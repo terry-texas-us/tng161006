@@ -73,12 +73,12 @@ class scriptsManager {
   }
 
   public static function buildScriptElements($flags, $id = 'public') {
-    $out = "<script src='js/jquery-2.2.0.js'></script>\n";
+    $out = "<script src='node_modules/jquery/dist/jquery.js'></script>\n";
     $out .= "<script src='js/jquery-ui.min.js'></script>\n";
-    $out .= "<script src='_/js/tether.min.js'></script>\n";
+//    $out .= "<script src='_/js/tether.min.js'></script>\n";
+    $out .= "<script src='node_modules/tether/dist/js/tether.js'></script>\n";
     $out .= "<script src='_/js/bootstrap.js'></script>\n";
-    $out .= "<script src='js/svg-injector.min.js'></script>\n";
-
+    $out .= "<script src='node_modules/svg-injector/dist/svg-injector.min.js'></script>\n";
     $out .= "<script src='js/net.js'></script>\n";
     $out .= "<script src='js/textSnippets.js'></script>\n";
     $out .= "<script src='js/modalDialog.js'></script>\n";
