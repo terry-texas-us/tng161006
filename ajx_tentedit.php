@@ -173,8 +173,7 @@ header("Content-type:text/html; charset=" . $session_charset);
 ?>
 
 <div id='tentedit'>
-  <?php beginFormElement("", "post", "form1\" onsubmit=\"return saveTentEdit(this);", "form1"); ?>
-
+  <form action="" method="post" name="form1" id="form1" onsubmit="return saveTentEdit(this);">
     <header class='modal-header'>
       <h4><?php echo uiTextSnippet('editevent'); ?></h4>
       <h2 class='header'><?php echo "$name: $title"; ?></h2>
@@ -222,10 +221,8 @@ header("Content-type:text/html; charset=" . $session_charset);
       <input type='submit' value="<?php echo uiTextSnippet('savechanges'); ?>"> 
       <span id='tspinner' style="display: none"><img src="img/spinner.gif"></span>
     </footer>
-  <?php endFormElement(); ?>
-
+  </form>
 </div>
-
 <div id='finished' style="margin: 10px; border: 0; display: none">
   <h2 class='header'><?php echo uiTextSnippet('thanks'); ?></h2>
   <p>

@@ -48,8 +48,8 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
     if ($msg) {
       echo "<b id='errormsg' class='msgerror h4'>" . stripslashes(strip_tags($msg)) . "</b>";
     }
-    beginFormElement("famsearch", "", "famsearch", "", "return makeURL();");
     ?>
+    <form action="famsearch.php" name="famsearch" onsubmit="return makeURL();">
       <div id='searchform'>
         <?php if ((!$requirelogin || !$treerestrict || !$assignedtree) && $numtrees > 1) { ?>
           <div class='row'>
@@ -384,7 +384,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
                   onclick="resetValues();"><?php echo uiTextSnippet('tng_reset'); ?></button>
         </div>
       </footer>
-    <?php endFormElement(); ?>
+    </form>
     <?php echo $publicFooterSection->build(); ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>

@@ -133,7 +133,7 @@ $headSection->setTitle($headTitle);
       echo "<br>\n";
       $buttontext = uiTextSnippet('submitsugg');
     } else {
-      $comments = uiTextSnippet('comments2');
+      $comments = uiTextSnippet('yourcomments');
       echo $publicHeaderSection->build();
       ?>
       <h2><img class='icon-md' src='svg/mail.svg'><?php echo $headTitle; ?></h2>
@@ -156,7 +156,7 @@ $headSection->setTitle($headTitle);
     ?>
 
     <?php
-    beginFormElement("tngsendmail", "post\" onsubmit=\"return validateForm();", "suggest", "suggest");
+    beginFormElement("tngsendmail", "post", "suggest", "suggest", "return validateForm();");
     if ($typestr) {
       ?>
       <input name="<?php echo $typestr; ?>ID" type='hidden' value="<?php echo $ID; ?>"/>

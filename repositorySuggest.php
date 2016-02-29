@@ -56,37 +56,37 @@ $headSection->setTitle($headTitle);
       }
       echo "<p><strong><font color=\"red\">$newmessage</font></strong></p>\n";
     }
-    beginFormElement("tngsendmail", "post\" onsubmit=\"return validateForm();", "suggest", "suggest");
     ?>
-    <div class='form-container'>
-      <h4><?php echo uiTextSnippet('suggestchange'); ?></h4>
-      <input name="repoID" type='hidden' value="<?php echo $ID; ?>"/>
-      <div class='form-group yourname'>
-        <label><?php echo uiTextSnippet('yourname'); ?>:</label>
-        <input class='form-control' name="<?php echo $_SESSION['tng_yourname']; ?>" type='text'>
-      </div>  
-      <div class='form-group'>
-        <label><?php echo uiTextSnippet('email'); ?>:</label>
-        <input class='form-control' id='email' name="<?php echo $_SESSION['tng_email']; ?>" type='email' value="<?php echo $preemail; ?>">
-        <input class='form-control' id='confirm-email' name='em2' type='email' value="<?php echo $preemail; ?>" placeholder="<?php echo uiTextSnippet('emailagain'); ?>">
-        <input name='mailme' type='checkbox' value='1'><?php echo uiTextSnippet('mailme'); ?>
+    <form action="tngsendmail.php" method="post" name="suggest" id="suggest" onsubmit="return validateForm();">
+      <div class='form-container'>
+        <h4><?php echo uiTextSnippet('suggestchange'); ?></h4>
+        <input name="repoID" type='hidden' value="<?php echo $ID; ?>"/>
+        <div class='form-group yourname'>
+          <label><?php echo uiTextSnippet('yourname'); ?>:</label>
+          <input class='form-control' name="<?php echo $_SESSION['tng_yourname']; ?>" type='text'>
+        </div>  
+        <div class='form-group'>
+          <label><?php echo uiTextSnippet('email'); ?>:</label>
+          <input class='form-control' id='email' name="<?php echo $_SESSION['tng_email']; ?>" type='email' value="<?php echo $preemail; ?>">
+          <input class='form-control' id='confirm-email' name='em2' type='email' value="<?php echo $preemail; ?>" placeholder="<?php echo uiTextSnippet('emailagain'); ?>">
+          <input name='mailme' type='checkbox' value='1'><?php echo uiTextSnippet('mailme'); ?>
+        </div>
+        <?php
+        if ($page) { ?>
+          <label><?php echo uiTextSnippet('subject'); ?>:</label>
+          <div><?php echo stripslashes($page); ?></div>
+        <?php } ?>
+        <hr>
+        <?php echo uiTextSnippet('proposedchanges'); ?>
+        <textarea class='form-control' name="<?php echo $_SESSION['tng_comments']; ?>" rows='4'></textarea>
+        <input name='enttype' type='hidden' value="R">
+        <input name='ID' type='hidden' value="<?php echo $ID; ?>"/>
+        <input name='tree' type='hidden' value="<?php echo $tree; ?>"/>
+        <input name='page' type='hidden' value="<?php echo $page; ?>"/>
+        <br>
+        <button class="btn btn-primary btn-block" type="submit"><?php echo uiTextSnippet('submitsugg'); ?></button>
       </div>
-      <?php
-      if ($page) { ?>
-        <label><?php echo uiTextSnippet('subject'); ?>:</label>
-        <div><?php echo stripslashes($page); ?></div>
-      <?php } ?>
-      <hr>
-      <?php echo uiTextSnippet('proposedchanges'); ?>
-      <textarea class='form-control' name="<?php echo $_SESSION['tng_comments']; ?>" rows='4'></textarea>
-      <input name='enttype' type='hidden' value="R">
-      <input name='ID' type='hidden' value="<?php echo $ID; ?>"/>
-      <input name='tree' type='hidden' value="<?php echo $tree; ?>"/>
-      <input name='page' type='hidden' value="<?php echo $page; ?>"/>
-      <br>
-      <button class="btn btn-primary btn-block" type="submit"><?php echo uiTextSnippet('submitsugg'); ?></button>
-    </div>
-    <?php endFormElement(); ?>
+    </form>
     <?php echo $publicFooterSection->build(); ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>

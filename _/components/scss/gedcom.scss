@@ -1,0 +1,27 @@
+
+.form-gedcom .form-container {
+  background-color: #eee;
+  max-width: 420px;
+  padding: 30px 15px;
+  margin: 10px auto;
+}
+
+.form-gedcom .form-heading,
+.form-gedcom .checkbox {
+  margin-bottom: 10px;
+}
+
+.form-gedcom .checkbox {
+  font-weight: normal;
+}
+
+.form-gedcom .form-control {
+  position: relative;
+  height: auto;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.form-gedcom .form-control:focus {
+  z-index: 2;
+}

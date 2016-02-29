@@ -124,8 +124,8 @@ if ($enttype) {
   $owner = $treerow['owner'] ? $treerow['owner'] : ($sitename ? $sitename : $dbowner);
 } else {
   $page = $page ? " ($page)" : "";
-  $subject = uiTextSnippet('comments2') . $page;
-  $body = uiTextSnippet('comments2') . $page . ": " . stripslashes($comments) . "\n\n$yourname\n$youremail";
+  $subject = uiTextSnippet('yourcomments') . $page;
+  $body = uiTextSnippet('yourcomments') . $page . ": " . stripslashes($comments) . "\n\n$yourname\n$youremail";
 
   $sendemail = $emailaddr;
   $owner = $sitename ? $sitename : $dbowner;

@@ -38,18 +38,9 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
     <?php echo $publicHeaderSection->build(); ?>
     <h2><img class='icon-md' src='svg/calendar.svg'><?php echo uiTextSnippet('anniversaries'); ?></h2>
     <br clear='left'>
-    <?php
-    beginFormElement("anniversaries2", "get", "form1", "form1", "return validateForm(this);");
-
-      echo treeDropdown(array('startform' => false, 'endform' => false, 'name' => 'form1'));
-      ?>
-        <p>
-          <?php
-          echo uiTextSnippet('explain');
-          ?>
-        </p>
-      <?php
-      ?>
+    <form action="anniversaries2.php" method="get" name="form1" id="form1" onsubmit="return validateForm(this);">
+      <?php echo treeDropdown(array('startform' => false, 'endform' => false, 'name' => 'form1')); ?>
+      <p><?php echo uiTextSnippet('explain'); ?></p>
       <div class="annfield">
         <label for="tngevent"><?php echo uiTextSnippet('event'); ?>:</label><br>
         <select name="tngevent" id="tngevent" style="max-width:335px">
@@ -191,8 +182,7 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
         | <input type='button' value="<?php echo uiTextSnippet('calendar'); ?>"
                  onclick="window.location.href='<?php echo "calendar.php?m=$tngmonth&amp;year=$tngyear&amp;tree=$tree"; ?>';"/>
       </div>
-
-    <?php endFormElement(); ?>
+    </form>
     <br clear='all'>
     <br>
     <?php
