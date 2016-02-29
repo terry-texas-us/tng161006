@@ -2,6 +2,8 @@
 include("tng_begin.php");
 
 include($subroot . "pedconfig.php");
+require 'personlib.php';
+
 if (!$personID) {
   die("no args");
 }
@@ -690,7 +692,11 @@ $headSection->setTitle(uiTextSnippet('descendfor') . " " . $row['name']);
       $innermenu .= " &nbsp;&nbsp; | &nbsp;&nbsp; <a href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=desc&amp;personID=$personID&amp;tree=$tree&amp;generations=$generations');return false;\">PDF</a>\n";
     }
     beginFormElement("descend", "get", "form1", "form1");
-    echo tng_menu('I', "descend", $personID, $innermenu);
+    echo buildPersonMenu("descend", $personID);
+    echo "<div class='pub-innermenu small'>\n";
+      echo $innermenu;
+    echo "</div>\n";
+    echo "<br>\n";
     endFormElement();
     ?>
     <p>

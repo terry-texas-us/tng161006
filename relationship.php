@@ -862,7 +862,11 @@ echo "<body id='public'>\n";
     $innermenu .= "<a href=\"relateform.php?primaryID=$primarypersonID&amp;tree=$tree\">" . uiTextSnippet('findanother') . "</a>\n";
 
     beginFormElement("relationship2", "get", "form1", "form1");
-    echo tng_menu('I', "relate", $primarypersonID, $innermenu);
+    echo buildPersonMenu("relate", $primarypersonID);
+    echo "<div class='pub-innermenu small'>\n";
+      echo $innermenu;
+    echo "</div>\n";
+    echo "<br>\n";
     echo "<input name='primarypersonID' type='hidden' value=\"$primarypersonID\" />\n";
     echo "<input name='savedpersonID' type='hidden' value=\"$secondpersonID\" />\n";
     echo "<input name='tree' type='hidden' value=\"$tree\" />\n";

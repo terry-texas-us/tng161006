@@ -8,7 +8,7 @@ include("getlang.php");
 
 $tngprint = 1;
 include("checklogin.php");
-include("personlib.php");
+require 'personlib.php';
 
 define('FPDF_FONTPATH', $rootpath . $endrootpath . 'font/');
 require('tngpdf.php');

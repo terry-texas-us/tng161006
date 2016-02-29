@@ -5,7 +5,7 @@ include("genlib.php");
 include("getlang.php");
 
 include("checklogin.php");
-include("personlib.php");
+require 'personlib.php';
 
 $firstsection = 0;
 $tableid = "";

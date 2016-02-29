@@ -2,6 +2,7 @@
 include("tng_begin.php");
 
 include($subroot . "pedconfig.php");
+require 'personlib.php';
 
 $righttree = checktree($tree);
 $rightbranch = checkbranch($row['branch']);
@@ -346,7 +347,11 @@ $innermenu .= "<a href=\"descendtext.php?personID=$personID&amp;tree=$tree&amp;g
 $innermenu .= "<a href=\"register.php?personID=$personID&amp;tree=$tree&amp;generations=$generations\">" . uiTextSnippet('regformat') . "</a>\n";
 
 beginFormElement("descend", "GET", "form1", "form1");
-echo tng_menu('I', "descend", $personID, $innermenu);
+echo buildPersonMenu("descend", $personID);
+echo "<div class='pub-innermenu small'>\n";
+  echo $innermenu;
+echo "</div>\n";
+echo "<br>\n";
 endFormElement();
 ?>
   <br clear="left">

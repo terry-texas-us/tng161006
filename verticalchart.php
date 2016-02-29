@@ -2,6 +2,8 @@
 include("tng_begin.php");
 
 include($subroot . "pedconfig.php");
+require 'personlib.php';
+
 if (!$personID && !isset($needperson)) {
   die("no args");
 }
@@ -445,7 +447,11 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " " . $row['name']);
     }
 
     beginFormElement("pedigree", "", "form1", "form1");
-    echo tng_menu('I', "pedigree", $personID, $innermenu);
+    echo buildPersonMenu("pedigree", $personID);
+    echo "<div class='pub-innermenu small'>\n";
+      echo $innermenu;
+    echo "</div>\n";
+    echo "<br>\n";
     endFormElement();
 
     $height = $pedigree['vheight'] ? $pedigree['vheight'] : 42;

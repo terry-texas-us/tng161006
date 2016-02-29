@@ -31,7 +31,6 @@ $headSection->setTitle(uiTextSnippet('regnewacct'));
 <h2><img class='icon-md' src='svg/lock-open.svg' alt=""><?php echo uiTextSnippet('regnewacct'); ?></h2>
 <br clear='left'>
 <?php
-@include("TNG_captcha.php");
 
 if (!$tngconfig['disallowreg']) {
   echo "<p><strong>*" . uiTextSnippet('required') . "</strong></p>\n";

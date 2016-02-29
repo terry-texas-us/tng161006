@@ -24,7 +24,7 @@ class publicNavElementSection extends navElementSection {
 
     $out = $this->buildListItem("surnames.php", "svg/users.svg", "surnames");
     $out .= $this->buildListItem("bookmarks.php", "svg/bookmarks.svg", "bookmarks");
-    $out .= $this->buildListItem("places.php", "svg/location.svg", "places");
+    $out .= $this->buildListItem("placesMain.php", "svg/location.svg", "places");
     $tngmonth = date("m", time() + (3600 * $time_offset));
     $out .= $this->buildListItem("calendar.php?m=$tngmonth", "svg/calendar.svg", "calendar");
     $out .= $this->buildListItem("cemeteries.php", "svg/headstone.svg", "cemeteries");
@@ -55,7 +55,7 @@ class publicNavElementSection extends navElementSection {
       $out .= $this->buildListItem("showlog.php", "svg/log-out.svg", "mnushowlog");
       $tngconfig['menucount'] += 2;
     }
-    $out .= $this->buildListItem("suggest.php?page=" . urlencode($title), "svg/mail.svg", "contactus");
+    $out .= $this->buildListItem("contactUs.php?page=" . urlencode($title), "svg/mail.svg", "contactus");
     $tngconfig['menucount'] += 10;    //everything except the 2 admin links
 
     return $out;

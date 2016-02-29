@@ -3,6 +3,8 @@
 include("tng_begin.php");
 
 include($subroot . "pedconfig.php");
+require 'personlib.php';
+
 if (!$personID && !isset($needperson)) {
   die("no args");
 }
@@ -472,7 +474,11 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
       $innermenu .= " &nbsp;&nbsp; | &nbsp;&nbsp; <a href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ped&amp;personID=' + firstperson + '&amp;tree=$tree&amp;generations=$generations');return false;\">PDF</a>\n";
     }
     beginFormElement("pedigree", "", "form1", "form1");
-    echo tng_menu('I', "pedigree", $personID, $innermenu);
+    echo buildPersonMenu("pedigree", $personID);
+    echo "<div class='pub-innermenu small'>\n";
+      echo $innermenu;
+    echo "</div>\n";
+    echo "<br>\n";
     endFormElement();
 
     if (!$tngprint) {

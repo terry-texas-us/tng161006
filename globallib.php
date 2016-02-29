@@ -595,17 +595,11 @@ function buildSearchResultPagination($total, $address, $perpage, $pagenavpages) 
   return $out;
 }
 
-function doMenuItem($index, $link, $icon, $label, $page, $thispage) {
-  $class = $page == $thispage ? " class=\"here\"" : "";
-  $imagetext = $icon ? "<img class='icon-sm' src='{$icon}'>" : "";
-
-  return "<li><a id=\"a$index\" href=\"$link\"$class>$imagetext$label</a></li>\n";
-}
-
 function displayDate($date) {
   $newdate = "";
   /* [ts] additional date string from rm (date-range  direction modifier 'begdate-enddate')
-          rm gedcom is emmitting an en dash character so what looks like a dash is a 3-byte                                                        character. Better to filter this on the gedcom import. Behavior also modified to
+          rm gedcom is emmitting an en dash character so what looks like a dash is a 3-byte character.
+   * Better to filter this on the gedcom import. Behavior also modified to
           all white-space characters. Need to watch this for a while to see if side-effect */
 
   // [ts] $dateparts = preg_split("/[\s–]/", $date);

@@ -5,6 +5,7 @@ if (!$personID) {
   die("no args");
 }
 include($subroot . "pedconfig.php");
+require 'personlib.php';
 
 $divctr = 1;
 if ($pedigree['stdesc']) {
@@ -181,7 +182,7 @@ scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
 header("Content-type: text/html; charset=" . $session_charset);
-$headSection->setTitle(uiTextSnippet(uiTextSnippet('descendfor') . " $namestr"));
+$headSection->setTitle(uiTextSnippet('descendfor') . " $namestr");
 ?>
 <!DOCTYPE html>
 <html>
@@ -233,7 +234,11 @@ $headSection->setTitle(uiTextSnippet(uiTextSnippet('descendfor') . " $namestr"))
     }
 
     beginFormElement("descend", "get", "form1", "form1");
-    echo tng_menu('I', "descend", $personID, $innermenu);
+    echo buildPersonMenu("descend", $personID);
+    echo "<div class='pub-innermenu small'>\n";
+      echo $innermenu;
+    echo "</div>\n";
+    echo "<br>\n";
     endFormElement();
     ?>
     <div>

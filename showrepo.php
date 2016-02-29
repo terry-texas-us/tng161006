@@ -5,7 +5,8 @@ if (!$repoID) {
   header("Location: thispagedoesnotexist.html");
   exit;
 }
-include("personlib.php");
+require 'personlib.php';
+require 'repositories.php';
 
 $flags['imgprev'] = true;
 
@@ -147,7 +148,11 @@ if ($media || $notes) {
 }
 
 $rightbranch = 1;
-echo tng_menu('R', "repo", $repoID, $innermenu);
+echo buildRepositoryMenu('repository', $repoID);
+echo "<div class='pub-innermenu small'>\n";
+  echo $innermenu;
+echo "</div>\n";
+echo "<br>\n";
 ?>
   <script>
     function innerToggle(part, subpart, subpartlink) {

@@ -5,6 +5,8 @@
  @import "variables";
  @import "mixins";
 
+ @import 'suggest.scss';
+ 
 $icon-muted: $gray-light !default;
 $icon-info: $brand-info !important;
 $icon-primary: $brand-primary !important;

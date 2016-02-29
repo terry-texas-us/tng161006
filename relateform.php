@@ -2,6 +2,7 @@
 include("tng_begin.php");
 
 include($subroot . "pedconfig.php");
+require 'personlib.php';
 
 $relatepersonID = $_SESSION['relatepersonID'];
 $relatetreeID = $_SESSION['relatetreeID'];
@@ -57,9 +58,8 @@ echo "<body id='public'>\n";
     $photostr = showSmallPhoto($primaryID, $namestr, $rights['both'], 0, false, $row['sex']);
     echo tng_DrawHeading($photostr, $namestr, getYears($row));
 
-    $innermenu = "&nbsp; \n";
-
-    echo tng_menu('I', "relate", $primaryID, $innermenu);
+    echo buildPersonMenu("relate", $primaryID);
+    echo "<br>\n";
 
     $namestr .= $namestrplus;
 

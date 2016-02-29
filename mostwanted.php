@@ -57,7 +57,7 @@ function showDivs($type) {
     $mediatext .= "<div class=\"mwperson\">\n";
     if ($type == "person") {
       if ($row['personID']) {
-        $mediatext .= "<a href=\"suggest.php?enttype=I&amp;ID={$row['personID']}&amp;tree={$row['gedcom']}\">" . uiTextSnippet('tellus') . "</a>";
+        $mediatext .= "<a href=\"personSuggest.php?&amp;ID={$row['personID']}&amp;tree={$row['gedcom']}\">" . uiTextSnippet('tellus') . "</a>";
 
         $rights = determineLivingPrivateRights($row);
         $row['allow_living'] = $rights['living'];
@@ -66,11 +66,11 @@ function showDivs($type) {
         $name = getName($row);
         $mediatext .= " &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; " . uiTextSnippet('moreinfo') . " <a href=\"getperson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$name</a>";
       } else {
-        $mediatext .= "<a href=\"suggest.php?page=" . uiTextSnippet('mostwanted') . ":+{$row['mwtitle']}\">" . uiTextSnippet('tellus') . "</a>";
+        $mediatext .= "<a href=\"contactUs.php?page=" . uiTextSnippet('mostwanted') . ":+{$row['mwtitle']}\">" . uiTextSnippet('tellus') . "</a>";
       }
     }
     if ($type == "photo" && $row['mediaID']) {
-      $mediatext .= "<a href=\"suggest.php?page=" . uiTextSnippet('mostwanted') . ":+{$row['mtitle']}\">" . uiTextSnippet('tellus') . "</a>";
+      $mediatext .= "<a href=\"contactUs.php?page=" . uiTextSnippet('mostwanted') . ":+{$row['mtitle']}\">" . uiTextSnippet('tellus') . "</a>";
       $mediatext .= " &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; " . uiTextSnippet('moreinfo') . " <a href=\"$href\">{$row['mtitle']}</a> &nbsp;&nbsp;&nbsp;";
     }
     $mediatext .= "</div>\n";

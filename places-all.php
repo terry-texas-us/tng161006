@@ -4,13 +4,13 @@ include("tng_begin.php");
 if ($tree && !$tngconfig['places1tree']) {
   $treestr = "tree=$tree&amp;";
   $treestr2 = "tree=$tree";
-  $places_url = "places.php?";
+  $places_url = "placesMain.php?";
   $logstring = "<a href=\"places-all.php?$treestr2\">" . uiTextSnippet('allplaces') . " (" . uiTextSnippet('tree') . ": $tree)</a>";
   $wherestr = "WHERE gedcom = \"$tree\"";
   $wherestr2 = "AND gedcom = \"$tree\"";
 } else {
   $treestr = $treestr2 = "";
-  $places_url = "places.php";
+  $places_url = "placesMain.php";
   $logstring = "<a href='places-all.php'>" . uiTextSnippet('allplaces') . "</a>";
   $wherestr = "";
   $wherestr2 = "";

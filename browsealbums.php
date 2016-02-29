@@ -2,7 +2,7 @@
 include("tng_begin.php");
 
 include("functions.php");
-include("personlib.php");
+require 'personlib.php';
 
 function doMediaSearch($instance, $pagenav) {
   global $mediasearch;

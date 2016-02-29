@@ -7,13 +7,13 @@ if ($tree && !$tngconfig['places1tree']) {
   $treestr = "tree=$tree&amp;";
   $treestr2 = "tree=$tree";
   $places_all_url = "places-all.php?";
-  $places_url = "places.php?";
+  $places_url = "placesMain.php?";
   $logstring = "<a href='places100.php?topnum=$topnum&amp;tree=$tree'>" . xmlcharacters(uiTextSnippet('placelist') . " &mdash; " . uiTextSnippet('top') . " $topnum (" . uiTextSnippet('tree') . ": $tree)") . "</a>";
   $wherestr = " AND gedcom = '$tree'";
 } else {
   $treestr = $treestr2 = "";
   $places_all_url = "places-all.php";
-  $places_url = "places.php";
+  $places_url = "placesMain.php";
   $logstring = "<a href='places100.php?topnum=$topnum'>" . xmlcharacters(uiTextSnippet('placelist') . " &mdash; " . uiTextSnippet('top') . " $topnum") . "</a>";
   $wherestr = "";
 }

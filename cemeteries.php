@@ -147,7 +147,7 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
         }
         $linectr++;     //Add extra line to allow for the <br> at the end
         $txt = $cemetery['country'] ? htmlspecialchars($cemetery['country'], ENT_QUOTES, $session_charset) : uiTextSnippet('nocountry');
-        echo "<div class=\"cemcountry h4 rounded4\"><a href=\"headstones.php?country=" . urlencode($cemetery['country']) . "&amp;tree=$tree\">$txt</a></div>\n";
+        echo "<div class=\"cemcountry h4\"><a href=\"headstones.php?country=" . urlencode($cemetery['country']) . "&amp;tree=$tree\">$txt</a></div>\n";
         $orphan = true;
       }
     }
@@ -155,7 +155,7 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
 
     if ($numhs) {
       echo "<br>\n";
-      echo "<div class=\"cemcountry h4 rounded4\">\n";
+      echo "<div class=\"cemcountry h4\">\n";
         echo "<a href='headstones.php?tree=$tree'>" . uiTextSnippet('nocemetery') . "</a>\n";
       echo "</div>\n";
     }

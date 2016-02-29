@@ -1,7 +1,7 @@
 <?php
 include("tng_begin.php");
 
-include("personlib.php");
+require 'personlib.php';
 
 $result = getPersonFullPlusDates($tree, $personID);
 if (!tng_num_rows($result)) {

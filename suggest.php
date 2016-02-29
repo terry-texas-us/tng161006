@@ -123,14 +123,14 @@ $headSection->setTitle($headTitle);
   <section class='container'>
     <?php
     if ($enttype) {
-      $comments = uiTextSnippet('comments');
+      $comments = uiTextSnippet('proposedchanges');
       echo $publicHeaderSection->build();
 
       $photostr = showSmallPhoto($ID, $name, $row['allow_living'] && $row['allow_private'], 0, false, $row['sex']);
       echo tng_DrawHeading($photostr, $name, $years);
 
-      $innermenu = "&nbsp; \n";
-      echo tng_menu($enttype, "suggest", $ID, $innermenu);
+      echo tng_menu($enttype, "suggest", $ID);
+      echo "<br>\n";
       $buttontext = uiTextSnippet('submitsugg');
     } else {
       $comments = uiTextSnippet('comments2');
@@ -156,8 +156,6 @@ $headSection->setTitle($headTitle);
     ?>
 
     <?php
-    @include("TNG_captcha.php");
-
     beginFormElement("tngsendmail", "post\" onsubmit=\"return validateForm();", "suggest", "suggest");
     if ($typestr) {
       ?>

@@ -4,7 +4,7 @@ include("genlib.php");
 include("getlang.php");
 
 include("api_checklogin.php");
-include("personlib.php");
+require 'personlib.php';
 include("api_library.php");
 include("log.php");
 

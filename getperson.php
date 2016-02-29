@@ -11,7 +11,7 @@ if ($tngprint) {
     $tngconfig['hidemedia'] = "";
 }
 $defermap = $map['pstartoff'] || $tngconfig['istart'] ? 1 : 0;
-include("personlib.php" );
+require 'personlib.php';
 
 $citations = array();
 $citedisplay = array();
@@ -778,7 +778,12 @@ $headSection->setTitle($headTitle);
     }
     $rightbranch = $org_rightbranch;
 
-    echo tng_menu('I', "person", $personID, $innermenu);
+    echo buildPersonMenu("person", $personID);
+    echo "<br>\n";
+    echo "<div class='pub-innermenu small'>\n";
+      echo $innermenu;
+    echo "</div><br>\n";
+    
     echo $persontext;
     echo "</div>\n"; // .vcard
     ?>

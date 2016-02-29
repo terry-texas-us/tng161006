@@ -8,14 +8,14 @@ if ($tree && !$tngconfig['places1tree']) {
   $treestr = "tree=$tree&amp;";
   $treestr2 = "tree=$tree";
   $places_all_url = "places-all.php?";
-  $places_url = "places.php?";
+  $places_url = "placesMain.php?";
   $logstring = "<a href=\"places-oneletter.php?firstchar=$firstchar&amp;psearch=$psearch&amp;tree=$tree\">" . uiTextSnippet('placelist') . ": $decodedfirstchar (" . uiTextSnippet('tree') . ": $tree)</a>";
   $wherestr = " gedcom = \"$tree\"";
   $wherestr2 = " AND gedcom = \"$tree\"";
 } else {
   $treestr = $treestr2 = "";
   $places_all_url = "places-all.php";
-  $places_url = "places.php";
+  $places_url = "placesMain.php";
   $logstring = "<a href=\"places-oneletter.php?firstchar=$firstchar&amp;psearch=$psearch\">" . uiTextSnippet('placelist') . ": $decodedfirstchar</a>";
   $wherestr = $wherestr2 = "";
 }

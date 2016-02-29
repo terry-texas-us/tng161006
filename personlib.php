@@ -1306,3 +1306,50 @@ function beginListItem($section) {
 function endListItem($section) {
   return "</li> <!-- #$section -->\n";
 }
+
+function buildPersonListItem($index, $link, $icon, $label, $page, $thispage) {
+  $out = '';
+  if ($page != $thispage) {
+    $out .= "<li>\n";
+      $out .= "<a id=\"a$index\" href=\"$link\"><img class='icon-sm' src='{$icon}'>$label</a>\n";
+    $out .= "</li>\n";
+  }
+  return $out;
+}
+
+function buildPersonMenu($currpage, $entityID) {
+  global $tree;
+  global $disallowgedcreate;
+  global $allow_edit;
+  global $rightbranch;
+  global $allow_ged;
+  global $emailaddr;
+
+  $nexttab = 0;
+  $menu = "<div id='tngmenu'>\n";
+
+  if ($allow_edit && $rightbranch) {
+    $menu .= "<a id=\"a$nexttab\" href=\"admin_editperson.php?personID=$entityID&amp;tree=$tree&amp;cw=1\" title='" . uiTextSnippet('edit') . "'>\n";
+      $menu .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
+    $menu .= "</a>\n";
+  } elseif ($emailaddr && $currpage != 'suggest') {
+    $menu .= "<a id='a$nexttab' href='personSuggest.php?ID=$entityID&amp;tree=$tree' title='" . uiTextSnippet('suggest') . "'>\n";
+      $menu .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
+    $menu .= "</a>\n";
+  }
+  $menu .= "<ul id='tngnav'>\n";
+
+  $menu .= buildPersonListItem($nexttab++, "getperson.php?personID=$entityID&amp;tree=$tree", "svg/user.svg", uiTextSnippet('indinfo'), $currpage, "person");
+  $menu .= buildPersonListItem($nexttab++, "pedigree.php?personID=$entityID&amp;tree=$tree", "svg/flow-split-horizontal.svg", uiTextSnippet('ancestors'), $currpage, "pedigree");
+  $menu .= buildPersonListItem($nexttab++, "descend.php?personID=$entityID&amp;tree=$tree", "svg/flow-cascade.svg", uiTextSnippet('descendants'), $currpage, "descend");
+  $menu .= buildPersonListItem($nexttab++, "relateform.php?primaryID=$entityID&amp;tree=$tree", "svg/users.svg", uiTextSnippet('relationship'), $currpage, "relate");
+  $menu .= buildPersonListItem($nexttab++, "timeline.php?primaryID=$entityID&amp;tree=$tree", "svg/project.svg", uiTextSnippet('timeline'), $currpage, "timeline");
+
+  if (!$disallowgedcreate || ($allow_ged && $rightbranch)) {
+    $menu .= buildPersonListItem($nexttab++, "gedform.php?personID=$entityID&amp;tree=$tree", "svg/folder.svg", uiTextSnippet('extractgedcom'), $currpage, "gedcom");
+  }
+  $menu .= "</ul>\n";
+  $menu .= "</div>\n";
+  return $menu;
+}
+

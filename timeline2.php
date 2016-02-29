@@ -2,6 +2,7 @@
 include("tng_begin.php");
 
 include($subroot . "pedconfig.php" );
+require 'personlib.php';
 
 $timeline = $_SESSION['timeline'];
 $tng_message = $_SESSION['tng_message'];
@@ -359,7 +360,11 @@ $innermenu = uiTextSnippet('chartwidth') . ": &nbsp;";
 $innermenu .= "<input class='small' name='newwidth' type='text' value=\"$chartwidth\" maxlength='4' size='4'> &nbsp;&nbsp; ";
 $innermenu .= "<a href='#' onclick=\"document.form1.submit();\">" . uiTextSnippet('refresh') . "</a>\n";
 
-echo tng_menu('I', "timeline", $primaryID, $innermenu);
+echo buildPersonMenu("timeline", $primaryID);
+echo "<div class='pub-innermenu small'>\n";
+  echo $innermenu;
+echo "</div>\n";
+echo "<br>\n";
 
 echo "<h4>" . uiTextSnippet('timeline') . "</h4><br>\n";
 

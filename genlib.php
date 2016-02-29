@@ -140,59 +140,58 @@ function getFirstNameOnly($row) {
   return $namestr;
 }
 
-function tng_menu($enttype, $currpage, $entityID, $innermenu) {
+function doMenuItem($index, $link, $icon, $label, $page, $thispage) {
+  $class = $page == $thispage ? " class=\"here\"" : "";
+  $imagetext = $icon ? "<img class='icon-sm' src='{$icon}'>" : "";
+
+  return "<li><a id=\"a$index\" href=\"$link\"$class>$imagetext$label</a></li>\n";
+}
+
+function tng_menu($enttype, $currpage, $entityID) {
   global $tree;
   global $disallowgedcreate;
   global $allow_edit;
   global $rightbranch;
   global $allow_ged;
   global $emailaddr;
-  global $tngprint;
-
+  
   $nexttab = 0;
-  if (!$tngprint) {
-    $menu = "<div id='tngmenu'>\n";
-    $menu .= "<ul id='tngnav'>\n";
-    if ($enttype == 'I') {
-      $menu .= doMenuItem($nexttab++, "getperson.php?personID=$entityID&amp;tree=$tree", "svg/user.svg", uiTextSnippet('indinfo'), $currpage, "person");
-      $menu .= doMenuItem($nexttab++, "pedigree.php?personID=$entityID&amp;tree=$tree", "svg/flow-split-horizontal.svg", uiTextSnippet('ancestors'), $currpage, "pedigree");
-      $menu .= doMenuItem($nexttab++, "descend.php?personID=$entityID&amp;tree=$tree", "svg/flow-cascade.svg", uiTextSnippet('descendants'), $currpage, "descend");
-      $menu .= doMenuItem($nexttab++, "relateform.php?primaryID=$entityID&amp;tree=$tree", "svg/users.svg", uiTextSnippet('relationship'), $currpage, "relate");
-      $menu .= doMenuItem($nexttab++, "timeline.php?primaryID=$entityID&amp;tree=$tree", "svg/project.svg", uiTextSnippet('timeline'), $currpage, "timeline");
+  $menu = "<div id='tngmenu'>\n";
+  $menu .= "<ul id='tngnav'>\n";
+  if ($enttype == 'I') {
+    $menu .= doMenuItem($nexttab++, "getperson.php?personID=$entityID&amp;tree=$tree", "svg/user.svg", uiTextSnippet('indinfo'), $currpage, "person");
+    $menu .= doMenuItem($nexttab++, "pedigree.php?personID=$entityID&amp;tree=$tree", "svg/flow-split-horizontal.svg", uiTextSnippet('ancestors'), $currpage, "pedigree");
+    $menu .= doMenuItem($nexttab++, "descend.php?personID=$entityID&amp;tree=$tree", "svg/flow-cascade.svg", uiTextSnippet('descendants'), $currpage, "descend");
+    $menu .= doMenuItem($nexttab++, "relateform.php?primaryID=$entityID&amp;tree=$tree", "svg/users.svg", uiTextSnippet('relationship'), $currpage, "relate");
+    $menu .= doMenuItem($nexttab++, "timeline.php?primaryID=$entityID&amp;tree=$tree", "svg/project.svg", uiTextSnippet('timeline'), $currpage, "timeline");
 
-      if (!$disallowgedcreate || ($allow_ged && $rightbranch)) {
-        $menu .= doMenuItem($nexttab++, "gedform.php?personID=$entityID&amp;tree=$tree", "svg/folder.svg", uiTextSnippet('extractgedcom'), $currpage, "gedcom");
-      }
-      $editstr = "admin_editperson.php?person";
-    } elseif ($enttype == 'F') {
-      $menu .= doMenuItem($nexttab++, "familygroup.php?familyID=$entityID&amp;tree=$tree", "svg/users.svg", uiTextSnippet('family'), $currpage, "family");
-      $editstr = "admin_editfamily.php?family";
-    } elseif ($enttype == 'S') {
-      $menu .= doMenuItem($nexttab++, "showsource.php?sourceID=$entityID&amp;tree=$tree", "svg/folder.svg", uiTextSnippet('source'), $currpage, "source");
-      $editstr = "admin_editsource.php?source";
-    } elseif ($enttype == 'R') {
-      $menu .= doMenuItem($nexttab++, "showrepo.php?repoID=$entityID&amp;tree=$tree", "svg/folder.svg", uiTextSnippet('repository'), $currpage, "repo");
-      $editstr = "admin_editrepo.php?repo";
-    } elseif ($enttype == 'L') {
+    if (!$disallowgedcreate || ($allow_ged && $rightbranch)) {
+      $menu .= doMenuItem($nexttab++, "gedform.php?personID=$entityID&amp;tree=$tree", "svg/folder.svg", uiTextSnippet('extractgedcom'), $currpage, "gedcom");
+    }
+    $editstr = "admin_editperson.php?person";
+  } elseif ($enttype == 'F') {
+    $menu .= doMenuItem($nexttab++, "familygroup.php?familyID=$entityID&amp;tree=$tree", "svg/users.svg", uiTextSnippet('family'), $currpage, "family");
+    $editstr = "admin_editfamily.php?family";
+  } elseif ($enttype == 'S') {
+    $menu .= doMenuItem($nexttab++, "showsource.php?sourceID=$entityID&amp;tree=$tree", "svg/folder.svg", uiTextSnippet('source'), $currpage, "source");
+    $editstr = "admin_editsource.php?source";
+  } elseif ($enttype == 'R') {
+    $menu .= doMenuItem($nexttab++, "showrepo.php?repoID=$entityID&amp;tree=$tree", "svg/folder.svg", uiTextSnippet('repository'), $currpage, "repo");
+    $editstr = "admin_editrepo.php?repo";
+  } elseif ($enttype == 'L') {
 
-      $treestr = $tngconfig['places1tree'] ? "" : "&amp;tree=$tree";
-      $menu .= doMenuItem($nexttab++, "placesearch.php?psearch=$entityID$treestr", "svg/home.svg", uiTextSnippet('place'), $currpage, "place");
-      $editstr = "admin_editplace.php?";
-      $entityID = urlencode($entityID);
-    }
-    if ($allow_edit && $rightbranch) {
-      $menu .= doMenuItem($nexttab, "$editstr" . "ID=$entityID&amp;tree=$tree&amp;cw=1\" target=\"_blank", "svg/new-message.svg", uiTextSnippet('edit'), $currpage, "");
-    } elseif ($emailaddr) {
-      $menu .= doMenuItem($nexttab, "suggest.php?enttype=$enttype&amp;ID=$entityID&amp;tree=$tree", "svg/new-message.svg", uiTextSnippet('suggest'), $currpage, "suggest");
-    }
-    $menu .= "</ul>\n";
-    $menu .= "</div>\n";
-    $menu .= "<div class='pub-innermenu small rounded4'>\n";
-    $menu .= $innermenu;
-    $menu .= "</div><br>\n";
-  } else {
-    $menu = "";
+    $treestr = $tngconfig['places1tree'] ? "" : "&amp;tree=$tree";
+    $menu .= doMenuItem($nexttab++, "placesearch.php?psearch=$entityID$treestr", "svg/home.svg", uiTextSnippet('place'), $currpage, "place");
+    $editstr = "admin_editplace.php?";
+    $entityID = urlencode($entityID);
   }
+  if ($allow_edit && $rightbranch) {
+    $menu .= doMenuItem($nexttab, "$editstr" . "ID=$entityID&amp;tree=$tree&amp;cw=1\" target=\"_blank", "svg/new-message.svg", uiTextSnippet('edit'), $currpage, "");
+  } elseif ($emailaddr) {
+    $menu .= doMenuItem($nexttab, "suggest.php?enttype=$enttype&amp;ID=$entityID&amp;tree=$tree", "svg/new-message.svg", uiTextSnippet('suggest'), $currpage, "suggest");
+  }
+  $menu .= "</ul>\n";
+  $menu .= "</div>\n";
   return $menu;
 }
 

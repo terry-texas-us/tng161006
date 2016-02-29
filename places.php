@@ -1,173 +1,213 @@
 <?php
-include("tng_begin.php");
 
-if ($tree && !$tngconfig['places1tree']) {
-  $treestr = "tree=$tree&amp;";
-  $treestr2 = "tree=$tree";
-  $places_all_url = "places-all.php?";
-  $places_url = "places.php?";
-  $logstring = "<a href=\"places.php?$treestr2\">" . uiTextSnippet('placelist') . " (" . uiTextSnippet('tree') . ": $tree)</a>";
-  $wherestr = "AND gedcom = \"$tree\"";
-} else {
-  $treestr = $treestr2 = "";
-  $places_all_url = "places-all.php";
-  $places_url = "places.php";
-  $logstring = "<a href='places.php'>" . uiTextSnippet('placelist') . "</a>";
-  $wherestr = "";
+function buildPlaceMenu($currpage, $entityID) {
+  global $tree;
+  global $allow_edit;
+  global $rightbranch;
+  global $emailaddr;
+  
+  $menu = '';
+  if ($allow_edit && $rightbranch) {
+    $menu .= "<a id='a0' href='admin_editplace.php?ID=" . urlencode($entityID) . "&amp;tree=$tree&amp;cw=1' title='" . uiTextSnippet('edit') . "'>\n";
+      $menu .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
+    $menu .= "</a>\n";
+  } elseif ($emailaddr && $currpage != 'suggest') {
+    $menu .= "<a id='a0' href='placeSuggest.php?&amp;ID=" . urlencode($entityID) . "&amp;tree=$tree' title='" . uiTextSnippet('suggest') . "'>\n";
+      $menu .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
+    $menu .= "</a>\n";
+  }
+  return $menu;
 }
-writelog($logstring);
-preparebookmark($logstring);
 
-scriptsManager::setShowShare($tngconfig['showshare'], $http);
-initMediaTypes();
+function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
+  global $eventtypes_table;
+  global $tree;
+  global $people_table;
+  global $families_table;
+  global $trees_table;
+  global $offset;
+  global $page;
+  global $psearch;
+  global $maxsearchresults;
+  global $psearchns;
+  global $urlstring;
+  global $events_table;
+  global $order;
+  global $namesort;
+  global $datesort;
 
-header("Content-type: text/html; charset=" . $session_charset);
-$headSection->setTitle(uiTextSnippet('placelist'));
-?>
-<!DOCTYPE html>
-<html>
-<?php echo $headSection->build($flags, 'public', $session_charset); ?>
-<body id='public'>
-  <section class='container'>
-    <?php echo $publicHeaderSection->build(); ?>
-    <h2><img class='icon-md' src='svg/location.svg'><?php echo uiTextSnippet('placelist'); ?></h2>
-    <br class='clearleft'>
-    <?php
-    if (!$tngconfig['places1tree']) {
-      echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'places', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
+  $successcount = 0;
+  $allwhere = "";
+  if ($prefix == 'I') {
+    $table = $people_table;
+    $peoplejoin1 = $peoplejoin2 = "";
+    $idfield = "personID";
+    $idtext = "personid";
+    $namefield = "lastfirst";
+  } elseif ($prefix == 'F') {
+    $table = $families_table;
+    $peoplejoin1 = " LEFT JOIN $people_table as p1 ON $families_table.gedcom = p1.gedcom AND p1.personID = $families_table.husband";
+    $peoplejoin2 = " LEFT JOIN $people_table as p2 ON $families_table.gedcom = p2.gedcom AND p2.personID = $families_table.wife";
+    $idfield = "familyID";
+    $idtext = "familyid";
+    $namefield = "family";
+  }
+  $allwhere .= "$table.gedcom = $trees_table.gedcom";
+  if ($tree) {
+    $allwhere .= " AND $table.gedcom=\"$tree\"";
+  }
+  $more = getLivingPrivateRestrictions($table, false, false);
+  if ($more) {
+    if ($allwhere) {
+      $allwhere .= " AND ";
     }
-    $linkstr = "";
-    $linkstr2col1 = "";
-    $linkstr2col2 = "";
-    $linkstr3col1 = "";
-    $linkstr3col2 = "";
-    $collen = 10;
-    $cols = 3;
+    $allwhere .= $more;
+  }
+  $max_browsesearch_pages = 5;
+  if ($offset) {
+    $offsetplus = $offset + 1;
+    $newoffset = "$offset, ";
+  } else {
+    $offsetplus = 1;
+    $newoffset = "";
+    $page = 1;
+  }
+  $tngevents = $stdevents;
+  $custevents = array();
+  $query = "SELECT tag, eventtypeID, display FROM $eventtypes_table
+    WHERE keep=\"1\" AND type=\"$prefix\" ORDER BY display";
+  $result = tng_query($query);
+  while ($row = tng_fetch_assoc($result)) {
+    $eventtypeID = $row['eventtypeID'];
+    array_push($tngevents, $eventtypeID);
+    array_push($custevents, $eventtypeID);
+    $displaymsgs[$eventtypeID] = getEventDisplay($row['display']);
+  }
+  tng_free_result($result);
 
-    $offsetorg = $offset;
-    $offset = $offset ? $offset + 1 : 1;
+  foreach ($tngevents as $tngevent) {
+    $eventsjoin = "";
+    $allwhere2 = "";
+    $placetxt = $displaymsgs[$tngevent];
 
-    $query = "SELECT ucase(left(trim(substring_index(place,',',-$offset)),1)) as firstchar, count(ucase(left(trim(substring_index(place,',',-$offset)),1))) as placecount "
-            . "FROM $places_table WHERE trim(substring_index(place,',',-$offset)) != \"\" $wherestr GROUP BY firstchar ORDER by firstchar";
-    $result = tng_query($query);
-    if ($result) {
-      $initialchar = 1;
+    if (in_array($tngevent, $custevents)) {
+      $eventsjoin = ", $events_table";
+      $allwhere2 .= " AND $table.$idfield = $events_table.persfamID AND $table.gedcom = $events_table.gedcom AND eventtypeID = \"$tngevent\" AND parenttag = \"\"";
+      $tngevent = "event";
+    }
+    $datefield = $tngevent . "date";
+    $datefieldtr = $tngevent . "datetr";
+    $place = $tngevent . "place";
+    $allwhere2 .= " AND $place = '$psearch'";
 
-      while ($place = tng_fetch_assoc($result)) {
-        if ($initialchar != 1) {
-          $linkstr .= " ";
-        }
-        if ($place['firstchar'] != "") {
-          $urlfirstchar = urlencode($place['firstchar']);
-          $countstr = uiTextSnippet('placesstarting') . ": " . $place['firstchar'] . " (" . number_format($place['placecount']) . " " . uiTextSnippet('totalnames') . ")";
-          $linkstr .= "<a href=\"places-oneletter.php?firstchar=$urlfirstchar&amp;{$treestr}offset=$offsetorg&amp;psearch=$psearch\" title=\"$countstr\">$place[firstchar]</a> ";
-        }
-        $initialchar++;
+    if ($prefix == 'F') {
+      if ($order == "name") {
+        $orderstr = "p1lastname, p2lastname, $datefieldtr";
+      } elseif ($order == "nameup") {
+        $orderstr = "p1lastname DESC, p2lastname DESC, $datefieldtr DESC";
+      } elseif ($order == "date") {
+        $orderstr = "$datefieldtr, p1lastname, p2lastname";
+      } else {
+        $orderstr = "$datefieldtr DESC, p1lastname DESC, p2lastname DESC";
       }
-      tng_free_result($result);
-    }
-
-    $query = "SELECT trim(substring_index(place,',',-$offset)) as myplace, count(place) as placecount "
-            . "FROM $places_table WHERE trim(substring_index(place,',',-$offset)) != \"\" $wherestr GROUP BY myplace ORDER by placecount DESC LIMIT 30";
-    $result = tng_query($query);
-    $maxcount = 0;
-    if ($result) {
-      $count = 1;
-      $col = -1;
-      while ($place = tng_fetch_assoc($result)) {
-        $place2 = urlencode($place['myplace']);
-        if ($place2 != "") {
-          if (!$maxcount) {
-            $maxcount = $place['placecount'];
-          }
-          $tally = $place['placecount'];
-          $tally_fmt = number_format($tally);
-          $thiswidth = floor($tally / $maxcount * 100);
-          $query = "SELECT count(place) as placecount FROM $places_table WHERE place = \"" . addslashes($place['myplace']) . "\" $wherestr";
-          $result2 = tng_query($query);
-          $countrow = tng_fetch_assoc($result2);
-          $specificcount = $countrow['placecount'];
-          tng_free_result($result2);
-
-          $searchlink = $specificcount ? " <a href='placesearch.php?{$treestr}psearch=$place2'><img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=''></a>" : "";
-          $name = $place['placecount'] > 1 || !$specificcount ? "<a href=\"places-oneletter.php?offset=$offset&amp;{$treestr}psearch=$place2\">" . str_replace(array("<", ">"), array("&lt;", "&gt;"), $place['myplace']) . "</a> ($tally_fmt)" : $place['myplace'];
-          if (($count - 1) % $collen == 0) {
-            $col++;
-          }
-          $chartstr = $col ? "" : "<td width=\"400\"><div style=\"width:{$thiswidth}%;\" class=\"bar rightround\"><a href=\"places-oneletter.php?offset=$offset&amp;{$treestr}psearch=$place2\" title=\"{$place['myplace']} ($tally_fmt)\"></a></div></td>";
-          $linkstr2col[$col] .= "<tr><td align=\"right\">$count.</td><td>$name$searchlink</td>$chartstr</tr>\n";
-          $count++;
-        }
+      $query = "SELECT $families_table.ID, $families_table.familyID, $families_table.living, $families_table.private, $families_table.branch, p1.lastname as p1lastname, p2.lastname as p2lastname, $place, $datefield, $families_table.gedcom, treename
+        FROM ($families_table, $trees_table $eventsjoin) $peoplejoin1 $peoplejoin2
+        WHERE $allwhere $allwhere2
+        ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
+    } elseif ($prefix == 'I') {
+      if ($order == "name") {
+        $orderstr = "lastname, firstname, $datefieldtr";
+      } elseif ($order == "nameup") {
+        $orderstr = "lastname DESC, firstname DESC, $datefieldtr DESC";
+      } elseif ($order == "date") {
+        $orderstr = "$datefieldtr, lastname, firstname";
+      } else {
+        $orderstr = "$datefieldtr DESC, lastname DESC, firstname DESC";
       }
-      tng_free_result($result);
+      $query = "SELECT $people_table.ID, $people_table.personID, lastname, lnprefix, firstname, $people_table.living, $people_table.private, $people_table.branch, prefix, suffix, nameorder, $place, $datefield, $people_table.gedcom, treename
+        FROM ($people_table, $trees_table $eventsjoin)
+        WHERE $allwhere $allwhere2
+        ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
     }
-    ?>
-    <div class='card'>
-      <div class='card-block'>
-        <h4 class='card-header'>
-          <?php echo uiTextSnippet('placesstarting'); ?>
-        </h4>
-        <p class="firstchars"><?php echo $linkstr; ?></p>
+    $result = tng_query($query);
+    $numrows = tng_num_rows($result);
+
+    //if results, do again w/o pagination to get total
+    if ($numrows == $maxsearchresults || $offsetplus > 1) {
+      $query = "SELECT count($idfield) as rcount
+        FROM ($table, $trees_table $eventsjoin)
+        WHERE $allwhere $allwhere2";
+      $result2 = tng_query($query);
+      $countrow = tng_fetch_assoc($result2);
+      $totrows = $countrow['rcount'];
+    } else {
+      $totrows = $numrows;
+    }
+    if ($numrows) {
+      echo "<br>\n";
+      echo "<div class='card'>\n";
+      echo "<h4 class='card-header'>" . $placetxt . "</h4>\n";
+      echo "<br>\n";
+      $numrowsplus = $numrows + $offset;
+      $successcount++;
+
+      echo "<p>" . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</p>";
+
+      $namestr = preg_replace("/xxx/", uiTextSnippet($namefield), $namesort);
+      $datestr = preg_replace("/yyy/", $placetxt, $datesort);
+      ?>
+      <table class="table table-sm table-striped">
+        <tr>
+          <th></th>
+          <th><?php echo $namestr; ?></th>
+          <th colspan='2'><?php echo $datestr; ?></th>
+          <th><?php echo uiTextSnippet($idtext); ?></th>
+          <?php if ($numtrees > 1) { ?>
+            <th><?php echo uiTextSnippet('tree'); ?></th>
+          <?php } ?>
+        </tr>
         <?php
-        beginFormElement("places-oneletter", "get");
-        echo uiTextSnippet('placescont') . ": <input name='psearch' type='text' />\n";
-        if ($tree && !$tngconfig['places1tree']) {
-          echo "<input name='tree' type='hidden' value=\"$tree\" />\n";
-        }
-        echo "<input name='stretch' type='hidden' value='1'>\n";
-        echo "<input name='pgo' type='submit' value=\"" . uiTextSnippet('go') . "\" />\n";
-        endFormElement();
-        ?>
-        <br>
-        <?php echo "<a href=\"$places_all_url" . "$treestr2\">" . uiTextSnippet('showallplaces') . "</a> (" . uiTextSnippet('sortedalpha') . ")"; ?>
-        </div>
-    </div>
-    <br>
-
-    <div class="card">
-      <div class='card-block'>
-        <h4 class="card-header">
-          <?php
-          echo str_replace('{xxx}', '30', uiTextSnippet('top{xxx}places')) . " (" . uiTextSnippet('totalplaces') . "):"; 
-          ?>
-        </h4>
-        <table class='table table-sm'>
-          <tr>
-            <?php
-            for ($i = 0; $i < $cols; $i++) {
-              if ($i) {
-                echo "<td class=\"table-gutter\">&nbsp;</td>\n";
-              }
-              ?>
-              <td>
-                <table class="table-histogram">
-                  <?php
-                  echo $linkstr2col[$i];
-                  ?>
-                </table>
-              </td>
-              <?php
-            }
-            ?>
-          </tr>
-        </table>
-        <div>
-          <?php
-          beginFormElement("places100", "get");
-          echo uiTextSnippet('showtop');
-          echo "<input name='topnum' type='text' value='100' size='4' maxlength='4'> " . uiTextSnippet('byoccurrence') . "\n";
-          if ($tree && !$tngconfig['places1tree']) {
-            echo "<input name='tree' type='hidden' value='$tree'>\n";
+        $i = $offsetplus;
+        $chartlinkimg = getimagesize("img/Chart.gif");
+        $chartlink = "<img src='img/Chart.gif' $chartlinkimg[3] alt=''>";
+        while ($row = tng_fetch_assoc($result)) {
+          $rights = determineLivingPrivateRights($row);
+          $row['allow_living'] = $rights['living'];
+          $row['allow_private'] = $rights['private'];
+          if ($rights['both']) {
+            $placetxt = $row[$place] ? $row[$place] : "";
+            $dateval = $row[$datefield];
+          } else {
+            $dateval = $placetxt = "";
           }
-          echo "<input type=\"submit\" value=\"" . uiTextSnippet('go') . "\" />\n";
-          endFormElement();
-          ?>
-        </div>
-      </div>
-    </div>
-    <br>
-    <?php echo $publicFooterSection->build(); ?>
-  </section> <!-- .container -->
-  <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
-</body>
-</html>
+          echo "<tr>\n";
+
+          echo "<td>$i</td>\n";
+          $i++;
+          echo "<td>\n";
+          if ($prefix == 'F') {
+            echo "<a href=\"familygroup.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}\">{$row['p1lastname']} / {$row['p2lastname']}</a>\n";
+          } elseif ($prefix == 'I') {
+            $name = getNameRev($row);
+            echo "<a href=\"pedigree.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$chartlink </a>\n";
+            echo "<a href=\"getperson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$name</a>\n";
+          }
+          echo "</td>";
+          echo "<td colspan='2'>" . displayDate($dateval) . "<br>$placetxt</td>\n";
+          echo "<td>{$row[$idfield]} </td>\n";
+          if ($numtrees > 1) {
+            echo "<td><a href=\"showtree.php?tree={$row['gedcom']}\">{$row['treename']}</a></td>";
+          }
+          echo "</tr>\n";
+        }
+        tng_free_result($result);
+        ?>
+      </table>
+      <?php
+      echo buildSearchResultPagination($totrows, "placesearch.php?$urlstring&amp;psearch=" . urlencode($psearchns) . "&amp;order=$order&amp;offset", $maxsearchresults, $max_browsesearch_pages);
+      echo "</div>\n";
+    }
+  }
+  return $successcount;
+}
+

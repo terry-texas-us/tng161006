@@ -9,7 +9,8 @@ include("getlang.php");
 
 include("checklogin.php");
 include("log.php");
-include("personlib.php");
+require 'personlib.php';
+require 'sources.php';
 
 $flags['imgprev'] = true;
 
@@ -225,7 +226,11 @@ $headSection->setTitle($headtext);
     } else {
       $innermenu = "<span id='tng_plink'>" . uiTextSnippet('srcinfo') . "</span>\n";
     }
-    echo tng_menu('S', "source", $sourceID, $innermenu);
+    echo buildSourceMenu('source', $sourceID);
+    echo "<div class='pub-innermenu small'>\n";
+      echo $innermenu;
+    echo "</div>\n";
+    echo "<br>\n";
     ?>
     <script>
       function innerToggle(part, subpart, subpartlink) {

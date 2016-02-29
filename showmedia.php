@@ -9,7 +9,7 @@ include("getlang.php");
 
 include("log.php");
 include("functions.php");
-include("personlib.php");
+require 'personlib.php';
 
 //starting time between slides
 $slidetime_display = "3.0";
@@ -199,7 +199,8 @@ echo "<body id='public'>\n";
       $slideshowheader = $namestr;
       echo tng_DrawHeading($mediastr, $namestr, $years);
 
-      echo tng_menu($linktype, $type, $personID, "&nbsp;");
+      echo tng_menu($linktype, $type, $personID);
+      echo "<br>\n";
     } else {
       if ($albumlinkID) {
         $mediastr = "<img class='icon-md' src='svg/album.svg'>\n";

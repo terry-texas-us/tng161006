@@ -1,7 +1,8 @@
 <?php
 include("tng_begin.php");
 
-include("personlib.php");
+require 'personlib.php';
+require 'families.php';
 
 $placelinkbegin = $tngconfig['places1tree'] ? "<a href=\"placesearch.php?psearch=" : "<a href=\"placesearch.php?tree=$tree&amp;psearch=";
 $placelinkend = "\" title=\"" . uiTextSnippet('findplaces') . "\"><img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=\"" . uiTextSnippet('findplaces') . "\"></a>";
@@ -595,10 +596,13 @@ $headSection->setTitle($headTitle);
     if ($allowpdf) {
       $innermenu .= " &nbsp;&nbsp; | &nbsp;&nbsp; <a href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=fam&amp;familyID=$familyID&amp;tree=$tree');return false;\">PDF</a>\n";
     }
-    echo tng_menu('F', "family", $familyID, $innermenu);
+    echo buildFamilyMenu("family", $familyID);
+    echo "<div class='pub-innermenu small'>\n";
+      echo $innermenu;
+    echo "</div>\n";
+    echo "<br>\n";
     echo $famtext;
     ?>
-
     <?php echo $publicFooterSection->build(); ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>

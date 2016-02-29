@@ -1,6 +1,8 @@
 <?php
 include("tng_begin.php");
 
+require 'personlib.php';
+
 $result = getPersonDataPlusDates($tree, $personID);
 if ($result) {
   $row = tng_fetch_assoc($result);
@@ -37,9 +39,8 @@ $headSection->setTitle(uiTextSnippet('creategedfor') . ": " . uiTextSnippet('ged
     $photostr = showSmallPhoto($personID, $name, $rights['both'], 0, false, $row['sex']);
     echo tng_DrawHeading($photostr, $name, getYears($row));
 
-    $innermenu = "&nbsp; \n";
-
-    echo tng_menu('I', "gedcom", $personID, $innermenu);
+    echo buildPersonMenu("gedcom", $personID);
+    echo "<br>\n";
 
     echo "<h4>" . uiTextSnippet('creategedfor') . "</h4>\n";
 

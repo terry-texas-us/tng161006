@@ -1,0 +1,43 @@
+
+.form-suggest .form-container {
+  background-color: #eee;
+  max-width: 420px;
+  padding: 30px 15px;
+  margin: 10px auto;
+}
+
+.form-suggest .form-heading,
+.form-suggest .checkbox {
+  margin-bottom: 10px;
+}
+
+.form-suggest .checkbox {
+  font-weight: normal;
+}
+
+.form-suggest .form-control {
+  position: relative;
+  height: auto;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.form-suggest .form-control:focus {
+  z-index: 2;
+}
+
+.form-suggest .yourname {
+  margin-bottom: 8px;
+}
+
+.form-suggest #email {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-suggest #confirm-email {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
