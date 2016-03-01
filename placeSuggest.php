@@ -36,7 +36,7 @@ $headSection->setTitle($headTitle);
     echo "<br style='clear: both;'>\n";
     echoResponseMessage($message, $sowner, $ssendemail);
     ?>
-    <form action='placeSuggestFormAction.php' method='post' name='suggest' id='suggest' onsubmit="return validateForm();">
+    <form action='placeSuggestFormAction.php' method='post' name='suggest' id='suggest' data-email-control='#email' data-confirm-email-control='#confirm-email'>
       <div class='form-container'>
         <h4><?php echo uiTextSnippet('suggestchange'); ?></h4>
         <input name="placeID" type='hidden' value="<?php echo $ID; ?>"/>

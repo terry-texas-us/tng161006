@@ -3,7 +3,7 @@ include("begin.php");
 $tngconfig['maint'] = "";
 include("adminlib.php");
 
-include("tngmaillib.php");
+require 'mail.php';
 
 if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && $_SESSION['allow_admin'] && $currentuser) {
   header("Location: admin.php");

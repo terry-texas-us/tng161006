@@ -12,6 +12,37 @@ function getCurrentUserEmail($currentUser, $users) {
   return $out;
 }
 
+function killBlockedAddress($address) {
+  global $addr_exclude;
+  
+  if ($addr_exclude) {
+    $blockedAddresses = explode(',', $addr_exclude);
+    foreach ($blockedAddresses as $blockedAddress) {
+      if ($blockedAddress) {
+        if (strstr($address, trim($blockedAddress))) {
+          die("sorry");
+        }
+      }
+    }
+  }
+  return false;
+}
+
+function killBlockedMessageContent($comments) {
+  global $msg_exclude;
+  
+  if ($msg_exclude) {
+    $snippets = explode(',', $msg_exclude);
+    foreach ($snippets as $snippet) {
+      if ($snippet) {
+        if (strstr($comments, trim($snippet))) {
+          die("sorry");
+        }
+      }
+    }
+  }
+}
+
 function echoResponseMessage($message, $sowner, $ssendemail) {
   if ($message) {
     $newmessage = uiTextSnippet($message);

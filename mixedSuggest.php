@@ -136,7 +136,7 @@ $headSection->setTitle($headTitle);
       echo "<h4><b>$headTitle</b></h4>\n";
     }
     ?>
-      <form action='mixedSuggestFormAction.php' method='post' name='suggest' id='suggest' onsubmit="return validateForm();">
+      <form action='mixedSuggestFormAction.php' method='post' name='suggest' id='suggest' data-email-control='#email' data-confirm-email-control='#confirm-email'>
       <div class='form-container'>
         <?php if ($typestr) { ?>
           <input name="<?php echo $typestr; ?>ID" type='hidden' value="<?php echo $ID; ?>"/>

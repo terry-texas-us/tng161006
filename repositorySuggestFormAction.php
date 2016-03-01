@@ -7,7 +7,7 @@ include("getlang.php");
 include("checklogin.php");
 
 include($subroot . "logconfig.php");
-include("tngmaillib.php");
+require 'mail.php';
 
 $valid_user_agent = isset($_SERVER["HTTP_USER_AGENT"]) && $_SERVER["HTTP_USER_AGENT"] != "";
 
@@ -35,26 +35,9 @@ $youremail = strtok($youremail, ",; ");
 if (!$youremail || !$comments || !$yourname) {
   die("sorry!");
 }
-if ($addr_exclude) {
-  $bad_addrs = explode(",", $addr_exclude);
-  foreach ($bad_addrs as $bad_addr) {
-    if ($bad_addr) {
-      if (strstr($youremail, trim($bad_addr))) {
-        die("sorry");
-      }
-    }
-  }
-}
-if ($msg_exclude) {
-  $bad_msgs = explode(",", $msg_exclude);
-  foreach ($bad_msgs as $bad_msg) {
-    if ($bad_msg) {
-      if (strstr($comments, trim($bad_msg))) {
-        die("sorry");
-      }
-    }
-  }
-}
+killBlockedAddress($youremail);
+killBlockedMessageContent($comments);
+
 $query = "SELECT reponame FROM $repositories_table WHERE repoID = \"$ID\" AND gedcom = \"$tree\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);

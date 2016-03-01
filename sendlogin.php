@@ -3,7 +3,7 @@ include("begin.php");
 include("genlib.php");
 include("getlang.php");
 
-include("tngmaillib.php");
+require 'mail.php';
 
 //look up email
 $email = trim($email);

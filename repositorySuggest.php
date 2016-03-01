@@ -42,7 +42,7 @@ $headSection->setTitle($headTitle);
     echo "<br>\n";
     echoResponseMessage($message, $sowner, $ssendemail);
     ?>
-    <form action='repositorySuggestFormAction.php' method='post' name='suggest' id='suggest' onsubmit="return validateForm();">
+    <form action='repositorySuggestFormAction.php' method='post' name='suggest' id='suggest' data-email-control='#email' data-confirm-email-control='#confirm-email'>
       <div class='form-container'>
         <h4><?php echo uiTextSnippet('suggestchange'); ?></h4>
         <input name="repoID" type='hidden' value="<?php echo $ID; ?>"/>

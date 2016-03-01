@@ -7,10 +7,11 @@ include("getlang.php");
 include("checklogin.php");
 
 include($subroot . "logconfig.php");
-include("tngmaillib.php");
+require 'mail.php';
 
 $valid_user_agent = isset($_SERVER["HTTP_USER_AGENT"]) && $_SERVER["HTTP_USER_AGENT"] != "";
 
+manageSessionMailVariables();
 $emailfield = $_SESSION['tng_email'];
 eval("\$youremail = \$$emailfield;");
 $_SESSION['tng_email'] = "";
@@ -35,26 +36,9 @@ $youremail = strtok($youremail, ",; ");
 if (!$youremail || !$comments || !$yourname) {
   die("sorry!");
 }
-if ($addr_exclude) {
-  $bad_addrs = explode(",", $addr_exclude);
-  foreach ($bad_addrs as $bad_addr) {
-    if ($bad_addr) {
-      if (strstr($youremail, trim($bad_addr))) {
-        die("sorry");
-      }
-    }
-  }
-}
-if ($msg_exclude) {
-  $bad_msgs = explode(",", $msg_exclude);
-  foreach ($bad_msgs as $bad_msg) {
-    if ($bad_msg) {
-      if (strstr($comments, trim($bad_msg))) {
-        die("sorry");
-      }
-    }
-  }
-}
+killBlockedAddress($youremail);
+killBlockedMessageContent($comments);
+
 $query = "SELECT firstname, lnprefix, lastname, prefix, suffix, sex, nameorder, living, private, branch, disallowgedcreate, IF(birthdatetr !='0000-00-00',YEAR(birthdatetr),YEAR(altbirthdatetr)) as birth, IF(deathdatetr !='0000-00-00',YEAR(deathdatetr),YEAR(burialdatetr)) as death
   FROM $people_table, $trees_table WHERE personID = \"$ID\" AND $people_table.gedcom = \"$tree\" AND $people_table.gedcom = $trees_table.gedcom";
 $result = tng_query($query);

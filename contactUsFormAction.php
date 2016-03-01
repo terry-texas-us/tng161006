@@ -5,7 +5,8 @@ include("genlib.php");
 include("getlang.php");
 
 include($subroot . "logconfig.php");
-include("tngmaillib.php");
+require 'mail.php';
+require 'suggest.php';
 
 $valid_user_agent = isset($_SERVER["HTTP_USER_AGENT"]) && $_SERVER["HTTP_USER_AGENT"] != "";
 
@@ -33,26 +34,9 @@ $youremail = strtok($youremail, ",; ");
 if (!$youremail || !$comments || !$yourname) {
   die("sorry!");
 }
-if ($addr_exclude) {
-  $bad_addrs = explode(",", $addr_exclude);
-  foreach ($bad_addrs as $bad_addr) {
-    if ($bad_addr) {
-      if (strstr($youremail, trim($bad_addr))) {
-        die("sorry");
-      }
-    }
-  }
-}
-if ($msg_exclude) {
-  $bad_msgs = explode(",", $msg_exclude);
-  foreach ($bad_msgs as $bad_msg) {
-    if ($bad_msg) {
-      if (strstr($comments, trim($bad_msg))) {
-        die("sorry");
-      }
-    }
-  }
-}
+killBlockedAddress($youremail);
+killBlockedMessageContent($comments);
+
 $subject = uiTextSnippet('yourcomments') . " (" . $page . ")";
 $body = $subject . ": " . stripslashes($comments) . "\n\n$yourname\n$youremail";
 

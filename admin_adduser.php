@@ -7,7 +7,7 @@ $admin_login = 1;
 include("checklogin.php");
 
 require("adminlog.php");
-include("tngmaillib.php");
+require 'mail.php';
 
 if ($assignedtree || !$allow_add) {
   $message = uiTextSnippet('norights');
