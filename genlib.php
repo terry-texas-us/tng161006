@@ -188,7 +188,7 @@ function tng_menu($enttype, $currpage, $entityID) {
   if ($allow_edit && $rightbranch) {
     $menu .= doMenuItem($nexttab, "$editstr" . "ID=$entityID&amp;tree=$tree&amp;cw=1\" target=\"_blank", "svg/new-message.svg", uiTextSnippet('edit'), $currpage, "");
   } elseif ($emailaddr) {
-    $menu .= doMenuItem($nexttab, "suggest.php?enttype=$enttype&amp;ID=$entityID&amp;tree=$tree", "svg/new-message.svg", uiTextSnippet('suggest'), $currpage, "suggest");
+    $menu .= doMenuItem($nexttab, "mixedSuggest.php?enttype=$enttype&amp;ID=$entityID&amp;tree=$tree", "svg/new-message.svg", uiTextSnippet('suggest'), $currpage, "suggest");
   }
   $menu .= "</ul>\n";
   $menu .= "</div>\n";

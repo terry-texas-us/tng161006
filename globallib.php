@@ -1015,7 +1015,7 @@ function placeImage($place) {
 function checkMaintenanceMode($area) {
   global $tngconfig;
 
-  if (strpos($_SERVER['SCRIPT_NAME'], "/suggest.php") === false && strpos($_SERVER['SCRIPT_NAME'], "admin") === false && $tngconfig['maint'] && (!$_SESSION['allow_admin'] || $_SESSION['assignedtree']) && strpos($_SERVER['SCRIPT_NAME'], "/index.") === false) {
+  if (strpos($_SERVER['SCRIPT_NAME'], "/mixedSuggest.php") === false && strpos($_SERVER['SCRIPT_NAME'], "admin") === false && $tngconfig['maint'] && (!$_SESSION['allow_admin'] || $_SESSION['assignedtree']) && strpos($_SERVER['SCRIPT_NAME'], "/index.") === false) {
     $maint_url = $area ? "adminmaint.php" : "maint.php";
     header("Location:$maint_url");
     exit;

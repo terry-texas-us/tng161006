@@ -55,18 +55,11 @@ if ($msg_exclude) {
     }
   }
 }
-$query = "SELECT firstname, lnprefix, lastname, prefix, suffix, sex, nameorder, living, private, branch, disallowgedcreate, IF(birthdatetr !='0000-00-00',YEAR(birthdatetr),YEAR(altbirthdatetr)) as birth, IF(deathdatetr !='0000-00-00',YEAR(deathdatetr),YEAR(burialdatetr)) as death
-  FROM $people_table, $trees_table WHERE personID = \"$ID\" AND $people_table.gedcom = \"$tree\" AND $people_table.gedcom = $trees_table.gedcom";
+$query = "SELECT title FROM $sources_table WHERE sourceID = \"$ID\" AND gedcom = \"$tree\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
-
-$righttree = checktree($tree);
-$rights = determineLivingPrivateRights($row, $righttree);
-$row['allow_living'] = $rights['living'];
-$row['allow_private'] = $rights['private'];
-
-$name = getName($row) . " ($ID)";
-$pagelink = "$tngwebsite/" . "getperson.php?personID=$ID&tree=$tree";
+$name = uiTextSnippet('source') . ": {$row['title']} ($ID)";
+$pagelink = "$tngwebsite/" . "showsource.php?sourceID=$ID&tree=$tree";
 tng_free_result($result);
 
 $subject = uiTextSnippet('proposed') . ": $name";
@@ -94,4 +87,4 @@ if ($success) {
 } else {
   $message = "mailnotsent&sowner=" . urlencode($owner) . "&ssendemail=" . urlencode($sendemail);
 }
-header("Location: personSuggest.php?ID=$ID&tree=$tree&message=$message");
+header("Location: sourceSuggest.php?ID=$ID&tree=$tree&message=$message");

@@ -144,4 +144,4 @@ if ($success) {
 } else {
   $message = "mailnotsent&sowner=" . urlencode($owner) . "&ssendemail=" . urlencode($sendemail);
 }
-header("Location: suggest.php?enttype=$enttype&ID=$ID&tree=$tree&message=$message");
+header("Location: mixedSuggest.php?enttype=$enttype&ID=$ID&tree=$tree&message=$message");
