@@ -69,7 +69,7 @@ $headSection->setTitle(uiTextSnippet('tree') . ": " . $row['treename']);
             showFact(uiTextSnippet('city'), $row['city']);
           }
           if ($row['state']) {
-            showFact(uiTextSnippet('state'), $row['state']);
+            showFact(uiTextSnippet('stateprov'), $row['state']);
           }
           if ($row['zip']) {
             showFact(uiTextSnippet('zip'), $row['zip']);

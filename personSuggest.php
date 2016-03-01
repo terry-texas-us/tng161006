@@ -63,9 +63,10 @@ $headSection->setTitle($headTitle);
       }
       echo "<p><strong><font color=\"red\">$newmessage</font></strong></p>\n";
     }
+    
     ?>
-    <form action="tngsendmail.php" method="post" name="suggest" id="suggest" onsubmit="return validateForm();">
-      <div class='form-container'> 
+    <form action="personSuggestFormAction.php" method="post" name="suggest" id="suggest" onsubmit="return validateForm();">
+      <div class='form-container'>
         <h4 class="form-heading"><?php echo uiTextSnippet('suggestchange'); ?></h4>
         <input name='personID' type='hidden' value="<?php echo $ID; ?>">
         <div class='form-group yourname'>

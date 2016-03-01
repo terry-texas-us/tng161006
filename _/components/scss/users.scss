@@ -1,0 +1,34 @@
+
+.form-newaccount .form-container {
+  background-color: #eee;
+  max-width: 420px;
+  padding: 30px 15px;
+  margin: 10px auto;
+}
+
+.form-newaccount .form-heading,
+.form-newaccount .checkbox {
+  margin-bottom: 10px;
+}
+
+.form-newaccount .checkbox {
+  font-weight: normal;
+}
+
+.form-newaccount .form-control:focus {
+  z-index: 2;
+}
+
+.form-newaccount input[name='password'],
+.form-newaccount #session-email {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-newaccount  input[name='password2'],
+.form-newaccount  input[name='em2'] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

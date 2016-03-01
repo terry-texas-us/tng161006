@@ -129,7 +129,7 @@ $allow_user_change = true;
           <td><input name='city' type='text' size='50' maxlength='64' value="<?php echo $row['city']; ?>"></td>
         </tr>
         <tr>
-          <td><?php echo uiTextSnippet('state'); ?>:</td>
+          <td><?php echo uiTextSnippet('stateprov'); ?>:</td>
           <td><input name='state' type='text' size='50' maxlength='64' value="<?php echo $row['state']; ?>"></td>
         </tr>
         <tr>

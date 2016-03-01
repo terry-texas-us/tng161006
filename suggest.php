@@ -62,7 +62,6 @@ if ($enttype == 'I') {
     $prow['allow_private'] = $prights['private'];
     $wname = getName($prow);
   }
-
   $plus = $hname && $wname ? " + " : "";
   $name = uiTextSnippet('family') . ": $hname$plus$wname ($ID)";
 
@@ -107,8 +106,6 @@ if ($enttype == 'I') {
 } else {
   $typestr = "";
 }
-
-
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 header("Content-type: text/html; charset=" . $session_charset);
@@ -119,7 +116,7 @@ $headSection->setTitle($headTitle);
 <!DOCTYPE html>
 <html>
 <?php echo $headSection->build($flags, 'public', $session_charset); ?>
-<body id='public'>
+<body class='form-suggest'>
   <section class='container'>
     <?php
     if ($enttype) {
@@ -149,65 +146,43 @@ $headSection->setTitle($headTitle);
       }
       echo "<p><strong><font color=\"red\">$newmessage</font></strong></p>\n";
     }
-
     if ($enttype) {
       echo "<h4><b>$headTitle</b></h4>\n";
     }
     ?>
-
-    <?php
-    beginFormElement("tngsendmail", "post", "suggest", "suggest", "return validateForm();");
-    if ($typestr) {
-      ?>
-      <input name="<?php echo $typestr; ?>ID" type='hidden' value="<?php echo $ID; ?>"/>
-      <?php
-    }
-    ?>
-      <table class='table table-sm'>
-        <tr>
-          <td width="20%"><?php echo uiTextSnippet('yourname'); ?>:</td>
-          <td width="80%">
-            <input class='longfield' name="<?php echo $_SESSION['tng_yourname']; ?>" type='text'>
-          </td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('email'); ?>:</td>
-          <td>
-            <input class='longfield' name="<?php echo $_SESSION['tng_email']; ?>" type='text' value="<?php echo $preemail; ?>"> 
-            <input name='mailme' type='checkbox' value='1'/><?php echo uiTextSnippet('mailme'); ?>
-          </td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('emailagain'); ?>:</td>
-          <td>
-            <input class='longfield' name='em2' type='text' value="<?php echo $preemail; ?>"/>
-          </td>
-        </tr>
-        <?php
-        if ($page) { ?>
-          <tr>
-            <td><?php echo uiTextSnippet('subject'); ?>:</td>
-            <td><?php echo stripslashes($page); ?></td>
-          </tr>
+    <form action="tngsendmail.php" method="post" name="suggest" id="suggest" onsubmit="return validateForm();">
+      <div class='form-container'>
+        <?php if ($typestr) { ?>
+          <input name="<?php echo $typestr; ?>ID" type='hidden' value="<?php echo $ID; ?>"/>
         <?php } ?>
-        <tr>
-          <td><?php echo $comments; ?>:</td>
-          <td>
-            <textarea cols="60" rows="10" name="<?php echo $_SESSION['tng_comments']; ?>"></textarea>
-          </td>
-        </tr>
-      </table>
-      <input name='enttype' type='hidden' value="<?php echo $enttype; ?>"/>
-      <input name='ID' type='hidden' value="<?php echo $ID; ?>"/>
-      <input name='tree' type='hidden' value="<?php echo $tree; ?>"/>
-      <input name='page' type='hidden' value="<?php echo $page; ?>"/>
-      <br>
-      <input type='submit' value="<?php echo $buttontext; ?>"/>
-    <?php endFormElement(); ?>
-      <br>
+        <div class='form-group yourname'>
+          <label><?php echo uiTextSnippet('yourname'); ?>:</label>
+          <input class='form-control' name="<?php echo $_SESSION['tng_yourname']; ?>" type='text'>
+        </div>  
+        <div class='form-group'>
+          <label><?php echo uiTextSnippet('email'); ?>:</label>
+          <input class='form-control' id='email' name="<?php echo $_SESSION['tng_email']; ?>" type='email' value="<?php echo $preemail; ?>">
+          <input class='form-control' id='confirm-email' name='em2' type='email' value="<?php echo $preemail; ?>" placeholder="<?php echo uiTextSnippet('emailagain'); ?>">
+          <input name='mailme' type='checkbox' value='1'><?php echo uiTextSnippet('mailme'); ?>
+        </div>
+        <?php if ($page) { ?>
+          <label><?php echo uiTextSnippet('subject'); ?>:</label>
+          <div><?php echo stripslashes($page); ?></div>
+        <?php } ?>
+        <hr>
+        <?php echo $comments; ?>:
+        <textarea class='form-control' name="<?php echo $_SESSION['tng_comments']; ?>" rows='4'></textarea>
+        <input name='enttype' type='hidden' value="<?php echo $enttype; ?>">
+        <input name='ID' type='hidden' value="<?php echo $ID; ?>">
+        <input name='tree' type='hidden' value="<?php echo $tree; ?>">
+        <input name='page' type='hidden' value="<?php echo $page; ?>">
+        <br>
+        <button class="btn btn-primary btn-block" type="submit"><?php echo $buttontext; ?></button>
+      </div>
+    </form>
     <?php echo $publicFooterSection->build(); ?>
   </section> <!-- .container -->
-  <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
+<?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
 <script>
   function validateForm() {
     if( document.suggest.<?php echo $_SESSION['tng_yourname'] ?>.value === '') {

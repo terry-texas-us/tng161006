@@ -4,7 +4,6 @@ include("begin.php");
 include("genlib.php");
 include("getlang.php");
 
-
 $query = "SELECT gedcom, treename FROM $trees_table ORDER BY treename";
 $treeresult = tng_query($query);
 $numtrees = tng_num_rows($treeresult);
@@ -26,97 +25,102 @@ $headSection->setTitle(uiTextSnippet('regnewacct'));
 <!DOCTYPE html>
 <html>
 <?php echo $headSection->build($flags, 'public', $session_charset); ?>
-<body id='public'>
-<?php echo $publicHeaderSection->build(); ?>
-<h2><img class='icon-md' src='svg/lock-open.svg' alt=""><?php echo uiTextSnippet('regnewacct'); ?></h2>
-<br clear='left'>
-<?php
-
-if (!$tngconfig['disallowreg']) {
-  echo "<p><strong>*" . uiTextSnippet('required') . "</strong></p>\n";
-  ?>
-  <table>
-    <tr>
-      <td>
-        <?php
-        $onsubmit = $ucount ? "return validateForm(this);" : "alert('" . uiTextSnippet('nousers') . "');return false;";
-        beginFormElement("addnewacct", "post", "form1", "", $onsubmit);
-        ?>
-        <table>
-          <tr>
-            <td><?php echo uiTextSnippet('username'); ?>*:</td>
-            <td><input name='username' type='text' maxlength='20'></td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('password'); ?>*:</td>
-            <td><input name='password' type='password' maxlength='20'></td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('pwdagain'); ?>*:</td>
-            <td><input name='password2' type='password' maxlength='20'></td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('realname'); ?>*:</td>
-            <td><input name='realname' type='text' size='50' maxlength='50'/></td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('phone'); ?>:</td>
-            <td><input name='phone' type='text' size='30' maxlength='30'/></td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('email'); ?>*:</td>
-            <td><input name="<?php echo $_SESSION['tng_email']; ?>" type='text' size='50' maxlength='100'/>
-            </td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('emailagain'); ?>*:</td>
-            <td><input name='em2' type='text' size='50' maxlength='100'/></td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('website'); ?>:</td>
-            <td><input name='website' type='text' size='50' maxlength='100' value="http://"/></td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('address'); ?>:</td>
-            <td><input name='address' type='text' size='50' maxlength='100'/></td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('city'); ?>:</td>
-            <td><input name='city' type='text' size='50' maxlength='64'/></td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('state'); ?>:</td>
-            <td><input name='state' type='text' size='50' maxlength='64'/></td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('zip'); ?>:</td>
-            <td><input name='zip' type='text' maxlength='10'></td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('country'); ?>:</td>
-            <td><input name='country' type='text' size='50' maxlength='64'/></td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('acctcomments'); ?>:</td>
-            <td><textarea cols="50" rows="4" name="notes"></textarea></td>
-          </tr>
-        </table>
-        <p><?php echo uiTextSnippet('accmail'); ?></p>
-        <br>
-        <input name="fingerprint" type='hidden' value='realperson'>
-        <input name='submit' type='submit' value="<?php echo uiTextSnippet('submit'); ?>"/>
-        <?php endFormElement(); ?>
-        <br>
-      </td>
-    </tr>
-  </table>
-  <?php
-} else {
-  echo "<p>" . uiTextSnippet('noregs') . "</p>\n";
-}
-echo $publicFooterSection->build();
-echo scriptsManager::buildScriptElements($flags, 'public');
-?>
+<body class='form-newaccount'>
+  <section class='container'>
+    <?php echo $publicHeaderSection->build(); ?>
+    <h2><img class='icon-md' src='svg/lock-open.svg' alt=""><?php echo uiTextSnippet('regnewacct'); ?></h2>
+    <?php if (!$tngconfig['disallowreg']) { ?>
+      <?php $onsubmit = $ucount ? "return validateForm(this);" : "alert('" . uiTextSnippet('nousers') . "'); return false;"; ?>
+      <form action="addnewacct.php" method="post" name="form1" onsubmit="<?php echo $onsubmit; ?>">
+        <div class='form-container'>
+          <div class='form-group row'>
+            <label class='form-control-label col-sm-3'><?php echo uiTextSnippet('username'); ?>*:</label>
+            <div class='col-sm-9'>
+              <input class='form-control' name='username' type='text' maxlength='20'>
+            </div>
+          </div>
+          <div class='form-group row'>
+            <label class='form-control-label col-sm-3'><?php echo uiTextSnippet('password'); ?>*:</label>
+            <div class='col-sm-9'>
+              <input class='form-control' name='password' type='password' maxlength='20'>
+              <input class='form-control' name='password2' type='password' maxlength='20' placeholder='<?php echo uiTextSnippet('pwdagain'); ?>'>
+            </div>
+          </div>
+          <div class='form-group row'>
+            <label class='form-control-label col-sm-3'><?php echo uiTextSnippet('realname'); ?>*:</label>
+            <div class='col-sm-9'>
+              <input class='form-control' name='realname' type='text' maxlength='50'>
+            </div>
+          </div> 
+          <div class='form-group row'>
+            <label class='form-control-label col-sm-3'><?php echo uiTextSnippet('email'); ?>*:</label>
+            <div class='col-sm-9'>
+              <input class='form-control' id='session-email' name="<?php echo $_SESSION['tng_email']; ?>" type='text' maxlength='100'>
+              <input class='form-control' name='em2' type='text' maxlength='100' placeholder='<?php echo uiTextSnippet('emailagain'); ?>'>
+            </div>
+          </div>
+          <hr>
+          <div class='form-group row'>
+            <label class='form-control-label col-sm-3'><?php echo uiTextSnippet('phone'); ?>:</label>
+            <div class='col-sm-9'>
+              <input class='form-control' name='phone' type='text' maxlength='30'>
+            </div>
+          </div>
+          <div class='form-group row'>
+            <label class='form-control-label col-sm-3'><?php echo uiTextSnippet('website'); ?>:</label>
+            <div class='col-sm-9'>
+              <input class='form-control' name='website' type='text' maxlength='100' value="http://">
+            </div>
+          </div>
+          <div class='form-group row'>
+            <label class='form-control-label col-sm-3'><?php echo uiTextSnippet('address'); ?>:</label>
+            <div class='col-sm-9'>
+              <input class='form-control' name='address' type='text' maxlength='100'>
+            </div>
+          </div>
+          <div class='form-group row'>
+            <label class='form-control-label col-sm-3'><?php echo uiTextSnippet('city'); ?>:</label>
+            <div class='col-sm-9'>
+              <input class='form-control' name='city' type='text' maxlength='64'>
+            </div>
+          </div>
+          <div class='form-group row'>
+            <label class='form-control-label col-sm-3'><?php echo uiTextSnippet('stateprov'); ?>:</label>
+            <div class='col-sm-9'>
+              <input class='form-control' name='state' type='text' maxlength='64'>
+            </div>
+          </div>
+          <div class='form-group row'>
+            <label class='form-control-label col-sm-3'><?php echo uiTextSnippet('zip'); ?>:</label>
+            <div class='col-sm-9'>
+              <input class='form-control' name='zip' type='text' maxlength='10'>
+            </div>
+          </div>
+          <div class='form-group row'>
+            <label class='form-control-label col-sm-3'><?php echo uiTextSnippet('country'); ?>:</label>
+            <div class='col-sm-9'>
+              <input class='form-control' name='country' type='text' maxlength='64'>
+            </div>
+          </div>
+          <div class='form-group row'>
+            <label class='form-control-label col-sm-12'><?php echo uiTextSnippet('acctcomments'); ?>:</label>
+            <div class='col-sm-12'>
+              <textarea class='form-control' rows="4" name="notes"></textarea>
+            </div>
+          </div>
+<!--
+          <p><?php echo uiTextSnippet('accmail'); ?></p>
+-->
+          <input name="fingerprint" type='hidden' value='realperson'>
+          <button class="btn btn-primary btn-block" type="submit"><?php echo uiTextSnippet('submit'); ?></button>
+        </div>
+      </form>
+    <?php } else { ?>
+      <p><?php echo uiTextSnippet('noregs'); ?></p>
+    <?php } ?>
+    <?php echo $publicFooterSection->build(); ?>
+  </section> <!-- .container -->
+<?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
 <script>
   function validateForm(form) {
     var rval = true;

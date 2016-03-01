@@ -22,10 +22,10 @@ $headSection->setTitle(uiTextSnippet('login'));
 <?php echo $headSection->build($flags, 'public', $session_charset); ?>
 <?php
 echo "<body id='public'>\n";
-echo $publicHeaderSection->build();
+  echo $publicHeaderSection->build();
 
-include("loginlib.php");
-echo $publicFooterSection->build();
+  include("loginlib.php");
+  echo $publicFooterSection->build();
 echo scriptsManager::buildScriptElements($flags, 'public');
 ?>
 <script>
