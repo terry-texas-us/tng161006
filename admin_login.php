@@ -34,9 +34,9 @@ if ($email) {
     if ($success) {
       $sendmail = 1;
       $content = uiTextSnippet('newpass') . ": $newpassword";
-      $message = uiTextSnippet('pwdsent');
+      $message = "<div class='alert alert-success' role='alert'>" . uiTextSnippet('pwdsent') . "</div>";
     } else {
-      $message = uiTextSnippet('loginnotsent3');
+      $message = "<div class='alert alert-warning' role='alert'>" . uiTextSnippet('loginnotsent3') . "</div>";
     }
   } else {
     $query = "SELECT username, realname FROM $users_table WHERE email = \"$email\"";
@@ -47,9 +47,9 @@ if ($email) {
     if ($row['username']) {
       $sendmail = 1;
       $content = uiTextSnippet('logininfo') . ":\n\n" . uiTextSnippet('username') . ": {$row['username']}";
-      $message = uiTextSnippet('usersent');
+      $message = "<div class='alert alert-success' role='alert'>" . uiTextSnippet('usersent') . "</div>";
     } else {
-      $message = uiTextSnippet('loginnotsent2');
+      $message = "<div class='alert alert-warning' role='alert'>" . uiTextSnippet('loginnotsent2') . "</div>";
     }
   }
   if ($sendmail) {

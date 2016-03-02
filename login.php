@@ -38,7 +38,7 @@ $headSection->setTitle(uiTextSnippet('login'));
     <?php if (!$tngconfig['disallowreg']) { ?>
       <p><?php echo uiTextSnippet('nologin'); ?> <a href='newacctform.php'><?php echo uiTextSnippet('regnewacct'); ?></a></p>
     <?php } ?>
-    <?php echo $publicFooterSection->build(); ?>
+    <?php // echo $publicFooterSection->build(); ?>
   </section> <!-- .container -->
 <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
 <script src="js/login.js"></script>

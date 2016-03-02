@@ -90,22 +90,6 @@ function setFocus(field) {
         $('#' + field).focus();
 }
 
-function sendLogin(form, url) {
-    var params = $(form).serialize();
-    $.ajax({
-        url: url,
-        data: params,
-        dataType: 'json',
-        success: function (vars) {
-            if ($('#' + vars.div).length) {
-                $('#' + vars.div).html(vars.msg);
-                $('#' + vars.div).effect('highlight', {}, 400);
-            }
-        }
-    });
-    return false;
-}
-
 var newuserok = false;
 function checkNewUser(userfield, olduserfield, submitform) {
     if (olduserfield && userfield.value === olduserfield.value) {
