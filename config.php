@@ -117,12 +117,12 @@ $tngconfig['autoapp'] = "0";
 $tngconfig['autotree'] = "0";
 $tngconfig['ackemail'] = "1";
 $tngconfig['omitpwd'] = "0";
-$tngconfig['usesmtp'] = "0";
+$tngconfig['usesmtp'] = "1";
 $tngconfig['mailhost'] = "smtp.mail.att.net";
 $tngconfig['mailuser'] = "t.smith@swbell.net";
 $tngconfig['mailpass'] = "tas122354";
 $tngconfig['mailport'] = "587";
-$tngconfig['mailenc'] = "";
+$tngconfig['mailenc'] = "tls";
 $maxgedcom = "8";
 $change_cutoff = "0";
 $change_limit = "10";
@@ -133,7 +133,6 @@ $tngconfig['oldids'] = "";
 $tngconfig['lastimport'] = "";
 $defaulttree = "twall";
 $tng_notinstalled = "";
-
 
 @include($subroot . "customconfig.php");
 ?>

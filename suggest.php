@@ -46,10 +46,11 @@ function killBlockedMessageContent($comments) {
 function echoResponseMessage($message, $sowner, $ssendemail) {
   if ($message) {
     $newmessage = uiTextSnippet($message);
-    if ($message == "mailnotsent") {
-      $newmessage = preg_replace("/xxx/", $sowner, $newmessage);
-      $newmessage = preg_replace("/yyy/", $ssendemail, $newmessage);
+    if ($message == 'mailsent') {
+      $newmessage = "<div class='alert alert-success' role='alert'>$newmessage</div>";
+    } else if ($message == "mailnotsent") {
+      $newmessage = "<div class='alert alert-danger' role='alert'>" . sprintf($newmessage, $sowner, $ssendemail) . "</div>";
     }
-    echo "<p><font color='red'>$newmessage</font></p>\n";
+    echo "$newmessage\n";
   }
 }

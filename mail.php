@@ -1,49 +1,57 @@
 <?php
 function tng_sendmail($from_name, $from_email, $to_name, $to_email, $subject, $body, $returnpath, $replyto) {
-  global $session_charset, $envelope, $tngconfig;
+  global $session_charset;
+  global $envelope;
+  global $tngconfig;
 
   if (function_exists('filter_var') && !filter_var($from_email, FILTER_VALIDATE_EMAIL)) {
     $success = false;
   } else {
     if ($tngconfig['usesmtp']) {
-      require_once("class.phpmailer.php");
-      require_once("class.smtp.php");
+      require_once 'PHPMailerAutoload.php';
+      
+      //require_once("class.phpmailer.php");
+      //require_once("class.smtp.php");
 
       //need host, port, username & password
       $options = new stdClass();
       $options->charset = $session_charset;
-      $mail = new PHPMailer($options);
+      $mail = new PHPMailer($options, true);
+      try {
+        $mail->IsSMTP();                           // set mailer to use SMTP
+        $mail->Host = $tngconfig['mailhost'];      // specify main and backup server or localhost
+        $mail->SMTPAuth = true;                    // turn on SMTP authentication
+        $mail->Username = $tngconfig['mailuser'];  // SMTP username
+        $mail->Password = $tngconfig['mailpass'];  // SMTP password
+        if (!empty($tngconfig['mailenc'])) {
+          $mail->SMTPSecure = $tngconfig['mailenc'];
+        } // SMTP encryption
+        //It should be same as that of the SMTP user
+        $mail->Port = $tngconfig['mailport'];
 
-      //Your SMTP servers details
+        $mail->From = $from_email;    // Default From email same as smtp user
+        $mail->FromName = $from_name;
 
-      $mail->IsSMTP();               // set mailer to use SMTP
-      $mail->Host = $tngconfig['mailhost'];  // specify main and backup server or localhost
-      $mail->SMTPAuth = true;     // turn on SMTP authentication
-      $mail->Username = $tngconfig['mailuser'];  // SMTP username
-      $mail->Password = $tngconfig['mailpass']; // SMTP password
-      if (!empty($tngconfig['mailenc'])) {
-        $mail->SMTPSecure = $tngconfig['mailenc'];
-      } // SMTP encryption
-      //It should be same as that of the SMTP user
-      $mail->Port = $tngconfig['mailport'];
+        $mail->AddAddress($to_email, $to_name); //Email address where you wish to receive/collect those emails.
+        $mail->AddReplyTo($replyto, $from_name);
 
-      $mail->From = $from_email;    //Default From email same as smtp user
-      $mail->FromName = $from_name;
+        $mail->CharSet = strtolower($session_charset);
+        //$mail->WordWrap = 50;
+        if ($session_charset && strtoupper($session_charset) != "ISO-8859-1") {
+          $mail->IsHTML(true);                                  // set email format to HTML
+          $body = nl2br($body);
+        }
 
-      $mail->AddAddress($to_email, $to_name); //Email address where you wish to receive/collect those emails.
-      $mail->AddReplyTo($replyto, $from_name);
+        $mail->Subject = $subject;
+        $mail->Body = $body;
 
-      $mail->CharSet = strtolower($session_charset);
-      //$mail->WordWrap = 50;
-      if ($session_charset && strtoupper($session_charset) != "ISO-8859-1") {
-        $mail->IsHTML(true);                                  // set email format to HTML
-        $body = nl2br($body);
+        $success = $mail->Send();
+        echo "Message sent!";
+      } catch (phpmailerException $e) {
+        echo $e->errorMessage();
+      } catch (Exception $e) {
+        echo $e->getMessage();
       }
-
-      $mail->Subject = $subject;
-      $mail->Body = $body;
-
-      $success = $mail->Send();
     } else {
       //normal procedure
       if (strtoupper($session_charset) != "ISO-8859-1") {
@@ -54,7 +62,6 @@ function tng_sendmail($from_name, $from_email, $to_name, $to_email, $subject, $b
       } else {
         $headers = "From: $from_name <$from_email>\nReply-to: $replyto\nReturn-Path: $returnpath\nDate:" . date('r', time());
       }
-
       if ($envelope) {
         $success = mail($to_email, $subject, $body, $headers, "-f" . $from_email);
       } else {
@@ -62,6 +69,5 @@ function tng_sendmail($from_name, $from_email, $to_name, $to_email, $subject, $b
       }
     }
   }
-
   return $success;
 }

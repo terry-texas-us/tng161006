@@ -7,11 +7,11 @@ include("getlang.php");
 include("checklogin.php");
 
 include($subroot . "logconfig.php");
+require 'suggest.php';
 require 'mail.php';
 
 $valid_user_agent = isset($_SERVER["HTTP_USER_AGENT"]) && $_SERVER["HTTP_USER_AGENT"] != "";
 
-manageSessionMailVariables();
 $emailfield = $_SESSION['tng_email'];
 eval("\$youremail = \$$emailfield;");
 $_SESSION['tng_email'] = "";
