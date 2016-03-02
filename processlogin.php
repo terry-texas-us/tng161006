@@ -15,7 +15,6 @@ if ($admin_login) {
   $dest_url = isset($_SESSION['destinationpage8']) ? $_SESSION['destinationpage8'] : $home_url;
   $login_url = $requirelogin || !isset($_SESSION['destinationpage8']) || strpos($_SESSION['destinationpage8'], $home_url) !== false || substr($_SESSION['destinationpage8'], -1) == "/" ? "login.php?message=loginfailed" : $dest_url;
 }
-
 $query = "SELECT * FROM $users_table WHERE BINARY username = \"$tngusername\"";
 $result = tng_query($query) or die("Cannot execute query: $query");
 if (tng_num_rows($result)) {
@@ -35,7 +34,6 @@ if (tng_num_rows($result)) {
 } else {
   $check = 0;
 }
-
 $headerstr = $login_url;
 $newroot = preg_replace("/\//", "", $rootpath);
 $newroot = preg_replace("/ /", "", $newroot);

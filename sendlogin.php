@@ -5,7 +5,6 @@ include("getlang.php");
 
 require 'mail.php';
 
-//look up email
 $email = trim($email);
 
 $valid_user_agent = isset($_SERVER["HTTP_USER_AGENT"]) && $_SERVER["HTTP_USER_AGENT"] != "";
@@ -16,7 +15,6 @@ if (preg_match("/\n[[:space:]]*(to|bcc|cc|boundary)[[:space:]]*[:|=].*@/i", $ema
 if (preg_match("/\r/i", $email) || preg_match("/\n/i", $email)) {
   die("sorry!");
 }
-
 $email = strtok($email, ",; ");
 $div = "";
 
@@ -40,12 +38,12 @@ if ($email) {
       if ($success) {
         $sendmail = 1;
         $content = uiTextSnippet('newpass') . ": $newpassword";
-        $message = uiTextSnippet('pwdsent');
+        $message = "<div class='alert alert-success' role='alert'>" . uiTextSnippet('pwdsent') . "</div>";
       } else {
-        $message = uiTextSnippet('loginnotsent3');
+        $message = "<div class='alert alert-warning' role='alert'>" . uiTextSnippet('loginnotsent3') . "</div>";
       }
     } else {
-      $message = uiTextSnippet('loginnotsent');
+      $message = "<div class='alert alert-warning' role='alert'>" . uiTextSnippet('loginnotsent') . "</div>";
     }
   } else {
     $div = "usnmsg";
@@ -57,12 +55,11 @@ if ($email) {
     if ($row['username']) {
       $sendmail = 1;
       $content = uiTextSnippet('logininfo') . ":\n\n" . uiTextSnippet('username') . ": {$row['username']}";
-      $message = uiTextSnippet('usersent');
+      $message = "<div class='alert alert-success' role='alert'>" . uiTextSnippet('usersent') . "</div>";
     } else {
-      $message = uiTextSnippet('loginnotsent2');
+      $message = "<div class='alert alert-warning' role='alert'>" . uiTextSnippet('loginnotsent2') . "</div>";
     }
   }
-
   if ($sendmail) {
     $mailmessage = $content;
     $owner = preg_replace("/,/", "", ($sitename ? $sitename : ($dbowner ? $dbowner : "TNG")));

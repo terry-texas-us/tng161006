@@ -9,7 +9,6 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && $_SESSION[
   header("Location: admin.php");
   $reset = 1;
 }
-
 if ($message) {
   if (uiTextSnippet($message)) {
     $message = uiTextSnippet($message);
@@ -18,7 +17,6 @@ if ($message) {
   }
 }
 if ($email) {
-
   $sendmail = 0;
 
   //if username is there too, then look up based on username and get password
@@ -54,7 +52,6 @@ if ($email) {
       $message = uiTextSnippet('loginnotsent2');
     }
   }
-
   if ($sendmail) {
     $mailmessage = $content;
     $owner = preg_replace("/,/", "", ($sitename ? $sitename : ($dbowner ? $dbowner : "TNG")));
@@ -62,7 +59,6 @@ if ($email) {
     tng_sendmail($owner, $emailaddr, $row['realname'], $email, uiTextSnippet('logininfo'), $mailmessage, $emailaddr, $emailaddr);
   }
 }
-
 $home_url = $homepage;
 
 $newroot = preg_replace('/\//', '', $rootpath);
@@ -97,86 +93,62 @@ if ($reset) {
   $_COOKIE[$loggedin] = "";
 }
 ?>
-<body>
+<body class='admin-login'>
   <section class='container'>
-    <table class='table table-sm'>
-      <tr>
-        <td>
-          <h4 class="white small"><?php echo uiTextSnippet('login') . ": " . uiTextSnippet('administration'); ?></h4>
-        </td>
-      </tr>
-      <?php if ($message) { ?>
-        <tr>
-          <td>
-            <span style="color: rgb(255, 0, 0)"><em><?php echo $message; ?></em></span>
-          </td>
-        </tr>
-      <?php } ?>
-      <tr>
-        <td>
-          <div id="admlogintable" style="position:relative">
-            <div class="altab" style="float:left">
-              <form action="processlogin.php" name="form1" method='post'>
-                <table class='table table-sm'>
-                  <tr>
-                    <td><?php echo uiTextSnippet('username'); ?>:</td>
-                    <td><input name='tngusername' type='text'></td>
-                  </tr>
-                  <tr>
-                    <td><?php echo uiTextSnippet('password'); ?>:</td>
-                    <td><input name='tngpassword' type="password"></td>
-                  </tr>
-                  <tr>
-                    <td colspan='2'>
-                      <input name='remember' type='checkbox' value='1' /> <?php echo uiTextSnippet('rempass'); ?>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                    <td><input type='submit' value="<?php echo uiTextSnippet('login'); ?>"/></td>
-                  </tr>
-                </table>
-                <p>
-                  <a href="<?php echo $home_url; ?>">
-                    <img src='svg/home.svg' width="20" height="20" alt="">
-                    <?php echo uiTextSnippet('publichome'); ?>
-                  </a>
-                </p>
-                <input name='admin_login' type='hidden' value='1' />
-                <input name='continue' type='hidden' value="<?php echo $continue; ?>" />
-              </form>
+    <p>
+      <a href="<?php echo $home_url; ?>">
+        <img class='icon-sm' src='svg/home.svg' alt="">
+        <?php echo uiTextSnippet('publichome'); ?>
+      </a>
+    </p>
+    <hr>
+    <?php if ($message) { ?>
+      <span style="color: rgb(255, 0, 0)"><em><?php echo $message; ?></em></span>
+    <?php } ?>
+    <div class='row'>
+      <div class='col-md-6'>
+        <form action='processlogin.php' name='form1' method='post'>
+          <div class='form-admin-login'>
+            <div class='form-admin-login-heading'>
+              <h4><?php echo uiTextSnippet('login') . ": " . uiTextSnippet('administration'); ?></h4>
             </div>
-            <div class="altab" style="float:left; width:50px;">&nbsp;&nbsp;&nbsp;</div>
-            <div class="altab">
-              <form action="admin_login.php" name="form2" method='post'>
-                <table class='table table-sm'>
-                  <tr>
-                    <td colspan='2'><span><?php echo uiTextSnippet('forgot1'); ?></span></td>
-                  </tr>
-                  <tr>
-                    <td><?php echo uiTextSnippet('email'); ?>:</td>
-                    <td>
-                      <input name='email' type='text'>
-                      <input type='submit' value="<?php echo uiTextSnippet('go'); ?>">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan='2'><span><br><?php echo uiTextSnippet('forgot2'); ?></span></td>
-                  </tr>
-                  <tr>
-                    <td><?php echo uiTextSnippet('username'); ?>:</td>
-                    <td>
-                      <input name='username' type='text'>
-                      <input type='submit' value="<?php echo uiTextSnippet('go'); ?>">
-                    </td>
-                  </tr>
-                </table>
-              </form>
+            <?php $label = uiTextSnippet('username'); ?>
+            <label class='sr-only' for='tngusername'><?php echo $label; ?></label>
+            <input class='form-control' id='username' name='tngusername' type='text' placeholder='<?php echo $label; ?>'>
+            <?php $label = uiTextSnippet('password'); ?>
+            <label class='sr-only' for='tngpassword'><?php echo $label; ?></label>
+            <input class='form-control' name='tngpassword' type="password" placeholder='<?php echo $label; ?>'>
+            <div class='checkbox'>
+              <label>
+                <input name='remember' type='checkbox' value='1'> <?php echo uiTextSnippet('rempass'); ?>
+              </label>
             </div>
+            <button class='btn btn-primary btn-block' type='submit'><?php echo uiTextSnippet('login'); ?></button>
+            <input name='admin_login' type='hidden' value='1'>
+            <input name='continue' type='hidden' value="<?php echo $continue; ?>">
           </div>
-        </td>
-      </tr>
-    </table>
+        </form>
+      </div>
+      <div class='col-md-6'>
+        <form action="admin_login.php" name="form2" method='post'>
+          <?php echo uiTextSnippet('forgot1'); ?>
+          <div class="input-group">
+            <input class='form-control' name='email' type='text' placeholder='<?php echo uiTextSnippet('email'); ?>'>
+            <span class="input-group-btn">
+              <button class='btn btn-secondary' type='submit'><?php echo uiTextSnippet('go'); ?></button>
+            </span>
+          </div>
+          <br>
+          <?php echo uiTextSnippet('forgot2'); ?>
+          <div class='input-group'>
+            <input class='form-control' name='username' type='text' placeholder='<?php echo uiTextSnippet('username'); ?>'>
+            <span class='input-group-btn'>
+              <button class="btn btn-secondary" type="submit"><?php echo uiTextSnippet('go'); ?></button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
   </section> <!-- .container -->
 <script>
   document.form1.tngusername.focus();

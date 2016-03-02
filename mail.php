@@ -46,11 +46,10 @@ function tng_sendmail($from_name, $from_email, $to_name, $to_email, $subject, $b
         $mail->Body = $body;
 
         $success = $mail->Send();
-        echo "Message sent!";
       } catch (phpmailerException $e) {
-        echo $e->errorMessage();
+// [ts]        echo $e->errorMessage();
       } catch (Exception $e) {
-        echo $e->getMessage();
+// [ts]        echo $e->getMessage();
       }
     } else {
       //normal procedure
