@@ -11,9 +11,8 @@ if ($assignedtree || !$allow_add) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-
 $query = "SELECT count(userID) as ucount FROM $users_table";
-$result = @tng_query($query);
+$result = tng_query($query);
 if ($result) {
   $row = tng_fetch_assoc($result);
 } else {
@@ -31,288 +30,245 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
 <!DOCTYPE html>
 <html>
 <?php echo $headSection->build('', 'admin', $session_charset); ?>
-<body id="users-addnewuser">
+<body id="users-add">
   <section class='container'>
     <?php
-    echo $adminHeaderSection->build('users-addnewuser', $message);
+    echo $adminHeaderSection->build('users-add', $message);
     $navList = new navList('');
     $navList->appendItem([true, "admin_users.php", uiTextSnippet('search'), "finduser"]);
-    $navList->appendItem([$allow_add, "admin_newuser.php", uiTextSnippet('addnew'), "adduser"]);
+    $navList->appendItem([$allow_add, "admin_newuser.php", uiTextSnippet('add'), "adduser"]);
     $navList->appendItem([$allow_edit, "admin_reviewusers.php", uiTextSnippet('review') . $revstar, "review"]);
     $navList->appendItem([true, "admin_mailusers.php", uiTextSnippet('email'), "mail"]);
     echo $navList->build("adduser");
     ?>
-    <form action="admin_adduser.php" method='post' name="form1" onSubmit="return validateForm(this);">
-      <table class='table table-sm'>
-        <tr>
-          <td><?php echo uiTextSnippet('description'); ?>:</td>
-          <td><input name='description' type='text' size='50' maxlength='50' required></td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('username'); ?>:</td>
-          <td><input name='username' type='text' maxlength="100"
-                     onblur="checkNewUser(this, null);"><span id="checkmsg"></span>
-          </td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('password'); ?>:</td>
-          <td><input name='password' type='password' maxlength="100"></td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('realname'); ?>:</td>
-          <td><input name='realname' type='text' size='50' maxlength='50'></td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('phone'); ?>:</td>
-          <td><input name='phone' type='text' size='30' maxlength='30'></td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('email'); ?>:</td>
-          <td><input name='email' type='text' size='50' maxlength='100' onblur="checkIfUnique(this);">
-            <span id="emailmsg"></span></td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td><input name='no_email' type='checkbox' value='1'> <?php echo uiTextSnippet('no_email'); ?></td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('website'); ?>:</td>
-          <td><input name='website' type='text' size='50' maxlength='128' value="http://"></td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('address'); ?>:</td>
-          <td><input name='address' type='text' size='50' maxlength='100'></td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('city'); ?>:</td>
-          <td><input name='city' type='text' size='50' maxlength='64'></td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('stateprov'); ?>:</td>
-          <td><input name='state' type='text' size='50' maxlength='64'></td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('zip'); ?>:</td>
-          <td><input name='zip' type='text' maxlength="10"></td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('cap_country'); ?>:</td>
-          <td><input name='country' type='text' size='50' maxlength='64'></td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('notes'); ?>:</td>
-          <td><textarea cols="50" rows="4" name="notes"></textarea></td>
-        </tr>
-        <tr>
-          <td>
-            <?php echo uiTextSnippet('tree'); ?> / <?php echo uiTextSnippet('personid'); ?>:
-          </td>
-          <td>
-            <select name="mynewgedcom">
-              <option value=''></option>
-              <?php
-              $query = "SELECT gedcom, treename FROM $trees_table ORDER BY treename";
-              $treeresult = tng_query($query);
+    <form id='users-add' name='form1' action="usersAddFormAction.php" method='post'>
+      <div class='row'>
+        <div class='col-md-6'>
+          <?php $label = uiTextSnippet('description'); ?>
+          <label class='sr-only' for='description'><?php echo $label; ?></label>
+          <input class='form-control' name='description' type='text' maxlength='50' placeholder='<?php echo $label; ?>' required>
 
-              while ($treerow = tng_fetch_assoc($treeresult)) {
-                echo "  <option value=\"{$treerow['gedcom']}\">{$treerow['treename']}</option>\n";
-              }
-              ?>
-            </select>
-            <input id='personID' name='personID' type='text' maxlength='22'>
-            &nbsp;<?php echo uiTextSnippet('text_or'); ?>&nbsp;
-            <a href="#" onclick="return findItem('I', 'personID', '', document.form1.mynewgedcom.options[document.form1.mynewgedcom.selectedIndex].value, '<?php echo $assignedbranch; ?>');"
-               title="<?php echo uiTextSnippet('find'); ?>">
-              <img class='icon-sm-inline' src="svg/magnifying-glass.svg" alt="<?php echo uiTextSnippet('find'); ?>">
-            </a>
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><input name='disabled' type='checkbox' value='1' /> <?php echo uiTextSnippet('disabled'); ?></td>
-        </tr>
-      </table>
-      <br><br>
-      <div>
-        <table class='table table-sm'>
-          <tr>
-            <td>
-              <p><strong><?php echo uiTextSnippet('roles'); ?>:</strong></p>
+          <?php $label = uiTextSnippet('username'); ?>
+          <label class='sr-only' for='username'><?php echo $label; ?></label>
+          <input class='form-control' name='username' type='text' maxlength="100" placeholder='<?php echo $label; ?>' required>
+          <span id='checkmsg'></span>
 
-              <?php
-              if ($row['ucount']) {
-                ?>
-                <p>
-                  <input name='role' type='radio' value='guest' checked
-                         onclick="assignRightsFromRole('guest');" />
-                  <?php echo uiTextSnippet('usrguest') . "<br><em class='small indent'>" . uiTextSnippet('usrguestd') . " " . uiTextSnippet('noadmin') . "</em>"; ?>
-                </p>
-                <p>
-                  <input name='role' type='radio' value='subm'
-                         onclick="assignRightsFromRole('subm');" />
-                  <?php echo uiTextSnippet('usrsubm') . "<br><em class='small indent'>" . uiTextSnippet('usrsubmd') . " " . uiTextSnippet('noadmin') . "</em>"; ?>
-                </p>
-                <p>
-                  <input name='role' type='radio' value='contrib'
-                         onclick="assignRightsFromRole('contrib');" />
-                  <?php echo uiTextSnippet('usrcontrib') . "<br><em class='small indent'>" . uiTextSnippet('usrcontribd') . "</em>"; ?>
-                </p>
-                <p>
-                  <input name='role' type='radio' value='editor' 
-                         onclick="assignRightsFromRole('editor');" />
-                  <?php echo uiTextSnippet('usreditor') . "<br><em class='small indent'>" . uiTextSnippet('usreditord') . "</em>"; ?>
-                </p>
-                <p>
-                  <input name='role' type='radio' value='mcontrib'
-                         onclick="assignRightsFromRole('mcontrib');" />
-                  <?php echo uiTextSnippet('usrmcontrib') . "<br><em class='small indent'>" . uiTextSnippet('usrmcontribd') . "</em>"; ?>
-                </p>
-                <p>
-                  <input name='role' type='radio' value='meditor'
-                         onclick="assignRightsFromRole('meditor');" />
-                  <?php echo uiTextSnippet('usrmeditor') . "<br><em class='small indent'>" . uiTextSnippet('usrmeditord') . "</em>"; ?>
-                </p>
-                <p>
-                  <input name='role' type='radio' value='custom'
-                         onclick="assignRightsFromRole('custom');" />
-                  <?php echo uiTextSnippet('usrcustom'); ?>
-                </p>
-                <?php
-              }
-              ?>
-              <p>
-                <input name='role' type='radio' value="admin"<?php if (!$row['ucount']) {echo " checked";} ?>
-                       onclick="assignRightsFromRole('admin');"/>
-                <?php echo uiTextSnippet('usradmin') . "<br><em class='small indent'>" . uiTextSnippet('usradmind') . "</em>"; ?>
-              </p>
-            </td>
-            <td>
-              <p><strong><?php echo uiTextSnippet('rights'); ?></strong></p>
-              <p>
-                <input class='rights' name='form_allow_add' type='radio' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>
-                       onclick="document.form1.role[6].checked = 'checked';"/> <?php echo uiTextSnippet('allow_add'); ?>
-                <br>
-                <?php
-                if ($row['ucount']) {
-                  ?>
-                  <input class='rights' name='form_allow_add' type='radio' value="3"
-                         onclick="document.form1.role[6].checked = 'checked';"/> <?php echo uiTextSnippet('allow_media_add'); ?>
-                  <br>
-                  <input class='rights' name='form_allow_add' type='radio' value='0'
-                         onclick="document.form1.role[6].checked = 'checked';"
-                         checked> <?php echo uiTextSnippet('no_add'); ?><br>
-                  <?php
-                }
-                ?>
-              </p>
+          <?php $label = uiTextSnippet('password'); ?>
+          <label class='sr-only' for='password'><?php echo $label; ?></label>
+          <input class='form-control' name='password' type='password' maxlength="100" placeholder='<?php echo $label; ?>' required>
+          <?php $label = uiTextSnippet('realname'); ?>
+          <label class='sr-only' for='realname'><?php echo $label; ?></label>
+          <input class='form-control' name='realname' type='text' maxlength='50' placeholder='<?php echo $label; ?>'>
 
-              <p>
-                <input class='rights' name='form_allow_edit' type='radio' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>
-                       onclick="document.form1.role[6].checked = 'checked';"/> <?php echo uiTextSnippet('allow_edit'); ?>
-                <br>
-                <?php
-                if ($row['ucount']) {
-                  ?>
-                  <input class='rights' name='form_allow_edit' type='radio' value="3"
-                         onclick="document.form1.role[6].checked = 'checked';"/> <?php echo uiTextSnippet('allow_media_edit'); ?>
-                  <br>
-                  <input class='rights' name='form_allow_edit' type='radio' value="2"
-                         onclick="document.form1.role[6].checked = 'checked';"/> <?php echo uiTextSnippet('tentative_edit'); ?>
-                  <br>
-                  <input class='rights' name='form_allow_edit' type='radio' value='0'
-                         onclick="document.form1.role[6].checked = 'checked';"
-                         checked> <?php echo uiTextSnippet('no_edit'); ?><br>
-                  <?php
-                }
-                ?>
-              </p>
-
-              <p>
-                <input class='rights' name='form_allow_delete' type='radio' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>
-                       onclick="document.form1.role[6].checked = 'checked';"/> <?php echo uiTextSnippet('allow_delete'); ?>
-                <br>
-                <?php
-                if ($row['ucount']) {
-                  ?>
-                  <input class='rights' name='form_allow_delete' type='radio' value="3"
-                         onclick="document.form1.role[6].checked = 'checked';"/> <?php echo uiTextSnippet('allow_media_delete'); ?>
-                  <br>
-                  <input class='rights' name='form_allow_delete' type='radio' value='0'
-                         onclick="document.form1.role[6].checked = 'checked';"
-                         checked> <?php echo uiTextSnippet('no_delete'); ?><br>
-                  <?php
-                }
-                ?>
-              </p>
-
-              <br>
-              <hr/>
-              <br>
-              <p>
-                <input name='form_allow_living' type='checkbox' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_living'); ?>
-                <br>
-                <input name='form_allow_private' type='checkbox' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_private'); ?>
-                <br>
-                <input name='form_allow_ged' type='checkbox' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_ged'); ?>
-                <br>
-                <input name='form_allow_pdf' type='checkbox' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_pdf'); ?>
-                <br>
-                <input name='form_allow_lds' type='checkbox' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_lds'); ?>
-                <br>
-                <input name='form_allow_profile' type='checkbox' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_profile'); ?>
-              </p>
-            </td>
-          </tr>
-        </table>
+          <?php $label = uiTextSnippet('phone'); ?>
+          <label class='sr-only' for='phone'><?php echo $label; ?></label>
+          <input class='form-control' name='phone' type='text' maxlength='30' placeholder='<?php echo $label; ?>'>
+          <?php $label = uiTextSnippet('email'); ?>
+          <label class='sr-only' for='email'><?php echo $label; ?></label>
+          <input class='form-control' name='email' type='text' maxlength='100' placeholder='<?php echo $label; ?>'>
+          <div id='emailmsg'></div>
+          <div class='checkbox'>
+            <label>
+              <input name='no_email' type='checkbox' value='1'> <?php echo uiTextSnippet('no_email'); ?>
+            </label>
+          </div>
+        </div>  
+        <div class='col-md-6'>
+          <?php $label = uiTextSnippet('website'); ?>
+          <label class='sr-only' for='website'><?php echo $label; ?></label>
+          <input class='form-control' name='website' type='url' maxlength='128' placeholder='<?php echo $label; ?>'>
+          <?php $label = uiTextSnippet('address'); ?>
+          <label class='sr-only' for='address'><?php echo $label; ?></label>
+          <input class='form-control' name='address' type='text' maxlength='100' placeholder='<?php echo $label; ?>'>
+          <?php $label = uiTextSnippet('city'); ?>
+          <label class='sr-only' for='city'><?php echo $label; ?></label>
+          <input class='form-control' name='city' type='text' maxlength='64' placeholder='<?php echo $label; ?>'>
+          <?php $label = uiTextSnippet('stateprov'); ?>
+          <label class='sr-only' for='state'><?php echo $label; ?></label>
+          <input class='form-control' name='state' type='text' maxlength='64' placeholder='<?php echo $label; ?>'>
+          <?php $label = uiTextSnippet('zip'); ?>
+          <label class='sr-only' for='zip'><?php echo $label; ?></label>
+          <input class='form-control' name='zip' type='text' maxlength="10" placeholder='<?php echo $label; ?>'>
+          <?php $label = uiTextSnippet('country'); ?>
+          <label class='sr-only' for='country'><?php echo $label; ?></label>
+          <input class='form-control' name='country' type='text' maxlength='64' placeholder='<?php echo $label; ?>'>
+        </div>
       </div>
-      <br><br>
+      <div class='row'>
+          <div class='col-md-12'><?php echo uiTextSnippet('notes'); ?></div>
+      </div>
+      <div class='row'>
+        <div class='col-md-12'><textarea class='form-control' name='notes' rows='4'></textarea></div>
+      </div>
+      <div class='row'>
+        <div class='col-sm-3'>
+          <?php echo uiTextSnippet('tree'); ?> / <?php echo uiTextSnippet('personid'); ?>:
+        </div>
+        <div class='col-sm-3'>
+          <select name="mynewgedcom">
+            <option value=''></option>
+            <?php
+            $query = "SELECT gedcom, treename FROM $trees_table ORDER BY treename";
+            $treeresult = tng_query($query);
 
+            while ($treerow = tng_fetch_assoc($treeresult)) {
+              echo "  <option value=\"{$treerow['gedcom']}\">{$treerow['treename']}</option>\n";
+            }
+            ?>
+          </select>
+        </div>
+        <div class='col-sm-6'>
+          <input class='form-control' id='personID' name='personID' type='text' maxlength='22'>
+          &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
+          <a id='findPerson' href="#" title="<?php echo uiTextSnippet('find'); ?>" data-assigned-branch='<?php echo $assignedbranch; ?>'>
+            <img class='icon-sm-inline' src="svg/magnifying-glass.svg" alt="<?php echo uiTextSnippet('find'); ?>">
+          </a>
+        </div>
+      </div>
+      <div class='row checkbox'>
+        <div class='col-sm-12'>
+          <label>
+            <input name='disabled' type='checkbox' value='1'> <?php echo uiTextSnippet('disabled'); ?>
+          </label>
+        </div>
+      </div>
+      <hr>
+
+      <div class='row'>
+        <div class='col-md-6'>
+          <p><strong><?php echo uiTextSnippet('roles'); ?>:</strong></p>
+
+          <?php if ($row['ucount']) { ?>
+            <p>
+              <input name='role' type='radio' value='guest' checked data-role='guest'>
+              <?php echo uiTextSnippet('usrguest') . "<br><em class='small indent'>" . uiTextSnippet('usrguestd') . " " . uiTextSnippet('noadmin') . "</em>"; ?>
+            </p>
+            <p>
+              <input name='role' type='radio' value='subm'  data-role='subm'>
+              <?php echo uiTextSnippet('usrsubm') . "<br><em class='small indent'>" . uiTextSnippet('usrsubmd') . " " . uiTextSnippet('noadmin') . "</em>"; ?>
+            </p>
+            <p>
+              <input name='role' type='radio' value='contrib' data-role='contrib'>
+              <?php echo uiTextSnippet('usrcontrib') . "<br><em class='small indent'>" . uiTextSnippet('usrcontribd') . "</em>"; ?>
+            </p>
+            <p>
+              <input name='role' type='radio' value='editor'  data-role='editor'>
+              <?php echo uiTextSnippet('usreditor') . "<br><em class='small indent'>" . uiTextSnippet('usreditord') . "</em>"; ?>
+            </p>
+            <p>
+              <input name='role' type='radio' value='mcontrib' data-role='mcontrib'>
+              <?php echo uiTextSnippet('usrmcontrib') . "<br><em class='small indent'>" . uiTextSnippet('usrmcontribd') . "</em>"; ?>
+            </p>
+            <p>
+              <input name='role' type='radio' value='meditor'  data-role='meditor'>
+              <?php echo uiTextSnippet('usrmeditor') . "<br><em class='small indent'>" . uiTextSnippet('usrmeditord') . "</em>"; ?>
+            </p>
+            <p>
+              <input name='role' type='radio' value='custom'  data-role='custom'>
+              <?php echo uiTextSnippet('usrcustom'); ?>
+            </p>
+          <?php } ?>
+          <p>
+            <input name='role' type='radio' value="admin"<?php if (!$row['ucount']) {echo " checked";} ?> data-role='admin'>
+            <?php echo uiTextSnippet('usradmin') . "<br><em class='small indent'>" . uiTextSnippet('usradmind') . "</em>"; ?>
+          </p>
+        </div>
+        <div class='col-md-6'>
+          <p><strong><?php echo uiTextSnippet('rights'); ?></strong></p>
+          <p>
+            <input class='rights' name='form_allow_add' type='radio' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_add'); ?>
+            <br>
+            <?php if ($row['ucount']) { ?>
+              <input class='rights' name='form_allow_add' type='radio' value="3"> <?php echo uiTextSnippet('allow_media_add'); ?>
+              <br>
+              <input class='rights' name='form_allow_add' type='radio' value='0' checked> <?php echo uiTextSnippet('no_add'); ?>
+              <br>
+            <?php } ?>
+          </p>
+          <p>
+            <input class='rights' name='form_allow_edit' type='radio' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_edit'); ?>
+            <br>
+            <?php if ($row['ucount']) { ?>
+              <input class='rights' name='form_allow_edit' type='radio' value='3'> <?php echo uiTextSnippet('allow_media_edit'); ?>
+              <br>
+              <input class='rights' name='form_allow_edit' type='radio' value='2'> <?php echo uiTextSnippet('tentative_edit'); ?>
+              <br>
+              <input class='rights' name='form_allow_edit' type='radio' value='0' checked> <?php echo uiTextSnippet('no_edit'); ?>
+              <br>
+            <?php } ?>
+          </p>
+          <p>
+            <input class='rights' name='form_allow_delete' type='radio' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_delete'); ?>
+            <br>
+            <?php if ($row['ucount']) { ?>
+              <input class='rights' name='form_allow_delete' type='radio' value='3'> <?php echo uiTextSnippet('allow_media_delete'); ?>
+              <br>
+              <input class='rights' name='form_allow_delete' type='radio' value='0' checked> <?php echo uiTextSnippet('no_delete'); ?>
+              <br>
+            <?php } ?>
+          </p>
+          <hr/>
+          <p>
+            <input name='form_allow_living' type='checkbox' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_living'); ?>
+            <br>
+            <input name='form_allow_private' type='checkbox' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_private'); ?>
+            <br>
+            <input name='form_allow_ged' type='checkbox' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_ged'); ?>
+            <br>
+            <input name='form_allow_pdf' type='checkbox' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_pdf'); ?>
+            <br>
+            <input name='form_allow_lds' type='checkbox' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_lds'); ?>
+            <br>
+            <input name='form_allow_profile' type='checkbox' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_profile'); ?>
+          </p>
+        </div>
+      </div>
+      <hr>
       <?php
       if ($row['ucount']) {
         echo "<strong>" . uiTextSnippet('accesslimits') . "</strong><br>\n";
         ?>
-        <input name='administrator' type='radio' value='1'
-               onclick="handleAdmin('allow');"> <?php echo uiTextSnippet('allow_admin'); ?><br>
-        <input name='administrator' type='radio' value='0' checked
-               onclick="handleAdmin('restrict');"> <?php echo uiTextSnippet('limitedrights'); ?><br>
+        <input name='administrator' type='radio' value='1' data-admin-access='allow'> <?php echo uiTextSnippet('allow_admin'); ?>
+        <br>
+        <input name='administrator' type='radio' value='0' checked data-admin-access='restrict'> <?php echo uiTextSnippet('limitedrights'); ?>
+        <br>
         <div id='restrictions'>
-          <table class='table table-sm'>
-            <tr>
-              <td>
-                <span><?php echo uiTextSnippet('tree'); ?>*:</span></td>
-              <td>
-                <select id='gedcom' name='gedcom'>
-                  <option value=''></option>
-                  <?php
-                  $query = "SELECT gedcom, treename FROM $trees_table ORDER BY treename";
-                  $treeresult = tng_query($query);
-
-                  while ($treerow = tng_fetch_assoc($treeresult)) {
-                    echo "  <option value=\"{$treerow['gedcom']}\">{$treerow['treename']}</option>\n";
-                  }
-                  ?>
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <td><span><?php echo uiTextSnippet('branch'); ?>**:</span></td>
-              <td>
+          <div class='row'>
+            <div class='col-sm-3'>
+              <span><?php echo uiTextSnippet('tree'); ?>*:</span>
+            </div>
+            <div class='col-sm-3'>
+              <select id='gedcom' name='gedcom'>
+                <option value=''></option>
                 <?php
-                $query = "SELECT branch, gedcom, description FROM $branches_table WHERE gedcom = \"{$row['gedcom']}\" ORDER BY description";
-                $branchresult = tng_query($query);
+                $query = "SELECT gedcom, treename FROM $trees_table ORDER BY treename";
+                $treeresult = tng_query($query);
 
-                echo "<select id='branch' name=\"branch\">\n";
-                echo "  <option value='' selected>" . uiTextSnippet('allbranches') . "</option>\n";
-                if ($assignedtree) {
-                  while ($branch = tng_fetch_assoc($branchresult)) {
-                    echo "  <option value=\"{$branch['branch']}\">{$branch['description']}</option>\n";
-                  }
+                while ($treerow = tng_fetch_assoc($treeresult)) {
+                  echo "  <option value=\"{$treerow['gedcom']}\">{$treerow['treename']}</option>\n";
                 }
-                echo "</select>\n";
                 ?>
-              </td>
-            </tr>
-          </table>
+              </select>
+            </div>
+            <div class='col-sm-3'>
+              <span><?php echo uiTextSnippet('branch'); ?>**:</span>
+            </div>
+            <div class='col-sm-3'>
+              <?php
+              $query = "SELECT branch, gedcom, description FROM $branches_table WHERE gedcom = \"{$row['gedcom']}\" ORDER BY description";
+              $branchresult = tng_query($query);
+
+              echo "<select id='branch' name=\"branch\">\n";
+              echo "  <option value='' selected>" . uiTextSnippet('allbranches') . "</option>\n";
+              if ($assignedtree) {
+                while ($branch = tng_fetch_assoc($branchresult)) {
+                  echo "  <option value=\"{$branch['branch']}\">{$branch['description']}</option>\n";
+                }
+              }
+              echo "</select>\n";
+              ?>
+            </div>
+          </div>
         </div>
         <?php
       } else {
@@ -322,30 +278,31 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
       }
       ?>
       <br>
-      <input name='notify' type='checkbox' value='1'
-             onClick="replaceText();">
-      <?php echo uiTextSnippet('notify'); ?><br>
-      <textarea name='welcome' rows='5' cols='50' style="display: none">
+      <input name='notify' type='checkbox' value='1'>
+      <?php echo uiTextSnippet('notify'); ?>
+      <br>
+      <textarea class='form-control' name='welcome' rows='4' style="display: none">
         <?php
         echo uiTextSnippet('hello') . " xxx,\r\n\r\n" . uiTextSnippet('activated') . " " . uiTextSnippet('infois') . ":\r\n\r\n" .
              uiTextSnippet('username') . ": yyy\r\n" . uiTextSnippet('password') . ": zzz\r\n\r\n$dbowner\r\n$tngdomain"; 
         ?>
-      </textarea><br><br>
-      <input name='submit' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
+      </textarea>
+      <br>
+      <button class='btn btn-primary btn-block' name='submit' type='submit'><?php echo uiTextSnippet('save'); ?></button>
     </form>
-    <br>
+    <hr>
     <p>
-      <?php
-      echo "*" . uiTextSnippet('treemsg') . "<br>\n";
-      echo "**" . uiTextSnippet('branchmsg') . "<br>\n";
-      ?>
+      <span>*<?php echo uiTextSnippet('treemsg'); ?></span>
+      <br>
+      <span>**<?php echo uiTextSnippet('branchmsg'); ?></span>
+      <br>
     </p>
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->
-  <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
-  <script src="js/selectutils.js"></script>
-  <script src="js/users.js"></script>
-  <script>
+<?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
+<script src="js/selectutils.js"></script>
+<script src="js/users.js"></script>
+<script>
   var orgrealname = "xxx";
   var orgusername = "yyy";
   var orgpassword = "zzz";
@@ -365,32 +322,6 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
     }
     <?php echo $swapbranches; ?>
   });
-
-  function validateForm(form) {
-    var rval = true;
-    if (form.description.value.length === 0) {
-      alert(textSnippet('enteruserdesc'));
-      form.description.focus();
-      rval = false;
-    } else if (form.username.value.length === 0) {
-      alert(textSnippet('enterusername'));
-      form.username.focus();
-      rval = false;
-    } else if (form.password.value.length === 0) {
-      alert(textSnippet('enterpassword'));
-      form.password.focus();
-      rval = false;
-    } else if (form.email.value.length !== 0 && !checkEmail(form.email.value)) {
-      alert(textSnippet('enteremail'));
-      form.email.focus();
-      rval = false;
-    } else if (form.administrator[1].checked && form.gedcom.selectedIndex < 1) {
-      alert(textSnippet('selecttree'));
-      form.gedcom.focus();
-      rval = false;
-    }
-    return rval;
-  }
-  </script>
+</script>
 </body>
 </html>

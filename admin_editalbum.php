@@ -277,13 +277,13 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
                              onkeypress="return newlinkEnter(document.form1, this, event);">
                   </td>
                   <!--<td>
-                    <input type='submit' value="<?php echo uiTextSnippet('add'); ?>"> <?php echo uiTextSnippet('text_or'); ?>
+                    <input type='submit' value="<?php echo uiTextSnippet('add'); ?>"> <?php echo uiTextSnippet('or'); ?>
                     <input name='find1' type='button' value="<?php echo uiTextSnippet('find'); ?>" onClick="findopen=true;openFind(document.find.linktype1.options['document.find.linktype1.selectedIndex'].value);$('newlines').innerHTML=resheremsg;">
                   </td>-->
                   <td>
                     <input type='button' value="<?php echo uiTextSnippet('add'); ?>"
                              onclick="return addMedia2EntityLink(document.form1);">
-                    &nbsp;<?php echo uiTextSnippet('text_or'); ?>&nbsp;
+                    &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
                   </td>
                   <td>
                     <a href="#" title="<?php echo uiTextSnippet('find'); ?>" onclick="return findItem(findform.linktype1.options[findform.linktype1.selectedIndex].value, 'newlink1', null, findform.tree1.options[findform.tree1.selectedIndex].value, '<?php echo $assignedbranch; ?>', 'a_<?php echo $albumID; ?>');">

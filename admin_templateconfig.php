@@ -242,7 +242,7 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
     }
 
     function showUploadBox(key, folder) {
-      jQuery('#div_' + key).html("<input type=\"file\" name=\"upload_" + key + "\" onchange=\"populateFileName(this,jQuery('#form_" + key + "'));\"/> <?php echo uiTextSnippet('text_or'); ?> <input type='button' value=\"<?php echo uiTextSnippet('select'); ?>\" name=\"photoselect_" + key + "\" onclick=\"javascript:FilePicker('form_" + key + "','" + folder + "');\" />");
+      jQuery('#div_' + key).html("<input type=\"file\" name=\"upload_" + key + "\" onchange=\"populateFileName(this,jQuery('#form_" + key + "'));\"/> <?php echo uiTextSnippet('or'); ?> <input type='button' value=\"<?php echo uiTextSnippet('select'); ?>\" name=\"photoselect_" + key + "\" onclick=\"javascript:FilePicker('form_" + key + "','" + folder + "');\" />");
       jQuery('#div_' + key).toggle();
       return false;
     }

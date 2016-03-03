@@ -69,7 +69,7 @@ $headSection->setTitle(uiTextSnippet('modifytree'));
               <tr>
                 <td>
                   <input id='personID' name='personID' type='text' value="<?php echo $row['personID']; ?>" size='10'>
-                  &nbsp;<?php echo uiTextSnippet('text_or'); ?>&nbsp;
+                  &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
                 </td>
                 <td>
                   <a href="#" title="<?php echo uiTextSnippet('find'); ?>" onclick="return findItem('I', 'personID', '', '<?php echo $tree; ?>', '<?php echo $assignedbranch; ?>');">

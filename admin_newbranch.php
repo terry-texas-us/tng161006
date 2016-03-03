@@ -76,7 +76,7 @@ $headSection->setTitle(uiTextSnippet('addnewbranch'));
                   <table id="startind3">
                     <tr>
                       <td>
-                        <input id='personID' name='personID' type='text' size='10'><?php echo uiTextSnippet('text_or'); ?>
+                        <input id='personID' name='personID' type='text' size='10'><?php echo uiTextSnippet('or'); ?>
                       </td>
                       <td>
                         <a href="#" title="<?php echo uiTextSnippet('find'); ?>"

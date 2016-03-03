@@ -90,7 +90,7 @@ $headSection->setTitle(uiTextSnippet('mergeplaces'));
           </td>
         </tr>
         <tr>
-          <td><?php echo uiTextSnippet('text_or'); ?>:</td>
+          <td><?php echo uiTextSnippet('or'); ?>:</td>
           <td><input name='place2' type='text' size='50' value="<?php echo stripslashes($place2); ?>">
           </td>
         </tr>

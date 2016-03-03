@@ -127,7 +127,7 @@ $assoccount = tng_num_rows($assocresult);
           </td>
           <td>
             <input id='passocID' name='passocID' type='text'>
-            &nbsp;<?php echo uiTextSnippet('text_or'); ?>&nbsp;
+            &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
             <a id='find' href='#' title="<?php echo uiTextSnippet('find'); ?>">
               <img class='icon-sm-inline' src='svg/magnifying-glass.svg'>
             </a>

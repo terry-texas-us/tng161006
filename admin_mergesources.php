@@ -391,7 +391,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
               <div style="float:left"><?php echo uiTextSnippet('sourceid'); ?> 1: <input
                         type='text' name="sourceID1" id="sourceID1" size='10'
                         value="<?php echo $sourceID1; ?>">
-                &nbsp;<?php echo uiTextSnippet('text_or'); ?>&nbsp;</div>
+                &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;</div>
               <a href="#" onclick="return findItem('S', 'sourceID1', 'sourceTitle1', document.form1.tree.options[document.form1.tree.selectedIndex].value);"
                  title="<?php echo uiTextSnippet('find'); ?>">
                 <img class='icon-sm' src='svg/magnifying-glass.svg'>
@@ -402,7 +402,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
               <div style="float:left"><?php echo uiTextSnippet('sourceid'); ?> 2: <input
                         type='text' name="sourceID2" id="sourceID2" size='10'
                         value="<?php echo $sourceID2; ?>">
-                &nbsp;<?php echo uiTextSnippet('text_or'); ?>&nbsp;</div>
+                &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;</div>
               <a href="#" onclick="return findItem('S', 'sourceID2', 'sourceTitle2', document.form1.tree.options[document.form1.tree.selectedIndex].value);"
                  title="<?php echo uiTextSnippet('find'); ?>">
                 <img class='icon-sm' src='svg/magnifying-glass.svg'>

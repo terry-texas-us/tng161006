@@ -72,7 +72,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
           </td>
           <td><input id='newlink1' name='newlink1' type='text' value="<?php echo $personID; ?>"></td>
           <td><input type='submit' value="<?php echo uiTextSnippet('text_continue'); ?>">
-            &nbsp;<?php echo uiTextSnippet('text_or'); ?>&nbsp; </td>
+            &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp; </td>
           <td>
             <a href="#" onclick="return findItem(document.find.linktype1.options[document.find.linktype1.selectedIndex].value,'newlink1',null,document.find.tree1.options[document.find.tree1.selectedIndex].value,'<?php echo $assignedbranch; ?>');"
                title="<?php echo uiTextSnippet('find'); ?>">

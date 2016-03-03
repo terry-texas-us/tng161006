@@ -95,8 +95,8 @@ $headSection->setTitle(uiTextSnippet('labelbranches'));
             <table id="startind3">
               <tr>
                 <td>
-                  <input id='personID' name='personID' type='text' size='10'>
-                  &nbsp;<?php echo uiTextSnippet('text_or'); ?>&nbsp;
+                  <input id='personID' name='personID' type='text'>
+                  &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
                 </td>
                 <td>
                   <a href="#" onclick="return findItem('I', 'personID', '', '<?php echo $tree; ?>', '<?php echo $assignedbranch; ?>');" title="<?php echo uiTextSnippet('find'); ?>">

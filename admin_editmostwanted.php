@@ -83,7 +83,7 @@ header("Content-type:text/html; charset=" . $session_charset);
               <tr>
                 <td>
                   <input id='personID' name='personID' type='text' size='22' maxlength='22' value="<?php echo $row['personID']; ?>">
-                  &nbsp;<?php echo uiTextSnippet('text_or'); ?>&nbsp;
+                  &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
                 </td>
                 <td>
                   <a href='#' title="<?php echo uiTextSnippet('find'); ?>" onclick="return findItem('I', 'personID', '', document.editmostwanted.mwtree.options[document.editmostwanted.mwtree.selectedIndex].value, '<?php echo $assignedbranch; ?>');">

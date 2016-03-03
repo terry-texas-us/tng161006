@@ -124,10 +124,10 @@ if ($result2) {
         <input id='newlink' name='newlink1' type='text' value=''
                  onkeypress="return newlinkEnter(findform, this, event);">
       </td>
-      <!--<td><input type='submit' value="<?php echo uiTextSnippet('add'); ?>"> <?php echo uiTextSnippet('text_or'); ?>
+      <!--<td><input type='submit' value="<?php echo uiTextSnippet('add'); ?>"> <?php echo uiTextSnippet('or'); ?>
       <input name='find1' type='button' value="<?php echo uiTextSnippet('find'); ?>" onClick="findopen=true;openFind(document.find.linktype1.options[document.find.linktype1.selectedIndex].value);$('newlines').innerHTML=resheremsg;"></td>-->
       <td><input type='button' value="<?php echo uiTextSnippet('add'); ?>"
-                 onclick="return addMedia2EntityLink(findform);"> &nbsp;<?php echo uiTextSnippet('text_or'); ?>
+                 onclick="return addMedia2EntityLink(findform);"> &nbsp;<?php echo uiTextSnippet('or'); ?>
         &nbsp;</td>
       <td>
         <a href='#' onclick="return findItem(findform.linktype1.options[findform.linktype1.selectedIndex].value, 'newlink', null, findform.tree1.options[findform.tree1.selectedIndex].value, '<?php echo $assignedbranch; ?>', 'm_<?php echo $mediaID; ?>');"

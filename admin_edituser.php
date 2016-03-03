@@ -45,7 +45,7 @@ $headSection->setTitle(uiTextSnippet('modifyuser'));
     echo $adminHeaderSection->build('users-modifyuser', $message);
     $navList = new navList('');
     $navList->appendItem([true, "admin_users.php", uiTextSnippet('search'), "finduser"]);
-    $navList->appendItem([$allow_add, "admin_newuser.php", uiTextSnippet('addnew'), "adduser"]);
+    $navList->appendItem([$allow_add, "admin_newuser.php", uiTextSnippet('add'), "adduser"]);
     $navList->appendItem([$allow_edit, "admin_reviewusers.php", uiTextSnippet('review') . $revstar, "review"]);
     $navList->appendItem([true, "admin_mailusers.php", uiTextSnippet('email'), "mail"]);
     $navList->appendItem([true, "#", uiTextSnippet('edit'), "edit"]);
@@ -144,7 +144,7 @@ $headSection->setTitle(uiTextSnippet('modifyuser'));
                     ?>
                   </select>
                   <input id='personID' name='personID' type='text' maxlength='22' value="<?php echo $row['personID']; ?>">
-                  &nbsp;<?php echo uiTextSnippet('text_or'); ?>&nbsp;
+                  &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
                   <a href="#" onclick="return findItem('I', 'personID', '', document.form1.mynewgedcom.options[document.form1.mynewgedcom.selectedIndex].value, '<?php echo $assignedbranch; ?>');"
                      title="<?php echo uiTextSnippet('find'); ?>">
                     <img class='icon-sm-inline' src="svg/magnifying-glass.svg" alt="<?php echo uiTextSnippet('find'); ?>">

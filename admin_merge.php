@@ -745,7 +745,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                                                                          name="personID1"
                                                                          id="personID1" size='10'
                                                                          value="<?php echo $personID1; ?>">
-                      &nbsp;<?php echo uiTextSnippet('text_or'); ?>&nbsp;
+                      &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
                     </div>
                     <a href="#" onclick="return findItem('I', 'personID1', 'name1', document.form1.tree.options[document.form1.tree.selectedIndex].value, '<?php echo $assignedbranch; ?>');"
                        title="<?php echo uiTextSnippet('find'); ?>">
@@ -760,7 +760,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                                                                          id="personID2" size='10'
                                                                          value="<?php echo $personID2; ?>"
                                                                          onkeyup="processEnter();">
-                      &nbsp;<?php echo uiTextSnippet('text_or'); ?>&nbsp;
+                      &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
                     </div>
                     <a href="#" onclick="return findItem('I', 'personID2', 'name2', document.form1.tree.options[document.form1.tree.selectedIndex].value, '<?php echo $assignedbranch; ?>');"
                        title="<?php echo uiTextSnippet('find'); ?>">

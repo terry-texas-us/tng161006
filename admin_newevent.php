@@ -61,7 +61,7 @@ header("Content-type:text/html; charset=" . $session_charset);
       <tr>
         <td><?php echo uiTextSnippet('eventplace'); ?>:</td>
         <td><input id='eventplace' name='eventplace' type='text' size='40'>
-          &nbsp;<?php echo uiTextSnippet('text_or'); ?>&nbsp;
+          &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
           <a href='#' onclick="return openFindPlaceForm('eventplace');" title="<?php echo uiTextSnippet('find'); ?>">
             <img class='icon-sm-inline' src='svg/magnifying-glass.svg' alt="<?php echo uiTextSnippet('find'); ?>">
           </a>

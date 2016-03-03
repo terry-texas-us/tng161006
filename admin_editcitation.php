@@ -29,7 +29,7 @@ header("Content-type:text/html; charset=" . $session_charset);
         <tr>
           <td><?php echo uiTextSnippet('source'); ?>:</td>
           <td>
-            <input id='sourceID2' name='sourceID' type='text' value="<?php echo $row['sourceID']; ?>"> &nbsp;<?php echo uiTextSnippet('text_or'); ?> &nbsp;
+            <input id='sourceID2' name='sourceID' type='text' value="<?php echo $row['sourceID']; ?>"> &nbsp;<?php echo uiTextSnippet('or'); ?> &nbsp;
             <input type='button' value="<?php echo uiTextSnippet('find'); ?>"
                    onclick="return initFilter('editcitation', 'findsource', 'sourceID2', 'sourceTitle2');">
             <input type='button' value="<?php echo uiTextSnippet('create'); ?>"

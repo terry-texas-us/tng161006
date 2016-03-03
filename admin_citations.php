@@ -135,7 +135,7 @@ $citationcount = tng_num_rows($citresult);
           <td><?php echo uiTextSnippet('sourceid'); ?>:</td>
           <td>
             <input id='sourceID' name='sourceID' type='text'>
-            &nbsp;<?php echo uiTextSnippet('text_or'); ?> &nbsp;
+            &nbsp;<?php echo uiTextSnippet('or'); ?> &nbsp;
             <input type='button' value="<?php echo uiTextSnippet('find'); ?>"
                    onclick="return initFilter('addcitation', 'findsource', 'sourceID', 'sourceTitle');"/>
             <input type='button' value="<?php echo uiTextSnippet('create'); ?>"
