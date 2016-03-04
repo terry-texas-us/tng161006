@@ -268,7 +268,7 @@ $headSection->setTitle(uiTextSnippet('families'));
           <?php
           echo buildSearchResultPagination($totrows, "admin_families.php?searchstring=$searchstring&amp;spousename=$spousename&amp;living=$living&amp;exactmatch=$exactmatch&amp;offset", $maxsearchresults, 5);
         } else {
-          echo uiTextSnippet('norecords');
+          echo "<div class='alert alert-warning'>" . uiTextSnippet('norecords') . "</div>\n";
         }
         tng_free_result($result);
         ?>

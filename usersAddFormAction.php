@@ -93,7 +93,7 @@ if (!$duplicate) {
 
   if (tng_affected_rows()) {
     $userID = tng_insert_id();
-    adminwritelog("<a href=\"admin_edituser.php?userID=$userID\">" . uiTextSnippet('addnewuser') . ": $username</a>");
+    adminwritelog("<a href=\"usersEdit.php?userID=$userID\">" . uiTextSnippet('addnewuser') . ": $username</a>");
     $message = uiTextSnippet('user') . " $username " . uiTextSnippet('succadded') . ".";
     if ($currentuser == "Administrator-No-Users-Yet") {
       $_SESSION['currentuser'] = $username;
@@ -105,4 +105,4 @@ if (!$duplicate) {
 } else {
   $message = uiTextSnippet('duplicate');
 }
-header("Location: admin_users.php?message=" . urlencode($message));
+header("Location: usersBrowse.php?message=" . urlencode($message));

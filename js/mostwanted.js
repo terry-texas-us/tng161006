@@ -1,6 +1,6 @@
 function startMostWanted() {
-    jQuery('#orderpersondivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderphotodivs', update: updatePersonOrder});
-    jQuery('#orderphotodivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderpersondivs', update: updatePhotoOrder});
+    $('#orderpersondivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderphotodivs', update: updatePersonOrder});
+    $('#orderphotodivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderpersondivs', update: updatePhotoOrder});
 }
 
 function updatePersonOrder(event, ui) {
@@ -13,12 +13,12 @@ function updatePhotoOrder(event, ui) {
 
 function updateMostWantedOrder(mwtype) {
     if (mwtype == "person")
-        var linklist = removePrefixFromArray(jQuery('#orderpersondivs').sortable('toArray'), 'orderpersondivs_');
+        var linklist = removePrefixFromArray($('#orderpersondivs').sortable('toArray'), 'orderpersondivs_');
     else
-        var linklist = removePrefixFromArray(jQuery('#orderphotodivs').sortable('toArray'), 'orderphotodivs_');
+        var linklist = removePrefixFromArray($('#orderphotodivs').sortable('toArray'), 'orderphotodivs_');
 
     var params = {sequence: linklist.join(','), mwtype: mwtype, action: 'mworder'};
-    jQuery.ajax({
+    $.ajax({
         url: 'ajx_updateorder.php',
         data: params,
         dataType: 'html'
@@ -41,8 +41,8 @@ function updateMostWanted(form) {
     else if (form.description.value.length === 0)
         alert(textSnippet('enterdesc'));
     else {
-        var params = jQuery(form).serialize();
-        jQuery.ajax({
+        var params = $(form).serialize();
+        $.ajax({
             url: 'admin_updatemostwanted.php',
             data: params,
             type: 'post',
@@ -50,13 +50,13 @@ function updateMostWanted(form) {
             success: function (vars) {
                 if (form.ID.value) {
                     //if its old, just update existing row and highlight
-                    jQuery('#title_' + vars.ID).html(vars.title);
-                    jQuery('#desc_' + vars.ID).html(vars.description);
+                    $('#title_' + vars.ID).html(vars.title);
+                    $('#desc_' + vars.ID).html(vars.description);
                     //update thumbnail if necessary
                     if (vars.thumbpath) {
-                        jQuery('#img_' + vars.ID).attr('src', vars.thumbpath);
-                        jQuery('#img_' + vars.ID).css('width', vars.width + 'px');
-                        jQuery('#img_' + vars.ID).css('height', vars.height + 'px');
+                        $('#img_' + vars.ID).attr('src', vars.thumbpath);
+                        $('#img_' + vars.ID).css('width', vars.width + 'px');
+                        $('#img_' + vars.ID).css('height', vars.height + 'px');
                     }
                 } else {
                     //if it's new, then insert row at bottom
@@ -88,17 +88,17 @@ function updateMostWanted(form) {
                     if (vars.del)
                         newcontent += '<a href="#" onclick="return removeFromMostWanted(\'' + vars.mwtype + '\',\'' + vars.ID + '\');">' + textSnippet('delete') + '</a>\n';
                     newcontent += '</div>\n</td>\n</tr></table>\n</div>\n';
-                    jQuery('#order' + vars.mwtype + 'divs').html(newcontent + jQuery('#order' + vars.mwtype + 'divs').html());
+                    $('#order' + vars.mwtype + 'divs').html(newcontent + $('#order' + vars.mwtype + 'divs').html());
                     if (vars.mwtype == 'person')
-                        jQuery('#orderpersondivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderphotodivs', update: updatePersonOrder});
+                        $('#orderpersondivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderphotodivs', update: updatePersonOrder});
                     else
-                        jQuery('#orderphotodivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderpersondivs', update: updatePhotoOrder});
+                        $('#orderphotodivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderpersondivs', update: updatePhotoOrder});
                 }
 
-                var tds = jQuery('tr#row_' + vars.ID + ' td');
+                var tds = $('tr#row_' + vars.ID + ' td');
                 mwlitbox.remove();
-                jQuery.each(tds, function (index, item) {
-                    jQuery(item).effect('highlight', {}, 2000);
+                $.each(tds, function (index, item) {
+                    $(item).effect('highlight', {}, 2000);
                 });
             }
         });
@@ -109,17 +109,17 @@ function updateMostWanted(form) {
 function removeFromMostWanted(type, id) {
     if (confirm(textSnippet('confremmw'))) {
         var params = {id: id, action: 'remmostwanted'};
-        jQuery.ajax({
+        $.ajax({
             url: 'ajx_updateorder.php',
             data: params,
             dataType: 'html',
             success: function () {
-                jQuery('#order' + type + 'divs_' + id).fadeOut(400, function () {
-                    jQuery('#order' + type + 'divs_' + id).remove();
+                $('#order' + type + 'divs_' + id).fadeOut(400, function () {
+                    $('#order' + type + 'divs_' + id).remove();
                     if (type == 'person')
-                        jQuery('#orderpersondivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderphotodivs', update: updatePersonOrder});
+                        $('#orderpersondivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderphotodivs', update: updatePersonOrder});
                     else
-                        jQuery('#orderphotodivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderpersondivs', update: updatePhotoOrder});
+                        $('#orderphotodivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderpersondivs', update: updatePhotoOrder});
                 });
             }
         });
@@ -128,13 +128,13 @@ function removeFromMostWanted(type, id) {
 }
 
 function showEditDelete(id) {
-    if (jQuery('#del_' + id).length)
-        jQuery('#del_' + id).css('visibility', 'visible');
+    if ($('#del_' + id).length)
+        $('#del_' + id).css('visibility', 'visible');
 }
 
 function hideEditDelete(id) {
-    if (jQuery('#del_' + id).length)
-        jQuery('#del_' + id).css('visibility', 'hidden');
+    if ($('#del_' + id).length)
+        $('#del_' + id).css('visibility', 'hidden');
 }
 
 function getNewMwMedia(form) {
@@ -142,12 +142,12 @@ function getNewMwMedia(form) {
     var searchstring = form.searchstring.value;
 
     doSpinner(1);
-    jQuery('#newmedia').html('');
+    $('#newmedia').html('');
     var searchtree = form.tree.value;
     var mediatypeID = form.mediatypeID.value;
 
     var strParams = {searchstring: searchstring, searchtree: searchtree, mediatypeID: mediatypeID};
-    jQuery.ajax({
+    $.ajax({
         url: 'admin_add2albumxml.php',
         data: strParams,
         dataType: 'html',
@@ -166,7 +166,7 @@ function getMoreMedia(searchstring, mediatypeID, hsstat, cemeteryID, offset, tre
         page: page,
         albumID: albumID
     };
-    jQuery.ajax({
+    $.ajax({
         url: 'admin_add2albumxml.php',
         data: params,
         dataType: 'html',
@@ -176,26 +176,26 @@ function getMoreMedia(searchstring, mediatypeID, hsstat, cemeteryID, offset, tre
 }
 
 function showMedia(req) {
-    jQuery('#newmedia').html(req);
-    jQuery('#spinner1').hide();
+    $('#newmedia').html(req);
+    $('#spinner1').hide();
 }
 
 function doSpinner(id) {
-    lastspinner = jQuery('#spinner' + id);
-    jQuery('#spinner' + id).show();
+    lastspinner = $('#spinner' + id);
+    $('#spinner' + id).show();
 }
 
 function selectMedia(mediaID) {
     document.editmostwanted.mediaID.value = mediaID;
-    jQuery('#mwthumb').html("&nbsp;");
-    jQuery('#mwdetails').html(textSnippet('loading'));
+    $('#mwthumb').html("&nbsp;");
+    $('#mwdetails').html(textSnippet('loading'));
 
-    jQuery.ajax({
+    $.ajax({
         url: 'admin_getphotodetails.php',
         data: {mediaID: mediaID},
         dataType: 'html',
         success: function (req) {
-            jQuery('#mwphoto').html(req);
+            $('#mwphoto').html(req);
         }
     });
 

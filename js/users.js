@@ -1,5 +1,5 @@
 // [ts] global functions and variables for jsLint
-/*global checkEmail, textSnippet */
+/*global checkEmail, deleteIt, findItem, textSnippet */
 var orgrealname, orgusername, orgpassword;
 
 function grantAdmin(status) {
@@ -14,44 +14,32 @@ function grantAdmin(status) {
     }
 }
 
-function toggleRights(status) {
-    'use strict';
-    $('.rights').each(function (index, item) {
-        item.disabled = status;
-    });
-}
-
 function assignRightsFromRole(role) {
     'use strict';
     var form = document.form1;
 
     switch (role) {
     case "guest":
-        //toggleRights('disabled');
         form.form_allow_add[2].checked = "checked";
         form.form_allow_edit[3].checked = "checked";
         form.form_allow_delete[2].checked = "checked";
         break;
     case "subm":
-        //toggleRights('disabled');
         form.form_allow_add[2].checked = "checked";
         form.form_allow_edit[2].checked = "checked";
         form.form_allow_delete[2].checked = "checked";
         break;
     case "contrib":
-        //toggleRights('disabled');
         form.form_allow_add[0].checked = "checked";
         form.form_allow_edit[3].checked = "checked";
         form.form_allow_delete[2].checked = "checked";
         break;
     case "mcontrib":
-        //toggleRights('disabled');
         form.form_allow_add[1].checked = "checked";
         form.form_allow_edit[3].checked = "checked";
         form.form_allow_delete[2].checked = "checked";
         break;
     case "editor":
-        //toggleRights('disabled');
         form.form_allow_add[0].checked = "checked";
         form.form_allow_edit[0].checked = "checked";
         form.form_allow_delete[0].checked = "checked";
@@ -59,16 +47,16 @@ function assignRightsFromRole(role) {
         grantAdmin('visible');
         break;
     case "meditor":
-        //toggleRights('disabled');
         form.form_allow_add[1].checked = "checked";
         form.form_allow_edit[1].checked = "checked";
         form.form_allow_delete[1].checked = "checked";
         break;
     case "custom":
-        toggleRights('');
+        $('.rights').each(function (index, item) {
+          item.disabled = '';
+        });
         break;
     case "admin":
-        //toggleRights('disabled');
         form.form_allow_add[0].checked = "checked";
         form.form_allow_edit[0].checked = "checked";
         form.form_allow_delete[0].checked = "checked";
@@ -146,6 +134,33 @@ function checkIfUnique(emailfield) {
     }
 }
 
+var newuserok = false;
+function checkNewUser(userfield, olduserfield, submitform) {
+    'use strict';
+    if (olduserfield && userfield.value === olduserfield.value) {
+        newuserok = true;
+        return true;
+    }
+    $.ajax({
+        url: 'usersValidateUsernameJSON.php',
+        data: {checkuser: userfield.value},
+        dataType: 'json',
+        success: function (vars) {
+            newuserok = vars.rval;
+            if (newuserok) {
+                if (submitform) {
+                    document.editprofile.submit();
+                } else {
+                    $('#checkmsg').removeClass('msgerror').addClass('msgapproved').html(vars.html);
+                }
+            } else {
+                $('#checkmsg').removeClass('msgapproved').addClass('msgerror').html(vars.html);
+            }
+        }
+    });
+    return false;
+}
+
 $('#users-add input[name="username"]').on('blur', function () {
     'use strict';
     checkNewUser(this, null);
@@ -221,3 +236,153 @@ $('#users-add').on('submit', function () {
     }
     return rval;
 });
+
+$('#users-edit input[name="username"]').on('change', function () {
+    'use strict';
+    checkNewUser(document.form1.username, document.form1.orguser);
+});
+
+$('#users-edit input[name="email"]').on('blur', function () {
+    'use strict';
+    checkIfUnique(this);
+});
+
+$('#users-edit #findPerson').on('click', function () {
+    'use strict';
+    var assignedBranch = $(this).data('assignedBranch');
+    return findItem('I', 'personID', '', document.form1.mynewgedcom.options[document.form1.mynewgedcom.selectedIndex].value, assignedBranch);
+});
+
+$('#users-edit input[name="role"]').on('click', function () {
+    'use strict';
+    var role = $(this).data('role');
+    assignRightsFromRole(role);
+});
+
+$('#users-edit input[name="form_allow_add"]').on('change', function () {
+    'use strict';
+    document.form1.role[6].checked = 'checked';
+});
+
+$('#users-edit input[name="form_allow_edit"]').on('change', function () {
+    'use strict';
+    document.form1.role[6].checked = 'checked';
+});
+
+$('#users-edit input[name="form_allow_delete"]').on('change', function () {
+    'use strict';
+    document.form1.role[6].checked = 'checked';
+});
+
+$('#users-edit input[name="administrator"]').on('change', function () {
+    'use strict';
+    var adminAccess = $(this).data('adminAccess');
+    handleAdmin(adminAccess);
+});
+
+$('#users-edit').on('submit', function () {
+    'use strict';
+    var form = document.form1;
+    var rval = true;
+    if (document.form1.username.value.length === 0) {
+        alert(textSnippet('enterusername'));
+        document.form1.username.focus();
+        rval = false;
+    } else if (document.form1.password.value.length === 0) {
+        alert(textSnippet('enterpassword'));
+        document.form1.password.focus();
+        rval = false;
+    } else if (form.email.value.length !== 0 && !checkEmail(form.email.value)) {
+        alert(textSnippet('enteremail'));
+        form.email.focus();
+        rval = false;
+    } else if (document.form1.administrator[1].checked && document.form1.gedcom.selectedIndex < 1) {
+        alert(textSnippet('selecttree'));
+        document.form1.gedcom.focus();
+        rval = false;
+    }
+    return rval;
+});
+
+// users-browse
+
+$('#users-search-reset').on('click', function () {
+    'use strict';
+    document.form1.searchstring.value = '';
+    document.form1.adminonly.checked = false;
+});
+
+$('#users-browse button[name="selectall"]').on('click', function () {
+    'use strict';
+    var i;
+    for (i = 0; i < document.form2.elements.length; i += 1) {
+        if (document.form2.elements[i].type === 'checkbox') {
+            document.form2.elements[i].checked = true;
+        }
+    }
+});
+
+$('#users-browse button[name="clearall"]').on('click', function () {
+    'use strict';
+    var i;
+    for (i = 0; i < document.form2.elements.length; i += 1) {
+        if (document.form2.elements[i].type === 'checkbox') {
+            document.form2.elements[i].checked = false;
+        }
+    }
+});
+
+$('#users-browse button[name="xuseraction"]').on('click', function () {
+    'use strict';
+    return confirm(textSnippet('confdeleterecs'));
+});
+
+$('#users-send-mail').on('submit', function () {
+    'use strict';
+    var rval = true;
+    if (document.form1.subject.value.length === 0) {
+        alert(textSnippet('entersubject'));
+        rval = false;
+    } else if (document.form1.messagetext.value.length === 0) {
+        alert(textSnippet('entermsgtext'));
+        rval = false;
+    }
+    return rval;
+});
+
+// users-review
+
+$('#users-review button[name="selectall"]').on('click', function () {
+    'use strict';
+    var i;
+    for (i = 0; i < document.form2.elements.length; i += 1) {
+        if (document.form2.elements[i].type === 'checkbox') {
+            document.form2.elements[i].checked = true;
+        }
+    }
+});
+
+$('#users-review button[name="clearall"]').on('click', function () {
+    'use strict';
+    var i;
+    for (i = 0; i < document.form2.elements.length; i += 1) {
+        if (document.form2.elements[i].type === 'checkbox') {
+            document.form2.elements[i].checked = false;
+        }
+    }
+});
+
+$('#users-review button[name="xuseraction"]').on('click', function () {
+    'use strict';
+    return confirm(textSnippet('confdeleterecs'));
+});
+
+$('#users-review #delete').on('click', function () {
+    'use strict';
+    var userId = $(this).data('userId');
+    if (confirm(textSnippet('confuserdelete'))) {
+        deleteIt('user', userId);
+    }
+    return false;
+});
+

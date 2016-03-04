@@ -144,7 +144,7 @@ $headSection->setTitle(uiTextSnippet('tlevents'));
               echo buildSearchResultPagination($totrows, "admin_timelineevents.php?searchstring=$searchstring&amp;offset", $maxsearchresults, 5);
             }
             else {
-              echo uiTextSnippet('norecords');
+              echo "<div class='alert alert-warning'>" . uiTextSnippet('norecords') . "</div>\n";
             }
             tng_free_result($result);
             ?>

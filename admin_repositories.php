@@ -207,7 +207,7 @@ $headSection->setTitle(uiTextSnippet('repositories'));
           <?php
           echo buildSearchResultPagination($totrows, "admin_repositories.php?searchstring=$searchstring&amp;exactmatch=$exactmatch&amp;offset", $maxsearchresults, 5);
         } else {
-          echo uiTextSnippet('norecords');
+          echo "<div class='alert alert-warning'>" . uiTextSnippet('norecords') . "</div>\n";
         }
         tng_free_result($result);
         ?>

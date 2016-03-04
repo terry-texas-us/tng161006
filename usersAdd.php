@@ -30,15 +30,15 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
 <!DOCTYPE html>
 <html>
 <?php echo $headSection->build('', 'admin', $session_charset); ?>
-<body id="users-add">
+<body>
   <section class='container'>
     <?php
     echo $adminHeaderSection->build('users-add', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_users.php", uiTextSnippet('search'), "finduser"]);
-    $navList->appendItem([$allow_add, "admin_newuser.php", uiTextSnippet('add'), "adduser"]);
-    $navList->appendItem([$allow_edit, "admin_reviewusers.php", uiTextSnippet('review') . $revstar, "review"]);
-    $navList->appendItem([true, "admin_mailusers.php", uiTextSnippet('email'), "mail"]);
+    $navList->appendItem([true, "usersBrowse.php", uiTextSnippet('search'), "finduser"]);
+//    $navList->appendItem([$allow_add, "usersAdd.php", uiTextSnippet('add'), "adduser"]);
+    $navList->appendItem([$allow_edit, "usersReview.php", uiTextSnippet('review') . $revstar, "review"]);
+    $navList->appendItem([true, "usersSendMail.php", uiTextSnippet('email'), "mail"]);
     echo $navList->build("adduser");
     ?>
     <form id='users-add' name='form1' action="usersAddFormAction.php" method='post'>
@@ -65,7 +65,7 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
           <input class='form-control' name='phone' type='text' maxlength='30' placeholder='<?php echo $label; ?>'>
           <?php $label = uiTextSnippet('email'); ?>
           <label class='sr-only' for='email'><?php echo $label; ?></label>
-          <input class='form-control' name='email' type='text' maxlength='100' placeholder='<?php echo $label; ?>'>
+          <input class='form-control' name='email' type='email' maxlength='100' placeholder='<?php echo $label; ?>'>
           <div id='emailmsg'></div>
           <div class='checkbox'>
             <label>
@@ -88,17 +88,19 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
           <input class='form-control' name='state' type='text' maxlength='64' placeholder='<?php echo $label; ?>'>
           <?php $label = uiTextSnippet('zip'); ?>
           <label class='sr-only' for='zip'><?php echo $label; ?></label>
-          <input class='form-control' name='zip' type='text' maxlength="10" placeholder='<?php echo $label; ?>'>
+          <input class='form-control' name='zip' type='text' maxlength='10' placeholder='<?php echo $label; ?>'>
           <?php $label = uiTextSnippet('country'); ?>
           <label class='sr-only' for='country'><?php echo $label; ?></label>
           <input class='form-control' name='country' type='text' maxlength='64' placeholder='<?php echo $label; ?>'>
         </div>
       </div>
       <div class='row'>
-          <div class='col-md-12'><?php echo uiTextSnippet('notes'); ?></div>
+        <div class='col-md-12'><?php echo uiTextSnippet('notes'); ?></div>
       </div>
       <div class='row'>
-        <div class='col-md-12'><textarea class='form-control' name='notes' rows='4'></textarea></div>
+        <div class='col-md-12'>
+          <textarea class='form-control' name='notes' rows='4'></textarea>
+        </div>
       </div>
       <div class='row'>
         <div class='col-sm-3'>
@@ -112,7 +114,8 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
             $treeresult = tng_query($query);
 
             while ($treerow = tng_fetch_assoc($treeresult)) {
-              echo "  <option value=\"{$treerow['gedcom']}\">{$treerow['treename']}</option>\n";
+              echo "  <option value=\"{$treerow['gedcom']}\">{$treerow['treename']}\n";
+              echo "</option>\n";
             }
             ?>
           </select>
@@ -121,12 +124,12 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
           <input class='form-control' id='personID' name='personID' type='text' maxlength='22'>
           &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
           <a id='findPerson' href="#" title="<?php echo uiTextSnippet('find'); ?>" data-assigned-branch='<?php echo $assignedbranch; ?>'>
-            <img class='icon-sm-inline' src="svg/magnifying-glass.svg" alt="<?php echo uiTextSnippet('find'); ?>">
+            <img class='icon-sm-inline' src='svg/magnifying-glass.svg' alt="<?php echo uiTextSnippet('find'); ?>">
           </a>
         </div>
       </div>
-      <div class='row checkbox'>
-        <div class='col-sm-12'>
+      <div class='row'>
+        <div class='col-sm-6 checkbox'>
           <label>
             <input name='disabled' type='checkbox' value='1'> <?php echo uiTextSnippet('disabled'); ?>
           </label>
@@ -207,7 +210,7 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
               <br>
             <?php } ?>
           </p>
-          <hr/>
+          <hr>
           <p>
             <input name='form_allow_living' type='checkbox' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_living'); ?>
             <br>
@@ -245,7 +248,8 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
                 $treeresult = tng_query($query);
 
                 while ($treerow = tng_fetch_assoc($treeresult)) {
-                  echo "  <option value=\"{$treerow['gedcom']}\">{$treerow['treename']}</option>\n";
+                  echo "  <option value=\"{$treerow['gedcom']}\">{$treerow['treename']}\n";
+                  echo "</option>\n";
                 }
                 ?>
               </select>
@@ -262,7 +266,8 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
               echo "  <option value='' selected>" . uiTextSnippet('allbranches') . "</option>\n";
               if ($assignedtree) {
                 while ($branch = tng_fetch_assoc($branchresult)) {
-                  echo "  <option value=\"{$branch['branch']}\">{$branch['description']}</option>\n";
+                  echo "  <option value=\"{$branch['branch']}\">{$branch['description']}\n";
+                  echo "</option>\n";
                 }
               }
               echo "</select>\n";

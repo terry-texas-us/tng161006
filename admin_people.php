@@ -284,7 +284,7 @@ $headSection->setTitle(uiTextSnippet('people'));
         </table>
       <?php 
       } else {
-        echo uiTextSnippet('norecords');
+        echo "<div class='alert alert-warning'>" . uiTextSnippet('norecords') . "</div>\n";
       }
       echo buildSearchResultPagination($totrows, "admin_people.php?searchstring=$searchstring&amp;living=$living&amp;exactmatch=$exactmatch&amp;offset", $maxsearchresults, 5);
       tng_free_result($result);

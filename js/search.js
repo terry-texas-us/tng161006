@@ -10,12 +10,12 @@ function closePersonPreview(personID, tree, event) {
         entitystr += "_" + event;
     }
     //new Effect.Fade('prev'+entitystr,{duration:.01});
-    jQuery('#prev' + entitystr).css('visibility', 'hidden');
+    $('#prev' + entitystr).css('visibility', 'hidden');
 }
 
-jQuery(document).ready(function () {
+$(document).ready(function () {
     'use strict';
-    jQuery('a.pers').each(function (index, item) {
+    $('a.pers').each(function (index, item) {
         var matches = /p(\w*)_t(\w*):*(\w*)/.exec(item.id),
           personID = matches[1],
           tree = matches[2],
@@ -30,7 +30,7 @@ jQuery(document).ready(function () {
             closePersonPreview(personID, tree, event);
         };
     });
-    jQuery('a.pl').each(function (index, item) {
+    $('a.pl').each(function (index, item) {
         item.title = "<?php echo $text['findplaces']; ?>";
     });
 });
@@ -42,17 +42,17 @@ function showPersonPreview(personID, tree, event) {
     if (event) {
         entitystr += "_" + event;
     }
-    jQuery('#prev' + entitystr).css('visibility', 'visible');
-    if (!jQuery('#prev' + entitystr).html()) {
-        jQuery('#prev' + entitystr).html('<div class="person-inner" id="ld' + entitystr + '"><img src="img/spinner.gif" style="border:0" alt=""> ' + textSnippet('loading') + '</div>');
+    $('#prev' + entitystr).css('visibility', 'visible');
+    if (!$('#prev' + entitystr).html()) {
+        $('#prev' + entitystr).html('<div class="person-inner" id="ld' + entitystr + '"><img src="img/spinner.gif" style="border:0" alt=""> ' + textSnippet('loading') + '</div>');
 
         params = {personID: personID, tree: tree};
-        jQuery.ajax({
+        $.ajax({
             url: 'ajx_perspreview.php',
             data: params,
             dataType: 'html',
             success: function (req) {
-                jQuery('#ld' + entitystr).html(req);
+                $('#ld' + entitystr).html(req);
             }
         });
     }

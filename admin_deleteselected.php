@@ -52,21 +52,11 @@ if ($xsrcaction) {
   $modmsg = "tlevents";
   $id = "tleventID";
   $location = "admin_timelineevents.php";
-} elseif ($xuseraction) {
-  $query = "DELETE FROM $users_table WHERE 1=0";
-  $modmsg = "users";
-  $id = "userID";
-  $location = "admin_users.php";
 } elseif ($xbranchaction) {
   $query = "DELETE FROM $branches_table WHERE 1=0";
   $modmsg = "branches";
   $id = "branch";
   $location = "admin_branches.php";
-} elseif ($xruseraction) {
-  $query = "DELETE FROM $users_table WHERE 1=0";
-  $modmsg = "users";
-  $id = "userID";
-  $location = "admin_reviewusers.php";
 } elseif ($xcemaction) {
   $query = "DELETE FROM $cemeteries_table WHERE 1=0";
   $modmsg = "cemeteries";
@@ -165,15 +155,6 @@ foreach (array_keys($_POST) as $key) {
       $query3 = "DELETE FROM $tlevents_table WHERE tleventID = \"$thisid\"";
       $result3 = tng_query($query3) or die(uiTextSnippet('cannotexecutequery') . ": $query3");
       $items[] = $thisid;
-    } elseif ($xuseraction || $xruseraction) {
-      $query3 = "SELECT username FROM $users_table WHERE userID = \"$thisid\"";
-      $result3 = tng_query($query3);
-      $urow = tng_fetch_assoc($result3);
-      tng_free_result($result3);
-
-      $query3 = "DELETE FROM $users_table WHERE userID = \"$thisid\"";
-      $result3 = tng_query($query3) or die(uiTextSnippet('cannotexecutequery') . ": $query3");
-      $items[] = $urow['username'];
     } elseif ($xbranchaction) {
       $args = explode('&', $thisid);
       $branch = $args[0];
