@@ -105,7 +105,7 @@ function checkID(id, type, dest, treefield) {
 
 function openChangeTree(entity, tree, id) {
     'use strict';
-    var url = 'admin_changetreeform.php?entity=' + entity + '&oldtree=' + tree + '&entityID=' + id;
+    var url = 'treesChange.php?entity=' + entity + '&oldtree=' + tree + '&entityID=' + id;
     tnglitbox = new ModalDialog(url);
     return false;
 }

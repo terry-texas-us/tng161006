@@ -23,7 +23,7 @@ if ($tngprint) {
     case "ahnentafel":
     case "anniversaries":
     case "calendar":
-    case "browsetrees":
+    case "treesShow":
     case "changelanguage":
     case "descend":
     case "descendtext":
@@ -61,7 +61,6 @@ if ($tngprint) {
     case "browsephotos":
     case "browserepos":
     case "browsesources":
-    case "browsetrees-old":
     case "extrastree":
     case "reports":
     case "search":

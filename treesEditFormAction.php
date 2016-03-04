@@ -38,7 +38,7 @@ if (!$private) {
 $query = "UPDATE $trees_table SET treename=\"$treename\",description=\"$description\",owner=\"$owner\",email=\"$email\",address=\"$address\",city=\"$city\",state=\"$state\",country=\"$country\",zip=\"$zip\",phone=\"$phone\",secret=\"$private\",disallowgedcreate=\"$disallowgedcreate\",disallowpdf=\"$disallowpdf\" WHERE gedcom=\"$tree\"";
 $result = tng_query($query);
 
-adminwritelog("<a href=\"admin_edittree.php?tree=$tree\">" . uiTextSnippet('modifytree') . ": $tree</a>");
+adminwritelog("<a href='treesEdit.php?tree=$tree'>" . uiTextSnippet('modifytree') . ": $tree</a>");
 
 $message = uiTextSnippet('changestotree') . " $treenamedisp " . uiTextSnippet('succsaved') . '.';
-header("Location: admin_trees.php?message=" . urlencode($message));
+header("Location: treesBrowse.php?message=" . urlencode($message));

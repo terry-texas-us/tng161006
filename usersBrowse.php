@@ -82,20 +82,22 @@ $headSection->setTitle(uiTextSnippet('users'));
     echo $navList->build("finduser");
     ?>
     <form id='users-search' action='usersBrowse.php' name='form1'>
-      <div class='row'>
-        <div class='col-sm-2'>  
-          <?php echo uiTextSnippet('searchfor'); ?>:
+      <label for='searchstring'><?php echo uiTextSnippet('searchfor'); ?>: </label>
+      <div class='row form-group'>
+        <div class='col-sm-6'>
+          <div class='input-group'>
+            <input class='form-control' name='searchstring' type='text' value="<?php echo $searchstring; ?>">
+            <span class='input-group-btn'>
+              <button class='btn btn-primary-outline' name='submit' type='submit'><?php echo uiTextSnippet('search'); ?></button>
+            </span>
+          </div>      
         </div>
-        <div class='col-sm-4'>
-          <input class='form-control' name='searchstring' type='text' value="<?php echo $searchstring; ?>">
-        </div>
-        <div class='col-sm-3'>
-          <input name='submit' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
-          <input id='users-search-reset' name='submit' type='submit' value="<?php echo uiTextSnippet('reset'); ?>">
+        <div class='col-sm-2'>
+          <button class='btn btn-secondary-outline' id='users-search-reset' name='submit' type='submit'><?php echo uiTextSnippet('reset'); ?></button>
         </div>
       </div>
       <div class='row'>
-        <div class='col-sm-10 col-sm-offset-2 checkbox'>
+        <div class='col-sm-4 checkbox'>
           <label>
             <input name='adminonly' type='checkbox' value='yes'<?php if ($adminonly == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('adminonly'); ?>
           </label>
@@ -104,6 +106,7 @@ $headSection->setTitle(uiTextSnippet('users'));
       <input name='finduser' type='hidden' value='1'>
       <input name='newsearch' type='hidden' value='1'>
     </form>
+    <hr>
     <?php
     $numrowsplus = $numrows + $offset;
     if (!$numrowsplus) {

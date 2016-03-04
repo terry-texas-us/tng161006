@@ -1,4 +1,18 @@
 <?php
+
+include("begin.php");
+include("adminlib.php");
+
+$admin_login = 1;
+include("checklogin.php");
+
+if (!$allow_delete) {
+  $message = uiTextSnippet('norights');
+  header("Location: admin_login.php?message=" . urlencode($message));
+  exit;
+}
+require("adminlog.php");
+
 $query = "DELETE from $people_table WHERE gedcom = \"$tree\"";
 $result = tng_query($query);
 
@@ -59,3 +73,9 @@ $result = tng_query($query);
 
 $query = "DELETE from $branchlinks_table WHERE branch = \"$branch\" AND gedcom = \"$tree\"";
 $result = tng_query($query);
+
+$message = uiTextSnippet('tree') . " $gedcom " . uiTextSnippet('succcleared') . '.';
+
+adminwritelog(uiTextSnippet('deleted') . ": " . uiTextSnippet('tree') . " $tree");
+
+header("Location: treesBrowse.php?message=" . urlencode($message));

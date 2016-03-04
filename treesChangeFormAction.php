@@ -11,7 +11,6 @@ if ($assignedtree || !$allow_edit) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-
 switch ($entity) {
   case "person":
     $url = "admin_editperson.php?personID=$newID&tree=$newtree";

@@ -115,7 +115,7 @@ $headSection->setTitle(uiTextSnippet('administration'));
       if ($allow_edit && $allow_add && $allow_delete && !$assignedtree) {
         echo adminMenuItem("admin_setup.php", uiTextSnippet('setup'), uiTextSnippet('setupitems'), "svg/cog.svg");
         echo adminMenuItem("usersBrowse.php", uiTextSnippet('users'), uiTextSnippet('usersitems'), "svg/users.svg");
-        echo adminMenuItem("admin_trees.php", uiTextSnippet('trees'), $treesmsg, "svg/tree.svg");
+        echo adminMenuItem("treesBrowse.php", uiTextSnippet('trees'), $treesmsg, "svg/tree.svg");
 
         if (!$assignedbranch) {
           echo adminMenuItem("admin_branches.php", uiTextSnippet('branches'), $treesmsg, "svg/flow-branch.svg");

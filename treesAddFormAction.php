@@ -41,19 +41,19 @@ $query = "INSERT IGNORE INTO $trees_table (gedcom,treename,description,owner,ema
 $result = tng_query($query);
 $success = tng_affected_rows();
 if ($success) {
-  adminwritelog("<a href=\"admin_edittree.php?tree=$gedcom\">" . uiTextSnippet('addnewtree') . ": $gedcom/$treename</a>");
+  adminwritelog("<a href='treesEdit.php?tree=$gedcom'>" . uiTextSnippet('addnewtree') . ": $gedcom/$treename</a>");
 
   $message = uiTextSnippet('tree') . " $treenamedisp " . uiTextSnippet('succadded') . '.';
   if ($beforeimport == "yes") {
     echo "1";
   } else {
-    header("Location: admin_trees.php?message=" . urlencode($message));
+    header("Location: treesBrowse.php?message=" . urlencode($message));
   }
 } else {
   $message = uiTextSnippet('treeexists');
   if ($beforeimport) {
     echo $message;
   } else {
-    header("Location: admin_newtree.php?message=" . urlencode($message) . "&treename=$treename&description=$description&owner=$owner&email=$email&address=$address&city=$city&state=$state&country=$country&zip=$zip&phone=$phone&private=$private&disallowgedcreate=$disallowgedcreate");
+    header("Location: treesAdd.php?message=" . urlencode($message) . "&treename=$treename&description=$description&owner=$owner&email=$email&address=$address&city=$city&state=$state&country=$country&zip=$zip&phone=$phone&private=$private&disallowgedcreate=$disallowgedcreate");
   }
 }

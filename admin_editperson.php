@@ -551,6 +551,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
 <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
 <script src="js/admin.js"></script>
 <script src="js/selectutils.js"></script>
+<script src='js/trees.js'></script>
 <script src="js/datevalidation.js"></script>
 <script src="js/associations.js"></script>
 <script src="js/citations.js"></script>
