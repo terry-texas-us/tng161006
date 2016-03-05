@@ -37,13 +37,13 @@ $headSection->setTitle(uiTextSnippet('addnewplace'));
     <?php
     echo $adminHeaderSection->build('places-addnewplace', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_places.php", uiTextSnippet('search'), "findplace"]);
-    $navList->appendItem([$allow_add, "admin_newplace.php", uiTextSnippet('addnew'), "addplace"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "admin_mergeplaces.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([true, "placesBrowse.php", uiTextSnippet('browse'), "findplace"]);
+    $navList->appendItem([$allow_add, "placesAdd.php", uiTextSnippet('add'), "addplace"]);
+    $navList->appendItem([$allow_edit && $allow_delete, "placesMerge.php", uiTextSnippet('merge'), "merge"]);
     $navList->appendItem([$allow_edit, "admin_geocodeform.php", uiTextSnippet('geocode'), "geo"]);
     echo $navList->build("addplace");
     ?>
-    <form action="admin_addplace.php" method='post' name="form1" onSubmit="return validateForm();">
+    <form name='form1' action='placesAddFormAction.php' method='post' onSubmit="return validateForm();">
       <table class='table table-sm'>
         <?php
         if (!$tngconfig['places1tree']) {

@@ -43,7 +43,7 @@ $query = "UPDATE $places_table SET place=\"$place\",placelevel=\"$placelevel\",t
 $result = tng_query($query);
 if (!$result) {
   $message = uiTextSnippet('duplicate');
-  header("Location: admin_places.php?message=" . urlencode($message));
+  header("Location: placesBrowse.php?message=" . urlencode($message));
   exit;
 }
 if ($tngconfig['places1tree']) {
@@ -92,10 +92,10 @@ if ($propagate && trim($orgplace)) {
   $query = "UPDATE $medialinks_table SET personID=\"$place\" WHERE personID=\"$orgplace\"$updatetreestr";
   $result = tng_query($query);
 }
-adminwritelog("<a href=\"admin_editplace.php?ID=$ID$treeurl\">" . uiTextSnippet('modifyplace') . ": $place</a>");
+adminwritelog("<a href=\"placesEdit.php?ID=$ID$treeurl\">" . uiTextSnippet('modifyplace') . ": $place</a>");
 
 if ($newscreen == "return") {
-  header("Location: admin_editplace.php?ID=$ID$treeurl");
+  header("Location: placesEdit.php?ID=$ID$treeurl");
 } elseif ($newscreen == "close") {
 ?>
   <!DOCTYPE html>
@@ -109,5 +109,5 @@ if ($newscreen == "return") {
 <?php
 } else {
   $message = uiTextSnippet('changestoplace') . " $place " . uiTextSnippet('succsaved') . '.';
-  header("Location: admin_places.php?message=" . urlencode($message));
+  header("Location: placesBrowse.php?message=" . urlencode($message));
 }

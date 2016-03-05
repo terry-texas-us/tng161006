@@ -53,9 +53,9 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
     <?php
     echo $adminHeaderSection->build('places-modifyplace', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_places.php", uiTextSnippet('search'), "findplace"]);
-    $navList->appendItem([$allow_add, "admin_newplace.php", uiTextSnippet('addnew'), "addplace"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "admin_mergeplaces.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([true, "placesBrowse.php", uiTextSnippet('browse'), "findplace"]);
+    $navList->appendItem([$allow_add, "placesAdd.php", uiTextSnippet('add'), "addplace"]);
+    $navList->appendItem([$allow_edit && $allow_delete, "placesMerge.php", uiTextSnippet('merge'), "merge"]);
     $navList->appendItem([$allow_edit, "admin_geocodeform.php", uiTextSnippet('geocode'), "geo"]);
     $navList->appendItem([$allow_edit, "#", uiTextSnippet('edit'), "edit"]);
 
@@ -67,7 +67,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
     </a>
     <!-- [ts] should this be placeID or is personID correct? -->
     <a href="admin_newmedia.php?personID=<?php echo $row['place']; ?>&amp;tree=<?php echo $tree; ?>&amp;linktype=L"><?php echo uiTextSnippet('addmedia'); ?></a>
-    <form action="admin_updateplace.php" method='post' name='form1' id='form1'
+    <form action="placesEditFormAction.php" method='post' name='form1' id='form1'
           onSubmit="return validateForm();">
       <h2><?php echo $row['place']; ?></h2>
       <table>

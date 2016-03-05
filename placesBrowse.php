@@ -121,15 +121,15 @@ $headSection->setTitle(uiTextSnippet('places'));
     <?php
     echo $adminHeaderSection->build('places', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_places.php", uiTextSnippet('search'), "findplace"]);
-    $navList->appendItem([$allow_add, "admin_newplace.php", uiTextSnippet('addnew'), "addplace"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "admin_mergeplaces.php", uiTextSnippet('merge'), "merge"]);
+//    $navList->appendItem([true, "placesBrowse.php", uiTextSnippet('browse'), "findplace"]);
+    $navList->appendItem([$allow_add, "placesAdd.php", uiTextSnippet('add'), "addplace"]);
+    $navList->appendItem([$allow_edit && $allow_delete, "placesMerge.php", uiTextSnippet('merge'), "merge"]);
     $navList->appendItem([$allow_edit, "admin_geocodeform.php", uiTextSnippet('geocode'), "geo"]);
     echo $navList->build("findplace");
     ?>
     <br>
     <div class='row'>
-      <form id='form1' name='form1' action='admin_places.php'>
+      <form id='form1' name='form1' action='placesBrowse.php'>
         <?php
         if (!$tngconfig['places1tree']) {
           include '_/components/php/treeSelectControl.php';
@@ -207,7 +207,7 @@ $headSection->setTitle(uiTextSnippet('places'));
         if ($numrows) {
           $actionstr = "";
         if ($allow_edit) {
-          $actionstr .= "<a href=\"admin_editplace.php?ID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
+          $actionstr .= "<a href=\"placesEdit.php?ID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
           $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
           $actionstr .= "</a>";
         }
@@ -254,7 +254,7 @@ $headSection->setTitle(uiTextSnippet('places'));
         ?>
       </table>
       <?php
-      echo buildSearchResultPagination($totrows, "admin_places.php?searchstring=" . stripslashes($searchstring) . "&amp;exactmatch=$exactmatch&amp;noocords=$nocoords&amp;temples=$temples&amp;offset", $maxsearchresults, 5);
+      echo buildSearchResultPagination($totrows, "placesBrowse.php?searchstring=" . stripslashes($searchstring) . "&amp;exactmatch=$exactmatch&amp;noocords=$nocoords&amp;temples=$temples&amp;offset", $maxsearchresults, 5);
     }
     else {
       echo "</table>\n" . uiTextSnippet('norecords');

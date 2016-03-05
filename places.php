@@ -8,7 +8,7 @@ function buildPlaceMenu($currpage, $entityID) {
   
   $menu = '';
   if ($allow_edit && $rightbranch) {
-    $menu .= "<a id='a0' href='admin_editplace.php?ID=" . urlencode($entityID) . "&amp;tree=$tree&amp;cw=1' title='" . uiTextSnippet('edit') . "'>\n";
+    $menu .= "<a id='a0' href='placesEdit.php?ID=" . urlencode($entityID) . "&amp;tree=$tree&amp;cw=1' title='" . uiTextSnippet('edit') . "'>\n";
       $menu .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
     $menu .= "</a>\n";
   } elseif ($emailaddr && $currpage != 'suggest') {

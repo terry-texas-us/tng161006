@@ -49,16 +49,16 @@ $headSection->setTitle(uiTextSnippet('mergeplaces'));
     <?php
     echo $adminHeaderSection->build('places-mergeplaces', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_places.php", uiTextSnippet('search'), "findplace"]);
-    $navList->appendItem([$allow_add, "admin_newplace.php", uiTextSnippet('addnew'), "addplace"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "admin_mergeplaces.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([true, "placesBrowse.php", uiTextSnippet('browse'), "findplace"]);
+    $navList->appendItem([$allow_add, "placesAdd.php", uiTextSnippet('add'), "addplace"]);
+    $navList->appendItem([$allow_edit && $allow_delete, "placesMerge.php", uiTextSnippet('merge'), "merge"]);
     $navList->appendItem([$allow_edit, "admin_geocodeform.php", uiTextSnippet('geocode'), "geo"]);
     echo $navList->build("merge");
     ?>
 
     <h4>1. <?php echo uiTextSnippet('findmerge'); ?></h4>
 
-    <form action="admin_mergeplaces.php" method='post' name="form1" onSubmit="return validateForm1();">
+    <form action="placesMerge.php" method='post' name="form1" onSubmit="return validateForm1();">
       <table class='table table-sm'>
         <?php
         if (!$tngconfig['places1tree']) {

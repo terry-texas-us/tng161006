@@ -46,11 +46,11 @@ if ($success) {
   if ($tngconfig['autogeo']) {
     $message = geocode($place, 0, $placeID);
   }
-  adminwritelog("<a href=\"admin_editplace.php?ID=$placeID\">" . uiTextSnippet('addnewplace') . ": $placeID - " . stripslashes($place) . "</a>");
+  adminwritelog("<a href=\"placesEdit.php?ID=$placeID\">" . uiTextSnippet('addnewplace') . ": $placeID - " . stripslashes($place) . "</a>");
 
   // [ts] testing before and after stuff. trivial example here. cleaner just to do many inline appends?
   $message = uiTextSnippet('place', ['after' => ' ']) . stripslashes($place) . uiTextSnippet('succadded', ['before' => ' ', 'after' => '.']);
 } else {
   $message = uiTextSnippet('place') . ' ' . stripslashes($place) . ' ' . uiTextSnippet('idexists');
 }
-header("Location: admin_places.php?message=" . urlencode($message));
+header("Location: placesBrowse.php?message=" . urlencode($message));
