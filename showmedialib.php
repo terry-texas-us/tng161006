@@ -248,7 +248,7 @@ function getMediaNavigation($mediaID, $personID, $albumlinkID, $result, $showlin
       $pagenav .= "<a href=\"browsemedia.php?" . $showall . "offset=$offset&amp;tngpage=$pagenum&amp;tnggallery=$tnggallery\">&raquo; " . uiTextSnippet('showall') . "</a>  &nbsp;&nbsp;&nbsp;";
     } else {
       if ($linktype == 'F') {
-        $pagenav .= "<a href=\"familygroup.php?familyID=$personID&amp;tree=$tree\">&raquo; " . uiTextSnippet('groupsheet') . "</a>  &nbsp;&nbsp;&nbsp;";
+        $pagenav .= "<a href=\"familiesShowFamily.php?familyID=$personID&amp;tree=$tree\">&raquo; " . uiTextSnippet('groupsheet') . "</a>  &nbsp;&nbsp;&nbsp;";
       } elseif ($linktype == 'S') {
         $pagenav .= "<a href=\"showsource.php?sourceID=$personID&amp;tree=$tree\">&raquo; " . uiTextSnippet('source') . "</a>  &nbsp;&nbsp;&nbsp;";
       } elseif ($linktype == 'R') {
@@ -388,7 +388,7 @@ function getMediaLinkText($mediaID, $ioffset) {
       $medialinktext .= "<a href=\"repositoriesShowItem.php?repoID={$prow['repoID']}&amp;tree={$prow['gedcom']}\">" . $repotext . "</a>";
     } elseif ($prow['familyID'] != null) {
       $familyname = trim($prow['hlnprefix'] . " " . $prow['hlastname']) . "/" . trim($prow['wlnprefix'] . " " . $prow['wlastname']) . " ({$prow['familyID']})";
-      $medialinktext .= "<a href=\"familygroup.php?familyID={$prow['familyID']}&amp;tree={$prow['gedcom']}\">" . uiTextSnippet('family') . ": $familyname</a>";
+      $medialinktext .= "<a href=\"familiesShowFamily.php?familyID={$prow['familyID']}&amp;tree={$prow['gedcom']}\">" . uiTextSnippet('family') . ": $familyname</a>";
     } else {
       $treestr = $tngconfig['places1tree'] ? "" : "&amp;tree={$prow['gedcom']}";
       $medialinktext .= "<a href=\"placesearch.php?psearch=" . urlencode($prow['personID']) . "$treestr\">" . $prow['personID'] . "</a>";

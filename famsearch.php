@@ -362,7 +362,7 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
         $fname = getNameRev($frow);
         $mname = getNameRev($mrow);
 
-        $famidstr = "<a href=\"familygroup.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}\" class=\"fam\" id=\"f{$row['familyID']}_t{$row['gedcom']}\">{$row['familyID']} </a>";
+        $famidstr = "<a href=\"familiesShowFamily.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}\" class=\"fam\" id=\"f{$row['familyID']}_t{$row['gedcom']}\">{$row['familyID']} </a>";
 
         echo "<tr>";
         echo "<td>$i</td>\n";

@@ -108,14 +108,14 @@ if (!$editconflict) {
   $query = "UPDATE $families_table SET husband=\"$husband\",wife=\"$wife\",living=\"$familyliving\",private=\"$private\",marrdate=\"$marrdate\",marrdatetr=\"$marrdatetr\",marrplace=\"$marrplace\",marrtype=\"$marrtype\",divdate=\"$divdate\",divdatetr=\"$divdatetr\",divplace=\"$divplace\",sealdate=\"$sealdate\",sealdatetr=\"$sealdatetr\",sealplace=\"$sealplace\",changedate=\"$newdate\",branch=\"$allbranches\",changedby=\"$currentuser\",edituser=\"\",edittime=\"0\" WHERE familyID=\"$familyID\" AND gedcom = \"$tree\"";
   $result = tng_query($query);
 
-  adminwritelog("<a href=\"admin_editfamily.php?familyID=$familyID&tree=$tree&cw=$cw\">" . uiTextSnippet('modifyfamily') . ": $tree/$familyID</a>");
+  adminwritelog("<a href=\"familiesEdit.php?familyID=$familyID&tree=$tree&cw=$cw\">" . uiTextSnippet('modifyfamily') . ": $tree/$familyID</a>");
 } else {
   $message = uiTextSnippet('notsaved');
 }
 if ($media == "1") {
   header("Location: admin_newmedia.php?personID=$familyID&tree=$tree&linktype=F&cw=$cw");
 } elseif ($newfamily == "return") {
-  header("Location: admin_editfamily.php?familyID=$familyID&tree=$tree&cw=$cw");
+  header("Location: familiesEdit.php?familyID=$familyID&tree=$tree&cw=$cw");
 } else {
   if ($newfamily == "close") {
   ?>
@@ -132,6 +132,6 @@ if ($media == "1") {
     echo 1;
   } else {
     $message = uiTextSnippet('changestofamily') . " $familyID " . uiTextSnippet('succsaved') . '.';
-    header("Location: admin_families.php?message=" . urlencode($message));
+    header("Location: familiesBrowse.php?message=" . urlencode($message));
   }
 }

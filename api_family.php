@@ -33,7 +33,7 @@ $row['allow_private'] = $rights['private'];
 $famname = getFamilyName($famrow);
 $namestr = uiTextSnippet('family') . ": " . $famname;
 
-$logstring = "<a href=\"familygroup.php?familyID=$familyID&amp;tree=$tree\">" . uiTextSnippet('familygroupfor') . " $famname</a>";
+$logstring = "<a href=\"familiesShowFamily.php?familyID=$familyID&amp;tree=$tree\">" . uiTextSnippet('familygroupfor') . " $famname</a>";
 writelog($logstring);
 
 $family = "\"id\":\"{$famrow['familyID']}\",\"tree\":\"{$famrow['gedcom']}\"";

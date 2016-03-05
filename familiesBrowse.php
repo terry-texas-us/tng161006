@@ -166,8 +166,8 @@ $headSection->setTitle(uiTextSnippet('families'));
     <?php
     echo $adminHeaderSection->build('families', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_families.php", uiTextSnippet('search'), "findfamily"]);
-    $navList->appendItem([$allow_add, "admin_newfamily.php", uiTextSnippet('addnew'), "addfamily"]);
+    $navList->appendItem([true, "familiesBrowse.php", uiTextSnippet('browse'), "findfamily"]);
+    $navList->appendItem([$allow_add, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
     $navList->appendItem([$allow_edit, "admin_findreview.php?type=F", uiTextSnippet('review') . $revstar, "review"]);
     echo $navList->build("findfamily");
     ?>
@@ -217,7 +217,7 @@ $headSection->setTitle(uiTextSnippet('families'));
             <?php
             $actionstr = "";
             if ($allow_edit) {
-              $actionstr .= "<a href=\"admin_editfamily.php?familyID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('edit') . "'>\n";
+              $actionstr .= "<a href=\"familiesEdit.php?familyID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('edit') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
               $actionstr .= "</a>\n";
             }
@@ -226,7 +226,7 @@ $headSection->setTitle(uiTextSnippet('families'));
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
               $actionstr .= "</a>\n";
             }
-            $actionstr .= "<a href=\"familygroup.php?familyID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('preview') . "'>\n";
+            $actionstr .= "<a href=\"familiesShowFamily.php?familyID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('preview') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
             $actionstr .= "</a>\n";
 
@@ -238,7 +238,7 @@ $headSection->setTitle(uiTextSnippet('families'));
               $row['allow_living'] = $rights['living'];
               $row['allow_private'] = $rights['private'];
 
-              $editlink = "admin_editfamily.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}";
+              $editlink = "familiesEdit.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}";
               $id = $allow_edit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['familyID'] . "</a>" : $row['familyID'];
 
               echo "<tr id=\"row_{$row['ID']}\">\n";
@@ -266,7 +266,7 @@ $headSection->setTitle(uiTextSnippet('families'));
             ?>
           </table>
           <?php
-          echo buildSearchResultPagination($totrows, "admin_families.php?searchstring=$searchstring&amp;spousename=$spousename&amp;living=$living&amp;exactmatch=$exactmatch&amp;offset", $maxsearchresults, 5);
+          echo buildSearchResultPagination($totrows, "familiesBrowse.php?searchstring=$searchstring&amp;spousename=$spousename&amp;living=$living&amp;exactmatch=$exactmatch&amp;offset", $maxsearchresults, 5);
         } else {
           echo "<div class='alert alert-warning'>" . uiTextSnippet('norecords') . "</div>\n";
         }

@@ -156,7 +156,7 @@ $headSection->setTitle($row['name']);
           $spparents = getSpouseParents($spouserow['personID'], $spouserow['sex']);
           echo " $spfirstfirstname $spparents $spouseinfo";
         }
-        echo " [<a href=\"familygroup.php?familyID={$spouserow['familyID']}&amp;tree=$tree\">" . uiTextSnippet('groupsheet') . "</a>]";
+        echo " [<a href=\"familiesShowFamily.php?familyID={$spouserow['familyID']}&amp;tree=$tree\">" . uiTextSnippet('groupsheet') . "</a>]";
         echo "</p>\n";
 
         if ($pedigree['regnotes']) {
@@ -318,7 +318,7 @@ $headSection->setTitle($row['name']);
                       $spparents = getSpouseParents($mothrow['personID'], $mothrow['sex']);
                       echo " $spfirstfirstname $spparents $spouseinfo";
                     }
-                    echo " [<a href=\"familygroup.php?familyID=$nextfamily&amp;tree=$tree\">" . uiTextSnippet('groupsheet') . "</a>]</p>\n";
+                    echo " [<a href=\"familiesShowFamily.php?familyID=$nextfamily&amp;tree=$tree\">" . uiTextSnippet('groupsheet') . "</a>]</p>\n";
                     echo "</td></tr></table>";
                     echo "<br clear='all'></li>\n";
                   }

@@ -498,7 +498,7 @@ function getPopup(slot) {
             if (popupcontent)
                 popupcontent += '<div class="popdivider"></div>';
             popupcontent += divtxt;
-            popupcontent += '<tr><td ' + tdclasstxt + ' colspan="4" id="pop' + slot + '"><B>' + textSnippet('family') + ':</B> [<a href=\"familygroup.php?familyID=' + fam.spFamID + '&amp;tree=' + tree + '">' + textSnippet('groupsheet') + '</a>]';
+            popupcontent += '<tr><td ' + tdclasstxt + ' colspan="4" id="pop' + slot + '"><B>' + textSnippet('family') + ':</B> [<a href=\"familiesShowFamily.php?familyID=' + fam.spFamID + '&amp;tree=' + tree + '">' + textSnippet('groupsheet') + '</a>]';
             if (allow_edit)
                 popupcontent += editIcon('F', slot, slotperson.backperson, fam.spFamID, slotperson.gender);
             popupcontent += '</td></tr>';

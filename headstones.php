@@ -290,7 +290,7 @@ if ($location) {
             }
             $hstext = $deathdate ? " ($abbrev " . displayDate($deathdate) . ")" : "";
           } elseif ($prow['familyID'] != null) {
-            $hslinktext .= "<a href=\"familygroup.php?familyID={$prow['familyID']}&amp;tree={$prow['gedcom']}<br>}\">" . uiTextSnippet('family') . ": " . getFamilyName($prow);
+            $hslinktext .= "<a href=\"familiesShowFamily.php?familyID={$prow['familyID']}&amp;tree={$prow['gedcom']}<br>}\">" . uiTextSnippet('family') . ": " . getFamilyName($prow);
           } elseif ($prow['sourceID'] != null) {
             $sourcetext = $prow['title'] ? uiTextSnippet('source') . ": {$prow['title']}" : uiTextSnippet('source') . ": {$prow['sourceID']}";
             $hslinktext .= "<a href=\"showsource.php?sourceID={$prow['sourceID']}&amp;tree={$prow['gedcom']}\">$sourcetext";

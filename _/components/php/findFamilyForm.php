@@ -1,5 +1,5 @@
 
-<form id='form1' name='form1' action='admin_families.php'>
+<form id='form1' name='form1' action='familiesBrowse.php'>
   <section class='card'>
     <div class='card-block'>
       <div class='row form-group'>

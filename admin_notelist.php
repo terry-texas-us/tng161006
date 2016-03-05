@@ -249,7 +249,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
                         $nrights = determineLivingPrivateRights($row2);
                         $row2['allow_living'] = $nrights['living'];
                         $row2['allow_private'] = $nrights['private'];
-                        $notelinktext .= "<li><a href=\"familygroup.php?familyID={$row2['familyID']}&tree={$nrow['gedcom']}\" target='_blank'>" . uiTextSnippet('family') . " {$row2['familyID']}</a></li>\n";
+                        $notelinktext .= "<li><a href=\"familiesShowFamily.php?familyID={$row2['familyID']}&tree={$nrow['gedcom']}\" target='_blank'>" . uiTextSnippet('family') . " {$row2['familyID']}</a></li>\n";
                         tng_free_result($result2);
                       }
                     }

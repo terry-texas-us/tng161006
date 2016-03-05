@@ -331,7 +331,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                       echo "<a id='unlink-from-family' href='#'  data-family-id='$familyId' data-tree='$tree'>" . uiTextSnippet('unlinkindividual') . " ($personID) " . uiTextSnippet('aschild') . "</a>\n";
                     echo "</div>\n";
                     echo "<strong>" . uiTextSnippet('family') . ":</strong>\n";
-                    echo "<a href=\"admin_editfamily.php?familyID={$familyId}&amp;tree=$tree&amp;cw=$cw\">{$familyId}</a>\n";
+                    echo "<a href=\"familiesEdit.php?familyID={$familyId}&amp;tree=$tree&amp;cw=$cw\">{$familyId}</a>\n";
                     
                     echo buildParentRow($parent, 'husband', 'father');
                     echo buildParentRow($parent, 'wife', 'mother');
@@ -424,7 +424,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                               echo "<div id='unlinks_$familyId' style='float: right; display: none'>\n";
                                 echo "<a id='unlink-from-family' href='#' data-family-id='$familyId' data-tree='$tree'>" . uiTextSnippet('unlinkindividual') . " ($personID) " . uiTextSnippet('asspouse') . "</a>\n";
                               echo "</div>\n";
-                              echo "<a href=\"admin_editfamily.php?familyID={$familyId}&amp;tree=$tree&amp;cw=$cw\">{$familyId}</a>\n";
+                              echo "<a href=\"familiesEdit.php?familyID={$familyId}&amp;tree=$tree&amp;cw=$cw\">{$familyId}</a>\n";
                               
                               if ($marriagerow[$spouse]) {
                                 $query = "SELECT personID, lastname, lnprefix, firstname, birthdate, birthplace, altbirthdate, altbirthplace, prefix, suffix, nameorder FROM $people_table WHERE personID = \"{$marriagerow[$spouse]}\" AND gedcom = \"$tree\"";

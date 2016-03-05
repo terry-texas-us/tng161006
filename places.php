@@ -186,7 +186,7 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
           $i++;
           echo "<td>\n";
           if ($prefix == 'F') {
-            echo "<a href=\"familygroup.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}\">{$row['p1lastname']} / {$row['p2lastname']}</a>\n";
+            echo "<a href=\"familiesShowFamily.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}\">{$row['p1lastname']} / {$row['p2lastname']}</a>\n";
           } elseif ($prefix == 'I') {
             $name = getNameRev($row);
             echo "<a href=\"pedigree.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$chartlink </a>\n";

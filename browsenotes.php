@@ -162,7 +162,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
               if (!$row2['allow_living']) {
                 $noneliving = 0;
               }
-              $notelinktext .= "<a href=\"familygroup.php?familyID={$row2['familyID']}&tree={$row2['gedcom']}\" target='_blank'>" . uiTextSnippet('family') . " {$row2['familyID']}</a>\n<br>\n";
+              $notelinktext .= "<a href=\"familiesShowFamily.php?familyID={$row2['familyID']}&tree={$row2['gedcom']}\" target='_blank'>" . uiTextSnippet('family') . " {$row2['familyID']}</a>\n<br>\n";
               tng_free_result($result2);
             }
           }

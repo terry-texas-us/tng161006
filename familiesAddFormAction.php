@@ -43,7 +43,7 @@ $result = tng_query($query);
 
 if ($result && tng_num_rows($result)) {
   $message = uiTextSnippet('family') . " $familyID " . uiTextSnippet('idexists');
-  header("Location: admin_families.php?message=$message");
+  header("Location: familiesBrowse.php?message=$message");
   exit;
 }
 
@@ -148,10 +148,10 @@ if ($lastperson) {
   $query = "UPDATE $people_table SET famc=\"$familyID\" WHERE personID = \"$lastperson\" AND gedcom = \"$tree\"";
   $result = tng_query($query);
 }
-adminwritelog("<a href=\"admin_editfamily.php?familyID=$familyID&amp;tree=$tree\">" . uiTextSnippet('addnewfamily') . ": $tree/$familyID</a>");
+adminwritelog("<a href=\"familiesEdit.php?familyID=$familyID&amp;tree=$tree\">" . uiTextSnippet('addnewfamily') . ": $tree/$familyID</a>");
 
 if ($newfamily == "ajax") {
   echo "1";
 } else {
-  header("Location: admin_editfamily.php?familyID=$familyID&tree=$tree&cw=$cw&added=1");
+  header("Location: familiesEdit.php?familyID=$familyID&tree=$tree&cw=$cw&added=1");
 }

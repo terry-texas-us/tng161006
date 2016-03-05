@@ -313,7 +313,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
 
     $spousename = getName($fam);
     $spouselink = $spousename ? "<a href=\"peopleShowPerson.php?personID={$fam['personID']}&amp;tree=$tree\">$spousename</a> | " : "";
-    $spouselink .= "<a href=\"familygroup.php?familyID={$fam['familyID']}&amp;tree=$tree\">{$fam['familyID']}</a>";
+    $spouselink .= "<a href=\"familiesShowFamily.php?familyID={$fam['familyID']}&amp;tree=$tree\">{$fam['familyID']}</a>";
 
     $fam['living'] = $fam['fliving'];
     $fam['private'] = $fam['fprivate'];
@@ -357,7 +357,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
     $fathername = getName($parent);
     tng_free_result($presult);
     $fatherlink = $fathername ? "<a href=\"peopleShowPerson.php?personID={$parent['personID']}&amp;tree=$tree\">$fathername</a> | " : "";
-    $fatherlink .= $fathername ? "<a href=\"familygroup.php?familyID={$parent['familyID']}&amp;tree=$tree\">{$parent['familyID']} " . uiTextSnippet('groupsheet') . "</a>" : "";
+    $fatherlink .= $fathername ? "<a href=\"familiesShowFamily.php?familyID={$parent['familyID']}&amp;tree=$tree\">{$parent['familyID']} " . uiTextSnippet('groupsheet') . "</a>" : "";
     $indtext .= showFact(uiTextSnippet('father'), $fatherlink);
 
     $query = "SELECT familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, $people_table.living, $people_table.private, $people_table.branch FROM ($families_table, $people_table) WHERE $families_table.familyID = \"{$ind['famc']}\" AND $families_table.gedcom = \"$tree\" AND $people_table.personID = $families_table.wife AND $people_table.gedcom = \"$tree\"";
@@ -371,7 +371,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
     $mothername = getName($parent);
     tng_free_result($presult);
     $motherlink = $mothername ? "<a href=\"peopleShowPerson.php?personID={$parent['personID']}&amp;tree=$tree\">$mothername</a> | " : "";
-    $motherlink .= $mothername ? "<a href=\"familygroup.php?familyID={$parent['familyID']}&amp;tree=$tree\">{$parent['familyID']} " . uiTextSnippet('groupsheet') . "</a>" : "";
+    $motherlink .= $mothername ? "<a href=\"familiesShowFamily.php?familyID={$parent['familyID']}&amp;tree=$tree\">{$parent['familyID']} " . uiTextSnippet('groupsheet') . "</a>" : "";
     $indtext .= showFact(uiTextSnippet('mother'), $motherlink);
   }
   $indtext .= "</table>\n";
@@ -405,7 +405,7 @@ if (!$rightbranch) {
   $tentative_edit = "";
 }
 
-$logstring = "<a href=\"familygroup.php?familyID=$familyID&amp;tree=$tree\">" . uiTextSnippet('familygroupfor') . " $famname</a>";
+$logstring = "<a href=\"familiesShowFamily.php?familyID=$familyID&amp;tree=$tree\">" . uiTextSnippet('familygroupfor') . " $famname</a>";
 writelog($logstring);
 preparebookmark($logstring);
 

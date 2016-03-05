@@ -219,7 +219,7 @@ if ($media == "1") {
 } elseif ($newfamily == "return") {
   header("Location: peopleEdit.php?personID=$personID&tree=$tree&cw=$cw");
 } elseif ($newfamily == "child") {
-  header("Location: admin_newfamily.php?child=$personID&tree=$tree&cw=$cw");
+  header("Location: familiesAdd.php?child=$personID&tree=$tree&cw=$cw");
 } elseif ($newfamily == "close") {
 ?>
   <!DOCTYPE html>
@@ -249,5 +249,5 @@ if ($media == "1") {
   $name = $session_charset == "UTF-8" ? getName($row) : utf8_encode(getName($row));
   echo "{\"id\":\"$personID\",\"name\":\"" . $name . "\"}";
 } else {
-  header("Location: admin_newfamily.php?$self=$personID&tree=$tree&cw=$cw");
+  header("Location: familiesAdd.php?$self=$personID&tree=$tree&cw=$cw");
 }

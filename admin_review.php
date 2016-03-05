@@ -77,10 +77,10 @@ if ($row['type'] == 'I' || $row['type'] == "C") {
   $checkbranch = 1;
 
   $teststr = "<br>\n";
-  $teststr .= "<a href=\"familygroup.php?familyID=$familyID&amp;tree=$tree\" title=\"<?php echo uiTextSnippet('preview') ?>\">\n";
+  $teststr .= "<a href=\"familiesShowFamily.php?familyID=$familyID&amp;tree=$tree\" title=\"<?php echo uiTextSnippet('preview') ?>\">\n";
   $teststr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
   $teststr .= "</a>\n";
-  $editstr = "  | <a href=\"admin_editfamily.php?familyID=$familyID&amp;tree=$tree\" target='_blank'>" . uiTextSnippet('edit') . "</a>";
+  $editstr = "  | <a href=\"familiesEdit.php?familyID=$familyID&amp;tree=$tree\" target='_blank'>" . uiTextSnippet('edit') . "</a>";
 }
 
 if (!$allow_edit || ($assignedtree && $assignedtree != $tree) || !$rightbranch) {
@@ -258,8 +258,8 @@ $headSection->setTitle(uiTextSnippet('review'));
     $navList->appendItem([$allow_edit, "admin_findreview.php?type=I", uiTextSnippet('review'), "review"]);
     $navList->appendItem([$allow_edit && $allow_delete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
   } else {
-    $navList->appendItem([true, "admin_families.php", uiTextSnippet('search'), "findperson"]);
-    $navList->appendItem([$allow_add, "admin_newfamily.php", uiTextSnippet('addnew'), "addfamily"]);
+    $navList->appendItem([true, "familiesBrowse.php", uiTextSnippet('browse'), "findperson"]);
+    $navList->appendItem([$allow_add, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
     $navList->appendItem([$allow_edit, "admin_findreview.php?type=F", uiTextSnippet('review'), "review"]);
   }
   echo $navList->build("review");

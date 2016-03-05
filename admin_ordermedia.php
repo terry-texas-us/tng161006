@@ -35,7 +35,7 @@ switch ($linktype) {
     $person = tng_fetch_assoc($result2);
     $namestr = uiTextSnippet('family') . ": $personID";
     tng_free_result($result2);
-    $test_url = "familygroup.php?";
+    $test_url = "familiesShowFamily.php?";
     $testID = "familyID";
     break;
   case 'S':

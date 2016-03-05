@@ -49,7 +49,7 @@ $row['allow_living'] = $rights['living'];
 $row['allow_private'] = $rights['private'];
 
 $name = uiTextSnippet('family') . ": " . getFamilyName($row);
-$pagelink = "$tngwebsite/" . "familygroup.php?familyID=$ID&tree=$tree";
+$pagelink = "$tngwebsite/" . "familiesShowFamily.php?familyID=$ID&tree=$tree";
 tng_free_result($result);
 
 $subject = uiTextSnippet('proposed') . ": $name";

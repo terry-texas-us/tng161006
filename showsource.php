@@ -178,7 +178,7 @@ $headSection->setTitle($headtext);
       if (!$srow['allow_private']) {
         $noneprivate = 0;
       }
-      $sourcelinktext .= "<a href=\"familygroup.php?familyID=$srow[familyID]&amp;tree={$srow['gedcom']}\">" . uiTextSnippet('family') . ": " . getFamilyName($srow) . "</a>";
+      $sourcelinktext .= "<a href=\"familiesShowFamily.php?familyID=$srow[familyID]&amp;tree={$srow['gedcom']}\">" . uiTextSnippet('family') . ": " . getFamilyName($srow) . "</a>";
     }
     if ($numrows >= $maxsearchresults) {
       $sourcelinktext .= "\n[<a href=\"showsource.php?sourceID=$sourceID&amp;tree=$tree&amp;ioffset=$ioffset&amp;foffset=" . ($newfoffset + $maxsearchresults) . "\">" . uiTextSnippet('morefam') . "</a>]";

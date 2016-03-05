@@ -128,8 +128,8 @@ $headSection->setTitle(uiTextSnippet('review'));
     } else {
       $hmsg = 'families';
       
-      $navList->appendItem([true, "admin_families.php", uiTextSnippet('search'), "findperson"]);
-      $navList->appendItem([$allow_add, "admin_newfamily.php", uiTextSnippet('addnew'), "addfamily"]);
+      $navList->appendItem([true, "familiesBrowse.php", uiTextSnippet('browse'), "findperson"]);
+      $navList->appendItem([$allow_add, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
       $navList->appendItem([$allow_edit, "admin_findreview.php?type=F", uiTextSnippet('review'), "review"]);
     }
     echo $navList->build("review");

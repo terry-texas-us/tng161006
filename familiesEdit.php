@@ -105,10 +105,10 @@ $headSection->setTitle(uiTextSnippet('modifyfamily'));
 
     echo $adminHeaderSection->build('families-modifyfamily', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_families.php", uiTextSnippet('search'), "findfamily"]);
-    $navList->appendItem([$allow_add, "admin_newfamily.php", uiTextSnippet('addnew'), "addfamily"]);
+    $navList->appendItem([true, "familiesBrowse.php", uiTextSnippet('browse'), "findfamily"]);
+    $navList->appendItem([$allow_add, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
     $navList->appendItem([$allow_edit, "admin_findreview.php?type=F", uiTextSnippet('review') . $revstar, "review"]);
-    $navList->appendItem([$allow_edit, "admin_editfamily.php?familyID=$familyID&tree=$tree", uiTextSnippet('edit'), "edit"]);
+    $navList->appendItem([$allow_edit, "familiesEdit.php?familyID=$familyID&tree=$tree", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <br>
@@ -120,7 +120,7 @@ $headSection->setTitle(uiTextSnippet('modifyfamily'));
           <?php
           if ($editconflict) {
             echo "<br><p>" . uiTextSnippet('editconflict') . "</p>\n";
-            echo "<p><strong><a href='admin_editfamily.php?familyID=$familyID&tree=$tree'>" . uiTextSnippet('retry') . "</a></strong></p>\n";
+            echo "<p><strong><a href='familiesEdit.php?familyID=$familyID&tree=$tree'>" . uiTextSnippet('retry') . "</a></strong></p>\n";
           } else {
             $iconColor = $gotassoc ? "icon-info" : "icon-muted";
             echo "<a id='family-associations' href='#' data-family-id='$familyID' data-tree='$tree' title='" . uiTextSnippet('associations') . "'>\n";
@@ -142,7 +142,7 @@ $headSection->setTitle(uiTextSnippet('modifyfamily'));
       </div>
     </header>
     <br>
-    <a href="familygroup.php?familyID=<?php echo $familyID; ?>&amp;tree=<?php echo $tree; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
+    <a href="familiesShowFamily.php?familyID=<?php echo $familyID; ?>&amp;tree=<?php echo $tree; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
       <img class='icon-sm' src='svg/eye.svg'>
     </a>
     <?php if ($allow_add && (!$assignedtree || $assignedtree == $tree)) { ?>
@@ -152,7 +152,7 @@ $headSection->setTitle(uiTextSnippet('modifyfamily'));
       <a id='expandall' href='#'><?php echo uiTextSnippet('expandall'); ?></a>
       <a id='collapseall' href='#'><?php echo uiTextSnippet('collapseall'); ?></a>
     </div>
-    <form id='form1' name='form1' action='admin_updatefamily.php' method='post'>
+    <form id='form1' name='form1' action='familiesEditFormAction.php' method='post'>
       <table class='table table-sm'>
         <?php
         if (!$editconflict) {

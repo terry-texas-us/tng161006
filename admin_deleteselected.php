@@ -41,7 +41,7 @@ if ($xsrcaction) {
   $query = "DELETE FROM $families_table WHERE 1=0";
   $modmsg = "families";
   $id = "ID";
-  $location = "admin_families.php";
+  $location = "familiesBrowse.php";
 } elseif ($xplacaction) {
   $query = "DELETE FROM $places_table WHERE 1=0";
   $modmsg = "places";

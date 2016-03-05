@@ -1273,7 +1273,7 @@ function formatAssoc($assoc) {
     if (!$assocstr) {
       $assocstr = $assoc['passocID'];
     }
-    $assocstr = "<a href=\"familygroup.php?familyID={$assoc['passocID']}&amp;tree=$tree\">" . uiTextSnippet('family') . ": $assocstr</a>";
+    $assocstr = "<a href=\"familiesShowFamily.php?familyID={$assoc['passocID']}&amp;tree=$tree\">" . uiTextSnippet('family') . ": $assocstr</a>";
   }
   $assocstr .= $assoc['relationship'] ? " (" . uiTextSnippet('relationship2') . ": {$assoc['relationship']})" : "";
 

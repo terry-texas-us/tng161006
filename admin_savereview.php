@@ -159,7 +159,7 @@ if ($choice != uiTextSnippet('postpone')) {
 
 if ($succmsg) {
   if ($row['type'] == 'F') {
-    adminwritelog("<a href=\"admin_editfamily.php?familyID=$family&tree=$tree\">$choice (" . uiTextSnippet('family') . "): $tree/{$row['familyID']}</a>");
+    adminwritelog("<a href=\"familiesEdit.php?familyID=$family&tree=$tree\">$choice (" . uiTextSnippet('family') . "): $tree/{$row['familyID']}</a>");
   } else {
     adminwritelog("<a href=\"peopleEdit.php?personID=$personID&tree=$tree\">$choice (" . uiTextSnippet('person') . "): $tree/{$row['personID']}</a>");
   }

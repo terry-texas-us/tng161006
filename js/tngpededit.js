@@ -145,7 +145,7 @@ function updateFamily(form, slot, script) {
                 dataType: 'html',
                 success: function (req) {
                     addNewPeople(req);
-                    if (script === "admin_addfamily.php")
+                    if (script === "familiesAddFormAction.php")
                         people[form.lastperson.value].famc = startfam;
                     else {
                         var notfound = true;
@@ -264,7 +264,7 @@ function validateFamily(form, slot) {
         alert(textSnippet('enterfamilyid'));
         return false;
     }
-    return updateFamily(form, slot, 'admin_addfamily.php');
+    return updateFamily(form, slot, 'familiesAddFormAction.php');
 }
 
 function validatePerson(form) {

@@ -38,7 +38,7 @@ while ($row = tng_fetch_assoc($brresult)) {
   $row['allow_living'] = $rights['living'];
   $row['allow_private'] = $rights['private'];
 
-  $names .= "<a href=\"admin_editfamily.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}&amp;cw=1\" target='_blank'>" . getFamilyName($row) . "</a><br>\n";
+  $names .= "<a href=\"familiesEdit.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}&amp;cw=1\" target='_blank'>" . getFamilyName($row) . "</a><br>\n";
   $fcounter++;
 }
 tng_free_result($brresult);

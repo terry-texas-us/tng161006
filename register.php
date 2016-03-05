@@ -167,7 +167,7 @@ $headSection->setTitle($row['name']);
             } else {
               echo " $spparents";
             }
-            echo " [<a href=\"familygroup.php?familyID={$spouserow['familyID']}&amp;tree=$tree\">" . uiTextSnippet('groupsheet') . "</a>]</p>\n";
+            echo " [<a href=\"familiesShowFamily.php?familyID={$spouserow['familyID']}&amp;tree=$tree\">" . uiTextSnippet('groupsheet') . "</a>]</p>\n";
 
             if ($pedigree['regnotes']) {
               if ($famrights['both']) {

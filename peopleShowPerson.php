@@ -377,7 +377,7 @@ $headSection->setTitle($headTitle);
             }
           }
         }
-        $persontext .= showEvent(array("text" => uiTextSnippet('familyid'), "date" => $parent['familyID'], "place" => "<a href=\"familygroup.php?familyID={$parent['familyID']}&amp;tree=$tree\">" . uiTextSnippet('groupsheet') . "</a>", "np" => 1));
+        $persontext .= showEvent(array("text" => uiTextSnippet('familyid'), "date" => $parent['familyID'], "place" => "<a href=\"familiesShowFamily.php?familyID={$parent['familyID']}&amp;tree=$tree\">" . uiTextSnippet('groupsheet') . "</a>", "np" => 1));
         $persontext .= "</table>\n";
         $persontext .= "<br>\n";
       }
@@ -546,11 +546,11 @@ $headSection->setTitle($headTitle);
           if ($marriagerow['changedate']) {
             $marriagerow['changedate'] .= " | ";
           }
-          $marriagerow['changedate'] .= "<a href=\"admin_editfamily.php?familyID={$marriagerow['familyID']}&amp;tree=$tree&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>";
+          $marriagerow['changedate'] .= "<a href=\"familiesEdit.php?familyID={$marriagerow['familyID']}&amp;tree=$tree&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>";
         }
         $persontext .= showEvent(array("text" => uiTextSnippet('lastmodified'), "fact" => $marriagerow['changedate']));
       }
-      $persontext .= showEvent(array("text" => uiTextSnippet('familyid'), "date" => $marriagerow['familyID'], "place" => "<a href=\"familygroup.php?familyID={$marriagerow['familyID']}&amp;tree=$tree\">" . uiTextSnippet('groupsheet') . "</a>", "np" => 1));
+      $persontext .= showEvent(array("text" => uiTextSnippet('familyid'), "date" => $marriagerow['familyID'], "place" => "<a href=\"familiesShowFamily.php?familyID={$marriagerow['familyID']}&amp;tree=$tree\">" . uiTextSnippet('groupsheet') . "</a>", "np" => 1));
       $persontext .= "</table>\n";
       $persontext .= "<br>\n";
     }

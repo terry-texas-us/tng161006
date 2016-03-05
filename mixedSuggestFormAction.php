@@ -67,7 +67,7 @@ if ($enttype == 'I') {
   $row['allow_private'] = $rights['private'];
 
   $name = uiTextSnippet('family') . ": " . getFamilyName($row);
-  $pagelink = "$tngwebsite/" . "familygroup.php?familyID=$ID&tree=$tree";
+  $pagelink = "$tngwebsite/" . "familiesShowFamily.php?familyID=$ID&tree=$tree";
   tng_free_result($result);
 } elseif ($enttype == 'S') {
   $query = "SELECT title FROM $sources_table WHERE sourceID = \"$ID\" AND gedcom = \"$tree\"";

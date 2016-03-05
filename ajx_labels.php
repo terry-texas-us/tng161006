@@ -258,7 +258,7 @@ function setFamilyLabel($personID, $gender) {
     while ($row = tng_fetch_assoc($result)) {
       $oldbranch = trim($row['branch']);
       if (!in_array($row['familyID'], $fdone)) {
-        $famnames .= "<a href=\"admin_editfamily.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}&amp;cw=1\" target='_blank'>" . getFamilyName($row) . "</a><br>\n";
+        $famnames .= "<a href=\"familiesEdit.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}&amp;cw=1\" target='_blank'>" . getFamilyName($row) . "</a><br>\n";
       }
       if ($branchaction == "delete") {
         $query = "DELETE FROM $families_table WHERE familyID = \"{$row['familyID']}\" AND gedcom = \"$tree\"";

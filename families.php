@@ -8,7 +8,7 @@ function buildFamilyMenu($currpage, $familyId) {
   
   $menu = '';
   if ($allow_edit && $rightbranch) {
-    $menu .= "<a id='a0' href='admin_editfamily.php?familyID=$familyId&amp;tree=$tree&amp;cw=1' title='" . uiTextSnippet('edit') . "'>\n";
+    $menu .= "<a id='a0' href='familiesEdit.php?familyID=$familyId&amp;tree=$tree&amp;cw=1' title='" . uiTextSnippet('edit') . "'>\n";
       $menu .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
     $menu .= "</a>\n";
   } elseif ($emailaddr && $currpage != 'suggest') {

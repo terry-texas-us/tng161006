@@ -180,7 +180,7 @@ function doMedia($mediatypeID) {
           $hstext = $deathdate ? " ($abbrev " . displayDate($deathdate) . ")" : "";
         }
       } elseif ($prow['familyID'] != null) {
-        $medialinktext .= "<li><a href=\"familygroup.php?familyID={$prow['familyID']}&amp;tree={$prow['gedcom']}\">" . uiTextSnippet('family') . ": " . getFamilyName($prow);
+        $medialinktext .= "<li><a href=\"familiesShowFamily.php?familyID={$prow['familyID']}&amp;tree={$prow['gedcom']}\">" . uiTextSnippet('family') . ": " . getFamilyName($prow);
       } elseif ($prow['sourceID'] != null) {
         $sourcetext = $prow['title'] ? uiTextSnippet('source') . ": " . $prow['title'] : uiTextSnippet('source') . ": " . $prow['sourceID'];
         $medialinktext .= "<li><a href=\"showsource.php?sourceID={$prow['sourceID']}&amp;tree={$prow['gedcom']}\">$sourcetext";

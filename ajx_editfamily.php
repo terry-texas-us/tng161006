@@ -102,7 +102,7 @@ $righttree = checktree($tree);
 
 include_once("eventlib.php");
 ?>
-<form id='famform1' name='famform1' action='' method='post' onsubmit="return updateFamily(this, <?php echo $slot; ?>, 'admin_updatefamily.php');">
+<form id='famform1' name='famform1' action='' method='post' onsubmit="return updateFamily(this, <?php echo $slot; ?>, 'familiesEditFormAction.php');">
   <header class='modal-header'>
     <div id='thumbholder' style="margin-right: 5px; <?php if (!$photo) {echo "display: none";} ?>">
       <?php echo $photo; ?>

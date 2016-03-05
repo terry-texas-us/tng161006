@@ -74,8 +74,8 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
     <?php
     echo $adminHeaderSection->build('families-addnewfamily', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_families.php", uiTextSnippet('search'), "findfamily"]);
-    $navList->appendItem([$allow_add, "admin_newfamily.php", uiTextSnippet('addnew'), "addfamily"]);
+    $navList->appendItem([true, "familiesBrowse.php", uiTextSnippet('browse'), "findfamily"]);
+    $navList->appendItem([$allow_add, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
     $navList->appendItem([$allow_edit, "admin_findreview.php?type=F", uiTextSnippet('review') . $revstar, "review"]);
     echo $navList->build("addfamily");
     ?>
@@ -83,7 +83,7 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
       <a href='#' onClick="toggleAll('on');"><?php echo uiTextSnippet('expandall'); ?></a>
       <a href='#' onClick="toggleAll('off');"><?php echo uiTextSnippet('collapseall'); ?></a>
     </div>
-    <form name='form1' action='admin_addfamily.php' method='post' onSubmit="return validateFamily(this);">
+    <form name='form1' action='familiesAddFormAction.php' method='post' onSubmit="return validateFamily(this);">
       <input name='lastperson' type='hidden' value="<?php echo $child; ?>">
       <table class='table table-sm'>
         <tr>

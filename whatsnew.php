@@ -207,7 +207,7 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
             //look up wife
             echo "<tr>\n";
               echo "<td>\n";
-                echo "<a href=\"familygroup.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}\">{$row['familyID']}</a>\n";
+                echo "<a href=\"familiesShowFamily.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}\">{$row['familyID']}</a>\n";
               echo "</td>\n";
               echo "<td>\n";
                 echo "<a href=\"peopleShowPerson.php?personID={$row['husband']}&amp;tree={$row['gedcom']}\">{$row['husband']}</a>\n";

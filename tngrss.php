@@ -97,7 +97,7 @@ function doMedia($mediatypeID) {
           $hstext = $deathdate ? " ($abbrev " . displayDate($deathdate) . ")" : "";
         }
       } elseif ($prow['familyID'] != null) {
-        $medialink = "familygroup.php?familyID={$prow['familyID']}&amp;tree={$prow['gedcom']}";
+        $medialink = "familiesShowFamily.php?familyID={$prow['familyID']}&amp;tree={$prow['gedcom']}";
         $mediatext = uiTextSnippet('family') . ": " . getFamilyName($prow);
       } elseif ($prow['sourceID'] != null) {
         $mediatext = $prow['title'] ? uiTextSnippet('source') . ": {$prow['title']}" : uiTextSnippet('source') . ": {$prow['sourceID']}";
@@ -310,7 +310,7 @@ if (!$personID) {
 
       $item = "\n<item>\n";
       $item .= "<title>" . xmlcharacters(uiTextSnippet('family') . ": " . getFamilyName($row)) . "</title>\n";
-      $item .= "<link>" . "$tngdomain/familygroup.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}$langstr" . "</link>\n";
+      $item .= "<link>" . "$tngdomain/familiesShowFamily.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}$langstr" . "</link>\n";
       $item .= "<description>";
 
       $item .= displayDate($row['marrdate']);

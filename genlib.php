@@ -170,8 +170,8 @@ function tng_menu($enttype, $currpage, $entityID) {
     }
     $editstr = "peopleEdit.php?person";
   } elseif ($enttype == 'F') {
-    $menu .= doMenuItem($nexttab++, "familygroup.php?familyID=$entityID&amp;tree=$tree", "svg/users.svg", uiTextSnippet('family'), $currpage, "family");
-    $editstr = "admin_editfamily.php?family";
+    $menu .= doMenuItem($nexttab++, "familiesShowFamily.php?familyID=$entityID&amp;tree=$tree", "svg/users.svg", uiTextSnippet('family'), $currpage, "family");
+    $editstr = "familiesEdit.php?family";
   } elseif ($enttype == 'S') {
     $menu .= doMenuItem($nexttab++, "showsource.php?sourceID=$entityID&amp;tree=$tree", "svg/folder.svg", uiTextSnippet('source'), $currpage, "source");
     $editstr = "admin_editsource.php?source";
