@@ -7,10 +7,10 @@ require 'personlib.php';
 function doMediaSearch($instance, $pagenav) {
   global $mediasearch;
 
-  $str = buildFormElement("browsealbums", "get", "MediaSearch$instance");
+  $str = buildFormElement("albumsShow", "get", "MediaSearch$instance");
   $str .= "<input name='mediasearch' type='text' value=\"$mediasearch\"> \n";
   $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . "\" /> \n";
-  $str .= "<input type='button' value=\"" . uiTextSnippet('tng_reset') . "\" onclick=\"window.location.href='browsealbums.php';\" />&nbsp;&nbsp;&nbsp;";
+  $str .= "<input type='button' value=\"" . uiTextSnippet('tng_reset') . "\" onclick=\"window.location.href='albumsShow.php';\" />&nbsp;&nbsp;&nbsp;";
   $str .= $pagenav;
   $str .= "</form>\n";
 
@@ -58,7 +58,7 @@ $treestr = $tree ? " " . uiTextSnippet('tree') . ": $tree" : "";
 $treestr = trim("$mediasearch $treestr");
 $treestr = $treestr ? " ($treestr)" : "";
 
-$logstring = "<a href=\"browsealbums.php?" . "tree=$tree&amp;offset=$offset&amp;mediasearch=$mediasearch\">" . uiTextSnippet('allalbums') . "$treestr</a>";
+$logstring = "<a href=\"albumsShow.php?" . "tree=$tree&amp;offset=$offset&amp;mediasearch=$mediasearch\">" . uiTextSnippet('allalbums') . "$treestr</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -77,12 +77,12 @@ $headSection->setTitle(uiTextSnippet('albums'));
     <h2><img class='icon-md' src='svg/album.svg'><?php echo uiTextSnippet('albums'); ?></h2>
     <br clear='all'>
     <?php
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'browsealbums', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
+    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'albumsShow', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
 
     if ($totrows) {
       echo "<p>" . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</p>";
     }
-    $pagenav = buildSearchResultPagination($totrows, "browsealbums.php?" . "mediasearch=$mediasearch&amp;offset", $maxsearchresults, $max_browsemedia_pages);
+    $pagenav = buildSearchResultPagination($totrows, "albumsShow.php?" . "mediasearch=$mediasearch&amp;offset", $maxsearchresults, $max_browsemedia_pages);
     echo doMediaSearch(1, $pagenav);
     echo "<br>\n";
     ?>
@@ -202,7 +202,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
           $description = $row['description'];
           if ($showAlbumInfo) {
             $imgsrc = getAlbumPhoto($row['albumID'], $row['albumname']);
-            $alblink = "<a href=\"showalbum.php?albumID={$row['albumID']}\">{$row['albumname']}</a>";
+            $alblink = "<a href=\"albumsShowAlbum.php?albumID={$row['albumID']}\">{$row['albumname']}</a>";
           } else {
             $imgsrc = "";
             $alblink = uiTextSnippet('living');

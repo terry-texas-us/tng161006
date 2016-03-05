@@ -27,4 +27,4 @@ $albumID = tng_insert_id();
 
 adminwritelog(uiTextSnippet('addnewalbum') . ": $albumname");
 
-header("Location: admin_editalbum.php?albumID=$albumID&added=1");
+header("Location: albumsEdit.php?albumID=$albumID&added=1");

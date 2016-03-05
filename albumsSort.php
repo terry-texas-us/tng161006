@@ -30,12 +30,12 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
     <?php
     echo $adminHeaderSection->build('albums-text_sort', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_albums.php", uiTextSnippet('search'), "findalbum"]);
-    $navList->appendItem([$allow_add, "admin_newalbum.php", uiTextSnippet('addnew'), "addalbum"]);
-    $navList->appendItem([$allow_edit, "admin_orderalbumform.php", uiTextSnippet('text_sort'), "sortalbums"]);
+    $navList->appendItem([true, "albumsBrowse.php", uiTextSnippet('browse'), "findalbum"]);
+    $navList->appendItem([$allow_add, "albumsAdd.php", uiTextSnippet('add'), "addalbum"]);
+    $navList->appendItem([$allow_edit, "albumsSort.php", uiTextSnippet('text_sort'), "sortalbums"]);
     echo $navList->build("sortalbums");
     ?>
-    <form action="admin_orderalbums.php" method='post' name="find" onsubmit="return validateSortForm();">
+    <form name='find' action='albumsSortFormAction.php' method='post' onsubmit="return validateSortForm();">
       <h4><?php echo uiTextSnippet('sortalbumind'); ?></h4>
       <table class='table table-sm'>
         <thead>

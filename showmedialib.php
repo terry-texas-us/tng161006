@@ -242,7 +242,7 @@ function getMediaNavigation($mediaID, $personID, $albumlinkID, $result, $showlin
     }
     if ($albumlinkID) {
       $offset = floor($page / $maxsearchresults) * $maxsearchresults;
-      $pagenav .= "<a href=\"showalbum.php?albumID=$albumID&amp;offset=$offset&amp;tngpage=$pagenum&amp;tnggallery=$tnggallery\">&raquo; $albumname</a>  &nbsp;&nbsp;&nbsp;";
+      $pagenav .= "<a href=\"albumsShowAlbum.php?albumID=$albumID&amp;offset=$offset&amp;tngpage=$pagenum&amp;tnggallery=$tnggallery\">&raquo; $albumname</a>  &nbsp;&nbsp;&nbsp;";
     } elseif (!$personID) {
       $offset = floor($page / $maxsearchresults) * $maxsearchresults;
       $pagenav .= "<a href=\"mediaShow.php?" . $showall . "offset=$offset&amp;tngpage=$pagenum&amp;tnggallery=$tnggallery\">&raquo; " . uiTextSnippet('showall') . "</a>  &nbsp;&nbsp;&nbsp;";
@@ -316,7 +316,7 @@ function getAlbumLinkText($mediaID) {
     if ($albumlinktext) {
       $albumlinktext .= ", ";
     }
-    $albumlinktext .= "<a href=\"showalbum.php?albumID={$row['albumID']}\">" . $row['albumname'] . "</a>";
+    $albumlinktext .= "<a href=\"albumsShowAlbum.php?albumID={$row['albumID']}\">" . $row['albumname'] . "</a>";
   }
   tng_free_result($result);
 

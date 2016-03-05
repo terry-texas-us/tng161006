@@ -81,7 +81,7 @@ function getAlbumPhoto($albumID, $albumname) {
     if (!$foundliving && !$foundprivate) {
       $size = getimagesize("$rootpath$tusefolder/{$trow['thumbpath']}");
       $imgsrc = "<div class=\"media-img\"><div class=\"media-prev\" id=\"prev$albumID\" style=\"display:none\"></div></div>\n";
-      $imgsrc .= "<a href=\"showalbum.php?albumID=$albumID\" title=\"" . uiTextSnippet('albclicksee') . "\"";
+      $imgsrc .= "<a href=\"albumsShowAlbum.php?albumID=$albumID\" title=\"" . uiTextSnippet('albclicksee') . "\"";
       if (function_exists(imageJpeg)) {
         $imgsrc .= " onmouseover=\"showPreview('$albumID','" . urlencode("$tusefolder/{$trow['path']}") . "','');\" onmouseout=\"closePreview('$albumID','');\" onclick=\"closePreview('$albumID','');\"";
       }

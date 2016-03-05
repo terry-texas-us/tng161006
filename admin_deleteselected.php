@@ -26,7 +26,7 @@ if ($xsrcaction) {
   $query = "DELETE FROM $sources_table WHERE 1=0";
   $modmsg = "sources";
   $id = "ID";
-  $location = "admin_sources.php";
+  $location = "sourcesBrowse.php";
 } elseif ($xrepoaction) {
   $query = "DELETE FROM $repositories_table WHERE 1=0";
   $modmsg = "repositories";

@@ -858,7 +858,7 @@ function getAlbums($entity, $linktype) {
 
     if (!$foundliving && !$foundprivate) {
       $thisalbum['imgsrc'] = getAlbumPhoto($albumlink['albumID'], $albumlink['albumname']);
-      $thisalbum['name'] = "<a href=\"showalbum.php?albumID={$albumlink['albumID']}\">{$albumlink['albumname']}</a> ({$arow['acount']})";
+      $thisalbum['name'] = "<a href=\"albumsShowAlbum.php?albumID={$albumlink['albumID']}\">{$albumlink['albumname']}</a> ({$arow['acount']})";
       $thisalbum['description'] = $albumlink['description'];
     } else {
       $thisalbum['imgsrc'] = "";
@@ -1156,7 +1156,7 @@ function getAlbumPhoto($albumID, $albumname) {
       $imgsrc = "<div class=\"media-img\">";
       $imgsrc .= "<div class=\"media-prev\" id=\"prev$albumID\" style=\"display:none\"></div>";
       $imgsrc .= "</div>\n";
-      $imgsrc .= "<a href=\"showalbum.php?albumID=$albumID\" title=\"" . uiTextSnippet('albclicksee') . "\"";
+      $imgsrc .= "<a href=\"albumsShowAlbum.php?albumID=$albumID\" title=\"" . uiTextSnippet('albclicksee') . "\"";
       if (function_exists(imageJpeg)) {
         $imgsrc .= " class=\"media-preview\" id=\"img-{$albumID}-0-" . urlencode("$tusefolder/{$trow['path']}") . "\"";
       }

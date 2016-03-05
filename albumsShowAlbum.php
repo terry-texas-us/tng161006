@@ -7,7 +7,7 @@ include("checklogin.php");
 include("functions.php");
 include("log.php");
 
-require_once("albumlib.php");
+require_once 'albums.php';
 
 $flags['imgprev'] = true;
 
@@ -97,7 +97,7 @@ function getAlbumLinkText($albumID) {
   }
   tng_free_result($presult);
   if ($numrows > $maxsearchresults) {
-    $links .= "\n[<a href=\"showalbum.php?albumID=$albumID&amp;ioffset=" . ($newioffset + $maxsearchresults) . "\">" . uiTextSnippet('morelinks') . "</a>]";
+    $links .= "\n[<a href=\"albumsShowAlbum.php?albumID=$albumID&amp;ioffset=" . ($newioffset + $maxsearchresults) . "\">" . uiTextSnippet('morelinks') . "</a>]";
   }
 
   return $links;
@@ -124,9 +124,9 @@ if ($tnggallery) {
   }
   $maxsearchresults *= 2;
   $wherestr .= " AND thumbpath != \"\"";
-  $gallerymsg = "<a href=\"showalbum.php?albumID=$albumID\">&raquo; " . uiTextSnippet('regphotos') . "</a>&nbsp;";
+  $gallerymsg = "<a href=\"albumsShowAlbum.php?albumID=$albumID\">&raquo; " . uiTextSnippet('regphotos') . "</a>&nbsp;";
 } else {
-  $gallerymsg = "<a href=\"showalbum.php?albumID=$albumID&amp;tnggallery=1\">&raquo; " . uiTextSnippet('gallery') . "</a>&nbsp;";
+  $gallerymsg = "<a href=\"albumsShowAlbum.php?albumID=$albumID&amp;tnggallery=1\">&raquo; " . uiTextSnippet('gallery') . "</a>&nbsp;";
 }
 
 $_SESSION['tng_gallery'] = $tnggallery;
@@ -199,7 +199,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 }
 $numrowsplus = $numrows + $offset;
 
-$logstring = "<a href=\"showalbum.php?albumID=$albumID\">$albumname</a>";
+$logstring = "<a href=\"albumsShowAlbum.php?albumID=$albumID\">$albumname</a>";
 writelog($logstring);
 preparebookmark($logstring);
 ?>
@@ -217,14 +217,14 @@ preparebookmark($logstring);
       echo tng_DrawHeading($imgsrc, $albumname, $description);
     }
     $hiddenfields[0] = array('name' => 'albumID', 'value' => $albumID);
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'showalbum', 'method' => 'get', 'name' => 'form1', 'id' => 'form1', 'hidden' => $hiddenfields));
+    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'albumsShowAlbum', 'method' => 'get', 'name' => 'form1', 'id' => 'form1', 'hidden' => $hiddenfields));
 
     $toplinks = "<p>";
     $toplinks .= $totrows ? uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows &nbsp;&nbsp; " : "";
     $toplinks .= $gallerymsg;
-    $toplinks .= $allow_admin && $allow_edit ? "<a href=\"admin_editalbum.php?albumID=$albumID&amp;cw=1\" target='_blank'>&raquo; " . uiTextSnippet('editalbum') . "</a> " : "";
+    $toplinks .= $allow_admin && $allow_edit ? "<a href=\"albumsEdit.php?albumID=$albumID&amp;cw=1\" target='_blank'>&raquo; " . uiTextSnippet('editalbum') . "</a> " : "";
 
-    $pagenav = buildSearchResultPagination($totrows, "showalbum.php?albumID=$albumID&amp;tnggallery=$tnggallery&amp;offset", $maxsearchresults, $max_browsemedia_pages);
+    $pagenav = buildSearchResultPagination($totrows, "albumsShowAlbum.php?albumID=$albumID&amp;tnggallery=$tnggallery&amp;offset", $maxsearchresults, $max_browsemedia_pages);
     $preheader = $pagenav . "</p>\n";
 
     if ($tnggallery) {

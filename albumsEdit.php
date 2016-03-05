@@ -89,9 +89,9 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
     <?php
     echo $adminHeaderSection->build('albums-modifyalbum', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_albums.php", uiTextSnippet('search'), "findalbum"]);
-    $navList->appendItem([$allow_add, "admin_newalbum.php", uiTextSnippet('addnew'), "addalbum"]);
-    $navList->appendItem([$allow_edit, "admin_orderalbumform.php", uiTextSnippet('text_sort'), "sortalbums"]);
+    $navList->appendItem([true, "albumsBrowse.php", uiTextSnippet('browse'), "findalbum"]);
+    $navList->appendItem([$allow_add, "albumsAdd.php", uiTextSnippet('add'), "addalbum"]);
+    $navList->appendItem([$allow_edit, "albumsSort.php", uiTextSnippet('text_sort'), "sortalbums"]);
     $navList->appendItem([$allow_edit, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
@@ -100,7 +100,7 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
       <a href='#' onClick="toggleAll('off');"><?php echo uiTextSnippet('collapseall'); ?></a>
     </div>
 
-    <form action="admin_updatealbum.php" method='post' name='form1' id='form1' onSubmit="return validateForm();">
+    <form action="albumsEditFormAction.php" method='post' name='form1' id='form1' onSubmit="return validateForm();">
       <div>
         <div id="thumbholder" style="float: left; <?php if (!$photo) {echo "display: none";} ?>">
           <?php echo $photo; ?>

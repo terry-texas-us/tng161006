@@ -93,12 +93,12 @@ $headSection->setTitle(uiTextSnippet('administration'));
       if ($allow_edit || $allow_add || $allow_delete) {
         echo adminMenuItem("peopleBrowse.php", uiTextSnippet('people'), $peoplemsg, "svg/person.svg");
         echo adminMenuItem("familiesBrowse.php", uiTextSnippet('families'), $familiesmsg, "svg/people.svg");
-        echo adminMenuItem("admin_sources.php", uiTextSnippet('sources'), $sourcesmsg, "svg/archive.svg");
+        echo adminMenuItem("sourcesBrowse.php", uiTextSnippet('sources'), $sourcesmsg, "svg/archive.svg");
         echo adminMenuItem("repositoriesBrowse.php", uiTextSnippet('repositories'), $sourcesmsg, "svg/building.svg");
       }
       if ($allow_edit || $allow_add || $allow_delete || $allow_media_add || $allow_media_edit || $allow_media_delete) {
         echo adminMenuItem("mediaBrowse.php", uiTextSnippet('media'), $mediamsg, "svg/media-mixed.svg");
-        echo adminMenuItem("admin_albums.php", uiTextSnippet('albums'), $mediamsg, "svg/album.svg");
+        echo adminMenuItem("albumsBrowse.php", uiTextSnippet('albums'), $mediamsg, "svg/album.svg");
       }
       if ($allow_edit || $allow_add || $allow_delete) {
         echo adminMenuItem("admin_cemeteries.php", uiTextSnippet('cemeteries'), $cemeteriesmsg, "svg/headstone.svg");

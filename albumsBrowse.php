@@ -80,9 +80,9 @@ $headSection->setTitle(uiTextSnippet('albums'));
     <?php
     echo $adminHeaderSection->build('albums', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_albums.php", uiTextSnippet('search'), "findalbum"]);
-    $navList->appendItem([$allow_media_add, "admin_newalbum.php", uiTextSnippet('addnew'), "addalbum"]);
-    $navList->appendItem([$allow_media_edit, "admin_orderalbumform.php", uiTextSnippet('text_sort'), "sortalbums"]);
+//    $navList->appendItem([true, "albumsBrowse.php", uiTextSnippet('browse'), "findalbum"]);
+    $navList->appendItem([$allow_media_add, "albumsAdd.php", uiTextSnippet('add'), "addalbum"]);
+    $navList->appendItem([$allow_media_edit, "albumsSort.php", uiTextSnippet('text_sort'), "sortalbums"]);
     echo $navList->build("findalbum");
     ?>
     <table class='table table-sm'>
@@ -110,7 +110,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
                 <?php
                 $actionstr = "";
                 if ($allow_media_edit) {
-                  $actionstr .= "<a href='admin_editalbum.php?albumID=xxx' title='" . uiTextSnippet('edit') . "'>\n";
+                  $actionstr .= "<a href='albumsEdit.php?albumID=xxx' title='" . uiTextSnippet('edit') . "'>\n";
                   $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
                   $actionstr .= "</a>\n";
                 }
@@ -119,7 +119,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
                   $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
                   $actionstr .= "</a>\n";
                 }
-                $actionstr .= "<a href=\"" . "showalbum.php?albumID=xxx\" title='" . uiTextSnippet('preview') . "'>\n";
+                $actionstr .= "<a href=\"" . "albumsShowAlbum.php?albumID=xxx\" title='" . uiTextSnippet('preview') . "'>\n";
                 $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
                 $actionstr .= "</a>\n";
 
@@ -141,7 +141,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
 
                   if ($trow['thumbpath'] && file_exists("$rootpath$tusefolder/" . $trow['thumbpath'])) {
                     $size = getimagesize("$rootpath$tusefolder/" . $trow['thumbpath']);
-                    echo "<a href=\"admin_editalbum.php?albumID={$row['albumID']}\"><img src=\"$tusefolder/" . str_replace("%2F", "/", rawurlencode($trow['thumbpath'])) . "\" $size[3] alt=\"{$row['albumname']}\"></a>\n";
+                    echo "<a href=\"albumsEdit.php?albumID={$row['albumID']}\"><img src=\"$tusefolder/" . str_replace("%2F", "/", rawurlencode($trow['thumbpath'])) . "\" $size[3] alt=\"{$row['albumname']}\"></a>\n";
                   } else {
                     echo "&nbsp;";
                   }
@@ -153,7 +153,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
                   $acount = $crow['acount'];
                   tng_free_result($cresult);
 
-                  $editlink = "admin_editalbum.php?albumID={$row['albumID']}";
+                  $editlink = "albumsEdit.php?albumID={$row['albumID']}";
                   $albumname = $allow_edit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['albumname'] . "</a>" : "<u>" . $row['albumname'] . "</u>";
 
                   echo "<td>$albumname<br>" . strip_tags($row['description']) . "&nbsp;</td>\n";
@@ -192,7 +192,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
                 ?>
               </table>
               <?php
-              echo buildSearchResultPagination($totrows, "admin_albums.php?searchstring=$searchstring&amp;exactmatch=$exactmatch&amp;offset", $maxsearchresults, 5);
+              echo buildSearchResultPagination($totrows, "albumsBrowse.php?searchstring=$searchstring&amp;exactmatch=$exactmatch&amp;offset", $maxsearchresults, 5);
             } else {
               echo "<div class='alert alert-warning'>" . uiTextSnippet('norecords') . "</div>\n";
             }

@@ -25,7 +25,7 @@ $result = tng_query($query);
 adminwritelog(uiTextSnippet('modifyalbum') . ": $albumID");
 
 if ($newscreen == "return") {
-  header("Location: admin_editalbum.php?albumID=$albumID");
+  header("Location: albumsEdit.php?albumID=$albumID");
 } else {
   if ($newscreen == "close") {
   ?>
@@ -40,6 +40,6 @@ if ($newscreen == "return") {
   <?php
   } else {
     $message = uiTextSnippet('changestoalbum') . " $albumID " . uiTextSnippet('succsaved') . '.';
-    header("Location: admin_albums.php?message=" . urlencode($message));
+    header("Location: albumsBrowse.php?message=" . urlencode($message));
   }
 }

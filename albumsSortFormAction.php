@@ -109,7 +109,7 @@ $numrows = tng_num_rows($result);
 
 if (!$numrows) {
   $message = uiTextSnippet('noresults');
-  header("Location: admin_orderalbumform.php?personID=$personID&message=" . urlencode($message));
+  header("Location: albumsSort.php?personID=$personID&message=" . urlencode($message));
   exit;
 }
 header("Content-type: text/html; charset=" . $session_charset);
@@ -122,9 +122,9 @@ $headSection->setTitle(uiTextSnippet($sortstr));
   <?php
   echo $adminHeaderSection->build('albums-text_sort', $message);
   $navList = new navList('');
-  $navList->appendItem([true, "admin_albums.php", uiTextSnippet('search'), "findalbum"]);
-  $navList->appendItem([$allow_add, "admin_newalbum.php", uiTextSnippet('addnew'), "addalbum"]);
-  $navList->appendItem([$allow_edit, "admin_orderalbumform.php", uiTextSnippet('text_sort'), "sortalbums"]);
+  $navList->appendItem([true, "albumsBrowse.php", uiTextSnippet('browse'), "findalbum"]);
+  $navList->appendItem([$allow_add, "albumsAdd.php", uiTextSnippet('add'), "addalbum"]);
+  $navList->appendItem([$allow_edit, "albumsSort.php", uiTextSnippet('text_sort'), "sortalbums"]);
   echo $navList->build("sortalbums");
   ?>
   <table class='table table-sm'>
@@ -175,7 +175,7 @@ $headSection->setTitle(uiTextSnippet($sortstr));
 
               if ($trow['thumbpath'] && file_exists("$rootpath$tusefolder/" . $trow['thumbpath'])) {
                 $size = getimagesize("$rootpath$tusefolder/" . $trow['thumbpath']);
-                echo "<a href=\"admin_editalbum.php?albumID={$row['albumID']}\"><img src=\"$tusefolder/" . str_replace("%2F", "/", rawurlencode($trow['thumbpath'])) . "\" $size[3] alt=\"{$row['albumname']}\"></a>";
+                echo "<a href=\"albumsEdit.php?albumID={$row['albumID']}\"><img src=\"$tusefolder/" . str_replace("%2F", "/", rawurlencode($trow['thumbpath'])) . "\" $size[3] alt=\"{$row['albumname']}\"></a>";
               } else {
                 echo "&nbsp;";
               }

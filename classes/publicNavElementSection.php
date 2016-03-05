@@ -72,7 +72,7 @@ class publicNavElementSection extends navElementSection {
         $tngconfig['menucount']++;
       }
     }
-    $out .= $this->buildListItem("browsealbums.php", "svg/album.svg", "albums");
+    $out .= $this->buildListItem("albumsShow.php", "svg/album.svg", "albums");
     $out .= $this->buildListItem("mediaShow.php", "svg/media-mixed.svg", "allmedia");
     $tngconfig['menucount'] += 2;
 

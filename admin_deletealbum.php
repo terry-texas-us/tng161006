@@ -23,4 +23,4 @@ $result = tng_query($query);
 adminwritelog(uiTextSnippet('deleted') . ": " . uiTextSnippet('album') . " $albumID");
 
 $message = uiTextSnippet('album') . " $albumID " . uiTextSnippet('succdeleted') . ".";
-header("Location: admin_albums.php?message=" . urlencode($message));
+header("Location: albumsBrowse.php?message=" . urlencode($message));
