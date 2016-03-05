@@ -71,7 +71,7 @@ if ($cemeteryID) {
   $location = uiTextSnippet('nocemetery');
 }
 
-$logstring = "<a href=\"showmap.php?cemeteryID=$cemeteryID&amp;tree=$tree\">$location</a>";
+$logstring = "<a href=\"cemeteriesShowCemetery.php?cemeteryID=$cemeteryID&amp;tree=$tree\">$location</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -91,7 +91,7 @@ $headSection->setTitle($location);
     <br clear='all'>
     <?php
     $hiddenfields[] = array('name' => 'cemeteryID', 'value' => $cemeteryID);
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'showmap', 'method' => 'get', 'name' => 'form1', 'id' => 'form1', 'hidden' => $hiddenfields));
+    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'cemeteriesShowCemetery', 'method' => 'get', 'name' => 'form1', 'id' => 'form1', 'hidden' => $hiddenfields));
 
     $infoblock = "";
     $body = "";
@@ -101,7 +101,7 @@ $headSection->setTitle($location);
         $infoblock .= "<img src=\"$headstonepath/{$cemetery['maplink']}\" $imageSize[3] alt=\"{$cemetery['cemname']}\"><br><br>\n";
       }
       if ($allow_admin && $allow_edit) {
-        $infoblock .= "<p><a href=\"admin_editcemetery.php?cemeteryID=$cemeteryID&amp;cw=1\" target='_blank'>" . uiTextSnippet('editcem') . "</a></p>\n";
+        $infoblock .= "<p><a href=\"cemeteriesEdit.php?cemeteryID=$cemeteryID&amp;cw=1\" target='_blank'>" . uiTextSnippet('editcem') . "</a></p>\n";
       }
       if ($cemetery['notes']) {
         $infoblock .= "<p><strong>" . uiTextSnippet('notes') . ":</strong><br>\n" . nl2br(insertLinks($cemetery['notes'])) . "</p>";
@@ -222,7 +222,7 @@ $headSection->setTitle($location);
         $totrows = $numrows;
       }
 
-      $pagenav = buildSearchResultPagination($totrows, "showmap.php?cemeteryID=$cemeteryID&amp;tree=$tree&amp;offset", $maxsearchresults, 5);
+      $pagenav = buildSearchResultPagination($totrows, "cemeteriesShowCemetery.php?cemeteryID=$cemeteryID&amp;tree=$tree&amp;offset", $maxsearchresults, 5);
       if ($pagenav) {
         $body .= "<p>$pagenav</p>";
       }

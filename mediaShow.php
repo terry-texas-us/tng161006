@@ -374,7 +374,7 @@ $headSection->setTitle($titlestr);
             $row['cemname'] = $row['city'];
           }
           $plotstr = $row['plot'] ? "<br>" . nl2br($row['plot']) : "";
-          $mediatext .= "<td width=\"30%\"><a href=\"showmap.php?cemeteryID={$row['cemeteryID']}\">{$row['cemname']}</a>$plotstr&nbsp;</td>\n";
+          $mediatext .= "<td width=\"30%\"><a href=\"cemeteriesShowCemetery.php?cemeteryID={$row['cemeteryID']}\">{$row['cemname']}</a>$plotstr&nbsp;</td>\n";
           $mediatext .= "<td>{$row['status']}</td>\n";
           $mediatext .= "<td width=\"30%\">\n";
         } else {

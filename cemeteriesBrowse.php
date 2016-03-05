@@ -95,15 +95,15 @@ $headSection->setTitle(uiTextSnippet('cemeteries'));
     <?php
     echo $adminHeaderSection->build('cemeteries', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_cemeteries.php", uiTextSnippet('search'), "findcem"]);
-    $navList->appendItem([$allow_add, "admin_newcemetery.php", uiTextSnippet('addnew'), "addcemetery"]);
+//    $navList->appendItem([true, "cemeteriesBrowse.php", uiTextSnippet('browse'), "findcem"]);
+    $navList->appendItem([$allow_add, "cemeteriesAdd.php", uiTextSnippet('add'), "addcemetery"]);
     echo $navList->build("findcem");
     ?>
     <table class='table table-sm'>
       <tr>
         <td>
           <div>
-            <form action="admin_cemeteries.php" name='form1'>
+            <form action="cemeteriesBrowse.php" name='form1'>
               <table>
                 <tr>
                   <td><?php echo uiTextSnippet('searchfor'); ?>:</td>
@@ -160,7 +160,7 @@ $headSection->setTitle(uiTextSnippet('cemeteries'));
                 if ($numrows) {
                 $actionstr = "";
                 if ($allow_edit) {
-                  $actionstr .= "<a href=\"admin_editcemetery.php?cemeteryID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
+                  $actionstr .= "<a href=\"cemeteriesEdit.php?cemeteryID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
                   $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
                   $actionstr .= "</a>";
                 }
@@ -169,7 +169,7 @@ $headSection->setTitle(uiTextSnippet('cemeteries'));
                   $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
                   $actionstr .= "</a>";
                 }
-                $actionstr .= "<a href=\"showmap.php?cemeteryID=xxx&amp;\" title='" . uiTextSnippet('preview') . "'>\n";
+                $actionstr .= "<a href=\"cemeteriesShowCemetery.php?cemeteryID=xxx&amp;\" title='" . uiTextSnippet('preview') . "'>\n";
                 $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
                 $actionstr .= "</a>\n";
 
@@ -199,7 +199,7 @@ $headSection->setTitle(uiTextSnippet('cemeteries'));
                     echo "<td>"
                     . "<input name=\"del{$row['cemeteryID']}\" type='checkbox' value='1'></td>";
                   }
-                  $editlink = "admin_editcemetery.php?cemeteryID={$row['cemeteryID']}";
+                  $editlink = "cemeteriesEdit.php?cemeteryID={$row['cemeteryID']}";
                   $cemname = $allow_edit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['cemname'] . "</a>" : $row['cemname'];
 
                   echo "<td>$cemname</td>\n";
@@ -231,7 +231,7 @@ $headSection->setTitle(uiTextSnippet('cemeteries'));
                 ?>
               </table>
             <?php
-            echo buildSearchResultPagination($totrows, "admin_cemeteries.php?searchstring=$searchstring&amp;exactmatch=$exactmatch&amp;offset", $maxsearchresults, 5);
+            echo buildSearchResultPagination($totrows, "cemeteriesBrowse.php?searchstring=$searchstring&amp;exactmatch=$exactmatch&amp;offset", $maxsearchresults, 5);
             }
             else {
               echo "<div class='alert alert-warning'>" . uiTextSnippet('norecords') . "</div>\n";

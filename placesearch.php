@@ -191,7 +191,7 @@ $headSection->setTitle($psearchns);
       } else {
         $location = $country;
       }
-      $cemdata .= "<tr><td>$i.</td><td><a href=\"showmap.php?cemeteryID={$prow['cemeteryID']}\">{$prow['cemname']}</a></td><td>$location</td></tr>\n";
+      $cemdata .= "<tr><td>$i.</td><td><a href=\"cemeteriesShowCemetery.php?cemeteryID={$prow['cemeteryID']}\">{$prow['cemname']}</a></td><td>$location</td></tr>\n";
       $i++;
     }
     if ($cemdata) {

@@ -27,7 +27,7 @@ class publicNavElementSection extends navElementSection {
     $out .= $this->buildListItem("placesMain.php", "svg/location.svg", "places");
     $tngmonth = date("m", time() + (3600 * $time_offset));
     $out .= $this->buildListItem("calendar.php?m=$tngmonth", "svg/calendar.svg", "calendar");
-    $out .= $this->buildListItem("cemeteries.php", "svg/headstone.svg", "cemeteries");
+    $out .= $this->buildListItem("cemeteriesShow.php", "svg/headstone.svg", "cemeteries");
     $out .= $this->buildListItem("searchform.php", "svg/magnifying-glass.svg", "searchnames");
     $out .= $this->buildListItem("famsearchform.php", "svg/magnifying-glass.svg", "searchfams");
 

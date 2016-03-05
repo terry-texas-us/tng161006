@@ -255,7 +255,7 @@ function doMedia($mediatypeID) {
       if (!$row['cemname']) {
         $row['cemname'] = $row['city'];
       }
-      $mediatext .= "<td><a href=\"showmap.php?cemeteryID={$row['cemeteryID']}\">{$row['cemname']}</a>";
+      $mediatext .= "<td><a href=\"cemeteriesShowCemetery.php?cemeteryID={$row['cemeteryID']}\">{$row['cemname']}</a>";
       if ($row['plot']) {
         $mediatext .= "<br>";
       }

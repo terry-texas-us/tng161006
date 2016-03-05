@@ -13,7 +13,7 @@ $hsresult = tng_query($query);
 $numhs = tng_num_rows($hsresult);
 tng_free_result($hsresult);
 
-$logstring = "<a href='cemeteries.php?tree=$tree'>" . uiTextSnippet('cemeteriesheadstones') . "$treestr</a>";
+$logstring = "<a href='cemeteriesShow.php?tree=$tree'>" . uiTextSnippet('cemeteriesheadstones') . "$treestr</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -34,7 +34,7 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
     <h2><img class='icon-md' src='svg/headstone.svg'><?php echo uiTextSnippet('cemeteriesheadstones'); ?></h2>
     <br clear='all'>
     <?php
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'cemeteries', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
+    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'cemeteriesShow', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
 
     define("DUMMYPLACE", "@@@@@@");
     define("NUMCOLS", 2);           //set as number of columns-1
@@ -84,7 +84,7 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
               }
               $txt = $cemetery['cemname'] ? $cemetery['cemname'] : uiTextSnippet('nocemname');
               $txt = htmlspecialchars($txt, ENT_QUOTES, $session_charset);
-              echo "- <a href=\"showmap.php?cemeteryID={$cemetery['cemeteryID']}&amp;tree=$tree\">$txt</a><br>\n";
+              echo "- <a href=\"cemeteriesShowCemetery.php?cemeteryID={$cemetery['cemeteryID']}&amp;tree=$tree\">$txt</a><br>\n";
               $cemetery = tng_fetch_assoc($cemresult);
               $i++;
             }

@@ -83,7 +83,7 @@ $numrows = tng_num_rows($result);
 
 if (!$numrows) {
   $message = uiTextSnippet('noresults');
-  header("Location: cemeteries.php?message=" . urlencode($message));
+  header("Location: cemeteriesShow.php?message=" . urlencode($message));
   exit;
 }
 $helplang = findhelp("cemeteries_help.html");
@@ -136,7 +136,7 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
           $rowcount = 0;
           $actionstr = "";
           if ($allow_edit) {
-            $actionstr .= "<a href=\"admin_editcemetery.php?cemeteryID=xxx\">\n";
+            $actionstr .= "<a href=\"cemeteriesEdit.php?cemeteryID=xxx\">\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg alt=\"" . uiTextSnippet('edit') . "\">\n";
             $actionstr .= "</a>\n";
           }

@@ -75,7 +75,7 @@ if (!$cemeteryID) {
 if (!$tngpage && !$cemeteryID && $cemresult && tng_num_rows($cemresult) == 1) {
   $cemetery = tng_fetch_assoc($cemresult);
   tng_free_result($cemresult);
-  header("Location: showmap.php?cemeteryID={$cemetery['cemeteryID']}&tree=$tree");
+  header("Location: cemeteriesShowCemetery.php?cemeteryID={$cemetery['cemeteryID']}&tree=$tree");
   exit;
 }
 if ($offset) {
@@ -179,7 +179,7 @@ if ($location) {
       if ($cemetery['cemname'] == uiTextSnippet('nocemetery')) {
         $location = $cemetery['cemname'];
       } else {
-        $location = "<a href=\"showmap.php?cemeteryID={$cemetery['cemeteryID']}&amp;tree=$tree\">" . $cemetery['cemname'];
+        $location = "<a href=\"cemeteriesShowCemetery.php?cemeteryID={$cemetery['cemeteryID']}&amp;tree=$tree\">" . $cemetery['cemname'];
         if ($cemetery['city']) {
           if ($location) {
             $location .= ", ";
@@ -228,7 +228,7 @@ if ($location) {
             "long" => $long,
             "pinplacelevel" => $pinplacelevel,
             "place" => $cemeteryplace,
-            "htmlcontent" => "<div class=\"mapballoon\"><a href=\"showmap.php?cemeteryID={$cemetery['cemeteryID']}\">$localballooncemeteryname</a><br>$localballooncemeteryplace$codednotes</div>"
+            "htmlcontent" => "<div class=\"mapballoon\"><a href=\"cemeteriesShowCemetery.php?cemeteryID={$cemetery['cemeteryID']}\">$localballooncemeteryname</a><br>$localballooncemeteryplace$codednotes</div>"
           ];
           $l2mCount++;
           $body .= "<a href=\"https://maps.google.com/maps?f=q" . uiTextSnippet('glang') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">\n";

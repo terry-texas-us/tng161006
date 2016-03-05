@@ -641,7 +641,7 @@ function doCemPlusMap($imgrow, $tree) {
     }
     $location .= $cemetery['country'];
   }
-  echo "<a href=\"showmap.php?cemeteryID={$imgrow['cemeteryID']}&amp;tree=$tree\">$location</a>";
+  echo "<a href=\"cemeteriesShowCemetery.php?cemeteryID={$imgrow['cemeteryID']}&amp;tree=$tree\">$location</a>";
   echo "</span></p>\n";
   if ($cemetery['notes']) {
     echo "<p><strong>" . uiTextSnippet('notes') . ":</strong> " . nl2br($cemetery['notes']) . "</p>";

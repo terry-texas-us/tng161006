@@ -46,7 +46,7 @@ if ($xsrcaction) {
   $query = "DELETE FROM $places_table WHERE 1=0";
   $modmsg = "places";
   $id = "ID";
-  $location = "admin_places.php";
+  $location = "placesBrowse.php";
 } elseif ($xtimeaction) {
   $query = "DELETE FROM $tlevents_table WHERE 1=0";
   $modmsg = "tlevents";
@@ -61,7 +61,7 @@ if ($xsrcaction) {
   $query = "DELETE FROM $cemeteries_table WHERE 1=0";
   $modmsg = "cemeteries";
   $id = "cemeteryID";
-  $location = "admin_cemeteries.php";
+  $location = "cemeteriesBrowse.php";
 } elseif ($xnoteaction) {
   $query = "DELETE FROM $xnotes_table WHERE 1=0";
   $modmsg = "notes";

@@ -71,13 +71,13 @@ if ($tngprint) {
       break;
 
     //allow full indexing
-    case "cemeteries":
+    case "cemeteriesShow":
     case "peopleShowPerson":
     case "familiesShowFamily":
     case "headstones":
     case "mostwanted":
     case "showmedia":
-    case "showmap":
+    case "cemeteriesShowCemetery":
     case "showphoto":
     case "repositoriesShowItem":
     case "showsource":

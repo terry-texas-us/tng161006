@@ -34,11 +34,11 @@ $headSection->setTitle(uiTextSnippet('addnewcemetery'));
     <?php
     echo $adminHeaderSection->build('cemeteries-addnewcemetery', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_cemeteries.php", uiTextSnippet('search'), "findcem"]);
-    $navList->appendItem([$allow_add, "admin_newcemetery.php", uiTextSnippet('addnew'), "addcemetery"]);
+    $navList->appendItem([true, "cemeteriesBrowse.php", uiTextSnippet('browse'), "findcem"]);
+//    $navList->appendItem([$allow_add, "cemeteriesAdd.php", uiTextSnippet('add'), "addcemetery"]);
     echo $navList->build("addcemetery");
     ?>
-    <form action="admin_addcemetery.php" method='post' name='form1' id='form1' ENCTYPE="multipart/form-data" onSubmit="return validateForm();">
+    <form action="cemeteriesAddFormAction.php" method='post' name='form1' id='form1' ENCTYPE="multipart/form-data" onSubmit="return validateForm();">
       <table class='table table-sm'>
         <tr>
           <td><?php echo uiTextSnippet('cemeteryname'); ?>:</td>

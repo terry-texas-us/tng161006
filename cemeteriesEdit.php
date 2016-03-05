@@ -45,16 +45,16 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
     <?php
     echo $adminHeaderSection->build('cemeteries-modifycemetery', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_cemeteries.php", uiTextSnippet('search'), "findcem"]);
-    $navList->appendItem([$allow_add, "admin_newcemetery.php", uiTextSnippet('addnew'), "addcemetery"]);
+    $navList->appendItem([true, "cemeteriesBrowse.php", uiTextSnippet('browse'), "findcem"]);
+    $navList->appendItem([$allow_add, "cemeteriesAdd.php", uiTextSnippet('add'), "addcemetery"]);
     $navList->appendItem([$allow_add, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <br>
-    <a href="showmap.php?cemeteryID=<?php echo $cemeteryID; ?>&amp;tree=<?php echo $tree; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
+    <a href="cemeteriesShowCemetery.php?cemeteryID=<?php echo $cemeteryID; ?>&amp;tree=<?php echo $tree; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
       <img class='icon-sm' src='svg/eye.svg'>
     </a>
-    <form action="admin_updatecemetery.php" method='post' name='form1' id='form1' ENCTYPE="multipart/form-data"
+    <form action="cemeteriesEditFormAction.php" method='post' name='form1' id='form1' ENCTYPE="multipart/form-data"
           onSubmit="return validateForm();">
       <table class='table table-sm'>
         <tr>
