@@ -81,7 +81,7 @@ if ($enttype == 'I') {
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   $name = uiTextSnippet('repository') . ": {$row['reponame']} ($ID)";
-  $pagelink = "$tngwebsite/" . "showrepo.php?repoID=$ID&tree=$tree";
+  $pagelink = "$tngwebsite/" . "repositoriesShowItem.php?repoID=$ID&tree=$tree";
   tng_free_result($result);
 } elseif ($enttype == 'L') {
   $name = $ID;

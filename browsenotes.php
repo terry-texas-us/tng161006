@@ -180,7 +180,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
             $result2 = tng_query($query);
             if (tng_num_rows($result2) == 1) {
               $row2 = tng_fetch_assoc($result2);
-              $notelinktext .= "<a href=\"showrepo.php?repoID={$row2['repoID']}&tree={$row2['gedcom']}\" target='_blank'>" . uiTextSnippet('repository') . " $sourcetext ({$row2['repoID']})</a>\n<br>\n";
+              $notelinktext .= "<a href=\"repositoriesShowItem.php?repoID={$row2['repoID']}&tree={$row2['gedcom']}\" target='_blank'>" . uiTextSnippet('repository') . " $sourcetext ({$row2['repoID']})</a>\n<br>\n";
               tng_free_result($result2);
             }
           }

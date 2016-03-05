@@ -186,7 +186,7 @@ function doMedia($mediatypeID) {
         $medialinktext .= "<li><a href=\"showsource.php?sourceID={$prow['sourceID']}&amp;tree={$prow['gedcom']}\">$sourcetext";
       } elseif ($prow['repoID'] != null) {
         $repotext = $prow['reponame'] ? uiTextSnippet('repository') . ": " . $prow['reponame'] : uiTextSnippet('repository') . ": " . $prow['repoID'];
-        $medialinktext .= "<li><a href=\"showrepo.php?repoID={$prow['repoID']}&amp;tree={$prow['gedcom']}\">$repotext";
+        $medialinktext .= "<li><a href=\"repositoriesShowItem.php?repoID={$prow['repoID']}&amp;tree={$prow['gedcom']}\">$repotext";
       } else {
         $medialinktext .= "<li><a href=\"placesearch.php?psearch=" . urlencode($prow['personID']);
         if (!$tngconfig['places1tree']) {

@@ -114,13 +114,13 @@ $headSection->setTitle(uiTextSnippet('repositories'));
     <?php
     echo $adminHeaderSection->build('repositories', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_repositories.php", uiTextSnippet('search'), "findrepo"]);
-    $navList->appendItem([$allow_add, "admin_newrepo.php", uiTextSnippet('addnew'), "addrepo"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "admin_mergerepos.php", uiTextSnippet('merge'), "merge"]);
+//    $navList->appendItem([true, "repositoriesBrowse.php", uiTextSnippet('search'), "findrepo"]);
+    $navList->appendItem([$allow_add, "repositoriesAdd.php", uiTextSnippet('add'), "addrepo"]);
+    $navList->appendItem([$allow_edit && $allow_delete, "repositoriesMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("findrepo");
     ?>
     <div>
-      <form id='form1' name='form1' action='admin_repositories.php'>
+      <form id='form1' name='form1' action='repositoriesBrowse.php'>
         <?php include '_/components/php/treeSelectControl.php'; ?>
         <label for='searchstring'><?php echo uiTextSnippet('searchfor'); ?></label>
         <input name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>">
@@ -171,7 +171,7 @@ $headSection->setTitle(uiTextSnippet('repositories'));
             <?php
             $actionstr = "";
             if ($allow_edit) {
-              $actionstr .= "<a href=\"admin_editrepo.php?repoID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('edit') . "'>\n";
+              $actionstr .= "<a href=\"repositoriesEdit.php?repoID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('edit') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
               $actionstr .= "</a>";
             }
@@ -180,7 +180,7 @@ $headSection->setTitle(uiTextSnippet('repositories'));
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
               $actionstr .= "</a>";
             }
-            $actionstr .= "<a href=\"showrepo.php?repoID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('preview') . "'>\n";
+            $actionstr .= "<a href=\"repositoriesShowItem.php?repoID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('preview') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
             $actionstr .= "</a>\n";
 
@@ -188,7 +188,7 @@ $headSection->setTitle(uiTextSnippet('repositories'));
               $newactionstr = preg_replace("/xxx/", $row['repoID'], $actionstr);
               $newactionstr = preg_replace("/yyy/", $row['gedcom'], $newactionstr);
               $newactionstr = preg_replace("/zzz/", $row['ID'], $newactionstr);
-              $editlink = "admin_editrepo.php?repoID={$row['repoID']}&amp;tree={$row['gedcom']}";
+              $editlink = "repositoriesEdit.php?repoID={$row['repoID']}&amp;tree={$row['gedcom']}";
               $id = $allow_edit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['repoID'] . "</a>" : $row['repoID'];
 
               echo "<tr id=\"row_{$row['ID']}\"><td><div class=\"action-btns\">$newactionstr</div></td>\n";
@@ -205,7 +205,7 @@ $headSection->setTitle(uiTextSnippet('repositories'));
             ?>
           </table>
           <?php
-          echo buildSearchResultPagination($totrows, "admin_repositories.php?searchstring=$searchstring&amp;exactmatch=$exactmatch&amp;offset", $maxsearchresults, 5);
+          echo buildSearchResultPagination($totrows, "repositoriesBrowse.php?searchstring=$searchstring&amp;exactmatch=$exactmatch&amp;offset", $maxsearchresults, 5);
         } else {
           echo "<div class='alert alert-warning'>" . uiTextSnippet('norecords') . "</div>\n";
         }

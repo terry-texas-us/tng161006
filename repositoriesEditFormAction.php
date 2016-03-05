@@ -39,7 +39,7 @@ $result = tng_query($query);
 adminwritelog("<a href=\"editrepo.php?repoID=$repoID&tree=$tree\">" . uiTextSnippet('modifyrepo') . ": $tree/$repoID</a>");
 
 if ($newscreen == "return") {
-  header("Location: admin_editrepo.php?repoID=$repoID&tree=$tree");
+  header("Location: repositoriesEdit.php?repoID=$repoID&tree=$tree");
 } else {
   if ($newscreen == "close") {
   ?>
@@ -54,6 +54,6 @@ if ($newscreen == "return") {
   <?php
   } else {
     $message = uiTextSnippet('changestorepo') . " $repoID " . uiTextSnippet('succsaved') . '.';
-    header("Location: admin_repositories.php?message=" . urlencode($message));
+    header("Location: repositoriesBrowse.php?message=" . urlencode($message));
   }
 }

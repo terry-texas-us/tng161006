@@ -362,17 +362,16 @@ $headSection->setTitle(uiTextSnippet('merge'));
     <?php
     echo $adminHeaderSection->build('repositories-merge', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_repositories.php", uiTextSnippet('search'), "findrepo"]);
-    $navList->appendItem([$allow_add, "admin_newrepo.php", uiTextSnippet('addnew'), "addrepo"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "admin_mergerepos.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([true, "repositoriesBrowse.php", uiTextSnippet('search'), "findrepo"]);
+    $navList->appendItem([$allow_add, "repositoriesAdd.php", uiTextSnippet('add'), "addrepo"]);
+//    $navList->appendItem([$allow_edit && $allow_delete, "repositoriesMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("merge");
     ?>
-
     <table class='table table-sm'>
       <tr>
         <td>
         <div><em><?php echo uiTextSnippet('choosemergerepos'); ?></em><br><br>
-          <form action="admin_mergerepos.php" method='post' name='form1' id='form1'>
+          <form id='form1' name='form1' action="repositoriesMerge.php" method='post'>
             <table>
               <tr>
                 <td><?php echo uiTextSnippet('tree'); ?>:</td>
@@ -460,9 +459,9 @@ $headSection->setTitle(uiTextSnippet('merge'));
               if (is_array($r1row)) {
                 $eventlist = array();
                 echo "<tr>\n";
-                echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('admin_editrepo.php?repoID={$r1row['repoID']}&amp;tree=$tree&amp;cw=1','edit')\"></td>\n";
+                echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('repositoriesEdit.php?repoID={$r1row['repoID']}&amp;tree=$tree&amp;cw=1','edit')\"></td>\n";
                 if (is_array($r2row)) {
-                  echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('admin_editrepo.php?repoID={$r2row['repoID']}&amp;tree=$tree&amp;cw=1','edit')\"></td>\n";
+                  echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('repositoriesEdit.php?repoID={$r2row['repoID']}&amp;tree=$tree&amp;cw=1','edit')\"></td>\n";
 
                   $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID as eventtypeID, $events_table.eventID as eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$r2row['repoID']}\" AND gedcom = \"$tree\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
                   $evresult = tng_query($query);

@@ -104,7 +104,7 @@ function doMedia($mediatypeID) {
         $medialink = "showsource.php?sourceID={$prow['sourceID']}&amp;tree={$prow['gedcom']}";
       } elseif ($prow['repoID'] != null) {
         $mediatext = $prow['reponame'] ? uiTextSnippet('repository') . ": " . $prow['reponame'] : uiTextSnippet('repository') . ": " . $prow['repoID'];
-        $medialink = "showrepo.php?repoID={$prow['repoID']}&amp;tree=$prow[gedcom]";
+        $medialink = "repositoriesShowItem.php?repoID={$prow['repoID']}&amp;tree=$prow[gedcom]";
       } else {
         $medialink = "placesearch.php?psearch={$prow['personID']}&amp;tree=$prow[gedcom]";
         $mediatext = $prow['personID'];

@@ -59,7 +59,7 @@ if ($tngprint) {
     case "browseheadstones":
     case "browsenotes":
     case "browsephotos":
-    case "browserepos":
+    case "repositoriesShow":
     case "browsesources":
     case "extrastree":
     case "reports":
@@ -79,7 +79,7 @@ if ($tngprint) {
     case "showmedia":
     case "showmap":
     case "showphoto":
-    case "showrepo":
+    case "repositoriesShowItem":
     case "showsource":
     case "showtree":
     case "surnames":

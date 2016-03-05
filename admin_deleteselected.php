@@ -31,7 +31,7 @@ if ($xsrcaction) {
   $query = "DELETE FROM $repositories_table WHERE 1=0";
   $modmsg = "repositories";
   $id = "ID";
-  $location = "admin_repositories.php";
+  $location = "repositoriesBrowse.php";
 } elseif ($xperaction) {
   $query = "DELETE FROM $people_table WHERE 1=0";
   $modmsg = "people";

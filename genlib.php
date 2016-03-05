@@ -176,8 +176,8 @@ function tng_menu($enttype, $currpage, $entityID) {
     $menu .= doMenuItem($nexttab++, "showsource.php?sourceID=$entityID&amp;tree=$tree", "svg/folder.svg", uiTextSnippet('source'), $currpage, "source");
     $editstr = "admin_editsource.php?source";
   } elseif ($enttype == 'R') {
-    $menu .= doMenuItem($nexttab++, "showrepo.php?repoID=$entityID&amp;tree=$tree", "svg/folder.svg", uiTextSnippet('repository'), $currpage, "repo");
-    $editstr = "admin_editrepo.php?repo";
+    $menu .= doMenuItem($nexttab++, "repositoriesShowItem.php?repoID=$entityID&amp;tree=$tree", "svg/folder.svg", uiTextSnippet('repository'), $currpage, "repo");
+    $editstr = "repositoriesEdit.php?repo";
   } elseif ($enttype == 'L') {
 
     $treestr = $tngconfig['places1tree'] ? "" : "&amp;tree=$tree";

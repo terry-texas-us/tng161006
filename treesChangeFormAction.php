@@ -57,7 +57,7 @@ switch ($entity) {
 
     break;
   case "repo":
-    $url = "admin_editrepo.php?repoID=$newID&tree=$newtree";
+    $url = "repositoriesEdit.php?repoID=$newID&tree=$newtree";
 
     $query = "UPDATE $repositories_table SET gedcom=\"$newtree\", repoID=\"$newID\" WHERE gedcom=\"$oldtree\" AND repoID=\"$entityID\"";
     $result = tng_query($query);

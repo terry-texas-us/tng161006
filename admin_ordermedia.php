@@ -61,7 +61,7 @@ switch ($linktype) {
     }
     $person['branch'] = "";
     tng_free_result($result2);
-    $test_url = "showrepo.php?";
+    $test_url = "repositoriesShowItem.php?";
     $testID = "repoID";
     break;
   case 'L':

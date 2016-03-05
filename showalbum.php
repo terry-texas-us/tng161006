@@ -77,7 +77,7 @@ function getAlbumLinkText($albumID) {
       $links .= "<a href=\"showsource.php?sourceID={$prow['sourceID']}&amp;tree={$prow['gedcom']}\">" . $sourcetext . "</a>";
     } elseif ($prow['repoID'] != null) {
       $repotext = $prow['reponame'] ? $prow['reponame'] : uiTextSnippet('repository') . ": {$prow['repoID']}";
-      $links .= "<a href=\"showrepo.php?repoID={$prow['repoID']}&amp;tree={$prow['gedcom']}\">" . $repotext . "</a>";
+      $links .= "<a href=\"repositoriesShowItem.php?repoID={$prow['repoID']}&amp;tree={$prow['gedcom']}\">" . $repotext . "</a>";
     } elseif ($prow['familyID'] != null) {
       $familyname = trim("{$prow['hlnprefix']} {$prow['hlastname']}") . "/" . trim("{$prow['wlnprefix']} {$prow['wlastname']}") . " ({$prow['familyID']})";
       $links .= "<a href=\"familygroup.php?familyID={$prow['familyID']}&amp;tree={$prow['gedcom']}\">" . uiTextSnippet('family') . ": $familyname</a>";
@@ -331,7 +331,7 @@ preparebookmark($logstring);
             $medialinktext .= "<li><a href=\"showsource.php?sourceID={$prow['sourceID']}&amp;tree={$prow['gedcom']}\">$sourcetext";
           } elseif ($prow['repoID'] != null) {
             $repotext = $prow['reponame'] ? $prow['reponame'] : uiTextSnippet('repository') . ": " . $prow['repoID'];
-            $medialinktext .= "<li><a href=\"showrepo.php?repoID={$prow['repoID']}&amp;tree={$prow['gedcom']}\">$repotext";
+            $medialinktext .= "<li><a href=\"repositoriesShowItem.php?repoID={$prow['repoID']}&amp;tree={$prow['gedcom']}\">$repotext";
           } elseif ($prow['familyID'] != null) {
             $medialinktext .= "<li><a href=\"familygroup.php?familyID={$prow['personID']}&amp;tree={$prow['gedcom']}\">" . uiTextSnippet('family') . ": " . getFamilyName($prow);
           } else {

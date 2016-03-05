@@ -44,6 +44,6 @@ if (!$addressID) {
 $query = "INSERT INTO $repositories_table (repoID,reponame,addressID,changedate,gedcom,changedby) VALUES (\"$repoID\",\"$reponame\",\"$addressID\",\"$newdate\",\"$tree1\",\"$currentuser\")";
 $result = tng_query($query);
 
-adminwritelog("<a href=\"admin_editrepo.php?repoID=$repoID&tree=$tree\">" . uiTextSnippet('addnewrepo') . ": $tree/$repoID</a>");
+adminwritelog("<a href=\"repositoriesEdit.php?repoID=$repoID&tree=$tree\">" . uiTextSnippet('addnewrepo') . ": $tree/$repoID</a>");
 
-header("Location: admin_editrepo.php?repoID=$repoID&tree=$tree&added=1");
+header("Location: repositoriesEdit.php?repoID=$repoID&tree=$tree&added=1");

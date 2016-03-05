@@ -8,12 +8,12 @@ function doRepoSearch( $instance, $pagenav ) {
     global $tree;
 
     $str = "<span>\n";
-    $str .= buildFormElement("browserepos", "get", "RepoSearch$instance");
+    $str .= buildFormElement("repositoriesShow", "get", "RepoSearch$instance");
     $str .= "<input name='reposearch' type='text' value=\"$reposearch\" /> \n";
   $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . "\" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
     $str .= $pagenav;
     if( $reposearch )
-    {$str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='browserepos.php'>" . uiTextSnippet('browseallrepos') . "</a>";}
+    {$str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='repositoriesShow.php'>" . uiTextSnippet('browseallrepos') . "</a>";}
     $str .= "<input name='tree' type='hidden' value=\"$tree\" />\n";
     $str .= "</form></span>\n";
     
@@ -65,7 +65,7 @@ else
 $numrowsplus = $numrows + $offset;
 
 $treestr = $tree ? " (" . uiTextSnippet('tree') . ": $tree)" : "";
-$logstring = "<a href=\"browserepos.php?tree=$tree&amp;offset=$offset&amp;reposearch=$reposearch\">" . xmlcharacters(uiTextSnippet('repositories') . $treestr) . "</a>";
+$logstring = "<a href=\"repositoriesShow.php?tree=$tree&amp;offset=$offset&amp;reposearch=$reposearch\">" . xmlcharacters(uiTextSnippet('repositories') . $treestr) . "</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -84,12 +84,12 @@ $headSection->setTitle(uiTextSnippet('repositories'));
     <h2><img class='icon-md' src='svg/building.svg'><?php echo uiTextSnippet('repositories'); ?></h2>
     <br clear='left'>
     <?php
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'browserepos', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
+    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'repositoriesShow', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
 
     if ($totrows) {
       echo "<p><span>" . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</span></p>";
     }
-    $pagenav = buildSearchResultPagination( $totrows, "browserepos.php?reposearch=$reposearch&amp;offset", $maxsearchresults, $max_browserepo_pages );
+    $pagenav = buildSearchResultPagination( $totrows, "repositoriesShow.php?reposearch=$reposearch&amp;offset", $maxsearchresults, $max_browserepo_pages );
     if ($pagenav || $reposearch) {
       echo doRepoSearch( 1, $pagenav );
       echo "<br>\n";
@@ -108,8 +108,8 @@ $headSection->setTitle(uiTextSnippet('repositories'));
       $i = $offsetplus;
       while ($row = tng_fetch_assoc($result)) {
         echo "<tr><td><span>$i</span></td>\n";
-        echo "<td><span><a href=\"showrepo.php?repoID={$row['repoID']}&amp;tree={$row['gedcom']}\">{$row['repoID']}</a>&nbsp;</span></td>";
-        echo "<td><span><a href=\"showrepo.php?repoID={$row['repoID']}&amp;tree={$row['gedcom']}\">{$row['reponame']}</a>&nbsp;</span></td>";
+        echo "<td><span><a href=\"repositoriesShowItem.php?repoID={$row['repoID']}&amp;tree={$row['gedcom']}\">{$row['repoID']}</a>&nbsp;</span></td>";
+        echo "<td><span><a href=\"repositoriesShowItem.php?repoID={$row['repoID']}&amp;tree={$row['gedcom']}\">{$row['reponame']}</a>&nbsp;</span></td>";
         if( $numtrees > 1 )
           {echo "<td><span>{$row['treename']}&nbsp;</span></td>";}
         echo "</tr>\n";

@@ -30,7 +30,7 @@ $reporow['allow_living'] = 1;
 
 $reponotes = getNotes($repoID, 'R');
 
-$logstring = "<a href=\"showrepo.php?repoID=$repoID&amp;tree=$tree\">" . uiTextSnippet('repo') . " {$reporow['reponame']} ($repoID)</a>";
+$logstring = "<a href=\"repositoriesShowItem.php?repoID=$repoID&amp;tree=$tree\">" . uiTextSnippet('repo') . " {$reporow['reponame']} ($repoID)</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -75,7 +75,7 @@ foreach ($events as $event) {
   $repotext .= showEvent($event);
 }
 if ($allow_admin && $allow_edit) {
-  $repotext .= showEvent(array("text" => uiTextSnippet('repoid'), "date" => $repoID, "place" => "<a href=\"admin_editrepo.php?repoID=$repoID&amp;tree=$tree&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>", "np" => 1));
+  $repotext .= showEvent(array("text" => uiTextSnippet('repoid'), "date" => $repoID, "place" => "<a href=\"repositoriesEdit.php?repoID=$repoID&amp;tree=$tree&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>", "np" => 1));
 } else {
   $repotext .= showEvent(array("text" => uiTextSnippet('repoid'), "date" => $repoID));
 }
@@ -100,7 +100,7 @@ while ($srow = tng_fetch_assoc($sresult)) {
   $repolinktext .= "<a href=\"showsource.php?sourceID={$srow['sourceID']}&amp;tree=$tree\">$title</a>";
 }
 if ($numrows >= $maxsearchresults) {
-  $repolinktext .= "\n[<a href=\"showrepo.php?repoID=$repoID&amp;tree=$tree&amp;foffset=$foffset&amp;soffset=" . ($newsoffset + $maxsearchresults) . "\">" . uiTextSnippet('moresrc') . "</a>]";
+  $repolinktext .= "\n[<a href=\"repositoriesShowItem.php?repoID=$repoID&amp;tree=$tree&amp;foffset=$foffset&amp;soffset=" . ($newsoffset + $maxsearchresults) . "\">" . uiTextSnippet('moresrc') . "</a>]";
 }
 tng_free_result($sresult);
 

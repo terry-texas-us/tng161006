@@ -93,7 +93,7 @@ $headSection->setTitle($headtext);
       $sourcetext .= showEvent(array("text" => uiTextSnippet('callnum'), "fact" => $srcrow['callnum']));
     }
     if ($srcrow['reponame']) {
-      $sourcetext .= showEvent(array("text" => uiTextSnippet('repository'), "fact" => "<a href=\"showrepo.php?repoID={$srcrow['repoID']}&amp;tree=$tree\">{$srcrow['reponame']}</a>"));
+      $sourcetext .= showEvent(array("text" => uiTextSnippet('repository'), "fact" => "<a href=\"repositoriesShowItem.php?repoID={$srcrow['repoID']}&amp;tree=$tree\">{$srcrow['reponame']}</a>"));
     }
     if ($srcrow['other']) {
       $sourcetext .= showEvent(array("text" => uiTextSnippet('other'), "fact" => $srcrow['other']));

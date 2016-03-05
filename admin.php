@@ -94,7 +94,7 @@ $headSection->setTitle(uiTextSnippet('administration'));
         echo adminMenuItem("admin_people.php", uiTextSnippet('people'), $peoplemsg, "svg/person.svg");
         echo adminMenuItem("admin_families.php", uiTextSnippet('families'), $familiesmsg, "svg/people.svg");
         echo adminMenuItem("admin_sources.php", uiTextSnippet('sources'), $sourcesmsg, "svg/archive.svg");
-        echo adminMenuItem("admin_repositories.php", uiTextSnippet('repositories'), $sourcesmsg, "svg/building.svg");
+        echo adminMenuItem("repositoriesBrowse.php", uiTextSnippet('repositories'), $sourcesmsg, "svg/building.svg");
       }
       if ($allow_edit || $allow_add || $allow_delete || $allow_media_add || $allow_media_edit || $allow_media_delete) {
         echo adminMenuItem("admin_media.php", uiTextSnippet('media'), $mediamsg, "svg/media-mixed.svg");

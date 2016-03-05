@@ -11,7 +11,6 @@ if ((!$allow_edit && (!$allow_add || !$added)) || ($assignedtree && $assignedtre
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-
 $repoID = ucfirst($repoID);
 
 $query = "SELECT treename FROM $trees_table WHERE gedcom = \"$tree\"";
@@ -36,7 +35,6 @@ while ($note = tng_fetch_assoc($notelinks)) {
   }
   $gotnotes[$note['eventID']] = "*";
 }
-
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifyrepo'));
 ?>
@@ -52,20 +50,20 @@ $headSection->setTitle(uiTextSnippet('modifyrepo'));
     <?php
     echo $adminHeaderSection->build('repositories-modifyrepo', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_repositories.php", uiTextSnippet('search'), "findrepo"]);
-    $navList->appendItem([$allow_add, "admin_newrepo.php", uiTextSnippet('addnew'), "addrepo"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "admin_mergerepos.php", uiTextSnippet('merge'), "merge"]);
-    $navList->appendItem([$allow_edit, "admin_editrepo.php?repoID=$repoID&tree=$tree", uiTextSnippet('edit'), "edit"]);
+    $navList->appendItem([true, "repositoriesBrowse.php", uiTextSnippet('search'), "findrepo"]);
+    $navList->appendItem([$allow_add, "repositoriesAdd.php", uiTextSnippet('add'), "addrepo"]);
+    $navList->appendItem([$allow_edit && $allow_delete, "repositoriesMerge.php", uiTextSnippet('merge'), "merge"]);
+//    $navList->appendItem([$allow_edit, "repositoriesEdit.php?repoID=$repoID&tree=$tree", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <br>
-    <a href="showrepo.php?repoID=<?php echo $repoID; ?>&amp;tree=<?php echo $tree; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
+    <a href="repositoriesShowItem.php?repoID=<?php echo $repoID; ?>&amp;tree=<?php echo $tree; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
       <img class='icon-sm' src='svg/eye.svg'>
     </a>
     <?php if ($allow_add && (!$assignedtree || $assignedtree == $tree)) { ?>
       <a href="admin_newmedia.php?personID=<?php echo $repoID; ?>&amp;tree=<?php echo $tree; ?>&amp;linktype=R"><?php echo uiTextSnippet('addmedia'); ?></a>
     <?php } ?>
-    <form action="admin_updaterepo.php" method='post' name='form1'>
+    <form id='repositories-edit' name='form1' action='repositoriesEditFormAction.php' method='post'>
       <div id="thumbholder" style="margin-right:5px; <?php if (!$photo) {echo "display: none";} ?>">
         <?php echo $photo; ?>
       </div>
