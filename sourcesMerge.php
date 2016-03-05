@@ -354,13 +354,13 @@ $headSection->setTitle(uiTextSnippet('merge'));
     <?php
     echo $adminHeaderSection->build('sources-merge', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_sources.php", uiTextSnippet('search'), "findsource"]);
-    $navList->appendItem([$allow_add, "admin_newsource.php", uiTextSnippet('addnew'), "addsource"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "admin_mergesources.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([true, "sourcesBrowse.php", uiTextSnippet('browse'), "findsource"]);
+    $navList->appendItem([$allow_add, "sourcesAdd.php", uiTextSnippet('add'), "addsource"]);
+    $navList->appendItem([$allow_edit && $allow_delete, "sourcesMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("merge");
     ?>
     <div><em><?php echo uiTextSnippet('choosemergesources'); ?></em><br><br>
-      <form action="admin_mergesources.php" method='post' name='form1' id='form1'>
+      <form id='form1' name='form1' action='sourcesMerge.php' method='post'>
         <table class='table table-sm'>
           <tr>
             <td><?php echo uiTextSnippet('tree'); ?>:</td>
@@ -486,9 +486,9 @@ $headSection->setTitle(uiTextSnippet('merge'));
           if (is_array($s1row)) {
             $eventlist = array();
             echo "<tr>\n";
-            echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('admin_editsource.php?sourceID={$s1row['sourceID']}&amp;tree=$tree&amp;cw=1','edit')\"></td>\n";
+            echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('sourcesEdit.php?sourceID={$s1row['sourceID']}&amp;tree=$tree&amp;cw=1','edit')\"></td>\n";
             if (is_array($s2row)) {
-              echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('admin_editsource.php?sourceID={$s2row['sourceID']}&amp;tree=$tree&amp;cw=1','edit')\"></td>\n";
+              echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('sourcesEdit.php?sourceID={$s2row['sourceID']}&amp;tree=$tree&amp;cw=1','edit')\"></td>\n";
 
               $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID as eventtypeID, $events_table.eventID as eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$s2row['sourceID']}\" AND gedcom = \"$tree\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
               $evresult = tng_query($query);

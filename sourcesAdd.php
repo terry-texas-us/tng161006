@@ -28,12 +28,12 @@ $headSection->setTitle(uiTextSnippet('addnewsource'));
     <?php
     echo $adminHeaderSection->build('sources-addnewsource', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_sources.php", uiTextSnippet('search'), "findsource"]);
-    $navList->appendItem([$allow_add, "admin_newsource.php", uiTextSnippet('addnew'), "addsource"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "admin_mergesources.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([true, "sourcesBrowse.php", uiTextSnippet('browse'), "findsource"]);
+    $navList->appendItem([$allow_add, "sourcesAdd.php", uiTextSnippet('add'), "addsource"]);
+    $navList->appendItem([$allow_edit && $allow_delete, "sourcesMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("addsource");
     ?>
-    <form name='form1' action='admin_addsource.php' method='post' onSubmit="return validateForm();">
+    <form name='form1' action='sourcesAddFormAction.php' method='post' onSubmit="return validateForm();">
       <strong><?php echo uiTextSnippet('prefixsourceid'); ?></strong>
       <?php echo uiTextSnippet('sourceid'); ?>:
       <div class='row'>

@@ -44,10 +44,10 @@ if (!$repoID) {
 $query = "INSERT INTO $sources_table (sourceID,shorttitle,title,author,callnum,publisher,repoID,actualtext,changedate,gedcom,changedby,type,other,comments) VALUES (\"$sourceID\",\"$shorttitle\",\"$title\",\"$author\",\"$callnum\",\"$publisher\",\"$repoID\",\"$actualtext\",\"$newdate\",\"$tree1\",\"$currentuser\",\"\",\"\",\"\")";
 $result = tng_query($query) or die($error_pfx . uiTextSnippet('cannotexecutequery') . ": $query");
 
-adminwritelog("<a href=\"admin_editsource.php?sourceID=$sourceID&amp;tree=$tree\">" . uiTextSnippet('addnewsource') . ": $tree/$sourceID</a>");
+adminwritelog("<a href=\"sourcesEdit.php?sourceID=$sourceID&amp;tree=$tree\">" . uiTextSnippet('addnewsource') . ": $tree/$sourceID</a>");
 
 if (isset($ajax)) {
   echo $sourceID;
 } else {
-  header("Location: admin_editsource.php?sourceID=$sourceID&tree=$tree&added=1");
+  header("Location: sourcesEdit.php?sourceID=$sourceID&tree=$tree&added=1");
 }

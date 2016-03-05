@@ -69,20 +69,20 @@ $headSection->setTitle(uiTextSnippet('modifysource'));
     <?php
     echo $adminHeaderSection->build('sources-modifysource', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_sources.php", uiTextSnippet('search'), "findsource"]);
-    $navList->appendItem([$allow_add, "admin_newsource.php", uiTextSnippet('addnew'), "addsource"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "admin_mergesources.php", uiTextSnippet('merge'), "merge"]);
-    $navList->appendItem([$allow_edit, "admin_editsource.php?sourceID=$sourceID&tree=$tree", uiTextSnippet('edit'), "edit"]);
+    $navList->appendItem([true, "sourcesBrowse.php", uiTextSnippet('browse'), "findsource"]);
+    $navList->appendItem([$allow_add, "sourcesAdd.php", uiTextSnippet('add'), "addsource"]);
+    $navList->appendItem([$allow_edit && $allow_delete, "sourcesMerge.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([$allow_edit, "sourcesEdit.php?sourceID=$sourceID&tree=$tree", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <br>
-    <a href="showsource.php?sourceID=<?php echo $sourceID; ?>&amp;tree=<?php echo $tree; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
+    <a href="sourcesShowSource.php?sourceID=<?php echo $sourceID; ?>&amp;tree=<?php echo $tree; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
       <img class='icon-sm' src='svg/eye.svg'>
     </a>
     <?php if ($allow_add && (!$assignedtree || $assignedtree == $tree)) { ?>
       <a href="admin_newmedia.php?personID=<?php echo $sourceID; ?>&amp;tree=<?php echo $tree; ?>&amp;linktype=S"><?php echo uiTextSnippet('addmedia'); ?></a>
     <?php } ?>
-    <form action="admin_updatesource.php" method='post' name='form1'>
+    <form name='form1' action='sourcesEditFormAction.php' method='post'>
       <header id='source-header'>
         <div class='row'>
           <div class='col-sm-12' id="thumbholder" style="margin-right: 5px; <?php if (!$photo) {} ?>">

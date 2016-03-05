@@ -8,7 +8,7 @@ function buildSourceMenu($currpage, $sourceId) {
   
   $menu = '';
   if ($allow_edit && $rightbranch) {
-    $menu .= "<a id='a0' href='admin_editsource.php?sourceID=$sourceId&amp;tree=$tree&amp;cw=1' title='" . uiTextSnippet('edit') . "'>\n";
+    $menu .= "<a id='a0' href='sourcesEdit.php?sourceID=$sourceId&amp;tree=$tree&amp;cw=1' title='" . uiTextSnippet('edit') . "'>\n";
       $menu .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
     $menu .= "</a>\n";
   } elseif ($emailaddr && $currpage != 'suggest') {

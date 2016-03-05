@@ -47,7 +47,7 @@ tng_free_result($sresult);
 $srcnotes = getNotes($sourceID, 'S');
 getCitations($sourceID);
 
-$logstring = "<a href=\"showsource.php?sourceID=$sourceID&amp;tree=$tree\">" . xmlcharacters(uiTextSnippet('source') . " {$srcrow['title']} ($sourceID)") . "</a>";
+$logstring = "<a href=\"sourcesShowSource.php?sourceID=$sourceID&amp;tree=$tree\">" . xmlcharacters(uiTextSnippet('source') . " {$srcrow['title']} ($sourceID)") . "</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -108,7 +108,7 @@ $headSection->setTitle($headtext);
       $sourcetext .= showEvent($event);
     }
     if ($allow_admin && $allow_edit) {
-      $sourcetext .= showEvent(array("text" => uiTextSnippet('sourceid'), "date" => $sourceID, "place" => "<a href=\"admin_editsource.php?sourceID=$sourceID&amp;tree=$tree&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>", "np" => 1));
+      $sourcetext .= showEvent(array("text" => uiTextSnippet('sourceid'), "date" => $sourceID, "place" => "<a href=\"sourcesEdit.php?sourceID=$sourceID&amp;tree=$tree&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>", "np" => 1));
     } else {
       $sourcetext .= showEvent(array("text" => uiTextSnippet('sourceid'), "date" => $sourceID));
     }
@@ -156,7 +156,7 @@ $headSection->setTitle($headtext);
       $sourcetext .= showEvent(array("text" => uiTextSnippet('text'), "fact" => $srcrow['actualtext']));
     }
     if ($numrows > $maxsearchresults) {
-      $sourcelinktext .= "\n[<a href=\"showsource.php?sourceID=$sourceID&amp;tree=$tree&amp;foffset=$foffset&amp;ioffset=" . ($newioffset + $maxsearchresults) . "\">" . uiTextSnippet('moreind') . "</a>]";
+      $sourcelinktext .= "\n[<a href=\"sourcesShowSource.php?sourceID=$sourceID&amp;tree=$tree&amp;foffset=$foffset&amp;ioffset=" . ($newioffset + $maxsearchresults) . "\">" . uiTextSnippet('moreind') . "</a>]";
     }
     tng_free_result($sresult);
 
@@ -181,7 +181,7 @@ $headSection->setTitle($headtext);
       $sourcelinktext .= "<a href=\"familiesShowFamily.php?familyID=$srow[familyID]&amp;tree={$srow['gedcom']}\">" . uiTextSnippet('family') . ": " . getFamilyName($srow) . "</a>";
     }
     if ($numrows >= $maxsearchresults) {
-      $sourcelinktext .= "\n[<a href=\"showsource.php?sourceID=$sourceID&amp;tree=$tree&amp;ioffset=$ioffset&amp;foffset=" . ($newfoffset + $maxsearchresults) . "\">" . uiTextSnippet('morefam') . "</a>]";
+      $sourcelinktext .= "\n[<a href=\"sourcesShowSource.php?sourceID=$sourceID&amp;tree=$tree&amp;ioffset=$ioffset&amp;foffset=" . ($newfoffset + $maxsearchresults) . "\">" . uiTextSnippet('morefam') . "</a>]";
     }
     tng_free_result($sresult);
 

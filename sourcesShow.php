@@ -8,13 +8,13 @@ function doSourceSearch($instance, $pagenav) {
   global $tree;
 
   $str = "<div>\n";
-  $str .= buildFormElement("browsesources", "get", "SourceSearch$instance");
+  $str .= buildFormElement("sourcesShow", "get", "SourceSearch$instance");
   $str .= "<input name='sourcesearch' type='text' value=\"$sourcesearch\"> \n";
   $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . "\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
   $str .= $pagenav;
   $str .= "<input name='tree' type='hidden' value=\"$tree\" />\n";
   if ($sourcesearch) {
-    $str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='browsesources.php'>" . uiTextSnippet('browseallsources') . "</a>";
+    $str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='sourcesShow.php'>" . uiTextSnippet('browseallsources') . "</a>";
   }
   $str .= "</form></div>\n";
 
@@ -65,7 +65,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 $numrowsplus = $numrows + $offset;
 
 $treestr = $tree ? " (" . uiTextSnippet('tree') . ": $tree)" : "";
-$logstring = "<a href=\"browsesources.php?tree=$tree&amp;offset=$offset&amp;sourcesearch=$sourcesearch\">" . xmlcharacters(uiTextSnippet('sources') . $treestr) . "</a>";
+$logstring = "<a href=\"sourcesShow.php?tree=$tree&amp;offset=$offset&amp;sourcesearch=$sourcesearch\">" . xmlcharacters(uiTextSnippet('sources') . $treestr) . "</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -84,12 +84,12 @@ $headSection->setTitle(uiTextSnippet('sources'));
     <h2><img class='icon-md' src='svg/archive.svg'><?php echo uiTextSnippet('sources'); ?></h2>
     <br clear='left'>
     <?php
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'browsesources', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
+    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'sourcesShow', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
 
     if ($totrows) {
       echo "<p><span>" . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</span></p>";
     }
-    $pagenav = buildSearchResultPagination($totrows, "browsesources.php?sourcesearch=$sourcesearch&amp;offset", $maxsearchresults, $max_browsesource_pages);
+    $pagenav = buildSearchResultPagination($totrows, "sourcesShow.php?sourcesearch=$sourcesearch&amp;offset", $maxsearchresults, $max_browsesource_pages);
     if ($pagenav || $sourcesearch) {
       echo doSourceSearch(1, $pagenav);
       echo "<br>\n";
@@ -110,7 +110,7 @@ $headSection->setTitle(uiTextSnippet('sources'));
         $sourcetitle = $row['title'] ? $row['title'] : $row['shorttitle'];
         echo "<tr>\n";
           echo "<td>$i</td>\n";
-          echo "<td><a href='showsource.php?sourceID={$row['sourceID']}&amp;tree={$row['gedcom']}'>{$row['sourceID']}</a></td>\n";
+          echo "<td><a href='sourcesShowSource.php?sourceID={$row['sourceID']}&amp;tree={$row['gedcom']}'>{$row['sourceID']}</a></td>\n";
           echo "<td>$sourcetitle<br>{$row['author']}</td>\n";
           if ($numtrees > 1) {
             echo "<td><a href='showtree.php?tree={$row['gedcom']}'>{$row['treename']}</a></td>\n";

@@ -122,13 +122,13 @@ $headSection->setTitle(uiTextSnippet('sources'));
     <?php
     echo $adminHeaderSection->build('sources', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_sources.php", uiTextSnippet('search'), "findsource"]);
-    $navList->appendItem([$allow_add, "admin_newsource.php", uiTextSnippet('addnew'), "addsource"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "admin_mergesources.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([true, "sourcesBrowse.php", uiTextSnippet('browse'), "findsource"]);
+    $navList->appendItem([$allow_add, "sourcesAdd.php", uiTextSnippet('add'), "addsource"]);
+    $navList->appendItem([$allow_edit && $allow_delete, "sourcesMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("findsource");
     ?>
     <div class="row">
-      <form action="admin_sources.php" name='form1' id='form1'>
+      <form action="sourcesBrowse.php" name='form1' id='form1'>
         <?php include '_/components/php/treeSelectControl.php'; ?>
         <label for='searchstring'>
           <?php echo uiTextSnippet('searchfor'); ?>
@@ -179,7 +179,7 @@ $headSection->setTitle(uiTextSnippet('sources'));
           if ($numrows) {
             $actionstr = "";
             if ($allow_edit) {
-              $actionstr .= "<a href=\"admin_editsource.php?sourceID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('edit') . "'>\n";
+              $actionstr .= "<a href=\"sourcesEdit.php?sourceID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('edit') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
               $actionstr .= "</a>\n";
             }
@@ -188,7 +188,7 @@ $headSection->setTitle(uiTextSnippet('sources'));
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
               $actionstr .= "</a>\n";
             }
-            $actionstr .= "<a href=\"showsource.php?sourceID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('preview') . "'>\n";
+            $actionstr .= "<a href=\"sourcesShowSource.php?sourceID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('preview') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
             $actionstr .= "</a>\n";
 
@@ -197,7 +197,7 @@ $headSection->setTitle(uiTextSnippet('sources'));
               $newactionstr = preg_replace("/yyy/", $row['gedcom'], $newactionstr);
               $newactionstr = preg_replace("/zzz/", $row['ID'], $newactionstr);
               $title = $row['shorttitle'] ? $row['shorttitle'] : $row['title'];
-              $editlink = "admin_editsource.php?sourceID={$row['sourceID']}&amp;tree={$row['gedcom']}";
+              $editlink = "sourcesEdit.php?sourceID={$row['sourceID']}&amp;tree={$row['gedcom']}";
               $id = $allow_edit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['sourceID'] . "</a>" : $row['sourceID'];
 
               echo "<tr id=\"row_{$row['ID']}\">\n";
@@ -216,7 +216,7 @@ $headSection->setTitle(uiTextSnippet('sources'));
             echo "<tr><td>" . uiTextSnippet('norecords') . "</td></tr>\n";
           }
         ?> </table> <?php
-        echo buildSearchResultPagination($totrows, "admin_sources.php?searchstring=$searchstring&amp;exactmatch=$exactmatch&amp;offset", $maxsearchresults, 5);
+        echo buildSearchResultPagination($totrows, "sourcesBrowse.php?searchstring=$searchstring&amp;exactmatch=$exactmatch&amp;offset", $maxsearchresults, 5);
         tng_free_result($result);
         ?>
       </form>

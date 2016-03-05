@@ -42,7 +42,7 @@ $query = "SELECT title FROM $sources_table WHERE sourceID = \"$ID\" AND gedcom =
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 $name = uiTextSnippet('source') . ": {$row['title']} ($ID)";
-$pagelink = "$tngwebsite/" . "showsource.php?sourceID=$ID&tree=$tree";
+$pagelink = "$tngwebsite/" . "sourcesShowSource.php?sourceID=$ID&tree=$tree";
 tng_free_result($result);
 
 $subject = uiTextSnippet('proposed') . ": $name";
