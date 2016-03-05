@@ -507,7 +507,7 @@ $result = @tng_query($query . $limitstr);
 
 $treelogstr = $tree ? " (" . uiTextSnippet('tree') . ": $tree)" : "";
 if ($rrow['active'] && !$csv) {
-  $logstring = "<a href=\"showreport.php?reportID=$reportID&amp;tree=$tree\">" . xmlcharacters(uiTextSnippet('report') . ": {$rrow['reportname']}$treelogstr") . "</a>";
+  $logstring = "<a href=\"reportsShowReport.php?reportID=$reportID&amp;tree=$tree\">" . xmlcharacters(uiTextSnippet('report') . ": {$rrow['reportname']}$treelogstr") . "</a>";
   writelog($logstring);
   preparebookmark($logstring);
 }
@@ -536,7 +536,7 @@ if ($csv) {
   }
   if (!$rrow['sqlselect']) {
     $hiddenfields[] = array('name' => 'reportID', 'value' => $reportID);
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'showreport', 'method' => 'get', 'name' => 'form1', 'id' => 'form1', 'hidden' => $hiddenfields));
+    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'reportsShowReport', 'method' => 'get', 'name' => 'form1', 'id' => 'form1', 'hidden' => $hiddenfields));
   }
 }
 if (!$result) {
@@ -574,7 +574,7 @@ if (!$result) {
 
     $numrowsplus = $numrows + $offset;
     if ($totrows) {
-      echo "<p>" . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows &nbsp; <a href=\"showreport.php?reportID=$reportID&csv=1&tree=$tree\" target='_blank'>&raquo; " . uiTextSnippet('csv') . "</a></p>";
+      echo "<p>" . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows &nbsp; <a href=\"reportsShowReport.php?reportID=$reportID&csv=1&tree=$tree\" target='_blank'>&raquo; " . uiTextSnippet('csv') . "</a></p>";
     }
   }
   if ($csv) {
@@ -682,7 +682,7 @@ if (!$result) {
     ?>
     </table>
     <?php
-    echo buildSearchResultPagination($totrows, "showreport.php?reportID=$reportID$testurl&amp;offset", $maxsearchresults, $max_browsesearch_pages);
+    echo buildSearchResultPagination($totrows, "reportsShowReport.php?reportID=$reportID$testurl&amp;offset", $maxsearchresults, $max_browsesearch_pages);
   }
 }
 if (!$csv) {

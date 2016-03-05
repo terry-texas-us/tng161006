@@ -150,11 +150,11 @@ $headSection->setTitle(uiTextSnippet('addnewreport'));
     <?php
     echo $adminHeaderSection->build('reports-addnewreport', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_reports.php", uiTextSnippet('search'), "findreport"]);
-    $navList->appendItem([$allow_add, "admin_newreport.php", uiTextSnippet('addnew'), "addreport"]);
+    $navList->appendItem([true, "reportsBrowse.php", uiTextSnippet('browse'), "findreport"]);
+    $navList->appendItem([$allow_add, "reportsAdd.php", uiTextSnippet('add'), "addreport"]);
     echo $navList->build("addreport");
     ?>
-    <form action="admin_addreport.php" method='post' name='form1' id='form1'
+    <form action="reportsAddFormAction.php" method='post' name='form1' id='form1'
           onSubmit="return validateForm();">
       <table class='table table-sm'>
         <tr>

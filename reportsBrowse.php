@@ -67,12 +67,12 @@ $headSection->setTitle(uiTextSnippet('reports'));
     <?php
     echo $adminHeaderSection->build('reports', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_reports.php", uiTextSnippet('search'), "findreport"]);
-    $navList->appendItem([$allow_add, "admin_newreport.php", uiTextSnippet('addnew'), "addreport"]);
+    $navList->appendItem([true, "reportsBrowse.php", uiTextSnippet('browse'), "findreport"]);
+    $navList->appendItem([$allow_add, "reportsAdd.php", uiTextSnippet('add'), "addreport"]);
     echo $navList->build("findreport");
     ?>
     <div>
-      <form action="admin_reports.php" name='form1'>
+      <form action="reportsBrowse.php" name='form1'>
         <?php echo uiTextSnippet('searchfor'); ?>: <input class='longfield' name='searchstring' type='text' value="<?php echo $searchstring; ?>">
         <input name='findreport' type='hidden' value='1'>
         <input name='newsearch' type='hidden' value='1'>
@@ -100,7 +100,7 @@ $headSection->setTitle(uiTextSnippet('reports'));
           <?php
           $actionstr = "";
           if ($allow_edit) {
-            $actionstr .= "<a href=\"admin_editreport.php?reportID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
+            $actionstr .= "<a href=\"reportsEdit.php?reportID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
             $actionstr .= "</a>";
           }
@@ -109,14 +109,14 @@ $headSection->setTitle(uiTextSnippet('reports'));
             $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
             $actionstr .= "</a>";
           }
-          $actionstr .= "<a href=\"showreport.php?reportID=xxx&amp;test=1\" title='" . uiTextSnippet('preview') . "'>\n";
+          $actionstr .= "<a href=\"reportsShowReport.php?reportID=xxx&amp;test=1\" title='" . uiTextSnippet('preview') . "'>\n";
           $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
           $actionstr .= "</a>\n";
 
           while ($row = tng_fetch_assoc($result)) {
             $active = $row['active'] ? uiTextSnippet('yes') : uiTextSnippet('no');
             $newactionstr = preg_replace("/xxx/", $row['reportID'], $actionstr);
-            $editlink = "admin_editreport.php?reportID={$row['reportID']}";
+            $editlink = "reportsEdit.php?reportID={$row['reportID']}";
             $id = $allow_edit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['reportID'] . "</a>" : $row['reportID'];
             $name = $allow_edit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['reportname'] . "</a>" : $row['reportname'];
 
@@ -129,7 +129,7 @@ $headSection->setTitle(uiTextSnippet('reports'));
           ?>
         </table>
         <?php
-        echo buildSearchResultPagination($totrows, "admin_reports.php?searchstring=$searchstring&amp;offset", $maxsearchresults, 5);
+        echo buildSearchResultPagination($totrows, "reportsBrowse.php?searchstring=$searchstring&amp;offset", $maxsearchresults, 5);
       } else {
         echo "<div class='alert alert-warning'>" . uiTextSnippet('norecords') . "</div>\n";
       }

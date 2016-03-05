@@ -62,9 +62,9 @@ if ($tngprint) {
     case "repositoriesShow":
     case "sourcesShow":
     case "extrastree":
-    case "reports":
+    case "reportsShow":
     case "search":
-    case "showreport":
+    case "reportsShowReport":
     case "surnames100":
     case "whatsnew":
       $flags['norobots'] = $NOI;

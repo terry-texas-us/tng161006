@@ -157,16 +157,15 @@ $headSection->setTitle(uiTextSnippet('modifyreport'));
     <?php
     echo $adminHeaderSection->build('reports-modifyreport', $message);
     $navList = new navList('');
-    $navList->appendItem([1, "admin_reports.php", uiTextSnippet('search'), "findreport"]);
-    $navList->appendItem([$allow_add, "admin_newreport.php", uiTextSnippet('addnew'), "addreport"]);
+    $navList->appendItem([1, "reportsBrowse.php", uiTextSnippet('browse'), "findreport"]);
+    $navList->appendItem([$allow_add, "reportsAdd.php", uiTextSnippet('add'), "addreport"]);
     $navList->appendItem([$allow_edit, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <table class='table table-sm'>
       <tr>
         <td>
-          <form id='form1' name='form1' action='admin_updatereport.php' method='post'
-              onSubmit="return validateForm();">
+          <form id='form1' name='form1' action='reportsEditFormAction.php' method='post' onSubmit="return validateForm();">
             <table>
               <tr>
                 <td><?php echo uiTextSnippet('reportname'); ?>:</td>

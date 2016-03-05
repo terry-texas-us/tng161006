@@ -23,7 +23,7 @@ $query = "INSERT INTO $reports_table (reportname, reportdesc, rank, active, disp
 $result = tng_query($query);
 $reportID = tng_insert_id();
 
-adminwritelog("<a href=\"admin_editreport.php?reportID=$reportID\">" . uiTextSnippet('addnewreport') . ": $reportID/$reportname</a>");
+adminwritelog("<a href=\"reportsEdit.php?reportID=$reportID\">" . uiTextSnippet('addnewreport') . ": $reportID/$reportname</a>");
 
 $message = uiTextSnippet('report') . " $reportID " . uiTextSnippet('succadded') . '.';
-header("Location: admin_reports.php?message=" . urlencode($message));
+header("Location: reportsBrowse.php?message=" . urlencode($message));
