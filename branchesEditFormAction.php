@@ -26,7 +26,7 @@ adminwritelog(uiTextSnippet('modifybranch') . ": $branch");
 
 if ($submitx) {
   $message = uiTextSnippet('changestobranch') . ' ' . stripslashes($description) . ' ' . uiTextSnippet('succsaved') . '.';
-  header("Location: admin_branches.php?message=" . urlencode($message));
+  header("Location: branchesBrowse.php?message=" . urlencode($message));
 } else {
-  header("Location: admin_editbranch.php?branch=$branch&tree=$tree");
+  header("Location: branchesEdit.php?branch=$branch&tree=$tree");
 }

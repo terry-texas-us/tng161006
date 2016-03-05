@@ -118,7 +118,7 @@ $headSection->setTitle(uiTextSnippet('administration'));
         echo adminMenuItem("treesBrowse.php", uiTextSnippet('trees'), $treesmsg, "svg/tree.svg");
 
         if (!$assignedbranch) {
-          echo adminMenuItem("admin_branches.php", uiTextSnippet('branches'), $treesmsg, "svg/flow-branch.svg");
+          echo adminMenuItem("branchesBrowse.php", uiTextSnippet('branches'), $treesmsg, "svg/flow-branch.svg");
         }
         echo adminMenuItem("admin_eventtypes.php", uiTextSnippet('customeventtypes'), uiTextSnippet('custeventitems'), "svg/graduation-cap.svg");
         echo adminMenuItem("admin_reports.php", uiTextSnippet('reports'), uiTextSnippet('reportsitems'), "svg/print.svg");

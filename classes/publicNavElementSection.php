@@ -45,9 +45,9 @@ class publicNavElementSection extends navElementSection {
     $out .= $this->buildListItem("reports.php", "svg/print.svg", "reports");
     $out .= $this->buildListItem("statistics.php", "svg/bar-graph.svg", "databasestatistics");
     $out .= $this->buildListItem("treesShow.php", "svg/tree.svg", "trees");
-    $out .= $this->buildListItem("browsebranches.php", "svg/flow-branch.svg", "branches");
+    $out .= $this->buildListItem("branchesShow.php", "svg/flow-branch.svg", "branches");
     $out .= $this->buildListItem("browsenotes.php", "svg/new-message.svg", "notes");
-    $out .= $this->buildListItem("browsesources.php", "svg/archive.svg", "sources");
+    $out .= $this->buildListItem("sourcesShow.php", "svg/archive.svg", "sources");
     $out .= $this->buildListItem("repositoriesShow.php", "svg/building.svg", "repositories");
 
     global $allow_admin;

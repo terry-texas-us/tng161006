@@ -39,8 +39,8 @@ $headSection->setTitle(uiTextSnippet('labelbranches'));
     <?php
     echo $adminHeaderSection->build('branches-labelbranches', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_branches.php", uiTextSnippet('search'), "findbranch"]);
-    $navList->appendItem([$allow_add, "admin_newbranch.php", uiTextSnippet('addnew'), "addbranch"]);
+    $navList->appendItem([true, "branchesBrowse.php", uiTextSnippet('browse'), "findbranch"]);
+    $navList->appendItem([$allow_add, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
     $navList->appendItem([$allow_edit, "#", uiTextSnippet('labelbranches'), "label"]);
     echo $navList->build("label");
     ?>

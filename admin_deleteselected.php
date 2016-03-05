@@ -56,7 +56,7 @@ if ($xsrcaction) {
   $query = "DELETE FROM $branches_table WHERE 1=0";
   $modmsg = "branches";
   $id = "branch";
-  $location = "admin_branches.php";
+  $location = "branchesBrowse.php";
 } elseif ($xcemaction) {
   $query = "DELETE FROM $cemeteries_table WHERE 1=0";
   $modmsg = "cemeteries";

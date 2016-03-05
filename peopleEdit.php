@@ -126,7 +126,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
     $navList->appendItem([$allow_add, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
     $navList->appendItem([$allow_edit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
     $navList->appendItem([$allow_edit && $allow_delete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
-    $navList->appendItem([$allow_edit, "peopleEdit.php?personID=$personID&amp;tree=$tree", uiTextSnippet('edit'), "edit"]);
+//    $navList->appendItem([$allow_edit, "peopleEdit.php?personID=$personID&amp;tree=$tree", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <div id="thumbholder" style="margin-right: 5px; <?php if (!$photo) {echo "display: none";} ?>">

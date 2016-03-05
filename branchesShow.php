@@ -7,12 +7,12 @@ function doBranchSearch($instance, $pagenav) {
   global $branchsearch;
 
   $str = "<span>\n";
-  $str .= buildFormElement("browsebranches", "GET", "BranchSearch$instance");
+  $str .= buildFormElement("branchesShow", "GET", "BranchSearch$instance");
   $str .= "<input name='branchsearch' type='text' value=\"$branchsearch\"> \n";
   $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . "\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
   $str .= $pagenav;
   if ($branchsearch) {
-    $str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='browsebranches.php'>" . uiTextSnippet('browsealltrees') . "</a>";
+    $str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='branchesShow.php'>" . uiTextSnippet('browsealltrees') . "</a>";
   }
   $str .= "</form></span>\n";
 
@@ -60,7 +60,7 @@ $treerow = tng_fetch_assoc($treeresult);
 $numtrees = $treerow['treecount'];
 tng_free_result($treeresult);
 
-$logstring = "<a href=\"browsebranches.php?tree=$tree&amp;offset=$offset&amp;branchsearch=$branchsearch\">" . xmlcharacters(uiTextSnippet('branches')) . "</a>";
+$logstring = "<a href=\"branchesShow.php?tree=$tree&amp;offset=$offset&amp;branchsearch=$branchsearch\">" . xmlcharacters(uiTextSnippet('branches')) . "</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -82,7 +82,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
     if ($totrows) {
       echo "<p><span>" . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</span></p>";
     }
-    $pagenav = buildSearchResultPagination($totrows, "browsebranches.php?branchsearch=$branchsearch&amp;offset", $maxsearchresults, $max_browsebranch_pages);
+    $pagenav = buildSearchResultPagination($totrows, "branchesShow.php?branchsearch=$branchsearch&amp;offset", $maxsearchresults, $max_browsebranch_pages);
     if ($pagenav || $branchsearch) {
       echo doBranchSearch(1, $pagenav);
     }

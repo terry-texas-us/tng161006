@@ -34,13 +34,12 @@ $headSection->setTitle(uiTextSnippet('modifytree'));
     <?php
     echo $adminHeaderSection->build('branches-modifybranch', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_branches.php", uiTextSnippet('search'), "findbranch"]);
-    $navList->appendItem([$allow_add, "admin_newbranch.php", uiTextSnippet('addnew'), "addbranch"]);
-    $navList->appendItem([$allow_edit, "#", uiTextSnippet('edit'), "edit"]);
+    $navList->appendItem([true, "branchesBrowse.php", uiTextSnippet('browse'), "findbranch"]);
+    $navList->appendItem([$allow_add, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
+//    $navList->appendItem([$allow_edit, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
-    <form action="admin_updatebranch.php" method='post' name='form1' id='form1'
-          onSubmit="return validateForm();">
+    <form id='form1' name='form1' action='branchesEditFormAction.php' method='post' onSubmit="return validateForm();">
       <table class='table table-sm'>
         <tr>
           <td><?php echo uiTextSnippet('tree'); ?>:</td>

@@ -98,11 +98,11 @@ $headSection->setTitle(uiTextSnippet('branches'));
     <?php
     echo $adminHeaderSection->build('branches', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_branches.php", uiTextSnippet('search'), "findbranch"]);
-    $navList->appendItem([$allow_add, "admin_newbranch.php", uiTextSnippet('addnew'), "addbranch"]);
+//    $navList->appendItem([true, "branchesBrowse.php", uiTextSnippet('browse'), "findbranch"]);
+    $navList->appendItem([$allow_add, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
     echo $navList->build("findbranch");
     ?>
-    <form id='form1' name='form1' action='admin_branches.php'>
+    <form id='form1' name='form1' action='branchesBrowse.php'>
       <label class='form-control-label' for='searchstring'><?php echo uiTextSnippet('searchfor'); ?>:</label>
       <select name='tree'>
         <?php
@@ -167,7 +167,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
         if ($numrows) {
           $actionstr = "";
           if ($allow_edit) {
-            $actionstr .= "<a href=\"admin_editbranch.php?branch=xxx&amp;tree=yyy\" title='" . uiTextSnippet('edit') . "'>\n";
+            $actionstr .= "<a href=\"branchesEdit.php?branch=xxx&amp;tree=yyy\" title='" . uiTextSnippet('edit') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
             $actionstr .= "</a>\n";
           }
@@ -188,7 +188,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
             if ($allow_delete) {
               echo "<td><input name=\"del{$row['branch']}&amp;{$row['gedcom']}\" type='checkbox' value='1'></td>";
             }
-            $editlink = "admin_editbranch.php?branch={$row['branch']}&tree={$row['gedcom']}";
+            $editlink = "branchesEdit.php?branch={$row['branch']}&tree={$row['gedcom']}";
             $id = $allow_edit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['branch'] . "</a>" : $row['branch'];
 
             echo "<td>$id</td>\n";
@@ -207,7 +207,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
           ?>
         </table>
         <?php
-        echo buildSearchResultPagination($totrows, "admin_branches.php?searchstring=$searchstring&amp;offset", $maxsearchresults, 5);
+        echo buildSearchResultPagination($totrows, "branchesBrowse.php?searchstring=$searchstring&amp;offset", $maxsearchresults, 5);
       } else {
         echo uiTextSnippet('notrees');
       }
