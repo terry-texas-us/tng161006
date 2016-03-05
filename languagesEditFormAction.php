@@ -22,4 +22,4 @@ $result = tng_query($query);
 adminwritelog("<a href=\"editlanguage.php?languageID=$languageID\">" . uiTextSnippet('modifylanguage') . ": $languageID</a>");
 
 $message = uiTextSnippet('changestolanguage') . " $languageID " . uiTextSnippet('succsaved') . '.';
-header("Location: admin_languages.php?message=" . urlencode($message));
+header("Location: languagesBrowse.php?message=" . urlencode($message));

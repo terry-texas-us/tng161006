@@ -122,7 +122,7 @@ $headSection->setTitle(uiTextSnippet('administration'));
         }
         echo adminMenuItem("eventtypesBrowse.php", uiTextSnippet('customeventtypes'), uiTextSnippet('custeventitems'), "svg/graduation-cap.svg");
         echo adminMenuItem("reportsBrowse.php", uiTextSnippet('reports'), uiTextSnippet('reportsitems'), "svg/print.svg");
-        echo adminMenuItem("admin_languages.php", uiTextSnippet('languages'), uiTextSnippet('languages'), "svg/language.svg");
+        echo adminMenuItem("languagesBrowse.php", uiTextSnippet('languages'), uiTextSnippet('languages'), "svg/language.svg");
         echo adminMenuItem("admin_utilities.php", uiTextSnippet('backuprestore'), uiTextSnippet('backupitems'), "svg/tools.svg");
       }
       ?>

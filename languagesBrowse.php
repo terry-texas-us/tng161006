@@ -66,12 +66,12 @@ $headSection->setTitle(uiTextSnippet('languages'));
     <?php
     echo $adminHeaderSection->build('languages', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_languages.php", uiTextSnippet('search'), "findlang"]);
-    $navList->appendItem([$allow_add, "admin_newlanguage.php", uiTextSnippet('addnew'), "addlanguage"]);
+//    $navList->appendItem([true, "languagesBrowse.php", uiTextSnippet('browse'), "findlang"]);
+    $navList->appendItem([$allow_add, "languagesAdd.php", uiTextSnippet('add'), "addlanguage"]);
     echo $navList->build("findlang");
     ?>
     <div>
-      <form name='form1' action='admin_languages.php'>
+      <form name='form1' action='languagesBrowse.php'>
         <?php echo uiTextSnippet('searchfor'); ?>: <input class='longfield' name='searchstring' type='text' value="<?php echo $searchstring; ?>">
         <input name='findlang' type='hidden' value='1'>
         <input name='newsearch' type='hidden' value='1'>
@@ -102,7 +102,7 @@ $headSection->setTitle(uiTextSnippet('languages'));
         if ($numrows) {
           $actionstr = "";
           if ($allow_edit) {
-            $actionstr .= "<a href=\"admin_editlanguage.php?languageID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
+            $actionstr .= "<a href=\"languagesEdit.php?languageID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
             $actionstr .= "</a>\n";
           }

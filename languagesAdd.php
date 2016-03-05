@@ -6,41 +6,36 @@ $admin_login = 1;
 include("checklogin.php");
 include("version.php");
 
-if (!$allow_edit) {
+if (!$allow_add) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-$query = "SELECT * FROM $languages_table WHERE languageID = \"$languageID\"";
-$result = tng_query($query);
-$row = tng_fetch_assoc($result);
-tng_free_result($result);
-
 header("Content-type: text/html; charset=" . $session_charset);
-$headSection->setTitle(uiTextSnippet('modifylanguage'));
+$headSection->setTitle(uiTextSnippet('addnewlanguage'));
 ?>
 <!DOCTYPE html>
 <html>
 <?php echo $headSection->build('', 'admin', $session_charset); ?>
-<body id="languages-modifylanguage">
+<body id="languages-addnewlanguage">
   <section class='container'>
     <?php
-    echo $adminHeaderSection->build('languages-modifylanguage', $message);
+    echo $adminHeaderSection->build('languages-addnewlanguage', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_languages.php", uiTextSnippet('search'), "findlang"]);
-    $navList->appendItem([$allow_add, "admin_newlanguage.php", uiTextSnippet('addnew'), "addlanguage"]);
-    $navList->appendItem([$allow_edit, "#", uiTextSnippet('edit'), "edit"]);
-    echo $navList->build("edit");
+    $navList->appendItem([true, "languagesBrowse.php", uiTextSnippet('browse'), "findlang"]);
+//    $navList->appendItem([$allow_add, "languagesAdd.php", uiTextSnippet('add'), "addlanguage"]);
+    echo $navList->build("addlanguage");
     ?>
     <table class='table table-sm'>
       <tr>
         <td>
-          <form action="admin_updatelanguage.php" method='post' name="form1" onSubmit="return validateForm();">
+          <form action="languagesAddFormAction.php" method='post' name="form1" onSubmit="return validateForm();">
             <table>
               <tr>
                 <td><?php echo uiTextSnippet('langfolder'); ?>:</td>
                 <td>
                   <select name="folder">
+                    <option value=''></option>
                     <?php
                     @chdir($rootpath . $endrootpath . $languages_path);
                     if ($handle = @opendir('.')) {
@@ -51,17 +46,8 @@ $headSection->setTitle(uiTextSnippet('modifylanguage'));
                         }
                       }
                       natcasesort($dirs);
-                      $found_current = 0;
                       foreach ($dirs as $dir) {
-                        echo "<option value=\"$dir\"";
-                        if ($dir == $row['folder']) {
-                          echo " selected";
-                          $found_current = 1;
-                        }
-                        echo ">$dir</option>\n";
-                      }
-                      if (!$found_current) {
-                        echo "<option value=\"{$row['folder']}\" selected>{$row['folder']}</option>\n";
+                        echo "<option value=\"$dir\">$dir</option>\n";
                       }
                       closedir($handle);
                     }
@@ -71,20 +57,20 @@ $headSection->setTitle(uiTextSnippet('modifylanguage'));
               </tr>
               <tr>
                 <td><?php echo uiTextSnippet('langdisplay'); ?>:</td>
-                <td><input name='display' type='text' size='50' value="<?php echo $row['display']; ?>"></td>
+                <td><input name='display' type='text' size='50'></td>
               </tr>
               <tr>
                 <td><?php echo uiTextSnippet('charset'); ?>:</td>
-                <td><input name='langcharset' type='text' size='30' value="<?php echo $row['charset']; ?>">
+                <td><input name='langcharset' type='text' size='30' value="<?php echo $session_charset; ?>">
                 </td>
               </tr>
             </table>
             <br>
-            <input name='languageID' type='hidden' value="<?php echo "$languageID"; ?>">
             <input name='submit' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
           </form>
         </td>
       </tr>
+
     </table>
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->

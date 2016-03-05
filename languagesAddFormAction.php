@@ -20,7 +20,7 @@ $query = "INSERT INTO $languages_table (display,folder,charset) VALUES (\"$displ
 $result = tng_query($query);
 $languageID = tng_insert_id();
 
-adminwritelog("<a href=\"admin_editlanguage.php?languageID=$languageID\">" . uiTextSnippet('addnewlanguage') . ": $display/$folder</a>");
+adminwritelog("<a href=\"languagesEdit.php?languageID=$languageID\">" . uiTextSnippet('addnewlanguage') . ": $display/$folder</a>");
 
 $message = uiTextSnippet('language') . " $display " . uiTextSnippet('succadded') . '.';
-header("Location: admin_languages.php?message=" . urlencode($message));
+header("Location: languagesBrowse.php?message=" . urlencode($message));
