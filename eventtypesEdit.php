@@ -44,12 +44,12 @@ $headSection->setTitle(uiTextSnippet('modifyeventtype'));
     <?php
     echo $adminHeaderSection->build('customeventtypes-modifyeventtype', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_eventtypes.php", uiTextSnippet('search'), "findevent"]);
-    $navList->appendItem([$allow_add, "admin_neweventtype.php", uiTextSnippet('addnew'), "addevent"]);
-    $navList->appendItem([$allow_edit, "#", uiTextSnippet('edit'), "edit"]);
+    $navList->appendItem([true, "eventtypesBrowse.php", uiTextSnippet('browse'), "findevent"]);
+    $navList->appendItem([$allow_add, "eventtypesAdd.php", uiTextSnippet('add'), "addevent"]);
+//    $navList->appendItem([$allow_edit, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
-    <form action="admin_updateeventtype.php" method='post' name="form1" onsubmit="return validateForm();">
+    <form name='form1' action='eventtypesEditFormAction.php' method='post' onsubmit="return validateForm();">
       <table class='table table-sm'>
         <tr>
           <td><?php echo uiTextSnippet('assocwith'); ?>:</td>

@@ -80,15 +80,15 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
     <?php
     echo $adminHeaderSection->build('customeventtypes', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_eventtypes.php", uiTextSnippet('search'), "findevent"]);
-    $navList->appendItem([$allow_add, "admin_neweventtype.php", uiTextSnippet('addnew'), "addevent"]);
+    $navList->appendItem([true, "eventtypesBrowse.php", uiTextSnippet('browse'), "findevent"]);
+    $navList->appendItem([$allow_add, "eventtypesAdd.php", uiTextSnippet('add'), "addevent"]);
     echo $navList->build("findevent");
     ?>
     <table class='table table-sm'>
       <tr>
         <td>
           <div>
-            <form action="admin_eventtypes.php" name='form1'>
+            <form action="eventtypesBrowse.php" name='form1'>
               <table>
                 <tr>
                   <td><?php echo uiTextSnippet('searchfor'); ?>:</td>
@@ -180,7 +180,7 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
                 if ($numrows) {
                 $actionstr = "";
                 if ($allow_edit) {
-                  $actionstr .= "<a href=\"admin_editeventtype.php?eventtypeID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
+                  $actionstr .= "<a href=\"eventtypesEdit.php?eventtypeID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
                   $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
                   $actionstr .= "</a>\n";
                 }
@@ -236,7 +236,7 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
                 ?>
               </table>
             <?php
-            echo buildSearchResultPagination($totrows, "admin_eventtypes.php?searchstring=$searchstring&amp;etype=$etype&amp;onimport=$onimport&amp;offset", $maxsearchresults, 5);
+            echo buildSearchResultPagination($totrows, "eventtypesBrowse.php?searchstring=$searchstring&amp;etype=$etype&amp;onimport=$onimport&amp;offset", $maxsearchresults, 5);
             }
             else {
               echo "</table>\n" . uiTextSnippet('norecords');

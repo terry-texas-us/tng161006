@@ -32,4 +32,4 @@ $result = tng_query($query);
 adminwritelog(uiTextSnippet('modifyeventtype') . ": $eventtypeID");
 
 $message = uiTextSnippet('changestoevtype') . " $eventtypeID " . uiTextSnippet('succsaved') . '.';
-header("Location: admin_eventtypes.php?message=" . urlencode($message));
+header("Location: eventtypesBrowse.php?message=" . urlencode($message));

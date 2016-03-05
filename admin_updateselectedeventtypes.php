@@ -43,4 +43,4 @@ if ($query) {
 adminwritelog(uiTextSnippet('modifyeventtype') . ": " . uiTextSnippet('all'));
 
 $message = uiTextSnippet('changestoallevtypes') . " " . uiTextSnippet('succsaved') . ".";
-header("Location: admin_eventtypes.php?message=" . urlencode($message));
+header("Location: eventtypesBrowse.php?message=" . urlencode($message));

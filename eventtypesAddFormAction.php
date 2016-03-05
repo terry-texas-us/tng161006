@@ -38,4 +38,4 @@ if (tng_affected_rows() == 1) {
 } else {
   $message = uiTextSnippet('eventtype') . " $eventtypeID " . uiTextSnippet('idexists') . '.';
 }
-header("Location: admin_eventtypes.php?message=" . urlencode($message));
+header("Location: eventtypesBrowse.php?message=" . urlencode($message));
