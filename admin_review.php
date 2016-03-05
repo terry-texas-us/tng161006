@@ -36,11 +36,11 @@ if ($row['type'] == 'I' || $row['type'] == "C") {
   $name = getName($prow);
   
   $teststr = "<br>\n";
-  $teststr .= "<a href=\"getperson.php?personID=$personID&amp;tree=$tree\" title=\"<?php echo uiTextSnippet('preview') ?>\">\n";
+  $teststr .= "<a href=\"peopleShowPerson.php?personID=$personID&amp;tree=$tree\" title=\"<?php echo uiTextSnippet('preview') ?>\">\n";
   $teststr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
   $teststr .= "</a>\n";
 
-  $editstr = "  | <a href=\"admin_editperson.php?personID=$personID&amp;tree=$tree\" target='_blank'>" . uiTextSnippet('edit') . "</a>";
+  $editstr = "  | <a href=\"peopleEdit.php?personID=$personID&amp;tree=$tree\" target='_blank'>" . uiTextSnippet('edit') . "</a>";
 } elseif ($row['type'] == 'F') {
   
   $query = "SELECT husband, wife FROM $families_table WHERE familyID = \"$familyID\" AND gedcom = \"$tree\"";
@@ -253,10 +253,10 @@ $headSection->setTitle(uiTextSnippet('review'));
   echo $adminHeaderSection->build($hmsg . '-review', $message);
   $navList = new navList('');
   if ($row['type'] == 'I') {
-    $navList->appendItem([true, "admin_people.php", uiTextSnippet('search'), "findperson"]);
-    $navList->appendItem([$allow_add, "admin_newperson.php", uiTextSnippet('addnew'), "addperson"]);
+    $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
+    $navList->appendItem([$allow_add, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
     $navList->appendItem([$allow_edit, "admin_findreview.php?type=I", uiTextSnippet('review'), "review"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "admin_merge.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([$allow_edit && $allow_delete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
   } else {
     $navList->appendItem([true, "admin_families.php", uiTextSnippet('search'), "findperson"]);
     $navList->appendItem([$allow_add, "admin_newfamily.php", uiTextSnippet('addnew'), "addfamily"]);

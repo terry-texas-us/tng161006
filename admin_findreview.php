@@ -121,10 +121,10 @@ $headSection->setTitle(uiTextSnippet('review'));
     $navList = new navList('');
     if ($type == 'I') {
       $hmsg = 'people';
-      $navList->appendItem([true, "admin_people.php", uiTextSnippet('search'), "findperson"]);
-      $navList->appendItem([$allow_add, "admin_newperson.php", uiTextSnippet('addnew'), "addperson"]);
+      $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
+      $navList->appendItem([$allow_add, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
       $navList->appendItem([$allow_edit, "admin_findreview.php?type=I", uiTextSnippet('review'), "review"]);
-      $navList->appendItem([$allow_edit && $allow_delete, "admin_merge.php", uiTextSnippet('merge'), "merge"]);
+      $navList->appendItem([$allow_edit && $allow_delete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
     } else {
       $hmsg = 'families';
       

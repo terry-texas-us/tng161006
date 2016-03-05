@@ -136,7 +136,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
           if ($numtrees > 1) {
             echo "<td><a href=\"showtree.php?tree={$row['gedcom']}\">{$row['treename']}</a></td>\n";
           }
-          echo "<td><a href=\"getperson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$namestr</a></td>\n";
+          echo "<td><a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$namestr</a></td>\n";
           echo "<td align='right'><a href=\"search.php?tree={$row['gedcom']}&amp;branch={$row['branch']}\">" . number_format($indrow['pcount']) . "</a></td>\n";
           echo "<td align='right'><a href=\"famsearch.php?tree={$row['gedcom']}&amp;branch={$row['branch']}\">" . number_format($famrow['fcount']) . "</a></td>\n";
           echo "</tr>\n";

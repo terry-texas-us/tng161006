@@ -238,7 +238,7 @@ function FillSlot(slot, currperson, lastperson) {
                 content = '<a href="' + slotperson.photolink + '">' + content + '</a>';
             content = '<td class="lefttop">' + content + '</td>';
         }
-        content += '<td class="pboxname" id="td' + slot + '">' + namepad + '<a href="getperson.php?personID=' + slotperson.personID + '&amp;tree=' + slotperson.tree + '" id="tdlink' + slot + '">' + slotperson.name + '</a>';
+        content += '<td class="pboxname" id="td' + slot + '">' + namepad + '<a href="peopleShowPerson.php?personID=' + slotperson.personID + '&amp;tree=' + slotperson.tree + '" id="tdlink' + slot + '">' + slotperson.name + '</a>';
         content += getGenderIcon(slotperson.gender);
 
         //put small pedigree link in every box except for primary individual
@@ -471,11 +471,11 @@ function getPopup(slot) {
             parentlink = '';
 
             if (par.fatherID)
-                parentlink += '<a href="getperson.php?personID=' + par.fatherID + '&amp;tree=' + tree + '">' + par.fathername + '</a>';
+                parentlink += '<a href="peopleShowPerson.php?personID=' + par.fatherID + '&amp;tree=' + tree + '">' + par.fathername + '</a>';
             if (par.motherID) {
                 if (parentlink)
                     parentlink += ", ";
-                parentlink += '<a href="getperson.php?personID=' + par.motherID + '&amp;tree=' + tree + '">' + par.mothername + '</a>';
+                parentlink += '<a href="peopleShowPerson.php?personID=' + par.motherID + '&amp;tree=' + tree + '">' + par.mothername + '</a>';
             }
             if (par.famID != slotperson.famc)
                 parpedlink = '<a href="pedigree.php?personID=' + slotperson.personID + '&amp;tree=' + tree + '&amp;parentset=' + count + '&amp;display=' + display + '&amp;generations=' + generations + '">' + chartlink + '</a>';
@@ -505,7 +505,7 @@ function getPopup(slot) {
             //do each spouse
             sppedlink = '';
             if (fam.spID && fam.spID != -1) {
-                spouselink = '<a href="getperson.php?personID=' + fam.spID + '&amp;tree=' + tree + '">' + fam.spname + '</a>';
+                spouselink = '<a href="peopleShowPerson.php?personID=' + fam.spID + '&amp;tree=' + tree + '">' + fam.spname + '</a>';
                 if (popupchartlinks)
                     sppedlink = pedIcon(fam.spID);
             } else
@@ -520,7 +520,7 @@ function getPopup(slot) {
                 for (var j = 0; j < children.length; j++) {
                     var spchild = children[j];
 
-                    kidlink = '<a href="getperson.php?personID=' + spchild.childID + '&amp;tree=' + tree + '">' + spchild.name + '</a>';
+                    kidlink = '<a href="peopleShowPerson.php?personID=' + spchild.childID + '&amp;tree=' + tree + '">' + spchild.name + '</a>';
                     if (popupchartlinks)
                         kidpedlink = pedIcon(spchild.childID);
                     else

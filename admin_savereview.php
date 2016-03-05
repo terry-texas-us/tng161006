@@ -161,7 +161,7 @@ if ($succmsg) {
   if ($row['type'] == 'F') {
     adminwritelog("<a href=\"admin_editfamily.php?familyID=$family&tree=$tree\">$choice (" . uiTextSnippet('family') . "): $tree/{$row['familyID']}</a>");
   } else {
-    adminwritelog("<a href=\"admin_editperson.php?personID=$personID&tree=$tree\">$choice (" . uiTextSnippet('person') . "): $tree/{$row['personID']}</a>");
+    adminwritelog("<a href=\"peopleEdit.php?personID=$personID&tree=$tree\">$choice (" . uiTextSnippet('person') . "): $tree/{$row['personID']}</a>");
   }
   $message = uiTextSnippet('tentdata') . " $persfamID $succmsg.";
 }

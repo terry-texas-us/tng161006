@@ -1143,7 +1143,7 @@ function buildParentRow($parent, $spouse, $label) {
       $out .= "<label class='col-sm-2 form-control-label' for='parent'>" . uiTextSnippet($label) . "</label>\n";
       $out .= "<div class='col-md-6'>\n";
         if ($prow['personID']) {
-          $out .= "<p id='parent'><a href=\"admin_editperson.php?personID={$prow['personID']}&amp;tree=$tree&amp;cw=$cw\">" . getName($prow) . " - {$prow['personID']}</a>$birthinfo</p>";
+          $out .= "<p id='parent'><a href=\"peopleEdit.php?personID={$prow['personID']}&amp;tree=$tree&amp;cw=$cw\">" . getName($prow) . " - {$prow['personID']}</a>$birthinfo</p>";
         }
       $out .= "</div>\n";
 

@@ -69,7 +69,7 @@ function getIndividual($key, $sex, $level, $trail) {
           $spouserow['allow_private'] = $srights['private'];
           $spousename = getName($spouserow);
           $vitalinfo = getVitalDates($spouserow);
-          $spousestr = "&nbsp;<a href=\"getperson.php?personID={$spouserow['personID']}&amp;tree=$tree\">$spousename</a>&nbsp; $vitalinfo<br>";
+          $spousestr = "&nbsp;<a href=\"peopleShowPerson.php?personID={$spouserow['personID']}&amp;tree=$tree\">$spousename</a>&nbsp; $vitalinfo<br>";
         }
       }
 
@@ -88,7 +88,7 @@ function getIndividual($key, $sex, $level, $trail) {
           $crow['allow_private'] = $crights['private'];
           $cname = getName($crow);
           $vitalinfo = getVitalDates($crow);
-          $rval .= str_repeat("  ", ($level - 1) * 8) . "<li>$level &nbsp;<a href=\"getperson.php?personID={$crow['personID']}&amp;tree=$tree\">$cname</a>&nbsp;<a href=\"desctracker.php?trail=$newtrail&amp;tree=$tree\" title=\"" . uiTextSnippet('graphdesc') . "\"><img src=\"img/dchart.gif\" width='10' height='9' alt=\"" . uiTextSnippet('graphdesc') . "\"></a> $vitalinfo\n";
+          $rval .= str_repeat("  ", ($level - 1) * 8) . "<li>$level &nbsp;<a href=\"peopleShowPerson.php?personID={$crow['personID']}&amp;tree=$tree\">$cname</a>&nbsp;<a href=\"desctracker.php?trail=$newtrail&amp;tree=$tree\" title=\"" . uiTextSnippet('graphdesc') . "\"><img src=\"img/dchart.gif\" width='10' height='9' alt=\"" . uiTextSnippet('graphdesc') . "\"></a> $vitalinfo\n";
           if ($level < $generations) {
             $ind = getIndividual($crow['personID'], $crow[sex], $level + 1, $newtrail);
             if ($ind) {
@@ -256,7 +256,7 @@ $headSection->setTitle(uiTextSnippet('descendfor') . " $namestr");
         <?php
         $vitalinfo = getVitalDates($row);
         echo "<ul class=\"first\">\n";
-        echo   "<li>$level &nbsp;<a href=\"getperson.php?personID=$personID&amp;tree=$tree\">$namestr</a>&nbsp; $vitalinfo\n";
+        echo   "<li>$level &nbsp;<a href=\"peopleShowPerson.php?personID=$personID&amp;tree=$tree\">$namestr</a>&nbsp; $vitalinfo\n";
 
         if ($generations > 1) {
           $ind = getIndividual($key, $row['sex'], $level + 1, $personID);

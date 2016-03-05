@@ -127,7 +127,7 @@ function getEvents($person) {
       $spouserow['allow_private'] = $srights['private'];
       if ($spouserow['firstname'] || $spouserow['lastname']) {
         $spousename = getName($spouserow);
-        $spouselink = "<a href=\"getperson.php?personID={$spouserow['personID']}&amp;tree=$tree\">$spousename</a>";
+        $spouselink = "<a href=\"peopleShowPerson.php?personID={$spouserow['personID']}&amp;tree=$tree\">$spousename</a>";
       }
       tng_free_result($spouseresult);
     } else {
@@ -162,7 +162,7 @@ function getEvents($person) {
       if ($crights['both']) {
         if ($child['firstname'] || $child['lastname']) {
           $childname = getName($child);
-          $childlink = "<a href=\"getperson.php?personID={$child['personID']}&amp;tree={$person['tree']}\">$childname</a>";
+          $childlink = "<a href=\"peopleShowPerson.php?personID={$child['personID']}&amp;tree={$person['tree']}\">$childname</a>";
         } else {
           $childlink = "";
         }
@@ -273,7 +273,7 @@ foreach ($timeline as $timeentry) {
         $latest = $newtimeentry['death'];
       }
     }
-    $newtimeentry['name'] = "<a href=\"getperson.php?personID=$timeperson&amp;tree=$timetree\">$namestr2</a>";
+    $newtimeentry['name'] = "<a href=\"peopleShowPerson.php?personID=$timeperson&amp;tree=$timetree\">$namestr2</a>";
     array_push($keeparray, $newtimeentry);
     tng_free_result($result2);
   }

@@ -403,7 +403,7 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
                 echo "<div class='person-img' id=\"mi{$row['gedcom']}_{$row['personID']}_$tngevent\">\n";
                   echo "<div class='person-prev' id=\"prev{$row['gedcom']}_{$row['personID']}_$tngevent\"></div>\n";
                 echo "</div>\n";
-                echo "<a href=\"pedigree.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$chartlink</a> <a href=\"getperson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\" class=\"pers\" id=\"p{$row['personID']}_t{$row['gedcom']}:$tngevent\">$name</a>&nbsp;</td>\n";
+                echo "<a href=\"pedigree.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$chartlink</a> <a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\" class=\"pers\" id=\"p{$row['personID']}_t{$row['gedcom']}:$tngevent\">$name</a>&nbsp;</td>\n";
               echo "<td>" . displayDate($dateval) . "</td><td>$placetxt</td>";
               echo "<td>{$row['personID']} </td>";
               if ($numtrees > 1) {

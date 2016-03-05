@@ -123,7 +123,7 @@ $headSection->setTitle($row['name']);
           echo "<table><tr><td width='40' align='right'>";
           echo "{$row['number']}.&nbsp;&nbsp;</td><td>";
           echo showSmallPhoto($row['personID'], $row['name'], $row['allow_living'] && $row['allow_private'], 0, false, $row['sex']);
-          echo "<a href=\"getperson.php?personID={$row['personID']}&amp;tree=$tree\" name=\"p{$row['personID']}\" id=\"p{$row['personID']}\">{$row['name']}</a>";
+          echo "<a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree=$tree\" name=\"p{$row['personID']}\" id=\"p{$row['personID']}\">{$row['name']}</a>";
           if ($row['genlist']) {
             echo " <a href=\"desctracker.php?trail={$row['trail']}&amp;tree=$tree\" title=\"" . uiTextSnippet('graphdesc') . "\">\n";
             echo "<img src=\"img/dchart.gif\" width='10' height='9' alt=\"" . uiTextSnippet('graphdesc') . "\">\n";
@@ -153,10 +153,10 @@ $headSection->setTitle($row['name']);
             //$spouserow['allow_private'] = $famrights['private'];
 
             if ($spouserow['marrdate'] || $spouserow['marrplace']) {
-              echo "<p>$firstfirstname " . strtolower(uiTextSnippet('wasmarried')) . " <a href=\"getperson.php?personID={$spouserow['personID']}&amp;tree=$tree\">{$spouserow['name']}</a>";
+              echo "<p>$firstfirstname " . strtolower(uiTextSnippet('wasmarried')) . " <a href=\"peopleShowPerson.php?personID={$spouserow['personID']}&amp;tree=$tree\">{$spouserow['name']}</a>";
               echo getSpouseDates($spouserow);
             } else {
-              echo "<p>$firstfirstname &mdash; <a href=\"getperson.php?personID={$spouserow['personID']}&amp;tree=$tree\">{$spouserow['name']}</a>.";
+              echo "<p>$firstfirstname &mdash; <a href=\"peopleShowPerson.php?personID={$spouserow['personID']}&amp;tree=$tree\">{$spouserow['name']}</a>.";
             }
             $spouseinfo = getVitalDates($spouserow);
             $spparents = $spouserow['personID'] ? getSpouseParents($spouserow['personID'], $spouserow['sex']) : uiTextSnippet('unknown');
@@ -204,7 +204,7 @@ $headSection->setTitle($row['name']);
                     $nextgen[$childID] = $childrow;
                   }
                 }
-                echo "<li style=\"list-style-type:lower-roman\">$displaycount. <a href='#' onclick=\"if(jQuery('#p$childID').length) {jQuery('html, body').animate({scrollTop: jQuery('#p$childID').offset().top-10},'slow');}else{window.location.href='getperson.php?personID=$childID&amp;tree=$tree';} return false;\">$name</a> &nbsp;<a href=\"desctracker.php?trail={$childrow['trail']}&amp;tree=$tree\"><img src=\"img/dchart.gif\" width='10' height='9' alt=\"" . uiTextSnippet('graphdesc') . "\"></a> $vitaldates</li>\n";
+                echo "<li style=\"list-style-type:lower-roman\">$displaycount. <a href='#' onclick=\"if(jQuery('#p$childID').length) {jQuery('html, body').animate({scrollTop: jQuery('#p$childID').offset().top-10},'slow');}else{window.location.href='peopleShowPerson.php?personID=$childID&amp;tree=$tree';} return false;\">$name</a> &nbsp;<a href=\"desctracker.php?trail={$childrow['trail']}&amp;tree=$tree\"><img src=\"img/dchart.gif\" width='10' height='9' alt=\"" . uiTextSnippet('graphdesc') . "\"></a> $vitaldates</li>\n";
               }
               echo "</ol>\n</td></tr></table>\n";
               tng_free_result($result2);

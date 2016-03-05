@@ -182,10 +182,10 @@ $headSection->setTitle(uiTextSnippet('people'));
     <?php
     echo $adminHeaderSection->build('people', $message);
     $navList = new navList('people');
-    $navList->appendItem([true, "admin_people.php", uiTextSnippet('search'), "findperson"]);
-    $navList->appendItem([$allow_add, "admin_newperson.php", uiTextSnippet('addnew'), "addperson"]);
+    $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
+    $navList->appendItem([$allow_add, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
     $navList->appendItem([$allow_edit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "admin_merge.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([$allow_edit && $allow_delete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build('findperson');
     include '_/components/php/findPeopleForm.php';
     
@@ -224,7 +224,7 @@ $headSection->setTitle(uiTextSnippet('people'));
             <?php
             $actionstr = "";
             if ($allow_edit) {
-              $actionstr .= "<a href=\"admin_editperson.php?personID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('edit') . "'>\n";
+              $actionstr .= "<a href=\"peopleEdit.php?personID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('edit') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
               $actionstr .= "</a>\n";
             }
@@ -233,7 +233,7 @@ $headSection->setTitle(uiTextSnippet('people'));
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
               $actionstr .= "</a>\n";
             }
-            $actionstr .= "<a href=\"getperson.php?personID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('preview') . "'>\n";
+            $actionstr .= "<a href=\"peopleShowPerson.php?personID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('preview') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
             $actionstr .= "</a>\n";
 
@@ -268,7 +268,7 @@ $headSection->setTitle(uiTextSnippet('people'));
                 echo "<td><input name=\"del{$row['ID']}\" type='checkbox' value='1'></td>";
               }
               echo "<td>\n";
-                $editlink = "admin_editperson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}";
+                $editlink = "peopleEdit.php?personID={$row['personID']}&amp;tree={$row['gedcom']}";
                 echo $allow_edit ? "<a href='$editlink' title='" . uiTextSnippet('edit') . "'>" . getname($row) . "</a>" : getname($row);
                 echo "<br>";
                 echo "{$row['personID']}\n";
@@ -286,7 +286,7 @@ $headSection->setTitle(uiTextSnippet('people'));
       } else {
         echo "<div class='alert alert-warning'>" . uiTextSnippet('norecords') . "</div>\n";
       }
-      echo buildSearchResultPagination($totrows, "admin_people.php?searchstring=$searchstring&amp;living=$living&amp;exactmatch=$exactmatch&amp;offset", $maxsearchresults, 5);
+      echo buildSearchResultPagination($totrows, "peopleBrowse.php?searchstring=$searchstring&amp;living=$living&amp;exactmatch=$exactmatch&amp;offset", $maxsearchresults, 5);
       tng_free_result($result);
       ?>
     </form>

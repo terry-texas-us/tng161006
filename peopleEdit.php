@@ -122,11 +122,11 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
     
     echo $adminHeaderSection->build('people-modifyperson', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_people.php", uiTextSnippet('search'), "findperson"]);
-    $navList->appendItem([$allow_add, "admin_newperson.php", uiTextSnippet('addnew'), "addperson"]);
+    $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
+    $navList->appendItem([$allow_add, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
     $navList->appendItem([$allow_edit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "admin_merge.php", uiTextSnippet('merge'), "merge"]);
-    $navList->appendItem([$allow_edit, "admin_editperson.php?personID=$personID&amp;tree=$tree", uiTextSnippet('edit'), "edit"]);
+    $navList->appendItem([$allow_edit && $allow_delete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([$allow_edit, "peopleEdit.php?personID=$personID&amp;tree=$tree", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <div id="thumbholder" style="margin-right: 5px; <?php if (!$photo) {echo "display: none";} ?>">
@@ -137,7 +137,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
       <?php
       if ($editconflict) {
         echo "<br><p>" . uiTextSnippet('editconflict') . "</p>\n";
-        echo "<p><strong><a href='admin_editperson.php?personID=$personID&tree=$tree'>" . uiTextSnippet('retry') . "</a></strong></p>\n";
+        echo "<p><strong><a href='peopleEdit.php?personID=$personID&tree=$tree'>" . uiTextSnippet('retry') . "</a></strong></p>\n";
       } else {
         $iconColor = $gotassoc ? "icon-info" : "icon-muted";
         echo "<a id='person-associations' href='#' title='" . uiTextSnippet('associations') . "' data-person-id='$personID' data-tree='$tree'>\n";
@@ -158,14 +158,14 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
       <br><br>
     </div>
     <br>
-    <a href="getperson.php?personID=<?php echo $personID; ?>&amp;tree=<?php echo $tree; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
+    <a href="peopleShowPerson.php?personID=<?php echo $personID; ?>&amp;tree=<?php echo $tree; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
       <img class='icon-sm' src='svg/eye.svg'>
     </a>
     <?php if ($allow_add && (!$assignedtree || $assignedtree == $tree)) { ?>
       <a id='addmedia-person' href='#'><?php echo uiTextSnippet('addmedia'); ?></a>
     <?php } ?>
 
-    <form action="admin_updateperson.php" method='post' name='form1' id='form1'>
+    <form action="peopleEditFormAction.php" method='post' name='form1' id='form1'>
       <?php if (!$editconflict) { ?>
         <div id='person-names'>
           <div class='row'>
@@ -444,7 +444,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                               <span>
                                 <?php
                                 if (isset($spouserow['personID']) && $spouserow['personID']) {
-                                  echo "<a href=\"admin_editperson.php?personID={$spouserow['personID']}&amp;tree=$tree&amp;cw=$cw\">" . getName($spouserow) . " - {$spouserow['personID']}</a>$birthinfo";
+                                  echo "<a href=\"peopleEdit.php?personID={$spouserow['personID']}&amp;tree=$tree&amp;cw=$cw\">" . getName($spouserow) . " - {$spouserow['personID']}</a>$birthinfo";
                                 }
                                 ?>
                               </span>
@@ -471,7 +471,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                                       echo "<div class='col-md-8'>$kidcount. ";
                                         if ($crights['both']) {
                                           if ($rightbranch) {
-                                            echo "<a href=\"admin_editperson.php?personID={$child['pID']}&amp;tree=$tree&amp;cw=$cw\">" . getName($child) . " - {$child['pID']}</a>";
+                                            echo "<a href=\"peopleEdit.php?personID={$child['pID']}&amp;tree=$tree&amp;cw=$cw\">" . getName($child) . " - {$child['pID']}</a>";
                                           } else {
                                             echo getName($child) . " - " . $child['pID'];
                                           }

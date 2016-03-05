@@ -63,7 +63,7 @@ $headSection->setTitle(uiTextSnippet('labelbranches'));
                     $row['allow_living'] = $rights['living'];
                     $row['allow_private'] = $rights['private'];
 
-                    echo "<a href=\"admin_editperson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}&amp;cw=1\" target='_blank'>" . getNameRev($row) . " ({$row['personID']})</a><br>\n";
+                    echo "<a href=\"peopleEdit.php?personID={$row['personID']}&amp;tree={$row['gedcom']}&amp;cw=1\" target='_blank'>" . getNameRev($row) . " ({$row['personID']})</a><br>\n";
                   }
                   tng_free_result($brresult);
                   ?>

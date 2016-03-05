@@ -236,7 +236,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
                         $nrights = determineLivingPrivateRights($row2);
                         $row2['allow_living'] = $nrights['living'];
                         $row2['allow_private'] = $nrights['private'];
-                        $notelinktext .= "<li><a href=\"getperson.php?personID={$row2['personID']}&amp;tree={$row2['gedcom']}\" target='_blank'>" . getNameRev($row2) . " ({$row2['personID']})</a></li>\n";
+                        $notelinktext .= "<li><a href=\"peopleShowPerson.php?personID={$row2['personID']}&amp;tree={$row2['gedcom']}\" target='_blank'>" . getNameRev($row2) . " ({$row2['personID']})</a></li>\n";
                         tng_free_result($result2);
                       }
                     }

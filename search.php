@@ -319,7 +319,7 @@ if (!$numrows) {
 } elseif ($numrows == 1) {
   $row = tng_fetch_assoc($result);
   tng_free_result($result);
-  header("Location: " . "getperson.php?personID=" . $row['personID'] . "&tree=" . $row['gedcom']);
+  header("Location: " . "peopleShowPerson.php?personID=" . $row['personID'] . "&tree=" . $row['gedcom']);
   exit;
 }
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
@@ -422,7 +422,7 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
             echo "<div class='person-prev' id=\"prev{$row['gedcom']}_{$row['personID']}\"></div>\n";
           echo "</div>\n";
           echo "<a href=\"pedigree.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$chartlink</a> ";
-          echo "<a href=\"getperson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\" class=\"pers\" id=\"p{$row['personID']}_t{$row['gedcom']}\">$name</a>";
+          echo "<a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\" class=\"pers\" id=\"p{$row['personID']}_t{$row['gedcom']}\">$name</a>";
         echo "</td>";
 
         if ($showspouse) {
@@ -444,7 +444,7 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
               tng_free_result($spresult);
             }
           }
-          $spousestr = $spouse ? "<a href=\"getperson.php?personID=$spouseID&amp;tree={$row['gedcom']}\">$spouse</a>&nbsp;" : "";
+          $spousestr = $spouse ? "<a href=\"peopleShowPerson.php?personID=$spouseID&amp;tree={$row['gedcom']}\">$spouse</a>&nbsp;" : "";
         } else {
           $spousestr = "";
         }

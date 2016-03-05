@@ -345,7 +345,7 @@ function do_chart($gens, $output = false) {
         }
         if (!$ignore || $gen_num > 1) {
           $row [$rows - $gen_num] .= "\t\t<div class=\"box\" style=\"left:{$person['xpos']}px;top:{$ypos}px;width:{$width}px\">\r\n\t\t\t<div class=\"inner\">\r\n\t\t\t\t<div>\r\n\t\t\t\t\t";
-          $url = htmlentities("getperson.php?personID={$person['personID']}&tree={$_GET['tree']}");
+          $url = htmlentities("peopleShowPerson.php?personID={$person['personID']}&tree={$_GET['tree']}");
           $row [$rows - $gen_num] .= "<a" . ($person['display'] ? " title=\"{$bio}\"" : "") . " href=\"{$url}\">{$person['name']}</a><br>" . getGenderIcon($person['sex'], -2);
           if ($person['display']) {
             if ($person['birthdatetr'] != '0000-00-00' || $person['altbirthdatetr'] != '0000-00-00' || $person['deathdatetr'] != '0000-00-00' || $person['burialdatetr'] != '0000-00-00') {

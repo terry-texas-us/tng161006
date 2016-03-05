@@ -378,7 +378,7 @@ function getMediaLinkText($mediaID, $ioffset) {
     $prow['allow_private'] = $prights['private'];
 
     if ($prow['personID2'] != null) {
-      $medialinktext .= "<a href=\"getperson.php?personID={$prow['personID2']}&amp;tree={$prow['gedcom']}\">";
+      $medialinktext .= "<a href=\"peopleShowPerson.php?personID={$prow['personID2']}&amp;tree={$prow['gedcom']}\">";
       $medialinktext .= getName($prow) . "</a>";
     } elseif ($prow['sourceID'] != null) {
       $sourcetext = $prow['title'] ? $prow['title'] : uiTextSnippet('source') . ": " . $prow['sourceID'];

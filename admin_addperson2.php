@@ -203,7 +203,7 @@ if ($result && tng_num_rows($result)) {
   } else {
 
   }
-  adminwritelog("<a href=\"admin_editperson.php?personID=$personID&amp;tree=$tree\">" . uiTextSnippet('addnewperson') . ": $tree/$personID</a>");
+  adminwritelog("<a href=\"peopleEdit.php?personID=$personID&amp;tree=$tree\">" . uiTextSnippet('addnewperson') . ": $tree/$personID</a>");
   if ($needped) {
     header("Location: pedigree.php?personID=$personID&tree=$tree");
   }

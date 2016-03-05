@@ -609,14 +609,14 @@ if (!$result) {
     for ($i = 0; $i < count($displayfields) - 1; $i++) {
       $thisfield = $displayfields[$i];
       if ($thisfield == "lastfirst") {
-        $data = $csv ? getNameRev($row) : "<a href=\"getperson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">" . getNameRev($row) . "</a>";
+        $data = $csv ? getNameRev($row) : "<a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">" . getNameRev($row) . "</a>";
       } else {
         if ($thisfield == "fullname") {
           $namestr = getName($row);
-          $data = $csv ? $namestr : showSmallPhoto($row['personID'], $namestr, $rights['both'], 0, false, $row['sex']) . "<a href=\"getperson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$namestr</a>";
+          $data = $csv ? $namestr : showSmallPhoto($row['personID'], $namestr, $rights['both'], 0, false, $row['sex']) . "<a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$namestr</a>";
         } else {
           if (strtoupper(substr($thisfield, -8)) == strtoupper("personID")) {
-            $data = $csv ? $row[$thisfield] : "<a href=\"getperson.php?personID=$row[$thisfield]&amp;tree={$row['gedcom']}\">$row[$thisfield]</a>";
+            $data = $csv ? $row[$thisfield] : "<a href=\"peopleShowPerson.php?personID=$row[$thisfield]&amp;tree={$row['gedcom']}\">$row[$thisfield]</a>";
           } else {
             if ($thisfield == "treename") {
               $data = $csv ? $row['treename'] : "<a href=\"showtree.php?tree={$row['gedcom']}\">{$row['treename']}</a>";
@@ -633,13 +633,13 @@ if (!$result) {
                     $sprow['allow_living'] = $srights['living'];
                     $sprow['allow_private'] = $srights['private'];
 
-                    $data = $csv ? getName($sprow) : "<a href=\"getperson.php?personID=$spouseID&amp;tree={$sprow['gedcom']}\">" . getName($sprow) . "</a>";
+                    $data = $csv ? getName($sprow) : "<a href=\"peopleShowPerson.php?personID=$spouseID&amp;tree={$sprow['gedcom']}\">" . getName($sprow) . "</a>";
                     tng_free_result($spresult);
                   } else {
                     $data = "";
                   }
                 } else {
-                  $data = $csv ? $spouseID : "<a href=\"getperson.php?personID=$spouseID&amp;tree={$sprow['gedcom']}\">$spouseID</a>";
+                  $data = $csv ? $spouseID : "<a href=\"peopleShowPerson.php?personID=$spouseID&amp;tree={$sprow['gedcom']}\">$spouseID</a>";
                 }
               } else {
                 if ($rights['both'] && (!in_array($thisfield, $ldsfields) || $rights['lds'])) {

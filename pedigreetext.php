@@ -85,7 +85,7 @@ function displayIndividual($key, $generation, $slot) {
   echo "<table width=\"100%\">\n";
   echo "<tr>\n";
   $pedborder = $slot % 2 && $slot != 1 ? "class=\"pedborderleft\"" : "";
-  echo "<td colspan='2' $pedborder><span>&nbsp;$slot. <a href=\"getperson.php?personID=$key&amp;tree=$tree\">$name</a>&nbsp;</span></td>\n";
+  echo "<td colspan='2' $pedborder><span>&nbsp;$slot. <a href=\"peopleShowPerson.php?personID=$key&amp;tree=$tree\">$name</a>&nbsp;</span></td>\n";
 
   //arrow goes here in own cell
   if ($nextslot >= $pedmax && $row['famc']) {

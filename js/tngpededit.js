@@ -37,7 +37,7 @@ function addPerson(form) {
         params += '&order=' + (childcount + 1);
     }
     $.ajax({
-        url: 'admin_addperson.php',
+        url: 'peopleAddFormAction.php',
         data: params,
         dataType: 'html',
         success: function (req) {
@@ -83,7 +83,7 @@ function updatePerson(form, slot) {
     checkDate(form.endldate);
     var params = $(form).serialize();
     $.ajax({
-        url: 'admin_updateperson.php',
+        url: 'peopleEditFormAction.php',
         data: params,
         dataType: 'html',
         success: function (req) {

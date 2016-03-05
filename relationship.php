@@ -384,7 +384,7 @@ function drawBox($drawpersonID, $spouseflag, $topflag) {
     } else {
       $nameinfo = $nameinfo_org;
     }
-    $pedigree['namelink'] = "<a href=\"getperson.php?personID={$row['personID']}&amp;tree=$tree\">$nameinfo</a>";
+    $pedigree['namelink'] = "<a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree=$tree\">$nameinfo</a>";
 
     $newoffset = $spouseflag ? $gens->offsetV : $gens->offsetV + $pedigree['puboxheight'] + 2 * $pedigree['boxVsep'];
     $gens->offsetV = $gens->offsetV == -1 ? 0 : $newoffset;

@@ -128,7 +128,7 @@ $headSection->setTitle($row['name']);
       echo "<table><tr><td width='40' align='right'>";
       echo "$personcount.&nbsp;&nbsp;</td><td>";
       echo showSmallPhoto($row['personID'], $row['name'], $rights['both'], 0);
-      echo "<a href=\"getperson.php?personID={$row['personID']}&amp;tree=$tree\" name=\"p{$row['personID']}\" id=\"p{$row['personID']}\">{$row['name']}</a>";
+      echo "<a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree=$tree\" name=\"p{$row['personID']}\" id=\"p{$row['personID']}\">{$row['name']}</a>";
       echo getVitalDates($row, 1);
       echo getOtherEvents($row);
       if ($rights['both'] && $pedigree['regnotes']) {
@@ -145,10 +145,10 @@ $headSection->setTitle($row['name']);
       while ($spouserow = array_shift($row['spouses'])) {
 
         if ($spouserow['marrdate'] || $spouserow['marrplace']) {
-          echo "<p>$firstfirstname " . strtolower(uiTextSnippet('wasmarried')) . " <a href=\"getperson.php?personID={$spouserow['personID']}&amp;tree=$tree\">{$spouserow['name']}</a>";
+          echo "<p>$firstfirstname " . strtolower(uiTextSnippet('wasmarried')) . " <a href=\"peopleShowPerson.php?personID={$spouserow['personID']}&amp;tree=$tree\">{$spouserow['name']}</a>";
           echo getSpouseDates($spouserow);
         } else {
-          echo "<p>$firstfirstname &mdash; <a href=\"getperson.php?personID={$spouserow['personID']}&amp;tree=$tree\">{$spouserow['name']}</a>.";
+          echo "<p>$firstfirstname &mdash; <a href=\"peopleShowPerson.php?personID={$spouserow['personID']}&amp;tree=$tree\">{$spouserow['name']}</a>.";
         }
         $spouseinfo = getVitalDates($spouserow);
         if ($spouseinfo) {
@@ -183,7 +183,7 @@ $headSection->setTitle($row['name']);
               $childrow['firstname'] = uiTextSnippet('living');
             }
 
-            echo "<li style=\"list-style-type:lower-roman\"><a href=\"getperson.php?personID={$childrow['personID']}&amp;tree=$tree\">{$childrow['name']}</a>";
+            echo "<li style=\"list-style-type:lower-roman\"><a href=\"peopleShowPerson.php?personID={$childrow['personID']}&amp;tree=$tree\">{$childrow['name']}</a>";
             echo getVitalDates($childrow);
             echo "</li>\n";
           }
@@ -262,7 +262,7 @@ $headSection->setTitle($row['name']);
                   echo "<table><tr><td width='40' align='right'>";
                   echo "$personcount.&nbsp;&nbsp;</td><td>";
                   echo showSmallPhoto($fathrow['personID'], $fathrow['name'], $frights['both'], 0);
-                  echo "<a href=\"getperson.php?personID={$fathrow['personID']}&amp;tree=$tree\" name=\"p{$fathrow['personID']}\" id=\"p{$fathrow['personID']}\">{$fathrow['name']}</a>";
+                  echo "<a href=\"peopleShowPerson.php?personID={$fathrow['personID']}&amp;tree=$tree\" name=\"p{$fathrow['personID']}\" id=\"p{$fathrow['personID']}\">{$fathrow['name']}</a>";
                   echo getVitalDates($fathrow, 1);
                   echo getOtherEvents($fathrow);
                   if ($frights['both'] && $pedigree['regnotes']) {
@@ -326,7 +326,7 @@ $headSection->setTitle($row['name']);
                   echo "<table><tr><td width='40' align='right'>";
                   echo "$personcount.&nbsp;&nbsp;</td><td>";
                   echo showSmallPhoto($mothrow['personID'], $mothrow['name'], $mrights['both'], 0);
-                  echo "<a href=\"getperson.php?personID={$mothrow['personID']}&amp;tree=$tree\" name=\"p{$mothrow['personID']}\" id=\"p{$mothrow['personID']}\">{$mothrow['name']}</a>";
+                  echo "<a href=\"peopleShowPerson.php?personID={$mothrow['personID']}&amp;tree=$tree\" name=\"p{$mothrow['personID']}\" id=\"p{$mothrow['personID']}\">{$mothrow['name']}</a>";
                   echo getVitalDates($mothrow, 1);
                   echo getOtherEvents($mothrow);
                   if ($mrights['both'] && $pedigree['regnotes']) {
@@ -377,7 +377,7 @@ $headSection->setTitle($row['name']);
                   echo $lastlastgen[$childrow['personID']] . ". ";
                   echo "<a href='#' onclick=\"jQuery('html, body').animate({scrollTop: jQuery('#p{$childrow['personID']}').offset().top-10},'slow'); return false;\">{$childrow['name']}</a>";
                 } else {
-                  echo "<a href=\"getperson.php?personID={$childrow['personID']}&amp;tree=$tree\">{$childrow['name']}</a>";
+                  echo "<a href=\"peopleShowPerson.php?personID={$childrow['personID']}&amp;tree=$tree\">{$childrow['name']}</a>";
                 }
                 echo getVitalDates($childrow);
                 echo "</li>\n";

@@ -168,7 +168,7 @@ function doMedia($mediatypeID) {
 
       $hstext = "";
       if ($prow['personID2'] != null) {
-        $medialinktext .= "<li><a href=\"getperson.php?personID={$prow['personID2']}&amp;tree={$prow['gedcom']}\">";
+        $medialinktext .= "<li><a href=\"peopleShowPerson.php?personID={$prow['personID2']}&amp;tree={$prow['gedcom']}\">";
         $medialinktext .= getName($prow);
         if ($mediatypeID == "headstones") {
           $deathdate = $prow['deathdate'] ? $prow['deathdate'] : $prow['burialdate'];

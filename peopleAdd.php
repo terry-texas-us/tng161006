@@ -35,13 +35,13 @@ $headSection->setTitle(uiTextSnippet('addnewperson'));
     <?php
     echo $adminHeaderSection->build('people-addnewperson', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_people.php", uiTextSnippet('search'), "findperson"]);
-    $navList->appendItem([$allow_add, "admin_newperson.php", uiTextSnippet('addnew'), "addperson"]);
+    $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
+    $navList->appendItem([$allow_add, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
     $navList->appendItem([$allow_edit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "admin_merge.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([$allow_edit && $allow_delete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("addperson");
     ?>
-    <form name="form1" action="admin_addperson.php" method='post' onSubmit="return trimCheckPersonRequired();">
+    <form name="form1" action="peopleAddFormAction.php" method='post' onSubmit="return trimCheckPersonRequired();">
       <header id='person-header'>
         <?php echo uiTextSnippet('personid'); ?>:
         <div class='row'>

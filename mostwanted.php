@@ -64,7 +64,7 @@ function showDivs($type) {
         $row['allow_private'] = $rights['private'];
 
         $name = getName($row);
-        $mediatext .= " &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; " . uiTextSnippet('moreinfo') . " <a href=\"getperson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$name</a>";
+        $mediatext .= " &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; " . uiTextSnippet('moreinfo') . " <a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$name</a>";
       } else {
         $mediatext .= "<a href=\"contactUs.php?page=" . uiTextSnippet('mostwanted') . ":+{$row['mwtitle']}\">" . uiTextSnippet('tellus') . "</a>";
       }

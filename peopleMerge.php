@@ -701,10 +701,10 @@ $headSection->setTitle(uiTextSnippet('merge'));
     <?php
     echo $adminHeaderSection->build('people-merge', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_people.php", uiTextSnippet('search'), "findperson"]);
-    $navList->appendItem([$allow_add, "admin_newperson.php", uiTextSnippet('addnew'), "addperson"]);
+    $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
+    $navList->appendItem([$allow_add, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
     $navList->appendItem([$allow_edit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "admin_merge.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([$allow_edit && $allow_delete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("merge");
     ?>
     <table class='table table-sm'>
@@ -712,7 +712,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
         <td>
           <h4><?php echo uiTextSnippet('findmatches'); ?></h4>
           <div><em><?php echo uiTextSnippet('choosemerge'); ?></em><br><br>
-            <form action="admin_merge.php" method='post' name='form1' id='form1'>
+            <form action="peopleMerge.php" method='post' name='form1' id='form1'>
               <table>
                 <tr>
                   <td><?php echo uiTextSnippet('tree'); ?>:</td>
@@ -846,9 +846,9 @@ $headSection->setTitle(uiTextSnippet('merge'));
                   $spouses = array();
                   $eventlist = array();
                   echo "<tr>\n";
-                  echo "<td colspan='3'><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('admin_editperson.php?personID={$p1row['personID']}&amp;tree=$tree&amp;cw=1','edit')\"></td>\n";
+                  echo "<td colspan='3'><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('peopleEdit.php?personID={$p1row['personID']}&amp;tree=$tree&amp;cw=1','edit')\"></td>\n";
                   if (is_array($p2row)) {
-                    echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('admin_editperson.php?personID={$p2row['personID']}&amp;tree=$tree&amp;cw=1','edit')\"></td>\n";
+                    echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('peopleEdit.php?personID={$p2row['personID']}&amp;tree=$tree&amp;cw=1','edit')\"></td>\n";
 
                     $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID as eventtypeID, $events_table.eventID as eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$p2row['personID']}\" AND gedcom = \"$tree\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
                     $evresult = tng_query($query);

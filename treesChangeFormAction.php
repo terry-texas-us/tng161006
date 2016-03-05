@@ -13,7 +13,7 @@ if ($assignedtree || !$allow_edit) {
 }
 switch ($entity) {
   case "person":
-    $url = "admin_editperson.php?personID=$newID&tree=$newtree";
+    $url = "peopleEdit.php?personID=$newID&tree=$newtree";
 
     $query = "UPDATE $people_table SET gedcom=\"$newtree\", personID=\"$newID\" WHERE gedcom=\"$oldtree\" AND personID=\"$entityID\"";
     $result = tng_query($query);

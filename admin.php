@@ -91,7 +91,7 @@ $headSection->setTitle(uiTextSnippet('administration'));
     <div class="row">
       <?php
       if ($allow_edit || $allow_add || $allow_delete) {
-        echo adminMenuItem("admin_people.php", uiTextSnippet('people'), $peoplemsg, "svg/person.svg");
+        echo adminMenuItem("peopleBrowse.php", uiTextSnippet('people'), $peoplemsg, "svg/person.svg");
         echo adminMenuItem("admin_families.php", uiTextSnippet('families'), $familiesmsg, "svg/people.svg");
         echo adminMenuItem("admin_sources.php", uiTextSnippet('sources'), $sourcesmsg, "svg/archive.svg");
         echo adminMenuItem("repositoriesBrowse.php", uiTextSnippet('repositories'), $sourcesmsg, "svg/building.svg");

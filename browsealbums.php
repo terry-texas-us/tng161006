@@ -174,7 +174,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
             }
 
             if ($prow['personID2'] != null) {
-              $medialinktext .= "<li><a href=\"getperson.php?personID={$prow['personID2']}&amp;tree={$prow['gedcom']}\">";
+              $medialinktext .= "<li><a href=\"peopleShowPerson.php?personID={$prow['personID2']}&amp;tree={$prow['gedcom']}\">";
               $medialinktext .= getName($prow) . "</a></li>\n";
             } elseif ($prow['sourceID'] != null) {
               $sourcetext = $prow['title'] ? uiTextSnippet('source') . ": {$prow['title']}" : uiTextSnippet('source') . ": {$prow['sourceID']}";

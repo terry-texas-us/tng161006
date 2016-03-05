@@ -145,7 +145,7 @@ $headSection->setTitle($headtext);
       if (!$srow['allow_private']) {
         $noneprivate = 0;
       }
-      $sourcelinktext .= "<a href=\"getperson.php?personID={$srow['persfamID']}&amp;tree={$srow['gedcom']}\">";
+      $sourcelinktext .= "<a href=\"peopleShowPerson.php?personID={$srow['persfamID']}&amp;tree={$srow['gedcom']}\">";
       $sourcelinktext .= getName($srow);
       $sourcelinktext .= "</a>";
     }

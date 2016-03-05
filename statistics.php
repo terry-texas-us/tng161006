@@ -223,7 +223,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
 
       echo "<tr><td>" . uiTextSnippet('earliestbirth');
       if ($firstallowed) {
-        echo " (<a href=\"getperson.php?personID=$firstbirthpersonid&amp;tree=$firstbirthgedcom\">$firstbirthfirstname $firstbirthlnprefix $firstbirthlastname</a>)";
+        echo " (<a href=\"peopleShowPerson.php?personID=$firstbirthpersonid&amp;tree=$firstbirthgedcom\">$firstbirthfirstname $firstbirthlnprefix $firstbirthlastname</a>)";
       }
       echo "</td>\n";
       echo "<td>" . displayDate($firstbirthdate) . "</td></tr>\n";
@@ -282,7 +282,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
             $daysold = 365 + $daysold;
           }
         }
-        echo "<tr><td><a href=\"getperson.php?personID=$personid&amp;tree=$gedcom\">";
+        echo "<tr><td><a href=\"peopleShowPerson.php?personID=$personid&amp;tree=$gedcom\">";
         if ($allowed) {
           echo "$firstname $lnprefix $lastname";
         } elseif ($line['private']) {

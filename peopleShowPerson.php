@@ -77,8 +77,8 @@ if ($row['branch']) {
 }
 tng_free_result($result);
 
-writelog("<a href='getperson.php?personID=$personID&amp;tree=$tree'>" . uiTextSnippet('indinfofor') . " $logname ($personID)</a>");
-preparebookmark("<a href='getperson.php?personID=$personID&amp;tree=$tree'>" . uiTextSnippet('indinfofor') . " $namestr ($personID)</a>");
+writelog("<a href='peopleShowPerson.php?personID=$personID&amp;tree=$tree'>" . uiTextSnippet('indinfofor') . " $logname ($personID)</a>");
+preparebookmark("<a href='peopleShowPerson.php?personID=$personID&amp;tree=$tree'>" . uiTextSnippet('indinfofor') . " $namestr ($personID)</a>");
 
 $headTitle = $namestr;
 if ($rights['both']) {
@@ -227,7 +227,7 @@ $headSection->setTitle($headTitle);
         if ($row['changedate']) {
           $row['changedate'] .= " | ";
         }
-        $row['changedate'] .= "<a href='admin_editperson.php?personID=$personID&amp;tree=$tree&amp;cw=1' target='_blank'>" . uiTextSnippet('edit') . "</a>";
+        $row['changedate'] .= "<a href='peopleEdit.php?personID=$personID&amp;tree=$tree&amp;cw=1' target='_blank'>" . uiTextSnippet('edit') . "</a>";
       }
       $persontext .= showEvent(array("text" => uiTextSnippet('lastmodified'), "fact" => $row['changedate']));
     }
@@ -254,7 +254,7 @@ $headSection->setTitle($headTitle);
           $fathrow['allow_private'] = $frights['private'];
           if ($fathrow['firstname'] || $fathrow['lastname']) {
             $fathname = getName($fathrow);
-            $fatherlink = "<a href='getperson.php?personID={$fathrow['personID']}&amp;tree=$tree'>$fathname</a>";
+            $fatherlink = "<a href='peopleShowPerson.php?personID={$fathrow['personID']}&amp;tree=$tree'>$fathname</a>";
           }
           else {
             $fatherlink = "";
@@ -287,7 +287,7 @@ $headSection->setTitle($headTitle);
           $mothrow['allow_private'] = $mrights['private'];
           if ($mothrow['firstname'] || $mothrow['lastname']) {
             $mothname = getName($mothrow);
-            $motherlink = "<a href=\"getperson.php?personID={$mothrow['personID']}&amp;tree=$tree\">$mothname</a>";
+            $motherlink = "<a href=\"peopleShowPerson.php?personID={$mothrow['personID']}&amp;tree=$tree\">$mothname</a>";
           }
           else {
             $motherlink = "";
@@ -428,7 +428,7 @@ $headSection->setTitle($headTitle);
         $spouserow['allow_private'] = $srights['private'];
         if ($spouserow['firstname'] || $spouserow['lastname']) {
           $spousename = getName($spouserow);
-          $spouselink = "<a href=\"getperson.php?personID={$spouserow['personID']}&amp;tree=$tree\">$spousename</a>";
+          $spouselink = "<a href=\"peopleShowPerson.php?personID={$spouserow['personID']}&amp;tree=$tree\">$spousename</a>";
         }
         if ($srights['both']) {
           $spouselink .= $birthinfo;
@@ -516,7 +516,7 @@ $headSection->setTitle($headTitle);
             $childname = getName($child);
             $persontext .= "<tr>\n";
             $persontext .= "<td width='10'>$ifkids</td>\n";
-            $persontext .= "<td id=\"child$childID\"><span>$kidcount. <a href=\"getperson.php?personID=$childID&amp;tree=$tree\">$childname</a>";
+            $persontext .= "<td id=\"child$childID\"><span>$kidcount. <a href=\"peopleShowPerson.php?personID=$childID&amp;tree=$tree\">$childname</a>";
             if ($crights['both']) {
               $persontext .= $birthinfo;
               $age = age($child);
@@ -791,7 +791,7 @@ $headSection->setTitle($headTitle);
   </section> <!-- .container -->
 
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
-<script src="js/getperson.js"></script>
+<script src="js/peopleShowPerson.js"></script>
 <?php if ($map['key']) { ?>
   <script src='https://maps.googleapis.com/maps/api/js?language="<?php echo uiTextSnippet('glang'); ?>"'></script>
 <?php } ?>

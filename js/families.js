@@ -24,7 +24,7 @@ $('#edit-husband').on('click', function () {
     'use strict';
     var field = document.form1.husband;
     if (field.value.length) {
-        deepOpen('admin_editperson.php?personID=' + field.value + '&tree=' + document.form1.tree.value + '&cw=1', 'editspouse');
+        deepOpen('peopleEdit.php?personID=' + field.value + '&tree=' + document.form1.tree.value + '&cw=1', 'editspouse');
     }
 });
 
@@ -58,7 +58,7 @@ $('#edit-wife').on('click', function () {
     'use strict';
     var field = document.form1.wife;
     if (field.value.length) {
-        deepOpen('admin_editperson.php?personID=' + field.value + '&tree=' + document.form1.tree.value + '&cw=1', 'editspouse');
+        deepOpen('peopleEdit.php?personID=' + field.value + '&tree=' + document.form1.tree.value + '&cw=1', 'editspouse');
     }
 });
 
@@ -101,7 +101,7 @@ $('#delete-child').on('click', function () {
 $('#edit-child').on('click', function () {
     'use strict';
     var $childId = $(this).data('childId');
-    deepOpen('admin_editperson.php?personID=' + $childId + '&tree=' + document.form1.tree.value + '&cw=1', 'editchild');
+    deepOpen('peopleEdit.php?personID=' + $childId + '&tree=' + document.form1.tree.value + '&cw=1', 'editchild');
 });
 
 $('#find-children').on('click', function () {

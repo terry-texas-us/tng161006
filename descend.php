@@ -268,7 +268,7 @@ function doBox($level, $person, $spouseflag, $kidsflag) {
   //echo "name=$person[name], top=$top<br>\n";
   // name info
   if ($person['name']) {
-    $boxstr .= "<td class=\"pboxname\" align=\"{$pedigree['boxalign']}\"><span style=\"font-size:{$pedigree['boxnamesize']}" . "pt;\">{$pedigree['spacer']}<a href=\"getperson.php?personID={$person['personID']}&amp;tree=$tree" . "\">{$person['name']}</a> " . getGenderIcon($person['sex'], $pedigree['gendalign']) . getNewChart($person['personID']) . "</span></td></tr></table></div>\n";
+    $boxstr .= "<td class=\"pboxname\" align=\"{$pedigree['boxalign']}\"><span style=\"font-size:{$pedigree['boxnamesize']}" . "pt;\">{$pedigree['spacer']}<a href=\"peopleShowPerson.php?personID={$person['personID']}&amp;tree=$tree" . "\">{$person['name']}</a> " . getGenderIcon($person['sex'], $pedigree['gendalign']) . getNewChart($person['personID']) . "</span></td></tr></table></div>\n";
   } else {
     $boxstr .= "<td class=\"pboxname\"><span style=\"font-size:{$pedigree['boxnamesize']}" . "pt;\">" . uiTextSnippet('unknownlit') . "</span></td></tr></table></div>\n";
   }

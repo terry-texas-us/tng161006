@@ -207,7 +207,7 @@ if (!$editconflict) {
       $spouseresult = tng_query($query);
     }
   }
-  adminwritelog("<a href=\"admin_editperson.php?personID=$personID&tree=$tree\">" . uiTextSnippet('modifyperson') . ": $tree/$personID</a>");
+  adminwritelog("<a href=\"peopleEdit.php?personID=$personID&tree=$tree\">" . uiTextSnippet('modifyperson') . ": $tree/$personID</a>");
 } else {
   $message = uiTextSnippet('notsaved');
 }
@@ -215,9 +215,9 @@ if ($media == "1") {
   header("Location: admin_newmedia.php?personID=$personID&tree=$tree&linktype=I&cw=$cw");
 } elseif ($newfamily == "none") {
   $message = uiTextSnippet('changestoperson') . " $personID " . uiTextSnippet('succsaved') . '.';
-  header("Location: admin_people.php?message=" . urlencode($message));
+  header("Location: peopleBrowse.php?message=" . urlencode($message));
 } elseif ($newfamily == "return") {
-  header("Location: admin_editperson.php?personID=$personID&tree=$tree&cw=$cw");
+  header("Location: peopleEdit.php?personID=$personID&tree=$tree&cw=$cw");
 } elseif ($newfamily == "child") {
   header("Location: admin_newfamily.php?child=$personID&tree=$tree&cw=$cw");
 } elseif ($newfamily == "close") {

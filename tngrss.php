@@ -85,7 +85,7 @@ function doMedia($mediatypeID) {
       }
 
       if ($prow['personID2'] != null) {
-        $medialink = "getperson.php?personID={$prow['personID2']}&amp;tree={$prow['gedcom']}";
+        $medialink = "peopleShowPerson.php?personID={$prow['personID2']}&amp;tree={$prow['gedcom']}";
         $mediatext = getName($prow);
         if ($mediatypeID == "headstones") {
           $deathdate = $prow['deathdate'] ? $prow['deathdate'] : $prow['burialdate'];
@@ -267,7 +267,7 @@ if (!$familyID) {    // if a family is NOT specified (ie: we are looking for a p
       $item .= "<title>";
       $item .= xmlcharacters(uiTextSnippet('indinfo') . ": " . $namestr . " (" . $row['personID'] . ")");
       $item .= "</title>\n";
-      $item .= "<link>" . "$tngdomain/getperson.php?personID=" . $row['personID'] . "&amp;tree=" . $row['gedcom'] . $langstr . "</link>\n";
+      $item .= "<link>" . "$tngdomain/peopleShowPerson.php?personID=" . $row['personID'] . "&amp;tree=" . $row['gedcom'] . $langstr . "</link>\n";
       $item .= "<description>";
       if ($birthdate || $birthplace) {
         $item .= xmlcharacters("$birthdate, $birthplace") . "</description>\n";

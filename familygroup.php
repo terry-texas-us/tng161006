@@ -145,10 +145,10 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   if ($ind['haskids']) {
     $indtext .= "+ ";
   }
-  $indtext .= "<a href='getperson.php?personID={$ind['personID']}&amp;tree=$tree'>$namestr</a>";
+  $indtext .= "<a href='peopleShowPerson.php?personID={$ind['personID']}&amp;tree=$tree'>$namestr</a>";
 
   if ($allow_edit && $rightbranch) {
-    $indtext .= " | <a href='admin_editperson.php?personID={$ind['personID']}&amp;tree=$tree&amp;cw=1' target='_blank'>" . uiTextSnippet('edit') . "</a>";
+    $indtext .= " | <a href='peopleEdit.php?personID={$ind['personID']}&amp;tree=$tree&amp;cw=1' target='_blank'>" . uiTextSnippet('edit') . "</a>";
   }
   $indtext .= "</h4>\n";
   $indtext .= "</div>\n"; // .card-header
@@ -312,7 +312,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
     $fam['allow_private'] = $famrights['private'];
 
     $spousename = getName($fam);
-    $spouselink = $spousename ? "<a href=\"getperson.php?personID={$fam['personID']}&amp;tree=$tree\">$spousename</a> | " : "";
+    $spouselink = $spousename ? "<a href=\"peopleShowPerson.php?personID={$fam['personID']}&amp;tree=$tree\">$spousename</a> | " : "";
     $spouselink .= "<a href=\"familygroup.php?familyID={$fam['familyID']}&amp;tree=$tree\">{$fam['familyID']}</a>";
 
     $fam['living'] = $fam['fliving'];
@@ -356,7 +356,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
 
     $fathername = getName($parent);
     tng_free_result($presult);
-    $fatherlink = $fathername ? "<a href=\"getperson.php?personID={$parent['personID']}&amp;tree=$tree\">$fathername</a> | " : "";
+    $fatherlink = $fathername ? "<a href=\"peopleShowPerson.php?personID={$parent['personID']}&amp;tree=$tree\">$fathername</a> | " : "";
     $fatherlink .= $fathername ? "<a href=\"familygroup.php?familyID={$parent['familyID']}&amp;tree=$tree\">{$parent['familyID']} " . uiTextSnippet('groupsheet') . "</a>" : "";
     $indtext .= showFact(uiTextSnippet('father'), $fatherlink);
 
@@ -370,7 +370,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
 
     $mothername = getName($parent);
     tng_free_result($presult);
-    $motherlink = $mothername ? "<a href=\"getperson.php?personID={$parent['personID']}&amp;tree=$tree\">$mothername</a> | " : "";
+    $motherlink = $mothername ? "<a href=\"peopleShowPerson.php?personID={$parent['personID']}&amp;tree=$tree\">$mothername</a> | " : "";
     $motherlink .= $mothername ? "<a href=\"familygroup.php?familyID={$parent['familyID']}&amp;tree=$tree\">{$parent['familyID']} " . uiTextSnippet('groupsheet') . "</a>" : "";
     $indtext .= showFact(uiTextSnippet('mother'), $motherlink);
   }

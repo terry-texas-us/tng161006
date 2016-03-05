@@ -159,7 +159,7 @@ function tng_menu($enttype, $currpage, $entityID) {
   $menu = "<div id='tngmenu'>\n";
   $menu .= "<ul id='tngnav'>\n";
   if ($enttype == 'I') {
-    $menu .= doMenuItem($nexttab++, "getperson.php?personID=$entityID&amp;tree=$tree", "svg/user.svg", uiTextSnippet('indinfo'), $currpage, "person");
+    $menu .= doMenuItem($nexttab++, "peopleShowPerson.php?personID=$entityID&amp;tree=$tree", "svg/user.svg", uiTextSnippet('indinfo'), $currpage, "person");
     $menu .= doMenuItem($nexttab++, "pedigree.php?personID=$entityID&amp;tree=$tree", "svg/flow-split-horizontal.svg", uiTextSnippet('ancestors'), $currpage, "pedigree");
     $menu .= doMenuItem($nexttab++, "descend.php?personID=$entityID&amp;tree=$tree", "svg/flow-cascade.svg", uiTextSnippet('descendants'), $currpage, "descend");
     $menu .= doMenuItem($nexttab++, "relateform.php?primaryID=$entityID&amp;tree=$tree", "svg/users.svg", uiTextSnippet('relationship'), $currpage, "relate");
@@ -168,7 +168,7 @@ function tng_menu($enttype, $currpage, $entityID) {
     if (!$disallowgedcreate || ($allow_ged && $rightbranch)) {
       $menu .= doMenuItem($nexttab++, "gedform.php?personID=$entityID&amp;tree=$tree", "svg/folder.svg", uiTextSnippet('extractgedcom'), $currpage, "gedcom");
     }
-    $editstr = "admin_editperson.php?person";
+    $editstr = "peopleEdit.php?person";
   } elseif ($enttype == 'F') {
     $menu .= doMenuItem($nexttab++, "familygroup.php?familyID=$entityID&amp;tree=$tree", "svg/users.svg", uiTextSnippet('family'), $currpage, "family");
     $editstr = "admin_editfamily.php?family";

@@ -56,9 +56,9 @@ function displayIndividual($key, $generation, $slot, $column) {
           $columns[$column][$generation] = "<span>" . uiTextSnippet($gentext) . "<br></span>\n<ul>\n";
         }
         $namestr = getNameRev($row);
-        $columns[$column][$generation] .= "<li><span><a href=\"getperson.php?tng_extras=1&amp;personID=$key&amp;tree=$tree\">$namestr</a> (" . trim(getYears($row)) . ")";
+        $columns[$column][$generation] .= "<li><span><a href=\"peopleShowPerson.php?tng_extras=1&amp;personID=$key&amp;tree=$tree\">$namestr</a> (" . trim(getYears($row)) . ")";
         if ($mediarow['mediacount']) {
-          $columns[$column][$generation] .= " <a href=\"getperson.php?tng_extras=1&amp;personID=$key&amp;tree=$tree\" title=\"" . uiTextSnippet('mediaavail') . "\">\n";
+          $columns[$column][$generation] .= " <a href=\"peopleShowPerson.php?tng_extras=1&amp;personID=$key&amp;tree=$tree\" title=\"" . uiTextSnippet('mediaavail') . "\">\n";
           $columns[$column][$generation] .= "<img class='icon-sm' src='svg/camera.svg' alt=\"" . uiTextSnippet('mediaavail') . "\"></a>";
         }
         $columns[$column][$generation] .= "</span></li>\n";

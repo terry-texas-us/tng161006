@@ -280,7 +280,7 @@ if ($location) {
 
           $hstext = "";
           if ($prow['personID2'] != null) {
-            $hslinktext .= "<a href=\"getperson.php?personID={$prow['personID2']}&amp;tree={$prow['gedcom']}\">";
+            $hslinktext .= "<a href=\"peopleShowPerson.php?personID={$prow['personID2']}&amp;tree={$prow['gedcom']}\">";
             $hslinktext .= getName($prow);
             $deathdate = $prow['deathdate'] ? $prow['deathdate'] : $prow['burialdate'];
             if ($prow['deathdate']) {

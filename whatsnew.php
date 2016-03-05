@@ -140,13 +140,13 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
               $birthplacestr .= "psearch=" . urlencode($birthplace) . "\"><img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=''></a>";
             }
             echo "<tr>\n";
-              echo "<td><a href=\"getperson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">{$row['personID']}</a></td>";
+              echo "<td><a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">{$row['personID']}</a></td>";
             echo "<td>\n";
               echo "<div class='person-img' id=\"mi{$row['gedcom']}_{$row['personID']}\">\n";
                 echo "<div class='person-prev' id=\"prev{$row['gedcom']}_{$row['personID']}\"></div>\n";
               echo "</div>\n";
               echo "<a href=\"pedigree.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$chartlink</a>\n";
-              echo "<a href=\"getperson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\" class='pers' id=\"p{$row['personID']}_t{$row['gedcom']}\">$namestr</a>\n";
+              echo "<a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\" class='pers' id=\"p{$row['personID']}_t{$row['gedcom']}\">$namestr</a>\n";
             echo "</td>\n";
             echo "<td>$birthdate</td><td>$birthplacestr</td>";
             if ($numtrees > 1) {
@@ -210,12 +210,12 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
                 echo "<a href=\"familygroup.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}\">{$row['familyID']}</a>\n";
               echo "</td>\n";
               echo "<td>\n";
-                echo "<a href=\"getperson.php?personID={$row['husband']}&amp;tree={$row['gedcom']}\">{$row['husband']}</a>\n";
+                echo "<a href=\"peopleShowPerson.php?personID={$row['husband']}&amp;tree={$row['gedcom']}\">{$row['husband']}</a>\n";
               echo "</td>\n";
             echo "<td>\n";
-              echo "<a href=\"getperson.php?personID={$row['husband']}&amp;tree={$row['gedcom']}\">$name</a>\n";
+              echo "<a href=\"peopleShowPerson.php?personID={$row['husband']}&amp;tree={$row['gedcom']}\">$name</a>\n";
             echo "</td>\n";
-            echo "<td><a href=\"getperson.php?personID={$row['wife']}&amp;tree={$row['gedcom']}\">{$row['wife']}</a></td>\n";
+            echo "<td><a href=\"peopleShowPerson.php?personID={$row['wife']}&amp;tree={$row['gedcom']}\">{$row['wife']}</a></td>\n";
             echo "<td>";
             if ($rights['both']) {
               $row['branch'] = $row['fbranch'];

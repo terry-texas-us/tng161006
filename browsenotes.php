@@ -142,7 +142,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
                 $noneliving = 0;
               }
 
-              $notelinktext .= "<a href=\"getperson.php?personID={$row2['personID']}&tree={$row2['gedcom']}\">" . getNameRev($row2) . " ({$row2['personID']})</a>\n<br>\n";
+              $notelinktext .= "<a href=\"peopleShowPerson.php?personID={$row2['personID']}&tree={$row2['gedcom']}\">" . getNameRev($row2) . " ({$row2['personID']})</a>\n<br>\n";
               tng_free_result($result2);
             }
           }

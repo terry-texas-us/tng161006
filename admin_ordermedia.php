@@ -26,7 +26,7 @@ switch ($linktype) {
     $person['allow_living'] = 1;
     $namestr = "$personID: " . getName($person);
     tng_free_result($result2);
-    $test_url = "getperson.php?";
+    $test_url = "peopleShowPerson.php?";
     $testID = "personID";
     break;
   case 'F':

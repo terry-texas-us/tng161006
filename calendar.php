@@ -143,7 +143,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
             $field = $key . 'datetr';
             if (isset($row[$field])) {
               $date = substr($row[$field], 5);
-              $html = '<img src="' . 'img/' . $val . '" class="calIcon" alt=""><a href="getperson.php?personID=' . $row['personID'] . '&amp;tree=' . $row['gedcom'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
+              $html = '<img src="' . 'img/' . $val . '" class="calIcon" alt=""><a href="peopleShowPerson.php?personID=' . $row['personID'] . '&amp;tree=' . $row['gedcom'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
 
               if(strpos($date,"-00"))
                 {$html = '<span>' . $html . '</span>';}
@@ -327,7 +327,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
           if ($isFam) {
             $html = '<img src="' . 'img/' . $calEvent[$tag] . '" class="calIcon" alt=""><a href="familygroup.php?familyID=' . $row['persfamID'] . '&amp;tree=' . $row['gedcom'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
           } else {
-            $html = '<img src="' . 'img/' . $calEvent[$tag] . '" class="calIcon" alt=""><a href="getperson.php?personID=' . $row['persfamID'] . '&amp;tree=' . $row['gedcom'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
+            $html = '<img src="' . 'img/' . $calEvent[$tag] . '" class="calIcon" alt=""><a href="peopleShowPerson.php?personID=' . $row['persfamID'] . '&amp;tree=' . $row['gedcom'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
           }
 
           $date = substr($row['eventdatetr'], 5);

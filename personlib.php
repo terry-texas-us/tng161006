@@ -1258,7 +1258,7 @@ function formatAssoc($assoc) {
     if (!$assocstr) {
       $assocstr = $assoc['passocID'];
     }
-    $assocstr = "<a href=\"getperson.php?personID={$assoc['passocID']}&amp;tree=$tree\">$assocstr</a>";
+    $assocstr = "<a href=\"peopleShowPerson.php?personID={$assoc['passocID']}&amp;tree=$tree\">$assocstr</a>";
   } elseif ($assoc['reltype'] == 'F') {
     $query = "SELECT familyID, husband, wife, living, private, marrdate, gedcom, branch, gedcom FROM $families_table WHERE familyID = \"{$assoc['passocID']}\" AND gedcom = \"$tree\"";
     $result = tng_query($query);
@@ -1329,7 +1329,7 @@ function buildPersonMenu($currpage, $entityID) {
   $menu = "<div id='tngmenu'>\n";
 
   if ($allow_edit && $rightbranch) {
-    $menu .= "<a id=\"a$nexttab\" href=\"admin_editperson.php?personID=$entityID&amp;tree=$tree&amp;cw=1\" title='" . uiTextSnippet('edit') . "'>\n";
+    $menu .= "<a id=\"a$nexttab\" href=\"peopleEdit.php?personID=$entityID&amp;tree=$tree&amp;cw=1\" title='" . uiTextSnippet('edit') . "'>\n";
       $menu .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
     $menu .= "</a>\n";
   } elseif ($emailaddr && $currpage != 'suggest') {
@@ -1339,7 +1339,7 @@ function buildPersonMenu($currpage, $entityID) {
   }
   $menu .= "<ul id='tngnav'>\n";
 
-  $menu .= buildPersonListItem($nexttab++, "getperson.php?personID=$entityID&amp;tree=$tree", "svg/user.svg", uiTextSnippet('indinfo'), $currpage, "person");
+  $menu .= buildPersonListItem($nexttab++, "peopleShowPerson.php?personID=$entityID&amp;tree=$tree", "svg/user.svg", uiTextSnippet('indinfo'), $currpage, "person");
   $menu .= buildPersonListItem($nexttab++, "pedigree.php?personID=$entityID&amp;tree=$tree", "svg/flow-split-horizontal.svg", uiTextSnippet('ancestors'), $currpage, "pedigree");
   $menu .= buildPersonListItem($nexttab++, "descend.php?personID=$entityID&amp;tree=$tree", "svg/flow-cascade.svg", uiTextSnippet('descendants'), $currpage, "descend");
   $menu .= buildPersonListItem($nexttab++, "relateform.php?primaryID=$entityID&amp;tree=$tree", "svg/users.svg", uiTextSnippet('relationship'), $currpage, "relate");

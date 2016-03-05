@@ -209,7 +209,7 @@ function setPersonLabel($personID) {
       $rights = determineLivingPrivateRights($row, true, true);
       $row['allow_living'] = $rights['living'];
       $row['allow_private'] = $rights['private'];
-      $names .= "<a href=\"admin_editperson.php?personID={$personID}&amp;tree=$tree&amp;cw=1\" target='_blank'>" . getName($row) . " ($personID)</a><br>\n";
+      $names .= "<a href=\"peopleEdit.php?personID={$personID}&amp;tree=$tree&amp;cw=1\" target='_blank'>" . getName($row) . " ($personID)</a><br>\n";
     }
 
     if ($branchaction == "clear" || $branchaction == "delete") {

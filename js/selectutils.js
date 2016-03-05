@@ -635,7 +635,7 @@ function retItem(id, place) {
         y2 = y1 + current.height();
 
         maptree = $('#maptree').val();
-        area = '<area coords=\"' + x1 + ',' + y1 + ',' + x2 + ',' + y2 + '\" href=\"' + 'getperson.php?personID=' + id + '&amp;tree=' + maptree + '\" title=\"' + returntext.replace(/\"/g, "'") + '\" />';
+        area = '<area coords=\"' + x1 + ',' + y1 + ',' + x2 + ',' + y2 + '\" href=\"' + 'peopleShowPerson.php?personID=' + id + '&amp;tree=' + maptree + '\" title=\"' + returntext.replace(/\"/g, "'") + '\" />';
         $('#imagemap').val($('#imagemap').val() + area);
 
         current.remove();

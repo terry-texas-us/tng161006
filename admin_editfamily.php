@@ -541,7 +541,7 @@ var tnglitbox;
   }
 
   function EditChild(id) {
-    deepOpen('admin_editperson.php?personID=' + id + '&tree=' + document.form1.tree.value + '&cw=1', 'editchild');
+    deepOpen('peopleEdit.php?personID=' + id + '&tree=' + document.form1.tree.value + '&cw=1', 'editchild');
   }
 
   function saveNewPerson(form) {

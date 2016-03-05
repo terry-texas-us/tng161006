@@ -190,7 +190,7 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
           } elseif ($prefix == 'I') {
             $name = getNameRev($row);
             echo "<a href=\"pedigree.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$chartlink </a>\n";
-            echo "<a href=\"getperson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$name</a>\n";
+            echo "<a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$name</a>\n";
           }
           echo "</td>";
           echo "<td colspan='2'>" . displayDate($dateval) . "<br>$placetxt</td>\n";

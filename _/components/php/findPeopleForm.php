@@ -1,6 +1,6 @@
  <!-- [ts] testing different approaches to bootstrap-forms -->
  
-<form name='form1' action='admin_people.php'>
+<form name='form1' action='peopleBrowse.php'>
   <section class='card'>
     <div class='card-block'>
       <div class='row form-group'>

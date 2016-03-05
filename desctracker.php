@@ -63,7 +63,7 @@ function drawBox($person, $box) {
   //inner table
   echo "<table style=\"margin:0\">\n<tr><td>";
   $name = getName($person);
-  $nameinfo = "<a href=\"getperson.php?personID={$person['personID']}&amp;tree=$tree\">$name</a>";
+  $nameinfo = "<a href=\"peopleShowPerson.php?personID={$person['personID']}&amp;tree=$tree\">$name</a>";
   if ($person['personID'] && $pedigree['inclphotos']) {
     $constoffset = 0;
     $photohtouse = $pedigree['puboxheight'] - $constoffset - ($pedigree['cellpad'] * 2) - 2; // take cellpadding into account

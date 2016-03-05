@@ -270,7 +270,7 @@ $headSection->setTitle($location);
             if (!$prow['allow_private']) {
               $noneprivate = 0;
             }
-            $hslinktext .= "<a href=\"getperson.php?personID={$prow['personID2']}&amp;tree={$prow['gedcom']}\">";
+            $hslinktext .= "<a href=\"peopleShowPerson.php?personID={$prow['personID2']}&amp;tree={$prow['gedcom']}\">";
             $hslinktext .= getName($prow);
             $deathdate = $prow['deathdate'] ? $prow['deathdate'] : $prow['burialdate'];
             if ($prow['deathdate']) {
@@ -383,7 +383,7 @@ $headSection->setTitle($location);
           $body .= "<tr><td>$i</td>\n";
             $body .= "<td>\n";
               $body .= "<a href=\"pedigree.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$chartlink </a>\n"; // [ts] $chartlink undefined .. no chart icon displayed with link
-              $body .= "<a href=\"getperson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$name</a>\n";
+              $body .= "<a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$name</a>\n";
           $body .= "</td>\n";
 
           $placetxt = $row['burialplace'];

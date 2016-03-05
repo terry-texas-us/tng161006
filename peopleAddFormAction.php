@@ -73,7 +73,7 @@ if ($result && tng_num_rows($result)) {
     echo "error:" . uiTextSnippet('person') . " $personID " . uiTextSnippet('idexists');
   } else {
     $message = uiTextSnippet('person') . " $personID " . uiTextSnippet('idexists');
-    header("Location: admin_people.php?message=" . urlencode($message));
+    header("Location: peopleBrowse.php?message=" . urlencode($message));
   }
   exit;
 }
@@ -154,7 +154,7 @@ foreach ($branchlist as $b) {
   $result = tng_query($query);
 }
 
-adminwritelog("<a href=\"admin_editperson.php?personID=$personID&amp;tree=$tree\">" . uiTextSnippet('addnewperson') . ": $tree/$personID</a>");
+adminwritelog("<a href=\"peopleEdit.php?personID=$personID&amp;tree=$tree\">" . uiTextSnippet('addnewperson') . ": $tree/$personID</a>");
 
 if ($type == "child") {
   if ($familyID) {
@@ -214,5 +214,5 @@ if ($type == "child") {
 } elseif ($newperson == "ajax") {
   echo 1;
 } else {
-  header("Location: admin_editperson.php?personID=$personID&tree=$tree&added=1");
+  header("Location: peopleEdit.php?personID=$personID&tree=$tree&added=1");
 }

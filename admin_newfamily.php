@@ -323,7 +323,7 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
   function EditSpouse(field) {
     var tree = getTree(document.form1.tree1);
     if (field.value.length)
-      deepOpen('admin_editperson.php?personID=' + field.value + '&tree=' + tree + '&cw=1', 'editspouse');
+      deepOpen('peopleEdit.php?personID=' + field.value + '&tree=' + tree + '&cw=1', 'editspouse');
   }
 
   function RemoveSpouse(spouse, spousedisplay) {

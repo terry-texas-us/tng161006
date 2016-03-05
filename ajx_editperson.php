@@ -410,7 +410,7 @@ include_once("eventlib.php");
                                 <span>
                                   <?php
                                   if (isset($spouserow['personID']) && $spouserow['personID']) {
-                                    echo "<a href=\"admin_editperson.php?personID={$spouserow['personID']}&amp;tree=$tree&amp;cw=$cw\">" . getName($spouserow) . " - {$spouserow['personID']}</a>$birthinfo";
+                                    echo "<a href=\"peopleEdit.php?personID={$spouserow['personID']}&amp;tree=$tree&amp;cw=$cw\">" . getName($spouserow) . " - {$spouserow['personID']}</a>$birthinfo";
                                   }
                                   ?>
                                 </span>
@@ -437,7 +437,7 @@ include_once("eventlib.php");
                                         echo "<div class='col-md-8'>$kidcount . ";
                                           if ($crights['both']) {
                                             if ($rightbranch) {
-                                              echo "<a href=\"admin_editperson.php?personID={$child['pID']}&amp;tree=$tree&amp;cw=$cw\">" . getName( $child ) . " - {$child['pID']}</a>";
+                                              echo "<a href=\"peopleEdit.php?personID={$child['pID']}&amp;tree=$tree&amp;cw=$cw\">" . getName( $child ) . " - {$child['pID']}</a>";
                                             } else {
                                               echo getName($child) . " - {$child['pID']}";
                                             }

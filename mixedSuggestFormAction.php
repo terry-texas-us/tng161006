@@ -53,7 +53,7 @@ if ($enttype == 'I') {
   $row['allow_private'] = $rights['private'];
 
   $name = getName($row) . " ($ID)";
-  $pagelink = "$tngwebsite/" . "getperson.php?personID=$ID&tree=$tree";
+  $pagelink = "$tngwebsite/" . "peopleShowPerson.php?personID=$ID&tree=$tree";
   tng_free_result($result);
 } elseif ($enttype == 'F') {
   $typestr = "family";
