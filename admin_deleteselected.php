@@ -51,7 +51,7 @@ if ($xsrcaction) {
   $query = "DELETE FROM $tlevents_table WHERE 1=0";
   $modmsg = "tlevents";
   $id = "tleventID";
-  $location = "admin_timelineevents.php";
+  $location = "timelineeventsBrowse.php";
 } elseif ($xbranchaction) {
   $query = "DELETE FROM $branches_table WHERE 1=0";
   $modmsg = "branches";

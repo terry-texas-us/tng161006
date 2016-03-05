@@ -35,8 +35,8 @@ $result = tng_query($query);
 adminwritelog(uiTextSnippet('modifytlevent') . ": $tleventID");
 
 if ($newscreen == "return") {
-  header("Location: admin_edittlevent.php?tleventID=$tleventID");
+  header("Location: timelineeventsEdit.php?tleventID=$tleventID");
 } else {
   $message = uiTextSnippet('changestotlevent') . " $tleventID " . uiTextSnippet('succsaved') . '.';
-  header("Location: admin_timelineevents.php?message=" . urlencode($message));
+  header("Location: timelineeventsBrowse.php?message=" . urlencode($message));
 }

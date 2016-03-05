@@ -103,7 +103,7 @@ $headSection->setTitle(uiTextSnippet('administration'));
       if ($allow_edit || $allow_add || $allow_delete) {
         echo adminMenuItem("cemeteriesBrowse.php", uiTextSnippet('cemeteries'), $cemeteriesmsg, "svg/headstone.svg");
         echo adminMenuItem("placesBrowse.php", uiTextSnippet('places'), $placesmsg, "svg/location.svg");
-        echo adminMenuItem("admin_timelineevents.php", uiTextSnippet('tlevents'), $timelinemsg, "img/tlevents_icon.gif");
+        echo adminMenuItem("timelineeventsBrowse.php", uiTextSnippet('tlevents'), $timelinemsg, "img/tlevents_icon.gif");
       }
       if ($allow_edit && $allow_add && $allow_delete && !$assignedtree) {
         echo adminMenuItem("admin_misc.php", uiTextSnippet('misc'), uiTextSnippet('miscitems'), "img/misc_icon.gif");

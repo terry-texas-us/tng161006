@@ -63,15 +63,15 @@ $headSection->setTitle(uiTextSnippet('tlevents'));
     <?php
     echo $adminHeaderSection->build('tlevents', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_timelineevents.php", uiTextSnippet('search'), "findtimeline"]);
-    $navList->appendItem([$allow_add, "admin_newtlevent.php", uiTextSnippet('addnew'), "addtlevent"]);
+//    $navList->appendItem([true, "timelineeventsBrowse.php", uiTextSnippet('browse'), "findtimeline"]);
+    $navList->appendItem([$allow_add, "timelineeventsAdd.php", uiTextSnippet('add'), "addtlevent"]);
     echo $navList->build("findtimeline");
     ?>
     <table class='table table-sm'>
       <tr>
         <td>
           <div>
-            <form action="admin_timelineevents.php" name='form1'>
+            <form action="timelineeventsBrowse.php" name='form1'>
               <?php echo uiTextSnippet('searchfor'); ?>: <input class='longfield' name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>">
               <input name="findtlevent" type='hidden' value='1'>
               <input name="newsearch" type='hidden' value='1'>
@@ -118,7 +118,7 @@ $headSection->setTitle(uiTextSnippet('tlevents'));
                 if ($numrows) {
                 $actionstr = "";
                 if ($allow_edit) {
-                  $actionstr .= "<a href=\"admin_edittlevent.php?tleventID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
+                  $actionstr .= "<a href=\"timelineeventsEdit.php?tleventID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
                   $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
                   $actionstr .= "</a>\n";
                 }
@@ -141,7 +141,7 @@ $headSection->setTitle(uiTextSnippet('tlevents'));
                 ?>
               </table>
               <?php
-              echo buildSearchResultPagination($totrows, "admin_timelineevents.php?searchstring=$searchstring&amp;offset", $maxsearchresults, 5);
+              echo buildSearchResultPagination($totrows, "timelineeventsBrowse.php?searchstring=$searchstring&amp;offset", $maxsearchresults, 5);
             }
             else {
               echo "<div class='alert alert-warning'>" . uiTextSnippet('norecords') . "</div>\n";

@@ -36,4 +36,4 @@ $tleventID = tng_insert_id();
 adminwritelog(uiTextSnippet('addnewtlevent') . ": $tleventID - $evdetail");
 
 $message = uiTextSnippet('tlevent') . " $tleventID " . uiTextSnippet('succadded') . '.';
-header("Location: admin_timelineevents.php?message=" . urlencode($message));
+header("Location: timelineeventsBrowse.php?message=" . urlencode($message));

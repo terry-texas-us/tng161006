@@ -22,11 +22,11 @@ $headSection->setTitle(uiTextSnippet('addnewtlevent'));
     <?php
     echo $adminHeaderSection->build('tlevents-addnewtlevent', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_timelineevents.php", uiTextSnippet('search'), "findtimeline"]);
-    $navList->appendItem([$allow_add, "admin_newtlevent.php", uiTextSnippet('addnew'), "addtlevent"]);
+    $navList->appendItem([true, "timelineeventsBrowse.php", uiTextSnippet('browse'), "findtimeline"]);
+    $navList->appendItem([$allow_add, "timelineeventsAdd.php", uiTextSnippet('add'), "addtlevent"]);
     echo $navList->build("addtlevent");
     ?>
-    <form name='form1' action='admin_addtlevent.php' method='post' onSubmit="return validateForm();">
+    <form name='form1' action='timelineeventsAddFormAction.php' method='post' onSubmit="return validateForm();">
       <table class='table table-sm'>
         <?php function doEventRow($label, $dayname, $monthname, $yearname, $help) { ?>
           <tr>

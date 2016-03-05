@@ -26,16 +26,15 @@ $headSection->setTitle(uiTextSnippet('modifytlevent'));
     <?php
     echo $adminHeaderSection->build('tlevents-modifytlevent', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_timelineevents.php", uiTextSnippet('search'), "findtlevent"]);
-    $navList->appendItem([$allow_add, "admin_newtlevent.php", uiTextSnippet('addnew'), "addtlevent"]);
+    $navList->appendItem([true, "timelineeventsBrowse.php", uiTextSnippet('browse'), "findtlevent"]);
+    $navList->appendItem([$allow_add, "timelineeventsAdd.php", uiTextSnippet('add'), "addtlevent"]);
     $navList->appendItem([$allow_edit, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <table class='table table-sm'>
       <tr>
         <td>
-          <form action="admin_updatetlevent.php" method='post' name='form1' id='form1'
-                onSubmit="return validateForm();">
+          <form id='form1' name='form1' action='timelineeventsEditFormAction.php' method='post' onSubmit="return validateForm();">
             <table>
               <?php
 
