@@ -141,16 +141,16 @@ $headSection->setTitle(uiTextSnippet('media'));
 
     echo $adminHeaderSection->build('media', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_media.php", uiTextSnippet('search'), "findmedia"]);
-    $navList->appendItem([$allow_media_add, "admin_newmedia.php", uiTextSnippet('addnew'), "addmedia"]);
-    $navList->appendItem([$allow_media_edit, "admin_ordermediaform.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    $navList->appendItem([$allow_media_edit && !$assignedtree, "admin_thumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-    $navList->appendItem([$allow_media_add && !$assignedtree, "admin_photoimport.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allow_media_add && !$assignedtree, "admin_mediaupload.php", uiTextSnippet('upload'), "upload"]);
+//    $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('browse'), "findmedia"]);
+    $navList->appendItem([$allow_media_add, "mediaAdd.php", uiTextSnippet('add'), "addmedia"]);
+    $navList->appendItem([$allow_media_edit, "mediaSort.php", uiTextSnippet('text_sort'), "sortmedia"]);
+    $navList->appendItem([$allow_media_edit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
+    $navList->appendItem([$allow_media_add && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
+    $navList->appendItem([$allow_media_add && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
     echo $navList->build("findmedia");
     ?>
     <div class='row'>
-      <form action="admin_media.php" name='form1' id='form1'>
+      <form action="mediaBrowse.php" name='form1' id='form1'>
         <table class='table'>
           <tr>
             <td>
@@ -351,7 +351,7 @@ $headSection->setTitle(uiTextSnippet('media'));
           if ($numrows) {
           $actionstr = "";
           if ($allow_media_edit) {
-            $actionstr .= "<a href=\"admin_editmedia.php?mediaID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
+            $actionstr .= "<a href=\"mediaEdit.php?mediaID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
             $actionstr .= "</a>\n";
           }
@@ -387,7 +387,7 @@ $headSection->setTitle(uiTextSnippet('media'));
               echo "<img src=\"$usefolder/" . str_replace("%2F", "/", rawurlencode($row['thumbpath'])) . "\" width=\"$photowtouse\" height=\"$photohtouse\"></span>\n";
             }
             echo "</td>\n";
-            $description = $allow_edit || $allow_media_edit ? "<a href=\"admin_editmedia.php?mediaID={$row['mediaID']}\">{$row['description']}</a>" : $row['description'];
+            $description = $allow_edit || $allow_media_edit ? "<a href=\"mediaEdit.php?mediaID={$row['mediaID']}\">{$row['description']}</a>" : $row['description'];
             echo "<td><span>$description<br>" . truncateIt(getXrefNotes($row['notes']), $maxnoteprev) . "</span></td>\n";
             if ($map['key']) {
               echo "<td><span>";
@@ -450,7 +450,7 @@ $headSection->setTitle(uiTextSnippet('media'));
           ?>
         </table>
         <?php
-        echo buildSearchResultPagination($totrows, "admin_media.php?searchstring=$searchstring&amp;mediatypeID=$mediatypeID&amp;fileext=$fileext&amp;hsstat=$hsstat&amp;cemeteryID=$cemeteryID&amp;offset", $maxsearchresults, 5);
+        echo buildSearchResultPagination($totrows, "mediaBrowse.php?searchstring=$searchstring&amp;mediatypeID=$mediatypeID&amp;fileext=$fileext&amp;hsstat=$hsstat&amp;cemeteryID=$cemeteryID&amp;offset", $maxsearchresults, 5);
       }
       else {
         echo "</table>\n" . uiTextSnippet('norecords');

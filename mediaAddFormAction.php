@@ -38,7 +38,7 @@ if ($newfile && $newfile != "none") {
   } else {
     //improper permissions or folder doesn't exist (root path may be wrong)
     $message = uiTextSnippet('notcopied') . " $newpath " . uiTextSnippet('improperpermissions') . ".";
-    header("Location: admin_media.php?message=" . urlencode($message));
+    header("Location: mediaBrowse.php?message=" . urlencode($message));
     exit;
   }
 }
@@ -61,7 +61,7 @@ if (function_exists(imageJpeg) && $thumbcreate == "auto") {
   } else {
     //could not create thumbnail (size or type problem) or permissions (root path may be wrong)
     $message = uiTextSnippet('thumbnailnotcopied') . " $newthumbpath " . uiTextSnippet('improper2') . '.';
-    header("Location: admin_media.php?message=" . urlencode($message));
+    header("Location: mediaBrowse.php?message=" . urlencode($message));
     exit;
   }
 } else {
@@ -71,7 +71,7 @@ if (function_exists(imageJpeg) && $thumbcreate == "auto") {
     } else {
       //improper permissions or folder doesn't exist (root path may be wrong)
       $message = uiTextSnippet('thumbnailnotcopied') . " $newthumbpath " . uiTextSnippet('improperpermissions') . ".";
-      header("Location: admin_media.php?message=" . urlencode($message));
+      header("Location: mediaBrowse.php?message=" . urlencode($message));
       exit;
     }
   }
@@ -154,10 +154,10 @@ if ($result && $success) {
   $query = "UPDATE $mediatypes_table SET disabled=\"0\" where mediatypeID=\"$mediatypeID\"";
   $result = @tng_query($query);
 
-  adminwritelog("<a href=\"admin_editmedia.php?mediaID=$mediaID\">" . uiTextSnippet('addnewmedia') . ": $mediaID</a>");
+  adminwritelog("<a href=\"mediaEdit.php?mediaID=$mediaID\">" . uiTextSnippet('addnewmedia') . ": $mediaID</a>");
 
-  header("Location: admin_editmedia.php?mediaID=$mediaID&newmedia=1&added=1");
+  header("Location: mediaEdit.php?mediaID=$mediaID&newmedia=1&added=1");
 } else {
   $message = uiTextSnippet('photonotadded') . ".";
-  header("Location: admin_media.php?message=" . urlencode($message));
+  header("Location: mediaBrowse.php?message=" . urlencode($message));
 }

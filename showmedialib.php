@@ -238,14 +238,14 @@ function getMediaNavigation($mediaID, $personID, $albumlinkID, $result, $showlin
 
   if ($showlinks) {
     if ($allow_admin && $allow_media_edit) {
-      $pagenav .= "<a href=\"admin_editmedia.php?mediaID=$mediaID&amp;cw=1\" target='_blank'>&raquo; " . uiTextSnippet('editmedia') . "</a> &nbsp;&nbsp;&nbsp;";
+      $pagenav .= "<a href=\"mediaEdit.php?mediaID=$mediaID&amp;cw=1\" target='_blank'>&raquo; " . uiTextSnippet('editmedia') . "</a> &nbsp;&nbsp;&nbsp;";
     }
     if ($albumlinkID) {
       $offset = floor($page / $maxsearchresults) * $maxsearchresults;
       $pagenav .= "<a href=\"showalbum.php?albumID=$albumID&amp;offset=$offset&amp;tngpage=$pagenum&amp;tnggallery=$tnggallery\">&raquo; $albumname</a>  &nbsp;&nbsp;&nbsp;";
     } elseif (!$personID) {
       $offset = floor($page / $maxsearchresults) * $maxsearchresults;
-      $pagenav .= "<a href=\"browsemedia.php?" . $showall . "offset=$offset&amp;tngpage=$pagenum&amp;tnggallery=$tnggallery\">&raquo; " . uiTextSnippet('showall') . "</a>  &nbsp;&nbsp;&nbsp;";
+      $pagenav .= "<a href=\"mediaShow.php?" . $showall . "offset=$offset&amp;tngpage=$pagenum&amp;tnggallery=$tnggallery\">&raquo; " . uiTextSnippet('showall') . "</a>  &nbsp;&nbsp;&nbsp;";
     } else {
       if ($linktype == 'F') {
         $pagenav .= "<a href=\"familiesShowFamily.php?familyID=$personID&amp;tree=$tree\">&raquo; " . uiTextSnippet('groupsheet') . "</a>  &nbsp;&nbsp;&nbsp;";

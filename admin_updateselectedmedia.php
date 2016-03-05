@@ -158,4 +158,4 @@ if ($count) {
 } else {
   $message = uiTextSnippet('nochanges');
 }
-header("Location: admin_media.php?message=" . urlencode($message));
+header("Location: mediaBrowse.php?message=" . urlencode($message));

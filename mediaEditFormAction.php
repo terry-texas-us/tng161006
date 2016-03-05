@@ -136,7 +136,7 @@ if ($newfile && $newfile != "none") {
   } else {
     //improper permissions or folder doesn't exist (root path may be wrong)
     $message = uiTextSnippet('notcopied') . " $newpath " . uiTextSnippet('improperpermissions') . '.';
-    header("Location: admin_media.php?message=" . urlencode($message));
+    header("Location: mediaBrowse.php?message=" . urlencode($message));
     exit;
   }
 }
@@ -153,7 +153,7 @@ if (function_exists(imageJpeg) && $thumbcreate == "auto") {
   } else {
     //could not create thumbnail (size or type problem) or permissions (root path may be wrong)
     $message = uiTextSnippet('thumbnailnotcopied') . " $newthumbpath " . uiTextSnippet('improper2') . ".";
-    header("Location: admin_media.php?message=" . urlencode($message));
+    header("Location: mediaBrowse.php?message=" . urlencode($message));
     exit;
   }
 } else {
@@ -163,7 +163,7 @@ if (function_exists(imageJpeg) && $thumbcreate == "auto") {
     } else {
       //improper permissions or folder doesn't exist (root path may be wrong)
       $message = uiTextSnippet('thumbnailnotcopied') . " $newthumbpath " . uiTextSnippet('improperpermissions') . '.';
-      header("Location: admin_media.php?message=" . urlencode($message));
+      header("Location: mediaBrowse.php?message=" . urlencode($message));
       exit;
     }
   }
@@ -195,10 +195,10 @@ if ($mediatypeID != $mediatypeID_org) {
     tng_free_result($result2);
   }
 }
-adminwritelog("<a href=\"admin_editmedia.php?mediaID=$mediaID\">" . uiTextSnippet('modifymedia') . ": $mediaID</a>");
+adminwritelog("<a href=\"mediaEdit.php?mediaID=$mediaID\">" . uiTextSnippet('modifymedia') . ": $mediaID</a>");
 
 if ($newmedia == "return") {
-  header("Location: admin_editmedia.php?mediaID=$mediaID&cw=$cw");
+  header("Location: mediaEdit.php?mediaID=$mediaID&cw=$cw");
 } else {
   if ($newmedia == "close") {
   ?>
@@ -213,6 +213,6 @@ if ($newmedia == "return") {
   <?php
   } else {
     $message = uiTextSnippet('changestoitem') . " $mediaID " . uiTextSnippet('succsaved') . '.';
-    header("Location: admin_media.php?message=" . urlencode($message));
+    header("Location: mediaBrowse.php?message=" . urlencode($message));
   }
 }

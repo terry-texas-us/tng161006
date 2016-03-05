@@ -54,7 +54,7 @@ if ($tngprint) {
       break;
 
     //no indexing, but allow link following
-    case "browsemedia":
+    case "mediaShow":
     case "browsedocs":
     case "browseheadstones":
     case "browsenotes":

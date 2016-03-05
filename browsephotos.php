@@ -3,7 +3,7 @@ include("begin.php");
 include("genlib.php");
 
 if ($_GET['showdocs'] == 1) {
-  header("Location: browsemedia.php?mediatypeID=documents");
+  header("Location: mediaShow.php?mediatypeID=documents");
 } else {
-  header("Location: browsemedia.php?mediatypeID=photos");
+  header("Location: mediaShow.php?mediatypeID=photos");
 }

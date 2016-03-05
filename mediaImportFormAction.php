@@ -78,12 +78,12 @@ $headSection->setTitle(uiTextSnippet('mediaimport'));
 
     echo $adminHeaderSection->build('media-import', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_media.php", uiTextSnippet('search'), "findmedia"]);
+    $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('search'), "findmedia"]);
     $navList->appendItem([$allow_media_add, "admin_newmedia.php", uiTextSnippet('addnew'), "addmedia"]);
     $navList->appendItem([$allow_media_edit, "admin_ordermediaform.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    $navList->appendItem([$allow_media_edit && !$assignedtree, "admin_thumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-    $navList->appendItem([$allow_media_add && !$assignedtree, "admin_photoimport.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allow_media_add && !$assignedtree, "admin_mediaupload.php", uiTextSnippet('upload'), "upload"]);
+    $navList->appendItem([$allow_media_edit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
+    $navList->appendItem([$allow_media_add && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
+    $navList->appendItem([$allow_media_add && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
     echo $navList->build("import");
     ?>
     <table class='table table-sm'>

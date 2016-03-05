@@ -46,9 +46,9 @@ if ($tnggallery) {
   }
   $maxsearchresults *= 2;
   $wherestr .= " AND thumbpath != \"\"";
-  $gallerymsg = "<a href=\"browsemedia.php?tree=$tree&amp;mediatypeID=$orgmediatypeID&amp;mediasearch=$mediasearch\">&raquo; " . uiTextSnippet('regphotos') . "</a>";
+  $gallerymsg = "<a href=\"mediaShow.php?tree=$tree&amp;mediatypeID=$orgmediatypeID&amp;mediasearch=$mediasearch\">&raquo; " . uiTextSnippet('regphotos') . "</a>";
 } else {
-  $gallerymsg = "<a href=\"browsemedia.php?tnggallery=1&amp;tree=$tree&amp;mediatypeID=$orgmediatypeID&amp;mediasearch=$mediasearch\">&raquo; " . uiTextSnippet('gallery') . "</a>";
+  $gallerymsg = "<a href=\"mediaShow.php?tnggallery=1&amp;tree=$tree&amp;mediatypeID=$orgmediatypeID&amp;mediasearch=$mediasearch\">&raquo; " . uiTextSnippet('gallery') . "</a>";
 }
 
 $_SESSION['tng_gallery'] = $tnggallery;
@@ -59,10 +59,10 @@ function doMediaSearch($instance, $pagenav) {
   global $orgmediatypeID;
   global $tree, $tnggallery;
 
-  $str = buildFormElement("browsemedia", "get", "MediaSearch$instance");
+  $str = buildFormElement("mediaShow", "get", "MediaSearch$instance");
   $str .= "<input name='mediasearch' type='text' value=\"$mediasearch\" /> \n";
   $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . "\" /> \n";
-  $str .= "<input type='button' value=\"" . uiTextSnippet('tng_reset') . "\" onclick=\"window.location.href='browsemedia.php?mediatypeID=$orgmediatypeID&amp;tree=$tree&amp;tnggallery=$tnggallery';\" />&nbsp;&nbsp;&nbsp;";
+  $str .= "<input type='button' value=\"" . uiTextSnippet('tng_reset') . "\" onclick=\"window.location.href='mediaShow.php?mediatypeID=$orgmediatypeID&amp;tree=$tree&amp;tnggallery=$tnggallery';\" />&nbsp;&nbsp;&nbsp;";
   $str .= "<input name='mediatypeID' type='hidden' value=\"$orgmediatypeID\" />\n";
   $str .= $pagenav;
   $str .= "<input name='tree' type='hidden' value=\"$tree\" />\n";
@@ -118,7 +118,7 @@ $numrowsplus = $numrows + $offset;
 $treestr = $tree ? " " . uiTextSnippet('tree') . ": $tree" : "";
 $treestr = trim("$mediasearch $treestr");
 $treestr = $treestr ? " ($treestr)" : "";
-$logstring = "<a href=\"browsemedia.php?tree=$tree&amp;offset=$offset&amp;mediasearch=$mediasearch&amp;mediatypeID=$mediatypeID\">$titlestr$treestr</a>";
+$logstring = "<a href=\"mediaShow.php?tree=$tree&amp;offset=$offset&amp;mediasearch=$mediasearch&amp;mediatypeID=$mediatypeID\">$titlestr$treestr</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -150,7 +150,7 @@ $headSection->setTitle($titlestr);
     <?php
     $hiddenfields[0] = array('name' => 'mediatypeID', 'value' => $orgmediatypeID);
     $hiddenfields[1] = array('name' => 'tnggallery', 'value' => $tnggallery);
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'browsemedia', 'method' => 'get', 'name' => 'form1', 'id' => 'form1', 'hidden' => $hiddenfields));
+    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'mediaShow', 'method' => 'get', 'name' => 'form1', 'id' => 'form1', 'hidden' => $hiddenfields));
 
     $toplinks = "<p>";
     if ($totrows) {
@@ -158,7 +158,7 @@ $headSection->setTitle($titlestr);
     }
     $toplinks .= "$gallerymsg";
 
-    $pagenav = buildSearchResultPagination($totrows, "browsemedia.php?mediasearch=$mediasearch&amp;tnggallery=$tnggallery&amp;mediatypeID=$orgmediatypeID&amp;offset", $maxsearchresults, $max_browsemedia_pages);
+    $pagenav = buildSearchResultPagination($totrows, "mediaShow.php?mediasearch=$mediasearch&amp;tnggallery=$tnggallery&amp;mediatypeID=$orgmediatypeID&amp;offset", $maxsearchresults, $max_browsemedia_pages);
     $preheader = doMediaSearch(1, $pagenav);
     $preheader .= "<br>\n";
 

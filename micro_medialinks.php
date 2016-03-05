@@ -80,7 +80,7 @@ if ($result2) {
     $linkrows .= "</a>";
     $linkrows .= "</td>\n";
     $linkrows .= "<td>" . uiTextSnippet($type) . "</td>\n";
-    $linkrows .= "<td>$name$id (<a href=\"admin_ordermedia.php?tree1={$plink['gedcom']}&linktype1=$linktype&mediatypeID=$mediatypeID&newlink1=$entityID&event1=$eventID\">" . uiTextSnippet('text_sort') . "</a>)&nbsp;</td>\n";
+    $linkrows .= "<td>$name$id (<a href=\"mediaSortFormAction.php?tree1={$plink['gedcom']}&linktype1=$linktype&mediatypeID=$mediatypeID&newlink1=$entityID&event1=$eventID\">" . uiTextSnippet('text_sort') . "</a>)&nbsp;</td>\n";
     $linkrows .= "<td>{$plink['treename']}</td>\n";
     $linkrows .= "<td id=\"event_{$plink['mlinkID']}\">$eventstr&nbsp;</td>\n";
     $linkrows .= "<td id=\"alt_{$plink['mlinkID']}\">$alttext</td>\n";

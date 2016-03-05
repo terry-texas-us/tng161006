@@ -2,4 +2,4 @@
 include("begin.php");
 include("genlib.php");
 
-header("Location: browsemedia.php?mediatypeID=headstones");
+header("Location: mediaShow.php?mediatypeID=headstones");

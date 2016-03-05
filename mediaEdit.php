@@ -149,12 +149,12 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
     <?php
     echo $adminHeaderSection->build('media-existingmediainfo', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_media.php", uiTextSnippet('search'), "findmedia"]);
-    $navList->appendItem([$allow_media_add, "admin_newmedia.php", uiTextSnippet('addnew'), "addmedia"]);
-    $navList->appendItem([$allow_media_edit, "admin_ordermediaform.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    $navList->appendItem([$allow_media_edit && !$assignedtree, "admin_thumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-    $navList->appendItem([$allow_media_add && !$assignedtree, "admin_photoimport.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allow_media_add && !$assignedtree, "admin_mediaupload.php", uiTextSnippet('upload'), "upload"]);
+    $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('browse'), "findmedia"]);
+    $navList->appendItem([$allow_media_add, "mediaAdd.php", uiTextSnippet('add'), "addmedia"]);
+    $navList->appendItem([$allow_media_edit, "mediaSort.php", uiTextSnippet('text_sort'), "sortmedia"]);
+    $navList->appendItem([$allow_media_edit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
+    $navList->appendItem([$allow_media_add && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
+    $navList->appendItem([$allow_media_add && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
     $navList->appendItem([$allow_media_edit, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
@@ -167,7 +167,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
       <a href='#' onClick="toggleAll('on');"><?php echo uiTextSnippet('expandall'); ?></a>
       <a href='#' onClick="toggleAll('off');"><?php echo uiTextSnippet('collapseall'); ?></a>
     </div>
-    <form action="admin_updatemedia.php" method='post' name='form1' id='form1' ENCTYPE="multipart/form-data"
+    <form action="mediaEditFormAction.php" method='post' name='form1' id='form1' ENCTYPE="multipart/form-data"
           onsubmit="return validateForm();">
       <table class="table table-sm">
         <tr>

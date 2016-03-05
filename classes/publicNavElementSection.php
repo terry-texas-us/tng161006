@@ -68,12 +68,12 @@ class publicNavElementSection extends navElementSection {
     $out = "";
     foreach ($mediatypes as $mediatype) {
       if (!$mediatype['disabled']) {
-        $out .= $this->buildListItem("browsemedia.php?mediatypeID=" . $mediatype['ID'], $mediatype['icon'], $mediatype['ID']);
+        $out .= $this->buildListItem("mediaShow.php?mediatypeID=" . $mediatype['ID'], $mediatype['icon'], $mediatype['ID']);
         $tngconfig['menucount']++;
       }
     }
     $out .= $this->buildListItem("browsealbums.php", "svg/album.svg", "albums");
-    $out .= $this->buildListItem("browsemedia.php", "svg/media-mixed.svg", "allmedia");
+    $out .= $this->buildListItem("mediaShow.php", "svg/media-mixed.svg", "allmedia");
     $tngconfig['menucount'] += 2;
 
     return $out;

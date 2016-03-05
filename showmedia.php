@@ -57,7 +57,7 @@ if ($medialinkID) {
 }
 //redirect if we're not supposed to be here
 if ($requirelogin && $treerestrict && $assignedtree && $row['gedcom'] && $row['gedcom'] != $assignedtree) {
-  header("location: browsemedia.php?");
+  header("location: mediaShow.php?");
   exit;
 }
 if (!tng_num_rows($result)) {

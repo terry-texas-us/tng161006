@@ -289,7 +289,7 @@ function addMedia2EntityLink(form, newEntityID, num) {
                     var td0 = insertCell(newtr, 0, "normal", actionbuttons);
                     td0.setAttribute('align', 'center');
                     insertCell(newtr, 1, "normal", linktext);
-                    var sortlink = type !== "album" ? ' (<a href="admin_ordermedia.php?tree1=' + treeID + '&linktype1=' + linktype + '&mediatypeID=' + mediatypeID + '&newlink1=' + entityID + '&event1=">' + textSnippet('text_sort') + '</a>)' : '';
+                    var sortlink = type !== "album" ? ' (<a href="mediaSortFormAction.php?tree1=' + treeID + '&linktype1=' + linktype + '&mediatypeID=' + mediatypeID + '&newlink1=' + entityID + '&event1=">' + textSnippet('text_sort') + '</a>)' : '';
                     insertCell(newtr, 2, "normal", name + displayID + sortlink);
                     insertCell(newtr, 3, "normal", treename + '&nbsp;');
 

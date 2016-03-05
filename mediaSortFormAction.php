@@ -98,7 +98,7 @@ $numrows = tng_num_rows($result);
 
 if (!$numrows) {
   $message = uiTextSnippet('noresults');
-  header("Location: admin_ordermediaform.php?personID=$personID&message=" . urlencode($message));
+  header("Location: mediaSort.php?personID=$personID&message=" . urlencode($message));
   exit;
 }
 header("Content-type: text/html; charset=" . $session_charset);
@@ -111,12 +111,12 @@ $headSection->setTitle(uiTextSnippet($sortstr));
   <?php
   echo $adminHeaderSection->build('media-text_sort', $message);
   $navList = new navList('');
-  $navList->appendItem([true, "admin_media.php", uiTextSnippet('search'), "findmedia"]);
-  $navList->appendItem([$allow_media_add, "admin_newmedia.php", uiTextSnippet('addnew'), "addmedia"]);
-  $navList->appendItem([$allow_media_edit, "admin_ordermediaform.php", uiTextSnippet('text_sort'), "sortmedia"]);
-  $navList->appendItem([$allow_media_edit && !$assignedtree, "admin_thumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-  $navList->appendItem([$allow_media_add && !$assignedtree, "admin_photoimport.php", uiTextSnippet('import'), "import"]);
-  $navList->appendItem([$allow_media_add && !$assignedtree, "admin_mediaupload.php", uiTextSnippet('upload'), "upload"]);
+  $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('browse'), "findmedia"]);
+  $navList->appendItem([$allow_media_add, "mediaAdd.php", uiTextSnippet('add'), "addmedia"]);
+  $navList->appendItem([$allow_media_edit, "mediaSort.php", uiTextSnippet('text_sort'), "sortmedia"]);
+  $navList->appendItem([$allow_media_edit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
+  $navList->appendItem([$allow_media_add && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
+  $navList->appendItem([$allow_media_add && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
   echo $navList->build("sortmedia");
   ?>
   <br>
@@ -172,13 +172,13 @@ $headSection->setTitle(uiTextSnippet($sortstr));
               echo "<td style=\"width:" . ($thumbmaxw + 6) . "px;text-align:center;\">";
               if ($row['thumbpath'] && file_exists("$rootpath$usefolder/" . $row['thumbpath'])) {
                 $size = getimagesize("$rootpath$usefolder/" . $row['thumbpath']);
-                echo "<a href=\"admin_editmedia.php?mediaID={$row['mediaID']}\"><img src=\"$usefolder/" . str_replace("%2F", "/", rawurlencode($row['thumbpath'])) . "\" $size[3] alt=\"{$row['description']}\"></a>";
+                echo "<a href=\"mediaEdit.php?mediaID={$row['mediaID']}\"><img src=\"$usefolder/" . str_replace("%2F", "/", rawurlencode($row['thumbpath'])) . "\" $size[3] alt=\"{$row['description']}\"></a>";
               } else {
                 echo "&nbsp;";
               }
               echo "</td>\n";
               $checked = $row['defphoto'] ? " checked" : "";
-              echo "<td><a href=\"admin_editmedia.php?mediaID={$row['mediaID']}\">{$row['description']}</a><br>$truncated<br>\n";
+              echo "<td><a href=\"mediaEdit.php?mediaID={$row['mediaID']}\">{$row['description']}</a><br>$truncated<br>\n";
               echo "<span id=\"md_{$row['medialinkID']}\" class=\"small\" style=\"color:gray;visibility:hidden\">\n";
               echo "<input name='rthumbs' type='radio' value=\"r{$row['mediaID']}\"$checked onclick=\"makeDefault(this);\">" . uiTextSnippet('makedefault') . "\n";
               echo " &nbsp;|&nbsp; ";

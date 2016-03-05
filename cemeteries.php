@@ -45,7 +45,7 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
     $divctr = $linectr = $colctr = $i = 0;
 
     echo "<div id=\"cemwrapper\">\n";
-    echo "<p>&nbsp;&nbsp;<a href=\"browsemedia.php?mediatypeID=headstones\">&raquo; " . uiTextSnippet('showallhsr') . "</a></p>\n";
+    echo "<p>&nbsp;&nbsp;<a href=\"mediaShow.php?mediatypeID=headstones\">&raquo; " . uiTextSnippet('showallhsr') . "</a></p>\n";
     echo "<div id=\"cemcontainer\">\n";
     echo "<div id=\"col$colctr\">\n";
 
