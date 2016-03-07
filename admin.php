@@ -110,7 +110,7 @@ $headSection->setTitle(uiTextSnippet('administration'));
       }
 
       if ($allow_edit && $allow_add && $allow_delete && !$assignedbranch) {
-        echo adminMenuItem("admin_dataimport.php", uiTextSnippet('datamaint'), uiTextSnippet('importgedcom2'), "img/datamaint_icon.gif");
+        echo adminMenuItem("dataImportGedcom.php", uiTextSnippet('datamaint'), uiTextSnippet('importgedcom2'), "img/datamaint_icon.gif");
       }
       if ($allow_edit && $allow_add && $allow_delete && !$assignedtree) {
         echo adminMenuItem("admin_setup.php", uiTextSnippet('setup'), uiTextSnippet('setupitems'), "svg/cog.svg");

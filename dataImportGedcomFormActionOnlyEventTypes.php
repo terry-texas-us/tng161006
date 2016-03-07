@@ -35,8 +35,8 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
   <?php
   echo $adminHeaderSection->build('datamaint-gedimport', $message);
   $navList = new navList('');
-  $navList->appendItem([true, "admin_dataimport.php", uiTextSnippet('import'), "import"]);
-  $navList->appendItem([true, "admin_export.php", uiTextSnippet('export'), "export"]);
+  $navList->appendItem([true, "dataImportGedcom.php", uiTextSnippet('import'), "import"]);
+  $navList->appendItem([true, "dataExportGedcom.php", uiTextSnippet('export'), "export"]);
   $navList->appendItem([true, "admin_secondmenu.php", uiTextSnippet('secondarymaint'), "second"]);
   echo $navList->build("import");
   ?>
@@ -223,7 +223,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       </span>
 
       <?php
-      echo "<p><a href=\"admin_dataimport.php\">" . uiTextSnippet('backtodataimport') . "</a></p>";
+      echo "<p><a href=\"dataImportGedcom.php\">" . uiTextSnippet('backtodataimport') . "</a></p>";
 
       echo "<div align=\"right\"><span>$tng_title, v.$tng_version</span></div>";
       ?>

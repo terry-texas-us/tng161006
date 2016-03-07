@@ -20,14 +20,13 @@ if (!$allow_add || !$allow_edit || $assignedbranch) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-
 include($subroot . "importconfig.php");
 require("datelib.php");
-require("gedimport_trees.php");
-require("gedimport_families.php");
-require("gedimport_sources.php");
-require("gedimport_people.php");
-require("gedimport_misc.php");
+require 'gedcomImportTrees.php';
+require 'gedcomImportFamilies.php';
+require 'gedcomImportSources.php';
+require 'gedcomImportPeople.php';
+require 'gedcomImportMisc.php';
 require("adminlog.php");
 $today = date("Y-m-d H:i:s");
 
@@ -90,8 +89,8 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
   if ($old) {
     echo $adminHeaderSection->build('datamaint-gedimport', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_dataimport.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allow_export, "admin_export.php", uiTextSnippet('export'), "export"]);
+    $navList->appendItem([true, "dataImportGedcom.php", uiTextSnippet('import'), "import"]);
+    $navList->appendItem([$allow_export, "dataExportGedcom.php", uiTextSnippet('export'), "export"]);
     $navList->appendItem([true, "admin_secondmenu.php", uiTextSnippet('secondarymaint'), "second"]);
     echo $navList->build("import");
     
@@ -267,7 +266,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
   if ($old) {
     echo "<p>$openmsg</p>\n";
     if ($clearedtogo == "true" && $saveimport && (!$remotefile || $remotefile == "none")) {
-      echo "<p>" . uiTextSnippet('ifimportfails') . " <a href=\"admin_gedimport.php?tree=$tree&amp;old=1\">" . uiTextSnippet('clickresume') . "</a>.</p>\n";
+      echo "<p>" . uiTextSnippet('ifimportfails') . " <a href=\"dataImportGedcomFormAction.php?tree=$tree&amp;old=1\">" . uiTextSnippet('clickresume') . "</a>.</p>\n";
     }
   } else {
     ?>
@@ -460,7 +459,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
 
   if ($old) {
     echo "<p><a href=\"admin_secondary.php?secaction=" . uiTextSnippet('tracklines') . "&tree=$tree\">" . uiTextSnippet('tracklines') . "</a></p>";
-    echo "<p><a href=\"admin_dataimport.php\">" . uiTextSnippet('backtodataimport') . "</a></p>\n";
+    echo "<p><a href=\"dataImportGedcom.php\">" . uiTextSnippet('backtodataimport') . "</a></p>\n";
     echo "</div></div>\n";
     echo "<div align=\"right\"><span>$tng_title, v.$tng_version</span></div>";
   }

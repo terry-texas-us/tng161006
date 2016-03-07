@@ -52,7 +52,7 @@ function checkFile(form) {
     }
 
     if (rval && form.target) {
-        if (form.action.indexOf("admin_gedimport.php") >= 0) {
+        if (form.action.indexOf("dataImportGedcomFormAction.php") >= 0) {
             resetimport();
             var popup = '<div class="impcontainer">\n';
             popup += '<div class="impheader"><h4 id="importmsg">';
@@ -74,7 +74,7 @@ function checkFile(form) {
             popup += '<br><div id="implinks"><a href="#" onclick="return suspendimport();">' + textSnippet('stop') + '</a>';
             if (saveimport === "1") {
                 treeval = treeselect.options[treeselect.selectedIndex].value;
-                popup += ' |  <a href="admin_gedimport.php?tree=' + treeval + '&resuming=1" id="resumelink" target="results" onclick="resumeimport();">' + textSnippet('resume') + '</a>';
+                popup += ' |  <a href="dataImportGedcomFormAction.php?tree=' + treeval + '&resuming=1" id="resumelink" target="results" onclick="resumeimport();">' + textSnippet('resume') + '</a>';
             }
             popup += '</div>\n<div id="errormsg"></div>';
             popup += '</div>';
@@ -101,7 +101,7 @@ function iframeLoaded() {
     if (submitted && started && !done && !suspended) {
         //restart if that is an option
         var treeselect = document.form1.tree1;
-        self.frames[0].location.href = "admin_gedimport.php?tree=" + treeselect.options[treeselect.selectedIndex].value + "&resuming=1";
+        self.frames[0].location.href = "dataImportGedcomFormAction.php?tree=" + treeselect.options[treeselect.selectedIndex].value + "&resuming=1";
     }
 }
 
@@ -116,7 +116,7 @@ function checkIfDone() {
     if (started && !done && !suspended) {
         if (lastptr === $('bar').style.width) {
             var treeselect = document.form1.tree1;
-            self.frames[0].location.href = "admin_gedimport.php?tree=" + treeselect.options[treeselect.selectedIndex].value + "&resuming=1";
+            self.frames[0].location.href = "dataImportGedcomFormAction.php?tree=" + treeselect.options[treeselect.selectedIndex].value + "&resuming=1";
         } else {
             lastptr = $('bar').style.width;
             timecheck = setTimeout(checkIfDone, checksecs);
@@ -204,7 +204,7 @@ function toggleSections(flag) {
     $('#desttree').toggle(400);
     $('#replace').toggle(400);
     $('#ioptions').toggle(400);
-    document.form1.action = flag ? 'admin_gedimport_eventtypes.php' : 'admin_gedimport.php';
+    document.form1.action = flag ? 'dataImportGedcomFormActionOnlyEventTypes.php' : 'dataImportGedcomFormAction.php';
     if (flag) {
         document.form1.allevents.checked = "";
     }
