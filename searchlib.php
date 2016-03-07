@@ -66,31 +66,31 @@ function buildYearCriteria($column, $colvar, $qualifyvar, $altcolumn, $qualifier
   $criteria = "";
   $numvalue = is_numeric($value) ? $value : preg_replace("/[^0-9]/", '', $value);
   switch ($qualifier) {
-    case "pm2":
+    case "plusminus2":
       $criteria = "($yearstr1 < $numvalue + 2 AND $yearstr2 > $numvalue - 2)";
       $qualifystr = uiTextSnippet('plusminus2');
       break;
-    case "pm5":
+    case "plusminus5":
       $criteria = "($yearstr1 < $numvalue + 5 AND $yearstr2 > $numvalue - 5)";
       $qualifystr = uiTextSnippet('plusminus5');
       break;
-    case "pm10":
+    case "plusminus10":
       $criteria = "($yearstr1 < $numvalue + 10 AND $yearstr2 > $numvalue - 10)";
       $qualifystr = uiTextSnippet('plusminus10');
       break;
-    case "lt":
+    case "lessthan":
       $criteria = "($yearstr1 != \"\" AND $yearstr1 < \"$numvalue\")";
       $qualifystr = uiTextSnippet('lessthan');
       break;
-    case "gt":
+    case "greaterthan":
       $criteria = "$yearstr1 > \"$numvalue\"";
       $qualifystr = uiTextSnippet('greaterthan');
       break;
-    case "lte":
+    case "lessthanequal":
       $criteria = "($yearstr1 != \"\" AND $yearstr1 <= \"$numvalue\")";
       $qualifystr = uiTextSnippet('lessthanequal');
       break;
-    case "gte":
+    case "greaterthanequal":
       $criteria = "$yearstr1 >= \"$numvalue\"";
       $qualifystr = uiTextSnippet('greaterthanequal');
       break;
@@ -108,6 +108,7 @@ function buildYearCriteria($column, $colvar, $qualifyvar, $altcolumn, $qualifier
       }
       $qualifystr = uiTextSnippet('dnexist');
       break;
+    case "equals":
     default:
       $criteria = "$yearstr1 = \"$value\"";
       $qualifystr = uiTextSnippet('equalto');

@@ -704,7 +704,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
     $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
     $navList->appendItem([$allow_add, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
     $navList->appendItem([$allow_edit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
+//    $navList->appendItem([$allow_edit && $allow_delete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("merge");
     ?>
     <table class='table table-sm'>

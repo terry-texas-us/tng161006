@@ -36,7 +36,7 @@ $assoccount = tng_num_rows($assocresult);
     <div class='modal-body'>
       <p>
         <?php if ($allow_add) { ?>
-          <input class='btn btn-secondary' id='addnew' type='button' value='<?php echo uiTextSnippet('addnew'); ?>'>
+        <button class='btn btn-secondary' id='addnew' type='button'><?php echo uiTextSnippet('add'); ?></button>
         <?php } ?>
       </p>
       <table class='table table-sm' id='associationstbl' <?php if (!$assoccount) {echo " style='display: none'";} ?>>
@@ -97,7 +97,7 @@ $assoccount = tng_num_rows($assocresult);
       </table>
     </div> <!-- .modal-body -->
     <footer class='modal-footer'>
-      <input class='btn btn-primary' id='finish' type='button' value="<?php echo uiTextSnippet('finish'); ?>">
+      <button class='btn btn-primary' id='finish' type='button'><?php echo uiTextSnippet('finish'); ?></button>
     </footer>
   </form>
 </div>

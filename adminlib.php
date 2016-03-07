@@ -10,12 +10,12 @@ checkMaintenanceMode(1);
 if (isset($map['key']) && $map['key']) {
   include_once("googlemaplib.php");
 }
-require_once './classes/headElementSection.php';
-require_once './classes/adminNavElementSection.php';
-require_once './classes/adminHeaderElementSection.php';
-require_once './classes/footerElementSection.php';
-require_once './classes/scriptsManager.php';
-require_once './classes/navList.php';
+require_once 'classes/headElementSection.php';
+require_once 'classes/adminNavElementSection.php';
+require_once 'classes/adminHeaderElementSection.php';
+require_once 'classes/footerElementSection.php';
+require_once 'classes/scriptsManager.php';
+require_once 'classes/navList.php';
 
 $headSection = new headElementSection($sitename);
 

@@ -52,7 +52,6 @@ if ($newsearch) {
     setcookie("tng_search_media_post[offset]", $offset, $exptime);
   }
 }
-
 if ($offset) {
   $offsetplus = $offset + 1;
   $newoffset = "$offset, ";
@@ -61,7 +60,6 @@ if ($offset) {
   $newoffset = "";
   $tngpage = 1;
 }
-
 if ($assignedtree) {
   $wherestr = "WHERE gedcom = \"$assignedtree\"";
   $wherestr2 = " AND $medialinks_table.gedcom = \"$assignedtree\"";
@@ -107,7 +105,6 @@ if ($unlinked) {
 if ($wherestr) {
   $wherestr = "WHERE $wherestr";
 }
-
 $query = "SELECT $media_table.mediaID as mediaID, $medialinkID description, notes, thumbpath, mediatypeID, usecollfolder, latitude, longitude, zoom FROM $media_table $join $wherestr ORDER BY description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
@@ -121,7 +118,6 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 } else {
   $totrows = $numrows;
 }
-
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('media'));
 ?>
@@ -151,62 +147,56 @@ $headSection->setTitle(uiTextSnippet('media'));
     ?>
     <div class='row'>
       <form action="mediaBrowse.php" name='form1' id='form1'>
-        <table class='table'>
-          <tr>
-            <td>
-              <?php
-              $newwherestr = $wherestr;
-              $wherestr = $orgwherestr;
-              include '_/components/php/treeSelectControl.php';
-              $wherestr = $newwherestr;
-              ?>
-              <label for='searchstring'>
-                <span><?php echo uiTextSnippet('searchfor'); ?></span>
-                <input class='btn btn-secondary' name='searchstring' type='text' value="<?php echo $originalstring; ?>">
-              </label>
-              <input class='btn btn-secondary' name='submit' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
-              <input class='btn btn-warning' name='submit' type='submit' value="<?php echo uiTextSnippet('reset'); ?>" 
-                  onClick="resetForm();">
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label for='fileext'>
-                <span><?php echo uiTextSnippet('fileext'); ?>:</span>
-                <input class='btn btn-secondary' name='fileext' type='text' value="<?php echo $fileext; ?>" size='3'>
-              </label>
-              <input name='unlinked' type='checkbox' value='1'<?php if ($unlinked) {echo " checked";} ?> /> <?php echo uiTextSnippet('unlinked'); ?>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label for='mediatyeID'>
-                <span><?php echo uiTextSnippet('mediatype'); ?>: </span>
-                <select class='form-control' name="mediatypeID" onchange="toggleHeadstoneCriteria(this.options[this.selectedIndex].value)">
-                  <?php
-                  echo   "<option value=''>" . uiTextSnippet('all') . "</option>\n";
-                  foreach ($mediatypes as $mediatype) {
-                    $msgID = $mediatype['ID'];
-                    echo "<option value=\"$msgID\"";
-                    if ($msgID == $mediatypeID) {
-                      echo " selected";
-                    }
-                    echo ">\n";
-                    echo $mediatype['display'] . "</option>\n";
+        <div class='row'>
+          <div class='col-md-6'>
+            <?php
+            $newwherestr = $wherestr;
+            $wherestr = $orgwherestr;
+            include '_/components/php/treeSelectControl.php';
+            $wherestr = $newwherestr;
+            ?>
+          </div>
+          <div class='col-md-6'>
+            <input class='form-control' name='searchstring' type='text' value="<?php echo $originalstring; ?>" placeholder='<?php echo uiTextSnippet('searchfor'); ?>'>
+            <button class='btn btn-primary-outline' name='submit' type='submit'><?php echo uiTextSnippet('search'); ?></button>
+            <button class='btn btn-warning-outline' name='submit' type='submit' onClick="resetForm();"><?php echo uiTextSnippet('reset'); ?></button>
+          </div>
+        </div>
+        <br>
+        <div class='row'>
+          <div class='col-md-6'>
+            <br>
+            <label class='form-control-label' for='fileext'><?php echo uiTextSnippet('fileext'); ?>:</label>
+            <input class='form-control' name='fileext' type='text' value="<?php echo $fileext; ?>">
+            <br>
+            <input name='unlinked' type='checkbox' value='1'<?php if ($unlinked) {echo " checked";} ?>> <?php echo uiTextSnippet('unlinked'); ?>
+          </div>
+          <div class='col-md-6'>
+            <label for='mediatyeID'>
+              <span><?php echo uiTextSnippet('mediatype'); ?>: </span>
+              <select class='form-control' name="mediatypeID" onchange="toggleHeadstoneCriteria(this.options[this.selectedIndex].value)">
+                <?php
+                echo   "<option value=''>" . uiTextSnippet('all') . "</option>\n";
+                foreach ($mediatypes as $mediatype) {
+                  $msgID = $mediatype['ID'];
+                  echo "<option value=\"$msgID\"";
+                  if ($msgID == $mediatypeID) {
+                    echo " selected";
                   }
-                  ?>
-                </select>
-              </label>
-              <?php if (!$assignedtree && $allow_add && $allow_edit && $allow_delete) { ?>
-                <input class='btn btn-secondary' name='addnewmediatype' type='button' value="<?php echo uiTextSnippet('addnewcoll'); ?>"
-                    onclick="tnglitbox = new ModalDialog('admin_newcollection.php?field=mediatypeID');">
-                <input class='btn btn-secondary' id='editmediatype' name='editmediatype' type='button' value="<?php echo uiTextSnippet('edit'); ?>" style="display: none"
-                    onclick="editMediatype(document.form1.mediatypeID);">
-                <input class='btn btn-danger' id='delmediatype' name='delmediatype' type='button' value="<?php echo uiTextSnippet('delete'); ?>" style="display: none"
-                    onclick="confirmDeleteMediatype(document.form1.mediatypeID);">
-              <?php } ?>
-            </td>
-          </tr>
+                  echo ">\n";
+                  echo $mediatype['display'] . "</option>\n";
+                }
+                ?>
+              </select>
+            </label>
+            <?php if (!$assignedtree && $allow_add && $allow_edit && $allow_delete) { ?>
+              <button class='btn btn-secondary' name='addnewmediatype' type='button' onclick="tnglitbox = new ModalDialog('admin_newcollection.php?field=mediatypeID');"><?php echo uiTextSnippet('addnewcoll'); ?></button>
+              <button class='btn btn-secondary' id='editmediatype' name='editmediatype' type='button' style="display: none" onclick="editMediatype(document.form1.mediatypeID);"><?php echo uiTextSnippet('edit'); ?></button>
+              <button class='btn btn-danger-outline' id='delmediatype' name='delmediatype' type='button' style="display: none" onclick="confirmDeleteMediatype(document.form1.mediatypeID);"><?php echo uiTextSnippet('delete'); ?></button>
+            <?php } ?>
+          </div>
+        </div>
+        <table class='table'>
           <tr id="hsstatrow">
             <td>
               <label for='hsstat'>
@@ -258,7 +248,6 @@ $headSection->setTitle(uiTextSnippet('media'));
             </td>
           </tr>
         </table>
-
         <input name='findmedia' type='hidden' value='1'>
         <input name='newsearch' type='hidden' value='1'>
       </form>
@@ -273,25 +262,16 @@ $headSection->setTitle(uiTextSnippet('media'));
       <form action="admin_updateselectedmedia.php" method='post' name="form2">
         <?php if ($allow_media_delete || $allow_media_edit) { ?>
           <div class='row'>
-            <div class='col-md-2'>
-              <input class='btn btn-secondary' name='selectall' type='button' value="<?php echo uiTextSnippet('selectall'); ?>" 
-                onClick="toggleAll(1);">
-            </div>
-            <div class='col-md-2'>
-              <input class='btn btn-secondary' name='clearall' type='button' value="<?php echo uiTextSnippet('clearall'); ?>" 
-                onClick="toggleAll(0);">
-            </div>
+            <div class='col-md-6'>
+              <button class='btn btn-secondary' name='selectall' type='button' onClick="toggleAll(1);"><?php echo uiTextSnippet('selectall'); ?></button>
+              <button class='btn btn-secondary' name='clearall' type='button' onClick="toggleAll(0);"><?php echo uiTextSnippet('clearall'); ?></button>
             <?php if ($allow_media_delete) { ?>
-              <div class='col-md-2'>
-                <input class='btn btn-danger' name='xphaction' type='submit' value="<?php echo uiTextSnippet('deleteselected'); ?>" 
-                onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');">
-              </div>
-            <?php
-            }
-            if ($allow_media_edit) {
-            ?>
+                <button class='btn btn-danger-outline' name='xphaction' type='submit' onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');"><?php echo uiTextSnippet('deleteselected'); ?></button>
+            <?php } ?>
+            </div>
+            <?php if ($allow_media_edit) { ?>
               <div class='col-md-3'>
-                <input class='btn btn-secondary' name='xphaction' type='submit' value="<?php echo uiTextSnippet('convto'); ?>">
+                <button class='btn btn-secondary' name='xphaction' type='submit'><?php echo uiTextSnippet('convto'); ?></button>
               </div>
               <div class='col-md-3'>
                 <select class='form-control' name="newmediatype">
@@ -306,6 +286,7 @@ $headSection->setTitle(uiTextSnippet('media'));
                 </select>
               </div>
             </div>  
+            <br>
             <?php
             $albumquery = "SELECT albumID, albumname FROM $albums_table ORDER BY albumname";
             $albumresult = tng_query($albumquery) or die(uiTextSnippet('cannotexecutequery') . ": $albumquery");
@@ -313,7 +294,7 @@ $headSection->setTitle(uiTextSnippet('media'));
             if ($numalbums) {
               echo "<div class='row'>\n";
                 echo "<div class='col-md-offset-6 col-md-3'>\n";
-                  echo "<input class='btn btn-secondary' name='xphaction' type='submit' value=\"" . uiTextSnippet('addtoalbum') . "\">\n";
+                  echo "<button class='btn btn-secondary' name='xphaction' type='submit'>" . uiTextSnippet('addtoalbum') . "</button>\n";
                 echo "</div>\n";
                 echo "<div class='col-md-3'>\n";
                   echo "<select class='form-control' name='albumID'>\n";
@@ -328,7 +309,6 @@ $headSection->setTitle(uiTextSnippet('media'));
           }
           ?>
         <?php } ?>
-
         <table class='table table-sm'>
           <thead>
             <tr>
@@ -413,7 +393,6 @@ $headSection->setTitle(uiTextSnippet('media'));
               $label = uiTextSnippet($mtypeID) ? uiTextSnippet($mtypeID) : $mediatypes_display[$mtypeID];
               echo "<td>" . $label . "</td>\n";
             }
-
             $query = "SELECT people.personID as personID2, familyID, husband, wife, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.prefix as prefix, people.suffix as suffix, nameorder,
               $medialinks_table.personID as personID, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame, linktype, $families_table.gedcom as gedcom
               FROM $medialinks_table
@@ -444,7 +423,6 @@ $headSection->setTitle(uiTextSnippet('media'));
             }
             $medialinktext = $medialinktext ? "<ul>\n$medialinktext\n</ul>\n" : "";
             echo "<td>$medialinktext</td>\n";
-
             echo "</tr>\n";
           }
           ?>
@@ -458,67 +436,66 @@ $headSection->setTitle(uiTextSnippet('media'));
       tng_free_result($result);
       ?>
       </form>
-
     </div> <!-- .row -->
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->
-  <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
-  <script src='js/admin.js'></script>
-  <script src='js/mediautils.js'></script>
-  <script>
-    var tnglitbox;
-    var stmediatypes = new Array(<?php echo $sttypestr; ?>);
-    var manage = 1;
-    var allow_media_edit = <?php echo($allow_media_edit ? "1" : "0"); ?>;
-    var allow_media_delete = <?php echo($allow_media_delete ? "1" : "0"); ?>;
-    var allow_edit = <?php echo($allow_edit ? "1" : "0"); ?>;
-    var allow_delete = <?php echo($allow_delete ? "1" : "0"); ?>;
+<?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
+<script src='js/admin.js'></script>
+<script src='js/mediautils.js'></script>
+<script>
+  var tnglitbox;
+  var stmediatypes = new Array(<?php echo $sttypestr; ?>);
+  var manage = 1;
+  var allow_media_edit = <?php echo($allow_media_edit ? "1" : "0"); ?>;
+  var allow_media_delete = <?php echo($allow_media_delete ? "1" : "0"); ?>;
+  var allow_edit = <?php echo($allow_edit ? "1" : "0"); ?>;
+  var allow_delete = <?php echo($allow_delete ? "1" : "0"); ?>;
 
-    function toggleHeadstoneCriteria(mediatypeID) {
-      var hsstatus = document.getElementById('hsstatrow');
-      var cemrow = document.getElementById('cemrow');
-      if (mediatypeID === 'headstones') {
-        cemrow.style.display = '';
-        hsstatus.style.display = '';
-      } else {
-        cemrow.style.display = 'none';
-        document.form1.cemeteryID.selectedIndex = 0;
-        hsstatus.style.display = 'none';
-        document.form1.hsstat.selectedIndex = 0;
-        if (mediatypeID && stmediatypes.indexOf(mediatypeID) === -1) {
-          if (jQuery('#editmediatype').length)
-            jQuery('#editmediatype').show();
-          if (jQuery('#delmediatype').length)
-            jQuery('#delmediatype').show();
-        } else {
-          if (jQuery('#editmediatype').length)
-            jQuery('#editmediatype').hide();
-          if (jQuery('#delmediatype').length)
-            jQuery('#delmediatype').hide();
-        }
-      }
-      return false;
-    }
-
-    function resetForm() {
-      document.form1.searchstring.value = '';
-      document.form1.tree.selectedIndex = 0;
-      document.form1.mediatypeID.selectedIndex = 0;
-      document.form1.fileext.value = '';
-      document.form1.unlinked.checked = false;
-      document.form1.hsstat.selectedIndex = 0;
+  function toggleHeadstoneCriteria(mediatypeID) {
+    var hsstatus = document.getElementById('hsstatrow');
+    var cemrow = document.getElementById('cemrow');
+    if (mediatypeID === 'headstones') {
+      cemrow.style.display = '';
+      hsstatus.style.display = '';
+    } else {
+      cemrow.style.display = 'none';
       document.form1.cemeteryID.selectedIndex = 0;
-    }
-
-    function confirmDelete(mediaID) {
-      if (confirm(textSnippet('confdeletemedia'))) {
-        deleteIt('media', mediaID);
+      hsstatus.style.display = 'none';
+      document.form1.hsstat.selectedIndex = 0;
+      if (mediatypeID && stmediatypes.indexOf(mediatypeID) === -1) {
+        if (jQuery('#editmediatype').length)
+          jQuery('#editmediatype').show();
+        if (jQuery('#delmediatype').length)
+          jQuery('#delmediatype').show();
+      } else {
+        if (jQuery('#editmediatype').length)
+          jQuery('#editmediatype').hide();
+        if (jQuery('#delmediatype').length)
+          jQuery('#delmediatype').hide();
       }
-      return false;
     }
-  </script>
-  <script>
-    toggleHeadstoneCriteria('<?php echo $mediatypeID; ?>');
-  </script>
+    return false;
+  }
+
+  function resetForm() {
+    document.form1.searchstring.value = '';
+    document.form1.tree.selectedIndex = 0;
+    document.form1.mediatypeID.selectedIndex = 0;
+    document.form1.fileext.value = '';
+    document.form1.unlinked.checked = false;
+    document.form1.hsstat.selectedIndex = 0;
+    document.form1.cemeteryID.selectedIndex = 0;
+  }
+
+  function confirmDelete(mediaID) {
+    if (confirm(textSnippet('confdeletemedia'))) {
+      deleteIt('media', mediaID);
+    }
+    return false;
+  }
+</script>
+<script>
+  toggleHeadstoneCriteria('<?php echo $mediatypeID; ?>');
+</script>
 </body>
 </html>

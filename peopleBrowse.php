@@ -182,7 +182,7 @@ $headSection->setTitle(uiTextSnippet('people'));
     <?php
     echo $adminHeaderSection->build('people', $message);
     $navList = new navList('people');
-    $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
+//    $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
     $navList->appendItem([$allow_add, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
     $navList->appendItem([$allow_edit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
     $navList->appendItem([$allow_edit && $allow_delete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
@@ -198,9 +198,9 @@ $headSection->setTitle(uiTextSnippet('people'));
     <form action="admin_deleteselected.php" method='post' name="form2">
       <?php if ($allow_delete) { ?>
         <p>
-          <input class='btn btn-secondary' id='selectall-people' name='selectall' type='button' value="<?php echo uiTextSnippet('selectall'); ?>">
-          <input class='btn btn-secondary' id='clearall-people' name='clearall' type='button' value="<?php echo uiTextSnippet('clearall'); ?>">
-          <input class='btn btn-danger' id='deleteselected-people' name='xperaction' type='submit' value="<?php echo uiTextSnippet('deleteselected'); ?>">
+          <button class='btn btn-secondary' id='selectall-people' name='selectall' type='button'><?php echo uiTextSnippet('selectall'); ?></button>
+          <button class='btn btn-secondary' id='clearall-people' name='clearall' type='button'><?php echo uiTextSnippet('clearall'); ?></button>
+          <button class='btn btn-danger-outline' id='deleteselected-people' name='xperaction' type='submit'><?php echo uiTextSnippet('deleteselected'); ?></button>
         </p>
       <?php } ?>
       <?php if ($numrows) { ?>            

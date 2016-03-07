@@ -11,6 +11,18 @@
  @import 'suggest.scss';
  @import 'gedcom.scss';
  
+.input-group-select {
+  padding: 0;
+  display: table-cell;
+ }
+
+ .input-group .form-control:last-child{
+   font-size: .96rem;
+   margin-left: -1px;
+   border-top-right-radius: .25rem;
+   border-bottom-right-radius: .25rem;
+ }
+ 
 $icon-muted: $gray-light !default;
 $icon-info: $brand-info !important;
 $icon-primary: $brand-primary !important;

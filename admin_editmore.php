@@ -86,7 +86,7 @@ header("Content-type:text/html; charset=" . $session_charset);
     </div>
     <footer class='modal-footer'>
       <div style='float: right'>
-        <input class='btn btn-primary-outline' name='submit' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
+        <button class='btn btn-primary' name='submit' type='submit'><?php echo uiTextSnippet('save'); ?></button>
       </div>
       <input name='eventtypeID' type='hidden' value="<?php echo $eventID; ?>">
       <input name='addressID' type='hidden' value="<?php echo $row['addressID']; ?>">

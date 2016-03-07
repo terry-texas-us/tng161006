@@ -43,6 +43,27 @@ $dontdo = array("ADDR", "BIRT", "CHR", "DEAT", "BURI", "NICK", "TITL", "NSFX", "
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
+function buildSelectInputGroup($label, $formName, $selectName, $value, $options, $selected) {
+  $out = "<label for='" . $formName . "'>" . uiTextSnippet($label) . "</label>\n";
+  $out .= "<div class='input-group' style='width: 100%;'>\n";
+    $out .= "<input class='form-control' name='" . $formName . "' type='text' value='" . $value . "' placeholder='" . uiTextSnippet($label) . "'>\n";
+    $out .= "<span class='input-group-select'>\n";
+      $out .= "<select class='form-control' name='" . $selectName . "'>\n";
+        foreach ($options as $option) {
+          $out .= "<option value='$option'" . ($selected == $option ? ' selected' : '') . ">" . uiTextSnippet($option) . "</option>\n";
+        }
+      $out .= "</select>\n";
+    $out .= "</span>\n";
+  $out .= "</div>\n";
+  return $out;
+}
+$idOptions = ['contains', 'equals', 'startswith', 'endswith'];
+$bpOptions = ['contains', 'equals', 'startswith', 'endswith', 'exists', 'dnexist'];
+$fnOptions = ['contains', 'equals', 'startswith', 'endswith', 'exists', 'dnexist', 'soundexof'];
+$lnOptions = ['contains', 'equals', 'startswith', 'endswith', 'exists', 'dnexist', 'soundexof', 'metaphoneof'];
+
+$yearOptions = ['equals', 'plusminus2', 'plusminus5', 'plusminus10', 'lessthan', 'greaterthan', 'lessthanequal', 'greaterthanequal', 'exists', 'dnexist'];
+
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('searchnames'));
 ?>
@@ -61,279 +82,81 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
     beginFormElement("search", "", "search", "", "return makeURL();");
     ?>
       <div class="searchform">
-        <?php if ((!$requirelogin || !$treerestrict || !$assignedtree) && $numtrees > 1) { ?>
-          <div class='row'>
-            <?php echo treeSelect($result); ?>
-          </div>
-        <?php } ?>
         <div class='row'>
-          <div class='col-sm-3'>
-            <select class='form-control' name='lnqualify'>
-              <?php
-              $item_array = [
-                array(uiTextSnippet('contains'), "contains"), 
-                array(uiTextSnippet('equals'), "equals"),
-                array(uiTextSnippet('startswith'), "startswith"),
-                array(uiTextSnippet('endswith'), "endswith"),
-                array(uiTextSnippet('exists'), "exists"),
-                array(uiTextSnippet('dnexist'), "dnexist"),
-                array(uiTextSnippet('soundexof'), "soundexof"),
-                array(uiTextSnippet('metaphoneof'), "metaphoneof")
-              ];
-
-              foreach ($item_array as $item) {
-                echo "<option value='$item[1]'";
-                if ($lnqualify == $item[1]) {
-                  echo " selected";
-                }
-                echo ">$item[0]</option>\n";
-              }
-              ?>
-            </select>
+          <div class='col-sm-6'>
+            <?php echo buildSelectInputGroup('personid', 'mypersonid', 'idqualify', $mypersonid, $idOptions, $idqualify); ?>
           </div>
-          <div class='col-sm-9'>
-            <input class='btn btn-secondary' name='mylastname' type='text' value="<?php echo $mylastname; ?>" placeholder="<?php echo uiTextSnippet('lastname'); ?>">
+          <div class='col-sm-6'>
+            <?php if ((!$requirelogin || !$treerestrict || !$assignedtree) && $numtrees > 1) { ?>
+              <?php echo treeSelect($result); ?>
+            <?php } ?>
           </div>
         </div>
+        <br>
         <div class='row'>
-          <div class='col-sm-3'>
-            <select class='form-control' name='fnqualify'>
-              <?php
-              $item_array = array(
-                array(uiTextSnippet('contains'), "contains"),
-                array(uiTextSnippet('equals'), "equals"),
-                array(uiTextSnippet('startswith'), "startswith"),
-                array(uiTextSnippet('endswith'), "endswith"),
-                array(uiTextSnippet('exists'), "exists"),
-                array(uiTextSnippet('dnexist'), "dnexist"),
-                array(uiTextSnippet('soundexof'), "soundexof"));
-
-              foreach ($item_array as $item) {
-                echo "<option value='$item[1]'";
-                if ($fnqualify == $item[1]) {
-                  echo " selected";
-                }
-                echo ">$item[0]</option>\n";
-              }
-              ?>
-            </select>
+          <div class='col-sm-6'>
+            <?php echo buildSelectInputGroup('lastname', 'mylastname', 'lnqualify', $mylastname, $lnOptions, $lnqualify); ?>
           </div>
-          <div class='col-sm-9'>
-            <input class='btn btn-secondary' name='myfirstname' type='text' value="<?php echo $myfirstname; ?>" placeholder="<?php echo uiTextSnippet('firstname'); ?>">
+          <div class='col-sm-6'>
+            <?php echo buildSelectInputGroup('firstname', 'myfirstname', 'fnqualify', $myfirstname, $fnOptions, $fnqualify); ?>
           </div>
         </div>
-        <table class='table table-sm'>
-          <tr>
-            <td><?php echo uiTextSnippet('personid'); ?>:</td>
-            <td>
-              <select name='idqualify'>
-                <?php
-                $item_array = array(array(uiTextSnippet('equals'), "equals"), array(uiTextSnippet('contains'), "contains"), array(uiTextSnippet('startswith'), "startswith"), array(uiTextSnippet('endswith'), "endswith"));
-                foreach ($item_array as $item) {
-                  echo "<option value='$item[1]'";
-                  if ($idqualify == $item[1]) {
-                    echo " selected";
-                  }
-                  echo ">$item[0]</option>\n";
-                }
-                ?>
-              </select>
-              <input name='mypersonid' type='text' value="<?php echo $mypersonid; ?>"/>
-            </td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('gender'); ?>:</td>
-            <td>
-              <select name='gequalify'>
-                <option value="equals"><?php echo uiTextSnippet('equals'); ?></option>
-              </select>
-              <select name="mygender">
-                <option value=''>&nbsp;</option>
-                <option value='M'<?php if ($mygender == 'M') {
-                  echo " selected";
-                } ?>><?php echo uiTextSnippet('male'); ?></option>
-                <option value='F'<?php if ($mygender == 'F') {
-                  echo " selected";
-                } ?>><?php echo uiTextSnippet('female'); ?></option>
-                <option value='U'<?php if ($mygender == 'U') {
-                  echo " selected";
-                } ?>><?php echo uiTextSnippet('unknown'); ?></option>
-                <option value='N'<?php if ($mygender == 'N') {
-                  echo " selected";
-                } ?>><?php echo uiTextSnippet('none'); ?></option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td colspan='2'>&nbsp;</td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('birthplace'); ?>:</td>
-            <td>
-              <select name="bpqualify">
-                <?php
-                $item_array = array(array(uiTextSnippet('contains'), "contains"), array(uiTextSnippet('equals'), "equals"), array(uiTextSnippet('startswith'), "startswith"), array(uiTextSnippet('endswith'), "endswith"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"));
-                foreach ($item_array as $item) {
-                  echo "<option value='$item[1]'";
-                  if ($bpqualify == $item[1]) {
-                    echo " selected";
-                  }
-                  echo ">$item[0]</option>\n";
-                }
-                ?>
-              </select>
-              <input name='mybirthplace' type='text' value="<?php echo $mybirthplace; ?>"/>
-            </td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('birthdatetr'); ?>:</td>
-            <td>
-              <select name="byqualify">
-                <?php
-                $item2_array = array(array(uiTextSnippet('equals'), ""), array(uiTextSnippet('plusminus2'), "pm2"), array(uiTextSnippet('plusminus5'), "pm5"), array(uiTextSnippet('plusminus10'), "pm10"), array(uiTextSnippet('lessthan'), "lt"), array(uiTextSnippet('greaterthan'), "gt"), array(uiTextSnippet('lessthanequal'), "lte"), array(uiTextSnippet('greaterthanequal'), "gte"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"));
-                foreach ($item2_array as $item) {
-                  echo "<option value='$item[1]'";
-                  if ($byqualify == $item[1]) {
-                    echo " selected";
-                  }
-                  echo ">$item[0]</option>\n";
-                }
-                ?>
-              </select>
-              <input name='mybirthyear' type='text' value="<?php echo $mybirthyear; ?>"/>
-            </td>
-          </tr>
-          <tr<?php if ($tngconfig['hidechr']) {
-            echo " style=\"display:none\"";
-          } ?>>
-            <td><?php echo uiTextSnippet('altbirthplace'); ?>:</td>
-            <td>
-              <select name="cpqualify">
-                <?php
-                foreach ($item_array as $item) {
-                  echo "<option value='$item[1]'";
-                  if ($cpqualify == $item[1]) {
-                    echo " selected";
-                  }
-                  echo ">$item[0]</option>\n";
-                }
-                ?>
-              </select>
-              <input name='myaltbirthplace' type='text' value="<?php echo $myaltbirthplace; ?>"/>
-            </td>
-          </tr>
-          <tr<?php if ($tngconfig['hidechr']) {
-            echo " style=\"display:none\"";
-          } ?>>
-            <td><?php echo uiTextSnippet('altbirthdatetr'); ?>:</td>
-            <td>
-              <select name="cyqualify">
-                <?php
-                $item2_array = array(array(uiTextSnippet('equals'), ""), array(uiTextSnippet('plusminus2'), "pm2"), array(uiTextSnippet('plusminus5'), "pm5"), array(uiTextSnippet('plusminus10'), "pm10"), array(uiTextSnippet('lessthan'), "lt"), array(uiTextSnippet('greaterthan'), "gt"), array(uiTextSnippet('lessthanequal'), "lte"), array(uiTextSnippet('greaterthanequal'), "gte"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"));
-                foreach ($item2_array as $item) {
-                  echo "<option value='$item[1]'";
-                  if ($cyqualify == $item[1]) {
-                    echo " selected";
-                  }
-                  echo ">$item[0]</option>\n";
-                }
-                ?>
-              </select>
-              <input name='myaltbirthyear' type='text' value="<?php echo $myaltbirthyear; ?>"/>
-            </td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('deathplace'); ?>:</td>
-            <td>
-              <select name="dpqualify">
-                <?php
-                foreach ($item_array as $item) {
-                  echo "<option value='$item[1]'";
-                  if ($dpqualify == $item[1]) {
-                    echo " selected";
-                  }
-                  echo ">$item[0]</option>\n";
-                }
-                ?>
-              </select>
-              <input name='mydeathplace' type='text' value="<?php echo $mydeathplace; ?>"/>
-            </td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('deathdatetr'); ?>:</td>
-            <td>
-              <select name="dyqualify">
-                <?php
-                $item2_array = array(array(uiTextSnippet('equals'), ""), array(uiTextSnippet('plusminus2'), "pm2"), array(uiTextSnippet('plusminus5'), "pm5"), array(uiTextSnippet('plusminus10'), "pm10"), array(uiTextSnippet('lessthan'), "lt"), array(uiTextSnippet('greaterthan'), "gt"), array(uiTextSnippet('lessthanequal'), "lte"), array(uiTextSnippet('greaterthanequal'), "gte"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"));
-                foreach ($item2_array as $item) {
-                  echo "<option value='$item[1]'";
-                  if ($dyqualify == $item[1]) {
-                    echo " selected";
-                  }
-                  echo ">$item[0]</option>\n";
-                }
-                ?>
-              </select>
-              <input name='mydeathyear' type='text' value="<?php echo $mydeathyear; ?>"/>
-            </td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('burialplace'); ?>:</td>
-            <td>
-              <select name="brpqualify">
-                <?php
-                foreach ($item_array as $item) {
-                  echo "<option value='$item[1]'";
-                  if ($brpqualify == $item[1]) {
-                    echo " selected";
-                  }
-                  echo ">$item[0]</option>\n";
-                }
-                ?>
-              </select>
-              <input name='myburialplace' type='text' value="<?php echo $myburialplace; ?>"/>
-            </td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('burialdatetr'); ?>:</td>
-            <td>
-              <select name="bryqualify">
-                <?php
-                $item2_array = array(array(uiTextSnippet('equals'), ""), array(uiTextSnippet('plusminus2'), "pm2"), array(uiTextSnippet('plusminus5'), "pm5"), array(uiTextSnippet('plusminus10'), "pm10"), array(uiTextSnippet('lessthan'), "lt"), array(uiTextSnippet('greaterthan'), "gt"), array(uiTextSnippet('lessthanequal'), "lte"), array(uiTextSnippet('greaterthanequal'), "gte"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"));
-                foreach ($item2_array as $item) {
-                  echo "<option value='$item[1]'";
-                  if ($bryqualify == $item[1]) {
-                    echo " selected";
-                  }
-                  echo ">$item[0]</option>\n";
-                }
-                ?>
-              </select>
-              <input name='myburialyear' type='text' value="<?php echo $myburialyear; ?>"/>
-            </td>
-          </tr>
-          <tr>
-            <td colspan='2'>&nbsp;</td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('spousesurname'); ?>*:</td>
-            <td>
-              <select name="spqualify">
-                <?php
-                $item_array = array(array(uiTextSnippet('contains'), "contains"), array(uiTextSnippet('equals'), "equals"), array(uiTextSnippet('startswith'), "startswith"), array(uiTextSnippet('endswith'), "endswith"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"), array(uiTextSnippet('soundexof'), "soundexof"), array(uiTextSnippet('metaphoneof'), "metaphoneof"));
-                foreach ($item_array as $item) {
-                  echo "<option value='$item[1]'";
-                  if ($spqualify == $item[1]) {
-                    echo " selected";
-                  }
-                  echo ">$item[0]</option>\n";
-                }
-                ?>
-              </select>
-              <input name='mysplname' type='text' value="<?php echo $mysplname; ?>"/>
-            </td>
-          </tr>
-        </table>
+
+        <div class='row'>
+          <div class='col-sm-6'>
+            <?php echo buildSelectInputGroup('birthplace', 'mybirthplace', 'bpqualify', $mybirthplace, $bpOptions, $bpqualify); ?>
+          </div>
+          <div class='col-sm-6'>
+            <?php echo buildSelectInputGroup('birthdatetr', 'mybirthyear', 'byqualify', $mybirthyear, $yearOptions, $byqualify); ?>
+          </div>
+        </div>
+
+        <div class='row'<?php if ($tngconfig['hidechr']) {echo " style='display: none'";} ?>>
+          <div class='col-sm-6'>
+            <?php echo buildSelectInputGroup('altbirthplace', 'myaltbirthplace', 'cpqualify', $myaltbirthplace, $bpOptions, $cpqualify); ?>
+          </div>
+          <div class='col-sm-6'>
+            <?php echo buildSelectInputGroup('altbirthdatetr', 'myaltbirthyear', 'cyqualify', $myaltbirthyear, $yearOptions, $cyqualify); ?>
+          </div>
+        </div>
+
+        <div class='row'>
+          <div class='col-sm-6'>
+            <?php echo buildSelectInputGroup('deathplace', 'mydeathplace', 'dpqualify', $mydeathplace, $bpOptions, $dpqualify); ?>
+          </div>
+          <div class='col-sm-6'>
+            <?php echo buildSelectInputGroup('deathdatetr', 'mydeathyear', 'dyqualify', $mydeathyear, $yearOptions, $dyqualify); ?>
+          </div>
+        </div>
+
+        <div class='row'>
+          <div class='col-sm-6'>
+            <?php echo buildSelectInputGroup('burialplace', 'myburialplace', 'brpqualify', $myburialplace, $bpOptions, $brpqualify); ?>
+          </div>
+          <div class='col-sm-6'>
+            <?php echo buildSelectInputGroup('burialdatetr', 'myburialyear', 'bryqualify', $myburialyear, $yearOptions, $bryqualify); ?>
+          </div>
+        </div>
+            
+        <div class='row'>
+          <div class='col-sm-6'>
+            <?php echo buildSelectInputGroup('spousesurname', 'mysplname', 'spqualify', $mysplname, $lnOptions, $spqualify); ?>
+          </div>
+          <div class='col-sm-6'>
+            <?php echo uiTextSnippet('gender'); ?>:
+            <select class='form-control' name='gequalify'>
+              <option value="equals"><?php echo uiTextSnippet('equals'); ?></option>
+            </select>
+            <select class='form-control' name="mygender">
+              <option value=''>&nbsp;</option>
+              <option value='M'<?php if ($mygender == 'M') {echo " selected";} ?>><?php echo uiTextSnippet('male'); ?></option>
+              <option value='F'<?php if ($mygender == 'F') {echo " selected";} ?>><?php echo uiTextSnippet('female'); ?></option>
+              <option value='U'<?php if ($mygender == 'U') {echo " selected";} ?>><?php echo uiTextSnippet('unknown'); ?></option>
+              <option value='N'<?php if ($mygender == 'N') {echo " selected";} ?>><?php echo uiTextSnippet('none'); ?></option>
+            </select>
+          </div>
+        </div>
+        
         <p class="small"><em>*<?php echo uiTextSnippet('spousemore'); ?></em></p>
         <input name='offset' type='hidden' value='0'/>
         <section class='custom-events'>
@@ -347,81 +170,25 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
                 <img class='icon-sm  pull-xs-right' src="svg/collapse.svg" alt=""></a>
             </span>
           </div>
-          <table style="display:none" id="otherevents">
-            <tr>
-              <td colspan='3'>&nbsp;</td>
-            </tr>
-            <tr>
-              <td><?php echo uiTextSnippet('nickname'); ?>:</td>
-              <td>
-                <select name="nnqualify">
-                  <?php
-                  foreach ($item_array as $item) {
-                    echo "<option value='$item[1]'";
-                    if ($nnqualify == $item[1]) {
-                      echo " selected";
-                    }
-                    echo ">$item[0]</option>\n";
-                  }
-                  ?>
-                </select>
-              </td>
-              <td><input name='mynickname' type='text' value="<?php echo $mynickname; ?>"/></td>
-            </tr>
-            <tr>
-              <td><?php echo uiTextSnippet('title'); ?>:</td>
-              <td>
-                <select name="tqualify">
-                  <?php
-                  foreach ($item_array as $item) {
-                    echo "<option value='$item[1]'";
-                    if ($tqualify == $item[1]) {
-                      echo " selected";
-                    }
-                    echo ">$item[0]</option>\n";
-                  }
-                  ?>
-                </select>
-              </td>
-              <td><input name='mytitle' type='text' value="<?php echo $mytitle; ?>"/></td>
-            </tr>
-            <tr>
-              <td><?php echo uiTextSnippet('prefix'); ?>:</td>
-              <td>
-                <select name="pfqualify">
-                  <?php
-                  foreach ($item_array as $item) {
-                    echo "<option value='$item[1]'";
-                    if ($pfqualify == $item[1]) {
-                      echo " selected";
-                    }
-                    echo ">$item[0]</option>\n";
-                  }
-                  ?>
-                </select>
-              </td>
-              <td><input name='myprefix' type='text' value="<?php echo $myprefix; ?>"/></td>
-            </tr>
-            <tr>
-              <td><?php echo uiTextSnippet('suffix'); ?>:</td>
-              <td>
-                <select name="sfqualify">
-                  <?php
-                  foreach ($item_array as $item) {
-                    echo "<option value='$item[1]'";
-                    if ($sfqualify == $item[1]) {
-                      echo " selected";
-                    }
-                    echo ">$item[0]</option>\n";
-                  }
-                  ?>
-                </select>
-              </td>
-              <td><input name='mysuffix' type='text' value="<?php echo $mysuffix; ?>"/></td>
-            </tr>
-            <tr>
-              <td colspan='3'>&nbsp;</td>
-            </tr>
+          
+          <section style="display: none" id="otherevents">
+            <div class='row'>
+              <div class='col-sm-6'>
+                <?php echo buildSelectInputGroup('nickname', 'mynickname', 'nnqualify', $mynickname, $bpOptions, $nnqualify); ?>
+              </div>
+              <div class='col-sm-6'>
+                <?php echo buildSelectInputGroup('title', 'mytitle', 'tqualify', $mytitle, $bpOptions, $tqualify); ?>
+              </div>
+            </div>          
+            <div class='row'>
+              <div class='col-sm-6'>
+                <?php echo buildSelectInputGroup('prefix', 'myprefix', 'pfqualify', $myprefix, $bpOptions, $pfqualify); ?>
+              </div>
+              <div class='col-sm-6'>
+                <?php echo buildSelectInputGroup('suffix', 'mysuffix', 'sfqualify', $mysuffix, $bpOptions, $sfqualify); ?>
+              </div>
+            </div>              
+            <br>
             <?php
             $eventtypes = array();
             $query = "SELECT eventtypeID, tag, display FROM $eventtypes_table WHERE keep=\"1\" AND type=\"I\" ORDER BY display";
@@ -437,59 +204,31 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
             ksort($eventtypes);
 
             foreach ($eventtypes as $row) {
-              echo "<tr>\n";
-                echo "<td colspan='3'>{$row['displaymsg']}</td>\n";
-              echo "</tr>\n";
-              echo "<tr>\n";
-                echo "<td>" . uiTextSnippet('fact') . ":</td>\n";
-              echo "<td>\n";
-              echo "<select name=\"cfq{$row['eventtypeID']}\">\n";
-              foreach ($item_array as $item) {
-                echo "<option value='$item[1]'";
-                echo ">$item[0]</option>\n";
-              }
-              echo "</select>\n";
-              echo "</td>\n";
-              echo "<td><input name=\"cef{$row['eventtypeID']}\" type='text' value='' /></td>\n";
-              echo "</tr>\n";
-
-              echo "<tr>\n";
-              echo "<td>" . uiTextSnippet('place') . ":</td>\n";
-              echo "<td>\n";
-              echo "<select name=\"cpq{$row['eventtypeID']}\">\n";
-              foreach ($item_array as $item) {
-                echo "<option value='$item[1]'";
-                echo ">$item[0]</option>\n";
-              }
-              echo "</select>\n";
-              echo "</td>\n";
-              echo "<td><input name=\"cep{$row['eventtypeID']}\" type='text' value='' /></td>\n";
-              echo "</tr>\n";
-
-              echo "<tr>\n";
-              echo "<td>" . uiTextSnippet('year') . ":</td>\n";
-              echo "<td>\n";
-              echo "<select name=\"cyq$row[eventtypeID]\">\n";
-
-              $item2_array = array(array(uiTextSnippet('equals'), ""), array(uiTextSnippet('plusminus2'), "pm2"), array(uiTextSnippet('plusminus5'), "pm5"), array(uiTextSnippet('plusminus10'), "pm10"), array(uiTextSnippet('lessthan'), "lt"), array(uiTextSnippet('greaterthan'), "gt"), array(uiTextSnippet('lessthanequal'), "lte"), array(uiTextSnippet('greaterthanequal'), "gte"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"));
-              foreach ($item2_array as $item) {
-                echo "<option value='$item[1]'";
-                echo ">$item[0]</option>\n";
-              }
-              echo "</select>\n";
-              echo "</td>\n";
-              echo "<td><input name=\"cey{$row['eventtypeID']}\" type='text' value='' /></td>\n";
-              echo "</tr>\n";
+              echo "{$row['displaymsg']}\n";
+              
+              echo "<div class='row'>\n";
+                echo "<div class='col-md-4'>\n";
+                  $formName = 'cef' . $row['eventtypeID'];
+                  $selectName = 'cfq' . $row['eventtypeID'];
+                  echo buildSelectInputGroup('fact', $formName, $selectName, '', $bpOptions, '');
+                echo "</div>\n";
+                echo "<div class='col-md-4'>\n";
+                  $formName = 'cep' . $row['eventtypeID'];
+                  $selectName = 'cpq' . $row['eventtypeID'];
+                  echo buildSelectInputGroup('place', $formName, $selectName, '', $bpOptions, '');
+                echo "</div>\n";
+                echo "<div class='col-md-4'>\n";
+                  $formName = 'cey' . $row['eventtypeID'];
+                  $selectName = 'cyq' . $row['eventtypeID'];
+                  echo buildSelectInputGroup('year', $formName, $selectName, '', $yearOptions, '');
+                echo "</div>\n";
+              echo "</div>\n";
             }
             ?>
-            <tr>
-              <td colspan='3'><br>
-                <input type='button' value="<?php echo uiTextSnippet('search'); ?>" onclick="return makeURL();"/> 
-                <input type='button' value="<?php echo uiTextSnippet('resetall'); ?>" onclick="resetValues();"/>
-              </td>
-            </tr>
-          </table>
-        </section> <!-- .custom-events -->
+            <button class='btn btn-primary-outline' type='button' onclick="return makeURL();"><?php echo uiTextSnippet('search'); ?></button> 
+            <button class='btn btn-warning-outline' type='button' onclick="resetValues();"><?php echo uiTextSnippet('resetall'); ?></button>
+          </section>
+        </section>  .custom-events 
       </div>
       <div class="searchsidebar">
         <table>

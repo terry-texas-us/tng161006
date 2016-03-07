@@ -3,15 +3,19 @@
   <section class='card'>
     <div class='card-block'>
       <div class='row form-group'>
-        <label for='searchstring' class='sr-only'><?php echo uiTextSnippet('searchfor'); ?></label>
-        <input class='btn btn-secondary' name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>" placeholder="<?php echo uiTextSnippet('searchfor'); ?>" autofocus>
-        <input class='btn btn-secondary-outline' name='submit' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
-        <input class='btn btn-warning-outline' name='submit' type='submit' value="<?php echo uiTextSnippet('reset'); ?>" onClick="resetFamiliesSearch();">
+        <div class='col-sm-6'>
+          <?php include '_/components/php/treeSelectControl.php'; ?>
+        </div>
+        <div class='col-sm-6'>
+          <label for='searchstring' class='sr-only'><?php echo uiTextSnippet('searchfor'); ?></label>
+          <input class='form-control' name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>" placeholder="<?php echo uiTextSnippet('searchfor'); ?>" autofocus>
+          <button class='btn btn-primary-outline' name='submit' type='submit'><?php echo uiTextSnippet('search'); ?></button>
+          <button class='btn btn-warning-outline' name='submit' type='submit' onClick="resetFamiliesSearch();"><?php echo uiTextSnippet('reset'); ?></button>
+        </div>
       </div>
     </div>
     <div class='card-block'>
       <div class='row form-group'>
-        <?php include '_/components/php/treeSelectControl.php'; ?>
         <select name="spousename">
           <option value='husband'<?php if ($spousename == 'husband') {echo " selected";} ?>>
             <?php echo uiTextSnippet('husbname'); ?></option>

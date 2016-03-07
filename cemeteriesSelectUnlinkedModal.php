@@ -54,7 +54,7 @@ $result = tng_query($query);
         </fieldset>
       </div> <!-- .modal-body -->
       <footer class='modal-footer'>
-        <input class='btn btn-primary' type='submit' value="<?php echo uiTextSnippet('go'); ?>">
+        <button class='btn btn-primary' type='submit'><?php echo uiTextSnippet('go'); ?></button>
       </footer>
     </form>
   <?php } else { ?>

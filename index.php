@@ -1,10 +1,9 @@
 <?php
-require_once './classes/chooseLanguage.php';
-require_once './classes/personSearchForm.class.php';
-
 include("tng_begin.php");
 
-include("classes/surname_cloud.class.php");
+require 'classes/chooseLanguage.php';
+require 'classes/personSearchForm.class.php';
+require 'classes/surname_cloud.class.php';
 
 $tngconfig['showshare'] = 0;
 $tngconfig['showprint'] = 1;
@@ -63,7 +62,6 @@ $headSection->setTitle($sitename ? "" : uiTextSnippet('mnuheader'));
       $nc->display(32);
       ?>
     </div> <!-- .card -->
-    
     <?php
     $form = new personSearchForm();
     echo $form->get();

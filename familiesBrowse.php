@@ -166,7 +166,7 @@ $headSection->setTitle(uiTextSnippet('families'));
     <?php
     echo $adminHeaderSection->build('families', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "familiesBrowse.php", uiTextSnippet('browse'), "findfamily"]);
+//    $navList->appendItem([true, "familiesBrowse.php", uiTextSnippet('browse'), "findfamily"]);
     $navList->appendItem([$allow_add, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
     $navList->appendItem([$allow_edit, "admin_findreview.php?type=F", uiTextSnippet('review') . $revstar, "review"]);
     echo $navList->build("findfamily");
@@ -183,12 +183,9 @@ $headSection->setTitle(uiTextSnippet('families'));
       <form action="admin_deleteselected.php" method='post' name="form2">
         <?php if ($allow_delete) { ?>
           <p>
-            <input class='btn btn-secondary' name='selectall' type='button' value="<?php echo uiTextSnippet('selectall'); ?>" 
-                onClick="toggleAll(1);">
-            <input class='btn btn-secondary' name='clearall' type='button' value="<?php echo uiTextSnippet('clearall'); ?>" 
-                onClick="toggleAll(0);">
-            <input class='btn btn-danger' name='xfamaction' type='submit' value="<?php echo uiTextSnippet('deleteselected'); ?>"
-                onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');">
+            <button class='btn btn-secondary' name='selectall' type='button' onClick="toggleAll(1);"><?php echo uiTextSnippet('selectall'); ?></button>
+            <button class='btn btn-secondary' name='clearall' type='button' onClick="toggleAll(0);"><?php echo uiTextSnippet('clearall'); ?></button>
+            <button class='btn btn-danger-outline' name='xfamaction' type='submit' onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');"><?php echo uiTextSnippet('deleteselected'); ?></button>
           </p>
         <?php }
         if ($numrows) {

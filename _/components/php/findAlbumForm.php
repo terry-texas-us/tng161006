@@ -1,20 +1,18 @@
- <!-- [ts] testing different approaches to bootstrap-forms -->
- 
 <form id='form1' name='form1' action='#'>
-  <section class="card">
+  <section class='card'>
     <div class='card-block'>
-      <div class="row form-group">
+      <div class='row form-group'>
         <label for='searchstring' class='sr-only'><?php echo uiTextSnippet('searchfor'); ?></label>
         <div class='input-group'>
           <input  class='form-control' id='searchstring' name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>" placeholder="<?php echo uiTextSnippet('searchfor'); ?>" autofocus>
-          <span class="input-group-btn">
-            <button class="btn btn-secondary" type="button" onclick="resetFamilies();"><?php echo uiTextSnippet('reset'); ?></button>
+          <span class='input-group-btn'>
+            <button class='btn btn-secondary' type='button' onclick="resetFamilies();"><?php echo uiTextSnippet('reset'); ?></button>
           </span>
         </div>
       </div>
-      <div class="row form-group">
-        <input class='btn btn-secondary-outline' name='submit' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
-        <input class='btn btn-secondary-outline' name='submit' type='submit' value="<?php echo uiTextSnippet('reset'); ?>" onclick="resetFamilies();">
+      <div class='row form-group'>
+        <button class='btn btn-secondary' name='submit' type='submit'><?php echo uiTextSnippet('search'); ?></button>
+        <button class='btn btn-secondary' name='submit' type='submit' onclick="resetFamilies();"><?php echo uiTextSnippet('reset'); ?></button>
       </div>
     </div>
   </section> <!-- .card -->

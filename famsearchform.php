@@ -193,7 +193,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
           <div class='col-sm-3'>
             <select class='form-control' name='myqualify'>
               <?php
-              $item2_array = array(array(uiTextSnippet('equals'), ""), array(uiTextSnippet('plusminus2'), "pm2"), array(uiTextSnippet('plusminus5'), "pm5"), array(uiTextSnippet('plusminus10'), "pm10"), array(uiTextSnippet('lessthan'), "lt"), array(uiTextSnippet('greaterthan'), "gt"), array(uiTextSnippet('lessthanequal'), "lte"), array(uiTextSnippet('greaterthanequal'), "gte"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"));
+              $item2_array = array(array(uiTextSnippet('equals'), ""), array(uiTextSnippet('plusminus2'), "plusminus2"), array(uiTextSnippet('plusminus5'), "plusminus5"), array(uiTextSnippet('plusminus10'), "plusminus10"), array(uiTextSnippet('lessthan'), "lessthan"), array(uiTextSnippet('greaterthan'), "greaterthan"), array(uiTextSnippet('lessthanequal'), "lessthanequal"), array(uiTextSnippet('greaterthanequal'), "greaterthanequal"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"));
               foreach ($item2_array as $item) {
                 echo "<option value='$item[1]'";
                 if ($myqualify == $item[1]) {
@@ -233,7 +233,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
           <div class='col-sm-3'>
             <select class='form-control' name='dvyqualify'>
               <?php
-              $item2_array = array(array(uiTextSnippet('equals'), ""), array(uiTextSnippet('plusminus2'), "pm2"), array(uiTextSnippet('plusminus5'), "pm5"), array(uiTextSnippet('plusminus10'), "pm10"), array(uiTextSnippet('lessthan'), "lt"), array(uiTextSnippet('greaterthan'), "gt"), array(uiTextSnippet('lessthanequal'), "lte"), array(uiTextSnippet('greaterthanequal'), "gte"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"));
+              $item2_array = array(array(uiTextSnippet('equals'), ""), array(uiTextSnippet('plusminus2'), "plusminus2"), array(uiTextSnippet('plusminus5'), "plusminus5"), array(uiTextSnippet('plusminus10'), "plusminus10"), array(uiTextSnippet('lessthan'), "lessthan"), array(uiTextSnippet('greaterthan'), "greaterthan"), array(uiTextSnippet('lessthanequal'), "lessthanequal"), array(uiTextSnippet('greaterthanequal'), "greaterthanequal"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"));
               foreach ($item2_array as $item) {
                 echo "<option value='$item[1]'";
                 if ($dvyqualify == $item[1]) {
@@ -314,7 +314,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
                   echo "<div class='col-sm-offset-1 col-sm-2'>" . uiTextSnippet('year') . ":</div>\n";
                   echo "<div class='col-sm-3'>\n";
                     echo "<select class='form-control' name=\"cyq{$row['eventtypeID']}\">\n";
-                      $item2_array = array(array(uiTextSnippet('equals'), ""), array(uiTextSnippet('plusminus2'), "pm2"), array(uiTextSnippet('plusminus5'), "pm5"), array(uiTextSnippet('plusminus10'), "pm10"), array(uiTextSnippet('lessthan'), "lt"), array(uiTextSnippet('greaterthan'), "gt"), array(uiTextSnippet('lessthanequal'), "lte"), array(uiTextSnippet('greaterthanequal'), "gte"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"));
+                      $item2_array = array(array(uiTextSnippet('equals'), ""), array(uiTextSnippet('plusminus2'), "plusminus2"), array(uiTextSnippet('plusminus5'), "plusminus5"), array(uiTextSnippet('plusminus10'), "plusminus10"), array(uiTextSnippet('lessthan'), "lessthan"), array(uiTextSnippet('greaterthan'), "greaterthan"), array(uiTextSnippet('lessthanequal'), "lessthanequal"), array(uiTextSnippet('greaterthanequal'), "greaterthanequal"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"));
                       foreach ($item2_array as $item) {
                         echo "<option value='$item[1]'";
                         echo ">$item[0]</option>\n";
