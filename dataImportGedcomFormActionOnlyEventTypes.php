@@ -37,7 +37,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
   $navList = new navList('');
   $navList->appendItem([true, "dataImportGedcom.php", uiTextSnippet('import'), "import"]);
   $navList->appendItem([true, "dataExportGedcom.php", uiTextSnippet('export'), "export"]);
-  $navList->appendItem([true, "admin_secondmenu.php", uiTextSnippet('secondarymaint'), "second"]);
+  $navList->appendItem([true, "dataSecondaryProcesses.php", uiTextSnippet('secondarymaint'), "second"]);
   echo $navList->build("import");
   ?>
   <div>

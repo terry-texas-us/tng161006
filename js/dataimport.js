@@ -78,8 +78,9 @@ function checkFile(form) {
             }
             popup += '</div>\n<div id="errormsg"></div>';
             popup += '</div>';
+
             tnglitbox = new ModalDialog(popup, {
-// [ts]             type: 'alert',
+                type: 'alert', // [ts] no alert type in ModalDialog
                 onremove: function () {
                     if (!done) {
                         stopimport();

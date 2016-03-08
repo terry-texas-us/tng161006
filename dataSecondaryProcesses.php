@@ -37,38 +37,31 @@ $headSection->setTitle(uiTextSnippet('secondary'));
     $navList = new navList('');
     $navList->appendItem([true, "dataImportGedcom.php", uiTextSnippet('import'), "import"]);
     $navList->appendItem([$allow_export, "dataExportGedcom.php", uiTextSnippet('export'), "export"]);
-    $navList->appendItem([true, "admin_secondmenu.php", uiTextSnippet('secondarymaint'), "second"]);
+//    $navList->appendItem([true, "dataSecondaryProcesses.php", uiTextSnippet('secondarymaint'), "second"]);
     echo $navList->build("second");
     ?>
-    <table class='table table-sm'>
-      <tr>
-        <td>
-          <form action="admin_secondary.php" method='post' name='form1'>
-            <span><?php echo uiTextSnippet('tree'); ?>: <select name='tree'>
-                <?php
-                if (!$assignedtree) {
-                  echo "  <option value=\"--all--\">" . uiTextSnippet('alltrees') . "</option>\n";
-                }
-                while ($row = tng_fetch_assoc($result)) {
-                  echo "  <option value=\"{$row['gedcom']}\">{$row['treename']}</option>\n";
-                }
-                ?>
-              </select><br><br></span>
-            <input name='secaction' type='submit' value="<?php echo uiTextSnippet('tracklines'); ?>">
-            <input name='secaction' type='submit' value="<?php echo uiTextSnippet('sortchildren'); ?>">
-            <input name='secaction' type='submit' value="<?php echo uiTextSnippet('sortspouses'); ?>">
-            <input name='secaction' type='submit' value="<?php echo uiTextSnippet('relabelbranches'); ?>">
-            
-            <input name='secaction' type='submit' value="<?php echo uiTextSnippet('creategendex'); ?>">
-            <input name='secaction' type='submit' value="<?php echo uiTextSnippet('evalmedia'); ?>">
-          </form>
-          <p><?php echo uiTextSnippet('postgdx'); ?>:<br>
-            &raquo; <a href="http://gendexnetwork.org" target="_blank">GenDex Network</a><br>
-            &raquo; <a href="http://www.familytreeseeker.com" target="_blank">FamilyTreeSeeker.com</a>
-          </p>
-        </td>
-      </tr>
-    </table>
+    <form action="dataSecondaryProcessesFormAction.php" method='post' name='form1'>
+      <label for='tree'><?php echo uiTextSnippet('tree'); ?></label>
+      <select class='form-control' name='tree'>
+        <?php
+        if (!$assignedtree) {
+          echo "  <option value=\"--all--\">" . uiTextSnippet('alltrees') . "</option>\n";
+        }
+        while ($row = tng_fetch_assoc($result)) {
+          echo "  <option value=\"{$row['gedcom']}\">{$row['treename']}</option>\n";
+        }
+        ?>
+      </select>
+      <br>
+      <hr>
+      <input class='btn btn-secondary-outline' name='secaction' type='submit' value="<?php echo uiTextSnippet('tracklines'); ?>">
+      <input class='btn btn-secondary-outline' name='secaction' type='submit' value="<?php echo uiTextSnippet('sortchildren'); ?>">
+      <input class='btn btn-secondary-outline' name='secaction' type='submit' value="<?php echo uiTextSnippet('sortspouses'); ?>">
+      <input class='btn btn-secondary-outline' name='secaction' type='submit' value="<?php echo uiTextSnippet('relabelbranches'); ?>">
+
+      <input class='btn btn-secondary-outline' name='secaction' type='submit' value="<?php echo uiTextSnippet('creategendex'); ?>">
+      <input class='btn btn-secondary-outline' name='secaction' type='submit' value="<?php echo uiTextSnippet('evalmedia'); ?>">
+    </form>
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>

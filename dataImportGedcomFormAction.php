@@ -91,7 +91,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
     $navList = new navList('');
     $navList->appendItem([true, "dataImportGedcom.php", uiTextSnippet('import'), "import"]);
     $navList->appendItem([$allow_export, "dataExportGedcom.php", uiTextSnippet('export'), "export"]);
-    $navList->appendItem([true, "admin_secondmenu.php", uiTextSnippet('secondarymaint'), "second"]);
+    $navList->appendItem([true, "dataSecondaryProcesses.php", uiTextSnippet('secondarymaint'), "second"]);
     echo $navList->build("import");
     
     echo "<div style=\"padding:2px\">\n";
@@ -323,7 +323,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       function showCloseMenu() {
         var closemsg = '<a href="#" onclick="tnglitbox.remove();return false;"><img src="img/tng_close.gif" style="margin-right:5px">' + textSnippet('closewindow') + '</a>';
         if (parent.started)
-          parent.document.getElementById('implinks').innerHTML = '<span id="toremove"><a href="#" onclick="return removeFile(\'<?php echo $gedfilename; ?>\');">' + textSnippet('removeged') + '</a></span><p>' + closemsg + ' | <a href="admin_secondmenu.php">' + textSnippet('moreoptions') + '</a></p>';
+          parent.document.getElementById('implinks').innerHTML = '<span id="toremove"><a href="#" onclick="return removeFile(\'<?php echo $gedfilename; ?>\');">' + textSnippet('removeged') + '</a></span><p>' + closemsg + ' | <a href="dataSecondaryProcesses.php">' + textSnippet('moreoptions') + '</a></p>';
         else
           parent.document.getElementById('implinks').innerHTML = '<p>' + closemsg + '</p>';
       }
@@ -458,7 +458,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
   }
 
   if ($old) {
-    echo "<p><a href=\"admin_secondary.php?secaction=" . uiTextSnippet('tracklines') . "&tree=$tree\">" . uiTextSnippet('tracklines') . "</a></p>";
+    echo "<p><a href=\"dataSecondaryProcessesFormAction.php?secaction=" . uiTextSnippet('tracklines') . "&tree=$tree\">" . uiTextSnippet('tracklines') . "</a></p>";
     echo "<p><a href=\"dataImportGedcom.php\">" . uiTextSnippet('backtodataimport') . "</a></p>\n";
     echo "</div></div>\n";
     echo "<div align=\"right\"><span>$tng_title, v.$tng_version</span></div>";

@@ -20,7 +20,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
   $navList = new navList('');
   $navList->appendItem([true, "dataImportGedcom.php", uiTextSnippet('import'), "import"]);
   $navList->appendItem([true, "dataExportGedcom.php", uiTextSnippet('export'), "export"]);
-  $navList->appendItem([true, "admin_secondmenu.php", uiTextSnippet('secondarymaint'), "second"]);
+  $navList->appendItem([true, "dataSecondaryProcesses.php", uiTextSnippet('secondarymaint'), "second"]);
   echo $navList->build("second");
   ?>
   <div>
@@ -304,7 +304,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
       adminwritelog(uiTextSnippet('secondary') . ": $secaction");
       ?>
 
-      <p>&raquo; <a href="admin_secondmenu.php"><?php echo uiTextSnippet('backtosecondary'); ?></a></p>
+      <p>&raquo; <a href="dataSecondaryProcesses.php"><?php echo uiTextSnippet('backtosecondary'); ?></a></p>
 
     </div>
   </div>

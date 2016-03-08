@@ -44,7 +44,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     $navList = new navList('');
     $navList->appendItem([true, "dataImportGedcom.php", uiTextSnippet('import'), "import"]);
 //    $navList->appendItem([$allow_ged,dataExportGedcomrt.php", uiTextSnippet('export'), "export"]);
-    $navList->appendItem([true, "admin_secondmenu.php", uiTextSnippet('secondarymaint'), "second"]);
+    $navList->appendItem([true, "dataSecondaryProcesses.php", uiTextSnippet('secondarymaint'), "second"]);
     echo $navList->build("export");
     ?>
 

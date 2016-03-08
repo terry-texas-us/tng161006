@@ -56,7 +56,7 @@ if (!$allow_ged && $assignedtree) {
     $navList = new navList('');
 //    $navList->appendItem([true, "dataImportGedcom.php", uiTextSnippet('import'), "import"]);
     $navList->appendItem([$allow_export, "dataExportGedcom.php", uiTextSnippet('export'), "export"]);
-    $navList->appendItem([true, "admin_secondmenu.php", uiTextSnippet('secondarymaint'), "second"]);
+    $navList->appendItem([true, "dataSecondaryProcesses.php", uiTextSnippet('secondarymaint'), "second"]);
     echo $navList->build("import");
     ?>
     <form name='form1' action='dataImportGedcomFormAction.php' target='results' method='post' ENCTYPE='multipart/form-data' onsubmit="return checkFile(this);">
