@@ -50,98 +50,116 @@ $headSection->setTitle(uiTextSnippet('modifyeventtype'));
     echo $navList->build("edit");
     ?>
     <form name='form1' action='eventtypesEditFormAction.php' method='post' onsubmit="return validateForm();">
-      <table class='table table-sm'>
-        <tr>
-          <td><?php echo uiTextSnippet('assocwith'); ?>:</td>
-          <td>
-            <select name='type'
-                    onChange="populateTags(this.options[this.selectedIndex].value, '');">
-              <option value='I'<?php if ($row['type'] == 'I') {echo " selected";} ?>><?php echo uiTextSnippet('individual'); ?></option>
-              <option value='F'<?php if ($row['type'] == 'F') {echo " selected";} ?>><?php echo uiTextSnippet('family'); ?></option>
-              <option value='S'<?php if ($row['type'] == 'S') {echo " selected";} ?>><?php echo uiTextSnippet('source'); ?></option>
-              <option value='R'<?php if ($row['type'] == 'R') {echo " selected";} ?>><?php echo uiTextSnippet('repository'); ?></option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('selecttag'); ?>:</td>
-          <td>
-            <select name='tag1' onChange="if (this.options[this.selectedIndex].value === 'EVEN') {
-                  toggleTdesc(1);
-                } else {
-                  toggleTdesc(0);
-                }">
-              <option value="<?php echo $row['tag']; ?>"><?php echo $row['tag']; ?></option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            &nbsp; <?php echo uiTextSnippet('orenter'); ?>:
-          </td>
-          <td>
-            <input name='tag2' type='text' size='10' onBlur="if (this.value === 'EVEN') {
-                  toggleTdesc(1);
-                } else {
-                  toggleTdesc(0);
-                }"> (<?php echo uiTextSnippet('ifbothdata'); ?>)
-          </td>
-        </tr>
-        <tr id="tdesc">
-          <td><?php echo uiTextSnippet('typedescription'); ?>*:</td>
-          <td><input name='description' type='text' size='40' value="<?php echo $row['description']; ?>"></td>
-        </tr>
-        <tr id="displaytr"<?php echo $displaytrstyle; ?>>
-          <td><?php echo uiTextSnippet('display'); ?>:</td>
-          <td><input name='defdisplay' type='text' size='40' value="<?php echo $defdisplay; ?>"></td>
-        </tr>
-        <?php
-        if ($displayrows) {
-          ?>
-          <tr>
-            <td colspan='2'>
-              <br>
-              <hr style="text-align:left; margin-left:0; width:400px; height:1px;"/>
-              <?php echo displayToggle("plus0", 0, "otherlangs", uiTextSnippet('othlangs'), ''); ?>
-              <table id="otherlangs"<?php echo $otherlangsstyle; ?>>
-                <tr>
-                  <td colspan='2'>
-                    <br><b><?php echo uiTextSnippet('allnone'); ?></b><br><br></td>
-                </tr>
-                <?php
-                echo $displayrows;
-                ?>
-              </table>
-              <hr style="text-align:left; margin-left:0; width:400px; height:1px;"/>
-            </td>
-          </tr>
-          <?php
-        }
-        ?>
-        <tr>
-          <td><?php echo uiTextSnippet('displayorder'); ?>:</td>
-          <td><input name='ordernum' type='text' size='4' value="<?php echo $row['ordernum']; ?>">
-          </td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('evdata'); ?>:</td>
-          <td><input name='keep' type='radio' value='1' <?php if ($row['keep']) {echo "checked";} ?>> <?php echo uiTextSnippet('accept'); ?>
-            &nbsp; <input name='keep' type='radio' value='0' <?php if ($row['keep'] != 1) {echo "checked";} ?>> <?php echo uiTextSnippet('ignore'); ?>
-          </td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('collapseev'); ?>:</td>
-          <td><input name='collapse' type='radio' value='1' <?php if ($row['collapse']) {echo "checked";} ?>> <?php echo uiTextSnippet('yes'); ?>
-            &nbsp; <input name='collapse' type='radio' value='0' <?php if ($row['collapse'] != 1) {
-              echo "checked";
-            } ?>> <?php echo uiTextSnippet('no'); ?>
-          </td>
-        </tr>
-      </table>
+      <div class='row'>
+        <div class='col-md-2'>
+          <?php echo uiTextSnippet('assocwith'); ?>:
+        </div>
+        <div class='col-md-4'>
+          <select class='form-control' name='type' onChange="populateTags(this.options[this.selectedIndex].value, '');">
+            <option value='I'<?php if ($row['type'] == 'I') {echo " selected";} ?>><?php echo uiTextSnippet('individual'); ?></option>
+            <option value='F'<?php if ($row['type'] == 'F') {echo " selected";} ?>><?php echo uiTextSnippet('family'); ?></option>
+            <option value='S'<?php if ($row['type'] == 'S') {echo " selected";} ?>><?php echo uiTextSnippet('source'); ?></option>
+            <option value='R'<?php if ($row['type'] == 'R') {echo " selected";} ?>><?php echo uiTextSnippet('repository'); ?></option>
+          </select>
+        </div>
+      </div>
+      <hr>
+      <div class='row'>
+        <div class='col-md-2'>
+          <?php echo uiTextSnippet('selecttag'); ?>:
+        </div> 
+        <div class='col-md-4'>
+          <select class='form-control' name='tag1' onChange="if (this.options[this.selectedIndex].value === 'EVEN') {toggleTdesc(1);} else {toggleTdesc(0);}">
+            <option value="<?php echo $row['tag']; ?>"><?php echo $row['tag']; ?></option>
+          </select>
+        </div>
+        <div class='col-md-3'>
+          <?php echo uiTextSnippet('evdata'); ?>
+        </div>
+        <div class='col-md-3'>
+          <div class='radio-inline'>
+            <label>
+              <input name='keep' type='radio' value='1' <?php if ($row['keep']) {echo "checked";} ?>>
+              <?php echo uiTextSnippet('accept'); ?>
+            </label>
+          </div>          
+          <div class='radio-inline'>
+            <label>
+              <input name='keep' type='radio' value='0' <?php if ($row['keep'] != 1) {echo "checked";} ?>>
+              <?php echo uiTextSnippet('ignore'); ?>
+            </label>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class='row'>
+        <div class='col-md-2'>
+          <?php echo uiTextSnippet('orenter'); ?>:
+        </div>
+        <div class='col-md-4'>
+          <input class='form-control' name='tag2' type='text' onBlur="if (this.value === 'EVEN') {toggleTdesc(1);} else {toggleTdesc(0);}"> (<?php echo uiTextSnippet('ifbothdata'); ?>)
+        </div>
+        <div class='col-md-6'>
+          <div id="tdesc">
+            <?php echo uiTextSnippet('typedescription'); ?>*:
+            <input class='form-control' name='description' type='text' value="<?php echo $row['description']; ?>">
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class='row'>
+        <div class='col-md-2'>
+          <?php echo uiTextSnippet('display'); ?>:
+        </div>
+        <div class='col-md-4'>
+          <div id="displaytr"<?php echo $displaytrstyle; ?>>
+            <input class='form-control' name='defdisplay' type='text' value="<?php echo $defdisplay; ?>">
+          </div>
+          <?php if ($displayrows) { ?>
+            <hr style="text-align:left; margin-left:0; width:400px; height:1px;"/>
+            <?php echo displayToggle("plus0", 0, "otherlangs", uiTextSnippet('othlangs'), ''); ?>
+            <table id='otherlangs'<?php echo $otherlangsstyle; ?>>
+              <tr>
+                <td colspan='2'>
+                  <br><b><?php echo uiTextSnippet('allnone'); ?></b><br><br></td>
+              </tr>
+              <?php
+              echo $displayrows;
+              ?>
+            </table>
+            <hr style="text-align: left; margin-left: 0; width: 400px; height: 1px;"/>
+          <?php } ?>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-2'>
+          <?php echo uiTextSnippet('displayorder'); ?>:
+        </div>
+        <div class='col-md-4'>
+          <input class='form-control' name='ordernum' type='text' value="<?php echo $row['ordernum']; ?>">
+        </div>
+        <div class='col-md-3'>
+          <?php echo uiTextSnippet('collapseev'); ?>:
+        </div>
+        <div class='col-md-3'>
+          <div class='radio-inline'>
+            <label>
+              <input name='collapse' type='radio' value='1' <?php if ($row['collapse']) {echo "checked";} ?>>
+              <?php echo uiTextSnippet('yes'); ?>
+            </label>
+          </div>
+          <div class='radio-inline'>
+            <label>
+              <input name='collapse' type='radio' value='0' <?php if ($row['collapse'] != 1) {echo "checked";} ?>>
+              <?php echo uiTextSnippet('no'); ?>
+            </label>
+          </div>
+        </div>
+      </div>
       <br>
       <input name='eventtypeID' type='hidden' value="<?php echo $eventtypeID; ?>">
       <input name='display' type='hidden' value=''>
-      <input name='submit' type='submit' value="<?php echo uiTextSnippet('savechanges'); ?>">
+      <button class='btn btn-primary-outline' name='submit' type='submit'><?php echo uiTextSnippet('savechanges'); ?></button>
     </form>
     <p>*<?php echo uiTextSnippet('typerequired'); ?></p>
     <?php echo $adminFooterSection->build(); ?>

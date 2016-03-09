@@ -20,7 +20,6 @@ if (!$allow_ged && $assignedtree) {
     exit;
   }
 }
-
 if ($assignedtree) {
   $wherestr = "WHERE gedcom = \"$assignedtree\"";
 } else {
@@ -47,8 +46,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     $navList->appendItem([true, "dataSecondaryProcesses.php", uiTextSnippet('secondarymaint'), "second"]);
     echo $navList->build("export");
     ?>
-
-    <form action="admin_gedcom2.php" method='post' name='form1'>
+    <form name='form1' action='dataExportGedcomFormAction.php' method='post'>
       <table class='table table-sm'>
         <tr>
           <td><?php echo uiTextSnippet('tree'); ?>:</td>

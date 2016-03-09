@@ -228,7 +228,7 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
             <button class='btn btn-primary-outline' type='button' onclick="return makeURL();"><?php echo uiTextSnippet('search'); ?></button> 
             <button class='btn btn-warning-outline' type='button' onclick="resetValues();"><?php echo uiTextSnippet('resetall'); ?></button>
           </section>
-        </section>  .custom-events 
+        </section>  <!-- .custom-events --> 
       </div>
       <div class="searchsidebar">
         <table>

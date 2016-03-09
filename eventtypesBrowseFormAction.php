@@ -1,5 +1,4 @@
 <?php
-
 include("begin.php");
 include("adminlib.php");
 
@@ -11,7 +10,6 @@ if ($assignedtree || !$allow_edit || !$allow_delete) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-
 require("adminlog.php");
 
 $query = "";
@@ -30,7 +28,6 @@ if ($cetaction == uiTextSnippet('ignoreselected')) {
     }
   }
 }
-
 if ($query) {
   foreach (array_keys($_POST) as $key) {
     if (substr($key, 0, 2) == "et") {
@@ -39,7 +36,6 @@ if ($query) {
   }
   $result = tng_query($query);
 }
-
 adminwritelog(uiTextSnippet('modifyeventtype') . ": " . uiTextSnippet('all'));
 
 $message = uiTextSnippet('changestoallevtypes') . " " . uiTextSnippet('succsaved') . ".";
