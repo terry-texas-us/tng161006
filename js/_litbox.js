@@ -29,9 +29,9 @@ LITBox.prototype = {
     setup: function () {
         'use strict';
         var self = this;
-        self._setup();
-//        $(document).ready(function () {
-//        });
+        $(document).ready(function () {
+            self._setup();
+        });
     },
     _setup: function () {
         'use strict';

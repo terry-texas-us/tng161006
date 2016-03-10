@@ -600,6 +600,14 @@ function incrCounter($prefix) {
     }
   } else {
     if ($allcount % $writeinterval == 0) {
+      ?>
+      <script>
+        var pbar = parent.document.getElementById('bar');
+        pbar.style.width = $newwidth;
+      </script>
+      <?php
+      
+      
       $newtext = "<div class=\"impc\"><span id=\"pr\">$newwidth</span>";
       if ($savestate['icount']) {
         $newtext .= "<span id=\"ic\">" . $savestate['icount'] . "</span>";

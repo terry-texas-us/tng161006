@@ -7,7 +7,6 @@ if (!count($_POST)) {
   header("Location: admin.php");
   exit;
 }
-
 if ($link) {
   include("checklogin.php");
 
@@ -17,14 +16,12 @@ if ($link) {
     exit;
   }
 }
-
 require("adminlog.php");
 
 $fp = @fopen($subroot . "importconfig.php", "w", 1);
 if (!$fp) {
   die(uiTextSnippet('cannotopen') . " importconfig.php");
 }
-
 $localphotopathdisplay = addslashes($localphotopathdisplay);
 $localhistorypathdisplay = addslashes($localhistorypathdisplay);
 $localdocumentpathdisplay = addslashes($localdocumentpathdisplay);
@@ -34,11 +31,9 @@ $localhspathdisplay = addslashes($localhspathdisplay);
 if (!$readmsecs) {
   $readmsecs = 750;
 }
-//if(!$checksecs) $checksecs = 20;
 if (!$rrnum) {
   $rrnum = 100;
 }
-
 flock($fp, LOCK_EX);
 
 fwrite($fp, "<?php\n");

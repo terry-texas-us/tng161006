@@ -107,7 +107,7 @@ function frmFiles() {
                       echo "</a>";
                       if ($allow_delete) {
                         echo "<a href='#' onclick=\"return deleteIt('file','$nImageNr','$tngpath/$subdir" . addslashes($file) . "');\" title='" . uiTextSnippet('delete') . "'>\n";
-                        echo "<img class='icon-sm' src='svg/delete.svg'>\n";
+                        echo "<img class='icon-sm' src='svg/trash.svg'>\n";
                         echo "</a>\n";
                       }
                       echo "<a href=\"javascript:ShowFile('$tngpath/$subdir" . addslashes($file) . "')\" title=\"" . uiTextSnippet('preview') . "\">\n";

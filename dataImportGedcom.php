@@ -204,6 +204,7 @@ if (!$allow_ged && $assignedtree) {
   }
   ?>
 </script>
+<script src='js/modalAlert.js'></script>
 <script src='js/dataimport.js'></script>
 <?php if ($debug) { ?>
   <iframe id="results" height="300" width="400" name="results" onload="iframeLoaded();"></iframe>

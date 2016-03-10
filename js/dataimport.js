@@ -55,21 +55,24 @@ function checkFile(form) {
         if (form.action.indexOf("dataImportGedcomFormAction.php") >= 0) {
             resetimport();
             var popup = '<div class="impcontainer">\n';
-            popup += '<div class="impheader"><h4 id="importmsg">';
-            if (form.remotefile.value.length) {
-                popup += textSnippet('uploading') + ' ' + form.remotefile.value;
-            } else {
-                popup += textSnippet('opening') + ' ' + form.database.value;
-            }
-            popup += '... &nbsp;<img src="img/spinner.gif"></h4></div>\n';
+            popup += '<div class="impheader">\n';
+              popup += '<h4 id="importmsg">';
+              if (form.remotefile.value.length) {
+                  popup += textSnippet('uploading') + ' ' + form.remotefile.value;
+              } else {
+                  popup += textSnippet('opening') + ' ' + form.database.value;
+              }
+              popup += '... &nbsp;<img src="img/spinner.gif"></h4>\n';
+            popup += '</div>\n';
             popup += '<div id="impdata" style="visibility:hidden">\n';
-            popup += '<p id="recordcount">\n<span class="imp">&nbsp;<span class="implabel">' + textSnippet('people') + ': </span><span id="personcount" class="impctr">0</span></span>\n';
-            popup += '<div class="imp">&nbsp;<span class="implabel">' + textSnippet('families') + ': </span><span id="familycount" class="impctr">0</span></div>\n';
-            popup += '<div class="imp">&nbsp;<span class="implabel">' + textSnippet('sources') + ': </span><span id="sourcecount" class="impctr">0</span></div>\n';
-            popup += '<div class="imp">&nbsp;<span class="implabel">' + textSnippet('notes') + ': </span><span id="notecount" class="impctr">0</span></div>\n';
-            popup += '<div class="imp">&nbsp;<span class="implabel">' + textSnippet('media') + ': </span><span id="mediacount" class="impctr">0</span></div>\n';
-            popup += '<div class="imp">&nbsp;<span class="implabel">' + textSnippet('places') + ': </span><span id="placecount" class="impctr">0</span></div>\n</p><br><br>';
-            popup += '<div class="progcontainer"><div id="progress" class="emptybar">\n<div id="bar" class="colorbar"></div>\n</div>\n</div>\n';
+              popup += '<p id="recordcount">\n<span class="imp">&nbsp;<span class="implabel">' + textSnippet('people') + ': </span><span id="personcount" class="impctr">0</span></span>\n';
+                popup += '<div class="imp">&nbsp;<span class="implabel">' + textSnippet('families') + ': </span><span id="familycount" class="impctr">0</span></div>\n';
+                popup += '<div class="imp">&nbsp;<span class="implabel">' + textSnippet('sources') + ': </span><span id="sourcecount" class="impctr">0</span></div>\n';
+                popup += '<div class="imp">&nbsp;<span class="implabel">' + textSnippet('notes') + ': </span><span id="notecount" class="impctr">0</span></div>\n';
+                popup += '<div class="imp">&nbsp;<span class="implabel">' + textSnippet('media') + ': </span><span id="mediacount" class="impctr">0</span></div>\n';
+                popup += '<div class="imp">&nbsp;<span class="implabel">' + textSnippet('places') + ': </span><span id="placecount" class="impctr">0</span></div>\n';
+              popup += '</p><br><br>';
+              popup += '<div class="progcontainer"><div id="progress" class="emptybar">\n<div id="bar" class="colorbar"></div>\n</div>\n</div>\n';
             popup += '</div>\n';
             popup += '<br><div id="implinks"><a href="#" onclick="return suspendimport();">' + textSnippet('stop') + '</a>';
             if (saveimport === "1") {
@@ -79,8 +82,7 @@ function checkFile(form) {
             popup += '</div>\n<div id="errormsg"></div>';
             popup += '</div>';
 
-            tnglitbox = new ModalDialog(popup, {
-                type: 'alert', // [ts] no alert type in ModalDialog
+            tnglitbox = new ModalAlert(popup, {
                 onremove: function () {
                     if (!done) {
                         stopimport();
@@ -156,7 +158,7 @@ function validateTreeForm(form) {
     } else {
         var params = $(form).serialize();
         $.ajax({
-            url: 'admin_addtree.php',
+            url: 'treesAddFormAction.php',
             data: params,
             dataType: 'html',
             success: function (req) {
@@ -263,7 +265,7 @@ $('#eventsonly').on('click', function () {
 
 $('#addnewtree').on('click', function () {
     'use strict';
-    var url = 'admin_dataImportNewTree.php?beforeimport=yes&helplang=' + helpLang;
+    var url = 'treesAddModal.php?beforeimport=yes&helplang=' + helpLang;
 
     tnglitbox = new ModalDialog(url);
 });
