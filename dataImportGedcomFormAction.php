@@ -29,9 +29,6 @@ require 'gedcomImportMisc.php';
 require("adminlog.php");
 $today = date("Y-m-d H:i:s");
 
-$readmsecs = $tngimpcfg['readmsecs'] && is_numeric($tngimpcfg['readmsecs']) ? $tngimpcfg['readmsecs'] : 750; // milliseconds
-$writeinterval = $tngimpcfg['rrnum'] && is_numeric($tngimpcfg['rrnum']) ? $tngimpcfg['rrnum'] : 100; // records
-
 global $prefix;
 global $medialinks;
 global $albumlinks;
@@ -86,6 +83,8 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
 <html>
 <?php echo $headSection->build('', 'admin', $session_charset); ?>
 <body id="datamaint-gedimport">
+<?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
+<script src='js/dataimport.js'></script>
   <section class='container'>
     <?php
     if ($old) {
@@ -270,72 +269,73 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       <script>
         var idivs, timeoutID;
         parent.started = <?php echo $clearedtogo; ?>;
-        var icount = parent.document.getElementById('personcount');
-        var fcount = parent.document.getElementById('familycount');
-        var scount = parent.document.getElementById('sourcecount');
-        var ncount = parent.document.getElementById('notecount');
-        var mcount = parent.document.getElementById('mediacount');
-        var pcount = parent.document.getElementById('placecount');
-        var pbar = parent.document.getElementById('bar');
+        gedFileName = '<?php echo $gedfilename; ?>';
+//        var icount = parent.document.getElementById('personcount');
+//        var fcount = parent.document.getElementById('familycount');
+//        var scount = parent.document.getElementById('sourcecount');
+//        var ncount = parent.document.getElementById('notecount');
+//        var mcount = parent.document.getElementById('mediacount');
+//        var pcount = parent.document.getElementById('placecount');
+//        var pbar = parent.document.getElementById('bar');
 
-        function updateCount() {
-            'use strict';
-            idivs = $('div.impc');
-            if (idivs.length) {
-                var ilen = idivs.length - 1;
+//        function updateCount() {
+//            var remoteFile = parent.document.getElementById('remotefile').value;
+//            
+//            idivs = $('div.impc');
+//            if (idivs.length) {
+//              var ilen = idivs.length - 1;
+//              // console.log('file at ' + idivs['ilen'].down('#pr').innerHTML);
+//              var pr = $(idivs[ilen]).find('#pr');
+//              if (pr.length) {
+//                  pbar.style.width = pr.html();
+//              }
+//              var ic = $(idivs[ilen]).find('#ic');
+//              if (ic.length) {
+//                  icount.innerHTML = ic.html();
+//              }
+//              var fc = $(idivs[ilen]).find('#fc');
+//              if (fc.length) {
+//                  fcount.innerHTML = fc.html();
+//              }
+//              var sc = $(idivs[ilen]).find('#sc');
+//              if (sc.length) {
+//                  scount.innerHTML = sc.html();
+//              }
+//              var nc = $(idivs[ilen]).find('#nc');
+//              if (nc.length) {
+//                  ncount.innerHTML = nc.html();
+//              }
+//              var mc = $(idivs[ilen]).find('#mc');
+//              if (mc.length) {
+//                  mcount.innerHTML = mc.html();
+//              }
+//              var pc = $(idivs[ilen]).find('#pc');
+//              if (pc.length) {
+//                  pcount.innerHTML = pc.html();
+//              }
+//            }
+//            if (!parent.done) {
+//                timeoutID = setTimeout(updateCount, 750);
+//            } else if (!parent.suspended) {
+//                msgdiv.innerHTML = textSnippet('finishedimporting') + ' &nbsp;<img src="img/tng_check.gif">';
+//                showCloseMenu();
+//            }
+//        }
 
-              var pr = $(idivs[ilen]).find('#pr');
-              if (pr.length) {
-                  pbar.style.width = pr.html();
-              }
-              var ic = $(idivs[ilen]).find('#ic');
-              if (ic.length) {
-                  icount.innerHTML = ic.html();
-              }
-              var fc = $(idivs[ilen]).find('#fc');
-              if (fc.length) {
-                  fcount.innerHTML = fc.html();
-              }
-              var sc = $(idivs[ilen]).find('#sc');
-              if (sc.length) {
-                  scount.innerHTML = sc.html();
-              }
-              var nc = $(idivs[ilen]).find('#nc');
-              if (nc.length) {
-                  ncount.innerHTML = nc.html();
-              }
-              var mc = $(idivs[ilen]).find('#mc');
-              if (mc.length) {
-                  mcount.innerHTML = mc.html();
-              }
-              var pc = $(idivs[ilen]).find('#pc');
-              if (pc.length) {
-                  pcount.innerHTML = pc.html();
-              }
-            }
-            if (!parent.done) {
-                timeoutID = setTimeout(updateCount, <?php echo $readmsecs; ?>);
-            } else if (!parent.suspended) {
-                msgdiv.innerHTML = textSnippet('finishedimporting') + ' &nbsp;<img src="img/tng_check.gif">';
-                showCloseMenu();
-            }
-        }
-
-        function showCloseMenu() {
-            'use strict';
-            var closemsg = '<a href="#" onclick="tnglitbox.remove();return false;"><img src="img/tng_close.gif" style="margin-right:5px">' + textSnippet('closewindow') + '</a>';
-            if (parent.started) {
-                parent.document.getElementById('implinks').innerHTML = '<span id="toremove"><a href="#" onclick="return removeFile(\'<?php echo $gedfilename; ?>\');">' + textSnippet('removeged') + '</a></span><p>' + closemsg + ' | <a href="dataSecondaryProcesses.php">' + textSnippet('moreoptions') + '</a></p>';
-            } else {
-                parent.document.getElementById('implinks').innerHTML = '<p>' + closemsg + '</p>';
-            }
-        }
+//        function showCloseMenu() {
+//            var closemsg = '<a href="#" onclick="tnglitbox.remove();return false;"><img src="img/tng_close.gif" style="margin-right:5px">' + textSnippet('closewindow') + '</a>';
+//            if (parent.started) {
+//                parent.document.getElementById('implinks').innerHTML = '<p>' + closemsg + ' | <a href="dataSecondaryProcesses.php">' + textSnippet('moreoptions') + '</a></p>';
+//            } else {
+//                parent.document.getElementById('implinks').innerHTML = '<p>' + closemsg + '</p>';
+//            }
+//        }
 
         var msgdiv = parent.document.getElementById('importmsg');
 
         if (parent.started) {
           parent.document.getElementById('impdata').style.visibility = "visible";
-          timeoutID = setTimeout(updateCount, <?php echo $readmsecs; ?>);
+          timeoutID = setTimeout(updateCount, 250);
         } else {
           showCloseMenu();
         }

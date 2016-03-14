@@ -257,18 +257,9 @@ input.verylongfield {width: 550px;}
 .impheader {height: 40px;}
 
 /*import counter labels, ie People, Families, Sources*/
-.implabel {font-weight: bold;}
+.implabel {font-weight: bold; padding: 0 .25rem}
 
 .imp {margin-right: 10px; float: left;}
-
-/*white box around progress bar*/
-.progcontainer {background-color: white;	padding: 5px; width: 500px;}
-
-/*empty progress bar*/
-.emptybar {width: 500px; height: 20px; border: 1px solid black;}
-
-/*colored part of progress bar*/
-.colorbar {width: 0; height: 20px; background-color: green;}
 
 /* for ArrowDown.gif in genlib.php */
 #mnav .arrow {float: left; margin-top: 4px; margin-bottom: 4px; width: 25px; height: 8px; border: 0;}

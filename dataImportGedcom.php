@@ -69,7 +69,8 @@ if (!$allow_ged && $assignedtree) {
           <?php echo uiTextSnippet('fromyourcomputer'); ?>:
         </div>
         <div class='col-md-9'>
-          <input class='form-control' name='remotefile' type='file'>
+          <input class='form-control' id='remotefile' name='remotefile' type='file'>
+          <input name='gedcomFile' type='hidden' value=''>
         </div>
       </div>
       <br>
@@ -186,9 +187,9 @@ if (!$allow_ged && $assignedtree) {
 <script>
   var helpLang = '<?php echo findhelp('tree_help.php'); ?>';
 
+  var gedFileName;
   var saveimport = "<?php echo $saveimport; ?>";
-  //var checksecs = <?php echo $checksecs; ?>000;
-
+  
   var branches = [];
   var branchcounts = new Array();
 

@@ -561,7 +561,7 @@ function getLatLong($value, $negdir) {
 }
 
 function incrCounter($prefix) {
-  global $savestate, $saveimport, $saveimport_table, $tree, $fp, $allcount, $fstat, $writeinterval, $old;
+  global $savestate, $saveimport, $saveimport_table, $tree, $fp, $allcount, $fstat, $old;
 
   $allcount++;
   switch ($prefix) {
@@ -599,15 +599,7 @@ function incrCounter($prefix) {
       @flush();
     }
   } else {
-    if ($allcount % $writeinterval == 0) {
-      ?>
-      <script>
-        var pbar = parent.document.getElementById('bar');
-        pbar.style.width = $newwidth;
-      </script>
-      <?php
-      
-      
+    if ($allcount % 100 == 0) {
       $newtext = "<div class=\"impc\"><span id=\"pr\">$newwidth</span>";
       if ($savestate['icount']) {
         $newtext .= "<span id=\"ic\">" . $savestate['icount'] . "</span>";

@@ -1,5 +1,5 @@
 // [ts] global functions and/or variables for JSLint
-/*global ModalDialog, FilePicker, textSnippet */
+/*global ModalAlert, ModalDialog, FilePicker, textSnippet */
 var branchcounts, branches, helpLang;
 var saveimport;
 
@@ -56,23 +56,24 @@ function checkFile(form) {
             resetimport();
             var popup = '<div class="impcontainer">\n';
             popup += '<div class="impheader">\n';
-              popup += '<h4 id="importmsg">';
-              if (form.remotefile.value.length) {
-                  popup += textSnippet('uploading') + ' ' + form.remotefile.value;
-              } else {
-                  popup += textSnippet('opening') + ' ' + form.database.value;
-              }
-              popup += '... &nbsp;<img src="img/spinner.gif"></h4>\n';
+            popup += '<h4 id="importmsg">';
+            if (form.remotefile.value.length) {
+                popup += textSnippet('uploading') + ' ' + form.remotefile.value;
+            } else {
+                popup += textSnippet('opening') + ' ' + form.database.value;
+            }
+            popup += '... &nbsp;<img src="img/spinner.gif"></h4>\n';
             popup += '</div>\n';
             popup += '<div id="impdata" style="visibility:hidden">\n';
-              popup += '<p id="recordcount">\n<span class="imp">&nbsp;<span class="implabel">' + textSnippet('people') + ': </span><span id="personcount" class="impctr">0</span></span>\n';
-                popup += '<div class="imp">&nbsp;<span class="implabel">' + textSnippet('families') + ': </span><span id="familycount" class="impctr">0</span></div>\n';
-                popup += '<div class="imp">&nbsp;<span class="implabel">' + textSnippet('sources') + ': </span><span id="sourcecount" class="impctr">0</span></div>\n';
-                popup += '<div class="imp">&nbsp;<span class="implabel">' + textSnippet('notes') + ': </span><span id="notecount" class="impctr">0</span></div>\n';
-                popup += '<div class="imp">&nbsp;<span class="implabel">' + textSnippet('media') + ': </span><span id="mediacount" class="impctr">0</span></div>\n';
-                popup += '<div class="imp">&nbsp;<span class="implabel">' + textSnippet('places') + ': </span><span id="placecount" class="impctr">0</span></div>\n';
-              popup += '</p><br><br>';
-              popup += '<div class="progcontainer"><div id="progress" class="emptybar">\n<div id="bar" class="colorbar"></div>\n</div>\n</div>\n';
+            popup += '<p id="recordcount">\n';
+            popup += '<span class="imp"><span class="implabel">' + textSnippet('people') + ': </span><span id="personcount" class="impctr">0</span></span>\n';
+            popup += '<div class="imp"><span class="implabel">' + textSnippet('families') + ': </span><span id="familycount" class="impctr">0</span></div>\n';
+            popup += '<div class="imp"><span class="implabel">' + textSnippet('sources') + ': </span><span id="sourcecount" class="impctr">0</span></div>\n';
+            popup += '<div class="imp"><span class="implabel">' + textSnippet('notes') + ': </span><span id="notecount" class="impctr">0</span></div>\n';
+            popup += '<div class="imp"><span class="implabel">' + textSnippet('media') + ': </span><span id="mediacount" class="impctr">0</span></div>\n';
+            popup += '<div class="imp"><span class="implabel">' + textSnippet('places') + ': </span><span id="placecount" class="impctr">0</span></div>\n';
+            popup += '</p><br><br>';
+            popup += '<progress class="progress progress-info" id="gedcom-progress" value="0" max="500"></progress>\n';
             popup += '</div>\n';
             popup += '<br><div id="implinks"><a href="#" onclick="return suspendimport();">' + textSnippet('stop') + '</a>';
             if (saveimport === "1") {
@@ -90,8 +91,6 @@ function checkFile(form) {
                 }
             });
             lastptr = '';
-            //may not be necessary with "onload"
-            //timecheck = setTimeout(checkIfDone, checksecs);
         } else {
             document.form1.target = "main";
         }
@@ -122,24 +121,87 @@ function checkIfDone() {
             self.frames[0].location.href = "dataImportGedcomFormAction.php?tree=" + treeselect.options[treeselect.selectedIndex].value + "&resuming=1";
         } else {
             lastptr = $('bar').style.width;
-            timecheck = setTimeout(checkIfDone, checksecs);
+            timecheck = setTimeout(checkIfDone);
         }
     }
 }
 
-function removeFile(filename) {
+function showCloseMenu() {
     'use strict';
-    var params = {filename: filename};
-    $.ajax({
-        url: 'admin_deletefile.php',
-        data: params,
-        dataType: 'html',
-        success: function (req) {
-            $('#toremove').html(req);
-        }
-    });
-    return false;
+    var closemsg = '<a href="#" onclick="tnglitbox.remove();return false;"><img src="img/tng_close.gif" style="margin-right:5px">' + textSnippet('closewindow') + '</a>';
+    if (parent.started) {
+        var removeMessage = '<p>' + closemsg + ' | <a href="dataSecondaryProcesses.php">' + textSnippet('moreoptions') + '</a></p>';
+        parent.document.getElementById('implinks').innerHTML = removeMessage;
+    } else {
+        parent.document.getElementById('implinks').innerHTML = '<p>' + closemsg + '</p>';
+    }
 }
+
+function updateCount() {
+    'use strict';
+
+    var idivs = $('div.impc');
+    if (idivs.length) {
+        var ilen = idivs.length - 1;
+        // console.log('file at ' + idivs['ilen'].down('#pr').innerHTML);
+        var pr = $(idivs[ilen]).find('#pr');
+        var parentDocument = parent.document;
+        if (pr.length) {
+            var gedcomProgress = parentDocument.getElementById('gedcom-progress');
+            var barValue = pr.html();
+            var percentComplete = 100 * barValue / 500;
+            gedcomProgress.setAttribute('value', barValue);
+            gedcomProgress.innerHTML = percentComplete + '%';
+            if (percentComplete === 100) {
+                gedcomProgress.className = 'progress progress-success';
+            }
+        }
+        var ic = $(idivs[ilen]).find('#ic');
+        if (ic.length) {
+            parent.document.getElementById('personcount').innerHTML = ic.html();
+        }
+        var fc = $(idivs[ilen]).find('#fc');
+        if (fc.length) {
+            parent.document.getElementById('familycount').innerHTML = fc.html();
+        }
+        var sc = $(idivs[ilen]).find('#sc');
+        if (sc.length) {
+            parent.document.getElementById('sourcecount').innerHTML = sc.html();
+        }
+        var nc = $(idivs[ilen]).find('#nc');
+        if (nc.length) {
+            parent.document.getElementById('notecount').innerHTML = nc.html();
+        }
+        var mc = $(idivs[ilen]).find('#mc');
+        if (mc.length) {
+            parent.document.getElementById('mediacount').innerHTML = mc.html();
+        }
+        var pc = $(idivs[ilen]).find('#pc');
+        if (pc.length) {
+            parent.document.getElementById('placecount').innerHTML = pc.html();
+        }
+    }
+    if (!parent.done) {
+        timeoutID = setTimeout(updateCount, 250);
+    } else if (!parent.suspended) {
+        msgdiv.innerHTML = textSnippet('finishedimporting') + ' &nbsp;<img src="img/tng_check.gif">';
+        showCloseMenu();
+    }
+}
+
+//function removeFile(filename) {
+//    'use strict';
+//    var params = {filename: filename};
+//    $.ajax({
+//        url: 'admin_deletefile.php',
+//        data: params,
+//        dataType: 'html',
+//        success: function (req) {
+//            $('#toremove').html(req);
+//        }
+//    });
+//    return false;
+//}
 
 function alphaNumericCheck(string) {
     'use strict';

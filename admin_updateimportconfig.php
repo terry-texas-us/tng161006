@@ -28,20 +28,12 @@ $localdocumentpathdisplay = addslashes($localdocumentpathdisplay);
 $localotherpathdisplay = addslashes($localotherpathdisplay);
 $localhspathdisplay = addslashes($localhspathdisplay);
 
-if (!$readmsecs) {
-  $readmsecs = 750;
-}
-if (!$rrnum) {
-  $rrnum = 100;
-}
 flock($fp, LOCK_EX);
 
 fwrite($fp, "<?php\n");
 fwrite($fp, "\$gedpath = \"$gedpath\";\n");
 fwrite($fp, "\$saveimport = \"$saveimport\";\n");
-fwrite($fp, "\$tngimpcfg['rrnum'] = \"$rrnum\";\n");
-fwrite($fp, "\$tngimpcfg['readmsecs'] = \"$readmsecs\";\n");
-//fwrite( $fp, "\$tngimpcfg[checksecs] = \"$checksecs\";\n" );
+
 fwrite($fp, "\$assignnames = \"$assignnames\";\n");
 fwrite($fp, "\$tngimpcfg['defimpopt'] = \"$defimpopt\";\n");
 fwrite($fp, "\$tngimpcfg['chdate'] = \"$blankchangedt\";\n");

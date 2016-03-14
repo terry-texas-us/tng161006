@@ -1,8 +1,6 @@
 <?php
 $gedpath = "gedcom";
 $saveimport = "1";
-$tngimpcfg['rrnum'] = "100";
-$tngimpcfg['readmsecs'] = "750";
 $assignnames = "";
 $tngimpcfg['defimpopt'] = "0";
 $tngimpcfg['chdate'] = "0";

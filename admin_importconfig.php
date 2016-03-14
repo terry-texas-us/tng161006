@@ -71,11 +71,6 @@ $headSection->setTitle(uiTextSnippet('modifyimportsettings'));
           </td>
         </tr>
         <tr>
-          <td><?php echo uiTextSnippet('progint'); ?>:</td>
-          <td><input name='readmsecs' type='text' value="<?php echo $tngimpcfg['readmsecs']; ?>" size='5'></td>
-        </tr>
-        <!--<tr><td><?php echo uiTextSnippet('failint'); ?>:</td><td><input name='checksecs' type='text' value="<?php echo $tngimpcfg['checksecs']; ?>" size='5'></td></tr>-->
-        <tr>
           <td><?php echo uiTextSnippet('defimpopt'); ?>:</td>
           <td>
             <select name="defimpopt">
