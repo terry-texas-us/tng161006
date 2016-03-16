@@ -36,7 +36,7 @@ $medialinks = $albumlinks = array();
 
 $ldsOK = determineLDSRights();
 
-@ob_implicit_flush(true);
+ob_implicit_flush(true);
 
 function getMediaLinksToSave() {
   global $events_table;
@@ -111,7 +111,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       $savegedfilename = $basefilename;
 
       if (@move_uploaded_file($remotefile, $gedfilename)) {
-        @chmod($gedfilename, 0644);
+        chmod($gedfilename, 0644);
 
         $fp = @fopen($gedfilename, "r");
 
@@ -269,84 +269,23 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       <script>
         var idivs, timeoutID;
         parent.started = <?php echo $clearedtogo; ?>;
-        gedFileName = '<?php echo $gedfilename; ?>';
-//        var icount = parent.document.getElementById('personcount');
-//        var fcount = parent.document.getElementById('familycount');
-//        var scount = parent.document.getElementById('sourcecount');
-//        var ncount = parent.document.getElementById('notecount');
-//        var mcount = parent.document.getElementById('mediacount');
-//        var pcount = parent.document.getElementById('placecount');
-//        var pbar = parent.document.getElementById('bar');
-
-//        function updateCount() {
-//            var remoteFile = parent.document.getElementById('remotefile').value;
-//            
-//            idivs = $('div.impc');
-//            if (idivs.length) {
-//              var ilen = idivs.length - 1;
-//              // console.log('file at ' + idivs['ilen'].down('#pr').innerHTML);
-//              var pr = $(idivs[ilen]).find('#pr');
-//              if (pr.length) {
-//                  pbar.style.width = pr.html();
-//              }
-//              var ic = $(idivs[ilen]).find('#ic');
-//              if (ic.length) {
-//                  icount.innerHTML = ic.html();
-//              }
-//              var fc = $(idivs[ilen]).find('#fc');
-//              if (fc.length) {
-//                  fcount.innerHTML = fc.html();
-//              }
-//              var sc = $(idivs[ilen]).find('#sc');
-//              if (sc.length) {
-//                  scount.innerHTML = sc.html();
-//              }
-//              var nc = $(idivs[ilen]).find('#nc');
-//              if (nc.length) {
-//                  ncount.innerHTML = nc.html();
-//              }
-//              var mc = $(idivs[ilen]).find('#mc');
-//              if (mc.length) {
-//                  mcount.innerHTML = mc.html();
-//              }
-//              var pc = $(idivs[ilen]).find('#pc');
-//              if (pc.length) {
-//                  pcount.innerHTML = pc.html();
-//              }
-//            }
-//            if (!parent.done) {
-//                timeoutID = setTimeout(updateCount, 750);
-//            } else if (!parent.suspended) {
-//                msgdiv.innerHTML = textSnippet('finishedimporting') + ' &nbsp;<img src="img/tng_check.gif">';
-//                showCloseMenu();
-//            }
-//        }
-
-//        function showCloseMenu() {
-//            var closemsg = '<a href="#" onclick="tnglitbox.remove();return false;"><img src="img/tng_close.gif" style="margin-right:5px">' + textSnippet('closewindow') + '</a>';
-//            if (parent.started) {
-//                parent.document.getElementById('implinks').innerHTML = '<p>' + closemsg + ' | <a href="dataSecondaryProcesses.php">' + textSnippet('moreoptions') + '</a></p>';
-//            } else {
-//                parent.document.getElementById('implinks').innerHTML = '<p>' + closemsg + '</p>';
-//            }
-//        }
-
         var msgdiv = parent.document.getElementById('importmsg');
 
         if (parent.started) {
-          parent.document.getElementById('impdata').style.visibility = "visible";
-          timeoutID = setTimeout(updateCount, 250);
+            parent.document.getElementById('impdata').style.visibility = "visible";
+            timeoutID = setTimeout(updateCount, 250);
         } else {
-          showCloseMenu();
+            var closemsg = '<a href="#" onclick="tnglitbox.remove();return false;">' + textSnippet('okay') + '</a>';
+            parent.document.getElementById('implinks').innerHTML = '<p>' + closemsg + '</p>';
         }
         msgdiv.innerHTML = "<?php echo $openmsg; ?>";
       </script>
 
     <?php
-    }
+    } // $old
     if ($fp !== false) {
-      @ob_flush();
-      @flush();
+      ob_flush();
+      flush();
 
       $savestate['livingstr'] = $savestate['norecalc'] ? "" : ", living";
       if (!$tngimpcfg['maxlivingage']) {
@@ -354,7 +293,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       }
       //get custom event types
       $query = "SELECT eventtypeID, tag, description, keep, type, display FROM $eventtypes_table";
-      $result = @tng_query($query);
+      $result = tng_query($query);
       $custeventlist = array();
       while ($row = tng_fetch_assoc($result)) {
         $eventtype = strtoupper($row['type'] . "_" . $row['tag'] . "_" . $row['description']);
@@ -412,14 +351,14 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
         } else {
           $lineinfo = getLine();
         }
-        @ob_flush();
-        @flush();
+        ob_flush();
+        flush();
       }
       fclose($fp);
 
       if ($saveimport) {
         $sql = "DELETE from $saveimport_table WHERE gedcom = \"$tree\"";
-        $result = @tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+        $result = tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
       $log = uiTextSnippet('gedimport') . ": " . basename(uiTextSnippet('filename')); 
       $log .= ":{$savestate['filename']}" . ($tree ? ", " . uiTextSnippet('tree') . ": $tree;" : "");
@@ -455,7 +394,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
           parent.done = true;
         </script>
       <?php
-      }
+      } // $old
     }
     if ($old) {
       echo "<p><a href=\"dataSecondaryProcessesFormAction.php?secaction=" . uiTextSnippet('tracklines') . "&tree=$tree\">" . uiTextSnippet('tracklines') . "</a></p>";

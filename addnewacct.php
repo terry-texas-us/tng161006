@@ -119,7 +119,7 @@ echo $publicHeaderSection->build();
 echo "<p class=\"header\">" . uiTextSnippet('regnewacct') . "</span></p><br>\n";
 echo "<span>\n";
 if ($success) {
-  echo "<p>" . uiTextSnippet('success') . "</p>";
+  echo "<p>" . uiTextSnippet('successfulregistration') . "</p>";
   if ($emailaddr) {
     $emailtouse = $tngconfig['fromadmin'] == 1 ? $emailaddr : $email;
     $message = "{$deftext['name']}: $realname\n{$deftext['username']}: $username\n\n{$deftext['emailmsg']} $moreinfo\n\n" . uiTextSnippet('administration') . ": $tngdomain/admin.php";

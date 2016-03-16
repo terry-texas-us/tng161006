@@ -75,10 +75,10 @@ function checkFile(form) {
             popup += '</p><br><br>';
             popup += '<progress class="progress progress-info" id="gedcom-progress" value="0" max="500"></progress>\n';
             popup += '</div>\n';
-            popup += '<br><div id="implinks"><a href="#" onclick="return suspendimport();">' + textSnippet('stop') + '</a>';
+            popup += '<br><div id="implinks"><a class="btn btn-secondary-outline" href="#" onclick="return suspendimport();">' + textSnippet('stop') + '</a>';
             if (saveimport === "1") {
                 treeval = treeselect.options[treeselect.selectedIndex].value;
-                popup += ' |  <a href="dataImportGedcomFormAction.php?tree=' + treeval + '&resuming=1" id="resumelink" target="results" onclick="resumeimport();">' + textSnippet('resume') + '</a>';
+                popup += ' <a class="btn btn-primary-outline" href="dataImportGedcomFormAction.php?tree=' + treeval + '&resuming=1" id="resumelink" target="results" onclick="resumeimport();">' + textSnippet('resume') + '</a>';
             }
             popup += '</div>\n<div id="errormsg"></div>';
             popup += '</div>';
@@ -123,17 +123,6 @@ function checkIfDone() {
             lastptr = $('bar').style.width;
             timecheck = setTimeout(checkIfDone);
         }
-    }
-}
-
-function showCloseMenu() {
-    'use strict';
-    var closemsg = '<a href="#" onclick="tnglitbox.remove();return false;"><img src="img/tng_close.gif" style="margin-right:5px">' + textSnippet('closewindow') + '</a>';
-    if (parent.started) {
-        var removeMessage = '<p>' + closemsg + ' | <a href="dataSecondaryProcesses.php">' + textSnippet('moreoptions') + '</a></p>';
-        parent.document.getElementById('implinks').innerHTML = removeMessage;
-    } else {
-        parent.document.getElementById('implinks').innerHTML = '<p>' + closemsg + '</p>';
     }
 }
 
@@ -184,28 +173,15 @@ function updateCount() {
     if (!parent.done) {
         timeoutID = setTimeout(updateCount, 250);
     } else if (!parent.suspended) {
-        msgdiv.innerHTML = textSnippet('finishedimporting') + ' &nbsp;<img src="img/tng_check.gif">';
-        showCloseMenu();
+        msgdiv.innerHTML = textSnippet('finishedimporting');
+        var closemsg = '<a class="btn btn-primary-outline" href="#" onclick="tnglitbox.remove(); return false;">' + textSnippet('okay') + '</a>';
+        parent.document.getElementById('implinks').innerHTML = '<p>' + closemsg + '</p>';
     }
 }
 
-//function removeFile(filename) {
-//    'use strict';
-//    var params = {filename: filename};
-//    $.ajax({
-//        url: 'admin_deletefile.php',
-//        data: params,
-//        dataType: 'html',
-//        success: function (req) {
-//            $('#toremove').html(req);
-//        }
-//    });
-//    return false;
-//}
-
 function alphaNumericCheck(string) {
     'use strict';
-    var regex = /^[0-9A-Za-z_-]+$/;
+    var regex = /^[0-9A-Za-z_\-]+$/;
     return regex.test(string);
 }
 

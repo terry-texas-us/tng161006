@@ -187,7 +187,6 @@ if (!$allow_ged && $assignedtree) {
 <script>
   var helpLang = '<?php echo findhelp('tree_help.php'); ?>';
 
-  var gedFileName;
   var saveimport = "<?php echo $saveimport; ?>";
   
   var branches = [];

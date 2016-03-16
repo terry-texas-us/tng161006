@@ -561,7 +561,14 @@ function getLatLong($value, $negdir) {
 }
 
 function incrCounter($prefix) {
-  global $savestate, $saveimport, $saveimport_table, $tree, $fp, $allcount, $fstat, $old;
+  global $savestate;
+  global $saveimport;
+  global $saveimport_table; 
+  global $tree;
+  global $fp;
+  global $allcount;
+  global $fstat;
+  global $old;
 
   $allcount++;
   switch ($prefix) {
@@ -624,7 +631,7 @@ function incrCounter($prefix) {
       @ob_flush();
       @flush();
     }
-  }
+  } // $old
   if ($saveimport) {
     $query = "UPDATE $saveimport_table SET icount = {$savestate['icount']}, fcount = {$savestate['fcount']}, scount = {$savestate['scount']}, mcount = {$savestate['mcount']}, ncount = {$savestate['ncount']}, mcount = {$savestate['mcount']}, pcount = {$savestate['pcount']}, offset = $offset WHERE gedcom = \"$tree\"";
     $result = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");

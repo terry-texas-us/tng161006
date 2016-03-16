@@ -20,7 +20,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
   $navList = new navList('');
   $navList->appendItem([true, "dataImportGedcom.php", uiTextSnippet('import'), "import"]);
   $navList->appendItem([true, "dataExportGedcom.php", uiTextSnippet('export'), "export"]);
-  $navList->appendItem([true, "dataSecondaryProcesses.php", uiTextSnippet('secondarymaint'), "second"]);
+//  $navList->appendItem([true, "dataSecondaryProcesses.php", uiTextSnippet('secondarymaint'), "second"]);
   echo $navList->build("second");
   ?>
   <div>
@@ -57,7 +57,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
           tng_free_result($fresult);
         }
         tng_free_result($result);
-        echo "<br><br>" . uiTextSnippet('finishedsort') . "<br>";
+        echo "<br><br>" . uiTextSnippet('finishedsortingchildren') . "<br>";
       } elseif ($secaction == uiTextSnippet('sortspouses')) {
 
         echo "<p>" . uiTextSnippet('sortingspouses') . "</p>";
@@ -109,7 +109,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
           tng_free_result($fresult);
         }
         tng_free_result($result);
-        echo "<br><br>" . uiTextSnippet('finishedsort') . "<br>";
+        echo "<br><br>" . uiTextSnippet('finishedsortingspouses') . "<br>";
       } elseif ($secaction == uiTextSnippet('creategendex')) {
 
         //create gendex file
