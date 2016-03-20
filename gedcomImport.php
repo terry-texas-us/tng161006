@@ -1,19 +1,10 @@
 <?php
 
-//set trim_it to a non-zero value to use this feature
-$trim_it = 0;
-//for individuals:
-$trimsize['I'] = 0;
-//for families:
-$trimsize['F'] = 0;
-//for sources:
-$trimsize['S'] = 0;
-
 function getLine() {
   global $fp, $lineending, $saveimport, $savestate;
 
   $lineinfo = array();
-  if ($line = ltrim(@fgets($fp, 1024))) {
+  if ($line = ltrim(fgets($fp, 1024))) {
     if ($saveimport) {
       $savestate['len'] = strlen($line);
     }
@@ -26,13 +17,12 @@ function getLine() {
     $lineinfo['level'] = trim($matches[1]);
     $lineinfo['tag'] = trim($matches[2]);
     $lineinfo['rest'] = trim($matches[3], $lineending);
-    //echo "$line: -$lineinfo['level']- -$lineinfo['tag']- -$lineinfo['rest']-<br>\n";
   } else {
     $lineinfo['level'] = "";
     $lineinfo['tag'] = "";
     $lineinfo['rest'] = "";
   }
-  if (!$lineinfo['tag'] && !@feof($fp)) {
+  if (!$lineinfo['tag'] && !feof($fp)) {
     $lineinfo = getLine();
   }
 
@@ -40,16 +30,14 @@ function getLine() {
 }
 
 function adjustID($ID, $offset) {
-  global $trim_it, $trimsize;
-
-  if ($offset || $trim_it) {
+  if ($offset) {
     //find first numeric in ID
     preg_match("/^(\D*)(\d*)(\D*)/", $ID, $matches);
     $prefix = $matches[1];
     $numericpart = $matches[2];
     $postfix = $matches[3];
     //add offset, make right length + add prefix
-    $thistrim = $trimsize[$prefix] ? $trimsize[$prefix] : strlen($numericpart);
+    $thistrim = strlen($numericpart);
     $newID = $prefix . str_pad($numericpart + $offset, $thistrim, "0", STR_PAD_LEFT) . $postfix;
   } else {
     $newID = $ID;

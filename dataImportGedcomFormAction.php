@@ -1,11 +1,10 @@
 <?php
-@ini_set("magic_quotes_runtime", "0");
-@ini_set("auto_detect_line_endings", "1");
-@ini_set('memory_limit', '200M');
-$umfs = substr(ini_get("upload_max_filesize"), 0, -1);
+ini_set("auto_detect_line_endings", "1");
+ini_set('memory_limit', '200M');
+$umfs = substr(ini_get('upload_max_filesize'), 0, -1);
 if ($umfs < 15) {
-  @ini_set("upload_max_filesize", "15M");
-  @ini_set("post_max_filesize", "15M");
+  ini_set('upload_max_filesize', '15M');
+  ini_set('post_max_size', '15M');
 }
 include("begin.php");
 include("adminlib.php");
@@ -21,11 +20,11 @@ if (!$allow_add || !$allow_edit || $assignedbranch) {
 }
 include($subroot . "importconfig.php");
 require("datelib.php");
+require 'gedcomImport.php';
 require 'gedcomImportTrees.php';
 require 'gedcomImportFamilies.php';
 require 'gedcomImportSources.php';
 require 'gedcomImportPeople.php';
-require 'gedcomImportMisc.php';
 require("adminlog.php");
 $today = date("Y-m-d H:i:s");
 
@@ -113,7 +112,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       if (@move_uploaded_file($remotefile, $gedfilename)) {
         chmod($gedfilename, 0644);
 
-        $fp = @fopen($gedfilename, "r");
+        $fp = fopen($gedfilename, "r");
 
         if ($fp === false) {
           $openmsg = uiTextSnippet('cannotopen') . " $basefilename. " . uiTextSnippet('umps');
@@ -132,7 +131,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
     } elseif ($database) {
       $gedfilename = $gedpath == "admin" || $gedpath == "" ? $database : "$rootpath$gedpath/$database";
       $savegedfilename = $database;
-      $fp = @fopen($gedfilename, "r");
+      $fp = fopen($gedfilename, "r");
       if ($fp === false) {
         $openmsg = uiTextSnippet('cannotopen') . " $database";
       } else {
