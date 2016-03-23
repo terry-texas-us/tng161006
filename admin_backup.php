@@ -28,7 +28,7 @@ function backup($table) {
   if (file_exists($filename)) {
     unlink($filename);
   }
-  $fp = @fopen($filename, "w");
+  $fp = fopen($filename, "w");
   if ($fp) {
     flock($fp, LOCK_EX);
     $nextone = $largechunk * -1;
@@ -65,7 +65,7 @@ function backup($table) {
 
     flock($fp, LOCK_UN);
     fclose($fp);
-    @chmod($filename, 0664);
+    chmod($filename, 0664);
     return "";
   } else {
     return uiTextSnippet('cannotopen') . " $filename.";
@@ -102,7 +102,7 @@ function getfilesize($filename) {
   return $filesize;
 }
 
-@set_time_limit(0);
+set_time_limit(0);
 $largechunk = 10000;
 $tablelist = array($address_table, $albums_table, $albumlinks_table, $album2entities_table, $assoc_table, $branches_table, $branchlinks_table, $cemeteries_table, $people_table, $families_table, $children_table,
         $languages_table, $places_table, $states_table, $countries_table, $sources_table, $repositories_table, $citations_table, $reports_table,
@@ -115,7 +115,7 @@ if ($table == "struct") {
   if (file_exists($filename)) {
     unlink($filename);
   }
-  $fp = @fopen($filename, "w");
+  $fp = fopen($filename, "w");
   if (!$fp) {
     die(uiTextSnippet('cannotopen') . " $filename");
   }
@@ -131,7 +131,7 @@ if ($table == "struct") {
 
   flock($fp, LOCK_UN);
   fclose($fp);
-  @chmod($filename, 0664);
+  chmod($filename, 0664);
 
   $message = uiTextSnippet('tablestruct') . ' ' . uiTextSnippet('succbackedup') . '.';
   adminwritelog(uiTextSnippet('backup') . ": " . uiTextSnippet('tablestruct'));

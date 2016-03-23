@@ -2,9 +2,9 @@
 ini_set("auto_detect_line_endings", "1");
 ini_set('memory_limit', '200M');
 $umfs = substr(ini_get('upload_max_filesize'), 0, -1);
-if ($umfs < 15) {
-  ini_set('upload_max_filesize', '15M');
-  ini_set('post_max_size', '15M');
+if ($umfs < 12) {
+  ini_set('upload_max_filesize', '12M');
+  ini_set('post_max_size', '12M');
 }
 include("begin.php");
 include("adminlib.php");

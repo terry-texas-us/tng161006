@@ -24,7 +24,7 @@ $collid = cleanID($collid);
 $newcollid = 0;
 if (!in_array($collid, $stdcolls)) {
   $query = "INSERT IGNORE INTO $mediatypes_table (mediatypeID,display,path,liketype,icon,thumb,exportas,ordernum) VALUES (\"$collid\",\"$display\",\"$path\",\"$liketype\",\"$icon\",\"$thumb\",\"$exportas\",\"$ordernum\")";
-  $result = @tng_query($query);
+  $result = tng_query($query);
 
   if (tng_affected_rows() > 0) {
     adminwritelog(uiTextSnippet('addnewcoll') . ": $display_org");

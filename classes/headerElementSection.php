@@ -1,10 +1,5 @@
 <?php
 
-/**
- * headerElementSection
- *
- * @author ts
- */
 class headerElementSection {
 
   protected $out;

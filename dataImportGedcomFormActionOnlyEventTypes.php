@@ -1,10 +1,11 @@
 <?php
 ini_set("auto_detect_line_endings", "1");
 $umfs = substr(ini_get('upload_max_filesize'), 0, -1);
-if ($umfs < 10) {
-  ini_set('upload_max_filesize', '10M');
+if ($umfs < 12) {
+  ini_set('upload_max_filesize', '12M');
+  ini_set('post_max_size', '12M');
+  
 }
-
 include("begin.php");
 include("adminlib.php");
 

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * Description of navList
- *
- * @author ts
- */
 class navList {
 
   private $id = '';

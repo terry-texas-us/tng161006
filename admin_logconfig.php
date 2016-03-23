@@ -15,7 +15,7 @@ if ($link) {
   }
 
   $query = "SELECT gedcom, treename FROM $trees_table ORDER BY treename";
-  $result = @tng_query($query);
+  $result = tng_query($query);
 } else {
   $result = false;
 }

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * footerElementSection
- *
- * @author ts
- */
 class footerElementSection {
 
     private $out;

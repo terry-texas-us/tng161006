@@ -56,7 +56,7 @@ $eventdatetr = convertDate($eventdate);
 if (trim($eventplace)) {
   $placetree = $tngconfig['places1tree'] ? "" : $tree;
   $query = "INSERT IGNORE INTO $places_table (gedcom,place,placelevel,zoom) VALUES (\"$placetree\",\"$eventplace\",\"0\",\"0\")";
-  $result = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+  $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   if ($tngconfig['autogeo'] && tng_affected_rows()) {
     $ID = tng_insert_id();
     $message = geocode($eventplace, 0, $ID);

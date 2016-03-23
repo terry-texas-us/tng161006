@@ -1,12 +1,6 @@
 <?php
 
-/**
- * Description of headElementSection
- *
- * @author ts
- */
-
-require_once './classes/scriptsManager.php';
+require_once 'scriptsManager.php';
 
 class headElementSection {
 

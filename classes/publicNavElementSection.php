@@ -1,11 +1,6 @@
 <?php
 
-/**
- * publicNavElementSection
- *
- * @author tsmit
- */
-require_once './classes/navElementSection.class.php';
+require_once 'classes/navElementSection.class.php';
 
 class publicNavElementSection extends navElementSection {
   

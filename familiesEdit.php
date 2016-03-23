@@ -507,7 +507,7 @@ var tnglitbox;
       sequence: childrenlist.join(','),
       action: 'childorder',
       familyID: document.form1.familyID.value,
-      tree: document.form1.tree.value,
+      tree: document.form1.tree.value
     };
     $.ajax({
       url: 'ajx_updateorder.php',

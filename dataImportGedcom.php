@@ -190,7 +190,7 @@ if (!$allow_ged && $assignedtree) {
   var saveimport = "<?php echo $saveimport; ?>";
   
   var branches = [];
-  var branchcounts = new Array();
+  var branchcounts = [];
 
   <?php
   $treectr = 0;

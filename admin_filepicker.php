@@ -195,7 +195,7 @@ function lCountFiles() {
   $nFileCount = 0;
   $savedir = getcwd();
   chdir("$rootpath$tngpath/" . stripslashes($subdir));
-  if ($handle = @opendir('.')) {
+  if ($handle = opendir('.')) {
     while ($file = readdir($handle)) {
       if (!$searchstring || strpos($file, $searchstring) === 0) {
         $filename = $file;

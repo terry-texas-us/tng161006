@@ -63,7 +63,7 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
             $sections = array();
             $entries = array();
             $folders = array();
-            if ($handle = @opendir('.')) {
+            if ($handle = opendir('.')) {
               while ($filename = readdir($handle)) {
                 if (is_dir($filename) && $filename != "." && $filename != "..") {
                   $i = substr($filename, 0, 8) == "template" && is_numeric(substr($filename, 8)) ? substr($filename, 8) : $filename;

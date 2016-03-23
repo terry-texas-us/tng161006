@@ -1,10 +1,5 @@
 <?php
 
-/**
- * navElementSection
- *
- * @author ts
- */
 class navElementSection {
     
     protected $out = '';

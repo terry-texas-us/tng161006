@@ -1,10 +1,5 @@
 <?php
 
-/**
- * chooseLanguage
- *
- * @author ts
- */
 class chooseLanguage {
 
   private $out;

@@ -12,7 +12,7 @@ if ($link) {
   }
 }
 
-if (@mkdir($folder, 0777)) {
+if (mkdir($folder, 0777)) {
   echo uiTextSnippet('success');
 } elseif (file_exists($folder)) {
   echo uiTextSnippet('fexists');

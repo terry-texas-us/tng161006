@@ -1,11 +1,6 @@
 <?php
 
-/**
- * adminNavElementSection
- *
- * @author tsmit
- */
-require_once './classes/navElementSection.class.php';
+require_once 'navElementSection.class.php';
 
 class adminNavElementSection extends navElementSection {
 

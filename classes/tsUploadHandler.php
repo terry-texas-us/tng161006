@@ -1,11 +1,6 @@
 <?php
 
-/**
- * Description of ts-uploadHandler
- *
- * @author ts
- */
-require_once './classes/UploadHandler.php';
+require_once 'UploadHandler.php';
 
 class tsUploadHandler extends UploadHandler {
 

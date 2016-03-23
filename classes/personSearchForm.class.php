@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Search Form - First Name and Last Name
- * @author ts
- */
 class personSearchForm {
 
   private $out = '';

@@ -1,12 +1,6 @@
 <?php
 
-/**
- * publicHeaderElementSection
- *
- * @author ts
- */
-
-require_once './classes/headerElementSection.php';
+require_once 'headerElementSection.php';
 
 class publicHeaderElementSection extends headerElementSection {
 

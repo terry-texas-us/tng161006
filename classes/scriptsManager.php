@@ -1,10 +1,5 @@
 <?php
 
-/**
- * scriptsManager
- *
- * @author ts
- */
 class scriptsManager {
     private $data = []; // [ts] overloaded data
 
