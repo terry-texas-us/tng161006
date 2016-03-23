@@ -170,7 +170,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
                 $display = uiTextSnippet($tag) ? uiTextSnippet($tag) : $tag;
               }
               $query = "INSERT IGNORE INTO $eventtypes_table (tag, description, display, keep, type)  VALUES(\"$tag\", \"$type\", \"$display\", \"0\", \"$prefix\")";
-              $result = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+              $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
               $eventctr++;
               echo "<strong>$eventctr</strong> ";
@@ -207,7 +207,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
         $lineinfo = getLine();
       }
     }
-    @fclose($fp);
+    fclose($fp);
     ?>
     <span>
       <br><br>

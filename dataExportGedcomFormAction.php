@@ -320,7 +320,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
       if ($savestate['ncount'] % 10 == 0) {
         if ($saveimport) {
           $query = "UPDATE $saveimport_table SET ncount=\"{$savestate['ncount']}\" WHERE gedcom = \"$tree\"";
-          $saveresult = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+          $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         }
         echo "<strong>N{$savestate['ncount']}</strong> ";
       }
@@ -393,7 +393,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
       if ($saveimport) {
         $savestate['offset'] = ftell($fp);
         $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$xnotetxt['noteID']}\" WHERE gedcom = \"$tree\"";
-        $saveresult = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+        $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
 
       return $xnotestr;
@@ -1146,7 +1146,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
       if ($saveimport) {
         $savestate['offset'] = ftell($fp);
         $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$source['sourceID']}\", scount=\"{$savestate['scount']}\" WHERE gedcom = \"$tree\"";
-        $saveresult = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+        $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
       if ($savestate['scount'] % 10 == 0) {
         echo "<strong>S{$savestate['scount']}</strong> ";
@@ -1227,7 +1227,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
       if ($saveimport) {
         $savestate['offset'] = ftell($fp);
         $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$repo['repoID']}\", rcount=\"{$savestate['rcount']}\" WHERE gedcom = \"$tree\"";
-        $saveresult = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+        $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
       if ($savestate['rcount'] % 10 == 0) {
         echo "<strong>R{$savestate['rcount']}</strong> ";
@@ -1259,7 +1259,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
       if ($branch) {
         foreach ($placelist as $place) {
           $query = "SELECT place, notes, latitude, longitude, placelevel, zoom FROM $places_table WHERE place = \"" . addslashes($place) . "\" $treestr";
-          $result = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+          $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
           $row = tng_fetch_assoc($result);
           if ($row['latitude'] || $row['longitude'] || $row['notes']) {
             $places[] = $row;
@@ -1268,7 +1268,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
         }
       } else {
         $query = "SELECT place, notes, latitude, longitude, placelevel, zoom FROM $places_table WHERE (latitude != \"\" OR longitude != \"\" OR notes != \"\") $treestr";
-        $result = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+        $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         while ($row = tng_fetch_assoc($result)) {
           $places[] = $row;
         }
@@ -1277,7 +1277,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
         $query = "SELECT $medialinks_table.personID as place, $places_table.notes as notes, latitude, longitude
           FROM ($places_table, $medialinks_table)
           WHERE linktype = \"L\" $treestr AND $places_table.place = $medialinks_table.personID $jtreestr";
-        $result = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+        $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         while ($row = tng_fetch_assoc($result)) {
           if (!in_array($place, $places)) {
             $places[] = $row;
@@ -1310,7 +1310,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
         if ($saveimport) {
           $savestate['offset'] = ftell($fp);
           $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$place['place']}\", pcount=\"{$savestate['pcount']}\" WHERE gedcom = \"$tree\"";
-          $saveresult = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+          $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         }
         if ($savestate['pcount'] % 10 == 0) {
           echo "<strong>P{$savestate['pcount']}</strong> ";
@@ -1327,7 +1327,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
       echo "<p>" . uiTextSnippet('ifexportfails') . " <a href=\"dataExportGedcomFormAction.php?tree=$tree&amp;resume=1\">" . uiTextSnippet('clickresume') . "</a>.</p>$lineending";
     }
 
-    @set_time_limit(0);
+    set_time_limit(0);
     $xnotes = array();
 
     $largechunk = 1000;
@@ -1338,7 +1338,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
     if ($saveimport) {
       if ($resume) {
         $checksql = "SELECT filename, offset, lasttype, lastid, icount, fcount, scount, ncount, rcount, mcount, pcount from $saveimport_table WHERE gedcom = \"$tree\"";
-        $result = @tng_query($checksql) or die(uiTextSnippet('cannotexecutequery') . ": $checksql");
+        $result = tng_query($checksql) or die(uiTextSnippet('cannotexecutequery') . ": $checksql");
         $found = tng_num_rows($result);
         if ($found) {
           $row = tng_fetch_assoc($result);
@@ -1396,17 +1396,17 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
         $result = tng_query($query);
 
         $sql = "INSERT INTO $saveimport_table (filename, offset, gedcom, media)  VALUES(\"$filename\", 0, \"$tree\", \"$exportmedia\")";
-        $result = @tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $sql");
+        $result = tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $sql");
       }
     }
     if ($found) {
-      $fp = @fopen($filename, "r+");
+      $fp = fopen($filename, "r+");
       fseek($fp, $savestate['offset']);
     } else {
       if (file_exists($filename)) {
         unlink($filename);
       }
-      $fp = @fopen($filename, "w");
+      $fp = fopen($filename, "w");
       $savestate['lasttype'] = 1;
       $savestate['icount'] = 0;
       $savestate['fcount'] = 0;
@@ -1487,7 +1487,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
               if ($saveimport) {
                 $savestate['offset'] = ftell($fp);
                 $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$ind['personID']}\", icount=\"{$savestate['icount']}\" WHERE gedcom = \"$tree\"";
-                $saveresult = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+                $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
               }
             }
           }
@@ -1526,7 +1526,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
               if ($saveimport) {
                 $savestate['offset'] = ftell($fp);
                 $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$fam['familyID']}\", fcount=\"{$savestate['fcount']}\" WHERE gedcom = \"$tree\"";
-                $saveresult = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+                $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
               }
             }
           }
@@ -1560,11 +1560,11 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
 
     flock($fp, LOCK_UN);
     fclose($fp);
-    @chmod($filename, 0644);
+    chmod($filename, 0644);
 
     if ($saveimport) {
       $sql = "DELETE from $saveimport_table WHERE gedcom = \"$tree\"";
-      $result = @tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+      $result = tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     }
     ?>
     <p>

@@ -7,7 +7,7 @@ if ($requirelogin && !$_SESSION['currentuser']) {
 
 $langstr = isset($_GET['lang']) ? "&amp;lang=$languages_path" . $_GET['lang'] : "";
 
-@ini_set("session.bug_compat_warn", "0");
+ini_set("session.bug_compat_warn", "0");
 
 include("version.php");
 

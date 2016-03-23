@@ -16,7 +16,7 @@ function adminwritelog($string) {
   $updated = date("D d M Y h:i:s A", time() + (3600 * $time_offset));
   array_unshift($lines, "$updated $string.\n");
 
-  $fp = @fopen($adminlogfile, "w");
+  $fp = fopen($adminlogfile, "w");
   if (!$fp) {
     die(uiTextSnippet('cannotopen') . " $adminlogfile");
   }

@@ -503,7 +503,7 @@ if ($rrow['sqlselect']) {
 }
 //echo $query . " LIMIT $newoffset" . $maxsearchresults;
 $limitstr = $csv ? "" : " LIMIT $newoffset" . $maxsearchresults;
-$result = @tng_query($query . $limitstr);
+$result = tng_query($query . $limitstr);
 
 $treelogstr = $tree ? " (" . uiTextSnippet('tree') . ": $tree)" : "";
 if ($rrow['active'] && !$csv) {

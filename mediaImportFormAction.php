@@ -32,8 +32,8 @@ function importFrom($tngpath, $orgpath, $needsubdirs) {
   } else {
     $path = $tngpath;
   }
-  @chdir("$rootpath$path") or die("Unable to open $rootpath$path. Please check your Root Path (General Settings).");
-  if ($handle = @opendir('.')) {
+  chdir("$rootpath$path") or die("Unable to open $rootpath$path. Please check your Root Path (General Settings).");
+  if ($handle = opendir('.')) {
     while ($filename = readdir($handle)) {
       if (is_file($filename)) {
         if (($thumbprefix && strpos($filename, $thumbprefix) !== 0) || ($thumbsuffix && substr($filename, -strlen($thumbsuffix)) != $thumbsuffix)) {
@@ -97,7 +97,7 @@ $headSection->setTitle(uiTextSnippet('mediaimport'));
           }
           if ($totalImported) {
             $query = "UPDATE $mediatypes_table SET disabled=\"0\" where mediatypeID=\"$mediatypeID\"";
-            $result = @tng_query($query);
+            $result = tng_query($query);
           }
           ?>
         </td>

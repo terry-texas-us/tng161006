@@ -31,7 +31,7 @@ function tng_affected_rows() {
 }
 
 function tng_connect($dbhost, $dbusername, $dbpassword) {
-  return @mysqli_connect($dbhost, $dbusername, $dbpassword);
+  return mysqli_connect($dbhost, $dbusername, $dbpassword);
 }
 
 function tng_data_seek($result, $offset) {
@@ -114,7 +114,7 @@ function tng_query($query) {
 function tng_query_noerror($query) {
   global $link;
 
-  $result = @mysqli_query($link, $query);
+  $result = mysqli_query($link, $query);
   return $result;
 }
 

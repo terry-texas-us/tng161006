@@ -37,8 +37,8 @@ $headSection->setTitle(uiTextSnippet('addnewlanguage'));
                   <select name="folder">
                     <option value=''></option>
                     <?php
-                    @chdir($rootpath . $endrootpath . $languages_path);
-                    if ($handle = @opendir('.')) {
+                    chdir($rootpath . $endrootpath . $languages_path);
+                    if ($handle = opendir('.')) {
                       $dirs = array();
                       while ($filename = readdir($handle)) {
                         if (is_dir($filename) && $filename != '..' && $filename != '.') {

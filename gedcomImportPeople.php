@@ -240,7 +240,7 @@ function getIndividualRecord($personID, $prevlevel) {
           $lineinfo = getLine();
           $relationship = $lineinfo['tag'] == "PEDI" ? $lineinfo['rest'] : "";
           $query = "INSERT IGNORE INTO $children_table (gedcom, familyID, personID, mrel, frel, parentorder) VALUES( \"$tree\", \"$famc\", \"$personID\", \"$relationship\", \"$relationship\", \"$parentorder\" )";
-          $result = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+          $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
           $success = tng_affected_rows();
           if ($success) {
             $parentorder++;
@@ -248,7 +248,7 @@ function getIndividualRecord($personID, $prevlevel) {
           if ($relationship) {
             if (!$success) {
               $query = "UPDATE $children_table SET mrel = \"$relationship\", frel = \"$relationship\" WHERE gedcom = \"$tree\" AND familyID = \"$famc\" AND personID = \"$personID\"";
-              $result = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+              $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
             }
             $lineinfo = getLine();
           }
@@ -257,15 +257,15 @@ function getIndividualRecord($personID, $prevlevel) {
               $info['SLGC']['DATETR'] = "0000-00-00";
             }
             $query = "INSERT IGNORE INTO $children_table (gedcom, familyID, personID, sealdate, sealdatetr, sealplace ) VALUES( \"$tree\", \"" . $famc . "\", \"$personID\", \"" . $info['SLGC']['DATE'] . "\", \"" . $info['SLGC']['DATETR'] . "\", \"$slgcplace\" )";
-            $result = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+            $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
             $success = tng_affected_rows();
             if (!$success && ($info['SLGC']['DATE'] || $slgplace || $info['SLGC']['SOUR'])) {
               $query = "UPDATE $children_table SET sealdate=\"" . $info['SLGC']['DATE'] . "\", sealdatetr=\"" . $info['SLGC']['DATETR'] . "\", sealplace=\"$slgcplace\" WHERE personID = \"$personID\" AND familyID = \"" . $famc . "\" AND gedcom = \"$tree\"";
-              $result = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+              $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
             }
             if (isset($info['SLGC']['SOUR'])) {
               $query = "DELETE from $citations_table WHERE persfamID = \"$personID" . "::" . $info['SLGC']['FAMC'] . "\" AND gedcom = \"$tree\"";
-              $result = @tng_query($query);
+              $result = tng_query($query);
               processCitations($personID . "::" . $famc, "SLGC", $info['SLGC']['SOUR']);
             }
           }
@@ -302,18 +302,18 @@ function getIndividualRecord($personID, $prevlevel) {
                 $info['SLGC']['DATETR'] = "0000-00-00";
               }
               $query = "INSERT IGNORE INTO $children_table (gedcom, familyID, personID, sealdate, sealdatetr, sealplace ) VALUES( \"$tree\", \"" . $info['SLGC']['FAMC'] . "\", \"$personID\", \"" . $info['SLGC']['DATE'] . "\", \"" . $info['SLGC']['DATETR'] . "\", \"$slgcplace\" )";
-              $result = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+              $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
               $success = tng_affected_rows();
             } else {
               $success = 0;
             }
             if (!$success && ($info['SLGC']['DATE'] || $slgplace || $info['SLGC']['SOUR'])) {
               $query = "UPDATE $children_table SET sealdate=\"" . $info['SLGC']['DATE'] . "\", sealdatetr=\"" . $info['SLGC']['DATETR'] . "\", sealplace=\"$slgcplace\" WHERE personID = \"$personID\" AND familyID = \"" . $info['SLGC']['FAMC'] . "\" AND gedcom = \"$tree\"";
-              $result = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+              $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
             }
             if (isset($info['SLGC']['SOUR'])) {
               $query = "DELETE from $citations_table WHERE persfamID = \"$personID" . "::" . $info['SLGC']['FAMC'] . "\" AND gedcom = \"$tree\"";
-              $result = @tng_query($query);
+              $result = tng_query($query);
               processCitations($personID . "::" . $info['SLGC']['FAMC'], "SLGC", $info['SLGC']['SOUR']);
             }
           }
@@ -522,7 +522,7 @@ function getIndividualRecord($personID, $prevlevel) {
     \"{$info['NICK']}\", \"{$info['TITL']}\", \"{$info['NPFX']}\", \"{$info['NSFX']}\", \"" . $info['BAPL']['DATE'] . "\", \"" . $info['BAPL']['DATETR'] . "\", \"$baplplace\",
     \"" . $info['CONL']['DATE'] . "\", \"" . $info['CONL']['DATETR'] . "\", \"$confplace\",\"" . $info['INIT']['DATE'] . "\", \"" . $info['INIT']['DATETR'] . "\", \"$initplace\",
     \"" . $info['ENDL']['DATE'] . "\", \"" . $info['ENDL']['DATETR'] . "\", \"$endlplace\", \"$inschangedt\", \"$prifamily\", \"$meta\", \"$tree\", \"{$savestate['branch']}\", \"$currentuser\", \"\", \"0\" )";
-  $result = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+  $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   $success = tng_affected_rows();
   if (!$success && $savestate['del'] != "no") {
     if ($inschangedt == "0000-00-00 00:00:00") {
@@ -530,7 +530,7 @@ function getIndividualRecord($personID, $prevlevel) {
     }
     if ($savestate['neweronly'] && $inschangedt) {
       $query = "SELECT changedate FROM $people_table WHERE personID=\"$personID\" AND gedcom = \"$tree\"";
-      $result = @tng_query($query);
+      $result = tng_query($query);
       $indrow = tng_fetch_assoc($result);
       $goahead = $inschangedt > $indrow['changedate'] ? 1 : 0;
       if ($result) {
@@ -557,7 +557,7 @@ function getIndividualRecord($personID, $prevlevel) {
         $query .= ", famc=\"$prifamily\"";
       }
       $query .= ", metaphone=\"$meta\" WHERE personID=\"$personID\" AND gedcom = \"$tree\"";
-      $result = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+      $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $success = 1;
 
       if ($savestate['del'] == "match") {
@@ -569,7 +569,7 @@ function getIndividualRecord($personID, $prevlevel) {
   if ($success) {
     if ($savestate['branch']) {
       $query = "INSERT IGNORE INTO $branchlinks_table (branch,gedcom,persfamID) VALUES(\"{$savestate['branch']}\",\"$tree\",\"$personID\")";
-      $result = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+      $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     }
     if ($custeventctr) {
       saveCustEvents($prefix, $personID, $events, $custeventctr);
@@ -616,14 +616,14 @@ function getIndividualRecord($personID, $prevlevel) {
           $uspousestr = "";
           $query = "INSERT IGNORE INTO $families_table (familyID, gedcom, changedby) VALUES(\"$familyID\", \"$tree\", \"$currentuser\" )";
         }
-        $result = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+        $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         $success = tng_affected_rows();
         if (!$success && ($uspousestr || $famlivingstr) && $savestate['del'] != "no") {
           if ($uspousestr && $famlivingstr) {
             $famlivingstr .= ",";
           }
           $query = "UPDATE $families_table SET $famlivingstr $uspousestr, changedby=\"$currentuser\" WHERE familyID=\"$familyID\" AND gedcom = \"$tree\"";
-          $result = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+          $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         }
       }
     }

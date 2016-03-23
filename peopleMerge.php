@@ -311,7 +311,7 @@ if ($personID1) {
   }
 }
 
-@set_time_limit(0);
+set_time_limit(0);
 if (!$mergeaction) {
   $cfirstname = "yes";
   $clastname = "yes";
@@ -443,7 +443,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
           tng_free_result($evresult);
 
           $query = "UPDATE $events_table set persfamID = \"$personID1\" WHERE persfamID = \"$personID2\" AND gedcom = \"$tree\" AND eventID = \"$varname\"";
-          $evresult = @tng_query($query);
+          $evresult = tng_query($query);
         }
         break;
       case "pa":
@@ -454,7 +454,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
         //if not selected, delete child record for person 2
 
         $query = "UPDATE $children_table set personID = \"$personID1\" WHERE personID = \"$personID2\" AND gedcom = \"$tree\" AND familyID = \"$varname\"";
-        $evresult = @tng_query($query);
+        $evresult = tng_query($query);
         if (!$prifamily) {
           $updatestr .= ", famc = \"$varname\" ";
           $prifamily = 1;
@@ -483,18 +483,18 @@ if ($mergeaction == uiTextSnippet('merge')) {
           } else {
             $query = "DELETE FROM $medialinks_table WHERE personID = \"$varname\" AND gedcom = \"$tree\"";
           }
-          $mediaresult = @tng_query($query);
+          $mediaresult = tng_query($query);
 
           //update all people records where FAMC = the deleted family, set FAMC = family on left
           $query = "UPDATE $people_table set famc = \"{$sp1row['familyID']}\" WHERE famc = \"$varname\" AND gedcom = \"$tree\"";
-          $paresult = @tng_query($query);
+          $paresult = tng_query($query);
 
           //move kids from right family to left
           $query = "UPDATE $children_table set familyID = \"{$sp1row['familyID']}\" WHERE familyID = \"$varname\" AND gedcom = \"$tree\"";
-          $chilresult = @tng_query($query);
+          $chilresult = tng_query($query);
           if (!$chilresult) {
             $query = "DELETE FROM $children_table WHERE familyID = \"$varname\" AND gedcom = \"$tree\"";
-            $chilresult = @tng_query($query);
+            $chilresult = tng_query($query);
           }
 
           if ($ccombinenotes && $varname) {
@@ -502,7 +502,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
           }
 
           $query = "UPDATE $events_table set persfamID = \"{$sp1row['familyID']}\" WHERE persfamID = \"$varname\" AND gedcom = \"$tree\"";
-          $evresult = @tng_query($query);
+          $evresult = tng_query($query);
         }
         break;
       case "yy":
@@ -512,7 +512,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
           $varname = substr($key, 8);
 
           $query = "UPDATE $families_table set $p1self = \"\", $p1spouseorder = \"\" WHERE familyID = \"$varname\" AND gedcom = \"$tree\"";
-          $chilresult = @tng_query($query);
+          $chilresult = tng_query($query);
         }
         break;
       case "zz":
@@ -520,7 +520,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
 
         //remove left person from family.
         $query = "UPDATE $families_table set $p1self = \"\", $p1spouseorder = \"\" WHERE familyID = \"$varname\" AND gedcom = \"$tree\"";
-        $chilresult = @tng_query($query);
+        $chilresult = tng_query($query);
         break;
       case "sp":
         $xx = "xx$key";
@@ -536,7 +536,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
             tng_free_result($sp1result);
 
             $query = "UPDATE $families_table set $p1self = \"$personID1\", $p1spouseorder = \"{$sp1row[$p1spouseorder]}\" WHERE familyID = \"$varname\" AND gedcom = \"$tree\"";
-            $chilresult = @tng_query($query);
+            $chilresult = tng_query($query);
 
             //delete family on LEFT
             $query = "DELETE from $families_table WHERE familyID = \"{$sp1row['familyID']}\" AND gedcom = \"$tree\"";
@@ -549,18 +549,18 @@ if ($mergeaction == uiTextSnippet('merge')) {
             } else {
               $query = "DELETE FROM $medialinks_table WHERE personID = \"{$sp1row['familyID']}\" AND gedcom = \"$tree\"";
             }
-            $mediaresult = @tng_query($query);
+            $mediaresult = tng_query($query);
 
             //update all people records where FAMC = the deleted family, set FAMC = family on right
             $query = "UPDATE $people_table set famc = \"$varname\" WHERE famc = \"{$sp1row['familyID']}\" AND gedcom = \"$tree\"";
-            $paresult = @tng_query($query);
+            $paresult = tng_query($query);
 
             //move all children from family1 to family2
             $query = "UPDATE $children_table set familyID = \"$varname\" WHERE familyID = \"{$sp1row['familyID']}\" AND gedcom = \"$tree\"";
-            $chilresult = @tng_query($query);
+            $chilresult = tng_query($query);
             if (!$chilresult) {
               $query = "DELETE FROM $children_table WHERE familyID = \"{$sp1row['familyID']}\" AND gedcom = \"$tree\"";
-              $chilresult = @tng_query($query);
+              $chilresult = tng_query($query);
             }
 
             if ($ccombinenotes && $sp1row['familyID']) {
@@ -568,7 +568,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
             }
 
             $query = "UPDATE $events_table set persfamID = \"{$sp1row['familyID']}\" WHERE persfamID = \"$varname\" AND gedcom = \"$tree\"";
-            $evresult = @tng_query($query);
+            $evresult = tng_query($query);
           } else {
             //this means spouses are different, the box has been checked, so they want to keep the right spouse + family
             $varname = substr($key, 6);
@@ -588,7 +588,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
 
             //update those families to have left person married to right spouse, change spouse order
             $query = "UPDATE $families_table set $p1self = \"$personID1\", $p1spouseorder = \"$sporder\" WHERE familyID = \"$varname\" AND gedcom = \"$tree\"";
-            $chilresult = @tng_query($query);
+            $chilresult = tng_query($query);
           }
         }
         break;
@@ -649,7 +649,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
   $defaultphoto2 = $tree ? "$rootpath$photopath/$tree.$personID2.$photosext" : "$rootpath$photopath/$personID2.$photosext";
   if ($ccombineextras) {
     $query = "UPDATE $medialinks_table set personID = \"$personID1\", defphoto = \"\" WHERE personID = \"$personID2\" AND gedcom = \"$tree\"";
-    $mediaresult = @tng_query($query);
+    $mediaresult = tng_query($query);
 
     //construct name for default photo 1
     if (file_exists($defaultphoto2)) {

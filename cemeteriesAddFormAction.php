@@ -19,8 +19,8 @@ if ($newfile && $newfile != "none") {
   }
   $newpath = "$rootpath$headstonepath/$maplink";
 
-  if (@move_uploaded_file($newfile, $newpath)) {
-    @chmod($newpath, 0644);
+  if (move_uploaded_file($newfile, $newpath)) {
+    chmod($newpath, 0644);
   } else {
     $message = uiTextSnippet('mapnotcopied') . " $newpath " . uiTextSnippet('improperpermissions') . ".";
     header("Location: cemeteriesBrowse.php?message=" . urlencode($message));

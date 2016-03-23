@@ -134,5 +134,5 @@ $tngconfig['lastimport'] = "";
 $defaulttree = "twall";
 $tng_notinstalled = "";
 
-@include($subroot . "customconfig.php");
+include($subroot . "customconfig.php");
 ?>

@@ -19,7 +19,7 @@ if ($session_charset != "UTF-8") {
 $display = addslashes($display);
 
 $query = "UPDATE $mediatypes_table SET display=\"$display\", path=\"$path\", liketype=\"$liketype\", icon=\"$icon\", thumb=\"$thumb\", exportas=\"$exportas\", ordernum=\"$ordernum\" WHERE mediatypeID=\"$collid\"";
-$result = @tng_query($query);
+$result = tng_query($query);
 
 if (tng_affected_rows()) {
   adminwritelog(uiTextSnippet('editcoll') . ": $display_org");

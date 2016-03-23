@@ -250,7 +250,7 @@ class SMTP
     if ($streamok) {
       $socket_context = stream_context_create($options);
       //Suppress errors; connection failures are handled at a higher level
-      $this->smtp_conn = @stream_socket_client(
+      $this->smtp_conn = stream_socket_client(
               $host . ":" . $port,
               $errno,
               $errstr,
@@ -293,7 +293,7 @@ class SMTP
       $max = ini_get('max_execution_time');
       // Don't bother if unlimited
       if ($max != 0 && $timeout > $max) {
-        @set_time_limit($timeout);
+        set_time_limit($timeout);
       }
       stream_set_timeout($this->smtp_conn, $timeout, 0);
     }
@@ -960,7 +960,7 @@ class SMTP
       $endtime = time() + $this->Timelimit;
     }
     while (is_resource($this->smtp_conn) && !feof($this->smtp_conn)) {
-      $str = @fgets($this->smtp_conn, 515);
+      $str = fgets($this->smtp_conn, 515);
       $this->edebug("SMTP -> get_lines(): \$data was \"$data\"", self::DEBUG_LOWLEVEL);
       $this->edebug("SMTP -> get_lines(): \$str is \"$str\"", self::DEBUG_LOWLEVEL);
       $data .= $str;

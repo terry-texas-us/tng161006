@@ -48,7 +48,7 @@ if ($proceed) {
   }
 
   $query = "UPDATE $users_table SET username=\"$username\",{$pwd_str}realname=\"$realname\",phone=\"$phone\",email=\"$email\",website=\"$website\",address=\"$address\",city=\"$city\",state=\"$state\",zip=\"$zip\",country=\"$country\" WHERE userID=\"$userID\"";
-  $result = @tng_query($query);
+  $result = tng_query($query);
 
   adminwritelog("<a href=\"usersEdit.php?userID=$userID\">" . uiTextSnippet('modifyuser') . ": $userID</a>");
 

@@ -21,7 +21,7 @@ if ($link) {
 }
 require("adminlog.php");
 
-$fp = @fopen($subroot . "templateconfig.php", "w", 1);
+$fp = fopen($subroot . "templateconfig.php", "w", 1);
 if (!$fp) {
   die(uiTextSnippet('cannotopen') . " templateconfig.php");
 }
@@ -40,8 +40,8 @@ foreach ($_FILES as $key => $file) {
     $foldername = is_numeric($form_templatenum) ? "template" . $form_templatenum : $form_templatenum;
     $newpath = $rootpath . "templates/$foldername/" . $_POST['form_' . $newkey];
 
-    if (@move_uploaded_file($newfile, $newpath)) {
-      @chmod($newpath, 0644);
+    if (move_uploaded_file($newfile, $newpath)) {
+      chmod($newpath, 0644);
     }
   }
 }

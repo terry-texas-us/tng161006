@@ -415,7 +415,7 @@ function checkXnote($fact) {
   preg_match("/^@(\S+)@/", $fact, $matches);
   if ($matches[1]) {
     $query = "SELECT note, ID from $xnotes_table WHERE noteID = \"$matches[1]\" AND gedcom=\"$tree\"";
-    $xnoteres = @tng_query($query);
+    $xnoteres = tng_query($query);
     if ($xnoteres) {
       $xnote = tng_fetch_assoc($xnoteres);
       $newfact[0] = trim($xnote['note']);

@@ -17,10 +17,10 @@ switch ($photoinfo[2]) {
     $image = imagecreatefromgif($imagename);
     break;
   case 3:
-    $image = @imagecreatefrompng($imagename);
+    $image = imagecreatefrompng($imagename);
     break;
   default:
-    $image = @imagecreatefromjpeg($imagename);
+    $image = imagecreatefromjpeg($imagename);
     break;
 }
 

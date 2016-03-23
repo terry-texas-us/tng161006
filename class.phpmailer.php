@@ -572,9 +572,9 @@ class PHPMailer
       $subject = $this->encodeHeader($this->secureHeader($subject));
     }
     if (ini_get('safe_mode') || !($this->UseSendmailOptions)) {
-      $result = @mail($to, $subject, $body, $header);
+      $result = mail($to, $subject, $body, $header);
     } else {
-      $result = @mail($to, $subject, $body, $header, $params);
+      $result = mail($to, $subject, $body, $header, $params);
     }
     return $result;
   }
@@ -1098,7 +1098,7 @@ class PHPMailer
     }
     if ($this->SingleTo) {
       foreach ($this->SingleToArray as $toAddr) {
-        if (!@$mail = popen($sendmail, 'w')) {
+        if (!$mail = popen($sendmail, 'w')) {
           throw new phpmailerException($this->lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
         }
         fputs($mail, 'To: ' . $toAddr . "\n");
@@ -1119,7 +1119,7 @@ class PHPMailer
         }
       }
     } else {
-      if (!@$mail = popen($sendmail, 'w')) {
+      if (!$mail = popen($sendmail, 'w')) {
         throw new phpmailerException($this->lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
       }
       fputs($mail, $header);
@@ -1942,7 +1942,7 @@ class PHPMailer
         $signed = tempnam(sys_get_temp_dir(), 'signed');
         //Workaround for PHP bug https://bugs.php.net/bug.php?id=69197
         if (empty($this->sign_extracerts_file)) {
-          $sign = @openssl_pkcs7_sign(
+          $sign = openssl_pkcs7_sign(
                   $file,
                   $signed,
                   'file://' . realpath($this->sign_cert_file),
@@ -1950,7 +1950,7 @@ class PHPMailer
                   null
           );
         } else {
-          $sign = @openssl_pkcs7_sign(
+          $sign = openssl_pkcs7_sign(
                   $file,
                   $signed,
                   'file://' . realpath($this->sign_cert_file),
@@ -1961,16 +1961,16 @@ class PHPMailer
           );
         }
         if ($sign) {
-          @unlink($file);
+          unlink($file);
           $body = file_get_contents($signed);
-          @unlink($signed);
+          unlink($signed);
           //The message returned by openssl contains both headers and body, so need to split them up
           $parts = explode("\n\n", $body, 2);
           $this->MIMEHeader .= $parts[0] . $this->LE . $this->LE;
           $body = $parts[1];
         } else {
-          @unlink($file);
-          @unlink($signed);
+          unlink($file);
+          unlink($signed);
           throw new phpmailerException($this->lang('signing') . openssl_error_string());
         }
       } catch (phpmailerException $exc) {
@@ -2082,7 +2082,7 @@ class PHPMailer
    */
   public function addAttachment($path, $name = '', $encoding = 'base64', $type = '', $disposition = 'attachment') {
     try {
-      if (!@is_file($path)) {
+      if (!is_file($path)) {
         throw new phpmailerException($this->lang('file_access') . $path, self::STOP_CONTINUE);
       }
       // If a MIME type is not specified, try to work it out from the file name
@@ -2544,7 +2544,7 @@ class PHPMailer
    * @return boolean True on successfully adding an attachment
    */
   public function addEmbeddedImage($path, $cid, $name = '', $encoding = 'base64', $type = '', $disposition = 'inline') {
-    if (!@is_file($path)) {
+    if (!is_file($path)) {
       $this->setError($this->lang('file_access') . $path);
       return false;
     }
@@ -2748,7 +2748,7 @@ class PHPMailer
   public static function rfcDate() {
     // Set the time zone to whatever the default is to avoid 500 errors
     // Will default to UTC if it's not set properly in php.ini
-    date_default_timezone_set(@date_default_timezone_get());
+    date_default_timezone_set(date_default_timezone_get());
     return date('D, j M Y H:i:s O');
   }
 

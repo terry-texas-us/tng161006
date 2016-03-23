@@ -160,7 +160,7 @@ class UploadHandler
   }
 
   protected function get_user_id() {
-    @session_start();
+    session_start();
     return session_id();
   }
 
@@ -327,15 +327,15 @@ class UploadHandler
                 $options['jpeg_quality'] : 75;
         break;
       case 'gif':
-        @imagecolortransparent($new_img, @imagecolorallocate($new_img, 0, 0, 0));
+        imagecolortransparent($new_img, imagecolorallocate($new_img, 0, 0, 0));
         $src_img = imagecreatefromgif($file_path);
         $write_image = 'imagegif';
         $image_quality = null;
         break;
       case 'png':
-        @imagecolortransparent($new_img, @imagecolorallocate($new_img, 0, 0, 0));
-        @imagealphablending($new_img, false);
-        @imagesavealpha($new_img, true);
+        imagecolortransparent($new_img, imagecolorallocate($new_img, 0, 0, 0));
+        imagealphablending($new_img, false);
+        imagesavealpha($new_img, true);
         $src_img = imagecreatefrompng($file_path);
         $write_image = 'imagepng';
         $image_quality = isset($options['png_quality']) ?
@@ -348,8 +348,8 @@ class UploadHandler
                     $new_img, $src_img, 0, 0, 0, 0, $new_width, $new_height, $img_width, $img_height
             ) && $write_image($new_img, $new_file_path, $image_quality);
     // Free up memory (imagedestroy does not delete files):
-    @imagedestroy($src_img);
-    @imagedestroy($new_img);
+    imagedestroy($src_img);
+    imagedestroy($new_img);
     return $success;
   }
 
@@ -482,31 +482,31 @@ class UploadHandler
     if (!function_exists('exif_read_data')) {
       return false;
     }
-    $exif = @exif_read_data($file_path);
+    $exif = exif_read_data($file_path);
     if ($exif === false) {
       return false;
     }
-    $orientation = intval(@$exif['Orientation']);
+    $orientation = intval($exif['Orientation']);
     if (!in_array($orientation, array(3, 6, 8))) {
       return false;
     }
     $image = imagecreatefromjpeg($file_path);
     switch ($orientation) {
       case 3:
-        $image = @imagerotate($image, 180, 0);
+        $image = imagerotate($image, 180, 0);
         break;
       case 6:
-        $image = @imagerotate($image, 270, 0);
+        $image = imagerotate($image, 270, 0);
         break;
       case 8:
-        $image = @imagerotate($image, 90, 0);
+        $image = imagerotate($image, 90, 0);
         break;
       default:
         return false;
     }
     $success = imagejpeg($image, $file_path);
     // Free up memory (imagedestroy does not delete files):
-    @imagedestroy($image);
+    imagedestroy($image);
     return $success;
   }
 
@@ -591,7 +591,7 @@ class UploadHandler
       }
       $query = "INSERT IGNORE INTO {$this->options['media_table']} (mediatypeID,mediakey,gedcom,path,thumbpath,description,notes,width,height,datetaken,placetaken,owner,changedate,changedby,form,alwayson,map,abspath,status,cemeteryID,plot,showmap,linktocem,latitude,longitude,zoom,bodytext,usenl,newwindow,usecollfolder)
           VALUES (\"{$this->options['mediatypeID']}\",\"$mediakey\",\"{$this->options['tree']}\",\"$filepath\",\"$thumbpath\",\"{$file->name}\",\"\",\"0\",\"0\",\"\",\"\",\"\",\"$newdate\",\"{$this->options['currentuser']}\",\"$form\",\"0\",\"\",\"0\",\"\",\"0\",\"\",\"0\",\"0\",\"\",\"\",\"0\",\"\",\"0\",\"0\",\"1\")";
-      $result = @tng_query($query);
+      $result = tng_query($query);
       $success = tng_affected_rows();
       if ($result && $success) {
         $file->mediaID = tng_insert_id();
@@ -791,7 +791,7 @@ class UploadHandler
 
     //pass media ID, get it here and use it to delete record and all links to it
     $query = "SELECT path, thumbpath, mediatypeID, usecollfolder FROM {$this->options['media_table']} WHERE mediaID = \"$mediaID\"";
-    $result = @tng_query($query);
+    $result = tng_query($query);
     $row = tng_fetch_assoc($result);
     tng_free_result($result);
 

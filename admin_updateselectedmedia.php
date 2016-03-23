@@ -48,13 +48,13 @@ if ($xphaction == uiTextSnippet('convto')) {
           if ($row['path']) {
             $oldpath = "$rootpath$oldmediapath/" . $row['path'];
             $newpath = "$rootpath$newmediapath/" . $row['path'];
-            @rename($oldpath, $newpath);
+            rename($oldpath, $newpath);
           }
 
           if ($row['thumbpath']) {
             $oldthumbpath = "$rootpath$oldmediapath/" . $row['thumbpath'];
             $newthumbpath = "$rootpath$newmediapath/" . $row['thumbpath'];
-            @rename($oldthumbpath, $newthumbpath);
+            rename($oldthumbpath, $newthumbpath);
           }
         }
         //change ordernum in media link
@@ -103,7 +103,7 @@ if ($xphaction == uiTextSnippet('convto')) {
   }
   if ($count) {
     $query = "UPDATE $mediatypes_table SET disabled=\"0\" where mediatypeID=\"$newmediatypeID\"";
-    $result = @tng_query($query);
+    $result = tng_query($query);
   }
 } elseif ($xphaction == uiTextSnippet('addtoalbum')) {
   foreach (array_keys($_POST) as $key) {

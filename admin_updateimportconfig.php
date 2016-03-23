@@ -18,7 +18,7 @@ if ($link) {
 }
 require("adminlog.php");
 
-$fp = @fopen($subroot . "importconfig.php", "w", 1);
+$fp = fopen($subroot . "importconfig.php", "w", 1);
 if (!$fp) {
   die(uiTextSnippet('cannotopen') . " importconfig.php");
 }

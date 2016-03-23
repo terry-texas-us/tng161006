@@ -242,11 +242,12 @@ $headSection->setTitle(uiTextSnippet('modifymapsettings'));
     }
 
     function validateLatLong(coord) {
+      var c;
       var keep = "1234567890.-";     // Characters stripped out
       var i;
       var returnString = "";
       for (i = 0; i < coord.length; i++) {  // Search through string and append to unfiltered values to returnString.
-        var c = coord.charAt(i);
+        c = coord.charAt(i);
         if (keep.indexOf(c) !== -1)
           returnString += c;
         else

@@ -177,7 +177,7 @@ if ($sourceID1) {
   }
 }
 
-@set_time_limit(0);
+set_time_limit(0);
 if (!$mergeaction) {
   $cshorttitle = "yes";
   $clongtitle = "yes";
@@ -285,7 +285,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
         }
 
         $query = "UPDATE $events_table set persfamID = \"$sourceID1\" WHERE persfamID = \"$sourceID2\" AND gedcom = \"$tree\" AND eventID = \"$varname\"";
-        $evresult = @tng_query($query);
+        $evresult = tng_query($query);
         break;
     }
   }
@@ -320,7 +320,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
   $defaultphoto2 = $tree ? "$rootpath$photopath/$tree.$sourceID2.$photosext" : "$rootpath$photopath/$sourceID2.$photosext";
   if ($ccombineextras) {
     $query = "UPDATE $medialinks_table set personID = \"$sourceID1\", defphoto = \"\" WHERE personID = \"$sourceID2\" AND gedcom = \"$tree\"";
-    $mediaresult = @tng_query($query);
+    $mediaresult = tng_query($query);
 
     //construct name for default photo 1
     if (file_exists($defaultphoto2)) {

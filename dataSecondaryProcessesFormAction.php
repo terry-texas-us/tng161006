@@ -140,7 +140,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         $result = tng_query($query);
         if ($result) {
           //open file (overwrite any contents)
-          $fp2 = @fopen($gendexout, "w");
+          $fp2 = fopen($gendexout, "w");
           if (!$fp2) {
             die(uiTextSnippet('cannotopen') . " $gendexout");
           }
@@ -278,11 +278,11 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         echo "<p>" . uiTextSnippet('evaluating') . "...</p>";
         //loop through each media type
         $query = "SELECT * FROM $mediatypes_table ORDER BY ordernum, display";
-        $result = @tng_query($query);
+        $result = tng_query($query);
 
         while ($row = tng_fetch_assoc($result)) {
           $query2 = "SELECT count(*) as counter FROM $media_table WHERE mediatypeID = \"{$row['mediatypeID']}\"";
-          $result2 = @tng_query($query2);
+          $result2 = tng_query($query2);
           $row2 = tng_fetch_assoc($result2);
           $display = $row['display'] ? $row['display'] : uiTextSnippet($row['mediatypeID']);
           echo "$display: " . number_format($row2['counter']);
@@ -293,7 +293,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
             $disabled = 0;
           }
           $query3 = "UPDATE $mediatypes_table SET disabled=\"$disabled\" where mediatypeID=\"{$row['mediatypeID']}\"";
-          $result3 = @tng_query($query3);
+          $result3 = tng_query($query3);
           echo "<br>\n";
           tng_free_result($result2);
         }

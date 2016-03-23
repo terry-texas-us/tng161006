@@ -33,8 +33,8 @@ $usefolder = $usecollfolder ? $mediatypes_assoc[$mediatypeID] : $mediapath;
 $newpath = "$rootpath$usefolder/$path";
 
 if ($newfile && $newfile != "none") {
-  if (@move_uploaded_file($newfile, $newpath)) {
-    @chmod($newpath, 0644);
+  if (move_uploaded_file($newfile, $newpath)) {
+    chmod($newpath, 0644);
   } else {
     //improper permissions or folder doesn't exist (root path may be wrong)
     $message = uiTextSnippet('notcopied') . " $newpath " . uiTextSnippet('improperpermissions') . ".";
@@ -57,7 +57,7 @@ if (function_exists(imageJpeg) && $thumbcreate == "auto") {
       $thumbpath = substr_replace($thumbpath, 'jpg', -3);
       $newthumbpath = substr_replace($newthumbpath, 'jpg', -3);
     }
-    @chmod($newthumbpath, 0644);
+    chmod($newthumbpath, 0644);
   } else {
     //could not create thumbnail (size or type problem) or permissions (root path may be wrong)
     $message = uiTextSnippet('thumbnailnotcopied') . " $newthumbpath " . uiTextSnippet('improper2') . '.';
@@ -66,8 +66,8 @@ if (function_exists(imageJpeg) && $thumbcreate == "auto") {
   }
 } else {
   if ($newthumb && $newthumb != "none") {
-    if (@move_uploaded_file($newthumb, $newthumbpath)) {
-      @chmod($newthumbpath, 0644);
+    if (move_uploaded_file($newthumb, $newthumbpath)) {
+      chmod($newthumbpath, 0644);
     } else {
       //improper permissions or folder doesn't exist (root path may be wrong)
       $message = uiTextSnippet('thumbnailnotcopied') . " $newthumbpath " . uiTextSnippet('improperpermissions') . ".";
@@ -130,14 +130,14 @@ $form = strtoupper($fileparts['extension']);
 $newdate = date("Y-m-d H:i:s", time() + (3600 * $time_offset));
 $mediakey = $path ? "$usefolder/$path" : time();
 $query = "INSERT IGNORE INTO $media_table (mediatypeID,mediakey,gedcom,path,thumbpath,description,notes,width,height,datetaken,placetaken,owner,changedate,changedby,form,alwayson,map,abspath,status,cemeteryID,plot,showmap,linktocem,latitude,longitude,zoom,bodytext,usenl,newwindow,usecollfolder) VALUES (\"$mediatypeID\",\"$mediakey\",\"$tree\",\"$path\",\"$thumbpath\",\"$description\",\"$notes\",\"$width\",\"$height\",\"$datetaken\",\"$placetaken\",\"$owner\",\"$newdate\",\"$currentuser\",\"$form\",\"$alwayson\",\"$imagemap\",\"$abspath\",\"$status\",\"$cemeteryID\",\"$plot\",\"$showmap\",\"$linktocem\",\"$latitude\",\"$longitude\",\"$zoom\",\"$bodytext\",\"$usenl\",\"$newwindow\",\"$usecollfolder\")";
-$result = @tng_query($query);
+$result = tng_query($query);
 $success = tng_affected_rows();
 if ($result && $success) {
   $mediaID = tng_insert_id();
 
   if ($link_personID) {
     $query = "SELECT count(medialinkID) as count FROM $medialinks_table WHERE personID = \"$link_personID\" AND gedcom = \"$link_tree\"";
-    $result = @tng_query($query);
+    $result = tng_query($query);
     if ($result) {
       $row = tng_fetch_assoc($result);
       $newrow = $row['count'] + 1;
@@ -149,10 +149,10 @@ if ($result && $success) {
     $defval = "";
 
     $query = "INSERT IGNORE INTO $medialinks_table (personID,mediaID,ordernum,gedcom,linktype,eventID,defphoto) VALUES (\"$link_personID\",\"$mediaID\",\"$newrow\",\"$link_tree\",\"$link_linktype\",\"\",\"$defval\")";
-    $result = @tng_query($query);
+    $result = tng_query($query);
   }
   $query = "UPDATE $mediatypes_table SET disabled=\"0\" where mediatypeID=\"$mediatypeID\"";
-  $result = @tng_query($query);
+  $result = tng_query($query);
 
   adminwritelog("<a href=\"mediaEdit.php?mediaID=$mediaID\">" . uiTextSnippet('addnewmedia') . ": $mediaID</a>");
 

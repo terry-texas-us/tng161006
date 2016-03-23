@@ -224,10 +224,11 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
     }
 
     function insertLangRow(rowID, type) {
+      var row;
       var language = jQuery('#lang_' + rowID);
       var langVal = language.val();
       if (langVal && !jQuery('#form_' + rowID + '_' + langVal).length) {
-        var row = document.getElementById(rowID);
+        row = document.getElementById(rowID);
         var langElem = language[0];
         var langDisplay = langElem.options[langElem.selectedIndex].innerHTML;
         var table = row.parentNode;

@@ -1,7 +1,7 @@
 <?php
 
-@ini_set("session.bug_compat_warn", "0");
-@ini_set("allow_url_fopen", "0");
+ini_set("session.bug_compat_warn", "0");
+ini_set("allow_url_fopen", "0");
 $http = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')) ? 'https' : 'http';
 
 set_time_limit(0);
@@ -627,9 +627,9 @@ function xmlcharacters($string) {
   $good = array("&#038;", "&#034;");
 
   $ucharset = strtoupper($session_charset);
-  $enc = function_exists('mb_detect_encoding') ? @mb_detect_encoding($string) : "";
+  $enc = function_exists('mb_detect_encoding') ? mb_detect_encoding($string) : "";
   if ($enc && strtoupper($enc) == "UTF-8" && $ucharset == "UTF-8") {
-    return str_replace($bad, $good, @mb_convert_encoding($string, 'UTF-8', $enc));
+    return str_replace($bad, $good, mb_convert_encoding($string, 'UTF-8', $enc));
   } elseif ($ucharset == "ISO-8859-1") {
     $trans = get_html_translation_table(HTML_ENTITIES, ENT_QUOTES);
     foreach ($trans as $k => $v) {
@@ -1024,7 +1024,7 @@ function checkMaintenanceMode($area) {
 
 function cleanIt($string) {
   global $session_charset;
-  $string = @htmlspecialchars(preg_replace("/\n/", " ", $string), ENT_QUOTES, $session_charset);
+  $string = htmlspecialchars(preg_replace("/\n/", " ", $string), ENT_QUOTES, $session_charset);
   $string = preg_replace("/\"/", "&#34;", $string);
   $string = preg_replace("/</", "&lt;", $string);
   $string = preg_replace("/>/", "&gt;", $string);
@@ -1049,7 +1049,7 @@ function tng_strtoupper($string) {
   global $session_charset;
 
   $ucharset = strtoupper($session_charset);
-  $enc = function_exists(mb_detect_encoding) ? @mb_detect_encoding($string) : "";
+  $enc = function_exists(mb_detect_encoding) ? mb_detect_encoding($string) : "";
   if ($enc && strtoupper($enc) == "UTF-8" && $ucharset == "UTF-8") {
     $string = mb_strtoupper($string, "UTF-8");
   } else {
@@ -1063,7 +1063,7 @@ function tng_strtolower($string) {
   global $session_charset;
 
   $ucharset = strtoupper($session_charset);
-  $enc = function_exists(mb_detect_encoding) ? @mb_detect_encoding($string) : "";
+  $enc = function_exists(mb_detect_encoding) ? mb_detect_encoding($string) : "";
   if ($enc && strtoupper($enc) == "UTF-8" && $ucharset == "UTF-8") {
     $string = mb_strtolower($string, "UTF-8");
   } else {

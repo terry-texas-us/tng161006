@@ -17,7 +17,7 @@ if ($link) {
 
 require("adminlog.php");
 
-$fp = @fopen($subroot . "pedconfig.php", "w", 1);
+$fp = fopen($subroot . "pedconfig.php", "w", 1);
 if (!$fp) {
   die(uiTextSnippet('cannotopen') . " pedconfig.php");
 }

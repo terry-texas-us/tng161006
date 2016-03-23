@@ -3,7 +3,7 @@
 function performQuery($query, $table = null) {
   global $badtables;
 
-  $result = @tng_query($query);
+  $result = tng_query($query);
   if (!$result && $table) {
     $badtables .= $badtables ? ",$table" : $table;
   }

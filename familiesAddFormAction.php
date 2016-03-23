@@ -66,7 +66,7 @@ $placetree = $tngconfig['places1tree'] ? "" : $tree;
 foreach ($places as $place) {
   $temple = strlen($place) == 5 && $place == strtoupper($place) ? 1 : 0;
   $query = "INSERT IGNORE INTO $places_table (gedcom,place,placelevel,zoom,geoignore,temple) VALUES (\"$placetree\",\"$place\",\"0\",\"0\",\"0\",\"$temple\")";
-  $result = @tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
+  $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   if ($tngconfig['autogeo'] && tng_affected_rows()) {
     $ID = tng_insert_id();
     $message = geocode($place, 0, $ID);

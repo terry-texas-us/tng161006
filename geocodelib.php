@@ -17,7 +17,7 @@ function geocode($address, $multiples, $id) {
   while ($geocode_pending) {
     $request_url = $base_url . "&address=" . urlencode($address);
     if (ini_get('allow_url_fopen')) {
-      $xml = @simplexml_load_file($request_url);
+      $xml = simplexml_load_file($request_url);
     } else {
       $ch = curl_init($request_url);
       curl_setopt($ch, CURLOPT_HEADER, false);

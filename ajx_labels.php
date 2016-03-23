@@ -15,7 +15,7 @@ if ($assignedbranch) {
   exit;
 }
 
-@set_time_limit(0);
+set_time_limit(0);
 $husbgender = array();
 $husbgender['self'] = 'husband';
 $husbgender['spouse'] = 'wife';
@@ -156,7 +156,7 @@ function setPersonLabel($personID) {
     $row = "";
     if ($branchaction == "delete") {
       $query = "SELECT firstname, lastname, lnprefix, nameorder, living, private, suffix, title, sex FROM $people_table WHERE personID=\"$personID\" AND gedcom = \"$tree\"";
-      $result = @tng_query($query);
+      $result = tng_query($query);
       $row = tng_fetch_assoc($result);
       tng_free_result($result);
 

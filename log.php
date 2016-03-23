@@ -30,7 +30,7 @@ function writelog($string) {
     } else {
       $remip = $_SERVER['REMOTE_ADDR'];
     }
-    $remhost = @gethostbyaddr($remip);
+    $remhost = gethostbyaddr($remip);
     if (!$remhost) {
       $remhost = $remip;
     }

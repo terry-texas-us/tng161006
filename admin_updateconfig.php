@@ -38,7 +38,7 @@ $doctype = addslashes($doctype);
 
 require("adminlog.php");
 
-$fp = @fopen($subroot . "config.php", "w", 1);
+$fp = fopen($subroot . "config.php", "w", 1);
 if (!$fp) {
   die(uiTextSnippet('cannotopen') . " config.php");
 }
@@ -212,7 +212,7 @@ fwrite($fp, "?>\n");
 flock($fp, LOCK_UN);
 fclose($fp);
 
-$fp = @fopen("subroot.php", "w", 1);
+$fp = fopen("subroot.php", "w", 1);
 if ($fp) {
   flock($fp, LOCK_EX);
   fwrite($fp, "<?php\n");

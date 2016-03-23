@@ -109,7 +109,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       $gedfilename = "$rootpath$gedpath/$basefilename";
       $savegedfilename = $basefilename;
 
-      if (@move_uploaded_file($remotefile, $gedfilename)) {
+      if (move_uploaded_file($remotefile, $gedfilename)) {
         chmod($gedfilename, 0644);
 
         $fp = fopen($gedfilename, "r");
