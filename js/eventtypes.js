@@ -51,8 +51,8 @@ function populateTags(etype, match) {
 
 function toggleTdesc(flag) {
     if (flag)
-        jQuery('#tdesc').fadeIn(400);
+        $('#tdesc').fadeIn(400);
     else
-        jQuery('#tdesc').fadeOut(400);
+        $('#tdesc').fadeOut(400);
 }
 

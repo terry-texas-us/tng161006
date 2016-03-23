@@ -78,7 +78,7 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
             natcasesort($entries);
             ?>
             <select name="form_templatenum" id="form_templatenum"
-                    onchange="switchTemplates(jQuery(this).val());">
+                    onchange="switchTemplates($(this).val());">
               <option value=''></option>
               <?php
               foreach ($entries as $entry) {
@@ -210,7 +210,7 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
   <script src='js/mediautils.js'></script>
   <script>
     function switchTemplates(newtemp) {
-      jQuery('div.tsection').each(function (index, item) {
+      $('div.tsection').each(function (index, item) {
         item.style.display = item.id === "t" + newtemp ? '' : 'none';
       });
     }
@@ -225,15 +225,15 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
 
     function insertLangRow(rowID, type) {
       var row;
-      var language = jQuery('#lang_' + rowID);
+      var language = $('#lang_' + rowID);
       var langVal = language.val();
-      if (langVal && !jQuery('#form_' + rowID + '_' + langVal).length) {
+      if (langVal && !$('#form_' + rowID + '_' + langVal).length) {
         row = document.getElementById(rowID);
         var langElem = language[0];
         var langDisplay = langElem.options[langElem.selectedIndex].innerHTML;
         var table = row.parentNode;
         var newtr = table.insertRow(row.rowIndex + 1);
-        var label = "&nbsp;&nbsp;" + jQuery('#' + rowID + ' :first-child').html();
+        var label = "&nbsp;&nbsp;" + $('#' + rowID + ' :first-child').html();
         insertCell(newtr, 0, label + "<br>&nbsp;&nbsp;&nbsp;(" + langDisplay + ")");
         var inputstr = type === "textarea" ? "<textarea name=\"form_" + rowID + "_" + langVal + "\" id=\"form_" + rowID + "_" + langVal + "\" rows=\"3\" cols=\"80\"></textarea>" : "<input class='longfield' id=\"form_" + rowID + "_" + langVal + "\" name=\"form_" + rowID + "_" + langVal + "\" type='text'>";
         insertCell(newtr, 1, inputstr);
@@ -243,8 +243,8 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
     }
 
     function showUploadBox(key, folder) {
-      jQuery('#div_' + key).html("<input type=\"file\" name=\"upload_" + key + "\" onchange=\"populateFileName(this,jQuery('#form_" + key + "'));\"/> <?php echo uiTextSnippet('or'); ?> <input type='button' value=\"<?php echo uiTextSnippet('select'); ?>\" name=\"photoselect_" + key + "\" onclick=\"javascript:FilePicker('form_" + key + "','" + folder + "');\" />");
-      jQuery('#div_' + key).toggle();
+      $('#div_' + key).html("<input type=\"file\" name=\"upload_" + key + "\" onchange=\"populateFileName(this,$('#form_" + key + "'));\"/> <?php echo uiTextSnippet('or'); ?> <input type='button' value=\"<?php echo uiTextSnippet('select'); ?>\" name=\"photoselect_" + key + "\" onclick=\"javascript:FilePicker('form_" + key + "','" + folder + "');\" />");
+      $('#div_' + key).toggle();
       return false;
     }
 
@@ -259,17 +259,17 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
       return false;
     }
 
-    jQuery(document).ready(function () {
-      jQuery('#previewbtn').click(function (e) {
+    $(document).ready(function () {
+      $('#previewbtn').click(function (e) {
         e.preventDefault();
-        jQuery('#previewscroll').toggle();
-        jQuery('.prevmsg').toggle();
+        $('#previewscroll').toggle();
+        $('.prevmsg').toggle();
         return false;
       });
-      jQuery('.prevdiv').click(function (e) {
+      $('.prevdiv').click(function (e) {
         e.preventDefault();
         var id = this.id.substring(4);
-        jQuery('#form_templatenum').val(id);
+        $('#form_templatenum').val(id);
         switchTemplates(id);
         return false;
       });

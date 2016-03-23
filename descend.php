@@ -241,7 +241,7 @@ function doBox($level, $person, $spouseflag, $kidsflag) {
   }
 
   if ($person['famc'] && $pedigree['popupchartlinks']) {
-    $iconactions = " onmouseover=\"if(jQuery('#ic$slot').length) jQuery('#ic$slot').show();\" onmouseout=\"if(jQuery('#ic$slot').length) jQuery('#ic$slot').hide();\"";
+    $iconactions = " onmouseover=\"if($('#ic$slot').length) $('#ic$slot').show();\" onmouseout=\"if($('#ic$slot').length) $('#ic$slot').hide();\"";
     $iconlinks = "<div class=\"floverlr\" id=\"ic$slot\" style=\"left:" . ($pedigree['puboxwidth'] - 35) . "px;top:" . ($pedigree['puboxheight'] - 15) . "px;display:none;background-color:$bgcolor\">";
     $iconlinks .= "<a href=\"{$pedigree['url']}personID={$person['personID']}&amp;tree=$tree&amp;display=standard&amp;generations=" . $pedigree['initpedgens'] . "\" title=\"" . uiTextSnippet('popupnote1') . "\">{$pedigree['chartlink']}</a>\n";
     $iconlinks .= "</div>\n";
@@ -765,8 +765,8 @@ $headSection->setTitle(uiTextSnippet('descendfor') . " " . $row['name']);
         lastpopup = slot;
 
         // show current
-        var ref = jQuery("#popup" + slot);
-        var box = jQuery("#box" + slot);
+        var ref = $("#popup" + slot);
+        var box = $("#box" + slot);
 
         var vOffset, hOffset, hDisplace;
 
@@ -774,11 +774,11 @@ $headSection->setTitle(uiTextSnippet('descendfor') . " " . $row['name']);
           vOffset = 0;
         else {
           vOffset = tall + high + 2 * <?php echo $pedigree['borderwidth']; ?>;
-          var vDisplace = box.position().top + high + 2 * <?php echo $pedigree['borderwidth']; ?> +ref.height() - jQuery('#outer').height() + 20; //20 is for the scrollbar
+          var vDisplace = box.position().top + high + 2 * <?php echo $pedigree['borderwidth']; ?> +ref.height() - $('#outer').height() + 20; //20 is for the scrollbar
           if (vDisplace > 0)
             vOffset -= vDisplace;
         }
-        hDisplace = box.position().left + ref.width() - jQuery('#outer').width();
+        hDisplace = box.position().left + ref.width() - $('#outer').width();
         if (hDisplace > 0)
           ref.offset({left: box.offset().left - hDisplace});
         ref.css('top', vOffset);

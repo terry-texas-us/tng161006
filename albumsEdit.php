@@ -187,7 +187,7 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
 
                   $truncated = substr($lrow['notes'], 0, 90);
                   $truncated = strlen($lrow['notes']) > 90 ? substr($truncated, 0, strrpos($truncated, ' ')) . '&hellip;' : $lrow['notes'];
-                  echo "<div class=\"sortrow\" id=\"orderdivs_{$lrow['albumlinkID']}\" style=\"clear:both;position:relative\" onmouseover=\"jQuery('#del_{$lrow['albumlinkID']}').css('visibility','visible');\" onmouseout=\"jQuery('#del_{$lrow['albumlinkID']}').css('visibility','hidden');\">";
+                  echo "<div class=\"sortrow\" id=\"orderdivs_{$lrow['albumlinkID']}\" style=\"clear:both;position:relative\" onmouseover=\"$('#del_{$lrow['albumlinkID']}').css('visibility','visible');\" onmouseout=\"$('#del_{$lrow['albumlinkID']}').css('visibility','hidden');\">";
                   echo "<table width=\"100%\" cellpadding=\"5\" cellspacing=\"1\"><tr>\n";
                   echo "<td class='dragarea'>";
                   echo "<img src='img/admArrowUp.gif' alt=''>" . uiTextSnippet('drag') . "\n";
@@ -197,8 +197,8 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
                   echo "<td class=\"small\" style=\"width:35px;text-align:center\">";
                   echo "<div style=\"padding-bottom:5px\"><a href='#' onclick=\"return moveItemInList('{$lrow['albumlinkID']}',1);\" title=\"" .
                           uiTextSnippet('movetop') . "\"><img src=\"img/admArrowUp.gif\" alt=''><br>Top</a></div>\n";
-                  echo "<input class='movefields' id=\"move{$lrow['albumlinkID']}\" name=\"move{$lrow['albumlinkID']}\" style='width: 30px' value=\"$count\" onkeypress=\"return handleMediaEnter('{$lrow['albumlinkID']}',jQuery('#move{$lrow['albumlinkID']}').val(),event);\" />\n";
-                  echo "<a href='#' onclick=\"return moveItemInList('{$lrow['albumlinkID']}',jQuery('#move{$lrow['albumlinkID']}').val());\" title=\"" . uiTextSnippet('movetop') . "\">Go</a>\n";
+                  echo "<input class='movefields' id=\"move{$lrow['albumlinkID']}\" name=\"move{$lrow['albumlinkID']}\" style='width: 30px' value=\"$count\" onkeypress=\"return handleMediaEnter('{$lrow['albumlinkID']}',$('#move{$lrow['albumlinkID']}').val(),event);\" />\n";
+                  echo "<a href='#' onclick=\"return moveItemInList('{$lrow['albumlinkID']}',$('#move{$lrow['albumlinkID']}').val());\" title=\"" . uiTextSnippet('movetop') . "\">Go</a>\n";
                   echo "</td>\n";
 
                   echo "<td style=\"width:" . ($thumbmaxw + 6) . "px;text-align:center;\">";

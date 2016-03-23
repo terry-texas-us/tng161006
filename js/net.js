@@ -72,7 +72,7 @@ net.ContentLoader.prototype.defaultError = function () {
 
 function showPreview(mediaID, path, entitystr) {
     if ($('#prev' + entitystr).html() === "")
-        $('#prev' + entitystr).html('<div id="ld' + entitystr + '"><img src="img/spinner.gif" style="border:0"> ' + textSnippet('loading') + '</div><img src="' + 'ajx_smallimage.php?' + 'mediaID=' + mediaID + '&path=' + encodeURIComponent(path) + '" style="display:none" onload="jQuery(\'#ld\'+\'' + entitystr + '\').hide(); this.style.display=\'\';">');
+        $('#prev' + entitystr).html('<div id="ld' + entitystr + '"><img src="img/spinner.gif" style="border:0"> ' + textSnippet('loading') + '</div><img src="' + 'ajx_smallimage.php?' + 'mediaID=' + mediaID + '&path=' + encodeURIComponent(path) + '" style="display:none" onload="$(\'#ld\'+\'' + entitystr + '\').hide(); this.style.display=\'\';">');
     $('#prev' + entitystr).fadeIn(100);
 }
 

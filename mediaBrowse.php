@@ -463,15 +463,15 @@ $headSection->setTitle(uiTextSnippet('media'));
       hsstatus.style.display = 'none';
       document.form1.hsstat.selectedIndex = 0;
       if (mediatypeID && stmediatypes.indexOf(mediatypeID) === -1) {
-        if (jQuery('#editmediatype').length)
-          jQuery('#editmediatype').show();
-        if (jQuery('#delmediatype').length)
-          jQuery('#delmediatype').show();
+        if ($('#editmediatype').length)
+          $('#editmediatype').show();
+        if ($('#delmediatype').length)
+          $('#delmediatype').show();
       } else {
-        if (jQuery('#editmediatype').length)
-          jQuery('#editmediatype').hide();
-        if (jQuery('#delmediatype').length)
-          jQuery('#delmediatype').hide();
+        if ($('#editmediatype').length)
+          $('#editmediatype').hide();
+        if ($('#delmediatype').length)
+          $('#delmediatype').hide();
       }
     }
     return false;

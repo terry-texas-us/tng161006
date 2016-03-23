@@ -358,7 +358,7 @@ for ($i = 1; $i <= $treenum; $i++) {
       var usecollfolder = frm.usecollfolder[0].checked ? 0 : 1;
       var mediatypeID = frm.mediatypeID.options[frm.mediatypeID.selectedIndex].value;
       var params = {path: frm.path.value, usecollfolder: usecollfolder, mediatypeID: mediatypeID};
-      jQuery.ajax({
+      $.ajax({
         url: 'admin_checkfile.php',
         data: params,
         dataType: 'html',

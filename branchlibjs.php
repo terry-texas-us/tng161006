@@ -30,11 +30,11 @@ echo $dispid;
 echo $dispname;
 ?>
 function swapBranches() {
-var tree = jQuery('#gedcom').val();
+var tree = $('#gedcom').val();
 var len = 0;
 document.form1.branch.options.length = 0;
-if(jQuery('#branchlist').length)
-jQuery('#branchlist').html('');
+if($('#branchlist').length)
+$('#branchlist').html('');
 
 for( var i = 0; i &lt; branchids[tree].length; i++ ) {
 var newElem = document.createElement("OPTION");

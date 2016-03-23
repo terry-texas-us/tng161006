@@ -143,7 +143,7 @@ $headSection->setTitle($row['name']);
 
           $fname = $row['firstname'];
           $firstfirstname = getFirstNameOnly($row);
-          $newlist = $row['number'] . ".<a href='#' onclick=\"jQuery('#p{$row['personID']}').animate({scrollTop: -200},'slow'); return false;\">$firstfirstname</a><sup style=\"font-size:8px;top:-2px\">$generation</sup>";
+          $newlist = $row['number'] . ".<a href='#' onclick=\"$('#p{$row['personID']}').animate({scrollTop: -200},'slow'); return false;\">$firstfirstname</a><sup style=\"font-size:8px;top:-2px\">$generation</sup>";
           if ($row['genlist']) {
             $newlist .= ", " . $row['genlist'];
           }
@@ -204,7 +204,7 @@ $headSection->setTitle($row['name']);
                     $nextgen[$childID] = $childrow;
                   }
                 }
-                echo "<li style=\"list-style-type:lower-roman\">$displaycount. <a href='#' onclick=\"if(jQuery('#p$childID').length) {jQuery('html, body').animate({scrollTop: jQuery('#p$childID').offset().top-10},'slow');}else{window.location.href='peopleShowPerson.php?personID=$childID&amp;tree=$tree';} return false;\">$name</a> &nbsp;<a href=\"desctracker.php?trail={$childrow['trail']}&amp;tree=$tree\"><img src=\"img/dchart.gif\" width='10' height='9' alt=\"" . uiTextSnippet('graphdesc') . "\"></a> $vitaldates</li>\n";
+                echo "<li style=\"list-style-type:lower-roman\">$displaycount. <a href='#' onclick=\"if($('#p$childID').length) {$('html, body').animate({scrollTop: $('#p$childID').offset().top-10},'slow');}else{window.location.href='peopleShowPerson.php?personID=$childID&amp;tree=$tree';} return false;\">$name</a> &nbsp;<a href=\"desctracker.php?trail={$childrow['trail']}&amp;tree=$tree\"><img src=\"img/dchart.gif\" width='10' height='9' alt=\"" . uiTextSnippet('graphdesc') . "\"></a> $vitaldates</li>\n";
               }
               echo "</ol>\n</td></tr></table>\n";
               tng_free_result($result2);

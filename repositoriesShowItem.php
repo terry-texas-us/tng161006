@@ -163,16 +163,16 @@ echo "<br>\n";
     }
 
     function turnOn(subpart, subpartlink) {
-      jQuery('#' + subpart).show();
+      $('#' + subpart).show();
     }
 
     function turnOff(subpart, subpartlink) {
-      jQuery('#' + subpart).hide();
+      $('#' + subpart).hide();
     }
 
     function infoToggle(part) {
       if (part === "all") {
-        jQuery('#info').show();
+        $('#info').show();
         <?php
         if ($media) {
           echo "\$('#media').show();\n";

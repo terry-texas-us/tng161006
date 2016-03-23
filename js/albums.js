@@ -107,20 +107,20 @@ function finishAddToAlbum(req) {
 
     newrow += '<td class="small" style="width:35px;text-align:center\">';
     newrow += '<div style=\"padding-bottom:5px\"><a href="#" onclick="return moveItemInList(\'' + albumlink + '\',1);" title="' + textSnippet('movetop') + '"><img src="img/admArrowUp.gif" alt=""><br>Top</a></div>\n';
-    newrow += '<input style="width:30px" class="movefields" name="move' + albumlink + '" id="move' + albumlink + '" value="' + newnum + '" onkeypress="return handleMediaEnter(\'' + albumlink + '\',jQuery(\'#move' + albumlink + '\').val(),event);" />\n';
-    newrow += '<a href="#" onclick="return moveItemInList(\'' + albumlink + '\',jQuery(\'#move' + albumlink + '\').val());" title="' + textSnippet('movetop') + '">Go</a>';
+    newrow += '<input style="width:30px" class="movefields" name="move' + albumlink + '" id="move' + albumlink + '" value="' + newnum + '" onkeypress="return handleMediaEnter(\'' + albumlink + '\',$(\'#move' + albumlink + '\').val(),event);" />\n';
+    newrow += '<a href="#" onclick="return moveItemInList(\'' + albumlink + '\',$(\'#move' + albumlink + '\').val());" title="' + textSnippet('movetop') + '">Go</a>';
     newrow += '</td>\n';
 
-    newrow += '<td style="width:' + (thumbmaxw + 6) + 'px;text-align:center;">' + jQuery('#thumbcell_' + media).html() + '</td>\n';
-    newrow += '<td>' + jQuery('#desc_' + media).html();
+    newrow += '<td style="width:' + (thumbmaxw + 6) + 'px;text-align:center;">' + $('#thumbcell_' + media).html() + '</td>\n';
+    newrow += '<td>' + $('#desc_' + media).html();
     newrow += '<div id="del_' + albumlink + '" class="small" style="color:gray;visibility:hidden">';
-    if (jQuery('#thumbcell_' + media).html() !== "&nbsp;") {
+    if ($('#thumbcell_' + media).html() !== "&nbsp;") {
         newrow += '<input name="rthumbs" type="radio" value="r' + media + '" onclick="makeDefault(this);">' + textSnippet('makedefault');
         newrow += ' &nbsp;|&nbsp; ';
     }
     newrow += '<a href="#" onclick="return removeFromAlbum(\'' + media + '\',\'' + albumlink + '\');">' + remove_text + '</a></div></td>\n';
-    newrow += '<td style="width:150px;">' + jQuery('#date_' + media).html() + '</td>';
-    newrow += '<td style="width:100px;">' + jQuery('#mtype_' + media).html() + '</td>\n';
+    newrow += '<td style="width:150px;">' + $('#date_' + media).html() + '</td>';
+    newrow += '<td style="width:100px;">' + $('#mtype_' + media).html() + '</td>\n';
     newrow += '</tr></table>';
 
     $('#add_' + media).hide();

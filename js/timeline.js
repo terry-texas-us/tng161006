@@ -1,5 +1,5 @@
-jQuery(document).ready(init);
-jQuery(window).resize(onResize);
+$(document).ready(init);
+$(window).resize(onResize);
 
 var tl;
 function init() {

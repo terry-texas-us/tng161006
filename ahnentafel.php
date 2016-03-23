@@ -307,10 +307,10 @@ $headSection->setTitle($row['name']);
                     $firstfirstname = getFirstNameOnly($fathrow);
                     $parentrow['both'] = $mothrow['both'];
                     if ($parentrow['marrdate'] || $parentrow['marrplace']) {
-                      echo "<p>$firstfirstname " . strtolower(uiTextSnippet('wasmarried')) . " <a href='#' onclick=\"jQuery('html, body').animate({scrollTop: jQuery('#p{$parentrow['wife']}').offset().top-10},'slow'); return false;\">{$mothrow['name']}</a>";
+                      echo "<p>$firstfirstname " . strtolower(uiTextSnippet('wasmarried')) . " <a href='#' onclick=\"$('html, body').animate({scrollTop: $('#p{$parentrow['wife']}').offset().top-10},'slow'); return false;\">{$mothrow['name']}</a>";
                       echo getSpouseDates($parentrow);
                     } else {
-                      echo "<p>$firstfirstname &mdash; <a href='#' onclick=\"jQuery('html, body').animate({scrollTop: jQuery('#p{$parentrow['wife']}').offset().top-10},'slow'); return false;\">{$mothrow['name']}</a>.";
+                      echo "<p>$firstfirstname &mdash; <a href='#' onclick=\"$('html, body').animate({scrollTop: $('#p{$parentrow['wife']}').offset().top-10},'slow'); return false;\">{$mothrow['name']}</a>.";
                     }
                     $spouseinfo = getVitalDates($mothrow);
                     if ($spouseinfo) {
@@ -375,7 +375,7 @@ $headSection->setTitle($row['name']);
                 echo "<li style=\"list-style-type:lower-roman\">";
                 if ($lastlastgen[$childrow['personID']]) {
                   echo $lastlastgen[$childrow['personID']] . ". ";
-                  echo "<a href='#' onclick=\"jQuery('html, body').animate({scrollTop: jQuery('#p{$childrow['personID']}').offset().top-10},'slow'); return false;\">{$childrow['name']}</a>";
+                  echo "<a href='#' onclick=\"$('html, body').animate({scrollTop: $('#p{$childrow['personID']}').offset().top-10},'slow'); return false;\">{$childrow['name']}</a>";
                 } else {
                   echo "<a href=\"peopleShowPerson.php?personID={$childrow['personID']}&amp;tree=$tree\">{$childrow['name']}</a>";
                 }

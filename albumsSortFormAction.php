@@ -150,7 +150,7 @@ $headSection->setTitle(uiTextSnippet($sortstr));
               $usefolder = $row['usecollfolder'] ? $mediatypes_assoc[$mediatypeID] : $mediapath;
               $truncated = substr($row['description'], 0, 90);
               $truncated = strlen($row['description']) > 90 ? substr($truncated, 0, strrpos($truncated, ' ')) . '&hellip;' : $row['description'];
-              echo "<div class=\"sortrow\" id=\"orderdivs_{$row['alinkID']}\" style=\"clear:both;position:relative\" onmouseover=\"jQuery('#md_{$row['albumID']}').css('visibility','visible');\" onmouseout=\"jQuery('#md_{$row['albumID']}').css('visibility','hidden');\">";
+              echo "<div class=\"sortrow\" id=\"orderdivs_{$row['alinkID']}\" style=\"clear:both;position:relative\" onmouseover=\"$('#md_{$row['albumID']}').css('visibility','visible');\" onmouseout=\"$('#md_{$row['albumID']}').css('visibility','hidden');\">";
               echo "<table width=\"100%\" cellpadding=\"5\" cellspacing=\"1\"><tr>\n";
               echo "<td class='dragarea'>";
                 echo "<img src='img/admArrowUp.gif' alt=''>" . uiTextSnippet('drag') . "\n";
@@ -159,8 +159,8 @@ $headSection->setTitle(uiTextSnippet($sortstr));
               echo "<td class=\"small\" style=\"width:35px;text-align:center\">";
               echo "<div style=\"padding-bottom:5px\"><a href='#' onclick=\"return moveItemInList('{$row['alinkID']}',1);\" title=\"" .
                       uiTextSnippet('movetop') . "\"><img src=\"img/admArrowUp.gif\" alt=''><br>" . uiTextSnippet('top') . "</a></div>\n";
-              echo "<input class='movefields' id=\"move{$row['alinkID']}\" name=\"move{$row['alinkID']}\" style='width: 30px' value=\"$count\" onkeypress=\"handleMediaEnter('{$row['alinkID']}',jQuery('#move{$row['alinkID']}').val(),event);\" />\n";
-              echo "<a href='#' onclick=\"return moveItemInList('{$row['alinkID']}',jQuery('#move{$row['alinkID']}').val());\" title=\"" .
+              echo "<input class='movefields' id=\"move{$row['alinkID']}\" name=\"move{$row['alinkID']}\" style='width: 30px' value=\"$count\" onkeypress=\"handleMediaEnter('{$row['alinkID']}',$('#move{$row['alinkID']}').val(),event);\" />\n";
+              echo "<a href='#' onclick=\"return moveItemInList('{$row['alinkID']}',$('#move{$row['alinkID']}').val());\" title=\"" .
                       uiTextSnippet('movetop') . "\">" . uiTextSnippet('go') . "</a>\n";
               echo "</td>\n";
 

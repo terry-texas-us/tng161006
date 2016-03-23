@@ -92,7 +92,7 @@ function getSpouseParents($personID, $sex) {
           if ($fathrow['name'] == uiTextSnippet('private')) {
             $fathrow['firstname'] = uiTextSnippet('private');
           }
-          $parentstr .= "<a href='#' onclick=\"if(jQuery('#p{$fathrow['personID']}').length) {jQuery('html, body').animate({scrollTop: jQuery('#p{$fathrow['personID']}').offset().top-10},'slow');}else{window.location.href='peopleShowPerson.php?personID={$fathrow['personID']}&amp;tree=$tree';} return false;\">$fathname</a>";
+          $parentstr .= "<a href='#' onclick=\"if($('#p{$fathrow['personID']}').length) {$('html, body').animate({scrollTop: $('#p{$fathrow['personID']}').offset().top-10},'slow');}else{window.location.href='peopleShowPerson.php?personID={$fathrow['personID']}&amp;tree=$tree';} return false;\">$fathname</a>";
         }
         tng_free_result($gotfather);
       }
@@ -115,7 +115,7 @@ function getSpouseParents($personID, $sex) {
           if ($parentstr) {
             $parentstr .= " " . uiTextSnippet('and') . " ";
           }
-          $parentstr .= "<a href='#' onclick=\"if(jQuery('#p{$mothrow['personID']}').length) {jQuery('html, body').animate({scrollTop: jQuery('#p{$mothrow['personID']}').offset().top-10},'slow');}else{window.location.href='peopleShowPerson.php?personID={$mothrow['personID']}&amp;tree=$tree';} return false;\">$mothname</a>";
+          $parentstr .= "<a href='#' onclick=\"if($('#p{$mothrow['personID']}').length) {$('html, body').animate({scrollTop: $('#p{$mothrow['personID']}').offset().top-10},'slow');}else{window.location.href='peopleShowPerson.php?personID={$mothrow['personID']}&amp;tree=$tree';} return false;\">$mothname</a>";
         }
         tng_free_result($gotmother);
       }

@@ -1105,7 +1105,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
       if (keycode === 13) {
         event.preventDefault();
         event.stopPropagation();
-        jQuery('#compref').click();
+        $('#compref').click();
         return false;
       }
     }

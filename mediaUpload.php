@@ -110,7 +110,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
                 </label>
               </div>          
               <div class='col-sm-3'>
-                <input name='folderselect' type='button' value="<?php echo uiTextSnippet('select') . "..."; ?>" onclick="FilePicker('folder', jQuery('#mediatypeID').val(), 1);">
+                <input name='folderselect' type='button' value="<?php echo uiTextSnippet('select') . "..."; ?>" onclick="FilePicker('folder', $('#mediatypeID').val(), 1);">
               </div>          
             </div>
             <noscript><input name='redirect' type='hidden' value="$https://blueimp.github.io/jQuery-File-Upload/"></noscript>
@@ -236,9 +236,9 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
     var remove_text = <?php echo "'" . uiTextSnippet('removelink') . "'" ?>;
 
     function enableSave(savebuttonid) {
-      jQuery('#q' + savebuttonid).removeAttr('disabled');
-      jQuery('#q' + savebuttonid + ' span').show();
-      jQuery('#ch' + savebuttonid).hide();
+      $('#q' + savebuttonid).removeAttr('disabled');
+      $('#q' + savebuttonid + ' span').show();
+      $('#ch' + savebuttonid).hide();
     }
 
     function validateForm() {
@@ -280,26 +280,26 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
 
     function changeCollection(coll) {
       var mediatype = coll.options[coll.selectedIndex].value;
-      jQuery('#folderlabel').html(mediafolders[mediatype]);
-      jQuery('#folder').val("");
+      $('#folderlabel').html(mediafolders[mediatype]);
+      $('#folder').val("");
     }
 
-    jQuery(document).ready(function () {
-      jQuery('#linker').click(function (e) {
+    $(document).ready(function () {
+      $('#linker').click(function (e) {
         e.preventDefault();
-        if (jQuery('#newlink1').val()) {
+        if ($('#newlink1').val()) {
           var medialist = "";
 
-          jQuery('.mediacheck:checked').each(function () {
+          $('.mediacheck:checked').each(function () {
             medialist += (medialist ? "," + this.id : this.id);
           });
           if (medialist) {
-            var linkermsg = jQuery('#linkermsg');
+            var linkermsg = $('#linkermsg');
             linkermsg.html('&nbsp;<img src="img/spinner.gif">');
 
-            var params = jQuery('#linkerform').serialize();
+            var params = $('#linkerform').serialize();
             params += "&medialist=" + medialist + "&action=masslink";
-            jQuery.ajax({
+            $.ajax({
               url: 'ajx_updateorder.php',
               data: params,
               dataType: 'html',
