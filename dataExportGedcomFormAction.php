@@ -1,10 +1,10 @@
 <?php
 ini_set('memory_limit', '200M');
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 include($subroot . "importconfig.php");

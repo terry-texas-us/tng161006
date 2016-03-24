@@ -1,12 +1,12 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
-if (!$allow_edit || ($assignedtree && $assignedtree != $tree)) {
+if (!$allowEdit || ($assignedtree && $assignedtree != $tree)) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -35,8 +35,8 @@ $headSection->setTitle(uiTextSnippet('modifytree'));
     echo $adminHeaderSection->build('branches-modifybranch', $message);
     $navList = new navList('');
     $navList->appendItem([true, "branchesBrowse.php", uiTextSnippet('browse'), "findbranch"]);
-    $navList->appendItem([$allow_add, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
-//    $navList->appendItem([$allow_edit, "#", uiTextSnippet('edit'), "edit"]);
+    $navList->appendItem([$allowAdd, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
+//    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <form id='form1' name='form1' action='branchesEditFormAction.php' method='post' onSubmit="return validateForm();">

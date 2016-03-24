@@ -6,13 +6,13 @@ class chooseLanguage {
 
   public function buildForm($instance) {
     global $chooselang;
-    global $languages_table;
+    global $languagesTable;
     global $mylanguage;
-    global $languages_path;
+    global $languagesPath;
 
     $this->out = "";
     if ($chooselang) {
-      $query = "SELECT languageID, display, folder FROM $languages_table ORDER BY display";
+      $query = "SELECT languageID, display, folder FROM $languagesTable ORDER BY display";
       $result = tng_query($query);
       $numlangs = tng_num_rows($result);
 
@@ -23,7 +23,7 @@ class chooseLanguage {
 
         while ($row = tng_fetch_assoc($result)) {
           $this->out .= "<option value=\"{$row['languageID']}\"";
-          if ($languages_path . $row['folder'] == $mylanguage) {
+          if ($languagesPath . $row['folder'] == $mylanguage) {
             $this->out .= " selected";
           }
           $this->out .= ">{$row['display']}</option>\n";

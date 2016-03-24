@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 $tng_search_trees = $_SESSION['tng_search_trees'] = 1;
@@ -59,7 +59,7 @@ $headSection->setTitle(uiTextSnippet('trees'));
 <body id='admin-trees'>
   <section class='container'>
     <?php
-    $allow_add_tree = $assignedtree ? 0 : $allow_add;
+    $allow_add_tree = $assignedtree ? 0 : $allowAdd;
     echo $adminHeaderSection->build('trees', $message);
     $navList = new navList('');
 //    $navList->appendItem([true, 'treesBrowse.php', uiTextSnippet('search'), 'findtree']);
@@ -108,12 +108,12 @@ $headSection->setTitle(uiTextSnippet('trees'));
         </thead>
         <?php
         $actionstr = "";
-        if ($allow_edit && !$assignedbranch) {
+        if ($allowEdit && !$assignedbranch) {
           $actionstr .= "<a href='treesEdit.php?tree=xxx' title='" . uiTextSnippet('edit') . "'>\n";
           $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
           $actionstr .= "</a>\n";
         }
-        if ($allow_delete && !$assignedbranch) {
+        if ($allowDelete && !$assignedbranch) {
           if (!$assignedtree) {
             $actionstr .= "<a href='#' onClick=\"if(confirm('" . uiTextSnippet('conftreedelete') . "' )){deleteIt('tree','xxx');} return false;\" title='" . uiTextSnippet('delete') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
@@ -126,7 +126,7 @@ $headSection->setTitle(uiTextSnippet('trees'));
         while ($row = tng_fetch_assoc($result)) {
           $newactionstr = preg_replace("/xxx/", $row['gedcom'], $actionstr);
           $editlink = "treesEdit.php?tree={$row['gedcom']}";
-          $gedcom = $allow_edit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['gedcom'] . "</a>" : $row['gedcom'];
+          $gedcom = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['gedcom'] . "</a>" : $row['gedcom'];
 
           $query = "SELECT count(personID) as pcount FROM $people_table WHERE gedcom = \"{$row['gedcom']}\"";
           $result2 = tng_query($query);

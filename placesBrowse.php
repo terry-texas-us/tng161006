@@ -1,10 +1,10 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include($subroot . "mapconfig.php");
-include("adminlib.php");
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 $orgtree = $tree;
@@ -122,9 +122,9 @@ $headSection->setTitle(uiTextSnippet('places'));
     echo $adminHeaderSection->build('places', $message);
     $navList = new navList('');
 //    $navList->appendItem([true, "placesBrowse.php", uiTextSnippet('browse'), "findplace"]);
-    $navList->appendItem([$allow_add, "placesAdd.php", uiTextSnippet('add'), "addplace"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "placesMerge.php", uiTextSnippet('merge'), "merge"]);
-    $navList->appendItem([$allow_edit, "admin_geocodeform.php", uiTextSnippet('geocode'), "geo"]);
+    $navList->appendItem([$allowAdd, "placesAdd.php", uiTextSnippet('add'), "addplace"]);
+    $navList->appendItem([$allowEdit && $allowDelete, "placesMerge.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([$allowEdit, "admin_geocodeform.php", uiTextSnippet('geocode'), "geo"]);
     echo $navList->build("findplace");
     ?>
     <br>
@@ -170,7 +170,7 @@ $headSection->setTitle(uiTextSnippet('places'));
     echo displayListLocation($offsetplus, $numrowsplus, $totrows);
     ?>
     <form action="admin_deleteselected.php" method='post' name="form2">
-      <?php if ($allow_delete) { ?>
+      <?php if ($allowDelete) { ?>
         <p>
           <input name='selectall' type='button' value="<?php echo uiTextSnippet('selectall'); ?>" 
                  onClick="toggleAll(1);">
@@ -185,7 +185,7 @@ $headSection->setTitle(uiTextSnippet('places'));
       <table class='table table-sm table-striped'>
         <tr>
           <th><?php echo uiTextSnippet('action'); ?></th>
-          <?php if ($allow_delete) { ?>
+          <?php if ($allowDelete) { ?>
             <th><?php echo uiTextSnippet('select'); ?></th>
           <?php } ?>
           <th><?php echo uiTextSnippet('place'); ?></th>
@@ -206,12 +206,12 @@ $headSection->setTitle(uiTextSnippet('places'));
         <?php
         if ($numrows) {
           $actionstr = "";
-        if ($allow_edit) {
+        if ($allowEdit) {
           $actionstr .= "<a href=\"placesEdit.php?ID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
           $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
           $actionstr .= "</a>";
         }
-        if ($allow_delete) {
+        if ($allowDelete) {
           $actionstr .= "<a href='#' onClick=\"return confirmDelete('xxx');\" title='" . uiTextSnippet('delete') . "'>\n";
           $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
           $actionstr .= "</a>";
@@ -231,7 +231,7 @@ $headSection->setTitle(uiTextSnippet('places'));
           }
           $newactionstr = preg_replace("/zzz/", urlencode($row['place']), $newactionstr);
           echo "<tr id=\"row_{$row['ID']}\"><td><div class=\"action-btns\">$newactionstr</div></td>\n";
-          if ($allow_delete) {
+          if ($allowDelete) {
             echo "<td><input name=\"del{$row['ID']}\" type='checkbox' value='1'></td>";
           }
           $display = $row['place'];

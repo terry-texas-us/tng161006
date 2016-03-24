@@ -1,12 +1,12 @@
 <?php
 
-include("begin.php");
+require 'begin.php';
 include("genlib.php");
 
 session_start();
 eval("\$newlanguage = preg_replace(\"/[^0-9]/\", '', \$newlanguage$instance);");
 
-$query = "SELECT folder, charset FROM $languages_table WHERE languageID = \"$newlanguage\"";
+$query = "SELECT folder, charset FROM $languagesTable WHERE languageID = \"$newlanguage\"";
 $result = tng_query($query) or die("Cannot execute query: $query"); //message is hardcoded because we haven't included the text file yet
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -14,7 +14,7 @@ tng_free_result($result);
 $session_language = $_SESSION['session_language'] = $row['folder'];
 $session_charset = $_SESSION['session_charset'] = $row['charset'];
 
-if (file_exists($languages_path . $row['folder'])) {
+if (file_exists($languagesPath . $row['folder'])) {
   $newroot = preg_replace('/\//', '', $rootpath);
   $newroot = preg_replace('/ /', '', $newroot);
   $newroot = preg_replace('/\./', '', $newroot);

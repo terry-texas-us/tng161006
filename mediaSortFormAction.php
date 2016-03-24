@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 require("adminlog.php");
@@ -112,11 +112,11 @@ $headSection->setTitle(uiTextSnippet($sortstr));
   echo $adminHeaderSection->build('media-text_sort', $message);
   $navList = new navList('');
   $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('browse'), "findmedia"]);
-  $navList->appendItem([$allow_media_add, "mediaAdd.php", uiTextSnippet('add'), "addmedia"]);
-  $navList->appendItem([$allow_media_edit, "mediaSort.php", uiTextSnippet('text_sort'), "sortmedia"]);
-  $navList->appendItem([$allow_media_edit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-  $navList->appendItem([$allow_media_add && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
-  $navList->appendItem([$allow_media_add && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
+  $navList->appendItem([$allowMediaAdd, "mediaAdd.php", uiTextSnippet('add'), "addmedia"]);
+  $navList->appendItem([$allowMediaEdit, "mediaSort.php", uiTextSnippet('text_sort'), "sortmedia"]);
+  $navList->appendItem([$allowMediaEdit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
+  $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
+  $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
   echo $navList->build("sortmedia");
   ?>
   <br>

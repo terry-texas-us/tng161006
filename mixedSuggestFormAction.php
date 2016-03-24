@@ -1,11 +1,11 @@
 <?php
 
-include("begin.php");
+require 'begin.php';
 include("genlib.php");
 include("getlang.php");
 
 if ($enttype) {
-  include("checklogin.php");
+  require 'checklogin.php';
 }
 include($subroot . "logconfig.php");
 require 'mail.php';

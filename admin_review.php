@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = true;
-include("checklogin.php");
+$adminLogin = true;
+require 'checklogin.php';
 include("version.php");
 
 $query = "SELECT *, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") as postdate FROM $temp_events_table WHERE tempID = \"$tempID\"";
@@ -83,7 +83,7 @@ if ($row['type'] == 'I' || $row['type'] == "C") {
   $editstr = "  | <a href=\"familiesEdit.php?familyID=$familyID&amp;tree=$tree\" target='_blank'>" . uiTextSnippet('edit') . "</a>";
 }
 
-if (!$allow_edit || ($assignedtree && $assignedtree != $tree) || !$rightbranch) {
+if (!$allowEdit || ($assignedtree && $assignedtree != $tree) || !$rightbranch) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -111,7 +111,7 @@ if (is_numeric($eventID)) {
       $displayval = "";
       for ($i = 0; $i < $numvalues; $i += 2) {
         $lang = $dispvalues[$i];
-        if ($mylanguage == $languages_path . $lang) {
+        if ($mylanguage == $languagesPath . $lang) {
           $displayval = $dispvalues[$i + 1];
           break;
         }
@@ -254,13 +254,13 @@ $headSection->setTitle(uiTextSnippet('review'));
   $navList = new navList('');
   if ($row['type'] == 'I') {
     $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
-    $navList->appendItem([$allow_add, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
-    $navList->appendItem([$allow_edit, "admin_findreview.php?type=I", uiTextSnippet('review'), "review"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
+    $navList->appendItem([$allowEdit, "admin_findreview.php?type=I", uiTextSnippet('review'), "review"]);
+    $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
   } else {
     $navList->appendItem([true, "familiesBrowse.php", uiTextSnippet('browse'), "findperson"]);
-    $navList->appendItem([$allow_add, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
-    $navList->appendItem([$allow_edit, "admin_findreview.php?type=F", uiTextSnippet('review'), "review"]);
+    $navList->appendItem([$allowAdd, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
+    $navList->appendItem([$allowEdit, "admin_findreview.php?type=F", uiTextSnippet('review'), "review"]);
   }
   echo $navList->build("review");
   ?>

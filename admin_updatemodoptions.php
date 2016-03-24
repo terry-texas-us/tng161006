@@ -1,7 +1,7 @@
 <?php
 
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 include("getlang.php");
 
 if (!count($_POST['options'])) {
@@ -10,11 +10,11 @@ if (!count($_POST['options'])) {
 }
 $options = $_POST['options'];
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
-if ($assignedtree || !$allow_edit) {
+if ($assignedtree || !$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;

@@ -1,12 +1,12 @@
 <?php
 
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 
-if (!$allow_media_edit && !$allow_media_add && !$allow_media_delete) {
+if (!$allowMediaEdit && !$allowMediaAdd && !$allowMediaDelete) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -214,7 +214,7 @@ switch ($action) {
     $rval .= "<td class=\"childblock\">\n";
 
     $rval .= "<div id=\"unlinkc_$personID\" class=\"small hide-right\"><a href='#' onclick=\"return unlinkChild('$personID','child_unlink');\">" . uiTextSnippet('remove') . "</a>";
-    if ($allow_delete) {
+    if ($allowDelete) {
       $rval .= " &nbsp; | &nbsp; <a href='#' onclick=\"return unlinkChild('$personID','child_delete');\">" . uiTextSnippet('delete') . "</a>";
     }
     $rval .= "</div>";

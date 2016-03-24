@@ -22,7 +22,7 @@ if ($display == "textonly" || (!$display && $pedigree['usepopups'] == -1)) {
 
 $result = getPersonFullPlusDates($tree, $personID);
 if (!tng_num_rows($result)) {
-  if (!$allow_add && !isset($needperson)) {
+  if (!$allowAdd && !isset($needperson)) {
     tng_free_result($result);
     header("Location: thispagedoesnotexist.html");
     exit;
@@ -528,8 +528,8 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
     var hideempty = <?php echo $pedigree['hideempty'] ?>;
     var leftarrowimg = '<?php echo $pedigree['leftarrowlink'] ?>';
     var namepad = '<?php echo $namepad ?>';
-    var allow_add = <?php echo $allow_add ?>;
-    var allow_edit = <?php echo $allow_edit ?>;
+    var allow_add = <?php echo $allowAdd ?>;
+    var allow_edit = <?php echo $allowEdit ?>;
     var chartlink = '<?php echo $pedigree['chartlink'] ?>';
     var personID = '<?php echo $personID ?>';
     var parentset = <?php echo $parentset ?>;
@@ -553,7 +553,7 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
       botlinks = '';
   </script>
   <script src='js/tngpedigree.js'></script>
-  <?php if($allow_edit || $allow_add) { ?>
+  <?php if($allowEdit || $allowAdd) { ?>
     <script src='js/tngpededit.js'></script>
   <?php } ?>
   
@@ -565,7 +565,7 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
     }
     getNewChart(personID, generations, parentset);
 
-    <?php if ($needperson && $allow_add) { ?>
+    <?php if ($needperson && $allowAdd) { ?>
     var nplitbox;
     function openCreatePersonForm() {
       tnglitbox = new ModalDialog('admin_newperson2.php?tree=<?php echo $tree; ?>&needped=1');
@@ -580,14 +580,14 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
       $('html, body').animate({scrollTop: $('#box1').offset().top<?php echo $scrolldown; ?>}, 'slow');
       <?php 
       }
-      if ($needperson && $allow_add) {
+      if ($needperson && $allowAdd) {
       ?>
       openCreatePersonForm();
       <?php } ?>
     });
   </script>
 
-  <?php if ($allow_edit || $allow_add) { ?>
+  <?php if ($allowEdit || $allowAdd) { ?>
     <script>
       var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;
       var preferDateFormat = '<?php echo $preferDateFormat; ?>';

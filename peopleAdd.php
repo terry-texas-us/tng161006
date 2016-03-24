@@ -1,12 +1,12 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = true;
-include("checklogin.php");
+$adminLogin = true;
+require 'checklogin.php';
 include("version.php");
 
-if (!$allow_add) {
+if (!$allowAdd) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -36,9 +36,9 @@ $headSection->setTitle(uiTextSnippet('addnewperson'));
     echo $adminHeaderSection->build('people-addnewperson', $message);
     $navList = new navList('');
     $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
-//    $navList->appendItem([$allow_add, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
-    $navList->appendItem([$allow_edit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
+//    $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
+    $navList->appendItem([$allowEdit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
+    $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("addperson");
     ?>
     <form name="form1" action="peopleAddFormAction.php" method='post' onSubmit="return trimCheckPersonRequired();">

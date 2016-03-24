@@ -1,7 +1,7 @@
 <?php
 
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
 if (!count($_POST)) {
   header("Location: admin.php");
@@ -9,11 +9,11 @@ if (!count($_POST)) {
 }
 
 if ($link) {
-  $admin_login = 1;
-  include("checklogin.php");
+  $adminLogin = 1;
+  require 'checklogin.php';
   include("version.php");
 
-  if ($assignedtree || !$allow_edit) {
+  if ($assignedtree || !$allowEdit) {
     $message = uiTextSnippet('norights');
     header("Location: admin_login.php?message=" . urlencode($message));
     exit;

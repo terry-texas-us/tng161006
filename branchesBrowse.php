@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("prefixes.php");
 include("version.php");
 
@@ -99,7 +99,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
     echo $adminHeaderSection->build('branches', $message);
     $navList = new navList('');
 //    $navList->appendItem([true, "branchesBrowse.php", uiTextSnippet('browse'), "findbranch"]);
-    $navList->appendItem([$allow_add, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
+    $navList->appendItem([$allowAdd, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
     echo $navList->build("findbranch");
     ?>
     <form id='form1' name='form1' action='branchesBrowse.php'>
@@ -138,7 +138,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
     echo displayListLocation($offsetplus, $numrowsplus, $totrows);
     ?>
     <form action="admin_deleteselected.php" method='post' name="form2">
-      <?php if ($allow_delete) { ?>
+      <?php if ($allowDelete) { ?>
         <p>
           <input name='selectall' type='button' value="<?php echo uiTextSnippet('selectall'); ?>" 
                  onClick="toggleAll(1);">
@@ -152,7 +152,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
         <thead>
           <tr>
             <th><?php echo uiTextSnippet('action'); ?></th>
-            <?php if ($allow_delete) { ?>
+            <?php if ($allowDelete) { ?>
               <th><?php echo uiTextSnippet('select'); ?></th>
             <?php } ?>
             <th><?php echo uiTextSnippet('id'); ?></th>
@@ -166,12 +166,12 @@ $headSection->setTitle(uiTextSnippet('branches'));
         <?php
         if ($numrows) {
           $actionstr = "";
-          if ($allow_edit) {
+          if ($allowEdit) {
             $actionstr .= "<a href=\"branchesEdit.php?branch=xxx&amp;tree=yyy\" title='" . uiTextSnippet('edit') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
             $actionstr .= "</a>\n";
           }
-          if ($allow_delete) {
+          if ($allowDelete) {
             if (!$assignedtree) {
               $actionstr .= "<a id='delete' data-branch='xxx' data-tree='yyy' href='#' title='" . uiTextSnippet('delete') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
@@ -185,11 +185,11 @@ $headSection->setTitle(uiTextSnippet('branches'));
             echo "<td>\n";
             echo "<div>\n$newactionstr</div>\n";
             echo "</td>\n";
-            if ($allow_delete) {
+            if ($allowDelete) {
               echo "<td><input name=\"del{$row['branch']}&amp;{$row['gedcom']}\" type='checkbox' value='1'></td>";
             }
             $editlink = "branchesEdit.php?branch={$row['branch']}&tree={$row['gedcom']}";
-            $id = $allow_edit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['branch'] . "</a>" : $row['branch'];
+            $id = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['branch'] . "</a>" : $row['branch'];
 
             echo "<td>$id</td>\n";
             echo "<td>&nbsp;{$row['description']}</td>\n";

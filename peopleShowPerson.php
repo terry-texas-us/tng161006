@@ -154,7 +154,7 @@ $headSection->setTitle($headTitle);
       if ($row['nickname']) {
         $persontext .= showEvent(array("text" => uiTextSnippet('nickname'), "fact" => $row['nickname'], "event" => "NICK", "entity" => $personID, "type" => 'I'));
       }
-      if ($row['private'] && $allow_edit && $allow_add && $allow_delete && !$assignedtree) {
+      if ($row['private'] && $allowEdit && $allowAdd && $allowDelete && !$assignedtree) {
         $persontext .= showEvent(array("text" => uiTextSnippet('private'), "fact" => uiTextSnippet('yes')));
       }
       setEvent(array("text" => uiTextSnippet('born'), "fact" => $stdex['BIRT'], "date" => $row['birthdate'], "place" => $row['birthplace'], "event" => "BIRT", "entity" => $personID, "type" => 'I'), $row['birthdatetr']);
@@ -221,9 +221,9 @@ $headSection->setTitle($headTitle);
     // [ts] stuffing $personID into `date` array element for pass to showEvent requires special text snippet processing
     //      determine if this is neccessary. 
     $persontext .= showEvent(array("text" => uiTextSnippet('personid'), "date" => $personID, "place" => $treestr, "np" => 1));
-    if ($row['changedate'] || ( $allow_edit && $rightbranch )) {
+    if ($row['changedate'] || ( $allowEdit && $rightbranch )) {
       $row['changedate'] = displayDate($row['changedate'], false);
-      if ($allow_edit && $rightbranch) {
+      if ($allowEdit && $rightbranch) {
         if ($row['changedate']) {
           $row['changedate'] .= " | ";
         }
@@ -540,9 +540,9 @@ $headSection->setTitle($headTitle);
       }
       $persontext .= writeAlbums($famalbums);
 
-      if ($marriagerow['changedate'] || ( $allow_edit && $rightfbranch )) {
+      if ($marriagerow['changedate'] || ( $allowEdit && $rightfbranch )) {
         $marriagerow['changedate'] = displayDate($marriagerow['changedate']);
-        if ($allow_edit && $rightfbranch) {
+        if ($allowEdit && $rightfbranch) {
           if ($marriagerow['changedate']) {
             $marriagerow['changedate'] .= " | ";
           }

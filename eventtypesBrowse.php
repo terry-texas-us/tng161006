@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 $tng_search_eventtypes = $_SESSION['tng_search_eventtypes'] = 1;
@@ -77,7 +77,7 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
     echo $adminHeaderSection->build('customeventtypes', $message);
     $navList = new navList('');
 //    $navList->appendItem([true, "eventtypesBrowse.php", uiTextSnippet('browse'), "findevent"]);
-    $navList->appendItem([$allow_add, "eventtypesAdd.php", uiTextSnippet('add'), "addevent"]);
+    $navList->appendItem([$allowAdd, "eventtypesAdd.php", uiTextSnippet('add'), "addevent"]);
     echo $navList->build("findevent");
     ?>
     <hr>
@@ -125,10 +125,10 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
     ?>
     <form action="eventtypesBrowseFormAction.php" method='post' name="form2">
       <p>
-        <?php if ($allow_delete) { ?>
+        <?php if ($allowDelete) { ?>
           <input class='btn btn-warning-outline' name='cetaction' type='submit' value="<?php echo uiTextSnippet('deleteselected'); ?>" onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');">
         <?php } ?>
-        <?php if ($allow_edit) { ?>
+        <?php if ($allowEdit) { ?>
           <input class='btn btn-secondary-outline' name='cetaction' type='submit' value="<?php echo uiTextSnippet('acceptselected'); ?>">
           <input class='btn btn-secondary-outline' name='cetaction' type='submit' value="<?php echo uiTextSnippet('ignoreselected'); ?>">
           <input class='btn btn-secondary-outline' name='cetaction' type='submit' value ="<?php echo uiTextSnippet('collapseselected'); ?>">
@@ -143,7 +143,7 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
           <thead>
             <tr>
               <th><?php echo uiTextSnippet('action'); ?></th>
-              <?php if ($allow_delete || $allow_edit) { ?>
+              <?php if ($allowDelete || $allowEdit) { ?>
                 <th><?php echo uiTextSnippet('select'); ?></th>
               <?php } ?>
               <th><?php echo uiTextSnippet('tag'); ?></th>
@@ -157,12 +157,12 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
           </thead>
           <?php
           $actionstr = "";
-          if ($allow_edit) {
+          if ($allowEdit) {
             $actionstr .= "<a href=\"eventtypesEdit.php?eventtypeID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
             $actionstr .= "</a>\n";
           }
-          if ($allow_delete) {
+          if ($allowDelete) {
             $actionstr .= "<a href='#' onClick=\"return confirmDelete('xxx');\" title='" . uiTextSnippet('delete') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
             $actionstr .= "</a>\n";
@@ -190,7 +190,7 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
               $displayval = "";
               for ($i = 0; $i < $numvalues; $i += 2) {
                 $lang = $dispvalues[$i];
-                if ($mylanguage == $languages_path . $lang) {
+                if ($mylanguage == $languagesPath . $lang) {
                   $displayval = $dispvalues[$i + 1];
                   break;
                 }
@@ -203,7 +203,7 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
             echo "<td>\n";
             echo "<div class='action-btns2'>\n$newactionstr</div>\n";
             echo "</td>\n";
-            if ($allow_delete || $allow_edit) {
+            if ($allowDelete || $allowEdit) {
               echo "<td><input name=\"et{$row['eventtypeID']}\" type='checkbox' value='1'></td>\n";
             }
             echo "<td>{$row['tag']}</td>\n";

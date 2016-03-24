@@ -1,10 +1,10 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
 if ($link) {
-  $admin_login = 1;
-  include("checklogin.php");
+  $adminLogin = 1;
+  require 'checklogin.php';
   include("version.php");
 }
 

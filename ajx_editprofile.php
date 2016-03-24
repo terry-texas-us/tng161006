@@ -1,7 +1,7 @@
 <?php
-include("begin.php");
-include("adminlib.php");
-include("checklogin.php");
+require 'begin.php';
+require 'adminlib.php';
+require 'checklogin.php';
 
 //if no rights, just throw up a message. don't redirect
 //remove javascript. put that somewhere global

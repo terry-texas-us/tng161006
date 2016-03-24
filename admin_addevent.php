@@ -1,11 +1,11 @@
 <?php
 
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-include("checklogin.php");
+require 'checklogin.php';
 
-if (!$allow_add) {
+if (!$allowAdd) {
   $message = uiTextSnippet('norights');
   exit;
 }
@@ -91,7 +91,7 @@ $info = strlen($info) > 90 ? substr($truncated, 0, strrpos($truncated, ' ')) . '
 header("Content-type:text/html; charset=" . $session_charset);
 $eventplace = stripslashes($eventplace);
 if ($eventID) {
-  echo "{\"id\":\"$eventID\",\"persfamID\":\"$persfamID\",\"tree\":\"$tree\",\"display\":\"$display\",\"eventdate\":\"$eventdate\",\"eventplace\":\"$eventplace\",\"info\":\"" . stripslashes($info) . "\",\"allow_edit\":$allow_edit,\"allow_delete\":$allow_delete}";
+  echo "{\"id\":\"$eventID\",\"persfamID\":\"$persfamID\",\"tree\":\"$tree\",\"display\":\"$display\",\"eventdate\":\"$eventdate\",\"eventplace\":\"$eventplace\",\"info\":\"" . stripslashes($info) . "\",\"allow_edit\":$allowEdit,\"allow_delete\":$allowDelete}";
 } else {
   echo "{\"id\":0}";
 }

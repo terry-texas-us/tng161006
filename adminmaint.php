@@ -1,10 +1,10 @@
 <?php
-include("begin.php");
+require 'begin.php';
 $tngconfig['maint'] = "";
-include("adminlib.php");
+require 'adminlib.php';
 
 $maintenance_mode = true;
-include("checklogin.php");
+require 'checklogin.php';
 include("version.php");
 
 header("Content-type: text/html; charset=" . $session_charset);

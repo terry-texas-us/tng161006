@@ -1,12 +1,12 @@
 <?php
 //This page written and contributed by Bert Deelman. Thanks, Bert!
-include("begin.php");
+require 'begin.php';
 include($subroot . "logconfig.php");
 include($subroot . "importconfig.php");
-include("adminlib.php");
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 $file_uploads = (bool)ini_get("file_uploads");

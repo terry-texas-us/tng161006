@@ -6,7 +6,7 @@ $currentuser = $_SESSION['currentuser'];
 $currentuserdesc = $_SESSION['currentuserdesc'];
 $thispage = getScriptName(false);
 
-global $admin_login;
+global $adminLogin;
 $need_assigned_tree = (!isset($orgtree) || !$orgtree) && $defaulttree && $assignedtree && $assignedtree != "-x-guest-x-";
 
 if (isset($_SESSION['postvars']) && is_array($_SESSION['postvars'])) {
@@ -14,7 +14,7 @@ if (isset($_SESSION['postvars']) && is_array($_SESSION['postvars'])) {
     ${$key} = $value;
   }
   $postvars = $_SESSION['postvars'] = "";
-} elseif (!$admin_login) {
+} elseif (!$adminLogin) {
   $postvars = $_SESSION['postvars'] = $_POST;
   $nodest_array = array("admi", "ajx_", "rpt_", "find", "tngr", "gedc", "goog", "img_");
   if (!$tngprint && !in_array(substr(basename($thispage), 0, 4), $nodest_array) && !$maintenance_mode) {
@@ -24,7 +24,7 @@ if (isset($_SESSION['postvars']) && is_array($_SESSION['postvars'])) {
   }
 }
 
-if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$admin_login || ($_SESSION['allow_admin'] && $currentuser))) {
+if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$adminLogin || ($_SESSION['allow_admin'] && $currentuser))) {
   if ($currentuser == "Administrator-No-Users-Yet") {
     $query = "SELECT userID FROM $users_table";
     $result = tng_query_noerror($query);
@@ -38,14 +38,14 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$admin_l
   }
   $allow_admin = $_SESSION['allow_admin'];
 
-  $allow_edit = $_SESSION['allow_edit'];
+  $allowEdit = $_SESSION['allow_edit'];
   
-  $allow_add = $_SESSION['allow_add'];
+  $allowAdd = $_SESSION['allow_add'];
   $tentative_edit = $_SESSION['tentative_edit'];
-  $allow_delete = $_SESSION['allow_delete'];
-  $allow_media_edit = $_SESSION['allow_media_edit'];
-  $allow_media_add = $_SESSION['allow_media_add'];
-  $allow_media_delete = $_SESSION['allow_media_delete'];
+  $allowDelete = $_SESSION['allow_delete'];
+  $allowMediaEdit = $_SESSION['allow_media_edit'];
+  $allowMediaAdd = $_SESSION['allow_media_add'];
+  $allowMediaDelete = $_SESSION['allow_media_delete'];
   $allow_living = $_SESSION['allow_living'];
   $allow_private = $_SESSION['allow_private'];
   $allow_ged = $_SESSION['allow_ged'];
@@ -58,13 +58,13 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$admin_l
   $result = tng_query_noerror($query);
   if (!$result || !tng_num_rows($result)) {
     $allow_admin = 1;
-    $allow_edit = 1;
-    $allow_add = 1;
+    $allowEdit = 1;
+    $allowAdd = 1;
     $tentative_edit = 0;
-    $allow_delete = 1;
-    $allow_media_edit = 1;
-    $allow_media_add = 1;
-    $allow_media_delete = 1;
+    $allowDelete = 1;
+    $allowMediaEdit = 1;
+    $allowMediaAdd = 1;
+    $allowMediaDelete = 1;
     $allow_living = 1;
     $allow_private = 1;
     $allow_ged = $allow_pdf = $allow_profile = 1;
@@ -76,7 +76,7 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$admin_l
     $_SESSION['session_rp'] = $rootpath;
     $_SESSION['tngrole'] = "admin";
   } else {
-    if ($admin_login == 1) {
+    if ($adminLogin == 1) {
       $postvars = $_SESSION['postvars'] = $_POST;
       $protocol = $_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off" ? "https://" : "http://";
       $destinationpage = $_SESSION['destinationpage8'] = $protocol . $_SERVER['HTTP_HOST'];
@@ -89,11 +89,11 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$admin_l
     if ($_COOKIE[$usercookiename]) {
       $passcookiename = "tngpass_$newroot";
       $passtype = "tngpasstype_$newroot";
-      $adminloginstr = $admin_login ? "admin_login=1&continue=1&" : "";
+      $adminloginstr = $adminLogin ? "admin_login=1&continue=1&" : "";
       header("Location: " . "processlogin.php?{$adminloginstr}tngusername=" . $_COOKIE[$usercookiename] . "&tngpassword=" . $_COOKIE[$passcookiename] . "&encrypted=encrypted");
       exit;
     }
-    if ($admin_login) {
+    if ($adminLogin) {
       header("Location: admin_login.php?continue=1");
       exit;
     } elseif ($requirelogin) {
@@ -110,7 +110,7 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$admin_l
       $_SESSION['tngrole'] = "guest";
 
       $allow_admin = 0;
-      $allow_edit = $allow_add = $tentative_edit = $allow_delete = $allow_media_add = $allow_media_edit = $allow_media_delete = 0;
+      $allowEdit = $allowAdd = $tentative_edit = $allowDelete = $allowMediaAdd = $allowMediaEdit = $allowMediaDelete = 0;
       $allow_living = $livedefault == 2 ? 1 : 0;
       $allow_private = 0;
       $allow_ged = $allow_pdf = $allow_profile = 0;
@@ -128,13 +128,13 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$admin_l
 
   //set session vars here if not previously logged in
   $_SESSION['allow_admin'] = $allow_admin;
-  $_SESSION['allow_edit'] = $allow_edit;
-  $_SESSION['allow_add'] = $allow_add;
+  $_SESSION['allow_edit'] = $allowEdit;
+  $_SESSION['allow_add'] = $allowAdd;
   $_SESSION['tentative_edit'] = $tentative_edit;
-  $_SESSION['allow_delete'] = $allow_delete;
-  $_SESSION['allow_media_edit'] = $allow_media_edit;
-  $_SESSION['allow_media_add'] = $allow_media_add;
-  $_SESSION['allow_media_delete'] = $allow_media_delete;
+  $_SESSION['allow_delete'] = $allowDelete;
+  $_SESSION['allow_media_edit'] = $allowMediaEdit;
+  $_SESSION['allow_media_add'] = $allowMediaAdd;
+  $_SESSION['allow_media_delete'] = $allowMediaDelete;
   $_SESSION['allow_living'] = $allow_living;
   $_SESSION['allow_private'] = $allow_private;
   $_SESSION['allow_ged'] = $allow_ged;

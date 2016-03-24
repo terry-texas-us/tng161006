@@ -1,10 +1,10 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 if (!$personID) {
   die("no args");
 }
-include("checklogin.php");
+require 'checklogin.php';
 
 $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch, living, private, gedcom FROM $people_table
     WHERE personID=\"$personID\" AND gedcom=\"$tree\"";

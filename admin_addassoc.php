@@ -1,13 +1,13 @@
 <?php
 
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-include("checklogin.php");
+require 'checklogin.php';
 
 require("adminlog.php");
 
-if (!$allow_add) {
+if (!$allowAdd) {
   $message = uiTextSnippet('norights');
   exit;
 }
@@ -53,4 +53,4 @@ $namestr = cleanIt($name . ": " . stripslashes($relationship));
 $namestr = truncateIt($namestr, 75);
 tng_free_result($result);
 header("Content-type:text/html; charset=" . $session_charset);
-echo "{\"id\":\"$assocID\",\"persfamID\":\"$personID\",\"tree\":\"$tree\",\"display\":\"$namestr\",\"allow_edit\":$allow_edit,\"allow_delete\":$allow_delete}";
+echo "{\"id\":\"$assocID\",\"persfamID\":\"$personID\",\"tree\":\"$tree\",\"display\":\"$namestr\",\"allow_edit\":$allowEdit,\"allow_delete\":$allowDelete}";

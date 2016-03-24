@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 if ($assignedtree) {
@@ -68,7 +68,7 @@ $headSection->setTitle(uiTextSnippet('reports'));
     echo $adminHeaderSection->build('reports', $message);
     $navList = new navList('');
     $navList->appendItem([true, "reportsBrowse.php", uiTextSnippet('browse'), "findreport"]);
-    $navList->appendItem([$allow_add, "reportsAdd.php", uiTextSnippet('add'), "addreport"]);
+    $navList->appendItem([$allowAdd, "reportsAdd.php", uiTextSnippet('add'), "addreport"]);
     echo $navList->build("findreport");
     ?>
     <div>
@@ -99,12 +99,12 @@ $headSection->setTitle(uiTextSnippet('reports'));
 
           <?php
           $actionstr = "";
-          if ($allow_edit) {
+          if ($allowEdit) {
             $actionstr .= "<a href=\"reportsEdit.php?reportID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
             $actionstr .= "</a>";
           }
-          if ($allow_delete) {
+          if ($allowDelete) {
             $actionstr .= "<a href='#' onClick=\"return confirmDelete('xxx');\" title='" . uiTextSnippet('delete') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
             $actionstr .= "</a>";
@@ -117,8 +117,8 @@ $headSection->setTitle(uiTextSnippet('reports'));
             $active = $row['active'] ? uiTextSnippet('yes') : uiTextSnippet('no');
             $newactionstr = preg_replace("/xxx/", $row['reportID'], $actionstr);
             $editlink = "reportsEdit.php?reportID={$row['reportID']}";
-            $id = $allow_edit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['reportID'] . "</a>" : $row['reportID'];
-            $name = $allow_edit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['reportname'] . "</a>" : $row['reportname'];
+            $id = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['reportID'] . "</a>" : $row['reportID'];
+            $name = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['reportname'] . "</a>" : $row['reportname'];
 
             echo "<tr id=\"row_{$row['reportID']}\"><td><div class=\"action-btns\">$newactionstr</div></td>\n";
             echo "<td>{$row['rank']}</td>\n";

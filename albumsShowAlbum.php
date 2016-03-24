@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include("genlib.php");
 include("getlang.php");
 
-include("checklogin.php");
+require 'checklogin.php';
 include("functions.php");
 include("log.php");
 
@@ -222,7 +222,7 @@ preparebookmark($logstring);
     $toplinks = "<p>";
     $toplinks .= $totrows ? uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows &nbsp;&nbsp; " : "";
     $toplinks .= $gallerymsg;
-    $toplinks .= $allow_admin && $allow_edit ? "<a href=\"albumsEdit.php?albumID=$albumID&amp;cw=1\" target='_blank'>&raquo; " . uiTextSnippet('editalbum') . "</a> " : "";
+    $toplinks .= $allow_admin && $allowEdit ? "<a href=\"albumsEdit.php?albumID=$albumID&amp;cw=1\" target='_blank'>&raquo; " . uiTextSnippet('editalbum') . "</a> " : "";
 
     $pagenav = buildSearchResultPagination($totrows, "albumsShowAlbum.php?albumID=$albumID&amp;tnggallery=$tnggallery&amp;offset", $maxsearchresults, $max_browsemedia_pages);
     $preheader = $pagenav . "</p>\n";

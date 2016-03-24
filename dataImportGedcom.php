@@ -1,13 +1,13 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 include($subroot . "importconfig.php");
 
-if (!$allow_add || !$allow_edit || $assignedbranch) {
+if (!$allowAdd || !$allowEdit || $assignedbranch) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;

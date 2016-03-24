@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 $tng_search_album = $_SESSION['tng_search_album'] = 1;
@@ -81,8 +81,8 @@ $headSection->setTitle(uiTextSnippet('albums'));
     echo $adminHeaderSection->build('albums', $message);
     $navList = new navList('');
 //    $navList->appendItem([true, "albumsBrowse.php", uiTextSnippet('browse'), "findalbum"]);
-    $navList->appendItem([$allow_media_add, "albumsAdd.php", uiTextSnippet('add'), "addalbum"]);
-    $navList->appendItem([$allow_media_edit, "albumsSort.php", uiTextSnippet('text_sort'), "sortalbums"]);
+    $navList->appendItem([$allowMediaAdd, "albumsAdd.php", uiTextSnippet('add'), "addalbum"]);
+    $navList->appendItem([$allowMediaEdit, "albumsSort.php", uiTextSnippet('text_sort'), "sortalbums"]);
     echo $navList->build("findalbum");
     ?>
     <table class='table table-sm'>
@@ -109,12 +109,12 @@ $headSection->setTitle(uiTextSnippet('albums'));
                 </tr>
                 <?php
                 $actionstr = "";
-                if ($allow_media_edit) {
+                if ($allowMediaEdit) {
                   $actionstr .= "<a href='albumsEdit.php?albumID=xxx' title='" . uiTextSnippet('edit') . "'>\n";
                   $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
                   $actionstr .= "</a>\n";
                 }
-                if ($allow_media_delete) {
+                if ($allowMediaDelete) {
                   $actionstr .= "<a href='#' onclick=\"return confirmDeleteAlbum('xxx');\" title='" . uiTextSnippet('delete') . "'>\n";
                   $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
                   $actionstr .= "</a>\n";
@@ -154,7 +154,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
                   tng_free_result($cresult);
 
                   $editlink = "albumsEdit.php?albumID={$row['albumID']}";
-                  $albumname = $allow_edit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['albumname'] . "</a>" : "<u>" . $row['albumname'] . "</u>";
+                  $albumname = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['albumname'] . "</a>" : "<u>" . $row['albumname'] . "</u>";
 
                   echo "<td>$albumname<br>" . strip_tags($row['description']) . "&nbsp;</td>\n";
                   echo "<td>$acount&nbsp;</td>\n";

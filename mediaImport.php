@@ -1,12 +1,12 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
-if (!$allow_media_add || $assignedtree) {
+if (!$allowMediaAdd || $assignedtree) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -50,11 +50,11 @@ $headSection->setTitle(uiTextSnippet('mediaimport'));
     echo $adminHeaderSection->build('media-import', $message);
     $navList = new navList('');
     $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('search'), "findmedia"]);
-    $navList->appendItem([$allow_media_add, "admin_newmedia.php", uiTextSnippet('addnew'), "addmedia"]);
-    $navList->appendItem([$allow_media_edit, "admin_ordermediaform.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    $navList->appendItem([$allow_media_edit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-//    $navList->appendItem([$allow_media_add && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allow_media_add && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
+    $navList->appendItem([$allowMediaAdd, "admin_newmedia.php", uiTextSnippet('addnew'), "addmedia"]);
+    $navList->appendItem([$allowMediaEdit, "admin_ordermediaform.php", uiTextSnippet('text_sort'), "sortmedia"]);
+    $navList->appendItem([$allowMediaEdit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
+//    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
+    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
     echo $navList->build("import");
     ?>
 
@@ -73,7 +73,7 @@ $headSection->setTitle(uiTextSnippet('mediaimport'));
               ?>
             </select>
             <?php
-            if (!$assignedtree && $allow_add && $allow_edit && $allow_delete) {
+            if (!$assignedtree && $allowAdd && $allowEdit && $allowDelete) {
               ?>
               <input name='addnewmediatype' type='button' value="<?php echo uiTextSnippet('addnewcoll'); ?>"
                      onclick="tnglitbox = new ModalDialog('admin_newcollection.php?field=mediatypeID');">
@@ -120,8 +120,8 @@ $headSection->setTitle(uiTextSnippet('mediaimport'));
   var tree = "<?php echo $tree; ?>";
   var tnglitbox;
   var stmediatypes = new Array(<?php echo $sttypestr; ?>);
-  var allow_edit = <?php echo($allow_edit ? "1" : "0"); ?>;
-  var allow_delete = <?php echo($allow_delete ? "1" : "0"); ?>;
+  var allow_edit = <?php echo($allowEdit ? "1" : "0"); ?>;
+  var allow_delete = <?php echo($allowDelete ? "1" : "0"); ?>;
   var manage = 1;
   <?php echo $likearray; ?>
 </script>

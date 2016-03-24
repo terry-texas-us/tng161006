@@ -1,12 +1,12 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
-if (!$allow_add) {
+if (!$allowAdd) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -29,8 +29,8 @@ $headSection->setTitle(uiTextSnippet('addnewsource'));
     echo $adminHeaderSection->build('sources-addnewsource', $message);
     $navList = new navList('');
     $navList->appendItem([true, "sourcesBrowse.php", uiTextSnippet('browse'), "findsource"]);
-    $navList->appendItem([$allow_add, "sourcesAdd.php", uiTextSnippet('add'), "addsource"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "sourcesMerge.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([$allowAdd, "sourcesAdd.php", uiTextSnippet('add'), "addsource"]);
+    $navList->appendItem([$allowEdit && $allowDelete, "sourcesMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("addsource");
     ?>
     <form name='form1' action='sourcesAddFormAction.php' method='post' onSubmit="return validateForm();">

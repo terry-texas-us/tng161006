@@ -63,7 +63,7 @@ function output_iptc_data($info) {
 
 function getMediaInfo($mediatypeID, $mediaID, $personID, $albumID, $albumlinkID, $cemeteryID, $eventID) {
   global $wherestr, $requirelogin, $treerestrict, $assignedtree, $tnggallery, $mediasearch, $tree, $all, $showall, $ordernum;
-  global $media_table, $medialinks_table, $albumlinks_table, $allow_media_edit;
+  global $media_table, $medialinks_table, $albumlinks_table, $allowMediaEdit;
 
   $info = array();
 
@@ -146,7 +146,7 @@ function getMediaInfo($mediatypeID, $mediaID, $personID, $albumID, $albumlinkID,
     $info['medianotes'] = $imgrow['altnotes'] ? $imgrow['altnotes'] : $imgrow['notes'];
   }
   if ($imgrow['gedcom'] && $assignedtree && $imgrow['gedcom'] != $assignedtree) {
-    $allow_media_edit = false;
+    $allowMediaEdit = false;
   }
   $info['gotmap'] = $imgrow['map'] ? 1 : 0;
   $info['result'] = $result;
@@ -226,7 +226,7 @@ function findLivingPrivate($mediaID, $tree) {
 }
 
 function getMediaNavigation($mediaID, $personID, $albumlinkID, $result, $showlinks = true) {
-  global $allow_admin, $allow_media_edit, $albumname, $albumID, $offset;
+  global $allow_admin, $allowMediaEdit, $albumname, $albumID, $offset;
   global $tree, $page, $maxsearchresults, $linktype, $showall, $tnggallery;
   global $tngconfig;
   global $totalpages, $all;
@@ -237,7 +237,7 @@ function getMediaNavigation($mediaID, $personID, $albumlinkID, $result, $showlin
   $pagenam = "";
 
   if ($showlinks) {
-    if ($allow_admin && $allow_media_edit) {
+    if ($allow_admin && $allowMediaEdit) {
       $pagenav .= "<a href=\"mediaEdit.php?mediaID=$mediaID&amp;cw=1\" target='_blank'>&raquo; " . uiTextSnippet('editmedia') . "</a> &nbsp;&nbsp;&nbsp;";
     }
     if ($albumlinkID) {

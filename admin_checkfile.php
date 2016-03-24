@@ -1,8 +1,8 @@
 <?php
 
-include("begin.php");
+require 'begin.php';
 
-include("checklogin.php");
+require 'checklogin.php';
 
 initMediaTypes();
 

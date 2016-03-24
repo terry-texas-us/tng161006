@@ -1,5 +1,5 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include("genlib.php");
 include("getlang.php");
 
@@ -38,7 +38,7 @@ if (!tng_num_rows($result)) {
   tng_free_result($result);
   header("Location: thispagedoesnotexist.html");
 }
-include("checklogin.php");
+require 'checklogin.php';
 include("showmedialib.php");
 
 $info = getMediaInfo($mediatypeID, $mediaID, $personID, $albumID, $albumlinkID, $cemeteryID, $eventID);

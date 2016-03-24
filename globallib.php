@@ -256,7 +256,7 @@ function isPhoto($row) {
 }
 
 function getEventDisplay($displaystr) {
-  global $mylanguage, $languages_path;
+  global $mylanguage, $languagesPath;
 
   $dispvalues = explode("|", $displaystr);
   $numvalues = count($dispvalues);
@@ -264,7 +264,7 @@ function getEventDisplay($displaystr) {
     $displayval = "";
     for ($i = 0; $i < $numvalues; $i += 2) {
       $lang = $dispvalues[$i];
-      if ($mylanguage == $languages_path . $lang) {
+      if ($mylanguage == $languagesPath . $lang) {
         $displayval = $dispvalues[$i + 1];
         break;
       }
@@ -1112,11 +1112,11 @@ function getAllTextPath() {
   global $rootpath;
   global $mylanguage;
   global $language;
-  global $languages_path;
+  global $languagesPath;
 
   $rootpath = trim($rootpath);
   if ($rootpath && strpos($rootpath, "http") !== 0) {
-    $thislanguage = trim($mylanguage ? $mylanguage : $languages_path . $language);
+    $thislanguage = trim($mylanguage ? $mylanguage : $languagesPath . $language);
   }
 }
 

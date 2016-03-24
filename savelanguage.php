@@ -1,11 +1,11 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include("genlib.php");
 
 
 session_start();
 
-$query = "SELECT display, folder, charset FROM $languages_table WHERE languageID = \"$newlanguage\"";
+$query = "SELECT display, folder, charset FROM $languagesTable WHERE languageID = \"$newlanguage\"";
 $result = tng_query($query) or die ("Cannot execute query: $query"); //message is hardcoded because we haven't included the text file yet
 $row = tng_fetch_assoc($result);
 tng_free_result($result);

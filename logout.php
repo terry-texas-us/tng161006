@@ -1,5 +1,5 @@
 <?php
-include("begin.php");
+require 'begin.php';
 
 session_start();
 $session_language = $_SESSION['session_language'];

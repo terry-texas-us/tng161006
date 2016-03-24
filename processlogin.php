@@ -1,12 +1,12 @@
 <?php
 
-include("begin.php");
+require 'begin.php';
 include("getlang.php");
 
 $tngconfig['maint'] = "";
 include("genlib.php");
 
-if ($admin_login) {
+if ($adminLogin) {
   $home_url = "admin.php";
   $login_url = "admin_login.php?";
   $dest_url = $_SESSION['destinationpage8'] && $continue ? $_SESSION['destinationpage8'] : $home_url;
@@ -46,7 +46,7 @@ if ($check) {
     setcookie("tngerror_$newroot", "logininactive", 0, "/");
   } else {
     $allow_admin = $row['allow_edit'] || $row['allow_add'] || $row['allow_delete'] ? 1 : 0;
-    if (!$admin_login || $allow_admin) {
+    if (!$adminLogin || $allow_admin) {
       $newdate = date("Y-m-d H:i:s", time() + (3600 * $time_offset));
       if ($resetpass && $newpassword && $row['allow_profile']) {
         $password_type = PasswordType();
@@ -60,19 +60,19 @@ if ($check) {
         setcookie("tngpass_$newroot", $row['password'], time() + 31536000, "/");
         setcookie("tngpasstype_$newroot", $row['password_type'], time() + 31536000, "/");
       }
-      if ($admin_login) {
+      if ($adminLogin) {
         setcookie("tngloggedin_$newroot", "1", 0, "/");
       }
       $logged_in = $_SESSION['logged_in'] = 1;
 
-      $allow_edit = $_SESSION['allow_edit'] = ($row['allow_edit'] == 1 ? 1 : 0);
-      $allow_add = $_SESSION['allow_add'] = ($row['allow_add'] == 1 ? 1 : 0);
+      $allowEdit = $_SESSION['allow_edit'] = ($row['allow_edit'] == 1 ? 1 : 0);
+      $allowAdd = $_SESSION['allow_add'] = ($row['allow_add'] == 1 ? 1 : 0);
       $tentative_edit = $_SESSION['tentative_edit'] = $row['tentative_edit'];
-      $allow_delete = $_SESSION['allow_delete'] = ($row['allow_delete'] == 1 ? 1 : 0);
+      $allowDelete = $_SESSION['allow_delete'] = ($row['allow_delete'] == 1 ? 1 : 0);
 
-      $allow_media_edit = $_SESSION['allow_media_edit'] = ($row['allow_edit'] ? 1 : 0);
-      $allow_media_add = $_SESSION['allow_media_add'] = ($row['allow_add'] ? 1 : 0);
-      $allow_media_delete = $_SESSION['allow_media_delete'] = ($row['allow_delete'] ? 1 : 0);
+      $allowMediaEdit = $_SESSION['allow_media_edit'] = ($row['allow_edit'] ? 1 : 0);
+      $allowMediaAdd = $_SESSION['allow_media_add'] = ($row['allow_add'] ? 1 : 0);
+      $allowMediaDelete = $_SESSION['allow_media_delete'] = ($row['allow_delete'] ? 1 : 0);
 
       $_SESSION['mygedcom'] = $row['mygedcom'];
       $_SESSION['mypersonID'] = $row['personID'];

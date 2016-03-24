@@ -1,5 +1,5 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include("genlib.php");
 if (!is_numeric($mediaID)) {
   header("Location: thispagedoesnotexist.html");
@@ -65,7 +65,7 @@ if (!tng_num_rows($result)) {
   header("Location: thispagedoesnotexist.html");
   exit;
 }
-include("checklogin.php");
+require 'checklogin.php';
 include("showmedialib.php");
 
 $mediaperpage = 1;

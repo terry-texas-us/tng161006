@@ -1,10 +1,10 @@
 <?php
 
-include("begin.php");
+require 'begin.php';
 include("genlib.php");
 
 $tngprint = 1;
-include("checklogin.php");
+require 'checklogin.php';
 
 header('Content-type: image/jpeg');
 $maxsize = 380;

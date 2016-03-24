@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 require("adminlog.php");
@@ -400,8 +400,8 @@ $headSection->setTitle(uiTextSnippet('labelbranches'));
     echo $adminHeaderSection->build('branches-labelbranches', $message);
     $navList = new navList('');
     $navList->appendItem([true, "branchesBrowse.php", uiTextSnippet('browse'), "findbranch"]);
-    $navList->appendItem([$allow_add, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
-    $navList->appendItem([$allow_edit, "#", uiTextSnippet('labelbranches'), "label"]);
+    $navList->appendItem([$allowAdd, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
+    $navList->appendItem([$allowEdit, "#", uiTextSnippet('labelbranches'), "label"]);
     echo $navList->build("label");
     ?>
     <div>

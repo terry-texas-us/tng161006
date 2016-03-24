@@ -1,10 +1,10 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include($subroot . "mapconfig.php");
-include("adminlib.php");
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 $orgtree = $tree;
@@ -158,7 +158,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
             ?>
             <form action="admin_deleteselected.php" method='post' name="form2">
               <?php
-              if ($allow_delete) {
+              if ($allowDelete) {
                 ?>
                 <p>
                   <input name='selectall' type='button' value="<?php echo uiTextSnippet('selectall'); ?>" 
@@ -175,7 +175,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
                 <tr>
                   <th><?php echo uiTextSnippet('action'); ?></th>
                   <?php
-                  if ($allow_delete) {
+                  if ($allowDelete) {
                     ?>
                     <th><?php echo uiTextSnippet('select'); ?></th>
                     <?php
@@ -194,12 +194,12 @@ $headSection->setTitle(uiTextSnippet('notes'));
                 <?php
                 if ($numrows) {
                 $actionstr = "";
-                if ($allow_edit) {
+                if ($allowEdit) {
                   $actionstr .= "<a href=\"admin_editnote2.php?ID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
                   $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
                   $actionstr .= "</a>\n";
                 }
-                if ($allow_delete) {
+                if ($allowDelete) {
                   $actionstr .= "<a href='#' onClick=\"return confirmDelete('xxx');\" title='" . uiTextSnippet('delete') . "'>\n";
                   $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
                   $actionstr .= "</a>\n";
@@ -208,7 +208,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
                 while ($row = tng_fetch_assoc($result)) {
                   $newactionstr = preg_replace("/xxx/", $row['ID'], $actionstr);
                   echo "<tr id=\"row_{$row['ID']}\"><td><div class=\"action-btns2\">$newactionstr</div></td>\n";
-                  if ($allow_delete) {
+                  if ($allowDelete) {
                     echo "<td><input name=\"del{$row['ID']}\" type='checkbox' value='1'></td>";
                   }
 
@@ -276,7 +276,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
                   }
                   tng_free_result($nresult);
 
-                  if (($allow_edit && !$assignedtree) || !$row['secret']) {
+                  if (($allowEdit && !$assignedtree) || !$row['secret']) {
                     $notetext = cleanIt($row['note']);
                     $notetext = truncateIt($notetext, 500);
                     if (!$notetext) {

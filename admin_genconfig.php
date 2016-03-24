@@ -1,14 +1,14 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
 $treeList = array();
 if ($link) {
-  $admin_login = 1;
-  include("checklogin.php");
+  $adminLogin = 1;
+  require 'checklogin.php';
   include("version.php");
 
-  if ($assignedtree || !$allow_edit) {
+  if ($assignedtree || !$allowEdit) {
     $message = uiTextSnippet('norights');
     header("Location: admin_login.php?message=" . urlencode($message));
     exit;
@@ -178,7 +178,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
                       </tr>
                       <tr>
                         <td><?php echo uiTextSnippet('languages'); ?>:</td>
-                        <td><input name='languages_table' type='text' value="<?php echo $languages_table; ?>"></td>
+                        <td><input name='languages_table' type='text' value="<?php echo $languagesTable; ?>"></td>
                       </tr>
                     </table>
                   </td>
@@ -696,7 +696,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
                   <td>
                     <select name="language">
                       <?php
-                      chdir($rootpath . $endrootpath . $languages_path);
+                      chdir($rootpath . $endrootpath . $languagesPath);
                       if ($handle = opendir('.')) {
                         $dirs = array();
                         while ($filename = readdir($handle)) {

@@ -4,7 +4,7 @@ include("tng_begin.php");
 $currentuser = $_SESSION['currentuser'];
 $currentuserdesc = $_SESSION['currentuserdesc'];
 
-$query = "SELECT languageID, display, folder FROM $languages_table ORDER BY display";
+$query = "SELECT languageID, display, folder FROM $languagesTable ORDER BY display";
 $result = tng_query($query);
 
 $numrows = tng_num_rows( $result );

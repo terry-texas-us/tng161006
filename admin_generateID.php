@@ -1,9 +1,9 @@
 <?php
 
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-include("checklogin.php");
+require 'checklogin.php';
 
 function getNewID($type, $table) {
   global $tree, $tngconfig;

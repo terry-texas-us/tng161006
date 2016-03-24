@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 function showDiv($type) {
@@ -13,12 +13,12 @@ function showDiv($type) {
   global $people_table;
   global $mediatypes_assoc;
   global $mediapath;
-  global $allow_add;
-  global $allow_delete;
-  global $allow_edit;
+  global $allowAdd;
+  global $allowDelete;
+  global $allowEdit;
   global $rootpath;
 
-  if ($allow_add) {
+  if ($allowAdd) {
     echo "<form action=\"\" style=\"margin:0;padding-bottom:5px\" method=\"post\" name=\"form$type\" id=\"form$type\">\n";
     echo "<input type='button' value=\"" . uiTextSnippet('addnew') . "\" onclick=\"return openMostWanted('$type','');\">\n";
     echo "</form>\n";
@@ -57,26 +57,26 @@ function showDiv($type) {
     echo "<td style=\"width:" . ($thumbmaxw + 6) . "px;text-align:center;\">";
     if ($lrow['thumbpath'] && file_exists("$rootpath$usefolder/" . $lrow['thumbpath'])) {
       $size = getimagesize("$rootpath$usefolder/" . $lrow['thumbpath']);
-      echo "<img src=\"$usefolder/" . str_replace("%2F", "/", rawurlencode($lrow['thumbpath'])) . "\" $size[3]} id=\"img_{$lrow['mwID']}\" alt=\"{$lrow['mtitle']}\">";
+      echo "<img src=\"$usefolder/" . str_replace("%2F", "/", rawurlencode($lrow['thumbpath'])) . "\" {$size[3]} id=\"img_{$lrow['mwID']}\" alt=\"{$lrow['mtitle']}\">";
     } else {
       echo "&nbsp;";
     }
     echo "</td>\n";
     echo "<td>";
-    if ($allow_edit) {
+    if ($allowEdit) {
       echo "<a href='#' onclick=\"return openMostWanted('{$lrow['mwtype']}','{$lrow['mwID']}');\" id=\"title_{$lrow['mwID']}\">{$lrow['title']}</a>";
     } else {
       echo "<u id=\"title_{$lrow['mwID']}\">{$lrow['title']}</u>";
     }
     echo "<br><span id=\"desc_{$lrow['mwID']}\">$truncated</span><br>";
     echo "<div id=\"del_{$lrow['mwID']}\" class=\"small\" style=\"color:gray;visibility:hidden\">";
-    if ($allow_edit) {
+    if ($allowEdit) {
       echo "<a href='#' onclick=\"return openMostWanted('{$lrow['mwtype']}','{$lrow['mwID']}');\">" . uiTextSnippet('edit') . "</a>";
-      if ($allow_delete) {
+      if ($allowDelete) {
         echo " | ";
       }
     }
-    if ($allow_delete) {
+    if ($allowDelete) {
       echo "<a href='#' onclick=\"return removeFromMostWanted('{$lrow['mwtype']}','{$lrow['mwID']}');\">" . uiTextSnippet('delete') . "</a>";
     }
     echo "</div>";

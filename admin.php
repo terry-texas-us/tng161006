@@ -2,7 +2,7 @@
 require 'begin.php';
 require 'adminlib.php';
 
-$admin_login = 2;
+$adminLogin = 2;
 require 'checklogin.php';
 require 'version.php';
 
@@ -18,33 +18,33 @@ function adminMenuItem($destination, $label, $message, $icon) {
   return $menu;
 }
 $genmsg = $mediamsg = "";
-if ($allow_add) {
+if ($allowAdd) {
   $genmsg .= uiTextSnippet('add') . " | ";
   $mediamsg = $genmsg;
-} elseif ($allow_media_add) {
+} elseif ($allowMediaAdd) {
   $mediamsg = uiTextSnippet('add') . " | ";
 }
 $genmsg .= uiTextSnippet('find2') . " | ";
 $mediamsg . uiTextSnippet('find2') . " | ";
-if ($allow_edit) {
+if ($allowEdit) {
   $genmsg .= uiTextSnippet('edit') . " | ";
   $mediamsg .= uiTextSnippet('edit') . " | ";
-} elseif ($allow_media_edit) {
+} elseif ($allowMediaEdit) {
   $mediamsg .= uiTextSnippet('edit') . " | ";
 }
-if ($allow_delete) {
+if ($allowDelete) {
   $genmsg .= uiTextSnippet('delete') . " | ";
   $mediamsg .= uiTextSnippet('delete') . " | ";
-} elseif ($allow_media_delete) {
+} elseif ($allowMediaDelete) {
   $mediamsg .= uiTextSnippet('delete') . " | ";
 }
 $sourcesmsg = $peoplemsg = $familiesmsg = $treesmsg = $cemeteriesmsg = $timelinemsg = $placesmsg = $genmsg;
 $mediamsg .= uiTextSnippet('text_sort') . " | ";
-if ($allow_edit) {
+if ($allowEdit) {
   $peoplemsg .= uiTextSnippet('reviewsh') . " | ";
   $familiesmsg .= uiTextSnippet('reviewsh') . " | ";
 }
-if ($allow_edit && $allow_delete) {
+if ($allowEdit && $allowDelete) {
   $peoplemsg .= uiTextSnippet('merge') . " | ";
   $placesmsg .= uiTextSnippet('merge') . " | ";
   $sourcesmsg .= uiTextSnippet('merge') . " | ";
@@ -69,7 +69,7 @@ $headSection->setTitle(uiTextSnippet('administration'));
     <form action="admin_savelanguage.php" target="_parent" name="language">
       <?php
       if ($link && $chooselang) {
-        $query = "SELECT languageID, display, folder FROM $languages_table ORDER BY display";
+        $query = "SELECT languageID, display, folder FROM $languagesTable ORDER BY display";
         $result = tng_query($query);
 
         if ($result && tng_num_rows($result)) {
@@ -77,7 +77,7 @@ $headSection->setTitle(uiTextSnippet('administration'));
 
           while ($row = tng_fetch_assoc($result)) {
             echo "<option value=\"{$row['languageID']}\"";
-            if ($languages_path . $row['folder'] == $mylanguage) {
+            if ($languagesPath . $row['folder'] == $mylanguage) {
               echo " selected";
             }
             echo ">{$row['display']}</option>\n";
@@ -90,29 +90,29 @@ $headSection->setTitle(uiTextSnippet('administration'));
     </form>
     <div class="row">
       <?php
-      if ($allow_edit || $allow_add || $allow_delete) {
+      if ($allowEdit || $allowAdd || $allowDelete) {
         echo adminMenuItem("peopleBrowse.php", uiTextSnippet('people'), $peoplemsg, "svg/person.svg");
         echo adminMenuItem("familiesBrowse.php", uiTextSnippet('families'), $familiesmsg, "svg/people.svg");
         echo adminMenuItem("sourcesBrowse.php", uiTextSnippet('sources'), $sourcesmsg, "svg/archive.svg");
         echo adminMenuItem("repositoriesBrowse.php", uiTextSnippet('repositories'), $sourcesmsg, "svg/building.svg");
       }
-      if ($allow_edit || $allow_add || $allow_delete || $allow_media_add || $allow_media_edit || $allow_media_delete) {
+      if ($allowEdit || $allowAdd || $allowDelete || $allowMediaAdd || $allowMediaEdit || $allowMediaDelete) {
         echo adminMenuItem("mediaBrowse.php", uiTextSnippet('media'), $mediamsg, "svg/media-mixed.svg");
         echo adminMenuItem("albumsBrowse.php", uiTextSnippet('albums'), $mediamsg, "svg/album.svg");
       }
-      if ($allow_edit || $allow_add || $allow_delete) {
+      if ($allowEdit || $allowAdd || $allowDelete) {
         echo adminMenuItem("cemeteriesBrowse.php", uiTextSnippet('cemeteries'), $cemeteriesmsg, "svg/headstone.svg");
         echo adminMenuItem("placesBrowse.php", uiTextSnippet('places'), $placesmsg, "svg/location.svg");
         echo adminMenuItem("timelineeventsBrowse.php", uiTextSnippet('tlevents'), $timelinemsg, "img/tlevents_icon.gif");
       }
-      if ($allow_edit && $allow_add && $allow_delete && !$assignedtree) {
+      if ($allowEdit && $allowAdd && $allowDelete && !$assignedtree) {
         echo adminMenuItem("admin_misc.php", uiTextSnippet('misc'), uiTextSnippet('miscitems'), "img/misc_icon.gif");
       }
 
-      if ($allow_edit && $allow_add && $allow_delete && !$assignedbranch) {
+      if ($allowEdit && $allowAdd && $allowDelete && !$assignedbranch) {
         echo adminMenuItem("dataImportGedcom.php", uiTextSnippet('datamaint'), uiTextSnippet('importgedcom2'), "img/datamaint_icon.gif");
       }
-      if ($allow_edit && $allow_add && $allow_delete && !$assignedtree) {
+      if ($allowEdit && $allowAdd && $allowDelete && !$assignedtree) {
         echo adminMenuItem("admin_setup.php", uiTextSnippet('setup'), uiTextSnippet('setupitems'), "svg/cog.svg");
         echo adminMenuItem("usersBrowse.php", uiTextSnippet('users'), uiTextSnippet('usersitems'), "svg/users.svg");
         echo adminMenuItem("treesBrowse.php", uiTextSnippet('trees'), $treesmsg, "svg/tree.svg");

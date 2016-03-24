@@ -1,10 +1,10 @@
 <?php
 
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = true;
-include("checklogin.php");
+$adminLogin = true;
+require 'checklogin.php';
 
 function doEvent($eventID, $displayval, $info) {
   echo "<event>\n";

@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 
@@ -27,8 +27,8 @@ $headSection->setTitle(uiTextSnippet('modifytlevent'));
     echo $adminHeaderSection->build('tlevents-modifytlevent', $message);
     $navList = new navList('');
     $navList->appendItem([true, "timelineeventsBrowse.php", uiTextSnippet('browse'), "findtlevent"]);
-    $navList->appendItem([$allow_add, "timelineeventsAdd.php", uiTextSnippet('add'), "addtlevent"]);
-    $navList->appendItem([$allow_edit, "#", uiTextSnippet('edit'), "edit"]);
+    $navList->appendItem([$allowAdd, "timelineeventsAdd.php", uiTextSnippet('add'), "addtlevent"]);
+    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <table class='table table-sm'>

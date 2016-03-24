@@ -1,14 +1,14 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include($subroot . "pedconfig.php");
-include("adminlib.php");
+require 'adminlib.php';
 
 if ($link) {
-  $admin_login = 1;
-  include("checklogin.php");
+  $adminLogin = 1;
+  require 'checklogin.php';
   include("version.php");
 
-  if ($assignedtree || !$allow_edit) {
+  if ($assignedtree || !$allowEdit) {
     $message = uiTextSnippet('norights');
     header("Location: admin_login.php?message=" . urlencode($message));
     exit;

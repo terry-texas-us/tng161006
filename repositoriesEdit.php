@@ -1,12 +1,12 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
-if ((!$allow_edit && (!$allow_add || !$added)) || ($assignedtree && $assignedtree != $tree)) {
+if ((!$allowEdit && (!$allowAdd || !$added)) || ($assignedtree && $assignedtree != $tree)) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -51,16 +51,16 @@ $headSection->setTitle(uiTextSnippet('modifyrepo'));
     echo $adminHeaderSection->build('repositories-modifyrepo', $message);
     $navList = new navList('');
     $navList->appendItem([true, "repositoriesBrowse.php", uiTextSnippet('search'), "findrepo"]);
-    $navList->appendItem([$allow_add, "repositoriesAdd.php", uiTextSnippet('add'), "addrepo"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "repositoriesMerge.php", uiTextSnippet('merge'), "merge"]);
-//    $navList->appendItem([$allow_edit, "repositoriesEdit.php?repoID=$repoID&tree=$tree", uiTextSnippet('edit'), "edit"]);
+    $navList->appendItem([$allowAdd, "repositoriesAdd.php", uiTextSnippet('add'), "addrepo"]);
+    $navList->appendItem([$allowEdit && $allowDelete, "repositoriesMerge.php", uiTextSnippet('merge'), "merge"]);
+//    $navList->appendItem([$allowEdit, "repositoriesEdit.php?repoID=$repoID&tree=$tree", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <br>
     <a href="repositoriesShowItem.php?repoID=<?php echo $repoID; ?>&amp;tree=<?php echo $tree; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
       <img class='icon-sm' src='svg/eye.svg'>
     </a>
-    <?php if ($allow_add && (!$assignedtree || $assignedtree == $tree)) { ?>
+    <?php if ($allowAdd && (!$assignedtree || $assignedtree == $tree)) { ?>
       <a href="admin_newmedia.php?personID=<?php echo $repoID; ?>&amp;tree=<?php echo $tree; ?>&amp;linktype=R"><?php echo uiTextSnippet('addmedia'); ?></a>
     <?php } ?>
     <form id='repositories-edit' name='form1' action='repositoriesEditFormAction.php' method='post'>

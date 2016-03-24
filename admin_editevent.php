@@ -1,8 +1,8 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-include("checklogin.php");
+require 'checklogin.php';
 
 $query = "SELECT display, $events_table.eventtypeID as eventtypeID, eventdate, eventplace, age, agency, cause, $events_table.gedcom as gedcom, $events_table.addressID, address1, address2, city, state, zip, country, info, phone, email, www FROM ($events_table, $eventtypes_table) LEFT JOIN $address_table on $events_table.addressID = $address_table.addressID WHERE eventID = \"$eventID\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID";
 $result = tng_query($query);

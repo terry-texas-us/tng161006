@@ -1,11 +1,11 @@
 <?php
 
 ini_set('memory_limit', '200M');
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 
 if ($assignedtree) {
   $message = uiTextSnippet('norights');
@@ -105,7 +105,7 @@ function getfilesize($filename) {
 set_time_limit(0);
 $largechunk = 10000;
 $tablelist = array($address_table, $albums_table, $albumlinks_table, $album2entities_table, $assoc_table, $branches_table, $branchlinks_table, $cemeteries_table, $people_table, $families_table, $children_table,
-        $languages_table, $places_table, $states_table, $countries_table, $sources_table, $repositories_table, $citations_table, $reports_table,
+        $languagesTable, $places_table, $states_table, $countries_table, $sources_table, $repositories_table, $citations_table, $reports_table,
         $events_table, $eventtypes_table, $trees_table, $notelinks_table, $xnotes_table, $users_table, $tlevents_table, $saveimport_table, $temp_events_table,
         $media_table, $medialinks_table, $mediatypes_table, $mostwanted_table);
 $ajaxmsg = $msg = "";

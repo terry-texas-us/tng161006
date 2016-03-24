@@ -1,5 +1,5 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include("genlib.php");
 if (!$sourceID) {
   header("Location: thispagedoesnotexist.html");
@@ -7,7 +7,7 @@ if (!$sourceID) {
 }
 include("getlang.php");
 
-include("checklogin.php");
+require 'checklogin.php';
 include("log.php");
 require 'personlib.php';
 require 'sources.php';
@@ -107,7 +107,7 @@ $headSection->setTitle($headtext);
     foreach ($events as $event) {
       $sourcetext .= showEvent($event);
     }
-    if ($allow_admin && $allow_edit) {
+    if ($allow_admin && $allowEdit) {
       $sourcetext .= showEvent(array("text" => uiTextSnippet('sourceid'), "date" => $sourceID, "place" => "<a href=\"sourcesEdit.php?sourceID=$sourceID&amp;tree=$tree&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>", "np" => 1));
     } else {
       $sourcetext .= showEvent(array("text" => uiTextSnippet('sourceid'), "date" => $sourceID));

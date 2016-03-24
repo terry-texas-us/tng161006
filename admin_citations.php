@@ -1,8 +1,8 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-include("checklogin.php");
+require 'checklogin.php';
 
 if (!isset($tree)) {
   $tree = "";
@@ -23,7 +23,7 @@ if ($eventtype['display']) {
     $displayval = "";
     for ($i = 0; $i < $numvalues; $i += 2) {
       $lang = $dispvalues[$i];
-      if ($mylanguage == $languages_path . $lang) {
+      if ($mylanguage == $languagesPath . $lang) {
         $eventtypedesc = $dispvalues[$i + 1];
         break;
       }
@@ -62,7 +62,7 @@ $citationcount = tng_num_rows($citresult);
     </header>
     <div class='modal-body'>
       <p>
-        <?php if ($allow_add) { ?>
+        <?php if ($allowAdd) { ?>
           <input type='button' value="  <?php echo uiTextSnippet('addnew'); ?>  "
                  onclick="document.citeform2.reset();gotoSection('citations', 'addcitation');">
         <?php } ?>
@@ -90,12 +90,12 @@ $citationcount = tng_num_rows($citresult);
             $citationsrc = cleanIt($citationsrc);
             $truncated = truncateIt($citationsrc, 75);
             $actionstr = '';
-            if ($allow_edit) {
+            if ($allowEdit) {
               $actionstr .= "<a href='#' onclick=\"return editCitation({$citation['citationID']});\" title='" . uiTextSnippet('edit') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
               $actionstr .= "</a>";
             }
-            if ($allow_delete) {
+            if ($allowDelete) {
               $actionstr .= "<a href='#' onclick=\"return deleteCitation({$citation['citationID']},'$persfamID','$tree','$eventID');\" title='" . uiTextSnippet('delete') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
               $actionstr .= "</a>";

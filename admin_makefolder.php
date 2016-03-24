@@ -1,11 +1,11 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
 header("Content-type:text/html; charset=" . $session_charset);
 if ($link) {
-  $admin_login = 1;
-  include("checklogin.php");
+  $adminLogin = 1;
+  require 'checklogin.php';
   if ($assignedtree) {
     echo uiTextSnippet('norights');
     exit;

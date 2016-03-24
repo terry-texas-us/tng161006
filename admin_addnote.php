@@ -1,11 +1,11 @@
 <?php
 
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-include("checklogin.php");
+require 'checklogin.php';
 
-if (!$allow_add || ($assignedtree && $assignedtree != $tree)) {
+if (!$allowAdd || ($assignedtree && $assignedtree != $tree)) {
   exit;
 }
 
@@ -33,4 +33,4 @@ adminwritelog(uiTextSnippet('addnewnote') . ": $tree/$persfamID/$xnoteID/$eventI
 $orgnote = cleanIt($orgnote);
 $truncated = truncateIt($orgnote, 75);
 header("Content-type:text/html; charset=" . $session_charset);
-echo "{\"id\":\"$ID\",\"persfamID\":\"$persfamID\",\"tree\":\"$tree\",\"eventID\":\"$eventID\",\"display\":\"$truncated\",\"allow_edit\":$allow_edit,\"allow_delete\":$allow_delete}";
+echo "{\"id\":\"$ID\",\"persfamID\":\"$persfamID\",\"tree\":\"$tree\",\"eventID\":\"$eventID\",\"display\":\"$truncated\",\"allow_edit\":$allowEdit,\"allow_delete\":$allowDelete}";

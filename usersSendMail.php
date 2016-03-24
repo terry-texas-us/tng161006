@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 header("Content-type: text/html; charset=" . $session_charset);
@@ -18,8 +18,8 @@ $headSection->setTitle(uiTextSnippet('emailusers'));
     echo $adminHeaderSection->build('users-emailmessage', $message);
     $navList = new navList('');
     $navList->appendItem([true, "usersBrowse.php", uiTextSnippet('search'), "finduser"]);
-    $navList->appendItem([$allow_add, "usersAdd.php", uiTextSnippet('add'), "adduser"]);
-    $navList->appendItem([$allow_edit, "usersReview.php", uiTextSnippet('review') . $revstar, "review"]);
+    $navList->appendItem([$allowAdd, "usersAdd.php", uiTextSnippet('add'), "adduser"]);
+    $navList->appendItem([$allowEdit, "usersReview.php", uiTextSnippet('review') . $revstar, "review"]);
 //    $navList->appendItem([true, "usersSendMail.php", uiTextSnippet('email'), "mail"]);
     echo $navList->build("mail");
     ?>

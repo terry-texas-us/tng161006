@@ -103,7 +103,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   global $datewidth;
   global $righttree;
   global $allow_lds_this;
-  global $allow_edit;
+  global $allowEdit;
   global $families_table;
   global $people_table;
   global $personID;
@@ -147,7 +147,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   }
   $indtext .= "<a href='peopleShowPerson.php?personID={$ind['personID']}&amp;tree=$tree'>$namestr</a>";
 
-  if ($allow_edit && $rightbranch) {
+  if ($allowEdit && $rightbranch) {
     $indtext .= " | <a href='peopleEdit.php?personID={$ind['personID']}&amp;tree=$tree&amp;cw=1' target='_blank'>" . uiTextSnippet('edit') . "</a>";
   }
   $indtext .= "</h4>\n";

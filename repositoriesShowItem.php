@@ -74,7 +74,7 @@ ksort($events);
 foreach ($events as $event) {
   $repotext .= showEvent($event);
 }
-if ($allow_admin && $allow_edit) {
+if ($allow_admin && $allowEdit) {
   $repotext .= showEvent(array("text" => uiTextSnippet('repoid'), "date" => $repoID, "place" => "<a href=\"repositoriesEdit.php?repoID=$repoID&amp;tree=$tree&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>", "np" => 1));
 } else {
   $repotext .= showEvent(array("text" => uiTextSnippet('repoid'), "date" => $repoID));

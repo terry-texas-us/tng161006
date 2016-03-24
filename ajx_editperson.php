@@ -1,10 +1,10 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 if (!$personID) {
   die("no args");
 }
-include("checklogin.php");
+require 'checklogin.php';
 
 initMediaTypes();
 
@@ -25,7 +25,7 @@ $row['burialplace'] = preg_replace("/\"/", "&#34;", $row['burialplace']);
 $row['baptplace'] = preg_replace("/\"/", "&#34;", $row['baptplace']);
 $row['endlplace'] = preg_replace("/\"/", "&#34;", $row['endlplace']);
 
-if ((!$allow_edit && (!$allow_add || !$added)) || ($assignedtree && $assignedtree != $tree) || !checkbranch($row['branch'])) {
+if ((!$allowEdit && (!$allowAdd || !$added)) || ($assignedtree && $assignedtree != $tree) || !checkbranch($row['branch'])) {
   $message = uiTextSnippet('norights');
   header("Location: ajx_login.php?message=" . urlencode($message));
   exit;

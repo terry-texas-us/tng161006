@@ -1,12 +1,12 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
-if (!$allow_add) {
+if (!$allowAdd) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -23,7 +23,7 @@ $headSection->setTitle(uiTextSnippet('addnewtlevent'));
     echo $adminHeaderSection->build('tlevents-addnewtlevent', $message);
     $navList = new navList('');
     $navList->appendItem([true, "timelineeventsBrowse.php", uiTextSnippet('browse'), "findtimeline"]);
-    $navList->appendItem([$allow_add, "timelineeventsAdd.php", uiTextSnippet('add'), "addtlevent"]);
+    $navList->appendItem([$allowAdd, "timelineeventsAdd.php", uiTextSnippet('add'), "addtlevent"]);
     echo $navList->build("addtlevent");
     ?>
     <form name='form1' action='timelineeventsAddFormAction.php' method='post' onSubmit="return validateForm();">

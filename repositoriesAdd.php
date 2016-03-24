@@ -1,12 +1,12 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
-if (!$allow_add) {
+if (!$allowAdd) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -28,8 +28,8 @@ $headSection->setTitle(uiTextSnippet('addnewrepo'));
     echo $adminHeaderSection->build('repositories-addnewrepo', $message);
     $navList = new navList('');
     $navList->appendItem([true, "repositoriesBrowse.php", uiTextSnippet('search'), "findrepo"]);
-//    $navList->appendItem([$allow_add, "repositoriesAdd.php", uiTextSnippet('add'), "addrepo"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "repositoriesMerge.php", uiTextSnippet('merge'), "merge"]);
+//    $navList->appendItem([$allowAdd, "repositoriesAdd.php", uiTextSnippet('add'), "addrepo"]);
+    $navList->appendItem([$allowEdit && $allowDelete, "repositoriesMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("addrepo");
     ?>
     <form name='form1' action='repositoriesAddFormAction.php' method='post' onSubmit="return validateForm();">

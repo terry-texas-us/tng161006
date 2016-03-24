@@ -1,14 +1,14 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 require("adminlog.php");
 
-if (!$allow_edit || !$allow_delete) {
+if (!$allowEdit || !$allowDelete) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -81,7 +81,7 @@ function doRow($field, $textmsg, $boxname) {
 }
 
 function getEvent($event) {
-  global $mylanguage, $languages_path;
+  global $mylanguage, $languagesPath;
 
   $dispvalues = explode("|", $event['display']);
   $numvalues = count($dispvalues);
@@ -89,7 +89,7 @@ function getEvent($event) {
     $displayval = "";
     for ($i = 0; $i < $numvalues; $i += 2) {
       $lang = $dispvalues[$i];
-      if ($mylanguage == $languages_path . $lang) {
+      if ($mylanguage == $languagesPath . $lang) {
         $displayval = $dispvalues[$i + 1];
         break;
       }
@@ -355,8 +355,8 @@ $headSection->setTitle(uiTextSnippet('merge'));
     echo $adminHeaderSection->build('sources-merge', $message);
     $navList = new navList('');
     $navList->appendItem([true, "sourcesBrowse.php", uiTextSnippet('browse'), "findsource"]);
-    $navList->appendItem([$allow_add, "sourcesAdd.php", uiTextSnippet('add'), "addsource"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "sourcesMerge.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([$allowAdd, "sourcesAdd.php", uiTextSnippet('add'), "addsource"]);
+    $navList->appendItem([$allowEdit && $allowDelete, "sourcesMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("merge");
     ?>
     <div><em><?php echo uiTextSnippet('choosemergesources'); ?></em><br><br>

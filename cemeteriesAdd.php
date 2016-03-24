@@ -1,13 +1,13 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include($subroot . "mapconfig.php");
-include("adminlib.php");
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
-if (!$allow_add) {
+if (!$allowAdd) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -35,7 +35,7 @@ $headSection->setTitle(uiTextSnippet('addnewcemetery'));
     echo $adminHeaderSection->build('cemeteries-addnewcemetery', $message);
     $navList = new navList('');
     $navList->appendItem([true, "cemeteriesBrowse.php", uiTextSnippet('browse'), "findcem"]);
-//    $navList->appendItem([$allow_add, "cemeteriesAdd.php", uiTextSnippet('add'), "addcemetery"]);
+//    $navList->appendItem([$allowAdd, "cemeteriesAdd.php", uiTextSnippet('add'), "addcemetery"]);
     echo $navList->build("addcemetery");
     ?>
     <form action="cemeteriesAddFormAction.php" method='post' name='form1' id='form1' ENCTYPE="multipart/form-data" onSubmit="return validateForm();">

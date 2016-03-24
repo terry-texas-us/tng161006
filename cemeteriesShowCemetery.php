@@ -100,7 +100,7 @@ $headSection->setTitle($location);
         $imageSize = getimagesize("$rootpath$headstonepath/" . $cemetery['maplink']);
         $infoblock .= "<img src=\"$headstonepath/{$cemetery['maplink']}\" $imageSize[3] alt=\"{$cemetery['cemname']}\"><br><br>\n";
       }
-      if ($allow_admin && $allow_edit) {
+      if ($allow_admin && $allowEdit) {
         $infoblock .= "<p><a href=\"cemeteriesEdit.php?cemeteryID=$cemeteryID&amp;cw=1\" target='_blank'>" . uiTextSnippet('editcem') . "</a></p>\n";
       }
       if ($cemetery['notes']) {

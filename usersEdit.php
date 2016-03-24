@@ -1,12 +1,12 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
-if ($assignedtree || !$allow_edit) {
+if ($assignedtree || !$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -44,8 +44,8 @@ $headSection->setTitle(uiTextSnippet('modifyuser'));
     echo $adminHeaderSection->build('users-edit', $message);
     $navList = new navList('');
     $navList->appendItem([true, "usersBrowse.php", uiTextSnippet('search'), "finduser"]);
-    $navList->appendItem([$allow_add, "usersAdd.php", uiTextSnippet('add'), "adduser"]);
-    $navList->appendItem([$allow_edit, "usersReview.php", uiTextSnippet('review') . $revstar, "review"]);
+    $navList->appendItem([$allowAdd, "usersAdd.php", uiTextSnippet('add'), "adduser"]);
+    $navList->appendItem([$allowEdit, "usersReview.php", uiTextSnippet('review') . $revstar, "review"]);
     $navList->appendItem([true, "usersSendMail.php", uiTextSnippet('email'), "mail"]);
 //    $navList->appendItem([true, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");

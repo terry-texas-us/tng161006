@@ -1,10 +1,10 @@
 <?php
-include("begin.php");
+require 'begin.php';
 require($subroot . "logconfig.php");
 include("genlib.php");
 include("getlang.php");
 
-include("checklogin.php");
+require 'checklogin.php';
 
 header("Content-type:text/html; charset=" . $session_charset);
 $lines = file($logfile);

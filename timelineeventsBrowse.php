@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 $tng_search_tlevents = $_SESSION['tng_search_tlevents'] = 1;
@@ -64,7 +64,7 @@ $headSection->setTitle(uiTextSnippet('tlevents'));
     echo $adminHeaderSection->build('tlevents', $message);
     $navList = new navList('');
 //    $navList->appendItem([true, "timelineeventsBrowse.php", uiTextSnippet('browse'), "findtimeline"]);
-    $navList->appendItem([$allow_add, "timelineeventsAdd.php", uiTextSnippet('add'), "addtlevent"]);
+    $navList->appendItem([$allowAdd, "timelineeventsAdd.php", uiTextSnippet('add'), "addtlevent"]);
     echo $navList->build("findtimeline");
     ?>
     <table class='table table-sm'>
@@ -90,7 +90,7 @@ $headSection->setTitle(uiTextSnippet('tlevents'));
             ?>
             <form action="admin_deleteselected.php" method='post' name="form2">
               <?php
-              if ($allow_delete) {
+              if ($allowDelete) {
                 ?>
                 <p>
                   <input name='selectall' type='button' value="<?php echo uiTextSnippet('selectall'); ?>" 
@@ -106,7 +106,7 @@ $headSection->setTitle(uiTextSnippet('tlevents'));
               <table class="table table-sm table-striped">
                 <tr>
                   <th><?php echo uiTextSnippet('action'); ?></th>
-                  <?php if ($allow_delete) { ?>
+                  <?php if ($allowDelete) { ?>
                     <th><?php echo uiTextSnippet('select'); ?></th>
                   <?php } ?>
                   <th><?php echo uiTextSnippet('evyear'); ?></th>
@@ -117,12 +117,12 @@ $headSection->setTitle(uiTextSnippet('tlevents'));
                 <?php
                 if ($numrows) {
                 $actionstr = "";
-                if ($allow_edit) {
+                if ($allowEdit) {
                   $actionstr .= "<a href=\"timelineeventsEdit.php?tleventID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
                   $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
                   $actionstr .= "</a>\n";
                 }
-                if ($allow_delete) {
+                if ($allowDelete) {
                   $actionstr .= "<a href='#' onClick=\"if(confirm('" . uiTextSnippet('confdeletetlevent') . "' )){deleteIt('tlevent',xxx);} return false;\" title='" . uiTextSnippet('delete') . "'>\n";
                   $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
                   $actionstr .= "</a>\n";
@@ -130,7 +130,7 @@ $headSection->setTitle(uiTextSnippet('tlevents'));
                 while ($rowcount < $numrows && $row = tng_fetch_assoc($result)) {
                   $newactionstr = preg_replace("/xxx/", $row['tleventID'], $actionstr);
                   echo "<tr id=\"row_{$row['tleventID']}\"><td><div class=\"action-btns2\">$newactionstr</div></td>\n";
-                  if ($allow_delete) {
+                  if ($allowDelete) {
                     echo "<td><input name=\"del{$row['tleventID']}\" type='checkbox' value='1'></td>";
                   }
                   echo "<td>{$row['evyear']}</td>\n";

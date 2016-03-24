@@ -1,12 +1,12 @@
 <?php
 
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = true;
-include("checklogin.php");
+$adminLogin = true;
+require 'checklogin.php';
 
-if (!$allow_delete) {
+if (!$allowDelete) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;

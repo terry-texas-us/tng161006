@@ -1,8 +1,8 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-include("checklogin.php");
+require 'checklogin.php';
 
 $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch, living, private, gedcom FROM $people_table
     WHERE personID=\"$personID\" AND gedcom=\"$tree\"";
@@ -35,7 +35,7 @@ $assoccount = tng_num_rows($assocresult);
     </header>
     <div class='modal-body'>
       <p>
-        <?php if ($allow_add) { ?>
+        <?php if ($allowAdd) { ?>
         <button class='btn btn-secondary' id='addnew' type='button'><?php echo uiTextSnippet('add'); ?></button>
         <?php } ?>
       </p>
@@ -75,12 +75,12 @@ $assoccount = tng_num_rows($assocresult);
               $assocname = cleanIt($assocname);
               $truncated = truncateIt($assocname, 75);
               $actionstr = '';
-              if ($allow_edit) {
+              if ($allowEdit) {
                 $actionstr .= "<a href='#' onclick=\"return editAssociation({$assoc['assocID']});\" title='" . uiTextSnippet('edit') . "'>\n";
                 $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
                 $actionstr .= "</a>";
               }
-              if ($allow_delete) {
+              if ($allowDelete) {
                 $actionstr .= "<a href='#' onclick=\"return deleteAssociation({$assoc['assocID']},'$personID','$tree');\" title='" . uiTextSnippet('delete') . "'>\n";
                 $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
                 $actionstr .= "</a>";

@@ -1,5 +1,5 @@
 <?php
-include("begin.php");
+require 'begin.php';
 $tngconfig['maint'] = "";
 include("genlib.php");
 include("getlang.php");

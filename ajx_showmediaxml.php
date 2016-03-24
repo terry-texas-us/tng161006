@@ -1,11 +1,11 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include("genlib.php");
 include("getlang.php");
 
 include("functions.php");
 require 'personlib.php';
-include("checklogin.php");
+require 'checklogin.php';
 include("showmedialib.php");
 
 initMediaTypes();

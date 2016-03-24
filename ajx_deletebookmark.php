@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include("genlib.php");
 include("getlang.php");
 
-include("checklogin.php");
+require 'checklogin.php';
 
 $newroot = preg_replace('/\//', '', $rootpath);
 $newroot = preg_replace('/ /', '', $newroot);

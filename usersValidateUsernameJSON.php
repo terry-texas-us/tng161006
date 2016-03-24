@@ -1,8 +1,8 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-include("checklogin.php");
+require 'checklogin.php';
 
 $query = "SELECT username FROM $users_table WHERE username = \"$checkuser\"";
 $result = tng_query($query) or die (uiTextSnippet('cannotexecutequery') . ": $query");

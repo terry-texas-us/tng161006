@@ -1,12 +1,12 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
-if ((!$allow_edit && (!$allow_add || !$added)) || ($assignedtree && $assignedtree != $tree)) {
+if ((!$allowEdit && (!$allowAdd || !$added)) || ($assignedtree && $assignedtree != $tree)) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -70,16 +70,16 @@ $headSection->setTitle(uiTextSnippet('modifysource'));
     echo $adminHeaderSection->build('sources-modifysource', $message);
     $navList = new navList('');
     $navList->appendItem([true, "sourcesBrowse.php", uiTextSnippet('browse'), "findsource"]);
-    $navList->appendItem([$allow_add, "sourcesAdd.php", uiTextSnippet('add'), "addsource"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "sourcesMerge.php", uiTextSnippet('merge'), "merge"]);
-    $navList->appendItem([$allow_edit, "sourcesEdit.php?sourceID=$sourceID&tree=$tree", uiTextSnippet('edit'), "edit"]);
+    $navList->appendItem([$allowAdd, "sourcesAdd.php", uiTextSnippet('add'), "addsource"]);
+    $navList->appendItem([$allowEdit && $allowDelete, "sourcesMerge.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([$allowEdit, "sourcesEdit.php?sourceID=$sourceID&tree=$tree", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <br>
     <a href="sourcesShowSource.php?sourceID=<?php echo $sourceID; ?>&amp;tree=<?php echo $tree; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
       <img class='icon-sm' src='svg/eye.svg'>
     </a>
-    <?php if ($allow_add && (!$assignedtree || $assignedtree == $tree)) { ?>
+    <?php if ($allowAdd && (!$assignedtree || $assignedtree == $tree)) { ?>
       <a href="admin_newmedia.php?personID=<?php echo $sourceID; ?>&amp;tree=<?php echo $tree; ?>&amp;linktype=S"><?php echo uiTextSnippet('addmedia'); ?></a>
     <?php } ?>
     <form name='form1' action='sourcesEditFormAction.php' method='post'>

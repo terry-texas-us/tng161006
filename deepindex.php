@@ -1,11 +1,11 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include("genlib.php");
-include("adminlib.php");
+require 'adminlib.php';
 
-$admin_login = 1;
+$adminLogin = 1;
 if ($link) {
-  include("checklogin.php");
+  require 'checklogin.php';
 }
 ?>
 <frameset>

@@ -1,12 +1,12 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
-if (!$allow_media_add) {
+if (!$allowMediaAdd) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -23,8 +23,8 @@ $headSection->setTitle(uiTextSnippet('addnewalbum'));
     echo $adminHeaderSection->build('albums-addnewalbum', $message);
     $navList = new navList('');
     $navList->appendItem([true, "albumsBrowse.php", uiTextSnippet('browse'), "findalbum"]);
-    $navList->appendItem([$allow_add, "albumsAdd.php", uiTextSnippet('add'), "addalbum"]);
-    $navList->appendItem([$allow_edit, "albumsSort.php", uiTextSnippet('text_sort'), "sortalbums"]);
+    $navList->appendItem([$allowAdd, "albumsAdd.php", uiTextSnippet('add'), "addalbum"]);
+    $navList->appendItem([$allowEdit, "albumsSort.php", uiTextSnippet('text_sort'), "sortalbums"]);
     echo $navList->build("addalbum");
     ?>
     <form name='form1' action='albumsAddFormAction.php' method='post' onSubmit="return validateForm();">

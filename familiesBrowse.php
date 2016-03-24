@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 if ($newsearch) {
@@ -167,8 +167,8 @@ $headSection->setTitle(uiTextSnippet('families'));
     echo $adminHeaderSection->build('families', $message);
     $navList = new navList('');
 //    $navList->appendItem([true, "familiesBrowse.php", uiTextSnippet('browse'), "findfamily"]);
-    $navList->appendItem([$allow_add, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
-    $navList->appendItem([$allow_edit, "admin_findreview.php?type=F", uiTextSnippet('review') . $revstar, "review"]);
+    $navList->appendItem([$allowAdd, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
+    $navList->appendItem([$allowEdit, "admin_findreview.php?type=F", uiTextSnippet('review') . $revstar, "review"]);
     echo $navList->build("findfamily");
     ?>
     <div>
@@ -181,7 +181,7 @@ $headSection->setTitle(uiTextSnippet('families'));
       echo displayListLocation($offsetplus, $numrowsplus, $totrows);
       ?>
       <form action="admin_deleteselected.php" method='post' name="form2">
-        <?php if ($allow_delete) { ?>
+        <?php if ($allowDelete) { ?>
           <p>
             <button class='btn btn-secondary' name='selectall' type='button' onClick="toggleAll(1);"><?php echo uiTextSnippet('selectall'); ?></button>
             <button class='btn btn-secondary' name='clearall' type='button' onClick="toggleAll(0);"><?php echo uiTextSnippet('clearall'); ?></button>
@@ -193,7 +193,7 @@ $headSection->setTitle(uiTextSnippet('families'));
           <table class="table table-sm table-striped">
             <tr>
               <th><?php echo uiTextSnippet('action'); ?></th>
-              <?php if ($allow_delete) { ?>
+              <?php if ($allowDelete) { ?>
                 <th><?php echo uiTextSnippet('select'); ?></th>
               <?php } ?>
               <th><?php echo uiTextSnippet('id'); ?></th>
@@ -213,12 +213,12 @@ $headSection->setTitle(uiTextSnippet('families'));
             </tr>
             <?php
             $actionstr = "";
-            if ($allow_edit) {
+            if ($allowEdit) {
               $actionstr .= "<a href=\"familiesEdit.php?familyID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('edit') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
               $actionstr .= "</a>\n";
             }
-            if ($allow_delete) {
+            if ($allowDelete) {
               $actionstr .= "<a href='#' onClick=\"return confirmDelete('zzz');\" title='" . uiTextSnippet('delete') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
               $actionstr .= "</a>\n";
@@ -236,13 +236,13 @@ $headSection->setTitle(uiTextSnippet('families'));
               $row['allow_private'] = $rights['private'];
 
               $editlink = "familiesEdit.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}";
-              $id = $allow_edit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['familyID'] . "</a>" : $row['familyID'];
+              $id = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['familyID'] . "</a>" : $row['familyID'];
 
               echo "<tr id=\"row_{$row['ID']}\">\n";
               echo "<td>\n";
               echo    "<div class='action-btns'>\n$newactionstr</div>\n";
               echo "</td>\n";
-              if ($allow_delete) {
+              if ($allowDelete) {
                 echo "<td><input name=\"del{$row['ID']}\" type='checkbox' value='1'></td>\n";
               }
               echo "<td>$id</td>\n";

@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 
 $query = "SELECT thumbpath,  usecollfolder, description, notes, mediatypeID FROM $media_table WHERE mediaID = \"$mediaID\"";
 $result = tng_query($query);

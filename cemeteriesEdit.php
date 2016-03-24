@@ -1,13 +1,13 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include($subroot . "mapconfig.php");
-include("adminlib.php");
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
-if (!$allow_edit) {
+if (!$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -46,8 +46,8 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
     echo $adminHeaderSection->build('cemeteries-modifycemetery', $message);
     $navList = new navList('');
     $navList->appendItem([true, "cemeteriesBrowse.php", uiTextSnippet('browse'), "findcem"]);
-    $navList->appendItem([$allow_add, "cemeteriesAdd.php", uiTextSnippet('add'), "addcemetery"]);
-    $navList->appendItem([$allow_add, "#", uiTextSnippet('edit'), "edit"]);
+    $navList->appendItem([$allowAdd, "cemeteriesAdd.php", uiTextSnippet('add'), "addcemetery"]);
+    $navList->appendItem([$allowAdd, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <br>

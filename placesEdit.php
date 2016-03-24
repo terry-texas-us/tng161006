@@ -1,10 +1,10 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include($subroot . "mapconfig.php");
-include("adminlib.php");
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 $tng_search_places = $_SESSION['tng_search_places'];
@@ -54,10 +54,10 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
     echo $adminHeaderSection->build('places-modifyplace', $message);
     $navList = new navList('');
     $navList->appendItem([true, "placesBrowse.php", uiTextSnippet('browse'), "findplace"]);
-    $navList->appendItem([$allow_add, "placesAdd.php", uiTextSnippet('add'), "addplace"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "placesMerge.php", uiTextSnippet('merge'), "merge"]);
-    $navList->appendItem([$allow_edit, "admin_geocodeform.php", uiTextSnippet('geocode'), "geo"]);
-    $navList->appendItem([$allow_edit, "#", uiTextSnippet('edit'), "edit"]);
+    $navList->appendItem([$allowAdd, "placesAdd.php", uiTextSnippet('add'), "addplace"]);
+    $navList->appendItem([$allowEdit && $allowDelete, "placesMerge.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([$allowEdit, "admin_geocodeform.php", uiTextSnippet('geocode'), "geo"]);
+    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
 
     echo $navList->build("edit");
     ?>
@@ -196,12 +196,12 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
                     $location .= $cemrow['country'];
                   }
                   $actionstr = '';
-                  if ($allow_delete) {
+                  if ($allowDelete) {
                     $actionstr .= "<a href='#' onclick=\"return deleteCemLink('{$cemrow['cemeteryID']}');\" title='" . uiTextSnippet('delete') . "'>\n";
                     $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
                     $actionstr .= "</a>";
                   }
-                  if ($allow_edit) {
+                  if ($allowEdit) {
                     $actionstr .= "<a href='#' onclick=\"return copyGeoInfo('{$cemrow['cemeteryID']}');\"><img class='icon-sm-inline' src='svg/globe.svg' id=\"geo{$cemrow['cemeteryID']}\" title=\"" . uiTextSnippet('geocopy') . "\" alt=\"" . uiTextSnippet('geocopy') . "\"></a>";
                   }
                   echo "<tr id=\"row_{$cemrow['cemeteryID']}\">\n";

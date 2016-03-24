@@ -1,15 +1,15 @@
 <?php
 
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 set_time_limit(0);
 
 require("adminlog.php");
 
-if (!$allow_media_add) {
+if (!$allowMediaAdd) {
   echo uiTextSnippet('norights');
   exit;
 }

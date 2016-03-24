@@ -1,17 +1,17 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
-if (!$allow_edit) {
+if (!$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-$query = "SELECT * FROM $languages_table WHERE languageID = \"$languageID\"";
+$query = "SELECT * FROM $languagesTable WHERE languageID = \"$languageID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -28,8 +28,8 @@ $headSection->setTitle(uiTextSnippet('modifylanguage'));
     echo $adminHeaderSection->build('languages-modifylanguage', $message);
     $navList = new navList('');
     $navList->appendItem([true, "languagesBrowse.php", uiTextSnippet('browse'), "findlang"]);
-    $navList->appendItem([$allow_add, "languagesAdd.php", uiTextSnippet('add'), "addlanguage"]);
-    $navList->appendItem([$allow_edit, "#", uiTextSnippet('edit'), "edit"]);
+    $navList->appendItem([$allowAdd, "languagesAdd.php", uiTextSnippet('add'), "addlanguage"]);
+    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <table class='table table-sm'>
@@ -42,7 +42,7 @@ $headSection->setTitle(uiTextSnippet('modifylanguage'));
                 <td>
                   <select name="folder">
                     <?php
-                    chdir($rootpath . $endrootpath . $languages_path);
+                    chdir($rootpath . $endrootpath . $languagesPath);
                     if ($handle = opendir('.')) {
                       $dirs = array();
                       while ($filename = readdir($handle)) {

@@ -1,12 +1,12 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
-if ($assignedtree || !$allow_edit) {
+if ($assignedtree || !$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -158,8 +158,8 @@ $headSection->setTitle(uiTextSnippet('modifyreport'));
     echo $adminHeaderSection->build('reports-modifyreport', $message);
     $navList = new navList('');
     $navList->appendItem([1, "reportsBrowse.php", uiTextSnippet('browse'), "findreport"]);
-    $navList->appendItem([$allow_add, "reportsAdd.php", uiTextSnippet('add'), "addreport"]);
-    $navList->appendItem([$allow_edit, "#", uiTextSnippet('edit'), "edit"]);
+    $navList->appendItem([$allowAdd, "reportsAdd.php", uiTextSnippet('add'), "addreport"]);
+    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <table class='table table-sm'>

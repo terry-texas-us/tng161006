@@ -26,7 +26,7 @@ $sitever = 'standard';
 
 session_start();
 
-$languages_path = "languages/";
+$languagesPath = "languages/";
 include("getlang.php");
 $session_language = $_SESSION['session_language'];
 $session_charset = $_SESSION['session_charset'];

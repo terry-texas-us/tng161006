@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = true;
-include("checklogin.php");
+$adminLogin = true;
+require 'checklogin.php';
 
 initMediaTypes();
 
@@ -26,7 +26,7 @@ $row['confplace'] = preg_replace("/\"/", "&#34;", $row['confplace']);
 $row['initplace'] = preg_replace("/\"/", "&#34;", $row['initplace']);
 $row['endlplace'] = preg_replace("/\"/", "&#34;", $row['endlplace']);
 
-if ((!$allow_edit && (!$allow_add || !$added)) || ($assignedtree && $assignedtree != $tree) || !checkbranch($row['branch'])) {
+if ((!$allowEdit && (!$allowAdd || !$added)) || ($assignedtree && $assignedtree != $tree) || !checkbranch($row['branch'])) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -123,10 +123,10 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
     echo $adminHeaderSection->build('people-modifyperson', $message);
     $navList = new navList('');
     $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
-    $navList->appendItem([$allow_add, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
-    $navList->appendItem([$allow_edit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
-//    $navList->appendItem([$allow_edit, "peopleEdit.php?personID=$personID&amp;tree=$tree", uiTextSnippet('edit'), "edit"]);
+    $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
+    $navList->appendItem([$allowEdit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
+    $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
+//    $navList->appendItem([$allowEdit, "peopleEdit.php?personID=$personID&amp;tree=$tree", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <div id="thumbholder" style="margin-right: 5px; <?php if (!$photo) {echo "display: none";} ?>">
@@ -161,7 +161,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
     <a href="peopleShowPerson.php?personID=<?php echo $personID; ?>&amp;tree=<?php echo $tree; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
       <img class='icon-sm' src='svg/eye.svg'>
     </a>
-    <?php if ($allow_add && (!$assignedtree || $assignedtree == $tree)) { ?>
+    <?php if ($allowAdd && (!$assignedtree || $assignedtree == $tree)) { ?>
       <a id='addmedia-person' href='#'><?php echo uiTextSnippet('addmedia'); ?></a>
     <?php } ?>
 
@@ -307,7 +307,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
         $parents = tng_query($query);
         $parentcount = tng_num_rows($parents);
         $addNewFamilyTitle = "title='" . uiTextSnippet('gotonewfamily') . " ($personID) " . uiTextSnippet('aschild') . "'";
-        $newparents = $allow_add && (!$assignedtree || $assignedtree == $tree) ? 
+        $newparents = $allowAdd && (!$assignedtree || $assignedtree == $tree) ? 
           "&nbsp; <a id='addnew-parents' href='#' $addNewFamilyTitle data-person-id='$personID' data-tree='$tree' data-cw='$cw'>" . uiTextSnippet('addnew') . "</a>\n" : "";
         echo displayToggle("plus2", 1, "parents", uiTextSnippet('parents') . " (<span id=\"parentcount\">$parentcount</span>) $newparents", "");
         ?>
@@ -387,7 +387,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
             <tr>
               <td>
                 <?php
-                $newspouse = $allow_add && (!$assignedtree || $assignedtree == $tree ) && $row['sex'] 
+                $newspouse = $allowAdd && (!$assignedtree || $assignedtree == $tree ) && $row['sex'] 
                   ? "&nbsp; <a id='addnew-family-spouses' href='#' data-self='$self' data-person-id='$personID' data-tree='$tree' data-cw='$cw' title=\"" . uiTextSnippet('gotonewfamily') . " ($personID) $selfdisplay\">" . uiTextSnippet('addnew') . "</a>\n" 
                   : "";
                 echo displayToggle("plus3", 1, "spouses", uiTextSnippet('spouses') . " (<span id=\"marrcount\">$marrcount</span>) $newspouse", "");
@@ -505,7 +505,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
               <p>
                 <?php
                 echo uiTextSnippet('onsave') . ":<br>";
-                if ($allow_add && (!$assignedtree || $assignedtree == $tree)) {
+                if ($allowAdd && (!$assignedtree || $assignedtree == $tree)) {
                   echo "<input id='radiochild' name='newfamily' type='radio' value='child'>" . uiTextSnippet('gotonewfamily') . " ($personID) " . uiTextSnippet('aschild') . "<br>\n";
                   if ($row['sex']) {
                     echo "<input id=\"radio$self\" name='newfamily' type='radio' value=\"$self\">" . uiTextSnippet('gotonewfamily') . " ($personID) $selfdisplay<br>\n";

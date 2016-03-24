@@ -4,12 +4,12 @@ function showCustEvents($id) {
   global $tree;
   global $events_table;
   global $eventtypes_table;
-  global $allow_edit;
-  global $allow_delete;
+  global $allowEdit;
+  global $allowDelete;
   global $gotnotes;
   global $gotcites;
   global $mylanguage;
-  global $languages_path;
+  global $languagesPath;
 
   echo "<div id='custevents' style='margin-bottom: 5px'>\n";
 
@@ -42,7 +42,7 @@ function showCustEvents($id) {
         $displayval = "";
         for ($i = 0; $i < $numvalues; $i += 2) {
           $lang = $dispvalues[$i];
-          if ($mylanguage == $languages_path . $lang) {
+          if ($mylanguage == $languagesPath . $lang) {
             $displayval = $dispvalues[$i + 1];
             break;
           }
@@ -55,12 +55,12 @@ function showCustEvents($id) {
       $info = strlen($info) > 90 ? substr($truncated, 0, strrpos($truncated, ' ')) . '&hellip;' : $info;
 
       $actionstr = '';
-      if ($allow_edit) {
+      if ($allowEdit) {
         $actionstr .= "<a href='#' onclick=\"return editEvent({$event['eventID']});\" title='" . uiTextSnippet('edit') . "'>\n";
         $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
         $actionstr .= "</a>\n";
       }
-      if ($allow_delete) {
+      if ($allowDelete) {
         $actionstr .= "<a href='#' onclick=\"return deleteEvent('{$event['eventID']}');\" title='" . uiTextSnippet('delete') . "'>\n";
         $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
         $actionstr .= "</a>\n";

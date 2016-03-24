@@ -1,12 +1,12 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
-if (!$allow_edit || ($assignedtree && $assignedtree != $tree)) {
+if (!$allowEdit || ($assignedtree && $assignedtree != $tree)) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -57,10 +57,10 @@ $headSection->setTitle(uiTextSnippet('modifytree'));
     <?php
     echo $adminHeaderSection->build('trees-modifytree', $message);
     $navList = new navList('');
-    $allow_add_tree = $assignedtree ? 0 : $allow_add;
+    $allow_add_tree = $assignedtree ? 0 : $allowAdd;
     $navList->appendItem([true, 'treesBrowse.php', uiTextSnippet('search'), "findtree"]);
     $navList->appendItem([$allow_add_tree, 'treesAdd.php', uiTextSnippet('add'), "addtree"]);
-//    $navList->appendItem([$allow_edit, "#", uiTextSnippet('edit'), "edit"]);
+//    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <form name='form1' action="treesEditFormAction.php" method='post' onSubmit="return validateForm();">

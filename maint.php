@@ -1,11 +1,11 @@
 <?php
-include("begin.php");
+require 'begin.php';
 $tngconfig['maint'] = "";
 include("genlib.php");
 include("getlang.php");
 
 $maintenance_mode = true;
-include("checklogin.php");
+require 'checklogin.php';
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();

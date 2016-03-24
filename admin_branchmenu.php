@@ -1,12 +1,12 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
-if (!$allow_edit || $assignedbranch) {
+if (!$allowEdit || $assignedbranch) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -40,8 +40,8 @@ $headSection->setTitle(uiTextSnippet('labelbranches'));
     echo $adminHeaderSection->build('branches-labelbranches', $message);
     $navList = new navList('');
     $navList->appendItem([true, "branchesBrowse.php", uiTextSnippet('browse'), "findbranch"]);
-    $navList->appendItem([$allow_add, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
-    $navList->appendItem([$allow_edit, "#", uiTextSnippet('labelbranches'), "label"]);
+    $navList->appendItem([$allowAdd, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
+    $navList->appendItem([$allowEdit, "#", uiTextSnippet('labelbranches'), "label"]);
     echo $navList->build("label");
     ?>
     <form action="admin_branchlabels.php" method='post' id="form1" name="form1"

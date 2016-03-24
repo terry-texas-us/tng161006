@@ -2,12 +2,12 @@
 // PDF Family Report
 // Author: Bret Rumsey
 //
-include("begin.php");
+require 'begin.php';
 include("genlib.php");
 include("getlang.php");
 
 $tngprint = 1;
-include("checklogin.php");
+require 'checklogin.php';
 require 'personlib.php';
 
 define('FPDF_FONTPATH', $rootpath . $endrootpath . 'font/');

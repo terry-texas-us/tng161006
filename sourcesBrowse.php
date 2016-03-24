@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 if ($newsearch) {
@@ -123,8 +123,8 @@ $headSection->setTitle(uiTextSnippet('sources'));
     echo $adminHeaderSection->build('sources', $message);
     $navList = new navList('');
     $navList->appendItem([true, "sourcesBrowse.php", uiTextSnippet('browse'), "findsource"]);
-    $navList->appendItem([$allow_add, "sourcesAdd.php", uiTextSnippet('add'), "addsource"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "sourcesMerge.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([$allowAdd, "sourcesAdd.php", uiTextSnippet('add'), "addsource"]);
+    $navList->appendItem([$allowEdit && $allowDelete, "sourcesMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("findsource");
     ?>
     <div class="row">
@@ -152,7 +152,7 @@ $headSection->setTitle(uiTextSnippet('sources'));
       echo displayListLocation($offsetplus, $numrowsplus, $totrows);
       ?>
       <form action="admin_deleteselected.php" method='post' name="form2">
-        <?php if ($allow_delete) { ?>
+        <?php if ($allowDelete) { ?>
           <p>
             <input name='selectall' type='button' value="<?php echo uiTextSnippet('selectall'); ?>" 
                 onClick="toggleAll(1);">
@@ -166,7 +166,7 @@ $headSection->setTitle(uiTextSnippet('sources'));
         <table class="table table-sm table-striped">
           <tr>
             <th><span><?php echo uiTextSnippet('action'); ?></span></th>
-            <?php if ($allow_delete) { ?>
+            <?php if ($allowDelete) { ?>
               <th><span><?php echo uiTextSnippet('select'); ?></span></th>
             <?php } ?>
             <th><span><?php echo uiTextSnippet('sourceid'); ?></span></th>
@@ -178,12 +178,12 @@ $headSection->setTitle(uiTextSnippet('sources'));
           <?php
           if ($numrows) {
             $actionstr = "";
-            if ($allow_edit) {
+            if ($allowEdit) {
               $actionstr .= "<a href=\"sourcesEdit.php?sourceID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('edit') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
               $actionstr .= "</a>\n";
             }
-            if ($allow_delete) {
+            if ($allowDelete) {
               $actionstr .= "<a href='#' onClick=\"return confirmDelete('zzz');\" title='" . uiTextSnippet('delete') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
               $actionstr .= "</a>\n";
@@ -198,11 +198,11 @@ $headSection->setTitle(uiTextSnippet('sources'));
               $newactionstr = preg_replace("/zzz/", $row['ID'], $newactionstr);
               $title = $row['shorttitle'] ? $row['shorttitle'] : $row['title'];
               $editlink = "sourcesEdit.php?sourceID={$row['sourceID']}&amp;tree={$row['gedcom']}";
-              $id = $allow_edit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['sourceID'] . "</a>" : $row['sourceID'];
+              $id = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['sourceID'] . "</a>" : $row['sourceID'];
 
               echo "<tr id=\"row_{$row['ID']}\">\n";
                 echo "<td><div class=\"action-btns\">$newactionstr</div></td>\n";
-                if ($allow_delete) {
+                if ($allowDelete) {
                   echo "<td><input name=\"del{$row['ID']}\" type='checkbox' value='1'></td>";
                 }
                 echo "<td>$id</td>\n";

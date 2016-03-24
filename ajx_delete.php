@@ -1,12 +1,12 @@
 <?php
 
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 
-if (!$allow_media_delete) {
+if (!$allowMediaDelete) {
   exit;
 }
 
@@ -46,7 +46,7 @@ switch ($t) {
     $logmsg = uiTextSnippet('deleted') . ": $desc";
     break;
   case "language":
-    $query = "DELETE FROM $languages_table WHERE languageID=\"$id\"";
+    $query = "DELETE FROM $languagesTable WHERE languageID=\"$id\"";
     $result = tng_query($query);
 
     $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('language') . " $id";

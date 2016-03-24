@@ -1,10 +1,10 @@
 <?php
-include("begin.php"); // [ts] args expected entity, oldtree, entityID
-include("adminlib.php");
+require 'begin.php'; // [ts] args expected entity, oldtree, entityID
+require 'adminlib.php';
 
-include("checklogin.php");
+require 'checklogin.php';
 
-if ($assignedtree || !$allow_edit) {
+if ($assignedtree || !$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;

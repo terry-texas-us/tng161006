@@ -1,8 +1,8 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-include("checklogin.php");
+require 'checklogin.php';
 
 $query = "SELECT * FROM $citations_table WHERE citationID = \"$citationID\"";
 $result = tng_query($query);

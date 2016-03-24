@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = true;
-include("checklogin.php");
+$adminLogin = true;
+require 'checklogin.php';
 include("version.php");
 
 if ($type == 'I') {
@@ -122,15 +122,15 @@ $headSection->setTitle(uiTextSnippet('review'));
     if ($type == 'I') {
       $hmsg = 'people';
       $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
-      $navList->appendItem([$allow_add, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
-      $navList->appendItem([$allow_edit, "admin_findreview.php?type=I", uiTextSnippet('review'), "review"]);
-      $navList->appendItem([$allow_edit && $allow_delete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
+      $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
+      $navList->appendItem([$allowEdit, "admin_findreview.php?type=I", uiTextSnippet('review'), "review"]);
+      $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
     } else {
       $hmsg = 'families';
       
       $navList->appendItem([true, "familiesBrowse.php", uiTextSnippet('browse'), "findperson"]);
-      $navList->appendItem([$allow_add, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
-      $navList->appendItem([$allow_edit, "admin_findreview.php?type=F", uiTextSnippet('review'), "review"]);
+      $navList->appendItem([$allowAdd, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
+      $navList->appendItem([$allowEdit, "admin_findreview.php?type=F", uiTextSnippet('review'), "review"]);
     }
     echo $navList->build("review");
     ?>
@@ -217,7 +217,7 @@ $headSection->setTitle(uiTextSnippet('review'));
               $actionstr = "<a href=\"admin_review.php?tempID=xxx\" title='" . uiTextSnippet('review') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
               $actionstr .= "</a>";
-              if ($allow_delete) {
+              if ($allowDelete) {
                 $actionstr .= "<a href='#' onclick=\"return confirmDelete('xxx');\" title='" . uiTextSnippet('delete') . "'>\n";
                 $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
                 $actionstr .= "</a>";
@@ -236,7 +236,7 @@ $headSection->setTitle(uiTextSnippet('review'));
                       $displayval = "";
                       for ($i = 0; $i < $numvalues; $i += 2) {
                         $lang = $dispvalues[$i];
-                        if ($mylanguage == $languages_path . $lang) {
+                        if ($mylanguage == $languagesPath . $lang) {
                           $displayval = $dispvalues[$i + 1];
                           break;
                         }

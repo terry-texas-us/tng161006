@@ -1,23 +1,23 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include($subroot . "templateconfig.php");
-include("adminlib.php");
+require 'adminlib.php';
 
 $templatespath = "templates";
 
 if ($link) {
-  $admin_login = 1;
-  include("checklogin.php");
+  $adminLogin = 1;
+  require 'checklogin.php';
   include("version.php");
 
-  if ($assignedtree || !$allow_edit) {
+  if ($assignedtree || !$allowEdit) {
     $message = uiTextSnippet('norights');
     header("Location: admin_login.php?message=" . urlencode($message));
     exit;
   }
 }
 $languageArray = array();
-$query = "SELECT display, folder FROM $languages_table ORDER BY display";
+$query = "SELECT display, folder FROM $languagesTable ORDER BY display";
 $result = tng_query($query);
 $languageList = tng_num_rows($result) ? "<option value=''></option>\n" : "";
 while ($row = tng_fetch_assoc($result)) {

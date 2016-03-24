@@ -2,10 +2,10 @@
 
 // [ts] this file is likely unused
 
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-include("checklogin.php");
+require 'checklogin.php';
 
 $tng_search_cemeteries = $_SESSION['tng_search_cemeteries'];
 $tng_search_cemeteries_post = $_SESSION['tng_search_cemeteries_post'];
@@ -135,12 +135,12 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
           <?php
           $rowcount = 0;
           $actionstr = "";
-          if ($allow_edit) {
+          if ($allowEdit) {
             $actionstr .= "<a href=\"cemeteriesEdit.php?cemeteryID=xxx\">\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg alt=\"" . uiTextSnippet('edit') . "\">\n";
             $actionstr .= "</a>\n";
           }
-          if ($allow_delete) {
+          if ($allowDelete) {
             $actionstr .= "<a href=\"deletecemetery.php?cemeteryID=xxx\" onClick=\"return confirm('" . uiTextSnippet('confdeletecem') . "' );\">\n";
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg' alt=\"" . uiTextSnippet('delete') . "\">\n";
             $actionstr .= "</a>";

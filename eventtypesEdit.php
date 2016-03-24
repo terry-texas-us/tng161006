@@ -1,12 +1,12 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
-if (!$allow_edit) {
+if (!$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -45,8 +45,8 @@ $headSection->setTitle(uiTextSnippet('modifyeventtype'));
     echo $adminHeaderSection->build('customeventtypes-modifyeventtype', $message);
     $navList = new navList('');
     $navList->appendItem([true, "eventtypesBrowse.php", uiTextSnippet('browse'), "findevent"]);
-    $navList->appendItem([$allow_add, "eventtypesAdd.php", uiTextSnippet('add'), "addevent"]);
-//    $navList->appendItem([$allow_edit, "#", uiTextSnippet('edit'), "edit"]);
+    $navList->appendItem([$allowAdd, "eventtypesAdd.php", uiTextSnippet('add'), "addevent"]);
+//    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <form name='form1' action='eventtypesEditFormAction.php' method='post' onsubmit="return validateForm();">
@@ -201,7 +201,7 @@ $headSection->setTitle(uiTextSnippet('modifyeventtype'));
       }
       $disppairs = null;
     }
-    $query = "SELECT languageID, display, folder FROM $languages_table ORDER BY display";
+    $query = "SELECT languageID, display, folder FROM $languagesTable ORDER BY display";
     $langresult = tng_query($query);
     if (tng_num_rows($langresult)) {
       $displayrows = "";

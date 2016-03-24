@@ -1,7 +1,7 @@
 $(document).ready(init);
 $(window).resize(onResize);
 
-var tl;
+    var tl;
 function init() {
     timeline_init();
 }

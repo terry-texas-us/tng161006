@@ -1,12 +1,12 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
-if (!$allow_add) {
+if (!$allowAdd) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -151,7 +151,7 @@ $headSection->setTitle(uiTextSnippet('addnewreport'));
     echo $adminHeaderSection->build('reports-addnewreport', $message);
     $navList = new navList('');
     $navList->appendItem([true, "reportsBrowse.php", uiTextSnippet('browse'), "findreport"]);
-    $navList->appendItem([$allow_add, "reportsAdd.php", uiTextSnippet('add'), "addreport"]);
+    $navList->appendItem([$allowAdd, "reportsAdd.php", uiTextSnippet('add'), "addreport"]);
     echo $navList->build("addreport");
     ?>
     <form action="reportsAddFormAction.php" method='post' name='form1' id='form1'

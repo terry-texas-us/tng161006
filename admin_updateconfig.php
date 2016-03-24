@@ -1,8 +1,8 @@
 <?php
 
-include("begin.php");
+require 'begin.php';
 include("processvars.php");
-include("adminlib.php");
+require 'adminlib.php';
 
 if (!count($_POST)) {
   header("Location: admin.php");
@@ -15,11 +15,11 @@ if (!$safety) {
 }
 
 if ($link) {
-  $admin_login = 1;
-  include("checklogin.php");
+  $adminLogin = 1;
+  require 'checklogin.php';
   include("version.php");
 
-  if ($assignedtree || !$allow_edit) {
+  if ($assignedtree || !$allowEdit) {
     $message = uiTextSnippet('norights');
     header("Location: admin_login.php?message=" . urlencode($message));
     exit;
@@ -66,7 +66,7 @@ fwrite($fp, "\$media_table = \"$media_table\";\n");
 fwrite($fp, "\$medialinks_table = \"$medialinks_table\";\n");
 fwrite($fp, "\$mediatypes_table = \"$mediatypes_table\";\n");
 fwrite($fp, "\$address_table = \"$address_table\";\n");
-fwrite($fp, "\$languages_table = \"$languages_table\";\n");
+fwrite($fp, "\$languagesTable = \"$languagesTable\";\n");
 fwrite($fp, "\$cemeteries_table = \"$cemeteries_table\";\n");
 
 fwrite($fp, "\$states_table = \"$states_table\";\n");

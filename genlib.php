@@ -152,7 +152,7 @@ function doMenuItem($index, $link, $icon, $label, $page, $thispage) {
 function tng_menu($enttype, $currpage, $entityID) {
   global $tree;
   global $disallowgedcreate;
-  global $allow_edit;
+  global $allowEdit;
   global $rightbranch;
   global $allow_ged;
   global $emailaddr;
@@ -187,7 +187,7 @@ function tng_menu($enttype, $currpage, $entityID) {
     $editstr = "admin_editplace.php?";
     $entityID = urlencode($entityID);
   }
-  if ($allow_edit && $rightbranch) {
+  if ($allowEdit && $rightbranch) {
     $menu .= doMenuItem($nexttab, "$editstr" . "ID=$entityID&amp;tree=$tree&amp;cw=1\" target=\"_blank", "svg/new-message.svg", uiTextSnippet('edit'), $currpage, "");
   } elseif ($emailaddr) {
     $menu .= doMenuItem($nexttab, "mixedSuggest.php?enttype=$enttype&amp;ID=$entityID&amp;tree=$tree", "svg/new-message.svg", uiTextSnippet('suggest'), $currpage, "suggest");

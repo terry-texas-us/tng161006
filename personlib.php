@@ -1320,7 +1320,7 @@ function buildPersonListItem($index, $link, $icon, $label, $page, $thispage) {
 function buildPersonMenu($currpage, $entityID) {
   global $tree;
   global $disallowgedcreate;
-  global $allow_edit;
+  global $allowEdit;
   global $rightbranch;
   global $allow_ged;
   global $emailaddr;
@@ -1328,7 +1328,7 @@ function buildPersonMenu($currpage, $entityID) {
   $nexttab = 0;
   $menu = "<div id='tngmenu'>\n";
 
-  if ($allow_edit && $rightbranch) {
+  if ($allowEdit && $rightbranch) {
     $menu .= "<a id=\"a$nexttab\" href=\"peopleEdit.php?personID=$entityID&amp;tree=$tree&amp;cw=1\" title='" . uiTextSnippet('edit') . "'>\n";
       $menu .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
     $menu .= "</a>\n";

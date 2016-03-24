@@ -1,8 +1,8 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include("genlib.php");
 include_once("tngdblib.php");
-include("checklogin.php");
+require 'checklogin.php';
 require 'mail.php';
 
 if ($session_charset != "UTF-8") {

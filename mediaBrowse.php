@@ -1,10 +1,10 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include($subroot . "mapconfig.php");
-include("adminlib.php");
+require 'adminlib.php';
 
-$admin_login = true;
-include("checklogin.php");
+$adminLogin = true;
+require 'checklogin.php';
 include("version.php");
 
 $maxnoteprev = 350;    //don't use the global value here because we always want to truncate
@@ -138,11 +138,11 @@ $headSection->setTitle(uiTextSnippet('media'));
     echo $adminHeaderSection->build('media', $message);
     $navList = new navList('');
 //    $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('browse'), "findmedia"]);
-    $navList->appendItem([$allow_media_add, "mediaAdd.php", uiTextSnippet('add'), "addmedia"]);
-    $navList->appendItem([$allow_media_edit, "mediaSort.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    $navList->appendItem([$allow_media_edit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-    $navList->appendItem([$allow_media_add && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allow_media_add && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
+    $navList->appendItem([$allowMediaAdd, "mediaAdd.php", uiTextSnippet('add'), "addmedia"]);
+    $navList->appendItem([$allowMediaEdit, "mediaSort.php", uiTextSnippet('text_sort'), "sortmedia"]);
+    $navList->appendItem([$allowMediaEdit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
+    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
+    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
     echo $navList->build("findmedia");
     ?>
     <div class='row'>
@@ -189,7 +189,7 @@ $headSection->setTitle(uiTextSnippet('media'));
                 ?>
               </select>
             </label>
-            <?php if (!$assignedtree && $allow_add && $allow_edit && $allow_delete) { ?>
+            <?php if (!$assignedtree && $allowAdd && $allowEdit && $allowDelete) { ?>
               <button class='btn btn-secondary' name='addnewmediatype' type='button' onclick="tnglitbox = new ModalDialog('admin_newcollection.php?field=mediatypeID');"><?php echo uiTextSnippet('addnewcoll'); ?></button>
               <button class='btn btn-secondary' id='editmediatype' name='editmediatype' type='button' style="display: none" onclick="editMediatype(document.form1.mediatypeID);"><?php echo uiTextSnippet('edit'); ?></button>
               <button class='btn btn-danger-outline' id='delmediatype' name='delmediatype' type='button' style="display: none" onclick="confirmDeleteMediatype(document.form1.mediatypeID);"><?php echo uiTextSnippet('delete'); ?></button>
@@ -260,16 +260,16 @@ $headSection->setTitle(uiTextSnippet('media'));
       echo displayListLocation($offsetplus, $numrowsplus, $totrows);
       ?>
       <form action="admin_updateselectedmedia.php" method='post' name="form2">
-        <?php if ($allow_media_delete || $allow_media_edit) { ?>
+        <?php if ($allowMediaDelete || $allowMediaEdit) { ?>
           <div class='row'>
             <div class='col-md-6'>
               <button class='btn btn-secondary' name='selectall' type='button' onClick="toggleAll(1);"><?php echo uiTextSnippet('selectall'); ?></button>
               <button class='btn btn-secondary' name='clearall' type='button' onClick="toggleAll(0);"><?php echo uiTextSnippet('clearall'); ?></button>
-            <?php if ($allow_media_delete) { ?>
+            <?php if ($allowMediaDelete) { ?>
                 <button class='btn btn-danger-outline' name='xphaction' type='submit' onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');"><?php echo uiTextSnippet('deleteselected'); ?></button>
             <?php } ?>
             </div>
-            <?php if ($allow_media_edit) { ?>
+            <?php if ($allowMediaEdit) { ?>
               <div class='col-md-3'>
                 <button class='btn btn-secondary' name='xphaction' type='submit'><?php echo uiTextSnippet('convto'); ?></button>
               </div>
@@ -313,7 +313,7 @@ $headSection->setTitle(uiTextSnippet('media'));
           <thead>
             <tr>
               <th><?php echo uiTextSnippet('action'); ?></th>
-              <?php if ($allow_edit || $allow_media_edit || $allow_delete || $allow_media_delete) { ?>
+              <?php if ($allowEdit || $allowMediaEdit || $allowDelete || $allowMediaDelete) { ?>
                 <th><?php echo uiTextSnippet('select'); ?></th>
               <?php } ?>
               <th><?php echo uiTextSnippet('thumb'); ?></th>
@@ -330,12 +330,12 @@ $headSection->setTitle(uiTextSnippet('media'));
           <?php
           if ($numrows) {
           $actionstr = "";
-          if ($allow_media_edit) {
+          if ($allowMediaEdit) {
             $actionstr .= "<a href=\"mediaEdit.php?mediaID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
             $actionstr .= "</a>\n";
           }
-          if ($allow_media_delete) {
+          if ($allowMediaDelete) {
             $actionstr .= "<a href='#' onClick=\"return confirmDelete('xxx');\" title='" . uiTextSnippet('delete') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
             $actionstr .= "</a>";
@@ -350,7 +350,7 @@ $headSection->setTitle(uiTextSnippet('media'));
             $usefolder = $row['usecollfolder'] ? $mediatypes_assoc[$mtypeID] : $mediapath;
             $newactionstr = preg_replace("/xxx/", $row['mediaID'], $actionstr);
             echo "<tr id=\"row_{$row['mediaID']}\"><td><div class=\"action-btns\">$newactionstr</div></td>\n";
-            if ($allow_edit || $allow_media_edit || $allow_delete || $allow_media_delete) {
+            if ($allowEdit || $allowMediaEdit || $allowDelete || $allowMediaDelete) {
               echo "<td><input name=\"ph{$row['mediaID']}\" type='checkbox' value='1'></td>";
             }
             echo "<td>";
@@ -367,7 +367,7 @@ $headSection->setTitle(uiTextSnippet('media'));
               echo "<img src=\"$usefolder/" . str_replace("%2F", "/", rawurlencode($row['thumbpath'])) . "\" width=\"$photowtouse\" height=\"$photohtouse\"></span>\n";
             }
             echo "</td>\n";
-            $description = $allow_edit || $allow_media_edit ? "<a href=\"mediaEdit.php?mediaID={$row['mediaID']}\">{$row['description']}</a>" : $row['description'];
+            $description = $allowEdit || $allowMediaEdit ? "<a href=\"mediaEdit.php?mediaID={$row['mediaID']}\">{$row['description']}</a>" : $row['description'];
             echo "<td><span>$description<br>" . truncateIt(getXrefNotes($row['notes']), $maxnoteprev) . "</span></td>\n";
             if ($map['key']) {
               echo "<td><span>";
@@ -446,10 +446,10 @@ $headSection->setTitle(uiTextSnippet('media'));
   var tnglitbox;
   var stmediatypes = new Array(<?php echo $sttypestr; ?>);
   var manage = 1;
-  var allow_media_edit = <?php echo($allow_media_edit ? "1" : "0"); ?>;
-  var allow_media_delete = <?php echo($allow_media_delete ? "1" : "0"); ?>;
-  var allow_edit = <?php echo($allow_edit ? "1" : "0"); ?>;
-  var allow_delete = <?php echo($allow_delete ? "1" : "0"); ?>;
+  var allow_media_edit = <?php echo($allowMediaEdit ? "1" : "0"); ?>;
+  var allow_media_delete = <?php echo($allowMediaDelete ? "1" : "0"); ?>;
+  var allow_edit = <?php echo($allowEdit ? "1" : "0"); ?>;
+  var allow_delete = <?php echo($allowDelete ? "1" : "0"); ?>;
 
   function toggleHeadstoneCriteria(mediatypeID) {
     var hsstatus = document.getElementById('hsstatrow');

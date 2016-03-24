@@ -10,7 +10,7 @@ include($subroot . "config.php");
 include($subroot . "templateconfig.php");
 
 include ('begin.php');
-include("adminlib.php");
+require 'adminlib.php';
 
 if ($subroot != $_GET['sr']) {
   $subroot = $_GET['sr'];
@@ -19,13 +19,13 @@ session_start();
 $session_language = $_SESSION['session_language'];
 $session_charset = $_SESSION['session_charset'];
 
-$languages_path = "languages/";
+$languagesPath = "languages/";
 include("getlang.php");
 
 $link = tng_db_connect($database_host, $database_name, $database_username, $database_password);
 if ($link) {
-  $admin_login = 1;
-  include("checklogin.php");
+  $adminLogin = 1;
+  require 'checklogin.php';
   if ($assignedtree) {
     $message = uiTextSnippet('norights');
     header("Location: admin_login.php?message=" . urlencode($message));

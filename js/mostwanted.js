@@ -1,10 +1,18 @@
-function updateMostWantedOrder(mwtype) {
-    if (mwtype === "person")
-        var linklist = removePrefixFromArray($('#orderpersondivs').sortable('toArray'), 'orderpersondivs_');
-    else
-        var linklist = removePrefixFromArray($('#orderphotodivs').sortable('toArray'), 'orderphotodivs_');
+// [ts] global functions and/or variables for JSLint
+/*global ModalDialog, removePrefixFromArray, textSnippet */
+var mwlitbox, thumbwidth, tnglitbox;
 
-    var params = {sequence: linklist.join(','), mwtype: mwtype, action: 'mworder'};
+function updateMostWantedOrder(mwtype) {
+    'use strict';
+    var params;
+    var linklist;
+    if (mwtype === "person") {
+        linklist = removePrefixFromArray($('#orderpersondivs').sortable('toArray'), 'orderpersondivs_');
+    } else {
+        linklist = removePrefixFromArray($('#orderphotodivs').sortable('toArray'), 'orderphotodivs_');
+    }
+
+    params = {sequence: linklist.join(','), mwtype: mwtype, action: 'mworder'};
     $.ajax({
         url: 'ajx_updateorder.php',
         data: params,
@@ -13,41 +21,50 @@ function updateMostWantedOrder(mwtype) {
 }
 
 function updatePersonOrder(event, ui) {
+    'use strict';
     updateMostWantedOrder('person');
 }
 
 function updatePhotoOrder(event, ui) {
+    'use strict';
     updateMostWantedOrder('photo');
 }
 
 function startMostWanted() {
+    'use strict';
     $('#orderpersondivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderphotodivs', update: updatePersonOrder});
     $('#orderphotodivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderpersondivs', update: updatePhotoOrder});
 }
 
 function openMostWanted(mwtype, ID) {
+    'use strict';
     mwlitbox = new ModalDialog('admin_editmostwanted.php?mwtype=' + mwtype + '&ID=' + ID, {size: 'modal-lg'});
     return false;
 }
 
 function openMostWantedMediaFind(tree) {
+    'use strict';
     tnglitbox = new ModalDialog('admin_findmwmedia.php?tree=' + tree);
     return false;
 }
 
 function updateMostWanted(form) {
-    if (form.title.value.length === 0)
+    'use strict';
+    var params;
+    if (form.title.value.length === 0) {
         alert(textSnippet('entertitle'));
-    else if (form.description.value.length === 0)
+    } else if (form.description.value.length === 0) {
         alert(textSnippet('enterdesc'));
-    else {
-        var params = $(form).serialize();
+    } else {
+        params = $(form).serialize();
         $.ajax({
             url: 'admin_updatemostwanted.php',
             data: params,
             type: 'post',
             dataType: 'json',
             success: function (vars) {
+                var tds;
+                var newcontent;
                 if (form.ID.value) {
                     //if its old, just update existing row and highlight
                     $('#title_' + vars.ID).html(vars.title);
@@ -60,42 +77,46 @@ function updateMostWanted(form) {
                     }
                 } else {
                     //if it's new, then insert row at bottom
-                    var newcontent = '<div class="sortrow" id="order' + vars.mwtype + 'divs_' + vars.ID + '" style="clear:both" onmouseover="showEditDelete(\'' + vars.ID + '\');" onmouseout="hideEditDelete(\'' + vars.ID + '\');">\n';
+                    newcontent = '<div class="sortrow" id="order' + vars.mwtype + 'divs_' + vars.ID + '" style="clear:both" onmouseover="showEditDelete(\'' + vars.ID + '\');" onmouseout="hideEditDelete(\'' + vars.ID + '\');">\n';
                     newcontent += '<table width="100%" cellpadding="5" cellspacing="1"><tr id="row_' + vars.ID + '">\n';
                     newcontent += '<td class="dragarea">\n';
                     newcontent += '<img src="img/admArrowUp.gif" alt=""><br>' + textSnippet('drag') + '<br>\n';
                     newcontent += '<img src="img/admArrowDown.gif" alt="">\n';
                     newcontent += '</td>\n';
                     newcontent += '<td style="width:' + thumbwidth + 'px;text-align:center;">\n';
-                    if (vars.thumbpath)
+                    if (vars.thumbpath) {
                         newcontent += '<img src="' + vars.thumbpath + '" width="' + vars.width + '" height="' + vars.height + '" id="img_' + vars.ID + '" alt="' + vars.description + '">\n';
-                    else
+                    } else {
                         newcontent += "&nbsp;";
-
+                    }
                     newcontent += '</td>\n';
                     newcontent += '<td>\n';
-                    if (vars.edit)
+                    if (vars.edit) {
                         newcontent += '<a href="#" onclick="return openMostWanted(\'' + vars.mwtype + '\',\'' + vars.ID + '\');" id="title_' + vars.ID + '">' + vars.title + '</a>\n';
-                    else
+                    } else {
                         newcontent += '<u id="title_' + vars.ID + '">' + vars.title + '</u>\n';
+                    }
                     newcontent += '<br><span id="desc_' + vars.ID + '">' + vars.description + '</span><br>\n';
                     newcontent += '<div id="del_' + vars.ID + '" class="small" style="color:gray;visibility:hidden">\n';
                     if (vars.edit) {
                         newcontent += '<a href="#" onclick="return openMostWanted(\'' + vars.mwtype + '\',\'' + vars.ID + '\');">' + textSnippet('edit') + '</a>\n';
-                        if (vars.del)
+                        if (vars.del) {
                             newcontent += ' | ';
+                        }
                     }
-                    if (vars.del)
+                    if (vars.del) {
                         newcontent += '<a href="#" onclick="return removeFromMostWanted(\'' + vars.mwtype + '\',\'' + vars.ID + '\');">' + textSnippet('delete') + '</a>\n';
+                    }
                     newcontent += '</div>\n</td>\n</tr></table>\n</div>\n';
                     $('#order' + vars.mwtype + 'divs').html(newcontent + $('#order' + vars.mwtype + 'divs').html());
-                    if (vars.mwtype == 'person')
+                    if (vars.mwtype === 'person') {
                         $('#orderpersondivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderphotodivs', update: updatePersonOrder});
-                    else
+                    } else {
                         $('#orderphotodivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderpersondivs', update: updatePhotoOrder});
+                    }
                 }
 
-                var tds = $('tr#row_' + vars.ID + ' td');
+                tds = $('tr#row_' + vars.ID + ' td');
                 mwlitbox.remove();
                 $.each(tds, function (index, item) {
                     $(item).effect('highlight', {}, 2000);
@@ -107,8 +128,10 @@ function updateMostWanted(form) {
 }
 
 function removeFromMostWanted(type, id) {
+    'use strict';
+    var params;
     if (confirm(textSnippet('confremmw'))) {
-        var params = {id: id, action: 'remmostwanted'};
+        params = {id: id, action: 'remmostwanted'};
         $.ajax({
             url: 'ajx_updateorder.php',
             data: params,
@@ -116,10 +139,11 @@ function removeFromMostWanted(type, id) {
             success: function () {
                 $('#order' + type + 'divs_' + id).fadeOut(400, function () {
                     $('#order' + type + 'divs_' + id).remove();
-                    if (type == 'person')
+                    if (type === 'person') {
                         $('#orderpersondivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderphotodivs', update: updatePersonOrder});
-                    else
+                    } else {
                         $('#orderphotodivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderpersondivs', update: updatePhotoOrder});
+                    }
                 });
             }
         });
@@ -128,25 +152,32 @@ function removeFromMostWanted(type, id) {
 }
 
 function showEditDelete(id) {
-    if ($('#del_' + id).length)
+    'use strict';
+    if ($('#del_' + id).length) {
         $('#del_' + id).css('visibility', 'visible');
+    }
 }
 
 function hideEditDelete(id) {
-    if ($('#del_' + id).length)
+    'use strict';
+    if ($('#del_' + id).length) {
         $('#del_' + id).css('visibility', 'hidden');
+    }
 }
 
 function getNewMwMedia(form) {
-    var hsstring;
+    'use strict';
+    var strParams;
+    var searchtree;
+    var mediatypeID;
     var searchstring = form.searchstring.value;
 
     doSpinner(1);
     $('#newmedia').html('');
-    var searchtree = form.tree.value;
-    var mediatypeID = form.mediatypeID.value;
+    searchtree = form.tree.value;
+    mediatypeID = form.mediatypeID.value;
 
-    var strParams = {searchstring: searchstring, searchtree: searchtree, mediatypeID: mediatypeID};
+    strParams = {searchstring: searchstring, searchtree: searchtree, mediatypeID: mediatypeID};
     $.ajax({
         url: 'admin_add2albumxml.php',
         data: strParams,
@@ -156,6 +187,7 @@ function getNewMwMedia(form) {
 }
 
 function getMoreMedia(searchstring, mediatypeID, hsstat, cemeteryID, offset, tree, page, albumID) {
+    'use strict';
     var params = {
         searchstring: searchstring,
         mediatypeID: mediatypeID,
@@ -176,16 +208,19 @@ function getMoreMedia(searchstring, mediatypeID, hsstat, cemeteryID, offset, tre
 }
 
 function showMedia(req) {
+    'use strict';
     $('#newmedia').html(req);
     $('#spinner1').hide();
 }
 
 function doSpinner(id) {
+    'use strict';
     lastspinner = $('#spinner' + id);
     $('#spinner' + id).show();
 }
 
 function selectMedia(mediaID) {
+    'use strict';
     document.editmostwanted.mediaID.value = mediaID;
     $('#mwthumb').html("&nbsp;");
     $('#mwdetails').html(textSnippet('loading'));

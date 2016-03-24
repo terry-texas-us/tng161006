@@ -2,7 +2,7 @@
 
 $mylanguage = "";
 if ($session_language) {
-  $mylanguage = $languages_path . $session_language;
+  $mylanguage = $languagesPath . $session_language;
 } else {
   $newroot = preg_replace("/\//", "", $rootpath); // [ts] no backslashes
   $newroot = preg_replace("/ /", "", $newroot);   // [ts] no spaces
@@ -11,16 +11,16 @@ if ($session_language) {
   $charcookiename = "tngchar_$newroot";
 
   if ($_COOKIE[$langcookiename]) {
-    $mylanguage = $languages_path . $_COOKIE[$langcookiename];
+    $mylanguage = $languagesPath . $_COOKIE[$langcookiename];
     $_SESSION['session_language'] = $_COOKIE[$langcookiename];
     $session_charset = $_SESSION['session_charset'] = $_COOKIE[$charcookiename];
   } elseif ($lang) {
-    $mylanguage = $languages_path . $lang;
+    $mylanguage = $languagesPath . $lang;
     $_SESSION['session_language'] = $lang;
   }
 }
 if (!$mylanguage) {
-    $mylanguage = $languages_path . $language;
+    $mylanguage = $languagesPath . $language;
     $_SESSION['session_language'] = $language;
 }
 $session_language = $_SESSION['session_language'];

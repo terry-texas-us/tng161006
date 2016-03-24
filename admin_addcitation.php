@@ -1,14 +1,14 @@
 <?php
 
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-include("checklogin.php");
+require 'checklogin.php';
 
 require("datelib.php");
 require("adminlog.php");
 
-if (!$allow_add) {
+if (!$allowAdd) {
   $message = uiTextSnippet('norights');
   exit;
 }
@@ -43,4 +43,4 @@ $citationsrc = "[$sourceID] " . $row['title'];
 $citationsrc = cleanIt($citationsrc);
 $truncated = truncateIt($citationsrc, 75);
 header("Content-type:text/html; charset=" . $session_charset);
-echo "{\"id\":\"$citationID\",\"persfamID\":\"$persfamID\",\"tree\":\"$tree\",\"eventID\":\"$eventID\",\"display\":\"$truncated\",\"allow_edit\":$allow_edit,\"allow_delete\":$allow_delete}";
+echo "{\"id\":\"$citationID\",\"persfamID\":\"$persfamID\",\"tree\":\"$tree\",\"eventID\":\"$eventID\",\"display\":\"$truncated\",\"allow_edit\":$allowEdit,\"allow_delete\":$allowDelete}";

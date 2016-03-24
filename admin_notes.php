@@ -1,8 +1,8 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-include("checklogin.php");
+require 'checklogin.php';
 
 $query = "SELECT $eventtypes_table.eventtypeID, tag, display FROM $events_table 
     LEFT JOIN  $eventtypes_table on $eventtypes_table.eventtypeID = $events_table.eventtypeID 
@@ -17,7 +17,7 @@ if ($eventtype['display']) {
     $displayval = "";
     for ($i = 0; $i < $numvalues; $i += 2) {
       $lang = $dispvalues[$i];
-      if ($mylanguage == $languages_path . $lang) {
+      if ($mylanguage == $languagesPath . $lang) {
         $eventtypedesc = $dispvalues[$i + 1];
         break;
       }
@@ -54,7 +54,7 @@ $notecount = tng_num_rows($notelinks);
     </header>
     <div class='modal-body'>
       <p>
-        <?php if ($allow_add) { ?>
+        <?php if ($allowAdd) { ?>
           <input type='button' value="  <?php echo uiTextSnippet('addnew'); ?>  "
                  onclick="document.form2.reset(); gotoSection('notelist', 'addnote');" />
         <?php } ?>
@@ -87,12 +87,12 @@ $notecount = tng_num_rows($notelinks);
             $note['note'] = cleanIt($note['note']);
             $truncated = truncateIt($note['note'], 75);
             $actionstr = '';
-            if ($allow_edit) {
+            if ($allowEdit) {
               $actionstr .= "<a href='#' onclick=\"return editNote({$note['ID']});\" title='" . uiTextSnippet('edit') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
               $actionstr .= "</a>";
             }
-            if ($allow_delete) {
+            if ($allowDelete) {
               $actionstr .= "<a href='#' onclick=\"return deleteNote({$note['ID']},'$persfamID','$tree','$eventID');\" title='" . uiTextSnippet('delete') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
               $actionstr .= "</a>";

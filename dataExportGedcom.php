@@ -1,10 +1,10 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include($subroot . "importconfig.php");
-include("adminlib.php");
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 if (!$allow_ged && $assignedtree) {

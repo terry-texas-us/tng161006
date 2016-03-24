@@ -1,12 +1,12 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
-if (!$allow_add) {
+if (!$allowAdd) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -23,7 +23,7 @@ $headSection->setTitle(uiTextSnippet('addnewlanguage'));
     echo $adminHeaderSection->build('languages-addnewlanguage', $message);
     $navList = new navList('');
     $navList->appendItem([true, "languagesBrowse.php", uiTextSnippet('browse'), "findlang"]);
-//    $navList->appendItem([$allow_add, "languagesAdd.php", uiTextSnippet('add'), "addlanguage"]);
+//    $navList->appendItem([$allowAdd, "languagesAdd.php", uiTextSnippet('add'), "addlanguage"]);
     echo $navList->build("addlanguage");
     ?>
     <table class='table table-sm'>
@@ -37,7 +37,7 @@ $headSection->setTitle(uiTextSnippet('addnewlanguage'));
                   <select name="folder">
                     <option value=''></option>
                     <?php
-                    chdir($rootpath . $endrootpath . $languages_path);
+                    chdir($rootpath . $endrootpath . $languagesPath);
                     if ($handle = opendir('.')) {
                       $dirs = array();
                       while ($filename = readdir($handle)) {

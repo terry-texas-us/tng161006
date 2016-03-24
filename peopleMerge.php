@@ -1,14 +1,14 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = true;
-include("checklogin.php");
+$adminLogin = true;
+require 'checklogin.php';
 include("version.php");
 
 require("adminlog.php");
 
-if (!$allow_edit || !$allow_delete) {
+if (!$allowEdit || !$allowDelete) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -90,7 +90,7 @@ function doRow($field, $textmsg, $boxname) {
 }
 
 function getEvent($event) {
-  global $mylanguage, $languages_path;
+  global $mylanguage, $languagesPath;
 
   $dispvalues = explode("|", $event['display']);
   $numvalues = count($dispvalues);
@@ -98,7 +98,7 @@ function getEvent($event) {
     $displayval = "";
     for ($i = 0; $i < $numvalues; $i += 2) {
       $lang = $dispvalues[$i];
-      if ($mylanguage == $languages_path . $lang) {
+      if ($mylanguage == $languagesPath . $lang) {
         $displayval = $dispvalues[$i + 1];
         break;
       }
@@ -702,9 +702,9 @@ $headSection->setTitle(uiTextSnippet('merge'));
     echo $adminHeaderSection->build('people-merge', $message);
     $navList = new navList('');
     $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
-    $navList->appendItem([$allow_add, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
-    $navList->appendItem([$allow_edit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
-//    $navList->appendItem([$allow_edit && $allow_delete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
+    $navList->appendItem([$allowEdit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
+//    $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("merge");
     ?>
     <table class='table table-sm'>

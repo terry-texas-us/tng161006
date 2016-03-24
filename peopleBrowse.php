@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = true;
-include("checklogin.php");
+$adminLogin = true;
+require 'checklogin.php';
 include("version.php");
 
 $exptime = 0;
@@ -183,9 +183,9 @@ $headSection->setTitle(uiTextSnippet('people'));
     echo $adminHeaderSection->build('people', $message);
     $navList = new navList('people');
 //    $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
-    $navList->appendItem([$allow_add, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
-    $navList->appendItem([$allow_edit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
-    $navList->appendItem([$allow_edit && $allow_delete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
+    $navList->appendItem([$allowEdit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
+    $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build('findperson');
     include '_/components/php/findPeopleForm.php';
     
@@ -196,7 +196,7 @@ $headSection->setTitle(uiTextSnippet('people'));
     echo displayListLocation($offsetplus, $numrowsplus, $totrows);
     ?>
     <form action="admin_deleteselected.php" method='post' name="form2">
-      <?php if ($allow_delete) { ?>
+      <?php if ($allowDelete) { ?>
         <p>
           <button class='btn btn-secondary' id='selectall-people' name='selectall' type='button'><?php echo uiTextSnippet('selectall'); ?></button>
           <button class='btn btn-secondary' id='clearall-people' name='clearall' type='button'><?php echo uiTextSnippet('clearall'); ?></button>
@@ -208,7 +208,7 @@ $headSection->setTitle(uiTextSnippet('people'));
           <thead>
             <tr>
               <th><?php echo uiTextSnippet('action'); ?></th>
-              <?php if ($allow_delete) { ?>
+              <?php if ($allowDelete) { ?>
                 <th><?php echo uiTextSnippet('select'); ?></th>
               <?php } ?>
               <th><?php echo uiTextSnippet('name'); ?></th>
@@ -223,12 +223,12 @@ $headSection->setTitle(uiTextSnippet('people'));
           <tbody>
             <?php
             $actionstr = "";
-            if ($allow_edit) {
+            if ($allowEdit) {
               $actionstr .= "<a href=\"peopleEdit.php?personID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('edit') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
               $actionstr .= "</a>\n";
             }
-            if ($allow_delete) {
+            if ($allowDelete) {
               $actionstr .= "<a id='delete' href='#' title='" . uiTextSnippet('delete') . "' data-row-id='zzz' data-tree='$tree'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
               $actionstr .= "</a>\n";
@@ -264,12 +264,12 @@ $headSection->setTitle(uiTextSnippet('people'));
               echo "<tr id=\"row_{$row['ID']}\">\n";
               echo "<td><div class=\"action-btns\">$newactionstr</div></td>\n";
 
-              if ($allow_delete) {
+              if ($allowDelete) {
                 echo "<td><input name=\"del{$row['ID']}\" type='checkbox' value='1'></td>";
               }
               echo "<td>\n";
                 $editlink = "peopleEdit.php?personID={$row['personID']}&amp;tree={$row['gedcom']}";
-                echo $allow_edit ? "<a href='$editlink' title='" . uiTextSnippet('edit') . "'>" . getname($row) . "</a>" : getname($row);
+                echo $allowEdit ? "<a href='$editlink' title='" . uiTextSnippet('edit') . "'>" . getname($row) . "</a>" : getname($row);
                 echo "<br>";
                 echo "{$row['personID']}\n";
               echo "</td>\n";

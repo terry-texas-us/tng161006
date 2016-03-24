@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 include("getlang.php");
 
-include("checklogin.php");
+require 'checklogin.php';
 
 if ($session_charset != "UTF-8") {
   $myfirstname = tng_utf8_decode($myfirstname);

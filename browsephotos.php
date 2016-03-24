@@ -1,5 +1,5 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include("genlib.php");
 
 if ($_GET['showdocs'] == 1) {

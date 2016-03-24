@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 if ($assignedtree) {
@@ -42,12 +42,12 @@ if ($offset) {
 }
 
 $wherestr = $searchstring ? "WHERE display LIKE \"%$searchstring%\" OR folder LIKE \"%$searchstring%\"" : "";
-$query = "SELECT languageID, display, folder, charset FROM $languages_table $wherestr ORDER BY display LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT languageID, display, folder, charset FROM $languagesTable $wherestr ORDER BY display LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(languageID) as lcount FROM $languages_table $wherestr";
+  $query = "SELECT count(languageID) as lcount FROM $languagesTable $wherestr";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['lcount'];
@@ -67,7 +67,7 @@ $headSection->setTitle(uiTextSnippet('languages'));
     echo $adminHeaderSection->build('languages', $message);
     $navList = new navList('');
 //    $navList->appendItem([true, "languagesBrowse.php", uiTextSnippet('browse'), "findlang"]);
-    $navList->appendItem([$allow_add, "languagesAdd.php", uiTextSnippet('add'), "addlanguage"]);
+    $navList->appendItem([$allowAdd, "languagesAdd.php", uiTextSnippet('add'), "addlanguage"]);
     echo $navList->build("findlang");
     ?>
     <div>
@@ -101,12 +101,12 @@ $headSection->setTitle(uiTextSnippet('languages'));
         <?php
         if ($numrows) {
           $actionstr = "";
-          if ($allow_edit) {
+          if ($allowEdit) {
             $actionstr .= "<a href=\"languagesEdit.php?languageID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
             $actionstr .= "</a>\n";
           }
-          if ($allow_delete) {
+          if ($allowDelete) {
             $actionstr .= "<a href='#' onclick=\"if(confirm('" . uiTextSnippet('conflangdelete') . "' )){deleteIt('language',xxx);} return false;\" title='" . uiTextSnippet('delete') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
             $actionstr .= "</a>\n";

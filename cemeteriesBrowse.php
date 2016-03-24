@@ -1,10 +1,10 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include($subroot . "mapconfig.php");
-include("adminlib.php");
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 $tng_search_cemeteries = $_SESSION['tng_search_cemeteries'] = 1;
@@ -96,7 +96,7 @@ $headSection->setTitle(uiTextSnippet('cemeteries'));
     echo $adminHeaderSection->build('cemeteries', $message);
     $navList = new navList('');
 //    $navList->appendItem([true, "cemeteriesBrowse.php", uiTextSnippet('browse'), "findcem"]);
-    $navList->appendItem([$allow_add, "cemeteriesAdd.php", uiTextSnippet('add'), "addcemetery"]);
+    $navList->appendItem([$allowAdd, "cemeteriesAdd.php", uiTextSnippet('add'), "addcemetery"]);
     echo $navList->build("findcem");
     ?>
     <table class='table table-sm'>
@@ -130,7 +130,7 @@ $headSection->setTitle(uiTextSnippet('cemeteries'));
             ?>
             <form action="admin_deleteselected.php" method='post' name="form2">
               <?php
-              if ($allow_delete) {
+              if ($allowDelete) {
                 ?>
                 <p>
                   <input name='selectall' type='button' value="<?php echo uiTextSnippet('selectall'); ?>" onClick="toggleAll(1);">
@@ -143,7 +143,7 @@ $headSection->setTitle(uiTextSnippet('cemeteries'));
               <table class="table table-sm table-striped">
                 <tr>
                   <th><?php echo uiTextSnippet('action'); ?></th>
-                  <?php if ($allow_delete) { ?>
+                  <?php if ($allowDelete) { ?>
                     <th><?php echo uiTextSnippet('select'); ?></th>
                   <?php } ?>
                   <th><?php echo uiTextSnippet('cemetery'); ?></th>
@@ -159,12 +159,12 @@ $headSection->setTitle(uiTextSnippet('cemeteries'));
                 <?php
                 if ($numrows) {
                 $actionstr = "";
-                if ($allow_edit) {
+                if ($allowEdit) {
                   $actionstr .= "<a href=\"cemeteriesEdit.php?cemeteryID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
                   $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
                   $actionstr .= "</a>";
                 }
-                if ($allow_delete) {
+                if ($allowDelete) {
                   $actionstr .= "<a href='#' onClick=\"return confirmDelete('xxx');\" title=\"" . uiTextSnippet('delete') . "\">\n";
                   $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
                   $actionstr .= "</a>";
@@ -195,12 +195,12 @@ $headSection->setTitle(uiTextSnippet('cemeteries'));
                   }
                   $newactionstr = preg_replace("/xxx/", $row['cemeteryID'], $actionstr);
                   echo "<tr id=\"row_{$row['cemeteryID']}\"><td><div class=\"action-btns\">$newactionstr</div></td>\n";
-                  if ($allow_delete) {
+                  if ($allowDelete) {
                     echo "<td>"
                     . "<input name=\"del{$row['cemeteryID']}\" type='checkbox' value='1'></td>";
                   }
                   $editlink = "cemeteriesEdit.php?cemeteryID={$row['cemeteryID']}";
-                  $cemname = $allow_edit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['cemname'] . "</a>" : $row['cemname'];
+                  $cemname = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['cemname'] . "</a>" : $row['cemname'];
 
                   echo "<td>$cemname</td>\n";
                   echo "<td>$location</td>\n";

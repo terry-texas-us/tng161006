@@ -1,10 +1,10 @@
 <?php
-include("begin.php");
+require 'begin.php';
 include("genlib.php");
 include("getlang.php");
 
 include("functions.php");
-include("checklogin.php");
+require 'checklogin.php';
 include("showmedialib.php");
 
 header("Content-type:text/html; charset=" . $session_charset);

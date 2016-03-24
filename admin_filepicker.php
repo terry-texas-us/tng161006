@@ -1,9 +1,9 @@
 <?php
-include("begin.php"); // [ts] args expected path, searchstring, folders [optional]
-include("adminlib.php");
+require 'begin.php'; // [ts] args expected path, searchstring, folders [optional]
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include($subroot . "importconfig.php");
 
 initMediaTypes();
@@ -38,7 +38,7 @@ function frmFiles() {
   global $tngpath;
   global $pagetotal;
   global $searchstring;
-  global $allow_delete;
+  global $allowDelete;
   global $tngconfig;
   global $folders;
 
@@ -105,7 +105,7 @@ function frmFiles() {
                       echo "<a href=\"javascript:ReturnFile('$img$subdir" . addslashes($file) . "')\" title='" . uiTextSnippet('select') . "'>\n";
                       echo "<img class='icon-sm' src='svg/new-message.svg'>\n";
                       echo "</a>";
-                      if ($allow_delete) {
+                      if ($allowDelete) {
                         echo "<a href='#' onclick=\"return deleteIt('file','$nImageNr','$tngpath/$subdir" . addslashes($file) . "');\" title='" . uiTextSnippet('delete') . "'>\n";
                         echo "<img class='icon-sm' src='svg/trash.svg'>\n";
                         echo "</a>\n";

@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 if ($assignedtree) {
@@ -127,7 +127,7 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
             doRow($events_table, uiTextSnippet('events'));
             doRow($eventtypes_table, uiTextSnippet('eventtypes'));
             doRow($families_table, uiTextSnippet('families'));
-            doRow($languages_table, uiTextSnippet('languages'));
+            doRow($languagesTable, uiTextSnippet('languages'));
             doRow($media_table, uiTextSnippet('mediatable'));
             doRow($medialinks_table, uiTextSnippet('medialinkstable'));
             doRow($mediatypes_table, uiTextSnippet('mediatypes'));

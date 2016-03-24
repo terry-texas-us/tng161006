@@ -1,7 +1,7 @@
 <?php
-include("begin.php");
+require 'begin.php';
 $tngconfig['maint'] = "";
-include("adminlib.php");
+require 'adminlib.php';
 
 require 'mail.php';
 

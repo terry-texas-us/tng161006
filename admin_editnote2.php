@@ -1,9 +1,9 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 include("version.php");
 
 $query = "SELECT $xnotes_table.note as note, secret, $notelinks_table.gedcom as gedcom, $notelinks_table.ID as nID FROM ($notelinks_table, $xnotes_table)
@@ -12,7 +12,7 @@ $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
 
-if (!$allow_edit || ($assignedtree && $assignedtree != $row['gedcom'])) {
+if (!$allowEdit || ($assignedtree && $assignedtree != $row['gedcom'])) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -35,7 +35,7 @@ $headSection->setTitle(uiTextSnippet('modifynote'));
     $navList->appendItem([true, "admin_notelist.php", uiTextSnippet('notes'), "notes"]);
     $navList->appendItem([true, "admin_whatsnewmsg.php", uiTextSnippet('whatsnew'), "whatsnew"]);
     $navList->appendItem([true, "admin_mostwanted.php", uiTextSnippet('mostwanted'), "mostwanted"]);
-    $navList->appendItem([$allow_edit, "#", uiTextSnippet('edit'), "edit"]);
+    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <table class='table table-sm'>

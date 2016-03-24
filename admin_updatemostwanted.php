@@ -1,12 +1,12 @@
 <?php
 
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 
-$admin_login = 1;
-include("checklogin.php");
+$adminLogin = 1;
+require 'checklogin.php';
 
-if (!$allow_edit && !$allow_add) {
+if (!$allowEdit && !$allowAdd) {
   exit;
 }
 
@@ -67,9 +67,9 @@ adminwritelog(uiTextSnippet('mostwanted') . " : $title");
 $truncated = str_replace("\r", "", $truncated);
 $truncated = str_replace("\n", "", $truncated);
 header("Content-Type: application/json; charset=" . $session_charset);
-//echo "{'ID':'$ID','title':'$cleantitle','description':'$truncated','mwtype':'$mwtype','mediaID':'$mediaID','thumbpath':'$thumbpath','width':'$size[0]','height':'$size[1]','edit':'$allow_edit','del':'$allow_delete'}";
+//echo "{'ID':'$ID','title':'$cleantitle','description':'$truncated','mwtype':'$mwtype','mediaID':'$mediaID','thumbpath':'$thumbpath','width':'$size[0]','height':'$size[1]','edit':'$allowEdit','del':'$allowDelete'}";
 echo "{\n";
 $cleaned = stripslashes($cleaned);
 $truncated = stripslashes($truncated);
-echo "\"ID\":\"$ID\",\"title\":\"$cleantitle\",\"description\":\"$truncated\",\"mwtype\":\"$mwtype\",\"mediaID\":\"$mediaID\",\"thumbpath\":\"$thumbpath\",\"width\":\"{$size[0]}\",\"height\":\"{$size[1]}\",\"edit\":\"$allow_edit\",\"del\":\"$allow_delete\"";
+echo "\"ID\":\"$ID\",\"title\":\"$cleantitle\",\"description\":\"$truncated\",\"mwtype\":\"$mwtype\",\"mediaID\":\"$mediaID\",\"thumbpath\":\"$thumbpath\",\"width\":\"{$size[0]}\",\"height\":\"{$size[1]}\",\"edit\":\"$allowEdit\",\"del\":\"$allowDelete\"";
 echo "}";

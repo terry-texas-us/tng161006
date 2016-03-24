@@ -1,11 +1,11 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 if (!$mediaID) {
   die("no args");
 }
 
-include("checklogin.php");
+require 'checklogin.php';
 
 initMediaTypes();
 
@@ -15,7 +15,7 @@ $row = tng_fetch_assoc($result);
 tng_free_result($result);
 $row['firstname'] = preg_replace("/\"/", "&#34;", $row['firstname']);
 
-if (!$allow_media_edit && !$allow_media_add) {
+if (!$allowMediaEdit && !$allowMediaAdd) {
   $message = uiTextSnippet('norights');
   header("Location: ajx_login.php?message=" . urlencode($message));
   exit;

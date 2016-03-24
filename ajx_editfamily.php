@@ -1,10 +1,10 @@
 <?php
-include("begin.php");
-include("adminlib.php");
+require 'begin.php';
+require 'adminlib.php';
 if (!$familyID) {
   die("no args");
 }
-include("checklogin.php");
+require 'checklogin.php';
 
 initMediaTypes();
 
@@ -34,7 +34,7 @@ $row['sealplace'] = preg_replace("/\"/", "&#34;", $row['sealplace']);
 $row['divplace'] = preg_replace("/\"/", "&#34;", $row['divplace']);
 $row['notes'] = preg_replace("/\"/", "&#34;", $row['notes']);
 
-if ((!$allow_edit && (!$allow_add || !$added)) || ($assignedtree && $assignedtree != $tree) || !checkbranch($row['branch'])) {
+if ((!$allowEdit && (!$allowAdd || !$added)) || ($assignedtree && $assignedtree != $tree) || !checkbranch($row['branch'])) {
   $message = uiTextSnippet('norights');
   header("Location: ajx_login.php?message=" . urlencode($message));
   exit;
@@ -324,7 +324,7 @@ include_once("eventlib.php");
                     $child['allow_private'] = $crights['private'];
                     if ($child['firstname'] || $child['lastname']) {
                       $childId = $child['pID'];
-                      echo "<div class='sortrow' id='child_{$childId}' data-child-id='{$childId}' data-allow-delete='{$allow_delete}' style='width: 500px; clear: both'";
+                      echo "<div class='sortrow' id='child_{$childId}' data-child-id='{$childId}' data-allow-delete='{$allowDelete}' style='width: 500px; clear: both'";
                       echo ">\n";
                         echo "<table class='table table-sm'>\n";
                           echo "<tr>\n";
@@ -333,7 +333,7 @@ include_once("eventlib.php");
                               echo "<img src='img/admArrowDown.gif' alt=''>\n";
                             echo "</td>\n";
                             echo "<td class='childblock'>\n";
-                              if ($allow_delete) {
+                              if ($allowDelete) {
                                 echo "<div class='small hide-right' id=\"unlinkc_{$childId}\">\n";
                                   echo "<a id='remove-child' href='#' data-child-id='{$childId}'>" . uiTextSnippet('remove') . "</a> &nbsp; | &nbsp;\n";
                                   echo "<a id='delete-child' href='#' data-child-id='{$childId}'>" . uiTextSnippet('delete') . "</a>\n";
