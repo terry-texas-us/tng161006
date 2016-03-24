@@ -1,6 +1,6 @@
 function validateForm1() {
     var rval = true;
-    if (document.form1.place.value.length == 0) {
+    if (document.form1.place.value.length === 0) {
         alert(textSnippet('enterplace'));
         rval = false;
     }

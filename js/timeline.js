@@ -8,7 +8,7 @@ function init() {
 
 function timeline_init() {
     var eventSource = new Timeline.DefaultEventSource();
-    if (monthpct != "0%") {
+    if (monthpct !== "0%") {
         var bandInfos = [
             Timeline.createBandInfo({
                 eventSource: eventSource,
@@ -49,7 +49,7 @@ function timeline_init() {
 
 var resizeTimerID = null;
 function onResize() {
-    if (resizeTimerID == null) {
+    if (resizeTimerID === null) {
         resizeTimerID = window.setTimeout(function () {
             resizeTimerID = null;
             tl.layout();

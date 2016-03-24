@@ -1,4 +1,4 @@
-function finishValidation( ) {
+function finishValidation() {
     var displayfields = document.form1.displayfields;
     var criteriafields = document.form1.finalcriteria;
     var orderbyfields = document.form1.finalsort;

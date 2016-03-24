@@ -1,18 +1,5 @@
-function startMostWanted() {
-    $('#orderpersondivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderphotodivs', update: updatePersonOrder});
-    $('#orderphotodivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderpersondivs', update: updatePhotoOrder});
-}
-
-function updatePersonOrder(event, ui) {
-    updateMostWantedOrder('person');
-}
-
-function updatePhotoOrder(event, ui) {
-    updateMostWantedOrder('photo');
-}
-
 function updateMostWantedOrder(mwtype) {
-    if (mwtype == "person")
+    if (mwtype === "person")
         var linklist = removePrefixFromArray($('#orderpersondivs').sortable('toArray'), 'orderpersondivs_');
     else
         var linklist = removePrefixFromArray($('#orderphotodivs').sortable('toArray'), 'orderphotodivs_');
@@ -23,6 +10,19 @@ function updateMostWantedOrder(mwtype) {
         data: params,
         dataType: 'html'
     });
+}
+
+function updatePersonOrder(event, ui) {
+    updateMostWantedOrder('person');
+}
+
+function updatePhotoOrder(event, ui) {
+    updateMostWantedOrder('photo');
+}
+
+function startMostWanted() {
+    $('#orderpersondivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderphotodivs', update: updatePersonOrder});
+    $('#orderphotodivs').sortable({dropOnEmpty: true, tag: 'div', connectWith: '#orderpersondivs', update: updatePhotoOrder});
 }
 
 function openMostWanted(mwtype, ID) {

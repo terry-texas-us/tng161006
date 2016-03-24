@@ -33,8 +33,8 @@
 //  "MMM dd, yyyy hh:mm:ssa" matches: "January 01, 2000 12:30:45AM"
 // ------------------------------------------------------------------
 
-var MONTH_NAMES = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
-var DAY_NAMES = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
+var MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+var DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 function LZ(x) {
     return(x < 0 || x > 9 ? "" : "0") + x
 }
@@ -48,7 +48,7 @@ function LZ(x) {
 // ------------------------------------------------------------------
 function isDate(val, format) {
     var date = getDateFromFormat(val, format);
-    return date != 0;
+    return date !== 0;
 
 }
 
@@ -63,7 +63,7 @@ function isDate(val, format) {
 function compareDates(date1, dateformat1, date2, dateformat2) {
     var d1 = getDateFromFormat(date1, dateformat1);
     var d2 = getDateFromFormat(date2, dateformat2);
-    if (d1 == 0 || d2 == 0) {
+    if (d1 === 0 || d2 === 0) {
         return -1;
     } else if (d1 > d2) {
         return 1;
@@ -108,7 +108,7 @@ function formatDate(date, format) {
     value["EE"] = DAY_NAMES[E];
     value["H"] = H;
     value["HH"] = LZ(H);
-    if (H == 0) {
+    if (H === 0) {
         value["h"] = 12;
     } else if (H > 12) {
         value["h"] = H - 12;
@@ -136,10 +136,10 @@ function formatDate(date, format) {
     while (i_format < format.length) {
         c = format.charAt(i_format);
         token = "";
-        while ((format.charAt(i_format) == c) && (i_format < format.length)) {
+        while ((format.charAt(i_format) === c) && (i_format < format.length)) {
             token += format.charAt(i_format++);
         }
-        if (value[token] != null) {
+        if (value[token] !== null) {
             result = result + value[token];
         } else {
             result = result + token;

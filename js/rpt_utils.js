@@ -1,8 +1,8 @@
 function toggleSection(section, img, display) {
-    if (display == 'on') {
+    if (display === 'on') {
         $('#' + img).attr('src', 'tng_collapse.gif');
         $('#' + section).fadeIn(300);
-    } else if (display == 'off') {
+    } else if (display === 'off') {
         $('#' + img).attr('src', 'tng_expand.gif');
         $('#' + section).fadeOut(300);
     } else {

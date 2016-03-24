@@ -1,5 +1,5 @@
 var browser;
-if (parseInt(navigator.appVersion) > 3)
+if (parseInt(navigator.appVersion, 10) > 3)
     if (navigator.appName === 'Netscape')
         // Firefox
         if (navigator.userAgent.indexOf('Firefox') !== -1)

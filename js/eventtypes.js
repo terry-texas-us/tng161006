@@ -1,8 +1,8 @@
-var Itypes = new Array("EVEN", "ADOP", "ADDR", "ALIA", "ANCI", "BARM", "BASM", "CAST", "CENS", "CHRA", "CONF", "CREM", "DESI", "DSCR", "EDUC", "EMIG", "FCOM", "GRAD", "IDNO", "IMMI", "LANG", "NATI", "NATU", "NCHI", "NMR", "OCCU", "ORDI", "ORDN", "PHON", "PROB", "PROP", "REFN", "RELI", "RESI", "RESN", "RETI", "RFN", "RIN", "SSN", "WILL");
-var Ftypes = new Array("EVEN", "ANUL", "CENS", "DIV", "DIVF", "ENGA", "MARB", "MARC", "MARL", "MARS", "REFN", "RIN");
-var Stypes = new Array("EVEN", "REFN", "RIN");
+var Itypes = ["EVEN", "ADOP", "ADDR", "ALIA", "ANCI", "BARM", "BASM", "CAST", "CENS", "CHRA", "CONF", "CREM", "DESI", "DSCR", "EDUC", "EMIG", "FCOM", "GRAD", "IDNO", "IMMI", "LANG", "NATI", "NATU", "NCHI", "NMR", "OCCU", "ORDI", "ORDN", "PHON", "PROB", "PROP", "REFN", "RELI", "RESI", "RESN", "RETI", "RFN", "RIN", "SSN", "WILL"];
+var Ftypes = ["EVEN", "ANUL", "CENS", "DIV", "DIVF", "ENGA", "MARB", "MARC", "MARL", "MARS", "REFN", "RIN"];
+var Stypes = ["EVEN", "REFN", "RIN"];
 var Rtypes = Stypes;
-var messages = new Array();
+var messages = [];
 
 function populateTags(etype, match) {
     var types = eval(etype + "types");
@@ -11,7 +11,7 @@ function populateTags(etype, match) {
     var found = false;
 
     field.options.length = 0;
-    if (navigator.appName == "Netscape") {
+    if (navigator.appName === "Netscape") {
         field.options[0] = new Option('', '', false, false)
         for (var i = 1; i <= types.length; i++) {
             key = types[i - 1];
