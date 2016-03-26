@@ -1,8 +1,8 @@
 <?php
 $needMap = true;
-include("tng_begin.php");
+require 'tng_begin.php';
 
-include($subroot . "mapconfig.php");
+require $subroot . 'mapconfig.php';
 require 'places.php';
 
 if (!$psearch) {

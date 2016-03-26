@@ -1,16 +1,16 @@
 <?php
 require 'begin.php';
-include("genlib.php");
-include("getlang.php");
+require 'genlib.php';
+require 'getlang.php';
 
-include("functions.php");
+require 'functions.php';
 require 'personlib.php';
 require 'checklogin.php';
-include("showmedialib.php");
+require 'showmedialib.php';
 
 initMediaTypes();
 
-include("showmediaxmllib.php");
+require 'showmediaxmllib.php';
 
 if ($page < $totalpages) {
   $nextpage = $page + 1;

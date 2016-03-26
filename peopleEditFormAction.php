@@ -4,10 +4,10 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-require("adminlog.php");
-require("datelib.php");
+require 'adminlog.php';
+require 'datelib.php';
 
-include("geocodelib.php");
+require 'geocodelib.php';
 
 $query = "SELECT branch, edituser, edittime FROM $people_table WHERE personID = \"$personID\" and gedcom = \"$tree\"";
 $result = tng_query($query);

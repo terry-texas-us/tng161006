@@ -1,7 +1,8 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
-function showFact($text, $fact, $numflag = 0) {
+function showFact($text, $fact, $numflag = 0)
+{
   echo "<tr>\n";
   echo "<td>" . $text . "</td>\n";
   echo "<td colspan='2' ";

@@ -1,7 +1,7 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
-include("functions.php");
+require 'functions.php';
 if (!isset($csv)) {
   $csv = false;
 }
@@ -10,7 +10,8 @@ if (!is_numeric($reportID)) {
   die("Sorry!");
 }
 
-function processfield($field) {
+function processfield($field)
+{
   global $need_families, $cejoins, $evfields, $people_table, $events_table, $familyfields_nonss;
 
   if (in_array($field, $familyfields_nonss)) {

@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('emailusers'));
@@ -72,7 +72,7 @@ $headSection->setTitle(uiTextSnippet('emailusers'));
 <script src="js/selectutils.js"></script>
 <script src='js/users.js'></script>
 <script>
-    <?php include("branchlibjs.php"); ?>
+    <?php require 'branchlibjs.php'; ?>
 
     $('#gedcom').on('change', function () {
       var tree = getTree(this);

@@ -10,7 +10,8 @@ foreach ($orgprefixes as $prefix) {
   $prefixcount++;
 }
 
-function getIndividualRecord($personID, $prevlevel) {
+function getIndividualRecord($personID, $prevlevel)
+{
   global $people_table, $children_table, $families_table, $tree, $citations_table, $assoc_table;
   global $savestate, $lineinfo, $custeventlist, $stdnotes, $notecount, $branchlinks_table;
   global $today, $lnprefixes, $lnpfxnum, $specpfx, $currentuser, $newprefixes, $orgprefixes, $tngimpcfg, $pciteevents, $prefix;

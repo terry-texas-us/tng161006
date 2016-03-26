@@ -8,7 +8,7 @@ if (!count($_POST)) {
   exit;
 }
 if ($link) {
-  require 'checklogin.php';
+  include 'checklogin.php';
 
   if ($assignedtree || !$allowEdit) {
     $message = uiTextSnippet('norights');
@@ -16,7 +16,7 @@ if ($link) {
     exit;
   }
 }
-require("adminlog.php");
+require 'adminlog.php';
 
 $fp = fopen($subroot . "importconfig.php", "w", 1);
 if (!$fp) {

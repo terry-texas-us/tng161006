@@ -1,9 +1,9 @@
 <?php
 $needMap = true;
-include("tng_begin.php");
+require 'tng_begin.php';
 
-include($subroot . "mapconfig.php");
-include("functions.php");
+require $subroot . 'mapconfig.php';
+require 'functions.php';
 
 $flags['imgprev'] = true;
 

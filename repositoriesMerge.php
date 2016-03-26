@@ -4,9 +4,9 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
-require("adminlog.php");
+require 'adminlog.php';
 
 if (!$allowEdit || !$allowDelete) {
   $message = uiTextSnippet('norights');

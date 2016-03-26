@@ -1,5 +1,5 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
 $treestr = $tree ? " (" . uiTextSnippet('tree') . ": $tree)" : "";
 $logstring = "<a href='surnames.php?tree=$tree'>" . xmlcharacters(uiTextSnippet('surnamelist') . $treestr) . "</a>";

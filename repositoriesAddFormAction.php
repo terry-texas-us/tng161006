@@ -13,7 +13,7 @@ if (!$allowAdd || ($assignedtree && $assignedtree != $tree)) {
   exit;
 }
 
-require("adminlog.php");
+require 'adminlog.php';
 
 $repoID = ucfirst($repoID);
 

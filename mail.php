@@ -8,7 +8,7 @@ function tng_sendmail($from_name, $from_email, $to_name, $to_email, $subject, $b
     $success = false;
   } else {
     if ($tngconfig['usesmtp']) {
-      require_once 'PHPMailerAutoload.php';
+      include_once 'PHPMailerAutoload.php';
       
       //require_once("class.phpmailer.php");
       //require_once("class.smtp.php");

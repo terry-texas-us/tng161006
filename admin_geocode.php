@@ -4,10 +4,10 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
-include("geocodelib.php");
-require("adminlog.php");
+require 'geocodelib.php';
+require 'adminlog.php';
 
 $orgtree = $tree;
 

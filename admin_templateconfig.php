@@ -1,14 +1,14 @@
 <?php
 require 'begin.php';
-include($subroot . "templateconfig.php");
+require $subroot . 'templateconfig.php';
 require 'adminlib.php';
 
 $templatespath = "templates";
 
 if ($link) {
   $adminLogin = 1;
-  require 'checklogin.php';
-  include("version.php");
+  include 'checklogin.php';
+  include 'version.php';
 
   if ($assignedtree || !$allowEdit) {
     $message = uiTextSnippet('norights');

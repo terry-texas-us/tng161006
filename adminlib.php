@@ -1,14 +1,14 @@
 <?php
-require("version.php");
+require 'version.php';
 
-include_once("pwdlib.php");
-include_once("globallib.php");
-include_once("mediatypes.php");
-include_once("tngfiletypes.php");
+require_once 'pwdlib.php';
+require_once 'globallib.php';
+require_once 'mediatypes.php';
+require_once 'tngfiletypes.php';
 checkMaintenanceMode(1);
 
 if (isset($map['key']) && $map['key']) {
-  include_once("googlemaplib.php");
+  include_once 'googlemaplib.php';
 }
 require_once 'classes/headElementSection.php';
 require_once 'classes/adminNavElementSection.php';
@@ -51,7 +51,7 @@ $scriptsManager = new scriptsManager('admin');
 
 function getNewNumericID($type, $field, $table) {
   global $tree;
-  include("prefixes.php");
+  include 'prefixes.php';
 
   eval("\$prefix = \$$type" . "prefix;");
   eval("\$suffix = \$$type" . "suffix;");

@@ -5,7 +5,7 @@ require 'adminlib.php';
 $adminLogin = 1;
 require 'checklogin.php';
 
-require("adminlog.php");
+require 'adminlog.php';
 require 'mail.php';
 
 if ($assignedtree) {
@@ -20,7 +20,7 @@ if ($gedcom) {
   }
 }
 $recipientquery = "SELECT realname, email FROM $users_table WHERE allow_living != \"-1\" AND email != \"\" AND (no_email is NULL or no_email != \"1\") $wherestr";
-$result = tng_query($recipientquery) or die (uiTextSnippet('cannotexecutequery') . ": $recipientquery");
+$result = tng_query($recipientquery) or die(uiTextSnippet('cannotexecutequery') . ": $recipientquery");
 $numrows = tng_num_rows($result);
 
 if (!$numrows) {

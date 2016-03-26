@@ -1,6 +1,7 @@
 <?php
 
-function performQuery($query, $table = null) {
+function performQuery($query, $table = null)
+{
   global $badtables;
 
   $result = tng_query($query);

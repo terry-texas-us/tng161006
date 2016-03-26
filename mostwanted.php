@@ -1,7 +1,7 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
-include("functions.php");
+require 'functions.php';
 
 $logstring = "<a href='mostwanted.php'>" . xmlcharacters(uiTextSnippet('mostwanted')) . "</a>";
 writelog($logstring);
@@ -11,7 +11,8 @@ $wherestr = $tree ? " AND $mostwanted_table.gedcom = \"$tree\"" : "";
 
 $gotImageJpeg = function_exists(imageJpeg);
 
-function showDivs($type) {
+function showDivs($type)
+{
   global $wherestr;
   global $people_table;
   global $media_table;

@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 $tng_search_album = $_SESSION['tng_search_album'] = 1;
 if ($newsearch) {
@@ -89,7 +89,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
       <tr>
         <td>
           <div>
-            <?php include '_/components/php/findAlbumForm.php'; ?>
+            <?php require '_/components/php/findAlbumForm.php'; ?>
             <?php
             $numrowsplus = $numrows + $offset;
             if (!$numrowsplus) {

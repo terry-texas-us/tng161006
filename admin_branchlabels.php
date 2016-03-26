@@ -4,10 +4,10 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
-require("adminlog.php");
-require("deletelib.php");
+require 'adminlog.php';
+require 'deletelib.php';
 
 if ($assignedbranch) {
   $message = uiTextSnippet('norights');

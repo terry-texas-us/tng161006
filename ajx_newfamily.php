@@ -48,7 +48,7 @@ tng_free_result($result);
 
 header("Content-type:text/html; charset=" . $session_charset);
 
-include_once("eventlib.php");
+require_once 'eventlib.php';
 ?>
 <form id='famform1' name='famform1' action='' method='post' onsubmit="return validateFamily(this, '<?php echo $slot; ?>');">
   <header class='modal-header'>

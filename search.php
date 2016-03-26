@@ -1,9 +1,9 @@
 <?php
 $order = "";
-include("tng_begin.php");
+require 'tng_begin.php';
 
-include("searchlib.php");
-include("prefixes.php");
+require 'searchlib.php';
+require 'prefixes.php';
 
 set_time_limit(0);
 $maxsearchresults = $nr ? ($nr < 200 ? $nr : 200) : ($_SESSION['tng_nr'] ? $_SESSION['tng_nr'] : $maxsearchresults);
@@ -112,7 +112,8 @@ if ($order == "name") {
   }
 }
 
-function buildCriteria($column, $colvar, $qualifyvar, $qualifier, $value, $textstr) {
+function buildCriteria($column, $colvar, $qualifyvar, $qualifier, $value, $textstr)
+{
   global $lnprefixes;
   global $criteria_limit;
   global $criteria_count;

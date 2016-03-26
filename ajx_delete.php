@@ -10,8 +10,8 @@ if (!$allowMediaDelete) {
   exit;
 }
 
-require("adminlog.php");
-require("deletelib.php");
+require 'adminlog.php';
+require 'deletelib.php';
 
 function getID($fields, $table, $id, $idname = "ID") {
   $query = "SELECT $fields FROM $table WHERE $idname = \"$id\"";
@@ -52,7 +52,7 @@ switch ($t) {
     $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('language') . " $id";
     break;
   case "media":
-    require("medialib.php");
+    include 'medialib.php';
 
     resortMedia($id);
     //removeImages($id);
@@ -232,7 +232,7 @@ switch ($t) {
     break;
   case "branch":
     $branch = $id;
-    require("branchlib.php");
+    include 'branchlib.php';
 
     $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('branch') . " $id";
     break;
@@ -248,7 +248,7 @@ switch ($t) {
 
     $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('report') . " $id";
     break;
-  case "entity":
+case "entity":
     $newname = addslashes($delitem);
     if ($entity == "state") {
       $query = "DELETE FROM $states_table WHERE state = \"$newname\"";

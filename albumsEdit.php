@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 if (!$allowMediaEdit && (!$allowMediaAdd || !$added)) {
   $message = uiTextSnippet('norights');
@@ -353,7 +353,7 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
                       $name = $plink['entityID'];
                     }
 
-                    include("eventmicro.php");
+                    include 'eventmicro.php';
 
                     echo "<tr id=\"alink_{$plink['alinkID']}\"><td>\n";
                     if ($type != "place") {

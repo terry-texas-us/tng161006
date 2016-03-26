@@ -1,13 +1,13 @@
 <?php
-//This page written and contributed by Bert Deelman. Thanks, Bert!
+
 require 'begin.php';
-include($subroot . "logconfig.php");
-include($subroot . "importconfig.php");
+require $subroot . 'logconfig.php';
+require $subroot . 'importconfig.php';
 require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 $file_uploads = (bool)ini_get("file_uploads");
 $safe_mode = (bool)ini_get("safe_mode");

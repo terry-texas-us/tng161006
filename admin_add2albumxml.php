@@ -7,7 +7,7 @@ require 'checklogin.php';
 
 initMediaTypes();
 
-function get_album_nav($total, $perpage, $pagenavpages) {
+function getAlbumNav($total, $perpage, $pagenavpages) {
   global $page;
   global $totalpages;
   global $orgtree;
@@ -128,7 +128,7 @@ if (!$numrowsplus) {
   $offsetplus = 0;
 }
 echo "<p>" . uiTextSnippet('matches') . ": $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows";
-$pagenav = get_album_nav($totrows, $maxsearchresults, 5);
+$pagenav = getAlbumNav($totrows, $maxsearchresults, 5);
 echo " &nbsp; <span>$pagenav</span></p>";
 ?>
   <table>

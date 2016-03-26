@@ -11,7 +11,7 @@ if ($assignedtree || !$allowAdd) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-require("adminlog.php");
+require 'adminlog.php';
 
 $display = addslashes($display);
 $folder = addslashes($folder);

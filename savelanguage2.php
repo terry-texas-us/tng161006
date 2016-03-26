@@ -1,7 +1,7 @@
 <?php
 
 require 'begin.php';
-include("genlib.php");
+require 'genlib.php';
 
 session_start();
 eval("\$newlanguage = preg_replace(\"/[^0-9]/\", '', \$newlanguage$instance);");

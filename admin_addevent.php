@@ -9,11 +9,10 @@ if (!$allowAdd) {
   $message = uiTextSnippet('norights');
   exit;
 }
+require 'datelib.php';
+require 'adminlog.php';
 
-require("datelib.php");
-require("adminlog.php");
-
-include("geocodelib.php");
+require 'geocodelib.php';
 
 $persfamID = ucfirst($persfamID);
 
@@ -34,7 +33,6 @@ if ($session_charset != "UTF-8") {
   $email = tng_utf8_decode($email);
   $www = tng_utf8_decode($www);
 }
-
 $eventdate = addslashes($eventdate);
 $eventplace = addslashes($eventplace);
 $info = addslashes($info);
@@ -62,7 +60,6 @@ if (trim($eventplace)) {
     $message = geocode($eventplace, 0, $ID);
   }
 }
-
 if ($address1 || $address2 || $city || $state || $zip || $country || $phone || $email || $www) {
   $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, gedcom, phone, email, www)  VALUES(\"$address1\", \"$address2\", \"$city\", \"$state\", \"$zip\", \"$country\", \"$tree\", \"$phone\", \"$email\", \"$www\")";
   $result = tng_query($query);
@@ -70,7 +67,6 @@ if ($address1 || $address2 || $city || $state || $zip || $country || $phone || $
 } else {
   $addressID = "";
 }
-
 $query = "INSERT INTO $events_table (eventtypeID, persfamID, eventdate, eventdatetr, eventplace, age, agency, cause, addressID, info, gedcom, parenttag)  VALUES(\"$eventtypeID\", \"$persfamID\", \"$eventdate\", \"$eventdatetr\", \"$eventplace\", \"$age\", \"$agency\", \"$cause\", \"$addressID\", \"$info\", \"$tree\", \"\")";
 $result = tng_query($query);
 $eventID = tng_insert_id();

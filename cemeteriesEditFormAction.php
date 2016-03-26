@@ -1,6 +1,6 @@
 <?php
 require 'begin.php';
-include($subroot . "mapconfig.php");
+require $subroot . 'mapconfig.php';
 require 'adminlib.php';
 
 $adminLogin = 1;
@@ -11,7 +11,7 @@ if (!$allowEdit) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-require("adminlog.php");
+require 'adminlog.php';
 
 if ($newfile && $newfile != "none") {
   if (substr($maplink, 0, 1) == "/") {

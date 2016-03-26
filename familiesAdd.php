@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
@@ -271,7 +271,7 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->
 <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
-<?php include_once("eventlib.php"); ?>
+<?php require_once 'eventlib.php'; ?>
 <script>
   var tnglitbox;
   var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;
@@ -298,7 +298,7 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
 
   <?php
   if (!$assignedtree && !$assignedbranch) {
-    include("branchlibjs.php");
+    include 'branchlibjs.php';
   } else {
     $swapbranches = "";
   }

@@ -1,6 +1,6 @@
 <?php
 require 'begin.php';
-include("genlib.php");
+require 'genlib.php';
 require 'adminlib.php';
 
 $adminLogin = 1;

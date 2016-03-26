@@ -1,18 +1,18 @@
 <?php
 require 'begin.php';
-include($subroot . "mapconfig.php");
+require $subroot . 'mapconfig.php';
 require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 if (!$allowMediaEdit && (!$allowMediaAdd || !$added)) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-include("showmedialib.php");
+require 'showmedialib.php';
 
 $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate "
         . "FROM $media_table WHERE mediaID = \"$mediaID\"";
@@ -468,7 +468,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
         <tr>
           <td id="linkstd">
             <?php echo displayToggle("plus2", 1, "links", uiTextSnippet('medialinks') . " (<span id=\"linkcount\">$numlinks</span>)", uiTextSnippet('linkssubt')); ?>
-            <?php include("micro_medialinks.php"); ?>
+            <?php require 'micro_medialinks.php'; ?>
           </td>
         </tr>
         <tr>

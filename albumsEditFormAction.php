@@ -10,7 +10,7 @@ if (!$allowMediaEdit) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-require("adminlog.php");
+require 'adminlog.php';
 
 $albumname = addslashes($albumname);
 $description = addslashes($description);

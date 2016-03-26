@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 if (!$allowAdd) {
     $message = uiTextSnippet('norights');
@@ -20,6 +20,6 @@ header("Content-type: text/html; charset=" . $session_charset);
   </a>
 </header>
 <div id='modal-body'>
-  <?php include '_/components/php/newTreeForm.php'; ?>
+  <?php require '_/components/php/newTreeForm.php'; ?>
 </div>
 <footer class='modal-footer'></footer>

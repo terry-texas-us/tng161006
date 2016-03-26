@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include($subroot . "importconfig.php");
+require $subroot . 'importconfig.php';
 
 initMediaTypes();
 

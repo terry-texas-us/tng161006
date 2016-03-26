@@ -1,11 +1,11 @@
 <?php
 require 'begin.php';
-include($subroot . "mapconfig.php");
+require $subroot . 'mapconfig.php';
 require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 $orgtree = $tree;
 $exptime = 0;

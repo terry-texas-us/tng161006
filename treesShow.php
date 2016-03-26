@@ -1,7 +1,7 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
-include("functions.php");
+require 'functions.php';
 
 if ($treesearch) {
   $wherestr = "WHERE treename LIKE \"%$treesearch%\" OR description LIKE \"%$treesearch%\"";

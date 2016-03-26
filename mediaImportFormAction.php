@@ -4,8 +4,8 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
-require("adminlog.php");
+require 'version.php';
+require 'adminlog.php';
 
 if (!$allowMediaAdd || $assignedtree) {
   $message = uiTextSnippet('norights');

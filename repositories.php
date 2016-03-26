@@ -1,6 +1,7 @@
 <?php
 
-function buildRepositoryMenu($currpage, $repositoryId) {
+function buildRepositoryMenu($currpage, $repositoryId)
+{
     global $tree;
     global $allowEdit;
     global $rightbranch;

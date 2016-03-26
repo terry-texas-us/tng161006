@@ -3,7 +3,7 @@ require_once '../../../begin.php';
 
 $scriptName = is_string($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] : '';
 if (strpos($scriptName, 'ajax/checkPersonId.php') !== false) {
-  require_once '../php/textSnippets.php';
+  include_once '../php/textSnippets.php';
 
   $query = "SELECT personID FROM $people_table WHERE personID = '$checkID' AND gedcom = '$tree'";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");

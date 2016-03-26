@@ -1,10 +1,10 @@
 <?php
 
 set_time_limit(0);
-include("tng_begin.php");
+require 'tng_begin.php';
 
-include($subroot . "pedconfig.php");
-include("pedbox.php");
+require $subroot . 'pedconfig.php';
+require 'pedbox.php';
 
 initMediaTypes();
 

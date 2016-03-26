@@ -1,14 +1,14 @@
 <?php
 require 'begin.php';
-include("genlib.php");
+require 'genlib.php';
 if (!$sourceID) {
   header("Location: thispagedoesnotexist.html");
   exit;
 }
-include("getlang.php");
+require 'getlang.php';
 
 require 'checklogin.php';
-include("log.php");
+require 'log.php';
 require 'personlib.php';
 require 'sources.php';
 

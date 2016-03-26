@@ -1,5 +1,5 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 if ($requirelogin && !$_SESSION['currentuser']) {
   header("Location:$homepage");
   exit;
@@ -9,7 +9,7 @@ $langstr = isset($_GET['lang']) ? "&amp;lang=$languagesPath" . $_GET['lang'] : "
 
 ini_set("session.bug_compat_warn", "0");
 
-include("version.php");
+require 'version.php';
 
 $date = date("r");
 $timezone = date("T");

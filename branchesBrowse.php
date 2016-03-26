@@ -4,8 +4,8 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("prefixes.php");
-include("version.php");
+require 'prefixes.php';
+require 'version.php';
 
 if ($assignedbranch) {
   $message = uiTextSnippet('norights');

@@ -1,7 +1,7 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
-include($subroot . "pedconfig.php" );
+require $subroot . 'pedconfig.php';
 require 'personlib.php';
 
 $timeline = $_SESSION['timeline'];

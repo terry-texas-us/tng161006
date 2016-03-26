@@ -1,11 +1,11 @@
 <?php
 require 'begin.php';
-include($subroot . "mapconfig.php");
+include $subroot . 'mapconfig.php';
 require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
@@ -26,9 +26,9 @@ $headSection->setTitle(uiTextSnippet('addnewcemetery'));
 <html>
 <?php echo $headSection->build('', 'admin', $session_charset); ?>
 <body<?php if ($map['key']) {
-    if (!$map['startoff']) {
-      echo " onload=\"divbox('mapcontainer');\"";
-    }
+  if (!$map['startoff']) {
+    echo " onload=\"divbox('mapcontainer');\"";
+  }
   } ?>>
   <section class='container'>
     <?php

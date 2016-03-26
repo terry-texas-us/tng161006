@@ -5,8 +5,8 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-require("datelib.php");
-require("adminlog.php");
+require 'datelib.php';
+require 'adminlog.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');

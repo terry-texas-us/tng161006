@@ -3,12 +3,12 @@
 // Author:  Bret Rumsey
 // Thanks to J. Kraber for his original implementation of this report.
 //
-include("tng_begin.php");
+require 'tng_begin.php';
 $tngprint = 1;
 
 define('FPDF_FONTPATH', $rootpath . $endrootpath . 'font/');
-require('tngpdf.php');
-require('rpt_utils.php');
+require 'tngpdf.php';
+require 'rpt_utils.php';
 $pdf = new TNGPDF($orient, 'in', $pagesize);
 setcookie("tng_pagesize", $pagesize, time() + 31536000, "/");
 

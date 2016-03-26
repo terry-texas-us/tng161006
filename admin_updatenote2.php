@@ -12,7 +12,7 @@ if (!$allowEdit || ($assignedtree && $assignedtree != $gedcom)) {
   exit;
 }
 
-require("adminlog.php");
+require 'adminlog.php';
 
 $note = addslashes($note);
 

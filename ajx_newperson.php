@@ -24,7 +24,7 @@ if ($father) {
 }
 header("Content-type:text/html; charset=" . $session_charset);
 
-include_once("eventlib.php");
+require_once 'eventlib.php';
 ?>
 <form id='persform1' name='persform1' action='' method='post' onSubmit="return validatePerson(this);">
   <header class='modal-header'>

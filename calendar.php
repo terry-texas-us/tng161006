@@ -1,12 +1,12 @@
 <?php
-/*
+/**
  * @author CJ Niemira <siege (at) siege (dot) org>
  * @copyright 2006,2008
  * @license GPL
  * @version 2.0
  */
 
-include("tng_begin.php");
+require 'tng_begin.php';
 
 $logstring = "<a href=\"calendar.php?living=$living&amp;hide=$hide&amp;tree=$tree&amp;m=$m&amp;year=$year\">" . xmlcharacters(uiTextSnippet('calendar')) . "</a>";
 writelog($logstring);
@@ -35,7 +35,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     <h2><img class='icon-md' src='svg/calendar.svg'><?php echo uiTextSnippet('calendar'); ?></h2>
     <br clear='left'>
     <?php
-    include_once("calsettings.php");
+    require_once 'calsettings.php';
 
     // Make an array of all the event types
     $calAllEvents = array_merge($calIndEvent, $calFamEvent, $calEvent);

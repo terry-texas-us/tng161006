@@ -1,5 +1,5 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
 require 'personlib.php';
 require 'families.php';

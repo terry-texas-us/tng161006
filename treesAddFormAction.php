@@ -12,7 +12,7 @@ if ($assignedtree || !$allowAdd) {
   exit;
 }
 
-require("adminlog.php");
+require 'adminlog.php';
 
 $gedcom = str_replace(" ", "", $gedcom);
 $treenamedisp = stripslashes($treename);

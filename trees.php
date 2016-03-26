@@ -1,6 +1,7 @@
 <?php
 
-function treeSelect($treeresult, $formname = null) {
+function treeSelect($treeresult, $formname = null)
+{
   global $tree;
 
   $ret = "<label for='tree'>" . uiTextSnippet('tree') . "</label>";
@@ -26,7 +27,8 @@ function treeSelect($treeresult, $formname = null) {
   return $ret;
 }
 
-function treeDropdown($forminfo) {
+function treeDropdown($forminfo)
+{
   global $requirelogin;
   global $assignedtree;
   global $trees_table;

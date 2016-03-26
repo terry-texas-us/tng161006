@@ -1,10 +1,10 @@
 <?php
 
 require 'begin.php';
-include("getlang.php");
+require 'getlang.php';
 
 $tngconfig['maint'] = "";
-include("genlib.php");
+require 'genlib.php';
 
 if ($adminLogin) {
   $home_url = "admin.php";

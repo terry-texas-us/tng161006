@@ -1,7 +1,7 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
-include("functions.php");
+require 'functions.php';
 
 function doNoteSearch($instance, $pagenav) {
   global $notesearch;

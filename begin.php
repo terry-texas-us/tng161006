@@ -6,14 +6,14 @@ if (isset($_GET['lang']) || isset($_GET['mylanguage']) || isset($_GET['language'
 $tngconfig = "";
 
 if (strpos($_SERVER['SCRIPT_NAME'], "/admin_updateconfig.php") === false) {
-  include("processvars.php");
+  include 'processvars.php';
 }
-include("subroot.php");
-include_once("tngconnect.php");
-include($tngconfig['subroot'] . "config.php");
+require 'subroot.php';
+require_once 'tngconnect.php';
+require $tngconfig['subroot'] . 'config.php';
 $subroot = $tngconfig['subroot'] ? $tngconfig['subroot'] : "";
 
-include($subroot . "templateconfig.php");
+require $subroot . 'templateconfig.php';
 
 if (isset($sitever)) {
   setcookie("tng_siteversion", $sitever, time() + 31536000, "/");
@@ -27,7 +27,7 @@ $sitever = 'standard';
 session_start();
 
 $languagesPath = "languages/";
-include("getlang.php");
+require 'getlang.php';
 $session_language = $_SESSION['session_language'];
 $session_charset = $_SESSION['session_charset'];
 

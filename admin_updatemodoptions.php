@@ -2,7 +2,7 @@
 
 require 'begin.php';
 require 'adminlib.php';
-include("getlang.php");
+require 'getlang.php';
 
 if (!count($_POST['options'])) {
   header("Location: admin.php");
@@ -12,7 +12,7 @@ $options = $_POST['options'];
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 if ($assignedtree || !$allowEdit) {
   $message = uiTextSnippet('norights');
@@ -25,7 +25,7 @@ if (isset($_SESSION['sortby'])) {
   unset($_SESSION['sortby']);
 }
 
-require("adminlog.php");
+require 'adminlog.php';
 $optionsfile = $subroot . 'mmconfig.php';
 if (!is_writeable($optionsfile)) {
   $_SESSION['err_msg'] = uiTextSnippet('checkwrite') . " " . uiTextSnippet('cantwrite') . " $optionsfile !";

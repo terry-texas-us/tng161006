@@ -45,7 +45,7 @@ header("Content-type:text/html; charset=" . $session_charset);
               if (!$assignedtree) {
                 echo "  <option value=''>" . uiTextSnippet('alltrees') . "</option>\n";
               }
-              $treeresult = tng_query($treequery) or die (uiTextSnippet('cannotexecutequery') . ": $treequery");
+              $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
               while ($treerow = tng_fetch_assoc($treeresult)) {
                 echo "  <option value=\"{$treerow['gedcom']}\"";
                 if ($treerow['gedcom'] == $tree) {

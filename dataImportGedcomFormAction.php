@@ -11,21 +11,21 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 if (!$allowAdd || !$allowEdit || $assignedbranch) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-include($subroot . "importconfig.php");
-require("datelib.php");
+require $subroot . 'importconfig.php';
+require 'datelib.php';
 require 'gedcomImport.php';
 require 'gedcomImportTrees.php';
 require 'gedcomImportFamilies.php';
 require 'gedcomImportSources.php';
 require 'gedcomImportPeople.php';
-require("adminlog.php");
+require 'adminlog.php';
 $today = date("Y-m-d H:i:s");
 
 global $prefix;

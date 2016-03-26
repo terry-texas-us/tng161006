@@ -5,11 +5,11 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
-include($subroot . "importconfig.php");
-require("adminlog.php");
-include("prefixes.php");
+require $subroot . 'importconfig.php';
+require 'adminlog.php';
+require 'prefixes.php';
 
 if (!$allow_ged && $assignedtree) {
   $query = "SELECT disallowgedcreate FROM $trees_table WHERE gedcom = \"$assignedtree\"";

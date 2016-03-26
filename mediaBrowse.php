@@ -1,11 +1,11 @@
 <?php
 require 'begin.php';
-include($subroot . "mapconfig.php");
+require $subroot . 'mapconfig.php';
 require 'adminlib.php';
 
 $adminLogin = true;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 $maxnoteprev = 350;    //don't use the global value here because we always want to truncate
 
@@ -152,7 +152,7 @@ $headSection->setTitle(uiTextSnippet('media'));
             <?php
             $newwherestr = $wherestr;
             $wherestr = $orgwherestr;
-            include '_/components/php/treeSelectControl.php';
+            require '_/components/php/treeSelectControl.php';
             $wherestr = $newwherestr;
             ?>
           </div>

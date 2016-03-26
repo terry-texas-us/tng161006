@@ -4,8 +4,8 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
-include($subroot . "importconfig.php");
+require 'version.php';
+require $subroot . 'importconfig.php';
 
 if (!$allowAdd || !$allowEdit || $assignedbranch) {
   $message = uiTextSnippet('norights');

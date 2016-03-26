@@ -2,15 +2,15 @@
 
 require 'begin.php';
 
-include("genlib.php");
-include("getlang.php");
+require 'genlib.php';
+require 'getlang.php';
 
-include("tngdblib.php");
+require 'tngdblib.php';
 
 if (strpos($_SERVER['SCRIPT_NAME'], "/changelanguage.php") === false && (strpos($_SERVER['SCRIPT_NAME'], "/mixedSuggest.php") === false || $enttype)) {
-  require 'checklogin.php';
+  include 'checklogin.php';
 } else {
   $currentuser = $_SESSION['currentuser'];
   $currentuserdesc = $_SESSION['currentuserdesc'];
 }
-include("log.php");
+require 'log.php';

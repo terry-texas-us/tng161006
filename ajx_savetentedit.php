@@ -1,7 +1,7 @@
 <?php
 require 'begin.php';
-include("genlib.php");
-include_once("tngdblib.php");
+require 'genlib.php';
+require_once 'tngdblib.php';
 require 'checklogin.php';
 require 'mail.php';
 

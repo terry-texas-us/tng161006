@@ -13,11 +13,11 @@ if (!$allowAdd || ($assignedtree && $assignedtree != $tree)) {
   exit;
 }
 
-require("adminlog.php");
-require("datelib.php");
+require 'adminlog.php';
+require 'datelib.php';
 
-include("geocodelib.php");
-include("deletelib.php");
+require 'geocodelib.php';
+require 'deletelib.php';
 
 $familyID = ucfirst($familyID);
 

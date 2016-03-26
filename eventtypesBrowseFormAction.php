@@ -10,7 +10,7 @@ if ($assignedtree || !$allowEdit || !$allowDelete) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-require("adminlog.php");
+require 'adminlog.php';
 
 $query = "";
 if ($cetaction == uiTextSnippet('ignoreselected')) {

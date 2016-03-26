@@ -5,14 +5,14 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-require("datelib.php");
+require 'datelib.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-require("adminlog.php");
+require 'adminlog.php';
 
 $orgrelationship = $relationship;
 if ($session_charset != "UTF-8") {

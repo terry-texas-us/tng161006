@@ -9,7 +9,7 @@ require 'checklogin.php';
 if (!$allowDelete) {
   exit;
 }
-require("adminlog.php");
+require 'adminlog.php';
 
 $query = "SELECT addressID FROM $events_table WHERE eventID=\"$eventID\"";
 $result = tng_query($query);

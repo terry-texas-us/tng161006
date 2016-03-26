@@ -1,6 +1,6 @@
 <?php
 require 'begin.php';
-include("globallib.php");
+require 'globallib.php';
 
 header("Content-type: image/png");
 

@@ -1,8 +1,8 @@
 <?php
 $order = "";
-include("tng_begin.php");
+require 'tng_begin.php';
 
-include("searchlib.php");
+require 'searchlib.php';
 
 set_time_limit(0);
 $maxsearchresults = $nr ? $nr : ($_SESSION['tng_nr'] ? $_SESSION['tng_nr'] : $maxsearchresults);

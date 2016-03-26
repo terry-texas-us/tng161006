@@ -1,6 +1,6 @@
 <?php
-include("tng_begin.php");
-include("functions.php");
+require 'tng_begin.php';
+require 'functions.php';
 
 $_SESSION['tng_mediatree'] = $tree;
 $_SESSION['tng_mediasearch'] = "";

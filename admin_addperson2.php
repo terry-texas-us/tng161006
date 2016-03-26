@@ -6,14 +6,13 @@ require 'adminlib.php';
 $adminLogin = 1;
 require 'checklogin.php';
 
-require("adminlog.php");
-require("datelib.php");
+require 'adminlog.php';
+require 'datelib.php';
 
 if (!$allowAdd || ($assignedtree && $assignedtree != $tree)) {
   exit;
 }
-
-include("deletelib.php");
+require 'deletelib.php';
 
 //this line needed to prevent garbage chars in IS0-8859-2
 header("Content-type:text/html; charset=" . $session_charset);
@@ -36,7 +35,6 @@ if ($session_charset != "UTF-8") {
   $initplace = tng_utf8_decode($initplace);
   $endlplace = tng_utf8_decode($endlplace);
 }
-
 $firstname = addslashes($firstname);
 $lnprefix = addslashes($lnprefix);
 $lastname = addslashes($lastname);
@@ -105,7 +103,6 @@ if ($result && tng_num_rows($result)) {
     $query = "INSERT IGNORE INTO $places_table (gedcom, place,placelevel,zoom,geoignore,temple) VALUES(\"$placetree\",\"$place\",\"0\",\"0\",\"0\",\"$temple\")";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   }
-
   if (is_array($branch)) {
     foreach ($branch as $b) {
       if ($b) {
@@ -144,7 +141,6 @@ if ($result && tng_num_rows($result)) {
     $query = "INSERT IGNORE INTO $branchlinks_table (branch,gedcom,persfamID) VALUES(\"$b\",\"$tree\",\"$personID\")";
     $result = tng_query($query);
   }
-
   $row['allow_living'] = $row['allow_private'] = 1;
 
   if ($type == "child") {
@@ -170,7 +166,6 @@ if ($result && tng_num_rows($result)) {
       }
       tng_free_result($result);
     }
-
     if ($row['birthdate']) {
       $birthdate = uiTextSnippet('birthabbr') . " " . $row['birthdate'];
     } else {
@@ -180,7 +175,6 @@ if ($result && tng_num_rows($result)) {
         $birthdate = "";
       }
     }
-
     $rval = "<div class='sortrow' id=\"child_$personID\" style='width: 500px; clear: both; display: none'";
     $rval .= " onmouseover=\"$('#unlinkc_$personID').css('visibility','visible');\" onmouseout=\"$('#unlinkc_$personID').css('visibility','hidden');\">\n";
     $rval .= "<table width=\"100%\" cellpadding=\"5\" cellspacing=\"1\"><tr>\n";

@@ -1,7 +1,7 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
-include($subroot . "pedconfig.php");
+require $subroot . 'pedconfig.php';
 require 'personlib.php';
 
 if (!$personID) {
@@ -14,7 +14,7 @@ if ($display == "textonly" || (!$display && !$pedigree['defdesc'])) {
   header("Location: register.php?personID=$personID&tree=$tree&generations=$generations");
   exit;
 }
-include("pedbox.php");
+require 'pedbox.php';
 
 if ($pedigree['defdesc'] == "") {
   $pedigree['defdesc'] = 2;

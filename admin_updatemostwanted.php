@@ -10,7 +10,7 @@ if (!$allowEdit && !$allowAdd) {
   exit;
 }
 
-require("adminlog.php");
+require 'adminlog.php';
 
 if ($session_charset != "UTF-8") {
   $title = tng_utf8_decode($title);

@@ -23,7 +23,7 @@ tng_free_result($result);
 
 header("Content-type: text/html; charset=" . $session_charset);
 
-include_once("eventlib.php");
+require_once 'eventlib.php';
 ?>
 <section class='container'>
   <form id='ldsordinances' name='ldsordinanances' onSubmit='updateLDSOrdinances(this);'>

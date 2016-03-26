@@ -28,7 +28,7 @@ if ($assignedtree) {
   $wherestr = "";
 }
 $treequery = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
-$treeresult = tng_query($treequery) or die (uiTextSnippet('cannotexecutequery') . ": $treequery");
+$treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
 $treenum = 0;
 while ($treerow = tng_fetch_assoc($treeresult)) {
   $treenum++;
@@ -60,7 +60,7 @@ header("Content-type:text/html; charset=" . $session_charset);
     <td>
       <h4><?php echo uiTextSnippet('medialinks'); ?></h4>
       <form action="" name='form1' id='form1'>
-        <?php include("micro_medialinks.php"); ?>
+        <?php include 'micro_medialinks.php'; ?>
       </form>
     </td>
   </tr>

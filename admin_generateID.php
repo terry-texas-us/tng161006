@@ -7,7 +7,7 @@ require 'checklogin.php';
 
 function getNewID($type, $table) {
   global $tree, $tngconfig;
-  include("prefixes.php");
+  include 'prefixes.php';
 
   if (isset($_COOKIE['tng_' . $type . 'lastid_' . $tree])) {
     $lastid = $_COOKIE['tng_' . $type . 'lastid_' . $tree];

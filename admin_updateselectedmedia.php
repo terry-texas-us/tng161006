@@ -12,8 +12,8 @@ if (!$allowEdit || !$allowDelete) {
   exit;
 }
 
-require("adminlog.php");
-require("medialib.php");
+require 'adminlog.php';
+require 'medialib.php';
 
 $count = 0;
 

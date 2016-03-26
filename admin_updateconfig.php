@@ -1,7 +1,7 @@
 <?php
 
 require 'begin.php';
-include("processvars.php");
+require 'processvars.php';
 require 'adminlib.php';
 
 if (!count($_POST)) {
@@ -16,8 +16,8 @@ if (!$safety) {
 
 if ($link) {
   $adminLogin = 1;
-  require 'checklogin.php';
-  include("version.php");
+  include 'checklogin.php';
+  include 'version.php';
 
   if ($assignedtree || !$allowEdit) {
     $message = uiTextSnippet('norights');
@@ -36,7 +36,7 @@ $dbowner = preg_replace("/\"/", "\\\"", $dbowner);
 
 $doctype = addslashes($doctype);
 
-require("adminlog.php");
+require 'adminlog.php';
 
 $fp = fopen($subroot . "config.php", "w", 1);
 if (!$fp) {

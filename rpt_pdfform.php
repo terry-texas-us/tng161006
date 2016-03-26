@@ -1,7 +1,7 @@
 <?php
 $tngprint = 1;
-include("tng_begin.php");
-include($subroot . "pedconfig.php");
+require 'tng_begin.php';
+include $subroot . 'pedconfig.php';
 
 if ($pdftype == "ped") {
   $dest = "rpt_pedigree";

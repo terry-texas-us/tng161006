@@ -1,11 +1,11 @@
 <?php
 require 'begin.php';
-include("genlib.php");
-include("getlang.php");
+require 'genlib.php';
+require 'getlang.php';
 
-include("functions.php");
+require 'functions.php';
 require 'checklogin.php';
-include("showmedialib.php");
+require 'showmedialib.php';
 
 header("Content-type:text/html; charset=" . $session_charset);
 ?>
@@ -18,7 +18,7 @@ header("Content-type:text/html; charset=" . $session_charset);
         <?php
         initMediaTypes();
 
-        include("showmediaxmllib.php");
+        require 'showmediaxmllib.php';
 
         echo "<p class='topmargin'>$pagenav</p>";
         echo "<h4>" . truncateIt($description, 100) . "</h4>\n";

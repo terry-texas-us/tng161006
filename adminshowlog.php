@@ -4,9 +4,9 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
-require($subroot . "logconfig.php");
+require $subroot . 'logconfig.php';
 
 $loglines = $adminmaxloglines ? $adminmaxloglines : "";
 

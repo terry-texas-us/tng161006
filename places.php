@@ -1,6 +1,7 @@
 <?php
 
-function buildPlaceMenu($currpage, $entityID) {
+function buildPlaceMenu($currpage, $entityID)
+{
   global $tree;
   global $allowEdit;
   global $rightbranch;
@@ -19,7 +20,8 @@ function buildPlaceMenu($currpage, $entityID) {
   return $menu;
 }
 
-function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
+function processPlaceEvents($prefix, $stdevents, $displaymsgs)
+{
   global $eventtypes_table;
   global $tree;
   global $people_table;

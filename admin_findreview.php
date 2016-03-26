@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 $adminLogin = true;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 if ($type == 'I') {
   $tng_search_preview = $_SESSION['tng_search_preview'] = 1;

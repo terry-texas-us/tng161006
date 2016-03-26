@@ -1,12 +1,12 @@
 <?php
 require 'begin.php';
-include($subroot . "logconfig.php");
+require $subroot . 'logconfig.php';
 require 'adminlib.php';
 
 if ($link) {
   $adminLogin = 1;
-  require 'checklogin.php';
-  include("version.php");
+  include 'checklogin.php';
+  include 'version.php';
 
   if ($assignedtree || !$allowEdit) {
     $message = uiTextSnippet('norights');

@@ -1,5 +1,5 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
 if ($tree && !$tngconfig['places1tree']) {
   $treestr = "tree=$tree&amp;";

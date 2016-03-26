@@ -1,12 +1,12 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
 if (!$personID) {
   die("no args");
 }
-include($subroot . "pedconfig.php");
+require $subroot . 'pedconfig.php';
 require 'personlib.php';
-include("reglib.php");
+require 'reglib.php';
 
 if ($tngmore) {
   $pedigree['regnotes'] = 1;

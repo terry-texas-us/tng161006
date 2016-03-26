@@ -1,12 +1,12 @@
 <?php
 
 require 'begin.php';
-include("genlib.php");
-include("getlang.php");
+require 'genlib.php';
+require 'getlang.php';
 
 require 'checklogin.php';
 
-include($subroot . "logconfig.php");
+require $subroot . 'logconfig.php';
 require 'suggest.php';
 require 'mail.php';
 

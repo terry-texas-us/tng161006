@@ -5,7 +5,7 @@ function adminwritelog($string) {
   global $time_offset;
   global $subroot;
 
-  require($subroot . "logconfig.php");
+  include $subroot . 'logconfig.php';
 
   $string .= " (" . uiTextSnippet('user') . ": $currentuserdesc)";
 

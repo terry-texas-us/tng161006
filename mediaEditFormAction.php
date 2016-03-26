@@ -10,7 +10,7 @@ if (!$allowMediaEdit && !$allowMediaAdd) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-require("adminlog.php");
+require 'adminlog.php';
 initMediaTypes();
 
 function reorderMedia($query, $plink, $mediatypeID) {
@@ -36,7 +36,7 @@ function reorderMedia($query, $plink, $mediatypeID) {
 
 $thumbquality = 80;
 if (function_exists(imageJpeg)) {
-  include("imageutils.php");
+  include 'imageutils.php';
 }
 $usefolder = $usecollfolder ? $mediatypes_assoc[$mediatypeID] : $mediapath;
 

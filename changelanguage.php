@@ -1,5 +1,5 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
 $currentuser = $_SESSION['currentuser'];
 $currentuserdesc = $_SESSION['currentuserdesc'];
@@ -7,7 +7,7 @@ $currentuserdesc = $_SESSION['currentuserdesc'];
 $query = "SELECT languageID, display, folder FROM $languagesTable ORDER BY display";
 $result = tng_query($query);
 
-$numrows = tng_num_rows( $result );
+$numrows = tng_num_rows($result);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
@@ -23,7 +23,7 @@ $headSection->setTitle(uiTextSnippet('changelanguage'));
 <h2><?php echo uiTextSnippet('changelanguage'); ?></h2>
 <br clear='all'>
 <?php 
-if( $numrows ) {
+if ($numrows) {
     $str .= buildFormElement("savelanguage", "post", "");
     echo "$str";
 

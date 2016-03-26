@@ -9,7 +9,7 @@ if (!$allowEdit) {
   exit;
 }
 
-require("adminlog.php");
+require 'adminlog.php';
 
 $query = "SELECT place, latitude, longitude, placelevel, zoom, notes FROM $places_table WHERE ID = \"$keep\"";
 $result = tng_query($query);
@@ -122,7 +122,7 @@ if ($addtoquery) {
   if (!$tngconfig['places1tree']) {
     $dquery .= ")";
   }
-  $result = tng_query($dquery) or die (uiTextSnippet('cannotexecutequery') . ": $dquery");
+  $result = tng_query($dquery) or die(uiTextSnippet('cannotexecutequery') . ": $dquery");
 
   adminwritelog(uiTextSnippet('mergeplaces') . ": $newplace");
 

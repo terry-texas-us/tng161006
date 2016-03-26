@@ -1,7 +1,7 @@
 <?php
 require 'begin.php';
-include("genlib.php");
-include("getlang.php");
+require 'genlib.php';
+require 'getlang.php';
 
 header("Content-type:text/html;charset=" . $session_charset);
 ?>
@@ -23,7 +23,7 @@ header("Content-type:text/html;charset=" . $session_charset);
 
 <body onload="calcHeight(window.innerHeight);">
   <script>
-    <?php include("js/img_utils.js"); ?>
+    <?php require 'js/img_utils.js'; ?>
   </script>
   <div id="loadingdiv2" style="position:static;">
     <?php echo uiTextSnippet('loading') ?> 

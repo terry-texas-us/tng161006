@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 $adminLogin = true;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 $query = "SELECT *, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") as postdate FROM $temp_events_table WHERE tempID = \"$tempID\"";
 $result = tng_query($query);
@@ -370,9 +370,9 @@ $headSection->setTitle(uiTextSnippet('review'));
 
   <?php
   echo $adminFooterSection->build();
-echo scriptsManager::buildScriptElements($flags, 'admin');
+  echo scriptsManager::buildScriptElements($flags, 'admin');
 ?>
-<?php include_once("eventlib.php"); ?>
+<?php require_once 'eventlib.php'; ?>
 <script>
   var tnglitbox;
   var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;

@@ -11,7 +11,7 @@ if (!$allowDelete) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-require("adminlog.php");
+require 'adminlog.php';
 
 $query = "DELETE from $people_table WHERE gedcom = \"$tree\"";
 $result = tng_query($query);
@@ -54,7 +54,7 @@ if ($tree) {
   $result = tng_query($query);
   while ($row = tng_fetch_assoc($result)) {
     $delquery = "DELETE FROM $albumlinks_table WHERE mediaID=\"{$row['mediaID']}\"";
-    $delresult = tng_query($delquery) or die (uiTextSnippet('cannotexecutequery') . ": $delquery");
+    $delresult = tng_query($delquery) or die(uiTextSnippet('cannotexecutequery') . ": $delquery");
   }
   tng_free_result($result);
 

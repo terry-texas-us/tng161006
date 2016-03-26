@@ -1,5 +1,5 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
 require 'classes/chooseLanguage.php';
 require 'classes/personSearchForm.class.php';

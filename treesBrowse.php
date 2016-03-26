@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 $tng_search_trees = $_SESSION['tng_search_trees'] = 1;
 if ($newsearch) {

@@ -1,7 +1,7 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
-include("functions.php");
+require 'functions.php';
 
 $tngyear = preg_replace("/[^0-9]/", "", $tngyear);
 $tngkeywords = preg_replace("/[^A-Za-z0-9]/", "", $tngkeywords);

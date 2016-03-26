@@ -1,12 +1,12 @@
 <?php
 
 require 'begin.php';
-include("genlib.php");
-include("getlang.php");
+require 'genlib.php';
+require 'getlang.php';
 
 require 'checklogin.php';
 
-include($subroot . "logconfig.php");
+require $subroot . 'logconfig.php';
 require 'mail.php';
 
 $valid_user_agent = isset($_SERVER["HTTP_USER_AGENT"]) && $_SERVER["HTTP_USER_AGENT"] != "";

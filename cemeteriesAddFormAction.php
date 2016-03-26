@@ -11,7 +11,7 @@ if (!$allowAdd) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-require("adminlog.php");
+require 'adminlog.php';
 
 if ($newfile && $newfile != "none") {
   if (substr($maplink, 0, 1) == "/") {

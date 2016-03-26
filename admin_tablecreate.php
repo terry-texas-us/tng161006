@@ -4,11 +4,11 @@ require 'adminlib.php';
 
 if ($link) {
   $adminLogin = 1;
-  require 'checklogin.php';
-  include("version.php");
+  include 'checklogin.php';
+  include 'version.php';
 }
 
-require("adminlog.php");
+require 'adminlog.php';
 
 if ($assignedtree) {
   $message = uiTextSnippet('norights');
@@ -18,7 +18,7 @@ if ($assignedtree) {
 
 $badtables = "";
 $collation = "";
-include("tabledefs.php");
+require 'tabledefs.php';
 
 if (!$badtables) {
   adminwritelog(uiTextSnippet('createtables'));

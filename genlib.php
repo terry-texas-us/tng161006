@@ -1,21 +1,21 @@
 <?php
-require_once("version.php");
+require_once 'version.php';
 
-include_once("pwdlib.php");
-include_once("globallib.php");
-include_once("mediatypes.php");
-include_once("tngfiletypes.php");
+require_once 'pwdlib.php';
+require_once 'globallib.php';
+require_once 'mediatypes.php';
+require_once 'tngfiletypes.php';
 
 require_once 'trees.php';
 
 checkMaintenanceMode(0);
 if ($needMap) {
-  include($subroot . "mapconfig.php");
+  require $subroot . 'mapconfig.php';
   if ($map['key']) {
-    include_once("googlemaplib.php");
+    include_once 'googlemaplib.php';
   }
 }
-include("tngrobots.php");
+require 'tngrobots.php';
 
 $gotlastpage = false;
 $flags['error'] = $error;

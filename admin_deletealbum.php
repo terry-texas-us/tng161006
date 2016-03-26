@@ -12,7 +12,7 @@ if (!$allowMediaDelete) {
   exit;
 }
 
-require("adminlog.php");
+require 'adminlog.php';
 
 $query = "DELETE FROM $albums_table WHERE albumID=\"$albumID\"";
 $result = tng_query($query);

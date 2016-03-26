@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 if ((!$allowEdit && (!$allowAdd || !$added)) || ($assignedtree && $assignedtree != $tree)) {
   $message = uiTextSnippet('norights');
@@ -45,7 +45,7 @@ $headSection->setTitle(uiTextSnippet('modifyrepo'));
   <section class='container'>
     <?php
     $photo = showSmallPhoto($repoID, $row['reponame'], 1, 0, 'R');
-    include_once("eventlib.php");
+    require_once 'eventlib.php';
     ?>
     <?php
     echo $adminHeaderSection->build('repositories-modifyrepo', $message);

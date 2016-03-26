@@ -1,9 +1,9 @@
 <?php
 require 'begin.php';
-include("genlib.php");
-include("getlang.php");
+require 'genlib.php';
+require 'getlang.php';
 
-include("functions.php");
+require 'functions.php';
 
 if ($medialinkID) {
   $query = "SELECT mediatypeID, personID, linktype, $medialinks_table.gedcom as gedcom, eventID, ordernum FROM ($media_table, $medialinks_table) WHERE medialinkID = \"$medialinkID\" AND $media_table.mediaID = $medialinks_table.mediaID";
@@ -39,7 +39,7 @@ if (!tng_num_rows($result)) {
   header("Location: thispagedoesnotexist.html");
 }
 require 'checklogin.php';
-include("showmedialib.php");
+require 'showmedialib.php';
 
 $info = getMediaInfo($mediatypeID, $mediaID, $personID, $albumID, $albumlinkID, $cemeteryID, $eventID);
 $imgrow = $info['imgrow'];

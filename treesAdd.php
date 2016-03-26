@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 if (!$allowAdd) {
     $message = uiTextSnippet('norights');
@@ -27,7 +27,7 @@ $headSection->setTitle(uiTextSnippet('addnewtree'));
 //    $navList->appendItem([$allow_add_tree, "treesAdd.php", uiTextSnippet('add'), "addtree"]);
     echo $navList->build("addtree");
     ?>
-    <?php include '_/components/php/newTreeForm.php'; ?>
+    <?php require '_/components/php/newTreeForm.php'; ?>
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->
 <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>

@@ -1,11 +1,11 @@
 <?php
 require 'begin.php';
-include("genlib.php");
-include("getlang.php");
+require 'genlib.php';
+require 'getlang.php';
 
 require 'checklogin.php';
-include("functions.php");
-include("log.php");
+require 'functions.php';
+require 'log.php';
 
 require_once 'albums.php';
 

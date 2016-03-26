@@ -273,7 +273,7 @@ $citationcount = tng_num_rows($citresult);
         <div id='checkmsg'></div>
       </div>
       <input name='tree1' type='hidden' value="<?php echo $tree; ?>"/>
-      <?php include("micro_newsource.php"); ?>
+      <?php require 'micro_newsource.php'; ?>
       <p><strong><?php echo uiTextSnippet('sevslater'); ?></strong></p>
     </div> <!-- .modal-body -->
     <footer class='modal-footer'>

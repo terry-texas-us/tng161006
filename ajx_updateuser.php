@@ -5,7 +5,7 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-require("adminlog.php");
+require 'adminlog.php';
 
 if (!$currentuser) {
   $message = uiTextSnippet('norights');

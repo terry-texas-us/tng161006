@@ -1,7 +1,7 @@
 <?php
 require 'begin.php';
-include("genlib.php");
-include("getlang.php");
+require 'genlib.php';
+require 'getlang.php';
 
 require 'checklogin.php';
 

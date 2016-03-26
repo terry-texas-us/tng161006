@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 $adminLogin = true;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
@@ -174,7 +174,7 @@ $headSection->setTitle(uiTextSnippet('addnewperson'));
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->
 <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
-<?php include_once("eventlib.php"); ?>
+<?php require_once 'eventlib.php'; ?>
 <script src="js/admin.js"></script>
 <script src="js/selectutils.js"></script>
 <script src="js/datevalidation.js"></script>

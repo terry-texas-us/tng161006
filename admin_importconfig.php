@@ -1,12 +1,12 @@
 <?php
 require 'begin.php';
-include($subroot . "importconfig.php");
+require $subroot . 'importconfig.php';
 require 'adminlib.php';
 
 if ($link) {
   $adminLogin = 1;
-  require 'checklogin.php';
-  include("version.php");
+  include 'checklogin.php';
+  include 'version.php';
 
   if ($assignedtree || !$allowEdit) {
     $message = uiTextSnippet('norights');
@@ -19,7 +19,6 @@ if ($link) {
 } else {
   $result = false;
 }
-
 if (!$tngimpcfg['maxlivingage']) {
   $tngimpcfg['maxlivingage'] = "110";
 }
@@ -31,7 +30,6 @@ if ($localphotopathdisplay && !$locimppath['photos']) {
 if ($localdocpathdisplay && !$locimppath['histories']) {
   $locimppath['histories'] = $localdocpathdisplay;
 }
-
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifyimportsettings'));
 ?>

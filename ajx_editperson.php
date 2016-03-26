@@ -102,7 +102,7 @@ $photo = showSmallPhoto($personID, $namestr, 1, 0, 'I', $row['sex']);
 
 header("Content-type: text/html; charset=" . $session_charset);
 
-include_once("eventlib.php");
+require_once 'eventlib.php';
 ?>
 <section class='container-fluid'>
   <form id='form1' name='form1' action='' method='post' onsubmit="return updatePerson(this, <?php echo $slot; ?>);">

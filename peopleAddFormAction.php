@@ -6,11 +6,11 @@ require 'adminlib.php';
 $adminLogin = 1;
 require 'checklogin.php';
 
-require("adminlog.php");
-require("datelib.php");
+require 'adminlog.php';
+require 'datelib.php';
 
-include("geocodelib.php");
-include("deletelib.php");
+require 'geocodelib.php';
+require 'deletelib.php';
 
 $tree = $tree1;
 if (!$allowAdd || ($assignedtree && $assignedtree != $tree)) {

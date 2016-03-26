@@ -11,7 +11,7 @@ if (!$allowDelete) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-require("adminlog.php");
+require 'adminlog.php';
 
 $query = "DELETE FROM $users_table WHERE 1=0";
 $location = ($xuseraction) ? "usersBrowse.php" : "usersReview.php";

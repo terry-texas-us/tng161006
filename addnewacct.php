@@ -1,10 +1,10 @@
 <?php
 require 'begin.php';
-include("genlib.php");
+require 'genlib.php';
 $deftext = $text;
-include("getlang.php");
+require 'getlang.php';
 
-include($subroot . "logconfig.php");
+require $subroot . 'logconfig.php';
 require 'mail.php';
 require 'suggest.php';
 

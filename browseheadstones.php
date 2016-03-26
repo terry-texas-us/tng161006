@@ -1,5 +1,5 @@
 <?php
 require 'begin.php';
-include("genlib.php");
+require 'genlib.php';
 
 header("Location: mediaShow.php?mediatypeID=headstones");

@@ -2,11 +2,11 @@
 
 require 'begin.php';
 $tngconfig['maint'] = "";
-include("genlib.php");
-include("getlang.php");
+require 'genlib.php';
+require 'getlang.php';
 
-include("log.php");
-include("loginlib.php");
+require 'log.php';
+require 'loginlib.php';
 
 session_start();
 

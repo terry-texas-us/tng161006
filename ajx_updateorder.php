@@ -433,7 +433,7 @@ switch ($action) {
     }
     break;
   case "addlink":
-    include("prefixes.php");
+    require 'prefixes.php';
     switch ($linktype) {
       case 'I':
         $prefix = $personprefix;

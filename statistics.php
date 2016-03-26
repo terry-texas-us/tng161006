@@ -1,7 +1,7 @@
 <?php
 // The following page was created by Roger L. Smith (roger@ERC.MsState.Edu), 
 // copyright July 2003. Used by permission.
-include("tng_begin.php");
+require 'tng_begin.php';
 
 $treestr = $tree ? " (" . uiTextSnippet('tree') . ": $tree)" : "";
 $logstring = "<a href='statistics.php?tree=$tree'>" . xmlcharacters(uiTextSnippet('databasestatistics') . $treestr) . "</a>";

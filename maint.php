@@ -1,8 +1,8 @@
 <?php
 require 'begin.php';
 $tngconfig['maint'] = "";
-include("genlib.php");
-include("getlang.php");
+require 'genlib.php';
+require 'getlang.php';
 
 $maintenance_mode = true;
 require 'checklogin.php';

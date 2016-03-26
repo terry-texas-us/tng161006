@@ -8,10 +8,10 @@ require 'checklogin.php';
 if (!$allowEdit) {
   exit;
 }
-require("datelib.php");
-require("adminlog.php");
+require 'datelib.php';
+require 'adminlog.php';
 
-include("geocodelib.php");
+require 'geocodelib.php';
 
 if ($session_charset != "UTF-8") {
   $eventplace = tng_utf8_decode($eventplace);

@@ -4,15 +4,14 @@ require 'begin.php';
 require 'adminlib.php';
 
 require 'checklogin.php';
-include("prefixes.php");
+require 'prefixes.php';
 
-require("adminlog.php");
+require 'adminlog.php';
 
 if ($noteID) {
   $query = "DELETE FROM $citations_table WHERE eventID=\"$noteprefix$noteID$notesuffix\"";
   $result = tng_query($query);
 }
-
 deleteNote($noteID, 1);
 
 $query = "SELECT count(ID) as ncount FROM $notelinks_table WHERE gedcom=\"$tree\" AND persfamID=\"$personID\" AND eventID=\"$eventID\"";

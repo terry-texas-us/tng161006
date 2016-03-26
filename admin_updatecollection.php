@@ -9,7 +9,7 @@ require 'checklogin.php';
 if (!$allowEdit) {
   exit;
 }
-require("adminlog.php");
+require 'adminlog.php';
 
 $display_org = stripslashes($display);
 

@@ -1,14 +1,14 @@
 <?php
 require 'begin.php';
-include("genlib.php");
+require 'genlib.php';
 if (!is_numeric($mediaID)) {
   header("Location: thispagedoesnotexist.html");
   exit;
 }
-include("getlang.php");
+require 'getlang.php';
 
-include("log.php");
-include("functions.php");
+require 'log.php';
+require 'functions.php';
 require 'personlib.php';
 
 //starting time between slides
@@ -66,7 +66,7 @@ if (!tng_num_rows($result)) {
   exit;
 }
 require 'checklogin.php';
-include("showmedialib.php");
+require 'showmedialib.php';
 
 $mediaperpage = 1;
 $max_showmedia_pages = 5;
@@ -363,7 +363,7 @@ echo "<body id='public'>\n";
   if (!$imgviewer || in_array($imgrow['mediatypeID'], $mediatypes_like[$imgviewer])) {
   ?>
   <script>
-  <?php include("js/img_utils.js"); ?>
+  <?php include 'js/img_utils.js'; ?>
   </script>
   <?php } ?>
 

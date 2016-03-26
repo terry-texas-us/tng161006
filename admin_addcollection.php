@@ -9,7 +9,7 @@ if (!$allowAdd) {
   exit;
 }
 
-require("adminlog.php");
+require 'adminlog.php';
 
 $display_org = stripslashes($display);
 

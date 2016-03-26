@@ -1,7 +1,7 @@
 <?php
 
 require 'begin.php';
-include("genlib.php");
+require 'genlib.php';
 
 $tngprint = 1;
 require 'checklogin.php';

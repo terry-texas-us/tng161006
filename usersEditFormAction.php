@@ -6,7 +6,7 @@ require 'adminlib.php';
 $adminLogin = 1;
 require 'checklogin.php';
 
-require("adminlog.php");
+require 'adminlog.php';
 require 'mail.php';
 
 if ($assignedtree || !$allowEdit) {

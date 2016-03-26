@@ -8,7 +8,7 @@ require 'checklogin.php';
 if (!$allowEdit) {
   exit;
 }
-require("adminlog.php");
+require 'adminlog.php';
 
 $rval = 0;
 

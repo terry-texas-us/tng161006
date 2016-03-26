@@ -1,15 +1,15 @@
 <?php
-include("processvars.php");
-include("subroot.php");
-// [ts] include_once("tngconnect.php");
+require 'processvars.php';
+require 'subroot.php';
+// [ts] require_once 'tngconnect.php';
 
 if (!file_exists($subroot . "config.php")) {
   $subroot = $_GET['sr'];
 }
-include($subroot . "config.php");
-include($subroot . "templateconfig.php");
+require $subroot . 'config.php';
+require $subroot . 'templateconfig.php';
 
-include ('begin.php');
+require 'begin.php';
 require 'adminlib.php';
 
 if ($subroot != $_GET['sr']) {
@@ -20,19 +20,19 @@ $session_language = $_SESSION['session_language'];
 $session_charset = $_SESSION['session_charset'];
 
 $languagesPath = "languages/";
-include("getlang.php");
+require 'getlang.php';
 
 $link = tng_db_connect($database_host, $database_name, $database_username, $database_password);
 if ($link) {
   $adminLogin = 1;
-  require 'checklogin.php';
+  include 'checklogin.php';
   if ($assignedtree) {
     $message = uiTextSnippet('norights');
     header("Location: admin_login.php?message=" . urlencode($message));
     exit;
   }
 }
-include("version.php");
+require 'version.php';
 
 $error_reporting = ((int)ini_get('error_reporting')) & E_NOTICE;
 

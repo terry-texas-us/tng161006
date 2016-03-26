@@ -13,7 +13,7 @@ if ($assignedtree) {
   exit;
 }
 
-require("adminlog.php");
+require 'adminlog.php';
 
 function restore($table) {
   global $rootpath;

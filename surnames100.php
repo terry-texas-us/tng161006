@@ -1,5 +1,5 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
 $topnum = preg_replace("/[^0-9]/", '', $topnum);
 
@@ -40,7 +40,7 @@ $headSection->setTitle(uiTextSnippet('surnamelist') . " &mdash; " . uiTextSnippe
       <div>
         <h4><?php echo uiTextSnippet('top30') . " (" . uiTextSnippet('totalnames') . "):"; ?></h4>
         <p class="small"><?php echo uiTextSnippet('showmatchingsurnames') . "&nbsp;&nbsp;&nbsp;<a href='surnames.php?tree=$tree'>" . uiTextSnippet('mainsurnamepage') . "</a> &nbsp;|&nbsp; <a href=\"surnames-all.php?tree=$tree\">" . uiTextSnippet('showallsurnames') . "</a>"; ?></p>
-        <?php include("surnamestable.php"); ?>
+        <?php require 'surnamestable.php'; ?>
       </div>
       <br>
     <?php echo $publicFooterSection->build(); ?>

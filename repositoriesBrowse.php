@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 if ($newsearch) {
   $exptime = 0;
@@ -121,7 +121,7 @@ $headSection->setTitle(uiTextSnippet('repositories'));
     ?>
     <div>
       <form id='form1' name='form1' action='repositoriesBrowse.php'>
-        <?php include '_/components/php/treeSelectControl.php'; ?>
+        <?php require '_/components/php/treeSelectControl.php'; ?>
         <label for='searchstring'><?php echo uiTextSnippet('searchfor'); ?></label>
         <input name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>">
         <input name='submit' type='submit' value="<?php echo uiTextSnippet('search'); ?>">

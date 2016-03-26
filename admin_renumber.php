@@ -4,9 +4,9 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
-include("prefixes.php");
+require 'prefixes.php';
 
 if (!$allowEdit || $assignedtree) {
   $message = uiTextSnippet('norights');

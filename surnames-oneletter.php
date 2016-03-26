@@ -1,6 +1,6 @@
 <?php
 set_time_limit(0);
-include("tng_begin.php");
+require 'tng_begin.php';
 
 $firstchar = mb_substr($firstchar, 0, 1, $charset);
 $decodedfirstchar = stripslashes(urldecode($firstchar));

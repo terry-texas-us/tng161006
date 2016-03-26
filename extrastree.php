@@ -1,14 +1,15 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
-include($subroot . "pedconfig.php");
+require $subroot . 'pedconfig.php';
 require 'personlib.php';
 
 if (!$generations) {
   $generations = 12;
 }
 
-function displayIndividual($key, $generation, $slot, $column) {
+function displayIndividual($key, $generation, $slot, $column)
+{
   global $columns;
   global $tree;
   global $pedmax;

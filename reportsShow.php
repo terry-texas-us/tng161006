@@ -1,5 +1,5 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
 $query = "SELECT reportname, reportdesc, reportID FROM $reports_table WHERE active = 1 ORDER BY rank, reportname";
 $result = tng_query($query);

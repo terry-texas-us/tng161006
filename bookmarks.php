@@ -1,5 +1,5 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
 $newroot = preg_replace('/\//', '', $rootpath);
 $newroot = preg_replace('/ /', '', $newroot);

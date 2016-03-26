@@ -1,6 +1,6 @@
 <?php
 $needMap = true;
-include("tng_begin.php");
+require 'tng_begin.php';
 
 if (!$personID) {
     header("Location: thispagedoesnotexist.html");

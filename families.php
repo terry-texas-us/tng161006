@@ -1,6 +1,7 @@
 <?php
 
-function buildFamilyMenu($currpage, $familyId) {
+function buildFamilyMenu($currpage, $familyId)
+{
   global $tree;
   global $allowEdit;
   global $rightbranch;

@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 if ($link) {
   $adminLogin = 1;
-  require 'checklogin.php';
+  include 'checklogin.php';
   if ($assignedtree) {
     $message = uiTextSnippet('norights');
     header("Location: admin_login.php?message=" . urlencode($message));

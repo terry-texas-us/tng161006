@@ -1,7 +1,7 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
-require($subroot . "logconfig.php");
+require $subroot . 'logconfig.php';
 
 if ($maxloglines) {
   $loglines = $maxloglines;

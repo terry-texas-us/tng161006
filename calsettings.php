@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * @author CJ Niemira <siege (at) siege (dot) org>
  * @copyright 2006,2008
  * @license GPL

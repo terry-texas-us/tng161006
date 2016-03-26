@@ -11,8 +11,8 @@ if (!$allowAdd) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-require("adminlog.php");
-include("geocodelib.php");
+require 'adminlog.php';
+require 'geocodelib.php';
 
 $place = addslashes($place);
 $placelevel = addslashes($placelevel);

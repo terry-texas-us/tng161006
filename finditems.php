@@ -4,7 +4,7 @@ require 'begin.php';
 require 'adminlib.php';
 
 require 'checklogin.php';
-include("prefixes.php");
+require 'prefixes.php';
 
 if ($session_charset != "UTF-8") {
   $criteria = tng_utf8_decode($criteria);

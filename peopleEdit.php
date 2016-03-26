@@ -118,7 +118,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
     <?php
     $photo = showSmallPhoto($personID, $namestr, 1, 0, 'I', $row['sex']);
     
-    include_once("eventlib.php");
+    require_once 'eventlib.php';
     
     echo $adminHeaderSection->build('people-modifyperson', $message);
     $navList = new navList('');

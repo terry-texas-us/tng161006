@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 if ($newsearch) {
   $exptime = 0;
@@ -129,7 +129,7 @@ $headSection->setTitle(uiTextSnippet('sources'));
     ?>
     <div class="row">
       <form action="sourcesBrowse.php" name='form1' id='form1'>
-        <?php include '_/components/php/treeSelectControl.php'; ?>
+        <?php require '_/components/php/treeSelectControl.php'; ?>
         <label for='searchstring'>
           <?php echo uiTextSnippet('searchfor'); ?>
           <input name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>">

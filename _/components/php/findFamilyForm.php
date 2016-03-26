@@ -4,7 +4,7 @@
     <div class='card-block'>
       <div class='row form-group'>
         <div class='col-sm-6'>
-          <?php include '_/components/php/treeSelectControl.php'; ?>
+          <?php require '_/components/php/treeSelectControl.php'; ?>
         </div>
         <div class='col-sm-6'>
           <label for='searchstring' class='sr-only'><?php echo uiTextSnippet('searchfor'); ?></label>

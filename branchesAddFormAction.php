@@ -11,7 +11,7 @@ if ($assignedbranch || !$allowAdd) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-require("adminlog.php");
+require 'adminlog.php';
 
 $branch = addslashes($branch);
 $description = addslashes($description);

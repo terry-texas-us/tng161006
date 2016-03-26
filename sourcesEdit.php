@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 if ((!$allowEdit && (!$allowAdd || !$added)) || ($assignedtree && $assignedtree != $tree)) {
   $message = uiTextSnippet('norights');
@@ -55,7 +55,7 @@ $headSection->setTitle(uiTextSnippet('modifysource'));
   <section class='container'>
     <?php
     $photo = showSmallPhoto($sourceID, $sourcename, 1, 0, 'S');
-    include_once("eventlib.php");
+    require_once 'eventlib.php';
     ?>
     <script>
       var tnglitbox;

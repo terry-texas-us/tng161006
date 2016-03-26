@@ -5,7 +5,7 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-require("prefixes.php");
+require 'prefixes.php';
 
 if ($type == "person") {
   $query = "SELECT personID FROM $people_table WHERE personID = \"$checkID\" AND gedcom = \"$tree\"";
@@ -30,7 +30,6 @@ if ($type == "person") {
     }
   }
 }
-
 $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 $prefixlen = strlen($prefix);
 $suffixlen = strlen($suffix) * -1;

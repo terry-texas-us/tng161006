@@ -3,7 +3,7 @@ require 'begin.php';
 require 'adminlib.php';
 
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 $familyID = ucfirst($familyID);
 $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $families_table WHERE familyID = \"$familyID\" AND gedcom = \"$tree\"";
@@ -101,7 +101,7 @@ $headSection->setTitle(uiTextSnippet('modifyfamily'));
     <?php
     $photo = showSmallPhoto($familyID, $namestr, 1, 0, 'F');
 
-    include_once("eventlib.php");
+    require_once 'eventlib.php';
 
     echo $adminHeaderSection->build('families-modifyfamily', $message);
     $navList = new navList('');

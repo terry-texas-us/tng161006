@@ -12,7 +12,7 @@ if (!$allowEdit || ($assignedtree && $assignedtree != $tree)) {
   exit;
 }
 
-require("adminlog.php");
+require 'adminlog.php';
 
 $description = addslashes($description);
 

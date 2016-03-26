@@ -11,7 +11,7 @@ if ($assignedtree) {
   exit;
 }
 
-require("adminlog.php");
+require 'adminlog.php';
 
 if ($table == "all") {
   $tablelist = array($cemeteries_table, $people_table, $families_table, $children_table, $languagesTable, $places_table, $states_table,

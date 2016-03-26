@@ -1,7 +1,6 @@
 <?php
 
 require 'begin.php';
-
 require 'checklogin.php';
 
 initMediaTypes();

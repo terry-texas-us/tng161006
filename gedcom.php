@@ -1,8 +1,8 @@
 <?php
 
-include("tng_begin.php");
+require 'tng_begin.php';
 
-include("version.php");
+require 'version.php';
 
 set_time_limit(0);
 $allsources = array();
@@ -24,7 +24,8 @@ if ($treerow['disallowgedcreate'] && (!$allow_ged || !$righttree)) {
 }
 tng_free_result($treeresult);
 
-function getAncestor($person, $generation) {
+function getAncestor($person, $generation)
+{
   global $tree, $maxgcgen, $indarray, $people_table;
 
   $query = "SELECT personID, famc FROM $people_table WHERE personID = \"$person\" AND gedcom = \"$tree\"";
@@ -46,7 +47,8 @@ function getAncestor($person, $generation) {
   }
 }
 
-function getCitations($persfamID) {
+function getCitations($persfamID)
+{
   global $citations_table;
   global $tree;
 
@@ -61,7 +63,8 @@ function getCitations($persfamID) {
   return $citations;
 }
 
-function writeCitation($citelist, $level) {
+function writeCitation($citelist, $level)
+{
   global $allsources, $lineending;
 
   $levelplus1 = $level + 1;
@@ -104,7 +107,8 @@ function writeCitation($citelist, $level) {
   return $citestr;
 }
 
-function getFact($row, $level) {
+function getFact($row, $level)
+{
   global $tree, $address_table, $lineending;
 
   $fact = "";
@@ -156,7 +160,8 @@ function getFact($row, $level) {
   return $fact;
 }
 
-function getStdExtras($persfamID, $level) {
+function getStdExtras($persfamID, $level)
+{
   global $tree, $events_table;
 
   $stdex = array();
@@ -168,7 +173,8 @@ function getStdExtras($persfamID, $level) {
   return $stdex;
 }
 
-function doEvent($custevent, $level) {
+function doEvent($custevent, $level)
+{
   global $lineending;
 
   $infolen = strlen($custevent['info']);
@@ -194,7 +200,8 @@ function doEvent($custevent, $level) {
   return $info;
 }
 
-function getNotes($id) {
+function getNotes($id)
+{
   global $notelinks_table, $xnotes_table, $tree, $eventtypes_table, $events_table, $xnotes;
 
   $query = "SELECT $notelinks_table.ID as ID, secret, $xnotes_table.note as note, $xnotes_table.noteID as noteID, $notelinks_table.eventID
@@ -228,7 +235,8 @@ function getNotes($id) {
   return $notearray;
 }
 
-function getNoteLine($level, $label, $note, $delta) {
+function getNoteLine($level, $label, $note, $delta)
+{
   global $lineending, $session_charset; // added $session_charset to fix UTF-8 problem
 
   $noteconc = "";
@@ -272,7 +280,8 @@ function getNoteLine($level, $label, $note, $delta) {
   return trim("$level $label $note") . "$lineending$noteconc";
 }
 
-function doNote($level, $label, $notetxt, $private = "") {
+function doNote($level, $label, $notetxt, $private = "")
+{
   $noteinfo = "";
   $notetxt = str_replace("\r", "", $notetxt);
   if (!preg_match('/^@.+@$/', $notetxt)) {
@@ -296,7 +305,8 @@ function doNote($level, $label, $notetxt, $private = "") {
   return $noteinfo;
 }
 
-function writeNote($level, $label, $notes) {
+function writeNote($level, $label, $notes)
+{
   global $citations;
 
   $noteinfo = "";
@@ -310,7 +320,8 @@ function writeNote($level, $label, $notes) {
   return $noteinfo;
 }
 
-function doXNotes() {
+function doXNotes()
+{
   global $xnotes_table, $tree, $xnotes, $lineending;
 
   if ($xnotes) {

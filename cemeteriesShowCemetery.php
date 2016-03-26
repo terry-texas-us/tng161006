@@ -1,13 +1,13 @@
 <?php
 $needMap = true;
-include("tng_begin.php");
-include($subroot . "mapconfig.php");
+require 'tng_begin.php';
+require $subroot . 'mapconfig.php';
 
 if (!$cemeteryID || !is_numeric($cemeteryID)) {
   header("Location: thispagedoesnotexist.html");
   exit;
 }
-include("functions.php");
+require 'functions.php';
 
 $flags['imgprev'] = true;
 

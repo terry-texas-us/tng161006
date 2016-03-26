@@ -12,7 +12,7 @@ if ($assignedtree || !$allowAdd) {
   exit;
 }
 
-require("adminlog.php");
+require 'adminlog.php';
 
 $reportname = addslashes($reportname);
 $reportdesc = addslashes($reportdesc);

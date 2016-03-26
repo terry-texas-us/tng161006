@@ -1,5 +1,5 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
 $topnum = preg_replace("/[^0-9]/", '', $topnum);
 

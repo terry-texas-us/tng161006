@@ -9,7 +9,7 @@ if (!$allowAdd || ($assignedtree && $assignedtree != $tree)) {
   exit;
 }
 
-require("adminlog.php");
+require 'adminlog.php';
 
 if ($session_charset != "UTF-8") {
   $note = tng_utf8_decode($note);

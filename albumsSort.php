@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
@@ -49,7 +49,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
           <td>
             <select name="tree1">
               <?php
-              $treeresult = tng_query($treequery) or die (uiTextSnippet('cannotexecutequery') . ": $treequery");
+              $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
               while ($treerow = tng_fetch_assoc($treeresult)) {
                 echo "  <option value=\"{$treerow['gedcom']}\"";
                 if ($treerow['gedcom'] == $tree) {

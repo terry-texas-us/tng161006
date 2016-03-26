@@ -5,7 +5,7 @@ require 'adminlib.php';
 require 'checklogin.php';
 
 $query = "SELECT username FROM $users_table WHERE username = \"$checkuser\"";
-$result = tng_query($query) or die (uiTextSnippet('cannotexecutequery') . ": $query");
+$result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
 if ($result && tng_num_rows($result)) {
   $message = "<b>$checkuser</b> " . uiTextSnippet('idinuse');

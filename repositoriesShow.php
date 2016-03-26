@@ -1,7 +1,7 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
-include("functions.php");
+require 'functions.php';
 
 function doRepoSearch( $instance, $pagenav ) {
     global $reposearch;
@@ -12,8 +12,9 @@ function doRepoSearch( $instance, $pagenav ) {
     $str .= "<input name='reposearch' type='text' value=\"$reposearch\" /> \n";
   $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . "\" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
     $str .= $pagenav;
-    if( $reposearch )
-    {$str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='repositoriesShow.php'>" . uiTextSnippet('browseallrepos') . "</a>";}
+    if ($reposearch) {
+      $str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='repositoriesShow.php'>" . uiTextSnippet('browseallrepos') . "</a>";
+    }
     $str .= "<input name='tree' type='hidden' value=\"$tree\" />\n";
     $str .= "</form></span>\n";
     
@@ -21,7 +22,7 @@ function doRepoSearch( $instance, $pagenav ) {
 }
 
 $max_browserepo_pages = 5;
-if( $offset ) {
+if ($offset) {
     $offsetplus = $offset + 1;
     $newoffset = "$offset, ";
 }
@@ -32,36 +33,36 @@ else {
 }
 
 $reposearch = trim($reposearch);
-if( $tree ) {
+if ($tree) {
     $wherestr = "WHERE $repositories_table.gedcom = \"$tree\"";
-    if( $reposearch ) {$wherestr .= " AND reponame LIKE \"%$reposearch%\"";}
+    if ($reposearch) {$wherestr .= " AND reponame LIKE \"%$reposearch%\"";}
     $join = "INNER JOIN";
-}
-else {
-    if( $reposearch )
-    {$wherestr = "WHERE reponame LIKE \"%$reposearch%\"";}
-    else
-    {$wherestr = "";}
+} else {
+    if ($reposearch) {
+      $wherestr = "WHERE reponame LIKE \"%$reposearch%\"";
+    } else {
+      $wherestr = "";
+    }
     $join = "LEFT JOIN";
 }
 
 $query = "SELECT repoID, reponame, $repositories_table.gedcom as gedcom, treename FROM $repositories_table $join $trees_table on $repositories_table.gedcom = $trees_table.gedcom $wherestr ORDER BY reponame LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
-$numrows = tng_num_rows( $result );
+$numrows = tng_num_rows($result);
 
-if( $numrows == $maxsearchresults || $offsetplus > 1 ) {
-    if( $tree )
-    {$query = "SELECT count(repoID) as scount FROM $repositories_table LEFT JOIN $trees_table on $repositories_table.gedcom = $trees_table.gedcom $wherestr";}
-    else
-    {$query = "SELECT count(repoID) as scount FROM $repositories_table $wherestr";}
+if ($numrows == $maxsearchresults || $offsetplus > 1) {
+    if ($tree) {
+      $query = "SELECT count(repoID) as scount FROM $repositories_table LEFT JOIN $trees_table on $repositories_table.gedcom = $trees_table.gedcom $wherestr";
+    } else {
+      $query = "SELECT count(repoID) as scount FROM $repositories_table $wherestr";
+    }
     $result2 = tng_query($query);
-    $row = tng_fetch_assoc( $result2 );
+    $row = tng_fetch_assoc($result2);
     $totrows = $row['scount'];
+} else {
+  $totrows = $numrows;
 }
-else
-    {$totrows = $numrows;}
-
 $numrowsplus = $numrows + $offset;
 
 $treestr = $tree ? " (" . uiTextSnippet('tree') . ": $tree)" : "";

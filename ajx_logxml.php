@@ -1,8 +1,8 @@
 <?php
 require 'begin.php';
-require($subroot . "logconfig.php");
-include("genlib.php");
-include("getlang.php");
+require $subroot . 'logconfig.php';
+require 'genlib.php';
+require 'getlang.php';
 
 require 'checklogin.php';
 

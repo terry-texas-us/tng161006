@@ -1,6 +1,6 @@
 <?php
 set_time_limit(0);
-include("tng_begin.php");
+require 'tng_begin.php';
 
 $treestr = $tree ? " (" . uiTextSnippet('tree') . ": $tree)" : "";
 $logstring = "<a href=\"surnames-all.php?tree=$tree\">" . uiTextSnippet('surnamelist') . ": " . uiTextSnippet('allsurnames') . "$treestr</a>";

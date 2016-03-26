@@ -1,10 +1,10 @@
 <?php
 require 'begin.php';
 $tngconfig['maint'] = "";
-include("genlib.php");
-include("getlang.php");
+require 'genlib.php';
+require 'getlang.php';
 
-include("log.php");
+require 'log.php';
 require_once 'loginlib.php';
 
 header("Content-type:text/html; charset=" . $session_charset);

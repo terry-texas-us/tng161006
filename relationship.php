@@ -1,9 +1,9 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
-include($subroot . "pedconfig.php");
-include("pedbox.php");
-include("prefixes.php");
+require $subroot . 'pedconfig.php';
+require 'pedbox.php';
+require 'prefixes.php';
 
 $totalRelationships = 0;
 $needmore = true;

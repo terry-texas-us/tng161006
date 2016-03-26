@@ -12,7 +12,7 @@ if (!$allowMediaAdd) {
   exit;
 }
 
-require("adminlog.php");
+require 'adminlog.php';
 initMediaTypes();
 
 $exptime = 0;
@@ -20,7 +20,7 @@ setcookie("lastcoll", $mediatypeID, $exptime);
 
 $thumbquality = 80;
 if (function_exists(imageJpeg)) {
-  include("imageutils.php");
+  include 'imageutils.php';
 }
 
 $path = stripslashes($path);

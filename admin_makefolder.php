@@ -5,7 +5,7 @@ require 'adminlib.php';
 header("Content-type:text/html; charset=" . $session_charset);
 if ($link) {
   $adminLogin = 1;
-  require 'checklogin.php';
+  include 'checklogin.php';
   if ($assignedtree) {
     echo uiTextSnippet('norights');
     exit;

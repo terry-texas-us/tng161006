@@ -1,13 +1,14 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
-include($subroot . "pedconfig.php");
+require $subroot . 'pedconfig.php';
 require 'personlib.php';
 
 $righttree = checktree($tree);
 $rightbranch = checkbranch($row['branch']);
 
-function drawBox($person, $box) {
+function drawBox($person, $box)
+{
   global $tree, $pedigree, $more, $boxheight, $boxwidth;
 
   if ($box['lineoutof']) {

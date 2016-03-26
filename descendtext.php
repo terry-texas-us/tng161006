@@ -1,10 +1,10 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
 if (!$personID) {
   die("no args");
 }
-include($subroot . "pedconfig.php");
+require $subroot . 'pedconfig.php';
 require 'personlib.php';
 
 $divctr = 1;
@@ -18,7 +18,8 @@ if ($pedigree['stdesc']) {
   $imgtitle = uiTextSnippet('collapse');
 }
 
-function getIndividual($key, $sex, $level, $trail) {
+function getIndividual($key, $sex, $level, $trail) 
+{
   global $tree;
   global $generations;
   global $righttree;
@@ -128,7 +129,8 @@ function getIndividual($key, $sex, $level, $trail) {
   return $rval;
 }
 
-function getVitalDates($row) {
+function getVitalDates($row)
+{
   $vitalinfo = "";
 
   if ($row['allow_living'] && $row['allow_private']) {

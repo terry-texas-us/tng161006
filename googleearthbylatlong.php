@@ -3,7 +3,7 @@
 // peopleShowPerson.php work to create the file that Google Earth opens to fly to.
 
 //code for making a KML file from long lat inputs m=world n=$place   lon=$lon   lat=$lat
-include('tng_begin.php');
+require 'tng_begin.php';
 
 $name = $_REQUEST['n'];
 $lat = $_REQUEST['lat'];

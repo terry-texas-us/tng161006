@@ -1,6 +1,7 @@
 <?php
 
-function writelog($string) {
+function writelog($string)
+{
   global $currentuser;
   global $currentuserdesc;
   global $_SERVER;
@@ -8,7 +9,7 @@ function writelog($string) {
   global $subroot;
   global $exusers;
 
-  require($subroot . "logconfig.php");
+  require $subroot . 'logconfig.php';
 
   if (!isset($_SERVER['REMOTE_HOST'])) {
     $_SERVER['REMOTE_HOST'] = '';
@@ -85,7 +86,8 @@ function writelog($string) {
   }
 }
 
-function getLock($ptr, $lockType) {
+function getLock($ptr, $lockType)
+{
   $locked = flock($ptr, $lockType);
   if (!$locked) {
     $counter = 0;
@@ -98,7 +100,8 @@ function getLock($ptr, $lockType) {
   return $locked;
 }
 
-function preparebookmark($string) {
+function preparebookmark($string)
+{
   global $gotlastpage;
   $_SESSION['tnglastpage'] = $string;
   $gotlastpage = true;

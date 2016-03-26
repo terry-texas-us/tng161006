@@ -5,7 +5,7 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-require("adminlog.php");
+require 'adminlog.php';
 
 $query = "DELETE FROM $assoc_table WHERE assocID=\"$assocID\"";
 $result = tng_query($query);

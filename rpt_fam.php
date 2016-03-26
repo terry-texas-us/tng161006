@@ -3,16 +3,16 @@
 // Author: Bret Rumsey
 //
 require 'begin.php';
-include("genlib.php");
-include("getlang.php");
+require 'genlib.php';
+require 'getlang.php';
 
 $tngprint = 1;
 require 'checklogin.php';
 require 'personlib.php';
 
 define('FPDF_FONTPATH', $rootpath . $endrootpath . 'font/');
-require('tngpdf.php');
-require('rpt_utils.php');
+require 'tngpdf.php';
+require 'rpt_utils.php';
 $pdf = new TNGPDF($orient, 'in', $pagesize);
 setcookie("tng_pagesize", $pagesize, time() + 31536000, "/");
 

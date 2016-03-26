@@ -1,8 +1,8 @@
 <?php
 set_time_limit(0);
-include("tng_begin.php");
+require 'tng_begin.php';
 
-include($subroot . "pedconfig.php");
+require $subroot . 'pedconfig.php';
 require 'personlib.php';
 
 if (!$personID && !isset($needperson)) {
@@ -235,7 +235,8 @@ if (!$pedigree['hideempty']) {
   $pedigree['hideempty'] = 0;
 }
 
-function getColor($shifts) {
+function getColor($shifts)
+{
   global $pedigree;
 
   $shiftval = $shifts * $pedigree['colorshift'];
@@ -266,7 +267,8 @@ function getColor($shifts) {
   return "#$R$G$B";
 }
 
-function showBox($generation, $slot) {
+function showBox($generation, $slot)
+{
   global $chartStyle;
   
   global $pedigree;

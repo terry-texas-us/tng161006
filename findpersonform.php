@@ -1,7 +1,7 @@
 <?php
 require 'begin.php';
 require 'adminlib.php';
-include("getlang.php");
+require 'getlang.php';
 
 require 'checklogin.php';
 

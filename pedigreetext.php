@@ -1,8 +1,8 @@
 <?php
 set_time_limit(0);
-include("tng_begin.php");
+require 'tng_begin.php';
 
-include($subroot . "pedconfig.php");
+require $subroot . 'pedconfig.php';
 require 'personlib.php';
 
 if (!$personID) {
@@ -15,14 +15,16 @@ if (isset($parentset)) {
   $parentset = intval($parentset);
 }
 
-function showBlank($pedborder) {
+function showBlank($pedborder)
+{
   echo "<td $pedborder><span>&nbsp;</span></td>\n";
   echo "<td><span>&nbsp;</span></td>\n</tr>\n";
   echo "<tr>\n<td $pedborder><span>&nbsp;</span></td>\n";
   echo "<td><span>&nbsp;</span></td>\n</tr>\n";
 }
 
-function displayIndividual($key, $generation, $slot) {
+function displayIndividual($key, $generation, $slot)
+{
   global $tree;
   global $generations;
   global $marrdate;

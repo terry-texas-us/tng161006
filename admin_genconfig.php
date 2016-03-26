@@ -5,8 +5,8 @@ require 'adminlib.php';
 $treeList = array();
 if ($link) {
   $adminLogin = 1;
-  require 'checklogin.php';
-  include("version.php");
+  include 'checklogin.php';
+  include 'version.php';
 
   if ($assignedtree || !$allowEdit) {
     $message = uiTextSnippet('norights');

@@ -5,7 +5,7 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-require("adminlog.php");
+require 'adminlog.php';
 
 $query = "DELETE FROM $citations_table WHERE citationID=\"$citationID\"";
 $result = tng_query($query);

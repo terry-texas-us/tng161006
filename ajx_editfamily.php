@@ -100,7 +100,7 @@ header("Content-type:text/html; charset=" . $session_charset);
 
 $righttree = checktree($tree);
 
-include_once("eventlib.php");
+require_once 'eventlib.php';
 ?>
 <form id='famform1' name='famform1' action='' method='post' onsubmit="return updateFamily(this, <?php echo $slot; ?>, 'familiesEditFormAction.php');">
   <header class='modal-header'>

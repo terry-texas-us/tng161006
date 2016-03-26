@@ -10,7 +10,7 @@ if (!$allowEdit || ($assignedtree && $assignedtree != $tree)) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-require("adminlog.php");
+require 'adminlog.php';
 
 $shorttitle = addslashes($shorttitle);
 $title = addslashes($title);

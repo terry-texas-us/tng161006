@@ -1,5 +1,5 @@
 <?php
-include("tng_begin.php");
+require 'tng_begin.php';
 
 $query = "SELECT * FROM $cemeteries_table ORDER BY country, state, county, city, cemname";
 $cemresult = tng_query($query);

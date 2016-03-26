@@ -1,5 +1,6 @@
 <?php
-function getFamilyRecord($familyID, $prevlevel) {
+function getFamilyRecord($familyID, $prevlevel)
+{
   global $families_table, $children_table, $tree, $fciteevents, $prefix, $assoc_table;
   global $savestate, $lineinfo, $custeventlist, $stdnotes, $notecount, $today, $currentuser, $tngimpcfg, $branchlinks_table;
 
@@ -111,7 +112,7 @@ function getFamilyRecord($familyID, $prevlevel) {
           } while ($lineinfo['level'] > $startlevel);
 
           $query = "UPDATE $children_table SET ordernum=$childorder$frelstr$mrelstr WHERE personID = \"$child\" AND familyID = \"$familyID\" AND gedcom = \"$tree\"";
-          $result = tng_query($query) or die (uiTextSnippet('cannotexecutequery') . ": $query");
+          $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
           $childorder++;
           break;
         case "ASSO":
@@ -191,7 +192,7 @@ function getFamilyRecord($familyID, $prevlevel) {
     $info['SLGS']['DATETR'] = "0000-00-00";
   }
   $query = "INSERT IGNORE INTO $families_table (familyID, marrdate, marrdatetr, marrplace, marrtype, divdate, divdatetr, divplace, husband, wife, sealdate, sealdatetr, sealplace, changedate, gedcom, branch, living, private, changedby ) VALUES(\"$familyID\", \"" . $info['MARR']['DATE'] . "\", \"" . $info['MARR']['DATETR'] . "\", \"" . $info['MARR']['PLAC'] . "\", \"" . $info['MARR']['TYPE'] . "\", \"" . $info['DIV']['DATE'] . "\", \"" . $info['DIV']['DATETR'] . "\", \"" . $info['DIV']['PLAC'] . "\", \"" . $info['HUSB'] . "\", \"" . $info['WIFE'] . "\", \"" . $info['SLGS']['DATE'] . "\", \"" . $info['SLGS']['DATETR'] . "\", \"$slgsplace\", \"$inschangedt\", \"$tree\", \"{$savestate['branch']}\", \"$living\", \"$private\", \"$currentuser\" )";
-  $result = tng_query($query) or die (uiTextSnippet('cannotexecutequery') . ": $query");
+  $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   $success = tng_affected_rows();
   if (!$success && $savestate['del'] != "no") {
     if ($savestate['neweronly'] && $inschangedt) {
@@ -209,7 +210,7 @@ function getFamilyRecord($familyID, $prevlevel) {
       $chdatestr = $inschangedt ? ", changedate=\"$inschangedt\"" : "";
       $branchstr = $savestate['branch'] ? ", branch=\"{$savestate['branch']}\"" : "";
       $query = "UPDATE $families_table SET marrdate=\"" . $info['MARR']['DATE'] . "\", marrdatetr=\"" . $info['MARR']['DATETR'] . "\", marrplace=\"" . $info['MARR']['PLAC'] . "\", marrtype=\"" . $info['MARR']['TYPE'] . "\", divdate=\"" . $info['DIV']['DATE'] . "\", divdatetr=\"" . $info['DIV']['DATETR'] . "\", divplace=\"" . $info['DIV']['PLAC'] . "\", husband=\"" . $info['HUSB'] . "\", wife=\"" . $info['WIFE'] . "\", sealdate=\"" . $info['SLGS']['DATE'] . "\", sealdatetr=\"" . $info['SLGS']['DATETR'] . "\", sealplace=\"$slgsplace\", changedby=\"$currentuser\" $chdatestr$branchstr WHERE familyID=\"$familyID\" AND gedcom = \"$tree\"";
-      $result = tng_query($query) or die (uiTextSnippet('cannotexecutequery') . ": $query");
+      $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $success = 1;
 
       if ($savestate['del'] == "match") {
@@ -221,7 +222,7 @@ function getFamilyRecord($familyID, $prevlevel) {
   if ($success) {
     if ($savestate['branch']) {
       $query = "INSERT IGNORE INTO $branchlinks_table (branch,gedcom,persfamID) VALUES(\"{$savestate['branch']}\",\"$tree\",\"$familyID\")";
-      $result = tng_query($query) or die (uiTextSnippet('cannotexecutequery') . ": $query");
+      $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     }
     if ($custeventctr) {
       saveCustEvents($prefix, $familyID, $events, $custeventctr);
@@ -246,7 +247,7 @@ function getFamilyRecord($familyID, $prevlevel) {
     if (count($assocarr)) {
       foreach ($assocarr as $assoc) {
         $query = "INSERT INTO $assoc_table (gedcom, personID, passocID, relationship, reltype) VALUES( \"$tree\", \"$familyID\", \"{$assoc['asso']}\", \"{$assoc['rela']}\", \"{$assoc['reltype']}\" )";
-        $result = tng_query($query) or die (uiTextSnippet('cannotexecutequery') . ": $query");
+        $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
     }
 

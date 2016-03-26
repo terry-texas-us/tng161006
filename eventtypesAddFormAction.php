@@ -11,7 +11,7 @@ if (!$allowAdd) {
   exit;
 }
 
-require("adminlog.php");
+require 'adminlog.php';
 
 $type = addslashes($type);
 $tag2 = addslashes($tag2);

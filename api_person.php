@@ -1,12 +1,12 @@
 <?php
 require 'begin.php';
-include("genlib.php");
-include("getlang.php");
+require 'genlib.php';
+require 'getlang.php';
 
-include("api_checklogin.php");
+require 'api_checklogin.php';
 require 'personlib.php';
-include("api_library.php");
-include("log.php");
+require 'api_library.php';
+require 'log.php';
 
 header("Content-Type: application/json; charset=" . $session_charset);
 

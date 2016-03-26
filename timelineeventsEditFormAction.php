@@ -12,7 +12,7 @@ if (!$allowEdit) {
   exit;
 }
 
-require("adminlog.php");
+require 'adminlog.php';
 
 $evdetail = addslashes($evdetail);
 $evtitle = addslashes($evtitle);

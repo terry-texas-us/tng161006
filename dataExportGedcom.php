@@ -1,11 +1,11 @@
 <?php
 require 'begin.php';
-include($subroot . "importconfig.php");
+require $subroot . 'importconfig.php';
 require 'adminlib.php';
 
 $adminLogin = 1;
 require 'checklogin.php';
-include("version.php");
+require 'version.php';
 
 if (!$allow_ged && $assignedtree) {
   $query = "SELECT disallowgedcreate FROM $trees_table WHERE gedcom = \"$assignedtree\"";
@@ -141,7 +141,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
   <script>
-    <?php include("branchlibjs.php"); ?>
+    <?php require 'branchlibjs.php'; ?>
 
     function toggleStuff() {
       if (document.form1.exportmedia.checked === true)
