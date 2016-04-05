@@ -46,7 +46,7 @@ $headSection->setTitle(uiTextSnippet('modifyeventtype'));
     $navList = new navList('');
     $navList->appendItem([true, "eventtypesBrowse.php", uiTextSnippet('browse'), "findevent"]);
     $navList->appendItem([$allowAdd, "eventtypesAdd.php", uiTextSnippet('add'), "addevent"]);
-//    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
+    //    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <form name='form1' action='eventtypesEditFormAction.php' method='post' onsubmit="return validateForm();">

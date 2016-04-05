@@ -189,9 +189,9 @@ if ($rrow['sqlselect']) {
       } elseif (in_array($dfield, $truedates)) {
         $displaystr .= "DATE_FORMAT($people_table.$dfield,'%d %b %Y') as $dfield" . "_disp";
       } elseif ($dfield == "gedcom") {
-        $trees_join = ", $trees_table";
+        $trees_join = ", $treesTable";
         if (!$dtreestr) {
-          $dtreestr = " $people_table.gedcom = $trees_table.gedcom";
+          $dtreestr = " $people_table.gedcom = $treesTable.gedcom";
         }
         $displaystr .= "treename";
         $displayfields[$i] = "treename";
@@ -248,26 +248,26 @@ if ($rrow['sqlselect']) {
     }
 
     if ($criteriafields[$i] == "currmonth") {
-      $criteriafields[$i] = "\"" . strtoupper(date("M", time() + (3600 * $time_offset))) . "\"";
+      $criteriafields[$i] = "\"" . strtoupper(date("M", time() + (3600 * $timeOffset))) . "\"";
     } else {
       if ($criteriafields[$i] == "currmonthnum") {
-        $criteriafields[$i] = "\"" . date("m", time() + (3600 * $time_offset)) . "\"";
+        $criteriafields[$i] = "\"" . date("m", time() + (3600 * $timeOffset)) . "\"";
       } else {
         if ($criteriafields[$i] == "curryear") {
-          $criteriafields[$i] = "\"" . date("Y", time() + (3600 * $time_offset)) . "\"";
+          $criteriafields[$i] = "\"" . date("Y", time() + (3600 * $timeOffset)) . "\"";
         } else {
           if ($criteriafields[$i] == "currday") {
-            $criteriafields[$i] = "\"" . date("d", time() + (3600 * $time_offset)) . "\"";
+            $criteriafields[$i] = "\"" . date("d", time() + (3600 * $timeOffset)) . "\"";
           } else {
             if ($criteriafields[$i] == "personID") {
               $criteriafields[$i] = "$people_table.personID";
             } else {
               if ($criteriafields[$i] == "today") {
-                if ($time_offset) {
-                  if ($time_offset > 0) {
-                    $criteriafields[$i] .= "DATE_ADD(NOW(), INTERVAL " . $time_offset . " HOUR)";
+                if ($timeOffset) {
+                  if ($timeOffset > 0) {
+                    $criteriafields[$i] .= "DATE_ADD(NOW(), INTERVAL " . $timeOffset . " HOUR)";
                   } else {
-                    $criteriafields[$i] .= "DATE_SUB(NOW(), INTERVAL " . $time_offset . " HOUR)";
+                    $criteriafields[$i] .= "DATE_SUB(NOW(), INTERVAL " . $timeOffset . " HOUR)";
                   }
                 } else {
                   $criteriafields[$i] = "NOW()";

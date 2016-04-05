@@ -5,7 +5,7 @@
     <div class='card-block'>
       <div class='row form-group'>
         <div class='col-md-6'>
-          <?php include '_/components/php/treeSelectControl.php'; ?>
+          <?php require '_/components/php/treeSelectControl.php'; ?>
         </div>
         <div class='input-group col-md-6'>
           <input class="form-control" id='searchstring' name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>">

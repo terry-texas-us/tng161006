@@ -96,7 +96,7 @@ while ($row = tng_fetch_assoc($result)) {
     }
   }
   if ($needsupdate) {
-    $changedate = date("Y-m-d H:i:s", time() + (3600 * $time_offset));
+    $changedate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
     $query = "UPDATE $media_table SET thumbpath=\"$thumbpath\", changedate=\"$changedate\", changedby=\"$currentuser\" WHERE mediaID=\"{$row['mediaID']}\"";
     $result2 = tng_query($query);
     $updated++;

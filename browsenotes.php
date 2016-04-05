@@ -54,7 +54,7 @@ $numrows = tng_num_rows($result);
 
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
   $query = "SELECT count($xnotes_table.ID) as scount FROM ($xnotes_table, $notelinks_table)
-    LEFT JOIN $trees_table on $xnotes_table.gedcom = $trees_table.gedcom
+    LEFT JOIN $treesTable on $xnotes_table.gedcom = $treesTable.gedcom
     $wherestr";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);

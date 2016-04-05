@@ -2,7 +2,7 @@
 
 require_once 'headerElementSection.php';
 
-class publicHeaderElementSection extends headerElementSection {
+class PublicHeaderElementSection extends HeaderElementSection {
 
   public function __construct($id = 'public') {
     parent::__construct($id);
@@ -13,9 +13,9 @@ class publicHeaderElementSection extends headerElementSection {
 
     $this->out .= "<h2 class='headtitle'><a href='index.php'>$this->title</a></h2>\n";
     $this->out .= "<h3 class='headsubtitle'>$this->subtitle</h3>\n";
-//    $this->out .= "<div class='headimage'>\n";
-//    $this->out .=   "<img src='$this->imageUrl' alt=''>\n";
-//    $this->out .= "</div>\n";
+    //    $this->out .= "<div class='headimage'>\n";
+    //    $this->out .=   "<img src='$this->imageUrl' alt=''>\n";
+    //    $this->out .= "</div>\n";
 
     global $publicNavSection;
     $this->out .= $publicNavSection->build($currentPage);

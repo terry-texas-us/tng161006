@@ -9,7 +9,7 @@ class tsUploadHandler extends UploadHandler {
   protected $media_table = '';
   protected $medialinks_table = '';
   protected $currentuser = '';
-  protected $time_offset = '';
+  protected $timeOffset = '';
   protected $mediatypeID = '';
   protected $media_folder = '';
   protected $thumbnail = [
@@ -52,17 +52,13 @@ class tsUploadHandler extends UploadHandler {
       if ($uploaded_file && is_uploaded_file($uploaded_file)) {
         // multipart/formdata uploads (POST method uploads)
         if ($append_file) {
-          file_put_contents(
-               $file_path, fopen($uploaded_file, 'r'), FILE_APPEND
-          );
+          file_put_contents($file_path, fopen($uploaded_file, 'r'), FILE_APPEND);
         } else {
           move_uploaded_file($uploaded_file, $file_path);
         }
       } else {
         // Non-multipart uploads (PUT method support)
-        file_put_contents(
-             $file_path, fopen('php://input', 'r'), $append_file ? FILE_APPEND : 0
-        );
+        file_put_contents($file_path, fopen('php://input', 'r'), $append_file ? FILE_APPEND : 0);
       }
       $file_size = $this->get_file_size($file_path, $append_file);
       if ($file_size === $file->size) {
@@ -81,7 +77,6 @@ class tsUploadHandler extends UploadHandler {
     }
     return $file;
   }
-// [ts] +++++++++++++++++++++++++++
 
   // [ts] mediaId returned as a property of the $file argument
 

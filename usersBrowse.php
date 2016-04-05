@@ -75,7 +75,7 @@ $headSection->setTitle(uiTextSnippet('users'));
     <?php
     echo $adminHeaderSection->build('users', $message);
     $navList = new navList('');
-//    $navList->appendItem([true, "usersBrowse.php", uiTextSnippet('search'), "finduser"]);
+    //    $navList->appendItem([true, "usersBrowse.php", uiTextSnippet('search'), "finduser"]);
     $navList->appendItem([$allowAdd, "usersAdd.php", uiTextSnippet('add'), "adduser"]);
     $navList->appendItem([$allowEdit, "usersReview.php", uiTextSnippet('review') . $revstar, "review"]);
     $navList->appendItem([true, "usersSendMail.php", uiTextSnippet('email'), "mail"]);

@@ -29,14 +29,14 @@ $query3 = "SELECT alinkID, entityID, eventID, people.lastname as lastname, peopl
     familyID, people.personID as personID, wifepeople.personID as wpersonID, wifepeople.firstname as wfirstname, wifepeople.lnprefix as wlnprefix, wifepeople.lastname as wlastname, wifepeople.prefix as wprefix, wifepeople.suffix as wsuffix, wifepeople.nameorder as wnameorder,
     husbpeople.personID as hpersonID, husbpeople.firstname as hfirstname, husbpeople.lnprefix as hlnprefix, husbpeople.lastname as hlastname, husbpeople.prefix as hprefix, husbpeople.suffix as hsuffix, husbpeople.nameorder as hnameorder,
     sourceID, sources.title, repositories.repoID as repoID, reponame, linktype
-    FROM ($album2entities_table as ate, $trees_table)
+    FROM ($album2entities_table as ate, $treesTable)
     LEFT JOIN $people_table AS people ON ate.entityID = people.personID AND ate.gedcom = people.gedcom
     LEFT JOIN $families_table ON ate.entityID = $families_table.familyID AND ate.gedcom = $families_table.gedcom
     LEFT JOIN $sources_table AS sources ON ate.entityID = sources.sourceID AND ate.gedcom = sources.gedcom
     LEFT JOIN $repositories_table AS repositories ON ate.entityID = repositories.repoID AND ate.gedcom = repositories.gedcom
     LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID AND $families_table.gedcom = husbpeople.gedcom
     LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID AND $families_table.gedcom = wifepeople.gedcom
-    WHERE albumID = \"$albumID\" AND ate.gedcom = $trees_table.gedcom ORDER BY alinkID DESC";
+    WHERE albumID = \"$albumID\" AND ate.gedcom = $treesTable.gedcom ORDER BY alinkID DESC";
 $result3 = tng_query($query3) or die(uiTextSnippet('cannotexecutequery') . ": $query3");
 $numlinks = tng_num_rows($result3);
 
@@ -49,7 +49,7 @@ if ($assignedtree) {
 } else {
   $wherestr = "";
 }
-$treequery = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
 
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifyalbum'));

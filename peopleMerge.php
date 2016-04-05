@@ -21,7 +21,7 @@ if ($assignedtree) {
 } else {
   $wherestr = "";
 }
-$query = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+$query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
 $treeresult = tng_query($query);
 
 if ($assignedbranch) {
@@ -606,7 +606,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
   }
   if ($updatestr) {
     $updatestr = substr($updatestr, 2);
-    $newdate = date("Y-m-d H:i:s", time() + (3600 * $time_offset));
+    $newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
     $updatestr .= ", changedate = \"$newdate\"";
     $query = "UPDATE $people_table set $updatestr WHERE personID = \"$personID1\" AND gedcom = \"$tree\"";
     $combresult = tng_query($query);
@@ -704,7 +704,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
     $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
     $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
     $navList->appendItem([$allowEdit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
-//    $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
+    //    $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("merge");
     ?>
     <table class='table table-sm'>
@@ -769,13 +769,9 @@ $headSection->setTitle(uiTextSnippet('merge'));
                   </td>
                 </tr>
                 <tr>
-                  <td id="name1"><?php if (isset($p1row['reponame'])) {
-                      echo truncateIt($r1row['reponame'], 75);
-                    } ?></td>
+                  <td id="name1"><?php if (isset($p1row['reponame'])) {echo truncateIt($r1row['reponame'], 75);} ?></td>
                   <td width="80"></td>
-                  <td id="name2"><?php if (isset($p2row['reponame'])) {
-                      echo truncateIt($r2row['reponame'], 75);
-                    } ?></td>
+                  <td id="name2"><?php if (isset($p2row['reponame'])) {echo truncateIt($r2row['reponame'], 75);} ?></td>
                 </tr>
               </table>
               <br>

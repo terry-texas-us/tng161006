@@ -65,22 +65,23 @@ $headSection->setTitle(uiTextSnippet('modifypedsettings'));
                   <td><?php echo uiTextSnippet('usepopups'); ?>:</td>
                   <td>
                     <select name="usepopups">
-                      <option value='1'<?php if ($pedigree['usepopups'] == 1) {echo " selected";} ?>><?php echo uiTextSnippet('pedstandard'); ?></option>
-                      <option value='0'<?php if (!$pedigree['usepopups']) {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('pedbox'); ?></option>
-                      <option value="-1"<?php if ($pedigree['usepopups'] == -1) {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('pedtextonly'); ?></option>
-                      <option value="2"<?php if ($pedigree['usepopups'] == 2) {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('pedcompact'); ?></option>
-                      <option value="3"<?php if ($pedigree['usepopups'] == 3) {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('ahnentafel'); ?></option>
-                      <option value="4"<?php if ($pedigree['usepopups'] == 4) {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('pedvertical'); ?></option>
+                      <option value='1'<?php if ($pedigree['usepopups'] == 1) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('pedstandard'); ?>
+                      </option>
+                      <option value='0'<?php if (!$pedigree['usepopups']) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('pedbox'); ?>
+                      </option>
+                      <option value="-1"<?php if ($pedigree['usepopups'] == -1) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('pedtextonly'); ?>
+                      </option>
+                      <option value="2"<?php if ($pedigree['usepopups'] == 2) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('pedcompact'); ?>
+                      </option>
+                      <option value="3"<?php if ($pedigree['usepopups'] == 3) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('ahnentafel'); ?></option>
+                      <option value="4"<?php if ($pedigree['usepopups'] == 4) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('pedvertical'); ?>
+                      </option>
                     </select>
                   </td>
                 </tr>
@@ -135,22 +136,23 @@ $headSection->setTitle(uiTextSnippet('modifypedsettings'));
                   <td><?php echo uiTextSnippet('boxalign'); ?>:</td>
                   <td>
                     <select name="boxalign">
-                      <option value="center"<?php if ($pedigree['boxalign'] == "center") {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('center'); ?></option>
-                      <option value="left"<?php if ($pedigree['boxalign'] == "left") {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('left'); ?></option>
-                      <option value="right"<?php if ($pedigree['boxalign'] == "right") {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('right'); ?></option>
+                      <option value="center"<?php if ($pedigree['boxalign'] == "center") {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('center'); ?>
+                      </option>
+                      <option value="left"<?php if ($pedigree['boxalign'] == "left") {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('left'); ?>
+                      </option>
+                      <option value="right"<?php if ($pedigree['boxalign'] == "right") {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('right'); ?>
+                      </option>
                     </select>
                   </td>
                 </tr>
                 <tr>
                   <td><?php echo uiTextSnippet('boxheightshift'); ?>:</td>
-                  <td><input type='text' value="<?php echo $pedigree['boxheightshift']; ?>"
-                             name="boxheightshift" size='10'></td>
+                  <td>
+                    <input type='text' value="<?php echo $pedigree['boxheightshift']; ?>" name="boxheightshift" size='10'>
+                  </td>
                 </tr>
               </table>
 
@@ -193,16 +195,18 @@ $headSection->setTitle(uiTextSnippet('modifypedsettings'));
                   <td><span><?php echo uiTextSnippet('usepopups'); ?>:</span></td>
                   <td>
                     <select name="defdesc">
-                      <option value="2"<?php if ($pedigree['defdesc'] == 2) {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('stdformat'); ?></option>
-                      <option value='0'<?php if (!$pedigree['defdesc']) {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('pedtextonly'); ?></option>
-                      <option value="3"<?php if ($pedigree['defdesc'] == 3) {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('pedcompact'); ?></option>
-                      <option value='1'<?php if ($pedigree['defdesc'] == 1) {echo " selected";} ?>><?php echo uiTextSnippet('regformat'); ?></option>
+                      <option value="2"<?php if ($pedigree['defdesc'] == 2) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('stdformat'); ?>
+                      </option>
+                      <option value='0'<?php if (!$pedigree['defdesc']) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('pedtextonly'); ?>
+                      </option>
+                      <option value="3"<?php if ($pedigree['defdesc'] == 3) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('pedcompact'); ?>
+                      </option>
+                      <option value='1'<?php if ($pedigree['defdesc'] == 1) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('regformat'); ?>
+                      </option>
                     </select>
                   </td>
                 </tr>
@@ -220,10 +224,12 @@ $headSection->setTitle(uiTextSnippet('modifypedsettings'));
                   <td><span><?php echo uiTextSnippet('stdesc'); ?>:</span></td>
                   <td>
                     <select name="stdesc">
-                      <option value='0'<?php if (!$pedigree['stdesc']) {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('stexpand'); ?></option>
-                      <option value='1'<?php if ($pedigree['stdesc'] == 1) {echo " selected";} ?>><?php echo uiTextSnippet('stcollapse'); ?></option>
+                      <option value='0'<?php if (!$pedigree['stdesc']) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('stexpand'); ?>
+                      </option>
+                      <option value='1'<?php if ($pedigree['stdesc'] == 1) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('stcollapse'); ?>
+                      </option>
                     </select>
                   </td>
                 </tr>
@@ -231,10 +237,12 @@ $headSection->setTitle(uiTextSnippet('modifypedsettings'));
                   <td><span><?php echo uiTextSnippet('regnotes'); ?>:</span></td>
                   <td>
                     <select name="regnotes">
-                      <option value='0'<?php if (!$pedigree['regnotes']) {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('no'); ?></option>
-                      <option value='1'<?php if ($pedigree['regnotes']) {echo " selected";} ?>><?php echo uiTextSnippet('yes'); ?></option>
+                      <option value='0'<?php if (!$pedigree['regnotes']) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('no'); ?>
+                      </option>
+                      <option value='1'<?php if ($pedigree['regnotes']) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('yes'); ?>
+                      </option>
                     </select>
                   </td>
                 </tr>
@@ -242,12 +250,12 @@ $headSection->setTitle(uiTextSnippet('modifypedsettings'));
                   <td><span><?php echo uiTextSnippet('regnosp'); ?>:</span></td>
                   <td>
                     <select name="regnosp">
-                      <option value='0'<?php if (!$pedigree['regnosp']) {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('chshow'); ?></option>
-                      <option value='1'<?php if ($pedigree['regnosp']) {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('chifsp'); ?></option>
+                      <option value='0'<?php if (!$pedigree['regnosp']) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('chshow'); ?>
+                      </option>
+                      <option value='1'<?php if ($pedigree['regnosp']) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('chifsp'); ?>
+                      </option>
                     </select>
                   </td>
                 </tr>
@@ -304,19 +312,17 @@ $headSection->setTitle(uiTextSnippet('modifypedsettings'));
                   <td>
                     <select name="simile"
                             onchange="new Effect.toggle('simileTable', 'appear', {duration: .2});">
-                      <option value='0'<?php if (!$pedigree['simile']) {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('no'); ?></option>
-                      <option value='1'<?php if ($pedigree['simile']) {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('yes'); ?></option>
+                      <option value='0'<?php if (!$pedigree['simile']) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('no'); ?>
+                      </option>
+                      <option value='1'<?php if ($pedigree['simile']) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('yes'); ?>
+                      </option>
                     </select>
                   </td>
                 </tr>
               </table>
-              <table<?php if (!$pedigree['simile']) {
-                echo " style=\"display:none\"";
-              } ?> id="simileTable">
+              <table<?php if (!$pedigree['simile']) {echo " style=\"display:none\"";} ?> id="simileTable">
                 <tr>
                   <td><?php echo uiTextSnippet('tcheight'); ?>:</td>
                   <td><input name='tcheight' type='text' value="<?php echo $pedigree['tcheight']; ?>" size='5'></td>
@@ -348,12 +354,12 @@ $headSection->setTitle(uiTextSnippet('modifypedsettings'));
                   <td><?php echo uiTextSnippet('inclevs'); ?>:</td>
                   <td>
                     <select name="tcevents">
-                      <option value='0'<?php if (!$pedigree['tcevents']) {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('allevs'); ?></option>
-                      <option value='1'<?php if ($pedigree['tcevents']) {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('rangeevs'); ?></option>
+                      <option value='0'<?php if (!$pedigree['tcevents']) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('allevs'); ?>
+                      </option>
+                      <option value='1'<?php if ($pedigree['tcevents']) {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('rangeevs'); ?>
+                      </option>
                     </select>
                   </td>
                 </tr>
@@ -436,27 +442,15 @@ $headSection->setTitle(uiTextSnippet('modifypedsettings'));
                         <td><?php echo uiTextSnippet('defpgsize'); ?>:</td>
                         <td>
                           <select name="pagesize">
-                            <option value="a3"<?php if ($pedigree['pagesize'] == "a3") {
-                              echo " selected";
-                            } ?>>
-                              A3
+                            <option value="a3"<?php if ($pedigree['pagesize'] == "a3") {echo " selected";} ?>>A3</option>
+                            <option value="a4"<?php if ($pedigree['pagesize'] == "a4") {echo " selected";} ?>>A4</option>
+                            <option value="a5"<?php if ($pedigree['pagesize'] == "a5") {echo " selected";} ?>>A5</option>
+                            <option value="letter"<?php if (!$pedigree['pagesize'] || $pedigree['pagesize'] == "letter") {echo " selected";} ?>>
+                              <?php echo uiTextSnippet('letter'); ?>
                             </option>
-                            <option value="a4"<?php if ($pedigree['pagesize'] == "a4") {
-                              echo " selected";
-                            } ?>>
-                              A4
+                            <option value="legal"<?php if ($pedigree['pagesize'] == "legal") {echo " selected";} ?>>
+                              <?php echo uiTextSnippet('legal'); ?>
                             </option>
-                            <option value="a5"<?php if ($pedigree['pagesize'] == "a5") {
-                              echo " selected";
-                            } ?>>
-                              A5
-                            </option>
-                            <option value="letter"<?php if (!$pedigree['pagesize'] || $pedigree['pagesize'] == "letter") {
-                              echo " selected";
-                            } ?>><?php echo uiTextSnippet('letter'); ?></option>
-                            <option value="legal"<?php if ($pedigree['pagesize'] == "legal") {
-                              echo " selected";
-                            } ?>><?php echo uiTextSnippet('legal'); ?></option>
                           </select>
                         </td>
                       </tr>
@@ -498,12 +492,12 @@ $headSection->setTitle(uiTextSnippet('modifypedsettings'));
                         <td><span><?php echo uiTextSnippet('pedevent'); ?>:</span></td>
                         <td>
                           <select name="pedevent">
-                            <option value="down"<?php if ($pedigree['event'] == "down") {
-                              echo " selected";
-                            } ?>><?php echo uiTextSnippet('mousedown'); ?></option>
-                            <option value="over"<?php if ($pedigree['event'] == "over") {
-                              echo " selected";
-                            } ?>><?php echo uiTextSnippet('mouseover'); ?></option>
+                            <option value="down"<?php if ($pedigree['event'] == "down") {echo " selected";} ?>>
+                              <?php echo uiTextSnippet('mousedown'); ?>
+                            </option>
+                            <option value="over"<?php if ($pedigree['event'] == "over") {echo " selected";} ?>>
+                              <?php echo uiTextSnippet('mouseover'); ?>
+                            </option>
                           </select>
                         </td>
                       </tr>
@@ -522,15 +516,15 @@ $headSection->setTitle(uiTextSnippet('modifypedsettings'));
                         <td><span><?php echo uiTextSnippet('puboxalign'); ?>:</span></td>
                         <td>
                           <select name="puboxalign">
-                            <option value="center"<?php if ($pedigree['puboxalign'] == "center") {
-                              echo " selected";
-                            } ?>><?php echo uiTextSnippet('center'); ?></option>
-                            <option value="left"<?php if ($pedigree['puboxalign'] == "left") {
-                              echo " selected";
-                            } ?>><?php echo uiTextSnippet('left'); ?></option>
-                            <option value="right"<?php if ($pedigree['puboxalign'] == "right") {
-                              echo " selected";
-                            } ?>><?php echo uiTextSnippet('right'); ?></option>
+                            <option value="center"<?php if ($pedigree['puboxalign'] == "center") {echo " selected";} ?>>
+                              <?php echo uiTextSnippet('center'); ?>
+                            </option>
+                            <option value="left"<?php if ($pedigree['puboxalign'] == "left") {echo " selected";} ?>>
+                              <?php echo uiTextSnippet('left'); ?>
+                            </option>
+                            <option value="right"<?php if ($pedigree['puboxalign'] == "right") {echo " selected";} ?>>
+                              <?php echo uiTextSnippet('right'); ?>
+                            </option>
                           </select>
                         </td>
                       </tr>

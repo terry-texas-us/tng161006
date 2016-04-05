@@ -1,26 +1,25 @@
 <?php
 
 class scriptsManager {
-    private $data = []; // [ts] overloaded data
+  private $data = []; // [ts] overloaded data
 
   private static $showShare = false;
   private static $http = 'http';
 
-    public function __construct($id) {
+  public function __construct($id) {
     $this->id = $id;
-    }
+  }
 
-    public function __set($name, $value) {
+  public function __set($name, $value) {
     $this->data[$name] = $value;
-    }
+  }
 
-    public function __get($name) {
+  public function __get($name) {
     if (array_key_exists($name, $this->data)) {
       $value = $this->data[$name];
     } else {
       $trace = debug_backtrace();
-      trigger_error('Undefined property via __get(): ' . $name . ' in ' . $trace[0]['file'] .
-        ' on line ' . $trace[0]['line'], E_USER_NOTICE);
+      trigger_error('Undefined property via __get(): ' . $name . ' in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_NOTICE);
       $value = null;
     }
     return $value;
@@ -70,7 +69,7 @@ class scriptsManager {
   public static function buildScriptElements($flags, $id = 'public') {
     $out = "<script src='node_modules/jquery/dist/jquery.js'></script>\n";
     $out .= "<script src='js/jquery-ui.min.js'></script>\n";
-//    $out .= "<script src='_/js/tether.min.js'></script>\n";
+    //    $out .= "<script src='_/js/tether.min.js'></script>\n";
     $out .= "<script src='node_modules/tether/dist/js/tether.js'></script>\n";
     $out .= "<script src='_/js/bootstrap.js'></script>\n";
     $out .= "<script src='node_modules/svg-injector/dist/svg-injector.min.js'></script>\n";
@@ -87,13 +86,12 @@ class scriptsManager {
         $out .= $flags['scripting'];
       }
       if (scriptsManager::$showShare) {
-        $w = headElementSection::$http === "https" ? "ws" : "w";
-        $out .= "<script src='" . headElementSection::$http . "://{$w}.sharethis.com/button/buttons.js'></script>\n";
+        $w = HeadElementSection::$http === "https" ? "ws" : "w";
+        $out .= "<script src='" . HeadElementSection::$http . "://{$w}.sharethis.com/button/buttons.js'></script>\n";
         $out .= scriptsManager::getScript('sharethis');
       }
       $out .= scriptsManager::getScript('litbox-globals', $flags);
     }
     return $out;
   }
-
 }

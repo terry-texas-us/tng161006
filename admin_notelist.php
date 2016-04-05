@@ -54,7 +54,7 @@ if ($assignedtree) {
 } else {
   $wherestr = "";
 }
-$treequery = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
 
 $wherestr = "WHERE $xnotes_table.ID = $notelinks_table.xnoteID";
 
@@ -103,208 +103,197 @@ $headSection->setTitle(uiTextSnippet('notes'));
     $navList->appendItem([true, "admin_mostwanted.php", uiTextSnippet('mostwanted'), "mostwanted"]);
     echo $navList->build("notes");
     ?>
+    <div>
 
-    <table class='table table-sm'>
-      <tr>
-        <td>
-          <div>
-
-            <form action="admin_notelist.php" name='form1' id='form1'>
-              <table>
-                <tr>
-                  <td><?php echo uiTextSnippet('searchfor'); ?>:</td>
-                  <td>
-                    <select name='tree'>
-                      <?php
-                      if (!$assignedtree) {
-                        echo "  <option value=''>" . uiTextSnippet('alltrees') . "</option>\n";
-                      }
-                      $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
-                      while ($treerow = tng_fetch_assoc($treeresult)) {
-                        echo "  <option value=\"{$treerow['gedcom']}\"";
-                        if ($treerow['gedcom'] == $tree) {
-                          echo " selected";
-                        }
-                        echo ">{$treerow['treename']}</option>\n";
-                      }
-                      tng_free_result($treeresult);
-                      ?>
-                    </select>
-                    <input class='longfield' name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>">
-                  </td>
-                  <td>
-                    <input name='submit' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
-                    <input name='submit' type='submit' value="<?php echo uiTextSnippet('reset'); ?>"
-                           onClick="resetForm();">
-                  </td>
-                </tr>
-                <tr>
-                  <td>&nbsp;</td>
-                  <td><input name='private' type='checkbox' value='yes'<?php if ($private == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('private'); ?>
-                  </td>
-                </tr>
-              </table>
-
-              <input name='newsearch' type='hidden' value='1'>
-            </form>
-            <br>
-
-            <?php
-            $numrowsplus = $numrows + $offset;
-            if (!$numrowsplus) {
-              $offsetplus = 0;
-            }
-            echo displayListLocation($offsetplus, $numrowsplus, $totrows);
-            ?>
-            <form action="admin_deleteselected.php" method='post' name="form2">
-              <?php
-              if ($allowDelete) {
-                ?>
-                <p>
-                  <input name='selectall' type='button' value="<?php echo uiTextSnippet('selectall'); ?>" 
-                         onClick="toggleAll(1);">
-                  <input name='clearall' type='button' value="<?php echo uiTextSnippet('clearall'); ?>"
-                         onClick="toggleAll(0);">
-                  <input name='xnoteaction' type='submit' value="<?php echo uiTextSnippet('deleteselected'); ?>"
-                         onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');">
-                </p>
+      <form action="admin_notelist.php" name='form1' id='form1'>
+        <table>
+          <tr>
+            <td><?php echo uiTextSnippet('searchfor'); ?>:</td>
+            <td>
+              <select name='tree'>
                 <?php
-              }
+                if (!$assignedtree) {
+                  echo "  <option value=''>" . uiTextSnippet('alltrees') . "</option>\n";
+                }
+                $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
+                while ($treerow = tng_fetch_assoc($treeresult)) {
+                  echo "  <option value=\"{$treerow['gedcom']}\"";
+                  if ($treerow['gedcom'] == $tree) {
+                    echo " selected";
+                  }
+                  echo ">{$treerow['treename']}</option>\n";
+                }
+                tng_free_result($treeresult);
+                ?>
+              </select>
+              <input class='longfield' name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>">
+            </td>
+            <td>
+              <input name='submit' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
+              <input name='submit' type='submit' value="<?php echo uiTextSnippet('reset'); ?>"
+                     onClick="resetForm();">
+            </td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td><input name='private' type='checkbox' value='yes'<?php if ($private == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('private'); ?>
+            </td>
+          </tr>
+        </table>
+
+        <input name='newsearch' type='hidden' value='1'>
+      </form>
+      <br>
+
+      <?php
+      $numrowsplus = $numrows + $offset;
+      if (!$numrowsplus) {
+        $offsetplus = 0;
+      }
+      echo displayListLocation($offsetplus, $numrowsplus, $totrows);
+      ?>
+      <form action="admin_deleteselected.php" method='post' name="form2">
+        <?php
+        if ($allowDelete) {
+          ?>
+          <p>
+            <input name='selectall' type='button' value="<?php echo uiTextSnippet('selectall'); ?>" 
+                   onClick="toggleAll(1);">
+            <input name='clearall' type='button' value="<?php echo uiTextSnippet('clearall'); ?>"
+                   onClick="toggleAll(0);">
+            <input name='xnoteaction' type='submit' value="<?php echo uiTextSnippet('deleteselected'); ?>"
+                   onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');">
+          </p>
+          <?php
+        }
+        ?>
+        <table class="table table-sm table-striped">
+          <tr>
+            <th><?php echo uiTextSnippet('action'); ?></th>
+            <?php
+            if ($allowDelete) {
               ?>
-              <table class="table table-sm table-striped">
-                <tr>
-                  <th><?php echo uiTextSnippet('action'); ?></th>
-                  <?php
-                  if ($allowDelete) {
-                    ?>
-                    <th><?php echo uiTextSnippet('select'); ?></th>
-                    <?php
-                  }
-                  ?>
-                  <th><?php echo uiTextSnippet('note'); ?></th>
-                  <?php
-                  if (!$tree) {
-                    ?>
-                    <th><?php echo uiTextSnippet('tree'); ?></th>
-                    <?php
-                  }
-                  ?>
-                  <th><?php echo uiTextSnippet('linkedto'); ?></th>
-                </tr>
-                <?php
-                if ($numrows) {
-                $actionstr = "";
-                if ($allowEdit) {
-                  $actionstr .= "<a href=\"admin_editnote2.php?ID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
-                  $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
-                  $actionstr .= "</a>\n";
-                }
-                if ($allowDelete) {
-                  $actionstr .= "<a href='#' onClick=\"return confirmDelete('xxx');\" title='" . uiTextSnippet('delete') . "'>\n";
-                  $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
-                  $actionstr .= "</a>\n";
-                }
-
-                while ($row = tng_fetch_assoc($result)) {
-                  $newactionstr = preg_replace("/xxx/", $row['ID'], $actionstr);
-                  echo "<tr id=\"row_{$row['ID']}\"><td><div class=\"action-btns2\">$newactionstr</div></td>\n";
-                  if ($allowDelete) {
-                    echo "<td><input name=\"del{$row['ID']}\" type='checkbox' value='1'></td>";
-                  }
-
-                  $query = "SELECT $notelinks_table.ID, $notelinks_table.persfamID as personID, $notelinks_table.gedcom, secret
-          FROM $notelinks_table
-          WHERE $notelinks_table.xnoteID = \"{$row['ID']}\" ";
-
-                  $nresult = tng_query($query);
-                  $notelinktext = "";
-                  while ($nrow = tng_fetch_assoc($nresult)) {
-                    $treetext = "";
-                    if (!$tree) {
-                      $query = "SELECT treename FROM " . $trees_table . " WHERE gedcom = \"{$nrow['gedcom']}\"";
-                      $result2 = tng_query($query);
-                      $row2 = tng_fetch_assoc($result2);
-                      $treetext = "<td>" . $row2['treename'] . "</td>";
-                      tng_free_result($result2);
-                    }
-
-                    if (!$notelinktext) {
-                      $query = "SELECT * FROM $people_table WHERE personID = \"{$nrow['personID']}\" AND gedcom = \"{$nrow['gedcom']}\"";
-                      $result2 = tng_query($query);
-                      if (tng_num_rows($result2) == 1) {
-                        $row2 = tng_fetch_assoc($result2);
-                        $nrights = determineLivingPrivateRights($row2);
-                        $row2['allow_living'] = $nrights['living'];
-                        $row2['allow_private'] = $nrights['private'];
-                        $notelinktext .= "<li><a href=\"peopleShowPerson.php?personID={$row2['personID']}&amp;tree={$row2['gedcom']}\" target='_blank'>" . getNameRev($row2) . " ({$row2['personID']})</a></li>\n";
-                        tng_free_result($result2);
-                      }
-                    }
-
-                    if (!$notelinktext) {
-                      $query = "SELECT * FROM $families_table WHERE familyID = \"{$nrow['personID']}\" AND gedcom = \"{$nrow['gedcom']}\"";
-                      $result2 = tng_query($query);
-                      if (tng_num_rows($result2) == 1) {
-                        $row2 = tng_fetch_assoc($result2);
-                        $nrights = determineLivingPrivateRights($row2);
-                        $row2['allow_living'] = $nrights['living'];
-                        $row2['allow_private'] = $nrights['private'];
-                        $notelinktext .= "<li><a href=\"familiesShowFamily.php?familyID={$row2['familyID']}&tree={$nrow['gedcom']}\" target='_blank'>" . uiTextSnippet('family') . " {$row2['familyID']}</a></li>\n";
-                        tng_free_result($result2);
-                      }
-                    }
-
-                    if (!$notelinktext) {
-                      $query = "SELECT * FROM $sources_table WHERE sourceID = \"{$nrow['personID']}\" AND gedcom = \"{$nrow['gedcom']}\"";
-                      $result2 = tng_query($query);
-                      if (tng_num_rows($result2) == 1) {
-                        $row2 = tng_fetch_assoc($result2);
-                        $notelinktext .= "<li><a href=\"showsource.php?sourceID={$row2['sourceID']}&tree={$row2['gedcom']}\" target='_blank'>" . uiTextSnippet('source') . " $sourcetext ({$row2['sourceID']})</a></li>\n";
-                        tng_free_result($result2);
-                      }
-                    }
-
-                    if (!$notelinktext) {
-                      $query = "SELECT * FROM $repositories_table WHERE repoID = \"{$nrow['personID']}\" AND gedcom = \"{$nrow['gedcom']}\"";
-                      $result2 = tng_query($query);
-                      if (tng_num_rows($result2) == 1) {
-                        $row2 = tng_fetch_assoc($result2);
-                        $notelinktext .= "<li><a href=\"repositoriesShowItem.php?repoID={$row2['repoID']}&tree={$row2['gedcom']}\" target='_blank'>" . uiTextSnippet('repository') . " $sourcetext ({$row2['repoID']})</a></li>\n";
-                        tng_free_result($result2);
-                      }
-                    }
-                  }
-                  tng_free_result($nresult);
-
-                  if (($allowEdit && !$assignedtree) || !$row['secret']) {
-                    $notetext = cleanIt($row['note']);
-                    $notetext = truncateIt($notetext, 500);
-                    if (!$notetext) {
-                      $notetext = "&nbsp;";
-                    }
-                  } else {
-                    $notetext = uiTextSnippet('private');
-                  }
-                  echo "<td>$notetext</td>\n";
-                  echo $treetext;
-                  echo "<td>\n<ul>\n$notelinktext\n</ul>\n</td></tr>\n";
-                }
-                ?>
-              </table>
-            <?php
-            echo buildSearchResultPagination($totrows, "admin_notelist.php?searchstring=$searchstring_noquotes&amp;offset", $maxsearchresults, 5);
+              <th><?php echo uiTextSnippet('select'); ?></th>
+              <?php
             }
-            else {
-              echo "</table>\n" . uiTextSnippet('norecords');
-            }
-            tng_free_result($result);
             ?>
-            </form>
+            <th><?php echo uiTextSnippet('note'); ?></th>
+            <?php
+            if (!$tree) {
+              ?>
+              <th><?php echo uiTextSnippet('tree'); ?></th>
+              <?php
+            }
+            ?>
+            <th><?php echo uiTextSnippet('linkedto'); ?></th>
+          </tr>
+          <?php
+          if ($numrows) {
+          $actionstr = "";
+          if ($allowEdit) {
+            $actionstr .= "<a href=\"admin_editnote2.php?ID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
+            $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
+            $actionstr .= "</a>\n";
+          }
+          if ($allowDelete) {
+            $actionstr .= "<a href='#' onClick=\"return confirmDelete('xxx');\" title='" . uiTextSnippet('delete') . "'>\n";
+            $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
+            $actionstr .= "</a>\n";
+          }
 
-          </div>
-        </td>
-      </tr>
-    </table>
+          while ($row = tng_fetch_assoc($result)) {
+            $newactionstr = preg_replace("/xxx/", $row['ID'], $actionstr);
+            echo "<tr id=\"row_{$row['ID']}\"><td><div class=\"action-btns2\">$newactionstr</div></td>\n";
+            if ($allowDelete) {
+              echo "<td><input name=\"del{$row['ID']}\" type='checkbox' value='1'></td>";
+            }
+            $query = "SELECT $notelinks_table.ID, $notelinks_table.persfamID as personID, $notelinks_table.gedcom, secret
+              FROM $notelinks_table
+              WHERE $notelinks_table.xnoteID = \"{$row['ID']}\" ";
+
+            $nresult = tng_query($query);
+            $notelinktext = "";
+            while ($nrow = tng_fetch_assoc($nresult)) {
+              $treetext = "";
+              if (!$tree) {
+                $query = "SELECT treename FROM " . $treesTable . " WHERE gedcom = \"{$nrow['gedcom']}\"";
+                $result2 = tng_query($query);
+                $row2 = tng_fetch_assoc($result2);
+                $treetext = "<td>" . $row2['treename'] . "</td>";
+                tng_free_result($result2);
+              }
+
+              if (!$notelinktext) {
+                $query = "SELECT * FROM $people_table WHERE personID = \"{$nrow['personID']}\" AND gedcom = \"{$nrow['gedcom']}\"";
+                $result2 = tng_query($query);
+                if (tng_num_rows($result2) == 1) {
+                  $row2 = tng_fetch_assoc($result2);
+                  $nrights = determineLivingPrivateRights($row2);
+                  $row2['allow_living'] = $nrights['living'];
+                  $row2['allow_private'] = $nrights['private'];
+                  $notelinktext .= "<li><a href=\"peopleShowPerson.php?personID={$row2['personID']}&amp;tree={$row2['gedcom']}\" target='_blank'>" . getNameRev($row2) . " ({$row2['personID']})</a></li>\n";
+                  tng_free_result($result2);
+                }
+              }
+              if (!$notelinktext) {
+                $query = "SELECT * FROM $families_table WHERE familyID = \"{$nrow['personID']}\" AND gedcom = \"{$nrow['gedcom']}\"";
+                $result2 = tng_query($query);
+                if (tng_num_rows($result2) == 1) {
+                  $row2 = tng_fetch_assoc($result2);
+                  $nrights = determineLivingPrivateRights($row2);
+                  $row2['allow_living'] = $nrights['living'];
+                  $row2['allow_private'] = $nrights['private'];
+                  $notelinktext .= "<li><a href=\"familiesShowFamily.php?familyID={$row2['familyID']}&tree={$nrow['gedcom']}\" target='_blank'>" . uiTextSnippet('family') . " {$row2['familyID']}</a></li>\n";
+                  tng_free_result($result2);
+                }
+              }
+              if (!$notelinktext) {
+                $query = "SELECT * FROM $sources_table WHERE sourceID = \"{$nrow['personID']}\" AND gedcom = \"{$nrow['gedcom']}\"";
+                $result2 = tng_query($query);
+                if (tng_num_rows($result2) == 1) {
+                  $row2 = tng_fetch_assoc($result2);
+                  $notelinktext .= "<li><a href=\"showsource.php?sourceID={$row2['sourceID']}&tree={$row2['gedcom']}\" target='_blank'>" . uiTextSnippet('source') . " $sourcetext ({$row2['sourceID']})</a></li>\n";
+                  tng_free_result($result2);
+                }
+              }
+              if (!$notelinktext) {
+                $query = "SELECT * FROM $repositories_table WHERE repoID = \"{$nrow['personID']}\" AND gedcom = \"{$nrow['gedcom']}\"";
+                $result2 = tng_query($query);
+                if (tng_num_rows($result2) == 1) {
+                  $row2 = tng_fetch_assoc($result2);
+                  $notelinktext .= "<li><a href=\"repositoriesShowItem.php?repoID={$row2['repoID']}&tree={$row2['gedcom']}\" target='_blank'>" . uiTextSnippet('repository') . " $sourcetext ({$row2['repoID']})</a></li>\n";
+                  tng_free_result($result2);
+                }
+              }
+            }
+            tng_free_result($nresult);
+
+            if (($allowEdit && !$assignedtree) || !$row['secret']) {
+              $notetext = cleanIt($row['note']);
+              $notetext = truncateIt($notetext, 500);
+              if (!$notetext) {
+                $notetext = "&nbsp;";
+              }
+            } else {
+              $notetext = uiTextSnippet('private');
+            }
+            echo "<td>$notetext</td>\n";
+            echo $treetext;
+            echo "<td>\n<ul>\n$notelinktext\n</ul>\n</td></tr>\n";
+          }
+          ?>
+        </table>
+      <?php
+      echo buildSearchResultPagination($totrows, "admin_notelist.php?searchstring=$searchstring_noquotes&amp;offset", $maxsearchresults, 5);
+      }
+      else {
+        echo "</table>\n" . uiTextSnippet('norecords');
+      }
+      tng_free_result($result);
+      ?>
+      </form>
+
+    </div>
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>

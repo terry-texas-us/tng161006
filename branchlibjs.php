@@ -7,7 +7,7 @@ $swapbranches = "swapBranches();\n";
 $dispid = "";
 $dispname = "";
 
-$query = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+$query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
 $treeresult = tng_query($query);
 while ($treerow = tng_fetch_assoc($treeresult)) {
   $nexttree = addslashes($treerow['gedcom']);

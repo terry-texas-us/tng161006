@@ -11,7 +11,7 @@ if ($assignedtree) {
 } else {
   $wherestr = "";
 }
-$treequery = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
 initMediaTypes();
 header("Content-type:text/html; charset=" . $session_charset);
 ?>

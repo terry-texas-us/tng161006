@@ -3,63 +3,63 @@ require 'tng_begin.php';
 
 require 'functions.php';
 
-function doRepoSearch( $instance, $pagenav ) {
-    global $reposearch;
-    global $tree;
+function doRepoSearch($instance, $pagenav) {
+  global $reposearch;
+  global $tree;
 
-    $str = "<span>\n";
-    $str .= buildFormElement("repositoriesShow", "get", "RepoSearch$instance");
-    $str .= "<input name='reposearch' type='text' value=\"$reposearch\" /> \n";
+  $str = "<span>\n";
+  $str .= buildFormElement("repositoriesShow", "get", "RepoSearch$instance");
+  $str .= "<input name='reposearch' type='text' value=\"$reposearch\" /> \n";
   $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . "\" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-    $str .= $pagenav;
-    if ($reposearch) {
-      $str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='repositoriesShow.php'>" . uiTextSnippet('browseallrepos') . "</a>";
-    }
-    $str .= "<input name='tree' type='hidden' value=\"$tree\" />\n";
-    $str .= "</form></span>\n";
-    
-    return $str;
+  $str .= $pagenav;
+  if ($reposearch) {
+    $str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='repositoriesShow.php'>" . uiTextSnippet('browseallrepos') . "</a>";
+  }
+  $str .= "<input name='tree' type='hidden' value=\"$tree\" />\n";
+  $str .= "</form></span>\n";
+
+  return $str;
 }
 
 $max_browserepo_pages = 5;
 if ($offset) {
-    $offsetplus = $offset + 1;
-    $newoffset = "$offset, ";
+  $offsetplus = $offset + 1;
+  $newoffset = "$offset, ";
 }
 else {
-    $offsetplus = 1;
-    $newoffset = "";
-    $page = 1;
+  $offsetplus = 1;
+  $newoffset = "";
+  $page = 1;
 }
 
 $reposearch = trim($reposearch);
 if ($tree) {
-    $wherestr = "WHERE $repositories_table.gedcom = \"$tree\"";
-    if ($reposearch) {$wherestr .= " AND reponame LIKE \"%$reposearch%\"";}
-    $join = "INNER JOIN";
+  $wherestr = "WHERE $repositories_table.gedcom = \"$tree\"";
+  if ($reposearch) {$wherestr .= " AND reponame LIKE \"%$reposearch%\"";}
+  $join = "INNER JOIN";
 } else {
-    if ($reposearch) {
-      $wherestr = "WHERE reponame LIKE \"%$reposearch%\"";
-    } else {
-      $wherestr = "";
-    }
-    $join = "LEFT JOIN";
+  if ($reposearch) {
+    $wherestr = "WHERE reponame LIKE \"%$reposearch%\"";
+  } else {
+    $wherestr = "";
+  }
+  $join = "LEFT JOIN";
 }
 
-$query = "SELECT repoID, reponame, $repositories_table.gedcom as gedcom, treename FROM $repositories_table $join $trees_table on $repositories_table.gedcom = $trees_table.gedcom $wherestr ORDER BY reponame LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT repoID, reponame, $repositories_table.gedcom as gedcom, treename FROM $repositories_table $join $treesTable on $repositories_table.gedcom = $treesTable.gedcom $wherestr ORDER BY reponame LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-    if ($tree) {
-      $query = "SELECT count(repoID) as scount FROM $repositories_table LEFT JOIN $trees_table on $repositories_table.gedcom = $trees_table.gedcom $wherestr";
-    } else {
-      $query = "SELECT count(repoID) as scount FROM $repositories_table $wherestr";
-    }
-    $result2 = tng_query($query);
-    $row = tng_fetch_assoc($result2);
-    $totrows = $row['scount'];
+  if ($tree) {
+    $query = "SELECT count(repoID) as scount FROM $repositories_table LEFT JOIN $treesTable on $repositories_table.gedcom = $treesTable.gedcom $wherestr";
+  } else {
+    $query = "SELECT count(repoID) as scount FROM $repositories_table $wherestr";
+  }
+  $result2 = tng_query($query);
+  $row = tng_fetch_assoc($result2);
+  $totrows = $row['scount'];
 } else {
   $totrows = $numrows;
 }
@@ -90,9 +90,9 @@ $headSection->setTitle(uiTextSnippet('repositories'));
     if ($totrows) {
       echo "<p><span>" . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</span></p>";
     }
-    $pagenav = buildSearchResultPagination( $totrows, "repositoriesShow.php?reposearch=$reposearch&amp;offset", $maxsearchresults, $max_browserepo_pages );
+    $pagenav = buildSearchResultPagination($totrows, "repositoriesShow.php?reposearch=$reposearch&amp;offset", $maxsearchresults, $max_browserepo_pages);
     if ($pagenav || $reposearch) {
-      echo doRepoSearch( 1, $pagenav );
+      echo doRepoSearch(1, $pagenav);
       echo "<br>\n";
     }
     ?>
@@ -101,7 +101,7 @@ $headSection->setTitle(uiTextSnippet('repositories'));
         <th></th>
         <th><?php echo uiTextSnippet('repoid'); ?></th>
         <th><?php echo uiTextSnippet('name'); ?></th>
-        <?php if( $numtrees > 1 ) { ?>
+        <?php if ($numtrees > 1) { ?>
           <th><?php echo uiTextSnippet('tree'); ?></th>
         <?php } ?>
       </tr>
@@ -111,8 +111,9 @@ $headSection->setTitle(uiTextSnippet('repositories'));
         echo "<tr><td><span>$i</span></td>\n";
         echo "<td><span><a href=\"repositoriesShowItem.php?repoID={$row['repoID']}&amp;tree={$row['gedcom']}\">{$row['repoID']}</a>&nbsp;</span></td>";
         echo "<td><span><a href=\"repositoriesShowItem.php?repoID={$row['repoID']}&amp;tree={$row['gedcom']}\">{$row['reponame']}</a>&nbsp;</span></td>";
-        if( $numtrees > 1 )
-          {echo "<td><span>{$row['treename']}&nbsp;</span></td>";}
+        if ($numtrees > 1) {
+          echo "<td><span>{$row['treename']}&nbsp;</span></td>";
+        }
         echo "</tr>\n";
         $i++;
       }
@@ -120,8 +121,8 @@ $headSection->setTitle(uiTextSnippet('repositories'));
       ?>
     </table>
     <?php
-    if( $pagenav || $reposearch ) {
-      echo doRepoSearch( 2, $pagenav ) . "<br>\n";
+    if ($pagenav || $reposearch) {
+      echo doRepoSearch(2, $pagenav) . "<br>\n";
     }
     ?>
     <?php echo $publicFooterSection->build(); ?>

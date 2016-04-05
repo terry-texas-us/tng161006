@@ -41,7 +41,7 @@ if (!isset($husbstr)) {
 if (!isset($wifestr)) {
   $wifestr = uiTextSnippet('clickfind');
 }
-$query = "SELECT treename FROM $trees_table WHERE gedcom=\"$tree\" ORDER BY treename";
+$query = "SELECT treename FROM $treesTable WHERE gedcom=\"$tree\" ORDER BY treename";
 $result = tng_query($query);
 $treerow = tng_fetch_assoc($result);
 tng_free_result($result);

@@ -25,17 +25,13 @@ $headSection->setTitle(uiTextSnippet('addnewcemetery'));
 <!DOCTYPE html>
 <html>
 <?php echo $headSection->build('', 'admin', $session_charset); ?>
-<body<?php if ($map['key']) {
-  if (!$map['startoff']) {
-    echo " onload=\"divbox('mapcontainer');\"";
-  }
-  } ?>>
+<body<?php if ($map['key']) {if (!$map['startoff']) {echo " onload=\"divbox('mapcontainer');\"";}} ?>>
   <section class='container'>
     <?php
     echo $adminHeaderSection->build('cemeteries-addnewcemetery', $message);
     $navList = new navList('');
     $navList->appendItem([true, "cemeteriesBrowse.php", uiTextSnippet('browse'), "findcem"]);
-//    $navList->appendItem([$allowAdd, "cemeteriesAdd.php", uiTextSnippet('add'), "addcemetery"]);
+    //    $navList->appendItem([$allowAdd, "cemeteriesAdd.php", uiTextSnippet('add'), "addcemetery"]);
     echo $navList->build("addcemetery");
     ?>
     <form action="cemeteriesAddFormAction.php" method='post' name='form1' id='form1' ENCTYPE="multipart/form-data" onSubmit="return validateForm();">

@@ -1,7 +1,7 @@
 <?php
 require 'tng_begin.php';
 
-$query = "SELECT gedcom, treename FROM $trees_table ORDER BY treename";
+$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $result = tng_query($query);
 $numtrees = tng_num_rows($result);
 

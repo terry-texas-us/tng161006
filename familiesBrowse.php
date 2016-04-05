@@ -85,7 +85,7 @@ function addCriteria($field, $value, $operator) {
   return $criteria;
 }
 
-$allwhere = "$families_table.gedcom = $trees_table.gedcom";
+$allwhere = "$families_table.gedcom = $treesTable.gedcom";
 $allwhere2 = "";
 
 if ($searchstring) {
@@ -114,7 +114,7 @@ if ($spousename == 'husband') {
 }
 
 if ($allwhere2) {
-  $allwhere2 .= "AND $people_table.gedcom = $trees_table.gedcom";
+  $allwhere2 .= "AND $people_table.gedcom = $treesTable.gedcom";
   $allwhere .= " $allwhere2";
   if ($tree) {
     $allwhere .= " AND $people_table.gedcom = \"$tree\"";
@@ -139,12 +139,12 @@ if ($living == "yes") {
   $allwhere .= " AND $families_table.living = \"1\"";
 }
 
-$query = "SELECT $families_table.ID as ID, familyID, husband, wife, marrdate, $families_table.gedcom as gedcom, treename $otherfields FROM ($families_table, $trees_table $people_join) WHERE $allwhere ORDER BY $sortstr familyID LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT $families_table.ID as ID, familyID, husband, wife, marrdate, $families_table.gedcom as gedcom, treename $otherfields FROM ($families_table, $treesTable $people_join) WHERE $allwhere ORDER BY $sortstr familyID LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count($families_table.ID) as fcount FROM ($families_table, $trees_table $people_join) WHERE $allwhere";
+  $query = "SELECT count($families_table.ID) as fcount FROM ($families_table, $treesTable $people_join) WHERE $allwhere";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['fcount'];
@@ -166,7 +166,7 @@ $headSection->setTitle(uiTextSnippet('families'));
     <?php
     echo $adminHeaderSection->build('families', $message);
     $navList = new navList('');
-//    $navList->appendItem([true, "familiesBrowse.php", uiTextSnippet('browse'), "findfamily"]);
+    //    $navList->appendItem([true, "familiesBrowse.php", uiTextSnippet('browse'), "findfamily"]);
     $navList->appendItem([$allowAdd, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
     $navList->appendItem([$allowEdit, "admin_findreview.php?type=F", uiTextSnippet('review') . $revstar, "review"]);
     echo $navList->build("findfamily");

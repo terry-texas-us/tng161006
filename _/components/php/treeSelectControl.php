@@ -1,5 +1,5 @@
 <?php
-$treequery = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
 $treeresult = tng_query($treequery);
 $numtrees = tng_num_rows($treeresult);
 if ($numtrees > 1) {

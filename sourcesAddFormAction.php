@@ -36,7 +36,7 @@ $callnum = addslashes($callnum);
 $publisher = addslashes($publisher);
 $actualtext = addslashes($actualtext);
 
-$newdate = date("Y-m-d H:i:s", time() + (3600 * $time_offset));
+$newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
 
 if (!$repoID) {
   $repoID = 0;

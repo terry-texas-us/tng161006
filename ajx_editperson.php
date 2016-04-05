@@ -58,7 +58,7 @@ $row['allow_private'] = $rights['private'];
 
 $namestr = getName($row);
 
-$query = "SELECT treename FROM $trees_table WHERE gedcom = \"$tree\"";
+$query = "SELECT treename FROM $treesTable WHERE gedcom = \"$tree\"";
 $result = tng_query($query);
 $treerow = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -404,55 +404,55 @@ require_once 'eventlib.php';
                                   $birthinfo = $spouserow['birthdate'] ? " (" . uiTextSnippet('birthabbr') . " " . displayDate($spouserow['birthdate']) . ")" : "";
                               } else {
                                   $spouserow = $birthinfo = "";
-                                }
-                                ?>
-                                <span><br><?php echo uiTextSnippet('spouse'); ?>:</span>
-                                <span>
-                                  <?php
-                                  if (isset($spouserow['personID']) && $spouserow['personID']) {
-                                    echo "<a href=\"peopleEdit.php?personID={$spouserow['personID']}&amp;tree=$tree&amp;cw=$cw\">" . getName($spouserow) . " - {$spouserow['personID']}</a>$birthinfo";
-                                  }
-                                  ?>
-                                </span>
-                                <?php if ($marriagerow['marrdate'] || $marriagerow['marrplace']) { ?>
-                                  <span><?php echo uiTextSnippet('married'); ?>:</span>
-                                  <span><?php echo $marriagerow['marrdate']; ?></span>
-                                <?php } ?>
+                              }
+                              ?>
+                              <span><br><?php echo uiTextSnippet('spouse'); ?>:</span>
+                              <span>
                                 <?php
-                                $query = "SELECT $people_table.personID as pID, firstname, lnprefix, lastname, haskids, living, private, branch, prefix, suffix, nameorder FROM ($people_table, $children_table) WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = \"{$familyId}\" AND $people_table.gedcom = \"$tree\" AND $children_table.gedcom = \"$tree\" ORDER BY ordernum";
-                                $children = tng_query($query);
-
-                                if ($children && tng_num_rows($children)) {
-                                  echo '<p>' . uiTextSnippet('children') . '</p>';
-
-                                  $kidcount = 1;
-                                  while ($child = tng_fetch_assoc($children)) {
-                                    $ifkids = $child['haskids'] ? "&gt" : "&nbsp";
-                                    $crights = determineLivingPrivateRights($child, $righttree);
-                                    $child['allow_living'] = $crights['living'];
-                                    $child['allow_private'] = $crights['private'];
-                                    if ($child['firstname'] || $child['lastname']) {
-                                      echo "<div class='row'>\n";
-                                        echo "<div class='col-sm-2'>$ifkids</div>\n";
-                                        echo "<div class='col-md-8'>$kidcount . ";
-                                          if ($crights['both']) {
-                                            if ($rightbranch) {
-                                              echo "<a href=\"peopleEdit.php?personID={$child['pID']}&amp;tree=$tree&amp;cw=$cw\">" . getName( $child ) . " - {$child['pID']}</a>";
-                                            } else {
-                                              echo getName($child) . " - {$child['pID']}";
-                                            }
-                                            echo $child['birthdate'] ? " (" . uiTextSnippet('birthabbr') . " " . displayDate($child['birthdate']) . ")" : "";
-                                          } else {
-                                            echo ($child['private'] ? uiTextSnippet('private') : uiTextSnippet('living')) . " - " . $child['pID'];
-                                          }
-                                        echo "</div>\n";
-                                      echo "</div>\n";
-                                    }
-                                    $kidcount++;
-                                  }
-                                  tng_free_result($children);
+                                if (isset($spouserow['personID']) && $spouserow['personID']) {
+                                  echo "<a href=\"peopleEdit.php?personID={$spouserow['personID']}&amp;tree=$tree&amp;cw=$cw\">" . getName($spouserow) . " - {$spouserow['personID']}</a>$birthinfo";
                                 }
                                 ?>
+                              </span>
+                              <?php if ($marriagerow['marrdate'] || $marriagerow['marrplace']) { ?>
+                                <span><?php echo uiTextSnippet('married'); ?>:</span>
+                                <span><?php echo $marriagerow['marrdate']; ?></span>
+                              <?php } ?>
+                              <?php
+                              $query = "SELECT $people_table.personID as pID, firstname, lnprefix, lastname, haskids, living, private, branch, prefix, suffix, nameorder FROM ($people_table, $children_table) WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = \"{$familyId}\" AND $people_table.gedcom = \"$tree\" AND $children_table.gedcom = \"$tree\" ORDER BY ordernum";
+                              $children = tng_query($query);
+
+                              if ($children && tng_num_rows($children)) {
+                                echo '<p>' . uiTextSnippet('children') . '</p>';
+
+                                $kidcount = 1;
+                                while ($child = tng_fetch_assoc($children)) {
+                                  $ifkids = $child['haskids'] ? "&gt" : "&nbsp";
+                                  $crights = determineLivingPrivateRights($child, $righttree);
+                                  $child['allow_living'] = $crights['living'];
+                                  $child['allow_private'] = $crights['private'];
+                                  if ($child['firstname'] || $child['lastname']) {
+                                    echo "<div class='row'>\n";
+                                      echo "<div class='col-sm-2'>$ifkids</div>\n";
+                                      echo "<div class='col-md-8'>$kidcount . ";
+                                        if ($crights['both']) {
+                                          if ($rightbranch) {
+                                            echo "<a href=\"peopleEdit.php?personID={$child['pID']}&amp;tree=$tree&amp;cw=$cw\">" . getName( $child ) . " - {$child['pID']}</a>";
+                                          } else {
+                                            echo getName($child) . " - {$child['pID']}";
+                                          }
+                                          echo $child['birthdate'] ? " (" . uiTextSnippet('birthabbr') . " " . displayDate($child['birthdate']) . ")" : "";
+                                        } else {
+                                          echo ($child['private'] ? uiTextSnippet('private') : uiTextSnippet('living')) . " - " . $child['pID'];
+                                        }
+                                      echo "</div>\n";
+                                    echo "</div>\n";
+                                  }
+                                  $kidcount++;
+                                }
+                                tng_free_result($children);
+                              }
+                              ?>
                               </td>
                             </tr>
                           </table>

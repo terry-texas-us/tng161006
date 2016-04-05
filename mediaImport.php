@@ -17,7 +17,7 @@ if ($assignedtree) {
 } else {
   $wherestr = "";
 }
-$treequery = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
 
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('mediaimport'));
@@ -53,7 +53,7 @@ $headSection->setTitle(uiTextSnippet('mediaimport'));
     $navList->appendItem([$allowMediaAdd, "admin_newmedia.php", uiTextSnippet('addnew'), "addmedia"]);
     $navList->appendItem([$allowMediaEdit, "admin_ordermediaform.php", uiTextSnippet('text_sort'), "sortmedia"]);
     $navList->appendItem([$allowMediaEdit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-//    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
+    //    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
     $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
     echo $navList->build("import");
     ?>

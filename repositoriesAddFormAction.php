@@ -28,7 +28,7 @@ $phone = addslashes($phone);
 $email = addslashes($email);
 $www = addslashes($www);
 
-$newdate = date("Y-m-d H:i:s", time() + (3600 * $time_offset));
+$newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
 
 if ($address1 || $address2 || $city || $state || $zip || $country || $phone || $email || $www) {
   $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, gedcom, phone, email, www)  VALUES(\"$address1\", \"$address2\", \"$city\", \"$state\", \"$zip\", \"$country\", \"$tree\", \"$phone\", \"$email\", \"$www\")";

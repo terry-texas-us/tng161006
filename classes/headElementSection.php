@@ -2,7 +2,7 @@
 
 require_once 'scriptsManager.php';
 
-class headElementSection {
+class HeadElementSection {
 
   protected $out;
 
@@ -10,7 +10,7 @@ class headElementSection {
   private $title = '';
   
   public function __construct($siteName) {
-    headElementSection::$siteName = $siteName;
+    HeadElementSection::$siteName = $siteName;
   }
   
   public function setTitle($title) {
@@ -18,7 +18,7 @@ class headElementSection {
   }
   
   public function build($flags, $id, $sessionCharset) { 
-    $siteName = headElementSection::$siteName;
+    $siteName = HeadElementSection::$siteName;
     $this->out = "<head>\n";
     if ($sessionCharset) {
       $this->out .= "<meta charset=\"$sessionCharset\">\n";

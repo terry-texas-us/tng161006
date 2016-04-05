@@ -16,7 +16,7 @@ $gotfamily = array();
 $righttree = checktree($tree);
 $ldsOK = determineLDSRights();
 
-$query = "SELECT disallowgedcreate, email, owner FROM $trees_table WHERE gedcom = \"$tree\"";
+$query = "SELECT disallowgedcreate, email, owner FROM $treesTable WHERE gedcom = \"$tree\"";
 $treeresult = tng_query($query);
 $treerow = tng_fetch_assoc($treeresult);
 if ($treerow['disallowgedcreate'] && (!$allow_ged || !$righttree)) {

@@ -32,7 +32,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
         </tr>
       </thead>
       <?php
-      $query = "SELECT lastimportdate, treename, secret FROM $trees_table WHERE gedcom = \"$tree\"";
+      $query = "SELECT lastimportdate, treename, secret FROM $treesTable WHERE gedcom = \"$tree\"";
       $result = tng_query($query);
       $treerow = tng_fetch_array($result, 'assoc');
       $lastimportdate = $treerow['lastimportdate'];
@@ -233,7 +233,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
 
         $importtime = strtotime($lastimportdate);
         if (substr($lastimport, 11, 8) != "00:00:00") {
-          $importtime += ($time_offset * 3600);
+          $importtime += ($timeOffset * 3600);
         }
         $importdate = strftime("%d %b %Y %H:%M:%S", $importtime);
 

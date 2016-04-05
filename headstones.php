@@ -264,12 +264,12 @@ if ($location) {
         $query = "SELECT medialinkID, $medialinks_table.personID as personID, people.personID as personID2, familyID, people.living as living, people.private as private, people.branch as branch,
           husband, wife, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname,
           people.prefix as prefix, people.suffix as suffix, nameorder, $medialinks_table.gedcom as gedcom, treename, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID,reponame, deathdate, burialdate, linktype
-          FROM ($medialinks_table, $trees_table)
+          FROM ($medialinks_table, $treesTable)
           LEFT JOIN $people_table AS people ON ($medialinks_table.personID = people.personID AND $medialinks_table.gedcom = people.gedcom)
           LEFT JOIN $families_table ON ($medialinks_table.personID = $families_table.familyID AND $medialinks_table.gedcom = $families_table.gedcom)
           LEFT JOIN $sources_table ON ($medialinks_table.personID = $sources_table.sourceID AND $medialinks_table.gedcom = $sources_table.gedcom)
           LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID AND $medialinks_table.gedcom = $repositories_table.gedcom)
-          WHERE mediaID = \"{$hs['mediaID']}\" AND $medialinks_table.gedcom = $trees_table.gedcom $wherestr2 ORDER BY lastname, lnprefix, firstname, $medialinks_table.personID";
+          WHERE mediaID = \"{$hs['mediaID']}\" AND $medialinks_table.gedcom = $treesTable.gedcom $wherestr2 ORDER BY lastname, lnprefix, firstname, $medialinks_table.personID";
 
         $presult = tng_query($query);
         $hslinktext = "";

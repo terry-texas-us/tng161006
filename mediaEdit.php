@@ -50,7 +50,7 @@ if ($assignedtree) {
 } else {
   $wherestr = "";
 }
-$treequery = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
 $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
 $treenum = 0;
 
@@ -66,7 +66,7 @@ $query = "SELECT $medialinks_table.medialinkID as mlinkID, $medialinks_table.per
     husbpeople.personID as hpersonID, husbpeople.firstname as hfirstname, husbpeople.lnprefix as hlnprefix, husbpeople.lastname as hlastname, husbpeople.prefix as hprefix, husbpeople.suffix as hsuffix, husbpeople.nameorder as hnameorder,
     sourceID, sources.title, repositories.repoID as repoID, reponame, defphoto, linktype, dontshow, people.living, people.private, $families_table.living as fliving, $families_table.private as fprivate
     FROM $medialinks_table
-    LEFT JOIN $trees_table as trees ON $medialinks_table.gedcom = trees.gedcom
+    LEFT JOIN $treesTable as trees ON $medialinks_table.gedcom = trees.gedcom
     LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID AND $medialinks_table.gedcom = people.gedcom
     LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID AND $medialinks_table.gedcom = $families_table.gedcom
     LEFT JOIN $sources_table AS sources ON $medialinks_table.personID = sources.sourceID AND $medialinks_table.gedcom = sources.gedcom
@@ -420,25 +420,24 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                   <td>
                     <select name="status">
                       <option value=''>&nbsp;</option>
-                      <option value="notyetlocated"<?php if ($row['status'] == 'notyetlocated') {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('notyetlocated'); ?></option>
-                      <option value="located"<?php if ($row['status'] == 'located') {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('located'); ?></option>
-                      <option value="unmarked"<?php if ($row['status'] == 'unmarked') {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('unmarked'); ?></option>
-                      <option value="missing"<?php if ($row['status'] == 'missing') {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('missing'); ?></option>
-                      <option value="cremated"<?php if ($row['status'] == 'cremated') {
-                        echo " selected";
-                      } ?>><?php echo uiTextSnippet('cremated'); ?></option>
+                      <option value="notyetlocated"<?php if ($row['status'] == 'notyetlocated') {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('notyetlocated'); ?>
+                      </option>
+                      <option value="located"<?php if ($row['status'] == 'located') {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('located'); ?>
+                      </option>
+                      <option value="unmarked"<?php if ($row['status'] == 'unmarked') {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('unmarked'); ?>
+                      </option>
+                      <option value="missing"<?php if ($row['status'] == 'missing') {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('missing'); ?>
+                      </option>
+                      <option value="cremated"<?php if ($row['status'] == 'cremated') {echo " selected";} ?>>
+                        <?php echo uiTextSnippet('cremated'); ?>
+                      </option>
                     </select>
                   </td>
                 </tr>
-
                 <tr>
                   <td colspan='2'>
                     <input name='alwayson' type='checkbox' value='1'<?php if ($row['alwayson']) {echo " checked";} ?>> <?php echo uiTextSnippet('alwayson'); ?>

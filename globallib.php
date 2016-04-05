@@ -689,7 +689,7 @@ function getXrefNotes($noteref, $tree = "") {
 }
 
 function getDatePrefix($datestr) {
- $prefix = "";
+  $prefix = "";
   if ($datestr) {
     $datestr = strtoupper($datestr);
     $prefixes = [uiTextSnippet('BEF'), uiTextSnippet('AFT'), uiTextSnippet('ABT'), uiTextSnippet('CAL'), uiTextSnippet('EST')];
@@ -759,7 +759,7 @@ function age($row) {
 
   if ($row['living'] == "1" && !$datum_2 && !$datum_alt_2) {
     // Today
-    $datum_2_tr = date("Y-m-d", time() + (3600 * $time_offset));
+    $datum_2_tr = date("Y-m-d", time() + (3600 * $timeOffset));
   }
 
   // Only if one of the FROM and one of the TO dates are filled
@@ -980,15 +980,6 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
         $photoref = $photocheck;
         $gotfile = file_exists("$rootpath$photocheck");
       }
-//    } elseif ($gender && $tngconfig['usedefthumbs']) {
-//      if ($gender == 'M') {
-//        $photocheck = "img/male.jpg";
-//      } elseif ($gender == 'F') {
-//        $photocheck = "img/female.jpg";
-//      }
-//      $photoref = $photocheck;
-//      $gotfile = file_exists("$rootpath$photocheck");
-//    }
     }
   }
   if ($gotfile) {

@@ -8,25 +8,25 @@ class navList {
 
   private $data = []; // [ts] overloaded data
 
-    public function __construct($id) {
+  public function __construct($id) {
     $this->id = $id;
-    }
+  }
 
-    public function __set($name, $value) {
+  public function __set($name, $value) {
     $this->data[$name] = $value;
-    }
+  }
 
-    public function __get($name) {
+  public function __get($name) {
     if (array_key_exists($name, $this->data)) {
       $value = $this->data[$name];
     } else {
       $trace = debug_backtrace();
-      trigger_error('Undefined property via __get(): ' . $name . ' in ' . $trace[0]['file'] .
-        ' on line ' . $trace[0]['line'], E_USER_NOTICE);
+      trigger_error('Undefined property via __get(): ' . $name . ' in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_NOTICE);
       $value = null;
     }
     return $value;
-    }
+  }
+  
   public function appendItem($item) {
     array_push($this->list, $item);
   }

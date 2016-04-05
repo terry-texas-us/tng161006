@@ -10,8 +10,8 @@ set_time_limit(0);
 
 if (!$tngneedresults) {
   //get today's date
-  $tngdaymonth = date("d", time() + (3600 * $time_offset));
-  $tngmonth = date("m", time() + (3600 * $time_offset));
+  $tngdaymonth = date("d", time() + (3600 * $timeOffset));
+  $tngmonth = date("m", time() + (3600 * $timeOffset));
   $tngneedresults = 1;
 }
 
@@ -327,12 +327,12 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
         //if no event was selected, do them each in turn
 
         $query = "SELECT $people_table.ID, $people_table.personID, lastname, lnprefix, firstname, $people_table.living, $people_table.branch, prefix, suffix, nameorder, $place, $datefield, $people_table.gedcom, treename $familiessortdate $eventsfields
-          FROM ($people_table, $trees_table $eventsjoin) $familiesjoin
-          WHERE $people_table.gedcom = $trees_table.gedcom $allwhere ";
+          FROM ($people_table, $treesTable $eventsjoin) $familiesjoin
+          WHERE $people_table.gedcom = $treesTable.gedcom $allwhere ";
         if ($needfamilies) {
           $query .= "UNION ALL SELECT $people_table.ID, $people_table.personID, lastname, lnprefix, firstname, $people_table.living, $people_table.branch, prefix, suffix, nameorder, $place, $datefield, $people_table.gedcom, treename $familiessortdate $eventsfields
-            FROM ($people_table, $trees_table $eventsjoin) $familiesjoinw
-            WHERE $people_table.gedcom = $trees_table.gedcom $allwhere ";
+            FROM ($people_table, $treesTable $eventsjoin) $familiesjoinw
+            WHERE $people_table.gedcom = $treesTable.gedcom $allwhere ";
         }
         $query .= " ORDER BY DAY($datefieldtr), MONTH($datefieldtr), YEAR($datefieldtr), lastname, firstname LIMIT $newoffset" . $maxsearchresults;
 
@@ -343,15 +343,15 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
         if ($numrows == $maxsearchresults || $offsetplus > 1) {
           if ($needfamilies) {
             $query = "SELECT (SELECT count(personID)
-              FROM ($people_table, $trees_table $eventsjoin) $familiesjoin
-              WHERE $people_table.gedcom = $trees_table.gedcom $allwhere) +
+              FROM ($people_table, $treesTable $eventsjoin) $familiesjoin
+              WHERE $people_table.gedcom = $treesTable.gedcom $allwhere) +
               (SELECT count(personID)
-              FROM ($people_table, $trees_table $eventsjoin) $familiesjoinw
-              WHERE $people_table.gedcom = $trees_table.gedcom $allwhere) as pcount";
+              FROM ($people_table, $treesTable $eventsjoin) $familiesjoinw
+              WHERE $people_table.gedcom = $treesTable.gedcom $allwhere) as pcount";
           } else {
             $query = "SELECT count(personID) as pcount
-              FROM ($people_table, $trees_table $eventsjoin) $familiesjoin
-              WHERE $people_table.gedcom = $trees_table.gedcom $allwhere";
+              FROM ($people_table, $treesTable $eventsjoin) $familiesjoin
+              WHERE $people_table.gedcom = $treesTable.gedcom $allwhere";
           }
           $result2 = tng_query($query);
           $countrow = tng_fetch_assoc($result2);

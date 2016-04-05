@@ -20,7 +20,7 @@ $headSection->setTitle(uiTextSnippet('emailusers'));
     $navList->appendItem([true, "usersBrowse.php", uiTextSnippet('search'), "finduser"]);
     $navList->appendItem([$allowAdd, "usersAdd.php", uiTextSnippet('add'), "adduser"]);
     $navList->appendItem([$allowEdit, "usersReview.php", uiTextSnippet('review') . $revstar, "review"]);
-//    $navList->appendItem([true, "usersSendMail.php", uiTextSnippet('email'), "mail"]);
+    //    $navList->appendItem([true, "usersSendMail.php", uiTextSnippet('email'), "mail"]);
     echo $navList->build("mail");
     ?>
     <form id='users-send-mail' name='form1' action='usersSendMailFormAction.php' method='post'>
@@ -37,7 +37,7 @@ $headSection->setTitle(uiTextSnippet('emailusers'));
           <select id='gedcom' name='gedcom'>
             <option value=''></option>
             <?php
-            $query = "SELECT gedcom, treename FROM $trees_table ORDER BY treename";
+            $query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
             $treeresult = tng_query($query);
 
             while ($treerow = tng_fetch_assoc($treeresult)) {

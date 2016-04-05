@@ -5,7 +5,7 @@ function writelog($string)
   global $currentuser;
   global $currentuserdesc;
   global $_SERVER;
-  global $time_offset;
+  global $timeOffset;
   global $subroot;
   global $exusers;
 
@@ -70,7 +70,7 @@ function writelog($string)
             $updated = date("D d M Y h:i:s A", current_time('timestamp', 0));
           } else {
             // it's not a WordPress Environment
-            $updated = date("D d M Y h:i:s A", time() + (3600 * $time_offset));
+            $updated = date("D d M Y h:i:s A", time() + (3600 * $timeOffset));
           } //End of addition for time stamp discrepancies with WordPress
           array_unshift($lines, "$updated $string.\n");
           $towrite = join('', $lines);

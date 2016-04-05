@@ -49,13 +49,10 @@ class PasswordHash
 
   function get_random_bytes($count) {
     $output = '';
-    if (is_readable('/dev/urandom') &&
-            ($fh = fopen('/dev/urandom', 'rb'))
-    ) {
+    if (is_readable('/dev/urandom') && ($fh = fopen('/dev/urandom', 'rb'))) {
       $output = fread($fh, $count);
       fclose($fh);
     }
-
     if (strlen($output) < $count) {
       $output = '';
       for ($i = 0; $i < $count; $i += 16) {

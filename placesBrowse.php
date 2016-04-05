@@ -96,7 +96,7 @@ $treename = $tngconfig['places1tree'] ? "" : ", treename";
 $query = "SELECT ID, place, placelevel, longitude, latitude, zoom, $places_table.gedcom as gedcom $treename 
     FROM $places_table";
 if (!$tngconfig['places1tree']) {
-  $query .= " LEFT JOIN $trees_table ON $places_table.gedcom = $trees_table.gedcom";
+  $query .= " LEFT JOIN $treesTable ON $places_table.gedcom = $treesTable.gedcom";
 }
 $query .= " WHERE $allwhere ORDER BY place, $places_table.gedcom, ID LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
@@ -121,7 +121,7 @@ $headSection->setTitle(uiTextSnippet('places'));
     <?php
     echo $adminHeaderSection->build('places', $message);
     $navList = new navList('');
-//    $navList->appendItem([true, "placesBrowse.php", uiTextSnippet('browse'), "findplace"]);
+    //    $navList->appendItem([true, "placesBrowse.php", uiTextSnippet('browse'), "findplace"]);
     $navList->appendItem([$allowAdd, "placesAdd.php", uiTextSnippet('add'), "addplace"]);
     $navList->appendItem([$allowEdit && $allowDelete, "placesMerge.php", uiTextSnippet('merge'), "merge"]);
     $navList->appendItem([$allowEdit, "admin_geocodeform.php", uiTextSnippet('geocode'), "geo"]);
@@ -255,8 +255,7 @@ $headSection->setTitle(uiTextSnippet('places'));
       </table>
       <?php
       echo buildSearchResultPagination($totrows, "placesBrowse.php?searchstring=" . stripslashes($searchstring) . "&amp;exactmatch=$exactmatch&amp;noocords=$nocoords&amp;temples=$temples&amp;offset", $maxsearchresults, 5);
-    }
-    else {
+    } else {
       echo "</table>\n" . uiTextSnippet('norecords');
     }
     tng_free_result($result);

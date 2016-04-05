@@ -1,7 +1,7 @@
 <?php
 require 'tng_begin.php';
 
-$query = "SELECT gedcom, treename FROM $trees_table ORDER BY treename";
+$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $result = tng_query($query);
 $numtrees = tng_num_rows($result);
 
@@ -391,8 +391,8 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
   <script>
     function resetValues() {
       <?php if ((!$requirelogin || !$treerestrict || !$assignedtree) && $numtrees > 1) {
-      echo "  document.famsearch.tree.selectedIndex = 0;";
-    } ?>
+        echo "  document.famsearch.tree.selectedIndex = 0;";
+      } ?>
       document.famsearch.flnqualify.selectedIndex = 0;
       document.famsearch.ffnqualify.selectedIndex = 0;
       document.famsearch.mlnqualify.selectedIndex = 0;

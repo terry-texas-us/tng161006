@@ -2,7 +2,7 @@
 
 require_once 'headerElementSection.php';
 
-class adminHeaderElementSection extends headerElementSection {
+class AdminHeaderElementSection extends HeaderElementSection {
 
   public function __construct($id = 'admin') {
     parent::__construct($id);

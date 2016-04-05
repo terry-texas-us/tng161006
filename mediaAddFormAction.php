@@ -127,7 +127,7 @@ if (!$zoom) {
 
 $fileparts = pathinfo($path);
 $form = strtoupper($fileparts['extension']);
-$newdate = date("Y-m-d H:i:s", time() + (3600 * $time_offset));
+$newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
 $mediakey = $path ? "$usefolder/$path" : time();
 $query = "INSERT IGNORE INTO $media_table (mediatypeID,mediakey,gedcom,path,thumbpath,description,notes,width,height,datetaken,placetaken,owner,changedate,changedby,form,alwayson,map,abspath,status,cemeteryID,plot,showmap,linktocem,latitude,longitude,zoom,bodytext,usenl,newwindow,usecollfolder) VALUES (\"$mediatypeID\",\"$mediakey\",\"$tree\",\"$path\",\"$thumbpath\",\"$description\",\"$notes\",\"$width\",\"$height\",\"$datetaken\",\"$placetaken\",\"$owner\",\"$newdate\",\"$currentuser\",\"$form\",\"$alwayson\",\"$imagemap\",\"$abspath\",\"$status\",\"$cemeteryID\",\"$plot\",\"$showmap\",\"$linktocem\",\"$latitude\",\"$longitude\",\"$zoom\",\"$bodytext\",\"$usenl\",\"$newwindow\",\"$usecollfolder\")";
 $result = tng_query($query);

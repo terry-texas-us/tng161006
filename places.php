@@ -26,7 +26,7 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs)
   global $tree;
   global $people_table;
   global $families_table;
-  global $trees_table;
+  global $treesTable;
   global $offset;
   global $page;
   global $psearch;
@@ -54,7 +54,7 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs)
     $idtext = "familyid";
     $namefield = "family";
   }
-  $allwhere .= "$table.gedcom = $trees_table.gedcom";
+  $allwhere .= "$table.gedcom = $treesTable.gedcom";
   if ($tree) {
     $allwhere .= " AND $table.gedcom=\"$tree\"";
   }
@@ -113,7 +113,7 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs)
         $orderstr = "$datefieldtr DESC, p1lastname DESC, p2lastname DESC";
       }
       $query = "SELECT $families_table.ID, $families_table.familyID, $families_table.living, $families_table.private, $families_table.branch, p1.lastname as p1lastname, p2.lastname as p2lastname, $place, $datefield, $families_table.gedcom, treename
-        FROM ($families_table, $trees_table $eventsjoin) $peoplejoin1 $peoplejoin2
+        FROM ($families_table, $treesTable $eventsjoin) $peoplejoin1 $peoplejoin2
         WHERE $allwhere $allwhere2
         ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
     } elseif ($prefix == 'I') {
@@ -127,7 +127,7 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs)
         $orderstr = "$datefieldtr DESC, lastname DESC, firstname DESC";
       }
       $query = "SELECT $people_table.ID, $people_table.personID, lastname, lnprefix, firstname, $people_table.living, $people_table.private, $people_table.branch, prefix, suffix, nameorder, $place, $datefield, $people_table.gedcom, treename
-        FROM ($people_table, $trees_table $eventsjoin)
+        FROM ($people_table, $treesTable $eventsjoin)
         WHERE $allwhere $allwhere2
         ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
     }
@@ -137,7 +137,7 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs)
     //if results, do again w/o pagination to get total
     if ($numrows == $maxsearchresults || $offsetplus > 1) {
       $query = "SELECT count($idfield) as rcount
-        FROM ($table, $trees_table $eventsjoin)
+        FROM ($table, $treesTable $eventsjoin)
         WHERE $allwhere $allwhere2";
       $result2 = tng_query($query);
       $countrow = tng_fetch_assoc($result2);

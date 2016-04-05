@@ -478,7 +478,7 @@ echo "<table width=\"" . ($chartwidth + $lineoffset + 20) . "\" style=\"height:$
 <div id="addmorediv" style="display:none;">
 <?php
 echo "<span><br><br>";
-$query = "SELECT gedcom, treename FROM $trees_table ORDER BY treename";
+$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $treeresult = tng_query($query);
 $numrows = tng_num_rows($treeresult);
 $newtime = time();

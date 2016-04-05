@@ -76,7 +76,7 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
     <?php
     echo $adminHeaderSection->build('customeventtypes', $message);
     $navList = new navList('');
-//    $navList->appendItem([true, "eventtypesBrowse.php", uiTextSnippet('browse'), "findevent"]);
+    //    $navList->appendItem([true, "eventtypesBrowse.php", uiTextSnippet('browse'), "findevent"]);
     $navList->appendItem([$allowAdd, "eventtypesAdd.php", uiTextSnippet('add'), "addevent"]);
     echo $navList->build("findevent");
     ?>

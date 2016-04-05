@@ -42,7 +42,7 @@ function frmFiles() {
   global $tngconfig;
   global $folders;
 
-// [ts]  $datefmt = $tngconfig['preferEuro'] == "true" ? "d/m/Y/* h:i:s A*/" : "m/d/Y h:i:s A";
+  // [ts]  $datefmt = $tngconfig['preferEuro'] == "true" ? "d/m/Y/* h:i:s A*/" : "m/d/Y h:i:s A";
   $datefmt = $tngconfig['preferEuro'] == "true" ? "d/m/Y" : "m/d/Y";
   ?>
   <div id='filepicker'>
@@ -148,8 +148,9 @@ function frmFiles() {
                     array_pop($dirbreakdown);
                     array_pop($dirbreakdown);
                     $newsubdir = implode('/', $dirbreakdown) . '/';
-                    if ($newsubdir == '/')
-                      {$newsubdir = '';}
+                    if ($newsubdir == '/') {
+                      $newsubdir = '';
+                    }
                   }
                   ?>
                   <tr>

@@ -19,7 +19,7 @@ if ($assignedtree) {
 } else {
   $wherestr = "";
 }
-$query = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+$query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
 $result = tng_query($query);
 
 $revstar = checkReview('I');
@@ -36,7 +36,7 @@ $headSection->setTitle(uiTextSnippet('addnewperson'));
     echo $adminHeaderSection->build('people-addnewperson', $message);
     $navList = new navList('');
     $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
-//    $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
+    //    $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
     $navList->appendItem([$allowEdit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
     $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("addperson");
@@ -248,7 +248,7 @@ function trimCheckPersonRequired() {
   $dispid = "";
   $dispname = "";
 
-  getBranchInfo($assignedtree, $trees_table, $branches_table, $dispid, $dispname);
+  getBranchInfo($assignedtree, $treesTable, $branches_table, $dispid, $dispname);
   
   echo $dispid;
   echo $dispname;

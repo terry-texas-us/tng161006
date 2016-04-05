@@ -642,9 +642,9 @@ $query = "CREATE TABLE $tlevents_table (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $tlevents_table);
 
-$query = "DROP TABLE IF EXISTS $trees_table";
+$query = "DROP TABLE IF EXISTS $treesTable";
 $result = performQuery($query);
-$query = "CREATE TABLE $trees_table (
+$query = "CREATE TABLE $treesTable (
     gedcom VARCHAR(20) NOT NULL,
     treename VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
@@ -663,7 +663,7 @@ $query = "CREATE TABLE $trees_table (
     importfilename VARCHAR(100) NOT NULL,
     PRIMARY KEY (gedcom)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $trees_table);
+$result = performQuery($query, $treesTable);
 
 $query = "DROP TABLE IF EXISTS $users_table";
 $result = performQuery($query);

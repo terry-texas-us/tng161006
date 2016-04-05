@@ -24,7 +24,7 @@ $headSection->setTitle(uiTextSnippet('addnewtree'));
     $navList = new navList('');
     $allow_add_tree = $assignedtree ? 0 : $allowAdd;
     $navList->appendItem([true, 'treesBrowse.php', uiTextSnippet('search'), 'findtree']);
-//    $navList->appendItem([$allow_add_tree, "treesAdd.php", uiTextSnippet('add'), "addtree"]);
+    //    $navList->appendItem([$allow_add_tree, "treesAdd.php", uiTextSnippet('add'), "addtree"]);
     echo $navList->build("addtree");
     ?>
     <?php require '_/components/php/newTreeForm.php'; ?>

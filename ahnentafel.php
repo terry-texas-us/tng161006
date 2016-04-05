@@ -385,7 +385,6 @@ $headSection->setTitle($row['name']);
               echo "</ol>\n</td></tr></table>\n";
               tng_free_result($result2);
             }
-  //      if(!$is_mozilla)
             echo "</td></tr></table>";
             echo "<br clear='all'></li>\n";
           }

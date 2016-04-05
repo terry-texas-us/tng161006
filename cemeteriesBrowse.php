@@ -95,7 +95,7 @@ $headSection->setTitle(uiTextSnippet('cemeteries'));
     <?php
     echo $adminHeaderSection->build('cemeteries', $message);
     $navList = new navList('');
-//    $navList->appendItem([true, "cemeteriesBrowse.php", uiTextSnippet('browse'), "findcem"]);
+    //    $navList->appendItem([true, "cemeteriesBrowse.php", uiTextSnippet('browse'), "findcem"]);
     $navList->appendItem([$allowAdd, "cemeteriesAdd.php", uiTextSnippet('add'), "addcemetery"]);
     echo $navList->build("findcem");
     ?>

@@ -89,9 +89,9 @@ function addCriteria($field, $value, $operator)
 }
 
 if ($tree) {
-  $allwhere = "$people_table.gedcom = \"$tree\" AND $people_table.gedcom = $trees_table.gedcom ";
+  $allwhere = "$people_table.gedcom = \"$tree\" AND $people_table.gedcom = $treesTable.gedcom ";
 } else {
-  $allwhere = "$people_table.gedcom = $trees_table.gedcom ";
+  $allwhere = "$people_table.gedcom = $treesTable.gedcom ";
 }
 if ($assignedbranch) {
   $allwhere .= " AND $people_table.branch LIKE \"%$assignedbranch%\"";
@@ -131,7 +131,7 @@ if ($nokids) {
   $nokidhaving = "HAVING ChildrenCount = 0 ";
   $nokidgroup = "GROUP BY $people_table.personID, $people_table.lastname, $people_table.firstname, $people_table.firstname, $people_table.lnprefix, "
           . "$people_table.prefix, $people_table.suffix, $people_table.nameorder, $people_table.birthdate, birthyear, $people_table.birthplace, $people_table.altbirthdate, altbirthyear, "
-          . "$people_table.altbirthplace, $people_table.gedcom, $trees_table.treename ";
+          . "$people_table.altbirthplace, $people_table.gedcom, $treesTable.treename ";
   $nokidselect = ", SUM((childrenH.familyID is not NULL) + (childrenW.familyID is not NULL)) AS ChildrenCount ";
   $nokidgroup2 = "GROUP BY $people_table.personID, $people_table.lastname, $people_table.firstname, $people_table.firstname, $people_table.lnprefix ";
 } else {
@@ -145,7 +145,7 @@ $query = "SELECT $people_table.ID, $people_table.personID, lastname, firstname, 
   . "altbirthdate, LPAD(SUBSTRING_INDEX(altbirthdate, ' ', -1),4,'0') as altbirthyear, altbirthplace, "
   . "deathdate, LPAD(SUBSTRING_INDEX(deathdate, ' ', -1),4,'0') as deathyear, deathplace, "
   . "$people_table.gedcom as gedcom, treename $nokidselect "
-  . "FROM ($people_table, $trees_table) $nokidjoin $noparentjoin $nospousejoin "
+  . "FROM ($people_table, $treesTable) $nokidjoin $noparentjoin $nospousejoin "
   . "WHERE $allwhere $nokidgroup $nokidhaving "
   . "ORDER BY lastname, lnprefix, firstname, birthyear, altbirthyear LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
@@ -154,13 +154,13 @@ $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
   if ($nokids) {
     $query = "SELECT $people_table.ID, $people_table.personID, lastname, firstname, lnprefix $nokidselect "
-            . "FROM ($people_table, $trees_table) $nokidjoin $noparentjoin $nospousejoin "
+            . "FROM ($people_table, $treesTable) $nokidjoin $noparentjoin $nospousejoin "
             . "WHERE $allwhere $nokidgroup2 $nokidhaving";
     $result2 = tng_query($query);
     $totrows = tng_num_rows($result2);
   } else {
     $query = "SELECT count($people_table.personID) as pcount "
-            . "FROM ($people_table, $trees_table) $noparentjoin $nospousejoin "
+            . "FROM ($people_table, $treesTable) $noparentjoin $nospousejoin "
             . "WHERE $allwhere";
     $result2 = tng_query($query);
     $row = tng_fetch_assoc($result2);
@@ -183,7 +183,7 @@ $headSection->setTitle(uiTextSnippet('people'));
     <?php
     echo $adminHeaderSection->build('people', $message);
     $navList = new navList('people');
-//    $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
+    //    $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
     $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
     $navList->appendItem([$allowEdit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
     $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
@@ -215,9 +215,9 @@ $headSection->setTitle(uiTextSnippet('people'));
               <th><?php echo uiTextSnippet('name'); ?></th>
               <th><?php echo uiTextSnippet('events'); ?></th>
               <?php 
-//              if ($numtrees > 1) {
-//                echo "<th>" . uiTextSnippet('tree') . "</th>\n";
-//              }
+              // if ($numtrees > 1) {
+              //   echo "<th>" . uiTextSnippet('tree') . "</th>\n";
+              // }
               ?>
             </tr>
           </thead>
@@ -275,9 +275,9 @@ $headSection->setTitle(uiTextSnippet('people'));
                 echo "{$row['personID']}\n";
               echo "</td>\n";
               echo "<td>$birthdate, $birthplace<br>$deathdate, $deathplace</td>\n";
-//              if ($numtrees > 1) {
-//                echo "<td>{$row['treename']}</td>\n";
-//              }
+              // if ($numtrees > 1) {
+              //   echo "<td>{$row['treename']}</td>\n";
+              // }
               echo "</tr>\n";
             }
             ?>

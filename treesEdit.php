@@ -11,7 +11,7 @@ if (!$allowEdit || ($assignedtree && $assignedtree != $tree)) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-$query = "SELECT * FROM $trees_table WHERE gedcom = \"$tree\"";
+$query = "SELECT * FROM $treesTable WHERE gedcom = \"$tree\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -60,7 +60,7 @@ $headSection->setTitle(uiTextSnippet('modifytree'));
     $allow_add_tree = $assignedtree ? 0 : $allowAdd;
     $navList->appendItem([true, 'treesBrowse.php', uiTextSnippet('search'), "findtree"]);
     $navList->appendItem([$allow_add_tree, 'treesAdd.php', uiTextSnippet('add'), "addtree"]);
-//    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
+    //    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <form name='form1' action="treesEditFormAction.php" method='post' onSubmit="return validateForm();">

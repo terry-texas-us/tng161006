@@ -12,7 +12,7 @@ require 'adminlog.php';
 require 'prefixes.php';
 
 if (!$allow_ged && $assignedtree) {
-  $query = "SELECT disallowgedcreate FROM $trees_table WHERE gedcom = \"$assignedtree\"";
+  $query = "SELECT disallowgedcreate FROM $treesTable WHERE gedcom = \"$assignedtree\"";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   $disallowgedcreate = $row['disallowgedcreate'];
@@ -1429,7 +1429,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
     $maxgcgen = 999;
 
     if (!$found) {
-      $query = "SELECT email, owner FROM $trees_table WHERE gedcom = \"$tree\"";
+      $query = "SELECT email, owner FROM $treesTable WHERE gedcom = \"$tree\"";
       $treeresult = tng_query($query);
       $treerow = tng_fetch_assoc($treeresult);
       tng_free_result($treeresult);

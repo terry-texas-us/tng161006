@@ -36,7 +36,7 @@ if ($branchsearch) {
 }
 
 $query = "SELECT b.branch, b.gedcom, b.description, treename, personID
-    FROM ($branches_table as b, $trees_table as t)
+    FROM ($branches_table as b, $treesTable as t)
     WHERE b.gedcom = t.gedcom $wherestr
     ORDER BY b.description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
@@ -54,7 +54,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 
 $numrowsplus = $numrows + $offset;
 
-$treequery = "SELECT count(gedcom) as treecount FROM $trees_table";
+$treequery = "SELECT count(gedcom) as treecount FROM $treesTable";
 $treeresult = tng_query($treequery);
 $treerow = tng_fetch_assoc($treeresult);
 $numtrees = $treerow['treecount'];

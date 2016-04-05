@@ -14,8 +14,7 @@ preparebookmark($logstring);
 
 $ucharset = strtoupper($session_charset);
 function substr_unicode($str, $start, $len = null) {
-    return join("", array_slice(
-        preg_split("//u", $str, -1, PREG_SPLIT_NO_EMPTY), $start, $len));
+    return join("", array_slice(preg_split("//u", $str, -1, PREG_SPLIT_NO_EMPTY), $start, $len));
 }
 
 $flags['styles'] = "<link href=\"css/calendar.css\" rel=\"stylesheet\" type=\"text/css\" />\n";
@@ -79,8 +78,9 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     // Query for individual/person events this month
     $select = array(); $where = array();
     foreach ($calIndEvent as $key => $val) {
-      if (in_array($key, $hideEvents))
-        {continue;}
+      if (in_array($key, $hideEvents)) {
+        continue;
+      }
       $select[] = $key . "date";
       $select[] = $key . "datetr";
       $select[] = $key . "place";
@@ -88,79 +88,78 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     }
 
     if (! empty($where)) {
-    $sql = "SELECT personID, gedcom, firstname, nickname, lnprefix, lastname, suffix, living, branch, private, " . implode (', ', $select) . "
-      FROM $people_table
-      WHERE (" . implode(' OR ', $where) . ")";
+      $sql = "SELECT personID, gedcom, firstname, nickname, lnprefix, lastname, suffix, living, branch, private, " . implode (', ', $select) . "
+        FROM $people_table
+        WHERE (" . implode(' OR ', $where) . ")";
 
-    if ($showLiving == '1') {
-      $sql .= ' AND living = 1';
-    } elseif ($showLiving == '0') {
-      $sql .= ' AND living = 0';
-    }
+      if ($showLiving == '1') {
+        $sql .= ' AND living = 1';
+      } elseif ($showLiving == '0') {
+        $sql .= ' AND living = 0';
+      }
 
-    if ($thisTree && $thisTree != '-x--all--x-') {
-      $sql .= " AND gedcom = '$thisTree'";
-      $righttree = checktree($thisTree);
-    }
-    else
-      {$righttree = -1;}
+      if ($thisTree && $thisTree != '-x--all--x-') {
+        $sql .= " AND gedcom = '$thisTree'";
+        $righttree = checktree($thisTree);
+      }
+      else
+        {$righttree = -1;}
 
-    $result = tng_query($sql);
-    # BREAK
-    if (!$result) {
-      echo "Err 1<br>$sql<br>";
-      echo tng_error();
-      exit;
-    }
+      $result = tng_query($sql);
+      # BREAK
+      if (!$result) {
+        echo "Err 1<br>$sql<br>";
+        echo tng_error();
+        exit;
+      }
 
+      // Make sure data is normalized
+      if (tng_num_rows($result) > 0) {
+        while ($row = tng_fetch_assoc($result)) {
 
-    // Make sure data is normalized
-    if (tng_num_rows($result) > 0) {
-      while ($row = tng_fetch_assoc($result)) {
+          $rights = determineLivingPrivateRights($row, $righttree);
+          $row['allow_living'] = $rights['living'];
+          $row['allow_private'] = $rights['private'];
+          if(($row['living'] && !$row['allow_living']) || ($row['private'] && !$row['allow_private'])) {
+            continue;
+          } else {
+            $longname = getName($row);
+            if ($ucharset == "UTF-8") {
+              $name = (mb_strlen($longname) > $truncateNameAfter)
+                ? substr_unicode($longname, 0, $truncateNameAfter) . '...'
+                : $longname;
+            } else {
+              $name = (strlen($longname) > $truncateNameAfter)
+                ? substr($longname, 0, $truncateNameAfter) . '...'
+                : $longname;
+            }
+            foreach ($calIndEvent as $key => $val) {
+              if ($val == null) {
+                continue;
+              }
+              $field = $key . 'datetr';
+              if (isset($row[$field])) {
+                $date = substr($row[$field], 5);
+                $html = '<img src="' . 'img/' . $val . '" class="calIcon" alt=""><a href="peopleShowPerson.php?personID=' . $row['personID'] . '&amp;tree=' . $row['gedcom'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
 
-        $rights = determineLivingPrivateRights($row, $righttree);
-        $row['allow_living'] = $rights['living'];
-        $row['allow_private'] = $rights['private'];
-        if(($row['living'] && !$row['allow_living']) || ($row['private'] && !$row['allow_private']))
-          {continue;}
-        else {
-          $longname = getName($row);
-          if($ucharset == "UTF-8") {
-            $name = (mb_strlen($longname) > $truncateNameAfter)
-              ? substr_unicode($longname, 0, $truncateNameAfter) . '...'
-              : $longname;
-          }
-          else {
-            $name = (strlen($longname) > $truncateNameAfter)
-              ? substr($longname, 0, $truncateNameAfter) . '...'
-              : $longname;
-          }
-
-          foreach ($calIndEvent as $key => $val) {
-            if ($val == null)
-              {continue;}
-
-            $field = $key . 'datetr';
-            if (isset($row[$field])) {
-              $date = substr($row[$field], 5);
-              $html = '<img src="' . 'img/' . $val . '" class="calIcon" alt=""><a href="peopleShowPerson.php?personID=' . $row['personID'] . '&amp;tree=' . $row['gedcom'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
-
-              if(strpos($date,"-00"))
-                {$html = '<span>' . $html . '</span>';}
-              $events[$date][$key][$row['gedcom']][$row['personID']] = $html;
+                if (strpos($date,"-00")) {
+                  $html = '<span>' . $html . '</span>';
+                }
+                $events[$date][$key][$row['gedcom']][$row['personID']] = $html;
+              }
             }
           }
         }
       }
-    }
     }
 
 
     // Query for family events this month
     $select = array(); $where = array();
     foreach ($calFamEvent as $key => $val) {
-      if (in_array($key, $hideEvents))
-        {continue;}
+      if (in_array($key, $hideEvents)) {
+        continue;
+      }
       $select[] = $families_table . '.' . $key . 'date';
       $select[] = $families_table . '.' . $key . 'datetr';
       $select[] = $families_table . '.' . $key . 'place';
@@ -168,173 +167,169 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     }
 
     if (! empty($where)) {
-    $sql = "SELECT familyID, gedcom, husband, wife, living, private, " . implode (', ', $select) . "
-      FROM $families_table
-      WHERE (" . implode(' OR ', $where) . ")";
+      $sql = "SELECT familyID, gedcom, husband, wife, living, private, " . implode (', ', $select) . "
+        FROM $families_table
+        WHERE (" . implode(' OR ', $where) . ")";
 
-    if ($showLiving == '1') {
-      $sql .= ' AND living = 1';
-    } elseif ($showLiving == '0') {
-      $sql .= ' AND living = 0';
-    }
+      if ($showLiving == '1') {
+        $sql .= ' AND living = 1';
+      } elseif ($showLiving == '0') {
+        $sql .= ' AND living = 0';
+      }
 
-    if ($thisTree && $thisTree != '-x--all--x-')
-      {$sql .= " AND gedcom = '$thisTree'";}
+      if ($thisTree && $thisTree != '-x--all--x-') {
+        $sql .= " AND gedcom = '$thisTree'";
+      }
 
-    $result = tng_query($sql);
-    # BREAK
-    if (!$result) {
-      echo "Err 2<br>";
-      echo tng_error();
-      exit;
-    }
+      $result = tng_query($sql);
+      # BREAK
+      if (!$result) {
+        echo "Err 2<br>";
+        echo tng_error();
+        exit;
+      }
 
 
-    // Make sure data is normalized
-    if (tng_num_rows($result) > 0) {
-      while ($row = tng_fetch_assoc($result)) {
+      // Make sure data is normalized
+      if (tng_num_rows($result) > 0) {
+        while ($row = tng_fetch_assoc($result)) {
 
-        $rights = determineLivingPrivateRights($row, $righttree);
-        $row['allow_living'] = $rights['living'];
-        $row['allow_private'] = $rights['private'];
-        if(($row['living'] && !$row['allow_living'] && $nonames == 1) || ($row['private'] && !$row['allow_private'] && $tngconfig['nnpriv'] == 1))
-          {continue;}
-        else {
-          $longname = getFamilyName($row);
-          if($ucharset == "UTF-8") {
-            $name = (mb_strlen($longname) > $truncateNameAfter)
-              ? substr_unicode($longname, 0, $truncateNameAfter) . '...'
-              : $longname;
-          }
-          else {
-            $name = (strlen($longname) > $truncateNameAfter)
-              ? substr($longname, 0, $truncateNameAfter) . '...'
-              : $longname;
-          }
+          $rights = determineLivingPrivateRights($row, $righttree);
+          $row['allow_living'] = $rights['living'];
+          $row['allow_private'] = $rights['private'];
+          if(($row['living'] && !$row['allow_living'] && $nonames == 1) || ($row['private'] && !$row['allow_private'] && $tngconfig['nnpriv'] == 1)) {
+            continue;
+          } else {
+            $longname = getFamilyName($row);
+            if($ucharset == "UTF-8") {
+              $name = (mb_strlen($longname) > $truncateNameAfter)
+                ? substr_unicode($longname, 0, $truncateNameAfter) . '...'
+                : $longname;
+            } else {
+              $name = (strlen($longname) > $truncateNameAfter)
+                ? substr($longname, 0, $truncateNameAfter) . '...'
+                : $longname;
+            }
+            foreach ($calFamEvent as $key => $val) {
+              if ($val == null) {
+                continue;
+              }
+              $field = $key . 'datetr';
+              if (isset($row[$field])) {
+                $date = substr($row[$field], 5);
+                $html = '<img src="' . 'img/' . $val . '" class="calIcon" alt=""><a href="familiesShowFamily.php?familyID=' . $row['familyID'] . '&amp;tree=' . $row['gedcom'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
 
-          foreach ($calFamEvent as $key => $val) {
-            if ($val == null)
-              {continue;}
-
-            $field = $key . 'datetr';
-            if (isset($row[$field])) {
-              $date = substr($row[$field], 5);
-              $html = '<img src="' . 'img/' . $val . '" class="calIcon" alt=""><a href="familiesShowFamily.php?familyID=' . $row['familyID'] . '&amp;tree=' . $row['gedcom'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
-
-              if(strpos($date,"-00"))
-                {$html = '<span>' . $html . '</span>';}
-              $events[$date][$key][$row['gedcom']][$row['familyID']] = $html;
+                if(strpos($date,"-00")) {
+                  $html = '<span>' . $html . '</span>';
+                }
+                $events[$date][$key][$row['gedcom']][$row['familyID']] = $html;
+              }
             }
           }
         }
       }
     }
-    }
-
 
     // Query for custom events this month
     $where = array();
     foreach ($calEvent as $key => $val) {
-      if (in_array($key, $hideEvents))
-        {continue;}
+      if (in_array($key, $hideEvents)) {
+        continue;
+      }
       $where[] = "$eventtypes_table.tag = '$key'";
     }
-
     if (! empty($where)) {
-    $sql = "SELECT gedcom, persfamID, tag, display, eventdate, eventdatetr, eventplace
-      FROM $events_table, $eventtypes_table
-      WHERE (" . implode(' OR ', $where) . ") AND $eventtypes_table.eventtypeID = $events_table.eventtypeID AND eventdatetr LIKE '%-$thisMonth-%'";
+      $sql = "SELECT gedcom, persfamID, tag, display, eventdate, eventdatetr, eventplace
+        FROM $events_table, $eventtypes_table
+        WHERE (" . implode(' OR ', $where) . ") AND $eventtypes_table.eventtypeID = $events_table.eventtypeID AND eventdatetr LIKE '%-$thisMonth-%'";
 
-    if ($thisTree != '-x--all--x-')
-      {$sql .= " AND gedcom = '$thisTree'";}
+      if ($thisTree != '-x--all--x-') {
+        $sql .= " AND gedcom = '$thisTree'";
+      }
+      $result = tng_query($sql);
+      # BREAK
+      if (!$result) {
+        echo "Err 3<br>";
+        echo tng_error();
+        exit;
+      }
 
-    $result = tng_query($sql);
-    # BREAK
-    if (!$result) {
-      echo "Err 3<br>";
-      echo tng_error();
-      exit;
-    }
+      // Make sure the data is normalized
+      if (tng_num_rows($result) > 0) {
+        while ($row = tng_fetch_assoc($result)) {
 
+          // Ugh... who did this happen to?
+          $isFam = 0;
 
-    // Make sure the data is normalized
-    if (tng_num_rows($result) > 0) {
-      while ($row = tng_fetch_assoc($result)) {
+          if ($row['persfamID']{0} == 'I') {
+            $sql = "SELECT * FROM $people_table WHERE personID = '" . $row['persfamID'] . "'";
+            if ($showLiving == '1') {
+              $sql .= ' AND living = 1';
+            } elseif ($showLiving == '0') {
+              $sql .= ' AND living = 0';
+            }
+            if ($thisTree != '-x--all--x-') {
+              $sql .= " AND gedcom = '$thisTree'";
+            }
+            $result2 = tng_query($sql);
 
-        // Ugh... who did this happen to?
-        $isFam = 0;
+            # BREAK
+            if (!$result2) {
+              echo "Err 4<br>";
+              echo tng_error();
+              exit;
+            }
+            if (tng_num_rows($result2) < 1) {
+              continue;
+            }
+            $longname = htmlentities(getName(tng_fetch_assoc($result2)),ENT_QUOTES);
 
-        if ($row['persfamID']{0} == 'I') {
-          $sql = "SELECT * FROM $people_table WHERE personID = '" . $row['persfamID'] . "'";
-          if ($showLiving == '1') {
-            $sql .= ' AND living = 1';
-          } elseif ($showLiving == '0') {
-            $sql .= ' AND living = 0';
-          }
+          } elseif ($row['persfamID']{0} == 'F') {
+            $sql = "SELECT * FROM $families_table WHERE familyID = '" . $row['persfamID'] . "'";
+            if ($showLiving == '1') {
+              $sql .= ' AND living = 1';
+            } elseif ($showLiving == '0') {
+              $sql .= ' AND living = 0';
+            }
+            if ($thisTree != '-x--all--x-') {
+              $sql .= " AND gedcom = '$thisTree'";
+            }
+            $result3 = tng_query($sql);
 
-          if ($thisTree != '-x--all--x-')
-            {$sql .= " AND gedcom = '$thisTree'";}
+            # BREAK
+            if (!$result3) {
+              echo "Err 5<br>";
+              echo tng_error();
+              exit;
+            }
+            if (tng_num_rows($result3) < 1) {
+              continue;
+            }
+            $longname = htmlentities(getFamilyName(tng_fetch_assoc($result3)),ENT_QUOTES);
+            $isFam = 1;
 
-          $result2 = tng_query($sql);
-
-          # BREAK
-          if (!$result2) {
-            echo "Err 4<br>";
-            echo tng_error();
-            exit;
-          }
-
-          if (tng_num_rows($result2) < 1)
-            {continue;}
-          $longname = htmlentities(getName(tng_fetch_assoc($result2)),ENT_QUOTES);
-
-        } elseif ($row['persfamID']{0} == 'F') {
-          $sql = "SELECT * FROM $families_table WHERE familyID = '" . $row['persfamID'] . "'";
-          if ($showLiving == '1') {
-            $sql .= ' AND living = 1';
-          } elseif ($showLiving == '0') {
-            $sql .= ' AND living = 0';
-          }
-
-          if ($thisTree != '-x--all--x-')
-            {$sql .= " AND gedcom = '$thisTree'";}
-
-          $result3 = tng_query($sql);
-
-          # BREAK
-          if (!$result3) {
-            echo "Err 5<br>";
-            echo tng_error();
-            exit;
-          }
-
-          if (tng_num_rows($result3) < 1)
-            {continue;}
-          $longname = htmlentities(getFamilyName(tng_fetch_assoc($result3)),ENT_QUOTES);
-          $isFam = 1;
-
-        } else {
-          continue;
-        }
-
-        $name = (strlen($longname) > $truncateNameAfter)
-          ? substr($longname, 0, $truncateNameAfter) . '...'
-          : $longname;
-
-        if (isset($row['eventdatetr'])) {
-          $tag = $row['tag'];
-
-          if ($isFam) {
-            $html = '<img src="' . 'img/' . $calEvent[$tag] . '" class="calIcon" alt=""><a href="familiesShowFamily.php?familyID=' . $row['persfamID'] . '&amp;tree=' . $row['gedcom'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
           } else {
-            $html = '<img src="' . 'img/' . $calEvent[$tag] . '" class="calIcon" alt=""><a href="peopleShowPerson.php?personID=' . $row['persfamID'] . '&amp;tree=' . $row['gedcom'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
+            continue;
           }
 
-          $date = substr($row['eventdatetr'], 5);
-          $events[$date][$tag][$row['gedcom']][$row['persfamID']] = $html;
+          $name = (strlen($longname) > $truncateNameAfter)
+            ? substr($longname, 0, $truncateNameAfter) . '...'
+            : $longname;
+
+          if (isset($row['eventdatetr'])) {
+            $tag = $row['tag'];
+
+            if ($isFam) {
+              $html = '<img src="' . 'img/' . $calEvent[$tag] . '" class="calIcon" alt=""><a href="familiesShowFamily.php?familyID=' . $row['persfamID'] . '&amp;tree=' . $row['gedcom'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
+            } else {
+              $html = '<img src="' . 'img/' . $calEvent[$tag] . '" class="calIcon" alt=""><a href="peopleShowPerson.php?personID=' . $row['persfamID'] . '&amp;tree=' . $row['gedcom'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
+            }
+
+            $date = substr($row['eventdatetr'], 5);
+            $events[$date][$tag][$row['gedcom']][$row['persfamID']] = $html;
+          }
         }
       }
-    }
     }
 
     $args = "?living=$showLiving&amp;hide=" . implode(',', $hideEvents) . "&amp;tree=$thisTree&amp;";
@@ -403,9 +398,9 @@ $headSection->setTitle(uiTextSnippet('calendar'));
 
     echo "</tr><tr>\n";
 
-    if ($startOfWeek > $startDay)
-      {$startOfWeek -= 7;}
-
+    if ($startOfWeek > $startDay) {
+      $startOfWeek -= 7;
+    }
     $dayInWeek = 0;
 
     for ($i = $startOfWeek; $i < ($daysInMonth + $startDay); $i++) {
@@ -426,8 +421,9 @@ $headSection->setTitle(uiTextSnippet('calendar'));
         if (array_key_exists($thisDate, $events)) {
           $j = 0;
           foreach ( array_keys($events[$thisDate]) as $event) {
-            if ($j > $truncateDateAfter)
-              {continue;}
+            if ($j > $truncateDateAfter) {
+              continue;
+            }
             foreach ( array_keys($events[$thisDate][$event]) as $ged ) {
               foreach ( array_keys($events[$thisDate][$event][$ged]) as $id ) {
                 if ($j >= $truncateDateAfter) {
@@ -435,7 +431,6 @@ $headSection->setTitle(uiTextSnippet('calendar'));
                   $j++;
                   continue 3;
                 }
-
                 // Print events
                 echo $events[$thisDate][$event][$ged][$id] . "<br>\n";
                 $j++;
@@ -501,9 +496,9 @@ $headSection->setTitle(uiTextSnippet('calendar'));
       }
 
       foreach ($calAllEvents as $key => $val) {
-        if ($val == null || empty($text[$key . 'date']))
-          {continue;}
-
+        if ($val == null || empty($text[$key . 'date'])) {
+          continue;
+        }
         if (in_array($key, $hideEvents)) {
           $class = 'hidden';
           $toHide = array_diff($hideEvents, array($key));
@@ -512,11 +507,9 @@ $headSection->setTitle(uiTextSnippet('calendar'));
           $toHide = $hideEvents;
           $toHide[] = $key;
         }
-
         $args = "?living=$showLiving&amp;hide=" . implode(',', $toHide) . "&amp;tree=$thisTree&amp;m=$thisMonth&amp;year=$thisYear";
         echo '<li><img src="' . 'img/' . $val . '" class="calIcon" alt=""><a href="' . $args . '" class="' . $class . '">' . $text[$key . 'date'] . '</a></li>' . "\n";
       }
-
     ?>
     </ul>
     </div>

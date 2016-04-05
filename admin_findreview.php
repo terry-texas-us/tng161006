@@ -69,9 +69,9 @@ if ($assignedtree) {
 } else {
   $wherestr = "";
 }
-$treequery = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
 
-$allwhere = "$temp_events_table.gedcom = $trees_table.gedcom";
+$allwhere = "$temp_events_table.gedcom = $treesTable.gedcom";
 if ($tree) {
   $allwhere .= " AND $temp_events_table.gedcom = \"$tree\"";
 }
@@ -86,15 +86,15 @@ if ($reviewuser != "") {
 if ($type == 'I') {
   $allwhere .= " AND $people_table.personID = $temp_events_table.personID AND $people_table.gedcom = $temp_events_table.gedcom AND (type = \"I\" OR type = \"C\")";
   $query = "SELECT tempID, $temp_events_table.personID as personID, lastname, firstname, lnprefix, prefix, suffix, nameorder, treename, eventID, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") as postdate, living, private, $people_table.gedcom, branch
-    FROM $people_table, $trees_table, $temp_events_table WHERE $allwhere ORDER BY postdate DESC";
+    FROM $people_table, $treesTable, $temp_events_table WHERE $allwhere ORDER BY postdate DESC";
   $returnpage = "people.php";
-  $totquery = "SELECT count(tempID) as tcount FROM $people_table, $trees_table, $temp_events_table WHERE $allwhere";
+  $totquery = "SELECT count(tempID) as tcount FROM $people_table, $treesTable, $temp_events_table WHERE $allwhere";
 } elseif ($type == 'F') {
   $allwhere .= " AND $families_table.familyID = $temp_events_table.familyID AND $families_table.gedcom = $temp_events_table.gedcom AND type = \"F\"";
   $query = "SELECT tempID, $temp_events_table.familyID as familyID, $families_table.gedcom as gedcom, husband, wife, treename, eventID, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") as postdate
-    FROM $families_table, $trees_table, $temp_events_table WHERE $allwhere ORDER BY postdate DESC";
+    FROM $families_table, $treesTable, $temp_events_table WHERE $allwhere ORDER BY postdate DESC";
   $returnpage = "families.php";
-  $totquery = "SELECT count(tempID) as tcount FROM $people_table, $trees_table, $temp_events_table WHERE $allwhere";
+  $totquery = "SELECT count(tempID) as tcount FROM $people_table, $treesTable, $temp_events_table WHERE $allwhere";
 }
 $result = tng_query($query);
 

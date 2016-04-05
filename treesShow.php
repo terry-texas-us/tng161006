@@ -8,7 +8,7 @@ if ($treesearch) {
 } else {
   $wherestr = "";
 }
-$query = "SELECT count(personID) as pcount, $trees_table.gedcom, treename, description FROM $trees_table LEFT JOIN $people_table on $trees_table.gedcom = $people_table.gedcom $wherestr GROUP BY $trees_table.gedcom ORDER BY treename LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT count(personID) as pcount, $treesTable.gedcom, treename, description FROM $treesTable LEFT JOIN $people_table on $treesTable.gedcom = $people_table.gedcom $wherestr GROUP BY $treesTable.gedcom ORDER BY treename LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 $numrows = tng_num_rows($result);
 

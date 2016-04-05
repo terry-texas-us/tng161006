@@ -33,7 +33,7 @@ $namesort = "name";
 $orderloc = strpos($_SERVER['QUERY_STRING'], "&amp;order=");
 $currargs = $orderloc > 0 ? substr($_SERVER['QUERY_STRING'], 0, $orderloc) : $_SERVER['QUERY_STRING'];
 
-$treequery = "SELECT count(gedcom) as treecount FROM $trees_table";
+$treequery = "SELECT count(gedcom) as treecount FROM $treesTable";
 $treeresult = tng_query($treequery);
 $treerow = tng_fetch_assoc($treeresult);
 $numtrees = $treerow['treecount'];
@@ -60,7 +60,7 @@ if ($tree && !$tngconfig['places1tree']) {
   $urlstring = "&amp;tree=$tree";
   $wherestr2 = " AND $places_table.gedcom = \"$tree\" ";
 
-  $query = "SELECT treename FROM $trees_table WHERE gedcom = \"$tree\"";
+  $query = "SELECT treename FROM $treesTable WHERE gedcom = \"$tree\"";
   $treeresult = tng_query($query);
   $treerow = tng_fetch_assoc($treeresult);
   tng_free_result($treeresult);
@@ -70,7 +70,7 @@ if ($tree && !$tngconfig['places1tree']) {
 
 if (!$tngconfig['places1tree']) {
   $querystring .= " " . uiTextSnippet('and') . " tree " . uiTextSnippet('equals') . " {$treerow['treename']} ";
-  $treejoin = " LEFT JOIN $trees_table on $places_table.gedcom = $trees_table.gedcom";
+  $treejoin = " LEFT JOIN $treesTable on $places_table.gedcom = $treesTable.gedcom";
   $treename = ", treename";
 } else {
   $treejoin = $treename = "";

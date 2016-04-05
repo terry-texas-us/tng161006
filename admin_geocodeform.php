@@ -50,7 +50,7 @@ $headSection->setTitle(uiTextSnippet('places'));
                       } else {
                         $wherestr = "";
                       }
-                      $treequery = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+                      $treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
                       $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
                       while ($treerow = tng_fetch_assoc($treeresult)) {
                         echo "  <option value=\"{$treerow['gedcom']}\"";

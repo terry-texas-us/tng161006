@@ -37,7 +37,7 @@ require_once 'eventlib.php';
         echo buildEventRow('confdate', 'confplace', 'CONL', $personID);
         echo buildEventRow('initdate', 'initplace', 'INIT', $personID);
         echo buildEventRow('endldate', 'endlplace', 'ENDL', $personID);
-// parents
+        // parents
         echo "<div id='parents'>\n";
           $query = "SELECT personID, familyID, sealdate, sealplace, frel, mrel FROM $children_table WHERE personID = \"$personID\" AND gedcom = \"$tree\" ORDER BY parentorder";
           $parents = tng_query($query);

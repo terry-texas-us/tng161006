@@ -1,6 +1,6 @@
 <?php
 
-class chooseLanguage {
+class ChooseLanguage {
 
   private $out;
 

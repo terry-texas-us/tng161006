@@ -13,7 +13,7 @@ function showFact($text, $fact, $numflag = 0)
   echo "</tr>\n";
 }
 
-$query = "SELECT count(personID) as pcount, $trees_table.gedcom, treename, description, owner, secret, address, email, city, state, zip, country, phone FROM $trees_table LEFT JOIN $people_table on $trees_table.gedcom = $people_table.gedcom WHERE $trees_table.gedcom = \"$tree\" GROUP BY $trees_table.gedcom";
+$query = "SELECT count(personID) as pcount, $treesTable.gedcom, treename, description, owner, secret, address, email, city, state, zip, country, phone FROM $treesTable LEFT JOIN $people_table on $treesTable.gedcom = $people_table.gedcom WHERE $treesTable.gedcom = \"$tree\" GROUP BY $treesTable.gedcom";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);

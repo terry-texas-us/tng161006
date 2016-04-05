@@ -63,7 +63,7 @@ $headSection->setTitle(uiTextSnippet('tlevents'));
     <?php
     echo $adminHeaderSection->build('tlevents', $message);
     $navList = new navList('');
-//    $navList->appendItem([true, "timelineeventsBrowse.php", uiTextSnippet('browse'), "findtimeline"]);
+    //    $navList->appendItem([true, "timelineeventsBrowse.php", uiTextSnippet('browse'), "findtimeline"]);
     $navList->appendItem([$allowAdd, "timelineeventsAdd.php", uiTextSnippet('add'), "addtlevent"]);
     echo $navList->build("findtimeline");
     ?>
@@ -142,8 +142,7 @@ $headSection->setTitle(uiTextSnippet('tlevents'));
               </table>
               <?php
               echo buildSearchResultPagination($totrows, "timelineeventsBrowse.php?searchstring=$searchstring&amp;offset", $maxsearchresults, 5);
-            }
-            else {
+            } else {
               echo "<div class='alert alert-warning'>" . uiTextSnippet('norecords') . "</div>\n";
             }
             tng_free_result($result);

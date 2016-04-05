@@ -88,7 +88,7 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
     }
     //select from people where date later than cutoff, order by changedate descending, limit = 10
     $query = "SELECT p.personID, lastname, lnprefix, firstname, birthdate, prefix, suffix, nameorder, living, private, branch, DATE_FORMAT(changedate,'%e %b %Y') as changedatef, changedby, LPAD(SUBSTRING_INDEX(birthdate, ' ', -1),4,'0') as birthyear, birthplace, altbirthdate, LPAD(SUBSTRING_INDEX(altbirthdate, ' ', -1),4,'0') as altbirthyear, altbirthplace, p.gedcom as gedcom, treename
-      FROM $people_table as p, $trees_table WHERE $cutoffstr p.gedcom = $trees_table.gedcom $allwhere
+      FROM $people_table as p, $treesTable WHERE $cutoffstr p.gedcom = $treesTable.gedcom $allwhere
       ORDER BY changedate DESC, lastname, firstname, birthyear, altbirthyear LIMIT $change_limit";
     $result = tng_query($query);
     if (tng_num_rows($result)) {
@@ -162,9 +162,9 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
     }
     //select husband, wife from families where date later than cutoff, order by changedate descending, limit = 10
     if ($tree) {
-      $allwhere = "$families_table.gedcom = '$tree' AND $families_table.gedcom = $trees_table.gedcom";
+      $allwhere = "$families_table.gedcom = '$tree' AND $families_table.gedcom = $treesTable.gedcom";
     } else {
-      $allwhere = "$families_table.gedcom = $trees_table.gedcom";
+      $allwhere = "$families_table.gedcom = $treesTable.gedcom";
     }
 
     $more = getLivingPrivateRestrictions($families_table, false, false);
@@ -175,7 +175,7 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
         $families_table.living as fliving, $families_table.private as fprivate, $people_table.living as living, $people_table.private as private,
         $people_table.branch as branch, $families_table.gedcom as gedcom, $families_table.branch as fbranch, DATE_FORMAT($families_table.changedate,'%e %b %Y') as changedatef,
         $families_table.changedby, treename
-      FROM ($families_table, $trees_table)
+      FROM ($families_table, $treesTable)
       LEFT JOIN $people_table ON $people_table.gedcom = $families_table.gedcom AND $people_table.personID = husband
       WHERE $famcutoffstr $allwhere
       ORDER BY $families_table.changedate DESC, lastname LIMIT $change_limit";

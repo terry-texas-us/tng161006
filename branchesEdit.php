@@ -18,7 +18,7 @@ $row = tng_fetch_assoc($result);
 $row['description'] = preg_replace('/\"/', '&#34;', $row['description']);
 tng_free_result($result);
 
-$query = "SELECT treename FROM $trees_table where gedcom = \"$tree\"";
+$query = "SELECT treename FROM $treesTable where gedcom = \"$tree\"";
 $treeresult = tng_query($query);
 $treerow = tng_fetch_assoc($treeresult);
 tng_free_result($treeresult);
@@ -36,7 +36,7 @@ $headSection->setTitle(uiTextSnippet('modifytree'));
     $navList = new navList('');
     $navList->appendItem([true, "branchesBrowse.php", uiTextSnippet('browse'), "findbranch"]);
     $navList->appendItem([$allowAdd, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
-//    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
+    //    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <form id='form1' name='form1' action='branchesEditFormAction.php' method='post' onSubmit="return validateForm();">

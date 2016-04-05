@@ -64,7 +64,7 @@ if (!$editconflict) {
   $initdatetr = convertDate($initdate);
   $endldatetr = convertDate($endldate);
 
-  $newdate = date("Y-m-d H:i:s", time() + (3600 * $time_offset));
+  $newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
 
   if (is_array($branch)) {
     foreach ($branch as $b) {

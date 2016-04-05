@@ -82,11 +82,11 @@ function delbackup($table) {
 }
 
 function getfiletime($filename) {
-  global $fileflag, $time_offset;
+  global $fileflag, $timeOffset;
 
   $filemodtime = "";
   if ($fileflag) {
-    $filemod = filemtime($filename) + (3600 * $time_offset);
+    $filemod = filemtime($filename) + (3600 * $timeOffset);
     $filemodtime = date("F j, Y h:i:s A", $filemod);
   }
   return $filemodtime;
@@ -106,7 +106,7 @@ set_time_limit(0);
 $largechunk = 10000;
 $tablelist = array($address_table, $albums_table, $albumlinks_table, $album2entities_table, $assoc_table, $branches_table, $branchlinks_table, $cemeteries_table, $people_table, $families_table, $children_table,
         $languagesTable, $places_table, $states_table, $countries_table, $sources_table, $repositories_table, $citations_table, $reports_table,
-        $events_table, $eventtypes_table, $trees_table, $notelinks_table, $xnotes_table, $users_table, $tlevents_table, $saveimport_table, $temp_events_table,
+        $events_table, $eventtypes_table, $treesTable, $notelinks_table, $xnotes_table, $users_table, $tlevents_table, $saveimport_table, $temp_events_table,
         $media_table, $medialinks_table, $mediatypes_table, $mostwanted_table);
 $ajaxmsg = $msg = "";
 

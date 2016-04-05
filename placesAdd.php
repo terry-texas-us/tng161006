@@ -19,7 +19,7 @@ if (!$tngconfig['places1tree']) {
   } else {
     $wherestr = "";
   }
-  $query = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+  $query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
   $result = tng_query($query);
 }
 header("Content-type: text/html; charset=" . $session_charset);
@@ -28,11 +28,7 @@ $headSection->setTitle(uiTextSnippet('addnewplace'));
 <!DOCTYPE html>
 <html>
 <?php echo $headSection->build('', 'admin', $session_charset); ?>
-<body<?php if ($map['key']) {
-    if (!$map['startoff']) {
-      echo " onload=\"divbox('mapcontainer');\"";
-    }
-  } ?>>
+<body<?php if ($map['key']) {if (!$map['startoff']) {echo " onload=\"divbox('mapcontainer');\"";}} ?>>
   <section class='container'>
     <?php
     echo $adminHeaderSection->build('places-addnewplace', $message);

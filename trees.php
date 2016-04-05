@@ -1,10 +1,9 @@
 <?php
 
-function treeSelect($treeresult, $formname = null)
-{
+function treeSelect($treeresult, $formname = null) {
   global $tree;
 
-  $ret = "<label for='tree'>" . uiTextSnippet('tree') . "</label>";
+  $ret  = "<label for='tree'>" . uiTextSnippet('tree') . "</label>";
   $ret .= "<select class='form-control' id='treeselect' name='tree'";
   if ($formname) {
     $ret .= " onchange=\"$('#treespinner').show(); document.$formname.submit();\"";
@@ -27,12 +26,11 @@ function treeSelect($treeresult, $formname = null)
   return $ret;
 }
 
-function treeDropdown($forminfo)
-{
+function treeDropdown($forminfo) {
   global $requirelogin;
   global $assignedtree;
-  global $trees_table;
-  global $time_offset;
+  global $treesTable;
+  global $timeOffset;
   global $treerestrict;
   global $tree;
   global $numtrees;
@@ -40,7 +38,7 @@ function treeDropdown($forminfo)
 
   $ret = "";
   if (!$requirelogin || !$treerestrict || !$assignedtree) {
-    $query = "SELECT gedcom, treename, lastimportdate FROM $trees_table ORDER BY treename";
+    $query = "SELECT gedcom, treename, lastimportdate FROM $treesTable ORDER BY treename";
     $treeresult = tng_query($query);
     $numtrees = tng_num_rows($treeresult);
     $foundtree = false;
@@ -80,7 +78,7 @@ function treeDropdown($forminfo)
       if ($lastimport) {
         $importtime = strtotime($lastimport);
         if (substr($lastimport, 11, 8) != "00:00:00") {
-          $importtime += ($time_offset * 3600);
+          $importtime += ($timeOffset * 3600);
         }
         $importdate = strtoupper(substr(PHP_OS, 0, 3)) == 'WIN' ? strftime("%#d %b %Y %H:%M:%S", $importtime) : strftime("%e %b %Y %H:%M:%S", $importtime);
         echo "<p>" . uiTextSnippet('lastimportdate') . ": " . displayDate($importdate) . "</p>";
@@ -90,4 +88,3 @@ function treeDropdown($forminfo)
   }
   return $ret;
 }
-

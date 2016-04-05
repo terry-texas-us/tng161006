@@ -74,9 +74,9 @@ function addCriteria($field, $value, $operator) {
 }
 
 if ($tree) {
-  $allwhere = "$repositories_table.gedcom = \"$tree\" AND $repositories_table.gedcom = $trees_table.gedcom";
+  $allwhere = "$repositories_table.gedcom = \"$tree\" AND $repositories_table.gedcom = $treesTable.gedcom";
 } else {
-  $allwhere = "$repositories_table.gedcom = $trees_table.gedcom";
+  $allwhere = "$repositories_table.gedcom = $treesTable.gedcom";
 }
 if ($searchstring) {
   $allwhere .= " AND (1=0 ";
@@ -90,12 +90,12 @@ if ($searchstring) {
   $allwhere .= addCriteria("reponame", $searchstring, $frontmod);
   $allwhere .= ")";
 }
-$query = "SELECT ID, repoID, reponame, $repositories_table.gedcom as gedcom, treename FROM ($repositories_table, $trees_table) WHERE $allwhere ORDER BY reponame, repoID LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT ID, repoID, reponame, $repositories_table.gedcom as gedcom, treename FROM ($repositories_table, $treesTable) WHERE $allwhere ORDER BY reponame, repoID LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(repoID) as rcount FROM ($repositories_table, $trees_table) WHERE $allwhere";
+  $query = "SELECT count(repoID) as rcount FROM ($repositories_table, $treesTable) WHERE $allwhere";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['rcount'];
@@ -114,7 +114,7 @@ $headSection->setTitle(uiTextSnippet('repositories'));
     <?php
     echo $adminHeaderSection->build('repositories', $message);
     $navList = new navList('');
-//    $navList->appendItem([true, "repositoriesBrowse.php", uiTextSnippet('search'), "findrepo"]);
+    //    $navList->appendItem([true, "repositoriesBrowse.php", uiTextSnippet('search'), "findrepo"]);
     $navList->appendItem([$allowAdd, "repositoriesAdd.php", uiTextSnippet('add'), "addrepo"]);
     $navList->appendItem([$allowEdit && $allowDelete, "repositoriesMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("findrepo");

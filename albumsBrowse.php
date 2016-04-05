@@ -80,7 +80,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
     <?php
     echo $adminHeaderSection->build('albums', $message);
     $navList = new navList('');
-//    $navList->appendItem([true, "albumsBrowse.php", uiTextSnippet('browse'), "findalbum"]);
+    //    $navList->appendItem([true, "albumsBrowse.php", uiTextSnippet('browse'), "findalbum"]);
     $navList->appendItem([$allowMediaAdd, "albumsAdd.php", uiTextSnippet('add'), "addalbum"]);
     $navList->appendItem([$allowMediaEdit, "albumsSort.php", uiTextSnippet('text_sort'), "sortalbums"]);
     echo $navList->build("findalbum");

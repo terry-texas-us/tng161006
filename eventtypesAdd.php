@@ -70,7 +70,7 @@ $headSection->setTitle(uiTextSnippet('addnewevtype'));
     echo $adminHeaderSection->build('customeventtypes-addnewevtype', $message);
     $navList = new navList('');
     $navList->appendItem([true, "eventtypesBrowse.php", uiTextSnippet('browse'), "findevent"]);
-//    $navList->appendItem([$allowAdd, "eventtypesAdd.php", uiTextSnippet('add'), "addevent"]);
+    //    $navList->appendItem([$allowAdd, "eventtypesAdd.php", uiTextSnippet('add'), "addevent"]);
     echo $navList->build("addevent");
     ?>
     <form name='form1' action='eventtypesAddFormAction.php' method='post' onSubmit="return validateForm();">

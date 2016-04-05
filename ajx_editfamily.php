@@ -50,7 +50,7 @@ $row['allow_private'] = $rights['private'];
 
 $namestr = getFamilyName($row);
 
-$query = "SELECT treename FROM $trees_table WHERE gedcom = \"$tree\"";
+$query = "SELECT treename FROM $treesTable WHERE gedcom = \"$tree\"";
 $result = tng_query($query);
 $treerow = tng_fetch_assoc($result);
 tng_free_result($result);

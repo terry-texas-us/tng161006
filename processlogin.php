@@ -47,7 +47,7 @@ if ($check) {
   } else {
     $allow_admin = $row['allow_edit'] || $row['allow_add'] || $row['allow_delete'] ? 1 : 0;
     if (!$adminLogin || $allow_admin) {
-      $newdate = date("Y-m-d H:i:s", time() + (3600 * $time_offset));
+      $newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
       if ($resetpass && $newpassword && $row['allow_profile']) {
         $password_type = PasswordType();
         $query = "UPDATE $users_table SET password=\"" . PasswordEncode($newpassword) . "\", lastlogin=\"$newdate\", password_type=\"$password_type\" WHERE userID=\"{$row['userID']}\"";

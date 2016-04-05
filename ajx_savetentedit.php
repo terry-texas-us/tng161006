@@ -10,7 +10,7 @@ if ($session_charset != "UTF-8") {
   $newinfo = tng_utf8_decode($newinfo);
   $usernote = tng_utf8_decode($usernote);
 }
-$postdate = date("Y-m-d H:i:s", time() + (3600 * $time_offset));
+$postdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
 $query = "INSERT INTO $temp_events_table (type,gedcom,personID,familyID,eventID,eventdate,eventplace,info,note,user,postdate) VALUES (\"$type\",\"$tree\",\"$personID\",\"$familyID\",\"$eventID\",\"$newdate\",\"$newplace\",\"$newinfo\",\"$usernote\",\"$currentuser\",\"$postdate\")";
 $result = tng_query($query);
 
@@ -56,7 +56,7 @@ if ($tngconfig['revmail']) {
     $plus = $hname && $wname ? " + " : "";
     $namestr = uiTextSnippet('family') . ": $hname$plus$wname ($familyID)";
   }
-  $query = "SELECT treename, email, owner FROM $trees_table WHERE gedcom=\"$tree\"";
+  $query = "SELECT treename, email, owner FROM $treesTable WHERE gedcom=\"$tree\"";
   $treeresult = tng_query($query);
   $treerow = tng_fetch_assoc($treeresult);
   $sendemail = $treerow['email'] ? $treerow['email'] : $emailaddr;

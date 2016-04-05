@@ -43,7 +43,7 @@ killBlockedMessageContent($comments);
 if ($enttype == 'I') {
   $typestr = "person";
   $query = "SELECT firstname, lnprefix, lastname, prefix, suffix, sex, nameorder, living, private, branch, disallowgedcreate, IF(birthdatetr !='0000-00-00',YEAR(birthdatetr),YEAR(altbirthdatetr)) as birth, IF(deathdatetr !='0000-00-00',YEAR(deathdatetr),YEAR(burialdatetr)) as death
-    FROM $people_table, $trees_table WHERE personID = \"$ID\" AND $people_table.gedcom = \"$tree\" AND $people_table.gedcom = $trees_table.gedcom";
+    FROM $people_table, $treesTable WHERE personID = \"$ID\" AND $people_table.gedcom = \"$tree\" AND $people_table.gedcom = $treesTable.gedcom";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
 
@@ -94,7 +94,7 @@ if ($enttype == 'I') {
 }
 if ($enttype) {
   $subject = uiTextSnippet('proposed') . ": $name";
-  $query = "SELECT treename, email, owner FROM $trees_table WHERE gedcom=\"$tree\"";
+  $query = "SELECT treename, email, owner FROM $treesTable WHERE gedcom=\"$tree\"";
   $treeresult = tng_query($query);
   $treerow = tng_fetch_assoc($treeresult);
   tng_free_result($treeresult);

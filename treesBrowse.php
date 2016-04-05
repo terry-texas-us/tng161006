@@ -37,12 +37,12 @@ $wherestr = $searchstring ? "WHERE (gedcom LIKE \"%$searchstring%\" OR treename 
 if ($assignedtree) {
   $wherestr .= $wherestr ? " AND gedcom = \"$assignedtree\"" : "WHERE gedcom = \"$assignedtree\"";
 }
-$query = "SELECT gedcom, treename, description, owner, DATE_FORMAT(lastimportdate,\"%d %b %Y %H:%i:%s\") as lastimportdate, importfilename FROM $trees_table $wherestr ORDER BY treename LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT gedcom, treename, description, owner, DATE_FORMAT(lastimportdate,\"%d %b %Y %H:%i:%s\") as lastimportdate, importfilename FROM $treesTable $wherestr ORDER BY treename LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(gedcom) as tcount FROM $trees_table $wherestr";
+  $query = "SELECT count(gedcom) as tcount FROM $treesTable $wherestr";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['tcount'];
@@ -62,7 +62,7 @@ $headSection->setTitle(uiTextSnippet('trees'));
     $allow_add_tree = $assignedtree ? 0 : $allowAdd;
     echo $adminHeaderSection->build('trees', $message);
     $navList = new navList('');
-//    $navList->appendItem([true, 'treesBrowse.php', uiTextSnippet('search'), 'findtree']);
+    //    $navList->appendItem([true, 'treesBrowse.php', uiTextSnippet('search'), 'findtree']);
     $navList->appendItem([$allow_add_tree, "treesAdd.php", uiTextSnippet('add'), "addtree"]);
     echo $navList->build("findtree");
     ?>

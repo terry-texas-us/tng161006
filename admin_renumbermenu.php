@@ -12,7 +12,7 @@ if ($assignedtree) {
   exit;
 }
 
-$query = "SELECT gedcom, treename FROM $trees_table ORDER BY treename";
+$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $result = tng_query($query);
 
 header("Content-type: text/html; charset=" . $session_charset);
@@ -81,10 +81,7 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
             </table>
             <br>
             <input name='start' type='hidden' value='1'/>
-            <input type='submit'
-                   value="<?php echo uiTextSnippet('renumber'); ?>"<?php if (!$tngconfig['maint']) {
-              echo " disabled";
-            } ?>>
+            <input type='submit' value="<?php echo uiTextSnippet('renumber'); ?>"<?php if (!$tngconfig['maint']) {echo " disabled";} ?>>
             <?php
             if (!$tngconfig['maint']) {
               echo "<span>" . uiTextSnippet('needmaint') . "</span>";

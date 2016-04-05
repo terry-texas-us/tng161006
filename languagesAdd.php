@@ -23,7 +23,7 @@ $headSection->setTitle(uiTextSnippet('addnewlanguage'));
     echo $adminHeaderSection->build('languages-addnewlanguage', $message);
     $navList = new navList('');
     $navList->appendItem([true, "languagesBrowse.php", uiTextSnippet('browse'), "findlang"]);
-//    $navList->appendItem([$allowAdd, "languagesAdd.php", uiTextSnippet('add'), "addlanguage"]);
+    //    $navList->appendItem([$allowAdd, "languagesAdd.php", uiTextSnippet('add'), "addlanguage"]);
     echo $navList->build("addlanguage");
     ?>
     <table class='table table-sm'>

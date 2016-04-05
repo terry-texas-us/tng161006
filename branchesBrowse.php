@@ -68,18 +68,18 @@ if ($assignedtree) {
   $wherestr = "";
 }
 $orgtree = $tree;
-$treequery = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
 
 $wherestr = $searchstring ? "WHERE (branch LIKE \"%$searchstring%\" OR $branches_table.description LIKE \"%$searchstring%\")" : "";
 if ($tree) {
   $wherestr .= $wherestr ? " AND $branches_table.gedcom = \"$tree\"" : "WHERE $branches_table.gedcom = \"$tree\"";
 }
-$query = "SELECT $branches_table.gedcom as gedcom, branch, $branches_table.description as description, personID, treename FROM $branches_table LEFT JOIN $trees_table ON $trees_table.gedcom = $branches_table.gedcom $wherestr ORDER BY $branches_table.description LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT $branches_table.gedcom as gedcom, branch, $branches_table.description as description, personID, treename FROM $branches_table LEFT JOIN $treesTable ON $treesTable.gedcom = $branches_table.gedcom $wherestr ORDER BY $branches_table.description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(branch) as bcount FROM $branches_table LEFT JOIN $trees_table ON $trees_table.gedcom = $branches_table.gedcom $wherestr";
+  $query = "SELECT count(branch) as bcount FROM $branches_table LEFT JOIN $treesTable ON $treesTable.gedcom = $branches_table.gedcom $wherestr";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['bcount'];
@@ -98,7 +98,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
     <?php
     echo $adminHeaderSection->build('branches', $message);
     $navList = new navList('');
-//    $navList->appendItem([true, "branchesBrowse.php", uiTextSnippet('browse'), "findbranch"]);
+    //    $navList->appendItem([true, "branchesBrowse.php", uiTextSnippet('browse'), "findbranch"]);
     $navList->appendItem([$allowAdd, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
     echo $navList->build("findbranch");
     ?>

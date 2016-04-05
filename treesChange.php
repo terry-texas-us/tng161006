@@ -26,7 +26,7 @@ switch ($entity) {
 $treelist = "  <option value=''></option>\n";
 $currenttree = "";
 
-$query = "SELECT gedcom, treename FROM $trees_table ORDER BY treename";
+$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $result = tng_query($query);
 
 while ($row = tng_fetch_assoc($result)) {

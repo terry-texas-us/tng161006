@@ -58,7 +58,7 @@ if ($assignedtree) {
 } else {
   $wherestr = "";
 }
-$query = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+$query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
 $result = tng_query($query);
 
 $revstar = checkReview('F');
@@ -75,7 +75,7 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
     echo $adminHeaderSection->build('families-addnewfamily', $message);
     $navList = new navList('');
     $navList->appendItem([true, "familiesBrowse.php", uiTextSnippet('browse'), "findfamily"]);
-//    $navList->appendItem([$allowAdd, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
+    //    $navList->appendItem([$allowAdd, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
     $navList->appendItem([$allowEdit, "admin_findreview.php?type=F", uiTextSnippet('review') . $revstar, "review"]);
     echo $navList->build("addfamily");
     ?>

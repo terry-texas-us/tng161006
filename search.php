@@ -218,7 +218,7 @@ if ($tree) {
     $querystring .= " " . uiTextSnippet('cap_and') . " ";
   }
 
-  $query = "SELECT treename FROM $trees_table WHERE gedcom = \"$tree\"";
+  $query = "SELECT treename FROM $treesTable WHERE gedcom = \"$tree\"";
   $treeresult = tng_query($query);
   $treerow = tng_fetch_assoc($treeresult);
   tng_free_result($treeresult);
@@ -244,7 +244,7 @@ if ($tree) {
     $allwhere .= " AND p.branch like \"%$branch%\"";
   }
 }
-$treequery = "SELECT count(gedcom) as treecount FROM $trees_table";
+$treequery = "SELECT count(gedcom) as treecount FROM $treesTable";
 $treeresult = tng_query($treequery);
 $treerow = tng_fetch_assoc($treeresult);
 $numtrees = $treerow['treecount'];
@@ -280,8 +280,8 @@ if (($mysplname && $mygender) || $spqualify == 'exists' || $spqualify == "dnexis
   $query = "SELECT p.ID, spouse.personID as spersonID, p.personID, p.lastname, p.lnprefix, p.firstname, p.living, p.private,
     p.branch, p.nickname, p.suffix, p.prefix, p.nameorder, p.title, p.birthplace, p.birthdate, p.deathplace, p.deathdate,
     p.altbirthdate, p.altbirthplace, p.burialdate, p.burialplace, p.gedcom, treename
-    FROM ($people_table as p, $families_table, $people_table as spouse, $trees_table) $cejoin
-    $allwhere AND (p.gedcom = $trees_table.gedcom AND p.gedcom=$families_table.gedcom AND spouse.gedcom=$families_table.gedcom AND $gstring)
+    FROM ($people_table as p, $families_table, $people_table as spouse, $treesTable) $cejoin
+    $allwhere AND (p.gedcom = $treesTable.gedcom AND p.gedcom=$families_table.gedcom AND spouse.gedcom=$families_table.gedcom AND $gstring)
     $orderstr LIMIT $newoffset" . $maxsearchresults;
   $showspouse = "yess";
   $query2 = "SELECT count(p.ID) as pcount
@@ -298,7 +298,7 @@ if (($mysplname && $mygender) || $spqualify == 'exists' || $spqualify == "dnexis
 
   $query = "SELECT p.ID, p.personID, lastname, lnprefix, firstname, p.living, p.private, p.branch, nickname, prefix, suffix, nameorder, title, birthplace, birthdate, deathplace, deathdate, altbirthdate, altbirthplace, burialdate, burialplace, p.gedcom, treename $huswife
     FROM $people_table AS p $families_join
-    LEFT JOIN $trees_table on p.gedcom = $trees_table.gedcom $cejoin $allwhere
+    LEFT JOIN $treesTable on p.gedcom = $treesTable.gedcom $cejoin $allwhere
     $orderstr LIMIT $newoffset" . $maxsearchresults;
   $query2 = "SELECT count(p.ID) as pcount FROM $people_table AS p $families_join $cejoin $allwhere";
 }

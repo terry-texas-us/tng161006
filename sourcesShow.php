@@ -45,14 +45,14 @@ if ($tree) {
   }
   $join = "LEFT JOIN";
 }
-$query = "SELECT sourceID, title, shorttitle, author, $sources_table.gedcom as gedcom, treename FROM $sources_table $join $trees_table on $sources_table.gedcom = $trees_table.gedcom $wherestr ORDER BY title LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT sourceID, title, shorttitle, author, $sources_table.gedcom as gedcom, treename FROM $sources_table $join $treesTable on $sources_table.gedcom = $treesTable.gedcom $wherestr ORDER BY title LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
   if ($tree) {
-    $query = "SELECT count(sourceID) as scount FROM $sources_table LEFT JOIN $trees_table on $sources_table.gedcom = $trees_table.gedcom $wherestr";
+    $query = "SELECT count(sourceID) as scount FROM $sources_table LEFT JOIN $treesTable on $sources_table.gedcom = $treesTable.gedcom $wherestr";
   } else {
     $query = "SELECT count(sourceID) as scount FROM $sources_table $wherestr";
   }

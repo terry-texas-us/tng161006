@@ -1,6 +1,6 @@
 <?php
 
-class personSearchForm {
+class PersonSearchForm {
 
   private $out = '';
 

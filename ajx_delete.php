@@ -312,7 +312,7 @@ case "entity":
       $result = tng_query($query);
     }
 
-    $query = "DELETE FROM $trees_table WHERE gedcom=\"$id\"";
+    $query = "DELETE FROM $treesTable WHERE gedcom=\"$id\"";
     $result = tng_query($query);
 
     $query = "DELETE from $branches_table WHERE gedcom = \"$id\"";

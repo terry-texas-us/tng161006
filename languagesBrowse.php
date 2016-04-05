@@ -66,7 +66,7 @@ $headSection->setTitle(uiTextSnippet('languages'));
     <?php
     echo $adminHeaderSection->build('languages', $message);
     $navList = new navList('');
-//    $navList->appendItem([true, "languagesBrowse.php", uiTextSnippet('browse'), "findlang"]);
+    //    $navList->appendItem([true, "languagesBrowse.php", uiTextSnippet('browse'), "findlang"]);
     $navList->appendItem([$allowAdd, "languagesAdd.php", uiTextSnippet('add'), "addlanguage"]);
     echo $navList->build("findlang");
     ?>

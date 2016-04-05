@@ -8,7 +8,7 @@ require 'checklogin.php';
 require 'version.php';
 
 if (!$allow_ged && $assignedtree) {
-  $query = "SELECT disallowgedcreate FROM $trees_table WHERE gedcom = \"$assignedtree\"";
+  $query = "SELECT disallowgedcreate FROM $treesTable WHERE gedcom = \"$assignedtree\"";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   $disallowgedcreate = $row['disallowgedcreate'];
@@ -25,7 +25,7 @@ if ($assignedtree) {
 } else {
   $wherestr = "";
 }
-$treequery = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
 
 $query = "SELECT branch, gedcom, description FROM $branches_table WHERE gedcom = \"{$row['gedcom']}\" ORDER BY description";
 $branchresult = tng_query($query);
@@ -42,7 +42,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     echo $adminHeaderSection->build('datamaint-gedexport', $message);
     $navList = new navList('');
     $navList->appendItem([true, "dataImportGedcom.php", uiTextSnippet('import'), "import"]);
-//    $navList->appendItem([$allow_ged,dataExportGedcomrt.php", uiTextSnippet('export'), "export"]);
+    //    $navList->appendItem([$allow_ged,dataExportGedcomrt.php", uiTextSnippet('export'), "export"]);
     $navList->appendItem([true, "dataSecondaryProcesses.php", uiTextSnippet('secondarymaint'), "second"]);
     echo $navList->build("export");
     ?>

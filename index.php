@@ -22,7 +22,7 @@ $headSection->setTitle($sitename ? "" : uiTextSnippet('mnuheader'));
   <section class='container'>
     <?php
     echo $publicHeaderSection->build();
-    $chooseLanguage = new chooseLanguage();
+    $chooseLanguage = new ChooseLanguage();
     echo $chooseLanguage->buildForm($instance);
     ?>
     <div class='row'>
@@ -58,12 +58,12 @@ $headSection->setTitle($sitename ? "" : uiTextSnippet('mnuheader'));
     <div class='card card-block text-xs-center'>
       <h3 class='card-header'><?php echo getTemplateMessage('topsurnames'); ?></h3>
       <?php
-      $nc = new surname_cloud();
+      $nc = new Surname_cloud();
       $nc->display(32);
       ?>
     </div> <!-- .card -->
     <?php
-    $form = new personSearchForm();
+    $form = new PersonSearchForm();
     echo $form->get();
     echo $publicFooterSection->build();
     ?>

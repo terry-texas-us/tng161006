@@ -149,7 +149,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
     $allcount = 0;
     if ($savestate['filename']) {
       $tree = $tree1; //selected
-      $query = "UPDATE $trees_table SET lastimportdate=\"$today\", importfilename=\"$savegedfilename\" WHERE gedcom=\"$tree\"";
+      $query = "UPDATE $treesTable SET lastimportdate=\"$today\", importfilename=\"$savegedfilename\" WHERE gedcom=\"$tree\"";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
       if ($del == "append") {

@@ -19,7 +19,7 @@ $callnum = addslashes($callnum);
 $publisher = addslashes($publisher);
 $actualtext = addslashes($actualtext);
 
-$newdate = date("Y-m-d H:i:s", time() + (3600 * $time_offset));
+$newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
 
 $query = "UPDATE $sources_table SET shorttitle=\"$shorttitle\",title=\"$title\",author=\"$author\",callnum=\"$callnum\",publisher=\"$publisher\",repoID=\"$repoID\",actualtext=\"$actualtext\",changedate=\"$newdate\",changedby=\"$currentuser\" WHERE sourceID=\"$sourceID\" AND gedcom = \"$tree\"";
 $result = tng_query($query);

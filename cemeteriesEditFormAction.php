@@ -50,7 +50,7 @@ $result = tng_query($query);
 
 $tree = $assignedtree;
 if (!$tree) {
-  $query = "SELECT gedcom FROM $trees_table LIMIT 2";
+  $query = "SELECT gedcom FROM $treesTable LIMIT 2";
   $result2 = tng_query($query);
   if (tng_num_rows($result2) == 1) {
     $row = tng_fetch_assoc($result2);

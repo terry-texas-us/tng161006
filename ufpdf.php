@@ -283,8 +283,8 @@ if (!class_exists('UFPDF')) {
       $this->_out('/CreationDate ' . $this->_textstring('D:' . date('YmdHis')));
     }
 
-// UTF-8 to UTF-16BE conversion.
-// Correctly handles all illegal UTF-8 sequences.
+    // UTF-8 to UTF-16BE conversion.
+    // Correctly handles all illegal UTF-8 sequences.
     function utf8_to_utf16be(&$txt, $bom = true) {
       $l = strlen($txt);
       $out = $bom ? "\xFE\xFF" : '';
@@ -389,8 +389,8 @@ if (!class_exists('UFPDF')) {
       return $out;
     }
 
-// UTF-8 to codepoint array conversion.
-// Correctly handles all illegal UTF-8 sequences.
+    // UTF-8 to codepoint array conversion.
+    // Correctly handles all illegal UTF-8 sequences.
     function utf8_to_codepoints(&$txt) {
       $l = strlen($txt);
       $out = array();
@@ -485,7 +485,7 @@ if (!class_exists('UFPDF')) {
       return $out;
     }
 
-//End of class
+    //End of class
   }
 
 }

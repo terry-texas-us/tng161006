@@ -53,7 +53,7 @@ $pagelink = "$tngwebsite/" . "familiesShowFamily.php?familyID=$ID&tree=$tree";
 tng_free_result($result);
 
 $subject = uiTextSnippet('proposed') . ": $name";
-$query = "SELECT treename, email, owner FROM $trees_table WHERE gedcom=\"$tree\"";
+$query = "SELECT treename, email, owner FROM $treesTable WHERE gedcom=\"$tree\"";
 $treeresult = tng_query($query);
 $treerow = tng_fetch_assoc($treeresult);
 tng_free_result($treeresult);

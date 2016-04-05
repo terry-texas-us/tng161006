@@ -381,9 +381,9 @@ function getPersonSimple($tree, $personID) {
 
 //Get basic tree data
 function getTreeSimple($tree) {
-  global $trees_table;
+  global $treesTable;
 
-  $query = "SELECT gedcom, treename, disallowgedcreate, disallowpdf FROM $trees_table WHERE gedcom = \"$tree\"";
+  $query = "SELECT gedcom, treename, disallowgedcreate, disallowpdf FROM $treesTable WHERE gedcom = \"$tree\"";
 
   return tng_query($query);
 }

@@ -83,9 +83,9 @@ function buildBranchSelectControl_from_admin_newperson($row, $tree, $assignedbra
   $query = "SELECT branch, description FROM $branches_table WHERE gedcom = \"$tree\" ORDER BY description";
   $branchresult = tng_query($query);
   $numbranches = tng_num_rows($branchresult);
-//  $branchlist = explode(",", $row['branch']);
+  //  $branchlist = explode(",", $row['branch']);
 
-//  $descriptions = array();
+  //  $descriptions = array();
   $assdesc = "";
   $options = "";
   while ($branchrow = tng_fetch_assoc($branchresult)) {
@@ -129,9 +129,9 @@ function buildBranchSelectControl_admin_newperson2($row, $tree, $assignedbranch,
   $branchresult = tng_query($query);
   $numbranches = tng_num_rows($branchresult);
   
-//  $branchlist = explode(",", $row[branch]);
+  //  $branchlist = explode(",", $row[branch]);
 
-//  $descriptions = array();
+  //  $descriptions = array();
   $assdesc = "";
   $options = "";
   while ($branchrow = tng_fetch_assoc($branchresult)) {

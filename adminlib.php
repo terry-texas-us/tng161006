@@ -17,20 +17,20 @@ require_once 'classes/footerElementSection.php';
 require_once 'classes/scriptsManager.php';
 require_once 'classes/navList.php';
 
-$headSection = new headElementSection($sitename);
+$headSection = new HeadElementSection($sitename);
 
-navElementSection::maintenanceState(isset($tngconfig['maint']) && $tngconfig['maint'] != "", uiTextSnippet('mainton'));
+NavElementSection::maintenanceState(isset($tngconfig['maint']) && $tngconfig['maint'] != "", uiTextSnippet('mainton'));
 
-//navElementSection::allowAdmin(isset($allow_admin) && $allow_admin != "");
-navElementSection::currentUser($currentuser);
-navElementSection::homePage($homepage);
-navElementSection::helpPath(findhelp('index_help.php') . "/index_help.php");
+//NavElementSection::allowAdmin(isset($allow_admin) && $allow_admin != "");
+NavElementSection::currentUser($currentuser);
+NavElementSection::homePage($homepage);
+NavElementSection::helpPath(findhelp('index_help.php') . "/index_help.php");
 
-$adminHeaderSection = new adminHeaderElementSection();
+$adminHeaderSection = new AdminHeaderElementSection();
 $adminHeaderSection->setTitle($tng_title);
 $adminHeaderSection->setVersion($tng_version);
 
-$adminNavSection = new adminNavElementSection('admin');
+$adminNavSection = new AdminNavElementSection('admin');
 
 // [ts] magic vocabulary text
 
@@ -46,7 +46,7 @@ $adminNavSection->users = uiTextSnippet('users');
 $adminNavSection->getstart = uiTextSnippet('getstart');
 $adminNavSection->logout = uiTextSnippet('logout');
 
-$adminFooterSection = new footerElementSection('admin');
+$adminFooterSection = new FooterElementSection('admin');
 $scriptsManager = new scriptsManager('admin');
 
 function getNewNumericID($type, $field, $table) {

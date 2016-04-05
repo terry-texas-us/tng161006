@@ -72,7 +72,7 @@ if ($row['branch']) {
     tng_free_result($brresult);
     }
     if ($branchstr) {
-    $treestr = $treestr . " | $branchstr";
+      $treestr = $treestr . " | $branchstr";
     }
 }
 tng_free_result($result);
@@ -86,13 +86,13 @@ if ($rights['both']) {
     $headTitle .= " " . uiTextSnippet('birthabbr') . " " . displayDate($row['birthdate']);
     }
     if ($row['birthplace']) {
-    $headTitle .= " " . $row['birthplace'];
+      $headTitle .= " " . $row['birthplace'];
     }
     if ($row['deathdate']) {
-    $headTitle .= " " . uiTextSnippet('deathabbr') . " " . displayDate($row['deathdate']);
+      $headTitle .= " " . uiTextSnippet('deathabbr') . " " . displayDate($row['deathdate']);
     }
     if ($row['deathplace']) {
-    $headTitle .= " " . $row['deathplace'];
+      $headTitle .= " " . $row['deathplace'];
     }
 }
 scriptsManager::setShowShare($tngconfig['showshare'], $http);

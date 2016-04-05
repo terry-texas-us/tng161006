@@ -159,7 +159,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   $indtext .= "<colgroup>\n";
   $indtext .= "<col width='10%' class='labelcol'>\n";
   $indtext .= "<col width='85%'>\n";
-//  $indtext .= "<col style='width: {$datewidth}px'>\n";
+  //  $indtext .= "<col style='width: {$datewidth}px'>\n";
   $indtext .= "<col>\n";
   if ($allow_lds_this) {
     $indtext .= "<col style='width: 125px'>\n";
@@ -445,8 +445,8 @@ $headSection->setTitle($headTitle);
     $fammedia = getMedia($famrow, 'F');
     $famalbums = getAlbums($famrow, 'F');
 
-//    $famtext .= "<ul class='nopad'>\n";
-//    $famtext .= beginListItem('info');
+    //    $famtext .= "<ul class='nopad'>\n";
+    //    $famtext .= beginListItem('info');
 
     //get husband & spouses
     if ($famrow['husband']) {
@@ -481,7 +481,7 @@ $headSection->setTitle($headTitle);
     }
     tng_free_result($children);
 
-//    $famtext .= endListItem('info');
+    //    $famtext .= endListItem('info');
 
     $firstsection = 1;
     $firstsectionsave = "";
@@ -565,7 +565,7 @@ $headSection->setTitle($headTitle);
       $famtext .= endListItem('notes');
       $notes = true;
     }
-//    $famtext .= "</ul>\n";
+    //    $famtext .= "</ul>\n";
 
     if ($media || $notes || $citedispctr || $assoctext) {
       if ($tngconfig['istart']) {

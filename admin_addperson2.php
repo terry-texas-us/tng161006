@@ -60,7 +60,7 @@ $confdatetr = convertDate($confdate);
 $initdatetr = convertDate($initdate);
 $endldatetr = convertDate($endldate);
 
-$newdate = date("Y-m-d H:i:s", time() + (3600 * $time_offset));
+$newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
 
 $query = "SELECT personID FROM $people_table WHERE personID = \"$personID\" and gedcom = \"$tree\"";
 $result = tng_query($query);

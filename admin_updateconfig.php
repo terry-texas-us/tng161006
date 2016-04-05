@@ -79,7 +79,7 @@ fwrite($fp, "\$events_table = \"$events_table\";\n");
 fwrite($fp, "\$eventtypes_table = \"$eventtypes_table\";\n");
 fwrite($fp, "\$rectangles_table = \"$rectangles_table\";\n");
 fwrite($fp, "\$reports_table = \"$reports_table\";\n");
-fwrite($fp, "\$trees_table = \"$trees_table\";\n");
+fwrite($fp, "\$treesTable = \"$treesTable\";\n");
 fwrite($fp, "\$notelinks_table = \"$notelinks_table\";\n");
 fwrite($fp, "\$xnotes_table = \"$xnotes_table\";\n");
 fwrite($fp, "\$saveimport_table = \"$saveimport_table\";\n");
@@ -153,7 +153,7 @@ fwrite($fp, "\$tngconfig['places1tree'] = \"$places1tree\";\n");
 fwrite($fp, "\$tngconfig['autogeo'] = \"$autogeo\";\n");
 
 fwrite($fp, "\$dbowner = \"$dbowner\";\n");
-fwrite($fp, "\$time_offset = \"$time_offset\";\n");
+fwrite($fp, "\$timeOffset = \"$timeOffset\";\n");
 fwrite($fp, "\$tngconfig['edit_timeout'] = \"$edit_timeout\";\n");
 fwrite($fp, "\$requirelogin = \"$requirelogin\";\n");
 fwrite($fp, "\$treerestrict = \"$treerestrict\";\n");

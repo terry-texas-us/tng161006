@@ -25,7 +25,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
     $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('search'), "findmedia"]);
     $navList->appendItem([$allowAdd, "admin_newmedia.php", uiTextSnippet('addnew'), "addmedia"]);
     $navList->appendItem([$allowEdit, "admin_ordermediaform.php", uiTextSnippet('text_sort'), "sortmedia"]);
-//    $navList->appendItem([$allowEdit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
+    //    $navList->appendItem([$allowEdit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
     $navList->appendItem([$allowMediaAdd, "mediaImport.php", uiTextSnippet('import'), "import"]);
     $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
     echo $navList->build("thumbs");
@@ -66,7 +66,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
                 <span><?php echo uiTextSnippet('tree') . ': '; ?></span>
                 <select name='tree'>
                   <?php
-                  $query = "SELECT gedcom, treename FROM $trees_table ORDER BY treename";
+                  $query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
                   $result = tng_query($query);
                   while ($row = tng_fetch_assoc($result)) {
                     echo "<option value=\"{$row['gedcom']}\">{$row['treename']}</option>\n";

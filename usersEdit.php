@@ -47,7 +47,7 @@ $headSection->setTitle(uiTextSnippet('modifyuser'));
     $navList->appendItem([$allowAdd, "usersAdd.php", uiTextSnippet('add'), "adduser"]);
     $navList->appendItem([$allowEdit, "usersReview.php", uiTextSnippet('review') . $revstar, "review"]);
     $navList->appendItem([true, "usersSendMail.php", uiTextSnippet('email'), "mail"]);
-//    $navList->appendItem([true, "#", uiTextSnippet('edit'), "edit"]);
+    //    $navList->appendItem([true, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <form id='users-edit' name='form1' action='usersEditFormAction.php' method='post'>
@@ -119,7 +119,7 @@ $headSection->setTitle(uiTextSnippet('modifyuser'));
           <select name="mynewgedcom">
             <option value=''></option>
             <?php
-            $query = "SELECT gedcom, treename FROM $trees_table ORDER BY treename";
+            $query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
             $treeresult = tng_query($query);
 
             while ($treerow = tng_fetch_assoc($treeresult)) {
@@ -267,7 +267,7 @@ $headSection->setTitle(uiTextSnippet('modifyuser'));
             <select id='gedcom' name='gedcom'>
               <option value=''></option>
               <?php
-              $query = "SELECT gedcom, treename FROM $trees_table ORDER BY treename";
+              $query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
               $treeresult = tng_query($query);
 
               while ($treerow = tng_fetch_assoc($treeresult)) {

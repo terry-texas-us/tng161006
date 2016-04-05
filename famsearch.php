@@ -187,7 +187,7 @@ if ($tree) {
     $querystring .= " AND ";
   }
 
-  $query = "SELECT treename FROM $trees_table WHERE gedcom = \"$tree\"";
+  $query = "SELECT treename FROM $treesTable WHERE gedcom = \"$tree\"";
   $treeresult = tng_query($query);
   $treerow = tng_fetch_assoc($treeresult);
   tng_free_result($treeresult);
@@ -214,7 +214,7 @@ if ($tree) {
   }
 }
 
-$treequery = "SELECT count(gedcom) as treecount FROM $trees_table";
+$treequery = "SELECT count(gedcom) as treecount FROM $treesTable";
 $treeresult = tng_query($treequery);
 $treerow = tng_fetch_assoc($treeresult);
 $numtrees = $treerow['treecount'];
@@ -251,17 +251,17 @@ if ($offset) {
 $query = "SELECT f.ID, familyID, husband, wife, marrdate, marrplace, divdate, divplace, f.gedcom as gedcom, f.living, f.private, f.branch, treename,
     father.lastname as flastname, father.lnprefix as flnprefix, father.firstname as ffirstname, father.living as fliving, father.private as fprivate, father.branch as fbranch,
     mother.lastname as mlastname, mother.lnprefix as mlnprefix, mother.firstname as mfirstname, mother.living as mliving, mother.private as fprivate, mother.branch as mbranch
-    FROM ($families_table as f, $trees_table) $cejoin
+    FROM ($families_table as f, $treesTable) $cejoin
     LEFT JOIN $people_table AS father ON f.gedcom=father.gedcom AND husband = father.personID
     LEFT JOIN $people_table AS mother ON f.gedcom=mother.gedcom AND wife = mother.personID
-    $allwhere (f.gedcom = $trees_table.gedcom)
+    $allwhere (f.gedcom = $treesTable.gedcom)
     ORDER BY $orderstr
     LIMIT $newoffset" . $maxsearchresults;
 $query2 = "SELECT count(f.ID) as fcount
-    FROM ($families_table as f, $trees_table) $cejoin
+    FROM ($families_table as f, $treesTable) $cejoin
     LEFT JOIN $people_table AS father ON f.gedcom=father.gedcom AND husband = father.personID
     LEFT JOIN $people_table AS mother ON f.gedcom=mother.gedcom AND wife = mother.personID
-    $allwhere (f.gedcom = $trees_table.gedcom)";
+    $allwhere (f.gedcom = $treesTable.gedcom)";
 
 //echo $query;
 $result = tng_query($query);

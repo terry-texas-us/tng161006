@@ -64,10 +64,10 @@ $username = trim($username);
 $password = trim($password);
 $realname = trim($realname);
 $email = trim($email);
-$today = date("Y-m-d H:i:s", time() + (3600 * $time_offset));
+$today = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
 
 if ($tngconfig['autotree']) {
-  $query = "SELECT MAX(0+SUBSTRING(gedcom,5)) as oldID FROM $trees_table WHERE gedcom LIKE \"tree%\"";
+  $query = "SELECT MAX(0+SUBSTRING(gedcom,5)) as oldID FROM $treesTable WHERE gedcom LIKE \"tree%\"";
   $result = tng_query($query);
   if (tng_num_rows($result)) {
     $maxrow = tng_fetch_array($result);
@@ -78,7 +78,7 @@ if ($tngconfig['autotree']) {
   tng_free_result($result);
 
   if ($tngconfig['autoapp']) {
-    $query = "INSERT IGNORE INTO $trees_table (gedcom,treename,description,owner,email,address,city,state,country,zip,phone,secret,disallowgedcreate) VALUES (\"$gedcom\",\"$realname\",\"\",\"$realname\",\"$email\",\"$address\",\"$city\",\"$state\",\"$country\",\"$zip\",\"$phone\",\"0\",\"0\")";
+    $query = "INSERT IGNORE INTO $treesTable (gedcom,treename,description,owner,email,address,city,state,country,zip,phone,secret,disallowgedcreate) VALUES (\"$gedcom\",\"$realname\",\"\",\"$realname\",\"$email\",\"$address\",\"$city\",\"$state\",\"$country\",\"$zip\",\"$phone\",\"0\",\"0\")";
     $result = tng_query($query);
   }
 } else {

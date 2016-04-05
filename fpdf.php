@@ -1,15 +1,5 @@
 <?php
 
-/* * *****************************************************************************
- * Software: FPDF                                                               *
- * Version:  1.53                                                               *
- * Date:     2004-12-31                                                         *
- * Author:   Olivier PLATHEY                                                    *
- * License:  Freeware                                                           *
- *                                                                              *
- * You may use, modify and redistribute this software as you wish.              *
- * ***************************************************************************** */
-
 ob_clean();
 
 if (!class_exists('FPDF')) {
@@ -18,7 +8,7 @@ if (!class_exists('FPDF')) {
   class FPDF
   {
 
-//Private properties
+    //Private properties
     var $page;                             //current page number
     var $n;                                    //current object number
     var $offsets;                        //array of object offsets
@@ -1606,10 +1596,10 @@ if (!class_exists('FPDF')) {
       }
     }
 
-//End of class
+    //End of class
   }
 
-//Handle special IE contype request
+  //Handle special IE contype request
   if (isset($_SERVER['HTTP_USER_AGENT']) && $_SERVER['HTTP_USER_AGENT'] == 'contype') {
     header('Content-Type: application/pdf');
     exit;

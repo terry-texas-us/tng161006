@@ -98,7 +98,7 @@ if ($personID && !$albumlinkID) {
       $query = "SELECT reponame FROM $repositories_table WHERE repoID = \"$personID\" AND gedcom = \"$tree\"";
     } elseif ($linktype == 'I') {
       $query = "SELECT lastname, firstname, prefix, suffix, title, lnprefix, living, private, branch, $people_table.gedcom, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, deathdatetr, burialdate, burialdatetr, sex, disallowgedcreate, IF(birthdatetr !='0000-00-00',YEAR(birthdatetr),YEAR(altbirthdatetr)) as birth, IF(deathdatetr !='0000-00-00',YEAR(deathdatetr),YEAR(burialdatetr)) as death
-        FROM $people_table, $trees_table WHERE personID = \"$personID\" AND $people_table.gedcom = \"$tree\" AND $people_table.gedcom = $trees_table.gedcom";
+        FROM $people_table, $treesTable WHERE personID = \"$personID\" AND $people_table.gedcom = \"$tree\" AND $people_table.gedcom = $treesTable.gedcom";
     }
     $result2 = tng_query($query);
     if ($result2) {

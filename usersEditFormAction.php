@@ -74,7 +74,7 @@ if (!$no_email) {
 if (!$disabled) {
   $disabled = 0;
 }
-$today = date("Y-m-d H:i:s", time() + (3600 * $time_offset));
+$today = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
 
 //if the username has changed, we must look up the new name to see if it exists
 //if it exists, "duplicate"
@@ -115,7 +115,7 @@ if (!$duplicate) {
 }
 if ($newuser) {
   if ($tngconfig['autotree'] && !$tngconfig['autoapp']) {
-    $query = "INSERT IGNORE INTO $trees_table (gedcom,treename,description,owner,email,address,city,state,country,zip,phone,secret,disallowgedcreate) VALUES (\"$gedcom\",\"$realname\",\"\",\"$realname\",\"$email\",\"$address\",\"$city\",\"$state\",\"$country\",\"$zip\",\"$phone\",\"0\",\"0\")";
+    $query = "INSERT IGNORE INTO $treesTable (gedcom,treename,description,owner,email,address,city,state,country,zip,phone,secret,disallowgedcreate) VALUES (\"$gedcom\",\"$realname\",\"\",\"$realname\",\"$email\",\"$address\",\"$city\",\"$state\",\"$country\",\"$zip\",\"$phone\",\"0\",\"0\")";
     $result = tng_query($query);
   }
   header("Location: usersReview.php?message=" . urlencode($message));

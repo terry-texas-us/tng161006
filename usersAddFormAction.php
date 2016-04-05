@@ -69,7 +69,7 @@ if (!$no_email) {
 if (!$disabled) {
   $disabled = 0;
 }
-$today = date("Y-m-d H:i:s", time() + (3600 * $time_offset));
+$today = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
 
 $duplicate = false;
 $emailstr = $email ? " OR LOWER(email) = LOWER(\"$email\")" : "";

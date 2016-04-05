@@ -29,7 +29,7 @@ $eventID = $row['eventID'];
 
 $persfamID = $personID ? uiTextSnippet('person') . " " . $personID : uiTextSnippet('family') . " " . $familyID;
 
-$changedate = date("Y-m-d H:i:s", time() + (3600 * $time_offset));
+$changedate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
 $eventdatetr = convertDate($eventdate);
 //don't forget to save date
 

@@ -66,7 +66,7 @@ if ($latitude && $longitude && !$zoom) {
 }
 $fileparts = pathinfo($path);
 $form = strtoupper($fileparts['extension']);
-$newdate = date("Y-m-d H:i:s", time() + (3600 * $time_offset));
+$newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
 
 if ($abspath) {
   $path = $mediaurl;

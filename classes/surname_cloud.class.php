@@ -1,32 +1,15 @@
 <?php
 
-/*
-  name_cloud - This class creates a "cloud" of names which represent the top n surnames
-  in the database (excluding empty names).
-  Author:
-  Roger Lee Navarre, based on code originally written by Wendel Voigt
- */
+class Surname_cloud {
 
-class surname_cloud {
+  public function __construct() {
 
-    public function __construct() {
-    
-    }
+  }
 
-    /*
-      Method:
-      display($top, $surnameTree, $surnameBranch) - generates html code to display the surname cloud
-      Parameters:
-      $top - number of names to put in the cloud (default is 50 names)
-      $surnameTree - limit names from this tree (default is "" which means all trees)
-      $surnameBranch - limit names from this branch (default is "" which means all branches)
-
-     */
-
-    function display($top = "50", $surnameTree = "", $surnameBranch = "") {
+  function display($top = "50", $surnameTree = "", $surnameBranch = "") {
     global $people_table;
     global $lnprefixes;
-    
+
     $treeBranchUrlString = "";
 
     // If you have surnames you wish to exclude enter them here
@@ -75,7 +58,7 @@ class surname_cloud {
     $tempArray[] = "";
 
     $SurnameMax = $countArray[0]['count']; // First record should have the most
-    
+
     $arr_length = count($countArray);
     for ($i = 0, $num = 1; $i < $arr_length && $num <= $top; $i++, $num++) {
       $name = $countArray[$i];
@@ -134,6 +117,5 @@ class surname_cloud {
     }
     $output .= "</div>";
     echo ($output);
-    }
-
+  }
 }

@@ -2,7 +2,7 @@
 
 function adminwritelog($string) {
   global $currentuserdesc;
-  global $time_offset;
+  global $timeOffset;
   global $subroot;
 
   include $subroot . 'logconfig.php';
@@ -13,7 +13,7 @@ function adminwritelog($string) {
   if ($adminmaxloglines && sizeof($lines) >= $adminmaxloglines) {
     array_pop($lines);
   }
-  $updated = date("D d M Y h:i:s A", time() + (3600 * $time_offset));
+  $updated = date("D d M Y h:i:s A", time() + (3600 * $timeOffset));
   array_unshift($lines, "$updated $string.\n");
 
   $fp = fopen($adminlogfile, "w");

@@ -1,21 +1,5 @@
 <?php
 
-/* * *****************************************************************************
- * This is the TNG PDF class, which extends the UFPDF class (which in turn      *
- * extends the FDPF class.                                                      *
- * Author:   Bret Rumsey                                                        *
- *                                                                              *
- * TNGPDF is TNGs own PDF class.                                                *
- * UFPDF is a modification of FPDF to support Unicode through UTF-8.            *
- *                                                                              *
- * Modifications                                                                *
- * - Removed font name mapping.                                                 *
- * - Fonts are now loaded in font "packages", meaning there is a directory      *
- *   under the FPDF_FONTPATH for each font family, which contains all of the    *
- *   variations for that font (italics, bold, etc).  This required adding the   *
- *   'family' key to the font info hash.                                        *
- * ***************************************************************************** */
-
 if (!class_exists('TNGPDF')) {
   define('TNGPDF_VERSION', '0.1');
 
@@ -25,10 +9,10 @@ if (!class_exists('TNGPDF')) {
   class TNGPDF extends UFPDF
   {
 
-// Private properties
+    // Private properties
     var $charset;         // character set being used
 
-// Public methods
+    // Public methods
 
     function TNGPDF($orientation = 'P', $unit = 'mm', $format = 'A4') {
       global $session_charset;

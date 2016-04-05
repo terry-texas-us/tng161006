@@ -59,7 +59,7 @@ header("Content-type:text/html; charset=" . $session_charset);
             <select name='mwtree' onchange="tree = this.options[this.selectedIndex].value">
               <?php
               $wherestr = $assignedtree ? " WHERE gedcom=\"$assignedtree\"" : "";
-              $query = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+              $query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
               $treeresult = tng_query($query);
 
               $trees = "";

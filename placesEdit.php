@@ -27,7 +27,7 @@ $row['place'] = preg_replace("/\"/", "&#34;", $row['place']);
 
 if (!$tngconfig['places1tree']) {
   if ($row['gedcom']) {
-    $query = "SELECT treename FROM $trees_table WHERE gedcom = \"{$row['gedcom']}\"";
+    $query = "SELECT treename FROM $treesTable WHERE gedcom = \"{$row['gedcom']}\"";
     $result = tng_query($query);
     $treerow = tng_fetch_assoc($result);
     tng_free_result($result);
@@ -37,7 +37,7 @@ if (!$tngconfig['places1tree']) {
     } else {
       $wherestr = "";
     }
-    $query = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+    $query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
     $treeresult = tng_query($query);
   }
 }

@@ -28,7 +28,7 @@ $headSection->setTitle(uiTextSnippet('addnewrepo'));
     echo $adminHeaderSection->build('repositories-addnewrepo', $message);
     $navList = new navList('');
     $navList->appendItem([true, "repositoriesBrowse.php", uiTextSnippet('search'), "findrepo"]);
-//    $navList->appendItem([$allowAdd, "repositoriesAdd.php", uiTextSnippet('add'), "addrepo"]);
+    //    $navList->appendItem([$allowAdd, "repositoriesAdd.php", uiTextSnippet('add'), "addrepo"]);
     $navList->appendItem([$allowEdit && $allowDelete, "repositoriesMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("addrepo");
     ?>
@@ -58,7 +58,7 @@ $headSection->setTitle(uiTextSnippet('addnewrepo'));
             <label for='tree1'><?php echo uiTextSnippet('tree'); ?>:</label>
             <select class='form-control' name="tree1" onChange="generateID('repo', document.form1.repoID, document.form1.tree1);">
               <?php
-              $query = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+              $query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
               $result = tng_query($query);
               $numtrees = tng_num_rows($result);
               while ($row = tng_fetch_assoc($result)) {

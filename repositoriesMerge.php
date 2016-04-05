@@ -20,7 +20,7 @@ if ($assignedtree) {
   $wherestr = "";
 }
 
-$query = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+$query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
 $treeresult = tng_query($query);
 
 function doRow($field, $textmsg, $boxname) {
@@ -364,7 +364,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
     $navList = new navList('');
     $navList->appendItem([true, "repositoriesBrowse.php", uiTextSnippet('search'), "findrepo"]);
     $navList->appendItem([$allowAdd, "repositoriesAdd.php", uiTextSnippet('add'), "addrepo"]);
-//    $navList->appendItem([$allowEdit && $allowDelete, "repositoriesMerge.php", uiTextSnippet('merge'), "merge"]);
+    //    $navList->appendItem([$allowEdit && $allowDelete, "repositoriesMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("merge");
     ?>
     <table class='table table-sm'>
@@ -419,13 +419,9 @@ $headSection->setTitle(uiTextSnippet('merge'));
                 </td>
               </tr>
               <tr>
-                <td id="reponame1"><?php if (isset($r1row['reponame'])) {
-                    echo truncateIt($r1row['reponame'], 75);
-                  } ?></td>
+                <td id="reponame1"><?php if (isset($r1row['reponame'])) {echo truncateIt($r1row['reponame'], 75);} ?></td>
                 <td width="80"></td>
-                <td id="reponame2"><?php if (isset($r2row['reponame'])) {
-                    echo truncateIt($r2row['reponame'], 75);
-                  } ?></td>
+                <td id="reponame2"><?php if (isset($r2row['reponame'])) {echo truncateIt($r2row['reponame'], 75);} ?></td>
               </tr>
             </table>
             <br>

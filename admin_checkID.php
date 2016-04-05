@@ -38,9 +38,8 @@ header("Content-type:text/html; charset=" . $session_charset);
 if ($result && tng_num_rows($result)) {
   echo "<span class=\"msgerror\">ID $checkID " . uiTextSnippet('idinuse') . "</span>";
 } else {
-  if (($prefix && (substr($checkID, 0, $prefixlen) != $prefix || !is_numeric(substr($checkID, $prefixlen)))) ||
-          ($suffix && (substr($checkID, $suffixlen) != $suffix || !is_numeric(substr($checkID, 0, $suffixlen))))
-  ) {
+  if (($prefix && (substr($checkID, 0, $prefixlen) != $prefix || !is_numeric(substr($checkID, $prefixlen)))) 
+    || ($suffix && (substr($checkID, $suffixlen) != $suffix || !is_numeric(substr($checkID, 0, $suffixlen))))) {
     echo "<span class=\"msgerror\">$checkID " . uiTextSnippet('idnotvalid') . " $prefix</span>";
   } else {
     echo "<span class=\"msgapproved\">ID $checkID " . uiTextSnippet('idok') . "</span>";

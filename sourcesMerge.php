@@ -20,7 +20,7 @@ if ($assignedtree) {
   $wherestr = "";
 }
 
-$query = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+$query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
 $treeresult = tng_query($query);
 
 function doRow($field, $textmsg, $boxname) {
@@ -410,13 +410,9 @@ $headSection->setTitle(uiTextSnippet('merge'));
             </td>
           </tr>
           <tr>
-            <td id="sourceTitle1"><?php if (isset($s1row['title'])) {
-                echo truncateIt($s1row['title'], 100);
-              } ?></td>
+            <td id="sourceTitle1"><?php if (isset($s1row['title'])) {echo truncateIt($s1row['title'], 100);} ?></td>
             <td width="80"></td>
-            <td id="sourceTitle2"><?php if (isset($s2row['title'])) {
-                echo truncateIt($s2row['title'], 100);
-              } ?></td>
+            <td id="sourceTitle2"><?php if (isset($s2row['title'])) {echo truncateIt($s2row['title'], 100);} ?></td>
           </tr>
         </table>
         <br>

@@ -13,7 +13,7 @@ if ((!$allowEdit && (!$allowAdd || !$added)) || ($assignedtree && $assignedtree 
 }
 $repoID = ucfirst($repoID);
 
-$query = "SELECT treename FROM $trees_table WHERE gedcom = \"$tree\"";
+$query = "SELECT treename FROM $treesTable WHERE gedcom = \"$tree\"";
 $result = tng_query($query);
 $treerow = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -53,7 +53,7 @@ $headSection->setTitle(uiTextSnippet('modifyrepo'));
     $navList->appendItem([true, "repositoriesBrowse.php", uiTextSnippet('search'), "findrepo"]);
     $navList->appendItem([$allowAdd, "repositoriesAdd.php", uiTextSnippet('add'), "addrepo"]);
     $navList->appendItem([$allowEdit && $allowDelete, "repositoriesMerge.php", uiTextSnippet('merge'), "merge"]);
-//    $navList->appendItem([$allowEdit, "repositoriesEdit.php?repoID=$repoID&tree=$tree", uiTextSnippet('edit'), "edit"]);
+    //    $navList->appendItem([$allowEdit, "repositoriesEdit.php?repoID=$repoID&tree=$tree", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <br>

@@ -66,7 +66,7 @@ $row['allow_private'] = $rights['private'];
 
 $namestr = getName($row);
 
-$query = "SELECT treename FROM $trees_table WHERE gedcom = \"$tree\"";
+$query = "SELECT treename FROM $treesTable WHERE gedcom = \"$tree\"";
 $result = tng_query($query);
 $treerow = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -126,7 +126,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
     $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
     $navList->appendItem([$allowEdit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
     $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
-//    $navList->appendItem([$allowEdit, "peopleEdit.php?personID=$personID&amp;tree=$tree", uiTextSnippet('edit'), "edit"]);
+    //    $navList->appendItem([$allowEdit, "peopleEdit.php?personID=$personID&amp;tree=$tree", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <div id="thumbholder" style="margin-right: 5px; <?php if (!$photo) {echo "display: none";} ?>">

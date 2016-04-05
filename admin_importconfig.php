@@ -14,7 +14,7 @@ if ($link) {
     exit;
   }
 
-  $query = "SELECT gedcom, treename FROM $trees_table ORDER BY treename";
+  $query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
   $result = tng_query($query);
 } else {
   $result = false;
@@ -72,48 +72,45 @@ $headSection->setTitle(uiTextSnippet('modifyimportsettings'));
           <td><?php echo uiTextSnippet('defimpopt'); ?>:</td>
           <td>
             <select name="defimpopt">
-              <option value='1'<?php if ($tngimpcfg['defimpopt'] == 1) {
-                echo " selected";
-              } ?>><?php echo uiTextSnippet('allcurrentdata'); ?></option>
-              <option value='0'<?php if (!$tngimpcfg['defimpopt']) {
-                echo " selected";
-              } ?>><?php echo uiTextSnippet('matchingonly'); ?></option>
-              <option value="2"<?php if ($tngimpcfg['defimpopt'] == 2) {
-                echo " selected";
-              } ?>><?php echo uiTextSnippet('donotreplace'); ?></option>
-              <option value="3"<?php if ($tngimpcfg['defimpopt'] == 3) {
-                echo " selected";
-              } ?>><?php echo uiTextSnippet('appendall'); ?></option>
+              <option value='1'<?php if ($tngimpcfg['defimpopt'] == 1) {echo " selected";} ?>>
+                <?php echo uiTextSnippet('allcurrentdata'); ?>
+              </option>
+              <option value='0'<?php if (!$tngimpcfg['defimpopt']) {echo " selected";} ?>>
+                <?php echo uiTextSnippet('matchingonly'); ?>
+              </option>
+              <option value="2"<?php if ($tngimpcfg['defimpopt'] == 2) {echo " selected";} ?>>
+                <?php echo uiTextSnippet('donotreplace'); ?>
+              </option>
+              <option value="3"<?php if ($tngimpcfg['defimpopt'] == 3) {echo " selected";} ?>>
+                <?php echo uiTextSnippet('appendall'); ?>
+              </option>
             </select>
-
           </td>
         </tr>
         <tr>
           <td><?php echo uiTextSnippet('blankchangedt'); ?>:</td>
           <td>
             <select name="blankchangedt">
-              <option value='0'<?php if (!$tngimpcfg['chdate']) {
-                echo " selected";
-              } ?>><?php echo uiTextSnippet('usetoday'); ?></option>
-              <option value='1'<?php if ($tngimpcfg['chdate']) {
-                echo " selected";
-              } ?>><?php echo uiTextSnippet('useblank'); ?></option>
+              <option value='0'<?php if (!$tngimpcfg['chdate']) {echo " selected";} ?>>
+                <?php echo uiTextSnippet('usetoday'); ?>
+              </option>
+              <option value='1'<?php if ($tngimpcfg['chdate']) {echo " selected";} ?>>
+                <?php echo uiTextSnippet('useblank'); ?>
+              </option>
             </select>
-
           </td>
         </tr>
         <tr>
           <td><?php echo uiTextSnippet('nobirthdate'); ?>:</td>
           <td>
             <select name="livingreqbirth">
-              <option value='0'<?php if (!$tngimpcfg['livingreqbirth']) {
-                echo " selected";
-              } ?>><?php echo uiTextSnippet('persdead'); ?></option>
-              <option value='1'<?php if ($tngimpcfg['livingreqbirth']) {
-                echo " selected";
-              } ?>><?php echo uiTextSnippet('persliving'); ?></option>
+              <option value='0'<?php if (!$tngimpcfg['livingreqbirth']) {echo " selected";} ?>>
+                <?php echo uiTextSnippet('persdead'); ?>
+              </option>
+              <option value='1'<?php if ($tngimpcfg['livingreqbirth']) {echo " selected";} ?>>
+                <?php echo uiTextSnippet('persliving'); ?>
+              </option>
             </select>
-
           </td>
         </tr>
         <tr>

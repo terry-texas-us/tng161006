@@ -25,7 +25,7 @@ $wifegender['self'] = 'wife';
 $wifegender['spouse'] = 'husband';
 $wifegender['spouseorder'] = 'wifeorder';
 
-$query = "SELECT treename FROM $trees_table where gedcom = \"$tree\"";
+$query = "SELECT treename FROM $treesTable where gedcom = \"$tree\"";
 $treeresult = tng_query($query);
 $treerow = tng_fetch_assoc($treeresult);
 tng_free_result($treeresult);

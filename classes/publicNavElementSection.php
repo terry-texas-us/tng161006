@@ -1,8 +1,8 @@
 <?php
 
-require_once 'classes/navElementSection.class.php';
+require_once 'classes/NavElementSection.class.php';
 
-class publicNavElementSection extends navElementSection {
+class PublicNavElementSection extends NavElementSection {
   
   private function buildListItem($link, $id, $label) {
     $title = htmlspecialchars(uiTextSnippet($label), ENT_QUOTES);
@@ -15,12 +15,12 @@ class publicNavElementSection extends navElementSection {
   }
 
   private function buildFindMenu() {
-    global $time_offset;
+    global $timeOffset;
 
     $out = $this->buildListItem("surnames.php", "svg/users.svg", "surnames");
     $out .= $this->buildListItem("bookmarks.php", "svg/bookmarks.svg", "bookmarks");
     $out .= $this->buildListItem("placesMain.php", "svg/location.svg", "places");
-    $tngmonth = date("m", time() + (3600 * $time_offset));
+    $tngmonth = date("m", time() + (3600 * $timeOffset));
     $out .= $this->buildListItem("calendar.php?m=$tngmonth", "svg/calendar.svg", "calendar");
     $out .= $this->buildListItem("cemeteriesShow.php", "svg/headstone.svg", "cemeteries");
     $out .= $this->buildListItem("searchform.php", "svg/magnifying-glass.svg", "searchnames");
@@ -79,7 +79,9 @@ class publicNavElementSection extends navElementSection {
 
     $fullmenu = "";
     if ($tngprint) {
-      $fullmenu .= "<div style=\"float:right\"><a href=\"javascript:{document.getElementById('printlink').style.visibility='hidden'; window.print();}\" style=\"text-decoration:underline\" id=\"printlink\">&gt;&gt; " . uiTextSnippet('tngprint') . " &lt;&lt;</a></div>\n";
+      $fullmenu .= "<div style=\"float:right\">\n";
+      $fullmenu .= "<a href=\"javascript:{document.getElementById('printlink').style.visibility='hidden'; window.print();}\" style=\"text-decoration:underline\" id=\"printlink\">&gt;&gt; " . uiTextSnippet('tngprint') . " &lt;&lt;</a>\n";
+      $fullmenu .= "</div>\n";
     } else {
       $fullmenu .= "<nav class='navbar navbar-dark bg-inverse' role='navigation'>\n";
       $outermenu .=  "<button type='button' class='navbar-toggler hidden-md-up' data-toggle='collapse' data-target='#public-navbar-collapse'>&#9776;</button>\n";
@@ -112,21 +114,21 @@ class publicNavElementSection extends navElementSection {
       $outermenu .=        "</ul>\n";
       $outermenu .=      "</li>\n";
 
-      if (navElementSection::$maintenanceIsOn) {
+      if (NavElementSection::$maintenanceIsOn) {
         $outermenu .=    "<li class='nav-item'>\n";
-        $outermenu .=      "<strong class='yellow'>" . publicNavElementSection::$maintenanceMessage . "</strong>\n";
+        $outermenu .=      "<strong class='yellow'>" . PublicNavElementSection::$maintenanceMessage . "</strong>\n";
         $outermenu .=    "</li>\n";
       }
       $outermenu .=    "</ul>\n"; // nav
       $outermenu .=  "</div> <!-- .navbar-collapse -->\n";
 
-    $outermenu .=  "</nav>\n"; // navbar
+      $outermenu .=  "</nav>\n"; // navbar
 
-    $fullmenu .= $outermenu;
+      $fullmenu .= $outermenu;
 
-    $fullmenu .= tng_getRightIcons();
+      $fullmenu .= tng_getRightIcons();
 
-    return $fullmenu;
+      return $fullmenu;
+    }
   }
-}
 }

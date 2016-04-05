@@ -72,7 +72,6 @@ fwrite($fp, "?>\n");
 flock($fp, LOCK_UN);
 fclose($fp);
 
-adminwritelog(uiTextSnippet('modifytemplatesettings') . " - " . uiTextSnippet('template') . " " . $form_templatenum . " - " .
-        uiTextSnippet('templateswitching') . " = " . $form_templateswitching);
+adminwritelog(uiTextSnippet('modifytemplatesettings') . " - " . uiTextSnippet('template') . " " . $form_templatenum . " - " . uiTextSnippet('templateswitching') . " = " . $form_templateswitching);
 
 header("Location: admin_setup.php");

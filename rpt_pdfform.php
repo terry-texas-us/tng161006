@@ -332,24 +332,15 @@ header("Content-type:text/html; charset=" . $session_charset);
             </td>
             <td>
               <select name="pagesize">
-                <option value="a3"<?php if ($pagesize == "a3") {
-                  echo " selected";
-                } ?>>A3
+                <option value="a3"<?php if ($pagesize == "a3") {echo " selected";} ?>>A3</option>
+                <option value="a4"<?php if ($pagesize == "a4") {echo " selected";} ?>>A4</option>
+                <option value="a5"<?php if ($pagesize == "a5") {echo " selected";} ?>>A5</option>
+                <option value="letter"<?php if (!$pagesize || $pagesize == "letter") {echo " selected";} ?>>
+                  <?php echo uiTextSnippet('letter'); ?>
                 </option>
-                <option value="a4"<?php if ($pagesize == "a4") {
-                  echo " selected";
-                } ?>>A4
+                <option value="legal<?php if ($pagesize == "legal") {echo " selected";} ?>">
+                  <?php echo uiTextSnippet('legal'); ?>
                 </option>
-                <option value="a5"<?php if ($pagesize == "a5") {
-                  echo " selected";
-                } ?>>A5
-                </option>
-                <option value="letter"<?php if (!$pagesize || $pagesize == "letter") {
-                  echo " selected";
-                } ?>><?php echo uiTextSnippet('letter'); ?></option>
-                <option value="legal<?php if ($pagesize == "legal") {
-                  echo " selected";
-                } ?>"><?php echo uiTextSnippet('legal'); ?></option>
               </select>
             </td>
           </tr>

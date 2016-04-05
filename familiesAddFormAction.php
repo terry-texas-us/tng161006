@@ -36,7 +36,7 @@ $marrdatetr = convertDate($marrdate);
 $divdatetr = convertDate($divdate);
 $sealdatetr = convertDate($sealdate);
 
-$newdate = date("Y-m-d H:i:s", time() + (3600 * $time_offset));
+$newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
 
 $query = "SELECT familyID FROM $families_table WHERE familyID = \"$familyID\" AND gedcom = \"$tree\"";
 $result = tng_query($query);

@@ -58,7 +58,7 @@ $headSection->setTitle(uiTextSnippet('addnewsource'));
           <?php echo uiTextSnippet('tree'); ?>
           <select class='form-control' name='tree1' onChange="generateID('source', document.form1.sourceID, document.form1.tree1);">
             <?php
-            $query = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+            $query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
             $result = tng_query($query);
             $numtrees = tng_num_rows($result);
             while ($row = tng_fetch_assoc($result)) {

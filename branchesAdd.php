@@ -18,7 +18,7 @@ if ($assignedtree) {
   $wherestr = "";
 }
 $orgtree = $tree;
-$treequery = "SELECT gedcom, treename FROM $trees_table $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
 
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('addnewbranch'));
@@ -32,7 +32,7 @@ $headSection->setTitle(uiTextSnippet('addnewbranch'));
     echo $adminHeaderSection->build('branches-addnewbranch', $message);
     $navList = new navList('');
     $navList->appendItem([true, "branchesBrowse.php", uiTextSnippet('browse'), "findbranch"]);
-//    $navList->appendItem([$allowAdd, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
+    //    $navList->appendItem([$allowAdd, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
     echo $navList->build("addbranch");
     ?>
     <table class='table table-sm'>

@@ -34,24 +34,24 @@ if (!$tree && $defaulttree) {
 } elseif ($tree == "-x--all--x-") {
   $tree = "";
 }
-require_once 'classes/headElementSection.php';
+require_once 'classes/HeadElementSection.php';
 require_once 'classes/publicNavElementSection.php';
 require_once 'classes/publicHeaderElementSection.php';
 require_once 'classes/footerElementSection.php';
 require_once 'classes/scriptsManager.php';
 
-$headSection = new headElementSection($sitename);
+$headSection = new HeadElementSection($sitename);
 
-navElementSection::maintenanceState(isset($tngconfig['maint']) && $tngconfig['maint'] != "", uiTextSnippet('mainton'));
+NavElementSection::maintenanceState(isset($tngconfig['maint']) && $tngconfig['maint'] != "", uiTextSnippet('mainton'));
 
-$publicHeaderSection = new publicHeaderElementSection();
+$publicHeaderSection = new PublicHeaderElementSection();
 $publicHeaderSection->setTitle(getTemplateMessage('headtitle'));
 $publicHeaderSection->setSubtitle(getTemplateMessage('headsubtitle'));
 $publicHeaderSection->setImageUrl($tmp['headimage']);
 
-$publicNavSection = new publicNavElementSection('public');
+$publicNavSection = new PublicNavElementSection('public');
 
-$publicFooterSection = new footerElementSection('public');
+$publicFooterSection = new FooterElementSection('public');
 $publicFooterSection->poweredBy = uiTextSnippet('pwrdby');
 $publicFooterSection->writtenBy = uiTextSnippet('writby');
 

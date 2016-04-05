@@ -4,7 +4,7 @@ require 'begin.php';
 require 'genlib.php';
 require 'getlang.php';
 
-$query = "SELECT gedcom, treename FROM $trees_table ORDER BY treename";
+$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $treeresult = tng_query($query);
 $numtrees = tng_num_rows($treeresult);
 
