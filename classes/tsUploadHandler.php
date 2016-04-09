@@ -13,13 +13,13 @@ class tsUploadHandler extends UploadHandler {
   protected $mediatypeID = '';
   protected $media_folder = '';
   protected $thumbnail = [
-         'folder' => '', 'prefix' => '', 'suffix' => '', 'maxwidth' => '', 'maxheight' => ''
+    'folder' => '', 'prefix' => '', 'suffix' => '', 'maxwidth' => '', 'maxheight' => ''
   ];
   protected $mediapath = ''; // [ts] used to change upload_dir in constructor
   protected $mediaurl = ''; // [ts] used to change upload_url  in constructor
-  protected $mediatypes_table = ''; // [ts] used in handle_file_upload
-  protected $subfolder = ''; // [ts] used in handle_file_upload
-  protected $added = 'added'; // [ts] used in handle_file_upload (ui snippet)
+  protected $mediatypes_table = ''; // [ts] used in handleFileUpload
+  protected $subfolder = ''; // [ts] used in handleFileUpload
+  protected $added = 'added'; // [ts] used in handleFileUpload (ui snippet)
 
   function __construct($options = null, $initialize = true) {
     parent::__construct($options, $initialize);
@@ -33,22 +33,22 @@ class tsUploadHandler extends UploadHandler {
     $this->media_folder = $options['media_folder'];
   }
 
-  protected function handle_file_upload($uploaded_file, $name, $size, $type, $error, $index = null, $content_range = null) {
-    // [ts] parent::handle_file_upload($uploaded_file, $name, $size, $type, $error, $index, $content_range);
+  protected function handleFileUpload($uploaded_file, $name, $size, $type, $error, $index = null, $content_range = null) {
+    // [ts] parent::handleFileUpload($uploaded_file, $name, $size, $type, $error, $index, $content_range);
 
     $file = new \stdClass();
-    $file->name = $this->get_file_name($uploaded_file, $name, $size, $type, $error, $index, $content_range);
-    $file->size = $this->fix_integer_overflow((int) $size);
+    $file->name = $this->getFileName($uploaded_file, $name, $size, $type, $error, $index, $content_range);
+    $file->size = $this->fixIntegerOverflow((int) $size);
     $file->type = $type;
     if ($this->validate($uploaded_file, $file, $error, $index)) {
-      $this->handle_form_data($file, $index);
-      $upload_dir = $this->get_upload_path();
+      $this->handleFormData($file, $index);
+      $upload_dir = $this->getUploadPath();
       if (!is_dir($upload_dir)) {
         mkdir($upload_dir, $this->options['mkdir_mode'], true);
       }
-      $file_path = $this->get_upload_path($file->name);
+      $file_path = $this->getUploadPath($file->name);
       $append_file = $content_range && is_file($file_path) &&
-           $file->size > $this->get_file_size($file_path);
+           $file->size > $this->getFileSize($file_path);
       if ($uploaded_file && is_uploaded_file($uploaded_file)) {
         // multipart/formdata uploads (POST method uploads)
         if ($append_file) {
@@ -60,20 +60,20 @@ class tsUploadHandler extends UploadHandler {
         // Non-multipart uploads (PUT method support)
         file_put_contents($file_path, fopen('php://input', 'r'), $append_file ? FILE_APPEND : 0);
       }
-      $file_size = $this->get_file_size($file_path, $append_file);
+      $file_size = $this->getFileSize($file_path, $append_file);
       if ($file_size === $file->size) {
-        $file->url = $this->get_download_url($file->name);
-        if ($this->is_valid_image_file($file_path)) {
-          $this->handle_image_file($file_path, $file);
+        $file->url = $this->getDownloadUrl($file->name);
+        if ($this->isValidImageFile($file_path)) {
+          $this->handleImageFile($file_path, $file);
         }
       } else {
         $file->size = $file_size;
         if (!$content_range && $this->options['discard_aborted_uploads']) {
           unlink($file_path);
-          $file->error = $this->get_error_message('abort');
+          $file->error = $this->getErrorMessage('abort');
         }
       }
-      $this->set_additional_file_properties($file);
+      $this->setAdditionalFileProperties($file);
     }
     return $file;
   }
@@ -108,12 +108,12 @@ class tsUploadHandler extends UploadHandler {
   }
  
   // [ts] function was renamed from set_delete_file_properties
-  protected function set_additional_file_properties($file) {
-    // [ts] parent::set_additional_file_properties($file);
+  protected function setAdditionalFileProperties($file) {
+    // [ts] parent::setAdditionalFileProperties($file);
 
     $file->deleteUrl = $this->options['script_url']
-         . $this->get_query_separator($this->options['script_url'])
-         . $this->get_singular_param_name()
+         . $this->getQuerySeparator($this->options['script_url'])
+         . $this->getSingularParamName()
          . '=' . rawurlencode($file->name);
     $file->deleteType = $this->options['delete_type'];
     if ($file->deleteType !== 'DELETE') {
@@ -127,18 +127,18 @@ class tsUploadHandler extends UploadHandler {
   public function delete($print_response = true) {
     // [ts] parent::delete($print_response);
 
-    $file_names = $this->get_file_names_params();
+    $file_names = $this->getFileNamesParams();
     if (empty($file_names)) {
-      $file_names = array($this->get_file_name_param());
+      $file_names = array($this->getFileNameParam());
     }
     $response = array();
     foreach ($file_names as $file_name) {
-      $file_path = $this->get_upload_path($file_name);
+      $file_path = $this->getUploadPath($file_name);
       $success = is_file($file_path) && $file_name[0] !== '.' && unlink($file_path);
       if ($success) {
         foreach ($this->options['image_versions'] as $version => $options) {
           if (!empty($version)) {
-            $file = $this->get_upload_path($file_name, $version);
+            $file = $this->getUploadPath($file_name, $version);
             if (is_file($file)) {
               unlink($file);
             }
@@ -147,16 +147,16 @@ class tsUploadHandler extends UploadHandler {
       }
       $response[$file_name] = $success;
     }
-    return $this->generate_response($response, $print_response);
+    return $this->generateResponse($response, $print_response);
   }
 
-  protected function get_download_url($file_name, $version = null, $direct = false) {
-    // [ts] parent::get_download_url($file_name, $version, $direct);
+  protected function getDownloadUrl($file_name, $version = null, $direct = false) {
+    // [ts] parent::getDownloadUrl($file_name, $version, $direct);
 
     if (!$direct && $this->options['download_via_php']) {
       $url = $this->options['script_url']
-           . $this->get_query_separator($this->options['script_url'])
-           . $this->get_singular_param_name() . '=' . rawurlencode($file_name);
+           . $this->getQuerySeparator($this->options['script_url'])
+           . $this->getSingularParamName() . '=' . rawurlencode($file_name);
       if ($version) {
         $url .= '&version=' . rawurlencode($version);
       }
@@ -167,10 +167,10 @@ class tsUploadHandler extends UploadHandler {
     } else {
       $version_url = $this->options['image_versions'][$version]['upload_url'];
       if ($version_url) {
-        return $version_url . $this->get_user_path() . rawurlencode($file_name);
+        return $version_url . $this->getUserPath() . rawurlencode($file_name);
       }
       $version_path = rawurlencode($version) . '/';
     }
-    return $this->options['upload_url'] . $this->get_user_path() . $version_path . rawurlencode($file_name);
+    return $this->options['upload_url'] . $this->getUserPath() . $version_path . rawurlencode($file_name);
   }
 }
