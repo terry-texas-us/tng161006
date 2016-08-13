@@ -62,7 +62,7 @@ header("Content-type:text/html; charset=" . $session_charset);
             </span>
           </div>
         </div>
-        <div class='col-md-offset-3 col-md-3'>
+        <div class='offset-md-3 col-md-3'>
           <label>
             <input name='living' type='checkbox' value='1' checked>
               <?php echo uiTextSnippet('living'); ?>&nbsp;

@@ -89,7 +89,7 @@ if (!$allow_ged && $assignedtree) {
       </div>
       <br>
       <div class='row'>
-        <div class='col-md-9 col-md-offset-3'>
+        <div class='col-md-9 offset-md-3'>
           <label class='checkbox'>
             <input id='allevents' name='allevents' type='checkbox' value='yes'> <?php echo uiTextSnippet('allevents'); ?>
           </label>

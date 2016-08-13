@@ -293,7 +293,7 @@ $headSection->setTitle(uiTextSnippet('media'));
             $numalbums = tng_num_rows($albumresult);
             if ($numalbums) {
               echo "<div class='row'>\n";
-                echo "<div class='col-md-offset-6 col-md-3'>\n";
+                echo "<div class='offset-md-6 col-md-3'>\n";
                   echo "<button class='btn btn-secondary' name='xphaction' type='submit'>" . uiTextSnippet('addtoalbum') . "</button>\n";
                 echo "</div>\n";
                 echo "<div class='col-md-3'>\n";

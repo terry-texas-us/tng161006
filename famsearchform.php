@@ -53,7 +53,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
       <div id='searchform'>
         <?php if ((!$requirelogin || !$treerestrict || !$assignedtree) && $numtrees > 1) { ?>
           <div class='row'>
-            <div class='col-md-offset-8 col-md-4'>
+            <div class='offset-md-8 col-md-4'>
               <?php echo treeSelect($result); ?>
             </div>
           </div>
@@ -283,7 +283,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
                   echo "<div class='col-sm-12'><h6>{$row['displaymsg']}</h6>\n";
                 echo "</div>\n";
                 echo "<div class='row'>\n";
-                  echo "<div class='col-sm-offset-1 col-sm-2'>" . uiTextSnippet('fact') . ":</div>\n";
+                  echo "<div class='offset-sm-1 col-sm-2'>" . uiTextSnippet('fact') . ":</div>\n";
                   echo "<div class='col-sm-3'>\n";
                     echo "<select class='form-control' name=\"cfq{$row['eventtypeID']}\">\n";
                       foreach ($item_array as $item) {
@@ -297,7 +297,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
                   echo "</div>\n";
                 echo "</div>\n";
                 echo "<div class='row'>\n";
-                  echo "<div class='col-sm-offset-1 col-sm-2'>" . uiTextSnippet('place') . ":</div>\n";
+                  echo "<div class='offset-sm-1 col-sm-2'>" . uiTextSnippet('place') . ":</div>\n";
                   echo "<div class='col-sm-3'>\n";
                     echo "<select class='form-control' name=\"cpq{$row['eventtypeID']}\">\n";
                       foreach ($item_array as $item) {
@@ -311,7 +311,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
                   echo "</div>\n";
                 echo "</div>\n";
                 echo "<div class='row'>\n";
-                  echo "<div class='col-sm-offset-1 col-sm-2'>" . uiTextSnippet('year') . ":</div>\n";
+                  echo "<div class='offset-sm-1 col-sm-2'>" . uiTextSnippet('year') . ":</div>\n";
                   echo "<div class='col-sm-3'>\n";
                     echo "<select class='form-control' name=\"cyq{$row['eventtypeID']}\">\n";
                       $item2_array = array(array(uiTextSnippet('equals'), ""), array(uiTextSnippet('plusminus2'), "plusminus2"), array(uiTextSnippet('plusminus5'), "plusminus5"), array(uiTextSnippet('plusminus10'), "plusminus10"), array(uiTextSnippet('lessthan'), "lessthan"), array(uiTextSnippet('greaterthan'), "greaterthan"), array(uiTextSnippet('lessthanequal'), "lessthanequal"), array(uiTextSnippet('greaterthanequal'), "greaterthanequal"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"));
@@ -330,7 +330,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
             ?>
           </div>
           <div class="row secondsearch">
-            <div class='col-sm-offset-6 col-sm-3'>
+            <div class='offset-sm-6 col-sm-3'>
               <button class='btn btn-outline-primary' onclick="return makeURL();"><?php echo uiTextSnippet('search'); ?></button>
             </div>
             <div class='col-sm-3'>
@@ -376,7 +376,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
         </div>
       </div>
       <footer class='row'>
-        <div class='col-sm-offset-6 col-sm-3'>
+        <div class='offset-sm-6 col-sm-3'>
           <button class='btn btn-outline-primary' id='searchbtn' type='submit'><?php echo uiTextSnippet('search'); ?></button>
         </div>
         <div class='col-sm-3'>
