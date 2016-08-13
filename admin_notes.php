@@ -142,7 +142,7 @@ $notecount = tng_num_rows($notelinks);
       <input name='tree' type='hidden' value="<?php echo $tree; ?>" />
       <input name='eventID' type='hidden' value="<?php echo $eventID; ?>" />
       
-      <button class='btn btn-primary-outline' name='submit' type='submit'><?php echo uiTextSnippet('save'); ?></button>
+      <button class='btn btn-outline-primary' name='submit' type='submit'><?php echo uiTextSnippet('save'); ?></button>
       <button class='btn' name='cancel' type='button' onclick="gotoSection('addnote', 'notelist');"><?php echo uiTextSnippet('cancel'); ?></button>
     </footer>
   </form>

@@ -57,7 +57,7 @@ $headSection->setTitle(uiTextSnippet('whatsnew'));
           } ?>
         </textarea>
       <br>
-      <button class='btn btn-primary-outline pull-right' name='submit' type='submit'><?php echo uiTextSnippet('save'); ?></button>
+      <button class='btn btn-outline-primary pull-right' name='submit' type='submit'><?php echo uiTextSnippet('save'); ?></button>
     </form>
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->

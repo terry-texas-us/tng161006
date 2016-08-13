@@ -49,7 +49,7 @@ $headSection->setTitle(uiTextSnippet('addnewrepo'));
             </div>
           </div>
           <div class='col-sm-2'>
-            <button class='btn btn-primary-outline' name='submit' type='submit' onClick="document.form1.newscreen[0].checked = true;"><?php echo uiTextSnippet('lockid'); ?></button>
+            <button class='btn btn-outline-primary' name='submit' type='submit' onClick="document.form1.newscreen[0].checked = true;"><?php echo uiTextSnippet('lockid'); ?></button>
           </div>
           <span id="checkmsg"></span>
         </div>

@@ -331,10 +331,10 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
           </div>
           <div class="row secondsearch">
             <div class='col-sm-offset-6 col-sm-3'>
-              <button class='btn btn-primary-outline' onclick="return makeURL();"><?php echo uiTextSnippet('search'); ?></button>
+              <button class='btn btn-outline-primary' onclick="return makeURL();"><?php echo uiTextSnippet('search'); ?></button>
             </div>
             <div class='col-sm-3'>
-              <button class='btn btn-warning-outline' onclick="resetValues();"><?php echo uiTextSnippet('resetall'); ?></button>
+              <button class='btn btn-outline-warning' onclick="resetValues();"><?php echo uiTextSnippet('resetall'); ?></button>
             </div>
           </div>
         </section> <!-- .custom-events -->
@@ -377,10 +377,10 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
       </div>
       <footer class='row'>
         <div class='col-sm-offset-6 col-sm-3'>
-          <button class='btn btn-primary-outline' id='searchbtn' type='submit'><?php echo uiTextSnippet('search'); ?></button>
+          <button class='btn btn-outline-primary' id='searchbtn' type='submit'><?php echo uiTextSnippet('search'); ?></button>
         </div>
         <div class='col-sm-3'>
-          <button class='btn btn-warning-outline' id='resetbtn' type='button' 
+          <button class='btn btn-outline-warning' id='resetbtn' type='button' 
                   onclick="resetValues();"><?php echo uiTextSnippet('tng_reset'); ?></button>
         </div>
       </footer>

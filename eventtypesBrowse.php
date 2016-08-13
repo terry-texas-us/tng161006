@@ -126,17 +126,17 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
     <form action="eventtypesBrowseFormAction.php" method='post' name="form2">
       <p>
         <?php if ($allowDelete) { ?>
-          <input class='btn btn-warning-outline' name='cetaction' type='submit' value="<?php echo uiTextSnippet('deleteselected'); ?>" onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');">
+          <input class='btn btn-outline-warning' name='cetaction' type='submit' value="<?php echo uiTextSnippet('deleteselected'); ?>" onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');">
         <?php } ?>
         <?php if ($allowEdit) { ?>
-          <input class='btn btn-secondary-outline' name='cetaction' type='submit' value="<?php echo uiTextSnippet('acceptselected'); ?>">
-          <input class='btn btn-secondary-outline' name='cetaction' type='submit' value="<?php echo uiTextSnippet('ignoreselected'); ?>">
-          <input class='btn btn-secondary-outline' name='cetaction' type='submit' value ="<?php echo uiTextSnippet('collapseselected'); ?>">
+          <input class='btn btn-outline-secondary' name='cetaction' type='submit' value="<?php echo uiTextSnippet('acceptselected'); ?>">
+          <input class='btn btn-outline-secondary' name='cetaction' type='submit' value="<?php echo uiTextSnippet('ignoreselected'); ?>">
+          <input class='btn btn-outline-secondary' name='cetaction' type='submit' value ="<?php echo uiTextSnippet('collapseselected'); ?>">
         <?php } ?>
       </p>
       <p>
-        <button class='btn btn-secondary-outline' name='selectall' type='button' onClick="toggleAll(1);"><?php echo uiTextSnippet('selectall'); ?></button>
-        <button class='btn btn-secondary-outline' name='clearall' type='button' onClick="toggleAll(0);"><?php echo uiTextSnippet('clearall'); ?></button>
+        <button class='btn btn-outline-secondary' name='selectall' type='button' onClick="toggleAll(1);"><?php echo uiTextSnippet('selectall'); ?></button>
+        <button class='btn btn-outline-secondary' name='clearall' type='button' onClick="toggleAll(0);"><?php echo uiTextSnippet('clearall'); ?></button>
       </p>
       <?php if ($numrows) { ?>
         <table class="table table-sm table-striped">

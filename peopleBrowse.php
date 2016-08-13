@@ -201,7 +201,7 @@ $headSection->setTitle(uiTextSnippet('people'));
         <p>
           <button class='btn btn-secondary' id='selectall-people' name='selectall' type='button'><?php echo uiTextSnippet('selectall'); ?></button>
           <button class='btn btn-secondary' id='clearall-people' name='clearall' type='button'><?php echo uiTextSnippet('clearall'); ?></button>
-          <button class='btn btn-danger-outline' id='deleteselected-people' name='xperaction' type='submit'><?php echo uiTextSnippet('deleteselected'); ?></button>
+          <button class='btn btn-outline-danger' id='deleteselected-people' name='xperaction' type='submit'><?php echo uiTextSnippet('deleteselected'); ?></button>
         </p>
       <?php } ?>
       <?php if ($numrows) { ?>            

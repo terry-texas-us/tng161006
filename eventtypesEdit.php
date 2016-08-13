@@ -159,7 +159,7 @@ $headSection->setTitle(uiTextSnippet('modifyeventtype'));
       <br>
       <input name='eventtypeID' type='hidden' value="<?php echo $eventtypeID; ?>">
       <input name='display' type='hidden' value=''>
-      <button class='btn btn-primary-outline' name='submit' type='submit'><?php echo uiTextSnippet('savechanges'); ?></button>
+      <button class='btn btn-outline-primary' name='submit' type='submit'><?php echo uiTextSnippet('savechanges'); ?></button>
     </form>
     <p>*<?php echo uiTextSnippet('typerequired'); ?></p>
     <?php echo $adminFooterSection->build(); ?>

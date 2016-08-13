@@ -34,8 +34,8 @@
       </div>
       <div class='row'>
         <div class='col-md-offset-6 col-md-6'>
-          <button class='btn btn-primary-outline' name='submit' type='submit'><?php echo uiTextSnippet('search'); ?></button>
-          <button class='btn btn-warning-outline' name='submit' type='submit' onclick="resetPeople();"><?php echo uiTextSnippet('reset'); ?></button>
+          <button class='btn btn-outline-primary' name='submit' type='submit'><?php echo uiTextSnippet('search'); ?></button>
+          <button class='btn btn-outline-warning' name='submit' type='submit' onclick="resetPeople();"><?php echo uiTextSnippet('reset'); ?></button>
         </div>
       </div>
     </div>

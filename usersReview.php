@@ -41,7 +41,7 @@ $headSection->setTitle(uiTextSnippet('users'));
       <?php if ($allowDelete) { ?>
         <button class='btn btn-secondary' name='selectall' type='button'><?php echo uiTextSnippet('selectall'); ?></button> 
         <button class='btn btn-secondary' name='clearall' type='button'><?php echo uiTextSnippet('clearall'); ?></button>
-        <button class='btn btn-danger-outline' name='xruseraction' type='submit' value='true'><?php echo uiTextSnippet('deleteselected'); ?></button>
+        <button class='btn btn-outline-danger' name='xruseraction' type='submit' value='true'><?php echo uiTextSnippet('deleteselected'); ?></button>
         <br>
       <?php } ?>
       <?php if ($numrows) { ?>

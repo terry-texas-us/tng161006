@@ -73,12 +73,12 @@ $headSection->setTitle(uiTextSnippet('trees'));
           <div class='input-group'>
             <input class='form-control' name='searchstring' type='text' value="<?php echo $searchstring; ?>">
             <span class='input-group-btn'>
-              <button class='btn btn-primary-outline' name='submit' type='submit'><?php echo uiTextSnippet('search'); ?></button>
+              <button class='btn btn-outline-primary' name='submit' type='submit'><?php echo uiTextSnippet('search'); ?></button>
             </span>
           </div>
         </div>
         <div class='col-sm-2'>
-          <button class='btn btn-secondary-outline' id='trees-search-reset' name='submit' type='submit'><?php echo uiTextSnippet('reset'); ?></button>
+          <button class='btn btn-outline-secondary' id='trees-search-reset' name='submit' type='submit'><?php echo uiTextSnippet('reset'); ?></button>
         </div>
       </div>
       <input name='findtree' type='hidden' value='1'>

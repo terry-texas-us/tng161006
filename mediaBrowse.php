@@ -158,8 +158,8 @@ $headSection->setTitle(uiTextSnippet('media'));
           </div>
           <div class='col-md-6'>
             <input class='form-control' name='searchstring' type='text' value="<?php echo $originalstring; ?>" placeholder='<?php echo uiTextSnippet('searchfor'); ?>'>
-            <button class='btn btn-primary-outline' name='submit' type='submit'><?php echo uiTextSnippet('search'); ?></button>
-            <button class='btn btn-warning-outline' name='submit' type='submit' onClick="resetForm();"><?php echo uiTextSnippet('reset'); ?></button>
+            <button class='btn btn-outline-primary' name='submit' type='submit'><?php echo uiTextSnippet('search'); ?></button>
+            <button class='btn btn-outline-warning' name='submit' type='submit' onClick="resetForm();"><?php echo uiTextSnippet('reset'); ?></button>
           </div>
         </div>
         <br>
@@ -192,7 +192,7 @@ $headSection->setTitle(uiTextSnippet('media'));
             <?php if (!$assignedtree && $allowAdd && $allowEdit && $allowDelete) { ?>
               <button class='btn btn-secondary' name='addnewmediatype' type='button' onclick="tnglitbox = new ModalDialog('admin_newcollection.php?field=mediatypeID');"><?php echo uiTextSnippet('addnewcoll'); ?></button>
               <button class='btn btn-secondary' id='editmediatype' name='editmediatype' type='button' style="display: none" onclick="editMediatype(document.form1.mediatypeID);"><?php echo uiTextSnippet('edit'); ?></button>
-              <button class='btn btn-danger-outline' id='delmediatype' name='delmediatype' type='button' style="display: none" onclick="confirmDeleteMediatype(document.form1.mediatypeID);"><?php echo uiTextSnippet('delete'); ?></button>
+              <button class='btn btn-outline-danger' id='delmediatype' name='delmediatype' type='button' style="display: none" onclick="confirmDeleteMediatype(document.form1.mediatypeID);"><?php echo uiTextSnippet('delete'); ?></button>
             <?php } ?>
           </div>
         </div>
@@ -266,7 +266,7 @@ $headSection->setTitle(uiTextSnippet('media'));
               <button class='btn btn-secondary' name='selectall' type='button' onClick="toggleAll(1);"><?php echo uiTextSnippet('selectall'); ?></button>
               <button class='btn btn-secondary' name='clearall' type='button' onClick="toggleAll(0);"><?php echo uiTextSnippet('clearall'); ?></button>
             <?php if ($allowMediaDelete) { ?>
-                <button class='btn btn-danger-outline' name='xphaction' type='submit' onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');"><?php echo uiTextSnippet('deleteselected'); ?></button>
+                <button class='btn btn-outline-danger' name='xphaction' type='submit' onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');"><?php echo uiTextSnippet('deleteselected'); ?></button>
             <?php } ?>
             </div>
             <?php if ($allowMediaEdit) { ?>

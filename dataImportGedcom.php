@@ -84,7 +84,7 @@ if (!$allow_ged && $assignedtree) {
         <div class='col-md-3'>
           <input id='database_org' type='hidden' value=''>
           <input id='database_last' type='hidden' value=''> 
-          <button class='btn btn-primary-outline' id='gedselect' name='gedselect' type='button'><?php echo uiTextSnippet('select') . "..."; ?></button>
+          <button class='btn btn-outline-primary' id='gedselect' name='gedselect' type='button'><?php echo uiTextSnippet('select') . "..."; ?></button>
         </div>
       </div>
       <br>
@@ -124,7 +124,7 @@ if (!$allow_ged && $assignedtree) {
             </div>
             <div class='col-md-3'>
               <?php if (!$assignedtree) { ?>
-              <button class='btn btn-primary-outline' id='addnewtree' name='newtree' type='button'><?php echo uiTextSnippet('addnewtree'); ?></button>
+              <button class='btn btn-outline-primary' id='addnewtree' name='newtree' type='button'><?php echo uiTextSnippet('addnewtree'); ?></button>
               <?php } ?>
             </div>
           </div>
@@ -177,7 +177,7 @@ if (!$allow_ged && $assignedtree) {
       <div style='float: right'>
         <input id='oldimport' name='old' type='checkbox' value='1'> <?php echo uiTextSnippet('oldimport'); ?>
       </div>
-      <button class='btn btn-primary-outline' name='submit' type='submit'><?php echo uiTextSnippet('importdata'); ?></button>
+      <button class='btn btn-outline-primary' name='submit' type='submit'><?php echo uiTextSnippet('importdata'); ?></button>
     </form>
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->

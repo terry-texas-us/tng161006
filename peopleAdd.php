@@ -57,7 +57,7 @@ $headSection->setTitle(uiTextSnippet('addnewperson'));
             </div>
           </div>
           <div class='col-sm-2'>
-            <button class='btn btn-primary-outline' id='lockid' name='submit' type='submit'><?php echo uiTextSnippet('lockid'); ?></button>
+            <button class='btn btn-outline-primary' id='lockid' name='submit' type='submit'><?php echo uiTextSnippet('lockid'); ?></button>
           </div>
           <div class='col-sm-4'>
             <label class='checkbox-inline'>
@@ -164,7 +164,7 @@ $headSection->setTitle(uiTextSnippet('addnewperson'));
       </div>
       <footer id='person-footer'>
         <p class='text-muted'><?php echo uiTextSnippet('pevslater'); ?></p>
-        <button class='btn btn-primary-outline' name='save' type='submit'><?php echo uiTextSnippet('savecont'); ?></button>
+        <button class='btn btn-outline-primary' name='save' type='submit'><?php echo uiTextSnippet('savecont'); ?></button>
         <input name='cw' type='hidden' value="<?php echo "$cw"; ?>">
         <?php if (!$lnprefixes) { ?>
           <input name='lnprefix' type='hidden' value=''>

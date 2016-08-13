@@ -50,7 +50,7 @@ $headSection->setTitle(uiTextSnippet('addnewsource'));
         </div>
         <div id="checkmsg"></div>
         <div class='col-md-offset-1 col-md-2'>
-          <button class='btn btn-primary-outline' name='submit' type='submit' value="<?php echo uiTextSnippet('lockid'); ?>" onClick="document.form1.newscreen[0].checked = true;"><?php echo uiTextSnippet('lockid'); ?></button>
+          <button class='btn btn-outline-primary' name='submit' type='submit' value="<?php echo uiTextSnippet('lockid'); ?>" onClick="document.form1.newscreen[0].checked = true;"><?php echo uiTextSnippet('lockid'); ?></button>
         </div>          
       </div>
       <div class='row'>

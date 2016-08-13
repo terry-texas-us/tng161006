@@ -75,10 +75,10 @@ function checkFile(form) {
             popup += '</p><br><br>';
             popup += '<progress class="progress progress-info" id="gedcom-progress" value="0" max="500"></progress>\n';
             popup += '</div>\n';
-            popup += '<br><div id="implinks"><a class="btn btn-secondary-outline" href="#" onclick="return suspendimport();">' + textSnippet('stop') + '</a>';
+            popup += '<br><div id="implinks"><a class="btn btn-outline-secondary" href="#" onclick="return suspendimport();">' + textSnippet('stop') + '</a>';
             if (saveimport === "1") {
                 treeval = treeselect.options[treeselect.selectedIndex].value;
-                popup += ' <a class="btn btn-primary-outline" href="dataImportGedcomFormAction.php?tree=' + treeval + '&resuming=1" id="resumelink" target="results" onclick="resumeimport();">' + textSnippet('resume') + '</a>';
+                popup += ' <a class="btn btn-outline-primary" href="dataImportGedcomFormAction.php?tree=' + treeval + '&resuming=1" id="resumelink" target="results" onclick="resumeimport();">' + textSnippet('resume') + '</a>';
             }
             popup += '</div>\n<div id="errormsg"></div>';
             popup += '</div>';
@@ -174,7 +174,7 @@ function updateCount() {
         timeoutID = setTimeout(updateCount, 250);
     } else if (!parent.suspended) {
         msgdiv.innerHTML = textSnippet('finishedimporting');
-        var closemsg = '<a class="btn btn-primary-outline" href="#" onclick="tnglitbox.remove(); return false;">' + textSnippet('okay') + '</a>';
+        var closemsg = '<a class="btn btn-outline-primary" href="#" onclick="tnglitbox.remove(); return false;">' + textSnippet('okay') + '</a>';
         parent.document.getElementById('implinks').innerHTML = '<p>' + closemsg + '</p>';
     }
 }

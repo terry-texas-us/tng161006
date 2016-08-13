@@ -88,12 +88,12 @@ $headSection->setTitle(uiTextSnippet('users'));
           <div class='input-group'>
             <input class='form-control' name='searchstring' type='text' value="<?php echo $searchstring; ?>">
             <span class='input-group-btn'>
-              <button class='btn btn-primary-outline' name='submit' type='submit'><?php echo uiTextSnippet('search'); ?></button>
+              <button class='btn btn-outline-primary' name='submit' type='submit'><?php echo uiTextSnippet('search'); ?></button>
             </span>
           </div>      
         </div>
         <div class='col-sm-2'>
-          <button class='btn btn-secondary-outline' id='users-search-reset' name='submit' type='submit'><?php echo uiTextSnippet('reset'); ?></button>
+          <button class='btn btn-outline-secondary' id='users-search-reset' name='submit' type='submit'><?php echo uiTextSnippet('reset'); ?></button>
         </div>
       </div>
       <div class='row'>
@@ -118,7 +118,7 @@ $headSection->setTitle(uiTextSnippet('users'));
       <?php if ($allowDelete) { ?>
         <button class='btn btn-secondary' name='selectall' type='button'><?php echo uiTextSnippet('selectall'); ?></button>
         <button class='btn btn-secondary' name='clearall' type='button'> <?php echo uiTextSnippet('clearall'); ?></button>
-        <button class='btn btn-danger-outline' name='xuseraction' type='submit' value='true'><?php echo uiTextSnippet('deleteselected'); ?></button>
+        <button class='btn btn-outline-danger' name='xuseraction' type='submit' value='true'><?php echo uiTextSnippet('deleteselected'); ?></button>
         <br>
       <?php } ?>
       <?php if ($numrows) { ?>

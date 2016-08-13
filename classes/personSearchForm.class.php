@@ -20,7 +20,7 @@ class PersonSearchForm {
       $this->out .= "<input class='form-control' id='myfirstname' name='myfirstname' type='text' placeholder='" . uiTextSnippet('mnufirstname') . "'>\n";
       $this->out .= "<label class='sr-only' for='mylastname'>" . uiTextSnippet('mnulastname') . "</label>\n";
       $this->out .= "<input class='form-control' id='mylastname' name='mylastname' type='text' placeholder='" . uiTextSnippet('mnulastname') . "'>\n";
-      $this->out .= "<button class='btn btn-primary-outline' type='submit'><img class='icon-sm' src='svg/magnifying-glass.svg'></button>\n";
+      $this->out .= "<button class='btn btn-outline-primary' type='submit'><img class='icon-sm' src='svg/magnifying-glass.svg'></button>\n";
       $this->out .= "<input name='mybool' type='hidden' value='AND'>\n";
     $this->out .= "</form>\n";
     $this->out .= "</div>\n";

@@ -54,13 +54,13 @@ $headSection->setTitle(uiTextSnippet('secondary'));
       </select>
       <br>
       <hr>
-      <input class='btn btn-secondary-outline' name='secaction' type='submit' value="<?php echo uiTextSnippet('tracklines'); ?>">
-      <input class='btn btn-secondary-outline' name='secaction' type='submit' value="<?php echo uiTextSnippet('sortchildren'); ?>">
-      <input class='btn btn-secondary-outline' name='secaction' type='submit' value="<?php echo uiTextSnippet('sortspouses'); ?>">
-      <input class='btn btn-secondary-outline' name='secaction' type='submit' value="<?php echo uiTextSnippet('relabelbranches'); ?>">
+      <input class='btn btn-outline-secondary' name='secaction' type='submit' value="<?php echo uiTextSnippet('tracklines'); ?>">
+      <input class='btn btn-outline-secondary' name='secaction' type='submit' value="<?php echo uiTextSnippet('sortchildren'); ?>">
+      <input class='btn btn-outline-secondary' name='secaction' type='submit' value="<?php echo uiTextSnippet('sortspouses'); ?>">
+      <input class='btn btn-outline-secondary' name='secaction' type='submit' value="<?php echo uiTextSnippet('relabelbranches'); ?>">
 
-      <input class='btn btn-secondary-outline' name='secaction' type='submit' value="<?php echo uiTextSnippet('creategendex'); ?>">
-      <input class='btn btn-secondary-outline' name='secaction' type='submit' value="<?php echo uiTextSnippet('evalmedia'); ?>">
+      <input class='btn btn-outline-secondary' name='secaction' type='submit' value="<?php echo uiTextSnippet('creategendex'); ?>">
+      <input class='btn btn-outline-secondary' name='secaction' type='submit' value="<?php echo uiTextSnippet('evalmedia'); ?>">
     </form>
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->

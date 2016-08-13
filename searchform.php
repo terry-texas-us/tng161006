@@ -225,8 +225,8 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
               echo "</div>\n";
             }
             ?>
-            <button class='btn btn-primary-outline' type='button' onclick="return makeURL();"><?php echo uiTextSnippet('search'); ?></button> 
-            <button class='btn btn-warning-outline' type='button' onclick="resetValues();"><?php echo uiTextSnippet('resetall'); ?></button>
+            <button class='btn btn-outline-primary' type='button' onclick="return makeURL();"><?php echo uiTextSnippet('search'); ?></button> 
+            <button class='btn btn-outline-warning' type='button' onclick="resetValues();"><?php echo uiTextSnippet('resetall'); ?></button>
           </section>
         </section>  <!-- .custom-events --> 
       </div>

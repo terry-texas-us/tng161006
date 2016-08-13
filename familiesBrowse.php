@@ -185,7 +185,7 @@ $headSection->setTitle(uiTextSnippet('families'));
           <p>
             <button class='btn btn-secondary' name='selectall' type='button' onClick="toggleAll(1);"><?php echo uiTextSnippet('selectall'); ?></button>
             <button class='btn btn-secondary' name='clearall' type='button' onClick="toggleAll(0);"><?php echo uiTextSnippet('clearall'); ?></button>
-            <button class='btn btn-danger-outline' name='xfamaction' type='submit' onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');"><?php echo uiTextSnippet('deleteselected'); ?></button>
+            <button class='btn btn-outline-danger' name='xfamaction' type='submit' onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');"><?php echo uiTextSnippet('deleteselected'); ?></button>
           </p>
         <?php }
         if ($numrows) {
