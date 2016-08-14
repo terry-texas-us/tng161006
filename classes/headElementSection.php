@@ -45,7 +45,7 @@ class HeadElementSection {
 
       $this->out .= "<link rel='alternate' type='application/rss+xml' title='RSS' href='tngrss.php' />\n";
     }
-    $this->out .= "<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>\n";
+    // [tas] $this->out .= "<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>\n";
     $this->out .= "<!-- Bootstrap styles -->\n";
     $this->out .= "<link rel='stylesheet' type='text/css' href='_/css/bootstrap.css'>\n";
     

@@ -20,7 +20,6 @@ if ($pedigree['regnotes']) {
 } else {
   $detail_link = "<a href=\"{$detail_link}&tngmore=1\">" . uiTextSnippet('moredetail') . "</a>";
 }
-
 $generation = 1;
 $personcount = 1;
 
@@ -43,7 +42,6 @@ if ($result) {
   $row['spouses'] = getSpouses($personID, $row['sex']);
   array_push($currgen, $row);
 }
-
 $treeResult = getTreeSimple($tree);
 $treerow = tng_fetch_assoc($treeResult);
 $disallowgedcreate = $treerow['disallowgedcreate'];
@@ -112,16 +110,16 @@ $headSection->setTitle($row['name']);
     ?>
     <div class="titleboxmedium">
       <div class="pull-xs-right"><?php echo $detail_link; ?></div>
-      <!-- <div align="left"> -->
       <?php
       while (count($currgen) && $generation <= $generations) {
         echo "<h4>" . uiTextSnippet('generation') . ": $generation</h4>\n";
-        //echo "<ol>\n";
-        echo "<ol style=\"list-style-type:none; padding:0; margin:0;\">";
+        echo "<ol style='list-style-type:none; padding:0; margin:0;'>\n";
         while ($row = array_shift($currgen)) {
-          echo "<li>";
-          echo "<table><tr><td width='40' align='right'>";
-          echo "{$row['number']}.&nbsp;&nbsp;</td><td>";
+          echo "<li>\n";
+          echo "<table>\n";
+          echo "<tr>\n";
+          echo "<td width='40'>{$row['number']}.</td>\n";
+          echo "<td>\n";
           echo showSmallPhoto($row['personID'], $row['name'], $row['allow_living'] && $row['allow_private'], 0, false, $row['sex']);
           echo "<a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree=$tree\" name=\"p{$row['personID']}\" id=\"p{$row['personID']}\">{$row['name']}</a>";
           if ($row['genlist']) {
@@ -140,7 +138,6 @@ $headSection->setTitle($row['name']);
           } else {
             $notes = "";
           }
-
           $fname = $row['firstname'];
           $firstfirstname = getFirstNameOnly($row);
           $newlist = $row['number'] . ".<a href='#' onclick=\"$('#p{$row['personID']}').animate({scrollTop: -200},'slow'); return false;\">$firstfirstname</a><sup style=\"font-size:8px;top:-2px\">$generation</sup>";
@@ -148,10 +145,6 @@ $headSection->setTitle($row['name']);
             $newlist .= ", " . $row['genlist'];
           }
           while ($spouserow = array_shift($row['spouses'])) {
-            //$famrights = determineLivingPrivateRights($spouserow, $righttree);
-            //$spouserow['allow_living'] = $famrights['living'];
-            //$spouserow['allow_private'] = $famrights['private'];
-
             if ($spouserow['marrdate'] || $spouserow['marrplace']) {
               echo "<p>$firstfirstname " . strtolower(uiTextSnippet('wasmarried')) . " <a href=\"peopleShowPerson.php?personID={$spouserow['personID']}&amp;tree=$tree\">{$spouserow['name']}</a>";
               echo getSpouseDates($spouserow);
@@ -178,7 +171,6 @@ $headSection->setTitle($row['name']);
                 }
               }
             }
-
             $result2 = getChildrenData($tree, $spouserow['familyID']);
             if ($result2 && tng_num_rows($result2)) {
               echo "<table><tr><td>" . uiTextSnippet('children') . ":<br>\n<ol>\n";
@@ -204,15 +196,17 @@ $headSection->setTitle($row['name']);
                     $nextgen[$childID] = $childrow;
                   }
                 }
-                echo "<li style=\"list-style-type:lower-roman\">$displaycount. <a href='#' onclick=\"if($('#p$childID').length) {$('html, body').animate({scrollTop: $('#p$childID').offset().top-10},'slow');}else{window.location.href='peopleShowPerson.php?personID=$childID&amp;tree=$tree';} return false;\">$name</a> &nbsp;<a href=\"desctracker.php?trail={$childrow['trail']}&amp;tree=$tree\"><img src=\"img/dchart.gif\" width='10' height='9' alt=\"" . uiTextSnippet('graphdesc') . "\"></a> $vitaldates</li>\n";
+                echo "<li style=\"list-style-type:lower-roman\">$displaycount. <a href='#' onclick=\"if(jQuery('#p$childID').length) {jQuery('html, body').animate({scrollTop: $('#p$childID').offset().top-10},'slow');}else{window.location.href='peopleShowPerson.php?personID=$childID&amp;tree=$tree';} return false;\">$name</a> &nbsp;<a href=\"desctracker.php?trail={$childrow['trail']}&amp;tree=$tree\"><img src=\"img/dchart.gif\" width='10' height='9' alt=\"" . uiTextSnippet('graphdesc') . "\"></a> $vitaldates</li>\n";
               }
               echo "</ol>\n</td></tr></table>\n";
               tng_free_result($result2);
             }
           }
-          //if(!$is_mozilla)
-          echo "</td></tr></table>";
-          echo "<br clear='all'></li>\n";
+          echo "</td>\n";
+          echo "</tr>\n";
+          echo "</table>\n";
+          echo "<br clear='all'>\n";
+          echo "</li>\n";
         }
         $currgen = $nextgen;
         unset($nextgen);
