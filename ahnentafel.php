@@ -20,7 +20,6 @@ if ($pedigree['regnotes']) {
 } else {
   $detail_link = "<a href=\"{$detail_link}&tngmore=1\">" . uiTextSnippet('moredetail') . "</a>";
 }
-
 $generation = 1;
 $personcount = 1;
 
@@ -36,7 +35,6 @@ if (!tng_num_rows($result)) {
   header("Location: thispagedoesnotexist.html");
   exit;
 }
-
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
 $righttree = checktree($tree);
@@ -140,7 +138,6 @@ $headSection->setTitle($row['name']);
       } else {
         $notes = "";
       }
-
       //do spouse
       while ($spouserow = array_shift($row['spouses'])) {
 
@@ -169,7 +166,6 @@ $headSection->setTitle($row['name']);
             }
           }
         }
-
         $result2 = getChildrenData($tree, $spouserow['familyID']);
         if ($result2 && tng_num_rows($result2)) {
           echo uiTextSnippet('children') . ":\n<ol class=\"ahnblock\">\n";
@@ -194,7 +190,6 @@ $headSection->setTitle($row['name']);
       //if(!$is_mozilla)
       echo "</td></tr></table>";
       echo "<br clear='all'></li>\n</ol>\n";
-
 
       //push famc (family of parents) to nextgen
       $parentfamID = "";
@@ -222,7 +217,6 @@ $headSection->setTitle($row['name']);
         }
         tng_free_result($parents);
       }
-
       array_push($currgen, $parentfamID);
       $generation++;
       $personcount = 1;
@@ -257,7 +251,6 @@ $headSection->setTitle($row['name']);
                   if ($fathrow['name'] == uiTextSnippet('living')) {
                     $fathrow['firstname'] = uiTextSnippet('living');
                   }
-
                   echo "<li>";
                   echo "<table><tr><td width='40' align='right'>";
                   echo "$personcount.&nbsp;&nbsp;</td><td>";
@@ -286,7 +279,6 @@ $headSection->setTitle($row['name']);
                 tng_free_result($gotfather);
               }
             }
-
             if ($parentrow['wife']) {
               $gotmother = getPersonData($tree, $parentrow['wife']);
 
@@ -361,7 +353,6 @@ $headSection->setTitle($row['name']);
                 }
               }
             }
-
             //get children
             $result2 = getChildrenData($tree, $nextfamily);
             if ($result2 && tng_num_rows($result2)) {
@@ -389,7 +380,6 @@ $headSection->setTitle($row['name']);
             echo "<br clear='all'></li>\n";
           }
         }
-
         $currgen = $nextgen;
         $lastlastgen = $lastgen;
         unset($nextgen);

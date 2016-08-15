@@ -258,8 +258,6 @@ function getNotes($persfamID, $flag) {
     if ($note['noteID']) {
       getCitations($note['noteID']);
     }
-    //else
-    //getCitations( $note['ID'] );
     if (!$note['eventID']) {
       $note['eventID'] = "--x-general-x--";
     }
@@ -427,13 +425,6 @@ function checkXnote($fact) {
     $newfact[0] = $fact;
   }
   return $newfact;
-}
-
-function strpos_array($notes, $needle) {
-  while (($pos = strpos($haystack, $needle, $pos)) !== false) {
-    $array[] = $pos++;
-  }
-  return $array;
 }
 
 function resetEvents() {
@@ -733,7 +724,10 @@ function doCustomEvents($entityID, $type, $nomap = 0) {
 }
 
 function doMediaSection($entity, $medialist, $albums) {
-  global $mediatypes, $cellnumber, $tableid, $datewidth;
+  global $mediatypes;
+  global $cellnumber;
+  global $tableid;
+  global $datewidth;
 
   $media = "";
   $tableid = "media";
@@ -752,13 +746,12 @@ function doMediaSection($entity, $medialist, $albums) {
   }
   $albumtext = writeAlbums($albums);
   if ($albumtext) {
-    //$media .= showBreak("smallbreak");
     if ($media) {
       $media .= "<br>\n";
     }
     $media .= "<table class=\"table tfixed\">\n";
     $media .= "<col class=\"labelcol\"/><col style=\"width:{$datewidth}px\"/><col/>\n";
-    $media .= "$albumtext\n</table>\n";;
+    $media .= "$albumtext\n</table>\n";
   }
   return $media;
 }
@@ -865,7 +858,6 @@ function getAlbums($entity, $linktype) {
       $thisalbum['name'] = uiTextSnippet('living');
       $thisalbum['description'] = "(" . uiTextSnippet('livingphoto') . ")";
     }
-
     if (!isset($albums[$eventID])) {
       $albums[$eventID] = array();
     }
@@ -915,7 +907,6 @@ function writeAlbums($albums_array) {
       $albumtext .= $albumrows;
     }
   }
-
   return $albumtext;
 }
 
@@ -1000,7 +991,11 @@ function getMedia($entity, $linktype) {
 }
 
 function writeMedia($media_array, $mediatypeID, $prefix = "") {
-  global $tableid, $cellnumber, $datewidth, $mediatypes_display, $tngconfig;
+  global $tableid;
+  global $cellnumber;
+  global $datewidth;
+  global $mediatypes_display;
+  global $tngconfig;
 
   $mediatext = "";
   $media = $media_array['-x--general--x-'][$mediatypeID];
@@ -1076,13 +1071,20 @@ function writeMedia($media_array, $mediatypeID, $prefix = "") {
       $mediatext .= $mediarows;
     }
   }
-
   return $mediatext;
 }
 
 function getAlbumPhoto($albumID, $albumname) {
-  global $livedefault, $rootpath, $media_table, $albumlinks_table, $people_table, $families_table, $citations_table, $medialinks_table;
-  global $mediatypes_assoc, $mediapath;
+  global $livedefault;
+  global $rootpath;
+  global $media_table;
+  global $albumlinks_table;
+  global $people_table;
+  global $families_table;
+  global $citations_table;
+  global $medialinks_table;
+  global $mediatypes_assoc;
+  global $mediapath;
 
   $wherestr2 = $tree ? " AND $medialinks_table.gedcom = \"$tree\"" : "";
 
@@ -1116,7 +1118,6 @@ function getAlbumPhoto($albumID, $albumname) {
         if ($prow['fprivate'] != null) {
           $prow['private'] = $prow['fprivate'];
         }
-
         $rights = determineLivingPrivateRights($prow);
         $prow['allow_living'] == $rights['living'];
         $prow['allow_private'] == $rights['private'];
@@ -1226,7 +1227,8 @@ function getFact($row) {
 }
 
 function getStdExtras($persfamID) {
-  global $tree, $events_table;
+  global $tree;
+  global $events_table;
 
   $stdex = array();
   $query = "SELECT age, agency, cause, addressID, parenttag FROM $events_table WHERE persfamID = \"$persfamID\" AND gedcom = \"$tree\" AND parenttag != \"\" ORDER BY parenttag";
