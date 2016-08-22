@@ -9,7 +9,6 @@ require 'version.php';
 if ($newsearch) {
   $exptime = 0;
   setcookie("tng_search_families_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_families_post[tree]", $tree, $exptime);
   setcookie("tng_search_families_post[living]", $living, $exptime);
   setcookie("tng_search_families_post[exactmatch]", $exactmatch, $exptime);
   setcookie("tng_search_families_post[spousename]", $spousename, $exptime);
@@ -18,9 +17,6 @@ if ($newsearch) {
 } else {
   if (!$searchstring) {
     $searchstring = stripslashes($_COOKIE['tng_search_families_post']['search']);
-  }
-  if (!$tree) {
-    $tree = $_COOKIE['tng_search_families_post']['tree'];
   }
   if (!$living) {
     $living = $_COOKIE['tng_search_families_post']['living'];
@@ -55,14 +51,6 @@ if ($offset) {
   $tngpage = 1;
 }
 
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-  $tree = $assignedtree;
-} else {
-  $wherestr = "";
-}
-$orgtree = $tree;
-
 function addCriteria($field, $value, $operator) {
   $criteria = "";
 
@@ -85,7 +73,7 @@ function addCriteria($field, $value, $operator) {
   return $criteria;
 }
 
-$allwhere = "$families_table.gedcom = $treesTable.gedcom";
+$allwhere = "1=1";
 $allwhere2 = "";
 
 if ($searchstring) {
@@ -114,13 +102,10 @@ if ($spousename == 'husband') {
 }
 
 if ($allwhere2) {
-  $allwhere2 .= "AND $people_table.gedcom = $treesTable.gedcom";
+  $allwhere2 .= "AND 1=1";
   $allwhere .= " $allwhere2";
-  if ($tree) {
-    $allwhere .= " AND $people_table.gedcom = \"$tree\"";
-  } else {
-    $allwhere .= " AND $people_table.gedcom = $families_table.gedcom";
-  }
+  $allwhere .= " AND $people_table.gedcom = $families_table.gedcom";
+
   if ($assignedbranch) {
     $allwhere .= " AND $families_table.branch LIKE \"%$assignedbranch%\"";
   }
@@ -132,13 +117,9 @@ if ($allwhere2) {
   $otherfields = "";
   $sortstr = "";
 }
-if ($tree) {
-  $allwhere .= " AND $families_table.gedcom = \"$tree\"";
-}
 if ($living == "yes") {
   $allwhere .= " AND $families_table.living = \"1\"";
 }
-
 $query = "SELECT $families_table.ID as ID, familyID, husband, wife, marrdate, $families_table.gedcom as gedcom, treename $otherfields FROM ($families_table, $treesTable $people_join) WHERE $allwhere ORDER BY $sortstr familyID LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
@@ -207,14 +188,11 @@ $headSection->setTitle(uiTextSnippet('families'));
                 <th><?php echo uiTextSnippet('wifename'); ?></th>
               <?php } ?>
               <th><?php echo uiTextSnippet('marrdate'); ?></th>
-              <?php if ($numtrees > 1) { ?>
-                <th><?php echo uiTextSnippet('tree'); ?></th>
-              <?php } ?>
             </tr>
             <?php
             $actionstr = "";
             if ($allowEdit) {
-              $actionstr .= "<a href=\"familiesEdit.php?familyID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('edit') . "'>\n";
+              $actionstr .= "<a href=\"familiesEdit.php?familyID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
               $actionstr .= "</a>\n";
             }
@@ -223,19 +201,18 @@ $headSection->setTitle(uiTextSnippet('families'));
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
               $actionstr .= "</a>\n";
             }
-            $actionstr .= "<a href=\"familiesShowFamily.php?familyID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('preview') . "'>\n";
+            $actionstr .= "<a href=\"familiesShowFamily.php?familyID=xxx\" title='" . uiTextSnippet('preview') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
             $actionstr .= "</a>\n";
 
             while ($row = tng_fetch_assoc($result)) {
               $newactionstr = preg_replace("/xxx/", $row['familyID'], $actionstr);
-              $newactionstr = preg_replace("/yyy/", $row['gedcom'], $newactionstr);
               $newactionstr = preg_replace("/zzz/", $row['ID'], $newactionstr);
               $rights = determineLivingPrivateRights($row);
               $row['allow_living'] = $rights['living'];
               $row['allow_private'] = $rights['private'];
 
-              $editlink = "familiesEdit.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}";
+              $editlink = "familiesEdit.php?familyID={$row['familyID']}";
               $id = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['familyID'] . "</a>" : $row['familyID'];
 
               echo "<tr id=\"row_{$row['ID']}\">\n";
@@ -255,9 +232,6 @@ $headSection->setTitle(uiTextSnippet('families'));
                 echo "<td>" . getName($row) . "</td>\n";
               }
               echo "<td>{$row['marrdate']}</td>\n";
-              if ($numtrees > 1) {
-                echo "<td>{$row['treename']}</td>\n";
-              }
               echo "</tr>\n";
             }
             ?>
@@ -279,7 +253,7 @@ $headSection->setTitle(uiTextSnippet('families'));
   <script>
     function confirmDelete(ID) {
       if (confirm(textSnippet('confdeletefam'))) {
-        deleteIt('family', ID, '<?php echo $tree; ?>');
+        deleteIt('family', ID);
       }
       return false;
     }

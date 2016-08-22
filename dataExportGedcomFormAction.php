@@ -11,19 +11,6 @@ require $subroot . 'importconfig.php';
 require 'adminlog.php';
 require 'prefixes.php';
 
-if (!$allow_ged && $assignedtree) {
-  $query = "SELECT disallowgedcreate FROM $treesTable WHERE gedcom = \"$assignedtree\"";
-  $result = tng_query($query);
-  $row = tng_fetch_assoc($result);
-  $disallowgedcreate = $row['disallowgedcreate'];
-  tng_free_result($result);
-
-  if ($disallowgedcreate) {
-    $message = uiTextSnippet('norights');
-    header("Location: admin_login.php?message=" . urlencode($message));
-    exit;
-  }
-}
 $allsources = array();
 $allrepos = array();
 $xnotes = array();
@@ -42,8 +29,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
 <body>
   <section class='container'>
     <?php
-    $righttree = checktree($tree);
-
     foreach ($mediatypes as $mediatype) {
       $msgID = $mediatype['ID'];
       eval("\$incl['$msgID'] = \${'incl_" . $msgID . "'};");
@@ -72,10 +57,10 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     echo $navList->build("export");
 
     function getCitations($persfamID) {
-      global $citations_table, $tree;
+      global $citations_table;
 
       $citations = array();
-      $citquery = "SELECT citationID, page, quay, citedate, citetext, note, sourceID, description, eventID FROM $citations_table WHERE persfamID = \"$persfamID\" AND gedcom = \"$tree\" ORDER BY eventID";
+      $citquery = "SELECT citationID, page, quay, citedate, citetext, note, sourceID, description, eventID FROM $citations_table WHERE persfamID = '$persfamID' ORDER BY eventID";
       $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
       while ($cite = tng_fetch_assoc($citresult)) {
@@ -130,7 +115,8 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     }
 
     function getFact($row, $level) {
-      global $tree, $address_table, $lineending;
+      global $address_table;
+      global $lineending;
 
       $fact = "";
       if ($row['age']) {
@@ -143,7 +129,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         $fact .= "$level CAUS {$row['cause']}$lineending";
       }
       if ($row['addressID']) {
-        $query = "SELECT address1, address2, city, state, zip, country, phone, email, www FROM $address_table WHERE addressID = \"{$row['addressID']}\" AND gedcom = \"$tree\"";
+        $query = "SELECT address1, address2, city, state, zip, country, phone, email, www FROM $address_table WHERE addressID = \"{$row['addressID']}\"";
         $addrresults = tng_query($query);
         $addr = tng_fetch_assoc($addrresults);
         if ($row['tag'] != "ADDR") {
@@ -182,10 +168,10 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     }
 
     function getStdExtras($persfamID, $level) {
-      global $tree, $events_table;
+      global $events_table;
 
       $stdex = array();
-      $query = "SELECT age, agency, cause, addressID, parenttag FROM $events_table WHERE persfamID = \"$persfamID\" AND gedcom = \"$tree\" AND parenttag != \"\" ORDER BY parenttag";
+      $query = "SELECT age, agency, cause, addressID, parenttag FROM $events_table WHERE persfamID = '$persfamID' AND parenttag != \"\" ORDER BY parenttag";
       $stdextras = tng_query($query);
       while ($stdextra = tng_fetch_assoc($stdextras)) {
         $stdex[$stdextra['parenttag']] = getFact($stdextra, $level);
@@ -220,15 +206,19 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     }
 
     function getNotes($id) {
-      global $notelinks_table, $xnotes_table, $tree, $eventtypes_table, $events_table, $xnotes;
+      global $notelinks_table;
+      global $xnotes_table;
+      global $eventtypes_table;
+      global $events_table;
+      global $xnotes;
 
       $query = "SELECT $notelinks_table.ID as ID, secret, $xnotes_table.note as note, $xnotes_table.noteID as noteID, $notelinks_table.eventID
-FROM $notelinks_table
-LEFT JOIN  $xnotes_table on $notelinks_table.xnoteID = $xnotes_table.ID AND $notelinks_table.gedcom = $xnotes_table.gedcom
-LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID
-LEFT JOIN $eventtypes_table on $eventtypes_table.eventtypeID = $events_table.eventtypeID
-WHERE $notelinks_table.persfamID=\"$id\" AND $notelinks_table.gedcom =\"$tree\"
-ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum, ID";
+          FROM $notelinks_table
+          LEFT JOIN  $xnotes_table on $notelinks_table.xnoteID = $xnotes_table.ID AND $notelinks_table.gedcom = $xnotes_table.gedcom
+          LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID
+          LEFT JOIN $eventtypes_table on $eventtypes_table.eventtypeID = $events_table.eventtypeID
+          WHERE $notelinks_table.persfamID = '$id'
+          ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum, ID";
       $notelinks = tng_query($query);
       $notearray = array();
       while ($notelink = tng_fetch_assoc($notelinks)) {
@@ -294,7 +284,9 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
     }
 
     function doNote($level, $label, $notetxt, $private = "") {
-      global $savestate, $saveimport, $saveimport_table, $tree;
+      global $savestate;
+      global $saveimport;
+      global $saveimport_table;
 
       $noteinfo = "";
       $notetxt = str_replace("\r", "", $notetxt);
@@ -319,7 +311,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
       $savestate['ncount']++;
       if ($savestate['ncount'] % 10 == 0) {
         if ($saveimport) {
-          $query = "UPDATE $saveimport_table SET ncount=\"{$savestate['ncount']}\" WHERE gedcom = \"$tree\"";
+          $query = "UPDATE $saveimport_table SET ncount=\"{$savestate['ncount']}\"";
           $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         }
         echo "<strong>N{$savestate['ncount']}</strong> ";
@@ -345,7 +337,12 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
     }
 
     function doXNotes() {
-      global $xnotes_table, $tree, $savestate, $noteprefix, $xnotes, $exliving, $exprivate;
+      global $xnotes_table;
+      global $savestate;
+      global $noteprefix;
+      global $xnotes;
+      global $exliving;
+      global $exprivate;
 
       $xnotestr = "";
 
@@ -354,7 +351,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
       if ($branch || $exliving || $exprivate) {
         if ($xnotes) {
           foreach ($xnotes as $xnote) {
-            $query = "SELECT note, noteID FROM $xnotes_table WHERE gedcom =\"$tree\" AND noteID = \"$xnote\" ORDER BY noteID";
+            $query = "SELECT note, noteID FROM $xnotes_table WHERE noteID = '$xnote' ORDER BY noteID";
             $xnotearray = tng_query($query);
             $xnotetxt = tng_fetch_assoc($xnotearray);
             $xnotestr .= writeXNote($xnotetxt);
@@ -364,7 +361,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
       } else {
         $prefixlen = strlen($noteprefix) + 1;
 
-        $query = "SELECT note, noteID, (0+SUBSTRING(noteID,$prefixlen)) as num FROM $xnotes_table WHERE gedcom =\"$tree\" AND noteID != \"\" {$savestate['wherestr']} ORDER BY num";
+        $query = "SELECT note, noteID, (0+SUBSTRING(noteID,$prefixlen)) as num FROM $xnotes_table WHERE noteID != \"\" {$savestate['wherestr']} ORDER BY num";
         $xnotearray = tng_query($query);
         while ($xnotetxt = tng_fetch_assoc($xnotearray)) {
           $xnotestr .= writeXNote($xnotetxt);
@@ -376,7 +373,12 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
     }
 
     function writeXNote($xnotetxt) {
-      global $tree, $savestate, $lineending, $citations, $fp, $saveimport, $saveimport_table;
+      global $savestate;
+      global $lineending;
+      global $citations;
+      global $fp;
+      global $saveimport;
+      global $saveimport_table;
 
       $xnotestr = "";
 
@@ -386,13 +388,9 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
       $citations = getCitations($xnotetxt['noteID']);
       $xnotestr .= writeCitation($citations['NAME'], $level + 2);
 
-      //$notes = split ( chr(10), $xnotetxt['note'] );
-      //foreach ( $notes as $note )
-      //$xnotestr .= "1 CONT $note$lineending";
-      //ncount purposefully not incremented here
       if ($saveimport) {
         $savestate['offset'] = ftell($fp);
-        $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$xnotetxt['noteID']}\" WHERE gedcom = \"$tree\"";
+        $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$xnotetxt['noteID']}\"";
         $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
 
@@ -400,12 +398,16 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
     }
 
     function getMediaLinks($id) {
-      global $tree, $savestate, $media_table, $medialinks_table;
-      global $expdir, $exppath, $incl;
+      global $savestate;
+      global $media_table;
+      global $medialinks_table;
+      global $expdir;
+      global $exppath;
+      global $incl;
 
       $allmedia = array();
       if ($savestate['media']) {
-        $query = "SELECT notes, altnotes, description, altdescription, path, mediatypeID, eventID, form, abspath, defphoto FROM ($media_table, $medialinks_table) WHERE $medialinks_table.gedcom =\"$tree\" AND $medialinks_table.personID=\"" . addslashes($id) . "\" AND $media_table.mediaID = $medialinks_table.mediaID ORDER BY eventID, ordernum";
+        $query = "SELECT notes, altnotes, description, altdescription, path, mediatypeID, eventID, form, abspath, defphoto FROM ($media_table, $medialinks_table) WHERE $medialinks_table.personID=\"" . addslashes($id) . "\" AND $media_table.mediaID = $medialinks_table.mediaID ORDER BY eventID, ordernum";
         $media = tng_query($query);
 
         while ($prow = tng_fetch_assoc($media)) {
@@ -485,10 +487,10 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
     }
 
     function appendParents($child) {
-      global $lineending, $righttree;
+      global $lineending;
 
       $info = "1 FAMC @{$child['familyID']}@$lineending";
-      $crights = determineLivingPrivateRights($child, $righttree);
+      $crights = determineLivingPrivateRights($child);
       $child['allow_living'] = $crights['living'];
       $child['allow_private'] = $crights['private'];
       if ($cright['both']) {
@@ -566,10 +568,11 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
     }
 
     function doAssociations($entityID) {
-      global $tree, $assoc_table, $lineending;
+      global $assoc_table;
+      global $lineending;
 
       $assocstr = "";
-      $query = "SELECT passocID, relationship FROM $assoc_table WHERE gedcom = \"$tree\" AND personID = \"$entityID\"";
+      $query = "SELECT passocID, relationship FROM $assoc_table WHERE personID = '$entityID'";
       $assocresult = tng_query($query);
       while ($assoc = tng_fetch_assoc($assocresult)) {
         $assocstr .= "1 ASSO @{$assoc['passocID']}@$lineending";
@@ -582,10 +585,21 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
     }
 
     function writeIndividual($ind) {
-      global $tree, $people_table, $events_table, $eventtypes_table, $lnprefixes;
-      global $children_table, $families_table, $citations, $templeready, $savestate, $fp, $lineending, $righttree, $exprivatestr, $exlivingstr;
+      global $people_table;
+      global $events_table;
+      global $eventtypes_table;
+      global $lnprefixes;
+      global $children_table;
+      global $families_table;
+      global $citations;
+      global $templeready;
+      global $savestate;
+      global $fp;
+      global $lineending;
+      global $exprivatestr;
+      global $exlivingstr;
 
-      $rights = determineLivingPrivateRights($ind, $righttree);
+      $rights = determineLivingPrivateRights($ind);
       $ind['allow_living'] = $rights['living'];
       $ind['allow_private'] = $rights['private'];
       $rights['both'] = $ind['allow_private'] && $ind['allow_living'];
@@ -599,7 +613,6 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
       if ($doit && $templeready) {
         $doit = getEligibility($ind);
       }
-
       $spousedata = "";
       if ($ind['sex'] == 'M') {
         $orderfield = ", wifeorder";
@@ -610,7 +623,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
       } else {
         $orderfield = $orderby = "";
       }
-      $query = "(SELECT familyID, changedate, sealdate, sealplace, marrplace, marrdatetr$orderfield FROM $families_table WHERE husband = \"{$ind['personID']}\" AND gedcom = \"$tree\"$exlivingstr$exprivatestr) UNION (SELECT familyID, changedate, sealdate, sealplace, marrplace, marrdatetr$orderfield FROM $families_table WHERE wife = \"{$ind['personID']}\" AND gedcom = \"$tree\"$exlivingstr$exprivatestr)$orderby";
+      $query = "(SELECT familyID, changedate, sealdate, sealplace, marrplace, marrdatetr$orderfield FROM $families_table WHERE husband = \"{$ind['personID']}\" $exlivingstr $exprivatestr) UNION (SELECT familyID, changedate, sealdate, sealplace, marrplace, marrdatetr$orderfield FROM $families_table WHERE wife = \"{$ind['personID']}\" $exlivingstr $exprivatestr)$orderby";
 
       $result2 = tng_query($query);
       while ($spouse = tng_fetch_assoc($result2)) {
@@ -620,13 +633,13 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
         }
         //if $doit still false, loop through children to see if sealing needs to be done for any of them
         if (!$doit) {
-          $query = "SELECT personID, sealdate, sealplace from $children_table WHERE gedcom = \"$tree\" AND familyID = \"{$spouse['familyID']}\"";
+          $query = "SELECT personID, sealdate, sealplace from $children_table WHERE familyID = \"{$spouse['familyID']}\"";
           $children = tng_query($query);
           if ($children) {
             while (!$doit && $child = tng_fetch_assoc($children)) {
               if (!$child['sealdate'] && !$child['sealplace']) {
                 //make sure child is eligible
-                $query = "SELECT birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdatetr, burialdatetr from $people_table WHERE gedcom = \"$tree\" AND personID = \"{$child['personID']}\"$exlivingstr$exprivatestr";
+                $query = "SELECT birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdatetr, burialdatetr from $people_table WHERE personID = \"{$child['personID']}\" $exlivingstr $exprivatestr";
                 $childresult = tng_query($query);
                 $childind = tng_fetch_assoc($childresult);
                 $doit = getEligibility($childind);
@@ -640,7 +653,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
       tng_free_result($result2);
 
       $childdata = "";
-      $query = "SELECT * from $children_table WHERE gedcom = \"$tree\" AND personID = \"{$ind['personID']}\" ORDER BY parentorder";
+      $query = "SELECT * from $children_table WHERE personID = \"{$ind['personID']}\" ORDER BY parentorder";
       $children = tng_query($query);
       if ($children) {
         while ($child = tng_fetch_assoc($children)) {
@@ -803,7 +816,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
         $info .= $parentdata;
 
         if ($rights['both']) {
-          $query = "SELECT tag, description, eventdate, eventplace, age, agency, cause, addressID, info, eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$ind['personID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND parenttag = \"\" AND gedcom = \"$tree\" AND keep = \"1\" ORDER BY eventdate, ordernum, tag";
+          $query = "SELECT tag, description, eventdate, eventplace, age, agency, cause, addressID, info, eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$ind['personID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND parenttag = \"\" AND keep = \"1\" ORDER BY eventdate, ordernum, tag";
           $custevents = tng_query($query);
           while ($custevent = tng_fetch_assoc($custevents)) {
             $info .= doEvent($custevent, 1);
@@ -880,8 +893,15 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
     }
 
     function writeFamily($family) {
-      global $tree, $events_table, $eventtypes_table, $citations, $savestate, $children_table, $people_table;
-      global $templeready, $fp, $lineending, $righttree;
+      global $events_table;
+      global $eventtypes_table;
+      global $citations;
+      global $savestate;
+      global $children_table;
+      global $people_table;
+      global $templeready;
+      global $fp;
+      global $lineending;
 
       $familyID = $family['familyID'];
       $doit = !$templeready;
@@ -891,7 +911,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
       }
 
       $childdata = "";
-      $query = "SELECT personID, sealdate, sealplace, mrel, frel FROM $children_table WHERE familyID = \"$familyID\" AND personID != \"\" AND gedcom = \"$tree\" ORDER BY ordernum";
+      $query = "SELECT personID, sealdate, sealplace, mrel, frel FROM $children_table WHERE familyID = \"$familyID\" AND personID != \"\" ORDER BY ordernum";
       $result = tng_query($query);
       if ($result) {
         while ($child = tng_fetch_assoc($result)) {
@@ -923,20 +943,20 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
 
         //look up family's rights
 
-        $frights = determineLivingPrivateRights($family, $righttree);
+        $frights = determineLivingPrivateRights($family);
         $family['allow_living'] = $frights['living'];
         $family['allow_private'] = $frights['private'];
         if ($frights['both']) {
           //look up husband and wife
-          $query = "SELECT personID, living, private, gedcom, branch FROM $people_table WHERE personID = \"{$family['husband']}\" AND gedcom = \"$tree\"";
+          $query = "SELECT personID, living, private, gedcom, branch FROM $people_table WHERE personID = \"{$family['husband']}\"";
           $result2 = tng_query($query);
           $hrow = tng_fetch_assoc($result2);
-          $frights = determineLivingPrivateRights($hrow, $righttree);
+          $frights = determineLivingPrivateRights($hrow);
           if ($frights['both']) {
-            $query = "SELECT personID, living, private, gedcom, branch FROM $people_table WHERE personID = \"{$family['wife']}\" AND gedcom = \"$tree\"";
+            $query = "SELECT personID, living, private, gedcom, branch FROM $people_table WHERE personID = \"{$family['wife']}\"";
             $result2 = tng_query($query);
             $wrow = tng_fetch_assoc($result2);
-            $frights = determineLivingPrivateRights($wrow, $righttree);
+            $frights = determineLivingPrivateRights($wrow);
           }
           tng_free_result($result2);
         }
@@ -985,7 +1005,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
             $info .= $extras['DIV'];
           }
 
-          $query = "SELECT tag, description, eventdate, eventplace, age, agency, cause, addressID, info, eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"$familyID\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND parenttag = \"\" AND gedcom = \"$tree\" AND keep = \"1\" ORDER BY eventdate, ordernum, tag";
+          $query = "SELECT tag, description, eventdate, eventplace, age, agency, cause, addressID, info, eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"$familyID\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND parenttag = \"\" AND keep = \"1\" ORDER BY eventdate, ordernum, tag";
           $custevents = tng_query($query);
           while ($custevent = tng_fetch_assoc($custevents)) {
             $info .= doEvent($custevent, 1);
@@ -1053,14 +1073,20 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
     }
 
     function doSources() {
-      global $tree, $sources_table, $savestate, $sourceprefix, $sourcesuffix, $allsources, $allrepos, $branch;
+      global $sources_table;
+      global $savestate;
+      global $sourceprefix;
+      global $sourcesuffix;
+      global $allsources;
+      global $allrepos;
+      global $branch;
 
       $sourcestr = "";
       if ($branch) {
         $newsources = array_unique($allsources);
         if ($newsources) {
           foreach ($newsources as $nextsource) {
-            $srcquery = "SELECT * FROM $sources_table WHERE sourceID = \"$nextsource\" AND gedcom = \"$tree\"";
+            $srcquery = "SELECT * FROM $sources_table WHERE sourceID = '$nextsource'";
             $srcresult = tng_query($srcquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
             if ($srcresult) {
               $source = tng_fetch_assoc($srcresult);
@@ -1080,7 +1106,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
           $numstr = "(0+SUBSTRING_INDEX(sourceID,'$sourcesuffix',1))";
         }
 
-        $srcquery = "SELECT *, $numstr as num FROM $sources_table WHERE gedcom = \"$tree\" {$savestate['wherestr']} ORDER BY num";
+        $srcquery = "SELECT *, $numstr as num FROM $sources_table WHERE 1 {$savestate['wherestr']} ORDER BY num";
         $srcresult = tng_query($srcquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         while ($source = tng_fetch_assoc($srcresult)) {
           $sourcestr .= writeSource($source);
@@ -1092,7 +1118,13 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
     }
 
     function writeSource($source) {
-      global $tree, $saveimport_table, $events_table, $eventtypes_table, $savestate, $lineending, $saveimport, $fp;
+      global $saveimport_table;
+      global $events_table;
+      global $eventtypes_table;
+      global $savestate;
+      global $lineending;
+      global $saveimport;
+      global $fp;
 
       $sourcestr = "";
       $srcnotes = getNotes($source['sourceID']);
@@ -1122,7 +1154,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
         }
       }
 
-      $query = "SELECT tag, description, eventdate, eventplace, info FROM $events_table, $eventtypes_table WHERE persfamID = \"{$source['sourceID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND type = \"S\" AND gedcom = \"$tree\" AND keep = \"1\" ORDER BY ordernum";
+      $query = "SELECT tag, description, eventdate, eventplace, info FROM $events_table, $eventtypes_table WHERE persfamID = \"{$source['sourceID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND type = \"S\" AND keep = \"1\" ORDER BY ordernum";
       $custevents = tng_query($query);
       while ($custevent = tng_fetch_assoc($custevents)) {
         $sourcestr .= doEvent($custevent, 1);
@@ -1145,7 +1177,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
       $savestate['scount']++;
       if ($saveimport) {
         $savestate['offset'] = ftell($fp);
-        $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$source['sourceID']}\", scount=\"{$savestate['scount']}\" WHERE gedcom = \"$tree\"";
+        $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$source['sourceID']}\", scount=\"{$savestate['scount']}\"";
         $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
       if ($savestate['scount'] % 10 == 0) {
@@ -1156,7 +1188,12 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
     }
 
     function doRepositories() {
-      global $tree, $branch, $repositories_table, $savestate, $repoprefix, $reposuffix, $allrepos;
+      global $branch;
+      global $repositories_table;
+      global $savestate;
+      global $repoprefix;
+      global $reposuffix;
+      global $allrepos;
 
       $repostr = "";
 
@@ -1164,7 +1201,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
         $newrepos = array_unique($allrepos);
         if ($newrepos) {
           foreach ($newrepos as $nextrepo) {
-            $repoquery = "SELECT * FROM $repositories_table WHERE repoID = \"$nextrepo\" AND gedcom = \"$tree\"";
+            $repoquery = "SELECT * FROM $repositories_table WHERE repoID = '$nextrepo'";
             $reporesult = tng_query($repoquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
             if ($reporesult) {
               $repo = tng_fetch_assoc($reporesult);
@@ -1181,7 +1218,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
           $numstr = "(0+SUBSTRING_INDEX(repoID,'$reposuffix',1))";
         }
 
-        $repoquery = "SELECT *, $numstr as num FROM $repositories_table WHERE gedcom = \"$tree\" {$savestate['wherestr']} ORDER BY num";
+        $repoquery = "SELECT *, $numstr as num FROM $repositories_table WHERE 1 {$savestate['wherestr']} ORDER BY num";
         $reporesult = tng_query($repoquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
         while ($repo = tng_fetch_assoc($reporesult)) {
@@ -1194,7 +1231,11 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
     }
 
     function writeRepository($repo) {
-      global $tree, $events_table, $eventtypes_table, $savestate, $lineending, $saveimport_table;
+      global $events_table;
+      global $eventtypes_table;
+      global $savestate;
+      global $lineending;
+      global $saveimport_table;
 
       $repostr = "";
       $reponotes = getNotes($repo['repoID']);
@@ -1208,7 +1249,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
         $repostr .= getFact($repo, 1);
       }
 
-      $query = "SELECT tag, description, eventdate, eventplace, info FROM $events_table, $eventtypes_table WHERE persfamID = \"{$repo['repoID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND type = \"R\" AND gedcom = \"$tree\" AND keep = \"1\" ORDER BY ordernum";
+      $query = "SELECT tag, description, eventdate, eventplace, info FROM $events_table, $eventtypes_table WHERE persfamID = \"{$repo['repoID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND type = \"R\" AND keep = \"1\" ORDER BY ordernum";
       $custevents = tng_query($query);
       while ($custevent = tng_fetch_assoc($custevents)) {
         $repostr .= doEvent($custevent, 1);
@@ -1226,7 +1267,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
       $savestate['rcount']++;
       if ($saveimport) {
         $savestate['offset'] = ftell($fp);
-        $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$repo['repoID']}\", rcount=\"{$savestate['rcount']}\" WHERE gedcom = \"$tree\"";
+        $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$repo['repoID']}\", rcount=\"{$savestate['rcount']}\"";
         $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
       if ($savestate['rcount'] % 10 == 0) {
@@ -1246,19 +1287,18 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
     }
 
     function doPlaces() {
-      global $tngconfig, $tree, $branch, $placelist, $places_table, $medialinks_table, $savestate, $lineending;
+      global $branch;
+      global $placelist;
+      global $places_table;
+      global $medialinks_table;
+      global $savestate;
+      global $lineending;
 
-      if ($tngconfig['places1tree']) {
-        $treestr = $jtreestr = "";
-      } else {
-        $treestr = "AND $places_table.gedcom = \"$tree\"";
-        $jtreestr = "AND $places_table.gedcom = $medialinks_table.gedcom";
-      }
       $places = array();
 
       if ($branch) {
         foreach ($placelist as $place) {
-          $query = "SELECT place, notes, latitude, longitude, placelevel, zoom FROM $places_table WHERE place = \"" . addslashes($place) . "\" $treestr";
+          $query = "SELECT place, notes, latitude, longitude, placelevel, zoom FROM $places_table WHERE place = \"" . addslashes($place) . "\"";
           $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
           $row = tng_fetch_assoc($result);
           if ($row['latitude'] || $row['longitude'] || $row['notes']) {
@@ -1267,7 +1307,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
           tng_free_result($result);
         }
       } else {
-        $query = "SELECT place, notes, latitude, longitude, placelevel, zoom FROM $places_table WHERE (latitude != \"\" OR longitude != \"\" OR notes != \"\") $treestr";
+        $query = "SELECT place, notes, latitude, longitude, placelevel, zoom FROM $places_table WHERE (latitude != \"\" OR longitude != \"\" OR notes != \"\")";
         $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         while ($row = tng_fetch_assoc($result)) {
           $places[] = $row;
@@ -1276,7 +1316,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
 
         $query = "SELECT $medialinks_table.personID as place, $places_table.notes as notes, latitude, longitude
           FROM ($places_table, $medialinks_table)
-          WHERE linktype = \"L\" $treestr AND $places_table.place = $medialinks_table.personID $jtreestr";
+          WHERE linktype = \"L\" $places_table.place = $medialinks_table.personID";
         $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         while ($row = tng_fetch_assoc($result)) {
           if (!in_array($place, $places)) {
@@ -1285,8 +1325,6 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
         }
         tng_free_result($result);
       }
-
-
       $placestr = "";
       foreach ($places as $place) {
         $placemedia = getMediaLinks($place['place']);
@@ -1305,28 +1343,24 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
         if ($placemedia) {
           $placestr .= writeMediaLinks($placemedia['-x--general--x-'], 1);
         }
-
         $savestate['pcount']++;
         if ($saveimport) {
           $savestate['offset'] = ftell($fp);
-          $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$place['place']}\", pcount=\"{$savestate['pcount']}\" WHERE gedcom = \"$tree\"";
+          $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$place['place']}\", pcount=\"{$savestate['pcount']}\"";
           $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         }
         if ($savestate['pcount'] % 10 == 0) {
           echo "<strong>P{$savestate['pcount']}</strong> ";
         }
       }
-
       return $placestr;
     }
-
     ?>
     <p><strong><?php echo uiTextSnippet('exporting'); ?></strong></p>
     <?php
     if ($saveimport) {
-      echo "<p>" . uiTextSnippet('ifexportfails') . " <a href=\"dataExportGedcomFormAction.php?tree=$tree&amp;resume=1\">" . uiTextSnippet('clickresume') . "</a>.</p>$lineending";
+      echo "<p>" . uiTextSnippet('ifexportfails') . " <a href=\"dataExportGedcomFormAction.php?resume=1\">" . uiTextSnippet('clickresume') . "</a>.</p>$lineending";
     }
-
     set_time_limit(0);
     $xnotes = array();
 
@@ -1337,7 +1371,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
     //if saving is enabled and URL flag is set, check the db table to see if a record exists
     if ($saveimport) {
       if ($resume) {
-        $checksql = "SELECT filename, offset, lasttype, lastid, icount, fcount, scount, ncount, rcount, mcount, pcount from $saveimport_table WHERE gedcom = \"$tree\"";
+        $checksql = "SELECT filename, offset, lasttype, lastid, icount, fcount, scount, ncount, rcount, mcount, pcount from $saveimport_table";
         $result = tng_query($checksql) or die(uiTextSnippet('cannotexecutequery') . ": $checksql");
         $found = tng_num_rows($result);
         if ($found) {
@@ -1392,10 +1426,11 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
         }
         tng_free_result($result);
       } else {
-        $query = "DELETE from $saveimport_table WHERE gedcom = \"$tree\"";
+        $query = "DELETE from $saveimport_table";
         $result = tng_query($query);
 
-        $sql = "INSERT INTO $saveimport_table (filename, offset, gedcom, media)  VALUES(\"$filename\", 0, \"$tree\", \"$exportmedia\")";
+        $sql = "INSERT INTO $saveimport_table (filename, offset, gedcom, media) "
+            . "VALUES('$filename', 0, '', '$exportmedia')";
         $result = tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $sql");
       }
     }
@@ -1429,7 +1464,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
     $maxgcgen = 999;
 
     if (!$found) {
-      $query = "SELECT email, owner FROM $treesTable WHERE gedcom = \"$tree\"";
+      $query = "SELECT email, owner FROM $treesTable";
       $treeresult = tng_query($query);
       $treerow = tng_fetch_assoc($treeresult);
       tng_free_result($treeresult);
@@ -1452,7 +1487,6 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
               . "0 @SUB1@ SUBM$lineending"
               . "1 NAME $ownername$lineending"
               . "1 EMAIL $owneremail$lineending";
-      //if( $templeready ) $firstpart .= "1 DEST TempleReady$lineending";
 
       fwrite($fp, "$firstpart");
     }
@@ -1475,7 +1509,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
         }
         $query = "SELECT personID, $numstr as num, lastname, lnprefix, firstname, sex, title, prefix, suffix, nickname, birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, baptdate, baptplace, endldate, endlplace, famc, living, private, branch, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate "
           . "FROM $people_table "
-          . "WHERE gedcom = \"$tree\"$branchstr$exlivingstr$exprivatestr {$savestate['wherestr']} "
+          . "WHERE 1 $branchstr $exlivingstr $exprivatestr {$savestate['wherestr']} "
           . "ORDER BY num "
           . "LIMIT $nextone, $largechunk";
         $result = tng_query($query);
@@ -1486,7 +1520,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
               writeIndividual($ind);
               if ($saveimport) {
                 $savestate['offset'] = ftell($fp);
-                $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$ind['personID']}\", icount=\"{$savestate['icount']}\" WHERE gedcom = \"$tree\"";
+                $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$ind['personID']}\", icount=\"{$savestate['icount']}\"";
                 $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
               }
             }
@@ -1514,7 +1548,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
 
         $query = "SELECT *, (0+SUBSTRING(familyID,$prefixlen)) as num, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate "
           . "FROM $families_table "
-          . "WHERE gedcom = \"$tree\"$branchstr {$savestate['wherestr']}$exlivingstr$exprivatestr "
+          . "WHERE 1 $branchstr {$savestate['wherestr']} $exlivingstr $exprivatestr "
           . "ORDER BY num "
           . "LIMIT $nextone, $largechunk";
         $result = tng_query($query);
@@ -1525,7 +1559,7 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
               $famarray[$fam['familyID']] = writeFamily($fam);
               if ($saveimport) {
                 $savestate['offset'] = ftell($fp);
-                $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$fam['familyID']}\", fcount=\"{$savestate['fcount']}\" WHERE gedcom = \"$tree\"";
+                $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$fam['familyID']}\", fcount=\"{$savestate['fcount']}\"";
                 $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
               }
             }
@@ -1563,13 +1597,13 @@ ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum
     chmod($filename, 0644);
 
     if ($saveimport) {
-      $sql = "DELETE from $saveimport_table WHERE gedcom = \"$tree\"";
+      $sql = "DELETE from $saveimport_table";
       $result = tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     }
     ?>
     <p>
       <?php
-      adminwritelog(uiTextSnippet('export') . ": $tree");
+      adminwritelog(uiTextSnippet('export'));
       echo uiTextSnippet('finishedexporting');
       echo "<br>\n";
       echo "{$savestate['icount']} " . uiTextSnippet('people')

@@ -3,14 +3,12 @@
   <tr>
     <td class="sncol">
       <?php
-      $wherestr = $tree ? "WHERE gedcom = \"$tree\"" : "";
-      $treestr = $orgtree ? "&amp;tree=$tree" : "";
+      $wherestr = "";
 
       $more = getLivingPrivateRestrictions($people_table, false, false);
       if ($more) {
         $wherestr .= $wherestr ? " AND " . $more : "WHERE $more";
       }
-
       $topnum = $topnum ? $topnum : 100;
       $surnamestr = $lnprefixes ? "TRIM(CONCAT_WS(' ',lnprefix,lastname) )" : "lastname";
       if ($tngconfig['ucsurnames']) {

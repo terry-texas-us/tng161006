@@ -16,9 +16,6 @@ if ($place) {
   }
   $query = "SELECT ID, place, longitude, latitude, gedcom FROM $places_table
     WHERE ";
-  if (!$tngconfig['places1tree']) {
-    $query .= "gedcom = \"$tree\" AND ";
-  }
   $query .= $pwherestr . " ORDER BY place, gedcom, ID";
   $result = tng_query($query);
 
@@ -60,30 +57,6 @@ $headSection->setTitle(uiTextSnippet('mergeplaces'));
 
     <form action="placesMerge.php" method='post' name="form1" onSubmit="return validateForm1();">
       <table class='table table-sm'>
-        <?php
-        if (!$tngconfig['places1tree']) {
-          ?>
-          <tr>
-            <td><?php echo uiTextSnippet('tree'); ?>:</td>
-            <td>
-              <select name='tree'>
-                <?php
-                $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
-                while ($treerow = tng_fetch_assoc($treeresult)) {
-                  echo "    <option value=\"{$treerow['gedcom']}\"";
-                  if ($treerow['gedcom'] == $tree) {
-                    echo " selected";
-                  }
-                  echo ">{$treerow['treename']}</option>\n";
-                }
-                tng_free_result($treeresult);
-                ?>
-              </select>
-            </td>
-          </tr>
-          <?php
-        }
-        ?>
         <tr>
           <td><?php echo uiTextSnippet('searchfor'); ?>:</td>
           <td><input name='place' type='text' size='50' value="<?php echo stripslashes($place); ?>">

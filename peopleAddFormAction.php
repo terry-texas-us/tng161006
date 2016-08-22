@@ -12,8 +12,7 @@ require 'datelib.php';
 require 'geocodelib.php';
 require 'deletelib.php';
 
-$tree = $tree1;
-if (!$allowAdd || ($assignedtree && $assignedtree != $tree)) {
+if (!$allowAdd) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -65,7 +64,7 @@ $endldatetr = convertDate($endldate);
 
 $newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
 
-$query = "SELECT personID FROM $people_table WHERE personID = \"$personID\" and gedcom = \"$tree\"";
+$query = "SELECT personID FROM $people_table WHERE personID = '$personID'";
 $result = tng_query($query);
 
 if ($result && tng_num_rows($result)) {
@@ -77,10 +76,8 @@ if ($result && tng_num_rows($result)) {
   }
   exit;
 }
-
-//delete all notes & citations linked to this person
-deleteCitations($personID, $tree);
-deleteNoteLinks($personID, $tree);
+deleteCitations($personID);
+deleteNoteLinks($personID);
 
 $places = array();
 if (trim($birthplace) && !in_array($birthplace, $places)) {
@@ -107,17 +104,15 @@ if (trim($initplace) && !in_array($initplace, $places)) {
 if (trim($endlplace) && !in_array($endlplace, $places)) {
   array_push($places, $endlplace);
 }
-$placetree = $tngconfig['places1tree'] ? "" : $tree;
 foreach ($places as $place) {
   $temple = strlen($place) == 5 && $place == strtoupper($place) ? 1 : 0;
-  $query = "INSERT IGNORE INTO $places_table (gedcom,place,placelevel,zoom,geoignore,temple) VALUES (\"$placetree\",\"$place\",\"0\",\"0\",\"0\",\"$temple\")";
+  $query = "INSERT IGNORE INTO $places_table (gedcom, place, placelevel, zoom, geoignore, temple) VALUES ('', '$place', '0', '0', '0', '$temple')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   if ($tngconfig['autogeo'] && tng_affected_rows()) {
     $ID = tng_insert_id();
     $message = geocode($place, 0, $ID);
   }
 }
-
 if (is_array($branch)) {
   foreach ($branch as $b) {
     if ($b) {
@@ -150,31 +145,32 @@ tng_free_result($result);
 
 $branchlist = explode(',', $allbranches);
 foreach ($branchlist as $b) {
-  $query = "INSERT IGNORE INTO $branchlinks_table (branch,gedcom,persfamID) VALUES(\"$b\",\"$tree\",\"$personID\")";
+  $query = "INSERT IGNORE INTO $branchlinks_table (branch, gedcom, persfamID) VALUES('$b', '', '$personID')";
   $result = tng_query($query);
 }
 
-adminwritelog("<a href=\"peopleEdit.php?personID=$personID&amp;tree=$tree\">" . uiTextSnippet('addnewperson') . ": $tree/$personID</a>");
+adminwritelog("<a href=\"peopleEdit.php?personID=$personID\">" . uiTextSnippet('addnewperson') . ": $personID</a>");
 
 if ($type == "child") {
   if ($familyID) {
-    $query = "SELECT personID FROM $children_table WHERE familyID=\"$familyID\" AND gedcom=\"$tree\"";
+    $query = "SELECT personID FROM $children_table WHERE familyID = '$familyID'";
     $result = tng_query($query);
     $order = tng_num_rows($result);
     tng_free_result($result);
 
-    $query = "INSERT INTO $children_table (familyID,personID,ordernum,gedcom,frel,mrel,haskids,parentorder,sealdate,sealdatetr,sealplace) VALUES (\"$familyID\",\"$personID\",$order,\"$tree\",\"\",\"\",0,0,\"\",\"0000-00-00\",\"\")";
+    $query = "INSERT INTO $children_table (familyID, personID, ordernum, gedcom, frel, mrel, haskids, parentorder, sealdate, sealdatetr, sealplace) "
+        . "VALUES ('$familyID', '$personID', $order, '$tree', '', '', 0, 0, '', '0000-00-00', '')";
     $result = tng_query($query);
 
-    $query = "SELECT husband,wife FROM $families_table WHERE familyID=\"$familyID\" AND gedcom=\"$tree\"";
+    $query = "SELECT husband,wife FROM $families_table WHERE familyID = '$familyID'";
     $result = tng_query($query);
     $famrow = tng_fetch_assoc($result);
     if ($famrow['husband']) {
-      $query = "UPDATE $children_table SET haskids=\"1\" WHERE personID = \"{$famrow['husband']}\" AND gedcom = \"$tree\"";
+      $query = "UPDATE $children_table SET haskids=\"1\" WHERE personID = \"{$famrow['husband']}\"";
       $result2 = tng_query($query);
     }
     if ($famrow['wife']) {
-      $query = "UPDATE $children_table SET haskids=\"1\" WHERE personID = \"{$famrow['wife']}\" AND gedcom = \"$tree\"";
+      $query = "UPDATE $children_table SET haskids=\"1\" WHERE personID = \"{$famrow['wife']}\"";
       $result2 = tng_query($query);
     }
     tng_free_result($result);
@@ -214,5 +210,5 @@ if ($type == "child") {
 } elseif ($newperson == "ajax") {
   echo 1;
 } else {
-  header("Location: peopleEdit.php?personID=$personID&tree=$tree&added=1");
+  header("Location: peopleEdit.php?personID=$personID&added=1");
 }

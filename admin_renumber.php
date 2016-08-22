@@ -8,12 +8,11 @@ require 'version.php';
 
 require 'prefixes.php';
 
-if (!$allowEdit || $assignedtree) {
+if (!$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-
 //can only start if in maintenance mode
 
 header("Content-type: text/html; charset=" . $session_charset);
@@ -69,9 +68,9 @@ echo $navList->build("renumber");
     if ($prefix) {
       $prefixlen = strlen($prefix) + 1;
 
-      $query = "SELECT ID, $id, (0+SUBSTRING($id,$prefixlen)) as num FROM $table WHERE gedcom = \"$tree\" AND (0+SUBSTRING($id,$prefixlen)) >= $nextnum ORDER BY num";
+      $query = "SELECT ID, $id, (0+SUBSTRING($id,$prefixlen)) as num FROM $table WHERE (0+SUBSTRING($id,$prefixlen)) >= $nextnum ORDER BY num";
     } else {
-      $query = "SELECT ID, $id, (0+SUBSTRING_INDEX($id,'$suffix',1)) as num FROM $table WHERE gedcom = \"$tree\" AND (0+SUBSTRING_INDEX($id,'$suffix',1)) >= $nextnum ORDER BY num";
+      $query = "SELECT ID, $id, (0+SUBSTRING_INDEX($id,'$suffix',1)) as num FROM $table WHERE (0+SUBSTRING_INDEX($id,'$suffix',1)) >= $nextnum ORDER BY num";
     }
 
     $result = tng_query($query);
@@ -124,7 +123,7 @@ echo $navList->build("renumber");
       if ($row['num'] >= $nextnum) {
         $newID = $digits ? ($prefix . str_pad($nextnum, $digits, "0", STR_PAD_LEFT) . $suffix) : ($prefix . $nextnum . $suffix);
 
-        $query = "SELECT ID from $table WHERE gedcom=\"$tree\" AND $id=\"$newID\"";
+        $query = "SELECT ID from $table WHERE $id = '$newID'";
         $result1 = tng_query($query);
         if (!tng_num_rows($result1)) {
           //if(tng_num_rows($result1)) die ("Problem: destination ID ($newID) already exists. Operation aborted.");
@@ -135,28 +134,28 @@ echo $navList->build("renumber");
           if ($type == "person") {
             $old = $row['personID'];
 
-            $query = "UPDATE $families_table SET husband=\"$newID\" WHERE gedcom=\"$tree\" AND husband=\"$old\"";
+            $query = "UPDATE $families_table SET husband = '$newID' WHERE husband = '$old'";
             $result2 = tng_query($query);
 
-            $query = "UPDATE $families_table SET wife=\"$newID\" WHERE gedcom=\"$tree\" AND wife=\"$old\"";
+            $query = "UPDATE $families_table SET wife = '$newID' WHERE wife = '$old'";
             $result2 = tng_query($query);
 
-            $query = "UPDATE $children_table SET personID=\"$newID\" WHERE gedcom=\"$tree\" AND personID=\"$old\"";
+            $query = "UPDATE $children_table SET personID = '$newID' WHERE personID = '$old'";
             $result2 = tng_query($query);
 
-            $query = "UPDATE $assoc_table SET personID=\"$newID\" WHERE gedcom=\"$tree\" AND personID=\"$old\"";
+            $query = "UPDATE $assoc_table SET personID = '$newID' WHERE personID = '$old'";
             $result2 = tng_query($query);
 
-            $query = "UPDATE $assoc_table SET passocID=\"$newID\" WHERE gedcom=\"$tree\" AND passocID=\"$old\"";
+            $query = "UPDATE $assoc_table SET passocID = '$newID' WHERE passocID = '$old'";
             $result2 = tng_query($query);
 
-            $query = "UPDATE $temp_events_table SET personID=\"$newID\" WHERE gedcom=\"$tree\" AND personID=\"$old\"";
+            $query = "UPDATE $temp_events_table SET personID = '$newID' WHERE personID = '$old'";
             $result2 = tng_query($query);
 
-            $query = "UPDATE $mostwanted_table SET personID=\"$newID\" WHERE gedcom=\"$tree\" AND personID=\"$old\"";
+            $query = "UPDATE $mostwanted_table SET personID = '$newID' WHERE personID = '$old'";
             $result2 = tng_query($query);
 
-            $query = "UPDATE $users_table SET personID=\"$newID\" WHERE mygedcom=\"$tree\" AND personID=\"$old\"";
+            $query = "UPDATE $users_table SET personID = '$newID' WHERE personID = '$old'";
             $result2 = tng_query($query);
 
             if (isset($keys[$old])) {
@@ -179,44 +178,44 @@ echo $navList->build("renumber");
           }
 
           if ($type == "family") {
-            $query = "UPDATE $children_table SET familyID=\"$newID\" WHERE gedcom=\"$tree\" AND familyID=\"{$row['familyID']}\"";
+            $query = "UPDATE $children_table SET familyID = '$newID' WHERE familyID=\"{$row['familyID']}\"";
             $result2 = tng_query($query);
 
-            $query = "UPDATE $people_table SET famc=\"$newID\" WHERE famc=\"{$row['familyID']}\" AND gedcom = \"$tree\"";
+            $query = "UPDATE $people_table SET famc = '$newID' WHERE famc=\"{$row['familyID']}\"";
             $result2 = tng_query($query);
 
-            $query = "UPDATE $temp_events_table SET familyID=\"$newID\" WHERE gedcom=\"$tree\" AND familyID=\"{$row['familyID']}\"";
+            $query = "UPDATE $temp_events_table SET familyID = '$newID' WHERE familyID=\"{$row['familyID']}\"";
             $result2 = tng_query($query);
           }
 
-          $query = "UPDATE $events_table SET persfamID=\"$newID\" WHERE gedcom=\"$tree\" AND persfamID=\"" . $row[$id] . "\"";
+          $query = "UPDATE $events_table SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . "\"";
           $result2 = tng_query($query);
 
-          $query = "UPDATE $medialinks_table SET personID=\"$newID\" WHERE gedcom=\"$tree\" AND personID=\"" . $row[$id] . "\"";
+          $query = "UPDATE $medialinks_table SET personID = '$newID' WHERE personID=\"" . $row[$id] . "\"";
           $result2 = tng_query($query);
 
           if ($type == "person" || $type == "family") {
-            $query = "UPDATE $branchlinks_table SET persfamID=\"$newID\" WHERE gedcom=\"$tree\" AND persfamID=\"" . $row[$id] . "\"";
+            $query = "UPDATE $branchlinks_table SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . "\"";
             $result2 = tng_query_noerror($query);
             $success = tng_affected_rows();
             if (!$success) {
-              $query = "DELETE FROM $branchlinks_table WHERE gedcom=\"$tree\" AND persfamID=\"" . $row[$id] . "\"";
+              $query = "DELETE FROM $branchlinks_table WHERE persfamID=\"" . $row[$id] . "\"";
               $result2 = tng_query_noerror($query);
             }
           }
 
-          $query = "UPDATE $album2entities_table SET entityID=\"$newID\" WHERE gedcom=\"$tree\" AND entityID=\"" . $row[$id] . "\"";
+          $query = "UPDATE $album2entities_table SET entityID = '$newID' WHERE entityID=\"" . $row[$id] . "\"";
           $result2 = tng_query($query);
 
           if ($type == "source") {
-            $query = "UPDATE $citations_table SET sourceID=\"$newID\" WHERE gedcom=\"$tree\" AND sourceID=\"" . $row[$id] . "\"";
+            $query = "UPDATE $citations_table SET sourceID = '$newID' WHERE sourceID=\"" . $row[$id] . "\"";
             $result2 = tng_query($query);
           } else {
-            $query = "UPDATE $citations_table SET persfamID=\"$newID\" WHERE gedcom=\"$tree\" AND persfamID=\"" . $row[$id] . "\"";
+            $query = "UPDATE $citations_table SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . "\"";
             $result2 = tng_query($query);
           }
 
-          $query = "UPDATE $notelinks_table SET persfamID=\"$newID\" WHERE gedcom=\"$tree\" AND persfamID=\"" . $row[$id] . "\"";
+          $query = "UPDATE $notelinks_table SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . "\"";
           $result2 = tng_query($query);
 
           //echo "$row['personID'] -&gt; $newID<br>";

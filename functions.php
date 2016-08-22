@@ -78,7 +78,9 @@ function doMedia($mediatypeID) {
   global $repositories_table;
   global $citations_table;
   global $nonames;
-  global $people_table, $treesTable, $currentuser;
+  global $people_table;
+  global $treesTable;
+  global $currentuser;
   global $rootpath, $mediapath, $header, $footer, $cemeteries_table, $mediatypes_assoc, $mediatypes_display;
   global $whatsnew, $thumbmaxw, $events_table, $eventtypes_table, $altstr, $tngconfig;
 
@@ -168,7 +170,7 @@ function doMedia($mediatypeID) {
 
       $hstext = "";
       if ($prow['personID2'] != null) {
-        $medialinktext .= "<li><a href=\"peopleShowPerson.php?personID={$prow['personID2']}&amp;tree={$prow['gedcom']}\">";
+        $medialinktext .= "<li><a href=\"peopleShowPerson.php?personID={$prow['personID2']}\">";
         $medialinktext .= getName($prow);
         if ($mediatypeID == "headstones") {
           $deathdate = $prow['deathdate'] ? $prow['deathdate'] : $prow['burialdate'];
@@ -180,18 +182,15 @@ function doMedia($mediatypeID) {
           $hstext = $deathdate ? " ($abbrev " . displayDate($deathdate) . ")" : "";
         }
       } elseif ($prow['familyID'] != null) {
-        $medialinktext .= "<li><a href=\"familiesShowFamily.php?familyID={$prow['familyID']}&amp;tree={$prow['gedcom']}\">" . uiTextSnippet('family') . ": " . getFamilyName($prow);
+        $medialinktext .= "<li><a href=\"familiesShowFamily.php?familyID={$prow['familyID']}\">" . uiTextSnippet('family') . ": " . getFamilyName($prow);
       } elseif ($prow['sourceID'] != null) {
         $sourcetext = $prow['title'] ? uiTextSnippet('source') . ": " . $prow['title'] : uiTextSnippet('source') . ": " . $prow['sourceID'];
-        $medialinktext .= "<li><a href=\"showsource.php?sourceID={$prow['sourceID']}&amp;tree={$prow['gedcom']}\">$sourcetext";
+        $medialinktext .= "<li><a href=\"showsource.php?sourceID={$prow['sourceID']}\">$sourcetext";
       } elseif ($prow['repoID'] != null) {
         $repotext = $prow['reponame'] ? uiTextSnippet('repository') . ": " . $prow['reponame'] : uiTextSnippet('repository') . ": " . $prow['repoID'];
-        $medialinktext .= "<li><a href=\"repositoriesShowItem.php?repoID={$prow['repoID']}&amp;tree={$prow['gedcom']}\">$repotext";
+        $medialinktext .= "<li><a href=\"repositoriesShowItem.php?repoID={$prow['repoID']}\">$repotext";
       } else {
         $medialinktext .= "<li><a href=\"placesearch.php?psearch=" . urlencode($prow['personID']);
-        if (!$tngconfig['places1tree']) {
-          $medialinktext .= "&amp;tree={$prow['gedcom']}";
-        }
         $medialinktext .= "\">" . $prow['personID'];
       }
       if ($prow['eventID']) {
@@ -213,7 +212,7 @@ function doMedia($mediatypeID) {
 
     $href = getMediaHREF($row, 0);
     $notes = $wherestr && $row['altnotes'] ? $row['altnotes'] : $row['notes'];
-    $notes = nl2br(truncateIt(getXrefNotes($row['notes'], $row['gedcom']), $tngconfig['maxnoteprev']));
+    $notes = nl2br(truncateIt(getXrefNotes($row['notes']), $tngconfig['maxnoteprev']));
     $description = $wherestr && $row['altdescription'] ? $row['altdescription'] : $row['description'];
 
     if ($row['allow_living']) {

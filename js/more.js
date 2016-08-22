@@ -27,9 +27,8 @@ $('.event-more').on('click', function () {
     'use strict';
     var eventId = $(this).data('eventId');
     var persfamId = $(this).data('persfamId');
-    var tree = $(this).data('tree');
 
-    tnglitbox = new ModalDialog('admin_editmore.php?eventID=' + eventId + '&persfamID=' + persfamId + '&tree=' + tree);
+    tnglitbox = new ModalDialog('admin_editmore.php?eventID=' + eventId + '&persfamID=' + persfamId);
     return false;
 });
 

@@ -6,12 +6,6 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-if ($assignedtree) {
-  $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
-  exit;
-}
-
 $tng_search_langs = $_SESSION['tng_search_langs'] = 1;
 if ($newsearch) {
   $exptime = 0;
@@ -31,7 +25,6 @@ if ($newsearch) {
     setcookie("tng_search_langs_post[offset]", $offset, $exptime);
   }
 }
-
 if ($offset) {
   $offsetplus = $offset + 1;
   $newoffset = "$offset, ";

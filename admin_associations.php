@@ -4,14 +4,12 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-$query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch, living, private, gedcom FROM $people_table
-    WHERE personID=\"$personID\" AND gedcom=\"$tree\"";
+$query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch, living, private, gedcom FROM $people_table WHERE personID = '$personID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 
-$righttree = checktree($tree);
-$rightbranch = $righttree ? checkbranch($row['branch']) : false;
-$rights = determineLivingPrivateRights($row, $righttree, $rightbranch);
+$rightbranch = checkbranch($row['branch']);
+$rights = determineLivingPrivateRights($row, $rightbranch);
 $row['allow_living'] = $rights['living'];
 $row['allow_private'] = $rights['private'];
 
@@ -21,7 +19,7 @@ tng_free_result($result);
 $helplang = findhelp("assoc_help.php");
 header("Content-type:text/html; charset=" . $session_charset);
 
-$query = "SELECT assocID, passocID, relationship, reltype FROM $assoc_table WHERE personID=\"$personID\" AND gedcom=\"$tree\"";
+$query = "SELECT assocID, passocID, relationship, reltype FROM $assoc_table WHERE personID = '$personID'";
 $assocresult = tng_query($query);
 $assoccount = tng_num_rows($assocresult);
 ?>
@@ -53,7 +51,7 @@ $assoccount = tng_num_rows($assocresult);
               //run query for name or family
               $assoc['allow_living'] = 1;
               if ($assoc['reltype'] == 'I') {
-                $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, living, private, branch FROM $people_table WHERE personID=\"{$assoc['passocID']}\" AND gedcom=\"$tree\"";
+                $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, living, private, branch FROM $people_table WHERE personID=\"{$assoc['passocID']}\"";
                 $nameresult = tng_query($query);
                 $row = tng_fetch_assoc($nameresult);
                 $rights = determineLivingPrivateRights($row);
@@ -62,7 +60,7 @@ $assoccount = tng_num_rows($assocresult);
                 $assocname = getName($row) . " ({$assoc['passocID']})";
                 tng_free_result($nameresult);
               } else {
-                $query = "SELECT husband, wife, gedcom, familyID, living, private FROM $families_table WHERE familyID=\"{$assoc['passocID']}\" AND gedcom=\"$tree\"";
+                $query = "SELECT husband, wife, gedcom, familyID, living, private FROM $families_table WHERE familyID=\"{$assoc['passocID']}\"";
                 $nameresult = tng_query($query);
                 $row = tng_fetch_assoc($nameresult);
                 $rights = determineLivingPrivateRights($row);
@@ -81,7 +79,7 @@ $assoccount = tng_num_rows($assocresult);
                 $actionstr .= "</a>";
               }
               if ($allowDelete) {
-                $actionstr .= "<a href='#' onclick=\"return deleteAssociation({$assoc['assocID']},'$personID','$tree');\" title='" . uiTextSnippet('delete') . "'>\n";
+                $actionstr .= "<a href='#' onclick=\"return deleteAssociation({$assoc['assocID']},'$personID');\" title='" . uiTextSnippet('delete') . "'>\n";
                 $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
                 $actionstr .= "</a>";
               }
@@ -146,7 +144,6 @@ $assoccount = tng_num_rows($assocresult);
     <footer class='modal-footer'>
       <input name='personID' type='hidden' value="<?php echo $personID; ?>">
       <input name='orgreltype' type='hidden' value="<?php echo $orgreltype; ?>">
-      <input name='tree' type='hidden' value="<?php echo $tree; ?>">
       <input name='submit' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
       <input name='cancel' type='button' value="<?php echo uiTextSnippet('cancel'); ?>"
              onclick="gotoSection('addassociation', 'associations');">
@@ -158,7 +155,6 @@ $assoccount = tng_num_rows($assocresult);
 <script src="js/associations.js"></script>
 <script>
     var helpLang = '<?php echo $helplang; ?>';
-    var tree = '<?php echo $tree; ?>';
     var assignedBranch = '<?php echo $assignedbranch; ?>';
     
     $('#help').on('click', function () {
@@ -177,6 +173,6 @@ $assoccount = tng_num_rows($assocresult);
     });
     
     $('#find').on('click', function () {
-        return findItem(assocType, 'passocID', null, tree, assignedBranch);
+        return findItem(assocType, 'passocID', null, assignedBranch);
     });
 </script>

@@ -9,7 +9,7 @@ if ($session_charset != "UTF-8") {
   $mywifename = tng_utf8_decode($mywifename);
 }
 
-$allwhere = "$families_table.gedcom = \"$tree\"";
+$allwhere = "1";
 $joinon = "";
 if ($assignedbranch) {
   $allwhere .= " AND $families_table.branch LIKE \"%$assignedbranch%\"";

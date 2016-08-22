@@ -8,12 +8,11 @@ if ($link) {
   include 'checklogin.php';
   include 'version.php';
 
-  if ($assignedtree || !$allowEdit) {
+  if (!$allowEdit) {
     $message = uiTextSnippet('norights');
     header("Location: admin_login.php?message=" . urlencode($message));
     exit;
   }
-
   $query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
   $result = tng_query($query);
 } else {

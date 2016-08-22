@@ -66,7 +66,7 @@ function updateAssociation(form) {
     return false;
 }
 
-function deleteAssociation(assocID, personID, tree) {
+function deleteAssociation(assocID, personID) {
     'use strict';
     if (confirm(textSnippet('confdeleteassoc'))) {
         var tds = $('tr#row_' + assocID + ' td');
@@ -74,7 +74,7 @@ function deleteAssociation(assocID, personID, tree) {
         $.each(tds, function (index, item) {
             $(item).effect('highlight', {color: '#ff9999'}, 200);
         });
-        params = {assocID: assocID, personID: personID, tree: tree};
+        params = {assocID: assocID, personID: personID};
         $.ajax({
             url: 'admin_deleteassoc.php',
             data: params,
@@ -94,15 +94,13 @@ function deleteAssociation(assocID, personID, tree) {
 $('#person-associations').on('click', function () {
     'use strict';
     var $personId = $(this).data('personId');
-    var $tree = $(this).data('tree');
-    tnglitbox = new ModalDialog('admin_associations.php?orgreltype=I&personID=' + $personId + '&tree=' + $tree);
+    tnglitbox = new ModalDialog('admin_associations.php?orgreltype=I&personID=' + $personId);
 });
 
 $('#family-associations').on('click', function () {
     'use strict';
     var $familyId = $(this).data('familyId');
-    var $tree = $(this).data('tree');
-    tnglitbox = new ModalDialog('admin_associations.php?orgreltype=I&personID=' + $familyId + '&tree=' + $tree);
+    tnglitbox = new ModalDialog('admin_associations.php?orgreltype=I&personID=' + $familyId);
 });
 
 var associationIcon = $('img.icon-associations');

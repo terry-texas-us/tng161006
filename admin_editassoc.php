@@ -45,7 +45,7 @@ header("Content-type:text/html; charset=" . $session_charset);
         </td>
         <td>
           <input name='passocID' type='text' value="<?php echo $row['passocID']; ?>">&nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
-          <a href="#" onclick="return findItem(assocType, 'passocID', '<?php echo $tree; ?>', '<?php echo $assignedbranch; ?>');" title="<?php echo uiTextSnippet('find'); ?>">
+          <a href="#" onclick="return findItem(assocType, 'passocID', '<?php echo $assignedbranch; ?>');" title="<?php echo uiTextSnippet('find'); ?>">
             <img class='icon-sm-inline' src='svg/magnifying-glass.svg'>
           </a>
         </td>

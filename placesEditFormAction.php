@@ -33,69 +33,56 @@ if (!$placelevel) {
 if (!$temple) {
   $temple = 0;
 }
-if (!$tngconfig['places1tree'] && $newtree) {
-  $newtreestr = ",gedcom=\"$newtree\"";
-  $tree = $newtree;
-} else {
-  $newtreestr = "";
-}
-$query = "UPDATE $places_table SET place=\"$place\",placelevel=\"$placelevel\",temple=\"$temple\",latitude=\"$latitude\",longitude=\"$longitude\",zoom=\"$zoom\",notes=\"$notes\",geoignore=\"0\"$newtreestr WHERE ID=\"$ID\"";
+$query = "UPDATE $places_table SET place = '$place', placelevel = '$placelevel', temple = '$temple', latitude = '$latitude', longitude = '$longitude', zoom = '$zoom', notes = '$notes', geoignore = '0' WHERE ID = '$ID'";
 $result = tng_query($query);
 if (!$result) {
   $message = uiTextSnippet('duplicate');
   header("Location: placesBrowse.php?message=" . urlencode($message));
   exit;
 }
-if ($tngconfig['places1tree']) {
-  $updatetreestr = "";
-  $treeurl = "";
-} else {
-  $updatetreestr = " AND gedcom=\"$tree\"";
-  $treeurl = "&tree=$tree";
-}
 if ($propagate && trim($orgplace)) {
   //people
-  $query = "UPDATE $people_table SET birthplace=\"$place\" WHERE birthplace=\"$orgplace\"$updatetreestr";
+  $query = "UPDATE $people_table SET birthplace = '$place' WHERE birthplace = '$orgplace'";
   $result = tng_query($query);
-  $query = "UPDATE $people_table SET altbirthplace=\"$place\" WHERE altbirthplace=\"$orgplace\"$updatetreestr";
+  $query = "UPDATE $people_table SET altbirthplace = '$place' WHERE altbirthplace = '$orgplace'";
   $result = tng_query($query);
-  $query = "UPDATE $people_table SET deathplace=\"$place\" WHERE deathplace=\"$orgplace\"$updatetreestr";
+  $query = "UPDATE $people_table SET deathplace = '$place' WHERE deathplace = '$orgplace'";
   $result = tng_query($query);
-  $query = "UPDATE $people_table SET burialplace=\"$place\" WHERE burialplace=\"$orgplace\"$updatetreestr";
+  $query = "UPDATE $people_table SET burialplace = '$place' WHERE burialplace = '$orgplace'";
   $result = tng_query($query);
-  $query = "UPDATE $people_table SET baptplace=\"$place\" WHERE baptplace=\"$orgplace\"$updatetreestr";
+  $query = "UPDATE $people_table SET baptplace = '$place' WHERE baptplace = '$orgplace'";
   $result = tng_query($query);
-  $query = "UPDATE $people_table SET confplace=\"$place\" WHERE confplace=\"$orgplace\"$updatetreestr";
+  $query = "UPDATE $people_table SET confplace = '$place' WHERE confplace = '$orgplace'";
   $result = tng_query($query);
-  $query = "UPDATE $people_table SET initplace=\"$place\" WHERE initplace=\"$orgplace\"$updatetreestr";
+  $query = "UPDATE $people_table SET initplace = '$place' WHERE initplace = '$orgplace'";
   $result = tng_query($query);
-  $query = "UPDATE $people_table SET endlplace=\"$place\" WHERE endlplace=\"$orgplace\"$updatetreestr";
+  $query = "UPDATE $people_table SET endlplace = '$place' WHERE endlplace = '$orgplace'";
   $result = tng_query($query);
 
   //families
-  $query = "UPDATE $families_table SET marrplace=\"$place\" WHERE marrplace=\"$orgplace\"$updatetreestr";
+  $query = "UPDATE $families_table SET marrplace = '$place' WHERE marrplace = '$orgplace'";
   $result = tng_query($query);
-  $query = "UPDATE $families_table SET divplace=\"$place\" WHERE divplace=\"$orgplace\"$updatetreestr";
+  $query = "UPDATE $families_table SET divplace = '$place' WHERE divplace = '$orgplace'";
   $result = tng_query($query);
-  $query = "UPDATE $families_table SET sealplace=\"$place\" WHERE sealplace=\"$orgplace\"$updatetreestr";
+  $query = "UPDATE $families_table SET sealplace = '$place' WHERE sealplace = '$orgplace'";
   $result = tng_query($query);
 
   //events
-  $query = "UPDATE $events_table SET eventplace=\"$place\" WHERE eventplace=\"$orgplace\"$updatetreestr";
+  $query = "UPDATE $events_table SET eventplace = '$place' WHERE eventplace = '$orgplace'";
   $result = tng_query($query);
 
   //children
-  $query = "UPDATE $children_table SET sealplace=\"$place\" WHERE sealplace=\"$orgplace\"$updatetreestr";
+  $query = "UPDATE $children_table SET sealplace = '$place' WHERE sealplace = '$orgplace'";
   $result = tng_query($query);
 
   //media
-  $query = "UPDATE $medialinks_table SET personID=\"$place\" WHERE personID=\"$orgplace\"$updatetreestr";
+  $query = "UPDATE $medialinks_table SET personID = '$place' WHERE personID = '$orgplace'";
   $result = tng_query($query);
 }
-adminwritelog("<a href=\"placesEdit.php?ID=$ID$treeurl\">" . uiTextSnippet('modifyplace') . ": $place</a>");
+adminwritelog("<a href=\"placesEdit.php?ID=$ID\">" . uiTextSnippet('modifyplace') . ": $place</a>");
 
 if ($newscreen == "return") {
-  header("Location: placesEdit.php?ID=$ID$treeurl");
+  header("Location: placesEdit.php?ID=$ID");
 } elseif ($newscreen == "close") {
 ?>
   <!DOCTYPE html>

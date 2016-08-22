@@ -6,17 +6,17 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-if (!$allowEdit || ($assignedtree && $assignedtree != $tree)) {
+if (!$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-$query = "SELECT * FROM $treesTable WHERE gedcom = \"$tree\"";
+$query = "SELECT * FROM $treesTable";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
 
-$query = "SELECT count(personID) as pcount FROM $people_table WHERE gedcom = \"$tree\"";
+$query = "SELECT count(personID) as pcount FROM $people_table";
 $result = tng_query($query);
 $prow = tng_fetch_assoc($result);
 $pcount = number_format($prow['pcount']);
@@ -57,7 +57,7 @@ $headSection->setTitle(uiTextSnippet('modifytree'));
     <?php
     echo $adminHeaderSection->build('trees-modifytree', $message);
     $navList = new navList('');
-    $allow_add_tree = $assignedtree ? 0 : $allowAdd;
+    $allow_add_tree = $allowAdd;
     $navList->appendItem([true, 'treesBrowse.php', uiTextSnippet('search'), "findtree"]);
     $navList->appendItem([$allow_add_tree, 'treesAdd.php', uiTextSnippet('add'), "addtree"]);
     //    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
@@ -152,7 +152,6 @@ $headSection->setTitle(uiTextSnippet('modifytree'));
         </div>
       </section>
       <div class='footer'>
-        <input name='tree' type='hidden' value="<?php echo "$tree"; ?>">
         <button class='btn btn-primary btn-block' name='submit' type='submit'><?php echo uiTextSnippet('save'); ?></button>
       </div>
     </form>

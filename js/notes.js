@@ -71,7 +71,7 @@ function addNote(form) {
     return false;
 }
 
-function deleteNote(noteID, personID, tree, eventID) {
+function deleteNote(noteID, personID, eventID) {
     'use strict';
     if (confirm(textSnippet('confdeletenote'))) {
         var tds = $('tr#row_' + noteID + ' td');
@@ -79,7 +79,7 @@ function deleteNote(noteID, personID, tree, eventID) {
         tds.each(function (index, item) {
             $(item).effect('highlight', {color: '#ff9999'}, 100);
         });
-        params = {noteID: noteID, personID: personID, tree: tree, eventID: eventID};
+        params = {noteID: noteID, personID: personID, eventID: eventID};
         $.ajax({
             url: 'admin_deletenote.php',
             data: params,

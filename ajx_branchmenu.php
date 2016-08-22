@@ -10,7 +10,7 @@ if (!$allowEdit || $assignedbranch) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-$query = "SELECT action FROM $branches_table WHERE gedcom = \"$tree\" and branch = \"$branch\"";
+$query = "SELECT action FROM $branches_table WHERE branch = '$branch'";
 $result = tng_query($query);
 $brow = tng_fetch_assoc($result);
 tng_free_result($result);

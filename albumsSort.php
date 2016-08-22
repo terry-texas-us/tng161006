@@ -11,13 +11,7 @@ if (!$allowEdit) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-  $tree = $assignedtree;
-} else {
-  $wherestr = "";
-}
-$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('sortmedia'));
@@ -40,27 +34,11 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
       <table class='table table-sm'>
         <thead>
           <tr>
-            <th><?php echo uiTextSnippet('tree'); ?></th>
             <th><?php echo uiTextSnippet('linktype'); ?></th>
             <th colspan='3'><?php echo uiTextSnippet('id'); ?></th>
           </tr>
         </thead>
         <tr>
-          <td>
-            <select name="tree1">
-              <?php
-              $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
-              while ($treerow = tng_fetch_assoc($treeresult)) {
-                echo "  <option value=\"{$treerow['gedcom']}\"";
-                if ($treerow['gedcom'] == $tree) {
-                  echo " selected";
-                }
-                echo ">{$treerow['treename']}</option>\n";
-              }
-              tng_free_result($treeresult);
-              ?>
-            </select>
-          </td>
           <td>
             <select name="linktype1">
               <option value='I'><?php echo uiTextSnippet('person'); ?></option>
@@ -74,7 +52,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
           <td><input type='submit' value="<?php echo uiTextSnippet('text_continue'); ?>">
             &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp; </td>
           <td>
-            <a href="#" onclick="return findItem(document.find.linktype1.options[document.find.linktype1.selectedIndex].value,'newlink1',null,document.find.tree1.options[document.find.tree1.selectedIndex].value,'<?php echo $assignedbranch; ?>');"
+            <a href="#" onclick="return findItem(document.find.linktype1.options[document.find.linktype1.selectedIndex].value, 'newlink1', null, '<?php echo $assignedbranch; ?>');"
                title="<?php echo uiTextSnippet('find'); ?>">
               <img class='icon-sm' src='svg/magnifying-glass.svg'>
             </a>

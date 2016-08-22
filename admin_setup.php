@@ -26,11 +26,6 @@ $link = tng_db_connect($database_host, $database_name, $database_username, $data
 if ($link) {
   $adminLogin = 1;
   include 'checklogin.php';
-  if ($assignedtree) {
-    $message = uiTextSnippet('norights');
-    header("Location: admin_login.php?message=" . urlencode($message));
-    exit;
-  }
 }
 require 'version.php';
 

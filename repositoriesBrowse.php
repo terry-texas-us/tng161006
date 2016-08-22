@@ -9,16 +9,12 @@ require 'version.php';
 if ($newsearch) {
   $exptime = 0;
   setcookie("tng_search_repos_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_repos_post[tree]", $tree, $exptime);
   setcookie("tng_search_repos_post[exactmatch]", $exactmatch, $exptime);
   setcookie("tng_search_repos_post[tngpage]", 1, $exptime);
   setcookie("tng_search_repos_post[offset]", 0, $exptime);
 } else {
   if (!$searchstring) {
     $searchstring = stripslashes($_COOKIE['tng_search_repos_post']['search']);
-  }
-  if (!$tree) {
-    $tree = $_COOKIE['tng_search_repos_post']['tree'];
   }
   if (!$exactmatch) {
     $exactmatch = $_COOKIE['tng_search_repos_post']['exactmatch'];
@@ -44,14 +40,6 @@ if ($offset) {
   $tngpage = 1;
 }
 
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-  $tree = $assignedtree;
-} else {
-  $wherestr = "";
-}
-$orgtree = $tree;
-
 function addCriteria($field, $value, $operator) {
   $criteria = "";
 
@@ -72,12 +60,7 @@ function addCriteria($field, $value, $operator) {
   }
   return $criteria;
 }
-
-if ($tree) {
-  $allwhere = "$repositories_table.gedcom = \"$tree\" AND $repositories_table.gedcom = $treesTable.gedcom";
-} else {
-  $allwhere = "$repositories_table.gedcom = $treesTable.gedcom";
-}
+$allwhere = "1=1";
 if ($searchstring) {
   $allwhere .= " AND (1=0 ";
   if ($exactmatch == "yes") {
@@ -121,7 +104,6 @@ $headSection->setTitle(uiTextSnippet('repositories'));
     ?>
     <div>
       <form id='form1' name='form1' action='repositoriesBrowse.php'>
-        <?php require '_/components/php/treeSelectControl.php'; ?>
         <label for='searchstring'><?php echo uiTextSnippet('searchfor'); ?></label>
         <input name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>">
         <input name='submit' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
@@ -164,14 +146,11 @@ $headSection->setTitle(uiTextSnippet('repositories'));
               <?php } ?>
               <th><?php echo uiTextSnippet('repoid'); ?></th>
               <th><?php echo uiTextSnippet('name'); ?></th>
-              <?php if ($numtrees > 1) { ?>
-                <th><?php echo uiTextSnippet('tree'); ?></th>
-              <?php } ?>
             </tr>
             <?php
             $actionstr = "";
             if ($allowEdit) {
-              $actionstr .= "<a href=\"repositoriesEdit.php?repoID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('edit') . "'>\n";
+              $actionstr .= "<a href=\"repositoriesEdit.php?repoID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
               $actionstr .= "</a>";
             }
@@ -180,15 +159,14 @@ $headSection->setTitle(uiTextSnippet('repositories'));
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
               $actionstr .= "</a>";
             }
-            $actionstr .= "<a href=\"repositoriesShowItem.php?repoID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('preview') . "'>\n";
+            $actionstr .= "<a href=\"repositoriesShowItem.php?repoID=xxx\" title='" . uiTextSnippet('preview') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
             $actionstr .= "</a>\n";
 
             while ($row = tng_fetch_assoc($result)) {
               $newactionstr = preg_replace("/xxx/", $row['repoID'], $actionstr);
-              $newactionstr = preg_replace("/yyy/", $row['gedcom'], $newactionstr);
               $newactionstr = preg_replace("/zzz/", $row['ID'], $newactionstr);
-              $editlink = "repositoriesEdit.php?repoID={$row['repoID']}&amp;tree={$row['gedcom']}";
+              $editlink = "repositoriesEdit.php?repoID={$row['repoID']}";
               $id = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['repoID'] . "</a>" : $row['repoID'];
 
               echo "<tr id=\"row_{$row['ID']}\"><td><div class=\"action-btns\">$newactionstr</div></td>\n";
@@ -197,9 +175,6 @@ $headSection->setTitle(uiTextSnippet('repositories'));
               }
               echo "<td>$id</td>\n";
               echo "<td>{$row['reponame']}</td>\n";
-              if ($numtrees > 1) {
-                echo "<td>{$row['treename']}</td>\n";
-              }
               echo "</tr>\n";
             }
             ?>

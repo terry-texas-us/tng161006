@@ -67,14 +67,12 @@ while ($tlrow = tng_fetch_assoc($tlresult)) {
 }
 tng_free_result($tlresult);
 
-$righttree = checktree($timetree);
-
 foreach ($timeline as $timeentry) {
   parse_str($timeentry);
   $query = "SELECT firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch, sex, gedcom,
     IF(birthdatetr !='0000-00-00',birthdatetr,altbirthdatetr) as birth,
     IF(deathdatetr !='0000-00-00',deathdatetr,burialdatetr) as death
-    FROM $people_table WHERE personID = \"$timeperson\" AND gedcom = \"$timetree\"";
+    FROM $people_table WHERE personID = '$timeperson'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
 
@@ -89,7 +87,7 @@ foreach ($timeline as $timeentry) {
     $end_date_gmt = date("M d Y") . " GMT";
     $end_year = "";
   }
-  $rights = determineLivingPrivateRights($row, $righttree);
+  $rights = determineLivingPrivateRights($row);
   $row['allow_living'] = $rights['living'];
   $row['allow_private'] = $rights['private'];
   $name = xmlcharacters(getName($row));
@@ -98,7 +96,7 @@ foreach ($timeline as $timeentry) {
 
   if (count($timeline) == 1 && $rights['both']) {
     $query = "SELECT display, eventdate, eventdatetr, eventplace, info FROM ($events_table, $eventtypes_table)
-      WHERE persfamID = \"$timeperson\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND gedcom = \"$timetree\" AND keep = \"1\" AND parenttag = \"\"
+      WHERE persfamID = \"$timeperson\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND keep = \"1\" AND parenttag = \"\"
       ORDER BY ordernum, tag, description, eventdatetr, info, eventID";
     $custevents = tng_query($query);
     while ($custevent = tng_fetch_assoc($custevents)) {
@@ -151,12 +149,12 @@ foreach ($timeline as $timeentry) {
     }
     //get and loop through all marriages (link to people table on opposite spouse) for this person based on gender
     if ($spouseorder) {
-      $marriages = getSpouseFamilyDataPlusDates($timetree, $self, $timeperson, $spouseorder);
+      $marriages = getSpouseFamilyDataPlusDates($self, $timeperson, $spouseorder);
     } else {
-      $marriages = getSpouseFamilyDataUnionPlusDates($timetree, $timeperson);
+      $marriages = getSpouseFamilyDataUnionPlusDates($timeperson);
     }
     if (!tng_num_rows($marriages) && $spouseorder) {
-      $marriages = getSpouseFamilyDataUnionPlusDates($timetree, $timeperson);
+      $marriages = getSpouseFamilyDataUnionPlusDates($timeperson);
     }
 
     while ($marriagerow = tng_fetch_assoc($marriages)) {
@@ -167,9 +165,9 @@ foreach ($timeline as $timeentry) {
         }
         unset($spouserow);
         if ($marriagerow[$spouse]) {
-          $spouseresult = getPersonSimple($timetree, $marriagerow[$spouse]);
+          $spouseresult = getPersonSimple($marriagerow[$spouse]);
           $spouserow = tng_fetch_assoc($spouseresult);
-          $srights = determineLivingPrivateRights($spouserow, $righttree);
+          $srights = determineLivingPrivateRights($spouserow);
           $spouserow['allow_living'] = $srights['living'];
           $spouserow['allow_private'] = $srights['private'];
           if ($spouserow['firstname'] || $spouserow['lastname']) {
@@ -179,7 +177,7 @@ foreach ($timeline as $timeentry) {
         }
 
         $rightfbranch = checkbranch($marriagerow['branch']) ? 1 : 0;
-        $mrights = determineLivingPrivateRights($marriagerow, $righttree, $rightfbranch);
+        $mrights = determineLivingPrivateRights($marriagerow, $rightfbranch);
         $marriagerow['allow_living'] = $mrights['living'];
         $marriagerow['allow_private'] = $mrights['private'];
         if ($mrights['both']) {
@@ -193,7 +191,7 @@ foreach ($timeline as $timeentry) {
       }
       //get all children (link to people) born to this marriage
       //loop through and make event for each
-      $children = getChildrenDataPlusDates($timetree, $marriagerow['familyID']);
+      $children = getChildrenDataPlusDates($marriagerow['familyID']);
 
       while ($child = tng_fetch_assoc($children)) {
         if ($child['birthdate']) {
@@ -206,7 +204,7 @@ foreach ($timeline as $timeentry) {
           $abbr = uiTextSnippet('chrabbr');
         }
         if ($date && substr($date, 0, 4) != "0000") {
-          $crights = determineLivingPrivateRights($child, $righttree);
+          $crights = determineLivingPrivateRights($child);
           $child['allow_living'] = $crights['living'];
           $child['allow_private'] = $crights['private'];
           if ($crights['both']) {

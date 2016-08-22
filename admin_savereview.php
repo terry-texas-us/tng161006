@@ -5,12 +5,11 @@ require 'adminlib.php';
 $adminLogin = true;
 require 'checklogin.php';
 
-if (!$allowEdit || ($assignedtree && $assignedtree != $tree)) {
+if (!$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-
 require 'adminlog.php';
 require 'datelib.php';
 
@@ -22,7 +21,6 @@ $query = "SELECT * FROM $temp_events_table WHERE tempID = \"$tempID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
-$tree = $row['gedcom'];
 $personID = $row['personID'];
 $familyID = $row['familyID'];
 $eventID = $row['eventID'];
@@ -39,9 +37,9 @@ if ($choice == uiTextSnippet('savedel')) {
     $result = tng_query($query);
 
     if ($row['type'] == 'F') {
-      $query = "UPDATE $families_table SET changedate = \"$changedate\", changedby = \"{$row['user']}\" WHERE familyID = \"$familyID\" AND gedcom = \"$tree\"";
+      $query = "UPDATE $families_table SET changedate = \"$changedate\", changedby = \"{$row['user']}\" WHERE familyID = '$familyID'";
     } else {
-      $query = "UPDATE $people_table SET changedate = \"$changedate\", changedby = \"{$row['user']}\" WHERE personID = \"$personID\" AND gedcom = \"$tree\"";
+      $query = "UPDATE $people_table SET changedate = \"$changedate\", changedby = \"{$row['user']}\" WHERE personID = '$personID'";
     }
     $result = tng_query($query);
   } else {
@@ -124,25 +122,21 @@ if ($choice == uiTextSnippet('savedel')) {
     if ($factfield) {
       $fieldstr .= $fieldstr ? ", $factfield" : $factfield;
     }
-
     if ($needfamilies) {
-      $query = "UPDATE $families_table SET $fieldstr WHERE familyID = \"$familyID\" AND gedcom = \"$tree\"";
+      $query = "UPDATE $families_table SET $fieldstr WHERE familyID = '$familyID'";
     } elseif ($needchildren) {
-      $query = "UPDATE $people_table SET changedate = \"$changedate\", changedby=\"{$row['user']}\" WHERE personID = \"$personID\" AND gedcom = \"$tree\"";
+      $query = "UPDATE $people_table SET changedate = \"$changedate\", changedby=\"{$row['user']}\" WHERE personID = '$personID'";
       $result = tng_query($query);
-      $query = "UPDATE $children_table SET $fieldstr WHERE familyID = \"$familyID\" AND personID = \"$personID\" AND gedcom = \"$tree\"";
+      $query = "UPDATE $children_table SET $fieldstr WHERE familyID = '$familyID' AND personID = '$personID'";
     } else {
-      $query = "UPDATE $people_table SET $fieldstr WHERE personID = \"$personID\" AND gedcom = \"$tree\"";
+      $query = "UPDATE $people_table SET $fieldstr WHERE personID = '$personID'";
     }
     $result = tng_query($query);
   }
-
   if ($eventplace) {
-    $placetree = $tngconfig['places1tree'] ? "" : $tree;
-    $query = "INSERT IGNORE INTO $places_table (gedcom,place,placelevel,zoom) VALUES (\"$placetree\",\"$eventplace\",\"0\",\"0\")";
+    $query = "INSERT IGNORE INTO $places_table (gedcom, place, placelevel, zoom) VALUES ('', '$eventplace', '0', '0')";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   }
-
   $succmsg = uiTextSnippet('tentadd');
 }
 if ($choice != uiTextSnippet('postpone')) {
@@ -156,12 +150,11 @@ if ($choice != uiTextSnippet('postpone')) {
   $succmsg = "";
   $message = "";
 }
-
 if ($succmsg) {
   if ($row['type'] == 'F') {
-    adminwritelog("<a href=\"familiesEdit.php?familyID=$family&tree=$tree\">$choice (" . uiTextSnippet('family') . "): $tree/{$row['familyID']}</a>");
+    adminwritelog("<a href=\"familiesEdit.php?familyID=$family\">$choice (" . uiTextSnippet('family') . "): {$row['familyID']}</a>");
   } else {
-    adminwritelog("<a href=\"peopleEdit.php?personID=$personID&tree=$tree\">$choice (" . uiTextSnippet('person') . "): $tree/{$row['personID']}</a>");
+    adminwritelog("<a href=\"peopleEdit.php?personID=$personID\">$choice (" . uiTextSnippet('person') . "): {$row['personID']}</a>");
   }
   $message = uiTextSnippet('tentdata') . " $persfamID $succmsg.";
 }

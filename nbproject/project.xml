@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.php.project</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/php-project/1">
+            <name>tng</name>
+        </data>
+        <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>childrenlist</word>
+            <word>childrenslist</word>
+            <word>fileupload</word>
+            <word>onsubmit</word>
+            <word>php</word>
+            <word>treeform</word>
+            <word>validateTreeForm</word>
+        </spellchecker-wordlist>
+    </configuration>
+</project>

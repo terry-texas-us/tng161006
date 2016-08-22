@@ -8,7 +8,7 @@ if ($link) {
   include 'checklogin.php';
   include 'version.php';
 
-  if ($assignedtree || !$allowEdit) {
+  if (!$allowEdit) {
     $message = uiTextSnippet('norights');
     header("Location: admin_login.php?message=" . urlencode($message));
     exit;
@@ -478,27 +478,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
               </select>
             </td>
           </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('defaulttree'); ?>:</td>
-            <td>
-              <select name="defaulttree">
-                <option value=''></option>
-                <?php
-                if ($link && $result) {
-                  foreach ($treeList as $treerow) {
-                    echo "  <option value=\"{$treerow['gedcom']}\"";
-                    if ($defaulttree == $treerow['gedcom']) {
-                      echo " selected";
-                    }
-                    echo ">{$treerow['treename']}</option>\n";
-                  }
-                } else {
-                  echo "  <option value=\"$defaulttree\" selected>$defaulttree</option>\n";
-                }
-                ?>
-              </select>
-            </td>
-          </tr>
+          
         </table>
       </div>
         <?php echo displayToggle("plus4", 0, "media", uiTextSnippet('media'), ""); ?>
@@ -1193,32 +1173,6 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
                 }
                 ?>
               </select>
-            </td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('places1tree'); ?>:</td>
-            <td>
-              <select id='places1tree' name='places1tree' onchange="flipPlaces(this);">
-                <option value='0'<?php if (!$tngconfig['places1tree']) {echo " selected";} ?>>
-                  <?php echo uiTextSnippet('yes'); ?>
-                </option>
-                <option value='1'<?php if ($tngconfig['places1tree']) {echo " selected";} ?>>
-                  <?php echo uiTextSnippet('no'); ?>
-                </option>
-              </select>
-              <input id='merge' type='button' value="<?php echo uiTextSnippet('merge'); ?>"
-                     onclick="convertPlaces('merge');" style="display: none">
-              <span id='mergeexpl' style="display:none"><?php echo uiTextSnippet('mergeexpl'); ?></span>
-              <select name="placetree" id="placetree" style="display:none">
-                <?php
-                foreach ($treeList as $treerow) {
-                  echo "  <option value=\"{$treerow['gedcom']}\">{$treerow['treename']}</option>\n";
-                }
-                ?>
-              </select>
-              <input id='convert' type='button' value="<?php echo uiTextSnippet('convert'); ?>"
-                     onclick="convertPlaces('convert');" style="display: none">
-              <span id='convertexpl' style="display: none"><?php echo uiTextSnippet('convexpl'); ?></span>
             </td>
           </tr>
           <tr>

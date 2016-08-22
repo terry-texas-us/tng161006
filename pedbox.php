@@ -1,12 +1,18 @@
 <?php
 function getPhotoSrc($persfamID, $living, $gender) {
-  global $rootpath, $photopath, $mediapath, $mediatypes_assoc;
-  global $photosext, $tree, $medialinks_table, $media_table, $tngconfig;
+  global $rootpath;
+  global $photopath;
+  global $mediapath;
+  global $mediatypes_assoc;
+  global $photosext;
+  global $medialinks_table;
+  global $media_table;
+  global $tngconfig;
 
   $photo = array();
 
   $query = "SELECT $media_table.mediaID, medialinkID, alwayson, thumbpath, mediatypeID, usecollfolder FROM ($media_table, $medialinks_table)
-    WHERE personID = \"$persfamID\" AND $medialinks_table.gedcom = \"$tree\" AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
+    WHERE personID = '$persfamID' AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
 
@@ -20,10 +26,9 @@ function getPhotoSrc($persfamID, $living, $gender) {
       $photolink = xmlcharacters("showmedia.php?mediaID={$row['mediaID']}&amp;medialinkID={$row['medialinkID']}");
     }
   } elseif ($living) {
-    $photoref = $photocheck = $tree ? "$photopath/$tree.$persfamID.$photosext" : "$photopath/$persfamID.$photosext";
+    $photoref = $photocheck = "$photopath/$persfamID.$photosext";
     $photolink = "";
   }
-
   $gotfile = $photocheck ? file_exists("$rootpath$photocheck") : false;
   if (!$gotfile) {
     if ($gender && $tngconfig['usedefthumbs']) {

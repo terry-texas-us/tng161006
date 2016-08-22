@@ -57,4 +57,4 @@ if ($success) {
 } else {
   $message = "mailnotsent&sowner=" . urlencode($owner) . "&ssendemail=" . urlencode($sendemail);
 }
-header("Location: contactUs.php?page=$page&tree=$tree&message=$message");
+header("Location: contactUs.php?page=$page&amp;message=$message");

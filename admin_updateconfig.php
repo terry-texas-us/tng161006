@@ -19,7 +19,7 @@ if ($link) {
   include 'checklogin.php';
   include 'version.php';
 
-  if ($assignedtree || !$allowEdit) {
+  if (!$allowEdit) {
     $message = uiTextSnippet('norights');
     header("Location: admin_login.php?message=" . urlencode($message));
     exit;
@@ -149,7 +149,6 @@ fwrite($fp, "\$tngconfig['showprint'] = \"$showprint\";\n");
 fwrite($fp, "\$tngconfig['showbmarks'] = \"$showbmarks\";\n");
 fwrite($fp, "\$tngconfig['hidechr'] = \"$hidechr\";\n");
 fwrite($fp, "\$tngconfig['password_type'] = \"$password_type\";\n");
-fwrite($fp, "\$tngconfig['places1tree'] = \"$places1tree\";\n");
 fwrite($fp, "\$tngconfig['autogeo'] = \"$autogeo\";\n");
 
 fwrite($fp, "\$dbowner = \"$dbowner\";\n");
@@ -202,7 +201,6 @@ fwrite($fp, "\$tngconfig['calstart'] = \"$calstart\";\n");
 fwrite($fp, "\$tngconfig['pardata'] = \"$pardata\";\n");
 fwrite($fp, "\$tngconfig['oldids'] = \"$oldids\";\n");
 fwrite($fp, "\$tngconfig['lastimport'] = \"$lastimport\";\n");
-fwrite($fp, "\$defaulttree = \"$defaulttree\";\n");
 fwrite($fp, "\$tng_notinstalled = \"$tng_notinstalled\";\n");
 fwrite($fp, "\n");
 fwrite($fp, "\n");

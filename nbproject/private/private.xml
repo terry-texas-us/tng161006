@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="28">
+        <file>
+            <url>admin_editfamily.php</url>
+            <bookmark id="14">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+            <bookmark id="15">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+            <bookmark id="23">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>adminlib.php</url>
+            <bookmark id="26">
+                <name/>
+                <line>197</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>css/genstyle.css</url>
+            <bookmark id="7">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+            <bookmark id="10">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+            <bookmark id="12">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+            <bookmark id="13">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>genlib.php</url>
+            <bookmark id="8">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>ajx_editfamily.php</url>
+            <bookmark id="20">
+                <name/>
+                <line>182</line>
+                <key/>
+            </bookmark>
+            <bookmark id="21">
+                <name/>
+                <line>235</line>
+                <key/>
+            </bookmark>
+            <bookmark id="22">
+                <name/>
+                <line>327</line>
+                <key/>
+            </bookmark>
+            <bookmark id="18">
+                <name/>
+                <line>387</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>js/nicedit.js</url>
+            <bookmark id="28">
+                <name/>
+                <line>253</line>
+                <key/>
+            </bookmark>
+            <bookmark id="27">
+                <name/>
+                <line>1183</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>searchform.php</url>
+            <bookmark id="16">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/apache/htdocs/tng/admin.php</file>
+            <file>file:/C:/apache/htdocs/tng/checklogin.php</file>
+            <file>file:/C:/apache/htdocs/tng/tngconnect.php</file>
+        </group>
+    </open-files>
+</project-private>

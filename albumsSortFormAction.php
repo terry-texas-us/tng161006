@@ -14,13 +14,12 @@ initMediaTypes();
 $personID = ucfirst($newlink1);
 $linktype = $linktype1;
 $eventID = $event1;
-$tree = $tree1;
 
 $sortstr = preg_replace("/xxx/", uiTextSnippet('albums'), uiTextSnippet('sortmedia'));
 
 switch ($linktype) {
   case 'I':
-    $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, branch FROM $people_table WHERE personID=\"$personID\" AND gedcom = \"$tree\"";
+    $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, branch FROM $people_table WHERE personID = '$personID'";
     $result2 = tng_query($query);
     $person = tng_fetch_assoc($result2);
     $person['allow_living'] = 1;
@@ -28,14 +27,14 @@ switch ($linktype) {
     tng_free_result($result2);
     break;
   case 'F':
-    $query = "SELECT branch FROM $families_table WHERE familyID=\"$personID\" AND gedcom = \"$tree\"";
+    $query = "SELECT branch FROM $families_table WHERE familyID = '$personID'";
     $result2 = tng_query($query);
     $person = tng_fetch_assoc($result2);
     $namestr = uiTextSnippet('family') . ": $personID";
     tng_free_result($result2);
     break;
   case 'S':
-    $query = "SELECT title FROM $sources_table WHERE sourceID=\"$personID\" AND gedcom = \"$tree\"";
+    $query = "SELECT title FROM $sources_table WHERE sourceID = '$personID'";
     $result2 = tng_query($query);
     $person = tng_fetch_assoc($result2);
     $namestr = uiTextSnippet('source') . ": $personID";
@@ -46,7 +45,7 @@ switch ($linktype) {
     tng_free_result($result2);
     break;
   case 'R':
-    $query = "SELECT reponame FROM $repositories_table WHERE repoID=\"$personID\" AND gedcom = \"$tree\"";
+    $query = "SELECT reponame FROM $repositories_table WHERE repoID = '$personID'";
     $result2 = tng_query($query);
     $person = tng_fetch_assoc($result2);
     $namestr = uiTextSnippet('repository') . ": $personID";
@@ -68,13 +67,13 @@ if (!checkbranch($person['branch'])) {
   exit;
 }
 
-adminwritelog("<a href=\"ordermedia.php?personID=$personID&amp;tree=$tree\">$sortstr: $action</a>");
+adminwritelog("<a href=\"ordermedia.php?personID=$personID\">$sortstr: $action</a>");
 
 $photofound = 0;
 $photo = "";
 
 $query = "SELECT alwayson, thumbpath, $media_table.mediaID as mediaID, usecollfolder, mediatypeID, medialinkID FROM ($media_table, $medialinks_table)
-    WHERE personID = \"$personID\" AND $medialinks_table.gedcom = \"$tree\" AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
+    WHERE personID = \"$personID\" AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
 $result = tng_query($query);
 if ($result) {
   $row = tng_fetch_assoc($result);
@@ -86,7 +85,7 @@ tng_free_result($result);
 if ($row['thumbpath']) {
   $photoref = "$usefolder/" . $row['thumbpath'];
 } else {
-  $photoref = $tree ? "$usefolder/$tree.$personID.$photosext" : "$photopath/$personID.$photosext";
+  $photoref = "$photopath/$personID.$photosext";
 }
 
 if (file_exists("$rootpath$photoref")) {
@@ -102,7 +101,7 @@ if (file_exists("$rootpath$photoref")) {
   $photofound = 1;
 }
 
-$query = "SELECT * FROM ($album2entities_table, $albums_table) WHERE $album2entities_table.entityID=\"$personID\" AND $album2entities_table.gedcom = \"$tree\" AND $albums_table.albumID = $album2entities_table.albumID ORDER BY ordernum";
+$query = "SELECT * FROM ($album2entities_table, $albums_table) WHERE $album2entities_table.entityID = '$personID' AND $albums_table.albumID = $album2entities_table.albumID ORDER BY ordernum";
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
@@ -204,7 +203,6 @@ $headSection->setTitle(uiTextSnippet($sortstr));
   <script>
     var entity = "<?php echo $personID; ?>";
     var album = "<?php echo $albumID; ?>";
-    var tree = "<?php echo $tree; ?>";
     var orderaction = "alborder";
   </script>
   <script src='js/albums.js'></script>

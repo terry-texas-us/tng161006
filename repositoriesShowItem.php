@@ -15,7 +15,7 @@ $firstsectionsave = "";
 $tableid = "";
 $cellnumber = 0;
 
-$query = "SELECT * FROM $repositories_table WHERE repoID = \"$repoID\" AND gedcom = \"$tree\"";
+$query = "SELECT * FROM $repositories_table WHERE repoID = '$repoID'";
 $result = tng_query($query);
 $reporow = tng_fetch_assoc($result);
 if (!tng_num_rows($result)) {
@@ -30,7 +30,7 @@ $reporow['allow_living'] = 1;
 
 $reponotes = getNotes($repoID, 'R');
 
-$logstring = "<a href=\"repositoriesShowItem.php?repoID=$repoID&amp;tree=$tree\">" . uiTextSnippet('repo') . " {$reporow['reponame']} ($repoID)</a>";
+$logstring = "<a href=\"repositoriesShowItem.php?repoID=$repoID\">" . uiTextSnippet('repo') . " {$reporow['reponame']} ($repoID)</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -75,7 +75,7 @@ foreach ($events as $event) {
   $repotext .= showEvent($event);
 }
 if ($allow_admin && $allowEdit) {
-  $repotext .= showEvent(array("text" => uiTextSnippet('repoid'), "date" => $repoID, "place" => "<a href=\"repositoriesEdit.php?repoID=$repoID&amp;tree=$tree&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>", "np" => 1));
+  $repotext .= showEvent(array("text" => uiTextSnippet('repoid'), "date" => $repoID, "place" => "<a href=\"repositoriesEdit.php?repoID=$repoID&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>", "np" => 1));
 } else {
   $repotext .= showEvent(array("text" => uiTextSnippet('repoid'), "date" => $repoID));
 }
@@ -88,7 +88,7 @@ if ($soffset) {
   $newsoffset = "";
 }
 
-$query = "SELECT sourceID, title, shorttitle FROM $sources_table WHERE gedcom = \"$tree\" AND repoID = '$repoID' ORDER BY title LIMIT $soffsetstr" . ($maxsearchresults + 1);
+$query = "SELECT sourceID, title, shorttitle FROM $sources_table WHERE repoID = '$repoID' ORDER BY title LIMIT $soffsetstr" . ($maxsearchresults + 1);
 $sresult = tng_query($query);
 $numrows = tng_num_rows($sresult);
 $repolinktext = "";
@@ -97,10 +97,10 @@ while ($srow = tng_fetch_assoc($sresult)) {
     $repolinktext .= "\n";
   }
   $title = $srow['shorttitle'] ? $srow['shorttitle'] : $srow['title'];
-  $repolinktext .= "<a href=\"showsource.php?sourceID={$srow['sourceID']}&amp;tree=$tree\">$title</a>";
+  $repolinktext .= "<a href=\"showsource.php?sourceID={$srow['sourceID']}\">$title</a>";
 }
 if ($numrows >= $maxsearchresults) {
-  $repolinktext .= "\n[<a href=\"repositoriesShowItem.php?repoID=$repoID&amp;tree=$tree&amp;foffset=$foffset&amp;soffset=" . ($newsoffset + $maxsearchresults) . "\">" . uiTextSnippet('moresrc') . "</a>]";
+  $repolinktext .= "\n[<a href=\"repositoriesShowItem.php?repoID=$repoID&amp;foffset=$foffset&amp;soffset=" . ($newsoffset + $maxsearchresults) . "\">" . uiTextSnippet('moresrc') . "</a>]";
 }
 tng_free_result($sresult);
 

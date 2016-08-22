@@ -14,13 +14,12 @@ initMediaTypes();
 $personID = ucfirst($newlink1);
 $linktype = $linktype1;
 $eventID = $event1;
-$tree = $linktype == 'L' && $tngconfig['places1tree'] ? "" : $tree1;
 
 $sortstr = preg_replace("/xxx/", uiTextSnippet($mediatypeID), uiTextSnippet('sortmedia'));
 
 switch ($linktype) {
   case 'I':
-    $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, branch FROM $people_table WHERE personID=\"$personID\" AND gedcom = \"$tree\"";
+    $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, branch FROM $people_table WHERE personID = '$personID'";
     $result2 = tng_query($query);
     $person = tng_fetch_assoc($result2);
     $person['allow_living'] = 1;
@@ -30,7 +29,7 @@ switch ($linktype) {
     $testID = "personID";
     break;
   case 'F':
-    $query = "SELECT branch FROM $families_table WHERE familyID=\"$personID\" AND gedcom = \"$tree\"";
+    $query = "SELECT branch FROM $families_table WHERE familyID = '$personID'";
     $result2 = tng_query($query);
     $person = tng_fetch_assoc($result2);
     $namestr = uiTextSnippet('family') . ": $personID";
@@ -39,7 +38,7 @@ switch ($linktype) {
     $testID = "familyID";
     break;
   case 'S':
-    $query = "SELECT title FROM $sources_table WHERE sourceID=\"$personID\" AND gedcom = \"$tree\"";
+    $query = "SELECT title FROM $sources_table WHERE sourceID = '$personID'";
     $result2 = tng_query($query);
     $person = tng_fetch_assoc($result2);
     $namestr = uiTextSnippet('source') . ": $personID";
@@ -52,7 +51,7 @@ switch ($linktype) {
     $testID = "sourceID";
     break;
   case 'R':
-    $query = "SELECT reponame FROM $repositories_table WHERE repoID=\"$personID\" AND gedcom = \"$tree\"";
+    $query = "SELECT reponame FROM $repositories_table WHERE repoID = '$personID'";
     $result2 = tng_query($query);
     $person = tng_fetch_assoc($result2);
     $namestr = uiTextSnippet('repository') . ": $personID";
@@ -78,12 +77,12 @@ if (!checkbranch($person['branch'])) {
   exit;
 }
 
-adminwritelog("<a href=\"ordermedia.php?personID=$personID&amp;tree=$tree\">$sortstr: $tree/$personID</a>");
+adminwritelog("<a href=\"ordermedia.php?personID=$personID\">$sortstr: $personID</a>");
 
 $photo = "";
 
 $query = "SELECT alwayson, thumbpath, $media_table.mediaID as mediaID, usecollfolder, mediatypeID, medialinkID FROM ($media_table, $medialinks_table)
-    WHERE personID = \"$personID\" AND $medialinks_table.gedcom = \"$tree\" AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
+    WHERE personID = '$personID' AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
 $result = tng_query($query);
 if ($result) {
   $row = tng_fetch_assoc($result);
@@ -91,7 +90,7 @@ if ($result) {
 $thismediatypeID = $row['mediatypeID'];
 tng_free_result($result);
 
-$query = "SELECT * FROM ($medialinks_table, $media_table) WHERE $medialinks_table.personID=\"$personID\" AND $medialinks_table.gedcom = \"$tree\" AND $media_table.mediaID = $medialinks_table.mediaID AND eventID = \"$eventID\" AND mediatypeID = \"$mediatypeID\" ORDER BY ordernum";
+$query = "SELECT * FROM ($medialinks_table, $media_table) WHERE $medialinks_table.personID = '$personID' AND $media_table.mediaID = $medialinks_table.mediaID AND eventID = \"$eventID\" AND mediatypeID = \"$mediatypeID\" ORDER BY ordernum";
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
@@ -114,13 +113,13 @@ $headSection->setTitle(uiTextSnippet($sortstr));
   $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('browse'), "findmedia"]);
   $navList->appendItem([$allowMediaAdd, "mediaAdd.php", uiTextSnippet('add'), "addmedia"]);
   $navList->appendItem([$allowMediaEdit, "mediaSort.php", uiTextSnippet('text_sort'), "sortmedia"]);
-  $navList->appendItem([$allowMediaEdit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-  $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
-  $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
+  $navList->appendItem([$allowMediaEdit, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
+  $navList->appendItem([$allowMediaAdd, "mediaImport.php", uiTextSnippet('import'), "import"]);
+  $navList->appendItem([$allowMediaAdd, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
   echo $navList->build("sortmedia");
   ?>
   <br>
-  <a href="<?php echo $test_url; ?><?php echo $testID; ?>=<?php echo $personID; ?>&amp;tree=<?php echo $tree; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
+  <a href="<?php echo $test_url; ?><?php echo $testID; ?>=<?php echo $personID; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
     <img class='icon-sm' src='svg/eye.svg'>
   </a>
   <table class='table table-sm'>
@@ -210,7 +209,7 @@ $headSection->setTitle(uiTextSnippet($sortstr));
   if ($row['thumbpath']) {
     $photoref = "$usefolder/" . $row['thumbpath'];
   } else {
-    $photoref = $tree ? "$usefolder/$tree.$personID.$photosext" : "$photopath/$personID.$photosext";
+    $photoref = "$photopath/$personID.$photosext";
   }
   if (file_exists("$rootpath$photoref")) {
     $photoinfo = getimagesize("$rootpath$photoref");
@@ -226,7 +225,6 @@ $headSection->setTitle(uiTextSnippet($sortstr));
   ?>
   <script>
     var entity = "<?php echo $personID; ?>";
-    var tree = "<?php echo $tree; ?>";
     var album = "";
     var orderaction = "order";
   </script>

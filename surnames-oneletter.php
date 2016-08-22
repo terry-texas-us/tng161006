@@ -4,10 +4,8 @@ require 'tng_begin.php';
 
 $firstchar = mb_substr($firstchar, 0, 1, $charset);
 $decodedfirstchar = stripslashes(urldecode($firstchar));
-//if($charset == "UTF-8") $decodedfirstchar = utf8_encode($decodedfirstchar);
 
-$treestr = $tree ? " (" . uiTextSnippet('tree') . ": $tree)" : "";
-$logstring = "<a href=\"surnames-oneletter.php?firstchar=$firstchar&amp;tree=$tree\">" . xmlcharacters(uiTextSnippet('surnamelist') . ": " . uiTextSnippet('beginswith') . " $decodedfirstchar$treestr") . "</a>";
+$logstring = "<a href=\"surnames-oneletter.php?firstchar=$firstchar\">" . xmlcharacters(uiTextSnippet('surnamelist') . ": " . uiTextSnippet('beginswith') . " $decodedfirstchar$treestr") . "</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -21,27 +19,22 @@ $headSection->setTitle(uiTextSnippet('surnamelist') . ": " . uiTextSnippet('begi
 <html>
 <?php echo $headSection->build($flags, 'public', $session_charset); ?>
 <body id='public'>
-<?php echo $publicHeaderSection->build(); ?>
-<h2><img class='icon-md' src='svg/person.svg'><?php echo uiTextSnippet('surnamelist') . ": " . uiTextSnippet('beginswith') . " $decodedfirstchar"; ?></h2>
-<br class='clearleft'>
-<?php
-$hiddenfields[] = array('name' => 'firstchar', 'value' => $firstchar);
-echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'surnames-oneletter', 'method' => 'get', 'name' => 'form1', 'id' => 'form1', 'hidden' => $hiddenfields));
-?>
+  <?php echo $publicHeaderSection->build(); ?>
+  <h2><img class='icon-md' src='svg/person.svg'><?php echo uiTextSnippet('surnamelist') . ": " . uiTextSnippet('beginswith') . " $decodedfirstchar"; ?></h2>
+  <br class='clearleft'>
 
   <div class="titlebox">
     <div>
       <h4><?php echo "" . uiTextSnippet('allbeginningwith') . " $decodedfirstchar, " . uiTextSnippet('sortedalpha') . " (" . uiTextSnippet('totalnames') . "):"; ?></h4>
       <p class="small">
-        <?php echo uiTextSnippet('showmatchingsurnames') . "&nbsp;&nbsp;&nbsp;<a href='surnames.php?tree=$tree'>" . uiTextSnippet('mainsurnamepage') . "</a> &nbsp;|&nbsp; <a href=\"surnames-all.php?tree=$tree\">" . uiTextSnippet('showallsurnames') . "</a>"; ?>
+        <?php echo uiTextSnippet('showmatchingsurnames') . "&nbsp;&nbsp;&nbsp;<a href='surnames.php'>" . uiTextSnippet('mainsurnamepage') . "</a> &nbsp;|&nbsp; <a href='surnames-all.php'>" . uiTextSnippet('showallsurnames') . "</a>"; ?>
       </p>
     </div>
     <table class="sntable">
       <tr>
         <td class="sncol">
           <?php
-          $wherestr = $tree ? "AND gedcom = \"$tree\"" : "";
-          $treestr = $orgtree ? "&amp;tree=$tree" : "";
+          $wherestr = "";
 
           $more = getLivingPrivateRestrictions($people_table, false, false);
           if ($more) {

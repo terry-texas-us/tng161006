@@ -14,7 +14,7 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-if ($assignedtree || !$allowEdit) {
+if (!$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;

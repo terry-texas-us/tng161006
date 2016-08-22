@@ -9,12 +9,12 @@ require 'datelib.php';
 
 require 'geocodelib.php';
 
-$query = "SELECT branch, edituser, edittime FROM $families_table WHERE familyID = \"$familyID\" and gedcom = \"$tree\"";
+$query = "SELECT branch, edituser, edittime FROM $families_table WHERE familyID = '$familyID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
 
-if (!$allowEdit || ($assignedtree && $assignedtree != $tree) || !checkbranch($row['branch'])) {
+if (!$allowEdit || !checkbranch($row['branch'])) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -40,7 +40,7 @@ if (!$editconflict) {
 
   //get living from husband, wife
   if ($husband) {
-    $spquery = "SELECT living FROM $people_table WHERE personID = \"$husband\" AND gedcom = \"$tree\"";
+    $spquery = "SELECT living FROM $people_table WHERE personID = '$husband'";
     $spouselive = tng_query($spquery) or die(uiTextSnippet('cannotexecutequery') . ": $spquery");
     $spouserow = tng_fetch_assoc($spouselive);
     $husbliving = $spouserow['living'];
@@ -48,7 +48,7 @@ if (!$editconflict) {
     $husbliving = 0;
   }
   if ($wife) {
-    $spquery = "SELECT living FROM $people_table WHERE personID = \"$wife\" AND gedcom = \"$tree\"";
+    $spquery = "SELECT living FROM $people_table WHERE personID = '$wife'";
     $spouselive = tng_query($spquery) or die(uiTextSnippet('cannotexecutequery') . ": $spquery");
     $spouserow = tng_fetch_assoc($spouselive);
     $wifeliving = $spouserow['living'];
@@ -75,13 +75,13 @@ if (!$editconflict) {
     $oldbranches = explode(",", $orgbranch);
     foreach ($oldbranches as $b) {
       if ($b && !in_array($b, $branch)) {
-        $query = "DELETE FROM $branchlinks_table WHERE persfamID = \"$familyID\" AND gedcom = \"$tree\" AND branch = \"$b\"";
+        $query = "DELETE FROM $branchlinks_table WHERE persfamID = '$familyID' AND branch = \"$b\"";
         $result = tng_query($query);
       }
     }
     foreach ($branch as $b) {
       if ($b && !in_array($b, $oldbranches)) {
-        $query = "INSERT IGNORE INTO $branchlinks_table (branch,gedcom,persfamID) VALUES(\"$b\",\"$tree\",\"$familyID\")";
+        $query = "INSERT IGNORE INTO $branchlinks_table (branch, gedcom, persfamID) VALUES('$b', '', '$familyID')";
         $result = tng_query($query);
       }
     }
@@ -96,26 +96,25 @@ if (!$editconflict) {
   if (trim($sealplace) && !in_array($sealplace, $places)) {
     array_push($places, $sealplace);
   }
-  $placetree = $tngconfig['places1tree'] ? "" : $tree;
   foreach ($places as $place) {
-    $query = "INSERT IGNORE INTO $places_table (gedcom,place,placelevel,zoom,geoignore) VALUES (\"$placetree\",\"$place\",\"0\",\"0\",\"0\")";
+    $query = "INSERT IGNORE INTO $places_table (gedcom, place, placelevel, zoom, geoignore) VALUES ('', '$place', '0', '0', '0')";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     if ($tngconfig['autogeo'] && tng_affected_rows()) {
       $ID = tng_insert_id();
       $message = geocode($place, 0, $ID);
     }
   }
-  $query = "UPDATE $families_table SET husband=\"$husband\",wife=\"$wife\",living=\"$familyliving\",private=\"$private\",marrdate=\"$marrdate\",marrdatetr=\"$marrdatetr\",marrplace=\"$marrplace\",marrtype=\"$marrtype\",divdate=\"$divdate\",divdatetr=\"$divdatetr\",divplace=\"$divplace\",sealdate=\"$sealdate\",sealdatetr=\"$sealdatetr\",sealplace=\"$sealplace\",changedate=\"$newdate\",branch=\"$allbranches\",changedby=\"$currentuser\",edituser=\"\",edittime=\"0\" WHERE familyID=\"$familyID\" AND gedcom = \"$tree\"";
+  $query = "UPDATE $families_table SET husband=\"$husband\",wife=\"$wife\",living=\"$familyliving\",private=\"$private\",marrdate=\"$marrdate\",marrdatetr=\"$marrdatetr\",marrplace=\"$marrplace\",marrtype=\"$marrtype\",divdate=\"$divdate\",divdatetr=\"$divdatetr\",divplace=\"$divplace\",sealdate=\"$sealdate\",sealdatetr=\"$sealdatetr\",sealplace=\"$sealplace\",changedate=\"$newdate\",branch=\"$allbranches\",changedby=\"$currentuser\",edituser=\"\",edittime=\"0\" WHERE familyID = '$familyID'";
   $result = tng_query($query);
 
-  adminwritelog("<a href=\"familiesEdit.php?familyID=$familyID&tree=$tree&cw=$cw\">" . uiTextSnippet('modifyfamily') . ": $tree/$familyID</a>");
+  adminwritelog("<a href=\"familiesEdit.php?familyID=$familyID&cw=$cw\">" . uiTextSnippet('modifyfamily') . ": $familyID</a>");
 } else {
   $message = uiTextSnippet('notsaved');
 }
 if ($media == "1") {
-  header("Location: admin_newmedia.php?personID=$familyID&tree=$tree&linktype=F&cw=$cw");
+  header("Location: admin_newmedia.php?personID=$familyID&amp;linktype=F&amp;cw=$cw");
 } elseif ($newfamily == "return") {
-  header("Location: familiesEdit.php?familyID=$familyID&tree=$tree&cw=$cw");
+  header("Location: familiesEdit.php?familyID=$familyID&amp;cw=$cw");
 } else {
   if ($newfamily == "close") {
   ?>

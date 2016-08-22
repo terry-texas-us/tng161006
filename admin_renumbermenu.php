@@ -6,12 +6,6 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-if ($assignedtree) {
-  $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
-  exit;
-}
-
 $query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $result = tng_query($query);
 
@@ -39,18 +33,6 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
           <h4><?php echo uiTextSnippet('renumber'); ?></h4>
           <form action="admin_renumber.php" method='post' name='form1'>
             <table>
-              <tr>
-                <td><?php echo uiTextSnippet('tree'); ?>:</td>
-                <td>
-                  <select name='tree'>
-                    <?php
-                    while ($row = tng_fetch_assoc($result)) {
-                      echo "  <option value=\"{$row['gedcom']}\">{$row['treename']}</option>\n";
-                    }
-                    ?>
-                  </select>
-                </td>
-              </tr>
               <tr>
                 <td><?php echo uiTextSnippet('idtype'); ?>:</td>
                 <td>

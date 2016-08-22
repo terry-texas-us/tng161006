@@ -22,17 +22,16 @@ function getID($fields, $table, $id, $idname = "ID") {
 }
 
 $logmsg = "";
-$tree = $desc;
 
 switch ($t) {
   case "album":
-    $query = "DELETE FROM $albums_table WHERE albumID=\"$id\"";
+    $query = "DELETE FROM $albums_table WHERE albumID = '$id'";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $albumlinks_table WHERE albumID=\"$id\"";
+    $query = "DELETE FROM $albumlinks_table WHERE albumID = '$id'";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $album2entities_table WHERE albumID=\"$id\"";
+    $query = "DELETE FROM $album2entities_table WHERE albumID = '$id'";
     $result = tng_query($query);
 
     $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('album') . " $id";
@@ -69,7 +68,6 @@ switch ($t) {
     $row = getID("personID, familyID, gedcom", $temp_events_table, $id, "tempID");
     $personID = $row['personID'];
     $familyID = $row['familyID'];
-    $tree = $row['gedcom'];
 
     $query = "DELETE FROM $temp_events_table WHERE tempID=\"$id\"";
     $result = tng_query($query);
@@ -94,79 +92,67 @@ switch ($t) {
   case "person":
     $row = getID("personID, gedcom, branch, sex", $people_table, $id);
     $personID = $row['personID'];
-    $tree = $row['gedcom'];
 
-    if (($assignedtree && $assignedtree != $tree) || !checkbranch($row['branch'])) {
+    if (!checkbranch($row['branch'])) {
       exit;
     }
 
     $query = "DELETE FROM $people_table WHERE ID=\"$id\"";
     $result = tng_query($query);
 
-    deletePersonPlus($personID, $tree, $row['sex']);
+    deletePersonPlus($personID, $row['sex']);
 
-    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('person') . " $tree/$personID";
+    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('person') . " $personID";
     break;
   case "family":
     $row = getID("familyID, branch, gedcom", $families_table, $id);
     $familyID = $row['familyID'];
-    $tree = $row['gedcom'];
 
-    if (($assignedtree && $assignedtree != $tree) || !checkbranch($row['branch'])) {
+    if (!checkbranch($row['branch'])) {
       exit;
     }
 
     $query = "DELETE FROM $families_table WHERE ID=\"$id\"";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $children_table WHERE familyID=\"$familyID\" AND gedcom = \"$tree\"";
+    $query = "DELETE FROM $children_table WHERE familyID = '$familyID'";
     $result = tng_query($query);
 
-    $query = "UPDATE $people_table SET famc=\"\" WHERE famc = \"$familyID\" AND gedcom = \"$tree\"";
+    $query = "UPDATE $people_table SET famc=\"\" WHERE famc = '$familyID'";
     $result = tng_query($query);
 
     updateHasKidsFamily($familyID);
 
-    deleteEvents($familyID, $tree);
-    deleteCitations($familyID, $tree);
-    deleteNoteLinks($familyID, $tree);
-    deleteBranchLinks($familyID, $tree);
-    deleteMediaLinks($familyID, $tree);
-    deleteAlbumLinks($familyID, $tree);
+    deleteEvents($familyID);
+    deleteCitations($familyID);
+    deleteNoteLinks($familyID);
+    deleteBranchLinks($familyID);
+    deleteMediaLinks($familyID);
+    deleteAlbumLinks($familyID);
 
-    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('family') . " $tree/$familyID";
+    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('family') . " $familyID";
     break;
   case "source":
-    if ($assignedtree && $assignedtree != $tree) {
-      exit;
-    }
-
     $row = getID("sourceID, gedcom", $sources_table, $id);
     $sourceID = $row['sourceID'];
-    $tree = $row['gedcom'];
 
     $query = "DELETE FROM $sources_table WHERE ID=\"$id\"";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $citations_table WHERE sourceID=\"$sourceID\" AND gedcom = \"$tree\"";
+    $query = "DELETE FROM $citations_table WHERE sourceID='$sourceID'";
     $result = tng_query($query);
 
-    deleteEvents($sourceID, $tree);
-    deleteCitations($sourceID, $tree);
-    deleteNoteLinks($sourceID, $tree);
-    deleteMediaLinks($sourceID, $tree);
-    deleteAlbumLinks($sourceID, $tree);
+    deleteEvents($sourceID);
+    deleteCitations($sourceID);
+    deleteNoteLinks($sourceID);
+    deleteMediaLinks($sourceID);
+    deleteAlbumLinks($sourceID);
 
     $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('source') . " $sourceID";
     break;
   case "repository":
-    if ($assignedtree && $assignedtree != $tree) {
-      exit;
-    }
-
     $row = getID("repoID, gedcom", $repositories_table, $id);
     $repoID = $row['repoID'];
-    $tree = $row['gedcom'];
 
     $query = "SELECT addressID FROM $repositories_table WHERE repoID=\"$repoID\"";
     $result = tng_query($query);
@@ -179,32 +165,27 @@ switch ($t) {
     $query = "DELETE FROM $repositories_table WHERE ID=\"$id\"";
     $result = tng_query($query);
 
-    $query = "UPDATE $sources_table SET repoID = \"\" WHERE repoID=\"$repoID\" AND gedcom = \"$tree\"";
+    $query = "UPDATE $sources_table SET repoID = \"\" WHERE repoID = '$repoID'";
     $result = tng_query($query);
 
-    deleteEvents($repoID, $tree);
-    deleteNoteLinks($repoID, $tree);
-    deleteMediaLinks($repoID, $tree);
-    deleteAlbumLinks($repoID, $tree);
+    deleteEvents($repoID);
+    deleteNoteLinks($repoID);
+    deleteMediaLinks($repoID);
+    deleteAlbumLinks($repoID);
 
-    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('person') . " $tree/$personID";
+    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('person') . " $personID";
     break;
   case "place":
     $row = getID("place, gedcom", $places_table, $id);
     $place = $row['place'];
-    $tree = $row['gedcom'];
-
-    if ($assignedtree && $assignedtree != $tree) {
-      exit;
-    }
 
     $query = "DELETE FROM $places_table WHERE ID=\"$id\"";
     $result = tng_query($query);
 
-    deleteMediaLinks($place, $tree);
-    deleteAlbumLinks($place, $tree);
+    deleteMediaLinks($place);
+    deleteAlbumLinks($place);
 
-    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('place') . " $tree/$place";
+    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('place') . " $place";
     break;
   case "cemetery":
     $query = "SELECT maplink FROM $cemeteries_table WHERE cemeteryID = \"$id\"";
@@ -327,28 +308,28 @@ case "entity":
     $logmsg = uiTextSnippet('deleted') . " $id " . uiTextSnippet('succdeleted') . ".";
     break;
   case "child_unlink":
-    $query = "DELETE FROM $children_table WHERE familyID=\"$familyID\" AND personID=\"$personID\" AND gedcom = \"$tree\"";
+    $query = "DELETE FROM $children_table WHERE familyID = '$familyID' AND personID = '$personID'";
     $result = tng_query($query);
 
-    $query = "UPDATE $people_table SET famc=\"\" WHERE personID = \"$personID\" AND gedcom = \"$tree\"";
+    $query = "UPDATE $people_table SET famc=\"\" WHERE personID = '$personID'";
     $result = tng_query($query);
 
     updateHasKidsFamily($familyID);
 
-    $logmsg = uiTextSnippet('chunlinked') . ": $personID/$familyID ($tree).";
+    $logmsg = uiTextSnippet('chunlinked') . ": $personID/$familyID.";
     break;
   case "child_delete":
-    $query = "SELECT sex FROM $people_table WHERE personID=\"$personID\" AND gedcom = \"$tree\"";
+    $query = "SELECT sex FROM $people_table WHERE personID='$personID'";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
     tng_free_result($result);
 
-    $query = "DELETE FROM $people_table WHERE personID=\"$personID\" AND gedcom = \"$tree\"";
+    $query = "DELETE FROM $people_table WHERE personID = '$personID'";
     $result = tng_query($query);
 
-    deletePersonPlus($personID, $tree, $row['sex']);
+    deletePersonPlus($personID, $row['sex']);
 
-    $logmsg = uiTextSnippet('deleted') . ": $personID/$familyID ($tree).";
+    $logmsg = uiTextSnippet('deleted') . ": $personID/$familyID.";
     break;
   case "mediatype":
     $query = "DELETE FROM $mediatypes_table WHERE mediatypeID=\"$id\"";

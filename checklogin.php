@@ -1,13 +1,11 @@
 <?php
 
-$assignedtree = $_SESSION['assignedtree'];
 $assignedbranch = $_SESSION['assignedbranch'];
 $currentuser = $_SESSION['currentuser'];
 $currentuserdesc = $_SESSION['currentuserdesc'];
 $thispage = getScriptName(false);
 
 global $adminLogin;
-$need_assigned_tree = (!isset($orgtree) || !$orgtree) && $defaulttree && $assignedtree && $assignedtree != "-x-guest-x-";
 
 if (isset($_SESSION['postvars']) && is_array($_SESSION['postvars'])) {
   foreach ($_SESSION['postvars'] as $key => $value) {
@@ -116,7 +114,6 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$adminLo
       $allow_ged = $allow_pdf = $allow_profile = 0;
       $allow_lds = $ldsdefault ? 0 : 1;
 
-      $assignedtree = $_SESSION['assignedtree'];
       $currentuser = $_SESSION['currentuser'];
       $currentuserdesc = $_SESSION['currentuserdesc'];
       $_SESSION['session_rp'] = $rootpath;
@@ -141,10 +138,6 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$adminLo
   $_SESSION['allow_pdf'] = $allow_pdf;
   $_SESSION['allow_lds'] = $allow_lds;
   $_SESSION['allow_profile'] = $allow_profile;
-}
-
-if ($need_assigned_tree) {
-  $tree = $assignedtree;
 }
 
 $postvars = $_SESSION['postvars'] = "";

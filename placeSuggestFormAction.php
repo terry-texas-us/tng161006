@@ -39,20 +39,15 @@ killBlockedAddress($youremail);
 killBlockedMessageContent($comments);
 
 $name = $ID;
-if ($tree && !$tngconfig['places1tree']) {
-  $treestr = "tree=$tree&amp;";
-} else {
-  $treestr = "";
-}
-$pagelink = "$tngwebsite/" . "placesearch.php?" . "{$treestr}psearch=" . urlencode($name);
+$pagelink = "$tngwebsite/" . "placesearch.php?psearch=" . urlencode($name);
 
 $subject = uiTextSnippet('proposed') . ": $name";
-$query = "SELECT treename, email, owner FROM $treesTable WHERE gedcom=\"$tree\"";
+$query = "SELECT treename, email, owner FROM $treesTable";
 $treeresult = tng_query($query);
 $treerow = tng_fetch_assoc($treeresult);
 tng_free_result($treeresult);
 
-$body = uiTextSnippet('proposed') . ": $name\n" . uiTextSnippet('tree') . ": {$treerow['treename']}\n" . uiTextSnippet('link') . ": $pagelink\n\n" . uiTextSnippet('description') . ": " . stripslashes($comments) . "\n\n$yourname\n$youremail";
+$body = uiTextSnippet('proposed') . ": $name\n" . uiTextSnippet('link') . ": $pagelink\n\n" . uiTextSnippet('description') . ": " . stripslashes($comments) . "\n\n$yourname\n$youremail";
 
 $sendemail = $treerow['email'] ? $treerow['email'] : $emailaddr;
 $owner = $treerow['owner'] ? $treerow['owner'] : ($sitename ? $sitename : $dbowner);
@@ -71,4 +66,4 @@ if ($success) {
 } else {
   $message = "mailnotsent&sowner=" . urlencode($owner) . "&ssendemail=" . urlencode($sendemail);
 }
-header("Location: placeSuggest.php?ID=$ID&tree=$tree&message=$message");
+header("Location: placeSuggest.php?ID=$ID&message=$message");

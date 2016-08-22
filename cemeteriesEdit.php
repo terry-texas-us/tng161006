@@ -51,7 +51,7 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
     echo $navList->build("edit");
     ?>
     <br>
-    <a href="cemeteriesShowCemetery.php?cemeteryID=<?php echo $cemeteryID; ?>&amp;tree=<?php echo $tree; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
+    <a href="cemeteriesShowCemetery.php?cemeteryID=<?php echo $cemeteryID; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
       <img class='icon-sm' src='svg/eye.svg'>
     </a>
     <form action="cemeteriesEditFormAction.php" method='post' name='form1' id='form1' ENCTYPE="multipart/form-data"

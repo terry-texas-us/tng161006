@@ -1,9 +1,7 @@
 <?php
 
-function getBranchInfo($assignedTree, $trees, $branches, &$ids, &$names) {
-  $wherestr = ($assignedTree) ? "WHERE gedcom = '$assignedTree'" : "";
-  
-  $query = "SELECT gedcom, treename FROM $trees $wherestr ORDER BY treename";
+function getBranchInfo($trees, $branches, &$ids, &$names) {
+  $query = "SELECT gedcom, treename FROM $trees ORDER BY treename";
   $treeresult = tng_query($query);
 
   while ($treerow = tng_fetch_assoc($treeresult)) {
@@ -11,7 +9,7 @@ function getBranchInfo($assignedTree, $trees, $branches, &$ids, &$names) {
     $ids .= "branchids['$nexttree'] = [''";
     $names .= "branchnames['$nexttree'] = ['" . uiTextSnippet('allbranches') . "'";
 
-    $query = "SELECT branch, gedcom, description FROM $branches WHERE gedcom = '$nexttree' ORDER BY description";
+    $query = "SELECT branch, gedcom, description FROM $branches ORDER BY description";
     $branchresult = tng_query($query);
 
     while ($branch = tng_fetch_assoc($branchresult)) {
@@ -25,10 +23,10 @@ function getBranchInfo($assignedTree, $trees, $branches, &$ids, &$names) {
   tng_free_result($treeresult);
 }
 
-function buildBranchSelectControl($row, $tree, $assignedbranch, $branches_table) {
+function buildBranchSelectControl($row, $assignedbranch, $branches_table) {
   $out = uiTextSnippet('branch') . ': ';
 
-  $query = "SELECT branch, description FROM $branches_table WHERE gedcom = \"$tree\" ORDER BY description";
+  $query = "SELECT branch, description FROM $branches_table ORDER BY description";
   $branchresult = tng_query($query);
   $branchlist = explode(",", $row['branch']);
 
@@ -77,55 +75,10 @@ function buildBranchSelectControl($row, $tree, $assignedbranch, $branches_table)
 
 // [ts] variations below
 
-function buildBranchSelectControl_from_admin_newperson($row, $tree, $assignedbranch, $branches_table) {
-  $out = uiTextSnippet('branch') . ': ';
-  
-  $query = "SELECT branch, description FROM $branches_table WHERE gedcom = \"$tree\" ORDER BY description";
-  $branchresult = tng_query($query);
-  $numbranches = tng_num_rows($branchresult);
-  //  $branchlist = explode(",", $row['branch']);
-
-  //  $descriptions = array();
-  $assdesc = "";
-  $options = "";
-  while ($branchrow = tng_fetch_assoc($branchresult)) {
-    $options .= "  <option value=\"{$branchrow['branch']}\">{$branchrow['description']}</option>\n";
-    if ($branchrow['branch'] == $assignedbranch) { // [ts] nt in ajx_newperson
-      $assdesc = $branchrow['description'];        // [ts] nt in ajx_newperson   
-    }                                              // [ts] nt in ajx_newperson   
-  }
-  $out .= "<span id='branchlist'></span>";
-  if (!$assignedbranch) {
-    if ($numbranches > 8) {
-      $select = uiTextSnippet('scrollbranch') . "<br>";
-    }
-    $select .= "<select id='branch' name=\"branch[]\" multiple size='8'>\n";
-      $select .= "<option value=''";
-      if ($row['branch'] == "") {
-        $select .= " selected";
-      }
-      $select .= ">" . uiTextSnippet('nobranch');
-      $select .= "</option>\n";
-
-      $select .= "$options\n";
-    $select .= "</select>\n";
-    
-    $out .= "<span> (<a id='branchedit' href='#' onclick=\"showBranchEdit('branchedit'); quitBranchEdit('branchedit'); return false;\">\n";
-    $out .= "<img src='img/ArrowDown.gif'>" . uiTextSnippet('edit') . "</a> )\n";
-    $out .= "</span><br>";
-    $out .= "<div id='branchedit' style='position: absolute; display: none;' onmouseover=\"clearTimeout(branchtimer);\" onmouseout=\"closeBranchEdit('branch', 'branchedit', 'branchlist');\">\n";
-    $out .= $select;
-    $out .= "</div>\n";
-  } else {
-    $out .= "<input name='branch' type='hidden' value=\"$assignedbranch\">$assdesc ($assignedbranch)"; // [ts] $assdesc ($assignedbranch)" part not in ajx_newperson
-  }
-  return $out;
-}
-
-function buildBranchSelectControl_admin_newperson2($row, $tree, $assignedbranch, $branches_table) {
+function buildBranchSelectControl_admin_newperson2($row, $assignedbranch, $branches_table) {
   $out = uiTextSnippet('branch') . ": ";
   
-  $query = "SELECT branch, description FROM $branches_table WHERE gedcom = \"$tree\" ORDER BY description";
+  $query = "SELECT branch, description FROM $branches_table ORDER BY description";
   $branchresult = tng_query($query);
   $numbranches = tng_num_rows($branchresult);
   
@@ -166,47 +119,6 @@ function buildBranchSelectControl_admin_newperson2($row, $tree, $assignedbranch,
     $out .= "</div>\n";
   } else {
     $out .= "<input name='branch' type='hidden' value=\"$assignedbranch\">$assdesc ($assignedbranch)";
-  }
-  return $out;
-}
-
-function buildBranchSelectControl_ajx_newperson($row, $tree, $assignedbranch, $branches_table) {
-  $out = uiTextSnippet('branch') . ": ";
-  
-  $query = "SELECT branch, description FROM $branches_table WHERE gedcom = \"$tree\" ORDER BY description";
-  $branchresult = tng_query($query);
-  $numbranches = tng_num_rows($branchresult);
-  $branchlist = explode(",", $row[branch]);
-
-  $descriptions = array();
-  $options = "";
-  while ($branchrow = tng_fetch_assoc($branchresult)) {
-    $options .= "  <option value=\"{$branchrow['branch']}\">{$branchrow['description']}</option>\n";
-  }
-  $out .= "<span id='pbranchlist'></span>";
-  if (!$assignedbranch) {
-    if ($numbranches > 8) {
-      $select = uiTextSnippet('scrollbranch') . "<br>";
-    }
-    $select .= "<select id='pbranch' name=\"branch[]\" multiple size=\"8\">\n";
-    $select .= "  <option value=''";
-    if ($row['branch'] == "") {
-      $select .= " selected";
-    }
-    $select .= ">" . uiTextSnippet('nobranch');
-    $select .= "</option>\n";
-
-    $select .= "$options\n";
-    $select .= "</select>\n";
-    
-    $out .= "<span> (<a id='pbranchedit' href='#'>\n";
-    $out .= "<img src='img/ArrowDown.gif'>" . uiTextSnippet('edit') . "</a> )\n";
-    $out .= "</span><br>";
-    $out .= "<div id='pbranchedit' style='position: absolute; display: none;'>\n";
-      $out .= $select;
-    $out .= "</div>\n";
-  } else {
-    $out .= "<input name='branch' type='hidden' value=\"$assignedbranch\">";
   }
   return $out;
 }

@@ -45,21 +45,18 @@ if ($latitude && $longitude && !$zoom) {
 if (!$zoom) {
   $zoom = 0;
 }
-$query = "INSERT INTO $cemeteries_table (cemname,maplink,city,county,state,country,latitude,longitude,zoom,notes,place) "
-        . "VALUES (\"$cemname\",\"$maplink\",\"$city\",\"$county\",\"$state\",\"$country\",\"$latitude\",\"$longitude\",\"$zoom\",\"$notes\",\"$place\")";
+$query = "INSERT INTO $cemeteries_table (cemname, maplink, city, county, state, country, latitude, longitude, zoom, notes, place) "
+        . "VALUES ('$cemname', '$maplink', '$city', '$county', '$state', '$country', '$latitude', '$longitude', '$zoom', '$notes', '$place')";
 $result = tng_query($query);
 $cemeteryID = tng_insert_id();
 
-$tree = $assignedtree;
-if (!$tree) {
-  $query = "SELECT gedcom FROM $treesTable LIMIT 2";
-  $result2 = tng_query($query);
-  if (tng_num_rows($result2) == 1) {
-    $row = tng_fetch_assoc($result2);
-    $tree = $row['gedcom'];
-  }
-  tng_free_result($result2);
+$query = "SELECT gedcom FROM $treesTable LIMIT 2";
+$result2 = tng_query($query);
+if (tng_num_rows($result2) == 1) {
+  $row = tng_fetch_assoc($result2);
 }
+tng_free_result($result2);
+
 $place = trim($place);
 if ($place) {
   //first check to see if any place exists in any tree with new place name
@@ -71,13 +68,11 @@ if ($place) {
       $latitude = $longitude = "";
       $zoom = 0;
     }
-    $placetree = $tngconfig['places1tree'] ? "" : $tree;
-    $query = "INSERT IGNORE INTO $places_table (gedcom,place,placelevel,latitude,longitude,zoom,notes) "
-            . "VALUES (\"$placetree\",\"$place\",\"0\",\"$latitude\",\"$longitude\",\"$zoom\",\"$notes\")";
+    $query = "INSERT IGNORE INTO $places_table (gedcom, place, placelevel, latitude, longitude, zoom, notes) "
+            . "VALUES ('', '$place', '0', '$latitude', '$longitude', '$zoom', '$notes')";
     $result3 = tng_query($query);
   } elseif (isset($usecoords)) {
-    $treestr = $tree && $tngconfig['places1tree'] ? "gedcom=\"$tree\" AND " : "";
-    $query = "UPDATE $places_table SET latitude=\"$latitude\",longitude=\"$longitude\",zoom=\"$zoom\" WHERE {$treestr}place=\"$place\"";
+    $query = "UPDATE $places_table SET latitude = '$latitude', longitude = '$longitude', zoom = '$zoom' WHERE place = '$place'";
     $result3 = tng_query($query);
   }
   tng_free_result($result);

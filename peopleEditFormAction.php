@@ -9,12 +9,12 @@ require 'datelib.php';
 
 require 'geocodelib.php';
 
-$query = "SELECT branch, edituser, edittime FROM $people_table WHERE personID = \"$personID\" and gedcom = \"$tree\"";
+$query = "SELECT branch, edituser, edittime FROM $people_table WHERE personID = '$personID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
 
-if ((!$allowEdit && (!$allowAdd || !$added)) || ($assignedtree && $assignedtree != $tree) || !checkbranch($row['branch'])) {
+if ((!$allowEdit && (!$allowAdd || !$added)) || !checkbranch($row['branch'])) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -81,13 +81,13 @@ if (!$editconflict) {
     $oldbranches = explode(",", $orgbranch);
     foreach ($oldbranches as $b) {
       if ($b && !in_array($b, $branch)) {
-        $query = "DELETE FROM $branchlinks_table WHERE persfamID = \"$personID\" AND gedcom = \"$tree\" AND branch = \"$b\"";
+        $query = "DELETE FROM $branchlinks_table WHERE persfamID = '$personID' AND branch = \"$b\"";
         $result = tng_query($query);
       }
     }
     foreach ($branch as $b) {
       if ($b && !in_array($b, $oldbranches)) {
-        $query = "INSERT IGNORE INTO $branchlinks_table (branch,gedcom,persfamID) VALUES(\"$b\",\"$tree\",\"$personID\")";
+        $query = "INSERT IGNORE INTO $branchlinks_table (branch, gedcom, persfamID) VALUES('$b', '', '$personID')";
         $result = tng_query($query);
       }
     }
@@ -117,16 +117,15 @@ if (!$editconflict) {
   if (trim($endlplace) && !in_array($endlplace, $places)) {
     array_push($places, $endlplace);
   }
-  $placetree = $tngconfig['places1tree'] ? "" : $tree;
   foreach ($places as $place) {
-    $query = "INSERT IGNORE INTO $places_table (gedcom,place,placelevel,zoom,geoignore) VALUES (\"$placetree\",\"$place\",\"0\",\"0\",\"0\")";
+    $query = "INSERT IGNORE INTO $places_table (gedcom, place, placelevel, zoom, geoignore) VALUES ('', '$place', '0', '0', '0')";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     if ($tngconfig['autogeo'] && tng_affected_rows()) {
       $ID = tng_insert_id();
       $message = geocode($place, 0, $ID);
     }
   }
-  $query = "SELECT familyID FROM $children_table WHERE personID = \"$personID\" AND gedcom = \"$tree\"";
+  $query = "SELECT familyID FROM $children_table WHERE personID = '$personID'";
   $parents = tng_query($query);
 
   $famc = "";
@@ -138,7 +137,7 @@ if (!$editconflict) {
       eval("\$sealpdatetr = convertdate( \$sealpdate{$parent['familyID']} );");
       eval("\$frel = \$frel{$parent['familyID']};");
       eval("\$mrel = \$mrel{$parent['familyID']};");
-      $query = "UPDATE $children_table SET sealdate=\"$sealpdate\", sealdatetr=\"$sealpdatetr\", sealplace=\"$sealpplace\", frel=\"$frel\", mrel=\"$mrel\" WHERE familyID = \"{$parent['familyID']}\" AND personID = \"$personID\" AND gedcom = \"$tree\"";
+      $query = "UPDATE $children_table SET sealdate=\"$sealpdate\", sealdatetr=\"$sealpdatetr\", sealplace=\"$sealpplace\", frel=\"$frel\", mrel=\"$mrel\" WHERE familyID = \"{$parent['familyID']}\" AND personID = '$personID'";
       $result2 = tng_query($query);
       if (!$famc) {
         $famc = $parent['familyID'];
@@ -160,7 +159,7 @@ if (!$editconflict) {
   $query = "UPDATE $people_table SET firstname=\"$firstname\", lnprefix=\"$lnprefix\", lastname=\"$lastname\", nickname=\"$nickname\", prefix=\"$prefix\", suffix=\"$suffix\", title=\"$title\", nameorder=\"$pnameorder\", living=\"$living\", private=\"$private\",
     birthdate=\"$birthdate\", birthdatetr=\"$birthdatetr\", birthplace=\"$birthplace\", sex=\"$sex\", altbirthdate=\"$altbirthdate\", altbirthdatetr=\"$altbirthdatetr\", altbirthplace=\"$altbirthplace\",
     deathdate=\"$deathdate\", deathdatetr=\"$deathdatetr\", deathplace=\"$deathplace\", burialdate=\"$burialdate\", burialdatetr=\"$burialdatetr\", burialplace=\"$burialplace\", burialtype=\"$burialtype\",
-    baptdate=\"$baptdate\", baptdatetr=\"$baptdatetr\", baptplace=\"$baptplace\", confdate=\"$confdate\", confdatetr=\"$confdatetr\", confplace=\"$confplace\", initdate=\"$initdate\", initdatetr=\"$initdatetr\", initplace=\"$initplace\", endldate=\"$endldate\", endldatetr=\"$endldatetr\", endlplace=\"$endlplace\", changedate=\"$newdate\",branch=\"$allbranches\",changedby=\"$currentuser\",edituser=\"\",edittime=\"0\",metaphone=\"$meta\" $famcstr WHERE personID=\"$personID\" AND gedcom = \"$tree\"";
+    baptdate=\"$baptdate\", baptdatetr=\"$baptdatetr\", baptplace=\"$baptplace\", confdate=\"$confdate\", confdatetr=\"$confdatetr\", confplace=\"$confplace\", initdate=\"$initdate\", initdatetr=\"$initdatetr\", initplace=\"$initplace\", endldate=\"$endldate\", endldatetr=\"$endldatetr\", endlplace=\"$endlplace\", changedate=\"$newdate\",branch=\"$allbranches\",changedby=\"$currentuser\",edituser=\"\",edittime=\"0\",metaphone=\"$meta\" $famcstr WHERE personID = '$personID'";
   $result = tng_query($query);
 
   if ($sex == 'M') {
@@ -176,19 +175,19 @@ if (!$editconflict) {
     }
   }
   if ($self) {
-    $query = "SELECT familyID, husband, wife FROM $families_table WHERE $families_table.$self = \"$personID\" AND gedcom = \"$tree\" ORDER BY $spouseorder";
+    $query = "SELECT familyID, husband, wife FROM $families_table WHERE $families_table.$self = '$personID' ORDER BY $spouseorder";
   } else {
-    $query = "SELECT familyID, husband, wife FROM $families_table WHERE ($families_table.husband = \"$personID\" OR $families_table.wife = \"$personID\") AND gedcom = \"$tree\"";
+    $query = "SELECT familyID, husband, wife FROM $families_table WHERE ($families_table.husband = \"$personID\" OR $families_table.wife = \"$personID\")";
   }
   $marriages = tng_query($query);
 
   if ($marriages && tng_num_rows($marriages)) {
     while ($marriagerow = tng_fetch_assoc($marriages)) {
       if ($personID == $marriagerow['husband']) {
-        $spquery = "SELECT living, private FROM $people_table WHERE personID = \"{$marriagerow['wife']}\" AND gedcom = \"$tree\"";
+        $spquery = "SELECT living, private FROM $people_table WHERE personID = \"{$marriagerow['wife']}\"";
       } else {
         if ($personID == $marriagerow['wife']) {
-          $spquery = "SELECT living, private FROM $people_table WHERE personID = \"{$marriagerow['husband']}\" AND gedcom = \"$tree\"";
+          $spquery = "SELECT living, private FROM $people_table WHERE personID = \"{$marriagerow['husband']}\"";
         } else {
           $spquery = "";
         }
@@ -203,23 +202,23 @@ if (!$editconflict) {
       }
       $familyliving = ($living || $spouseliving) ? 1 : 0;
       $familyprivate = ($private || $spouseprivate) ? 1 : 0;
-      $query = "UPDATE $families_table SET living = \"$familyliving\", private = \"$familyprivate\", branch = \"$allbranches\" WHERE familyID = \"{$marriagerow['familyID']}\" AND gedcom = \"$tree\"";
+      $query = "UPDATE $families_table SET living = \"$familyliving\", private = \"$familyprivate\", branch = \"$allbranches\" WHERE familyID = \"{$marriagerow['familyID']}\"";
       $spouseresult = tng_query($query);
     }
   }
-  adminwritelog("<a href=\"peopleEdit.php?personID=$personID&tree=$tree\">" . uiTextSnippet('modifyperson') . ": $tree/$personID</a>");
+  adminwritelog("<a href=\"peopleEdit.php?personID=$personID\">" . uiTextSnippet('modifyperson') . ": $personID</a>");
 } else {
   $message = uiTextSnippet('notsaved');
 }
 if ($media == "1") {
-  header("Location: admin_newmedia.php?personID=$personID&tree=$tree&linktype=I&cw=$cw");
+  header("Location: admin_newmedia.php?personID=$personID&amp;linktype=I&amp;cw=$cw");
 } elseif ($newfamily == "none") {
   $message = uiTextSnippet('changestoperson') . " $personID " . uiTextSnippet('succsaved') . '.';
   header("Location: peopleBrowse.php?message=" . urlencode($message));
 } elseif ($newfamily == "return") {
-  header("Location: peopleEdit.php?personID=$personID&tree=$tree&cw=$cw");
+  header("Location: peopleEdit.php?personID=$personID&cw=$cw");
 } elseif ($newfamily == "child") {
-  header("Location: familiesAdd.php?child=$personID&tree=$tree&cw=$cw");
+  header("Location: familiesAdd.php?child=$personID&cw=$cw");
 } elseif ($newfamily == "close") {
 ?>
   <!DOCTYPE html>
@@ -249,5 +248,5 @@ if ($media == "1") {
   $name = $session_charset == "UTF-8" ? getName($row) : utf8_encode(getName($row));
   echo "{\"id\":\"$personID\",\"name\":\"" . $name . "\"}";
 } else {
-  header("Location: familiesAdd.php?$self=$personID&tree=$tree&cw=$cw");
+  header("Location: familiesAdd.php?$self=$personID&cw=$cw");
 }

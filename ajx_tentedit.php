@@ -3,8 +3,6 @@ require 'tng_begin.php';
 
 $factfield = $datefield = $placefield = "";
 
-$righttree = checktree($tree);
-
 if ($type == 'I' || $type == "C") {
   if ($type == 'I') {
     $personID = $persfamID;
@@ -14,10 +12,10 @@ if ($type == 'I' || $type == "C") {
     $personID = $ids[0];
     $familyID = $ids[1];
   }
-  $result = getPersonSimple($tree, $personID);
+  $result = getPersonSimple($personID);
   $namerow = tng_fetch_assoc($result);
 
-  $rights = determineLivingPrivateRights($namerow, $righttree);
+  $rights = determineLivingPrivateRights($namerow);
   $namerow['allow_living'] = $rights['living'];
   $namerow['allow_private'] = $rights['private'];
 
@@ -27,31 +25,31 @@ if ($type == 'I' || $type == "C") {
   $personID = "";
   $familyID = $persfamID;
 
-  $result = getFamilyData($tree, $familyID);
+  $result = getFamilyData($familyID);
   $frow = tng_fetch_assoc($result);
   $hname = $wname = "";
 
-  $rights = determineLivingPrivateRights($frow, $righttree);
+  $rights = determineLivingPrivateRights($frow);
   $frow['allow_living'] = $rights['living'];
   $frow['allow_private'] = $rights['private'];
 
   if ($frow['husband']) {
-    $result = getPersonSimple($tree, $frow['husband']);
+    $result = getPersonSimple($frow['husband']);
     $prow = tng_fetch_assoc($result);
     tng_free_result($result);
 
-    $prights = determineLivingPrivateRights($prow, $righttree);
+    $prights = determineLivingPrivateRights($prow);
     $prow['allow_living'] = $prights['living'];
     $prow['allow_private'] = $prights['private'];
 
     $hname = getName($prow);
   }
   if ($frow['wife']) {
-    $result = getPersonSimple($tree, $frow['wife']);
+    $result = getPersonSimple($frow['wife']);
     $prow = tng_fetch_assoc($result);
     tng_free_result($result);
 
-    $prights = determineLivingPrivateRights($prow, $righttree);
+    $prights = determineLivingPrivateRights($prow);
     $prow['allow_living'] = $prights['living'];
     $prow['allow_private'] = $prights['private'];
 
@@ -156,11 +154,11 @@ if (is_numeric($event)) {
     }
 
     if ($needfamilies) {
-      $query = "SELECT $fieldstr FROM $families_table WHERE familyID = \"$familyID\" AND gedcom = \"$tree\"";
+      $query = "SELECT $fieldstr FROM $families_table WHERE familyID = '$familyID'";
     } elseif ($needchildren) {
-      $query = "SELECT $fieldstr FROM $children_table WHERE familyID = \"$familyID\" AND personID = \"$personID\" AND gedcom = \"$tree\"";
+      $query = "SELECT $fieldstr FROM $children_table WHERE familyID = '$familyID' AND personID = '$personID'";
     } else {
-      $query = "SELECT $fieldstr FROM $people_table WHERE personID = \"$personID\" AND gedcom = \"$tree\"";
+      $query = "SELECT $fieldstr FROM $people_table WHERE personID = '$personID'";
     }
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
@@ -179,7 +177,6 @@ header("Content-type:text/html; charset=" . $session_charset);
       <h2 class='header'><?php echo "$name: $title"; ?></h2>
     </header>
     <div class='modal-body'>
-      <input name='tree' type='hidden' value="<?php echo $tree; ?>">
       <input name='personID' type='hidden' value="<?php echo $personID; ?>">
       <input name='familyID' type='hidden' value="<?php echo $familyID; ?>">
       <input name='eventID' type='hidden' value="<?php echo $event; ?>">

@@ -5,15 +5,12 @@ $query = "SELECT * FROM $cemeteries_table ORDER BY country, state, county, city,
 $cemresult = tng_query($query);
 $numcems = $tngconfig['cemrows'] ? $tngconfig['cemrows'] : max(floor(tng_num_rows($cemresult) / 2), 10);
 
-$treestr = $tree ? " (" . uiTextSnippet('tree') . ": $tree)" : "";
-$wherestr = ($tree) ? "AND $medialinks_table.gedcom = \"$tree\"" : "";
-
-$query = "SELECT $medialinks_table.personID as personID FROM $medialinks_table, $media_table WHERE $media_table.mediaID = $medialinks_table.mediaID AND mediatypeID=\"headstones\" AND cemeteryID = \"\" $wherestr";
+$query = "SELECT $medialinks_table.personID as personID FROM $medialinks_table, $media_table WHERE $media_table.mediaID = $medialinks_table.mediaID AND mediatypeID = 'headstones' AND cemeteryID = ''";
 $hsresult = tng_query($query);
 $numhs = tng_num_rows($hsresult);
 tng_free_result($hsresult);
 
-$logstring = "<a href='cemeteriesShow.php?tree=$tree'>" . uiTextSnippet('cemeteriesheadstones') . "$treestr</a>";
+$logstring = "<a href='cemeteriesShow.php'>" . uiTextSnippet('cemeteriesheadstones') . "</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -34,8 +31,6 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
     <h2><img class='icon-md' src='svg/headstone.svg'><?php echo uiTextSnippet('cemeteriesheadstones'); ?></h2>
     <br clear='all'>
     <?php
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'cemeteriesShow', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
-
     define("DUMMYPLACE", "@@@@@@");
     define("NUMCOLS", 2);           //set as number of columns-1
     define("DEFAULT_COLUMN_LENGTH", $numcems);
@@ -75,7 +70,7 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
                   $txt = $cemetery['city'] ? htmlspecialchars($cemetery['city'], ENT_QUOTES, $session_charset) : uiTextSnippet('nocity');
                   echo "<div class=\"pad3\">\n";
                     echo "<img src=\"" . "img/tng_expand.gif\" class=\"expandicon\" title='" . uiTextSnippet('expand') . "' id='plusminus$divname' onclick=\"return toggleSection('$divname');\" alt=''>\n";
-                    echo "<a href=\"headstones.php?country=" . urlencode($cemetery['country']) . "&amp;state=" . urlencode($cemetery['state']) . "&amp;county=" . urlencode($cemetery['county']) . "&amp;city=" . urlencode($cemetery['city']) . "&amp;tree=$tree\">$txt</a>\n";
+                    echo "<a href=\"headstones.php?country=" . urlencode($cemetery['country']) . "&amp;state=" . urlencode($cemetery['state']) . "&amp;county=" . urlencode($cemetery['county']) . "&amp;city=" . urlencode($cemetery['city']) . "\">$txt</a>\n";
                   echo "</div>\n";
                   echo "<div id=\"$divname\" class=\"cemblock\" style=\"display:none;\">\n";
                 } else {
@@ -84,7 +79,7 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
               }
               $txt = $cemetery['cemname'] ? $cemetery['cemname'] : uiTextSnippet('nocemname');
               $txt = htmlspecialchars($txt, ENT_QUOTES, $session_charset);
-              echo "- <a href=\"cemeteriesShowCemetery.php?cemeteryID={$cemetery['cemeteryID']}&amp;tree=$tree\">$txt</a><br>\n";
+              echo "- <a href=\"cemeteriesShowCemetery.php?cemeteryID={$cemetery['cemeteryID']}\">$txt</a><br>\n";
               $cemetery = tng_fetch_assoc($cemresult);
               $i++;
             }
@@ -102,7 +97,7 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
               $txt = $cemetery['county'] ? htmlspecialchars($cemetery['county'], ENT_QUOTES, $session_charset) : uiTextSnippet('nocounty');
               echo "<div class=\"pad3\">\n";
                 echo "<img src=\"" . "img/tng_expand.gif\" class=\"expandicon\" title='" . uiTextSnippet('expand') . "' id='plusminus$divname' onclick=\"return toggleSection('$divname');\" alt=''>\n";
-                echo "<a href=\"headstones.php?country=" . urlencode($cemetery['country']) . "&amp;state=" . urlencode($cemetery['state']) . "&amp;county=" . urlencode($cemetery['county']) . "&amp;tree=$tree\">$txt</a>\n";
+                echo "<a href=\"headstones.php?country=" . urlencode($cemetery['country']) . "&amp;state=" . urlencode($cemetery['state']) . "&amp;county=" . urlencode($cemetery['county']) . "\">$txt</a>\n";
               echo "</div>\n";
               echo "<div id=\"$divname\" class='cemblock' style='display:none;'>\n";
               $hiding = true;
@@ -126,7 +121,7 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
           $txt = $cemetery['state'] ? htmlspecialchars($cemetery['state'], ENT_QUOTES, $session_charset) : uiTextSnippet('nostate');
           if ($cemetery['state'] || !$tngconfig['cemblanks']) {
             $linectr += 2;        //Add extra line to allow for the <br> at the end
-            echo "<br><strong><a href=\"headstones.php?country=" . urlencode($cemetery['country']) . "&amp;state=" . urlencode($cemetery['state']) . "&amp;tree=$tree\">$txt</a></strong><br>\n";
+            echo "<br><strong><a href=\"headstones.php?country=" . urlencode($cemetery['country']) . "&amp;state=" . urlencode($cemetery['state']) . "\">$txt</a></strong><br>\n";
           } else {
             $linectr++;
             echo "<br>\n";
@@ -147,7 +142,7 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
         }
         $linectr++;     //Add extra line to allow for the <br> at the end
         $txt = $cemetery['country'] ? htmlspecialchars($cemetery['country'], ENT_QUOTES, $session_charset) : uiTextSnippet('nocountry');
-        echo "<div class=\"cemcountry h4\"><a href=\"headstones.php?country=" . urlencode($cemetery['country']) . "&amp;tree=$tree\">$txt</a></div>\n";
+        echo "<div class=\"cemcountry h4\"><a href=\"headstones.php?country=" . urlencode($cemetery['country']) . "\">$txt</a></div>\n";
         $orphan = true;
       }
     }
@@ -156,7 +151,7 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
     if ($numhs) {
       echo "<br>\n";
       echo "<div class=\"cemcountry h4\">\n";
-        echo "<a href='headstones.php?tree=$tree'>" . uiTextSnippet('nocemetery') . "</a>\n";
+        echo "<a href='headstones.php'>" . uiTextSnippet('nocemetery') . "</a>\n";
       echo "</div>\n";
     }
     echo "</div>\n";    //colx

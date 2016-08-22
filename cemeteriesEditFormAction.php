@@ -48,20 +48,17 @@ if (!$zoom) {
 $query = "UPDATE $cemeteries_table SET cemname=\"$cemname\",maplink=\"$maplink\",city=\"$city\",county=\"$county\",state=\"$state\",country=\"$country\",latitude=\"$latitude\",longitude=\"$longitude\",zoom=\"$zoom\",notes=\"$notes\",place=\"$place\" WHERE cemeteryID=\"$cemeteryID\"";
 $result = tng_query($query);
 
-$tree = $assignedtree;
-if (!$tree) {
-  $query = "SELECT gedcom FROM $treesTable LIMIT 2";
-  $result2 = tng_query($query);
-  if (tng_num_rows($result2) == 1) {
-    $row = tng_fetch_assoc($result2);
-    $tree = $row['gedcom'];
-  }
-  tng_free_result($result2);
+$query = "SELECT gedcom FROM $treesTable LIMIT 2";
+$result2 = tng_query($query);
+if (tng_num_rows($result2) == 1) {
+  $row = tng_fetch_assoc($result2);
 }
+tng_free_result($result2);
+
 $place = trim($place);
 if ($place) {
   //first check to see if any place exists in any tree with new place name
-  $query = "SELECT * FROM $places_table WHERE place = \"$place\"";
+  $query = "SELECT * FROM $places_table WHERE place = '$place'";
   $result = tng_query($query);
 
   if (!tng_num_rows($result)) {
@@ -69,16 +66,15 @@ if ($place) {
       $latitude = $longitude = "";
       $zoom = 0;
     }
-    $query = "INSERT IGNORE INTO $places_table (gedcom,place,placelevel,latitude,longitude,zoom,notes) VALUES (\"$tree\",\"$place\",\"0\",\"$latitude\",\"$longitude\",\"$zoom\",\"$notes\")";
+    $query = "INSERT IGNORE INTO $places_table (gedcom, place, placelevel, latitude, longitude, zoom, notes) "
+        . "VALUES ('', '$place', '0', '$latitude', '$longitude', '$zoom', '$notes')";
     $result3 = tng_query($query);
   } elseif (isset($usecoords)) {
-    $treestr = $tree && $tngconfig['places1tree'] ? "gedcom=\"$tree\" AND " : "";
-    $query = "UPDATE $places_table SET latitude=\"$latitude\",longitude=\"$longitude\",zoom=\"$zoom\" WHERE {$treestr}place=\"$place\"";
+    $query = "UPDATE $places_table SET latitude = '$latitude', longitude = '$longitude', zoom='$zoom' WHERE place = '$place'";
     $result3 = tng_query($query);
   }
   tng_free_result($result);
 }
-
 adminwritelog("<a href=\"cemeteriesEdit.php?cemeteryID=$cemeteryID\">" . uiTextSnippet('modifycemetery') . ": $cemeteryID</a>");
 
 if ($newscreen == "return") {

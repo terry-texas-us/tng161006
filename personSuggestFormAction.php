@@ -40,26 +40,25 @@ killBlockedAddress($youremail);
 killBlockedMessageContent($comments);
 
 $query = "SELECT firstname, lnprefix, lastname, prefix, suffix, sex, nameorder, living, private, branch, disallowgedcreate, IF(birthdatetr !='0000-00-00',YEAR(birthdatetr),YEAR(altbirthdatetr)) as birth, IF(deathdatetr !='0000-00-00',YEAR(deathdatetr),YEAR(burialdatetr)) as death
-  FROM $people_table, $treesTable WHERE personID = \"$ID\" AND $people_table.gedcom = \"$tree\" AND $people_table.gedcom = $treesTable.gedcom";
+  FROM $people_table, $treesTable WHERE personID = '$ID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 
-$righttree = checktree($tree);
-$rights = determineLivingPrivateRights($row, $righttree);
+$rights = determineLivingPrivateRights($row);
 $row['allow_living'] = $rights['living'];
 $row['allow_private'] = $rights['private'];
 
 $name = getName($row) . " ($ID)";
-$pagelink = "$tngwebsite/" . "peopleShowPerson.php?personID=$ID&tree=$tree";
+$pagelink = "$tngwebsite/" . "peopleShowPerson.php?personID=$ID";
 tng_free_result($result);
 
 $subject = uiTextSnippet('proposed') . ": $name";
-$query = "SELECT treename, email, owner FROM $treesTable WHERE gedcom=\"$tree\"";
+$query = "SELECT treename, email, owner FROM $treesTable";
 $treeresult = tng_query($query);
 $treerow = tng_fetch_assoc($treeresult);
 tng_free_result($treeresult);
 
-$body = uiTextSnippet('proposed') . ": $name\n" . uiTextSnippet('tree') . ": {$treerow['treename']}\n" . uiTextSnippet('link') . ": $pagelink\n\n" . uiTextSnippet('description') . ": " . stripslashes($comments) . "\n\n$yourname\n$youremail";
+$body = uiTextSnippet('proposed') . ": $name\n" . uiTextSnippet('link') . ": $pagelink\n\n" . uiTextSnippet('description') . ": " . stripslashes($comments) . "\n\n$yourname\n$youremail";
 
 $sendemail = $treerow['email'] ? $treerow['email'] : $emailaddr;
 $owner = $treerow['owner'] ? $treerow['owner'] : ($sitename ? $sitename : $dbowner);
@@ -78,4 +77,4 @@ if ($success) {
 } else {
   $message = "mailnotsent&sowner=" . urlencode($owner) . "&ssendemail=" . urlencode($sendemail);
 }
-header("Location: personSuggest.php?ID=$ID&tree=$tree&message=$message");
+header("Location: personSuggest.php?ID=$ID&amp;message=$message");

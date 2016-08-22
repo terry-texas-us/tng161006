@@ -9,8 +9,6 @@ require 'version.php';
 require 'geocodelib.php';
 require 'adminlog.php';
 
-$orgtree = $tree;
-
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('places'));
 ?>
@@ -34,10 +32,9 @@ $headSection->setTitle(uiTextSnippet('places'));
           <h4><?php echo uiTextSnippet('geocoding'); ?></h4><br>
           <div>
             <?php
-            $treestr = $tree1 ? " AND gedcom = \"$tree1\"" : "";
             $limitstr = $limit ? "LIMIT $limit" : "";
-            //$limitstr = "LIMIT 1";
-            $query = "SELECT ID, place FROM $places_table WHERE (latitude = \"\" OR latitude IS NULL) AND (longitude = \"\" OR longitude IS NULL) AND temple != \"1\" AND geoignore != \"1\"$treestr ORDER BY place $limitstr";
+
+            $query = "SELECT ID, place FROM $places_table WHERE (latitude = \"\" OR latitude IS NULL) AND (longitude = \"\" OR longitude IS NULL) AND temple != \"1\" AND geoignore != \"1\" ORDER BY place $limitstr";
             $result = tng_query($query);
 
             $delay = 0;

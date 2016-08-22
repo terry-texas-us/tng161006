@@ -11,8 +11,6 @@ function getAlbumPhoto($albumID, $albumname) {
   global $mediatypes_assoc;
   global $mediapath;
   
-  $wherestr2 = $tree ? " AND $medialinks_table.gedcom = \"$tree\"" : "";
-
   $query2 = "SELECT path, thumbpath, usecollfolder, mediatypeID, $albumlinks_table.mediaID as mediaID, alwayson FROM ($media_table, $albumlinks_table)
     WHERE albumID = \"$albumID\" AND $media_table.mediaID = $albumlinks_table.mediaID AND defphoto=\"1\"";
   $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
@@ -31,7 +29,7 @@ function getAlbumPhoto($albumID, $albumname) {
         FROM $medialinks_table
         LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID AND $medialinks_table.gedcom = people.gedcom
         LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID AND $medialinks_table.gedcom = $families_table.gedcom
-        WHERE mediaID = \"$mediaID\"$wherestr2";
+        WHERE mediaID = '$mediaID'";
       $presult = tng_query($query);
       while ($prow = tng_fetch_assoc($presult)) {
         if ($prow['fbranch'] != null) {

@@ -6,19 +6,14 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-if ((!$allowEdit && (!$allowAdd || !$added)) || ($assignedtree && $assignedtree != $tree)) {
+if ((!$allowEdit && (!$allowAdd || !$added))) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
 $repoID = ucfirst($repoID);
 
-$query = "SELECT treename FROM $treesTable WHERE gedcom = \"$tree\"";
-$result = tng_query($query);
-$treerow = tng_fetch_assoc($result);
-tng_free_result($result);
-
-$query = "SELECT reponame, changedby, $repositories_table.addressID, address1, address2, city, state, zip, country, phone, email, www, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $repositories_table LEFT JOIN $address_table on $repositories_table.addressID = $address_table.addressID WHERE repoID = \"$repoID\" AND $repositories_table.gedcom = \"$tree\"";
+$query = "SELECT reponame, changedby, $repositories_table.addressID, address1, address2, city, state, zip, country, phone, email, www, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $repositories_table LEFT JOIN $address_table on $repositories_table.addressID = $address_table.addressID WHERE repoID = '$repoID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -26,7 +21,7 @@ $row['reponame'] = preg_replace("/\"/", "&#34;", $row['reponame']);
 
 $row['allow_living'] = 1;
 
-$query = "SELECT DISTINCT eventID as eventID FROM $notelinks_table WHERE persfamID=\"$repoID\" AND gedcom =\"$tree\"";
+$query = "SELECT DISTINCT eventID as eventID FROM $notelinks_table WHERE persfamID = '$repoID'";
 $notelinks = tng_query($query);
 $gotnotes = array();
 while ($note = tng_fetch_assoc($notelinks)) {
@@ -53,15 +48,15 @@ $headSection->setTitle(uiTextSnippet('modifyrepo'));
     $navList->appendItem([true, "repositoriesBrowse.php", uiTextSnippet('search'), "findrepo"]);
     $navList->appendItem([$allowAdd, "repositoriesAdd.php", uiTextSnippet('add'), "addrepo"]);
     $navList->appendItem([$allowEdit && $allowDelete, "repositoriesMerge.php", uiTextSnippet('merge'), "merge"]);
-    //    $navList->appendItem([$allowEdit, "repositoriesEdit.php?repoID=$repoID&tree=$tree", uiTextSnippet('edit'), "edit"]);
+    //    $navList->appendItem([$allowEdit, "repositoriesEdit.php?repoID=$repoID", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <br>
-    <a href="repositoriesShowItem.php?repoID=<?php echo $repoID; ?>&amp;tree=<?php echo $tree; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
+    <a href="repositoriesShowItem.php?repoID=<?php echo $repoID; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
       <img class='icon-sm' src='svg/eye.svg'>
     </a>
-    <?php if ($allowAdd && (!$assignedtree || $assignedtree == $tree)) { ?>
-      <a href="admin_newmedia.php?personID=<?php echo $repoID; ?>&amp;tree=<?php echo $tree; ?>&amp;linktype=R"><?php echo uiTextSnippet('addmedia'); ?></a>
+    <?php if ($allowAdd) { ?>
+      <a href="admin_newmedia.php?personID=<?php echo $repoID; ?>&amp;linktype=R"><?php echo uiTextSnippet('addmedia'); ?></a>
     <?php } ?>
     <form id='repositories-edit' name='form1' action='repositoriesEditFormAction.php' method='post'>
       <div id="thumbholder" style="margin-right:5px; <?php if (!$photo) {echo "display: none";} ?>">
@@ -78,15 +73,6 @@ $headSection->setTitle(uiTextSnippet('modifyrepo'));
         <br clear='all'>
       </div>
       <table class='table table-sm'>
-        <tr>
-          <td><?php echo uiTextSnippet('tree'); ?>:</td>
-          <td>
-            <?php echo $treerow['treename']; ?>
-            &nbsp;(<a href="#" onclick="return openChangeTree('source', '<?php echo $tree; ?>', '<?php echo $sourceID; ?>');">
-              <img src="img/ArrowDown.gif"><?php echo uiTextSnippet('edit'); ?>
-            </a> )
-          </td>
-        </tr>
         <tr>
           <td><?php echo uiTextSnippet('name'); ?>:</td>
           <td><input name='reponame' type='text' size='40' value="<?php echo $row['reponame']; ?>">
@@ -138,7 +124,7 @@ $headSection->setTitle(uiTextSnippet('modifyrepo'));
           <td><?php echo uiTextSnippet('otherevents'); ?>:</td>
           <td>
             <?php
-            echo "<input type='button' value=\"  " . uiTextSnippet('addnew') . "  \" onClick=\"newEvent('R','$repoID','$tree');\">&nbsp;\n";
+            echo "<input type='button' value=\"  " . uiTextSnippet('addnew') . "  \" onClick=\"newEvent('R','$repoID');\">&nbsp;\n";
             ?>
           </td>
         </tr>
@@ -157,7 +143,6 @@ $headSection->setTitle(uiTextSnippet('modifyrepo'));
         }
         ?>
       </p>
-      <input name='tree' type='hidden' value="<?php echo $tree; ?>">
       <input name='addressID' type='hidden' value="<?php echo $row['addressID']; ?>">
       <input name='repoID' type='hidden' value="<?php echo "$repoID"; ?>">
       <input name='cw' type='hidden' value="<?php echo "$cw"; ?>">
@@ -171,8 +156,6 @@ $headSection->setTitle(uiTextSnippet('modifyrepo'));
   var tnglitbox;
   var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;
   var preferDateFormat = '<?php echo $preferDateFormat; ?>';
-
-  var tree = '<?php echo $tree; ?>';
 </script>
 <script src="js/selectutils.js"></script>
 <script src="js/datevalidation.js"></script>  

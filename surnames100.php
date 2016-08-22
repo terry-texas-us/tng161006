@@ -5,8 +5,7 @@ $topnum = preg_replace("/[^0-9]/", '', $topnum);
 
 $text['top30'] = preg_replace("/xxx/", $topnum, $text['top30']);
 
-$treestr = $tree ? " (" . uiTextSnippet('tree') . ": $tree)" : "";
-$logstring = "<a href='surnames100.php?topnum=$topnum&amp;tree=$tree'>" . xmlcharacters(uiTextSnippet('surnamelist') . ": " . uiTextSnippet('top') . " $topnum$treestr") . "</a>";
+$logstring = "<a href='surnames100.php?topnum=$topnum'>" . xmlcharacters(uiTextSnippet('surnamelist') . ": " . uiTextSnippet('top') . " $topnum") . "</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -25,7 +24,6 @@ $headSection->setTitle(uiTextSnippet('surnamelist') . " &mdash; " . uiTextSnippe
     <h2><img class='icon-md' src='svg/person.svg'><?php echo uiTextSnippet('surnamelist') . ": " . uiTextSnippet('top30'); ?></h2>
     <br class='clearleft'>
     <?php
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'surnames100', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
 
     beginFormElement("surnames100", "get");
     ?>
@@ -39,7 +37,7 @@ $headSection->setTitle(uiTextSnippet('surnamelist') . " &mdash; " . uiTextSnippe
 
       <div>
         <h4><?php echo uiTextSnippet('top30') . " (" . uiTextSnippet('totalnames') . "):"; ?></h4>
-        <p class="small"><?php echo uiTextSnippet('showmatchingsurnames') . "&nbsp;&nbsp;&nbsp;<a href='surnames.php?tree=$tree'>" . uiTextSnippet('mainsurnamepage') . "</a> &nbsp;|&nbsp; <a href=\"surnames-all.php?tree=$tree\">" . uiTextSnippet('showallsurnames') . "</a>"; ?></p>
+        <p class="small"><?php echo uiTextSnippet('showmatchingsurnames') . "&nbsp;&nbsp;&nbsp;<a href='surnames.php'>" . uiTextSnippet('mainsurnamepage') . "</a> &nbsp;|&nbsp; <a href = 'surnames-all.php'>" . uiTextSnippet('showallsurnames') . "</a>"; ?></p>
         <?php require 'surnamestable.php'; ?>
       </div>
       <br>

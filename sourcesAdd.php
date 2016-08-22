@@ -11,12 +11,6 @@ if (!$allowAdd) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-} else {
-  $wherestr = "";
-}
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('addnewsource'));
 ?>
@@ -53,22 +47,7 @@ $headSection->setTitle(uiTextSnippet('addnewsource'));
           <button class='btn btn-outline-primary' name='submit' type='submit' value="<?php echo uiTextSnippet('lockid'); ?>" onClick="document.form1.newscreen[0].checked = true;"><?php echo uiTextSnippet('lockid'); ?></button>
         </div>          
       </div>
-      <div class='row'>
-        <div class='col-md-6'>
-          <?php echo uiTextSnippet('tree'); ?>
-          <select class='form-control' name='tree1' onChange="generateID('source', document.form1.sourceID, document.form1.tree1);">
-            <?php
-            $query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
-            $result = tng_query($query);
-            $numtrees = tng_num_rows($result);
-            while ($row = tng_fetch_assoc($result)) {
-              echo "  <option value=\"{$row['gedcom']}\">{$row['treename']}</option>\n";
-            }
-            tng_free_result($result);
-            ?>
-          </select>
-        </div>
-      </div>
+      <br>
       <?php include("micro_newsource.php"); ?>
       <p><strong><?php echo uiTextSnippet('sevslater'); ?></strong></p>
         <input name='save' type='submit' value="<?php echo uiTextSnippet('savecont'); ?>">

@@ -174,7 +174,7 @@ $('#users-add input[name="email"]').on('blur', function () {
 $('#users-add #findPerson').on('click', function () {
     'use strict';
     var assignedBranch = $(this).data('assignedBranch');
-    return findItem('I', 'personID', '', document.form1.mynewgedcom.options[document.form1.mynewgedcom.selectedIndex].value, assignedBranch);
+    return findItem('I', 'personID', '', assignedBranch);
 });
 
 $('#users-add input[name="role"]').on('click', function () {
@@ -250,7 +250,7 @@ $('#users-edit input[name="email"]').on('blur', function () {
 $('#users-edit #findPerson').on('click', function () {
     'use strict';
     var assignedBranch = $(this).data('assignedBranch');
-    return findItem('I', 'personID', '', document.form1.mynewgedcom.options[document.form1.mynewgedcom.selectedIndex].value, assignedBranch);
+    return findItem('I', 'personID', '', assignedBranch);
 });
 
 $('#users-edit input[name="role"]').on('click', function () {

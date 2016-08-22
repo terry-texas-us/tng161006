@@ -12,16 +12,6 @@ if (!$allowAdd) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-
-if (!$tngconfig['places1tree']) {
-  if ($assignedtree) {
-    $wherestr = "WHERE gedcom = \"$assignedtree\"";
-  } else {
-    $wherestr = "";
-  }
-  $query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
-  $result = tng_query($query);
-}
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('addnewplace'));
 ?>
@@ -41,25 +31,6 @@ $headSection->setTitle(uiTextSnippet('addnewplace'));
     ?>
     <form name='form1' action='placesAddFormAction.php' method='post' onSubmit="return validateForm();">
       <table class='table table-sm'>
-        <?php
-        if (!$tngconfig['places1tree']) {
-          ?>
-          <tr>
-            <td><?php echo uiTextSnippet('tree'); ?>:</td>
-            <td width="90%">
-              <select name='tree'>
-                <?php
-                while ($row = tng_fetch_assoc($result)) {
-                  echo "    <option value=\"{$row['gedcom']}\">{$row['treename']}</option>\n";
-                }
-                tng_free_result($result);
-                ?>
-              </select>
-            </td>
-          </tr>
-          <?php
-        }
-        ?>
         <tr>
           <td><?php echo uiTextSnippet('place'); ?>:</td>
           <td><input id='place' name='place' type='text' size='50'></td>

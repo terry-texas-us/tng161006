@@ -22,7 +22,6 @@ function validateForm2(form) {
     if (!rval)
         alert(textSnippet('enterkeep'));
     if (rval) {
-        var tree = document.form1.tree ? document.form1.tree.options[document.form1.tree.selectedIndex].value : "";
         var checks = $('input.mc');
         var mergelist = new Array();
         checks.each(function (index, item) {
@@ -31,7 +30,7 @@ function validateForm2(form) {
         });
         var keep = form.keep[i].value;
         $('#placespin').show();
-        var params = {places: mergelist.join(','), keep: keep, tree: tree};
+        var params = {places: mergelist.join(','), keep: keep};
         $.ajax({
             url: 'admin_mergeplacesajax.php',
             data: params,

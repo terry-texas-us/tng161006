@@ -15,13 +15,13 @@ if (!String.prototype.trim) {
     };
 }
 
-function deleteIt(type, id, tree) {
+function deleteIt(type, id) {
     'use strict';
     var tds = $('#row_' + id + ' td'), params;
     $.each(tds, function (index, item) {
         $(item).effect('highlight', {color: '#ff9999'}, 1500);
     });
-    params = {t: type, id: id, desc: tree};
+    params = {t: type, id: id};
     $.ajax({
         url: 'ajx_delete.php',
         data: params,

@@ -132,8 +132,6 @@ function getNameUniversal($row, $order, $hcard = null) {
 function getFamilyName($row) {
   global $people_table;
 
-  $righttree = checktree($row['gedcom']);
-
   $hquery = "SELECT firstname, lnprefix, lastname, title, prefix, suffix, living, private, branch, nameorder, gedcom "
           . "FROM $people_table "
           . "WHERE personID = \"{$row['husband']}\" "
@@ -141,7 +139,7 @@ function getFamilyName($row) {
   $hresult = tng_query($hquery) or die(uiTextSnippet('cannotexecutequery') . ": $hquery");
   $hrow = tng_fetch_assoc($hresult);
 
-  $hrights = determineLivingPrivateRights($hrow, $righttree);
+  $hrights = determineLivingPrivateRights($hrow);
   $hrow['allow_living'] = $hrights['living'];
   $hrow['allow_private'] = $hrights['private'];
 
@@ -155,7 +153,7 @@ function getFamilyName($row) {
   $wresult = tng_query($wquery) or die(uiTextSnippet('cannotexecutequery') . ": $wquery");
   $wrow = tng_fetch_assoc($wresult);
 
-  $wrights = determineLivingPrivateRights($wrow, $righttree);
+  $wrights = determineLivingPrivateRights($wrow);
   $wrow['allow_living'] = $wrights['living'];
   $wrow['allow_private'] = $wrights['private'];
 
@@ -282,15 +280,12 @@ function checkbranch($branch) {
   return (!$assignedbranch || (false !== ($pos = strpos($branch, $assignedbranch, 0)))) ? 1 : 0;
 }
 
-function checktree($tree) {
-  global $assignedtree;
-
-  return (!$assignedtree || $tree == $assignedtree);
-}
-
 // The following function is now obsolete
 function determineLivingRights($row, $usedb = 0, $allow_living_db = 0, $allow_private_db = 0) {
-  global $livedefault, $allow_living, $allow_private, $rightbranch, $tree;
+  global $livedefault;
+  global $allow_living;
+  global $allow_private;
+  global $rightbranch;
 
   $allow_living_loc = $usedb ? $allow_living_db : $allow_living;
   $allow_private_loc = $usedb ? $allow_private_db : $allow_private;
@@ -303,7 +298,7 @@ function determineLivingRights($row, $usedb = 0, $allow_living_db = 0, $allow_pr
     $livingrights = 1;
   } else {
     $yes_living = $yes_private = true;
-    $user_person = $_SESSION['mypersonID'] && $_SESSION['mygedcom'] == $tree && $_SESSION['mypersonID'] == $row['personID'];
+    $user_person = $_SESSION['mypersonID'] && $_SESSION['mypersonID'] == $row['personID'];
     if ($living) {
       if ($livedefault != 2) {     //everyone has living rights
         if ((!$allow_living_loc || !$rightbranch) && !$user_person) {
@@ -321,13 +316,12 @@ function determineLivingRights($row, $usedb = 0, $allow_living_db = 0, $allow_pr
   return $livingrights;
 } // end obsolete function
 
-function determineLivingPrivateRights($row, $pagerighttree = -1, $pagerightbranch = -1) {
+function determineLivingPrivateRights($row, $pagerightbranch = -1) {
   global $livedefault;
   global $ldsdefault;
   global $allow_living;
   global $allow_private;
   global $allow_lds;
-  global $tree;
 
   $rights = array('private' => true, 'living' => true, 'lds' => (!$ldsdefault ? true : false));
 
@@ -335,18 +329,16 @@ function determineLivingPrivateRights($row, $pagerighttree = -1, $pagerightbranc
   $private = $row['private'];
 
   if ($private || $living || $ldsdefault == 2) {
-    //check tree
-    $righttree = $pagerighttree >= 0 ? $pagerighttree : checktree($row['gedcom']);
-    $righttreebranch = $pagerightbranch >= 0 ? $pagerightbranch : ($righttree ? checkbranch($row['branch']) : false);
-    $user_person = $_SESSION['mypersonID'] && $_SESSION['mygedcom'] == $tree && $_SESSION['mypersonID'] == $row['personID'];
+    $rightbranch = $pagerightbranch >= 0 ? $pagerightbranch : (checkbranch($row['branch']));
+    $user_person = $_SESSION['mypersonID'] && $_SESSION['mypersonID'] == $row['personID'];
 
-    if ($living && (!$allow_living || !$righttreebranch) && !$user_person) {
+    if ($living && (!$allow_living || !$rightbranch) && !$user_person) {
       $rights['living'] = false;
     }
-    if ($private && (!$allow_private || !$righttreebranch) && !$user_person) {
+    if ($private && (!$allow_private || !$rightbranch) && !$user_person) {
       $rights['private'] = false;
     }
-    if ($ldsdefault == 2 && (($allow_lds && $righttreebranch) || $user_person)) {
+    if ($ldsdefault == 2 && (($allow_lds && $rightbranch) || $user_person)) {
       $rights['lds'] = true;
     }
   }
@@ -358,17 +350,20 @@ function determineLivingPrivateRights($row, $pagerighttree = -1, $pagerightbranc
 function determineLDSRights($notree = false) {
   global $ldsdefault;
   global $allow_lds;
-  global $tree;
-  global $assignedtree;
 
-  $treeOK = !$tree || $notree || !$assignedtree || $tree == $assignedtree;
-  $ldsOK = !$ldsdefault || ($ldsdefault == 2 && $allow_lds && $treeOK) ? true : false;
+  $ldsOK = !$ldsdefault || ($ldsdefault == 2 && $allow_lds) ? true : false;
 
   return $ldsOK;
 }
 
 function getLivingPrivateRestrictions($table, $firstname, $allOtherInput) {
-  global $livedefault, $nonames, $tngconfig, $allow_living, $allow_private, $assignedtree, $assignedbranch, $people_table;
+  global $livedefault;
+  global $nonames;
+  global $tngconfig;
+  global $allow_living;
+  global $allow_private;
+  global $assignedbranch;
+  global $people_table;
 
   $query = "";
   if ($table) {
@@ -376,8 +371,8 @@ function getLivingPrivateRestrictions($table, $firstname, $allOtherInput) {
   }
   $limitedLivingRights = $allow_living && !$livedefault;
   $limitedPrivateRights = $allow_private;
-  $allLivingRights = $livedefault == 2 || ($allow_living && !$assignedtree);
-  $allPrivateRights = $allow_private && !$assignedtree;
+  $allLivingRights = $livedefault == 2 || ($allow_living);
+  $allPrivateRights = $allow_private;
   $livingNameRestrictions = $livedefault == 1 || (!$livedefault && ($nonames == 1 || ($nonames == 2 && $firstname)) && !$allLivingRights);
   $privateNameRestrictions = ($tngconfig['nnpriv'] == 1 || ($tngconfig['nnpriv'] == 2 && $firstname)) && !$allPrivateRights;
 
@@ -386,10 +381,6 @@ function getLivingPrivateRestrictions($table, $firstname, $allOtherInput) {
     if ($_SESSION['mypersonID'] && $table == $people_table) {
       //this is me (current user)
       $matchperson = " OR ({$table}gedcom = \"{$_SESSION['mygedcom']}\" AND {$table}personID = \"{$_SESSION['mypersonID']}\")";
-    }
-    if ($assignedtree) {
-      //rights are limited to a tree or tree+branch
-      $atreestr = $assignedbranch ? " OR ({$table}gedcom = \"$assignedtree\" AND {$table}branch LIKE \"%$assignedbranch%\")" : " OR {$table}gedcom = \"$assignedtree\"";
     }
     if (($livingNameRestrictions && $privateNameRestrictions) || ($allOtherInput && !$allLivingRights && !$allPrivateRights)) {
       if ($limitedLivingRights && $limitedPrivateRights) {
@@ -423,7 +414,6 @@ function getLivingPrivateRestrictions($table, $firstname, $allOtherInput) {
 
 function checkLivingLinks($itemID) {
   global $livedefault;
-  global $assignedtree;
   global $assignedbranch;
   global $people_table;
   global $medialinks_table;
@@ -431,7 +421,7 @@ function checkLivingLinks($itemID) {
   global $allow_living;
   global $allow_private;
 
-  if (($livedefault == 2 || $allow_living) && $allow_private && !$assignedtree) {
+  if (($livedefault == 2 || $allow_living) && $allow_private) {
     return true;
   }
   $icriteria = $fcriteria = "";
@@ -441,18 +431,6 @@ function checkLivingLinks($itemID) {
     $icriteria = $fcriteria = "AND (living = 1 OR private = 1)";
   } else {
     // Viewer can see some media of Living individuals, now figure if there are some the viewer should not see
-    if ($assignedtree && $livedefault != 2) {
-      // Should not be able to see Living individuals in other Trees, so narrow search to those other Trees
-      $icriteria = "$people_table.gedcom != \"$assignedtree\"";
-      $fcriteria = "$families_table.gedcom != \"$assignedtree\"";
-
-      if ($assignedbranch) { // Note: must have a Tree selected to have a Branch
-        // Should not be able to see Living individuals in other Branches either, so need to check for those too.
-        $bcriteria = "OR !(branch LIKE \"%$assignedbranch%\")";
-        $icriteria = "($icriteria $bcriteria)";
-        $fcriteria = "($fcriteria $bcriteria)";
-      }
-    }
     if (!$allow_living && $livedefault != 2) {
       $icriteria = $icriteria ? "AND (living = 1 OR ($icriteria AND private = 1))" : "AND living = 1";
       $fcriteria = $fcriteria ? "AND (living = 1 OR ($fcriteria AND private = 1))" : "AND living = 1";
@@ -526,7 +504,6 @@ function getScriptPath() {
 function buildSearchResultPagination($total, $address, $perpage, $pagenavpages) {
   global $tngpage;
   global $totalpages;
-  global $orgtree;
 
   if (!$tngpage) {
     $tngpage = 1;
@@ -550,7 +527,7 @@ function buildSearchResultPagination($total, $address, $perpage, $pagenavpages) 
     $navoffset = (($prevpage * $perpage) - $perpage);
 
     $out .= "<li class='page-item'>\n";
-      $out .= "<a class='page-link' href='$address=$navoffset&amp;tree=$orgtree&amp;tngpage=$prevpage' aria-label='Previous'>\n";
+      $out .= "<a class='page-link' href='$address=$navoffset&amp;tngpage=$prevpage' aria-label='Previous'>\n";
         $out .= "<span aria-hidden='true'>&laquo;</span>\n";
         $out .= "<span class='sr-only'>Previous</span>\n";
       $out .= "</a>\n";
@@ -560,20 +537,20 @@ function buildSearchResultPagination($total, $address, $perpage, $pagenavpages) 
     $navoffset = (($curpage - 1) * $perpage);
     if (($curpage <= $tngpage - $pagenavpages || $curpage >= $tngpage + $pagenavpages) && $pagenavpages) {
       if ($curpage == 1) {
-        $firstPage = "<li class='page-item'><a class='page-link' href='$address=$navoffset&amp;tree=$orgtree&amp;tngpage=$curpage' title='" . uiTextSnippet('firstpage') . "'>1</a></li>\n";
+        $firstPage = "<li class='page-item'><a class='page-link' href='$address=$navoffset&amp;tngpage=$curpage' title='" . uiTextSnippet('firstpage') . "'>1</a></li>\n";
         $out .= $firstPage;
         $out .= "<li class='page-item disabled'><a class='page-link' href='#'>...</a></li>\n";
       }
       if ($curpage == $totalpages) {
         $out .= "<li class='page-item disabled'><a class='page-link' href='#'>...</a></li>\n";
-        $lastPage = "<li class='page-item'><a class='page-link' href='$address=$navoffset&amp;tree=$orgtree&amp;tngpage=$curpage' title='" . uiTextSnippet('lastpage') . "'>$totalpages</a></li>\n";
+        $lastPage = "<li class='page-item'><a class='page-link' href='$address=$navoffset&amp;tngpage=$curpage' title='" . uiTextSnippet('lastpage') . "'>$totalpages</a></li>\n";
         $out .= $lastPage;
       }
     } else {
       if ($curpage == $tngpage) {
         $out .= "<li class='page-item active'><a class='page-link' href='#'>$curpage</a></li>\n";
       } else {
-        $out .= "<li class='page-item'><a class='page-link' href='$address=$navoffset&amp;tree=$orgtree&amp;tngpage=$curpage'>$curpage</a></li>\n";
+        $out .= "<li class='page-item'><a class='page-link' href='$address=$navoffset&amp;tngpage=$curpage'>$curpage</a></li>\n";
       }
     }
   }
@@ -582,7 +559,7 @@ function buildSearchResultPagination($total, $address, $perpage, $pagenavpages) 
     $navoffset = (($nextpage * $perpage) - $perpage);
 
     $out .= "<li class='page-item'>\n";
-    $out .= "<a class='page-link' href='$address=$navoffset&amp;tree=$orgtree&amp;tngpage=$nextpage' aria-label='Next'>\n";
+    $out .= "<a class='page-link' href='$address=$navoffset&amp;tngpage=$nextpage' aria-label='Next'>\n";
       $out .= "<span aria-hidden='true'>&raquo;</span>\n";
       $out .= "<span class='sr-only'>Next</span>\n";
       $out .= "</a>\n";
@@ -667,15 +644,12 @@ function generatePassword($flag) {
   return $password;
 }
 
-function getXrefNotes($noteref, $tree = "") {
+function getXrefNotes($noteref) {
   global $xnotes_table;
 
   preg_match("/^@(\S+)@/", $noteref, $matches);
   if ($matches[1]) {
-    $query = "SELECT note "
-            . "FROM $xnotes_table "
-            . "WHERE noteID = \"$matches[1]\" "
-            . "AND gedcom=\"$tree\"";
+    $query = "SELECT note FROM $xnotes_table WHERE noteID = \"$matches[1]\"";
     $xnoteres = tng_query($query);
     if ($xnoteres) {
       $xnote = tng_fetch_assoc($xnoteres);
@@ -918,7 +892,6 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
   global $mediapath;
   global $mediatypes_assoc;
   global $photosext;
-  global $tree;
   global $medialinks_table;
   global $media_table;
   global $tngconfig;
@@ -929,7 +902,6 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
   $query = "SELECT $media_table.mediaID, medialinkID, alwayson, thumbpath, mediatypeID, usecollfolder, newwindow "
           . "FROM ($media_table, $medialinks_table) "
           . "WHERE personID = \"$persfamID\" "
-          . "AND $medialinks_table.gedcom = \"$tree\" "
           . "AND $media_table.mediaID = $medialinks_table.mediaID "
           . "AND defphoto = '1'";
   $result = tng_query($query);
@@ -951,7 +923,7 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
       $suffix = "</a>";
     }
   } elseif ($rights) {
-    $photoref = $photocheck = $tree ? "$photopath/$tree.$persfamID.$photosext" : "$photopath/$persfamID.$photosext";
+    $photoref = $photocheck = "$photopath/$persfamID.$photosext";
     $prefix = $suffix = "";
   }
 
@@ -961,7 +933,6 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
       $query = "SELECT medialinkID "
               . "FROM ($media_table, $medialinks_table) "
               . "WHERE personID = \"$persfamID\" "
-              . "AND $medialinks_table.gedcom = \"$tree\" "
               . "AND $media_table.mediaID = $medialinks_table.mediaID "
               . "AND mediatypeID = \"photos\" "
               . "AND thumbpath != \"\"";
@@ -970,7 +941,7 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
       tng_free_result($result2);
       if ($numphotos) {
         //if photos exist, show box with link to sort page where they can pick a default
-        $photo = "<a href=\"mediaSortFormAction.php?newlink1=$persfamID&tree1=$tree&mediatypeID=photos&linktype1=$type\" class=\"small\" style=\"display:block;padding:8px;border:1px solid black;margin-right:6px;text-align:center\">" . uiTextSnippet('choosedef') . "</a>";
+        $photo = "<a href=\"mediaSortFormAction.php?newlink1=$persfamID&amp;mediatypeID=photos&amp;linktype1=$type\" class=\"small\" style=\"display:block;padding:8px;border:1px solid black;margin-right:6px;text-align:center\">" . uiTextSnippet('choosedef') . "</a>";
       } elseif ($gender && $tngconfig['usedefthumbs']) {
         if ($gender == 'M') {
           $photocheck = "img/male.jpg";
@@ -1114,17 +1085,15 @@ function getAllTextPath() {
 function buildParentRow($parent, $spouse, $label) {
   global $people_table;
   global $families_table;
-  global $tree;
-  global $righttree;
 
   $out = "";
-  $query = "SELECT personID, lastname, lnprefix, firstname, birthdate, birthplace, altbirthdate, altbirthplace, prefix, suffix, nameorder FROM $people_table, $families_table WHERE $people_table.personID = $families_table.$spouse AND $families_table.familyID = \"{$parent['familyID']}\" AND $people_table.gedcom = \"$tree\" AND $families_table.gedcom = \"$tree\"";
+  $query = "SELECT personID, lastname, lnprefix, firstname, birthdate, birthplace, altbirthdate, altbirthplace, prefix, suffix, nameorder FROM $people_table, $families_table WHERE $people_table.personID = $families_table.$spouse AND $families_table.familyID = \"{$parent['familyID']}\"";
   $gotparent = tng_query($query);
 
   if ($gotparent) {
     $prow = tng_fetch_assoc($gotparent);
 
-    $prights = determineLivingPrivateRights($row, $righttree);
+    $prights = determineLivingPrivateRights($row);
     $prow['allow_living'] = $prights['living'];
     $prow['allow_private'] = $prights['private'];
 
@@ -1134,7 +1103,7 @@ function buildParentRow($parent, $spouse, $label) {
       $out .= "<label class='col-sm-2 form-control-label' for='parent'>" . uiTextSnippet($label) . "</label>\n";
       $out .= "<div class='col-md-6'>\n";
         if ($prow['personID']) {
-          $out .= "<p id='parent'><a href=\"peopleEdit.php?personID={$prow['personID']}&amp;tree=$tree&amp;cw=$cw\">" . getName($prow) . " - {$prow['personID']}</a>$birthinfo</p>";
+          $out .= "<p id='parent'><a href=\"peopleEdit.php?personID={$prow['personID']}&amp;cw=$cw\">" . getName($prow) . " - {$prow['personID']}</a>$birthinfo</p>";
         }
       $out .= "</div>\n";
 

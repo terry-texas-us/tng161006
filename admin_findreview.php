@@ -9,14 +9,10 @@ require 'version.php';
 if ($type == 'I') {
   $tng_search_preview = $_SESSION['tng_search_preview'] = 1;
   if ($newsearch) {
-    $_SESSION['tng_search_preview_post']['tree'] = $tree;
     $_SESSION['tng_search_preview_post']['user'] = $reviewuser;
     $_SESSION['tng_search_preview_post']['page'] = 1;
     $_SESSION['tng_search_preview_post']['offset'] = 0;
   } else {
-    if (!$tree) {
-      $tree = $_SESSION['tng_search_preview_post']['tree'];
-    }
     if (!$reviewuser) {
       $reviewuser = $_SESSION['tng_search_preview_post']['user'];
     }
@@ -31,14 +27,10 @@ if ($type == 'I') {
 } else { //$type == F
   $tng_search_preview = $_SESSION['tng_search_preview'] = 1;
   if ($newsearch) {
-    $_SESSION['tng_search_freview_post']['tree'] = $tree;
     $_SESSION['tng_search_freview_post']['user'] = $reviewuser;
     $_SESSION['tng_search_freview_post']['page'] = 1;
     $_SESSION['tng_search_freview_post']['offset'] = 0;
   } else {
-    if (!$tree) {
-      $tree = $_SESSION['tng_search_freview_post']['tree'];
-    }
     if (!$reviewuser) {
       $reviewuser = $_SESSION['tng_search_freview_post']['user'];
     }
@@ -51,9 +43,6 @@ if ($type == 'I') {
     }
   }
 }
-$orgtree = $tree;
-
-
 if ($offset) {
   $offsetplus = $offset + 1;
   $newoffset = "$offset, ";
@@ -63,18 +52,9 @@ if ($offset) {
   $page = 1;
 }
 
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-  $tree = $assignedtree;
-} else {
-  $wherestr = "";
-}
-$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 
-$allwhere = "$temp_events_table.gedcom = $treesTable.gedcom";
-if ($tree) {
-  $allwhere .= " AND $temp_events_table.gedcom = \"$tree\"";
-}
+$allwhere = "1=1";
 
 if ($assignedbranch) {
   $allwhere .= " AND branch LIKE \"%$assignedbranch%\"";
@@ -134,12 +114,10 @@ $headSection->setTitle(uiTextSnippet('review'));
     }
     echo $navList->build("review");
     ?>
-
     <table class='table table-sm'>
       <tr>
         <td>
           <h4><?php echo uiTextSnippet('selectevaction'); ?></h4>
-
           <div>
             <form action="admin_findreview.php" name='form1'>
               <table>
@@ -165,25 +143,8 @@ $headSection->setTitle(uiTextSnippet('review'));
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
-                  <td><?php echo uiTextSnippet('tree'); ?>:</td>
-                  <td>
-                    <select name='tree'>
-                      <?php
-                      if (!$assignedtree) {
-                        echo "  <option value=''>" . uiTextSnippet('alltrees') . "</option>\n";
-                      }
-                      $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
-                      while ($treerow = tng_fetch_assoc($treeresult)) {
-                        echo "  <option value=\"{$treerow['gedcom']}\"";
-                        if ($treerow['gedcom'] == $tree) {
-                          echo " selected";
-                        }
-                        echo ">{$treerow['treename']}</option>\n";
-                      }
-                      tng_free_result($treeresult);
-                      ?>
-                    </select>
-                  </td>
+                  <td></td>
+                  <td></td>
                   <td>
                     <input name='submit' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
                     <input name='submit' type='submit' value="<?php echo uiTextSnippet('reset'); ?>"

@@ -19,7 +19,6 @@ header("Content-type:text/html; charset=" . $session_charset);
   <form id='findform1' name='findform1' action='' onsubmit="return openFind(this,'findperson2.php');">
     <span>(<?php echo $subtitle; ?>)</span><br>
 
-    <input name='tree' type='hidden' value="<?php echo $tree; ?>">
     <?php if ($formname == "") {
       $formname = "form1";
     } ?>

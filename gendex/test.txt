@@ -1,0 +1,17 @@
+I1390&tree=test|NOACK|Emma /NOACK/|30 AUG 1875|Sachsen, Germany|26 SEP 1945|Copperas Cove, Coryell, Texas, United States|
+I1398&tree=test|TEINERT|Alfred Alvin /TEINERT/|27 JUL 1901|Lincoln, Lee, Texas, United States|17 OCT 1980|Lynn, Texas, United States|
+I1388&tree=test|TEINERT|Alma Louise /TEINERT/|30 JUL 1910|Texas, United States|25 FEB 1979|Harris, Texas, United States|
+I1391&tree=test|TEINERT|Clara Esther /TEINERT/|9 APR 1895|Lee, Texas, United States|||
+I1396&tree=test|TEINERT|Ella Lydia /TEINERT/|4 AUG 1898|Lee, Texas, United States|14 APR 1995|Coryell, Texas, United States|
+I1400&tree=test|TEINERT|Emily Mathilda /TEINERT/|2 JAN 1902|Copperas Cove, Coryell, Texas, United States|1989|Poca City, Oklahoma, United States|
+I155&tree=test|TEINERT|Emma Theresia /TEINERT/|7 AUG 1875|Serbin, Lee, Texas, United States|16 MAR 1960|Copperas Cove, Coryell, Texas, United States|
+I567&tree=test|TEINERT|Ernestina Bertha /TEINERT/|22 DEC 1877|Serbin, Lee, Texas, United States|15 AUG 1962||
+I151&tree=test|TEINERT|Ernst Emil /TEINERT/|23 FEB 1870|Texas, United States|12 OCT 1947||
+I154&tree=test|TEINERT|Hanna Paulina /TEINERT/|21 OCT 1883|Serbin, Lee, Texas, United States|9 NOV 1979|Round Rock, Williamson, Texas, United States|
+I1389&tree=test|TEINERT|Johann Ernst Fürchtegott /TEINERT/|11 APR 1873|Serbin, Bastrop, Texas, United States|2 SEP 1963|Copperas Cove, Coryell, Texas, United States|
+I152&tree=test|TEINERT|Johann Gerhard /TEINERT/|5 SEP 1879|Serbin, Lee, Texas, United States|13 JAN 1973||
+I1394&tree=test|TEINERT|Ludwig Paul /TEINERT/|25 JUL 1897|Lee, Texas, United States|28 MAR 1983|Williamson, Texas, United States|
+I493&tree=test|TEINERT|Maria Theresia /TEINERT/|28 SEP 1867|Texas, United States|4 DEC 1940||
+I1392&tree=test|TEINERT|Martin R. /TEINERT/|26 MAY 1896|Lee, Texas, United States|24 APR 1970|Walburg, Williamson, Texas, United States|
+I153&tree=test|TEINERT|Oswald Theodor /TEINERT/|20 MAY 1881|Serbin, Lee, Texas, United States|25 AUG 1962|Giddings, Lee, Texas, United States|
+I1395&tree=test|TEINERT|Otto /TEINERT/|ABT 1897|Lee, Texas, United States|1897||

@@ -1,6 +1,5 @@
 <?php
 
-$assignedtree = $_SESSION['assignedtree'];
 $assignedbranch = $_SESSION['assignedbranch'];
 $currentuser = $_SESSION['currentuser'];
 

@@ -1,0 +1,1107 @@
+﻿0 HEAD
+1 SOUR RootsMagic
+2 NAME RootsMagic
+2 VERS 7.1.0.0
+2 CORP RootsMagic, Inc.
+3 ADDR PO Box 495
+4 CONT Springville, UT 84663
+4 CONT USA
+3 PHON 1-800-ROOTSMAGIC
+3 WWW www.RootsMagic.com
+1 DEST RootsMagic
+1 DATE 8 MAR 2016
+1 FILE test-families(2)-completeRM7-for-tng-NO-rm-specific-import.ged
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+0 @I151@ INDI
+1 NAME Ernst Emil /Teinert/
+2 GIVN Ernst Emil
+2 SURN Teinert
+1 SEX M
+1 _UID 47E6141A259D45F9916A5B04093F24052614
+1 _FSFTID LVWX-TKV
+1 CHAN
+2 DATE 7 SEP 2015
+1 BIRT
+2 DATE 23 FEB 1870
+2 PLAC Texas, United States
+2 ADDR Rabbs Creek
+1 CHR
+2 DATE 2 MAR 1870
+2 PLAC Serbin, Bastrop, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S52@
+3 PAGE 1870:7, Ernst Emil Teinert
+3 DATA
+4 TEXT Feb. 23, 1am. | Mar. 2 | Ernst Emil 2nd child, 1st son | Johann Teinert
+5 CONC , farmer on Rabbs Creek first marriage | Hanna, nee Kurjo, from Serbin f
+5 CONC irst marriage | 1) Johann, foster son of Carl Teinert, farmer at Serbin
+5 CONC . 2) Ernst Teinert, farmer on Rabbs Creek. 3) August Teinert, farmer on R
+5 CONC abbs Creek. 4) George Falke, farmer at Serbin. 5) Magdalena, 3rd daught
+5 CONC er of Carl Teinert of Serbin. 6) Maria, 2nd daughter of Carl Teinert, f
+5 CONC armer at Serbin. 7) Maria, 2nd daughter of Michael Kurjo, farmer at Ser
+5 CONC bin. 8) Hanna, wife of Johann Kasper, farmer at Serbin. |
+1 RESI
+2 DATE 21 JUL 1870
+2 PLAC Fayette, Texas, United States
+2 ADDR West of Caldwell Road
+2 SOUR @S25@
+3 PAGE West of Caldwell Road + Winchester Post Office || Winchester P.O.; p. 6 (penned); 38; 38; Ernst E. Teinert in the household of John Teinert; 1585
+3 NOTE (born in February)
+3 DATA
+4 TEXT 5/12 | M | W | | | | Texas
+1 RESI
+2 DATE 24 JUN 1880
+2 PLAC Lee, Texas, United States
+2 ADDR Precinct No. 1
+2 SOUR @S42@
+3 PAGE Precinct No. 1; 91; p. 54 (penned); 463; 477; Ernst Teinert in the household of John Teinert; 1316
+3 DATA
+4 TEXT W | M | 9 | Son | | | Texas
+1 CONF
+2 DATE 6 APR 1884
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S2@
+3 PAGE 1884:01 1, Ernst Emil Teinert
+3 NOTE {Wendish Confirmation}
+3 DATA
+4 TEXT Johann Teinert | Feb. 23, 1870 | Ps. 86:11
+1 RESI
+2 DATE 11 JUN 1900
+2 PLAC Lee, Texas, United States
+2 ADDR Justice Precinct 1
+3 NOTE {1900 U.S. census region: lying south and west of the Houston & Texas C
+4 CONC entral Railroad}
+2 SOUR @S43@
+3 PAGE Justice Precinct 1; 56; sheet 11A (penned); 217; 217; Emil E. Teinert in the household of John Teinert; 1654
+3 DATA
+4 TEXT Son | W | M | Feb | 1870 | 30 | S | Texas | Farm laborer
+1 DEAT
+2 DATE 12 OCT 1947
+1 BURI
+2 PLAC Coryell, Texas, United States
+2 ADDR Immanuel Lutheran Church Cemetery
+1 FAMC @F499@
+0 @I152@ INDI
+1 NAME Johann Gerhard /Teinert/
+2 GIVN Johann Gerhard
+2 SURN Teinert
+1 SEX M
+1 _UID 9904F5247EC4471E88752D9A36CB361D7573
+1 _FSFTID LD56-8HC
+1 CHAN
+2 DATE 18 SEP 2015
+1 BIRT
+2 DATE 5 SEP 1879
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR Rabbs Creek
+1 CHR
+2 DATE 14 SEP 1879
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S52@
+3 PAGE 1879:20, Johann Gerhard Teinert
+3 DATA
+4 TEXT Sept. 5, 12:15pm. | Sept. 14 | Johann Gerhard 7th child, 3rd son | Joha
+5 CONC nn Teinert, farmer on Rabbs Creek at Serbin first marriage | Hanna, nee K
+5 CONC urjo, from Serbin first marriage | 1) Andreas Kurjo, older son of Micha
+5 CONC el Kurjo, farmer at Serbin. 2) Johann Wukasch, steam-miller and farmer a
+5 CONC t Serbin. 3) Matthes Zoch, farmer on Rabbs Creek. 4) Theresia, youngest d
+5 CONC aughter of Michael Kurjo, farmer at Serbin. 5) Magdalena, wife of Ernst T
+5 CONC einert, farmer at Serbin. 6) Hanna, wife of August Teinert, farmer at S
+5 CONC erbin.
+1 RESI
+2 DATE 24 JUN 1880
+2 PLAC Lee, Texas, United States
+2 ADDR Precinct No. 1
+2 SOUR @S42@
+3 PAGE Precinct No. 1; 91; p. 54 (penned); 463; 477; Gerrot Teinert in the household of John Teinert; 1316
+3 DATA
+4 TEXT W | M | 1 | Son | | | Texas
+1 CONF
+2 DATE 26 MAR 1893
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S2@
+3 PAGE 1893:06 6, Johann Gerhard Teinert
+3 NOTE {Wendish Confirmation}
+3 DATA
+4 TEXT Johann Teinert | Sept. 5, 1879 | 2 Tim. 2:8
+1 RESI
+2 DATE 11 JUN 1900
+2 PLAC Lee, Texas, United States
+2 ADDR Justice Precinct 1
+3 NOTE {1900 U.S. census region: lying south and west of the Houston & Texas C
+4 CONC entral Railroad}
+2 SOUR @S43@
+3 PAGE Justice Precinct 1; 56; sheet 11A (penned); 217; 217; Gerhard Teinert in the household of John Teinert; 1654
+3 DATA
+4 TEXT Son | W | M | Sept | 1879 | 20 | S | Texas | Farm laborer
+1 DEAT
+2 DATE 13 JAN 1973
+1 FAMC @F499@
+0 @I153@ INDI
+1 NAME Oswald Theodor /Teinert/
+2 GIVN Oswald Theodor
+2 SURN Teinert
+1 SEX M
+1 _UID 7FA89979ED814345B4186CC15C7858F64A10
+1 _FSFTID LDY6-JL9
+1 CHAN
+2 DATE 31 OCT 2015
+1 BIRT
+2 DATE 20 MAY 1881
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR Rabbs Creek
+1 CHR
+2 DATE 29 MAY 1881
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S52@
+3 PAGE 1881:15, Oswald Theodor Teinert
+3 DATA
+4 TEXT May 20, 11:45pm. | May 29 | Oswald Theodor 8th child, 4th son | Johann T
+5 CONC einert, farmer on Rabbs Creek at Serbin first marriage | Hanna, nee Kur
+5 CONC jo, from Serbin first marriage | 1) Traugott Zoch, oldest son of Matthe
+5 CONC s Zoch, farmer at Serbin. 2) Carl August Buchhorn, surviving 3rd son of t
+5 CONC he late Johann Buchhorn, garden-owner in Weigersdorf. 3) Ernst Teinert, f
+5 CONC armer on Rabbs Creek at Serbin. 4) August Teinert, farmer on Rabbs Cree
+5 CONC k at Serbin. 5) Hanna Burjak, oldest daughter of Johann Burjak, renter o
+5 CONC n Rabbs Creek. 6) Maria Theresia, wife of Andreas Kurjo, farmer at Serb
+5 CONC in. 7) Maria Theresia, 3rd daughter of Michael Kurjo, farmer at Serbin. 8
+5 CONC ) Maria, wife of Johann Wukasch, farmer at Serbin.
+1 CONF
+2 DATE 7 APR 1895
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S2@
+3 PAGE 1895:05 5, Oswald Theodore Teinert
+3 NOTE {Wendish Confirmation}
+3 DATA
+4 TEXT Johann Teinert | May 20, 1881 | Ps. 27:1
+1 RESI
+2 DATE 11 JUN 1900
+2 PLAC Lee, Texas, United States
+2 ADDR Justice Precinct 1
+3 NOTE {1900 U.S. census region: lying south and west of the Houston & Texas C
+4 CONC entral Railroad}
+2 SOUR @S43@
+3 PAGE Justice Precinct 1; 56; sheet 11A (penned); 217; 217; Theodor Teinert in the household of John Teinert; 1654
+3 DATA
+4 TEXT Son | W | M | May | 1882 | 18 | S | Texas | Farm laborer
+1 DEAT
+2 DATE 25 AUG 1962
+2 PLAC Giddings, Lee, Texas, United States
+1 BURI
+2 PLAC Warda, Fayette, Texas, United States
+2 ADDR Holy Cross Cemetery
+1 FAMC @F499@
+0 @I154@ INDI
+1 NAME Hanna Paulina /Teinert/
+2 GIVN Hanna Paulina
+2 SURN Teinert
+1 SEX F
+1 _UID E2CB095963BB4F17BFCC668473B71BB502FA
+1 _FSFTID LD56-83R
+1 CHAN
+2 DATE 31 OCT 2015
+1 BIRT
+2 DATE 21 OCT 1883
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR Rabbs Creek
+1 CHR
+2 DATE 31 OCT 1883
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S52@
+3 PAGE 1883:31, Hanna Paulina Teinert
+3 DATA
+4 TEXT Oct. 21, 4:30am. | Oct. 31 | Hanna Paulina 9th child, 5th daughter | Jo
+5 CONC hann Teinert, farmer on Rabbs Creek at Serbin first marriage | Hanna, n
+5 CONC ee Kurjo, from Serbin first marriage | 1) Johanna Clementina, 2nd daugh
+5 CONC ter by 3rd marriage of Johann Carl Teinert, farmer on Rabbs Creek. 2) M
+5 CONC aria, wife of Andreas Kurjo, merchant in Serbin. 3) Magdalena, wife of E
+5 CONC rnst Teinert, farmer on Rabbs Creek. 4) Magdalena, wife of Johann Burja
+5 CONC k, farmer on Rabbs Creek. 5) Johann Carl, oldest son of August Teinert, f
+5 CONC armer on Rabbs Creek. 6) Carl Johann Mörbe, steam-miller at Warda. 7) M
+5 CONC atthes Zoch, farmer on Rabbs Creek.
+1 CONF
+2 DATE 3 APR 1898
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S2@
+3 PAGE 1898:07 7, Anna Paulina Teinert
+3 NOTE {Wendish Confirmation}
+3 DATA
+4 TEXT Johann Teinert | Oct. 21, 1883 | John 6:68
+1 RESI
+2 DATE 11 JUN 1900
+2 PLAC Lee, Texas, United States
+2 ADDR Justice Precinct 1
+3 NOTE {1900 U.S. census region: lying south and west of the Houston & Texas C
+4 CONC entral Railroad}
+2 SOUR @S43@
+3 PAGE Justice Precinct 1; 56; sheet 11A (penned); 217; 217; Pauline Teinert in the household of John Teinert; 1654
+3 DATA
+4 TEXT Daughter | W | F | Oct | 1883 | 16 | S | Texas | Farm laborer
+1 DEAT
+2 DATE 9 NOV 1979
+2 PLAC Round Rock, Williamson, Texas, United States
+1 BURI
+2 PLAC Walburg, Williamson, Texas, United States
+2 ADDR Zion Lutheran Cemetery
+1 FAMC @F499@
+0 @I155@ INDI
+1 NAME Emma Theresia /Teinert/
+2 GIVN Emma Theresia
+2 SURN Teinert
+1 SEX F
+1 _UID E00D5A04F633472D8F735C7088DCE50D0C77
+1 _FSFTID LD56-899
+1 CHAN
+2 DATE 29 OCT 2015
+1 BIRT
+2 DATE 7 AUG 1875
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR Rabbs Creek
+1 CHR
+2 DATE 8 AUG 1875
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR Rabbs Creek
+2 SOUR @S52@
+3 PAGE 1875:18, Emma Theresia Teinert
+3 NOTE {twins}
+3 DATA
+4 TEXT Aug. 7, 12:30am. | Aug. 8, home-baptism | Emma Theresia 4th child, 2nd d
+5 CONC aughter | Johann Teinert, farmer on Rabbs Creek at Serbin first marriag
+5 CONC e | Hanna, nee Kurjo, from Serbin first marriage | 1) Theresia, 3rd dau
+5 CONC ghter of Michael Kurjo, farmer at Serbin. 2) Hanna Maria, wife of Johan
+5 CONC n Schelnik, farmer on Rabbs Creek at Serbin. 3) Johann Wukasch, farmer a
+5 CONC t Serbin. 4) Johann Kasper, farmer at Serbin.
+1 RESI
+2 DATE 24 JUN 1880
+2 PLAC Lee, Texas, United States
+2 ADDR Precinct No. 1
+2 SOUR @S42@
+3 PAGE Precinct No. 1; 91; p. 54 (penned); 463; 477; Emma Teinert in the household of John Teinert; 1316
+3 DATA
+4 TEXT W | F | 4 | D | | | Texas
+1 CONF
+2 DATE 14 APR 1889
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S2@
+3 PAGE 1889:08 8, Emma Theresia Teinert
+3 NOTE {Wendish Confirmation}
+3 DATA
+4 TEXT Johann Teinert | Aug. 7, 1875 | Is. 54:10
+1 DEAT
+2 DATE 16 MAR 1960
+2 PLAC Copperas Cove, Coryell, Texas, United States
+1 BURI
+2 PLAC Coryell, Texas, United States
+2 ADDR Immanuel Lutheran Church Cemetery
+1 FAMC @F499@
+0 @I493@ INDI
+1 NAME Maria Theresia /Teinert/
+2 GIVN Maria Theresia
+2 SURN Teinert
+1 SEX F
+1 _UID BADBC8C7E8AF47E99E5DE251D5D104793C80
+1 _FSFTID LD56-8D8
+1 CHAN
+2 DATE 7 SEP 2015
+1 BIRT
+2 DATE 28 SEP 1867
+2 PLAC Texas, United States
+2 ADDR Rabbs Creek
+1 CHR
+2 DATE 4 OCT 1867
+2 PLAC Texas, United States
+2 ADDR Rabbs Creek
+2 SOUR @S52@
+3 PAGE 1867:24, Maria Theresia Teinert
+3 DATA
+4 TEXT Sept. 28, 11:30am. | Oct. 4, home-baptism | Maria Theresia 1st child, 1
+5 CONC st daughter | Johann Teinert, farmer on Rabbs Creek first marriage | Ha
+5 CONC nna, nee Kurjo, from Serbin first marriage | 1) Magdalena, 3rd daughter o
+5 CONC f Johann Carl Teinert, farmer at Serbin. 2) Maria, 2nd daughter of Mich
+5 CONC ael Kurjo, farmer at Serbin. 3) Maria, only daughter of Georg Falke, fa
+5 CONC rmer on Rabbs Creek. 4) Johann Schelnik, farmer on Rabbs Creek. |
+1 RESI
+2 DATE 21 JUL 1870
+2 PLAC Fayette, Texas, United States
+2 ADDR West of Caldwell Road
+2 SOUR @S25@
+3 PAGE West of Caldwell Road + Winchester Post Office || Winchester P.O.; p. 6 (penned); 38; 38; Mary Teinert in the household of John Teinert; 1585
+3 DATA
+4 TEXT 2 | F | W | | | | Texas
+1 RESI
+2 DATE 24 JUN 1880
+2 PLAC Lee, Texas, United States
+2 ADDR Precinct No. 1
+2 SOUR @S42@
+3 PAGE Precinct No. 1; 91; p. 54 (penned); 463; 477; Mary Teinert in the household of John Teinert; 1316
+3 DATA
+4 TEXT W | F | 13 | D | S | At Home | Texas
+1 CONF
+2 DATE 10 APR 1881
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S2@
+3 PAGE 1881:05 5, Maria Theresia Teinert
+3 DATA
+4 TEXT oldest daughter of Johann Teinert | Sept. 28, 1867
+1 DEAT
+2 DATE 4 DEC 1940
+1 BURI
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Paul Lutheran Church Cemetery
+2 SOUR @S48@
+3 PAGE Marie Synatschk marker; 2010; personally photographed
+1 FAMC @F499@
+0 @I567@ INDI
+1 NAME Ernestina Bertha /Teinert/
+2 GIVN Ernestina Bertha
+2 SURN Teinert
+1 SEX F
+1 _UID 7A201613508842209264A5A1B93D205AA97B
+1 _FSFTID LD56-89B
+1 CHAN
+2 DATE 29 OCT 2015
+1 BIRT
+2 DATE 22 DEC 1877
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR Rabbs Creek
+1 CHR
+2 DATE 30 DEC 1877
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S52@
+3 PAGE 1877:26, Ernestina Bertha Teinert
+3 DATA
+4 TEXT Dec. 22, 9:30pm. | Dec. 30 | Ernestina Bertha 6th child, 4th daughter | J
+5 CONC ohann Teinert, farmer on Rabbs Creek at Serbin first marriage | Hanna, n
+5 CONC ee Kurjo, from Serbin first marriage | 1) Maria Theresia, 3rd daughter o
+5 CONC f Michael Kurjo, farmer at Serbin. 2) Maria, wife of John Teinert, rent
+5 CONC er on Rabbs Creek. 3) Maria, wife of Johann Wukasch, farmer at Serbin. 4
+5 CONC ) Maria, wife of Matthes Zoch, farmer on Rabbs Creek. 5) Andreas, older s
+5 CONC on of Michael Kurjo, farmer at Serbin. 6) Ernst Teinert, farmer on Rabb
+5 CONC s Creek at Serbin. 7) August Teinert, farmer on Rabbs Creek at Serbin.
+1 RESI
+2 DATE 24 JUN 1880
+2 PLAC Lee, Texas, United States
+2 ADDR Precinct No. 1
+2 SOUR @S42@
+3 PAGE Precinct No. 1; 91; p. 54 (penned); 463; 477; Berter Teinert in the household of John Teinert; 1316
+3 DATA
+4 TEXT W | F | 2 | D | | | Texas
+1 CONF
+2 DATE 10 APR 1892
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S2@
+3 PAGE 1892:08 8, Ernstina Bertha Teinert
+3 NOTE {Wendish Confirmation}
+3 DATA
+4 TEXT Johann Teinert | Dec. 22, 1878 | Php. 1:6
+1 RESI
+2 DATE 12 JUN 1900
+2 PLAC Lee, Texas, United States
+2 ADDR Justice Precinct 1
+3 NOTE {1900 U.S. census region: lying south and west of the Houston & Texas C
+4 CONC entral Railroad}
+2 SOUR @S43@
+3 PAGE Justice Precinct 1; 56; sheet 12B (penned); 243; 243; Bertha Wagner in the household of Hermann Wagner; 1654
+3 NOTE {1 child with 1 living}
+3 DATA
+4 TEXT Wife | W | F | Dec | 1878 | 22 | M-1 | Texas |
+1 DEAT
+2 DATE 15 AUG 1962
+1 FAMC @F499@
+0 @I1388@ INDI
+1 NAME Alma Louise /Teinert/
+2 GIVN Alma Louise
+2 SURN Teinert
+1 SEX F
+1 _UID 9C375C56900449DD878F31188E81662E415E
+1 _FSFTID LD52-N4N
+1 CHAN
+2 DATE 20 AUG 2015
+1 BIRT
+2 DATE 30 JUL 1910
+2 PLAC Texas, United States
+1 DEAT
+2 DATE 25 FEB 1979
+2 PLAC Harris, Texas, United States
+1 FAMC @F440@
+0 @I1389@ INDI
+1 NAME Johann Ernst Fürchtegott /Teinert/
+2 GIVN Johann Ernst Fürchtegott
+2 SURN Teinert
+2 NICK John
+1 SEX M
+1 _UID 805519E0A60147E58ED1381CE04DF78A0241
+1 _FSFTID 9JML-KPV
+1 CHAN
+2 DATE 20 AUG 2015
+1 BIRT
+2 DATE 11 APR 1873
+2 PLAC Serbin, Bastrop, Texas, United States
+2 ADDR Rabbs Creek
+1 CHR
+2 DATE 20 APR 1873
+2 PLAC Serbin, Bastrop, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S52@
+3 PAGE 1873:12, Johann Ernst Fürchtegott Teinert
+3 DATA
+4 TEXT Apr. 11, 12:30am. | Apr. 20 | Johann Ernst Fürchtegott 3rd child, 2nd s
+5 CONC on | Johann Teinert, farmer on Rabbs Creek at Serbin first marriage | H
+5 CONC anna, nee Kurjo, from Serbin first marriage | 1) Andreas Kurjo, older s
+5 CONC on of Michael Kurjo, farmer at Serbin. 2) Johann Zoch, farmer on Bo[o]n
+5 CONC s Creek. 3) Johann Wukasch, steam-mill manager at Serbin. 4) Johann Kas
+5 CONC per, farmer at Serbin. 5) Agnes, 4th daughter of Carl Teinert, farmer a
+5 CONC t Serbin. 6) Maria, 2nd daughter of the latter. 7) Magdalena, wife of E
+5 CONC rnst Teinert, farmer at Serbin. 8) Hanna, wife of August Teinert, farme
+5 CONC r at Serbin.
+1 CONF
+2 DATE 3 APR 1887
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S2@
+3 PAGE 1887:02 2, Johann Ernst Fürchtegott Teinert
+3 NOTE {Wendish Confirmation}
+3 DATA
+4 TEXT Johann Teinert | Apr. 11, 1873 | --
+1 DEAT
+2 DATE 2 SEP 1963
+2 PLAC Copperas Cove, Coryell, Texas, United States
+1 BAPL
+2 DATE 1972
+2 STAT Submitted
+2 TEMP ARIZO
+1 SLGC
+2 DATE 1973
+2 STAT Completed
+2 TEMP ARIZO
+2 FAMC @F499@
+1 BURI
+2 PLAC Coryell, Texas, United States
+2 ADDR Immanuel Lutheran Church Cemetery
+1 FAMS @F440@
+1 FAMC @F499@
+0 @I1390@ INDI
+1 NAME Emma /Noack/
+2 GIVN Emma
+2 SURN Noack
+1 SEX F
+1 _UID C549E50DB2CD4068BFCD3F189B04208C55DE
+1 _FSFTID 9JML-KPR
+1 CHAN
+2 DATE 20 AUG 2015
+1 BIRT
+2 DATE 30 AUG 1875
+2 PLAC Sachsen, Germany
+1 IMMI Nurnberg
+2 DATE 20 JAN 1881
+2 PLAC New Orleans, Orleans, Louisiana, United States
+1 CONF
+2 DATE 22 MAR 1891
+2 PLAC Warda, Fayette, Texas, United States
+2 ADDR Holy Cross Lutheran Church
+2 SOUR @S33@
+3 PAGE 1891, No. 8, Emma Noack
+1 DEAT
+2 DATE 26 SEP 1945
+2 PLAC Copperas Cove, Coryell, Texas, United States
+1 BURI
+2 PLAC Copperas Cove, Coryell, Texas, United States
+2 ADDR Copperas Cove Cemetery
+1 FAMS @F440@
+0 @I1391@ INDI
+1 NAME Clara Esther /Teinert/
+2 GIVN Clara Esther
+2 SURN Teinert
+1 SEX F
+1 _UID 53F76AA382374589A372285B6F00EDDDAF14
+1 _FSFTID LD52-FB8
+1 CHAN
+2 DATE 4 AUG 2014
+1 BIRT
+2 DATE 9 APR 1895
+2 PLAC Lee, Texas, United States
+1 DEAT
+1 FAMC @F440@
+0 @I1392@ INDI
+1 NAME Martin R. /Teinert/
+2 GIVN Martin R.
+2 SURN Teinert
+1 SEX M
+1 _UID DD691FEBC0314F45972CC2BA04AFD636D34F
+1 _FSFTID 9JML-KGT
+1 CHAN
+2 DATE 3 NOV 2012
+1 BIRT
+2 DATE 26 MAY 1896
+2 PLAC Lee, Texas, United States
+1 DEAT
+2 DATE 24 APR 1970
+2 PLAC Walburg, Williamson, Texas, United States
+1 BURI
+2 PLAC Walburg, Williamson, Texas, United States
+2 ADDR Zion Lutheran Cemetery
+1 FAMC @F440@
+0 @I1394@ INDI
+1 NAME Ludwig Paul /Teinert/
+2 GIVN Ludwig Paul
+2 SURN Teinert
+1 SEX M
+1 _UID AC4D072C7EB5415EAC003DE98D9212EDEEBE
+1 _FSFTID LD52-NMD
+1 CHAN
+2 DATE 3 NOV 2012
+1 BIRT
+2 DATE 25 JUL 1897
+2 PLAC Lee, Texas, United States
+1 DEAT
+2 DATE 28 MAR 1983
+2 PLAC Williamson, Texas, United States
+2 SOUR @S11@
+3 PAGE 2010; Ludwig Teinert; 462-58-4355; 1983
+1 BURI
+2 PLAC Walburg, Williamson, Texas, United States
+2 ADDR Zion Lutheran Cemetery
+1 FAMC @F440@
+0 @I1395@ INDI
+1 NAME Otto /Teinert/
+2 GIVN Otto
+2 SURN Teinert
+1 SEX M
+1 _UID DE790B975E304F68917B3F087118B6F5C566
+1 _FSFTID LD52-F1X
+1 CHAN
+2 DATE 25 JUN 2012
+1 BIRT
+2 DATE ABT 1897
+2 PLAC Lee, Texas, United States
+1 DEAT
+2 DATE 1897
+1 FAMC @F440@
+0 @I1396@ INDI
+1 NAME Ella Lydia /Teinert/
+2 GIVN Ella Lydia
+2 SURN Teinert
+1 SEX F
+1 _UID 445E7B4131324959B1F80A7E07A66109AB11
+1 _FSFTID LD52-NQN
+1 CHAN
+2 DATE 20 AUG 2015
+1 BIRT
+2 DATE 4 AUG 1898
+2 PLAC Lee, Texas, United States
+1 DEAT
+2 DATE 14 APR 1995
+2 PLAC Coryell, Texas, United States
+2 SOUR @S11@
+3 PAGE 2010; Ella L. Mathias; 457-50-0170; 1995
+1 BURI
+2 PLAC Coryell, Texas, United States
+2 ADDR Immanuel Lutheran Church Cemetery
+1 FAMC @F440@
+0 @I1398@ INDI
+1 NAME Alfred Alvin /Teinert/
+2 GIVN Alfred Alvin
+2 SURN Teinert
+1 SEX M
+1 _UID 288B9A71BF5F49BDA0D6DF6599E571931EEB
+1 _FSFTID LD52-N74
+1 CHAN
+2 DATE 15 AUG 2015
+1 BIRT
+2 DATE 27 JUL 1901
+2 PLAC Lincoln, Lee, Texas, United States
+1 DEAT
+2 DATE 17 OCT 1980
+2 PLAC Lynn, Texas, United States
+1 BURI
+2 PLAC Wilson, Lynn, Texas, United States
+2 ADDR Green Memorial Park
+1 FAMC @F440@
+0 @I1400@ INDI
+1 NAME Emily Mathilda /Teinert/
+2 GIVN Emily Mathilda
+2 SURN Teinert
+1 SEX F
+1 _UID A69B684D6DAF483095C2E20386A5959A204B
+1 _FSFTID LD52-NWQ
+1 CHAN
+2 DATE 11 AUG 2015
+1 BIRT
+2 DATE 2 JAN 1902
+2 PLAC Copperas Cove, Coryell, Texas, United States
+1 DEAT
+2 DATE 1989
+2 PLAC Poca City, Oklahoma, United States
+1 BURI
+2 PLAC Waco, McLennan, Texas, United States
+2 ADDR Waco Memorial Park
+1 FAMC @F440@
+0 @I1402@ INDI
+1 NAME Erwin /Teinert/
+2 GIVN Erwin
+2 SURN Teinert
+1 SEX M
+1 _UID EE8A8860D3964CC4AAC2056ED4B4C4676BB5
+1 _FSFTID LD52-NCX
+1 CHAN
+2 DATE 20 AUG 2015
+1 BIRT
+2 DATE 7 MAY 1917
+2 PLAC Texas, United States
+1 DEAT
+2 DATE 7 MAR 1918
+1 BURI
+2 PLAC Coryell, Texas, United States
+2 ADDR Immanuel Lutheran Church Cemetery
+1 FAMC @F440@
+0 @I1403@ INDI
+1 NAME Johanna Magdalena /Teinert/
+2 GIVN Johanna Magdalena
+2 SURN Teinert
+2 NICK Lena
+1 SEX F
+1 _UID 2B8DD5A8AF484BD5B503851CF04F8B67D669
+1 _FSFTID LD56-8ZF
+1 CHAN
+2 DATE 29 OCT 2015
+1 BIRT
+2 DATE 7 AUG 1875
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR Rabbs Creek
+1 CHR
+2 DATE 8 AUG 1875
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR Rabbs Creek
+2 SOUR @S52@
+3 PAGE 1875:19, Johanna Magdalena Teinert
+3 DATA
+4 TEXT Aug. 7, 1:15am. | Aug. 8, home-baptism | Johanna Magdalena 5th child, 3
+5 CONC rd daughter | Johann Teinert, farmer on Rabbs Creek at Serbin first mar
+5 CONC riage | Hanna, nee Kurjo, from Serbin first marriage | 1) Theresia, you
+5 CONC ngest daughter of Johann Carl Teinert, farmer at Serbin. 2) Hanna, wife o
+5 CONC f August Teinert, farmer on Rabbs Creek at Serbin. 3) Johann Teinert, f
+5 CONC oster son of Johann Carl Teinert, farmer at Serbin. 4) Ernst Teinert, f
+5 CONC armer on Rabbs Creek at Serbin.
+1 RESI
+2 DATE 24 JUN 1880
+2 PLAC Lee, Texas, United States
+2 ADDR Precinct No. 1
+2 SOUR @S42@
+3 PAGE Precinct No. 1; 91; p. 54 (penned); 463; 477; Lina Teinert in the household of John Teinert; 1316
+3 DATA
+4 TEXT W | F | 4 | D | | | Texas
+1 CONF
+2 DATE 14 APR 1889
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S2@
+3 PAGE 1889:09 9, Johanna Magdalena Teinert
+3 NOTE {Wendish Confirmation}
+3 DATA
+4 TEXT Johann Teinert | Aug. 7, 1875 | Deut. 7:9
+1 DEAT
+2 DATE 16 JUN 1970
+2 PLAC Austin, Travis, Texas, United States
+1 BURI
+2 PLAC Coryell, Texas, United States
+2 ADDR Immanuel Lutheran Church Cemetery
+1 FAMC @F499@
+0 @I1408@ INDI
+1 NAME Johann Alwin /Teinert/
+2 GIVN Johann Alwin
+2 SURN Teinert
+1 SEX M
+1 _UID 7DAB04D06CD148D8B9EE0CA9C5BE61D16AD0
+1 _FSFTID LD52-FCP
+1 CHAN
+2 DATE 15 NOV 2015
+1 BIRT
+2 DATE 8 OCT 1885
+2 PLAC Serbin, Lee, Texas, United States
+1 CHR
+2 DATE 25 OCT 1885
+2 PLAC Serbin, Bastrop, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S51@
+3 PAGE 1885:33, Johann Alwin Teinert
+3 DATA
+4 TEXT Oct. 8, 1885 | Oct. 25, 1885 | Johann Alwin | Johann Teinert | Anna, bo
+5 CONC rn Kurjo | 1. Johann Burjack. 2. Carl Kurjo. 3. Andreas Kurjo. 4. Ernst T
+5 CONC einert. 5. Emma Teinert. 6. Maria Zoch. 7. Theresia, wife of Carl Moerb
+5 CONC e. 8. Maria, wife of Johann Wukasch. | [H.T. Kilian]
+1 RESI
+2 DATE 11 JUN 1900
+2 PLAC Lee, Texas, United States
+2 ADDR Justice Precinct 1
+3 NOTE {1900 U.S. census region: lying south and west of the Houston & Texas C
+4 CONC entral Railroad}
+2 SOUR @S43@
+3 PAGE Justice Precinct 1; 56; sheet 11A (penned); 217; 217; John A. Teinert in the household of John Teinert; 1654
+3 NOTE {[record has errors]}
+3 DATA
+4 TEXT Son | W | F | June | 1886 | 14 | S | Texas | Farm laborer
+1 DEAT
+2 DATE 25 JUL 1977
+2 PLAC Austin, Travis, Texas, United States
+1 BURI
+2 PLAC Coryell, Texas, United States
+2 ADDR Immanuel Lutheran Church Cemetery
+1 FAMC @F499@
+0 @I1602@ INDI
+1 NAME Johann /Teinert/
+2 GIVN Johann
+2 SURN Teinert
+2 NICK John
+1 SEX M
+1 _UID 9E5BB8E8DE124177BAE5564DD2C08BD171FB
+1 _FSFTID MD8G-J7K
+1 CHAN
+2 DATE 26 AUG 2015
+1 BIRT
+2 DATE 14 MAY 1841 OR 15 MAY 1841
+2 PLAC Dauban, Rothenburg, Schlesien, Preußen
+1 EMIG
+2 DATE 1854
+2 PLAC Dauban, Rothenburg, Schlesien, Preußen
+2 SOUR @S70@
+3 PAGE p. 294, From Rothenburg district in or near Dauban
+3 DATA
+4 TEXT garden nursery owner Joh. Karl Teinert (38), Mrs. Schneider and six chi
+5 CONC ldren: August (17), Johann (12), Ernst (11), Hanna, Maria, Magdalena
+1 IMMI Ben Nevis
+2 DATE 15 DEC 1854
+2 PLAC Galveston, Galveston, Texas, United States
+2 SOUR @S1@
+3 PAGE No. 9, Teinert
+3 DATA
+4 TEXT Johann | Son | Dauban | Rothenburg | May 14, 1841 |
+1 CONF
+2 DATE 4 MAY 1856
+2 PLAC New Ulm, Austin, Texas, United States
+2 SOUR @S2@
+3 PAGE 1856:06 1, Johann Teinert
+3 NOTE {Wendish Confirmation}
+3 DATA
+4 TEXT second son of Johann Carl Teinert | May 15, 1841
+1 EVEN as a Confederate soldier in the Civil War
+2 TYPE Military
+2 DATE ABT 1863
+1 RESI
+2 DATE 21 JUL 1870
+2 PLAC Fayette, Texas, United States
+2 ADDR West of Caldwell Road
+2 SOUR @S25@
+3 PAGE West of Caldwell Road + Winchester Post Office || Winchester P.O.; p. 6 (penned); 38; 38; John Teinert; 1585
+3 DATA
+4 TEXT 28 | M | W | Farmer | | | Prussia
+1 RESI
+2 DATE 24 JUN 1880
+2 PLAC Lee, Texas, United States
+2 ADDR Precinct No. 1
+2 SOUR @S42@
+3 PAGE Precinct No. 1; 91; p. 54 (penned); 463; 477; John Teinert; 1316
+3 DATA
+4 TEXT W | M | 37 | Head | M | Farmer | Prussia
+1 RESI
+2 DATE 11 JUN 1900
+2 PLAC Lee, Texas, United States
+2 ADDR Justice Precinct 1
+3 NOTE {1900 U.S. census region: lying south and west of the Houston & Texas C
+4 CONC entral Railroad}
+2 SOUR @S43@
+3 PAGE Justice Precinct 1; 56; sheet 11A (penned); 217; 217; John Teinert; 1654
+3 NOTE {Citizenship: 1854-46-Na}
+3 DATA
+4 TEXT Head | W | M | May | 1841 | 59 | M-34 | Germany | Farmer
+1 DEAT
+2 DATE 8 MAR 1932
+2 PLAC Copperas Cove, Coryell, Texas, United States
+1 BURI
+2 PLAC Coryell, Texas, United States
+2 ADDR Immanuel Lutheran Church Cemetery
+1 FAMS @F499@
+0 @I1634@ INDI
+1 NAME Hanna /Kurjo/
+2 GIVN Hanna
+2 SURN Kurjo
+1 SEX F
+1 _UID 601ADF03EF2E41B29E4124AF9721877EDB1E
+1 _FSFTID LD52-X5W
+1 CHAN
+2 DATE 26 AUG 2015
+1 BIRT
+2 DATE 25 DEC 1845
+2 PLAC Wurschen, Bautzen, Sachsen, Germany
+1 IMMI Ben Nevis
+2 DATE 15 DEC 1854
+2 PLAC Galveston, Galveston, Texas, United States
+2 SOUR @S1@
+3 PAGE No. 84, Kurijo
+3 DATA
+4 TEXT Hanna | Daughter | Wurschen | Saxony | Dec. 25, 1845 |
+1 CONF
+2 DATE 22 APR 1859
+2 PLAC Low Pinoak Settlement, Bastrop, Texas, United States
+2 SOUR @S2@
+3 PAGE 1859:05 5, Hanna Kurjo.
+1 RESI
+2 DATE 21 JUL 1870
+2 PLAC Fayette, Texas, United States
+2 ADDR West of Caldwell Road
+2 SOUR @S25@
+3 PAGE West of Caldwell Road + Winchester Post Office || Winchester P.O.; p. 6 (penned); 38; 38; Anna Teinert in the household of John Teinert; 1585
+3 DATA
+4 TEXT 25 | F | W | Keeps House | | | Prussia
+1 RESI
+2 DATE 24 JUN 1880
+2 PLAC Lee, Texas, United States
+2 ADDR Precinct No. 1
+2 SOUR @S42@
+3 PAGE Precinct No. 1; 91; p. 54 (penned); 463; 477; Anna Teinert in the household of John Teinert; 1316
+3 DATA
+4 TEXT W | F | 30 | Wife | M | Keeps house | Prussia
+1 RESI
+2 DATE 11 JUN 1900
+2 PLAC Lee, Texas, United States
+2 ADDR Justice Precinct 1
+3 NOTE {1900 U.S. census region: lying south and west of the Houston & Texas C
+4 CONC entral Railroad}
+2 SOUR @S43@
+3 PAGE Justice Precinct 1; 56; sheet 11A (penned); 217; 217; Anna Teinert in the household of John Teinert; 1654
+3 NOTE {10 children with 10 living}{Citizenship: 1854-46}
+3 DATA
+4 TEXT Wife | W | F | Dec | 1843 | 56 | M-34 | Germany | Farm (laborer)
+1 DEAT
+2 DATE 16 APR 1917
+2 PLAC Coryell, Texas, United States
+1 BURI
+2 PLAC Coryell, Texas, United States
+2 ADDR Immanuel Lutheran Church Cemetery
+1 FAMS @F499@
+0 @I3608@ INDI
+1 NAME Ernest Walter /Teinert/
+2 GIVN Ernest Walter
+2 SURN Teinert
+1 NAME Ernest Walter /Teinert/
+2 GIVN Ernest Walter
+2 SURN Teinert
+2 NSFX Sr.
+2 TYPE aka
+2 _SDATE AFT 1942
+1 SEX M
+1 _UID 6E95D16593F84E27B6FB8E64D957200B37AA
+1 _FSFTID LDTY-P3P
+1 CHAN
+2 DATE 20 AUG 2015
+1 BIRT
+2 DATE 6 AUG 1911
+1 DEAT
+2 DATE 29 SEP 2000
+2 PLAC Williamson, Texas, United States
+2 SOUR @S11@
+3 PAGE 2010; Ernest W. Teinert; 454-16-6544; 2000
+1 BURI
+2 PLAC Walburg, Williamson, Texas, United States
+2 ADDR Zion Lutheran Cemetery
+1 FAMC @F440@
+0 @I6494@ INDI
+1 NAME Anna /Teinert/
+2 GIVN Anna
+2 SURN Teinert
+1 SEX F
+1 _UID 1118811A655044988DD53EA292AEC8731232
+1 _FSFTID LD52-F45
+1 CHAN
+2 DATE 29 OCT 2015
+1 BIRT
+2 DATE ABT 1868
+2 PLAC Texas, United States
+1 RESI
+2 DATE 24 JUN 1880
+2 PLAC Lee, Texas, United States
+2 ADDR Precinct No. 1
+2 SOUR @S42@
+3 PAGE Precinct No. 1; 91; p. 54 (penned); 463; 477; Anny Teinert in the household of John Teinert; 1316
+3 DATA
+4 TEXT W | F | 12 | D | S | At Home | Texas
+1 DEAT
+1 FAMC @F499@
+0 @I11101@ INDI
+1 NAME Ernest R. /Teinert/
+2 GIVN Ernest R.
+2 SURN Teinert
+1 SEX M
+1 _UID D5738DB739804BC593229C8B81AFD6D91090
+1 _FSFTID LKQZ-NV6
+1 CHAN
+2 DATE 20 AUG 2015
+1 BIRT
+2 DATE 22 APR 1904
+2 PLAC Texas, United States
+1 DEAT
+2 DATE 29 SEP 2000
+2 PLAC Williamson, Texas, United States
+1 FAMC @F440@
+0 @I11102@ INDI
+1 NAME Erna Maria /Teinert/
+2 GIVN Erna Maria
+2 SURN Teinert
+1 SEX F
+1 _UID D7E435F6E5674255B43332079E228792C2BC
+1 _FSFTID LVY7-RVR
+1 CHAN
+2 DATE 20 AUG 2015
+1 BIRT
+2 DATE 19 SEP 1905
+2 PLAC Copperas Cove, Coryell, Texas, United States
+1 DEAT
+1 FAMC @F440@
+0 @I11103@ INDI
+1 NAME Wanda /Teinert/
+2 GIVN Wanda
+2 SURN Teinert
+1 SEX F
+1 _UID 0F297946B76E409C9E5A337F7020778E377C
+1 _FSFTID LVY7-RR1
+1 CHAN
+2 DATE 20 AUG 2015
+1 BIRT
+2 DATE ABT 1908
+2 PLAC Texas, United States
+1 DEAT
+1 FAMC @F440@
+0 @I11104@ INDI
+1 NAME John /Teinert/
+2 GIVN John
+2 SURN Teinert
+1 SEX M
+1 _UID 300530FF6D77417C88E7D30F1C976A1386E7
+1 _FSFTID LVY7-RPD
+1 CHAN
+2 DATE 20 AUG 2015
+1 BIRT
+2 DATE 7 JUL 1908
+2 PLAC Texas, United States
+1 DEAT
+2 DATE 30 JUL 1960
+2 PLAC Dallas, Dallas, Texas, United States
+1 FAMC @F440@
+0 @F440@ FAM
+1 HUSB @I1389@
+1 WIFE @I1390@
+1 CHIL @I1391@
+1 CHIL @I1392@
+1 CHIL @I1395@
+1 CHIL @I1394@
+1 CHIL @I1396@
+1 CHIL @I1398@
+1 CHIL @I1400@
+1 CHIL @I11101@
+1 CHIL @I11102@
+1 CHIL @I11103@
+1 CHIL @I11104@
+1 CHIL @I1388@
+1 CHIL @I3608@
+1 CHIL @I1402@
+1 MARR
+2 DATE 3 JAN 1894
+1 SLGS
+2 DATE 1974
+2 STAT Uncleared
+2 TEMP ARIZO
+0 @F499@ FAM
+1 HUSB @I1602@
+1 WIFE @I1634@
+1 CHIL @I493@
+1 CHIL @I6494@
+1 CHIL @I151@
+1 CHIL @I1389@
+1 CHIL @I1403@
+1 CHIL @I155@
+1 CHIL @I567@
+1 CHIL @I152@
+1 CHIL @I153@
+1 CHIL @I154@
+1 CHIL @I1408@
+1 MARR
+2 DATE 12 AUG 1866
+2 PLAC Serbin, Bastrop, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S21@
+3 PAGE 1866, No. 7, Johann Teinert & Hanna Kurjo
+0 @S1@ SOUR
+1 ABBR Blasig, Anne. The Wends of Texas: Appendix II
+1 TITL Anne Blasig, "Appendix II: An Abstract of the Original Ship Register of t
+2 CONC he Wendish Colonists of Texas of 1854," <i>The Wends of Texas</i>, Anne B
+2 CONC lasig (San Antonio: The Naylor Company, 1954), .
+1 TEXT Family Members | Status | City or Village | Region | Birthday | Remarks
+0 @S2@ SOUR
+1 ABBR Buchhorn, Rev. Michael. Confirmation Records of St. Paul Lutheran Church Serbin, Texas: 1856-2003
+1 TITL Rev. Michael Buchhorn, editor, <i>Confirmation Records of St. Paul Luth
+2 CONC eran Church Serbin, Texas: 1856-2003</i> (Serbin, Texas: St. Paul Luthe
+2 CONC ran Church, 2003), .
+0 @S11@ SOUR
+1 ABBR Social Security Death Index, online
+1 TITL Social Security Administration, "U.S. Social Security Death Index," dat
+2 CONC abase, <i>Ancestry.com</i> (http://www.ancestry.com : accessed ), , .
+0 @S21@ SOUR
+1 ABBR St. Paul Lutheran Church (Serbin, Texas). Marriages (1854-1883)
+1 TITL St. Paul Lutheran Church (Serbin, Texas), Marriages,, ; , .
+1 NOTE [rough draft, preliminary working copy, status March 1991; made by Prof
+2 CONC . Joseph Wilson, Dept. of German and Slavic Studies, Rice Univ., Housto
+2 CONC n, Texas]
+0 @S25@ SOUR
+1 ABBR Texas. Fayette. 1870 U.S. census
+1 TITL 1870 U.S. census, Texas, Fayette County, population schedule, ; digital i
+2 CONC mage, <i>Ancestry.com</i> (http://www.ancestry.com : downloaded); citin
+2 CONC g NARA microfilm publication M593.
+0 @S33@ SOUR
+1 ABBR Holy Cross Lutheran Church (Warda, Texas). Confirmations
+1 TITL Holy Cross Lutheran Church (Warda, Texas), "Confirmanden Register" (Con
+2 CONC firmation Register),, ; , .
+0 @S42@ SOUR
+1 ABBR Texas. Lee. 1880 U.S. census
+1 TITL 1880 U.S. census, Texas, Lee County, population schedule, ; digital ima
+2 CONC ge, <i>Ancestry.com</i> (http://www.ancestry.com : accessed); citing NA
+2 CONC RA microfilm publication T9.
+0 @S43@ SOUR
+1 ABBR Texas. Lee. 1900 U.S. census
+1 TITL 1900 U.S. census, Texas, Lee County, population schedule, ; digital ima
+2 CONC ge, <i>Ancestry.com</i> (http://www.ancestry.com : accessed); citing NA
+2 CONC RA microfilm publication T623.
+1 NOTE {Justice Precinct 8 containing the Fedor, Loebau and Lincoln communitie
+2 CONC s}
+0 @S48@ SOUR
+1 ABBR Texas. Lee. Serbin. St. Pauls Cemetery
+1 TITL St. Pauls Cemetery (Serbin, Lee, Texas), ; , .
+0 @S51@ SOUR
+1 ABBR Wilson, Joseph. Pastor H. T. Kilian Baptismal Records of St. Paul Lutheran Church, Serbin, Texas: 1884-1919
+1 TITL Joseph Wilson, editor, <i>Pastor H. T. Kilian Baptismal Records of St. P
+2 CONC aul Lutheran Church, Serbin, Texas: 1884-1919</i> (Giddings, Texas: St. P
+2 CONC aul Lutheran Church, Serbin, Texas, 2003), .
+1 TEXT Birth | Bapt. | Child's name | Father | Mother | Witnesses (sponsors) | P
+2 CONC astor
+0 @S52@ SOUR
+1 ABBR Wilson, Joseph. Pastor John Kilian Baptismal Records of St. Paul Lutheran Church, Serbin, Texas: 1854-1883
+1 TITL Joseph Wilson, editor, <i>Pastor John Kilian Baptismal Records of St. P
+2 CONC aul Lutheran Church, Serbin, Texas: 1854-1883</i> (Easley, South Caroli
+2 CONC na: Southern Historical Press, Inc., 1985), .
+0 @S70@ SOUR
+1 ABBR Iwan, Wilhelm. The Old Lutheran Emigration
+1 TITL Wilhelm Iwan, <i>The Old Lutheran Emigration at the Middle of the 19th C
+2 CONC entury: Volume II</i> (Breslau: Johann Hess Institute, 1943).
+0 TRLR

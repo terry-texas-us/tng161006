@@ -6,7 +6,7 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-if ($assignedtree || !$allowAdd) {
+if (!$allowAdd) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -103,23 +103,6 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
         </div>
       </div>
       <div class='row'>
-        <div class='col-sm-3'>
-          <?php echo uiTextSnippet('tree'); ?> / <?php echo uiTextSnippet('personid'); ?>:
-        </div>
-        <div class='col-sm-3'>
-          <select name="mynewgedcom">
-            <option value=''></option>
-            <?php
-            $query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-            $treeresult = tng_query($query);
-
-            while ($treerow = tng_fetch_assoc($treeresult)) {
-              echo "  <option value=\"{$treerow['gedcom']}\">{$treerow['treename']}\n";
-              echo "</option>\n";
-            }
-            ?>
-          </select>
-        </div>
         <div class='col-sm-6'>
           <input class='form-control' id='personID' name='personID' type='text' maxlength='22'>
           &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
@@ -238,21 +221,8 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
         <div id='restrictions'>
           <div class='row'>
             <div class='col-sm-3'>
-              <span><?php echo uiTextSnippet('tree'); ?>*:</span>
             </div>
             <div class='col-sm-3'>
-              <select id='gedcom' name='gedcom'>
-                <option value=''></option>
-                <?php
-                $query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-                $treeresult = tng_query($query);
-
-                while ($treerow = tng_fetch_assoc($treeresult)) {
-                  echo "  <option value=\"{$treerow['gedcom']}\">{$treerow['treename']}\n";
-                  echo "</option>\n";
-                }
-                ?>
-              </select>
             </div>
             <div class='col-sm-3'>
               <span><?php echo uiTextSnippet('branch'); ?>**:</span>
@@ -264,12 +234,6 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
 
               echo "<select id='branch' name=\"branch\">\n";
               echo "  <option value='' selected>" . uiTextSnippet('allbranches') . "</option>\n";
-              if ($assignedtree) {
-                while ($branch = tng_fetch_assoc($branchresult)) {
-                  echo "  <option value=\"{$branch['branch']}\">{$branch['description']}\n";
-                  echo "</option>\n";
-                }
-              }
               echo "</select>\n";
               ?>
             </div>
@@ -297,7 +261,6 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
     </form>
     <hr>
     <p>
-      <span>*<?php echo uiTextSnippet('treemsg'); ?></span>
       <br>
       <span>**<?php echo uiTextSnippet('branchmsg'); ?></span>
       <br>

@@ -7,7 +7,7 @@ require 'personlib.php';
 $timeline = $_SESSION['timeline'];
 $tng_message = $_SESSION['tng_message'];
 if (!is_array($timeline)) {
-  header("Location: timeline.php?primaryID=$primaryID&tree=$tree");
+  header("Location: timeline.php?primaryID=$primaryID");
   exit;
 }
 $tlmonths[0] = "";
@@ -43,26 +43,24 @@ if ($chartwidth && is_numeric($chartwidth)) {
 $checkboxcellwidth = 48; //width of table cell holding "delete" checkboxes. If bars do not line up with gray lines, adjust this value up or down accordingly
 $divisions = 5; //number of chart segments
 
-$result = getPersonDataPlusDates($tree, $primaryID);
+$result = getPersonDataPlusDates($primaryID);
 if ($result) {
   $row = tng_fetch_assoc($result);
-  $righttree = checktree($tree);
   $rightbranch = checkbranch($row['branch']);
-  $rights = determineLivingPrivateRights($row, $righttree, $rightbranch);
+  $rights = determineLivingPrivateRights($row, $rightbranch);
   $row['allow_living'] = $rights['living'];
   $row['allow_private'] = $rights['private'];
   $namestr = getName($row);
   $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $namestr);
   tng_free_result($result);
 }
-$treeResult = getTreeSimple($tree);
+$treeResult = getTreeSimple();
 $treerow = tng_fetch_assoc($treeResult);
 $disallowgedcreate = $treerow['disallowgedcreate'];
 tng_free_result($treeResult);
 
 function getEvents($person) {
   global $ratio;
-  global $righttree;
 
   $personID = $person['personID'];
   $tree = $person['tree'];
@@ -106,12 +104,12 @@ function getEvents($person) {
   }
   //get and loop through all marriages (link to people table on opposite spouse) for this person based on gender
   if ($spouseorder) {
-    $marriages = getSpouseFamilyDataPlusDates($person['tree'], $self, $personID, $spouseorder);
+    $marriages = getSpouseFamilyDataPlusDates($self, $personID, $spouseorder);
   } else {
-    $marriages = getSpouseFamilyDataUnionPlusDates($person['tree'], $personID);
+    $marriages = getSpouseFamilyDataUnionPlusDates($personID);
   }
   if (!tng_num_rows($marriages) && $spouseorder) {
-    $marriages = getSpouseFamilyDataUnionPlusDates($person['tree'], $personID);
+    $marriages = getSpouseFamilyDataUnionPlusDates($personID);
   }
   while ($marriagerow = tng_fetch_assoc($marriages)) {
     //do event for marriage date and person (observe living rights)
@@ -120,21 +118,21 @@ function getEvents($person) {
     }
     unset($spouserow);
     if ($marriagerow[$spouse]) {
-      $spouseresult = getPersonSimple($person['tree'], $marriagerow[$spouse]);
+      $spouseresult = getPersonSimple($marriagerow[$spouse]);
       $spouserow = tng_fetch_assoc($spouseresult);
-      $srights = determineLivingPrivateRights($spouserow, $righttree);
+      $srights = determineLivingPrivateRights($spouserow);
       $spouserow['allow_living'] = $srights['living'];
       $spouserow['allow_private'] = $srights['private'];
       if ($spouserow['firstname'] || $spouserow['lastname']) {
         $spousename = getName($spouserow);
-        $spouselink = "<a href=\"peopleShowPerson.php?personID={$spouserow['personID']}&amp;tree=$tree\">$spousename</a>";
+        $spouselink = "<a href=\"peopleShowPerson.php?personID={$spouserow['personID']}\">$spousename</a>";
       }
       tng_free_result($spouseresult);
     } else {
       $spouselink = "";
     }
     $rightfbranch = checkbranch($marriagerow['branch']) ? 1 : 0;
-    $mrights = determineLivingPrivateRights($marriagerow, $righttree, $rightfbranch);
+    $mrights = determineLivingPrivateRights($marriagerow, $rightfbranch);
     $marriagerow['allow_living'] = $mrights['living'];
     $marriagerow['allow_private'] = $mrights['private'];
 
@@ -153,16 +151,16 @@ function getEvents($person) {
     }
     //get all children (link to people) born to this marriage
     //loop through and make event for each
-    $children = getChildrenDataPlusDates($person['tree'], $marriagerow['familyID']);
+    $children = getChildrenDataPlusDates($marriagerow['familyID']);
 
     while ($child = tng_fetch_assoc($children)) {
-      $crights = determineLivingPrivateRights($child, $righttree);
+      $crights = determineLivingPrivateRights($child);
       $child['allow_living'] = $crights['living'];
       $child['allow_private'] = $crights['private'];
       if ($crights['both']) {
         if ($child['firstname'] || $child['lastname']) {
           $childname = getName($child);
-          $childlink = "<a href=\"peopleShowPerson.php?personID={$child['personID']}&amp;tree={$person['tree']}\">$childname</a>";
+          $childlink = "<a href=\"peopleShowPerson.php?personID={$child['personID']}\">$childname</a>";
         } else {
           $childlink = "";
         }
@@ -224,8 +222,8 @@ function getEvents($person) {
   return $eventstr;
 }
 
-writelog("<a href='timeline.php?primaryID=$primaryID&amp;tree=$tree'>" . uiTextSnippet('timeline') . " ($logname)</a>");
-preparebookmark("<a href='timeline.php?primaryID=$primaryID&amp;tree=$tree'>" . uiTextSnippet('timeline') . " ($namestr)</a>");
+writelog("<a href='timeline.php?primaryID=$primaryID'>" . uiTextSnippet('timeline') . " ($logname)</a>");
+preparebookmark("<a href='timeline.php?primaryID=$primaryID'>" . uiTextSnippet('timeline') . " ($namestr)</a>");
 
 $keeparray = array();
 $earliest = date('Y');
@@ -242,7 +240,7 @@ foreach ($timeline as $timeentry) {
     $newtimeentry['personID'] = $timeperson;
     $newtimeentry['tree'] = $timetree;
     $displaydeath = $row2['death'] ? $row2['death'] : "";
-    $rights2 = determineLivingPrivateRights($row2, $righttree);
+    $rights2 = determineLivingPrivateRights($row2);
     $row2['allow_living'] = $rights2['living'];
     $row2['allow_private'] = $rights2['private'];
     $namestr2 = getName($row2);
@@ -273,7 +271,7 @@ foreach ($timeline as $timeentry) {
         $latest = $newtimeentry['death'];
       }
     }
-    $newtimeentry['name'] = "<a href=\"peopleShowPerson.php?personID=$timeperson&amp;tree=$timetree\">$namestr2</a>";
+    $newtimeentry['name'] = "<a href=\"peopleShowPerson.php?personID=$timeperson\">$namestr2</a>";
     array_push($keeparray, $newtimeentry);
     tng_free_result($result2);
   }
@@ -496,17 +494,15 @@ for ($x = 2; $x < 6; $x++) {
     echo "</select>\n";
     $treestr = "' + document.form1.nexttree$x.options[document.form1.nexttree$x.selectedIndex].value + '";
   } else {
-    echo "<input name=\"nexttree$x\" type='hidden' value=\"$tree\" />";
     $treestr = "$tree";
   }
   echo "<input id=\"nextpersonID$x\" name=\"nextpersonID$x\" type='text' size=\"10\" />  \n";
-  echo "<input id=\"find$x\" name=\"find$x\" type='button' value=\"" . uiTextSnippet('find') . "\" onclick=\"findItem('I','nextpersonID$x',null,'$tree');\" /><br>\n";
+  echo "<input id=\"find$x\" name=\"find$x\" type='button' value=\"" . uiTextSnippet('find') . "\" onclick=\"findItem('I','nextpersonID$x',null);\" /><br>\n";
   if ($x < 5) {
     $treeresult = tng_query($query);
   }
 }
 ?>
-  <input name='tree' type='hidden' value="<?php echo $tree; ?>" />
   <input name='primaryID' type='hidden' value="<?php echo $primaryID; ?>" />
   <br>
   </span>

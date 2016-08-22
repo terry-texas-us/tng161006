@@ -56,7 +56,8 @@ if ($addressID) {
     $addressID = "";
   }
 } elseif ($address1 || $address2 || $city || $state || $zip || $country || $phone || $email || $www) {
-  $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, gedcom, phone, email, www)  VALUES('$address1', '$address2', '$city', '$state', '$zip', '$country', '$tree', '$phone', '$email', '$www')";
+  $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, gedcom, phone, email, www)  "
+      . "VALUES('$address1', '$address2', '$city', '$state', '$zip', '$country', '', '$phone', '$email', '$www')";
   $result = tng_query($query);
   $addressID = tng_insert_id();
   adminwritelog(uiTextSnippet('addnewaddress') . ": $addressID");
@@ -76,10 +77,10 @@ if ($eventID) {
 } else {
   if ($age || $agency || $cause || $addressID || $info) {
     $query = "INSERT INTO $events_table (eventtypeID, persfamID, age, agency, cause, addressID, info, gedcom, parenttag, eventdate, eventdatetr, eventplace) "
-      . "VALUES(0, '$persfamID', '$age', '$agency', '$cause', '$addressID', '$info', '$tree', '$eventtypeID', '', '0000-00-00', '')";
+      . "VALUES(0, '$persfamID', '$age', '$agency', '$cause', '$addressID', '$info', '', '$eventtypeID', '', '0000-00-00', '')";
     $result = tng_query($query);
     $eventID = tng_insert_id();
-    adminwritelog(uiTextSnippet('addnewevent') . ": $eventID - $eventtypeID/$tree/$persfamID");
+    adminwritelog(uiTextSnippet('addnewevent') . ": $eventID - $eventtypeID/$persfamID");
     $rval = 1;
   }
 }

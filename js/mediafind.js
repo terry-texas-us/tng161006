@@ -1,7 +1,7 @@
 function getPotentialLinks(linktype) {
     'use strict';
     var form = document.find2;
-    var strParams = {tree: tree, linktype: linktype};
+    var strParams = {linktype: linktype};
 
     switch (linktype) {
     case 'I':
@@ -93,14 +93,14 @@ function toggleEventRow(check, entrynum) {
         eventrow.show();
         var tree = document.find.tree1;
         var linktype = document.find.linktype1;
-        fetchData(linktype.options[linktype.selectedIndex].value, entity.value, tree.options[tree.selectedIndex].value, entrynum);
+        fetchData(linktype.options[linktype.selectedIndex].value, entity.value, entrynum);
     } else
         eventrow.hide();
     return true;
 }
 
-function fetchData(linktype, persfamID, tree, count) {
-    var strParams = "persfamID=" + persfamID + "&tree=" + tree + "&linktype=" + linktype + "&count=" + count;
+function fetchData(linktype, persfamID, count) {
+    var strParams = "persfamID=" + persfamID + "&linktype=" + linktype + "&count=" + count;
     var loader1 = new net.ContentLoader('admin_mediaeventxml.php', fillList, null, "POST", strParams);
 }
 
@@ -289,7 +289,7 @@ function addMedia2EntityLink(form, newEntityID, num) {
                     var td0 = insertCell(newtr, 0, "normal", actionbuttons);
                     td0.setAttribute('align', 'center');
                     insertCell(newtr, 1, "normal", linktext);
-                    var sortlink = type !== "album" ? ' (<a href="mediaSortFormAction.php?tree1=' + treeID + '&linktype1=' + linktype + '&mediatypeID=' + mediatypeID + '&newlink1=' + entityID + '&event1=">' + textSnippet('text_sort') + '</a>)' : '';
+                    var sortlink = type !== "album" ? ' (<a href="mediaSortFormAction.php?linktype1=' + linktype + '&mediatypeID=' + mediatypeID + '&newlink1=' + entityID + '&event1=">' + textSnippet('text_sort') + '</a>)' : '';
                     insertCell(newtr, 2, "normal", name + displayID + sortlink);
                     insertCell(newtr, 3, "normal", treename + '&nbsp;');
 
@@ -300,7 +300,7 @@ function addMedia2EntityLink(form, newEntityID, num) {
                         var td5 = insertCell(newtr, 5, "normal", '&nbsp;')
                         td5.id = 'alt_' + linkID;
                         //var defphoto = vars[2] == "1" ? textSnippet('yes') : "";
-                        var td6 = insertCell(newtr, 6, "normal", '<input id="defc' + linkID + '" name="defc' + linkID + '" type="checkbox" onclick="toggleDefault(this,\'' + tree + '\',\'' + entityID + '\');" value="1"/>');
+                        var td6 = insertCell(newtr, 6, "normal", '<input id="defc' + linkID + '" name="defc' + linkID + '" type="checkbox" onclick="toggleDefault(this,\'' + entityID + '\');" value="1"/>');
                         td6.id = 'def_' + linkID;
                         td6.setAttribute('align', 'center');
                         var td7 = insertCell(newtr, 7, "normal", '<input id="show' + linkID + '" name="show' + linkID + '" type="checkbox" onclick="toggleShow(this);" value="1" checked>');
@@ -320,7 +320,7 @@ function addMedia2EntityLink(form, newEntityID, num) {
                     if ($('#link_' + id).length) {
                         $('#link_' + id).hide();
                         if (hasthumb === "1" && type === "media")
-                            $('#sdef_' + entityID).html('<a href="#" onclick="return setDefault(' + linkID + ',\'' + treeID + '\',\'' + entityID + '\');" class="smallest">' + textSnippet('makedefault') + '</a>');
+                            $('#sdef_' + entityID).html('<a href="#" onclick="return setDefault(' + linkID + ',\'' + entityID + '\');" class="smallest">' + textSnippet('makedefault') + '</a>');
                         $('#linked_' + id).fadeIn(400);
                     }
                     $('#nolinks').hide();

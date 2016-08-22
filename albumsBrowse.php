@@ -10,15 +10,11 @@ $tng_search_album = $_SESSION['tng_search_album'] = 1;
 if ($newsearch) {
   $exptime = 0;
   setcookie("tng_search_album_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_album_post[tree]", $tree, $exptime);
   setcookie("tng_search_album_post[tngpage]", 1, $exptime);
   setcookie("tng_search_album_post[offset]", 0, $exptime);
 } else {
   if (!$searchstring) {
     $searchstring = stripslashes($_COOKIE['tng_search_album_post']['search']);
-  }
-  if (!$tree) {
-    $tree = $_COOKIE['tng_search_album_post']['tree'];
   }
   if (!isset($offset)) {
     $tngpage = $_COOKIE['tng_search_album_post']['tngpage'];
@@ -40,20 +36,7 @@ if ($offset) {
   $newoffset = "";
   $tngpage = 1;
 }
-
-if ($assignedtree) {
-  $tree = $assignedtree;
-}
-
 $wherestr = $searchstring ? "WHERE albumname LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR keywords LIKE \"%$searchstring%\"" : "";
-
-if ($assignedtree) {
-  $wherestr2 = " AND $album2entities_table.gedcom = \"$assignedtree\"";
-} elseif ($tree) {
-  $wherestr2 = " AND $album2entities_table.gedcom = \"$tree\"";
-} else {
-  $wherestr2 = "";
-}
 
 $query = "SELECT * FROM $albums_table $wherestr ORDER BY albumname LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
@@ -167,7 +150,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
                       LEFT JOIN $families_table ON $album2entities_table.entityID = $families_table.familyID AND $album2entities_table.gedcom = $families_table.gedcom
                       LEFT JOIN $sources_table ON $album2entities_table.entityID = $sources_table.sourceID AND $album2entities_table.gedcom = $sources_table.gedcom
                       LEFT JOIN $repositories_table ON ($album2entities_table.entityID = $repositories_table.repoID AND $album2entities_table.gedcom = $repositories_table.gedcom)
-                      WHERE albumID = \"{$row['albumID']}\"$wherestr2 ORDER BY lastname, lnprefix, firstname, personID LIMIT 10";
+                      WHERE albumID = \"{$row['albumID']}\" ORDER BY lastname, lnprefix, firstname, personID LIMIT 10";
                   $presult = tng_query($query);
                   $alinktext = "";
                   while ($prow = tng_fetch_assoc($presult)) {

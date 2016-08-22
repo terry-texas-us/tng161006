@@ -6,7 +6,8 @@ require 'adminlib.php';
 require 'checklogin.php';
 
 function getNewID($type, $table) {
-  global $tree, $tngconfig;
+  global $tree;
+  global $tngconfig;
   include 'prefixes.php';
 
   if (isset($_COOKIE['tng_' . $type . 'lastid_' . $tree])) {
@@ -26,7 +27,7 @@ function getNewID($type, $table) {
   }
   if ($tngconfig['oldids']) {
     while (!$found) {
-      $query = "SELECT ID FROM $table WHERE gedcom = \"$tree\" and {$type}ID = \"$prefix$lastid$suffix\"";
+      $query = "SELECT ID FROM $table WHERE {$type}ID = \"$prefix$lastid$suffix\"";
       $result = tng_query($query);
       if (!tng_num_rows($result)) {
         $found = true;
@@ -41,11 +42,11 @@ function getNewID($type, $table) {
     if ($prefix) {
       $preflen = strlen($prefix);
       $numpart = "CAST(SUBSTRING($typestr," . ($preflen + 1) . ") as SIGNED)";
-      $wherestr = " AND $numpart >= $lastid";
+      $wherestr = "$numpart >= $lastid";
     } elseif ($suffix) {
       $suflen = strlen($suffix);
       $numpart = "CAST(SUBSTRING($typestr,0,LENGTH($typestr - " . ($sufflen + 1) . ")) as SIGNED)";
-      $wherestr = " AND $numpart >= $lastid";
+      $wherestr = "$numpart >= $lastid";
     } else {
       $numpart = $typestr;
       $wherestr = "";
@@ -55,7 +56,7 @@ function getNewID($type, $table) {
     $nextone = 0;
     $newnum = "";
     do {
-      $query = "SELECT $typestr FROM $table WHERE gedcom = \"$tree\" $wherestr
+      $query = "SELECT $typestr FROM $table WHERE $wherestr
         ORDER BY $numpart
         LIMIT $nextone, $maxrows";
       $result = tng_query($query);

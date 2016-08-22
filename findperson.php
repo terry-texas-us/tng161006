@@ -9,7 +9,7 @@ if ($session_charset != "UTF-8") {
   $myfirstname = tng_utf8_decode($myfirstname);
   $mylastname = tng_utf8_decode($mylastname);
 }
-$allwhere = "gedcom = \"$tree\"";
+$allwhere = "1";
 if ($personID) {
   $allwhere .= " AND personID = \"$personID\"";
 }
@@ -23,7 +23,7 @@ if ($mylastname) {
     $allwhere .= " AND lastname LIKE \"%" . trim($mylastname) . "%\"";
   }
 }
-if ($livedefault < 2 && (!$allow_living_db || $assignedtree) && $nonames == 1) {
+if ($livedefault < 2 && (!$allow_living_db) && $nonames == 1) {
   $allwhere .= " AND ";
   if ($allow_living_db) {
     if ($assignedbranch) {

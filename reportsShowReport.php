@@ -45,9 +45,6 @@ if ($offset) {
 }
 
 $query = "SELECT * FROM $reports_table WHERE reportID = $reportID";
-if (!$test && $assignedtree) {
-  $query .= " and active > 0";
-}
 $testurl = $test ? "&amp;test=$test" : "";
 $result = tng_query($query);
 $rrow = tng_fetch_assoc($result);
@@ -124,15 +121,9 @@ if ($rrow['sqlselect']) {
   $displayfields = $newds;
   $query = str_replace(";", "", $rrow['sqlselect']);
 } else {
-  if ($tree) {
-    $peopletreestr = "$people_table.gedcom = \"$tree\"";
-    //$familytreestr = "if(sex='M',families1.gedcom = \"$tree\",families2.gedcom = \"$tree\")";
-    $childrentreestr = "$children_table.gedcom = \"$tree\"";
-  } else {
-    $peopletreestr = "";
-    //$familytreestr = "";
-    $childrentreestr = "";
-  }
+  $peopletreestr = "";
+  $childrentreestr = "";
+  
   $treestr = $peopletreestr;
   $trees_join = "";
 
@@ -506,9 +497,8 @@ if ($rrow['sqlselect']) {
 $limitstr = $csv ? "" : " LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query . $limitstr);
 
-$treelogstr = $tree ? " (" . uiTextSnippet('tree') . ": $tree)" : "";
 if ($rrow['active'] && !$csv) {
-  $logstring = "<a href=\"reportsShowReport.php?reportID=$reportID&amp;tree=$tree\">" . xmlcharacters(uiTextSnippet('report') . ": {$rrow['reportname']}$treelogstr") . "</a>";
+  $logstring = "<a href=\"reportsShowReport.php?reportID=$reportID\">" . xmlcharacters(uiTextSnippet('report') . ": {$rrow['reportname']}") . "</a>";
   writelog($logstring);
   preparebookmark($logstring);
 }
@@ -534,10 +524,6 @@ if ($csv) {
   <?php
   if ($test) {
     echo "<p><strong>SQL:</strong> $query</p>\n";
-  }
-  if (!$rrow['sqlselect']) {
-    $hiddenfields[] = array('name' => 'reportID', 'value' => $reportID);
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'reportsShowReport', 'method' => 'get', 'name' => 'form1', 'id' => 'form1', 'hidden' => $hiddenfields));
   }
 }
 if (!$result) {
@@ -575,7 +561,7 @@ if (!$result) {
 
     $numrowsplus = $numrows + $offset;
     if ($totrows) {
-      echo "<p>" . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows &nbsp; <a href=\"reportsShowReport.php?reportID=$reportID&csv=1&tree=$tree\" target='_blank'>&raquo; " . uiTextSnippet('csv') . "</a></p>";
+      echo "<p>" . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows &nbsp; <a href=\"reportsShowReport.php?reportID=$reportID&amp;csv=1\" target='_blank'>&raquo; " . uiTextSnippet('csv') . "</a></p>";
     }
   }
   if ($csv) {
@@ -594,7 +580,7 @@ if (!$result) {
     <?php
   }
   $rowcount = $offset;
-  $treestr = $tngconfig['places1tree'] ? "" : "tree=$tree&amp;";
+  $treestr = "";
   while ($row = tng_fetch_assoc($result)) {
     $rowcount++;
 
@@ -610,14 +596,14 @@ if (!$result) {
     for ($i = 0; $i < count($displayfields) - 1; $i++) {
       $thisfield = $displayfields[$i];
       if ($thisfield == "lastfirst") {
-        $data = $csv ? getNameRev($row) : "<a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">" . getNameRev($row) . "</a>";
+        $data = $csv ? getNameRev($row) : "<a href=\"peopleShowPerson.php?personID={$row['personID']}\">" . getNameRev($row) . "</a>";
       } else {
         if ($thisfield == "fullname") {
           $namestr = getName($row);
-          $data = $csv ? $namestr : showSmallPhoto($row['personID'], $namestr, $rights['both'], 0, false, $row['sex']) . "<a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$namestr</a>";
+          $data = $csv ? $namestr : showSmallPhoto($row['personID'], $namestr, $rights['both'], 0, false, $row['sex']) . "<a href=\"peopleShowPerson.php?personID={$row['personID']}\">$namestr</a>";
         } else {
           if (strtoupper(substr($thisfield, -8)) == strtoupper("personID")) {
-            $data = $csv ? $row[$thisfield] : "<a href=\"peopleShowPerson.php?personID=$row[$thisfield]&amp;tree={$row['gedcom']}\">$row[$thisfield]</a>";
+            $data = $csv ? $row[$thisfield] : "<a href=\"peopleShowPerson.php?personID=$row[$thisfield]\">$row[$thisfield]</a>";
           } else {
             if ($thisfield == "treename") {
               $data = $csv ? $row['treename'] : "<a href=\"showtree.php?tree={$row['gedcom']}\">{$row['treename']}</a>";
@@ -634,13 +620,13 @@ if (!$result) {
                     $sprow['allow_living'] = $srights['living'];
                     $sprow['allow_private'] = $srights['private'];
 
-                    $data = $csv ? getName($sprow) : "<a href=\"peopleShowPerson.php?personID=$spouseID&amp;tree={$sprow['gedcom']}\">" . getName($sprow) . "</a>";
+                    $data = $csv ? getName($sprow) : "<a href=\"peopleShowPerson.php?personID=$spouseID\">" . getName($sprow) . "</a>";
                     tng_free_result($spresult);
                   } else {
                     $data = "";
                   }
                 } else {
-                  $data = $csv ? $spouseID : "<a href=\"peopleShowPerson.php?personID=$spouseID&amp;tree={$sprow['gedcom']}\">$spouseID</a>";
+                  $data = $csv ? $spouseID : "<a href=\"peopleShowPerson.php?personID=$spouseID\">$spouseID</a>";
                 }
               } else {
                 if ($rights['both'] && (!in_array($thisfield, $ldsfields) || $rights['lds'])) {

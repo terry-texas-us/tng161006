@@ -40,21 +40,18 @@ $labelwidth += 0.1;
 if ($blankform == 1) {
   $title = uiTextSnippet('indreport');
 } else {
-  $result = getPersonData($tree, $personID);
+  $result = getPersonData($personID);
   if ($result) {
     $row = tng_fetch_assoc($result);
 
-    $righttree = checktree($tree);
-    $rights = determineLivingPrivateRights($row, $righttree);
+    $rights = determineLivingPrivateRights($row);
     $row['allow_living'] = $rights['living'];
     $row['allow_private'] = $rights['private'];
 
     $namestr = getName($row);
   }
-
   $title = uiTextSnippet('indreportfor') . " $namestr ($personID)";
 }
-
 $pdf->SetTitle($title);
 $titleConfig = array('title' => $title,
         'font' => $hdrFont,
@@ -156,7 +153,7 @@ else {
       doubleLine(uiTextSnippet('christened'), displayDate($row['altbirthdate']), uiTextSnippet('place'), $row['altbirthplace'], $cite);
     }
 
-    $custevents = getPersonEventData($tree, $personID);
+    $custevents = getPersonEventData($personID);
     while ($custevent = tng_fetch_assoc($custevents)) {
       $displayval = getEventDisplay($custevent['display']);
       $fact = array();
@@ -217,7 +214,7 @@ else {
   }
 
   // do parents
-  $parents = getChildParentsFamily($tree, $personID);
+  $parents = getChildParentsFamily($personID);
   if ($parents && tng_num_rows($parents)) {
     $titleConfig = array('title' => $title,
             'font' => $hdrFont,
@@ -227,11 +224,11 @@ else {
             'skipFirst' => false,
             'line' => false);
     while ($parent = tng_fetch_assoc($parents)) {
-      $gotfather = getParentSimplePlusDates($tree, $parent['familyID'], 'husband');
+      $gotfather = getParentSimplePlusDates($parent['familyID'], 'husband');
       if ($gotfather) {
         $fathrow = tng_fetch_assoc($gotfather);
 
-        $frights = determineLivingPrivateRights($fathrow, $righttree);
+        $frights = determineLivingPrivateRights($fathrow);
         $fathrow['allow_living'] = $frights['living'];
         $fathrow['allow_private'] = $frights['private'];
 
@@ -252,11 +249,11 @@ else {
         singleLine(uiTextSnippet('father'), '');
       }
 
-      $gotmother = getParentSimplePlusDates($tree, $parent['familyID'], 'wife');
+      $gotmother = getParentSimplePlusDates($parent['familyID'], 'wife');
       if ($gotmother) {
         $mothrow = tng_fetch_assoc($gotmother);
 
-        $mrights = determineLivingPrivateRights($mothrow, $righttree);
+        $mrights = determineLivingPrivateRights($mothrow);
         $mothrow['allow_living'] = $mrights['living'];
         $mothrow['allow_private'] = $mrights['private'];
 
@@ -304,16 +301,16 @@ else {
     }
   }
   if ($spouseorder) {
-    $marriages = getSpouseFamilyDataPlusDates($tree, $self, $personID, $spouseorder);
+    $marriages = getSpouseFamilyDataPlusDates($self, $personID, $spouseorder);
   } else {
-    $marriages = getSpouseFamilyDataUnionPlusDates($tree, $personID);
+    $marriages = getSpouseFamilyDataUnionPlusDates($personID);
   }
   if (!tng_num_rows($marriages) && $spouseorder) {
-    $marriages = getSpouseFamilyDataUnionPlusDates($tree, $personID);
+    $marriages = getSpouseFamilyDataUnionPlusDates($personID);
     $spouseorder = 0;
   }
   while ($marriagerow = tng_fetch_assoc($marriages)) {
-    $mrights = determineLivingPrivateRights($marriagerow, $righttree);
+    $mrights = determineLivingPrivateRights($marriagerow);
     $marriagerow['allow_living'] = $mrights['living'];
     $marriagerow['allow_private'] = $mrights['private'];
 
@@ -324,10 +321,10 @@ else {
       $spouse = $marriagerow['husband'] == $personID ? wife : husband;
     }
     if ($marriagerow[$spouse]) {
-      $spouseresult = getPersonSimple($tree, $marriagerow[$spouse]);
+      $spouseresult = getPersonSimple($marriagerow[$spouse]);
       $spouserow = tng_fetch_assoc($spouseresult);
 
-      $srights = determineLivingPrivateRights($spouserow, $righttree);
+      $srights = determineLivingPrivateRights($spouserow);
       $spouserow['allow_living'] = $srights['living'];
       $spouserow['allow_private'] = $srights['private'];
 
@@ -359,11 +356,11 @@ else {
     }
 
     // get the children from this marriage
-    $children = getChildrenDataPlusDates($tree, $marriagerow['familyID']);
+    $children = getChildrenDataPlusDates($marriagerow['familyID']);
     if ($children && tng_num_rows($children)) {
       $childcnt = 1;
       while ($child = tng_fetch_assoc($children)) {
-        $crights = determineLivingPrivateRights($child, $righttree);
+        $crights = determineLivingPrivateRights($child);
         $child['allow_living'] = $crights['living'];
         $child['allow_private'] = $crights['private'];
 

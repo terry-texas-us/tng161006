@@ -6,12 +6,7 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-} else {
-  $wherestr = "";
-}
-$query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $result = tng_query($query);
 
 header("Content-type: text/html; charset=" . $session_charset);
@@ -24,15 +19,6 @@ $headSection->setTitle(uiTextSnippet('secondary'));
   <section class='container'>
     <?php
     $allow_export = 1;
-    if (!$allow_ged && $assignedtree) {
-      $query = "SELECT disallowgedcreate FROM $treesTable WHERE gedcom = \"$assignedtree\"";
-      $disresult = tng_query($query);
-      $row = tng_fetch_assoc($disresult);
-      if ($row['disallowgedcreate']) {
-        $allow_export = 0;
-      }
-      tng_free_result($disresult);
-    }
     echo $adminHeaderSection->build('datamaint-secondary', $message);
     $navList = new navList('');
     $navList->appendItem([true, "dataImportGedcom.php", uiTextSnippet('import'), "import"]);
@@ -41,19 +27,6 @@ $headSection->setTitle(uiTextSnippet('secondary'));
     echo $navList->build("second");
     ?>
     <form action="dataSecondaryProcessesFormAction.php" method='post' name='form1'>
-      <label for='tree'><?php echo uiTextSnippet('tree'); ?></label>
-      <select class='form-control' name='tree'>
-        <?php
-        if (!$assignedtree) {
-          echo "  <option value=\"--all--\">" . uiTextSnippet('alltrees') . "</option>\n";
-        }
-        while ($row = tng_fetch_assoc($result)) {
-          echo "  <option value=\"{$row['gedcom']}\">{$row['treename']}</option>\n";
-        }
-        ?>
-      </select>
-      <br>
-      <hr>
       <input class='btn btn-outline-secondary' name='secaction' type='submit' value="<?php echo uiTextSnippet('tracklines'); ?>">
       <input class='btn btn-outline-secondary' name='secaction' type='submit' value="<?php echo uiTextSnippet('sortchildren'); ?>">
       <input class='btn btn-outline-secondary' name='secaction' type='submit' value="<?php echo uiTextSnippet('sortspouses'); ?>">

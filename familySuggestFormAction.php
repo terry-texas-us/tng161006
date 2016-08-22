@@ -39,26 +39,25 @@ if (!$youremail || !$comments || !$yourname) {
 killBlockedAddress($youremail);
 killBlockedMessageContent($comments);
 
-$query = "SELECT familyID, husband, wife, living, private, marrdate, gedcom, branch FROM $families_table WHERE familyID = \"$ID\" AND gedcom = \"$tree\"";
+$query = "SELECT familyID, husband, wife, living, private, marrdate, gedcom, branch FROM $families_table WHERE familyID = '$ID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 
-$righttree = checktree($tree);
-$rights = determineLivingPrivateRights($row, $righttree);
+$rights = determineLivingPrivateRights($row);
 $row['allow_living'] = $rights['living'];
 $row['allow_private'] = $rights['private'];
 
 $name = uiTextSnippet('family') . ": " . getFamilyName($row);
-$pagelink = "$tngwebsite/" . "familiesShowFamily.php?familyID=$ID&tree=$tree";
+$pagelink = "$tngwebsite/" . "familiesShowFamily.php?familyID=$ID";
 tng_free_result($result);
 
 $subject = uiTextSnippet('proposed') . ": $name";
-$query = "SELECT treename, email, owner FROM $treesTable WHERE gedcom=\"$tree\"";
+$query = "SELECT treename, email, owner FROM $treesTable";
 $treeresult = tng_query($query);
 $treerow = tng_fetch_assoc($treeresult);
 tng_free_result($treeresult);
 
-$body = uiTextSnippet('proposed') . ": $name\n" . uiTextSnippet('tree') . ": {$treerow['treename']}\n" . uiTextSnippet('link') . ": $pagelink\n\n" . uiTextSnippet('description') . ": " . stripslashes($comments) . "\n\n$yourname\n$youremail";
+$body = uiTextSnippet('proposed') . ": $name\n" . uiTextSnippet('link') . ": $pagelink\n\n" . uiTextSnippet('description') . ": " . stripslashes($comments) . "\n\n$yourname\n$youremail";
 
 $sendemail = $treerow['email'] ? $treerow['email'] : $emailaddr;
 $owner = $treerow['owner'] ? $treerow['owner'] : ($sitename ? $sitename : $dbowner);
@@ -77,4 +76,4 @@ if ($success) {
 } else {
   $message = "mailnotsent&sowner=" . urlencode($owner) . "&ssendemail=" . urlencode($sendemail);
 }
-header("Location: familySuggest.php?ID=$ID&tree=$tree&message=$message");
+header("Location: familySuggest.php?ID=$ID&amp;message=$message");

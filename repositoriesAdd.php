@@ -11,11 +11,6 @@ if (!$allowAdd) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-} else {
-  $wherestr = "";
-}
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('addnewrepo'));
 ?>
@@ -52,22 +47,6 @@ $headSection->setTitle(uiTextSnippet('addnewrepo'));
             <button class='btn btn-outline-primary' name='submit' type='submit' onClick="document.form1.newscreen[0].checked = true;"><?php echo uiTextSnippet('lockid'); ?></button>
           </div>
           <span id="checkmsg"></span>
-        </div>
-        <div class='row'>
-          <div class='col-sm-6'>
-            <label for='tree1'><?php echo uiTextSnippet('tree'); ?>:</label>
-            <select class='form-control' name="tree1" onChange="generateID('repo', document.form1.repoID, document.form1.tree1);">
-              <?php
-              $query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
-              $result = tng_query($query);
-              $numtrees = tng_num_rows($result);
-              while ($row = tng_fetch_assoc($result)) {
-                echo "<option value=\"{$row['gedcom']}\">{$row['treename']}</option>\n";
-              }
-              tng_free_result($result);
-              ?>
-            </select>
-          </div>
         </div>
       </header>
       <div>        

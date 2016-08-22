@@ -6,7 +6,7 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-if ($assignedtree || !$allowEdit) {
+if (!$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -112,27 +112,6 @@ $headSection->setTitle(uiTextSnippet('modifyuser'));
         </div>
       </div>
       <div class='row'>
-        <div class='col-sm-3'>
-          <?php echo uiTextSnippet('tree'); ?> / <?php echo uiTextSnippet('personid'); ?>:
-        </div>
-        <div class='col-sm-3'>
-          <select name="mynewgedcom">
-            <option value=''></option>
-            <?php
-            $query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-            $treeresult = tng_query($query);
-
-            while ($treerow = tng_fetch_assoc($treeresult)) {
-              echo "  <option value=\"{$treerow['gedcom']}\"";
-              if ($treerow['gedcom'] == $row['mygedcom']) {
-                echo " selected";
-              }
-              echo ">{$treerow['treename']}\n";
-              echo "</option>\n";
-            }
-            ?>
-          </select>
-        </div>
         <div class='col-sm-6'>
           <input class='form-control' id='personID' name='personID' type='text' maxlength='22' value="<?php echo $row['personID']; ?>">
           &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
@@ -261,27 +240,6 @@ $headSection->setTitle(uiTextSnippet('modifyuser'));
       <div id="restrictions" <?php if ($adminaccess) {echo "style='visibility: hidden;'";} ?>>
         <div class='row'>
           <div class='col-sm-3'>
-            <span><?php echo uiTextSnippet('tree'); ?>*:</span>
-          </div>
-          <div class='col-sm-3'>
-            <select id='gedcom' name='gedcom'>
-              <option value=''></option>
-              <?php
-              $query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-              $treeresult = tng_query($query);
-
-              while ($treerow = tng_fetch_assoc($treeresult)) {
-                echo "  <option value=\"{$treerow['gedcom']}\"";
-                if ($row['gedcom'] == $treerow['gedcom']) {
-                  echo " selected";
-                }
-                echo ">{$treerow['treename']}\n";
-                echo "</option>\n";
-              }
-              ?>
-            </select>
-          </div>
-          <div class='col-sm-3'>
             <span><?php echo uiTextSnippet('branch'); ?>**:</span>
           </div>
           <div class='col-sm-3'>
@@ -326,7 +284,6 @@ $headSection->setTitle(uiTextSnippet('modifyuser'));
     </form>
     <hr>
     <p>
-      <span>*<?php echo uiTextSnippet('treemsg'); ?></span>
       <br>
       <span>**<?php echo uiTextSnippet('branchmsg'); ?></span>
       <br>

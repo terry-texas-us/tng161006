@@ -20,11 +20,22 @@ function doMedia($mediatypeID) {
   global $mediatypes_display;
   global $timezone;
   global $session_charset;
-
-  global $media_table, $medialinks_table, $change_limit, $cutoffstr, $families_table, $sources_table, $repositories_table, $citations_table, $nonames;
-  global $people_table, $treesTable;
+  global $media_table;
+  global $medialinks_table;
+  global $change_limit;
+  global $cutoffstr;
+  global $families_table;
+  global $sources_table;
+  global $repositories_table;
+  global $citations_table;
+  global $nonames;
+  global $people_table;
+  global $treesTable;
   global $cemeteries_table;
-  global $livedefault, $wherestr2, $events_table, $eventtypes_table;
+  global $livedefault;
+  global $wherestr2;
+  global $events_table;
+  global $eventtypes_table;
 
   if ($mediatypeID == "headstones") {
     $hsfields = ", $media_table.cemeteryID, cemname";
@@ -32,7 +43,6 @@ function doMedia($mediatypeID) {
   } else {
     $hsfields = $hsjoin = "";
   }
-
   $query = "SELECT distinct $media_table.mediaID as mediaID, description, $media_table.notes, thumbpath, path, form, mediatypeID, $media_table.gedcom as gedcom, alwayson, usecollfolder, DATE_FORMAT(changedate,'%a, %d %b %Y %T') as changedatef, status, abspath, newwindow $hsfields
     FROM $media_table $hsjoin";
   $query .= " WHERE $cutoffstr $wherestr AND mediatypeID = \"$mediatypeID\" ORDER BY changedate DESC, description LIMIT $change_limit";
@@ -85,7 +95,7 @@ function doMedia($mediatypeID) {
       }
 
       if ($prow['personID2'] != null) {
-        $medialink = "peopleShowPerson.php?personID={$prow['personID2']}&amp;tree={$prow['gedcom']}";
+        $medialink = "peopleShowPerson.php?personID={$prow['personID2']}";
         $mediatext = getName($prow);
         if ($mediatypeID == "headstones") {
           $deathdate = $prow['deathdate'] ? $prow['deathdate'] : $prow['burialdate'];
@@ -97,16 +107,16 @@ function doMedia($mediatypeID) {
           $hstext = $deathdate ? " ($abbrev " . displayDate($deathdate) . ")" : "";
         }
       } elseif ($prow['familyID'] != null) {
-        $medialink = "familiesShowFamily.php?familyID={$prow['familyID']}&amp;tree={$prow['gedcom']}";
+        $medialink = "familiesShowFamily.php?familyID={$prow['familyID']}";
         $mediatext = uiTextSnippet('family') . ": " . getFamilyName($prow);
       } elseif ($prow['sourceID'] != null) {
         $mediatext = $prow['title'] ? uiTextSnippet('source') . ": {$prow['title']}" : uiTextSnippet('source') . ": {$prow['sourceID']}";
-        $medialink = "showsource.php?sourceID={$prow['sourceID']}&amp;tree={$prow['gedcom']}";
+        $medialink = "showsource.php?sourceID={$prow['sourceID']}";
       } elseif ($prow['repoID'] != null) {
         $mediatext = $prow['reponame'] ? uiTextSnippet('repository') . ": " . $prow['reponame'] : uiTextSnippet('repository') . ": " . $prow['repoID'];
-        $medialink = "repositoriesShowItem.php?repoID={$prow['repoID']}&amp;tree=$prow[gedcom]";
+        $medialink = "repositoriesShowItem.php?repoID={$prow['repoID']}";
       } else {
-        $medialink = "placesearch.php?psearch={$prow['personID']}&amp;tree=$prow[gedcom]";
+        $medialink = "placesearch.php?psearch={$prow['personID']}";
         $mediatext = $prow['personID'];
       }
       if ($prow['eventID']) {
@@ -124,7 +134,7 @@ function doMedia($mediatypeID) {
     $href = str_replace("\" target=\"_blank", "", $href);  // fix the string in case someone might have used the "open in a new window" option on the media
     if ((!$foundliving && !$foundprivate) || !$nonames || $row['alwayson']) {
       $description = strip_tags($row['description']);
-      $notes = nl2br(strip_tags(getXrefNotes($row['notes'], $row['gedcom'])));
+      $notes = nl2br(strip_tags(getXrefNotes($row['notes'])));
       if (($foundliving || $foundprivate) && !$row['alwayson']) {
         $notes .= " (" . uiTextSnippet('livingphoto') . ")";
       }
@@ -217,11 +227,7 @@ if (!$personID && !$familyID) {             // only feed the changes when not mo
 }
 $cutoffstr .= " AND";
 
-if ($tree) {
-  $allwhere = "AND p.gedcom = \"$tree\"";
-} else {
-  $allwhere = "";
-}
+$allwhere = "";
 
 $more = getLivingPrivateRestrictions("p", false, false);
 if ($more) {
@@ -267,7 +273,7 @@ if (!$familyID) {    // if a family is NOT specified (ie: we are looking for a p
       $item .= "<title>";
       $item .= xmlcharacters(uiTextSnippet('indinfo') . ": " . $namestr . " (" . $row['personID'] . ")");
       $item .= "</title>\n";
-      $item .= "<link>" . "$tngdomain/peopleShowPerson.php?personID=" . $row['personID'] . "&amp;tree=" . $row['gedcom'] . $langstr . "</link>\n";
+      $item .= "<link>" . "$tngdomain/peopleShowPerson.php?personID=" . $row['personID'] . $langstr . "</link>\n";
       $item .= "<description>";
       if ($birthdate || $birthplace) {
         $item .= xmlcharacters("$birthdate, $birthplace") . "</description>\n";
@@ -310,7 +316,7 @@ if (!$personID) {
 
       $item = "\n<item>\n";
       $item .= "<title>" . xmlcharacters(uiTextSnippet('family') . ": " . getFamilyName($row)) . "</title>\n";
-      $item .= "<link>" . "$tngdomain/familiesShowFamily.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}$langstr" . "</link>\n";
+      $item .= "<link>" . "$tngdomain/familiesShowFamily.php?familyID={$row['familyID']}$langstr" . "</link>\n";
       $item .= "<description>";
 
       $item .= displayDate($row['marrdate']);

@@ -5,7 +5,6 @@ require 'functions.php';
 
 function doNoteSearch($instance, $pagenav) {
   global $notesearch;
-  global $tree;
 
   $str = "<div>\n";
   $str .= buildFormElement("browsenotes", "get", "notesearch$instance");
@@ -15,7 +14,6 @@ function doNoteSearch($instance, $pagenav) {
   if ($notesearch) {
     $str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='browsenotes.php'>" . uiTextSnippet('browseallnotes') . "</a>";
   }
-  $str .= "<input name='tree' type='hidden' value=\"$tree\" />\n";
   $str .= "</form></div>\n";
 
   return $str;
@@ -31,9 +29,7 @@ if ($offset) {
   $page = 1;
 }
 $wherestr = "WHERE $xnotes_table.ID = $notelinks_table.xnoteID";
-if ($tree) {
-  $wherestr .= " AND $xnotes_table.gedcom = \"$tree\"";
-}
+
 if (!$allow_private) {
   $wherestr .= " AND $notelinks_table.secret != \"1\"";
 }
@@ -62,11 +58,9 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 } else {
   $totrows = $numrows;
 }
-
 $numrowsplus = $numrows + $offset;
 
-$treestr = $tree ? " (" . uiTextSnippet('tree') . ": $tree)" : "";
-$logstring = "<a href=\"browsenotes.php?tree=$tree&amp;offset=$offset&amp;notesearch=" . htmlentities(stripslashes($notesearch), ENT_QUOTES) . "\">" . xmlcharacters(uiTextSnippet('notes') . $treestr) . "</a>";
+$logstring = "<a href=\"browsenotes.php?offset=$offset&amp;notesearch=" . htmlentities(stripslashes($notesearch), ENT_QUOTES) . "\">" . xmlcharacters(uiTextSnippet('notes')) . "</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -85,8 +79,6 @@ $headSection->setTitle(uiTextSnippet('notes'));
     <h2><img class='icon-md' src='svg/new-message.svg'><?php echo uiTextSnippet('notes'); ?></h2>
     <br clear='left'>
     <?php
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'browsenotes', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
-
     if ($totrows) {
       echo "<p>" . uiTextSnippet('matches') . " " . number_format($offsetplus) . " " . uiTextSnippet('to') . " " . number_format($numrowsplus) . " " . uiTextSnippet('of') . " " . number_format($totrows) . "</p>";
     }
@@ -142,7 +134,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
                 $noneliving = 0;
               }
 
-              $notelinktext .= "<a href=\"peopleShowPerson.php?personID={$row2['personID']}&tree={$row2['gedcom']}\">" . getNameRev($row2) . " ({$row2['personID']})</a>\n<br>\n";
+              $notelinktext .= "<a href=\"peopleShowPerson.php?personID={$row2['personID']}\">" . getNameRev($row2) . " ({$row2['personID']})</a>\n<br>\n";
               tng_free_result($result2);
             }
           }
@@ -162,7 +154,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
               if (!$row2['allow_living']) {
                 $noneliving = 0;
               }
-              $notelinktext .= "<a href=\"familiesShowFamily.php?familyID={$row2['familyID']}&tree={$row2['gedcom']}\" target='_blank'>" . uiTextSnippet('family') . " {$row2['familyID']}</a>\n<br>\n";
+              $notelinktext .= "<a href=\"familiesShowFamily.php?familyID={$row2['familyID']}\" target='_blank'>" . uiTextSnippet('family') . " {$row2['familyID']}</a>\n<br>\n";
               tng_free_result($result2);
             }
           }
@@ -171,7 +163,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
             $result2 = tng_query($query);
             if (tng_num_rows($result2) == 1) {
               $row2 = tng_fetch_assoc($result2);
-              $notelinktext .= "<a href=\"showsource.php?sourceID={$row2['sourceID']}&tree={$row2['gedcom']}\" target='_blank'>" . uiTextSnippet('source') . " $sourcetext ({$row2['sourceID']})</a>\n<br>\n";
+              $notelinktext .= "<a href=\"showsource.php?sourceID={$row2['sourceID']}\" target='_blank'>" . uiTextSnippet('source') . " $sourcetext ({$row2['sourceID']})</a>\n<br>\n";
               tng_free_result($result2);
             }
           }
@@ -180,7 +172,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
             $result2 = tng_query($query);
             if (tng_num_rows($result2) == 1) {
               $row2 = tng_fetch_assoc($result2);
-              $notelinktext .= "<a href=\"repositoriesShowItem.php?repoID={$row2['repoID']}&tree={$row2['gedcom']}\" target='_blank'>" . uiTextSnippet('repository') . " $sourcetext ({$row2['repoID']})</a>\n<br>\n";
+              $notelinktext .= "<a href=\"repositoriesShowItem.php?repoID={$row2['repoID']}\" target='_blank'>" . uiTextSnippet('repository') . " $sourcetext ({$row2['repoID']})</a>\n<br>\n";
               tng_free_result($result2);
             }
           }

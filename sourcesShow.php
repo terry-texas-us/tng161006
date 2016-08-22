@@ -5,14 +5,12 @@ require 'functions.php';
 
 function doSourceSearch($instance, $pagenav) {
   global $sourcesearch;
-  global $tree;
 
   $str = "<div>\n";
   $str .= buildFormElement("sourcesShow", "get", "SourceSearch$instance");
   $str .= "<input name='sourcesearch' type='text' value=\"$sourcesearch\"> \n";
   $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . "\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
   $str .= $pagenav;
-  $str .= "<input name='tree' type='hidden' value=\"$tree\" />\n";
   if ($sourcesearch) {
     $str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='sourcesShow.php'>" . uiTextSnippet('browseallsources') . "</a>";
   }
@@ -31,31 +29,21 @@ if ($offset) {
   $page = 1;
 }
 $sourcesearch = trim($sourcesearch);
-if ($tree) {
-  $wherestr = "WHERE $sources_table.gedcom = \"$tree\"";
-  if ($sourcesearch) {
-    $wherestr .= " AND (title LIKE \"%$sourcesearch%\" OR shorttitle LIKE \"%$sourcesearch%\" OR author LIKE \"%$sourcesearch%\")";
-  }
-  $join = "INNER JOIN";
+if ($sourcesearch) {
+  $wherestr = "WHERE title LIKE \"%$sourcesearch%\" OR shorttitle LIKE \"%$sourcesearch%\" OR author LIKE \"%$sourcesearch%\"";
 } else {
-  if ($sourcesearch) {
-    $wherestr = "WHERE title LIKE \"%$sourcesearch%\" OR shorttitle LIKE \"%$sourcesearch%\" OR author LIKE \"%$sourcesearch%\"";
-  } else {
-    $wherestr = "";
-  }
-  $join = "LEFT JOIN";
+  $wherestr = "";
 }
+$join = "LEFT JOIN";
+
 $query = "SELECT sourceID, title, shorttitle, author, $sources_table.gedcom as gedcom, treename FROM $sources_table $join $treesTable on $sources_table.gedcom = $treesTable.gedcom $wherestr ORDER BY title LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  if ($tree) {
-    $query = "SELECT count(sourceID) as scount FROM $sources_table LEFT JOIN $treesTable on $sources_table.gedcom = $treesTable.gedcom $wherestr";
-  } else {
-    $query = "SELECT count(sourceID) as scount FROM $sources_table $wherestr";
-  }
+  $query = "SELECT count(sourceID) as scount FROM $sources_table $wherestr";
+
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['scount'];
@@ -64,8 +52,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 }
 $numrowsplus = $numrows + $offset;
 
-$treestr = $tree ? " (" . uiTextSnippet('tree') . ": $tree)" : "";
-$logstring = "<a href=\"sourcesShow.php?tree=$tree&amp;offset=$offset&amp;sourcesearch=$sourcesearch\">" . xmlcharacters(uiTextSnippet('sources') . $treestr) . "</a>";
+$logstring = "<a href=\"sourcesShow.php?offset=$offset&amp;sourcesearch=$sourcesearch\">" . xmlcharacters(uiTextSnippet('sources')) . "</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -84,7 +71,6 @@ $headSection->setTitle(uiTextSnippet('sources'));
     <h2><img class='icon-md' src='svg/archive.svg'><?php echo uiTextSnippet('sources'); ?></h2>
     <br clear='left'>
     <?php
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'sourcesShow', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
 
     if ($totrows) {
       echo "<p><span>" . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</span></p>";
@@ -100,9 +86,6 @@ $headSection->setTitle(uiTextSnippet('sources'));
         <th></th>
         <th><?php echo uiTextSnippet('sourceid'); ?></th>
         <th><?php echo uiTextSnippet('title') . ", " . uiTextSnippet('author'); ?></th>
-        <?php if ($numtrees > 1) { ?>
-          <th><?php echo uiTextSnippet('tree'); ?></th>
-        <?php } ?>
       </tr>
       <?php
       $i = $offsetplus;
@@ -110,11 +93,8 @@ $headSection->setTitle(uiTextSnippet('sources'));
         $sourcetitle = $row['title'] ? $row['title'] : $row['shorttitle'];
         echo "<tr>\n";
           echo "<td>$i</td>\n";
-          echo "<td><a href='sourcesShowSource.php?sourceID={$row['sourceID']}&amp;tree={$row['gedcom']}'>{$row['sourceID']}</a></td>\n";
+          echo "<td><a href='sourcesShowSource.php?sourceID={$row['sourceID']}'>{$row['sourceID']}</a></td>\n";
           echo "<td>$sourcetitle<br>{$row['author']}</td>\n";
-          if ($numtrees > 1) {
-            echo "<td><a href='showtree.php?tree={$row['gedcom']}'>{$row['treename']}</a></td>\n";
-          }
         echo "</tr>\n";
         $i++;
       }

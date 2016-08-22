@@ -25,11 +25,8 @@ tng_free_result($result);
 
 $dquery = "DELETE FROM $places_table WHERE ";
 
-$dquery .= $tngconfig['places1tree'] ? "" : " gedcom = \"$tree\" AND (";
 $addtoquery = "";
 $mergelist = explode(',', $places);
-
-$treestr = $tngconfig['places1tree'] ? "" : "AND gedcom=\"$tree\"";
 
 foreach ($mergelist as $val) {
   if ($addtoquery) {
@@ -69,59 +66,56 @@ foreach ($mergelist as $val) {
       $result = tng_query($query);
     }
 
-    $query = "UPDATE $people_table SET birthplace=\"$newplace\" WHERE birthplace=\"$oldplace\" $treestr";
+    $query = "UPDATE $people_table SET birthplace = '$newplace' WHERE birthplace = '$oldplace'";
     $result = tng_query($query);
-    $query = "UPDATE $people_table SET altbirthplace=\"$newplace\" WHERE altbirthplace=\"$oldplace\" $treestr";
+    $query = "UPDATE $people_table SET altbirthplace = '$newplace' WHERE altbirthplace = '$oldplace'";
     $result = tng_query($query);
-    $query = "UPDATE $people_table SET deathplace=\"$newplace\" WHERE deathplace=\"$oldplace\" $treestr";
+    $query = "UPDATE $people_table SET deathplace = '$newplace' WHERE deathplace = '$oldplace'";
     $result = tng_query($query);
-    $query = "UPDATE $people_table SET burialplace=\"$newplace\" WHERE burialplace=\"$oldplace\" $treestr";
+    $query = "UPDATE $people_table SET burialplace = '$newplace' WHERE burialplace = '$oldplace'";
     $result = tng_query($query);
-    $query = "UPDATE $people_table SET baptplace=\"$newplace\" WHERE baptplace=\"$oldplace\" $treestr";
+    $query = "UPDATE $people_table SET baptplace = '$newplace' WHERE baptplace = '$oldplace'";
     $result = tng_query($query);
-    $query = "UPDATE $people_table SET confplace=\"$newplace\" WHERE confplace=\"$oldplace\" $treestr";
+    $query = "UPDATE $people_table SET confplace = '$newplace' WHERE confplace = '$oldplace'";
     $result = tng_query($query);
-    $query = "UPDATE $people_table SET initplace=\"$newplace\" WHERE initplace=\"$oldplace\" $treestr";
+    $query = "UPDATE $people_table SET initplace = '$newplace' WHERE initplace = '$oldplace'";
     $result = tng_query($query);
-    $query = "UPDATE $people_table SET endlplace=\"$newplace\" WHERE endlplace=\"$oldplace\" $treestr";
+    $query = "UPDATE $people_table SET endlplace = '$newplace' WHERE endlplace = '$oldplace'";
     $result = tng_query($query);
 
     //families
-    $query = "UPDATE $families_table SET marrplace=\"$newplace\" WHERE marrplace=\"$oldplace\" $treestr";
+    $query = "UPDATE $families_table SET marrplace = '$newplace' WHERE marrplace = '$oldplace'";
     $result = tng_query($query);
-    $query = "UPDATE $families_table SET divplace=\"$newplace\" WHERE divplace=\"$oldplace\" $treestr";
+    $query = "UPDATE $families_table SET divplace = '$newplace' WHERE divplace = '$oldplace'";
     $result = tng_query($query);
-    $query = "UPDATE $families_table SET sealplace=\"$newplace\" WHERE sealplace=\"$oldplace\" $treestr";
+    $query = "UPDATE $families_table SET sealplace = '$newplace' WHERE sealplace = '$oldplace'";
     $result = tng_query($query);
 
     //events
-    $query = "UPDATE $events_table SET eventplace=\"$newplace\" WHERE eventplace=\"$oldplace\" $treestr";
+    $query = "UPDATE $events_table SET eventplace = '$newplace' WHERE eventplace = '$oldplace'";
     $result = tng_query($query);
 
     //children
-    $query = "UPDATE $children_table SET sealplace=\"$newplace\" WHERE sealplace=\"$oldplace\" $treestr";
+    $query = "UPDATE $children_table SET sealplace = '$newplace' WHERE sealplace = '$oldplace'";
     $result = tng_query($query);
 
     //media (this is quick & dirty. would be better to cycle through each link and try the update, then delete the old if the update is not successful,
     //since that would indicate a key collision and the old record would remain, but it shouldn't come up very often and it wouldn't be critical in any case)
-    $query = "UPDATE $medialinks_table SET personID=\"$newplace\" WHERE personID=\"$oldplace\" $treestr";
+    $query = "UPDATE $medialinks_table SET personID = '$newplace' WHERE personID = '$oldplace'";
     $result = tng_query($query);
 
     if (!tng_affected_rows()) {
-      $query = "DELETE FROM $medialinks_table WHERE personID=\"$oldplace\" $treestr";
+      $query = "DELETE FROM $medialinks_table WHERE personID = '$oldplace'";
       $result = tng_query($query);
     }
 
     //cemeteries
-    $query = "UPDATE $cemeteries_table SET place=\"$newplace\" WHERE place=\"$oldplace\"";
+    $query = "UPDATE $cemeteries_table SET place = '$newplace' WHERE place = '$oldplace'";
     $result = tng_query($query);
   }
 }
 if ($addtoquery) {
   $dquery .= $addtoquery;
-  if (!$tngconfig['places1tree']) {
-    $dquery .= ")";
-  }
   $result = tng_query($dquery) or die(uiTextSnippet('cannotexecutequery') . ": $dquery");
 
   adminwritelog(uiTextSnippet('mergeplaces') . ": $newplace");

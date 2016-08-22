@@ -11,41 +11,40 @@ if ($session_charset != "UTF-8") {
   $usernote = tng_utf8_decode($usernote);
 }
 $postdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
-$query = "INSERT INTO $temp_events_table (type,gedcom,personID,familyID,eventID,eventdate,eventplace,info,note,user,postdate) VALUES (\"$type\",\"$tree\",\"$personID\",\"$familyID\",\"$eventID\",\"$newdate\",\"$newplace\",\"$newinfo\",\"$usernote\",\"$currentuser\",\"$postdate\")";
+$query = "INSERT INTO $temp_events_table (type, gedcom, personID, familyID, eventID, eventdate, eventplace, info, note, user, postdate) "
+    . "VALUES ('$type', '', '$personID', '$familyID', '$eventID', '$newdate', '$newplace', '$newinfo', '$usernote', '$currentuser', '$postdate')";
 $result = tng_query($query);
-
-$righttree = checktree($tree);
 
 if ($tngconfig['revmail']) {
   if ($personID) {
-    $result = getPersonSimple($tree, $personID);
+    $result = getPersonSimple($personID);
     $namerow = tng_fetch_assoc($result);
-    $rights = determineLivingPrivateRights($namerow, $righttree);
+    $rights = determineLivingPrivateRights($namerow);
     $namerow['allow_living'] = $rights['living'];
     $namerow['allow_private'] = $rights['private'];
     $namestr = getName($namerow) . " ($personID)";
     tng_free_result($result);
   } else {
-    $result = getFamilyData($tree, $familyID);
+    $result = getFamilyData($familyID);
     $frow = tng_fetch_assoc($result);
     $hname = $wname = "";
-    $frights = determineLivingPrivateRights($frow, $righttree);
+    $frights = determineLivingPrivateRights($frow);
     $frow['allow_living'] = $frights['living'];
     $frow['allow_private'] = $frights['private'];
     if ($frow['husband']) {
-      $presult = getPersonSimple($tree, $frow['husband']);
+      $presult = getPersonSimple($frow['husband']);
       $prow = tng_fetch_assoc($presult);
       tng_free_result($presult);
-      $prights = determineLivingPrivateRights($prow, $righttree);
+      $prights = determineLivingPrivateRights($prow);
       $prow['allow_living'] = $prights['living'];
       $prow['allow_private'] = $prights['private'];
       $hname = getName($prow);
     }
     if ($frow['wife']) {
-      $presult = getPersonSimple($tree, $frow['wife']);
+      $presult = getPersonSimple($frow['wife']);
       $prow = tng_fetch_assoc($presult);
       tng_free_result($presult);
-      $prights = determineLivingPrivateRights($prow, $righttree);
+      $prights = determineLivingPrivateRights($prow);
       $prow['allow_living'] = $prights['living'];
       $prow['allow_private'] = $prights['private'];
       $wname = getName($prow);
@@ -56,7 +55,7 @@ if ($tngconfig['revmail']) {
     $plus = $hname && $wname ? " + " : "";
     $namestr = uiTextSnippet('family') . ": $hname$plus$wname ($familyID)";
   }
-  $query = "SELECT treename, email, owner FROM $treesTable WHERE gedcom=\"$tree\"";
+  $query = "SELECT treename, email, owner FROM $treesTable";
   $treeresult = tng_query($query);
   $treerow = tng_fetch_assoc($treeresult);
   $sendemail = $treerow['email'] ? $treerow['email'] : $emailaddr;

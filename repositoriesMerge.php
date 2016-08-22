@@ -13,14 +13,9 @@ if (!$allowEdit || !$allowDelete) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
+$wherestr = "";
 
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-} else {
-  $wherestr = "";
-}
-
-$query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $treeresult = tng_query($query);
 
 function doRow($field, $textmsg, $boxname) {
@@ -161,7 +156,8 @@ function addCriteria($row) {
 }
 
 function doNotes($persfam1, $persfam2, $varname) {
-  global $ccombinenotes, $notelinks_table, $tree;
+  global $ccombinenotes;
+  global $notelinks_table;
 
   if ($varname) {
     if ($varname == "general") {
@@ -173,16 +169,16 @@ function doNotes($persfam1, $persfam2, $varname) {
   }
 
   if ($ccombinenotes != "yes") {
-    $query = "DELETE from $notelinks_table WHERE persfamID = \"$persfam1\" AND gedcom = \"$tree\" $wherestr";
+    $query = "DELETE from $notelinks_table WHERE persfamID = '$persfam1' $wherestr";
     tng_query($query);
   }
-  $query = "UPDATE $notelinks_table set persfamID = \"$persfam1\" WHERE persfamID = \"$persfam2\" AND gedcom = \"$tree\" $wherestr";
+  $query = "UPDATE $notelinks_table set persfamID = \"$persfam1\" WHERE persfamID = '$persfam2' $wherestr";
   tng_query($query);
 }
 
 $r1row = $r2row = "";
 if ($repoID1) {
-  $query = "SELECT reponame, repoID, $repositories_table.addressID as addressID, address1, address2, city, state, zip, country, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $repositories_table LEFT JOIN $address_table on $repositories_table.addressID = $address_table.addressID WHERE repoID = \"$repoID1\" AND $repositories_table.gedcom = \"$tree\"";
+  $query = "SELECT reponame, repoID, $repositories_table.addressID as addressID, address1, address2, city, state, zip, country, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $repositories_table LEFT JOIN $address_table on $repositories_table.addressID = $address_table.addressID WHERE repoID = '$repoID1'";
   $result = tng_query($query);
   if ($result && tng_num_rows($result)) {
     $r1row = tng_fetch_assoc($result);
@@ -209,14 +205,14 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
       $nextone = $nextchunk + 1;
       $nextchunk += $largechunk;
 
-      $query = "SELECT * FROM $repositories_table WHERE gedcom = \"$tree\" $wherestr ORDER BY repoID LIMIT $nextone, $largechunk";
+      $query = "SELECT * FROM $repositories_table WHERE 1 $wherestr ORDER BY repoID LIMIT $nextone, $largechunk";
       $result = tng_query($query);
       $numrows = tng_num_rows($result);
       if ($result && $numrows) {
         while ($still_looking && $row = tng_fetch_assoc($result)) {
           $wherestr2 = addCriteria($row);
 
-          $query = "SELECT * FROM $repositories_table WHERE repoID > \"{$row['repoID']}\" AND gedcom = \"$tree\" $wherestr2 ORDER BY repoID";
+          $query = "SELECT * FROM $repositories_table WHERE repoID > \"{$row['repoID']}\" $wherestr2 ORDER BY repoID";
           $result2 = tng_query($query);
           if ($result2 && tng_num_rows($result2)) {
             //set repoID1, repoID2
@@ -240,7 +236,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
     $wherestr2 = $repoID2 ? " AND repoID > \"$repoID2\"" : "";
     $wherestr2 .= addCriteria($r1row);
 
-    $query = "SELECT * FROM $repositories_table WHERE repoID != \"{$r1row['repoID']}\" AND gedcom = \"$tree\" $wherestr2 ORDER BY repoID LIMIT 1";
+    $query = "SELECT * FROM $repositories_table WHERE repoID != \"{$r1row['repoID']}\" $wherestr2 ORDER BY repoID LIMIT 1";
     $result2 = tng_query($query);
     if ($result2 && tng_num_rows($result2)) {
       $r2row = tng_fetch_assoc($result2);
@@ -251,7 +247,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
     }
   }
 } elseif ($repoID2) {
-  $query = "SELECT reponame, repoID, $repositories_table.addressID as addressID, address1, address2, city, state, zip, country, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $repositories_table LEFT JOIN $address_table on $repositories_table.addressID = $address_table.addressID WHERE repoID = \"$repoID2\" AND $repositories_table.gedcom = \"$tree\"";
+  $query = "SELECT reponame, repoID, $repositories_table.addressID as addressID, address1, address2, city, state, zip, country, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $repositories_table LEFT JOIN $address_table on $repositories_table.addressID = $address_table.addressID WHERE repoID = '$repoID2'";
   $result2 = tng_query($query);
   if ($result2 && tng_num_rows($result2) && $repoID1 != $repoID2) {
     $r2row = tng_fetch_assoc($result2);
@@ -278,11 +274,11 @@ if ($mergeaction == uiTextSnippet('merge')) {
         if (strpos($key, "::")) {
           $halves = explode("::", substr($key, 5));
           $varname = substr(strstr($halves[0], "_"), 1);
-          $query = "DELETE from $events_table WHERE persfamID = \"$repoID1\" AND gedcom = \"$tree\" and eventID = \"$varname\"";
+          $query = "DELETE from $events_table WHERE persfamID = '$repoID1' and eventID = \"$varname\"";
           $evresult = tng_query($query);
           $varname = substr(strstr($halves[1], "_"), 1);
 
-          $query = "SELECT eventID FROM $events_table WHERE persfamID = \"$repoID2\" AND  gedcom = \"$tree\" and eventID = \"$varname\"";
+          $query = "SELECT eventID FROM $events_table WHERE persfamID = '$repoID2' AND eventID = '$varname'";
           $evresult = tng_query($query);
           while ($evrow = tng_fetch_assoc($evresult)) {
             doNotes($repoID1, $repoID2, $evrow['eventID']);
@@ -293,7 +289,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
           doNotes($repoID1, $repoID2, $varname);
         }
 
-        $query = "UPDATE $events_table set persfamID = \"$repoID1\" WHERE persfamID = \"$repoID2\" AND gedcom = \"$tree\" AND eventID = \"$varname\"";
+        $query = "UPDATE $events_table set persfamID = \"$repoID1\" WHERE persfamID = '$repoID2' AND eventID = \"$varname\"";
         $evresult = tng_query($query);
         break;
     }
@@ -302,38 +298,38 @@ if ($mergeaction == uiTextSnippet('merge')) {
     doNotes($repoID1, $repoID2, "general");
 
     //convert all remaining notes and citations
-    $query = "UPDATE $notelinks_table set persfamID = \"$repoID1\" WHERE persfamID = \"$repoID2\" AND gedcom = \"$tree\"";
+    $query = "UPDATE $notelinks_table set persfamID = \"$repoID1\" WHERE persfamID = '$repoID2'";
     $noteresult = tng_query($query);
   }
   if ($updatestr) {
     $updatestr = substr($updatestr, 2);
-    $query = "UPDATE $repositories_table set $updatestr WHERE repoID = \"$repoID1\" AND gedcom = \"$tree\"";
+    $query = "UPDATE $repositories_table set $updatestr WHERE repoID = '$repoID1'";
     $combresult = tng_query($query);
   }
 
-  $query = "DELETE from $repositories_table WHERE repoID = \"$repoID2\" AND gedcom = \"$tree\"";
+  $query = "DELETE from $repositories_table WHERE repoID = '$repoID2'";
   $combresult = tng_query($query);
 
   //delete remaining notes & events for repo 2
-  $query = "DELETE from $events_table WHERE persfamID = \"$repoID2\" AND gedcom = \"$tree\"";
+  $query = "DELETE from $events_table WHERE persfamID = '$repoID2'";
   $combresult = tng_query($query);
 
-  $query = "DELETE from $notelinks_table WHERE persfamID = \"$repoID2\" AND gedcom = \"$tree\"";
+  $query = "DELETE from $notelinks_table WHERE persfamID = '$repoID2'";
   $combresult = tng_query($query);
 
   //point sources for r2 to r1
-  $query = "UPDATE $sources_table set repoID = \"$repoID1\" WHERE repoID = \"$repoID2\" AND gedcom = \"$tree\"";
+  $query = "UPDATE $sources_table set repoID = \"$repoID1\" WHERE repoID = '$repoID2'";
   $combresult = tng_query($query);
 
   //construct name for default photo 2
-  $defaultphoto2 = $tree ? "$rootpath$photopath/$tree.$repoID2.$photosext" : "$rootpath$photopath/$repoID2.$photosext";
+  $defaultphoto2 = "$rootpath$photopath/$repoID2.$photosext";
   if ($ccombineextras) {
-    $query = "UPDATE $medialinks_table set personID = \"$repoID1\", defphoto = \"\" WHERE personID = \"$repoID2\" AND gedcom = \"$tree\"";
+    $query = "UPDATE $medialinks_table set personID = \"$repoID1\", defphoto = \"\" WHERE personID = '$repoID2'";
     $mediaresult = tng_query($query);
 
     //construct name for default photo 1
     if (file_exists($defaultphoto2)) {
-      $defaultphoto1 = $tree ? "$rootpath$photopath/$tree.$repoID1.$photosext" : "$rootpath$photopath/$repoID1.$photosext";
+      $defaultphoto1 = "$rootpath$photopath/$repoID1.$photosext";
       if (!file_exists($defaultphoto1)) {
         rename($defaultphoto2, $defaultphoto1);
       }
@@ -341,7 +337,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
       //unlink( $defaultphoto2 );
     }
   } else {
-    $query = "DELETE FROM $medialinks_table WHERE personID = \"$repoID2\" AND gedcom = \"$tree\"";
+    $query = "DELETE FROM $medialinks_table WHERE personID = '$repoID2'";
     $mediaresult = tng_query($query);
 
     //if( file_exists( $defaultphoto2 ) )
@@ -349,7 +345,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
   }
   $repoID2 = "";
   $r2row = "";
-  adminwritelog(uiTextSnippet('merge') . ": $tree/$repoID2 => $repoID1");
+  adminwritelog(uiTextSnippet('merge') . ": $repoID2 => $repoID1");
 }
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('merge'));
@@ -372,29 +368,6 @@ $headSection->setTitle(uiTextSnippet('merge'));
         <td>
         <div><em><?php echo uiTextSnippet('choosemergerepos'); ?></em><br><br>
           <form id='form1' name='form1' action="repositoriesMerge.php" method='post'>
-            <table>
-              <tr>
-                <td><?php echo uiTextSnippet('tree'); ?>:</td>
-                <td>
-                  <select name='tree'>
-                    <?php
-                    $trees = "";
-                    while ($treerow = tng_fetch_assoc($treeresult)) {
-                      $trees .= "      <option value=\"{$treerow['gedcom']}\"";
-                      if ($treerow['gedcom'] == $tree) {
-                        $trees .= " selected";
-                      }
-                      $trees .= ">{$treerow['treename']}</option>\n";
-                    }
-                    echo $trees;
-                    ?>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td></td>
-              </tr>
-            </table>
             <br>
             <table>
               <tr>
@@ -403,7 +376,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                     <?php echo uiTextSnippet('repoid'); ?> 1: <input id='repoID1' name='repoID1' type='text' size='10' value="<?php echo $repoID1; ?>">
                     &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
                   </div>
-                  <a href="#"  title="<?php echo uiTextSnippet('find'); ?>" onclick="return findItem('R', 'repoID1', 'reponame1', document.form1.tree.options[document.form1.tree.selectedIndex].value);">
+                  <a href="#"  title="<?php echo uiTextSnippet('find'); ?>" onclick="return findItem('R', 'repoID1', 'reponame1');">
                     <img class='icon-sm' src='svg/magnifying-glass.svg'>
                   </a>
                 </td>
@@ -413,7 +386,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                     <?php echo uiTextSnippet('repoid'); ?> 2: <input id='repoID2' name='repoID2' type='text' size='10' value="<?php echo $repoID2; ?>">
                     &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
                   </div>
-                  <a href="#" title="<?php echo uiTextSnippet('find'); ?>" onclick="return findItem('R', 'repoID2', 'reponame2', document.form1.tree.options[document.form1.tree.selectedIndex].value);">
+                  <a href="#" title="<?php echo uiTextSnippet('find'); ?>" onclick="return findItem('R', 'repoID2', 'reponame2');">
                     <img class='icon-sm' src='svg/magnifying-glass.svg'>
                   </a>
                 </td>
@@ -455,11 +428,11 @@ $headSection->setTitle(uiTextSnippet('merge'));
               if (is_array($r1row)) {
                 $eventlist = array();
                 echo "<tr>\n";
-                echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('repositoriesEdit.php?repoID={$r1row['repoID']}&amp;tree=$tree&amp;cw=1','edit')\"></td>\n";
+                echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('repositoriesEdit.php?repoID={$r1row['repoID']}&amp;cw=1','edit')\"></td>\n";
                 if (is_array($r2row)) {
-                  echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('repositoriesEdit.php?repoID={$r2row['repoID']}&amp;tree=$tree&amp;cw=1','edit')\"></td>\n";
+                  echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('repositoriesEdit.php?repoID={$r2row['repoID']}&amp;cw=1','edit')\"></td>\n";
 
-                  $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID as eventtypeID, $events_table.eventID as eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$r2row['repoID']}\" AND gedcom = \"$tree\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
+                  $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID as eventtypeID, $events_table.eventID as eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$r2row['repoID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
                   $evresult = tng_query($query);
                   $eventcount = tng_num_rows($evresult);
 
@@ -481,7 +454,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                 doRow("repoID", "repoid", "");
                 doRow("reponame", "name", "r2reponame");
                 doRow("addressID", "address", "r2addressID");
-                $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID as eventtypeID, $events_table.eventID as eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$r1row['repoID']}\" AND gedcom = \"$tree\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
+                $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID as eventtypeID, $events_table.eventID as eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$r1row['repoID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
                 $evresult = tng_query($query);
                 $eventcount = tng_num_rows($evresult);
 

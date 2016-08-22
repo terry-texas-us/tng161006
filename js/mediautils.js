@@ -60,14 +60,14 @@ function ShowFile(sFileName) {
 function confirmDeleteFile(row, filepath) {
     'use strict';
     if (confirm(textSnippet('confdeletefile'))) {
-        deleteIt('file', row, filepath);
+        deleteIt('file', row);
     }
     return false;
 }
 
-function setDefault(linkID, tree, entity) {
+function setDefault(linkID, entity) {
     'use strict';
-    var params = {action: 'setdef2', tree: tree, entity: entity, media: media};
+    var params = {action: 'setdef2', entity: entity, media: media};
     $.ajax({
         url: 'ajx_updateorder.php',
         data: params,
@@ -218,7 +218,6 @@ Coordinate_X_InImage = Coordinate_Y_InImage = 0;
 function imageClick(photoID) {
     'use strict';
     var shapeobj = document.form1.shape;
-    var tree = document.form1.maptree.options[document.form1.maptree.selectedIndex].value;
     var shape;
 
     //GetCoordinatesInImage();
@@ -242,7 +241,7 @@ function imageClick(photoID) {
             y2 = Coordinate_Y_InImage;
             radius = "";
         }
-        findItem('I', 'imagemap', '', tree, assignedbranch);
+        findItem('I', 'imagemap', '', assignedbranch);
         firstclick = true;
     }
 }
@@ -314,9 +313,8 @@ function assignDefaults(form) {
     $('#defresults').html("");
     $('#defresults').hide();
     var overwrite = form.overwritedefs.checked ? 1 : "";
-    var tree = form.tree.options[form.tree.selectedIndex].value;
     $('#defspin').show();
-    var params = {overwritedefs: overwrite, tree: tree};
+    var params = {overwritedefs: overwrite};
     $.ajax({
         url: 'admin_defphotos.php',
         data: params,
@@ -645,11 +643,11 @@ function toggleShow(checkbox) {
     });
 }
 
-function toggleDefault(checkbox, tree, entityID) {
+function toggleDefault(checkbox, entityID) {
     'use strict';
     var toggle = checkbox.checked ? 1 : 0;
     var medialinkID = checkbox.name.substr(4);
-    var params = {medialinkID: medialinkID, tree: tree, entity: entityID, toggle: toggle, action: 'setdef3'};
+    var params = {medialinkID: medialinkID, entity: entityID, toggle: toggle, action: 'setdef3'};
     $.ajax({
         url: 'ajx_updateorder.php',
         data: params

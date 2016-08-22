@@ -5,13 +5,7 @@ require 'adminlib.php';
 $adminLogin = 1;
 require 'checklogin.php';
 
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-  $tree = $assignedtree;
-} else {
-  $wherestr = "";
-}
-$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 initMediaTypes();
 header("Content-type:text/html; charset=" . $session_charset);
 ?>
@@ -34,7 +28,6 @@ header("Content-type:text/html; charset=" . $session_charset);
     </div> <!-- .modal-body -->
     <footer class='modal-footer'>
       <input name='mediatypeID' type='hidden' value="<?php echo $mediatypeID; ?>">
-      <input name='tree' type='hidden' value="<?php echo $tree; ?>">
     </footer>
   </form>
   <div id='newmedia' style='width: 620px; height: 430px; overflow: auto'></div>

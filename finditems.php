@@ -21,10 +21,10 @@ header("Content-type:text/html; charset=" . $session_charset);
 
 $mediaquery = "";
 if ($albumID) {
-  $mediaquery = "SELECT entityID, gedcom FROM $album2entities_table WHERE gedcom = \"$tree\" AND albumID = \"$albumID\" AND linktype = \"$type\"";
+  $mediaquery = "SELECT entityID, gedcom FROM $album2entities_table WHERE albumID = '$albumID' AND linktype = '$type'";
 } else {
   if ($mediaID) {
-    $mediaquery = "SELECT personID as entityID, gedcom FROM $medialinks_table WHERE gedcom = \"$tree\" AND mediaID = \"$mediaID\" AND linktype = \"$type\"";
+    $mediaquery = "SELECT personID as entityID, gedcom FROM $medialinks_table WHERE mediaID = '$mediaID' AND linktype = '$type'";
   }
 }
 
@@ -73,7 +73,7 @@ switch ($type) {
     $myffirstname = trim($myffirstname);
     $myflastname = trim($myflastname);
     $myfpersonID = trim($myfpersonID);
-    $allwhere = "gedcom = \"$tree\"";
+    $allwhere = "1";
     if ($branch) {
       $allwhere .= " AND branch LIKE \"%$branch%\"";
     }
@@ -99,7 +99,7 @@ switch ($type) {
 
     if ($more) {
       if ($allwhere) {
-        $allwhere = $tree ? "$allwhere AND " : "($allwhere) AND ";
+        $allwhere = "($allwhere) AND ";
       }
       $allwhere .= $more;
     }
@@ -158,7 +158,7 @@ switch ($type) {
     $myhusbname = trim($myhusbname);
     $mywifename = trim($mywifename);
     $myfamilyID = trim($myfamilyID);
-    $allwhere = "$families_table.gedcom = \"$tree\"";
+    $allwhere = "1";
     if ($branch) {
       $allwhere .= " AND $families_table.branch LIKE \"%$branch%\"";
     }
@@ -260,7 +260,7 @@ switch ($type) {
     }
     break;
   case 'S':
-    $query = "SELECT sourceID, title, shorttitle FROM $sources_table WHERE gedcom = \"$tree\" AND (title LIKE \"$f$criteria%\" OR shorttitle LIKE \"$f$criteria%\") ORDER BY title LIMIT 250";
+    $query = "SELECT sourceID, title, shorttitle FROM $sources_table WHERE (title LIKE \"$f$criteria%\" OR shorttitle LIKE \"$f$criteria%\") ORDER BY title LIMIT 250";
     $result = tng_query($query);
 
     if (tng_num_rows($result)) {
@@ -282,7 +282,7 @@ switch ($type) {
     }
     break;
   case 'R':
-    $query = "SELECT repoID, reponame FROM $repositories_table WHERE gedcom = \"$tree\" AND reponame LIKE \"$f$criteria%\" ORDER BY reponame LIMIT 250";
+    $query = "SELECT repoID, reponame FROM $repositories_table WHERE reponame LIKE \"$f$criteria%\" ORDER BY reponame LIMIT 250";
     $result = tng_query($query);
 
     if (tng_num_rows($result)) {
@@ -303,7 +303,7 @@ switch ($type) {
     }
     break;
   case 'L':
-    $allwhere = $tree && !$tngconfig['places1tree'] ? "gedcom = \"$tree\"" : "1=1";
+    $allwhere = "1=1";
     if ($criteria) {
       $allwhere .= " AND place LIKE \"$f$criteria%\"";
     }

@@ -39,13 +39,12 @@ ob_implicit_flush(true);
 
 function getMediaLinksToSave() {
   global $events_table;
-  global $tree;
   global $medialinks_table;
 
   $medialinks = array();
   $query = "SELECT medialinkID, mediaID, $medialinks_table.eventID, persfamID, eventtypeID, eventdate, eventplace, info
     FROM ($medialinks_table,$events_table)
-    WHERE $medialinks_table.gedcom = \"$tree\" AND $medialinks_table.eventID != \"\" AND $medialinks_table.eventID = $events_table.eventID";
+    WHERE $medialinks_table.eventID != \"\" AND $medialinks_table.eventID = $events_table.eventID";
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {
@@ -58,12 +57,13 @@ function getMediaLinksToSave() {
 }
 
 function getAlbumLinksToSave() {
-  global $events_table, $tree, $album2entities_table;
+  global $events_table;
+  global $album2entities_table;
 
   $albumlinks = array();
   $query = "SELECT alinkID, albumID, $album2entities_table.eventID, entityID, eventtypeID, eventdate, eventplace, info
     FROM ($album2entities_table,$events_table)
-    WHERE $album2entities_table.gedcom = \"$tree\" AND $album2entities_table.eventID != \"\" AND $album2entities_table.eventID = $events_table.eventID";
+    WHERE $album2entities_table.eventID != \"\" AND $album2entities_table.eventID = $events_table.eventID";
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {
@@ -149,7 +149,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
     $allcount = 0;
     if ($savestate['filename']) {
       $tree = $tree1; //selected
-      $query = "UPDATE $treesTable SET lastimportdate=\"$today\", importfilename=\"$savegedfilename\" WHERE gedcom=\"$tree\"";
+      $query = "UPDATE $treesTable SET lastimportdate=\"$today\", importfilename=\"$savegedfilename\"";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
       if ($del == "append") {
@@ -199,11 +199,12 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
         $query = "DELETE from $saveimport_table";
         $result = tng_query($query);
 
-        $sql = "INSERT INTO $saveimport_table (filename, icount, ioffset, fcount, foffset, scount, soffset, mcount, pcount, ncount, noffset, roffset, offset, delvar, ucaselast, norecalc, neweronly, media, gedcom, branch)  VALUES(\"{$savestate['filename']}\", 0, \"{$savestate['ioffset']}\", 0, \"{$savestate['foffset']}\", 0, \"{$savestate['soffset']}\", 0, 0, 0, \"{$savestate['noffset']}\", \"{$savestate['roffset']}\", 0, \"$del\", {$savestate['ucaselast']}, {$savestate['norecalc']}, {$savestate['neweronly']}, $mll, \"$tree\", \"$branch\")";
+        $sql = "INSERT INTO $saveimport_table (filename, icount, ioffset, fcount, foffset, scount, soffset, mcount, pcount, ncount, noffset, roffset, offset, delvar, ucaselast, norecalc, neweronly, media, gedcom, branch) "
+            . "VALUES(\"{$savestate['filename']}\", 0, \"{$savestate['ioffset']}\", 0, \"{$savestate['foffset']}\", 0, \"{$savestate['soffset']}\", 0, 0, 0, \"{$savestate['noffset']}\", \"{$savestate['roffset']}\", 0, '$del', {$savestate['ucaselast']}, {$savestate['norecalc']}, {$savestate['neweronly']}, $mll, '', '$branch')";
         $result = tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $sql");
       }
     } elseif ($saveimport && !$openmsg) {
-      $checksql = "SELECT filename, icount, ioffset, fcount, foffset, scount, soffset, mcount, pcount, ncount, noffset, offset, ucaselast, norecalc, neweronly, media, branch, delvar from $saveimport_table WHERE gedcom = \"$tree\"";
+      $checksql = "SELECT filename, icount, ioffset, fcount, foffset, scount, soffset, mcount, pcount, ncount, noffset, offset, ucaselast, norecalc, neweronly, media, branch, delvar from $saveimport_table";
       $result = tng_query($checksql) or die(uiTextSnippet('cannotexecutequery') . ": $checksql");
       $found = tng_num_rows($result);
       if ($found) {
@@ -261,7 +262,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
     if ($old) {
       echo "<p>$openmsg</p>\n";
       if ($clearedtogo == "true" && $saveimport && (!$remotefile || $remotefile == "none")) {
-        echo "<p>" . uiTextSnippet('ifimportfails') . " <a href=\"dataImportGedcomFormAction.php?tree=$tree&amp;old=1\">" . uiTextSnippet('clickresume') . "</a>.</p>\n";
+        echo "<p>" . uiTextSnippet('ifimportfails') . " <a href=\"dataImportGedcomFormAction.php?old=1\">" . uiTextSnippet('clickresume') . "</a>.</p>\n";
       }
     } else {
     ?>
@@ -356,7 +357,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       fclose($fp);
 
       if ($saveimport) {
-        $sql = "DELETE from $saveimport_table WHERE gedcom = \"$tree\"";
+        $sql = "DELETE from $saveimport_table";
         $result = tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
       $log = uiTextSnippet('gedimport') . ": " . basename(uiTextSnippet('filename')); 
@@ -396,7 +397,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       } // $old
     }
     if ($old) {
-      echo "<p><a href=\"dataSecondaryProcessesFormAction.php?secaction=" . uiTextSnippet('tracklines') . "&tree=$tree\">" . uiTextSnippet('tracklines') . "</a></p>";
+      echo "<p><a href=\"dataSecondaryProcessesFormAction.php?secaction=" . uiTextSnippet('tracklines') . "\">" . uiTextSnippet('tracklines') . "</a></p>";
       echo "<p><a href=\"dataImportGedcom.php\">" . uiTextSnippet('backtodataimport') . "</a></p>\n";
 
       echo "<div align=\"right\"><span>$tng_title, v.$tng_version</span></div>";

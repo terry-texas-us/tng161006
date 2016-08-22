@@ -135,8 +135,6 @@ function getMaxStringWidth($strings, $font, $style, $size, $append = '', $oldmax
 }
 
 function getMyAncestors($focalPerson, $tree, $gen) {
-  global $righttree;
-
   $ancestorInfo = array();
 
   //     ind --------+
@@ -151,18 +149,18 @@ function getMyAncestors($focalPerson, $tree, $gen) {
       if ($ancestorInfo[$i][$j]['personID'] != 'X' && $ancestorInfo[$i][$j]['personID'] != '') {
         // find the family for this person
         $personID = $ancestorInfo[$i][$j]['personID'];
-        $result = getChildFamily($tree, $personID, "parentorder");
+        $result = getChildFamily($personID, "parentorder");
         if ($result) {
           $row = tng_fetch_assoc($result);
           $familyID = $row['familyID'];
           tng_free_result($result);
 
           // query husband (the father of the person in question)
-          $result = getParentData($tree, $familyID, 'husband');
+          $result = getParentData($familyID, 'husband');
           if ($result) {
             $row = tng_fetch_assoc($result);
 
-            $rights = determineLivingPrivateRights($row, $righttree);
+            $rights = determineLivingPrivateRights($row);
             $row['allow_living'] = $rights['living'];
             $row['allow_private'] = $rights['private'];
 
@@ -186,11 +184,11 @@ function getMyAncestors($focalPerson, $tree, $gen) {
           }
 
           // query wife (the mother of the person in question)
-          $result = getParentData($tree, $familyID, 'wife');
+          $result = getParentData($familyID, 'wife');
           if ($result) {
             $row = tng_fetch_assoc($result);
 
-            $rights = determineLivingPrivateRights($row, $righttree);
+            $rights = determineLivingPrivateRights($row);
             $row['allow_living'] = $rights['living'];
             $row['allow_private'] = $rights['private'];
 
@@ -217,11 +215,11 @@ function getMyAncestors($focalPerson, $tree, $gen) {
   }
 
   // QUERY FOCAL PERSON
-  $result = getPersonData($tree, $focalPerson);
+  $result = getPersonData($focalPerson);
   if ($result) {
     $row = tng_fetch_assoc($result);
 
-    $rights = determineLivingPrivateRights($row, $righttree);
+    $rights = determineLivingPrivateRights($row);
     $row['allow_living'] = $rights['living'];
     $row['allow_private'] = $rights['private'];
 

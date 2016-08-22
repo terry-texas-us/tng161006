@@ -4,12 +4,13 @@ require 'tng_begin.php';
 require $subroot . 'pedconfig.php';
 require 'personlib.php';
 
-$righttree = checktree($tree);
 $rightbranch = checkbranch($row['branch']);
 
-function drawBox($person, $box)
-{
-  global $tree, $pedigree, $more, $boxheight, $boxwidth;
+function drawBox($person, $box) {
+  global $pedigree;
+  global $more;
+  global $boxheight;
+  global $boxwidth;
 
   if ($box['lineoutof']) {
     $bgcolor = $pedigree['boxcolor'];
@@ -64,7 +65,7 @@ function drawBox($person, $box)
   //inner table
   echo "<table style=\"margin:0\">\n<tr><td>";
   $name = getName($person);
-  $nameinfo = "<a href=\"peopleShowPerson.php?personID={$person['personID']}&amp;tree=$tree\">$name</a>";
+  $nameinfo = "<a href=\"peopleShowPerson.php?personID={$person['personID']}\">$name</a>";
   if ($person['personID'] && $pedigree['inclphotos']) {
     $constoffset = 0;
     $photohtouse = $pedigree['puboxheight'] - $constoffset - ($pedigree['cellpad'] * 2) - 2; // take cellpadding into account
@@ -148,21 +149,22 @@ function drawEmpty($top, $middle, $bottom) {
 }
 
 function doNextPerson($row, $items, $nextperson, $box) {
-  global $tree, $childcount, $totkids, $righttree;
+  global $childcount;
+  global $totkids;
 
   $nextnextfamily = $items[0];
   if ($row['personID'] == $nextperson && $nextnextfamily) {
     $result3 = null;
     if ($row['sex'] == 'M') {
-      $result3 = getParentDataCrossPlusDates($tree, $nextnextfamily, 'husband', $row['personID'], 'wife');
+      $result3 = getParentDataCrossPlusDates($nextnextfamily, 'husband', $row['personID'], 'wife');
     } else {
       if ($row['sex'] == 'F') {
-        $result3 = getParentDataCrossPlusDates($tree, $nextnextfamily, 'wife', $row['personID'], 'husband');
+        $result3 = getParentDataCrossPlusDates($nextnextfamily, 'wife', $row['personID'], 'husband');
       }
     }
     if ($result3) {
       $spouserow = tng_fetch_assoc($result3);
-      $srights = determineLivingPrivateRights($spouserow, $righttree);
+      $srights = determineLivingPrivateRights($spouserow);
       $spouserow['allow_living'] = $srights['living'];
       $spouserow['allow_private'] = $srights['private'];
       tng_free_result($result3);
@@ -277,19 +279,15 @@ $pedigree['cellpad'] = 5;
 $pedigree['puboxheight'] += 24;
 
 $pedigree['halfwidth'] = floor($pedigree['puboxwidth'] / 2) + 6;
-$pedigree['phototree'] = $tree;
-if ($tree) {
-  $pedigree['phototree'] .= ".";
-}
 
 $items = explode(",", $trail);
 $personID = $nextperson = array_shift($items);
 if ($nextperson) {
-  $result = getPersonFullPlusDates($tree, $nextperson);
+  $result = getPersonFullPlusDates($nextperson);
   if ($result) {
     $row = tng_fetch_assoc($result);
 
-    $rights = determineLivingPrivateRights($row, $righttree, $rightbranch);
+    $rights = determineLivingPrivateRights($row, $rightbranch);
     $row['allow_living'] = $rights['living'];
     $row['allow_private'] = $rights['private'];
 
@@ -297,13 +295,13 @@ if ($nextperson) {
     $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $descname);
   }
 
-  $treeResult = getTreeSimple($tree);
+  $treeResult = getTreeSimple();
   $treerow = tng_fetch_assoc($treeResult);
   $disallowgedcreate = $treerow['disallowgedcreate'];
   tng_free_result($treeResult);
 
-  writelog("<a href=\"desctracker.php?trail=$trail&amp;tree=$tree\">" . uiTextSnippet('descendfor') . " $logname ($personID)</a>");
-  preparebookmark("<a href=\"desctracker.php?trail=$trail&amp;tree=$tree\">" . uiTextSnippet('descendfor') . " $descname ($personID)</a>");
+  writelog("<a href=\"desctracker.php?trail=$trail\">" . uiTextSnippet('descendfor') . " $logname ($personID)</a>");
+  preparebookmark("<a href=\"desctracker.php?trail=$trail\">" . uiTextSnippet('descendfor') . " $descname ($personID)</a>");
 }
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
@@ -339,13 +337,13 @@ if (!$generations) {
   }
 }
 
-$innermenu = "<a href=\"descend.php?personID=$personID&amp;tree=$tree&amp;display=standard&amp;generations=$generations\">" .
+$innermenu = "<a href=\"descend.php?personID=$personID&amp;display=standard&amp;generations=$generations\">" .
         uiTextSnippet('pedstandard') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-$innermenu .= "<a href=\"descend.php?personID=$personID&amp;tree=$tree&amp;display=compact&amp;generations=$generations\">" .
+$innermenu .= "<a href=\"descend.php?personID=$personID&amp;display=compact&amp;generations=$generations\">" .
         uiTextSnippet('pedcompact') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-$innermenu .= "<a href=\"descendtext.php?personID=$personID&amp;tree=$tree&amp;generations=$generations\">" .
+$innermenu .= "<a href=\"descendtext.php?personID=$personID&amp;generations=$generations\">" .
         uiTextSnippet('pedtextonly') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-$innermenu .= "<a href=\"register.php?personID=$personID&amp;tree=$tree&amp;generations=$generations\">" . uiTextSnippet('regformat') . "</a>\n";
+$innermenu .= "<a href=\"register.php?personID=$personID&amp;generations=$generations\">" . uiTextSnippet('regformat') . "</a>\n";
 
 beginFormElement("descend", "GET", "form1", "form1");
 echo buildPersonMenu("descend", $personID);
@@ -390,7 +388,7 @@ endFormElement();
             $more = count($items);
 
             //get kids
-            $result2 = getChildrenDataPlusDates($tree, $nextfamily);
+            $result2 = getChildrenDataPlusDates($nextfamily);
             if ($result2) {
               echo "<table>\n<tr>\n";
               $totkids = tng_num_rows($result2);
@@ -401,7 +399,7 @@ endFormElement();
               while ($row = tng_fetch_assoc($result2)) {
                 $childcount++;
 
-                $rights = determineLivingPrivateRights($row, $righttree);
+                $rights = determineLivingPrivateRights($row);
                 $row['allow_living'] = $rights['living'];
                 $row['allow_private'] = $rights['private'];
 

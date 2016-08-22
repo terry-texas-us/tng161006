@@ -11,14 +11,7 @@ if (!$allowMediaEdit) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-  $tree = $assignedtree;
-} else {
-  $wherestr = "";
-}
-$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 
 $flags['styles'] .= "<!-- blueimp Gallery styles -->\n";
 $flags['styles'] .= "<link rel=\"stylesheet\" href=\"//blueimp.github.io/Gallery/css/blueimp-gallery.min.css\">\n";
@@ -45,9 +38,9 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
     $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('browse'), "findmedia"]);
     $navList->appendItem([$allowMediaAdd, "mediaAdd.php", uiTextSnippet('add'), "addmedia"]);
     $navList->appendItem([$allowMediaEdit, "mediaSort.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    $navList->appendItem([$allowMediaEdit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
-    //    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
+    $navList->appendItem([$allowMediaEdit, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
+    $navList->appendItem([$allowMediaAdd, "mediaImport.php", uiTextSnippet('import'), "import"]);
+    //    $navList->appendItem([$allowMediaAdd, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
     echo $navList->build("upload");
     ?>
     <table class='table table-sm'>
@@ -69,36 +62,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
                 </select>
               </div>
               <div class='col-sm-3'>
-                <span>&nbsp;<?php echo uiTextSnippet('tree'); ?>: </span>
                 <?php
-                if ($assignedtree) {
-                  if ($row['gedcom']) {
-                    $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
-                    $treerow = tng_fetch_assoc($treeresult);
-                    echo $treerow['treename'];
-                    tng_free_result($treeresult);
-                  } else {
-                    echo uiTextSnippet('alltrees');
-                  }
-                  echo "<input name='tree' type='hidden' value=\"{$row['gedcom']}\">";
-                } else {
-                  echo "<select class=\"form-control\" name=\"tree\">";
-                  echo "  <option value=''>" . uiTextSnippet('alltrees') . "</option>\n";
-                  if ($row['gedcom']) {
-                    $tree = $row['gedcom'];
-                  }
-
-                  $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
-                  while ($treerow = tng_fetch_assoc($treeresult)) {
-                    echo "  <option value=\"{$treerow['gedcom']}\"";
-                    if ($treerow['gedcom'] == $row['gedcom']) {
-                      echo " selected";
-                    }
-                    echo ">{$treerow['treename']}</option>\n";
-                  }
-                  echo "</select>&nbsp;&nbsp;\n";
-                  tng_free_result($treeresult);
-                }
                 $mediatypeID = $mediatypes[0]['ID'];
                 $folder = $mediatypes_assoc[$mediatypeID];
                 ?>
@@ -163,22 +127,6 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
           <form action="mediaSortFormAction.php" method="get" name="find" id="linkerform" onsubmit="return validateForm();">
             <div class='row'>
               <div class='col-sm-3'>
-                <?php echo uiTextSnippet('tree'); ?>
-                <select class='form-control' name="tree1">
-                  <?php
-                  $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
-                  while ($treerow = tng_fetch_assoc($treeresult)) {
-                    echo "  <option value=\"{$treerow['gedcom']}\"";
-                    if ($treerow['gedcom'] == $tree) {
-                      echo " selected";
-                    }
-                    echo ">{$treerow['treename']}</option>\n";
-                  }
-                  tng_free_result($treeresult);
-                  ?>
-                </select>
-              </div>
-              <div class='col-sm-3'>
                 <?php echo uiTextSnippet('linktype'); ?>
                 <select class='form-control' name="linktype1" onchange="toggleEventLink(this.selectedIndex);">
                   <option value='I'><?php echo uiTextSnippet('person'); ?></option>
@@ -192,7 +140,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
                 <?php echo uiTextSnippet('id'); ?>
                 <input id='newlink1' name='newlink1' type='text' value="<?php echo $personID; ?>" 
                        onblur="toggleEventRow(document.find.eventlink1.checked);">
-                <a href="#" onclick="return findItem(document.find.linktype1.options[document.find.linktype1.selectedIndex].value, 'newlink1', null, document.find.tree1.options[document.find.tree1.selectedIndex].value, '<?php echo $assignedbranch; ?>');" title="<?php echo uiTextSnippet('find'); ?>">
+                <a href="#" onclick="return findItem(document.find.linktype1.options[document.find.linktype1.selectedIndex].value, 'newlink1', null, '<?php echo $assignedbranch; ?>');" title="<?php echo uiTextSnippet('find'); ?>">
                   <img class='icon-sm' src='svg/magnifying-glass.svg'>
                 </a>
                 <input class='toggle' type='button' value="<?php echo uiTextSnippet('selectall'); ?>">

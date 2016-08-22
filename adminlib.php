@@ -50,16 +50,15 @@ $adminFooterSection = new FooterElementSection('admin');
 $scriptsManager = new scriptsManager('admin');
 
 function getNewNumericID($type, $field, $table) {
-  global $tree;
   include 'prefixes.php';
 
   eval("\$prefix = \$$type" . "prefix;");
   eval("\$suffix = \$$type" . "suffix;");
   if ($prefix) {
     $prefixlen = strlen($prefix) + 1;
-    $query = "SELECT MAX(0+SUBSTRING($field" . "ID,$prefixlen)) as newID FROM $table WHERE gedcom = \"$tree\" AND $field" . "ID LIKE \"$prefix%\"";
+    $query = "SELECT MAX(0+SUBSTRING($field" . "ID,$prefixlen)) as newID FROM $table WHERE $field" . "ID LIKE \"$prefix%\"";
   } else {
-    $query = "SELECT MAX(0+SUBSTRING_INDEX($field" . "ID,'$suffix',1)) as newID FROM $table WHERE gedcom = \"$tree\"";
+    $query = "SELECT MAX(0+SUBSTRING_INDEX($field" . "ID,'$suffix',1)) as newID FROM $table";
   }
   $result = tng_query($query);
   $maxrow = tng_fetch_array($result);
@@ -89,7 +88,6 @@ function checkReview($type) {
   global $families_table;
   global $temp_events_table;
   global $assignedbranch;
-  global $assignedtree;
 
   if ($type == 'I') {
     $revwhere = "$people_table.personID = $temp_events_table.personID AND $people_table.gedcom = $temp_events_table.gedcom AND (type = \"I\" OR type = \"C\")";
@@ -97,9 +95,6 @@ function checkReview($type) {
   } else {
     $revwhere = "$families_table.familyID = $temp_events_table.familyID AND $families_table.gedcom = $temp_events_table.gedcom AND type = \"F\"";
     $table = $families_table;
-  }
-  if ($assignedtree) {
-    $revwhere .= " AND $temp_events_table.gedcom = \"$tree\"";
   }
   if ($assignedbranch) {
     $revwhere .= " AND branch LIKE \"%$assignedbranch%\"";
@@ -158,7 +153,6 @@ function showEventRow($datefield, $placefield, $label, $persfamID) {
   global $gotnotes;
   global $gotcites;
   global $row;
-  global $tree;
   global $noclass;
 
   $ldsarray = array("BAPL", "CONL", "INIT", "ENDL", "SLGS", "SLGC");
@@ -186,7 +180,7 @@ function showEventRow($datefield, $placefield, $label, $persfamID) {
     $tr .= "<td>\n";
 
     $iconColor = $gotmore[$label] ? "icon-info" : "icon-muted";
-    $tr .= "<a class='event-more' href='#' title='" . uiTextSnippet('more') . "' data-event-id='$label' data-persfam-id='$persfamID' data-tree='$tree'>\n";
+    $tr .= "<a class='event-more' href='#' title='" . uiTextSnippet('more') . "' data-event-id='$label' data-persfam-id='$persfamID'>\n";
     $tr .= "<img class='icon-sm icon-right icon-more $iconColor' data-event-id='$label' data-src='svg/plus.svg'>\n";
     $tr .= "</a>\n";
 
@@ -221,7 +215,6 @@ function buildEventRow($datefield, $placefield, $label, $persfamID) {
   global $gotnotes;
   global $gotcites;
   global $row;
-  global $tree;
   
   $ldsarray = array("BAPL", "CONL", "INIT", "ENDL", "SLGS", "SLGC");
 
@@ -247,7 +240,7 @@ function buildEventRow($datefield, $placefield, $label, $persfamID) {
   }
   if (isset($gotmore)) {
     $iconColor = $gotmore[$label] ? "icon-info" : "icon-muted";
-    $out .= "<a class='event-more' href='#' title='" . uiTextSnippet('more') . "' data-event-id='$label' data-persfam-id='$persfamID' data-tree='$tree'>\n";
+    $out .= "<a class='event-more' href='#' title='" . uiTextSnippet('more') . "' data-event-id='$label' data-persfam-id='$persfamID'>\n";
     $out .= "<img class='icon-sm icon-right icon-more $iconColor' data-event-id='$label' data-src='svg/plus.svg'>\n";
     $out .= "</a>\n";
   }
@@ -295,16 +288,16 @@ function determineConflict($row, $table) {
   return $editconflict;
 }
 
-function getHasKids($tree, $personID) {
+function getHasKids($personID) {
   global $families_table;
   global $children_table;
 
   $haskids = 0;
-  $query = "SELECT familyID FROM $families_table WHERE husband=\"$personID\" AND gedcom=\"$tree\" UNION
-    SELECT familyID FROM $families_table WHERE wife=\"$personID\" AND gedcom=\"$tree\"";
+  $query = "SELECT familyID FROM $families_table WHERE husband = '$personID' UNION
+    SELECT familyID FROM $families_table WHERE wife = '$personID'";
   $fresult = tng_query($query);
   while ($famrow = tng_fetch_assoc($fresult)) {
-    $query = "SELECT personID FROM $children_table WHERE familyID=\"{$famrow['familyID']}\" AND gedcom=\"$tree\"";
+    $query = "SELECT personID FROM $children_table WHERE familyID = \"{$famrow['familyID']}\"";
     $cresult = tng_query($query);
     $ccount = tng_num_rows($cresult);
     tng_free_result($cresult);

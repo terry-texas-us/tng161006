@@ -3,7 +3,6 @@ require 'tng_begin.php';
 
 $query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $result = tng_query($query);
-$numtrees = tng_num_rows($result);
 
 if ($_SESSION['tng_search_tree']) {
   $tree = $_SESSION['tng_search_tree'];
@@ -85,11 +84,6 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
         <div class='row'>
           <div class='col-sm-6'>
             <?php echo buildSelectInputGroup('personid', 'mypersonid', 'idqualify', $mypersonid, $idOptions, $idqualify); ?>
-          </div>
-          <div class='col-sm-6'>
-            <?php if ((!$requirelogin || !$treerestrict || !$assignedtree) && $numtrees > 1) { ?>
-              <?php echo treeSelect($result); ?>
-            <?php } ?>
           </div>
         </div>
         <br>
@@ -286,7 +280,7 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
   <script>
-    var searchByTree = <?php echo ((!$requirelogin || !$treerestrict || !$assignedtree) && $numtrees > 1) ? "true" : "false"; ?>;
+    var searchByTree = "false";
     function resetValues() {
       if (searchByTree) {
         document.search.tree.selectedIndex = 0;
@@ -362,9 +356,6 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
 
       URL = "mybool=" + thisform.mybool[thisform.mybool.selectedIndex].value;
       URL = URL + "&nr=" + thisform.nr[thisform.nr.selectedIndex].value;
-      <?php if ((!$requirelogin || !$treerestrict || !$assignedtree) && $numtrees > 1) { ?>
-      URL = URL + "&tree=" + thisform.tree[thisform.tree.selectedIndex].value;
-      <?php } ?>
 
       if (thisform.showdeath.checked)
         URL = URL + "&showdeath=yes";

@@ -7,12 +7,10 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-$orgtree = $tree;
 $exptime = 0;
 if ($newsearch) {
   $searchstring = trim($searchstring);
   setcookie("tng_search_places_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_places_post[tree]", $tree, $exptime);
   setcookie("tng_search_places_post[exactmatch]", $exactmatch, $exptime);
   setcookie("tng_search_places_post[nocoords]", $nocoords, $exptime);
   setcookie("tng_search_places_post[temples]", $temples, $exptime);
@@ -21,9 +19,6 @@ if ($newsearch) {
 } else {
   if (!$searchstring) {
     $searchstring = stripslashes($_COOKIE['tng_search_places_post']['search']);
-  }
-  if (!$tree) {
-    $tree = $_COOKIE['tng_search_places_post']['tree'];
   }
   if (!$exactmatch) {
     $exactmatch = $_COOKIE['tng_search_places_post']['exactmatch'];
@@ -53,32 +48,20 @@ if ($offset) {
   $newoffset = "";
   $tngpage = 1;
 }
-if ($assignedtree && !$tngconfig['places1tree']) {
-  $tree = $assignedtree;
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-} else {
-  $tree = $wherestr = "";
-}
+$tree = "";
 
 function addCriteria($field, $value, $operator) {
   $criteria = $operator == "=" ? " OR $field $operator \"$value\"" : " OR $field $operator \"%$value%\"";
 
   return $criteria;
 }
-if ($tree) {
-  $allwhere = "$places_table.gedcom = \"$tree\"";
-} else {
-  $allwhere = "1 = 1";
-}
-
+$allwhere = "1 = 1";
 if ($nocoords) {
   $allwhere .= " AND (latitude IS NULL OR latitude = \"\" OR longitude IS NULL OR longitude = \"\")";
 }
-
 if ($temples) {
   $allwhere .= " AND temple = 1";
 }
-
 if ($searchstring) {
   $allwhere .= " AND (1=0";
   if ($exactmatch == "yes") {
@@ -86,18 +69,13 @@ if ($searchstring) {
   } else {
     $frontmod = "LIKE";
   }
-
   $allwhere .= addCriteria("place", $searchstring, $frontmod);
   $allwhere .= addCriteria("notes", $searchstring, $frontmod);
   $allwhere .= ")";
 }
-$treename = $tngconfig['places1tree'] ? "" : ", treename";
+$treename = "";
 
-$query = "SELECT ID, place, placelevel, longitude, latitude, zoom, $places_table.gedcom as gedcom $treename 
-    FROM $places_table";
-if (!$tngconfig['places1tree']) {
-  $query .= " LEFT JOIN $treesTable ON $places_table.gedcom = $treesTable.gedcom";
-}
+$query = "SELECT ID, place, placelevel, longitude, latitude, zoom, $places_table.gedcom as gedcom $treename FROM $places_table";
 $query .= " WHERE $allwhere ORDER BY place, $places_table.gedcom, ID LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 $numrows = tng_num_rows($result);
@@ -130,11 +108,6 @@ $headSection->setTitle(uiTextSnippet('places'));
     <br>
     <div class='row'>
       <form id='form1' name='form1' action='placesBrowse.php'>
-        <?php
-        if (!$tngconfig['places1tree']) {
-          include '_/components/php/treeSelectControl.php';
-        }
-        ?>
         <label for='searchstring'><?php echo uiTextSnippet('searchfor'); ?></label>
         <input name='searchstring' type='text' value="<?php echo stripslashes($searchstring_noquotes); ?>">
         <input name='submit' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
@@ -196,11 +169,6 @@ $headSection->setTitle(uiTextSnippet('places'));
           <th><?php echo uiTextSnippet('longitude'); ?></th>
           <?php if ($map['key']) { ?>
             <th><?php echo uiTextSnippet('zoom'); ?></th>
-            <?php
-          }
-          if (!$tngconfig['places1tree']) {
-          ?>
-            <th><?php echo uiTextSnippet('tree'); ?></th>
           <?php } ?>
         </tr>
         <?php
@@ -217,18 +185,12 @@ $headSection->setTitle(uiTextSnippet('places'));
           $actionstr .= "</a>";
         }
         $actionstr .= "<a href=\"placesearch.php?psearch=zzz";
-        if (!$tngconfig['places1tree']) {
-          $actionstr .= "&amp;tree=yyy";
-        }
         $actionstr .= "\" title='" . uiTextSnippet('preview') . "'>\n";
         $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
         $actionstr .= "</a>\n";
 
         while ($row = tng_fetch_assoc($result)) {
           $newactionstr = preg_replace("/xxx/", $row['ID'], $actionstr);
-          if (!$tngconfig['places1tree']) {
-            $newactionstr = preg_replace("/yyy/", $row['gedcom'], $newactionstr);
-          }
           $newactionstr = preg_replace("/zzz/", urlencode($row['place']), $newactionstr);
           echo "<tr id=\"row_{$row['ID']}\"><td><div class=\"action-btns\">$newactionstr</div></td>\n";
           if ($allowDelete) {
@@ -245,9 +207,6 @@ $headSection->setTitle(uiTextSnippet('places'));
           echo "<td>{$row['longitude']}</td>\n";
           if ($map['key']) {
             echo "<td>{$row['zoom']}</td>\n";
-          }
-          if (!$tngconfig['places1tree']) {
-            echo "<td>{$row['treename']}</td>\n";
           }
           echo "</tr>\n";
         }

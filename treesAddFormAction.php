@@ -6,7 +6,7 @@ require 'adminlib.php';
 $adminLogin = 1;
 require 'checklogin.php';
 
-if ($assignedtree || !$allowAdd) {
+if (!$allowAdd) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -37,7 +37,8 @@ if (!$disallowpdf) {
 if (!$private) {
   $private = 0;
 }
-$query = "INSERT IGNORE INTO $treesTable (gedcom,treename,description,owner,email,address,city,state,country,zip,phone,secret,disallowgedcreate,disallowpdf) VALUES (\"$gedcom\",\"$treename\",\"$description\",\"$owner\",\"$email\",\"$address\",\"$city\",\"$state\",\"$country\",\"$zip\",\"$phone\",\"$private\",\"$disallowgedcreate\",\"$disallowpdf\")";
+$query = "INSERT IGNORE INTO $treesTable (gedcom, treename, description, owner, email, address, city, state, country, zip, phone, secret, disallowgedcreate, disallowpdf) "
+    . "VALUES ('', '$treename', '$description', '$owner', '$email', '$address', '$city', '$state', '$country', '$zip', '$phone', '$private', '$disallowgedcreate', '$disallowpdf')";
 $result = tng_query($query);
 $success = tng_affected_rows();
 if ($success) {

@@ -99,7 +99,6 @@ if ($check) {
       } else { //never do lds
         $allow_lds = $_SESSION['allow_lds'] = 0;
       }
-      $assignedtree = $_SESSION['assignedtree'] = $row['gedcom'];
       $assignedbranch = $_SESSION['assignedbranch'] = $row['branch'];
       $currentuser = $_SESSION['currentuser'] = $row['username'];
       $currentuserdesc = $_SESSION['currentuserdesc'] = $row['description'];

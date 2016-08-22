@@ -10,60 +10,57 @@ $query = "SELECT *, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") as postdate FROM
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
-$tree = $row['gedcom'];
 $personID = $row['personID'];
 $familyID = $row['familyID'];
 $eventID = $row['eventID'];
-
-$righttree = checktree($tree);
 
 //look up person or family
 if ($row['type'] == 'I' || $row['type'] == "C") {
   $tng_search_preview = $_SESSION['tng_search_preview'];
   $reviewmsg = uiTextSnippet('reviewpeople');
 
-  $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, gedcom, branch FROM $people_table WHERE personID = \"$personID\" AND gedcom = \"$tree\"";
+  $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, gedcom, branch FROM $people_table WHERE personID = '$personID'";
   $result = tng_query($query);
   $prow = tng_fetch_assoc($result);
   tng_free_result($result);
 
   $persfamID = $personID;
-  $rightbranch = $righttree ? checkbranch($prow['branch']) : false;
-  $rights = determineLivingPrivateRights($prow, $righttree, $rightbranch);
+  $rightbranch = checkbranch($prow['branch']);
+  $rights = determineLivingPrivateRights($prow, $rightbranch);
   $prow['allow_living'] = $rights['living'];
   $prow['allow_private'] = $rights['private'];
 
   $name = getName($prow);
   
   $teststr = "<br>\n";
-  $teststr .= "<a href=\"peopleShowPerson.php?personID=$personID&amp;tree=$tree\" title=\"<?php echo uiTextSnippet('preview') ?>\">\n";
+  $teststr .= "<a href=\"peopleShowPerson.php?personID=$personID\" title=\"<?php echo uiTextSnippet('preview') ?>\">\n";
   $teststr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
   $teststr .= "</a>\n";
 
-  $editstr = "  | <a href=\"peopleEdit.php?personID=$personID&amp;tree=$tree\" target='_blank'>" . uiTextSnippet('edit') . "</a>";
+  $editstr = "  | <a href=\"peopleEdit.php?personID=$personID\" target='_blank'>" . uiTextSnippet('edit') . "</a>";
 } elseif ($row['type'] == 'F') {
   
-  $query = "SELECT husband, wife FROM $families_table WHERE familyID = \"$familyID\" AND gedcom = \"$tree\"";
+  $query = "SELECT husband, wife FROM $families_table WHERE familyID = '$familyID'";
   $result = tng_query($query);
   $frow = tng_fetch_assoc($result);
   $hname = $wname = "";
   if ($frow['husband']) {
-    $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, gedcom, branch FROM $people_table WHERE personID = \"{$frow['husband']}\" AND gedcom = \"$tree\"";
+    $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, gedcom, branch FROM $people_table WHERE personID = \"{$frow['husband']}\"";
     $result = tng_query($query);
     $prow = tng_fetch_assoc($result);
-    $rightbranch = $righttree ? checkbranch($prow['branch']) : false;
-    $prights = determineLivingPrivateRights($prow, $righttree, $rightbranch);
+    $rightbranch = checkbranch($prow['branch']);
+    $prights = determineLivingPrivateRights($prow, $rightbranch);
     $prow['allow_living'] = $prights['living'];
     $prow['allow_private'] = $prights['private'];
     tng_free_result($result);
     $hname = getName($prow);
   }
   if ($frow['wife']) {
-    $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, gedcom, branch FROM $people_table WHERE personID = \"{$frow['wife']}\" AND gedcom = \"$tree\"";
+    $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, gedcom, branch FROM $people_table WHERE personID = \"{$frow['wife']}\"";
     $result = tng_query($query);
     $prow = tng_fetch_assoc($result);
-    $rightbranch = $righttree ? checkbranch($prow['branch']) : false;
-    $prights = determineLivingPrivateRights($prow, $righttree, $rightbranch);
+    $rightbranch = checkbranch($prow['branch']);
+    $prights = determineLivingPrivateRights($prow, $rightbranch);
     $prow['allow_living'] = $prights['living'];
     $prow['allow_private'] = $prights['private'];
     tng_free_result($result);
@@ -77,13 +74,13 @@ if ($row['type'] == 'I' || $row['type'] == "C") {
   $checkbranch = 1;
 
   $teststr = "<br>\n";
-  $teststr .= "<a href=\"familiesShowFamily.php?familyID=$familyID&amp;tree=$tree\" title=\"<?php echo uiTextSnippet('preview') ?>\">\n";
+  $teststr .= "<a href=\"familiesShowFamily.php?familyID=$familyID\" title=\"<?php echo uiTextSnippet('preview') ?>\">\n";
   $teststr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
   $teststr .= "</a>\n";
-  $editstr = "  | <a href=\"familiesEdit.php?familyID=$familyID&amp;tree=$tree\" target='_blank'>" . uiTextSnippet('edit') . "</a>";
+  $editstr = "  | <a href=\"familiesEdit.php?familyID=$familyID\" target='_blank'>" . uiTextSnippet('edit') . "</a>";
 }
 
-if (!$allowEdit || ($assignedtree && $assignedtree != $tree) || !$rightbranch) {
+if (!$allowEdit || !$rightbranch) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -205,17 +202,17 @@ if (is_numeric($eventID)) {
   }
 
   if ($needfamilies) {
-    $query = "SELECT $fieldstr FROM $families_table WHERE familyID = \"$familyID\" AND gedcom = \"$tree\"";
+    $query = "SELECT $fieldstr FROM $families_table WHERE familyID = \"$familyID\"";
   } elseif ($needchildren) {
-    $query = "SELECT $fieldstr FROM $children_table WHERE familyID = \"$familyID\" AND personID = \"$personID\" AND gedcom = \"$tree\"";
+    $query = "SELECT $fieldstr FROM $children_table WHERE familyID = '$familyID' AND personID = '$personID'";
   } else {
-    $query = "SELECT $fieldstr FROM $people_table WHERE personID = \"$personID\" AND gedcom = \"$tree\"";
+    $query = "SELECT $fieldstr FROM $people_table WHERE personID = '$personID'";
   }
   $result = tng_query($query);
   $evrow = tng_fetch_assoc($result);
   tng_free_result($result);
 
-  $query = "SELECT count(eventID) as evcount FROM $events_table WHERE persfamID=\"$persfamID\" AND gedcom =\"$tree\" AND eventID =\"$eventID\"";
+  $query = "SELECT count(eventID) as evcount FROM $events_table WHERE persfamID = '$persfamID' AND eventID = '$eventID'";
   $morelinks = tng_query($query);
   $more = tng_fetch_assoc($morelinks);
   $gotmore = $more['evcount'] ? "*" : "";
@@ -223,19 +220,13 @@ if (is_numeric($eventID)) {
 
   $displayval = uiTextSnippet($eventID);
 }
-
-$query = "SELECT treename FROM $treesTable WHERE gedcom = \"$tree\"";
-$result = tng_query($query);
-$treerow = tng_fetch_assoc($result);
-tng_free_result($result);
-
-$query = "SELECT count(ID) as notecount FROM $notelinks_table WHERE persfamID=\"$persfamID\" AND gedcom =\"$tree\" AND eventID =\"$eventID\"";
+$query = "SELECT count(ID) as notecount FROM $notelinks_table WHERE persfamID = '$persfamID' AND eventID = '$eventID'";
 $notelinks = tng_query($query);
 $note = tng_fetch_assoc($notelinks);
 $gotnotes = $note['notecount'] ? "*" : "";
 tng_free_result($notelinks);
 
-$citequery = "SELECT count(citationID) as citecount FROM $citations_table WHERE persfamID=\"$persfamID\" AND gedcom =\"$tree\" AND eventID = \"$eventID\"";
+$citequery = "SELECT count(citationID) as citecount FROM $citations_table WHERE persfamID = '$persfamID' AND eventID = '$eventID'";
 $citeresult = tng_query($citequery) or die(uiTextSnippet('cannotexecutequery') . ": $citequery");
 $cite = tng_fetch_assoc($citeresult);
 $gotcites = $cite['citecount'] ? "*" : "";
@@ -272,10 +263,6 @@ $headSection->setTitle(uiTextSnippet('review'));
 
             <form action="admin_savereview.php" method='post' name='form1'>
               <table>
-                <tr>
-                  <td><span><?php echo uiTextSnippet('tree'); ?>:</span></td>
-                  <td><?php echo $treerow['treename']; ?></td>
-                </tr>
                 <tr>
                   <td colspan='2'>&nbsp;</td>
                 </tr>
@@ -317,7 +304,7 @@ $headSection->setTitle(uiTextSnippet('review'));
                     <?php
                     if (!is_numeric($eventID)) {
                       $iconColor = $gotmore ? "icon-info" : "icon-muted";
-                      echo "<a class='event-more' href='#' title='" . uiTextSnippet('more') . "' data-event-id='$eventID' data-persfam-id='$persfamID' data-tree='$tree'>\n";
+                      echo "<a class='event-more' href='#' title='" . uiTextSnippet('more') . "' data-event-id='$eventID' data-persfam-id='$persfamID'>\n";
                       echo "<img class='icon-sm icon-right icon-more $iconColor' data-event-id='$label' data-src='svg/plus.svg'>\n";
                       echo "</a>\n";
                     }
@@ -353,7 +340,6 @@ $headSection->setTitle(uiTextSnippet('review'));
               <br>
               <input name='tempID' type='hidden' value="<?php echo $tempID; ?>">
               <input name='type' type='hidden' value="<?php echo $row['type']; ?>">
-              <input name='tree' type='hidden' value="<?php echo $tree; ?>">
               <input name='choice' type='hidden' value="<?php echo uiTextSnippet('savedel'); ?>">
               <input type='submit' value="<?php echo uiTextSnippet('savedel'); ?>">
               <input type='submit' value="<?php echo uiTextSnippet('postpone'); ?>"
@@ -377,8 +363,6 @@ $headSection->setTitle(uiTextSnippet('review'));
   var tnglitbox;
   var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;
   var preferDateFormat = '<?php echo $preferDateFormat; ?>';
-  
-  var tree = '<?php echo $tree; ?>';
 </script>
 <script src="js/selectutils.js"></script>
 <script src="js/datevalidation.js"></script>

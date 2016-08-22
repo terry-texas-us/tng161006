@@ -3,18 +3,17 @@ require 'tng_begin.php';
 
 require 'personlib.php';
 
-$result = getPersonDataPlusDates($tree, $personID);
+$result = getPersonDataPlusDates($personID);
 if ($result) {
   $row = tng_fetch_assoc($result);
-  $righttree = checktree($tree);
   $rightbranch = checkbranch($row['branch']);
-  $rights = determineLivingPrivateRights($row, $righttree, $rightbranch);
+  $rights = determineLivingPrivateRights($row, $rightbranch);
   $row['allow_living'] = $rights['living'];
   $row['allow_private'] = $rights['private'];
   $name = getName($row);
   tng_free_result($result);
 }
-$treeResult = getTreeSimple($tree);
+$treeResult = getTreeSimple();
 $treerow = tng_fetch_assoc($treeResult);
 $disallowgedcreate = $row['disallowgedcreate'];
 tng_free_result($treeResult);
@@ -49,7 +48,6 @@ $headSection->setTitle(uiTextSnippet('creategedfor') . ": " . uiTextSnippet('ged
           <h4><?php echo uiTextSnippet('creategedfor'); ?></h4>
         </div>
         <input name='personID' type='hidden' value="<?php echo $personID; ?>">
-        <input name='tree' type='hidden' value="<?php echo $tree; ?>">
 <!--
         <span><?php echo uiTextSnippet('gedstartfrom'); ?>: </span>
         <span><?php echo $name; ?></span>

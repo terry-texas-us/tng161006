@@ -18,7 +18,7 @@ if ($mediaID) {
 }
 $bailtext = $mediaoption ? uiTextSnippet('finish') : uiTextSnippet('cancel');
 
-$applyfilter = "applyFilter({form:'findform1',fieldId:'myplace', type:'L', tree:'$tree', destdiv:'placeresults', temple:getTempleCheck()$mediaoption});";
+$applyfilter = "applyFilter({form:'findform1',fieldId:'myplace', type:'L', destdiv:'placeresults', temple:getTempleCheck()$mediaoption});";
 
 header("Content-type:text/html; charset=" . $session_charset);
 ?>
@@ -38,7 +38,6 @@ header("Content-type:text/html; charset=" . $session_charset);
                 form:'findform1',
                 fieldId:'myplace',
                 type:'L',
-                tree:'<?php echo $tree; ?>',
                 destdiv:'placeresults',
                 temple:getTempleCheck()<?php echo $mediaoption; ?>
               });">
@@ -63,7 +62,6 @@ header("Content-type:text/html; charset=" . $session_charset);
               <input id='temple' name='temple' type='checkbox' value='1' checked onclick="lastFilter = ''; applyFilter({
                   form:'findform1',
                   fieldId:'myplace',
-                  type:'L', tree:'<?php echo $tree; ?>',
                   destdiv:'placeresults',
                   temple:getTempleCheck()<?php echo $mediaoption; ?>
                 });"> <?php echo uiTextSnippet('findtemples'); ?>

@@ -33,12 +33,6 @@ $namesort = "name";
 $orderloc = strpos($_SERVER['QUERY_STRING'], "&amp;order=");
 $currargs = $orderloc > 0 ? substr($_SERVER['QUERY_STRING'], 0, $orderloc) : $_SERVER['QUERY_STRING'];
 
-$treequery = "SELECT count(gedcom) as treecount FROM $treesTable";
-$treeresult = tng_query($treequery);
-$treerow = tng_fetch_assoc($treeresult);
-$numtrees = $treerow['treecount'];
-tng_free_result($treeresult);
-
 if ($order == "name") {
   $namesort = "<a href='placesearch.php?$currargs&amp;order=nameup'>xxx <img src=\"img/tng_sort_desc.gif\" width=\"15\" height=\"8\" alt=''></a>";
 } else {
@@ -49,33 +43,11 @@ if ($order == "date") {
 } else {
   $datesort = "<a href='placesearch.php?$currargs&amp;order=date'>yyy <img src=\"img/tng_sort_asc.gif\" width=\"15\" height=\"8\" alt=''></a>";
 }
-
-//don't allow default tree here
-$tree = $orgtree;
 $tngconfig['istart'] = 0;
 
 $ldsOK = determineLDSRights();
 
-if ($tree && !$tngconfig['places1tree']) {
-  $urlstring = "&amp;tree=$tree";
-  $wherestr2 = " AND $places_table.gedcom = \"$tree\" ";
-
-  $query = "SELECT treename FROM $treesTable WHERE gedcom = \"$tree\"";
-  $treeresult = tng_query($query);
-  $treerow = tng_fetch_assoc($treeresult);
-  tng_free_result($treeresult);
-} else {
-  $urlstring = $wherestr2 = "";
-}
-
-if (!$tngconfig['places1tree']) {
-  $querystring .= " " . uiTextSnippet('and') . " tree " . uiTextSnippet('equals') . " {$treerow['treename']} ";
-  $treejoin = " LEFT JOIN $treesTable on $places_table.gedcom = $treesTable.gedcom";
-  $treename = ", treename";
-} else {
-  $treejoin = $treename = "";
-}
-$logstring = "<a href=\"placesearch.php?psearch=$psearchns$urlstring\">" . uiTextSnippet('searchresults') . " $querystring</a>";
+$logstring = "<a href=\"placesearch.php?psearch=$psearchns\">" . uiTextSnippet('searchresults') . " $querystring</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -99,7 +71,7 @@ $headSection->setTitle($psearchns);
 
     //show the notes and media for each tree (if none specified)
     //first do media
-    $pquery = "SELECT placelevel,latitude,longitude,zoom,notes,$places_table.gedcom$treename FROM $places_table$treejoin WHERE place = \"$psearch\"$wherestr2";
+    $pquery = "SELECT placelevel, latitude, longitude, zoom, notes, $places_table.gedcom$treename FROM $places_table$treejoin WHERE place = '$psearch'";
     $presult = tng_query($pquery) or die(uiTextSnippet('cannotexecutequery') . ": $pquery");
 
     $rightbranch = 1;
@@ -116,9 +88,6 @@ $headSection->setTitle($psearchns);
           echo "<br><div id='map' style=\"width: {$map['hstw']}; height: {$map['hsth']}; margin-bottom:20px;\" class=\"rounded10\"></div>\n";
           $usedplaces = array();
           $mapdrawn = true;
-        }
-        if (!$tngconfig['places1tree'] && $numtrees > 1) {
-          echo "<br><span><strong>" . uiTextSnippet('tree') . ":</strong> {$prow['treename']}</span><br>\n";
         }
         if ($prow['notes']) {
           echo "<span><strong>" . uiTextSnippet('notes') . ":</strong> " . nl2br($prow['notes']) . "</span><br>";
@@ -152,9 +121,7 @@ $headSection->setTitle($psearchns);
         }
       }
     }
-    if (!$tree && tng_num_rows($presult) == 1) {
-      $tree = $foundtree;
-    }
+    
     tng_free_result($presult);
 
     $placemedia = getMedia($psearch, 'L');

@@ -36,20 +36,14 @@ $query3 = "SELECT alinkID, entityID, eventID, people.lastname as lastname, peopl
     LEFT JOIN $repositories_table AS repositories ON ate.entityID = repositories.repoID AND ate.gedcom = repositories.gedcom
     LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID AND $families_table.gedcom = husbpeople.gedcom
     LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID AND $families_table.gedcom = wifepeople.gedcom
-    WHERE albumID = \"$albumID\" AND ate.gedcom = $treesTable.gedcom ORDER BY alinkID DESC";
+    WHERE albumID = '$albumID' ORDER BY alinkID DESC";
 $result3 = tng_query($query3) or die(uiTextSnippet('cannotexecutequery') . ": $query3");
 $numlinks = tng_num_rows($result3);
 
 if (!$thumbmaxw) {
   $thumbmaxw = 50;
 }
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-  $tree = $assignedtree;
-} else {
-  $wherestr = "";
-}
-$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifyalbum'));
@@ -247,22 +241,10 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
             <div id="albumlinks">
               <table style="padding-top:12px">
                 <tr>
-                  <td><?php echo uiTextSnippet('tree'); ?></td>
                   <td><?php echo uiTextSnippet('linktype'); ?></td>
                   <td colspan='2'><?php echo uiTextSnippet('id'); ?></td>
                 </tr>
                 <tr>
-                  <td>
-                    <select name="tree1">
-                      <?php
-                      $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
-                      while ($treerow = tng_fetch_assoc($treeresult)) {
-                        echo "  <option value=\"{$treerow['gedcom']}\">{$treerow['treename']}</option>\n";
-                      }
-                      tng_free_result($treeresult);
-                      ?>
-                    </select>
-                  </td>
                   <td>
                     <select name="linktype1">
                       <option value='I'><?php echo uiTextSnippet('person'); ?></option>
@@ -286,7 +268,7 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
                     &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
                   </td>
                   <td>
-                    <a href="#" title="<?php echo uiTextSnippet('find'); ?>" onclick="return findItem(findform.linktype1.options[findform.linktype1.selectedIndex].value, 'newlink1', null, findform.tree1.options[findform.tree1.selectedIndex].value, '<?php echo $assignedbranch; ?>', 'a_<?php echo $albumID; ?>');">
+                    <a href="#" title="<?php echo uiTextSnippet('find'); ?>" onclick="return findItem(findform.linktype1.options[findform.linktype1.selectedIndex].value, 'newlink1', null, '<?php echo $assignedbranch; ?>', 'a_<?php echo $albumID; ?>');">
                       <img class='icon-sm' src='svg/magnifying-glass.svg'>
                     </a>
                   </td>

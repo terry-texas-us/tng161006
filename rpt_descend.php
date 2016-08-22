@@ -24,11 +24,10 @@ $pdf->AddFont($hdrFont);
 $pdf->AddFont($hdrFont, 'B');
 $pdf->AddFont($rptFont);
 
-$result = getPersonData($tree, $personID);
+$result = getPersonData($personID);
 if ($result) {
   $row = tng_fetch_assoc($result);
-  $righttree = checktree($tree);
-  $rights = determineLivingPrivateRights($row, $righttree);
+  $rights = determineLivingPrivateRights($row);
   $row['allow_living'] = $rights['living'];
   $row['allow_private'] = $rights['private'];
   $namestr = getName($row);
@@ -158,14 +157,16 @@ $pdf->Output();
 // END PDF REPORT
 
 function getIndividual($key, $sex, $level, $trail, $num) {
-  global $j, $infoDescend, $numbering;
-  global $tree, $genperpage;
-  global $numgen, $startnum, $righttree;
+  global $j;
+  global $infoDescend;
+  global $numbering;
+  global $genperpage;
+  global $numgen;
+  global $startnum;
 
   if (is_null($j)) {
     $j = 1;
   }
-
   if ($sex == 'M') {
     $self = 'husband';
     $spouse = 'wife';
@@ -176,16 +177,16 @@ function getIndividual($key, $sex, $level, $trail, $num) {
     $spouseorder = 'wifeorder';
   }
 
-  $result = getSpouseFamilyMinimal($tree, $self, $key, $spouseorder);
+  $result = getSpouseFamilyMinimal($self, $key, $spouseorder);
   if ($result) {
     while ($row = tng_fetch_assoc($result)) {
       $spousestr = '';
       if ($row[$spouse]) {
-        $spouseresult = getPersonData($tree, $row[$spouse]);
+        $spouseresult = getPersonData($row[$spouse]);
         if ($spouseresult) {
           $spouserow = tng_fetch_assoc($spouseresult);
 
-          $srights = determineLivingPrivateRights($spouserow, $righttree);
+          $srights = determineLivingPrivateRights($spouserow);
           $spouserow['allow_living'] = $srights['living'];
           $spouserow['allow_private'] = $srights['private'];
 
@@ -227,7 +228,7 @@ function getIndividual($key, $sex, $level, $trail, $num) {
       }
       $infoDescend[$j]['vitals'] = $vitalinfo;
 
-      $result2 = getChildrenData($tree, $row['familyID']);
+      $result2 = getChildrenData($row['familyID']);
       $numkids = tng_num_rows($result2);
       if ($numkids) {
         // Note: need to also determine index of last child for the purpose of drawing a veritical line
@@ -237,7 +238,7 @@ function getIndividual($key, $sex, $level, $trail, $num) {
         while ($crow = tng_fetch_assoc($result2)) {
           $newtrail = "$trail,{$row['familyID']},{$crow['personID']}";
 
-          $crights = determineLivingPrivateRights($crow, $righttree);
+          $crights = determineLivingPrivateRights($crow);
           $crow['allow_living'] = $crights['living'];
           $crow['allow_private'] = $crights['private'];
 

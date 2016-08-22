@@ -11,15 +11,9 @@ if (!$allowAdd) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-
 require_once 'branches.php';
 
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-} else {
-  $wherestr = "";
-}
-$query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $result = tng_query($query);
 
 $revstar = checkReview('I');
@@ -72,22 +66,11 @@ $headSection->setTitle(uiTextSnippet('addnewperson'));
         </div>
         <div class='row'>
           <div class='col-md-6'>
-            <?php echo uiTextSnippet('tree'); ?>:
-            <select class='form-control' id='gedcom' name='tree1'>
-              <?php
-              $firsttree = $assignedtree;
-              while ($row = tng_fetch_assoc($result)) {
-                if (!$firsttree) {
-                  $firsttree = $row['gedcom'];
-                }
-                echo "  <option value='{$row['gedcom']}'>{$row['treename']}</option>\n";
-              }
-              ?>
-            </select>
+            
           </div>
           <div class='col-md-6'>
             <br>
-            <?php echo buildBranchSelectControl($row, $firsttree, $assignedbranch, $branches_table); ?>
+            <?php echo buildBranchSelectControl($row, $assignedbranch, $branches_table); ?>
           </div>
         </div>
       </header>
@@ -190,8 +173,6 @@ var allow_notes = false;
 
 var persfamID = "";
 
-var tree = '<?php echo $tree; ?>';
-
 $(document).ready(function() {
     generateID('person', document.form1.personID, document.form1.tree1);
     $('#person-id').addClass('form-control-success').css({'z-index' : '10'}).parent().addClass('has-success');
@@ -234,7 +215,7 @@ function trimCheckPersonRequired() {
     return rval;
 }
 
-<?php if (!$assignedtree && !$assignedbranch) { ?>
+<?php if (!$assignedbranch) { ?>
     
 //----
   var branchids = [];
@@ -248,7 +229,7 @@ function trimCheckPersonRequired() {
   $dispid = "";
   $dispname = "";
 
-  getBranchInfo($assignedtree, $treesTable, $branches_table, $dispid, $dispname);
+  getBranchInfo($treesTable, $branches_table, $dispid, $dispname);
   
   echo $dispid;
   echo $dispname;
@@ -257,7 +238,7 @@ function trimCheckPersonRequired() {
     
   <?php  
 } else {
-    $query = "SELECT description FROM $branches_table WHERE gedcom = \"$assignedtree\" AND branch = \"$assignedbranch\" ORDER BY description";
+    $query = "SELECT description FROM $branches_table WHERE branch = '$assignedbranch' ORDER BY description";
     $branchresult = tng_query($query);
     $branch = tng_fetch_assoc($branchresult);
     $dispname = $branch['description'];

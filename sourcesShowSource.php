@@ -19,7 +19,7 @@ $firstsectionsave = "";
 $tableid = "";
 $cellnumber = 0;
 
-$query = "SELECT sourceID, title, shorttitle, author, publisher, actualtext, reponame, $sources_table.repoID as repoID, callnum, other FROM $sources_table LEFT JOIN $repositories_table on $sources_table.repoID = $repositories_table.repoID AND $sources_table.gedcom = $repositories_table.gedcom WHERE $sources_table.sourceID = \"$sourceID\" AND $sources_table.gedcom = \"$tree\"";
+$query = "SELECT sourceID, title, shorttitle, author, publisher, actualtext, reponame, $sources_table.repoID as repoID, callnum, other FROM $sources_table LEFT JOIN $repositories_table on $sources_table.repoID = $repositories_table.repoID AND $sources_table.gedcom = $repositories_table.gedcom WHERE $sources_table.sourceID = '$sourceID'";
 $result = tng_query($query);
 $srcrow = tng_fetch_assoc($result);
 if (!tng_num_rows($result)) {
@@ -30,15 +30,14 @@ if (!tng_num_rows($result)) {
 tng_free_result($result);
 
 $query = "SELECT count(personID) as ccount FROM $citations_table, $people_table
-    WHERE $citations_table.sourceID = '$sourceID' AND $citations_table.gedcom = \"$tree\" AND $citations_table.persfamID = $people_table.personID AND $citations_table.gedcom = $people_table.gedcom
+    WHERE $citations_table.sourceID = '$sourceID' AND $citations_table.persfamID = $people_table.personID AND $citations_table.gedcom = $people_table.gedcom
     AND (living = '1' OR private = '1')";
 $sresult = tng_query($query);
 $srow = tng_fetch_assoc($sresult);
 $srcrow['living'] = $srcrow['private'] = $srow['ccount'] ? 1 : 0;
 
-$righttree = checktree($tree);
-$rightbranch = $righttree ? true : false;
-$rights = determineLivingPrivateRights($srcrow, $righttree, $rightbranch);
+$rightbranch = true;
+$rights = determineLivingPrivateRights($srcrow, $rightbranch);
 $srcrow['allow_living'] = $rights['living'];
 $srcrow['allow_private'] = $rights['private'];
 
@@ -47,7 +46,7 @@ tng_free_result($sresult);
 $srcnotes = getNotes($sourceID, 'S');
 getCitations($sourceID);
 
-$logstring = "<a href=\"sourcesShowSource.php?sourceID=$sourceID&amp;tree=$tree\">" . xmlcharacters(uiTextSnippet('source') . " {$srcrow['title']} ($sourceID)") . "</a>";
+$logstring = "<a href=\"sourcesShowSource.php?sourceID=$sourceID\">" . xmlcharacters(uiTextSnippet('source') . " {$srcrow['title']} ($sourceID)") . "</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -93,7 +92,7 @@ $headSection->setTitle($headtext);
       $sourcetext .= showEvent(array("text" => uiTextSnippet('callnum'), "fact" => $srcrow['callnum']));
     }
     if ($srcrow['reponame']) {
-      $sourcetext .= showEvent(array("text" => uiTextSnippet('repository'), "fact" => "<a href=\"repositoriesShowItem.php?repoID={$srcrow['repoID']}&amp;tree=$tree\">{$srcrow['reponame']}</a>"));
+      $sourcetext .= showEvent(array("text" => uiTextSnippet('repository'), "fact" => "<a href=\"repositoriesShowItem.php?repoID={$srcrow['repoID']}\">{$srcrow['reponame']}</a>"));
     }
     if ($srcrow['other']) {
       $sourcetext .= showEvent(array("text" => uiTextSnippet('other'), "fact" => $srcrow['other']));
@@ -108,7 +107,7 @@ $headSection->setTitle($headtext);
       $sourcetext .= showEvent($event);
     }
     if ($allow_admin && $allowEdit) {
-      $sourcetext .= showEvent(array("text" => uiTextSnippet('sourceid'), "date" => $sourceID, "place" => "<a href=\"sourcesEdit.php?sourceID=$sourceID&amp;tree=$tree&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>", "np" => 1));
+      $sourcetext .= showEvent(array("text" => uiTextSnippet('sourceid'), "date" => $sourceID, "place" => "<a href=\"sourcesEdit.php?sourceID=$sourceID&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>", "np" => 1));
     } else {
       $sourcetext .= showEvent(array("text" => uiTextSnippet('sourceid'), "date" => $sourceID));
     }
@@ -126,7 +125,7 @@ $headSection->setTitle($headtext);
       $foffsetstr = "";
       $newfoffset = "";
     }
-    $query = "SELECT DISTINCT $citations_table.persfamID, $citations_table.gedcom, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch FROM $citations_table, $people_table WHERE $citations_table.persfamID = $people_table.personID AND $citations_table.gedcom = $people_table.gedcom AND $citations_table.gedcom = \"$tree\" AND $citations_table.sourceID = '$sourceID' ORDER BY lastname, firstname LIMIT $ioffsetstr" . ($maxsearchresults + 1);
+    $query = "SELECT DISTINCT $citations_table.persfamID, $citations_table.gedcom, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch FROM $citations_table, $people_table WHERE $citations_table.persfamID = $people_table.personID AND $citations_table.gedcom = $people_table.gedcom AND $citations_table.sourceID = '$sourceID' ORDER BY lastname, firstname LIMIT $ioffsetstr" . ($maxsearchresults + 1);
     $sresult = tng_query($query);
     $numrows = tng_num_rows($sresult);
     $sourcelinktext = "";
@@ -135,7 +134,7 @@ $headSection->setTitle($headtext);
       if ($sourcelinktext) {
         $sourcelinktext .= "\n";
       }
-      $srights = determineLivingPrivateRights($srow, $righttree);
+      $srights = determineLivingPrivateRights($srow);
       $srow['allow_living'] = $srights['living'];
       $srow['allow_private'] = $srights['private'];
 
@@ -145,7 +144,7 @@ $headSection->setTitle($headtext);
       if (!$srow['allow_private']) {
         $noneprivate = 0;
       }
-      $sourcelinktext .= "<a href=\"peopleShowPerson.php?personID={$srow['persfamID']}&amp;tree={$srow['gedcom']}\">";
+      $sourcelinktext .= "<a href=\"peopleShowPerson.php?personID={$srow['persfamID']}\">";
       $sourcelinktext .= getName($srow);
       $sourcelinktext .= "</a>";
     }
@@ -156,11 +155,11 @@ $headSection->setTitle($headtext);
       $sourcetext .= showEvent(array("text" => uiTextSnippet('text'), "fact" => $srcrow['actualtext']));
     }
     if ($numrows > $maxsearchresults) {
-      $sourcelinktext .= "\n[<a href=\"sourcesShowSource.php?sourceID=$sourceID&amp;tree=$tree&amp;foffset=$foffset&amp;ioffset=" . ($newioffset + $maxsearchresults) . "\">" . uiTextSnippet('moreind') . "</a>]";
+      $sourcelinktext .= "\n[<a href=\"sourcesShowSource.php?sourceID=$sourceID&amp;foffset=$foffset&amp;ioffset=" . ($newioffset + $maxsearchresults) . "\">" . uiTextSnippet('moreind') . "</a>]";
     }
     tng_free_result($sresult);
 
-    $query = "SELECT DISTINCT $citations_table.persfamID, $citations_table.gedcom, familyID, husband, wife, living, private, branch FROM $citations_table, $families_table WHERE $citations_table.persfamID = $families_table.familyID AND $citations_table.gedcom = $families_table.gedcom AND $citations_table.gedcom = \"$tree\" AND $citations_table.sourceID = '$sourceID' ORDER BY familyID LIMIT $foffsetstr" . ($maxsearchresults + 1);
+    $query = "SELECT DISTINCT $citations_table.persfamID, $citations_table.gedcom, familyID, husband, wife, living, private, branch FROM $citations_table, $families_table WHERE $citations_table.persfamID = $families_table.familyID AND $citations_table.gedcom = $families_table.gedcom AND $citations_table.sourceID = '$sourceID' ORDER BY familyID LIMIT $foffsetstr" . ($maxsearchresults + 1);
     $sresult = tng_query($query);
     $numrows = tng_num_rows($sresult);
     $noneliving = $noneprivate = 1;
@@ -168,7 +167,7 @@ $headSection->setTitle($headtext);
       if ($sourcelinktext) {
         $sourcelinktext .= "\n";
       }
-      $srights = determineLivingPrivateRights($srow, $righttree);
+      $srights = determineLivingPrivateRights($srow);
       $srow['allow_living'] = $srights['living'];
       $srow['allow_private'] = $srights['private'];
 
@@ -178,10 +177,10 @@ $headSection->setTitle($headtext);
       if (!$srow['allow_private']) {
         $noneprivate = 0;
       }
-      $sourcelinktext .= "<a href=\"familiesShowFamily.php?familyID=$srow[familyID]&amp;tree={$srow['gedcom']}\">" . uiTextSnippet('family') . ": " . getFamilyName($srow) . "</a>";
+      $sourcelinktext .= "<a href=\"familiesShowFamily.php?familyID=$srow[familyID]\">" . uiTextSnippet('family') . ": " . getFamilyName($srow) . "</a>";
     }
     if ($numrows >= $maxsearchresults) {
-      $sourcelinktext .= "\n[<a href=\"sourcesShowSource.php?sourceID=$sourceID&amp;tree=$tree&amp;ioffset=$ioffset&amp;foffset=" . ($newfoffset + $maxsearchresults) . "\">" . uiTextSnippet('morefam') . "</a>]";
+      $sourcelinktext .= "\n[<a href=\"sourcesShowSource.php?sourceID=$sourceID&amp;ioffset=$ioffset&amp;foffset=" . ($newfoffset + $maxsearchresults) . "\">" . uiTextSnippet('morefam') . "</a>]";
     }
     tng_free_result($sresult);
 

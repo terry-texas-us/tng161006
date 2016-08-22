@@ -20,14 +20,7 @@ if (!$allowMediaEdit && !$allowMediaAdd) {
   header("Location: ajx_login.php?message=" . urlencode($message));
   exit;
 }
-
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-  $tree = $assignedtree;
-} else {
-  $wherestr = "";
-}
-$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
 $treenum = 0;
 while ($treerow = tng_fetch_assoc($treeresult)) {

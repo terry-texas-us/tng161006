@@ -34,9 +34,6 @@ if ($offset) {
   $tngpage = 1;
 }
 $wherestr = $searchstring ? "WHERE (gedcom LIKE \"%$searchstring%\" OR treename LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR owner LIKE \"%$searchstring%\")" : "";
-if ($assignedtree) {
-  $wherestr .= $wherestr ? " AND gedcom = \"$assignedtree\"" : "WHERE gedcom = \"$assignedtree\"";
-}
 $query = "SELECT gedcom, treename, description, owner, DATE_FORMAT(lastimportdate,\"%d %b %Y %H:%i:%s\") as lastimportdate, importfilename FROM $treesTable $wherestr ORDER BY treename LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
@@ -59,7 +56,7 @@ $headSection->setTitle(uiTextSnippet('trees'));
 <body id='admin-trees'>
   <section class='container'>
     <?php
-    $allow_add_tree = $assignedtree ? 0 : $allowAdd;
+    $allow_add_tree = $allowAdd;
     echo $adminHeaderSection->build('trees', $message);
     $navList = new navList('');
     //    $navList->appendItem([true, 'treesBrowse.php', uiTextSnippet('search'), 'findtree']);
@@ -114,11 +111,10 @@ $headSection->setTitle(uiTextSnippet('trees'));
           $actionstr .= "</a>\n";
         }
         if ($allowDelete && !$assignedbranch) {
-          if (!$assignedtree) {
-            $actionstr .= "<a href='#' onClick=\"if(confirm('" . uiTextSnippet('conftreedelete') . "' )){deleteIt('tree','xxx');} return false;\" title='" . uiTextSnippet('delete') . "'>\n";
-            $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
-            $actionstr .= "</a>\n";
-          }
+          $actionstr .= "<a href='#' onClick=\"if(confirm('" . uiTextSnippet('conftreedelete') . "' )){deleteIt('tree','xxx');} return false;\" title='" . uiTextSnippet('delete') . "'>\n";
+          $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
+          $actionstr .= "</a>\n";
+          
           $actionstr .= "<a href=\"treesClear.php?tree=xxx\" onClick=\"return confirm('" . uiTextSnippet('conftreeclear') . "' );\" title=\"" . uiTextSnippet('clear') . "\">\n";
           $actionstr .= "<img class='icon-sm' src='svg/axe.svg'>\n";
           $actionstr .= "</a>";

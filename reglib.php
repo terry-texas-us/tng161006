@@ -1,9 +1,6 @@
 <?php
 
 function getSpouses($personID, $sex) {
-  global $tree;
-  global $righttree;
-
   $spouses = array();
   if ($sex == 'M') {
     $self = 'husband';
@@ -18,22 +15,21 @@ function getSpouses($personID, $sex) {
       $self = $spouse = $spouseorder = "";
     }
   }
-
   if ($spouse) {
-    $result = getSpouseFamilyData($tree, $self, $personID, $spouseorder);
+    $result = getSpouseFamilyData($self, $personID, $spouseorder);
   } else {
-    $result = getSpouseFamilyDataUnion($tree, $personID, $spouseorder);
+    $result = getSpouseFamilyDataUnion($personID, $spouseorder);
   }
   $marrtot = tng_num_rows($result);
   if (!$marrtot) {
-    $result = getSpouseFamilyDataUnion($tree, $personID, $spouseorder);
+    $result = getSpouseFamilyDataUnion($personID, $spouseorder);
     $self = $spouse = $spouseorder = "";
   }
   while ($row = tng_fetch_assoc($result)) {
     if (!$spouse) {
       $spouse = $row['husband'] == $personID ? 'wife' : 'husband';
     }
-    $result2 = getPersonData($tree, $row[$spouse]);
+    $result2 = getPersonData($row[$spouse]);
     $spouserow = tng_fetch_assoc($result2);
     $spouserow['familyID'] = $row['familyID'];
     $spouserow['marrdate'] = $row['marrdate'];
@@ -43,8 +39,8 @@ function getSpouses($personID, $sex) {
     $spouserow['divplace'] = $row['divplace'];
     $spouserow['fliving'] = $row['living'];
 
-    $famrights = determineLivingPrivateRights($row, $righttree);
-    $sprights = determineLivingPrivateRights($spouserow, $righttree);
+    $famrights = determineLivingPrivateRights($row);
+    $sprights = determineLivingPrivateRights($spouserow);
     $spouserow['allow_living'] = $sprights['living'] && $famrights['living'];
     $spouserow['allow_private'] = $sprights['private'] && $famrights['private'];
 
@@ -57,9 +53,6 @@ function getSpouses($personID, $sex) {
 }
 
 function getSpouseParents($personID, $sex) {
-  global $tree;
-  global $righttree;
-
   if ($sex == 'M') {
     $childtext = uiTextSnippet('sonof');
   } else {
@@ -71,17 +64,17 @@ function getSpouseParents($personID, $sex) {
   }
 
   $allparents = "";
-  $parents = getChildFamily($tree, $personID, "ordernum");
+  $parents = getChildFamily($personID, "ordernum");
 
   if ($parents && tng_num_rows($parents)) {
     while ($parent = tng_fetch_assoc($parents)) {
       $parentstr = "";
-      $gotfather = getParentData($tree, $parent['familyID'], 'husband');
+      $gotfather = getParentData($parent['familyID'], 'husband');
 
       if ($gotfather) {
         $fathrow = tng_fetch_assoc($gotfather);
         if ($fathrow['firstname'] || $fathrow['lastname']) {
-          $frights = determineLivingPrivateRights($fathrow, $righttree);
+          $frights = determineLivingPrivateRights($fathrow);
           $fathrow['allow_living'] = $frights['living'];
           $fathrow['allow_private'] = $frights['private'];
           $fathname = getName($fathrow);
@@ -92,17 +85,17 @@ function getSpouseParents($personID, $sex) {
           if ($fathrow['name'] == uiTextSnippet('private')) {
             $fathrow['firstname'] = uiTextSnippet('private');
           }
-          $parentstr .= "<a href='#' onclick=\"if(jQuery('#p{$fathrow['personID']}').length) {jQuery('html, body').animate({scrollTop: jQuery('#p{$fathrow['personID']}').offset().top-10},'slow');}else{window.location.href='peopleShowPerson.php?personID={$fathrow['personID']}&amp;tree=$tree';} return false;\">$fathname</a>";
+          $parentstr .= "<a href='#' onclick=\"if(jQuery('#p{$fathrow['personID']}').length) {jQuery('html, body').animate({scrollTop: jQuery('#p{$fathrow['personID']}').offset().top-10},'slow');}else{window.location.href='peopleShowPerson.php?personID={$fathrow['personID']}';} return false;\">$fathname</a>";
         }
         tng_free_result($gotfather);
       }
 
-      $gotmother = getParentData($tree, $parent['familyID'], 'wife');
+      $gotmother = getParentData($parent['familyID'], 'wife');
 
       if ($gotmother) {
         $mothrow = tng_fetch_assoc($gotmother);
         if ($mothrow['firstname'] || $mothrow['lastname']) {
-          $mrights = determineLivingPrivateRights($mothrow, $righttree);
+          $mrights = determineLivingPrivateRights($mothrow);
           $mothrow['allow_living'] = $mrights['living'];
           $mothrow['allow_private'] = $mrights['private'];
           $mothname = getName($mothrow);
@@ -115,7 +108,7 @@ function getSpouseParents($personID, $sex) {
           if ($parentstr) {
             $parentstr .= " " . uiTextSnippet('and') . " ";
           }
-          $parentstr .= "<a href='#' onclick=\"if(jQuery('#p{$mothrow['personID']}').length) {jQuery('html, body').animate({scrollTop: jQuery('#p{$mothrow['personID']}').offset().top-10},'slow');}else{window.location.href='peopleShowPerson.php?personID={$mothrow['personID']}&amp;tree=$tree';} return false;\">$mothname</a>";
+          $parentstr .= "<a href='#' onclick=\"if(jQuery('#p{$mothrow['personID']}').length) {jQuery('html, body').animate({scrollTop: jQuery('#p{$mothrow['personID']}').offset().top-10},'slow');}else{window.location.href='peopleShowPerson.php?personID={$mothrow['personID']}';} return false;\">$mothname</a>";
         }
         tng_free_result($gotmother);
       }
@@ -221,14 +214,13 @@ function getSpouseDates($row) {
 }
 
 function getOtherEvents($row) {
-  global $tree;
   global $eventtypes_table;
   global $events_table;
   global $pedigree;
 
   $otherEvents = "";
   if ($pedigree['regnotes'] && $row['allow_living'] && $row['allow_private']) {
-    $query = "SELECT display, eventdate, eventdatetr, eventplace, age, agency, cause, addressID, info, tag, description, eventID FROM ($events_table, $eventtypes_table) WHERE persfamID = \"{$row['personID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND gedcom = \"$tree\" AND keep = \"1\" AND parenttag = \"\" ORDER BY eventdatetr, ordernum, tag, description, info, eventID";
+    $query = "SELECT display, eventdate, eventdatetr, eventplace, age, agency, cause, addressID, info, tag, description, eventID FROM ($events_table, $eventtypes_table) WHERE persfamID = \"{$row['personID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND keep = \"1\" AND parenttag = \"\" ORDER BY eventdatetr, ordernum, tag, description, info, eventID";
     $custevents = tng_query($query);
     while ($custevent = tng_fetch_assoc($custevents)) {
       $displayval = getEventDisplay($custevent['display']);
@@ -268,7 +260,10 @@ function getOtherEvents($row) {
 }
 
 function getRegNotes($persfamID, $flag) {
-  global $notelinks_table, $xnotes_table, $tree, $eventtypes_table, $events_table;
+  global $notelinks_table;
+  global $xnotes_table;
+  global $eventtypes_table;
+  global $events_table;
 
   $custnotes = array();
   $gennotes = array();
@@ -293,7 +288,7 @@ function getRegNotes($persfamID, $flag) {
     LEFT JOIN  $xnotes_table on $notelinks_table.xnoteID = $xnotes_table.ID AND $notelinks_table.gedcom = $xnotes_table.gedcom 
     LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID 
     LEFT JOIN $eventtypes_table on $eventtypes_table.eventtypeID = $events_table.eventtypeID 
-    WHERE $notelinks_table.persfamID=\"$persfamID\" AND $notelinks_table.gedcom=\"$tree\" AND secret!=\"1\"
+    WHERE $notelinks_table.persfamID = '$persfamID' AND secret!=\"1\"
     ORDER BY eventdatetr, $eventtypes_table.ordernum, tag";
   $notelinks = tng_query($query);
 

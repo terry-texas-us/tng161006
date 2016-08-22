@@ -10,7 +10,7 @@ function editPerson(personID, slot, gender) {
         else if (gender === 'F')
             spouseorder = 'wifeorder';
         persfamID = personID;
-        tnglitbox = new ModalDialog('ajx_editperson.php?personID=' + personID + '&tree=' + tree + '&slot=' + slot, {size: 'modal-lg'});
+        tnglitbox = new ModalDialog('ajx_editperson.php?personID=' + personID + '&slot=' + slot, {size: 'modal-lg'});
         startSortPerson();
     }
     return false;
@@ -23,7 +23,7 @@ function newPerson(gender, type, father, familyID) {
     allow_cites = false;
     allow_notes = false;
     newpersongender = gender;
-    nplitbox = new ModalDialog('ajx_newperson.php?tree=' + tree + '&gender=' + gender + '&type=' + type + '&father=' + father + '&familyID=' + familyID, {size: 'modal-lg'});
+    nplitbox = new ModalDialog('ajx_newperson.php?gender=' + gender + '&type=' + type + '&father=' + father + '&familyID=' + familyID, {size: 'modal-lg'});
     generateIDajax('person', 'personID');
     $('#firstname').focus();
     return false;
@@ -109,7 +109,7 @@ function editFamily(familyID, slot, lastperson) {
     allow_cites = true;
     allow_notes = true;
     persfamID = familyID;
-    tnglitbox = new ModalDialog('ajx_editfamily.php?familyID=' + familyID + '&tree=' + tree + '&lastperson=' + lastperson + '&slot=' + slot, {size: 'modal-lg'});
+    tnglitbox = new ModalDialog('ajx_editfamily.php?familyID=' + familyID + '&lastperson=' + lastperson + '&slot=' + slot, {size: 'modal-lg'});
     startSortFamily();
     return false;
 }
@@ -117,7 +117,7 @@ function editFamily(familyID, slot, lastperson) {
 function newFamily(slot, child) {
     allow_cites = false;
     allow_notes = false;
-    tnglitbox = new ModalDialog('ajx_newfamily.php?tree=' + tree + '&child=' + child + '&slot=' + slot, {size: 'modal-lg'});
+    tnglitbox = new ModalDialog('ajx_newfamily.php?child=' + child + '&slot=' + slot, {size: 'modal-lg'});
     generateIDajax('family', 'familyID');
     return false;
 }
@@ -138,7 +138,7 @@ function updateFamily(form, slot, script) {
                 scm1 /= 2;
                 scm1 = Math.floor(scm1);
             }
-            var params = {generations: getgens, tree: tree, display: display, backpers1: form.lastperson.value, famc1: startfam};
+            var params = {generations: getgens, display: display, backpers1: form.lastperson.value, famc1: startfam};
             $.ajax({
                 url: 'ajx_pedjson.php?',
                 data: params,
@@ -184,7 +184,7 @@ function startSortPerson() {
 function updateParentsOrder(id) {
     var parentlist = $('#parents').sortable('toArray');
 
-    var params = {sequence: parentlist.join(','), action: 'parentorder', personID: persfamID, tree: tree};
+    var params = {sequence: parentlist.join(','), action: 'parentorder', personID: persfamID};
     $.ajax({
         url: 'ajx_updateorder.php',
         data: params,
@@ -195,7 +195,7 @@ function updateParentsOrder(id) {
 function updateSpousesOrder(id) {
     var spouselist = $('#spouses').sortable('toArray');
 
-    var params = {sequence: spouselist.join(','), action: 'spouseorder', tree: tree, spouseorder: spouseorder};
+    var params = {sequence: spouselist.join(','), action: 'spouseorder', spouseorder: spouseorder};
     $.ajax({
         url: 'ajx_updateorder.php',
         data: params,
@@ -205,7 +205,7 @@ function updateSpousesOrder(id) {
 
 function unlinkParents(familyID) {
     if (confirm(textSnippet('confunlinkchild'))) {
-        var params = {action: 'parentunlink', familyID: familyID, personID: persfamID, tree: tree};
+        var params = {action: 'parentunlink', familyID: familyID, personID: persfamID};
         $.ajax({
             url: 'ajx_updateorder.php',
             data: params,
@@ -224,7 +224,7 @@ function unlinkParents(familyID) {
 function updateChildrenOrder(id) {
     var childlist = $('#childrenlist').sortable('toArray');
 
-    var params = {sequence: childlist.join(','), action: 'childorder', familyID: persfamID, tree: tree};
+    var params = {sequence: childlist.join(','), action: 'childorder', familyID: persfamID};
     $.ajax({
         url: 'ajx_updateorder.php',
         data: params,
@@ -277,7 +277,7 @@ function validatePerson(form) {
 }
 
 function generateIDajax(type, dest) {
-    var params = {type: type, tree: tree};
+    var params = {type: type};
     $.ajax({
         url: 'admin_generateID.php',
         data: params,
@@ -289,7 +289,7 @@ function generateIDajax(type, dest) {
 }
 
 function checkIDajax(checkID, type, dest) {
-    var params = {checkID: checkID, type: type, tree: tree};
+    var params = {checkID: checkID, type: type};
     $.ajax({
         url: 'admin_checkID.php',
         data: params,

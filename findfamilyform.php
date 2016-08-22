@@ -15,7 +15,7 @@ if ($mediaID) {
 }
 $bailtext = $mediaoption ? uiTextSnippet('finish') : uiTextSnippet('cancel');
 
-$applyfilter = "applyFilter({form:'findform1',fieldId:'myhusbname',myhusbname:$('#myhusbname').val(),mywifename:$('#mywifename').val(),myfamilyID:$('#myfamilyID').val(),type:'F',tree:'$tree',branch:'branch',destdiv:'findresults'$mediaoption});";
+$applyfilter = "applyFilter({form:'findform1', fieldId:'myhusbname', myhusbname:$('#myhusbname').val(), mywifename:$('#mywifename').val(), myfamilyID:$('#myfamilyID').val(), type:'F', branch:'branch', destdiv:'findresults'$mediaoption});";
 
 header("Content-type:text/html; charset=" . $session_charset);
 ?>
@@ -41,7 +41,6 @@ header("Content-type:text/html; charset=" . $session_charset);
                mywifename:$('#mywifename').val(),
                myfamilyID:$('#myfamilyID').val(),
                type:'F',
-               tree:'<?php echo $tree; ?>',
                branch:'<?php echo $branch; ?>',
                destdiv:'findresults'<?php echo $mediaoption; ?>
              });">
@@ -54,7 +53,6 @@ header("Content-type:text/html; charset=" . $session_charset);
               mywifename:$('#mywifename').val(),
               myfamilyID:$('#myfamilyID').val(),
               type:'F',
-              tree:'<?php echo $tree; ?>',
               branch:'<?php echo $branch; ?>',
               destdiv:'findresults'<?php echo $mediaoption; ?>
             });">
@@ -67,7 +65,6 @@ header("Content-type:text/html; charset=" . $session_charset);
               mywifename:$('#mywifename').val(),
               myfamilyID:$('#myfamilyID').val(),
               type:'F',
-              tree:'<?php echo $tree; ?>',
               branch:'<?php echo $branch; ?>',
               destdiv:'findresults'<?php echo $mediaoption; ?>
             });">

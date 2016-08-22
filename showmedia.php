@@ -25,9 +25,6 @@ if ($medialinkID) {
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   $personID = $row['personID'];
-  if (!$requirelogin || !$treerestrict || !$assignedtree) {
-    $tree = $row['gedcom'];
-  }
   $ordernum = $row['ordernum'];
   $mediatypeID = $row['mediatypeID'];
   $linktype = $row['linktype'];
@@ -51,14 +48,6 @@ if ($medialinkID) {
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   $mediatypeID = $row['mediatypeID'];
-  if (!$requirelogin || !$treerestrict || !$assignedtree) {
-    $tree = $row['gedcom'];
-  }
-}
-//redirect if we're not supposed to be here
-if ($requirelogin && $treerestrict && $assignedtree && $row['gedcom'] && $row['gedcom'] != $assignedtree) {
-  header("location: mediaShow.php?");
-  exit;
 }
 if (!tng_num_rows($result)) {
   tng_free_result($result);
@@ -91,14 +80,14 @@ if ($personID && !$albumlinkID) {
     $rightbranch = 1;
   } else {
     if ($linktype == 'F') {
-      $query = "SELECT familyID, husband, wife, living, marrdate, gedcom, branch FROM $families_table WHERE familyID = \"$personID\" AND gedcom = \"$tree\"";
+      $query = "SELECT familyID, husband, wife, living, marrdate, gedcom, branch FROM $families_table WHERE familyID = '$personID'";
     } elseif ($linktype == 'S') {
-      $query = "SELECT title FROM $sources_table WHERE sourceID = \"$personID\" AND gedcom = \"$tree\"";
+      $query = "SELECT title FROM $sources_table WHERE sourceID = '$personID'";
     } elseif ($linktype == 'R') {
-      $query = "SELECT reponame FROM $repositories_table WHERE repoID = \"$personID\" AND gedcom = \"$tree\"";
+      $query = "SELECT reponame FROM $repositories_table WHERE repoID = '$personID'";
     } elseif ($linktype == 'I') {
       $query = "SELECT lastname, firstname, prefix, suffix, title, lnprefix, living, private, branch, $people_table.gedcom, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, deathdatetr, burialdate, burialdatetr, sex, disallowgedcreate, IF(birthdatetr !='0000-00-00',YEAR(birthdatetr),YEAR(altbirthdatetr)) as birth, IF(deathdatetr !='0000-00-00',YEAR(deathdatetr),YEAR(burialdatetr)) as death
-        FROM $people_table, $treesTable WHERE personID = \"$personID\" AND $people_table.gedcom = \"$tree\" AND $people_table.gedcom = $treesTable.gedcom";
+        FROM $people_table, $treesTable WHERE personID = '$personID'";
     }
     $result2 = tng_query($query);
     if ($result2) {
@@ -107,9 +96,8 @@ if ($personID && !$albumlinkID) {
         $row['allow_living'] = $row['allow_private'] = 1;
         $rightbranch = 1;
       } else {
-        $righttree = checktree($tree);
-        $rightbranch = $righttree ? checkbranch($row['branch']) : false;
-        $rights = determineLivingPrivateRights($row, $righttree, $rightbranch);
+        $rightbranch = checkbranch($row['branch']);
+        $rights = determineLivingPrivateRights($row, $rightbranch);
         $row['allow_living'] = $rights['living'];
         $row['allow_private'] = $rights['private'];
         $disallowgedcreate = $row['disallowgedcreate'];
@@ -119,7 +107,7 @@ if ($personID && !$albumlinkID) {
   }
 }
 
-$livinginfo = findLivingPrivate($mediaID, $tree);
+$livinginfo = findLivingPrivate($mediaID);
 $noneliving = $livinginfo['noneliving'] && $livinginfo['noneprivate'];
 
 $showPhotoInfo = $imgrow['alwayson'] || $noneliving;
@@ -130,7 +118,7 @@ $nonamesloc = $livinginfo['private'] ? $tngconfig['nnpriv'] : $nonames;
 
 if ($noneliving || !$nonamesloc || $imgrow['alwayson']) {
   $description = preg_replace("/\"/", "&#34;", $mediadescription);
-  $notes = nl2br(getXrefNotes($medianotes, $tree));
+  $notes = nl2br(getXrefNotes($medianotes));
   $mapnote = $info['gotmap'] ? "<p>" . uiTextSnippet('mediamaptext') . "</p>\n" : "";
 } else {
   $description = $notes = ($livinginfo['private'] ? uiTextSnippet('private') : uiTextSnippet('living'));

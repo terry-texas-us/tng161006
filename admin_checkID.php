@@ -8,22 +8,22 @@ require 'checklogin.php';
 require 'prefixes.php';
 
 if ($type == "person") {
-  $query = "SELECT personID FROM $people_table WHERE personID = \"$checkID\" AND gedcom = \"$tree\"";
+  $query = "SELECT personID FROM $people_table WHERE personID = '$checkID'";
   $prefix = $personprefix;
   $suffix = $personsuffix;
 } else {
   if ($type == "family") {
-    $query = "SELECT familyID FROM $families_table WHERE familyID = \"$checkID\" AND gedcom = \"$tree\"";
+    $query = "SELECT familyID FROM $families_table WHERE familyID = '$checkID'";
     $prefix = $familyprefix;
     $suffix = $familysuffix;
   } else {
     if ($type == "source") {
-      $query = "SELECT sourceID FROM $sources_table WHERE sourceID = \"$checkID\" AND gedcom = \"$tree\"";
+      $query = "SELECT sourceID FROM $sources_table WHERE sourceID = '$checkID'";
       $prefix = $sourceprefix;
       $suffix = $sourcesuffix;
     } else {
       if ($type == "repo") {
-        $query = "SELECT repoID FROM $repositories_table WHERE repoID = \"$checkID\" AND gedcom = \"$tree\"";
+        $query = "SELECT repoID FROM $repositories_table WHERE repoID = '$checkID'";
         $prefix = $repoprefix;
         $suffix = $reposuffix;
       }

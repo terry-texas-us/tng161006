@@ -7,8 +7,7 @@ require 'checklogin.php';
 
 $error_pfx = $ajax ? "error:" : "";
 
-$tree = $tree1;
-if (!$allowAdd || ($assignedtree && $assignedtree != $tree)) {
+if (!$allowAdd) {
   $message = uiTextSnippet('norights');
   if ($ajax) {
     echo $error_pfx . $message;
@@ -41,13 +40,14 @@ $newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
 if (!$repoID) {
   $repoID = 0;
 }
-$query = "INSERT INTO $sources_table (sourceID,shorttitle,title,author,callnum,publisher,repoID,actualtext,changedate,gedcom,changedby,type,other,comments) VALUES (\"$sourceID\",\"$shorttitle\",\"$title\",\"$author\",\"$callnum\",\"$publisher\",\"$repoID\",\"$actualtext\",\"$newdate\",\"$tree1\",\"$currentuser\",\"\",\"\",\"\")";
+$query = "INSERT INTO $sources_table (sourceID, shorttitle, title, author, callnum, publisher, repoID, actualtext, changedate, gedcom, changedby, type, other, comments) "
+    . "VALUES ('$sourceID', '$shorttitle', '$title', '$author', '$callnum', '$publisher', '$repoID', '$actualtext', '$newdate', '', '$currentuser', '', '', '')";
 $result = tng_query($query) or die($error_pfx . uiTextSnippet('cannotexecutequery') . ": $query");
 
-adminwritelog("<a href=\"sourcesEdit.php?sourceID=$sourceID&amp;tree=$tree\">" . uiTextSnippet('addnewsource') . ": $tree/$sourceID</a>");
+adminwritelog("<a href=\"sourcesEdit.php?sourceID=$sourceID\">" . uiTextSnippet('addnewsource') . ": $sourceID</a>");
 
 if (isset($ajax)) {
   echo $sourceID;
 } else {
-  header("Location: sourcesEdit.php?sourceID=$sourceID&tree=$tree&added=1");
+  header("Location: sourcesEdit.php?sourceID=$sourceID&added=1");
 }

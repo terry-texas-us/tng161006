@@ -12,7 +12,7 @@ $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
 
-if (!$allowEdit || ($assignedtree && $assignedtree != $row['gedcom'])) {
+if (!$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;

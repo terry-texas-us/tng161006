@@ -6,14 +6,12 @@ if (!$personID) {
 }
 require 'checklogin.php';
 
-$query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch, living, private, gedcom FROM $people_table
-    WHERE personID=\"$personID\" AND gedcom=\"$tree\"";
+$query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch, living, private, gedcom FROM $people_table WHERE personID = '$personID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 
-$righttree = checktree($tree);
-$rightbranch = $righttree ? checkbranch($row['branch']) : false;
-$rights = determineLivingPrivateRights($row, $righttree, $rightbranch);
+$rightbranch = checkbranch($row['branch']);
+$rights = determineLivingPrivateRights($row, $rightbranch);
 
 $row['allow_living'] = $rights['living'];
 $row['allow_private'] = $rights['private'];
@@ -39,7 +37,7 @@ require_once 'eventlib.php';
         echo buildEventRow('endldate', 'endlplace', 'ENDL', $personID);
         // parents
         echo "<div id='parents'>\n";
-          $query = "SELECT personID, familyID, sealdate, sealplace, frel, mrel FROM $children_table WHERE personID = \"$personID\" AND gedcom = \"$tree\" ORDER BY parentorder";
+          $query = "SELECT personID, familyID, sealdate, sealplace, frel, mrel FROM $children_table WHERE personID = '$personID' ORDER BY parentorder";
           $parents = tng_query($query);
           $parentcount = tng_num_rows($parents);
 
@@ -49,7 +47,7 @@ require_once 'eventlib.php';
             echo buildParentRow($parent, 'husband', 'father');
             echo buildParentRow($parent, 'wife', 'mother');
 
-            $citquery = "SELECT citationID FROM $citations_table WHERE persfamID = \"$personID" . "::" . "{$familyId}\" AND gedcom = \"$tree\"";
+            $citquery = "SELECT citationID FROM $citations_table WHERE persfamID = \"$personID" . "::" . "{$familyId}\"";
             $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
             $iconColor = tng_num_rows($citresult) ? "icon-info" : "icon-muted";
             tng_free_result($citresult);

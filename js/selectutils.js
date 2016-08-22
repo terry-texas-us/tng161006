@@ -103,9 +103,9 @@ function checkID(id, type, dest, treefield) {
     }
 }
 
-function openChangeTree(entity, tree, id) {
+function openChangeTree(entity, id) {
     'use strict';
-    var url = 'treesChange.php?entity=' + entity + '&oldtree=' + tree + '&entityID=' + id;
+    var url = 'treesChange.php?entity=' + entity + '&entityID=' + id;
     tnglitbox = new ModalDialog(url);
     return false;
 }
@@ -204,9 +204,9 @@ function editEvent(eventID) {
     return false;
 }
 
-function newEvent(prefix, persfamID, tree) {
+function newEvent(prefix, persfamID) {
     'use strict';
-    tnglitbox = new ModalDialog('admin_newevent.php?prefix=' + prefix + '&persfamID=' + persfamID + '&tree=' + tree);
+    tnglitbox = new ModalDialog('admin_newevent.php?prefix=' + prefix + '&persfamID=' + persfamID);
     return false;
 }
 
@@ -454,49 +454,51 @@ function openFindPlaceForm(field, temple) {
     return false;
 }
 
-function findItem(type, field, titlediv, findtree, findbranch, media) {
+function findItem(type, field, titlediv, branch, media) {
     'use strict';
-    var newpage;
+    var url;
+    var branchstr = branch ? 'branch=' + branch : '';
+    var mediastr = '';
     var mediaparts;
-    var mediastr;
-    var branchstr;
     var startfield;
 
     if (media) {
+        if (branch) {
+            mediastr = '&amp;';
+        }
         mediaparts = media.split('_');
         if (mediaparts[0] === 'm') {
-            mediastr = '&mediaID=' + mediaparts[1];
+            mediastr += 'mediaID=' + mediaparts[1];
         } else {
-            mediastr = '&albumID=' + mediaparts[1];
+            mediastr += 'albumID=' + mediaparts[1];
         }
-    } else {
-        mediastr = '';
     }
-    //activebox = field;
     switch (type) {
     case 'I':
-        newpage = "findpersonform.php";
+        url = "findpersonform.php";
         startfield = "myflastname";
         break;
     case 'F':
-        newpage = "findfamilyform.php";
+        url = "findfamilyform.php";
         startfield = "myhusbname";
         break;
     case 'S':
-        newpage = "findsourceform.php";
+        url = "findsourceform.php";
         startfield = "mytitle";
         break;
     case 'R':
-        newpage = "findrepoform.php";
+        url = "findrepoform.php";
         startfield = "mytitle";
         break;
     case 'L':
-        newpage = "findplaceform.php";
+        url = "findplaceform.php";
         startfield = "myplace";
         break;
     }
-    branchstr = findbranch ? '&branch=' + findbranch : '';
-    seclitbox = new ModalDialog(newpage + '?tree=' + findtree + branchstr + mediastr);
+    if (branch || media) {
+        url += '?';
+    }
+    seclitbox = new ModalDialog(url + branchstr + mediastr);
     initFilter(null, seclitbox, field, titlediv);
     $('#' + startfield).focus();
 
@@ -635,7 +637,7 @@ function retItem(id, place) {
         y2 = y1 + current.height();
 
         maptree = $('#maptree').val();
-        area = '<area coords=\"' + x1 + ',' + y1 + ',' + x2 + ',' + y2 + '\" href=\"' + 'peopleShowPerson.php?personID=' + id + '&amp;tree=' + maptree + '\" title=\"' + returntext.replace(/\"/g, "'") + '\" />';
+        area = '<area coords=\"' + x1 + ',' + y1 + ',' + x2 + ',' + y2 + '\" href=\"' + 'peopleShowPerson.php?personID=' + id + '\" title=\"' + returntext.replace(/\"/g, "'") + '\" />';
         $('#imagemap').val($('#imagemap').val() + area);
 
         current.remove();

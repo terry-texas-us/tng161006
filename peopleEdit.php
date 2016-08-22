@@ -8,7 +8,7 @@ require 'checklogin.php';
 initMediaTypes();
 
 $personID = ucfirst($personID);
-$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $people_table WHERE personID = \"$personID\" and gedcom = \"$tree\"";
+$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $people_table WHERE personID = '$personID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -26,7 +26,7 @@ $row['confplace'] = preg_replace("/\"/", "&#34;", $row['confplace']);
 $row['initplace'] = preg_replace("/\"/", "&#34;", $row['initplace']);
 $row['endlplace'] = preg_replace("/\"/", "&#34;", $row['endlplace']);
 
-if ((!$allowEdit && (!$allowAdd || !$added)) || ($assignedtree && $assignedtree != $tree) || !checkbranch($row['branch'])) {
+if ((!$allowEdit && (!$allowAdd || !$added)) || !checkbranch($row['branch'])) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -57,21 +57,15 @@ if ($row['sex'] == 'M') {
 }
 $tng_search_people = $_SESSION['tng_search_people'];
 
-$righttree = checktree($tree);
-$rightbranch = $righttree ? checkbranch($row['branch']) : false;
+$rightbranch = checkbranch($row['branch']);
 
-$rights = determineLivingPrivateRights($row, $righttree, $rightbranch);
+$rights = determineLivingPrivateRights($row, $rightbranch);
 $row['allow_living'] = $rights['living'];
 $row['allow_private'] = $rights['private'];
 
 $namestr = getName($row);
 
-$query = "SELECT treename FROM $treesTable WHERE gedcom = \"$tree\"";
-$result = tng_query($query);
-$treerow = tng_fetch_assoc($result);
-tng_free_result($result);
-
-$query = "SELECT DISTINCT eventID as eventID FROM $notelinks_table WHERE persfamID=\"$personID\" AND gedcom =\"$tree\"";
+$query = "SELECT DISTINCT eventID as eventID FROM $notelinks_table WHERE persfamID = '$personID'";
 $notelinks = tng_query($query);
 $gotnotes = array();
 while ($note = tng_fetch_assoc($notelinks)) {
@@ -82,7 +76,7 @@ while ($note = tng_fetch_assoc($notelinks)) {
 }
 tng_free_result($notelinks);
 
-$citquery = "SELECT DISTINCT eventID FROM $citations_table WHERE persfamID = \"$personID\" AND gedcom = \"$tree\"";
+$citquery = "SELECT DISTINCT eventID FROM $citations_table WHERE persfamID = '$personID'";
 $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
 $gotcites = array();
 while ($cite = tng_fetch_assoc($citresult)) {
@@ -93,13 +87,13 @@ while ($cite = tng_fetch_assoc($citresult)) {
 }
 tng_free_result($citresult);
 
-$assocquery = "SELECT count(assocID) as acount FROM $assoc_table WHERE personID = \"$personID\" AND gedcom = \"$tree\"";
+$assocquery = "SELECT count(assocID) as acount FROM $assoc_table WHERE personID = '$personID'";
 $assocresult = tng_query($assocquery) or die(uiTextSnippet('cannotexecutequery') . ": $assocquery");
 $assocrow = tng_fetch_assoc($assocresult);
 $gotassoc = $assocrow['acount'] ? "*" : "";
 tng_free_result($assocresult);
 
-$query = "SELECT parenttag FROM $events_table WHERE persfamID=\"$personID\" AND gedcom =\"$tree\"";
+$query = "SELECT parenttag FROM $events_table WHERE persfamID = '$personID'";
 $morelinks = tng_query($query);
 $gotmore = array();
 while ($more = tng_fetch_assoc($morelinks)) {
@@ -126,7 +120,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
     $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
     $navList->appendItem([$allowEdit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
     $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
-    //    $navList->appendItem([$allowEdit, "peopleEdit.php?personID=$personID&amp;tree=$tree", uiTextSnippet('edit'), "edit"]);
+    //    $navList->appendItem([$allowEdit, "peopleEdit.php?personID=$personID", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <div id="thumbholder" style="margin-right: 5px; <?php if (!$photo) {echo "display: none";} ?>">
@@ -137,10 +131,10 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
       <?php
       if ($editconflict) {
         echo "<br><p>" . uiTextSnippet('editconflict') . "</p>\n";
-        echo "<p><strong><a href='peopleEdit.php?personID=$personID&tree=$tree'>" . uiTextSnippet('retry') . "</a></strong></p>\n";
+        echo "<p><strong><a href='peopleEdit.php?personID=$personID'>" . uiTextSnippet('retry') . "</a></strong></p>\n";
       } else {
         $iconColor = $gotassoc ? "icon-info" : "icon-muted";
-        echo "<a id='person-associations' href='#' title='" . uiTextSnippet('associations') . "' data-person-id='$personID' data-tree='$tree'>\n";
+        echo "<a id='person-associations' href='#' title='" . uiTextSnippet('associations') . "' data-person-id='$personID'>\n";
         echo "<img class='icon-md icon-associations $iconColor' data-src='svg/connections.svg'>\n";
         echo "</a>\n";
 
@@ -158,10 +152,10 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
       <br><br>
     </div>
     <br>
-    <a href="peopleShowPerson.php?personID=<?php echo $personID; ?>&amp;tree=<?php echo $tree; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
+    <a href="peopleShowPerson.php?personID=<?php echo $personID; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
       <img class='icon-sm' src='svg/eye.svg'>
     </a>
-    <?php if ($allowAdd && (!$assignedtree || $assignedtree == $tree)) { ?>
+    <?php if ($allowAdd) { ?>
       <a id='addmedia-person' href='#'><?php echo uiTextSnippet('addmedia'); ?></a>
     <?php } ?>
 
@@ -170,16 +164,10 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
         <div id='person-names'>
           <div class='row'>
             <div class='col-md-4'>
-              <?php echo uiTextSnippet('tree') . ":&nbsp;" . $treerow['treename'] . "&nbsp;"; ?>
-              <span>( 
-                <a id='change-tree' href='#' data-tree='<?php echo $tree; ?>' data-person-id='<?php echo $personID; ?>'>
-                  <img src='img/ArrowDown.gif'><?php echo uiTextSnippet('edit'); ?>
-                </a>)
-              </span>
             </div>
             <div class='col-md-4'>
               <?php require_once 'branches.php'; ?>
-              <?php echo buildBranchSelectControl($row, $tree, $assignedbranch, $branches_table); ?>
+              <?php echo buildBranchSelectControl($row, $assignedbranch, $branches_table); ?>
             </div>
             <div class='col-md-4'>
               <div class='checkbox-inline'>
@@ -296,19 +284,19 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
           }
           ?>
           <?php echo uiTextSnippet('otherevents'); ?>:
-            <input id='addnew-event-person' type='button' value=" <?php echo uiTextSnippet('addnew') ?> " data-person-id='<?php echo $personID; ?>' data-tree='<?php echo $tree; ?>'>
+            <input id='addnew-event-person' type='button' value=" <?php echo uiTextSnippet('addnew') ?> " data-person-id='<?php echo $personID; ?>'>
           <?php
           showCustEvents($personID);
           ?>
         </div> <!-- #person-events -->
         
         <?php
-        $query = "SELECT personID, familyID, sealdate, sealplace, frel, mrel FROM $children_table WHERE personID = \"$personID\" AND gedcom = \"$tree\" ORDER BY parentorder";
+        $query = "SELECT personID, familyID, sealdate, sealplace, frel, mrel FROM $children_table WHERE personID = '$personID' ORDER BY parentorder";
         $parents = tng_query($query);
         $parentcount = tng_num_rows($parents);
         $addNewFamilyTitle = "title='" . uiTextSnippet('gotonewfamily') . " ($personID) " . uiTextSnippet('aschild') . "'";
-        $newparents = $allowAdd && (!$assignedtree || $assignedtree == $tree) ? 
-          "&nbsp; <a id='addnew-parents' href='#' $addNewFamilyTitle data-person-id='$personID' data-tree='$tree' data-cw='$cw'>" . uiTextSnippet('addnew') . "</a>\n" : "";
+        $newparents = $allowAdd ? 
+          "&nbsp; <a id='addnew-parents' href='#' $addNewFamilyTitle data-person-id='$personID' data-cw='$cw'>" . uiTextSnippet('addnew') . "</a>\n" : "";
         echo displayToggle("plus2", 1, "parents", uiTextSnippet('parents') . " (<span id=\"parentcount\">$parentcount</span>) $newparents", "");
         ?>
         <div id='parents'>
@@ -328,16 +316,16 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                   }
                   echo "<td>\n";
                     echo "<div id='unlinkp_$familyId' style='float: right; display: none'>\n";
-                      echo "<a id='unlink-from-family' href='#'  data-family-id='$familyId' data-tree='$tree'>" . uiTextSnippet('unlinkindividual') . " ($personID) " . uiTextSnippet('aschild') . "</a>\n";
+                      echo "<a id='unlink-from-family' href='#'  data-family-id='$familyId'>" . uiTextSnippet('unlinkindividual') . " ($personID) " . uiTextSnippet('aschild') . "</a>\n";
                     echo "</div>\n";
                     echo "<strong>" . uiTextSnippet('family') . ":</strong>\n";
-                    echo "<a href=\"familiesEdit.php?familyID={$familyId}&amp;tree=$tree&amp;cw=$cw\">{$familyId}</a>\n";
+                    echo "<a href=\"familiesEdit.php?familyID={$familyId}&amp;cw=$cw\">{$familyId}</a>\n";
                     
                     echo buildParentRow($parent, 'husband', 'father');
                     echo buildParentRow($parent, 'wife', 'mother');
                     $parent['sealplace'] = preg_replace("/\"/", "&#34;", $parent['sealplace']);
                     if ($rights['lds']) {
-                      $citquery = "SELECT citationID FROM $citations_table WHERE persfamID = \"$personID" . "::" . "{$familyId}\" AND gedcom = \"$tree\"";
+                      $citquery = "SELECT citationID FROM $citations_table WHERE persfamID = \"$personID" . "::" . "{$familyId}\"";
                       $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
                       $iconColor = tng_num_rows($citresult) ? "icon-info" : "icon-muted";
                       tng_free_result($citresult);
@@ -377,9 +365,9 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
           <?php
           if ($row['sex']) {
             if ($self) {
-              $query = "SELECT $spouse, familyID, marrdate FROM $families_table WHERE $families_table.$self = \"$personID\" AND gedcom = \"$tree\" ORDER BY $spouseorder";
+              $query = "SELECT $spouse, familyID, marrdate FROM $families_table WHERE $families_table.$self = '$personID' ORDER BY $spouseorder";
             } else {
-              $query = "SELECT husband, wife, familyID, marrdate FROM $families_table WHERE ($families_table.husband = \"$personID\" OR $families_table.wife = \"$personID\") AND gedcom = \"$tree\"";
+              $query = "SELECT husband, wife, familyID, marrdate FROM $families_table WHERE ($families_table.husband = \"$personID\" OR $families_table.wife = \"$personID\")";
             }
             $marriages = tng_query($query);
             $marrcount = tng_num_rows($marriages);
@@ -387,8 +375,8 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
             <tr>
               <td>
                 <?php
-                $newspouse = $allowAdd && (!$assignedtree || $assignedtree == $tree ) && $row['sex'] 
-                  ? "&nbsp; <a id='addnew-family-spouses' href='#' data-self='$self' data-person-id='$personID' data-tree='$tree' data-cw='$cw' title=\"" . uiTextSnippet('gotonewfamily') . " ($personID) $selfdisplay\">" . uiTextSnippet('addnew') . "</a>\n" 
+                $newspouse = $allowAdd && $row['sex'] 
+                  ? "&nbsp; <a id='addnew-family-spouses' href='#' data-self='$self' data-person-id='$personID' data-cw='$cw' title=\"" . uiTextSnippet('gotonewfamily') . " ($personID) $selfdisplay\">" . uiTextSnippet('addnew') . "</a>\n" 
                   : "";
                 echo displayToggle("plus3", 1, "spouses", uiTextSnippet('spouses') . " (<span id=\"marrcount\">$marrcount</span>) $newspouse", "");
                 ?>
@@ -422,16 +410,16 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                               <?php
                               echo "<strong>" . uiTextSnippet('family') . ":</strong>\n";
                               echo "<div id='unlinks_$familyId' style='float: right; display: none'>\n";
-                                echo "<a id='unlink-from-family' href='#' data-family-id='$familyId' data-tree='$tree'>" . uiTextSnippet('unlinkindividual') . " ($personID) " . uiTextSnippet('asspouse') . "</a>\n";
+                                echo "<a id='unlink-from-family' href='#' data-family-id='$familyId'>" . uiTextSnippet('unlinkindividual') . " ($personID) " . uiTextSnippet('asspouse') . "</a>\n";
                               echo "</div>\n";
-                              echo "<a href=\"familiesEdit.php?familyID={$familyId}&amp;tree=$tree&amp;cw=$cw\">{$familyId}</a>\n";
+                              echo "<a href=\"familiesEdit.php?familyID={$familyId}&amp;cw=$cw\">{$familyId}</a>\n";
                               
                               if ($marriagerow[$spouse]) {
-                                $query = "SELECT personID, lastname, lnprefix, firstname, birthdate, birthplace, altbirthdate, altbirthplace, prefix, suffix, nameorder FROM $people_table WHERE personID = \"{$marriagerow[$spouse]}\" AND gedcom = \"$tree\"";
+                                $query = "SELECT personID, lastname, lnprefix, firstname, birthdate, birthplace, altbirthdate, altbirthplace, prefix, suffix, nameorder FROM $people_table WHERE personID = \"{$marriagerow[$spouse]}\"";
                                 $spouseresult = tng_query($query);
                                 $spouserow = tng_fetch_assoc($spouseresult);
 
-                                $srights = determineLivingPrivateRights($spouserow, $righttree);
+                                $srights = determineLivingPrivateRights($spouserow);
                                 $spouserow['allow_living'] = $srights['living'];
                                 $spouserow['allow_private'] = $srights['private'];
 
@@ -444,7 +432,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                               <span>
                                 <?php
                                 if (isset($spouserow['personID']) && $spouserow['personID']) {
-                                  echo "<a href=\"peopleEdit.php?personID={$spouserow['personID']}&amp;tree=$tree&amp;cw=$cw\">" . getName($spouserow) . " - {$spouserow['personID']}</a>$birthinfo";
+                                  echo "<a href=\"peopleEdit.php?personID={$spouserow['personID']}&amp;cw=$cw\">" . getName($spouserow) . " - {$spouserow['personID']}</a>$birthinfo";
                                 }
                                 ?>
                               </span>
@@ -453,7 +441,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                                 <span><?php echo displayDate($marriagerow['marrdate']); ?></span>
                               <?php } ?>
                               <?php
-                              $query = "SELECT $people_table.personID as pID, firstname, lnprefix, lastname, birthdate, birthplace, altbirthdate, altbirthplace, haskids, living, private, branch, prefix, suffix, nameorder FROM ($people_table, $children_table) WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = \"{$familyId}\" AND $people_table.gedcom = \"$tree\" AND $children_table.gedcom = \"$tree\" ORDER BY ordernum";
+                              $query = "SELECT $people_table.personID as pID, firstname, lnprefix, lastname, birthdate, birthplace, altbirthdate, altbirthplace, haskids, living, private, branch, prefix, suffix, nameorder FROM ($people_table, $children_table) WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = \"{$familyId}\" ORDER BY ordernum";
                               $children = tng_query($query);
 
                               if ($children && tng_num_rows($children)) {
@@ -471,7 +459,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                                       echo "<div class='col-md-8'>$kidcount. ";
                                         if ($crights['both']) {
                                           if ($rightbranch) {
-                                            echo "<a href=\"peopleEdit.php?personID={$child['pID']}&amp;tree=$tree&amp;cw=$cw\">" . getName($child) . " - {$child['pID']}</a>";
+                                            echo "<a href=\"peopleEdit.php?personID={$child['pID']}&amp;cw=$cw\">" . getName($child) . " - {$child['pID']}</a>";
                                           } else {
                                             echo getName($child) . " - " . $child['pID'];
                                           }
@@ -505,7 +493,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
               <p>
                 <?php
                 echo uiTextSnippet('onsave') . ":<br>";
-                if ($allowAdd && (!$assignedtree || $assignedtree == $tree)) {
+                if ($allowAdd) {
                   echo "<input id='radiochild' name='newfamily' type='radio' value='child'>" . uiTextSnippet('gotonewfamily') . " ($personID) " . uiTextSnippet('aschild') . "<br>\n";
                   if ($row['sex']) {
                     echo "<input id=\"radio$self\" name='newfamily' type='radio' value=\"$self\">" . uiTextSnippet('gotonewfamily') . " ($personID) $selfdisplay<br>\n";
@@ -520,7 +508,6 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                 ?>
               </p>
               <input id='newmedia' name='media' type='hidden' value=''>
-              <input name='tree' type='hidden' value="<?php echo $tree; ?>">
               <input name='added' type='hidden' value="<?php echo $added; ?>">
               <input name='personID' type='hidden' value="<?php echo "$personID"; ?>">
               <input name='submit2' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
@@ -566,7 +553,6 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
   var allow_cites = true;
   var allow_notes = true;
 
-  var tree = '<?php echo $tree; ?>';
   var spouseOrder = '<?php echo $spouseorder; ?>';
   
   $(document).ready( function() {

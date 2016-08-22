@@ -139,7 +139,7 @@ $headSection->setTitle(uiTextSnippet('mostwanted'));
     var mwlitbox;
     var tnglitbox;
     var thumbwidth = <?php echo($thumbmaxw + 6); ?>;
-    var tree = "<?php echo $assignedtree; ?>";
+    var tree = "";
   </script>
 </body>
 </html>

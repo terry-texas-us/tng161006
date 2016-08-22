@@ -7,12 +7,11 @@ require 'personlib.php';
 $relatepersonID = $_SESSION['relatepersonID'];
 $relatetreeID = $_SESSION['relatetreeID'];
 
-$result = getPersonDataPlusDates($tree, $primaryID);
+$result = getPersonDataPlusDates($primaryID);
 if ($result) {
   $row = tng_fetch_assoc($result);
-  $righttree = checktree($tree);
   $rightbranch = checkbranch($row['branch']);
-  $rights = determineLivingPrivateRights($row, $righttree, $rightbranch);
+  $rights = determineLivingPrivateRights($row, $rightbranch);
   $row['allow_living'] = $rights['living'];
   $row['allow_private'] = $rights['private'];
   if ($rights['both']) {
@@ -33,7 +32,7 @@ if ($result) {
   }
   $namestr = getName($row);
 
-  $treeResult = getTreeSimple($tree);
+  $treeResult = getTreeSimple();
   $treerow = tng_fetch_assoc($treeResult);
   $disallowgedcreate = $treerow['disallowgedcreate'];
   tng_free_result($treeResult);
@@ -95,11 +94,11 @@ echo "<body id='public'>\n";
                 <td>
                   <?php
                   if ($relatepersonID && $relatetreeID == $tree) {
-                    $query = "SELECT firstname, lastname, lnprefix, prefix, suffix, nameorder, living, private, branch, birthdate, altbirthdate FROM $people_table WHERE personID = \"$relatepersonID\" AND gedcom = \"$tree\"";
+                    $query = "SELECT firstname, lastname, lnprefix, prefix, suffix, nameorder, living, private, branch, birthdate, altbirthdate FROM $people_table WHERE personID = '$relatepersonID'";
                     $result2 = tng_query($query);
                     if ($result2) {
                       $row2 = tng_fetch_assoc($result2);
-                      $rights2 = determineLivingPrivateRights($row2, $righttree);
+                      $rights2 = determineLivingPrivateRights($row2);
                       $row2['allow_living'] = $rights2['living'];
                       $row2['allow_private'] = $rights2['private'];
                       if ($row2['allow_living']) {
@@ -193,7 +192,6 @@ echo "<body id='public'>\n";
         </tr>
       </table>
       <br>
-      <input name='tree' type='hidden' value="<?php echo $tree; ?>">
       <input id='primarypersonID' name='primarypersonID' type='hidden' value="<?php echo $primaryID; ?>">
       <input id='calcbtn' type='submit' value="<?php echo uiTextSnippet('calculate'); ?>">
       <br><br>
@@ -214,11 +212,11 @@ echo "<body id='public'>\n";
     });
 
     $('#findFirstPerson').on('click', function() {
-      findItem('I', 'altprimarypersonID', 'name1', '<?php echo $tree; ?>');
+      findItem('I', 'altprimarypersonID', 'name1');
     });
 
     $('#findSecondPerson').on('click', function() {
-      findItem('I', 'secondpersonID', 'name2', '<?php echo $tree; ?>');
+      findItem('I', 'secondpersonID', 'name2');
     });
   </script>
   <script src='js/selectutils.js'></script>

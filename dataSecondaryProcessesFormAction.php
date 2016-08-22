@@ -33,10 +33,6 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         echo "<p>" . uiTextSnippet('sortingchildren') . "</p>";
         echo uiTextSnippet('families') . ":<br>\n";
         $fcount = 0;
-        if ($tree != "--all--") {
-          $wherestr = "WHERE $families_table.gedcom = \"$tree\"";
-          $wherestr2 = "AND $children_table.gedcom = \"$tree\"";
-        }
         $query = "SELECT familyID, gedcom FROM $families_table $wherestr";
         $result = tng_query($query);
         while ($family = tng_fetch_assoc($result)) {
@@ -63,9 +59,6 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         echo "<p>" . uiTextSnippet('sortingspouses') . "</p>";
         echo uiTextSnippet('people') . ":<br>\n";
         $fcount = 0;
-        if ($tree != "--all--") {
-          $wherestr = " AND $families_table.gedcom = \"$tree\"";
-        }
         //first do husbands
         $query = "SELECT personID, $families_table.gedcom as gedcom FROM $families_table, $people_table WHERE $people_table.personID = $families_table.husband AND $people_table.gedcom = $families_table.gedcom $wherestr";
         $result = tng_query($query);
@@ -126,16 +119,10 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
           }
           return $info;
         }
-
         echo "<p>" . uiTextSnippet('creatinggendex') . "</p>";
-        if ($tree == "--all--") {
-          $gendexout = "$rootpath$gendexfile/gendex.txt";
-          $gendexURL = "$tngdomain/$gendexfile/gendex.txt";
-        } else {
-          $wherestr = "WHERE gedcom = \"$tree\"";
-          $gendexout = $tree ? "$rootpath$gendexfile/$tree.txt" : "$rootpath$gendexfile/blanktree.txt";
-          $gendexURL = $tree ? "$tngdomain/$gendexfile/$tree.txt" : "$tngdomain/$gendexfile/blanktree.txt";
-        }
+        $gendexout = "$rootpath$gendexfile/gendex.txt";
+        $gendexURL = "$tngdomain/$gendexfile/gendex.txt";
+
         $query = "SELECT personID, firstname, lnprefix, lastname, living, private, birthdate, birthplace, altbirthdate, altbirthplace, deathdate, deathplace, burialdate, burialplace, gedcom FROM $people_table $wherestr ORDER BY lastname, firstname";
         $result = tng_query($query);
         if ($result) {
@@ -188,15 +175,9 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         echo uiTextSnippet('families') . ":<br>\n";
 
         $query = "UPDATE $children_table SET haskids = 0";
-        if ($tree != "--all--") {
-          $query .= " WHERE gedcom = \"$tree\"";
-        }
         $result2 = tng_query($query);
 
         $fcount = 0;
-        if ($tree != "--all--") {
-          $wherestr = "AND $families_table.gedcom = \"$tree\"";
-        }
         $query = "SELECT distinct ($families_table.familyID), husband, wife, $families_table.gedcom as gedcom FROM ($children_table, $families_table) WHERE $families_table.familyID = $children_table.familyID AND $families_table.gedcom = $children_table.gedcom $wherestr";
         $result = tng_query($query);
         while ($family = tng_fetch_assoc($result)) {
@@ -217,9 +198,6 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         echo "<br><br>" . uiTextSnippet('finishedtracking') . "<br>";
       } elseif ($secaction == uiTextSnippet('relabelbranches')) {
         echo "<p>" . uiTextSnippet('relabeling') . "</p>";
-        if ($tree != "--all--") {
-          $wherestr = "WHERE gedcom = \"$tree\"";
-        }
         $query = "SELECT branch, persfamID, gedcom FROM $branchlinks_table $wherestr";
         $result = tng_query($query);
         while ($branch = tng_fetch_assoc($result)) {
@@ -292,7 +270,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
           } else {
             $disabled = 0;
           }
-          $query3 = "UPDATE $mediatypes_table SET disabled=\"$disabled\" where mediatypeID=\"{$row['mediatypeID']}\"";
+          $query3 = "UPDATE $mediatypes_table SET disabled=\"$disabled\" WHERE mediatypeID=\"{$row['mediatypeID']}\"";
           $result3 = tng_query($query3);
           echo "<br>\n";
           tng_free_result($result2);

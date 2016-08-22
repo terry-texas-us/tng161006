@@ -118,16 +118,15 @@ if (is_dir($font_dir)) {
 $pdftype = $savetype;
 
 if ($pdftype == "fam") {
-  $result = getFamilyData($tree, $familyID);
+  $result = getFamilyData($familyID);
   $famrow = tng_fetch_assoc($result);
   $titletext = getFamilyName($famrow);
 } else {
-  $result = getPersonSimple($tree, $personID);
+  $result = getPersonSimple($personID);
   if ($result) {
     $row = tng_fetch_assoc($result);
 
-    $righttree = checktree($tree);
-    $rights = determineLivingPrivateRights($row, $righttree);
+    $rights = determineLivingPrivateRights($row);
     $row['allow_living'] = $rights['living'];
     $row['allow_private'] = $rights['private'];
 
@@ -208,10 +207,6 @@ header("Content-type:text/html; charset=" . $session_charset);
       } else {
         echo "<input name='personID' type='hidden' value=\"$personID\"/>\n";
       }
-      ?>
-      <input name='tree' type='hidden' value="<?php echo $tree; ?>"/>
-
-      <?php
       // options specific to certain report types
       if ($pdftype == "desc") {
         ?>

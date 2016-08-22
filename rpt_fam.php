@@ -40,14 +40,13 @@ if ($ldsOK) {
 if ($blankform == 1) {
   $title = uiTextSnippet('familygroupfor');
 } else {
-  $query = "SELECT familyID, husband, wife, living, private, marrdate, gedcom, branch FROM $families_table WHERE familyID = \"$familyID\" AND gedcom = \"$tree\"";
+  $query = "SELECT familyID, husband, wife, living, private, marrdate, gedcom, branch FROM $families_table WHERE familyID = '$familyID'";
   $result = tng_query($query);
   if ($result) {
     $famrow = tng_fetch_assoc($result);
     $famname = getFamilyName($famrow);
 
-    $righttree = checktree($tree);
-    $rights = determineLivingPrivateRights($famrow, $righttree);
+    $rights = determineLivingPrivateRights($famrow);
     $famrow['allow_living'] = $rights['living'];
     $famrow['allow_private'] = $rights['private'];
 
@@ -144,7 +143,7 @@ else {
     titleLine(uiTextSnippet('children'));
 
     // for each child
-    $query = "SELECT $people_table.personID as personID, branch, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, famc, sex, birthdate, birthplace, altbirthdate, altbirthplace, haskids, deathdate, deathplace, burialdate, burialplace, burialtype, baptdate, baptplace, confdate, confplace, initdate, initplace, endldate, endlplace, sealdate, sealplace FROM $people_table, $children_table WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = \"$famrow[familyID]\" AND $people_table.gedcom = \"$tree\" AND $children_table.gedcom = \"$tree\" ORDER BY ordernum";
+    $query = "SELECT $people_table.personID as personID, branch, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, famc, sex, birthdate, birthplace, altbirthdate, altbirthplace, haskids, deathdate, deathplace, burialdate, burialplace, burialtype, baptdate, baptplace, confdate, confplace, initdate, initplace, endldate, endlplace, sealdate, sealplace FROM $people_table, $children_table WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = \"$famrow[familyID]\" ORDER BY ordernum";
     $children = tng_query($query);
     if ($children && tng_num_rows($children)) {
       $childcount = 0;
@@ -220,19 +219,17 @@ else {
 $pdf->Output();
 
 function displayChild($personID, $childcount) {
-  global $tree;
   global $people_table;
   global $families_table;
   global $children_table;
   global $citesources;
-  global $righttree;
 
-  $query = "SELECT * FROM $people_table WHERE personID = \"$personID\" AND gedcom = \"$tree\"";
+  $query = "SELECT * FROM $people_table WHERE personID = '$personID'";
   $result = tng_query($query);
   $ind = tng_fetch_assoc($result);
   tng_free_result($result);
 
-  $rights = determineLivingPrivateRights($ind, $righttree);
+  $rights = determineLivingPrivateRights($ind);
   $ind['allow_living'] = $rights['living'];
   $ind['allow_private'] = $rights['private'];
 
@@ -286,7 +283,7 @@ function displayChild($personID, $childcount) {
       $cite = reorderCitation($personID . "_ENDL", 0);
       dateLine(uiTextSnippet('endowedlds'), displayDate($ind['endldate']), $ind['endlplace'], $cite);
 
-      $query = "SELECT sealdate, sealplace FROM $children_table WHERE familyID = \"{$ind['famc']}\" AND personID = \"$personID\" AND gedcom = \"$tree\"";
+      $query = "SELECT sealdate, sealplace FROM $children_table WHERE familyID = \"{$ind['famc']}\" AND personID = '$personID'";
       $chresult = tng_query($query);
       $child = tng_fetch_assoc($chresult);
       getCitations($personID . "::" . $ind['famc'], 0);
@@ -302,19 +299,19 @@ function displayChild($personID, $childcount) {
   // show spouses
   $query = "SELECT familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, $families_table.living as fliving, $families_table.private as fprivate, $families_table.branch as fbranch, $people_table.living as living, $people_table.private as private, $people_table.branch as branch, marrdate, marrplace, sealdate, sealplace FROM $families_table ";
   if ($ind['sex'] == 'M') {
-    $query .= "LEFT JOIN $people_table on $families_table.wife = $people_table.personID AND $families_table.gedcom = $people_table.gedcom WHERE husband = \"{$ind['personID']}\" AND $people_table.gedcom = \"$tree\" $restriction ORDER BY husborder";
+    $query .= "LEFT JOIN $people_table on $families_table.wife = $people_table.personID AND $families_table.gedcom = $people_table.gedcom WHERE husband = \"{$ind['personID']}\" $restriction ORDER BY husborder";
   } else {
     if ($ind['sex'] = 'F') {
-      $query .= "LEFT JOIN $people_table on $families_table.husband = $people_table.personID AND $families_table.gedcom = $people_table.gedcom WHERE wife = \"{$ind['personID']}\" AND $people_table.gedcom = \"$tree\" $restriction ORDER BY wifeorder";
+      $query .= "LEFT JOIN $people_table on $families_table.husband = $people_table.personID AND $families_table.gedcom = $people_table.gedcom WHERE wife = \"{$ind['personID']}\" $restriction ORDER BY wifeorder";
     } else {
-      $query .= "LEFT JOIN $people_table on ($families_table.husband = $people_table.personID OR $families_table.wife = $people_table.personID) AND $families_table.gedcom = $people_table.gedcom WHERE (wife = \"{$ind['personID']}\" && husband = \"{$ind['personID']}\") AND $people_table.gedcom = \"$tree\"";
+      $query .= "LEFT JOIN $people_table on ($families_table.husband = $people_table.personID OR $families_table.wife = $people_table.personID) AND $families_table.gedcom = $people_table.gedcom WHERE (wife = \"{$ind['personID']}\" && husband = \"{$ind['personID']}\")";
     }
   }
 
   $spresult = tng_query($query);
 
   while ($fam = tng_fetch_assoc($spresult)) {
-    $frights = determineLivingPrivateRights($fam, $righttree);
+    $frights = determineLivingPrivateRights($fam);
     $fam['allow_living'] = $frights['living'];
     $fam['allow_private'] = $frights['private'];
 
@@ -323,7 +320,7 @@ function displayChild($personID, $childcount) {
     $fam['living'] = $fam['fliving'];
     $fam['private'] = $fam['fprivate'];
 
-    $frights = determineLivingPrivateRights($fam, $righttree);
+    $frights = determineLivingPrivateRights($fam);
 
     $marrplace = "";
     if ($frights['both']) {
@@ -355,14 +352,18 @@ function displayChild($personID, $childcount) {
 }
 
 function displayIndividual($personID, $showparents, $showmarriage) {
-  global $familyID, $tree, $people_table, $families_table, $children_table, $citesources, $righttree;
+  global $familyID;
+  global $people_table;
+  global $families_table;
+  global $children_table;
+  global $citesources;
 
-  $query = "SELECT * FROM $people_table WHERE personID = \"$personID\" AND gedcom = \"$tree\"";
+  $query = "SELECT * FROM $people_table WHERE personID = '$personID'";
   $result = tng_query($query);
   $ind = tng_fetch_assoc($result);
   tng_free_result($result);
 
-  $rights = determineLivingPrivateRights($ind, $righttree);
+  $rights = determineLivingPrivateRights($ind);
   $ind['allow_living'] = $rights['living'];
   $ind['allow_private'] = $rights['private'];
 
@@ -423,11 +424,11 @@ function displayIndividual($personID, $showparents, $showmarriage) {
   if ($showparents) {
     //show parents (for hus&wif)
     $cite1 = $cite2 = "";
-    $query = "SELECT YEAR(birthdatetr) AS birthyear, YEAR(deathdatetr) AS deathyear, familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, $people_table.living, $people_table.private, $people_table.branch FROM ($families_table, $people_table) WHERE $families_table.familyID = \"{$ind['famc']}\" AND $families_table.gedcom = \"$tree\" AND $people_table.personID = $families_table.husband AND $people_table.gedcom = \"$tree\"";
+    $query = "SELECT YEAR(birthdatetr) AS birthyear, YEAR(deathdatetr) AS deathyear, familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, $people_table.living, $people_table.private, $people_table.branch FROM ($families_table, $people_table) WHERE $families_table.familyID = \"{$ind['famc']}\" AND $people_table.personID = $families_table.husband";
     $presult = tng_query($query);
     $parent = tng_fetch_assoc($presult);
 
-    $prights = determineLivingPrivateRights($parent, $righttree);
+    $prights = determineLivingPrivateRights($parent);
     $parent['allow_living'] = $prights['living'];
     $parent['allow_private'] = $prights['private'];
 
@@ -440,11 +441,11 @@ function displayIndividual($personID, $showparents, $showmarriage) {
       $cite1 = reorderCitation($fatherID . "_NAME", 0);
     }
 
-    $query = "SELECT YEAR(birthdatetr) AS birthyear, YEAR(deathdatetr) AS deathyear, familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, $people_table.living, $people_table.private, $people_table.branch FROM ($families_table, $people_table) WHERE $families_table.familyID = \"{$ind['famc']}\" AND $families_table.gedcom = \"$tree\" AND $people_table.personID = $families_table.wife AND $people_table.gedcom = \"$tree\"";
+    $query = "SELECT YEAR(birthdatetr) AS birthyear, YEAR(deathdatetr) AS deathyear, familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, $people_table.living, $people_table.private, $people_table.branch FROM ($families_table, $people_table) WHERE $families_table.familyID = \"{$ind['famc']}\" AND $people_table.personID = $families_table.wife";
     $presult = tng_query($query);
     $parent = tng_fetch_assoc($presult);
 
-    $prights = determineLivingPrivateRights($parent, $righttree);
+    $prights = determineLivingPrivateRights($parent);
     $parent['allow_living'] = $prights['living'];
     $parent['allow_private'] = $prights['private'];
 
@@ -458,7 +459,7 @@ function displayIndividual($personID, $showparents, $showmarriage) {
     }
     parentLine(uiTextSnippet('father'), $fathername, uiTextSnippet('mother'), $mothername, $cite1, $cite2);
     if ($rights['lds'] && $rights['both']) {
-      $query = "SELECT sealdate, sealplace FROM $children_table WHERE familyID = \"{$ind['famc']}\" AND personID = \"$personID\" AND gedcom = \"$tree\"";
+      $query = "SELECT sealdate, sealplace FROM $children_table WHERE familyID = \"{$ind['famc']}\" AND personID = '$personID'";
       $chresult = tng_query($query);
       $child = tng_fetch_assoc($chresult);
       $cite = reorderCitation($personID . "::" . $ind['famc'] . "_SLGC", 0);
@@ -469,11 +470,11 @@ function displayIndividual($personID, $showparents, $showmarriage) {
 
   if ($showmarriage) {
     // marriages
-    $query = "SELECT husband, wife, marrdate, marrplace, divdate, divplace, sealdate, sealplace, living, private, branch FROM $families_table WHERE familyID = \"$familyID\" AND gedcom = \"$tree\"";
+    $query = "SELECT husband, wife, marrdate, marrplace, divdate, divplace, sealdate, sealplace, living, private, branch FROM $families_table WHERE familyID = '$familyID'";
     $result = tng_query($query);
     $fam = tng_fetch_assoc($result);
 
-    $frights = determineLivingPrivateRights($fam, $righttree);
+    $frights = determineLivingPrivateRights($fam);
     $fam['allow_living'] = $frights['living'];
     $fam['allow_private'] = $frights['private'];
 

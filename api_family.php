@@ -11,7 +11,7 @@ require 'log.php';
 header("Content-Type: application/json; charset=" . $session_charset);
 
 //get family
-$query = "SELECT familyID, husband, wife, living, private, marrdate, gedcom, branch FROM $families_table WHERE familyID = \"$familyID\" AND gedcom = \"$tree\"";
+$query = "SELECT familyID, husband, wife, living, private, marrdate, gedcom, branch FROM $families_table WHERE familyID = '$familyID'";
 $result = tng_query($query);
 $famrow = tng_fetch_assoc($result);
 if (!tng_num_rows($result)) {
@@ -21,29 +21,27 @@ if (!tng_num_rows($result)) {
 } else {
   tng_free_result($result);
 }
-
 echo "{\n";
 
-$righttree = checktree($tree);
 $rightbranch = checkbranch($famrow['branch']);
-$rights = determineLivingPrivateRights($famrow, $righttree, $rightbranch);
+$rights = determineLivingPrivateRights($famrow, $rightbranch);
 $row['allow_living'] = $rights['living'];
 $row['allow_private'] = $rights['private'];
 
 $famname = getFamilyName($famrow);
 $namestr = uiTextSnippet('family') . ": " . $famname;
 
-$logstring = "<a href=\"familiesShowFamily.php?familyID=$familyID&amp;tree=$tree\">" . uiTextSnippet('familygroupfor') . " $famname</a>";
+$logstring = "<a href=\"familiesShowFamily.php?familyID=$familyID\">" . uiTextSnippet('familygroupfor') . " $famname</a>";
 writelog($logstring);
 
 $family = "\"id\":\"{$famrow['familyID']}\",\"tree\":\"{$famrow['gedcom']}\"";
 //get husband & spouses
 if ($famrow['husband']) {
-  $query = "SELECT * FROM $people_table WHERE personID = \"{$famrow['husband']}\" AND gedcom = \"$tree\"";
+  $query = "SELECT * FROM $people_table WHERE personID = \"{$famrow['husband']}\"";
   $result = tng_query($query);
   $husbrow = tng_fetch_assoc($result);
 
-  $hrights = determineLivingPrivateRights($husbrow, $righttree);
+  $hrights = determineLivingPrivateRights($husbrow);
   $husbrow['allow_living'] = $hrights['living'];
   $husbrow['allow_private'] = $hrights['private'];
 
@@ -54,11 +52,11 @@ if ($famrow['husband']) {
 
 //get wife & spouses
 if ($famrow['wife']) {
-  $query = "SELECT * FROM $people_table WHERE personID = \"{$famrow['wife']}\" AND gedcom = \"$tree\"";
+  $query = "SELECT * FROM $people_table WHERE personID = \"{$famrow['wife']}\"";
   $result = tng_query($query);
   $wiferow = tng_fetch_assoc($result);
 
-  $wrights = determineLivingPrivateRights($wiferow, $righttree);
+  $wrights = determineLivingPrivateRights($wiferow);
   $wiferow['allow_living'] = $wrights['living'];
   $wiferow['allow_private'] = $wrights['private'];
 
@@ -89,8 +87,7 @@ if ($eventstr) {
 $query = "SELECT $people_table.personID as personID, branch, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, famc, sex, birthdate, birthplace,
     altbirthdate, altbirthplace, haskids, deathdate, deathplace, burialdate, burialplace, baptdate, baptplace, confdate, confplace, initdate, initplace, endldate, endlplace, sealdate, sealplace
     FROM $people_table, $children_table
-    WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = \"{$famrow['familyID']}\" AND $people_table.gedcom = \"$tree\" AND
-    $children_table.gedcom = \"$tree\" ORDER BY ordernum";
+    WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = \"{$famrow['familyID']}\" ORDER BY ordernum";
 $children = tng_query($query);
 
 if ($children && tng_num_rows($children)) {
@@ -102,7 +99,7 @@ if ($children && tng_num_rows($children)) {
     }
     $childcount++;
 
-    $crights = determineLivingPrivateRights($childrow, $righttree);
+    $crights = determineLivingPrivateRights($childrow);
     $childrow['allow_living'] = $crights['living'];
     $childrow['allow_private'] = $crights['private'];
 

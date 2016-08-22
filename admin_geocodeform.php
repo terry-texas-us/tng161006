@@ -7,8 +7,6 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-$orgtree = $tree;
-
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('places'));
 ?>
@@ -23,7 +21,7 @@ $headSection->setTitle(uiTextSnippet('places'));
     $navList->appendItem([true, "placesBrowse.php", uiTextSnippet('browse'), "findplace"]);
     $navList->appendItem([$allowAdd, "placesAdd.php", uiTextSnippet('add'), "addplace"]);
     $navList->appendItem([$allowEdit && $allowDelete, "placesMerge.php", uiTextSnippet('merge'), "merge"]);
-    $navList->appendItem([$allowEdit, "admin_geocodeform.php", uiTextSnippet('geocode'), "geo"]);
+    // [ts] $navList->appendItem([$allowEdit, "admin_geocodeform.php", uiTextSnippet('geocode'), "geo"]);
     echo $navList->build("geo");
     ?>
 
@@ -33,38 +31,7 @@ $headSection->setTitle(uiTextSnippet('places'));
           <h4><?php echo uiTextSnippet('geoexpl'); ?></h4>
 
           <form action="admin_geocode.php" method='post' name='form1'>
-            <?php
-            if ($tngconfig['places1tree']) {
-              echo "<input name='tree1' type='hidden' value='' />\n";
-            }
-            ?>
             <table class='table tabel-sm'>
-              <?php if (!$tngconfig['places1tree']) { ?>
-                <tr>
-                  <td><?php echo uiTextSnippet('tree'); ?>:</td>
-                  <td>
-                    <select name="tree1">
-                      <?php
-                      if ($assignedtree) {
-                        $wherestr = "WHERE gedcom = \"$assignedtree\"";
-                      } else {
-                        $wherestr = "";
-                      }
-                      $treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
-                      $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
-                      while ($treerow = tng_fetch_assoc($treeresult)) {
-                        echo "  <option value=\"{$treerow['gedcom']}\"";
-                        if ($treerow['gedcom'] == $tree) {
-                          echo " selected";
-                        }
-                        echo ">{$treerow['treename']}</option>\n";
-                      }
-                      tng_free_result($treeresult);
-                      ?>
-                    </select>
-                  </td>
-                </tr>
-              <?php } ?>
               <tr>
                 <td><?php echo uiTextSnippet('limit'); ?></td>
                 <td>

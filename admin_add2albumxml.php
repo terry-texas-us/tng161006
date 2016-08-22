@@ -10,7 +10,6 @@ initMediaTypes();
 function getAlbumNav($total, $perpage, $pagenavpages) {
   global $page;
   global $totalpages;
-  global $orgtree;
   global $albumID;
   global $searchstring;
   global $mediatypeID;
@@ -36,27 +35,27 @@ function getAlbumNav($total, $perpage, $pagenavpages) {
   if ($page > 1) {
     $prevpage = $page - 1;
     $navoffset = (($prevpage * $perpage) - $perpage);
-    $prevlink = " <a href='#' onclick=\"return getMoreMedia('$searchstring', '$mediatypeID', '$hsstat', '$cemeteryID', '$navoffset', '$orgtree', '$prevpage', '$albumID');\" title=\"" . uiTextSnippet('prev') . "\">&laquo;" . uiTextSnippet('prev') . "</a> ";
+    $prevlink = " <a href='#' onclick=\"return getMoreMedia('$searchstring', '$mediatypeID', '$hsstat', '$cemeteryID', '$navoffset', '$prevpage', '$albumID');\" title=\"" . uiTextSnippet('prev') . "\">&laquo;" . uiTextSnippet('prev') . "</a> ";
   }
   if ($page < $totalpages) {
     $nextpage = $page + 1;
     $navoffset = (($nextpage * $perpage) - $perpage);
-    $nextlink = "<a href='#' onclick=\"return getMoreMedia('$searchstring', '$mediatypeID', '$hsstat', '$cemeteryID', '$navoffset', '$orgtree', '$nextpage', '$albumID');\" title=\"" . uiTextSnippet('next') . "\">" . uiTextSnippet('next') . "&raquo;</a>";
+    $nextlink = "<a href='#' onclick=\"return getMoreMedia('$searchstring', '$mediatypeID', '$hsstat', '$cemeteryID', '$navoffset', '$nextpage', '$albumID');\" title=\"" . uiTextSnippet('next') . "\">" . uiTextSnippet('next') . "&raquo;</a>";
   }
   while ($curpage++ < $totalpages) {
     $navoffset = (($curpage - 1) * $perpage);
     if (($curpage <= $page - $pagenavpages || $curpage >= $page + $pagenavpages) && $pagenavpages) {
       if ($curpage == 1) {
-        $firstlink = " <a href='#' onclick=\"return getMoreMedia('$searchstring', '$mediatypeID', '$hsstat', '$cemeteryID', '$navoffset', '$orgtree', '$curpage', '$albumID');\" title=\"" . uiTextSnippet('firstpage') . "\">&laquo;1</a> ... ";
+        $firstlink = " <a href='#' onclick=\"return getMoreMedia('$searchstring', '$mediatypeID', '$hsstat', '$cemeteryID', '$navoffset', '$curpage', '$albumID');\" title=\"" . uiTextSnippet('firstpage') . "\">&laquo;1</a> ... ";
       }
       if ($curpage == $totalpages) {
-        $lastlink = "... <a href='#' onclick=\"return getMoreMedia('$searchstring', '$mediatypeID', '$hsstat', '$cemeteryID', '$navoffset', '$orgtree', '$curpage', '$albumID');\" title=\"" . uiTextSnippet('lastpage') . "\">$totalpages&raquo;</a>";
+        $lastlink = "... <a href='#' onclick=\"return getMoreMedia('$searchstring', '$mediatypeID', '$hsstat', '$cemeteryID', '$navoffset', '$curpage', '$albumID');\" title=\"" . uiTextSnippet('lastpage') . "\">$totalpages&raquo;</a>";
       }
     } else {
       if ($curpage == $page) {
         $pagenav .= " [$curpage] ";
       } else {
-        $pagenav .= " <a href='#' onclick=\"return getMoreMedia('$searchstring', '$mediatypeID', '$hsstat', '$cemeteryID', '$navoffset', '$orgtree', '$curpage', '$albumID');\">$curpage</a> ";
+        $pagenav .= " <a href='#' onclick=\"return getMoreMedia('$searchstring', '$mediatypeID', '$hsstat', '$cemeteryID', '$navoffset', '$curpage', '$albumID');\">$curpage</a> ";
       }
     }
   }

@@ -10,13 +10,8 @@ if (!$allowAdd) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-$query = "SELECT treename FROM $treesTable WHERE gedcom = \"$tree\"";
-$result = tng_query($query);
-$treerow = tng_fetch_assoc($result);
-tng_free_result($result);
-
 if ($father) {
-  $query = "SELECT lnprefix, lastname, branch FROM $people_table WHERE gedcom=\"$tree\" AND personID=\"$father\"";
+  $query = "SELECT lnprefix, lastname, branch FROM $people_table WHERE personID = '$father'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   tng_free_result($result);
@@ -76,11 +71,10 @@ header("Content-type:text/html; charset=" . $session_charset);
       </div>
       <div class='row'>
         <div class='col-md-6'>
-          <?php echo uiTextSnippet('tree') . ": " . $treerow['treename']; ?>
         </div>
         <div class='col-md-6'>
           <?php require_once 'branches.php'; ?>
-          <?php echo buildBranchSelectControl_admin_newperson2($row, $tree, $assignedbranch, $branches_table); ?>
+          <?php echo buildBranchSelectControl_admin_newperson2($row, $assignedbranch, $branches_table); ?>
         </div>
       </div>
       <div class='row'>
@@ -152,7 +146,6 @@ header("Content-type:text/html; charset=" . $session_charset);
       <strong><?php echo uiTextSnippet('pevslater2'); ?></strong>
     </div> <!-- .modal-body -->
     <footer class='modal-footer'>
-      <input name='tree' type='hidden' value="<?php echo $tree; ?>">
       <input name='needped' type='hidden' value="<?php echo $needped; ?>">
       <input name='familyID' type='hidden' value="<?php echo $familyID; ?>">
       <?php if ($type == "") {

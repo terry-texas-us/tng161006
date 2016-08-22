@@ -11,14 +11,7 @@ if (!$allowMediaEdit) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-  $tree = $assignedtree;
-} else {
-  $wherestr = "";
-}
-$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('sortmedia'));
@@ -34,36 +27,20 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
     $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('browse'), "findmedia"]);
     $navList->appendItem([$allowMediaAdd, "mediaAdd.php", uiTextSnippet('add'), "addmedia"]);
     //    $navList->appendItem([$allowMediaEdit, "mediaSort.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    $navList->appendItem([$allowMediaEdit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
+    $navList->appendItem([$allowMediaEdit, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
+    $navList->appendItem([$allowMediaAdd, "mediaImport.php", uiTextSnippet('import'), "import"]);
+    $navList->appendItem([$allowMediaAdd, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
     echo $navList->build("sortmedia");
     ?>
     <form name='find' action='mediaSortFormAction.php' method='get' onsubmit="return validateForm();">
       <h4><?php echo uiTextSnippet('sortmediaind'); ?></h4>
       <table class='table table-sm'>
         <tr>
-          <td><?php echo uiTextSnippet('tree'); ?></td>
           <td><?php echo uiTextSnippet('linktype'); ?></td>
           <td><?php echo uiTextSnippet('mediatype'); ?></td>
           <td colspan='3'><?php echo uiTextSnippet('id'); ?></td>
         </tr>
         <tr>
-          <td>
-            <select name='tree1'>
-              <?php
-              $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
-              while ($treerow = tng_fetch_assoc($treeresult)) {
-                echo "  <option value=\"{$treerow['gedcom']}\"";
-                if ($treerow['gedcom'] == $tree) {
-                  echo " selected";
-                }
-                echo ">{$treerow['treename']}</option>\n";
-              }
-              tng_free_result($treeresult);
-              ?>
-            </select>
-          </td>
           <td>
             <select name='linktype1' onchange="toggleEventLink(this.selectedIndex);">
               <option value='I'><?php echo uiTextSnippet('person'); ?></option>
@@ -93,7 +70,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
           </td>
           <td>
             <a href="#" title="<?php echo uiTextSnippet('find'); ?>"
-                 onclick="return findItem(document.find.linktype1.options[document.find.linktype1.selectedIndex].value, 'newlink1', null, document.find.tree1.options[document.find.tree1.selectedIndex].value, '<?php echo $assignedbranch; ?>');">
+                 onclick="return findItem(document.find.linktype1.options[document.find.linktype1.selectedIndex].value, 'newlink1', null, '<?php echo $assignedbranch; ?>');">
               <img class='icon-sm' src='svg/magnifying-glass.svg'>
             </a>
           </td>

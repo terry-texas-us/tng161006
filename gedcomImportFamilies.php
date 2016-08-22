@@ -1,8 +1,19 @@
 <?php
-function getFamilyRecord($familyID, $prevlevel)
-{
-  global $families_table, $children_table, $tree, $fciteevents, $prefix, $assoc_table;
-  global $savestate, $lineinfo, $custeventlist, $stdnotes, $notecount, $today, $currentuser, $tngimpcfg, $branchlinks_table;
+function getFamilyRecord($familyID, $prevlevel) {
+  global $families_table;
+  global $children_table;
+  global $fciteevents;
+  global $prefix;
+  global $assoc_table;
+  global $savestate;
+  global $lineinfo;
+  global $custeventlist;
+  global $stdnotes;
+  global $notecount;
+  global $today;
+  global $currentuser;
+  global $tngimpcfg;
+  global $branchlinks_table;
 
   $familyID = adjustID($familyID, $savestate['foffset']);
 
@@ -111,7 +122,7 @@ function getFamilyRecord($familyID, $prevlevel)
             }
           } while ($lineinfo['level'] > $startlevel);
 
-          $query = "UPDATE $children_table SET ordernum=$childorder$frelstr$mrelstr WHERE personID = \"$child\" AND familyID = \"$familyID\" AND gedcom = \"$tree\"";
+          $query = "UPDATE $children_table SET ordernum=$childorder$frelstr$mrelstr WHERE personID = \"$child\" AND familyID = '$familyID'";
           $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
           $childorder++;
           break;
@@ -191,12 +202,13 @@ function getFamilyRecord($familyID, $prevlevel)
   if (!$info['SLGS']['DATETR']) {
     $info['SLGS']['DATETR'] = "0000-00-00";
   }
-  $query = "INSERT IGNORE INTO $families_table (familyID, marrdate, marrdatetr, marrplace, marrtype, divdate, divdatetr, divplace, husband, wife, sealdate, sealdatetr, sealplace, changedate, gedcom, branch, living, private, changedby ) VALUES(\"$familyID\", \"" . $info['MARR']['DATE'] . "\", \"" . $info['MARR']['DATETR'] . "\", \"" . $info['MARR']['PLAC'] . "\", \"" . $info['MARR']['TYPE'] . "\", \"" . $info['DIV']['DATE'] . "\", \"" . $info['DIV']['DATETR'] . "\", \"" . $info['DIV']['PLAC'] . "\", \"" . $info['HUSB'] . "\", \"" . $info['WIFE'] . "\", \"" . $info['SLGS']['DATE'] . "\", \"" . $info['SLGS']['DATETR'] . "\", \"$slgsplace\", \"$inschangedt\", \"$tree\", \"{$savestate['branch']}\", \"$living\", \"$private\", \"$currentuser\" )";
+  $query = "INSERT IGNORE INTO $families_table (familyID, marrdate, marrdatetr, marrplace, marrtype, divdate, divdatetr, divplace, husband, wife, sealdate, sealdatetr, sealplace, changedate, gedcom, branch, living, private, changedby ) "
+      . "VALUES('$familyID', \"" . $info['MARR']['DATE'] . "\", \"" . $info['MARR']['DATETR'] . "\", \"" . $info['MARR']['PLAC'] . "\", \"" . $info['MARR']['TYPE'] . "\", \"" . $info['DIV']['DATE'] . "\", \"" . $info['DIV']['DATETR'] . "\", \"" . $info['DIV']['PLAC'] . "\", \"" . $info['HUSB'] . "\", \"" . $info['WIFE'] . "\", \"" . $info['SLGS']['DATE'] . "\", \"" . $info['SLGS']['DATETR'] . "\", '$slgsplace', '$inschangedt', '', \"{$savestate['branch']}\", '$living', '$private', '$currentuser')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   $success = tng_affected_rows();
   if (!$success && $savestate['del'] != "no") {
     if ($savestate['neweronly'] && $inschangedt) {
-      $query = "SELECT changedate FROM $families_table WHERE familyID=\"$familyID\" AND gedcom = \"$tree\"";
+      $query = "SELECT changedate FROM $families_table WHERE familyID = '$familyID'";
       $result = tng_query($query);
       $famrow = tng_fetch_assoc($result);
       $goahead = $inschangedt > $famrow['changedate'] ? 1 : 0;
@@ -209,7 +221,7 @@ function getFamilyRecord($familyID, $prevlevel)
     if ($goahead) {
       $chdatestr = $inschangedt ? ", changedate=\"$inschangedt\"" : "";
       $branchstr = $savestate['branch'] ? ", branch=\"{$savestate['branch']}\"" : "";
-      $query = "UPDATE $families_table SET marrdate=\"" . $info['MARR']['DATE'] . "\", marrdatetr=\"" . $info['MARR']['DATETR'] . "\", marrplace=\"" . $info['MARR']['PLAC'] . "\", marrtype=\"" . $info['MARR']['TYPE'] . "\", divdate=\"" . $info['DIV']['DATE'] . "\", divdatetr=\"" . $info['DIV']['DATETR'] . "\", divplace=\"" . $info['DIV']['PLAC'] . "\", husband=\"" . $info['HUSB'] . "\", wife=\"" . $info['WIFE'] . "\", sealdate=\"" . $info['SLGS']['DATE'] . "\", sealdatetr=\"" . $info['SLGS']['DATETR'] . "\", sealplace=\"$slgsplace\", changedby=\"$currentuser\" $chdatestr$branchstr WHERE familyID=\"$familyID\" AND gedcom = \"$tree\"";
+      $query = "UPDATE $families_table SET marrdate=\"" . $info['MARR']['DATE'] . "\", marrdatetr=\"" . $info['MARR']['DATETR'] . "\", marrplace=\"" . $info['MARR']['PLAC'] . "\", marrtype=\"" . $info['MARR']['TYPE'] . "\", divdate=\"" . $info['DIV']['DATE'] . "\", divdatetr=\"" . $info['DIV']['DATETR'] . "\", divplace=\"" . $info['DIV']['PLAC'] . "\", husband=\"" . $info['HUSB'] . "\", wife=\"" . $info['WIFE'] . "\", sealdate=\"" . $info['SLGS']['DATE'] . "\", sealdatetr=\"" . $info['SLGS']['DATETR'] . "\", sealplace=\"$slgsplace\", changedby=\"$currentuser\" $chdatestr$branchstr WHERE familyID = '$familyID'";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $success = 1;
 
@@ -221,13 +233,12 @@ function getFamilyRecord($familyID, $prevlevel)
   }
   if ($success) {
     if ($savestate['branch']) {
-      $query = "INSERT IGNORE INTO $branchlinks_table (branch,gedcom,persfamID) VALUES(\"{$savestate['branch']}\",\"$tree\",\"$familyID\")";
+      $query = "INSERT IGNORE INTO $branchlinks_table (branch, gedcom, persfamID) VALUES(\"{$savestate['branch']}\", '', '$familyID')";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     }
     if ($custeventctr) {
       saveCustEvents($prefix, $familyID, $events, $custeventctr);
     }
-
     if (isset($cite)) {
       processCitations($familyID, "", $cite);
     }
@@ -236,17 +247,16 @@ function getFamilyRecord($familyID, $prevlevel)
         processCitations($familyID, $citeevent, $info[$citeevent]['SOUR']);
       }
     }
-
     if ($notecount) {
       for ($notectr = 1; $notectr <= $notecount; $notectr++) {
         saveNote($familyID, $stdnotes[$notectr]['TAG'], $stdnotes[$notectr]);
       }
     }
-
     //do associations
     if (count($assocarr)) {
       foreach ($assocarr as $assoc) {
-        $query = "INSERT INTO $assoc_table (gedcom, personID, passocID, relationship, reltype) VALUES( \"$tree\", \"$familyID\", \"{$assoc['asso']}\", \"{$assoc['rela']}\", \"{$assoc['reltype']}\" )";
+        $query = "INSERT INTO $assoc_table (gedcom, personID, passocID, relationship, reltype) "
+            . "VALUES('', '$familyID', \"{$assoc['asso']}\", \"{$assoc['rela']}\", \"{$assoc['reltype']}\" )";
         $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
     }

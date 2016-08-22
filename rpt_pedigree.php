@@ -24,7 +24,6 @@ $pdf->AddFont($rptFont);
 if ($blankform) {
   $title = uiTextSnippet('pedigreech');
 } else {
-  $righttree = checktree($tree);
   $infoAncestors = getMyAncestors($personID, $tree, $genperpage);
   $title = uiTextSnippet('pedigreefor') . " " . getName($infoAncestors[0][0]);
 }

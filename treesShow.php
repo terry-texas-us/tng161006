@@ -56,7 +56,7 @@ $headSection->setTitle(uiTextSnippet('trees'));
           echo "<td>{$row['description']}</td>";
           echo "<td><a href=\"search.php?tree={$row['gedcom']}\">" . number_format($row['pcount']) . "</a></td>";
           echo "<td><a href=\"famsearch.php?tree={$row['gedcom']}\">" . number_format($famrow['fcount']) . "</a></td>";
-          echo "<td><a href=\"sourcesShow.php?tree={$row['gedcom']}\">" . number_format($srcrow['scount']) . "</a></td>";
+          echo "<td><a href=\"sourcesShow.php\">" . number_format($srcrow['scount']) . "</a></td>";
         echo "</tr>\n";
         $i++;
       }

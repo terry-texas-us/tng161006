@@ -47,14 +47,15 @@ $eventdatetr = convertDate($eventdate);
 
 if ($addressID) {
   if ($address1 || $address2 || $city || $state || $zip || $country || $phone || $email || $www) {
-    $query = "UPDATE $address_table SET address1=\"$address1\", address2=\"$address2\", city=\"$city\", state=\"$state\", zip=\"$zip\", country=\"$country\", gedcom=\"$tree\", phone=\"$phone\", email=\"$email\", www=\"$www\" WHERE addressID = \"$addressID\"";
+    $query = "UPDATE $address_table SET address1 = '$address1', address2 = '$address2', city = '$city', state = '$state', zip = '$zip\", country = '$country', gedcom = '', phone = '$phone', email = '$email', www = '$www' WHERE addressID = '$addressID'";
   } else {
-    $query = "DELETE FROM $address_table WHERE addressID = \"$addressID\"";
+    $query = "DELETE FROM $address_table WHERE addressID = '$addressID'";
     $addressID = "";
   }
   $result = tng_query($query);
 } elseif ($address1 || $address2 || $city || $state || $zip || $country || $phone || $email || $www) {
-  $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, gedcom, phone, email, www)  VALUES(\"$address1\", \"$address2\", \"$city\", \"$state\", \"$zip\", \"$country\", \"$tree\", \"$phone\", \"$email\", \"$www\")";
+  $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, gedcom, phone, email, www) "
+      . "VALUES('$address1', '$address2', '$city', '$state', '$zip', '$country', '', '$phone', '$email', '$www')";
   $result = tng_query($query);
   $addressID = tng_insert_id();
 }
@@ -63,15 +64,13 @@ $query = "UPDATE $events_table SET eventdate=\"$eventdate\", eventdatetr=\"$even
 $result = tng_query($query);
 
 if (trim($eventplace)) {
-  $placetree = $tngconfig['places1tree'] ? "" : $tree;
-  $query = "INSERT IGNORE INTO $places_table (gedcom,place,placelevel,zoom) VALUES (\"$placetree\",\"$eventplace\",\"0\",\"0\")";
+  $query = "INSERT IGNORE INTO $places_table (gedcom, place, placelevel, zoom) VALUES ('', '$eventplace', '0', '0')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   if ($tngconfig['autogeo'] && tng_affected_rows()) {
     $ID = tng_insert_id();
     $message = geocode($eventplace, 0, $ID);
   }
 }
-
 adminwritelog(uiTextSnippet('modifyevent') . ": $eventID");
 
 $query = "SELECT display FROM $eventtypes_table, $events_table WHERE $eventtypes_table.eventtypeID = $events_table.eventtypeID AND eventID = \"$eventID\"";

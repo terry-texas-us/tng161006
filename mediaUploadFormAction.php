@@ -46,7 +46,6 @@ $options = array(
         'thumb_suffix' => $thumbsuffix,
         'thumb_maxwidth' => $thumbmaxw,
         'thumb_maxheight' => $thumbmaxh,
-        'tree' => $tree, // [ts] undefined .. is this ok?
         'media_table' => $media_table,
         'medialinks_table' => $medialinks_table,
         'mediatypes_table' => $mediatypes_table,

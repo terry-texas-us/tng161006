@@ -69,13 +69,13 @@ if ($subquery) {
   $cemresult = "";
 }
 if (!$cemeteryID) {
-  $toppagenav = buildSearchResultPagination($totrows, "headstones.php?country=$country&amp;state=$state&amp;county=$county&amp;city=$city&amp;tree=$tree&amp;cemoffset", $max_cemeteries, $max_pages);
+  $toppagenav = buildSearchResultPagination($totrows, "headstones.php?country=$country&amp;state=$state&amp;county=$county&amp;city=$city&amp;cemoffset", $max_cemeteries, $max_pages);
   $tngpage = 1;
 }
 if (!$tngpage && !$cemeteryID && $cemresult && tng_num_rows($cemresult) == 1) {
   $cemetery = tng_fetch_assoc($cemresult);
   tng_free_result($cemresult);
-  header("Location: cemeteriesShowCemetery.php?cemeteryID={$cemetery['cemeteryID']}&tree=$tree");
+  header("Location: cemeteriesShowCemetery.php?cemeteryID={$cemetery['cemeteryID']}");
   exit;
 }
 if ($offset) {
@@ -111,7 +111,7 @@ $titlestr = uiTextSnippet('cemeteriesheadstones');
 if ($location) {
   $titlestr .= " " . uiTextSnippet('in') . " $location";
 }
-$logstring = "<a href=\"headstones.php?country=$country&amp;state=$state&amp;county=$county&amp;city=$city&amp;cemeteryID=$cemeteryID&amp;tree=$tree\">$titlestr</a>";
+$logstring = "<a href=\"headstones.php?country=$country&amp;state=$state&amp;county=$county&amp;city=$city&amp;cemeteryID=$cemeteryID\">$titlestr</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -137,14 +137,6 @@ if ($location) {
     $hiddenfields[] = array('name' => 'country', 'value' => $country);
     $hiddenfields[] = array('name' => 'state', 'value' => $state);
     $hiddenfields[] = array('name' => 'county', 'value' => $county);
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'headstones', 'method' => 'get', 'name' => 'form1', 'id' => 'form1', 'hidden' => $hiddenfields));
-
-    if ($tree) {
-      $wherestr = " AND ($media_table.gedcom = \"$tree\" || $media_table.gedcom = \"\")";
-      $wherestr2 = " AND $medialinks_table.gedcom = \"$tree\"";
-    } else {
-      $wherestr = $wherestr2 = "";
-    }
 
     $body = "";
     $cemcount = 0;
@@ -157,7 +149,7 @@ if ($location) {
       $thiscem = $subquery ? $cemetery['cemeteryID'] : "";
       $query = "SELECT DISTINCT $media_table.mediaID, description, notes, path, thumbpath, status, plot, showmap, usecollfolder, form, mediatypeID, abspath, newwindow
         FROM $media_table LEFT JOIN $medialinks_table on $media_table.mediaID = $medialinks_table.mediaID
-        WHERE mediatypeID = \"headstones\" AND cemeteryID = \"$thiscem\" $wherestr ORDER BY description LIMIT $newoffset" . $maxsearchresults;
+        WHERE mediatypeID = 'headstones' AND cemeteryID = '$thiscem' ORDER BY description LIMIT $newoffset" . $maxsearchresults;
       if (!$subquery) {
         $cemetery = array();
         $cemetery['cemname'] = uiTextSnippet('nocemetery');
@@ -167,7 +159,7 @@ if ($location) {
 
       $numrows = tng_num_rows($hsresult);
       if ($numrows == $maxsearchresults || $offsetplus > 1) {
-        $query = "SELECT count(DISTINCT $media_table.mediaID) as hscount FROM $media_table LEFT JOIN $medialinks_table on $media_table.mediaID = $medialinks_table.mediaID WHERE mediatypeID = \"headstones\" AND cemeteryID = \"$thiscem\" $wherestr";
+        $query = "SELECT count(DISTINCT $media_table.mediaID) as hscount FROM $media_table LEFT JOIN $medialinks_table on $media_table.mediaID = $medialinks_table.mediaID WHERE mediatypeID = 'headstones' AND cemeteryID = '$thiscem'";
         $result2 = tng_query($query);
         $row = tng_fetch_assoc($result2);
         $totrows = $row['hscount'];
@@ -179,7 +171,7 @@ if ($location) {
       if ($cemetery['cemname'] == uiTextSnippet('nocemetery')) {
         $location = $cemetery['cemname'];
       } else {
-        $location = "<a href=\"cemeteriesShowCemetery.php?cemeteryID={$cemetery['cemeteryID']}&amp;tree=$tree\">" . $cemetery['cemname'];
+        $location = "<a href=\"cemeteriesShowCemetery.php?cemeteryID={$cemetery['cemeteryID']}\">" . $cemetery['cemname'];
         if ($cemetery['city']) {
           if ($location) {
             $location .= ", ";
@@ -240,7 +232,7 @@ if ($location) {
 
       $body .= $location;
       $body .= "</h4>";
-      $pagenav = buildSearchResultPagination($totrows, "headstones.php?cemeteryID={$cemetery['cemeteryID']}&amp;tree=$tree&amp;offset", $maxsearchresults, 5);
+      $pagenav = buildSearchResultPagination($totrows, "headstones.php?cemeteryID={$cemetery['cemeteryID']}&amp;offset", $maxsearchresults, 5);
       $body .= "<p>$pagenav</p>";
       $body .= "</div>\n";
 
@@ -269,7 +261,7 @@ if ($location) {
           LEFT JOIN $families_table ON ($medialinks_table.personID = $families_table.familyID AND $medialinks_table.gedcom = $families_table.gedcom)
           LEFT JOIN $sources_table ON ($medialinks_table.personID = $sources_table.sourceID AND $medialinks_table.gedcom = $sources_table.gedcom)
           LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID AND $medialinks_table.gedcom = $repositories_table.gedcom)
-          WHERE mediaID = \"{$hs['mediaID']}\" AND $medialinks_table.gedcom = $treesTable.gedcom $wherestr2 ORDER BY lastname, lnprefix, firstname, $medialinks_table.personID";
+          WHERE mediaID = \"{$hs['mediaID']}\" ORDER BY lastname, lnprefix, firstname, $medialinks_table.personID";
 
         $presult = tng_query($query);
         $hslinktext = "";
@@ -280,7 +272,7 @@ if ($location) {
 
           $hstext = "";
           if ($prow['personID2'] != null) {
-            $hslinktext .= "<a href=\"peopleShowPerson.php?personID={$prow['personID2']}&amp;tree={$prow['gedcom']}\">";
+            $hslinktext .= "<a href=\"peopleShowPerson.php?personID={$prow['personID2']}\">";
             $hslinktext .= getName($prow);
             $deathdate = $prow['deathdate'] ? $prow['deathdate'] : $prow['burialdate'];
             if ($prow['deathdate']) {
@@ -290,16 +282,15 @@ if ($location) {
             }
             $hstext = $deathdate ? " ($abbrev " . displayDate($deathdate) . ")" : "";
           } elseif ($prow['familyID'] != null) {
-            $hslinktext .= "<a href=\"familiesShowFamily.php?familyID={$prow['familyID']}&amp;tree={$prow['gedcom']}<br>}\">" . uiTextSnippet('family') . ": " . getFamilyName($prow);
+            $hslinktext .= "<a href=\"familiesShowFamily.php?familyID={$prow['familyID']}<br>}\">" . uiTextSnippet('family') . ": " . getFamilyName($prow);
           } elseif ($prow['sourceID'] != null) {
             $sourcetext = $prow['title'] ? uiTextSnippet('source') . ": {$prow['title']}" : uiTextSnippet('source') . ": {$prow['sourceID']}";
-            $hslinktext .= "<a href=\"showsource.php?sourceID={$prow['sourceID']}&amp;tree={$prow['gedcom']}\">$sourcetext";
+            $hslinktext .= "<a href=\"showsource.php?sourceID={$prow['sourceID']}\">$sourcetext";
           } elseif ($prow['repoID'] != null) {
             $repotext = $prow['reponame'] ? uiTextSnippet('repository') . ": {$prow['reponame']}" : uiTextSnippet('repository') . ": {$prow['repoID']}";
-            $hslinktext .= "<a href=\"repositoriesShowItem.php?repoID={$prow['repoID']}&amp;tree={$prow['gedcom']}\">$repotext";
+            $hslinktext .= "<a href=\"repositoriesShowItem.php?repoID={$prow['repoID']}\">$repotext";
           } else {
-            $treestr = $tngconfig['places1tree'] ? "" : "&amp;tree={$prow['gedcom']}";
-            $hslinktext .= "<a href=\"placesearch.php?psearch={$prow['personID']}$treestr\">{$prow['personID']}";
+            $hslinktext .= "<a href=\"placesearch.php?psearch={$prow['personID']}\">{$prow['personID']}";
           }
           $hslinktext .= "</a>$hstext\n<br>\n";
         }

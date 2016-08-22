@@ -7,10 +7,9 @@ $_SESSION['tng_email'] = generatePassword(1);
 $_SESSION['tng_comments'] = generatePassword(1);
 $_SESSION['tng_yourname'] = generatePassword(1);
 
-$righttree = checktree($tree);
 $preemail = getCurrentUserEmail($currentuser, $users_table);
 
-$query = "SELECT reponame FROM $repositories_table WHERE repoID = \"$ID\" AND gedcom = \"$tree\"";
+$query = "SELECT reponame FROM $repositories_table WHERE repoID = '$ID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -61,7 +60,6 @@ $headSection->setTitle($headTitle);
         <textarea class='form-control' name="<?php echo $_SESSION['tng_comments']; ?>" rows='4' required></textarea>
         <input name='enttype' type='hidden' value="R">
         <input name='ID' type='hidden' value="<?php echo $ID; ?>">
-        <input name='tree' type='hidden' value="<?php echo $tree; ?>">
         <br>
         <button class="btn btn-primary btn-block" type="submit"><?php echo uiTextSnippet('submitsugg'); ?></button>
       </div>

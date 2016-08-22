@@ -3,11 +3,7 @@ require 'tng_begin.php';
 
 $query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $result = tng_query($query);
-$numtrees = tng_num_rows($result);
 
-if ($_SESSION['tng_search_ftree']) {
-  $tree = $_SESSION['tng_search_ftree'];
-}
 $flnqualify = $_SESSION['tng_search_flnqualify'];
 $myflastname = $_SESSION['tng_search_flastname'];
 $ffnqualify = $_SESSION['tng_search_ffnqualify'];
@@ -51,13 +47,6 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
     ?>
     <form action="famsearch.php" name="famsearch" onsubmit="return makeURL();">
       <div id='searchform'>
-        <?php if ((!$requirelogin || !$treerestrict || !$assignedtree) && $numtrees > 1) { ?>
-          <div class='row'>
-            <div class='offset-md-8 col-md-4'>
-              <?php echo treeSelect($result); ?>
-            </div>
-          </div>
-        <?php } ?>
         <div class='father-name'>
           <fieldset>
             <legend><?php echo uiTextSnippet('fathername'); ?></legend>
@@ -390,9 +379,6 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
   <script>
     function resetValues() {
-      <?php if ((!$requirelogin || !$treerestrict || !$assignedtree) && $numtrees > 1) {
-        echo "  document.famsearch.tree.selectedIndex = 0;";
-      } ?>
       document.famsearch.flnqualify.selectedIndex = 0;
       document.famsearch.ffnqualify.selectedIndex = 0;
       document.famsearch.mlnqualify.selectedIndex = 0;
@@ -437,10 +423,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
 
       URL = "mybool=" + thisform.mybool[thisform.mybool.selectedIndex].value;
       URL = URL + "&nr=" + thisform.nr[thisform.nr.selectedIndex].value;
-      <?php if ((!$requirelogin || !$treerestrict || !$assignedtree) && $numtrees > 1) { ?>
-      URL = URL + "&tree=" + thisform.tree[thisform.tree.selectedIndex].value;
       <?php
-      }
       $qualifiers = array("fln", "ffn", "mln", "mfn", "fid", "mp", "my", "dvp", "dvy");
       $criteria = array("flastname", "ffirstname", "mlastname", "mfirstname", "familyid", "marrplace", "marryear", "divplace", "divyear");
 
@@ -456,7 +439,6 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
       <?php
       $qcount++;
       }
-
       //get eventtypeIDs from $eventtypes_table
       $query = "SELECT eventtypeID, tag FROM $eventtypes_table WHERE keep=\"1\" AND type=\"F\"";
       $etresult = tng_query($query);

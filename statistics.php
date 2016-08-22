@@ -3,8 +3,7 @@
 // copyright July 2003. Used by permission.
 require 'tng_begin.php';
 
-$treestr = $tree ? " (" . uiTextSnippet('tree') . ": $tree)" : "";
-$logstring = "<a href='statistics.php?tree=$tree'>" . xmlcharacters(uiTextSnippet('databasestatistics') . $treestr) . "</a>";
+$logstring = "<a href='statistics.php'>" . xmlcharacters(uiTextSnippet('databasestatistics')) . "</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -21,9 +20,6 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
   <section class='container'>
     <?php echo $publicHeaderSection->build(); ?>
     <h2><img class='icon-md' src='svg/bar-graph.svg'><?php echo uiTextSnippet('databasestatistics'); ?></h2>
-    <?php
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'statistics', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
-    ?>
     <table class='table table-sm'>
       <thead>
         <tr>
@@ -32,33 +28,24 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
         </tr>
       </thead>
       <?php
-      $query = "SELECT lastimportdate, treename, secret FROM $treesTable WHERE gedcom = \"$tree\"";
+      $query = "SELECT lastimportdate, treename, secret FROM $treesTable";
       $result = tng_query($query);
       $treerow = tng_fetch_array($result, 'assoc');
       $lastimportdate = $treerow['lastimportdate'];
 
-      if ($tree) {
-        $wherestr = "WHERE gedcom = \"$tree\"";
-        $wherestr2 = "AND gedcom= \"$tree\"";
-      } else {
-        $wherestr = "";
-        $wherestr2 = "";
-      }
-
-      $query = "SELECT count(id) as pcount FROM $people_table $wherestr";
+      $query = "SELECT count(id) as pcount FROM $people_table";
       $result = tng_query($query);
       $row = tng_fetch_assoc($result);
       $totalpeople = $row['pcount'];
       tng_free_result($result);
 
-      $query = "SELECT count(id) as fcount FROM $families_table $wherestr";
+      $query = "SELECT count(id) as fcount FROM $families_table";
       $result = tng_query($query);
       $row = tng_fetch_assoc($result);
       $totalfamilies = $row['fcount'];
       tng_free_result($result);
 
-      $query = "SELECT count(DISTINCT ucase(lastname)) as lncount
-     FROM $people_table $wherestr";
+      $query = "SELECT count(DISTINCT ucase(lastname)) as lncount FROM $people_table";
       $result = tng_query($query);
       $row = tng_fetch_array($result);
       $uniquesurnames = number_format($row['lncount']);
@@ -67,31 +54,26 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
       $totalmedia = array();
       foreach ($mediatypes as $mediatype) {
         $mediatypeID = $mediatype['ID'];
-        if ($tree) {
-          $query = "SELECT count(distinct mediaID) as mcount FROM $media_table
-        WHERE mediatypeID = \"$mediatypeID\" AND (gedcom = \"$tree\" OR gedcom = \"\")";
-        } else {
-          $query = "SELECT count(mediaID) as mcount FROM $media_table WHERE mediatypeID = \"$mediatypeID\"";
-        }
+        $query = "SELECT count(mediaID) as mcount FROM $media_table WHERE mediatypeID = '$mediatypeID'";
+
         $result = tng_query($query);
         $row = tng_fetch_assoc($result);
         $totalmedia[$mediatypeID] = number_format($row['mcount']);
         tng_free_result($result);
       }
-
-      $query = "SELECT count(id) as scount FROM $sources_table $wherestr";
+      $query = "SELECT count(id) as scount FROM $sources_table";
       $result = tng_query($query);
       $row = tng_fetch_assoc($result);
       $totalsources = number_format($row['scount']);
       tng_free_result($result);
 
-      $query = "SELECT count(id) as pcount FROM $people_table WHERE sex = 'M' $wherestr2";
+      $query = "SELECT count(id) as pcount FROM $people_table WHERE sex = 'M'";
       $result = tng_query($query);
       $row = tng_fetch_assoc($result);
       $males = $row['pcount'];
       tng_free_result($result);
 
-      $query = "SELECT count(id) as pcount FROM $people_table WHERE sex = 'F' $wherestr2";
+      $query = "SELECT count(id) as pcount FROM $people_table WHERE sex = 'F'";
       $result = tng_query($query);
       $row = tng_fetch_assoc($result);
       $females = $row['pcount'];
@@ -99,7 +81,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
 
       $unknownsex = $totalpeople - $males - $females;
 
-      $query = "SELECT count(id) as pcount FROM $people_table WHERE living != 0 $wherestr2";
+      $query = "SELECT count(id) as pcount FROM $people_table WHERE living != 0";
       $result = tng_query($query);
       $row = tng_fetch_assoc($result);
       $numliving = number_format($row['pcount']);
@@ -107,7 +89,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
 
       $query = "SELECT personID, firstname, lnprefix, lastname, birthdate, gedcom, living, private, branch
       FROM $people_table 
-      WHERE birthdatetr != '0000-00-00' $wherestr2
+      WHERE birthdatetr != '0000-00-00'
       ORDER BY birthdatetr LIMIT 1";
       $result = tng_query($query);
       $firstbirth = tng_fetch_array($result);
@@ -133,7 +115,6 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
         AND birthdate not like 'ABT%' AND deathdate not like 'ABT%'
         AND birthdate not like 'BET%' AND deathdate not like 'BET%'
         AND birthdate not like 'CAL%' AND deathdate not like 'CAL%'
-        $wherestr2
         ORDER BY totaldays DESC";
       $result = tng_query($query);
       $numpeople = tng_num_rows($result);
@@ -223,7 +204,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
 
       echo "<tr><td>" . uiTextSnippet('earliestbirth');
       if ($firstallowed) {
-        echo " (<a href=\"peopleShowPerson.php?personID=$firstbirthpersonid&amp;tree=$firstbirthgedcom\">$firstbirthfirstname $firstbirthlnprefix $firstbirthlastname</a>)";
+        echo " (<a href=\"peopleShowPerson.php?personID=$firstbirthpersonid\">$firstbirthfirstname $firstbirthlnprefix $firstbirthlastname</a>)";
       }
       echo "</td>\n";
       echo "<td>" . displayDate($firstbirthdate) . "</td></tr>\n";
@@ -254,7 +235,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
         AS yearsold, DAYOFYEAR( deathdatetr ) - DAYOFYEAR( birthdatetr ) AS daysold,
         IF(DAYOFYEAR(deathdatetr) and DAYOFYEAR(birthdatetr),TO_DAYS(deathdatetr) - TO_DAYS(birthdatetr),(YEAR(deathdatetr) - YEAR(birthdatetr)) * 365) as totaldays
           FROM $people_table
-          WHERE birthdatetr != '0000-00-00' AND deathdatetr != '0000-00-00' $wherestr2
+          WHERE birthdatetr != '0000-00-00' AND deathdatetr != '0000-00-00'
           AND birthdate not like 'AFT%' AND deathdate not like 'AFT%'
           AND birthdate not like 'BEF%' AND deathdate not like 'BEF%'
           AND birthdate not like 'ABT%' AND deathdate not like 'ABT%'
@@ -282,7 +263,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
             $daysold = 365 + $daysold;
           }
         }
-        echo "<tr><td><a href=\"peopleShowPerson.php?personID=$personid&amp;tree=$gedcom\">";
+        echo "<tr><td><a href=\"peopleShowPerson.php?personID=$personid\">";
         if ($allowed) {
           echo "$firstname $lnprefix $lastname";
         } elseif ($line['private']) {
@@ -314,7 +295,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
 
     if ($tree && !$treerow['secret']) {
       echo "<br>\n";
-      echo "<span><a href='showtree.php?tree=$tree'>" . uiTextSnippet('treedetail') . "</a></span>\n";
+      echo "<span><a href='showtree.php'>" . uiTextSnippet('treedetail') . "</a></span>\n";
       echo "<br>\n";
     }
     echo "<br>\n";

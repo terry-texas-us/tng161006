@@ -12,24 +12,24 @@ if (!$allowMediaEdit) {
   echo uiTextSnippet('norights');
   exit;
 }
-$query = "SELECT DISTINCT personID FROM $medialinks_table WHERE gedcom='$tree'";
+$query = "SELECT DISTINCT personID FROM $medialinks_table";
 $result = tng_query($query);
 
 $defsdone = 0;
 while ($distinctplink = tng_fetch_assoc($result)) {
   //must have a thumbnail
-  $query2 = "SELECT medialinkID FROM ($medialinks_table, $media_table) WHERE $medialinks_table.mediaID = $media_table.mediaID AND $medialinks_table.gedcom=\"$tree\" AND personID = \"{$distinctplink['personID']}\" AND thumbpath != \"\" and mediatypeID = \"photos\" ORDER BY ordernum";
+  $query2 = "SELECT medialinkID FROM ($medialinks_table, $media_table) WHERE $medialinks_table.mediaID = $media_table.mediaID AND personID = \"{$distinctplink['personID']}\" AND thumbpath != \"\" and mediatypeID = \"photos\" ORDER BY ordernum";
   $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
 
   $defsexist = 0;
   if (!$overwritedefs) {
-    $query3 = "SELECT count(medialinkID) as pcount FROM $medialinks_table WHERE gedcom=\"$tree\" AND personID = \"{$distinctplink['personID']}\" AND defphoto = '1'";
+    $query3 = "SELECT count(medialinkID) as pcount FROM $medialinks_table WHERE personID = \"{$distinctplink['personID']}\" AND defphoto = '1'";
     $result3 = tng_query($query3) or die(uiTextSnippet('cannotexecutequery') . ": $query3");
     $pcountrow = tng_fetch_assoc($result3);
     if ($pcountrow['pcount']) {
       $defsexist = 1;
     } else {
-      $oldstylephoto = $tree ? "$rootpath$photopath/$tree.{$distinctplink['personID']}.$photosext" : "$rootpath$photopath/{$distinctplink['personID']}.$photosext";
+      $oldstylephoto = "$rootpath$photopath/{$distinctplink['personID']}.$photosext";
       if (file_exists($oldstylephoto)) {
         $defsexist = 1;
       }

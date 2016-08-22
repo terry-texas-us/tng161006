@@ -9,16 +9,12 @@ require 'version.php';
 if ($newsearch) {
   $exptime = 0;
   setcookie("tng_search_sources_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_sources_post[tree]", $tree, $exptime);
   setcookie("tng_search_sources_post[exactmatch]", $exactmatch, $exptime);
   setcookie("tng_search_sources_post[tngpage]", 1, $exptime);
   setcookie("tng_search_sources_post[offset]", 0, $exptime);
 } else {
   if (!$searchstring) {
     $searchstring = stripslashes($_COOKIE['tng_search_sources_post']['search']);
-  }
-  if (!$tree) {
-    $tree = $_COOKIE['tng_search_sources_post']['tree'];
   }
   if (!$exactmatch) {
     $exactmatch = $_COOKIE['tng_search_sources_post']['exactmatch'];
@@ -44,14 +40,6 @@ if ($offset) {
   $tngpage = 1;
 }
 
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-  $tree = $assignedtree;
-} else {
-  $wherestr = "";
-}
-$orgtree = $tree;
-
 function addCriteria($field, $value, $operator) {
   $criteria = "";
 
@@ -73,12 +61,7 @@ function addCriteria($field, $value, $operator) {
 
   return $criteria;
 }
-
-if ($tree) {
-  $allwhere = "$sources_table.gedcom = \"$tree\" AND $sources_table.gedcom = $treesTable.gedcom";
-} else {
-  $allwhere = "$sources_table.gedcom = $treesTable.gedcom";
-}
+$allwhere = "1=1";
 
 if ($searchstring) {
   $allwhere .= " AND (1=0 ";
@@ -129,7 +112,6 @@ $headSection->setTitle(uiTextSnippet('sources'));
     ?>
     <div class="row">
       <form action="sourcesBrowse.php" name='form1' id='form1'>
-        <?php require '_/components/php/treeSelectControl.php'; ?>
         <label for='searchstring'>
           <?php echo uiTextSnippet('searchfor'); ?>
           <input name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>">
@@ -171,15 +153,12 @@ $headSection->setTitle(uiTextSnippet('sources'));
             <?php } ?>
             <th><span><?php echo uiTextSnippet('sourceid'); ?></span></th>
             <th><span><?php echo uiTextSnippet('title'); ?></span></th>
-            <?php if ($numtrees > 1) { ?>
-              <th><span><?php echo uiTextSnippet('tree'); ?></span></th>
-            <?php } ?>
           </tr>
           <?php
           if ($numrows) {
             $actionstr = "";
             if ($allowEdit) {
-              $actionstr .= "<a href=\"sourcesEdit.php?sourceID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('edit') . "'>\n";
+              $actionstr .= "<a href=\"sourcesEdit.php?sourceID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
               $actionstr .= "</a>\n";
             }
@@ -188,16 +167,15 @@ $headSection->setTitle(uiTextSnippet('sources'));
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
               $actionstr .= "</a>\n";
             }
-            $actionstr .= "<a href=\"sourcesShowSource.php?sourceID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('preview') . "'>\n";
+            $actionstr .= "<a href=\"sourcesShowSource.php?sourceID=xxx\" title='" . uiTextSnippet('preview') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
             $actionstr .= "</a>\n";
 
             while ($row = tng_fetch_assoc($result)) {
               $newactionstr = preg_replace("/xxx/", $row['sourceID'], $actionstr);
-              $newactionstr = preg_replace("/yyy/", $row['gedcom'], $newactionstr);
               $newactionstr = preg_replace("/zzz/", $row['ID'], $newactionstr);
               $title = $row['shorttitle'] ? $row['shorttitle'] : $row['title'];
-              $editlink = "sourcesEdit.php?sourceID={$row['sourceID']}&amp;tree={$row['gedcom']}";
+              $editlink = "sourcesEdit.php?sourceID={$row['sourceID']}";
               $id = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['sourceID'] . "</a>" : $row['sourceID'];
 
               echo "<tr id=\"row_{$row['ID']}\">\n";
@@ -207,9 +185,6 @@ $headSection->setTitle(uiTextSnippet('sources'));
                 }
                 echo "<td>$id</td>\n";
                 echo "<td>$title</td>\n";
-                if ($numtrees > 1) {
-                  echo "<td>{$row['treename']}</td>\n";
-                }
               echo "</tr>\n";
             }
           } else {

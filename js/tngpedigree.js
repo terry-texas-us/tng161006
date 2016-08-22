@@ -75,7 +75,7 @@ function setFirstPerson(newperson) {
     if (newperson != firstperson) {
         firstperson = newperson;
         if (!tngprint) {
-            var params = 'personID=' + newperson + '&tree=' + tree + '&parentset=' + parentset + '&generations=' + generations;
+            var params = 'personID=' + newperson + '&parentset=' + parentset + '&generations=' + generations;
             $("#stdpedlnk").attr('href', 'pedigree.php?' + params + '&display=standard');
             $("#compedlnk").attr('href', 'pedigree.php?' + params + '&display=compact');
             $("#boxpedlnk").attr('href', 'pedigree.php?' + params + '&display=box');
@@ -90,7 +90,7 @@ function fetchData(famParams, newgens) {
     var loading = $("#loading");
     loading.css('visibility', 'visible');
 
-    var strParams = "generations=" + newgens + "&tree=" + tree + '&display=' + display + famParams;
+    var strParams = "generations=" + newgens + '&display=' + display + famParams;
     var loader1 = new net.ContentLoader('ajx_pedjson.php?', FillChart, null, "POST", strParams);
 }
 
@@ -238,7 +238,7 @@ function FillSlot(slot, currperson, lastperson) {
                 content = '<a href="' + slotperson.photolink + '">' + content + '</a>';
             content = '<td class="lefttop">' + content + '</td>';
         }
-        content += '<td class="pboxname" id="td' + slot + '">' + namepad + '<a href="peopleShowPerson.php?personID=' + slotperson.personID + '&amp;tree=' + slotperson.tree + '" id="tdlink' + slot + '">' + slotperson.name + '</a>';
+        content += '<td class="pboxname" id="td' + slot + '">' + namepad + '<a href="peopleShowPerson.php?personID=' + slotperson.personID + '" id="tdlink' + slot + '">' + slotperson.name + '</a>';
         content += getGenderIcon(slotperson.gender);
 
         //put small pedigree link in every box except for primary individual
@@ -471,14 +471,14 @@ function getPopup(slot) {
             parentlink = '';
 
             if (par.fatherID)
-                parentlink += '<a href="peopleShowPerson.php?personID=' + par.fatherID + '&amp;tree=' + tree + '">' + par.fathername + '</a>';
+                parentlink += '<a href="peopleShowPerson.php?personID=' + par.fatherID + '">' + par.fathername + '</a>';
             if (par.motherID) {
                 if (parentlink)
                     parentlink += ", ";
-                parentlink += '<a href="peopleShowPerson.php?personID=' + par.motherID + '&amp;tree=' + tree + '">' + par.mothername + '</a>';
+                parentlink += '<a href="peopleShowPerson.php?personID=' + par.motherID + '">' + par.mothername + '</a>';
             }
             if (par.famID != slotperson.famc)
-                parpedlink = '<a href="pedigree.php?personID=' + slotperson.personID + '&amp;tree=' + tree + '&amp;parentset=' + count + '&amp;display=' + display + '&amp;generations=' + generations + '">' + chartlink + '</a>';
+                parpedlink = '<a href="pedigree.php?personID=' + slotperson.personID + '&amp;parentset=' + count + '&amp;display=' + display + '&amp;generations=' + generations + '">' + chartlink + '</a>';
             else
                 parpedlink = '';
             popupcontent += '<tr><td ' + tdclasstxt + ' id="popabbr' + slot + '"><b>' + count + '</b></td>';
@@ -498,14 +498,14 @@ function getPopup(slot) {
             if (popupcontent)
                 popupcontent += '<div class="popdivider"></div>';
             popupcontent += divtxt;
-            popupcontent += '<tr><td ' + tdclasstxt + ' colspan="4" id="pop' + slot + '"><B>' + textSnippet('family') + ':</B> [<a href=\"familiesShowFamily.php?familyID=' + fam.spFamID + '&amp;tree=' + tree + '">' + textSnippet('groupsheet') + '</a>]';
+            popupcontent += '<tr><td ' + tdclasstxt + ' colspan="4" id="pop' + slot + '"><B>' + textSnippet('family') + ':</B> [<a href=\"familiesShowFamily.php?familyID=' + fam.spFamID + '">' + textSnippet('groupsheet') + '</a>]';
             if (allow_edit)
                 popupcontent += editIcon('F', slot, slotperson.backperson, fam.spFamID, slotperson.gender);
             popupcontent += '</td></tr>';
             //do each spouse
             sppedlink = '';
             if (fam.spID && fam.spID != -1) {
-                spouselink = '<a href="peopleShowPerson.php?personID=' + fam.spID + '&amp;tree=' + tree + '">' + fam.spname + '</a>';
+                spouselink = '<a href="peopleShowPerson.php?personID=' + fam.spID + '">' + fam.spname + '</a>';
                 if (popupchartlinks)
                     sppedlink = pedIcon(fam.spID);
             } else
@@ -520,7 +520,7 @@ function getPopup(slot) {
                 for (var j = 0; j < children.length; j++) {
                     var spchild = children[j];
 
-                    kidlink = '<a href="peopleShowPerson.php?personID=' + spchild.childID + '&amp;tree=' + tree + '">' + spchild.name + '</a>';
+                    kidlink = '<a href="peopleShowPerson.php?personID=' + spchild.childID + '">' + spchild.name + '</a>';
                     if (popupchartlinks)
                         kidpedlink = pedIcon(spchild.childID);
                     else
@@ -554,5 +554,5 @@ function editIcon(type, slot, personID, familyID, gender) {
 }
 
 function pedIcon(personID) {
-    return ' <a href="pedigree.php?personID=' + personID + '&amp;tree=' + tree + '&amp;display=' + display + '&amp;generations=' + generations + '" title="' + textSnippet('popupnote2') + '">' + chartlink + '</a>';
+    return ' <a href="pedigree.php?personID=' + personID + '&amp;display=' + display + '&amp;generations=' + generations + '" title="' + textSnippet('popupnote2') + '">' + chartlink + '</a>';
 }

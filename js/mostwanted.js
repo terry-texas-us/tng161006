@@ -186,7 +186,7 @@ function getNewMwMedia(form) {
     });
 }
 
-function getMoreMedia(searchstring, mediatypeID, hsstat, cemeteryID, offset, tree, page, albumID) {
+function getMoreMedia(searchstring, mediatypeID, hsstat, cemeteryID, offset, page, albumID) {
     'use strict';
     var params = {
         searchstring: searchstring,
@@ -194,7 +194,6 @@ function getMoreMedia(searchstring, mediatypeID, hsstat, cemeteryID, offset, tre
         hsstat: hsstat,
         cemeteryID: cemeteryID,
         offset: offset,
-        tree: tree,
         page: page,
         albumID: albumID
     };

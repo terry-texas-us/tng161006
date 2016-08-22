@@ -4,9 +4,6 @@
     <div class='card-block'>
       <div class='row form-group'>
         <div class='col-sm-6'>
-          <?php require '_/components/php/treeSelectControl.php'; ?>
-        </div>
-        <div class='col-sm-6'>
           <label for='searchstring' class='sr-only'><?php echo uiTextSnippet('searchfor'); ?></label>
           <input class='form-control' name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>" placeholder="<?php echo uiTextSnippet('searchfor'); ?>" autofocus>
           <button class='btn btn-outline-primary' name='submit' type='submit'><?php echo uiTextSnippet('search'); ?></button>

@@ -1,8 +1,7 @@
 <?php
 require 'tng_begin.php';
 
-$treestr = $tree ? " (" . uiTextSnippet('tree') . ": $tree)" : "";
-$logstring = "<a href='surnames.php?tree=$tree'>" . xmlcharacters(uiTextSnippet('surnamelist') . $treestr) . "</a>";
+$logstring = "<a href='surnames.php'>" . xmlcharacters(uiTextSnippet('surnamelist')) . "</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -21,7 +20,6 @@ $headSection->setTitle(uiTextSnippet('surnamelist'));
     <h2><img class='icon-md' src='svg/person.svg'><?php echo uiTextSnippet('surnamelist'); ?></h2>
     <br class='clearleft'>
     <?php
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'surnames', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
     $linkstr = "";
     $linkstr2col1 = "";
     $linkstr2col2 = "";
@@ -32,8 +30,7 @@ $headSection->setTitle(uiTextSnippet('surnamelist'));
     $nosurname = urlencode(uiTextSnippet('nosurname'));
     $text['top30'] = preg_replace("/xxx/", "30", $text['top30']);
 
-    $wherestr = $tree ? "WHERE gedcom = \"$tree\"" : "";
-    $treestr = $orgtree ? "&amp;tree=$tree" : "";
+    $wherestr = "";
 
     $allwhere = getLivingPrivateRestrictions($people_table, false, false);
 
@@ -110,7 +107,7 @@ $headSection->setTitle(uiTextSnippet('surnamelist'));
         <h4><?php echo uiTextSnippet('surnamesstarting'); ?></h4>
       <!--</div>-->
       <p class="firstchars"><?php echo $linkstr; ?></p>
-      <?php echo "<a href='surnames-all.php?tree=$tree'>" . uiTextSnippet('showallsurnames') . "</a> (" . uiTextSnippet('sortedalpha') . ")"; ?>
+      <?php echo "<a href='surnames-all.php'>" . uiTextSnippet('showallsurnames') . "</a> (" . uiTextSnippet('sortedalpha') . ")"; ?>
     <!--</div>-->
 
     <br>
@@ -140,7 +137,6 @@ $headSection->setTitle(uiTextSnippet('surnamelist'));
         echo uiTextSnippet('showtop');
         ?>
         <input name='topnum' type='text' value='100' size='4' maxlength='4'/> <?php echo uiTextSnippet('byoccurrence'); ?>
-        <input name='tree' type='hidden' value="<?php echo $tree; ?>"/>
         <input type='submit' value="<?php echo uiTextSnippet('go'); ?>"/>
       <?php endFormElement(); ?>
     </div>

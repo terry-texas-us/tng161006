@@ -54,29 +54,6 @@ header("Content-type:text/html; charset=" . $session_charset);
           </td>
         </tr>
         <tr>
-          <td><?php echo uiTextSnippet('tree'); ?>:</td>
-          <td>
-            <select name='mwtree' onchange="tree = this.options[this.selectedIndex].value">
-              <?php
-              $wherestr = $assignedtree ? " WHERE gedcom=\"$assignedtree\"" : "";
-              $query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
-              $treeresult = tng_query($query);
-
-              $trees = "";
-              while ($treerow = tng_fetch_assoc($treeresult)) {
-                $trees .= "      <option value=\"{$treerow['gedcom']}\"";
-                if ($treerow['gedcom'] == $row['gedcom']) {
-                  $trees .= " selected";
-                }
-                $trees .= ">{$treerow['treename']}</option>\n";
-              }
-              echo $trees;
-              tng_free_result($treeresult);
-              ?>
-            </select>
-          </td>
-        </tr>
-        <tr>
           <td><?php echo uiTextSnippet('person'); ?>:</td>
           <td>
             <table>
@@ -86,7 +63,7 @@ header("Content-type:text/html; charset=" . $session_charset);
                   &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
                 </td>
                 <td>
-                  <a href='#' title="<?php echo uiTextSnippet('find'); ?>" onclick="return findItem('I', 'personID', '', document.editmostwanted.mwtree.options[document.editmostwanted.mwtree.selectedIndex].value, '<?php echo $assignedbranch; ?>');">
+                  <a href='#' title="<?php echo uiTextSnippet('find'); ?>" onclick="return findItem('I', 'personID', '', '<?php echo $assignedbranch; ?>');">
                     <img class='icon-sm' src='svg/magnifying-glass.svg'>
                   </a>
                 </td>

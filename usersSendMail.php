@@ -31,37 +31,20 @@ $headSection->setTitle(uiTextSnippet('emailusers'));
       <span><br><strong><?php echo uiTextSnippet('selectgroup'); ?></strong></span>
       <div class='row'>
         <div class='col-sm-2'>
-          <span><?php echo uiTextSnippet('tree'); ?>*:</span>
+          <span><?php echo uiTextSnippet('branch'); ?>**:</span>
         </div>
         <div class='col-sm-4'>
-          <select id='gedcom' name='gedcom'>
+          <select name="branch" id="branch">
             <option value=''></option>
-            <?php
-            $query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-            $treeresult = tng_query($query);
-
-            while ($treerow = tng_fetch_assoc($treeresult)) {
-              echo "  <option value=\"{$treerow['gedcom']}\">{$treerow['treename']}</option>\n";
-            }
-            ?>
+            <option value='' selected><?php echo uiTextSnippet('nobranch'); ?></option>
           </select>
         </div>
-          <div class='col-sm-2'>
-            <span><?php echo uiTextSnippet('branch'); ?>**:</span>
-          </div>
-          <div class='col-sm-4'>
-            <select name="branch" id="branch">
-              <option value=''></option>
-              <option value='' selected><?php echo uiTextSnippet('nobranch'); ?></option>
-            </select>
-          </div>
       </div>
       <br>
       <button class='btn btn-primary' name='submit' type='submit'><?php echo uiTextSnippet('send'); ?></button>
     </form>
     <br>
     <p>
-      <span>*<?php echo uiTextSnippet('treemailmsg'); ?></span>
       <br>
       <span>**<?php echo uiTextSnippet('branchmailmsg'); ?></span>
       <br>

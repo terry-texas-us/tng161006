@@ -80,11 +80,11 @@ if ($result2) {
     $linkrows .= "</a>";
     $linkrows .= "</td>\n";
     $linkrows .= "<td>" . uiTextSnippet($type) . "</td>\n";
-    $linkrows .= "<td>$name$id (<a href=\"mediaSortFormAction.php?tree1={$plink['gedcom']}&linktype1=$linktype&mediatypeID=$mediatypeID&newlink1=$entityID&event1=$eventID\">" . uiTextSnippet('text_sort') . "</a>)&nbsp;</td>\n";
+    $linkrows .= "<td>$name$id (<a href=\"mediaSortFormAction.php?linktype1=$linktype&amp;mediatypeID=$mediatypeID&amp;newlink1=$entityID&amp;event1=$eventID\">" . uiTextSnippet('text_sort') . "</a>)&nbsp;</td>\n";
     $linkrows .= "<td>{$plink['treename']}</td>\n";
     $linkrows .= "<td id=\"event_{$plink['mlinkID']}\">$eventstr&nbsp;</td>\n";
     $linkrows .= "<td id=\"alt_{$plink['mlinkID']}\">$alttext</td>\n";
-    $linkrows .= "<td id=\"def_{$plink['mlinkID']}\"><input id=\"defc{$plink['mlinkID']}\" name=\"defc{$plink['mlinkID']}\" type='checkbox' onclick=\"toggleDefault(this,'{$plink['gedcom']}','$entityID');\" value='1'$dchecked\"/></td>\n";
+    $linkrows .= "<td id=\"def_{$plink['mlinkID']}\"><input id=\"defc{$plink['mlinkID']}\" name=\"defc{$plink['mlinkID']}\" type='checkbox' onclick=\"toggleDefault(this,'$entityID');\" value='1'$dchecked\"/></td>\n";
     $linkrows .= "<td id=\"show_{$plink['mlinkID']}\"><input id=\"show{$plink['mlinkID']}\" name=\"show{$plink['mlinkID']}\" type='checkbox' onclick=\"toggleShow(this);\" value='1'$schecked\"/></td></tr>\n";
   }
   tng_free_result($result2);
@@ -130,7 +130,7 @@ if ($result2) {
                  onclick="return addMedia2EntityLink(findform);"> &nbsp;<?php echo uiTextSnippet('or'); ?>
         &nbsp;</td>
       <td>
-        <a href='#' onclick="return findItem(findform.linktype1.options[findform.linktype1.selectedIndex].value, 'newlink', null, findform.tree1.options[findform.tree1.selectedIndex].value, '<?php echo $assignedbranch; ?>', 'm_<?php echo $mediaID; ?>');"
+        <a href='#' onclick="return findItem(findform.linktype1.options[findform.linktype1.selectedIndex].value, 'newlink', null, '<?php echo $assignedbranch; ?>', 'm_<?php echo $mediaID; ?>');"
            title="<?php echo uiTextSnippet('find'); ?>">
           <img class='icon-sm' src='svg/magnifying-glass.svg'>
         </a>

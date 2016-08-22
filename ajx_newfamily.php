@@ -23,7 +23,7 @@ if ($child) {
   }
 }
 if ($newperson) {
-  $query = "SELECT personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch FROM $people_table WHERE personID = \"$newperson\" AND gedcom = \"$tree\"";
+  $query = "SELECT personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch FROM $people_table WHERE personID = '$newperson'";
   $result = tng_query($query);
   $newpersonrow = tng_fetch_assoc($result);
   tng_free_result($result);
@@ -41,11 +41,6 @@ if (!isset($husbstr)) {
 if (!isset($wifestr)) {
   $wifestr = uiTextSnippet('clickfind');
 }
-$query = "SELECT treename FROM $treesTable WHERE gedcom=\"$tree\" ORDER BY treename";
-$result = tng_query($query);
-$treerow = tng_fetch_assoc($result);
-tng_free_result($result);
-
 header("Content-type:text/html; charset=" . $session_charset);
 
 require_once 'eventlib.php';
@@ -73,7 +68,7 @@ require_once 'eventlib.php';
           <td><input id='husbnameplusid' name='husbnameplusid' type='text' size='40' value="<?php echo "$husbstr"; ?>" readonly>
             <input id='husband' name='husband' type='hidden' value="<?php echo $husband; ?>">
             <input type='button' value="<?php echo uiTextSnippet('find'); ?>"
-                   onclick="return findItem('I', 'husband', 'husbnameplusid', '<?php echo $tree; ?>', '<?php echo $assignedbranch; ?>');">
+                   onclick="return findItem('I', 'husband', 'husbnameplusid', '<?php echo $assignedbranch; ?>');">
             <input type='button' value="<?php echo uiTextSnippet('create'); ?>"
                    onclick="return newPerson('M', 'spouse');">
             <input type='button' value="  <?php echo uiTextSnippet('edit'); ?>  "
@@ -88,7 +83,7 @@ require_once 'eventlib.php';
             <input id='wifenameplusid' name='wifenameplusid' type='text' size='40' value="<?php echo "$wifestr"; ?>" readonly>
             <input id='wife' name='wife' type='hidden' value="<?php echo $wife; ?>">
             <input type='button' value="<?php echo uiTextSnippet('find'); ?>"
-                   onclick="return findItem('I', 'wife', 'wifenameplusid', '<?php echo $tree; ?>', '<?php echo $assignedbranch; ?>');">
+                   onclick="return findItem('I', 'wife', 'wifenameplusid', '<?php echo $assignedbranch; ?>');">
             <input type='button' value="<?php echo uiTextSnippet('create'); ?>"
                    onclick="return newPerson('F', 'spouse');">
             <input type='button' value="  <?php echo uiTextSnippet('edit'); ?>  "
@@ -104,11 +99,11 @@ require_once 'eventlib.php';
             <input name='living' type='checkbox' value='1' checked> <?php echo uiTextSnippet('living'); ?>&nbsp;
             <input name='private' type='checkbox' value='1'> <?php echo uiTextSnippet('private'); ?>
           </td>
-          <td><?php echo uiTextSnippet('tree') . ": " . $treerow['treename']; ?></td>
+          <td></td>
           <td><?php echo uiTextSnippet('branch') . ": "; ?></td>
           <td style="height: 2em">
             <?php
-            $query = "SELECT branch, description FROM $branches_table WHERE gedcom = \"$tree\" ORDER BY description";
+            $query = "SELECT branch, description FROM $branches_table ORDER BY description";
             $branchresult = tng_query($query);
             $numbranches = tng_num_rows($branchresult);
             $branchlist = explode(",", $row['branch']);
@@ -177,7 +172,6 @@ require_once 'eventlib.php';
   </div> <!-- .modal-body -->
   <footer class='modal-footer'>
     <input name='newfamily' type='hidden' value='ajax'>
-    <input name='tree1' type='hidden' value="<?php echo $tree; ?>">
     <input name='submit2' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
   </footer>
 </form>

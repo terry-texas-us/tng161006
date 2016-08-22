@@ -6,7 +6,7 @@ require 'adminlib.php';
 $adminLogin = 1;
 require 'checklogin.php';
 
-$query = "SELECT branch, description FROM $branches_table WHERE gedcom=\"$tree\"";
+$query = "SELECT branch, description FROM $branches_table";
 $result = tng_query($query);
 $numrows = tng_num_rows($result);
 

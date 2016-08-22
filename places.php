@@ -1,29 +1,25 @@
 <?php
 
-function buildPlaceMenu($currpage, $entityID)
-{
-  global $tree;
+function buildPlaceMenu($currpage, $entityID) {
   global $allowEdit;
   global $rightbranch;
   global $emailaddr;
-  
+
   $menu = '';
   if ($allowEdit && $rightbranch) {
-    $menu .= "<a id='a0' href='placesEdit.php?ID=" . urlencode($entityID) . "&amp;tree=$tree&amp;cw=1' title='" . uiTextSnippet('edit') . "'>\n";
-      $menu .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
+    $menu .= "<a id='a0' href='placesEdit.php?ID=" . urlencode($entityID) . "&amp;cw=1' title='" . uiTextSnippet('edit') . "'>\n";
+    $menu .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
     $menu .= "</a>\n";
   } elseif ($emailaddr && $currpage != 'suggest') {
-    $menu .= "<a id='a0' href='placeSuggest.php?&amp;ID=" . urlencode($entityID) . "&amp;tree=$tree' title='" . uiTextSnippet('suggest') . "'>\n";
-      $menu .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
+    $menu .= "<a id='a0' href='placeSuggest.php?&amp;ID=" . urlencode($entityID) . "' title='" . uiTextSnippet('suggest') . "'>\n";
+    $menu .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
     $menu .= "</a>\n";
   }
   return $menu;
 }
 
-function processPlaceEvents($prefix, $stdevents, $displaymsgs)
-{
+function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
   global $eventtypes_table;
-  global $tree;
   global $people_table;
   global $families_table;
   global $treesTable;
@@ -54,10 +50,7 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs)
     $idtext = "familyid";
     $namefield = "family";
   }
-  $allwhere .= "$table.gedcom = $treesTable.gedcom";
-  if ($tree) {
-    $allwhere .= " AND $table.gedcom=\"$tree\"";
-  }
+  $allwhere .= "1=1";
   $more = getLivingPrivateRestrictions($table, false, false);
   if ($more) {
     if ($allwhere) {
@@ -164,9 +157,6 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs)
           <th><?php echo $namestr; ?></th>
           <th colspan='2'><?php echo $datestr; ?></th>
           <th><?php echo uiTextSnippet($idtext); ?></th>
-          <?php if ($numtrees > 1) { ?>
-            <th><?php echo uiTextSnippet('tree'); ?></th>
-          <?php } ?>
         </tr>
         <?php
         $i = $offsetplus;
@@ -188,18 +178,15 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs)
           $i++;
           echo "<td>\n";
           if ($prefix == 'F') {
-            echo "<a href=\"familiesShowFamily.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}\">{$row['p1lastname']} / {$row['p2lastname']}</a>\n";
+            echo "<a href=\"familiesShowFamily.php?familyID={$row['familyID']}\">{$row['p1lastname']} / {$row['p2lastname']}</a>\n";
           } elseif ($prefix == 'I') {
             $name = getNameRev($row);
-            echo "<a href=\"pedigree.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$chartlink </a>\n";
-            echo "<a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$name</a>\n";
+            echo "<a href=\"pedigree.php?personID={$row['personID']}\">$chartlink </a>\n";
+            echo "<a href=\"peopleShowPerson.php?personID={$row['personID']}\">$name</a>\n";
           }
           echo "</td>";
           echo "<td colspan='2'>" . displayDate($dateval) . "<br>$placetxt</td>\n";
           echo "<td>{$row[$idfield]} </td>\n";
-          if ($numtrees > 1) {
-            echo "<td><a href=\"showtree.php?tree={$row['gedcom']}\">{$row['treename']}</a></td>";
-          }
           echo "</tr>\n";
         }
         tng_free_result($result);

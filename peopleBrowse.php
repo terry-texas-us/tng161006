@@ -9,7 +9,6 @@ require 'version.php';
 $exptime = 0;
 if ($newsearch) {
   setcookie("tng_search_people_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_people_post[tree]", $tree, $exptime);
   setcookie("tng_search_people_post[living]", $living, $exptime);
   setcookie("tng_search_people_post[exactmatch]", $exactmatch, $exptime);
   setcookie("tng_search_people_post[nokids]", $nokids, $exptime);
@@ -20,9 +19,6 @@ if ($newsearch) {
 } else {
   if (!$searchstring) {
     $searchstring = stripslashes($_COOKIE['tng_search_people_post']['search']);
-  }
-  if (!$tree) {
-    $tree = $_COOKIE['tng_search_people_post']['tree'];
   }
   if (!$living) {
     $living = $_COOKIE['tng_search_people_post']['living'];
@@ -58,13 +54,6 @@ if ($offset) {
   $newoffset = "";
   $tngpage = 1;
 }
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-  $tree = $assignedtree;
-} else {
-  $wherestr = "";
-}
-$orgtree = $tree;
 
 function addCriteria($field, $value, $operator)
 {
@@ -88,11 +77,8 @@ function addCriteria($field, $value, $operator)
   return $criteria;
 }
 
-if ($tree) {
-  $allwhere = "$people_table.gedcom = \"$tree\" AND $people_table.gedcom = $treesTable.gedcom ";
-} else {
-  $allwhere = "$people_table.gedcom = $treesTable.gedcom ";
-}
+$allwhere = "1=1 ";
+
 if ($assignedbranch) {
   $allwhere .= " AND $people_table.branch LIKE \"%$assignedbranch%\"";
 }
@@ -214,27 +200,22 @@ $headSection->setTitle(uiTextSnippet('people'));
               <?php } ?>
               <th><?php echo uiTextSnippet('name'); ?></th>
               <th><?php echo uiTextSnippet('events'); ?></th>
-              <?php 
-              // if ($numtrees > 1) {
-              //   echo "<th>" . uiTextSnippet('tree') . "</th>\n";
-              // }
-              ?>
             </tr>
           </thead>
           <tbody>
             <?php
             $actionstr = "";
             if ($allowEdit) {
-              $actionstr .= "<a href=\"peopleEdit.php?personID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('edit') . "'>\n";
+              $actionstr .= "<a href=\"peopleEdit.php?personID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
               $actionstr .= "</a>\n";
             }
             if ($allowDelete) {
-              $actionstr .= "<a id='delete' href='#' title='" . uiTextSnippet('delete') . "' data-row-id='zzz' data-tree='$tree'>\n";
+              $actionstr .= "<a id='delete' href='#' title='" . uiTextSnippet('delete') . "' data-row-id='zzz'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
               $actionstr .= "</a>\n";
             }
-            $actionstr .= "<a href=\"peopleShowPerson.php?personID=xxx&amp;tree=yyy\" title='" . uiTextSnippet('preview') . "'>\n";
+            $actionstr .= "<a href=\"peopleShowPerson.php?personID=xxx\" title='" . uiTextSnippet('preview') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
             $actionstr .= "</a>\n";
 
@@ -259,7 +240,6 @@ $headSection->setTitle(uiTextSnippet('people'));
                 $deathplace = $row['deathplace'];
               }
               $newactionstr = preg_replace("/xxx/", $row['personID'], $actionstr);
-              $newactionstr = preg_replace("/yyy/", $row['gedcom'], $newactionstr);
               $newactionstr = preg_replace("/zzz/", $row['ID'], $newactionstr);
 
               echo "<tr id=\"row_{$row['ID']}\">\n";
@@ -269,15 +249,12 @@ $headSection->setTitle(uiTextSnippet('people'));
                 echo "<td><input name=\"del{$row['ID']}\" type='checkbox' value='1'></td>";
               }
               echo "<td>\n";
-                $editlink = "peopleEdit.php?personID={$row['personID']}&amp;tree={$row['gedcom']}";
+                $editlink = "peopleEdit.php?personID={$row['personID']}";
                 echo $allowEdit ? "<a href='$editlink' title='" . uiTextSnippet('edit') . "'>" . getname($row) . "</a>" : getname($row);
                 echo "<br>";
                 echo "{$row['personID']}\n";
               echo "</td>\n";
               echo "<td>$birthdate, $birthplace<br>$deathdate, $deathplace</td>\n";
-              // if ($numtrees > 1) {
-              //   echo "<td>{$row['treename']}</td>\n";
-              // }
               echo "</tr>\n";
             }
             ?>
@@ -310,9 +287,8 @@ $headSection->setTitle(uiTextSnippet('people'));
     
     $('#admin-people #delete').on('click', function () {
         var rowId = $(this).data('rowId');
-        var tree = $(this).data('tree');
         if (confirm(textSnippet('confdeletepers'))) {
-            deleteIt('person', rowId, tree);
+            deleteIt('person', rowId);
       }
       return false;
     });

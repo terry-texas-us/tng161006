@@ -8,7 +8,7 @@
 
 require 'tng_begin.php';
 
-$logstring = "<a href=\"calendar.php?living=$living&amp;hide=$hide&amp;tree=$tree&amp;m=$m&amp;year=$year\">" . xmlcharacters(uiTextSnippet('calendar')) . "</a>";
+$logstring = "<a href=\"calendar.php?living=$living&amp;hide=$hide&amp;m=$m&amp;year=$year\">" . xmlcharacters(uiTextSnippet('calendar')) . "</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -71,12 +71,11 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     $showLiving  = $allow_living ? (isset($_GET['living']) ? $_GET['living'] : 2) : 0;
     $hideEvents  = isset($_GET['hide']) ? explode(',', $_GET['hide']) : $defaultHide;
 
-    $thisTree = $tree;
-
     $events = array();
 
     // Query for individual/person events this month
-    $select = array(); $where = array();
+    $select = array();
+    $where = array();
     foreach ($calIndEvent as $key => $val) {
       if (in_array($key, $hideEvents)) {
         continue;
@@ -86,7 +85,6 @@ $headSection->setTitle(uiTextSnippet('calendar'));
       $select[] = $key . "place";
       $where[] = $key . "datetr LIKE '%-$thisMonth-%'";
     }
-
     if (! empty($where)) {
       $sql = "SELECT personID, gedcom, firstname, nickname, lnprefix, lastname, suffix, living, branch, private, " . implode (', ', $select) . "
         FROM $people_table
@@ -97,14 +95,6 @@ $headSection->setTitle(uiTextSnippet('calendar'));
       } elseif ($showLiving == '0') {
         $sql .= ' AND living = 0';
       }
-
-      if ($thisTree && $thisTree != '-x--all--x-') {
-        $sql .= " AND gedcom = '$thisTree'";
-        $righttree = checktree($thisTree);
-      }
-      else
-        {$righttree = -1;}
-
       $result = tng_query($sql);
       # BREAK
       if (!$result) {
@@ -112,12 +102,11 @@ $headSection->setTitle(uiTextSnippet('calendar'));
         echo tng_error();
         exit;
       }
-
       // Make sure data is normalized
       if (tng_num_rows($result) > 0) {
         while ($row = tng_fetch_assoc($result)) {
 
-          $rights = determineLivingPrivateRights($row, $righttree);
+          $rights = determineLivingPrivateRights($row);
           $row['allow_living'] = $rights['living'];
           $row['allow_private'] = $rights['private'];
           if(($row['living'] && !$row['allow_living']) || ($row['private'] && !$row['allow_private'])) {
@@ -140,7 +129,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
               $field = $key . 'datetr';
               if (isset($row[$field])) {
                 $date = substr($row[$field], 5);
-                $html = '<img src="' . 'img/' . $val . '" class="calIcon" alt=""><a href="peopleShowPerson.php?personID=' . $row['personID'] . '&amp;tree=' . $row['gedcom'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
+                $html = '<img src="' . 'img/' . $val . '" class="calIcon" alt=""><a href="peopleShowPerson.php?personID=' . $row['personID'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
 
                 if (strpos($date,"-00")) {
                   $html = '<span>' . $html . '</span>';
@@ -155,7 +144,8 @@ $headSection->setTitle(uiTextSnippet('calendar'));
 
 
     // Query for family events this month
-    $select = array(); $where = array();
+    $select = array();
+    $where = array();
     foreach ($calFamEvent as $key => $val) {
       if (in_array($key, $hideEvents)) {
         continue;
@@ -176,11 +166,6 @@ $headSection->setTitle(uiTextSnippet('calendar'));
       } elseif ($showLiving == '0') {
         $sql .= ' AND living = 0';
       }
-
-      if ($thisTree && $thisTree != '-x--all--x-') {
-        $sql .= " AND gedcom = '$thisTree'";
-      }
-
       $result = tng_query($sql);
       # BREAK
       if (!$result) {
@@ -194,7 +179,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
       if (tng_num_rows($result) > 0) {
         while ($row = tng_fetch_assoc($result)) {
 
-          $rights = determineLivingPrivateRights($row, $righttree);
+          $rights = determineLivingPrivateRights($row);
           $row['allow_living'] = $rights['living'];
           $row['allow_private'] = $rights['private'];
           if(($row['living'] && !$row['allow_living'] && $nonames == 1) || ($row['private'] && !$row['allow_private'] && $tngconfig['nnpriv'] == 1)) {
@@ -217,7 +202,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
               $field = $key . 'datetr';
               if (isset($row[$field])) {
                 $date = substr($row[$field], 5);
-                $html = '<img src="' . 'img/' . $val . '" class="calIcon" alt=""><a href="familiesShowFamily.php?familyID=' . $row['familyID'] . '&amp;tree=' . $row['gedcom'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
+                $html = '<img src="' . 'img/' . $val . '" class="calIcon" alt=""><a href="familiesShowFamily.php?familyID=' . $row['familyID'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
 
                 if(strpos($date,"-00")) {
                   $html = '<span>' . $html . '</span>';
@@ -243,9 +228,6 @@ $headSection->setTitle(uiTextSnippet('calendar'));
         FROM $events_table, $eventtypes_table
         WHERE (" . implode(' OR ', $where) . ") AND $eventtypes_table.eventtypeID = $events_table.eventtypeID AND eventdatetr LIKE '%-$thisMonth-%'";
 
-      if ($thisTree != '-x--all--x-') {
-        $sql .= " AND gedcom = '$thisTree'";
-      }
       $result = tng_query($sql);
       # BREAK
       if (!$result) {
@@ -268,9 +250,6 @@ $headSection->setTitle(uiTextSnippet('calendar'));
             } elseif ($showLiving == '0') {
               $sql .= ' AND living = 0';
             }
-            if ($thisTree != '-x--all--x-') {
-              $sql .= " AND gedcom = '$thisTree'";
-            }
             $result2 = tng_query($sql);
 
             # BREAK
@@ -290,9 +269,6 @@ $headSection->setTitle(uiTextSnippet('calendar'));
               $sql .= ' AND living = 1';
             } elseif ($showLiving == '0') {
               $sql .= ' AND living = 0';
-            }
-            if ($thisTree != '-x--all--x-') {
-              $sql .= " AND gedcom = '$thisTree'";
             }
             $result3 = tng_query($sql);
 
@@ -320,9 +296,9 @@ $headSection->setTitle(uiTextSnippet('calendar'));
             $tag = $row['tag'];
 
             if ($isFam) {
-              $html = '<img src="' . 'img/' . $calEvent[$tag] . '" class="calIcon" alt=""><a href="familiesShowFamily.php?familyID=' . $row['persfamID'] . '&amp;tree=' . $row['gedcom'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
+              $html = '<img src="' . 'img/' . $calEvent[$tag] . '" class="calIcon" alt=""><a href="familiesShowFamily.php?familyID=' . $row['persfamID'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
             } else {
-              $html = '<img src="' . 'img/' . $calEvent[$tag] . '" class="calIcon" alt=""><a href="peopleShowPerson.php?personID=' . $row['persfamID'] . '&amp;tree=' . $row['gedcom'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
+              $html = '<img src="' . 'img/' . $calEvent[$tag] . '" class="calIcon" alt=""><a href="peopleShowPerson.php?personID=' . $row['persfamID'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
             }
 
             $date = substr($row['eventdatetr'], 5);
@@ -332,7 +308,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
       }
     }
 
-    $args = "?living=$showLiving&amp;hide=" . implode(',', $hideEvents) . "&amp;tree=$thisTree&amp;";
+    $args = "?living=$showLiving&amp;hide=" . implode(',', $hideEvents) . "&amp;";
 
     // Write the calendar
     ?> <div id="calWrapper"> <?php
@@ -342,10 +318,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     $hidden[] = array('name' => 'y', 'value' => $thisYear);
     $hidden[] = array('name' => 'living', 'value' => $showLiving);
     $hidden[] = array('name' => 'hide', 'value' => implode(',', $hideEvents));
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'calendar', 'method' => 'get', 'name' => 'treeform', 'id' => 'treeform', 'hidden' => $hidden));
-
     ?>
-
     <div id="calHeader">
       <a href="<?php echo $args; ?>m=<?php echo $thisMonth; ?>&amp;y=<?php echo $lastYear; ?>">
         <img src='img/ArrowLeft.gif' alt="">
@@ -379,7 +352,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     </div>
     <?php
         echo '<b>' . uiTextSnippet('filter') . ':</b>&nbsp; ';
-        $args = "&amp;hide=" . implode(',', $hideEvents) . "&amp;tree=$thisTree&amp;m=$thisMonth&amp;year=$thisYear";
+        $args = "&amp;hide=" . implode(',', $hideEvents) . "&amp;m=$thisMonth&amp;year=$thisYear";
         echo $showLiving == 2 ? '<b>' . uiTextSnippet('all') . '</b> &nbsp;|&nbsp; ' : '<a href="?living=2' . $args . '">' . uiTextSnippet('all') . '</a> &nbsp;|&nbsp; ';
         echo $showLiving == 1 ? '<b>' . uiTextSnippet('living') . '</b> &nbsp;|&nbsp; ' : '<a href="?living=1' . $args . '">' . uiTextSnippet('living') . '</a> &nbsp;|&nbsp; ';
         echo !$showLiving ? '<b>' . uiTextSnippet('notliving') . '</b>': '<a href="?living=0' . $args . '">' . uiTextSnippet('notliving') . '</a>';
@@ -507,7 +480,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
           $toHide = $hideEvents;
           $toHide[] = $key;
         }
-        $args = "?living=$showLiving&amp;hide=" . implode(',', $toHide) . "&amp;tree=$thisTree&amp;m=$thisMonth&amp;year=$thisYear";
+        $args = "?living=$showLiving&amp;hide=" . implode(',', $toHide) . "&amp;m=$thisMonth&amp;year=$thisYear";
         echo '<li><img src="' . 'img/' . $val . '" class="calIcon" alt=""><a href="' . $args . '" class="' . $class . '">' . $text[$key . 'date'] . '</a></li>' . "\n";
       }
     ?>

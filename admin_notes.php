@@ -40,7 +40,7 @@ header("Content-type:text/html; charset=" . $session_charset);
 
 $query = "SELECT $notelinks_table.ID as ID, $xnotes_table.note as note, noteID, secret FROM ($notelinks_table, $xnotes_table)
     WHERE $notelinks_table.xnoteID = $xnotes_table.ID AND $notelinks_table.gedcom = $xnotes_table.gedcom
-        AND persfamID=\"$persfamID\" AND $notelinks_table.gedcom =\"$tree\" AND eventID = \"$eventID\" ORDER BY ordernum, ID";
+        AND persfamID = '$persfamID' AND eventID = '$eventID' ORDER BY ordernum, ID";
 $notelinks = tng_query($query);
 $notecount = tng_num_rows($notelinks);
 ?>
@@ -74,7 +74,7 @@ $notecount = tng_num_rows($notelinks);
         if ($notelinks && $notecount) {
 
           while ($note = tng_fetch_assoc($notelinks)) {
-            $citquery = "SELECT citationID FROM $citations_table WHERE gedcom = \"$tree\" AND ";
+            $citquery = "SELECT citationID FROM $citations_table WHERE ";
             if ($note['noteID']) {
               $citquery .= "((persfamID = \"$persfamID\" AND eventID = \"N{$note['ID']}\") OR persfamID = \"{$note['noteID']}\")";
             } else {
@@ -93,7 +93,7 @@ $notecount = tng_num_rows($notelinks);
               $actionstr .= "</a>";
             }
             if ($allowDelete) {
-              $actionstr .= "<a href='#' onclick=\"return deleteNote({$note['ID']},'$persfamID','$tree','$eventID');\" title='" . uiTextSnippet('delete') . "'>\n";
+              $actionstr .= "<a href='#' onclick=\"return deleteNote({$note['ID']},'$persfamID','$eventID');\" title='" . uiTextSnippet('delete') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
               $actionstr .= "</a>";
             }
@@ -139,7 +139,6 @@ $notecount = tng_num_rows($notelinks);
     </div> <!-- .modal-body -->
     <footer class='modal-footer'>
       <input name='persfamID' type='hidden' value="<?php echo $persfamID; ?>" />
-      <input name='tree' type='hidden' value="<?php echo $tree; ?>" />
       <input name='eventID' type='hidden' value="<?php echo $eventID; ?>" />
       
       <button class='btn btn-outline-primary' name='submit' type='submit'><?php echo uiTextSnippet('save'); ?></button>

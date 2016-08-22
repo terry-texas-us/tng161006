@@ -9,7 +9,7 @@ require 'checklogin.php';
 require 'adminlog.php';
 require 'mail.php';
 
-if ($assignedtree || !$allowAdd) {
+if (!$allowAdd) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;

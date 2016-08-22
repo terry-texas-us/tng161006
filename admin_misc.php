@@ -6,11 +6,6 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-if ($assignedtree) {
-  $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
-  exit;
-}
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('misc'));
 ?>

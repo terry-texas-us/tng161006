@@ -38,20 +38,20 @@ if (!$youremail || !$comments || !$yourname) {
 killBlockedAddress($youremail);
 killBlockedMessageContent($comments);
 
-$query = "SELECT title FROM $sources_table WHERE sourceID = \"$ID\" AND gedcom = \"$tree\"";
+$query = "SELECT title FROM $sources_table WHERE sourceID = '$ID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 $name = uiTextSnippet('source') . ": {$row['title']} ($ID)";
-$pagelink = "$tngwebsite/" . "sourcesShowSource.php?sourceID=$ID&tree=$tree";
+$pagelink = "$tngwebsite/" . "sourcesShowSource.php?sourceID=$ID";
 tng_free_result($result);
 
 $subject = uiTextSnippet('proposed') . ": $name";
-$query = "SELECT treename, email, owner FROM $treesTable WHERE gedcom=\"$tree\"";
+$query = "SELECT treename, email, owner FROM $treesTable";
 $treeresult = tng_query($query);
 $treerow = tng_fetch_assoc($treeresult);
 tng_free_result($treeresult);
 
-$body = uiTextSnippet('proposed') . ": $name\n" . uiTextSnippet('tree') . ": {$treerow['treename']}\n" . uiTextSnippet('link') . ": $pagelink\n\n" . uiTextSnippet('description') . ": " . stripslashes($comments) . "\n\n$yourname\n$youremail";
+$body = uiTextSnippet('proposed') . ": $name\n" . uiTextSnippet('link') . ": $pagelink\n\n" . uiTextSnippet('description') . ": " . stripslashes($comments) . "\n\n$yourname\n$youremail";
 
 $sendemail = $treerow['email'] ? $treerow['email'] : $emailaddr;
 $owner = $treerow['owner'] ? $treerow['owner'] : ($sitename ? $sitename : $dbowner);
@@ -70,4 +70,4 @@ if ($success) {
 } else {
   $message = "mailnotsent&sowner=" . urlencode($owner) . "&ssendemail=" . urlencode($sendemail);
 }
-header("Location: sourceSuggest.php?ID=$ID&tree=$tree&message=$message");
+header("Location: sourceSuggest.php?ID=$ID&message=$message");

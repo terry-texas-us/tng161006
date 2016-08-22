@@ -1,0 +1,2821 @@
+﻿0 HEAD
+1 SOUR RootsMagic
+2 NAME RootsMagic
+2 VERS 7.0.7.0
+2 CORP RootsMagic, Inc.
+3 ADDR PO Box 495
+4 CONT Springville, UT 84663
+4 CONT USA
+3 PHON 1-800-ROOTSMAGIC
+3 WWW www.RootsMagic.com
+1 DEST RootsMagic
+1 DATE 3 SEP 2015
+1 FILE temp-LD5P-7NJ.ged
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+0 @I2977@ INDI
+1 NAME Johann /Bjar/
+2 GIVN Johann
+2 SURN Bjar
+1 NAME Johann /Biar/
+2 GIVN Johann
+2 SURN Biar
+2 TYPE other spelling
+2 _SDATE BEF 16 FEB 1823
+1 NAME Johann /Bjar/
+2 GIVN Johann
+2 SURN Bjar
+2 NSFX Sr.
+2 TYPE aka
+2 _SDATE AFT 1850
+1 SEX M
+1 _UID 55CB666C1C8540F382F61AA8C3A28B08F815
+1 _FSFTID LD5P-765
+1 CHAN
+2 DATE 26 AUG 2015
+1 _COLOR 13
+1 BIRT
+2 DATE 16 FEB 1823
+2 PLAC Gröditz, Bautzen, Sachsen, Germany
+1 IMMI Ben Nevis
+2 DATE 15 DEC 1854
+2 PLAC Galveston, Galveston, Texas, United States
+2 SOUR @S1@
+3 PAGE No. 86, Bjar
+3 _TMPLT
+4 FIELD
+5 NAME Page
+5 VALUE No. 86, Bjar
+3 DATA
+4 TEXT Johann | Blacksmith | Gröditz | Saxony | Feb. 16, 1823 |
+1 RESI
+2 DATE 6 JUL 1870 OR 7 JUL 1870
+2 PLAC Bastrop, Texas, United States
+2 SOUR @S18@
+3 PAGE [Not given] || []; p. 145 (penned); 983; 1057; Johannes Bjar; 1574
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE [Not given] || []
+4 FIELD
+5 NAME PageID
+5 VALUE p. 145 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 983
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 1057
+4 FIELD
+5 NAME Person
+5 VALUE Johannes Bjar
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1574
+3 DATA
+4 TEXT 47 | M | W | Farmer | 600 | 200 | Saxonia
+1 RESI
+2 DATE 3 JUN 1880
+2 PLAC Lee, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S42@
+3 PAGE Precinct 2; 92; p. 4 (penned); 1; 33; John Biar Sr.; 1316
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Precinct 2
+4 FIELD
+5 NAME ED
+5 VALUE 92
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 1
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 33
+4 FIELD
+5 NAME Person
+5 VALUE John Biar Sr.
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1316
+3 DATA
+4 TEXT W | M | 57 | Head | Widowed | Farmer | Saxony
+1 DEAT
+2 DATE 9 JUN 1885
+2 PLAC Texas, United States
+1 BURI
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Pauls Cemetery
+2 SOUR @S48@
+3 PAGE Johann Biar marker; 2010; personally photographed
+3 _TMPLT
+4 FIELD
+5 NAME Item
+5 VALUE Johann Biar marker
+4 FIELD
+5 NAME Section
+4 FIELD
+5 NAME Date
+5 VALUE 2010
+4 FIELD
+5 NAME CollectedInfo
+5 VALUE personally photographed
+1 FAMS @F887@
+0 @I2978@ INDI
+1 NAME Magdalena /Mehle/
+2 GIVN Magdalena
+2 SURN Mehle
+1 SEX F
+1 _UID 384C82039AB64C5EBF00D4E6F9A215CAF6B3
+1 _FSFTID LD5P-7FM
+1 CHAN
+2 DATE 11 AUG 2015
+1 _COLOR 13
+1 BIRT
+2 DATE NOV 1825
+2 PLAC Gröditz, Bautzen, Sachsen, Germany
+1 IMMI Ben Nevis
+2 DATE 15 DEC 1854
+2 PLAC Galveston, Galveston, Texas, United States
+2 SOUR @S1@
+3 PAGE No. 86, Bjar
+3 _TMPLT
+4 FIELD
+5 NAME Page
+5 VALUE No. 86, Bjar
+3 DATA
+4 TEXT Magdalene | Wife | Gröditz | Saxony | Nov., 1825 |
+1 DEAT
+2 DATE 18 SEP 1867
+2 PLAC Serbin, Bastrop, Texas, United States
+2 SOUR @S20@
+3 PAGE 1867, No. 17, Magdalena Bjar
+3 _TMPLT
+4 FIELD
+5 NAME Title
+4 FIELD
+5 NAME ItemOfInterest
+4 FIELD
+5 NAME Page
+5 VALUE 1867, No. 17, Magdalena Bjar
+3 DATA
+4 TEXT Sept. 18, 11pm. § Sept. 19 § brief funeral address, blessing at the gra
+5 CONC ve, and on Sept. 22 funeral sermon § Magdalena § wife of Johann Bjar, f
+5 CONC armer at Serbin § 41 years, 10 months, less 2 days § acute nervous feve
+5 CONC r § the widower, 4 sons, 1 daughter, in Europe her father, 1 brother, 3 s
+5 CONC isters §
+1 FAMS @F887@
+0 @I2979@ INDI
+1 NAME Johann /Bjar/
+2 GIVN Johann
+2 SURN Bjar
+2 NSFX Jr.
+1 NAME Johann /Biar/
+2 GIVN Johann
+2 SURN Biar
+2 NSFX Jr.
+2 TYPE other spelling
+2 _SDATE BEF 30 AUG 1850
+1 SEX M
+1 _UID 38AA6F095B12454CBACE1D512F758C8F0DDC
+1 _FSFTID LD5P-7FY
+1 CHAN
+2 DATE 26 AUG 2015
+1 _COLOR 13
+1 BIRT
+2 DATE 30 AUG 1850
+2 PLAC Gröditz, Bautzen, Sachsen, Germany
+1 IMMI Ben Nevis
+2 DATE 15 DEC 1854
+2 PLAC Galveston, Galveston, Texas, United States
+2 SOUR @S1@
+3 PAGE No. 86, Bjar
+3 _TMPLT
+4 FIELD
+5 NAME Page
+5 VALUE No. 86, Bjar
+3 DATA
+4 TEXT Johann | Son | Gröditz | Saxony | Aug. 30, 1850 |
+1 CONF
+2 DATE MAR 1864
+2 PLAC Serbin, Bastrop, Texas, United States
+2 SOUR @S2@
+3 PAGE 1864:01 1, Johann Bjar.
+3 _TMPLT
+4 FIELD
+5 NAME Page
+5 VALUE 1864:01 1, Johann Bjar.
+1 RESI
+2 DATE 6 JUL 1870 OR 7 JUL 1870
+2 PLAC Bastrop, Texas, United States
+2 SOUR @S18@
+3 PAGE [Not given] || []; p. 145 (penned); 983; 1057; Johann Bjar in the household of Johannes Bjar; 1574
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE [Not given] || []
+4 FIELD
+5 NAME PageID
+5 VALUE p. 145 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 983
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 1057
+4 FIELD
+5 NAME Person
+5 VALUE Johann Bjar in the household of Johannes Bjar
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1574
+3 DATA
+4 TEXT 20 | M | W | Farm labour | | | Saxonia
+1 RESI
+2 DATE 3 JUN 1880
+2 PLAC Lee, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S42@
+3 PAGE Precinct 2; 92; p. 4 (penned); 1; 32; John Biar Jr.; 1316
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Precinct 2
+4 FIELD
+5 NAME ED
+5 VALUE 92
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 1
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 32
+4 FIELD
+5 NAME Person
+5 VALUE John Biar Jr.
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1316
+3 DATA
+4 TEXT W | M | 29 | Head | M | Carpenter | Saxony
+1 RESI
+2 DATE BET 16 JUN 1900 AND 18 JUN 1900
+2 PLAC Serbin, Lee, Texas, United States
+2 SOUR @S43@
+3 PAGE Serbin Precinct; 57; sheet 9A (penned); 147; 153; John Biar; 1654
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Serbin Precinct
+4 FIELD
+5 NAME ED
+5 VALUE 57
+4 FIELD
+5 NAME PageID
+5 VALUE sheet 9A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 147
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 153
+4 FIELD
+5 NAME Person
+5 VALUE John Biar
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1654
+3 NOTE {Citizenship: 1854-46-Na}
+3 DATA
+4 TEXT Head | W | M | Aug | 1850 | 49 | M-27 | Germany | Farmer
+1 DEAT
+2 DATE 20 JUN 1923
+2 PLAC Giddings, Lee, Texas, United States
+1 BURI
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Pauls Cemetery
+1 FAMC @F887@
+0 @I2980@ INDI
+1 NAME Andreas /Bjar/
+2 GIVN Andreas
+2 SURN Bjar
+1 NAME Andreas /Biar/
+2 GIVN Andreas
+2 SURN Biar
+2 TYPE other spelling
+2 _SDATE BEF 28 OCT 1853
+1 SEX M
+1 _UID 614BED2688E9457A800AECF522BE22B5110A
+1 _FSFTID LD5P-7NJ
+1 CHAN
+2 DATE 2 SEP 2015
+1 _COLOR 13
+1 BIRT
+2 DATE 28 OCT 1853
+2 PLAC Gröditz, Bautzen, Sachsen, Germany
+1 IMMI Ben Nevis
+2 DATE 15 DEC 1854
+2 PLAC Galveston, Galveston, Texas, United States
+2 SOUR @S1@
+3 PAGE No. 86, Bjar
+3 _TMPLT
+4 FIELD
+5 NAME Page
+5 VALUE No. 86, Bjar
+3 DATA
+4 TEXT Andreas | Son | Gröditz | Saxony | Oct. 28, 1853 |
+1 CONF
+2 DATE 5 APR 1868
+2 PLAC Serbin, Bastrop, Texas, United States
+2 SOUR @S2@
+3 PAGE 1868:05 5, Andreas Bjar.
+3 _TMPLT
+4 FIELD
+5 NAME Page
+5 VALUE 1868:05 5, Andreas Bjar.
+1 RESI
+2 DATE 6 JUL 1870 OR 7 JUL 1870
+2 PLAC Bastrop, Texas, United States
+2 SOUR @S18@
+3 PAGE [Not given] || []; p. 145 (penned); 983; 1057; Andreas Bjar in the household of Johannes Bjar; 1574
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE [Not given] || []
+4 FIELD
+5 NAME PageID
+5 VALUE p. 145 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 983
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 1057
+4 FIELD
+5 NAME Person
+5 VALUE Andreas Bjar in the household of Johannes Bjar
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1574
+3 DATA
+4 TEXT 17 | M | W | Farm labour | | | Saxonia
+1 RESI
+2 DATE 3 JUN 1880
+2 PLAC Lee, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S42@
+3 PAGE Precinct 2; 92; p. 4 (penned); 1; 34; Andreas Biar; 1316
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Precinct 2
+4 FIELD
+5 NAME ED
+5 VALUE 92
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 1
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 34
+4 FIELD
+5 NAME Person
+5 VALUE Andreas Biar
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1316
+3 DATA
+4 TEXT W | M | 26 | Head | M | Farmer | Saxony
+1 RESI
+2 DATE 2 JUN 1900
+2 PLAC Serbin, Lee, Texas, United States
+2 SOUR @S43@
+3 PAGE Serbin Precinct; 57; sheet 2A (penned); 19; 19; Andrew Biar; 1654
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Serbin Precinct
+4 FIELD
+5 NAME ED
+5 VALUE 57
+4 FIELD
+5 NAME PageID
+5 VALUE sheet 2A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 19
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 19
+4 FIELD
+5 NAME Person
+5 VALUE Andrew Biar
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1654
+3 NOTE {Citizenship: 1859-41-Na}
+3 DATA
+4 TEXT Head | W | M | Oct | 1853 | 46 | M-24 | Germany | Farmer
+1 DEAT
+2 DATE 8 FEB 1916
+2 PLAC Serbin, Lee, Texas, United States
+2 SOUR @S56@
+3 PAGE Andreas Biar, 1916
+3 _TMPLT
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME ItemOfInterest
+5 VALUE Andreas Biar, 1916
+3 DATA
+4 TEXT 08 Feb 1916 | Serbin, Lee, Texas, United States | Male | Married | 28 O
+5 CONC ct 1853 | Saxson, Germany | John Biar | Magdtalena Moehle | 4866
+1 FAMS @F1998@
+1 FAMS @F2088@
+1 FAMC @F887@
+0 @I3133@ INDI
+1 NAME Ernst August /Biar/
+2 GIVN Ernst August
+2 SURN Biar
+1 SEX M
+1 _UID 63DF218FA1BE4622BFE7F41190E01B7564D7
+1 _FSFTID LD5P-7KL
+1 CHAN
+2 DATE 23 JAN 2013
+1 BIRT
+2 DATE 17 JUN 1862
+2 PLAC Serbin, Bastrop, Texas, United States
+1 CHR
+2 DATE 29 JUN 1862
+2 PLAC Serbin, Bastrop, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S52@
+3 PAGE 1862:11, Ernst August Bjar
+3 _TMPLT
+4 FIELD
+5 NAME Page
+5 VALUE 1862:11, Ernst August Bjar
+3 DATA
+4 TEXT June 17, 3:30pm. | June 29 | Ernst August 6th child, 4th son | Johann B
+5 CONC jar, farmer at Serbin first marriage | Magdalena, nee Mehle, from Särke i
+5 CONC n Saxony first marriage | 1) Johann Schelnik, renter on Rabbs Creek. 2) J
+5 CONC ohann Dube, farmer at Serbin. 3) Michael Kurjo, farmer at Serbin. 4) Ma
+5 CONC ria, wife of Friedrich Kessel, shoemaker at Bastrop. 5) Eleonore, wife o
+5 CONC f Carl Traugott Wenke, farmer at Serbin. |
+1 CENS
+2 DATE 6 JUL 1870 OR 7 JUL 1870
+2 PLAC Bastrop, Texas, United States
+2 SOUR @S18@
+3 PAGE [Not given] || []; p. 145 (penned); 983; 1057; Ernst Bjar in the household of Johannes Bjar; 1574
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE [Not given] || []
+4 FIELD
+5 NAME PageID
+5 VALUE p. 145 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 983
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 1057
+4 FIELD
+5 NAME Person
+5 VALUE Ernst Bjar in the household of Johannes Bjar
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1574
+3 DATA
+4 TEXT 8 | M | W | | | | Texas
+1 CENS
+2 DATE 3 JUN 1880
+2 PLAC Lee, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S42@
+3 PAGE Precinct 2; 92; p. 4 (penned); 1; 33; Ernst Biar in the household of John Biar Sr.; 1316
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Precinct 2
+4 FIELD
+5 NAME ED
+5 VALUE 92
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 1
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 33
+4 FIELD
+5 NAME Person
+5 VALUE Ernst Biar in the household of John Biar Sr.
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1316
+3 DATA
+4 TEXT W | M | 18 | Son | S | Farmer | Texas
+1 DEAT
+2 DATE 10 OCT 1888
+1 BURI
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Pauls Cemetery
+2 SOUR @S48@
+3 PAGE Ernst A. Biar marker; 2010; personally photographed
+3 _TMPLT
+4 FIELD
+5 NAME Item
+5 VALUE Ernst A. Biar marker
+4 FIELD
+5 NAME Section
+4 FIELD
+5 NAME Date
+5 VALUE 2010
+4 FIELD
+5 NAME CollectedInfo
+5 VALUE personally photographed
+1 FAMC @F887@
+0 @I3308@ INDI
+1 NAME Maria Magdalena /Groeschel/
+2 GIVN Maria Magdalena
+2 SURN Groeschel
+1 SEX F
+1 _UID 2D9C784B26644AF3BFE32B5BC25930D19710
+1 _FSFTID LD5B-3JG
+1 CHAN
+2 DATE 5 FEB 2014
+1 BIRT
+2 DATE 28 NOV 1861
+2 PLAC Serbin, Bastrop, Texas, United States
+1 CHR
+2 DATE 5 DEC 1861
+2 PLAC Serbin, Bastrop, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S52@
+3 PAGE 1861:28, Maria Magdalena Gröschel
+3 _TMPLT
+4 FIELD
+5 NAME Page
+5 VALUE 1861:28, Maria Magdalena Gröschel
+3 DATA
+4 TEXT Nov. 28, 1:30am. | Dec. 5 | Maria Magdalena 4th child, 2nd daughter | A
+5 CONC ugust Gröschel, farmer at Serbin first marriage | Agnes, nee Malke, fro
+5 CONC m Weicha in Saxony first marriage | 1) Agnes, wife of Andreas Kappler, f
+5 CONC armer at Serbin. 2) Hanna, wife of Johann Zieschank, farmer at Serbin. 3
+5 CONC ) Johann Miertschin, farmer at Serbin. 4) Matthäus Schulze, farmer at S
+5 CONC erbin. |
+1 CENS
+2 DATE 5 JUL 1870
+2 PLAC Bastrop, Texas, United States
+2 SOUR @S18@
+3 PAGE Bastrop Post Office || Bastrop P.O.; p. 142 (penned); 962; 1036; Helena Grosche in the household of Aug Grosche; 1574
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Bastrop Post Office || Bastrop P.O.
+4 FIELD
+5 NAME PageID
+5 VALUE p. 142 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 962
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 1036
+4 FIELD
+5 NAME Person
+5 VALUE Helena Grosche in the household of Aug Grosche
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1574
+3 DATA
+4 TEXT 8 | F | W | | | | Texas
+1 CONF
+2 DATE 9 APR 1876
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S2@
+3 PAGE 1876:06 6, Maria Magdalena Gröschel
+3 _TMPLT
+4 FIELD
+5 NAME Page
+5 VALUE 1876:06 6, Maria Magdalena Gröschel
+3 NOTE {Wendish Confirmation}
+3 DATA
+4 TEXT younger daughter of August Gröschel | Nov. 28, 1861
+1 CENS
+2 DATE 7 JUN 1880
+2 PLAC Lee, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S42@
+3 PAGE Precinct 2; 92; p. 9 (penned); 1; 80; Magdalen Groechel in the household of August Groeschel; 1316
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Precinct 2
+4 FIELD
+5 NAME ED
+5 VALUE 92
+4 FIELD
+5 NAME PageID
+5 VALUE p. 9 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 1
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 80
+4 FIELD
+5 NAME Person
+5 VALUE Magdalen Groechel in the household of August Groeschel
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1316
+3 DATA
+4 TEXT W | F | 18 | Daughter | S | at home | Texas
+1 CENS
+2 DATE 2 JUN 1900
+2 PLAC Serbin, Lee, Texas, United States
+2 SOUR @S43@
+3 PAGE Serbin Precinct; 57; sheet 2A (penned); 19; 19; Magdalena Biar in the household of Andrew Biar; 1654
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Serbin Precinct
+4 FIELD
+5 NAME ED
+5 VALUE 57
+4 FIELD
+5 NAME PageID
+5 VALUE sheet 2A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 19
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 19
+4 FIELD
+5 NAME Person
+5 VALUE Magdalena Biar in the household of Andrew Biar
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1654
+3 NOTE {4 children with 4 living}
+3 DATA
+4 TEXT Wife | W | F | Nov | 1862 | 37 | M-24 | Texas |
+1 DEAT
+2 DATE 29 NOV 1937
+1 BURI
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Pauls Cemetery
+1 FAMS @F2088@
+0 @I3519@ INDI
+1 NAME Maria /Biar/
+2 GIVN Maria
+2 SURN Biar
+1 SEX F
+1 _UID 36F47E966F2643EE97AD9CB6D0C9F6608990
+1 _FSFTID LD5P-7JX
+1 CHAN
+2 DATE 31 AUG 2015
+1 BIRT
+2 DATE 29 AUG 1856
+2 PLAC Low Pinoak Settlement, Bastrop, Texas, United States
+1 CHR
+2 DATE 7 SEP 1856
+2 PLAC Serbin, Bastrop, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S52@
+3 PAGE 1856:18, Maria Bjar
+3 _TMPLT
+4 FIELD
+5 NAME Page
+5 VALUE 1856:18, Maria Bjar
+3 DATA
+4 TEXT Aug. 29, 3am. | Sept. 7 | Maria 4th child, 1st daughter | Johann Bjar, f
+5 CONC armer in the L.P.S. first marriage | Magdalena, nee Mehle, from Särke i
+5 CONC n the Kingdom of Saxony first marriage | 1) Agnes, wife of August Grosc
+5 CONC hel, farmer in the L.P.S. 2) Johann Zieschank, farmer in the L.P.S. 3) A
+5 CONC ugust Polnik, farmer in the L.P.S. |
+1 IMMI
+2 DATE 1869
+1 CONF
+2 DATE 10 APR 1870
+2 PLAC Serbin, Bastrop, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S2@
+3 PAGE 1870:09 9, Maria Bjar.
+3 _TMPLT
+4 FIELD
+5 NAME Page
+5 VALUE 1870:09 9, Maria Bjar.
+1 RESI
+2 DATE 6 JUL 1870 OR 7 JUL 1870
+2 PLAC Bastrop, Texas, United States
+2 SOUR @S18@
+3 PAGE [Not given] || []; p. 145 (penned); 983; 1057; Maria Bjar in the household of Johannes Bjar; 1574
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE [Not given] || []
+4 FIELD
+5 NAME PageID
+5 VALUE p. 145 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 983
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 1057
+4 FIELD
+5 NAME Person
+5 VALUE Maria Bjar in the household of Johannes Bjar
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1574
+3 DATA
+4 TEXT 14 | F | W | Keeping house | | | Texas
+1 RESI
+2 DATE 4 JUN 1880
+2 PLAC Lee, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S42@
+3 PAGE Precinct No. 2; 92; p. 5 (penned); 1; 39; Maria Schulze in the household of August Schulze; 1316
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Precinct No. 2
+4 FIELD
+5 NAME ED
+5 VALUE 92
+4 FIELD
+5 NAME PageID
+5 VALUE p. 5 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 1
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 39
+4 FIELD
+5 NAME Person
+5 VALUE Maria Schulze in the household of August Schulze
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1316
+3 DATA
+4 TEXT W | F | 24 | Wife | M | Keeping house | Texas
+1 RESI
+2 DATE BET 4 JUN 1900 AND 5 JUN 1900
+2 PLAC Serbin, Lee, Texas, United States
+2 SOUR @S43@
+3 PAGE Serbin Precinct; 57; sheet 3A (penned); 46; 46; Maria Schulz in the household of August Schulz; 1654
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Serbin Precinct
+4 FIELD
+5 NAME ED
+5 VALUE 57
+4 FIELD
+5 NAME PageID
+5 VALUE sheet 3A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 46
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 46
+4 FIELD
+5 NAME Person
+5 VALUE Maria Schulz in the household of August Schulz
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1654
+3 NOTE {10 children with 7 living}
+3 DATA
+4 TEXT Wife | W | F | Aug | 1856 | 43 | M-25 | Texas |
+1 DEAT
+2 DATE 5 AUG 1924
+1 BURI
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Pauls Cemetery
+1 FAMC @F887@
+0 @I4273@ INDI
+1 NAME Maria Theresia /Biar/
+2 GIVN Maria Theresia
+2 SURN Biar
+1 SEX F
+1 _UID 6A989F3CF128492FADA2ECAB891853155DA7
+1 _FSFTID LD5P-7VC
+1 CHAN
+2 DATE 23 JAN 2013
+1 BIRT
+2 DATE 8 DEC 1859
+2 PLAC Low Pinoak Settlement, Bastrop, Texas, United States
+1 CHR
+2 DATE 26 DEC 1859
+2 PLAC Serbin, Bastrop, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S52@
+3 PAGE 1859:30, Maria Theresia Bjar
+3 _TMPLT
+4 FIELD
+5 NAME Page
+5 VALUE 1859:30, Maria Theresia Bjar
+3 DATA
+4 TEXT Dec. 8, 2am. | Dec. 26 | Maria Theresia + died July 28, 1865 5th child, 2
+5 CONC nd daughter | Johann Bjar, farmer in the L.P.S. first marriage | Magdal
+5 CONC ena, nee Mehle, from Särke in Saxony first marriage | 1) Maria, only da
+5 CONC ughter of Carl Traugott Wenke, farmer in the L.P.S. 2) Magdalena, survi
+5 CONC ving widow of the late Andreas Urban, former farmer in the L.P.S. 3) Jo
+5 CONC hann, only son of Matthäus Schelnik, farmer in the L.P.S. 4) Andreas Ka
+5 CONC ppler, farmer on Knobbs Branch. |
+1 DEAT
+2 DATE 28 JUL 1865
+2 PLAC Serbin, Bastrop, Texas, United States
+2 SOUR @S20@
+3 PAGE 1865, No. 10, Maria Theresia Bjar
+3 _TMPLT
+4 FIELD
+5 NAME Title
+4 FIELD
+5 NAME ItemOfInterest
+4 FIELD
+5 NAME Page
+5 VALUE 1865, No. 10, Maria Theresia Bjar
+3 DATA
+4 TEXT July 28, 5:30am. § July 29 § brief funeral address, blessing at the gra
+5 CONC ve, and funeral sermon § Maria Theresia § younger daughter of Johann Bj
+5 CONC ar [Biar], farmer at Serbin § 5 years, 7 months, 20 days § brain inflam
+5 CONC mation § the parents, 4 brothers, 1 sister §
+1 FAMC @F887@
+0 @I4882@ INDI
+1 NAME Johann Herman /Biar/
+2 GIVN Johann Herman
+2 SURN Biar
+1 SEX M
+1 _UID 2841A94EE725491F8E17EFDB0213F83D8D3F
+1 _FSFTID LD5P-722
+1 CHAN
+2 DATE 11 AUG 2015
+1 BIRT
+2 DATE 27 OCT 1864
+2 PLAC Serbin, Bastrop, Texas, United States
+1 CHR
+2 DATE 6 NOV 1864
+2 PLAC Serbin, Bastrop, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S52@
+3 PAGE 1864:10, Johann Herman Bjar
+3 _TMPLT
+4 FIELD
+5 NAME Page
+5 VALUE 1864:10, Johann Herman Bjar
+3 DATA
+4 TEXT Oct. 27, 4pm. | Nov. 6 | Johann Herman 7th child, 5th son | Johann Bjar
+5 CONC , farmer at Serbin first marriage | Magdalena, nee Mehle, from Särke in S
+5 CONC axony first marriage | 1) Johann Schelnik, farmer at Serbin. 2) Carl Tr
+5 CONC augott Wenke, farmer at Serbin. 3) Maria, wife of Christoph Kokel, farm
+5 CONC er at Serbin. 4) Johanna Christiana, wife of Michael Kurjo, farmer at S
+5 CONC erbin. |
+1 CENS
+2 DATE 6 JUL 1870 OR 7 JUL 1870
+2 PLAC Bastrop, Texas, United States
+2 SOUR @S18@
+3 PAGE [Not given] || []; p. 145 (penned); 983; 1057; Herman Bjar in the household of Johannes Bjar; 1574
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE [Not given] || []
+4 FIELD
+5 NAME PageID
+5 VALUE p. 145 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 983
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 1057
+4 FIELD
+5 NAME Person
+5 VALUE Herman Bjar in the household of Johannes Bjar
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1574
+3 DATA
+4 TEXT 6 | M | W | | | | Texas
+1 CENS
+2 DATE 3 JUN 1880
+2 PLAC Lee, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S42@
+3 PAGE Precinct 2; 92; p. 4 (penned); 1; 33; Herman Biar in the household of John Biar Sr.; 1316
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Precinct 2
+4 FIELD
+5 NAME ED
+5 VALUE 92
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 1
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 33
+4 FIELD
+5 NAME Person
+5 VALUE Herman Biar in the household of John Biar Sr.
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1316
+3 DATA
+4 TEXT W | M | 15 | Son | S | Farmer | Texas
+1 DEAT
+2 DATE 29 NOV 1950
+1 BURI
+2 DATE 2 DEC 1950
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Pauls Cemetery
+1 FAMC @F887@
+0 @I6371@ INDI
+1 NAME Maria Therese /Hattass/
+2 GIVN Maria Therese
+2 SURN Hattass
+1 SEX F
+1 _UID 94DD4C8B89D6469D82D60898D99CFE80750F
+1 _FSFTID LD5T-CHY
+1 CHAN
+2 DATE 17 APR 2014
+1 BIRT
+2 DATE 1 MAR 1856
+2 PLAC Texas, United States
+1 CONF
+2 DATE 10 APR 1870
+2 PLAC Serbin, Bastrop, Texas, United States
+2 ADDR St. Paul Lutheran Church
+2 SOUR @S2@
+3 PAGE 1870:11 11, Maria
+3 _TMPLT
+4 FIELD
+5 NAME Page
+5 VALUE 1870:11 11, Maria
+3 DATA
+4 TEXT stepdaughter of Johann Hattas | Mar. 1, 1856
+1 CENS
+2 DATE 4 JUL 1870
+2 PLAC Bastrop, Texas, United States
+2 SOUR @S18@
+3 PAGE Bastrop Post Office || Bastrop P.O.; p. 131 (penned); 865; 957; Maria Hattas in the household of John Hattas; 1574
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Bastrop Post Office || Bastrop P.O.
+4 FIELD
+5 NAME PageID
+5 VALUE p. 131 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 865
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 957
+4 FIELD
+5 NAME Person
+5 VALUE Maria Hattas in the household of John Hattas
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1574
+3 DATA
+4 TEXT 14 | F | W | | | | Texas
+1 CENS
+2 DATE 3 JUN 1880
+2 PLAC Lee, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S42@
+3 PAGE Precinct 2; 92; p. 4 (penned); 1; 34; Maria Biar in the household of Andreas Biar; 1316
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Precinct 2
+4 FIELD
+5 NAME ED
+5 VALUE 92
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 1
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 34
+4 FIELD
+5 NAME Person
+5 VALUE Maria Biar in the household of Andreas Biar
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1316
+3 DATA
+4 TEXT W | F | 24 | Wife | M | Keeping house | Texas
+1 DEAT
+2 DATE 30 AUG 1894
+1 BURI
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Pauls Cemetery
+1 FAMS @F1998@
+0 @I6400@ INDI
+1 NAME Johann Ernst Gerhard /Biar/
+2 GIVN Johann Ernst Gerhard
+2 SURN Biar
+1 SEX M
+1 _UID 57DBDCD1784044DA925DC1FDD2AF84F35A7E
+1 _FSFTID LD5T-CZC
+1 CHAN
+2 DATE 5 APR 2014
+1 BIRT
+2 DATE 30 NOV 1876
+2 PLAC Texas, United States
+1 CHR
+2 DATE 10 DEC 1876
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Peter Lutheran Church
+2 SOUR @S66@
+3 PAGE 1876, No. 25, Johann Ernst Gerhard Biar
+3 _TMPLT
+4 FIELD
+5 NAME Title
+4 FIELD
+5 NAME ItemOfInterest
+4 FIELD
+5 NAME Page
+5 VALUE 1876, No. 25, Johann Ernst Gerhard Biar
+3 DATA
+4 TEXT Nov. 30, 1876, 1am | Dec. 10, same | Johann Ernst Gerhard | Andreas Bia
+5 CONC r | Marie Therese nee Hattas | Johann Biar sen, Johann Hattas, Auguste S
+5 CONC chulze, Ernst Biar, Agnes Miertschin, Agnes Biar nee Handrick, Lydia Ha
+5 CONC ttas, Maria Kieschnick | Geyer
+1 CENS
+2 DATE 3 JUN 1880
+2 PLAC Lee, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S42@
+3 PAGE Precinct 2; 92; p. 4 (penned); 1; 34; Gerhard Biar in the household of Andreas Biar; 1316
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Precinct 2
+4 FIELD
+5 NAME ED
+5 VALUE 92
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 1
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 34
+4 FIELD
+5 NAME Person
+5 VALUE Gerhard Biar in the household of Andreas Biar
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1316
+3 DATA
+4 TEXT W | M | 3 | Son | S | | Texas
+1 DEAT
+2 DATE 20 OCT 1954
+2 PLAC Taylor, Williamson, Texas, United States
+1 BURI
+2 PLAC Thorndale, Milam, Texas, United States
+2 ADDR St. Paul Lutheran Cemetery
+1 FAMC @F1998@
+0 @I6401@ INDI
+1 NAME Johann Otto /Biar/
+2 GIVN Johann Otto
+2 SURN Biar
+1 SEX M
+1 _UID 859CED490E344191BA1EC4D7A2F1267D1437
+1 _FSFTID LD5T-CZ5
+1 CHAN
+2 DATE 11 MAR 2015
+1 BIRT
+2 DATE 1 OCT 1879
+2 PLAC Texas, United States
+1 CHR
+2 DATE 12 OCT 1879
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Peter Lutheran Church
+2 SOUR @S66@
+3 PAGE 1879, No. 18, Johann Otto Biar
+3 _TMPLT
+4 FIELD
+5 NAME Title
+4 FIELD
+5 NAME ItemOfInterest
+4 FIELD
+5 NAME Page
+5 VALUE 1879, No. 18, Johann Otto Biar
+3 DATA
+4 TEXT Oct. 1, 11:30am | Oct. 12, same | Johann Otto | Andreas Biar | Marie Th
+5 CONC erese nee Hattas | Hermann Biar, Johann Biar, Christoph Hattas, Johann M
+5 CONC ertschin, Andreas Kischnick, Anna Hattas, Emilie Zindler nee Kischnik, M
+5 CONC arie Schulz nee Biar, Anna Mertschin nee Hattas | same
+1 CENS
+2 DATE 3 JUN 1880
+2 PLAC Lee, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S42@
+3 PAGE Precinct 2; 92; p. 4 (penned); 1; 34; Otto Biar in the household of Andreas Biar; 1316
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Precinct 2
+4 FIELD
+5 NAME ED
+5 VALUE 92
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 1
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 34
+4 FIELD
+5 NAME Person
+5 VALUE Otto Biar in the household of Andreas Biar
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1316
+3 DATA
+4 TEXT W | M | 8/12 - Oct | | S | | Texas
+1 DEAT
+2 DATE 14 NOV 1956
+1 BURI
+2 PLAC Thorndale, Milam, Texas, United States
+2 ADDR St. Paul Lutheran Cemetery
+1 FAMC @F1998@
+0 @I6755@ INDI
+1 NAME Emma Maria Theresia /Biar/
+2 GIVN Emma Maria Theresia
+2 SURN Biar
+1 SEX F
+1 _UID 5E8A37256CE4475699F72CC76A941C23F1B4
+1 _FSFTID LD5T-CD3
+1 CHAN
+2 DATE 17 AUG 2015
+1 BIRT
+2 DATE 18 JUN 1882
+2 PLAC Lee, Texas, United States
+1 CHR
+2 DATE 2 JUL 1882
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Peter Lutheran Church
+2 SOUR @S66@
+3 PAGE 1882, No. 7, Emma Maria Theresia Biar
+3 _TMPLT
+4 FIELD
+5 NAME Title
+4 FIELD
+5 NAME ItemOfInterest
+4 FIELD
+5 NAME Page
+5 VALUE 1882, No. 7, Emma Maria Theresia Biar
+3 DATA
+4 TEXT June 18, 5 Am | July 2, in church | Emma Maria Theresia | Andreas Biar | M
+5 CONC arie Therese nee Hattas | Emma Louise Hattas, Marie Therese Mertsching, A
+5 CONC nna Nowatnik nee M.., Ernst Biar, August Schulz, Johann Becker | same
+1 CENS
+2 DATE 2 JUN 1900
+2 PLAC Serbin, Lee, Texas, United States
+2 SOUR @S43@
+3 PAGE Serbin Precinct; 57; sheet 2A (penned); 19; 19; Thersia Biar in the household of Andrew Biar; 1654
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Serbin Precinct
+4 FIELD
+5 NAME ED
+5 VALUE 57
+4 FIELD
+5 NAME PageID
+5 VALUE sheet 2A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 19
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 19
+4 FIELD
+5 NAME Person
+5 VALUE Thersia Biar in the household of Andrew Biar
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1654
+3 DATA
+4 TEXT Daughter | W | F | June | 1882 | 17 | S | Texas |
+1 DEAT
+2 DATE 4 JUL 1920
+2 PLAC Bastrop, Texas, United States
+1 BURI
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Pauls Cemetery
+1 FAMC @F1998@
+0 @I6756@ INDI
+1 NAME Maria Magdalena /Biar/
+2 GIVN Maria Magdalena
+2 SURN Biar
+1 SEX F
+1 _UID 20B71CF240AE4AB9B3EDCDE38754E7826A22
+1 _FSFTID LD5T-C6Q
+1 CHAN
+2 DATE 11 MAR 2015
+1 BIRT
+2 DATE 2 SEP 1885
+2 PLAC Texas, United States
+1 CHR
+2 DATE 13 SEP 1885
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Peter Lutheran Church
+2 SOUR @S66@
+3 PAGE 1885, No. 12, Maria Magdalena Biar
+3 _TMPLT
+4 FIELD
+5 NAME Title
+4 FIELD
+5 NAME ItemOfInterest
+4 FIELD
+5 NAME Page
+5 VALUE 1885, No. 12, Maria Magdalena Biar
+3 DATA
+4 TEXT Sept. 2, 4am | Sept. 13, same | Maria Magdalena | Andreas Biar | Mariae T
+5 CONC heresa nee Hattas | Mrs. Magdalena Kischnick, Mrs. Anna Becker, Mrs. Ma
+5 CONC ria Schulz, Hermann Biar, Mr. Matthes Tschernik, Mr. Johann Biar | Geye
+5 CONC r
+1 CENS
+2 DATE 2 JUN 1900
+2 PLAC Serbin, Lee, Texas, United States
+2 SOUR @S43@
+3 PAGE Serbin Precinct; 57; sheet 2A (penned); 19; 19; Maria Biar in the household of Andrew Biar; 1654
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Serbin Precinct
+4 FIELD
+5 NAME ED
+5 VALUE 57
+4 FIELD
+5 NAME PageID
+5 VALUE sheet 2A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 19
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 19
+4 FIELD
+5 NAME Person
+5 VALUE Maria Biar in the household of Andrew Biar
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1654
+3 DATA
+4 TEXT Daughter | W | F | Sept | 1885 | 14 | S | Texas |
+1 DEAT
+2 DATE 25 JUL 1963
+1 BURI
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Pauls Cemetery
+1 FAMC @F1998@
+0 @F887@ FAM
+1 HUSB @I2977@
+1 WIFE @I2978@
+1 CHIL @I2979@
+1 CHIL @I2980@
+1 CHIL @I3519@
+1 CHIL @I4273@
+1 CHIL @I3133@
+1 CHIL @I4882@
+1 MARR
+2 DATE EST 1846
+1 _TODO
+2 DESC 1860 census
+2 DATE 11 DEC 2012
+2 NOTE Family is likely 287/254 (Binic) from Precinct 4, p. 34.
+2 STAT OPEN
+2 PRTY 5
+0 @F1998@ FAM
+1 HUSB @I2980@
+1 WIFE @I6371@
+1 CHIL @I6400@
+1 CHIL @I6401@
+1 CHIL @I6755@
+1 CHIL @I6756@
+1 MARR
+2 DATE 8 FEB 1876
+2 PLAC Serbin, Lee, Texas, United States
+2 ADDR St. Peter Lutheran Church
+2 SOUR @S49@
+3 PAGE 1876, No. 1, Andreas Biar & Maria Hattas
+3 _TMPLT
+4 FIELD
+5 NAME Title
+4 FIELD
+5 NAME ItemOfInterest
+4 FIELD
+5 NAME Page
+5 VALUE 1876, No. 1, Andreas Biar & Maria Hattas
+3 DATA
+4 TEXT | 8 Feb 1876 | unmarried Andreas Biar | unmarried Maria Hattas | | Timo
+5 CONC theus Stiemke
+0 @F2088@ FAM
+1 HUSB @I2980@
+1 WIFE @I3308@
+1 MARR
+2 DATE 1896
+2 SOUR @S49@
+3 PAGE 1896, No. 2, Andreas Biar & Magdalena Greschel
+3 _TMPLT
+4 FIELD
+5 NAME Title
+4 FIELD
+5 NAME ItemOfInterest
+4 FIELD
+5 NAME Page
+5 VALUE 1896, No. 2, Andreas Biar & Magdalena Greschel
+3 DATA
+4 TEXT | / | Andreas Biar (widower) in Serbin, Tex | Magdalena Greschel in Ser
+5 CONC bin, Tex. | | Kilian
+0 @S1@ SOUR
+1 ABBR Blasig, Anne. The Wends of Texas: Appendix II
+1 TITL Anne Blasig, "Appendix II: An Abstract of the Original Ship Register of t
+2 CONC he Wendish Colonists of Texas of 1854," <i>The Wends of Texas</i>, Anne B
+2 CONC lasig (San Antonio: The Naylor Company, 1954), .
+1 _SUBQ Blasig, "Appendix II", .
+1 _BIBL Blasig, Anne. "Appendix II: An Abstract of the Original Ship Register o
+2 CONC f the Wendish Colonists of Texas of 1854." <i>The Wends of Texas</i>. A
+2 CONC nne Blasig. San Antonio: The Naylor Company, 1954.
+1 TEXT Family Members | Status | City or Village | Region | Birthday | Remarks
+1 _TMPLT
+2 TID 17
+2 FIELD
+3 NAME ChapAuthor
+3 VALUE Anne Blasig
+2 FIELD
+3 NAME ChapTitle
+3 VALUE Appendix II
+2 FIELD
+3 NAME ChapSubtitle
+3 VALUE An Abstract of the Original Ship Register of the Wendish Colonists of T
+4 CONC exas of 1854
+2 FIELD
+3 NAME Prefix
+2 FIELD
+3 NAME BookTitle
+3 VALUE The Wends of Texas
+2 FIELD
+3 NAME BookSubtitle
+2 FIELD
+3 NAME BookAuthor
+3 VALUE Anne Blasig
+2 FIELD
+3 NAME Role
+2 FIELD
+3 NAME Edition
+2 FIELD
+3 NAME PubPlace
+3 VALUE San Antonio
+2 FIELD
+3 NAME Publisher
+3 VALUE The Naylor Company
+2 FIELD
+3 NAME PubDate
+3 VALUE 1954
+0 @S2@ SOUR
+1 ABBR Buchhorn, Rev. Michael. Confirmation Records of St. Paul Lutheran Church Serbin, Texas: 1856-2003
+1 TITL Rev. Michael Buchhorn, editor, <i>Confirmation Records of St. Paul Luth
+2 CONC eran Church Serbin, Texas: 1856-2003</i> (Serbin, Texas: St. Paul Luthe
+2 CONC ran Church, 2003), .
+1 _SUBQ Buchhorn, <i>Confirmation Records of St. Paul Lutheran Church Serbin, T
+2 CONC exas</i>, .
+1 _BIBL Buchhorn, Rev. Michael, editor. <i>Confirmation Records of St. Paul Lut
+2 CONC heran Church Serbin, Texas: 1856-2003</i>. Serbin, Texas: St. Paul Luth
+2 CONC eran Church, 2003.
+1 _TMPLT
+2 TID 14
+2 FIELD
+3 NAME Author
+3 VALUE Rev. Michael Buchhorn
+2 FIELD
+3 NAME Role
+3 VALUE editor
+2 FIELD
+3 NAME Title
+3 VALUE Confirmation Records of St. Paul Lutheran Church Serbin, Texas
+2 FIELD
+3 NAME SubTitle
+3 VALUE 1856-2003
+2 FIELD
+3 NAME SuplAuthor
+2 FIELD
+3 NAME SuplRole
+2 FIELD
+3 NAME Edition
+2 FIELD
+3 NAME PubPlace
+3 VALUE Serbin, Texas
+2 FIELD
+3 NAME Publisher
+3 VALUE St. Paul Lutheran Church
+2 FIELD
+3 NAME PubDate
+3 VALUE 2003
+0 @S18@ SOUR
+1 ABBR Texas. Bastrop. 1870 U.S. census
+1 TITL 1870 U.S. census, Texas, Bastrop County, population schedule, ; digital i
+2 CONC mage, <i>Ancestry.com</i> (http://www.ancestry.com : downloaded); citin
+2 CONC g NARA microfilm publication M593.
+1 _SUBQ 1870 U.S. census, Texas, Bastrop Co., pop. sch., .
+1 _BIBL Texas. Bastrop County. 1870 U.S. census, population schedule. Digital i
+2 CONC mages. <i>Ancestry.com</i>. http://www.ancestry.com : n.d..
+1 _TMPLT
+2 TID 10000
+2 FIELD
+3 NAME CensusID
+3 VALUE 1870 U.S. census
+2 FIELD
+3 NAME JurisdictionState
+3 VALUE Texas
+2 FIELD
+3 NAME JurisdictionCounty
+3 VALUE Bastrop
+2 FIELD
+3 NAME WebSite
+3 VALUE Ancestry.com
+2 FIELD
+3 NAME URL
+3 VALUE http://www.ancestry.com
+2 FIELD
+3 NAME FilmID
+3 VALUE M593
+0 @S20@ SOUR
+1 ABBR St. Paul Lutheran Church (Serbin, Texas). Deaths (1854-1883)
+1 TITL St. Paul Lutheran Church (Serbin, Texas), Death Records,, ; , .
+1 _SUBQ St. Paul Lutheran Church (Serbin), Death Records, .
+1 _BIBL St. Paul Lutheran Church (Serbin, Texas). Death Records. , .
+1 NOTE [rough draft, preliminary working copy, status March 1991; made by Prof
+2 CONC . Joseph Wilson, Dept. of German and Slavic Studies, Rice Univ., Housto
+2 CONC n, Texas]
+1 _TMPLT
+2 TID 355
+2 FIELD
+3 NAME Church_Author
+3 VALUE St. Paul Lutheran Church
+2 FIELD
+3 NAME Location
+3 VALUE Serbin, Texas || Serbin
+2 FIELD
+3 NAME ChurchLoc
+3 VALUE St. Paul Lutheran Church
+2 FIELD
+3 NAME RegisterName
+3 VALUE Death Records
+2 FIELD
+3 NAME Volume
+2 FIELD
+3 NAME ArchRegNo
+2 FIELD
+3 NAME Repository
+2 FIELD
+3 NAME RepositoryLoc
+0 @S42@ SOUR
+1 ABBR Texas. Lee. 1880 U.S. census
+1 TITL 1880 U.S. census, Texas, Lee County, population schedule, ; digital ima
+2 CONC ge, <i>Ancestry.com</i> (http://www.ancestry.com : downloaded); citing N
+2 CONC ARA microfilm publication T9.
+1 _SUBQ 1880 U.S. census, Texas, Lee Co., pop. sch., .
+1 _BIBL Texas. Lee County. 1880 U.S. census, population schedule. Digital image
+2 CONC s. <i>Ancestry.com</i>. http://www.ancestry.com : n.d..
+1 _TMPLT
+2 TID 10001
+2 FIELD
+3 NAME CensusID
+3 VALUE 1880 U.S. census
+2 FIELD
+3 NAME JurisdictionState
+3 VALUE Texas
+2 FIELD
+3 NAME JurisdictionCounty
+3 VALUE Lee
+2 FIELD
+3 NAME WebSite
+3 VALUE Ancestry.com
+2 FIELD
+3 NAME URL
+3 VALUE http://www.ancestry.com
+2 FIELD
+3 NAME FilmID
+3 VALUE T9
+0 @S43@ SOUR
+1 ABBR Texas. Lee. 1900 U.S. census
+1 TITL 1900 U.S. census, Texas, Lee County, population schedule, ; digital ima
+2 CONC ge, <i>Ancestry.com</i> (http://www.ancestry.com : downloaded); citing N
+2 CONC ARA microfilm publication T623.
+1 _SUBQ 1900 U.S. census, Texas, Lee Co., pop. sch., .
+1 _BIBL Texas. Lee County. 1900 U.S. census, population schedule. Digital image
+2 CONC s. <i>Ancestry.com</i>. http://www.ancestry.com : n.d..
+1 NOTE {Justice Precinct 8 containing the Fedor, Loebau and Lincoln communitie
+2 CONC s}
+1 _TMPLT
+2 TID 10001
+2 FIELD
+3 NAME CensusID
+3 VALUE 1900 U.S. census
+2 FIELD
+3 NAME JurisdictionState
+3 VALUE Texas
+2 FIELD
+3 NAME JurisdictionCounty
+3 VALUE Lee
+2 FIELD
+3 NAME WebSite
+3 VALUE Ancestry.com
+2 FIELD
+3 NAME URL
+3 VALUE http://www.ancestry.com
+2 FIELD
+3 NAME FilmID
+3 VALUE T623
+0 @S48@ SOUR
+1 ABBR Texas. Lee. Serbin. St. Pauls Cemetery
+1 TITL St. Pauls Cemetery (Serbin, Lee, Texas), ; , .
+1 _SUBQ St. Pauls Cemetery (Serbin, Lee, Texas), .
+1 _BIBL St. Pauls Cemetery (Serbin, Lee, Texas). Grave markers.
+1 _TMPLT
+2 TID 94
+2 FIELD
+3 NAME Cemetery
+3 VALUE St. Pauls Cemetery
+2 FIELD
+3 NAME Location
+3 VALUE Serbin, Lee, Texas
+2 FIELD
+3 NAME DirectionsData
+2 FIELD
+3 NAME MarkerType
+3 VALUE Grave markers
+0 @S49@ SOUR
+1 ABBR St. Peter Lutheran Church (Serbin, Texas). Marriages
+1 TITL St. Peter Lutheran Church (Serbin, Texas), "Trau Register" (Marriage Re
+2 CONC gister),, ; , .
+1 _SUBQ St. Peter Lutheran Church (Serbin), "Trau Register" (Marriage Register)
+2 CONC , .
+1 _BIBL St. Peter Lutheran Church (Serbin, Texas). "Trau Register" (Marriage Re
+2 CONC gister). , .
+1 TEXT banns [proclamation] | wedding | Name, standing and residence of groom | N
+2 CONC ame and residence of the bride | Remarks | Pastor
+1 _TMPLT
+2 TID 355
+2 FIELD
+3 NAME Church_Author
+3 VALUE St. Peter Lutheran Church
+2 FIELD
+3 NAME Location
+3 VALUE Serbin, Texas || Serbin
+2 FIELD
+3 NAME ChurchLoc
+3 VALUE St. Peter Lutheran Church
+2 FIELD
+3 NAME RegisterName
+3 VALUE "Trau Register" (Marriage Register)
+2 FIELD
+3 NAME Volume
+2 FIELD
+3 NAME ArchRegNo
+2 FIELD
+3 NAME Repository
+2 FIELD
+3 NAME RepositoryLoc
+0 @S52@ SOUR
+1 ABBR Wilson, Joseph. Pastor John Kilian Baptismal Records of St. Paul Lutheran Church, Serbin, Texas: 1854-1883
+1 TITL Joseph Wilson, editor, <i>Pastor John Kilian Baptismal Records of St. P
+2 CONC aul Lutheran Church, Serbin, Texas: 1854-1883</i> (Easley, South Caroli
+2 CONC na: Southern Historical Press, Inc., 1985), .
+1 _SUBQ Wilson, <i>Pastor John Kilian Baptismal Records of St. Paul Lutheran Ch
+2 CONC urch, Serbin, Texas</i>, .
+1 _BIBL Wilson, Joseph, editor. <i>Pastor John Kilian Baptismal Records of St. P
+2 CONC aul Lutheran Church, Serbin, Texas: 1854-1883</i>. Easley, South Caroli
+2 CONC na: Southern Historical Press, Inc., 1985.
+1 _TMPLT
+2 TID 14
+2 FIELD
+3 NAME Author
+3 VALUE Joseph Wilson
+2 FIELD
+3 NAME Role
+3 VALUE editor
+2 FIELD
+3 NAME Title
+3 VALUE Pastor John Kilian Baptismal Records of St. Paul Lutheran Church, Serbi
+4 CONC n, Texas
+2 FIELD
+3 NAME SubTitle
+3 VALUE 1854-1883
+2 FIELD
+3 NAME SuplAuthor
+2 FIELD
+3 NAME SuplRole
+2 FIELD
+3 NAME Edition
+2 FIELD
+3 NAME PubPlace
+3 VALUE Easley, South Carolina
+2 FIELD
+3 NAME Publisher
+3 VALUE Southern Historical Press, Inc.
+2 FIELD
+3 NAME PubDate
+3 VALUE 1985
+0 @S56@ SOUR
+1 ABBR Texas. Deaths. 1890-1976
+1 TITL "Texas, Deaths, 1890-1976," index and images, <i>FamilySearch</i> (http
+2 CONC s://familysearch.org: accessed ), ; citing State Registrar Office, Aust
+2 CONC in, Texas.
+1 _SUBQ <I>FamilySearch</i>, .
+1 _BIBL "Texas, Deaths, 1890-1976." Index and images. <i>FamilySearch</i>. http
+2 CONC s://familysearch.org: .
+1 _TMPLT
+2 TID 347
+2 FIELD
+3 NAME Author
+2 FIELD
+3 NAME DatabaseTitle
+3 VALUE Texas, Deaths, 1890-1976
+2 FIELD
+3 NAME CreatorOwner
+2 FIELD
+3 NAME WebsiteTitle
+3 VALUE FamilySearch
+2 FIELD
+3 NAME URL
+3 VALUE https://familysearch.org
+2 FIELD
+3 NAME ItemType
+3 VALUE Index and images
+2 FIELD
+3 NAME CreditLine
+3 VALUE State Registrar Office, Austin, Texas
+0 @S66@ SOUR
+1 ABBR St. Peter Lutheran Church (Serbin, Texas). Baptisms
+1 TITL St. Peter Lutheran Church (Serbin, Texas), Baptisms,, ; , .
+1 _SUBQ St. Peter Lutheran Church (Serbin), Baptisms, .
+1 _BIBL St. Peter Lutheran Church (Serbin, Texas). Baptisms. , .
+1 NOTE [rough draft, preliminary working copy, status March 1991; made by Prof
+2 CONC . Joseph Wilson, Dept. of German and Slavic Studies, Rice Univ., Housto
+2 CONC n, Texas]
+1 _TMPLT
+2 TID 355
+2 FIELD
+3 NAME Church_Author
+3 VALUE St. Peter Lutheran Church
+2 FIELD
+3 NAME Location
+3 VALUE Serbin, Texas || Serbin
+2 FIELD
+3 NAME ChurchLoc
+3 VALUE St. Peter Lutheran Church
+2 FIELD
+3 NAME RegisterName
+3 VALUE Baptisms
+2 FIELD
+3 NAME Volume
+2 FIELD
+3 NAME ArchRegNo
+2 FIELD
+3 NAME Repository
+2 FIELD
+3 NAME RepositoryLoc
+0 _PLAC Bastrop, Texas, United States
+1 MAP
+2 LATI N30.1000000
+2 LONG W97.3333300
+0 _PLAC Galveston, Galveston, Texas, United States
+1 MAP
+2 LATI N29.3011100
+2 LONG W94.7975000
+0 _PLAC Giddings, Lee, Texas, United States
+1 MAP
+2 LATI N30.1825000
+2 LONG W96.9361100
+0 _PLAC Gröditz, Bautzen, Sachsen, Germany
+1 MAP
+2 LATI N51.2166667
+2 LONG E14.6166667
+0 _PLAC Lee, Texas, United States
+1 NOTE 1880 U.S. census: embracing the town of Serbin
+2 CONT
+2 CONT
+2 CONT
+1 MAP
+2 LATI N30.2833306
+2 LONG W96.9500000
+0 _PLAC Low Pinoak Settlement, Bastrop, Texas, United States
+1 NOTE most common early name for the Wendish-German settlement called Serbin b
+2 CONC eginning in 1860.
+1 MAP
+2 LATI N30.1275000
+2 LONG W96.9986111
+0 _PLAC Serbin, Bastrop, Texas, United States
+1 MAP
+2 LATI N30.1275000
+2 LONG W96.9986111
+0 _PLAC Serbin, Lee, Texas, United States
+1 MAP
+2 LATI N30.1275000
+2 LONG W96.9986100
+0 _PLAC Taylor, Williamson, Texas, United States
+1 MAP
+2 LATI N30.5705600
+2 LONG W97.4091700
+0 _PLAC Texas, United States
+1 MAP
+2 LATI N31.2502806
+2 LONG W99.2502806
+0 _PLAC Thorndale, Milam, Texas, United States
+1 MAP
+2 LATI N30.6136100
+2 LONG W97.2052800
+0 _EVDEF BIRT
+1 TYPE P
+1 TITL Birth
+1 ABBR Birth
+1 SENT [person] was born< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the birth of [person]< [Date]>< [PlaceDetails]>< [
+3 CONC Place]>.
+1 ROLE Doctor
+2 SENT [ThisPerson] delivered [person]< [Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF DEAT
+1 TYPE P
+1 TITL Death
+1 ABBR Death
+1 SENT [person] died< [Desc]>< [Date]>< [person:Age]>< [PlaceDetails]>< [Place
+2 CONC ]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the death of [person]< [Date]>< [PlaceDetails]>< [
+3 CONC Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF CHR
+1 TYPE P
+1 TITL Christen
+1 ABBR Chr
+1 SENT [person] was baptised< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the christening of [person]< [Date]>< [PlaceDeta
+3 CONC ils]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF BURI
+1 TYPE P
+1 TITL Burial
+1 ABBR Burial
+1 SENT [person] was buried< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the burial of [person]< [Date]>< [PlaceDetails]>
+3 CONC < [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF CREM
+1 TYPE P
+1 TITL Cremation
+1 ABBR Cremation
+1 SENT [person] was cremated< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the cremation of [person]< [Date]>< [PlaceDetail
+3 CONC s]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF ADOP
+1 TYPE P
+1 TITL Adoption
+1 ABBR Adoption
+1 SENT [person] was adopted< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the adoption of [person]< [Date]>< [PlaceDetails
+3 CONC ]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF BAPM
+1 TYPE P
+1 TITL Baptism
+1 ABBR Baptism
+1 SENT [person] was baptized< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the baptism of [person]< [Date]>< [PlaceDetails]
+3 CONC >< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF BARM
+1 TYPE P
+1 TITL Bar Mitzvah
+1 ABBR Bar Mitzvah
+1 SENT [person] celebrated his bar mitzvah< [Date]>< [PlaceDetails]>< [Place]>
+2 CONC .
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the bar mitzvah of [person]< [Date]>< [PlaceDeta
+3 CONC ils]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF BASM
+1 TYPE P
+1 TITL Bas Mitzvah
+1 ABBR Bas Mitzvah
+1 SENT [person] celebrated her bas mitzvah< [Date]>< [PlaceDetails]>< [Place]>
+2 CONC .
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the bas mitzvah of [person]< [Date]>< [PlaceDeta
+3 CONC ils]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF BLES
+1 TYPE P
+1 TITL Blessing
+1 ABBR Blessing
+1 SENT [person] was blessed< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the blessing of [person]< [Date]>< [PlaceDetails
+3 CONC ]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF CHRA
+1 TYPE P
+1 TITL Christen (adult)
+1 ABBR Chr (adult)
+1 SENT [person] was christened< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the christening of [person]< [Date]>< [PlaceDeta
+3 CONC ils]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF CONF
+1 TYPE P
+1 TITL Confirmation
+1 ABBR Confirmation
+1 SENT [person] was confirmed< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the confirmation of [person]< [Date]>< [PlaceDet
+3 CONC ails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF FCOM
+1 TYPE P
+1 TITL First communion
+1 ABBR First comm
+1 SENT [person] received first communion< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the first communion of [person]< [Date]>< [Place
+3 CONC Details]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF ORDN
+1 TYPE P
+1 TITL Ordination
+1 ABBR Ordination
+1 SENT [person] was ordained< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the ordination of [person]< [Date]>< [PlaceDetai
+3 CONC ls]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF NATU
+1 TYPE P
+1 TITL Naturalization
+1 ABBR Naturalization
+1 SENT [person] was naturalized< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the naturalization of [person]< [Date]>< [PlaceD
+3 CONC etails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF EMIG
+1 TYPE P
+1 TITL Emigration
+1 ABBR Emigration
+1 SENT [person] emigrated< [Date]>< from [Place:plain]>< [PlaceDetails]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the emigration of [person]< [Date]>< [PlaceDetai
+3 CONC ls]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF IMMI
+1 TYPE P
+1 TITL Immigration
+1 ABBR Immigration
+1 SENT [person] immigrated< [Date]>< to [Place:plain]>< [PlaceDetails]>< on th
+2 CONC e <i>[Desc]</i>>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the immigration of [person]< [Date]>< [PlaceDeta
+3 CONC ils]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF CENS
+1 TYPE P
+1 TITL Census
+1 ABBR Census
+1 SENT [person] appeared in the census< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] appeared in the household of [person] in the census< [Date
+3 CONC ]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF PROB
+1 TYPE P
+1 TITL Probate
+1 ABBR Probate
+1 SENT [person] had [person:hisher] estate probated< [Date]>< [PlaceDetails]>< [
+2 CONC Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the probate of [person]< [Date]>< [PlaceDetails]
+3 CONC >< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF WILL
+1 TYPE P
+1 TITL Will
+1 ABBR Will
+1 SENT [person] signed a will< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the will of [person]< [Date]>< [PlaceDetails]>< [
+3 CONC Place]>.
+1 ROLE Heir
+2 SENT [ThisPerson] was named an heir in the will of [person]< [Date]>< [Place
+3 CONC Details]>< [Place]>.
+1 ROLE Executor
+2 SENT [ThisPerson] was named an executor for the will of [person]< [Date]>< [
+3 CONC PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF GRAD
+1 TYPE P
+1 TITL Graduation
+1 ABBR Graduation
+1 SENT [person] graduated< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the graduation of [person]< [Date]>< [PlaceDetai
+3 CONC ls]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF RETI
+1 TYPE P
+1 TITL Retirement
+1 ABBR Retirement
+1 SENT [person] retired< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the retirement of [person]< [Date]>< [PlaceDetai
+3 CONC ls]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF DSCR
+1 TYPE P
+1 TITL Description
+1 ABBR Description
+1 SENT [person] was described as [Desc]< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the appearance of [person] as [Desc]< [Date]>< [
+3 CONC PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF EDUC
+1 TYPE P
+1 TITL Education
+1 ABBR Education
+1 SENT [person] was educated < [Desc]>< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the education of [person]< [Date]>< [PlaceDetail
+3 CONC s]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF NATI
+1 TYPE P
+1 TITL Nationality
+1 ABBR Nationality
+1 SENT [person] was [Desc]< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the nationality of [person] as [Desc]< [Date]>< [
+3 CONC PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF OCCU
+1 TYPE P
+1 TITL Occupation
+1 ABBR Occupation
+1 SENT [date] [person] was [Desc:A]< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the occupation of [person]< [Date]> as [Desc:A]< [
+3 CONC PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF PROP
+1 TYPE P
+1 TITL Property
+1 ABBR Property
+1 SENT [person] owned [Desc]< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the property of [person] as [Desc:A]< [Date]>< [
+3 CONC PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF RELI
+1 TYPE P
+1 TITL Religion
+1 ABBR Religion
+1 SENT [person] was [Desc]< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the religion of [person] as [Desc:A]< [Date]>< [
+3 CONC PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF RESI
+1 TYPE P
+1 TITL Residence
+1 ABBR Residence
+1 SENT [person] lived< [Desc]>< [PlaceDetails]>< [Place]>< [Date]>.
+1 ROLE Witness
+2 SENT [ThisPerson] lived in the residence of [person] < [PlaceDetails]>< [Pla
+3 CONC ce]>< [Date]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF SSN
+1 TYPE P
+1 TITL Soc Sec No
+1 ABBR SSN
+1 SENT [person] had Social Security Number [Desc].
+1 PLAC N
+1 DATE N
+1 DESC Y
+0 _EVDEF BAPL
+1 TYPE P
+1 TITL LDS Baptism
+1 ABBR LDS Bapt
+1 SENT [person] was baptized into the LDS Church< [Date]>< [PlaceDetails]>< [P
+2 CONC lace]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the baptism of [person] into the LDS Church< [Da
+3 CONC te]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF ENDL
+1 TYPE P
+1 TITL LDS Endowment
+1 ABBR LDS Endow
+1 SENT [person] was endowed< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the endowment of [person]< [Date]>< [PlaceDetail
+3 CONC s]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF SLGC
+1 TYPE P
+1 TITL LDS Seal to parents
+1 ABBR LDS SealPar
+1 SENT [person] was sealed to [person:hisher] parents< [Date]>< [PlaceDetails]
+2 CONC >< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the sealed to parents of [person]< [Date]>< [Pla
+3 CONC ceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF AFN
+1 TYPE P
+1 TITL Ancestral File Number
+1 ABBR AFN
+1 SENT [person] has Ancestral File Number [Desc].
+1 PLAC N
+1 DATE N
+1 DESC Y
+0 _EVDEF REFN
+1 TYPE P
+1 TITL Reference No
+1 ABBR Ref #
+1 SENT [person] has reference number [Desc].
+1 PLAC N
+1 DATE N
+1 DESC Y
+0 _EVDEF CAST
+1 TYPE P
+1 TITL Caste
+1 ABBR Caste
+1 SENT [person] was associated with [Desc]< [Date]>< [PlaceDetails]>< [Place]>
+2 CONC .
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the associated with [Desc] of [person]< [Date]>< [
+3 CONC PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF TITL
+1 TYPE P
+1 TITL Title (Nobility)
+1 ABBR Title
+1 SENT [person] held the title of [Desc]< [Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF CONL
+1 TYPE P
+1 TITL LDS Confirmation
+1 ABBR LDS Conf
+1 SENT [person] was confirmed a member of the LDS Church< [Date]>< [PlaceDetai
+2 CONC ls]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the confirmation of [person] as a member of the L
+3 CONC DS Church< [Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF WAC
+1 TYPE P
+1 TITL LDS Initiatory
+1 ABBR LDS Init
+1 SENT [person] received LDS initiatory< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the LDS initiatory of [person]< [Date]>< [PlaceD
+3 CONC etails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF MARR
+1 TYPE F
+1 TITL Marriage
+1 ABBR Marriage
+1 SENT [couple] <#Couple#was|were> married< [Date]>< [PlaceDetails]>< [Place]>
+2 CONC .
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the marriage of [couple]< [Date]>< [PlaceDetails
+3 CONC ]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF ANUL
+1 TYPE F
+1 TITL Annulment
+1 ABBR Annulment
+1 SENT [couple] had their marriage annulled< [Date]>< [PlaceDetails]>< [Place]
+2 CONC >.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the annulment of the marriage of [couple]< [Date
+3 CONC ]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF DIV
+1 TYPE F
+1 TITL Divorce
+1 ABBR Divorce
+1 SENT [couple] <#Couple#was|were> divorced< [Date]>< [PlaceDetails]>< [Place]
+2 CONC >.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the divorce of [couple]< [Date]>< [PlaceDetails]
+3 CONC >< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF DIVF
+1 TYPE F
+1 TITL Divorce filed
+1 ABBR Div. filed
+1 SENT [couple] filed for divorce< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the divorce filing of [couple]< [Date]>< [PlaceD
+3 CONC etails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF ENGA
+1 TYPE F
+1 TITL Engagement
+1 ABBR Engagement
+1 SENT [couple] <#Couple#was|were> engaged< [Date]>< [PlaceDetails]>< [Place]>
+2 CONC .
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the engagement of [couple]< [Date]>< [PlaceDetai
+3 CONC ls]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF MARB
+1 TYPE F
+1 TITL Marriage Bann
+1 ABBR Marr Bann
+1 SENT [couple] had marriage banns published< [Date]>< [PlaceDetails]>< [Place
+2 CONC ]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the publishing of the marriage banns of [couple]
+3 CONC <[Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF MARC
+1 TYPE F
+1 TITL Marriage Contract
+1 ABBR Marr Contract
+1 SENT [couple] signed a marriage contract< [Date]>< [PlaceDetails]>< [Place]>
+2 CONC .
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the marriage contract of [couple]< [Date]>< [Pla
+3 CONC ceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF MARL
+1 TYPE F
+1 TITL Marriage License
+1 ABBR Marr Lic
+1 SENT [couple] obtained a marriage license< [Date]>< [PlaceDetails]>< [Place]
+2 CONC >.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the obtaining of the marriage license by [couple
+3 CONC ]< [Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF MARS
+1 TYPE F
+1 TITL Marriage Settlement
+1 ABBR Marr Settlement
+1 SENT [couple] obtained a marriage settlement< [Date]>< [PlaceDetails]>< [Pla
+2 CONC ce]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the marriage settlement of [couple]< [Date]>< [P
+3 CONC laceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF SLGS
+1 TYPE F
+1 TITL LDS Seal to spouse
+1 ABBR LDS SealSp
+1 SENT [couple] were sealed together< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the sealing of [couple]< [Date]>< [PlaceDetails]
+3 CONC >< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF RESI
+1 TYPE F
+1 TITL Residence (family)
+1 ABBR Residence (fam)
+1 SENT [couple] lived < [Desc]>< [PlaceDetails]>< [Place]>< [Date]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF CENS
+1 TYPE F
+1 TITL Census (family)
+1 ABBR Census (fam)
+1 SENT [couple] appeared in the census< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] appeared in the census in the household of [couple]< [Date
+3 CONC ]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF Degree
+1 TYPE P
+1 TITL Degree
+1 ABBR Degree
+1 SENT [person] received a< [desc]> degree< [Date]>< [PlaceDetails]>< [Place]>
+2 CONC .
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the degree of [person]< [Date]>< [PlaceDetails]>
+3 CONC < [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Military
+1 TYPE P
+1 TITL Military
+1 ABBR Military
+1 SENT [person] served in the military< [Desc]>< [Date]>< [PlaceDetails]>< [Pl
+2 CONC ace]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the military service of [person]< [Date]>< [Plac
+3 CONC eDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Mission
+1 TYPE P
+1 TITL Mission
+1 ABBR Mission
+1 SENT [person] served a mission< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the mission of [person]< [Date]>< [PlaceDetails]
+3 CONC >< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Stillborn
+1 TYPE P
+1 TITL Stillborn
+1 ABBR Stillborn
+1 SENT [person] was stillborn< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the stillbirth of [person]< [Date]>< [PlaceDetai
+3 CONC ls]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF Illness
+1 TYPE P
+1 TITL Illness
+1 ABBR Illness
+1 SENT [person] was ill< with [Desc]>< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the illness of [person] with [Desc]< [Date]>< [P
+3 CONC laceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Living
+1 TYPE P
+1 TITL Living
+1 ABBR Living
+1 SENT [person] was living< [Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF Elected
+1 TYPE P
+1 TITL Election
+1 ABBR Elected
+1 SENT [person] was elected< as [Desc]>< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the election of [person] as [Desc]< [Date]>< [Pl
+3 CONC aceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Excomm
+1 TYPE P
+1 TITL Excommunication
+1 ABBR Excomm
+1 SENT [person] was excommunicated< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the excommunication of [person]< [Date]>< [Place
+3 CONC Details]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF Namesake
+1 TYPE P
+1 TITL Namesake
+1 ABBR Namesake
+1 SENT [person] was named after [Desc]< [Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Separation
+1 TYPE F
+1 TITL Separation
+1 ABBR Separation
+1 SENT [couple] were separated< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the separation of [couple]< [Date]>< [PlaceDetai
+3 CONC ls]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF Alt. Name
+1 TYPE P
+1 TITL Alternate name
+1 ABBR Alt. Name
+1 SENT [person] was also known as [Desc]< [Date]>.
+1 PLAC N
+1 DATE Y
+1 DESC N
+0 _EVDEF _DNA
+1 TYPE P
+1 TITL DNA test
+1 ABBR DNA
+1 SENT [person] had a DNA test performed< [Date]>.
+1 PLAC N
+1 DATE Y
+1 DESC N
+0 _EVDEF Misc
+1 TYPE P
+1 TITL Miscellaneous
+1 ABBR Misc
+1 SENT [person]< [Desc]>< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [person]< [Desc]>< [Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Obituary
+1 TYPE P
+1 TITL Obituary
+1 ABBR Obituary
+1 SENT [Person:Poss] obituary was published in the< [Desc]>< [Date]>< [PlaceDe
+2 CONC tails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Military Enlistment
+1 TYPE P
+1 TITL Military Enlistment
+1 ABBR Military Enlistment
+1 SENT [Person] enlisted< in the [Desc]>< [Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Alt. Birth
+1 TYPE P
+1 TITL Alternate Birth
+1 ABBR Alt. Birth
+1 SENT [Person] may have been born< [Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF Emigration (fam)
+1 TYPE F
+1 TITL Emigration (family)
+1 ABBR Emigration (fam)
+1 SENT [Couple]< and children [Witness:first]> emigrated< [Date]>< from [Place
+2 CONC :plain]>< [PlaceDetails]>< on [Desc]>.
+1 ROLE Witness
+2 SENT [ThisPerson] emigrated with [couple]< [Date]>< from [Place:plain]>< [Pl
+3 CONC aceDetails]>< on [Desc]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Grave Marker (fam)
+1 TYPE F
+1 TITL Grave Marker (family)
+1 ABBR Grave Marker (fam)
+1 SENT [Couple] share a grave marker< [PlaceDetails]>< [Place:first]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Never Married
+1 TYPE P
+1 TITL Never Married
+1 ABBR Never Married
+1 SENT [Person] was never married.
+1 PLAC N
+1 DATE N
+1 DESC N
+0 _STMPLT
+1 TID 10000
+1 NAME Census, U.S. Federal, pop. sch. 1850-1870 (Online images) [SsGe.10000]
+1 DESC Jurisdiction state, county and census id as lead source list elements; Census ID as lead first (full) reference note; Uses: Optional Abbrev function in CivilDivision field to substitute abbreviations; No credit line in Source List.
+1 FOOTNOTE [CensusID], [JurisdictionState]<, [JurisdictionCounty] County>, populat
+2 CONC ion schedule, [CivilDivision]<, [PageID]><, dwelling [DwellingNumber]><
+2 CONC , family [FamilyNumber]><, [Person]>; digital image, <i>[WebSite]</i> (
+2 CONC [URL] : <[AccessType]|downloaded>< [AccessDate]>); citing NARA microfil
+2 CONC m publication [FilmID]<, roll [Roll]>.
+1 SHORT [CensusID], [JurisdictionState]<, [JurisdictionCounty] Co.>, pop. sch., [
+2 CONC CivilDivision:Abbrev]<, [PageID]><, dwel. [DwellingNumber]><, fam. [Fam
+2 CONC ilyNumber]><, [Person]>.
+1 BIBLIO [JurisdictionState]. <[JurisdictionCounty] County.> [CensusID], populat
+2 CONC ion schedule. Digital images. <i>[WebSite]</i>. [URL] : <[AccessDate:Ye
+2 CONC ar]|n.d.>.
+1 FIELD
+2 NAME CensusID
+2 DISPLAY Census ID (Generic)
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME JurisdictionState
+2 DISPLAY Jurisdiction State
+2 TYPE PLACE
+2 ISDETAIL N
+1 FIELD
+2 NAME JurisdictionCounty
+2 DISPLAY Jurisdiction County
+2 TYPE PLACE
+2 ISDETAIL N
+1 FIELD
+2 NAME CivilDivision
+2 DISPLAY Civil Division
+2 HINT Ward 7 Holyoake; or Pea River post office || abbreviated to Pea River P.O.
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME PageID
+2 DISPLAY Page ID
+2 HINT e.g. p. 123 (penned)  or sheet 12-B (Stamped) or p. 238, line 7
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME DwellingNumber
+2 DISPLAY Dwelling Number
+2 HINT Household dwelling number
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME FamilyNumber
+2 DISPLAY Family Number
+2 HINT Household family number
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME Person
+2 DISPLAY Person of interest
+2 HINT name of person
+2 TYPE NAME
+2 ISDETAIL Y
+1 FIELD
+2 NAME WebSite
+2 DISPLAY Website
+2 HINT title of the website, e.g. Ancestry.com
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME URL
+2 DISPLAY URL (Digital Location)
+2 HINT digital location, e.g. http://www.ancestry.com
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME AccessType
+2 DISPLAY Access type
+2 HINT e.g. accessed, viewed, downloaded [default = downloaded]
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME AccessDate
+2 DISPLAY Access date
+2 HINT date you viewed the site
+2 TYPE DATE
+2 ISDETAIL Y
+1 FIELD
+2 NAME FilmID
+2 DISPLAY Film ID
+2 HINT NARA microfilm series number
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME Roll
+2 DISPLAY Microfilm roll
+2 TYPE TEXT
+2 ISDETAIL Y
+0 _STMPLT
+1 TID 10001
+1 NAME Census, U.S. Federal, pop. sch. 1880-1930 (Online images) [SsGe.10001]
+1 DESC Jurisdiction state, county and census id as lead source list elements; Census ID as lead first (full) reference note; Uses: Optional Abbrev function in CivilDivision field to substitute abbreviations; No credit line in Source List.
+1 FOOTNOTE [CensusID], [JurisdictionState]<, [JurisdictionCounty] County>, populat
+2 CONC ion schedule, [CivilDivision]<, enumeration district (ED) [ED]><, [Page
+2 CONC ID]><, dwelling [DwellingNumber]><, family [FamilyNumber]><, [Person]>; d
+2 CONC igital image, <i>[WebSite]</i> ([URL] : <[AccessType]|downloaded>< [Acc
+2 CONC essDate]>); citing NARA microfilm publication [FilmID]<, roll [Roll]>.
+1 SHORT [CensusID], [JurisdictionState]<, [JurisdictionCounty] Co.>, pop. sch., [
+2 CONC CivilDivision:Abbrev]<, ED [ED]><, [PageID]><, dwel. [DwellingNumber]><
+2 CONC , fam. [FamilyNumber]><, [Person]>.
+1 BIBLIO [JurisdictionState]. <[JurisdictionCounty] County.> [CensusID], populat
+2 CONC ion schedule. Digital images. <i>[WebSite]</i>. [URL] : <[AccessDate:Ye
+2 CONC ar]|n.d.>.
+1 FIELD
+2 NAME CensusID
+2 DISPLAY Census ID (Generic)
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME JurisdictionState
+2 DISPLAY Jurisdiction State
+2 TYPE PLACE
+2 ISDETAIL N
+1 FIELD
+2 NAME JurisdictionCounty
+2 DISPLAY Jurisdiction County
+2 TYPE PLACE
+2 ISDETAIL N
+1 FIELD
+2 NAME CivilDivision
+2 DISPLAY Civil Division
+2 HINT Ward 7 Holyoake; or Pea River post office || abbreviated to Pea River P.O.
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME ED
+2 DISPLAY Enumeration District
+2 HINT ED number, e.g. 307
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME PageID
+2 DISPLAY Page ID
+2 HINT e.g. p. 123 (penned)  or sheet 12-B (Stamped) or p. 238, line 7
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME DwellingNumber
+2 DISPLAY Dwelling Number
+2 HINT Household dwelling number
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME FamilyNumber
+2 DISPLAY Family Number
+2 HINT Household family number
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME Person
+2 DISPLAY Person of interest
+2 HINT name of person
+2 TYPE NAME
+2 ISDETAIL Y
+1 FIELD
+2 NAME WebSite
+2 DISPLAY Website
+2 HINT title of the website, e.g. Ancestry.com
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME URL
+2 DISPLAY URL (Digital Location)
+2 HINT digital location, e.g. http://www.ancestry.com
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME AccessType
+2 DISPLAY Access type
+2 HINT e.g. accessed, viewed, downloaded [default = downloaded]
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME AccessDate
+2 DISPLAY Access date
+2 HINT date you viewed the site
+2 TYPE DATE
+2 ISDETAIL Y
+1 FIELD
+2 NAME FilmID
+2 DISPLAY Film ID
+2 HINT NARA microfilm series number
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME Roll
+2 DISPLAY Microfilm roll
+2 TYPE TEXT
+2 ISDETAIL Y
+0 TRLR

@@ -13,9 +13,6 @@ if (is_numeric($ID)) {
   $wherestr = "ID = \"$ID\"";
 } else {
   $wherestr = "place = \"$ID\"";
-  if ($tree && !$tngconfig['places1tree']) {
-    $wherestr .= " AND gedcom = \"$tree\"";
-  }
 }
 $query = "SELECT * FROM $places_table WHERE $wherestr";
 $result = tng_query($query);
@@ -24,23 +21,6 @@ tng_free_result($result);
 $orgplace = $row['place'];
 $ID = $row['ID'];
 $row['place'] = preg_replace("/\"/", "&#34;", $row['place']);
-
-if (!$tngconfig['places1tree']) {
-  if ($row['gedcom']) {
-    $query = "SELECT treename FROM $treesTable WHERE gedcom = \"{$row['gedcom']}\"";
-    $result = tng_query($query);
-    $treerow = tng_fetch_assoc($result);
-    tng_free_result($result);
-  } else {
-    if ($assignedtree) {
-      $wherestr = "WHERE gedcom = \"$assignedtree\"";
-    } else {
-      $wherestr = "";
-    }
-    $query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
-    $treeresult = tng_query($query);
-  }
-}
 
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifyplace'));
@@ -66,38 +46,11 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
       <img class='icon-sm' src='svg/eye.svg'>
     </a>
     <!-- [ts] should this be placeID or is personID correct? -->
-    <a href="admin_newmedia.php?personID=<?php echo $row['place']; ?>&amp;tree=<?php echo $tree; ?>&amp;linktype=L"><?php echo uiTextSnippet('addmedia'); ?></a>
+    <a href="admin_newmedia.php?personID=<?php echo $row['place']; ?>&amp;linktype=L"><?php echo uiTextSnippet('addmedia'); ?></a>
     <form action="placesEditFormAction.php" method='post' name='form1' id='form1'
           onSubmit="return validateForm();">
       <h2><?php echo $row['place']; ?></h2>
       <table>
-        <tr>
-          <td><?php echo uiTextSnippet('tree'); ?>:</td>
-          <td>
-            <?php
-            if (!$tngconfig['places1tree']) {
-              if (!$row['gedcom']) {
-                ?>
-                <select name="newtree">
-                  <option value=''></option>
-                  <?php
-                  while ($treerow = tng_fetch_assoc($treeresult)) {
-                    echo "    <option value=\"{$treerow['gedcom']}\">{$treerow['treename']}</option>\n";
-                  }
-                  tng_free_result($treeresult);
-                  ?>
-                </select>
-                <?php
-              } else {
-                ?>
-                <?php echo $treerow['treename']; ?>
-                <input name='tree' type='hidden' value="<?php echo $row['gedcom']; ?>">
-                <?php
-              }
-            }
-            ?>
-          </td>
-        </tr>
         <tr>
           <td><?php echo uiTextSnippet('place'); ?>:</td>
           <td>
@@ -279,7 +232,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
 
   function deleteCemLink(cemeteryID) {
     if (confirm(textSnippet('confdelcemlink'))) {
-      deleteIt('cemlink', cemeteryID, '');
+      deleteIt('cemlink', cemeteryID);
     }
   }
 

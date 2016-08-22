@@ -15,7 +15,7 @@ if ($mediaID) {
 }
 $bailtext = $mediaoption ? uiTextSnippet('finish') : uiTextSnippet('cancel');
 
-$applyfilter = "applyFilter({form:'findrepoform1',fieldId:'mytitle',type:'R',tree:'$tree',destdiv:'reporesults'$mediaoption});";
+$applyfilter = "applyFilter({form:'findrepoform1', fieldId:'mytitle', type:'R', destdiv:'reporesults'$mediaoption});";
 
 header("Content-type:text/html; charset=" . $session_charset);
 ?>
@@ -34,7 +34,6 @@ header("Content-type:text/html; charset=" . $session_charset);
               form: 'findrepoform1',
               fieldId: 'mytitle',
               type: 'R',
-              tree: '<?php echo $tree; ?>',
               destdiv: 'reporesults'<?php echo $mediaoption; ?>
             });">
           </td>

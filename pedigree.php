@@ -10,17 +10,17 @@ if (!$personID && !isset($needperson)) {
 }
 
 if ($display == "textonly" || (!$display && $pedigree['usepopups'] == -1)) {
-  header("Location: pedigreetext.php?personID=$personID&tree=$tree&generations=$generations");
+  header("Location: pedigreetext.php?personID=&amp;personID&amp;generations=$generations");
   exit;
 } elseif ($display == "ahnentafel" || (!$display && $pedigree['usepopups'] == 3)) {
-  header("Location: ahnentafel.php?personID=$personID&tree=$tree&generations=$generations");
+  header("Location: ahnentafel.php?personID=$personID&amp;generations=$generations");
   exit;
 } elseif ($display == "vertical" || (!$display && $pedigree['usepopups'] == 4)) {
-  header("Location: verticalchart.php?personID=$personID&tree=$tree&generations=$generations");
+  header("Location: verticalchart.php?personID=$personID&amp;generations=$generations");
   exit;
 }
 
-$result = getPersonFullPlusDates($tree, $personID);
+$result = getPersonFullPlusDates($personID);
 if (!tng_num_rows($result)) {
   if (!$allowAdd && !isset($needperson)) {
     tng_free_result($result);
@@ -32,16 +32,15 @@ if (!tng_num_rows($result)) {
 }
 
 $row = tng_fetch_assoc($result);
-$righttree = checktree($tree);
-$rightbranch = $righttree ? checkbranch($row['branch']) : false;
-$rights = determineLivingPrivateRights($row, $righttree, $rightbranch);
+$rightbranch = checkbranch($row['branch']);
+$rights = determineLivingPrivateRights($row, $rightbranch);
 $row['allow_living'] = $rights['living'];
 $row['allow_private'] = $rights['private'];
 $pedname = getName($row);
 $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $pedname);
 tng_free_result($result);
 
-$treeResult = getTreeSimple($tree);
+$treeResult = getTreeSimple();
 $treerow = tng_fetch_assoc($treeResult);
 $disallowgedcreate = $treerow['disallowgedcreate'];
 $allowpdf = !$treerow['disallowpdf'] || ($allow_pdf && $rightbranch);
@@ -225,10 +224,6 @@ if ($pedigree['colorshift'] > 0) {
   $extreme = $extreme > $pedigree['baseB'] ? $extreme : $pedigree['baseB'];
 }
 $pedigree['colorshift'] = round($pedigree['colorshift'] / 100 * $extreme / ($generations + 1));
-$pedigree['phototree'] = $tree;
-if ($tree) {
-  $pedigree['phototree'] .= ".";
-}
 
 $pedigree['bullet'] = "&bull;";
 if (!$pedigree['hideempty']) {
@@ -434,8 +429,8 @@ showBox(1, $slot);
 $chartStyle .= "</style>\n";
 
 $gentext = xmlcharacters(uiTextSnippet('generations'));
-writelog("<a href=\"pedigree.php?personID=$personID&amp;tree=$tree&amp;generations=$generations&amp;display=$display\">" . xmlcharacters(uiTextSnippet('pedigreefor') . " $logname ($personID)") . "</a> $generations " . $gentext);
-preparebookmark("<a href=\"pedigree.php?personID=$personID&amp;tree=$tree&amp;generations=$generations&amp;display=$display\">" . xmlcharacters(uiTextSnippet('pedigreefor') . " $pedname ($personID)") . "</a> $generations " . $gentext);
+writelog("<a href=\"pedigree.php?personID=$personID&amp;generations=$generations&amp;display=$display\">" . xmlcharacters(uiTextSnippet('pedigreefor') . " $logname ($personID)") . "</a> $generations " . $gentext);
+preparebookmark("<a href=\"pedigree.php?personID=$personID&amp;generations=$generations&amp;display=$display\">" . xmlcharacters(uiTextSnippet('pedigreefor') . " $pedname ($personID)") . "</a> $generations " . $gentext);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
@@ -456,7 +451,7 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
     echo tng_DrawHeading($photostr, $pedname, getYears($row));
 
     $innermenu = uiTextSnippet('generations') . ": &nbsp;";
-    $innermenu .= "<select name=\"generations\" class=\"small\" onchange=\"window.location.href='pedigree.php?personID=' + firstperson + '&amp;tree=$tree&amp;parentset=$parentset&amp;display=$display&amp;generations=' + this.options[this.selectedIndex].value\">\n";
+    $innermenu .= "<select name=\"generations\" class=\"small\" onchange=\"window.location.href='pedigree.php?personID=' + firstperson + '&amp;parentset=$parentset&amp;display=$display&amp;generations=' + this.options[this.selectedIndex].value\">\n";
     for ($i = 2; $i <= $pedigree['maxgen']; $i++) {
       $innermenu .= "<option value=\"$i\"";
       if ($i == $generations) {
@@ -465,15 +460,15 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
       $innermenu .= ">$i</option>\n";
     }
     $innermenu .= "</select>&nbsp;&nbsp;&nbsp;\n";
-    $innermenu .= "<a href=\"pedigree.php?personID=$personID&amp;tree=$tree&amp;parentset=$parentset&amp;display=standard&amp;generations=$generations\" id=\"stdpedlnk\">" . uiTextSnippet('pedstandard') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"verticalchart.php?personID=$personID&amp;tree=$tree&amp;parentset=$parentset&amp;display=vertical&amp;generations=$generations\" id=\"pedchartlnk\">" . uiTextSnippet('pedvertical') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"pedigree.php?personID=$personID&amp;tree=$tree&amp;parentset=$parentset&amp;display=compact&amp;generations=$generations\" id=\"compedlnk\">" . uiTextSnippet('pedcompact') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"pedigree.php?personID=$personID&amp;tree=$tree&amp;parentset=$parentset&amp;display=box&amp;generations=$generations\" id=\"boxpedlnk\">" . uiTextSnippet('pedbox') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"pedigreetext.php?personID=$personID&amp;tree=$tree&amp;parentset=$parentset&amp;generations=$generations\" id=\"textlnk\">" . uiTextSnippet('pedtextonly') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"ahnentafel.php?personID=$personID&amp;tree=$tree&amp;parentset=$parentset&amp;generations=$generations\" id=\"ahnlnk\">" . uiTextSnippet('ahnentafel') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"extrastree.php?personID=$personID&amp;tree=$tree&amp;parentset=$parentset&amp;showall=1&amp;generations=$generations\" id=\"extralnk\">" . uiTextSnippet('media') . "</a>\n";
+    $innermenu .= "<a href=\"pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=standard&amp;generations=$generations\" id=\"stdpedlnk\">" . uiTextSnippet('pedstandard') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
+    $innermenu .= "<a href=\"verticalchart.php?personID=$personID&amp;parentset=$parentset&amp;display=vertical&amp;generations=$generations\" id=\"pedchartlnk\">" . uiTextSnippet('pedvertical') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
+    $innermenu .= "<a href=\"pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=compact&amp;generations=$generations\" id=\"compedlnk\">" . uiTextSnippet('pedcompact') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
+    $innermenu .= "<a href=\"pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=box&amp;generations=$generations\" id=\"boxpedlnk\">" . uiTextSnippet('pedbox') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
+    $innermenu .= "<a href=\"pedigreetext.php?personID=$personID&amp;parentset=$parentset&amp;generations=$generations\" id=\"textlnk\">" . uiTextSnippet('pedtextonly') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
+    $innermenu .= "<a href=\"ahnentafel.php?personID=$personID&amp;parentset=$parentset&amp;generations=$generations\" id=\"ahnlnk\">" . uiTextSnippet('ahnentafel') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
+    $innermenu .= "<a href=\"extrastree.php?personID=$personID&amp;parentset=$parentset&amp;showall=1&amp;generations=$generations\" id=\"extralnk\">" . uiTextSnippet('media') . "</a>\n";
     if ($generations <= 6 && $allowpdf) {
-      $innermenu .= " &nbsp;&nbsp; | &nbsp;&nbsp; <a href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ped&amp;personID=' + firstperson + '&amp;tree=$tree&amp;generations=$generations');return false;\">PDF</a>\n";
+      $innermenu .= " &nbsp;&nbsp; | &nbsp;&nbsp; <a href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ped&amp;personID=' + firstperson + '&amp;generations=$generations');return false;\">PDF</a>\n";
     }
     beginFormElement("pedigree", "", "form1", "form1");
     echo buildPersonMenu("pedigree", $personID);
@@ -511,7 +506,6 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
   <script>
     var lastpopup = '';
-    var tree = '<?php echo $tree ?>';
     var tnglitbox;
     var slotceiling = <?php echo $pedmax ?>;
     var slotceiling_minus1 = <?php echo ( pow( 2, $generations - 1 ) ) ?>;
@@ -570,8 +564,7 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
     <?php if ($needperson && $allowAdd) { ?>
     var nplitbox;
     function openCreatePersonForm() {
-      tnglitbox = new ModalDialog('admin_newperson2.php?tree=<?php echo $tree; ?>&needped=1');
-//      generateID('person', document.npform.personID, '');
+      tnglitbox = new ModalDialog('admin_newperson2.php?&amp;needped=1');
       $('#firstname').focus();
       return false;
     }

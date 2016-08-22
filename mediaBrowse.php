@@ -18,7 +18,6 @@ if ($newsearch) {
   setcookie("tng_search_media_post[unlinked]", $unlinked, $exptime);
   setcookie("tng_search_media_post[hsstat]", $hsstat, $exptime);
   setcookie("tng_search_media_post[cemeteryID]", $cemeteryID, $exptime);
-  setcookie("tng_search_media_post[tree]", $tree, $exptime);
   setcookie("tng_search_media_post[tngpage]", 1, $exptime);
   setcookie("tng_search_media_post[offset]", 0, $exptime);
 } else {
@@ -40,9 +39,6 @@ if ($newsearch) {
   if (!$cemeteryID) {
     $cemeteryID = $_COOKIE['tng_search_media_post']['cemeteryID'];
   }
-  if (!$tree) {
-    $tree = $_COOKIE['tng_search_media_post']['tree'];
-  }
   if (!isset($offset)) {
     $tngpage = $_COOKIE['tng_search_media_post']['tngpage'];
     $offset = $_COOKIE['tng_search_media_post']['offset'];
@@ -60,27 +56,12 @@ if ($offset) {
   $newoffset = "";
   $tngpage = 1;
 }
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-  $wherestr2 = " AND $medialinks_table.gedcom = \"$assignedtree\"";
-  //$tree = $assignedtree;
-} else {
-  $wherestr = "";
-  if ($tree) {
-    $wherestr2 = " AND $medialinks_table.gedcom = \"$tree\"";
-  }
-}
-$orgwherestr = $wherestr;
-$orgtree = $tree;
+$orgwherestr = "";
 
 $originalstring = preg_replace("/\"/", "&#34;", $searchstring);
 $searchstring = addslashes($searchstring);
 $wherestr = $searchstring ? "($media_table.mediaID LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR path LIKE \"%$searchstring%\" OR notes LIKE \"%$searchstring%\" OR bodytext LIKE \"%$searchstring%\")" : "";
-if ($assignedtree) {
-  $wherestr .= $wherestr ? " AND ($media_table.gedcom = \"$tree\" || $media_table.gedcom = \"\")" : "($media_table.gedcom = \"$tree\" || $media_table.gedcom = \"\")";
-} elseif ($tree) {
-  $wherestr .= $wherestr ? " AND $media_table.gedcom = \"$tree\"" : "$media_table.gedcom = \"$tree\"";
-}
+
 if ($mediatypeID) {
   $wherestr .= $wherestr ? " AND mediatypeID = \"$mediatypeID\"" : "mediatypeID = \"$mediatypeID\"";
 }
@@ -140,9 +121,9 @@ $headSection->setTitle(uiTextSnippet('media'));
     //    $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('browse'), "findmedia"]);
     $navList->appendItem([$allowMediaAdd, "mediaAdd.php", uiTextSnippet('add'), "addmedia"]);
     $navList->appendItem([$allowMediaEdit, "mediaSort.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    $navList->appendItem([$allowMediaEdit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
+    $navList->appendItem([$allowMediaEdit, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
+    $navList->appendItem([$allowMediaAdd, "mediaImport.php", uiTextSnippet('import'), "import"]);
+    $navList->appendItem([$allowMediaAdd, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
     echo $navList->build("findmedia");
     ?>
     <div class='row'>
@@ -152,7 +133,6 @@ $headSection->setTitle(uiTextSnippet('media'));
             <?php
             $newwherestr = $wherestr;
             $wherestr = $orgwherestr;
-            require '_/components/php/treeSelectControl.php';
             $wherestr = $newwherestr;
             ?>
           </div>
@@ -189,7 +169,7 @@ $headSection->setTitle(uiTextSnippet('media'));
                 ?>
               </select>
             </label>
-            <?php if (!$assignedtree && $allowAdd && $allowEdit && $allowDelete) { ?>
+            <?php if ($allowAdd && $allowEdit && $allowDelete) { ?>
               <button class='btn btn-secondary' name='addnewmediatype' type='button' onclick="tnglitbox = new ModalDialog('admin_newcollection.php?field=mediatypeID');"><?php echo uiTextSnippet('addnewcoll'); ?></button>
               <button class='btn btn-secondary' id='editmediatype' name='editmediatype' type='button' style="display: none" onclick="editMediatype(document.form1.mediatypeID);"><?php echo uiTextSnippet('edit'); ?></button>
               <button class='btn btn-outline-danger' id='delmediatype' name='delmediatype' type='button' style="display: none" onclick="confirmDeleteMediatype(document.form1.mediatypeID);"><?php echo uiTextSnippet('delete'); ?></button>
@@ -400,7 +380,7 @@ $headSection->setTitle(uiTextSnippet('media'));
               LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID AND $medialinks_table.gedcom = $families_table.gedcom
               LEFT JOIN $sources_table ON $medialinks_table.personID = $sources_table.sourceID AND $medialinks_table.gedcom = $sources_table.gedcom
               LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID AND $medialinks_table.gedcom = $repositories_table.gedcom)
-              WHERE mediaID = \"{$row['mediaID']}\"$wherestr2 ORDER BY lastname, lnprefix, firstname, personID LIMIT 10";
+              WHERE mediaID = \"{$row['mediaID']}\" ORDER BY lastname, lnprefix, firstname, personID LIMIT 10";
             $presult = tng_query($query);
             $medialinktext = "";
             while ($prow = tng_fetch_assoc($presult)) {

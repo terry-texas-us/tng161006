@@ -6,12 +6,7 @@ header("Content-type:text/html; charset=" . $session_charset);
 if ($link) {
   $adminLogin = 1;
   include 'checklogin.php';
-  if ($assignedtree) {
-    echo uiTextSnippet('norights');
-    exit;
-  }
 }
-
 if (mkdir($folder, 0777)) {
   echo uiTextSnippet('success');
 } elseif (file_exists($folder)) {

@@ -6,14 +6,14 @@ require 'adminlib.php';
 require 'checklogin.php';
 
 //permissions
-if ($assignedtree || !$allowEdit) {
+if (!$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
 switch ($entity) {
   case "person":
-    $url = "peopleEdit.php?personID=$newID&tree=$newtree";
+    $url = "peopleEdit.php?personID=$newID";
 
     $query = "UPDATE $people_table SET gedcom=\"$newtree\", personID=\"$newID\" WHERE gedcom=\"$oldtree\" AND personID=\"$entityID\"";
     $result = tng_query($query);
@@ -57,7 +57,7 @@ switch ($entity) {
 
     break;
   case "repo":
-    $url = "repositoriesEdit.php?repoID=$newID&tree=$newtree";
+    $url = "repositoriesEdit.php?repoID=$newID";
 
     $query = "UPDATE $repositories_table SET gedcom=\"$newtree\", repoID=\"$newID\" WHERE gedcom=\"$oldtree\" AND repoID=\"$entityID\"";
     $result = tng_query($query);

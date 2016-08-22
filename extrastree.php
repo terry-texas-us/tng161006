@@ -8,10 +8,8 @@ if (!$generations) {
   $generations = 12;
 }
 
-function displayIndividual($key, $generation, $slot, $column)
-{
+function displayIndividual($key, $generation, $slot, $column) {
   global $columns;
-  global $tree;
   global $pedmax;
   global $media_table;
   global $medialinks_table;
@@ -19,16 +17,15 @@ function displayIndividual($key, $generation, $slot, $column)
   global $col2fam;
   global $showall;
   global $parentset;
-  global $righttree;
 
   $nextslot = $slot * 2;
   $name = "";
 
   if ($key) {
-    $result = getPersonDataPlusDates($tree, $key);
+    $result = getPersonDataPlusDates($key);
     if ($result) {
       $row = tng_fetch_assoc($result);
-      $rights = determineLivingPrivateRights($row, $righttree);
+      $rights = determineLivingPrivateRights($row);
       $row['allow_living'] = $rights['living'];
       $row['allow_private'] = $rights['private'];
       $lastname = trim($row['lnprefix'] . " " . $row['lastname']);
@@ -42,7 +39,7 @@ function displayIndividual($key, $generation, $slot, $column)
       }
 
       //if( $rights['both'] ) {
-      $mediaquery = "SELECT count($medialinks_table.medialinkID) as mediacount FROM ($medialinks_table, $media_table) WHERE $medialinks_table.mediaID = $media_table.mediaID AND personID = \"$key\" AND $medialinks_table.gedcom = \"$tree\"";
+      $mediaquery = "SELECT count($medialinks_table.medialinkID) as mediacount FROM ($medialinks_table, $media_table) WHERE $medialinks_table.mediaID = $media_table.mediaID AND personID = '$key'";
       $mediaresult = tng_query($mediaquery) or die(uiTextSnippet('cannotexecutequery') . ": $mediaquery");
       if ($mediaresult) {
         $mediarow = tng_fetch_assoc($mediaresult);
@@ -57,9 +54,9 @@ function displayIndividual($key, $generation, $slot, $column)
           $columns[$column][$generation] = "<span>" . uiTextSnippet($gentext) . "<br></span>\n<ul>\n";
         }
         $namestr = getNameRev($row);
-        $columns[$column][$generation] .= "<li><span><a href=\"peopleShowPerson.php?tng_extras=1&amp;personID=$key&amp;tree=$tree\">$namestr</a> (" . trim(getYears($row)) . ")";
+        $columns[$column][$generation] .= "<li><span><a href=\"peopleShowPerson.php?tng_extras=1&amp;personID=$key\">$namestr</a> (" . trim(getYears($row)) . ")";
         if ($mediarow['mediacount']) {
-          $columns[$column][$generation] .= " <a href=\"peopleShowPerson.php?tng_extras=1&amp;personID=$key&amp;tree=$tree\" title=\"" . uiTextSnippet('mediaavail') . "\">\n";
+          $columns[$column][$generation] .= " <a href=\"peopleShowPerson.php?tng_extras=1&amp;personID=$key\" title=\"" . uiTextSnippet('mediaavail') . "\">\n";
           $columns[$column][$generation] .= "<img class='icon-sm' src='svg/camera.svg' alt=\"" . uiTextSnippet('mediaavail') . "\"></a>";
         }
         $columns[$column][$generation] .= "</span></li>\n";
@@ -78,7 +75,7 @@ function displayIndividual($key, $generation, $slot, $column)
       $parentfamID = "";
       $locparentset = $parentset;
       $parentfamIDs = array();
-      $parents = getChildFamily($tree, $key, "parentorder");
+      $parents = getChildFamily($key, "parentorder");
       if ($parents) {
         $parentscount = tng_num_rows($parents);
         if ($parentscount > 0) {
@@ -99,7 +96,7 @@ function displayIndividual($key, $generation, $slot, $column)
         }
         tng_free_result($parents);
       }
-      $result2 = getFamilyMinimal($tree, $parentfamID);
+      $result2 = getFamilyMinimal($parentfamID);
       if ($result2) {
         $newrow = tng_fetch_assoc($result2);
         $husband = $newrow['husband'];
@@ -119,12 +116,11 @@ function displayIndividual($key, $generation, $slot, $column)
   }
 }
 
-$result = getPersonDataPlusDates($tree, $personID);
+$result = getPersonDataPlusDates($personID);
 if ($result) {
   $row = tng_fetch_assoc($result);
-  $righttree = checktree($tree);
-  $rightbranch = $righttree ? checkbranch($row['branch']) : false;
-  $rights = determineLivingPrivateRights($row, $righttree, $rightbranch);
+  $rightbranch = checkbranch($row['branch']);
+  $rights = determineLivingPrivateRights($row, $rightbranch);
   $row['allow_living'] = $rights['living'];
   $row['allow_private'] = $rights['private'];
   $pedname = getName($row);
@@ -132,7 +128,7 @@ if ($result) {
   tng_free_result($result);
 }
 
-$treeResult = getTreeSimple($tree);
+$treeResult = getTreeSimple();
 $treerow = tng_fetch_assoc($treeResult);
 $disallowgedcreate = $treerow['disallowgedcreate'];
 $allowpdf = !$treerow['disallowpdf'] || ($allow_pdf && $rightbranch);
@@ -143,8 +139,8 @@ $columns = array();
 $pedmax = pow(2, intval($generations));
 $key = $personID;
 
-writelog("<a href=\"extrastree.php?personID=$personID&amp;tree=$tree\">" . uiTextSnippet('familyof') . " $logname ($personID)</a>");
-preparebookmark("<a href=\"extrastree.php?personID=$personID&amp;tree=$tree\">" . uiTextSnippet('familyof') . " $pedname ($personID)</a>");
+writelog("<a href=\"extrastree.php?personID=$personID\">" . uiTextSnippet('familyof') . " $logname ($personID)</a>");
+preparebookmark("<a href=\"extrastree.php?personID=$personID\">" . uiTextSnippet('familyof') . " $pedname ($personID)</a>");
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
@@ -167,7 +163,7 @@ $headSection->setTitle(uiTextSnippet('media') . ": " . uiTextSnippet('familyof')
     if ($generations > $pedigree['maxgen']) {
       $generations = $pedigree['maxgen'];
     }
-    $innermenu .= "<select name=\"generations\" class=\"small\" onchange=\"window.location.href='extrastree.php?personID=$personID&amp;tree=$tree&amp;showall=$showall&amp;generations=' + this.options[this.selectedIndex].value\">\n";
+    $innermenu .= "<select name=\"generations\" class=\"small\" onchange=\"window.location.href='extrastree.php?personID=$personID&amp;showall=$showall&amp;generations=' + this.options[this.selectedIndex].value\">\n";
     for ($i = 1; $i <= $pedigree['maxgen']; $i++) {
       $innermenu .= "<option value=\"$i\"";
       if ($i == $generations) {
@@ -176,22 +172,22 @@ $headSection->setTitle(uiTextSnippet('media') . ": " . uiTextSnippet('familyof')
       $innermenu .= ">$i</option>\n";
     }
     $innermenu .= "</select>&nbsp;&nbsp;&nbsp;\n";
-    $innermenu .= "<a href=\"pedigree.php?personID=$personID&amp;tree=$tree&amp;parentset=$parentset&amp;display=standard&amp;generations=$generations\" id=\"stdpedlnk\">" .
+    $innermenu .= "<a href=\"pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=standard&amp;generations=$generations\" id=\"stdpedlnk\">" .
             uiTextSnippet('pedstandard') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"verticalchart.php?personID=$personID&amp;tree=$tree&amp;parentset=$parentset&amp;display=vertical&amp;generations=$generations\" id=\"pedchartlnk\">" .
+    $innermenu .= "<a href=\"verticalchart.php?personID=$personID&amp;parentset=$parentset&amp;display=vertical&amp;generations=$generations\" id=\"pedchartlnk\">" .
             uiTextSnippet('pedvertical') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"pedigree.php?personID=$personID&amp;tree=$tree&amp;parentset=$parentset&amp;display=compact&amp;generations=$generations\" id=\"compedlnk\">" .
+    $innermenu .= "<a href=\"pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=compact&amp;generations=$generations\" id=\"compedlnk\">" .
             uiTextSnippet('pedcompact') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"pedigree.php?personID=$personID&amp;tree=$tree&amp;parentset=$parentset&amp;display=box&amp;generations=$generations\" id=\"boxpedlnk\">" .
+    $innermenu .= "<a href=\"pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=box&amp;generations=$generations\" id=\"boxpedlnk\">" .
             uiTextSnippet('pedbox') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"pedigreetext.php?personID=$personID&amp;tree=$tree&amp;parentset=$parentset&amp;generations=$generations\">" .
+    $innermenu .= "<a href=\"pedigreetext.php?personID=$personID&amp;parentset=$parentset&amp;generations=$generations\">" .
             uiTextSnippet('pedtextonly') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"ahnentafel.php?personID=$personID&amp;tree=$tree&amp;parentset=$parentset&amp;generations=$generations\">" .
+    $innermenu .= "<a href=\"ahnentafel.php?personID=$personID&amp;parentset=$parentset&amp;generations=$generations\">" .
             uiTextSnippet('ahnentafel') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"extrastree.php?personID=$personID&amp;tree=$tree&amp;parentset=$parentset&amp;showall=1&amp;generations=$generations\">" .
+    $innermenu .= "<a href=\"extrastree.php?personID=$personID&amp;parentset=$parentset&amp;showall=1&amp;generations=$generations\">" .
             uiTextSnippet('media') . "</a>\n";
     if ($generations <= 6 && $allowpdf) {
-      $innermenu .= " &nbsp;&nbsp; | &nbsp;&nbsp; <a href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ped&amp;personID=$personID&amp;tree=$tree&amp;generations=$generations');return false;\">PDF</a>\n";
+      $innermenu .= " &nbsp;&nbsp; | &nbsp;&nbsp; <a href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ped&amp;personID=$personID&amp;generations=$generations');return false;\">PDF</a>\n";
     }
 
     beginFormElement("pedigree", "", "form1", "form1");

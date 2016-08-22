@@ -6,7 +6,6 @@ require 'getlang.php';
 
 $query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $treeresult = tng_query($query);
-$numtrees = tng_num_rows($treeresult);
 
 $query = "SELECT count(userID) as ucount FROM $users_table";
 $userresult = tng_query($query);

@@ -7,25 +7,7 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-if (!$allow_ged && $assignedtree) {
-  $query = "SELECT disallowgedcreate FROM $treesTable WHERE gedcom = \"$assignedtree\"";
-  $result = tng_query($query);
-  $row = tng_fetch_assoc($result);
-  $disallowgedcreate = $row['disallowgedcreate'];
-  tng_free_result($result);
-
-  if ($disallowgedcreate) {
-    $message = uiTextSnippet('norights');
-    header("Location: admin_login.php?message=" . urlencode($message));
-    exit;
-  }
-}
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-} else {
-  $wherestr = "";
-}
-$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 
 $query = "SELECT branch, gedcom, description FROM $branches_table WHERE gedcom = \"{$row['gedcom']}\" ORDER BY description";
 $branchresult = tng_query($query);
@@ -48,28 +30,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     ?>
     <form name='form1' action='dataExportGedcomFormAction.php' method='post'>
       <table class='table table-sm'>
-        <tr>
-          <td><?php echo uiTextSnippet('tree'); ?>:</td>
-          <td>
-            <select id='gedcom' name='tree' onchange="swapBranches();">
-              <?php
-              $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
-              $firsttree = "";
-              while ($treerow = tng_fetch_assoc($treeresult)) {
-                if (!$firsttree) {
-                  $firsttree = $treerow['gedcom'];
-                }
-                echo "  <option value=\"{$treerow['gedcom']}\"";
-                if ($treerow['gedcom'] == $tree) {
-                  echo " selected";
-                }
-                echo ">{$treerow['treename']}</option>\n";
-              }
-              tng_free_result($treeresult);
-              ?>
-            </select>
-          </td>
-        </tr>
         <tr>
           <td><?php echo uiTextSnippet('branch'); ?>:</td>
           <td>

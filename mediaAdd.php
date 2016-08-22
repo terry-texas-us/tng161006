@@ -11,14 +11,7 @@ if (!$allowMediaAdd) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-  $tree = $assignedtree;
-} else {
-  $wherestr = "";
-}
-$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
 $treenum = 0;
 while ($treerow = tng_fetch_assoc($treeresult)) {
@@ -62,9 +55,9 @@ $headSection->setTitle(uiTextSnippet('addnewmedia'));
     $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('browse'), "findmedia"]);
     //    $navList->appendItem([$allowMediaAdd, "mediaAdd.php", uiTextSnippet('add'), "addmedia"]);
     $navList->appendItem([$allowMediaEdit, "mediaSort.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    $navList->appendItem([$allowMediaEdit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
+    $navList->appendItem([$allowMediaEdit, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
+    $navList->appendItem([$allowMediaAdd, "mediaImport.php", uiTextSnippet('import'), "import"]);
+    $navList->appendItem([$allowMediaAdd, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
     echo $navList->build("addmedia");
     ?>
     <div class='small'>
@@ -74,7 +67,6 @@ $headSection->setTitle(uiTextSnippet('addnewmedia'));
     <form action="mediaAddFormAction.php" method='post' name='form1' id='form1' ENCTYPE="multipart/form-data"
           onSubmit="return validateForm();">
       <input name='link_personID' type='hidden' value="<?php echo $personID; ?>">
-      <input name='link_tree' type='hidden' value="<?php echo $tree; ?>">
       <input name='link_linktype' type='hidden' value="<?php echo $linktype; ?>">
      
       <?php echo displayToggle("plus0", 1, "mediafile", uiTextSnippet('imagefile'), uiTextSnippet('uplsel')); ?>
@@ -85,7 +77,7 @@ $headSection->setTitle(uiTextSnippet('addnewmedia'));
         <select name="mediatypeID" onChange="switchOnType(this.options[this.selectedIndex].value)">
           <?php echo $moptions; ?>
         </select>
-        <?php if (!$assignedtree && $allowAdd && $allowEdit && $allowDelete) { ?>
+        <?php if ($allowAdd && $allowEdit && $allowDelete) { ?>
           <input name='addnewmediatype' type='button' value="<?php echo uiTextSnippet('addnewcoll'); ?>"
                  onclick="tnglitbox = new ModalDialog('admin_newcollection.php?field=mediatypeID');">
           <input id='editmediatype' name='editmediatype' type='button' value="<?php echo uiTextSnippet('edit'); ?>" style="display: none"
@@ -219,26 +211,6 @@ $headSection->setTitle(uiTextSnippet('addnewmedia'));
             <input name='datetaken' type='text' size='40' onblur="checkDate(this);">
           </div>
         </div>
-        <div class='row'>
-          <div class='col-sm-12'>
-            <?php echo uiTextSnippet('tree'); ?>:
-            <select name='tree'>
-              <?php
-              echo "  <option value=''>" . uiTextSnippet('alltrees') . "</option>\n";
-              $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
-              while ($treerow = tng_fetch_assoc($treeresult)) {
-                echo "  <option value=\"{$treerow['gedcom']}\"";
-                if ($treerow['gedcom'] == $tree) {
-                  echo " selected";
-                }
-                echo ">{$treerow['treename']}</option>\n";
-              }
-              tng_free_result($treeresult);
-              ?>
-            </select>
-          </div>
-        </div>
-
         <!-- headstone section -->
         <div class='row' id='cemrow'>
           <div class='col-sm-12'>
@@ -314,7 +286,6 @@ $headSection->setTitle(uiTextSnippet('addnewmedia'));
 <script src='js/admin.js'></script>
 <script src='js/datevalidation.js'></script>
 <script>
-  var tree = "<?php echo $tree; ?>";
   var tnglitbox;
   var trees = new Array();
   var treename = new Array();

@@ -105,14 +105,14 @@ $headSection->setTitle(uiTextSnippet('administration'));
         echo adminMenuItem("placesBrowse.php", uiTextSnippet('places'), $placesmsg, "svg/location.svg");
         echo adminMenuItem("timelineeventsBrowse.php", uiTextSnippet('tlevents'), $timelinemsg, "img/tlevents_icon.gif");
       }
-      if ($allowEdit && $allowAdd && $allowDelete && !$assignedtree) {
+      if ($allowEdit && $allowAdd && $allowDelete) {
         echo adminMenuItem("admin_misc.php", uiTextSnippet('misc'), uiTextSnippet('miscitems'), "img/misc_icon.gif");
       }
 
       if ($allowEdit && $allowAdd && $allowDelete && !$assignedbranch) {
         echo adminMenuItem("dataImportGedcom.php", uiTextSnippet('datamaint'), uiTextSnippet('importgedcom2'), "img/datamaint_icon.gif");
       }
-      if ($allowEdit && $allowAdd && $allowDelete && !$assignedtree) {
+      if ($allowEdit && $allowAdd && $allowDelete) {
         echo adminMenuItem("admin_setup.php", uiTextSnippet('setup'), uiTextSnippet('setupitems'), "svg/cog.svg");
         echo adminMenuItem("usersBrowse.php", uiTextSnippet('users'), uiTextSnippet('usersitems'), "svg/users.svg");
         echo adminMenuItem("treesBrowse.php", uiTextSnippet('trees'), $treesmsg, "svg/tree.svg");

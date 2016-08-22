@@ -4,12 +4,11 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-if ($assignedtree || !$allowEdit) {
+if (!$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-
 switch ($entity) {
   case "person":
     $IDlabel = uiTextSnippet('personid');

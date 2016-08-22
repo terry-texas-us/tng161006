@@ -23,7 +23,7 @@ $bailtext = $mediaoption ? uiTextSnippet('finish') : uiTextSnippet('cancel');
 
 $applyfilter = "applyFilter({"
         . "form: 'findform1', fieldId: 'myflastname', myflastname: $('#myflastname').val(), myffirstname: $('#myffirstname').val(), myfpersonID: $('#myfpersonID').val(),"
-        . "type: 'I', tree: '$tree', branch: '$branch', destdiv: 'findresults'$mediaoption});";
+        . "type: 'I', branch: '$branch', destdiv: 'findresults'$mediaoption});";
 
 header("Content-type:text/html; charset=" . $session_charset);
 ?>
@@ -45,21 +45,21 @@ header("Content-type:text/html; charset=" . $session_charset);
             <input id='myflastname' name='myflastname' type='text' tabindex='1'
                    onkeyup="filterChanged(event, {
                     form: 'findform1', fieldId: 'myflastname', myflastname: $('#myflastname').val(), myffirstname: $('#myffirstname').val(), myfpersonID: $('#myfpersonID').val(),
-                    type: 'I', tree: '<?php echo $tree; ?>', branch: '<?php echo $branch; ?>', destdiv: 'findresults'<?php echo $mediaoption; ?>
+                    type: 'I', branch: '<?php echo $branch; ?>', destdiv: 'findresults'<?php echo $mediaoption; ?>
                   });">
           </td>
           <td>
             <input id='myffirstname' name='myffirstname' type='text' tabindex='2'
                    onkeyup="filterChanged(event, {
                            form: 'findform1', fieldId: 'myffirstname', myflastname: $('#myflastname').val(), myffirstname: $('#myffirstname').val(), myfpersonID: $('#myfpersonID').val(),
-                           type: 'I', tree: '<?php echo $tree; ?>', branch: '<?php echo $branch; ?>', destdiv: 'findresults'<?php echo $mediaoption; ?>
+                           type: 'I', branch: '<?php echo $branch; ?>', destdiv: 'findresults'<?php echo $mediaoption; ?>
                          });">
           </td>
           <td>
             <input id='myfpersonID' name='myfpersonID' type='text' tabindex="3"
                    onkeyup="filterChanged(event, {
                            form: 'findform1', fieldId: 'myfpersonID', myflastname: $('#myflastname').val(), myffirstname: $('#myffirstname').val(), myfpersonID: $('#myfpersonID').val(),
-                           type: 'I', tree: '<?php echo $tree; ?>', branch: '<?php echo $branch; ?>', destdiv: 'findresults'<?php echo $mediaoption; ?>
+                           type: 'I', branch: '<?php echo $branch; ?>', destdiv: 'findresults'<?php echo $mediaoption; ?>
                          });">
             <!--<input type='submit' value="<?php echo uiTextSnippet('search'); ?>" />-->
             <input type='button' value="<?php echo $bailtext; ?>" onclick="gotoSection(seclitbox, null);">

@@ -13,13 +13,13 @@ function showFact($text, $fact, $numflag = 0)
   echo "</tr>\n";
 }
 
-$query = "SELECT count(personID) as pcount, $treesTable.gedcom, treename, description, owner, secret, address, email, city, state, zip, country, phone FROM $treesTable LEFT JOIN $people_table on $treesTable.gedcom = $people_table.gedcom WHERE $treesTable.gedcom = \"$tree\" GROUP BY $treesTable.gedcom";
+$query = "SELECT count(personID) as pcount, $treesTable.gedcom, treename, description, owner, secret, address, email, city, state, zip, country, phone FROM $treesTable LEFT JOIN $people_table on $treesTable.gedcom = $people_table.gedcom GROUP BY $treesTable.gedcom";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
 
-writelog("<a href='showtree.php?tree=$tree'>" . uiTextSnippet('tree') . ": {$row['treename']}</a>");
-preparebookmark("<a href='showtree.php?tree=$tree'>" . uiTextSnippet('tree') . ": {$row['treename']}</a>");
+writelog("<a href='showtree.php'>" . uiTextSnippet('tree') . ": {$row['treename']}</a>");
+preparebookmark("<a href='showtree.php'>" . uiTextSnippet('tree') . ": {$row['treename']}</a>");
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();

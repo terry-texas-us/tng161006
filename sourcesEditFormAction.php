@@ -5,7 +5,7 @@ require 'adminlib.php';
 $adminLogin = 1;
 require 'checklogin.php';
 
-if (!$allowEdit || ($assignedtree && $assignedtree != $tree)) {
+if (!$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -21,13 +21,13 @@ $actualtext = addslashes($actualtext);
 
 $newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
 
-$query = "UPDATE $sources_table SET shorttitle=\"$shorttitle\",title=\"$title\",author=\"$author\",callnum=\"$callnum\",publisher=\"$publisher\",repoID=\"$repoID\",actualtext=\"$actualtext\",changedate=\"$newdate\",changedby=\"$currentuser\" WHERE sourceID=\"$sourceID\" AND gedcom = \"$tree\"";
+$query = "UPDATE $sources_table SET shorttitle=\"$shorttitle\",title=\"$title\",author=\"$author\",callnum=\"$callnum\",publisher=\"$publisher\",repoID=\"$repoID\",actualtext=\"$actualtext\",changedate=\"$newdate\",changedby=\"$currentuser\" WHERE sourceID = '$sourceID'";
 $result = tng_query($query);
 
-adminwritelog("<a href=\"sourcesEdit.php?sourceID=$sourceID&amp;tree=$tree\">" . uiTextSnippet('modifysource') . ": $tree/$sourceID</a>");
+adminwritelog("<a href=\"sourcesEdit.php?sourceID=$sourceID\">" . uiTextSnippet('modifysource') . ": $sourceID</a>");
 
 if ($newscreen == "return") {
-  header("Location: sourcesEdit.php?sourceID=$sourceID&tree=$tree");
+  header("Location: sourcesEdit.php?sourceID=$sourceID");
 } else {
   if ($newscreen == "close") {
   ?>

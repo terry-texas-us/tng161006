@@ -49,11 +49,7 @@
       $query = "SELECT repoID, reponame, gedcom FROM $repositories_table $wherestr ORDER BY reponame";
       $reporesult = tng_query($query);
       while ($reporow = tng_fetch_assoc($reporesult)) {
-        if (!$assignedtree && $numtrees > 1) {
-          echo "  <option value='{$reporow['repoID']}'>{$reporow['reponame']} (" . uiTextSnippet('tree') . ": {$reporow['gedcom']})</option>\n";
-        } else {
-          echo "  <option value='{$reporow['repoID']}'>{$reporow['reponame']}</option>\n";
-        }
+        echo "  <option value='{$reporow['repoID']}'>{$reporow['reponame']}</option>\n";
       }
       tng_free_result($reporesult);
       ?>

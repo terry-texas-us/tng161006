@@ -4,8 +4,7 @@
 $('#change-tree').on('click', function () {
     'use strict';
     var $personId = $(this).data('personId');
-    var $tree = $(this).data('tree');
-    var url = 'treesChange.php?entity=person&oldtree=' + $tree + '&entityID=' + $personId;
+    var url = 'treesChange.php?entity=person&entityID=' + $personId;
     tnglitbox = new ModalDialog(url);
     return false;
 });

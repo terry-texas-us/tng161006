@@ -6,21 +6,20 @@ $_SESSION['tng_email'] = generatePassword(1);
 $_SESSION['tng_comments'] = generatePassword(1);
 $_SESSION['tng_yourname'] = generatePassword(1);
 
-$righttree = checktree($tree);
 $preemail = getCurrentUserEmail($currentuser, $users_table);
 
 if ($enttype == 'I') {
   $typestr = "person";
-  $result = getPersonDataPlusDates($tree, $ID);
+  $result = getPersonDataPlusDates($ID);
   if ($result) {
     $row = tng_fetch_assoc($result);
-    $rights = determineLivingPrivateRights($row, $righttree);
+    $rights = determineLivingPrivateRights($row);
     $row['allow_living'] = $rights['living'];
     $row['allow_private'] = $rights['private'];
     $name = getName($row) . " ($ID)";
     tng_free_result($result);
   }
-  $treeResult = getTreeSimple($tree);
+  $treeResult = getTreeSimple();
   $treerow = tng_fetch_assoc($treeResult);
   $disallowgedcreate = $treerow['disallowgedcreate'];
   tng_free_result($treeResult);
@@ -28,29 +27,29 @@ if ($enttype == 'I') {
   $years = getYears($row);
 } elseif ($enttype == 'F') {
   $typestr = "family";
-  $result = getFamilyData($tree, $ID);
+  $result = getFamilyData($ID);
   $row = tng_fetch_assoc($result);
   tng_free_result($result);
 
   $hname = $wname = "";
-  $rights = determineLivingPrivateRights($row, $righttree);
+  $rights = determineLivingPrivateRights($row);
   $row['allow_living'] = $rights['living'];
   $row['allow_private'] = $rights['private'];
 
   if ($row['husband']) {
-    $result = getPersonSimple($tree, $row['husband']);
+    $result = getPersonSimple($row['husband']);
     $prow = tng_fetch_assoc($result);
     tng_free_result($result);
-    $prights = determineLivingPrivateRights($prow, $righttree);
+    $prights = determineLivingPrivateRights($prow);
     $prow['allow_living'] = $prights['living'];
     $prow['allow_private'] = $prights['private'];
     $hname = getName($prow);
   }
   if ($row['wife']) {
-    $result = getPersonSimple($tree, $row['wife']);
+    $result = getPersonSimple($row['wife']);
     $prow = tng_fetch_assoc($result);
     tng_free_result($result);
-    $prights = determineLivingPrivateRights($prow, $righttree);
+    $prights = determineLivingPrivateRights($prow);
     $prow['allow_living'] = $prights['living'];
     $prow['allow_private'] = $prights['private'];
     $wname = getName($prow);
@@ -61,7 +60,7 @@ if ($enttype == 'I') {
   $years = $years = $row['marrdate'] && $row['allow_living'] && $row['allow_private'] ? uiTextSnippet('marrabbr') . " " . displayDate($row['marrdate']) : "";
 } elseif ($enttype == 'S') {
   $typestr = "source";
-  $query = "SELECT title FROM $sources_table WHERE sourceID = \"$ID\" AND gedcom = \"$tree\"";
+  $query = "SELECT title FROM $sources_table WHERE sourceID = '$ID'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   tng_free_result($result);
@@ -73,7 +72,7 @@ if ($enttype == 'I') {
   $srow = tng_fetch_assoc($sresult);
   $row['living'] = $srow['ccount'] ? 1 : 0;
 
-  $rights = determineLivingPrivateRights($row, $righttree);
+  $rights = determineLivingPrivateRights($row);
   $row['allow_living'] = $rights['living'];
   $row['allow_private'] = $rights['private'];
   tng_free_result($sresult);
@@ -82,7 +81,7 @@ if ($enttype == 'I') {
   $years = "";
 } elseif ($enttype == 'R') {
   $typestr = "repo";
-  $query = "SELECT reponame FROM $repositories_table WHERE repoID = \"$ID\" AND gedcom = \"$tree\"";
+  $query = "SELECT reponame FROM $repositories_table WHERE repoID = '$ID'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   tng_free_result($result);
@@ -160,7 +159,6 @@ $headSection->setTitle($headTitle);
         <textarea class='form-control' name="<?php echo $_SESSION['tng_comments']; ?>" rows='4' required></textarea>
         <input name='enttype' type='hidden' value="<?php echo $enttype; ?>">
         <input name='ID' type='hidden' value="<?php echo $ID; ?>">
-        <input name='tree' type='hidden' value="<?php echo $tree; ?>">
         <input name='page' type='hidden' value="<?php echo $page; ?>">
         <br>
         <button class="btn btn-primary btn-block" type="submit"><?php echo $buttontext; ?></button>

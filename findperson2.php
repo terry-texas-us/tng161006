@@ -8,7 +8,7 @@ if ($session_charset != "UTF-8") {
   $myfirstname = tng_utf8_decode($myfirstname);
   $mylastname = tng_utf8_decode($mylastname);
 }
-$allwhere = "gedcom = \"$tree\"";
+$allwhere = "1";
 if ($personID) {
   $allwhere .= " AND personID = \"$personID\"";
 }

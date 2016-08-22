@@ -34,7 +34,6 @@ if ($branchsearch) {
 } else {
   $wherestr = "";
 }
-
 $query = "SELECT b.branch, b.gedcom, b.description, treename, personID
     FROM ($branches_table as b, $treesTable as t)
     WHERE b.gedcom = t.gedcom $wherestr
@@ -51,16 +50,9 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 } else {
   $totrows = $numrows;
 }
-
 $numrowsplus = $numrows + $offset;
 
-$treequery = "SELECT count(gedcom) as treecount FROM $treesTable";
-$treeresult = tng_query($treequery);
-$treerow = tng_fetch_assoc($treeresult);
-$numtrees = $treerow['treecount'];
-tng_free_result($treeresult);
-
-$logstring = "<a href=\"branchesShow.php?tree=$tree&amp;offset=$offset&amp;branchsearch=$branchsearch\">" . xmlcharacters(uiTextSnippet('branches')) . "</a>";
+$logstring = "<a href=\"branchesShow.php?offset=$offset&amp;branchsearch=$branchsearch\">" . xmlcharacters(uiTextSnippet('branches')) . "</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -92,9 +84,6 @@ $headSection->setTitle(uiTextSnippet('branches'));
           <tr>
             <th></th>
             <th><?php echo uiTextSnippet('description'); ?></th>
-            <?php if ($numtrees > 1) { ?>
-              <th><?php echo uiTextSnippet('treename'); ?></th>
-            <?php } ?>
             <th><?php echo uiTextSnippet('startingind'); ?></th>
             <th><?php echo uiTextSnippet('individuals'); ?></th>
             <th><?php echo uiTextSnippet('families'); ?></th>
@@ -122,7 +111,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
           $indrow = tng_fetch_assoc($indresult);
           tng_free_result($indresult);
 
-          $presult = getPersonSimple($row['gedcom'], $row['personID']);
+          $presult = getPersonSimple($row['personID']);
           $prow = tng_fetch_assoc($presult);
           tng_free_result($presult);
           $prights = determineLivingPrivateRights($prow);
@@ -133,10 +122,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
           echo "<tr>\n";
           echo "<td>$i</td>\n";
           echo "<td>{$row['description']}</td>\n";
-          if ($numtrees > 1) {
-            echo "<td><a href=\"showtree.php?tree={$row['gedcom']}\">{$row['treename']}</a></td>\n";
-          }
-          echo "<td><a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$namestr</a></td>\n";
+          echo "<td><a href=\"peopleShowPerson.php?personID={$row['personID']}\">$namestr</a></td>\n";
           echo "<td align='right'><a href=\"search.php?tree={$row['gedcom']}&amp;branch={$row['branch']}\">" . number_format($indrow['pcount']) . "</a></td>\n";
           echo "<td align='right'><a href=\"famsearch.php?tree={$row['gedcom']}&amp;branch={$row['branch']}\">" . number_format($famrow['fcount']) . "</a></td>\n";
           echo "</tr>\n";

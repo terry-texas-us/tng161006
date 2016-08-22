@@ -7,9 +7,9 @@ $adminLogin = true;
 require 'checklogin.php';
 
 if ($albumID) {
-  $query2 = "SELECT entityID, gedcom FROM $album2entities_table WHERE gedcom = \"$tree\" AND albumID = \"$albumID\" AND linktype = \"$linktype\"";
+  $query2 = "SELECT entityID, gedcom FROM $album2entities_table WHERE albumID = '$albumID' AND linktype = '$linktype'";
 } else {
-  $query2 = "SELECT personID as entityID, gedcom FROM $medialinks_table WHERE gedcom = \"$tree\" AND mediaID = \"$mediaID\" AND linktype = \"$linktype\"";
+  $query2 = "SELECT personID as entityID, gedcom FROM $medialinks_table WHERE mediaID = '$mediaID' AND linktype = '$linktype'";
 }
 $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
 $alreadygot = array();
@@ -48,7 +48,6 @@ function showAction($entityID, $num = null) {
 }
 
 function doPeople($firstname, $lastname) {
-  global $tree;
   global $assignedbranch;
   global $lnprefixes;
   global $maxsearchresults;
@@ -62,7 +61,7 @@ function doPeople($firstname, $lastname) {
   $lines .= "<td>" . uiTextSnippet('deathdate') . "</td>\n";
   $lines .= "</tr>\n";
 
-  $allwhere = "gedcom = \"$tree\"";
+  $allwhere = "1";
   if ($assignedbranch) {
     $allwhere .= " AND branch LIKE \"%$assignedbranch%\"";
   }
@@ -115,7 +114,6 @@ function doPeople($firstname, $lastname) {
 }
 
 function doFamilies($husbname, $wifename) {
-  global $tree;
   global $assignedbranch;
   global $maxsearchresults;
   global $families_table;
@@ -128,12 +126,11 @@ function doFamilies($husbname, $wifename) {
   $lines .= "<td>" . uiTextSnippet('wifename') . "</td>\n";
   $lines .= "</tr>\n";
 
-  $allwhere = "$families_table.gedcom = \"$tree\"";
+  $allwhere = "1";
 
   if ($assignedbranch) {
     $allwhere .= " AND $families_table.branch LIKE \"%$assignedbranch%\"";
   }
-
   $allwhere2 = "";
 
   if ($wifename) {
@@ -145,7 +142,6 @@ function doFamilies($husbname, $wifename) {
       $allwhere2 .= "CONCAT_WS(' ',wifepeople.firstname,TRIM(CONCAT_WS(' ',wifepeople.lnprefix,wifepeople.lastname))) LIKE \"%$term%\"";
     }
   }
-
   if ($husbname) {
     $terms = explode(' ', $husbname);
     foreach ($terms as $term) {
@@ -200,7 +196,6 @@ function doFamilies($husbname, $wifename) {
 }
 
 function doSources($title) {
-  global $tree;
   global $sources_table;
   global $maxsearchresults;
 
@@ -210,7 +205,7 @@ function doSources($title) {
   $lines .= "<td>" . uiTextSnippet('title') . "</td>\n";
   $lines .= "</tr>\n";
 
-  $query = "SELECT sourceID, title FROM $sources_table WHERE gedcom = \"$tree\" AND title LIKE \"%$title%\" ORDER BY title LIMIT $maxsearchresults";
+  $query = "SELECT sourceID, title FROM $sources_table WHERE title LIKE \"%$title%\" ORDER BY title LIMIT $maxsearchresults";
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {
@@ -224,7 +219,6 @@ function doSources($title) {
 }
 
 function doRepos($title) {
-  global $tree;
   global $repositories_table;
   global $maxsearchresults;
 
@@ -234,7 +228,7 @@ function doRepos($title) {
   $lines .= "<td>" . uiTextSnippet('title') . "</td>\n";
   $lines .= "</tr>\n";
 
-  $query = "SELECT repoID, reponame FROM $repositories_table WHERE gedcom = \"$tree\" AND reponame LIKE \"%$title%\" ORDER BY reponame LIMIT $maxsearchresults";
+  $query = "SELECT repoID, reponame FROM $repositories_table WHERE reponame LIKE \"%$title%\" ORDER BY reponame LIMIT $maxsearchresults";
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {
@@ -248,7 +242,6 @@ function doRepos($title) {
 }
 
 function doPlaces($place) {
-  global $tree;
   global $maxsearchresults;
   global $places_table;
 
@@ -257,7 +250,7 @@ function doPlaces($place) {
   $lines .= "<td>" . uiTextSnippet('place') . "</td>\n";
   $lines .= "</tr>\n";
 
-  $allwhere = "gedcom = \"$tree\"";
+  $allwhere = "1";
   if ($place) {
     $allwhere .= " AND place LIKE \"%$place%\"";
   }

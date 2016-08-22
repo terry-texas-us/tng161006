@@ -3,20 +3,7 @@ require 'tng_begin.php';
 
 $topnum = preg_replace("/[^0-9]/", '', $topnum);
 
-if ($tree && !$tngconfig['places1tree']) {
-  $treestr = "tree=$tree&amp;";
-  $treestr2 = "tree=$tree";
-  $places_all_url = "places-all.php?";
-  $places_url = "placesMain.php?";
-  $logstring = "<a href='places100.php?topnum=$topnum&amp;tree=$tree'>" . xmlcharacters(uiTextSnippet('placelist') . " &mdash; " . uiTextSnippet('top') . " $topnum (" . uiTextSnippet('tree') . ": $tree)") . "</a>";
-  $wherestr = " AND gedcom = '$tree'";
-} else {
-  $treestr = $treestr2 = "";
-  $places_all_url = "places-all.php";
-  $places_url = "placesMain.php";
-  $logstring = "<a href='places100.php?topnum=$topnum'>" . xmlcharacters(uiTextSnippet('placelist') . " &mdash; " . uiTextSnippet('top') . " $topnum") . "</a>";
-  $wherestr = "";
-}
+$logstring = "<a href='places100.php?topnum=$topnum'>" . xmlcharacters(uiTextSnippet('placelist') . " &mdash; " . uiTextSnippet('top') . " $topnum") . "</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -35,9 +22,6 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": " . uiTextSnippet('top') 
     <h2><img class='icon-md' src='svg/location.svg'><? echo uiTextSnippet('placelist') . ": " . uiTextSnippet('top') . " $topnum"; ?></h2>
     <br class='clearleft'>
     <?php
-    if ($tree && !$tngconfig['places1tree']) {
-      echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'places100', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
-    }
     beginFormElement("places100", "get");
     ?>
       <div class="card">
@@ -52,16 +36,13 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": " . uiTextSnippet('top') 
       <div class="card">
         <?php
         echo uiTextSnippet('placescont') . ": <input name='psearch' type='text' />\n";
-        if ($tree && !$tngconfig['places1tree']) {
-          echo "<input name='tree' type='hidden' value='{$tree}' />\n";
-        }
         echo "<input name='stretch' type='hidden' value='1' />\n";
         echo "<input name='pgo' type='submit' value='" . uiTextSnippet('go') . "' />\n";
         if (!$decodedfirstchar) {
           $decodedfirstchar = uiTextSnippet('top') . " $topnum";
         }
         ?>
-        <?php echo "<a href='{$places_url}{$treestr}'>" . uiTextSnippet('mainplacepage') . "</a> &nbsp;|&nbsp; <a href='{$places_all_url}{$treestr2}'>" . uiTextSnippet('showallplaces') . "</a>"; ?>
+        <?php echo "<a href='placesMain.php'>" . uiTextSnippet('mainplacepage') . "</a> &nbsp;|&nbsp; <a href='places-all.php'>" . uiTextSnippet('showallplaces') . "</a>"; ?>
       </div>
     <?php endFormElement(); ?>
     <br>
@@ -74,10 +55,10 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": " . uiTextSnippet('top') 
         <tr>
           <td class="plcol">
             <?php
+            $wherestr = "";
             if ($psearch) {
               $wherestr .= " AND trim(substring_index(place,',',-$offset)) = \"$psearch\"";
             }
-
             $offsetorg = $offset;
             $offset = $offset ? $offset + 1 : 1;
             $offsetplus = $offset + 1;
@@ -97,7 +78,6 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": " . uiTextSnippet('top') 
                 $numcols = 3;
                 $num_in_col = ceil($topnum / 3);
               }
-
               $num_in_col_ctr = 0;
               while ($place = tng_fetch_assoc($result)) {
                 $place2 = urlencode($place['myplace']);
@@ -108,10 +88,10 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": " . uiTextSnippet('top') 
                 $specificcount = $countrow['placecount'];
                 tng_free_result($result2);
 
-                $searchlink = $specificcount ? " <a href='placesearch.php?{$treestr}psearch=$place2'>"
+                $searchlink = $specificcount ? " <a href='placesearch.php?psearch=$place2'>"
                         . "<img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=''></a>" : "";
                 if ($place[placecount] > 1 || !$specificcount) {
-                  $name = "<a href=\"places-oneletter.php?offset=$offset&amp;{$treestr}psearch=$place2\">{$place['myplace']}</a>";
+                  $name = "<a href=\"places-oneletter.php?offset=$offset&amp;psearch=$place2\">{$place['myplace']}</a>";
                   echo "$counter. $name ({$place['placecount']}) $searchlink<br>\n";
                 } else {
                   echo "$counter. {$place['myplace']} $searchlink<br>\n";

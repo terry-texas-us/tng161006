@@ -561,7 +561,7 @@ class UploadHandler
         $file->mediaID = tng_insert_id();
         adminwritelog("<a href=\"admin_editmedia.php?mediaID={$file->mediaID}\">{$this->options['added']}: {$file->mediaID}</a>");
 
-        $query = "UPDATE {$this->options['mediatypes_table']} SET disabled=\"0\" where mediatypeID=\"{$this->options['mediatypeID']}\"";
+        $query = "UPDATE {$this->options['mediatypes_table']} SET disabled=\"0\" WHERE mediatypeID=\"{$this->options['mediatypeID']}\"";
         tng_query($query);
       } else {
         $file->mediaID = "";

@@ -41,8 +41,7 @@ $('#collapseall-editperson').on('click', function () {
 $('#change-tree').on('click', function () {
     'use strict';
     var $personId = $(this).data('personId');
-    var $tree = $(this).data('tree');
-    var url = 'treesChange.php?entity=person&oldtree=' + $tree + '&entityID=' + $personId;
+    var url = 'treesChange.php?entity=person&entityID=' + $personId;
     tnglitbox = new ModalDialog(url);
     return false;
 });
@@ -84,8 +83,7 @@ $('#branchedit-person').on('mouseout', function () {
 $('#addnew-event-person').on('click', function () {
     'use strict';
     var $personId = $(this).data('personId');
-    var $tree = $(this).data('tree');
-    newEvent('I', $personId, $tree);
+    newEvent('I', $personId);
 });
 
 $('#parents .sortrow').on('mouseover', function () {
@@ -153,18 +151,16 @@ function addNewFamily(radioval, args) {
 $('#addnew-parents').on('click', function () {
     'use strict';
     var $personId = $(this).data('personId');
-    var $tree = $(this).data('tree');
     var $cw = $(this).data('cw');
-    return addNewFamily('child', 'child=' + $personId + '&tree=' + $tree + '&cw=' + $cw);
+    return addNewFamily('child', 'child=' + $personId + '&cw=' + $cw);
 });
 
 $('#addnew-family-spouses').on('click', function () {
     'use strict';
     var $self = $(this).data('self');
     var $personId = $(this).data('personId');
-    var $tree = $(this).data('tree');
     var $cw = $(this).data('cw');
-    return addNewFamily($self, $self + '=' + $personId + '&tree=' + $tree + '&cw=' + $cw);
+    return addNewFamily($self, $self + '=' + $personId + '&cw=' + $cw);
 });
 
 $('#parent-sealdate').on('blur', function () {
@@ -241,14 +237,13 @@ function startPersonSorts(tree, spouseOrder) {
     }
 }
 
-function unlinkSpouse(tree, familyID) {
+function unlinkSpouse(familyID) {
     'use strict';
     if (confirm(textSnippet('confunlinkspouse'))) {
         var params = {
             action: 'spouseunlink',
             familyID: familyID,
-            personID: document.form1.personID.value,
-            tree: tree
+            personID: document.form1.personID.value
         };
         $.ajax({
             url: 'ajx_updateorder.php',
@@ -267,19 +262,17 @@ function unlinkSpouse(tree, familyID) {
 
 $('#spouses #unlink-from-family').on('click', function () {
     'use strict';
-    var $tree = $(this).data('tree');
     var $familyId = $(this).data('familyId');
-    return unlinkSpouse($tree, $familyId);
+    return unlinkSpouse($familyId);
 });
 
-function unlinkChildFamily(tree, familyID) {
+function unlinkChildFamily(familyID) {
     'use strict';
     if (confirm(textSnippet('confunlinkchild'))) {
         var params = {
             action: 'parentunlink',
             familyID: familyID,
             personID: document.form1.personID.value,
-            tree: tree
         };
         $.ajax({
             url: 'ajx_updateorder.php',
@@ -299,7 +292,6 @@ function unlinkChildFamily(tree, familyID) {
 $('#parents #unlink-from-family').on('click', function () {
     'use strict';
     var $familyId = $(this).data('familyId');
-    var $tree = $(this).data('tree');
 
-    return unlinkChildFamily($tree, $familyId);
+    return unlinkChildFamily($familyId);
 });

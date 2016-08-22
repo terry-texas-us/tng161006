@@ -17,35 +17,32 @@ function xmlPhoto($persfamID, $living, $gender) {
 }
 
 function xmlPerson($currperson, $backperson, $generation) {
-  global $tree;
   global $pedigree;
   global $parentset;
-  global $righttree;
   global $generations;
   global $display;
   global $people;
   global $familylist;
   global $families;
 
-  $result = getPersonData($tree, $currperson);
+  $result = getPersonData($currperson);
   $row = tng_fetch_assoc($result);
   tng_free_result($result);
 
-  $person = "{\"personID\":\"$currperson\",\"tree\":\"$tree\",\"backperson\":\"$backperson\",\"gender\":\"{$row['sex']}\",";
+  $person = "{\"personID\":\"$currperson\",\"backperson\":\"$backperson\",\"gender\":\"{$row['sex']}\",";
   //look up info
-  $rightbranch = $righttree ? checkbranch($row['branch']) : false;
-  $rights = determineLivingPrivateRights($row, $righttree, $rightbranch);
+  $rightbranch = checkbranch($row['branch']);
+  $rights = determineLivingPrivateRights($row, $rightbranch);
   $row['allow_living'] = $rights['living'];
   $row['allow_private'] = $rights['private'];
   $nameinfo = xmlcharacters(getName($row));
-  //$nameinfo = htmlentities( getName( $row ), ENT_QUOTES );
   $person .= "\"name\":\"$nameinfo\",";
 
   $parentfamID = "";
   $locparentset = $parentset;
   $parentscount = 0;
   $parentfamIDs = array();
-  $parents = $familyresult = getChildFamily($tree, $currperson, "parentorder");
+  $parents = $familyresult = getChildFamily($currperson, "parentorder");
   if ($parents) {
     $parentscount = tng_num_rows($parents);
     if ($parentscount > 0) {
@@ -68,7 +65,6 @@ function xmlPerson($currperson, $backperson, $generation) {
   }
 
   $person .= $parentfamID ? "\"famc\":\"$parentfamID\"," : "\"famc\":\"-1\",";
-  //if($parentfamID) $person .= "\"famc\":\"$parentfamID\",";
   if ($display == "standard" && $pedigree['inclphotos']) {
     $person .= xmlPhoto($currperson, $rights['both'], $row['sex']) . ",";
   } else {
@@ -152,9 +148,9 @@ function xmlPerson($currperson, $backperson, $generation) {
     //get person's gender that way (male if it matches husband, female if it matches wife), assign $spouse, $self and $spouseorder
   }
   if ($spouseorder) {
-    $spouseresults = getSpouseFamilyFull($tree, $self, $currperson, $spouseorder);
+    $spouseresults = getSpouseFamilyFull($self, $currperson, $spouseorder);
   } else {
-    $spouseresults = getSpouseFamilyFullUnion($tree, $currperson);
+    $spouseresults = getSpouseFamilyFullUnion($currperson);
     $marrtot = tng_num_rows($spouseresults);
     if ($marrtot) {
       $spouserow = tng_fetch_assoc($spouseresults);
@@ -167,7 +163,7 @@ function xmlPerson($currperson, $backperson, $generation) {
         $self = 'wife';
         $spouseorder = 'wifeorder';
       }
-      $spouseresults = getSpouseFamilyFullUnion($tree, $currperson);
+      $spouseresults = getSpouseFamilyFullUnion($currperson);
     }
   }
   if ($spouseorder) {
@@ -179,10 +175,10 @@ function xmlPerson($currperson, $backperson, $generation) {
       $spfams .= "{";
       $sp = "";
       if ($spouserow[$spouse]) {
-        $spouseIDresult = getPersonSimple($tree, $spouserow[$spouse]);
+        $spouseIDresult = getPersonSimple($spouserow[$spouse]);
         $spouseIDrow = tng_fetch_assoc($spouseIDresult);
-        $rightbranch = $righttree ? checkbranch($spouseIDrow['branch']) : false;
-        $rights = determineLivingPrivateRights($spouseIDrow, $righttree, $rightbranch);
+        $rightbranch = checkbranch($spouseIDrow['branch']);
+        $rights = determineLivingPrivateRights($spouseIDrow, $rightbranch);
         $spouseIDrow['allow_living'] = $rights['living'];
         $spouseIDrow['allow_private'] = $rights['private'];
         $sp = "\"spID\":\"" . $spouserow[$spouse] . "\",";
@@ -213,22 +209,21 @@ function xmlPerson($currperson, $backperson, $generation) {
 }
 
 function getChildren($familyID) {
-  global $tree, $pedigree, $righttree;
+  global $pedigree;
 
   $children = "";
   if ($pedigree['popupkids']) {
-    $childrenresults = getChildrenSimple($tree, $familyID);
+    $childrenresults = getChildrenSimple($familyID);
     if ($childrenresults && tng_num_rows($childrenresults)) {
       while ($child = tng_fetch_assoc($childrenresults)) {
         if ($children) {
           $children .= ",\n";
         }
-        $rightbranch = $righttree ? checkbranch($child['branch']) : false;
-        $rights = determineLivingPrivateRights($child, $righttree, $rightbranch);
+        $rightbranch = checkbranch($child['branch']);
+        $rights = determineLivingPrivateRights($child, $rightbranch);
         $child['allow_living'] = $rights['living'];
         $child['allow_private'] = $rights['private'];
         $children .= "{\"childID\":\"" . $child['pID'] . "\",\"name\":\"" . xmlcharacters(getName($child)) . "\"}";
-        //$children .= "{\"childID\":\"" . $child['pID'] . "\",\"name\":\"" . htmlentities( getName( $child ), ENT_QUOTES ) . "\"}";
       }
       $children = "\"children\":[$children]";  //used to be child
     }
@@ -239,11 +234,9 @@ function getChildren($familyID) {
 }
 
 function getFamily($famrow) {
-  global $righttree;
-
   $family = "{\"famID\":\"" . $famrow['familyID'] . "\",\"husband\":\"" . $famrow['husband'] . "\",\"wife\":\"" . $famrow['wife'] . "\",";
-  $rightbranch = $righttree ? checkbranch($famrow['branch']) : false;
-  $rights = determineLivingPrivateRights($famrow, $righttree, $rightbranch);
+  $rightbranch = checkbranch($famrow['branch']);
+  $rights = determineLivingPrivateRights($famrow, $rightbranch);
   $famrow['allow_living'] = $rights['living'];
   $famrow['allow_private'] = $rights['private'];
   if ($rights['both']) {
@@ -271,9 +264,10 @@ function getFamily($famrow) {
 }
 
 function xmlFamily($famc, $backperson, $generation) {
-  global $tree, $families, $familylist;
+  global $families;
+  global $familylist;
 
-  $famresult = getFamilyData($tree, $famc);
+  $famresult = getFamilyData($famc);
   if ($famresult) {
     $famrow = tng_fetch_assoc($famresult);
     $families[] = getFamily($famrow);
@@ -291,27 +285,25 @@ function xmlFamily($famc, $backperson, $generation) {
 
 // subroutine to get father/mother ids and names
 function getParentInfo($famid) {
-  global $tree, $righttree;
-
   $parentarray = array();
-  $parentresult = getParentSimple($tree, $famid, 'husband');
+  $parentresult = getParentSimple($famid, 'husband');
   if ($parentresult) {
     $row = tng_fetch_assoc($parentresult);
     $parentarray['fathID'] = $row['personID'];
-    $rightbranch = $righttree ? checkbranch($row['branch']) : false;
-    $rights = determineLivingPrivateRights($row, $righttree, $rightbranch);
+    $rightbranch = checkbranch($row['branch']);
+    $rights = determineLivingPrivateRights($row, $rightbranch);
     $row['allow_living'] = $rights['living'];
     $row['allow_private'] = $rights['private'];
     $parentarray['fathname'] = xmlcharacters(getName($row));
     tng_free_result($parentresult);
   }
 
-  $parentresult = getParentSimple($tree, $famid, 'wife');
+  $parentresult = getParentSimple($famid, 'wife');
   if ($parentresult) {
     $row = tng_fetch_assoc($parentresult);
     $parentarray['mothID'] = $row['personID'];
-    $rightbranch = $righttree ? checkbranch($row['branch']) : false;
-    $rights = determineLivingPrivateRights($row, $righttree, $rightbranch);
+    $rightbranch = checkbranch($row['branch']);
+    $rights = determineLivingPrivateRights($row, $rightbranch);
     $row['allow_living'] = $rights['living'];
     $row['allow_private'] = $rights['private'];
     $parentarray['mothname'] = xmlcharacters(getName($row));
@@ -319,9 +311,6 @@ function getParentInfo($famid) {
   }
   return $parentarray;
 }
-
-$righttree = checktree($tree);
-
 // how many generations to show?
 if (!$pedigree['maxgen']) {
   $pedigree['maxgen'] = 6;
@@ -335,14 +324,8 @@ if ($generations > $pedigree['maxgen']) {
     $generations = intval($generations);
   }
 }
-
 // alternate parent display?
 $parentset = $parentset ? intval($parentset) : 0;
-
-$pedigree['phototree'] = $tree;
-if ($tree) {
-  $pedigree['phototree'] .= ".";
-}
 
 $people = array();
 $families = array();

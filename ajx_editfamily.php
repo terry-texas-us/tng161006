@@ -25,7 +25,7 @@ function getBirth($row) {
 }
 
 $familyID = ucfirst($familyID);
-$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $families_table WHERE familyID = \"$familyID\" AND gedcom = \"$tree\"";
+$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $families_table WHERE familyID = '$familyID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -34,28 +34,21 @@ $row['sealplace'] = preg_replace("/\"/", "&#34;", $row['sealplace']);
 $row['divplace'] = preg_replace("/\"/", "&#34;", $row['divplace']);
 $row['notes'] = preg_replace("/\"/", "&#34;", $row['notes']);
 
-if ((!$allowEdit && (!$allowAdd || !$added)) || ($assignedtree && $assignedtree != $tree) || !checkbranch($row['branch'])) {
+if ((!$allowEdit && (!$allowAdd || !$added)) || !checkbranch($row['branch'])) {
   $message = uiTextSnippet('norights');
   header("Location: ajx_login.php?message=" . urlencode($message));
   exit;
 }
-
 $editconflict = determineConflict($row, $families_table);
 
-$righttree = checktree($tree);
-$rightbranch = $righttree ? checkbranch($row['branch']) : false;
-$rights = determineLivingPrivateRights($row, $righttree, $rightbranch);
+$rightbranch = checkbranch($row['branch']);
+$rights = determineLivingPrivateRights($row, $rightbranch);
 $row['allow_living'] = $rights['living'];
 $row['allow_private'] = $rights['private'];
 
 $namestr = getFamilyName($row);
 
-$query = "SELECT treename FROM $treesTable WHERE gedcom = \"$tree\"";
-$result = tng_query($query);
-$treerow = tng_fetch_assoc($result);
-tng_free_result($result);
-
-$query = "SELECT DISTINCT eventID as eventID FROM $notelinks_table WHERE persfamID=\"$familyID\" AND gedcom =\"$tree\"";
+$query = "SELECT DISTINCT eventID as eventID FROM $notelinks_table WHERE persfamID = '$familyID'";
 $notelinks = tng_query($query);
 $gotnotes = array();
 while ($note = tng_fetch_assoc($notelinks)) {
@@ -64,8 +57,7 @@ while ($note = tng_fetch_assoc($notelinks)) {
   }
   $gotnotes[$note['eventID']] = "*";
 }
-
-$citquery = "SELECT DISTINCT eventID FROM $citations_table WHERE persfamID = \"$familyID\" AND gedcom = \"$tree\"";
+$citquery = "SELECT DISTINCT eventID FROM $citations_table WHERE persfamID = '$familyID'";
 $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
 $gotcites = array();
 while ($cite = tng_fetch_assoc($citresult)) {
@@ -74,21 +66,19 @@ while ($cite = tng_fetch_assoc($citresult)) {
   }
   $gotcites[$cite['eventID']] = "*";
 }
-
-$assocquery = "SELECT count(assocID) as acount FROM $assoc_table WHERE personID = \"$familyID\" AND gedcom = \"$tree\"";
+$assocquery = "SELECT count(assocID) as acount FROM $assoc_table WHERE personID = '$familyID'";
 $assocresult = tng_query($assocquery) or die(uiTextSnippet('cannotexecutequery') . ": $assocquery");
 $assocrow = tng_fetch_assoc($assocresult);
 $gotassoc = $assocrow['acount'] ? "*" : "";
 tng_free_result($assocresult);
 
-$query = "SELECT parenttag FROM $events_table WHERE persfamID=\"$familyID\" AND gedcom =\"$tree\"";
+$query = "SELECT parenttag FROM $events_table WHERE persfamID = '$familyID'";
 $morelinks = tng_query($query);
 $gotmore = array();
 while ($more = tng_fetch_assoc($morelinks)) {
   $gotmore[$more['parenttag']] = "*";
 }
-
-$query = "SELECT $people_table.personID as pID, firstname, lastname, lnprefix, prefix, suffix, nameorder, birthdate, altbirthdate, living, private, branch FROM $people_table, $children_table WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = \"$familyID\" AND $people_table.gedcom = \"$tree\" AND $children_table.gedcom = \"$tree\" ORDER BY ordernum";
+$query = "SELECT $people_table.personID as pID, firstname, lastname, lnprefix, prefix, suffix, nameorder, birthdate, altbirthdate, living, private, branch FROM $people_table, $children_table WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = '$familyID' ORDER BY ordernum";
 $children = tng_query($query);
 
 $kidcount = tng_num_rows($children);
@@ -97,8 +87,6 @@ $helplang = findhelp("families_help.php");
 
 $photo = showSmallPhoto($familyID, $namestr, 1, 0, true);
 header("Content-type:text/html; charset=" . $session_charset);
-
-$righttree = checktree($tree);
 
 require_once 'eventlib.php';
 ?>
@@ -114,7 +102,7 @@ require_once 'eventlib.php';
         echo "<br><p>" . uiTextSnippet('editconflict') . "</p>";
       } else {
         $iconColor = $gotassoc ? "icon-info" : "icon-muted";
-        echo "<a id='family-associations' href='#' data-family-id='$familyID' data-tree='$tree' title='" . uiTextSnippet('associations') . "'>\n";
+        echo "<a id='family-associations' href='#' data-family-id='$familyID' title='" . uiTextSnippet('associations') . "'>\n";
         echo "<img class='icon-md icon-associations $iconColor' data-src='svg/connections.svg'>\n";
         echo "</a>\n";
 
@@ -144,13 +132,13 @@ require_once 'eventlib.php';
               <table class='table table-sm'>
                 <?php
                 if ($row['husband']) {
-                  $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, living, private, branch, birthdate, altbirthdate FROM $people_table WHERE personID = \"{$row['husband']}\" AND gedcom = \"$tree\"";
+                  $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, living, private, branch, birthdate, altbirthdate FROM $people_table WHERE personID = \"{$row['husband']}\"";
                   $spouseresult = tng_query($query);
                   $spouserow = tng_fetch_assoc($spouseresult);
                   tng_free_result($spouseresult);
                 }
                 if ($row['husband']) {
-                  $hrights = determineLivingPrivateRights($spouserow, $righttree);
+                  $hrights = determineLivingPrivateRights($spouserow);
                   $spouserow['allow_living'] = $hrights['living'];
                   $spouserow['allow_private'] = $hrights['private'];
                   $husbstr = getName($spouserow) . getBirth($spouserow) . " - " . $row['husband'];
@@ -164,7 +152,7 @@ require_once 'eventlib.php';
                   <td>
                     <input id='husbnameplusid' name='husbnameplusid' type='text' value="<?php echo "$husbstr"; ?>" readonly>
                     <input id='husband' name='husband' type='hidden' value="<?php echo $row['husband']; ?>">
-                    <input id='find-husband' type='button' value="<?php echo uiTextSnippet('find'); ?>" data-tree='<?php echo $tree; ?>' data-assigned-branch='<?php echo $assignedbranch; ?>'>
+                    <input id='find-husband' type='button' value="<?php echo uiTextSnippet('find'); ?>" data-assigned-branch='<?php echo $assignedbranch; ?>'>
                     <input id='addnew-husband' type='button' value="<?php echo uiTextSnippet('addnew'); ?>">
                     <input id='edit-husband' type='button' value="  <?php echo uiTextSnippet('edit'); ?>  ">
                     <input id='remove-husband' type='button' value="<?php echo uiTextSnippet('remove'); ?>">
@@ -172,7 +160,7 @@ require_once 'eventlib.php';
                 </tr>
                 <?php
                 if ($row['wife']) {
-                  $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, living, private, branch, birthdate, altbirthdate FROM $people_table WHERE personID = \"{$row['wife']}\" AND gedcom = \"$tree\"";
+                  $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, living, private, branch, birthdate, altbirthdate FROM $people_table WHERE personID = \"{$row['wife']}\"";
                   $spouseresult = tng_query($query);
                   $spouserow = tng_fetch_assoc($spouseresult);
                   tng_free_result($spouseresult);
@@ -180,7 +168,7 @@ require_once 'eventlib.php';
                   $spouserow = "";
                 }
                 if ($row['wife']) {
-                  $wrights = determineLivingPrivateRights($spouserow, $righttree);
+                  $wrights = determineLivingPrivateRights($spouserow);
                   $spouserow['allow_living'] = $wrights['living'];
                   $spouserow['allow_private'] = $wrights['private'];
                   $wifestr = getName($spouserow) . getBirth($spouserow) . " - " . $row['wife'];
@@ -194,7 +182,7 @@ require_once 'eventlib.php';
                   <td>
                     <input id='wifenameplusid' name='wifenameplusid' type='text' value="<?php echo "$wifestr"; ?>" readonly>
                     <input id='wife' name='wife' type='hidden' value="<?php echo $row['wife']; ?>">
-                    <input id='find-wife' type='button' value="<?php echo uiTextSnippet('find'); ?>" data-tree='<?php echo $tree; ?>' data-assigned-branch='<?php echo $assignedbranch; ?>'>
+                    <input id='find-wife' type='button' value="<?php echo uiTextSnippet('find'); ?>" data-assigned-branch='<?php echo $assignedbranch; ?>'>
                     <input id='addnew-wife' type='button' value="<?php echo uiTextSnippet('addnew'); ?>">
                     <input id='edit-wife' type='button' value="  <?php echo uiTextSnippet('edit'); ?>  ">
                     <input id='remove-wife' type='button' value="<?php echo uiTextSnippet('remove'); ?>">
@@ -209,11 +197,11 @@ require_once 'eventlib.php';
                     &nbsp;&nbsp;
                     <input name='private' type='checkbox' value='1'<?php if ($row['private']) {echo " checked=\"$checked\"";} ?>> <?php echo uiTextSnippet('private'); ?>
                   </td>
-                  <td><?php echo uiTextSnippet('tree') . ": " . $treerow['treename']; ?></td>
+                  <td></td>
                   <td><?php echo uiTextSnippet('branch') . ": "; ?>
 
                     <?php
-                    $query = "SELECT branch, description FROM $branches_table WHERE gedcom = \"$tree\" ORDER BY description";
+                    $query = "SELECT branch, description FROM $branches_table ORDER BY description";
                     $branchresult = tng_query($query);
                     $branchlist = explode(",", $row['branch']);
 
@@ -297,7 +285,7 @@ require_once 'eventlib.php';
                 <tr>
                   <td><?php echo uiTextSnippet('otherevents'); ?>:</td>
                   <td colspan='6'>
-                    <input id='addnew-event' type='button' value=" <?php echo uiTextSnippet('addnew'); ?> " data-family-id='<?php echo $familyID; ?>' data-tree='<?php echo $tree; ?>'>
+                    <input id='addnew-event' type='button' value=" <?php echo uiTextSnippet('addnew'); ?> " data-family-id='<?php echo $familyID; ?>'>
                   </td>
                 </tr>
               </table>
@@ -319,7 +307,7 @@ require_once 'eventlib.php';
                 <?php
                 if ($children && $kidcount) {
                   while ($child = tng_fetch_assoc($children)) {
-                    $crights = determineLivingPrivateRights($child, $righttree);
+                    $crights = determineLivingPrivateRights($child);
                     $child['allow_living'] = $crights['living'];
                     $child['allow_private'] = $crights['private'];
                     if ($child['firstname'] || $child['lastname']) {
@@ -365,9 +353,8 @@ require_once 'eventlib.php';
                 ?>
               </div> <!-- .childrenlist -->
 
-              <input name='tree' type='hidden' value="<?php echo $tree; ?>">
               <p><?php echo uiTextSnippet('newchildren'); ?>:
-                <input id='find-children' type='button' value="<?php echo uiTextSnippet('find'); ?>" data-tree='<?php echo $tree; ?>' data-assigned-branch='<?php echo $assignedbranch; ?>'>
+                <input id='find-children' type='button' value="<?php echo uiTextSnippet('find'); ?>" data-assigned-branch='<?php echo $assignedbranch; ?>'>
                 <input id='addnew-child' type='button' value="<?php echo uiTextSnippet('addnew'); ?>" data-family-id='<?php echo $familyID; ?>' data-assigned-branch='<?php echo $assignedbranch; ?>'>
                 <input name='familyID' type='hidden' value="<?php echo "$familyID"; ?>">
                 <input name='lastperson' type='hidden' value="<?php echo "$lastperson"; ?>">
@@ -394,9 +381,8 @@ require_once 'eventlib.php';
 <script src='js/families.js'></script>
 <script>
   $('#find-husband').on('click', function () {
-      var $tree = $(this).data('tree');
       var $assignedBranch = $(this).data('assignedBranch');
-      return findItem('I', 'husband', 'husbnameplusid', $tree, $assignedBranch);
+      return findItem('I', 'husband', 'husbnameplusid', $assignedBranch);
   });
 
   $('#addnew-husband').on('click', function () {
@@ -412,9 +398,8 @@ require_once 'eventlib.php';
   });
   
   $('#find-wife').on('click', function () {
-      var $tree = $(this).data('tree');
       var $assignedBranch = $(this).data('assignedBranch');
-      return findItem('I', 'wife', 'wifenameplusid', $tree, $assignedBranch);
+      return findItem('I', 'wife', 'wifenameplusid', $assignedBranch);
   });
 
   $('#addnew-wife').on('click', function () {
@@ -445,8 +430,7 @@ require_once 'eventlib.php';
 
   $('#addnew-event').on('click', function () {
       var $familyId = $(this).data('familyId');
-      var $tree = $(this).data('tree');
-      newEvent('F',$familyId, $tree);
+      newEvent('F',$familyId);
   });
   
   $('#childrenlist .sortrow').on('mouseover', function () {
@@ -464,8 +448,7 @@ require_once 'eventlib.php';
   });
 
   $('#find-children').on('click', function () {
-      var $tree = $(this).data('tree');
-      return findItem('I', 'children', null, $tree);
+      return findItem('I', 'children', null);
   });
 
   $('#addnew-child').on('click', function () {

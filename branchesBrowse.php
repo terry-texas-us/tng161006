@@ -13,8 +13,8 @@ if ($assignedbranch) {
   exit;
 }
 
-function getBranchCount($tree, $branch, $table) {
-  $query = "SELECT count(ID) as count FROM $table WHERE gedcom = \"$tree\" and branch LIKE \"%$branch%\"";
+function getBranchCount($branch, $table) {
+  $query = "SELECT count(ID) as count FROM $table WHERE branch LIKE \"%$branch%\"";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   $count = $row['count'];
@@ -31,15 +31,11 @@ if ($newsearch) {
   $exptime = 05;
   $searchstring = stripslashes(trim($searchstring));
   setcookie("tng_search_branches_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_branches_post[tree]", $tree, $exptime);
   setcookie("tng_search_branches_post[tngpage]", 1, $exptime);
   setcookie("tng_search_branches_post[offset]", 0, $exptime);
 } else {
   if (!$searchstring) {
     $searchstring = $_COOKIE['tng_search_branches_post']['search'];
-  }
-  if (!$tree) {
-    $tree = $_COOKIE['tng_search_branches_post']['tree'];
   }
   if (!isset($offset)) {
     $tngpage = $_COOKIE['tng_search_branches_post']['tngpage'];
@@ -61,19 +57,9 @@ if ($offset) {
   $newoffset = "";
   $tngpage = 1;
 }
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-  $tree = $assignedtree;
-} else {
-  $wherestr = "";
-}
-$orgtree = $tree;
-$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 
 $wherestr = $searchstring ? "WHERE (branch LIKE \"%$searchstring%\" OR $branches_table.description LIKE \"%$searchstring%\")" : "";
-if ($tree) {
-  $wherestr .= $wherestr ? " AND $branches_table.gedcom = \"$tree\"" : "WHERE $branches_table.gedcom = \"$tree\"";
-}
 $query = "SELECT $branches_table.gedcom as gedcom, branch, $branches_table.description as description, personID, treename FROM $branches_table LEFT JOIN $treesTable ON $treesTable.gedcom = $branches_table.gedcom $wherestr ORDER BY $branches_table.description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
@@ -103,23 +89,6 @@ $headSection->setTitle(uiTextSnippet('branches'));
     echo $navList->build("findbranch");
     ?>
     <form id='form1' name='form1' action='branchesBrowse.php'>
-      <label class='form-control-label' for='searchstring'><?php echo uiTextSnippet('searchfor'); ?>:</label>
-      <select name='tree'>
-        <?php
-        if (!$assignedtree) {
-          echo "  <option value=''>" . uiTextSnippet('alltrees') . "</option>\n";
-        }
-        $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
-        while ($treerow = tng_fetch_assoc($treeresult)) {
-          echo "  <option value=\"{$treerow['gedcom']}\"";
-          if ($treerow['gedcom'] == $tree) {
-            echo " selected";
-          }
-          echo ">{$treerow['treename']}</option>\n";
-        }
-        tng_free_result($treeresult);
-        ?>
-      </select>
       <input name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>">
 
       <input name='submit' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
@@ -129,7 +98,6 @@ $headSection->setTitle(uiTextSnippet('branches'));
       <input name='newsearch' type='hidden' value='1'>
     </form>
     <br>
-
     <?php
     $numrowsplus = $numrows + $offset;
     if (!$numrowsplus) {
@@ -172,11 +140,9 @@ $headSection->setTitle(uiTextSnippet('branches'));
             $actionstr .= "</a>\n";
           }
           if ($allowDelete) {
-            if (!$assignedtree) {
-              $actionstr .= "<a id='delete' data-branch='xxx' data-tree='yyy' href='#' title='" . uiTextSnippet('delete') . "'>\n";
-              $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
-              $actionstr .= "</a>\n";
-            }
+            $actionstr .= "<a id='delete' data-branch='xxx' href='#' title='" . uiTextSnippet('delete') . "'>\n";
+            $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
+            $actionstr .= "</a>\n";
           }
           while ($row = tng_fetch_assoc($result)) {
             $newactionstr = str_replace("xxx", $row['branch'], $actionstr);
@@ -195,8 +161,8 @@ $headSection->setTitle(uiTextSnippet('branches'));
             echo "<td>&nbsp;{$row['description']}</td>\n";
             echo "<td>{$row['treename']}</td>\n";
 
-            $pcount = getBranchCount($row['gedcom'], $row['branch'], $people_table);
-            $fcount = getBranchCount($row['gedcom'], $row['branch'], $families_table);
+            $pcount = getBranchCount($row['branch'], $people_table);
+            $fcount = getBranchCount($row['branch'], $families_table);
 
             echo "<td>{$row['personID']}&nbsp;</td>\n";
             echo "<td>$pcount&nbsp;</td>\n";
@@ -221,9 +187,8 @@ $headSection->setTitle(uiTextSnippet('branches'));
 $('#admin-branches #delete').on('click', function () {
     'use strict';
     var branch = $(this).data('branch');
-    var tree = $(this).data('tree');
     if (confirm(textSnippet('confbranchdelete'))) {
-        deleteIt('branch', branch, tree);
+        deleteIt('branch', branch);
     }
     return false;
 });

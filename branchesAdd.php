@@ -11,14 +11,7 @@ if (!$allowAdd) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-  $tree = $assignedtree;
-} else {
-  $wherestr = "";
-}
-$orgtree = $tree;
-$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('addnewbranch'));
@@ -40,20 +33,6 @@ $headSection->setTitle(uiTextSnippet('addnewbranch'));
         <td>
           <form action="branchesAddFormAction.php" method='post' name="form1" onsubmit="return validateForm();">
             <table>
-              <tr>
-                <td><?php echo uiTextSnippet('tree'); ?>:</td>
-                <td>
-                  <select name='tree' id="tree1">
-                    <?php
-                    $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
-                    while ($treerow = tng_fetch_assoc($treeresult)) {
-                      echo "  <option value=\"{$treerow['gedcom']}\">{$treerow['treename']}</option>\n";
-                    }
-                    tng_free_result($treeresult);
-                    ?>
-                  </select>
-                </td>
-              </tr>
               <tr>
                 <td><?php echo uiTextSnippet('branchid'); ?>:</td>
                 <td><input name='branch' type='text' maxlength="20"/></td>
@@ -80,7 +59,7 @@ $headSection->setTitle(uiTextSnippet('addnewbranch'));
                       </td>
                       <td>
                         <a href="#" title="<?php echo uiTextSnippet('find'); ?>"
-                           onclick="return findItem('I', 'personID', '', getTree(document.getElementById('tree1')), '<?php echo $assignedbranch; ?>');">
+                           onclick="return findItem('I', 'personID', '', '<?php echo $assignedbranch; ?>');">
                           <img class='icon-sm' src='svg/magnifying-glass.svg'>
                         </a>
                       </td>

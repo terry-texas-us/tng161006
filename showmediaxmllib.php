@@ -6,9 +6,7 @@ if ($medialinkID) {
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   $personID = $row['personID'];
-  if (!$requirelogin || !$treerestrict || !$assignedtree) {
-    $tree = $row[gedcom];
-  }
+  $tree = $row[gedcom];
   $ordernum = $row['ordernum'];
   $mediatypeID = $row['mediatypeID'];
   $linktype = $row['linktype'];
@@ -32,20 +30,12 @@ if ($medialinkID) {
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   $mediatypeID = $row['mediatypeID'];
-  if (!$requirelogin || !$treerestrict || !$assignedtree) {
-    $tree = $row['gedcom'];
-  }
-}
-//redirect if we're not supposed to be here
-if ($requirelogin && $treerestrict && $assignedtree && $row['gedcom'] && $row['gedcom'] != $assignedtree) {
-  exit;
 }
 if (!tng_num_rows($result)) {
   tng_free_result($result);
   header("Location: thispagedoesnotexist.html");
   exit;
 }
-
 $info = getMediaInfo($mediatypeID, $mediaID, $personID, $albumID, $albumlinkID, $cemeteryID, $eventID);
 $ordernum = $info['ordernum'];
 $mediaID = $info['mediaID'];
@@ -55,7 +45,7 @@ $page = $info['page'];
 $result = $info['result'];
 $imgrow = $info['imgrow'];
 
-$livinginfo = findLivingPrivate($mediaID, $tree);
+$livinginfo = findLivingPrivate($mediaID);
 $noneliving = $livinginfo['noneliving'] && $livinginfo['noneprivate'];
 
 $showPhotoInfo = $imgrow['alwayson'] || $noneliving;
@@ -63,7 +53,7 @@ $nonamesloc = $livinginfo['private'] ? $tngconfig['nnpriv'] : $nonames;
 
 if ($noneliving || !$nonamesloc || $imgrow['alwayson']) {
   $description = $mediadescription;
-  $notes = nl2br(xmlcharacters(getXrefNotes($medianotes, $tree)));
+  $notes = nl2br(xmlcharacters(getXrefNotes($medianotes)));
   $notes .= $info['gotmap'] ? "<p>" . uiTextSnippet('mediamaptext') . "</p>" : "";
 } else {
   $description = $notes = uiTextSnippet('living');

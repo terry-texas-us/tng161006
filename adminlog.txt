@@ -1,0 +1,911 @@
+Fri 19 Aug 2016 02:41:35 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/texas-tw-pre-1901-for-tng-rm-specific.ged, Tree: master; 8286 People, 2835 Families, 75 Sources, 93 Notes, 0 Media, 727 Places (User: Administrator).
+Fri 19 Aug 2016 02:36:54 PM <a href='treesEdit.php?tree=master'>Add New Tree: master/master</a> (User: Administrator).
+Fri 19 Aug 2016 02:36:17 PM Deleted  was successfully deleted. (User: Administrator).
+Fri 19 Aug 2016 02:31:30 PM <a href='treesEdit.php?tree=root'>Add New Tree: root/root</a> (User: Administrator).
+Fri 19 Aug 2016 02:30:57 PM Deleted earlywends was successfully deleted. (User: Administrator).
+Fri 19 Aug 2016 02:30:46 PM Deleted: Tree earlywends (User: Administrator).
+Fri 19 Aug 2016 02:29:43 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-rm-specific-import.ged, Tree: earlywends; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 54 Places (User: Administrator).
+Fri 19 Aug 2016 01:11:07 PM <a href="peopleEdit.php?personID=I1">Add New Person: I1</a> (User: Administrator).
+Fri 19 Aug 2016 01:04:26 PM <a href="repositoriesEdit.php?repoID=REPO1">Add New Repository: REPO1</a> (User: Administrator).
+Thu 18 Aug 2016 06:04:41 PM <a href="languagesEdit.php?languageID=4">Add New Language: /</a> (User: Administrator).
+Thu 18 Aug 2016 05:25:26 PM Sent E-mail Message (User: Administrator).
+Thu 18 Aug 2016 05:24:06 PM <a href="usersEdit.php?userID=15">Edit Existing User: 15</a> (User: Administrator).
+Thu 18 Aug 2016 04:23:40 PM <a href="sourcesEdit.php?sourceID=">Add New Source: </a> (User: Administrator).
+Thu 18 Aug 2016 02:31:32 PM Secondary Processes: Create GENDEX (User: Administrator).
+Thu 18 Aug 2016 01:59:05 PM Deleted test was successfully deleted. (User: Administrator).
+Wed 17 Aug 2016 03:26:38 PM Label Branches:  (/) (User: Administrator).
+Wed 17 Aug 2016 03:25:10 PM Label Branches:  (/) (User: Administrator).
+Wed 17 Aug 2016 03:17:15 PM Label Branches:  (/) (User: Administrator).
+Wed 17 Aug 2016 01:22:25 PM Label Branches: /NewBranch (add/partial) (User: Administrator).
+Wed 17 Aug 2016 01:21:57 PM Label Branches: /NewBranch (add/partial) (User: Administrator).
+Wed 17 Aug 2016 01:21:34 PM Edit Existing Branch: NewBranch (User: Administrator).
+Wed 17 Aug 2016 01:20:31 PM Add New Branch : New Branch for test (User: Administrator).
+Wed 17 Aug 2016 01:11:28 PM Add New Citation: 66243/I1389/BIRT/S52 (User: Administrator).
+Wed 17 Aug 2016 12:58:20 PM Add New Association: 2/I1391::I10 (Church) (User: Administrator).
+Wed 17 Aug 2016 12:41:23 PM Edit Existing Association: 1//::I4431 (Godson) (User: Administrator).
+Wed 17 Aug 2016 12:22:34 PM Add New Association: 1//I1389::I4431 (Friend) (User: Administrator).
+Tue 16 Aug 2016 05:55:24 PM Modify Configuration Settings (User: Administrator).
+Sat 13 Aug 2016 08:37:32 AM <a href='treesEdit.php?tree=test'>Add New Tree: test/Test Tree</a> (User: Administrator).
+Fri 12 Aug 2016 12:58:29 PM Deleted rm was successfully deleted. (User: Administrator).
+Fri 12 Aug 2016 12:58:07 PM Deleted test was successfully deleted. (User: Administrator).
+Thu 24 Mar 2016 07:58:52 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/texas-tw-pre-1901-for-tng-rm-specific.ged, Tree: earlywends; 8286 People, 2835 Families, 75 Sources, 93 Notes, 0 Media, 1321 Places (User: Administrator).
+Tue 22 Mar 2016 10:16:33 AM Deleted: Places /TRUJI - Trujillo Peru, /TWINF - Twin Falls Idaho, /VANCO - Vancouver British Columbia, /VERAC - Veracruz Mexico, /VERNA - Vernal Utah, /VILLA - Villahermosa Tabasco Mexico, /WASHI - Washington D.C., /WINTE - Winter Quarters (new) (User: Administrator).
+Tue 22 Mar 2016 10:16:28 AM Deleted: Places /SANTO - San Antonio Texas, /SAPPO - Sapporo Japan, /SDIEG - San Diego California, /SDOMI - Santo Domingo Dominican Republic, /SEATT - Seattle Washington, /SEOUL - Seoul South Korea, /SGEOR - St. George Utah, /SJOSE - San Jose Costa Rica, /SLAKE - Salt Lake, /SLOUI - St. Louis Missouri, /SNOWF - Snowflake Arizona, /SPAUL - São Paulo Brazil, /SPMIN - St. Paul Minnesota, /SPOKA - Spokane Washington, /STOCK - Stockholm Sweden, /SUVA - Suva Fiji, /SWISS - Bern Switzerland, /SYDNE - Sydney Australia, /TAIPE - Taipei Taiwan, /TAMPI - Tampico Mexico, /TEGUC - Tegucigalpa Honduras, /TGUTI - Tuxtla Gutierrez Mexico, /TIJUA - Tijuana Mexico, /TOKYO - Tokyo Japan, /TORON - Toronto Ontario (User: Administrator).
+Tue 22 Mar 2016 10:16:25 AM Deleted: Places /ORLAN - Orlando Florida, /OTHER - Other, /PALEG - Porto Alegre Brazil, /PALMY - Palmyra New York, /PANAM - Panamá City Panamá, /PAPEE - Papeete Tahiti, /PAYSO - Payson Utah, /PERTH - Perth Australia, /PHILA - Philadelphia Pennsylvania, /PHOEN - Phoenix Arizona, /POFFI - President's Office, /PORTL - Portland Oregon, /PREST - Preston England, /PROCC - Provo City Center, /PROVO - Provo Utah, /QUETZ - Quetzaltenango Guatemala, /RALEI - Raleigh North Carolina, /RECIF - Recife Brazil, /REDLA - Redlands California, /REGIN - Regina Saskatchewan, /RENO - Reno Nevada, /REXBU - Rexburg Idaho, /SACRA - Sacramento California, /SANSA - San Salvador El Salvador, /SANTI - Santiago Chile (User: Administrator).
+Tue 22 Mar 2016 10:16:21 AM Deleted: Places /MANHA - Manhattan New York, /MANIL - Manila Philippines, /MANTI - Manti Utah, /MEDFO - Medford Oregon, /MELBO - Melbourne Australia, /MEMPH - Memphis Tennessee, /MERID - Mérida Mexico, /MEXIC - Mexico City D.F. Mexico, /MNTVD - Montevideo Uruguay, /MONTE - Monterrey Mexico, /MONTI - Monticello Utah, /MONTR - Montreal Quebec, /MTIMP - Mount Timpanogos Utah, /NASHV - Nashville Tennessee, /NAUV2 - Nauvoo Illinois (new), /NAUVO - Nauvoo (original), /NBEAC - Newport Beach California, /NUKUA - Nuku'alofa Tonga, /NYORK - Harrison New York, /NZEAL - Hamilton New Zealand, /OAKLA - Oakland California, /OAXAC - Oaxaca Mexico, /OGDEN - Ogden Utah, /OKLAH - Oklahoma City Oklahoma, /OQUIR - Oquirrh Mountain Utah (User: Administrator).
+Tue 22 Mar 2016 10:16:16 AM Deleted: Places /GUATE - Guatemala City Guatemala, /GUAYA - Guayaquil Ecuador, /HAGUE - The Hague Netherlands, /HALIF - Halifax Nova Scotia, /HAWAI - Laie Hawaii, /HELSI - Helsinki Finland, /HERMO - Hermosillo Sonora Mexico, /HKONG - Hong Kong China, /HOUST - Houston Texas, /IFALL - Idaho Falls Idaho, /INDIA - Indianapolis Indiana, /JOHAN - Johannesburg South Africa, /JRIVE - Jordan River Utah, /KANSA - Kansas City Missouri, /KONA - Kona Hawaii, /KYIV - Kyiv Ukraine, /LANGE - Los Angeles California, /LIMA - Lima Peru, /LOGAN - Logan Utah, /LONDO - London England, /LOUIS - Louisville Kentucky, /LUBBO - Lubbock Texas, /LVEGA - Las Vegas Nevada, /MADRI - Madrid Spain, /MANAU - Manaus Brazil (User: Administrator).
+Tue 22 Mar 2016 10:16:12 AM Deleted: Places /CHICA - Chicago Illinois, /CIUJU - Ciudad Juárez Mexico, /COCHA - Cochabamba Bolivia, /COLJU - Colonia Juárez Chihuahua Mexico, /COLSC - Columbia South Carolina, /COLUM - Columbus Ohio, /COPEN - Copenhagen Denmark, /CORDO - Córdoba Argentina, /CRIVE - Columbia River Washington, /CURIT - Curitiba Brazil, /DALLA - Dallas Texas, /DENVE - Denver Colorado, /DETRO - Detroit Michigan, /DRAPE - Draper Utah, /EDMON - Edmonton Alberta, /EHOUS - Endowment House, /FORTC - Fort Collins Colorado, /FORTL - Fort Lauderdale Florida, /FRANK - Frankfurt Germany, /FREIB - Freiberg Germany, /FRESN - Fresno California, /FUKUO - Fukuoka Japan, /GILAV - Gila Valley Arizona, /GILBE - Gilbert Arizona, /GUADA - Guadalajara Mexico (User: Administrator).
+Tue 22 Mar 2016 10:16:07 AM Deleted: Places /ABA - Aba Nigeria, /ACCRA - Accra Ghana, /ADELA - Adelaide Australia, /ALBER - Cardston Alberta, /ALBUQ - Albuquerque New Mexico, /ANCHO - Anchorage Alaska, /APIA - Apia Samoa, /ARIZO - Mesa Arizona, /ASUNC - Asuncion Paraguay, /ATLAN - Atlanta Georgia, /BAIRE - Buenos Aires Argentina, /BILLI - Billings Montana, /BIRMI - Birmingham Alabama, /BISMA - Bismarck North Dakota, /BOGOT - Bogota D.C. Columbia, /BOISE - Boise Idaho, /BOSTO - Boston Massachusetts, /BOUNT - Bountiful Utah, /BRIGH - Brigham City Utah, /BRISB - Brisbane Australia, /BROUG - Baton Rouge Louisiana, /CALGA - Calgary Alberta, /CAMPI - Campinas Brazil, /CARAC - Caracas D.F. Venezuela, /CEBUP - Cebu Philippines (User: Administrator).
+Tue 22 Mar 2016 09:52:14 AM Deleted: Tree test (User: Administrator).
+Tue 22 Mar 2016 09:51:06 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 54 Places (User: Administrator).
+Tue 22 Mar 2016 09:50:40 AM Deleted: Tree test (User: Administrator).
+Tue 22 Mar 2016 09:49:32 AM <a href="admin_geocode.php">Geocode all Places without latitude and longitude coordinates (10)</a> (User: Administrator).
+Tue 22 Mar 2016 09:49:22 AM <a href="admin_geocode.php">Geocode all Places without latitude and longitude coordinates (10)</a> (User: Administrator).
+Mon 21 Mar 2016 03:07:40 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 30 Places (User: Administrator).
+Mon 21 Mar 2016 02:40:11 PM Edit Existing Event Type: All (User: Administrator).
+Mon 21 Mar 2016 02:39:59 PM Deleted: Tree test (User: Administrator).
+Mon 21 Mar 2016 02:02:21 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 30 Places (User: Administrator).
+Mon 21 Mar 2016 10:01:51 AM Edit Existing Event Type: All (User: Administrator).
+Mon 21 Mar 2016 10:01:25 AM Deleted: Tree earlywends (User: Administrator).
+Mon 21 Mar 2016 09:47:35 AM Import/Export: 20 Event Types (User: Administrator).
+Mon 21 Mar 2016 09:46:02 AM Edit Existing Event Type: All (User: Administrator).
+Mon 21 Mar 2016 09:42:23 AM Deleted: Tree earlywends (User: Administrator).
+Mon 21 Mar 2016 09:27:02 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/earlywends.ged, Tree: earlywends; 8226 People, 2779 Families, 74 Sources, 10 Notes, 0 Media, 705 Places (User: Administrator).
+Mon 21 Mar 2016 09:25:04 AM Edit Existing Event Type: All (User: Administrator).
+Mon 21 Mar 2016 09:04:35 AM Import/Export: 12 Event Types (User: Administrator).
+Mon 21 Mar 2016 09:04:17 AM Edit Existing Event Type: All (User: Administrator).
+Mon 21 Mar 2016 08:58:11 AM Import/Export: 11 Event Types (User: Administrator).
+Mon 21 Mar 2016 08:57:44 AM Edit Existing Event Type: All (User: Administrator).
+Mon 21 Mar 2016 08:57:22 AM Deleted: Tree rm (User: Administrator).
+Mon 21 Mar 2016 08:46:52 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/terry.texas.us__complete_RM7_used_for_db_integrity_test__2016_03_19.ged, Tree: rm; 10818 People, 3614 Families, 92 Sources, 101 Notes, 0 Media, 902 Places (User: Administrator).
+Mon 21 Mar 2016 08:22:06 AM Edit Existing Event Type: All (User: Administrator).
+Mon 21 Mar 2016 08:21:42 AM Import/Export: 12 Event Types (User: Administrator).
+Mon 21 Mar 2016 08:05:05 AM <a href='treesEdit.php?tree=rm'>Add New Tree: rm/rm</a> (User: Administrator).
+Mon 21 Mar 2016 08:03:57 AM Edit Existing Event Type: All (User: Administrator).
+Mon 21 Mar 2016 08:03:41 AM Deleted: Tree test (User: Administrator).
+Mon 21 Mar 2016 08:03:34 AM Deleted: Tree earlywends (User: Administrator).
+Sun 20 Mar 2016 08:43:13 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/earlywends.ged, Tree: earlywends; 8226 People, 2779 Families, 74 Sources, 10 Notes, 0 Media, 705 Places (User: Administrator).
+Sun 20 Mar 2016 08:38:19 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sun 20 Mar 2016 08:36:36 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sun 20 Mar 2016 08:23:30 AM Import/Export: 2 Event Types (User: Administrator).
+Sun 20 Mar 2016 08:12:32 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/earlywends.ged, Tree: earlywends; 8226 People, 2779 Families, 74 Sources, 10 Notes, 0 Media, 705 Places (User: Administrator).
+Sun 20 Mar 2016 07:08:32 AM Import/Export: 2 Event Types (User: Administrator).
+Sat 19 Mar 2016 09:20:20 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/texas-tw-_pre-1901_-for-tng-NO-rm-specific.ged, Tree: earlywends; 8286 People, 2835 Families, 75 Sources, 93 Notes, 0 Media, 718 Places (User: Administrator).
+Sat 19 Mar 2016 09:18:15 AM Edit Existing Event Type: All (User: Administrator).
+Sat 19 Mar 2016 09:16:11 AM Import/Export: 16 Event Types (User: Administrator).
+Sat 19 Mar 2016 09:15:31 AM Edit Existing Event Type: All (User: Administrator).
+Sat 19 Mar 2016 09:15:20 AM Deleted: Tree test (User: Administrator).
+Sat 19 Mar 2016 09:15:15 AM Deleted: Tree earlywends (User: Administrator).
+Sat 19 Mar 2016 08:37:28 AM Deleted: Event Type 117 (User: Administrator).
+Sat 19 Mar 2016 08:37:22 AM Deleted: Event Type 121 (User: Administrator).
+Sat 19 Mar 2016 08:37:15 AM Deleted: Event Type 120 (User: Administrator).
+Sat 19 Mar 2016 07:48:35 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/texas-tw (pre-1901)-for-tng-NO-rm-specific-import.ged, Tree: earlywends; 8268 People, 2828 Families, 75 Sources, 95 Notes, 0 Media, 714 Places (User: Administrator).
+Sat 19 Mar 2016 07:46:35 AM <a href='treesEdit.php?tree=earlywends'>Add New Tree: earlywends/Early Wends</a> (User: Administrator).
+Sat 19 Mar 2016 07:43:40 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: test; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Fri 18 Mar 2016 07:23:37 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Fri 18 Mar 2016 07:20:32 AM Edit Existing Event Type: All (User: Administrator).
+Fri 18 Mar 2016 07:19:46 AM Import/Export: 8 Event Types (User: Administrator).
+Fri 18 Mar 2016 07:18:53 AM <a href='treesEdit.php?tree=test'>Add New Tree: test/Test</a> (User: Administrator).
+Fri 18 Mar 2016 07:17:58 AM Edit Existing Event Type: All (User: Administrator).
+Fri 18 Mar 2016 07:17:40 AM Deleted test was successfully deleted. (User: Administrator).
+Fri 18 Mar 2016 07:17:35 AM Deleted boyce was successfully deleted. (User: Administrator).
+Wed 16 Mar 2016 08:01:43 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Wed 16 Mar 2016 08:00:55 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Tue 15 Mar 2016 09:33:16 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Tue 15 Mar 2016 09:32:11 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Tue 15 Mar 2016 09:26:55 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Tue 15 Mar 2016 08:35:52 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Tue 15 Mar 2016 08:16:25 AM Secondary Processes: Trim Media Menus (User: Administrator).
+Tue 15 Mar 2016 08:16:09 AM Secondary Processes: Create GENDEX (User: Administrator).
+Tue 15 Mar 2016 08:16:05 AM Secondary Processes: Relabel Branches (User: Administrator).
+Tue 15 Mar 2016 08:15:57 AM Secondary Processes: Sort Spouses (User: Administrator).
+Tue 15 Mar 2016 08:15:10 AM Secondary Processes: Sort Spouses (User: Administrator).
+Tue 15 Mar 2016 08:14:55 AM Secondary Processes: Sort Spouses (User: Administrator).
+Tue 15 Mar 2016 08:12:25 AM Secondary Processes: Sort Spouses (User: Administrator).
+Tue 15 Mar 2016 08:11:46 AM Zusätzliche Aktionen: Kinder sortieren (Benutzer: Administrator).
+Tue 15 Mar 2016 08:11:11 AM Secondary Processes: Sort Children (User: Administrator).
+Tue 15 Mar 2016 08:02:55 AM Secondary Processes: Sort Children (User: Administrator).
+Tue 15 Mar 2016 08:01:35 AM Secondary Processes: Track Lines (User: Administrator).
+Tue 15 Mar 2016 07:47:20 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Tue 15 Mar 2016 07:46:36 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Tue 15 Mar 2016 07:37:16 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Tue 15 Mar 2016 07:36:06 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Tue 15 Mar 2016 07:27:25 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Tue 15 Mar 2016 07:19:29 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Tue 15 Mar 2016 07:14:10 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Tue 15 Mar 2016 07:01:01 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Tue 15 Mar 2016 07:00:12 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Tue 15 Mar 2016 06:53:42 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Tue 15 Mar 2016 06:53:05 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Mon 14 Mar 2016 10:26:16 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Mon 14 Mar 2016 10:25:40 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Mon 14 Mar 2016 09:27:40 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Mon 14 Mar 2016 08:59:34 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Mon 14 Mar 2016 08:58:39 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Mon 14 Mar 2016 08:56:50 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Mon 14 Mar 2016 08:55:39 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Mon 14 Mar 2016 07:38:28 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Mon 14 Mar 2016 07:27:10 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Mon 14 Mar 2016 07:26:40 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Mon 14 Mar 2016 07:21:14 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Mon 14 Mar 2016 07:20:47 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sun 13 Mar 2016 06:03:34 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sun 13 Mar 2016 05:59:33 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sun 13 Mar 2016 05:53:25 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sun 13 Mar 2016 05:49:48 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sun 13 Mar 2016 05:39:55 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sun 13 Mar 2016 05:36:36 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Sun 13 Mar 2016 05:33:38 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sun 13 Mar 2016 05:25:32 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sun 13 Mar 2016 05:23:52 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sun 13 Mar 2016 05:07:19 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sun 13 Mar 2016 05:03:19 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sun 13 Mar 2016 04:54:37 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sun 13 Mar 2016 04:47:20 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sun 13 Mar 2016 04:33:49 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sun 13 Mar 2016 08:34:59 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sun 13 Mar 2016 08:32:11 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sun 13 Mar 2016 08:29:51 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sun 13 Mar 2016 08:29:24 AM Edit Existing Event Type: All (User: Administrator).
+Sun 13 Mar 2016 08:28:37 AM Deleted: Tree boyce (User: Administrator).
+Sun 13 Mar 2016 08:28:31 AM Deleted: Tree test (User: Administrator).
+Sun 13 Mar 2016 08:25:21 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sun 13 Mar 2016 08:22:13 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sun 13 Mar 2016 08:14:39 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sun 13 Mar 2016 08:08:44 AM Deleted: gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged (User: Administrator).
+Sun 13 Mar 2016 08:07:56 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sun 13 Mar 2016 08:06:04 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sun 13 Mar 2016 08:05:27 AM Deleted: gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged (User: Administrator).
+Sun 13 Mar 2016 08:05:02 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sun 13 Mar 2016 08:02:33 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sun 13 Mar 2016 08:00:51 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sun 13 Mar 2016 07:39:35 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sat 12 Mar 2016 11:42:03 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sat 12 Mar 2016 11:41:01 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sat 12 Mar 2016 11:24:39 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sat 12 Mar 2016 10:41:42 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sat 12 Mar 2016 10:41:03 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sat 12 Mar 2016 10:35:23 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sat 12 Mar 2016 10:34:12 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sat 12 Mar 2016 10:10:48 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Sat 12 Mar 2016 10:04:48 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 23 Places (User: Administrator).
+Sat 12 Mar 2016 10:03:31 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sat 12 Mar 2016 09:57:22 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sat 12 Mar 2016 09:41:55 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sat 12 Mar 2016 09:32:51 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sat 12 Mar 2016 09:31:34 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sat 12 Mar 2016 09:29:39 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sat 12 Mar 2016 09:28:01 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sat 12 Mar 2016 09:27:07 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Sat 12 Mar 2016 09:21:17 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 09:19:18 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 09:17:14 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 09:16:46 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 09:14:47 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 09:10:41 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 09:05:15 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: test; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 09:04:33 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 07:59:34 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 07:52:05 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 07:51:47 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 07:49:26 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 07:49:10 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 07:48:20 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 07:41:07 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 07:40:40 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 07:15:03 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 07:10:33 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 06:54:32 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 06:49:10 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 12 Mar 2016 06:47:15 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Thu 10 Mar 2016 03:46:06 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Thu 10 Mar 2016 03:42:08 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Thu 10 Mar 2016 03:33:26 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Thu 10 Mar 2016 03:28:00 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Thu 10 Mar 2016 09:34:04 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Thu 10 Mar 2016 09:32:53 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Thu 10 Mar 2016 09:30:09 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Thu 10 Mar 2016 09:29:28 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Thu 10 Mar 2016 06:29:06 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Thu 10 Mar 2016 06:19:22 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Thu 10 Mar 2016 06:18:57 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Thu 10 Mar 2016 06:05:30 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Thu 10 Mar 2016 06:01:50 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Thu 10 Mar 2016 05:57:59 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Thu 10 Mar 2016 05:45:33 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 24 Places (User: Administrator).
+Thu 10 Mar 2016 05:43:54 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Thu 10 Mar 2016 05:40:25 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Wed 09 Mar 2016 05:04:45 PM <a href='treesEdit.php?tree=boyce'>Add New Tree: boyce/Boyce</a> (User: Administrator).
+Wed 09 Mar 2016 05:03:50 PM Deleted boyce was successfully deleted. (User: Administrator).
+Wed 09 Mar 2016 05:03:15 PM <a href='treesEdit.php?tree=boyce'>Add New Tree: boyce/Boyce</a> (User: Administrator).
+Wed 09 Mar 2016 04:47:42 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: test; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 03:33:37 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: test; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 03:32:29 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: test; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 03:20:08 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: test; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 03:19:56 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: test; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 03:16:42 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: test; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 03:06:51 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: test; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 02:38:22 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: test/; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 02:37:58 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: test/; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 02:15:54 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: test/; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 02:11:17 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: test/; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Wed 09 Mar 2016 09:28:31 AM Import/Export: 8 Event Types (User: Administrator).
+Wed 09 Mar 2016 09:27:50 AM <a href='treesEdit.php?tree=test'>Add New Tree: test/Test</a> (User: Administrator).
+Wed 09 Mar 2016 09:23:45 AM Edit Existing Event Type: All (User: Administrator).
+Wed 09 Mar 2016 09:23:32 AM Deleted test was successfully deleted. (User: Administrator).
+Wed 09 Mar 2016 09:23:24 AM Deleted earlywends was successfully deleted. (User: Administrator).
+Wed 09 Mar 2016 09:23:13 AM Deleted boyce was successfully deleted. (User: Administrator).
+Wed 09 Mar 2016 08:31:57 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce/; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 08:01:59 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce/; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 07:53:33 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce/; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 07:52:48 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce/; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 07:26:50 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce/; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 07:20:55 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce/; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 07:19:48 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce/; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 07:04:23 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce/; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 06:59:12 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce/; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 06:57:15 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce/; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 0 Places (User: Administrator).
+Wed 09 Mar 2016 06:55:55 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce.ged, Tree: boyce/; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Wed 09 Mar 2016 06:55:22 AM <a href='treesEdit.php?tree=boyce'>Add New Tree: boyce/Boyce</a> (User: Administrator).
+Tue 08 Mar 2016 02:14:20 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/earlywends.ged, Tree: earlywends/; 8226 People, 2779 Families, 74 Sources, 10 Notes, 0 Media, 679 Places (User: Administrator).
+Tue 08 Mar 2016 02:09:54 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: earlywends/; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Tue 08 Mar 2016 02:04:31 PM <a href='treesEdit.php?tree=earlywends'>Add New Tree: earlywends/Early Wends</a> (User: Administrator).
+Tue 08 Mar 2016 01:53:36 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-NO-rm-specific-import.ged, Tree: test/; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Tue 08 Mar 2016 01:52:06 PM <a href='treesEdit.php?tree=test'>Add New Tree: test/Test</a> (User: Administrator).
+Tue 08 Mar 2016 01:49:32 PM Deleted: Place /Trinity Lutheran Church Cemetery, Fedor, Lee, Texas, United States (User: Administrator).
+Tue 08 Mar 2016 01:49:29 PM Deleted: Place /Swiss Alp, United States (User: Administrator).
+Tue 08 Mar 2016 01:48:55 PM Edit Existing Event Type: All (User: Administrator).
+Tue 08 Mar 2016 01:48:36 PM Deleted test was successfully deleted. (User: Administrator).
+Tue 08 Mar 2016 01:48:33 PM Deleted earlywends was successfully deleted. (User: Administrator).
+Tue 08 Mar 2016 12:39:41 PM Deleted twall was successfully deleted. (User: Administrator).
+Tue 08 Mar 2016 12:13:22 PM Deleted: Event Type 28 (User: Administrator).
+Tue 08 Mar 2016 12:13:01 PM Deleted: Event Type 19 (User: Administrator).
+Tue 08 Mar 2016 12:12:35 PM Deleted: Event Type 24 (User: Administrator).
+Tue 08 Mar 2016 12:12:30 PM Deleted: Event Type 25 (User: Administrator).
+Tue 08 Mar 2016 12:12:15 PM Deleted: Event Type 23 (User: Administrator).
+Tue 08 Mar 2016 11:44:18 AM Edit Existing Event Type: All (User: Administrator).
+Tue 08 Mar 2016 11:40:39 AM Edit Existing Event Type: All (User: Administrator).
+Tue 08 Mar 2016 11:40:28 AM Edit Existing Event Type: All (User: Administrator).
+Tue 08 Mar 2016 11:40:07 AM Edit Existing Event Type: All (User: Administrator).
+Tue 08 Mar 2016 11:29:26 AM Edit Existing Event Type: All (User: Administrator).
+Tue 08 Mar 2016 11:27:33 AM Edit Existing Event Type: All (User: Administrator).
+Tue 08 Mar 2016 11:27:02 AM Edit Existing Event Type: All (User: Administrator).
+Tue 08 Mar 2016 08:58:51 AM Export: test (User: Administrator).
+Tue 08 Mar 2016 08:50:45 AM Export: test (User: Administrator).
+Tue 08 Mar 2016 08:50:17 AM Export: test (User: Administrator).
+Tue 08 Mar 2016 08:43:03 AM Export: test (User: Administrator).
+Tue 08 Mar 2016 08:32:35 AM Export: test (User: Administrator).
+Tue 08 Mar 2016 08:05:12 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-rm-specific-import.ged, Tree: test/; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Tue 08 Mar 2016 06:44:23 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-rm-specific-import.ged, Tree: test/; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Tue 08 Mar 2016 06:41:18 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-rm-specific-import.ged, Tree: test/; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Tue 08 Mar 2016 06:12:36 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-rm-specific-import.ged, Tree: test/; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 28 Places (User: Administrator).
+Tue 08 Mar 2016 06:07:38 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-rm-specific-import.ged, Tree: test/; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 2 Places (User: Administrator).
+Tue 08 Mar 2016 06:07:03 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-rm-specific-import.ged, Tree: test/; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 2 Places (User: Administrator).
+Tue 08 Mar 2016 06:05:19 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-rm-specific-import.ged, Tree: test/; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 2 Places (User: Administrator).
+Tue 08 Mar 2016 06:04:36 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-rm-specific-import.ged, Tree: test/; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 2 Places (User: Administrator).
+Tue 08 Mar 2016 06:00:59 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-rm-specific-import.ged, Tree: test/; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 2 Places (User: Administrator).
+Tue 08 Mar 2016 05:57:32 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/test-families_2_-completeRM7-for-tng-rm-specific-import.ged, Tree: test/; 28 People, 2 Families, 12 Sources, 2 Notes, 0 Media, 9 Places (User: Administrator).
+Tue 08 Mar 2016 04:30:46 AM Secondary Processes: Create GENDEX (User: Administrator).
+Tue 08 Mar 2016 04:25:33 AM Secondary Processes: Create GENDEX (User: Administrator).
+Tue 08 Mar 2016 04:21:08 AM Secondary Processes:  (User: Administrator).
+Tue 08 Mar 2016 04:21:00 AM Secondary Processes: Create GENDEX (User: Administrator).
+Mon 07 Mar 2016 05:26:41 PM Secondary Processes: Create GENDEX (User: Administrator).
+Mon 07 Mar 2016 05:09:22 PM Secondary Processes:  (User: Administrator).
+Mon 07 Mar 2016 03:15:39 PM <a href='treesEdit.php?tree=test'>Add New Tree: test/Test</a> (User: Administrator).
+Mon 07 Mar 2016 02:44:50 PM Secondary Processes: Create GENDEX (User: Administrator).
+Mon 07 Mar 2016 02:43:58 PM Secondary Processes: Track Lines (User: Administrator).
+Mon 07 Mar 2016 02:03:39 PM Export: earlywends (User: Administrator).
+Mon 07 Mar 2016 01:11:42 PM <a href='treesEdit.php?tree=twall'>Add New Tree: twall/TexasWendsAll</a> (User: Administrator).
+Mon 07 Mar 2016 12:53:07 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/texas-tw__pre-1901_.ged, Tree: earlywends/; 8226 People, 2779 Families, 74 Sources, 10 Notes, 0 Media, 706 Places (User: Administrator).
+Mon 07 Mar 2016 12:40:47 PM <a href='treesEdit.php?tree=earlywends'>Add New Tree: earlywends/EarlyWends</a> (User: Administrator).
+Mon 07 Mar 2016 12:39:30 PM Deleted earlywends was successfully deleted. (User: Administrator).
+Mon 07 Mar 2016 12:35:29 PM Deleted twall was successfully deleted. (User: Administrator).
+Mon 07 Mar 2016 12:29:50 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/texas-tw__pre-1901_.ged, Tree: earlywends/; 8226 People, 2779 Families, 74 Sources, 10 Notes, 0 Media, 706 Places (User: Administrator).
+Mon 07 Mar 2016 12:17:12 PM <a href='treesEdit.php?tree=earlywends'>Add New Tree: earlywends/EarlyWends</a> (User: Administrator).
+Mon 07 Mar 2016 12:16:04 PM Deleted NewTree was successfully deleted. (User: Administrator).
+Mon 07 Mar 2016 12:15:51 PM Deleted tree8 was successfully deleted. (User: Administrator).
+Mon 07 Mar 2016 12:15:34 PM Deleted earlywends was successfully deleted. (User: Administrator).
+Mon 07 Mar 2016 12:03:13 PM <a href='treesEdit.php?tree=earlywends'>Add New Tree: earlywends/EarlyWends</a> (User: Administrator).
+Mon 07 Mar 2016 11:59:11 AM Edit Existing Event Type: All (User: Administrator).
+Sat 05 Mar 2016 01:19:26 PM Deleted: Place / (User: Administrator).
+Sat 05 Mar 2016 12:12:38 PM <a href="ordermedia.php?personID=I29&amp;tree=twall">Sort Headstones for: twall/I29</a> (User: Administrator).
+Sat 05 Mar 2016 12:09:39 PM <a href="ordermedia.php?personID=I1&amp;tree=NewTree">Sort Photos for: NewTree/I1</a> (User: Administrator).
+Sat 05 Mar 2016 12:09:16 PM <a href="ordermedia.php?personID=&amp;tree=">Sort  for: /</a> (User: Administrator).
+Sat 05 Mar 2016 09:06:01 AM <a href="peopleEdit.php?personID=I3&amp;tree=NewTree">Add New Person: NewTree/I3</a> (User: Contributor).
+Sat 05 Mar 2016 09:05:36 AM <a href="peopleEdit.php?personID=I2&amp;tree=NewTree">Add New Person: NewTree/I2</a> (User: Contributor).
+Sat 05 Mar 2016 09:03:58 AM <a href="usersEdit.php?userID=15">Add New User: conartist</a> (User: Administrator).
+Sat 05 Mar 2016 08:59:16 AM <a href="usersEdit.php?userID=4">Edit Existing User: 4</a> (User: Administrator).
+Sat 05 Mar 2016 08:58:19 AM <a href="usersEdit.php?userID=4">Edit Existing User: 4</a> (User: Administrator).
+Sat 05 Mar 2016 07:36:32 AM <a href="peopleEdit.php?personID=I5157&tree=twall">Edit Existing Person: twall/I5157</a> (User: Administrator).
+Fri 04 Mar 2016 11:16:07 AM <a href='treesEdit.php?tree=tree8'>Edit Existing Tree: tree8</a> (User: Administrator).
+Fri 04 Mar 2016 11:12:21 AM <a href='treesEdit.php?tree=tree8'>Add New Tree: tree8/Tree eight</a> (User: Administrator).
+Fri 04 Mar 2016 11:05:46 AM Deleted: Tree NewTree (User: Administrator).
+Fri 04 Mar 2016 11:02:44 AM Deleted: Tree NewTree (User: Administrator).
+Fri 04 Mar 2016 09:26:53 AM <a href="treesEdit.php?tree=twall">Edit Existing Tree: twall</a> (User: Administrator).
+Fri 04 Mar 2016 07:09:41 AM <a href="treesEdit.php?tree=NewTree">Add New Tree: NewTree/Brand New Tree</a> (User: Administrator).
+Thu 03 Mar 2016 06:12:41 PM Deleted: Users qwerty (User: Administrator).
+Thu 03 Mar 2016 06:12:25 PM <a href="usersEdit.php?userID=14">Add New User: qwerty</a> (User: Administrator).
+Thu 03 Mar 2016 05:56:45 PM Deleted: Users  (User: Administrator).
+Thu 03 Mar 2016 05:56:32 PM Deleted: Users  (User: Administrator).
+Thu 03 Mar 2016 05:55:52 PM Deleted: Users ConArtist (User: Administrator).
+Thu 03 Mar 2016 05:34:27 PM Deleted: Users usertodel (User: Administrator).
+Thu 03 Mar 2016 05:31:35 PM Deleted: Users user2test (User: Administrator).
+Thu 03 Mar 2016 05:16:19 PM Deleted: User reviewTester (User: Administrator).
+Thu 03 Mar 2016 03:46:47 PM Deleted: User usertoreview (User: Administrator).
+Thu 03 Mar 2016 02:29:07 PM Sent E-mail Message (User: Administrator).
+Thu 03 Mar 2016 01:45:29 PM Deleted: User  (User: Administrator).
+Thu 03 Mar 2016 01:45:02 PM <a href="usersEdit.php?userID=4">Edit Existing User: 4</a> (User: Administrator).
+Thu 03 Mar 2016 11:38:11 AM <a href="usersEdit.php?userID=9">Edit Existing User: 9</a> (User: Administrator).
+Thu 03 Mar 2016 07:53:50 AM <a href="usersEdit.php?userID=9">Add New User: ConArtist</a> (User: Administrator).
+Thu 03 Mar 2016 06:01:10 AM Deleted: User ConArtist (User: Administrator).
+Thu 03 Mar 2016 05:42:58 AM <a href="usersEdit.php?userID=8">Add New User: ConArtist</a> (User: Administrator).
+Thu 03 Mar 2016 05:42:12 AM Deleted: User ConArtist (User: Administrator).
+Thu 03 Mar 2016 05:41:57 AM <a href="usersEdit.php?userID=7">Add New User: ConArtist</a> (User: Administrator).
+Thu 03 Mar 2016 04:44:15 AM <a href="usersEdit.php?userID=6">Add New User: </a> (User: Administrator).
+Wed 02 Mar 2016 01:34:14 PM <a href="usersEdit.php?userID=1">Edit Existing User: 1</a> (User: Administrator).
+Wed 02 Mar 2016 07:02:04 AM Modify Configuration Settings (User: Administrator).
+Wed 02 Mar 2016 06:58:06 AM Modify Configuration Settings (User: Administrator).
+Tue 01 Mar 2016 03:16:19 PM Modify Configuration Settings (User: Administrator).
+Tue 01 Mar 2016 12:12:12 PM Modify Log Configuration Settings (User: Administrator).
+Tue 01 Mar 2016 11:55:46 AM Modify Log Configuration Settings (User: Administrator).
+Tue 01 Mar 2016 06:28:26 AM Modify Configuration Settings (User: Administrator).
+Tue 01 Mar 2016 06:25:26 AM Modify Configuration Settings (User: Administrator).
+Tue 01 Mar 2016 06:22:15 AM Modify Configuration Settings (User: Administrator).
+Mon 29 Feb 2016 06:03:27 PM <a href="usersEdit.php?userID=5">Edit Existing User: 5</a> (User: Administrator).
+Mon 29 Feb 2016 06:02:47 PM <a href="usersEdit.php?userID=4">Edit Existing User: 4</a> (User: Administrator).
+Mon 29 Feb 2016 06:02:36 PM Deleted: User storm (User: Administrator).
+Mon 29 Feb 2016 05:54:17 PM Modify Configuration Settings (User: Administrator).
+Mon 29 Feb 2016 05:34:23 PM Modify Configuration Settings (User: Administrator).
+Mon 29 Feb 2016 03:57:42 PM <a href="usersEdit.php?userID=3">Edit Existing User: 3</a> (User: Administrator).
+Mon 29 Feb 2016 03:55:14 PM <a href="usersEdit.php?userID=3">Edit Existing User: 3</a> (User: Administrator).
+Mon 29 Feb 2016 03:52:48 PM <a href="usersEdit.php?userID=3">Edit Existing User: 3</a> (User: Administrator).
+Mon 29 Feb 2016 06:23:40 AM Most Wanted : Johann Teinert (User: Administrator).
+Mon 29 Feb 2016 06:19:50 AM Most Wanted : Johann Teinert (User: Administrator).
+Sun 28 Feb 2016 02:16:30 PM Modify Configuration Settings (User: Administrator).
+Sat 27 Feb 2016 09:04:50 AM Modify Configuration Settings (User: Administrator).
+Sat 27 Feb 2016 08:56:51 AM Modify Configuration Settings (User: Administrator).
+Sat 27 Feb 2016 08:43:58 AM Modify Configuration Settings (User: Administrator).
+Fri 26 Feb 2016 05:59:36 PM Deleted: Citation 15096 (User: Administrator).
+Fri 26 Feb 2016 05:59:26 PM Add New Citation: 15096/twall/I1389/3458/S10 (User: Administrator).
+Fri 26 Feb 2016 05:58:03 PM Deleted: Citation 15095 (User: Administrator).
+Fri 26 Feb 2016 05:57:49 PM Add New Citation: 15095/twall/I1389/3458/S10 (User: Administrator).
+Fri 26 Feb 2016 05:56:49 PM Deleted: Citation 15094 (User: Administrator).
+Fri 26 Feb 2016 05:56:42 PM Add New Citation: 15094/twall/I1389/3458/S10 (User: Administrator).
+Fri 26 Feb 2016 05:55:57 PM Deleted: Citation 15093 (User: Administrator).
+Fri 26 Feb 2016 05:48:49 PM Add New Citation: 15093/twall/I1389/3458/S10 (User: Administrator).
+Fri 26 Feb 2016 05:48:20 PM Deleted: Citation 15092 (User: Administrator).
+Fri 26 Feb 2016 05:45:32 PM Add New Citation: 15092/twall/I1389/3458/S10 (User: Administrator).
+Fri 26 Feb 2016 05:44:06 PM Deleted: Citation 15091 (User: Administrator).
+Fri 26 Feb 2016 05:31:56 PM Add New Citation: 15091/twall/I1389/3458/S10 (User: Administrator).
+Fri 26 Feb 2016 05:29:07 PM Deleted: Citation 15090 (User: Administrator).
+Fri 26 Feb 2016 05:27:52 PM Add New Citation: 15090/twall/I1389/3458/S10 (User: Administrator).
+Fri 26 Feb 2016 04:55:33 PM Add New Citation: 15089/twall/I1389/N125/S10 (User: Administrator).
+Fri 26 Feb 2016 04:51:03 PM Deleted: Note 127 (User: Administrator).
+Fri 26 Feb 2016 12:26:11 PM <a href="peopleEdit.php?personID=I1389&tree=twall">Person bearbeiten: twall/I1389</a> (Benutzer: Administrator).
+Fri 26 Feb 2016 05:43:42 AM Add New Note: twall/I1389/127/3458 (User: Administrator).
+Fri 26 Feb 2016 05:42:04 AM Deleted: Note 126 (User: Administrator).
+Fri 26 Feb 2016 05:34:37 AM Add New Note: twall/I1389/126/3458 (User: Administrator).
+Thu 25 Feb 2016 05:18:36 PM Add New Note: twall/I1389/125/3462 (User: Administrator).
+Thu 25 Feb 2016 05:13:11 PM Add New Note: twall/I1389/124/3459 (User: Administrator).
+Thu 25 Feb 2016 02:29:27 PM <a href="ordermedia.php?personID=&amp;tree=">Sort  for: /</a> (User: Administrator).
+Thu 25 Feb 2016 02:26:07 PM <a href="ordermedia.php?personID=&amp;tree=">Sort  for: /</a> (User: Administrator).
+Thu 25 Feb 2016 11:46:28 AM Add New Event: 47136 - DEAT/twall/I1389 (User: Administrator).
+Thu 25 Feb 2016 11:46:28 AM Add new address: 37388 (User: Administrator).
+Thu 25 Feb 2016 11:44:36 AM Delete event: 47135 (User: Administrator).
+Thu 25 Feb 2016 11:44:36 AM Delete address: 37387 (User: Administrator).
+Thu 25 Feb 2016 11:42:49 AM Add New Event: 47135 - BIRT/twall/I1389 (User: Administrator).
+Thu 25 Feb 2016 11:42:49 AM Add new address: 37387 (User: Administrator).
+Thu 25 Feb 2016 11:42:13 AM Delete event: 47134 (User: Administrator).
+Thu 25 Feb 2016 11:40:42 AM Modify Event: 47134 (User: Administrator).
+Thu 25 Feb 2016 11:40:42 AM Delete address: 37386 (User: Administrator).
+Thu 25 Feb 2016 11:38:18 AM Modify Event: 47134 (User: Administrator).
+Thu 25 Feb 2016 11:38:18 AM Add new address: 37386 (User: Administrator).
+Thu 25 Feb 2016 11:37:14 AM Add New Event: 47134 - BIRT/twall/I1389 (User: Administrator).
+Thu 25 Feb 2016 11:15:04 AM Add New Event: 47133 - BIRT//I1389 (User: Administrator).
+Thu 25 Feb 2016 11:12:28 AM Add New Event: 47132 - BIRT/I1389/I1389 (User: Administrator).
+Thu 25 Feb 2016 10:43:13 AM Delete event: 47131 (User: Administrator).
+Thu 25 Feb 2016 10:43:03 AM Add New Event: 47131 - BIRT/twall/I1389 (User: Administrator).
+Thu 25 Feb 2016 10:41:58 AM Delete event: 47130 (User: Administrator).
+Thu 25 Feb 2016 10:35:44 AM Modify Event: 47130 (User: Administrator).
+Thu 25 Feb 2016 10:34:11 AM Modify Event: 47130 (User: Administrator).
+Thu 25 Feb 2016 10:30:01 AM Add New Event: 47130 - BIRT/twall/I1389 (User: Administrator).
+Thu 25 Feb 2016 10:26:04 AM Delete event: 47129 (User: Administrator).
+Thu 25 Feb 2016 10:26:04 AM Delete address: 37385 (User: Administrator).
+Thu 25 Feb 2016 10:25:11 AM Modify Event: 47129 (User: Administrator).
+Thu 25 Feb 2016 10:25:11 AM Modify address: 37385 (User: Administrator).
+Thu 25 Feb 2016 10:24:02 AM Modify Event: 47129 (User: Administrator).
+Thu 25 Feb 2016 10:24:02 AM Modify address: 37385 (User: Administrator).
+Thu 25 Feb 2016 10:23:23 AM Modify Event: 47129 (User: Administrator).
+Thu 25 Feb 2016 10:23:23 AM Modify address: 37385 (User: Administrator).
+Thu 25 Feb 2016 10:22:58 AM Modify Event: 47129 (User: Administrator).
+Thu 25 Feb 2016 10:22:58 AM Add new address: 37385 (User: Administrator).
+Thu 25 Feb 2016 10:19:16 AM Add New Event: 47129 - BIRT/twall/I1389 (User: Administrator).
+Thu 25 Feb 2016 10:17:24 AM Delete event: 47128 (User: Administrator).
+Thu 25 Feb 2016 10:17:24 AM Delete address: 37384 (User: Administrator).
+Thu 25 Feb 2016 10:15:55 AM Modify Event: 47128 (User: Administrator).
+Thu 25 Feb 2016 10:15:55 AM Modify address: 37384 (User: Administrator).
+Thu 25 Feb 2016 10:12:06 AM Modify Event: 47128 (User: Administrator).
+Thu 25 Feb 2016 10:12:06 AM Add new address: 37384 (User: Administrator).
+Thu 25 Feb 2016 10:09:12 AM Add New Event: 47128 - BIRT/twall/I1389 (User: Administrator).
+Thu 25 Feb 2016 10:08:35 AM Delete event: 47127 (User: Administrator).
+Thu 25 Feb 2016 10:00:00 AM Modify Event: 47127 (User: Administrator).
+Thu 25 Feb 2016 09:53:37 AM Add New Event: 47127 - BIRT/twall/I1389 (User: Administrator).
+Thu 25 Feb 2016 09:51:31 AM Delete event: 47126 (User: Administrator).
+Thu 25 Feb 2016 09:36:59 AM Add New Event: 47126 - BIRT/twall/I1389 (User: Administrator).
+Thu 25 Feb 2016 09:34:22 AM Delete event: 47125 (User: Administrator).
+Thu 25 Feb 2016 09:33:39 AM Modify Event: 47125 (User: Administrator).
+Thu 25 Feb 2016 09:33:39 AM Delete address: 37383 (User: Administrator).
+Thu 25 Feb 2016 09:24:35 AM Add New Event: 47125 - BIRT/twall/I1389 (User: Administrator).
+Thu 25 Feb 2016 09:24:35 AM Add new address: 37383 (User: Administrator).
+Thu 25 Feb 2016 09:23:27 AM Deleted Boyce was successfully deleted. (User: Administrator).
+Thu 25 Feb 2016 09:21:59 AM Delete event: 47123 (User: Administrator).
+Thu 25 Feb 2016 09:19:02 AM Delete event: 47124 (User: Administrator).
+Thu 25 Feb 2016 09:19:02 AM Delete address: 37382 (User: Administrator).
+Thu 25 Feb 2016 09:15:33 AM Add New Event: 47124 - BIRT/twall/I1389 (User: Administrator).
+Thu 25 Feb 2016 09:15:33 AM Add new address: 37382 (User: Administrator).
+Thu 25 Feb 2016 09:15:13 AM Add New Event: 47123 - BIRT/twall/I1389 (User: Administrator).
+Thu 25 Feb 2016 09:14:19 AM Delete event: 47122 (User: Administrator).
+Thu 25 Feb 2016 09:12:40 AM Add new address: 37381 (User: Administrator).
+Thu 25 Feb 2016 09:10:47 AM Modify Event: 47122 (User: Administrator).
+Thu 25 Feb 2016 09:10:24 AM Delete address: 37380 (User: Administrator).
+Thu 25 Feb 2016 09:09:34 AM Add New Event: 47122 - BIRT/twall/I1389 (User: Administrator).
+Thu 25 Feb 2016 09:09:34 AM Add new address: 37380 (User: Administrator).
+Thu 25 Feb 2016 09:07:23 AM Delete event: 47121 (User: Administrator).
+Thu 25 Feb 2016 09:07:23 AM Delete address: 37379 (User: Administrator).
+Thu 25 Feb 2016 09:06:18 AM Add New Event: 47121 - CHR/twall/I1389 (User: Administrator).
+Thu 25 Feb 2016 09:06:18 AM Add new address: 37379 (User: Administrator).
+Thu 25 Feb 2016 09:03:15 AM Delete event: 47120 (User: Administrator).
+Thu 25 Feb 2016 09:03:15 AM Delete address: 37378 (User: Administrator).
+Thu 25 Feb 2016 09:01:53 AM Add New Event: BIRT/twall/I1389 (User: Administrator).
+Thu 25 Feb 2016 09:01:53 AM Add new address: 37378 (User: Administrator).
+Thu 25 Feb 2016 08:17:18 AM Modify Event: 47119 (User: Administrator).
+Thu 25 Feb 2016 08:13:21 AM Add New Event: BIRT/twall/I1389 (User: Administrator).
+Thu 25 Feb 2016 07:58:09 AM Add New Event: BIRT/twall/I1389 (User: Administrator).
+Wed 24 Feb 2016 04:41:49 PM Modify Event: 47110 (User: Administrator).
+Wed 24 Feb 2016 04:34:39 PM Modify Event: 47110 (User: Administrator).
+Wed 24 Feb 2016 04:34:28 PM Modify Event: 47111 (User: Administrator).
+Wed 24 Feb 2016 04:34:22 PM Modify Event: 47111 (User: Administrator).
+Wed 24 Feb 2016 04:33:52 PM Modify Event: 47112 (User: Administrator).
+Wed 24 Feb 2016 04:33:48 PM Modify Event: 47112 (User: Administrator).
+Wed 24 Feb 2016 03:07:59 PM Add New Event: BIRT/twall/I1389 (User: Administrator).
+Wed 24 Feb 2016 03:07:59 PM Add New Event: BIRT/twall/I1389 (User: Administrator).
+Wed 24 Feb 2016 03:07:59 PM Add New Event: BIRT/twall/I1389 (User: Administrator).
+Wed 24 Feb 2016 03:07:58 PM Add New Event: BIRT/twall/I1389 (User: Administrator).
+Wed 24 Feb 2016 03:07:58 PM Add New Event: BIRT/twall/I1389 (User: Administrator).
+Wed 24 Feb 2016 03:07:58 PM Add New Event: BIRT/twall/I1389 (User: Administrator).
+Wed 24 Feb 2016 03:07:57 PM Add New Event: BIRT/twall/I1389 (User: Administrator).
+Wed 24 Feb 2016 03:07:54 PM Add New Event: BIRT/twall/I1389 (User: Administrator).
+Wed 24 Feb 2016 02:40:21 PM Deleted: Note 120 (User: Administrator).
+Wed 24 Feb 2016 02:40:01 PM Deleted: Note 123 (User: Administrator).
+Wed 24 Feb 2016 02:34:58 PM Add New Note: twall/I1389/123/DEAT (User: Administrator).
+Wed 24 Feb 2016 02:34:11 PM Deleted: Note 121 (User: Administrator).
+Wed 24 Feb 2016 02:34:01 PM Deleted: Note 122 (User: Administrator).
+Wed 24 Feb 2016 02:26:35 PM Add New Note: twall/I1389/122/BURI (User: Administrator).
+Wed 24 Feb 2016 02:20:57 PM Add New Note: twall/I1389/121/DEAT (User: Administrator).
+Wed 24 Feb 2016 02:19:11 PM Add New Note: twall/I1389/120/CHR (User: Administrator).
+Wed 24 Feb 2016 02:16:15 PM Add New Note: twall/I1389/119/BIRT (User: Administrator).
+Wed 24 Feb 2016 01:43:11 PM Deleted: Association 6 (User: Administrator).
+Wed 24 Feb 2016 01:41:10 PM Add New Association: 6/twall/I1602::i89 (test connection icon) (User: Administrator).
+Wed 24 Feb 2016 01:40:41 PM Deleted: Association 5 (User: Administrator).
+Wed 24 Feb 2016 11:31:18 AM Add New Association: 5/twall/I1602::i89 (test connection icon) (User: Administrator).
+Wed 24 Feb 2016 11:30:23 AM Deleted: Association 4 (User: Administrator).
+Wed 24 Feb 2016 11:29:34 AM Add New Association: 4/twall/I1602::i89 (unknown test) (User: Administrator).
+Tue 23 Feb 2016 12:14:12 PM Modify Configuration Settings (User: Administrator).
+Tue 23 Feb 2016 11:10:52 AM Add New Association: 3/twall/F440::i109 (test connection icon) (User: Administrator).
+Mon 22 Feb 2016 06:24:42 PM Deleted: Event 3463 (User: Administrator).
+Mon 22 Feb 2016 06:24:36 PM Deleted: Event 3461 (User: Administrator).
+Mon 22 Feb 2016 06:24:28 PM Deleted: Event 3460 (User: Administrator).
+Mon 22 Feb 2016 06:19:26 PM Deleted: Event 4242 (User: Administrator).
+Mon 22 Feb 2016 11:09:49 AM Modify Configuration Settings (User: Administrator).
+Mon 22 Feb 2016 11:08:39 AM Modify Configuration Settings (User: Administrator).
+Mon 22 Feb 2016 10:01:13 AM Add New Event: 1 - The first fifty were tough. (User: Administrator).
+Mon 22 Feb 2016 09:17:58 AM <a href="peopleEdit.php?personID=I1389&tree=twall">Edit Existing Person: twall/I1389</a> (User: Administrator).
+Mon 22 Feb 2016 08:49:46 AM <a href="cemeteriesEdit.php?cemeteryID=10">Add New Cemetery: 10 - St. Michaels Lutheran Church Cemetery</a> (User: Administrator).
+Mon 22 Feb 2016 07:26:30 AM <a href="reportsEdit.php?reportID=1">Edit Existing Report: 1</a> (User: Administrator).
+Mon 22 Feb 2016 07:24:41 AM <a href="reportsEdit.php?reportID=1">Edit Existing Report: 1</a> (User: Administrator).
+Sun 21 Feb 2016 05:56:55 PM Back up: Table structure (User: Administrator).
+Sun 21 Feb 2016 05:53:40 PM Back up: addresses (User: Administrator).
+Sun 21 Feb 2016 05:50:06 PM <a href="peopleEdit.php?personID=I1602&tree=twall">Edit Existing Person: twall/I1602</a> (User: Administrator).
+Sat 20 Feb 2016 03:29:05 PM <a href="peopleEdit.php?reportID=1">Edit Existing Report: 1</a> (User: Administrator).
+Sat 20 Feb 2016 05:32:58 AM Edit Existing Media: All (User: Administrator).
+Sat 20 Feb 2016 05:32:34 AM Edit Existing Media: All (User: Administrator).
+Sat 20 Feb 2016 05:32:00 AM Edit Existing Media: All (User: Administrator).
+Sat 20 Feb 2016 05:31:39 AM Edit Existing Media: All (User: Administrator).
+Sat 20 Feb 2016 05:31:15 AM Edit Existing Media: All (User: Administrator).
+Sat 20 Feb 2016 05:31:01 AM Edit Existing Media: All (User: Administrator).
+Sat 20 Feb 2016 05:29:04 AM Edit Existing Media: All (User: Administrator).
+Sat 20 Feb 2016 05:28:27 AM Edit Existing Media: All (User: Administrator).
+Sat 20 Feb 2016 05:28:09 AM Edit Existing Media: All (User: Administrator).
+Sat 20 Feb 2016 05:27:49 AM Edit Existing Media: All (User: Administrator).
+Sat 20 Feb 2016 05:27:38 AM Edit Existing Media: All (User: Administrator).
+Sat 20 Feb 2016 05:26:45 AM Edit Existing Media: All (User: Administrator).
+Sat 20 Feb 2016 05:26:22 AM Edit Existing Media: All (User: Administrator).
+Sat 20 Feb 2016 05:25:35 AM Edit Existing Media: All (User: Administrator).
+Sat 20 Feb 2016 05:24:53 AM Edit Existing Media: All (User: Administrator).
+Sat 20 Feb 2016 05:24:18 AM Edit Existing Media: All (User: Administrator).
+Sat 20 Feb 2016 05:23:49 AM Edit Existing Media: All (User: Administrator).
+Sat 20 Feb 2016 05:23:20 AM Edit Existing Media: All (User: Administrator).
+Sat 20 Feb 2016 05:22:50 AM Edit Existing Media: All (User: Administrator).
+Sat 20 Feb 2016 05:21:36 AM Edit Existing Media: All (User: Administrator).
+Tue 16 Feb 2016 02:46:45 PM Modify Configuration Settings (User: Administrator).
+Tue 16 Feb 2016 12:55:54 PM Modify Configuration Settings (User: Administrator).
+Mon 15 Feb 2016 02:35:21 PM Modify Configuration Settings (User: Administrator).
+Mon 15 Feb 2016 02:31:34 PM Modify Configuration Settings (User: Administrator).
+Sun 14 Feb 2016 02:05:34 PM Deleted treebs was successfully deleted. (User: Administrator).
+Sun 14 Feb 2016 02:00:53 PM Deleted: Person Boyce/I8 (User: Administrator).
+Sat 13 Feb 2016 09:26:27 AM <a href="peopleEdit.php?personID=I184&amp;tree=Boyce">Add New Person: Boyce/I184</a> (User: Administrator).
+Sat 13 Feb 2016 08:25:41 AM <a href="peopleEdit.php?personID=I8&amp;tree=Boyce">Add New Person: Boyce/I8</a> (User: Administrator).
+Sat 13 Feb 2016 05:48:23 AM Deleted: People twall/I168 (User: Administrator).
+Sat 13 Feb 2016 05:48:13 AM Deleted: People twall/I498, twall/I499, twall/I500, twall/I547, twall/I71, Boyce/184, Boyce/I184, Boyce/I185, Boyce/I8 (User: Administrator).
+Fri 12 Feb 2016 05:42:23 PM <a href="peopleEdit.php?personID=I185&amp;tree=Boyce">Add New Person: Boyce/I185</a> (User: Administrator).
+Fri 12 Feb 2016 12:14:06 PM <a href="peopleEdit.php?personID=I184&amp;tree=Boyce">Add New Person: Boyce/I184</a> (User: Administrator).
+Fri 12 Feb 2016 10:26:03 AM <a href="peopleEdit.php?personID=184&amp;tree=Boyce">Add New Person: Boyce/184</a> (User: Administrator).
+Wed 10 Feb 2016 06:05:20 PM <a href="familiesEdit.php?familyID=F180&amp;tree=twall">Add New Family: twall/F180</a> (User: Administrator).
+Wed 10 Feb 2016 05:34:58 AM <a href="peopleEdit.php?personID=I1389&tree=twall">Edit Existing Person: twall/I1389</a> (User: Administrator).
+Tue 09 Feb 2016 11:07:07 AM <a href="peopleEdit.php?personID=I1389&tree=twall">Edit Existing Person: twall/I1389</a> (User: Administrator).
+Sun 07 Feb 2016 08:21:19 AM <a href="peopleEdit.php?personID=I168&amp;tree=twall">Add New Person: twall/I168</a> (User: Administrator).
+Sat 06 Feb 2016 05:31:30 PM <a href="peopleEdit.php?personID=I8&amp;tree=Boyce">Add New Person: Boyce/I8</a> (User: Administrator).
+Sat 06 Feb 2016 02:00:42 PM Modify Configuration Settings (User: Administrator).
+Sat 06 Feb 2016 12:58:26 PM Modify Configuration Settings (User: Administrator).
+Sat 06 Feb 2016 11:59:30 AM Modify Configuration Settings (User: Administrator).
+Sat 06 Feb 2016 11:46:10 AM Modify Configuration Settings (User: Administrator).
+Sat 06 Feb 2016 05:19:31 AM <a href="familiesEdit.php?familyID=F177&amp;tree=twall">Add New Family: twall/F177</a> (User: Administrator).
+Sat 06 Feb 2016 05:14:56 AM <a href="peopleEdit.php?personID=I1389&tree=twall">Edit Existing Person: twall/I1389</a> (User: Administrator).
+Fri 05 Feb 2016 02:03:39 PM <a href="familiesEdit.php?familyID=F176&amp;tree=twall">Add New Family: twall/F176</a> (User: Administrator).
+Fri 05 Feb 2016 02:02:46 PM <a href="peopleEdit.php?personID=I1389&tree=twall">Edit Existing Person: twall/I1389</a> (User: Administrator).
+Thu 04 Feb 2016 04:56:51 PM <a href="familiesEdit.php?familyID=F440&tree=twall&cw=">Edit Existing Family: twall/F440</a> (User: Administrator).
+Thu 04 Feb 2016 06:25:40 AM <a href="peopleEdit.php?personID=I1389&tree=twall">Edit Existing Person: twall/I1389</a> (User: Administrator).
+Thu 04 Feb 2016 05:07:40 AM Label Branches: / (/) (User: Administrator).
+Wed 03 Feb 2016 06:00:18 PM Edit Existing Branch: teinert (User: Administrator).
+Wed 03 Feb 2016 02:41:29 PM <a href="cemeteriesEdit.php?cemeteryID=8">Edit Existing Cemetery: 8</a> (User: Administrator).
+Tue 02 Feb 2016 08:53:50 AM Edit Existing Branch: teinert (User: Administrator).
+Tue 02 Feb 2016 06:06:43 AM Edit Existing Branch: teinert (User: Administrator).
+Tue 02 Feb 2016 06:06:11 AM Edit Existing Branch: teinert (User: Administrator).
+Mon 01 Feb 2016 11:01:18 AM <a href="peopleEdit.php?personID=I1389&tree=twall">Edit Existing Person: twall/I1389</a> (User: Administrator).
+Mon 01 Feb 2016 10:32:04 AM <a href="peopleEdit.php?personID=I1389&tree=twall">Edit Existing Person: twall/I1389</a> (User: Administrator).
+Sun 31 Jan 2016 01:35:49 PM <a href="peopleEdit.php?personID=I1602&tree=twall">Edit Existing Person: twall/I1602</a> (User: Administrator).
+Sun 31 Jan 2016 10:39:49 AM <a href="familiesEdit.php?familyID=F148&amp;tree=twall">Add New Family: twall/F148</a> (User: Administrator).
+Sun 31 Jan 2016 10:35:45 AM <a href="familiesEdit.php?familyID=F26&amp;tree=twall">Add New Family: twall/F26</a> (User: Administrator).
+Sun 31 Jan 2016 10:35:14 AM <a href="peopleEdit.php?personID=I71&amp;tree=twall">Add New Person: twall/I71</a> (User: Administrator).
+Sat 30 Jan 2016 05:52:21 PM Most Wanted : the elusive mr. biar (User: Administrator).
+Sat 30 Jan 2016 05:38:38 PM Edit Existing Media: All (User: Administrator).
+Sat 30 Jan 2016 05:38:35 PM Edit Existing Media: All (User: Administrator).
+Sat 30 Jan 2016 05:38:32 PM Edit Existing Media: All (User: Administrator).
+Sat 30 Jan 2016 12:45:48 PM Enter new country: Columbia (User: Administrator).
+Sat 30 Jan 2016 12:28:49 PM Enter new state: West Virginia (User: Administrator).
+Sat 30 Jan 2016 12:24:25 PM Enter new state: New York (User: Administrator).
+Sat 30 Jan 2016 12:23:24 PM Enter new state: Georgia (User: Administrator).
+Sat 30 Jan 2016 11:44:47 AM Label Branches: twall/teinert (add/partial) (User: Administrator).
+Wed 27 Jan 2016 02:24:41 PM Media &gt;&gt; Import (photos):  (User: Administrator).
+Wed 27 Jan 2016 02:12:46 PM Deleted empty was successfully deleted. (User: Administrator).
+Wed 27 Jan 2016 07:58:57 AM <a href="treesEdit.php?tree=treebs">Add New Tree: treebs/tree created using bootstrap form</a> (User: Administrator).
+Wed 27 Jan 2016 07:58:26 AM Deleted treebs was successfully deleted. (User: Administrator).
+Wed 27 Jan 2016 07:49:13 AM <a href="treesEdit.php?tree=treebs">Add New Tree: treebs/tree created using bootstrap form</a> (User: Administrator).
+Wed 27 Jan 2016 07:48:25 AM Deleted treebs was successfully deleted. (User: Administrator).
+Wed 27 Jan 2016 07:17:29 AM <a href="treesEdit.php?tree=treebs">Add New Tree: treebs/tree created using bootstrap form</a> (User: Administrator).
+Wed 27 Jan 2016 07:16:18 AM Deleted treebs was successfully deleted. (User: Administrator).
+Wed 27 Jan 2016 07:12:42 AM <a href="treesEdit.php?tree=treebs">Add New Tree: treebs/tree created using bootstrap form</a> (User: Administrator).
+Wed 27 Jan 2016 07:10:44 AM Deleted treebs was successfully deleted. (User: Administrator).
+Wed 27 Jan 2016 07:09:45 AM <a href="treesEdit.php?tree=treebs">Add New Tree: treebs/tree created using bootstrap form</a> (User: Administrator).
+Wed 27 Jan 2016 07:09:09 AM Deleted treebs was successfully deleted. (User: Administrator).
+Wed 27 Jan 2016 07:05:12 AM <a href="treesEdit.php?tree=treebs">Add New Tree: treebs/tree created using bootstrap form</a> (User: Administrator).
+Wed 27 Jan 2016 07:01:27 AM Deleted tree8 was successfully deleted. (User: Administrator).
+Wed 27 Jan 2016 06:55:43 AM <a href="treesEdit.php?tree=tree8">Add New Tree: tree8/tree8</a> (User: Administrator).
+Wed 27 Jan 2016 06:53:56 AM Deleted treebs was successfully deleted. (User: Administrator).
+Wed 27 Jan 2016 06:51:49 AM <a href="treesEdit.php?tree=treebs">Add New Tree: treebs/treebs name</a> (User: Administrator).
+Wed 27 Jan 2016 06:47:40 AM <a href="treesEdit.php?tree=treebs">Add New Tree: treebs/tree created using bootstrap form</a> (User: Administrator).
+Wed 27 Jan 2016 06:42:59 AM Deleted tr7 was successfully deleted. (User: Administrator).
+Wed 27 Jan 2016 06:42:55 AM Deleted treebs was successfully deleted. (User: Administrator).
+Wed 27 Jan 2016 06:34:13 AM <a href="treesEdit.php?tree=treebs">Add New Tree: treebs/tree created using bootstrap form</a> (User: Administrator).
+Tue 26 Jan 2016 03:56:28 PM Enter new state: Washington (User: Administrator).
+Tue 26 Jan 2016 03:47:13 PM Enter new country: Canada (User: Administrator).
+Tue 26 Jan 2016 02:17:46 PM Label Branches: twall/teinert (add/partial) (User: Administrator).
+Tue 26 Jan 2016 02:14:50 PM Label Branches: twall/teinert (add/partial) (User: Administrator).
+Tue 26 Jan 2016 12:18:26 PM Label Branches: twall/teinert (add/partial) (User: Administrator).
+Tue 26 Jan 2016 12:15:54 PM Label Branches: twall/teinert (add/partial) (User: Administrator).
+Tue 26 Jan 2016 12:15:51 PM Label Branches: twall/teinert (add/partial) (User: Administrator).
+Tue 26 Jan 2016 12:09:56 PM Label Branches: twall/teinert (add/partial) (User: Administrator).
+Tue 26 Jan 2016 12:08:08 PM Label Branches: twall/teinert (add/partial) (User: Administrator).
+Tue 26 Jan 2016 09:25:10 AM Deleted: Branch bobsbranch (User: Administrator).
+Tue 26 Jan 2016 09:23:28 AM Edit Existing Branch: bobsbranch (User: Administrator).
+Tue 26 Jan 2016 06:31:36 AM Label Branches: twall/steg (add/partial) (User: Administrator).
+Tue 26 Jan 2016 06:31:21 AM Edit Existing Branch: steg (User: Administrator).
+Tue 26 Jan 2016 06:31:00 AM Add New Branch : /Leroys ancestors (User: Administrator).
+Tue 26 Jan 2016 05:56:14 AM Edit Existing Branch: bobsbranch (User: Administrator).
+Mon 25 Jan 2016 03:25:55 PM Label Branches: Boyce/bobsbranch (add/partial) (User: Administrator).
+Mon 25 Jan 2016 03:25:52 PM Label Branches: Boyce/bobsbranch (add/partial) (User: Administrator).
+Mon 25 Jan 2016 03:25:00 PM Edit Existing Branch: bobsbranch (User: Administrator).
+Mon 25 Jan 2016 03:07:48 PM Edit Existing Branch: bobsbranch (User: Administrator).
+Mon 25 Jan 2016 01:42:08 PM Label Branches: Boyce/bobsbranch (delete/partial) (User: Administrator).
+Sun 24 Jan 2016 05:14:36 PM Edit Existing Media: All (User: Administrator).
+Sun 24 Jan 2016 05:14:13 PM Edit Existing Media: All (User: Administrator).
+Sun 24 Jan 2016 05:13:03 PM Edit Existing Media: All (User: Administrator).
+Sun 24 Jan 2016 05:10:58 PM Edit Existing Media: All (User: Administrator).
+Sun 24 Jan 2016 05:10:25 PM Edit Existing Media: All (User: Administrator).
+Sun 24 Jan 2016 05:09:54 PM Edit Existing Media: All (User: Administrator).
+Sun 24 Jan 2016 05:09:38 PM Modify Configuration Settings (User: Administrator).
+Sun 24 Jan 2016 05:08:51 PM Edit Existing Media: All (User: Administrator).
+Sun 24 Jan 2016 05:08:44 PM Edit Existing Media: All (User: Administrator).
+Sun 24 Jan 2016 05:08:38 PM Edit Existing Media: All (User: Administrator).
+Sun 24 Jan 2016 05:08:31 PM Edit Existing Media: All (User: Administrator).
+Sun 24 Jan 2016 05:08:23 PM Edit Existing Media: All (User: Administrator).
+Sun 24 Jan 2016 05:08:12 PM Edit Existing Media: All (User: Administrator).
+Sun 24 Jan 2016 05:07:55 PM Edit Existing Media: All (User: Administrator).
+Sun 24 Jan 2016 05:07:43 PM Edit Existing Media: All (User: Administrator).
+Sun 24 Jan 2016 05:07:30 PM Edit Existing Media: All (User: Administrator).
+Sun 24 Jan 2016 05:07:15 PM Edit Existing Media: All (User: Administrator).
+Sun 24 Jan 2016 05:05:51 PM Media &gt;&gt; Import ():  (User: Administrator).
+Sun 24 Jan 2016 04:59:48 PM Media &gt;&gt; Import (photos): empty (User: Administrator).
+Sun 24 Jan 2016 02:51:51 PM <a href="usersEdit.php?userID=5">Add New User: mu</a> (User: Administrator).
+Sun 24 Jan 2016 02:05:06 PM <a href="admin_editsource.php?sourceID=S4&amp;tree=Boyce">Add New Source: Boyce/S4</a> (User: Administrator).
+Sun 24 Jan 2016 01:48:11 PM <a href="admin_editsource.php?sourceID=S3&amp;tree=Boyce">Add New Source: Boyce/S3</a> (User: Administrator).
+Sun 24 Jan 2016 01:43:00 PM Deleted: Source S3 (User: Administrator).
+Sun 24 Jan 2016 01:42:04 PM <a href="admin_editsource.php?sourceID=S3&amp;tree=Boyce">Add New Source: Boyce/S3</a> (User: Administrator).
+Sun 24 Jan 2016 09:36:19 AM Modify Map Configuration Settings (User: Administrator).
+Sat 23 Jan 2016 10:58:05 AM Edit Existing Album: 1 (User: Administrator).
+Sat 23 Jan 2016 07:32:17 AM <a href="ordermedia.php?personID=&amp;tree=">Sort Albums for: </a> (User: Administrator).
+Sat 23 Jan 2016 07:32:00 AM <a href="ordermedia.php?personID=&amp;tree=">Sort Albums for: </a> (User: Administrator).
+Fri 22 Jan 2016 05:00:56 PM Enter new state: Arizona (User: Administrator).
+Fri 22 Jan 2016 04:13:46 PM Enter new state: Indiana (User: Administrator).
+Fri 22 Jan 2016 04:13:10 PM Enter new state: Ohio (User: Administrator).
+Fri 22 Jan 2016 04:08:13 PM Enter new state: New Mexico (User: Administrator).
+Fri 22 Jan 2016 04:05:25 PM Enter new state: Alabama (User: Administrator).
+Fri 22 Jan 2016 01:39:57 PM Label Branches: Boyce/bobsbranch (add/partial) (User: Administrator).
+Fri 22 Jan 2016 01:39:35 PM Label Branches: Boyce/bobsbranch (add/partial) (User: Administrator).
+Fri 22 Jan 2016 01:39:23 PM Label Branches: Boyce/bobsbranch (add/partial) (User: Administrator).
+Fri 22 Jan 2016 01:39:13 PM Edit Existing Branch: bobsbranch (User: Administrator).
+Fri 22 Jan 2016 01:37:27 PM Label Branches: twall/teinert (add/partial) (User: Administrator).
+Fri 22 Jan 2016 11:48:47 AM Add New Branch : /Bobs parents (User: Administrator).
+Fri 22 Jan 2016 10:00:16 AM Deleted: Branch bobsbranch (User: Administrator).
+Fri 22 Jan 2016 09:59:16 AM Add New Branch : /Bobs parents (User: Administrator).
+Fri 22 Jan 2016 08:42:26 AM Deleted: Branch bobsbranch (User: Administrator).
+Fri 22 Jan 2016 08:31:20 AM Edit Existing Branch: bobsbranch (User: Administrator).
+Fri 22 Jan 2016 08:30:50 AM Edit Existing Branch: bobsbranch (User: Administrator).
+Fri 22 Jan 2016 08:30:18 AM Edit Existing Branch: bobsbranch (User: Administrator).
+Fri 22 Jan 2016 08:24:05 AM Add New Branch : /Bobs parents (User: Administrator).
+Fri 22 Jan 2016 07:48:57 AM Deleted: Branch bobsbranch (User: Administrator).
+Fri 22 Jan 2016 07:16:43 AM Add New Branch : /Bobs parents (User: Administrator).
+Fri 22 Jan 2016 07:15:23 AM Deleted: Branch bobsbranch (User: Administrator).
+Fri 22 Jan 2016 07:03:58 AM Add New Branch : /Bob parents (User: Administrator).
+Thu 21 Jan 2016 06:05:59 PM Modify Configuration Settings (User: Administrator).
+Thu 21 Jan 2016 06:11:10 AM <a href="usersEdit.php?userID=4">Edit Existing User: 4</a> (User: Administrator).
+Thu 21 Jan 2016 06:10:40 AM <a href="usersEdit.php?userID=4">Add New User: subm</a> (User: Administrator).
+Thu 21 Jan 2016 05:43:24 AM <a href="usersEdit.php?userID=3">Edit Existing User: 3</a> (User: Administrator).
+Thu 21 Jan 2016 05:42:06 AM <a href="usersEdit.php?userID=3">Edit Existing User: 3</a> (User: Administrator).
+Thu 21 Jan 2016 05:40:09 AM <a href="usersEdit.php?userID=3">Add New User: guest</a> (User: Administrator).
+Thu 21 Jan 2016 04:29:06 AM <a href="admin_geocode.php">Geocode all Places without latitude and longitude coordinates (10)</a> (User: Administrator).
+Thu 21 Jan 2016 04:28:53 AM <a href="admin_geocode.php">Geocode all Places without latitude and longitude coordinates ()</a> (User: Administrator).
+Thu 21 Jan 2016 04:28:39 AM <a href="admin_editplace.php?ID=923&tree=Boyce">Edit Existing Place: Loraine, Mitchell, Texas, United States</a> (User: Administrator).
+Thu 21 Jan 2016 03:56:35 AM <a href="peopleEdit.php?personID=I8&tree=Boyce">Edit Existing Person: Boyce/I8</a> (User: Administrator).
+Wed 20 Jan 2016 04:55:08 PM <a href="peopleEdit.php?personID=I1389&tree=twall">Edit Existing Person: twall/I1389</a> (User: Administrator).
+Wed 20 Jan 2016 04:00:45 PM Add New Association: 2/twall/I1389::I10835 (friend) (User: Administrator).
+Wed 20 Jan 2016 02:15:01 PM <a href="peopleEdit.php?personID=I1389&tree=twall">Edit Existing Person: twall/I1389</a> (User: Administrator).
+Tue 19 Jan 2016 04:34:39 PM <a href="peopleEdit.php?personID=I29&tree=twall">Edit Existing Person: twall/I29</a> (User: Administrator).
+Tue 19 Jan 2016 04:15:22 PM Modify Pedigree Configuration Settings (User: Administrator).
+Tue 19 Jan 2016 04:01:19 PM Modify Pedigree Configuration Settings (User: Administrator).
+Tue 19 Jan 2016 03:16:36 PM Modify Pedigree Configuration Settings (User: Administrator).
+Tue 19 Jan 2016 03:14:11 PM Modify Pedigree Configuration Settings (User: Administrator).
+Tue 19 Jan 2016 03:03:26 PM Modify Pedigree Configuration Settings (User: Administrator).
+Tue 19 Jan 2016 03:02:30 PM Modify Pedigree Configuration Settings (User: Administrator).
+Tue 19 Jan 2016 02:43:03 PM Modify Pedigree Configuration Settings (User: Administrator).
+Tue 19 Jan 2016 02:42:40 PM Modify Pedigree Configuration Settings (User: Administrator).
+Mon 18 Jan 2016 06:12:06 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/Robert_Edward_Boyce__complete_RM6_.ged, Tree: Boyce/; 169 People, 56 Families, 13 Sources, 1 Notes, 0 Media, 88 Places (User: Administrator).
+Mon 18 Jan 2016 06:11:43 AM <a href="treesEdit.php?tree=Boyce">Add New Tree: Boyce/Boyce</a> (User: Administrator).
+Mon 18 Jan 2016 05:35:28 AM Secondary Processes: Create GENDEX (User: Administrator).
+Mon 18 Jan 2016 05:06:28 AM <a href="admin_editmedia.php?mediaID=7">Edit Existing Media: 7</a> (User: Administrator).
+Mon 18 Jan 2016 05:05:49 AM <a href="admin_editmedia.php?mediaID=4">Edit Existing Media: 4</a> (User: Administrator).
+Mon 18 Jan 2016 05:04:22 AM <a href="admin_editmedia.php?mediaID=3">Edit Existing Media: 3</a> (User: Administrator).
+Mon 18 Jan 2016 04:51:39 AM <a href="admin_editmedia.php?mediaID=3">Edit Existing Media: 3</a> (User: Administrator).
+Sun 17 Jan 2016 03:23:02 PM Generate Thumbnails: Thumbnails generated: 6; Records updated: 9; Thumbnails not generated due to path, permissions, size or file name problems: 0 (User: Administrator).
+Sun 17 Jan 2016 01:05:52 PM Generate Thumbnails: Thumbnails generated: 9; Records updated: 0; Thumbnails not generated due to path, permissions, size or file name problems: 0 (User: Administrator).
+Sun 17 Jan 2016 06:35:58 AM Generate Thumbnails: Thumbnails generated: 9; Records updated: 0; Thumbnails not generated due to path, permissions, size or file name problems: 0 (User: Administrator).
+Sun 17 Jan 2016 06:35:05 AM Generate Thumbnails: Thumbnails generated: 6; Records updated: 0; Thumbnails not generated due to path, permissions, size or file name problems: 0 (User: Administrator).
+Sun 17 Jan 2016 06:25:17 AM Generate Thumbnails: Thumbnails generated: 6; Records updated: 0; Thumbnails not generated due to path, permissions, size or file name problems: 0 (User: Administrator).
+Sun 17 Jan 2016 06:07:42 AM Generate Thumbnails: Thumbnails generated: 0; Records updated: 0; Thumbnails not generated due to path, permissions, size or file name problems: 6 (User: Administrator).
+Sun 17 Jan 2016 05:59:23 AM Assign Default Photos: Default photos assigned: 0; (User: Administrator).
+Sun 17 Jan 2016 05:52:52 AM : Default photos assigned: 0; (User: Administrator).
+Sun 17 Jan 2016 05:50:28 AM : Default photos assigned: 0; (User: Administrator).
+Sun 17 Jan 2016 05:16:17 AM Generate Thumbnails: Thumbnails generated: 3; Records updated: 3; Thumbnails not generated due to path, permissions, size or file name problems: 6 (User: Administrator).
+Sun 17 Jan 2016 05:14:44 AM Generate Thumbnails: Thumbnails generated: 3; Records updated: 0; Thumbnails not generated due to path, permissions, size or file name problems: 6 (User: Administrator).
+Sun 17 Jan 2016 05:11:50 AM Modify Configuration Settings (User: Administrator).
+Sat 16 Jan 2016 05:46:52 PM <a href="cemeteriesEdit.php?cemeteryID=7">Add New Cemetery: 7 - St. Paul Lutheran Church Cemetery</a> (User: Administrator).
+Sat 16 Jan 2016 02:01:02 PM <a href="cemeteriesEdit.php?cemeteryID=4">Edit Existing Cemetery: 4</a> (User: Administrator).
+Sat 16 Jan 2016 01:59:00 PM <a href="admin_editmedia.php?mediaID=6">Edit Existing Media: 6</a> (User: Administrator).
+Sat 16 Jan 2016 01:53:58 PM <a href="cemeteriesEdit.php?cemeteryID=4">Edit Existing Cemetery: 4</a> (User: Administrator).
+Sat 16 Jan 2016 01:42:51 PM <a href="cemeteriesEdit.php?cemeteryID=4">Edit Existing Cemetery: 4</a> (User: Administrator).
+Sat 16 Jan 2016 05:53:58 AM Modify Configuration Settings (User: Administrator).
+Fri 15 Jan 2016 05:54:31 PM Modify Configuration Settings (User: Administrator).
+Fri 15 Jan 2016 05:52:29 PM Modify Configuration Settings (User: Administrator).
+Fri 15 Jan 2016 05:48:39 PM Modify Configuration Settings (User: Administrator).
+Fri 15 Jan 2016 05:47:59 PM Modify Configuration Settings (User: Administrator).
+Thu 14 Jan 2016 02:12:04 PM <a href="admin_editplace.php?ID=922">Add New Place: 922 - nearRoundTop, Texas</a> (User: Administrator).
+Thu 14 Jan 2016 12:21:01 PM Modify Map Configuration Settings (User: Administrator).
+Thu 14 Jan 2016 06:45:33 AM Modify Map Configuration Settings (User: Administrator).
+Thu 14 Jan 2016 06:30:52 AM Modify Map Configuration Settings (User: Administrator).
+Wed 13 Jan 2016 06:04:30 PM Modify Map Configuration Settings (User: Administrator).
+Wed 13 Jan 2016 06:03:42 PM Modify Map Configuration Settings (User: Administrator).
+Wed 13 Jan 2016 02:14:01 PM Modify Map Configuration Settings (User: Administrator).
+Wed 13 Jan 2016 02:12:34 PM Modify Map Configuration Settings (User: Administrator).
+Wed 13 Jan 2016 01:58:23 PM Modify Map Configuration Settings (User: Administrator).
+Wed 13 Jan 2016 01:54:55 PM Modify Map Configuration Settings (User: Administrator).
+Wed 13 Jan 2016 12:14:00 PM Modify Map Configuration Settings (User: Administrator).
+Tue 12 Jan 2016 03:00:58 PM Modify Configuration Settings (User: Administrator).
+Tue 12 Jan 2016 10:29:15 AM Modify Configuration Settings (User: Administrator).
+Tue 12 Jan 2016 10:27:58 AM Modify Configuration Settings (User: Administrator).
+Tue 12 Jan 2016 10:26:18 AM Modify Configuration Settings (User: Administrator).
+Mon 11 Jan 2016 02:51:03 PM Modify Map Configuration Settings (User: Administrator).
+Mon 11 Jan 2016 02:44:04 PM Modify Map Configuration Settings (User: Administrator).
+Mon 11 Jan 2016 09:36:18 AM <a href="admin_editmedia.php?mediaID=9">Edit Existing Media: 9</a> (User: Administrator).
+Mon 11 Jan 2016 09:24:51 AM <a href="admin_editplace.php?ID=921">Add New Place: 921 - </a> (User: Administrator).
+Mon 11 Jan 2016 07:56:58 AM <a href="cemeteriesEdit.php?cemeteryID=4">Edit Existing Cemetery: 4</a> (User: Administrator).
+Fri 08 Jan 2016 05:04:24 AM Deleted atree was successfully deleted. (User: Administrator).
+Fri 08 Jan 2016 05:02:56 AM Deleted tre was successfully deleted. (User: Administrator).
+Fri 08 Jan 2016 04:53:27 AM Deleted tre1 was successfully deleted. (User: Administrator).
+Fri 08 Jan 2016 04:52:05 AM Deleted tr2 was successfully deleted. (User: Administrator).
+Thu 07 Jan 2016 09:59:37 AM <a href="treesEdit.php?tree=tr2">Add New Tree: tr2/tr2</a> (User: Administrator).
+Thu 07 Jan 2016 09:58:45 AM <a href="treesEdit.php?tree=atree">Add New Tree: atree/atreename</a> (User: Administrator).
+Thu 07 Jan 2016 09:55:50 AM <a href="treesEdit.php?tree=tre1">Add New Tree: tre1/tre11</a> (User: Administrator).
+Thu 07 Jan 2016 09:39:26 AM Deleted treefrominput was successfully deleted. (User: Administrator).
+Thu 07 Jan 2016 09:39:19 AM Deleted treefrombutton was successfully deleted. (User: Administrator).
+Thu 07 Jan 2016 09:39:03 AM <a href="treesEdit.php?tree=treefrominput">Add New Tree: treefrominput/tfi</a> (User: Administrator).
+Thu 07 Jan 2016 09:38:28 AM <a href="treesEdit.php?tree=treefrombutton">Add New Tree: treefrombutton/tfb</a> (User: Administrator).
+Thu 07 Jan 2016 08:08:43 AM <a href="treesEdit.php?tree=tre">Add New Tree: tre/tre</a> (User: Administrator).
+Thu 07 Jan 2016 08:08:31 AM Deleted tre was successfully deleted. (User: Administrator).
+Thu 07 Jan 2016 08:08:21 AM <a href="treesEdit.php?tree=tre">Add New Tree: tre/tre</a> (User: Administrator).
+Wed 06 Jan 2016 11:38:06 AM <a href="treesEdit.php?tree=empty">Add New Tree: empty/Empty Tree</a> (User: Administrator).
+Wed 06 Jan 2016 10:26:37 AM Deleted: Person twall/I5997 (User: Administrator).
+Wed 06 Jan 2016 10:26:09 AM Deleted: Person / (User: Administrator).
+Mon 04 Jan 2016 01:58:49 PM <a href="peopleEdit.php?personID=I1389&tree=twall">Edit Existing Person: twall/I1389</a> (User: Administrator).
+Sun 03 Jan 2016 12:29:22 PM <a href="admin_geocode.php">Geocode all Places without latitude and longitude coordinates ()</a> (User: Administrator).
+Sun 03 Jan 2016 12:28:04 PM <a href="admin_geocode.php">Geocode all Places without latitude and longitude coordinates ()</a> (User: Administrator).
+Sat 02 Jan 2016 01:42:11 PM <a href="ordermedia.php?personID=&amp;tree=">Sort  for: /</a> (User: Administrator).
+Sat 02 Jan 2016 12:52:10 PM <a href="peopleEdit.php?personID=I2639&tree=twall">Edit Existing Person: twall/I2639</a> (User: Administrator).
+Fri 01 Jan 2016 08:25:53 PM <a href="reportsEdit.php?reportID=1">Edit Existing Report: 1</a> (User: Administrator).
+Fri 01 Jan 2016 08:24:30 PM <a href="reportsEdit.php?reportID=1">Add New Report: 1/Teinert</a> (User: Administrator).
+Fri 01 Jan 2016 07:05:44 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/temp-LD5P-7NJ.ged, Tree: twall/; 14 People, 3 Families, 11 Sources, 3 Notes, 0 Media, 2 Places (User: Administrator).
+Fri 01 Jan 2016 04:49:35 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/temp-LD5P-7NJ.ged, Tree: twall/; 14 People, 3 Families, 11 Sources, 3 Notes, 0 Media, 2 Places (User: Administrator).
+Fri 01 Jan 2016 01:11:45 PM Secondary Processes:  (User: Administrator).
+Fri 01 Jan 2016 01:09:09 PM Secondary Processes:  (User: Administrator).
+Thu 31 Dec 2015 09:01:35 AM Modify Configuration Settings (User: Administrator).
+Thu 31 Dec 2015 08:52:00 AM Edit Existing Media: All (User: Administrator).
+Thu 31 Dec 2015 08:50:00 AM Edit Existing Media: All (User: Administrator).
+Thu 31 Dec 2015 08:49:47 AM Edit Existing Media: All (User: Administrator).
+Thu 31 Dec 2015 08:49:29 AM Edit Existing Media: All (User: Administrator).
+Tue 29 Dec 2015 10:55:24 AM Label Branches: / (/) (User: Administrator).
+Tue 29 Dec 2015 10:48:59 AM Label Branches: / (/) (User: Administrator).
+Tue 29 Dec 2015 10:48:49 AM Label Branches: / (/) (User: Administrator).
+Tue 29 Dec 2015 10:46:21 AM Label Branches: / (/) (User: Administrator).
+Tue 29 Dec 2015 10:46:17 AM Label Branches: / (/) (User: Administrator).
+Tue 29 Dec 2015 10:46:15 AM Label Branches: / (/) (User: Administrator).
+Tue 29 Dec 2015 10:45:57 AM Label Branches: / (/) (User: Administrator).
+Tue 29 Dec 2015 10:44:15 AM Label Branches: / (/) (User: Administrator).
+Tue 29 Dec 2015 10:41:24 AM Label Branches: / (/) (User: Administrator).
+Tue 29 Dec 2015 10:36:41 AM Label Branches: / (/) (User: Administrator).
+Tue 29 Dec 2015 10:36:34 AM Label Branches: / (/) (User: Administrator).
+Tue 29 Dec 2015 10:36:18 AM Label Branches: / (/) (User: Administrator).
+Tue 29 Dec 2015 10:34:12 AM Label Branches: / (/) (User: Administrator).
+Tue 29 Dec 2015 10:32:46 AM Label Branches: / (/) (User: Administrator).
+Tue 29 Dec 2015 10:29:22 AM Label Branches: / (/) (User: Administrator).
+Sat 26 Dec 2015 10:57:37 AM Modify Configuration Settings (User: Administrator).
+Sat 26 Dec 2015 09:47:12 AM Modify Configuration Settings (User: Administrator).
+Thu 24 Dec 2015 02:12:40 PM <a href="ordermedia.php?personID=&amp;tree=">Sort  for: /</a> (User: Administrator).
+Sun 20 Dec 2015 02:42:10 PM Edit Existing Media: All (User: Administrator).
+Sun 20 Dec 2015 12:15:18 PM <a href="admin_editmedia.php?mediaID=13">Add New Media: 13</a> (User: Administrator).
+Sun 20 Dec 2015 12:11:45 PM <a href="admin_editmedia.php?mediaID=12">Add New Media: 12</a> (User: Administrator).
+Sun 20 Dec 2015 12:07:47 PM <a href="admin_editmedia.php?mediaID=11">Add New Media: 11</a> (User: Administrator).
+Sun 20 Dec 2015 11:23:43 AM <a href="admin_editmedia.php?mediaID=10">Add New Media: 10</a> (User: Administrator).
+Sun 20 Dec 2015 11:13:59 AM <a href="admin_editmedia.php?mediaID=9">Add New Media: 9</a> (User: Administrator).
+Sat 19 Dec 2015 06:24:48 PM <a href="admin_editmedia.php?mediaID=8">Add New Media: 8</a> (User: Administrator).
+Sat 19 Dec 2015 06:12:47 PM <a href="admin_editmedia.php?mediaID=7">Add New Media: 7</a> (User: Administrator).
+Sat 19 Dec 2015 05:09:20 PM Generate Thumbnails: Thumbnails generated: 1; Records updated: 0; Thumbnails not generated due to path, permissions, size or file name problems: 4 (User: Administrator).
+Thu 17 Dec 2015 05:09:39 PM <a href="admin_editmedia.php?mediaID=6">Add New Media: 6</a> (User: Administrator).
+Thu 17 Dec 2015 05:09:34 PM <a href="admin_editmedia.php?mediaID=5">Add New Media: 5</a> (User: Administrator).
+Thu 17 Dec 2015 05:09:14 PM <a href="admin_editmedia.php?mediaID=4">Add New Media: 4</a> (User: Administrator).
+Thu 17 Dec 2015 04:28:21 PM <a href="admin_editmedia.php?mediaID=3">Edit Existing Media: 3</a> (User: Administrator).
+Thu 17 Dec 2015 04:27:51 PM <a href="admin_editmedia.php?mediaID=3">Add New Media: 3</a> (User: Administrator).
+Wed 16 Dec 2015 06:40:34 PM Deleted sand was successfully deleted. (User: Administrator).
+Tue 15 Dec 2015 05:29:45 PM <a href="peopleEdit.php?personID=I2&tree=sand">Edit Existing Person: sand/I2</a> (User: Administrator).
+Mon 14 Dec 2015 02:14:18 PM Most Wanted : the elusive mr. biar (User: Administrator).
+Sat 12 Dec 2015 11:49:16 AM <a href="usersEdit.php?userID=2">Add New User: storm</a> (User: Administrator).
+Sat 12 Dec 2015 09:58:16 AM <a href="admin_geocode.php">Geocode all Places without latitude and longitude coordinates ()</a> (User: Administrator).
+Sat 12 Dec 2015 09:44:14 AM Generate Thumbnails: Thumbnails generated: 1; Records updated: 1; Thumbnails not generated due to path, permissions, size or file name problems: 0 (User: Administrator).
+Thu 10 Dec 2015 10:03:42 AM Deleted: Place sand/newplace,nowhere (User: $currentuserdesc) (User: Administrator).
+Thu 10 Dec 2015 09:44:47 AM Deleted: Place sand/before and after, test (User: Administrator).
+Thu 10 Dec 2015 09:44:27 AM Deleted: Place sand/asaa, bsw (User: Administrator).
+Thu 10 Dec 2015 09:31:10 AM <a href="admin_editplace.php?ID=919">Add New Place: 919 - before and after, test</a> (User: Administrator).
+Thu 10 Dec 2015 09:27:40 AM <a href="admin_editplace.php?ID=918">Add New Place: 918 - asaa, bsw</a> (User: Administrator).
+Thu 10 Dec 2015 09:03:20 AM <a href="admin_editplace.php?ID=917">Add New Place: 917 - someplace,us</a> (User: Administrator).
+Thu 10 Dec 2015 09:01:27 AM <a href="admin_editplace.php?ID=916">Add New Place: 916 - newplace,nowhere</a> (User: Administrator).
+Thu 10 Dec 2015 09:00:56 AM <a href="admin_editplace.php?ID=915">Add New Place: 915 - newplace,anywhere</a> (User: Administrator).
+Thu 10 Dec 2015 08:59:19 AM <a href="admin_editplace.php?ID=914">Add New Place: 914 - testing psuedo snippet</a> (User: Administrator).
+Thu 10 Dec 2015 08:13:56 AM Add New Branch : /b2 descr (User: Administrator).
+Thu 10 Dec 2015 08:12:50 AM Add New Branch : /will quickly delete (User: Administrator).
+Wed 09 Dec 2015 11:25:28 AM <a href="peopleEdit.php?personID=I129&tree=twall">Edit Existing Person: twall/I129</a> (User: Administrator).
+Mon 07 Dec 2015 05:03:51 PM Deleted: Cemetery 5 (User: Administrator).
+Mon 07 Dec 2015 02:45:09 PM <a href="admin_geocode.php">Geocode all Places without latitude and longitude coordinates (10)</a> (User: Administrator).
+Mon 07 Dec 2015 10:05:12 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/temp-LD5P-7NJ.ged, Tree: sand/; 14 People, 3 Families, 11 Sources, 3 Notes, 0 Media, 22 Places (User: Administrator).
+Mon 07 Dec 2015 10:04:57 AM <a href="treesEdit.php?tree=sand">Add New Tree: sand/testtree</a> (User: Administrator).
+Mon 07 Dec 2015 08:18:14 AM <a href="cemeteriesEdit.php?cemeteryID=5">Add New Cemetery: 5 - Trinity Lutheran Cemetery</a> (User: Administrator).
+Mon 07 Dec 2015 08:08:54 AM <a href="cemeteriesEdit.php?cemeteryID=4">Add New Cemetery: 4 - Holy Cross Lutheran Cemetery</a> (User: Administrator).
+Mon 07 Dec 2015 08:04:47 AM Deleted: Cemeteries Holy Cross Lutheran Cemetery, Trinity Lutheran Cemetery (User: Administrator).
+Mon 07 Dec 2015 08:04:37 AM Deleted: Cemetery 2 (User: Administrator).
+Mon 07 Dec 2015 07:55:18 AM <a href="cemeteriesEdit.php?cemeteryID=3">Add New Cemetery: 3 - Holy Cross Lutheran Cemetery</a> (User: Administrator).
+Mon 07 Dec 2015 07:52:19 AM <a href="cemeteriesEdit.php?cemeteryID=2">Add New Cemetery: 2 - St. Paul Lutheran Church Cemetery</a> (User: Administrator).
+Sun 06 Dec 2015 03:51:17 PM <a href="cemeteriesEdit.php?cemeteryID=1">Add New Cemetery: 1 - Trinity Lutheran Cemetery</a> (User: Administrator).
+Sun 06 Dec 2015 03:50:49 PM Enter new state: Texas (User: Administrator).
+Sun 06 Dec 2015 03:50:40 PM Enter new country: United States (User: Administrator).
+Sun 06 Dec 2015 02:53:26 PM Add New Association: 1/twall/I6480::I3457 (just interested in the effect [ts]) (User: Administrator).
+Sun 06 Dec 2015 06:59:59 AM Modify Configuration Settings (User: Administrator).
+Sun 06 Dec 2015 06:43:58 AM Modify Configuration Settings (User: Administrator).
+Fri 04 Dec 2015 11:33:36 AM Modify Configuration Settings (User: Administrator).
+Fri 04 Dec 2015 11:21:11 AM Modify Configuration Settings (User: Administrator).
+Fri 04 Dec 2015 11:20:09 AM Modify Configuration Settings (User: Administrator).
+Fri 04 Dec 2015 11:19:10 AM Modify Configuration Settings (User: Administrator).
+Fri 04 Dec 2015 11:07:02 AM Modify Configuration Settings (User: Administrator).
+Fri 04 Dec 2015 10:59:17 AM Modify Configuration Settings (User: Administrator).
+Fri 04 Dec 2015 08:31:45 AM <a href="admin_geocode.php">Geocode all Places without latitude and longitude coordinates (10)</a> (User: Administrator).
+Fri 04 Dec 2015 08:31:37 AM <a href="admin_geocode.php">Geocode all Places without latitude and longitude coordinates ()</a> (User: Administrator).
+Thu 03 Dec 2015 03:37:05 PM <a href="admin_geocode.php">Geocode all Places without latitude and longitude coordinates ()</a> (User: Administrator).
+Thu 03 Dec 2015 03:35:53 PM <a href="admin_geocode.php">Geocode all Places without latitude and longitude coordinates (10)</a> (User: Administrator).
+Thu 03 Dec 2015 02:44:08 PM Deleted empty was successfully deleted. (User: Administrator).
+Thu 03 Dec 2015 11:05:44 AM <a href="peopleEdit.php?personID=I1&tree=empty">Edit Existing Person: empty/I1</a> (User: Administrator).
+Thu 03 Dec 2015 06:05:42 AM Modify Configuration Settings (User: Administrator).
+Thu 03 Dec 2015 05:20:38 AM <a href="peopleEdit.php?personID=I1&amp;tree=empty">Add New Person: empty/I1</a> (User: Administrator).
+Wed 02 Dec 2015 05:52:07 PM <a href="editrepo.php?repoID=REPO1&tree=twall">Edit Existing Repository: twall/REPO1</a> (User: Administrator).
+Wed 02 Dec 2015 05:51:57 PM <a href="repositoriesEdit.php?repoID=REPO1&tree=twall">Add New Repository: twall/REPO1</a> (User: Administrator).
+Wed 02 Dec 2015 12:30:00 PM Modify Configuration Settings (User: Administrator).
+Tue 01 Dec 2015 01:31:46 PM Modify Configuration Settings (User: Administrator).
+Tue 01 Dec 2015 01:03:13 PM Modify Configuration Settings (User: Administrator).
+Tue 01 Dec 2015 08:03:55 AM Modify Configuration Settings (User: Administrator).
+Tue 01 Dec 2015 07:45:04 AM Modify Configuration Settings (User: Administrator).
+Tue 01 Dec 2015 07:29:55 AM Modify Configuration Settings (User: Administrator).
+Tue 01 Dec 2015 07:14:55 AM Modify Configuration Settings (User: Administrator).
+Tue 01 Dec 2015 07:05:02 AM Modify Configuration Settings (User: Administrator).
+Tue 01 Dec 2015 06:53:32 AM Modify Configuration Settings (User: Administrator).
+Tue 01 Dec 2015 06:51:00 AM Modify Configuration Settings (User: Administrator).
+Tue 01 Dec 2015 06:39:22 AM Modify Configuration Settings (User: Administrator).
+Tue 01 Dec 2015 06:16:11 AM Modify Configuration Settings (User: Administrator).
+Tue 01 Dec 2015 05:45:09 AM Modify Configuration Settings (User: Administrator).
+Tue 01 Dec 2015 05:39:45 AM Modify Configuration Settings (User: Administrator).
+Tue 01 Dec 2015 05:37:38 AM Modify Configuration Settings (User: Administrator).
+Tue 01 Dec 2015 05:05:46 AM Modify Configuration Settings (User: Administrator).
+Tue 01 Dec 2015 05:00:58 AM Modify Configuration Settings (User: Administrator).
+Mon 30 Nov 2015 03:55:31 PM <a href="admin_editmedia.php?mediaID=2">Add New Media: 2</a> (User: Administrator).
+Sat 28 Nov 2015 09:15:44 PM <a href="treesEdit.php?tree=twall">Edit Existing Tree: twall</a> (User: Administrator).
+Wed 25 Nov 2015 01:04:17 PM Modify Configuration Settings (User: Administrator).
+Wed 25 Nov 2015 12:54:36 PM Modify Configuration Settings (User: Administrator).
+Wed 25 Nov 2015 12:43:46 PM Modify Configuration Settings (User: Administrator).
+Wed 25 Nov 2015 12:42:46 PM Modify Configuration Settings (User: Administrator).
+Wed 25 Nov 2015 10:22:37 AM Modify Template Configuration Settings -   -  = 0 (User: Administrator).
+Wed 25 Nov 2015 10:12:57 AM Modify Template Configuration Settings -   -  = 1 (User: Administrator).
+Wed 25 Nov 2015 05:52:22 AM Modify Template Configuration Settings -  12 -  = 1 (User: Administrator).
+Tue 24 Nov 2015 09:06:50 PM Modify Template Configuration Settings -  12 -  = 1 (User: Administrator).
+Tue 24 Nov 2015 04:04:51 PM Modify Template Configuration Settings -  1 -  = 1 (User: Administrator).
+Tue 24 Nov 2015 04:00:42 PM Modify Template Configuration Settings -  1 -  = 1 (User: Administrator).
+Tue 24 Nov 2015 08:29:23 AM Add New Branch : /Johann Carl Teinert (User: Administrator).
+Tue 24 Nov 2015 06:59:06 AM <a href="treesEdit.php?tree=empty">Add New Tree: empty/Empty Tree</a> (User: Administrator).
+Mon 23 Nov 2015 11:14:56 AM Modify Template Configuration Settings -   -  = 1 (User: Administrator).
+Mon 23 Nov 2015 09:32:14 AM Modify Template Configuration Settings -  1 -  = 1 (User: Administrator).
+Mon 23 Nov 2015 07:35:28 AM Modify Template Configuration Settings -  12 -  = 1 (User: Administrator).
+Mon 23 Nov 2015 06:03:05 AM Modify Template Configuration Settings -   -  = 1 (User: Administrator).
+Sun 22 Nov 2015 02:57:59 PM Modify Configuration Settings (User: Administrator).
+Sun 22 Nov 2015 02:57:37 PM Modify Template Configuration Settings -  1 -  = 1 (User: Administrator).
+Sun 22 Nov 2015 02:20:13 PM Modify Configuration Settings (User: Administrator).
+Sat 21 Nov 2015 05:56:32 PM Modify Template Configuration Settings -   -  = 1 (User: Administrator).
+Sat 21 Nov 2015 05:54:03 PM Modify Template Configuration Settings -  1 -  = 1 (User: Administrator).
+Sat 21 Nov 2015 05:51:55 PM Modify Template Configuration Settings -   -  = 1 (User: Administrator).
+Sat 21 Nov 2015 05:51:32 PM Modify Template Configuration Settings -  1 -  = 1 (User: Administrator).
+Sat 21 Nov 2015 05:47:19 PM Modify Template Configuration Settings -   -  = 1 (User: Administrator).
+Sat 21 Nov 2015 02:29:08 PM Deleted: Language 3 (User: Administrator).
+Sat 21 Nov 2015 10:20:53 AM Modify Template Configuration Settings -  12 -  = 1 (User: Administrator).
+Sat 21 Nov 2015 08:59:40 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/terry.texas.us__excl_RM7_specific__2015_11_18.ged, Tree: twall/; 0 People, 0 Families, 0 Sources, 0 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 21 Nov 2015 08:56:32 AM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/terry.texas.us__excl_RM7_specific__2015_11_18.ged, Tree: twall/; 0 People, 0 Families, 0 Sources, 0 Notes, 0 Media, 0 Places (User: Administrator).
+Sat 21 Nov 2015 08:00:37 AM Edit Existing Album: 1 (User: Administrator).
+Sat 21 Nov 2015 07:57:02 AM <a href="admin_editmedia.php?mediaID=1">Edit Existing Media: 1</a> (User: Administrator).
+Sat 21 Nov 2015 07:57:00 AM <a href="admin_editmedia.php?mediaID=1">Add New Media: 1</a> (User: Administrator).
+Sat 21 Nov 2015 07:54:17 AM : First Item Addition [ts] (User: Administrator).
+Sat 21 Nov 2015 07:28:53 AM Modify Template Configuration Settings -   -  = 1 (User: Administrator).
+Sat 21 Nov 2015 06:58:52 AM <a href="editlanguage.php?languageID=1">Edit Existing Language: 1</a> (User: Administrator).
+Sat 21 Nov 2015 06:42:06 AM Modify Configuration Settings (User: Administrator).
+Sat 21 Nov 2015 06:41:22 AM <a href="languagesEdit.php?languageID=2">Add New Language: Deutsch/German-UTF8</a> (User: Administrator).
+Sat 21 Nov 2015 06:39:09 AM <a href="languagesEdit.php?languageID=1">Add New Language: English/English-UTF8</a> (User: Administrator).

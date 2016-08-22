@@ -13,22 +13,22 @@ $private = array();
 $indarray = array();
 $gotfamily = array();
 
-$righttree = checktree($tree);
 $ldsOK = determineLDSRights();
 
-$query = "SELECT disallowgedcreate, email, owner FROM $treesTable WHERE gedcom = \"$tree\"";
+$query = "SELECT disallowgedcreate, email, owner FROM $treesTable";
 $treeresult = tng_query($query);
 $treerow = tng_fetch_assoc($treeresult);
-if ($treerow['disallowgedcreate'] && (!$allow_ged || !$righttree)) {
+if ($treerow['disallowgedcreate'] && (!$allow_ged)) {
   exit;
 }
 tng_free_result($treeresult);
 
-function getAncestor($person, $generation)
-{
-  global $tree, $maxgcgen, $indarray, $people_table;
+function getAncestor($person, $generation) {
+  global $maxgcgen;
+  global $indarray;
+  global $people_table;
 
-  $query = "SELECT personID, famc FROM $people_table WHERE personID = \"$person\" AND gedcom = \"$tree\"";
+  $query = "SELECT personID, famc FROM $people_table WHERE personID = '$person'";
   $result = tng_query($query);
   if ($result) {
     $ind = tng_fetch_assoc($result);
@@ -47,13 +47,11 @@ function getAncestor($person, $generation)
   }
 }
 
-function getCitations($persfamID)
-{
+function getCitations($persfamID) {
   global $citations_table;
-  global $tree;
 
   $citations = array();
-  $citquery = "SELECT citationID, page, quay, citedate, citetext, note, sourceID, description, eventID FROM $citations_table WHERE persfamID = \"$persfamID\" AND gedcom = \"$tree\" ORDER BY eventID";
+  $citquery = "SELECT citationID, page, quay, citedate, citetext, note, sourceID, description, eventID FROM $citations_table WHERE persfamID = '$persfamID' ORDER BY eventID";
   $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
   while ($cite = tng_fetch_assoc($citresult)) {
@@ -63,9 +61,9 @@ function getCitations($persfamID)
   return $citations;
 }
 
-function writeCitation($citelist, $level)
-{
-  global $allsources, $lineending;
+function writeCitation($citelist, $level) {
+  global $allsources;
+  global $lineending;
 
   $levelplus1 = $level + 1;
   $citestr = "";
@@ -107,9 +105,9 @@ function writeCitation($citelist, $level)
   return $citestr;
 }
 
-function getFact($row, $level)
-{
-  global $tree, $address_table, $lineending;
+function getFact($row, $level) {
+  global $address_table;
+  global $lineending;
 
   $fact = "";
   if ($row['age']) {
@@ -122,7 +120,7 @@ function getFact($row, $level)
     $fact .= "$level CAUS {$row['cause']}$lineending";
   }
   if ($row['addressID']) {
-    $query = "SELECT address1, address2, city, state, zip, country, phone, www, email FROM $address_table WHERE addressID = \"{$row['addressID']}\" AND gedcom = \"$tree\"";
+    $query = "SELECT address1, address2, city, state, zip, country, phone, www, email FROM $address_table WHERE addressID = \"{$row['addressID']}\"";
     $addrresults = tng_query($query);
     $addr = tng_fetch_assoc($addrresults);
     if ($row['tag'] != "ADDR") {
@@ -160,12 +158,11 @@ function getFact($row, $level)
   return $fact;
 }
 
-function getStdExtras($persfamID, $level)
-{
-  global $tree, $events_table;
+function getStdExtras($persfamID, $level) {
+  global $events_table;
 
   $stdex = array();
-  $query = "SELECT age, agency, cause, addressID, parenttag FROM $events_table WHERE persfamID = \"$persfamID\" AND gedcom = \"$tree\" AND parenttag != \"\" ORDER BY parenttag";
+  $query = "SELECT age, agency, cause, addressID, parenttag FROM $events_table WHERE persfamID = '$persfamID' AND parenttag != \"\" ORDER BY parenttag";
   $stdextras = tng_query($query);
   while ($stdextra = tng_fetch_assoc($stdextras)) {
     $stdex[$stdextra['parenttag']] = getFact($stdextra, $level);
@@ -200,17 +197,20 @@ function doEvent($custevent, $level)
   return $info;
 }
 
-function getNotes($id)
-{
-  global $notelinks_table, $xnotes_table, $tree, $eventtypes_table, $events_table, $xnotes;
+function getNotes($id) {
+  global $notelinks_table;
+  global $xnotes_table;
+  global $eventtypes_table;
+  global $events_table;
+  global $xnotes;
 
   $query = "SELECT $notelinks_table.ID as ID, secret, $xnotes_table.note as note, $xnotes_table.noteID as noteID, $notelinks_table.eventID
-    FROM $notelinks_table
-    LEFT JOIN  $xnotes_table on $notelinks_table.xnoteID = $xnotes_table.ID AND $notelinks_table.gedcom = $xnotes_table.gedcom
-    LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID
-    LEFT JOIN $eventtypes_table on $eventtypes_table.eventtypeID = $events_table.eventtypeID
-    WHERE $notelinks_table.persfamID=\"$id\" AND $notelinks_table.gedcom =\"$tree\"
-    ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum";
+      FROM $notelinks_table
+      LEFT JOIN  $xnotes_table on $notelinks_table.xnoteID = $xnotes_table.ID AND $notelinks_table.gedcom = $xnotes_table.gedcom
+      LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID
+      LEFT JOIN $eventtypes_table on $eventtypes_table.eventtypeID = $events_table.eventtypeID
+      WHERE $notelinks_table.persfamID = '$id'
+      ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum";
   $notelinks = tng_query($query);
   $notearray = array();
   while ($notelink = tng_fetch_assoc($notelinks)) {
@@ -320,14 +320,14 @@ function writeNote($level, $label, $notes)
   return $noteinfo;
 }
 
-function doXNotes()
-{
-  global $xnotes_table, $tree, $xnotes, $lineending;
+function doXNotes() {
+  global $xnotes_table;
+  global $xnotes;
+  global $lineending;
 
   if ($xnotes) {
-
     foreach ($xnotes as $xnote) {
-      $query = "SELECT note FROM $xnotes_table WHERE gedcom =\"$tree\" AND noteID = \"$xnote\" ORDER BY noteID";
+      $query = "SELECT note FROM $xnotes_table WHERE noteID = '$xnote' ORDER BY noteID";
       $xnotearray = tng_query($query);
       $xnotetxt = tng_fetch_assoc($xnotearray);
       echo "0 @$xnote@ NOTE$lineending";
@@ -339,9 +339,15 @@ function doXNotes()
 }
 
 function getFamily($person, $parents, $generation) {
-  global $tree, $famarray, $indarray, $families_table, $children_table, $people_table, $lineending, $gotfamily;
+  global $famarray;
+  global $indarray;
+  global $families_table;
+  global $children_table;
+  global $people_table;
+  global $lineending;
+  global $gotfamily;
 
-  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate FROM $families_table WHERE familyID = \"$parents\" AND gedcom = \"$tree\"";
+  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate FROM $families_table WHERE familyID = '$parents'";
   $result = tng_query($query);
   if ($result) {
     $family = tng_fetch_assoc($result);
@@ -353,7 +359,7 @@ function getFamily($person, $parents, $generation) {
 
       if ($family['husband']) {
         getAncestor($family['husband'], $generation);
-        $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate FROM $families_table WHERE husband = \"{$family['husband']}\" AND gedcom = \"$tree\" ORDER BY husborder";
+        $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate FROM $families_table WHERE husband = \"{$family['husband']}\" ORDER BY husborder";
         $result = tng_query($query);
         if ($result) {
           while ($spouse = tng_fetch_assoc($result)) {
@@ -376,7 +382,7 @@ function getFamily($person, $parents, $generation) {
 
       if ($family['wife']) {
         getAncestor($family['wife'], $generation);
-        $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate FROM $families_table WHERE wife = \"{$family['wife']}\" AND gedcom = \"$tree\" ORDER BY wifeorder";
+        $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate FROM $families_table WHERE wife = \"{$family['wife']}\" ORDER BY wifeorder";
         $result = tng_query($query);
         if ($result) {
           while ($spouse = tng_fetch_assoc($result)) {
@@ -397,7 +403,7 @@ function getFamily($person, $parents, $generation) {
         }
       }
       if ($generation > 1) {
-        $query = "SELECT familyID, $children_table.personID as personID, sealdate, sealplace, mrel, frel, living, private, branch FROM $children_table, $people_table WHERE familyID = \"$parents\" AND $children_table.gedcom = \"$tree\" AND $children_table.personID = $people_table.personID AND $children_table.gedcom = $people_table.gedcom ORDER BY ordernum";
+        $query = "SELECT familyID, $children_table.personID as personID, sealdate, sealplace, mrel, frel, living, private, branch FROM $children_table, $people_table WHERE familyID = \"$parents\" AND $children_table.personID = $people_table.personID AND $children_table.gedcom = $people_table.gedcom ORDER BY ordernum";
         $result = tng_query($query);
         if ($result) {
           while ($child = tng_fetch_assoc($result)) {
@@ -424,13 +430,15 @@ function getFamily($person, $parents, $generation) {
 }
 
 function appendParents($child) {
-  global $ldsOK, $lineending, $indarray, $righttree;
+  global $ldsOK;
+  global $lineending;
+  global $indarray;
 
   $info = "";
   if (!strstr($indarray[$child['personID']], "1 FAMC @{$child['familyID']}@")) {
     $info = "1 FAMC @{$child['familyID']}@$lineending";
   }
-  $crights = determineLivingPrivateRights($row, $righttree);
+  $crights = determineLivingPrivateRights($row);
   $child['allow_living'] = $crights['living'];
   $child['allow_private'] = $crights['private'];
   if ($crights['both']) {
@@ -470,7 +478,6 @@ function appendParents($child) {
 }
 
 function writeIndividual($person) {
-  global $tree;
   global $ldsOK;
   global $people_table;
   global $events_table;
@@ -480,16 +487,15 @@ function writeIndividual($person) {
   global $assoc_table;
   global $lineending;
   global $private;
-  global $righttree;
 
-  $query = "SELECT lastname, lnprefix, firstname, sex, title, prefix, suffix, nameorder, nickname, birthdate, birthplace, altbirthdate, altbirthplace, deathdate, deathplace, burialdate, burialplace, burialtype, baptdate, baptplace, confdate, confplace, initdate, initplace, endldate, endlplace, famc, living, private, branch, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate FROM $people_table WHERE personID = \"$person\" AND gedcom = \"$tree\"";
+  $query = "SELECT lastname, lnprefix, firstname, sex, title, prefix, suffix, nameorder, nickname, birthdate, birthplace, altbirthdate, altbirthplace, deathdate, deathplace, burialdate, burialplace, burialtype, baptdate, baptplace, confdate, confplace, initdate, initplace, endldate, endlplace, famc, living, private, branch, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate FROM $people_table WHERE personID = '$person'";
   $result = tng_query($query);
   if ($result) {
     $ind = tng_fetch_assoc($result);
     if ($ind['private']) {
       array_push($private, $person);
     }
-    $rights = determineLivingPrivateRights($ind, $righttree);
+    $rights = determineLivingPrivateRights($ind);
     $ind['allow_living'] = $rights['living'];
     $ind['allow_private'] = $rights['private'];
     if ($rights['both']) {
@@ -646,7 +652,7 @@ function writeIndividual($person) {
         $info .= $extras['BURI'];
       }
 
-      $query = "SELECT tag, description, eventdate, eventplace, age, agency, cause, addressID, info, eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"$person\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND parenttag = \"\" AND gedcom = \"$tree\" AND keep = \"1\" ORDER BY ordernum";
+      $query = "SELECT tag, description, eventdate, eventplace, age, agency, cause, addressID, info, eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"$person\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND parenttag = \"\" AND keep = \"1\" ORDER BY ordernum";
       $custevents = tng_query($query);
       while ($custevent = tng_fetch_assoc($custevents)) {
         $info .= doEvent($custevent, 1);
@@ -667,7 +673,7 @@ function writeIndividual($person) {
         $info .= doLDSEvent("ENDL", "endl", $indnotes['ENDL'], $citations['ENDL'], $extras['ENDL'], $ind);
       }
       //do associations
-      $query = "SELECT passocID, relationship FROM $assoc_table WHERE gedcom = \"$tree\" AND personID = \"$person\"";
+      $query = "SELECT passocID, relationship FROM $assoc_table WHERE personID = '$person'";
       $assocresult = tng_query($query);
       while ($assoc = tng_fetch_assoc($assocresult)) {
         $info .= "1 ASSO @{$assoc['passocID']}@$lineending";
@@ -723,14 +729,19 @@ function doLDSEvent($tag, $key, $notes, $citations, $extras, $row) {
 }
 
 function writeFamily($family) {
-  global $tree, $ldsOK, $events_table, $eventtypes_table, $citations, $lineending, $famarray, $private, $righttree;
+  global $ldsOK;
+  global $events_table;
+  global $eventtypes_table;
+  global $citations;
+  global $lineending;
+  global $famarray;
+  global $private;
 
   $familyID = $family['familyID'];
   if ($famarray[$familyID]) {
     return $famarray[$familyID];
   }
-
-  $frights = determineLivingPrivateRights($family, $righttree);
+  $frights = determineLivingPrivateRights($family);
   $family['allow_living'] = $frights['living'];
   $family['allow_private'] = $frights['private'];
 
@@ -796,7 +807,7 @@ function writeFamily($family) {
         $info .= $extras['DIV'];
       }
 
-      $query = "SELECT tag, description, eventdate, eventplace, age, agency, cause, addressID, info, eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"$familyID\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND parenttag = \"\" AND gedcom = \"$tree\" AND keep = \"1\" ORDER BY ordernum";
+      $query = "SELECT tag, description, eventdate, eventplace, age, agency, cause, addressID, info, eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"$familyID\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND parenttag = \"\" AND keep = \"1\" ORDER BY ordernum";
       $custevents = tng_query($query);
       while ($custevent = tng_fetch_assoc($custevents)) {
         $info .= doEvent($custevent, 1);
@@ -863,9 +874,15 @@ function processEntities($entarray) {
 }
 
 function getDescendant($person, $generation) {
-  global $tree, $maxgcgen, $famarray, $indarray, $families_table, $children_table, $people_table, $lineending;
+  global $maxgcgen;
+  global $famarray;
+  global $indarray;
+  global $families_table;
+  global $children_table;
+  global $people_table;
+  global $lineending;
 
-  $result = getPersonGender($tree, $person);
+  $result = getPersonGender($person);
   $row = tng_fetch_assoc($result);
   if ($row['sex'] == 'M') {
     $orderby = " ORDER BY husborder";
@@ -875,7 +892,7 @@ function getDescendant($person, $generation) {
     $orderby = "";
   }
   tng_free_result($result);
-  $query = "(SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate FROM $families_table WHERE husband = \"$person\" AND gedcom = \"$tree\") UNION (SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate FROM $families_table WHERE wife = \"$person\" AND gedcom = \"$tree\")$orderby";
+  $query = "(SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate FROM $families_table WHERE husband = '$person') UNION (SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate FROM $families_table WHERE wife = \"$person\")$orderby";
   $result = tng_query($query);
   if ($result) {
     while ($family = tng_fetch_assoc($result)) {
@@ -898,7 +915,7 @@ function getDescendant($person, $generation) {
           $indarray[$person] .= "1 FAMS @{$family['familyID']}@$lineending";
         }
         if ($generation > 0) {
-          $query = "SELECT $children_table.personID as personID, familyID, mrel, frel, living, private, branch FROM $children_table, $people_table WHERE familyID = \"{$family['familyID']}\" AND $children_table.personID = $people_table.personID AND $children_table.gedcom = \"$tree\" AND $people_table.gedcom = \"$tree\" ORDER BY ordernum";
+          $query = "SELECT $children_table.personID as personID, familyID, mrel, frel, living, private, branch FROM $children_table, $people_table WHERE familyID = \"{$family['familyID']}\" AND $children_table.personID = $people_table.personID ORDER BY ordernum";
           $result2 = tng_query($query);
           if ($result2) {
             while ($child = tng_fetch_assoc($result2)) {
@@ -927,7 +944,6 @@ function getDescendant($person, $generation) {
 }
 
 function doSources() {
-  global $tree;
   global $sources_table;
   global $events_table;
   global $eventtypes_table;
@@ -938,7 +954,7 @@ function doSources() {
   $newsources = array_unique($allsources);
   if ($newsources) {
     foreach ($newsources as $nextsource) {
-      $srcquery = "SELECT * FROM $sources_table WHERE sourceID = \"$nextsource\" AND gedcom = \"$tree\"";
+      $srcquery = "SELECT * FROM $sources_table WHERE sourceID = '$nextsource'";
       $srcresult = tng_query($srcquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       if ($srcresult) {
         $source = tng_fetch_assoc($srcresult);
@@ -970,7 +986,7 @@ function doSources() {
           }
         }
 
-        $query = "SELECT tag, description, eventdate, eventplace, info FROM $events_table, $eventtypes_table WHERE persfamID = \"{$source['sourceID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND type = \"S\" AND gedcom = \"$tree\" AND keep = \"1\" ORDER BY ordernum";
+        $query = "SELECT tag, description, eventdate, eventplace, info FROM $events_table, $eventtypes_table WHERE persfamID = \"{$source['sourceID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND type = \"S\" AND keep = \"1\" ORDER BY ordernum";
         $custevents = tng_query($query);
         while ($custevent = tng_fetch_assoc($custevents)) {
           echo doEvent($custevent, 1);
@@ -991,12 +1007,16 @@ function doSources() {
 }
 
 function doRepositories() {
-  global $tree, $repositories_table, $events_table, $eventtypes_table, $allrepos, $lineending;
+  global $repositories_table;
+  global $events_table;
+  global $eventtypes_table;
+  global $allrepos;
+  global $lineending;
 
   $newrepos = array_unique($allrepos);
   if ($newrepos) {
     foreach ($newrepos as $nextrepo) {
-      $repoquery = "SELECT * FROM $repositories_table WHERE repoID = \"$nextrepo\" AND gedcom = \"$tree\"";
+      $repoquery = "SELECT * FROM $repositories_table WHERE repoID = '$nextrepo'";
       $reporesult = tng_query($repoquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       if ($reporesult) {
         $repo = tng_fetch_assoc($reporesult);
@@ -1008,7 +1028,7 @@ function doRepositories() {
           echo getFact($repo, 1);
         }
 
-        $query = "SELECT tag, description, eventdate, eventplace, info FROM $events_table, $eventtypes_table WHERE persfamID = \"{$repo['repoID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND type = \"R\" AND gedcom = \"$tree\" AND keep = \"1\" ORDER BY ordernum";
+        $query = "SELECT tag, description, eventdate, eventplace, info FROM $events_table, $eventtypes_table WHERE persfamID = \"{$repo['repoID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND type = \"R\" AND keep = \"1\" ORDER BY ordernum";
         $custevents = tng_query($query);
         while ($custevent = tng_fetch_assoc($custevents)) {
           echo doEvent($custevent, 1);
@@ -1029,11 +1049,11 @@ if ($maxgcgen > 0 || $type == "all") {
     $maxgcgen = 999;
   }
 
-  $query = "SELECT firstname, lnprefix, lastname, suffix, living, private, branch FROM $people_table WHERE personID = \"$personID\" AND $people_table.gedcom = \"$tree\"";
+  $query = "SELECT firstname, lnprefix, lastname, suffix, living, private, branch FROM $people_table WHERE personID = '$personID'";
   $result = tng_query($query) or die("Cannot execute query: $query");
   if ($result) {
     $row = tng_fetch_assoc($result);
-    $rights = determineLivingPrivateRights($row, $righttree);
+    $rights = determineLivingPrivateRights($row);
     $row['allow_living'] = $rights['living'];
     $row['allow_private'] = $rights['private'];
     $namestr = getName($row);
@@ -1088,7 +1108,7 @@ if ($maxgcgen > 0 || $type == "all") {
       getDescendant($personID, $generation);
     } else {
       if ($type == "all") {
-        $query = "SELECT personID, sex FROM $people_table WHERE gedcom = \"$tree\"";
+        $query = "SELECT personID, sex FROM $people_table";
         $result = tng_query($query);
         while ($ind = tng_fetch_assoc($result)) {
           if (!array_key_exists($ind['personID'], $indarray)) {
@@ -1096,10 +1116,10 @@ if ($maxgcgen > 0 || $type == "all") {
           }
           $query = "";
           if ($ind['sex'] == 'M') {
-            $query = "SELECT familyID FROM $families_table WHERE husband = \"{$ind['personID']}\" AND gedcom = \"$tree\" ORDER BY wifeorder";
+            $query = "SELECT familyID FROM $families_table WHERE husband = \"{$ind['personID']}\" ORDER BY wifeorder";
           } else {
             if ($ind['sex'] == 'F') {
-              $query = "SELECT familyID FROM $families_table WHERE wife = \"{$ind['personID']}\" AND gedcom = \"$tree\" ORDER BY husborder";
+              $query = "SELECT familyID FROM $families_table WHERE wife = \"{$ind['personID']}\" ORDER BY husborder";
             }
           }
           if ($query) {
@@ -1113,12 +1133,12 @@ if ($maxgcgen > 0 || $type == "all") {
         }
         tng_free_result($result);
 
-        $query = "SELECT * FROM $families_table WHERE gedcom = \"$tree\"";
+        $query = "SELECT * FROM $families_table";
         $result = tng_query($query);
         while ($fam = tng_fetch_assoc($result)) {
           $famarray[$fam['familyID']] = writeFamily($fam);
 
-          $query = "SELECT personID as personID, mrel, frel FROM $children_table WHERE familyID = \"{$fam['familyID']}\" AND gedcom = \"$tree\" ORDER BY ordernum";
+          $query = "SELECT personID as personID, mrel, frel FROM $children_table WHERE familyID = \"{$fam['familyID']}\" ORDER BY ordernum";
           $result2 = tng_query($query);
           if ($result2) {
             while ($child = tng_fetch_assoc($result2)) {

@@ -27,7 +27,7 @@ $indnotes = getNotes($personID, 'I');
 getCitations($personID);
 $stdex = getStdExtras($personID);
 
-$result = getPersonFullPlusDates($tree, $personID);
+$result = getPersonFullPlusDates($personID);
 if (!tng_num_rows($result)) {
     tng_free_result($result);
     header("Location: thispagedoesnotexist.html");
@@ -36,9 +36,8 @@ if (!tng_num_rows($result)) {
 $flags['imgprev'] = true;
 
 $row = tng_fetch_assoc($result);
-$righttree = checktree($tree);
-$rightbranch = $righttree ? checkbranch($row['branch']) : false;
-$rights = determineLivingPrivateRights($row, $righttree, $rightbranch);
+$rightbranch = checkbranch($row['branch']);
+$rights = determineLivingPrivateRights($row, $rightbranch);
 $row['allow_living'] = $rights['living'];
 $row['allow_private'] = $rights['private'];
 if (!$rightbranch) {
@@ -48,14 +47,14 @@ $org_rightbranch = $rightbranch;
 $namestr = getName($row);
 $nameformap = $namestr;
 
-$treeResult = getTreeSimple($tree);
+$treeResult = getTreeSimple();
 $treerow = tng_fetch_assoc($treeResult);
 $disallowgedcreate = $treerow['disallowgedcreate'];
 $allowpdf = !$treerow['disallowpdf'] || ($allow_pdf && $rightbranch);
 tng_free_result($treeResult);
 
 $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $namestr);
-$treestr = "<a href='showtree.php?tree=$tree'>{$treerow['treename']}</a>";
+$treestr = "<a href='showtree.php'>{$treerow['treename']}</a>";
 if ($row['branch']) {
     //explode on commas
     $branches = explode(",", $row['branch']);
@@ -63,7 +62,7 @@ if ($row['branch']) {
     $branchstr = "";
     foreach ($branches as $branch) {
     $count++;
-    $brresult = getBranchesSimple($tree, $branch);
+    $brresult = getBranchesSimple($branch);
     $brrow = tng_fetch_assoc($brresult);
     $branchstr .= $brrow['description'] ? $brrow['description'] : $branch;
     if ($count < count($branches)) {
@@ -77,8 +76,8 @@ if ($row['branch']) {
 }
 tng_free_result($result);
 
-writelog("<a href='peopleShowPerson.php?personID=$personID&amp;tree=$tree'>" . uiTextSnippet('indinfofor') . " $logname ($personID)</a>");
-preparebookmark("<a href='peopleShowPerson.php?personID=$personID&amp;tree=$tree'>" . uiTextSnippet('indinfofor') . " $namestr ($personID)</a>");
+writelog("<a href='peopleShowPerson.php?personID=$personID'>" . uiTextSnippet('indinfofor') . " $logname ($personID)</a>");
+preparebookmark("<a href='peopleShowPerson.php?personID=$personID'>" . uiTextSnippet('indinfofor') . " $namestr ($personID)</a>");
 
 $headTitle = $namestr;
 if ($rights['both']) {
@@ -154,7 +153,7 @@ $headSection->setTitle($headTitle);
       if ($row['nickname']) {
         $persontext .= showEvent(array("text" => uiTextSnippet('nickname'), "fact" => $row['nickname'], "event" => "NICK", "entity" => $personID, "type" => 'I'));
       }
-      if ($row['private'] && $allowEdit && $allowAdd && $allowDelete && !$assignedtree) {
+      if ($row['private'] && $allowEdit && $allowAdd && $allowDelete) {
         $persontext .= showEvent(array("text" => uiTextSnippet('private'), "fact" => uiTextSnippet('yes')));
       }
       setEvent(array("text" => uiTextSnippet('born'), "fact" => $stdex['BIRT'], "date" => $row['birthdate'], "place" => $row['birthplace'], "event" => "BIRT", "entity" => $personID, "type" => 'I'), $row['birthdatetr']);
@@ -196,7 +195,7 @@ $headSection->setTitle($headTitle);
       $persontext .= showEvent($event);
     }
     if ($rights['both']) {
-      $assocresult = getAssociations($tree, $personID);
+      $assocresult = getAssociations($personID);
       while ($assoc = tng_fetch_assoc($assocresult)) {
         $persontext .= showEvent(array("text" => uiTextSnippet('association'), "fact" => formatAssoc($assoc)));
       }
@@ -227,7 +226,7 @@ $headSection->setTitle($headTitle);
         if ($row['changedate']) {
           $row['changedate'] .= " | ";
         }
-        $row['changedate'] .= "<a href='peopleEdit.php?personID=$personID&amp;tree=$tree&amp;cw=1' target='_blank'>" . uiTextSnippet('edit') . "</a>";
+        $row['changedate'] .= "<a href='peopleEdit.php?personID=$personID&amp;cw=1' target='_blank'>" . uiTextSnippet('edit') . "</a>";
       }
       $persontext .= showEvent(array("text" => uiTextSnippet('lastmodified'), "fact" => $row['changedate']));
     }
@@ -235,7 +234,7 @@ $headSection->setTitle($headTitle);
     $persontext .= "<br>\n";
 
     // do parents
-    $parents = getChildParentsFamily($tree, $personID);
+    $parents = getChildParentsFamily($personID);
 
     if ($parents && tng_num_rows($parents)) {
       while ($parent = tng_fetch_assoc($parents)) {
@@ -244,17 +243,17 @@ $headSection->setTitle($headTitle);
         $cellnumber = 0;
         resetEvents();
         getCitations($personID . "::" . $parent['familyID']);
-        $gotfather = getParentData($tree, $parent['familyID'], 'husband');
+        $gotfather = getParentData($parent['familyID'], 'husband');
 
         if ($gotfather) {
           $fathrow = tng_fetch_assoc($gotfather);
           $birthinfo = getBirthInfo($fathrow);
-          $frights = determineLivingPrivateRights($fathrow, $righttree);
+          $frights = determineLivingPrivateRights($fathrow);
           $fathrow['allow_living'] = $frights['living'];
           $fathrow['allow_private'] = $frights['private'];
           if ($fathrow['firstname'] || $fathrow['lastname']) {
             $fathname = getName($fathrow);
-            $fatherlink = "<a href='peopleShowPerson.php?personID={$fathrow['personID']}&amp;tree=$tree'>$fathname</a>";
+            $fatherlink = "<a href='peopleShowPerson.php?personID={$fathrow['personID']}'>$fathname</a>";
           }
           else {
             $fatherlink = "";
@@ -277,17 +276,17 @@ $headSection->setTitle($headTitle);
           }
           tng_free_result($gotfather);
         }
-        $gotmother = getParentData($tree, $parent['familyID'], 'wife');
+        $gotmother = getParentData($parent['familyID'], 'wife');
 
         if ($gotmother) {
           $mothrow = tng_fetch_assoc($gotmother);
           $birthinfo = getBirthInfo($mothrow);
-          $mrights = determineLivingPrivateRights($mothrow, $righttree);
+          $mrights = determineLivingPrivateRights($mothrow);
           $mothrow['allow_living'] = $mrights['living'];
           $mothrow['allow_private'] = $mrights['private'];
           if ($mothrow['firstname'] || $mothrow['lastname']) {
             $mothname = getName($mothrow);
-            $motherlink = "<a href=\"peopleShowPerson.php?personID={$mothrow['personID']}&amp;tree=$tree\">$mothname</a>";
+            $motherlink = "<a href=\"peopleShowPerson.php?personID={$mothrow['personID']}\">$mothname</a>";
           }
           else {
             $motherlink = "";
@@ -313,13 +312,13 @@ $headSection->setTitle($headTitle);
         if ($rights['both'] && $rights['lds'] && $tngconfig['pardata'] < 2) {
           setEvent(array("text" => uiTextSnippet('sealedplds'), "date" => $parent['sealdate'], "place" => $parent['sealplace'], "event" => "SLGC", "entity" => "$personID::{$parent['familyID']}", "type" => "C", "nomap" => 1), $parent['sealdatetr']);
         }
-        $gotparents = getFamilyData($tree, $parent['familyID']);
+        $gotparents = getFamilyData($parent['familyID']);
         $parentrow = tng_fetch_assoc($gotparents);
         tng_free_result($gotparents);
         $parent['personID'] = "";
 
         if ($tngconfig['pardata'] < 2) {
-          $prights = determineLivingPrivateRights($parentrow, $righttree);
+          $prights = determineLivingPrivateRights($parentrow);
           $parentrow['allow_living'] = $prights['living'];
           $parentrow['allow_private'] = $prights['private'];
 
@@ -349,7 +348,7 @@ $headSection->setTitle($headTitle);
             foreach ($events as $event) {
               $persontext .= showEvent($event);
             }
-            $assocresult = getAssociations($tree, $parent['familyID']);
+            $assocresult = getAssociations($parent['familyID']);
             while ($assoc = tng_fetch_assoc($assocresult)) {
               $persontext .= showEvent(array("text" => uiTextSnippet('association'), "fact" => formatAssoc($assoc)));
             }
@@ -377,7 +376,7 @@ $headSection->setTitle($headTitle);
             }
           }
         }
-        $persontext .= showEvent(array("text" => uiTextSnippet('familyid'), "date" => $parent['familyID'], "place" => "<a href=\"familiesShowFamily.php?familyID={$parent['familyID']}&amp;tree=$tree\">" . uiTextSnippet('groupsheet') . "</a>", "np" => 1));
+        $persontext .= showEvent(array("text" => uiTextSnippet('familyid'), "date" => $parent['familyID'], "place" => "<a href=\"familiesShowFamily.php?familyID={$parent['familyID']}\">" . uiTextSnippet('groupsheet') . "</a>", "np" => 1));
         $persontext .= "</table>\n";
         $persontext .= "<br>\n";
       }
@@ -385,15 +384,15 @@ $headSection->setTitle($headTitle);
     }
     // marriages
     if ($spouseorder) {
-      $marriages = getSpouseFamilyFull($tree, $self, $personID, $spouseorder);
+      $marriages = getSpouseFamilyFull($self, $personID, $spouseorder);
     }
     else {
-      $marriages = getSpouseFamilyFullUnion($tree, $personID);
+      $marriages = getSpouseFamilyFullUnion($personID);
     }
     $marrtot = tng_num_rows($marriages);
     if (!$marrtot) {
       if ($spouseorder) {
-        $marriages = getSpouseFamilyFullUnion($tree, $personID);
+        $marriages = getSpouseFamilyFullUnion($personID);
         $marrtot = tng_num_rows($marriages);
       }
       $spouseorder = 0;
@@ -420,15 +419,15 @@ $headSection->setTitle($headTitle);
       unset($spouserow);
       unset($birthinfo);
       if ($marriagerow[$spouse]) {
-        $spouseresult = getPersonData($tree, $marriagerow[$spouse]);
+        $spouseresult = getPersonData($marriagerow[$spouse]);
         $spouserow = tng_fetch_assoc($spouseresult);
         $birthinfo = getBirthInfo($spouserow);
-        $srights = determineLivingPrivateRights($spouserow, $righttree);
+        $srights = determineLivingPrivateRights($spouserow);
         $spouserow['allow_living'] = $srights['living'];
         $spouserow['allow_private'] = $srights['private'];
         if ($spouserow['firstname'] || $spouserow['lastname']) {
           $spousename = getName($spouserow);
-          $spouselink = "<a href=\"peopleShowPerson.php?personID={$spouserow['personID']}&amp;tree=$tree\">$spousename</a>";
+          $spouselink = "<a href=\"peopleShowPerson.php?personID={$spouserow['personID']}\">$spousename</a>";
         }
         if ($srights['both']) {
           $spouselink .= $birthinfo;
@@ -453,7 +452,7 @@ $headSection->setTitle($headTitle);
         $persontext .= showEvent(array("text" => uiTextSnippet('family') . "$marrstr", "fact" => $spouselink));
       }
       $rightfbranch = checkbranch($marriagerow['branch']) ? 1 : 0;
-      $marrights = determineLivingPrivateRights($marriagerow, $righttree);
+      $marrights = determineLivingPrivateRights($marriagerow);
       $marriagerow['allow_living'] = $marrights['living'];
       $marriagerow['allow_private'] = $marrights['private'];
       $fammedia = getMedia($marriagerow, 'F');
@@ -472,7 +471,7 @@ $headSection->setTitle($headTitle);
         foreach ($events as $event) {
           $persontext .= showEvent($event);
         }
-        $assocresult = getAssociations($tree, $marriagerow['familyID']);
+        $assocresult = getAssociations($marriagerow['familyID']);
         while ($assoc = tng_fetch_assoc($assocresult)) {
           $persontext .= showEvent(array("text" => uiTextSnippet('association'), "fact" => formatAssoc($assoc)));
         }
@@ -495,7 +494,7 @@ $headSection->setTitle($headTitle);
       $marrcount++;
 
       // children
-      $children = getChildrenData($tree, $marriagerow['familyID']);
+      $children = getChildrenData($marriagerow['familyID']);
 
       if ($children && tng_num_rows($children)) {
         $persontext .= "<tr>\n";
@@ -506,17 +505,17 @@ $headSection->setTitle($headTitle);
         $persontext .= "<table class='table table-sm table-striped'>\n";
         while ($child = tng_fetch_assoc($children)) {
           $childID = $child['personID'];
-          $child['gedcom'] = $tree;
-          $ifkids = $child['haskids'] ? "<a href=\"descend.php?personID=$childID&amp;tree=$tree\" title=\"" . uiTextSnippet('descendants') . "\" class=\"descindicator\"><strong>+</strong></a>" : "&nbsp;";
+          $child['gedcom'] = '';
+          $ifkids = $child['haskids'] ? "<a href=\"descend.php?personID=$childID\" title=\"" . uiTextSnippet('descendants') . "\" class=\"descindicator\"><strong>+</strong></a>" : "&nbsp;";
           $birthinfo = getBirthInfo($child);
-          $crights = determineLivingPrivateRights($child, $righttree);
+          $crights = determineLivingPrivateRights($child);
           $child['allow_living'] = $crights['living'];
           $child['allow_private'] = $crights['private'];
           if ($child['firstname'] || $child['lastname']) {
             $childname = getName($child);
             $persontext .= "<tr>\n";
             $persontext .= "<td width='10'>$ifkids</td>\n";
-            $persontext .= "<td id=\"child$childID\"><span>$kidcount. <a href=\"peopleShowPerson.php?personID=$childID&amp;tree=$tree\">$childname</a>";
+            $persontext .= "<td id=\"child$childID\"><span>$kidcount. <a href=\"peopleShowPerson.php?personID=$childID\">$childname</a>";
             if ($crights['both']) {
               $persontext .= $birthinfo;
               $age = age($child);
@@ -546,11 +545,11 @@ $headSection->setTitle($headTitle);
           if ($marriagerow['changedate']) {
             $marriagerow['changedate'] .= " | ";
           }
-          $marriagerow['changedate'] .= "<a href=\"familiesEdit.php?familyID={$marriagerow['familyID']}&amp;tree=$tree&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>";
+          $marriagerow['changedate'] .= "<a href=\"familiesEdit.php?familyID={$marriagerow['familyID']}&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>";
         }
         $persontext .= showEvent(array("text" => uiTextSnippet('lastmodified'), "fact" => $marriagerow['changedate']));
       }
-      $persontext .= showEvent(array("text" => uiTextSnippet('familyid'), "date" => $marriagerow['familyID'], "place" => "<a href=\"familiesShowFamily.php?familyID={$marriagerow['familyID']}&amp;tree=$tree\">" . uiTextSnippet('groupsheet') . "</a>", "np" => 1));
+      $persontext .= showEvent(array("text" => uiTextSnippet('familyid'), "date" => $marriagerow['familyID'], "place" => "<a href=\"familiesShowFamily.php?familyID={$marriagerow['familyID']}\">" . uiTextSnippet('groupsheet') . "</a>", "np" => 1));
       $persontext .= "</table>\n";
       $persontext .= "<br>\n";
     }
@@ -774,7 +773,7 @@ $headSection->setTitle($headTitle);
       $innermenu = "<span>" . uiTextSnippet('persinfo') . "</span>\n";
     }
     if ($allowpdf) {
-      $innermenu .= " &nbsp;&nbsp; | &nbsp;&nbsp; <a href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ind&amp;personID=$personID&amp;tree=$tree');return false;\">PDF</a>\n";
+      $innermenu .= " &nbsp;&nbsp; | &nbsp;&nbsp; <a href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ind&amp;personID=$personID');return false;\">PDF</a>\n";
     }
     $rightbranch = $org_rightbranch;
 

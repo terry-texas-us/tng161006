@@ -1,20 +1,7 @@
 <?php
 require 'tng_begin.php';
 
-if ($tree && !$tngconfig['places1tree']) {
-  $treestr = "tree=$tree&amp;";
-  $treestr2 = "tree=$tree";
-  $places_url = "placesMain.php?";
-  $logstring = "<a href=\"places-all.php?$treestr2\">" . uiTextSnippet('allplaces') . " (" . uiTextSnippet('tree') . ": $tree)</a>";
-  $wherestr = "WHERE gedcom = \"$tree\"";
-  $wherestr2 = "AND gedcom = \"$tree\"";
-} else {
-  $treestr = $treestr2 = "";
-  $places_url = "placesMain.php";
-  $logstring = "<a href='places-all.php'>" . uiTextSnippet('allplaces') . "</a>";
-  $wherestr = "";
-  $wherestr2 = "";
-}
+$logstring = "<a href='places-all.php'>" . uiTextSnippet('allplaces') . "</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -33,13 +20,10 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": " . uiTextSnippet('allpla
     <h2><img class='icon-md' src='svg/location.svg'><?php echo uiTextSnippet('placelist') . ": " . uiTextSnippet('allplaces'); ?></h2>
     <br class='clearleft'>
     <?php
-    if (!$tngconfig['places1tree']) {
-      echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'places-all', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
-    }
     $offset = 1;
 
     $linkstr = "";
-    $query = "SELECT distinct ucase(left(trim(substring_index(place,',',-$offset)),1)) as firstchar FROM $places_table $wherestr GROUP BY firstchar ORDER by firstchar";
+    $query = "SELECT distinct ucase(left(trim(substring_index(place,',',-$offset)),1)) as firstchar FROM $places_table GROUP BY firstchar ORDER by firstchar";
     $result = tng_query($query);
     if ($result) {
       $initialchar = 1;
@@ -67,15 +51,12 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": " . uiTextSnippet('allpla
       <?php
       beginFormElement("places-oneletter", "get");
       echo uiTextSnippet('placescont') . ": <input name='psearch' type='text' />\n";
-      if ($tree && !$tngconfig['places1tree']) {
-        echo "<input name='tree' type='hidden' value=\"$tree\" />\n";
-      }
       echo "<input name='stretch' type='hidden' value='1'>\n";
       echo "<input name='pgo' type='submit' value=\"" . uiTextSnippet('go') . "\" />\n";
       endFormElement();
       ?>
 
-      <br><?php echo "<a href=\"$places_url" . "$treestr2\">" . uiTextSnippet('mainplacepage') . "</a>"; ?>
+      <br><?php echo "<a href='placesMain.php'>" . uiTextSnippet('mainplacepage') . "</a>"; ?>
     </div>
     <br>
     <p class="small"><?php echo uiTextSnippet('showmatchingplaces'); ?></p>
@@ -92,7 +73,7 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": " . uiTextSnippet('allpla
             <tr>
               <td class="plcol">
                 <?php
-                $query = "SELECT trim(substring_index(place,',',-$offset)) as myplace, count(place) as placecount FROM $places_table WHERE trim(substring_index(place,',',-$offset)) LIKE \"$urlfirstchar%\" $wherestr2 GROUP BY myplace ORDER by myplace";
+                $query = "SELECT trim(substring_index(place,',',-$offset)) as myplace, count(place) as placecount FROM $places_table WHERE trim(substring_index(place,',',-$offset)) LIKE \"$urlfirstchar%\" GROUP BY myplace ORDER by myplace";
                 $result = tng_query($query);
                 $topnum = tng_num_rows($result);
                 if ($result) {
@@ -121,19 +102,16 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": " . uiTextSnippet('allpla
                       $placetitle = $place['myplace'];
                     }
 
-                    $query = "SELECT count(place) as placecount FROM $places_table WHERE place = \"$place3\" $wherestr2";
+                    $query = "SELECT count(place) as placecount FROM $places_table WHERE place = '$place3'";
                     $result2 = tng_query($query);
                     $countrow = tng_fetch_assoc($result2);
                     $specificcount = $countrow['placecount'];
                     tng_free_result($result2);
 
-                    $searchlink = $specificcount ? " <a href=\"placesearch.php?{$treestr}psearch=$place2\" title=\"" .
+                    $searchlink = $specificcount ? " <a href=\"placesearch.php?psearch=$place2\" title=\"" .
                             uiTextSnippet('findplaces') . "\"><img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=\"uiTextSnippet(findplaces)\"></a>" : "";
                     if ($place['placecount'] > 1 || ($place['myplace'] != $place['wholeplace'] && !$commaOnEnd)) {
                       $name = "<a href=\"places-oneletter.php?" . $poffset;
-                      if ($tree && !$tngconfig['places1tree']) {
-                        $name .= "tree={$place['gedcom']}&amp;";
-                      }
                       $name .= "psearch=$place2\">" . str_replace(array("<", ">"), array("&lt;", "&gt;"), $place['myplace']) . "</a>";
                       echo "$snnum. $name ({$place['placecount']})$searchlink<br>\n";
                     } else {

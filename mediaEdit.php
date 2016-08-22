@@ -44,13 +44,7 @@ if ($row['form']) {
   preg_match("/\.(.+)$/", $row['path'], $matches);
   $form = strtoupper($matches[1]);
 }
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-  $tree = $assignedtree;
-} else {
-  $wherestr = "";
-}
-$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
 $treenum = 0;
 
@@ -152,9 +146,9 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
     $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('browse'), "findmedia"]);
     $navList->appendItem([$allowMediaAdd, "mediaAdd.php", uiTextSnippet('add'), "addmedia"]);
     $navList->appendItem([$allowMediaEdit, "mediaSort.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    $navList->appendItem([$allowMediaEdit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
+    $navList->appendItem([$allowMediaEdit, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
+    $navList->appendItem([$allowMediaAdd, "mediaImport.php", uiTextSnippet('import'), "import"]);
+    $navList->appendItem([$allowMediaAdd, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
     $navList->appendItem([$allowMediaEdit, "#", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
@@ -209,7 +203,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                       }
                       ?>
                     </select>
-                    <?php if (!$assignedtree && $allowAdd && $allowEdit && $allowDelete) { ?>
+                    <?php if ($allowAdd && $allowEdit && $allowDelete) { ?>
                       <input name='addnewmediatype' type='button' value="<?php echo uiTextSnippet('addnewcoll'); ?>"
                              onclick="tnglitbox = new ModalDialog('admin_newcollection.php?field=mediatypeID');">
                       <input id='editmediatype' name='editmediatype' type='button' value="<?php echo uiTextSnippet('edit'); ?>"
@@ -349,40 +343,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                     <input name='datetaken' type='text' value="<?php echo $row['datetaken']; ?>" size='40' onblur="checkDate(this);">
                   </td>
                 </tr>
-                <tr>
-                  <td><?php echo uiTextSnippet('tree'); ?>:</td>
-                  <td>
-                    <?php
-                    if ($assignedtree) {
-                      if ($row['gedcom']) {
-                        $treeresult = tng_query($treequery);
-                        $treerow = tng_fetch_assoc($treeresult);
-                        echo $treerow['treename'];
-                        tng_free_result($treeresult);
-                      } else {
-                        echo uiTextSnippet('alltrees');
-                      }
-                      echo "<input name='tree' type='hidden' value=\"{$row['gedcom']}\">";
-                    } else {
-                      echo "<select name=\"tree\" onchange=\"$('#microtree').val($(this).val());\">";
-                      echo "  <option value=''>" . uiTextSnippet('alltrees') . "</option>\n";
-                      if ($row['gedcom']) {
-                        $tree = $row['gedcom'];
-                      }
-                      $treeresult = tng_query($treequery);
-                      while ($treerow = tng_fetch_assoc($treeresult)) {
-                        echo "  <option value=\"{$treerow['gedcom']}\"";
-                        if ($treerow['gedcom'] == $row['gedcom']) {
-                          echo " selected";
-                        }
-                        echo ">{$treerow['treename']}</option>\n";
-                      }
-                      echo "</select>\n";
-                      tng_free_result($treeresult);
-                    }
-                    ?>
-                  </td>
-                </tr>
+                
                 <!-- headstone section -->
                 <tr id="cemrow">
                   <td><?php echo uiTextSnippet('cemetery'); ?>:</td>
@@ -737,8 +698,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
     });
 
     $('#myimg').mouseup(function () {
-      var tree = $('#maptree').val();
-      findItem('I', 'imagemap', '', tree, assignedbranch);
+      findItem('I', 'imagemap', '', assignedbranch);
       $("#current").attr({id: ''});
     });
   });

@@ -4,12 +4,6 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-if (!isset($tree)) {
-  $tree = "";
-}
-
-$wherestr = "WHERE gedcom = \"$tree\"";
-
 $query = "SELECT $eventtypes_table.eventtypeID, tag, display FROM $events_table
     LEFT JOIN  $eventtypes_table on $eventtypes_table.eventtypeID = $events_table.eventtypeID 
     WHERE eventID=\"$eventID\"";
@@ -47,7 +41,7 @@ header("Content-type:text/html; charset=" . $session_charset);
 $xnotestr = $noteID ? " OR persfamID = \"$noteID\"" : "";
 $query = "SELECT citationID, $citations_table.sourceID as sourceID, description, title, shorttitle
     FROM $citations_table LEFT JOIN $sources_table on $citations_table.sourceID = $sources_table.sourceID AND $sources_table.gedcom = $citations_table.gedcom
-    WHERE $citations_table.gedcom = \"$tree\" AND ((persfamID = \"$persfamID\" AND eventID = \"$eventID\")$xnotestr) ORDER BY ordernum, citationID";
+    WHERE ((persfamID = \"$persfamID\" AND eventID = \"$eventID\")$xnotestr) ORDER BY ordernum, citationID";
 $citresult = tng_query($query);
 $citationcount = tng_num_rows($citresult);
 ?>
@@ -96,7 +90,7 @@ $citationcount = tng_num_rows($citresult);
               $actionstr .= "</a>";
             }
             if ($allowDelete) {
-              $actionstr .= "<a href='#' onclick=\"return deleteCitation({$citation['citationID']},'$persfamID','$tree','$eventID');\" title='" . uiTextSnippet('delete') . "'>\n";
+              $actionstr .= "<a href='#' onclick=\"return deleteCitation({$citation['citationID']},'$persfamID','$eventID');\" title='" . uiTextSnippet('delete') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
               $actionstr .= "</a>";
             }
@@ -143,7 +137,7 @@ $citationcount = tng_num_rows($citresult);
             <?php
             if (isset($_SESSION['lastcite'])) {
               $parts = explode("|", $_SESSION['lastcite']);
-              if ($parts[0] == $tree) {
+              if ($parts[0] == '') {
                 echo "<input type='button' value=\"" . uiTextSnippet('copylast') . "\" onclick=\"return copylast(document.citeform2,'{$parts[1]}');\">";
                 echo "&nbsp; <img src=\"img/spinner.gif\" id=\"lastspinner\" style=\"vertical-align:-3px; display:none\">";
               }
@@ -195,7 +189,6 @@ $citationcount = tng_num_rows($citresult);
     </div> <!-- .modal-body -->
     <footer class='modal-footer'>
       <input name='persfamID' type='hidden' value="<?php echo $persfamID; ?>"/>
-      <input name='tree' type='hidden' value="<?php echo $tree; ?>"/>
       <input name='eventID' type='hidden' value="<?php echo $eventID; ?>"/>
       <input name='submit' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
       <p>
@@ -206,7 +199,7 @@ $citationcount = tng_num_rows($citresult);
 </div>
 <div id='editcitation' style='display: none;'></div>
 
-<?php $applyfilter = "applyFilter({form:'findsourceform1', fieldId:'mytitle', type:'S', tree:'$tree', destdiv:'sourceresults'});"; ?>
+<?php $applyfilter = "applyFilter({form:'findsourceform1', fieldId:'mytitle', type:'S', destdiv:'sourceresults'});"; ?>
 <div id='findsource' style='display: none;'>
   <form action="" method='post' name="findsourceform1" id="findsourceform1" onsubmit="return <?php echo $applyfilter; ?>">
     <header class='modal-header'>
@@ -220,7 +213,7 @@ $citationcount = tng_num_rows($citresult);
           <td><?php echo uiTextSnippet('title'); ?>:</td>
           <td>
             <input id='mytitle' name='mytitle' type='text'
-                   onkeyup="filterChanged(event, {form: 'findsourceform1', fieldId: 'mytitle', type: 'S', tree: '<?php echo $tree; ?>', destdiv: 'sourceresults'});"/>
+                   onkeyup="filterChanged(event, {form: 'findsourceform1', fieldId: 'mytitle', type: 'S', destdiv: 'sourceresults'});"/>
           </td>
           <td>
             <input type='submit' value="<?php echo uiTextSnippet('search'); ?>"> 
@@ -272,7 +265,6 @@ $citationcount = tng_num_rows($citresult);
         </div>
         <div id='checkmsg'></div>
       </div>
-      <input name='tree1' type='hidden' value="<?php echo $tree; ?>"/>
       <?php require 'micro_newsource.php'; ?>
       <p><strong><?php echo uiTextSnippet('sevslater'); ?></strong></p>
     </div> <!-- .modal-body -->

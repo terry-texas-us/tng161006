@@ -25,20 +25,17 @@ if ($child) {
     }
   }
 }
-
 if ($newperson) {
-  $query = "SELECT personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch, gedcom FROM $people_table WHERE personID = \"$newperson\" AND gedcom = \"$tree\"";
+  $query = "SELECT personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch, gedcom FROM $people_table WHERE personID = '$newperson'";
   $result = tng_query($query);
   $newpersonrow = tng_fetch_assoc($result);
 
-  $righttree = checktree($tree);
-  $rightbranch = $righttree ? checkbranch($newpersonrow['branch']) : false;
-  $rights = determineLivingPrivateRights($newpersonrow, $righttree, $rightbranch);
+  $rightbranch = checkbranch($newpersonrow['branch']);
+  $rights = determineLivingPrivateRights($newpersonrow, $rightbranch);
   $newpersonrow['allow_living'] = $rights['living'];
   $newpersonrow['allow_private'] = $rights['private'];
   tng_free_result($result);
 }
-
 if ($husband) {
   $husbstr = getName($newpersonrow) . " - $husband";
 } else {
@@ -52,13 +49,7 @@ if (!isset($husbstr)) {
 if (!isset($wifestr)) {
   $wifestr = uiTextSnippet('clickfind');
 }
-
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-} else {
-  $wherestr = "";
-}
-$query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $result = tng_query($query);
 
 $revstar = checkReview('F');
@@ -92,26 +83,6 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
               <tr>
                 <td colspan='2'>
                   <span><strong><?php echo uiTextSnippet('prefixfamilyid'); ?></strong></span></td>
-              </tr>
-              <tr>
-                <td><?php echo uiTextSnippet('tree'); ?>:</td>
-                <td>
-                  <select id='gedcom' name='tree1'>
-                    <?php
-                    $firsttree = $assignedtree;
-                    while ($row = tng_fetch_assoc($result)) {
-                      if (!$firsttree) {
-                        $firsttree = $row['gedcom'];
-                      }
-                      echo "  <option value=\"{$row['gedcom']}\"";
-                      if ($tree == $row['gedcom']) {
-                        echo " selected";
-                      }
-                      echo ">{$row['treename']}</option>\n";
-                    }
-                    ?>
-                  </select>
-                </td>
               </tr>
               <tr>
                 <td><?php echo uiTextSnippet('branch'); ?>:</td>
@@ -189,7 +160,7 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
                     <input id='husbnameplusid' name='husbnameplusid' type='text' size='40' value="<?php echo "$husbstr"; ?>" readonly>
                     <input id='husband' name='husband' type='hidden' value="<?php echo $husband; ?>">
                     <input type='button' value="<?php echo uiTextSnippet('find'); ?>"
-                           onclick="return findItem('I', 'husband', 'husbnameplusid', document.form1.tree1.options[document.form1.tree1.selectedIndex].value, '<?php echo $assignedbranch; ?>');">
+                           onclick="return findItem('I', 'husband', 'husbnameplusid', '<?php echo $assignedbranch; ?>');">
                     <input type='button' value="<?php echo uiTextSnippet('create'); ?>"
                            onclick="return openCreatePersonForm('husband', 'husbnameplusid', 'spouse', 'M');">
                     <input type='button' value="  <?php echo uiTextSnippet('edit'); ?>  "
@@ -203,7 +174,7 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
                   <td><input id='wifenameplusid' name='wifenameplusid' type='text' size='40' value="<?php echo "$wifestr"; ?>" readonly>
                     <input id='wife' name='wife' type='hidden' value="<?php echo $wife; ?>">
                     <input type='button' value="<?php echo uiTextSnippet('find'); ?>"
-                           onclick="return findItem('I', 'wife', 'wifenameplusid', document.form1.tree1.options[document.form1.tree1.selectedIndex].value, '<?php echo $assignedbranch; ?>');">
+                           onclick="return findItem('I', 'wife', 'wifenameplusid', '<?php echo $assignedbranch; ?>');">
                     <input type='button' value="<?php echo uiTextSnippet('create'); ?>"
                            onclick="return openCreatePersonForm('wife', 'wifenameplusid', 'spouse', 'F');">
                     <input type='button' value="  <?php echo uiTextSnippet('edit'); ?>  "
@@ -276,8 +247,6 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
   var tnglitbox;
   var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;
   var preferDateFormat = '<?php echo $preferDateFormat; ?>';
-
-  var tree = '<?php echo $tree; ?>';
 </script>
 <script src="js/selectutils.js"></script>
 <script src="js/datevalidation.js"></script>
@@ -297,7 +266,7 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
   }
 
   <?php
-  if (!$assignedtree && !$assignedbranch) {
+  if (!$assignedbranch) {
     include 'branchlibjs.php';
   } else {
     $swapbranches = "";
@@ -323,7 +292,7 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
   function EditSpouse(field) {
     var tree = getTree(document.form1.tree1);
     if (field.value.length)
-      deepOpen('peopleEdit.php?personID=' + field.value + '&tree=' + tree + '&cw=1', 'editspouse');
+      deepOpen('peopleEdit.php?personID=' + field.value + '&cw=1', 'editspouse');
   }
 
   function RemoveSpouse(spouse, spousedisplay) {

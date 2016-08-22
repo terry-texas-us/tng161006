@@ -4,16 +4,15 @@ var activeidbox, activenamebox, tnglitbox;
 
 $('#find-husband').on('click', function () {
     'use strict';
-    var $tree = $(this).data('tree');
     var $assignedBranch = $(this).data('assignedBranch');
-    return findItem('I', 'husband', 'husbnameplusid', $tree, $assignedBranch);
+    return findItem('I', 'husband', 'husbnameplusid', $assignedBranch);
 });
 
 $('#create-husband').on('click', function () {
     'use strict';
     activeidbox = 'husband';
     activenamebox = 'husbnameplusid';
-    var url = 'admin_newperson2.php?tree=' + document.form1.tree.value + '&type=spouse' + '&familyID=' + document.form1.familyID.value + '&father=&gender=M';
+    var url = 'admin_newperson2.php?type=spouse' + '&familyID=' + document.form1.familyID.value + '&father=&gender=M';
     tnglitbox = new ModalDialog(url);
 //      generateID('person', document.npform.personID);
     $('#firstname').focus();
@@ -24,7 +23,7 @@ $('#edit-husband').on('click', function () {
     'use strict';
     var field = document.form1.husband;
     if (field.value.length) {
-        deepOpen('peopleEdit.php?personID=' + field.value + '&tree=' + document.form1.tree.value + '&cw=1', 'editspouse');
+        deepOpen('peopleEdit.php?personID=' + field.value + '&cw=1', 'editspouse');
     }
 });
 
@@ -38,16 +37,15 @@ $('#remove-husband').on('click', function () {
 
 $('#find-wife').on('click', function () {
     'use strict';
-    var $tree = $(this).data('tree');
     var $assignedBranch = $(this).data('assignedBranch');
-    return findItem('I', 'wife', 'wifenameplusid', $tree, $assignedBranch);
+    return findItem('I', 'wife', 'wifenameplusid', $assignedBranch);
 });
 
 $('#create-wife').on('click', function () {
     'use strict';
     activeidbox = 'wife';
     activenamebox = 'wifenameplusid';
-    var url = 'admin_newperson2.php?tree=' + document.form1.tree.value + '&type=spouse' + '&familyID=' + document.form1.familyID.value + '&father=&gender=F';
+    var url = 'admin_newperson2.php?type=spouse' + '&familyID=' + document.form1.familyID.value + '&father=&gender=F';
     tnglitbox = new ModalDialog(url);
 //      generateID('person', document.npform.personID);
     $('#firstname').focus();
@@ -58,7 +56,7 @@ $('#edit-wife').on('click', function () {
     'use strict';
     var field = document.form1.wife;
     if (field.value.length) {
-        deepOpen('peopleEdit.php?personID=' + field.value + '&tree=' + document.form1.tree.value + '&cw=1', 'editspouse');
+        deepOpen('peopleEdit.php?personID=' + field.value + '&cw=1', 'editspouse');
     }
 });
 
@@ -101,21 +99,20 @@ $('#delete-child').on('click', function () {
 $('#edit-child').on('click', function () {
     'use strict';
     var $childId = $(this).data('childId');
-    deepOpen('peopleEdit.php?personID=' + $childId + '&tree=' + document.form1.tree.value + '&cw=1', 'editchild');
+    deepOpen('peopleEdit.php?personID=' + $childId + '&cw=1', 'editchild');
 });
 
 $('#find-children').on('click', function () {
     'use strict';
-    var $tree = $(this).data('tree');
     var $assignedBranch = $(this).data('assignedBranch');
-    return findItem('I', 'children', null, $tree, $assignedBranch);
+    return findItem('I', 'children', null, $assignedBranch);
 });
 
 $('#create-child').on('click', function () {
     'use strict';
     activeidbox = '';
     activenamebox = '';
-    var url = 'admin_newperson2.php?tree=' + document.form1.tree.value + '&type=child' + '&familyID=' + document.form1.familyID.value + '&father=' + document.form1.husband.value + '&gender=';
+    var url = 'admin_newperson2.php?type=child' + '&familyID=' + document.form1.familyID.value + '&father=' + document.form1.husband.value + '&gender=';
     tnglitbox = new ModalDialog(url);
 //      generateID('person', document.npform.personID);
     $('#firstname').focus();

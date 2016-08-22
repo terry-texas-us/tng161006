@@ -6,11 +6,6 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-if ($assignedtree) {
-  $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
-  exit;
-}
 $query = "SELECT userID, description, username, gedcom, branch, allow_edit, allow_add, allow_delete, allow_living, allow_lds, allow_ged, realname, email, DATE_FORMAT(dt_registered,\"%d %b %Y %H:%i:%s\") as dt_registered_fmt FROM $users_table WHERE allow_living = \"-1\"ORDER BY dt_registered DESC";
 $result = tng_query($query);
 

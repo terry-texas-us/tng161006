@@ -1,0 +1,8890 @@
+﻿0 HEAD
+1 SOUR RootsMagic
+2 NAME RootsMagic
+2 VERS 6.3.1.4
+2 CORP RootsMagic, Inc.
+3 ADDR PO Box 495
+4 CONT Springville, UT 84663
+4 CONT USA
+3 PHON 1-800-ROOTSMAGIC
+3 WWW www.RootsMagic.com
+1 DEST RootsMagic
+1 DATE 30 AUG 2014
+1 FILE Robert Edward Boyce (complete RM6).ged
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+0 @I3637@ INDI
+1 NAME Robert Edward /Boyce/
+2 GIVN Robert Edward
+2 SURN Boyce
+1 SEX M
+1 _UID AA0BF15F9F9642FFAA9E2A357D9C6817BA0D
+1 _FSFTID LDYX-N93
+1 CHAN
+2 DATE 26 AUG 2013
+1 BIRT
+2 DATE 5 MAY 1941
+2 PLAC Loraine, Mitchell, Texas, United States
+1 FAMC @F2177@
+0 @I7150@ INDI
+1 NAME Steve Edward /Boyce/
+2 GIVN Steve Edward
+2 SURN Boyce
+2 NSFX Jr.
+1 SEX M
+1 _UID F6560951D4764101892CF9A644D82201C507
+1 _FSFTID LDRM-JR9
+1 CHAN
+2 DATE 4 SEP 2013
+1 BIRT
+2 DATE 28 JUN 1919
+2 PLAC Texas, United States
+1 CENS
+2 DATE 23 FEB 1920
+2 PLAC Lelia Lake, Donley, Texas, United States
+2 SOUR @S83@
+3 PAGE Justice Precinct No. 5; 66; p. 13B (penned); 232; 241; S. E. Boyce in the household of Stephen E. Boyce; 1790
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 66
+4 FIELD
+5 NAME PageID
+5 VALUE p. 13B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 232
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 241
+4 FIELD
+5 NAME Person
+5 VALUE S. E. Boyce in the household of Stephen E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1790
+3 DATA
+4 TEXT Son | M | W | 6/12 | S | Texas | none
+1 DEAT
+2 DATE 22 MAR 1997
+2 PLAC Big Spring, Howard, Texas, United States
+1 BURI
+2 PLAC Loraine, Mitchell, Texas, United States
+2 ADDR Loraine Cemetery
+1 FAMS @F2177@
+1 FAMC @F2180@
+0 @I7151@ INDI
+1 NAME Helen Marie /Compton/
+2 GIVN Helen Marie
+2 SURN Compton
+1 SEX F
+1 _UID 17CFF577927341DA862EC860BD327FD38F5C
+1 _FSFTID LDRM-JR2
+1 CHAN
+2 DATE 26 AUG 2013
+1 BIRT
+2 DATE 23 DEC 1921
+2 PLAC Loraine, Mitchell, Texas, United States
+1 DEAT
+2 DATE 13 SEP 2001
+2 PLAC Snyder, Scurry, Texas, United States
+1 BURI
+2 PLAC Loraine, Mitchell, Texas, United States
+2 ADDR Loraine Cemetery
+1 FAMS @F2177@
+1 FAMC @F2178@
+0 @I7152@ INDI
+1 NAME Sydney Albert /Compton/
+2 GIVN Sydney Albert
+2 SURN Compton
+2 NSFX Sr.
+1 SEX M
+1 _UID 46B18AD96A294ADB8B4EDB97CF59B72D6913
+1 _FSFTID LZGP-NK1
+1 CHAN
+2 DATE 6 SEP 2013
+1 BIRT
+2 DATE 3 JUL 1880
+2 PLAC Elkmont, Limestone, Alabama, United States
+1 CENS
+2 DATE 7 JUN 1900
+2 PLAC Eastland, Texas, United States
+2 ADDR Justice Precinct 4
+2 SOUR @S85@
+3 PAGE Justice Precinct 4; 58; p. 4B (penned); 67; 67; Sydney Compton; 1629
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 4
+4 FIELD
+5 NAME ED
+5 VALUE 58
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 67
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 67
+4 FIELD
+5 NAME Person
+5 VALUE Sydney Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1629
+3 DATA
+4 TEXT head | W | M | July | 1880 | 19 | M-2 | Alabama | Farmer
+1 CENS
+2 DATE 6 MAY 1910
+2 PLAC Loraine, Mitchell, Texas, United States
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 5; 171; p. 14A (penned); 253; 255; Sidney A. Compton; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 171
+4 FIELD
+5 NAME PageID
+5 VALUE p. 14A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 253
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 255
+4 FIELD
+5 NAME Person
+5 VALUE Sidney A. Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Head | M | W | 29 | M1-12 | Alabama | Farmer-General farm
+1 DEAT
+2 DATE 26 JUL 1947
+2 PLAC Lafayette, Lafayette, Louisiana, United States
+1 BURI
+2 PLAC Loraine, Mitchell, Texas, United States
+2 ADDR Loraine Cemetery
+1 FAMS @F2178@
+1 FAMC @F2214@
+0 @I7153@ INDI
+1 NAME Amanda Missouri /Hopper/
+2 GIVN Amanda Missouri
+2 SURN Hopper
+1 SEX F
+1 _UID E6C7C17F2383459584C5D5757BCC16328FB6
+1 _FSFTID LZT5-FC1
+1 CHAN
+2 DATE 26 SEP 2013
+1 BIRT
+2 DATE 19 OCT 1877 OR 19 OCT 1879
+2 PLAC Buchanan, Georgia, United States
+1 CENS
+2 DATE 3 JUN 1880
+2 PLAC Cleburne, Alabama, United States
+2 ADDR Beat No. 1 Borden's
+2 SOUR @S86@
+3 PAGE Beat No. 1 Borden's; 41; p. 5 (penned); 34; 34; Amanda Hopper in the household of William Hopper; 8
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Beat No. 1 Borden's
+4 FIELD
+5 NAME ED
+5 VALUE 41
+4 FIELD
+5 NAME PageID
+5 VALUE p. 5 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 34
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 34
+4 FIELD
+5 NAME Person
+5 VALUE Amanda Hopper in the household of William Hopper
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 8
+3 DATA
+4 TEXT W | F | 2 | Daughter | S | | Georgia
+1 CENS
+2 DATE 7 JUN 1900
+2 PLAC Eastland, Texas, United States
+2 ADDR Justice Precinct 4
+2 SOUR @S85@
+3 PAGE Justice Precinct 4; 58; p. 4B (penned); 67; 67; Manda Compton in the household of Sydney Compton; 1629
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 4
+4 FIELD
+5 NAME ED
+5 VALUE 58
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 67
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 67
+4 FIELD
+5 NAME Person
+5 VALUE Manda Compton in the household of Sydney Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1629
+3 NOTE {2 children with 2 living}
+3 DATA
+4 TEXT wife | W | F | Oct | 1879 | 21 | M-2 | Georgia |
+1 CENS
+2 DATE 6 MAY 1910
+2 PLAC Loraine, Mitchell, Texas, United States
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 5; 171; p. 14A (penned); 253; 255; Mandy M. Compton in the household of Sidney A. Compton; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 171
+4 FIELD
+5 NAME PageID
+5 VALUE p. 14A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 253
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 255
+4 FIELD
+5 NAME Person
+5 VALUE Mandy M. Compton in the household of Sidney A. Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 NOTE {8 children with 8 living}
+3 DATA
+4 TEXT Wife | F | W | 32 | M1-12 | Georgia | none
+1 DEAT
+2 DATE 2 DEC 1968
+2 PLAC Loraine, Mitchell, Texas, United States
+1 BURI
+2 PLAC Loraine, Mitchell, Texas, United States
+2 ADDR Loraine Cemetery
+1 FAMS @F2178@
+1 FAMC @F2217@
+0 @I7154@ INDI
+1 NAME Royce Daymon /Boyce/
+2 GIVN Royce Daymon
+2 SURN Boyce
+1 SEX M
+1 _UID 82134693CC45415386C4FD60C0964378CB9E
+1 _FSFTID LDYX-RVW
+1 CHAN
+2 DATE 26 AUG 2013
+1 BIRT
+2 DATE 28 SEP 1942
+2 PLAC Mitchell, Texas, United States
+2 SOUR @S12@
+3 PAGE Royce Daymon Boyce
+3 _TMPLT
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME ItemofInterest
+5 VALUE Royce Daymon Boyce
+1 FAMC @F2177@
+0 @I7155@ INDI
+1 NAME Beulah Irene /Compton/
+2 GIVN Beulah Irene
+2 SURN Compton
+1 SEX F
+1 _UID 3C874B4BD0CF458D9C8EF743366FF1FFC3BF
+1 _FSFTID LDR5-5SJ
+1 CHAN
+2 DATE 9 JAN 2014
+1 BIRT
+2 DATE 15 JAN 1907
+2 PLAC Texas, United States
+1 CENS
+2 DATE 6 MAY 1910
+2 PLAC Loraine, Mitchell, Texas, United States
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 5; 171; p. 14A (penned); 253; 255; Bul[ha] I. Compton in the household of Sidney A. Compton; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 171
+4 FIELD
+5 NAME PageID
+5 VALUE p. 14A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 253
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 255
+4 FIELD
+5 NAME Person
+5 VALUE Bul[ha] I. Compton in the household of Sidney A. Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Daughter | F | W | 3 | S | Texas | none
+1 DEAT
+2 DATE 11 MAY 2003
+1 FAMS @F2486@
+1 FAMS @F2179@
+1 FAMC @F2178@
+0 @I7156@ INDI
+1 NAME Walter J. /Cox/
+2 GIVN Walter J.
+2 SURN Cox
+1 SEX M
+1 _UID 179D4450BC47411DAC83839222E636214C7F
+1 _FSFTID LDTY-BWY
+1 CHAN
+2 DATE 5 SEP 2013
+1 BIRT
+2 DATE EST 1919
+1 FAMS @F2179@
+0 @I7157@ INDI
+1 NAME Sydney Albert /Compton/
+2 GIVN Sydney Albert
+2 SURN Compton
+2 NSFX Jr.
+1 SEX M
+1 _UID AA35C959817A46DC86676C767595A119B1C5
+1 _FSFTID LDR5-5VV
+1 CHAN
+2 DATE 5 SEP 2013
+1 BIRT
+2 DATE 17 JUN 1915
+2 PLAC Mitchell, Texas, United States
+1 DEAT
+2 DATE 27 JUL 1997
+2 PLAC Lubbock, Texas, United States
+1 BURI
+2 PLAC Colorado City, Mitchell, Texas, United States
+2 ADDR Colorado City Cemetery
+1 FAMS @F2238@
+1 FAMC @F2178@
+0 @I7158@ INDI
+1 NAME Jessie Woodrow /Compton/
+2 GIVN Jessie Woodrow
+2 SURN Compton
+1 SEX M
+1 _UID 943552D9020A42FE8042D5DAA9127873572F
+1 _FSFTID LDR5-5LP
+1 CHAN
+2 DATE 5 SEP 2013
+1 BIRT
+2 DATE 1 APR 1918
+2 PLAC Texas, United States
+1 DEAT
+2 DATE 21 JUN 1972
+2 PLAC Pampa, Gray, Texas, United States
+1 BURI
+2 PLAC Loraine, Mitchell, Texas, United States
+2 ADDR Loraine Cemetery
+1 FAMS @F2239@
+1 FAMC @F2178@
+0 @I7159@ INDI
+1 NAME Eulis Britton /Compton/
+2 GIVN Eulis Britton
+2 SURN Compton
+1 SEX M
+1 _UID 3F451D3633324146B2EA6FE06DBAB78D19A6
+1 _FSFTID LDR5-PTT
+1 CHAN
+2 DATE 6 SEP 2013
+1 BIRT
+2 DATE 23 NOV 1902
+2 PLAC Eastland, Texas, United States
+1 CENS
+2 DATE 6 MAY 1910
+2 PLAC Loraine, Mitchell, Texas, United States
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 5; 171; p. 14A (penned); 253; 255; Eulis B. Compton in the household of Sidney A. Compton; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 171
+4 FIELD
+5 NAME PageID
+5 VALUE p. 14A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 253
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 255
+4 FIELD
+5 NAME Person
+5 VALUE Eulis B. Compton in the household of Sidney A. Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Son | M | W | 7 | S | Texas | Farm Laborer-home farm
+1 DEAT
+2 DATE 5 JAN 1975
+2 PLAC Howard, Texas, United States
+1 BURI
+2 PLAC Loraine, Mitchell, Texas, United States
+2 ADDR Loraine Cemetery
+1 FAMS @F2237@
+1 FAMC @F2178@
+0 @I7160@ INDI
+1 NAME Robert Euel /Compton/
+2 GIVN Robert Euel
+2 SURN Compton
+1 SEX M
+1 _UID 18E1D815B8A749E187868C6E343FD367230A
+1 _FSFTID LDR5-5M6
+1 CHAN
+2 DATE 24 JUL 2014
+1 BIRT
+2 DATE ABT 1905
+2 PLAC Texas, United States
+1 CENS
+2 DATE 6 MAY 1910
+2 PLAC Loraine, Mitchell, Texas, United States
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 5; 171; p. 14A (penned); 253; 255; Robert E. Compton in the household of Sidney A. Compton; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 171
+4 FIELD
+5 NAME PageID
+5 VALUE p. 14A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 253
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 255
+4 FIELD
+5 NAME Person
+5 VALUE Robert E. Compton in the household of Sidney A. Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Son | M | W | 5 | S | Texas | none
+1 DEAT
+1 FAMC @F2178@
+0 @I7161@ INDI
+1 NAME Cynthia Mae /Compton/
+2 GIVN Cynthia Mae
+2 SURN Compton
+1 SEX F
+1 _UID 9273E575B89841E3A9AFDB700B1620B36AC5
+1 _FSFTID K8GF-V6V
+1 CHAN
+2 DATE 6 SEP 2013
+1 BIRT
+2 DATE 15 MAY 1898
+2 PLAC Eastland, Texas, United States
+1 CENS
+2 DATE 7 JUN 1900
+2 PLAC Eastland, Texas, United States
+2 ADDR Justice Precinct 4
+2 SOUR @S85@
+3 PAGE Justice Precinct 4; 58; p. 4B (penned); 67; 67; May Compton in the household of Sydney Compton; 1629
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 4
+4 FIELD
+5 NAME ED
+5 VALUE 58
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 67
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 67
+4 FIELD
+5 NAME Person
+5 VALUE May Compton in the household of Sydney Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1629
+3 DATA
+4 TEXT daughter | W | F | May | 1898 | 2 | S | Texas |
+1 CENS
+2 DATE 6 MAY 1910
+2 PLAC Loraine, Mitchell, Texas, United States
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 5; 171; p. 14A (penned); 253; 255; Cyntha M. Compton in the household of Sidney A. Compton; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 171
+4 FIELD
+5 NAME PageID
+5 VALUE p. 14A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 253
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 255
+4 FIELD
+5 NAME Person
+5 VALUE Cyntha M. Compton in the household of Sidney A. Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Daughter | F | W | 11 | S | Texas | Farm Laborer-home farm
+1 DEAT
+2 DATE 3 SEP 1988
+2 PLAC Mitchell, Texas, United States
+1 BURI
+2 PLAC Loraine, Mitchell, Texas, United States
+2 ADDR Loraine Cemetery
+1 FAMS @F2236@
+1 FAMC @F2178@
+0 @I7162@ INDI
+1 NAME Annie Lizzie /Compton/
+2 GIVN Annie Lizzie
+2 SURN Compton
+1 SEX F
+1 _UID 246C865F80454953B7BC18D878EE3A3D1676
+1 _FSFTID LDR5-P5W
+1 CHAN
+2 DATE 6 SEP 2013
+1 BIRT
+2 DATE 8 DEC 1899
+2 PLAC Eastland, Texas, United States
+1 CENS
+2 DATE 7 JUN 1900
+2 PLAC Eastland, Texas, United States
+2 ADDR Justice Precinct 4
+2 SOUR @S85@
+3 PAGE Justice Precinct 4; 58; p. 4B (penned); 67; 67; Anna Compton in the household of Sydney Compton; 1629
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 4
+4 FIELD
+5 NAME ED
+5 VALUE 58
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 67
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 67
+4 FIELD
+5 NAME Person
+5 VALUE Anna Compton in the household of Sydney Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1629
+3 DATA
+4 TEXT daughter | W | F | Dec | 1899 | 6/12 | S | Texas |
+1 CENS
+2 DATE 6 MAY 1910
+2 PLAC Loraine, Mitchell, Texas, United States
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 5; 171; p. 14A (penned); 253; 255; Annie L. Compton in the household of Sidney A. Compton; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 171
+4 FIELD
+5 NAME PageID
+5 VALUE p. 14A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 253
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 255
+4 FIELD
+5 NAME Person
+5 VALUE Annie L. Compton in the household of Sidney A. Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Daughter | F | W | 9 | S | Texas | Farm Laborer-home farm
+1 DEAT
+2 DATE 17 JAN 1916
+2 PLAC Mitchell, Texas, United States
+1 BURI
+2 PLAC Loraine, Mitchell, Texas, United States
+2 ADDR Loraine Cemetery
+1 FAMC @F2178@
+0 @I7163@ INDI
+1 NAME Teaty A. /Compton/
+2 GIVN Teaty A.
+2 SURN Compton
+1 SEX F
+1 _UID C3AB8CC780484ACA88444B0522F0234533E8
+1 _FSFTID LDR5-PR8
+1 CHAN
+2 DATE 24 JUL 2014
+1 BIRT
+2 DATE ABT 1902
+2 PLAC Texas, United States
+1 CENS
+2 DATE 6 MAY 1910
+2 PLAC Loraine, Mitchell, Texas, United States
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 5; 171; p. 14A (penned); 253; 255; Teaty A. Compton in the household of Sidney A. Compton; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 171
+4 FIELD
+5 NAME PageID
+5 VALUE p. 14A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 253
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 255
+4 FIELD
+5 NAME Person
+5 VALUE Teaty A. Compton in the household of Sidney A. Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Daughter | F | W | 8 | S | Texas | Farm Laborer-home farm
+1 DEAT
+1 FAMC @F2178@
+0 @I7164@ INDI
+1 NAME Eva V. /Compton/
+2 GIVN Eva V.
+2 SURN Compton
+1 SEX F
+1 _UID 5305C739DCC44E5687AC4E6B3007E2AA4B2A
+1 _FSFTID LDR5-5D8
+1 CHAN
+2 DATE 24 JUL 2014
+1 BIRT
+2 DATE ABT 1908
+2 PLAC Texas, United States
+1 CENS
+2 DATE 6 MAY 1910
+2 PLAC Loraine, Mitchell, Texas, United States
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 5; 171; p. 14A (penned); 253; 255; Eva V. Compton in the household of Sidney A. Compton; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 171
+4 FIELD
+5 NAME PageID
+5 VALUE p. 14A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 253
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 255
+4 FIELD
+5 NAME Person
+5 VALUE Eva V. Compton in the household of Sidney A. Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 NOTE {twins}
+3 DATA
+4 TEXT Daughter | F | W | 2 | S | Texas | none
+1 DEAT
+1 FAMC @F2178@
+0 @I7165@ INDI
+1 NAME Vera /Compton/
+2 GIVN Vera
+2 SURN Compton
+1 SEX F
+1 _UID E3098E831B724750AC2CE5370EB9E17A3786
+1 _FSFTID LDR5-54H
+1 CHAN
+2 DATE 24 JUL 2014
+1 BIRT
+2 DATE ABT 1908
+2 PLAC Texas, United States
+1 CENS
+2 DATE 6 MAY 1910
+2 PLAC Loraine, Mitchell, Texas, United States
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 5; 171; p. 14A (penned); 253; 255; Ver. Compton in the household of Sidney A. Compton; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 171
+4 FIELD
+5 NAME PageID
+5 VALUE p. 14A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 253
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 255
+4 FIELD
+5 NAME Person
+5 VALUE Ver. Compton in the household of Sidney A. Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 NOTE {twins}
+3 DATA
+4 TEXT Daughter | F | W | 2 | S | Texas |
+1 DEAT
+1 FAMC @F2178@
+0 @I7166@ INDI
+1 NAME Steve Edward /Boyce/
+2 GIVN Steve Edward
+2 SURN Boyce
+1 SEX M
+1 _UID 03D5283C80404F19B9FEED576A1D57427F88
+1 _FSFTID LDRM-JR6
+1 CHAN
+2 DATE 4 SEP 2013
+1 BIRT
+2 DATE 10 JUN 1892 OR 10 JUN 1893
+2 PLAC Texas, United States
+1 CENS
+2 DATE 8 JUN 1900
+2 PLAC Sutton, Texas, United States
+2 ADDR Justice Precinct 1
+2 SOUR @S77@
+3 PAGE Justice Precinct 1; 70; page 9B (penned); 175; 175; Steve E. Boyer in the household of Kinner K. Boyer; 1670
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 1
+4 FIELD
+5 NAME ED
+5 VALUE 70
+4 FIELD
+5 NAME PageID
+5 VALUE page 9B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 175
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 175
+4 FIELD
+5 NAME Person
+5 VALUE Steve E. Boyer in the household of Kinner K. Boyer
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1670
+3 DATA
+4 TEXT Son | W | M | June | 1893 | 6 | S | Texas |
+1 CENS
+2 DATE 5 MAY 1910
+2 PLAC Mitchell, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 2; 168; p. 3B (penned); 49; 51; Steve A. Boyce in the household of Kinner K. Boyce; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 2
+4 FIELD
+5 NAME ED
+5 VALUE 168
+4 FIELD
+5 NAME PageID
+5 VALUE p. 3B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 49
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 51
+4 FIELD
+5 NAME Person
+5 VALUE Steve A. Boyce in the household of Kinner K. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Son | M | W | 16 | S | Texas | none
+1 CENS
+2 DATE 23 FEB 1920
+2 PLAC Lelia Lake, Donley, Texas, United States
+2 SOUR @S83@
+3 PAGE Justice Precinct No. 5; 66; p. 13B (penned); 232; 241; Stephen E. Boyce; 1790
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 66
+4 FIELD
+5 NAME PageID
+5 VALUE p. 13B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 232
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 241
+4 FIELD
+5 NAME Person
+5 VALUE Stephen E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1790
+3 DATA
+4 TEXT Head | M | W | 28 | M | Texas | Farmer-General Farm
+1 DEAT
+2 DATE 4 JUL 1956
+2 PLAC Stanislaus, California, United States
+1 FAMS @F2180@
+1 FAMC @F2195@
+0 @I7167@ INDI
+1 NAME Martha Ellen /Morrison/
+2 GIVN Martha Ellen
+2 SURN Morrison
+1 SEX F
+1 _UID 85AD8B638532401499230721EA3B0FA4E751
+1 _FSFTID MT29-MZW
+1 CHAN
+2 DATE 6 SEP 2013
+1 BIRT
+2 DATE 13 MAR 1890
+2 PLAC Texas, United States
+1 CENS
+2 DATE 21 JUN 1900
+2 PLAC Hamilton, Texas, United States
+2 ADDR Justice Precinct 5
+2 SOUR @S84@
+3 PAGE Justice Precinct No. 5; 86; p. 11A (penned); 166; 169; Martha E. Morrison in the household of James E. Morrison; 1641
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 86
+4 FIELD
+5 NAME PageID
+5 VALUE p. 11A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 166
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 169
+4 FIELD
+5 NAME Person
+5 VALUE Martha E. Morrison in the household of James E. Morrison
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1641
+3 DATA
+4 TEXT Daughter | W | F | Mar | 1890 | 10 | S | Texas |
+1 CENS
+2 DATE 19 APR 1910
+2 PLAC Loraine, Mitchell, Texas, United States
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 5; 171; p. 5A (penned); 89; 89; Ellen M. Morrisson in the household of Elbert J. Morrisson; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 171
+4 FIELD
+5 NAME PageID
+5 VALUE p. 5A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 89
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 89
+4 FIELD
+5 NAME Person
+5 VALUE Ellen M. Morrisson in the household of Elbert J. Morrisson
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Daughter | F | W | 20 | S | Texas | none
+1 CENS
+2 DATE 23 FEB 1920
+2 PLAC Lelia Lake, Donley, Texas, United States
+2 SOUR @S83@
+3 PAGE Justice Precinct No. 5; 66; p. 13B (penned); 232; 241; Ellen Boyce in the household of Stephen E. Boyce; 1790
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 66
+4 FIELD
+5 NAME PageID
+5 VALUE p. 13B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 232
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 241
+4 FIELD
+5 NAME Person
+5 VALUE Ellen Boyce in the household of Stephen E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1790
+3 DATA
+4 TEXT Wife | F | W | 39 | M | Texas | none
+1 DEAT
+2 DATE 9 APR 1929
+1 BURI
+2 PLAC Clarendon, Donley, Texas, United States
+2 ADDR Citizens Cemetery
+1 FAMS @F2180@
+1 FAMC @F2211@
+0 @I7168@ INDI
+1 NAME Reatha Elizabeth /Boyce/
+2 GIVN Reatha Elizabeth
+2 SURN Boyce
+1 SEX F
+1 _UID 7DB70CD0B6D5476A8ADA8A0671A1EBB1EEBE
+1 _FSFTID LDR5-PDF
+1 CHAN
+2 DATE 4 SEP 2013
+1 BIRT
+2 DATE 11 SEP 1915
+2 PLAC Loraine, Mitchell, Texas, United States
+1 CENS
+2 DATE 23 FEB 1920
+2 PLAC Lelia Lake, Donley, Texas, United States
+2 SOUR @S83@
+3 PAGE Justice Precinct No. 5; 66; p. 13B (penned); 232; 241; Rethie E. Boyce in the household of Stephen E. Boyce; 1790
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 66
+4 FIELD
+5 NAME PageID
+5 VALUE p. 13B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 232
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 241
+4 FIELD
+5 NAME Person
+5 VALUE Rethie E. Boyce in the household of Stephen E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1790
+3 DATA
+4 TEXT Daughter | F | W | 4 4/12 | S | Texas | none
+1 DEAT
+2 DATE 23 MAR 1996
+2 PLAC Lubbock, Texas, United States
+1 FAMS @F2182@
+1 FAMC @F2180@
+0 @I7169@ INDI
+1 NAME Lillie Bea /Boyce/
+2 GIVN Lillie Bea
+2 SURN Boyce
+1 SEX F
+1 _UID 3D5D877E135C4966AE104C5E987B59D56629
+1 _FSFTID LDR5-P6P
+1 CHAN
+2 DATE 4 SEP 2013
+1 BIRT
+2 DATE ABT 1918
+2 PLAC Texas, United States
+1 CENS
+2 DATE 23 FEB 1920
+2 PLAC Lelia Lake, Donley, Texas, United States
+2 SOUR @S83@
+3 PAGE Justice Precinct No. 5; 66; p. 13B (penned); 232; 241; Lillie B. Boyce in the household of Stephen E. Boyce; 1790
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 66
+4 FIELD
+5 NAME PageID
+5 VALUE p. 13B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 232
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 241
+4 FIELD
+5 NAME Person
+5 VALUE Lillie B. Boyce in the household of Stephen E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1790
+3 DATA
+4 TEXT Daughter | F | W | 2 4/12 | S | Texas | none
+1 FAMC @F2180@
+0 @I7170@ INDI
+1 NAME Lucy Elinor /Boyce/
+2 GIVN Lucy Elinor
+2 SURN Boyce
+1 SEX F
+1 _UID F552FB36DC8C43A5A87026B43A23F1FA023A
+1 _FSFTID LDR5-PXR
+1 CHAN
+2 DATE 4 SEP 2013
+1 BIRT
+2 DATE 29 APR 1921
+2 PLAC Donley, Texas, United States
+1 DEAT
+2 DATE 16 SEP 2004
+2 PLAC Texas, United States
+1 FAMS @F2232@
+1 FAMC @F2180@
+0 @I7171@ INDI
+1 NAME Oliver Preston /Boyce/
+2 GIVN Oliver Preston
+2 SURN Boyce
+1 SEX M
+1 _UID 5B3B0D5B6CAD44E193F34A1AB67055C5669C
+1 _FSFTID LDR5-PNW
+1 CHAN
+2 DATE 26 AUG 2013
+1 BIRT
+2 DATE 24 APR 1923
+2 PLAC Mitchell, Texas, United States
+1 DEAT
+2 DATE 3 JUL 2005
+2 PLAC Howard, Texas, United States
+1 BURI
+2 PLAC Stanton, Martin, Texas, United States
+2 ADDR Evergreen Cemetery
+1 FAMS @F2183@
+1 FAMC @F2180@
+0 @I7172@ INDI
+1 NAME Damon Lee /Boyce/
+2 GIVN Damon Lee
+2 SURN Boyce
+1 SEX M
+1 _UID 42CC6749339F40D29C061332A7CA82078301
+1 _FSFTID LDR5-PJ9
+1 CHAN
+2 DATE 26 AUG 2013
+1 BIRT
+2 DATE 13 AUG 1925
+2 PLAC Donley, Texas, United States
+1 DEAT
+2 DATE 12 JUN 2002
+2 PLAC Cooke, Texas, United States
+1 BURI
+2 PLAC Stanton, Martin, Texas, United States
+2 ADDR Evergreen Cemetery
+1 FAMS @F2181@
+1 FAMC @F2180@
+0 @I7173@ INDI
+1 NAME Allene //
+2 GIVN Allene
+1 SEX F
+1 _UID 7504BD4BA35A4825A16D5A09BDC2EDCD957D
+1 _FSFTID LDTB-PZW
+1 CHAN
+2 DATE 26 AUG 2013
+1 BIRT
+2 DATE EST 1928
+1 FAMS @F2181@
+0 @I7174@ INDI
+1 NAME Robert Neal /Craig/
+2 GIVN Robert Neal
+2 SURN Craig
+1 SEX M
+1 _UID 58A0F008D40A453A852F51258EB33E3D339C
+1 _FSFTID LX3R-6G1
+1 CHAN
+2 DATE 23 JUL 2014
+1 BIRT
+2 DATE 24 DEC 1911
+2 PLAC Texas, United States
+1 DEAT
+2 DATE 18 AUG 1962
+2 PLAC Bryan, Brazos, Texas, United States
+1 BURI
+2 PLAC Bryan, Brazos, Texas, United States
+2 ADDR Bryan City Cemetery
+1 FAMS @F2182@
+0 @I7175@ INDI
+1 NAME Mary Frances /Anderson/
+2 GIVN Mary Frances
+2 SURN Anderson
+1 SEX F
+1 _UID E147B67275074CD59F44A3CF7B719C854FE2
+1 _FSFTID LDTB-L5R
+1 CHAN
+2 DATE 26 AUG 2013
+1 BIRT
+2 DATE EST 1926
+1 DEAT
+2 DATE 19 JAN 1991
+1 FAMS @F2183@
+0 @I7197@ INDI
+1 NAME Lucy J. /Haggerman/
+2 GIVN Lucy J.
+2 SURN Haggerman
+1 SEX F
+1 _UID C55B639C8F0C4654AD8E3878A0049435ACBE
+1 _FSFTID KJWH-2R7
+1 CHAN
+2 DATE 26 SEP 2013
+1 BIRT
+2 DATE JUL 1875
+2 PLAC Texas, United States
+1 CENS
+2 DATE 8 JUN 1900
+2 PLAC Sutton, Texas, United States
+2 ADDR Justice Precinct 1
+2 SOUR @S77@
+3 PAGE Justice Precinct 1; 70; page 9B (penned); 175; 175; Lucy J. Boyer in the household of Kinner K. Boyer; 1670
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 1
+4 FIELD
+5 NAME ED
+5 VALUE 70
+4 FIELD
+5 NAME PageID
+5 VALUE page 9B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 175
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 175
+4 FIELD
+5 NAME Person
+5 VALUE Lucy J. Boyer in the household of Kinner K. Boyer
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1670
+3 NOTE {5 children with 5 living}
+3 DATA
+4 TEXT Wife | W | F | July | 1875 | 24 | M-10 | Texas |
+1 CENS
+2 DATE 5 MAY 1910
+2 PLAC Mitchell, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 2; 168; p. 3B (penned); 49; 51; Lucy J. Boyce in the household of Kinner K. Boyce; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 2
+4 FIELD
+5 NAME ED
+5 VALUE 168
+4 FIELD
+5 NAME PageID
+5 VALUE p. 3B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 49
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 51
+4 FIELD
+5 NAME Person
+5 VALUE Lucy J. Boyce in the household of Kinner K. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 NOTE {8 children with 7 living}
+3 DATA
+4 TEXT Wife | F | W | 35 | M1-19 | Texas | none
+1 DEAT Y
+1 FAMS @F2195@
+0 @I7198@ INDI
+1 NAME Kinner K. /Boyce/
+2 GIVN Kinner K.
+2 SURN Boyce
+1 SEX M
+1 _UID ACB99D73C5454442849DBA6C8B5AE5F3090B
+1 _FSFTID KJWH-2TD
+1 CHAN
+2 DATE 26 SEP 2013
+1 BIRT
+2 DATE 4 MAY 1871
+2 PLAC Los Angeles, California, United States
+1 CENS
+2 DATE 5 JUN 1880
+2 PLAC Burnet, Texas, United States
+2 SOUR @S78@
+3 PAGE Precinct No. 2 & 7; 35; p. 8 (penned); Kinner K. Boyce in the household of Isaac E. Boyce; 1293
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Precinct No. 2 & 7
+4 FIELD
+5 NAME ED
+5 VALUE 35
+4 FIELD
+5 NAME PageID
+5 VALUE p. 8 (penned)
+4 FIELD
+5 NAME DwellingNumber
+4 FIELD
+5 NAME FamilyNumber
+4 FIELD
+5 NAME Person
+5 VALUE Kinner K. Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1293
+3 DATA
+4 TEXT W | M | 9 | Son | | at School | California
+1 CENS
+2 DATE 8 JUN 1900
+2 PLAC Sutton, Texas, United States
+2 ADDR Justice Precinct 1
+2 SOUR @S77@
+3 PAGE Justice Precinct 1; 70; page 9B (penned); 175; 175; Kinner K. Boyer; 1670
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 1
+4 FIELD
+5 NAME ED
+5 VALUE 70
+4 FIELD
+5 NAME PageID
+5 VALUE page 9B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 175
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 175
+4 FIELD
+5 NAME Person
+5 VALUE Kinner K. Boyer
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1670
+3 DATA
+4 TEXT Head | W | M | May | 1871 | 29 | M-10 | Texas | Stock herder
+1 CENS
+2 DATE 5 MAY 1910
+2 PLAC Mitchell, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 2; 168; p. 3B (penned); 49; 51; Kinner K. Boyce; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 2
+4 FIELD
+5 NAME ED
+5 VALUE 168
+4 FIELD
+5 NAME PageID
+5 VALUE p. 3B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 49
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 51
+4 FIELD
+5 NAME Person
+5 VALUE Kinner K. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Head | M | W | 39 | M1-19 | California | Farmer-General Farm
+1 DEAT
+2 DATE 26 OCT 1943
+2 PLAC Donley, Texas, United States
+2 SOUR @S56@
+3 PAGE Kenner K Boyce, 1943
+3 _TMPLT
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME ItemOfInterest
+5 VALUE Kenner K Boyce, 1943
+3 DATA
+4 TEXT 26 Oct 1943 Lelia Lake, Donley, Texas, United States | Male | Married | 0
+5 CONC 4 May 1871 | Los Angeles, California | Aron Anderson Boyce | Carolina W
+5 CONC ilkerson | 45981
+1 BURI
+2 PLAC Clarendon, Donley, Texas, United States
+2 ADDR Citizens Cemetery
+1 FAMS @F2195@
+1 FAMC @F2196@
+0 @I7199@ INDI
+1 NAME Isaac Ely /Boyce/
+2 GIVN Isaac Ely
+2 SURN Boyce
+1 SEX M
+1 _UID 5B21424FF3154E3883D5020EEC0804ADA847
+1 _FSFTID 2Z3G-Z6L
+1 CHAN
+2 DATE 22 NOV 2013
+1 BIRT
+2 DATE 8 OCT 1824
+2 PLAC Missouri, United States
+1 CENS
+2 DATE 10 SEP 1850
+2 PLAC Travis, Texas, United States
+2 SOUR @S81@
+3 PAGE p. 286 (penned-missing); 154; 154; Isac Boyce in the household of Elizabeth Boyce; 915
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+4 FIELD
+5 NAME PageID
+5 VALUE p. 286 (penned-missing)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 154
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 154
+4 FIELD
+5 NAME Person
+5 VALUE Isac Boyce in the household of Elizabeth Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 915
+3 DATA
+4 TEXT 25 | M | | Farmer | 400 | Missouri
+1 CENS
+2 DATE 7 JUL 1860
+2 PLAC Burnet, Texas, United States
+2 SOUR @S79@
+3 PAGE Burnet post office; p. 48 (penned); 318; 318; Isaac E. Boyce; 1289
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Burnet post office
+4 FIELD
+5 NAME PageID
+5 VALUE p. 48 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 318
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 318
+4 FIELD
+5 NAME Person
+5 VALUE Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1289
+3 DATA
+4 TEXT 35 | M | Stock Raising | 400 | 2200 | Missouri
+1 CENS
+2 DATE 11 AUG 1870
+2 PLAC Los Nietos, Los Angeles, California, United States
+2 SOUR @S80@
+3 PAGE Los Nietos post office; p. 31 (penned); 328; 345; Isaac E. Boyce; 73
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Los Nietos post office
+4 FIELD
+5 NAME PageID
+5 VALUE p. 31 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 328
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 345
+4 FIELD
+5 NAME Person
+5 VALUE Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 73
+3 DATA
+4 TEXT 45 | M | W | Farm laborer | | 900 | Missouri
+1 CENS
+2 DATE 5 JUN 1880
+2 PLAC Burnet, Texas, United States
+2 SOUR @S78@
+3 PAGE Precinct No. 2 & 7; 35; p. 7 (penned); Isaac E. Boyce; 1293
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Precinct No. 2 & 7
+4 FIELD
+5 NAME ED
+5 VALUE 35
+4 FIELD
+5 NAME PageID
+5 VALUE p. 7 (penned)
+4 FIELD
+5 NAME DwellingNumber
+4 FIELD
+5 NAME FamilyNumber
+4 FIELD
+5 NAME Person
+5 VALUE Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1293
+3 DATA
+4 TEXT W | M | 55 | Head | M | Farmer | Missouri
+1 DEAT
+2 DATE 17 JAN 1884
+1 BURI
+2 PLAC Burnet, Burnet, Texas, United States
+2 ADDR Old Burnet Cemetery
+1 FAMS @F2196@
+1 FAMC @F2201@
+0 @I7200@ INDI
+1 NAME Caroline Katherine /Wilkens/
+2 GIVN Caroline Katherine
+2 SURN Wilkens
+1 NAME Carolina /Wilkerson/
+2 GIVN Carolina
+2 SURN Wilkerson
+2 _SDATE BEF 25 FEB 1829
+1 SEX F
+1 _UID 56FAA2EF6825489F9BB47D30FEA8090D0D94
+1 _FSFTID 2Z3G-ZJD
+1 CHAN
+2 DATE 7 SEP 2013
+1 BIRT
+2 DATE 25 FEB 1829
+2 PLAC North Carolina, United States
+1 CENS
+2 DATE 14 SEP 1850
+2 PLAC Williamson, Texas, United States
+2 ADDR Milam & Williamson District
+2 SOUR @S87@
+3 PAGE Milam & Williamson District; p. 693 (penned); 217; 229; Catharine C. Wilkins in the household of Jonathan Wilkins; 916
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Milam & Williamson District
+4 FIELD
+5 NAME PageID
+5 VALUE p. 693 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 217
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 229
+4 FIELD
+5 NAME Person
+5 VALUE Catharine C. Wilkins in the household of Jonathan Wilkins
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 916
+3 DATA
+4 TEXT 21 | F | | | | N. Carolina
+1 CENS
+2 DATE 7 JUL 1860
+2 PLAC Burnet, Texas, United States
+2 SOUR @S79@
+3 PAGE Burnet post office; p. 48 (penned); 318; 318; Caroline Boyce in the household of Isaac E. Boyce; 1289
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Burnet post office
+4 FIELD
+5 NAME PageID
+5 VALUE p. 48 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 318
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 318
+4 FIELD
+5 NAME Person
+5 VALUE Caroline Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1289
+3 DATA
+4 TEXT 31 | F | | | | N. Carolina
+1 CENS
+2 DATE 11 AUG 1870
+2 PLAC Los Nietos, Los Angeles, California, United States
+2 SOUR @S80@
+3 PAGE Los Nietos post office; p. 31 (penned); 328; 345; Caroline Boyce in the household of Isaac E. Boyce; 73
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Los Nietos post office
+4 FIELD
+5 NAME PageID
+5 VALUE p. 31 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 328
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 345
+4 FIELD
+5 NAME Person
+5 VALUE Caroline Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 73
+3 DATA
+4 TEXT 41 | F | W | Keeping house | | | Missouri
+1 CENS
+2 DATE 5 JUN 1880
+2 PLAC Burnet, Texas, United States
+2 SOUR @S78@
+3 PAGE Precinct No. 2 & 7; 35; p. 7 (penned); Caroline K. Boyce in the household of Isaac E. Boyce; 1293
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Precinct No. 2 & 7
+4 FIELD
+5 NAME ED
+5 VALUE 35
+4 FIELD
+5 NAME PageID
+5 VALUE p. 7 (penned)
+4 FIELD
+5 NAME DwellingNumber
+4 FIELD
+5 NAME FamilyNumber
+4 FIELD
+5 NAME Person
+5 VALUE Caroline K. Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1293
+3 DATA
+4 TEXT W | F | 51 | Wife | | Keeping house | North Carolina
+1 CENS
+2 DATE 8 JUN 1900
+2 PLAC Sutton, Texas, United States
+2 ADDR Justice Precinct 1
+2 SOUR @S77@
+3 PAGE Justice Precinct 1; 70; page 9B (penned); 175; 175; Catherine C. Boyer in the household of Kinner K. Boyer; 1670
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 1
+4 FIELD
+5 NAME ED
+5 VALUE 70
+4 FIELD
+5 NAME PageID
+5 VALUE page 9B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 175
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 175
+4 FIELD
+5 NAME Person
+5 VALUE Catherine C. Boyer in the household of Kinner K. Boyer
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1670
+3 NOTE {11 children with 9 living}
+3 DATA
+4 TEXT Mother | W | F | Feb | 1829 | 71 | Widowed | N. Carolina |
+1 DEAT
+2 DATE 5 FEB 1904
+1 BURI
+2 PLAC Menard, Menard, Texas, United States
+2 ADDR Little Saline Cemetery
+1 FAMS @F2196@
+1 FAMC @F2240@
+0 @I7201@ INDI
+1 NAME Reuben Hornsby /Boyce/
+2 GIVN Reuben Hornsby
+2 SURN Boyce
+1 SEX M
+1 _UID 9D99DAB420CD4D058734F4570FCDAAEF7E4A
+1 _FSFTID 27DM-KTX
+1 CHAN
+2 DATE 7 SEP 2013
+1 BIRT
+2 DATE 8 JAN 1852
+2 PLAC Williamson, Texas, United States
+1 CENS
+2 DATE 7 JUL 1860
+2 PLAC Burnet, Texas, United States
+2 SOUR @S79@
+3 PAGE Burnet post office; p. 48 (penned); 318; 318; Reuben Boyce in the household of Isaac E. Boyce; 1289
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Burnet post office
+4 FIELD
+5 NAME PageID
+5 VALUE p. 48 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 318
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 318
+4 FIELD
+5 NAME Person
+5 VALUE Reuben Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1289
+3 DATA
+4 TEXT 6 | M | | | | Texas
+1 CENS
+2 DATE 11 AUG 1870
+2 PLAC Los Nietos, Los Angeles, California, United States
+2 SOUR @S80@
+3 PAGE Los Nietos post office; p. 32 (penned); 328; 345; Robert H. Boyce in the household of Isaac E. Boyce; 73
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Los Nietos post office
+4 FIELD
+5 NAME PageID
+5 VALUE p. 32 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 328
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 345
+4 FIELD
+5 NAME Person
+5 VALUE Robert H. Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 73
+3 DATA
+4 TEXT 16 | M | W | at Home | | | Texas
+1 DEAT
+2 DATE 23 MAY 1927
+2 PLAC Howard, Texas, United States
+1 BURI
+2 PLAC Coahoma, Howard, Texas, United States
+2 ADDR Coahoma Cemetery
+1 FAMC @F2196@
+0 @I7202@ INDI
+1 NAME Johnathan W. /Boyce/
+2 GIVN Johnathan W.
+2 SURN Boyce
+1 SEX M
+1 _UID A897288A1A724F4285EFE6D09D4C51168846
+1 _FSFTID LZFF-VBM
+1 CHAN
+2 DATE 30 AUG 2013
+1 BIRT
+2 DATE 23 FEB 1859
+2 PLAC Burnet, Texas, United States
+1 CENS
+2 DATE 7 JUL 1860
+2 PLAC Burnet, Texas, United States
+2 SOUR @S79@
+3 PAGE Burnet post office; p. 48 (penned); 318; 318; Jonathan Boyce in the household of Isaac E. Boyce; 1289
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Burnet post office
+4 FIELD
+5 NAME PageID
+5 VALUE p. 48 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 318
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 318
+4 FIELD
+5 NAME Person
+5 VALUE Jonathan Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1289
+3 DATA
+4 TEXT 1 | M | | | | Texas
+1 CENS
+2 DATE 11 AUG 1870
+2 PLAC Los Nietos, Los Angeles, California, United States
+2 SOUR @S80@
+3 PAGE Los Nietos post office; p. 32 (penned); 328; 345; James W. Boyce in the household of Isaac E. Boyce; 73
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Los Nietos post office
+4 FIELD
+5 NAME PageID
+5 VALUE p. 32 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 328
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 345
+4 FIELD
+5 NAME Person
+5 VALUE James W. Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 73
+3 DATA
+4 TEXT 12 | M | W | at Home | | | Texas
+1 CENS
+2 DATE 5 JUN 1880
+2 PLAC Burnet, Texas, United States
+2 SOUR @S78@
+3 PAGE Precinct No. 2 & 7; 35; p. 7 (penned); Johnathan W. Boyce in the household of Isaac E. Boyce; 1293
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Precinct No. 2 & 7
+4 FIELD
+5 NAME ED
+5 VALUE 35
+4 FIELD
+5 NAME PageID
+5 VALUE p. 7 (penned)
+4 FIELD
+5 NAME DwellingNumber
+4 FIELD
+5 NAME FamilyNumber
+4 FIELD
+5 NAME Person
+5 VALUE Johnathan W. Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1293
+3 DATA
+4 TEXT W | M | 21 | Son | S | Farmer | Texas
+1 DEAT
+2 DATE 3 JUL 1900
+1 BURI
+2 PLAC Baggs, Carbon, Wyoming, United States
+2 ADDR Baggs Cemetery
+1 FAMC @F2196@
+0 @I7203@ INDI
+1 NAME John J. /Boyce/
+2 GIVN John J.
+2 SURN Boyce
+2 NICK Jack
+1 SEX M
+1 _UID 92083ECA3D3C43688A81266B4629360A11CF
+1 _FSFTID LWJ5-ZLX
+1 CHAN
+2 DATE 9 NOV 2013
+1 BIRT
+2 DATE 21 SEP 1860
+2 PLAC Texas, United States
+1 CENS
+2 DATE 11 AUG 1870
+2 PLAC Los Nietos, Los Angeles, California, United States
+2 SOUR @S80@
+3 PAGE Los Nietos post office; p. 32 (penned); 328; 345; John J. Boyce in the household of Isaac E. Boyce; 73
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Los Nietos post office
+4 FIELD
+5 NAME PageID
+5 VALUE p. 32 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 328
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 345
+4 FIELD
+5 NAME Person
+5 VALUE John J. Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 73
+3 DATA
+4 TEXT 11 | M | W | at Home | | | Texas
+1 CENS
+2 DATE 5 JUN 1880
+2 PLAC Burnet, Texas, United States
+2 SOUR @S78@
+3 PAGE Precinct No. 2 & 7; 35; p. 7 (penned); John J. Boyce in the household of Isaac E. Boyce; 1293
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Precinct No. 2 & 7
+4 FIELD
+5 NAME ED
+5 VALUE 35
+4 FIELD
+5 NAME PageID
+5 VALUE p. 7 (penned)
+4 FIELD
+5 NAME DwellingNumber
+4 FIELD
+5 NAME FamilyNumber
+4 FIELD
+5 NAME Person
+5 VALUE John J. Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1293
+3 DATA
+4 TEXT W | M | 19 | Son | S | Farmer | Texas
+1 DEAT
+2 DATE 9 JAN 1941
+2 PLAC Austin, Travis, Texas, United States
+2 SOUR @S56@
+3 PAGE J J Boyce
+3 _TMPLT
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME ItemOfInterest
+5 VALUE J J Boyce
+3 DATA
+4 TEXT 9 Jan 1941 | Austin, Travis, Texas, United States | Male | Married | 21 S
+5 CONC ep 1860 | Burnet, Texas | Isaac Boyce | Caroline Wilkins | 5525
+1 BURI
+2 PLAC Burnet, Burnet, Texas, United States
+2 ADDR Odd Fellows Cemetery
+1 FAMS @F2200@
+1 FAMS @F2199@
+1 FAMC @F2196@
+0 @I7204@ INDI
+1 NAME William James /Boyce/
+2 GIVN William James
+2 SURN Boyce
+1 SEX M
+1 _UID 012447C5908C4DE9B1C0DE48AC9F2C7E0FCD
+1 _FSFTID 2Z8Q-H1K
+1 CHAN
+2 DATE 30 AUG 2013
+1 BIRT
+2 DATE 15 MAR 1862
+2 PLAC Texas, United States
+1 CENS
+2 DATE 11 AUG 1870
+2 PLAC Los Nietos, Los Angeles, California, United States
+2 SOUR @S80@
+3 PAGE Los Nietos post office; p. 32 (penned); 328; 345; William J. Boyce in the household of Isaac E. Boyce; 73
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Los Nietos post office
+4 FIELD
+5 NAME PageID
+5 VALUE p. 32 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 328
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 345
+4 FIELD
+5 NAME Person
+5 VALUE William J. Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 73
+3 DATA
+4 TEXT 10 | M | W | at Home | | | Texas
+1 CENS
+2 DATE 5 JUN 1880
+2 PLAC Burnet, Texas, United States
+2 SOUR @S78@
+3 PAGE Precinct No. 2 & 7; 35; p. 7 (penned); William I. Boyce in the household of Isaac E. Boyce; 1293
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Precinct No. 2 & 7
+4 FIELD
+5 NAME ED
+5 VALUE 35
+4 FIELD
+5 NAME PageID
+5 VALUE p. 7 (penned)
+4 FIELD
+5 NAME DwellingNumber
+4 FIELD
+5 NAME FamilyNumber
+4 FIELD
+5 NAME Person
+5 VALUE William I. Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1293
+3 DATA
+4 TEXT W | M | 17 | Son | S | Farmer | Texas
+1 DEAT
+2 DATE 12 AUG 1916
+2 PLAC Howard, Texas, United States
+1 BURI
+2 PLAC Coahoma, Howard, Texas, United States
+2 ADDR Coahoma Cemetery
+1 FAMC @F2196@
+0 @I7205@ INDI
+1 NAME Stephen Albert /Boyce/
+2 GIVN Stephen Albert
+2 SURN Boyce
+1 SEX M
+1 _UID 56E6D47E2E44413F8D7189E92B4D95676413
+1 _FSFTID L413-PKM
+1 CHAN
+2 DATE 14 JUL 2014
+1 BIRT
+2 DATE ABT 1865
+2 PLAC Texas, United States
+1 CENS
+2 DATE 5 JUN 1880
+2 PLAC Burnet, Texas, United States
+2 SOUR @S78@
+3 PAGE Precinct No. 2 & 7; 35; p. 8 (penned); Stephen A. Boyce in the household of Isaac E. Boyce; 1293
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Precinct No. 2 & 7
+4 FIELD
+5 NAME ED
+5 VALUE 35
+4 FIELD
+5 NAME PageID
+5 VALUE p. 8 (penned)
+4 FIELD
+5 NAME DwellingNumber
+4 FIELD
+5 NAME FamilyNumber
+4 FIELD
+5 NAME Person
+5 VALUE Stephen A. Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1293
+3 DATA
+4 TEXT W | M | 15 | Son | | at School | Texas
+1 DEAT
+2 DATE 7 MAR 1941
+1 FAMC @F2196@
+0 @I7206@ INDI
+1 NAME Josiah M. /Boyce/
+2 GIVN Josiah M.
+2 SURN Boyce
+1 SEX M
+1 _UID 7D01E3C4612B4E34ABB7C31E0687EBDCCA62
+1 _FSFTID 2Z8Q-HBV
+1 CHAN
+2 DATE 30 AUG 2013
+1 BIRT
+2 DATE ABT 1868
+2 PLAC California, United States
+1 CENS
+2 DATE 5 JUN 1880
+2 PLAC Burnet, Texas, United States
+2 SOUR @S78@
+3 PAGE Precinct No. 2 & 7; 35; p. 8 (penned); Josiah M. Boyce in the household of Isaac E. Boyce; 1293
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Precinct No. 2 & 7
+4 FIELD
+5 NAME ED
+5 VALUE 35
+4 FIELD
+5 NAME PageID
+5 VALUE p. 8 (penned)
+4 FIELD
+5 NAME DwellingNumber
+4 FIELD
+5 NAME FamilyNumber
+4 FIELD
+5 NAME Person
+5 VALUE Josiah M. Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1293
+3 DATA
+4 TEXT W | M | 12 | Son | | at School | California
+1 DEAT Y
+1 FAMC @F2196@
+0 @I7207@ INDI
+1 NAME Carley B. /Boyce/
+2 GIVN Carley B.
+2 SURN Boyce
+1 SEX M
+1 _UID 252AFD66B55A4DBFBCFF50D41F05A5E0556F
+1 _FSFTID LDTL-H5C
+1 CHAN
+2 DATE 29 AUG 2013
+1 BIRT
+2 DATE ABT 1870
+2 PLAC California, United States
+1 CENS
+2 DATE 5 JUN 1880
+2 PLAC Burnet, Texas, United States
+2 SOUR @S78@
+3 PAGE Precinct No. 2 & 7; 35; p. 8 (penned); Carley B. Boyce in the household of Isaac E. Boyce; 1293
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Precinct No. 2 & 7
+4 FIELD
+5 NAME ED
+5 VALUE 35
+4 FIELD
+5 NAME PageID
+5 VALUE p. 8 (penned)
+4 FIELD
+5 NAME DwellingNumber
+4 FIELD
+5 NAME FamilyNumber
+4 FIELD
+5 NAME Person
+5 VALUE Carley B. Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1293
+3 DATA
+4 TEXT W | M | 10 | Son | | at School | California
+1 DEAT Y
+1 FAMC @F2196@
+0 @I7208@ INDI
+1 NAME Aaron Anderson /Boyce/
+2 GIVN Aaron Anderson
+2 SURN Boyce
+1 SEX M
+1 _UID E3C482A3FA874CF598BB2BC83B4317F25BC5
+1 _FSFTID KWJB-XDC
+1 CHAN
+2 DATE 30 AUG 2013
+1 BIRT
+2 DATE 5 SEP 1854
+2 PLAC Texas, United States
+1 CENS
+2 DATE 7 JUL 1860
+2 PLAC Burnet, Texas, United States
+2 SOUR @S79@
+3 PAGE Burnet post office; p. 48 (penned); 318; 318; Aaron Boyce in the household of Isaac E. Boyce; 1289
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Burnet post office
+4 FIELD
+5 NAME PageID
+5 VALUE p. 48 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 318
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 318
+4 FIELD
+5 NAME Person
+5 VALUE Aaron Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1289
+3 DATA
+4 TEXT 5 | M | | | | Texas
+1 CENS
+2 DATE 11 AUG 1870
+2 PLAC Los Nietos, Los Angeles, California, United States
+2 SOUR @S80@
+3 PAGE Los Nietos post office; p. 32 (penned); 328; 345; Albert A. Boyce in the household of Isaac E. Boyce; 73
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Los Nietos post office
+4 FIELD
+5 NAME PageID
+5 VALUE p. 32 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 328
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 345
+4 FIELD
+5 NAME Person
+5 VALUE Albert A. Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 73
+3 DATA
+4 TEXT 15 | M | W | at Home | | | Texas
+1 DEAT
+2 DATE 8 OCT 1933
+2 PLAC Coahoma, Howard, Texas, United States
+2 SOUR @S56@
+3 PAGE Aaron Anderson Boyce, 1933
+3 _TMPLT
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME ItemOfInterest
+5 VALUE Aaron Anderson Boyce, 1933
+3 DATA
+4 TEXT 8 Oct 1933 | Coahoma, Howard, Texas, United States | Male | Married | 5 S
+5 CONC ep 1854 | Austin, Texas | Isiac Elija Boyce | Caroline Wilkins | 46382
+1 BURI
+2 PLAC Coahoma, Howard, Texas, United States
+2 ADDR Coahoma Cemetery
+1 FAMS @F2198@
+1 FAMC @F2196@
+0 @I7209@ INDI
+1 NAME Isaac Ely /Boyce/
+2 GIVN Isaac Ely
+2 SURN Boyce
+1 SEX M
+1 _UID 30407F3C1CA54A149AA70037397C1AB0416D
+1 _FSFTID 2RBW-S4F
+1 CHAN
+2 DATE 30 AUG 2013
+1 BIRT
+2 DATE 14 APR 1856
+2 PLAC Burnet, Texas, United States
+1 CENS
+2 DATE 7 JUL 1860
+2 PLAC Burnet, Texas, United States
+2 SOUR @S79@
+3 PAGE Burnet post office; p. 48 (penned); 318; 318; Isaac E. Boyce in the household of Isaac E. Boyce; 1289
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Burnet post office
+4 FIELD
+5 NAME PageID
+5 VALUE p. 48 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 318
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 318
+4 FIELD
+5 NAME Person
+5 VALUE Isaac E. Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1289
+3 DATA
+4 TEXT 4 | M | | | | Texas
+1 CENS
+2 DATE 11 AUG 1870
+2 PLAC Los Nietos, Los Angeles, California, United States
+2 SOUR @S80@
+3 PAGE Los Nietos post office; p. 32 (penned); 328; 345; Edwin J. Boyce in the household of Isaac E. Boyce; 73
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Los Nietos post office
+4 FIELD
+5 NAME PageID
+5 VALUE p. 32 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 328
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 345
+4 FIELD
+5 NAME Person
+5 VALUE Edwin J. Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 73
+3 DATA
+4 TEXT 15 | M | W | at Home | | | Texas
+1 DEAT
+2 DATE 20 JUN 1895
+2 PLAC Kimble, Texas, United States
+1 BURI
+2 PLAC Menard, Menard, Texas, United States
+2 ADDR Little Saline Cemetery
+1 FAMS @F2197@
+1 FAMC @F2196@
+0 @I7210@ INDI
+1 NAME Mary E. /Boyce/
+2 GIVN Mary E.
+2 SURN Boyce
+1 SEX F
+1 _UID A7DD77507B00496A98FC35B40DC1755E9772
+1 _FSFTID LZFK-CSY
+1 CHAN
+2 DATE 30 AUG 2013
+1 BIRT
+2 DATE ABT 1857
+2 PLAC Texas, United States
+1 CENS
+2 DATE 7 JUL 1860
+2 PLAC Burnet, Texas, United States
+2 SOUR @S79@
+3 PAGE Burnet post office; p. 48 (penned); 318; 318; Mary E. Boyce in the household of Isaac E. Boyce; 1289
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Burnet post office
+4 FIELD
+5 NAME PageID
+5 VALUE p. 48 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 318
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 318
+4 FIELD
+5 NAME Person
+5 VALUE Mary E. Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1289
+3 DATA
+4 TEXT 3 | F | | | | Texas
+1 CENS
+2 DATE 11 AUG 1870
+2 PLAC Los Nietos, Los Angeles, California, United States
+2 SOUR @S80@
+3 PAGE Los Nietos post office; p. 32 (penned); 328; 345; Mary E. Boyce in the household of Isaac E. Boyce; 73
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Los Nietos post office
+4 FIELD
+5 NAME PageID
+5 VALUE p. 32 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 328
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 345
+4 FIELD
+5 NAME Person
+5 VALUE Mary E. Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 73
+3 DATA
+4 TEXT 13 | F | W | at Home | | | Texas
+1 DEAT Y
+1 FAMC @F2196@
+0 @I7211@ INDI
+1 NAME Eli Isaac /Boyce/
+2 GIVN Eli Isaac
+2 SURN Boyce
+1 SEX M
+1 _UID 77CFDB0E645C499EAE8A7FDC64E08F6EAA85
+1 _FSFTID 9FQ4-92B
+1 CHAN
+2 DATE 2 SEP 2013
+1 BIRT
+2 DATE 1 DEC 1891
+2 PLAC Texas, United States
+1 CENS
+2 DATE 8 JUN 1900
+2 PLAC Sutton, Texas, United States
+2 ADDR Justice Precinct 1
+2 SOUR @S77@
+3 PAGE Justice Precinct 1; 70; page 9B (penned); 175; 175; Eli J. Boyer in the household of Kinner K. Boyer; 1670
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 1
+4 FIELD
+5 NAME ED
+5 VALUE 70
+4 FIELD
+5 NAME PageID
+5 VALUE page 9B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 175
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 175
+4 FIELD
+5 NAME Person
+5 VALUE Eli J. Boyer in the household of Kinner K. Boyer
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1670
+3 DATA
+4 TEXT Son | W | M | Dec | 1891 | 8 | S | Texas |
+1 CENS
+2 DATE 5 MAY 1910
+2 PLAC Mitchell, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 2; 168; p. 3B (penned); 49; 51; Ely J. Boyce in the household of Kinner K. Boyce; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 2
+4 FIELD
+5 NAME ED
+5 VALUE 168
+4 FIELD
+5 NAME PageID
+5 VALUE p. 3B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 49
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 51
+4 FIELD
+5 NAME Person
+5 VALUE Ely J. Boyce in the household of Kinner K. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Son | M | W | 18 | S | Texas | none
+1 DEAT
+2 DATE 28 JAN 1970
+2 PLAC Midland, Midland, Texas, United States
+2 SOUR @S56@
+3 PAGE Ely Isaac Boyce, 1970
+3 _TMPLT
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME ItemOfInterest
+5 VALUE Ely Isaac Boyce, 1970
+3 DATA
+4 TEXT 28 Jan 1970 | Midland, Midland, Texas, United States | Male | Married | 1 D
+5 CONC ec 1891 | Junction, Texas | K K Boyce | Lucy Haglermann | 05679
+1 BURI
+2 PLAC Canyon, Randall, Texas, United States
+2 ADDR Dreamland Cemetery
+1 FAMS @F2225@
+1 FAMC @F2195@
+0 @I7212@ INDI
+1 NAME Cora Ellen /Boyce/
+2 GIVN Cora Ellen
+2 SURN Boyce
+1 SEX F
+1 _UID F899D1853C6A49909C555AFE9D31C13E7CFA
+1 _FSFTID 2Z3G-ZRW
+1 CHAN
+2 DATE 31 AUG 2013
+1 BIRT
+2 DATE 7 JUL 1895
+2 PLAC Texas, United States
+1 CENS
+2 DATE 8 JUN 1900
+2 PLAC Sutton, Texas, United States
+2 ADDR Justice Precinct 1
+2 SOUR @S77@
+3 PAGE Justice Precinct 1; 70; page 9B (penned); 175; 175; Cora E. Boyer in the household of Kinner K. Boyer; 1670
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 1
+4 FIELD
+5 NAME ED
+5 VALUE 70
+4 FIELD
+5 NAME PageID
+5 VALUE page 9B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 175
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 175
+4 FIELD
+5 NAME Person
+5 VALUE Cora E. Boyer in the household of Kinner K. Boyer
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1670
+3 DATA
+4 TEXT Daughter | W | F | July | 1895 | 4 | S | Texas |
+1 CENS
+2 DATE 5 MAY 1910
+2 PLAC Mitchell, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 2; 168; p. 3B (penned); 50; 52; Cora Sweat in the household of Frank M. Sweat; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 2
+4 FIELD
+5 NAME ED
+5 VALUE 168
+4 FIELD
+5 NAME PageID
+5 VALUE p. 3B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 50
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 52
+4 FIELD
+5 NAME Person
+5 VALUE Cora Sweat in the household of Frank M. Sweat
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Wife | F | W | 14 | M1-0 | Texas | none
+1 DEAT
+2 DATE 28 FEB 1962
+1 BURI
+2 PLAC Colorado City, Mitchell, Texas, United States
+2 ADDR Colorado City Cemetery
+1 FAMS @F2222@
+1 FAMC @F2195@
+0 @I7213@ INDI
+1 NAME Corker Boyd /Boyce/
+2 GIVN Corker Boyd
+2 SURN Boyce
+1 SEX M
+1 _UID 12D8F061F863462C879DAFA79F4AEBA6FCB4
+1 _FSFTID 9VSY-TNZ
+1 CHAN
+2 DATE 2 SEP 2013
+1 BIRT
+2 DATE 28 DEC 1896
+2 PLAC Texas, United States
+1 CENS
+2 DATE 8 JUN 1900
+2 PLAC Sutton, Texas, United States
+2 ADDR Justice Precinct 1
+2 SOUR @S77@
+3 PAGE Justice Precinct 1; 70; page 9B (penned); 175; 175; Corker B. Boyer in the household of Kinner K. Boyer; 1670
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 1
+4 FIELD
+5 NAME ED
+5 VALUE 70
+4 FIELD
+5 NAME PageID
+5 VALUE page 9B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 175
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 175
+4 FIELD
+5 NAME Person
+5 VALUE Corker B. Boyer in the household of Kinner K. Boyer
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1670
+3 DATA
+4 TEXT Son | W | M | Dec | 1896 | 3 | S | Texas |
+1 CENS
+2 DATE 5 MAY 1910
+2 PLAC Mitchell, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 2; 168; p. 3B (penned); 49; 51; Boyd Boyce in the household of Kinner K. Boyce; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 2
+4 FIELD
+5 NAME ED
+5 VALUE 168
+4 FIELD
+5 NAME PageID
+5 VALUE p. 3B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 49
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 51
+4 FIELD
+5 NAME Person
+5 VALUE Boyd Boyce in the household of Kinner K. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Son | M | W | 13 | S | Texas | none
+1 DEAT
+2 DATE SEP 1969
+1 FAMS @F2226@
+1 FAMC @F2195@
+0 @I7214@ INDI
+1 NAME Price Vertner /Boyce/
+2 GIVN Price Vertner
+2 SURN Boyce
+1 SEX M
+1 _UID 679AF2015AB14E96A57A1F50BA63F63DC1E6
+1 _FSFTID KJWH-2YZ
+1 CHAN
+2 DATE 26 JUL 2014
+1 BIRT
+2 DATE 11 MAR 1898
+2 PLAC Texas, United States
+1 CENS
+2 DATE 8 JUN 1900
+2 PLAC Sutton, Texas, United States
+2 ADDR Justice Precinct 1
+2 SOUR @S77@
+3 PAGE Justice Precinct 1; 70; page 9B (penned); 175; 175; Price B. Boyer in the household of Kinner K. Boyer; 1670
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 1
+4 FIELD
+5 NAME ED
+5 VALUE 70
+4 FIELD
+5 NAME PageID
+5 VALUE page 9B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 175
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 175
+4 FIELD
+5 NAME Person
+5 VALUE Price B. Boyer in the household of Kinner K. Boyer
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1670
+3 DATA
+4 TEXT Son | W | M | May | 1898 | 2 | S | Texas |
+1 CENS
+2 DATE 5 MAY 1910
+2 PLAC Mitchell, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 2; 168; p. 3B (penned); 49; 51; Price V. Boyce in the household of Kinner K. Boyce; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 2
+4 FIELD
+5 NAME ED
+5 VALUE 168
+4 FIELD
+5 NAME PageID
+5 VALUE p. 3B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 49
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 51
+4 FIELD
+5 NAME Person
+5 VALUE Price V. Boyce in the household of Kinner K. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Son | M | W | 12 | S | Texas | none
+1 DEAT
+1 FAMS @F2223@
+1 FAMC @F2195@
+0 @I7215@ INDI
+1 NAME Matilda P. /Thomas/
+2 GIVN Matilda P.
+2 SURN Thomas
+1 SEX F
+1 _UID D047D2DD64D7406980277750173C2B8C2259
+1 _FSFTID LZXX-BRS
+1 CHAN
+2 DATE 28 AUG 2013
+1 BIRT
+2 DATE 27 APR 1857
+1 DEAT
+2 DATE 24 MAY 1917
+1 BURI
+2 PLAC Menard, Menard, Texas, United States
+2 ADDR Little Saline Cemetery
+1 FAMS @F2197@
+0 @I7216@ INDI
+1 NAME Harriette Almeda /Callahan/
+2 GIVN Harriette Almeda
+2 SURN Callahan
+1 SEX F
+1 _UID 06772400B69C45DBB02A7E01205C908B03D0
+1 _FSFTID KWJB-XDZ
+1 CHAN
+2 DATE 6 OCT 2013
+1 BIRT
+2 DATE 28 MAR 1857
+2 PLAC Kansas City, Wyandotte, Kansas, United States
+1 DEAT
+2 DATE 1936
+1 BURI
+2 PLAC Coahoma, Howard, Texas, United States
+2 ADDR Coahoma Cemetery
+1 FAMS @F2198@
+0 @I7217@ INDI
+1 NAME Emma Kate /Engle/
+2 GIVN Emma Kate
+2 SURN Engle
+1 SEX F
+1 _UID B9BC0CF07F6D485A8AB42313B0C2A65BE623
+1 _FSFTID LDTP-ZYC
+1 CHAN
+2 DATE 28 AUG 2013
+1 BIRT
+2 DATE 14 FEB 1878
+1 DEAT
+2 DATE 19 MAY 1968
+1 BURI
+2 PLAC Burnet, Burnet, Texas, United States
+2 ADDR Odd Fellows Cemetery
+1 FAMS @F2199@
+0 @I7218@ INDI
+1 NAME Essie //
+2 GIVN Essie
+1 SEX F
+1 _UID 4EBEDADFAB1A44B19D57191A25915E813B29
+1 _FSFTID LDTL-VWJ
+1 CHAN
+2 DATE 28 AUG 2013
+1 BIRT
+2 DATE MAR 1870
+2 PLAC Alabama, United States
+1 DEAT
+2 DATE 1900
+1 BURI
+2 PLAC Burnet, Burnet, Texas, United States
+2 ADDR Odd Fellows Cemetery
+1 FAMS @F2200@
+0 @I7219@ INDI
+1 NAME Aaron Forman /Boyce/
+2 GIVN Aaron Forman
+2 SURN Boyce
+2 NSFX Sr.
+1 SEX M
+1 _UID DC6C8E7FF4F848BFB8753810C39731579F07
+1 _FSFTID L7T5-CXS
+1 CHAN
+2 DATE 28 DEC 2013
+1 BIRT
+2 DATE 21 APR 1800
+2 PLAC Tennessee, United States
+1 DEAT
+2 DATE 4 SEP 1846
+2 PLAC Texas, United States
+1 BURI
+2 PLAC Manor, Travis, Texas, United States
+2 ADDR Boyce Family Cemetery
+1 FAMS @F2201@
+0 @I7220@ INDI
+1 NAME Elizabeth Judah /Ely/
+2 GIVN Elizabeth Judah
+2 SURN Ely
+1 SEX F
+1 _UID 4379E5095B1340E89124469F297EA84972F9
+1 _FSFTID L4QL-219
+1 CHAN
+2 DATE 29 AUG 2013
+1 BIRT
+2 DATE 16 FEB 1804
+2 PLAC Kentucky, United States
+1 CENS
+2 DATE 10 SEP 1850
+2 PLAC Travis, Texas, United States
+2 SOUR @S81@
+3 PAGE p. 286 (penned-missing); 154; 154; Elizabeth Boyce; 915
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+4 FIELD
+5 NAME PageID
+5 VALUE p. 286 (penned-missing)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 154
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 154
+4 FIELD
+5 NAME Person
+5 VALUE Elizabeth Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 915
+3 DATA
+4 TEXT 45 | F | | | 500 | Kentucky
+1 DEAT
+2 DATE 13 JAN 1884
+1 BURI
+2 PLAC Manor, Travis, Texas, United States
+2 ADDR Boyce Family Cemetery
+1 FAMS @F2201@
+0 @I7221@ INDI
+1 NAME Mary Ann /Boyce/
+2 GIVN Mary Ann
+2 SURN Boyce
+1 SEX F
+1 _UID D1409FA0B45A4A73BAFAE5C9BDD43F59A617
+1 _FSFTID LQ52-WQK
+1 CHAN
+2 DATE 25 MAR 2014
+1 BIRT
+2 DATE 15 AUG 1823
+2 PLAC Missouri, United States
+1 DEAT
+2 DATE 28 OCT 1866
+2 PLAC Texas, United States
+1 BURI
+2 PLAC Llano, Texas, United States
+2 ADDR Moss Cemetery
+1 FAMS @F2202@
+1 FAMC @F2201@
+0 @I7222@ INDI
+1 NAME Matthew Mark /Moss/
+2 GIVN Matthew Mark
+2 SURN Moss
+2 NSFX III
+1 SEX M
+1 _UID B07630B6D0C44C0BBFB4408943DB5CF4A1A9
+1 _FSFTID LQ52-W3W
+1 CHAN
+2 DATE 11 AUG 2014
+1 BIRT
+2 DATE 1802
+1 DEAT
+2 DATE 1 AUG 1895
+2 PLAC Llano, Texas, United States
+1 FAMS @F2202@
+0 @I7223@ INDI
+1 NAME James /Boyce/
+2 GIVN James
+2 SURN Boyce
+1 SEX M
+1 _UID A7FF4AC0305B4E49B8F24EDAE42106BF6E25
+1 _FSFTID LDT7-ZDD
+1 CHAN
+2 DATE 30 AUG 2013
+1 BIRT
+2 DATE 1 SEP 1826
+2 PLAC Missouri, United States
+1 DEAT
+2 DATE 11 NOV 1841
+2 PLAC Travis, Texas Republic, United States
+1 BURI
+2 PLAC Manor, Travis, Texas, United States
+2 ADDR Boyce Family Cemetery
+2 NOTE He shares grave marker with father Aaron.
+1 FAMC @F2201@
+0 @I7224@ INDI
+1 NAME Elizabeth /Boyce/
+2 GIVN Elizabeth
+2 SURN Boyce
+1 SEX F
+1 _UID 7C7968FC46824AEABE2741880A8D103BE5A8
+1 _FSFTID KLV3-C74
+1 CHAN
+2 DATE 7 NOV 2013
+1 BIRT
+2 DATE 15 AUG 1834
+2 PLAC Wisconsin, United States
+1 CENS
+2 DATE 10 SEP 1850
+2 PLAC Travis, Texas, United States
+2 SOUR @S81@
+3 PAGE p. 286 (penned-missing); 154; 154; Elizabeth Pomphry in the household of Elizabeth Boyce; 915
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+4 FIELD
+5 NAME PageID
+5 VALUE p. 286 (penned-missing)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 154
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 154
+4 FIELD
+5 NAME Person
+5 VALUE Elizabeth Pomphry in the household of Elizabeth Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 915
+3 DATA
+4 TEXT 18 | F | | | | Wisconsin
+1 DEAT
+2 DATE 11 MAR 1870
+1 BURI
+2 PLAC Manor, Travis, Texas, United States
+2 ADDR Boyce Family Cemetery
+1 FAMS @F2203@
+1 FAMS @F2208@
+1 FAMC @F2201@
+0 @I7225@ INDI
+1 NAME Reason Beal /Pumphrey/
+2 GIVN Reason Beal
+2 SURN Pumphrey
+1 SEX M
+1 _UID 9B51DAFAE6BA4F66AE04AA6547B3A4BF333C
+1 _FSFTID KLV3-CHJ
+1 CHAN
+2 DATE 30 SEP 2013
+1 BIRT
+2 DATE ABT 1822
+2 PLAC Virginia, United States
+1 CENS
+2 DATE 10 SEP 1850
+2 PLAC Travis, Texas, United States
+2 SOUR @S81@
+3 PAGE p. 286 (penned-missing); 154; 154; Reason Pomphry in the household of Elizabeth Boyce; 915
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+4 FIELD
+5 NAME PageID
+5 VALUE p. 286 (penned-missing)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 154
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 154
+4 FIELD
+5 NAME Person
+5 VALUE Reason Pomphry in the household of Elizabeth Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 915
+3 DATA
+4 TEXT 28 | M | | Physician | 474 | Virginia
+1 DEAT
+2 DATE 1857
+1 FAMS @F2203@
+0 @I7226@ INDI
+1 NAME Aaron Firman /Boyce/
+2 GIVN Aaron Firman
+2 SURN Boyce
+1 SEX M
+1 _UID D52BD261514E4E6BB06CDA7420C16EF23698
+1 _FSFTID L7T5-CD7
+1 CHAN
+2 DATE 10 NOV 2013
+1 BIRT
+2 DATE 29 FEB 1840
+2 PLAC Texas, United States
+1 CENS
+2 DATE 10 SEP 1850
+2 PLAC Travis, Texas, United States
+2 SOUR @S81@
+3 PAGE p. 286 (penned-missing); 154; 154; Aaron Boyce in the household of Elizabeth Boyce; 915
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+4 FIELD
+5 NAME PageID
+5 VALUE p. 286 (penned-missing)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 154
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 154
+4 FIELD
+5 NAME Person
+5 VALUE Aaron Boyce in the household of Elizabeth Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 915
+3 DATA
+4 TEXT 11 | M | | | | Texas
+1 DEAT
+2 DATE 28 FEB 1912
+2 PLAC Imperial, California, United States
+1 BURI
+2 PLAC El Centro, Imperial, California, United States
+2 ADDR Evergreen Cemetery
+1 FAMS @F2206@
+1 FAMC @F2201@
+0 @I7227@ INDI
+1 NAME Stephen /Boyce/
+2 GIVN Stephen
+2 SURN Boyce
+1 SEX M
+1 _UID D968EA5D9AD347C881D0043FE8A17623BAE1
+1 _FSFTID LDTW-76R
+1 CHAN
+2 DATE 13 AUG 2014
+1 BIRT
+2 DATE ABT 1829
+2 PLAC Wisconsin, United States
+1 CENS
+2 DATE 10 SEP 1850
+2 PLAC Travis, Texas, United States
+2 SOUR @S81@
+3 PAGE p. 286 (penned-missing); 154; 154; Stephen Boyce in the household of Elizabeth Boyce; 915
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+4 FIELD
+5 NAME PageID
+5 VALUE p. 286 (penned-missing)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 154
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 154
+4 FIELD
+5 NAME Person
+5 VALUE Stephen Boyce in the household of Elizabeth Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 915
+3 DATA
+4 TEXT 21 | M | | Farmer | | Wisconsin
+1 DEAT
+1 FAMS @F2204@
+1 FAMS @F2210@
+1 FAMC @F2201@
+0 @I7228@ INDI
+1 NAME Malvina A. /Boyce/
+2 GIVN Malvina A.
+2 SURN Boyce
+1 SEX F
+1 _UID 1C34D87A54CB4ABC872542DFDF9A6E199458
+1 _FSFTID KLV7-6DJ
+1 CHAN
+2 DATE 29 AUG 2014
+1 BIRT
+2 DATE 29 MAY 1837
+2 PLAC Wisconsin, United States
+1 CENS
+2 DATE 10 SEP 1850
+2 PLAC Travis, Texas, United States
+2 SOUR @S81@
+3 PAGE p. 286 (penned-missing); 154; 154; Malinda Boyce in the household of Elizabeth Boyce; 915
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+4 FIELD
+5 NAME PageID
+5 VALUE p. 286 (penned-missing)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 154
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 154
+4 FIELD
+5 NAME Person
+5 VALUE Malinda Boyce in the household of Elizabeth Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 915
+3 DATA
+4 TEXT 13 | F | | | | Wisconsin
+1 CENS
+2 DATE 14 JUN 1860
+2 PLAC Williamson, Texas, United States
+2 ADDR Williamson Division
+1 DEAT
+1 FAMS @F2205@
+1 FAMC @F2201@
+0 @I7229@ INDI
+1 NAME William /Boyce/
+2 GIVN William
+2 SURN Boyce
+1 SEX M
+1 _UID 05AD064EFBB94A6B98DB13267EB5EC0E4805
+1 _FSFTID KLV3-HY7
+1 CHAN
+2 DATE 1 SEP 2013
+1 BIRT
+2 DATE 17 JAN 1842
+2 PLAC Texas, United States
+1 CENS
+2 DATE 10 SEP 1850
+2 PLAC Travis, Texas, United States
+2 SOUR @S81@
+3 PAGE p. 286 (penned-missing); 154; 154; William Boyce in the household of Elizabeth Boyce; 915
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+4 FIELD
+5 NAME PageID
+5 VALUE p. 286 (penned-missing)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 154
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 154
+4 FIELD
+5 NAME Person
+5 VALUE William Boyce in the household of Elizabeth Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 915
+3 DATA
+4 TEXT 10 | M | | | | Texas
+1 DEAT
+2 DATE 16 JUN 1905
+1 BURI
+2 PLAC Travis, Texas, United States
+2 ADDR Gregg Cemetery
+1 FAMS @F2209@
+1 FAMC @F2201@
+0 @I7230@ INDI
+1 NAME John /Boyce/
+2 GIVN John
+2 SURN Boyce
+1 SEX M
+1 _UID 3E9AEDD972564A22BBF884D02A3F0F3D8E89
+1 _FSFTID 9FQ4-92X
+1 CHAN
+2 DATE 29 AUG 2013
+1 BIRT
+2 DATE ABT 1843
+2 PLAC Texas, United States
+1 CENS
+2 DATE 10 SEP 1850
+2 PLAC Travis, Texas, United States
+2 SOUR @S81@
+3 PAGE p. 286 (penned-missing); 154; 154; John Boyce in the household of Elizabeth Boyce; 915
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+4 FIELD
+5 NAME PageID
+5 VALUE p. 286 (penned-missing)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 154
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 154
+4 FIELD
+5 NAME Person
+5 VALUE John Boyce in the household of Elizabeth Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 915
+3 DATA
+4 TEXT 7 | M | | | | Texas
+1 DEAT Y
+1 FAMC @F2201@
+0 @I7231@ INDI
+1 NAME Fanny /Foster/
+2 GIVN Fanny
+2 SURN Foster
+1 SEX F
+1 _UID 5CEE78FAAEB648D3BAC48E29169ACB38236A
+1 _FSFTID LDTW-7FS
+1 CHAN
+2 DATE 29 AUG 2013
+1 BIRT
+2 DATE 18 MAR 1835
+1 DEAT
+2 DATE 29 OCT 1858
+1 FAMS @F2204@
+0 @I7232@ INDI
+1 NAME Dewitt C. /Booth/
+2 GIVN Dewitt C.
+2 SURN Booth
+1 SEX M
+1 _UID 22F08A27F9854414832446334C99167125C5
+1 _FSFTID KLV7-682
+1 CHAN
+2 DATE 29 AUG 2014
+1 BIRT
+2 DATE ABT 1830
+2 PLAC Mississippi, United States
+1 CENS
+2 DATE 14 JUN 1860
+2 PLAC Williamson, Texas, United States
+2 ADDR Williamson Division
+1 DEAT
+1 FAMS @F2205@
+0 @I7233@ INDI
+1 NAME Mary Malvenia /Cain/
+2 GIVN Mary Malvenia
+2 SURN Cain
+1 SEX F
+1 _UID C08633EDAA324DD0BE980F0C8E21855357C3
+1 _FSFTID KDBN-2KC
+1 CHAN
+2 DATE 9 NOV 2013
+1 BIRT
+2 DATE CALC 5 FEB 1846
+2 PLAC Arkansas, United States
+1 DEAT
+2 DATE 12 JUN 1911
+1 BURI
+2 PLAC El Centro, Imperial, California, United States
+2 ADDR Evergreen Cemetery
+1 FAMS @F2206@
+0 @I7234@ INDI
+1 NAME Imogen /Boyce/
+2 GIVN Imogen
+2 SURN Boyce
+1 SEX F
+1 _UID CA89A296C72F4FA895A30CA0C25AFAC032C7
+1 _FSFTID KXCT-W8D
+1 CHAN
+2 DATE 29 AUG 2013
+1 BIRT
+2 DATE 21 MAY 1867
+2 PLAC Travis, Texas, United States
+1 DEAT
+2 DATE 3 MAR 1957
+2 PLAC California, United States
+1 BURI
+2 PLAC El Centro, Imperial, California, United States
+2 ADDR Evergreen Cemetery
+1 FAMS @F2207@
+1 FAMC @F2206@
+0 @I7235@ INDI
+1 NAME Austin Ira /Aten/
+2 GIVN Austin Ira
+2 SURN Aten
+1 SEX M
+1 _UID 28A16B9C4A0A4B2C9157C2C8E66F4917C200
+1 _FSFTID LDTL-C34
+1 CHAN
+2 DATE 6 OCT 2013
+1 BIRT
+2 DATE 3 SEP 1862
+2 PLAC Alexander, Illinois, United States
+1 DEAT
+2 DATE 6 JUL 1953
+1 BURI
+2 PLAC El Centro, Imperial, California, United States
+1 FAMS @F2207@
+0 @I7236@ INDI
+1 NAME John Ely /Boyce/
+2 GIVN John Ely
+2 SURN Boyce
+1 SEX M
+1 _UID BF771297A9FF42AEB69D4E9D3AA5CFF5586D
+1 _FSFTID MKB1-8L1
+1 CHAN
+2 DATE 29 AUG 2013
+1 BIRT
+2 DATE 28 OCT 1870
+2 PLAC Austin, Travis, Texas, United States
+1 DEAT
+2 DATE 23 APR 1916
+2 PLAC California, United States
+1 BURI
+2 PLAC El Centro, Imperial, California, United States
+2 ADDR Evergreen Cemetery
+1 FAMC @F2206@
+0 @I7237@ INDI
+1 NAME Reason Beal /Pumphrey/
+2 GIVN Reason Beal
+2 SURN Pumphrey
+1 SEX M
+1 _UID 3BCCA54398A647B6A0D1131A299F868CA243
+1 _FSFTID KLXR-C3S
+1 CHAN
+2 DATE 29 AUG 2013
+1 BIRT
+2 DATE 3 APR 1854
+2 PLAC Travis, Texas, United States
+1 DEAT
+2 DATE 4 MAY 1920
+2 PLAC Austin, Travis, Texas, United States
+1 BURI
+2 PLAC Taylor, Williamson, Texas, United States
+2 ADDR Taylor City Cemetery
+1 FAMC @F2203@
+0 @I7238@ INDI
+1 NAME John Boyce /Pumphrey/
+2 GIVN John Boyce
+2 SURN Pumphrey
+1 SEX M
+1 _UID B2D6F9CCA67C4DFCB01A43709D9F92D2D5DD
+1 _FSFTID KLV3-C44
+1 CHAN
+2 DATE 29 AUG 2013
+1 BIRT
+2 DATE 10 NOV 1852
+2 PLAC Travis, Texas, United States
+1 DEAT
+2 DATE 20 JUL 1917
+2 PLAC Taylor, Williamson, Texas, United States
+1 BURI
+2 PLAC Taylor, Williamson, Texas, United States
+2 ADDR Taylor City Cemetery
+1 FAMC @F2203@
+0 @I7239@ INDI
+1 NAME David F. /Knight/
+2 GIVN David F.
+2 SURN Knight
+1 SEX M
+1 _UID 3C0230DA6C024867AE59F0CCA4F1013AF83F
+1 _FSFTID LDT4-F77
+1 CHAN
+2 DATE 29 AUG 2013
+1 BIRT
+2 DATE EST 1831
+1 DEAT Y
+1 FAMS @F2208@
+0 @I7240@ INDI
+1 NAME Mary Ophelia /Stone/
+2 GIVN Mary Ophelia
+2 SURN Stone
+1 SEX F
+1 _UID 1C44B2C85EB54E1DAD4FC13871CBA7F32375
+1 _FSFTID KLV3-HBD
+1 CHAN
+2 DATE 4 OCT 2013
+1 BIRT
+2 DATE 1 APR 1845
+2 PLAC Bastrop, Texas Republic, United States
+1 DEAT
+2 DATE 27 MAR 1937
+1 DEAT
+2 PLAC Austin, Travis, Texas, United States
+2 ADDR Texas State Cemetery
+1 FAMS @F2209@
+0 @I7241@ INDI
+1 NAME Claudia J. /Boyce/
+2 GIVN Claudia J.
+2 SURN Boyce
+1 SEX F
+1 _UID 92EF01747D964E339B82C96F72A4A4892204
+1 _FSFTID LDTF-ZK9
+1 CHAN
+2 DATE 28 DEC 2013
+1 BIRT
+2 DATE SEP 1878
+2 PLAC Texas, United States
+1 DEAT Y
+1 FAMC @F2209@
+0 @I7242@ INDI
+1 NAME Dony K. /Boyce/
+2 GIVN Dony K.
+2 SURN Boyce
+1 SEX F
+1 _UID 408505EDDE0348F782D98DA9BB1127086331
+1 _FSFTID 9NSZ-Q1W
+1 CHAN
+2 DATE 29 AUG 2013
+1 BIRT
+2 DATE FEB 1881
+2 PLAC Texas, United States
+1 DEAT Y
+1 FAMC @F2209@
+0 @I7243@ INDI
+1 NAME Gladys /Boyce/
+2 GIVN Gladys
+2 SURN Boyce
+1 SEX F
+1 _UID BE608941C9FC4E10A74D531464C3D6F6594B
+1 _FSFTID 9NSZ-Q14
+1 CHAN
+2 DATE 29 AUG 2013
+1 BIRT
+2 DATE DEC 1884
+2 PLAC Texas, United States
+1 DEAT Y
+1 FAMC @F2209@
+0 @I7244@ INDI
+1 NAME Bell /Boyce/
+2 GIVN Bell
+2 SURN Boyce
+1 NAME Annie Isabelle /Boyce/
+2 GIVN Annie Isabelle
+2 SURN Boyce
+1 SEX F
+1 _UID ED5AD91A264F40CBA9487012755FFCA5A2DE
+1 _FSFTID KJD1-2DP
+1 CHAN
+2 DATE 7 NOV 2013
+1 BIRT
+2 DATE JAN 1876
+2 PLAC Texas, United States
+1 DEAT Y
+1 FAMC @F2206@
+0 @I7245@ INDI
+1 NAME Iona Lucile /Boyce/
+2 GIVN Iona Lucile
+2 SURN Boyce
+1 SEX F
+1 _UID 42C7A136A78B4B2F86586E719DA26A2E2074
+1 _FSFTID MTG9-KQS
+1 CHAN
+2 DATE 29 AUG 2013
+1 BIRT
+2 DATE 7 MAY 1888
+2 PLAC Texas, United States
+1 DEAT
+2 DATE 10 FEB 1979
+1 BURI
+2 PLAC El Centro, Imperial, California, United States
+2 ADDR Evergreen Cemetery
+1 FAMC @F2206@
+0 @I7246@ INDI
+1 NAME Helen M. //
+2 GIVN Helen M.
+1 SEX F
+1 _UID DDB1E8CA50B64C799F044C3D62BF3CF5892B
+1 _FSFTID LDTW-7FG
+1 CHAN
+2 DATE 28 DEC 2013
+1 BIRT
+2 DATE ABT 1840
+2 PLAC Arkansas, United States
+1 DEAT Y
+1 FAMS @F2210@
+0 @I7247@ INDI
+1 NAME Alonzo Vincent /Boyce/
+2 GIVN Alonzo Vincent
+2 SURN Boyce
+1 SEX M
+1 _UID B8DD20C0B49E40E7B07C91CA44ED74233DEA
+1 _FSFTID LDTW-7JH
+1 CHAN
+2 DATE 29 AUG 2013
+1 BIRT
+2 DATE 2 MAY 1857
+2 PLAC Texas, United States
+1 DEAT
+2 DATE 10 NOV 1925
+1 BURI
+2 PLAC Del Rio, Val Verde, Texas, United States
+2 ADDR Westlawn Cemetery
+1 FAMC @F2210@
+0 @I7248@ INDI
+1 NAME Alvia /Boyce/
+2 GIVN Alvia
+2 SURN Boyce
+1 SEX F
+1 _UID 13F89C16316F4EE4BACB412CBF831BB997B2
+1 _FSFTID LDTW-7V1
+1 CHAN
+2 DATE 23 JAN 2014
+1 BIRT
+2 DATE ABT 1859
+2 PLAC Texas, United States
+1 DEAT Y
+1 FAMC @F2210@
+0 @I7249@ INDI
+1 NAME James Elbert /Morrison/
+2 GIVN James Elbert
+2 SURN Morrison
+1 SEX M
+1 _UID 4359324C3299495CB338EFD0149586DD40C2
+1 _FSFTID 2ZS3-CCD
+1 CHAN
+2 DATE 26 SEP 2013
+1 BIRT
+2 DATE 17 NOV 1845
+2 PLAC Illinois, United States
+1 CENS
+2 DATE 28 SEP 1850
+2 PLAC Milam, Texas, United States
+1 CENS
+2 DATE 25 AUG 1870
+2 PLAC Hill, Texas, United States
+2 ADDR Precinct No. 4
+1 CENS
+2 DATE 21 JUN 1900
+2 PLAC Hamilton, Texas, United States
+2 ADDR Justice Precinct 5
+2 SOUR @S84@
+3 PAGE Justice Precinct No. 5; 86; p. 11A (penned); 166; 169; James E. Morrison; 1641
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 86
+4 FIELD
+5 NAME PageID
+5 VALUE p. 11A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 166
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 169
+4 FIELD
+5 NAME Person
+5 VALUE James E. Morrison
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1641
+3 DATA
+4 TEXT Head | W | M | Nov | 1846 | 53 | M-20 | Illinois | Farmer
+1 CENS
+2 DATE 19 APR 1910
+2 PLAC Loraine, Mitchell, Texas, United States
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 5; 171; p. 5A (penned); 89; 89; Elbert J. Morrisson; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 171
+4 FIELD
+5 NAME PageID
+5 VALUE p. 5A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 89
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 89
+4 FIELD
+5 NAME Person
+5 VALUE Elbert J. Morrisson
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Head | M | W | 64 | M1-30 | Illinois | Freighter-own wagon
+1 DEAT
+2 DATE 14 JAN 1924
+2 PLAC Loraine, Mitchell, Texas, United States
+1 BURI
+2 PLAC Loraine, Mitchell, Texas, United States
+2 ADDR Loraine Cemetery
+1 FAMS @F2211@
+1 FAMC @F2213@
+0 @I7250@ INDI
+1 NAME Martha Elinor /Myers/
+2 GIVN Martha Elinor
+2 SURN Myers
+1 SEX F
+1 _UID 28C1FC9BEA734455871A7D6E91F4921E3768
+1 _FSFTID KNC9-9B9
+1 CHAN
+2 DATE 26 SEP 2013
+1 BIRT
+2 DATE 26 OCT 1860
+2 PLAC Texas, United States
+1 CENS
+2 DATE 21 JUN 1900
+2 PLAC Hamilton, Texas, United States
+2 ADDR Justice Precinct 5
+2 SOUR @S84@
+3 PAGE Justice Precinct No. 5; 86; p. 11A (penned); 166; 169; Martha E. Morrison in the household of James E. Morrison; 1641
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 86
+4 FIELD
+5 NAME PageID
+5 VALUE p. 11A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 166
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 169
+4 FIELD
+5 NAME Person
+5 VALUE Martha E. Morrison in the household of James E. Morrison
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1641
+3 NOTE {10 children with 9 living}
+3 DATA
+4 TEXT Wife | W | F | Oct | 1860 | 39 | M-20 | Texas |
+1 CENS
+2 DATE 19 APR 1910
+2 PLAC Loraine, Mitchell, Texas, United States
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 5; 171; p. 5A (penned); 89; 89; Myers E. Morrisson in the household of Elbert J. Morrisson; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 171
+4 FIELD
+5 NAME PageID
+5 VALUE p. 5A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 89
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 89
+4 FIELD
+5 NAME Person
+5 VALUE Myers E. Morrisson in the household of Elbert J. Morrisson
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 NOTE {11 children with [9] living}
+3 DATA
+4 TEXT Wife | F | W | 49 | M1-30 | Texas | none
+1 DEAT
+2 DATE 7 FEB 1943
+2 PLAC Martin, Texas, United States
+1 BURI
+2 PLAC Loraine, Mitchell, Texas, United States
+2 ADDR Loraine Cemetery
+1 FAMS @F2211@
+1 FAMC @F2212@
+0 @I7251@ INDI
+1 NAME Almed A. /Morrison/
+2 GIVN Almed A.
+2 SURN Morrison
+1 SEX F
+1 _UID A4C748B4DE954D3A857CA05EAB2B5DAE418F
+1 _FSFTID 9MXM-T4S
+1 CHAN
+2 DATE 4 SEP 2013
+1 BIRT
+2 DATE FEB 1884
+2 PLAC Texas, United States
+1 CENS
+2 DATE 21 JUN 1900
+2 PLAC Hamilton, Texas, United States
+2 ADDR Justice Precinct 5
+2 SOUR @S84@
+3 PAGE Justice Precinct No. 5; 86; p. 11A (penned); 166; 169; Almed A. Morrison in the household of James E. Morrison; 1641
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 86
+4 FIELD
+5 NAME PageID
+5 VALUE p. 11A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 166
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 169
+4 FIELD
+5 NAME Person
+5 VALUE Almed A. Morrison in the household of James E. Morrison
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1641
+3 DATA
+4 TEXT Daughter | W | F | Feb | 1884 | 16 | S | Texas |
+1 DEAT Y
+1 FAMC @F2211@
+0 @I7252@ INDI
+1 NAME Emily Vashti /Morrison/
+2 GIVN Emily Vashti
+2 SURN Morrison
+1 SEX F
+1 _UID D4F6619533534A46B726514E4B266D95C513
+1 _FSFTID K46Y-RN3
+1 CHAN
+2 DATE 24 JUL 2014
+1 BIRT
+2 DATE 3 JUL 1886
+2 PLAC Hamilton, Texas, United States
+1 CENS
+2 DATE 21 JUN 1900
+2 PLAC Hamilton, Texas, United States
+2 ADDR Justice Precinct 5
+2 SOUR @S84@
+3 PAGE Justice Precinct No. 5; 86; p. 11A (penned); 166; 169; Emily B. Morrison in the household of James E. Morrison; 1641
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 86
+4 FIELD
+5 NAME PageID
+5 VALUE p. 11A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 166
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 169
+4 FIELD
+5 NAME Person
+5 VALUE Emily B. Morrison in the household of James E. Morrison
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1641
+3 DATA
+4 TEXT Daughter | W | F | July | 1886 | 13 | S | Texas |
+1 DEAT
+2 DATE 24 FEB 1973
+1 BURI
+2 PLAC Midland, Midland, Texas, United States
+2 ADDR Fairview Cemetery
+1 FAMC @F2211@
+0 @I7253@ INDI
+1 NAME Maybell /Morrison/
+2 GIVN Maybell
+2 SURN Morrison
+1 SEX F
+1 _UID B64A52230D914692A7C793D5C7315B3D5194
+1 _FSFTID KZBG-LCF
+1 CHAN
+2 DATE 4 SEP 2013
+1 BIRT
+2 DATE 5 AUG 1888
+2 PLAC Texas, United States
+1 CENS
+2 DATE 21 JUN 1900
+2 PLAC Hamilton, Texas, United States
+2 ADDR Justice Precinct 5
+2 SOUR @S84@
+3 PAGE Justice Precinct No. 5; 86; p. 11A (penned); 166; 169; Mary B. Morrison in the household of James E. Morrison; 1641
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 86
+4 FIELD
+5 NAME PageID
+5 VALUE p. 11A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 166
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 169
+4 FIELD
+5 NAME Person
+5 VALUE Mary B. Morrison in the household of James E. Morrison
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1641
+3 DATA
+4 TEXT Daughter | W | F | Aug | 1888 | 11 | S | Texas |
+1 DEAT
+2 DATE 11 FEB 1972
+2 SOUR @S56@
+3 PAGE Maybell Morrison Jones, 1972
+3 _TMPLT
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME ItemOfInterest
+5 VALUE Maybell Morrison Jones, 1972
+3 DATA
+4 TEXT 11 Feb 1972 | Dublin, Erath, Texas, United States | Female | Widowed | 5 A
+5 CONC ug 1888 | Hamilton, Texas | J E Morrison | Martha F Meyers | 10423
+1 BURI
+2 PLAC Turnersville, Coryell, Texas, United States
+2 ADDR Turnersville Cemetery
+1 FAMS @F2233@
+1 FAMC @F2211@
+0 @I7254@ INDI
+1 NAME Jenny Lula /Morrison/
+2 GIVN Jenny Lula
+2 SURN Morrison
+1 SEX F
+1 _UID BE594466B0B44FB889A6889F838EE943BF6F
+1 _FSFTID MT29-MZK
+1 CHAN
+2 DATE 6 SEP 2013
+1 BIRT
+2 DATE 7 APR 1892
+2 PLAC Texas, United States
+1 CENS
+2 DATE 21 JUN 1900
+2 PLAC Hamilton, Texas, United States
+2 ADDR Justice Precinct 5
+2 SOUR @S84@
+3 PAGE Justice Precinct No. 5; 86; p. 11A (penned); 166; 169; Ginnie L. Morrison in the household of James E. Morrison; 1641
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 86
+4 FIELD
+5 NAME PageID
+5 VALUE p. 11A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 166
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 169
+4 FIELD
+5 NAME Person
+5 VALUE Ginnie L. Morrison in the household of James E. Morrison
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1641
+3 DATA
+4 TEXT Daughter | W | F | Apr | 1892 | 8 | S | Texas |
+1 CENS
+2 DATE 19 APR 1910
+2 PLAC Loraine, Mitchell, Texas, United States
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 5; 171; p. 5A (penned); 89; 89; Lula J. Morrisson in the household of Elbert J. Morrisson; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 171
+4 FIELD
+5 NAME PageID
+5 VALUE p. 5A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 89
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 89
+4 FIELD
+5 NAME Person
+5 VALUE Lula J. Morrisson in the household of Elbert J. Morrisson
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Daughter | F | W | 18 | S | Texas | none
+1 DEAT
+2 DATE 15 MAR 1968
+2 PLAC Mitchell, Texas, United States
+1 BURI
+2 PLAC Roscoe, Nolan, Texas, United States
+2 ADDR Roscoe Cemetery
+1 FAMS @F2234@
+1 FAMC @F2211@
+0 @I7255@ INDI
+1 NAME Sammie Ruth /Morrison/
+2 GIVN Sammie Ruth
+2 SURN Morrison
+1 SEX F
+1 _UID 38892F73DC294FA19F2406997CB762C21172
+1 _FSFTID 9M6J-ZMQ
+1 CHAN
+2 DATE 6 SEP 2013
+1 BIRT
+2 DATE 23 FEB 1894
+2 PLAC Texas, United States
+1 CENS
+2 DATE 21 JUN 1900
+2 PLAC Hamilton, Texas, United States
+2 ADDR Justice Precinct 5
+2 SOUR @S84@
+3 PAGE Justice Precinct No. 5; 86; p. 11A (penned); 166; 169; Sammie R. Morrison in the household of James E. Morrison; 1641
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 86
+4 FIELD
+5 NAME PageID
+5 VALUE p. 11A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 166
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 169
+4 FIELD
+5 NAME Person
+5 VALUE Sammie R. Morrison in the household of James E. Morrison
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1641
+3 DATA
+4 TEXT Daughter | W | F | Feb | 1884 | 6 | S | Texas |
+1 CENS
+2 DATE 19 APR 1910
+2 PLAC Loraine, Mitchell, Texas, United States
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 5; 171; p. 5A (penned); 89; 89; Sammie R. Morrisson in the household of Elbert J. Morrisson; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 171
+4 FIELD
+5 NAME PageID
+5 VALUE p. 5A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 89
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 89
+4 FIELD
+5 NAME Person
+5 VALUE Sammie R. Morrisson in the household of Elbert J. Morrisson
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Daughter | F | W | 15 | S | Texas | none
+1 DEAT
+2 DATE 29 APR 1964
+2 PLAC Sweetwater, Nolan, Texas, United States
+1 BURI
+2 PLAC Hermleigh, Scurry, Texas, United States
+2 ADDR Lone Wolf Cemetery
+1 FAMS @F2235@
+1 FAMC @F2211@
+0 @I7256@ INDI
+1 NAME Nancy E. /Morrison/
+2 GIVN Nancy E.
+2 SURN Morrison
+1 SEX F
+1 _UID 841F9012E47F472D935317433EBAAF0C0FA1
+1 _FSFTID MT29-M8S
+1 CHAN
+2 DATE 20 JUN 2014
+1 BIRT
+2 DATE 26 MAR 1897
+2 PLAC Texas, United States
+1 CENS
+2 DATE 21 JUN 1900
+2 PLAC Hamilton, Texas, United States
+2 ADDR Justice Precinct 5
+2 SOUR @S84@
+3 PAGE Justice Precinct No. 5; 86; p. 11A (penned); 166; 169; Nancy E. Morrison in the household of James E. Morrison; 1641
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 86
+4 FIELD
+5 NAME PageID
+5 VALUE p. 11A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 166
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 169
+4 FIELD
+5 NAME Person
+5 VALUE Nancy E. Morrison in the household of James E. Morrison
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1641
+3 DATA
+4 TEXT Daughter | W | F | Mar | 1897 | 3 | S | Texas |
+1 CENS
+2 DATE 19 APR 1910
+2 PLAC Loraine, Mitchell, Texas, United States
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 5; 171; p. 5A (penned); 89; 89; Nancy E. Morrisson in the household of Elbert J. Morrisson; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 171
+4 FIELD
+5 NAME PageID
+5 VALUE p. 5A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 89
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 89
+4 FIELD
+5 NAME Person
+5 VALUE Nancy E. Morrisson in the household of Elbert J. Morrisson
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Daughter | F | W | 13 | S | Texas | none
+1 DEAT
+2 DATE 5 DEC 1986
+2 PLAC Stanton, Martin, Texas, United States
+1 FAMC @F2211@
+0 @I7257@ INDI
+1 NAME James Seth /Morrison/
+2 GIVN James Seth
+2 SURN Morrison
+1 SEX M
+1 _UID CC39A028709743069B3153539334C5AEC950
+1 _FSFTID 9DMC-5R7
+1 CHAN
+2 DATE 6 SEP 2013
+1 BIRT
+2 DATE 9 JAN 1899
+2 PLAC Texas, United States
+1 CENS
+2 DATE 21 JUN 1900
+2 PLAC Hamilton, Texas, United States
+2 ADDR Justice Precinct 5
+2 SOUR @S84@
+3 PAGE Justice Precinct No. 5; 86; p. 11A (penned); 166; 169; James S. Morrison in the household of James E. Morrison; 1641
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 86
+4 FIELD
+5 NAME PageID
+5 VALUE p. 11A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 166
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 169
+4 FIELD
+5 NAME Person
+5 VALUE James S. Morrison in the household of James E. Morrison
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1641
+3 DATA
+4 TEXT Son | W | M | Jan | 1899 | 1 | S | Texas |
+1 CENS
+2 DATE 19 APR 1910
+2 PLAC Loraine, Mitchell, Texas, United States
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 5; 171; p. 5A (penned); 89; 89; James S. Morrisson in the household of Elbert J. Morrisson; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 171
+4 FIELD
+5 NAME PageID
+5 VALUE p. 5A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 89
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 89
+4 FIELD
+5 NAME Person
+5 VALUE James S. Morrisson in the household of Elbert J. Morrisson
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Son | M | W | 11 | S | Texas | none
+1 DEAT
+2 DATE 25 JUN 1978
+2 PLAC Howard, Texas, United States
+1 FAMC @F2211@
+0 @I7258@ INDI
+1 NAME Joel Henry /Myers/
+2 GIVN Joel Henry
+2 SURN Myers
+1 SEX M
+1 _UID EA128ABEC7A5410F8E817001C1C706B9C716
+1 _FSFTID LC3Z-LCK
+1 CHAN
+2 DATE 7 SEP 2013
+1 BIRT
+2 DATE 22 DEC 1837
+2 PLAC Georgia, United States
+1 DEAT
+2 DATE 25 JAN 1910
+2 PLAC Hillsboro, Hill, Texas, United States
+1 BURI
+2 PLAC Prairie Valley, Hill, Texas, United States
+2 ADDR Prairie Valley Cemetery
+1 OBJE
+2 FILE D:\SkyDrive\Genealogy\Photos\Myers, Joel Henry (-1910).jpg
+2 FORM jpg
+2 TITL Joel Henry Myers
+2 _TYPE PHOTO
+2 _SCBK Y
+2 _PRIM Y
+1 FAMS @F2212@
+0 @I7259@ INDI
+1 NAME Sarah Ann /Walling/
+2 GIVN Sarah Ann
+2 SURN Walling
+1 SEX F
+1 _UID 9964068FFA1E4C8C99AE3C5ED5717D8CB2DE
+1 _FSFTID 94RW-MQ6
+1 CHAN
+2 DATE 2 JUL 2014
+1 BIRT
+2 DATE 2 MAY 1844
+2 PLAC Rusk, Texas, United States
+1 DEAT
+2 DATE 13 MAY 1879
+2 PLAC Hillsboro, Hill, Texas, United States
+1 FAMS @F2212@
+0 @I7260@ INDI
+1 NAME W. Samuel /Morrison/
+2 GIVN W. Samuel
+2 SURN Morrison
+1 SEX M
+1 _UID 6E52B555A9384ACCB4DBAE9A32F267B4D71C
+1 _FSFTID LC9N-DXS
+1 CHAN
+2 DATE 26 SEP 2013
+1 BIRT
+2 DATE 2 MAR 1814
+2 PLAC Tennessee, United States
+1 CENS
+2 DATE 28 SEP 1850
+2 PLAC Milam, Texas, United States
+1 CENS
+2 DATE 25 AUG 1870
+2 PLAC Hill, Texas, United States
+2 ADDR Precinct No. 4
+1 DEAT
+2 DATE 27 JAN 1892
+1 BURI
+2 PLAC Hamilton, Texas, United States
+2 ADDR Hurst Ranch Cemetery
+1 FAMS @F2213@
+0 @I7261@ INDI
+1 NAME Rebecca Ann /Baugh/
+2 GIVN Rebecca Ann
+2 SURN Baugh
+2 NICK Peggy
+1 SEX F
+1 _UID 6F80363D6E11405F85D427F61F901503BD3C
+1 _FSFTID 2ZS3-CNV
+1 CHAN
+2 DATE 7 SEP 2013
+1 BIRT
+2 DATE 1815
+2 PLAC Kentucky, United States
+1 CENS
+2 DATE 28 SEP 1850
+2 PLAC Milam, Texas, United States
+1 DEAT
+2 DATE 1861
+1 BURI
+2 PLAC Hillsboro, Hill, Texas, United States
+2 ADDR Hillsboro City Cemetery
+1 FAMS @F2213@
+0 @I7262@ INDI
+1 NAME Robert Noah /Compton/
+2 GIVN Robert Noah
+2 SURN Compton
+1 SEX M
+1 _UID B821F93A04834A4A8B8A336853B309C3A9E0
+1 _FSFTID LHS8-99J
+1 CHAN
+2 DATE 7 OCT 2013
+1 BIRT
+2 DATE 12 AUG 1840
+2 PLAC Georgia, United States
+1 CENS
+2 DATE 7 JUN 1900
+2 PLAC Eastland, Texas, United States
+2 ADDR Justice Precinct 4
+2 SOUR @S85@
+3 PAGE Justice Precinct 4; 58; p. 4B (penned); 64; 64; Robert Compton; 1629
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 4
+4 FIELD
+5 NAME ED
+5 VALUE 58
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 64
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 64
+4 FIELD
+5 NAME Person
+5 VALUE Robert Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1629
+3 DATA
+4 TEXT head | W | M | Aug | 1840 | 59 | M-34 | Georgia | Farmer
+1 DEAT
+2 DATE 9 JAN 1928
+2 SOUR @S56@
+3 PAGE Robert Noah Compton
+3 _TMPLT
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME ItemOfInterest
+5 VALUE Robert Noah Compton
+3 DATA
+4 TEXT 8 Jan 1928 | Nimrod, Eastland, Texas, United States | Male | Married | 1
+5 CONC 2 Aug 1840 | Alabama | Fields Compton | Thornton | 1501
+1 BURI
+2 PLAC Cisco, Eastland, Texas, United States
+2 ADDR Nimrod Cemetery
+1 FAMS @F2214@
+1 FAMS @F2219@
+1 FAMC @F2218@
+0 @I7263@ INDI
+1 NAME James Henry /Compton/
+2 GIVN James Henry
+2 SURN Compton
+1 SEX M
+1 _UID 0ED9CEB1B3A54208AB9E005DC9E6F899EE09
+1 _FSFTID LZGP-S2G
+1 CHAN
+2 DATE 5 SEP 2013
+1 BIRT
+2 DATE 16 FEB 1889
+2 PLAC Alabama, United States
+1 CENS
+2 DATE 7 JUN 1900
+2 PLAC Eastland, Texas, United States
+2 ADDR Justice Precinct 4
+2 SOUR @S85@
+3 PAGE Justice Precinct 4; 58; p. 4B (penned); 64; 64; James Compton in the household of Robert Compton; 1629
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 4
+4 FIELD
+5 NAME ED
+5 VALUE 58
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 64
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 64
+4 FIELD
+5 NAME Person
+5 VALUE James Compton in the household of Robert Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1629
+3 DATA
+4 TEXT son | W | M | Feb | 1890 | 10 | S | Alabama | at school
+1 DEAT
+2 DATE 8 JUN 1942
+1 BURI
+2 PLAC Loraine, Mitchell, Texas, United States
+2 ADDR Loraine Cemetery
+1 FAMC @F2214@
+0 @I7264@ INDI
+1 NAME William Noah /Compton/
+2 GIVN William Noah
+2 SURN Compton
+1 SEX M
+1 _UID 29687E51195944E89838D97AF445B901144A
+1 _FSFTID LZGP-MQ1
+1 CHAN
+2 DATE 29 AUG 2013
+1 BIRT
+2 DATE 20 NOV 1868
+2 PLAC Tennessee, United States
+1 DEAT
+2 DATE 19 AUG 1955
+1 BURI
+2 PLAC Cisco, Eastland, Texas, United States
+2 ADDR Nimrod Cemetery
+1 FAMC @F2214@
+0 @I7265@ INDI
+1 NAME John Manuel /Compton/
+2 GIVN John Manuel
+2 SURN Compton
+1 SEX M
+1 _UID 2C1C127B6B1A49BC97488BC53A1EA7FF8C91
+1 _FSFTID M1Q8-HF2
+1 CHAN
+2 DATE 7 OCT 2013
+1 BIRT
+2 DATE 6 MAR 1873
+2 PLAC Tennessee, United States
+1 CENS
+2 DATE 7 JUN 1900
+2 PLAC Eastland, Texas, United States
+2 ADDR Justice Precinct 4
+2 SOUR @S85@
+3 PAGE Justice Precinct 4; 58; p. 4B (penned); 66; 66; John Compton; 1629
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 4
+4 FIELD
+5 NAME ED
+5 VALUE 58
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 66
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 66
+4 FIELD
+5 NAME Person
+5 VALUE John Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1629
+3 DATA
+4 TEXT head | W | M | Mar | 1873 | 27 | M-4 | Tennessee | Farmer
+1 DEAT
+2 DATE 7 JUN 1967
+2 PLAC Loraine, Mitchell, Texas, United States
+1 BURI
+2 PLAC Loraine, Mitchell, Texas, United States
+2 ADDR Loraine Cemetery
+1 FAMS @F2215@
+1 FAMS @F2216@
+1 FAMC @F2214@
+0 @I7266@ INDI
+1 NAME Harvey Eugene /Compton/
+2 GIVN Harvey Eugene
+2 SURN Compton
+1 SEX M
+1 _UID DA726E2DF11946AD930C31788039623077D4
+1 _FSFTID LZGP-972
+1 CHAN
+2 DATE 29 AUG 2013
+1 BIRT
+2 DATE 3 JAN 1878
+2 PLAC Alabama, United States
+1 DEAT
+2 DATE 18 FEB 1934
+2 PLAC Mitchell, Texas, United States
+1 FAMC @F2214@
+0 @I7267@ INDI
+1 NAME Pemelia Louise /Bryant/
+2 GIVN Pemelia Louise
+2 SURN Bryant
+1 SEX F
+1 _UID D20F30934B2043F5A99867866958260965B0
+1 _FSFTID LZ81-LHH
+1 CHAN
+2 DATE 7 SEP 2013
+1 BIRT
+2 DATE 28 JAN 1849
+2 PLAC Tennessee, United States
+1 CENS
+2 DATE 7 JUN 1900
+2 PLAC Eastland, Texas, United States
+2 ADDR Justice Precinct 4
+2 SOUR @S85@
+3 PAGE Justice Precinct 4; 58; p. 4B (penned); 64; 64; Pemilie Compton in the household of Robert Compton; 1629
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 4
+4 FIELD
+5 NAME ED
+5 VALUE 58
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 64
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 64
+4 FIELD
+5 NAME Person
+5 VALUE Pemilie Compton in the household of Robert Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1629
+3 NOTE {12 children with 9 living}
+3 DATA
+4 TEXT wife | W | F | Jan | 1849 | 51 | M-34 | Tennessee |
+1 DEAT
+2 DATE 5 SEP 1905
+1 BURI
+2 PLAC Cisco, Eastland, Texas, United States
+2 ADDR Nimrod Cemetery
+1 FAMS @F2214@
+1 FAMC @F2220@
+0 @I7268@ INDI
+1 NAME Fannie Lou /Francis/
+2 GIVN Fannie Lou
+2 SURN Francis
+1 SEX F
+1 _UID EC0F155E1F514CFD80DD4D2C48605D484A50
+1 _FSFTID K2MK-1LS
+1 CHAN
+2 DATE 10 NOV 2013
+1 BIRT
+2 DATE 12 SEP 1876
+2 PLAC Alabama, United States
+1 CENS
+2 DATE 7 JUN 1900
+2 PLAC Eastland, Texas, United States
+2 ADDR Justice Precinct 4
+2 SOUR @S85@
+3 PAGE Justice Precinct 4; 58; p. 4B (penned); 66; 66; Fannie Compton in the household of John Compton; 1629
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 4
+4 FIELD
+5 NAME ED
+5 VALUE 58
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 66
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 66
+4 FIELD
+5 NAME Person
+5 VALUE Fannie Compton in the household of John Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1629
+3 NOTE {2 children with 2 living}
+3 DATA
+4 TEXT wife | W | F | Sept | 1876 | 23 | M-4 | Alabama |
+1 DEAT
+2 DATE 21 JUN 1903 OR 25 JUN 1904
+2 PLAC Texas, United States
+1 FAMS @F2215@
+0 @I7269@ INDI
+1 NAME Letitia M. //
+2 GIVN Letitia M.
+1 SEX F
+1 _UID AA74A1C50BBA4C67814B598DF665ABD98D76
+1 _FSFTID LDTP-HJ2
+1 CHAN
+2 DATE 29 AUG 2013
+1 BIRT
+2 DATE 15 DEC 1874
+2 PLAC Arkansas, United States
+1 DEAT
+2 DATE 6 SEP 1964
+1 BURI
+2 PLAC Loraine, Mitchell, Texas, United States
+2 ADDR Loraine Cemetery
+1 FAMS @F2216@
+0 @I7270@ INDI
+1 NAME William S. /Hopper/
+2 GIVN William S.
+2 SURN Hopper
+1 SEX M
+1 _UID FC717764EE204BE8830E20EBB8CF13B5748C
+1 _FSFTID LDR5-TYX
+1 CHAN
+2 DATE 7 SEP 2013
+1 BIRT
+2 DATE AUG 1851
+2 PLAC Arkansas, United States
+1 CENS
+2 DATE 3 JUN 1880
+2 PLAC Cleburne, Alabama, United States
+2 ADDR Beat No. 1 Borden's
+2 SOUR @S86@
+3 PAGE Beat No. 1 Borden's; 41; p. 5 (penned); 34; 34; William Hopper; 8
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Beat No. 1 Borden's
+4 FIELD
+5 NAME ED
+5 VALUE 41
+4 FIELD
+5 NAME PageID
+5 VALUE p. 5 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 34
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 34
+4 FIELD
+5 NAME Person
+5 VALUE William Hopper
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 8
+3 DATA
+4 TEXT W | M | 28 | Head | M | Farm laborer | Arkansas
+1 DEAT
+2 DATE 5 NOV 1928
+1 BURI
+2 PLAC West Point, Cullman, Alabama, United States
+2 ADDR Crossroads Cemetery
+1 FAMS @F2217@
+0 @I7271@ INDI
+1 NAME Martha E. /Ward/
+2 GIVN Martha E.
+2 SURN Ward
+1 SEX F
+1 _UID 6D5CFA3DF2D146FEAF318F6F81D51A8ADF8B
+1 _FSFTID LDR5-YD8
+1 CHAN
+2 DATE 6 SEP 2013
+1 BIRT
+2 DATE SEP 1844
+2 PLAC Georgia, United States
+1 CENS
+2 DATE 3 JUN 1880
+2 PLAC Cleburne, Alabama, United States
+2 ADDR Beat No. 1 Borden's
+2 SOUR @S86@
+3 PAGE Beat No. 1 Borden's; 41; p. 5 (penned); 34; 34; Martha E. Hopper in the household of William Hopper; 8
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Beat No. 1 Borden's
+4 FIELD
+5 NAME ED
+5 VALUE 41
+4 FIELD
+5 NAME PageID
+5 VALUE p. 5 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 34
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 34
+4 FIELD
+5 NAME Person
+5 VALUE Martha E. Hopper in the household of William Hopper
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 8
+3 DATA
+4 TEXT W | F | 35 | Wife | M | Kepping house | Georgia
+1 DEAT
+2 DATE 5 SEP 1929
+2 PLAC Cullman, Alabama, United States
+1 FAMS @F2217@
+1 FAMC @F2221@
+0 @I7272@ INDI
+1 NAME William J. /Hopper/
+2 GIVN William J.
+2 SURN Hopper
+1 SEX M
+1 _UID 3291DC8CE56B4C91A69368FCB9FFA799ED82
+1 _FSFTID LDRR-98K
+1 CHAN
+2 DATE 7 SEP 2013
+1 BIRT
+2 DATE ABT 1871
+2 PLAC Georgia, United States
+1 CENS
+2 DATE 3 JUN 1880
+2 PLAC Cleburne, Alabama, United States
+2 ADDR Beat No. 1 Borden's
+2 SOUR @S86@
+3 PAGE Beat No. 1 Borden's; 41; p. 5 (penned); 34; 34; William J. Hopper in the household of William Hopper; 8
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Beat No. 1 Borden's
+4 FIELD
+5 NAME ED
+5 VALUE 41
+4 FIELD
+5 NAME PageID
+5 VALUE p. 5 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 34
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 34
+4 FIELD
+5 NAME Person
+5 VALUE William J. Hopper in the household of William Hopper
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 8
+3 DATA
+4 TEXT W | M | 9 | Son | S | at House | Georgia
+1 DEAT
+2 DATE 10 MAY 1951
+2 PLAC Cullman, Alabama, United States
+1 FAMC @F2217@
+0 @I7273@ INDI
+1 NAME Ida.. E. /Hopper/
+2 GIVN Ida.. E.
+2 SURN Hopper
+1 SEX F
+1 _UID 4A8C8105C5224577BD23CB974DE62B3FDEC3
+1 _FSFTID LDRR-963
+1 CHAN
+2 DATE 6 SEP 2013
+1 BIRT
+2 DATE ABT 1874
+2 PLAC Georgia, United States
+1 CENS
+2 DATE 3 JUN 1880
+2 PLAC Cleburne, Alabama, United States
+2 ADDR Beat No. 1 Borden's
+2 SOUR @S86@
+3 PAGE Beat No. 1 Borden's; 41; p. 5 (penned); 34; 34; Ida.. E. Hopper in the household of William Hopper; 8
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Beat No. 1 Borden's
+4 FIELD
+5 NAME ED
+5 VALUE 41
+4 FIELD
+5 NAME PageID
+5 VALUE p. 5 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 34
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 34
+4 FIELD
+5 NAME Person
+5 VALUE Ida.. E. Hopper in the household of William Hopper
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 8
+3 DATA
+4 TEXT W | F | 6 | Daughter | S | | Georgia
+1 DEAT Y
+1 FAMC @F2217@
+0 @I7274@ INDI
+1 NAME James /Hopper/
+2 GIVN James
+2 SURN Hopper
+1 SEX M
+1 _UID E191A3C258D74F3888A3B291946B99C356FA
+1 _FSFTID LDRR-9XW
+1 CHAN
+2 DATE 6 SEP 2013
+1 BIRT
+2 DATE FEB 1880
+2 PLAC Alabama, United States
+1 CENS
+2 DATE 3 JUN 1880
+2 PLAC Cleburne, Alabama, United States
+2 ADDR Beat No. 1 Borden's
+2 SOUR @S86@
+3 PAGE Beat No. 1 Borden's; 41; p. 5 (penned); 34; 34; James Hopper in the household of William Hopper; 8
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Beat No. 1 Borden's
+4 FIELD
+5 NAME ED
+5 VALUE 41
+4 FIELD
+5 NAME PageID
+5 VALUE p. 5 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 34
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 34
+4 FIELD
+5 NAME Person
+5 VALUE James Hopper in the household of William Hopper
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 8
+3 DATA
+4 TEXT W | M | 4/12-Feby | Son | S | | Alabama
+1 DEAT Y
+1 FAMC @F2217@
+0 @I7275@ INDI
+1 NAME Fields /Compton/
+2 GIVN Fields
+2 SURN Compton
+1 SEX M
+1 _UID 265F2B1A3846408387C0F372E7A56B7A2899
+1 _FSFTID LDTS-X97
+1 CHAN
+2 DATE 12 AUG 2014
+1 BIRT
+2 DATE EST 1815
+2 PLAC Georgia, United States
+1 DEAT
+1 FAMS @F2218@
+0 @I7276@ INDI
+1 NAME  /Thornton/
+2 SURN Thornton
+1 SEX F
+1 _UID F4BA213100AB422AB5D7AFC7CFB7A80C531B
+1 _FSFTID LDTS-X3W
+1 CHAN
+2 DATE 12 AUG 2014
+1 BIRT
+2 DATE EST 1818
+2 PLAC Georgia, United States
+1 DEAT
+1 FAMS @F2218@
+0 @I7277@ INDI
+1 NAME Amanda Virginia /Wood/
+2 GIVN Amanda Virginia
+2 SURN Wood
+1 SEX F
+1 _UID F81998115D704EDDA1D8582CCAD380F9C597
+1 _FSFTID LZGP-JVJ
+1 CHAN
+2 DATE 29 AUG 2013
+1 BIRT
+2 DATE 20 MAY 1850
+1 DEAT
+2 DATE 3 APR 1930
+1 BURI
+2 PLAC Cisco, Eastland, Texas, United States
+2 ADDR Nimrod Cemetery
+1 FAMS @F2219@
+0 @I7278@ INDI
+1 NAME John /Bryant/
+2 GIVN John
+2 SURN Bryant
+1 SEX M
+1 _UID CC48C714F0404CBD934C4BDD26CE30FD5099
+1 _FSFTID L7RJ-9DK
+1 CHAN
+2 DATE 13 AUG 2014
+1 BIRT
+2 DATE ABT 1823
+2 PLAC Tennessee, United States
+1 DEAT
+1 FAMS @F2220@
+0 @I7279@ INDI
+1 NAME Egletine //
+2 GIVN Egletine
+1 SEX F
+1 _UID 4B82D2DD42EC4E6F8CBC8CCD49D64BA517E0
+1 _FSFTID LDTW-7PK
+1 CHAN
+2 DATE 13 AUG 2014
+1 BIRT
+2 DATE ABT 1829
+2 PLAC Tennessee, United States
+1 DEAT
+1 FAMS @F2220@
+0 @I7280@ INDI
+1 NAME Jane /Bryant/
+2 GIVN Jane
+2 SURN Bryant
+1 SEX F
+1 _UID B1E7140573EF42C98EF66BE4F6C8F6AB5027
+1 _FSFTID LZ81-LVH
+1 CHAN
+2 DATE 29 AUG 2013
+1 BIRT
+2 DATE ABT 1848
+2 PLAC Tennessee, United States
+1 DEAT Y
+1 FAMC @F2220@
+0 @I7281@ INDI
+1 NAME Kie /Ward/
+2 GIVN Kie
+2 SURN Ward
+1 SEX M
+1 _UID 2CBF11BB6D394DE2866EF27DE61EB836E1C8
+1 _FSFTID LDRR-9LG
+1 CHAN
+2 DATE 12 AUG 2014
+1 BIRT
+2 DATE EST 1819
+2 PLAC Georgia, United States
+1 DEAT
+1 FAMS @F2221@
+0 @I7282@ INDI
+1 NAME Joseph M. /Boyce/
+2 GIVN Joseph M.
+2 SURN Boyce
+1 SEX M
+1 _UID 8F88F86BAD2B463EA1C94E1545D2461C1CBC
+1 _FSFTID LDTL-H2L
+1 CHAN
+2 DATE 30 AUG 2013
+1 BIRT
+2 DATE ABT 1862
+2 PLAC Texas, United States
+1 CENS
+2 DATE 11 AUG 1870
+2 PLAC Los Nietos, Los Angeles, California, United States
+2 SOUR @S80@
+3 PAGE Los Nietos post office; p. 32 (penned); 328; 345; Joseph M. Boyce in the household of Isaac E. Boyce; 73
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Los Nietos post office
+4 FIELD
+5 NAME PageID
+5 VALUE p. 32 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 328
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 345
+4 FIELD
+5 NAME Person
+5 VALUE Joseph M. Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 73
+3 DATA
+4 TEXT 16 | M | W | at Home | | | Texas
+1 DEAT Y
+1 FAMC @F2196@
+0 @I7283@ INDI
+1 NAME Charles B. /Boyce/
+2 GIVN Charles B.
+2 SURN Boyce
+1 SEX M
+1 _UID 9F1DEA6216C745869220C930C866A64E7D68
+1 _FSFTID L413-P8Z
+1 CHAN
+2 DATE 30 AUG 2013
+1 BIRT
+2 DATE ABT 1863
+2 PLAC Texas, United States
+1 CENS
+2 DATE 11 AUG 1870
+2 PLAC Los Nietos, Los Angeles, California, United States
+2 SOUR @S80@
+3 PAGE Los Nietos post office; p. 32 (penned); 328; 345; Charles B. Boyce in the household of Isaac E. Boyce; 73
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Los Nietos post office
+4 FIELD
+5 NAME PageID
+5 VALUE p. 32 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 328
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 345
+4 FIELD
+5 NAME Person
+5 VALUE Charles B. Boyce in the household of Isaac E. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 73
+3 DATA
+4 TEXT 7 | M | W | at Home | | | Texas
+1 DEAT Y
+1 FAMC @F2196@
+0 @I7284@ INDI
+1 NAME Kinner Kenner /Boyce/
+2 GIVN Kinner Kenner
+2 SURN Boyce
+1 SEX M
+1 _UID 1231ECA8076F4EC484E11129CC5D5C75F866
+1 _FSFTID LDT2-Z76
+1 CHAN
+2 DATE 28 DEC 2013
+1 BIRT
+2 DATE 10 SEP 1886
+2 PLAC Menard, Texas, United States
+1 DEAT
+2 DATE 14 SEP 1928
+1 BURI
+2 PLAC Coahoma, Howard, Texas, United States
+2 ADDR Coahoma Cemetery
+1 FAMC @F2198@
+0 @I7285@ INDI
+1 NAME Viola /Boyce/
+2 GIVN Viola
+2 SURN Boyce
+1 SEX F
+1 _UID 96C66627B3D146E2A94E9EA3EA20DBAD5F4E
+1 _FSFTID LDTT-2MS
+1 CHAN
+2 DATE 24 JUL 2014
+1 BIRT
+2 DATE ABT 1904
+2 PLAC Texas, United States
+1 CENS
+2 DATE 5 MAY 1910
+2 PLAC Mitchell, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 2; 168; p. 3B (penned); 49; 51; Viola Boyce in the household of Kinner K. Boyce; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 2
+4 FIELD
+5 NAME ED
+5 VALUE 168
+4 FIELD
+5 NAME PageID
+5 VALUE p. 3B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 49
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 51
+4 FIELD
+5 NAME Person
+5 VALUE Viola Boyce in the household of Kinner K. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Daughter | F | W | 6 | S | Texas | none
+1 DEAT
+1 FAMC @F2195@
+0 @I7286@ INDI
+1 NAME Emma Lee /Boyce/
+2 GIVN Emma Lee
+2 SURN Boyce
+1 SEX F
+1 _UID B1BB1EA099964EC3B9E21B8138E2DFD36D82
+1 _FSFTID LDTT-2MT
+1 CHAN
+2 DATE 2 SEP 2013
+1 BIRT
+2 DATE 29 JUL 1906
+2 PLAC Texas, United States
+1 CENS
+2 DATE 5 MAY 1910
+2 PLAC Mitchell, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 2; 168; p. 3B (penned); 49; 51; Emma Lee Boyce in the household of Kinner K. Boyce; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 2
+4 FIELD
+5 NAME ED
+5 VALUE 168
+4 FIELD
+5 NAME PageID
+5 VALUE p. 3B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 49
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 51
+4 FIELD
+5 NAME Person
+5 VALUE Emma Lee Boyce in the household of Kinner K. Boyce
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Daughter | F | W | 3 | S | Texas | none
+1 DEAT
+2 DATE 19 APR 1990
+2 PLAC Midland, Texas, United States
+1 FAMS @F2224@
+1 FAMC @F2195@
+0 @I7287@ INDI
+1 NAME Frank Marion /Sweat/
+2 GIVN Frank Marion
+2 SURN Sweat
+1 SEX M
+1 _UID A8246CA7A1E9400C9FFE2BB8548C373D899D
+1 _FSFTID KGCF-TT9
+1 CHAN
+2 DATE 31 AUG 2013
+1 BIRT
+2 DATE 17 FEB 1890
+2 PLAC Jones, Texas, United States
+1 CENS
+2 DATE 5 MAY 1910
+2 PLAC Mitchell, Texas, United States
+2 ADDR Precinct No. 2
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 2; 168; p. 3B (penned); 50; 52; Frank M. Sweat; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 2
+4 FIELD
+5 NAME ED
+5 VALUE 168
+4 FIELD
+5 NAME PageID
+5 VALUE p. 3B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 50
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 52
+4 FIELD
+5 NAME Person
+5 VALUE Frank M. Sweat
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Head | M | W | 20 | M1-0 | Texas | Farmer-General Farm
+1 DEAT
+2 DATE 30 JAN 1970
+1 BURI
+2 PLAC Colorado City, Mitchell, Texas, United States
+2 ADDR Colorado City Cemetery
+1 FAMS @F2222@
+0 @I7288@ INDI
+1 NAME Fay L. //
+2 GIVN Fay L.
+1 SEX F
+1 _UID 6676C5BCE08E4942966FDACBC974ED749EFC
+1 _FSFTID LDTT-DSB
+1 CHAN
+2 DATE 24 JUL 2014
+1 BIRT
+2 DATE ABT 1902
+2 PLAC Texas, United States
+1 DEAT
+1 FAMS @F2223@
+0 @I7289@ INDI
+1 NAME Marvin /McBee/
+2 GIVN Marvin
+2 SURN McBee
+1 SEX M
+1 _UID FADC33411CC649A4909A94513019867E7563
+1 _FSFTID LDTT-29V
+1 CHAN
+2 DATE 24 JUL 2014
+1 BIRT
+2 DATE 30 SEP 1905
+2 PLAC Texas, United States
+1 DEAT
+1 FAMS @F2224@
+0 @I7290@ INDI
+1 NAME Harriet /Boyce/
+2 GIVN Harriet
+2 SURN Boyce
+1 SEX F
+1 _UID 701025B413C844CFABEFA3E6CD1A97BEA624
+1 _FSFTID 9VSY-TFD
+1 CHAN
+2 DATE 1 SEP 2013
+1 BIRT
+2 DATE 25 MAR 1836
+2 PLAC Wisconsin, United States
+1 DEAT
+2 DATE 1840
+2 PLAC Brown, Wisconsin, United States
+1 FAMC @F2201@
+0 @I7291@ INDI
+1 NAME Elizabeth /Booth/
+2 GIVN Elizabeth
+2 SURN Booth
+1 SEX F
+1 _UID 985B3BF43B8D4E66A9DDC690572515434EE7
+1 _FSFTID LDT2-Q6N
+1 CHAN
+2 DATE 28 DEC 2013
+1 BIRT
+2 DATE ABT 1855
+2 PLAC Texas, United States
+1 CENS
+2 DATE 14 JUN 1860
+2 PLAC Williamson, Texas, United States
+2 ADDR Williamson Division
+1 DEAT Y
+1 FAMC @F2205@
+0 @I7292@ INDI
+1 NAME Matila /Booth/
+2 GIVN Matila
+2 SURN Booth
+1 SEX F
+1 _UID 9DD8CC1885A040AA87ACF6056EAF60667922
+1 _FSFTID LDT2-QXD
+1 CHAN
+2 DATE 28 DEC 2013
+1 BIRT
+2 DATE ABT 1857
+2 PLAC Texas, United States
+1 CENS
+2 DATE 14 JUN 1860
+2 PLAC Williamson, Texas, United States
+2 ADDR Williamson Division
+1 DEAT Y
+1 FAMC @F2205@
+0 @I7293@ INDI
+1 NAME William /Booth/
+2 GIVN William
+2 SURN Booth
+1 SEX M
+1 _UID 8395643501284612A89BFD3129451ABCE7F9
+1 _FSFTID LNR2-PHK
+1 CHAN
+2 DATE 1 SEP 2013
+1 BIRT
+2 DATE ABT 1859
+2 PLAC Texas, United States
+1 CENS
+2 DATE 14 JUN 1860
+2 PLAC Williamson, Texas, United States
+2 ADDR Williamson Division
+1 DEAT Y
+1 FAMC @F2205@
+0 @I7294@ INDI
+1 NAME Benjamin A. /Booth/
+2 GIVN Benjamin A.
+2 SURN Booth
+1 SEX M
+1 _UID 45DA201AD68C4D9890613CF7AB9AEBBEB2FE
+1 _FSFTID LDT2-QV3
+1 CHAN
+2 DATE 1 SEP 2013
+1 BIRT
+2 DATE ABT 1868
+2 PLAC Texas, United States
+1 DEAT Y
+1 FAMC @F2205@
+0 @I7295@ INDI
+1 NAME Walter /Booth/
+2 GIVN Walter
+2 SURN Booth
+1 SEX M
+1 _UID 8E4B27F8EC6A40E7A88560D101DA927DBDA7
+1 _FSFTID LDT2-QVG
+1 CHAN
+2 DATE 28 DEC 2013
+1 BIRT
+2 DATE ABT 1872
+2 PLAC Texas, United States
+1 DEAT Y
+1 FAMC @F2205@
+0 @I7296@ INDI
+1 NAME Dewitt C. /Booth/
+2 GIVN Dewitt C.
+2 SURN Booth
+1 SEX M
+1 _UID 229D982E0A4C45D0BDF1E087A093FD4F849B
+1 _FSFTID LDT2-QKF
+1 CHAN
+2 DATE 28 DEC 2013
+1 BIRT
+2 DATE ABT 1878
+2 PLAC Texas, United States
+1 DEAT Y
+1 FAMC @F2205@
+0 @I7297@ INDI
+1 NAME Nancy J. //
+2 GIVN Nancy J.
+1 SEX F
+1 _UID CE952FB4FA4F4D14B81DBD4CA3C15F64F58A
+1 _FSFTID LDTR-YDX
+1 CHAN
+2 DATE 2 SEP 2013
+1 BIRT
+2 DATE 4 APR 1894
+2 PLAC Tennessee, United States
+1 DEAT
+2 DATE 12 MAR 1980
+1 BURI
+2 PLAC Canyon, Randall, Texas, United States
+2 ADDR Dreamland Cemetery
+1 FAMS @F2225@
+0 @I7298@ INDI
+1 NAME Ethel A. /Rundel/
+2 GIVN Ethel A.
+2 SURN Rundel
+1 SEX F
+1 _UID CED7D6EC8F2B46DBABD95F843CC155746F8B
+1 _FSFTID MZBM-XSB
+1 CHAN
+2 DATE 5 AUG 2014
+1 BIRT
+2 DATE ABT 1896
+2 PLAC Minnesota, United States
+1 DEAT
+1 FAMS @F2226@
+0 @I7299@ INDI
+1 NAME Mary Elizabeth /Morrison/
+2 GIVN Mary Elizabeth
+2 SURN Morrison
+1 SEX F
+1 _UID B9C3D5FE0E3B47D88BBD73CBF3AB02401D55
+1 _FSFTID K2XZ-G51
+1 CHAN
+2 DATE 1 DEC 2013
+1 BIRT
+2 DATE 26 FEB 1835 OR 28 FEB 1835
+2 PLAC Mississippi, United States
+1 CENS
+2 DATE 28 SEP 1850
+2 PLAC Milam, Texas, United States
+1 DEAT
+2 DATE 24 NOV 1921
+2 PLAC Texas, United States
+1 BURI
+2 PLAC Hillsboro, Hill, Texas, United States
+2 ADDR Hillsboro City Cemetery
+1 FAMS @F2227@
+1 FAMC @F2213@
+0 @I7300@ INDI
+1 NAME Jane /Morrison/
+2 GIVN Jane
+2 SURN Morrison
+1 SEX F
+1 _UID 34889964289B4F378295E0C421C120803FF6
+1 _FSFTID 2ZS3-CJ4
+1 CHAN
+2 DATE 3 SEP 2013
+1 BIRT
+2 DATE 4 FEB 1837
+2 PLAC Iowa, United States
+1 CENS
+2 DATE 28 SEP 1850
+2 PLAC Milam, Texas, United States
+1 DEAT
+2 DATE 12 FEB 1929
+2 PLAC Hillsboro, Hill, Texas, United States
+1 FAMS @F2228@
+1 FAMC @F2213@
+0 @I7301@ INDI
+1 NAME John William /Morrison/
+2 GIVN John William
+2 SURN Morrison
+1 SEX M
+1 _UID A005EAE7C8B74646A10A5E1D3A9B17891CC4
+1 _FSFTID 2ZS3-CQX
+1 CHAN
+2 DATE 3 SEP 2013
+1 BIRT
+2 DATE 2 MAY 1839
+2 PLAC Iowa, United States
+1 CENS
+2 DATE 28 SEP 1850
+2 PLAC Milam, Texas, United States
+1 DEAT
+2 DATE 1 MAY 1927
+1 BURI
+2 PLAC Peoria, Hill, Texas, United States
+2 ADDR Peoria Cemetery
+1 FAMS @F2229@
+1 FAMC @F2213@
+0 @I7302@ INDI
+1 NAME Emily Caroline /Morrison/
+2 GIVN Emily Caroline
+2 SURN Morrison
+1 SEX F
+1 _UID E92CBDF403D2494F89EFF4F547EED0CA634B
+1 _FSFTID LH5K-6NM
+1 CHAN
+2 DATE 3 SEP 2013
+1 BIRT
+2 DATE 13 MAR 1840
+2 PLAC Illinois, United States
+1 CENS
+2 DATE 28 SEP 1850
+2 PLAC Milam, Texas, United States
+1 DEAT
+2 DATE 7 FEB 1925
+2 PLAC Hill, Texas, United States
+1 FAMS @F2231@
+1 FAMS @F2230@
+1 FAMC @F2213@
+0 @I7303@ INDI
+1 NAME  /Fancher/
+2 SURN Fancher
+1 SEX M
+1 _UID 5FAB5B9B9F4045B2803D2BE832475179E9E3
+1 _FSFTID L4S1-NWG
+1 CHAN
+2 DATE 30 AUG 2014
+1 BIRT
+2 DATE EST 1832
+1 DEAT
+1 FAMS @F2227@
+0 @I7304@ INDI
+1 NAME Rosana /Morrison/
+2 GIVN Rosana
+2 SURN Morrison
+1 SEX F
+1 _UID E91779E82B02465DA7CA58E577625A213388
+1 _FSFTID 9DMC-5ZY
+1 CHAN
+2 DATE 2 SEP 2013
+1 BIRT
+2 DATE ABT 1848
+2 PLAC Texas, United States
+1 CENS
+2 DATE 28 SEP 1850
+2 PLAC Milam, Texas, United States
+1 DEAT Y
+1 FAMC @F2213@
+0 @I7305@ INDI
+1 NAME Thomas Jefferson /Morrison/
+2 GIVN Thomas Jefferson
+2 SURN Morrison
+1 SEX M
+1 _UID 0D8E0FE52CF2465986D42D407B69F0280F61
+1 _FSFTID LH5K-6P2
+1 CHAN
+2 DATE 7 SEP 2013
+1 BIRT
+2 DATE 11 MAY 1850
+2 PLAC Waco, McLennan, Texas, United States
+1 DEAT
+2 DATE 15 NOV 1939
+2 PLAC Hillsboro, Hill, Texas, United States
+1 BURI
+2 PLAC Hillsboro, Hill, Texas, United States
+2 ADDR Ridge Park Cemetery
+1 FAMS @F2242@
+1 FAMC @F2213@
+0 @I7306@ INDI
+1 NAME Hiram /West/
+2 GIVN Hiram
+2 SURN West
+1 SEX M
+1 _UID 3F7977AB9FF340ED82163F29B2CF5274E030
+1 _FSFTID LH5K-D4K
+1 CHAN
+2 DATE 3 SEP 2013
+1 BIRT
+2 DATE EST 1834
+1 DEAT
+2 DATE 17 JAN 1879
+2 PLAC Hill, Texas, United States
+1 FAMS @F2228@
+0 @I7307@ INDI
+1 NAME Vashti Missouri /Womack/
+2 GIVN Vashti Missouri
+2 SURN Womack
+1 SEX F
+1 _UID AA858DC554D04E03AAA69AEB11A817AE494E
+1 _FSFTID LD8N-QXJ
+1 CHAN
+2 DATE 3 OCT 2013
+1 BIRT
+2 DATE 28 MAR 1842
+1 DEAT
+2 DATE 12 MAY 1881
+2 PLAC Peoria, Hill, Texas, United States
+1 FAMS @F2229@
+0 @I7308@ INDI
+1 NAME William /Moore/
+2 GIVN William
+2 SURN Moore
+1 SEX M
+1 _UID 91367C2C6A1E40AD80CE8F04108351C36C53
+1 _FSFTID LDT4-XN6
+1 CHAN
+2 DATE 3 SEP 2013
+1 BIRT
+2 DATE ABT 1830
+2 PLAC Mississippi, United States
+1 DEAT
+2 DATE BEF 1900
+1 FAMS @F2230@
+0 @I7309@ INDI
+1 NAME R. G. /Steel/
+2 GIVN R. G.
+2 SURN Steel
+1 SEX M
+1 _UID 37843513001049C39F7F032B0D47629DBE32
+1 _FSFTID LH5K-6WQ
+1 CHAN
+2 DATE 26 AUG 2014
+1 BIRT
+2 DATE ABT 1826
+2 PLAC Missouri, United States
+1 DEAT
+1 FAMS @F2231@
+0 @I7310@ INDI
+1 NAME Loy /Dalton/
+2 GIVN Loy
+2 SURN Dalton
+1 SEX M
+1 _UID A27D15EEED774FFAB0F43EF5EF8DED0C1B7A
+1 _FSFTID 9M45-1PF
+1 CHAN
+2 DATE 4 SEP 2013
+1 BIRT
+2 DATE 30 JAN 1915
+1 DEAT
+2 DATE 13 APR 1986
+2 PLAC Lamb, Texas, United States
+1 FAMS @F2232@
+0 @I7311@ INDI
+1 NAME William D. /Jones/
+2 GIVN William D.
+2 SURN Jones
+1 SEX M
+1 _UID 39367A6260AA4C339B2C07D7DDC77C9730B2
+1 _FSFTID LDTP-RQM
+1 CHAN
+2 DATE 4 SEP 2013
+1 BIRT
+2 DATE 10 JAN 1888
+1 DEAT
+2 DATE 30 OCT 1970
+1 BURI
+2 PLAC Turnersville, Coryell, Texas, United States
+2 ADDR Turnersville Cemetery
+1 FAMS @F2233@
+0 @I7312@ INDI
+1 NAME Oscar S. /Hagood/
+2 GIVN Oscar S.
+2 SURN Hagood
+1 SEX M
+1 _UID 8FC0BF5D8E6B472EB880A4D470251394C525
+1 _FSFTID LDTP-RP2
+1 CHAN
+2 DATE 4 SEP 2013
+1 BIRT
+2 DATE EST 1889
+1 DEAT
+2 DATE 15 JUL 1965
+1 BURI
+2 PLAC Roscoe, Nolan, Texas, United States
+2 ADDR Roscoe Cemetery
+1 FAMS @F2234@
+0 @I7313@ INDI
+1 NAME Raymond /Kidd/
+2 GIVN Raymond
+2 SURN Kidd
+1 SEX M
+1 _UID 9507869FEAF74FA9A4E9EE76E624682C291D
+1 _FSFTID LDTR-YMH
+1 CHAN
+2 DATE 7 JAN 2014
+1 BIRT
+2 DATE 22 JAN 1894
+2 PLAC Jefferson, Missouri, United States
+1 DEAT
+2 DATE 14 JUL 1955
+2 PLAC Midland, Midland, Texas, United States
+1 BURI
+2 PLAC Hermleigh, Scurry, Texas, United States
+1 FAMS @F2235@
+0 @I7314@ INDI
+1 NAME Eula /Compton/
+2 GIVN Eula
+2 SURN Compton
+1 SEX F
+1 _UID 433E674E79CB44959D4788F62CD1D327AC7B
+1 _FSFTID LZGP-9NP
+1 CHAN
+2 DATE 5 SEP 2013
+1 BIRT
+2 DATE MAY 1885
+2 PLAC Alabama, United States
+1 CENS
+2 DATE 7 JUN 1900
+2 PLAC Eastland, Texas, United States
+2 ADDR Justice Precinct 4
+2 SOUR @S85@
+3 PAGE Justice Precinct 4; 58; p. 4B (penned); 64; 64; Eula Compton in the household of Robert Compton; 1629
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 4
+4 FIELD
+5 NAME ED
+5 VALUE 58
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 64
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 64
+4 FIELD
+5 NAME Person
+5 VALUE Eula Compton in the household of Robert Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1629
+3 DATA
+4 TEXT daughter | W | F | May | 1885 | 15 | S | Alabama | at school
+1 DEAT Y
+1 FAMC @F2214@
+0 @I7315@ INDI
+1 NAME Georgia /Compton/
+2 GIVN Georgia
+2 SURN Compton
+1 SEX F
+1 _UID 4790C241484B42F892587BE3EAB4E0B3202E
+1 _FSFTID LZGP-9T3
+1 CHAN
+2 DATE 5 SEP 2013
+1 BIRT
+2 DATE OCT 1887
+2 PLAC Alabama, United States
+1 CENS
+2 DATE 7 JUN 1900
+2 PLAC Eastland, Texas, United States
+2 ADDR Justice Precinct 4
+2 SOUR @S85@
+3 PAGE Justice Precinct 4; 58; p. 4B (penned); 64; 64; Georgia Compton in the household of Robert Compton; 1629
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 4
+4 FIELD
+5 NAME ED
+5 VALUE 58
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 64
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 64
+4 FIELD
+5 NAME Person
+5 VALUE Georgia Compton in the household of Robert Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1629
+3 DATA
+4 TEXT daughter | W | F | Oct | 1887 | 12 | S | Alabama | at school
+1 DEAT Y
+1 FAMC @F2214@
+0 @I7316@ INDI
+1 NAME H..ver /Compton/
+2 GIVN H..ver
+2 SURN Compton
+1 SEX F
+1 _UID 86383B8FFFD24492928BFEA0EB7BAD79764A
+1 _FSFTID LDTP-HK5
+1 CHAN
+2 DATE 26 JUL 2014
+1 BIRT
+2 DATE OCT 1897
+2 PLAC Texas, United States
+1 CENS
+2 DATE 7 JUN 1900
+2 PLAC Eastland, Texas, United States
+2 ADDR Justice Precinct 4
+2 SOUR @S85@
+3 PAGE Justice Precinct 4; 58; p. 4B (penned); 66; 66; H..ver Compton in the household of John Compton; 1629
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 4
+4 FIELD
+5 NAME ED
+5 VALUE 58
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 66
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 66
+4 FIELD
+5 NAME Person
+5 VALUE H..ver Compton in the household of John Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1629
+3 DATA
+4 TEXT daughter | W | F | Oct | 1897 | 2 | S | Texas |
+1 DEAT
+1 FAMC @F2215@
+0 @I7317@ INDI
+1 NAME Folossie /Compton/
+2 GIVN Folossie
+2 SURN Compton
+1 SEX F
+1 _UID 4A1CF112B53F43FEADC8813A193195E49126
+1 _FSFTID LDTP-H27
+1 CHAN
+2 DATE 26 JUL 2014
+1 BIRT
+2 DATE JUN 1899
+2 PLAC Texas, United States
+1 CENS
+2 DATE 7 JUN 1900
+2 PLAC Eastland, Texas, United States
+2 ADDR Justice Precinct 4
+2 SOUR @S85@
+3 PAGE Justice Precinct 4; 58; p. 4B (penned); 66; 66; Folossie Compton in the household of John Compton; 1629
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct 4
+4 FIELD
+5 NAME ED
+5 VALUE 58
+4 FIELD
+5 NAME PageID
+5 VALUE p. 4B (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 66
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 66
+4 FIELD
+5 NAME Person
+5 VALUE Folossie Compton in the household of John Compton
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1629
+3 DATA
+4 TEXT daughter | W | F | June | 1899 | 11/12 | S | Texas |
+1 DEAT
+1 FAMC @F2215@
+0 @I7318@ INDI
+1 NAME Kendrick Cayce /McAdams/
+2 GIVN Kendrick Cayce
+2 SURN McAdams
+1 SEX M
+1 _UID 0739194E04B342CEA139046DE28E6821B2C1
+1 _FSFTID KH26-YWV
+1 CHAN
+2 DATE 5 SEP 2013
+1 BIRT
+2 DATE 2 APR 1891
+2 PLAC Texas, United States
+1 DEAT
+2 DATE 6 SEP 1967
+2 PLAC Loraine, Mitchell, Texas, United States
+1 BURI
+2 PLAC Loraine, Mitchell, Texas, United States
+2 ADDR Loraine Cemetery
+1 FAMS @F2236@
+0 @I7319@ INDI
+1 NAME Beatrice /Tolbert/
+2 GIVN Beatrice
+2 SURN Tolbert
+1 SEX F
+1 _UID 6D439DEB629C4628843BA0E84C405FA47A09
+1 _FSFTID LDTY-7V5
+1 CHAN
+2 DATE 5 SEP 2013
+1 BIRT
+2 DATE 17 APR 1907
+2 PLAC Texas, United States
+1 DEAT
+2 DATE 20 OCT 1942
+2 PLAC Mitchell, Texas, United States
+1 BURI
+2 PLAC Loraine, Mitchell, Texas, United States
+2 ADDR Loraine Cemetery
+1 FAMS @F2237@
+0 @I7320@ INDI
+1 NAME Ila Belle /Patterson/
+2 GIVN Ila Belle
+2 SURN Patterson
+1 SEX F
+1 _UID 34F2D6B41A34447F883205D2A8995AD8C5A6
+1 _FSFTID LDTY-P95
+1 CHAN
+2 DATE 5 SEP 2013
+1 BIRT
+2 DATE 13 OCT 1915
+2 PLAC Texas, United States
+1 DEAT
+2 DATE 12 FEB 1983
+1 BURI
+2 PLAC Colorado City, Mitchell, Texas, United States
+2 ADDR Colorado City Cemetery
+1 FAMS @F2238@
+0 @I7321@ INDI
+1 NAME Mary Elizabeth /Stutes/
+2 GIVN Mary Elizabeth
+2 SURN Stutes
+1 SEX F
+1 _UID 1EA43E9EF6CE4979A8314592393BC5DBE86C
+1 _FSFTID LDTB-V3F
+1 CHAN
+2 DATE 5 SEP 2013
+1 BIRT
+2 DATE EST 1921
+1 FAMS @F2239@
+0 @I7322@ INDI
+1 NAME Henry Preston /Morrison/
+2 GIVN Henry Preston
+2 SURN Morrison
+1 SEX M
+1 _UID 8049A2FB523C4111877C04E3E652CFADE46D
+1 _FSFTID 9M6J-MYT
+1 CHAN
+2 DATE 24 JUL 2014
+1 BIRT
+2 DATE 22 FEB 1901
+2 PLAC Hamilton, Texas, United States
+1 CENS
+2 DATE 19 APR 1910
+2 PLAC Loraine, Mitchell, Texas, United States
+2 SOUR @S82@
+3 PAGE Justice Precinct No. 5; 171; p. 5A (penned); 89; 89; Henry P. Morrisson in the household of Elbert J. Morrisson; 1578
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Justice Precinct No. 5
+4 FIELD
+5 NAME ED
+5 VALUE 171
+4 FIELD
+5 NAME PageID
+5 VALUE p. 5A (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 89
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 89
+4 FIELD
+5 NAME Person
+5 VALUE Henry P. Morrisson in the household of Elbert J. Morrisson
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 1578
+3 DATA
+4 TEXT Son | M | W | 9 | S | Texas | none
+1 DEAT
+2 DATE 13 MAR 1984
+2 PLAC Stanton, Martin, Texas, United States
+1 FAMC @F2211@
+0 @I7323@ INDI
+1 NAME Robert L. /Hopper/
+2 GIVN Robert L.
+2 SURN Hopper
+1 SEX M
+1 _UID 4833A7BE220044AAA115CB64207964A7792A
+1 _FSFTID LDRR-9JS
+1 CHAN
+2 DATE 7 SEP 2013
+1 BIRT
+2 DATE 12 MAR 1881
+2 PLAC Alabama, United States
+1 DEAT
+2 DATE 21 JUL 1953
+1 BURI
+2 PLAC West Point, Cullman, Alabama, United States
+2 ADDR Crossroads Cemetery
+1 FAMC @F2217@
+0 @I7324@ INDI
+1 NAME John S. /Hopper/
+2 GIVN John S.
+2 SURN Hopper
+1 SEX M
+1 _UID 5102B50302124437AA12EA6C04D689CEDD88
+1 _FSFTID LDRR-9V1
+1 CHAN
+2 DATE 11 AUG 2014
+1 BIRT
+2 DATE OCT 1888
+2 PLAC Alabama, United States
+1 DEAT
+1 FAMC @F2217@
+0 @I7325@ INDI
+1 NAME Thomas H. /Hopper/
+2 GIVN Thomas H.
+2 SURN Hopper
+1 SEX M
+1 _UID AB17FBD208154126B312E7CE88BECD30D03E
+1 _FSFTID LDRR-9FN
+1 CHAN
+2 DATE 6 SEP 2013
+1 BIRT
+2 DATE MAR 1880
+2 PLAC Alabama, United States
+1 DEAT Y
+1 FAMC @F2217@
+0 @I7326@ INDI
+1 NAME Johnathan /Wilkins/
+2 GIVN Johnathan
+2 SURN Wilkins
+1 SEX M
+1 _UID 929720EC529E49F4811BAE9F2D0F5D422696
+1 _FSFTID KLX7-WH5
+1 CHAN
+2 DATE 7 SEP 2013
+1 BIRT
+2 DATE ABT 1807
+2 PLAC North Carolina, United States
+1 CENS
+2 DATE 14 SEP 1850
+2 PLAC Williamson, Texas, United States
+2 ADDR Milam & Williamson District
+2 SOUR @S87@
+3 PAGE Milam & Williamson District; p. 693 (penned); 217; 229; Jonathan Wilkins; 916
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Milam & Williamson District
+4 FIELD
+5 NAME PageID
+5 VALUE p. 693 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 217
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 229
+4 FIELD
+5 NAME Person
+5 VALUE Jonathan Wilkins
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 916
+3 DATA
+4 TEXT 43 | M | | Farmer | | N. Carolina
+1 DEAT
+2 DATE AFT 1850
+1 FAMS @F2240@
+0 @I7327@ INDI
+1 NAME Susanna /Black/
+2 GIVN Susanna
+2 SURN Black
+1 SEX F
+1 _UID 8F161EE3B33C44FC8BB2B1BC73D6ABE0536D
+1 _FSFTID KZPK-L8P
+1 CHAN
+2 DATE 11 AUG 2014
+1 BIRT
+2 DATE ABT 1808
+2 PLAC North Carolina, United States
+1 CENS
+2 DATE 14 SEP 1850
+2 PLAC Williamson, Texas, United States
+2 ADDR Milam & Williamson District
+2 SOUR @S87@
+3 PAGE Milam & Williamson District; p. 693 (penned); 217; 229; Susanna Wilkins in the household of Jonathan Wilkins; 916
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Milam & Williamson District
+4 FIELD
+5 NAME PageID
+5 VALUE p. 693 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 217
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 229
+4 FIELD
+5 NAME Person
+5 VALUE Susanna Wilkins in the household of Jonathan Wilkins
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 916
+3 DATA
+4 TEXT 42 | F | | | | N. Carolina
+1 DEAT
+1 FAMS @F2240@
+0 @I7328@ INDI
+1 NAME Lucinda Miranda /Wilkins/
+2 GIVN Lucinda Miranda
+2 SURN Wilkins
+1 SEX F
+1 _UID 03F80027A80743AD891B0643CB7CA2710860
+1 _FSFTID K8NV-V2H
+1 CHAN
+2 DATE 7 SEP 2013
+1 BIRT
+2 DATE ABT 1830
+2 PLAC North Carolina, United States
+1 CENS
+2 DATE 16 SEP 1850
+2 PLAC Williamson, Texas, United States
+2 ADDR Milam & Williamson District
+2 SOUR @S87@
+3 PAGE Milam & Williamson District; p. 694 (penned); 217; 229; Lucinda M. Wilkins in the household of Jonathan Wilkins; 916
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Milam & Williamson District
+4 FIELD
+5 NAME PageID
+5 VALUE p. 694 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 217
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 229
+4 FIELD
+5 NAME Person
+5 VALUE Lucinda M. Wilkins in the household of Jonathan Wilkins
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 916
+3 DATA
+4 TEXT 20 | F | | | | N. Carolina
+1 DEAT Y
+1 FAMS @F2241@
+1 FAMC @F2240@
+0 @I7329@ INDI
+1 NAME George W. /Wilkins/
+2 GIVN George W.
+2 SURN Wilkins
+1 SEX M
+1 _UID 5041437C6CE646A697F94E6D3BA892358302
+1 _FSFTID KZMT-6BL
+1 CHAN
+2 DATE 7 SEP 2013
+1 BIRT
+2 DATE ABT 1832
+2 PLAC Missouri, United States
+1 CENS
+2 DATE 14 SEP 1850
+2 PLAC Williamson, Texas, United States
+2 ADDR Milam & Williamson District
+2 SOUR @S87@
+3 PAGE Milam & Williamson District; p. 694 (penned); 217; 229; George W. Wilkins in the household of Jonathan Wilkins; 916
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Milam & Williamson District
+4 FIELD
+5 NAME PageID
+5 VALUE p. 694 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 217
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 229
+4 FIELD
+5 NAME Person
+5 VALUE George W. Wilkins in the household of Jonathan Wilkins
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 916
+3 DATA
+4 TEXT 18 | M | | Farmer | | Missouri
+1 DEAT Y
+1 FAMC @F2240@
+0 @I7330@ INDI
+1 NAME Josiah /Wilkins/
+2 GIVN Josiah
+2 SURN Wilkins
+1 SEX M
+1 _UID 3A362881FD73430C94C99D71C202A1BB636B
+1 _FSFTID K19N-SN5
+1 CHAN
+2 DATE 7 SEP 2013
+1 BIRT
+2 DATE ABT 1836
+2 PLAC Missouri, United States
+1 CENS
+2 DATE 14 SEP 1850
+2 PLAC Williamson, Texas, United States
+2 ADDR Milam & Williamson District
+2 SOUR @S87@
+3 PAGE Milam & Williamson District; p. 694 (penned); 217; 229; Josiah Wilkins in the household of Jonathan Wilkins; 916
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Milam & Williamson District
+4 FIELD
+5 NAME PageID
+5 VALUE p. 694 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 217
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 229
+4 FIELD
+5 NAME Person
+5 VALUE Josiah Wilkins in the household of Jonathan Wilkins
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 916
+3 DATA
+4 TEXT 14 | M | | | | Missouri
+1 DEAT Y
+1 FAMC @F2240@
+0 @I7331@ INDI
+1 NAME John J. /Wilkins/
+2 GIVN John J.
+2 SURN Wilkins
+1 SEX M
+1 _UID 55D38488C0E14D37B4CA73D20DCD5F78CD2C
+1 _FSFTID K8FR-FDZ
+1 CHAN
+2 DATE 7 SEP 2013
+1 BIRT
+2 DATE ABT 1838
+2 PLAC Missouri, United States
+1 CENS
+2 DATE 14 SEP 1850
+2 PLAC Williamson, Texas, United States
+2 ADDR Milam & Williamson District
+2 SOUR @S87@
+3 PAGE Milam & Williamson District; p. 694 (penned); 217; 229; John J. Wilkins in the household of Jonathan Wilkins; 916
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Milam & Williamson District
+4 FIELD
+5 NAME PageID
+5 VALUE p. 694 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 217
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 229
+4 FIELD
+5 NAME Person
+5 VALUE John J. Wilkins in the household of Jonathan Wilkins
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 916
+3 DATA
+4 TEXT 12 | M | | | | Missouri
+1 DEAT Y
+1 FAMC @F2240@
+0 @I7332@ INDI
+1 NAME Matthew M. /Wilkins/
+2 GIVN Matthew M.
+2 SURN Wilkins
+1 SEX M
+1 _UID E3BEE56AAF9F4805B314EFDDB59FA8163066
+1 _FSFTID KD9P-9VS
+1 CHAN
+2 DATE 7 SEP 2013
+1 BIRT
+2 DATE ABT 1840
+2 PLAC Missouri, United States
+1 CENS
+2 DATE 14 SEP 1850
+2 PLAC Williamson, Texas, United States
+2 ADDR Milam & Williamson District
+2 SOUR @S87@
+3 PAGE Milam & Williamson District; p. 694 (penned); 217; 229; Matthew M. Wilkins in the household of Jonathan Wilkins; 916
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Milam & Williamson District
+4 FIELD
+5 NAME PageID
+5 VALUE p. 694 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 217
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 229
+4 FIELD
+5 NAME Person
+5 VALUE Matthew M. Wilkins in the household of Jonathan Wilkins
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 916
+3 DATA
+4 TEXT 10 | M | | | | Missouri
+1 DEAT Y
+1 FAMC @F2240@
+0 @I7333@ INDI
+1 NAME James /Wilkins/
+2 GIVN James
+2 SURN Wilkins
+1 SEX M
+1 _UID EAA4968BBA8444F194F911C2836853955522
+1 _FSFTID KZM2-2MT
+1 CHAN
+2 DATE 7 SEP 2013
+1 BIRT
+2 DATE ABT 1842
+2 PLAC Texas, United States
+1 CENS
+2 DATE 14 SEP 1850
+2 PLAC Williamson, Texas, United States
+2 ADDR Milam & Williamson District
+2 SOUR @S87@
+3 PAGE Milam & Williamson District; p. 694 (penned); 217; 229; James Wilkins in the household of Jonathan Wilkins; 916
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Milam & Williamson District
+4 FIELD
+5 NAME PageID
+5 VALUE p. 694 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 217
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 229
+4 FIELD
+5 NAME Person
+5 VALUE James Wilkins in the household of Jonathan Wilkins
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 916
+3 DATA
+4 TEXT 8 | M | | | | Texas
+1 DEAT Y
+1 FAMC @F2240@
+0 @I7334@ INDI
+1 NAME William /Wilkins/
+2 GIVN William
+2 SURN Wilkins
+1 SEX M
+1 _UID 10F23305B2F946C7A105066DB99333AE3820
+1 _FSFTID K8LV-WGC
+1 CHAN
+2 DATE 7 SEP 2013
+1 BIRT
+2 DATE ABT 1846
+2 PLAC Texas, United States
+1 CENS
+2 DATE 14 SEP 1850
+2 PLAC Williamson, Texas, United States
+2 ADDR Milam & Williamson District
+2 SOUR @S87@
+3 PAGE Milam & Williamson District; p. 694 (penned); 217; 229; William Wilkins in the household of Jonathan Wilkins; 916
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Milam & Williamson District
+4 FIELD
+5 NAME PageID
+5 VALUE p. 694 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 217
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 229
+4 FIELD
+5 NAME Person
+5 VALUE William Wilkins in the household of Jonathan Wilkins
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 916
+3 DATA
+4 TEXT 4 | M | | | | Texas
+1 DEAT Y
+1 FAMC @F2240@
+0 @I7335@ INDI
+1 NAME Abigail /Wilkins/
+2 GIVN Abigail
+2 SURN Wilkins
+1 SEX F
+1 _UID C147187B32DA49079FBAFD365709B201967D
+1 _FSFTID KHWH-3HG
+1 CHAN
+2 DATE 7 SEP 2013
+1 BIRT
+2 DATE ABT OCT 1849
+2 PLAC Texas, United States
+1 CENS
+2 DATE 14 SEP 1850
+2 PLAC Williamson, Texas, United States
+2 ADDR Milam & Williamson District
+2 SOUR @S87@
+3 PAGE Milam & Williamson District; p. 694 (penned); 217; 229; Abigail Wilkins in the household of Jonathan Wilkins; 916
+3 _TMPLT
+4 FIELD
+5 NAME CivilDivision
+5 VALUE Milam & Williamson District
+4 FIELD
+5 NAME PageID
+5 VALUE p. 694 (penned)
+4 FIELD
+5 NAME DwellingNumber
+5 VALUE 217
+4 FIELD
+5 NAME FamilyNumber
+5 VALUE 229
+4 FIELD
+5 NAME Person
+5 VALUE Abigail Wilkins in the household of Jonathan Wilkins
+4 FIELD
+5 NAME AccessType
+4 FIELD
+5 NAME AccessDate
+4 FIELD
+5 NAME Roll
+5 VALUE 916
+3 DATA
+4 TEXT 11/12 | F | | | | Texas
+1 DEAT Y
+1 FAMC @F2240@
+0 @I7336@ INDI
+1 NAME Richardson W. /Davis/
+2 GIVN Richardson W.
+2 SURN Davis
+1 SEX M
+1 _UID 21DF465D59AB46DF8275C57AE2E4EB8B3E9E
+1 _FSFTID L4S2-SKV
+1 CHAN
+2 DATE 30 SEP 2013
+1 BIRT
+2 DATE 7 JUL 1825
+2 PLAC Georgia, United States
+1 DEAT
+2 DATE 8 JUN 1907
+1 BURI
+2 PLAC Sonora, Sutton, Texas, United States
+2 ADDR Sonora Cemetery
+1 FAMS @F2241@
+0 @I7337@ INDI
+1 NAME Mary Frances /Couch/
+2 GIVN Mary Frances
+2 SURN Couch
+1 SEX F
+1 _UID 06E9391E0E68499DA005730CC4998B21CF4D
+1 _FSFTID 9NT7-LLL
+1 CHAN
+2 DATE 7 SEP 2013
+1 BIRT
+2 DATE 28 JAN 1855
+2 PLAC Rutherford, Tennessee, United States
+1 DEAT
+2 DATE 7 MAR 1936
+2 PLAC Hillsboro, Hill, Texas, United States
+1 BURI
+2 PLAC Hillsboro, Hill, Texas, United States
+2 ADDR Ridge Park Cemetery
+1 FAMS @F2242@
+0 @I7776@ INDI
+1 NAME Willis Homon /Boyd/
+2 GIVN Willis Homon
+2 SURN Boyd
+1 SEX M
+1 _UID E9B8F3004DEC439CB8ED16A16EAF04234C50
+1 _FSFTID LZT5-XHQ
+1 CHAN
+2 DATE 9 JAN 2014
+1 BIRT
+2 DATE 16 JUL 1904
+2 PLAC Mitchell, Texas, United States
+1 DEAT
+2 DATE 15 JUN 1966
+2 PLAC Clifton, Bosque, Texas, United States
+1 BURI
+2 PLAC Clifton, Bosque, Texas, United States
+2 ADDR Clifton Memorial Park
+1 FAMS @F2486@
+0 @F2177@ FAM
+1 HUSB @I7150@
+1 WIFE @I7151@
+1 CHIL @I3637@
+1 CHIL @I7154@
+1 MARR
+2 DATE EST 1940
+0 @F2178@ FAM
+1 HUSB @I7152@
+1 WIFE @I7153@
+1 CHIL @I7161@
+1 CHIL @I7162@
+1 CHIL @I7163@
+1 CHIL @I7159@
+1 CHIL @I7160@
+1 CHIL @I7155@
+1 CHIL @I7165@
+1 CHIL @I7164@
+1 CHIL @I7157@
+1 CHIL @I7158@
+1 CHIL @I7151@
+1 MARR
+2 DATE 9 AUG 1897
+2 PLAC Alabama, United States
+0 @F2179@ FAM
+1 HUSB @I7156@
+1 WIFE @I7155@
+1 MARR
+2 DATE 14 MAR 1974
+0 @F2180@ FAM
+1 HUSB @I7166@
+1 WIFE @I7167@
+1 CHIL @I7168@
+1 CHIL @I7169@
+1 CHIL @I7150@
+1 CHIL @I7170@
+1 CHIL @I7171@
+1 CHIL @I7172@
+1 MARR
+2 DATE EST 1915
+0 @F2181@ FAM
+1 HUSB @I7172@
+1 WIFE @I7173@
+1 MARR
+2 DATE EST 1949
+0 @F2182@ FAM
+1 HUSB @I7174@
+1 WIFE @I7168@
+1 MARR
+2 DATE EST 1936
+0 @F2183@ FAM
+1 HUSB @I7171@
+1 WIFE @I7175@
+1 MARR
+2 DATE 23 DEC 1947
+0 @F2195@ FAM
+1 HUSB @I7198@
+1 WIFE @I7197@
+1 CHIL @I7211@
+1 CHIL @I7166@
+1 CHIL @I7212@
+1 CHIL @I7213@
+1 CHIL @I7214@
+1 CHIL @I7285@
+1 CHIL @I7286@
+1 MARR
+2 DATE ABT 1890
+0 @F2196@ FAM
+1 HUSB @I7199@
+1 WIFE @I7200@
+1 CHIL @I7201@
+1 CHIL @I7208@
+1 CHIL @I7209@
+1 CHIL @I7210@
+1 CHIL @I7202@
+1 CHIL @I7203@
+1 CHIL @I7282@
+1 CHIL @I7283@
+1 CHIL @I7204@
+1 CHIL @I7205@
+1 CHIL @I7206@
+1 CHIL @I7207@
+1 CHIL @I7198@
+1 MARR
+2 DATE 7 JAN 1852
+2 PLAC Williamson, Texas, United States
+0 @F2197@ FAM
+1 HUSB @I7209@
+1 WIFE @I7215@
+1 MARR
+2 DATE EST 1878
+0 @F2198@ FAM
+1 HUSB @I7208@
+1 WIFE @I7216@
+1 CHIL @I7284@
+1 MARR
+2 DATE EST 1878
+0 @F2199@ FAM
+1 HUSB @I7203@
+1 WIFE @I7217@
+1 MARR
+2 DATE EST 1899
+0 @F2200@ FAM
+1 HUSB @I7203@
+1 WIFE @I7218@
+1 MARR
+2 DATE ABT 1886
+0 @F2201@ FAM
+1 HUSB @I7219@
+1 WIFE @I7220@
+1 CHIL @I7221@
+1 CHIL @I7199@
+1 CHIL @I7223@
+1 CHIL @I7227@
+1 CHIL @I7224@
+1 CHIL @I7290@
+1 CHIL @I7228@
+1 CHIL @I7226@
+1 CHIL @I7229@
+1 CHIL @I7230@
+1 MARR
+2 DATE 1 AUG 1822
+2 PLAC Ralls, Missouri, United States
+0 @F2202@ FAM
+1 HUSB @I7222@
+1 WIFE @I7221@
+1 MARR
+2 DATE OCT 1838
+2 PLAC Fayette, Texas Republic, United States
+0 @F2203@ FAM
+1 HUSB @I7225@
+1 WIFE @I7224@
+1 CHIL @I7238@
+1 CHIL @I7237@
+1 MARR
+2 DATE 17 NOV 1849
+2 PLAC Texas, United States
+0 @F2204@ FAM
+1 HUSB @I7227@
+1 WIFE @I7231@
+1 MARR
+2 DATE 1 JUN 1854
+2 PLAC Williamson, Texas, United States
+0 @F2205@ FAM
+1 HUSB @I7232@
+1 WIFE @I7228@
+1 CHIL @I7291@
+1 CHIL @I7292@
+1 CHIL @I7293@
+1 CHIL @I7294@
+1 CHIL @I7295@
+1 CHIL @I7296@
+1 MARR
+2 DATE 1854
+2 PLAC Travis, Texas, United States
+0 @F2206@ FAM
+1 HUSB @I7226@
+1 WIFE @I7233@
+1 CHIL @I7234@
+1 CHIL @I7236@
+1 CHIL @I7244@
+1 CHIL @I7245@
+1 MARR
+2 DATE 28 FEB 1866
+2 PLAC Travis, Texas, United States
+0 @F2207@ FAM
+1 HUSB @I7235@
+1 WIFE @I7234@
+1 MARR
+2 DATE 3 FEB 1892
+2 PLAC Travis, Texas, United States
+0 @F2208@ FAM
+1 HUSB @I7239@
+1 WIFE @I7224@
+1 MARR
+2 DATE AFT 1857
+0 @F2209@ FAM
+1 HUSB @I7229@
+1 WIFE @I7240@
+1 CHIL @I7241@
+1 CHIL @I7242@
+1 CHIL @I7243@
+1 MARR
+2 DATE 6 NOV 1868
+0 @F2210@ FAM
+1 HUSB @I7227@
+1 WIFE @I7246@
+1 CHIL @I7247@
+1 CHIL @I7248@
+1 MARR
+2 DATE BEF 1860
+0 @F2211@ FAM
+1 HUSB @I7249@
+1 WIFE @I7250@
+1 CHIL @I7251@
+1 CHIL @I7252@
+1 CHIL @I7253@
+1 CHIL @I7167@
+1 CHIL @I7254@
+1 CHIL @I7255@
+1 CHIL @I7256@
+1 CHIL @I7257@
+1 CHIL @I7322@
+1 MARR
+2 DATE 18 OCT 1879
+2 PLAC Hill, Texas, United States
+0 @F2212@ FAM
+1 HUSB @I7258@
+1 WIFE @I7259@
+1 CHIL @I7250@
+1 MARR
+2 DATE 9 JUL 1857
+2 PLAC Rusk, Texas, United States
+0 @F2213@ FAM
+1 HUSB @I7260@
+1 WIFE @I7261@
+1 CHIL @I7299@
+1 CHIL @I7300@
+1 CHIL @I7301@
+1 CHIL @I7302@
+1 CHIL @I7249@
+1 CHIL @I7304@
+1 CHIL @I7305@
+1 MARR
+2 DATE 13 FEB 1834
+2 PLAC Jefferson, Illinois, United States
+0 @F2214@ FAM
+1 HUSB @I7262@
+1 WIFE @I7267@
+1 CHIL @I7264@
+1 CHIL @I7265@
+1 CHIL @I7266@
+1 CHIL @I7152@
+1 CHIL @I7314@
+1 CHIL @I7315@
+1 CHIL @I7263@
+1 MARR
+2 DATE 31 JAN 1866
+2 PLAC Lincoln, Tennessee, United States
+0 @F2215@ FAM
+1 HUSB @I7265@
+1 WIFE @I7268@
+1 CHIL @I7316@
+1 CHIL @I7317@
+1 MARR
+2 DATE 2 NOV 1896
+0 @F2216@ FAM
+1 HUSB @I7265@
+1 WIFE @I7269@
+1 MARR
+2 DATE AFT 1904
+0 @F2217@ FAM
+1 HUSB @I7270@
+1 WIFE @I7271@
+1 CHIL @I7272@
+1 CHIL @I7273@
+1 CHIL @I7153@
+1 CHIL @I7274@
+1 CHIL @I7325@
+1 CHIL @I7323@
+1 CHIL @I7324@
+1 MARR
+2 DATE ABT 1871
+0 @F2218@ FAM
+1 HUSB @I7275@
+1 WIFE @I7276@
+1 CHIL @I7262@
+0 @F2219@ FAM
+1 HUSB @I7262@
+1 WIFE @I7277@
+1 MARR
+2 DATE AFT 1905
+0 @F2220@ FAM
+1 HUSB @I7278@
+1 WIFE @I7279@
+1 CHIL @I7280@
+1 CHIL @I7267@
+1 MARR
+2 DATE EST 1847
+0 @F2221@ FAM
+1 HUSB @I7281@
+1 CHIL @I7271@
+0 @F2222@ FAM
+1 HUSB @I7287@
+1 WIFE @I7212@
+1 MARR
+2 DATE 19 JAN 1910
+0 @F2223@ FAM
+1 HUSB @I7214@
+1 WIFE @I7288@
+1 MARR
+2 DATE EST 1920
+0 @F2224@ FAM
+1 HUSB @I7289@
+1 WIFE @I7286@
+1 MARR
+2 DATE EST 1930
+0 @F2225@ FAM
+1 HUSB @I7211@
+1 WIFE @I7297@
+1 MARR
+2 DATE EST 1915
+0 @F2226@ FAM
+1 HUSB @I7213@
+1 WIFE @I7298@
+1 MARR
+2 DATE EST 1920
+0 @F2227@ FAM
+1 HUSB @I7303@
+1 WIFE @I7299@
+1 MARR
+2 DATE EST 1856
+0 @F2228@ FAM
+1 HUSB @I7306@
+1 WIFE @I7300@
+1 MARR
+2 DATE 19 APR 1866
+0 @F2229@ FAM
+1 HUSB @I7301@
+1 WIFE @I7307@
+1 MARR
+2 DATE EST 1863
+0 @F2230@ FAM
+1 HUSB @I7308@
+1 WIFE @I7302@
+1 MARR
+2 DATE AFT 1862
+0 @F2231@ FAM
+1 HUSB @I7309@
+1 WIFE @I7302@
+1 MARR
+2 DATE ABT 1859
+0 @F2232@ FAM
+1 HUSB @I7310@
+1 WIFE @I7170@
+1 MARR
+2 DATE EST 1942
+0 @F2233@ FAM
+1 HUSB @I7311@
+1 WIFE @I7253@
+1 MARR
+2 DATE EST 1912
+0 @F2234@ FAM
+1 HUSB @I7312@
+1 WIFE @I7254@
+1 MARR
+2 DATE EST 1913
+0 @F2235@ FAM
+1 HUSB @I7313@
+1 WIFE @I7255@
+1 MARR
+2 DATE EST 1915
+0 @F2236@ FAM
+1 HUSB @I7318@
+1 WIFE @I7161@
+1 MARR
+2 DATE 26 OCT 1913
+0 @F2237@ FAM
+1 HUSB @I7159@
+1 WIFE @I7319@
+1 MARR
+2 DATE EST 1928
+0 @F2238@ FAM
+1 HUSB @I7157@
+1 WIFE @I7320@
+1 MARR
+2 DATE EST 1939
+0 @F2239@ FAM
+1 HUSB @I7158@
+1 WIFE @I7321@
+1 MARR
+2 DATE EST 1942
+0 @F2240@ FAM
+1 HUSB @I7326@
+1 WIFE @I7327@
+1 CHIL @I7200@
+1 CHIL @I7328@
+1 CHIL @I7329@
+1 CHIL @I7330@
+1 CHIL @I7331@
+1 CHIL @I7332@
+1 CHIL @I7333@
+1 CHIL @I7334@
+1 CHIL @I7335@
+1 MARR
+2 DATE EST 1829
+0 @F2241@ FAM
+1 HUSB @I7336@
+1 WIFE @I7328@
+1 MARR
+2 DATE 8 JUL 1852
+2 PLAC Williamson, Texas, United States
+0 @F2242@ FAM
+1 HUSB @I7305@
+1 WIFE @I7337@
+1 MARR
+2 DATE EST 1876
+0 @F2486@ FAM
+1 HUSB @I7776@
+1 WIFE @I7155@
+1 MARR
+2 DATE 25 NOV 1925
+2 PLAC Mitchell, Texas, United States
+0 @S12@ SOUR
+1 ABBR Texas. Birth Index, 1903-1997
+1 TITL Texas Department of State Health Services, "Birth Index, 1903-1997," da
+2 CONC tabase on-line, <i>Ancestry.com</i> (http://www.ancestry.com : accessed )
+2 CONC , .
+1 _SUBQ Texas, "Birth Index, 1903-1997," database on-line, <i>Ancestry.com</i>, .
+1 _BIBL Texas. Department of State Health Services. "Birth Index, 1903-1997." D
+2 CONC atabase on-line. <i>Ancestry.com</i>. http://www.ancestry.com : .
+1 _TMPLT
+2 TID 10004
+2 FIELD
+3 NAME Jurisdiction
+3 VALUE Texas
+2 FIELD
+3 NAME Creator
+3 VALUE Department of State Health Services
+2 FIELD
+3 NAME ItemTitle
+3 VALUE Birth Index, 1903-1997
+2 FIELD
+3 NAME ItemType
+3 VALUE database on-line
+2 FIELD
+3 NAME WebsiteTitle
+3 VALUE Ancestry.com
+2 FIELD
+3 NAME URL
+3 VALUE http://www.ancestry.com
+0 @S56@ SOUR
+1 ABBR Texas. Deaths. 1890-1976
+1 TITL "Texas, Deaths, 1890-1976," index and images, <i>FamilySearch</i> (http
+2 CONC s://familysearch.org: accessed ), ; citing State Registrar Office, Aust
+2 CONC in, Texas.
+1 _SUBQ <I>FamilySearch</i>, .
+1 _BIBL "Texas, Deaths, 1890-1976." Index and images. <i>FamilySearch</i>. http
+2 CONC s://familysearch.org: .
+1 _TMPLT
+2 TID 347
+2 FIELD
+3 NAME Author
+2 FIELD
+3 NAME DatabaseTitle
+3 VALUE Texas, Deaths, 1890-1976
+2 FIELD
+3 NAME CreatorOwner
+2 FIELD
+3 NAME WebsiteTitle
+3 VALUE FamilySearch
+2 FIELD
+3 NAME URL
+3 VALUE https://familysearch.org
+2 FIELD
+3 NAME ItemType
+3 VALUE Index and images
+2 FIELD
+3 NAME CreditLine
+3 VALUE State Registrar Office, Austin, Texas
+0 @S77@ SOUR
+1 ABBR Texas. Sutton. 1900 U.S. census
+1 TITL 1900 U.S. census, Texas, Sutton County, population schedule, ; digital i
+2 CONC mage, <i>Ancestry.com</i> (http://www.ancestry.com : downloaded); citin
+2 CONC g NARA microfilm publication T623.
+1 _SUBQ 1900 U.S. census, Texas, Sutton Co., pop. sch., .
+1 _BIBL Texas. Sutton County. 1900 U.S. census, population schedule. Digital im
+2 CONC ages. <i>Ancestry.com</i>. http://www.ancestry.com : n.d..
+1 _TMPLT
+2 TID 10001
+2 FIELD
+3 NAME CensusID
+3 VALUE 1900 U.S. census
+2 FIELD
+3 NAME JurisdictionState
+3 VALUE Texas
+2 FIELD
+3 NAME JurisdictionCounty
+3 VALUE Sutton
+2 FIELD
+3 NAME WebSite
+3 VALUE Ancestry.com
+2 FIELD
+3 NAME URL
+3 VALUE http://www.ancestry.com
+2 FIELD
+3 NAME FilmID
+3 VALUE T623
+0 @S78@ SOUR
+1 ABBR Texas. Burnet. 1880 U.S. census
+1 TITL 1880 U.S. census, Texas, Burnet County, population schedule, ; digital i
+2 CONC mage, <i>Ancestry.com</i> (http://www.ancestry.com : downloaded); citin
+2 CONC g NARA microfilm publication T9.
+1 _SUBQ 1880 U.S. census, Texas, Burnet Co., pop. sch., .
+1 _BIBL Texas. Burnet County. 1880 U.S. census, population schedule. Digital im
+2 CONC ages. <i>Ancestry.com</i>. http://www.ancestry.com : n.d..
+1 _TMPLT
+2 TID 10001
+2 FIELD
+3 NAME CensusID
+3 VALUE 1880 U.S. census
+2 FIELD
+3 NAME JurisdictionState
+3 VALUE Texas
+2 FIELD
+3 NAME JurisdictionCounty
+3 VALUE Burnet
+2 FIELD
+3 NAME WebSite
+3 VALUE Ancestry.com
+2 FIELD
+3 NAME URL
+3 VALUE http://www.ancestry.com
+2 FIELD
+3 NAME FilmID
+3 VALUE T9
+0 @S79@ SOUR
+1 ABBR Texas. Burnet. 1860 U.S. census
+1 TITL 1860 U.S. census, Texas, Burnet County, population schedule, ; digital i
+2 CONC mage, <i>Ancestry.com</i> (http://www.ancestry.com : downloaded); citin
+2 CONC g NARA microfilm publication M653.
+1 _SUBQ 1860 U.S. census, Texas, Burnet Co., pop. sch., .
+1 _BIBL Texas. Burnet County. 1860 U.S. census, population schedule. Digital im
+2 CONC ages. <i>Ancestry.com</i>. http://www.ancestry.com : n.d..
+1 _TMPLT
+2 TID 10000
+2 FIELD
+3 NAME CensusID
+3 VALUE 1860 U.S. census
+2 FIELD
+3 NAME JurisdictionState
+3 VALUE Texas
+2 FIELD
+3 NAME JurisdictionCounty
+3 VALUE Burnet
+2 FIELD
+3 NAME WebSite
+3 VALUE Ancestry.com
+2 FIELD
+3 NAME URL
+3 VALUE http://www.ancestry.com
+2 FIELD
+3 NAME FilmID
+3 VALUE M653
+0 @S80@ SOUR
+1 ABBR California. Los Angeles. 1870 U.S. census
+1 TITL 1870 U.S. census, California, Los Angeles County, population schedule, ; d
+2 CONC igital image, <i>Ancestry.com</i> (http://www.ancestry.com : downloaded
+2 CONC ); citing NARA microfilm publication M593.
+1 _SUBQ 1870 U.S. census, California, Los Angeles Co., pop. sch., .
+1 _BIBL California. Los Angeles County. 1870 U.S. census, population schedule. D
+2 CONC igital images. <i>Ancestry.com</i>. http://www.ancestry.com : n.d..
+1 _TMPLT
+2 TID 10000
+2 FIELD
+3 NAME CensusID
+3 VALUE 1870 U.S. census
+2 FIELD
+3 NAME JurisdictionState
+3 VALUE California
+2 FIELD
+3 NAME JurisdictionCounty
+3 VALUE Los Angeles
+2 FIELD
+3 NAME WebSite
+3 VALUE Ancestry.com
+2 FIELD
+3 NAME URL
+3 VALUE http://www.ancestry.com
+2 FIELD
+3 NAME FilmID
+3 VALUE M593
+0 @S81@ SOUR
+1 ABBR Texas. Travis. 1850 U.S. census
+1 TITL 1850 U.S. census, Texas, Travis County, population schedule, ; digital i
+2 CONC mage, <i>Ancestry.com</i> (http://www.ancestry.com : downloaded); citin
+2 CONC g NARA microfilm publication M432.
+1 _SUBQ 1850 U.S. census, Texas, Travis Co., pop. sch., .
+1 _BIBL Texas. Travis County. 1850 U.S. census, population schedule. Digital im
+2 CONC ages. <i>Ancestry.com</i>. http://www.ancestry.com : n.d..
+1 _TMPLT
+2 TID 10000
+2 FIELD
+3 NAME CensusID
+3 VALUE 1850 U.S. census
+2 FIELD
+3 NAME JurisdictionState
+3 VALUE Texas
+2 FIELD
+3 NAME JurisdictionCounty
+3 VALUE Travis
+2 FIELD
+3 NAME WebSite
+3 VALUE Ancestry.com
+2 FIELD
+3 NAME URL
+3 VALUE http://www.ancestry.com
+2 FIELD
+3 NAME FilmID
+3 VALUE M432
+0 @S82@ SOUR
+1 ABBR Texas. Mitchell. 1910 U.S. census
+1 TITL 1910 U.S. census, Texas, Mitchell County, population schedule, ; digita
+2 CONC l image, <i>Ancestry.com</i> (http://www.ancestry.com : downloaded); ci
+2 CONC ting NARA microfilm publication T624.
+1 _SUBQ 1910 U.S. census, Texas, Mitchell Co., pop. sch., .
+1 _BIBL Texas. Mitchell County. 1910 U.S. census, population schedule. Digital i
+2 CONC mages. <i>Ancestry.com</i>. http://www.ancestry.com : n.d..
+1 _TMPLT
+2 TID 10001
+2 FIELD
+3 NAME CensusID
+3 VALUE 1910 U.S. census
+2 FIELD
+3 NAME JurisdictionState
+3 VALUE Texas
+2 FIELD
+3 NAME JurisdictionCounty
+3 VALUE Mitchell
+2 FIELD
+3 NAME WebSite
+3 VALUE Ancestry.com
+2 FIELD
+3 NAME URL
+3 VALUE http://www.ancestry.com
+2 FIELD
+3 NAME FilmID
+3 VALUE T624
+0 @S83@ SOUR
+1 ABBR Texas. Donley. 1920 U.S. census
+1 TITL 1920 U.S. census, Texas, Donley County, population schedule, ; digital i
+2 CONC mage, <i>Ancestry.com</i> (http://www.ancestry.com : downloaded); citin
+2 CONC g NARA microfilm publication T625.
+1 _SUBQ 1920 U.S. census, Texas, Donley Co., pop. sch., .
+1 _BIBL Texas. Donley County. 1920 U.S. census, population schedule. Digital im
+2 CONC ages. <i>Ancestry.com</i>. http://www.ancestry.com : n.d..
+1 _TMPLT
+2 TID 10001
+2 FIELD
+3 NAME CensusID
+3 VALUE 1920 U.S. census
+2 FIELD
+3 NAME JurisdictionState
+3 VALUE Texas
+2 FIELD
+3 NAME JurisdictionCounty
+3 VALUE Donley
+2 FIELD
+3 NAME WebSite
+3 VALUE Ancestry.com
+2 FIELD
+3 NAME URL
+3 VALUE http://www.ancestry.com
+2 FIELD
+3 NAME FilmID
+3 VALUE T625
+0 @S84@ SOUR
+1 ABBR Texas. Hamilton. 1900 U.S. census
+1 TITL 1900 U.S. census, Texas, Hamilton County, population schedule, ; digita
+2 CONC l image, <i>Ancestry.com</i> (http://www.ancestry.com : downloaded); ci
+2 CONC ting NARA microfilm publication T623.
+1 _SUBQ 1900 U.S. census, Texas, Hamilton Co., pop. sch., .
+1 _BIBL Texas. Hamilton County. 1900 U.S. census, population schedule. Digital i
+2 CONC mages. <i>Ancestry.com</i>. http://www.ancestry.com : n.d..
+1 _TMPLT
+2 TID 10001
+2 FIELD
+3 NAME CensusID
+3 VALUE 1900 U.S. census
+2 FIELD
+3 NAME JurisdictionState
+3 VALUE Texas
+2 FIELD
+3 NAME JurisdictionCounty
+3 VALUE Hamilton
+2 FIELD
+3 NAME WebSite
+3 VALUE Ancestry.com
+2 FIELD
+3 NAME URL
+3 VALUE http://www.ancestry.com
+2 FIELD
+3 NAME FilmID
+3 VALUE T623
+0 @S85@ SOUR
+1 ABBR Texas. Eastland. 1900 U.S. census
+1 TITL 1900 U.S. census, Texas, Eastland County, population schedule, ; digita
+2 CONC l image, <i>Ancestry.com</i> (http://www.ancestry.com : downloaded); ci
+2 CONC ting NARA microfilm publication T623.
+1 _SUBQ 1900 U.S. census, Texas, Eastland Co., pop. sch., .
+1 _BIBL Texas. Eastland County. 1900 U.S. census, population schedule. Digital i
+2 CONC mages. <i>Ancestry.com</i>. http://www.ancestry.com : n.d..
+1 _TMPLT
+2 TID 10001
+2 FIELD
+3 NAME CensusID
+3 VALUE 1900 U.S. census
+2 FIELD
+3 NAME JurisdictionState
+3 VALUE Texas
+2 FIELD
+3 NAME JurisdictionCounty
+3 VALUE Eastland
+2 FIELD
+3 NAME WebSite
+3 VALUE Ancestry.com
+2 FIELD
+3 NAME URL
+3 VALUE http://www.ancestry.com
+2 FIELD
+3 NAME FilmID
+3 VALUE T623
+0 @S86@ SOUR
+1 ABBR Alabama. Cleburne. 1880 U.S. census
+1 TITL 1880 U.S. census, Alabama, Cleburne County, population schedule, ; digi
+2 CONC tal image, <i>Ancestry.com</i> (http://www.ancestry.com : downloaded); c
+2 CONC iting NARA microfilm publication T9.
+1 _SUBQ 1880 U.S. census, Alabama, Cleburne Co., pop. sch., .
+1 _BIBL Alabama. Cleburne County. 1880 U.S. census, population schedule. Digita
+2 CONC l images. <i>Ancestry.com</i>. http://www.ancestry.com : n.d..
+1 _TMPLT
+2 TID 10001
+2 FIELD
+3 NAME CensusID
+3 VALUE 1880 U.S. census
+2 FIELD
+3 NAME JurisdictionState
+3 VALUE Alabama
+2 FIELD
+3 NAME JurisdictionCounty
+3 VALUE Cleburne
+2 FIELD
+3 NAME WebSite
+3 VALUE Ancestry.com
+2 FIELD
+3 NAME URL
+3 VALUE http://www.ancestry.com
+2 FIELD
+3 NAME FilmID
+3 VALUE T9
+0 @S87@ SOUR
+1 ABBR Texas. Williamson. 1850 U.S. census
+1 TITL 1850 U.S. census, Texas, Williamson County, population schedule, ; digi
+2 CONC tal image, <i>Ancestry.com</i> (http://www.ancestry.com : downloaded); c
+2 CONC iting NARA microfilm publication M432.
+1 _SUBQ 1850 U.S. census, Texas, Williamson Co., pop. sch., .
+1 _BIBL Texas. Williamson County. 1850 U.S. census, population schedule. Digita
+2 CONC l images. <i>Ancestry.com</i>. http://www.ancestry.com : n.d..
+1 _TMPLT
+2 TID 10000
+2 FIELD
+3 NAME CensusID
+3 VALUE 1850 U.S. census
+2 FIELD
+3 NAME JurisdictionState
+3 VALUE Texas
+2 FIELD
+3 NAME JurisdictionCounty
+3 VALUE Williamson
+2 FIELD
+3 NAME WebSite
+3 VALUE Ancestry.com
+2 FIELD
+3 NAME URL
+3 VALUE http://www.ancestry.com
+2 FIELD
+3 NAME FilmID
+3 VALUE M432
+0 _PLAC Alabama, United States
+1 MAP
+2 LATI N32.7502800
+2 LONG W86.7502800
+0 _PLAC Alexander, Illinois, United States
+1 MAP
+2 LATI N37.1833300
+2 LONG W89.1833300
+0 _PLAC Arkansas, United States
+1 MAP
+2 LATI N34.7502806
+2 LONG W92.5002806
+0 _PLAC Austin, Travis, Texas, United States
+1 MAP
+2 LATI N30.2669400
+2 LONG W97.7427800
+0 _PLAC Baggs, Carbon, Wyoming, United States
+1 MAP
+2 LATI N41.0358300
+2 LONG W107.6569400
+0 _PLAC Big Spring, Howard, Texas, United States
+1 MAP
+2 LATI N32.2502800
+2 LONG W101.4783300
+0 _PLAC Brown, Wisconsin, United States
+1 MAP
+2 LATI N44.4666700
+2 LONG W87.9666700
+0 _PLAC Bryan, Brazos, Texas, United States
+1 MAP
+2 LATI N30.6741700
+2 LONG W96.3697200
+0 _PLAC Burnet, Burnet, Texas, United States
+1 MAP
+2 LATI N30.7580600
+2 LONG W98.2280600
+0 _PLAC Burnet, Texas, United States
+1 MAP
+2 LATI N30.7833300
+2 LONG W98.1833300
+0 _PLAC California, United States
+1 MAP
+2 LATI N37.2502806
+2 LONG W119.7502806
+0 _PLAC Canyon, Randall, Texas, United States
+1 MAP
+2 LATI N34.9802800
+2 LONG W101.9183300
+0 _PLAC Cisco, Eastland, Texas, United States
+1 MAP
+2 LATI N32.3880600
+2 LONG W98.9788900
+0 _PLAC Clarendon, Donley, Texas, United States
+1 MAP
+2 LATI N34.9377800
+2 LONG W100.8877800
+0 _PLAC Cleburne, Alabama, United States
+1 MAP
+2 LATI N33.6666700
+2 LONG W85.5166700
+0 _PLAC Clifton, Bosque, Texas, United States
+1 MAP
+2 LATI N31.7822200
+2 LONG W97.5763900
+0 _PLAC Coahoma, Howard, Texas, United States
+1 MAP
+2 LATI N32.2963900
+2 LONG W101.3058300
+0 _PLAC Colorado City, Mitchell, Texas, United States
+1 MAP
+2 LATI N32.3880600
+2 LONG W100.8641700
+0 _PLAC Cooke, Texas, United States
+1 MAP
+2 LATI N33.6333300
+2 LONG W97.2166700
+0 _PLAC Cullman, Alabama, United States
+1 MAP
+2 LATI N34.1333300
+2 LONG W86.8666700
+0 _PLAC Del Rio, Val Verde, Texas, United States
+1 MAP
+2 LATI N29.3625000
+2 LONG W100.8963900
+0 _PLAC Donley, Texas, United States
+1 MAP
+2 LATI N34.9666700
+2 LONG W100.8166700
+0 _PLAC Eastland, Texas, United States
+1 MAP
+2 LATI N32.3333300
+2 LONG W98.8333300
+0 _PLAC El Centro, Imperial, California, United States
+1 MAP
+2 LATI N32.7919400
+2 LONG W115.5622200
+0 _PLAC Elkmont, Limestone, Alabama, United States
+1 MAP
+2 LATI N34.9288900
+2 LONG W86.9738900
+0 _PLAC Georgia, United States
+1 MAP
+2 LATI N32.7502806
+2 LONG W83.5002806
+0 _PLAC Hamilton, Texas, United States
+1 MAP
+2 LATI N31.7166694
+2 LONG W98.0833306
+0 _PLAC Hermleigh, Scurry, Texas, United States
+1 MAP
+2 LATI N32.6350000
+2 LONG W100.7588900
+0 _PLAC Hill, Texas, United States
+1 MAP
+2 LATI N32.0166694
+2 LONG W97.1333306
+0 _PLAC Hillsboro, Hill, Texas, United States
+1 MAP
+2 LATI N32.0108300
+2 LONG W97.1297200
+0 _PLAC Howard, Texas, United States
+1 MAP
+2 LATI N32.3000000
+2 LONG W101.4500000
+0 _PLAC Illinois, United States
+1 MAP
+2 LATI N40.0002806
+2 LONG W89.2502806
+0 _PLAC Imperial, California, United States
+1 MAP
+2 LATI N33.0333300
+2 LONG W115.4166700
+0 _PLAC Iowa, United States
+1 MAP
+2 LATI N42.0002800
+2 LONG W93.5002800
+0 _PLAC Jefferson, Illinois, United States
+1 MAP
+2 LATI N38.3000000
+2 LONG W88.9333300
+0 _PLAC Jefferson, Missouri, United States
+1 MAP
+2 LATI N38.2666694
+2 LONG W90.5833306
+0 _PLAC Jones, Texas, United States
+1 MAP
+2 LATI N32.7505600
+2 LONG W99.8833300
+0 _PLAC Kansas City, Wyandotte, Kansas, United States
+1 MAP
+2 LATI N39.1141700
+2 LONG W94.6272200
+0 _PLAC Kentucky, United States
+1 MAP
+2 LATI N38.2004167
+2 LONG W84.8776250
+0 _PLAC Kimble, Texas, United States
+1 MAP
+2 LATI N30.4666700
+2 LONG W99.7666700
+0 _PLAC Lafayette, Lafayette, Louisiana, United States
+1 MAP
+2 LATI N30.2238900
+2 LONG W92.0197200
+0 _PLAC Lamb, Texas, United States
+1 MAP
+2 LATI N34.0666700
+2 LONG W102.3500000
+0 _PLAC Lelia Lake, Donley, Texas, United States
+1 MAP
+2 LATI N34.9011100
+2 LONG W100.7702800
+0 _PLAC Lincoln, Tennessee, United States
+1 MAP
+2 LATI N35.1500000
+2 LONG W86.6000000
+0 _PLAC Llano, Texas, United States
+1 MAP
+2 LATI N30.7000000
+2 LONG W98.6666700
+0 _PLAC Loraine, Mitchell, Texas, United States
+1 MAP
+2 LATI N32.4111100
+2 LONG W100.7119400
+0 _PLAC Los Angeles, California, United States
+1 MAP
+2 LATI N34.3666694
+2 LONG W118.2000000
+0 _PLAC Los Nietos, Los Angeles, California, United States
+1 MAP
+2 LATI N33.9683300
+2 LONG W118.0697200
+0 _PLAC Lubbock, Texas, United States
+1 MAP
+2 LATI N33.6000000
+2 LONG W101.8333306
+0 _PLAC Manor, Travis, Texas, United States
+1 MAP
+2 LATI N30.3405600
+2 LONG W97.5566700
+0 _PLAC Martin, Texas, United States
+1 MAP
+2 LATI N32.3000000
+2 LONG W101.9500000
+0 _PLAC Menard, Menard, Texas, United States
+1 MAP
+2 LATI N30.9175000
+2 LONG W99.7861100
+0 _PLAC Menard, Texas, United States
+1 MAP
+2 LATI N30.8666700
+2 LONG W99.8500000
+0 _PLAC Midland, Midland, Texas, United States
+1 MAP
+2 LATI N31.9972200
+2 LONG W102.0775000
+0 _PLAC Midland, Texas, United States
+1 MAP
+2 LATI N31.8666694
+2 LONG W102.0500000
+0 _PLAC Milam, Texas, United States
+1 MAP
+2 LATI N30.8000000
+2 LONG W96.9500000
+0 _PLAC Minnesota, United States
+1 MAP
+2 LATI N46.2502800
+2 LONG W94.2502800
+0 _PLAC Mississippi, United States
+1 MAP
+2 LATI N32.7502806
+2 LONG W89.7502806
+0 _PLAC Missouri, United States
+1 MAP
+2 LATI N38.2502806
+2 LONG W92.5002806
+0 _PLAC Mitchell, Texas, United States
+1 MAP
+2 LATI N32.3000000
+2 LONG W100.9333300
+0 _PLAC North Carolina, United States
+1 MAP
+2 LATI N35.5005611
+2 LONG W80.0005611
+0 _PLAC Pampa, Gray, Texas, United States
+1 MAP
+2 LATI N35.5361100
+2 LONG W100.9594400
+0 _PLAC Peoria, Hill, Texas, United States
+1 MAP
+2 LATI N31.9780600
+2 LONG W97.2216700
+0 _PLAC Prairie Valley, Hill, Texas, United States
+1 MAP
+2 LATI N31.8769400
+2 LONG W97.3280600
+0 _PLAC Ralls, Missouri, United States
+1 MAP
+2 LATI N39.5333300
+2 LONG W91.6333300
+0 _PLAC Roscoe, Nolan, Texas, United States
+1 MAP
+2 LATI N32.4458300
+2 LONG W100.5383300
+0 _PLAC Rusk, Texas, United States
+1 MAP
+2 LATI N32.1166700
+2 LONG W94.7833300
+0 _PLAC Rutherford, Tennessee, United States
+1 MAP
+2 LATI N35.8500000
+2 LONG W86.4000000
+0 _PLAC Snyder, Scurry, Texas, United States
+1 MAP
+2 LATI N32.7177800
+2 LONG W100.9172200
+0 _PLAC Sonora, Sutton, Texas, United States
+1 MAP
+2 LATI N30.5666700
+2 LONG W100.6430600
+0 _PLAC Stanislaus, California, United States
+1 MAP
+2 LATI N37.5500000
+2 LONG W121.0005600
+0 _PLAC Stanton, Martin, Texas, United States
+1 MAP
+2 LATI N32.1291700
+2 LONG W101.7880600
+0 _PLAC Sutton, Texas, United States
+1 MAP
+2 LATI N30.5005600
+2 LONG W100.5500000
+0 _PLAC Sweetwater, Nolan, Texas, United States
+1 MAP
+2 LATI N32.4708300
+2 LONG W100.4055600
+0 _PLAC Taylor, Williamson, Texas, United States
+1 MAP
+2 LATI N30.5705600
+2 LONG W97.4091700
+0 _PLAC Tennessee, United States
+1 MAP
+2 LATI N35.7502806
+2 LONG W86.2502806
+0 _PLAC Texas, United States
+1 MAP
+2 LATI N31.2502806
+2 LONG W99.2502806
+0 _PLAC Travis, Texas, United States
+1 MAP
+2 LATI N30.3333300
+2 LONG W97.8000000
+0 _PLAC Turnersville, Coryell, Texas, United States
+1 MAP
+2 LATI N31.6172200
+2 LONG W97.7386100
+0 _PLAC Virginia, United States
+1 MAP
+2 LATI N37.5481167
+2 LONG W77.4467472
+0 _PLAC Waco, McLennan, Texas, United States
+1 MAP
+2 LATI N31.5491694
+2 LONG W97.1463889
+0 _PLAC West Point, Cullman, Alabama, United States
+1 MAP
+2 LATI N34.2386100
+2 LONG W86.9591700
+0 _PLAC Williamson, Texas, United States
+1 MAP
+2 LATI N30.6333333
+2 LONG W97.5833333
+0 _PLAC Wisconsin, United States
+1 MAP
+2 LATI N44.5002800
+2 LONG W90.0002800
+0 _EVDEF BIRT
+1 TYPE P
+1 TITL Birth
+1 ABBR Birth
+1 SENT [person] was born< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the birth of [person]< [Date]>< [PlaceDetails]>< [
+3 CONC Place]>.
+1 ROLE Doctor
+2 SENT [ThisPerson] delivered [person]< [Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF DEAT
+1 TYPE P
+1 TITL Death
+1 ABBR Death
+1 SENT [person] died< [Desc]>< [Date]>< [person:Age]>< [PlaceDetails]>< [Place
+2 CONC ]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the death of [person]< [Date]>< [PlaceDetails]>< [
+3 CONC Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF CHR
+1 TYPE P
+1 TITL Christen
+1 ABBR Chr
+1 SENT [person] was baptised< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the christening of [person]< [Date]>< [PlaceDeta
+3 CONC ils]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF BURI
+1 TYPE P
+1 TITL Burial
+1 ABBR Burial
+1 SENT [person] was buried< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the burial of [person]< [Date]>< [PlaceDetails]>
+3 CONC < [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF CREM
+1 TYPE P
+1 TITL Cremation
+1 ABBR Cremation
+1 SENT [person] was cremated< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the cremation of [person]< [Date]>< [PlaceDetail
+3 CONC s]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF ADOP
+1 TYPE P
+1 TITL Adoption
+1 ABBR Adoption
+1 SENT [person] was adopted< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the adoption of [person]< [Date]>< [PlaceDetails
+3 CONC ]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF BAPM
+1 TYPE P
+1 TITL Baptism
+1 ABBR Baptism
+1 SENT [person] was baptized< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the baptism of [person]< [Date]>< [PlaceDetails]
+3 CONC >< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF BARM
+1 TYPE P
+1 TITL Bar Mitzvah
+1 ABBR Bar Mitzvah
+1 SENT [person] celebrated his bar mitzvah< [Date]>< [PlaceDetails]>< [Place]>
+2 CONC .
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the bar mitzvah of [person]< [Date]>< [PlaceDeta
+3 CONC ils]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF BASM
+1 TYPE P
+1 TITL Bas Mitzvah
+1 ABBR Bas Mitzvah
+1 SENT [person] celebrated her bas mitzvah< [Date]>< [PlaceDetails]>< [Place]>
+2 CONC .
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the bas mitzvah of [person]< [Date]>< [PlaceDeta
+3 CONC ils]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF BLES
+1 TYPE P
+1 TITL Blessing
+1 ABBR Blessing
+1 SENT [person] was blessed< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the blessing of [person]< [Date]>< [PlaceDetails
+3 CONC ]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF CHRA
+1 TYPE P
+1 TITL Christen (adult)
+1 ABBR Chr (adult)
+1 SENT [person] was christened< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the christening of [person]< [Date]>< [PlaceDeta
+3 CONC ils]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF CONF
+1 TYPE P
+1 TITL Confirmation
+1 ABBR Confirmation
+1 SENT [person] was confirmed< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the confirmation of [person]< [Date]>< [PlaceDet
+3 CONC ails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF FCOM
+1 TYPE P
+1 TITL First communion
+1 ABBR First comm
+1 SENT [person] received first communion< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the first communion of [person]< [Date]>< [Place
+3 CONC Details]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF ORDN
+1 TYPE P
+1 TITL Ordination
+1 ABBR Ordination
+1 SENT [person] was ordained< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the ordination of [person]< [Date]>< [PlaceDetai
+3 CONC ls]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF NATU
+1 TYPE P
+1 TITL Naturalization
+1 ABBR Naturalization
+1 SENT [person] was naturalized< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the naturalization of [person]< [Date]>< [PlaceD
+3 CONC etails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF EMIG
+1 TYPE P
+1 TITL Emigration
+1 ABBR Emigration
+1 SENT [person] emigrated< [Date]>< from [Place:plain]>< [PlaceDetails]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the emigration of [person]< [Date]>< [PlaceDetai
+3 CONC ls]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF IMMI
+1 TYPE P
+1 TITL Immigration
+1 ABBR Immigration
+1 SENT [person] immigrated< [Date]>< to [Place:plain]>< [PlaceDetails]>< on th
+2 CONC e <i>[Desc]</i>>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the immigration of [person]< [Date]>< [PlaceDeta
+3 CONC ils]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF CENS
+1 TYPE P
+1 TITL Census
+1 ABBR Census
+1 SENT [person] appeared in the census< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] appeared in the household of [person] in the census< [Date
+3 CONC ]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF PROB
+1 TYPE P
+1 TITL Probate
+1 ABBR Probate
+1 SENT [person] had [person:hisher] estate probated< [Date]>< [PlaceDetails]>< [
+2 CONC Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the probate of [person]< [Date]>< [PlaceDetails]
+3 CONC >< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF WILL
+1 TYPE P
+1 TITL Will
+1 ABBR Will
+1 SENT [person] signed a will< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the will of [person]< [Date]>< [PlaceDetails]>< [
+3 CONC Place]>.
+1 ROLE Heir
+2 SENT [ThisPerson] was named an heir in the will of [person]< [Date]>< [Place
+3 CONC Details]>< [Place]>.
+1 ROLE Executor
+2 SENT [ThisPerson] was named an executor for the will of [person]< [Date]>< [
+3 CONC PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF GRAD
+1 TYPE P
+1 TITL Graduation
+1 ABBR Graduation
+1 SENT [person] graduated< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the graduation of [person]< [Date]>< [PlaceDetai
+3 CONC ls]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF RETI
+1 TYPE P
+1 TITL Retirement
+1 ABBR Retirement
+1 SENT [person] retired< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the retirement of [person]< [Date]>< [PlaceDetai
+3 CONC ls]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF DSCR
+1 TYPE P
+1 TITL Description
+1 ABBR Description
+1 SENT [person] was described as [Desc]< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the appearance of [person] as [Desc]< [Date]>< [
+3 CONC PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF EDUC
+1 TYPE P
+1 TITL Education
+1 ABBR Education
+1 SENT [person] was educated < [Desc]>< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the education of [person]< [Date]>< [PlaceDetail
+3 CONC s]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF NATI
+1 TYPE P
+1 TITL Nationality
+1 ABBR Nationality
+1 SENT [person] was [Desc]< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the nationality of [person] as [Desc]< [Date]>< [
+3 CONC PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF OCCU
+1 TYPE P
+1 TITL Occupation
+1 ABBR Occupation
+1 SENT [date] [person] was [Desc:A]< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the occupation of [person]< [Date]> as [Desc:A]< [
+3 CONC PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF PROP
+1 TYPE P
+1 TITL Property
+1 ABBR Property
+1 SENT [person] owned [Desc]< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the property of [person] as [Desc:A]< [Date]>< [
+3 CONC PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF RELI
+1 TYPE P
+1 TITL Religion
+1 ABBR Religion
+1 SENT [person] was [Desc]< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the religion of [person] as [Desc:A]< [Date]>< [
+3 CONC PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF RESI
+1 TYPE P
+1 TITL Residence
+1 ABBR Residence
+1 SENT [person] lived< [Desc]>< [PlaceDetails]>< [Place]>< [Date]>.
+1 ROLE Witness
+2 SENT [ThisPerson] lived in the residence of [person] < [PlaceDetails]>< [Pla
+3 CONC ce]>< [Date]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF SSN
+1 TYPE P
+1 TITL Soc Sec No
+1 ABBR SSN
+1 SENT [person] had Social Security Number [Desc].
+1 PLAC N
+1 DATE N
+1 DESC Y
+0 _EVDEF BAPL
+1 TYPE P
+1 TITL LDS Baptism
+1 ABBR LDS Bapt
+1 SENT [person] was baptized into the LDS Church< [Date]>< [PlaceDetails]>< [P
+2 CONC lace]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the baptism of [person] into the LDS Church< [Da
+3 CONC te]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF ENDL
+1 TYPE P
+1 TITL LDS Endowment
+1 ABBR LDS Endow
+1 SENT [person] was endowed< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the endowment of [person]< [Date]>< [PlaceDetail
+3 CONC s]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF SLGC
+1 TYPE P
+1 TITL LDS Seal to parents
+1 ABBR LDS SealPar
+1 SENT [person] was sealed to [person:hisher] parents< [Date]>< [PlaceDetails]
+2 CONC >< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the sealed to parents of [person]< [Date]>< [Pla
+3 CONC ceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF AFN
+1 TYPE P
+1 TITL Ancestral File Number
+1 ABBR AFN
+1 SENT [person] has Ancestral File Number [Desc].
+1 PLAC N
+1 DATE N
+1 DESC Y
+0 _EVDEF REFN
+1 TYPE P
+1 TITL Reference No
+1 ABBR Ref #
+1 SENT [person] has reference number [Desc].
+1 PLAC N
+1 DATE N
+1 DESC Y
+0 _EVDEF CAST
+1 TYPE P
+1 TITL Caste
+1 ABBR Caste
+1 SENT [person] was associated with [Desc]< [Date]>< [PlaceDetails]>< [Place]>
+2 CONC .
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the associated with [Desc] of [person]< [Date]>< [
+3 CONC PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF TITL
+1 TYPE P
+1 TITL Title (Nobility)
+1 ABBR Title
+1 SENT [person] held the title of [Desc]< [Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF CONL
+1 TYPE P
+1 TITL LDS Confirmation
+1 ABBR LDS Conf
+1 SENT [person] was confirmed a member of the LDS Church< [Date]>< [PlaceDetai
+2 CONC ls]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the confirmation of [person] as a member of the L
+3 CONC DS Church< [Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF WAC
+1 TYPE P
+1 TITL LDS Initiatory
+1 ABBR LDS Init
+1 SENT [person] received LDS initiatory< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the LDS initiatory of [person]< [Date]>< [PlaceD
+3 CONC etails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF MARR
+1 TYPE F
+1 TITL Marriage
+1 ABBR Marriage
+1 SENT [couple] <#Couple#was|were> married< [Date]>< [PlaceDetails]>< [Place]>
+2 CONC .
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the marriage of [couple]< [Date]>< [PlaceDetails
+3 CONC ]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF ANUL
+1 TYPE F
+1 TITL Annulment
+1 ABBR Annulment
+1 SENT [couple] had their marriage annulled< [Date]>< [PlaceDetails]>< [Place]
+2 CONC >.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the annulment of the marriage of [couple]< [Date
+3 CONC ]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF DIV
+1 TYPE F
+1 TITL Divorce
+1 ABBR Divorce
+1 SENT [couple] <#Couple#was|were> divorced< [Date]>< [PlaceDetails]>< [Place]
+2 CONC >.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the divorce of [couple]< [Date]>< [PlaceDetails]
+3 CONC >< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF DIVF
+1 TYPE F
+1 TITL Divorce filed
+1 ABBR Div. filed
+1 SENT [couple] filed for divorce< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the divorce filing of [couple]< [Date]>< [PlaceD
+3 CONC etails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF ENGA
+1 TYPE F
+1 TITL Engagement
+1 ABBR Engagement
+1 SENT [couple] <#Couple#was|were> engaged< [Date]>< [PlaceDetails]>< [Place]>
+2 CONC .
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the engagement of [couple]< [Date]>< [PlaceDetai
+3 CONC ls]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF MARB
+1 TYPE F
+1 TITL Marriage Bann
+1 ABBR Marr Bann
+1 SENT [couple] had marriage banns published< [Date]>< [PlaceDetails]>< [Place
+2 CONC ]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the publishing of the marriage banns of [couple]
+3 CONC <[Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF MARC
+1 TYPE F
+1 TITL Marriage Contract
+1 ABBR Marr Contract
+1 SENT [couple] signed a marriage contract< [Date]>< [PlaceDetails]>< [Place]>
+2 CONC .
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the marriage contract of [couple]< [Date]>< [Pla
+3 CONC ceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF MARL
+1 TYPE F
+1 TITL Marriage License
+1 ABBR Marr Lic
+1 SENT [couple] obtained a marriage license< [Date]>< [PlaceDetails]>< [Place]
+2 CONC >.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the obtaining of the marriage license by [couple
+3 CONC ]< [Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF MARS
+1 TYPE F
+1 TITL Marriage Settlement
+1 ABBR Marr Settlement
+1 SENT [couple] obtained a marriage settlement< [Date]>< [PlaceDetails]>< [Pla
+2 CONC ce]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the marriage settlement of [couple]< [Date]>< [P
+3 CONC laceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF SLGS
+1 TYPE F
+1 TITL LDS Seal to spouse
+1 ABBR LDS SealSp
+1 SENT [couple] were sealed together< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the sealing of [couple]< [Date]>< [PlaceDetails]
+3 CONC >< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF RESI
+1 TYPE F
+1 TITL Residence (family)
+1 ABBR Residence (fam)
+1 SENT [couple] lived < [Desc]>< [PlaceDetails]>< [Place]>< [Date]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF CENS
+1 TYPE F
+1 TITL Census (family)
+1 ABBR Census (fam)
+1 SENT [couple] appeared in the census< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] appeared in the census in the household of [couple]< [Date
+3 CONC ]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF Degree
+1 TYPE P
+1 TITL Degree
+1 ABBR Degree
+1 SENT [person] received a< [desc]> degree< [Date]>< [PlaceDetails]>< [Place]>
+2 CONC .
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the degree of [person]< [Date]>< [PlaceDetails]>
+3 CONC < [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Military
+1 TYPE P
+1 TITL Military
+1 ABBR Military
+1 SENT [person] served in the military< [Desc]>< [Date]>< [PlaceDetails]>< [Pl
+2 CONC ace]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the military service of [person]< [Date]>< [Plac
+3 CONC eDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Mission
+1 TYPE P
+1 TITL Mission
+1 ABBR Mission
+1 SENT [person] served a mission< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the mission of [person]< [Date]>< [PlaceDetails]
+3 CONC >< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Stillborn
+1 TYPE P
+1 TITL Stillborn
+1 ABBR Stillborn
+1 SENT [person] was stillborn< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the stillbirth of [person]< [Date]>< [PlaceDetai
+3 CONC ls]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF Illness
+1 TYPE P
+1 TITL Illness
+1 ABBR Illness
+1 SENT [person] was ill< with [Desc]>< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the illness of [person] with [Desc]< [Date]>< [P
+3 CONC laceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Living
+1 TYPE P
+1 TITL Living
+1 ABBR Living
+1 SENT [person] was living< [Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF Elected
+1 TYPE P
+1 TITL Election
+1 ABBR Elected
+1 SENT [person] was elected< as [Desc]>< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the election of [person] as [Desc]< [Date]>< [Pl
+3 CONC aceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Excomm
+1 TYPE P
+1 TITL Excommunication
+1 ABBR Excomm
+1 SENT [person] was excommunicated< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the excommunication of [person]< [Date]>< [Place
+3 CONC Details]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF Namesake
+1 TYPE P
+1 TITL Namesake
+1 ABBR Namesake
+1 SENT [person] was named after [Desc]< [Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Separation
+1 TYPE F
+1 TITL Separation
+1 ABBR Separation
+1 SENT [couple] were separated< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [ThisPerson] witnessed the separation of [couple]< [Date]>< [PlaceDetai
+3 CONC ls]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF Alt. Name
+1 TYPE P
+1 TITL Alternate name
+1 ABBR Alt. Name
+1 SENT [person] was also known as [Desc]< [Date]>.
+1 PLAC N
+1 DATE Y
+1 DESC N
+0 _EVDEF _DNA
+1 TYPE P
+1 TITL DNA test
+1 ABBR DNA
+1 SENT [person] had a DNA test performed< [Date]>.
+1 PLAC N
+1 DATE Y
+1 DESC N
+0 _EVDEF Misc
+1 TYPE P
+1 TITL Miscellaneous
+1 ABBR Misc
+1 SENT [person]< [Desc]>< [Date]>< [PlaceDetails]>< [Place]>.
+1 ROLE Witness
+2 SENT [person]< [Desc]>< [Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Obituary
+1 TYPE P
+1 TITL Obituary
+1 ABBR Obituary
+1 SENT [Person:Poss] obituary was published in the< [Desc]>< [Date]>< [PlaceDe
+2 CONC tails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Military Enlistment
+1 TYPE P
+1 TITL Military Enlistment
+1 ABBR Military Enlistment
+1 SENT [Person] enlisted< in the [Desc]>< [Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Alt. Birth
+1 TYPE P
+1 TITL Alternate Birth
+1 ABBR Alt. Birth
+1 SENT [Person] may have been born< [Date]>< [PlaceDetails]>< [Place]>.
+1 PLAC Y
+1 DATE Y
+1 DESC N
+0 _EVDEF Emigration (fam)
+1 TYPE F
+1 TITL Emigration (family)
+1 ABBR Emigration (fam)
+1 SENT [Couple]< and children [Witness:first]> emigrated< [Date]>< from [Place
+2 CONC :plain]>< [PlaceDetails]>< on [Desc]>.
+1 ROLE Witness
+2 SENT [ThisPerson] emigrated with [couple]< [Date]>< from [Place:plain]>< [Pl
+3 CONC aceDetails]>< on [Desc]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Grave Marker (fam)
+1 TYPE F
+1 TITL Grave Marker (family)
+1 ABBR Grave Marker (fam)
+1 SENT [Couple] share a grave marker< [PlaceDetails]>< [Place:first]>.
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _EVDEF Never Married
+1 TYPE P
+1 TITL Never Married
+1 ABBR Never Married
+1 SENT [Person] was never married.
+1 PLAC N
+1 DATE N
+1 DESC N
+0 _EVDEF Immigration
+1 TYPE P
+1 TITL Immigration
+1 ABBR Immigration
+1 SENT [NEED TO DEFINE SENTENCE: Immigration]
+1 PLAC Y
+1 DATE Y
+1 DESC Y
+0 _STMPLT
+1 TID 10000
+1 NAME Census, U.S. Federal, pop. sch. 1850-1870 (Online images)
+1 DESC Jurisdiction state, county and census id as lead source list elements; Census ID as lead first (full) reference note; Uses: Optional Abbrev function in CivilDivision field to substitute abbreviations; No credit line in Source List.
+1 FOOTNOTE [CensusID], [JurisdictionState]<, [JurisdictionCounty] County>, populat
+2 CONC ion schedule, [CivilDivision]<, [PageID]><, dwelling [DwellingNumber]><
+2 CONC , family [FamilyNumber]><, [Person]>; digital image, <i>[WebSite]</i> (
+2 CONC [URL] : <[AccessType]|downloaded>< [AccessDate]>); citing NARA microfil
+2 CONC m publication [FilmID]<, roll [Roll]>.
+1 SHORT [CensusID], [JurisdictionState]<, [JurisdictionCounty] Co.>, pop. sch., [
+2 CONC CivilDivision:Abbrev]<, [PageID]><, dwel. [DwellingNumber]><, fam. [Fam
+2 CONC ilyNumber]><, [Person]>.
+1 BIBLIO [JurisdictionState]. <[JurisdictionCounty] County.> [CensusID], populat
+2 CONC ion schedule. Digital images. <i>[WebSite]</i>. [URL] : <[AccessDate:Ye
+2 CONC ar]|n.d.>.
+1 FIELD
+2 NAME CensusID
+2 DISPLAY Census ID (Generic)
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME JurisdictionState
+2 DISPLAY Jurisdiction State
+2 TYPE PLACE
+2 ISDETAIL N
+1 FIELD
+2 NAME JurisdictionCounty
+2 DISPLAY Jurisdiction County
+2 TYPE PLACE
+2 ISDETAIL N
+1 FIELD
+2 NAME CivilDivision
+2 DISPLAY Civil Division
+2 HINT Ward 7 Holyoake; or Pea River post office || abbreviated to Pea River P.O.
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME PageID
+2 DISPLAY Page ID
+2 HINT e.g. p. 123 (penned)  or sheet 12-B (Stamped) or p. 238, line 7
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME DwellingNumber
+2 DISPLAY Dwelling Number
+2 HINT Household dwelling number
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME FamilyNumber
+2 DISPLAY Family Number
+2 HINT Household family number
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME Person
+2 DISPLAY Person of interest
+2 HINT name of person
+2 TYPE NAME
+2 ISDETAIL Y
+1 FIELD
+2 NAME WebSite
+2 DISPLAY Website
+2 HINT title of the website, e.g. Ancestry.com
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME URL
+2 DISPLAY URL (Digital Location)
+2 HINT digital location, e.g. http://www.ancestry.com
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME AccessType
+2 DISPLAY Access type
+2 HINT e.g. accessed, viewed, downloaded [default = downloaded]
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME AccessDate
+2 DISPLAY Access date
+2 HINT date you viewed the site
+2 TYPE DATE
+2 ISDETAIL Y
+1 FIELD
+2 NAME FilmID
+2 DISPLAY Film ID
+2 HINT NARA microfilm series number
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME Roll
+2 DISPLAY Microfilm roll
+2 TYPE TEXT
+2 ISDETAIL Y
+0 _STMPLT
+1 TID 10001
+1 NAME Census, U.S. Federal, pop. sch. 1880-1930 (Online images)
+1 DESC Jurisdiction state, county and census id as lead source list elements; Census ID as lead first (full) reference note; Uses: Optional Abbrev function in CivilDivision field to substitute abbreviations; No credit line in Source List.
+1 FOOTNOTE [CensusID], [JurisdictionState]<, [JurisdictionCounty] County>, populat
+2 CONC ion schedule, [CivilDivision]<, enumeration district (ED) [ED]><, [Page
+2 CONC ID]><, dwelling [DwellingNumber]><, family [FamilyNumber]><, [Person]>; d
+2 CONC igital image, <i>[WebSite]</i> ([URL] : <[AccessType]|downloaded>< [Acc
+2 CONC essDate]>); citing NARA microfilm publication [FilmID]<, roll [Roll]>.
+1 SHORT [CensusID], [JurisdictionState]<, [JurisdictionCounty] Co.>, pop. sch., [
+2 CONC CivilDivision:Abbrev]<, ED [ED]><, [PageID]><, dwel. [DwellingNumber]><
+2 CONC , fam. [FamilyNumber]><, [Person]>.
+1 BIBLIO [JurisdictionState]. <[JurisdictionCounty] County.> [CensusID], populat
+2 CONC ion schedule. Digital images. <i>[WebSite]</i>. [URL] : <[AccessDate:Ye
+2 CONC ar]|n.d.>.
+1 FIELD
+2 NAME CensusID
+2 DISPLAY Census ID (Generic)
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME JurisdictionState
+2 DISPLAY Jurisdiction State
+2 TYPE PLACE
+2 ISDETAIL N
+1 FIELD
+2 NAME JurisdictionCounty
+2 DISPLAY Jurisdiction County
+2 TYPE PLACE
+2 ISDETAIL N
+1 FIELD
+2 NAME CivilDivision
+2 DISPLAY Civil Division
+2 HINT Ward 7 Holyoake; or Pea River post office || abbreviated to Pea River P.O.
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME ED
+2 DISPLAY Enumeration District
+2 HINT ED number, e.g. 307
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME PageID
+2 DISPLAY Page ID
+2 HINT e.g. p. 123 (penned)  or sheet 12-B (Stamped) or p. 238, line 7
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME DwellingNumber
+2 DISPLAY Dwelling Number
+2 HINT Household dwelling number
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME FamilyNumber
+2 DISPLAY Family Number
+2 HINT Household family number
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME Person
+2 DISPLAY Person of interest
+2 HINT name of person
+2 TYPE NAME
+2 ISDETAIL Y
+1 FIELD
+2 NAME WebSite
+2 DISPLAY Website
+2 HINT title of the website, e.g. Ancestry.com
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME URL
+2 DISPLAY URL (Digital Location)
+2 HINT digital location, e.g. http://www.ancestry.com
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME AccessType
+2 DISPLAY Access type
+2 HINT e.g. accessed, viewed, downloaded [default = downloaded]
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME AccessDate
+2 DISPLAY Access date
+2 HINT date you viewed the site
+2 TYPE DATE
+2 ISDETAIL Y
+1 FIELD
+2 NAME FilmID
+2 DISPLAY Film ID
+2 HINT NARA microfilm series number
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME Roll
+2 DISPLAY Microfilm roll
+2 TYPE TEXT
+2 ISDETAIL Y
+0 _STMPLT
+1 TID 10004
+1 NAME Vital Records (state-level, online derivatives) (SsGe)
+1 DESC state-level online database (derivative) (EE); Vital Records: State-compiled Abstracts/databases (QS); creator lead element
+1 FOOTNOTE <[Jurisdiction] ><[Creator], ><?[ItemTitle]|"[ItemTitle]," <[ItemType:L
+2 CONC ower:Abbrev], >><i>[WebsiteTitle]</i><?[ItemTitle]| |, <[ItemType:Lower
+2 CONC :Abbrev] >>([URL] : <[AccessType]|accessed> [AccessDate]), [ItemOfInter
+2 CONC est].
+1 SHORT <[Jurisdiction], ><?[ItemTitle]|"[ItemTitle]," <[ItemType:Lower:Abbrev]
+2 CONC , >><i>[WebsiteTitle]</i><?[ItemTitle]|, |, <[ItemType:Lower:Abbrev] >>
+2 CONC [ItemOfInterest:Abbrev].
+1 BIBLIO <[Jurisdiction]. ><[Creator]. ><?[ItemTitle]|"[ItemTitle]." <[ItemType:
+2 CONC Caps]. >><i>[WebsiteTitle]</i><?[ItemTitle]|. |. <[ItemType:Caps]. >>[U
+2 CONC RL] : [AccessDate:Year].
+1 FIELD
+2 NAME Jurisdiction
+2 DISPLAY Jurisdiction
+2 HINT the entity (state) responsible for compiling the database or index
+2 TYPE PLACE
+2 ISDETAIL N
+1 FIELD
+2 NAME Creator
+2 DISPLAY Creator/author
+2 HINT the identified creator (department) of the database or index
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME ItemTitle
+2 DISPLAY Item Title
+2 HINT the title of the item (optional)
+2 LONGHINT not required if database and website are one and the same (i.e. only on
+3 CONC e database on the site)
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME ItemType
+2 DISPLAY Item Type
+2 HINT the type of item
+2 LONGHINT e.g. database or digital images. Full version (for bibliography)||short
+3 CONC ened version (for footnotes)
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME WebsiteTitle
+2 DISPLAY Website Title
+2 HINT the title of the website
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME URL
+2 DISPLAY URL
+2 HINT the internet URL address
+2 TYPE TEXT
+2 ISDETAIL N
+1 FIELD
+2 NAME AccessType
+2 DISPLAY Access type
+2 HINT how you accessed the site
+2 LONGHINT e.g. accessed, downloaded, viewed [default = accessed]
+2 TYPE TEXT
+2 ISDETAIL Y
+1 FIELD
+2 NAME AccessDate
+2 DISPLAY Access date
+2 HINT the date you accessed or viewed the site
+2 TYPE DATE
+2 ISDETAIL Y
+1 FIELD
+2 NAME ItemofInterest
+2 DISPLAY Item of interest
+2 HINT description of name, date, event
+2 LONGHINT full version||shortened version for subsequent notes
+2 TYPE TEXT
+2 ISDETAIL Y
+0 TRLR

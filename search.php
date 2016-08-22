@@ -208,54 +208,12 @@ if ($mygender) {
 $dontdo = array("ADDR", "BIRT", "CHR", "DEAT", "BURI", "NICK", "TITL", "NSFX");
 $cejoin = doCustomEvents('I');
 
-if ($tree) {
-  if ($urlstring) {
-    $urlstring .= "&amp;";
-  }
-  $urlstring .= "tree=$tree";
-
-  if ($querystring) {
-    $querystring .= " " . uiTextSnippet('cap_and') . " ";
-  }
-
-  $query = "SELECT treename FROM $treesTable WHERE gedcom = \"$tree\"";
-  $treeresult = tng_query($query);
-  $treerow = tng_fetch_assoc($treeresult);
-  tng_free_result($treeresult);
-
-  $querystring .= uiTextSnippet('tree') . " " . uiTextSnippet('equals') . " {$treerow['treename']}";
-
-  if ($allwhere) {
-    $allwhere = "($allwhere) AND";
-  }
-  $allwhere .= " p.gedcom=\"$tree\"";
-
-  if ($branch) {
-    $urlstring .= "&amp;branch=$branch";
-    $querystring .= " " . uiTextSnippet('cap_and') . " ";
-
-    $query = "SELECT description FROM $branches_table WHERE gedcom = \"$tree\" AND branch = \"$branch\"";
-    $branchresult = tng_query($query);
-    $branchrow = tng_fetch_assoc($branchresult);
-    tng_free_result($branchresult);
-
-    $querystring .= uiTextSnippet('branch') . " " . uiTextSnippet('equals') . " {$branchrow['description']}";
-
-    $allwhere .= " AND p.branch like \"%$branch%\"";
-  }
-}
-$treequery = "SELECT count(gedcom) as treecount FROM $treesTable";
-$treeresult = tng_query($treequery);
-$treerow = tng_fetch_assoc($treeresult);
-$numtrees = $treerow['treecount'];
-tng_free_result($treeresult);
-
 $gotInput = $mytitle || $myprefix || $mysuffix || $mynickname || $mybirthplace || $mydeathplace || $mybirthyear || $mydeathyear || $ecount;
 $more = getLivingPrivateRestrictions("p", $myfirstname, $gotInput);
 
 if ($more) {
   if ($allwhere) {
-    $allwhere = $tree ? "$allwhere AND " : "($allwhere) AND ";
+    $allwhere = "($allwhere) AND ";
   }
   $allwhere .= $more;
 }
@@ -281,7 +239,7 @@ if (($mysplname && $mygender) || $spqualify == 'exists' || $spqualify == "dnexis
     p.branch, p.nickname, p.suffix, p.prefix, p.nameorder, p.title, p.birthplace, p.birthdate, p.deathplace, p.deathdate,
     p.altbirthdate, p.altbirthplace, p.burialdate, p.burialplace, p.gedcom, treename
     FROM ($people_table as p, $families_table, $people_table as spouse, $treesTable) $cejoin
-    $allwhere AND (p.gedcom = $treesTable.gedcom AND p.gedcom=$families_table.gedcom AND spouse.gedcom=$families_table.gedcom AND $gstring)
+    $allwhere AND ($gstring)
     $orderstr LIMIT $newoffset" . $maxsearchresults;
   $showspouse = "yess";
   $query2 = "SELECT count(p.ID) as pcount
@@ -320,7 +278,7 @@ if (!$numrows) {
 } elseif ($numrows == 1) {
   $row = tng_fetch_assoc($result);
   tng_free_result($result);
-  header("Location: " . "peopleShowPerson.php?personID=" . $row['personID'] . "&tree=" . $row['gedcom']);
+  header("Location: " . "peopleShowPerson.php?personID=" . $row['personID']);
   exit;
 }
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
@@ -370,9 +328,6 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
           <th><?php echo uiTextSnippet('spouse'); ?></th>
         <?php } ?>
         <th><?php echo uiTextSnippet('personid'); ?></th>
-        <?php if ($numtrees > 1) { ?>
-          <th><?php echo uiTextSnippet('tree'); ?></th>
-        <?php } ?>
       </tr>
       <?php
       $i = $offsetplus;
@@ -422,8 +377,8 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
           echo "<div class='person-img' id=\"mi{$row['gedcom']}_{$row['personID']}\">\n";
             echo "<div class='person-prev' id=\"prev{$row['gedcom']}_{$row['personID']}\"></div>\n";
           echo "</div>\n";
-          echo "<a href=\"pedigree.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$chartlink</a> ";
-          echo "<a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\" class=\"pers\" id=\"p{$row['personID']}_t{$row['gedcom']}\">$name</a>";
+          echo "<a href=\"pedigree.php?personID={$row['personID']}\">$chartlink</a> ";
+          echo "<a href=\"peopleShowPerson.php?personID={$row['personID']}\" class=\"pers\" id=\"p{$row['personID']}_t{$row['gedcom']}\">$name</a>";
         echo "</td>";
 
         if ($showspouse) {
@@ -445,7 +400,7 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
               tng_free_result($spresult);
             }
           }
-          $spousestr = $spouse ? "<a href=\"peopleShowPerson.php?personID=$spouseID&amp;tree={$row['gedcom']}\">$spouse</a>&nbsp;" : "";
+          $spousestr = $spouse ? "<a href=\"peopleShowPerson.php?personID=$spouseID\">$spouse</a>&nbsp;" : "";
         } else {
           $spousestr = "";
         }
@@ -469,9 +424,6 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
           echo "<td>$spousestr</td>";
         }
         echo "<td>{$row['personID']} </td>";
-        if ($numtrees > 1) {
-          echo "<td><a href=\"showtree.php?tree={$row['gedcom']}\">{$row['treename']}</a>&nbsp;</td>";
-        }
         echo "</tr>\n";
       }
       tng_free_result($result);

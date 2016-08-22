@@ -52,8 +52,7 @@ $www = addslashes($www);
 $eventdatetr = convertDate($eventdate);
 
 if (trim($eventplace)) {
-  $placetree = $tngconfig['places1tree'] ? "" : $tree;
-  $query = "INSERT IGNORE INTO $places_table (gedcom,place,placelevel,zoom) VALUES (\"$placetree\",\"$eventplace\",\"0\",\"0\")";
+  $query = "INSERT IGNORE INTO $places_table (gedcom, place, placelevel, zoom) VALUES ('', '$eventplace', '0','0')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   if ($tngconfig['autogeo'] && tng_affected_rows()) {
     $ID = tng_insert_id();
@@ -61,17 +60,19 @@ if (trim($eventplace)) {
   }
 }
 if ($address1 || $address2 || $city || $state || $zip || $country || $phone || $email || $www) {
-  $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, gedcom, phone, email, www)  VALUES(\"$address1\", \"$address2\", \"$city\", \"$state\", \"$zip\", \"$country\", \"$tree\", \"$phone\", \"$email\", \"$www\")";
+  $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, gedcom, phone, email, www) "
+      . "VALUES('$address1', '$address2', '$city', '$state', '$zip', '$country', '', '$phone', '$email', '$www')";
   $result = tng_query($query);
   $addressID = tng_insert_id();
 } else {
   $addressID = "";
 }
-$query = "INSERT INTO $events_table (eventtypeID, persfamID, eventdate, eventdatetr, eventplace, age, agency, cause, addressID, info, gedcom, parenttag)  VALUES(\"$eventtypeID\", \"$persfamID\", \"$eventdate\", \"$eventdatetr\", \"$eventplace\", \"$age\", \"$agency\", \"$cause\", \"$addressID\", \"$info\", \"$tree\", \"\")";
+$query = "INSERT INTO $events_table (eventtypeID, persfamID, eventdate, eventdatetr, eventplace, age, agency, cause, addressID, info, gedcom, parenttag) "
+    . "VALUES('$eventtypeID', '$persfamID', '$eventdate', '$eventdatetr', '$eventplace', '$age', '$agency', '$cause', '$addressID', '$info', '', '')";
 $result = tng_query($query);
 $eventID = tng_insert_id();
 
-adminwritelog(uiTextSnippet('addnewevent') . ": $eventtypeID/$tree/$persfamID");
+adminwritelog(uiTextSnippet('addnewevent') . ": $eventtypeID/$persfamID");
 
 $query = "SELECT display FROM $eventtypes_table WHERE eventtypeID = \"$eventtypeID\"";
 $result = tng_query($query);
@@ -87,7 +88,7 @@ $info = strlen($info) > 90 ? substr($truncated, 0, strrpos($truncated, ' ')) . '
 header("Content-type:text/html; charset=" . $session_charset);
 $eventplace = stripslashes($eventplace);
 if ($eventID) {
-  echo "{\"id\":\"$eventID\",\"persfamID\":\"$persfamID\",\"tree\":\"$tree\",\"display\":\"$display\",\"eventdate\":\"$eventdate\",\"eventplace\":\"$eventplace\",\"info\":\"" . stripslashes($info) . "\",\"allow_edit\":$allowEdit,\"allow_delete\":$allowDelete}";
+  echo "{\"id\":\"$eventID\",\"persfamID\":\"$persfamID\",\"display\":\"$display\",\"eventdate\":\"$eventdate\",\"eventplace\":\"$eventplace\",\"info\":\"" . stripslashes($info) . "\",\"allow_edit\":$allowEdit,\"allow_delete\":$allowDelete}";
 } else {
   echo "{\"id\":0}";
 }

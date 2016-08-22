@@ -78,11 +78,12 @@ if ($tngconfig['autotree']) {
   tng_free_result($result);
 
   if ($tngconfig['autoapp']) {
-    $query = "INSERT IGNORE INTO $treesTable (gedcom,treename,description,owner,email,address,city,state,country,zip,phone,secret,disallowgedcreate) VALUES (\"$gedcom\",\"$realname\",\"\",\"$realname\",\"$email\",\"$address\",\"$city\",\"$state\",\"$country\",\"$zip\",\"$phone\",\"0\",\"0\")";
+    $query = "INSERT IGNORE INTO $treesTable (gedcom, treename, description, owner, email, address, city, state, country, zip, phone, secret, disallowgedcreate) "
+        . "VALUES ('$gedcom', '$realname', '', '$realname', '$email', '$address', '$city', '$state', '$country', '$zip', '$phone', '0', '0')";
     $result = tng_query($query);
   }
 } else {
-  $gedcom = $assignedtree ? $assignedtree : "";
+  $gedcom = "";
 }
 
 if ($username && $password && $realname && $email && $fingerprint == "realperson") {

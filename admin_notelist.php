@@ -7,7 +7,6 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-$orgtree = $tree;
 $exptime = 0;
 
 $searchstring_noquotes = stripslashes(preg_replace("/\"/", "&#34;", $searchstring));
@@ -15,7 +14,6 @@ $searchstring = addslashes($searchstring);
 
 if ($newsearch) {
   setcookie("tng_search_notes_post[search]", $searchstring_noquotes, $exptime);
-  setcookie("tng_search_notes_post[tree]", $tree, $exptime);
   setcookie("tng_search_notes_post[tngpage]", 1, $exptime);
   setcookie("tng_search_notes_post[offset]", 0, $exptime);
   setcookie("tng_search_notes_post[private]", $private, $exptime);
@@ -27,9 +25,6 @@ if ($newsearch) {
   if (!$private) {
     $private = $_COOKIE['tng_search_notes_post']['private'];
   }
-  if (!$tree) {
-    $tree = $_COOKIE['tng_search_notes_post']['tree'];
-  }
   if (!isset($offset)) {
     $tngpage = $_COOKIE['tng_search_notes_post']['tngpage'];
     $offset = $_COOKIE['tng_search_notes_post']['offset'];
@@ -38,7 +33,6 @@ if ($newsearch) {
     setcookie("tng_search_notes_post[offset]", $offset, $exptime);
   }
 }
-
 if ($offset) {
   $offsetplus = $offset + 1;
   $newoffset = "$offset, ";
@@ -47,30 +41,17 @@ if ($offset) {
   $newoffset = "";
   $tngpage = 1;
 }
-
-if ($assignedtree) {
-  $tree = $assignedtree;
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-} else {
-  $wherestr = "";
-}
-$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 
 $wherestr = "WHERE $xnotes_table.ID = $notelinks_table.xnoteID";
-
-if ($tree) {
-  $wherestr .= " AND $xnotes_table.gedcom = \"$tree\"";
-}
 
 if ($private) {
   $wherestr .= " AND $notelinks_table.secret != 0";
 }
-
 if ($searchstring) {
   $wherestr .= $wherestr ? " AND" : "WHERE";
   $wherestr .= " ($xnotes_table.note LIKE '%" . $searchstring . "%')";
 }
-
 $query = "SELECT $xnotes_table.ID as ID, $xnotes_table.note as note, $xnotes_table.gedcom as gedcom
     FROM ($xnotes_table, $notelinks_table)" . $wherestr . " ORDER BY note LIMIT $newoffset" . $maxsearchresults;
 
@@ -104,28 +85,11 @@ $headSection->setTitle(uiTextSnippet('notes'));
     echo $navList->build("notes");
     ?>
     <div>
-
       <form action="admin_notelist.php" name='form1' id='form1'>
         <table>
           <tr>
-            <td><?php echo uiTextSnippet('searchfor'); ?>:</td>
+            <td><?php echo uiTextSnippet('searchfor'); ?>: </td>
             <td>
-              <select name='tree'>
-                <?php
-                if (!$assignedtree) {
-                  echo "  <option value=''>" . uiTextSnippet('alltrees') . "</option>\n";
-                }
-                $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
-                while ($treerow = tng_fetch_assoc($treeresult)) {
-                  echo "  <option value=\"{$treerow['gedcom']}\"";
-                  if ($treerow['gedcom'] == $tree) {
-                    echo " selected";
-                  }
-                  echo ">{$treerow['treename']}</option>\n";
-                }
-                tng_free_result($treeresult);
-                ?>
-              </select>
               <input class='longfield' name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>">
             </td>
             <td>
@@ -170,21 +134,11 @@ $headSection->setTitle(uiTextSnippet('notes'));
         <table class="table table-sm table-striped">
           <tr>
             <th><?php echo uiTextSnippet('action'); ?></th>
-            <?php
-            if ($allowDelete) {
-              ?>
+            <?php if ($allowDelete) { ?>
               <th><?php echo uiTextSnippet('select'); ?></th>
-              <?php
-            }
-            ?>
+            <?php } ?>
             <th><?php echo uiTextSnippet('note'); ?></th>
-            <?php
-            if (!$tree) {
-              ?>
-              <th><?php echo uiTextSnippet('tree'); ?></th>
-              <?php
-            }
-            ?>
+            <th><?php echo uiTextSnippet('tree'); ?></th>
             <th><?php echo uiTextSnippet('linkedto'); ?></th>
           </tr>
           <?php
@@ -215,13 +169,11 @@ $headSection->setTitle(uiTextSnippet('notes'));
             $notelinktext = "";
             while ($nrow = tng_fetch_assoc($nresult)) {
               $treetext = "";
-              if (!$tree) {
-                $query = "SELECT treename FROM " . $treesTable . " WHERE gedcom = \"{$nrow['gedcom']}\"";
-                $result2 = tng_query($query);
-                $row2 = tng_fetch_assoc($result2);
-                $treetext = "<td>" . $row2['treename'] . "</td>";
-                tng_free_result($result2);
-              }
+              $query = "SELECT treename FROM " . $treesTable . " WHERE gedcom = \"{$nrow['gedcom']}\"";
+              $result2 = tng_query($query);
+              $row2 = tng_fetch_assoc($result2);
+              $treetext = "<td>" . $row2['treename'] . "</td>";
+              tng_free_result($result2);
 
               if (!$notelinktext) {
                 $query = "SELECT * FROM $people_table WHERE personID = \"{$nrow['personID']}\" AND gedcom = \"{$nrow['gedcom']}\"";
@@ -231,7 +183,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
                   $nrights = determineLivingPrivateRights($row2);
                   $row2['allow_living'] = $nrights['living'];
                   $row2['allow_private'] = $nrights['private'];
-                  $notelinktext .= "<li><a href=\"peopleShowPerson.php?personID={$row2['personID']}&amp;tree={$row2['gedcom']}\" target='_blank'>" . getNameRev($row2) . " ({$row2['personID']})</a></li>\n";
+                  $notelinktext .= "<li><a href=\"peopleShowPerson.php?personID={$row2['personID']}\" target='_blank'>" . getNameRev($row2) . " ({$row2['personID']})</a></li>\n";
                   tng_free_result($result2);
                 }
               }
@@ -243,7 +195,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
                   $nrights = determineLivingPrivateRights($row2);
                   $row2['allow_living'] = $nrights['living'];
                   $row2['allow_private'] = $nrights['private'];
-                  $notelinktext .= "<li><a href=\"familiesShowFamily.php?familyID={$row2['familyID']}&tree={$nrow['gedcom']}\" target='_blank'>" . uiTextSnippet('family') . " {$row2['familyID']}</a></li>\n";
+                  $notelinktext .= "<li><a href=\"familiesShowFamily.php?familyID={$row2['familyID']}\" target='_blank'>" . uiTextSnippet('family') . " {$row2['familyID']}</a></li>\n";
                   tng_free_result($result2);
                 }
               }
@@ -252,7 +204,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
                 $result2 = tng_query($query);
                 if (tng_num_rows($result2) == 1) {
                   $row2 = tng_fetch_assoc($result2);
-                  $notelinktext .= "<li><a href=\"showsource.php?sourceID={$row2['sourceID']}&tree={$row2['gedcom']}\" target='_blank'>" . uiTextSnippet('source') . " $sourcetext ({$row2['sourceID']})</a></li>\n";
+                  $notelinktext .= "<li><a href=\"showsource.php?sourceID={$row2['sourceID']}\" target='_blank'>" . uiTextSnippet('source') . " $sourcetext ({$row2['sourceID']})</a></li>\n";
                   tng_free_result($result2);
                 }
               }
@@ -261,14 +213,14 @@ $headSection->setTitle(uiTextSnippet('notes'));
                 $result2 = tng_query($query);
                 if (tng_num_rows($result2) == 1) {
                   $row2 = tng_fetch_assoc($result2);
-                  $notelinktext .= "<li><a href=\"repositoriesShowItem.php?repoID={$row2['repoID']}&tree={$row2['gedcom']}\" target='_blank'>" . uiTextSnippet('repository') . " $sourcetext ({$row2['repoID']})</a></li>\n";
+                  $notelinktext .= "<li><a href=\"repositoriesShowItem.php?repoID={$row2['repoID']}\" target='_blank'>" . uiTextSnippet('repository') . " $sourcetext ({$row2['repoID']})</a></li>\n";
                   tng_free_result($result2);
                 }
               }
             }
             tng_free_result($nresult);
 
-            if (($allowEdit && !$assignedtree) || !$row['secret']) {
+            if (($allowEdit) || !$row['secret']) {
               $notetext = cleanIt($row['note']);
               $notetext = truncateIt($notetext, 500);
               if (!$notetext) {

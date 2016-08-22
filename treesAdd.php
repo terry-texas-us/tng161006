@@ -22,7 +22,7 @@ $headSection->setTitle(uiTextSnippet('addnewtree'));
     <?php
     echo $adminHeaderSection->build('trees-addnewtree', $message);
     $navList = new navList('');
-    $allow_add_tree = $assignedtree ? 0 : $allowAdd;
+    $allow_add_tree = $allowAdd;
     $navList->appendItem([true, 'treesBrowse.php', uiTextSnippet('search'), 'findtree']);
     //    $navList->appendItem([$allow_add_tree, "treesAdd.php", uiTextSnippet('add'), "addtree"]);
     echo $navList->build("addtree");

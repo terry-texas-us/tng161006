@@ -236,20 +236,18 @@ if (is_numeric($primarypersonID)) {
 }
 $primarypersonID = strtoupper($primarypersonID);
 
-$righttree = checktree($tree);
-
-$result = getPersonDataPlusDates($tree, $primarypersonID);
+$result = getPersonDataPlusDates($primarypersonID);
 if (tng_num_rows($result)) {
   $row = tng_fetch_assoc($result);
   $rightbranch = checkbranch($row['branch']);
-  $rights = determineLivingPrivateRights($row, $righttree, $rightbranch);
+  $rights = determineLivingPrivateRights($row, $rightbranch);
   $row['allow_living'] = $rights['living'];
   $row['allow_private'] = $rights['private'];
   $namestr = getName($row);
   $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $namestr);
   $gender1 = $row['sex'];
 
-  $treeResult = getTreeSimple($tree);
+  $treeResult = getTreeSimple();
   $treerow = tng_fetch_assoc($treeResult);
   $disallowgedcreate = $treerow['disallowgedcreate'];
   tng_free_result($treeResult);
@@ -258,10 +256,10 @@ if (tng_num_rows($result)) {
 }
 tng_free_result($result);
 
-$result2 = getPersonSimple($tree, $secondpersonID);
+$result2 = getPersonSimple($secondpersonID);
 if (tng_num_rows($result2)) {
   $row2 = tng_fetch_assoc($result2);
-  $rights2 = determineLivingPrivateRights($row2, $righttree);
+  $rights2 = determineLivingPrivateRights($row2);
   $row2['allow_living'] = $rights2['living'];
   $row2['allow_private'] = $rights2['private'];
   $namestr2 = getName($row2);
@@ -272,9 +270,9 @@ if (tng_num_rows($result2)) {
 }
 tng_free_result($result2);
 
-writelog("<a href=\"relationship.php?altprimarypersonID=$primarypersonID&amp;tree=$tree&amp;secondpersonID=$secondpersonID\">" .
+writelog("<a href=\"relationship.php?altprimarypersonID=$primarypersonID&amp;secondpersonID=$secondpersonID\">" .
         uiTextSnippet('relcalc') . ": $logname ($primarypersonID) =&gt;$logname2 ($secondpersonID)</a>");
-preparebookmark("<a href=\"relationship.php?altprimarypersonID=$primarypersonID&amp;tree=$tree&amp;secondpersonID=$secondpersonID\">" .
+preparebookmark("<a href=\"relationship.php?altprimarypersonID=$primarypersonID&amp;secondpersonID=$secondpersonID\">" .
         uiTextSnippet('relcalc') . ": $namestr ($primarypersonID) =&gt;$namestr2 ($secondpersonID)</a>");
 
 $pedigree['url'] = "pedigree.php?";
@@ -289,11 +287,6 @@ if (file_exists("img/Chart.gif")) {
 } else {
   $pedigree['chartlink'] = "<span><b>P</b></span>";
 }
-$pedigree['phototree'] = $tree;
-if ($tree) {
-  $pedigree['phototree'] .= ".";
-}
-
 if ($pedigree['usepopups'] == 1) {
   $pedigree['display'] = "standard";
 } elseif ($pedigree['usepopups'] == 0) {
@@ -354,12 +347,10 @@ function drawCouple($couple, $topflag, $linedown) {
 
 function drawBox($drawpersonID, $spouseflag, $topflag) {
   global $gens;
-  global $tree;
   global $pedigree;
   global $personID1;
   global $primarypersonID;
   global $slot;
-  global $righttree;
 
   if ($spouseflag && !$topflag) {
     $boxcolortouse = getColor(1);
@@ -371,11 +362,11 @@ function drawBox($drawpersonID, $spouseflag, $topflag) {
   $pedigree['begnamefont'] = "<span style=\"font-size:$namefontsztouse" . "pt\">";
   $pedigree['endfont'] = "</span>";
 
-  $result = getPersonData($tree, $drawpersonID);
+  $result = getPersonData($drawpersonID);
   if ($result) {
     $row = tng_fetch_assoc($result);
 
-    $rights = determineLivingPrivateRights($row, $righttree);
+    $rights = determineLivingPrivateRights($row);
     $row['allow_living'] = $rights['living'];
     $row['allow_private'] = $rights['private'];
     $nameinfo_org = getName($row);
@@ -384,7 +375,7 @@ function drawBox($drawpersonID, $spouseflag, $topflag) {
     } else {
       $nameinfo = $nameinfo_org;
     }
-    $pedigree['namelink'] = "<a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree=$tree\">$nameinfo</a>";
+    $pedigree['namelink'] = "<a href=\"peopleShowPerson.php?personID={$row['personID']}\">$nameinfo</a>";
 
     $newoffset = $spouseflag ? $gens->offsetV : $gens->offsetV + $pedigree['puboxheight'] + 2 * $pedigree['boxVsep'];
     $gens->offsetV = $gens->offsetV == -1 ? 0 : $newoffset;
@@ -393,7 +384,7 @@ function drawBox($drawpersonID, $spouseflag, $topflag) {
     if ($row['famc'] && $pedigree['popupchartlinks']) {
       $iconactions = " onmouseover=\"if($('ic$slot')) $('ic$slot').style.display='';\" onmouseout=\"if($('ic$slot')) $('ic$slot').style.display='none';\"";
       $iconlinks = "<div class=\"floverlr\" id=\"ic$slot\" style=\"left:" . ($pedigree['puboxwidth'] - 35) . "px;top:" . ($pedigree['puboxheight'] - 15) . "px;display:none;background-color:$boxcolortouse\">";
-      $iconlinks .= "<a href=\"{$pedigree['url']}personID=$drawpersonID&amp;tree=$tree&amp;display=standard&amp;generations=" . $pedigree['initpedgens'] . "\" title=\"" . uiTextSnippet('popupnote2') . "\">{$pedigree['chartlink']}</a>\n";
+      $iconlinks .= "<a href=\"{$pedigree['url']}personID=$drawpersonID&amp;display=standard&amp;generations=" . $pedigree['initpedgens'] . "\" title=\"" . uiTextSnippet('popupnote2') . "\">{$pedigree['chartlink']}</a>\n";
       $iconlinks .= "</div>\n";
       $slot++;
     } else {
@@ -418,10 +409,9 @@ function drawBox($drawpersonID, $spouseflag, $topflag) {
 
     // name info
     echo "<td align=\"{$pedigree['puboxalign']}\" class=\"pboxname\" style=\"height:$tableheight\">{$pedigree['begnamefont']}" . $pedigree['namelink'] . $pedigree['endfont'];
-    //if( $row['famc'] && $pedigree['popupchartlinks'])
-    //echo " <a href=\"{$pedigree['url']}" . "personID={$row['personID']}&amp;tree=$tree&amp;display={$pedigree['display']}\">{$pedigree['chartlink']}</a>";
 
-    echo "</td></tr></table></div>\n";
+    echo "</td></tr>\n";
+    echo "</table></div>\n";
     //end box
 
     echo "<div class='rounded10' style=\"position:absolute; background-color:{$pedigree['shadowcolor']}; top:" . ($gens->offsetV - $pedigree['borderwidth'] + $pedigree['shadowoffset']) . "px;left:" . ($gens->offsetH - $pedigree['borderwidth'] + $pedigree['shadowoffset']) . "px;height:" . ($pedigree['puboxheight'] + (2 * $pedigree['borderwidth'])) . "px;width:" . ($pedigree['puboxwidth'] + (2 * $pedigree['borderwidth'])) . "px;z-index:1\"></div>\n";
@@ -527,10 +517,11 @@ function finishRelationship($couple) {
 }
 
 function checkOtherSpouse($parentrow, $parent, $spouse) {
-  global $tree, $gens, $needmore;
+  global $gens;
+  global $needmore;
 
   if ($parentrow[$parent] && $needmore) {
-    $osresult = getSpouseFamilyMinimalExcept($tree, $parent, $parentrow[$parent], $spouse, $parentrow[$spouse]);
+    $osresult = getSpouseFamilyMinimalExcept($parent, $parentrow[$parent], $spouse, $parentrow[$spouse]);
 
     //save husband and wife in $gens
     $gens->multparent1 = $parentrow[$parent];
@@ -544,7 +535,7 @@ function checkOtherSpouse($parentrow, $parent, $spouse) {
       //is it the new spouse? We already know it isn't the main parent
       checkParent($osrow, $spouse, $parent); //switched here
 
-      $childresult = getChildrenMinimal($tree, $osrow['familyID']);
+      $childresult = getChildrenMinimal($osrow['familyID']);
 
       while ($needmore && $childrow = tng_fetch_assoc($childresult)) {
         checkpersondown($childrow['personID']);
@@ -577,7 +568,6 @@ function checkParent($parentrow, $parent, $spouse) {
 
 //check ancestors of person1 to see if you find person2
 function checkpersonup($nextcouple) {
-  global $tree;
   global $maxupgen;
   global $gens;
   global $needmore;
@@ -594,9 +584,9 @@ function checkpersonup($nextcouple) {
   }
   $gensup = $gens->upcount;
 
-  $familyresult = getChildFamily($tree, $checkpersonID, "ordernum");
+  $familyresult = getChildFamily($checkpersonID, "ordernum");
   while ($familyrow = tng_fetch_assoc($familyresult)) {
-    $parentsresult = getFamilyMinimal($tree, $familyrow['familyID']);
+    $parentsresult = getFamilyMinimal($familyrow['familyID']);
 
     $gens->downarray = array();
     $gens->downcount = 0;
@@ -614,7 +604,7 @@ function checkpersonup($nextcouple) {
       //we're going down again, so we're assuming cousins or siblings
       $gens->split = 1;
 
-      $childresult = getChildrenMinimalExcept($tree, $familyrow['familyID'], $checkpersonID);
+      $childresult = getChildrenMinimalExcept($familyrow['familyID'], $checkpersonID);
       while ($needmore && $childrow = tng_fetch_assoc($childresult)) {
         checkpersondown($childrow['personID']);
       }
@@ -670,7 +660,6 @@ function checkpersonup($nextcouple) {
 
 //check descendants of person1 to see if you find person2
 function checkpersondown($checkpersonID) {
-  global $tree;
   global $targetID;
   global $maxupgen;
   global $gens;
@@ -685,7 +674,7 @@ function checkpersondown($checkpersonID) {
   //check person
   if ($checkpersonID != $targetID) {
     //get sex of each individual
-    $result = getPersonGender($tree, $checkpersonID);
+    $result = getPersonGender($checkpersonID);
     if ($result) {
       $row = tng_fetch_assoc($result);
       if ($row['sex'] == 'M') {
@@ -703,7 +692,7 @@ function checkpersondown($checkpersonID) {
       }
       if ($spouseorder) {
         //get spouses -- for each spouse
-        $spouseresult = getSpousesSimple($tree, $self, $checkpersonID, $spouse, $spouseorder);
+        $spouseresult = getSpousesSimple($self, $checkpersonID, $spouse, $spouseorder);
 
         while ($needmore && $spouserow = tng_fetch_assoc($spouseresult)) {
           //build couple
@@ -725,7 +714,7 @@ function checkpersondown($checkpersonID) {
             //get children -- for each child
             if ($pushed) {
               if ($gensdown < $maxupgen) {
-                $childresult = getChildrenMinimal($tree, $spouserow['familyID']);
+                $childresult = getChildrenMinimal($spouserow['familyID']);
                 while ($needmore && $childrow = tng_fetch_assoc($childresult)) {
                   checkpersondown($childrow['personID']);
                 }
@@ -859,7 +848,7 @@ echo "<body id='public'>\n";
     }
     $innermenu .= "</select>&nbsp;&nbsp;&nbsp;\n";
     $innermenu .= "<a href='#' onclick=\"document.form1.submit();\">" . uiTextSnippet('refresh') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"relateform.php?primaryID=$primarypersonID&amp;tree=$tree\">" . uiTextSnippet('findanother') . "</a>\n";
+    $innermenu .= "<a href=\"relateform.php?primaryID=$primarypersonID\">" . uiTextSnippet('findanother') . "</a>\n";
 
     beginFormElement("relationship2", "get", "form1", "form1");
     echo buildPersonMenu("relate", $primarypersonID);
@@ -869,7 +858,6 @@ echo "<body id='public'>\n";
     echo "<br>\n";
     echo "<input name='primarypersonID' type='hidden' value=\"$primarypersonID\" />\n";
     echo "<input name='savedpersonID' type='hidden' value=\"$secondpersonID\" />\n";
-    echo "<input name='tree' type='hidden' value=\"$tree\" />\n";
     endFormElement();
     ?>
       <div id="searching"><img src="img/spinner.gif" alt=""> <?php echo uiTextSnippet('searching'); ?></div>

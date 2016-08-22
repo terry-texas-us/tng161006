@@ -16,12 +16,9 @@ if (!$allowEdit || !$allowDelete) {
 
 $deleteblankfamilies = 1;
 
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-} else {
-  $wherestr = "";
-}
-$query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$wherestr = "";
+
+$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $treeresult = tng_query($query);
 
 if ($assignedbranch) {
@@ -29,8 +26,6 @@ if ($assignedbranch) {
 } else {
   $branchstr = "";
 }
-
-$righttree = checktree($tree);
 $ldsOK = determineLDSRights();
 
 function doRow($field, $textmsg, $boxname) {
@@ -124,17 +119,15 @@ function getEvent($event) {
 
 function getSpouse($marriage, $spouse) {
   global $people_table;
-  global $tree;
   global $ldsOK;
-  global $righttree;
 
   $spousestr = "";
   if ($marriage[$spouse]) {
-    $query = "SELECT personID, lastname, firstname, prefix, suffix, nameorder FROM $people_table WHERE personID = \"{$marriage[$spouse]}\" AND gedcom = \"$tree\"";
+    $query = "SELECT personID, lastname, firstname, prefix, suffix, nameorder FROM $people_table WHERE personID = \"{$marriage[$spouse]}\"";
     $gotspouse = tng_query($query);
     $spouserow = tng_fetch_assoc($gotspouse);
 
-    $srights = determineLivingPrivateRights($fathrow, $righttree);
+    $srights = determineLivingPrivateRights($fathrow);
     $spouserow['allow_living'] = $srights['living'];
     $spouserow['allow_private'] = $srights['private'];
 
@@ -165,18 +158,16 @@ function getSpouse($marriage, $spouse) {
 function getParents($parent) {
   global $people_table;
   global $families_table;
-  global $tree;
-  global $righttree;
   global $ldsOK;
 
   $parentstr = "";
-  $query = "SELECT personID, lastname, firstname, prefix, suffix, nameorder FROM $people_table, $families_table WHERE $people_table.personID = $families_table.husband AND $families_table.familyID = \"{$parent['familyID']}\" AND $people_table.gedcom = \"$tree\" AND $families_table.gedcom = \"$tree\"";
+  $query = "SELECT personID, lastname, firstname, prefix, suffix, nameorder FROM $people_table, $families_table WHERE $people_table.personID = $families_table.husband AND $families_table.familyID = \"{$parent['familyID']}\"";
   $gotfather = tng_query($query);
 
   if ($gotfather) {
     $fathrow = tng_fetch_assoc($gotfather);
 
-    $frights = determineLivingPrivateRights($fathrow, $righttree);
+    $frights = determineLivingPrivateRights($fathrow);
     $fathrow['allow_living'] = $frights['living'];
     $fathrow['allow_private'] = $frights['private'];
 
@@ -184,13 +175,13 @@ function getParents($parent) {
     tng_free_result($gotfather);
   }
 
-  $query = "SELECT personID, lastname, firstname, prefix, suffix, nameorder FROM $people_table, $families_table WHERE $people_table.personID = $families_table.wife AND $families_table.familyID = \"{$parent['familyID']}\" AND $people_table.gedcom = \"$tree\" AND $families_table.gedcom = \"$tree\"";
+  $query = "SELECT personID, lastname, firstname, prefix, suffix, nameorder FROM $people_table, $families_table WHERE $people_table.personID = $families_table.wife AND $families_table.familyID = \"{$parent['familyID']}\"";
   $gotmother = tng_query($query);
 
   if ($gotmother) {
     $mothrow = tng_fetch_assoc($gotmother);
 
-    $mrights = determineLivingPrivateRights($mothrow, $righttree);
+    $mrights = determineLivingPrivateRights($mothrow);
     $mothrow['allow_living'] = $mrights['living'];
     $mothrow['allow_private'] = $mrights['private'];
 
@@ -245,19 +236,20 @@ function addCriteria($row) {
 }
 
 function doNotesCitations($persfam1, $persfam2, $varname) {
-  global $ccombinenotes, $notelinks_table, $citations_table, $tree;
+  global $ccombinenotes;
+  global $notelinks_table;
+  global $citations_table;
 
   if ($varname) {
     if ($varname == "general") {
       $varname = "";
     }
-    $wherestr = "AND eventID = \"$varname\"";
+    $wherestr = " AND eventID = \"$varname\"";
   } else {
     $wherestr = "";
   }
-
   if ($ccombinenotes != "yes") {
-    $query = "SELECT xnoteID FROM $notelinks_table WHERE persfamID = \"$persfam1\" AND gedcom = \"$tree\" $wherestr";
+    $query = "SELECT xnoteID FROM $notelinks_table WHERE persfamID = '$persfam1' $wherestr";
     $noteresult = tng_query($query);
     while ($row = tng_fetch_assoc($noteresult)) {
       $query = "DELETE FROM $xnotes_table WHERE ID=\"{$row['xnoteID']}\"";
@@ -265,42 +257,42 @@ function doNotesCitations($persfam1, $persfam2, $varname) {
     }
     tng_free_result($noteresult);
 
-    $query = "DELETE from $notelinks_table WHERE persfamID = \"$persfam1\" AND gedcom = \"$tree\" $wherestr";
+    $query = "DELETE from $notelinks_table WHERE persfamID = '$persfam1' $wherestr";
     tng_query($query);
 
-    $query = "DELETE from $citations_table WHERE persfamID = \"$persfam1\" AND gedcom = \"$tree\" $wherestr";
+    $query = "DELETE from $citations_table WHERE persfamID = '$persfam1' $wherestr";
     tng_query($query);
   }
-  $query = "UPDATE $notelinks_table set persfamID = \"$persfam1\" WHERE persfamID = \"$persfam2\" AND gedcom = \"$tree\" $wherestr";
+  $query = "UPDATE $notelinks_table set persfamID = \"$persfam1\" WHERE persfamID = '$persfam2' $wherestr";
   tng_query($query);
 
-  $query = "UPDATE $citations_table set persfamID = \"$persfam1\" WHERE persfamID = \"$persfam2\" AND gedcom = \"$tree\" $wherestr";
+  $query = "UPDATE $citations_table set persfamID = \"$persfam1\" WHERE persfamID = '$persfam2' $wherestr";
   tng_query($query);
 }
 
 function doAssociations($personID1, $personID2) {
-  global $tree, $assoc_table;
+  global $assoc_table;
 
-  $query = "UPDATE $assoc_table set personID = \"$personID1\" WHERE personID = \"$personID2\" AND gedcom = \"$tree\"";
+  $query = "UPDATE $assoc_table set personID = \"$personID1\" WHERE personID = '$personID2'";
   tng_query($query);
 
-  $query = "UPDATE $assoc_table set passocID = \"$personID1\" WHERE personID = \"$personID2\" AND gedcom = \"$tree\"";
+  $query = "UPDATE $assoc_table set passocID = \"$personID1\" WHERE personID = '$personID2'";
   tng_query($query);
 }
 
 function delAssociations($entity) {
-  global $tree, $assoc_table;
+  global $assoc_table;
 
-  $query = "DELETE FROM $assoc_table WHERE personID = \"$entity\" AND gedcom = \"$tree\"";
+  $query = "DELETE FROM $assoc_table WHERE personID = '$entity'";
   tng_query($query);
 
-  $query = "DELETE FROM $assoc_table WHERE passocID = \"$entity\" AND gedcom = \"$tree\"";
+  $query = "DELETE FROM $assoc_table WHERE passocID = '$entity'";
   tng_query($query);
 }
 
 $p1row = $p2row = "";
 if ($personID1) {
-  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $people_table WHERE personID = \"$personID1\" and gedcom = \"$tree\"";
+  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $people_table WHERE personID = '$personID1'";
   $result = tng_query($query);
   if ($result && tng_num_rows($result)) {
     $p1row = tng_fetch_assoc($result);
@@ -334,7 +326,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
       $nextone = $nextchunk + 1;
       $nextchunk += $largechunk;
 
-      $query = "SELECT * FROM $people_table WHERE gedcom = \"$tree\" $branchstr $wherestr ORDER BY personID, lastname, firstname LIMIT $nextone, $largechunk";
+      $query = "SELECT * FROM $people_table WHERE 1 $branchstr $wherestr ORDER BY personID, lastname, firstname LIMIT $nextone, $largechunk";
       $result = tng_query($query);
       $numrows = tng_num_rows($result);
       if ($result && $numrows) {
@@ -342,7 +334,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
           //echo "compare $row['firstname'] $row['lastname']<br>\n";
           $wherestr2 = addCriteria($row);
 
-          $query = "SELECT * FROM $people_table WHERE personID > \"{$row['personID']}\" AND gedcom = \"$tree\" $branchstr $wherestr2 ORDER BY personID, lastname, firstname LIMIT 1";
+          $query = "SELECT * FROM $people_table WHERE personID > \"{$row['personID']}\" $branchstr $wherestr2 ORDER BY personID, lastname, firstname LIMIT 1";
           //echo "q2: $query<br>\n";
           $result2 = tng_query($query);
           if ($result2 && tng_num_rows($result2)) {
@@ -367,7 +359,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
     $wherestr2 = $personID2 ? " AND personID > \"$personID2\"" : "";
     $wherestr2 .= addCriteria($p1row);
 
-    $query = "SELECT * FROM $people_table WHERE personID != \"{$p1row['personID']}\" AND gedcom = \"$tree\" $branchstr $wherestr2 ORDER BY personID, lastname, firstname LIMIT 1";
+    $query = "SELECT * FROM $people_table WHERE personID != \"{$p1row['personID']}\" $branchstr $wherestr2 ORDER BY personID, lastname, firstname LIMIT 1";
     $result2 = tng_query($query);
     if ($result2 && tng_num_rows($result2)) {
       $p2row = tng_fetch_assoc($result2);
@@ -379,7 +371,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
     }
   }
 } elseif ($personID2) {
-  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $people_table WHERE personID = \"$personID2\" AND gedcom = \"$tree\"";
+  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $people_table WHERE personID = '$personID2'";
   $result2 = tng_query($query);
   if ($result2 && tng_num_rows($result2) && $personID1 != $personID2) {
     $p2row = tng_fetch_assoc($result2);
@@ -428,32 +420,32 @@ if ($mergeaction == uiTextSnippet('merge')) {
         if (strpos($key, "::")) {
           $halves = explode("::", substr($key, 5));
           $varname = substr(strstr($halves[1], "_"), 1);
-          $query = "DELETE from $events_table WHERE persfamID = \"$personID1\" AND gedcom = \"$tree\" and eventID = \"$varname\"";
+          $query = "DELETE from $events_table WHERE persfamID = '$personID1' and eventID = \"$varname\"";
           $evresult = tng_query($query);
           $varname = $halves['0'] != "event" ? substr(strstr($halves['0'], "_"), 1) : "";
         } else {
           $varname = substr(strstr($key, "_"), 1);
         }
         if ($varname) {
-          $query = "SELECT eventID FROM $events_table WHERE persfamID = \"$personID2\" AND  gedcom = \"$tree\" and eventID = \"$varname\"";
+          $query = "SELECT eventID FROM $events_table WHERE persfamID = '$personID2' AND eventID = \"$varname\"";
           $evresult = tng_query($query);
           while ($evrow = tng_fetch_assoc($evresult)) {
             doNotesCitations($personID1, $personID2, $evrow['eventID']);
           }
           tng_free_result($evresult);
 
-          $query = "UPDATE $events_table set persfamID = \"$personID1\" WHERE persfamID = \"$personID2\" AND gedcom = \"$tree\" AND eventID = \"$varname\"";
+          $query = "UPDATE $events_table set persfamID = '$personID1' WHERE persfamID = '$personID2' AND eventID = \"$varname\"";
           $evresult = tng_query($query);
         }
         break;
       case "pa":
         $varname = substr($key, 7);
-        $query = "DELETE from $children_table WHERE personID = \"$personID1\" AND gedcom = \"$tree\" and familyID = \"$varname\"";
+        $query = "DELETE from $children_table WHERE personID = '$personID1' and familyID = \"$varname\"";
         $evresult = tng_query($query);
 
         //if not selected, delete child record for person 2
 
-        $query = "UPDATE $children_table set personID = \"$personID1\" WHERE personID = \"$personID2\" AND gedcom = \"$tree\" AND familyID = \"$varname\"";
+        $query = "UPDATE $children_table set personID = '$personID1' WHERE personID = '$personID2' AND familyID = \"$varname\"";
         $evresult = tng_query($query);
         if (!$prifamily) {
           $updatestr .= ", famc = \"$varname\" ";
@@ -467,11 +459,11 @@ if ($mergeaction == uiTextSnippet('merge')) {
           $varname = substr($key, 8);
 
           //delete family on right (important to do deleting first)
-          $query = "DELETE from $families_table WHERE familyID = \"$varname\" AND gedcom = \"$tree\"";
+          $query = "DELETE from $families_table WHERE familyID = '$varname'";
           $famresult = tng_query($query);
 
           //get families where left person is the husband/wife and right SPOUSE is the wife/husband
-          $query = "SELECT familyID FROM $families_table WHERE gedcom = \"$tree\" AND $p1self = \"$personID1\" AND $p1spouse = \"" . substr($value, 6) . "\"";
+          $query = "SELECT familyID FROM $families_table WHERE $p1self = \"$personID1\" AND $p1spouse = \"" . substr($value, 6) . "\"";
           $sp1result = tng_query($query);
           $sp1row = tng_fetch_assoc($sp1result);
           tng_free_result($sp1result);
@@ -479,21 +471,21 @@ if ($mergeaction == uiTextSnippet('merge')) {
           delAssociations($varname);
 
           if ($ccombineextras) {
-            $query = "UPDATE $medialinks_table set personID = \"{$sp1row['familyID']}\" WHERE personID = \"$varname\" AND gedcom = \"$tree\"";
+            $query = "UPDATE $medialinks_table set personID = \"{$sp1row['familyID']}\" WHERE personID = '$varname'";
           } else {
-            $query = "DELETE FROM $medialinks_table WHERE personID = \"$varname\" AND gedcom = \"$tree\"";
+            $query = "DELETE FROM $medialinks_table WHERE personID = '$varname'";
           }
           $mediaresult = tng_query($query);
 
           //update all people records where FAMC = the deleted family, set FAMC = family on left
-          $query = "UPDATE $people_table set famc = \"{$sp1row['familyID']}\" WHERE famc = \"$varname\" AND gedcom = \"$tree\"";
+          $query = "UPDATE $people_table set famc = \"{$sp1row['familyID']}\" WHERE famc = '$varname'";
           $paresult = tng_query($query);
 
           //move kids from right family to left
-          $query = "UPDATE $children_table set familyID = \"{$sp1row['familyID']}\" WHERE familyID = \"$varname\" AND gedcom = \"$tree\"";
+          $query = "UPDATE $children_table set familyID = \"{$sp1row['familyID']}\" WHERE familyID = '$varname'";
           $chilresult = tng_query($query);
           if (!$chilresult) {
-            $query = "DELETE FROM $children_table WHERE familyID = \"$varname\" AND gedcom = \"$tree\"";
+            $query = "DELETE FROM $children_table WHERE familyID = '$varname'";
             $chilresult = tng_query($query);
           }
 
@@ -501,7 +493,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
             doNotesCitations($sp1row['familyID'], $varname, "");
           }
 
-          $query = "UPDATE $events_table set persfamID = \"{$sp1row['familyID']}\" WHERE persfamID = \"$varname\" AND gedcom = \"$tree\"";
+          $query = "UPDATE $events_table set persfamID = \"{$sp1row['familyID']}\" WHERE persfamID = '$varname'";
           $evresult = tng_query($query);
         }
         break;
@@ -511,7 +503,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
         if (!$_POST[$samespouse] && $p1self) {
           $varname = substr($key, 8);
 
-          $query = "UPDATE $families_table set $p1self = \"\", $p1spouseorder = \"\" WHERE familyID = \"$varname\" AND gedcom = \"$tree\"";
+          $query = "UPDATE $families_table set $p1self = \"\", $p1spouseorder = \"\" WHERE familyID = '$varname'";
           $chilresult = tng_query($query);
         }
         break;
@@ -519,7 +511,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
         $varname = substr($key, 8);
 
         //remove left person from family.
-        $query = "UPDATE $families_table set $p1self = \"\", $p1spouseorder = \"\" WHERE familyID = \"$varname\" AND gedcom = \"$tree\"";
+        $query = "UPDATE $families_table set $p1self = \"\", $p1spouseorder = \"\" WHERE familyID = '$varname'";
         $chilresult = tng_query($query);
         break;
       case "sp":
@@ -530,36 +522,36 @@ if ($mergeaction == uiTextSnippet('merge')) {
 
             //same spouse, box checked, so we're removing LEFT family, moving kids over to left family
             //get families where left person is the husband/wife and right SPOUSE is the wife/husband
-            $query = "SELECT familyID, $p1spouseorder FROM $families_table WHERE gedcom = \"$tree\" AND $p1self = \"$personID1\" AND $p1spouse = \"" . substr($value, 6) . "\"";
+            $query = "SELECT familyID, $p1spouseorder FROM $families_table WHERE $p1self = \"$personID1\" AND $p1spouse = \"" . substr($value, 6) . "\"";
             $sp1result = tng_query($query);
             $sp1row = tng_fetch_assoc($sp1result);
             tng_free_result($sp1result);
 
-            $query = "UPDATE $families_table set $p1self = \"$personID1\", $p1spouseorder = \"{$sp1row[$p1spouseorder]}\" WHERE familyID = \"$varname\" AND gedcom = \"$tree\"";
+            $query = "UPDATE $families_table set $p1self = \"$personID1\", $p1spouseorder = \"{$sp1row[$p1spouseorder]}\" WHERE familyID = '$varname'";
             $chilresult = tng_query($query);
 
             //delete family on LEFT
-            $query = "DELETE from $families_table WHERE familyID = \"{$sp1row['familyID']}\" AND gedcom = \"$tree\"";
+            $query = "DELETE from $families_table WHERE familyID = \"{$sp1row['familyID']}\"";
             $famresult = tng_query($query);
 
             doAssociations($varname, $sp1row['familyID']);
 
             if ($ccombineextras) {
-              $query = "UPDATE $medialinks_table set personID = \"$varname\" WHERE personID = \"{$sp1row['familyID']}\" AND gedcom = \"$tree\"";
+              $query = "UPDATE $medialinks_table set personID = \"$varname\" WHERE personID = \"{$sp1row['familyID']}\"";
             } else {
-              $query = "DELETE FROM $medialinks_table WHERE personID = \"{$sp1row['familyID']}\" AND gedcom = \"$tree\"";
+              $query = "DELETE FROM $medialinks_table WHERE personID = \"{$sp1row['familyID']}\"";
             }
             $mediaresult = tng_query($query);
 
             //update all people records where FAMC = the deleted family, set FAMC = family on right
-            $query = "UPDATE $people_table set famc = \"$varname\" WHERE famc = \"{$sp1row['familyID']}\" AND gedcom = \"$tree\"";
+            $query = "UPDATE $people_table set famc = \"$varname\" WHERE famc = \"{$sp1row['familyID']}\"";
             $paresult = tng_query($query);
 
             //move all children from family1 to family2
-            $query = "UPDATE $children_table set familyID = \"$varname\" WHERE familyID = \"{$sp1row['familyID']}\" AND gedcom = \"$tree\"";
+            $query = "UPDATE $children_table set familyID = \"$varname\" WHERE familyID = \"{$sp1row['familyID']}\"";
             $chilresult = tng_query($query);
             if (!$chilresult) {
-              $query = "DELETE FROM $children_table WHERE familyID = \"{$sp1row['familyID']}\" AND gedcom = \"$tree\"";
+              $query = "DELETE FROM $children_table WHERE familyID = \"{$sp1row['familyID']}\"";
               $chilresult = tng_query($query);
             }
 
@@ -567,27 +559,27 @@ if ($mergeaction == uiTextSnippet('merge')) {
               doNotesCitations($varname, $sp1row['familyID'], "");
             }
 
-            $query = "UPDATE $events_table set persfamID = \"{$sp1row['familyID']}\" WHERE persfamID = \"$varname\" AND gedcom = \"$tree\"";
+            $query = "UPDATE $events_table set persfamID = \"{$sp1row['familyID']}\" WHERE persfamID = '$varname'";
             $evresult = tng_query($query);
           } else {
             //this means spouses are different, the box has been checked, so they want to keep the right spouse + family
             $varname = substr($key, 6);
 
             //get families where right person is married to right spouse
-            $query = "SELECT familyID FROM $families_table WHERE gedcom = \"$tree\" AND $p1self = \"$personID2\" AND $p1spouse = \"$varname\"";
+            $query = "SELECT familyID FROM $families_table WHERE $p1self = \"$personID2\" AND $p1spouse = \"$varname\"";
             $sp1result = tng_query($query);
             $sp1row = tng_fetch_assoc($sp1result);
             tng_free_result($sp1result);
 
             //get spouse order for left person, add one
-            $query = "SELECT $p1spouseorder FROM $families_table WHERE gedcom = \"$tree\" AND $p1self = \"$personID1\" ORDER BY $p1spouseorder DESC";
+            $query = "SELECT $p1spouseorder FROM $families_table WHERE $p1self = \"$personID1\" ORDER BY $p1spouseorder DESC";
             $spresult = tng_query($query);
             $sprow = tng_fetch_assoc($spresult);
             tng_free_result($spresult);
             $sporder = $sprow[$p1spouseorder] + 1;
 
             //update those families to have left person married to right spouse, change spouse order
-            $query = "UPDATE $families_table set $p1self = \"$personID1\", $p1spouseorder = \"$sporder\" WHERE familyID = \"$varname\" AND gedcom = \"$tree\"";
+            $query = "UPDATE $families_table set $p1self = \"$personID1\", $p1spouseorder = \"$sporder\" WHERE familyID = '$varname'";
             $chilresult = tng_query($query);
           }
         }
@@ -598,28 +590,28 @@ if ($mergeaction == uiTextSnippet('merge')) {
     doNotesCitations($personID1, $personID2, "general");
 
     //convert all remaining notes and citations
-    $query = "UPDATE $notelinks_table set persfamID = \"$personID1\" WHERE persfamID = \"$personID2\" AND gedcom = \"$tree\"";
+    $query = "UPDATE $notelinks_table set persfamID = \"$personID1\" WHERE persfamID = '$personID2'";
     $noteresult = tng_query($query);
 
-    $query = "UPDATE $citations_table set persfamID = \"$personID1\" WHERE persfamID = \"$personID2\" AND gedcom = \"$tree\"";
+    $query = "UPDATE $citations_table set persfamID = \"$personID1\" WHERE persfamID = '$personID2'";
     $citeresult = tng_query($query);
   }
   if ($updatestr) {
     $updatestr = substr($updatestr, 2);
     $newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
     $updatestr .= ", changedate = \"$newdate\"";
-    $query = "UPDATE $people_table set $updatestr WHERE personID = \"$personID1\" AND gedcom = \"$tree\"";
+    $query = "UPDATE $people_table set $updatestr WHERE personID = '$personID1'";
     $combresult = tng_query($query);
   }
 
-  $query = "DELETE from $people_table WHERE personID = \"$personID2\" AND gedcom = \"$tree\"";
+  $query = "DELETE from $people_table WHERE personID = '$personID2'";
   $combresult = tng_query($query);
 
   //delete remaining notes, citations & events for person 2
-  $query = "DELETE from $events_table WHERE persfamID = \"$personID2\" AND gedcom = \"$tree\"";
+  $query = "DELETE from $events_table WHERE persfamID = '$personID2'";
   $combresult = tng_query($query);
 
-  $query = "SELECT xnoteID FROM $notelinks_table WHERE persfamID = \"$persfam2\" AND gedcom = \"$tree\"";
+  $query = "SELECT xnoteID FROM $notelinks_table WHERE persfamID = '$persfam2'";
   $noteresult = tng_query($query);
   while ($row = tng_fetch_assoc($noteresult)) {
     $query = "DELETE FROM $xnotes_table WHERE ID=\"{$row['xnoteID']}\"";
@@ -627,33 +619,33 @@ if ($mergeaction == uiTextSnippet('merge')) {
   }
   tng_free_result($noteresult);
 
-  $query = "DELETE from $notelinks_table WHERE persfamID = \"$personID2\" AND gedcom = \"$tree\"";
+  $query = "DELETE from $notelinks_table WHERE persfamID = '$personID2'";
   $combresult = tng_query($query);
 
-  $query = "DELETE from $citations_table WHERE persfamID = \"$personID2\" AND gedcom = \"$tree\"";
+  $query = "DELETE from $citations_table WHERE persfamID = '$personID2'";
   $combresult = tng_query($query);
 
   doAssociations($personID1, $personID2);
 
   //update families: remove person2 as spouse from all families
   if ($p1self) {
-    $query = "UPDATE $families_table set $p1self = \"\", $p1spouseorder = \"0\" WHERE $p1self = \"$personID2\" AND gedcom = \"$tree\"";
+    $query = "UPDATE $families_table set $p1self = \"\", $p1spouseorder = \"0\" WHERE $p1self = '$personID2'";
     $chilresult = tng_query($query);
   }
 
   //remove person2 from children table
-  $query = "DELETE FROM $children_table WHERE personID = \"$personID2\" AND gedcom = \"$tree\"";
+  $query = "DELETE FROM $children_table WHERE personID = '$personID2'";
   $chilresult = tng_query($query);
 
   //construct name for default photo 2
-  $defaultphoto2 = $tree ? "$rootpath$photopath/$tree.$personID2.$photosext" : "$rootpath$photopath/$personID2.$photosext";
+  $defaultphoto2 = "$rootpath$photopath/$personID2.$photosext";
   if ($ccombineextras) {
-    $query = "UPDATE $medialinks_table set personID = \"$personID1\", defphoto = \"\" WHERE personID = \"$personID2\" AND gedcom = \"$tree\"";
+    $query = "UPDATE $medialinks_table set personID = \"$personID1\", defphoto = \"\" WHERE personID = '$personID2'";
     $mediaresult = tng_query($query);
 
     //construct name for default photo 1
     if (file_exists($defaultphoto2)) {
-      $defaultphoto1 = $tree ? "$rootpath$photopath/$tree.$personID1.$photosext" : "$rootpath$photopath/$personID1.$photosext";
+      $defaultphoto1 = "$rootpath$photopath/$personID1.$photosext";
       if (!file_exists($defaultphoto1)) {
         rename($defaultphoto2, $defaultphoto1);
       }
@@ -661,11 +653,8 @@ if ($mergeaction == uiTextSnippet('merge')) {
       //unlink( $defaultphoto2 );
     }
   } else {
-    $query = "DELETE FROM $medialinks_table WHERE personID = \"$personID2\" AND gedcom = \"$tree\"";
+    $query = "DELETE FROM $medialinks_table WHERE personID = '$personID2'";
     $mediaresult = tng_query($query);
-
-    //if( file_exists( $defaultphoto2 ) )
-    //unlink( $defaultphoto2 );
   }
   $personID2 = "";
   $p2row = "";
@@ -673,20 +662,20 @@ if ($mergeaction == uiTextSnippet('merge')) {
   //clean up: remove all families with husband blank and wife blank
   //remove all children from those families
   if ($deleteblankfamilies) {
-    $query = "SELECT familyID FROM $families_table WHERE gedcom = \"$tree\" AND husband = \"\" AND wife = \"\"";
+    $query = "SELECT familyID FROM $families_table WHERE husband = \"\" AND wife = \"\"";
     $blankfams = tng_query($query);
     while ($blankrow = tng_fetch_assoc($blankfams)) {
-      $query = "DELETE FROM $children_table WHERE familyID = \"{$blankrow['familyID']}\" AND gedcom = \"$tree\"";
+      $query = "DELETE FROM $children_table WHERE familyID = \"{$blankrow['familyID']}\"";
       $chilresult = tng_query($query);
 
-      $query = "UPDATE $people_table SET famc=\"\" WHERE famc = \"{$blankrow['familyID']}\" AND gedcom = \"$tree\"";
+      $query = "UPDATE $people_table SET famc=\"\" WHERE famc = \"{$blankrow['familyID']}\"";
       $result2 = tng_query($query);
     }
     tng_free_result($blankfams);
-    $query = "DELETE FROM $families_table WHERE gedcom = \"$tree\" AND husband = \"\" AND wife = \"\"";
+    $query = "DELETE FROM $families_table WHERE husband = \"\" AND wife = \"\"";
     $famresult = tng_query($query);
   }
-  adminwritelog(uiTextSnippet('merge') . ": $tree/$personID2 => $personID1");
+  adminwritelog(uiTextSnippet('merge') . ": $personID2 => $personID1");
 }
 $revstar = checkReview('I');
 
@@ -713,29 +702,6 @@ $headSection->setTitle(uiTextSnippet('merge'));
           <h4><?php echo uiTextSnippet('findmatches'); ?></h4>
           <div><em><?php echo uiTextSnippet('choosemerge'); ?></em><br><br>
             <form action="peopleMerge.php" method='post' name='form1' id='form1'>
-              <table>
-                <tr>
-                  <td><?php echo uiTextSnippet('tree'); ?>:</td>
-                  <td>
-                    <select name='tree'>
-                      <?php
-                      $trees = "";
-                      while ($treerow = tng_fetch_assoc($treeresult)) {
-                        $trees .= "      <option value=\"{$treerow['gedcom']}\"";
-                        if ($treerow['gedcom'] == $tree) {
-                          $trees .= " selected";
-                        }
-                        $trees .= ">{$treerow['treename']}</option>\n";
-                      }
-                      echo $trees;
-                      ?>
-                    </select>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                </tr>
-              </table>
               <br>
               <table>
                 <tr>
@@ -747,7 +713,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                                                                          value="<?php echo $personID1; ?>">
                       &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
                     </div>
-                    <a href="#" onclick="return findItem('I', 'personID1', 'name1', document.form1.tree.options[document.form1.tree.selectedIndex].value, '<?php echo $assignedbranch; ?>');"
+                    <a href="#" onclick="return findItem('I', 'personID1', 'name1', '<?php echo $assignedbranch; ?>');"
                        title="<?php echo uiTextSnippet('find'); ?>">
                       <img class='icon-sm' src='svg/magnifying-glass.svg'>
                     </a>
@@ -762,7 +728,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                                                                          onkeyup="processEnter();">
                       &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
                     </div>
-                    <a href="#" onclick="return findItem('I', 'personID2', 'name2', document.form1.tree.options[document.form1.tree.selectedIndex].value, '<?php echo $assignedbranch; ?>');"
+                    <a href="#" onclick="return findItem('I', 'personID2', 'name2', '<?php echo $assignedbranch; ?>');"
                        title="<?php echo uiTextSnippet('find'); ?>">
                       <img class='icon-sm' src='svg/magnifying-glass.svg'>
                     </a>
@@ -842,11 +808,11 @@ $headSection->setTitle(uiTextSnippet('merge'));
                   $spouses = array();
                   $eventlist = array();
                   echo "<tr>\n";
-                  echo "<td colspan='3'><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('peopleEdit.php?personID={$p1row['personID']}&amp;tree=$tree&amp;cw=1','edit')\"></td>\n";
+                  echo "<td colspan='3'><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('peopleEdit.php?personID={$p1row['personID']}&amp;cw=1','edit')\"></td>\n";
                   if (is_array($p2row)) {
-                    echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('peopleEdit.php?personID={$p2row['personID']}&amp;tree=$tree&amp;cw=1','edit')\"></td>\n";
+                    echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('peopleEdit.php?personID={$p2row['personID']}&amp;cw=1','edit')\"></td>\n";
 
-                    $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID as eventtypeID, $events_table.eventID as eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$p2row['personID']}\" AND gedcom = \"$tree\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
+                    $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID as eventtypeID, $events_table.eventID as eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$p2row['personID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
                     $evresult = tng_query($query);
                     $eventcount = tng_num_rows($evresult);
 
@@ -861,7 +827,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                       tng_free_result($evresult);
                     }
 
-                    $query = "SELECT personID, familyID, sealdate, sealplace FROM $children_table WHERE personID = \"{$p2row['personID']}\" AND gedcom = \"$tree\"";
+                    $query = "SELECT personID, familyID, sealdate, sealplace FROM $children_table WHERE personID = \"{$p2row['personID']}\"";
                     $parents2 = tng_query($query);
 
                     if ($parents2 && tng_num_rows($parents2)) {
@@ -890,7 +856,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                       }
 
                       if ($p2self) {
-                        $query = "SELECT $p2spouse, familyID, marrdate, marrplace, sealdate, sealplace FROM $families_table WHERE $families_table.$p2self = \"{$p2row['personID']}\" AND gedcom = \"$tree\" ORDER BY $p2spouseorder";
+                        $query = "SELECT $p2spouse, familyID, marrdate, marrplace, sealdate, sealplace FROM $families_table WHERE $families_table.$p2self = \"{$p2row['personID']}\" ORDER BY $p2spouseorder";
                         $marriages2 = tng_query($query);
 
                         while ($marriage = tng_fetch_assoc($marriages2)) {
@@ -935,7 +901,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                     doRow("endldate", "endldate", "p2endldate");
                     doRow("endlplace", "endlplace", "p2endlplace");
                   }
-                  $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID as eventtypeID, $events_table.eventID as eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$p1row['personID']}\" AND gedcom = \"$tree\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
+                  $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID as eventtypeID, $events_table.eventID as eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$p1row['personID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
                   $evresult = tng_query($query);
                   $eventcount = tng_num_rows($evresult);
 
@@ -963,7 +929,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                     doRow($ename, "otherevents", $inputname);
                   }
 
-                  $query = "SELECT personID, familyID, sealdate, sealplace FROM $children_table WHERE personID = \"{$p1row['personID']}\" AND gedcom = \"$tree\"";
+                  $query = "SELECT personID, familyID, sealdate, sealplace FROM $children_table WHERE personID = \"{$p1row['personID']}\"";
                   $parents1 = tng_query($query);
 
                   if ($parents1 && tng_num_rows($parents1)) {
@@ -998,7 +964,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                     }
 
                     if ($p1self) {
-                      $query = "SELECT $p1spouse, familyID, marrdate, marrplace, sealdate, sealplace FROM $families_table WHERE $families_table.$p1self = \"{$p1row['personID']}\" AND gedcom = \"$tree\" ORDER BY $p1spouseorder";
+                      $query = "SELECT $p1spouse, familyID, marrdate, marrplace, sealdate, sealplace FROM $families_table WHERE $families_table.$p1self = \"{$p1row['personID']}\" ORDER BY $p1spouseorder";
                       $marriages1 = tng_query($query);
 
                       while ($marriage = tng_fetch_assoc($marriages1)) {
@@ -1052,8 +1018,6 @@ $headSection->setTitle(uiTextSnippet('merge'));
   <script src="js/admin.js"></script>
   <script src="js/selectutils.js"></script>
   <script>
-    var tree = "<?php echo $tree; ?>";
-    
     function validateForm() {
       var rval = true;
 

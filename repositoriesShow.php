@@ -5,7 +5,6 @@ require 'functions.php';
 
 function doRepoSearch($instance, $pagenav) {
   global $reposearch;
-  global $tree;
 
   $str = "<span>\n";
   $str .= buildFormElement("repositoriesShow", "get", "RepoSearch$instance");
@@ -15,7 +14,6 @@ function doRepoSearch($instance, $pagenav) {
   if ($reposearch) {
     $str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='repositoriesShow.php'>" . uiTextSnippet('browseallrepos') . "</a>";
   }
-  $str .= "<input name='tree' type='hidden' value=\"$tree\" />\n";
   $str .= "</form></span>\n";
 
   return $str;
@@ -33,18 +31,12 @@ else {
 }
 
 $reposearch = trim($reposearch);
-if ($tree) {
-  $wherestr = "WHERE $repositories_table.gedcom = \"$tree\"";
-  if ($reposearch) {$wherestr .= " AND reponame LIKE \"%$reposearch%\"";}
-  $join = "INNER JOIN";
+if ($reposearch) {
+  $wherestr = "WHERE reponame LIKE \"%$reposearch%\"";
 } else {
-  if ($reposearch) {
-    $wherestr = "WHERE reponame LIKE \"%$reposearch%\"";
-  } else {
-    $wherestr = "";
-  }
-  $join = "LEFT JOIN";
+  $wherestr = "";
 }
+$join = "LEFT JOIN";
 
 $query = "SELECT repoID, reponame, $repositories_table.gedcom as gedcom, treename FROM $repositories_table $join $treesTable on $repositories_table.gedcom = $treesTable.gedcom $wherestr ORDER BY reponame LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
@@ -52,11 +44,8 @@ $result = tng_query($query);
 $numrows = tng_num_rows($result);
 
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  if ($tree) {
-    $query = "SELECT count(repoID) as scount FROM $repositories_table LEFT JOIN $treesTable on $repositories_table.gedcom = $treesTable.gedcom $wherestr";
-  } else {
-    $query = "SELECT count(repoID) as scount FROM $repositories_table $wherestr";
-  }
+  $query = "SELECT count(repoID) as scount FROM $repositories_table $wherestr";
+
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['scount'];
@@ -65,8 +54,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 }
 $numrowsplus = $numrows + $offset;
 
-$treestr = $tree ? " (" . uiTextSnippet('tree') . ": $tree)" : "";
-$logstring = "<a href=\"repositoriesShow.php?tree=$tree&amp;offset=$offset&amp;reposearch=$reposearch\">" . xmlcharacters(uiTextSnippet('repositories') . $treestr) . "</a>";
+$logstring = "<a href=\"repositoriesShow.php?offset=$offset&amp;reposearch=$reposearch\">" . xmlcharacters(uiTextSnippet('repositories')) . "</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -85,7 +73,6 @@ $headSection->setTitle(uiTextSnippet('repositories'));
     <h2><img class='icon-md' src='svg/building.svg'><?php echo uiTextSnippet('repositories'); ?></h2>
     <br clear='left'>
     <?php
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'repositoriesShow', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
 
     if ($totrows) {
       echo "<p><span>" . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</span></p>";
@@ -101,19 +88,13 @@ $headSection->setTitle(uiTextSnippet('repositories'));
         <th></th>
         <th><?php echo uiTextSnippet('repoid'); ?></th>
         <th><?php echo uiTextSnippet('name'); ?></th>
-        <?php if ($numtrees > 1) { ?>
-          <th><?php echo uiTextSnippet('tree'); ?></th>
-        <?php } ?>
       </tr>
       <?php
       $i = $offsetplus;
       while ($row = tng_fetch_assoc($result)) {
         echo "<tr><td><span>$i</span></td>\n";
-        echo "<td><span><a href=\"repositoriesShowItem.php?repoID={$row['repoID']}&amp;tree={$row['gedcom']}\">{$row['repoID']}</a>&nbsp;</span></td>";
-        echo "<td><span><a href=\"repositoriesShowItem.php?repoID={$row['repoID']}&amp;tree={$row['gedcom']}\">{$row['reponame']}</a>&nbsp;</span></td>";
-        if ($numtrees > 1) {
-          echo "<td><span>{$row['treename']}&nbsp;</span></td>";
-        }
+        echo "<td><span><a href=\"repositoriesShowItem.php?repoID={$row['repoID']}\">{$row['repoID']}</a>&nbsp;</span></td>";
+        echo "<td><span><a href=\"repositoriesShowItem.php?repoID={$row['repoID']}\">{$row['reponame']}</a>&nbsp;</span></td>";
         echo "</tr>\n";
         $i++;
       }

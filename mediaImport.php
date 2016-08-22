@@ -6,18 +6,12 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-if (!$allowMediaAdd || $assignedtree) {
+if (!$allowMediaAdd) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-} else {
-  $wherestr = "";
-}
-$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('mediaimport'));
@@ -52,9 +46,9 @@ $headSection->setTitle(uiTextSnippet('mediaimport'));
     $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('search'), "findmedia"]);
     $navList->appendItem([$allowMediaAdd, "admin_newmedia.php", uiTextSnippet('addnew'), "addmedia"]);
     $navList->appendItem([$allowMediaEdit, "admin_ordermediaform.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    $navList->appendItem([$allowMediaEdit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-    //    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
+    $navList->appendItem([$allowMediaEdit, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
+    //    $navList->appendItem([$allowMediaAdd, "mediaImport.php", uiTextSnippet('import'), "import"]);
+    $navList->appendItem([$allowMediaAdd, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
     echo $navList->build("import");
     ?>
 
@@ -72,9 +66,7 @@ $headSection->setTitle(uiTextSnippet('mediaimport'));
               }
               ?>
             </select>
-            <?php
-            if (!$assignedtree && $allowAdd && $allowEdit && $allowDelete) {
-              ?>
+            <?php if ($allowAdd && $allowEdit && $allowDelete) { ?>
               <input name='addnewmediatype' type='button' value="<?php echo uiTextSnippet('addnewcoll'); ?>"
                      onclick="tnglitbox = new ModalDialog('admin_newcollection.php?field=mediatypeID');">
               <input id='editmediatype' name='editmediatype' type='button' value="<?php echo uiTextSnippet('edit'); ?>"
@@ -83,32 +75,10 @@ $headSection->setTitle(uiTextSnippet('mediaimport'));
               <input id='delmediatype' name='delmediatype' type='button' value="<?php echo uiTextSnippet('delete'); ?>"
                      style="display: none"
                      onclick="confirmDeleteMediatype(document.form1.mediatypeID);">
-              <?php
-            }
-            ?>
-          </td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('tree'); ?>*:</td>
-          <td>
-            <select name='tree'>
-              <option value=''></option>
-              <?php
-              $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
-              while ($treerow = tng_fetch_assoc($treeresult)) {
-                echo "  <option value=\"{$treerow['gedcom']}\"";
-                if ($treerow['gedcom'] == $tree) {
-                  echo " selected";
-                }
-                echo ">{$treerow['treename']}</option>\n";
-              }
-              tng_free_result($treeresult);
-              ?>
-            </select>
+            <?php } ?>
           </td>
         </tr>
       </table>
-      <p>*<?php echo uiTextSnippet('phalltrees'); ?></p>
       <input name='submit' type='submit' value="<?php echo uiTextSnippet('import'); ?>">
     </form>
     <?php echo $adminFooterSection->build(); ?>
@@ -117,7 +87,6 @@ $headSection->setTitle(uiTextSnippet('mediaimport'));
 <script src='js/admin.js'></script>
 <script src='js/mediautils.js'></script>
 <script>
-  var tree = "<?php echo $tree; ?>";
   var tnglitbox;
   var stmediatypes = new Array(<?php echo $sttypestr; ?>);
   var allow_edit = <?php echo($allowEdit ? "1" : "0"); ?>;

@@ -8,11 +8,6 @@ require 'checklogin.php';
 require 'adminlog.php';
 require 'mail.php';
 
-if ($assignedtree) {
-  $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
-  exit;
-}
 if ($gedcom) {
   $wherestr = " AND gedcom=\"$gedcom\"";
   if ($branch) {

@@ -6,12 +6,11 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-if ($assignedtree || !$allowEdit) {
+if (!$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-
 $query = "SELECT * FROM $reports_table WHERE reportID = \"$reportID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);

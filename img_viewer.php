@@ -10,9 +10,7 @@ if ($medialinkID) {
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   $personID = $row['personID'];
-  if (!$requirelogin || !$treerestrict || !$assignedtree) {
-    $tree = $row['gedcom'];
-  }
+  
   $ordernum = $row['ordernum'];
   $mediatypeID = $row['mediatypeID'];
   $linktype = $row['linktype'];
@@ -25,15 +23,8 @@ if ($medialinkID) {
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   $mediatypeID = $row['mediatypeID'];
-  if (!$requirelogin || !$treerestrict || !$assignedtree) {
-    $tree = $row['gedcom'];
-  }
 }
 
-if ($requirelogin && $treerestrict && $assignedtree && $row['gedcom'] && $row['gedcom'] != $assignedtree) {
-  header("location: mediaShow.php?");
-  exit;
-}
 if (!tng_num_rows($result)) {
   tng_free_result($result);
   header("Location: thispagedoesnotexist.html");

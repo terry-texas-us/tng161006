@@ -13,7 +13,7 @@ if ($session_charset != "UTF-8") {
   $myplace = tng_utf8_decode($myplace);
 }
 
-$allwhere = $tree ? "gedcom = \"$tree\"" : "1=1";
+$allwhere = "1=1";
 if ($myplace) {
   $allwhere .= " AND place LIKE \"%$myplace%\"";
 }

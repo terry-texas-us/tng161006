@@ -8,10 +8,10 @@ if (!$personID) {
   die("no args");
 }
 if ($display == "textonly" || (!$display && !$pedigree['defdesc'])) {
-  header("Location: descendtext.php?personID=$personID&tree=$tree&generations=$generations");
+  header("Location: descendtext.php?personID=$personID&amp;generations=$generations");
   exit;
 } elseif ($display == "register" || (!$display && $pedigree['defdesc'] == 1)) {
-  header("Location: register.php?personID=$personID&tree=$tree&generations=$generations");
+  header("Location: register.php?personID=$personID&amp;generations=$generations");
   exit;
 }
 require 'pedbox.php';
@@ -153,31 +153,33 @@ function getColor($shifts) {
 }
 
 function getParents($personID) {
-  global $tree, $pedigree, $display, $generations, $righttree;
+  global $pedigree;
+  global $display;
+  global $generations;
 
   $parentinfo = "";
-  $result = getChildParentsFamilyMinimal($tree, $personID);
+  $result = getChildParentsFamilyMinimal($personID);
   while ($parents = tng_fetch_assoc($result)) {
     if ($parents['husband']) {
-      $presult = getPersonSimple($tree, $parents['husband']);
+      $presult = getPersonSimple($parents['husband']);
       $husband = tng_fetch_assoc($presult);
-      $rights = determineLivingPrivateRights($husband, $righttree);
+      $rights = determineLivingPrivateRights($husband);
       $husband['allow_living'] = $rights['living'];
       $husband['allow_private'] = $rights['private'];
       $husband['name'] = getName($husband);
 
-      $parentinfo .= "<tr><td><a href=\"descend.php?personID={$parents['husband']}&amp;tree=$tree&amp;generations=$generations&amp;display=$display\">{$pedigree['leftarrowlink']}<span>{$husband['name']}</span></a> " . getGenderIcon('M', $pedigree['gendalign']) . "</td></tr>\n";
+      $parentinfo .= "<tr><td><a href=\"descend.php?personID={$parents['husband']}&amp;generations=$generations&amp;display=$display\">{$pedigree['leftarrowlink']}<span>{$husband['name']}</span></a> " . getGenderIcon('M', $pedigree['gendalign']) . "</td></tr>\n";
       tng_free_result($presult);
     }
     if ($parents['wife']) {
-      $presult = getPersonSimple($tree, $parents['wife']);
+      $presult = getPersonSimple($parents['wife']);
       $wife = tng_fetch_assoc($presult);
-      $rights = determineLivingPrivateRights($wife, $righttree);
+      $rights = determineLivingPrivateRights($wife);
       $wife['allow_living'] = $rights['living'];
       $wife['allow_private'] = $rights['private'];
       $wife['name'] = getName($wife);
 
-      $parentinfo .= "<tr><td><a href=\"descend.php?personID={$parents['wife']}&amp;tree=$tree&amp;generations=$generations&amp;display=$display\">{$pedigree['leftarrowlink']}<span>{$wife['name']}</span></a> " . getGenderIcon('F', $pedigree['gendalign']) . "</td></tr>\n";
+      $parentinfo .= "<tr><td><a href=\"descend.php?personID={$parents['wife']}&amp;generations=$generations&amp;display=$display\">{$pedigree['leftarrowlink']}<span>{$wife['name']}</span></a> " . getGenderIcon('F', $pedigree['gendalign']) . "</td></tr>\n";
       tng_free_result($presult);
     }
   }
@@ -187,15 +189,20 @@ function getParents($personID) {
 }
 
 function getNewChart($personID) {
-  global $tree;
   global $generations;
   global $display;
 
-  return $kidsflag ? "<a href=\"descend.php?personID=$personID&amp;tree=$tree&amp;generations=$generations&amp;display=$display\"><img src=\"img/dchart.gif\" width='10' height='9' alt=\"" . uiTextSnippet('popupnote3') . "\"></a>" : "";
+  return $kidsflag ? "<a href=\"descend.php?personID=$personID&amp;generations=$generations&amp;display=$display\"><img src=\"img/dchart.gif\" width='10' height='9' alt=\"" . uiTextSnippet('popupnote3') . "\"></a>" : "";
 }
 
 function doBox($level, $person, $spouseflag, $kidsflag) {
-  global $pedigree, $topmarker, $botmarker, $spouseoffset, $maxwidth, $maxheight, $personID, $tree;
+  global $pedigree;
+  global $topmarker;
+  global $botmarker;
+  global $spouseoffset;
+  global $maxwidth;
+  global $maxheight;
+  global $personID;
   global $generations;
   global $display;
   global $numboxes;
@@ -223,7 +230,6 @@ function doBox($level, $person, $spouseflag, $kidsflag) {
   if ($farleft > $maxwidth) {
     $maxwidth = $farleft;
   }
-
   $boxstr = "";
   if ($person['personID'] == $personID) {
     $parentinfo = getParents($personID);
@@ -239,11 +245,10 @@ function doBox($level, $person, $spouseflag, $kidsflag) {
       $boxstr .= "<tr><td class=\"pboxpopup\"><b>" . uiTextSnippet('parents') . "</b></td></tr>\n$parentinfo\n</table></td></tr></table>\n</div>\n</div>\n</div>\n</div>\n";
     }
   }
-
   if ($person['famc'] && $pedigree['popupchartlinks']) {
     $iconactions = " onmouseover=\"if($('#ic$slot').length) $('#ic$slot').show();\" onmouseout=\"if($('#ic$slot').length) $('#ic$slot').hide();\"";
     $iconlinks = "<div class=\"floverlr\" id=\"ic$slot\" style=\"left:" . ($pedigree['puboxwidth'] - 35) . "px;top:" . ($pedigree['puboxheight'] - 15) . "px;display:none;background-color:$bgcolor\">";
-    $iconlinks .= "<a href=\"{$pedigree['url']}personID={$person['personID']}&amp;tree=$tree&amp;display=standard&amp;generations=" . $pedigree['initpedgens'] . "\" title=\"" . uiTextSnippet('popupnote1') . "\">{$pedigree['chartlink']}</a>\n";
+    $iconlinks .= "<a href=\"{$pedigree['url']}personID={$person['personID']}&amp;display=standard&amp;generations=" . $pedigree['initpedgens'] . "\" title=\"" . uiTextSnippet('popupnote1') . "\">{$pedigree['chartlink']}</a>\n";
     $iconlinks .= "</div>\n";
     $slot++;
   } else {
@@ -265,14 +270,12 @@ function doBox($level, $person, $spouseflag, $kidsflag) {
       $boxstr .= "<td class=\"lefttop\">$imagestr</td>";
     }
   }
-  //echo "name=$person[name], top=$top<br>\n";
   // name info
   if ($person['name']) {
-    $boxstr .= "<td class=\"pboxname\" align=\"{$pedigree['boxalign']}\"><span style=\"font-size:{$pedigree['boxnamesize']}" . "pt;\">{$pedigree['spacer']}<a href=\"peopleShowPerson.php?personID={$person['personID']}&amp;tree=$tree" . "\">{$person['name']}</a> " . getGenderIcon($person['sex'], $pedigree['gendalign']) . getNewChart($person['personID']) . "</span></td></tr></table></div>\n";
+    $boxstr .= "<td class=\"pboxname\" align=\"{$pedigree['boxalign']}\"><span style=\"font-size:{$pedigree['boxnamesize']}" . "pt;\">{$pedigree['spacer']}<a href=\"peopleShowPerson.php?personID={$person['personID']}" . "\">{$person['name']}</a> " . getGenderIcon($person['sex'], $pedigree['gendalign']) . getNewChart($person['personID']) . "</span></td></tr></table></div>\n";
   } else {
     $boxstr .= "<td class=\"pboxname\"><span style=\"font-size:{$pedigree['boxnamesize']}" . "pt;\">" . uiTextSnippet('unknownlit') . "</span></td></tr></table></div>\n";
   }
-  //$boxstr .= "<div class=\"boxborder\" style=\"top:" . ($top-$pedigree['borderwidth']) . "px;left:" . ($left-$pedigree['borderwidth']) . "px;height:" . ($pedigree['boxheight']+(2*$pedigree['borderwidth'])) . "px;width:" . ($pedigree[boxwidth]+(2*$pedigree['borderwidth'])) . "px;z-index:4\"></div>\n";
   $boxstr .= "<div class=\"shadow $rounded\" style=\"top:" . ($top + $pedigree['shadowoffset']) . "px;left:" . ($left - $pedigree['borderwidth'] + $pedigree['shadowoffset']) . "px;height:" . ($pedigree['boxheight'] + (2 * $pedigree['borderwidth'])) . "px;width:" . ($pedigree['boxwidth'] + (2 * $pedigree['borderwidth'])) . "px;z-index:1\"></div>\n";
 
   if ($display != "compact" && $pedigree['usepopups']) {
@@ -286,7 +289,6 @@ function doBox($level, $person, $spouseflag, $kidsflag) {
       $boxstr .= "$vitalinfo\n</table></div></div></div></div>\n";
     }
   }
-
   if (!$spouseflag && $person['personID'] != $personID) {
     $boxstr .= "<div class=\"boxborder\" style=\"top:" . ($top + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($left - intval($pedigree['boxHsep'] / 2)) . "px;height:" . $pedigree['linewidth'] . "px;width:" . (intval($pedigree['boxHsep'] / 2) + 2) . "px;z-index:3;overflow:hidden\"></div>\n";
     $boxstr .= "<div class=\"shadow\" style=\"top:" . ($top + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2) + $pedigree['shadowoffset'] + 1) . "px;left:" . (($left - intval($pedigree['boxHsep'] / 2)) + $pedigree['shadowoffset'] + 1) . "px;height:" . $pedigree['linewidth'] . "px;width:" . (intval($pedigree['boxHsep'] / 2) + 2) . "px;z-index:1;overflow:hidden\"></div>\n";
@@ -300,8 +302,7 @@ function doBox($level, $person, $spouseflag, $kidsflag) {
         $boxstr .= "<div class=\"shadow\" style=\"top:" . ($top + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2) + $pedigree['shadowoffset'] + 1) . "px;left:" . ($left + $pedigree['boxwidth'] + $pedigree['shadowoffset'] + 1) . "px;height:" . $pedigree['linewidth'] . "px;width:" . (intval($pedigree['boxHsep'] / 2) + 1) . "px;z-index:1;overflow:hidden\"></div>\n";
       } else {
         $boxstr .= "<div style=\"position: absolute; top:" . ($top + $pedigree['borderwidth'] + intval(($pedigree['boxheight'] - $pedigree['offpageimgh']) / 2) + 1) . "px;left:" . ($left + $pedigree['boxwidth'] + $pedigree['borderwidth'] + $pedigree['shadowoffset'] + 3) . "px;z-index:5\">\n";
-        //$nextperson = $person['personID'] ? $person['personID'] : $spouseflag;
-        $boxstr .= "<a href=\"descend.php?personID=$spouseflag&amp;tree=$tree&amp;generations=$generations&amp;display=$display\" title=\"" . uiTextSnippet('popupnote3') . "\">{$pedigree['offpagelink']}</a></div>\n";
+        $boxstr .= "<a href=\"descend.php?personID=$spouseflag&amp;generations=$generations&amp;display=$display\" title=\"" . uiTextSnippet('popupnote3') . "\">{$pedigree['offpagelink']}</a></div>\n";
       }
     }
   }
@@ -310,14 +311,22 @@ function doBox($level, $person, $spouseflag, $kidsflag) {
 }
 
 function doIndividual($person, $level) {
-  global $tree, $generations, $pedigree, $righttree, $chart;
-  global $topmarker, $botmarker, $vslots, $spouseoffset, $needtop, $starttop, $spouses_for_next_gen;
+  global $generations;
+  global $pedigree;
+  global $chart;
+  global $topmarker;
+  global $botmarker;
+  global $vslots;
+  global $spouseoffset;
+  global $needtop;
+  global $starttop;
+  global $spouses_for_next_gen;
 
   //look up person
-  $result = getPersonData($tree, $person);
+  $result = getPersonData($person);
   if ($result) {
     $row = tng_fetch_assoc($result);
-    $rights = determineLivingPrivateRights($row, $righttree);
+    $rights = determineLivingPrivateRights($row);
     $row['allow_living'] = $rights['living'];
     $row['allow_private'] = $rights['private'];
     $row['name'] = getName($row);
@@ -338,19 +347,17 @@ function doIndividual($person, $level) {
       $self = $spouse = $spouseorder = "";
     }
   }
-
   //look up spouse-families
   if ($spouse) {
-    $result = getSpouseFamilyMinimal($tree, $self, $person, $spouseorder);
+    $result = getSpouseFamilyMinimal($self, $person, $spouseorder);
   } else {
-    $result = getSpouseFamilyMinimalUnion($tree, $person);
+    $result = getSpouseFamilyMinimalUnion($person);
   }
   $marrtot = tng_num_rows($result);
   if ($spouse && !$marrtot) {
-    $result = getSpouseFamilyMinimalUnion($tree, $person);
+    $result = getSpouseFamilyMinimalUnion($person);
     $self = $spouse = $spouseorder = "";
   }
-
   //for each family
   $needperson = 1;
   $spousecount = 0;
@@ -361,10 +368,9 @@ function doIndividual($person, $level) {
     $originaltop = $topmarker[$level];
     //get children
 
-    $result2 = getChildrenMinimal($tree, $famrow['familyID']);
+    $result2 = getChildrenMinimal($famrow['familyID']);
     $numkids = tng_num_rows($result2);
     if ($level < $generations) {
-      //if( $famrow[$spouse] )
 
       if ($numkids) {
         $needtop[$level + 1] = 1;
@@ -381,12 +387,10 @@ function doIndividual($person, $level) {
           $vheight = 0;
         }
         if ($numkids == 1 && $spousecount < 2 && !$spouses_for_next_gen[$level + 1]) {
-          //$topmarker[$level + 1] += $pedigree[diff];
           for ($i = $level + 1; $i <= $generations; $i++) {
             setTopMarker($i, $topmarker[$i] + $pedigree['diff'], "lowering previous gens, 348");
           }
         }
-
         if ($vheight) {
           $chart .= "<div class=\"boxborder\" style=\"top:" . ($starttop[$level + 1] + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($childleft - intval($pedigree['boxHsep'] / 2)) . "px;height:" . $vheight . "px;width:" . $pedigree['linewidth'] . "px;z-index:3\"></div>\n";
           $chart .= "<div class=\"shadow\" style=\"top:" . ($starttop[$level + 1] + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2) + $pedigree['shadowoffset'] + 1) . "px;left:" . ($childleft - intval($pedigree['boxHsep'] / 2) + $pedigree['shadowoffset'] + 1) . "px;height:" . $vheight . "px;width:" . $pedigree['linewidth'] . "px;z-index:1\"></div>\n";
@@ -395,7 +399,6 @@ function doIndividual($person, $level) {
         setTopMarker($level, $starttop[$level + 1] + intval($vheight / 2), "increasing, half of box height, 356");
       }
     }
-
     if ($needperson) {
       //set "top"
       //take number of "vslots" for this family
@@ -410,23 +413,21 @@ function doIndividual($person, $level) {
       $chart .= doBox($level, $row, 0, 0);
       $needperson = 0;
     }
-    //echo "familyID = $famrow[familyID], vs=" . $vslots[$famrow[familyID]] . ", ve=" . $vendspouses[$famrow[familyID]] . "<br>";
     //get spouse data (if exists)
     $spouserow = array();
     if (!$spouse) {
       $spouse = $famrow['husband'] == $person ? 'wife' : 'husband';
     }
     if ($famrow[$spouse]) {
-      $spouseresult = getPersonData($tree, $famrow[$spouse]);
+      $spouseresult = getPersonData($famrow[$spouse]);
       $spouserow = tng_fetch_assoc($spouseresult);
-      $rights = determineLivingPrivateRights($spouserow, $righttree);
+      $rights = determineLivingPrivateRights($spouserow);
       $spouserow['allow_living'] = $rights['living'];
       $spouserow['allow_private'] = $rights['private'];
       $spouserow['name'] = getName($spouserow);
     } else {
       $spouserow = array();
     }
-
     //do box for other spouse
     //lines down from primary spouse
     $vheight = $topmarker[$level] - $thistop - intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2);
@@ -462,8 +463,9 @@ function doIndividual($person, $level) {
 }
 
 function getData($key, $sex, $level) {
-  global $tree, $generations;
-  global $vslots, $vendspouses;
+  global $generations;
+  global $vslots;
+  global $vendspouses;
 
   if ($sex == 'M') {
     $self = 'husband';
@@ -474,7 +476,6 @@ function getData($key, $sex, $level) {
   } else {
     $self = $spouseorder = "";
   }
-
   $gotafamily = 0;
   $stats = array();
   $stats['slots'] = 0;
@@ -482,13 +483,13 @@ function getData($key, $sex, $level) {
   $stats['es'] = 0; //end spouses
 
   if ($self) {
-    $result = getSpouseFamilyMinimal($tree, $self, $key, $spouseorder);
+    $result = getSpouseFamilyMinimal($self, $key, $spouseorder);
   } else {
-    $result = getSpouseFamilyMinimalUnion($tree, $key);
+    $result = getSpouseFamilyMinimalUnion($key);
   }
   $stats['fams'] = tng_num_rows($result);
   if ($self && !$stats['fams']) {
-    $result = getSpouseFamilyMinimalUnion($tree, $key);
+    $result = getSpouseFamilyMinimalUnion($key);
     $stats['fams'] = tng_num_rows($result);
   }
   if ($result) {
@@ -503,7 +504,7 @@ function getData($key, $sex, $level) {
       } //for this spouse only; primary individual not included
       $endspouseslots = 1;
 
-      $result2 = getChildrenMinimalPlusGender($tree, $row['familyID']);
+      $result2 = getChildrenMinimalPlusGender($row['familyID']);
       $numkids = tng_num_rows($result2);
       if ($numkids) {
         while ($crow = tng_fetch_assoc($result2)) {
@@ -606,30 +607,27 @@ function getVitalDates($row) {
   }
   return $vitalinfo;
 }
-
 $level = 1;
 $key = $personID;
 
-$result = getPersonFullPlusDates($tree, $personID);
+$result = getPersonFullPlusDates($personID);
 if ($result) {
   $row = tng_fetch_assoc($result);
-  $righttree = checktree($tree);
-  $rightbranch = $righttree ? checkbranch($row['branch']) : false;
-  $rights = determineLivingPrivateRights($row, $righttree, $rightbranch);
+  $rightbranch = checkbranch($row['branch']);
+  $rights = determineLivingPrivateRights($row, $rightbranch);
   $row['allow_living'] = $rights['living'];
   $row['allow_private'] = $rights['private'];
   $row['name'] = getName($row);
   $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $row['name']);
 }
-
-$treeResult = getTreeSimple($tree);
+$treeResult = getTreeSimple();
 $treerow = tng_fetch_assoc($treeResult);
 $disallowgedcreate = $treerow['disallowgedcreate'];
 $allowpdf = !$treerow['disallowpdf'] || ($allow_pdf && $rightbranch);
 tng_free_result($treeResult);
 
-writelog("<a href=\"descend.php?personID=$personID&amp;tree=$tree&amp;display=$display\">" . xmlcharacters(uiTextSnippet('descendfor') . " $logname ($personID)") . "</a>");
-preparebookmark("<a href=\"descend.php?personID=$personID&amp;tree=$tree&amp;display=$display\">" . uiTextSnippet('descendfor') . " " . $row['name'] . " ($personID)</a>");
+writelog("<a href=\"descend.php?personID=$personID&amp;display=$display\">" . xmlcharacters(uiTextSnippet('descendfor') . " $logname ($personID)") . "</a>");
+preparebookmark("<a href=\"descend.php?personID=$personID&amp;display=$display\">" . uiTextSnippet('descendfor') . " " . $row['name'] . " ($personID)</a>");
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
@@ -675,7 +673,7 @@ $headSection->setTitle(uiTextSnippet('descendfor') . " " . $row['name']);
       setTopMarker($i, 0, "initializing");
     }
     $innermenu = uiTextSnippet('generations') . ": &nbsp;";
-    $innermenu .= "<select name=\"generations\" class=\"small\" onchange=\"window.location.href='descend.php?personID=$personID&amp;tree=$tree&amp;display=$display&amp;generations=' + this.options[this.selectedIndex].value\">\n";
+    $innermenu .= "<select name=\"generations\" class=\"small\" onchange=\"window.location.href='descend.php?personID=$personID&amp;display=$display&amp;generations=' + this.options[this.selectedIndex].value\">\n";
     for ($i = 1; $i <= $pedigree['maxdesc']; $i++) {
       $innermenu .= "<option value=\"$i\"";
       if ($i == $generations) {
@@ -684,12 +682,12 @@ $headSection->setTitle(uiTextSnippet('descendfor') . " " . $row['name']);
       $innermenu .= ">$i</option>\n";
     }
     $innermenu .= "</select>&nbsp;&nbsp;&nbsp;\n";
-    $innermenu .= "<a href=\"descend.php?personID=$personID&amp;tree=$tree&amp;display=standard&amp;generations=$generations\">" . uiTextSnippet('pedstandard') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"descend.php?personID=$personID&amp;tree=$tree&amp;display=compact&amp;generations=$generations\">" . uiTextSnippet('pedcompact') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"descendtext.php?personID=$personID&amp;tree=$tree&amp;generations=$generations\">" . uiTextSnippet('pedtextonly') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"register.php?personID=$personID&amp;tree=$tree&amp;generations=$generations\">" . uiTextSnippet('regformat') . "</a>\n";
+    $innermenu .= "<a href=\"descend.php?personID=$personID&amp;display=standard&amp;generations=$generations\">" . uiTextSnippet('pedstandard') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
+    $innermenu .= "<a href=\"descend.php?personID=$personID&amp;display=compact&amp;generations=$generations\">" . uiTextSnippet('pedcompact') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
+    $innermenu .= "<a href=\"descendtext.php?personID=$personID&amp;generations=$generations\">" . uiTextSnippet('pedtextonly') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
+    $innermenu .= "<a href=\"register.php?personID=$personID&amp;generations=$generations\">" . uiTextSnippet('regformat') . "</a>\n";
     if ($generations <= 12 && $allowpdf) {
-      $innermenu .= " &nbsp;&nbsp; | &nbsp;&nbsp; <a href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=desc&amp;personID=$personID&amp;tree=$tree&amp;generations=$generations');return false;\">PDF</a>\n";
+      $innermenu .= " &nbsp;&nbsp; | &nbsp;&nbsp; <a href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=desc&amp;personID=$personID&amp;generations=$generations');return false;\">PDF</a>\n";
     }
     beginFormElement("descend", "get", "form1", "form1");
     echo buildPersonMenu("descend", $personID);

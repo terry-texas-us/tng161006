@@ -6,12 +6,6 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-if ($assignedtree) {
-  $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
-  exit;
-}
-
 $tng_search_tlevents = $_SESSION['tng_search_reports'] = 1;
 if ($newsearch) {
   $exptime = 0;

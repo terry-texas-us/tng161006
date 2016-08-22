@@ -14,9 +14,7 @@ if (!$tngneedresults) {
   $tngmonth = date("m", time() + (3600 * $timeOffset));
   $tngneedresults = 1;
 }
-
-$treestr = $tree ? " (" . uiTextSnippet('tree') . ": $tree)" : "";
-$logstring = "<a href=\"anniversaries.php?tngevent=$tngevent&amp;tngdaymonth=$tngdaymonth&amp;tngmonth=$tngmonth&amp;tngyear=$tngyear&amp;tngkeywords=$tngkeywords&amp;tngneedresults=$tngneedresults&amp;offset=$offset&amp;tree=$tree&amp;tngpage=$tngpage\">" . xmlcharacters(uiTextSnippet('anniversaries') . " $treestr") . "</a>";
+$logstring = "<a href=\"anniversaries.php?tngevent=$tngevent&amp;tngdaymonth=$tngdaymonth&amp;tngmonth=$tngmonth&amp;tngyear=$tngyear&amp;tngkeywords=$tngkeywords&amp;tngneedresults=$tngneedresults&amp;offset=$offset&amp;tngpage=$tngpage\">" . xmlcharacters(uiTextSnippet('anniversaries')) . "</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -39,7 +37,6 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
     <h2><img class='icon-md' src='svg/calendar.svg'><?php echo uiTextSnippet('anniversaries'); ?></h2>
     <br clear='left'>
     <form action="anniversaries2.php" method="get" name="form1" id="form1" onsubmit="return validateForm(this);">
-      <?php echo treeDropdown(array('startform' => false, 'endform' => false, 'name' => 'form1')); ?>
       <p><?php echo uiTextSnippet('explain'); ?></p>
       <div class="annfield">
         <label for="tngevent"><?php echo uiTextSnippet('event'); ?>:</label><br>
@@ -180,7 +177,7 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
         <input type='submit' value="<?php echo uiTextSnippet('search'); ?>"/>
         <input type='button' value="<?php echo uiTextSnippet('tng_reset'); ?>" onclick="resetForm();"/>
         | <input type='button' value="<?php echo uiTextSnippet('calendar'); ?>"
-                 onclick="window.location.href='<?php echo "calendar.php?m=$tngmonth&amp;year=$tngyear&amp;tree=$tree"; ?>';"/>
+                 onclick="window.location.href='<?php echo "calendar.php?m=$tngmonth&amp;year=$tngyear"; ?>';"/>
       </div>
     </form>
     <br clear='all'>
@@ -295,19 +292,6 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
         if ($tngdaymonth || $tngmonth || $tngyear) {
           $allwhere .= " AND $datefieldtr != '0000-00-00'";
         }
-
-        if ($tree) {
-          if ($urlstring) {
-            $urlstring .= "&amp;";
-          }
-          $urlstring .= "tree=$tree";
-
-          if ($allwhere) {
-            $allwhere = " AND (1=1 $allwhere)";
-          }
-          $allwhere .= " AND $people_table.gedcom=\"$tree\"";
-        }
-
         $more = getLivingPrivateRestrictions($people_table, false, true);
         if ($more) {
           $allwhere .= " AND " . $more;
@@ -328,15 +312,14 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
 
         $query = "SELECT $people_table.ID, $people_table.personID, lastname, lnprefix, firstname, $people_table.living, $people_table.branch, prefix, suffix, nameorder, $place, $datefield, $people_table.gedcom, treename $familiessortdate $eventsfields
           FROM ($people_table, $treesTable $eventsjoin) $familiesjoin
-          WHERE $people_table.gedcom = $treesTable.gedcom $allwhere ";
+          WHERE 1 $allwhere ";
         if ($needfamilies) {
           $query .= "UNION ALL SELECT $people_table.ID, $people_table.personID, lastname, lnprefix, firstname, $people_table.living, $people_table.branch, prefix, suffix, nameorder, $place, $datefield, $people_table.gedcom, treename $familiessortdate $eventsfields
             FROM ($people_table, $treesTable $eventsjoin) $familiesjoinw
-            WHERE $people_table.gedcom = $treesTable.gedcom $allwhere ";
+            WHERE 1=1 $allwhere ";
         }
         $query .= " ORDER BY DAY($datefieldtr), MONTH($datefieldtr), YEAR($datefieldtr), lastname, firstname LIMIT $newoffset" . $maxsearchresults;
 
-        //echo "debug: $query<br>\n";
         $result = tng_query($query);
         $numrows = tng_num_rows($result);
 
@@ -344,14 +327,14 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
           if ($needfamilies) {
             $query = "SELECT (SELECT count(personID)
               FROM ($people_table, $treesTable $eventsjoin) $familiesjoin
-              WHERE $people_table.gedcom = $treesTable.gedcom $allwhere) +
+              WHERE 1=1 $allwhere) +
               (SELECT count(personID)
               FROM ($people_table, $treesTable $eventsjoin) $familiesjoinw
-              WHERE $people_table.gedcom = $treesTable.gedcom $allwhere) as pcount";
+              WHERE 1=1 $allwhere) as pcount";
           } else {
             $query = "SELECT count(personID) as pcount
               FROM ($people_table, $treesTable $eventsjoin) $familiesjoin
-              WHERE $people_table.gedcom = $treesTable.gedcom $allwhere";
+              WHERE 1=1 $allwhere";
           }
           $result2 = tng_query($query);
           $countrow = tng_fetch_assoc($result2);
@@ -373,22 +356,18 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
               <th><?php echo uiTextSnippet('lastfirst'); ?></th>
               <th colspan='2'><?php echo $datetxt; ?></th>
               <th><?php echo uiTextSnippet('personid'); ?></th>
-              <?php if ($numtrees > 1) { ?>
-                <th><?php echo uiTextSnippet('tree'); ?></th>
-              <?php } ?>
             </tr>
 
             <?php
             $i = $offsetplus;
             $chartlinkimg = getimagesize("img/Chart.gif");
             $chartlink = "<img src=\"img/Chart.gif\" alt='' $chartlinkimg[3]>";
-            $treestr = $tngconfig['places1tree'] ? "" : "tree=$tree&amp;";
             while ($row = tng_fetch_assoc($result)) {
               $rights = determineLivingPrivateRights($row);
               $row['allow_living'] = $rights['living'];
               $row['allow_private'] = $rights['private'];
               if ($rights['both']) {
-                $placetxt = $row[$place] ? $row[$place] . " <a href='placesearch.php?{$treestr}psearch=" . urlencode($row[$place]) . "' title='" . uiTextSnippet('findplaces') . "'>"
+                $placetxt = $row[$place] ? $row[$place] . " <a href='placesearch.php?psearch=" . urlencode($row[$place]) . "' title='" . uiTextSnippet('findplaces') . "'>"
                   . "<img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt='" . uiTextSnippet('findplaces') . "'></a>" : truncateIt($row['info'], 75);
                 $dateval = $row[$datefield];
               } else {
@@ -403,12 +382,9 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
                 echo "<div class='person-img' id=\"mi{$row['gedcom']}_{$row['personID']}_$tngevent\">\n";
                   echo "<div class='person-prev' id=\"prev{$row['gedcom']}_{$row['personID']}_$tngevent\"></div>\n";
                 echo "</div>\n";
-                echo "<a href=\"pedigree.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$chartlink</a> <a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\" class=\"pers\" id=\"p{$row['personID']}_t{$row['gedcom']}:$tngevent\">$name</a>&nbsp;</td>\n";
+                echo "<a href=\"pedigree.php?personID={$row['personID']}\">$chartlink</a> <a href=\"peopleShowPerson.php?personID={$row['personID']}\" class=\"pers\" id=\"p{$row['personID']}_t{$row['gedcom']}:$tngevent\">$name</a>&nbsp;</td>\n";
               echo "<td>" . displayDate($dateval) . "</td><td>$placetxt</td>";
               echo "<td>{$row['personID']} </td>";
-              if ($numtrees > 1) {
-                echo "<td><a href=\"showtree.php?tree={$row['gedcom']}\">{$row['treename']}</a></td>";
-              }
               echo "</tr>\n";
             }
             tng_free_result($result);

@@ -15,7 +15,7 @@ if ($mediaID) {
 }
 $bailtext = $mediaoption ? uiTextSnippet('finish') : uiTextSnippet('cancel');
 
-$applyfilter = "applyFilter({form:'findsourceform1',fieldId:'mytitle',type:'S',tree:'$tree',destdiv:'sourceresults'$mediaoption});";
+$applyfilter = "applyFilter({form:'findsourceform1', fieldId:'mytitle', type:'S', destdiv:'sourceresults'$mediaoption});";
 
 header("Content-type:text/html; charset=" . $session_charset);
 ?>
@@ -34,7 +34,6 @@ header("Content-type:text/html; charset=" . $session_charset);
               form: 'findsourceform1',
               fieldId: 'mytitle',
               type: 'S',
-              tree: '<?php echo $tree; ?>',
               destdiv: 'sourceresults'<?php echo $mediaoption; ?>
             });">
           </td>

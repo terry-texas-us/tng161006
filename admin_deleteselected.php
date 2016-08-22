@@ -84,48 +84,44 @@ foreach (array_keys($_POST) as $key) {
     if ($xperaction) {
       $row = getID("personID, gedcom, branch, sex", $people_table, $thisid);
       $personID = $row['personID'];
-      $tree = $row['gedcom'];
       $items[] = $row['gedcom'] . "/" . $row['personID'];
 
-      deletePersonPlus($personID, $tree, $row['sex']);
+      deletePersonPlus($personID, $row['sex']);
     } elseif ($xfamaction) {
       $row = getID("familyID, branch, gedcom", $families_table, $thisid);
       $familyID = $row['familyID'];
-      $tree = $row['gedcom'];
       $items[] = $row['gedcom'] . "/" . $row['familyID'];
 
-      $fquery = "DELETE FROM $children_table WHERE familyID=\"$familyID\" AND gedcom = \"$tree\"";
+      $fquery = "DELETE FROM $children_table WHERE familyID='$familyID'";
       $result = tng_query($fquery);
 
-      $pquery = "UPDATE $people_table SET famc=\"\" WHERE gedcom = \"$tree\" AND famc=\"$familyID\"";
+      $pquery = "UPDATE $people_table SET famc=\"\" WHERE famc='$familyID'";
       $result = tng_query($pquery);
 
       updateHasKidsFamily($familyID);
 
-      deleteEvents($familyID, $tree);
-      deleteCitations($familyID, $tree);
-      deleteNoteLinks($familyID, $tree);
-      deleteBranchLinks($familyID, $tree);
-      deleteMediaLinks($familyID, $tree);
-      deleteAlbumLinks($familyID, $tree);
+      deleteEvents($familyID);
+      deleteCitations($familyID);
+      deleteNoteLinks($familyID);
+      deleteBranchLinks($familyID);
+      deleteMediaLinks($familyID);
+      deleteAlbumLinks($familyID);
     } elseif ($xsrcaction) {
       $row = getID("sourceID, gedcom", $sources_table, $thisid);
       $sourceID = $row['sourceID'];
-      $tree = $row['gedcom'];
       $items[] = $row['gedcom'] . "/" . $row['sourceID'];
 
-      $squery = "DELETE FROM $citations_table WHERE sourceID=\"$sourceID\" AND gedcom = \"$tree\"";
+      $squery = "DELETE FROM $citations_table WHERE sourceID = '$sourceID'";
       $result = tng_query($squery);
 
-      deleteEvents($sourceID, $tree);
-      deleteCitations($sourceID, $tree);
-      deleteNoteLinks($sourceID, $tree);
-      deleteMediaLinks($sourceID, $tree);
-      deleteAlbumLinks($sourceID, $tree);
+      deleteEvents($sourceID);
+      deleteCitations($sourceID);
+      deleteNoteLinks($sourceID);
+      deleteMediaLinks($sourceID);
+      deleteAlbumLinks($sourceID);
     } elseif ($xrepoaction) {
       $row = getID("repoID, gedcom", $repositories_table, $thisid);
       $repoID = $row['repoID'];
-      $tree = $row['gedcom'];
       $items[] = $row['gedcom'] . "/" . $row['repoID'];
 
       $rquery = "SELECT addressID FROM $repositories_table WHERE repoID=\"$repoID\"";
@@ -136,21 +132,20 @@ foreach (array_keys($_POST) as $key) {
       $rquery = "DELETE FROM $address_table WHERE addressID=\"{$row['addressID']}\"";
       $result = tng_query($rquery);
 
-      $rquery = "UPDATE $sources_table SET repoID = \"\" WHERE repoID=\"$repoID\" AND gedcom = \"$tree\"";
+      $rquery = "UPDATE $sources_table SET repoID = \"\" WHERE repoID = '$repoID'";
       $result = tng_query($rquery);
 
-      deleteEvents($repoID, $tree);
-      deleteNoteLinks($repoID, $tree);
-      deleteMediaLinks($repoID, $tree);
-      deleteAlbumLinks($repoID, $tree);
+      deleteEvents($repoID);
+      deleteNoteLinks($repoID);
+      deleteMediaLinks($repoID);
+      deleteAlbumLinks($repoID);
     } elseif ($xplacaction) {
       $row = getID("place, gedcom", $places_table, $thisid);
       $place = $row['place'];
-      $tree = $row['gedcom'];
       $items[] = $row['gedcom'] . "/" . $row['place'];
 
-      deleteMediaLinks($place, $tree);
-      deleteAlbumLinks($place, $tree);
+      deleteMediaLinks($place);
+      deleteAlbumLinks($place);
     } elseif ($xtimeaction) {
       $query3 = "DELETE FROM $tlevents_table WHERE tleventID = \"$thisid\"";
       $result3 = tng_query($query3) or die(uiTextSnippet('cannotexecutequery') . ": $query3");

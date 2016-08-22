@@ -7,13 +7,9 @@ $logstring = "<a href='mostwanted.php'>" . xmlcharacters(uiTextSnippet('mostwant
 writelog($logstring);
 preparebookmark($logstring);
 
-$wherestr = $tree ? " AND $mostwanted_table.gedcom = \"$tree\"" : "";
-
 $gotImageJpeg = function_exists(imageJpeg);
 
-function showDivs($type)
-{
-  global $wherestr;
+function showDivs($type) {
   global $people_table;
   global $media_table;
   global $mostwanted_table;
@@ -31,7 +27,7 @@ function showDivs($type)
     FROM $mostwanted_table
     LEFT JOIN $media_table ON $mostwanted_table.mediaID = $media_table.mediaID
     LEFT JOIN $people_table ON $mostwanted_table.personID = $people_table.personID AND $mostwanted_table.gedcom = $people_table.gedcom
-    WHERE mwtype = \"$type\"$wherestr ORDER BY ordernum";
+    WHERE mwtype = '$type' ORDER BY ordernum";
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {
@@ -58,14 +54,14 @@ function showDivs($type)
     $mediatext .= "<div class=\"mwperson\">\n";
     if ($type == "person") {
       if ($row['personID']) {
-        $mediatext .= "<a href=\"personSuggest.php?&amp;ID={$row['personID']}&amp;tree={$row['gedcom']}\">" . uiTextSnippet('tellus') . "</a>";
+        $mediatext .= "<a href=\"personSuggest.php?&amp;ID={$row['personID']}\">" . uiTextSnippet('tellus') . "</a>";
 
         $rights = determineLivingPrivateRights($row);
         $row['allow_living'] = $rights['living'];
         $row['allow_private'] = $rights['private'];
 
         $name = getName($row);
-        $mediatext .= " &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; " . uiTextSnippet('moreinfo') . " <a href=\"peopleShowPerson.php?personID={$row['personID']}&amp;tree={$row['gedcom']}\">$name</a>";
+        $mediatext .= " &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; " . uiTextSnippet('moreinfo') . " <a href=\"peopleShowPerson.php?personID={$row['personID']}\">$name</a>";
       } else {
         $mediatext .= "<a href=\"contactUs.php?page=" . uiTextSnippet('mostwanted') . ":+{$row['mwtitle']}\">" . uiTextSnippet('tellus') . "</a>";
       }
@@ -104,7 +100,6 @@ $headSection->setTitle(uiTextSnippet('mostwanted'));
     <h2><img class='icon-md' src='svg/person-unknown.svg'><?php echo uiTextSnippet('mostwanted'); ?></h2>
     <br clear='left'>
     <?php
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'mostwanted', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
 
     echo "<div class=\"titlebox mwblock\">\n";
     echo "<h4>&nbsp;" . uiTextSnippet('mysperson') . "</h4>\n";

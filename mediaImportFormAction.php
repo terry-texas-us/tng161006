@@ -7,7 +7,7 @@ require 'checklogin.php';
 require 'version.php';
 require 'adminlog.php';
 
-if (!$allowMediaAdd || $assignedtree) {
+if (!$allowMediaAdd) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -19,7 +19,6 @@ function importFrom($tngpath, $orgpath, $needsubdirs) {
   global $rootpath;
   global $media_table;
   global $mediatypeID;
-  global $tree;
   global $timeOffset;
   global $thumbprefix;
   global $thumbsuffix;
@@ -43,7 +42,8 @@ function importFrom($tngpath, $orgpath, $needsubdirs) {
           $fileparts = pathinfo($filename);
           $form = strtoupper($fileparts["extension"]);
           $newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
-          $query = "INSERT IGNORE INTO $media_table (mediatypeID,mediakey,gedcom,path,thumbpath,description,notes,width,height,datetaken,placetaken,owner,changedate,form,alwayson,map,abspath,status,cemeteryID,showmap,linktocem,latitude,longitude,zoom,bodytext,usenl,newwindow,usecollfolder) VALUES (\"$mediatypeID\",\"$path/$filename\",\"$tree\",\"$orgpath$filename\",\"\",\"$orgpath$filename\",\"\",\"\",\"\",\"\",\"\",\"\",\"$newdate\",\"$form\",\"0\",\"\",\"0\",\"\",\"\",\"0\",\"0\",\"\",\"\",\"0\",\"\",\"0\",\"0\",\"1\")";
+          $query = "INSERT IGNORE INTO $media_table (mediatypeID, mediakey, gedcom, path, thumbpath, description, notes, width, height, datetaken, placetaken, owner, changedate, form, alwayson, map, abspath, status, cemeteryID, showmap, linktocem, latitude, longitude, zoom, bodytext, usenl, newwindow, usecollfolder) "
+              . "VALUES ('$mediatypeID', '$path/$filename', '', '$orgpath$filename', '', '$orgpath$filename', '', '', '', '', '', '', '$newdate', '$form', '0', '', '0', '', '', '0', '0', '', '', '0', '', '0', '0', '1')";
           tng_query($query);
           $success = tng_affected_rows();
           //$success = 1;
@@ -63,7 +63,7 @@ function importFrom($tngpath, $orgpath, $needsubdirs) {
 
   return $subdirs;
 }
-adminwritelog(uiTextSnippet('media') . " &gt;&gt; " . uiTextSnippet('import') . " ($mediatypeID): $tree");
+adminwritelog(uiTextSnippet('media') . " &gt;&gt; " . uiTextSnippet('import') . " ($mediatypeID)");
 
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('mediaimport'));
@@ -81,9 +81,9 @@ $headSection->setTitle(uiTextSnippet('mediaimport'));
     $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('search'), "findmedia"]);
     $navList->appendItem([$allowMediaAdd, "admin_newmedia.php", uiTextSnippet('addnew'), "addmedia"]);
     $navList->appendItem([$allowMediaEdit, "admin_ordermediaform.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    $navList->appendItem([$allowMediaEdit && !$assignedtree, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaImport.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allowMediaAdd && !$assignedtree, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
+    $navList->appendItem([$allowMediaEdit, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
+    $navList->appendItem([$allowMediaAdd, "mediaImport.php", uiTextSnippet('import'), "import"]);
+    $navList->appendItem([$allowMediaAdd, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
     echo $navList->build("import");
     ?>
     <table class='table table-sm'>
@@ -96,7 +96,7 @@ $headSection->setTitle(uiTextSnippet('mediaimport'));
             importFrom($tngpath, $subdir, 0);
           }
           if ($totalImported) {
-            $query = "UPDATE $mediatypes_table SET disabled=\"0\" where mediatypeID=\"$mediatypeID\"";
+            $query = "UPDATE $mediatypes_table SET disabled=\"0\" WHERE mediatypeID = '$mediatypeID'";
             $result = tng_query($query);
           }
           ?>

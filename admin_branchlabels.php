@@ -14,7 +14,6 @@ if ($assignedbranch) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-
 set_time_limit(0);
 $husbgender = array();
 $husbgender['self'] = 'husband';
@@ -25,22 +24,20 @@ $wifegender['self'] = 'wife';
 $wifegender['spouse'] = 'husband';
 $wifegender['spouseorder'] = 'wifeorder';
 
-$query = "SELECT treename FROM $treesTable where gedcom = \"$tree\"";
+$query = "SELECT treename FROM $treesTable";
 $treeresult = tng_query($query);
-$treerow = tng_fetch_assoc($treeresult);
 tng_free_result($treeresult);
 
 $counter = $fcounter = 0;
 $done = $fdone = array();
 
 function getGender($personID) {
-  global $tree;
   global $people_table;
   global $husbgender;
   global $wifegender;
 
   $info = array();
-  $query = "SELECT firstname, lastname, sex FROM $people_table WHERE personID = \"$personID\" AND gedcom = \"$tree\"";
+  $query = "SELECT firstname, lastname, sex FROM $people_table WHERE personID = '$personID'";
   $result = tng_query($query);
   if ($result) {
     $row = tng_fetch_assoc($result);
@@ -63,13 +60,11 @@ function getGender($personID) {
 }
 
 function clearBranch($table, $branch) {
-  global $tree;
-
-  $query = "UPDATE $table SET branch=\"\" WHERE gedcom=\"$tree\" AND branch = \"$branch\"";
+  $query = "UPDATE $table SET branch=\"\" WHERE branch = '$branch'";
   tng_query($query);
   $counter = tng_affected_rows();
 
-  $query = "SELECT branch, ID FROM $table WHERE gedcom=\"$tree\" AND branch LIKE \"%$branch%\"";
+  $query = "SELECT branch, ID FROM $table WHERE branch LIKE \"%$branch%\"";
   $result = tng_query($query);
   while ($row = tng_fetch_assoc($result)) {
     $oldbranch = trim($row['branch']);
@@ -91,16 +86,17 @@ function clearBranch($table, $branch) {
 }
 
 function deleteBranch($table, $branch) {
-  global $tree, $people_table, $children_table;
+  global $people_table;
+  global $children_table;
 
   $counter = 0;
   if ($table == $people_table) {
-    $query = "SELECT ID, personID, branch, sex FROM $table WHERE gedcom=\"$tree\" AND branch LIKE \"%$branch%\"";
+    $query = "SELECT ID, personID, branch, sex FROM $table WHERE branch LIKE \"%$branch%\"";
     $result = tng_query($query);
     while ($row = tng_fetch_assoc($result)) {
       $branches = explode(",", trim($row['branch']));
       if (in_array($branch, $branches)) {
-        deletePersonPlus($row['personID'], $tree, $row['sex']);
+        deletePersonPlus($row['personID'], $row['sex']);
         $query = "DELETE FROM $table WHERE ID=\"{$row['ID']}\"";
         tng_query($query);
         $counter++;
@@ -108,25 +104,25 @@ function deleteBranch($table, $branch) {
     }
     tng_free_result($result);
   } else {
-    $query = "SELECT ID, familyID, branch FROM $table WHERE gedcom=\"$tree\" AND branch LIKE \"%$branch%\"";
+    $query = "SELECT ID, familyID, branch FROM $table WHERE branch LIKE \"%$branch%\"";
     $result = tng_query($query);
     while ($row = tng_fetch_assoc($result)) {
       $branches = explode(",", trim($row['branch']));
       if (in_array($branch, $branches)) {
         $familyID = $row['familyID'];
-        $query = "DELETE FROM $children_table WHERE ID=\"$familyID\" AND gedcom = \"$tree\"";
+        $query = "DELETE FROM $children_table WHERE ID = '$familyID'";
         tng_query($query);
 
-        $query = "UPDATE $people_table SET famc=\"\" WHERE famc = \"$familyID\" AND gedcom = \"$tree\"";
+        $query = "UPDATE $people_table SET famc=\"\" WHERE famc = '$familyID'";
         tng_query($query);
 
-        deleteEvents($familyID, $tree);
-        deleteCitations($familyID, $tree);
-        deleteNoteLinks($familyID, $tree);
-        deleteBranchLinks($familyID, $tree);
-        deleteMediaLinks($familyID, $tree);
-        deleteAlbumLinks($familyID, $tree);
-        deleteAssociations($familyID, $tree);
+        deleteEvents($familyID);
+        deleteCitations($familyID);
+        deleteNoteLinks($familyID);
+        deleteBranchLinks($familyID);
+        deleteMediaLinks($familyID);
+        deleteAlbumLinks($familyID);
+        deleteAssociations($familyID);
 
         $query = "DELETE FROM $table WHERE ID=\"{$row['ID']}\"";
         tng_query($query);
@@ -140,26 +136,30 @@ function deleteBranch($table, $branch) {
 }
 
 function setPersonLabel($personID) {
-  global $tree, $people_table, $branch, $branchlinks_table, $overwrite, $branchaction, $done;
+  global $people_table;
+  global $branch;
+  global $branchlinks_table;
+  global $overwrite;
+  global $branchaction;
+  global $done;
 
-  //echo "personID=$personID, tree=$tree, branch=$branch<br>\n";
   if ($personID) {
     if ($branchaction == "delete") {
-      $query = "SELECT sex FROM $people_table WHERE personID=\"$personID\" AND gedcom = \"$tree\"";
+      $query = "SELECT sex FROM $people_table WHERE personID='$personID'";
       $result = tng_query($query);
       $row = tng_fetch_assoc($result);
       tng_free_result($result);
 
-      $query = "DELETE FROM $people_table WHERE personID = \"$personID\" AND gedcom = \"$tree\"";
+      $query = "DELETE FROM $people_table WHERE personID = '$personID'";
       tng_query($query);
 
       //also delete children, events, medialinks, citations, notes, other family references
-      deletePersonPlus($personID, $tree, $row['sex']);
+      deletePersonPlus($personID, $row['sex']);
       doICounter();
     } elseif (!in_array($personID, $done)) {
       if ($branch && ($overwrite != 1 || $branchaction == "clear")) { //append or leave
         //appending, so get current value first
-        $query = "SELECT branch FROM $people_table WHERE personID = \"$personID\" AND gedcom = \"$tree\"";
+        $query = "SELECT branch FROM $people_table WHERE personID = '$personID'";
         $result = tng_query($query);
         $row = tng_fetch_assoc($result);
         $oldbranch = trim($row['branch']);
@@ -186,25 +186,23 @@ function setPersonLabel($personID) {
         $newbranch = $branch;
         $oldbranch = "";
       }
-
       if ($overwrite || !$oldbranch) {
-        $query = "UPDATE $people_table SET branch = \"$newbranch\" WHERE personID = \"$personID\" AND gedcom = \"$tree\"";
+        $query = "UPDATE $people_table SET branch = '$newbranch' WHERE personID = '$personID'";
         tng_query($query);
         doICounter();
       }
       array_push($done, $personID);
     }
-
     if ($branchaction == "clear" || $branchaction == "delete") {
-      $query = "DELETE FROM $branchlinks_table WHERE persfamID = \"$personID\" AND gedcom = \"$tree\" AND branch = \"$branch\"";
+      $query = "DELETE FROM $branchlinks_table WHERE persfamID = '$personID' AND branch = '$branch'";
       tng_query($query);
     } else {
       if ($overwrite == 1 || !$branch) {
-        $query = "DELETE FROM $branchlinks_table WHERE persfamID = \"$personID\" AND gedcom = \"$tree\"";
+        $query = "DELETE FROM $branchlinks_table WHERE persfamID = '$personID'";
         tng_query($query);
       }
       if ($branch) {
-        $query = "INSERT IGNORE INTO $branchlinks_table (branch,gedcom,persfamID) VALUES(\"$branch\",\"$tree\",\"$personID\")";
+        $query = "INSERT IGNORE INTO $branchlinks_table (branch, gedcom, persfamID) VALUES('$branch', '', '$personID')";
         tng_query($query);
       }
     }
@@ -230,31 +228,36 @@ function doFCounter() {
 }
 
 function setFamilyLabel($personID, $gender) {
-  global $tree, $families_table, $branch, $overwrite, $branchlinks_table, $branchaction, $people_table, $fdone;
+  global $families_table;
+  global $branch;
+  global $overwrite;
+  global $branchlinks_table;
+  global $branchaction;
+  global $people_table;
+  global $fdone;
 
-  //echo "personID=$personID, tree=$tree, branch=$branch<br>\n";
   if ($gender['self']) {
-    $query = "SELECT branch, familyID FROM $families_table WHERE {$gender['self']} = \"$personID\" AND gedcom = \"$tree\"";
+    $query = "SELECT branch, familyID FROM $families_table WHERE {$gender['self']} = '$personID'";
     $result = tng_query($query);
     while ($row = tng_fetch_assoc($result)) {
       $oldbranch = trim($row['branch']);
       if ($branchaction == "delete") {
-        $query = "DELETE FROM $families_table WHERE familyID = \"{$row['familyID']}\" AND gedcom = \"$tree\"";
+        $query = "DELETE FROM $families_table WHERE familyID = \"{$row['familyID']}\"";
         tng_query($query);
 
-        $query = "UPDATE $people_table SET famc=\"\" WHERE famc = \"{$row['familyID']}\" AND gedcom = \"$tree\"";
+        $query = "UPDATE $people_table SET famc=\"\" WHERE famc = \"{$row['familyID']}\"";
         tng_query($query);
 
         //also delete children, events, medialinks, citations, notes
-        $query = "DELETE FROM $children_table WHERE ID=\"$familyID\" AND gedcom = \"$tree\"";
+        $query = "DELETE FROM $children_table WHERE ID = '$familyID'";
         tng_query($query);
 
-        deleteEvents($familyID, $tree);
-        deleteCitations($familyID, $tree);
-        deleteNoteLinks($familyID, $tree);
-        deleteBranchLinks($familyID, $tree);
-        deleteMediaLinks($familyID, $tree);
-        deleteAlbumLinks($familyID, $tree);
+        deleteEvents($familyID);
+        deleteCitations($familyID);
+        deleteNoteLinks($familyID);
+        deleteBranchLinks($familyID);
+        deleteMediaLinks($familyID);
+        deleteAlbumLinks($familyID);
         doFCounter();
       } elseif (!in_array($row['familyID'], $fdone)) {
         if ($branch && $oldbranch && ($overwrite == 2 || $branchaction == "clear")) {
@@ -277,7 +280,7 @@ function setFamilyLabel($personID, $gender) {
         }
 
         if ($overwrite || !$oldbranch) {
-          $query = "UPDATE $families_table SET branch = \"$newbranch\" WHERE familyID = \"{$row['familyID']}\" AND gedcom = \"$tree\"";
+          $query = "UPDATE $families_table SET branch = \"$newbranch\" WHERE familyID = \"{$row['familyID']}\"";
           tng_query($query);
 
           doFCounter();
@@ -286,15 +289,15 @@ function setFamilyLabel($personID, $gender) {
       }
 
       if ($branchaction == "clear" || $branchaction == "delete") {
-        $query = "DELETE FROM $branchlinks_table WHERE persfamID = \"{$row['familyID']}\" AND gedcom = \"$tree\" AND branch = \"$branch\"";
+        $query = "DELETE FROM $branchlinks_table WHERE persfamID = \"{$row['familyID']}\" AND branch = '$branch'";
         tng_query($query);
       } else {
         if ($overwrite == 1 || !$branch) {
-          $query = "DELETE FROM $branchlinks_table WHERE persfamID = \"{$row['familyID']}\" AND gedcom = \"$tree\"";
+          $query = "DELETE FROM $branchlinks_table WHERE persfamID = \"{$row['familyID']}\"";
           tng_query($query);
         }
         if ($branch) {
-          $query = "INSERT IGNORE INTO $branchlinks_table (branch,gedcom,persfamID) VALUES(\"$branch\",\"$tree\",\"{$row['familyID']}\")";
+          $query = "INSERT IGNORE INTO $branchlinks_table (branch, gedcom, persfamID) VALUES('$branch', '', \"{$row['familyID']}\")";
           tng_query($query);
         }
       }
@@ -304,11 +307,11 @@ function setFamilyLabel($personID, $gender) {
 }
 
 function setSpousesLabel($personID, $gender) {
-  global $tree, $families_table;
+  global $families_table;
 
   setFamilyLabel($personID, $gender);
   if ($gender['self']) {
-    $query = "SELECT {$gender['spouse']}, familyID FROM $families_table WHERE {$gender['self']} = \"$personID\" AND gedcom = \"$tree\" ORDER BY {$gender['spouseorder']}";
+    $query = "SELECT {$gender['spouse']}, familyID FROM $families_table WHERE {$gender['self']} = '$personID' ORDER BY {$gender['spouseorder']}";
     $spouseresult = tng_query($query);
     while ($spouserow = tng_fetch_assoc($spouseresult)) {
       setPersonLabel($spouserow[$gender['spouse']]);
@@ -317,22 +320,27 @@ function setSpousesLabel($personID, $gender) {
 }
 
 function doAncestors($personID, $gender, $gen) {
-  global $dagens, $tree, $agens, $children_table, $families_table, $husbgender, $wifegender, $dospouses;
+  global $dagens;
+  global $agens;
+  global $children_table;
+  global $families_table;
+  global $husbgender;
+  global $wifegender;
+  global $dospouses;
 
   setPersonLabel($personID);
   setFamilyLabel($personID, $gender);
   if ($dospouses) {
     setSpousesLabel($personID, $gender);
   }
-
   $spouses = array();
   if ($gen <= $agens) {
-    $query = "SELECT $children_table.familyID as familyID, husband, wife FROM ($children_table, $families_table) WHERE $children_table.familyID = $families_table.familyID AND personID = \"$personID\" AND $children_table.gedcom = \"$tree\" AND $families_table.gedcom = \"$tree\"";
+    $query = "SELECT $children_table.familyID as familyID, husband, wife FROM ($children_table, $families_table) WHERE $children_table.familyID = $families_table.familyID AND personID = '$personID'";
     $familyresult = tng_query($query);
 
     while ($familyrow = tng_fetch_assoc($familyresult)) {
       if ($dagens) {
-        $query = "SELECT personID FROM $children_table WHERE familyID = \"{$familyrow['familyID']}\" AND gedcom = \"$tree\" AND personID != \"$personID\"";
+        $query = "SELECT personID FROM $children_table WHERE familyID = \"{$familyrow['familyID']}\" AND personID != '$personID'";
         $childresult = tng_query($query);
         while ($childrow = tng_fetch_assoc($childresult)) {
           $newgender = getGender($childrow['personID']);
@@ -357,20 +365,19 @@ function doAncestors($personID, $gender, $gen) {
 }
 
 function doDescendants($personID, $gender, $gen, $maxgen) {
-  global $tree;
   global $families_table;
   global $children_table;
   global $dospouses;
 
   if ($gender['spouseorder']) {
-    $query = "SELECT familyID FROM $families_table WHERE {$gender['self']} = \"$personID\" AND gedcom = \"$tree\" ORDER BY {$gender['spouseorder']}";
+    $query = "SELECT familyID FROM $families_table WHERE {$gender['self']} = '$personID' ORDER BY {$gender['spouseorder']}";
   } else {
-    $query = "SELECT familyID FROM $families_table WHERE gedcom = \"$tree\" AND (husband = \"$personID\" OR wife = \"$personID\")";
+    $query = "SELECT familyID FROM $families_table WHERE (husband = \"$personID\" OR wife = \"$personID\")";
   }
   $spouseresult = tng_query($query);
   while ($spouserow = tng_fetch_assoc($spouseresult)) {
     //setPersonLabel( $spouserow[$gender['spouse']] );
-    $query = "SELECT personID FROM $children_table WHERE familyID = \"{$spouserow['familyID']}\" AND gedcom = \"$tree\" ORDER BY ordernum";
+    $query = "SELECT personID FROM $children_table WHERE familyID = \"{$spouserow['familyID']}\" ORDER BY ordernum";
     $childresult = tng_query($query);
     while ($childrow = tng_fetch_assoc($childresult)) {
       $newgender = getGender($childrow['personID']);
@@ -431,7 +438,7 @@ $headSection->setTitle(uiTextSnippet('labelbranches'));
             $fcounter = deleteBranch($families_table, $branch);
           }
 
-          $query = "DELETE FROM $branchlinks_table WHERE gedcom = \"$tree\" AND branch = \"$branch\"";
+          $query = "DELETE FROM $branchlinks_table WHERE branch = '$branch'";
           $result = tng_query($query);
         } else {
           $gender = getGender($personID);
@@ -456,11 +463,11 @@ $headSection->setTitle(uiTextSnippet('labelbranches'));
         }
         echo "<span>" . uiTextSnippet('totalaffected') . ": $counter " . uiTextSnippet('people') . ", $fcounter " . uiTextSnippet('families') . ".</span>";
 
-        adminwritelog(uiTextSnippet('labelbranches') . ": $tree/$branch ($branchaction/$set)");
+        adminwritelog(uiTextSnippet('labelbranches') . ": $branch ($branchaction/$set)");
         ?>
 
         <p>
-          <a href="admin_branchmenu.php?tree=<?php echo "$tree&amp;branch=$branch"; ?>"><?php echo uiTextSnippet('labelmore'); ?></a>
+          <a href="admin_branchmenu.php?branch=<?php echo "$branch"; ?>"><?php echo uiTextSnippet('labelmore'); ?></a>
         </p>
 
       </div>

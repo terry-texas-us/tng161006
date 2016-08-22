@@ -7,7 +7,6 @@ require 'searchlib.php';
 set_time_limit(0);
 $maxsearchresults = $nr ? $nr : ($_SESSION['tng_nr'] ? $_SESSION['tng_nr'] : $maxsearchresults);
 
-$_SESSION['tng_search_ftree'] = $tree;
 $_SESSION['tng_search_branch'] = $branch;
 $_SESSION['tng_search_flnqualify'] = $flnqualify;
 $myflastname = trim(stripslashes($myflastname));
@@ -130,7 +129,6 @@ function buildCriteria($column, $colvar, $qualifyvar, $qualifier, $value, $texts
 }
 
 $querystring = "";
-$allwhere = "";
 
 if ($myflastname || $flnqualify == 'exists' || $flnqualify == "dnexist") {
   if ($myflastname == uiTextSnippet('nosurname')) {
@@ -173,63 +171,19 @@ if ($mydivplace || $dvpqualify == 'exists' || $dvpqualify == "dnexist") {
 if ($mydivyear || $dvyqualify == 'exists' || $dvyqualify == "dnexist") {
   buildYearCriteria("divdatetr", "mydivyear", "dvyqualify", "", $dvyqualify, $mydivyear, uiTextSnippet('divdatetr'));
 }
-
 $dontdo = array("MARR", "DIV");
 $cejoin = doCustomEvents('F');
-
-if ($tree) {
-  if ($urlstring) {
-    $urlstring .= "&amp;";
-  }
-  $urlstring .= "tree=$tree";
-
-  if ($querystring) {
-    $querystring .= " AND ";
-  }
-
-  $query = "SELECT treename FROM $treesTable WHERE gedcom = \"$tree\"";
-  $treeresult = tng_query($query);
-  $treerow = tng_fetch_assoc($treeresult);
-  tng_free_result($treeresult);
-
-  $querystring .= uiTextSnippet('tree') . " " . uiTextSnippet('equals') . " {$treerow['treename']}";
-
-  if ($allwhere) {
-    $allwhere = "($allwhere) AND";
-  }
-  $allwhere .= " f.gedcom=\"$tree\"";
-
-  if ($branch) {
-    $urlstring .= "&amp;branch=$branch";
-    $querystring .= " " . uiTextSnippet('cap_and') . " ";
-
-    $query = "SELECT description FROM $branches_table WHERE gedcom = \"$tree\" AND branch = \"$branch\"";
-    $branchresult = tng_query($query);
-    $branchrow = tng_fetch_assoc($branchresult);
-    tng_free_result($branchresult);
-
-    $querystring .= uiTextSnippet('branch') . " " . uiTextSnippet('equals') . " {$branchrow['description']}";
-
-    $allwhere .= " AND f.branch like \"%$branch%\"";
-  }
-}
-
-$treequery = "SELECT count(gedcom) as treecount FROM $treesTable";
-$treeresult = tng_query($treequery);
-$treerow = tng_fetch_assoc($treeresult);
-$numtrees = $treerow['treecount'];
-tng_free_result($treeresult);
 
 $gotInput = $mymarrplace || $mydivplace || $mymarryear || $mydivyear || $ecount;
 $more = getLivingPrivateRestrictions('F', false, $gotInput);
 
+$allwhere = "";
 if ($more) {
   if ($allwhere) {
-    $allwhere = $tree ? "$allwhere AND " : "($allwhere) AND ";
+    $allwhere = "($allwhere) AND ";
   }
   $allwhere .= $more;
 }
-
 if ($allwhere) {
   $allwhere = "WHERE " . $allwhere . " AND ";
   $querystring = uiTextSnippet('text_for') . " $querystring";
@@ -254,14 +208,14 @@ $query = "SELECT f.ID, familyID, husband, wife, marrdate, marrplace, divdate, di
     FROM ($families_table as f, $treesTable) $cejoin
     LEFT JOIN $people_table AS father ON f.gedcom=father.gedcom AND husband = father.personID
     LEFT JOIN $people_table AS mother ON f.gedcom=mother.gedcom AND wife = mother.personID
-    $allwhere (f.gedcom = $treesTable.gedcom)
+    $allwhere (1=1)
     ORDER BY $orderstr
     LIMIT $newoffset" . $maxsearchresults;
 $query2 = "SELECT count(f.ID) as fcount
     FROM ($families_table as f, $treesTable) $cejoin
     LEFT JOIN $people_table AS father ON f.gedcom=father.gedcom AND husband = father.personID
     LEFT JOIN $people_table AS mother ON f.gedcom=mother.gedcom AND wife = mother.personID
-    $allwhere (f.gedcom = $treesTable.gedcom)";
+    $allwhere (1=1)";
 
 //echo $query;
 $result = tng_query($query);
@@ -315,9 +269,6 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
           <?php if ($mydivplace || $mydivyear) { ?>
             <th colspan='2'><?php echo $divsort; ?></th>
           <?php } ?>
-          <?php if ($numtrees > 1) { ?>
-            <th><?php echo uiTextSnippet('tree'); ?></th>
-          <?php } ?>
         </tr>
       </thead>
       <?php
@@ -362,7 +313,7 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
         $fname = getNameRev($frow);
         $mname = getNameRev($mrow);
 
-        $famidstr = "<a href=\"familiesShowFamily.php?familyID={$row['familyID']}&amp;tree={$row['gedcom']}\" class=\"fam\" id=\"f{$row['familyID']}_t{$row['gedcom']}\">{$row['familyID']} </a>";
+        $famidstr = "<a href=\"familiesShowFamily.php?familyID={$row['familyID']}\" class=\"fam\" id=\"f{$row['familyID']}_t{$row['gedcom']}\">{$row['familyID']} </a>";
 
         echo "<tr>";
         echo "<td>$i</td>\n";
@@ -376,9 +327,6 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
         echo "<td>$marrdate</td><td>$marrplace</td>";
         if ($mydivyear || $mydivplace) {
           echo "<td>$divdate </td><td>$divplace</td>";
-        }
-        if ($numtrees > 1) {
-          echo "<td><a href=\"showtree.php?tree={$row['gedcom']}\">{$row['treename']}</a></td>";
         }
         echo "</tr>\n";
       }

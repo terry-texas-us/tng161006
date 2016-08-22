@@ -9,7 +9,7 @@ require 'checklogin.php';
 require 'adminlog.php';
 require 'mail.php';
 
-if ($assignedtree || !$allowEdit) {
+if (!$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
@@ -115,7 +115,8 @@ if (!$duplicate) {
 }
 if ($newuser) {
   if ($tngconfig['autotree'] && !$tngconfig['autoapp']) {
-    $query = "INSERT IGNORE INTO $treesTable (gedcom,treename,description,owner,email,address,city,state,country,zip,phone,secret,disallowgedcreate) VALUES (\"$gedcom\",\"$realname\",\"\",\"$realname\",\"$email\",\"$address\",\"$city\",\"$state\",\"$country\",\"$zip\",\"$phone\",\"0\",\"0\")";
+    $query = "INSERT IGNORE INTO $treesTable (gedcom, treename, description, owner, email, address, city, state, country, zip, phone, secret, disallowgedcreate) "
+        . "VALUES ('', '$realname', '', '$realname', '$email', '$address', '$city', '$state', '$country', '$zip', '$phone', '0', '0')";
     $result = tng_query($query);
   }
   header("Location: usersReview.php?message=" . urlencode($message));

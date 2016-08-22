@@ -6,22 +6,16 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-if ((!$allowEdit && (!$allowAdd || !$added)) || ($assignedtree && $assignedtree != $tree)) {
+if ((!$allowEdit && (!$allowAdd || !$added))) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-
 initMediaTypes();
 
 $sourceID = ucfirst($sourceID);
 
-$query = "SELECT treename FROM $treesTable WHERE gedcom = \"$tree\"";
-$result = tng_query($query);
-$treerow = tng_fetch_assoc($result);
-tng_free_result($result);
-
-$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $sources_table WHERE sourceID = \"$sourceID\" AND gedcom = \"$tree\"";
+$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $sources_table WHERE sourceID = '$sourceID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -35,7 +29,7 @@ $row['actualtext'] = preg_replace("/\"/", "&#34;", $row['actualtext']);
 $sourcename = $row['title'] ? $row['title'] : $row['shorttitle'];
 $row['allow_living'] = 1;
 
-$query = "SELECT DISTINCT eventID as eventID FROM $notelinks_table WHERE persfamID=\"$sourceID\" AND gedcom =\"$tree\"";
+$query = "SELECT DISTINCT eventID as eventID FROM $notelinks_table WHERE persfamID = '$sourceID'";
 $notelinks = tng_query($query);
 $gotnotes = array();
 while ($note = tng_fetch_assoc($notelinks)) {
@@ -61,8 +55,6 @@ $headSection->setTitle(uiTextSnippet('modifysource'));
       var tnglitbox;
       var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;
       var preferDateFormat = '<?php echo $preferDateFormat; ?>';
-
-      var tree = '<?php echo $tree; ?>';
     </script>
     <script src="js/selectutils.js"></script>
     <script src="js/datevalidation.js"></script>
@@ -72,15 +64,15 @@ $headSection->setTitle(uiTextSnippet('modifysource'));
     $navList->appendItem([true, "sourcesBrowse.php", uiTextSnippet('browse'), "findsource"]);
     $navList->appendItem([$allowAdd, "sourcesAdd.php", uiTextSnippet('add'), "addsource"]);
     $navList->appendItem([$allowEdit && $allowDelete, "sourcesMerge.php", uiTextSnippet('merge'), "merge"]);
-    $navList->appendItem([$allowEdit, "sourcesEdit.php?sourceID=$sourceID&tree=$tree", uiTextSnippet('edit'), "edit"]);
+    $navList->appendItem([$allowEdit, "sourcesEdit.php?sourceID=$sourceID", uiTextSnippet('edit'), "edit"]);
     echo $navList->build("edit");
     ?>
     <br>
-    <a href="sourcesShowSource.php?sourceID=<?php echo $sourceID; ?>&amp;tree=<?php echo $tree; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
+    <a href="sourcesShowSource.php?sourceID=<?php echo $sourceID; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
       <img class='icon-sm' src='svg/eye.svg'>
     </a>
-    <?php if ($allowAdd && (!$assignedtree || $assignedtree == $tree)) { ?>
-      <a href="admin_newmedia.php?personID=<?php echo $sourceID; ?>&amp;tree=<?php echo $tree; ?>&amp;linktype=S"><?php echo uiTextSnippet('addmedia'); ?></a>
+    <?php if ($allowAdd) { ?>
+      <a href="admin_newmedia.php?personID=<?php echo $sourceID; ?>&amp;linktype=S"><?php echo uiTextSnippet('addmedia'); ?></a>
     <?php } ?>
     <form name='form1' action='sourcesEditFormAction.php' method='post'>
       <header id='source-header'>
@@ -102,15 +94,6 @@ $headSection->setTitle(uiTextSnippet('modifysource'));
         </div>
       </header>
       <table class='table table-sm'>
-        <tr>
-          <td><?php echo uiTextSnippet('tree'); ?>:</td>
-          <td>
-            <?php echo $treerow['treename']; ?>
-            &nbsp;(<a href="#" onclick="return openChangeTree('source', '<?php echo $tree; ?>', '<?php echo $sourceID; ?>');">
-              <img src='img/ArrowDown.gif'>
-                <?php echo uiTextSnippet('edit'); ?></a>)
-          </td>
-        </tr>
         <tr>
           <td><?php echo uiTextSnippet('shorttitle'); ?>:</td>
           <td>
@@ -141,18 +124,14 @@ $headSection->setTitle(uiTextSnippet('modifysource'));
             <select name="repoID">
               <option value=''></option>
               <?php
-              $query = "SELECT repoID, reponame, gedcom FROM $repositories_table WHERE gedcom = \"$tree\" ORDER BY reponame";
+              $query = "SELECT repoID, reponame, gedcom FROM $repositories_table ORDER BY reponame";
               $reporesult = tng_query($query);
               while ($reporow = tng_fetch_assoc($reporesult)) {
                 echo "    <option value=\"{$reporow['repoID']}\"";
                 if ($reporow['repoID'] == $row['repoID']) {
                   echo " selected";
                 }
-                if (!$assignedtree && $numtrees > 1) {
-                  echo ">{$reporow['reponame']} (" . uiTextSnippet('tree') . ": {$reporow['gedcom']})</option>\n";
-                } else {
-                  echo ">{$reporow['reponame']}</option>\n";
-                }
+                echo ">{$reporow['reponame']}</option>\n";
               }
               tng_free_result($reporesult);
               ?>
@@ -172,7 +151,7 @@ $headSection->setTitle(uiTextSnippet('modifysource'));
           <td><?php echo uiTextSnippet('otherevents'); ?>:</td>
           <td>
             <?php
-            echo "<input type='button' value=\"  " . uiTextSnippet('addnew') . "  \" onClick=\"newEvent('S','$sourceID','$tree');\">&nbsp;\n";
+            echo "<input type='button' value=\"  " . uiTextSnippet('addnew') . "  \" onClick=\"newEvent('S','$sourceID',);\">&nbsp;\n";
             ?>
           </td>
         </tr>
@@ -189,7 +168,6 @@ $headSection->setTitle(uiTextSnippet('modifysource'));
         }
         ?>
       </p>
-      <input name='tree' type='hidden' value="<?php echo $tree; ?>">
       <input name='sourceID' type='hidden' value="<?php echo "$sourceID"; ?>">
       <input name='cw' type='hidden' value="<?php echo "$cw"; ?>">
       <input name='submit2' type='submit' value="<?php echo uiTextSnippet('save'); ?>">

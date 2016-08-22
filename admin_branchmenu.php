@@ -12,17 +12,17 @@ if (!$allowEdit || $assignedbranch) {
   exit;
 }
 
-$query = "SELECT treename FROM $treesTable WHERE gedcom = \"$tree\"";
+$query = "SELECT treename FROM $treesTable";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
 
-$query = "SELECT description FROM $branches_table WHERE gedcom = \"$tree\" and branch = \"$branch\"";
+$query = "SELECT description FROM $branches_table WHERE branch = '$branch'";
 $result = tng_query($query);
 $brow = tng_fetch_assoc($result);
 tng_free_result($result);
 
-$query = "SELECT count(persfamID) as pcount FROM $branchlinks_table WHERE gedcom = \"$tree\" AND branch = \"$branch\"";
+$query = "SELECT count(persfamID) as pcount FROM $branchlinks_table WHERE branch = '$branch'";
 $result = tng_query($query);
 $prow = tng_fetch_assoc($result);
 $pcount = $prow['pcount'];
@@ -47,12 +47,6 @@ $headSection->setTitle(uiTextSnippet('labelbranches'));
     <form action="admin_branchlabels.php" method='post' id="form1" name="form1"
           onSubmit="return validateForm();">
       <table class='table table-sm'>
-        <tr>
-          <td><strong><?php echo uiTextSnippet('tree'); ?>:</strong></td>
-          <td><?php echo $row['treename']; ?>
-            <input name='tree' type='hidden' value="<?php echo $tree; ?>">
-          </td>
-        </tr>
         <tr>
           <td><strong><?php echo uiTextSnippet('branch'); ?>:</strong></td>
           <td><?php echo $brow['description'] . "<br>(" . uiTextSnippet('people') . " + " . uiTextSnippet('families') . " = $pcount*)"; ?>
@@ -99,7 +93,7 @@ $headSection->setTitle(uiTextSnippet('labelbranches'));
                   &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
                 </td>
                 <td>
-                  <a href="#" onclick="return findItem('I', 'personID', '', '<?php echo $tree; ?>', '<?php echo $assignedbranch; ?>');" title="<?php echo uiTextSnippet('find'); ?>">
+                  <a href="#" onclick="return findItem('I', 'personID', '', '<?php echo $assignedbranch; ?>');" title="<?php echo uiTextSnippet('find'); ?>">
                     <img class='icon-sm' src='svg/magnifying-glass.svg'>
                   </a>
                 </td>
@@ -164,7 +158,7 @@ $headSection->setTitle(uiTextSnippet('labelbranches'));
       <br>
       <input id='labelsub' type='submit' value="<?php echo uiTextSnippet('addlabels'); ?>"> 
       <input type='button' value="<?php echo uiTextSnippet('showpeople'); ?>"
-              onclick="window.location.href = 'admin_showbranch.php?tree=<?php echo $tree; ?>&branch=<?php echo $branch; ?>';">
+              onclick="window.location.href = 'admin_showbranch.php?branch=<?php echo $branch; ?>';">
     </form>
     <p>*<?php echo uiTextSnippet('branchdiscl'); ?></p>
     <?php echo $adminFooterSection->build(); ?>
@@ -172,8 +166,6 @@ $headSection->setTitle(uiTextSnippet('labelbranches'));
   <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
   <script src='js/selectutils.js'></script>
   <script>
-    var tree = "<?php echo $tree; ?>";
-    
     function toggleClear(option) {
       $('#overwrite1').fadeOut(300);
       $('#overwrite2').fadeOut(300);

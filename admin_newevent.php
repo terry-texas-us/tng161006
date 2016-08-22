@@ -128,7 +128,6 @@ header("Content-type:text/html; charset=" . $session_charset);
   </div> <!-- .modal-body -->
   <footer class='modal-footer'>
     <input name='persfamID' type='hidden' value="<?php echo $persfamID; ?>">
-    <input name='tree' type='hidden' value="<?php echo $tree; ?>">
     <input name='submit' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
     <input name='cancel' type='button' value="<?php echo uiTextSnippet('cancel'); ?>" onclick="tnglitbox.remove();">
   </footer>

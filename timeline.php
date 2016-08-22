@@ -20,27 +20,23 @@ if ($primaryID) {
 }
 for ($i = 2; $i < 6; $i++) {
   $nextpersonID = "nextpersonID$i";
-  $nexttree = "nexttree$i";
   if ($$nextpersonID != "") {
-    $newentry2 = "timeperson=" . strtoupper($$nextpersonID) . "&timetree=" . $$nexttree;
+    $newentry2 = "timeperson=" . strtoupper($$nextpersonID);
     if (!in_array($newentry2, $timeline)) {
       array_push($timeline, $newentry2);
       $_SESSION['timeline'] = $timeline;
     }
   }
 }
-
-$righttree = checktree($timetree);
-
 $finalarray = array();
 foreach ($timeline as $timeentry) {
   parse_str($timeentry);
   $todelete = $timetree . "_" . $timeperson;
   if ($$todelete != "1") {
-    $result2 = getPersonDataPlusDates($timetree, $timeperson);
+    $result2 = getPersonDataPlusDates($timeperson);
     if ($result2) {
       $row2 = tng_fetch_assoc($result2);
-      $rights = determineLivingPrivateRights($row2, $timetree);
+      $rights = determineLivingPrivateRights($row2);
       $row2['allow_living'] = $rights['living'];
       $row2['allow_private'] = $rights['private'];
       if (($row2['living'] && !$rights['living']) || ($row2['private'] && !$rights['private'])) {
@@ -57,4 +53,4 @@ foreach ($timeline as $timeentry) {
 $timeline = $_SESSION['timeline'] = $finalarray;
 $_SESSION['tng_message'] = $tng_message;
 
-header("Location: timeline2.php?primaryID=$primaryID&tree=$tree&chartwidth=$newwidth");
+header("Location: timeline2.php?primaryID=$primaryID&amp;chartwidth=$newwidth");

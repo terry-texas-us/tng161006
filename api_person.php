@@ -11,7 +11,7 @@ require 'log.php';
 header("Content-Type: application/json; charset=" . $session_charset);
 
 $query = "SELECT *, DATE_FORMAT(changedate,\"%e %b %Y\") as changedate
-    FROM $people_table WHERE personID = \"$personID\" AND gedcom = \"$tree\"";
+    FROM $people_table WHERE personID = '$personID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 if (!tng_num_rows($result)) {
@@ -21,12 +21,10 @@ if (!tng_num_rows($result)) {
 } else {
   tng_free_result($result);
 }
-
 echo "{\n";
 
-$righttree = checktree($tree);
 $rightbranch = checkbranch($row['branch']);
-$rights = determineLivingPrivateRights($row, $righttree);
+$rights = determineLivingPrivateRights($row);
 $row['allow_living'] = $rights['living'];
 $row['allow_private'] = $rights['private'];
 
@@ -34,7 +32,7 @@ $namestr = getName($row);
 
 $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $namestr);
 
-writelog("<a href=\"peopleShowPerson.php?personID=$personID&amp;tree=$tree\">" . uiTextSnippet('indinfofor') . " $logname ($personID)</a>");
+writelog("<a href=\"peopleShowPerson.php?personID=$personID\">" . uiTextSnippet('indinfofor') . " $logname ($personID)</a>");
 
 $events = array();
 echo api_person($row, $fullevents);

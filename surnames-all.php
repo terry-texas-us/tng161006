@@ -2,8 +2,7 @@
 set_time_limit(0);
 require 'tng_begin.php';
 
-$treestr = $tree ? " (" . uiTextSnippet('tree') . ": $tree)" : "";
-$logstring = "<a href=\"surnames-all.php?tree=$tree\">" . uiTextSnippet('surnamelist') . ": " . uiTextSnippet('allsurnames') . "$treestr</a>";
+$logstring = "<a href='surnames-all.php'>" . uiTextSnippet('surnamelist') . ": " . uiTextSnippet('allsurnames') . "</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -22,21 +21,13 @@ $headSection->setTitle(uiTextSnippet('surnamelist') . " - " . uiTextSnippet('all
     <h2><img class='icon-md' src='svg/person.svg'><?php echo uiTextSnippet('surnamelist'); ?></h2>
     <br class='clearleft'>
     <?php
-    echo treeDropdown(array('startform' => true, 'endform' => true, 'action' => 'surnames-all', 'method' => 'get', 'name' => 'form1', 'id' => 'form1'));
-
-    if ($tree) {
-      $wherestr = "WHERE gedcom = \"$tree\"";
-      $wherestr2 = "AND gedcom = \"$tree\"";
-    } else {
-      $wherestr = "";
-      $wherestr2 = "";
-    }
-    $treestr = $orgtree ? "&amp;tree=$tree" : "";
+    $wherestr = "";
+    $wherestr2 = "";
 
     $allwhere = getLivingPrivateRestrictions($people_table, false, false);
 
     if ($allwhere) {
-      $wherestr .= $wherestr ? " AND $allwhere" : "WHERE $allwhere";
+      $wherestr .= "WHERE $allwhere";
       $wherestr2 .= " AND $allwhere";
     }
     $linkstr = "";

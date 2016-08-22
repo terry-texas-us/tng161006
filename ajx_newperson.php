@@ -9,13 +9,9 @@ if (!$allowAdd) {
   header("Location: login.php?message=" . urlencode($message));
   exit;
 }
-$query = "SELECT treename FROM $treesTable WHERE gedcom=\"$tree\" ORDER BY treename";
-$result = tng_query($query);
-$treerow = tng_fetch_assoc($result);
-tng_free_result($result);
 
 if ($father) {
-  $query = "SELECT lnprefix, lastname, branch FROM $people_table WHERE gedcom=\"$tree\" AND personID=\"$father\"";
+  $query = "SELECT lnprefix, lastname, branch FROM $people_table WHERE personID = '$father'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   tng_free_result($result);
@@ -60,12 +56,11 @@ require_once 'eventlib.php';
     </div>
     <div class='row'>
       <div class='col-md-6'>
-        <?php echo uiTextSnippet('tree') . ": " . $treerow['treename']; ?>
       </div>
       <div class='col-md-6'>
         <?php require_once 'branches.php'; ?>
         <br>
-        <?php echo buildBranchSelectControl($row, $tree, $assignedbranch, $branches_table); ?>
+        <?php echo buildBranchSelectControl($row, $assignedbranch, $branches_table); ?>
       </div>
     </div>
     <div id='person-names'>
@@ -144,7 +139,6 @@ require_once 'eventlib.php';
   </div> <!-- .modal-body -->
   <footer class='modal-footer'>
     <input name='newperson' type='hidden' value='ajax'>
-    <input name='tree1' type='hidden' value="<?php echo $tree; ?>">
     <input name='familyID' type='hidden' value="<?php echo $familyID; ?>">
     <input name='type' type='hidden' value="<?php echo $type; ?>">
     <?php if (!$lnprefixes) {echo "<input name='lnprefix' type='hidden' value=''>";} ?>

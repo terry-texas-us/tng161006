@@ -36,7 +36,7 @@ function addCitation(form) {
     return false;
 }
 
-function deleteCitation(citationID, personID, tree, eventID) {
+function deleteCitation(citationID, personID, eventID) {
     'use strict';
     if (confirm(textSnippet('confdeletecite'))) {
         var tds = $('tr#row_' + citationID + ' td');
@@ -44,7 +44,7 @@ function deleteCitation(citationID, personID, tree, eventID) {
         $.each(tds, function (index, item) {
             $(item).effect('highlight', {color: '#ff9999'}, 2500);
         });
-        params = {citationID: citationID, personID: personID, tree: tree, eventID: eventID};
+        params = {citationID: citationID, personID: personID, eventID: eventID};
         $.ajax({
             url: 'admin_deletecitation.php',
             data: params,

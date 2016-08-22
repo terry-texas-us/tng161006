@@ -88,7 +88,6 @@ $tngconfig['showprint'] = "0";
 $tngconfig['showbmarks'] = "0";
 $tngconfig['hidechr'] = "0";
 $tngconfig['password_type'] = "md5";
-$tngconfig['places1tree'] = "0";
 $tngconfig['autogeo'] = "0";
 $dbowner = "Terry";
 $timeOffset = "0";
@@ -131,8 +130,7 @@ $tngconfig['calstart'] = "0";
 $tngconfig['pardata'] = "2";
 $tngconfig['oldids'] = "";
 $tngconfig['lastimport'] = "";
-$defaulttree = "twall";
 $tng_notinstalled = "";
 
-require $subroot . 'customconfig.php';
+@include($subroot . "customconfig.php");
 ?>

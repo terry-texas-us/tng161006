@@ -30,7 +30,7 @@ if (!$private) {
 $query = "UPDATE $notelinks_table SET secret=\"$private\" WHERE ID=\"$ID\"";
 $result = tng_query($query);
 
-adminwritelog(uiTextSnippet('modifynote') . ": $tree/$persfamID/$ID/$eventID");
+adminwritelog(uiTextSnippet('modifynote') . ": $persfamID/$ID/$eventID");
 
 $orgnote = cleanIt($orgnote);
 $truncated = truncateIt(stripslashes($orgnote), 75);

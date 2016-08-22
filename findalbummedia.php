@@ -4,13 +4,7 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-  $tree = $assignedtree;
-} else {
-  $wherestr = "";
-}
-$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 initMediaTypes();
 header("Content-type:text/html; charset=" . $session_charset);
 ?>
@@ -23,7 +17,6 @@ header("Content-type:text/html; charset=" . $session_charset);
       <table class='table table-sm'>
         <tr>
           <td><?php echo uiTextSnippet('mediatype'); ?>:</td>
-          <td><?php echo uiTextSnippet('tree'); ?>:</td>
           <td colspan='2'><span><?php echo uiTextSnippet('searchfor'); ?>: </span></td>
         </tr>
         <tr>
@@ -36,24 +29,6 @@ header("Content-type:text/html; charset=" . $session_charset);
                 $msgID = $mediatype['ID'];
                 echo "  <option value=\"$msgID\">" . $mediatype['display'] . "</option>\n";
               }
-              ?>
-            </select>
-          </td>
-          <td>
-            <select name='searchtree' onchange="getNewMedia(document.find2, 0)">
-              <?php
-              if (!$assignedtree) {
-                echo "  <option value=''>" . uiTextSnippet('alltrees') . "</option>\n";
-              }
-              $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
-              while ($treerow = tng_fetch_assoc($treeresult)) {
-                echo "  <option value=\"{$treerow['gedcom']}\"";
-                if ($treerow['gedcom'] == $tree) {
-                  echo " selected";
-                }
-                echo ">{$treerow['treename']}</option>\n";
-              }
-              tng_free_result($treeresult);
               ?>
             </select>
           </td>

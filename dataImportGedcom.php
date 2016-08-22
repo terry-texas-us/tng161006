@@ -12,14 +12,8 @@ if (!$allowAdd || !$allowEdit || $assignedbranch) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-if ($assignedtree) {
-  $wherestr = "WHERE gedcom = \"$assignedtree\"";
-} else {
-  $wherestr = "";
-}
-$query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $result = tng_query($query);
-$numtrees = tng_num_rows($result);
 
 $treenum = 0;
 $trees = [];
@@ -35,16 +29,6 @@ header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('datamaint'));
 
 $allow_export = 1;
-if (!$allow_ged && $assignedtree) {
-  $query = "SELECT disallowgedcreate FROM $treesTable WHERE gedcom = \"$assignedtree\"";
-  $disresult = tng_query($query);
-  $row = tng_fetch_assoc($disresult);
-  
-  if ($row['disallowgedcreate']) {
-    $allow_export = 0;
-  }
-  tng_free_result($disresult);
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -107,9 +91,6 @@ if (!$allow_ged && $assignedtree) {
             <div class='col-md-6'>
               <select class='form-control' id='tree1' name='tree1' onchange="getBranches(this, this.selectedIndex);">
                 <?php
-                if ($numtrees != 1) {
-                  echo "  <option value=''></option>\n";
-                }
                 $treectr = 0;
                 for ($i = 0; $i < $treenum; $i++) {
                   echo " <option value=\"{$trees[$treectr]}\"";
@@ -123,9 +104,7 @@ if (!$allow_ged && $assignedtree) {
               </select>
             </div>
             <div class='col-md-3'>
-              <?php if (!$assignedtree) { ?>
               <button class='btn btn-outline-primary' id='addnewtree' name='newtree' type='button'><?php echo uiTextSnippet('addnewtree'); ?></button>
-              <?php } ?>
             </div>
           </div>
           <div class='row' id='destbranch' style='display: none'>

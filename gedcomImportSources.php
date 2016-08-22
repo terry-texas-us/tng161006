@@ -49,8 +49,15 @@ function handleSource($persfamID, $prevlevel) {
 }
 
 function getSourceRecord($sourceID, $prevlevel) {
-  global $sources_table, $tree, $savestate, $lineinfo, $stdnotes, $notecount;
-  global $currentuser, $tngimpcfg, $today, $prefix;
+  global $sources_table;
+  global $savestate;
+  global $lineinfo;
+  global $stdnotes;
+  global $notecount;
+  global $currentuser;
+  global $tngimpcfg;
+  global $today;
+  global $prefix;
 
   $sourceID = adjustID($sourceID, $savestate['soffset']);
 
@@ -148,12 +155,13 @@ function getSourceRecord($sourceID, $prevlevel) {
     }
   }
   $inschangedt = $changedate ? $changedate : ($tngimpcfg['chdate'] ? "" : $today);
-  $query = "INSERT IGNORE INTO $sources_table (sourceID, callnum, title, author, publisher, shorttitle, repoID, actualtext, changedate, gedcom, changedby, type, other, comments)  VALUES(\"$sourceID\", \"{$info['CALN']}\", \"{$info['TITL']}\", \"{$info['AUTH']}\", \"{$info['PUBL']}\", \"{$info['ABBR']}\", \"{$info['REPO']}\", \"" . trim($info['TEXT']) . "\", \"$changedate\", \"$tree\", \"$currentuser\", \"\",\"\",\"\")";
+  $query = "INSERT IGNORE INTO $sources_table (sourceID, callnum, title, author, publisher, shorttitle, repoID, actualtext, changedate, gedcom, changedby, type, other, comments) "
+      . "VALUES('$sourceID', \"{$info['CALN']}\", \"{$info['TITL']}\", \"{$info['AUTH']}\", \"{$info['PUBL']}\", \"{$info['ABBR']}\", \"{$info['REPO']}\", \"" . trim($info['TEXT']) . "\", '$changedate', '', '$currentuser', '', '', '')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   $success = tng_affected_rows();
   if (!$success && $savestate['del'] != "no") {
     if ($savestate['neweronly'] && $inschangedt) {
-      $query = "SELECT changedate FROM $sources_table WHERE sourceID=\"$sourceID\" AND gedcom = \"$tree\"";
+      $query = "SELECT changedate FROM $sources_table WHERE sourceID='$sourceID'";
       $result = tng_query($query);
       $srcrow = tng_fetch_assoc($result);
       $goahead = $inschangedt > $srcrow['changedate'] ? 1 : 0;
@@ -165,7 +173,7 @@ function getSourceRecord($sourceID, $prevlevel) {
     }
     if ($goahead) {
       $chdatestr = $inschangedt ? ", changedate=\"$inschangedt\"" : "";
-      $query = "UPDATE $sources_table SET callnum=\"{$info['CALN']}\", title=\"{$info['TITL']}\", author=\"{$info['AUTH']}\", publisher=\"{$info['PUBL']}\", shorttitle=\"{$info['ABBR']}\", repoID=\"{$info['REPO']}\", actualtext=\"" . trim($info['TEXT']) . "\", changedby=\"$currentuser\" $chdatestr WHERE sourceID=\"$sourceID\" AND gedcom = \"$tree\"";
+      $query = "UPDATE $sources_table SET callnum=\"{$info['CALN']}\", title=\"{$info['TITL']}\", author=\"{$info['AUTH']}\", publisher=\"{$info['PUBL']}\", shorttitle=\"{$info['ABBR']}\", repoID=\"{$info['REPO']}\", actualtext=\"" . trim($info['TEXT']) . "\", changedby=\"$currentuser\" $chdatestr WHERE sourceID = '$sourceID'";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $success = 1;
 
@@ -228,8 +236,16 @@ function getRestOfSource($sourceID, $prevlevel) {
 }
 
 function getRepoRecord($repoID, $prevlevel) {
-  global $repositories_table, $tree, $savestate, $lineinfo, $stdnotes, $notecount;
-  global $currentuser, $tngimpcfg, $today, $address_table, $prefix;
+  global $repositories_table;
+  global $savestate;
+  global $lineinfo;
+  global $stdnotes;
+  global $notecount;
+  global $currentuser;
+  global $tngimpcfg;
+  global $today;
+  global $address_table;
+  global $prefix;
 
   $repoID = adjustID($repoID, $savestate['roffset']);
 
@@ -309,12 +325,12 @@ function getRepoRecord($repoID, $prevlevel) {
     }
   }
   $inschangedt = $changedate ? $changedate : ($tngimpcfg['chdate'] ? "" : $today);
-  $query = "INSERT IGNORE INTO $repositories_table (repoID, reponame, changedate, gedcom, changedby)  VALUES(\"$repoID\", \"{$info['NAME']}\", \"$inschangedt\", \"$tree\", \"$currentuser\")";
+  $query = "INSERT IGNORE INTO $repositories_table (repoID, reponame, changedate, gedcom, changedby)  VALUES('$repoID', \"{$info['NAME']}\", '$inschangedt', '', '$currentuser')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   $success = tng_affected_rows();
   if (!$success && $savestate['del'] != "no") {
     if ($savestate['neweronly'] && $inschangedt) {
-      $query = "SELECT changedate FROM $repositories_table WHERE repoID=\"$repoID\" AND gedcom = \"$tree\"";
+      $query = "SELECT changedate FROM $repositories_table WHERE repoID = '$repoID'";
       $result = tng_query($query);
       $reporow = tng_fetch_assoc($result);
       $goahead = $inschangedt > $reporow['changedate'] ? 1 : 0;
@@ -329,7 +345,7 @@ function getRepoRecord($repoID, $prevlevel) {
       if (!isset($info['ADDR'])) {
         $info['ADDR'] = 0;
       }
-      $query = "UPDATE $repositories_table SET reponame=\"{$info['NAME']}\", addressID=\"{$info['ADDR']}\", changedby=\"$currentuser\" $chdatestr WHERE repoID=\"$repoID\" AND gedcom = \"$tree\"";
+      $query = "UPDATE $repositories_table SET reponame=\"{$info['NAME']}\", addressID=\"{$info['ADDR']}\", changedby=\"$currentuser\" $chdatestr WHERE repoID = '$repoID'";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $success = 1;
 
@@ -352,10 +368,11 @@ function getRepoRecord($repoID, $prevlevel) {
       processMedia($mmcount, $mminfo, $repoID, "");
     }
     if (is_array($address)) {
-      $query = "INSERT INTO $address_table (gedcom, address1, address2, city, state, zip, country, www, email, phone) VALUES(\"$tree\", \"{$address['ADR1']}\", \"{$address['ADR2']}\", \"{$address['CITY']}\", \"{$address['STAE']}\", \"{$address['POST']}\",  \"{$address['CTRY']}\", \"{$address['WWW']}\", \"{$address['EMAIL']}\", \"{$address['PHON']}\")";
+      $query = "INSERT INTO $address_table (gedcom, address1, address2, city, state, zip, country, www, email, phone) "
+          . "VALUES('', \"{$address['ADR1']}\", \"{$address['ADR2']}\", \"{$address['CITY']}\", \"{$address['STAE']}\", \"{$address['POST']}\",  \"{$address['CTRY']}\", \"{$address['WWW']}\", \"{$address['EMAIL']}\", \"{$address['PHON']}\")";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $info['ADDR'] = tng_insert_id();
-      $query = "UPDATE $repositories_table SET addressID=\"{$info['ADDR']}\" WHERE repoID=\"$repoID\" AND gedcom = \"$tree\"";
+      $query = "UPDATE $repositories_table SET addressID=\"{$info['ADDR']}\" WHERE repoID = '$repoID'";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     }
   }

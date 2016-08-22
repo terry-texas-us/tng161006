@@ -6,22 +6,17 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-if (!$allowEdit || ($assignedtree && $assignedtree != $tree)) {
+if (!$allowEdit) {
   $message = uiTextSnippet('norights');
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
 
-$query = "SELECT * FROM $branches_table WHERE gedcom = \"$tree\" AND branch = \"$branch\"";
+$query = "SELECT * FROM $branches_table WHERE branch = '$branch'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 $row['description'] = preg_replace('/\"/', '&#34;', $row['description']);
 tng_free_result($result);
-
-$query = "SELECT treename FROM $treesTable where gedcom = \"$tree\"";
-$treeresult = tng_query($query);
-$treerow = tng_fetch_assoc($treeresult);
-tng_free_result($treeresult);
 
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifytree'));
@@ -41,10 +36,6 @@ $headSection->setTitle(uiTextSnippet('modifytree'));
     ?>
     <form id='form1' name='form1' action='branchesEditFormAction.php' method='post' onSubmit="return validateForm();">
       <table class='table table-sm'>
-        <tr>
-          <td><?php echo uiTextSnippet('tree'); ?>:</td>
-          <td><?php echo $treerow['treename']; ?></td>
-        </tr>
         <tr>
           <td><?php echo uiTextSnippet('branchid'); ?>:</td>
           <td><?php echo $branch; ?></td>
@@ -71,7 +62,7 @@ $headSection->setTitle(uiTextSnippet('modifytree'));
                   &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;
                 </td>
                 <td>
-                  <a href="#" title="<?php echo uiTextSnippet('find'); ?>" onclick="return findItem('I', 'personID', '', '<?php echo $tree; ?>', '<?php echo $assignedbranch; ?>');">
+                  <a href="#" title="<?php echo uiTextSnippet('find'); ?>" onclick="return findItem('I', 'personID', '', '<?php echo $assignedbranch; ?>');">
                     <img class='icon-sm' src='svg/magnifying-glass.svg'>
                   </a>
                 </td>
@@ -123,7 +114,6 @@ $headSection->setTitle(uiTextSnippet('modifytree'));
       </table>
       <span>
         <br></span>
-      <input name='tree' type='hidden' value="<?php echo $tree; ?>">
       <input name='branch' type='hidden' value="<?php echo $branch; ?>">
 
       <input name='submit' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
@@ -138,7 +128,6 @@ $headSection->setTitle(uiTextSnippet('modifytree'));
 <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
 <script src='js/selectutils.js'></script>
 <script>
-  var tree = '<?php echo $tree; ?>';
   var branch = '<?php echo $branch; ?>';
 
 function validateForm() {

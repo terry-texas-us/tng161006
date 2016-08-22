@@ -18,11 +18,8 @@ if ($pedigree['stdesc']) {
   $imgtitle = uiTextSnippet('collapse');
 }
 
-function getIndividual($key, $sex, $level, $trail) 
-{
-  global $tree;
+function getIndividual($key, $sex, $level, $trail) {
   global $generations;
-  global $righttree;
   global $divctr;
   global $display;
   global $excolimg;
@@ -44,13 +41,13 @@ function getIndividual($key, $sex, $level, $trail)
   }
 
   if ($spouse) {
-    $result = getSpouseFamilyMinimal($tree, $self, $key, $spouseorder);
+    $result = getSpouseFamilyMinimal($self, $key, $spouseorder);
   } elseif ($key) {
-    $result = getSpouseFamilyMinimalUnion($tree, $key);
+    $result = getSpouseFamilyMinimalUnion($key);
   }
   $marrtot = tng_num_rows($result);
   if (!$marrtot && $key) {
-    $result = getSpouseFamilyMinimalUnion($tree, $key);
+    $result = getSpouseFamilyMinimalUnion($key);
     $self = $spouse = $spouseorder = "";
   }
 
@@ -62,19 +59,19 @@ function getIndividual($key, $sex, $level, $trail)
         $spouse = $row['husband'] == $key ? 'wife' : 'husband';
       }
       if ($row[$spouse]) {
-        $spouseresult = getPersonData($tree, $row[$spouse]);
+        $spouseresult = getPersonData($row[$spouse]);
         if ($spouseresult) {
           $spouserow = tng_fetch_assoc($spouseresult);
-          $srights = determineLivingPrivateRights($spouserow, $righttree);
+          $srights = determineLivingPrivateRights($spouserow);
           $spouserow['allow_living'] = $srights['living'];
           $spouserow['allow_private'] = $srights['private'];
           $spousename = getName($spouserow);
           $vitalinfo = getVitalDates($spouserow);
-          $spousestr = "&nbsp;<a href=\"peopleShowPerson.php?personID={$spouserow['personID']}&amp;tree=$tree\">$spousename</a>&nbsp; $vitalinfo<br>";
+          $spousestr = "&nbsp;<a href=\"peopleShowPerson.php?personID={$spouserow['personID']}\">$spousename</a>&nbsp; $vitalinfo<br>";
         }
       }
 
-      $result2 = getChildrenData($tree, $row['familyID']);
+      $result2 = getChildrenData($row['familyID']);
       $numkids = tng_num_rows($result2);
       if ($numkids) {
         $divname = "fc$divctr";
@@ -84,12 +81,12 @@ function getIndividual($key, $sex, $level, $trail)
 
         while ($crow = tng_fetch_assoc($result2)) {
           $newtrail = "$trail,{$row['familyID']},{$crow['personID']}";
-          $crights = determineLivingPrivateRights($crow, $righttree);
+          $crights = determineLivingPrivateRights($crow);
           $crow['allow_living'] = $crights['living'];
           $crow['allow_private'] = $crights['private'];
           $cname = getName($crow);
           $vitalinfo = getVitalDates($crow);
-          $rval .= str_repeat("  ", ($level - 1) * 8) . "<li>$level &nbsp;<a href=\"peopleShowPerson.php?personID={$crow['personID']}&amp;tree=$tree\">$cname</a>&nbsp;<a href=\"desctracker.php?trail=$newtrail&amp;tree=$tree\" title=\"" . uiTextSnippet('graphdesc') . "\"><img src=\"img/dchart.gif\" width='10' height='9' alt=\"" . uiTextSnippet('graphdesc') . "\"></a> $vitalinfo\n";
+          $rval .= str_repeat("  ", ($level - 1) * 8) . "<li>$level &nbsp;<a href=\"peopleShowPerson.php?personID={$crow['personID']}\">$cname</a>&nbsp;<a href=\"desctracker.php?trail=$newtrail\" title=\"" . uiTextSnippet('graphdesc') . "\"><img src=\"img/dchart.gif\" width='10' height='9' alt=\"" . uiTextSnippet('graphdesc') . "\"></a> $vitalinfo\n";
           if ($level < $generations) {
             $ind = getIndividual($crow['personID'], $crow[sex], $level + 1, $newtrail);
             if ($ind) {
@@ -98,19 +95,17 @@ function getIndividual($key, $sex, $level, $trail)
             }
           } else {
             //do union to check for children where person is either husband or wife
-            //echo "<br>$query<br>";
-            $nxtfams = getSpouseFamilyMinimalUnion($tree, $crow['personID']);
+            $nxtfams = getSpouseFamilyMinimalUnion($crow['personID']);
             $nxtkids = 0;
             while ($nxtfam = tng_fetch_assoc($nxtfams)) {
-              //echo "$query<br>kids=$nxtrow[ccount], tot=$nxtkids<br>";
-              $result3 = countChildren($tree, $nxtfam['familyID']);
+              $result3 = countChildren($nxtfam['familyID']);
               $nxtrow = tng_fetch_assoc($result3);
               $nxtkids += $nxtrow['ccount'];
               tng_free_result($result3);
             }
             if ($nxtkids) {
               //chart continues
-              $rval .= "[<a href=\"descendtext.php?personID={$crow['personID']}&amp;tree=$tree\" title=\"" . uiTextSnippet('popupnote3') . "\"> =&gt;</a>]";
+              $rval .= "[<a href=\"descendtext.php?personID={$crow['personID']}\" title=\"" . uiTextSnippet('popupnote3') . "\"> =&gt;</a>]";
             }
           }
           $rval .= str_repeat("  ", ($level - 1) * 8) . "</li>\n";
@@ -155,30 +150,27 @@ function getVitalDates($row)
   }
   return $vitalinfo;
 }
-
 $level = 1;
 $key = $personID;
 
-$result = getPersonFullPlusDates($tree, $personID);
+$result = getPersonFullPlusDates($personID);
 if ($result) {
   $row = tng_fetch_assoc($result);
-  $righttree = checktree($tree);
-  $rightbranch = $righttree ? checkbranch($row['branch']) : false;
-  $rights = determineLivingPrivateRights($row, $righttree, $rightbranch);
+  $rightbranch = checkbranch($row['branch']);
+  $rights = determineLivingPrivateRights($row, $rightbranch);
   $row['allow_living'] = $rights['living'];
   $row['allow_private'] = $rights['private'];
   $namestr = getName($row);
   $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $namestr);
 }
-
-$treeResult = getTreeSimple($tree);
+$treeResult = getTreeSimple();
 $treerow = tng_fetch_assoc($treeResult);
 $disallowgedcreate = $treerow['disallowgedcreate'];
 $allowpdf = !$treerow['disallowpdf'] || ($allow_pdf && $rightbranch);
 tng_free_result($treeResult);
 
-writelog("<a href=\"descendtext.php?personID=$personID&amp;tree=$tree\">" . uiTextSnippet('descendfor') . " $logname ($personID)</a>");
-preparebookmark("<a href=\"descendtext.php?personID=$personID&amp;tree=$tree\">" . uiTextSnippet('descendfor') . " $namestr ($personID)</a>");
+writelog("<a href=\"descendtext.php?personID=$personID\">" . uiTextSnippet('descendfor') . " $logname ($personID)</a>");
+preparebookmark("<a href=\"descendtext.php?personID=$personID\">" . uiTextSnippet('descendfor') . " $namestr ($personID)</a>");
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
@@ -214,7 +206,7 @@ $headSection->setTitle(uiTextSnippet('descendfor') . " $namestr");
     }
 
     $innermenu = uiTextSnippet('generations') . ": &nbsp;";
-    $innermenu .= "<select name=\"generations\" class=\"small\" onchange=\"window.location.href='descendtext.php?personID=$personID&amp;tree=$tree&amp;display=$display&amp;generations=' + this.options[this.selectedIndex].value\">\n";
+    $innermenu .= "<select name=\"generations\" class=\"small\" onchange=\"window.location.href='descendtext.php?personID=$personID&amp;display=$display&amp;generations=' + this.options[this.selectedIndex].value\">\n";
     for ($i = 1; $i <= $pedigree['maxdesc']; $i++) {
       $innermenu .= "<option value=\"$i\"";
       if ($i == $generations) {
@@ -223,16 +215,16 @@ $headSection->setTitle(uiTextSnippet('descendfor') . " $namestr");
       $innermenu .= ">$i</option>\n";
     }
     $innermenu .= "</select>&nbsp;&nbsp;&nbsp;\n";
-    $innermenu .= "<a href=\"descend.php?personID=$personID&amp;tree=$tree&amp;display=standard&amp;generations=$generations\">" .
+    $innermenu .= "<a href=\"descend.php?personID=$personID&amp;display=standard&amp;generations=$generations\">" .
             uiTextSnippet('pedstandard') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"descend.php?personID=$personID&amp;tree=$tree&amp;display=compact&amp;generations=$generations\">" .
+    $innermenu .= "<a href=\"descend.php?personID=$personID&amp;display=compact&amp;generations=$generations\">" .
             uiTextSnippet('pedcompact') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"descendtext.php?personID=$personID&amp;tree=$tree&amp;generations=$generations\">" .
+    $innermenu .= "<a href=\"descendtext.php?personID=$personID&amp;generations=$generations\">" .
             uiTextSnippet('pedtextonly') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"register.php?personID=$personID&amp;tree=$tree&amp;generations=$generations\">" .
+    $innermenu .= "<a href=\"register.php?personID=$personID&amp;generations=$generations\">" .
             uiTextSnippet('regformat') . "</a>\n";
     if ($generations <= 12 && $allowpdf) {
-      $innermenu .= " &nbsp;&nbsp; | &nbsp;&nbsp; <a href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=desc&amp;personID=$personID&amp;tree=$tree&amp;generations=$generations');return false;\">PDF</a>\n";
+      $innermenu .= " &nbsp;&nbsp; | &nbsp;&nbsp; <a href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=desc&amp;personID=$personID&amp;generations=$generations');return false;\">PDF</a>\n";
     }
 
     beginFormElement("descend", "get", "form1", "form1");
@@ -258,7 +250,7 @@ $headSection->setTitle(uiTextSnippet('descendfor') . " $namestr");
         <?php
         $vitalinfo = getVitalDates($row);
         echo "<ul class=\"first\">\n";
-        echo   "<li>$level &nbsp;<a href=\"peopleShowPerson.php?personID=$personID&amp;tree=$tree\">$namestr</a>&nbsp; $vitalinfo\n";
+        echo   "<li>$level &nbsp;<a href=\"peopleShowPerson.php?personID=$personID\">$namestr</a>&nbsp; $vitalinfo\n";
 
         if ($generations > 1) {
           $ind = getIndividual($key, $row['sex'], $level + 1, $personID);

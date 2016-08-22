@@ -5,12 +5,6 @@ require 'adminlib.php';
 $adminLogin = 1;
 require 'checklogin.php';
 
-if ($assignedtree) {
-  $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
-  exit;
-}
-
 require 'adminlog.php';
 
 if ($table == "all") {
@@ -25,7 +19,6 @@ if ($table == "all") {
   $tablename = $table;
   $message = uiTextSnippet('table') . " $tablename " . uiTextSnippet('succoptimized') . ".";
 }
-
 foreach ($tablelist as $thistable) {
   $query = "OPTIMIZE TABLE $thistable";
   $result = tng_query($query);
