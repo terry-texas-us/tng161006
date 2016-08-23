@@ -238,13 +238,13 @@ if (($mysplname && $mygender) || $spqualify == 'exists' || $spqualify == "dnexis
   $query = "SELECT p.ID, spouse.personID as spersonID, p.personID, p.lastname, p.lnprefix, p.firstname, p.living, p.private,
     p.branch, p.nickname, p.suffix, p.prefix, p.nameorder, p.title, p.birthplace, p.birthdate, p.deathplace, p.deathdate,
     p.altbirthdate, p.altbirthplace, p.burialdate, p.burialplace, p.gedcom, treename
-    FROM ($people_table as p, $families_table, $people_table as spouse, $treesTable) $cejoin
+    FROM ($people_table as p, $families_table, $people_table as spouse) $cejoin
     $allwhere AND ($gstring)
     $orderstr LIMIT $newoffset" . $maxsearchresults;
   $showspouse = "yess";
   $query2 = "SELECT count(p.ID) as pcount
         FROM ($people_table as p, $families_table, $people_table as spouse) $cejoin
-    $allwhere AND (p.gedcom=$families_table.gedcom AND spouse.gedcom=$families_table.gedcom AND $gstring)";
+    $allwhere AND ($gstring)";
 } else {
   if ($showspouse == "yes") {
     $families_join = "LEFT JOIN $families_table AS families1 ON (p.personID = families1.husband) LEFT JOIN $families_table AS families2 ON (p.personID = families2.wife ) ";    // added IDF Apr 03
@@ -374,11 +374,11 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
         echo "<td>$i</td>\n";
         $i++;
         echo "<td>\n";
-          echo "<div class='person-img' id=\"mi{$row['gedcom']}_{$row['personID']}\">\n";
-            echo "<div class='person-prev' id=\"prev{$row['gedcom']}_{$row['personID']}\"></div>\n";
+          echo "<div class='person-img' id=\"mi_{$row['personID']}\">\n";
+            echo "<div class='person-prev' id=\"prev_{$row['personID']}\"></div>\n";
           echo "</div>\n";
           echo "<a href=\"pedigree.php?personID={$row['personID']}\">$chartlink</a> ";
-          echo "<a href=\"peopleShowPerson.php?personID={$row['personID']}\" class=\"pers\" id=\"p{$row['personID']}_t{$row['gedcom']}\">$name</a>";
+          echo "<a href=\"peopleShowPerson.php?personID={$row['personID']}\" class=\"pers\" id=\"p{$row['personID']}_t\">$name</a>";
         echo "</td>";
 
         if ($showspouse) {

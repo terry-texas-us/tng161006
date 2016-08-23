@@ -74,8 +74,8 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
       $allwhere .= " AND " . $more;
     }
     //select from people where date later than cutoff, order by changedate descending, limit = 10
-    $query = "SELECT p.personID, lastname, lnprefix, firstname, birthdate, prefix, suffix, nameorder, living, private, branch, DATE_FORMAT(changedate,'%e %b %Y') as changedatef, changedby, LPAD(SUBSTRING_INDEX(birthdate, ' ', -1),4,'0') as birthyear, birthplace, altbirthdate, LPAD(SUBSTRING_INDEX(altbirthdate, ' ', -1),4,'0') as altbirthyear, altbirthplace, p.gedcom as gedcom, treename
-      FROM $people_table as p, $treesTable WHERE $cutoffstr 1=1 $allwhere
+    $query = "SELECT p.personID, lastname, lnprefix, firstname, birthdate, prefix, suffix, nameorder, living, private, branch, DATE_FORMAT(changedate,'%e %b %Y') as changedatef, changedby, LPAD(SUBSTRING_INDEX(birthdate, ' ', -1),4,'0') as birthyear, birthplace, altbirthdate, LPAD(SUBSTRING_INDEX(altbirthdate, ' ', -1),4,'0') as altbirthyear, altbirthplace
+      FROM $people_table as p WHERE $cutoffstr 1=1 $allwhere
       ORDER BY changedate DESC, lastname, firstname, birthyear, altbirthyear LIMIT $change_limit";
     $result = tng_query($query);
     if (tng_num_rows($result)) {
@@ -123,11 +123,11 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
             echo "<tr>\n";
               echo "<td><a href=\"peopleShowPerson.php?personID={$row['personID']}\">{$row['personID']}</a></td>";
             echo "<td>\n";
-              echo "<div class='person-img' id=\"mi{$row['gedcom']}_{$row['personID']}\">\n";
-                echo "<div class='person-prev' id=\"prev{$row['gedcom']}_{$row['personID']}\"></div>\n";
+              echo "<div class='person-img' id=\"mi_{$row['personID']}\">\n";
+                echo "<div class='person-prev' id=\"prev_{$row['personID']}\"></div>\n";
               echo "</div>\n";
               echo "<a href=\"pedigree.php?personID={$row['personID']}\">$chartlink</a>\n";
-              echo "<a href=\"peopleShowPerson.php?personID={$row['personID']}\" class='pers' id=\"p{$row['personID']}_t{$row['gedcom']}\">$namestr</a>\n";
+              echo "<a href=\"peopleShowPerson.php?personID={$row['personID']}\" class='pers' id=\"p{$row['personID']}_t\">$namestr</a>\n";
             echo "</td>\n";
             echo "<td>$birthdate</td><td>$birthplacestr</td>";
             echo "<td>" . displayDate($row['changedatef']) . ($currentuser ? " ({$row['changedby']})" : "") . "</td></tr>\n";
@@ -145,11 +145,8 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
     if ($more) {
       $allwhere .= " AND " . $more;
     }
-    $query = "SELECT familyID, husband, wife, marrdate, $families_table.gedcom as gedcom, firstname, lnprefix, lastname, prefix, suffix, nameorder,
-        $families_table.living as fliving, $families_table.private as fprivate, $people_table.living as living, $people_table.private as private,
-        $people_table.branch as branch, $families_table.gedcom as gedcom, $families_table.branch as fbranch, DATE_FORMAT($families_table.changedate,'%e %b %Y') as changedatef,
-        $families_table.changedby, treename
-      FROM ($families_table, $treesTable)
+    $query = "SELECT familyID, husband, wife, marrdate, firstname, lnprefix, lastname, prefix, suffix, nameorder, $families_table.living as fliving, $families_table.private as fprivate, $people_table.living as living, $people_table.private as private, $people_table.branch as branch, $families_table.branch as fbranch, DATE_FORMAT($families_table.changedate,'%e %b %Y') as changedatef, $families_table.changedby
+      FROM ($families_table)
       LEFT JOIN $people_table ON $people_table.personID = husband
       WHERE $famcutoffstr $allwhere
       ORDER BY $families_table.changedate DESC, lastname LIMIT $change_limit";

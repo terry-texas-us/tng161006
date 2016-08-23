@@ -112,8 +112,7 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
           }
 
           //loop through custom event types where keep=1, not a standard event
-          $query = "SELECT eventtypeID, tag, display FROM $eventtypes_table
-        WHERE keep=\"1\" AND type=\"I\" ORDER BY display";
+          $query = "SELECT eventtypeID, tag, display FROM $eventtypes_table WHERE keep = '1' AND type = 'I' ORDER BY display";
           $result = tng_query($query);
           $dontdo = array("ADDR", "BIRT", "CHR", "DEAT", "BURI", "NAME", "NICK", "TITL", "NSFX", "DIV", "MARR");
           while ($row = tng_fetch_assoc($result)) {
@@ -310,12 +309,12 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
         //if one event was selected, just do that one
         //if no event was selected, do them each in turn
 
-        $query = "SELECT $people_table.ID, $people_table.personID, lastname, lnprefix, firstname, $people_table.living, $people_table.branch, prefix, suffix, nameorder, $place, $datefield, $people_table.gedcom, treename $familiessortdate $eventsfields
-          FROM ($people_table, $treesTable $eventsjoin) $familiesjoin
+        $query = "SELECT $people_table.ID, $people_table.personID, lastname, lnprefix, firstname, $people_table.living, $people_table.branch, prefix, suffix, nameorder, $place, $datefield $familiessortdate $eventsfields
+          FROM ($people_table $eventsjoin) $familiesjoin
           WHERE 1 $allwhere ";
         if ($needfamilies) {
-          $query .= "UNION ALL SELECT $people_table.ID, $people_table.personID, lastname, lnprefix, firstname, $people_table.living, $people_table.branch, prefix, suffix, nameorder, $place, $datefield, $people_table.gedcom, treename $familiessortdate $eventsfields
-            FROM ($people_table, $treesTable $eventsjoin) $familiesjoinw
+          $query .= "UNION ALL SELECT $people_table.ID, $people_table.personID, lastname, lnprefix, firstname, $people_table.living, $people_table.branch, prefix, suffix, nameorder, $place, $datefield $familiessortdate $eventsfields
+            FROM ($people_table $eventsjoin) $familiesjoinw
             WHERE 1=1 $allwhere ";
         }
         $query .= " ORDER BY DAY($datefieldtr), MONTH($datefieldtr), YEAR($datefieldtr), lastname, firstname LIMIT $newoffset" . $maxsearchresults;
@@ -326,14 +325,14 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
         if ($numrows == $maxsearchresults || $offsetplus > 1) {
           if ($needfamilies) {
             $query = "SELECT (SELECT count(personID)
-              FROM ($people_table, $treesTable $eventsjoin) $familiesjoin
+              FROM ($people_table $eventsjoin) $familiesjoin
               WHERE 1=1 $allwhere) +
               (SELECT count(personID)
-              FROM ($people_table, $treesTable $eventsjoin) $familiesjoinw
+              FROM ($people_table $eventsjoin) $familiesjoinw
               WHERE 1=1 $allwhere) as pcount";
           } else {
             $query = "SELECT count(personID) as pcount
-              FROM ($people_table, $treesTable $eventsjoin) $familiesjoin
+              FROM ($people_table $eventsjoin) $familiesjoin
               WHERE 1=1 $allwhere";
           }
           $result2 = tng_query($query);
@@ -379,10 +378,10 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
               echo "<td>$i</td>\n";
               $i++;
               echo "<td>\n";
-                echo "<div class='person-img' id=\"mi{$row['gedcom']}_{$row['personID']}_$tngevent\">\n";
-                  echo "<div class='person-prev' id=\"prev{$row['gedcom']}_{$row['personID']}_$tngevent\"></div>\n";
+                echo "<div class='person-img' id=\"mi_{$row['personID']}_$tngevent\">\n";
+                  echo "<div class='person-prev' id=\"prev_{$row['personID']}_$tngevent\"></div>\n";
                 echo "</div>\n";
-                echo "<a href=\"pedigree.php?personID={$row['personID']}\">$chartlink</a> <a href=\"peopleShowPerson.php?personID={$row['personID']}\" class=\"pers\" id=\"p{$row['personID']}_t{$row['gedcom']}:$tngevent\">$name</a>&nbsp;</td>\n";
+                echo "<a href=\"pedigree.php?personID={$row['personID']}\">$chartlink</a> <a href=\"peopleShowPerson.php?personID={$row['personID']}\" class=\"pers\" id=\"p{$row['personID']}_t:$tngevent\">$name</a>&nbsp;</td>\n";
               echo "<td>" . displayDate($dateval) . "</td><td>$placetxt</td>";
               echo "<td>{$row['personID']} </td>";
               echo "</tr>\n";

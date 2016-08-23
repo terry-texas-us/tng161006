@@ -202,17 +202,17 @@ if ($offset) {
 }
 
 //left join to people table twice, once for husband and for wife
-$query = "SELECT f.ID, familyID, husband, wife, marrdate, marrplace, divdate, divplace, f.gedcom as gedcom, f.living, f.private, f.branch, treename,
+$query = "SELECT f.ID, familyID, husband, wife, marrdate, marrplace, divdate, divplace, f.living, f.private, f.branch,
     father.lastname as flastname, father.lnprefix as flnprefix, father.firstname as ffirstname, father.living as fliving, father.private as fprivate, father.branch as fbranch,
     mother.lastname as mlastname, mother.lnprefix as mlnprefix, mother.firstname as mfirstname, mother.living as mliving, mother.private as fprivate, mother.branch as mbranch
-    FROM ($families_table as f, $treesTable) $cejoin
+    FROM ($families_table as f) $cejoin
     LEFT JOIN $people_table AS father ON husband = father.personID
     LEFT JOIN $people_table AS mother ON wife = mother.personID
     $allwhere (1=1)
     ORDER BY $orderstr
     LIMIT $newoffset" . $maxsearchresults;
 $query2 = "SELECT count(f.ID) as fcount
-    FROM ($families_table as f, $treesTable) $cejoin
+    FROM ($families_table as f) $cejoin
     LEFT JOIN $people_table AS father ON husband = father.personID
     LEFT JOIN $people_table AS mother ON wife = mother.personID
     $allwhere (1=1)";
@@ -313,14 +313,14 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
         $fname = getNameRev($frow);
         $mname = getNameRev($mrow);
 
-        $famidstr = "<a href=\"familiesShowFamily.php?familyID={$row['familyID']}\" class=\"fam\" id=\"f{$row['familyID']}_t{$row['gedcom']}\">{$row['familyID']} </a>";
+        $famidstr = "<a href=\"familiesShowFamily.php?familyID={$row['familyID']}\" class=\"fam\" id=\"f{$row['familyID']}_t\">{$row['familyID']} </a>";
 
         echo "<tr>";
         echo "<td>$i</td>\n";
         $i++;
         echo "<td>$famidstr";
-          echo "<div class='person-img' id=\"mi{$row['gedcom']}_{$row['familyID']}\">\n";
-            echo "<div class='person-prev' id=\"prev{$row['gedcom']}_{$row['familyID']}\"></div>\n";
+          echo "<div class='person-img' id=\"mi_{$row['familyID']}\">\n";
+            echo "<div class='person-prev' id=\"prev_{$row['familyID']}\"></div>\n";
           echo "</div>\n";
         echo "</td>";
         echo "<td>$fname</td><td>$mname</td>";
