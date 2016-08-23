@@ -69,9 +69,7 @@ $headSection->setTitle($psearchns);
 
     echo tng_DrawHeading($photostr, $psearchns, "");
 
-    //show the notes and media for each tree (if none specified)
-    //first do media
-    $pquery = "SELECT placelevel, latitude, longitude, zoom, notes, $places_table.gedcom$treename FROM $places_table$treejoin WHERE place = '$psearch'";
+    $pquery = "SELECT placelevel, latitude, longitude, zoom, notes FROM $places_table WHERE place = '$psearch'";
     $presult = tng_query($pquery) or die(uiTextSnippet('cannotexecutequery') . ": $pquery");
 
     $rightbranch = 1;
@@ -80,9 +78,7 @@ $headSection->setTitle($psearchns);
 
     $altstr = ", altdescription, altnotes";
     $mapdrawn = false;
-    $foundtree = "";
     while ($prow = tng_fetch_assoc($presult)) {
-      $foundtree = $prow['gedcom'];
       if ($prow['notes'] || $prow['latitude'] || $prow['longitude']) {
         if (($prow['latitude'] || $prow['longitude']) && $map['key'] && !$mapdrawn) {
           echo "<br><div id='map' style=\"width: {$map['hstw']}; height: {$map['hsth']}; margin-bottom:20px;\" class=\"rounded10\"></div>\n";
@@ -177,7 +173,7 @@ $headSection->setTitle($psearchns);
     $successcount = 0;
 
     //then loop over events like anniversaries
-    $stdevents = array("birth", "altbirth", "death", "burial");
+    $stdevents = ["birth", "altbirth", "death", "burial"];
     $displaymsgs = array("birth" => uiTextSnippet('birth'), "altbirth" => uiTextSnippet('christened'), "death" => uiTextSnippet('died'), "burial" => uiTextSnippet('buried'));
     //$dontdo = array("ADDR","BIRT","CHR","DEAT","BURI","NAME","NICK","TITL","NSFX");
     if ($ldsOK) {

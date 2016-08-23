@@ -22,7 +22,6 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
   global $eventtypes_table;
   global $people_table;
   global $families_table;
-  global $treesTable;
   global $offset;
   global $page;
   global $psearch;
@@ -35,7 +34,6 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
   global $datesort;
 
   $successcount = 0;
-  $allwhere = "";
   if ($prefix == 'I') {
     $table = $people_table;
     $peoplejoin1 = $peoplejoin2 = "";
@@ -50,14 +48,8 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
     $idtext = "familyid";
     $namefield = "family";
   }
-  $allwhere .= "1=1";
-  $more = getLivingPrivateRestrictions($table, false, false);
-  if ($more) {
-    if ($allwhere) {
-      $allwhere .= " AND ";
-    }
-    $allwhere .= $more;
-  }
+  $livingPrivateCondition = getLivingPrivateRestrictions($table, false, false);
+  $livingPrivateCondition .= ($livingPrivateCondition ? ' AND ' : '');
   $max_browsesearch_pages = 5;
   if ($offset) {
     $offsetplus = $offset + 1;
@@ -68,9 +60,8 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
     $page = 1;
   }
   $tngevents = $stdevents;
-  $custevents = array();
-  $query = "SELECT tag, eventtypeID, display FROM $eventtypes_table
-    WHERE keep=\"1\" AND type=\"$prefix\" ORDER BY display";
+  $custevents = [];
+  $query = "SELECT tag, eventtypeID, display FROM $eventtypes_table WHERE keep = '1' AND type = '$prefix' ORDER BY display";
   $result = tng_query($query);
   while ($row = tng_fetch_assoc($result)) {
     $eventtypeID = $row['eventtypeID'];
@@ -87,13 +78,13 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
 
     if (in_array($tngevent, $custevents)) {
       $eventsjoin = ", $events_table";
-      $allwhere2 .= " AND $table.$idfield = $events_table.persfamID AND eventtypeID = \"$tngevent\" AND parenttag = \"\"";
+      $allwhere2 .= "$table.$idfield = $events_table.persfamID AND eventtypeID = '$tngevent' AND parenttag = '' AND ";
       $tngevent = "event";
     }
     $datefield = $tngevent . "date";
     $datefieldtr = $tngevent . "datetr";
     $place = $tngevent . "place";
-    $allwhere2 .= " AND $place = '$psearch'";
+    $allwhere2 .= "$place = '$psearch'";
 
     if ($prefix == 'F') {
       if ($order == "name") {
@@ -105,10 +96,8 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
       } else {
         $orderstr = "$datefieldtr DESC, p1lastname DESC, p2lastname DESC";
       }
-      $query = "SELECT $families_table.ID, $families_table.familyID, $families_table.living, $families_table.private, $families_table.branch, p1.lastname as p1lastname, p2.lastname as p2lastname, $place, $datefield, $families_table.gedcom, treename
-        FROM ($families_table, $treesTable $eventsjoin) $peoplejoin1 $peoplejoin2
-        WHERE $allwhere $allwhere2
-        ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
+      $query = "SELECT $families_table.ID, familyID, $families_table.living, $families_table.private, $families_table.branch, p1.lastname as p1lastname, p2.lastname as p2lastname, $place, $datefield "
+          . "FROM ($families_table $eventsjoin) $peoplejoin1 $peoplejoin2 WHERE $livingPrivateCondition $allwhere2 ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
     } elseif ($prefix == 'I') {
       if ($order == "name") {
         $orderstr = "lastname, firstname, $datefieldtr";
@@ -119,19 +108,15 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
       } else {
         $orderstr = "$datefieldtr DESC, lastname DESC, firstname DESC";
       }
-      $query = "SELECT $people_table.ID, $people_table.personID, lastname, lnprefix, firstname, $people_table.living, $people_table.private, $people_table.branch, prefix, suffix, nameorder, $place, $datefield, $people_table.gedcom, treename
-        FROM ($people_table, $treesTable $eventsjoin)
-        WHERE $allwhere $allwhere2
-        ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
+      $query = "SELECT $people_table.ID, personID, lastname, lnprefix, firstname, living, private, branch, prefix, suffix, nameorder, $place, $datefield "
+          . "FROM ($people_table $eventsjoin) WHERE $livingPrivateCondition $allwhere2 ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
     }
     $result = tng_query($query);
     $numrows = tng_num_rows($result);
 
     //if results, do again w/o pagination to get total
     if ($numrows == $maxsearchresults || $offsetplus > 1) {
-      $query = "SELECT count($idfield) as rcount
-        FROM ($table, $treesTable $eventsjoin)
-        WHERE $allwhere $allwhere2";
+      $query = "SELECT count($idfield) as rcount FROM ($table $eventsjoin) WHERE $livingPrivateCondition $allwhere2";
       $result2 = tng_query($query);
       $countrow = tng_fetch_assoc($result2);
       $totrows = $countrow['rcount'];
