@@ -44,8 +44,8 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
     $namefield = "lastfirst";
   } elseif ($prefix == 'F') {
     $table = $families_table;
-    $peoplejoin1 = " LEFT JOIN $people_table as p1 ON $families_table.gedcom = p1.gedcom AND p1.personID = $families_table.husband";
-    $peoplejoin2 = " LEFT JOIN $people_table as p2 ON $families_table.gedcom = p2.gedcom AND p2.personID = $families_table.wife";
+    $peoplejoin1 = " LEFT JOIN $people_table as p1 ON p1.personID = $families_table.husband";
+    $peoplejoin2 = " LEFT JOIN $people_table as p2 ON p2.personID = $families_table.wife";
     $idfield = "familyID";
     $idtext = "familyid";
     $namefield = "family";

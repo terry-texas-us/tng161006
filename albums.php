@@ -27,8 +27,8 @@ function getAlbumPhoto($albumID, $albumname) {
     if (!$trow['alwayson'] && $livedefault != 2) {
       $query = "SELECT people.living as living, people.private as private, people.branch as branch, $families_table.branch as fbranch, $families_table.living as fliving, $families_table.private as fprivate, linktype, $medialinks_table.gedcom as gedcom
         FROM $medialinks_table
-        LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID AND $medialinks_table.gedcom = people.gedcom
-        LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID AND $medialinks_table.gedcom = $families_table.gedcom
+        LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID
+        LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID
         WHERE mediaID = '$mediaID'";
       $presult = tng_query($query);
       while ($prow = tng_fetch_assoc($presult)) {

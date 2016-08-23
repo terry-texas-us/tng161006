@@ -40,7 +40,7 @@ header("Content-type:text/html; charset=" . $session_charset);
 
 $xnotestr = $noteID ? " OR persfamID = \"$noteID\"" : "";
 $query = "SELECT citationID, $citations_table.sourceID as sourceID, description, title, shorttitle
-    FROM $citations_table LEFT JOIN $sources_table on $citations_table.sourceID = $sources_table.sourceID AND $sources_table.gedcom = $citations_table.gedcom
+    FROM $citations_table LEFT JOIN $sources_table ON $citations_table.sourceID = $sources_table.sourceID
     WHERE ((persfamID = \"$persfamID\" AND eventID = \"$eventID\")$xnotestr) ORDER BY ordernum, citationID";
 $citresult = tng_query($query);
 $citationcount = tng_num_rows($citresult);

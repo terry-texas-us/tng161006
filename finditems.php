@@ -202,8 +202,8 @@ switch ($type) {
       $allwhere2 = "AND $allwhere2";
     }
 
-    $joinonwife = "LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID AND $families_table.gedcom = wifepeople.gedcom";
-    $joinonhusb = "LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID AND $families_table.gedcom = husbpeople.gedcom";
+    $joinonwife = "LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID";
+    $joinonhusb = "LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID";
     $query = "SELECT familyID, wifepeople.personID as wpersonID, wifepeople.firstname as wfirstname, wifepeople.lnprefix as wlnprefix, wifepeople.lastname as wlastname, wifepeople.suffix as wsuffix, wifepeople.nameorder as wnameorder, wifepeople.living as wliving, wifepeople.private as wprivate, wifepeople.branch as wbranch,
       husbpeople.personID as hpersonID, husbpeople.firstname as hfirstname, husbpeople.lnprefix as hlnprefix, husbpeople.lastname as hlastname, husbpeople.suffix as hsuffix, husbpeople.nameorder as hnameorder, husbpeople.living as hliving, husbpeople.private as hprivate, husbpeople.branch as hbranch FROM $families_table $joinonwife $joinonhusb WHERE $allwhere $allwhere2 ORDER BY hlastname, hlnprefix, hfirstname LIMIT 250";
     $result = tng_query($query);

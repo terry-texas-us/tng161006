@@ -97,23 +97,23 @@ if ($living == "yes") {
   $allwhere .= " AND $people_table.living = \"1\"";
 }
 if ($noparents) {
-  $noparentjoin = "LEFT JOIN $children_table as noparents ON $people_table.personID = noparents.personID AND $people_table.gedcom = noparents.gedcom";
+  $noparentjoin = "LEFT JOIN $children_table as noparents ON $people_table.personID = noparents.personID";
   $allwhere .= " AND noparents.familyID is NULL";
 } else {
   $noparentjoin = "";
 }
 if ($nospouse) {
-  $nospousejoin = "LEFT JOIN $families_table as nospousef ON $people_table.personID = nospousef.husband AND $people_table.gedcom = nospousef.gedcom "
-          . "LEFT JOIN $families_table as nospousem ON $people_table.personID = nospousem.wife AND $people_table.gedcom = nospousem.gedcom";
+  $nospousejoin = "LEFT JOIN $families_table as nospousef ON $people_table.personID = nospousef.husband "
+          . "LEFT JOIN $families_table as nospousem ON $people_table.personID = nospousem.wife";
   $allwhere .= " AND nospousef.familyID is NULL AND nospousem.familyID is NULL";
 } else {
   $nospousejoin = "";
 }
 if ($nokids) {
-  $nokidjoin = "LEFT OUTER JOIN $families_table AS familiesH ON $people_table.gedcom=familiesH.gedcom AND $people_table.personID=familiesH.husband "
-          . "LEFT OUTER JOIN $families_table AS familiesW ON $people_table.gedcom=familiesW.gedcom AND $people_table.personID=familiesW.wife "
-          . "LEFT OUTER JOIN $children_table AS childrenH ON familiesH.gedcom=childrenH.gedcom AND familiesH.familyID=childrenH.familyID "
-          . "LEFT OUTER JOIN $children_table AS childrenW ON familiesW.gedcom=childrenW.gedcom AND familiesW.familyID=childrenW.familyID ";
+  $nokidjoin = "LEFT OUTER JOIN $families_table AS familiesH ON $people_table.personID=familiesH.husband "
+          . "LEFT OUTER JOIN $families_table AS familiesW ON $people_table.personID=familiesW.wife "
+          . "LEFT OUTER JOIN $children_table AS childrenH ON familiesH.familyID=childrenH.familyID "
+          . "LEFT OUTER JOIN $children_table AS childrenW ON familiesW.familyID=childrenW.familyID ";
   $nokidhaving = "HAVING ChildrenCount = 0 ";
   $nokidgroup = "GROUP BY $people_table.personID, $people_table.lastname, $people_table.firstname, $people_table.firstname, $people_table.lnprefix, "
           . "$people_table.prefix, $people_table.suffix, $people_table.nameorder, $people_table.birthdate, birthyear, $people_table.birthplace, $people_table.altbirthdate, altbirthyear, "

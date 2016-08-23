@@ -25,7 +25,7 @@ function processfield($field)
     $subtype = substr($field, 3, 2);
     $newfield = "e$eventtypeID.$evfields[$subtype]";
     if (!isset($cejoins[$eventtypeID])) {
-      $cejoins[$eventtypeID] = "LEFT JOIN $events_table e$eventtypeID ON $people_table.personID = e$eventtypeID.persfamID AND $people_table.gedcom = e$eventtypeID.gedcom AND e$eventtypeID.eventtypeID = \"$eventtypeID\"";
+      $cejoins[$eventtypeID] = "LEFT JOIN $events_table e$eventtypeID ON $people_table.personID = e$eventtypeID.persfamID AND e$eventtypeID.eventtypeID = \"$eventtypeID\"";
     }
   } else {
     $newfield = $field;
@@ -199,7 +199,7 @@ if ($rrow['sqlselect']) {
         $displaystr .= "e$eventtypeID.$evfields[$subtype] as $evfields[$subtype]$eventtypeID";
         $displayfields[$i] = "$evfields[$subtype]$eventtypeID";
         if (!isset($cejoins[$eventtypeID])) {
-          $cejoins[$eventtypeID] = "LEFT JOIN $events_table e$eventtypeID ON $people_table.personID = e$eventtypeID.persfamID AND $people_table.gedcom = e$eventtypeID.gedcom AND e$eventtypeID.eventtypeID = \"$eventtypeID\"";
+          $cejoins[$eventtypeID] = "LEFT JOIN $events_table e$eventtypeID ON $people_table.personID = e$eventtypeID.persfamID AND e$eventtypeID.eventtypeID = \"$eventtypeID\"";
         }
       } elseif ($dfield == "lastfirst") {
         $displaystr .= "lastname, firstname";
@@ -309,7 +309,7 @@ if ($rrow['sqlselect']) {
             $subtype = substr($criteriafields[$i], 3, 2);
             $newcriteria = "e$eventtypeID.$evfields[$subtype]";
             if (!isset($cejoins[$eventtypeID])) {
-              $cejoins[$eventtypeID] = "LEFT JOIN $events_table e$eventtypeID ON $people_table.personID = e$eventtypeID.persfamID AND $people_table.gedcom = e$eventtypeID.gedcom AND e$eventtypeID.eventtypeID = \"$eventtypeID\"";
+              $cejoins[$eventtypeID] = "LEFT JOIN $events_table e$eventtypeID ON $people_table.personID = e$eventtypeID.persfamID AND e$eventtypeID.eventtypeID = \"$eventtypeID\"";
             }
           } else {
             $newcriteria = $criteriafields[$i];
@@ -467,14 +467,14 @@ if ($rrow['sqlselect']) {
   }
 
   if ($need_families) {
-    $families_join = "LEFT JOIN $families_table AS families1 ON ($people_table.gedcom = families1.gedcom AND $people_table.personID = families1.husband ) LEFT JOIN $families_table AS families2 ON ($people_table.gedcom = families2.gedcom AND $people_table.personID = families2.wife ) ";
-    //$families_join = "LEFT JOIN $families_table ON ($people_table.personID = $families_table.husband OR $people_table.personID = $families_table.wife) AND $people_table.gedcom = $families_table.gedcom";
+    $families_join = "LEFT JOIN $families_table AS families1 ON ($people_table.personID = families1.husband ) LEFT JOIN $families_table AS families2 ON ($people_table.personID = families2.wife ) ";
+    //$families_join = "LEFT JOIN $families_table ON ($people_table.personID = $families_table.husband OR $people_table.personID = $families_table.wife)";
     //if( $familytreestr ) $treestr .= " AND $familytreestr";
   } else {
     $families_join = "";
   }
   if ($need_children) {
-    $children_join = "LEFT JOIN $children_table ON $people_table.personID = $children_table.personID AND $people_table.gedcom = $children_table.gedcom";
+    $children_join = "LEFT JOIN $children_table ON $people_table.personID = $children_table.personID";
     if ($childrentreestr) {
       $treestr .= " AND $childrentreestr";
     }

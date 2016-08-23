@@ -125,10 +125,10 @@ function doMedia($mediatypeID) {
       $families_table.branch as fbranch, $families_table.living as fliving, $families_table.private as fprivate, husband, wife, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname,
       people.prefix as prefix, people.suffix as suffix, nameorder, $medialinks_table.gedcom as gedcom, treename, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID,reponame, deathdate, burialdate, linktype
       FROM $medialinks_table
-      LEFT JOIN $people_table AS people ON ($medialinks_table.personID = people.personID AND $medialinks_table.gedcom = people.gedcom)
-      LEFT JOIN $families_table ON ($medialinks_table.personID = $families_table.familyID AND $medialinks_table.gedcom = $families_table.gedcom)
-      LEFT JOIN $sources_table ON ($medialinks_table.personID = $sources_table.sourceID AND $medialinks_table.gedcom = $sources_table.gedcom)
-      LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID AND $medialinks_table.gedcom = $repositories_table.gedcom)
+      LEFT JOIN $people_table AS people ON ($medialinks_table.personID = people.personID)
+      LEFT JOIN $families_table ON ($medialinks_table.personID = $families_table.familyID)
+      LEFT JOIN $sources_table ON ($medialinks_table.personID = $sources_table.sourceID)
+      LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID)
       LEFT JOIN $treesTable ON $medialinks_table.gedcom = $treesTable.gedcom
       WHERE mediaID = \"{$row['mediaID']}\"$Wherestr2 ORDER BY lastname, lnprefix, firstname, $medialinks_table.personID";
     $presult = tng_query($query);

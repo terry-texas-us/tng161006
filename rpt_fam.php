@@ -299,12 +299,12 @@ function displayChild($personID, $childcount) {
   // show spouses
   $query = "SELECT familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, $families_table.living as fliving, $families_table.private as fprivate, $families_table.branch as fbranch, $people_table.living as living, $people_table.private as private, $people_table.branch as branch, marrdate, marrplace, sealdate, sealplace FROM $families_table ";
   if ($ind['sex'] == 'M') {
-    $query .= "LEFT JOIN $people_table on $families_table.wife = $people_table.personID AND $families_table.gedcom = $people_table.gedcom WHERE husband = \"{$ind['personID']}\" $restriction ORDER BY husborder";
+    $query .= "LEFT JOIN $people_table on $families_table.wife = $people_table.personID WHERE husband = \"{$ind['personID']}\" $restriction ORDER BY husborder";
   } else {
     if ($ind['sex'] = 'F') {
-      $query .= "LEFT JOIN $people_table on $families_table.husband = $people_table.personID AND $families_table.gedcom = $people_table.gedcom WHERE wife = \"{$ind['personID']}\" $restriction ORDER BY wifeorder";
+      $query .= "LEFT JOIN $people_table on $families_table.husband = $people_table.personID WHERE wife = \"{$ind['personID']}\" $restriction ORDER BY wifeorder";
     } else {
-      $query .= "LEFT JOIN $people_table on ($families_table.husband = $people_table.personID OR $families_table.wife = $people_table.personID) AND $families_table.gedcom = $people_table.gedcom WHERE (wife = \"{$ind['personID']}\" && husband = \"{$ind['personID']}\")";
+      $query .= "LEFT JOIN $people_table on ($families_table.husband = $people_table.personID OR $families_table.wife = $people_table.personID) WHERE (wife = \"{$ind['personID']}\" && husband = \"{$ind['personID']}\")";
     }
   }
 

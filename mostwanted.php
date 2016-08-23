@@ -26,7 +26,7 @@ function showDivs($type) {
     lastname, firstname, lnprefix, suffix, prefix, $people_table.title as title, living, private, nameorder, branch
     FROM $mostwanted_table
     LEFT JOIN $media_table ON $mostwanted_table.mediaID = $media_table.mediaID
-    LEFT JOIN $people_table ON $mostwanted_table.personID = $people_table.personID AND $mostwanted_table.gedcom = $people_table.gedcom
+    LEFT JOIN $people_table ON $mostwanted_table.personID = $people_table.personID
     WHERE mwtype = '$type' ORDER BY ordernum";
   $result = tng_query($query);
 

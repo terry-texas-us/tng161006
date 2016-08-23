@@ -184,10 +184,10 @@ $headSection->setTitle($titlestr);
         $families_table.living as fliving, $families_table.private as fprivate, familyID, husband, wife, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.prefix as prefix, people.suffix as suffix, nameorder,
         $medialinks_table.gedcom, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame, deathdate, burialdate, linktype
         FROM $medialinks_table
-        LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID AND $medialinks_table.gedcom = people.gedcom
-        LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID AND $medialinks_table.gedcom = $families_table.gedcom
-        LEFT JOIN $sources_table ON $medialinks_table.personID = $sources_table.sourceID AND $medialinks_table.gedcom = $sources_table.gedcom
-        LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID AND $medialinks_table.gedcom = $repositories_table.gedcom)
+        LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID
+        LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID
+        LEFT JOIN $sources_table ON $medialinks_table.personID = $sources_table.sourceID
+        LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID)
         WHERE mediaID = \"{$row['mediaID']}\" ORDER BY lastname, lnprefix, firstname, personID LIMIT $maxplus";
       $presult = tng_query($query);
       $numrows = tng_num_rows($presult);

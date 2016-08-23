@@ -285,7 +285,7 @@ function getRegNotes($persfamID, $flag) {
   }
 
   $query = "SELECT display, $xnotes_table.note as note, $notelinks_table.eventID as eventID FROM $notelinks_table
-    LEFT JOIN  $xnotes_table on $notelinks_table.xnoteID = $xnotes_table.ID AND $notelinks_table.gedcom = $xnotes_table.gedcom 
+    LEFT JOIN  $xnotes_table on $notelinks_table.xnoteID = $xnotes_table.ID 
     LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID 
     LEFT JOIN $eventtypes_table on $eventtypes_table.eventtypeID = $events_table.eventtypeID 
     WHERE $notelinks_table.persfamID = '$persfamID' AND secret!=\"1\"

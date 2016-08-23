@@ -247,7 +247,7 @@ if (($mysplname && $mygender) || $spqualify == 'exists' || $spqualify == "dnexis
     $allwhere AND (p.gedcom=$families_table.gedcom AND spouse.gedcom=$families_table.gedcom AND $gstring)";
 } else {
   if ($showspouse == "yes") {
-    $families_join = "LEFT JOIN $families_table AS families1 ON (p.gedcom = families1.gedcom AND p.personID = families1.husband ) LEFT JOIN $families_table AS families2 ON (p.gedcom = families2.gedcom AND p.personID = families2.wife ) ";    // added IDF Apr 03
+    $families_join = "LEFT JOIN $families_table AS families1 ON (p.personID = families1.husband) LEFT JOIN $families_table AS families2 ON (p.personID = families2.wife ) ";    // added IDF Apr 03
     $huswife = ", families1.wife as wife, families2.husband as husband";                                                                // added IDF Apr 03
   } else {
     $families_join = "";

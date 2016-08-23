@@ -150,7 +150,7 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
         $people_table.branch as branch, $families_table.gedcom as gedcom, $families_table.branch as fbranch, DATE_FORMAT($families_table.changedate,'%e %b %Y') as changedatef,
         $families_table.changedby, treename
       FROM ($families_table, $treesTable)
-      LEFT JOIN $people_table ON $people_table.gedcom = $families_table.gedcom AND $people_table.personID = husband
+      LEFT JOIN $people_table ON $people_table.personID = husband
       WHERE $famcutoffstr $allwhere
       ORDER BY $families_table.changedate DESC, lastname LIMIT $change_limit";
     $famresult = tng_query($query);

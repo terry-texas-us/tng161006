@@ -1,3 +1,25 @@
+Mon 22 Aug 2016 10:22:24 PM <a href="familiesShowFamily.php?familyID=F2043">Family Group Sheet for /Hanna Fritsche (F2043)</a> accessed by DESKTOP.
+Mon 22 Aug 2016 10:21:51 PM <a href='whatsnew.php?'>What's New</a> accessed by DESKTOP.
+Mon 22 Aug 2016 10:14:37 PM <a href="placesearch.php?psearch=Preußen">Search Results Preußen</a> accessed by DESKTOP.
+Mon 22 Aug 2016 10:14:32 PM <a href='placesMain.php'>Place List</a> accessed by DESKTOP.
+Mon 22 Aug 2016 10:14:27 PM <a href="pedigree.php?personID=I1389&amp;generations=4&amp;display=standard">Pedigree Chart for Johann Ernst Fürchtegott Teinert (I1389)</a> 4 Generations accessed by DESKTOP.
+Mon 22 Aug 2016 10:13:25 PM <a href='peopleShowPerson.php?personID=I563'>Individual info for Agnes Teinert (I563)</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 10:02:40 PM <a href="familiesShowFamily.php?familyID=F499">Family Group Sheet for Johann Teinert/Hanna Kurjo (F499)</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 10:02:33 PM <a href='peopleShowPerson.php?personID=I1389'>Individual info for Johann Ernst Fürchtegott Teinert (I1389)</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 10:02:30 PM <a href="pedigree.php?personID=I1389&amp;generations=4&amp;display=standard">Pedigree Chart for Johann Ernst Fürchtegott Teinert (I1389)</a> 4 Generations accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 10:00:06 PM <a href="anniversaries.php?tngevent=&amp;tngdaymonth=22&amp;tngmonth=08&amp;tngyear=&amp;tngkeywords=&amp;tngneedresults=1&amp;offset=&amp;tngpage=">Dates and Anniversaries</a> accessed by DESKTOP.
+Mon 22 Aug 2016 09:59:34 PM <a href="anniversaries.php?tngevent=&amp;tngdaymonth=22&amp;tngmonth=08&amp;tngyear=&amp;tngkeywords=&amp;tngneedresults=1&amp;offset=&amp;tngpage=">Dates and Anniversaries</a> accessed by DESKTOP.
+Mon 22 Aug 2016 09:56:53 PM <a href="showmedia.php?mediaID=1&amp;tnggallery=">Photos: Media Information [tas] (1)</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 09:56:50 PM <a href="albumsShowAlbum.php?albumID=1">First Item Addition [ tas ]</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 09:56:40 PM <a href="albumsShow.php?offset=&amp;mediasearch=">All Albums</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 09:47:54 PM <a href="pedigree.php?personID=I1389&amp;generations=4&amp;display=standard">Pedigree Chart for Johann Ernst Fürchtegott Teinert (I1389)</a> 4 Generations accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 09:45:54 PM <a href="pedigree.php?personID=I1389&amp;generations=4&amp;display=standard">Pedigree Chart for Johann Ernst Fürchtegott Teinert (I1389)</a> 4 Generations accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 09:42:57 PM <a href="placesearch.php?psearch=Austria">Search Results Austria</a> accessed by DESKTOP.
+Mon 22 Aug 2016 09:42:53 PM <a href="places-oneletter.php?firstchar=&amp;psearch=Austria">Place List: Austria</a> accessed by DESKTOP.
+Mon 22 Aug 2016 09:42:50 PM <a href='places-all.php'>All Largest Localities</a> accessed by DESKTOP.
+Mon 22 Aug 2016 09:42:46 PM <a href="places-oneletter.php?firstchar=&amp;psearch=serbin">Place List: serbin</a> accessed by DESKTOP.
+Mon 22 Aug 2016 09:42:41 PM <a href='placesMain.php'>Place List</a> accessed by DESKTOP.
+Mon 22 Aug 2016 09:42:33 PM <a href="search.php?">Search Results </a> accessed by DESKTOP.
 Mon 22 Aug 2016 09:09:34 PM <a href="placesearch.php?psearch=Anderson, Texas, United States">Search Results Anderson, Texas, United States</a> accessed by DESKTOP (User: Administrator).
 Mon 22 Aug 2016 09:09:11 PM <a href='peopleShowPerson.php?personID=I4321'>Individual info for Alma Augusta Maria Lehmann (I4321)</a> accessed by DESKTOP (User: Administrator).
 Mon 22 Aug 2016 09:09:09 PM <a href="search.php?mylastname=LEHMANN&amp;lnqualify=equals&amp;mybool=AND">Search Results for Last Name equals LEHMANN</a> accessed by DESKTOP (User: Administrator).
@@ -226,25 +248,3 @@ Fri 19 Aug 2016 08:20:34 AM <a href='showtree.php?tree=earlywends'>Tree: Early W
 Fri 19 Aug 2016 08:19:39 AM <a href='statistics.php?tree=earlywends'>Statistics (Tree: earlywends)</a> accessed by DESKTOP.
 Fri 19 Aug 2016 08:08:29 AM <a href="search.php?mybool=AND&nr=50&mymlastname=teinert&mlnqualify=contains">Search Results for Last Name contains teinert</a> accessed by DESKTOP.
 Fri 19 Aug 2016 08:08:12 AM <a href="search.php?">Search Results </a> accessed by DESKTOP.
-Fri 19 Aug 2016 08:03:17 AM <a href="anniversaries.php?tngevent=&amp;tngdaymonth=&amp;tngmonth=8&amp;tngyear=&amp;tngkeywords=&amp;tngneedresults=1&amp;offset=&amp;tngpage=">Dates and Anniversaries  (Tree: earlywends)</a> accessed by DESKTOP.
-Fri 19 Aug 2016 08:02:57 AM <a href="anniversaries.php?tngevent=&amp;tngdaymonth=19&amp;tngmonth=08&amp;tngyear=&amp;tngkeywords=&amp;tngneedresults=1&amp;offset=&amp;tngpage=">Dates and Anniversaries  (Tree: earlywends)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 10:20:32 PM <a href="repositoriesShow.php?offset=&amp;reposearch=">Repositories (Tree: earlywends)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 10:20:28 PM <a href="sourcesShow.php?offset=&amp;sourcesearch=">Sources (Tree: earlywends)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 10:20:19 PM <a href="sourcesShow.php?offset=&amp;sourcesearch=">Sources (Tree: earlywends)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 10:20:14 PM <a href="browsenotes.php?offset=&amp;notesearch=">Notes (Tree: earlywends)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 10:20:10 PM <a href="branchesShow.php?tree=earlywends&amp;offset=&amp;branchsearch=">Branches</a> accessed by DESKTOP.
-Thu 18 Aug 2016 10:20:01 PM <a href='statistics.php?tree=earlywends'>Statistics (Tree: earlywends)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 10:19:58 PM <a href='reportsShow.php'>Reports</a> accessed by DESKTOP.
-Thu 18 Aug 2016 10:19:54 PM <a href='mostwanted.php'>Most Wanted</a> accessed by DESKTOP.
-Thu 18 Aug 2016 10:19:49 PM <a href='whatsnew.php?'>What's New</a> accessed by DESKTOP.
-Thu 18 Aug 2016 10:19:30 PM <a href="mediaShow.php?offset=&amp;mediasearch=&amp;mediatypeID=">All Media (Tree: earlywends)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 10:19:26 PM <a href="albumsShow.php?tree=earlywends&amp;offset=&amp;mediasearch=">All Albums (Tree: earlywends)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 10:19:22 PM <a href="mediaShow.php?offset=&amp;mediasearch=&amp;mediatypeID=headstones">Headstones (Tree: earlywends)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 10:19:18 PM <a href="mediaShow.php?offset=&amp;mediasearch=&amp;mediatypeID=documents">Documents (Tree: earlywends)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 10:19:15 PM <a href="mediaShow.php?offset=&amp;mediasearch=&amp;mediatypeID=photos">Photos (Tree: earlywends)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 10:18:57 PM <a href='cemeteriesShow.php?tree=earlywends'>Cemeteries and Headstones (Tree: earlywends)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 10:18:49 PM <a href="calendar.php?living=&amp;hide=&amp;tree=earlywends&amp;m=08&amp;year=">Calendar</a> accessed by DESKTOP.
-Thu 18 Aug 2016 10:18:44 PM <a href='placesMain.php'>Place List</a> accessed by DESKTOP.
-Thu 18 Aug 2016 10:18:37 PM <a href='surnames.php?tree=earlywends'>Surname List (Tree: earlywends)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 09:34:46 PM <a href='peopleShowPerson.php?personID=I1389'>Individual info for Johann Ernst Fürchtegott Teinert (I1389)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 09:34:42 PM <a href="pedigree.php?personID=I1389&amp;generations=4&amp;display=standard">Pedigree Chart for Johann Ernst Fürchtegott Teinert (I1389)</a> 4 Generations accessed by DESKTOP.

@@ -214,7 +214,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
 
       $query = "SELECT $notelinks_table.ID as ID, secret, $xnotes_table.note as note, $xnotes_table.noteID as noteID, $notelinks_table.eventID
           FROM $notelinks_table
-          LEFT JOIN  $xnotes_table on $notelinks_table.xnoteID = $xnotes_table.ID AND $notelinks_table.gedcom = $xnotes_table.gedcom
+          LEFT JOIN  $xnotes_table on $notelinks_table.xnoteID = $xnotes_table.ID
           LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID
           LEFT JOIN $eventtypes_table on $eventtypes_table.eventtypeID = $events_table.eventtypeID
           WHERE $notelinks_table.persfamID = '$id'

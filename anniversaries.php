@@ -264,8 +264,8 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
             break;
         }
         if ($needfamilies) {
-          $familiesjoin = " LEFT JOIN $families_table ON ($people_table.gedcom = $families_table.gedcom AND $people_table.personID = $families_table.husband)";
-          $familiesjoinw = " LEFT JOIN $families_table ON ($people_table.gedcom = $families_table.gedcom AND $people_table.personID = $families_table.wife)";
+          $familiesjoin = " LEFT JOIN $families_table ON ($people_table.personID = $families_table.husband)";
+          $familiesjoinw = " LEFT JOIN $families_table ON ($people_table.personID = $families_table.wife)";
           $familiessortdate = ", " . $tngevent . "datetr";
         } else {
           $familiesjoin = "";
