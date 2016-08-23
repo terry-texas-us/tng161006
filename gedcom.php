@@ -403,7 +403,7 @@ function getFamily($person, $parents, $generation) {
         }
       }
       if ($generation > 1) {
-        $query = "SELECT familyID, $children_table.personID as personID, sealdate, sealplace, mrel, frel, living, private, branch FROM $children_table, $people_table WHERE familyID = \"$parents\" AND $children_table.personID = $people_table.personID AND $children_table.gedcom = $people_table.gedcom ORDER BY ordernum";
+        $query = "SELECT familyID, $children_table.personID as personID, sealdate, sealplace, mrel, frel, living, private, branch FROM $children_table, $people_table WHERE familyID = \"$parents\" AND $children_table.personID = $people_table.personID ORDER BY ordernum";
         $result = tng_query($query);
         if ($result) {
           while ($child = tng_fetch_assoc($result)) {

@@ -611,7 +611,7 @@ if (!$result) {
               if (substr($thisfield, 0, 6) == "spouse") {
                 $spouseID = $row['spouse'];
                 if ($thisfield == "spousename") {
-                  $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, gedcom, living, private, branch FROM $people_table WHERE personID = \"$spouseID\" AND gedcom = \"{$row['gedcom']}\"";
+                  $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, gedcom, living, private, branch FROM $people_table WHERE personID = \"$spouseID\"";
                   $spresult = tng_query($query);
                   if ($spresult) {
                     $sprow = tng_fetch_assoc($spresult);

@@ -176,7 +176,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
               tng_free_result($result2);
 
               if (!$notelinktext) {
-                $query = "SELECT * FROM $people_table WHERE personID = \"{$nrow['personID']}\" AND gedcom = \"{$nrow['gedcom']}\"";
+                $query = "SELECT * FROM $people_table WHERE personID = \"{$nrow['personID']}\"";
                 $result2 = tng_query($query);
                 if (tng_num_rows($result2) == 1) {
                   $row2 = tng_fetch_assoc($result2);
@@ -188,7 +188,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
                 }
               }
               if (!$notelinktext) {
-                $query = "SELECT * FROM $families_table WHERE familyID = \"{$nrow['personID']}\" AND gedcom = \"{$nrow['gedcom']}\"";
+                $query = "SELECT * FROM $families_table WHERE familyID = \"{$nrow['personID']}\"";
                 $result2 = tng_query($query);
                 if (tng_num_rows($result2) == 1) {
                   $row2 = tng_fetch_assoc($result2);
@@ -200,7 +200,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
                 }
               }
               if (!$notelinktext) {
-                $query = "SELECT * FROM $sources_table WHERE sourceID = \"{$nrow['personID']}\" AND gedcom = \"{$nrow['gedcom']}\"";
+                $query = "SELECT * FROM $sources_table WHERE sourceID = \"{$nrow['personID']}\"";
                 $result2 = tng_query($query);
                 if (tng_num_rows($result2) == 1) {
                   $row2 = tng_fetch_assoc($result2);
@@ -209,7 +209,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
                 }
               }
               if (!$notelinktext) {
-                $query = "SELECT * FROM $repositories_table WHERE repoID = \"{$nrow['personID']}\" AND gedcom = \"{$nrow['gedcom']}\"";
+                $query = "SELECT * FROM $repositories_table WHERE repoID = \"{$nrow['personID']}\"";
                 $result2 = tng_query($query);
                 if (tng_num_rows($result2) == 1) {
                   $row2 = tng_fetch_assoc($result2);

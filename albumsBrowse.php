@@ -146,10 +146,10 @@ $headSection->setTitle(uiTextSnippet('albums'));
 
                   $query = "SELECT people.personID as personID2, familyID, husband, wife, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.prefix as prefix, people.suffix as suffix, nameorder, $album2entities_table.entityID as personID, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame
                       FROM $album2entities_table
-                      LEFT JOIN $people_table AS people ON $album2entities_table.entityID = people.personID AND $album2entities_table.gedcom = people.gedcom
-                      LEFT JOIN $families_table ON $album2entities_table.entityID = $families_table.familyID AND $album2entities_table.gedcom = $families_table.gedcom
-                      LEFT JOIN $sources_table ON $album2entities_table.entityID = $sources_table.sourceID AND $album2entities_table.gedcom = $sources_table.gedcom
-                      LEFT JOIN $repositories_table ON ($album2entities_table.entityID = $repositories_table.repoID AND $album2entities_table.gedcom = $repositories_table.gedcom)
+                      LEFT JOIN $people_table AS people ON $album2entities_table.entityID = people.personID
+                      LEFT JOIN $families_table ON $album2entities_table.entityID = $families_table.familyID
+                      LEFT JOIN $sources_table ON $album2entities_table.entityID = $sources_table.sourceID
+                      LEFT JOIN $repositories_table ON ($album2entities_table.entityID = $repositories_table.repoID)
                       WHERE albumID = \"{$row['albumID']}\" ORDER BY lastname, lnprefix, firstname, personID LIMIT 10";
                   $presult = tng_query($query);
                   $alinktext = "";

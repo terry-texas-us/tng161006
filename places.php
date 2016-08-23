@@ -87,7 +87,7 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
 
     if (in_array($tngevent, $custevents)) {
       $eventsjoin = ", $events_table";
-      $allwhere2 .= " AND $table.$idfield = $events_table.persfamID AND $table.gedcom = $events_table.gedcom AND eventtypeID = \"$tngevent\" AND parenttag = \"\"";
+      $allwhere2 .= " AND $table.$idfield = $events_table.persfamID AND eventtypeID = \"$tngevent\" AND parenttag = \"\"";
       $tngevent = "event";
     }
     $datefield = $tngevent . "date";

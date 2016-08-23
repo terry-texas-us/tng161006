@@ -49,15 +49,19 @@ function initChart() {
 }
 
 function get_details(&$gens, $generation, $max_generations) {
-  global $width, $spacing, $person_count, $gedcom, $people_table, $families_table;
+  global $width;
+  global $spacing;
+  global $person_count;
+  global $people_table;
+  global $families_table;
   $delete_variables = array('firstname', 'lnprefix', 'lastname', 'title', 'prefix', 'suffix', 'nameorder', 'allow_living', 'allow_private');
   foreach ($gens[$generation] as $num => $g) {
     if ($g) {
       $query = "SELECT personID, firstname, lnprefix, lastname, title, prefix, suffix, nameorder, sex, birthdate, birthdatetr,
         altbirthdate, altbirthdatetr, deathdate, deathdatetr, burialdate, burialdatetr, birthplace, altbirthplace, deathplace, burialplace,
         husband AS father, wife AS mother, {$people_table}.living, {$people_table}.private, {$people_table}.branch, {$people_table}.gedcom
-        FROM {$people_table} LEFT JOIN {$families_table} ON {$people_table}.famc={$families_table}.familyID AND {$people_table}.gedcom={$families_table}.gedcom
-        WHERE personID='{$g}' AND {$people_table}.gedcom='{$gedcom}'";
+        FROM {$people_table} LEFT JOIN {$families_table} ON {$people_table}.famc={$families_table}.familyID
+        WHERE personID='{$g}'";
       $result = tng_query($query);
       if ($result && tng_num_rows($result)) {
         $result = tng_fetch_assoc($result);

@@ -167,8 +167,8 @@ function findLivingPrivate($mediaID) {
   $query = "SELECT $medialinks_table.medialinkID, $medialinks_table.personID as personID, $medialinks_table.gedcom as gedcom, linktype, people.living as living, people.private as private, people.branch as branch,
     $families_table.branch as fbranch, $families_table.living as fliving, $families_table.private as fprivate
     FROM $medialinks_table
-    LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID AND $medialinks_table.gedcom = people.gedcom
-    LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID AND $medialinks_table.gedcom = $families_table.gedcom
+    LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID
+    LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID
     WHERE $medialinks_table.mediaID = \"$mediaID\"";
 
   $presult = tng_query($query);
@@ -194,7 +194,7 @@ function findLivingPrivate($mediaID) {
     }
     if (!$prow['living'] && !$prow['private'] && $prow['linktype'] == 'I') {
       $query = "SELECT count(*) as ccount FROM $citations_table, $people_table
-        WHERE $citations_table.sourceID = '{$prow['personID']}' AND $citations_table.persfamID = $people_table.personID AND $citations_table.gedcom = $people_table.gedcom
+        WHERE $citations_table.sourceID = '{$prow['personID']}' AND $citations_table.persfamID = $people_table.personID
         AND (living = '1' OR private = '1')";
       $presult2 = tng_query($query);
       $prow2 = tng_fetch_assoc($presult2);
@@ -351,12 +351,12 @@ function getMediaLinkText($mediaID, $ioffset) {
     wifepeople.prefix as wprefix, wifepeople.suffix as wsuffix, husbpeople.personID as hpersonID, husbpeople.firstname as hfirstname, husbpeople.lnprefix as hlnprefix, husbpeople.lastname as hlastname,
     husbpeople.prefix as hprefix, husbpeople.suffix as hsuffix, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame
     FROM $medialinks_table
-    LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID AND $medialinks_table.gedcom = people.gedcom
-    LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID AND $medialinks_table.gedcom = $families_table.gedcom
-    LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID AND $families_table.gedcom = husbpeople.gedcom
-    LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID AND $families_table.gedcom = wifepeople.gedcom
-    LEFT JOIN $sources_table ON $medialinks_table.personID = $sources_table.sourceID AND $medialinks_table.gedcom = $sources_table.gedcom
-    LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID AND $medialinks_table.gedcom = $repositories_table.gedcom)
+    LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID
+    LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID
+    LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID
+    LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID
+    LEFT JOIN $sources_table ON $medialinks_table.personID = $sources_table.sourceID
+    LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID)
     WHERE mediaID = \"$mediaID\"$wherestr2 ORDER BY people.lastname, people.lnprefix, people.firstname, hlastname, hlnprefix, hfirstname  LIMIT $ioffsetstr" . ($maxsearchresults + 1);
   $presult = tng_query($query);
   $numrows = tng_num_rows($presult);

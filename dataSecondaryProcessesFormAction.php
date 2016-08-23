@@ -37,7 +37,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         $result = tng_query($query);
         while ($family = tng_fetch_assoc($result)) {
           $query = "SELECT $children_table.ID as ID, IF(birthdatetr !='0000-00-00',birthdatetr,altbirthdatetr) as birth FROM $children_table, $people_table
-      WHERE $children_table.familyID = \"{$family['familyID']}\" AND $people_table.personID = $children_table.personID AND $people_table.gedcom = $children_table.gedcom $wherestr2
+      WHERE $children_table.familyID = \"{$family['familyID']}\" AND $people_table.personID = $children_table.personID $wherestr2
       ORDER BY birth, ordernum";
           $fresult = tng_query($query);
           $order = 0;
@@ -60,11 +60,11 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         echo uiTextSnippet('people') . ":<br>\n";
         $fcount = 0;
         //first do husbands
-        $query = "SELECT personID, $families_table.gedcom as gedcom FROM $families_table, $people_table WHERE $people_table.personID = $families_table.husband AND $people_table.gedcom = $families_table.gedcom $wherestr";
+        $query = "SELECT personID, $families_table.gedcom as gedcom FROM $families_table, $people_table WHERE $people_table.personID = $families_table.husband $wherestr";
         $result = tng_query($query);
         while ($husband = tng_fetch_assoc($result)) {
           $query = "SELECT ID FROM $families_table
-      WHERE husband = \"{$husband['personID']}\" AND gedcom = \"{$husband['gedcom']}\"
+      WHERE husband = \"{$husband['personID']}\"
       ORDER BY marrdatetr, husborder";
           $fresult = tng_query($query);
           $order = 0;
@@ -82,11 +82,11 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         tng_free_result($result);
 
         //now do wives
-        $query = "SELECT personID, $families_table.gedcom as gedcom FROM $families_table, $people_table WHERE $people_table.personID = $families_table.wife AND $people_table.gedcom = $families_table.gedcom $wherestr";
+        $query = "SELECT personID, $families_table.gedcom as gedcom FROM $families_table, $people_table WHERE $people_table.personID = $families_table.wife $wherestr";
         $result = tng_query($query);
         while ($wife = tng_fetch_assoc($result)) {
           $query = "SELECT ID FROM $families_table
-      WHERE wife = \"{$wife['personID']}\" AND gedcom = \"{$wife['gedcom']}\"
+      WHERE wife = \"{$wife['personID']}\"
       ORDER BY marrdatetr, wifeorder";
           $fresult = tng_query($query);
           $order = 0;
@@ -178,15 +178,15 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         $result2 = tng_query($query);
 
         $fcount = 0;
-        $query = "SELECT distinct ($families_table.familyID), husband, wife, $families_table.gedcom as gedcom FROM ($children_table, $families_table) WHERE $families_table.familyID = $children_table.familyID AND $families_table.gedcom = $children_table.gedcom $wherestr";
+        $query = "SELECT distinct ($families_table.familyID), husband, wife, $families_table.gedcom as gedcom FROM ($children_table, $families_table) WHERE $families_table.familyID = $children_table.familyID $wherestr";
         $result = tng_query($query);
         while ($family = tng_fetch_assoc($result)) {
           if ($family['husband'] != "") {
-            $query = "UPDATE $children_table SET haskids = 1 WHERE personID = \"{$family['husband']}\" AND gedcom = \"{$family['gedcom']}\"";
+            $query = "UPDATE $children_table SET haskids = 1 WHERE personID = \"{$family['husband']}\"";
             $result2 = tng_query($query);
           }
           if ($family['wife'] != "") {
-            $query = "UPDATE $children_table SET haskids = 1 WHERE personID = \"{$family['wife']}\" AND gedcom = \"{$family['gedcom']}\"";
+            $query = "UPDATE $children_table SET haskids = 1 WHERE personID = \"{$family['wife']}\"";
             $result2 = tng_query($query);
           }
           $fcount++;
@@ -203,7 +203,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         while ($branch = tng_fetch_assoc($result)) {
           $success = 0;
           if (substr($branch['persfamID'], 0, 1) != 'F') {
-            $query = "SELECT branch FROM $people_table WHERE personID = \"{$branch['persfamID']}\" AND gedcom = \"{$branch['gedcom']}\"";
+            $query = "SELECT branch FROM $people_table WHERE personID = \"{$branch['persfamID']}\"";
             $result2 = tng_query($query);
             if (tng_num_rows($result2)) {
               $row = tng_fetch_assoc($result2);
@@ -217,14 +217,14 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
               } else {
                 $label = $branch['branch'];
               }
-              $query = "UPDATE $people_table SET branch = \"$label\" WHERE personID = \"{$branch['persfamID']}\" AND gedcom = \"{$branch['gedcom']}\"";
+              $query = "UPDATE $people_table SET branch = \"$label\" WHERE personID = \"{$branch['persfamID']}\"";
               $result3 = tng_query($query);
               $success = 1;
             }
             tng_free_result($result2);
           }
           if (!$success) {
-            $query = "SELECT branch FROM $families_table WHERE familyID = \"{$branch['persfamID']}\" AND gedcom = \"{$branch['gedcom']}\"";
+            $query = "SELECT branch FROM $families_table WHERE familyID = \"{$branch['persfamID']}\"";
             $result2 = tng_query($query);
             if (tng_num_rows($result2)) {
               $row = tng_fetch_assoc($result2);
@@ -238,7 +238,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
               } else {
                 $label = $branch['branch'];
               }
-              $query = "UPDATE $families_table SET branch = \"$label\" WHERE familyID = \"{$branch['persfamID']}\" AND gedcom = \"{$branch['gedcom']}\"";
+              $query = "UPDATE $families_table SET branch = \"$label\" WHERE familyID = \"{$branch['persfamID']}\"";
               $result3 = tng_query($query);
               $success = 1;
             }

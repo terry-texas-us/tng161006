@@ -147,7 +147,7 @@ function doMedia($mediatypeID) {
       }
       if ($prow['living'] == null && $prow['private'] == null && $prow['linktype'] == 'I') {
         $query = "SELECT count(personID) as ccount FROM $citations_table, $people_table
-          WHERE $citations_table.sourceID = '{$prow['personID']}' AND $citations_table.persfamID = $people_table.personID AND $citations_table.gedcom = $people_table.gedcom
+          WHERE $citations_table.sourceID = '{$prow['personID']}' AND $citations_table.persfamID = $people_table.personID
           AND (living = '1' OR private = '1')";
         $presult2 = tng_query($query);
         $prow2 = tng_fetch_assoc($presult2);

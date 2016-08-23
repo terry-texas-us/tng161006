@@ -90,10 +90,10 @@ function checkReview($type) {
   global $assignedbranch;
 
   if ($type == 'I') {
-    $revwhere = "$people_table.personID = $temp_events_table.personID AND $people_table.gedcom = $temp_events_table.gedcom AND (type = \"I\" OR type = \"C\")";
+    $revwhere = "$people_table.personID = $temp_events_table.personID AND (type = 'I' OR type = 'C')";
     $table = $people_table;
   } else {
-    $revwhere = "$families_table.familyID = $temp_events_table.familyID AND $families_table.gedcom = $temp_events_table.gedcom AND type = \"F\"";
+    $revwhere = "$families_table.familyID = $temp_events_table.familyID AND type = 'F'";
     $table = $families_table;
   }
   if ($assignedbranch) {

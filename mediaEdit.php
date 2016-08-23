@@ -61,12 +61,12 @@ $query = "SELECT $medialinks_table.medialinkID as mlinkID, $medialinks_table.per
     sourceID, sources.title, repositories.repoID as repoID, reponame, defphoto, linktype, dontshow, people.living, people.private, $families_table.living as fliving, $families_table.private as fprivate
     FROM $medialinks_table
     LEFT JOIN $treesTable as trees ON $medialinks_table.gedcom = trees.gedcom
-    LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID AND $medialinks_table.gedcom = people.gedcom
-    LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID AND $medialinks_table.gedcom = $families_table.gedcom
-    LEFT JOIN $sources_table AS sources ON $medialinks_table.personID = sources.sourceID AND $medialinks_table.gedcom = sources.gedcom
-    LEFT JOIN $repositories_table AS repositories ON $medialinks_table.personID = repositories.repoID AND $medialinks_table.gedcom = repositories.gedcom
-    LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID AND $families_table.gedcom = husbpeople.gedcom
-    LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID AND $families_table.gedcom = wifepeople.gedcom
+    LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID
+    LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID
+    LEFT JOIN $sources_table AS sources ON $medialinks_table.personID = sources.sourceID
+    LEFT JOIN $repositories_table AS repositories ON $medialinks_table.personID = repositories.repoID
+    LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID
+    LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID
     WHERE mediaID = \"$mediaID\" ORDER BY $medialinks_table.medialinkID DESC";
 $result2 = tng_query($query);
 $numlinks = tng_num_rows($result2);

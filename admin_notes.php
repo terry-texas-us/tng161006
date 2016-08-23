@@ -39,7 +39,7 @@ $helplang = findhelp("notes_help.php");
 header("Content-type:text/html; charset=" . $session_charset);
 
 $query = "SELECT $notelinks_table.ID as ID, $xnotes_table.note as note, noteID, secret FROM ($notelinks_table, $xnotes_table)
-    WHERE $notelinks_table.xnoteID = $xnotes_table.ID AND $notelinks_table.gedcom = $xnotes_table.gedcom
+    WHERE $notelinks_table.xnoteID = $xnotes_table.ID
         AND persfamID = '$persfamID' AND eventID = '$eventID' ORDER BY ordernum, ID";
 $notelinks = tng_query($query);
 $notecount = tng_num_rows($notelinks);

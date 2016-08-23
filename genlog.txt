@@ -1,3 +1,33 @@
+Mon 22 Aug 2016 09:09:34 PM <a href="placesearch.php?psearch=Anderson, Texas, United States">Search Results Anderson, Texas, United States</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 09:09:11 PM <a href='peopleShowPerson.php?personID=I4321'>Individual info for Alma Augusta Maria Lehmann (I4321)</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 09:09:09 PM <a href="search.php?mylastname=LEHMANN&amp;lnqualify=equals&amp;mybool=AND">Search Results for Last Name equals LEHMANN</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 09:09:06 PM <a href="surnames-oneletter.php?firstchar=L">Surname List: Begins with L</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 09:09:03 PM <a href='surnames.php'>Surname List</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 09:08:58 PM <a href="surnames-oneletter.php?firstchar=A">Surname List: Begins with A</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 09:08:57 PM <a href="search.php?mylastname=ANDRES&amp;lnqualify=equals&amp;mybool=AND">Search Results for Last Name equals ANDRES</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 09:08:54 PM <a href="surnames-oneletter.php?firstchar=A">Surname List: Begins with A</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 09:08:52 PM <a href='surnames.php'>Surname List</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 09:08:46 PM <a href="repositoriesShow.php?offset=&amp;reposearch=">Repositories</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 09:07:53 PM <a href='showtree.php'>Tree: master</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 09:07:45 PM <a href='peopleShowPerson.php?personID=I1389'>Individual info for Johann Ernst Fürchtegott Teinert (I1389)</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 09:04:49 PM <a href="search.php?">Search Results </a> accessed by DESKTOP.
+Mon 22 Aug 2016 06:40:47 PM <a href="register.php?personID=I1389">Descendancy for Johann Ernst Fürchtegott Teinert (I1389)</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 06:40:45 PM <a href="descendtext.php?personID=I1389">Descendancy for Johann Ernst Fürchtegott Teinert (I1389)</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 06:40:43 PM <a href="descend.php?personID=I1389&amp;display=compact">Descendancy for Johann Ernst Fürchtegott Teinert (I1389)</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 06:40:39 PM <a href="descend.php?personID=I1389&amp;display=standard">Descendancy for Johann Ernst Fürchtegott Teinert (I1389)</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 06:40:29 PM <a href="ahnentafel.php?personID=I1389">Ahnentafel: Johann Ernst Fürchtegott Teinert (I1389)</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 06:40:27 PM <a href="pedigree.php?personID=I1389&amp;generations=4&amp;display=textonly">Pedigree Chart for Johann Ernst Fürchtegott Teinert (I1389)</a> 4 Generations accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 06:40:24 PM <a href="pedigree.php?personID=I1389&amp;generations=4&amp;display=box">Pedigree Chart for Johann Ernst Fürchtegott Teinert (I1389)</a> 4 Generations accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 06:40:21 PM <a href="pedigree.php?personID=I1389&amp;generations=4&amp;display=compact">Pedigree Chart for Johann Ernst Fürchtegott Teinert (I1389)</a> 4 Generations accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 06:40:17 PM <a href="verticalchart.php?personID=I1389&amp;generations=&amp;display=vertical">Pedigree Chart for Johann Ernst Fürchtegott Teinert (I1389)</a>   accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 06:38:11 PM <a href="verticalchart.php?personID=I1389&amp;generations=&amp;display=vertical">Pedigree Chart for Johann Ernst Fürchtegott Teinert (I1389)</a>   accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 06:38:08 PM <a href="pedigree.php?personID=I1389&amp;generations=4&amp;display=standard">Pedigree Chart for Johann Ernst Fürchtegott Teinert (I1389)</a> 4 Generations accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 06:38:02 PM <a href="familiesShowFamily.php?familyID=F1466">Family Group Sheet for Christoph Vogel/Agnes Jenke (F1466)</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 06:27:50 PM <a href="familiesShowFamily.php?familyID=F1466">Family Group Sheet for Christoph Vogel/Agnes Jenke (F1466)</a> accessed by DESKTOP.
+Mon 22 Aug 2016 06:27:45 PM <a href="browsenotes.php?offset=75&amp;notesearch=">Notes</a> accessed by DESKTOP.
+Mon 22 Aug 2016 06:27:32 PM <a href="browsenotes.php?offset=&amp;notesearch=">Notes</a> accessed by DESKTOP.
+Mon 22 Aug 2016 06:24:45 PM <a href="showmedia.php?mediaID=7&amp;tnggallery=">Headstones: Drosche, Maria.jpg (7)</a> accessed by DESKTOP (User: Administrator).
+Mon 22 Aug 2016 05:46:13 PM <a href="placesearch.php?psearch=Albany, Shackelford, Texas, United States">Search Results Albany, Shackelford, Texas, United States</a> accessed by DESKTOP (User: Administrator).
 Fri 19 Aug 2016 02:57:39 PM <a href='showtree.php?tree=master'>Tree: master</a> accessed by DESKTOP.
 Fri 19 Aug 2016 02:57:25 PM <a href='surnames.php?tree=twall'>Surname List (Tree: twall)</a> accessed by DESKTOP.
 Fri 19 Aug 2016 02:57:19 PM <a href='showtree.php?tree=master'>Tree: master</a> accessed by DESKTOP.
@@ -218,33 +248,3 @@ Thu 18 Aug 2016 10:18:44 PM <a href='placesMain.php'>Place List</a> accessed by 
 Thu 18 Aug 2016 10:18:37 PM <a href='surnames.php?tree=earlywends'>Surname List (Tree: earlywends)</a> accessed by DESKTOP.
 Thu 18 Aug 2016 09:34:46 PM <a href='peopleShowPerson.php?personID=I1389'>Individual info for Johann Ernst Fürchtegott Teinert (I1389)</a> accessed by DESKTOP.
 Thu 18 Aug 2016 09:34:42 PM <a href="pedigree.php?personID=I1389&amp;generations=4&amp;display=standard">Pedigree Chart for Johann Ernst Fürchtegott Teinert (I1389)</a> 4 Generations accessed by DESKTOP.
-Thu 18 Aug 2016 09:13:48 PM <a href="familiesShowFamily.php?familyID=F1372">Family Group Sheet for Carl Friedrich Adam Frank/Wilhelmine Arnold (F1372)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 09:13:41 PM <a href="calendar.php?living=&amp;hide=&amp;tree=earlywends&amp;m=&amp;year=">Calendar</a> accessed by DESKTOP.
-Thu 18 Aug 2016 09:00:34 PM <a href="ahnentafel.php?personID=I1389">Ahnentafel: Johann Ernst Fürchtegott Teinert (I1389)</a> accessed by DESKTOP (User: Administrator).
-Thu 18 Aug 2016 09:00:28 PM <a href="ahnentafel.php?personID=I1389">Ahnentafel: Johann Ernst Fürchtegott Teinert (I1389)</a> accessed by DESKTOP (User: Administrator).
-Thu 18 Aug 2016 09:00:24 PM <a href="pedigree.php?personID=I1389&amp;generations=4&amp;display=standard">Pedigree Chart for Johann Ernst Fürchtegott Teinert (I1389)</a> 4 Generations accessed by DESKTOP (User: Administrator).
-Thu 18 Aug 2016 06:28:23 PM <a href="familiesShowFamily.php?familyID=F532">Family Group Sheet for Johann Carl Teinert/Hanna Christine Michalk (F532)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 06:28:05 PM <a href="familiesShowFamily.php?familyID=F532">Family Group Sheet for Johann Carl Teinert/Hanna Christine Michalk (F532)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 06:27:50 PM <a href='peopleShowPerson.php?personID=I563'>Individual info for Agnes Teinert (I563)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 06:27:47 PM <a href="search.php?mybool=AND&amp;nr=50&amp;mylastname=teinert&amp;lnqualify=contains">Search Results for Last Name contains teinert AND Tree equals Early Wends</a> accessed by DESKTOP.
-Thu 18 Aug 2016 06:23:48 PM <a href="showmedia.php?mediaID=10&amp;tnggallery=">Photos: Noack, Maria.JPG (10)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 06:23:44 PM <a href="mediaShow.php?offset=&amp;mediasearch=&amp;mediatypeID=">All Media (Tree: earlywends)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 06:23:35 PM <a href="showmedia.php?mediaID=7&amp;tnggallery=">Headstones: Drosche, Maria.jpg (7)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 06:23:32 PM <a href="mediaShow.php?offset=&amp;mediasearch=&amp;mediatypeID=headstones">Headstones (Tree: earlywends)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 06:23:21 PM <a href="showmedia.php?mediaID=9&amp;tnggallery=">Headstones: Bamsch, Henry & Ernestine [].JPG (9)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 06:22:41 PM <a href="showmedia.php?mediaID=9&amp;tnggallery=">Headstones: Bamsch, Henry & Ernestine [].JPG (9)</a> accessed by DESKTOP (User: Administrator).
-Thu 18 Aug 2016 06:22:19 PM <a href="mediaShow.php?offset=&amp;mediasearch=&amp;mediatypeID=">All Media (Tree: earlywends)</a> accessed by DESKTOP (User: Administrator).
-Thu 18 Aug 2016 05:27:15 PM <a href='whatsnew.php?'>What's New</a> accessed by DESKTOP (User: Administrator).
-Thu 18 Aug 2016 05:13:01 PM <a href="showmedia.php?mediaID=6&amp;tnggallery=">Headstones: Foerster, Johann August.JPG (6)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 05:12:55 PM <a href="mediaShow.php?offset=&amp;mediasearch=&amp;mediatypeID=">All Media (Tree: earlywends)</a> accessed by DESKTOP.
-Thu 18 Aug 2016 05:12:44 PM <a href="mediaShow.php?offset=&amp;mediasearch=&amp;mediatypeID=">All Media (Tree: earlywends)</a> accessed by DESKTOP (User: Administrator).
-Thu 18 Aug 2016 03:43:04 PM <a href='peopleShowPerson.php?personID=I1391'>Individual info for Clara Esther Teinert (I1391)</a> accessed by DESKTOP (User: Administrator).
-Thu 18 Aug 2016 03:42:58 PM <a href="ahnentafel.php?personID=I1389">Ahnentafel: Johann Ernst Fürchtegott Teinert (I1389)</a> accessed by DESKTOP (User: Administrator).
-Thu 18 Aug 2016 03:42:44 PM <a href="pedigree.php?personID=I1389&amp;generations=4&amp;display=standard">Pedigree Chart for Johann Ernst Fürchtegott Teinert (I1389)</a> 4 Generations accessed by DESKTOP (User: Administrator).
-Thu 18 Aug 2016 03:42:38 PM <a href="register.php?personID=I1389">Descendancy for Johann Ernst Fürchtegott Teinert (I1389)</a> accessed by DESKTOP (User: Administrator).
-Thu 18 Aug 2016 03:42:35 PM <a href="descend.php?personID=I1389&amp;display=standard">Descendancy for Johann Ernst Fürchtegott Teinert (I1389)</a> accessed by DESKTOP (User: Administrator).
-Thu 18 Aug 2016 03:42:29 PM <a href='peopleShowPerson.php?personID=I1389'>Individual info for Johann Ernst Fürchtegott Teinert (I1389)</a> accessed by DESKTOP (User: Administrator).
-Thu 18 Aug 2016 03:42:24 PM <a href="pedigree.php?personID=I1389&amp;generations=4&amp;display=standard">Pedigree Chart for Johann Ernst Fürchtegott Teinert (I1389)</a> 4 Generations accessed by DESKTOP (User: Administrator).
-Thu 18 Aug 2016 03:04:02 PM <a href='timeline.php?primaryID='>Timeline ()</a> accessed by DESKTOP (User: Administrator).
-Thu 18 Aug 2016 02:01:10 PM <a href="places-oneletter.php?firstchar=&amp;psearch=serbin">Place List: serbin</a> accessed by DESKTOP (User: Administrator).
-Thu 18 Aug 2016 01:59:51 PM <a href="placesearch.php?psearch=Serbin, Bastrop, Texas, United States">Search Results Serbin, Bastrop, Texas, United States</a> accessed by DESKTOP (User: Administrator).

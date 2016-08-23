@@ -104,7 +104,7 @@ if ($spousename == 'husband') {
 if ($allwhere2) {
   $allwhere2 .= "AND 1=1";
   $allwhere .= " $allwhere2";
-  $allwhere .= " AND $people_table.gedcom = $families_table.gedcom";
+  $allwhere .= " ";
 
   if ($assignedbranch) {
     $allwhere .= " AND $families_table.branch LIKE \"%$assignedbranch%\"";

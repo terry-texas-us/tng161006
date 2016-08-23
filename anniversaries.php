@@ -259,7 +259,7 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
 
             $eventsjoin = ", $events_table";
             $eventsfields = ",info";
-            $allwhere .= " AND $people_table.personID = $events_table.persfamID AND $people_table.gedcom = $events_table.gedcom AND eventtypeID = \"$tngevent\"";
+            $allwhere .= " AND $people_table.personID = $events_table.persfamID AND eventtypeID = \"$tngevent\"";
             $tngevent = "event";
             break;
         }

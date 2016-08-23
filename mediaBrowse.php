@@ -376,10 +376,10 @@ $headSection->setTitle(uiTextSnippet('media'));
             $query = "SELECT people.personID as personID2, familyID, husband, wife, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.prefix as prefix, people.suffix as suffix, nameorder,
               $medialinks_table.personID as personID, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame, linktype, $families_table.gedcom as gedcom
               FROM $medialinks_table
-              LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID AND $medialinks_table.gedcom = people.gedcom
-              LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID AND $medialinks_table.gedcom = $families_table.gedcom
-              LEFT JOIN $sources_table ON $medialinks_table.personID = $sources_table.sourceID AND $medialinks_table.gedcom = $sources_table.gedcom
-              LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID AND $medialinks_table.gedcom = $repositories_table.gedcom)
+              LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID
+              LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID
+              LEFT JOIN $sources_table ON $medialinks_table.personID = $sources_table.sourceID
+              LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID)
               WHERE mediaID = \"{$row['mediaID']}\" ORDER BY lastname, lnprefix, firstname, personID LIMIT 10";
             $presult = tng_query($query);
             $medialinktext = "";

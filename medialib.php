@@ -30,16 +30,16 @@ function resortMedia($mediaID) {
       $query = "DELETE FROM $medialinks_table WHERE mediaID = {$plink['mediaID']}";
       tng_query($query);
 
-      $query = "SELECT personID from $people_table WHERE personID = \"{$plink['personID']}\" AND gedcom = \"{$plink['gedcom']}\"";
+      $query = "SELECT personID from $people_table WHERE personID = \"{$plink['personID']}\"";
       reorderMedia($query, $plink, $plink['mediatypeID']);
 
-      $query = "SELECT familyID as personID from $families_table WHERE familyID = \"{$plink['personID']}\" AND gedcom = \"{$plink['gedcom']}\"";
+      $query = "SELECT familyID as personID from $families_table WHERE familyID = \"{$plink['personID']}\"";
       reorderMedia($query, $plink, $plink['mediatypeID']);
 
-      $query = "SELECT sourceID as personID from $sources_table WHERE sourceID = \"{$plink['personID']}\" AND gedcom = \"{$plink['gedcom']}\"";
+      $query = "SELECT sourceID as personID from $sources_table WHERE sourceID = \"{$plink['personID']}\"";
       reorderMedia($query, $plink, $plink['mediatypeID']);
 
-      $query = "SELECT repoID as personID from $repositories_table WHERE repoID = \"{$plink['personID']}\" AND gedcom = \"{$plink['gedcom']}\"";
+      $query = "SELECT repoID as personID from $repositories_table WHERE repoID = \"{$plink['personID']}\"";
       reorderMedia($query, $plink, $plink['mediatypeID']);
     }
     tng_free_result($result2);

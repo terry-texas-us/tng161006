@@ -85,16 +85,16 @@ if ($xphaction == uiTextSnippet('convto')) {
           $result5 = tng_query($query5) or die(uiTextSnippet('cannotexecutequery') . ": $query5");
 
           //reorder old media type for everything linked to item
-          $query6 = "SELECT personID from $people_table WHERE personID = \"{$row3['personID']}\" AND gedcom = \"{$row3['gedcom']}\"";
+          $query6 = "SELECT personID from $people_table WHERE personID = \"{$row3['personID']}\"";
           reorderMedia($query6, $row3, $row3['mediatypeID']);
 
-          $query6 = "SELECT familyID as personID from $families_table WHERE familyID = \"{$row3['personID']}\" AND gedcom = \"{$row3['gedcom']}\"";
+          $query6 = "SELECT familyID as personID from $families_table WHERE familyID = \"{$row3['personID']}\"";
           reorderMedia($query6, $row3, $row3['mediatypeID']);
 
-          $query6 = "SELECT sourceID as personID from $sources_table WHERE sourceID = \"{$row3['personID']}\" AND gedcom = \"{$row3['gedcom']}\"";
+          $query6 = "SELECT sourceID as personID from $sources_table WHERE sourceID = \"{$row3['personID']}\"";
           reorderMedia($query6, $row3, $row3['mediatypeID']);
 
-          $query6 = "SELECT repoID as personID from $repositories_table WHERE repoID = \"{$row3['personID']}\" AND gedcom = \"{$row3['gedcom']}\"";
+          $query6 = "SELECT repoID as personID from $repositories_table WHERE repoID = \"{$row3['personID']}\"";
           reorderMedia($query6, $row3, $row3['mediatypeID']);
         }
         tng_free_result($result3);

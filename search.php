@@ -389,7 +389,7 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
             $spouseID = $row['husband'] ? $row['husband'] : $row['wife'];
           }
           if ($spouseID) {
-            $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, living, private, branch, gedcom FROM $people_table WHERE personID = \"$spouseID\" AND gedcom = \"{$row['gedcom']}\"";
+            $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, living, private, branch, gedcom FROM $people_table WHERE personID = \"$spouseID\"";
             $spresult = tng_query($query);
             if ($spresult) {
               $sprow = tng_fetch_assoc($spresult);

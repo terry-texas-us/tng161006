@@ -5,7 +5,7 @@ require 'adminlib.php';
 require 'checklogin.php';
 
 $query = "SELECT $xnotes_table.note as note, $xnotes_table.ID as xID, secret, $notelinks_table.gedcom as gedcom, persfamID, eventID FROM $notelinks_table,  $xnotes_table
-    WHERE $notelinks_table.xnoteID = $xnotes_table.ID AND $notelinks_table.gedcom = $xnotes_table.gedcom AND $notelinks_table.ID = \"$noteID\"";
+    WHERE $notelinks_table.xnoteID = $xnotes_table.ID AND $notelinks_table.ID = '$noteID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
