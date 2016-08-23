@@ -30,14 +30,11 @@ if ($offset) {
 }
 
 if ($branchsearch) {
-  $wherestr = " AND (branch LIKE \"%$branchsearch%\" OR b.description LIKE \"%$branchsearch%\")";
+  $whereClause = "WHERE (branch LIKE '%$branchsearch%' OR description LIKE '%$branchsearch%')";
 } else {
-  $wherestr = "";
+  $whereClause = "";
 }
-$query = "SELECT b.branch, b.gedcom, b.description, treename, personID
-    FROM ($branches_table as b, $treesTable as t)
-    WHERE b.gedcom = t.gedcom $wherestr
-    ORDER BY b.description LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT branch, description, personID FROM $branches_table $whereClause ORDER BY description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
@@ -123,8 +120,8 @@ $headSection->setTitle(uiTextSnippet('branches'));
           echo "<td>$i</td>\n";
           echo "<td>{$row['description']}</td>\n";
           echo "<td><a href=\"peopleShowPerson.php?personID={$row['personID']}\">$namestr</a></td>\n";
-          echo "<td align='right'><a href=\"search.php?tree={$row['gedcom']}&amp;branch={$row['branch']}\">" . number_format($indrow['pcount']) . "</a></td>\n";
-          echo "<td align='right'><a href=\"famsearch.php?tree={$row['gedcom']}&amp;branch={$row['branch']}\">" . number_format($famrow['fcount']) . "</a></td>\n";
+          echo "<td align='right'><a href=\"search.php?branch={$row['branch']}\">" . number_format($indrow['pcount']) . "</a></td>\n";
+          echo "<td align='right'><a href=\"famsearch.php?branch={$row['branch']}\">" . number_format($famrow['fcount']) . "</a></td>\n";
           echo "</tr>\n";
           $i++;
         }

@@ -117,7 +117,7 @@ if ($nokids) {
   $nokidhaving = "HAVING ChildrenCount = 0 ";
   $nokidgroup = "GROUP BY $people_table.personID, $people_table.lastname, $people_table.firstname, $people_table.firstname, $people_table.lnprefix, "
           . "$people_table.prefix, $people_table.suffix, $people_table.nameorder, $people_table.birthdate, birthyear, $people_table.birthplace, $people_table.altbirthdate, altbirthyear, "
-          . "$people_table.altbirthplace, $people_table.gedcom, $treesTable.treename ";
+          . "$people_table.altbirthplace ";
   $nokidselect = ", SUM((childrenH.familyID is not NULL) + (childrenW.familyID is not NULL)) AS ChildrenCount ";
   $nokidgroup2 = "GROUP BY $people_table.personID, $people_table.lastname, $people_table.firstname, $people_table.firstname, $people_table.lnprefix ";
 } else {
@@ -129,9 +129,8 @@ if ($nokids) {
 $query = "SELECT $people_table.ID, $people_table.personID, lastname, firstname, lnprefix, prefix, suffix, nameorder, "
   . "birthdate, LPAD(SUBSTRING_INDEX(birthdate, ' ', -1),4,'0') as birthyear, birthplace, "
   . "altbirthdate, LPAD(SUBSTRING_INDEX(altbirthdate, ' ', -1),4,'0') as altbirthyear, altbirthplace, "
-  . "deathdate, LPAD(SUBSTRING_INDEX(deathdate, ' ', -1),4,'0') as deathyear, deathplace, "
-  . "$people_table.gedcom as gedcom, treename $nokidselect "
-  . "FROM ($people_table, $treesTable) $nokidjoin $noparentjoin $nospousejoin "
+  . "deathdate, LPAD(SUBSTRING_INDEX(deathdate, ' ', -1),4,'0') as deathyear, deathplace $nokidselect "
+  . "FROM ($people_table) $nokidjoin $noparentjoin $nospousejoin "
   . "WHERE $allwhere $nokidgroup $nokidhaving "
   . "ORDER BY lastname, lnprefix, firstname, birthyear, altbirthyear LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
@@ -140,13 +139,13 @@ $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
   if ($nokids) {
     $query = "SELECT $people_table.ID, $people_table.personID, lastname, firstname, lnprefix $nokidselect "
-            . "FROM ($people_table, $treesTable) $nokidjoin $noparentjoin $nospousejoin "
+            . "FROM ($people_table) $nokidjoin $noparentjoin $nospousejoin "
             . "WHERE $allwhere $nokidgroup2 $nokidhaving";
     $result2 = tng_query($query);
     $totrows = tng_num_rows($result2);
   } else {
     $query = "SELECT count($people_table.personID) as pcount "
-            . "FROM ($people_table, $treesTable) $noparentjoin $nospousejoin "
+            . "FROM ($people_table) $noparentjoin $nospousejoin "
             . "WHERE $allwhere";
     $result2 = tng_query($query);
     $row = tng_fetch_assoc($result2);

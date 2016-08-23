@@ -73,12 +73,12 @@ if ($searchstring) {
   $allwhere .= addCriteria("reponame", $searchstring, $frontmod);
   $allwhere .= ")";
 }
-$query = "SELECT ID, repoID, reponame, $repositories_table.gedcom as gedcom, treename FROM ($repositories_table, $treesTable) WHERE $allwhere ORDER BY reponame, repoID LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT ID, repoID, reponame FROM $repositories_table WHERE $allwhere ORDER BY reponame, repoID LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(repoID) as rcount FROM ($repositories_table, $treesTable) WHERE $allwhere";
+  $query = "SELECT count(repoID) as rcount FROM $repositories_table WHERE $allwhere";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['rcount'];

@@ -81,12 +81,12 @@ if ($searchstring) {
   $allwhere .= ")";
 }
 
-$query = "SELECT sourceID, shorttitle, title, $sources_table.gedcom as gedcom, treename, ID FROM ($sources_table, $treesTable) WHERE $allwhere ORDER BY shorttitle, title LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT sourceID, shorttitle, title, ID FROM $sources_table WHERE $allwhere ORDER BY shorttitle, title LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(sourceID) as scount FROM ($sources_table, $treesTable) WHERE $allwhere";
+  $query = "SELECT count(sourceID) as scount FROM $sources_table WHERE $allwhere";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['scount'];

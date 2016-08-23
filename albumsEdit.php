@@ -25,11 +25,8 @@ $query2 = "SELECT albumlinkID, thumbpath, $media_table.mediaID as mediaID, useco
 $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
 $numrows = tng_num_rows($result2);
 
-$query3 = "SELECT alinkID, entityID, eventID, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.suffix as suffix, people.nameorder as nameorder, ate.gedcom, treename,
-    familyID, people.personID as personID, wifepeople.personID as wpersonID, wifepeople.firstname as wfirstname, wifepeople.lnprefix as wlnprefix, wifepeople.lastname as wlastname, wifepeople.prefix as wprefix, wifepeople.suffix as wsuffix, wifepeople.nameorder as wnameorder,
-    husbpeople.personID as hpersonID, husbpeople.firstname as hfirstname, husbpeople.lnprefix as hlnprefix, husbpeople.lastname as hlastname, husbpeople.prefix as hprefix, husbpeople.suffix as hsuffix, husbpeople.nameorder as hnameorder,
-    sourceID, sources.title, repositories.repoID as repoID, reponame, linktype
-    FROM ($album2entities_table as ate, $treesTable)
+$query3 = "SELECT alinkID, entityID, eventID, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.suffix as suffix, people.nameorder as nameorder, familyID, people.personID as personID, wifepeople.personID as wpersonID, wifepeople.firstname as wfirstname, wifepeople.lnprefix as wlnprefix, wifepeople.lastname as wlastname, wifepeople.prefix as wprefix, wifepeople.suffix as wsuffix, wifepeople.nameorder as wnameorder, husbpeople.personID as hpersonID, husbpeople.firstname as hfirstname, husbpeople.lnprefix as hlnprefix, husbpeople.lastname as hlastname, husbpeople.prefix as hprefix, husbpeople.suffix as hsuffix, husbpeople.nameorder as hnameorder, sourceID, sources.title, repositories.repoID as repoID, reponame, linktype
+    FROM ($album2entities_table as ate)
     LEFT JOIN $people_table AS people ON ate.entityID = people.personID
     LEFT JOIN $families_table ON ate.entityID = $families_table.familyID
     LEFT JOIN $sources_table AS sources ON ate.entityID = sources.sourceID
@@ -43,8 +40,6 @@ $numlinks = tng_num_rows($result3);
 if (!$thumbmaxw) {
   $thumbmaxw = 50;
 }
-$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifyalbum'));
 ?>
@@ -283,7 +278,6 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
                   <th><?php echo uiTextSnippet('action'); ?></th>
                   <th><?php echo uiTextSnippet('linktype'); ?></th>
                   <th><?php echo uiTextSnippet('name') . ", " . uiTextSnippet('id'); ?></th>
-                  <th><?php echo uiTextSnippet('tree'); ?></th>
                   <th><?php echo uiTextSnippet('event'); ?></th>
                 </tr>
                 <?php
@@ -349,7 +343,6 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
                     echo "</td>\n";
                     echo "<td>" . uiTextSnippet($type) . "</td>\n";
                     echo "<td>$name$id</td>\n";
-                    echo "<td>{$plink['treename']}</td>\n";
                     echo "<td id=\"event_{$plink['alinkID']}\">$eventstr&nbsp;</td>\n";
                     echo "</tr>\n";
                   }
