@@ -10,7 +10,6 @@ $maxsearchresults = $nr ? ($nr < 200 ? $nr : 200) : ($_SESSION['tng_nr'] ? $_SES
 if (!isset($mybool)) {
   $mybool = "AND";
 }
-$_SESSION['tng_search_tree'] = $tree;
 $_SESSION['tng_search_branch'] = $branch;
 $_SESSION['tng_search_lnqualify'] = $lnqualify;
 $mylastname = trim(stripslashes($mylastname));
@@ -57,7 +56,6 @@ $myburialyear = trim(stripslashes($myburialyear));
 $_SESSION['tng_search_burialyear'] = cleanIt($myburialyear);
 
 $_SESSION['tng_search_bool'] = $mybool;
-$_SESSION['tng_search_showdeath'] = $showdeath;
 $_SESSION['tng_search_gender'] = $mygender;
 
 $_SESSION['tng_search_showspouse'] = $showspouse;
@@ -70,50 +68,47 @@ if ($order) {
   $_SESSION['tng_search_order'] = $order;
 } else {
   $order = isset($_SESSION['tng_search_order']) ? $_SESSION['tng_search_order'] : "name";
-  if (!$showdeath && ($order == "death" || $order == "deathup")) {
-    $order = "name";
-  }
 }
-$_SERVER['QUERY_STRING'] = str_replace(array('&amp;', '&'), array('&', '&amp;'), $_SERVER['QUERY_STRING']);
+$_SERVER['QUERY_STRING'] = str_replace(['&amp;', '&'], ['&', '&amp;'], $_SERVER['QUERY_STRING']);
 $birthsort = "birth";
 $deathsort = "death";
 $namesort = "nameup";
 $orderloc = strpos($_SERVER['QUERY_STRING'], "&amp;order=");
 $currargs = $orderloc > 0 ? substr($_SERVER['QUERY_STRING'], 0, $orderloc) : $_SERVER['QUERY_STRING'];
-$birthlabel = $tngconfig['hidechr'] ? uiTextSnippet('born') : uiTextSnippet('bornchr');
 $mybooltext = $mybool == "AND" ? uiTextSnippet('cap_and') : uiTextSnippet('cap_or');
 
+$birthOrderHeader = $tngconfig['hidechr'] ? uiTextSnippet('born') : uiTextSnippet('bornchr');
 if ($order == "birth") {
-  $orderstr = "IF(p.birthdatetr, p.birthdatetr, p.altbirthdatetr), p.lastname, p.firstname";
-  $birthsort = $tngprint ? $birthlabel : "<a href=\"search.php?$currargs&amp;order=birthup\">$birthlabel <img src=\"img/tng_sort_desc.gif\" width=\"15\" height=\"8\" alt=''></a>";
+  $orderbyClause = "IF(p.birthdatetr, p.birthdatetr, p.altbirthdatetr), p.lastname, p.firstname";
+  $birthsort = $tngprint ? $birthOrderHeader : "<a href=\"search.php?$currargs&amp;order=birthup\">$birthOrderHeader <img src='img/tng_sort_desc.gif' width='15' height='8' alt=''></a>";
 } else {
-  $birthsort = $tngprint ? $birthlabel : "<a href=\"search.php?$currargs&amp;order=birth\">$birthlabel <img src=\"img/tng_sort_asc.gif\" width=\"15\" height=\"8\" alt=''></a>";
+  $birthsort = $tngprint ? $birthOrderHeader : "<a href=\"search.php?$currargs&amp;order=birth\">$birthOrderHeader <img src='img/tng_sort_asc.gif' width='15' height='8' alt=''></a>";
   if ($order == "birthup") {
-    $orderstr = "IF(p.birthdatetr, p.birthdatetr, p.altbirthdatetr) DESC, p.lastname, p.firstname";
+    $orderbyClause = "IF(p.birthdatetr, p.birthdatetr, p.altbirthdatetr) DESC, p.lastname, p.firstname";
   }
 }
+$deathOrderHeader = uiTextSnippet('diedburied');
 if ($order == "death") {
-  $orderstr = "IF(p.deathdatetr, p.deathdatetr, p.burialdatetr), p.lastname, p.firstname, IF(p.birthdatetr, p.birthdatetr, p.altbirthdatetr)";
-  $deathsort = $tngprint ? uiTextSnippet('diedburied') : "<a href=\"search.php?$currargs&amp;order=deathup\">" . uiTextSnippet('diedburied') . " <img src=\"img/tng_sort_desc.gif\" width=\"15\" height=\"8\"></a>";
+  $orderbyClause = "IF(p.deathdatetr, p.deathdatetr, p.burialdatetr), p.lastname, p.firstname, IF(p.birthdatetr, p.birthdatetr, p.altbirthdatetr)";
+  $deathsort = $tngprint ? $deathOrderHeader : "<a href=\"search.php?$currargs&amp;order=deathup\">" . $deathOrderHeader . " <img src='img/tng_sort_desc.gif' width='15' height='8'></a>";
 } else {
-  $deathsort = $tngprint ? uiTextSnippet('diedburied') : "<a href=\"search.php?$currargs&amp;order=death\">" . uiTextSnippet('diedburied') . " <img src=\"img/tng_sort_asc.gif\" width=\"15\" height=\"8\"></a>";
+  $deathsort = $tngprint ? $deathOrderHeader : "<a href=\"search.php?$currargs&amp;order=death\">" . $deathOrderHeader . " <img src='img/tng_sort_asc.gif' width='15' height='8'></a>";
   if ($order == "deathup") {
-    $orderstr = "IF(p.deathdatetr, p.deathdatetr, p.burialdatetr) DESC, p.lastname, p.firstname, IF(p.birthdatetr, p.birthdatetr, p.altbirthdatetr)";
+    $orderbyClause = "IF(p.deathdatetr, p.deathdatetr, p.burialdatetr) DESC, p.lastname, p.firstname, IF(p.birthdatetr, p.birthdatetr, p.altbirthdatetr)";
   }
 }
-$nametitle = uiTextSnippet('lastfirst');
+$nametitle = uiTextSnippet('name');
 if ($order == "name") {
-  $orderstr = "p.lastname, p.firstname, IF(p.birthdatetr, p.birthdatetr, p.altbirthdatetr)";
-  $namesort = $tngprint ? $nametitle : "<a href=\"search.php?$currargs&amp;order=nameup\">$nametitle <img src=\"img/tng_sort_desc.gif\" width=\"15\" height=\"8\" alt=''></a>";
+  $orderbyClause = "p.lastname, p.firstname, IF(p.birthdatetr, p.birthdatetr, p.altbirthdatetr)";
+  $namesort = $tngprint ? $nametitle : "<a href=\"search.php?$currargs&amp;order=nameup\">$nametitle <img src='img/tng_sort_desc.gif' width='15' height='8' alt=''></a>";
 } else {
-  $namesort = $tngprint ? $nametitle : "<a href=\"search.php?$currargs&amp;order=name\">$nametitle <img src=\"img/tng_sort_asc.gif\" width=\"15\" height=\"8\" alt=''></a>";
+  $namesort = $tngprint ? $nametitle : "<a href=\"search.php?$currargs&amp;order=name\">$nametitle <img src='img/tng_sort_asc.gif' width='15' height='8' alt=''></a>";
   if ($order == "nameup") {
-    $orderstr = "p.lastname DESC, p.firstname DESC, IF(p.birthdatetr, p.birthdatetr, p.altbirthdatetr)";
+    $orderbyClause = "p.lastname DESC, p.firstname DESC, IF(p.birthdatetr, p.birthdatetr, p.altbirthdatetr)";
   }
 }
 
-function buildCriteria($column, $colvar, $qualifyvar, $qualifier, $value, $textstr)
-{
+function buildCriteria($column, $colvar, $qualifyvar, $qualifier, $value, $textstr) {
   global $lnprefixes;
   global $criteria_limit;
   global $criteria_count;
@@ -205,7 +200,7 @@ if ($mygender) {
   }
   buildCriteria("p.sex", "mygender", "gequalify", $gequalify, $mygender, uiTextSnippet('gender'));
 }
-$dontdo = array("ADDR", "BIRT", "CHR", "DEAT", "BURI", "NICK", "TITL", "NSFX");
+$dontdo = ["ADDR", "BIRT", "CHR", "DEAT", "BURI", "NICK", "TITL", "NSFX"];
 $cejoin = doCustomEvents('I');
 
 $gotInput = $mytitle || $myprefix || $mysuffix || $mynickname || $mybirthplace || $mydeathplace || $mybirthyear || $mydeathyear || $ecount;
@@ -221,43 +216,38 @@ if ($allwhere) {
   $allwhere = "WHERE " . $allwhere;
   $querystring = uiTextSnippet('text_for') . " $querystring";
 }
-if ($orderstr) {
-  $orderstr = "ORDER BY $orderstr";
+if ($orderbyClause) {
+  $orderbyClause = "ORDER BY $orderbyClause";
 }
 $max_browsesearch_pages = 5;
+
+$limitClause = "LIMIT ";
 if ($offset) {
   $offsetplus = $offset + 1;
-  $newoffset = "$offset, ";
+  $limitClause .= "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
   $page = 1;
 }
+$limitClause .= $maxsearchresults;
+
 if (($mysplname && $mygender) || $spqualify == 'exists' || $spqualify == "dnexist") {
-  $gstring = $mygender == 'F' ? "p.personID = wife AND spouse.personID = husband" : "p.personID = husband AND spouse.personID = wife";
-  $query = "SELECT p.ID, spouse.personID as spersonID, p.personID, p.lastname, p.lnprefix, p.firstname, p.living, p.private,
-    p.branch, p.nickname, p.suffix, p.prefix, p.nameorder, p.title, p.birthplace, p.birthdate, p.deathplace, p.deathdate,
-    p.altbirthdate, p.altbirthplace, p.burialdate, p.burialplace, p.gedcom, treename
-    FROM ($people_table as p, $families_table, $people_table as spouse) $cejoin
-    $allwhere AND ($gstring)
-    $orderstr LIMIT $newoffset" . $maxsearchresults;
+  $spouseCondition = $mygender == 'F' ? "p.personID = wife AND spouse.personID = husband" : "p.personID = husband AND spouse.personID = wife";
+  $query = "SELECT p.ID, spouse.personID as spersonID, p.personID, p.lastname, p.lnprefix, p.firstname, p.living, p.private, p.branch, p.nickname, p.suffix, p.prefix, p.nameorder, p.title, p.birthplace, p.birthdate, p.deathplace, p.deathdate, p.altbirthdate, p.altbirthplace, p.burialdate, p.burialplace "
+      . "FROM ($people_table AS p, $families_table, $people_table AS spouse) $cejoin $allwhere AND $spouseCondition $orderbyClause $limitClause";
   $showspouse = "yess";
-  $query2 = "SELECT count(p.ID) as pcount
-        FROM ($people_table as p, $families_table, $people_table as spouse) $cejoin
-    $allwhere AND ($gstring)";
+  $query2 = "SELECT count(p.ID) as pcount FROM ($people_table AS p, $families_table, $people_table AS spouse) $cejoin $allwhere AND $spouseCondition";
 } else {
   if ($showspouse == "yes") {
-    $families_join = "LEFT JOIN $families_table AS families1 ON (p.personID = families1.husband) LEFT JOIN $families_table AS families2 ON (p.personID = families2.wife ) ";    // added IDF Apr 03
-    $huswife = ", families1.wife as wife, families2.husband as husband";                                                                // added IDF Apr 03
+    $families_join = "LEFT JOIN $families_table AS families1 ON (p.personID = families1.husband) LEFT JOIN $families_table AS families2 ON (p.personID = families2.wife) ";
+    $huswife = ", families1.wife as wife, families2.husband as husband";
   } else {
     $families_join = "";
     $huswife = "";
   }
 
-  $query = "SELECT p.ID, p.personID, lastname, lnprefix, firstname, p.living, p.private, p.branch, nickname, prefix, suffix, nameorder, title, birthplace, birthdate, deathplace, deathdate, altbirthdate, altbirthplace, burialdate, burialplace, p.gedcom, treename $huswife
-    FROM $people_table AS p $families_join
-    LEFT JOIN $treesTable on p.gedcom = $treesTable.gedcom $cejoin $allwhere
-    $orderstr LIMIT $newoffset" . $maxsearchresults;
+  $query = "SELECT p.ID, p.personID, lastname, lnprefix, firstname, p.living, p.private, p.branch, nickname, prefix, suffix, nameorder, title, birthplace, birthdate, deathplace, deathdate, altbirthdate, altbirthplace, burialdate, burialplace $huswife "
+      . "FROM $people_table AS p $families_join $cejoin $allwhere $orderbyClause $limitClause";
   $query2 = "SELECT count(p.ID) as pcount FROM $people_table AS p $families_join $cejoin $allwhere";
 }
 $result = tng_query($query);
@@ -321,13 +311,10 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
           <th><?php echo uiTextSnippet('nickname'); ?></th>
         <?php } ?>
         <th colspan='2'><?php echo $birthsort; ?></th>
-        <?php if ($mydeathyear || $mydeathplace || $myburialyear || $myburialplace || $showdeath) { ?>
-          <th colspan='2'><?php echo $deathsort; ?></th>
-        <?php } ?>
+        <th colspan='2'><?php echo $deathsort; ?></th>
         <?php if ($showspouse) { ?>
           <th><?php echo uiTextSnippet('spouse'); ?></th>
         <?php } ?>
-        <th><?php echo uiTextSnippet('personid'); ?></th>
       </tr>
       <?php
       $i = $offsetplus;
@@ -379,6 +366,8 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
           echo "</div>\n";
           echo "<a href=\"pedigree.php?personID={$row['personID']}\">$chartlink</a> ";
           echo "<a href=\"peopleShowPerson.php?personID={$row['personID']}\" class=\"pers\" id=\"p{$row['personID']}_t\">$name</a>";
+          echo "<br>";
+          echo "{$row['personID']}";
         echo "</td>";
 
         if ($showspouse) {
@@ -389,7 +378,7 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
             $spouseID = $row['husband'] ? $row['husband'] : $row['wife'];
           }
           if ($spouseID) {
-            $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, living, private, branch, gedcom FROM $people_table WHERE personID = \"$spouseID\"";
+            $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, living, private, branch FROM $people_table WHERE personID = '$spouseID'";
             $spresult = tng_query($query);
             if ($spresult) {
               $sprow = tng_fetch_assoc($spresult);
@@ -400,7 +389,7 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
               tng_free_result($spresult);
             }
           }
-          $spousestr = $spouse ? "<a href=\"peopleShowPerson.php?personID=$spouseID\">$spouse</a>&nbsp;" : "";
+          $spousestr = $spouse ? "<a href=\"peopleShowPerson.php?personID=$spouseID\">$spouse</a>" : "";
         } else {
           $spousestr = "";
         }
@@ -417,20 +406,17 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
           echo "<td>$nickname &nbsp;</td>";
         }
         echo "<td colspan='2'>$birthdate<br>$birthplace</td>";
-        if ($mydeathyear || $mydeathplace || $myburialyear || $myburialplace || $showdeath) {
-          echo "<td colspan='2'>$deathdate<br>$deathplace</td>";
-        }
+        echo "<td colspan='2'>$deathdate<br>$deathplace</td>";
         if ($showspouse) {
           echo "<td>$spousestr</td>";
         }
-        echo "<td>{$row['personID']} </td>";
         echo "</tr>\n";
       }
       tng_free_result($result);
       ?>
     </table>
     <?php
-    echo buildSearchResultPagination($totrows, "search.php?$urlstring&amp;mybool=$mybool&amp;nr=$maxsearchresults&amp;showspouse=$showspouse&amp;showdeath=$showdeath&amp;offset", $maxsearchresults, $max_browsesearch_pages);
+    echo buildSearchResultPagination($totrows, "search.php?$urlstring&amp;mybool=$mybool&amp;nr=$maxsearchresults&amp;showspouse=$showspouse&amp;offset", $maxsearchresults, $max_browsesearch_pages);
     echo $publicFooterSection->build();
     ?>
   </section> <!-- .container -->

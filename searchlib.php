@@ -157,20 +157,22 @@ function addtoQuery($textstr, $colvar, $criteria, $qualifyvar, $qualifier, $qual
 }
 
 function doCustomEvents($type) {
-  global $dontdo, $cejoin, $eventtypes_table, $events_table, $allwhere, $mybool;
+  global $dontdo;
+  global $cejoin;
+  global $eventtypes_table;
+  global $events_table;
+  global $allwhere;
+  global $mybool;
 
   $cejoin = "";
-  $query = "SELECT eventtypeID, tag, display FROM "
-          . "$eventtypes_table WHERE keep=\"1\" AND type=\"$type\" ORDER BY display";
+  $query = "SELECT eventtypeID, tag, display FROM $eventtypes_table WHERE keep = '1' AND type = '$type' ORDER BY display";
   $result = tng_query($query);
   $needce = 0;
   $ecount = 0;
   if ($type == 'F') {
     $persfamfield = "f.familyID";
-    $treefield = "f.gedcom";
   } else { //assume for now that $type == 'I'
     $persfamfield = "p.personID";
-    $treefield = "p.gedcom";
   }
 
   while ($row = tng_fetch_assoc($result)) {
@@ -193,7 +195,6 @@ function doCustomEvents($type) {
         buildCriteria($tablepfx . "info", $cefstr, $cfqstr, $cfq, $cef, "$display (" . uiTextSnippet('fact') . ")");
         $needce = 1;
       }
-
       $cepstr = "cep" . $row['eventtypeID'];
       eval("global \$$cepstr;");
       eval("\$cep = \$$cepstr;");
@@ -209,7 +210,6 @@ function doCustomEvents($type) {
         buildCriteria($tablepfx . "eventplace", $cepstr, $cpqstr, $cpq, $cep, "$display (" . uiTextSnippet('place') . ")");
         $needce = 1;
       }
-
       $ceystr = "cey" . $row['eventtypeID'];
       eval("global \$$ceystr;");
       eval("\$cey = \$$ceystr;");
@@ -227,20 +227,18 @@ function doCustomEvents($type) {
       }
       if ($needce) {
         if ($mybool == "AND") {
-          $cejoin .= "INNER JOIN $events_table as e$ecount ON $treefield = $tablepfx" . "gedcom AND $persfamfield = $tablepfx" . "persfamID ";
+          $cejoin .= "INNER JOIN $events_table as e$ecount ON $persfamfield = $tablepfx" . "persfamID ";
           if ($allwhere) {
             $allwhere .= " $mybool ";
           }
           $allwhere .= $tablepfx . "eventtypeID = \"{$row['eventtypeID']}\" ";
         } else {    //OR
-          $cejoin .= "LEFT JOIN $events_table as e$ecount ON $treefield = $tablepfx" . "gedcom AND $persfamfield = $tablepfx" . "persfamID AND $tablepfx" . "eventtypeID = \"{$row['eventtypeID']}\" ";
+          $cejoin .= "LEFT JOIN $events_table as e$ecount ON $persfamfield = $tablepfx" . "persfamID AND $tablepfx" . "eventtypeID = \"{$row['eventtypeID']}\" ";
         }
         $needce = 0;
       }
     }
   }
   tng_free_result($result);
-  //if( !$cejoin && $ecount )
-  //$cejoin = "LEFT JOIN $events_table ON $treefield = $events_table.gedcom AND $persfamfield = $events_table.persfamID " ;
   return $cejoin;
 }

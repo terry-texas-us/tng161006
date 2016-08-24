@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AnalysisUIOptions">
+    <option name="FILTER_RESOLVED_ITEMS" value="false" />
     <option name="ANALYZE_TEST_SOURCES" value="false" />
+    <option name="SCOPE_TYPE" value="10" />
     <option name="CUSTOM_SCOPE_NAME" value="Current File" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d319423f-696a-455d-9e23-0e8f0d4d6eb9" name="Default" comment="" />
+    <list default="true" id="d319423f-696a-455d-9e23-0e8f0d4d6eb9" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adminlog.txt" afterPath="$PROJECT_DIR$/adminlog.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/famsearch.php" afterPath="$PROJECT_DIR$/famsearch.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/famsearchform.php" afterPath="$PROJECT_DIR$/famsearchform.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/genlog.txt" afterPath="$PROJECT_DIR$/genlog.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/search.php" afterPath="$PROJECT_DIR$/search.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/searchform.php" afterPath="$PROJECT_DIR$/searchform.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/usersBrowse.php" afterPath="$PROJECT_DIR$/usersBrowse.php" />
+    </list>
     <ignored path="tng.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -31,7 +43,117 @@
     <favorites_list name="tng" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="addnewacct.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/addnewacct.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding>
+                <marker date="1471989519695" expanded="true" signature="2296:2709" ph="INSERT IGNOR... ${$users_table}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="famsearch.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/famsearch.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3993">
+              <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+              <folding>
+                <marker date="1472045975729" expanded="true" signature="15150:15158" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="famsearchform.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/famsearchform.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="539">
+              <caret line="205" column="46" selection-start-line="205" selection-start-column="46" selection-end-line="205" selection-end-column="46" />
+              <folding>
+                <marker date="1472049751159" expanded="true" signature="42:100" ph="SELECT gedco... ${$treesTable}" />
+                <marker date="1472049751159" expanded="true" signature="13201:13305" ph="SELECT event... ${$eventtypes_table}" />
+                <marker date="1472049751159" expanded="true" signature="22076:22154" ph="SELECT event... ${$eventtypes_table}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="search.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/search.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5491">
+              <caret line="323" column="13" selection-start-line="323" selection-start-column="13" selection-end-line="323" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="searchform.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/searchform.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="6205">
+              <caret line="365" column="6" selection-start-line="365" selection-start-column="6" selection-end-line="365" selection-end-column="6" />
+              <folding>
+                <marker date="1472049060584" expanded="true" signature="16695:16773" ph="SELECT event... ${$eventtypes_table}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="searchlib.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/searchlib.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+              <folding>
+                <marker date="1472007333525" expanded="true" signature="4900:5008" ph="SELECT event... ${$eventtypes_table}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="usersBrowse.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/usersBrowse.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2618">
+              <caret line="154" column="17" selection-start-line="154" selection-start-column="17" selection-end-line="154" selection-end-column="17" />
+              <folding>
+                <marker date="1471990541427" expanded="true" signature="1502:1654" ph="SELECT *, DA... ${$users_table}" />
+                <marker date="1471990541427" expanded="true" signature="1819:1897" ph="SELECT count... ${$users_table}" />
+                <marker date="1471990541427" expanded="true" signature="2082:2158" ph="SELECT count... ${$users_table}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2261">
+              <caret line="133" column="9" selection-start-line="133" selection-start-column="9" selection-end-line="133" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin_genconfig.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin_genconfig.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17782">
+              <caret line="1046" column="25" selection-start-line="1046" selection-start-column="25" selection-end-line="1046" selection-end-column="25" />
+              <folding>
+                <marker date="1472041625184" expanded="true" signature="3196:3232" ph="SELECT count... ${$users_table}" />
+                <marker date="1472041625184" expanded="true" signature="55988:56019" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -39,11 +161,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/geocodelib.php" />
-        <option value="$PROJECT_DIR$/globallib.php" />
-        <option value="$PROJECT_DIR$/google_marker.php" />
-        <option value="$PROJECT_DIR$/languagesAdd.php" />
-        <option value="$PROJECT_DIR$/languagesEdit.php" />
         <option value="$PROJECT_DIR$/log.php" />
         <option value="$PROJECT_DIR$/mediaAddFormAction.php" />
         <option value="$PROJECT_DIR$/mediaImportFormAction.php" />
@@ -90,6 +207,11 @@
         <option value="$PROJECT_DIR$/admin_diagnostics.php" />
         <option value="$PROJECT_DIR$/mediatypes.php" />
         <option value="$PROJECT_DIR$/_/css/bootstrap.css" />
+        <option value="$PROJECT_DIR$/admin_genconfig.php" />
+        <option value="$PROJECT_DIR$/search.php" />
+        <option value="$PROJECT_DIR$/searchform.php" />
+        <option value="$PROJECT_DIR$/famsearch.php" />
+        <option value="$PROJECT_DIR$/famsearchform.php" />
       </list>
     </option>
   </component>
@@ -126,6 +248,9 @@
             <id />
           </State>
           <State>
+            <id>Code StylePHP</id>
+          </State>
+          <State>
             <id>PHP</id>
           </State>
           <State>
@@ -134,7 +259,7 @@
         </expanded-state>
         <selected-state>
           <State>
-            <id>Code SmellPHP</id>
+            <id>Code StylePHP</id>
           </State>
         </selected-state>
       </profile-state>
@@ -165,8 +290,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -259,6 +382,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -394,6 +519,10 @@
       <workItem from="1471105845584" duration="107000" />
       <workItem from="1471106070005" duration="24000" />
       <workItem from="1471198210671" duration="163000" />
+      <workItem from="1472038224088" duration="106000" />
+      <workItem from="1472040695299" duration="690000" />
+      <workItem from="1472049083957" duration="249000" />
+      <workItem from="1472049372199" duration="384000" />
     </task>
     <servers />
   </component>
@@ -406,7 +535,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21060000" />
+    <option name="totallyTimeSpent" value="22489000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -419,14 +548,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1924" height="1084" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20230608" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32846716" sideWeight="0.4978678" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40661687" sideWeight="0.5042644" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection Results" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295688" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295688" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4369748" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43634498" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32983193" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14779875" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -478,22 +607,190 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="17" />
+      <option name="time" value="18" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mediatypes.php">
+    <entry file="file://$PROJECT_DIR$/addnewacct.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1394">
-          <caret line="82" column="16" selection-start-line="82" selection-start-column="16" selection-end-line="82" selection-end-column="16" />
+        <state relative-caret-position="102">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding>
-            <marker date="1459812637383" expanded="true" signature="1425:1483" ph="..." />
+            <marker date="1471989519695" expanded="true" signature="2296:2709" ph="INSERT IGNOR... ${$users_table}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_/css/bootstrap.css">
+    <entry file="file://$PROJECT_DIR$/famsearch.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1472045975729" expanded="true" signature="15150:15158" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5491">
+          <caret line="323" column="13" selection-start-line="323" selection-start-column="13" selection-end-line="323" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/searchform.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6205">
+          <caret line="365" column="6" selection-start-line="365" selection-start-column="6" selection-end-line="365" selection-end-column="6" />
+          <folding>
+            <marker date="1472049060584" expanded="true" signature="16695:16773" ph="SELECT event... ${$eventtypes_table}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/searchlib.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+          <folding>
+            <marker date="1472007333525" expanded="true" signature="4900:5008" ph="SELECT event... ${$eventtypes_table}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/usersBrowse.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2618">
+          <caret line="154" column="17" selection-start-line="154" selection-start-column="17" selection-end-line="154" selection-end-column="17" />
+          <folding>
+            <marker date="1471990541427" expanded="true" signature="1502:1654" ph="SELECT *, DA... ${$users_table}" />
+            <marker date="1471990541427" expanded="true" signature="1819:1897" ph="SELECT count... ${$users_table}" />
+            <marker date="1471990541427" expanded="true" signature="2082:2158" ph="SELECT count... ${$users_table}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2261">
+          <caret line="133" column="9" selection-start-line="133" selection-start-column="9" selection-end-line="133" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin_genconfig.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17782">
+          <caret line="1046" column="25" selection-start-line="1046" selection-start-column="25" selection-end-line="1046" selection-end-column="25" />
+          <folding>
+            <marker date="1472041625184" expanded="true" signature="3196:3232" ph="SELECT count... ${$users_table}" />
+            <marker date="1472041625184" expanded="true" signature="55988:56019" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addnewacct.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding>
+            <marker date="1471989519695" expanded="true" signature="2296:2709" ph="INSERT IGNOR... ${$users_table}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/famsearch.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4590">
+          <caret line="270" column="13" selection-start-line="270" selection-start-column="13" selection-end-line="270" selection-end-column="13" />
+          <folding>
+            <marker date="1472045975729" expanded="true" signature="15150:15158" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5610">
+          <caret line="330" column="13" selection-start-line="330" selection-start-column="13" selection-end-line="330" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/searchform.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6307">
+          <caret line="371" column="6" selection-start-line="371" selection-start-column="6" selection-end-line="371" selection-end-column="6" />
+          <folding>
+            <marker date="1472049060584" expanded="true" signature="16695:16773" ph="SELECT event... ${$eventtypes_table}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/searchlib.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1472007333525" expanded="true" signature="4900:5008" ph="SELECT event... ${$eventtypes_table}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/usersBrowse.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2618">
+          <caret line="154" column="17" selection-start-line="154" selection-start-column="17" selection-end-line="154" selection-end-column="17" />
+          <folding>
+            <marker date="1471990541427" expanded="true" signature="1502:1654" ph="SELECT *, DA... ${$users_table}" />
+            <marker date="1471990541427" expanded="true" signature="1819:1897" ph="SELECT count... ${$users_table}" />
+            <marker date="1471990541427" expanded="true" signature="2082:2158" ph="SELECT count... ${$users_table}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2261">
+          <caret line="133" column="9" selection-start-line="133" selection-start-column="9" selection-end-line="133" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin_genconfig.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17952">
+          <caret line="1056" column="25" selection-start-line="1056" selection-start-column="25" selection-end-line="1056" selection-end-column="25" />
+          <folding>
+            <marker date="1472041625184" expanded="true" signature="3196:3232" ph="SELECT count... ${$users_table}" />
+            <marker date="1472041625184" expanded="true" signature="55988:56019" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addnewacct.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
+          <folding>
+            <marker date="1471989519695" expanded="true" signature="2296:2709" ph="INSERT IGNOR... ${$users_table}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/famsearch.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1734">
+          <caret line="102" column="9" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
+          <folding>
+            <marker date="1472045975729" expanded="true" signature="15150:15158" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -515,7 +812,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -533,7 +829,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mediatypes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1394">
+          <caret line="82" column="16" selection-start-line="82" selection-start-column="16" selection-end-line="82" selection-end-column="16" />
+          <folding>
+            <marker date="1459812637383" expanded="true" signature="1425:1483" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -579,7 +891,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="213" column="22" selection-start-line="213" selection-start-column="22" selection-end-line="213" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -597,7 +908,97 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
           <caret line="272" column="97" selection-start-line="272" selection-start-column="97" selection-end-line="272" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addnewacct.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding>
+            <marker date="1471989519695" expanded="true" signature="2296:2709" ph="INSERT IGNOR... ${$users_table}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5491">
+          <caret line="323" column="13" selection-start-line="323" selection-start-column="13" selection-end-line="323" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/usersBrowse.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2618">
+          <caret line="154" column="17" selection-start-line="154" selection-start-column="17" selection-end-line="154" selection-end-column="17" />
+          <folding>
+            <marker date="1471990541427" expanded="true" signature="1502:1654" ph="SELECT *, DA... ${$users_table}" />
+            <marker date="1471990541427" expanded="true" signature="1819:1897" ph="SELECT count... ${$users_table}" />
+            <marker date="1471990541427" expanded="true" signature="2082:2158" ph="SELECT count... ${$users_table}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin_genconfig.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17782">
+          <caret line="1046" column="25" selection-start-line="1046" selection-start-column="25" selection-end-line="1046" selection-end-column="25" />
+          <folding>
+            <marker date="1472041625184" expanded="true" signature="3196:3232" ph="SELECT count... ${$users_table}" />
+            <marker date="1472041625184" expanded="true" signature="55988:56019" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/searchform.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6205">
+          <caret line="365" column="6" selection-start-line="365" selection-start-column="6" selection-end-line="365" selection-end-column="6" />
+          <folding>
+            <marker date="1472049060584" expanded="true" signature="16695:16773" ph="SELECT event... ${$eventtypes_table}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2261">
+          <caret line="133" column="9" selection-start-line="133" selection-start-column="9" selection-end-line="133" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/searchlib.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+          <folding>
+            <marker date="1472007333525" expanded="true" signature="4900:5008" ph="SELECT event... ${$eventtypes_table}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/famsearch.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3993">
+          <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+          <folding>
+            <marker date="1472045975729" expanded="true" signature="15150:15158" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/famsearchform.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="205" column="46" selection-start-line="205" selection-start-column="46" selection-end-line="205" selection-end-column="46" />
+          <folding>
+            <marker date="1472049751159" expanded="true" signature="42:100" ph="SELECT gedco... ${$treesTable}" />
+            <marker date="1472049751159" expanded="true" signature="13201:13305" ph="SELECT event... ${$eventtypes_table}" />
+            <marker date="1472049751159" expanded="true" signature="22076:22154" ph="SELECT event... ${$eventtypes_table}" />
+          </folding>
         </state>
       </provider>
     </entry>

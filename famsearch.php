@@ -171,7 +171,7 @@ if ($mydivplace || $dvpqualify == 'exists' || $dvpqualify == "dnexist") {
 if ($mydivyear || $dvyqualify == 'exists' || $dvyqualify == "dnexist") {
   buildYearCriteria("divdatetr", "mydivyear", "dvyqualify", "", $dvyqualify, $mydivyear, uiTextSnippet('divdatetr'));
 }
-$dontdo = array("MARR", "DIV");
+$dontdo = ["MARR", "DIV"];
 $cejoin = doCustomEvents('F');
 
 $gotInput = $mymarrplace || $mydivplace || $mymarryear || $mydivyear || $ecount;
@@ -202,22 +202,16 @@ if ($offset) {
 }
 
 //left join to people table twice, once for husband and for wife
-$query = "SELECT f.ID, familyID, husband, wife, marrdate, marrplace, divdate, divplace, f.living, f.private, f.branch,
-    father.lastname as flastname, father.lnprefix as flnprefix, father.firstname as ffirstname, father.living as fliving, father.private as fprivate, father.branch as fbranch,
-    mother.lastname as mlastname, mother.lnprefix as mlnprefix, mother.firstname as mfirstname, mother.living as mliving, mother.private as fprivate, mother.branch as mbranch
-    FROM ($families_table as f) $cejoin
-    LEFT JOIN $people_table AS father ON husband = father.personID
-    LEFT JOIN $people_table AS mother ON wife = mother.personID
-    $allwhere (1=1)
-    ORDER BY $orderstr
-    LIMIT $newoffset" . $maxsearchresults;
-$query2 = "SELECT count(f.ID) as fcount
-    FROM ($families_table as f) $cejoin
-    LEFT JOIN $people_table AS father ON husband = father.personID
-    LEFT JOIN $people_table AS mother ON wife = mother.personID
-    $allwhere (1=1)";
+$query = "SELECT f.ID, familyID, husband, wife, marrdate, marrplace, divdate, divplace, f.living, f.private, f.branch, father.lastname as flastname, father.lnprefix as flnprefix, father.firstname as ffirstname, father.living as fliving, father.private as fprivate, father.branch as fbranch, mother.lastname as mlastname, mother.lnprefix as mlnprefix, mother.firstname as mfirstname, mother.living as mliving, mother.private as fprivate, mother.branch as mbranch "
+    . "FROM ($families_table AS f) $cejoin "
+    . "LEFT JOIN $people_table AS father ON husband = father.personID "
+    . "LEFT JOIN $people_table AS mother ON wife = mother.personID $allwhere (1=1) "
+    . "ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
+$query2 = "SELECT count(f.ID) as fcount "
+    . "FROM ($families_table AS f) $cejoin "
+    . "LEFT JOIN $people_table AS father ON husband = father.personID LEFT JOIN $people_table AS mother ON wife = mother.personID "
+    . "$allwhere (1=1)";
 
-//echo $query;
 $result = tng_query($query);
 $numrows = tng_num_rows($result);
 
@@ -273,30 +267,29 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
       </thead>
       <?php
       $i = $offsetplus;
-      //$chartlinkimg = getimagesize("img/Chart.gif");
       $chartlink = "<img src=\"img/Chart.gif\" class=\"chartimg\">";
       while ($row = tng_fetch_assoc($result)) {
         //assemble frow and mrow, override family living flag if allow_living for either of these is no
-        $frow = array(
+        $frow = [
           "firstname" => $row['ffirstname'],
           "lnprefix" => $row['flnprefix'],
           "lastname" => $row['flastname'],
           "living" => $row['fliving'],
           "private" => $row['fprivate'],
           "branch" => $row['fbranch']
-        );
+        ];
         $rights = determineLivingPrivateRights($frow);
         $frow['allow_living'] = $rights['living'];
         $frow['allow_private'] = $rights['private'];
 
-        $mrow = array(
+        $mrow = [
           "firstname" => $row['mfirstname'],
           "lnprefix" => $row['mlnprefix'],
           "lastname" => $row['mlastname'],
           "living" => $row['mliving'],
           "branch" => $row['mbranch'],
           "private" => $row['mprivate']
-        );
+        ];
         $rights = determineLivingPrivateRights($mrow);
         $mrow['allow_living'] = $rights['living'];
         $mrow['allow_private'] = $rights['private'];

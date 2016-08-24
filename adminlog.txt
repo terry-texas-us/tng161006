@@ -1,3 +1,7 @@
+Tue 23 Aug 2016 05:33:58 PM <a href="usersEdit.php?userID=19">Edit Existing User: 19</a> (User: Administrator).
+Tue 23 Aug 2016 05:12:43 PM <a href="usersEdit.php?userID=16">Edit Existing User: 16</a> (User: Administrator).
+Tue 23 Aug 2016 05:12:27 PM <a href="usersEdit.php?userID=18">Add New User: guest</a> (User: Administrator).
+Tue 23 Aug 2016 05:06:52 PM <a href="usersEdit.php?userID=17">Add New User: contributor</a> (User: Administrator).
 Fri 19 Aug 2016 02:41:35 PM GEDCOM Import: File Name:C:/apache/htdocs/tng/gedcom/texas-tw-pre-1901-for-tng-rm-specific.ged, Tree: master; 8286 People, 2835 Families, 75 Sources, 93 Notes, 0 Media, 727 Places (User: Administrator).
 Fri 19 Aug 2016 02:36:54 PM <a href='treesEdit.php?tree=master'>Add New Tree: master/master</a> (User: Administrator).
 Fri 19 Aug 2016 02:36:17 PM Deleted  was successfully deleted. (User: Administrator).

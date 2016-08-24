@@ -1,12 +1,6 @@
 <?php
 require 'tng_begin.php';
 
-$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-$result = tng_query($query);
-
-if ($_SESSION['tng_search_tree']) {
-  $tree = $_SESSION['tng_search_tree'];
-}
 $lnqualify = $_SESSION['tng_search_lnqualify'];
 $mylastname = $_SESSION['tng_search_lastname'];
 $fnqualify = $_SESSION['tng_search_fnqualify'];
@@ -30,14 +24,13 @@ $myburialplace = $_SESSION['tng_search_burialplace'];
 $bryqualify = $_SESSION['tng_search_bryqualify'];
 $myburialyear = $_SESSION['tng_search_burialyear'];
 $mybool = $_SESSION['tng_search_bool'];
-$showdeath = $_SESSION['tng_search_showdeath'];
 $showspouse = $_SESSION['tng_search_showspouse'];
 $mygender = $_SESSION['tng_search_gender'];
 $mysplname = $_SESSION['tng_search_mysplname'];
 $spqualify = $_SESSION['tng_search_spqualify'];
 $nr = $_SESSION['tng_nr'];
 
-$dontdo = array("ADDR", "BIRT", "CHR", "DEAT", "BURI", "NICK", "TITL", "NSFX", "NPFX");
+$dontdo = ["ADDR", "BIRT", "CHR", "DEAT", "BURI", "NICK", "TITL", "NSFX", "NPFX"];
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
@@ -184,7 +177,7 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
             </div>              
             <br>
             <?php
-            $eventtypes = array();
+            $eventtypes = [];
             $query = "SELECT eventtypeID, tag, display FROM $eventtypes_table WHERE keep=\"1\" AND type=\"I\" ORDER BY display";
             $result = tng_query($query);
             while ($row = tng_fetch_assoc($result)) {
@@ -231,7 +224,7 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
             <td>
               <select name="mybool">
                 <?php
-                $item3_array = array(array(uiTextSnippet('cap_and'), "AND"), array(uiTextSnippet('cap_or'), "OR"));
+                $item3_array = [[uiTextSnippet('cap_and'), "AND"], [uiTextSnippet('cap_or'), "OR"]];
                 foreach ($item3_array as $item) {
                   echo "<option value='$item[1]'";
                   if ($mybool == $item[1]) {
@@ -249,7 +242,7 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
             <td>
               <select name="nr">
                 <?php
-                $item3_array = array(array(50, 50), array(100, 100), array(150, 150), array(200, 200));
+                $item3_array = [[25, 25], [50, 50], [100, 100], [200, 200]];
                 foreach ($item3_array as $item) {
                   echo "<option value='$item[1]'";
                   if ($nr == $item[1]) {
@@ -264,8 +257,6 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
           </tr>
         </table>
         <p>
-          <input name='showdeath' type='checkbox' value='yes'<?php if ($showdeath == "yes") {echo " checked";} ?> /> <?php echo uiTextSnippet('showdeath'); ?>
-          <br>
           <input name='showspouse' type='checkbox' value='yes'<?php if ($showspouse == "yes") {echo " checked"; } ?> /> <?php echo uiTextSnippet('showspouse'); ?>
           <br>
           <br>
@@ -357,14 +348,12 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
       URL = "mybool=" + thisform.mybool[thisform.mybool.selectedIndex].value;
       URL = URL + "&nr=" + thisform.nr[thisform.nr.selectedIndex].value;
 
-      if (thisform.showdeath.checked)
-        URL = URL + "&showdeath=yes";
       if (thisform.showspouse.checked)
         URL = URL + "&showspouse=yes";
 
       <?php
-      $qualifiers = array("ln", "fn", "id", "bp", "by", "cp", "cy", "dp", "dy", "brp", "bry", "nn", "t", "pf", "sf", "sp", "ge");
-      $criteria = array("lastname", "firstname", "personid", "birthplace", "birthyear", "altbirthplace", "altbirthyear", "deathplace", "deathyear", "burialplace", "burialyear", "nickname", "title", "prefix", "suffix", "splname", "gender");
+      $qualifiers = ["ln", "fn", "id", "bp", "by", "cp", "cy", "dp", "dy", "brp", "bry", "nn", "t", "pf", "sf", "sp", "ge"];
+      $criteria = ["lastname", "firstname", "personid", "birthplace", "birthyear", "altbirthplace", "altbirthyear", "deathplace", "deathyear", "burialplace", "burialyear", "nickname", "title", "prefix", "suffix", "splname", "gender"];
 
       $qcount = 0;
       $found = 0;

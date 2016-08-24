@@ -128,7 +128,6 @@ $headSection->setTitle(uiTextSnippet('users'));
               <th><?php echo uiTextSnippet('description'); ?></th>
               <th><?php echo uiTextSnippet('realname') . " / " . uiTextSnippet('email'); ?></th>
               <!--<th><?php echo uiTextSnippet('admin'); ?></th>-->
-              <th><?php echo uiTextSnippet('tree'); ?></th>
               <th><?php echo uiTextSnippet('branch'); ?></th>
               <th><?php echo uiTextSnippet('role'); ?></th>
               <th><?php echo uiTextSnippet('living'); ?></th>
@@ -179,7 +178,6 @@ $headSection->setTitle(uiTextSnippet('users'));
             $rolestr = 'usr' . ($row['role'] ? $row['role'] : 'custom');
             echo "<a href=\"mailto:" . $row['email'] . "\">" . $row['email'] . "</a></td>\n";
 
-            echo "<td>{$row['gedcom']}</td>\n";
             echo "<td>{$row['branch']}</td>\n";
             echo "<td>" . uiTextSnippet($rolestr) . "</td>\n";
             echo "<td>$form_allow_living</td>\n";

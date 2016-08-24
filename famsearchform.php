@@ -25,7 +25,7 @@ $mydivyear = $_SESSION['tng_search_divyear'];
 $mybool = $_SESSION['tng_search_fbool'];
 $nr = $_SESSION['tng_nr'];
 
-$dontdo = array("MARR", "DIV");
+$dontdo = ["MARR", "DIV"];
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
@@ -55,7 +55,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
               <div class='col-sm-3'>
                 <select class='form-control' name='flnqualify'>
                   <?php
-                  $item_array = array(array(uiTextSnippet('contains'), "contains"), array(uiTextSnippet('equals'), "equals"), array(uiTextSnippet('startswith'), "startswith"), array(uiTextSnippet('endswith'), "endswith"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"), array(uiTextSnippet('soundexof'), "soundexof"), array(uiTextSnippet('metaphoneof'), "metaphoneof"));
+                  $item_array = [[uiTextSnippet('contains'), "contains"], [uiTextSnippet('equals'), "equals"], [uiTextSnippet('startswith'), "startswith"], [uiTextSnippet('endswith'), "endswith"], [uiTextSnippet('exists'), "exists"], [uiTextSnippet('dnexist'), "dnexist"], [uiTextSnippet('soundexof'), "soundexof"], [uiTextSnippet('metaphoneof'), "metaphoneof"]];
                   foreach ($item_array as $item) {
                     echo "<option value='$item[1]'";
                     if ($flnqualify == $item[1]) {
@@ -120,7 +120,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
               <div class='col-sm-3'>
                 <select class='form-control' name='mfnqualify'>
                   <?php
-                  $item_array = array(array(uiTextSnippet('contains'), "contains"), array(uiTextSnippet('equals'), "equals"), array(uiTextSnippet('startswith'), "startswith"), array(uiTextSnippet('endswith'), "endswith"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"), array(uiTextSnippet('soundexof'), "soundexof"));
+                  $item_array = [[uiTextSnippet('contains'), "contains"], [uiTextSnippet('equals'), "equals"], [uiTextSnippet('startswith'), "startswith"], [uiTextSnippet('endswith'), "endswith"], [uiTextSnippet('exists'), "exists"], [uiTextSnippet('dnexist'), "dnexist"], [uiTextSnippet('soundexof'), "soundexof"]];
                   foreach ($item_array as $item) {
                     echo "<option value='$item[1]'";
                     if ($mfnqualify == $item[1]) {
@@ -162,7 +162,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
           <div class='col-sm-3'>
             <select class='form-control' name='mpqualify'>
               <?php
-              $item_array = array(array(uiTextSnippet('contains'), "contains"), array(uiTextSnippet('equals'), "equals"), array(uiTextSnippet('startswith'), "startswith"), array(uiTextSnippet('endswith'), "endswith"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"));
+              $item_array = [[uiTextSnippet('contains'), "contains"], [uiTextSnippet('equals'), "equals"], [uiTextSnippet('startswith'), "startswith"], [uiTextSnippet('endswith'), "endswith"], [uiTextSnippet('exists'), "exists"], [uiTextSnippet('dnexist'), "dnexist"]];
               foreach ($item_array as $item) {
                 echo "<option value='$item[1]'";
                 if ($mpqualify == $item[1]) {
@@ -182,7 +182,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
           <div class='col-sm-3'>
             <select class='form-control' name='myqualify'>
               <?php
-              $item2_array = array(array(uiTextSnippet('equals'), ""), array(uiTextSnippet('plusminus2'), "plusminus2"), array(uiTextSnippet('plusminus5'), "plusminus5"), array(uiTextSnippet('plusminus10'), "plusminus10"), array(uiTextSnippet('lessthan'), "lessthan"), array(uiTextSnippet('greaterthan'), "greaterthan"), array(uiTextSnippet('lessthanequal'), "lessthanequal"), array(uiTextSnippet('greaterthanequal'), "greaterthanequal"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"));
+              $item2_array = [[uiTextSnippet('equals'), ""], [uiTextSnippet('plusminus2'), "plusminus2"], [uiTextSnippet('plusminus5'), "plusminus5"], [uiTextSnippet('plusminus10'), "plusminus10"], [uiTextSnippet('lessthan'), "lessthan"], [uiTextSnippet('greaterthan'), "greaterthan"], [uiTextSnippet('lessthanequal'), "lessthanequal"], [uiTextSnippet('greaterthanequal'), "greaterthanequal"], [uiTextSnippet('exists'), "exists"], [uiTextSnippet('dnexist'), "dnexist"]];
               foreach ($item2_array as $item) {
                 echo "<option value='$item[1]'";
                 if ($myqualify == $item[1]) {
@@ -351,7 +351,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
           <div class='col-sm-3'>
             <select class='form-control' name="nr">
               <?php
-              $item3_array = array(array(50, 50), array(100, 100), array(150, 150), array(200, 200));
+              $item3_array = [[25, 25], [50, 50], [100, 100], [200, 200]];
               foreach ($item3_array as $item) {
                 echo "<option value='$item[1]'";
                 if ($nr == $item[1]) {
