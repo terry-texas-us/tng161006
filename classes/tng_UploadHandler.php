@@ -553,8 +553,8 @@ class UploadHandler
       } else {
         $filepath = $file->name;
       }
-      $query = "INSERT IGNORE INTO {$this->options['media_table']} (mediatypeID,mediakey,gedcom,path,thumbpath,description,notes,width,height,datetaken,placetaken,owner,changedate,changedby,form,alwayson,map,abspath,status,cemeteryID,plot,showmap,linktocem,latitude,longitude,zoom,bodytext,usenl,newwindow,usecollfolder)
-          VALUES (\"{$this->options['mediatypeID']}\",\"$mediakey\",\"{$this->options['tree']}\",\"$filepath\",\"$thumbpath\",\"{$file->name}\",\"\",\"0\",\"0\",\"\",\"\",\"\",\"$newdate\",\"{$this->options['currentuser']}\",\"$form\",\"0\",\"\",\"0\",\"\",\"0\",\"\",\"0\",\"0\",\"\",\"\",\"0\",\"\",\"0\",\"0\",\"1\")";
+      $query = "INSERT IGNORE INTO {$this->options['media_table']} (mediatypeID, mediakey, path, thumbpath, description, notes, width, height, datetaken, placetaken, owner, changedate, changedby, form, alwayson, map, abspath, status, cemeteryID, plot, showmap, linktocem, latitude, longitude, zoom, bodytext, usenl, newwindow, usecollfolder) "
+      . "VALUES ('{$this->options['mediatypeID']}', '$mediakey', '$filepath', '$thumbpath', '{$file->name}', '', '0', '0', '', '', '', '$newdate', '{$this->options['currentuser']}', '$form', '0', '', '0', '', '0', '', '0', '0', '', '', '0', '', '0', '0', '1')";
       $result = tng_query($query);
       $success = tng_affected_rows();
       if ($result && $success) {

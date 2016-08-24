@@ -68,8 +68,8 @@ if ($place) {
       $latitude = $longitude = "";
       $zoom = 0;
     }
-    $query = "INSERT IGNORE INTO $places_table (gedcom, place, placelevel, latitude, longitude, zoom, notes) "
-            . "VALUES ('', '$place', '0', '$latitude', '$longitude', '$zoom', '$notes')";
+    $query = "INSERT IGNORE INTO $places_table (place, placelevel, latitude, longitude, zoom, notes) "
+            . "VALUES ('$place', '0', '$latitude', '$longitude', '$zoom', '$notes')";
     $result3 = tng_query($query);
   } elseif (isset($usecoords)) {
     $query = "UPDATE $places_table SET latitude = '$latitude', longitude = '$longitude', zoom = '$zoom' WHERE place = '$place'";

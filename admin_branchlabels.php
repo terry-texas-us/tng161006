@@ -202,7 +202,7 @@ function setPersonLabel($personID) {
         tng_query($query);
       }
       if ($branch) {
-        $query = "INSERT IGNORE INTO $branchlinks_table (branch, gedcom, persfamID) VALUES('$branch', '', '$personID')";
+        $query = "INSERT IGNORE INTO $branchlinks_table (branch, persfamID) VALUES('$branch', '$personID')";
         tng_query($query);
       }
     }
@@ -297,7 +297,7 @@ function setFamilyLabel($personID, $gender) {
           tng_query($query);
         }
         if ($branch) {
-          $query = "INSERT IGNORE INTO $branchlinks_table (branch, gedcom, persfamID) VALUES('$branch', '', \"{$row['familyID']}\")";
+          $query = "INSERT IGNORE INTO $branchlinks_table (branch, persfamID) VALUES('$branch', '{$row['familyID']}')";
           tng_query($query);
         }
       }

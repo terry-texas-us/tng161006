@@ -87,7 +87,7 @@ if (!$editconflict) {
     }
     foreach ($branch as $b) {
       if ($b && !in_array($b, $oldbranches)) {
-        $query = "INSERT IGNORE INTO $branchlinks_table (branch, gedcom, persfamID) VALUES('$b', '', '$personID')";
+        $query = "INSERT IGNORE INTO $branchlinks_table (branch, persfamID) VALUES('$b', '$personID')";
         $result = tng_query($query);
       }
     }
@@ -118,7 +118,7 @@ if (!$editconflict) {
     array_push($places, $endlplace);
   }
   foreach ($places as $place) {
-    $query = "INSERT IGNORE INTO $places_table (gedcom, place, placelevel, zoom, geoignore) VALUES ('', '$place', '0', '0', '0')";
+    $query = "INSERT IGNORE INTO $places_table (place, placelevel, zoom, geoignore) VALUES ('$place', '0', '0', '0')";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     if ($tngconfig['autogeo'] && tng_affected_rows()) {
       $ID = tng_insert_id();

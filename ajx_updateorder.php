@@ -185,8 +185,8 @@ switch ($action) {
   case "addchild":
     $haskids = getHasKids($personID);
 
-    $query = "INSERT INTO $children_table (familyID, personID, ordernum, gedcom, mrel, frel, haskids, parentorder, sealdate, sealdatetr, sealplace) "
-        . "VALUES ('$familyID', '$personID', $order, '', '', '', $haskids, 0, '', '0000-00-00', '')";
+    $query = "INSERT INTO $children_table (familyID, personID, ordernum, mrel, frel, haskids, parentorder, sealdate, sealdatetr, sealplace) "
+        . "VALUES ('$familyID', '$personID', $order, '', '', $haskids, 0, '', '0000-00-00', '')";
     $result = tng_query($query);
 
     $query = "SELECT husband,wife FROM $families_table WHERE familyID = '$familyID'";
@@ -567,8 +567,8 @@ switch ($action) {
         $name = stripslashes($entityID);
 
         if (!$numrows) {
-          $query = "INSERT IGNORE INTO $places_table (gedcom, place, placelevel, temple, latitude, longitude, zoom, notes, geoignore) "
-              . "VALUES ('', '$entityID', '0', '0', '', '', '13', '', '0')";
+          $query = "INSERT IGNORE INTO $places_table (place, placelevel, temple, latitude, longitude, zoom, notes, geoignore) "
+              . "VALUES ('$entityID', '0', '0', '', '', '13', '', '0')";
           $result = tng_query($query);
           $numrows = 1;
         }
@@ -577,11 +577,11 @@ switch ($action) {
 
     if ($numrows) {
       if ($type == "album") {
-        $query = "INSERT IGNORE INTO $album2entities_table (entityID, albumID, ordernum, gedcom, linktype) "
-            . "VALUES ('$entityID', '$albumID', '$newrow', '', '$linktype')";
+        $query = "INSERT IGNORE INTO $album2entities_table (entityID, albumID, ordernum, linktype) "
+            . "VALUES ('$entityID', '$albumID', '$newrow', '$linktype')";
       } else {
-        $query = "INSERT IGNORE INTO $medialinks_table (personID, mediaID, ordernum, gedcom, linktype, eventID) "
-            . "VALUES ('$entityID', '$mediaID', '$newrow', '', '$linktype', '')";
+        $query = "INSERT IGNORE INTO $medialinks_table (personID, mediaID, ordernum, linktype, eventID) "
+            . "VALUES ('$entityID', '$mediaID', '$newrow', '$linktype', '')";
       }
 
       $result = tng_query($query);
@@ -620,8 +620,8 @@ switch ($action) {
     $newlinks = 0;
     $mediaIDs = explode(",", $medialist);
     foreach ($mediaIDs as $mediaID) {
-      $query = "INSERT IGNORE INTO $medialinks_table (personID, mediaID, ordernum, gedcom, linktype, eventID) "
-          . "VALUES ('$entityID', '$mediaID', '$newrow', '', '$linktype1', '$event1')";
+      $query = "INSERT IGNORE INTO $medialinks_table (personID, mediaID, ordernum, linktype, eventID) "
+          . "VALUES ('$entityID', '$mediaID', '$newrow', '$linktype1', '$event1')";
       $result = tng_query($query);
       if (tng_affected_rows()) {
         $newlinks += 1;

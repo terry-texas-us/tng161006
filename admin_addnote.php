@@ -17,14 +17,14 @@ if ($session_charset != "UTF-8") {
 $orgnote = preg_replace("/$lineending/", " ", stripslashes($note));
 $note = addslashes($note);
 
-$query = "INSERT INTO $xnotes_table (noteID, gedcom, note)  VALUES('', '', '$note')";
+$query = "INSERT INTO $xnotes_table (noteID, note)  VALUES('', '$note')";
 $result = tng_query($query);
 $xnoteID = tng_insert_id();
 
 if (!$private) {
   $private = "0";
 }
-$query = "INSERT INTO $notelinks_table (persfamID, gedcom, xnoteID, eventID, secret, ordernum) VALUES ('$persfamID', '', '$xnoteID', '$eventID', '$private', 999)";
+$query = "INSERT INTO $notelinks_table (persfamID, xnoteID, eventID, secret, ordernum) VALUES ('$persfamID', '$xnoteID', '$eventID', '$private', 999)";
 $result = tng_query($query);
 $ID = tng_insert_id();
 

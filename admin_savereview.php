@@ -134,7 +134,7 @@ if ($choice == uiTextSnippet('savedel')) {
     $result = tng_query($query);
   }
   if ($eventplace) {
-    $query = "INSERT IGNORE INTO $places_table (gedcom, place, placelevel, zoom) VALUES ('', '$eventplace', '0', '0')";
+    $query = "INSERT IGNORE INTO $places_table (place, placelevel, zoom) VALUES ('$eventplace', '0', '0')";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   }
   $succmsg = uiTextSnippet('tentadd');

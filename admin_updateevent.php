@@ -54,8 +54,8 @@ if ($addressID) {
   }
   $result = tng_query($query);
 } elseif ($address1 || $address2 || $city || $state || $zip || $country || $phone || $email || $www) {
-  $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, gedcom, phone, email, www) "
-      . "VALUES('$address1', '$address2', '$city', '$state', '$zip', '$country', '', '$phone', '$email', '$www')";
+  $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, phone, email, www) "
+      . "VALUES('$address1', '$address2', '$city', '$state', '$zip', '$country', '$phone', '$email', '$www')";
   $result = tng_query($query);
   $addressID = tng_insert_id();
 }
@@ -64,7 +64,7 @@ $query = "UPDATE $events_table SET eventdate=\"$eventdate\", eventdatetr=\"$even
 $result = tng_query($query);
 
 if (trim($eventplace)) {
-  $query = "INSERT IGNORE INTO $places_table (gedcom, place, placelevel, zoom) VALUES ('', '$eventplace', '0', '0')";
+  $query = "INSERT IGNORE INTO $places_table (place, placelevel, zoom) VALUES ('$eventplace', '0', '0')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   if ($tngconfig['autogeo'] && tng_affected_rows()) {
     $ID = tng_insert_id();

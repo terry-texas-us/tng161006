@@ -16,12 +16,12 @@ if ($session_charset != "UTF-8") {
 }
 $relationship = addslashes($relationship);
 
-$query = "INSERT INTO $assoc_table (gedcom, personID, passocID, relationship, reltype)  VALUES('', '$personID', '$passocID', '$relationship', '$reltype')";
+$query = "INSERT INTO $assoc_table (personID, passocID, relationship, reltype)  VALUES('$personID', '$passocID', '$relationship', '$reltype')";
 $result = tng_query($query);
 $assocID = tng_insert_id();
 
 if ($revassoc) {
-  $query = "INSERT INTO $assoc_table (gedcom, personID, passocID, relationship, reltype)  VALUES('', '$passocID', '$personID', '$relationship', '$orgreltype')";
+  $query = "INSERT INTO $assoc_table (personID, passocID, relationship, reltype)  VALUES('$passocID', '$personID', '$relationship', '$orgreltype')";
   $result = tng_query($query);
 }
 adminwritelog(uiTextSnippet('addnewassoc') . ": $assocID/$personID::$passocID ($relationship)");

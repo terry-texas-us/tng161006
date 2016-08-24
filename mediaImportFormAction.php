@@ -42,8 +42,8 @@ function importFrom($tngpath, $orgpath, $needsubdirs) {
           $fileparts = pathinfo($filename);
           $form = strtoupper($fileparts["extension"]);
           $newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
-          $query = "INSERT IGNORE INTO $media_table (mediatypeID, mediakey, gedcom, path, thumbpath, description, notes, width, height, datetaken, placetaken, owner, changedate, form, alwayson, map, abspath, status, cemeteryID, showmap, linktocem, latitude, longitude, zoom, bodytext, usenl, newwindow, usecollfolder) "
-              . "VALUES ('$mediatypeID', '$path/$filename', '', '$orgpath$filename', '', '$orgpath$filename', '', '', '', '', '', '', '$newdate', '$form', '0', '', '0', '', '', '0', '0', '', '', '0', '', '0', '0', '1')";
+          $query = "INSERT IGNORE INTO $media_table (mediatypeID, mediakey, path, thumbpath, description, notes, width, height, datetaken, placetaken, owner, changedate, form, alwayson, map, abspath, status, cemeteryID, showmap, linktocem, latitude, longitude, zoom, bodytext, usenl, newwindow, usecollfolder) "
+              . "VALUES ('$mediatypeID', '$path/$filename', '$orgpath$filename', '', '$orgpath$filename', '', '', '', '', '', '', '$newdate', '$form', '0', '', '0', '', '', '0', '0', '', '', '0', '', '0', '0', '1')";
           tng_query($query);
           $success = tng_affected_rows();
           //$success = 1;

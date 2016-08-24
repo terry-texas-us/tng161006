@@ -29,8 +29,8 @@ if ($addressID) {
   $query = "UPDATE $address_table SET address1=\"$address1\", address2=\"$address2\", city=\"$city\", state=\"$state\", zip=\"$zip\", country=\"$country\", phone=\"$phone\", email=\"$email\", www=\"$www\" WHERE addressID = \"$addressID\"";
   $result = tng_query($query);
 } elseif ($address1 || $address2 || $city || $state || $zip || $country || $phone || $email || $www) {
-  $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, gedcom, phone, email, www) "
-      . "VALUES('$address1', '$address2', '$city', '$state', '$zip', '$country', '', '$phone', '$email', '$www')";
+  $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, phone, email, www) "
+      . "VALUES('$address1', '$address2', '$city', '$state', '$zip', '$country', '$phone', '$email', '$www')";
   $result = tng_query($query);
   $addressID = tng_insert_id();
 }

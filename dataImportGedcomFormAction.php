@@ -199,8 +199,8 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
         $query = "DELETE from $saveimport_table";
         $result = tng_query($query);
 
-        $sql = "INSERT INTO $saveimport_table (filename, icount, ioffset, fcount, foffset, scount, soffset, mcount, pcount, ncount, noffset, roffset, offset, delvar, ucaselast, norecalc, neweronly, media, gedcom, branch) "
-            . "VALUES(\"{$savestate['filename']}\", 0, \"{$savestate['ioffset']}\", 0, \"{$savestate['foffset']}\", 0, \"{$savestate['soffset']}\", 0, 0, 0, \"{$savestate['noffset']}\", \"{$savestate['roffset']}\", 0, '$del', {$savestate['ucaselast']}, {$savestate['norecalc']}, {$savestate['neweronly']}, $mll, '', '$branch')";
+        $sql = "INSERT INTO $saveimport_table (filename, icount, ioffset, fcount, foffset, scount, soffset, mcount, pcount, ncount, noffset, roffset, offset, delvar, ucaselast, norecalc, neweronly, media, branch) "
+            . "VALUES(\"{$savestate['filename']}\", 0, \"{$savestate['ioffset']}\", 0, \"{$savestate['foffset']}\", 0, \"{$savestate['soffset']}\", 0, 0, 0, \"{$savestate['noffset']}\", \"{$savestate['roffset']}\", 0, '$del', {$savestate['ucaselast']}, {$savestate['norecalc']}, {$savestate['neweronly']}, $mll, '$branch')";
         $result = tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $sql");
       }
     } elseif ($saveimport && !$openmsg) {

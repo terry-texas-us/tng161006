@@ -99,7 +99,7 @@ if ($result && tng_num_rows($result)) {
   }
   foreach ($places as $place) {
     $temple = strlen($place) == 5 && $place == strtoupper($place) ? 1 : 0;
-    $query = "INSERT IGNORE INTO $places_table (gedcom, place, placelevel, zoom, geoignore, temple) VALUES('', '$place', '0', '0', '0', '$temple')";
+    $query = "INSERT IGNORE INTO $places_table (place, placelevel, zoom, geoignore, temple) VALUES('$place', '0', '0', '0', '$temple')";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   }
   if (is_array($branch)) {
@@ -125,8 +125,8 @@ if ($result && tng_num_rows($result)) {
     $familyID = "";
   }
   $meta = metaphone($lnprefix . $lastname);
-  $query = "INSERT INTO $people_table (personID, firstname, lnprefix, lastname, nickname, prefix, suffix, title, nameorder, living, private, birthdate, birthdatetr, birthplace, sex, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, baptdate, baptdatetr, baptplace, confdate, confdatetr, confplace, initdate, initdatetr, initplace, endldate, endldatetr, endlplace, changedate, gedcom, branch, changedby, famc, metaphone, edituser, edittime)
-    VALUES('$personID', '$firstname', '$lnprefix', '$lastname', '$nickname', '$prefix', '$suffix', '$title', '0', '$living', '$private', '$birthdate', '$birthdatetr', '$birthplace', '$sex', '$altbirthdate', '$altbirthdatetr', '$altbirthplace', '$deathdate', '$deathdatetr', '$deathplace', '$burialdate', '$burialdatetr', '$burialplace', '$burialtype', '$baptdate', '$baptdatetr', '$baptplace', '$confdate', '$confdatetr', '$confplace', '$initdate', '$initdatetr', '$initplace', '$endldate', '$endldatetr', '$endlplace', '$newdate', '', '$allbranches', '$currentuser', '$familyID', '$meta', '', '0')";
+  $query = "INSERT INTO $people_table (personID, firstname, lnprefix, lastname, nickname, prefix, suffix, title, nameorder, living, private, birthdate, birthdatetr, birthplace, sex, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, baptdate, baptdatetr, baptplace, confdate, confdatetr, confplace, initdate, initdatetr, initplace, endldate, endldatetr, endlplace, changedate, branch, changedby, famc, metaphone, edituser, edittime)
+    VALUES('$personID', '$firstname', '$lnprefix', '$lastname', '$nickname', '$prefix', '$suffix', '$title', '0', '$living', '$private', '$birthdate', '$birthdatetr', '$birthplace', '$sex', '$altbirthdate', '$altbirthdatetr', '$altbirthplace', '$deathdate', '$deathdatetr', '$deathplace', '$burialdate', '$burialdatetr', '$burialplace', '$burialtype', '$baptdate', '$baptdatetr', '$baptplace', '$confdate', '$confdatetr', '$confplace', '$initdate', '$initdatetr', '$initplace', '$endldate', '$endldatetr', '$endlplace', '$newdate', '$allbranches', '$currentuser', '$familyID', '$meta', '', '0')";
   $result = tng_query($query);
   $ID = tng_insert_id();
 
@@ -137,7 +137,7 @@ if ($result && tng_num_rows($result)) {
 
   $branchlist = explode(',', $allbranches);
   foreach ($branchlist as $b) {
-    $query = "INSERT IGNORE INTO $branchlinks_table (branch, gedcom, persfamID) VALUES('$b', '', '$personID')";
+    $query = "INSERT IGNORE INTO $branchlinks_table (branch, persfamID) VALUES('$b', '$personID')";
     $result = tng_query($query);
   }
   $row['allow_living'] = $row['allow_private'] = 1;
@@ -149,8 +149,8 @@ if ($result && tng_num_rows($result)) {
       $order = tng_num_rows($result) + 1;
       tng_free_result($result);
 
-      $query = "INSERT INTO $children_table (familyID, personID, ordernum, gedcom, frel, mrel, haskids, parentorder, sealdate, sealdatetr, sealplace) "
-          . "VALUES ('$familyID', '$personID', $order, '', '$frel', '$mrel', 0, 0, '', '0000-00-00', '')";
+      $query = "INSERT INTO $children_table (familyID, personID, ordernum, frel, mrel, haskids, parentorder, sealdate, sealdatetr, sealplace) "
+          . "VALUES ('$familyID', '$personID', $order, '$frel', '$mrel', 0, 0, '', '0000-00-00', '')";
       $result = tng_query($query);
 
       $query = "SELECT husband,wife FROM $families_table WHERE familyID = '$familyID'";

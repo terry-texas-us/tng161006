@@ -1429,8 +1429,8 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         $query = "DELETE from $saveimport_table";
         $result = tng_query($query);
 
-        $sql = "INSERT INTO $saveimport_table (filename, offset, gedcom, media) "
-            . "VALUES('$filename', 0, '', '$exportmedia')";
+        $sql = "INSERT INTO $saveimport_table (filename, offset, media) "
+            . "VALUES('$filename', 0, '$exportmedia')";
         $result = tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $sql");
       }
     }

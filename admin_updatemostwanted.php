@@ -29,17 +29,17 @@ if ($mediaID == "") {
 }
 
 if ($ID) {
-  $query = "UPDATE $mostwanted_table SET title=\"$title\", description=\"$description\", personID=\"$personID\", mediaID=\"$mediaID\", gedcom=\"$mwtree\" WHERE ID=\"$ID\"";
+  $query = "UPDATE $mostwanted_table SET title='$title', description='$description', personID='$personID', mediaID='$mediaID' WHERE ID='$ID'";
   $result = tng_query($query);
 } else {
   //get new ordernum
-  $query2 = "SELECT max(ordernum) as maxordernum FROM $mostwanted_table WHERE mwtype = \"$mwtype\"";
+  $query2 = "SELECT max(ordernum) as maxordernum FROM $mostwanted_table WHERE mwtype = '$mwtype'";
   $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
   $row2 = tng_fetch_assoc($result2);
   $ordernum = $row2['maxordernum'] + 1;
   tng_free_result($result2);
 
-  $query = "INSERT INTO $mostwanted_table (title,description,personID,mediaID,gedcom,mwtype,ordernum) VALUES (\"$title\",\"$description\",\"$personID\",\"$mediaID\",\"$mwtree\",\"$mwtype\",$ordernum)";
+  $query = "INSERT INTO $mostwanted_table (title, description, personID, mediaID, mwtype, ordernum) VALUES ('$title', '$description', '$personID', '$mediaID', '$mwtype', $ordernum)";
   $result = tng_query($query);
   $ID = tng_insert_id();
 }
@@ -49,7 +49,7 @@ $thumbpath = "";
 $size = array(0, 0);
 if ($mediaID && $mediaID != $orgmediaID) {
   initMediaTypes();
-  $query = "SELECT * FROM $media_table WHERE mediaID = \"$mediaID\"";
+  $query = "SELECT * FROM $media_table WHERE mediaID = '$mediaID'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   $mediatypeID = $row['mediatypeID'];

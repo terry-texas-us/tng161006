@@ -106,7 +106,7 @@ if (trim($endlplace) && !in_array($endlplace, $places)) {
 }
 foreach ($places as $place) {
   $temple = strlen($place) == 5 && $place == strtoupper($place) ? 1 : 0;
-  $query = "INSERT IGNORE INTO $places_table (gedcom, place, placelevel, zoom, geoignore, temple) VALUES ('', '$place', '0', '0', '0', '$temple')";
+  $query = "INSERT IGNORE INTO $places_table (place, placelevel, zoom, geoignore, temple) VALUES ('$place', '0', '0', '0', '$temple')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   if ($tngconfig['autogeo'] && tng_affected_rows()) {
     $ID = tng_insert_id();
@@ -132,8 +132,8 @@ if (!$burialtype) {
   $burialtype = 0;
 }
 $meta = metaphone($lnprefix . $lastname);
-$query = "INSERT INTO $people_table (personID,firstname,lnprefix,lastname,nickname,prefix,suffix,title,nameorder,living,private,birthdate,birthdatetr,birthplace,sex,altbirthdate,altbirthdatetr,altbirthplace,deathdate,deathdatetr,deathplace,burialdate,burialdatetr,burialplace,burialtype,baptdate,baptdatetr,baptplace,confdate,confdatetr,confplace,initdate,initdatetr,initplace,endldate,endldatetr,endlplace,changedate,gedcom,branch,changedby,famc,metaphone,edituser,edittime)
-    VALUES(\"$personID\",\"$firstname\",\"$lnprefix\",\"$lastname\",\"$nickname\",\"$prefix\",\"$suffix\",\"$title\",\"$pnameorder\",\"$living\",\"$private\",\"$birthdate\",\"$birthdatetr\",\"$birthplace\",\"$sex\",\"$altbirthdate\",\"$altbirthdatetr\",\"$altbirthplace\",\"$deathdate\",\"$deathdatetr\",\"$deathplace\",\"$burialdate\",\"$burialdatetr\",\"$burialplace\",\"$burialtype\",\"$baptdate\",\"$baptdatetr\",\"$baptplace\",\"$confdate\",\"$confdatetr\",\"$confplace\",\"$initdate\",\"$initdatetr\",\"$initplace\",\"$endldate\",\"$endldatetr\",\"$endlplace\",\"$newdate\",\"$tree\",\"$allbranches\",\"$currentuser\",\"\",\"$meta\",\"\",\"0\")";
+$query = "INSERT INTO $people_table (personID, firstname, lnprefix, lastname, nickname, prefix, suffix, title, nameorder, living, private, birthdate, birthdatetr, birthplace, sex, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, baptdate, baptdatetr, baptplace, confdate, confdatetr, confplace, initdate, initdatetr, initplace, endldate, endldatetr, endlplace, changedate, branch, changedby, famc, metaphone, edituser, edittime)
+    VALUES('$personID', '$firstname', '$lnprefix', '$lastname', '$nickname', '$prefix', '$suffix', '$title', '$pnameorder', '$living', '$private', '$birthdate', '$birthdatetr', '$birthplace', '$sex', '$altbirthdate', '$altbirthdatetr', '$altbirthplace', '$deathdate', '$deathdatetr', '$deathplace', '$burialdate', '$burialdatetr', '$burialplace', '$burialtype', '$baptdate', '$baptdatetr', '$baptplace', '$confdate', '$confdatetr', '$confplace', '$initdate', '$initdatetr', '$initplace', '$endldate', '$endldatetr', '$endlplace', '$newdate', '$allbranches', '$currentuser', '', '$meta', '', '0')";
 $result = tng_query($query);
 $ID = tng_insert_id();
 
@@ -145,7 +145,7 @@ tng_free_result($result);
 
 $branchlist = explode(',', $allbranches);
 foreach ($branchlist as $b) {
-  $query = "INSERT IGNORE INTO $branchlinks_table (branch, gedcom, persfamID) VALUES('$b', '', '$personID')";
+  $query = "INSERT IGNORE INTO $branchlinks_table (branch, persfamID) VALUES('$b', '$personID')";
   $result = tng_query($query);
 }
 
@@ -158,8 +158,8 @@ if ($type == "child") {
     $order = tng_num_rows($result);
     tng_free_result($result);
 
-    $query = "INSERT INTO $children_table (familyID, personID, ordernum, gedcom, frel, mrel, haskids, parentorder, sealdate, sealdatetr, sealplace) "
-        . "VALUES ('$familyID', '$personID', $order, '$tree', '', '', 0, 0, '', '0000-00-00', '')";
+    $query = "INSERT INTO $children_table (familyID, personID, ordernum, frel, mrel, haskids, parentorder, sealdate, sealdatetr, sealplace) "
+        . "VALUES ('$familyID', '$personID', $order, '', '', 0, 0, '', '0000-00-00', '')";
     $result = tng_query($query);
 
     $query = "SELECT husband,wife FROM $families_table WHERE familyID = '$familyID'";

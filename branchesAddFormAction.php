@@ -19,8 +19,8 @@ $description = addslashes($description);
 if (!$dospouses) {
   $dospouses = 0;
 }
-$query = "INSERT INTO $branches_table (gedcom, branch, description, personID, agens, dgens, dagens, inclspouses, action) "
-    . "VALUES ('', '$branch', '$description', '$personID', '$agens', '$dgens', '$dagens', '$dospouses', '2')";
+$query = "INSERT INTO $branches_table (branch, description, personID, agens, dgens, dagens, inclspouses, action) "
+    . "VALUES ('$branch', '$description', '$personID', '$agens', '$dgens', '$dagens', '$dospouses', '2')";
 $result = tng_query($query);
 $success = tng_affected_rows();
 
