@@ -16,6 +16,8 @@ require 'adminlog.php';
 $query = "DELETE from $people_table";
 $result = tng_query($query);
 
+tng_query("ALTER TABLE `tgn`.`people` AUTO_INCREMENT = 1");
+
 $query = "DELETE from $families_table";
 $result = tng_query($query);
 
@@ -37,6 +39,8 @@ $result = tng_query($query);
 $query = "DELETE from $events_table";
 $result = tng_query($query);
 
+tng_query("ALTER TABLE `tgn`.`events` AUTO_INCREMENT = 1");
+
 $query = "DELETE from $notelinks_table";
 $result = tng_query($query);
 
@@ -48,6 +52,8 @@ $result = tng_query($query);
 
 $query = "DELETE from $places_table";
 $result = tng_query($query);
+
+tng_query("ALTER TABLE `tgn`.`places` AUTO_INCREMENT = 1");
 
 $query = "UPDATE $people_table SET branch=\"\" WHERE branch = '$branch'";
 $result = tng_query($query);

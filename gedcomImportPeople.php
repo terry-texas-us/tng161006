@@ -35,17 +35,17 @@ function getIndividualRecord($personID, $prevlevel) {
 
   $personID = adjustID($personID, $savestate['ioffset']);
 
-  $prefix = 'I';
+	$prefix = "I";
   $info = "";
   $prifamily = "";
   $changedate = "";
   $burialtype = 0;
-  $info['BIRT'] = $info['DEAT'] = $info['BURI'] = $info['BAPL'] = $info['CONL'] = $info['INIT'] = $info['ENDL'] = $info['NAME'] = $info['SLGC'] = array();
-  $spouses = array();
-  $events = array();
-  $stdnotes = array();
-  $mminfo = array();
-  $cite = array();
+  $info['BIRT'] = $info['DEAT'] = $info['BURI'] = $info['BAPL'] = $info['CONL'] = $info['INIT'] = $info['ENDL'] = $info['NAME'] = $info['SLGC'] = [];
+  $spouses = [];
+  $events = [];
+  $stdnotes = [];
+  $mminfo = [];
+  $cite = [];
   $notecount = 0;
   $mmcount = 0;
   $custeventctr = 0;
@@ -53,11 +53,11 @@ function getIndividualRecord($personID, $prevlevel) {
   $citecount = 0;
   $parentorder = 1;
   $prevlevel++;
-  $assocarr = array();
+  $assocarr = [];
   $living = $private = 0;
 
-  static $arrayLower = array('�', '�', '�', '�', '�', '�', '�', '�', '�', '�', '�');
-  static $arrayUpper = array('�', '�', '�', '�', '�', '�', '�', '�', '�', '�', '�');
+	static $arrayLower = ['á','à','ä','é','è','ó','ò','ö','ú','ù','ü'];
+	static $arrayUpper = ['Á','À','Ä','É','È','Ó','Ò','Ö','Ú','Ù','Ü'];
 
   $lineinfo = getLine();
   while ($lineinfo['tag'] && $lineinfo['level'] >= $prevlevel) {
@@ -80,7 +80,7 @@ function getIndividualRecord($personID, $prevlevel) {
               $newname = addslashes(trim($lineinfo['rest']));
             }
             $custeventctr++;
-            $events[$custeventctr] = array();
+            $events[$custeventctr] = [];
             $events[$custeventctr]['TAG'] = "NAME";
             $thisevent = $prefix . "_NAME_";
             //make sure it's a keeper before continuing by checking against type_tag_desc list
@@ -135,12 +135,12 @@ function getIndividualRecord($personID, $prevlevel) {
             //this may be just a quickie fix for ALIA
             if ($info['NAME']['ALIA']) {
               $custeventctr++;
-              $events[$custeventctr] = array();
+              $events[$custeventctr] = [];
               $events[$custeventctr]['TAG'] = "ALIA";
               $thisevent = $prefix . "_ALIA_";
               //make sure it's a keeper before continuing by checking against type_tag_desc list
               if (in_array($thisevent, $custeventlist)) {
-                $events[$custeventctr]['INFO'] = array();
+                $events[$custeventctr]['INFO'] = [];
                 $events[$custeventctr]['INFO']['FACT'] = $info['NAME']['ALIA'];
               }
             }
@@ -153,7 +153,7 @@ function getIndividualRecord($personID, $prevlevel) {
         case "TITL":
           if (isset($info[$tag])) {
             $custeventctr++;
-            $events[$custeventctr] = array();
+            $events[$custeventctr] = [];
             $events[$custeventctr]['TAG'] = $tag;
             $thisevent = $prefix . "_" . $tag . "_";
             $events[$custeventctr]['INFO']['FACT'] = addslashes($lineinfo['rest']);
@@ -189,7 +189,7 @@ function getIndividualRecord($personID, $prevlevel) {
         case "ENDL":
           if (isset($info[$tag]['more'])) {
             $custeventctr++;
-            $events[$custeventctr] = array();
+            $events[$custeventctr] = [];
             $events[$custeventctr]['TAG'] = $tag;
             $thisevent = $prefix . "_" . $tag . "_";
             //make sure it's a keeper before continuing by checking against type_tag_desc list
@@ -204,26 +204,26 @@ function getIndividualRecord($personID, $prevlevel) {
               dumpnotes($info[$tag]['NOTES']);
             }
             if ($tag == "BIRT" && $info['BIRT']['TYPE'] == "stillborn") {
-              $info['BIRT']['NOTES'][] = array("NOTE" => "stillborn");
+              $info['BIRT']['NOTES'][] = ["NOTE" => "stillborn"];
             }
             if (isset($info[$tag]['FACT']) && $info[$tag]['FACT']) {
               if (!isset($info[$tag]['DATE']) && !isset($info[$tag]['PLAC'])) {
                 $info[$tag]['DATE'] = $info[$tag]['FACT'];
               } elseif ($info[$tag]['FACT'] != "Y") {
                 if (!isset($info[$tag]['NOTES'])) {
-                  $info[$tag]['NOTES'] = array();
+                  $info[$tag]['NOTES'] = [];
                   $notectr = 1;
                 } else {
                   $notectr = count($info[$tag]['NOTES']);
                 }
-                $info[$tag]['NOTES'][$notectr] = array("NOTE" => $info[$tag]['FACT'], "TAG" => $tag, "XNOTE" => "");
+                $info[$tag]['NOTES'][$notectr] = ["NOTE" => $info[$tag]['FACT'], "TAG" => $tag, "XNOTE" => ""];
                 dumpnotes($info[$tag]['NOTES']);
               }
             }
             if ($info[$tag]['extra']) {
               $info[$tag]['parent'] = $tag;
               $custeventctr++;
-              $events[$custeventctr] = array();
+              $events[$custeventctr] = [];
               $events[$custeventctr]['TAG'] = $tag;
               $thisevent = $prefix . "_" . $tag . "_";
               //make sure it's a keeper before continuing by checking against type_tag_desc list
@@ -292,7 +292,7 @@ function getIndividualRecord($personID, $prevlevel) {
           break;
         case "ASSO":
           preg_match("/^@(\S+)@/", $lineinfo['rest'], $matches);
-          $thisassoc = array();
+          $thisassoc = [];
           if (substr($matches[1], 0, 1) == 'I' || substr($matches[1], -1) == 'I') {
             $countertouse = $savestate['ioffset'];
             $thisassoc['reltype'] = 'I';
@@ -400,6 +400,9 @@ function getIndividualRecord($personID, $prevlevel) {
             $private = $lineinfo['rest'] == "Private" ? "1" : 0;
             $lineinfo = getLine();
           }
+          break;
+        case "_UID":
+          $lineinfo = getLine();
           break;
         default:
           //custom event -- should be 1 TAG
@@ -534,15 +537,13 @@ function getIndividualRecord($personID, $prevlevel) {
   if (!$info['ENDL']['DATETR']) {
     $info['ENDL']['DATETR'] = "0000-00-00";
   }
-  $query = "INSERT IGNORE INTO $people_table (personID, lastname, lnprefix, firstname, living, private, sex, birthdate, birthdatetr, birthplace,
-    altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, nickname, title, prefix, suffix,
-    baptdate, baptdatetr, baptplace, confdate, confdatetr, confplace, initdate, initdatetr, initplace, endldate, endldatetr, endlplace, changedate, famc, metaphone, gedcom, branch, changedby, edituser, edittime)
+  $query = "INSERT IGNORE INTO $people_table (personID, lastname, lnprefix, firstname, living, private, sex, birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, nickname, title, prefix, suffix, baptdate, baptdatetr, baptplace, confdate, confdatetr, confplace, initdate, initdatetr, initplace, endldate, endldatetr, endlplace, changedate, famc, metaphone, branch, changedby, edituser, edittime)
     VALUES(\"$personID\", \"{$info['SURN']}\", \"{$info['lnprefix']}\", \"{$info['GIVN']}\", \"$living\", \"$private\", \"{$info['SEX']}\", \"" . $info['BIRT']['DATE'] . "\", \"" . $info['BIRT']['DATETR'] . "\",
     \"" . $info['BIRT']['PLAC'] . "\", \"" . $info['CHR']['DATE'] . "\", \"" . $info['CHR']['DATETR'] . "\", \"" . $info['CHR']['PLAC'] . "\",
     \"" . $info['DEAT']['DATE'] . "\", \"" . $info['DEAT']['DATETR'] . "\", \"" . $info['DEAT']['PLAC'] . "\", \"" . $info['BURI']['DATE'] . "\", \"" . $info['BURI']['DATETR'] . "\", \"" . $info['BURI']['PLAC'] . "\", $burialtype,
     \"{$info['NICK']}\", \"{$info['TITL']}\", \"{$info['NPFX']}\", \"{$info['NSFX']}\", \"" . $info['BAPL']['DATE'] . "\", \"" . $info['BAPL']['DATETR'] . "\", \"$baplplace\",
     \"" . $info['CONL']['DATE'] . "\", \"" . $info['CONL']['DATETR'] . "\", \"$confplace\",\"" . $info['INIT']['DATE'] . "\", \"" . $info['INIT']['DATETR'] . "\", \"$initplace\",
-    \"" . $info['ENDL']['DATE'] . "\", \"" . $info['ENDL']['DATETR'] . "\", \"$endlplace\", \"$inschangedt\", \"$prifamily\", \"$meta\", '', \"{$savestate['branch']}\", \"$currentuser\", \"\", \"0\" )";
+    \"" . $info['ENDL']['DATE'] . "\", \"" . $info['ENDL']['DATETR'] . "\", \"$endlplace\", \"$inschangedt\", \"$prifamily\", \"$meta\", \"{$savestate['branch']}\", \"$currentuser\", \"\", \"0\" )";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   $success = tng_affected_rows();
   if (!$success && $savestate['del'] != "no") {

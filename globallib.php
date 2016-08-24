@@ -323,7 +323,7 @@ function determineLivingPrivateRights($row, $pagerightbranch = -1) {
   global $allow_private;
   global $allow_lds;
 
-  $rights = array('private' => true, 'living' => true, 'lds' => (!$ldsdefault ? true : false));
+  $rights = ['private' => true, 'living' => true, 'lds' => (!$ldsdefault ? true : false)];
 
   $living = $livedefault == 2 ? false : $row['living'];
   $private = $row['private'];
@@ -600,8 +600,8 @@ function displayDate($date) {
 function xmlcharacters($string) {
   global $session_charset;
 
-  $bad = array("&", "\"");
-  $good = array("&#038;", "&#034;");
+  $bad = ["&", "\""];
+  $good = ["&#038;", "&#034;"];
 
   $ucharset = strtoupper($session_charset);
   $enc = function_exists('mb_detect_encoding') ? mb_detect_encoding($string) : "";
@@ -1048,24 +1048,24 @@ function tng_utf8_decode($text) {
 }
 
 function utf82iso88592($text) {
-  $text = str_replace("\xC4\x85", '�', $text);
-  $text = str_replace("\xC4\x84", '�', $text);
-  $text = str_replace("\xC4\x87", '�', $text);
-  $text = str_replace("\xC4\x86", '�', $text);
-  $text = str_replace("\xC4\x99", '�', $text);
-  $text = str_replace("\xC4\x98", '�', $text);
-  $text = str_replace("\xC5\x82", '�', $text);
-  $text = str_replace("\xC5\x81", '�', $text);
-  $text = str_replace("\xC3\xB3", '�', $text);
-  $text = str_replace("\xC3\x93", '�', $text);
-  $text = str_replace("\xC5\x9B", '�', $text);
-  $text = str_replace("\xC5\x9A", '�', $text);
-  $text = str_replace("\xC5\xBC", '�', $text);
-  $text = str_replace("\xC5\xBB", '�', $text);
-  $text = str_replace("\xC5\xBA", '�', $text);
-  $text = str_replace("\xC5\xB9", '�', $text);
-  $text = str_replace("\xc5\x84", '�', $text);
-  $text = str_replace("\xc5\x83", '�', $text);
+	$text = str_replace("\xC4\x85", '±', $text);
+	$text = str_replace("\xC4\x84", '¡', $text);
+	$text = str_replace("\xC4\x87", 'æ', $text);
+	$text = str_replace("\xC4\x86", 'Æ', $text);
+	$text = str_replace("\xC4\x99", 'ê', $text);
+	$text = str_replace("\xC4\x98", 'Ê', $text);
+	$text = str_replace("\xC5\x82", '³', $text);
+	$text = str_replace("\xC5\x81", '£', $text);
+	$text = str_replace("\xC3\xB3", 'ó', $text);
+	$text = str_replace("\xC3\x93", 'Ó', $text);
+	$text = str_replace("\xC5\x9B", '¶', $text);
+	$text = str_replace("\xC5\x9A", '¦', $text);
+	$text = str_replace("\xC5\xBC", '¿', $text);
+	$text = str_replace("\xC5\xBB", '¯', $text);
+	$text = str_replace("\xC5\xBA", '¼', $text);
+	$text = str_replace("\xC5\xB9", '¬', $text);
+	$text = str_replace("\xc5\x84", 'ñ', $text);
+	$text = str_replace("\xc5\x83", 'Ñ', $text);
 
   return $text;
 }
@@ -1113,7 +1113,7 @@ function buildParentRow($parent, $spouse, $label) {
         $out .= "<select class='form-control form-control-sm' id='relationship' name=\"$fieldname{$parent['familyID']}\">\n";
         $out .= "<option value=''></option>\n";
 
-        $reltypes = array("adopted", "birth", "foster", "sealing", "step");
+        $reltypes = ["adopted", "birth", "foster", "sealing", "step"];
         foreach ($reltypes as $reltype) {
           $out .= "<option value=\"$reltype\"";
           if ($parent[$fieldname] == $reltype || $parent[$fieldname] == uiTextSnippet($reltype)) {
