@@ -2,7 +2,6 @@
 require 'begin.php';
 require 'adminlib.php';
 
-$treeList = array();
 if ($link) {
   $adminLogin = 1;
   include 'checklogin.php';
@@ -13,16 +12,7 @@ if ($link) {
     header("Location: admin_login.php?message=" . urlencode($message));
     exit;
   }
-
-  $query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-  $result = tng_query($query);
-  while ($row = tng_fetch_assoc($result)) {
-    $treeList[] = $row;
-  }
-} else {
-  $result = false;
 }
-
 if (!$rootpath) {
   $rootpath = dirname(__FILE__);
   $rootpath .= "/";
@@ -30,7 +20,6 @@ if (!$rootpath) {
     $rootpath = str_replace("\\", "/", $rootpath);
   }
 }
-
 if (!$lineendingdisplay) {
   if ($lineending == "\r\n") {
     $lineendingdisplay = "\\r\\n";
@@ -632,7 +621,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
                 <?php
                 chdir($rootpath . $endrootpath . $languagesPath);
                 if ($handle = opendir('.')) {
-                  $dirs = array();
+                  $dirs = [];
                   while ($filename = readdir($handle)) {
                     if (is_dir($filename) && $filename != '..' && $filename != '.') {
                       array_push($dirs, $filename);
@@ -911,19 +900,6 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
                   <?php echo uiTextSnippet('no'); ?>
                 </option>
                 <option value='1'<?php if ($tngconfig['revmail']) {echo " selected";} ?>>
-                  <?php echo uiTextSnippet('yes'); ?>
-                </option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('autotree'); ?>:</td>
-            <td>
-              <select id='autotree' name='autotree'>
-                <option value='0'<?php if (!$tngconfig['autotree']) {echo " selected";} ?>>
-                  <?php echo uiTextSnippet('no'); ?>
-                </option>
-                <option value='1'<?php if ($tngconfig['autotree']) {echo " selected";} ?>>
                   <?php echo uiTextSnippet('yes'); ?>
                 </option>
               </select>

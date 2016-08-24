@@ -229,7 +229,7 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
             </div>
             <div class='col-sm-3'>
               <?php
-              $query = "SELECT branch, gedcom, description FROM $branches_table WHERE gedcom = \"{$row['gedcom']}\" ORDER BY description";
+              $query = "SELECT branch, description FROM $branches_table ORDER BY description";
               $branchresult = tng_query($query);
 
               echo "<select id='branch' name=\"branch\">\n";
@@ -242,7 +242,6 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
         <?php
       } else {
         echo "<b>" . uiTextSnippet('firstuser') . "</b>\n";
-        echo "<input name='gedcom' type='hidden' value=''>\n";
         echo "<input name='branch' type='hidden' value=''>";
       }
       ?>

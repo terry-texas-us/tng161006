@@ -66,25 +66,7 @@ $realname = trim($realname);
 $email = trim($email);
 $today = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
 
-if ($tngconfig['autotree']) {
-  $query = "SELECT MAX(0+SUBSTRING(gedcom,5)) as oldID FROM $treesTable WHERE gedcom LIKE \"tree%\"";
-  $result = tng_query($query);
-  if (tng_num_rows($result)) {
-    $maxrow = tng_fetch_array($result);
-    $gedcom = "tree" . ($maxrow['oldID'] + 1);
-  } else {
-    $gedcom = "tree1";
-  }
-  tng_free_result($result);
-
-  if ($tngconfig['autoapp']) {
-    $query = "INSERT IGNORE INTO $treesTable (gedcom, treename, description, owner, email, address, city, state, country, zip, phone, secret, disallowgedcreate) "
-        . "VALUES ('$gedcom', '$realname', '', '$realname', '$email', '$address', '$city', '$state', '$country', '$zip', '$phone', '0', '0')";
-    $result = tng_query($query);
-  }
-} else {
-  $gedcom = "";
-}
+$gedcom = "";
 
 if ($username && $password && $realname && $email && $fingerprint == "realperson") {
   if ($tngconfig['autoapp']) {
@@ -97,7 +79,8 @@ if ($username && $password && $realname && $email && $fingerprint == "realperson
     $moreinfo = $deftext['accinactive'];
   }
   $password_type = PasswordType();
-  $query = "INSERT IGNORE INTO $users_table (description,username,password,password_type,realname,phone,email,website,address,city,state,zip,country,notes,gedcom,role,allow_living,dt_registered) VALUES (\"$realname\",\"$username\",\"$password\",\"$password_type\",\"$realname\",\"$phone\",\"$email\",\"$website\",\"$address\",\"$city\",\"$state\",\"$zip\",\"$country\",\"$notes\",\"$gedcom\",\"guest\",\"$allow_living_val\",\"$today\")";
+  $query = "INSERT IGNORE INTO $users_table (description, username, password, password_type, realname, phone, email, website, address, city, state, zip, country, notes, role, allow_living, dt_registered) "
+      . "VALUES ('$realname', '$username', '$password', '$password_type', '$realname', '$phone', '$email', '$website', '$address', '$city', '$state', '$zip', '$country', '$notes', 'guest', '$allow_living_val', '$today')";
   $result = tng_query($query);
   $success = tng_affected_rows();
 } else {

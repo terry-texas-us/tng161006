@@ -183,7 +183,6 @@ fwrite($fp, "\$tngconfig['fromadmin'] = \"$fromadmin\";\n");
 fwrite($fp, "\$tngconfig['disallowreg'] = \"$disallowreg\";\n");
 fwrite($fp, "\$tngconfig['revmail'] = \"$revmail\";\n");
 fwrite($fp, "\$tngconfig['autoapp'] = \"$autoapp\";\n");
-fwrite($fp, "\$tngconfig['autotree'] = \"$autotree\";\n");
 fwrite($fp, "\$tngconfig['ackemail'] = \"$ackemail\";\n");
 fwrite($fp, "\$tngconfig['omitpwd'] = \"$omitpwd\";\n");
 fwrite($fp, "\$tngconfig['usesmtp'] = \"$usesmtp\";\n");

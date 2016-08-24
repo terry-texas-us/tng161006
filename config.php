@@ -113,7 +113,6 @@ $tngconfig['fromadmin'] = "1";
 $tngconfig['disallowreg'] = "0";
 $tngconfig['revmail'] = "1";
 $tngconfig['autoapp'] = "0";
-$tngconfig['autotree'] = "0";
 $tngconfig['ackemail'] = "1";
 $tngconfig['omitpwd'] = "0";
 $tngconfig['usesmtp'] = "1";
