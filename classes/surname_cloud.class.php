@@ -6,7 +6,7 @@ class Surname_cloud {
 
   }
 
-  function display($top = "50", $surnameTree = "", $surnameBranch = "") {
+  function display($top = "50", $surnameBranch = "") {
     global $people_table;
     global $lnprefixes;
 
@@ -19,11 +19,6 @@ class Surname_cloud {
 
     if ($more) {
       $wherestr .= $wherestr ? " AND " . $more : "WHERE $more";
-    }
-    if ($surnameTree != "") {
-      $treeString = "gedcom = \"" . $surnameTree . "\"";
-      $wherestr .= $wherestr ? " AND " . $treeString : "WHERE " . $treeString;
-      $treeBranchUrlString .= "&amp;tree=$surnameTree";
     }
     if ($surnameBranch != "") {
       $branchString = "branch = \"" . $surnameBranch . "\"";

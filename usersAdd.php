@@ -225,7 +225,7 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
             <div class='col-sm-3'>
             </div>
             <div class='col-sm-3'>
-              <span><?php echo uiTextSnippet('branch'); ?>**:</span>
+              <span><?php echo uiTextSnippet('branch'); ?>*:</span>
             </div>
             <div class='col-sm-3'>
               <?php
@@ -259,11 +259,7 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
       <button class='btn btn-primary btn-block' name='submit' type='submit'><?php echo uiTextSnippet('save'); ?></button>
     </form>
     <hr>
-    <p>
-      <br>
-      <span>**<?php echo uiTextSnippet('branchmsg'); ?></span>
-      <br>
-    </p>
+    <p>*<?php echo uiTextSnippet('branchmsg'); ?></p>
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->
 <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>

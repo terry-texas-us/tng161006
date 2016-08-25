@@ -60,7 +60,6 @@ require 'showmedialib.php';
 $mediaperpage = 1;
 $max_showmedia_pages = 5;
 
-//echo "mt=$mediatypeID"; exit;
 $info = getMediaInfo($mediatypeID, $mediaID, $personID, $albumID, $albumlinkID, $cemeteryID, $eventID);
 $ordernum = $info['ordernum'];
 $mediaID = $info['mediaID'];
@@ -112,9 +111,6 @@ $noneliving = $livinginfo['noneliving'] && $livinginfo['noneprivate'];
 
 $showPhotoInfo = $imgrow['alwayson'] || $noneliving;
 $nonamesloc = $livinginfo['private'] ? $tngconfig['nnpriv'] : $nonames;
-
-//$rightbranch = $livinginfo['rightbranch'];
-//$allrightbranch = $livinginfo['allrightbranch'];
 
 if ($noneliving || !$nonamesloc || $imgrow['alwayson']) {
   $description = preg_replace("/\"/", "&#34;", $mediadescription);
@@ -245,11 +241,9 @@ echo "<body id='public'>\n";
       } else {
         echo "<br><br>";
       }
-
       if (!$show_on_top) {
         showMediaSource($imgrow);
       }
-
       if ($mediatypeID == "headstones" && ($imgrow['status'] || $imgrow['plot'])) {
         echo "<p>";
         if ($imgrow['status']) {
@@ -271,7 +265,6 @@ echo "<body id='public'>\n";
       } else {
         echo "<br>\n";
       }
-
       $medialinktext = getMediaLinkText($mediaID, $ioffset);
       $albumlinktext = getAlbumLinkText($mediaID);
       echo showTable($imgrow, $medialinktext, $albumlinktext);
@@ -281,7 +274,6 @@ echo "<body id='public'>\n";
       if ($imgrow['cemeteryID']) {
         doCemPlusMap($imgrow);
       }
-
       if (!$tngprint) {
         echo "<br><p>$pagenav$sscontrols</p><br>\n";
       }
@@ -343,7 +335,6 @@ echo "<body id='public'>\n";
           cemeteryID: '<?php echo $cemeteryID ?>'
         });
       }
-    
     </script>
   <?php
   }
@@ -354,6 +345,5 @@ echo "<body id='public'>\n";
   <?php include 'js/img_utils.js'; ?>
   </script>
   <?php } ?>
-
 </body>
 </html>

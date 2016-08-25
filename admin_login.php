@@ -124,7 +124,7 @@ if ($reset) {
               </label>
             </div>
             <button class='btn btn-primary btn-block' type='submit'><?php echo uiTextSnippet('login'); ?></button>
-            <input name='admin_login' type='hidden' value='1'>
+            <input name='adminLogin' type='hidden' value='1'>
             <input name='continue' type='hidden' value="<?php echo $continue; ?>">
           </div>
         </form>

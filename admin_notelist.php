@@ -157,7 +157,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
             if ($allowDelete) {
               echo "<td><input name=\"del{$row['ID']}\" type='checkbox' value='1'></td>";
             }
-            $query = "SELECT $notelinks_table.ID, $notelinks_table.persfamID AS personID, secret FROM $notelinks_table WHERE $notelinks_table.xnoteID = \"{$row['ID']}\" ";
+            $query = "SELECT $notelinks_table.ID, $notelinks_table.persfamID AS personID, secret FROM $notelinks_table WHERE $notelinks_table.xnoteID = '{$row['ID']}' ";
 
             $nresult = tng_query($query);
             $notelinktext = "";

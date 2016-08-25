@@ -52,7 +52,7 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
     $photo = "";
 
     $query = "SELECT alwayson, thumbpath, $media_table.mediaID as mediaID, usecollfolder, mediatypeID, albumlinkID FROM ($media_table, $albumlinks_table)
-      WHERE albumID = \"$albumID\" AND $media_table.mediaID = $albumlinks_table.mediaID AND defphoto = '1'";
+      WHERE albumID = '$albumID' AND $media_table.mediaID = $albumlinks_table.mediaID AND defphoto = '1'";
     $defresult = tng_query($query);
     if ($defresult) {
       $drow = tng_fetch_assoc($defresult);

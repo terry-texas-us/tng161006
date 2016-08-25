@@ -126,10 +126,7 @@ if ($nokids) {
   $nokidgroup = "";
   $nokidselect = "";
 }
-$query = "SELECT $people_table.ID, $people_table.personID, lastname, firstname, lnprefix, prefix, suffix, nameorder, "
-  . "birthdate, LPAD(SUBSTRING_INDEX(birthdate, ' ', -1),4,'0') as birthyear, birthplace, "
-  . "altbirthdate, LPAD(SUBSTRING_INDEX(altbirthdate, ' ', -1),4,'0') as altbirthyear, altbirthplace, "
-  . "deathdate, LPAD(SUBSTRING_INDEX(deathdate, ' ', -1),4,'0') as deathyear, deathplace $nokidselect "
+$query = "SELECT $people_table.ID, $people_table.personID, lastname, firstname, lnprefix, prefix, suffix, nameorder, birthdate, LPAD(SUBSTRING_INDEX(birthdate, ' ', -1), 4, '0') AS birthyear, birthplace, altbirthdate, LPAD(SUBSTRING_INDEX(altbirthdate, ' ', -1), 4, '0') AS altbirthyear, altbirthplace, deathdate, LPAD(SUBSTRING_INDEX(deathdate, ' ', -1), 4, '0') AS deathyear, deathplace $nokidselect "
   . "FROM ($people_table) $nokidjoin $noparentjoin $nospousejoin "
   . "WHERE $allwhere $nokidgroup $nokidhaving "
   . "ORDER BY lastname, lnprefix, firstname, birthyear, altbirthyear LIMIT $newoffset" . $maxsearchresults;
@@ -186,7 +183,7 @@ $headSection->setTitle(uiTextSnippet('people'));
         <p>
           <button class='btn btn-secondary' id='selectall-people' name='selectall' type='button'><?php echo uiTextSnippet('selectall'); ?></button>
           <button class='btn btn-secondary' id='clearall-people' name='clearall' type='button'><?php echo uiTextSnippet('clearall'); ?></button>
-          <button class='btn btn-outline-danger' id='deleteselected-people' name='xperaction' type='submit'><?php echo uiTextSnippet('deleteselected'); ?></button>
+          <button class='btn btn-outline-danger' id='deleteselected-people' name='xperaction' type='submit' value='true'><?php echo uiTextSnippet('deleteselected'); ?></button>
         </p>
       <?php } ?>
       <?php if ($numrows) { ?>            

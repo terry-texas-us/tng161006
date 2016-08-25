@@ -154,7 +154,7 @@ $headSection->setTitle($row['name']);
             $spparents = $spouserow['personID'] ? getSpouseParents($spouserow['personID'], $spouserow['sex']) : uiTextSnippet('unknown');
             if ($spouseinfo) {
               $spname = getName($spouserow);
-              $spfirstfirstname = getFirstNameOnly($spouserow, " ");
+              $spfirstfirstname = getFirstNameOnly($spouserow);
               echo " $spfirstfirstname $spparents $spouseinfo";
             } else {
               echo " $spparents";

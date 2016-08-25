@@ -82,7 +82,7 @@ function deletePersonPlus($personID, $gender) {
     if ($gender == 'F') {
       $query = "SELECT familyID FROM $families_table WHERE wife = '$personID'";
     } else {
-      $query = "SELECT familyID FROM $families_table WHERE (husband = \"$personID\" OR wife = \"$personID\")";
+      $query = "SELECT familyID FROM $families_table WHERE (husband = '$personID' OR wife = '$personID')";
     }
   }
 
@@ -92,10 +92,10 @@ function deletePersonPlus($personID, $gender) {
   }
   tng_free_result($result);
 
-  $query = "UPDATE $families_table SET husband=\"\", husborder=\"\" WHERE husband = '$personID'";
+  $query = "UPDATE $families_table SET husband = '', husborder = 0 WHERE husband = '$personID'";
   tng_query($query);
 
-  $query = "UPDATE $families_table SET wife=\"\", wifeorder=\"\" WHERE wife = '$personID'";
+  $query = "UPDATE $families_table SET wife = '', wifeorder = 0 WHERE wife = '$personID'";
   tng_query($query);
 
   deleteMediaLinks($personID);
@@ -110,7 +110,7 @@ function updateHasKids($spouseID, $spousestr) {
   $result = tng_query($query);
   $numkids = 0;
   while (!$numkids && $row = tng_fetch_assoc($result)) {
-    $query = "SELECT count(ID) as ccount FROM $children_table WHERE familyID = \"$row[familyID]\"";
+    $query = "SELECT count(ID) as ccount FROM $children_table WHERE familyID = '$row[familyID]'";
     $result2 = tng_query($query);
     $crow = tng_fetch_assoc($result2);
     $numkids = $crow['ccount'];
@@ -118,7 +118,7 @@ function updateHasKids($spouseID, $spousestr) {
   }
   tng_free_result($result);
   if (!$numkids) {
-    $query = "UPDATE $children_table SET haskids=\"0\" WHERE personID = '$spouseID'";
+    $query = "UPDATE $children_table SET haskids = '0' WHERE personID = '$spouseID'";
     tng_query($query);
   }
 }

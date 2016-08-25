@@ -155,7 +155,6 @@ fwrite($fp, "\$dbowner = \"$dbowner\";\n");
 fwrite($fp, "\$timeOffset = \"$timeOffset\";\n");
 fwrite($fp, "\$tngconfig['edit_timeout'] = \"$edit_timeout\";\n");
 fwrite($fp, "\$requirelogin = \"$requirelogin\";\n");
-fwrite($fp, "\$treerestrict = \"$treerestrict\";\n");
 fwrite($fp, "\$livedefault = \"$livedefault\";\n");
 fwrite($fp, "\$ldsdefault = \"$ldsdefault\";\n");
 fwrite($fp, "\$chooselang = \"$chooselang\";\n");

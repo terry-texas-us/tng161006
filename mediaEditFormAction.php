@@ -20,7 +20,7 @@ function reorderMedia($query, $plink, $mediatypeID) {
   $eventID = $plink['eventID'];
   $result3 = tng_query($query);
   while ($personrow = tng_fetch_assoc($result3)) {
-    $query = "SELECT medialinkID FROM ($medialinks_table, $media_table) WHERE personID = \"{$personrow['personID']}\" AND $medialinks_table.gedcom = \"$ptree\" AND $media_table.mediaID = $medialinks_table.mediaID AND eventID = \"$eventID\" AND mediatypeID = \"$mediatypeID\" ORDER BY ordernum";
+    $query = "SELECT medialinkID FROM ($medialinks_table, $media_table) WHERE personID = \"{$personrow['personID']}\" AND $media_table.mediaID = $medialinks_table.mediaID AND eventID = \"$eventID\" AND mediatypeID = \"$mediatypeID\" ORDER BY ordernum";
     $result4 = tng_query($query);
 
     $counter = 1;

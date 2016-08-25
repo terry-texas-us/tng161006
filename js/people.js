@@ -38,14 +38,6 @@ $('#collapseall-editperson').on('click', function () {
 //    $('#names').fadeOut();
 });
 
-$('#change-tree').on('click', function () {
-    'use strict';
-    var $personId = $(this).data('personId');
-    var url = 'treesChange.php?entity=person&entityID=' + $personId;
-    tnglitbox = new ModalDialog(url);
-    return false;
-});
-
 $('#show-branchedit-person').on('click', function () {
     'use strict';
     showBranchEdit('branchedit-person');

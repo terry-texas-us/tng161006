@@ -82,7 +82,7 @@ if ($mediasearch) {
   $wherestr .= " AND ($media_table.description LIKE \"%$mediasearch2%\" OR $media_table.notes LIKE \"%$mediasearch2%\" OR bodytext LIKE \"%$mediasearch2%\")";
 }
 
-$query = "SELECT $media_table.mediaID, $media_table.description, $media_table.notes, path, thumbpath, alwayson, usecollfolder, form, mediatypeID, status, plot, newwindow, abspath, $media_table.gedcom $hsfields FROM $media_table";
+$query = "SELECT $media_table.mediaID, $media_table.description, $media_table.notes, path, thumbpath, alwayson, usecollfolder, form, mediatypeID, status, plot, newwindow, abspath $hsfields FROM $media_table";
 $query .= " $hsjoin $wherestr ORDER BY description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 $numrows = tng_num_rows($result);
@@ -180,15 +180,13 @@ $headSection->setTitle($titlestr);
       if ($status && uiTextSnippet($status)) {
         $row['status'] = uiTextSnippet($status);
       }
-      $query = "SELECT $medialinks_table.mediaID, $medialinks_table.personID as personID, people.personID as personID2, people.living as living, people.private as private, people.branch as branch, $medialinks_table.eventID, $families_table.branch as fbranch,
-        $families_table.living as fliving, $families_table.private as fprivate, familyID, husband, wife, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.prefix as prefix, people.suffix as suffix, nameorder,
-        $medialinks_table.gedcom, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame, deathdate, burialdate, linktype
+      $query = "SELECT $medialinks_table.mediaID, $medialinks_table.personID as personID, people.personID as personID2, people.living as living, people.private as private, people.branch as branch, $medialinks_table.eventID, $families_table.branch as fbranch, $families_table.living as fliving, $families_table.private as fprivate, familyID, husband, wife, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.prefix as prefix, people.suffix as suffix, nameorder, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame, deathdate, burialdate, linktype
         FROM $medialinks_table
         LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID
         LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID
         LEFT JOIN $sources_table ON $medialinks_table.personID = $sources_table.sourceID
         LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID)
-        WHERE mediaID = \"{$row['mediaID']}\" ORDER BY lastname, lnprefix, firstname, personID LIMIT $maxplus";
+        WHERE mediaID = '{$row['mediaID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT $maxplus";
       $presult = tng_query($query);
       $numrows = tng_num_rows($presult);
       $medialinktext = "";
@@ -208,8 +206,7 @@ $headSection->setTitle($titlestr);
         //if living still null, must be a source
         if ($prow['living'] == null && $prow['private'] == null && $prow['linktype'] == 'I') {
           $query = "SELECT count(personID) as ccount FROM $citations_table, $people_table
-            WHERE $citations_table.sourceID = '{$prow['personID']}' AND $citations_table.persfamID = $people_table.personID
-            AND (living = '1' OR private = '1')";
+              WHERE $citations_table.sourceID = '{$prow['personID']}' AND $citations_table.persfamID = $people_table.personID AND (living = '1' OR private = '1')";
           $presult2 = tng_query($query);
           $prow2 = tng_fetch_assoc($presult2);
           if ($prow2['ccount']) {
@@ -219,8 +216,7 @@ $headSection->setTitle($titlestr);
         }
         if ($prow['living'] == null && $prow['private'] == null && $prow['linktype'] == 'F') {
           $query = "SELECT count(familyID) as ccount FROM $citations_table, $families_table
-            WHERE $citations_table.sourceID = '{$prow['personID']}' AND $citations_table.persfamID = $families_table.familyID
-            AND living = '1'";
+              WHERE $citations_table.sourceID = '{$prow['personID']}' AND $citations_table.persfamID = $families_table.familyID AND living = '1'";
           $presult2 = tng_query($query);
           $prow2 = tng_fetch_assoc($presult2);
           if ($prow2['ccount']) {

@@ -93,7 +93,6 @@ $dbowner = "Terry";
 $timeOffset = "0";
 $tngconfig['edit_timeout'] = "";
 $requirelogin = "0";
-$treerestrict = "0";
 $livedefault = "0";
 $ldsdefault = "0";
 $chooselang = "1";

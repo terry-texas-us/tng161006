@@ -5,7 +5,7 @@ require 'adminlib.php';
 require 'checklogin.php';
 
 $query = "SELECT $eventtypes_table.eventtypeID, tag, display FROM $events_table
-    LEFT JOIN  $eventtypes_table on $eventtypes_table.eventtypeID = $events_table.eventtypeID 
+    LEFT JOIN  $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID 
     WHERE eventID=\"$eventID\"";
 $eventtypes = tng_query($query);
 $eventtype = tng_fetch_assoc($eventtypes);
@@ -136,11 +136,9 @@ $citationcount = tng_num_rows($citresult);
                    onclick="return initNewItem('source', document.newsourceform.sourceID, 'sourceID', 'sourceTitle', 'addcitation', 'newsource');"/>
             <?php
             if (isset($_SESSION['lastcite'])) {
-              $parts = explode("|", $_SESSION['lastcite']);
-              if ($parts[0] == '') {
-                echo "<input type='button' value=\"" . uiTextSnippet('copylast') . "\" onclick=\"return copylast(document.citeform2,'{$parts[1]}');\">";
-                echo "&nbsp; <img src=\"img/spinner.gif\" id=\"lastspinner\" style=\"vertical-align:-3px; display:none\">";
-              }
+              $citationID = $_SESSION['lastcite'];
+              echo "<input type='button' value=\"" . uiTextSnippet('copylast') . "\" onclick=\"return copylast(document.citeform2, '$citationID');\">";
+              echo "<img src='img/spinner.gif' id='lastspinner' style='vertical-align:-3px; display:none'>";
             }
             ?>
           </td>

@@ -6,9 +6,9 @@ $adminLogin = 1;
 require 'checklogin.php';
 
 if ($type == "album") {
-  $query = "SELECT eventID, linktype, entityID FROM $album2entities_table WHERE alinkID = \"$linkID\"";
+  $query = "SELECT eventID, linktype, entityID FROM $album2entities_table WHERE alinkID = '$linkID'";
 } else {
-  $query = "SELECT eventID, altdescription, altnotes, defphoto, linktype, personID, dontshow FROM $medialinks_table WHERE medialinkID = \"$linkID\"";
+  $query = "SELECT eventID, altdescription, altnotes, defphoto, linktype, personID, dontshow FROM $medialinks_table WHERE medialinkID = '$linkID'";
 }
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
@@ -51,7 +51,7 @@ if ($row['linktype'] == 'I') {
 }
 
 //now call up custom events linked to passed in entity
-$query = "SELECT display, eventdate, eventplace, info, eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"$entityID\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND keep = \"1\" AND parenttag = \"\" ORDER BY ordernum, tag, description, eventdatetr, info, eventID";
+$query = "SELECT display, eventdate, eventplace, info, eventID FROM $events_table, $eventtypes_table WHERE persfamID = '$entityID' AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND keep = '1' AND parenttag = '' ORDER BY ordernum, tag, description, eventdatetr, info, eventID";
 $custevents = tng_query($query);
 while ($custevent = tng_fetch_assoc($custevents)) {
   $displayval = getEventDisplay($custevent['display']);

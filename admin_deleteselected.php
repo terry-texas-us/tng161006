@@ -3,7 +3,7 @@
 require 'begin.php';
 require 'adminlib.php';
 
-$adminLogin = true;
+$adminLogin = 1;
 require 'checklogin.php';
 
 if (!$allowDelete) {
@@ -15,7 +15,7 @@ require 'adminlog.php';
 require 'deletelib.php';
 
 function getID($fields, $table, $id) {
-  $query = "SELECT $fields FROM $table WHERE ID = \"$id\"";
+  $query = "SELECT $fields FROM $table WHERE ID = '$id'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   tng_free_result($result);
@@ -76,19 +76,19 @@ foreach (array_keys($_POST) as $key) {
   if (substr($key, 0, 3) == "del") {
     $count++;
     $thisid = substr($key, 3);
-    $query .= " OR $id =\"$thisid\"";
+    $query .= " OR $id = '$thisid'";
 
     $itemID = "";
     $tree = "";
 
     if ($xperaction) {
-      $row = getID("personID, gedcom, branch, sex", $people_table, $thisid);
+      $row = getID("personID, branch, sex", $people_table, $thisid);
       $personID = $row['personID'];
       $items[] = $row['gedcom'] . "/" . $row['personID'];
 
       deletePersonPlus($personID, $row['sex']);
     } elseif ($xfamaction) {
-      $row = getID("familyID, branch, gedcom", $families_table, $thisid);
+      $row = getID("familyID, branch", $families_table, $thisid);
       $familyID = $row['familyID'];
       $items[] = $row['gedcom'] . "/" . $row['familyID'];
 
@@ -107,7 +107,7 @@ foreach (array_keys($_POST) as $key) {
       deleteMediaLinks($familyID);
       deleteAlbumLinks($familyID);
     } elseif ($xsrcaction) {
-      $row = getID("sourceID, gedcom", $sources_table, $thisid);
+      $row = getID("sourceID", $sources_table, $thisid);
       $sourceID = $row['sourceID'];
       $items[] = $row['gedcom'] . "/" . $row['sourceID'];
 
@@ -120,7 +120,7 @@ foreach (array_keys($_POST) as $key) {
       deleteMediaLinks($sourceID);
       deleteAlbumLinks($sourceID);
     } elseif ($xrepoaction) {
-      $row = getID("repoID, gedcom", $repositories_table, $thisid);
+      $row = getID("repoID", $repositories_table, $thisid);
       $repoID = $row['repoID'];
       $items[] = $row['gedcom'] . "/" . $row['repoID'];
 
@@ -140,7 +140,7 @@ foreach (array_keys($_POST) as $key) {
       deleteMediaLinks($repoID);
       deleteAlbumLinks($repoID);
     } elseif ($xplacaction) {
-      $row = getID("place, gedcom", $places_table, $thisid);
+      $row = getID("place", $places_table, $thisid);
       $place = $row['place'];
       $items[] = $row['gedcom'] . "/" . $row['place'];
 

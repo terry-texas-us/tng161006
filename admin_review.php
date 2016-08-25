@@ -2,11 +2,11 @@
 require 'begin.php';
 require 'adminlib.php';
 
-$adminLogin = true;
+$adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-$query = "SELECT *, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") as postdate FROM $temp_events_table WHERE tempID = \"$tempID\"";
+$query = "SELECT *, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") as postdate FROM $temp_events_table WHERE tempID = '$tempID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -45,7 +45,7 @@ if ($row['type'] == 'I' || $row['type'] == "C") {
   $frow = tng_fetch_assoc($result);
   $hname = $wname = "";
   if ($frow['husband']) {
-    $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch FROM $people_table WHERE personID = \"{$frow['husband']}\"";
+    $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch FROM $people_table WHERE personID = '{$frow['husband']}'";
     $result = tng_query($query);
     $prow = tng_fetch_assoc($result);
     $rightbranch = checkbranch($prow['branch']);
@@ -56,7 +56,7 @@ if ($row['type'] == 'I' || $row['type'] == "C") {
     $hname = getName($prow);
   }
   if ($frow['wife']) {
-    $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch FROM $people_table WHERE personID = \"{$frow['wife']}\"";
+    $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch FROM $people_table WHERE personID = '{$frow['wife']}'";
     $result = tng_query($query);
     $prow = tng_fetch_assoc($result);
     $rightbranch = checkbranch($prow['branch']);
@@ -66,7 +66,6 @@ if ($row['type'] == 'I' || $row['type'] == "C") {
     tng_free_result($result);
     $wname = getName($prow);
   }
-
   $persfamID = $familyID;
   $plus = $hname && $wname ? " + " : "";
   $name = "$hname$plus$wname";
@@ -92,7 +91,7 @@ if (is_numeric($eventID)) {
   $placefield = "eventplace";
   $factfield = "info";
 
-  $query = "SELECT eventdate, eventplace, info FROM $events_table WHERE eventID = \"$eventID\"";
+  $query = "SELECT eventdate, eventplace, info FROM $events_table WHERE eventID = '$eventID'";
   $result = tng_query($query);
   $evrow = tng_fetch_assoc($result);
   tng_free_result($result);
@@ -192,7 +191,6 @@ if (is_numeric($eventID)) {
       $needchildren = 1;
       break;
   }
-
   $fieldstr = $datefield;
   if ($placefield) {
     $fieldstr .= $fieldstr ? ", $placefield" : $placefield;
@@ -200,9 +198,8 @@ if (is_numeric($eventID)) {
   if ($factfield) {
     $fieldstr .= $fieldstr ? ", $factfield" : $factfield;
   }
-
   if ($needfamilies) {
-    $query = "SELECT $fieldstr FROM $families_table WHERE familyID = \"$familyID\"";
+    $query = "SELECT $fieldstr FROM $families_table WHERE familyID = '$familyID'";
   } elseif ($needchildren) {
     $query = "SELECT $fieldstr FROM $children_table WHERE familyID = '$familyID' AND personID = '$personID'";
   } else {
@@ -239,136 +236,125 @@ $headSection->setTitle(uiTextSnippet('review'));
 <html>
 <?php echo $headSection->build('', 'admin', $session_charset); ?>
 <body>
-  <?php
-  $hmsg = $row['type'] == 'I' ? 'people' : 'families';
-  echo $adminHeaderSection->build($hmsg . '-review', $message);
-  $navList = new navList('');
-  if ($row['type'] == 'I') {
-    $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
-    $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
-    $navList->appendItem([$allowEdit, "admin_findreview.php?type=I", uiTextSnippet('review'), "review"]);
-    $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
-  } else {
-    $navList->appendItem([true, "familiesBrowse.php", uiTextSnippet('browse'), "findperson"]);
-    $navList->appendItem([$allowAdd, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
-    $navList->appendItem([$allowEdit, "admin_findreview.php?type=F", uiTextSnippet('review'), "review"]);
-  }
-  echo $navList->build("review");
-  ?>
-  <table class='table table-sm'>
-    <tr>
-      <td>
-        <span class='h4'><?php echo "$persfamID: $name</strong> $teststr $editstr"; ?><br><br>
-          <div>
+  <section class='container'>
+    <?php
+    $hmsg = $row['type'] == 'I' ? 'people' : 'families';
+    echo $adminHeaderSection->build($hmsg . '-review', $message);
+    $navList = new navList('');
+    if ($row['type'] == 'I') {
+      $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
+      $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
+      $navList->appendItem([$allowEdit, "admin_findreview.php?type=I", uiTextSnippet('review'), "review"]);
+      $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
+    } else {
+      $navList->appendItem([true, "familiesBrowse.php", uiTextSnippet('browse'), "findperson"]);
+      $navList->appendItem([$allowAdd, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
+      $navList->appendItem([$allowEdit, "admin_findreview.php?type=F", uiTextSnippet('review'), "review"]);
+    }
+    echo $navList->build("review");
+    ?>
+    <span class='h4'><?php echo "$persfamID: $name</strong> $teststr $editstr"; ?></span><br>
+    <form action="admin_savereview.php" method='post' name='form1'>
+      <table>
+        <tr>
+          <td colspan='2'>&nbsp;</td>
+        </tr>
+        <tr>
+          <td><span class='h4'><?php echo uiTextSnippet('event'); ?>
+              :</span></td>
+          <td><span class='h4'><?php echo $displayval; ?></span></td>
+        </tr>
+        <tr>
+          <td colspan='2'>&nbsp;</td>
+        </tr>
+        <?php
+        if ($datefield) {
+          echo "<tr><td>" . uiTextSnippet('eventdate') . ": </span></td><td><span>{$evrow[$datefield]}</td></tr>\n";
+          echo "<tr><td><strong>" . uiTextSnippet('suggested') . ":</strong></td><td colspan='2'>\n";
+          echo "<input name='newdate' type='text' value=\"{$row['eventdate']}\" onblur=\"checkDate(this);\">\n";
+          echo "</td></tr>\n";
+        }
+        if ($placefield) {
+          $row['eventplace'] = preg_replace('/\"/', '&#34;', $row['eventplace']);
+          echo "<tr><td>" . uiTextSnippet('eventplace') . ":</td><td><span>{$evrow[$placefield]}</td></tr>\n";
+          echo "<tr><td><strong>" . uiTextSnippet('suggested') . ":</strong></td><td><input class='verylongfield' id='newplace' name='newplace' type='text' size='40' value=\"{$row['eventplace']}\"></td>";
+          echo "<td>\n";
+            echo "<a href='#' onclick=\"return openFindPlaceForm('newplace');\" title='" . uiTextSnippet('find') . "'>\n";
+            echo "<img class='icon-sm' src='svg/magnifying-glass.svg'>\n";
+            echo "</a>\n";
+          echo "</td></tr>\n";
+        }
+        if ($factfield) {
+          $row['info'] = preg_replace('/\"/', '&#34;', $row['info']);
+          echo "<tr><td>" . uiTextSnippet('detail') . ":</td><td>{$row[$factfield]}</td></tr>\n";
+          echo "<tr><td><strong>" . uiTextSnippet('suggested') . ":</strong></td><td colspan='2'><textarea cols=\"60\" rows=\"4\" name=\"newinfo\">{$row['info']}</textarea></td></tr>\n";
+        }
+        $row['note'] = preg_replace('/\"/', '&#34;', $row['note']);
+        ?>
+        <tr>
+          <td>&nbsp;</td>
+          <td>
+            <?php
+            if (!is_numeric($eventID)) {
+              $iconColor = $gotmore ? "icon-info" : "icon-muted";
+              echo "<a class='event-more' href='#' title='" . uiTextSnippet('more') . "' data-event-id='$eventID' data-persfam-id='$persfamID'>\n";
+              echo "<img class='icon-sm icon-right icon-more $iconColor' data-event-id='$label' data-src='svg/plus.svg'>\n";
+              echo "</a>\n";
+            }
+            $iconColor = $gotnotes ? "icon-info" : "icon-muted";
+            echo "<a class='event-notes' href='#' title='" . uiTextSnippet('notes') . "' data-event-id='$eventID' data-persfam-id='$persfamID'>\n";
+            echo "<img class='icon-sm icon-right icon-notes $iconColor' data-src='svg/documents.svg'>\n";
+            echo "</a>\n";
 
-            <form action="admin_savereview.php" method='post' name='form1'>
-              <table>
-                <tr>
-                  <td colspan='2'>&nbsp;</td>
-                </tr>
-                <tr>
-                  <td><span class='h4'><?php echo uiTextSnippet('event'); ?>
-                      :</span></td>
-                  <td><span class='h4'><?php echo $displayval; ?></span></td>
-                </tr>
-                <tr>
-                  <td colspan='2'>&nbsp;</td>
-                </tr>
-                <?php
-                if ($datefield) {
-                  echo "<tr><td>" . uiTextSnippet('eventdate') . ": </span></td><td><span>{$evrow[$datefield]}</td></tr>\n";
-                  echo "<tr><td><strong>" . uiTextSnippet('suggested') . ":</strong></td><td colspan='2'>\n";
-                  echo "<input name='newdate' type='text' value=\"{$row['eventdate']}\" onblur=\"checkDate(this);\">\n";
-                  echo "</td></tr>\n";
-                }
-                if ($placefield) {
-                  $row['eventplace'] = preg_replace('/\"/', '&#34;', $row['eventplace']);
-                  echo "<tr><td>" . uiTextSnippet('eventplace') . ":</td><td><span>{$evrow[$placefield]}</td></tr>\n";
-                  echo "<tr><td><strong>" . uiTextSnippet('suggested') . ":</strong></td><td><input class='verylongfield' id='newplace' name='newplace' type='text' size='40' value=\"{$row['eventplace']}\"></td>";
-                  echo "<td>\n";
-                    echo "<a href='#' onclick=\"return openFindPlaceForm('newplace');\" title='" . uiTextSnippet('find') . "'>\n";
-                    echo "<img class='icon-sm' src='svg/magnifying-glass.svg'>\n";
-                    echo "</a>\n";
-                  echo "</td></tr>\n";
-                }
-                if ($factfield) {
-                  $row['info'] = preg_replace('/\"/', '&#34;', $row['info']);
-                  echo "<tr><td>" . uiTextSnippet('detail') . ":</td><td>{$row[$factfield]}</td></tr>\n";
-                  echo "<tr><td><strong>" . uiTextSnippet('suggested') . ":</strong></td><td colspan='2'><textarea cols=\"60\" rows=\"4\" name=\"newinfo\">{$row['info']}</textarea></td></tr>\n";
-                }
-                $row['note'] = preg_replace('/\"/', '&#34;', $row['note']);
-                ?>
-                <tr>
-                  <td>&nbsp;</td>
-                  <td>
-                    <?php
-                    if (!is_numeric($eventID)) {
-                      $iconColor = $gotmore ? "icon-info" : "icon-muted";
-                      echo "<a class='event-more' href='#' title='" . uiTextSnippet('more') . "' data-event-id='$eventID' data-persfam-id='$persfamID'>\n";
-                      echo "<img class='icon-sm icon-right icon-more $iconColor' data-event-id='$label' data-src='svg/plus.svg'>\n";
-                      echo "</a>\n";
-                    }
-                    $iconColor = $gotnotes ? "icon-info" : "icon-muted";
-                    echo "<a class='event-notes' href='#' title='" . uiTextSnippet('notes') . "' data-event-id='$eventID' data-persfam-id='$persfamID'>\n";
-                    echo "<img class='icon-sm icon-right icon-notes $iconColor' data-src='svg/documents.svg'>\n";
-                    echo "</a>\n";
-
-                    $iconColor = $gotcites ? "icon-info" : "icon-muted";
-                    echo "<a class='event-citations' href='#' title='" . uiTextSnippet('citations') . "' data-event-id='$eventID' data-persfam-id='$persfamID'>\n";
-                    echo "<img class='icon-sm icon-right icon-citations $iconColor' data-src='svg/archive.svg'>\n";
-                    echo "</a>\n";
-                    ?>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan='2'>&nbsp;</td>
-                </tr>
-                <tr>
-                  <td><?php echo uiTextSnippet('usernotes'); ?>:</td>
-                  <td><textarea cols="60" rows="4"
-                                             name="usernote"><?php echo $row['note']; ?></textarea>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan='2'>&nbsp;</td>
-                </tr>
-                <tr>
-                  <td><?php echo uiTextSnippet('postdate'); ?>:</td>
-                  <td><?php echo "{$row['postdate']} ({$row['user']})"; ?></td>
-                </tr>
-              </table>
-              <br>
-              <input name='tempID' type='hidden' value="<?php echo $tempID; ?>">
-              <input name='type' type='hidden' value="<?php echo $row['type']; ?>">
-              <input name='choice' type='hidden' value="<?php echo uiTextSnippet('savedel'); ?>">
-              <input type='submit' value="<?php echo uiTextSnippet('savedel'); ?>">
-              <input type='submit' value="<?php echo uiTextSnippet('postpone'); ?>"
-                     onClick="document.form1.choice.value = '<?php echo uiTextSnippet('postpone'); ?>';">
-              <input type='submit' value="<?php echo uiTextSnippet('igndel'); ?>"
-                     onClick="document.form1.choice.value = '<?php echo uiTextSnippet('igndel'); ?>';">
-              <br>
-            </form>
-          </div>
-      </td>
-    </tr>
-
-  </table>
-
-  <?php
-  echo $adminFooterSection->build();
-  echo scriptsManager::buildScriptElements($flags, 'admin');
-?>
-<?php require_once 'eventlib.php'; ?>
+            $iconColor = $gotcites ? "icon-info" : "icon-muted";
+            echo "<a class='event-citations' href='#' title='" . uiTextSnippet('citations') . "' data-event-id='$eventID' data-persfam-id='$persfamID'>\n";
+            echo "<img class='icon-sm icon-right icon-citations $iconColor' data-src='svg/archive.svg'>\n";
+            echo "</a>\n";
+            ?>
+          </td>
+        </tr>
+        <tr>
+          <td colspan='2'>&nbsp;</td>
+        </tr>
+        <tr>
+          <td><?php echo uiTextSnippet('usernotes'); ?>:</td>
+          <td><textarea cols="60" rows="4"
+                                     name="usernote"><?php echo $row['note']; ?></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td colspan='2'>&nbsp;</td>
+        </tr>
+        <tr>
+          <td><?php echo uiTextSnippet('postdate'); ?>:</td>
+          <td><?php echo "{$row['postdate']} ({$row['user']})"; ?></td>
+        </tr>
+      </table>
+      <br>
+      <input name='tempID' type='hidden' value="<?php echo $tempID; ?>">
+      <input name='type' type='hidden' value="<?php echo $row['type']; ?>">
+      <input name='choice' type='hidden' value="<?php echo uiTextSnippet('savedel'); ?>">
+      <input type='submit' value="<?php echo uiTextSnippet('savedel'); ?>">
+      <input type='submit' value="<?php echo uiTextSnippet('postpone'); ?>"
+             onClick="document.form1.choice.value = '<?php echo uiTextSnippet('postpone'); ?>';">
+      <input type='submit' value="<?php echo uiTextSnippet('igndel'); ?>"
+             onClick="document.form1.choice.value = '<?php echo uiTextSnippet('igndel'); ?>';">
+      <br>
+    </form>
+    <?php echo $adminFooterSection->build(); ?>
+  </section> <!-- .container -->
+  <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
+  <?php require_once 'eventlib.php'; ?>
 <script>
-  var tnglitbox;
-  var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;
-  var preferDateFormat = '<?php echo $preferDateFormat; ?>';
+    var tnglitbox;
+    var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;
+    var preferDateFormat = '<?php echo $preferDateFormat; ?>';
 </script>
 <script src="js/selectutils.js"></script>
 <script src="js/datevalidation.js"></script>
 <script src="js/citations.js"></script>
 <script>
-  var persfamID = "<?php echo $personID; ?>";
+    var persfamID = "<?php echo $personID; ?>";
 </script>
 </body>
 </html>

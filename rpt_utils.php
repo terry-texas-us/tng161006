@@ -134,7 +134,7 @@ function getMaxStringWidth($strings, $font, $style, $size, $append = '', $oldmax
   return $max;
 }
 
-function getMyAncestors($focalPerson, $tree, $gen) {
+function getMyAncestors($focalPerson, $gen) {
   $ancestorInfo = [];
 
   //     ind --------+

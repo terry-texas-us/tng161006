@@ -686,22 +686,6 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             </td>
           </tr>
           <tr>
-            <td><?php echo uiTextSnippet('treerestrict'); ?>:</td>
-            <td>
-              <span id="trdisabled"<?php if ($requirelogin) {echo " style=\"display:none\"";} ?>>
-                <?php echo uiTextSnippet('reqloginset'); ?>
-              </span>
-              <select name="treerestrict" id="treerestrict"<?php if (!$requirelogin) {echo " style=\"display:none\"";} ?>>
-                <option value='0'<?php if (!$treerestrict) {echo " selected";} ?>>
-                  <?php echo uiTextSnippet('no'); ?>
-                </option>
-                <option value='1'<?php if ($treerestrict) {echo " selected";} ?>>
-                  <?php echo uiTextSnippet('yes'); ?>
-                </option>
-              </select>
-            </td>
-          </tr>
-          <tr>
             <td><?php echo uiTextSnippet('ldsdefault'); ?>:</td>
             <td>
               <select name='ldsdefault'>

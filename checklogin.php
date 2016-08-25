@@ -69,7 +69,6 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$adminLo
     $allow_lds = 1;
     $_SESSION['currentuser'] = "Administrator-No-Users-Yet";
     $_SESSION['currentuserdesc'] = "Administrator";
-    $_SESSION['assignedtree'] = "";
     $logged_in = $_SESSION['logged_in'] = 1;
     $_SESSION['session_rp'] = $rootpath;
     $_SESSION['tngrole'] = "admin";
@@ -87,7 +86,7 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$adminLo
     if ($_COOKIE[$usercookiename]) {
       $passcookiename = "tngpass_$newroot";
       $passtype = "tngpasstype_$newroot";
-      $adminloginstr = $adminLogin ? "admin_login=1&continue=1&" : "";
+      $adminloginstr = $adminLogin ? "adminLogin=1&amp;continue=1&amp;" : "";
       header("Location: " . "processlogin.php?{$adminloginstr}tngusername=" . $_COOKIE[$usercookiename] . "&tngpassword=" . $_COOKIE[$passcookiename] . "&encrypted=encrypted");
       exit;
     }
@@ -104,7 +103,6 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$adminLo
       $_SESSION['currentuserdesc'] = "";
       $_SESSION['mygedcom'] = "";
       $_SESSION['mypersonID'] = "";
-      $_SESSION['assignedtree'] = "-x-guest-x-";
       $_SESSION['tngrole'] = "guest";
 
       $allow_admin = 0;

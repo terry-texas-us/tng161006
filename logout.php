@@ -16,7 +16,7 @@ setcookie("tngloggedin_$newroot", "", time() - 31536000, "/");
 session_start();
 $_SESSION['session_language'] = $session_language;
 $_SESSION['session_charset'] = $session_charset;
-if ($_GET['admin_login']) {
+if ($_GET['adminLogin']) {
   header("Location: admin_login.php");
 } elseif ($requirelogin || !isset($_SERVER["HTTP_REFERER"])) {
   header("Location: $homepage");

@@ -12,7 +12,7 @@ if (!$allowAdd || !$allowEdit || $assignedbranch) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
+$query = "SELECT gedcom FROM $treesTable";
 $result = tng_query($query);
 
 $treenum = 0;

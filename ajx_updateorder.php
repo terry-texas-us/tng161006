@@ -373,9 +373,9 @@ switch ($action) {
     break;
   case "dellink":
     if ($type == "album") {
-      $query = "SELECT entityID, gedcom FROM $album2entities_table WHERE alinkID=\"$linkID\"";
+      $query = "SELECT entityID FROM $album2entities_table WHERE alinkID = '$linkID'";
     } else {
-      $query = "SELECT personID as entityID, eventID, mediatypeID FROM ($medialinks_table, $media_table) WHERE medialinkID=\"$linkID\" and $medialinks_table.mediaID = $media_table.mediaID";
+      $query = "SELECT personID AS entityID, eventID, mediatypeID FROM ($medialinks_table, $media_table) WHERE medialinkID = '$linkID' AND $medialinks_table.mediaID = $media_table.mediaID";
     }
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);

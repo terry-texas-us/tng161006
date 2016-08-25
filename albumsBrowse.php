@@ -150,7 +150,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
                       LEFT JOIN $families_table ON $album2entities_table.entityID = $families_table.familyID
                       LEFT JOIN $sources_table ON $album2entities_table.entityID = $sources_table.sourceID
                       LEFT JOIN $repositories_table ON ($album2entities_table.entityID = $repositories_table.repoID)
-                      WHERE albumID = \"{$row['albumID']}\" ORDER BY lastname, lnprefix, firstname, personID LIMIT 10";
+                      WHERE albumID = '{$row['albumID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT 10";
                   $presult = tng_query($query);
                   $alinktext = "";
                   while ($prow = tng_fetch_assoc($presult)) {

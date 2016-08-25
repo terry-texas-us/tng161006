@@ -50,17 +50,10 @@ $query = "INSERT INTO $cemeteries_table (cemname, maplink, city, county, state, 
 $result = tng_query($query);
 $cemeteryID = tng_insert_id();
 
-$query = "SELECT gedcom FROM $treesTable LIMIT 2";
-$result2 = tng_query($query);
-if (tng_num_rows($result2) == 1) {
-  $row = tng_fetch_assoc($result2);
-}
-tng_free_result($result2);
-
 $place = trim($place);
 if ($place) {
   //first check to see if any place exists in any tree with new place name
-  $query = "SELECT * FROM $places_table WHERE place = \"$place\"";
+  $query = "SELECT * FROM $places_table WHERE place = '$place'";
   $result = tng_query($query);
 
   if (!tng_num_rows($result)) {
@@ -68,8 +61,7 @@ if ($place) {
       $latitude = $longitude = "";
       $zoom = 0;
     }
-    $query = "INSERT IGNORE INTO $places_table (place, placelevel, latitude, longitude, zoom, notes) "
-            . "VALUES ('$place', '0', '$latitude', '$longitude', '$zoom', '$notes')";
+    $query = "INSERT IGNORE INTO $places_table (place, placelevel, latitude, longitude, zoom, notes) VALUES ('$place', '0', '$latitude', '$longitude', '$zoom', '$notes')";
     $result3 = tng_query($query);
   } elseif (isset($usecoords)) {
     $query = "UPDATE $places_table SET latitude = '$latitude', longitude = '$longitude', zoom = '$zoom' WHERE place = '$place'";

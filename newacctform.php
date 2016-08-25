@@ -4,9 +4,6 @@ require 'begin.php';
 require 'genlib.php';
 require 'getlang.php';
 
-$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-$treeresult = tng_query($query);
-
 $query = "SELECT count(userID) as ucount FROM $users_table";
 $userresult = tng_query($query);
 $row = tng_fetch_assoc($userresult);

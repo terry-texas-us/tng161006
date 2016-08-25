@@ -214,9 +214,9 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
 
       $query = "SELECT $notelinks_table.ID as ID, secret, $xnotes_table.note as note, $xnotes_table.noteID as noteID, $notelinks_table.eventID
           FROM $notelinks_table
-          LEFT JOIN  $xnotes_table on $notelinks_table.xnoteID = $xnotes_table.ID
+          LEFT JOIN  $xnotes_table ON $notelinks_table.xnoteID = $xnotes_table.ID
           LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID
-          LEFT JOIN $eventtypes_table on $eventtypes_table.eventtypeID = $events_table.eventtypeID
+          LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID
           WHERE $notelinks_table.persfamID = '$id'
           ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum, ID";
       $notelinks = tng_query($query);
@@ -948,12 +948,12 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         $family['allow_private'] = $frights['private'];
         if ($frights['both']) {
           //look up husband and wife
-          $query = "SELECT personID, living, private, gedcom, branch FROM $people_table WHERE personID = \"{$family['husband']}\"";
+          $query = "SELECT personID, living, private, branch FROM $people_table WHERE personID = '{$family['husband']}'";
           $result2 = tng_query($query);
           $hrow = tng_fetch_assoc($result2);
           $frights = determineLivingPrivateRights($hrow);
           if ($frights['both']) {
-            $query = "SELECT personID, living, private, gedcom, branch FROM $people_table WHERE personID = \"{$family['wife']}\"";
+            $query = "SELECT personID, living, private, branch FROM $people_table WHERE personID = '{$family['wife']}'";
             $result2 = tng_query($query);
             $wrow = tng_fetch_assoc($result2);
             $frights = determineLivingPrivateRights($wrow);

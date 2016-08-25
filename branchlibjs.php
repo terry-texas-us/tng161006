@@ -7,7 +7,7 @@ $swapbranches = "swapBranches();\n";
 $dispid = "";
 $dispname = "";
 
-$query = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
+$query = "SELECT gedcom FROM $treesTable $wherestr";
 $treeresult = tng_query($query);
 while ($treerow = tng_fetch_assoc($treeresult)) {
   $nexttree = addslashes($treerow['gedcom']);
@@ -30,18 +30,22 @@ echo $dispid;
 echo $dispname;
 ?>
 function swapBranches() {
-var tree = $('#gedcom').val();
-var len = 0;
-document.form1.branch.options.length = 0;
-if($('#branchlist').length)
-$('#branchlist').html('');
-
-for( var i = 0; i &lt; branchids[tree].length; i++ ) {
-var newElem = document.createElement("OPTION");
-len = len + 1;
-newElem.text = branchnames[tree][i];
-newElem.value = branchids[tree][i];
-if( !i ) newElem.selected = true;
-document.form1.branch.options.add(newElem);
-}
+    var tree = $('#gedcom').val();
+    var len = 0;
+    document.form1.branch.options.length = 0;
+    if ($('#branchlist').length) {
+        $('#branchlist').html('');
+    }
+    var newOptionElement;
+    var i;
+    for (i = 0; i < branchids[tree].length; i += 1) {
+        newOptionElement = document.createElement("OPTION");
+        len = len + 1;
+        newOptionElement.text = branchnames[tree][i];
+        newOptionElement.value = branchids[tree][i];
+        if (!i) {
+            newOptionElement.selected = true;
+        }
+        document.form1.branch.options.add(newOptionElement);
+    }
 }

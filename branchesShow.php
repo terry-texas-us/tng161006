@@ -28,12 +28,8 @@ if ($offset) {
   $newoffset = "";
   $page = 1;
 }
+$whereClause = ($branchsearch) ? "WHERE (branch LIKE '%$branchsearch%' OR b.description LIKE '%$branchsearch%')" : '';
 
-if ($branchsearch) {
-  $whereClause = "WHERE (branch LIKE '%$branchsearch%' OR description LIKE '%$branchsearch%')";
-} else {
-  $whereClause = "";
-}
 $query = "SELECT branch, description, personID FROM $branches_table $whereClause ORDER BY description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 

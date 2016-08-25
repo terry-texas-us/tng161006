@@ -7,9 +7,6 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-$query = "SELECT branch, gedcom, description FROM $branches_table WHERE gedcom = \"{$row['gedcom']}\" ORDER BY description";
-$branchresult = tng_query($query);
-
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('gedexport'));
 ?>
@@ -32,7 +29,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           <td><?php echo uiTextSnippet('branch'); ?>:</td>
           <td>
             <?php
-            $query = "SELECT branch, gedcom, description FROM $branches_table WHERE gedcom = \"$firsttree\" ORDER BY description";
+            $query = "SELECT branch, description FROM $branches_table ORDER BY description";
             $branchresult = tng_query($query);
 
             echo "<select id='branch' name=\"branch\" size=\"$selectnum\">\n";

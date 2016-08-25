@@ -293,11 +293,10 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
     <?php
     tng_free_result($result);
 
-    if ($tree && !$treerow['secret']) {
-      echo "<br>\n";
-      echo "<span><a href='showtree.php'>" . uiTextSnippet('treedetail') . "</a></span>\n";
-      echo "<br>\n";
-    }
+    echo "<br>\n";
+    echo "<span><a href='showtree.php'>" . uiTextSnippet('treedetail') . "</a></span>\n";
+    echo "<br>\n";
+
     echo "<br>\n";
     echo $publicFooterSection->build();
     ?>

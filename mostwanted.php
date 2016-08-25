@@ -21,9 +21,7 @@ function showDivs($type) {
 
   $mediatext = "<table class='table'>\n";
 
-  $query = "SELECT DISTINCT $mostwanted_table.ID as mwID, mwtype, thumbpath, abspath, form, usecollfolder, mediatypeID, path, $media_table.description as mtitle,
-    $mostwanted_table.personID, $mostwanted_table.gedcom, $mostwanted_table.mediaID, $mostwanted_table.description as mwdesc, $mostwanted_table.title as mwtitle,
-    lastname, firstname, lnprefix, suffix, prefix, $people_table.title as title, living, private, nameorder, branch
+  $query = "SELECT DISTINCT $mostwanted_table.ID as mwID, mwtype, thumbpath, abspath, form, usecollfolder, mediatypeID, path, $media_table.description as mtitle, $mostwanted_table.personID, $mostwanted_table.mediaID, $mostwanted_table.description as mwdesc, $mostwanted_table.title as mwtitle, lastname, firstname, lnprefix, suffix, prefix, $people_table.title as title, living, private, nameorder, branch
     FROM $mostwanted_table
     LEFT JOIN $media_table ON $mostwanted_table.mediaID = $media_table.mediaID
     LEFT JOIN $people_table ON $mostwanted_table.personID = $people_table.personID

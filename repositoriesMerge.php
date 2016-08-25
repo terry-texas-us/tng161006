@@ -15,9 +15,6 @@ if (!$allowEdit || !$allowDelete) {
 }
 $wherestr = "";
 
-$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-$treeresult = tng_query($query);
-
 function doRow($field, $textmsg, $boxname) {
   global $r1row;
   global $r2row;
@@ -178,7 +175,7 @@ function doNotes($persfam1, $persfam2, $varname) {
 
 $r1row = $r2row = "";
 if ($repoID1) {
-  $query = "SELECT reponame, repoID, $repositories_table.addressID as addressID, address1, address2, city, state, zip, country, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $repositories_table LEFT JOIN $address_table on $repositories_table.addressID = $address_table.addressID WHERE repoID = '$repoID1'";
+  $query = "SELECT reponame, repoID, $repositories_table.addressID as addressID, address1, address2, city, state, zip, country, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $repositories_table LEFT JOIN $address_table ON $repositories_table.addressID = $address_table.addressID WHERE repoID = '$repoID1'";
   $result = tng_query($query);
   if ($result && tng_num_rows($result)) {
     $r1row = tng_fetch_assoc($result);
@@ -247,7 +244,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
     }
   }
 } elseif ($repoID2) {
-  $query = "SELECT reponame, repoID, $repositories_table.addressID as addressID, address1, address2, city, state, zip, country, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $repositories_table LEFT JOIN $address_table on $repositories_table.addressID = $address_table.addressID WHERE repoID = '$repoID2'";
+  $query = "SELECT reponame, repoID, $repositories_table.addressID as addressID, address1, address2, city, state, zip, country, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $repositories_table LEFT JOIN $address_table ON $repositories_table.addressID = $address_table.addressID WHERE repoID = '$repoID2'";
   $result2 = tng_query($query);
   if ($result2 && tng_num_rows($result2) && $repoID1 != $repoID2) {
     $r2row = tng_fetch_assoc($result2);

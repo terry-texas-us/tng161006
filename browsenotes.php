@@ -102,15 +102,14 @@ $headSection->setTitle(uiTextSnippet('notes'));
             $nrow['private'] = 1;
           }
           if (!$notelinktext) {
-            $query = "SELECT * FROM $people_table WHERE personID = \"{$nrow['personID']}\"";
+            $query = "SELECT * FROM $people_table WHERE personID = '{$nrow['personID']}'";
             $result2 = tng_query($query);
             if (tng_num_rows($result2) == 1) {
               $row2 = tng_fetch_assoc($result2);
 
               if (!$row2['living'] || !$row2['private']) {
                 $query = "SELECT count(personID) as ccount FROM $citations_table, $people_table
-              WHERE $citations_table.sourceID = '{$nrow['personID']}' AND $citations_table.persfamID = $people_table.personID
-              AND (living = '1' OR private = '1')";
+              WHERE $citations_table.sourceID = '{$nrow['personID']}' AND $citations_table.persfamID = $people_table.personID AND (living = '1' OR private = '1')";
                 $nresult2 = tng_query($query);
                 $nrow2 = tng_fetch_assoc($nresult2);
                 if ($nrow2['ccount']) {
@@ -137,7 +136,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
           }
 
           if (!$notelinktext) {
-            $query = "SELECT * FROM $families_table WHERE familyID = \"{$nrow['personID']}\"";
+            $query = "SELECT * FROM $families_table WHERE familyID = '{$nrow['personID']}'";
             $result2 = tng_query($query);
             if (tng_num_rows($result2) == 1) {
               $row2 = tng_fetch_assoc($result2);
@@ -156,7 +155,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
             }
           }
           if (!$notelinktext) {
-            $query = "SELECT * FROM $sources_table WHERE sourceID = \"{$nrow['personID']}\"";
+            $query = "SELECT * FROM $sources_table WHERE sourceID = '{$nrow['personID']}'";
             $result2 = tng_query($query);
             if (tng_num_rows($result2) == 1) {
               $row2 = tng_fetch_assoc($result2);
@@ -165,7 +164,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
             }
           }
           if (!$notelinktext) {
-            $query = "SELECT * FROM $repositories_table WHERE repoID = \"{$nrow['personID']}\"";
+            $query = "SELECT * FROM $repositories_table WHERE repoID = '{$nrow['personID']}'";
             $result2 = tng_query($query);
             if (tng_num_rows($result2) == 1) {
               $row2 = tng_fetch_assoc($result2);

@@ -20,14 +20,6 @@ require 'tngrobots.php';
 $gotlastpage = false;
 $flags['error'] = $error;
 
-if ($requirelogin && $treerestrict && $_SESSION['assignedtree']) {
-  if (!$tree) {
-    $tree = $_SESSION['assignedtree'];
-  } elseif ($tree != $_SESSION['assignedtree']) {
-    header("Location:$homepage");
-    exit;
-  }
-}
 $tree = "";
 
 require_once 'classes/HeadElementSection.php';

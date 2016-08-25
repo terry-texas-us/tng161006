@@ -39,12 +39,7 @@ class SMTP
   
   protected $smtp_conn;
   
-  protected $error = [
-          'error' => '',
-          'detail' => '',
-          'smtp_code' => '',
-          'smtp_code_ex' => ''
-  ];
+  protected $error = ['error' => '', 'detail' => '', 'smtp_code' => '', 'smtp_code_ex' => ''];
   
   protected $helo_rply = null;
   
@@ -583,12 +578,7 @@ class SMTP
 
   
   protected function setError($message, $detail = '', $smtp_code = '', $smtp_code_ex = '') {
-    $this->error = [
-            'error' => $message,
-            'detail' => $detail,
-            'smtp_code' => $smtp_code,
-            'smtp_code_ex' => $smtp_code_ex
-    ];
+    $this->error = ['error' => $message, 'detail' => $detail, 'smtp_code' => $smtp_code, 'smtp_code_ex' => $smtp_code_ex];
   }
 
   

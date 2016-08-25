@@ -21,13 +21,11 @@ if (tng_num_rows($result)) {
   $row = tng_fetch_assoc($result);
   $type = $encrypted ? $encrypted : $row['password_type'];
   $check = PasswordCheck($tngpassword, $row['password'], $type);
-  if ($check == 2) {
-    // We have a match, an unencrypted $tngpassword, and it needs to be updated
-    $password_type = PasswordType();    // the current encryption setting
-    $password = PasswordEncode($tngpassword, $password_type); // encrypt with the current encryption setting
+  if ($check == 2) { // match but the hash type is not the same as PasswordType()
+    $password_type = PasswordType();    // update password to the new encoding method specified by PasswordType()
+    $password = PasswordEncode($tngpassword, $password_type);
 
-    $query2 = "UPDATE $users_table SET password=\"$password\", password_type=\"$password_type\" ";
-    $query2 .= "WHERE userID = \"{$row['userID']}\"";
+    $query2 = "UPDATE $users_table SET password = '$password', password_type = '$password_type' WHERE userID = \"{$row['userID']}\"";
 
     $result2 = tng_query($query) or die("Cannot execute query: $query");
   }
@@ -42,7 +40,7 @@ $newroot = preg_replace("/\./", "", $newroot);
 if ($check) {
   if ($row['disabled']) {
     setcookie("tngerror_$newroot", "disabled", 0, "/");
-  } elseif ($row['allow_living'] == -1) {
+  } elseif ($row['allow_living'] == -1) { // this column uses -1 to indicate an inactive user account
     setcookie("tngerror_$newroot", "logininactive", 0, "/");
   } else {
     $allow_admin = $row['allow_edit'] || $row['allow_add'] || $row['allow_delete'] ? 1 : 0;

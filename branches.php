@@ -1,7 +1,7 @@
 <?php
 
 function getBranchInfo($trees, $branches, &$ids, &$names) {
-  $query = "SELECT gedcom, treename FROM $trees ORDER BY treename";
+  $query = "SELECT gedcom FROM $trees";
   $treeresult = tng_query($query);
 
   while ($treerow = tng_fetch_assoc($treeresult)) {

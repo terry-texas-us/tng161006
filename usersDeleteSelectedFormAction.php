@@ -3,7 +3,7 @@
 require 'begin.php';
 require 'adminlib.php';
 
-$adminLogin = true;
+$adminLogin = 1;
 require 'checklogin.php';
 
 if (!$allowDelete) {
@@ -26,7 +26,6 @@ foreach (array_keys($_POST) as $key) {
     $query .= " OR userID =\"$thisid\"";
 
     $itemID = "";
-    $tree = "";
 
     $query3 = "SELECT username FROM $users_table WHERE userID = \"$thisid\"";
     $result3 = tng_query($query3);

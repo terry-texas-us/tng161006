@@ -5,7 +5,7 @@ require 'adminlib.php';
 require 'checklogin.php';
 
 $query = "SELECT $eventtypes_table.eventtypeID, tag, display FROM $events_table 
-    LEFT JOIN  $eventtypes_table on $eventtypes_table.eventtypeID = $events_table.eventtypeID 
+    LEFT JOIN  $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID 
     WHERE eventID=\"$eventID\"";
 $eventtypes = tng_query($query);
 $eventtype = tng_fetch_assoc($eventtypes);
@@ -39,8 +39,7 @@ $helplang = findhelp("notes_help.php");
 header("Content-type:text/html; charset=" . $session_charset);
 
 $query = "SELECT $notelinks_table.ID as ID, $xnotes_table.note as note, noteID, secret FROM ($notelinks_table, $xnotes_table)
-    WHERE $notelinks_table.xnoteID = $xnotes_table.ID
-        AND persfamID = '$persfamID' AND eventID = '$eventID' ORDER BY ordernum, ID";
+    WHERE $notelinks_table.xnoteID = $xnotes_table.ID AND persfamID = '$persfamID' AND eventID = '$eventID' ORDER BY ordernum, ID";
 $notelinks = tng_query($query);
 $notecount = tng_num_rows($notelinks);
 ?>

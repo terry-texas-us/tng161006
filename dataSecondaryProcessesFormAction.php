@@ -35,8 +35,8 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         $query = "SELECT familyID FROM $families_table";
         $result = tng_query($query);
         while ($family = tng_fetch_assoc($result)) {
-          $query = "SELECT $children_table.ID as ID, IF(birthdatetr !='0000-00-00',birthdatetr,altbirthdatetr) as birth FROM $children_table, $people_table
-      WHERE $children_table.familyID = \"{$family['familyID']}\" AND $people_table.personID = $children_table.personID $wherestr2 ORDER BY birth, ordernum";
+          $query = "SELECT $children_table.ID as ID, IF(birthdatetr !='0000-00-00', birthdatetr, altbirthdatetr) as birth FROM $children_table, $people_table "
+              . "WHERE $children_table.familyID = '{$family['familyID']}' AND $people_table.personID = $children_table.personID ORDER BY birth, ordernum";
           $fresult = tng_query($query);
           $order = 0;
           while ($child = tng_fetch_assoc($fresult)) {

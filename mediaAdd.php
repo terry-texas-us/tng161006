@@ -11,7 +11,7 @@ if (!$allowMediaAdd) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
+$treequery = "SELECT gedcom FROM $treesTable";
 $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
 $treenum = 0;
 while ($treerow = tng_fetch_assoc($treeresult)) {

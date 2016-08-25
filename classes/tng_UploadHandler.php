@@ -693,9 +693,7 @@ class UploadHandler
     }
     $file_name = $this->getFileNameParam();
     if ($file_name) {
-      $response = [
-              substr($this->options['param_name'], 0, -1) => $this->get_file_object($file_name)
-      ];
+      $response = [substr($this->options['param_name'], 0, -1) => $this->get_file_object($file_name)];
     } else {
       $response = [
               $this->options['param_name'] => $this->getFileObjects()

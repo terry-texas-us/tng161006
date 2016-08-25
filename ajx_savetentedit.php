@@ -55,7 +55,7 @@ if ($tngconfig['revmail']) {
     $plus = $hname && $wname ? " + " : "";
     $namestr = uiTextSnippet('family') . ": $hname$plus$wname ($familyID)";
   }
-  $query = "SELECT treename, email, owner FROM $treesTable";
+  $query = "SELECT email, owner FROM $treesTable";
   $treeresult = tng_query($query);
   $treerow = tng_fetch_assoc($treeresult);
   $sendemail = $treerow['email'] ? $treerow['email'] : $emailaddr;

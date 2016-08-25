@@ -6,9 +6,6 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-$result = tng_query($query);
-
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('backuprestore'));
 ?>
@@ -25,56 +22,50 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
     $navList->appendItem([true, "admin_renumbermenu.php", uiTextSnippet('renumber'), "renumber"]);
     echo $navList->build("renumber");
     ?>
-    <table class='table table-sm'>
-      <tr>
-        <td>
-          <p><?php echo uiTextSnippet('reseqwarn'); ?></p>
+    <p><?php echo uiTextSnippet('reseqwarn'); ?></p>
 
-          <h4><?php echo uiTextSnippet('renumber'); ?></h4>
-          <form action="admin_renumber.php" method='post' name='form1'>
-            <table>
-              <tr>
-                <td><?php echo uiTextSnippet('idtype'); ?>:</td>
-                <td>
-                  <select name='type'>
-                    <option value="person"><?php echo uiTextSnippet('people'); ?></option>
-                    <option value="family"><?php echo uiTextSnippet('families'); ?></option>
-                    <option value="source"><?php echo uiTextSnippet('sources'); ?></option>
-                    <option value="repo"><?php echo uiTextSnippet('repositories'); ?></option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td><?php echo uiTextSnippet('mindigits'); ?>*:</td>
-                <td>
-                  <select name="digits">
-                    <?php
-                    for ($i = 1; $i <= 20; $i++) {
-                      echo "<option value=\"$i\">$i</option>\n";
-                    }
-                    ?>
-                  </select>
-                </td>
-              </tr>
-              <!--<tr>
-                <td><?php echo uiTextSnippet('useroffset'); ?>*:</td>
-                <td><input name='start' type='text' value='1' /></td>
-              </tr>-->
-            </table>
-            <br>
-            <input name='start' type='hidden' value='1'/>
-            <input type='submit' value="<?php echo uiTextSnippet('renumber'); ?>"<?php if (!$tngconfig['maint']) {echo " disabled";} ?>>
-            <?php
-            if (!$tngconfig['maint']) {
-              echo "<span>" . uiTextSnippet('needmaint') . "</span>";
-            }
-            ?>
-            <br><br>
-            <?php echo "<p>*" . uiTextSnippet('niprefix') . "</p>\n"; ?>
-          </form>
-        </td>
-      </tr>
-    </table>
+    <h4><?php echo uiTextSnippet('renumber'); ?></h4>
+    <form action="admin_renumber.php" method='post' name='form1'>
+      <table>
+        <tr>
+          <td><?php echo uiTextSnippet('idtype'); ?>:</td>
+          <td>
+            <select name='type'>
+              <option value="person"><?php echo uiTextSnippet('people'); ?></option>
+              <option value="family"><?php echo uiTextSnippet('families'); ?></option>
+              <option value="source"><?php echo uiTextSnippet('sources'); ?></option>
+              <option value="repo"><?php echo uiTextSnippet('repositories'); ?></option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><?php echo uiTextSnippet('mindigits'); ?>*:</td>
+          <td>
+            <select name="digits">
+              <?php
+              for ($i = 1; $i <= 20; $i++) {
+                echo "<option value=\"$i\">$i</option>\n";
+              }
+              ?>
+            </select>
+          </td>
+        </tr>
+        <!--<tr>
+          <td><?php echo uiTextSnippet('useroffset'); ?>*:</td>
+          <td><input name='start' type='text' value='1' /></td>
+        </tr>-->
+      </table>
+      <br>
+      <input name='start' type='hidden' value='1'/>
+      <input type='submit' value="<?php echo uiTextSnippet('renumber'); ?>"<?php if (!$tngconfig['maint']) {echo " disabled";} ?>>
+      <?php
+      if (!$tngconfig['maint']) {
+        echo "<span>" . uiTextSnippet('needmaint') . "</span>";
+      }
+      ?>
+      <br><br>
+      <?php echo "<p>*" . uiTextSnippet('niprefix') . "</p>\n"; ?>
+    </form>
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>

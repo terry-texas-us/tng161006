@@ -63,7 +63,6 @@ function getEvents($person) {
   global $ratio;
 
   $personID = $person['personID'];
-  $tree = $person['tree'];
   $events = [];
   $eventstr = "";
   $leftoffset = 3;
@@ -232,13 +231,12 @@ foreach ($timeline as $timeentry) {
   parse_str($timeentry);
   $query = "SELECT firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch, sex, IF(birthdatetr !='0000-00-00',YEAR(birthdatetr),YEAR(altbirthdatetr)) as birth,
     IF(deathdatetr !='0000-00-00',YEAR(deathdatetr),YEAR(burialdatetr)) as death, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, deathdatetr, burialdate, burialdatetr
-    FROM $people_table WHERE personID = \"$timeperson\" AND gedcom = \"$timetree\"";
+    FROM $people_table WHERE personID = '$timeperson'";
   $result2 = tng_query($query);
   if ($result2) {
     $row2 = tng_fetch_assoc($result2);
     $newtimeentry = [];
     $newtimeentry['personID'] = $timeperson;
-    $newtimeentry['tree'] = $timetree;
     $displaydeath = $row2['death'] ? $row2['death'] : "";
     $rights2 = determineLivingPrivateRights($row2);
     $row2['allow_living'] = $rights2['living'];
@@ -441,7 +439,7 @@ foreach ($keeparray as $timeentry) {
   $spanleft = $lineoffset + intval($ratio * ( $timeentry['birth'] - $earliest ));
   $spanwidth = intval($ratio * $timeentry['lifespan']);
   echo "<div id=\"cb$numlines\" class=\"tlbar cb\" style=\"top:$top" . "px;width:$spanwidth" . "px;\">\n";
-  if ($timeentry['personID'] == $primaryID && $timeentry['tree'] == $tree) {
+  if ($timeentry['personID'] == $primaryID) {
     echo "&nbsp;";
   } else {
     echo "<input name=\"{$timeentry['tree']}_{$timeentry['personID']}\" type='checkbox' value='1'>\n";
@@ -486,15 +484,10 @@ for ($x = 2; $x < 6; $x++) {
     echo "<select name=\"nexttree$x\">\n";
     while ($treerow = tng_fetch_assoc($treeresult)) {
       echo "  <option value=\"{$treerow['gedcom']}\"";
-      if ($treerow['gedcom'] == $tree) {
-        echo " selected";
-      }
+      echo " selected";
       echo ">{$treerow['treename']}</option>\n";
     }
     echo "</select>\n";
-    $treestr = "' + document.form1.nexttree$x.options[document.form1.nexttree$x.selectedIndex].value + '";
-  } else {
-    $treestr = "$tree";
   }
   echo "<input id=\"nextpersonID$x\" name=\"nextpersonID$x\" type='text' size=\"10\" />  \n";
   echo "<input id=\"find$x\" name=\"find$x\" type='button' value=\"" . uiTextSnippet('find') . "\" onclick=\"findItem('I','nextpersonID$x',null);\" /><br>\n";

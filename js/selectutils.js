@@ -103,13 +103,6 @@ function checkID(id, type, dest, treefield) {
     }
 }
 
-function openChangeTree(entity, id) {
-    'use strict';
-    var url = 'treesChange.php?entity=' + entity + '&entityID=' + id;
-    tnglitbox = new ModalDialog(url);
-    return false;
-}
-
 function insertCell(row, index, classname, content) {
     'use strict';
     var cell = row.insertCell(index);
@@ -262,7 +255,7 @@ function initCitationSort() {
 
 function showCitations(eventID, persfamID) {
     'use strict';
-    tnglitbox = new ModalDialog('admin_citations.php?eventID=' + eventID + '&persfamID=' + persfamID + '&tree=' + tree, {doneLoading: initCitationSort});
+    tnglitbox = new ModalDialog('admin_citations.php?eventID=' + eventID + '&persfamID=' + persfamID, {doneLoading: initCitationSort});
     return false;
 }
 

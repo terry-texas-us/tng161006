@@ -239,7 +239,7 @@ function setFamilyLabel($personID, $gender) {
   global $famnames;
 
   if ($gender['self']) {
-    $query = "SELECT branch, familyID, husband, wife, gedcom, living, private FROM $families_table WHERE {$gender['self']} = '$personID'";
+    $query = "SELECT branch, familyID, husband, wife, living, private FROM $families_table WHERE {$gender['self']} = '$personID'";
     $result = tng_query($query);
     while ($row = tng_fetch_assoc($result)) {
       $oldbranch = trim($row['branch']);

@@ -199,7 +199,7 @@ if ($rrow['sqlselect']) {
         $displaystr .= "e$eventtypeID.$evfields[$subtype] as $evfields[$subtype]$eventtypeID";
         $displayfields[$i] = "$evfields[$subtype]$eventtypeID";
         if (!isset($cejoins[$eventtypeID])) {
-          $cejoins[$eventtypeID] = "LEFT JOIN $events_table e$eventtypeID ON $people_table.personID = e$eventtypeID.persfamID AND e$eventtypeID.eventtypeID = \"$eventtypeID\"";
+          $cejoins[$eventtypeID] = "LEFT JOIN $events_table e$eventtypeID ON $people_table.personID = e$eventtypeID.persfamID AND e$eventtypeID.eventtypeID = '$eventtypeID'";
         }
       } elseif ($dfield == "lastfirst") {
         $displaystr .= "lastname, firstname";
@@ -309,7 +309,7 @@ if ($rrow['sqlselect']) {
             $subtype = substr($criteriafields[$i], 3, 2);
             $newcriteria = "e$eventtypeID.$evfields[$subtype]";
             if (!isset($cejoins[$eventtypeID])) {
-              $cejoins[$eventtypeID] = "LEFT JOIN $events_table e$eventtypeID ON $people_table.personID = e$eventtypeID.persfamID AND e$eventtypeID.eventtypeID = \"$eventtypeID\"";
+              $cejoins[$eventtypeID] = "LEFT JOIN $events_table e$eventtypeID ON $people_table.personID = e$eventtypeID.persfamID AND e$eventtypeID.eventtypeID = '$eventtypeID'";
             }
           } else {
             $newcriteria = $criteriafields[$i];
@@ -465,11 +465,8 @@ if ($rrow['sqlselect']) {
   if ($orderbystr) {
     $orderbystr = "ORDER BY $orderbystr";
   }
-
   if ($need_families) {
-    $families_join = "LEFT JOIN $families_table AS families1 ON ($people_table.personID = families1.husband ) LEFT JOIN $families_table AS families2 ON ($people_table.personID = families2.wife ) ";
-    //$families_join = "LEFT JOIN $families_table ON ($people_table.personID = $families_table.husband OR $people_table.personID = $families_table.wife)";
-    //if( $familytreestr ) $treestr .= " AND $familytreestr";
+    $families_join = "LEFT JOIN $families_table AS families1 ON ($people_table.personID = families1.husband) LEFT JOIN $families_table AS families2 ON ($people_table.personID = families2.wife) ";
   } else {
     $families_join = "";
   }
@@ -611,7 +608,7 @@ if (!$result) {
               if (substr($thisfield, 0, 6) == "spouse") {
                 $spouseID = $row['spouse'];
                 if ($thisfield == "spousename") {
-                  $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, gedcom, living, private, branch FROM $people_table WHERE personID = \"$spouseID\"";
+                  $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, living, private, branch FROM $people_table WHERE personID = '$spouseID'";
                   $spresult = tng_query($query);
                   if ($spresult) {
                     $sprow = tng_fetch_assoc($spresult);

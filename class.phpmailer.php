@@ -324,10 +324,7 @@ class PHPMailer
       foreach ($list as $address) {
         if ($address->host != '.SYNTAX-ERROR.') {
           if ($this->validateAddress($address->mailbox . '@' . $address->host)) {
-            $addresses[] = [
-                    'name' => (property_exists($address, 'personal') ? $address->personal : ''),
-                    'address' => $address->mailbox . '@' . $address->host
-            ];
+            $addresses[] = ['name' => (property_exists($address, 'personal') ? $address->personal : ''), 'address' => $address->mailbox . '@' . $address->host];
           }
         }
       }
@@ -340,19 +337,13 @@ class PHPMailer
         if (strpos($address, '<') === false) {
           //No separate name, just use the whole thing
           if ($this->validateAddress($address)) {
-            $addresses[] = [
-                    'name' => '',
-                    'address' => $address
-            ];
+            $addresses[] = ['name' => '', 'address' => $address];
           }
         } else {
           list($name, $email) = explode('<', $address);
           $email = trim(str_replace('>', '', $email));
           if ($this->validateAddress($email)) {
-            $addresses[] = [
-                    'name' => trim(str_replace(['"', "'"], '', $name)),
-                    'address' => $email
-            ];
+            $addresses[] = ['name' => trim(str_replace(['"', "'"], '', $name)), 'address' => $email];
           }
         }
       }

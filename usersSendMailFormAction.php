@@ -8,13 +8,9 @@ require 'checklogin.php';
 require 'adminlog.php';
 require 'mail.php';
 
-if ($gedcom) {
-  $wherestr = " AND gedcom=\"$gedcom\"";
-  if ($branch) {
-    $wherestr .= " AND branch=\"$branch\"";
-  }
-}
-$recipientquery = "SELECT realname, email FROM $users_table WHERE allow_living != \"-1\" AND email != \"\" AND (no_email is NULL or no_email != \"1\") $wherestr";
+$wherestr = $branch ? " AND branch = '$branch'" : '';
+
+$recipientquery = "SELECT realname, email FROM $users_table WHERE allow_living != '-1' AND email != '' AND (no_email is NULL or no_email != '1') $wherestr";
 $result = tng_query($recipientquery) or die(uiTextSnippet('cannotexecutequery') . ": $recipientquery");
 $numrows = tng_num_rows($result);
 
@@ -30,7 +26,6 @@ if (!$numrows) {
     $recipient = $row['email'];
     tng_sendmail($owner, $emailaddr, $row['realname'], $recipient, $subject, $body, $emailaddr, $emailaddr);
   }
-
   adminwritelog(uiTextSnippet('sentmailmessage'));
   $message = uiTextSnippet('succmail') . ".";
 }

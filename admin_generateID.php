@@ -6,12 +6,11 @@ require 'adminlib.php';
 require 'checklogin.php';
 
 function getNewID($type, $table) {
-  global $tree;
   global $tngconfig;
   include 'prefixes.php';
 
-  if (isset($_COOKIE['tng_' . $type . 'lastid_' . $tree])) {
-    $lastid = $_COOKIE['tng_' . $type . 'lastid_' . $tree];
+  if (isset($_COOKIE['tng_' . $type . '_lastid'])) {
+    $lastid = $_COOKIE['tng_' . $type . '_lastid'];
   } else {
     $lastid = 1;
   }
@@ -84,7 +83,7 @@ function getNewID($type, $table) {
   }
 
   $newID = $prefix . $lastid . $suffix;
-  setcookie('tng_' . $type . 'lastid_' . $tree, $newnum, time() + 60 * 60 * 24 * 365);
+  setcookie('tng_' . $type . '_lastid', $newnum, time() + 60 * 60 * 24 * 365);
 
   return $newID;
 }

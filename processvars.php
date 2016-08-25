@@ -49,6 +49,3 @@ if (isset($sourceID)) {
 if (isset($repoID)) {
   $repoID = preg_replace("/[^A-Za-z0-9_\- ]/", '', $repoID);
 }
-if (isset($tree)) {
-  $tree = preg_replace("/[^A-Za-z0-9\._\-]/", '', $tree);
-}

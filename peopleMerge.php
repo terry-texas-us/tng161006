@@ -2,7 +2,7 @@
 require 'begin.php';
 require 'adminlib.php';
 
-$adminLogin = true;
+$adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
@@ -17,9 +17,6 @@ if (!$allowEdit || !$allowDelete) {
 $deleteblankfamilies = 1;
 
 $wherestr = "";
-
-$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-$treeresult = tng_query($query);
 
 if ($assignedbranch) {
   $branchstr = " AND branch LIKE \"%$assignedbranch%\"";

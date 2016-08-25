@@ -3,7 +3,7 @@
 require 'begin.php';
 require 'adminlib.php';
 
-$adminLogin = true;
+$adminLogin = 1;
 require 'checklogin.php';
 
 function doEvent($eventID, $displayval, $info) {

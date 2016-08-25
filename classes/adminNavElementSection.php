@@ -47,7 +47,7 @@ class AdminNavElementSection extends NavElementSection {
       default:
         break;
     }
-    $this->out .= "<li class='nav-item'><a class='nav-link' href='logout.php?admin_login=1' target='_parent'>$this->logout (<strong>" . NavElementSection::$currentUser . "</strong>)</a></li>\n";
+    $this->out .= "<li class='nav-item'><a class='nav-link' href='logout.php?adminLogin=1' target='_parent'>$this->logout (<strong>" . NavElementSection::$currentUser . "</strong>)</a></li>\n";
 
     $helpFile = $topLevel . "_help.php";
     $helpPath = findhelp($helpFile) . '/' . $helpFile;

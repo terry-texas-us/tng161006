@@ -8,10 +8,7 @@ require 'checklogin.php';
 require 'adminlog.php';
 
 if ($table == "all") {
-  $tablelist = [$cemeteries_table, $people_table, $families_table, $children_table, $languagesTable, $places_table, $states_table,
-          $countries_table, $sources_table, $citations_table, $reports_table, $events_table, $eventtypes_table, $treesTable, $notelinks_table,
-          $xnotes_table, $users_table, $tlevents_table, $saveimport_table, $temp_events_table, $branches_table, $branchlinks_table,
-          $address_table, $albums_table, $albumlinks_table, $album2entities_table, $assoc_table, $media_table, $medialinks_table, $mediatypes_table];
+  $tablelist = [$cemeteries_table, $people_table, $families_table, $children_table, $languagesTable, $places_table, $states_table, $countries_table, $sources_table, $citations_table, $reports_table, $events_table, $eventtypes_table, $treesTable, $notelinks_table, $xnotes_table, $users_table, $tlevents_table, $saveimport_table, $temp_events_table, $branches_table, $branchlinks_table, $address_table, $albums_table, $albumlinks_table, $album2entities_table, $assoc_table, $media_table, $medialinks_table, $mediatypes_table];
   $tablename = uiTextSnippet('alltables');
   $message = "$tablename " . uiTextSnippet('succoptimized') . ".";
 } else {

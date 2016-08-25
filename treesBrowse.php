@@ -6,7 +6,6 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-$tng_search_trees = $_SESSION['tng_search_trees'] = 1;
 if ($newsearch) {
   $exptime = 0;
   setcookie("tng_search_trees_post[search]", $searchstring, $exptime);

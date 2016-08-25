@@ -240,14 +240,14 @@ $headSection->setTitle(uiTextSnippet('modifyuser'));
       <div id="restrictions" <?php if ($adminaccess) {echo "style='visibility: hidden;'";} ?>>
         <div class='row'>
           <div class='col-sm-3'>
-            <span><?php echo uiTextSnippet('branch'); ?>**:</span>
+            <span><?php echo uiTextSnippet('branch'); ?>*:</span>
           </div>
           <div class='col-sm-3'>
             <?php
-            $query = "SELECT branch, gedcom, description FROM $branches_table WHERE gedcom = \"{$row['gedcom']}\" ORDER BY description";
+            $query = "SELECT branch, gedcom, description FROM $branches_table ORDER BY description";
             $branchresult = tng_query($query);
 
-            echo "<select id='branch' name=\"branch\" size=\"$selectnum\">\n";
+            echo "<select id='branch' name='branch' size='$selectnum'>\n";
             echo "  <option value=''>" . uiTextSnippet('allbranches') . "</option>\n";
             while ($branch = tng_fetch_assoc($branchresult)) {
               echo "  <option value=\"{$branch['branch']}\"";
@@ -262,7 +262,7 @@ $headSection->setTitle(uiTextSnippet('modifyuser'));
           </div>
         </div>
       </div>
-      <?php if ($row['allow_living'] == -1) { //account is inactive
+      <?php if ($row['allow_living'] == -1) { // inactive user account
         echo "<input name='notify' type='checkbox' value='1' checked onClick=\"replaceText();\"> " . uiTextSnippet('notify') . "<br>\n";
         $owner = $sitename ? $sitename : $dbowner;
         echo "<textarea class='form-control' name='welcome' rows='4'>" . uiTextSnippet('hello') . " {$row['realname']},\r\n\r\n" . uiTextSnippet('activated');
@@ -283,11 +283,7 @@ $headSection->setTitle(uiTextSnippet('modifyuser'));
       <button class='btn btn-primary btn-block' name='submit' type='submit'><?php echo uiTextSnippet('savechanges'); ?></button>
     </form>
     <hr>
-    <p>
-      <br>
-      <span>**<?php echo uiTextSnippet('branchmsg'); ?></span>
-      <br>
-    </p>
+    <p>*<?php echo uiTextSnippet('branchmsg'); ?></p>
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->
 <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
@@ -298,7 +294,7 @@ $headSection->setTitle(uiTextSnippet('modifyuser'));
     var orgusername = "<?php echo $row['username']; ?>";
     var orgpassword = "<?php echo $row['password']; ?>";
 
-        <?php include("branchlibjs.php"); ?>
+    <?php include("branchlibjs.php"); ?>
 
     $('#gedcom').on('change', function () {
       var tree = getTree(this);

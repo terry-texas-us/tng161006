@@ -5,7 +5,6 @@ require $subroot . 'pedconfig.php';
 require 'personlib.php';
 
 $relatepersonID = $_SESSION['relatepersonID'];
-$relatetreeID = $_SESSION['relatetreeID'];
 
 $result = getPersonDataPlusDates($primaryID);
 if ($result) {
@@ -93,7 +92,7 @@ echo "<body id='public'>\n";
                 <td><strong><?php echo uiTextSnippet('person2'); ?> </strong></td>
                 <td>
                   <?php
-                  if ($relatepersonID && $relatetreeID == $tree) {
+                  if ($relatepersonID) {
                     $query = "SELECT firstname, lastname, lnprefix, prefix, suffix, nameorder, living, private, branch, birthdate, altbirthdate FROM $people_table WHERE personID = '$relatepersonID'";
                     $result2 = tng_query($query);
                     if ($result2) {

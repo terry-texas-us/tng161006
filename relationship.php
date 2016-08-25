@@ -221,7 +221,6 @@ if ($secondpersonID) {
     $secondpersonID = $personprefix . $secondpersonID . $personsuffix;
   }
   $relatepersonID = $_SESSION['relatepersonID'] = cleanIt($secondpersonID);
-  $relatetreeID = $_SESSION['relatetreeID'] = $tree;
 } else {
   $secondpersonID = $savedpersonID;
 }

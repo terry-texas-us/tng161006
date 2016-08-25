@@ -178,8 +178,6 @@ function getMoreInfo($persfamID, $prevlevel, $prevtag, $prevtype) {
           }
           break;
         default:
-          //if( $moreinfo['FACT'] ) $moreinfo['FACT'] .= ", ";
-          //$moreinfo['FACT'] .= addslashes( removeDelims( $lineinfo['rest'] ) );
           $lineinfo = getLine();
           break;
       }
@@ -193,7 +191,7 @@ function getMoreInfo($persfamID, $prevlevel, $prevtag, $prevtype) {
   }
   if (is_array($address)) {
     $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, www, email, phone) "
-        . "VALUES('{$address['ADR1']}', '{$address['ADR2']}', '{$address['CITY']}', '{$address['STAE']}', '{$address['POST']}',  '{$address['CTRY']}', '{$address['WWW']}', '{$address['EMAIL']}', '{$address['PHON']}')";
+        . "VALUES('{$address['ADR1']}', '{$address['ADR2']}', '{$address['CITY']}', '{$address['STAE']}', '{$address['POST']}', '{$address['CTRY']}', '{$address['WWW']}', '{$address['EMAIL']}', '{$address['PHON']}')";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     $moreinfo['ADDR'] = tng_insert_id();
     if ($moreinfo['FACT'] == $address['ADR1']) {

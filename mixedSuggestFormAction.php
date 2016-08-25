@@ -56,7 +56,7 @@ if ($enttype == 'I') {
   tng_free_result($result);
 } elseif ($enttype == 'F') {
   $typestr = "family";
-  $query = "SELECT familyID, husband, wife, living, private, marrdate, gedcom, branch FROM $families_table WHERE familyID = '$ID'";
+  $query = "SELECT familyID, husband, wife, living, private, marrdate, branch FROM $families_table WHERE familyID = '$ID'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
 
@@ -88,7 +88,7 @@ if ($enttype == 'I') {
 }
 if ($enttype) {
   $subject = uiTextSnippet('proposed') . ": $name";
-  $query = "SELECT treename, email, owner FROM $treesTable";
+  $query = "SELECT email, owner FROM $treesTable";
   $treeresult = tng_query($query);
   $treerow = tng_fetch_assoc($treeresult);
   tng_free_result($treeresult);

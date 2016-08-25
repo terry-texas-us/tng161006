@@ -6,7 +6,7 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-$query = "SELECT $xnotes_table.note AS note, secret, $notelinks_table.ID as nID FROM ($notelinks_table, $xnotes_table)
+$query = "SELECT $xnotes_table.note AS note, secret, $notelinks_table.ID AS nID FROM ($notelinks_table, $xnotes_table)
     WHERE $notelinks_table.xnoteID = $xnotes_table.ID AND $xnotes_table.ID = '$ID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);

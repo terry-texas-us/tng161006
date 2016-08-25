@@ -6,9 +6,6 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-$result = tng_query($query);
-
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('secondary'));
 ?>

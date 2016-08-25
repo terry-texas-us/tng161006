@@ -1,9 +1,6 @@
 <?php
 require 'tng_begin.php';
 
-$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-$result = tng_query($query);
-
 $flnqualify = $_SESSION['tng_search_flnqualify'];
 $myflastname = $_SESSION['tng_search_flastname'];
 $ffnqualify = $_SESSION['tng_search_ffnqualify'];

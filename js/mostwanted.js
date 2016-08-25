@@ -168,16 +168,14 @@ function hideEditDelete(id) {
 function getNewMwMedia(form) {
     'use strict';
     var strParams;
-    var searchtree;
     var mediatypeID;
     var searchstring = form.searchstring.value;
 
     doSpinner(1);
     $('#newmedia').html('');
-    searchtree = form.tree.value;
     mediatypeID = form.mediatypeID.value;
 
-    strParams = {searchstring: searchstring, searchtree: searchtree, mediatypeID: mediatypeID};
+    strParams = {searchstring: searchstring, mediatypeID: mediatypeID};
     $.ajax({
         url: 'admin_add2albumxml.php',
         data: strParams,

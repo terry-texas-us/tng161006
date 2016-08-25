@@ -14,8 +14,6 @@ if (!$allowEdit || !$allowDelete) {
   exit;
 }
 $wherestr = "";
-$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-$treeresult = tng_query($query);
 
 function doRow($field, $textmsg, $boxname) {
   global $s1row;

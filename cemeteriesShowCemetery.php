@@ -188,7 +188,7 @@ $headSection->setTitle($location);
     tng_free_result($hsresult);
 
     $query = "SELECT DISTINCT $media_table.mediaID, description, notes, path, thumbpath, status, plot, showmap, usecollfolder, mediatypeID, latitude, longitude, form, abspath, newwindow
-      FROM $media_table LEFT JOIN $medialinks_table on $media_table.mediaID = $medialinks_table.mediaID
+      FROM $media_table LEFT JOIN $medialinks_table ON $media_table.mediaID = $medialinks_table.mediaID
       WHERE cemeteryID = \"$cemeteryID\"$typeclause AND mediatypeID = \"headstones\" AND linktocem != \"1\" ORDER BY description LIMIT $newoffset" . $maxsearchresults;
     $hsresult = tng_query($query);
 
@@ -198,7 +198,7 @@ $headSection->setTitle($location);
       $body .= "<h4>" . uiTextSnippet('headstone') . "</h4>\n";
 
       if ($numrows == $maxsearchresults || $offsetplus > 1) {
-        $query = "SELECT count(DISTINCT $media_table.mediaID) as hscount FROM $media_table LEFT JOIN $medialinks_table on $media_table.mediaID = $medialinks_table.mediaID WHERE cemeteryID = \"$cemeteryID\"$typeclause AND linktocem != \"1\"";
+        $query = "SELECT count(DISTINCT $media_table.mediaID) as hscount FROM $media_table LEFT JOIN $medialinks_table ON $media_table.mediaID = $medialinks_table.mediaID WHERE cemeteryID = \"$cemeteryID\"$typeclause AND linktocem != \"1\"";
         $result2 = tng_query($query);
         $row = tng_fetch_assoc($result2);
         $totrows = $row['hscount'];

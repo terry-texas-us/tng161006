@@ -206,9 +206,9 @@ function getNotes($id) {
 
   $query = "SELECT $notelinks_table.ID as ID, secret, $xnotes_table.note as note, $xnotes_table.noteID as noteID, $notelinks_table.eventID
       FROM $notelinks_table
-      LEFT JOIN  $xnotes_table on $notelinks_table.xnoteID = $xnotes_table.ID
+      LEFT JOIN  $xnotes_table ON $notelinks_table.xnoteID = $xnotes_table.ID
       LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID
-      LEFT JOIN $eventtypes_table on $eventtypes_table.eventtypeID = $events_table.eventtypeID
+      LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID
       WHERE $notelinks_table.persfamID = '$id'
       ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum";
   $notelinks = tng_query($query);
@@ -403,7 +403,7 @@ function getFamily($person, $parents, $generation) {
         }
       }
       if ($generation > 1) {
-        $query = "SELECT familyID, $children_table.personID as personID, sealdate, sealplace, mrel, frel, living, private, branch FROM $children_table, $people_table WHERE familyID = \"$parents\" AND $children_table.personID = $people_table.personID ORDER BY ordernum";
+        $query = "SELECT familyID, $children_table.personID as personID, sealdate, sealplace, mrel, frel, living, private, branch FROM $children_table, $people_table WHERE familyID = '$parents' AND $children_table.personID = $people_table.personID ORDER BY ordernum";
         $result = tng_query($query);
         if ($result) {
           while ($child = tng_fetch_assoc($result)) {

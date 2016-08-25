@@ -12,7 +12,7 @@ if ($newwidth) {
 }
 
 if ($primaryID) {
-  $newentry = "timeperson=$primaryID" . "&timetree=$tree";
+  $newentry = "timeperson=$primaryID";
   if (!in_array($newentry, $timeline)) {
     array_push($timeline, $newentry);
     $_SESSION['timeline'] = $timeline;
@@ -31,7 +31,7 @@ for ($i = 2; $i < 6; $i++) {
 $finalarray = [];
 foreach ($timeline as $timeentry) {
   parse_str($timeentry);
-  $todelete = $timetree . "_" . $timeperson;
+  $todelete = "_" . $timeperson;
   if ($$todelete != "1") {
     $result2 = getPersonDataPlusDates($timeperson);
     if ($result2) {

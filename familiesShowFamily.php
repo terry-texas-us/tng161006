@@ -58,7 +58,6 @@ function showDatePlace($event) {
       $pcitestr = $event['place'] ? "&nbsp; <span><sup>[$cite]</sup></span>" : "";
     }
   }
-
   $dptext .= "<tr>\n";
   $editicon = $tentative_edit ? "<img class='icon-sm' src='svg/new-message.svg' alt=\"" . uiTextSnippet('editevent') . "\" onclick=\"tnglitbox = new ModalDialog('ajx_tentedit.php?persfamID={$event['ID']}&amp;type={$event['type']}&amp;event={$event['event']}&amp;title={$event['text']}');\" class=\"fakelink\">" : "";
   $dptext .= "<td $cellid><span>" . $event['text'] . "&nbsp;$editicon</span></td>\n";
@@ -291,12 +290,12 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   //show other spouses
   $query = "SELECT familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, $families_table.living as fliving, $families_table.private as fprivate, $families_table.branch as branch, $people_table.living as living, $people_table.private as private, marrdate, marrplace, sealdate, sealplace, marrtype FROM $families_table ";
   if ($ind['sex'] == 'M') {
-    $query .= "LEFT JOIN $people_table on $families_table.wife = $people_table.personID WHERE husband = \"{$ind['personID']}\" $restriction ORDER BY husborder";
+    $query .= "LEFT JOIN $people_table ON $families_table.wife = $people_table.personID WHERE husband = '{$ind['personID']}' $restriction ORDER BY husborder";
   } else {
     if ($ind['sex'] = 'F') {
-      $query .= "LEFT JOIN $people_table on $families_table.husband = $people_table.personID WHERE wife = \"{$ind['personID']}\" $restriction ORDER BY wifeorder";
+      $query .= "LEFT JOIN $people_table ON $families_table.husband = $people_table.personID WHERE wife = '{$ind['personID']}' $restriction ORDER BY wifeorder";
     } else {
-      $query .= "LEFT JOIN $people_table on ($families_table.husband = $people_table.personID OR $families_table.wife = $people_table.personID) WHERE (wife = \"{$ind['personID']}\" && husband = \"{$ind['personID']}\")";
+      $query .= "LEFT JOIN $people_table ON ($families_table.husband = $people_table.personID OR $families_table.wife = $people_table.personID) WHERE (wife = '{$ind['personID']}' && husband = '{$ind['personID']}')";
     }
   }
   $spresult = tng_query($query);
@@ -375,8 +374,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
 
   return $indtext;
 }
-//get family
-$query = "SELECT familyID, husband, wife, living, private, marrdate, gedcom, branch FROM $families_table WHERE familyID = '$familyID'";
+$query = "SELECT familyID, husband, wife, living, private, marrdate, branch FROM $families_table WHERE familyID = '$familyID'";
 $result = tng_query($query);
 $famrow = tng_fetch_assoc($result);
 if (!tng_num_rows($result)) {
@@ -601,7 +599,7 @@ $headSection->setTitle($headTitle);
   <script src="js/rpt_utils.js"></script>\n";
   <?php if ($tentative_edit) { ?>
     <script>
-      var preferEuro = <?php echo ($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>
+      var preferEuro = <?php echo ($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;
       var preferDateFormat = '<?php echo $preferDateFormat; ?>';
     </script>
     <script src="js/tentedit.js"></script>
