@@ -82,7 +82,7 @@ $headSection->setTitle($location);
     <h2><img class='icon-md' src='svg/headstone.svg'><?php echo $location; ?></h2>
     <br clear='all'>
     <?php
-    $hiddenfields[] = array('name' => 'cemeteryID', 'value' => $cemeteryID);
+    $hiddenfields[] = ['name' => 'cemeteryID', 'value' => $cemeteryID];
 
     $infoblock = "";
     $body = "";

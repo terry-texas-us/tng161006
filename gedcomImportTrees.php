@@ -14,7 +14,7 @@ function ClearData($tree) {
   global $address_table;
   global $assoc_table;
 
-  $clear_files = array(
+  $clear_files = [
           $address_table,
           $assoc_table,
           $children_table,
@@ -26,7 +26,7 @@ function ClearData($tree) {
           $repositories_table,
           $sources_table,
           $xnotes_table
-  );
+  ];
   $query = "SELECT COUNT(*) as trees FROM $treesTable";
   if (!($result = tng_query($query))) {
     die (uiTextSnippet('cannotexecutequery') . ": $query");

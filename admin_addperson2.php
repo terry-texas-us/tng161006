@@ -72,7 +72,7 @@ deleteNoteLinks($personID);
 if ($result && tng_num_rows($result)) {
   echo "error:" . uiTextSnippet('person') . " $personID " . uiTextSnippet('idexists');
 } else {
-  $places = array();
+  $places = [];
   if (trim($birthplace) && !in_array($birthplace, $places)) {
     array_push($places, $birthplace);
   }

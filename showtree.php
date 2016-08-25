@@ -13,8 +13,7 @@ function showFact($text, $fact, $numflag = 0)
   echo "</tr>\n";
 }
 
-$query = "SELECT count(personID) as pcount, $treesTable.gedcom, treename, description, owner, secret, address, email, city, state, zip, country, phone FROM $treesTable LEFT JOIN $people_table on $treesTable.gedcom = $people_table.gedcom GROUP BY $treesTable.gedcom";
-$result = tng_query($query);
+$result = tng_query("SELECT gedcom, treename, description, owner, secret, address, email, city, state, zip, country, phone FROM $treesTable");
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
 
@@ -44,19 +43,19 @@ $headSection->setTitle(uiTextSnippet('tree') . ": " . $row['treename']);
         if ($row['description']) {
           showFact(uiTextSnippet('description'), $row['description']);
         }
+        $presult = tng_query("SELECT count(personID) as pcount FROM $people_table");
+        $prow = tng_fetch_assoc($presult);
+        tng_free_result($presult);
+        showFact(uiTextSnippet('individuals'), $prow['pcount'], true);
 
-        showFact(uiTextSnippet('individuals'), $row['pcount'], true);
+        $fresult = tng_query("SELECT count(familyID) as fcount FROM $families_table");
+        $frow = tng_fetch_assoc($fresult);
+        tng_free_result($fresult);
+        showFact(uiTextSnippet('families'), $frow['fcount'], true);
 
-        $query = "SELECT count(familyID) as fcount FROM $families_table WHERE gedcom = \"{$row['gedcom']}\"";
-        $famresult = tng_query($query);
-        $famrow = tng_fetch_assoc($famresult);
-        tng_free_result($famresult);
-        showFact(uiTextSnippet('families'), $famrow['fcount'], true);
-
-        $query = "SELECT count(sourceID) as scount FROM $sources_table WHERE gedcom = \"{$row['gedcom']}\"";
-        $srcresult = tng_query($query);
-        $srcrow = tng_fetch_assoc($srcresult);
-        tng_free_result($srcresult);
+        $sresult = tng_query("SELECT count(sourceID) as scount FROM $sources_table");
+        $srow = tng_fetch_assoc($sresult);
+        tng_free_result($sresult);
         showFact(uiTextSnippet('sources'), $srcrow['scount'], true);
 
         if (!$row['secret']) {

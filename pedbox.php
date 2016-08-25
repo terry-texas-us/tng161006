@@ -9,7 +9,7 @@ function getPhotoSrc($persfamID, $living, $gender) {
   global $media_table;
   global $tngconfig;
 
-  $photo = array();
+  $photo = [];
 
   $query = "SELECT $media_table.mediaID, medialinkID, alwayson, thumbpath, mediatypeID, usecollfolder FROM ($media_table, $medialinks_table)
     WHERE personID = '$persfamID' AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";

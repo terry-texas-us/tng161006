@@ -75,7 +75,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
               <div class='col-sm-3'>
                 <select class='form-control' name="ffnqualify">
                   <?php
-                  $item_array = array(array(uiTextSnippet('contains'), "contains"), array(uiTextSnippet('equals'), "equals"), array(uiTextSnippet('startswith'), "startswith"), array(uiTextSnippet('endswith'), "endswith"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"), array(uiTextSnippet('soundexof'), "soundexof"));
+                  $item_array = [[uiTextSnippet('contains'), "contains"], [uiTextSnippet('equals'), "equals"], [uiTextSnippet('startswith'), "startswith"], [uiTextSnippet('endswith'), "endswith"], [uiTextSnippet('exists'), "exists"], [uiTextSnippet('dnexist'), "dnexist"], [uiTextSnippet('soundexof'), "soundexof"]];
                   foreach ($item_array as $item) {
                     echo "<option value='$item[1]'";
                     if ($ffnqualify == $item[1]) {
@@ -100,7 +100,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
               <div class='col-sm-3'>
                 <select class='form-control' name='mlnqualify'>
                   <?php
-                  $item_array = array(array(uiTextSnippet('contains'), "contains"), array(uiTextSnippet('equals'), "equals"), array(uiTextSnippet('startswith'), "startswith"), array(uiTextSnippet('endswith'), "endswith"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"), array(uiTextSnippet('soundexof'), "soundexof"), array(uiTextSnippet('metaphoneof'), "metaphoneof"));
+                  $item_array = [[uiTextSnippet('contains'), "contains"], [uiTextSnippet('equals'), "equals"], [uiTextSnippet('startswith'), "startswith"], [uiTextSnippet('endswith'), "endswith"], [uiTextSnippet('exists'), "exists"], [uiTextSnippet('dnexist'), "dnexist"], [uiTextSnippet('soundexof'), "soundexof"], [uiTextSnippet('metaphoneof'), "metaphoneof"]];
                   foreach ($item_array as $item) {
                     echo "<option value='$item[1]'";
                     if ($mlnqualify == $item[1]) {
@@ -142,7 +142,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
           <div class='col-sm-3'>
             <select class='form-control' name='fidqualify' title='<?php echo $fidqualify; ?>'>
               <?php
-              $item_array = array(array(uiTextSnippet('equals'), "equals"), array(uiTextSnippet('contains'), "contains"), array(uiTextSnippet('startswith'), "startswith"), array(uiTextSnippet('endswith'), "endswith"));
+              $item_array = [[uiTextSnippet('equals'), "equals"], [uiTextSnippet('contains'), "contains"], [uiTextSnippet('startswith'), "startswith"], [uiTextSnippet('endswith'), "endswith"]];
               foreach ($item_array as $item) {
                 echo "<option value='$item[1]'";
                 if ($fidqualify == $item[1]) {
@@ -202,7 +202,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
           <div class='col-sm-3'>
             <select class='form-control' name='dvpqualify'>
               <?php
-              $item_array = array(array(uiTextSnippet('contains'), "contains"), array(uiTextSnippet('equals'), "equals"), array(uiTextSnippet('startswith'), "startswith"), array(uiTextSnippet('endswith'), "endswith"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"));
+              $item_array = [[uiTextSnippet('contains'), "contains"], [uiTextSnippet('equals'), "equals"], [uiTextSnippet('startswith'), "startswith"], [uiTextSnippet('endswith'), "endswith"], [uiTextSnippet('exists'), "exists"], [uiTextSnippet('dnexist'), "dnexist"]];
               foreach ($item_array as $item) {
                 echo "<option value='$item[1]'";
                 if ($dvpqualify == $item[1]) {
@@ -222,7 +222,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
           <div class='col-sm-3'>
             <select class='form-control' name='dvyqualify'>
               <?php
-              $item2_array = array(array(uiTextSnippet('equals'), ""), array(uiTextSnippet('plusminus2'), "plusminus2"), array(uiTextSnippet('plusminus5'), "plusminus5"), array(uiTextSnippet('plusminus10'), "plusminus10"), array(uiTextSnippet('lessthan'), "lessthan"), array(uiTextSnippet('greaterthan'), "greaterthan"), array(uiTextSnippet('lessthanequal'), "lessthanequal"), array(uiTextSnippet('greaterthanequal'), "greaterthanequal"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"));
+              $item2_array = [[uiTextSnippet('equals'), ""], [uiTextSnippet('plusminus2'), "plusminus2"], [uiTextSnippet('plusminus5'), "plusminus5"], [uiTextSnippet('plusminus10'), "plusminus10"], [uiTextSnippet('lessthan'), "lessthan"], [uiTextSnippet('greaterthan'), "greaterthan"], [uiTextSnippet('lessthanequal'), "lessthanequal"], [uiTextSnippet('greaterthanequal'), "greaterthanequal"], [uiTextSnippet('exists'), "exists"], [uiTextSnippet('dnexist'), "dnexist"]];
               foreach ($item2_array as $item) {
                 echo "<option value='$item[1]'";
                 if ($dvyqualify == $item[1]) {
@@ -255,7 +255,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
             <?php
             $query = "SELECT eventtypeID, tag, display FROM $eventtypes_table WHERE keep=\"1\" AND type=\"F\" ORDER BY display";
             $result = tng_query($query);
-            $eventtypes = array();
+            $eventtypes = [];
             while ($row = tng_fetch_assoc($result)) {
               if (!in_array($row['tag'], $dontdo)) {
                 $row['displaymsg'] = getEventDisplay($row['display']);
@@ -303,7 +303,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
                   echo "<div class='offset-sm-1 col-sm-2'>" . uiTextSnippet('year') . ":</div>\n";
                   echo "<div class='col-sm-3'>\n";
                     echo "<select class='form-control' name=\"cyq{$row['eventtypeID']}\">\n";
-                      $item2_array = array(array(uiTextSnippet('equals'), ""), array(uiTextSnippet('plusminus2'), "plusminus2"), array(uiTextSnippet('plusminus5'), "plusminus5"), array(uiTextSnippet('plusminus10'), "plusminus10"), array(uiTextSnippet('lessthan'), "lessthan"), array(uiTextSnippet('greaterthan'), "greaterthan"), array(uiTextSnippet('lessthanequal'), "lessthanequal"), array(uiTextSnippet('greaterthanequal'), "greaterthanequal"), array(uiTextSnippet('exists'), "exists"), array(uiTextSnippet('dnexist'), "dnexist"));
+                      $item2_array = [[uiTextSnippet('equals'), ""], [uiTextSnippet('plusminus2'), "plusminus2"], [uiTextSnippet('plusminus5'), "plusminus5"], [uiTextSnippet('plusminus10'), "plusminus10"], [uiTextSnippet('lessthan'), "lessthan"], [uiTextSnippet('greaterthan'), "greaterthan"], [uiTextSnippet('lessthanequal'), "lessthanequal"], [uiTextSnippet('greaterthanequal'), "greaterthanequal"], [uiTextSnippet('exists'), "exists"], [uiTextSnippet('dnexist'), "dnexist"]];
                       foreach ($item2_array as $item) {
                         echo "<option value='$item[1]'";
                         echo ">$item[0]</option>\n";
@@ -334,7 +334,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
           <div class='col-sm-3'>
             <select class='form-control' name='mybool'>
               <?php
-              $item3_array = array(array(uiTextSnippet('cap_and'), "AND"), array(uiTextSnippet('cap_or'), "OR"));
+              $item3_array = [[uiTextSnippet('cap_and'), "AND"], [uiTextSnippet('cap_or'), "OR"]];
               foreach ($item3_array as $item) {
                 echo "<option value='$item[1]'";
                 if ($mybool == $item[1]) {
@@ -424,8 +424,8 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
       URL = "mybool=" + thisform.mybool[thisform.mybool.selectedIndex].value;
       URL = URL + "&nr=" + thisform.nr[thisform.nr.selectedIndex].value;
       <?php
-      $qualifiers = array("fln", "ffn", "mln", "mfn", "fid", "mp", "my", "dvp", "dvy");
-      $criteria = array("flastname", "ffirstname", "mlastname", "mfirstname", "familyid", "marrplace", "marryear", "divplace", "divyear");
+      $qualifiers = ["fln", "ffn", "mln", "mfn", "fid", "mp", "my", "dvp", "dvy"];
+      $criteria = ["flastname", "ffirstname", "mlastname", "mfirstname", "familyid", "marrplace", "marryear", "divplace", "divyear"];
 
       $qcount = 0;
       $found = 0;

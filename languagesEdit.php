@@ -44,7 +44,7 @@ $headSection->setTitle(uiTextSnippet('modifylanguage'));
                     <?php
                     chdir($rootpath . $endrootpath . $languagesPath);
                     if ($handle = opendir('.')) {
-                      $dirs = array();
+                      $dirs = [];
                       while ($filename = readdir($handle)) {
                         if (is_dir($filename) && $filename != '..' && $filename != '.') {
                           array_push($dirs, $filename);

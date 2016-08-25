@@ -426,7 +426,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
             <table>
               <?php
               if (is_array($r1row)) {
-                $eventlist = array();
+                $eventlist = [];
                 echo "<tr>\n";
                 echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('repositoriesEdit.php?repoID={$r1row['repoID']}&amp;cw=1','edit')\"></td>\n";
                 if (is_array($r2row)) {

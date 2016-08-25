@@ -41,7 +41,7 @@ function xmlPerson($currperson, $backperson, $generation) {
   $parentfamID = "";
   $locparentset = $parentset;
   $parentscount = 0;
-  $parentfamIDs = array();
+  $parentfamIDs = [];
   $parents = $familyresult = getChildFamily($currperson, "parentorder");
   if ($parents) {
     $parentscount = tng_num_rows($parents);
@@ -128,9 +128,9 @@ function xmlPerson($currperson, $backperson, $generation) {
   }
 
   //do spouses
-  $spiceNames = array();
-  $spiceIDs = array();
-  $spicekidcount = array();
+  $spiceNames = [];
+  $spiceIDs = [];
+  $spicekidcount = [];
   $spousecount = 1;
 
   $spouse = $self = $spouseorder = "";
@@ -285,7 +285,7 @@ function xmlFamily($famc, $backperson, $generation) {
 
 // subroutine to get father/mother ids and names
 function getParentInfo($famid) {
-  $parentarray = array();
+  $parentarray = [];
   $parentresult = getParentSimple($famid, 'husband');
   if ($parentresult) {
     $row = tng_fetch_assoc($parentresult);
@@ -327,9 +327,9 @@ if ($generations > $pedigree['maxgen']) {
 // alternate parent display?
 $parentset = $parentset ? intval($parentset) : 0;
 
-$people = array();
-$families = array();
-$familylist = array();
+$people = [];
+$families = [];
+$familylist = [];
 
 header("Content-Type: application/json; charset=" . $session_charset);
 echo "{\n";

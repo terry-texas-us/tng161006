@@ -82,7 +82,7 @@ $headSection->setTitle($psearchns);
       if ($prow['notes'] || $prow['latitude'] || $prow['longitude']) {
         if (($prow['latitude'] || $prow['longitude']) && $map['key'] && !$mapdrawn) {
           echo "<br><div id='map' style=\"width: {$map['hstw']}; height: {$map['hsth']}; margin-bottom:20px;\" class=\"rounded10\"></div>\n";
-          $usedplaces = array();
+          $usedplaces = [];
           $mapdrawn = true;
         }
         if ($prow['notes']) {
@@ -104,7 +104,7 @@ $headSection->setTitle($psearchns);
             $uniqueplace = $psearch . $lat . $long;
             if ($map['showallpins'] || !in_array($uniqueplace, $usedplaces)) {
               $usedplaces[] = $uniqueplace;
-              $locations2map[$l2mCount] = array("pinplacelevel" => $pinplacelevel, "lat" => $lat, "long" => $long, "zoom" => $zoom, "htmlcontent" => "<div class=\"mapballoon\">$placeleveltext<br>$codedplace$codednotes</div>");
+              $locations2map[$l2mCount] = ["pinplacelevel" => $pinplacelevel, "lat" => $lat, "long" => $long, "zoom" => $zoom, "htmlcontent" => "<div class=\"mapballoon\">$placeleveltext<br>$codedplace$codednotes</div>"];
               $l2mCount++;
             }
           }
@@ -174,7 +174,7 @@ $headSection->setTitle($psearchns);
 
     //then loop over events like anniversaries
     $stdevents = ["birth", "altbirth", "death", "burial"];
-    $displaymsgs = array("birth" => uiTextSnippet('birth'), "altbirth" => uiTextSnippet('christened'), "death" => uiTextSnippet('died'), "burial" => uiTextSnippet('buried'));
+    $displaymsgs = ["birth" => uiTextSnippet('birth'), "altbirth" => uiTextSnippet('christened'), "death" => uiTextSnippet('died'), "burial" => uiTextSnippet('buried')];
     //$dontdo = array("ADDR","BIRT","CHR","DEAT","BURI","NAME","NICK","TITL","NSFX");
     if ($ldsOK) {
       array_push($stdevents, "endl", "init", "conf", "bapt");
@@ -185,8 +185,8 @@ $headSection->setTitle($psearchns);
     }
     $successcount += processPlaceEvents('I', $stdevents, $displaymsgs);
 
-    $stdevents = array("marr", "div");
-    $displaymsgs = array("marr" => uiTextSnippet('married'), "div" => uiTextSnippet('divorced'));
+    $stdevents = ["marr", "div"];
+    $displaymsgs = ["marr" => uiTextSnippet('married'), "div" => uiTextSnippet('divorced')];
     if ($ldsOK) {
       array_push($stdevents, "seal");
       $displaymsgs['seal'] = uiTextSnippet('sealedslds');

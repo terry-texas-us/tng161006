@@ -76,25 +76,25 @@ $headSection->setTitle($headtext);
     $sourcetext .= "<col style='width: {$datewidth}px'>\n";
     $sourcetext .= "<col>\n";
     if ($srcrow['title']) {
-      $sourcetext .= showEvent(array("text" => uiTextSnippet('title'), "fact" => $srcrow['title']));
+      $sourcetext .= showEvent(["text" => uiTextSnippet('title'), "fact" => $srcrow['title']]);
     }
     if ($srcrow['shorttitle']) {
-      $sourcetext .= showEvent(array("text" => uiTextSnippet('shorttitle'), "fact" => $srcrow['shorttitle']));
+      $sourcetext .= showEvent(["text" => uiTextSnippet('shorttitle'), "fact" => $srcrow['shorttitle']]);
     }
     if ($srcrow['author']) {
-      $sourcetext .= showEvent(array("text" => uiTextSnippet('author'), "fact" => $srcrow['author']));
+      $sourcetext .= showEvent(["text" => uiTextSnippet('author'), "fact" => $srcrow['author']]);
     }
     if ($srcrow['publisher']) {
-      $sourcetext .= showEvent(array("text" => uiTextSnippet('publisher'), "fact" => $srcrow['publisher']));
+      $sourcetext .= showEvent(["text" => uiTextSnippet('publisher'), "fact" => $srcrow['publisher']]);
     }
     if ($srcrow['callnum']) {
-      $sourcetext .= showEvent(array("text" => uiTextSnippet('callnum'), "fact" => $srcrow['callnum']));
+      $sourcetext .= showEvent(["text" => uiTextSnippet('callnum'), "fact" => $srcrow['callnum']]);
     }
     if ($srcrow['reponame']) {
-      $sourcetext .= showEvent(array("text" => uiTextSnippet('repository'), "fact" => "<a href=\"repositoriesShowItem.php?repoID={$srcrow['repoID']}\">{$srcrow['reponame']}</a>"));
+      $sourcetext .= showEvent(["text" => uiTextSnippet('repository'), "fact" => "<a href=\"repositoriesShowItem.php?repoID={$srcrow['repoID']}\">{$srcrow['reponame']}</a>"]);
     }
     if ($srcrow['other']) {
-      $sourcetext .= showEvent(array("text" => uiTextSnippet('other'), "fact" => $srcrow['other']));
+      $sourcetext .= showEvent(["text" => uiTextSnippet('other'), "fact" => $srcrow['other']]);
     }
 
     //do custom events
@@ -106,9 +106,9 @@ $headSection->setTitle($headtext);
       $sourcetext .= showEvent($event);
     }
     if ($allow_admin && $allowEdit) {
-      $sourcetext .= showEvent(array("text" => uiTextSnippet('sourceid'), "date" => $sourceID, "place" => "<a href=\"sourcesEdit.php?sourceID=$sourceID&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>", "np" => 1));
+      $sourcetext .= showEvent(["text" => uiTextSnippet('sourceid'), "date" => $sourceID, "place" => "<a href=\"sourcesEdit.php?sourceID=$sourceID&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>", "np" => 1]);
     } else {
-      $sourcetext .= showEvent(array("text" => uiTextSnippet('sourceid'), "date" => $sourceID));
+      $sourcetext .= showEvent(["text" => uiTextSnippet('sourceid'), "date" => $sourceID]);
     }
     if ($ioffset) {
       $ioffsetstr = "$ioffset, ";
@@ -151,7 +151,7 @@ $headSection->setTitle($headtext);
       if ((!$noneliving && !$srcrow['allow_living']) || (!$noneprivate && !$srcrow['allow_private'])) {
         $srcrow['actualtext'] = uiTextSnippet('livingphoto');
       }
-      $sourcetext .= showEvent(array("text" => uiTextSnippet('text'), "fact" => $srcrow['actualtext']));
+      $sourcetext .= showEvent(["text" => uiTextSnippet('text'), "fact" => $srcrow['actualtext']]);
     }
     if ($numrows > $maxsearchresults) {
       $sourcelinktext .= "\n[<a href=\"sourcesShowSource.php?sourceID=$sourceID&amp;foffset=$foffset&amp;ioffset=" . ($newioffset + $maxsearchresults) . "\">" . uiTextSnippet('moreind') . "</a>]";
@@ -184,7 +184,7 @@ $headSection->setTitle($headtext);
     tng_free_result($sresult);
 
     if ($sourcelinktext) {
-      $sourcetext .= showEvent(array("text" => uiTextSnippet('indlinked'), "fact" => $sourcelinktext));
+      $sourcetext .= showEvent(["text" => uiTextSnippet('indlinked'), "fact" => $sourcelinktext]);
     }
     $sourcetext .= "</table>\n";
     $sourcetext .= "<br>\n";

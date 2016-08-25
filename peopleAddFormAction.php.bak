@@ -137,7 +137,7 @@ $query = "INSERT INTO $people_table (personID, firstname, lnprefix, lastname, ni
 $result = tng_query($query);
 $ID = tng_insert_id();
 
-$query = "SELECT personID, lastname, firstname, lnprefix, birthdate, altbirthdate, prefix, suffix, nameorder FROM $people_table WHERE ID = '$ID'";
+$query = "SELECT personID, lastname, firstname, lnprefix, birthdate, altbirthdate, prefix, suffix, nameorder FROM $people_table WHERE ID=\"$ID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 $row['allow_living'] = $row['allow_private'] = 1;
@@ -166,11 +166,11 @@ if ($type == "child") {
     $result = tng_query($query);
     $famrow = tng_fetch_assoc($result);
     if ($famrow['husband']) {
-      $query = "UPDATE $children_table SET haskids = '1' WHERE personID = \"{$famrow['husband']}\"";
+      $query = "UPDATE $children_table SET haskids=\"1\" WHERE personID = \"{$famrow['husband']}\"";
       $result2 = tng_query($query);
     }
     if ($famrow['wife']) {
-      $query = "UPDATE $children_table SET haskids = '1' WHERE personID = \"{$famrow['wife']}\"";
+      $query = "UPDATE $children_table SET haskids=\"1\" WHERE personID = \"{$famrow['wife']}\"";
       $result2 = tng_query($query);
     }
     tng_free_result($result);
@@ -186,7 +186,7 @@ if ($type == "child") {
     }
   }
 
-  $rval = "<div class='sortrow' id='child_$personID' style='width: 500px; clear: both; display: none'";
+  $rval = "<div class='sortrow' id=\"child_$personID\" style='width: 500px; clear: both; display: none'";
   $rval .= " onmouseover=\"$('unlinkc_$personID').style.visibility='visible';\" onmouseout=\"$('unlinkc_$personID').style.visibility='hidden';\">\n";
   $rval .= "<table width=\"100%\" cellpadding=\"5\" cellspacing=\"1\"><tr>\n";
   $rval .= "<td class='dragarea'>";

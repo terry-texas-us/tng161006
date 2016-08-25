@@ -56,7 +56,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     $startDay  = date('w', $time);
 
     $daysInMonth  = date('t', $time);
-    $daysOfWeek  = array(uiTextSnippet('sunday'), uiTextSnippet('monday'), uiTextSnippet('tuesday'), uiTextSnippet('wednesday'), uiTextSnippet('thursday'), uiTextSnippet('friday'), uiTextSnippet('saturday'));
+    $daysOfWeek  = [uiTextSnippet('sunday'), uiTextSnippet('monday'), uiTextSnippet('tuesday'), uiTextSnippet('wednesday'), uiTextSnippet('thursday'), uiTextSnippet('friday'), uiTextSnippet('saturday')];
 
     $thisMonthName  = uiTextSnippet(strtoupper(date('F', $time)));
 
@@ -71,11 +71,11 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     $showLiving  = $allow_living ? (isset($_GET['living']) ? $_GET['living'] : 2) : 0;
     $hideEvents  = isset($_GET['hide']) ? explode(',', $_GET['hide']) : $defaultHide;
 
-    $events = array();
+    $events = [];
 
     // Query for individual/person events this month
-    $select = array();
-    $where = array();
+    $select = [];
+    $where = [];
     foreach ($calIndEvent as $key => $val) {
       if (in_array($key, $hideEvents)) {
         continue;
@@ -144,8 +144,8 @@ $headSection->setTitle(uiTextSnippet('calendar'));
 
 
     // Query for family events this month
-    $select = array();
-    $where = array();
+    $select = [];
+    $where = [];
     foreach ($calFamEvent as $key => $val) {
       if (in_array($key, $hideEvents)) {
         continue;
@@ -216,7 +216,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     }
 
     // Query for custom events this month
-    $where = array();
+    $where = [];
     foreach ($calEvent as $key => $val) {
       if (in_array($key, $hideEvents)) {
         continue;
@@ -313,11 +313,11 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     // Write the calendar
     ?> <div id="calWrapper"> <?php
 
-    $hidden = array();
-    $hidden[] = array('name' => 'm', 'value' => $thisMonth);
-    $hidden[] = array('name' => 'y', 'value' => $thisYear);
-    $hidden[] = array('name' => 'living', 'value' => $showLiving);
-    $hidden[] = array('name' => 'hide', 'value' => implode(',', $hideEvents));
+    $hidden = [];
+    $hidden[] = ['name' => 'm', 'value' => $thisMonth];
+    $hidden[] = ['name' => 'y', 'value' => $thisYear];
+    $hidden[] = ['name' => 'living', 'value' => $showLiving];
+    $hidden[] = ['name' => 'hide', 'value' => implode(',', $hideEvents)];
     ?>
     <div id="calHeader">
       <a href="<?php echo $args; ?>m=<?php echo $thisMonth; ?>&amp;y=<?php echo $lastYear; ?>">
@@ -444,7 +444,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     <ul class="flat">
     <?php
       // make sure the custom text key is set
-      $where = array();
+      $where = [];
       if(count($calEvent)) {
         foreach ($calEvent as $key => $val)
           {$where[] = "$eventtypes_table.tag = '$key'";}
@@ -474,7 +474,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
         }
         if (in_array($key, $hideEvents)) {
           $class = 'hidden';
-          $toHide = array_diff($hideEvents, array($key));
+          $toHide = array_diff($hideEvents, [$key]);
         } else {
           $class = 'nothidden';
           $toHide = $hideEvents;

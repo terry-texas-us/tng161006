@@ -1,12 +1,12 @@
 <?php
 function convertDate($olddate) {
   //additional month names (ie, different languages) may be added with same values in case multiple languages are used in the same database
-  $months = array("JAN" => 1, "FEB" => 2, "MAR" => 3, "APR" => 4, "MAY" => 5, "JUN" => 6, "JUL" => 7, "AUG" => 8, "SEP" => 9, "OCT" => 10, "NOV" => 11, "DEC" => 12);
-  $hebrewmonths = array("TIS" => 1, "CHE" => 2, "HES" => 2, "KIS" => 3, "TEV" => 4, "TEB" => 4, "SHV" => 5, "SHE" => 5, "ADA" => 6, "VEA" => 7, "NIS" => 8, "IYA" => 9, "SIV" => 10, "TAM" => 11, "AB" => 12, "AV" => 12, "ELU" => 13);
+  $months = ["JAN" => 1, "FEB" => 2, "MAR" => 3, "APR" => 4, "MAY" => 5, "JUN" => 6, "JUL" => 7, "AUG" => 8, "SEP" => 9, "OCT" => 10, "NOV" => 11, "DEC" => 12];
+  $hebrewmonths = ["TIS" => 1, "CHE" => 2, "HES" => 2, "KIS" => 3, "TEV" => 4, "TEB" => 4, "SHV" => 5, "SHE" => 5, "ADA" => 6, "VEA" => 7, "NIS" => 8, "IYA" => 9, "SIV" => 10, "TAM" => 11, "AB" => 12, "AV" => 12, "ELU" => 13];
   //alternatives for "BEF" and "AFT" should be entered in these lists separated by commas
-  $befarray = array("BEF");
-  $aftarray = array("AFT");
-  $lastday = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+  $befarray = ["BEF"];
+  $aftarray = ["AFT"];
+  $lastday = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   $preferred_separator = "/";  //this character separates the components in a numeric date, as in "MM/DD/YYYY"
   $numeric_date_order = 0;  //0 = MM/DD/YYYY; 1 = DD/MM/YYYY
   $befstringused = false;

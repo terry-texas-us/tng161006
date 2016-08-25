@@ -133,8 +133,8 @@ $headSection->setTitle($titlestr);
     <h2><?php echo $icon . $titlestr; ?></h2>
     <br clear='all'>
     <?php
-    $hiddenfields[0] = array('name' => 'mediatypeID', 'value' => $orgmediatypeID);
-    $hiddenfields[1] = array('name' => 'tnggallery', 'value' => $tnggallery);
+    $hiddenfields[0] = ['name' => 'mediatypeID', 'value' => $orgmediatypeID];
+    $hiddenfields[1] = ['name' => 'tnggallery', 'value' => $tnggallery];
 
     $toplinks = "<p>";
     if ($totrows) {

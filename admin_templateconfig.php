@@ -16,7 +16,7 @@ if ($link) {
     exit;
   }
 }
-$languageArray = array();
+$languageArray = [];
 $query = "SELECT display, folder FROM $languagesTable ORDER BY display";
 $result = tng_query($query);
 $languageList = tng_num_rows($result) ? "<option value=''></option>\n" : "";
@@ -60,9 +60,9 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
             <?php
             chdir($rootpath . $endrootpath . $templatespath);
             $totaltemplates = 0;
-            $sections = array();
-            $entries = array();
-            $folders = array();
+            $sections = [];
+            $entries = [];
+            $folders = [];
             if ($handle = opendir('.')) {
               while ($filename = readdir($handle)) {
                 if (is_dir($filename) && $filename != "." && $filename != "..") {
@@ -117,9 +117,9 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
 
             <br><br>
             <?php
-            $textareas = array('mainpara', 'searchpara', 'fhpara', 'fhlinkshis', 'fhlinkshers', 'mwpara', 'featurepara', 'respara', 'featurelinks', 'reslinks', 'headtitle', 'headsubtitle', 'latestnews', 'featurepara1', 'featurepara2', 'featurepara3', 'featurepara4', 'photocaption', 'newstext', 'featurespara', 'photocaptionl', 'photocaptionr');
+            $textareas = ['mainpara', 'searchpara', 'fhpara', 'fhlinkshis', 'fhlinkshers', 'mwpara', 'featurepara', 'respara', 'featurelinks', 'reslinks', 'headtitle', 'headsubtitle', 'latestnews', 'featurepara1', 'featurepara2', 'featurepara3', 'featurepara4', 'photocaption', 'newstext', 'featurespara', 'photocaptionl', 'photocaptionr'];
             //needtrans: these fields can be duplicated in another language
-            $needtrans = array('headline', 'maintitle', 'welcome', 'hisside', 'herside', 'headtitle1', 'headtitle2', 'headtitle3', 'momside', 'dadside', 'mainpara', 'featurepara', 'searchpara', 'fhpara', 'mwpara', 'respara', 'headtitle', 'headsubtitle', 'latestnews', 'featuretitle1', 'featuretitle2', 'featuretitle3', 'featuretitle4', 'featurepara1', 'featurepara2', 'featurepara3', 'featurepara4', 'photocaption', 'newstext', 'menutitle', 'phototitlel', 'photocaptionl', 'phototitler', 'photocaptionr', 'topsurnames', 'featurespara');
+            $needtrans = ['headline', 'maintitle', 'welcome', 'hisside', 'herside', 'headtitle1', 'headtitle2', 'headtitle3', 'momside', 'dadside', 'mainpara', 'featurepara', 'searchpara', 'fhpara', 'mwpara', 'respara', 'headtitle', 'headsubtitle', 'latestnews', 'featuretitle1', 'featuretitle2', 'featuretitle3', 'featuretitle4', 'featurepara1', 'featurepara2', 'featurepara3', 'featurepara4', 'photocaption', 'newstext', 'menutitle', 'phototitlel', 'photocaptionl', 'phototitler', 'photocaptionr', 'topsurnames', 'featurespara'];
             foreach ($tmp as $key => $value) {
               $parts = explode("_", $key);
               $n = $parts[0];

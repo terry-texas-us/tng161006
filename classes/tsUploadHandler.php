@@ -128,9 +128,9 @@ class tsUploadHandler extends UploadHandler {
 
     $file_names = $this->getFileNamesParams();
     if (empty($file_names)) {
-      $file_names = array($this->getFileNameParam());
+      $file_names = [$this->getFileNameParam()];
     }
-    $response = array();
+    $response = [];
     foreach ($file_names as $file_name) {
       $file_path = $this->getUploadPath($file_name);
       $success = is_file($file_path) && $file_name[0] !== '.' && unlink($file_path);

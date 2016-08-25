@@ -41,7 +41,7 @@ class Surname_cloud {
       return "";
     }
     // Fetch all surnames into an array
-    $surnames = array();
+    $surnames = [];
     $idx = 0;
     while ($row = tng_fetch_array($result)) {
       $row['id'] = $idx++; // Save $surnames index
@@ -50,7 +50,7 @@ class Surname_cloud {
     }
     // Sort the names array by count
     $countArray = $surnames;
-    $tempArray = array();
+    $tempArray = [];
     foreach ($countArray as $key => $row) {
       $tempArray[$key] = $row['count'];
     }

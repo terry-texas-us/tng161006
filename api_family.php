@@ -45,7 +45,7 @@ if ($famrow['husband']) {
   $husbrow['allow_living'] = $hrights['living'];
   $husbrow['allow_private'] = $hrights['private'];
 
-  $events = array();
+  $events = [];
   $family .= ",\"father\":{" . api_person($husbrow, $fullevents) . "}";
   tng_free_result($result);
 }
@@ -60,18 +60,18 @@ if ($famrow['wife']) {
   $wiferow['allow_living'] = $wrights['living'];
   $wiferow['allow_private'] = $wrights['private'];
 
-  $events = array();
+  $events = [];
   $family .= ",\"mother\":{" . api_person($wiferow, $fullevents) . "}";
   tng_free_result($result);
 }
 
-$events = array();
+$events = [];
 if ($rights['both']) {
-  setMinEvent(array("date" => $famrow['marrdate'], "place" => $famrow['marrplace'], "event" => "MARR"), $famrow['marrdatetr']);
-  setMinEvent(array("date" => $famrow['divdate'], "place" => $famrow['divplace'], "event" => "DIV"), $famrow['divdatetr']);
+  setMinEvent(["date" => $famrow['marrdate'], "place" => $famrow['marrplace'], "event" => "MARR"], $famrow['marrdatetr']);
+  setMinEvent(["date" => $famrow['divdate'], "place" => $famrow['divplace'], "event" => "DIV"], $famrow['divdatetr']);
 
   if ($fullevents && $rights['lds']) {
-    setMinEvent(array("date" => $famrow['sealdate'], "place" => $famrow['sealplace'], "event" => "SLGS"), $famrow['sealdatetr']);
+    setMinEvent(["date" => $famrow['sealdate'], "place" => $famrow['sealplace'], "event" => "SLGS"], $famrow['sealdatetr']);
   }
 
   if ($fullevents) {
@@ -103,7 +103,7 @@ if ($children && tng_num_rows($children)) {
     $childrow['allow_living'] = $crights['living'];
     $childrow['allow_private'] = $crights['private'];
 
-    $events = array();
+    $events = [];
     $family .= "{" . api_person($childrow, $fullevents) . "}";
   }
   $family .= "]";

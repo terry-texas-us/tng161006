@@ -58,7 +58,7 @@ $namestr = getName($row);
 
 $query = "SELECT DISTINCT eventID as eventID FROM $notelinks_table WHERE persfamID = '$personID'";
 $notelinks = tng_query($query);
-$gotnotes = array();
+$gotnotes = [];
 while ($note = tng_fetch_assoc($notelinks)) {
   if (!$note['eventID']) {
     $note['eventID'] = "general";
@@ -69,7 +69,7 @@ tng_free_result($notelinks);
 
 $citquery = "SELECT DISTINCT eventID FROM $citations_table WHERE persfamID = '$personID'";
 $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
-$gotcites = array();
+$gotcites = [];
 while ($cite = tng_fetch_assoc($citresult)) {
   if (!$cite['eventID']) {
     $cite['eventID'] = "general";
@@ -86,11 +86,11 @@ tng_free_result($assocresult);
 
 $query = "SELECT parenttag FROM $events_table WHERE persfamID = '$personID'";
 $morelinks = tng_query($query);
-$gotmore = array();
+$gotmore = [];
 while ($more = tng_fetch_assoc($morelinks)) {
   $gotmore[$more['parenttag']] = "*";
 }
-$reltypes = array("adopted", "birth", "foster", "sealing", "step");
+$reltypes = ["adopted", "birth", "foster", "sealing", "step"];
 $photo = showSmallPhoto($personID, $namestr, 1, 0, 'I', $row['sex']);
 
 header("Content-type: text/html; charset=" . $session_charset);

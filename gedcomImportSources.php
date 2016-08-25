@@ -2,7 +2,7 @@
 function handleSource($persfamID, $prevlevel) {
   global $lineinfo, $savestate;
 
-  $cite = array();
+  $cite = [];
   preg_match("/^@(\S+)@/", $lineinfo['rest'], $matches);
   if ($matches[1]) {
     $cite['sourceID'] = adjustID($matches[1], $savestate['soffset']);
@@ -64,11 +64,11 @@ function getSourceRecord($sourceID, $prevlevel) {
   $prefix = 'S';
   $info = "";
   $changedate = "";
-  $events = array();
-  $stdnotes = array();
+  $events = [];
+  $stdnotes = [];
   $notecount = 0;
   $custeventctr = 0;
-  $mminfo = array();
+  $mminfo = [];
   $mmcount = 0;
   $prevlevel++;
 
@@ -252,11 +252,11 @@ function getRepoRecord($repoID, $prevlevel) {
   $prefix = 'R';
   $info = "";
   $changedate = "";
-  $events = array();
-  $stdnotes = array();
+  $events = [];
+  $stdnotes = [];
   $notecount = 0;
   $custeventctr = 0;
-  $mminfo = array();
+  $mminfo = [];
   $mmcount = 0;
   $prevlevel++;
 

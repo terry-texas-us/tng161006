@@ -31,7 +31,7 @@ $headSection->setTitle(uiTextSnippet('addnewmedia'));
   <section class='container'>
     <?php
     $lastcoll = isset($_COOKIE['lastcoll']) ? $_COOKIE['lastcoll'] : "";
-    $standardtypes = array();
+    $standardtypes = [];
     $moptions = "";
     $likearray = "var like = new Array();\n";
     foreach ($mediatypes as $mediatype) {

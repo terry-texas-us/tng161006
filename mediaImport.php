@@ -20,7 +20,7 @@ $headSection->setTitle(uiTextSnippet('mediaimport'));
 <body>
   <section class='container'>
     <?php
-    $standardtypes = array();
+    $standardtypes = [];
     $moptions = "";
     $likearray = "var like = new Array();\n";
     foreach ($mediatypes as $mediatype) {

@@ -31,7 +31,7 @@ header("Content-type:text/html; charset=" . $session_charset);
               $query = "SELECT * FROM $eventtypes_table WHERE type = \"$prefix\" ORDER BY tag";
               $evresult = tng_query($query);
 
-              $events = array();
+              $events = [];
               while ($eventtype = tng_fetch_assoc($evresult)) {
                 $display = getEventDisplay($eventtype['display']);
                 $option = $display . ($eventtype['tag'] != "EVEN" ? " ({$eventtype['tag']})" : "");

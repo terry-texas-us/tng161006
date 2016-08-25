@@ -112,7 +112,7 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": " . uiTextSnippet('allpla
                             uiTextSnippet('findplaces') . "\"><img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=\"uiTextSnippet(findplaces)\"></a>" : "";
                     if ($place['placecount'] > 1 || ($place['myplace'] != $place['wholeplace'] && !$commaOnEnd)) {
                       $name = "<a href=\"places-oneletter.php?" . $poffset;
-                      $name .= "psearch=$place2\">" . str_replace(array("<", ">"), array("&lt;", "&gt;"), $place['myplace']) . "</a>";
+                      $name .= "psearch=$place2\">" . str_replace(["<", ">"], ["&lt;", "&gt;"], $place['myplace']) . "</a>";
                       echo "$snnum. $name ({$place['placecount']})$searchlink<br>\n";
                     } else {
                       echo "$snnum. $placetitle$searchlink<br>\n";

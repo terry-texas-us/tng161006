@@ -74,7 +74,7 @@ $headSection->setTitle(uiTextSnippet('placelist'));
           tng_free_result($result2);
 
           $searchlink = $specificcount ? " <a href='placesearch.php?psearch=$place2'><img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=''></a>" : "";
-          $name = $place['placecount'] > 1 || !$specificcount ? "<a href=\"places-oneletter.php?offset=$offset&amp;psearch=$place2\">" . str_replace(array("<", ">"), array("&lt;", "&gt;"), $place['myplace']) . "</a> ($tally_fmt)" : $place['myplace'];
+          $name = $place['placecount'] > 1 || !$specificcount ? "<a href=\"places-oneletter.php?offset=$offset&amp;psearch=$place2\">" . str_replace(["<", ">"], ["&lt;", "&gt;"], $place['myplace']) . "</a> ($tally_fmt)" : $place['myplace'];
           if (($count - 1) % $collen == 0) {
             $col++;
           }

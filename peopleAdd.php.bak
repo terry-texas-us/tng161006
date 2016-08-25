@@ -2,7 +2,7 @@
 require 'begin.php';
 require 'adminlib.php';
 
-$adminLogin = 1;
+$adminLogin = true;
 require 'checklogin.php';
 require 'version.php';
 
@@ -12,6 +12,9 @@ if (!$allowAdd) {
   exit;
 }
 require_once 'branches.php';
+
+$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
+$result = tng_query($query);
 
 $revstar = checkReview('I');
 

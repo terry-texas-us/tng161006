@@ -108,7 +108,7 @@ require_once 'eventlib.php';
             $numbranches = tng_num_rows($branchresult);
             $branchlist = explode(",", $row['branch']);
 
-            $descriptions = array();
+            $descriptions = [];
             $options = "";
             while ($branchrow = tng_fetch_assoc($branchresult)) {
               $options .= "  <option value=\"{$branchrow['branch']}\">{$branchrow['description']}</option>\n";

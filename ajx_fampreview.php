@@ -90,7 +90,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   $indtext .= "<br></h4>\n";
   $indtext .= "</td></tr>\n";
 
-  $event = array();
+  $event = [];
   $event = "";
 
   $event['text'] = uiTextSnippet('born');
@@ -150,7 +150,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
       tng_free_result($result);
 
       $event = "";
-      $eventd = array();
+      $eventd = [];
       $event['text'] = uiTextSnippet('married');
       $event['event'] = "MARR";
       $event['type'] = 'F';

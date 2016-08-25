@@ -62,22 +62,22 @@ $paperdim = $pdf->GetPageSize();
 // set the document title
 $title = uiTextSnippet('descendfor') . ' ' . $infoDescend[0][name];
 $pdf->SetTitle($title);
-$titleConfig = array('title' => $title,
+$titleConfig = ['title' => $title,
         'font' => $hdrFont,
         'fontSize' => $hdrFontSize,
         'justification' => 'L',
         'lMargin' => $lftmrg,
         'skipFirst' => false,
         'header' => false,
-        'line' => true);
-$footerConfig = array('font' => $hdrFont,
+        'line' => true];
+$footerConfig = ['font' => $hdrFont,
         'fontSizeLarge' => 8,
         'fontSizeSmall' => 6,
         'printWordPage' => true,
         'bMargin' => $botmrg,
         'lMargin' => $lftmrg,
         'skipFirst' => false,
-        'line' => false);
+        'line' => false];
 
 // set margins
 $pdf->SetTopMargin($topmrg);

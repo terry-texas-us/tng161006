@@ -111,13 +111,13 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 if ($albumID) {
   $query2 = "SELECT mediaID FROM $albumlinks_table WHERE albumID = \"$albumID\"";
   $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
-  $alreadygot = array();
+  $alreadygot = [];
   while ($row2 = tng_fetch_assoc($result2)) {
     $alreadygot[] = $row2['mediaID'];
   }
   tng_free_result($result2);
 } else {
-  $alreadygot[] = array();
+  $alreadygot[] = [];
 }
 
 header("Content-type:text/html; charset=" . $session_charset);

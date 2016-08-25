@@ -50,22 +50,22 @@ function api_person($row, $fullevents = false) {
   $person .= "\"title\":\"$title\",\"prefix\":\"$prefix\",\"suffix\":\"$suffix\",\"nickname\":\"$nickname\",\"gender\":\"{$row['sex']}\",\"changedate\":\"" . displayDate($row['changedate'], false) . "\"";
 
   if ($row['allow_living'] && $row['allow_private']) {
-    setMinEvent(array("date" => $row['birthdate'], "place" => $row['birthplace'], "event" => "BIRT"), $row['birthdatetr']);
-    setMinEvent(array("date" => $row['altbirthdate'], "place" => $row['altbirthplace'], "event" => "CHR"), $row['altbirthdatetr']);
+    setMinEvent(["date" => $row['birthdate'], "place" => $row['birthplace'], "event" => "BIRT"], $row['birthdatetr']);
+    setMinEvent(["date" => $row['altbirthdate'], "place" => $row['altbirthplace'], "event" => "CHR"], $row['altbirthdatetr']);
 
     if ($fullevents && $rights['lds']) {
-      setMinEvent(array("date" => $row['baptdate'], "place" => $row['baptplace'], "event" => "BAPL"), $row['baptdatetr']);
-      setMinEvent(array("date" => $row['confdate'], "place" => $row['confplace'], "event" => "CONL"), $row['confdatetr']);
-      setMinEvent(array("date" => $row['initdate'], "place" => $row['initplace'], "event" => "INIT"), $row['initdatetr']);
-      setMinEvent(array("date" => $row['endldate'], "place" => $row['endlplace'], "event" => "ENDL"), $row['endldatetr']);
+      setMinEvent(["date" => $row['baptdate'], "place" => $row['baptplace'], "event" => "BAPL"], $row['baptdatetr']);
+      setMinEvent(["date" => $row['confdate'], "place" => $row['confplace'], "event" => "CONL"], $row['confdatetr']);
+      setMinEvent(["date" => $row['initdate'], "place" => $row['initplace'], "event" => "INIT"], $row['initdatetr']);
+      setMinEvent(["date" => $row['endldate'], "place" => $row['endlplace'], "event" => "ENDL"], $row['endldatetr']);
     }
 
     if ($fullevents) {
       doCustomEvents($personID, 'I');
     }
 
-    setMinEvent(array("date" => $row['deathdate'], "place" => $row['deathplace'], "event" => "DEAT"), $row['deathdatetr']);
-    setMinEvent(array("date" => $row['burialdate'], "place" => $row['burialplace'], "event" => "BURI"), $row['burialdatetr']);
+    setMinEvent(["date" => $row['deathdate'], "place" => $row['deathplace'], "event" => "DEAT"], $row['deathdatetr']);
+    setMinEvent(["date" => $row['burialdate'], "place" => $row['burialplace'], "event" => "BURI"], $row['burialdatetr']);
   }
 
   $eventstr = processEvents($events);

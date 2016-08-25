@@ -19,7 +19,7 @@ if ($session_charset != "UTF-8") {
 
 $display = addslashes($display);
 
-$stdcolls = array("photos", "histories", "headstones", "documents", "recordings", "videos");
+$stdcolls = ["photos", "histories", "headstones", "documents", "recordings", "videos"];
 $collid = cleanID($collid);
 $newcollid = 0;
 if (!in_array($collid, $stdcolls)) {

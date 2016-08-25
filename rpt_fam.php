@@ -30,10 +30,10 @@ $pdf->AddFont($rptFont, 'B');
 $ldsOK = determineLDSRights(true);
 
 // compute the label width based on the longest string that will be displayed
-$labelwidth = getMaxStringWidth(array(uiTextSnippet('name'), uiTextSnippet('born'), uiTextSnippet('christened'), uiTextSnippet('died'), uiTextSnippet('buried'),
-        uiTextSnippet('cremated'), uiTextSnippet('spouse'), uiTextSnippet('married')), $lblFont, 'B', $lblFontSize, ':');
+$labelwidth = getMaxStringWidth([uiTextSnippet('name'), uiTextSnippet('born'), uiTextSnippet('christened'), uiTextSnippet('died'), uiTextSnippet('buried'),
+        uiTextSnippet('cremated'), uiTextSnippet('spouse'), uiTextSnippet('married')], $lblFont, 'B', $lblFontSize, ':');
 if ($ldsOK) {
-  $labelwidth = getMaxStringWidth(array(uiTextSnippet('baptizedlds'), uiTextSnippet('endowedlds'), uiTextSnippet('sealedslds')), $lblFont, 'B', $lblFontSize, ':', $labelwidth);
+  $labelwidth = getMaxStringWidth([uiTextSnippet('baptizedlds'), uiTextSnippet('endowedlds'), uiTextSnippet('sealedslds')], $lblFont, 'B', $lblFontSize, ':', $labelwidth);
 }
 
 // header and footer config
@@ -54,22 +54,22 @@ if ($blankform == 1) {
   }
 }
 $pdf->SetTitle($title);
-$titleConfig = array('title' => $title,
+$titleConfig = ['title' => $title,
         'font' => $hdrFont,
         'fontSize' => $hdrFontSize,
         'justification' => 'L',
         'lMargin' => $lftmrg,
         'skipFirst' => false,
         'header' => false,
-        'line' => false);
-$footerConfig = array('font' => $hdrFont,
+        'line' => false];
+$footerConfig = ['font' => $hdrFont,
         'fontSizeLarge' => 8,
         'fontSizeSmall' => 6,
         'printWordPage' => true,
         'bMargin' => $botmrg,
         'lMargin' => $lftmrg,
         'skipFirst' => false,
-        'line' => false);
+        'line' => false];
 
 // set margins
 $pdf->SetTopMargin($topmrg);
@@ -86,9 +86,9 @@ $pdf->AddPage();
 $paperdim = $pdf->GetPageSize();
 
 // citation vars
-$citations = array();
-$citedisplay = array();
-$citestring = array();
+$citations = [];
+$citedisplay = [];
+$citestring = [];
 
 // create a blank form if that's what they asked for
 if ($blankform == 1) {

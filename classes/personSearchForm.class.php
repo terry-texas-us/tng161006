@@ -9,7 +9,7 @@ class PersonSearchForm {
     $num_args = func_num_args();
 
     if (method_exists($this, $construct = '__construct' . $num_args)) {
-      call_user_func_array(array($this, $construct), $args);
+      call_user_func_array([$this, $construct], $args);
     }
   }
 

@@ -74,7 +74,7 @@ function displayIndividual($key, $generation, $slot, $column) {
     if ($key) {
       $parentfamID = "";
       $locparentset = $parentset;
-      $parentfamIDs = array();
+      $parentfamIDs = [];
       $parents = getChildFamily($key, "parentorder");
       if ($parents) {
         $parentscount = tng_num_rows($parents);
@@ -134,7 +134,7 @@ $disallowgedcreate = $treerow['disallowgedcreate'];
 $allowpdf = !$treerow['disallowpdf'] || ($allow_pdf && $rightbranch);
 tng_free_result($treeResult);
 
-$columns = array();
+$columns = [];
 
 $pedmax = pow(2, intval($generations));
 $key = $personID;

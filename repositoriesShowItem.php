@@ -58,12 +58,12 @@ $repotext .= beginListItem('info');
 $repotext .= "<table class=\"table tfixed\">\n";
 $repotext .= "<col class=\"labelcol\"/><col style=\"width:{$datewidth}px\"/><col/>\n";
 if ($reporow['reponame']) {
-  $repotext .= showEvent(array("text" => uiTextSnippet('name'), "fact" => $reporow['reponame']));
+  $repotext .= showEvent(["text" => uiTextSnippet('name'), "fact" => $reporow['reponame']]);
 }
 if ($reporow['addressID']) {
   $reporow['isrepo'] = true;
   $extras = getFact($reporow);
-  $repotext .= showEvent(array("text" => uiTextSnippet('address'), "fact" => $extras));
+  $repotext .= showEvent(["text" => uiTextSnippet('address'), "fact" => $extras]);
 }
 
 //do custom events
@@ -75,9 +75,9 @@ foreach ($events as $event) {
   $repotext .= showEvent($event);
 }
 if ($allow_admin && $allowEdit) {
-  $repotext .= showEvent(array("text" => uiTextSnippet('repoid'), "date" => $repoID, "place" => "<a href=\"repositoriesEdit.php?repoID=$repoID&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>", "np" => 1));
+  $repotext .= showEvent(["text" => uiTextSnippet('repoid'), "date" => $repoID, "place" => "<a href=\"repositoriesEdit.php?repoID=$repoID&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>", "np" => 1]);
 } else {
-  $repotext .= showEvent(array("text" => uiTextSnippet('repoid'), "date" => $repoID));
+  $repotext .= showEvent(["text" => uiTextSnippet('repoid'), "date" => $repoID]);
 }
 
 if ($soffset) {
@@ -105,7 +105,7 @@ if ($numrows >= $maxsearchresults) {
 tng_free_result($sresult);
 
 if ($repolinktext) {
-  $repotext .= showEvent(array("text" => uiTextSnippet('indlinked'), "fact" => $repolinktext));
+  $repotext .= showEvent(["text" => uiTextSnippet('indlinked'), "fact" => $repolinktext]);
 }
 
 $repotext .= "</table>\n";

@@ -40,10 +40,10 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
     $navList->appendItem([true, "dataSecondaryProcesses.php", uiTextSnippet('secondarymaint'), "second"]);
     echo $navList->build("import");
 
-    $pciteevents = array("NAME", "BIRT", "CHR", "SEX", "DEAT", "BURI", "BAPL", "CONL", "INIT", "ENDL", "SLGC", "NICK", "NSFX", "TITL", "CHAN", "NPFX", "NSFX", "FAMC", "FAMS", "OBJE", "IMAGE", "SOUR", "ASSO", "_LIVING");
-    $fciteevents = array("HUSB", "WIFE", "MARR", "DIV", "SLGS", "CHAN", "CHIL", "OBJE", "SOUR", "ASSO", "_LIVING");
-    $sciteevents = array("ABBR", "AUTH", "CALN", "PUBL", "TITL", "CHAN", "DATA", "TEXT", "OBJE", "REPO");
-    $rciteevents = array("NAME", "ADDR", "CHAN", "OBJE");
+    $pciteevents = ["NAME", "BIRT", "CHR", "SEX", "DEAT", "BURI", "BAPL", "CONL", "INIT", "ENDL", "SLGC", "NICK", "NSFX", "TITL", "CHAN", "NPFX", "NSFX", "FAMC", "FAMS", "OBJE", "IMAGE", "SOUR", "ASSO", "_LIVING"];
+    $fciteevents = ["HUSB", "WIFE", "MARR", "DIV", "SLGS", "CHAN", "CHIL", "OBJE", "SOUR", "ASSO", "_LIVING"];
+    $sciteevents = ["ABBR", "AUTH", "CALN", "PUBL", "TITL", "CHAN", "DATA", "TEXT", "OBJE", "REPO"];
+    $rciteevents = ["NAME", "ADDR", "CHAN", "OBJE"];
 
     set_time_limit(0);
     if ($remotefile && $remotefile != "none") {
@@ -73,7 +73,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
     //get custom event types
     $query = "SELECT eventtypeID, tag, description, keep, type, display FROM $eventtypes_table";
     $result = tng_query($query);
-    $custeventlist = array();
+    $custeventlist = [];
     while ($row = tng_fetch_assoc($result)) {
       $eventtype = $row['type'] . "_" . $row['tag'] . "_" . $row['description'];
       if ($row['keep'] && !in_array($eventtype, $custeventlist)) {
@@ -87,10 +87,10 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
     function getLine() {
       global $fp, $lineending;
 
-      $lineinfo = array();
+      $lineinfo = [];
       if ($line = ltrim(fgets($fp, 1024))) {
-        $patterns = array("/��.*��/", "/��.*/", "/.*��/", "/@@/");
-        $replacements = array("", "", "", "@");
+		$patterns = ["/®®.*¯¯/", "/®®.*/", "/.*¯¯/", "/@@/"];
+		$replacements = ["", "", "", "@"];
         $line = preg_replace($patterns, $replacements, $line);
 
         preg_match("/^(\d+)\s+(\S+) ?(.*)$/", $line, $matches);

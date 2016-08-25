@@ -18,9 +18,9 @@ $row['sqlselect'] = preg_replace('/\"/', '&#34;', $row['sqlselect']);
 
 tng_free_result($result);
 
-$dontdo = array("ADDR", "BIRT", "CHR", "DEAT", "BURI", "NAME", "NICK", "TITL", "NSFX", "NPFX");
+$dontdo = ["ADDR", "BIRT", "CHR", "DEAT", "BURI", "NAME", "NICK", "TITL", "NSFX", "NPFX"];
 
-$dfields = array();
+$dfields = [];
 $dfields['personID'] = "personid";
 $dfields['fullname'] = "fullname";
 $dfields['lastfirst'] = "lastfirst";
@@ -61,7 +61,7 @@ if ($allow_lds) {
   $dfields['psealplace'] = "ldssealpplace";
 }
 
-$cfields = array();
+$cfields = [];
 $cfields['personID'] = "personid";
 $cfields['firstname'] = "firstname";
 $cfields['lastname'] = "lastname";
@@ -117,7 +117,7 @@ if ($allow_lds) {
   $cfields['psealplace'] = "ldssealpplace";
 }
 
-$ofields = array();
+$ofields = [];
 $ofields['contains'] = "contains";
 $ofields['starts with'] = "startswith";
 $ofields['ends with'] = "endswith";
@@ -130,13 +130,13 @@ $ofields['currday'] = "currentday";
 $ofields['today'] = "today";
 $ofields['to_days'] = "convtodays";
 
-$subtypes = array();
+$subtypes = [];
 $subtypes['dt'] = uiTextSnippet('rptdate');
 $subtypes['tr'] = uiTextSnippet('rptdatetr');
 $subtypes['pl'] = uiTextSnippet('place');
 $subtypes['fa'] = uiTextSnippet('fact');
 
-$cetypes = array();
+$cetypes = [];
 $query = "SELECT eventtypeID, tag, display FROM $eventtypes_table WHERE keep=\"1\" AND type=\"I\" ORDER BY display";
 $ceresult = tng_query($query);
 while ($cerow = tng_fetch_assoc($ceresult)) {
@@ -333,8 +333,8 @@ $headSection->setTitle(uiTextSnippet('modifyreport'));
                                 onDblClick="RemovefromDisplay(document.form1.finalcriteria);">
                           <?php
                           $criteriafields = explode($lineending, $row['criteria']);
-                          $mnemonics = array("eq", "neq", "gt", "gte", "lt", "lte");
-                          $symbols = array("=", "!=", ">", ">=", "<", "<=");
+                          $mnemonics = ["eq", "neq", "gt", "gte", "lt", "lte"];
+                          $symbols = ["=", "!=", ">", ">=", "<", "<="];
                           for ($i = 0; $i < count($criteriafields) - 1; $i++) {
                             $cfield = preg_replace("'\"'", "", $criteriafields[$i]);
                             if (isset($cfields[$cfield])) {

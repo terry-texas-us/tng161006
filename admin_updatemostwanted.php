@@ -46,7 +46,7 @@ if ($ID) {
 
 //get thumbnail path
 $thumbpath = "";
-$size = array(0, 0);
+$size = [0, 0];
 if ($mediaID && $mediaID != $orgmediaID) {
   initMediaTypes();
   $query = "SELECT * FROM $media_table WHERE mediaID = '$mediaID'";

@@ -155,7 +155,7 @@ function showEventRow($datefield, $placefield, $label, $persfamID) {
   global $row;
   global $noclass;
 
-  $ldsarray = array("BAPL", "CONL", "INIT", "ENDL", "SLGS", "SLGC");
+  $ldsarray = ["BAPL", "CONL", "INIT", "ENDL", "SLGS", "SLGC"];
 
   $short = " style='width: 100px'";
   $long = $noclass ? " style='width: 270px'" : " class='longfield'";
@@ -216,7 +216,7 @@ function buildEventRow($datefield, $placefield, $label, $persfamID) {
   global $gotcites;
   global $row;
   
-  $ldsarray = array("BAPL", "CONL", "INIT", "ENDL", "SLGS", "SLGC");
+  $ldsarray = ["BAPL", "CONL", "INIT", "ENDL", "SLGS", "SLGC"];
 
   $out = "<div class='row'>\n";
   $out .= "<div class='col-md-2'>" . uiTextSnippet($label) . ":</div>\n";

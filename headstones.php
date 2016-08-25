@@ -134,9 +134,9 @@ if ($location) {
     <h2><img class='icon-md' src='svg/headstone.svg'><?php echo $headerLabel; ?></h2>
     <br clear='all'>
     <?php
-    $hiddenfields[] = array('name' => 'country', 'value' => $country);
-    $hiddenfields[] = array('name' => 'state', 'value' => $state);
-    $hiddenfields[] = array('name' => 'county', 'value' => $county);
+    $hiddenfields[] = ['name' => 'country', 'value' => $country];
+    $hiddenfields[] = ['name' => 'state', 'value' => $state];
+    $hiddenfields[] = ['name' => 'county', 'value' => $county];
 
     $body = "";
     $cemcount = 0;
@@ -151,7 +151,7 @@ if ($location) {
         FROM $media_table LEFT JOIN $medialinks_table on $media_table.mediaID = $medialinks_table.mediaID
         WHERE mediatypeID = 'headstones' AND cemeteryID = '$thiscem' ORDER BY description LIMIT $newoffset" . $maxsearchresults;
       if (!$subquery) {
-        $cemetery = array();
+        $cemetery = [];
         $cemetery['cemname'] = uiTextSnippet('nocemetery');
         $subquery = "done";
       }

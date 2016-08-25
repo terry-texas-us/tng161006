@@ -24,7 +24,7 @@ function relateSelect($label) {
   $pout = "<select name=\"$fieldname\">\n";
   $pout .= "<option value=''></option>\n";
 
-  $reltypes = array("adopted", "birth", "foster", "sealing", "step");
+  $reltypes = ["adopted", "birth", "foster", "sealing", "step"];
   foreach ($reltypes as $reltype) {
     $pout .= "<option value=\"$reltype\"";
     if ($parent[$fieldname] == $reltype || $parent[$fieldname] == uiTextSnippet($reltype)) {

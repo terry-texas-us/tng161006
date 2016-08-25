@@ -2,7 +2,7 @@
 require 'begin.php';
 require 'adminlib.php';
 
-$adminLogin = 1;
+$adminLogin = true;
 require 'checklogin.php';
 
 initMediaTypes();

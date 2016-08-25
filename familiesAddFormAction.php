@@ -48,7 +48,7 @@ deleteCitations($familyID);
 deleteNoteLinks($familyID);
 deleteChildren($familyID);
 
-$places = array();
+$places = [];
 if (trim($marrplace) && !in_array($marrplace, $places)) {
   array_push($places, $marrplace);
 }

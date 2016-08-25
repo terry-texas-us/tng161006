@@ -52,9 +52,9 @@ function numberToRoman($num) {
   $result = '';
 
   // Declare a lookup array that we will use to traverse the number:
-  $lookup = array('m' => 1000, 'cm' => 900, 'd' => 500, 'cd' => 400,
+  $lookup = ['m' => 1000, 'cm' => 900, 'd' => 500, 'cd' => 400,
           'c' => 100, 'xc' => 90, 'l' => 50, 'xl' => 40,
-          'x' => 10, 'ix' => 9, 'v' => 5, 'iv' => 4, 'i' => 1);
+          'x' => 10, 'ix' => 9, 'v' => 5, 'iv' => 4, 'i' => 1];
 
   foreach ($lookup as $roman => $value) {
     $matches = intval($n / $value);
@@ -67,15 +67,15 @@ function numberToRoman($num) {
 
 function numberToText($num) {
 
-  $lookup = array(1 => 'first', 2 => 'second', 3 => 'third', 4 => 'fourth',
+  $lookup = [1 => 'first', 2 => 'second', 3 => 'third', 4 => 'fourth',
           5 => 'fifth', 6 => 'sixth', 7 => 'seventh', 8 => 'eighth',
           9 => 'ninth', 10 => 'tenth', 11 => 'eleventh', 12 => 'twelfth',
           13 => 'thirteenth', 14 => 'fourteenth', 15 => 'fifteenth',
           16 => 'sixteenth', 17 => 'seventeenth', 18 => 'eighteenth',
           19 => 'ninetenth', 20 => 'twentieth', 30 => 'thirtieth',
-          40 => 'fortieth', 50 => 'fiftieth', 60 => 'sixtieth');
-  $name = array(20 => 'twenty', 30 => 'thirty', 40 => 'forty',
-          50 => 'fifty', 60 => 'sixty');
+          40 => 'fortieth', 50 => 'fiftieth', 60 => 'sixtieth'];
+  $name = [20 => 'twenty', 30 => 'thirty', 40 => 'forty',
+          50 => 'fifty', 60 => 'sixty'];
 
   if ($num >= 1 && $num <= 20) {
     return $lookup[$num];
@@ -91,7 +91,7 @@ function numberToText($num) {
 }
 
 function genToRelationship($gen) {
-  $lookup = array(1 => '', 2 => 'Parents', 3 => 'Grandparents', 4 => 'Great Grandparents');
+  $lookup = [1 => '', 2 => 'Parents', 3 => 'Grandparents', 4 => 'Great Grandparents'];
 
   if ($gen == 1) {
     return '';
@@ -135,7 +135,7 @@ function getMaxStringWidth($strings, $font, $style, $size, $append = '', $oldmax
 }
 
 function getMyAncestors($focalPerson, $tree, $gen) {
-  $ancestorInfo = array();
+  $ancestorInfo = [];
 
   //     ind --------+
   //     gen -----+  |

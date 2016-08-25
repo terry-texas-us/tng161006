@@ -70,7 +70,7 @@ if ($xsrcaction) {
 }
 $modifymsg = uiTextSnippet($modmsg);
 $count = 0;
-$items = array();
+$items = [];
 
 foreach (array_keys($_POST) as $key) {
   if (substr($key, 0, 3) == "del") {

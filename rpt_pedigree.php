@@ -28,22 +28,22 @@ if ($blankform) {
   $title = uiTextSnippet('pedigreefor') . " " . getName($infoAncestors[0][0]);
 }
 $pdf->SetTitle($title);
-$titleConfig = array('title' => $title,
+$titleConfig = ['title' => $title,
         'font' => $hdrFont,
         'fontSize' => $hdrFontSize,
         'justification' => 'L',
         'lMargin' => $lftmrg,
         'skipFirst' => false,
         'header' => false,
-        'line' => false);
-$footerConfig = array('font' => $hdrFont,
+        'line' => false];
+$footerConfig = ['font' => $hdrFont,
         'fontSizeLarge' => 8,
         'fontSizeSmall' => 6,
         'printWordPage' => true,
         'bMargin' => $botmrg,
         'lMargin' => $lftmrg,
         'skipFirst' => false,
-        'line' => false);
+        'line' => false];
 
 
 // set margins
@@ -86,16 +86,16 @@ function drawIndInfo($ind, $x, $y, $w, $listwhat, $xh = 0) {
   $pdf->CellFit($w, $lineheight + $xh, ($ind['firstname'] || $ind['lastname'] ? getName($ind) : ''), 0, 1, 'L', 0, '', 1, 0);
   $pdf->SetFont($rptFont, '', $rptFontSize);
   if ($listwhat == 0) {
-    $list = array('birthdate', 'birthplace', 'marrdate', 'marrplace', 'deathdate', 'deathplace');
+    $list = ['birthdate', 'birthplace', 'marrdate', 'marrplace', 'deathdate', 'deathplace'];
   } else {
     if ($listwhat == 1) {
-      $list = array('birthdate', 'birthplace', 'deathdate', 'deathplace');
+      $list = ['birthdate', 'birthplace', 'deathdate', 'deathplace'];
     } else {
       if ($listwhat == 2) {
-        $list = array('birthdate', 'deathdate');
+        $list = ['birthdate', 'deathdate'];
       } else {
         if ($listwhat == 3) {
-          $list = array('birthdate');
+          $list = ['birthdate'];
         }
       }
     }
@@ -269,7 +269,7 @@ function createBlankChart($gens, $topy) {
 
   $lineheight = 0.1;
 
-  $yval = array();
+  $yval = [];
   if (!is_numeric($startnum) || $startnum < 1) {
     $startnum = 1;
   } else {
@@ -285,7 +285,7 @@ function createBlankChart($gens, $topy) {
   $mfhalf = ($mothboxheight + $fathboxheight) / 2;
   $mhalf = $mothboxheight / 2;
   $fhalf = $fathboxheight / 2;
-  $abbrevs = array(uiTextSnippet('capbirthabbr'), uiTextSnippet('capplaceabbr'), uiTextSnippet('capdeathabbr'), uiTextSnippet('capplaceabbr'));
+  $abbrevs = [uiTextSnippet('capbirthabbr'), uiTextSnippet('capplaceabbr'), uiTextSnippet('capdeathabbr'), uiTextSnippet('capplaceabbr')];
   if ($gens <= 4) {
     $moretopmrg = 0.2;
 
@@ -571,16 +571,16 @@ function drawHusbWifeCombo($w, $num, $fh, $mh, $hsp, $vsp, $endspace = 0, $drawl
 
   // what characters are we going to display?
   if ($listmode == 0) {
-    $charlisth = array(uiTextSnippet('capbirthabbr'), uiTextSnippet('capplaceabbr'), uiTextSnippet('capmarrabbr'), uiTextSnippet('capplaceabbr'), uiTextSnippet('capdeathabbr'), uiTextSnippet('capplaceabbr'));
-    $charlistw = array(uiTextSnippet('capbirthabbr'), uiTextSnippet('capplaceabbr'), uiTextSnippet('capdeathabbr'), uiTextSnippet('capplaceabbr'));
+    $charlisth = [uiTextSnippet('capbirthabbr'), uiTextSnippet('capplaceabbr'), uiTextSnippet('capmarrabbr'), uiTextSnippet('capplaceabbr'), uiTextSnippet('capdeathabbr'), uiTextSnippet('capplaceabbr')];
+    $charlistw = [uiTextSnippet('capbirthabbr'), uiTextSnippet('capplaceabbr'), uiTextSnippet('capdeathabbr'), uiTextSnippet('capplaceabbr')];
   } else {
     if ($listmode == 1) {
-      $charlisth = array(uiTextSnippet('capbirthabbr'), uiTextSnippet('capdeathabbr'));
-      $charlistw = array(uiTextSnippet('capbirthabbr'), uiTextSnippet('capdeathabbr'));
+      $charlisth = [uiTextSnippet('capbirthabbr'), uiTextSnippet('capdeathabbr')];
+      $charlistw = [uiTextSnippet('capbirthabbr'), uiTextSnippet('capdeathabbr')];
     } else {
       if ($listmode == 2) {
-        $charlisth = array(uiTextSnippet('capbirthabbr'));
-        $charlistw = array(uiTextSnippet('capbirthabbr'));
+        $charlisth = [uiTextSnippet('capbirthabbr')];
+        $charlistw = [uiTextSnippet('capbirthabbr')];
       }
     }
   }

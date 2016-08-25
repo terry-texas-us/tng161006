@@ -12,9 +12,9 @@ if (!$allowAdd) {
   exit;
 }
 
-$dontdo = array("ADDR", "BIRT", "CHR", "DEAT", "BURI", "NAME", "NICK", "TITL", "NSFX", "NPFX");
+$dontdo = ["ADDR", "BIRT", "CHR", "DEAT", "BURI", "NAME", "NICK", "TITL", "NSFX", "NPFX"];
 
-$dfields = array();
+$dfields = [];
 $dfields['personID'] = "personid";
 $dfields['fullname'] = "fullname";
 $dfields['lastfirst'] = "lastfirst";
@@ -55,7 +55,7 @@ if ($allow_lds) {
   $dfields['psealplace'] = "ldssealpplace";
 }
 
-$cfields = array();
+$cfields = [];
 $cfields['personID'] = "personid";
 $cfields['firstname'] = "firstname";
 $cfields['lastname'] = "lastname";
@@ -111,7 +111,7 @@ if ($allow_lds) {
   $cfields['psealplace'] = "ldssealpplace";
 }
 
-$ofields = array();
+$ofields = [];
 $ofields['contains'] = "contains";
 $ofields['starts with'] = "startswith";
 $ofields['ends with'] = "endswith";
@@ -124,13 +124,13 @@ $ofields['currday'] = "currentday";
 $ofields['today'] = "today";
 $ofields['to_days'] = "convtodays";
 
-$subtypes = array();
+$subtypes = [];
 $subtypes['dt'] = uiTextSnippet('rptdate');
 $subtypes['tr'] = uiTextSnippet('rptdatetr');
 $subtypes['pl'] = uiTextSnippet('place');
 $subtypes['fa'] = uiTextSnippet('fact');
 
-$cetypes = array();
+$cetypes = [];
 $query = "SELECT eventtypeID, tag, display FROM $eventtypes_table WHERE keep=\"1\" AND type=\"I\" ORDER BY display";
 $ceresult = tng_query($query);
 while ($cerow = tng_fetch_assoc($ceresult)) {

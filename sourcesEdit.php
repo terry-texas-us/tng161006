@@ -31,7 +31,7 @@ $row['allow_living'] = 1;
 
 $query = "SELECT DISTINCT eventID as eventID FROM $notelinks_table WHERE persfamID = '$sourceID'";
 $notelinks = tng_query($query);
-$gotnotes = array();
+$gotnotes = [];
 while ($note = tng_fetch_assoc($notelinks)) {
   if (!$note['eventID']) {
     $note['eventID'] = "general";

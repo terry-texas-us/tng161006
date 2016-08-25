@@ -14,7 +14,7 @@ if (isset($_SESSION['postvars']) && is_array($_SESSION['postvars'])) {
   $postvars = $_SESSION['postvars'] = "";
 } elseif (!$adminLogin) {
   $postvars = $_SESSION['postvars'] = $_POST;
-  $nodest_array = array("admi", "ajx_", "rpt_", "find", "tngr", "gedc", "goog", "img_");
+  $nodest_array = ["admi", "ajx_", "rpt_", "find", "tngr", "gedc", "goog", "img_"];
   if (!$tngprint && !in_array(substr(basename($thispage), 0, 4), $nodest_array) && !$maintenance_mode) {
     $protocol = $_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off" ? "https://" : "http://";
     $destinationpage = $_SESSION['destinationpage8'] = $protocol . $_SERVER['HTTP_HOST'];

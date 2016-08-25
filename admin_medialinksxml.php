@@ -12,7 +12,7 @@ if ($albumID) {
   $query2 = "SELECT personID as entityID FROM $medialinks_table WHERE mediaID = '$mediaID' AND linktype = '$linktype'";
 }
 $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
-$alreadygot = array();
+$alreadygot = [];
 while ($row2 = tng_fetch_assoc($result2)) {
   $alreadygot[] = $row2['entityID'];
 }

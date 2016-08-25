@@ -14,9 +14,9 @@ $allow_lds_this = "";
 
 $flags['imgprev'] = true;
 
-$citations = array();
-$citedisplay = array();
-$citestring = array();
+$citations = [];
+$citedisplay = [];
+$citestring = [];
 $citedispctr = 0;
 
 $ldsOK = determineLDSRights();
@@ -483,7 +483,7 @@ $headSection->setTitle($headTitle);
       $query = "SELECT passocID, relationship, reltype FROM $assoc_table WHERE personID = '$familyID'";
       $assocresult = tng_query($query);
       while ($assoc = tng_fetch_assoc($assocresult)) {
-        $assoctext .= showEvent(array("text" => uiTextSnippet('association'), "fact" => formatAssoc($assoc)));
+        $assoctext .= showEvent(["text" => uiTextSnippet('association'), "fact" => formatAssoc($assoc)]);
       }
       tng_free_result($assocresult);
       if ($assoctext) {

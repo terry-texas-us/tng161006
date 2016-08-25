@@ -180,7 +180,7 @@ $headSection->setTitle(uiTextSnippet('modifyeventtype'));
     <?php
     $dispvalues = explode("|", $row['display']);
     $numvalues = count($dispvalues);
-    $disppairs = array();
+    $disppairs = [];
     if ($numvalues > 1) {
       for ($i = 0; $i < $numvalues; $i += 2) {
         $lang = $dispvalues[$i];
@@ -237,7 +237,7 @@ $headSection->setTitle(uiTextSnippet('modifyeventtype'));
     return rval;
   }
   <?php
-  $messages = array('EVEN', 'ADOP', 'ADDR', 'ALIA', 'ANCI', 'BARM', 'BASM', 'CAST', 'CENS', 'CHRA', 'CONF', 'CREM', 'DESI', 'DSCR', 'EDUC', 'EMIG', 'FCOM', 'GRAD', 'IDNO', 'IMMI', 'LANG', 'NATI', 'NATU', 'NCHI', 'NMR', 'OCCU', 'ORDI', 'ORDN', 'PHON', 'PROB', 'PROP', 'REFN', 'RELI', 'RESI', 'RESN', 'RETI', 'RFN', 'RIN', 'SSN', 'WILL', 'ANUL', 'DIV', 'DIVF', 'ENGA', 'MARB', 'MARC', 'MARR', 'MARL');
+  $messages = ['EVEN', 'ADOP', 'ADDR', 'ALIA', 'ANCI', 'BARM', 'BASM', 'CAST', 'CENS', 'CHRA', 'CONF', 'CREM', 'DESI', 'DSCR', 'EDUC', 'EMIG', 'FCOM', 'GRAD', 'IDNO', 'IMMI', 'LANG', 'NATI', 'NATU', 'NCHI', 'NMR', 'OCCU', 'ORDI', 'ORDN', 'PHON', 'PROB', 'PROP', 'REFN', 'RELI', 'RESI', 'RESN', 'RETI', 'RFN', 'RIN', 'SSN', 'WILL', 'ANUL', 'DIV', 'DIVF', 'ENGA', 'MARB', 'MARC', 'MARR', 'MARL'];
   foreach ($messages as $msg) {
     echo "messages['$msg'] = \"" . uiTextSnippet($msg) . "\";\n";
   }

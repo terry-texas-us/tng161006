@@ -11,11 +11,11 @@ require $subroot . 'importconfig.php';
 require 'adminlog.php';
 require 'prefixes.php';
 
-$allsources = array();
-$allrepos = array();
-$xnotes = array();
-$citations = array();
-$placelist = array();
+$allsources = [];
+$allrepos = [];
+$xnotes = [];
+$citations = [];
+$placelist = [];
 
 if (!$exportmedia) {
   $exportmedia = 0;
@@ -59,13 +59,13 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     function getCitations($persfamID) {
       global $citations_table;
 
-      $citations = array();
+      $citations = [];
       $citquery = "SELECT citationID, page, quay, citedate, citetext, note, sourceID, description, eventID FROM $citations_table WHERE persfamID = '$persfamID' ORDER BY eventID";
       $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
       while ($cite = tng_fetch_assoc($citresult)) {
         $eventID = $cite['eventID'] ? $cite['eventID'] : "NAME";
-        $citations[$eventID][] = array("page" => $cite['page'], "quay" => $cite['quay'], "citedate" => $cite['citedate'], "citetext" => $cite['citetext'], "note" => $cite['note'], "sourceID" => $cite['sourceID'], "description" => $cite['description']);
+        $citations[$eventID][] = ["page" => $cite['page'], "quay" => $cite['quay'], "citedate" => $cite['citedate'], "citetext" => $cite['citetext'], "note" => $cite['note'], "sourceID" => $cite['sourceID'], "description" => $cite['description']];
       }
       return $citations;
     }
@@ -170,7 +170,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     function getStdExtras($persfamID, $level) {
       global $events_table;
 
-      $stdex = array();
+      $stdex = [];
       $query = "SELECT age, agency, cause, addressID, parenttag FROM $events_table WHERE persfamID = '$persfamID' AND parenttag != \"\" ORDER BY parenttag";
       $stdextras = tng_query($query);
       while ($stdextra = tng_fetch_assoc($stdextras)) {
@@ -220,14 +220,14 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           WHERE $notelinks_table.persfamID = '$id'
           ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum, ID";
       $notelinks = tng_query($query);
-      $notearray = array();
+      $notearray = [];
       while ($notelink = tng_fetch_assoc($notelinks)) {
         $eventid = $notelink['eventID'] ? $notelink['eventID'] : "-x--general--x-";
         $newnote = $notelink['noteID'] ? "@{$notelink['noteID']}@" : $notelink['note'];
         if (!is_array($notearray[$eventid])) {
-          $notearray[$eventid] = array();
+          $notearray[$eventid] = [];
         }
-        $innerarray = array();
+        $innerarray = [];
         $innerarray['text'] = $newnote;
         $innerarray['id'] = 'N' . $notelink['ID'];
         $innerarray['private'] = $notelink['secret'];
@@ -405,7 +405,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       global $exppath;
       global $incl;
 
-      $allmedia = array();
+      $allmedia = [];
       if ($savestate['media']) {
         $query = "SELECT notes, altnotes, description, altdescription, path, mediatypeID, eventID, form, abspath, defphoto FROM ($media_table, $medialinks_table) WHERE $medialinks_table.personID=\"" . addslashes($id) . "\" AND $media_table.mediaID = $medialinks_table.mediaID ORDER BY eventID, ordernum";
         $media = tng_query($query);
@@ -437,7 +437,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
 
             $prow['notes'] = $prow['altnotes'] ? $prow['altnotes'] : $prow['notes'];
             if (!is_array($allmedia[$eventID])) {
-              $allmedia[$eventID] = array();
+              $allmedia[$eventID] = [];
             }
             array_push($allmedia[$eventID], $prow);
           }
@@ -670,8 +670,8 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           $indnotes = getNotes($ind['personID']);
           $indmedia = getMediaLinks($ind['personID']);
         } else {
-          $indnotes = array();
-          $indmedia = array();
+          $indnotes = [];
+          $indmedia = [];
         }
 
         $citations = getCitations($ind['personID']);
@@ -1294,7 +1294,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       global $savestate;
       global $lineending;
 
-      $places = array();
+      $places = [];
 
       if ($branch) {
         foreach ($placelist as $place) {
@@ -1362,7 +1362,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       echo "<p>" . uiTextSnippet('ifexportfails') . " <a href=\"dataExportGedcomFormAction.php?resume=1\">" . uiTextSnippet('clickresume') . "</a>.</p>$lineending";
     }
     set_time_limit(0);
-    $xnotes = array();
+    $xnotes = [];
 
     $largechunk = 1000;
     $filename = "$rootpath$gedpath/$tree.ged";

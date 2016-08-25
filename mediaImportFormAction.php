@@ -23,7 +23,7 @@ function importFrom($tngpath, $orgpath, $needsubdirs) {
   global $thumbprefix;
   global $thumbsuffix;
   global $totalImported;
-  $subdirs = array();
+  $subdirs = [];
 
   if ($orgpath) {
     $path = $tngpath . "/" . $orgpath;

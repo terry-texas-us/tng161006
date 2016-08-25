@@ -50,7 +50,7 @@ if ($ldsOK) {              //don't show these if the user does not have rights t
 }
 
 /* To show CUSTOM events, enter the GEDCOM TAG and set an icon */
-$calEvent = array();
+$calEvent = [];
 //$calEvent['EDUC']    = 'tng_cal_educ.png';
 //$calEvent['EMIG']    = 'tng_cal_emig.png';
 //$calEvent['ENGA']    = 'tng_cal_enga.png';
@@ -58,7 +58,7 @@ $calEvent = array();
 
 
 /* You can hide certain events by default by entering the keys here */
-$defaultHide = array('altbirth', 'burial', 'bapt', 'endl', 'seal');
+$defaultHide = ['altbirth', 'burial', 'bapt', 'endl', 'seal'];
 
 
 /* Make an array of all the event types */

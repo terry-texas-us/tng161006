@@ -50,7 +50,7 @@ $namestr = getFamilyName($row);
 
 $query = "SELECT DISTINCT eventID as eventID FROM $notelinks_table WHERE persfamID = '$familyID'";
 $notelinks = tng_query($query);
-$gotnotes = array();
+$gotnotes = [];
 while ($note = tng_fetch_assoc($notelinks)) {
   if (!$note['eventID']) {
     $note['eventID'] = "general";
@@ -59,7 +59,7 @@ while ($note = tng_fetch_assoc($notelinks)) {
 }
 $citquery = "SELECT DISTINCT eventID FROM $citations_table WHERE persfamID = '$familyID'";
 $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
-$gotcites = array();
+$gotcites = [];
 while ($cite = tng_fetch_assoc($citresult)) {
   if (!$cite['eventID']) {
     $cite['eventID'] = "general";
@@ -74,7 +74,7 @@ tng_free_result($assocresult);
 
 $query = "SELECT parenttag FROM $events_table WHERE persfamID = '$familyID'";
 $morelinks = tng_query($query);
-$gotmore = array();
+$gotmore = [];
 while ($more = tng_fetch_assoc($morelinks)) {
   $gotmore[$more['parenttag']] = "*";
 }
@@ -205,7 +205,7 @@ require_once 'eventlib.php';
                     $branchresult = tng_query($query);
                     $branchlist = explode(",", $row['branch']);
 
-                    $descriptions = array();
+                    $descriptions = [];
                     $options = "";
                     while ($branchrow = tng_fetch_assoc($branchresult)) {
                       $options .= "  <option value=\"{$branchrow['branch']}\"";

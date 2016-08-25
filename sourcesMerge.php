@@ -451,7 +451,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
         <table class='table table-sm'>
           <?php
           if (is_array($s1row)) {
-            $eventlist = array();
+            $eventlist = [];
             echo "<tr>\n";
             echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('sourcesEdit.php?sourceID={$s1row['sourceID']}&amp;cw=1','edit')\"></td>\n";
             if (is_array($s2row)) {

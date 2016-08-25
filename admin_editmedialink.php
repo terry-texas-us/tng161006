@@ -26,24 +26,24 @@ function doEvent($eventID, $displayval, $info) {
 $options = "<option value=''>" . uiTextSnippet('none') . "</option>";
 if ($row['linktype'] == 'I') {
   //standard people events
-  $list = array("NAME", "BIRT", "CHR", "DEAT", "BURI");
+  $list = ["NAME", "BIRT", "CHR", "DEAT", "BURI"];
   foreach ($list as $eventtype) {
     $options .= doEvent($eventtype, uiTextSnippet($eventtype), '');
   }
   if ($ldsOK) {
-    $ldslist = array("BAPL", "CONL", "INIT", "ENDL", "SLGC");
+    $ldslist = ["BAPL", "CONL", "INIT", "ENDL", "SLGC"];
     foreach ($ldslist as $eventtype) {
       $options .= doEvent($eventtype, uiTextSnippet($eventtype), '');
     }
   }
 } elseif ($row['linktype'] == 'F') {
   //standard family events
-  $list = array("MARR", "DIV");
+  $list = ["MARR", "DIV"];
   foreach ($list as $eventtype) {
     $options .= doEvent($eventtype, uiTextSnippet($eventtype), '');
   }
   if ($ldsOK) {
-    $ldslist = array("SLGS");
+    $ldslist = ["SLGS"];
     foreach ($ldslist as $eventtype) {
       $options .= doEvent($eventtype, uiTextSnippet($eventtype), '');
     }

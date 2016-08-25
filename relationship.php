@@ -33,8 +33,8 @@ class Relationship
 
   var $upcount = 0;
   var $downcount = 0;
-  var $downarray = array();
-  var $uparray = array();
+  var $downarray = [];
+  var $uparray = [];
   var $match = 0;
   var $spouseflag = 0;
   var $spouses = 0;
@@ -45,7 +45,7 @@ class Relationship
   var $half = false;
   var $multparents = 0;
   var $multparent1, $multspouse1, $multspouse2;
-  var $uplist = array();
+  var $uplist = [];
   var $upptr = 0;
 
   function reset() {
@@ -77,7 +77,7 @@ class Relationship
         //cousins or siblings or aunt/uncle
         //echo "up=" . $this->upcount . ", down=" . $this->downcount;
         if ($this->downcount == 1 && $this->upcount == 1) {
-          $msgarray = $this->half ? array(uiTextSnippet('halfbrother'), uiTextSnippet('halfsister'), uiTextSnippet('halfsibling')) : array(uiTextSnippet('brother'), uiTextSnippet('sister'), uiTextSnippet('sibling'));
+          $msgarray = $this->half ? [uiTextSnippet('halfbrother'), uiTextSnippet('halfsister'), uiTextSnippet('halfsibling')] : [uiTextSnippet('brother'), uiTextSnippet('sister'), uiTextSnippet('sibling')];
           $relmsg = $this->getRelMsg($this->spouseflag, $name1, $g1, $name2, $g2, $msgarray);
         } elseif (!$this->downcount) {
           if ($this->upcount == 1) {
@@ -106,13 +106,13 @@ class Relationship
           $relmsg = "$name1 " . uiTextSnippet('is') . " $reldesc $name2";
         } elseif ($this->upcount == 1) {
           $greats = $this->downcount - 2;
-          $relarray = $greats ? array(uiTextSnippet('guncle'), uiTextSnippet('gaunt'), uiTextSnippet('guncleaunt')) : array(uiTextSnippet('uncle'), uiTextSnippet('aunt'), uiTextSnippet('uncleaunt'));
+          $relarray = $greats ? [uiTextSnippet('guncle'), uiTextSnippet('gaunt'), uiTextSnippet('guncleaunt')] : [uiTextSnippet('uncle'), uiTextSnippet('aunt'), uiTextSnippet('uncleaunt')];
           $greatmsg = $greats > 1 ? "$greats x" : "";
           $relmsg = $this->getRelMsg($this->spouseflag, $name1, $g1, $name2, $g2, $relarray);
           $relmsg = preg_replace("/xxx/", $greatmsg, $relmsg);
         } elseif ($this->downcount == 1) {
           $greats = $this->upcount - 2;
-          $relarray = $greats ? array(uiTextSnippet('gnephew'), uiTextSnippet('gniece'), uiTextSnippet('gnephnc')) : array(uiTextSnippet('nephew'), uiTextSnippet('niece'), uiTextSnippet('nephnc'));
+          $relarray = $greats ? [uiTextSnippet('gnephew'), uiTextSnippet('gniece'), uiTextSnippet('gnephnc')] : [uiTextSnippet('nephew'), uiTextSnippet('niece'), uiTextSnippet('nephnc')];
           $greatmsg = $greats > 1 ? "$greats x" : "";
           $relmsg = $this->getRelMsg($this->spouseflag, $name1, $g1, $name2, $g2, $relarray);
           $relmsg = preg_replace("/xxx/", $greatmsg, $relmsg);
@@ -121,7 +121,7 @@ class Relationship
           $cousins = $this->downcount <= $this->upcount ? $this->downcount - 1 : $this->upcount - 1;
           //get sex of person1 to determine male cousin or female cousin (for languages with gender)
           $cousinmsg = $cousins > 1 ? "$cousins x" : "";
-          $msgarray = $this->half ? array(uiTextSnippet('mhalfcousin'), uiTextSnippet('fhalfcousin'), uiTextSnippet('halfcousin')) : array(uiTextSnippet('mcousin'), uiTextSnippet('fcousin'), uiTextSnippet('cousin'));
+          $msgarray = $this->half ? [uiTextSnippet('mhalfcousin'), uiTextSnippet('fhalfcousin'), uiTextSnippet('halfcousin')] : [uiTextSnippet('mcousin'), uiTextSnippet('fcousin'), uiTextSnippet('cousin')];
           $relmsg = $this->getRelMsg($this->spouseflag, $name1, $g1, $name2, $g2, $msgarray);
           $relmsg = preg_replace("/xxx/", $cousinmsg, $relmsg);
           $removed = abs($this->downcount - $this->upcount);
@@ -166,10 +166,10 @@ class Relationship
           //great grandson/great granddaughter
           if ($this->downcount) {
             $greats = $this->downcount - 3;
-            $relarray = $greats ? array(uiTextSnippet('ggfath'), uiTextSnippet('ggmoth'), uiTextSnippet('ggpar')) : array(uiTextSnippet('gfath'), uiTextSnippet('gmoth'), uiTextSnippet('gpar'));
+            $relarray = $greats ? [uiTextSnippet('ggfath'), uiTextSnippet('ggmoth'), uiTextSnippet('ggpar')] : [uiTextSnippet('gfath'), uiTextSnippet('gmoth'), uiTextSnippet('gpar')];
           } else {
             $greats = $this->upcount - 2;
-            $relarray = $greats ? array(uiTextSnippet('ggson'), uiTextSnippet('ggdau'), uiTextSnippet('ggsondau')) : array(uiTextSnippet('gson'), uiTextSnippet('gdau'), uiTextSnippet('gsondau'));
+            $relarray = $greats ? [uiTextSnippet('ggson'), uiTextSnippet('ggdau'), uiTextSnippet('ggsondau')] : [uiTextSnippet('gson'), uiTextSnippet('gdau'), uiTextSnippet('gsondau')];
           }
           $greatmsg = $greats > 1 ? "$greats x" : "";
           $relmsg = $this->getRelMsg($this->spouseflag, $name1, $g1, $name2, $g2, $relarray);
@@ -200,8 +200,8 @@ class Relationship
     return $gender == 'M' ? 'F' : ($gender == 'F' ? 'M' : $gender);
   }
 
-  function buildUparray() {
-    $this->uparray = array();
+  function buildUp[] {
+    $this->uparray = [];
     $index = $this->upptr;
     $upcount = $this->upcount - 1;
     while ($upcount >= 0) {
@@ -529,7 +529,7 @@ function checkOtherSpouse($parentrow, $parent, $spouse) {
     while ($needmore && $osrow = tng_fetch_assoc($osresult)) {
       $gens->multspouse2 = $osrow[$spouse];
 
-      $gens->downarray = array();
+      $gens->downarray = [];
       $gens->downcount = 0;
 
       //is it the new spouse? We already know it isn't the main parent
@@ -577,10 +577,10 @@ function checkpersonup($nextcouple) {
 
   $lastup = $gens->upcount;
   $gens->upcount += 1;
-  $gens->buildUparray();
+  $gens->buildUp[];
 
   if (!isset($gens->uplist[$gens->upcount])) {
-    $gens->uplist[$gens->upcount] = array();
+    $gens->uplist[$gens->upcount] = [];
   }
   $gensup = $gens->upcount;
 
@@ -588,7 +588,7 @@ function checkpersonup($nextcouple) {
   while ($familyrow = tng_fetch_assoc($familyresult)) {
     $parentsresult = getFamilyMinimal($familyrow['familyID']);
 
-    $gens->downarray = array();
+    $gens->downarray = [];
     $gens->downcount = 0;
     $parentrow = tng_fetch_assoc($parentsresult);
     if (!checkParent($parentrow, 'husband', 'wife') && !checkParent($parentrow, 'wife', 'husband')) {
@@ -620,10 +620,10 @@ function checkpersonup($nextcouple) {
       //if found, then draw original parents on left, other parents to right with line connecting the common spouse
     }
     if ($parentrow['husband'] && ($gensup < $maxupgen)) {
-      array_push($gens->uplist[$gensup], array("person" => $parentrow['husband'], "spouse" => $parentrow['wife'], "childindex" => $gens->upptr));
+      array_push($gens->uplist[$gensup], ["person" => $parentrow['husband'], "spouse" => $parentrow['wife'], "childindex" => $gens->upptr]);
     }
     if ($parentrow['wife'] && ($gensup < $maxupgen)) {
-      array_push($gens->uplist[$gensup], array("person" => $parentrow['wife'], "spouse" => $parentrow['husband'], "childindex" => $gens->upptr));
+      array_push($gens->uplist[$gensup], ["person" => $parentrow['wife'], "spouse" => $parentrow['husband'], "childindex" => $gens->upptr]);
     }
 
     tng_free_result($parentsresult);
@@ -878,7 +878,7 @@ echo "<body id='public'>\n";
       $couple['person'] = $primarypersonID;
       $couple['spouse'] = "";
       $couple['childindex'] = 0;
-      $gens->uplist[0] = array();
+      $gens->uplist[0] = [];
       array_push($gens->uplist[0], $couple); //exp
 
       checkpersonup($couple);
@@ -896,7 +896,7 @@ echo "<body id='public'>\n";
         $couple['person'] = $secondpersonID;
         $couple['spouse'] = "";
         $couple['childindex'] = 0;
-        $gens->uplist[0] = array();
+        $gens->uplist[0] = [];
         array_push($gens->uplist[0], $couple);
 
         checkpersonup($couple);

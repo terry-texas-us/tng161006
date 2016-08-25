@@ -38,7 +38,7 @@ if ($folder) {
 /* [ts] construct using options which are part of the application environment
         this will alter the default behaviour of the sample handler from blueimp */
 
-$options = array(
+$options = [
         'mediapath' => $rootpath . $endrootpath . $mediafolder . "/",
         'mediaurl' => $tngdomain . $endslash . $mediafolder . "/",
         'thumb_folder' => $thumb_folder,
@@ -55,7 +55,7 @@ $options = array(
         'media_folder' => $mediafolder,
         'subfolder' => $folder,
         'added' => uiTextSnippet('addnewmedia')
-);
+];
 
 error_reporting(E_ALL | E_STRICT);
 

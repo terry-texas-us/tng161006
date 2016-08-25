@@ -114,7 +114,7 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
           //loop through custom event types where keep=1, not a standard event
           $query = "SELECT eventtypeID, tag, display FROM $eventtypes_table WHERE keep = '1' AND type = 'I' ORDER BY display";
           $result = tng_query($query);
-          $dontdo = array("ADDR", "BIRT", "CHR", "DEAT", "BURI", "NAME", "NICK", "TITL", "NSFX", "DIV", "MARR");
+          $dontdo = ["ADDR", "BIRT", "CHR", "DEAT", "BURI", "NAME", "NICK", "TITL", "NSFX", "DIV", "MARR"];
           while ($row = tng_fetch_assoc($result)) {
             if (!in_array($row['tag'], $dontdo)) {
               echo "<option value=\"{$row['eventtypeID']}\"";
@@ -185,17 +185,17 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
     if ($tngneedresults) {
       $successcount = 0;
       if ($tngevent) {
-        $tngevents = array($tngevent);
+        $tngevents = [$tngevent];
       } else {
-        $tngevents = array("birth", "altbirth", "death", "burial", "marr", "div");
+        $tngevents = ["birth", "altbirth", "death", "burial", "marr", "div"];
         if ($ldsOK) {
-          $ldsevents = array("seal", "endl", "bapt", "conf", "init");
+          $ldsevents = ["seal", "endl", "bapt", "conf", "init"];
           $tngevents = array_merge($tngevents, $ldsevents);
         }
         $query = "SELECT tag, eventtypeID FROM $eventtypes_table
           WHERE keep=\"1\" AND type=\"I\" ORDER BY display";
         $result = tng_query($query);
-        $dontdo = array("ADDR", "BIRT", "CHR", "DEAT", "BURI", "NAME", "NICK", "TITL", "NSFX", "DIV", "MARR");
+        $dontdo = ["ADDR", "BIRT", "CHR", "DEAT", "BURI", "NAME", "NICK", "TITL", "NSFX", "DIV", "MARR"];
         while ($row = tng_fetch_assoc($result)) {
           if (!in_array($row['tag'], $dontdo)) {
             array_push($tngevents, $row['eventtypeID']);

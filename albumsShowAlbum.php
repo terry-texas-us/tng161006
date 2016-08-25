@@ -216,7 +216,7 @@ preparebookmark($logstring);
     } else {
       echo tng_DrawHeading($imgsrc, $albumname, $description);
     }
-    $hiddenfields[0] = array('name' => 'albumID', 'value' => $albumID);
+    $hiddenfields[0] = ['name' => 'albumID', 'value' => $albumID];
 
     $toplinks = "<p>";
     $toplinks .= $totrows ? uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows &nbsp;&nbsp; " : "";

@@ -39,12 +39,12 @@ class SMTP
   
   protected $smtp_conn;
   
-  protected $error = array(
+  protected $error = [
           'error' => '',
           'detail' => '',
           'smtp_code' => '',
           'smtp_code_ex' => ''
-  );
+  ];
   
   protected $helo_rply = null;
   
@@ -58,7 +58,7 @@ class SMTP
       return;
     }
     //Avoid clash with built-in function names
-    if (!in_array($this->Debugoutput, array('error_log', 'html', 'echo')) and is_callable($this->Debugoutput)) {
+    if (!in_array($this->Debugoutput, ['error_log', 'html', 'echo']) and is_callable($this->Debugoutput)) {
       call_user_func($this->Debugoutput, $str, $this->do_debug);
       return;
     }
@@ -80,7 +80,7 @@ class SMTP
   }
 
   
-  public function connect($host, $port = null, $timeout = 30, $options = array()) {
+  public function connect($host, $port = null, $timeout = 30, $options = []) {
     static $streamok;
     //This is enabled by default since 5.0.0 but some providers disable it
     //Check this once and cache the result
@@ -163,7 +163,7 @@ class SMTP
       self::edebug('Auth method requested: ' . ($authtype ? $authtype : 'UNKNOWN'), self::DEBUG_LOWLEVEL);
       self::edebug('Auth methods available on the server: ' . implode(',', $this->server_caps['AUTH']), self::DEBUG_LOWLEVEL);
       if (empty($authtype)) {
-        foreach (array('LOGIN', 'CRAM-MD5', 'NTLM', 'PLAIN') as $method) {
+        foreach (['LOGIN', 'CRAM-MD5', 'NTLM', 'PLAIN'] as $method) {
           if (in_array($method, $this->server_caps['AUTH'])) {
             $authtype = $method;
             break;
@@ -312,7 +312,7 @@ class SMTP
      * NOTE: this does not count towards line-length limit.
      */
     // Normalize line breaks before exploding
-    $lines = explode("\n", str_replace(array("\r\n", "\r"), "\n", $msg_data));
+    $lines = explode("\n", str_replace(["\r\n", "\r"], "\n", $msg_data));
     /* To distinguish between a complete RFC822 message and a plain message body, we check if the first field
      * of the first line (':' separated) does not contain a space then it _should_ be a header and we will
      * process all lines before a blank line as headers.
@@ -323,7 +323,7 @@ class SMTP
       $in_headers = true;
     }
     foreach ($lines as $line) {
-      $lines_out = array();
+      $lines_out = [];
       if ($in_headers and $line == '') {
         $in_headers = false;
       }
@@ -390,7 +390,7 @@ class SMTP
 
   
   protected function parseHelloFields($type) {
-    $this->server_caps = array();
+    $this->server_caps = [];
     $lines = explode("\n", $this->last_reply);
     foreach ($lines as $n => $s) {
       $s = trim(substr($s, 4));
@@ -432,7 +432,7 @@ class SMTP
 
   
   public function recipient($toaddr) {
-    return $this->sendCommand('RCPT TO', 'RCPT TO:<' . $toaddr . '>', array(250, 251));
+    return $this->sendCommand('RCPT TO', 'RCPT TO:<' . $toaddr . '>', [250, 251]);
   }
 
   
@@ -449,7 +449,7 @@ class SMTP
     $this->clientSend($commandstring . self::CRLF);
     $this->last_reply = $this->getLines();
     // Fetch SMTP code and possible error code explanation
-    $matches = array();
+    $matches = [];
     if (preg_match("/^([0-9]{3})[ -](?:([0-9]\\.[0-9]\\.[0-9]) )?/", $this->last_reply, $matches)) {
       $code = $matches[1];
       $code_ex = (count($matches) > 2 ? $matches[2] : null);
@@ -478,7 +478,7 @@ class SMTP
 
   
   public function verify($name) {
-    return $this->sendCommand('VRFY', "VRFY $name", array(250, 251));
+    return $this->sendCommand('VRFY', "VRFY $name", [250, 251]);
   }
 
   
@@ -583,12 +583,12 @@ class SMTP
 
   
   protected function setError($message, $detail = '', $smtp_code = '', $smtp_code_ex = '') {
-    $this->error = array(
+    $this->error = [
             'error' => $message,
             'detail' => $detail,
             'smtp_code' => $smtp_code,
             'smtp_code_ex' => $smtp_code_ex
-    );
+    ];
   }
 
   

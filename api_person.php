@@ -34,7 +34,7 @@ $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : 
 
 writelog("<a href=\"peopleShowPerson.php?personID=$personID\">" . uiTextSnippet('indinfofor') . " $logname ($personID)</a>");
 
-$events = array();
+$events = [];
 echo api_person($row, $fullevents);
 
 echo "}";

@@ -6,11 +6,11 @@ require 'datelib.php';
 
 $timeline = $_SESSION['timeline'];
 if (!is_array($timeline)) {
-  $timeline = array();
+  $timeline = [];
 }
 
 function getTimelineDate($date) {
-  $ret = array();
+  $ret = [];
 
   preg_match('/(\d\d\d\d)-(\d\d)-(\d\d).*/', $date, $matches);
   if ($matches[2] == "00") {
@@ -36,8 +36,8 @@ echo "<data>\n";
 $wherestr = $pedigree['tcevents'] ? "WHERE (evyear BETWEEN \"$earliest\" AND \"$latest\") OR (endyear BETWEEN \"$earliest\" AND \"$latest\")" : "";
 $tlquery = "SELECT evday, evmonth, evyear, evtitle, evdetail, endday, endmonth, endyear FROM $tlevents_table $wherestr ORDER BY evyear, evmonth, evday";
 $tlresult = tng_query($tlquery) or die(uiTextSnippet('cannotexecutequery') . ": $tlquery");
-$tlevents = array();
-$tlevents2 = array();
+$tlevents = [];
+$tlevents2 = [];
 while ($tlrow = tng_fetch_assoc($tlresult)) {
   if ($tlrow['evday'] == "0") {
     $tlrow['evday'] = "1";

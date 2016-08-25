@@ -31,7 +31,7 @@ $today = date("Y-m-d H:i:s");
 global $prefix;
 global $medialinks;
 global $albumlinks;
-$medialinks = $albumlinks = array();
+$medialinks = $albumlinks = [];
 
 $ldsOK = determineLDSRights();
 
@@ -41,7 +41,7 @@ function getMediaLinksToSave() {
   global $events_table;
   global $medialinks_table;
 
-  $medialinks = array();
+  $medialinks = [];
   $query = "SELECT medialinkID, mediaID, $medialinks_table.eventID, persfamID, eventtypeID, eventdate, eventplace, info
     FROM ($medialinks_table,$events_table)
     WHERE $medialinks_table.eventID != \"\" AND $medialinks_table.eventID = $events_table.eventID";
@@ -60,7 +60,7 @@ function getAlbumLinksToSave() {
   global $events_table;
   global $album2entities_table;
 
-  $albumlinks = array();
+  $albumlinks = [];
   $query = "SELECT alinkID, albumID, $album2entities_table.eventID, entityID, eventtypeID, eventdate, eventplace, info
     FROM ($album2entities_table,$events_table)
     WHERE $album2entities_table.eventID != \"\" AND $album2entities_table.eventID = $events_table.eventID";
@@ -94,9 +94,9 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       $navList->appendItem([true, "dataSecondaryProcesses.php", uiTextSnippet('secondarymaint'), "second"]);
       echo $navList->build("import");
     }
-    $stdevents = array("BIRT", "SEX", "DEAT", "BURI", "MARR", "SLGS", "SLGC", "NICK", "NSFX", "TITL", "BAPL", "CONL", "INIT", "ENDL", "CHAN", "CALN", "AUTH", "PUBL", "ABBR", "TEXT");
-    $pciteevents = array("NAME", "BIRT", "CHR", "DEAT", "BURI", "BAPL", "CONL", "INIT", "ENDL", "SLGC");
-    $fciteevents = array("MARR", "DIV", "SLGS");
+    $stdevents = ["BIRT", "SEX", "DEAT", "BURI", "MARR", "SLGS", "SLGC", "NICK", "NSFX", "TITL", "BAPL", "CONL", "INIT", "ENDL", "CHAN", "CALN", "AUTH", "PUBL", "ABBR", "TEXT"];
+    $pciteevents = ["NAME", "BIRT", "CHR", "DEAT", "BURI", "BAPL", "CONL", "INIT", "ENDL", "SLGC"];
+    $fciteevents = ["MARR", "DIV", "SLGS"];
 
     //read first line into $line
     set_time_limit(0);
@@ -294,7 +294,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       //get custom event types
       $query = "SELECT eventtypeID, tag, description, keep, type, display FROM $eventtypes_table";
       $result = tng_query($query);
-      $custeventlist = array();
+      $custeventlist = [];
       while ($row = tng_fetch_assoc($result)) {
         $eventtype = strtoupper($row['type'] . "_" . $row['tag'] . "_" . $row['description']);
         $custevents[$eventtype]['keep'] = $row['keep'];
@@ -306,7 +306,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       }
       tng_free_result($result);
 
-      $stdnotes = array();
+      $stdnotes = [];
       $notecount = 0;
 
       $lineinfo = getLine();
@@ -332,7 +332,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
               break;
             case "OBJE":
               if ($savestate['media']) {
-                $mminfo = array();
+                $mminfo = [];
                 getMultimediaRecord($id, 0);
               } else {
                 $lineinfo = getLine();

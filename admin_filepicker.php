@@ -22,7 +22,7 @@ $pagetotal = 50;
 if (!isset($subdir)) {
   $subdir = '';
 }
-$ImageFileTypes = array("GIF", "JPG", "PNG");
+$ImageFileTypes = ["GIF", "JPG", "PNG"];
 
 header("Content-type:text/html; charset=" . $session_charset);
 
@@ -77,8 +77,8 @@ function frmFiles() {
         $savedir = getcwd();
         chdir("$rootpath$tngpath/" . stripslashes($subdir));
         if ($handle = opendir('.')) {
-          $fentries = array();
-          $dentries = array();
+          $fentries = [];
+          $dentries = [];
           while ($file = readdir($handle)) {
             if (!$searchstring || strpos(strtoupper($file), strtoupper($searchstring)) === 0) {
               if (is_file($file)) {

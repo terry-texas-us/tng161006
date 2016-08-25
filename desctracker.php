@@ -169,7 +169,7 @@ function doNextPerson($row, $items, $nextperson, $box) {
       $spouserow['allow_private'] = $srights['private'];
       tng_free_result($result3);
     } else {
-      $spouserow = array();
+      $spouserow = [];
     }
 
     $childcount++;
@@ -194,7 +194,7 @@ function doNextPerson($row, $items, $nextperson, $box) {
 function getBox($childcount, $totkids, $thisisit, $gotnext) {
   global $more;
 
-  $box = array();
+  $box = [];
 
   $box['lineoutof'] = $thisisit;
   $thisside = ($childcount < (($totkids / 2) + .5)) && $gotnext ? 1 : 0;
@@ -363,7 +363,7 @@ endFormElement();
           $more = count($items);
           if ($nextperson) {
             echo "<table>\n<tr>\n";
-            $box = array();
+            $box = [];
             $box['lineinto'] = 0;
             $box['lineoutof'] = 1;
             $box['topleft'] = $box['topright'] = 0;
@@ -380,7 +380,7 @@ endFormElement();
             }
           }
           while ($more) {
-            $lineinfo = array();
+            $lineinfo = [];
             $linelength = 0;
             $gotnext = 0;
             $nextfamily = array_shift($items);

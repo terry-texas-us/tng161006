@@ -46,7 +46,7 @@ foreach ($_FILES as $key => $file) {
   }
 }
 $lastkey = "";
-$holdarr = array();
+$holdarr = [];
 foreach ($_POST as $newkey => $newvalue) {
   $newvalue = addslashes($newvalue);
 
@@ -61,7 +61,7 @@ foreach ($_POST as $newkey => $newvalue) {
       foreach ($holdarr as $holdkey => $holdvalue) {
         fwrite($fp, "\$tmp['" . $holdkey . "'] = \"$holdvalue\";\n");
       }
-      $holdarr = array();
+      $holdarr = [];
     }
     fwrite($fp, "\$tmp['" . $key . "'] = \"$newvalue\";\n");
     $lastkey = $key;

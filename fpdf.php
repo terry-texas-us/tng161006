@@ -76,14 +76,14 @@ if (!class_exists('FPDF')) {
       $this->page = 0;
       $this->n = 2;
       $this->buffer = '';
-      $this->pages = array();
-      $this->OrientationChanges = array();
+      $this->pages = [];
+      $this->OrientationChanges = [];
       $this->state = 0;
-      $this->fonts = array();
-      $this->FontFiles = array();
-      $this->diffs = array();
-      $this->images = array();
-      $this->links = array();
+      $this->fonts = [];
+      $this->FontFiles = [];
+      $this->diffs = [];
+      $this->images = [];
+      $this->links = [];
       $this->InFooter = false;
       $this->lasth = 0;
       $this->FontFamily = '';
@@ -96,7 +96,7 @@ if (!class_exists('FPDF')) {
       $this->ColorFlag = false;
       $this->ws = 0;
       // Standard Type 1 Fonts (Standard 14 Fonts)
-      $this->CoreFonts = array(
+      $this->CoreFonts = [
               'courier' => 'Courier',
               'courierB' => 'Courier-Bold',
               'courierI' => 'Courier-Oblique',
@@ -110,7 +110,7 @@ if (!class_exists('FPDF')) {
               'timesI' => 'Times-Italic',
               'timesBI' => 'Times-BoldItalic',
               'symbol' => 'Symbol',
-              'zapfdingbats' => 'ZapfDingbats');
+              'zapfdingbats' => 'ZapfDingbats'];
       //Scale factor
       if ($unit == 'pt') {
         $this->k = 1;
@@ -127,15 +127,15 @@ if (!class_exists('FPDF')) {
       if (is_string($format)) {
         $format = strtolower($format);
         if ($format == 'a3') {
-          $format = array(841.89, 1190.55);
+          $format = [841.89, 1190.55];
         } elseif ($format == 'a4') {
-          $format = array(595.28, 841.89);
+          $format = [595.28, 841.89];
         } elseif ($format == 'a5') {
-          $format = array(420.94, 595.28);
+          $format = [420.94, 595.28];
         } elseif ($format == 'letter') {
-          $format = array(612, 792);
+          $format = [612, 792];
         } elseif ($format == 'legal') {
-          $format = array(612, 1008);
+          $format = [612, 1008];
         } else {
           $this->Error('Unknown page format: ' . $format);
         }
@@ -470,7 +470,7 @@ if (!class_exists('FPDF')) {
         $this->Error('Could not include font definition file');
       }
       $i = count($this->fonts) + 1;
-      $this->fonts[$fontkey] = array('i' => $i, 'type' => $type, 'name' => $name, 'desc' => $desc, 'up' => $up, 'ut' => $ut, 'cw' => $cw, 'enc' => $enc, 'file' => $file);
+      $this->fonts[$fontkey] = ['i' => $i, 'type' => $type, 'name' => $name, 'desc' => $desc, 'up' => $up, 'ut' => $ut, 'cw' => $cw, 'enc' => $enc, 'file' => $file];
       if ($diff) {
         //Search existing encodings
         $d = 0;
@@ -489,9 +489,9 @@ if (!class_exists('FPDF')) {
       }
       if ($file) {
         if ($type == 'TrueType') {
-          $this->FontFiles[$file] = array('length1' => $originalsize);
+          $this->FontFiles[$file] = ['length1' => $originalsize];
         } else {
-          $this->FontFiles[$file] = array('length1' => $size1, 'length2' => $size2);
+          $this->FontFiles[$file] = ['length1' => $size1, 'length2' => $size2];
         }
       }
     }
@@ -543,7 +543,7 @@ if (!class_exists('FPDF')) {
             }
           }
           $i = count($this->fonts) + 1;
-          $this->fonts[$fontkey] = array('i' => $i, 'type' => 'core', 'name' => $this->CoreFonts[$fontkey], 'up' => -100, 'ut' => 50, 'cw' => $fpdf_charwidths[$fontkey]);
+          $this->fonts[$fontkey] = ['i' => $i, 'type' => 'core', 'name' => $this->CoreFonts[$fontkey], 'up' => -100, 'ut' => 50, 'cw' => $fpdf_charwidths[$fontkey]];
         } else {
           $this->Error('Undefined font: ' . $family . ' ' . $style);
         }
@@ -574,7 +574,7 @@ if (!class_exists('FPDF')) {
     function AddLink() {
       //Create a new internal link
       $n = count($this->links) + 1;
-      $this->links[$n] = array(0, 0);
+      $this->links[$n] = [0, 0];
       return $n;
     }
 
@@ -586,12 +586,12 @@ if (!class_exists('FPDF')) {
       if ($page == -1) {
         $page = $this->page;
       }
-      $this->links[$link] = array($page, $y);
+      $this->links[$link] = [$page, $y];
     }
 
     function Link($x, $y, $w, $h, $link) {
       //Put a link on the page
-      $this->PageLinks[$this->page][] = array($x * $this->k, $this->hPt - $y * $this->k, $w * $this->k, $h * $this->k, $link);
+      $this->PageLinks[$this->page][] = [$x * $this->k, $this->hPt - $y * $this->k, $w * $this->k, $h * $this->k, $link];
     }
 
     function Text($x, $y, $txt) {
@@ -1478,7 +1478,7 @@ if (!class_exists('FPDF')) {
         $data .= fread($f, 4096);
       }
       fclose($f);
-      return array('w' => $a[0], 'h' => $a[1], 'cs' => $colspace, 'bpc' => $bpc, 'f' => 'DCTDecode', 'data' => $data);
+      return ['w' => $a[0], 'h' => $a[1], 'cs' => $colspace, 'bpc' => $bpc, 'f' => 'DCTDecode', 'data' => $data];
     }
 
     function _parsepng($file) {
@@ -1538,13 +1538,13 @@ if (!class_exists('FPDF')) {
           //Read transparency info
           $t = fread($f, $n);
           if ($ct == 0) {
-            $trns = array(ord(substr($t, 1, 1)));
+            $trns = [ord(substr($t, 1, 1))];
           } elseif ($ct == 2) {
-            $trns = array(ord(substr($t, 1, 1)), ord(substr($t, 3, 1)), ord(substr($t, 5, 1)));
+            $trns = [ord(substr($t, 1, 1)), ord(substr($t, 3, 1)), ord(substr($t, 5, 1))];
           } else {
             $pos = strpos($t, chr(0));
             if ($pos !== false) {
-              $trns = array($pos);
+              $trns = [$pos];
             }
           }
           fread($f, 4);
@@ -1562,7 +1562,7 @@ if (!class_exists('FPDF')) {
         $this->Error('Missing palette in ' . $file);
       }
       fclose($f);
-      return array('w' => $w, 'h' => $h, 'cs' => $colspace, 'bpc' => $bpc, 'f' => 'FlateDecode', 'parms' => $parms, 'pal' => $pal, 'trns' => $trns, 'data' => $data);
+      return ['w' => $w, 'h' => $h, 'cs' => $colspace, 'bpc' => $bpc, 'f' => 'FlateDecode', 'parms' => $parms, 'pal' => $pal, 'trns' => $trns, 'data' => $data];
     }
 
     function _freadint($f) {

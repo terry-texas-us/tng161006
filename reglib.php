@@ -1,7 +1,7 @@
 <?php
 
 function getSpouses($personID, $sex) {
-  $spouses = array();
+  $spouses = [];
   if ($sex == 'M') {
     $self = 'husband';
     $spouse = 'wife';
@@ -224,7 +224,7 @@ function getOtherEvents($row) {
     $custevents = tng_query($query);
     while ($custevent = tng_fetch_assoc($custevents)) {
       $displayval = getEventDisplay($custevent['display']);
-      $fact = array();
+      $fact = [];
       if ($custevent['info']) {
         $fact = checkXnote($custevent['info']);
         if ($fact[1]) {
@@ -265,23 +265,23 @@ function getRegNotes($persfamID, $flag) {
   global $eventtypes_table;
   global $events_table;
 
-  $custnotes = array();
-  $gennotes = array();
-  $precustnotes = array();
-  $postcustnotes = array();
+  $custnotes = [];
+  $gennotes = [];
+  $precustnotes = [];
+  $postcustnotes = [];
 
   if ($flag == 'I') {
-    $precusttitles = array("BIRT" => uiTextSnippet('birth'), "CHR" => uiTextSnippet('christened'), "NAME" => uiTextSnippet('name'),
+    $precusttitles = ["BIRT" => uiTextSnippet('birth'), "CHR" => uiTextSnippet('christened'), "NAME" => uiTextSnippet('name'),
             "TITL" => uiTextSnippet('title'), "NSFX" => uiTextSnippet('suffix'), "NICK" => uiTextSnippet('nickname'),
-            "BAPL" => uiTextSnippet('baptizedlds'), "CONL" => uiTextSnippet('conflds'), "INIT" => uiTextSnippet('initlds'), "ENDL" => uiTextSnippet('endowedlds'));
-    $postcusttitles = array("DEAT" => uiTextSnippet('died'), "BURI" => uiTextSnippet('buried'), "SLGC" => uiTextSnippet('sealedplds'));
+            "BAPL" => uiTextSnippet('baptizedlds'), "CONL" => uiTextSnippet('conflds'), "INIT" => uiTextSnippet('initlds'), "ENDL" => uiTextSnippet('endowedlds')];
+    $postcusttitles = ["DEAT" => uiTextSnippet('died'), "BURI" => uiTextSnippet('buried'), "SLGC" => uiTextSnippet('sealedplds')];
   } elseif ($flag == 'F') {
-    $precusttitles = array("MARR" => uiTextSnippet('married'), "SLGS" => uiTextSnippet('sealedslds'), "DIV" => uiTextSnippet('divorced'));
-    $postcusttitles = array();
+    $precusttitles = ["MARR" => uiTextSnippet('married'), "SLGS" => uiTextSnippet('sealedslds'), "DIV" => uiTextSnippet('divorced')];
+    $postcusttitles = [];
   } else {
-    $precusttitles = array("ABBR" => uiTextSnippet('shorttitle'), "CALN" => uiTextSnippet('callnum'), "AUTH" => uiTextSnippet('author'),
-            "PUBL" => uiTextSnippet('publisher'), "TITL" => uiTextSnippet('title'));
-    $postcusttitles = array();
+    $precusttitles = ["ABBR" => uiTextSnippet('shorttitle'), "CALN" => uiTextSnippet('callnum'), "AUTH" => uiTextSnippet('author'),
+            "PUBL" => uiTextSnippet('publisher'), "TITL" => uiTextSnippet('title')];
+    $postcusttitles = [];
   }
 
   $query = "SELECT display, $xnotes_table.note as note, $notelinks_table.eventID as eventID FROM $notelinks_table
@@ -306,20 +306,20 @@ function getRegNotes($persfamID, $flag) {
       if ($note['display']) {
         $currtitle = getEventDisplay($note['display']);
         $key = "cust$currevent";
-        $custnotes[$key] = array("title" => $currtitle, "text" => "");
+        $custnotes[$key] = ["title" => $currtitle, "text" => ""];
         $type = 2;
       } else {
         if ($postcusttitles[$currevent]) {
           $currtitle = $postcusttitles[$currevent];
-          $postcustnotes[$currevent] = array("title" => $postcusttitles[$currevent], "text" => "");
+          $postcustnotes[$currevent] = ["title" => $postcusttitles[$currevent], "text" => ""];
           $type = 3;
         } else {
           $currtitle = $precusttitles[$currevent] ? $precusttitles[$currevent] : " ";
           if ($note['eventID'] == "--x-general-x--") {
-            $gennotes[$currevent] = array("title" => $precusttitles[$currevent], "text" => "");
+            $gennotes[$currevent] = ["title" => $precusttitles[$currevent], "text" => ""];
             $type = 0;
           } else {
-            $precustnotes[$currevent] = array("title" => $precusttitles[$currevent], "text" => "");
+            $precustnotes[$currevent] = ["title" => $precusttitles[$currevent], "text" => ""];
             $type = 1;
           }
         }

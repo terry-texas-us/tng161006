@@ -69,7 +69,7 @@ if (!$editconflict) {
     }
   } else {
     $allbranches = $branch;
-    $branch = array($branch);
+    $branch = [$branch];
   }
   if ($allbranches != $orgbranch) {
     $oldbranches = explode(",", $orgbranch);
@@ -86,7 +86,7 @@ if (!$editconflict) {
       }
     }
   }
-  $places = array();
+  $places = [];
   if (trim($marrplace) && !in_array($marrplace, $places)) {
     array_push($places, $marrplace);
   }

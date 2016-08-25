@@ -80,11 +80,11 @@ echo $navList->build("renumber");
       //search media table for all media records with an image map
       $query = "SELECT mediaID, map from $media_table WHERE map != \"\"";
       $result1 = tng_query($query);
-      $keys = array();
-      $maps = array();
+      $keys = [];
+      $maps = [];
       while ($row = tng_fetch_assoc($result1)) {
         //put all in an array with mediaID as the key
-        $maps[$row['mediaID']] = array("map" => $row['map'], "newmap" => "");
+        $maps[$row['mediaID']] = ["map" => $row['map'], "newmap" => ""];
         $pattern = "/personID=(I\d+)&[amp;]*tree=$tree/";
         //loop over all of them and pull out person IDs
         preg_match_all($pattern, $row['map'], $matches, PREG_SET_ORDER);
@@ -93,7 +93,7 @@ echo $navList->build("renumber");
           $fullmatch = $match[0];
           $specmatch = $match[1];
           $key = $specmatch;
-          $keys[$key][] = array("mediaID" => $row['mediaID'], "found" => $fullmatch);
+          $keys[$key][] = ["mediaID" => $row['mediaID'], "found" => $fullmatch];
           /* this block used for testing
             if(isset($keys[$key])) {
             foreach($keys[$key] as $tkey) {

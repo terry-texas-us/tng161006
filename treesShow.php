@@ -3,14 +3,8 @@ require 'tng_begin.php';
 
 require 'functions.php';
 
-if ($treesearch) {
-  $wherestr = "WHERE treename LIKE \"%$treesearch%\" OR description LIKE \"%$treesearch%\"";
-} else {
-  $wherestr = "";
-}
-$query = "SELECT count(personID) as pcount, $treesTable.gedcom, treename, description FROM $treesTable LEFT JOIN $people_table on $treesTable.gedcom = $people_table.gedcom $wherestr GROUP BY $treesTable.gedcom ORDER BY treename LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT gedcom, treename, description FROM $treesTable";
 $result = tng_query($query);
-$numrows = tng_num_rows($result);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
@@ -40,23 +34,25 @@ $headSection->setTitle(uiTextSnippet('trees'));
       <?php
       $i = 1;
       while ($row = tng_fetch_assoc($result)) {
-        $query = "SELECT count(familyID) as fcount FROM $families_table WHERE gedcom = \"{$row['gedcom']}\"";
-        $famresult = tng_query($query);
-        $famrow = tng_fetch_assoc($famresult);
-        tng_free_result($famresult);
+        $presult = tng_query("SELECT count(personID) AS pcount FROM $people_table");
+        $prow = tng_fetch_assoc($presult);
+        tng_free_result($presult);
+                
+        $fresult = tng_query("SELECT count(familyID) as fcount FROM $families_table");
+        $frow = tng_fetch_assoc($fresult);
+        tng_free_result($fresult);
 
-        $query = "SELECT count(sourceID) as scount FROM $sources_table WHERE gedcom = \"{$row['gedcom']}\"";
-        $srcresult = tng_query($query);
-        $srcrow = tng_fetch_assoc($srcresult);
-        tng_free_result($srcresult);
+        $sresult = tng_query("SELECT count(sourceID) as scount FROM $sources_table");
+        $srow = tng_fetch_assoc($sresult);
+        tng_free_result($sresult);
 
         echo "<tr>\n";
           echo "<td>$i</td>\n";
           echo "<td><a href=\"showtree.php?tree=$row[gedcom]\">{$row['treename']}</a></td>";
           echo "<td>{$row['description']}</td>";
-          echo "<td><a href=\"search.php?tree={$row['gedcom']}\">" . number_format($row['pcount']) . "</a></td>";
-          echo "<td><a href=\"famsearch.php?tree={$row['gedcom']}\">" . number_format($famrow['fcount']) . "</a></td>";
-          echo "<td><a href=\"sourcesShow.php\">" . number_format($srcrow['scount']) . "</a></td>";
+          echo "<td><a href=\"search.php\">" . number_format($prow['pcount']) . "</a></td>";
+          echo "<td><a href=\"famsearch.php\">" . number_format($frow['fcount']) . "</a></td>";
+          echo "<td><a href=\"sourcesShow.php\">" . number_format($srow['scount']) . "</a></td>";
         echo "</tr>\n";
         $i++;
       }

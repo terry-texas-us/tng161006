@@ -37,13 +37,13 @@ function setTopMarker($level, $value, $debug) {
   $topmarker[$level] = $value;
 }
 $pedigree['cellpad'] = 5;
-$topmarker = array();
-$botmarker = array();
-$spouses_for_next_gen = array();
+$topmarker = [];
+$botmarker = [];
+$spouses_for_next_gen = [];
 $maxwidth = 0;
 $maxheight = 0;
-$starttop = array();
-$needtop = array();
+$starttop = [];
+$needtop = [];
 $numboxes = 0;
 
 $arrdnpath = $rootpath . $endrootpath . "img/ArrowDown.gif";
@@ -414,7 +414,7 @@ function doIndividual($person, $level) {
       $needperson = 0;
     }
     //get spouse data (if exists)
-    $spouserow = array();
+    $spouserow = [];
     if (!$spouse) {
       $spouse = $famrow['husband'] == $person ? 'wife' : 'husband';
     }
@@ -426,7 +426,7 @@ function doIndividual($person, $level) {
       $spouserow['allow_private'] = $rights['private'];
       $spouserow['name'] = getName($spouserow);
     } else {
-      $spouserow = array();
+      $spouserow = [];
     }
     //do box for other spouse
     //lines down from primary spouse
@@ -477,7 +477,7 @@ function getData($key, $sex, $level) {
     $self = $spouseorder = "";
   }
   $gotafamily = 0;
-  $stats = array();
+  $stats = [];
   $stats['slots'] = 0;
   $stats['fams'] = 0;
   $stats['es'] = 0; //end spouses

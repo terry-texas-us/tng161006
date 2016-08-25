@@ -804,9 +804,9 @@ $headSection->setTitle(uiTextSnippet('merge'));
               <table>
                 <?php
                 if (is_array($p1row)) {
-                  $parentsets = array();
-                  $spouses = array();
-                  $eventlist = array();
+                  $parentsets = [];
+                  $spouses = [];
+                  $eventlist = [];
                   echo "<tr>\n";
                   echo "<td colspan='3'><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('peopleEdit.php?personID={$p1row['personID']}&amp;cw=1','edit')\"></td>\n";
                   if (is_array($p2row)) {

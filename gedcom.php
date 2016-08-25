@@ -5,13 +5,13 @@ require 'tng_begin.php';
 require 'version.php';
 
 set_time_limit(0);
-$allsources = array();
-$allrepos = array();
-$xnotes = array();
-$citations = array();
-$private = array();
-$indarray = array();
-$gotfamily = array();
+$allsources = [];
+$allrepos = [];
+$xnotes = [];
+$citations = [];
+$private = [];
+$indarray = [];
+$gotfamily = [];
 
 $ldsOK = determineLDSRights();
 
@@ -50,13 +50,13 @@ function getAncestor($person, $generation) {
 function getCitations($persfamID) {
   global $citations_table;
 
-  $citations = array();
+  $citations = [];
   $citquery = "SELECT citationID, page, quay, citedate, citetext, note, sourceID, description, eventID FROM $citations_table WHERE persfamID = '$persfamID' ORDER BY eventID";
   $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
   while ($cite = tng_fetch_assoc($citresult)) {
     $eventID = $cite['eventID'] ? $cite['eventID'] : "-x--general--x-";
-    $citations[$eventID][] = array("page" => $cite['page'], "quay" => $cite['quay'], "citedate" => $cite['citedate'], "citetext" => $cite['citetext'], "note" => $cite['note'], "sourceID" => $cite['sourceID'], "description" => $cite['description']);
+    $citations[$eventID][] = ["page" => $cite['page'], "quay" => $cite['quay'], "citedate" => $cite['citedate'], "citetext" => $cite['citetext'], "note" => $cite['note'], "sourceID" => $cite['sourceID'], "description" => $cite['description']];
   }
   return $citations;
 }
@@ -161,7 +161,7 @@ function getFact($row, $level) {
 function getStdExtras($persfamID, $level) {
   global $events_table;
 
-  $stdex = array();
+  $stdex = [];
   $query = "SELECT age, agency, cause, addressID, parenttag FROM $events_table WHERE persfamID = '$persfamID' AND parenttag != \"\" ORDER BY parenttag";
   $stdextras = tng_query($query);
   while ($stdextra = tng_fetch_assoc($stdextras)) {
@@ -212,15 +212,15 @@ function getNotes($id) {
       WHERE $notelinks_table.persfamID = '$id'
       ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum";
   $notelinks = tng_query($query);
-  $notearray = array();
+  $notearray = [];
   while ($notelink = tng_fetch_assoc($notelinks)) {
     $eventid = $notelink['eventID'] ? $notelink['eventID'] : "-x--general--x-";
     $newnote = $notelink['noteID'] ? "@{$notelink['noteID']}@" : $notelink['note'];
     if (!is_array($notearray[$eventid])) {
-      $notearray[$eventid] = array();
+      $notearray[$eventid] = [];
     }
     //array_push( $notearray[$eventid], $newnote );
-    $innerarray = array();
+    $innerarray = [];
     $innerarray['text'] = $newnote;
     $innerarray['id'] = 'N' . $notelink['ID'];
     $innerarray['private'] = $notelink['secret'];
@@ -287,7 +287,7 @@ function doNote($level, $label, $notetxt, $private = "")
   if (!preg_match('/^@.+@$/', $notetxt)) {
     $notetxt = str_replace("@", "@@", $notetxt);
   }
-  $notes = is_string($notetxt) ? preg_split('/\r\n|\n/', $notetxt) : array();
+  $notes = is_string($notetxt) ? preg_split('/\r\n|\n/', $notetxt) : [];
   //$note = trim( array_shift( $notes ) );
   if ($level) {
     $note = array_shift($notes);
@@ -501,7 +501,7 @@ function writeIndividual($person) {
     if ($rights['both']) {
       $indnotes = getNotes($person);
     } else {
-      $indnotes = array();
+      $indnotes = [];
     }
 
     $citations = getCitations($person);

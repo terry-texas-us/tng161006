@@ -33,24 +33,24 @@ echo "</targetlist>\n";
 
 if ($linktype == 'I') {
   //standard people events
-  $list = array("NAME", "BIRT", "CHR", "DEAT", "BURI");
+  $list = ["NAME", "BIRT", "CHR", "DEAT", "BURI"];
   foreach ($list as $eventtype) {
     doEvent($eventtype, uiTextSnippet($eventtype), "");
   }
   if ($allow_lds) {
-    $ldslist = array("BAPL", "CONL", "INIT", "ENDL", "SLGC");
+    $ldslist = ["BAPL", "CONL", "INIT", "ENDL", "SLGC"];
     foreach ($ldslist as $eventtype) {
       doEvent($eventtype, uiTextSnippet($eventtype), "");
     }
   }
 } elseif ($linktype == 'F') {
   //standard family events
-  $list = array("MARR", "DIV");
+  $list = ["MARR", "DIV"];
   foreach ($list as $eventtype) {
     doEvent($eventtype, uiTextSnippet($eventtype), "");
   }
   if ($allow_lds) {
-    $ldslist = array("SLGS");
+    $ldslist = ["SLGS"];
     foreach ($ldslist as $eventtype) {
       doEvent($eventtype, uiTextSnippet($eventtype), "");
     }

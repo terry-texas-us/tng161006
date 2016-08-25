@@ -24,11 +24,11 @@ if ($pedigree['regnotes']) {
 $generation = 1;
 $personcount = 1;
 
-$currgen = array();
-$nextgen = array();
-$numbers = array();
-$lastgen = array();
-$lastlastgen = array();
+$currgen = [];
+$nextgen = [];
+$numbers = [];
+$lastgen = [];
+$lastlastgen = [];
 
 $result = getPersonFullPlusDates($personID);
 if (!tng_num_rows($result)) {
@@ -199,7 +199,7 @@ $headSection->setTitle($row['name']);
       $parentfamID = "";
       $locparentset = $parentset;
       $parentscount = 0;
-      $parentfamIDs = array();
+      $parentfamIDs = [];
       $parents = getChildFamily($personID, "parentorder");
       if ($parents) {
         $parentscount = tng_num_rows($parents);
@@ -393,8 +393,8 @@ $headSection->setTitle($row['name']);
         $lastlastgen = $lastgen;
         unset($nextgen);
         unset($lastgen);
-        $nextgen = array();
-        $lastgen = array();
+        $nextgen = [];
+        $lastgen = [];
         $generation++;
         echo "</ol>\n<br>\n";
       }

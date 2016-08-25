@@ -23,8 +23,8 @@ if ($pedigree['regnotes']) {
 $generation = 1;
 $personcount = 1;
 
-$currgen = array();
-$nextgen = array();
+$currgen = [];
+$nextgen = [];
 
 $result = getPersonFullPlusDates($personID);
 if ($result) {
@@ -209,7 +209,7 @@ $headSection->setTitle($row['name']);
         }
         $currgen = $nextgen;
         unset($nextgen);
-        $nextgen = array();
+        $nextgen = [];
         $generation++;
         echo "</ol>\n<br>\n";
       }

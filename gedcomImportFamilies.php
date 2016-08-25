@@ -20,18 +20,18 @@ function getFamilyRecord($familyID, $prevlevel) {
   $prefix = 'F';
   $info = "";
   $changedate = "";
-  $info['MARR'] = array();
-  $info['SLGS'] = array();
-  $events = array();
-  $stdnotes = array();
+  $info['MARR'] = [];
+  $info['SLGS'] = [];
+  $events = [];
+  $stdnotes = [];
   $notecount = 0;
   $childorder = 1;
   $custeventctr = 0;
-  $cite = array();
-  $mminfo = array();
+  $cite = [];
+  $mminfo = [];
   $mmcount = 0;
   $prevlevel++;
-  $assocarr = array();
+  $assocarr = [];
   $citecount = 0;
   $living = $private = 0;
 
@@ -51,7 +51,7 @@ function getFamilyRecord($familyID, $prevlevel) {
         case "SLGS":
           if (isset($info[$tag]['more'])) {
             $custeventctr++;
-            $events[$custeventctr] = array();
+            $events[$custeventctr] = [];
             $events[$custeventctr]['TAG'] = $tag;
             $thisevent = $prefix . "_" . $tag . "_";
             //make sure it's a keeper before continuing by checking against type_tag_desc list
@@ -71,7 +71,7 @@ function getFamilyRecord($familyID, $prevlevel) {
             if ($info[$tag]['extra']) {
               $info[$tag]['parent'] = $tag;
               $custeventctr++;
-              $events[$custeventctr] = array();
+              $events[$custeventctr] = [];
               $events[$custeventctr]['TAG'] = $tag;
               $thisevent = $prefix . "_" . $tag . "_";
               //make sure it's a keeper before continuing by checking against type_tag_desc list
@@ -128,7 +128,7 @@ function getFamilyRecord($familyID, $prevlevel) {
           break;
         case "ASSO":
           preg_match("/^@(\S+)@/", $lineinfo['rest'], $matches);
-          $thisassoc = array();
+          $thisassoc = [];
           if (substr($matches[1], 0, 1) == 'I' || substr($matches[1], -1) == 'I') {
             $countertouse = $savestate['ioffset'];
             $thisassoc['reltype'] = 'I';

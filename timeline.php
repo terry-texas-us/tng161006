@@ -3,7 +3,7 @@ require 'tng_begin.php';
 
 $timeline = $_SESSION['timeline'];
 if (!is_array($timeline)) {
-  $timeline = array();
+  $timeline = [];
 }
 
 $tng_message = $_SESSION['tng_message'] = "";
@@ -28,7 +28,7 @@ for ($i = 2; $i < 6; $i++) {
     }
   }
 }
-$finalarray = array();
+$finalarray = [];
 foreach ($timeline as $timeentry) {
   parse_str($timeentry);
   $todelete = $timetree . "_" . $timeperson;

@@ -51,7 +51,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
       $uniquesurnames = number_format($row['lncount']);
       tng_free_result($result);
 
-      $totalmedia = array();
+      $totalmedia = [];
       foreach ($mediatypes as $mediatype) {
         $mediatypeID = $mediatype['ID'];
         $query = "SELECT count(mediaID) as mcount FROM $media_table WHERE mediatypeID = '$mediatypeID'";
