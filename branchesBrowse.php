@@ -57,8 +57,6 @@ if ($offset) {
   $newoffset = "";
   $tngpage = 1;
 }
-$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-
 $wherestr = $searchstring ? "WHERE (branch LIKE \"%$searchstring%\" OR $branches_table.description LIKE \"%$searchstring%\")" : "";
 $query = "SELECT $branches_table.gedcom as gedcom, branch, $branches_table.description as description, personID, treename FROM $branches_table LEFT JOIN $treesTable ON $treesTable.gedcom = $branches_table.gedcom $wherestr ORDER BY $branches_table.description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);

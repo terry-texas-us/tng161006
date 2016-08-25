@@ -4,7 +4,6 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 initMediaTypes();
 header("Content-type:text/html; charset=" . $session_charset);
 ?>

@@ -11,8 +11,6 @@ if (!$allowMediaEdit) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-
 $flags['styles'] .= "<!-- blueimp Gallery styles -->\n";
 $flags['styles'] .= "<link rel=\"stylesheet\" href=\"//blueimp.github.io/Gallery/css/blueimp-gallery.min.css\">\n";
 

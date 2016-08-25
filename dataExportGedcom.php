@@ -7,8 +7,6 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-
 $query = "SELECT branch, gedcom, description FROM $branches_table WHERE gedcom = \"{$row['gedcom']}\" ORDER BY description";
 $branchresult = tng_query($query);
 

@@ -32,9 +32,6 @@ if ($place) {
     $place = $_COOKIE['tng_search_places_post']['search'];
   }
 }
-
-$treequery = "SELECT gedcom, treename FROM $treesTable $wherestr ORDER BY treename";
-
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('mergeplaces'));
 ?>

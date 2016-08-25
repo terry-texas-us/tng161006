@@ -11,8 +11,6 @@ if (!$allowMediaAdd) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('mediaimport'));
 ?>

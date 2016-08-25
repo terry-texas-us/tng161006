@@ -52,8 +52,6 @@ if ($offset) {
   $page = 1;
 }
 
-$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-
 $allwhere = "1=1";
 
 if ($assignedbranch) {

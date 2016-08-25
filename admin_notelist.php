@@ -41,8 +41,6 @@ if ($offset) {
   $newoffset = "";
   $tngpage = 1;
 }
-$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-
 $wherestr = "WHERE $xnotes_table.ID = $notelinks_table.xnoteID";
 
 if ($private) {
