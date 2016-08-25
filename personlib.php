@@ -428,13 +428,6 @@ function checkXnote($fact) {
   return $newfact;
 }
 
-function strpos_array($notes, $needle) {
-  while (($pos = strpos($haystack, $needle, $pos)) !== false) {
-    $array[] = $pos++;
-  }
-  return $array;
-}
-
 function resetEvents() {
   global $eventctr;
   global $events;
@@ -446,7 +439,12 @@ function resetEvents() {
 }
 
 function setEvent($data, $datetr) {
-  global $eventctr, $events, $nodate, $map, $eventctr_all, $nodate_all, $tngconfig;
+  global $eventctr;
+  global $events;
+  global $nodate;
+  global $map;
+  global $eventctr_all;
+  global $nodate_all;
 
   //make a copy of datetr
   $datetr_all = $datetr;
@@ -722,15 +720,16 @@ function doCustomEvents($entityID, $type, $nomap = 0) {
     }
     $extras = getFact($custevent);
     $fact = (count($fact) && $fact[0] != "") ? array_merge($fact, $extras) : $extras;
-    if ($displayval != '_UID') { // [ts] is this identifier used .. it still comes in on many gedcoms
-      setEvent(["text" => $displayval, "date" => $custevent['eventdate'], "place" => $custevent['eventplace'], "fact" => $fact, "xnote" => $xnote, "event" => $eventID, "entity" => $entityID, "type" => $type, "nomap" => $nomap, "collapse" => $custevent['collapse'] && !$tngprint], $custevent['eventdatetr']);
-    }
+    setEvent(["text" => $displayval, "date" => $custevent['eventdate'], "place" => $custevent['eventplace'], "fact" => $fact, "xnote" => $xnote, "event" => $eventID, "entity" => $entityID, "type" => $type, "nomap" => $nomap, "collapse" => $custevent['collapse'] && !$tngprint], $custevent['eventdatetr']);
   }
   tng_free_result($custevents);
 }
 
 function doMediaSection($entity, $medialist, $albums) {
-  global $mediatypes, $cellnumber, $tableid, $datewidth;
+  global $mediatypes;
+  global $cellnumber;
+  global $tableid;
+  global $datewidth;
 
   $media = "";
   $tableid = "media";
@@ -755,7 +754,7 @@ function doMediaSection($entity, $medialist, $albums) {
     }
     $media .= "<table class=\"table tfixed\">\n";
     $media .= "<col class=\"labelcol\"/><col style=\"width:{$datewidth}px\"/><col/>\n";
-    $media .= "$albumtext\n</table>\n";;
+    $media .= "$albumtext\n</table>\n";
   }
   return $media;
 }
@@ -1003,7 +1002,11 @@ function getMedia($entity, $linktype) {
 }
 
 function writeMedia($media_array, $mediatypeID, $prefix = "") {
-  global $tableid, $cellnumber, $datewidth, $mediatypes_display, $tngconfig;
+  global $tableid;
+  global $cellnumber;
+  global $datewidth;
+  global $mediatypes_display;
+  global $tngconfig;
 
   $mediatext = "";
   $media = $media_array['-x--general--x-'][$mediatypeID];

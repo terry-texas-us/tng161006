@@ -34,9 +34,7 @@ if ($sourcesearch) {
 } else {
   $wherestr = "";
 }
-$join = "LEFT JOIN";
-
-$query = "SELECT sourceID, title, shorttitle, author, $sources_table.gedcom as gedcom, treename FROM $sources_table $join $treesTable on $sources_table.gedcom = $treesTable.gedcom $wherestr ORDER BY title LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT sourceID, title, shorttitle, author FROM $sources_table $wherestr ORDER BY title LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
