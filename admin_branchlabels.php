@@ -15,28 +15,24 @@ if ($assignedbranch) {
   exit;
 }
 set_time_limit(0);
-$husbgender = array();
+$husbgender = [];
 $husbgender['self'] = 'husband';
 $husbgender['spouse'] = 'wife';
 $husbgender['spouseorder'] = 'husborder';
-$wifegender = array();
+$wifegender = [];
 $wifegender['self'] = 'wife';
 $wifegender['spouse'] = 'husband';
 $wifegender['spouseorder'] = 'wifeorder';
 
-$query = "SELECT treename FROM $treesTable";
-$treeresult = tng_query($query);
-tng_free_result($treeresult);
-
 $counter = $fcounter = 0;
-$done = $fdone = array();
+$done = $fdone = [];
 
 function getGender($personID) {
   global $people_table;
   global $husbgender;
   global $wifegender;
 
-  $info = array();
+  $info = [];
   $query = "SELECT firstname, lastname, sex FROM $people_table WHERE personID = '$personID'";
   $result = tng_query($query);
   if ($result) {
@@ -297,7 +293,7 @@ function setFamilyLabel($personID, $gender) {
           tng_query($query);
         }
         if ($branch) {
-          $query = "INSERT IGNORE INTO $branchlinks_table (branch, persfamID) VALUES('$branch', '{$row['familyID']}')";
+          $query = "INSERT IGNORE INTO $branchlinks_table (branch, persfamID) VALUES('$branch', \"{$row['familyID']}\")";
           tng_query($query);
         }
       }
@@ -333,7 +329,7 @@ function doAncestors($personID, $gender, $gen) {
   if ($dospouses) {
     setSpousesLabel($personID, $gender);
   }
-  $spouses = array();
+  $spouses = [];
   if ($gen <= $agens) {
     $query = "SELECT $children_table.familyID as familyID, husband, wife FROM ($children_table, $families_table) WHERE $children_table.familyID = $families_table.familyID AND personID = '$personID'";
     $familyresult = tng_query($query);

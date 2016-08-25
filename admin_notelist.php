@@ -50,8 +50,7 @@ if ($searchstring) {
   $wherestr .= $wherestr ? " AND" : "WHERE";
   $wherestr .= " ($xnotes_table.note LIKE '%" . $searchstring . "%')";
 }
-$query = "SELECT $xnotes_table.ID as ID, $xnotes_table.note as note, $xnotes_table.gedcom as gedcom
-    FROM ($xnotes_table, $notelinks_table)" . $wherestr . " ORDER BY note LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT $xnotes_table.ID as ID, $xnotes_table.note as note FROM ($xnotes_table, $notelinks_table)" . $wherestr . " ORDER BY note LIMIT $newoffset" . $maxsearchresults;
 
 $result = tng_query($query);
 
@@ -136,7 +135,6 @@ $headSection->setTitle(uiTextSnippet('notes'));
               <th><?php echo uiTextSnippet('select'); ?></th>
             <?php } ?>
             <th><?php echo uiTextSnippet('note'); ?></th>
-            <th><?php echo uiTextSnippet('tree'); ?></th>
             <th><?php echo uiTextSnippet('linkedto'); ?></th>
           </tr>
           <?php
@@ -159,20 +157,11 @@ $headSection->setTitle(uiTextSnippet('notes'));
             if ($allowDelete) {
               echo "<td><input name=\"del{$row['ID']}\" type='checkbox' value='1'></td>";
             }
-            $query = "SELECT $notelinks_table.ID, $notelinks_table.persfamID as personID, $notelinks_table.gedcom, secret
-              FROM $notelinks_table
-              WHERE $notelinks_table.xnoteID = \"{$row['ID']}\" ";
+            $query = "SELECT $notelinks_table.ID, $notelinks_table.persfamID AS personID, secret FROM $notelinks_table WHERE $notelinks_table.xnoteID = \"{$row['ID']}\" ";
 
             $nresult = tng_query($query);
             $notelinktext = "";
             while ($nrow = tng_fetch_assoc($nresult)) {
-              $treetext = "";
-              $query = "SELECT treename FROM " . $treesTable . " WHERE gedcom = \"{$nrow['gedcom']}\"";
-              $result2 = tng_query($query);
-              $row2 = tng_fetch_assoc($result2);
-              $treetext = "<td>" . $row2['treename'] . "</td>";
-              tng_free_result($result2);
-
               if (!$notelinktext) {
                 $query = "SELECT * FROM $people_table WHERE personID = \"{$nrow['personID']}\"";
                 $result2 = tng_query($query);

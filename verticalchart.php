@@ -38,7 +38,10 @@ $allowpdf = !$treerow['disallowpdf'] || ($allow_pdf && $rightbranch);
 tng_free_result($treeResult);
 
 function initChart() {
-  global $gens, $gedcom, $generations, $personID;
+  global $gens;
+  global $gedcom;
+  global $generations;
+  global $personID;
 
   $gedcom = tng_real_escape_string($_GET['tree']);
   $gens[1][1] = $personID;
@@ -54,12 +57,10 @@ function get_details(&$gens, $generation, $max_generations) {
   global $person_count;
   global $people_table;
   global $families_table;
-  $delete_variables = array('firstname', 'lnprefix', 'lastname', 'title', 'prefix', 'suffix', 'nameorder', 'allow_living', 'allow_private');
+  $delete_variables = ['firstname', 'lnprefix', 'lastname', 'title', 'prefix', 'suffix', 'nameorder', 'allow_living', 'allow_private'];
   foreach ($gens[$generation] as $num => $g) {
     if ($g) {
-      $query = "SELECT personID, firstname, lnprefix, lastname, title, prefix, suffix, nameorder, sex, birthdate, birthdatetr,
-        altbirthdate, altbirthdatetr, deathdate, deathdatetr, burialdate, burialdatetr, birthplace, altbirthplace, deathplace, burialplace,
-        husband AS father, wife AS mother, {$people_table}.living, {$people_table}.private, {$people_table}.branch, {$people_table}.gedcom
+      $query = "SELECT personID, firstname, lnprefix, lastname, title, prefix, suffix, nameorder, sex, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, deathdatetr, burialdate, burialdatetr, birthplace, altbirthplace, deathplace, burialplace, husband AS father, wife AS mother, {$people_table}.living, {$people_table}.private, {$people_table}.branch
         FROM {$people_table} LEFT JOIN {$families_table} ON {$people_table}.famc={$families_table}.familyID
         WHERE personID='{$g}'";
       $result = tng_query($query);

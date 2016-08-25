@@ -132,10 +132,7 @@ function getNameUniversal($row, $order, $hcard = null) {
 function getFamilyName($row) {
   global $people_table;
 
-  $hquery = "SELECT firstname, lnprefix, lastname, title, prefix, suffix, living, private, branch, nameorder, gedcom "
-          . "FROM $people_table "
-          . "WHERE personID = \"{$row['husband']}\" "
-          . "AND gedcom = \"{$row['gedcom']}\"";
+  $hquery = "SELECT firstname, lnprefix, lastname, title, prefix, suffix, living, private, branch, nameorder FROM $people_table WHERE personID = '{$row['husband']}'";
   $hresult = tng_query($hquery) or die(uiTextSnippet('cannotexecutequery') . ": $hquery");
   $hrow = tng_fetch_assoc($hresult);
 
@@ -146,10 +143,7 @@ function getFamilyName($row) {
   $husbname = getName($hrow);
   tng_free_result($hresult);
 
-  $wquery = "SELECT firstname, lnprefix, lastname, title, prefix, suffix, living, private, branch, nameorder, gedcom "
-          . "FROM $people_table "
-          . "WHERE personID = \"{$row['wife']}\" "
-          . "AND gedcom = \"{$row['gedcom']}\"";
+  $wquery = "SELECT firstname, lnprefix, lastname, title, prefix, suffix, living, private, branch, nameorder FROM $people_table WHERE personID = '{$row['wife']}'";
   $wresult = tng_query($wquery) or die(uiTextSnippet('cannotexecutequery') . ": $wquery");
   $wrow = tng_fetch_assoc($wresult);
 
@@ -380,7 +374,7 @@ function getLivingPrivateRestrictions($table, $firstname, $allOtherInput) {
     $atreestr = $matchperson = "";
     if ($_SESSION['mypersonID'] && $table == $people_table) {
       //this is me (current user)
-      $matchperson = " OR ({$table}gedcom = \"{$_SESSION['mygedcom']}\" AND {$table}personID = \"{$_SESSION['mypersonID']}\")";
+      $matchperson = " OR ({$table}personID = \"{$_SESSION['mypersonID']}\")";
     }
     if (($livingNameRestrictions && $privateNameRestrictions) || ($allOtherInput && !$allLivingRights && !$allPrivateRights)) {
       if ($limitedLivingRights && $limitedPrivateRights) {
@@ -448,11 +442,7 @@ function checkLivingLinks($itemID) {
   }
   if ($icriteria) {
     // Now find Living individuals linked to the media that fit the criteria set above.
-    $query = "SELECT count(*) as pcount "
-            . "FROM ($medialinks_table, $people_table) "
-            . "WHERE $medialinks_table.personID = $people_table.personID "
-            . "AND $medialinks_table.gedcom = $people_table.gedcom "
-            . "AND $medialinks_table.mediaID = '$itemID' $icriteria";
+    $query = "SELECT count(*) as pcount FROM ($medialinks_table, $people_table) WHERE $medialinks_table.personID = $people_table.personID AND $medialinks_table.mediaID = '$itemID' $icriteria";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
     tng_free_result($result);
@@ -462,11 +452,7 @@ function checkLivingLinks($itemID) {
   }
 
   if ($fcriteria) {
-    $query = "SELECT count(*) as pcount "
-            . "FROM ($medialinks_table, $families_table) "
-            . "WHERE $medialinks_table.personID = $families_table.familyID "
-            . "AND $medialinks_table.gedcom = $families_table.gedcom "
-            . "AND $medialinks_table.mediaID = '$itemID' $fcriteria";
+    $query = "SELECT count(*) as pcount FROM ($medialinks_table, $families_table) WHERE $medialinks_table.personID = $families_table.familyID AND $medialinks_table.mediaID = '$itemID' $fcriteria";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
     tng_free_result($result);
@@ -977,7 +963,7 @@ function placeImage($place) {
 function checkMaintenanceMode($area) {
   global $tngconfig;
 
-  if (strpos($_SERVER['SCRIPT_NAME'], "/mixedSuggest.php") === false && strpos($_SERVER['SCRIPT_NAME'], "admin") === false && $tngconfig['maint'] && (!$_SESSION['allow_admin'] || $_SESSION['assignedtree']) && strpos($_SERVER['SCRIPT_NAME'], "/index.") === false) {
+  if (strpos($_SERVER['SCRIPT_NAME'], "/mixedSuggest.php") === false && strpos($_SERVER['SCRIPT_NAME'], "admin") === false && $tngconfig['maint'] && (!$_SESSION['allow_admin']) && strpos($_SERVER['SCRIPT_NAME'], "/index.") === false) {
     $maint_url = $area ? "adminmaint.php" : "maint.php";
     header("Location:$maint_url");
     exit;

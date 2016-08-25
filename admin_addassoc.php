@@ -37,7 +37,7 @@ if ($reltype == 'I') {
   $row['allow_private'] = $rights['private'];
   $name = getName($row) . " ($passocID)";
 } else {
-  $query = "SELECT husband, wife, gedcom, familyID FROM $families_table WHERE familyID = '$passocID'";
+  $query = "SELECT husband, wife, familyID FROM $families_table WHERE familyID = '$passocID'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   $name = getFamilyName($row);

@@ -21,7 +21,6 @@ function reorderMedia($query, $plink) {
   global $type;
   global $album2entities_table;
 
-  $ptree = $plink['gedcom'];
   $eventID = $plink['eventID'];
   $result3 = tng_query($query);
   while ($personrow = tng_fetch_assoc($result3)) {
@@ -376,7 +375,7 @@ switch ($action) {
     if ($type == "album") {
       $query = "SELECT entityID, gedcom FROM $album2entities_table WHERE alinkID=\"$linkID\"";
     } else {
-      $query = "SELECT personID as entityID, $medialinks_table.gedcom as gedcom, eventID, mediatypeID FROM ($medialinks_table, $media_table) WHERE medialinkID=\"$linkID\" and $medialinks_table.mediaID = $media_table.mediaID";
+      $query = "SELECT personID as entityID, eventID, mediatypeID FROM ($medialinks_table, $media_table) WHERE medialinkID=\"$linkID\" and $medialinks_table.mediaID = $media_table.mediaID";
     }
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
@@ -479,7 +478,7 @@ switch ($action) {
     $numrows = 0;
     switch ($linktype) {
       case 'I':
-        $query = "SELECT firstname, lnprefix, lastname, prefix, suffix, title, living, private, nameorder, gedcom, branch FROM $people_table WHERE personID = '$entityID'";
+        $query = "SELECT firstname, lnprefix, lastname, prefix, suffix, title, living, private, nameorder, branch FROM $people_table WHERE personID = '$entityID'";
         $result = tng_query($query);
         $row = tng_fetch_assoc($result);
         $rights = determineLivingPrivateRights($row);
@@ -500,7 +499,6 @@ switch ($action) {
         $row = tng_fetch_assoc($result);
         $name = "";
 
-        $person['gedcom'] = '';
         if ($row['hpersonID']) {
           $person['personID'] = $row['hpersonID'];
           $person['firstname'] = $row['hfirstname'];

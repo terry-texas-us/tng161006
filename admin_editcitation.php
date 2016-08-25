@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-$query = "SELECT $citations_table.sourceID as sourceID, description, page, quay, citedate, citetext, note, title, $citations_table.gedcom as gedcom FROM $citations_table LEFT JOIN $sources_table on $citations_table.sourceID = $sources_table.sourceID WHERE citationID = \"$citationID\"";
+$query = "SELECT $citations_table.sourceID as sourceID, description, page, quay, citedate, citetext, note, title FROM $citations_table LEFT JOIN $sources_table on $citations_table.sourceID = $sources_table.sourceID WHERE citationID = \"$citationID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -89,7 +89,6 @@ header("Content-type:text/html; charset=" . $session_charset);
   </div> <!-- .modal-body -->
   <footer class='modal-footer'>
     <input name='citationID' type='hidden' value="<?php echo $citationID; ?>">
-    <input name='tree' type='hidden' value="<?php echo $row['gedcom']; ?>">
     <input name='submit' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
     <p>
       <a href='#' onclick="return gotoSection('editcitation', 'citations');"><?php echo uiTextSnippet('cancel'); ?></a>

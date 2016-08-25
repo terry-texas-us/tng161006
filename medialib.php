@@ -1,12 +1,12 @@
 <?php
 function reorderMedia($query, $plink, $mediatypeID) {
-  global $medialinks_table, $media_table;
+  global $medialinks_table;
+  global $media_table;
 
-  $ptree = $plink['gedcom'];
   $eventID = $plink['eventID'];
   $result3 = tng_query($query);
   while ($personrow = tng_fetch_assoc($result3)) {
-    $query = "SELECT medialinkID FROM ($medialinks_table, $media_table) WHERE personID = \"{$personrow['personID']}\" AND $medialinks_table.gedcom = \"$ptree\" AND $media_table.mediaID = $medialinks_table.mediaID AND eventID = \"$eventID\" AND mediatypeID = \"$mediatypeID\" ORDER BY ordernum";
+    $query = "SELECT medialinkID FROM ($medialinks_table, $media_table) WHERE personID = \"{$personrow['personID']}\" AND $media_table.mediaID = $medialinks_table.mediaID AND eventID = \"$eventID\" AND mediatypeID = \"$mediatypeID\" ORDER BY ordernum";
     $result4 = tng_query($query);
 
     $counter = 1;
@@ -21,9 +21,14 @@ function reorderMedia($query, $plink, $mediatypeID) {
 }
 
 function resortMedia($mediaID) {
-  global $media_table, $medialinks_table, $people_table, $families_table, $sources_table, $repositories_table;
+  global $media_table;
+  global $medialinks_table;
+  global $people_table;
+  global $families_table;
+  global $sources_table;
+  global $repositories_table;
 
-  $query = "SELECT $media_table.mediaID as mediaID, personID, $medialinks_table.gedcom as gedcom, mediatypeID FROM $medialinks_table, $media_table WHERE $medialinks_table.mediaID = \"$mediaID\" AND $medialinks_table.mediaID = $media_table.mediaID";
+  $query = "SELECT $media_table.mediaID as mediaID, personID, mediatypeID FROM $medialinks_table, $media_table WHERE $medialinks_table.mediaID = '$mediaID' AND $medialinks_table.mediaID = $media_table.mediaID";
   $result2 = tng_query($query);
   if ($result2) {
     while ($plink = tng_fetch_assoc($result2)) {

@@ -7,9 +7,9 @@ $adminLogin = true;
 require 'checklogin.php';
 
 if ($albumID) {
-  $query2 = "SELECT entityID, gedcom FROM $album2entities_table WHERE albumID = '$albumID' AND linktype = '$linktype'";
+  $query2 = "SELECT entityID FROM $album2entities_table WHERE albumID = '$albumID' AND linktype = '$linktype'";
 } else {
-  $query2 = "SELECT personID as entityID, gedcom FROM $medialinks_table WHERE mediaID = '$mediaID' AND linktype = '$linktype'";
+  $query2 = "SELECT personID as entityID FROM $medialinks_table WHERE mediaID = '$mediaID' AND linktype = '$linktype'";
 }
 $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
 $alreadygot = array();

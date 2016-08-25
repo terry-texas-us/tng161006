@@ -41,17 +41,14 @@ if ($notesearch) {
   $wherestr .= " match($xnotes_table.note) against( \"$notesearch2\" in boolean mode)";
 }
 
-$query = "SELECT $xnotes_table.ID as ID, $xnotes_table.note as note, $notelinks_table.persfamID as personID, $xnotes_table.gedcom as gedcom
-    FROM ($xnotes_table, $notelinks_table)
-    $wherestr ORDER BY note LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT $xnotes_table.ID as ID, $xnotes_table.note as note, $notelinks_table.persfamID as personID
+    FROM ($xnotes_table, $notelinks_table) $wherestr ORDER BY note LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count($xnotes_table.ID) as scount FROM ($xnotes_table, $notelinks_table)
-    LEFT JOIN $treesTable on $xnotes_table.gedcom = $treesTable.gedcom
-    $wherestr";
+  $query = "SELECT count($xnotes_table.ID) as scount FROM ($xnotes_table, $notelinks_table) $wherestr";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['scount'];

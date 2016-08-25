@@ -93,24 +93,10 @@ if ($result2) {
 <div id="links" style="margin:0;padding-top:12px">
   <table>
     <tr>
-      <td><?php echo uiTextSnippet('tree'); ?></td>
       <td><?php echo uiTextSnippet('linktype'); ?></td>
       <td colspan='2'><?php echo uiTextSnippet('id'); ?></td>
     </tr>
     <tr>
-      <td>
-        <select name="tree1" id="microtree">
-          <?php
-          for ($j = 1; $j <= $treenum; $j++) {
-            echo "  <option value=\"{$trees[$j]}\"";
-            if ($trees[$j] == $usetree) {
-              echo " selected";
-            }
-            echo ">$treename[$j]</option>\n";
-          }
-          ?>
-        </select>
-      </td>
       <td>
         <select name="linktype1">
           <option value='I'><?php echo uiTextSnippet('person'); ?></option>

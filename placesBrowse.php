@@ -48,7 +48,6 @@ if ($offset) {
   $newoffset = "";
   $tngpage = 1;
 }
-$tree = "";
 
 function addCriteria($field, $value, $operator) {
   $criteria = $operator == "=" ? " OR $field $operator \"$value\"" : " OR $field $operator \"%$value%\"";
@@ -73,10 +72,7 @@ if ($searchstring) {
   $allwhere .= addCriteria("notes", $searchstring, $frontmod);
   $allwhere .= ")";
 }
-$treename = "";
-
-$query = "SELECT ID, place, placelevel, longitude, latitude, zoom, $places_table.gedcom as gedcom $treename FROM $places_table";
-$query .= " WHERE $allwhere ORDER BY place, $places_table.gedcom, ID LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT ID, place, placelevel, longitude, latitude, zoom FROM $places_table WHERE $allwhere ORDER BY place, ID LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {

@@ -77,7 +77,7 @@ $gotmore = array();
 while ($more = tng_fetch_assoc($morelinks)) {
   $gotmore[$more['parenttag']] = "*";
 }
-$query = "SELECT $people_table.personID as pID, firstname, lastname, lnprefix, prefix, suffix, nameorder, birthdate, altbirthdate, living, private, branch, $people_table.gedcom FROM $people_table, $children_table WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = '$familyID' ORDER BY ordernum";
+$query = "SELECT $people_table.personID as pID, firstname, lastname, lnprefix, prefix, suffix, nameorder, birthdate, altbirthdate, living, private, branch FROM $people_table, $children_table WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = '$familyID' ORDER BY ordernum";
 $children = tng_query($query);
 
 $kidcount = tng_num_rows($children);

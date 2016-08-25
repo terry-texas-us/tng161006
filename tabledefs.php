@@ -26,9 +26,9 @@ $query = "CREATE TABLE $address_table (
     www VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     phone VARCHAR(30) NOT NULL,
-    gedcom VARCHAR(20) NOT NULL,
+    gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     PRIMARY KEY (addressID),
-    INDEX address (gedcom, country, state, city, address1)
+    INDEX address (country, state, city, address1)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $address_table);
 
@@ -70,8 +70,8 @@ $query = "CREATE TABLE $album2entities_table (
     albumID INT(11) NOT NULL,
     ordernum FLOAT NOT NULL,
     PRIMARY KEY (alinkID),
-    UNIQUE alinkID (gedcom, entityID, albumID),
-    INDEX entityID (gedcom, entityID, ordernum),
+    UNIQUE alinkID (entityID, albumID),
+    INDEX entityID (entityID, ordernum),
     FOREIGN KEY alinks_fk1 (gedcom, entityID) REFERENCES $people_table (gedcom, personID),
     FOREIGN KEY alinks_fk2 (gedcom, entityID) REFERENCES $families_table (gedcom, familyID),
     FOREIGN KEY alinks_fk3 (gedcom, entityID) REFERENCES $sources_table (gedcom, sourceID)
@@ -82,13 +82,13 @@ $query = "DROP TABLE IF EXISTS $assoc_table";
 $result = performQuery($query);
 $query = "CREATE TABLE $assoc_table (
     assocID INT(11) NOT NULL AUTO_INCREMENT,
-    gedcom VARCHAR(20) NOT NULL,
+    gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     personID VARCHAR(22) NOT NULL,
     passocID VARCHAR(22) NOT NULL,
     reltype VARCHAR(1) NOT NULL,
     relationship VARCHAR(75) NOT NULL,
     PRIMARY KEY (assocID),
-    INDEX assoc (gedcom, personID)
+    INDEX assoc (personID)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $assoc_table);
 
@@ -96,7 +96,7 @@ $query = "DROP TABLE IF EXISTS $branches_table";
 $result = performQuery($query);
 $query = "CREATE TABLE $branches_table (
     branch VARCHAR(20) NOT NULL,
-    gedcom VARCHAR(20) NOT NULL,
+    gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     description VARCHAR(128) NOT NULL,
     personID VARCHAR(22) NOT NULL,
     agens INT(11) NOT NULL,
@@ -104,8 +104,8 @@ $query = "CREATE TABLE $branches_table (
     dagens INT(11) NOT NULL,
     inclspouses TINYINT(4) NOT NULL,
     action TINYINT(4) NOT NULL,
-    PRIMARY KEY (gedcom, branch),
-    INDEX description (gedcom, description)
+    PRIMARY KEY (branch),
+    INDEX description (description)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $branches_table);
 
@@ -114,10 +114,10 @@ $result = performQuery($query);
 $query = "CREATE TABLE $branchlinks_table (
     ID INT(11) NOT NULL AUTO_INCREMENT,
     branch VARCHAR(20) NOT NULL,
-    gedcom VARCHAR(20) NOT NULL,
+    gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     persfamID VARCHAR(22) NOT NULL,
     PRIMARY KEY (ID),
-    UNIQUE branch (gedcom, branch, persfamID)
+    UNIQUE branch (branch, persfamID)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $branchlinks_table);
 
@@ -146,7 +146,7 @@ $query = "DROP TABLE IF EXISTS $children_table";
 $result = performQuery($query);
 $query = "CREATE TABLE $children_table (
     ID INT(11) NOT NULL AUTO_INCREMENT,
-    gedcom VARCHAR(20) NOT NULL,
+    gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     familyID VARCHAR(22) NOT NULL,
     personID VARCHAR(22) NOT NULL,
     frel VARCHAR(20) NOT NULL,
@@ -158,8 +158,8 @@ $query = "CREATE TABLE $children_table (
     ordernum SMALLINT(6) NOT NULL,
     parentorder TINYINT(4) NOT NULL,
     PRIMARY KEY (ID),
-    UNIQUE familyID (gedcom, familyID, personID),
-    INDEX personID (gedcom, personID),
+    UNIQUE familyID (familyID, personID),
+    INDEX personID (personID),
     FOREIGN KEY children_fk1 (gedcom, familyID) REFERENCES $families_table (gedcom, familyID),
     FOREIGN KEY children_fk2 (gedcom, personID) REFERENCES $people_table (gedcom, personID)
 ) ENGINE = MYISAM $collationstr";
@@ -169,7 +169,7 @@ $query = "DROP TABLE IF EXISTS $citations_table";
 $result = performQuery($query);
 $query = "CREATE TABLE $citations_table (
     citationID INT(11) NOT NULL AUTO_INCREMENT,
-    gedcom VARCHAR(20) NOT NULL,
+    gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     persfamID VARCHAR(22) NOT NULL,
     eventID VARCHAR(10) NOT NULL,
     sourceID VARCHAR(22) NOT NULL,
@@ -182,7 +182,7 @@ $query = "CREATE TABLE $citations_table (
     quay VARCHAR(2) NOT NULL,
     note TEXT NOT NULL,
     PRIMARY KEY (citationID),
-    INDEX citation (gedcom, persfamID, eventID, sourceID, description(20)),
+    INDEX citation (persfamID, eventID, sourceID, description(20)),
     FOREIGN KEY citations_fk1 (gedcom, persfamID) REFERENCES $people_table (gedcom, personID),
     FOREIGN KEY citations_fk2 (gedcom, persfamID) REFERENCES $families_table (gedcom, familyID),
     FOREIGN KEY citations_fk3 (gedcom, sourceID) REFERENCES $sources_table (gedcom, sourceID)
@@ -201,7 +201,7 @@ $query = "DROP TABLE IF EXISTS $events_table";
 $result = performQuery($query);
 $query = "CREATE TABLE $events_table (
     eventID INT(11) NOT NULL AUTO_INCREMENT,
-    gedcom VARCHAR(20) NOT NULL,
+    gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     persfamID VARCHAR(22) NOT NULL,
     eventtypeID INT(11) NOT NULL,
     eventdate VARCHAR(50) NOT NULL,
@@ -214,8 +214,8 @@ $query = "CREATE TABLE $events_table (
     parenttag VARCHAR(10) NOT NULL,
     info TEXT NOT NULL,
     PRIMARY KEY (eventID),
-    INDEX persfamID (gedcom, persfamID),
-    INDEX eventplace (gedcom, eventplace(20)),
+    INDEX persfamID (persfamID),
+    INDEX eventplace (eventplace(20)),
     FOREIGN KEY events_fk1 (gedcom, persfamID) REFERENCES $people_table (gedcom, personID),
     FOREIGN KEY events_fk2 (gedcom, persfamID) REFERENCES $families_table (gedcom, familyID),
     FOREIGN KEY events_fk3 (gedcom, persfamID) REFERENCES $sources_table (gedcom, sourceID),
@@ -244,7 +244,7 @@ $query = "DROP TABLE IF EXISTS $families_table";
 $result = performQuery($query);
 $query = "CREATE TABLE $families_table (
     ID INT(11) NOT NULL AUTO_INCREMENT,
-    gedcom VARCHAR(20) NOT NULL,
+    gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     familyID VARCHAR(22) NOT NULL,
     husband VARCHAR(22) NOT NULL,
     wife VARCHAR(22) NOT NULL,
@@ -269,9 +269,9 @@ $query = "CREATE TABLE $families_table (
     edituser VARCHAR(20) NOT NULL,
     edittime INT(11) NOT NULL,
     PRIMARY KEY (ID),
-    UNIQUE familyID (gedcom, familyID),
-    INDEX husband (gedcom, husband),
-    INDEX wife (gedcom, wife),
+    UNIQUE familyID (familyID),
+    INDEX husband (husband),
+    INDEX wife (wife),
     INDEX marrplace (marrplace(20)),
     INDEX divplace (divplace(20)),
     INDEX changedate (changedate)
@@ -293,7 +293,7 @@ $query = "DROP TABLE IF EXISTS $medialinks_table";
 $result = performQuery($query);
 $query = "CREATE TABLE $medialinks_table (
     medialinkID INT(11) NOT NULL AUTO_INCREMENT,
-    gedcom VARCHAR(20) NOT NULL,
+    gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     linktype CHAR(1) NOT NULL,
     personID VARCHAR(248) NOT NULL,
     eventID VARCHAR(10) NOT NULL,
@@ -304,8 +304,8 @@ $query = "CREATE TABLE $medialinks_table (
     dontshow TINYINT(4) NOT NULL,
     defphoto VARCHAR(1) NOT NULL,
     PRIMARY KEY (medialinkID),
-    UNIQUE mediaID (gedcom, personID, mediaID, eventID),
-    INDEX personID (gedcom, personID, ordernum),
+    UNIQUE mediaID (personID, mediaID, eventID),
+    INDEX personID (personID, ordernum),
     FOREIGN KEY medialinks_fk1 (gedcom, personID) REFERENCES $people_table (gedcom, personID),
     FOREIGN KEY medialinks_fk2 (gedcom, personID) REFERENCES $families_table (gedcom, familyID),
     FOREIGN KEY medialinks_fk3 (gedcom, personID) REFERENCES $sources_table (gedcom, sourceID)
@@ -318,7 +318,7 @@ $query = "CREATE TABLE $media_table (
     mediaID INT(11) NOT NULL AUTO_INCREMENT,
     mediatypeID VARCHAR(20) NOT NULL,
     mediakey VARCHAR(255) NOT NULL,
-    gedcom VARCHAR(20) NOT NULL,
+    gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     form VARCHAR(10) NOT NULL,
     path VARCHAR(255) NULL,
     description TEXT NULL,
@@ -347,7 +347,7 @@ $query = "CREATE TABLE $media_table (
     changedate DATETIME NOT NULL,
     changedby VARCHAR(20) NOT NULL,
     PRIMARY KEY (mediaID),
-    UNIQUE mediakey (gedcom, mediakey),
+    UNIQUE mediakey (mediakey),
     INDEX mediatypeID (mediatypeID),
     INDEX changedate (changedate),
     INDEX description (description(20)),
@@ -391,7 +391,7 @@ $result = performQuery($query);
 $query = "CREATE TABLE $mostwanted_table (
     ID INT(11) NOT NULL AUTO_INCREMENT,
     ordernum FLOAT NOT NULL,
-    gedcom VARCHAR(20) NOT NULL,
+    gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     mwtype VARCHAR(10) NOT NULL,
     title VARCHAR(128) NOT NULL,
     description TEXT NOT NULL,
@@ -407,13 +407,13 @@ $result = performQuery($query);
 $query = "CREATE TABLE $notelinks_table (
     ID INT(11) NOT NULL AUTO_INCREMENT,
     persfamID VARCHAR(22) NOT NULL,
-    gedcom VARCHAR(20) NOT NULL,
+    gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     xnoteID INT(11) NOT NULL,
     eventID VARCHAR(10) NOT NULL,
     ordernum FLOAT NOT NULL,
     secret TINYINT(4) NOT NULL,
     PRIMARY KEY (ID),
-    INDEX notelinks (gedcom, persfamID, eventID),
+    INDEX notelinks (persfamID, eventID),
     FOREIGN KEY notelinks_fk1 (gedcom, persfamID) REFERENCES $people_table (gedcom, personID),
     FOREIGN KEY notelinks_fk2 (gedcom, persfamID) REFERENCES $families_table (gedcom, familyID)
 ) ENGINE = MYISAM $collationstr";
@@ -423,7 +423,7 @@ $query = "DROP TABLE IF EXISTS $people_table";
 $result = performQuery($query);
 $query = "CREATE TABLE $people_table (
     ID INT(11) NOT NULL AUTO_INCREMENT,
-    gedcom VARCHAR(20) NOT NULL,
+    gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     personID VARCHAR(22) NOT NULL,
     lnprefix VARCHAR(25) NOT NULL,
     lastname VARCHAR(127) NOT NULL,
@@ -469,11 +469,9 @@ $query = "CREATE TABLE $people_table (
     edituser VARCHAR(20) NOT NULL,
     edittime INT(11) NOT NULL,
     PRIMARY KEY (ID),
-    UNIQUE gedpers (gedcom, personID),
+    UNIQUE personID (personID),
     INDEX lastname (lastname, firstname),
     INDEX firstname (firstname),
-    INDEX gedlast (gedcom, lastname, firstname),
-    INDEX gedfirst (gedcom, firstname),
     INDEX birthplace (birthplace(20)),
     INDEX altbirthplace (altbirthplace(20)),
     INDEX deathplace (deathplace(20)),
@@ -490,7 +488,7 @@ $query = "DROP TABLE IF EXISTS $places_table";
 $result = performQuery($query);
 $query = "CREATE TABLE $places_table (
     ID INT(11) NOT NULL AUTO_INCREMENT,
-    gedcom VARCHAR(20) NOT NULL,
+    gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     place VARCHAR(248) NOT NULL,
     longitude VARCHAR(20) NULL,
     latitude VARCHAR(20) NULL,
@@ -500,8 +498,8 @@ $query = "CREATE TABLE $places_table (
     geoignore TINYINT(4) NOT NULL,
     notes TEXT NULL,
     PRIMARY KEY (ID),
-    UNIQUE place (gedcom, place),
-    INDEX temple (temple, gedcom, place)
+    UNIQUE place (place),
+    INDEX temple (temple, place)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $places_table);
 
@@ -529,12 +527,12 @@ $query = "CREATE TABLE $repositories_table (
     ID INT(11) NOT NULL AUTO_INCREMENT,
     repoID VARCHAR(22) NOT NULL,
     reponame VARCHAR(90) NOT NULL,
-    gedcom VARCHAR(20) NOT NULL,
+    gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     addressID INT(11) NOT NULL,
     changedate DATETIME NOT NULL,
     changedby VARCHAR(20) NOT NULL,
     PRIMARY KEY (ID),
-    UNIQUE repoID (gedcom, repoID),
+    UNIQUE repoID (repoID),
     INDEX reponame (reponame)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $repositories_table);
@@ -574,7 +572,7 @@ $query = "DROP TABLE IF EXISTS $sources_table";
 $result = performQuery($query);
 $query = "CREATE TABLE $sources_table (
     ID INT(11) NOT NULL AUTO_INCREMENT,
-    gedcom VARCHAR(20) NOT NULL,
+    gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     sourceID VARCHAR(22) NOT NULL,
     callnum VARCHAR(120) NOT NULL,
     type VARCHAR(20) NULL,
@@ -590,7 +588,7 @@ $query = "CREATE TABLE $sources_table (
     changedby VARCHAR(20) NOT NULL,
     PRIMARY KEY (ID),
     FULLTEXT sourcetext (actualtext),
-    UNIQUE sourceID (gedcom, sourceID),
+    UNIQUE sourceID (sourceID),
     INDEX changedate (changedate)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $sources_table);
@@ -608,7 +606,7 @@ $result = performQuery($query);
 $query = "CREATE TABLE $temp_events_table (
     tempID INT(11) NOT NULL AUTO_INCREMENT,
     type CHAR(1) NOT NULL,
-    gedcom VARCHAR(20) NOT NULL,
+    gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     personID VARCHAR(22) NOT NULL,
     familyID VARCHAR(22) NOT NULL,
     eventID VARCHAR(10) NOT NULL,
@@ -619,7 +617,7 @@ $query = "CREATE TABLE $temp_events_table (
     user VARCHAR(20) NOT NULL,
     postdate DATETIME NOT NULL,
     PRIMARY KEY (tempID),
-    INDEX gedtype (gedcom, type),
+    INDEX gedtype (type),
     INDEX user (user)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $temp_events_table);
@@ -713,11 +711,11 @@ $result = performQuery($query);
 $query = "CREATE TABLE $xnotes_table (
     ID INT(11) NOT NULL AUTO_INCREMENT,
     noteID VARCHAR(22) NOT NULL,
-    gedcom VARCHAR(20) NOT NULL,
+    gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     note TEXT NOT NULL,
     PRIMARY KEY (ID),
     FULLTEXT note (note),
-    INDEX noteID (gedcom, noteID),
+    INDEX noteID (noteID),
     FOREIGN KEY xnotes_fk1 (gedcom, ID) REFERENCES $notelinks_table (gedcom, xnoteID)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $xnotes_table);

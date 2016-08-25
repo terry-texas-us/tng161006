@@ -20,22 +20,8 @@ if (!$allowMediaEdit && !$allowMediaAdd) {
   header("Location: ajx_login.php?message=" . urlencode($message));
   exit;
 }
-$treequery = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-$treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
-$treenum = 0;
-while ($treerow = tng_fetch_assoc($treeresult)) {
-  $treenum++;
-  $trees[$treenum] = $treerow['gedcom'];
-  $treename[$treenum] = $treerow['treename'];
-}
-tng_free_result($treeresult);
-
-$query = "SELECT $medialinks_table.medialinkID as mlinkID, $medialinks_table.personID as personID, eventID, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.prefix as prefix, people.suffix as suffix, people.nameorder as nameorder, altdescription, altnotes, $medialinks_table.gedcom as gedcom, people.branch as branch, treename,
-    familyID, people.personID as personID2, wifepeople.personID as wpersonID, wifepeople.firstname as wfirstname, wifepeople.lnprefix as wlnprefix, wifepeople.lastname as wlastname, wifepeople.prefix as wprefix, wifepeople.suffix as wsuffix, wifepeople.nameorder as wnameorder,
-    husbpeople.personID as hpersonID, husbpeople.firstname as hfirstname, husbpeople.lnprefix as hlnprefix, husbpeople.lastname as hlastname, husbpeople.prefix as hprefix, husbpeople.suffix as hsuffix, husbpeople.nameorder as hnameorder,
-    sourceID, sources.title, repositories.repoID as repoID, reponame, defphoto, linktype, dontshow, people.living, people.private, $families_table.living as fliving, $families_table.private as fprivate
+$query = "SELECT $medialinks_table.medialinkID as mlinkID, $medialinks_table.personID as personID, eventID, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.prefix as prefix, people.suffix as suffix, people.nameorder as nameorder, altdescription, altnotes, people.branch as branch, familyID, people.personID as personID2, wifepeople.personID as wpersonID, wifepeople.firstname as wfirstname, wifepeople.lnprefix as wlnprefix, wifepeople.lastname as wlastname, wifepeople.prefix as wprefix, wifepeople.suffix as wsuffix, wifepeople.nameorder as wnameorder, husbpeople.personID as hpersonID, husbpeople.firstname as hfirstname, husbpeople.lnprefix as hlnprefix, husbpeople.lastname as hlastname, husbpeople.prefix as hprefix, husbpeople.suffix as hsuffix, husbpeople.nameorder as hnameorder, sourceID, sources.title, repositories.repoID as repoID, reponame, defphoto, linktype, dontshow, people.living, people.private, $families_table.living as fliving, $families_table.private as fprivate
     FROM $medialinks_table
-    LEFT JOIN $treesTable as trees ON $medialinks_table.gedcom = trees.gedcom
     LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID
     LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID
     LEFT JOIN $sources_table AS sources ON $medialinks_table.personID = sources.sourceID
@@ -47,7 +33,6 @@ $result2 = tng_query($query);
 
 header("Content-type:text/html; charset=" . $session_charset);
 ?>
-
 <table>
   <tr>
     <td>

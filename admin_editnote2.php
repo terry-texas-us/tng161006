@@ -6,7 +6,7 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-$query = "SELECT $xnotes_table.note as note, secret, $notelinks_table.gedcom as gedcom, $notelinks_table.ID as nID FROM ($notelinks_table, $xnotes_table)
+$query = "SELECT $xnotes_table.note AS note, secret, $notelinks_table.ID as nID FROM ($notelinks_table, $xnotes_table)
     WHERE $notelinks_table.xnoteID = $xnotes_table.ID AND $xnotes_table.ID = '$ID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
@@ -64,7 +64,6 @@ $headSection->setTitle(uiTextSnippet('modifynote'));
             </table>
             <input name='ID' type='hidden' value="<?php echo $row['nID']; ?>">
             <input name='xID' type='hidden' value="<?php echo $ID; ?>">
-            <input name='gedcom' type='hidden' value="<?php echo $row['gedcom']; ?>">
             <input name='submit' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
             <input name='cancel' type='button' value="<?php echo uiTextSnippet('cancel'); ?>"
                 onClick="window.location.href = 'admin_notelist.php';">

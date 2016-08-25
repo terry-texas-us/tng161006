@@ -28,17 +28,15 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
 
       <?php
       set_time_limit(0);
-      $wherestr = "";
       if ($secaction == uiTextSnippet('sortchildren')) {
         echo "<p>" . uiTextSnippet('sortingchildren') . "</p>";
         echo uiTextSnippet('families') . ":<br>\n";
         $fcount = 0;
-        $query = "SELECT familyID, gedcom FROM $families_table $wherestr";
+        $query = "SELECT familyID FROM $families_table";
         $result = tng_query($query);
         while ($family = tng_fetch_assoc($result)) {
           $query = "SELECT $children_table.ID as ID, IF(birthdatetr !='0000-00-00',birthdatetr,altbirthdatetr) as birth FROM $children_table, $people_table
-      WHERE $children_table.familyID = \"{$family['familyID']}\" AND $people_table.personID = $children_table.personID $wherestr2
-      ORDER BY birth, ordernum";
+      WHERE $children_table.familyID = \"{$family['familyID']}\" AND $people_table.personID = $children_table.personID $wherestr2 ORDER BY birth, ordernum";
           $fresult = tng_query($query);
           $order = 0;
           while ($child = tng_fetch_assoc($fresult)) {
@@ -60,12 +58,10 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         echo uiTextSnippet('people') . ":<br>\n";
         $fcount = 0;
         //first do husbands
-        $query = "SELECT personID, $families_table.gedcom as gedcom FROM $families_table, $people_table WHERE $people_table.personID = $families_table.husband $wherestr";
+        $query = "SELECT personID FROM $families_table, $people_table WHERE $people_table.personID = $families_table.husband";
         $result = tng_query($query);
         while ($husband = tng_fetch_assoc($result)) {
-          $query = "SELECT ID FROM $families_table
-      WHERE husband = \"{$husband['personID']}\"
-      ORDER BY marrdatetr, husborder";
+          $query = "SELECT ID FROM $families_table WHERE husband = '{$husband['personID']}' ORDER BY marrdatetr, husborder";
           $fresult = tng_query($query);
           $order = 0;
           while ($spouse = tng_fetch_assoc($fresult)) {
@@ -82,12 +78,10 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         tng_free_result($result);
 
         //now do wives
-        $query = "SELECT personID, $families_table.gedcom as gedcom FROM $families_table, $people_table WHERE $people_table.personID = $families_table.wife $wherestr";
+        $query = "SELECT personID FROM $families_table, $people_table WHERE $people_table.personID = $families_table.wife";
         $result = tng_query($query);
         while ($wife = tng_fetch_assoc($result)) {
-          $query = "SELECT ID FROM $families_table
-      WHERE wife = \"{$wife['personID']}\"
-      ORDER BY marrdatetr, wifeorder";
+          $query = "SELECT ID FROM $families_table WHERE wife = '{$wife['personID']}' ORDER BY marrdatetr, wifeorder";
           $fresult = tng_query($query);
           $order = 0;
           while ($spouse = tng_fetch_assoc($fresult)) {
@@ -123,7 +117,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         $gendexout = "$rootpath$gendexfile/gendex.txt";
         $gendexURL = "$tngdomain/$gendexfile/gendex.txt";
 
-        $query = "SELECT personID, firstname, lnprefix, lastname, living, private, birthdate, birthplace, altbirthdate, altbirthplace, deathdate, deathplace, burialdate, burialplace, gedcom FROM $people_table $wherestr ORDER BY lastname, firstname";
+        $query = "SELECT personID, firstname, lnprefix, lastname, living, private, birthdate, birthplace, altbirthdate, altbirthplace, deathdate, deathplace, burialdate, burialplace FROM $people_table ORDER BY lastname, firstname";
         $result = tng_query($query);
         if ($result) {
           //open file (overwrite any contents)
@@ -140,9 +134,9 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
               $person['lastname'] = $uclast;
               $info = $person['living'] ? "||||" : getVitals($person);
               if ($person['living'] && $nonames == 2) {
-                $line = $person['personID'] . "&tree={$person['gedcom']}|$uclast|" . initials($person['firstname']) . " /$uclast/|$info\n";
+                $line = $person['personID'] . "&tree=master|$uclast|" . initials($person['firstname']) . " /$uclast/|$info\n";
               } else {
-                $line = $person['personID'] . "&tree={$person['gedcom']}|$uclast|{$person['firstname']} /$uclast/|$info\n";
+                $line = $person['personID'] . "&tree=master|$uclast|{$person['firstname']} /$uclast/|$info\n";
               }
               if ($session_charset == "UTF-8") {
                 $line = utf8_decode($line);
@@ -178,15 +172,15 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         $result2 = tng_query($query);
 
         $fcount = 0;
-        $query = "SELECT distinct ($families_table.familyID), husband, wife, $families_table.gedcom as gedcom FROM ($children_table, $families_table) WHERE $families_table.familyID = $children_table.familyID $wherestr";
+        $query = "SELECT distinct ($families_table.familyID), husband, wife FROM ($children_table, $families_table) WHERE $families_table.familyID = $children_table.familyID";
         $result = tng_query($query);
         while ($family = tng_fetch_assoc($result)) {
           if ($family['husband'] != "") {
-            $query = "UPDATE $children_table SET haskids = 1 WHERE personID = \"{$family['husband']}\"";
+            $query = "UPDATE $children_table SET haskids = 1 WHERE personID = '{$family['husband']}'";
             $result2 = tng_query($query);
           }
           if ($family['wife'] != "") {
-            $query = "UPDATE $children_table SET haskids = 1 WHERE personID = \"{$family['wife']}\"";
+            $query = "UPDATE $children_table SET haskids = 1 WHERE personID = '{$family['wife']}'";
             $result2 = tng_query($query);
           }
           $fcount++;
@@ -198,7 +192,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         echo "<br><br>" . uiTextSnippet('finishedtracking') . "<br>";
       } elseif ($secaction == uiTextSnippet('relabelbranches')) {
         echo "<p>" . uiTextSnippet('relabeling') . "</p>";
-        $query = "SELECT branch, persfamID, gedcom FROM $branchlinks_table $wherestr";
+        $query = "SELECT branch, persfamID FROM $branchlinks_table";
         $result = tng_query($query);
         while ($branch = tng_fetch_assoc($result)) {
           $success = 0;

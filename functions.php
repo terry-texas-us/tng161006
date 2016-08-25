@@ -40,7 +40,7 @@ function get_media_offsets($result, $mediaID) {
   $prev = $i ? $i - 1 : $nexttolast;
   $next = $i < $nexttolast ? $i + 1 : 0;
 
-  return array($i, $prev, $next, $nexttolast);
+  return [$i, $prev, $next, $nexttolast];
 }
 
 function get_media_link($result, $address, $page, $jumpfunc, $title, $label, $allstr, $showlinks) {
@@ -79,7 +79,6 @@ function doMedia($mediatypeID) {
   global $citations_table;
   global $nonames;
   global $people_table;
-  global $treesTable;
   global $currentuser;
   global $rootpath, $mediapath, $header, $footer, $cemeteries_table, $mediatypes_assoc, $mediatypes_display;
   global $whatsnew, $thumbmaxw, $events_table, $eventtypes_table, $altstr, $tngconfig;
@@ -91,10 +90,10 @@ function doMedia($mediatypeID) {
     $hsfields = $hsjoin = "";
   }
 
-  $query = "SELECT distinct $media_table.mediaID as mediaID, description $altstr, $media_table.notes, thumbpath, path, form, mediatypeID, $media_table.gedcom as gedcom, alwayson, usecollfolder, DATE_FORMAT(changedate,'%e %b %Y') as changedatef, changedby, status, plot, abspath, newwindow $hsfields
+  $query = "SELECT distinct $media_table.mediaID as mediaID, description $altstr, $media_table.notes, thumbpath, path, form, mediatypeID, alwayson, usecollfolder, DATE_FORMAT(changedate,'%e %b %Y') as changedatef, changedby, status, plot, abspath, newwindow $hsfields
     FROM $media_table $hsjoin";
   if ($wherestr) {
-    $query .= " LEFT JOIN $medialinks_table on $media_table.mediaID = $medialinks_table.mediaID";
+    $query .= " LEFT JOIN $medialinks_table ON $media_table.mediaID = $medialinks_table.mediaID";
   }
   $query .= " WHERE $cutoffstr $wherestr mediatypeID = \"$mediatypeID\" ORDER BY ";
   if (strpos($_SERVER['SCRIPT_NAME'], "placesearch") !== false) {
@@ -123,13 +122,12 @@ function doMedia($mediatypeID) {
 
     $query = "SELECT medialinkID, $medialinks_table.personID as personID, $medialinks_table.eventID, people.personID as personID2, familyID, people.living as living, people.private as private, people.branch as branch,
       $families_table.branch as fbranch, $families_table.living as fliving, $families_table.private as fprivate, husband, wife, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname,
-      people.prefix as prefix, people.suffix as suffix, nameorder, $medialinks_table.gedcom as gedcom, treename, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID,reponame, deathdate, burialdate, linktype
+      people.prefix as prefix, people.suffix as suffix, nameorder, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID,reponame, deathdate, burialdate, linktype
       FROM $medialinks_table
       LEFT JOIN $people_table AS people ON ($medialinks_table.personID = people.personID)
       LEFT JOIN $families_table ON ($medialinks_table.personID = $families_table.familyID)
       LEFT JOIN $sources_table ON ($medialinks_table.personID = $sources_table.sourceID)
       LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID)
-      LEFT JOIN $treesTable ON $medialinks_table.gedcom = $treesTable.gedcom
       WHERE mediaID = \"{$row['mediaID']}\"$Wherestr2 ORDER BY lastname, lnprefix, firstname, $medialinks_table.personID";
     $presult = tng_query($query);
     $foundliving = 0;
@@ -147,8 +145,7 @@ function doMedia($mediatypeID) {
       }
       if ($prow['living'] == null && $prow['private'] == null && $prow['linktype'] == 'I') {
         $query = "SELECT count(personID) as ccount FROM $citations_table, $people_table
-          WHERE $citations_table.sourceID = '{$prow['personID']}' AND $citations_table.persfamID = $people_table.personID
-          AND (living = '1' OR private = '1')";
+          WHERE $citations_table.sourceID = '{$prow['personID']}' AND $citations_table.persfamID = $people_table.personID AND (living = '1' OR private = '1')";
         $presult2 = tng_query($query);
         $prow2 = tng_fetch_assoc($presult2);
         if ($prow2['ccount']) {

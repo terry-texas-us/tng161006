@@ -57,13 +57,13 @@ if ($offset) {
   $newoffset = "";
   $tngpage = 1;
 }
-$wherestr = $searchstring ? "WHERE (branch LIKE \"%$searchstring%\" OR $branches_table.description LIKE \"%$searchstring%\")" : "";
-$query = "SELECT $branches_table.gedcom as gedcom, branch, $branches_table.description as description, personID, treename FROM $branches_table LEFT JOIN $treesTable ON $treesTable.gedcom = $branches_table.gedcom $wherestr ORDER BY $branches_table.description LIMIT $newoffset" . $maxsearchresults;
+$whereClause = $searchstring ? "WHERE (branch LIKE '%$searchstring%' OR $branches_table.description LIKE '%$searchstring%')" : "";
+$query = "SELECT branch, $branches_table.description as description, personID FROM $branches_table $whereClause ORDER BY $branches_table.description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(branch) as bcount FROM $branches_table LEFT JOIN $treesTable ON $treesTable.gedcom = $branches_table.gedcom $wherestr";
+  $query = "SELECT count(branch) as bcount FROM $branches_table $whereClause";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['bcount'];
@@ -91,7 +91,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
 
       <input name='submit' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
       <input name='submit' type='submit' value="<?php echo uiTextSnippet('reset'); ?>"
-                   onClick="document.form1.searchstring.value = ''; document.form1.tree.selectedIndex = 0;">
+                   onClick="document.form1.searchstring.value = '';">
       <input name='findbranch' type='hidden' value='1'>
       <input name='newsearch' type='hidden' value='1'>
     </form>
@@ -123,7 +123,6 @@ $headSection->setTitle(uiTextSnippet('branches'));
             <?php } ?>
             <th><?php echo uiTextSnippet('id'); ?></th>
             <th><?php echo uiTextSnippet('description'); ?></th>
-            <th><?php echo uiTextSnippet('tree'); ?></th>
             <th><?php echo uiTextSnippet('startingind'); ?></th>
             <th><?php echo uiTextSnippet('people'); ?></th>
             <th><?php echo uiTextSnippet('families'); ?></th>
@@ -133,7 +132,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
         if ($numrows) {
           $actionstr = "";
           if ($allowEdit) {
-            $actionstr .= "<a href=\"branchesEdit.php?branch=xxx&amp;tree=yyy\" title='" . uiTextSnippet('edit') . "'>\n";
+            $actionstr .= "<a href=\"branchesEdit.php?branch=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
             $actionstr .= "</a>\n";
           }
@@ -144,20 +143,18 @@ $headSection->setTitle(uiTextSnippet('branches'));
           }
           while ($row = tng_fetch_assoc($result)) {
             $newactionstr = str_replace("xxx", $row['branch'], $actionstr);
-            $newactionstr = str_replace("yyy", $row['gedcom'], $newactionstr);
             echo "<tr id=\"row_{$row['branch']}\">\n";
             echo "<td>\n";
             echo "<div>\n$newactionstr</div>\n";
             echo "</td>\n";
             if ($allowDelete) {
-              echo "<td><input name=\"del{$row['branch']}&amp;{$row['gedcom']}\" type='checkbox' value='1'></td>";
+              echo "<td><input name=\"del{$row['branch']}\" type='checkbox' value='1'></td>";
             }
-            $editlink = "branchesEdit.php?branch={$row['branch']}&tree={$row['gedcom']}";
+            $editlink = "branchesEdit.php?branch={$row['branch']}";
             $id = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['branch'] . "</a>" : $row['branch'];
 
             echo "<td>$id</td>\n";
             echo "<td>&nbsp;{$row['description']}</td>\n";
-            echo "<td>{$row['treename']}</td>\n";
 
             $pcount = getBranchCount($row['branch'], $people_table);
             $fcount = getBranchCount($row['branch'], $families_table);

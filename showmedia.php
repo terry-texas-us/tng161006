@@ -21,7 +21,7 @@ initMediaTypes();
 if ($medialinkID) {
   //look up media & medialinks joined
   //get info for linked person/family/source/repo
-  $query = "SELECT mediatypeID, personID, linktype, $medialinks_table.gedcom as gedcom, eventID, ordernum FROM ($media_table, $medialinks_table) WHERE medialinkID = \"$medialinkID\" AND $media_table.mediaID = $medialinks_table.mediaID";
+  $query = "SELECT mediatypeID, personID, linktype, eventID, ordernum FROM ($media_table, $medialinks_table) WHERE medialinkID = '$medialinkID' AND $media_table.mediaID = $medialinks_table.mediaID";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   $personID = $row['personID'];
@@ -44,7 +44,7 @@ if ($medialinkID) {
     $albdesc = $row['description'];
     tng_free_result($result);
   }
-  $query = "SELECT mediatypeID, gedcom FROM $media_table WHERE mediaID = \"$mediaID\"";
+  $query = "SELECT mediatypeID FROM $media_table WHERE mediaID = '$mediaID'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   $mediatypeID = $row['mediatypeID'];
@@ -80,13 +80,13 @@ if ($personID && !$albumlinkID) {
     $rightbranch = 1;
   } else {
     if ($linktype == 'F') {
-      $query = "SELECT familyID, husband, wife, living, marrdate, gedcom, branch FROM $families_table WHERE familyID = '$personID'";
+      $query = "SELECT familyID, husband, wife, living, marrdate, branch FROM $families_table WHERE familyID = '$personID'";
     } elseif ($linktype == 'S') {
       $query = "SELECT title FROM $sources_table WHERE sourceID = '$personID'";
     } elseif ($linktype == 'R') {
       $query = "SELECT reponame FROM $repositories_table WHERE repoID = '$personID'";
     } elseif ($linktype == 'I') {
-      $query = "SELECT lastname, firstname, prefix, suffix, title, lnprefix, living, private, branch, $people_table.gedcom, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, deathdatetr, burialdate, burialdatetr, sex, disallowgedcreate, IF(birthdatetr !='0000-00-00',YEAR(birthdatetr),YEAR(altbirthdatetr)) as birth, IF(deathdatetr !='0000-00-00',YEAR(deathdatetr),YEAR(burialdatetr)) as death
+      $query = "SELECT lastname, firstname, prefix, suffix, title, lnprefix, living, private, branch, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, deathdatetr, burialdate, burialdatetr, sex, disallowgedcreate, IF(birthdatetr !='0000-00-00',YEAR(birthdatetr),YEAR(altbirthdatetr)) as birth, IF(deathdatetr !='0000-00-00',YEAR(deathdatetr),YEAR(burialdatetr)) as death
         FROM $people_table, $treesTable WHERE personID = '$personID'";
     }
     $result2 = tng_query($query);
@@ -279,7 +279,7 @@ echo "<body id='public'>\n";
       //do cemetery name here for headstones
       //do map here for headstones
       if ($imgrow['cemeteryID']) {
-        doCemPlusMap($imgrow, $tree);
+        doCemPlusMap($imgrow);
       }
 
       if (!$tngprint) {

@@ -3,7 +3,7 @@ require 'begin.php';
 require $subroot . 'mapconfig.php';
 require 'adminlib.php';
 
-$adminLogin = true;
+$adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
@@ -79,7 +79,7 @@ if ($cemeteryID) {
   $wherestr .= $wherestr ? " AND cemeteryID = \"$cemeteryID\"" : "cemeteryID = \"$cemeteryID\"";
 }
 if ($unlinked) {
-  $join = "LEFT JOIN $medialinks_table on $media_table.mediaID = $medialinks_table.mediaID";
+  $join = "LEFT JOIN $medialinks_table ON $media_table.mediaID = $medialinks_table.mediaID";
   $medialinkID = "medialinkID,";
   $wherestr .= $wherestr ? " AND medialinkID is NULL" : "medialinkID is NULL";
 }
@@ -108,7 +108,7 @@ $headSection->setTitle(uiTextSnippet('media'));
 <body id='admin-media'>
   <section class='container'>
     <?php
-    $standardtypes = array();
+    $standardtypes = [];
     foreach ($mediatypes as $mediatype) {
       if (!$mediatype['type']) {
         $standardtypes[] = "\"" . $mediatype['ID'] . "\"";
@@ -373,14 +373,13 @@ $headSection->setTitle(uiTextSnippet('media'));
               $label = uiTextSnippet($mtypeID) ? uiTextSnippet($mtypeID) : $mediatypes_display[$mtypeID];
               echo "<td>" . $label . "</td>\n";
             }
-            $query = "SELECT people.personID as personID2, familyID, husband, wife, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.prefix as prefix, people.suffix as suffix, nameorder,
-              $medialinks_table.personID as personID, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame, linktype, $families_table.gedcom as gedcom
+            $query = "SELECT people.personID as personID2, familyID, husband, wife, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.prefix as prefix, people.suffix as suffix, nameorder, $medialinks_table.personID as personID, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame, linktype
               FROM $medialinks_table
               LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID
               LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID
               LEFT JOIN $sources_table ON $medialinks_table.personID = $sources_table.sourceID
               LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID)
-              WHERE mediaID = \"{$row['mediaID']}\" ORDER BY lastname, lnprefix, firstname, personID LIMIT 10";
+              WHERE mediaID = '{$row['mediaID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT 10";
             $presult = tng_query($query);
             $medialinktext = "";
             while ($prow = tng_fetch_assoc($presult)) {

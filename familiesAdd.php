@@ -26,7 +26,7 @@ if ($child) {
   }
 }
 if ($newperson) {
-  $query = "SELECT personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch, gedcom FROM $people_table WHERE personID = '$newperson'";
+  $query = "SELECT personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch FROM $people_table WHERE personID = '$newperson'";
   $result = tng_query($query);
   $newpersonrow = tng_fetch_assoc($result);
 
@@ -49,9 +49,6 @@ if (!isset($husbstr)) {
 if (!isset($wifestr)) {
   $wifestr = uiTextSnippet('clickfind');
 }
-$query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-$result = tng_query($query);
-
 $revstar = checkReview('F');
 
 header("Content-type: text/html; charset=" . $session_charset);
@@ -88,7 +85,7 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
                 <td><?php echo uiTextSnippet('branch'); ?>:</td>
                 <td style="height:2em">
                   <?php
-                  $query = "SELECT branch, description FROM $branches_table WHERE gedcom = \"$firsttree\" ORDER BY description";
+                  $query = "SELECT branch, description FROM $branches_table ORDER BY description";
                   $branchresult = tng_query($query);
                   $numbranches = tng_num_rows($branchresult);
                   $branchlist = explode(",", $row['branch']);

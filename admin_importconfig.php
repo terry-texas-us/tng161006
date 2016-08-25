@@ -13,10 +13,6 @@ if ($link) {
     header("Location: admin_login.php?message=" . urlencode($message));
     exit;
   }
-  $query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
-  $result = tng_query($query);
-} else {
-  $result = false;
 }
 if (!$tngimpcfg['maxlivingage']) {
   $tngimpcfg['maxlivingage'] = "110";

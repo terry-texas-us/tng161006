@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-$query = "SELECT $xnotes_table.note as note, $xnotes_table.ID as xID, secret, $notelinks_table.gedcom as gedcom, persfamID, eventID FROM $notelinks_table,  $xnotes_table
+$query = "SELECT $xnotes_table.note as note, $xnotes_table.ID as xID, secret, persfamID, eventID FROM $notelinks_table,  $xnotes_table
     WHERE $notelinks_table.xnoteID = $xnotes_table.ID AND $notelinks_table.ID = '$noteID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
@@ -51,7 +51,6 @@ header("Content-type:text/html; charset=" . $session_charset);
   <br>
   <input name='xID' type='hidden' value="<?php echo $row['xID']; ?>">
   <input name='ID' type='hidden' value="<?php echo $noteID; ?>">
-  <input name='tree' type='hidden' value="<?php echo $row['gedcom']; ?>">
   <input name='persfamID' type='hidden' value="<?php echo $row['persfamID']; ?>">
   <input name='eventID' type='hidden' value="<?php echo $row['eventID']; ?>">
 </form>

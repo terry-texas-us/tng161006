@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-$query = "SELECT display, $events_table.eventtypeID as eventtypeID, eventdate, eventplace, age, agency, cause, $events_table.gedcom as gedcom, $events_table.addressID, address1, address2, city, state, zip, country, info, phone, email, www FROM ($events_table, $eventtypes_table) LEFT JOIN $address_table on $events_table.addressID = $address_table.addressID WHERE eventID = \"$eventID\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID";
+$query = "SELECT display, $events_table.eventtypeID as eventtypeID, eventdate, eventplace, age, agency, cause, $events_table.addressID, address1, address2, city, state, zip, country, info, phone, email, www FROM ($events_table, $eventtypes_table) LEFT JOIN $address_table on $events_table.addressID = $address_table.addressID WHERE eventID = \"$eventID\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -119,7 +119,6 @@ header("Content-type:text/html; charset=" . $session_charset);
   <footer class='modal-footer'>
     <input name='addressID' type='hidden' value="<?php echo $row['addressID']; ?>">
     <input name='eventID' type='hidden' value="<?php echo $eventID; ?>">
-    <input name='tree' type='hidden' value="<?php echo $row['gedcom']; ?>">
     <input name='submit' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
     <input name='cancel' type='button' value="<?php echo uiTextSnippet('cancel'); ?>" onclick="tnglitbox.remove();">
   </footer>

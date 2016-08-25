@@ -25,12 +25,10 @@ if ($wherestr) {
 }
 //if doing a locality search, link directly to placesearch
 if ($stretch) {
-  $query = "SELECT distinct place as myplace, place as wholeplace, count( place ) as placecount, gedcom "
-          . "FROM $places_table $wherestr GROUP BY myplace ORDER by myplace";
+  $query = "SELECT distinct place as myplace, place as wholeplace, count( place ) as placecount FROM $places_table $wherestr GROUP BY myplace ORDER by myplace";
   $places_oneletter_url = "placesearch.php?";
 } else {
-  $query = "SELECT distinct trim(substring_index(place,',',-$offset)) as myplace, trim(place) as wholeplace, count(place) as placecount, gedcom "
-          . "FROM $places_table $wherestr GROUP BY myplace ORDER by myplace";
+  $query = "SELECT distinct trim(substring_index(place,',',-$offset)) as myplace, trim(place) as wholeplace, count(place) as placecount FROM $places_table $wherestr GROUP BY myplace ORDER by myplace";
   $places_oneletter_url = "places-oneletter.php?";
 }
 $result = tng_query($query);
@@ -62,9 +60,9 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": $displaychar");
     <h2><img class='icon-md' src='svg/location.svg'><?php echo uiTextSnippet('placelist') . ": $displaychar"; ?></h2>
     <br class='clearleft'>
     <?php
-    $hiddenfields[] = array('name' => 'firstchar', 'value' => $firstchar);
-    $hiddenfields[] = array('name' => 'psearch', 'value' => $psearch);
-    $hiddenfields[] = array('name' => 'offset', 'value' => $offsetorg);
+    $hiddenfields[] = ['name' => 'firstchar', 'value' => $firstchar];
+    $hiddenfields[] = ['name' => 'psearch', 'value' => $psearch];
+    $hiddenfields[] = ['name' => 'offset', 'value' => $offsetorg];
     beginFormElement("places-oneletter", "get");
     ?>
       <div class="card">

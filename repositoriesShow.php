@@ -36,9 +36,7 @@ if ($reposearch) {
 } else {
   $wherestr = "";
 }
-$join = "LEFT JOIN";
-
-$query = "SELECT repoID, reponame, $repositories_table.gedcom as gedcom, treename FROM $repositories_table $join $treesTable on $repositories_table.gedcom = $treesTable.gedcom $wherestr ORDER BY reponame LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT repoID, reponame FROM $repositories_table $wherestr ORDER BY reponame LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);

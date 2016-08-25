@@ -10,7 +10,7 @@ if (!$allowEdit) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-$query = "SELECT personID, firstname, lastname, lnprefix, prefix, suffix, branch, gedcom, nameorder, living, private FROM $people_table WHERE branch LIKE \"%$branch%\" ORDER BY lastname, firstname";
+$query = "SELECT personID, firstname, lastname, lnprefix, prefix, suffix, branch, nameorder, living, private FROM $people_table WHERE branch LIKE \"%$branch%\" ORDER BY lastname, firstname";
 $brresult = tng_query($query);
 $numresults = tng_num_rows($brresult);
 $names = "";
@@ -26,7 +26,7 @@ while ($row = tng_fetch_assoc($brresult)) {
 }
 tng_free_result($brresult);
 
-$query = "SELECT familyID, husband, wife, gedcom, branch, living, private FROM $families_table WHERE branch LIKE \"%$branch%\" ORDER BY familyID";
+$query = "SELECT familyID, husband, wife, branch, living, private FROM $families_table WHERE branch LIKE \"%$branch%\" ORDER BY familyID";
 $brresult = tng_query($query);
 $numfresults = tng_num_rows($brresult);
 

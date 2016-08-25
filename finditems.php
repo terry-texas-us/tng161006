@@ -21,16 +21,16 @@ header("Content-type:text/html; charset=" . $session_charset);
 
 $mediaquery = "";
 if ($albumID) {
-  $mediaquery = "SELECT entityID, gedcom FROM $album2entities_table WHERE albumID = '$albumID' AND linktype = '$type'";
+  $mediaquery = "SELECT entityID FROM $album2entities_table WHERE albumID = '$albumID' AND linktype = '$type'";
 } else {
   if ($mediaID) {
-    $mediaquery = "SELECT personID as entityID, gedcom FROM $medialinks_table WHERE mediaID = '$mediaID' AND linktype = '$type'";
+    $mediaquery = "SELECT personID as entityID FROM $medialinks_table WHERE mediaID = '$mediaID' AND linktype = '$type'";
   }
 }
 
 if ($mediaquery) {
   $result2 = tng_query($mediaquery) or die(uiTextSnippet('cannotexecutequery') . ": $mediaquery");
-  $alreadygot = array();
+  $alreadygot = [];
   while ($row2 = tng_fetch_assoc($result2)) {
     $alreadygot[] = $row2['entityID'];
   }
@@ -104,7 +104,7 @@ switch ($type) {
       $allwhere .= $more;
     }
 
-    $query = "SELECT personID, lastname, firstname, lnprefix, birthdate, altbirthdate, deathdate, burialdate, prefix, suffix, nameorder, living, private, branch, gedcom FROM $people_table WHERE $allwhere ORDER BY lastname, lnprefix, firstname LIMIT 250";
+    $query = "SELECT personID, lastname, firstname, lnprefix, birthdate, altbirthdate, deathdate, burialdate, prefix, suffix, nameorder, living, private, branch FROM $people_table WHERE $allwhere ORDER BY lastname, lnprefix, firstname LIMIT 250";
     $result = tng_query($query);
 
     if (tng_num_rows($result)) {
@@ -204,8 +204,7 @@ switch ($type) {
 
     $joinonwife = "LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID";
     $joinonhusb = "LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID";
-    $query = "SELECT familyID, wifepeople.personID as wpersonID, wifepeople.firstname as wfirstname, wifepeople.lnprefix as wlnprefix, wifepeople.lastname as wlastname, wifepeople.suffix as wsuffix, wifepeople.nameorder as wnameorder, wifepeople.living as wliving, wifepeople.private as wprivate, wifepeople.branch as wbranch,
-      husbpeople.personID as hpersonID, husbpeople.firstname as hfirstname, husbpeople.lnprefix as hlnprefix, husbpeople.lastname as hlastname, husbpeople.suffix as hsuffix, husbpeople.nameorder as hnameorder, husbpeople.living as hliving, husbpeople.private as hprivate, husbpeople.branch as hbranch FROM $families_table $joinonwife $joinonhusb WHERE $allwhere $allwhere2 ORDER BY hlastname, hlnprefix, hfirstname LIMIT 250";
+    $query = "SELECT familyID, wifepeople.personID as wpersonID, wifepeople.firstname as wfirstname, wifepeople.lnprefix as wlnprefix, wifepeople.lastname as wlastname, wifepeople.suffix as wsuffix, wifepeople.nameorder as wnameorder, wifepeople.living as wliving, wifepeople.private as wprivate, wifepeople.branch as wbranch, husbpeople.personID as hpersonID, husbpeople.firstname as hfirstname, husbpeople.lnprefix as hlnprefix, husbpeople.lastname as hlastname, husbpeople.suffix as hsuffix, husbpeople.nameorder as hnameorder, husbpeople.living as hliving, husbpeople.private as hprivate, husbpeople.branch as hbranch FROM $families_table $joinonwife $joinonhusb WHERE $allwhere $allwhere2 ORDER BY hlastname, hlnprefix, hfirstname LIMIT 250";
     $result = tng_query($query);
 
     if (tng_num_rows($result)) {

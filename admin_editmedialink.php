@@ -6,13 +6,9 @@ $adminLogin = 1;
 require 'checklogin.php';
 
 if ($type == "album") {
-  $query = "SELECT eventID, linktype, entityID, gedcom
-    FROM $album2entities_table
-    WHERE alinkID = \"$linkID\"";
+  $query = "SELECT eventID, linktype, entityID FROM $album2entities_table WHERE alinkID = \"$linkID\"";
 } else {
-  $query = "SELECT eventID, altdescription, altnotes, defphoto, linktype, personID, gedcom, dontshow
-    FROM $medialinks_table
-    WHERE medialinkID = \"$linkID\"";
+  $query = "SELECT eventID, altdescription, altnotes, defphoto, linktype, personID, dontshow FROM $medialinks_table WHERE medialinkID = \"$linkID\"";
 }
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
@@ -112,7 +108,6 @@ header("Content-type:text/html; charset=" . $session_charset);
     <br>
     <?php if ($type != 'album') { ?>
       <input name='personID' type='hidden' value="<?php echo $entityID; ?>">
-      <input name='tree' type='hidden' value="<?php echo $row['gedcom']; ?>">
     <?php } ?>
     <p>
       <?php

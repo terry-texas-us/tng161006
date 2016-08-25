@@ -8,7 +8,7 @@ require 'version.php';
 
 $m = $mostwanted_table;
 if ($ID) {
-  $query = "SELECT $m.title as title, $m.personID as personID, $m.description as description, $m.mediaID as mediaID, $m.gedcom as gedcom, mwtype, thumbpath,
+  $query = "SELECT $m.title as title, $m.personID as personID, $m.description as description, $m.mediaID as mediaID, mwtype, thumbpath,
     usecollfolder, $media_table.description as mtitle, $media_table.notes as mdesc, mediatypeID
     FROM $m
     LEFT JOIN $media_table on $m.mediaID = $media_table.mediaID

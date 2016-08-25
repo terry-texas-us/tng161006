@@ -9,7 +9,7 @@ if (!$allowEdit) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-$query = "SELECT passocID, relationship, reltype, gedcom FROM $assoc_table WHERE assocID = \"$assocID\"";
+$query = "SELECT passocID, relationship, reltype FROM $assoc_table WHERE assocID = \"$assocID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -58,7 +58,6 @@ header("Content-type:text/html; charset=" . $session_charset);
   </div> <!-- .modal-body -->
   <footer class='modal-footer'>
     <input name='assocID' type='hidden' value="<?php echo $assocID; ?>">
-    <input name='tree' type='hidden' value="<?php echo $row['gedcom']; ?>">
     <input name='submit' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
   </footer>
 </form>
