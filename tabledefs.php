@@ -72,9 +72,9 @@ $query = "CREATE TABLE $album2entities_table (
     PRIMARY KEY (alinkID),
     UNIQUE alinkID (entityID, albumID),
     INDEX entityID (entityID, ordernum),
-    FOREIGN KEY alinks_fk1 (gedcom, entityID) REFERENCES $people_table (gedcom, personID),
-    FOREIGN KEY alinks_fk2 (gedcom, entityID) REFERENCES $families_table (gedcom, familyID),
-    FOREIGN KEY alinks_fk3 (gedcom, entityID) REFERENCES $sources_table (gedcom, sourceID)
+    FOREIGN KEY alinks_fk1 (entityID) REFERENCES $people_table (personID),
+    FOREIGN KEY alinks_fk2 (entityID) REFERENCES $families_table (familyID),
+    FOREIGN KEY alinks_fk3 (entityID) REFERENCES $sources_table (sourceID)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $album2entities_table);
 
@@ -160,8 +160,8 @@ $query = "CREATE TABLE $children_table (
     PRIMARY KEY (ID),
     UNIQUE familyID (familyID, personID),
     INDEX personID (personID),
-    FOREIGN KEY children_fk1 (gedcom, familyID) REFERENCES $families_table (gedcom, familyID),
-    FOREIGN KEY children_fk2 (gedcom, personID) REFERENCES $people_table (gedcom, personID)
+    FOREIGN KEY children_fk1 (familyID) REFERENCES $families_table (familyID),
+    FOREIGN KEY children_fk2 (personID) REFERENCES $people_table (personID)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $children_table);
 
@@ -183,9 +183,9 @@ $query = "CREATE TABLE $citations_table (
     note TEXT NOT NULL,
     PRIMARY KEY (citationID),
     INDEX citation (persfamID, eventID, sourceID, description(20)),
-    FOREIGN KEY citations_fk1 (gedcom, persfamID) REFERENCES $people_table (gedcom, personID),
-    FOREIGN KEY citations_fk2 (gedcom, persfamID) REFERENCES $families_table (gedcom, familyID),
-    FOREIGN KEY citations_fk3 (gedcom, sourceID) REFERENCES $sources_table (gedcom, sourceID)
+    FOREIGN KEY citations_fk1 (persfamID) REFERENCES $people_table (personID),
+    FOREIGN KEY citations_fk2 (persfamID) REFERENCES $families_table (familyID),
+    FOREIGN KEY citations_fk3 (sourceID) REFERENCES $sources_table (sourceID)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $citations_table);
 
@@ -216,9 +216,9 @@ $query = "CREATE TABLE $events_table (
     PRIMARY KEY (eventID),
     INDEX persfamID (persfamID),
     INDEX eventplace (eventplace(20)),
-    FOREIGN KEY events_fk1 (gedcom, persfamID) REFERENCES $people_table (gedcom, personID),
-    FOREIGN KEY events_fk2 (gedcom, persfamID) REFERENCES $families_table (gedcom, familyID),
-    FOREIGN KEY events_fk3 (gedcom, persfamID) REFERENCES $sources_table (gedcom, sourceID),
+    FOREIGN KEY events_fk1 (persfamID) REFERENCES $people_table (personID),
+    FOREIGN KEY events_fk2 (persfamID) REFERENCES $families_table (familyID),
+    FOREIGN KEY events_fk3 (persfamID) REFERENCES $sources_table (sourceID),
     FOREIGN KEY events_fk4 (eventtypeID) REFERENCES $eventtypes_table (eventtypeID)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $events_table);
@@ -306,9 +306,9 @@ $query = "CREATE TABLE $medialinks_table (
     PRIMARY KEY (medialinkID),
     UNIQUE mediaID (personID, mediaID, eventID),
     INDEX personID (personID, ordernum),
-    FOREIGN KEY medialinks_fk1 (gedcom, personID) REFERENCES $people_table (gedcom, personID),
-    FOREIGN KEY medialinks_fk2 (gedcom, personID) REFERENCES $families_table (gedcom, familyID),
-    FOREIGN KEY medialinks_fk3 (gedcom, personID) REFERENCES $sources_table (gedcom, sourceID)
+    FOREIGN KEY medialinks_fk1 (personID) REFERENCES $people_table (personID),
+    FOREIGN KEY medialinks_fk2 (personID) REFERENCES $families_table (familyID),
+    FOREIGN KEY medialinks_fk3 (personID) REFERENCES $sources_table (sourceID)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $medialinks_table);
 
@@ -414,8 +414,8 @@ $query = "CREATE TABLE $notelinks_table (
     secret TINYINT(4) NOT NULL,
     PRIMARY KEY (ID),
     INDEX notelinks (persfamID, eventID),
-    FOREIGN KEY notelinks_fk1 (gedcom, persfamID) REFERENCES $people_table (gedcom, personID),
-    FOREIGN KEY notelinks_fk2 (gedcom, persfamID) REFERENCES $families_table (gedcom, familyID)
+    FOREIGN KEY notelinks_fk1 (persfamID) REFERENCES $people_table (personID),
+    FOREIGN KEY notelinks_fk2 (persfamID) REFERENCES $families_table (familyID)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $notelinks_table);
 
@@ -716,6 +716,6 @@ $query = "CREATE TABLE $xnotes_table (
     PRIMARY KEY (ID),
     FULLTEXT note (note),
     INDEX noteID (noteID),
-    FOREIGN KEY xnotes_fk1 (gedcom, ID) REFERENCES $notelinks_table (gedcom, xnoteID)
+    FOREIGN KEY xnotes_fk1 (ID) REFERENCES $notelinks_table (xnoteID)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $xnotes_table);
