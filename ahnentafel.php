@@ -190,10 +190,8 @@ $headSection->setTitle($row['name']);
           tng_free_result($result2);
         }
       }
-      //if(!$is_mozilla)
       echo "</td></tr></table>";
       echo "<br clear='all'></li>\n</ol>\n";
-
 
       //push famc (family of parents) to nextgen
       $parentfamID = "";

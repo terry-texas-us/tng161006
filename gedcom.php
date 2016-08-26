@@ -170,8 +170,7 @@ function getStdExtras($persfamID, $level) {
   return $stdex;
 }
 
-function doEvent($custevent, $level)
-{
+function doEvent($custevent, $level) {
   global $lineending;
 
   $infolen = strlen($custevent['info']);
@@ -235,8 +234,7 @@ function getNotes($id) {
   return $notearray;
 }
 
-function getNoteLine($level, $label, $note, $delta)
-{
+function getNoteLine($level, $label, $note, $delta) {
   global $lineending, $session_charset; // added $session_charset to fix UTF-8 problem
 
   $noteconc = "";
@@ -280,22 +278,19 @@ function getNoteLine($level, $label, $note, $delta)
   return trim("$level $label $note") . "$lineending$noteconc";
 }
 
-function doNote($level, $label, $notetxt, $private = "")
-{
+function doNote($level, $label, $notetxt, $private = "") {
   $noteinfo = "";
   $notetxt = str_replace("\r", "", $notetxt);
   if (!preg_match('/^@.+@$/', $notetxt)) {
     $notetxt = str_replace("@", "@@", $notetxt);
   }
   $notes = is_string($notetxt) ? preg_split('/\r\n|\n/', $notetxt) : [];
-  //$note = trim( array_shift( $notes ) );
   if ($level) {
     $note = array_shift($notes);
     $noteinfo .= getNoteLine($level, $label, $note, 1);
   }
   $level++;
   foreach ($notes as $note) {
-    //$note = trim($note);
     $noteinfo .= getNoteLine($level, "CONT", $note, 0);
   }
   if ($private) {
@@ -305,8 +300,7 @@ function doNote($level, $label, $notetxt, $private = "")
   return $noteinfo;
 }
 
-function writeNote($level, $label, $notes)
-{
+function writeNote($level, $label, $notes) {
   global $citations;
 
   $noteinfo = "";
@@ -442,7 +436,6 @@ function appendParents($child) {
   $child['allow_living'] = $crights['living'];
   $child['allow_private'] = $crights['private'];
   if ($crights['both']) {
-    //if( $child['relationship'] ) $info .= "2 PEDI {$child['relationship']}$lineending";
     if ($rights['lds'] && $ldsOK) {
       if ($child['sealdate'] || $child['sealplace']) {
         $childnotes = getNotes($child['personID']);
