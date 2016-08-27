@@ -1,14 +1,18 @@
 <?php
 
 function getLine() {
-  global $fp, $lineending, $saveimport, $savestate;
+  global $fp;
+  global $lineending;
+  global $saveimport;
+  global $savestate;
 
   $lineinfo = [];
   if ($line = ltrim(fgets($fp, 1024))) {
     if ($saveimport) {
       $savestate['len'] = strlen($line);
     }
-    $patterns = ["/®®.*¯¯/", "/®®.*/", "/.*¯¯/", "/@@/"];
+   // [ts] first 3 characters in gedcom file are ï»¿ - tried adding to preg_replace - does not work so 0 HEAD is skipped!
+    $patterns = ["/®®.*¯¯/", "/®®.*/", "/.*¯¯/", "/@@/"]; 
     $replacements = ["", "", "", "@"];
     $line = preg_replace($patterns, $replacements, $line);
 

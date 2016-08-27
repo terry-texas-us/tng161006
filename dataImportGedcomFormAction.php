@@ -98,7 +98,6 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
     $pciteevents = ["NAME", "BIRT", "CHR", "DEAT", "BURI", "BAPL", "CONL", "INIT", "ENDL", "SLGC"];
     $fciteevents = ["MARR", "DIV", "SLGS"];
 
-    //read first line into $line
     set_time_limit(0);
     $fp = false;
     $savestate['filename'] = "";
@@ -149,7 +148,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
     $allcount = 0;
     if ($savestate['filename']) {
       $tree = $tree1; //selected
-      $query = "UPDATE $treesTable SET lastimportdate=\"$today\", importfilename=\"$savegedfilename\"";
+      $query = "UPDATE $treesTable SET lastimportdate = '$today', importfilename = '$savegedfilename'";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
       if ($del == "append") {
@@ -196,7 +195,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       $mll = $savestate['media'] * 10 + $savestate['latlong'];
 
       if ($saveimport) {
-        $query = "DELETE from $saveimport_table";
+        $query = "DELETE FROM $saveimport_table";
         $result = tng_query($query);
 
         $sql = "INSERT INTO $saveimport_table (filename, icount, ioffset, fcount, foffset, scount, soffset, mcount, pcount, ncount, noffset, roffset, offset, delvar, ucaselast, norecalc, neweronly, media, branch) "
@@ -309,7 +308,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       $stdnotes = [];
       $notecount = 0;
 
-      $lineinfo = getLine();
+      $lineinfo = getLine(); // first line of the file
       while ($lineinfo['tag']) {
         if ($lineinfo['level'] == 0) {
           preg_match("/^@(\S+)@/", $lineinfo['tag'], $matches);
