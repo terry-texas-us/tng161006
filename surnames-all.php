@@ -32,7 +32,7 @@ $headSection->setTitle(uiTextSnippet('surnamelist') . " - " . uiTextSnippet('all
     }
     $linkstr = "";
     $nosurname = urlencode(uiTextSnippet('nosurname'));
-    $query = "SELECT ucase(left(lastname,1)) as firstchar, ucase( $binary left(lastname,1) ) as binfirstchar FROM $people_table $wherestr GROUP BY binfirstchar ORDER by binfirstchar";
+    $query = "SELECT ucase(left(lastname,1)) AS firstchar, ucase( $binary left(lastname,1) ) AS binfirstchar FROM $people_table $wherestr GROUP BY binfirstchar ORDER by binfirstchar";
     $result = tng_query($query);
     if ($result) {
       $initialchar = 1;
@@ -78,7 +78,7 @@ $headSection->setTitle(uiTextSnippet('surnamelist') . " - " . uiTextSnippet('all
               if ($tngconfig['ucsurnames']) {
                 $surnamestr = "ucase($surnamestr)";
               }
-              $query = "SELECT ucase( $binary $surnamestr ) as lastname, $surnamestr as lowername, ucase($binary lastname) as binlast, count( ucase($binary lastname) ) as lncount FROM $people_table WHERE ucase($binary TRIM(lastname)) LIKE \"$urlfirstchar%\" $wherestr2 GROUP BY lowername ORDER by binlast";
+              $query = "SELECT ucase( $binary $surnamestr ) AS lastname, $surnamestr AS lowername, ucase($binary lastname) AS binlast, count( ucase($binary lastname) ) AS lncount FROM $people_table WHERE ucase($binary TRIM(lastname)) LIKE \"$urlfirstchar%\" $wherestr2 GROUP BY lowername ORDER by binlast";
               $result = tng_query($query);
               $topnum = tng_num_rows($result);
               if ($result) {

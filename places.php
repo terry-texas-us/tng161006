@@ -96,7 +96,7 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
       } else {
         $orderstr = "$datefieldtr DESC, p1lastname DESC, p2lastname DESC";
       }
-      $query = "SELECT $families_table.ID, familyID, $families_table.living, $families_table.private, $families_table.branch, p1.lastname as p1lastname, p2.lastname as p2lastname, $place, $datefield "
+      $query = "SELECT $families_table.ID, familyID, $families_table.living, $families_table.private, $families_table.branch, p1.lastname AS p1lastname, p2.lastname AS p2lastname, $place, $datefield "
           . "FROM ($families_table $eventsjoin) $peoplejoin1 $peoplejoin2 WHERE $livingPrivateCondition $allwhere2 ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
     } elseif ($prefix == 'I') {
       if ($order == "name") {
@@ -116,7 +116,7 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
 
     //if results, do again w/o pagination to get total
     if ($numrows == $maxsearchresults || $offsetplus > 1) {
-      $query = "SELECT count($idfield) as rcount FROM ($table $eventsjoin) WHERE $livingPrivateCondition $allwhere2";
+      $query = "SELECT count($idfield) AS rcount FROM ($table $eventsjoin) WHERE $livingPrivateCondition $allwhere2";
       $result2 = tng_query($query);
       $countrow = tng_fetch_assoc($result2);
       $totrows = $countrow['rcount'];

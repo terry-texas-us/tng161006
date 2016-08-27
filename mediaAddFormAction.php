@@ -137,7 +137,7 @@ if ($result && $success) {
   $mediaID = tng_insert_id();
 
   if ($link_personID) {
-    $query = "SELECT count(medialinkID) as count FROM $medialinks_table WHERE personID = '$link_personID'";
+    $query = "SELECT count(medialinkID) AS count FROM $medialinks_table WHERE personID = '$link_personID'";
     $result = tng_query($query);
     if ($result) {
       $row = tng_fetch_assoc($result);

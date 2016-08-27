@@ -42,9 +42,8 @@ function getMediaLinksToSave() {
   global $medialinks_table;
 
   $medialinks = [];
-  $query = "SELECT medialinkID, mediaID, $medialinks_table.eventID, persfamID, eventtypeID, eventdate, eventplace, info
-    FROM ($medialinks_table,$events_table)
-    WHERE $medialinks_table.eventID != \"\" AND $medialinks_table.eventID = $events_table.eventID";
+  $query = "SELECT medialinkID, mediaID, $medialinks_table.eventID, persfamID, eventtypeID, eventdate, eventplace, info FROM ($medialinks_table,$events_table) "
+      . "WHERE $medialinks_table.eventID != '' AND $medialinks_table.eventID = $events_table.eventID";
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {
@@ -61,9 +60,8 @@ function getAlbumLinksToSave() {
   global $album2entities_table;
 
   $albumlinks = [];
-  $query = "SELECT alinkID, albumID, $album2entities_table.eventID, entityID, eventtypeID, eventdate, eventplace, info
-    FROM ($album2entities_table,$events_table)
-    WHERE $album2entities_table.eventID != \"\" AND $album2entities_table.eventID = $events_table.eventID";
+  $query = "SELECT alinkID, albumID, $album2entities_table.eventID, entityID, eventtypeID, eventdate, eventplace, info FROM ($album2entities_table,$events_table) "
+      . "WHERE $album2entities_table.eventID != '' AND $album2entities_table.eventID = $events_table.eventID";
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {
@@ -203,7 +201,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
         $result = tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $sql");
       }
     } elseif ($saveimport && !$openmsg) {
-      $checksql = "SELECT filename, icount, ioffset, fcount, foffset, scount, soffset, mcount, pcount, ncount, noffset, offset, ucaselast, norecalc, neweronly, media, branch, delvar from $saveimport_table";
+      $checksql = "SELECT filename, icount, ioffset, fcount, foffset, scount, soffset, mcount, pcount, ncount, noffset, offset, ucaselast, norecalc, neweronly, media, branch, delvar FROM $saveimport_table";
       $result = tng_query($checksql) or die(uiTextSnippet('cannotexecutequery') . ": $checksql");
       $found = tng_num_rows($result);
       if ($found) {
@@ -344,7 +342,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
               } elseif ($lineinfo['tag'] == "_PLAC" || $lineinfo['tag'] == "_PLAC_DEFN" || $lineinfo['tag'] == "PLAC") {
                 getPlaceRecord($lineinfo['rest'], 0);
               } elseif ($lineinfo['tag'] == "HEAD") {
-                getHeadRecord();
+                $lineinfo = getHeadRecord();
               } elseif ($lineinfo['tag'] == "_EVDEF") { // [ts] RM extention
                 $lineinfo = getEventDefinitionRecord($rest);
               } else {

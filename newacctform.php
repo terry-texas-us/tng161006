@@ -4,7 +4,7 @@ require 'begin.php';
 require 'genlib.php';
 require 'getlang.php';
 
-$query = "SELECT count(userID) as ucount FROM $users_table";
+$query = "SELECT count(userID) AS ucount FROM $users_table";
 $userresult = tng_query($query);
 $row = tng_fetch_assoc($userresult);
 $ucount = $row['ucount'];

@@ -288,7 +288,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   }
 
   //show other spouses
-  $query = "SELECT familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, $families_table.living as fliving, $families_table.private as fprivate, $families_table.branch as branch, $people_table.living as living, $people_table.private as private, marrdate, marrplace, sealdate, sealplace, marrtype FROM $families_table ";
+  $query = "SELECT familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, $families_table.living AS fliving, $families_table.private AS fprivate, $families_table.branch AS branch, $people_table.living AS living, $people_table.private AS private, marrdate, marrplace, sealdate, sealplace, marrtype FROM $families_table ";
   if ($ind['sex'] == 'M') {
     $query .= "LEFT JOIN $people_table ON $families_table.wife = $people_table.personID WHERE husband = '{$ind['personID']}' $restriction ORDER BY husborder";
   } else {
@@ -459,7 +459,7 @@ $headSection->setTitle($headTitle);
     }
 
     //for each child
-    $query = "SELECT $people_table.personID as personID, branch, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, famc, sex, birthdate, birthplace, altbirthdate, altbirthplace, haskids, deathdate, deathplace, burialdate, burialplace, burialtype, baptdate, baptplace, endldate, endlplace, sealdate, sealplace FROM $people_table, $children_table WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = \"{$famrow['familyID']}\" ORDER BY ordernum";
+    $query = "SELECT $people_table.personID AS personID, branch, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, famc, sex, birthdate, birthplace, altbirthdate, altbirthplace, haskids, deathdate, deathplace, burialdate, burialplace, burialtype, baptdate, baptplace, endldate, endlplace, sealdate, sealplace FROM $people_table, $children_table WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = \"{$famrow['familyID']}\" ORDER BY ordernum";
     $children = tng_query($query);
 
     if ($children && tng_num_rows($children)) {

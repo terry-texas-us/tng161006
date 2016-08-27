@@ -25,7 +25,7 @@ function restore($table) {
   $fields = array_shift($lines);
   if (substr($fields, 0, 1) == '"') { // does this line hold the field list?
     array_unshift($lines, $fields);    // no - so put the line back on the lines array and build field list from table
-    $query = "SELECT * FROM $table"; // no need for limit as table is empty
+    $query = "SELECT * FROM $table"; // table is empty
     $result = tng_query($query);
     $fields = "";
     $nflds = tng_num_fields($result);

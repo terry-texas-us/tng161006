@@ -404,12 +404,7 @@ class PHPMailer
     }
     switch ($patternselect) {
       case 'pcre8':
-        /**
-         * Uses the same RFC5322 regex on which FILTER_VALIDATE_EMAIL is based, but allows dotless domains.
-         * @link http://squiloople.com/2009/12/20/email-address-validation/
-         * @copyright 2009-2010 Michael Rushton
-         * Feel free to use and redistribute this code. But please keep this copyright notice.
-         */
+        
         return (boolean)preg_match(
             '/^(?!(?>(?1)"?(?>\\\[ -~]|[^"])"?(?1)){255,})(?!(?>(?1)"?(?>\\\[ -~]|[^"])"?(?1)){65,}@)' .
             '((?>(?>(?>((?>(?>(?>\x0D\x0A)?[\t ])+|(?>[\t ]*\x0D\x0A)?[\t ]+)?)(\((?>(?2)' .
@@ -852,10 +847,6 @@ class PHPMailer
     return (boolean)$foundlang; // Returns false if language not found
   }
 
-  /**
-   * Get the array of strings for the current language.
-   * @return array
-   */
   public function getTranslations() {
     return $this->language;
   }
@@ -1291,11 +1282,9 @@ class PHPMailer
         $signed = tempnam(sys_get_temp_dir(), 'signed');
         //Workaround for PHP bug https://bugs.php.net/bug.php?id=69197
         if (empty($this->sign_extracerts_file)) {
-          $sign = openssl_pkcs7_sign($file, $signed, 'file://' . realpath($this->sign_cert_file), 
-              ['file://' . realpath($this->sign_key_file), $this->sign_key_pass], null);
+          $sign = openssl_pkcs7_sign($file, $signed, 'file://' . realpath($this->sign_cert_file), ['file://' . realpath($this->sign_key_file), $this->sign_key_pass], null);
         } else {
-          $sign = openssl_pkcs7_sign($file, $signed, 'file://' . realpath($this->sign_cert_file),
-              ['file://' . realpath($this->sign_key_file), $this->sign_key_pass], null, PKCS7_DETACHED, $this->sign_extracerts_file);
+          $sign = openssl_pkcs7_sign($file, $signed, 'file://' . realpath($this->sign_cert_file), ['file://' . realpath($this->sign_key_file), $this->sign_key_pass], null, PKCS7_DETACHED, $this->sign_extracerts_file);
         }
         if ($sign) {
           unlink($file);
@@ -1551,7 +1540,6 @@ class PHPMailer
         }
         $matchcount = preg_match_all('/[^\040\041\043-\133\135-\176]/', $str, $matches);
         break;
-      /** @noinspection PhpMissingBreakStatementInspection */
       case 'comment':
         $matchcount = preg_match_all('/[()"]/', $str, $matches);
         // Intentional fall-through
@@ -1645,16 +1633,9 @@ class PHPMailer
     return $this->fixEOL($string);
   }
 
-  
-  public function encodeQPphp(
-          $string,
-          $line_max = 76,
-          /** @noinspection PhpUnusedParameterInspection */
-          $space_conv = false
-  ) {
+  public function encodeQPphp($string, $line_max = 76, $space_conv = false) {
     return $this->encodeQP($string, $line_max);
   }
-
   
   public function encodeQ($str, $position = 'text') {
     // There should not be any EOL in the string
@@ -1696,13 +1677,7 @@ class PHPMailer
   }
 
   
-  public function addStringAttachment(
-          $string,
-          $filename,
-          $encoding = 'base64',
-          $type = '',
-          $disposition = 'attachment'
-  ) {
+  public function addStringAttachment($string, $filename, $encoding = 'base64', $type = '', $disposition = 'attachment') {
     // If a MIME type is not specified, try to work it out from the file name
     if ($type == '') {
       $type = self::filenameToType($filename);
@@ -1748,15 +1723,7 @@ class PHPMailer
     return true;
   }
 
-  
-  public function addStringEmbeddedImage(
-          $string,
-          $cid,
-          $name = '',
-          $encoding = 'base64',
-          $type = '',
-          $disposition = 'inline'
-  ) {
+  public function addStringEmbeddedImage($string, $cid, $name = '', $encoding = 'base64', $type = '', $disposition = 'inline') {
     // If a MIME type is not specified, try to work it out from the name
     if ($type == '') {
       $type = self::filenameToType($name);
@@ -1972,10 +1939,8 @@ class PHPMailer
           if (strlen($directory) > 1 && substr($directory, -1) != '/') {
             $directory .= '/';
           }
-          if ($this->addEmbeddedImage($basedir . $directory . $filename, $cid, $filename, 'base64', 
-              self::_mime_types((string)self::mb_pathinfo($filename, PATHINFO_EXTENSION)))) {
-            $message = preg_replace('/' . $images[1][$imgindex] . '=["\']' . preg_quote($url, '/') . '["\']/Ui',
-                $images[1][$imgindex] . '="cid:' . $cid . '"', $message);
+          if ($this->addEmbeddedImage($basedir . $directory . $filename, $cid, $filename, 'base64', self::_mime_types((string)self::mb_pathinfo($filename, PATHINFO_EXTENSION)))) {
+            $message = preg_replace('/' . $images[1][$imgindex] . '=["\']' . preg_quote($url, '/') . '["\']/Ui', $images[1][$imgindex] . '="cid:' . $cid . '"', $message);
           }
         }
       }
@@ -1991,15 +1956,12 @@ class PHPMailer
     return $this->Body;
   }
 
-  
   public function html2text($html, $advanced = false) {
     if (is_callable($advanced)) {
       return call_user_func($advanced, $html);
     }
-    return html_entity_decode(trim(strip_tags(preg_replace('/<(head|title|style|script)[^>]*>.*?<\/\\1>/si', '', $html))),
-        ENT_QUOTES, $this->CharSet);
+    return html_entity_decode(trim(strip_tags(preg_replace('/<(head|title|style|script)[^>]*>.*?<\/\\1>/si', '', $html))), ENT_QUOTES, $this->CharSet);
   }
-
   
   public static function _mime_types($ext = '') {
     $mimes = [

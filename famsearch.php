@@ -201,14 +201,11 @@ if ($offset) {
   $page = 1;
 }
 
-//left join to people table twice, once for husband and for wife
-$query = "SELECT f.ID, familyID, husband, wife, marrdate, marrplace, divdate, divplace, f.living, f.private, f.branch, father.lastname as flastname, father.lnprefix as flnprefix, father.firstname as ffirstname, father.living as fliving, father.private as fprivate, father.branch as fbranch, mother.lastname as mlastname, mother.lnprefix as mlnprefix, mother.firstname as mfirstname, mother.living as mliving, mother.private as fprivate, mother.branch as mbranch "
-    . "FROM ($families_table AS f) $cejoin "
+$query = "SELECT f.ID, familyID, husband, wife, marrdate, marrplace, divdate, divplace, f.living, f.private, f.branch, father.lastname AS flastname, father.lnprefix AS flnprefix, father.firstname AS ffirstname, father.living AS fliving, father.private AS fprivate, father.branch AS fbranch, mother.lastname AS mlastname, mother.lnprefix AS mlnprefix, mother.firstname AS mfirstname, mother.living AS mliving, mother.private AS fprivate, mother.branch AS mbranch FROM ($families_table AS f) $cejoin "
     . "LEFT JOIN $people_table AS father ON husband = father.personID "
     . "LEFT JOIN $people_table AS mother ON wife = mother.personID $allwhere (1=1) "
     . "ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
-$query2 = "SELECT count(f.ID) as fcount "
-    . "FROM ($families_table AS f) $cejoin "
+$query2 = "SELECT count(f.ID) AS fcount FROM ($families_table AS f) $cejoin "
     . "LEFT JOIN $people_table AS father ON husband = father.personID LEFT JOIN $people_table AS mother ON wife = mother.personID "
     . "$allwhere (1=1)";
 

@@ -35,10 +35,10 @@ function showDiv($type) {
   echo "</table>\n";
 
 
-  $query = "SELECT DISTINCT $mostwanted_table.ID as mwID, mwtype, thumbpath, usecollfolder, mediatypeID, $media_table.description as mtitle, $mostwanted_table.description as mwdesc, $mostwanted_table.title as title FROM $mostwanted_table
-    LEFT JOIN $media_table ON $mostwanted_table.mediaID = $media_table.mediaID
-    LEFT JOIN $people_table ON $mostwanted_table.personID = $people_table.personID
-    WHERE mwtype = \"$type\" ORDER BY ordernum";
+  $query = "SELECT DISTINCT $mostwanted_table.ID AS mwID, mwtype, thumbpath, usecollfolder, mediatypeID, $media_table.description AS mtitle, $mostwanted_table.description AS mwdesc, $mostwanted_table.title AS title FROM $mostwanted_table "
+      . "LEFT JOIN $media_table ON $mostwanted_table.mediaID = $media_table.mediaID "
+      . "LEFT JOIN $people_table ON $mostwanted_table.personID = $people_table.personID "
+      . "WHERE mwtype = '$type' ORDER BY ordernum";
   $result = tng_query($query);
   //echo $query;
 

@@ -48,7 +48,7 @@ $headSection->setTitle(uiTextSnippet('addnewsource'));
         </div>          
       </div>
       <br>
-      <?php include("micro_newsource.php"); ?>
+      <?php require "micro_newsource.php"; ?>
       <p><strong><?php echo uiTextSnippet('sevslater'); ?></strong></p>
         <input name='save' type='submit' value="<?php echo uiTextSnippet('savecont'); ?>">
     </form>

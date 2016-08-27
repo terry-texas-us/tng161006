@@ -14,7 +14,7 @@ $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
 
-$query = "SELECT count(personID) as ccount FROM $citations_table, $people_table
+$query = "SELECT count(personID) AS ccount FROM $citations_table, $people_table
     WHERE $citations_table.sourceID = '$ID' AND $citations_table.persfamID = $people_table.personID AND living = '1'";
 $sresult = tng_query($query);
 $srow = tng_fetch_assoc($sresult);

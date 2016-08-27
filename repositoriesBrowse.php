@@ -78,7 +78,7 @@ $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(repoID) as rcount FROM $repositories_table WHERE $allwhere";
+  $query = "SELECT count(repoID) AS rcount FROM $repositories_table WHERE $allwhere";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['rcount'];

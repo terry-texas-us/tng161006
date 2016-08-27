@@ -269,10 +269,8 @@ if (tng_num_rows($result2)) {
 }
 tng_free_result($result2);
 
-writelog("<a href=\"relationship.php?altprimarypersonID=$primarypersonID&amp;secondpersonID=$secondpersonID\">" .
-        uiTextSnippet('relcalc') . ": $logname ($primarypersonID) =&gt;$logname2 ($secondpersonID)</a>");
-preparebookmark("<a href=\"relationship.php?altprimarypersonID=$primarypersonID&amp;secondpersonID=$secondpersonID\">" .
-        uiTextSnippet('relcalc') . ": $namestr ($primarypersonID) =&gt;$namestr2 ($secondpersonID)</a>");
+writelog("<a href=\"relationship.php?altprimarypersonID=$primarypersonID&amp;secondpersonID=$secondpersonID\">" . uiTextSnippet('relcalc') . ": $logname ($primarypersonID) =&gt;$logname2 ($secondpersonID)</a>");
+preparebookmark("<a href=\"relationship.php?altprimarypersonID=$primarypersonID&amp;secondpersonID=$secondpersonID\">" . uiTextSnippet('relcalc') . ": $namestr ($primarypersonID) =&gt;$namestr2 ($secondpersonID)</a>");
 
 $pedigree['url'] = "pedigree.php?";
 $pedigree['cellpad'] = 5;

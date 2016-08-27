@@ -81,7 +81,7 @@ adminwritelog("<a href=\"ordermedia.php?personID=$personID\">$sortstr: $personID
 
 $photo = "";
 
-$query = "SELECT alwayson, thumbpath, $media_table.mediaID as mediaID, usecollfolder, mediatypeID, medialinkID FROM ($media_table, $medialinks_table)
+$query = "SELECT alwayson, thumbpath, $media_table.mediaID AS mediaID, usecollfolder, mediatypeID, medialinkID FROM ($media_table, $medialinks_table)
     WHERE personID = '$personID' AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
 $result = tng_query($query);
 if ($result) {

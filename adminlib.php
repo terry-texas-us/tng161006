@@ -56,9 +56,9 @@ function getNewNumericID($type, $field, $table) {
   eval("\$suffix = \$$type" . "suffix;");
   if ($prefix) {
     $prefixlen = strlen($prefix) + 1;
-    $query = "SELECT MAX(0+SUBSTRING($field" . "ID,$prefixlen)) as newID FROM $table WHERE $field" . "ID LIKE \"$prefix%\"";
+    $query = "SELECT MAX(0+SUBSTRING($field" . "ID,$prefixlen)) AS newID FROM $table WHERE $field" . "ID LIKE \"$prefix%\"";
   } else {
-    $query = "SELECT MAX(0+SUBSTRING_INDEX($field" . "ID,'$suffix',1)) as newID FROM $table";
+    $query = "SELECT MAX(0+SUBSTRING_INDEX($field" . "ID,'$suffix',1)) AS newID FROM $table";
   }
   $result = tng_query($query);
   $maxrow = tng_fetch_array($result);
@@ -99,7 +99,7 @@ function checkReview($type) {
   if ($assignedbranch) {
     $revwhere .= " AND branch LIKE \"%$assignedbranch%\"";
   }
-  $revquery = "SELECT count(tempID) as tcount FROM ($table, $temp_events_table) WHERE $revwhere";
+  $revquery = "SELECT count(tempID) AS tcount FROM ($table, $temp_events_table) WHERE $revwhere";
   $revresult = tng_query($revquery) or die(uiTextSnippet('cannotexecutequery') . ": $revquery");
   $revrow = tng_fetch_assoc($revresult);
   tng_free_result($revresult);
@@ -116,7 +116,7 @@ function deleteNote($noteID, $flag) {
   $nrow = tng_fetch_assoc($result);
   tng_free_result($result);
 
-  $query = "SELECT count(ID) as xcount FROM $xnotes_table WHERE ID=\"{$nrow['xnoteID']}\"";
+  $query = "SELECT count(ID) AS xcount FROM $xnotes_table WHERE ID=\"{$nrow['xnoteID']}\"";
   $result = tng_query($query);
   $xrow = tng_fetch_assoc($result);
   tng_free_result($result);

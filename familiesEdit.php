@@ -6,7 +6,7 @@ require 'checklogin.php';
 require 'version.php';
 
 $familyID = ucfirst($familyID);
-$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $families_table WHERE familyID = '$familyID'";
+$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $families_table WHERE familyID = '$familyID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -47,7 +47,7 @@ $row['allow_private'] = $rights['private'];
 
 $namestr = getFamilyName($row);
 
-$query = "SELECT DISTINCT eventID as eventID FROM $notelinks_table WHERE persfamID = '$familyID'";
+$query = "SELECT DISTINCT eventID AS eventID FROM $notelinks_table WHERE persfamID = '$familyID'";
 $notelinks = tng_query($query);
 $gotnotes = [];
 while ($note = tng_fetch_assoc($notelinks)) {
@@ -65,7 +65,7 @@ while ($cite = tng_fetch_assoc($citresult)) {
   }
   $gotcites[$cite['eventID']] = "*";
 }
-$assocquery = "SELECT count(assocID) as acount FROM $assoc_table WHERE personID = '$familyID'";
+$assocquery = "SELECT count(assocID) AS acount FROM $assoc_table WHERE personID = '$familyID'";
 $assocresult = tng_query($assocquery) or die(uiTextSnippet('cannotexecutequery') . ": $assocquery");
 $assocrow = tng_fetch_assoc($assocresult);
 $gotassoc = $assocrow['acount'] ? "*" : "";
@@ -77,7 +77,7 @@ $gotmore = [];
 while ($more = tng_fetch_assoc($morelinks)) {
   $gotmore[$more['parenttag']] = "*";
 }
-$query = "SELECT $people_table.personID as pID, firstname, lastname, lnprefix, prefix, suffix, nameorder, birthdate, altbirthdate, living, private, branch FROM $people_table, $children_table WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = '$familyID' ORDER BY ordernum";
+$query = "SELECT $people_table.personID AS pID, firstname, lastname, lnprefix, prefix, suffix, nameorder, birthdate, altbirthdate, living, private, branch FROM $people_table, $children_table WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = '$familyID' ORDER BY ordernum";
 $children = tng_query($query);
 
 $kidcount = tng_num_rows($children);

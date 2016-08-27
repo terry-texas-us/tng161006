@@ -289,7 +289,7 @@ function delAssociations($entity) {
 
 $p1row = $p2row = "";
 if ($personID1) {
-  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $people_table WHERE personID = '$personID1'";
+  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $people_table WHERE personID = '$personID1'";
   $result = tng_query($query);
   if ($result && tng_num_rows($result)) {
     $p1row = tng_fetch_assoc($result);
@@ -368,7 +368,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
     }
   }
 } elseif ($personID2) {
-  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $people_table WHERE personID = '$personID2'";
+  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $people_table WHERE personID = '$personID2'";
   $result2 = tng_query($query);
   if ($result2 && tng_num_rows($result2) && $personID1 != $personID2) {
     $p2row = tng_fetch_assoc($result2);
@@ -809,7 +809,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                   if (is_array($p2row)) {
                     echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('peopleEdit.php?personID={$p2row['personID']}&amp;cw=1','edit')\"></td>\n";
 
-                    $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID as eventtypeID, $events_table.eventID as eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$p2row['personID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
+                    $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID AS eventtypeID, $events_table.eventID AS eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$p2row['personID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
                     $evresult = tng_query($query);
                     $eventcount = tng_num_rows($evresult);
 
@@ -898,7 +898,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                     doRow("endldate", "endldate", "p2endldate");
                     doRow("endlplace", "endlplace", "p2endlplace");
                   }
-                  $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID as eventtypeID, $events_table.eventID as eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$p1row['personID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
+                  $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID AS eventtypeID, $events_table.eventID AS eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$p1row['personID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
                   $evresult = tng_query($query);
                   $eventcount = tng_num_rows($evresult);
 

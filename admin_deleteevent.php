@@ -32,7 +32,7 @@ $row = tng_fetch_assoc($result);
 if ($result) {
   tng_free_result($result);
 }
-$query = "SELECT count(ID) as xcount FROM $notelinks_table WHERE xnoteID=\"{$row['xnoteID']}\"";
+$query = "SELECT count(ID) AS xcount FROM $notelinks_table WHERE xnoteID=\"{$row['xnoteID']}\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 if ($result) {

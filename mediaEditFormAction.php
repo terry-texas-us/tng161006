@@ -168,7 +168,7 @@ if (function_exists(imageJpeg) && $thumbcreate == "auto") {
     }
   }
 }
-$query = "UPDATE $media_table SET path = '$path', thumbpath = '$thumbpath', description = '$description', notes = '$notes', width = '$width', height = '$height', datetaken = '$datetaken', placetaken = '$place', owner = '$owner', changedate = '$newdate', changedby = '$currentuser', form = '$form', alwayson = '$alwayson', mediatypeID = '$mediatypeID', map = '$imagemap', abspath = '$abspath', gedcom = '', status = '$status', cemeteryID = '$cemeteryID', plot = '$plot', showmap = '$showmap',linktocem=\"$linktocem\",latitude=\"$latitude\",longitude= '$longitude', zoom = '$zoom', bodytext = '$bodytext', usenl = '$usenl', newwindow = '$newwindow', usecollfolder = '$usecollfolder', mediakey = '$mediakey'  WHERE mediaID = '$mediaID'";
+$query = "UPDATE $media_table SET path = '$path', thumbpath = '$thumbpath', description = '$description', notes = '$notes', width = '$width', height = '$height', datetaken = '$datetaken', placetaken = '$place', owner = '$owner', changedate = '$newdate', changedby = '$currentuser', form = '$form', alwayson = '$alwayson', mediatypeID = '$mediatypeID', map = '$imagemap', abspath = '$abspath', gedcom = '', status = '$status', cemeteryID = '$cemeteryID', plot = '$plot', showmap = '$showmap', linktocem = '$linktocem', latitude = '$latitude', longitude= '$longitude', zoom = '$zoom', bodytext = '$bodytext', usenl = '$usenl', newwindow = '$newwindow', usecollfolder = '$usecollfolder', mediakey = '$mediakey'  WHERE mediaID = '$mediaID'";
 $result = tng_query($query);
 
 if ($mediatypeID != $mediatypeID_org) {
@@ -176,19 +176,19 @@ if ($mediatypeID != $mediatypeID_org) {
   $result2 = tng_query($query);
   if ($result2) {
     while ($plink = tng_fetch_assoc($result2)) {
-      $query = "SELECT personID from $people_table WHERE personID = \"{$plink['personID']}\"";
+      $query = "SELECT personID FROM $people_table WHERE personID = \"{$plink['personID']}\"";
       reorderMedia($query, $plink, $mediatypeID_org);
       reorderMedia($query, $plink, $mediatypeID);
 
-      $query = "SELECT familyID as personID from $families_table WHERE familyID = \"{$plink['personID']}\"";
+      $query = "SELECT familyID AS personID FROM $families_table WHERE familyID = \"{$plink['personID']}\"";
       reorderMedia($query, $plink, $mediatypeID_org);
       reorderMedia($query, $plink, $mediatypeID);
 
-      $query = "SELECT sourceID as personID from $sources_table WHERE sourceID = \"{$plink['personID']}\"";
+      $query = "SELECT sourceID AS personID FROM $sources_table WHERE sourceID = \"{$plink['personID']}\"";
       reorderMedia($query, $plink, $mediatypeID_org);
       reorderMedia($query, $plink, $mediatypeID);
 
-      $query = "SELECT repoID as personID from $repositories_table WHERE repoID = \"{$plink['personID']}\"";
+      $query = "SELECT repoID AS personID FROM $repositories_table WHERE repoID = \"{$plink['personID']}\"";
       reorderMedia($query, $plink, $mediatypeID_org);
       reorderMedia($query, $plink, $mediatypeID);
     }

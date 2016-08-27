@@ -36,7 +36,7 @@ $result = tng_query($query);
 $numrows = tng_num_rows($result);
 
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(branch) as branchcount FROM $branches_table";
+  $query = "SELECT count(branch) AS branchcount FROM $branches_table";
   $result2 = tng_query($query);
   $countrow = tng_fetch_assoc($result2);
   $totrows = $countrow['branchcount'];
@@ -94,12 +94,12 @@ $headSection->setTitle(uiTextSnippet('branches'));
         }
 
         while ($row = tng_fetch_assoc($result)) {
-          $query = "SELECT count(familyID) as fcount FROM $families_table WHERE branch LIKE \"%{$row['branch']}%\" $familywhere";
+          $query = "SELECT count(familyID) AS fcount FROM $families_table WHERE branch LIKE \"%{$row['branch']}%\" $familywhere";
           $famresult = tng_query($query);
           $famrow = tng_fetch_assoc($famresult);
           tng_free_result($famresult);
 
-          $query = "SELECT count(personID) as pcount FROM $people_table WHERE branch LIKE \"%{$row['branch']}%\" $peoplewhere";
+          $query = "SELECT count(personID) AS pcount FROM $people_table WHERE branch LIKE \"%{$row['branch']}%\" $peoplewhere";
           $indresult = tng_query($query);
           $indrow = tng_fetch_assoc($indresult);
           tng_free_result($indresult);

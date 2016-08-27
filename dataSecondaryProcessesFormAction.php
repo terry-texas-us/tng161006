@@ -35,7 +35,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         $query = "SELECT familyID FROM $families_table";
         $result = tng_query($query);
         while ($family = tng_fetch_assoc($result)) {
-          $query = "SELECT $children_table.ID as ID, IF(birthdatetr !='0000-00-00', birthdatetr, altbirthdatetr) as birth FROM $children_table, $people_table "
+          $query = "SELECT $children_table.ID AS ID, IF(birthdatetr !='0000-00-00', birthdatetr, altbirthdatetr) AS birth FROM $children_table, $people_table "
               . "WHERE $children_table.familyID = '{$family['familyID']}' AND $people_table.personID = $children_table.personID ORDER BY birth, ordernum";
           $fresult = tng_query($query);
           $order = 0;
@@ -253,7 +253,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         $result = tng_query($query);
 
         while ($row = tng_fetch_assoc($result)) {
-          $query2 = "SELECT count(*) as counter FROM $media_table WHERE mediatypeID = \"{$row['mediatypeID']}\"";
+          $query2 = "SELECT count(*) AS counter FROM $media_table WHERE mediatypeID = \"{$row['mediatypeID']}\"";
           $result2 = tng_query($query2);
           $row2 = tng_fetch_assoc($result2);
           $display = $row['display'] ? $row['display'] : uiTextSnippet($row['mediatypeID']);

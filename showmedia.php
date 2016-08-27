@@ -34,7 +34,7 @@ if ($medialinkID) {
   $eventID = $row['eventID'];
 } else {
   if ($albumlinkID) {
-    $query = "SELECT albumname, description, ordernum, $albums_table.albumID as albumID FROM ($albums_table, $albumlinks_table)
+    $query = "SELECT albumname, description, ordernum, $albums_table.albumID AS albumID FROM ($albums_table, $albumlinks_table)
       WHERE albumlinkID = \"$albumlinkID\" AND $albumlinks_table.albumID = $albums_table.albumID";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
@@ -85,8 +85,7 @@ if ($personID && !$albumlinkID) {
     } elseif ($linktype == 'R') {
       $query = "SELECT reponame FROM $repositories_table WHERE repoID = '$personID'";
     } elseif ($linktype == 'I') {
-      $query = "SELECT lastname, firstname, prefix, suffix, title, lnprefix, living, private, branch, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, deathdatetr, burialdate, burialdatetr, sex, disallowgedcreate, IF(birthdatetr !='0000-00-00',YEAR(birthdatetr),YEAR(altbirthdatetr)) as birth, IF(deathdatetr !='0000-00-00',YEAR(deathdatetr),YEAR(burialdatetr)) as death
-        FROM $people_table, $treesTable WHERE personID = '$personID'";
+      $query = "SELECT lastname, firstname, prefix, suffix, title, lnprefix, living, private, branch, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, deathdatetr, burialdate, burialdatetr, sex, disallowgedcreate, IF(birthdatetr !='0000-00-00', YEAR(birthdatetr), YEAR(altbirthdatetr)) AS birth, IF(deathdatetr !='0000-00-00', YEAR(deathdatetr), YEAR(burialdatetr)) AS death FROM $people_table, $treesTable WHERE personID = '$personID'";
     }
     $result2 = tng_query($query);
     if ($result2) {

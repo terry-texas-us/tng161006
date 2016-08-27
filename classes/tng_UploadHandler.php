@@ -372,8 +372,7 @@ class UploadHandler
     } else {
       $file_size = $content_length;
     }
-    if ($this->options['max_file_size'] 
-      && ($file_size > $this->options['max_file_size'] || $file->size > $this->options['max_file_size'])) {
+    if ($this->options['max_file_size'] && ($file_size > $this->options['max_file_size'] || $file->size > $this->options['max_file_size'])) {
       $file->error = $this->getErrorMessage('max_file_size');
       return false;
     }
@@ -381,8 +380,7 @@ class UploadHandler
       $file->error = $this->getErrorMessage('min_file_size');
       return false;
     }
-    if (is_int($this->options['max_number_of_files']) 
-      && ($this->countFileObjects() >= $this->options['max_number_of_files'])) {
+    if (is_int($this->options['max_number_of_files']) && ($this->countFileObjects() >= $this->options['max_number_of_files'])) {
       $file->error = $this->getErrorMessage('max_number_of_files');
       return false;
     }

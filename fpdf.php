@@ -63,12 +63,6 @@ if (!class_exists('FPDF')) {
     var $AliasNbPages;             //alias for total number of pages
     var $PDFVersion;                 //PDF version number
 
-    /*     * *****************************************************************************
-     *                                                                              *
-     *                               Public methods                                 *
-     *                                                                              *
-     * ***************************************************************************** */
-
     function FPDF($orientation = 'P', $unit = 'mm', $format = 'A4') {
       //Some checks
       $this->_dochecks();
@@ -465,7 +459,7 @@ if (!class_exists('FPDF')) {
       if (isset($this->fonts[$fontkey])) {
         $this->Error('Font already added: ' . $family . ' ' . $style);
       }
-      include($this->_getfontpath() . $file);
+      include $this->_getfontpath() . $file;
       if (!isset($name)) {
         $this->Error('Could not include font definition file');
       }
@@ -537,7 +531,7 @@ if (!class_exists('FPDF')) {
             if ($family == 'times' || $family == 'helvetica') {
               $file .= strtolower($style);
             }
-            include($this->_getfontpath() . $file . '.php');
+            include $this->_getfontpath() . $file . '.php';
             if (!isset($fpdf_charwidths[$fontkey])) {
               $this->Error('Could not include font metric file');
             }
@@ -1036,12 +1030,6 @@ if (!class_exists('FPDF')) {
       }
       return '';
     }
-
-    /*     * *****************************************************************************
-     *                                                                              *
-     *                              Protected methods                               *
-     *                                                                              *
-     * ***************************************************************************** */
 
     function _dochecks() {
       //Check for locale-related bug

@@ -43,17 +43,17 @@ $headSection->setTitle(uiTextSnippet('tree') . ": " . $row['treename']);
         if ($row['description']) {
           showFact(uiTextSnippet('description'), $row['description']);
         }
-        $presult = tng_query("SELECT count(personID) as pcount FROM $people_table");
+        $presult = tng_query("SELECT count(personID) AS pcount FROM $people_table");
         $prow = tng_fetch_assoc($presult);
         tng_free_result($presult);
         showFact(uiTextSnippet('individuals'), $prow['pcount'], true);
 
-        $fresult = tng_query("SELECT count(familyID) as fcount FROM $families_table");
+        $fresult = tng_query("SELECT count(familyID) AS fcount FROM $families_table");
         $frow = tng_fetch_assoc($fresult);
         tng_free_result($fresult);
         showFact(uiTextSnippet('families'), $frow['fcount'], true);
 
-        $sresult = tng_query("SELECT count(sourceID) as scount FROM $sources_table");
+        $sresult = tng_query("SELECT count(sourceID) AS scount FROM $sources_table");
         $srow = tng_fetch_assoc($sresult);
         tng_free_result($sresult);
         showFact(uiTextSnippet('sources'), $srcrow['scount'], true);

@@ -76,7 +76,7 @@ $query = "SELECT ID, place, placelevel, longitude, latitude, zoom FROM $places_t
 $result = tng_query($query);
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(ID) as pcount FROM $places_table WHERE $allwhere";
+  $query = "SELECT count(ID) AS pcount FROM $places_table WHERE $allwhere";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['pcount'];

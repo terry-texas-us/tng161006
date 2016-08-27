@@ -1,7 +1,7 @@
 <?php
 $tngprint = 1;
 require 'tng_begin.php';
-include $subroot . 'pedconfig.php';
+require $subroot . 'pedconfig.php';
 
 if ($pdftype == "ped") {
   $dest = "rpt_pedigree";
@@ -109,7 +109,7 @@ if (is_dir($font_dir)) {
         $charset_dir = '/utf8';
       }
       if (is_dir("$font_dir/$fontfamily$charset_dir") && is_file("$font_dir/$fontfamily$charset_dir/$fontfamily.php")) {
-        include("$font_dir/$fontfamily$charset_dir/$fontfamily.php");
+        include "$font_dir/$fontfamily$charset_dir/$fontfamily.php";
         $font_list[$fontfamily] = $name;
       }
     }

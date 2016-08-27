@@ -1,5 +1,4 @@
 <?php
-//jmj map mod
 $locations2map = [];
 $l2mCount = 0;
 $map['pins'] = 0;

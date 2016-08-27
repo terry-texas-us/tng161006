@@ -30,8 +30,7 @@ $pdf->AddFont($rptFont, 'B');
 $ldsOK = determineLDSRights(true);
 
 // compute the label width based on the longest string that will be displayed
-$labelwidth = getMaxStringWidth([uiTextSnippet('name'), uiTextSnippet('born'), uiTextSnippet('christened'), uiTextSnippet('died'), uiTextSnippet('buried'),
-        uiTextSnippet('cremated'), uiTextSnippet('spouse'), uiTextSnippet('married')], $lblFont, 'B', $lblFontSize, ':');
+$labelwidth = getMaxStringWidth([uiTextSnippet('name'), uiTextSnippet('born'), uiTextSnippet('christened'), uiTextSnippet('died'), uiTextSnippet('buried'), uiTextSnippet('cremated'), uiTextSnippet('spouse'), uiTextSnippet('married')], $lblFont, 'B', $lblFontSize, ':');
 if ($ldsOK) {
   $labelwidth = getMaxStringWidth([uiTextSnippet('baptizedlds'), uiTextSnippet('endowedlds'), uiTextSnippet('sealedslds')], $lblFont, 'B', $lblFontSize, ':', $labelwidth);
 }
@@ -143,7 +142,7 @@ else {
     titleLine(uiTextSnippet('children'));
 
     // for each child
-    $query = "SELECT $people_table.personID as personID, branch, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, famc, sex, birthdate, birthplace, altbirthdate, altbirthplace, haskids, deathdate, deathplace, burialdate, burialplace, burialtype, baptdate, baptplace, confdate, confplace, initdate, initplace, endldate, endlplace, sealdate, sealplace FROM $people_table, $children_table WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = \"$famrow[familyID]\" ORDER BY ordernum";
+    $query = "SELECT $people_table.personID AS personID, branch, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, famc, sex, birthdate, birthplace, altbirthdate, altbirthplace, haskids, deathdate, deathplace, burialdate, burialplace, burialtype, baptdate, baptplace, confdate, confplace, initdate, initplace, endldate, endlplace, sealdate, sealplace FROM $people_table, $children_table WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = \"$famrow[familyID]\" ORDER BY ordernum";
     $children = tng_query($query);
     if ($children && tng_num_rows($children)) {
       $childcount = 0;
@@ -297,7 +296,7 @@ function displayChild($personID, $childcount) {
   }
 
   // show spouses
-  $query = "SELECT familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, $families_table.living as fliving, $families_table.private as fprivate, $families_table.branch as fbranch, $people_table.living as living, $people_table.private as private, $people_table.branch as branch, marrdate, marrplace, sealdate, sealplace FROM $families_table ";
+  $query = "SELECT familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, $families_table.living AS fliving, $families_table.private AS fprivate, $families_table.branch AS fbranch, $people_table.living AS living, $people_table.private AS private, $people_table.branch AS branch, marrdate, marrplace, sealdate, sealplace FROM $families_table ";
   if ($ind['sex'] == 'M') {
     $query .= "LEFT JOIN $people_table ON $families_table.wife = $people_table.personID WHERE husband = \"{$ind['personID']}\" $restriction ORDER BY husborder";
   } else {
@@ -498,7 +497,6 @@ function displayIndividual($personID, $showparents, $showmarriage) {
   }
 }
 
-// childNameLine
 function childNameLine($label1, $data1, $data2, $cite = '') {
   global $pdf, $paperdim, $rtmrg, $lineheight;
   global $rptFont, $rptFontSize, $lblFont, $lblFontSize;
@@ -521,7 +519,6 @@ function childNameLine($label1, $data1, $data2, $cite = '') {
   $pdf->Ln($lineheight);
 }
 
-// nameLine
 function nameLine($label1, $data1, $shade = 0, $cite = '') {
   global $pdf, $paperdim, $rtmrg, $lineheight;
   global $rptFont, $rptFontSize, $lblFont, $lblFontSize;
@@ -546,7 +543,6 @@ function nameLine($label1, $data1, $shade = 0, $cite = '') {
   $pdf->Ln($lineheight);
 }
 
-// spouseLine
 function spouseLine($label1, $data1, $data2, $cite1 = '', $cite2 = '') {
   global $pdf, $paperdim, $lftmrg, $rtmrg, $lineheight;
   global $rptFont, $rptFontSize, $lblFont, $lblFontSize;
@@ -581,7 +577,6 @@ function spouseLine($label1, $data1, $data2, $cite1 = '', $cite2 = '') {
   $pdf->Ln($lineheight);
 }
 
-// dateLine
 function dateLine($label1, $data1, $data2, $cite = '') {
   global $pdf, $paperdim, $lftmrg, $rtmrg, $lineheight;
   global $rptFont, $rptFontSize, $lblFont, $lblFontSize;
@@ -607,7 +602,6 @@ function dateLine($label1, $data1, $data2, $cite = '') {
   $pdf->Ln($lineheight);
 }
 
-// parentLine
 function parentLine($label1, $data1, $label2, $data2, $cite1 = '', $cite2 = '') {
   global $pdf, $paperdim, $lftmrg, $rtmrg, $lineheight;
   global $rptFont, $rptFontSize, $lblFont, $lblFontSize;

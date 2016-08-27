@@ -20,20 +20,19 @@ tng_free_result($result);
 $row['description'] = preg_replace("/\"/", "&#34;", $row['description']);
 $row['keywords'] = preg_replace("/\"/", "&#34;", $row['keywords']);
 
-$query2 = "SELECT albumlinkID, thumbpath, $media_table.mediaID as mediaID, usecollfolder, mediatypeID, notes, description, datetaken, placetaken, defphoto FROM ($media_table, $albumlinks_table)
+$query2 = "SELECT albumlinkID, thumbpath, $media_table.mediaID AS mediaID, usecollfolder, mediatypeID, notes, description, datetaken, placetaken, defphoto FROM ($media_table, $albumlinks_table)
     WHERE albumID = \"$albumID\" AND $media_table.mediaID = $albumlinks_table.mediaID order by ordernum, description";
 $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
 $numrows = tng_num_rows($result2);
 
-$query3 = "SELECT alinkID, entityID, eventID, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.suffix as suffix, people.nameorder as nameorder, familyID, people.personID as personID, wifepeople.personID as wpersonID, wifepeople.firstname as wfirstname, wifepeople.lnprefix as wlnprefix, wifepeople.lastname as wlastname, wifepeople.prefix as wprefix, wifepeople.suffix as wsuffix, wifepeople.nameorder as wnameorder, husbpeople.personID as hpersonID, husbpeople.firstname as hfirstname, husbpeople.lnprefix as hlnprefix, husbpeople.lastname as hlastname, husbpeople.prefix as hprefix, husbpeople.suffix as hsuffix, husbpeople.nameorder as hnameorder, sourceID, sources.title, repositories.repoID as repoID, reponame, linktype
-    FROM ($album2entities_table as ate)
-    LEFT JOIN $people_table AS people ON ate.entityID = people.personID
-    LEFT JOIN $families_table ON ate.entityID = $families_table.familyID
-    LEFT JOIN $sources_table AS sources ON ate.entityID = sources.sourceID
-    LEFT JOIN $repositories_table AS repositories ON ate.entityID = repositories.repoID
-    LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID
-    LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID
-    WHERE albumID = '$albumID' ORDER BY alinkID DESC";
+$query3 = "SELECT alinkID, entityID, eventID, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.suffix AS suffix, people.nameorder AS nameorder, familyID, people.personID AS personID, wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.prefix AS wprefix, wifepeople.suffix AS wsuffix, wifepeople.nameorder AS wnameorder, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.prefix AS hprefix, husbpeople.suffix AS hsuffix, husbpeople.nameorder AS hnameorder, sourceID, sources.title, repositories.repoID AS repoID, reponame, linktype FROM ($album2entities_table as ate) "
+    . "LEFT JOIN $people_table AS people ON ate.entityID = people.personID "
+    . "LEFT JOIN $families_table ON ate.entityID = $families_table.familyID "
+    . "LEFT JOIN $sources_table AS sources ON ate.entityID = sources.sourceID "
+    . "LEFT JOIN $repositories_table AS repositories ON ate.entityID = repositories.repoID "
+    . "LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID "
+    . "LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID "
+    . "WHERE albumID = '$albumID' ORDER BY alinkID DESC";
 $result3 = tng_query($query3) or die(uiTextSnippet('cannotexecutequery') . ": $query3");
 $numlinks = tng_num_rows($result3);
 
@@ -51,7 +50,7 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
     <?php
     $photo = "";
 
-    $query = "SELECT alwayson, thumbpath, $media_table.mediaID as mediaID, usecollfolder, mediatypeID, albumlinkID FROM ($media_table, $albumlinks_table)
+    $query = "SELECT alwayson, thumbpath, $media_table.mediaID AS mediaID, usecollfolder, mediatypeID, albumlinkID FROM ($media_table, $albumlinks_table)
       WHERE albumID = '$albumID' AND $media_table.mediaID = $albumlinks_table.mediaID AND defphoto = '1'";
     $defresult = tng_query($query);
     if ($defresult) {

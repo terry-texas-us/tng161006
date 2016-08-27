@@ -119,8 +119,6 @@ if ($pedigree['colorshift'] > 0) {
 $pedigree['colorshift'] = round($pedigree['colorshift'] / 100 * $extreme / 5);
 $pedigree['url'] = "pedigree.php?";
 
-//$pedigree[boxcolor] = getColor(1);
-
 function getColor($shifts) {
   global $pedigree;
 

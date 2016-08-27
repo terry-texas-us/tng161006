@@ -40,12 +40,12 @@ if ($offset) {
 }
 $wherestr = $searchstring ? " AND (username LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR realname LIKE \"%$searchstring%\" OR email LIKE \"%$searchstring%\")" : "";
 $wherestr .= $adminonly ? " AND allow_add = \"1\" AND allow_edit = \"1\" AND allow_delete = \"1\" AND gedcom = \"\"" : "";
-$query = "SELECT *, DATE_FORMAT(lastlogin,\"%d %b %Y %H:%i:%s\") as lastlogin FROM $users_table WHERE allow_living != \"-1\" $wherestr ORDER BY description LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT *, DATE_FORMAT(lastlogin,\"%d %b %Y %H:%i:%s\") AS lastlogin FROM $users_table WHERE allow_living != \"-1\" $wherestr ORDER BY description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(userID) as ucount FROM $users_table WHERE allow_living != \"-1\" $wherestr";
+  $query = "SELECT count(userID) AS ucount FROM $users_table WHERE allow_living != \"-1\" $wherestr";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['ucount'];
@@ -53,7 +53,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 } else {
   $totrows = $numrows;
 }
-$revquery = "SELECT count(userID) as ucount FROM $users_table WHERE allow_living = \"-1\"";
+$revquery = "SELECT count(userID) AS ucount FROM $users_table WHERE allow_living = \"-1\"";
 $revresult = tng_query($revquery) or die(uiTextSnippet('cannotexecutequery') . ": $revquery");
 $revrow = tng_fetch_assoc($revresult);
 $revstar = $revrow['ucount'] ? " *" : "";

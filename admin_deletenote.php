@@ -14,7 +14,7 @@ if ($noteID) {
 }
 deleteNote($noteID, 1);
 
-$query = "SELECT count(ID) as ncount FROM $notelinks_table WHERE persfamID = '$personID' AND eventID = '$eventID'";
+$query = "SELECT count(ID) AS ncount FROM $notelinks_table WHERE persfamID = '$personID' AND eventID = '$eventID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);

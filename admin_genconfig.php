@@ -86,7 +86,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             </td>
           </tr>
           <?php
-          $query = "SELECT count(userID) as ucount FROM $users_table";
+          $query = "SELECT count(userID) AS ucount FROM $users_table";
           $uresult = tng_query($query);
           if ($uresult) {
             $urow = tng_fetch_assoc($uresult);

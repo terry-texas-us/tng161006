@@ -68,9 +68,9 @@ echo $navList->build("renumber");
     if ($prefix) {
       $prefixlen = strlen($prefix) + 1;
 
-      $query = "SELECT ID, $id, (0+SUBSTRING($id,$prefixlen)) as num FROM $table WHERE (0+SUBSTRING($id,$prefixlen)) >= $nextnum ORDER BY num";
+      $query = "SELECT ID, $id, (0+SUBSTRING($id,$prefixlen)) AS num FROM $table WHERE (0+SUBSTRING($id,$prefixlen)) >= $nextnum ORDER BY num";
     } else {
-      $query = "SELECT ID, $id, (0+SUBSTRING_INDEX($id,'$suffix',1)) as num FROM $table WHERE (0+SUBSTRING_INDEX($id,'$suffix',1)) >= $nextnum ORDER BY num";
+      $query = "SELECT ID, $id, (0+SUBSTRING_INDEX($id,'$suffix',1)) AS num FROM $table WHERE (0+SUBSTRING_INDEX($id,'$suffix',1)) >= $nextnum ORDER BY num";
     }
 
     $result = tng_query($query);
@@ -78,7 +78,7 @@ echo $navList->build("renumber");
     //do this only for person type:
     if ($type == "person") {
       //search media table for all media records with an image map
-      $query = "SELECT mediaID, map from $media_table WHERE map != \"\"";
+      $query = "SELECT mediaID, map FROM $media_table WHERE map != ''";
       $result1 = tng_query($query);
       $keys = [];
       $maps = [];
@@ -123,7 +123,7 @@ echo $navList->build("renumber");
       if ($row['num'] >= $nextnum) {
         $newID = $digits ? ($prefix . str_pad($nextnum, $digits, "0", STR_PAD_LEFT) . $suffix) : ($prefix . $nextnum . $suffix);
 
-        $query = "SELECT ID from $table WHERE $id = '$newID'";
+        $query = "SELECT ID FROM $table WHERE $id = '$newID'";
         $result1 = tng_query($query);
         if (!tng_num_rows($result1)) {
           //if(tng_num_rows($result1)) die ("Problem: destination ID ($newID) already exists. Operation aborted.");

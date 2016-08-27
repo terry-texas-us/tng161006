@@ -5,7 +5,7 @@ require 'adminlib.php';
 
 $adminLogin = 1;
 if ($link) {
-  require 'checklogin.php';
+  include 'checklogin.php';
 }
 ?>
 <frameset>

@@ -2,8 +2,8 @@
 
 function help_header($helptitle) {
   $relpath = "../../";
-  include($relpath . "version.php");
-  include($relpath . "begin.php");
+  include $relpath . "version.php";
+  include $relpath . "begin.php";
 
   $header = "<!DOCTYPE html>\n";
   $header .= "<html>\n";

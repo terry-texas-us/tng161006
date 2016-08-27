@@ -331,9 +331,7 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
               FROM ($people_table $eventsjoin) $familiesjoinw
               WHERE 1=1 $allwhere) as pcount";
           } else {
-            $query = "SELECT count(personID) as pcount
-              FROM ($people_table $eventsjoin) $familiesjoin
-              WHERE 1=1 $allwhere";
+            $query = "SELECT count(personID) AS pcount FROM ($people_table $eventsjoin) $familiesjoin WHERE 1=1 $allwhere";
           }
           $result2 = tng_query($query);
           $countrow = tng_fetch_assoc($result2);

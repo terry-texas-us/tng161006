@@ -13,7 +13,9 @@ if ((!$allowEdit && (!$allowAdd || !$added))) {
 }
 $repoID = ucfirst($repoID);
 
-$query = "SELECT reponame, changedby, $repositories_table.addressID, address1, address2, city, state, zip, country, phone, email, www, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $repositories_table LEFT JOIN $address_table on $repositories_table.addressID = $address_table.addressID WHERE repoID = '$repoID'";
+$query = "SELECT reponame, changedby, $repositories_table.addressID, address1, address2, city, state, zip, country, phone, email, www, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $repositories_table "
+    . "LEFT JOIN $address_table ON $repositories_table.addressID = $address_table.addressID "
+    . "WHERE repoID = '$repoID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -21,7 +23,7 @@ $row['reponame'] = preg_replace("/\"/", "&#34;", $row['reponame']);
 
 $row['allow_living'] = 1;
 
-$query = "SELECT DISTINCT eventID as eventID FROM $notelinks_table WHERE persfamID = '$repoID'";
+$query = "SELECT DISTINCT eventID AS eventID FROM $notelinks_table WHERE persfamID = '$repoID'";
 $notelinks = tng_query($query);
 $gotnotes = [];
 while ($note = tng_fetch_assoc($notelinks)) {

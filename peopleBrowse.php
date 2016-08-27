@@ -141,9 +141,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
     $result2 = tng_query($query);
     $totrows = tng_num_rows($result2);
   } else {
-    $query = "SELECT count($people_table.personID) as pcount "
-            . "FROM ($people_table) $noparentjoin $nospousejoin "
-            . "WHERE $allwhere";
+    $query = "SELECT count($people_table.personID) AS pcount FROM ($people_table) $noparentjoin $nospousejoin WHERE $allwhere";
     $result2 = tng_query($query);
     $row = tng_fetch_assoc($result2);
     $totrows = $row['pcount'];

@@ -19,7 +19,9 @@ $firstsectionsave = "";
 $tableid = "";
 $cellnumber = 0;
 
-$query = "SELECT sourceID, title, shorttitle, author, publisher, actualtext, reponame, $sources_table.repoID as repoID, callnum, other FROM $sources_table LEFT JOIN $repositories_table ON $sources_table.repoID = $repositories_table.repoID WHERE $sources_table.sourceID = '$sourceID'";
+$query = "SELECT sourceID, title, shorttitle, author, publisher, actualtext, reponame, $sources_table.repoID AS repoID, callnum, other FROM $sources_table "
+    . "LEFT JOIN $repositories_table ON $sources_table.repoID = $repositories_table.repoID "
+    . "WHERE $sources_table.sourceID = '$sourceID'";
 $result = tng_query($query);
 $srcrow = tng_fetch_assoc($result);
 if (!tng_num_rows($result)) {
@@ -29,7 +31,7 @@ if (!tng_num_rows($result)) {
 }
 tng_free_result($result);
 
-$query = "SELECT count(personID) as ccount FROM $citations_table, $people_table "
+$query = "SELECT count(personID) AS ccount FROM $citations_table, $people_table "
     . "WHERE $citations_table.sourceID = '$sourceID' AND $citations_table.persfamID = $people_table.personID AND (living = '1' OR private = '1')";
 $sresult = tng_query($query);
 $srow = tng_fetch_assoc($sresult);

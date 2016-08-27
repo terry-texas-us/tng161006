@@ -36,12 +36,8 @@ header("Content-type:text/html; charset=" . $session_charset);
       </tr>
       <tr>
         <td>
-          <span id="person_label"<?php if ($row['reltype'] == 'F') {
-            echo " style=\"display:none\"";
-          } ?>><?php echo uiTextSnippet('personid'); ?></span>
-          <span id="family_label"<?php if ($row['reltype'] == 'I') {
-            echo " style=\"display:none\"";
-          } ?>><?php echo uiTextSnippet('familyid'); ?></span>:
+          <span id="person_label"<?php if ($row['reltype'] == 'F') {echo " style=\"display:none\"";} ?>><?php echo uiTextSnippet('personid'); ?></span>
+          <span id="family_label"<?php if ($row['reltype'] == 'I') {echo " style=\"display:none\"";} ?>><?php echo uiTextSnippet('familyid'); ?></span>:
         </td>
         <td>
           <input name='passocID' type='text' value="<?php echo $row['passocID']; ?>">&nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;

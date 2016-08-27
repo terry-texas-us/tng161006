@@ -442,7 +442,7 @@ function checkLivingLinks($itemID) {
   }
   if ($icriteria) {
     // Now find Living individuals linked to the media that fit the criteria set above.
-    $query = "SELECT count(*) as pcount FROM ($medialinks_table, $people_table) WHERE $medialinks_table.personID = $people_table.personID AND $medialinks_table.mediaID = '$itemID' $icriteria";
+    $query = "SELECT count(*) AS pcount FROM ($medialinks_table, $people_table) WHERE $medialinks_table.personID = $people_table.personID AND $medialinks_table.mediaID = '$itemID' $icriteria";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
     tng_free_result($result);
@@ -452,7 +452,7 @@ function checkLivingLinks($itemID) {
   }
 
   if ($fcriteria) {
-    $query = "SELECT count(*) as pcount FROM ($medialinks_table, $families_table) WHERE $medialinks_table.personID = $families_table.familyID AND $medialinks_table.mediaID = '$itemID' $fcriteria";
+    $query = "SELECT count(*) AS pcount FROM ($medialinks_table, $families_table) WHERE $medialinks_table.personID = $families_table.familyID AND $medialinks_table.mediaID = '$itemID' $fcriteria";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
     tng_free_result($result);
@@ -605,13 +605,6 @@ function xmlcharacters($string) {
     return str_replace($bad, $good, $string);
   }
 }
-
-/* more elegant solution that doesn't quite work
-  function xmlcharacters($string) {
-  $string = str_replace(array('&','"','\''), array('&amp;','&quot;','&apos;'), $string);
-  return preg_replace('/&amp;([A-Za-z]+;|#[0-9]+;)/',"&$1", $string);
-  }
- */
 
 function generatePassword($flag) {
   $password = "";
@@ -1034,24 +1027,24 @@ function tng_utf8_decode($text) {
 }
 
 function utf82iso88592($text) {
-	$text = str_replace("\xC4\x85", '±', $text);
-	$text = str_replace("\xC4\x84", '¡', $text);
-	$text = str_replace("\xC4\x87", 'æ', $text);
-	$text = str_replace("\xC4\x86", 'Æ', $text);
-	$text = str_replace("\xC4\x99", 'ê', $text);
-	$text = str_replace("\xC4\x98", 'Ê', $text);
-	$text = str_replace("\xC5\x82", '³', $text);
-	$text = str_replace("\xC5\x81", '£', $text);
-	$text = str_replace("\xC3\xB3", 'ó', $text);
-	$text = str_replace("\xC3\x93", 'Ó', $text);
-	$text = str_replace("\xC5\x9B", '¶', $text);
-	$text = str_replace("\xC5\x9A", '¦', $text);
-	$text = str_replace("\xC5\xBC", '¿', $text);
-	$text = str_replace("\xC5\xBB", '¯', $text);
-	$text = str_replace("\xC5\xBA", '¼', $text);
-	$text = str_replace("\xC5\xB9", '¬', $text);
-	$text = str_replace("\xc5\x84", 'ñ', $text);
-	$text = str_replace("\xc5\x83", 'Ñ', $text);
+  $text = str_replace("\xC4\x85", '±', $text);
+  $text = str_replace("\xC4\x84", '¡', $text);
+  $text = str_replace("\xC4\x87", 'æ', $text);
+  $text = str_replace("\xC4\x86", 'Æ', $text);
+  $text = str_replace("\xC4\x99", 'ê', $text);
+  $text = str_replace("\xC4\x98", 'Ê', $text);
+  $text = str_replace("\xC5\x82", '³', $text);
+  $text = str_replace("\xC5\x81", '£', $text);
+  $text = str_replace("\xC3\xB3", 'ó', $text);
+  $text = str_replace("\xC3\x93", 'Ó', $text);
+  $text = str_replace("\xC5\x9B", '¶', $text);
+  $text = str_replace("\xC5\x9A", '¦', $text);
+  $text = str_replace("\xC5\xBC", '¿', $text);
+  $text = str_replace("\xC5\xBB", '¯', $text);
+  $text = str_replace("\xC5\xBA", '¼', $text);
+  $text = str_replace("\xC5\xB9", '¬', $text);
+  $text = str_replace("\xc5\x84", 'ñ', $text);
+  $text = str_replace("\xc5\x83", 'Ñ', $text);
 
   return $text;
 }

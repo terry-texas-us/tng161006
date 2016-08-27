@@ -17,7 +17,7 @@ $result = tng_query($query);
 $brow = tng_fetch_assoc($result);
 tng_free_result($result);
 
-$query = "SELECT count(persfamID) as pcount FROM $branchlinks_table WHERE branch = '$branch'";
+$query = "SELECT count(persfamID) AS pcount FROM $branchlinks_table WHERE branch = '$branch'";
 $result = tng_query($query);
 $prow = tng_fetch_assoc($result);
 $pcount = $prow['pcount'];

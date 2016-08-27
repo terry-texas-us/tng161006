@@ -64,12 +64,11 @@ if ($result2) {
       $id = "";
       $linktype = 'L';
     }
-
     $dchecked = $plink['defphoto'] ? " checked" : "";
     $schecked = $plink['dontshow'] ? "" : " checked";
     $alttext = $plink['altdescription'] || $plink['altnotes'] ? uiTextSnippet('yes') : "&nbsp;";
 
-    include("eventmicro.php");
+    include "eventmicro.php";
 
     $linkrows .= "<tr id=\"alink_{$plink['mlinkID']}\"><td>";
     $linkrows .= "<a href='#' onclick=\"return editMedia2EntityLink({$plink['mlinkID']});\" title='" . uiTextSnippet('edit') . "'>\n";

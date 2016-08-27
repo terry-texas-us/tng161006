@@ -1,8 +1,5 @@
 <?php
-//
-// Common functions to help out with PDF report generation
-//
-// generateDates
+
 function generateDates($ind) {
   if ($ind['allow_living'] && $ind['allow_private']) {
     if ($ind['birthdate'] == '') {
@@ -22,7 +19,6 @@ function generateDates($ind) {
   return $result;
 }
 
-// generateYears
 function generateYears($ind) {
   if ($ind['allow_living'] && $ind['allow_private']) {
     if (!$ind['birth']) {
@@ -100,7 +96,6 @@ function genToRelationship($gen) {
   }
 }
 
-// titleLine
 function titleLine($label1) {
   global $pdf, $paperdim, $lftmrg, $rtmrg, $lineheight;
   global $lblFont, $lblFontSize;

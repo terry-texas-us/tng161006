@@ -28,23 +28,23 @@ function resortMedia($mediaID) {
   global $sources_table;
   global $repositories_table;
 
-  $query = "SELECT $media_table.mediaID as mediaID, personID, mediatypeID FROM $medialinks_table, $media_table WHERE $medialinks_table.mediaID = '$mediaID' AND $medialinks_table.mediaID = $media_table.mediaID";
+  $query = "SELECT $media_table.mediaID AS mediaID, personID, mediatypeID FROM $medialinks_table, $media_table WHERE $medialinks_table.mediaID = '$mediaID' AND $medialinks_table.mediaID = $media_table.mediaID";
   $result2 = tng_query($query);
   if ($result2) {
     while ($plink = tng_fetch_assoc($result2)) {
       $query = "DELETE FROM $medialinks_table WHERE mediaID = {$plink['mediaID']}";
       tng_query($query);
 
-      $query = "SELECT personID from $people_table WHERE personID = \"{$plink['personID']}\"";
+      $query = "SELECT personID FROM $people_table WHERE personID = \"{$plink['personID']}\"";
       reorderMedia($query, $plink, $plink['mediatypeID']);
 
-      $query = "SELECT familyID as personID from $families_table WHERE familyID = \"{$plink['personID']}\"";
+      $query = "SELECT familyID AS personID FROM $families_table WHERE familyID = \"{$plink['personID']}\"";
       reorderMedia($query, $plink, $plink['mediatypeID']);
 
-      $query = "SELECT sourceID as personID from $sources_table WHERE sourceID = \"{$plink['personID']}\"";
+      $query = "SELECT sourceID AS personID FROM $sources_table WHERE sourceID = \"{$plink['personID']}\"";
       reorderMedia($query, $plink, $plink['mediatypeID']);
 
-      $query = "SELECT repoID as personID from $repositories_table WHERE repoID = \"{$plink['personID']}\"";
+      $query = "SELECT repoID AS personID FROM $repositories_table WHERE repoID = \"{$plink['personID']}\"";
       reorderMedia($query, $plink, $plink['mediatypeID']);
     }
     tng_free_result($result2);
@@ -61,7 +61,7 @@ function removeImages($mediaID) {
   $usefolder = $row['usecollfolder'] ? $mediatypes_assoc[$mediatypeID] : $mediapath;
 
   //now look for any records with path still the same. if none, go ahead and delete.
-  $query = "SELECT count(mediaID) as mcount FROM $media_table WHERE path = \"{$row['path']}\"";
+  $query = "SELECT count(mediaID) AS mcount FROM $media_table WHERE path = \"{$row['path']}\"";
   $result3 = tng_query($query);
   $row3 = tng_fetch_assoc($result3);
   tng_free_result($result3);
@@ -71,7 +71,7 @@ function removeImages($mediaID) {
   }
 
   //now look for any records with thumbpath still the same. if none, go ahead and delete.
-  $query = "SELECT count(mediaID) as mcount FROM $media_table WHERE thumbpath = \"$row[thumbpath]\"";
+  $query = "SELECT count(mediaID) AS mcount FROM $media_table WHERE thumbpath = \"$row[thumbpath]\"";
   $result3 = tng_query($query);
   $row3 = tng_fetch_assoc($result3);
   tng_free_result($result3);

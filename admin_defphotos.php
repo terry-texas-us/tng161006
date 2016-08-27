@@ -23,7 +23,7 @@ while ($distinctplink = tng_fetch_assoc($result)) {
 
   $defsexist = 0;
   if (!$overwritedefs) {
-    $query3 = "SELECT count(medialinkID) as pcount FROM $medialinks_table WHERE personID = \"{$distinctplink['personID']}\" AND defphoto = '1'";
+    $query3 = "SELECT count(medialinkID) AS pcount FROM $medialinks_table WHERE personID = \"{$distinctplink['personID']}\" AND defphoto = '1'";
     $result3 = tng_query($query3) or die(uiTextSnippet('cannotexecutequery') . ": $query3");
     $pcountrow = tng_fetch_assoc($result3);
     if ($pcountrow['pcount']) {

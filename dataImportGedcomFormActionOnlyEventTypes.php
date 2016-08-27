@@ -89,8 +89,8 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
 
       $lineinfo = [];
       if ($line = ltrim(fgets($fp, 1024))) {
-		$patterns = ["/®®.*¯¯/", "/®®.*/", "/.*¯¯/", "/@@/"];
-		$replacements = ["", "", "", "@"];
+        $patterns = ["/®®.*¯¯/", "/®®.*/", "/.*¯¯/", "/@@/"];
+        $replacements = ["", "", "", "@"];
         $line = preg_replace($patterns, $replacements, $line);
 
         preg_match("/^(\d+)\s+(\S+) ?(.*)$/", $line, $matches);

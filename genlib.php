@@ -10,7 +10,7 @@ require_once 'trees.php';
 
 checkMaintenanceMode(0);
 if ($needMap) {
-  require $subroot . 'mapconfig.php';
+  include $subroot . 'mapconfig.php';
   if ($map['key']) {
     include_once 'googlemaplib.php';
   }

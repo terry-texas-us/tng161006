@@ -1,10 +1,4 @@
 <?php
-/**
- * @author CJ Niemira <siege (at) siege (dot) org>
- * @copyright 2006,2008
- * @license GPL
- * @version 2.0
- */
 
 require 'tng_begin.php';
 
@@ -86,7 +80,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
       $where[] = $key . "datetr LIKE '%-$thisMonth-%'";
     }
     if (! empty($where)) {
-      $sql = "SELECT personID, gedcom, firstname, nickname, lnprefix, lastname, suffix, living, branch, private, " . implode (', ', $select) . "
+      $sql = "SELECT personID, gedcom, firstname, nickname, lnprefix, lastname, suffix, living, branch, private, " . implode(', ', $select) . "
         FROM $people_table
         WHERE (" . implode(' OR ', $where) . ")";
 
@@ -131,7 +125,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
                 $date = substr($row[$field], 5);
                 $html = '<img src="' . 'img/' . $val . '" class="calIcon" alt=""><a href="peopleShowPerson.php?personID=' . $row['personID'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
 
-                if (strpos($date,"-00")) {
+                if (strpos($date, "-00")) {
                   $html = '<span>' . $html . '</span>';
                 }
                 $events[$date][$key][$row['gedcom']][$row['personID']] = $html;
@@ -157,7 +151,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     }
 
     if (! empty($where)) {
-      $sql = "SELECT familyID, gedcom, husband, wife, living, private, " . implode (', ', $select) . "
+      $sql = "SELECT familyID, gedcom, husband, wife, living, private, " . implode(', ', $select) . "
         FROM $families_table
         WHERE (" . implode(' OR ', $where) . ")";
 
@@ -204,7 +198,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
                 $date = substr($row[$field], 5);
                 $html = '<img src="' . 'img/' . $val . '" class="calIcon" alt=""><a href="familiesShowFamily.php?familyID=' . $row['familyID'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
 
-                if(strpos($date,"-00")) {
+                if (strpos($date, "-00")) {
                   $html = '<span>' . $html . '</span>';
                 }
                 $events[$date][$key][$row['gedcom']][$row['familyID']] = $html;
@@ -261,7 +255,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
             if (tng_num_rows($result2) < 1) {
               continue;
             }
-            $longname = htmlentities(getName(tng_fetch_assoc($result2)),ENT_QUOTES);
+            $longname = htmlentities(getName(tng_fetch_assoc($result2)), ENT_QUOTES);
 
           } elseif ($row['persfamID']{0} == 'F') {
             $sql = "SELECT * FROM $families_table WHERE familyID = '" . $row['persfamID'] . "'";
@@ -281,7 +275,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
             if (tng_num_rows($result3) < 1) {
               continue;
             }
-            $longname = htmlentities(getFamilyName(tng_fetch_assoc($result3)),ENT_QUOTES);
+            $longname = htmlentities(getFamilyName(tng_fetch_assoc($result3)), ENT_QUOTES);
             $isFam = 1;
 
           } else {
@@ -449,9 +443,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
         foreach ($calEvent as $key => $val)
           {$where[] = "$eventtypes_table.tag = '$key'";}
 
-        $sql = "SELECT tag, display
-          FROM $eventtypes_table
-          WHERE " . implode(' OR ', $where);
+        $sql = "SELECT tag, display FROM $eventtypes_table WHERE " . implode(' OR ', $where);
 
         $result = tng_query($sql);
         # BREAK

@@ -33,7 +33,7 @@ if ($ID) {
   $result = tng_query($query);
 } else {
   //get new ordernum
-  $query2 = "SELECT max(ordernum) as maxordernum FROM $mostwanted_table WHERE mwtype = '$mwtype'";
+  $query2 = "SELECT max(ordernum) AS maxordernum FROM $mostwanted_table WHERE mwtype = '$mwtype'";
   $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
   $row2 = tng_fetch_assoc($result2);
   $ordernum = $row2['maxordernum'] + 1;

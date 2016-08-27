@@ -356,7 +356,7 @@ switch ($action) {
     break;
   case "add":
     //add photo to album at end
-    $query2 = "SELECT max(ordernum) as maxordernum FROM $albumlinks_table WHERE albumID = \"$album\" GROUP BY albumID";
+    $query2 = "SELECT max(ordernum) AS maxordernum FROM $albumlinks_table WHERE albumID = \"$album\" GROUP BY albumID";
     $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
     $row2 = tng_fetch_assoc($result2);
     $count = $row2['maxordernum'] + 1;
@@ -390,16 +390,16 @@ switch ($action) {
     }
     $result = tng_query($query);
 
-    $query2 = "SELECT personID from $people_table WHERE personID = '$entityID'";
+    $query2 = "SELECT personID FROM $people_table WHERE personID = '$entityID'";
     reorderMedia($query2, $row);
 
-    $query2 = "SELECT familyID as personID from $families_table WHERE familyID = '$entityID'";
+    $query2 = "SELECT familyID AS personID FROM $families_table WHERE familyID = '$entityID'";
     reorderMedia($query2, $row);
 
-    $query2 = "SELECT sourceID as personID from $sources_table WHERE sourceID = '$entityID'";
+    $query2 = "SELECT sourceID AS personID FROM $sources_table WHERE sourceID = '$entityID'";
     reorderMedia($query2, $row);
 
-    $query2 = "SELECT repoID as personID from $repositories_table WHERE repoID = '$entityID'";
+    $query2 = "SELECT repoID AS personID FROM $repositories_table WHERE repoID = '$entityID'";
     reorderMedia($query2, $row);
 
     $rval = $linkID . "&" . $entityID;
@@ -428,7 +428,7 @@ switch ($action) {
     }
     break;
   case "addlink":
-    require 'prefixes.php';
+    include 'prefixes.php';
     switch ($linktype) {
       case 'I':
         $prefix = $personprefix;
@@ -462,9 +462,9 @@ switch ($action) {
       $entityID = $entityID . $suffix;
     }
     if ($type == "album") {
-      $query = "SELECT count(alinkID) as count FROM $album2entities_table WHERE entityID = \"$entityID\"";
+      $query = "SELECT count(alinkID) AS count FROM $album2entities_table WHERE entityID = \"$entityID\"";
     } else {
-      $query = "SELECT count(medialinkID) as count FROM $medialinks_table WHERE personID = \"$entityID\"";
+      $query = "SELECT count(medialinkID) AS count FROM $medialinks_table WHERE personID = \"$entityID\"";
     }
     $result = tng_query($query);
     if ($result) {
@@ -492,9 +492,8 @@ switch ($action) {
       case 'F':
         $joinonwife = "LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID";
         $joinonhusb = "LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID";
-        $query = "SELECT wifepeople.personID as wpersonID, wifepeople.firstname as wfirstname, wifepeople.lnprefix as wlnprefix, wifepeople.lastname as wlastname, wifepeople.prefix as wprefix, wifepeople.suffix as wsuffix, wifepeople.nameorder as wnameorder, wifepeople.branch as wbranch,
-          husbpeople.personID as hpersonID, husbpeople.firstname as hfirstname, husbpeople.lnprefix as hlnprefix, husbpeople.lastname as hlastname, husbpeople.prefix as hprefix, husbpeople.suffix as hsuffix, husbpeople.nameorder as hnameorder, husbpeople.branch as hbranch
-          FROM $families_table $joinonwife $joinonhusb WHERE familyID = '$entityID'";
+        $query = "SELECT wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.prefix AS wprefix, wifepeople.suffix AS wsuffix, wifepeople.nameorder AS wnameorder, wifepeople.branch AS wbranch, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.prefix AS hprefix, husbpeople.suffix AS hsuffix, husbpeople.nameorder AS hnameorder, husbpeople.branch AS hbranch FROM $families_table $joinonwife $joinonhusb "
+            . "WHERE familyID = '$entityID'";
         $result = tng_query($query);
         $row = tng_fetch_assoc($result);
         $name = "";
@@ -605,7 +604,7 @@ switch ($action) {
     break;
   case "masslink":
     $entityID = tng_utf8_decode($newlink1);
-    $query = "SELECT count(medialinkID) as count FROM $medialinks_table WHERE personID = \"$entityID\"";
+    $query = "SELECT count(medialinkID) AS count FROM $medialinks_table WHERE personID = \"$entityID\"";
     $result = tng_query($query);
     if ($result) {
       $row = tng_fetch_assoc($result);

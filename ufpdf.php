@@ -1,17 +1,5 @@
 <?php
 
-/* * *****************************************************************************
- * Software: UFPDF, Unicode Free PDF generator                                  *
- * Version:  0.1                                                                *
- *           based on FPDF 1.52 by Olivier PLATHEY                              *
- * Date:     2004-09-01                                                         *
- * Author:   Steven Wittens <steven@acko.net>                                   *
- * License:  GPL                                                                *
- *                                                                              *
- * UFPDF is a modification of FPDF to support Unicode through UTF-8.            *
- *                                                                              *
- * ***************************************************************************** */
-
 if (!class_exists('UFPDF')) {
   define('UFPDF_VERSION', '0.1');
 
@@ -55,7 +43,7 @@ if (!class_exists('UFPDF')) {
       if (defined('FPDF_FONTPATH')) {
         $file = FPDF_FONTPATH . $file;
       }
-      include($file);
+      include $file;
       if (!isset($name)) {
         $this->Error('Could not include font definition file');
       }
@@ -171,12 +159,6 @@ if (!class_exists('UFPDF')) {
         $this->x += $w;
       }
     }
-
-    /*     * *****************************************************************************
-     *                                                                              *
-     *                              Protected methods                               *
-     *                                                                              *
-     * ***************************************************************************** */
 
     function _puttruetypeunicode($font) {
       //Type0 Font

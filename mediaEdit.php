@@ -14,7 +14,7 @@ if (!$allowMediaEdit && (!$allowMediaAdd || !$added)) {
 }
 require 'showmedialib.php';
 
-$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate "
+$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate "
         . "FROM $media_table WHERE mediaID = \"$mediaID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
@@ -55,15 +55,14 @@ while ($treerow = tng_fetch_assoc($treeresult)) {
 }
 tng_free_result($treeresult);
 
-$query = "SELECT $medialinks_table.medialinkID as mlinkID, $medialinks_table.personID as personID, eventID, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.prefix as prefix, people.suffix as suffix, people.nameorder as nameorder, altdescription, altnotes, people.branch as branch, familyID, people.personID as personID2, wifepeople.personID as wpersonID, wifepeople.firstname as wfirstname, wifepeople.lnprefix as wlnprefix, wifepeople.lastname as wlastname, wifepeople.prefix as wprefix, wifepeople.suffix as wsuffix, wifepeople.nameorder as wnameorder, husbpeople.personID as hpersonID, husbpeople.firstname as hfirstname, husbpeople.lnprefix as hlnprefix, husbpeople.lastname as hlastname, husbpeople.prefix as hprefix, husbpeople.suffix as hsuffix, husbpeople.nameorder as hnameorder, sourceID, sources.title, repositories.repoID as repoID, reponame, defphoto, linktype, dontshow, people.living, people.private, $families_table.living as fliving, $families_table.private as fprivate
-    FROM $medialinks_table
-    LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID
-    LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID
-    LEFT JOIN $sources_table AS sources ON $medialinks_table.personID = sources.sourceID
-    LEFT JOIN $repositories_table AS repositories ON $medialinks_table.personID = repositories.repoID
-    LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID
-    LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID
-    WHERE mediaID = \"$mediaID\" ORDER BY $medialinks_table.medialinkID DESC";
+$query = "SELECT $medialinks_table.medialinkID AS mlinkID, $medialinks_table.personID AS personID, eventID, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, people.nameorder AS nameorder, altdescription, altnotes, people.branch AS branch, familyID, people.personID AS personID2, wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.prefix AS wprefix, wifepeople.suffix AS wsuffix, wifepeople.nameorder AS wnameorder, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.prefix AS hprefix, husbpeople.suffix AS hsuffix, husbpeople.nameorder AS hnameorder, sourceID, sources.title, repositories.repoID AS repoID, reponame, defphoto, linktype, dontshow, people.living, people.private, $families_table.living AS fliving, $families_table.private AS fprivate FROM $medialinks_table "
+    . "LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID "
+    . "LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID "
+    . "LEFT JOIN $sources_table AS sources ON $medialinks_table.personID = sources.sourceID "
+    . "LEFT JOIN $repositories_table AS repositories ON $medialinks_table.personID = repositories.repoID "
+    . "LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID "
+    . "LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID "
+    . "WHERE mediaID = '$mediaID' ORDER BY $medialinks_table.medialinkID DESC";
 $result2 = tng_query($query);
 $numlinks = tng_num_rows($result2);
 

@@ -175,7 +175,9 @@ function doNotes($persfam1, $persfam2, $varname) {
 
 $r1row = $r2row = "";
 if ($repoID1) {
-  $query = "SELECT reponame, repoID, $repositories_table.addressID as addressID, address1, address2, city, state, zip, country, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $repositories_table LEFT JOIN $address_table ON $repositories_table.addressID = $address_table.addressID WHERE repoID = '$repoID1'";
+  $query = "SELECT reponame, repoID, $repositories_table.addressID AS addressID, address1, address2, city, state, zip, country, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $repositories_table "
+      . "LEFT JOIN $address_table ON $repositories_table.addressID = $address_table.addressID "
+      . "WHERE repoID = '$repoID1'";
   $result = tng_query($query);
   if ($result && tng_num_rows($result)) {
     $r1row = tng_fetch_assoc($result);
@@ -244,7 +246,9 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
     }
   }
 } elseif ($repoID2) {
-  $query = "SELECT reponame, repoID, $repositories_table.addressID as addressID, address1, address2, city, state, zip, country, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $repositories_table LEFT JOIN $address_table ON $repositories_table.addressID = $address_table.addressID WHERE repoID = '$repoID2'";
+  $query = "SELECT reponame, repoID, $repositories_table.addressID AS addressID, address1, address2, city, state, zip, country, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $repositories_table "
+      . "LEFT JOIN $address_table ON $repositories_table.addressID = $address_table.addressID "
+      . "WHERE repoID = '$repoID2'";
   $result2 = tng_query($query);
   if ($result2 && tng_num_rows($result2) && $repoID1 != $repoID2) {
     $r2row = tng_fetch_assoc($result2);
@@ -429,7 +433,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                 if (is_array($r2row)) {
                   echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('repositoriesEdit.php?repoID={$r2row['repoID']}&amp;cw=1','edit')\"></td>\n";
 
-                  $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID as eventtypeID, $events_table.eventID as eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$r2row['repoID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
+                  $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID AS eventtypeID, $events_table.eventID AS eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$r2row['repoID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
                   $evresult = tng_query($query);
                   $eventcount = tng_num_rows($evresult);
 
@@ -451,7 +455,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                 doRow("repoID", "repoid", "");
                 doRow("reponame", "name", "r2reponame");
                 doRow("addressID", "address", "r2addressID");
-                $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID as eventtypeID, $events_table.eventID as eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$r1row['repoID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
+                $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID AS eventtypeID, $events_table.eventID AS eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$r1row['repoID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
                 $evresult = tng_query($query);
                 $eventcount = tng_num_rows($evresult);
 

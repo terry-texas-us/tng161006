@@ -46,7 +46,7 @@ $headSection->setTitle(uiTextSnippet('surnamelist') . ": " . uiTextSnippet('begi
             $surnamestr = "ucase($surnamestr)";
           }
           $firstchar = $firstchar == "\"" ? "\\\"" : $firstchar;
-          $query = "SELECT ucase( $binary $surnamestr ) as lastname, $surnamestr as lowername, ucase($binary lastname) as binlast, count( ucase($binary lastname) ) as lncount FROM $people_table WHERE ucase($binary TRIM(lastname)) LIKE \"$firstchar%\" $wherestr GROUP BY lowername ORDER by binlast";
+          $query = "SELECT ucase( $binary $surnamestr ) AS lastname, $surnamestr AS lowername, ucase($binary lastname) AS binlast, count( ucase($binary lastname) ) AS lncount FROM $people_table WHERE ucase($binary TRIM(lastname)) LIKE \"$firstchar%\" $wherestr GROUP BY lowername ORDER by binlast";
           $result = tng_query($query);
           $topnum = tng_num_rows($result);
           if ($result) {

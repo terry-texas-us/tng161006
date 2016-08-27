@@ -33,12 +33,12 @@ if ($offset) {
   $tngpage = 1;
 }
 $wherestr = $searchstring ? "WHERE (gedcom LIKE \"%$searchstring%\" OR treename LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR owner LIKE \"%$searchstring%\")" : "";
-$query = "SELECT gedcom, treename, description, owner, DATE_FORMAT(lastimportdate,\"%d %b %Y %H:%i:%s\") as lastimportdate, importfilename FROM $treesTable $wherestr ORDER BY treename LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT gedcom, treename, description, owner, DATE_FORMAT(lastimportdate,\"%d %b %Y %H:%i:%s\") AS lastimportdate, importfilename FROM $treesTable $wherestr ORDER BY treename LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(gedcom) as tcount FROM $treesTable $wherestr";
+  $query = "SELECT count(gedcom) AS tcount FROM $treesTable $wherestr";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['tcount'];
@@ -123,7 +123,7 @@ $headSection->setTitle(uiTextSnippet('trees'));
           $editlink = "treesEdit.php?tree={$row['gedcom']}";
           $gedcom = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['gedcom'] . "</a>" : $row['gedcom'];
 
-          $query = "SELECT count(personID) as pcount FROM $people_table";
+          $query = "SELECT count(personID) AS pcount FROM $people_table";
           $result2 = tng_query($query);
           $prow = tng_fetch_assoc($result2);
           $pcount = number_format($prow['pcount']);

@@ -8,7 +8,7 @@ require 'checklogin.php';
 initMediaTypes();
 
 $personID = ucfirst($personID);
-$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $people_table WHERE personID = '$personID'";
+$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $people_table WHERE personID = '$personID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -65,7 +65,7 @@ $row['allow_private'] = $rights['private'];
 
 $namestr = getName($row);
 
-$query = "SELECT DISTINCT eventID as eventID FROM $notelinks_table WHERE persfamID = '$personID'";
+$query = "SELECT DISTINCT eventID AS eventID FROM $notelinks_table WHERE persfamID = '$personID'";
 $notelinks = tng_query($query);
 $gotnotes = [];
 while ($note = tng_fetch_assoc($notelinks)) {
@@ -87,7 +87,7 @@ while ($cite = tng_fetch_assoc($citresult)) {
 }
 tng_free_result($citresult);
 
-$assocquery = "SELECT count(assocID) as acount FROM $assoc_table WHERE personID = '$personID'";
+$assocquery = "SELECT count(assocID) AS acount FROM $assoc_table WHERE personID = '$personID'";
 $assocresult = tng_query($assocquery) or die(uiTextSnippet('cannotexecutequery') . ": $assocquery");
 $assocrow = tng_fetch_assoc($assocresult);
 $gotassoc = $assocrow['acount'] ? "*" : "";
@@ -166,7 +166,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
             <div class='col-md-4'>
             </div>
             <div class='col-md-4'>
-              <?php require_once 'branches.php'; ?>
+              <?php include_once 'branches.php'; ?>
               <?php echo buildBranchSelectControl($row, $assignedbranch, $branches_table); ?>
             </div>
             <div class='col-md-4'>
@@ -441,7 +441,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                                 <span><?php echo displayDate($marriagerow['marrdate']); ?></span>
                               <?php } ?>
                               <?php
-                              $query = "SELECT $people_table.personID as pID, firstname, lnprefix, lastname, birthdate, birthplace, altbirthdate, altbirthplace, haskids, living, private, branch, prefix, suffix, nameorder FROM ($people_table, $children_table) WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = \"{$familyId}\" ORDER BY ordernum";
+                              $query = "SELECT $people_table.personID AS pID, firstname, lnprefix, lastname, birthdate, birthplace, altbirthdate, altbirthplace, haskids, living, private, branch, prefix, suffix, nameorder FROM ($people_table, $children_table) WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = \"{$familyId}\" ORDER BY ordernum";
                               $children = tng_query($query);
 
                               if ($children && tng_num_rows($children)) {

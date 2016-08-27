@@ -1,8 +1,5 @@
 <?php
-// PDF Descendancy Report
-// Author:  Bret Rumsey
-// Thanks to J. Kraber for his original implementation of this report.
-//
+
 require 'tng_begin.php';
 $tngprint = 1;
 

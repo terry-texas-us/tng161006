@@ -35,7 +35,7 @@ function getIndividualRecord($personID, $prevlevel) {
 
   $personID = adjustID($personID, $savestate['ioffset']);
 
-	$prefix = "I";
+  $prefix = "I";
   $info = "";
   $prifamily = "";
   $changedate = "";
@@ -56,8 +56,8 @@ function getIndividualRecord($personID, $prevlevel) {
   $assocarr = [];
   $living = $private = 0;
 
-	static $arrayLower = ['á','à','ä','é','è','ó','ò','ö','ú','ù','ü'];
-	static $arrayUpper = ['Á','À','Ä','É','È','Ó','Ò','Ö','Ú','Ù','Ü'];
+  static $arrayLower = ['á','à','ä','é','è','ó','ò','ö','ú','ù','ü'];
+  static $arrayUpper = ['Á','À','Ä','É','È','Ó','Ò','Ö','Ú','Ù','Ü'];
 
   $lineinfo = getLine();
   while ($lineinfo['tag'] && $lineinfo['level'] >= $prevlevel) {

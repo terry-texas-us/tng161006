@@ -508,7 +508,7 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
     var lastpopup = '';
     var tnglitbox;
     var slotceiling = <?php echo $pedmax ?>;
-    var slotceiling_minus1 = <?php echo ( pow( 2, $generations - 1 ) ) ?>;
+    var slotceiling_minus1 = <?php echo (pow(2, $generations - 1)) ?>;
     var display = '<?php echo $display ?>';
     var pedcellpad = <?php echo $pedigree['cellpad'] ?>;
     var pedboxalign = '<?php echo $pedigree['boxalign'] ?>';

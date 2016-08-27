@@ -84,9 +84,9 @@ function getCitations($persfamID, $shortcite = 1) {
   global $citedisplay;
 
   $actualtext = $shortcite ? "" : ", actualtext";
-  $citquery = "SELECT citationID, title, shorttitle, author, other, publisher, callnum, page, quay, citedate, citetext, $citations_table.note as note, $citations_table.sourceID, description, eventID{$actualtext}
-    FROM $citations_table LEFT JOIN $sources_table ON $citations_table.sourceID = $sources_table.sourceID
-    WHERE persfamID = '$persfamID' ORDER BY ordernum, citationID";
+  $citquery = "SELECT citationID, title, shorttitle, author, other, publisher, callnum, page, quay, citedate, citetext, $citations_table.note AS note, $citations_table.sourceID, description, eventID{$actualtext} FROM $citations_table "
+      . "LEFT JOIN $sources_table ON $citations_table.sourceID = $sources_table.sourceID "
+      . "WHERE persfamID = '$persfamID' ORDER BY ordernum, citationID";
   $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
 
   while ($citrow = tng_fetch_assoc($citresult)) {
@@ -242,12 +242,11 @@ function getNotes($persfamID, $flag) {
   }
 
   $secretstr = $allow_private ? "" : " AND secret != \"1\"";
-  $query = "SELECT display, $xnotes_table.note as note, $notelinks_table.eventID as eventID, $notelinks_table.xnoteID as xnoteID, $notelinks_table.ID as ID, noteID FROM $notelinks_table
-    LEFT JOIN  $xnotes_table ON $notelinks_table.xnoteID = $xnotes_table.ID
-    LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID
-    LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID
-    WHERE $notelinks_table.persfamID = '$persfamID' $secretstr
-    ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum, ID";
+  $query = "SELECT display, $xnotes_table.note AS note, $notelinks_table.eventID AS eventID, $notelinks_table.xnoteID AS xnoteID, $notelinks_table.ID AS ID, noteID FROM $notelinks_table "
+      . "LEFT JOIN  $xnotes_table ON $notelinks_table.xnoteID = $xnotes_table.ID "
+      . "LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID "
+      . "LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID "
+      . "WHERE $notelinks_table.persfamID = '$persfamID' $secretstr ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum, ID";
   $notelinks = tng_query($query);
 
   $currevent = "";
@@ -413,7 +412,7 @@ function checkXnote($fact) {
   $newfact = [];
   preg_match("/^@(\S+)@/", $fact, $matches);
   if ($matches[1]) {
-    $query = "SELECT note, ID from $xnotes_table WHERE noteID = \"$matches[1]\"";
+    $query = "SELECT note, ID FROM $xnotes_table WHERE noteID = \"$matches[1]\"";
     $xnoteres = tng_query($query);
     if ($xnoteres) {
       $xnote = tng_fetch_assoc($xnoteres);
@@ -472,8 +471,8 @@ function setEvent($data, $datetr) {
     global $pinplacelevel0;
 
     $safeplace = tng_real_escape_string($data['place']);
-    $query = "SELECT place, placelevel, latitude, longitude, zoom, notes
-      FROM $places_table WHERE $places_table.place = '$safeplace' and (latitude is not null and latitude != '') and (longitude is not null and longitude != '')";
+    $query = "SELECT place, placelevel, latitude, longitude, zoom, notes FROM $places_table "
+        . "WHERE $places_table.place = '$safeplace' and (latitude is not null and latitude != '') and (longitude is not null and longitude != '')";
     $custevents = tng_query($query);
 
     $numrows = tng_num_rows($custevents);
@@ -801,10 +800,8 @@ function getAlbums($entity, $linktype) {
   $ID = $misc['personID'];
   $always = $misc['always'];
 
-  $query = "SELECT $albums_table.albumID, albumname, description, eventID, alwayson
-    FROM ($albums_table,$album2entities_table) 
-    WHERE entityID = '$ID' AND $album2entities_table.albumID=$albums_table.albumID AND active = \"1\" 
-    ORDER BY ordernum, albumname";
+  $query = "SELECT $albums_table.albumID, albumname, description, eventID, alwayson FROM ($albums_table,$album2entities_table) "
+      . "WHERE entityID = '$ID' AND $album2entities_table.albumID=$albums_table.albumID AND active = '1' ORDER BY ordernum, albumname";
   $albumlinks = tng_query($query);
 
   while ($albumlink = tng_fetch_assoc($albumlinks)) {
@@ -812,11 +809,10 @@ function getAlbums($entity, $linktype) {
     $eventID = $albumlink['eventID'] && $entity['allow_living'] && $entity['allow_private'] ? $albumlink['eventID'] : "-x--general--x-";
 
     //check to see if we have rights to view this album
-    $query = "SELECT $album2entities_table.entityID as personID, people.living as living, people.private as private, people.branch as branch, families.branch as fbranch, families.living as fliving, families.private as fprivate, familyID, people.personID as personID2
-      FROM $album2entities_table
-      LEFT JOIN $people_table AS people ON $album2entities_table.entityID = people.personID
-      LEFT JOIN $families_table AS families ON $album2entities_table.entityID = families.familyID
-      WHERE albumID = '{$albumlink['albumID']}'";
+    $query = "SELECT $album2entities_table.entityID AS personID, people.living AS living, people.private AS private, people.branch AS branch, families.branch AS fbranch, families.living AS fliving, families.private AS fprivate, familyID, people.personID AS personID2 FROM $album2entities_table "
+        . "LEFT JOIN $people_table AS people ON $album2entities_table.entityID = people.personID "
+        . "LEFT JOIN $families_table AS families ON $album2entities_table.entityID = families.familyID "
+        . "WHERE albumID = '{$albumlink['albumID']}'";
     $presult = tng_query($query);
     $foundliving = 0;
     $foundprivate = 0;
@@ -851,7 +847,7 @@ function getAlbums($entity, $linktype) {
     tng_free_result($presult);
 
     //putting this count in the albums table would make this faster
-    $query = "SELECT count($albumlinks_table.albumlinkID) as acount FROM $albumlinks_table WHERE albumID = \"{$albumlink['albumID']}\"";
+    $query = "SELECT count($albumlinks_table.albumlinkID) AS acount FROM $albumlinks_table WHERE albumID = \"{$albumlink['albumID']}\"";
     $result2 = tng_query($query);
     $arow = tng_fetch_assoc($result2);
     tng_free_result($result2);
@@ -934,10 +930,8 @@ function getMedia($entity, $linktype) {
   $personID = $misc['personID'];
   $always = $misc['always'];
 
-  $query = "SELECT medialinkID, description, notes, altdescription, altnotes, usecollfolder, mediatypeID, personID, $medialinks_table.mediaID as mediaID, thumbpath, status, plot, eventID, alwayson, path, form, abspath, newwindow
-    FROM ($medialinks_table, $media_table)
-    WHERE $medialinks_table.personID=\"$personID\"
-    AND $media_table.mediaID = $medialinks_table.mediaID and dontshow != 1";
+  $query = "SELECT medialinkID, description, notes, altdescription, altnotes, usecollfolder, mediatypeID, personID, $medialinks_table.mediaID AS mediaID, thumbpath, status, plot, eventID, alwayson, path, form, abspath, newwindow FROM ($medialinks_table, $media_table) "
+      . "WHERE $medialinks_table.personID = '$personID' AND $media_table.mediaID = $medialinks_table.mediaID and dontshow != 1";
   $query .= " $always  ORDER BY eventID, mediatypeID, ordernum";
   $medialinks = tng_query($query);
   $gotImageJpeg = function_exists(imageJpeg);
@@ -1098,7 +1092,7 @@ function getAlbumPhoto($albumID, $albumname) {
   global $mediatypes_assoc;
   global $mediapath;
 
-  $query2 = "SELECT path, thumbpath, usecollfolder, mediatypeID, $albumlinks_table.mediaID as mediaID, alwayson FROM ($media_table, $albumlinks_table)
+  $query2 = "SELECT path, thumbpath, usecollfolder, mediatypeID, $albumlinks_table.mediaID AS mediaID, alwayson FROM ($media_table, $albumlinks_table)
     WHERE albumID = \"$albumID\" AND $media_table.mediaID = $albumlinks_table.mediaID AND defphoto=\"1\"";
   $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
   $trow = tng_fetch_assoc($result2);
@@ -1112,11 +1106,10 @@ function getAlbumPhoto($albumID, $albumname) {
     $foundliving = 0;
     $foundprivate = 0;
     if (!$trow['alwayson'] && $livedefault != 2) {
-      $query = "SELECT people.living as living, people.private as private, people.branch as branch, $families_table.branch as fbranch, $families_table.living as fliving, $families_table.private as fprivate, linktype
-        FROM $medialinks_table
-        LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID
-        LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID
-        WHERE mediaID = '$mediaID'";
+      $query = "SELECT people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, linktype FROM $medialinks_table "
+          . "LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID "
+          . "LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID "
+          . "WHERE mediaID = '$mediaID'";
       $presult = tng_query($query);
       while ($prow = tng_fetch_assoc($presult)) {
         if ($prow['fbranch'] != null) {
@@ -1135,7 +1128,7 @@ function getAlbumPhoto($albumID, $albumname) {
 
         //if living still null, must be a source
         if ($prow['living'] == null && $prow['private'] == null && $prow['linktype'] == 'I') {
-          $query = "SELECT count(personID) as ccount FROM $citations_table, $people_table
+          $query = "SELECT count(personID) AS ccount FROM $citations_table, $people_table
               WHERE $citations_table.sourceID = '{$prow['personID']}' AND $citations_table.persfamID = $people_table.personID AND living = '1'";
           $presult2 = tng_query($query);
           $prow2 = tng_fetch_assoc($presult2);
@@ -1144,7 +1137,7 @@ function getAlbumPhoto($albumID, $albumname) {
           }
           tng_free_result($presult2);
         } elseif ($prow['living'] == null && $prow['private'] == null && $prow['linktype'] == 'F') {
-          $query = "SELECT count(familyID) as ccount FROM $citations_table, $families_table
+          $query = "SELECT count(familyID) AS ccount FROM $citations_table, $families_table
               WHERE $citations_table.sourceID = '{$prow['personID']}' AND $citations_table.persfamID = $families_table.familyID AND living = '1'";
           $presult2 = tng_query($query);
           $prow2 = tng_fetch_assoc($presult2);

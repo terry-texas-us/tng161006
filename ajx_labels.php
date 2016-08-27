@@ -341,7 +341,7 @@ function doAncestors($personID, $gender, $gen) {
 
   $spouses = [];
   if ($gen <= $agens) {
-    $query = "SELECT $children_table.familyID as familyID, husband, wife FROM ($children_table, $families_table) WHERE $children_table.familyID = $families_table.familyID AND personID = '$personID'";
+    $query = "SELECT $children_table.familyID AS familyID, husband, wife FROM ($children_table, $families_table) WHERE $children_table.familyID = $families_table.familyID AND personID = '$personID'";
     $familyresult = tng_query($query);
 
     while ($familyrow = tng_fetch_assoc($familyresult)) {

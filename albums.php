@@ -11,7 +11,7 @@ function getAlbumPhoto($albumID, $albumname) {
   global $mediatypes_assoc;
   global $mediapath;
   
-  $query2 = "SELECT path, thumbpath, usecollfolder, mediatypeID, $albumlinks_table.mediaID as mediaID, alwayson FROM ($media_table, $albumlinks_table)
+  $query2 = "SELECT path, thumbpath, usecollfolder, mediatypeID, $albumlinks_table.mediaID AS mediaID, alwayson FROM ($media_table, $albumlinks_table)
     WHERE albumID = \"$albumID\" AND $media_table.mediaID = $albumlinks_table.mediaID AND defphoto=\"1\"";
   $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
   $trow = tng_fetch_assoc($result2);
@@ -25,8 +25,10 @@ function getAlbumPhoto($albumID, $albumname) {
     $foundliving = 0;
     $foundprivate = 0;
     if (!$trow['alwayson'] && $livedefault != 2) {
-      $query = "SELECT people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, linktype
-        FROM $medialinks_table LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID WHERE mediaID = '$mediaID'";
+      $query = "SELECT people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, linktype FROM $medialinks_table "
+          . "LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID "
+          . "LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID "
+          . "WHERE mediaID = '$mediaID'";
       $presult = tng_query($query);
       while ($prow = tng_fetch_assoc($presult)) {
         if ($prow['fbranch'] != null) {
@@ -45,7 +47,7 @@ function getAlbumPhoto($albumID, $albumname) {
         $prow['allow_private'] == $rights['private'];
 
         if ($prow['living'] == null && $prow['private'] == null && $prow['linktype'] == 'I') {
-          $query = "SELECT count(personID) as ccount FROM $citations_table, $people_table
+          $query = "SELECT count(personID) AS ccount FROM $citations_table, $people_table
             WHERE $citations_table.sourceID = '{$prow['personID']}' AND $citations_table.persfamID = $people_table.personID AND living = '1'";
           $presult2 = tng_query($query);
           $prow2 = tng_fetch_assoc($presult2);
@@ -54,7 +56,7 @@ function getAlbumPhoto($albumID, $albumname) {
           }
           tng_free_result($presult2);
         } elseif ($prow['living'] == null && $prow['private'] == null && $prow['linktype'] == 'F') {
-          $query = "SELECT count(familyID) as ccount FROM $citations_table, $families_table
+          $query = "SELECT count(familyID) AS ccount FROM $citations_table, $families_table
             WHERE $citations_table.sourceID = '{$prow['personID']}' AND $citations_table.persfamID = $families_table.familyID AND living = '1'";
           $presult2 = tng_query($query);
           $prow2 = tng_fetch_assoc($presult2);

@@ -9,7 +9,7 @@ function writelog($string)
   global $subroot;
   global $exusers;
 
-  require $subroot . 'logconfig.php';
+  include $subroot . 'logconfig.php';
 
   if (!isset($_SERVER['REMOTE_HOST'])) {
     $_SERVER['REMOTE_HOST'] = '';

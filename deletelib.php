@@ -110,7 +110,7 @@ function updateHasKids($spouseID, $spousestr) {
   $result = tng_query($query);
   $numkids = 0;
   while (!$numkids && $row = tng_fetch_assoc($result)) {
-    $query = "SELECT count(ID) as ccount FROM $children_table WHERE familyID = '$row[familyID]'";
+    $query = "SELECT count(ID) AS ccount FROM $children_table WHERE familyID = '$row[familyID]'";
     $result2 = tng_query($query);
     $crow = tng_fetch_assoc($result2);
     $numkids = $crow['ccount'];

@@ -36,7 +36,7 @@ $result = tng_query($query);
 $numrows = tng_num_rows($result);
 
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count($albums_table.albumID) as acount FROM $albums_table";
+  $query = "SELECT count($albums_table.albumID) AS acount FROM $albums_table";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   tng_free_result($result2);
@@ -90,19 +90,18 @@ $headSection->setTitle(uiTextSnippet('albums'));
         $maxplus = $maxsearchresults + 1;
         $thumbcount = 0;
         while ($row = tng_fetch_assoc($result)) {
-          $query2 = "SELECT count($albumlinks_table.albumlinkID) as acount "
+          $query2 = "SELECT count($albumlinks_table.albumlinkID) AS acount "
                 . "FROM $albumlinks_table WHERE albumID = \"{$row['albumID']}\"";
           $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
           $arow = tng_fetch_assoc($result2);
           tng_free_result($result2);
 
-          $query = "SELECT $album2entities_table.entityID as personID, people.personID as personID2, people.living as living, people.private as private, people.branch as branch, $families_table.branch as fbranch, $families_table.living as fliving, $families_table.private as fprivate, familyID, husband, wife, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.prefix as prefix, people.suffix as suffix, nameorder, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame, deathdate, burialdate, linktype
-        FROM $album2entities_table
-        LEFT JOIN $people_table AS people ON $album2entities_table.entityID = people.personID
-        LEFT JOIN $families_table ON $album2entities_table.entityID = $families_table.familyID
-        LEFT JOIN $sources_table ON $album2entities_table.entityID = $sources_table.sourceID
-        LEFT JOIN $repositories_table ON ($album2entities_table.entityID = $repositories_table.repoID)
-        WHERE albumID = '{$row['albumID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT $maxplus";
+          $query = "SELECT $album2entities_table.entityID AS personID, people.personID AS personID2, people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, familyID, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame, deathdate, burialdate, linktype FROM $album2entities_table "
+              . "LEFT JOIN $people_table AS people ON $album2entities_table.entityID = people.personID "
+              . "LEFT JOIN $families_table ON $album2entities_table.entityID = $families_table.familyID "
+              . "LEFT JOIN $sources_table ON $album2entities_table.entityID = $sources_table.sourceID "
+              . "LEFT JOIN $repositories_table ON ($album2entities_table.entityID = $repositories_table.repoID) "
+              . "WHERE albumID = '{$row['albumID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT $maxplus";
           $presult = tng_query($query);
           $numrows = tng_num_rows($presult);
           $medialinktext = "";
@@ -121,7 +120,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
             }
             //if living still null, must be a source
             if ($prow['living'] == null && $prow['private'] == null && $prow['linktype'] == 'I') {
-              $query = "SELECT count(personID) as ccount FROM $citations_table, $people_table "
+              $query = "SELECT count(personID) AS ccount FROM $citations_table, $people_table "
                   . "WHERE $citations_table.sourceID = '{$prow['personID']}' AND $citations_table.persfamID = $people_table.personID AND (living = '1' OR private = '1')";
               $presult2 = tng_query($query);
               $prow2 = tng_fetch_assoc($presult2);
@@ -131,7 +130,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
               tng_free_result($presult2);
             }
             if ($prow['living'] == null && $prow['private'] == null && $prow[linktype] == 'F') {
-              $query = "SELECT count(familyID) as ccount FROM $citations_table, $families_table "
+              $query = "SELECT count(familyID) AS ccount FROM $citations_table, $families_table "
                   . "WHERE $citations_table.sourceID = '{$prow['personID']}' AND $citations_table.persfamID = $families_table.familyID AND living = '1'";
               $presult2 = tng_query($query);
               $prow2 = tng_fetch_assoc($presult2);

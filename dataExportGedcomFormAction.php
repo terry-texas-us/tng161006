@@ -212,13 +212,11 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       global $events_table;
       global $xnotes;
 
-      $query = "SELECT $notelinks_table.ID as ID, secret, $xnotes_table.note as note, $xnotes_table.noteID as noteID, $notelinks_table.eventID
-          FROM $notelinks_table
-          LEFT JOIN  $xnotes_table ON $notelinks_table.xnoteID = $xnotes_table.ID
-          LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID
-          LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID
-          WHERE $notelinks_table.persfamID = '$id'
-          ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum, ID";
+      $query = "SELECT $notelinks_table.ID AS ID, secret, $xnotes_table.note AS note, $xnotes_table.noteID AS noteID, $notelinks_table.eventID FROM $notelinks_table "
+          . "LEFT JOIN  $xnotes_table ON $notelinks_table.xnoteID = $xnotes_table.ID "
+          . "LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID "
+          . "LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID "
+          . "WHERE $notelinks_table.persfamID = '$id' ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum, ID";
       $notelinks = tng_query($query);
       $notearray = [];
       while ($notelink = tng_fetch_assoc($notelinks)) {
@@ -361,7 +359,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       } else {
         $prefixlen = strlen($noteprefix) + 1;
 
-        $query = "SELECT note, noteID, (0+SUBSTRING(noteID,$prefixlen)) as num FROM $xnotes_table WHERE noteID != \"\" {$savestate['wherestr']} ORDER BY num";
+        $query = "SELECT note, noteID, (0+SUBSTRING(noteID,$prefixlen)) AS num FROM $xnotes_table WHERE noteID != \"\" {$savestate['wherestr']} ORDER BY num";
         $xnotearray = tng_query($query);
         while ($xnotetxt = tng_fetch_assoc($xnotearray)) {
           $xnotestr .= writeXNote($xnotetxt);
@@ -633,13 +631,13 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         }
         //if $doit still false, loop through children to see if sealing needs to be done for any of them
         if (!$doit) {
-          $query = "SELECT personID, sealdate, sealplace from $children_table WHERE familyID = \"{$spouse['familyID']}\"";
+          $query = "SELECT personID, sealdate, sealplace FROM $children_table WHERE familyID = \"{$spouse['familyID']}\"";
           $children = tng_query($query);
           if ($children) {
             while (!$doit && $child = tng_fetch_assoc($children)) {
               if (!$child['sealdate'] && !$child['sealplace']) {
                 //make sure child is eligible
-                $query = "SELECT birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdatetr, burialdatetr from $people_table WHERE personID = \"{$child['personID']}\" $exlivingstr $exprivatestr";
+                $query = "SELECT birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdatetr, burialdatetr FROM $people_table WHERE personID = \"{$child['personID']}\" $exlivingstr $exprivatestr";
                 $childresult = tng_query($query);
                 $childind = tng_fetch_assoc($childresult);
                 $doit = getEligibility($childind);
@@ -653,7 +651,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       tng_free_result($result2);
 
       $childdata = "";
-      $query = "SELECT * from $children_table WHERE personID = \"{$ind['personID']}\" ORDER BY parentorder";
+      $query = "SELECT * FROM $children_table WHERE personID = \"{$ind['personID']}\" ORDER BY parentorder";
       $children = tng_query($query);
       if ($children) {
         while ($child = tng_fetch_assoc($children)) {
@@ -1106,7 +1104,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           $numstr = "(0+SUBSTRING_INDEX(sourceID,'$sourcesuffix',1))";
         }
 
-        $srcquery = "SELECT *, $numstr as num FROM $sources_table WHERE 1 {$savestate['wherestr']} ORDER BY num";
+        $srcquery = "SELECT *, $numstr AS num FROM $sources_table WHERE 1 {$savestate['wherestr']} ORDER BY num";
         $srcresult = tng_query($srcquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         while ($source = tng_fetch_assoc($srcresult)) {
           $sourcestr .= writeSource($source);
@@ -1218,7 +1216,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           $numstr = "(0+SUBSTRING_INDEX(repoID,'$reposuffix',1))";
         }
 
-        $repoquery = "SELECT *, $numstr as num FROM $repositories_table WHERE 1 {$savestate['wherestr']} ORDER BY num";
+        $repoquery = "SELECT *, $numstr AS num FROM $repositories_table WHERE 1 {$savestate['wherestr']} ORDER BY num";
         $reporesult = tng_query($repoquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
         while ($repo = tng_fetch_assoc($reporesult)) {
@@ -1314,9 +1312,8 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         }
         tng_free_result($result);
 
-        $query = "SELECT $medialinks_table.personID as place, $places_table.notes as notes, latitude, longitude
-          FROM ($places_table, $medialinks_table)
-          WHERE linktype = \"L\" $places_table.place = $medialinks_table.personID";
+        $query = "SELECT $medialinks_table.personID AS place, $places_table.notes AS notes, latitude, longitude FROM ($places_table, $medialinks_table) "
+            . "WHERE linktype = 'L' $places_table.place = $medialinks_table.personID";
         $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         while ($row = tng_fetch_assoc($result)) {
           if (!in_array($place, $places)) {
@@ -1371,7 +1368,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     //if saving is enabled and URL flag is set, check the db table to see if a record exists
     if ($saveimport) {
       if ($resume) {
-        $checksql = "SELECT filename, offset, lasttype, lastid, icount, fcount, scount, ncount, rcount, mcount, pcount from $saveimport_table";
+        $checksql = "SELECT filename, offset, lasttype, lastid, icount, fcount, scount, ncount, rcount, mcount, pcount FROM $saveimport_table";
         $result = tng_query($checksql) or die(uiTextSnippet('cannotexecutequery') . ": $checksql");
         $found = tng_num_rows($result);
         if ($found) {
@@ -1507,7 +1504,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         } else {
           $numstr = "(0+SUBSTRING_INDEX(personID,'$personsuffix',1))";
         }
-        $query = "SELECT personID, $numstr as num, lastname, lnprefix, firstname, sex, title, prefix, suffix, nickname, birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, baptdate, baptplace, endldate, endlplace, famc, living, private, branch, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate "
+        $query = "SELECT personID, $numstr AS num, lastname, lnprefix, firstname, sex, title, prefix, suffix, nickname, birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, baptdate, baptplace, endldate, endlplace, famc, living, private, branch, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate "
           . "FROM $people_table "
           . "WHERE 1 $branchstr $exlivingstr $exprivatestr {$savestate['wherestr']} "
           . "ORDER BY num "
@@ -1546,7 +1543,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           $numstr = "(0+SUBSTRING_INDEX(familyID,'$familysuffix',1))";
         }
 
-        $query = "SELECT *, (0+SUBSTRING(familyID,$prefixlen)) as num, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate "
+        $query = "SELECT *, (0+SUBSTRING(familyID,$prefixlen)) AS num, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate "
           . "FROM $families_table "
           . "WHERE 1 $branchstr {$savestate['wherestr']} $exlivingstr $exprivatestr "
           . "ORDER BY num "

@@ -221,7 +221,7 @@ function getFamilyRecord($familyID, $prevlevel) {
     if ($goahead) {
       $chdatestr = $inschangedt ? ", changedate=\"$inschangedt\"" : "";
       $branchstr = $savestate['branch'] ? ", branch=\"{$savestate['branch']}\"" : "";
-      $query = "UPDATE $families_table SET marrdate=\"" . $info['MARR']['DATE'] . "\", marrdatetr=\"" . $info['MARR']['DATETR'] . "\", marrplace=\"" . $info['MARR']['PLAC'] . "\", marrtype=\"" . $info['MARR']['TYPE'] . "\", divdate=\"" . $info['DIV']['DATE'] . "\", divdatetr=\"" . $info['DIV']['DATETR'] . "\", divplace=\"" . $info['DIV']['PLAC'] . "\", husband=\"" . $info['HUSB'] . "\", wife=\"" . $info['WIFE'] . "\", sealdate=\"" . $info['SLGS']['DATE'] . "\", sealdatetr=\"" . $info['SLGS']['DATETR'] . "\", sealplace=\"$slgsplace\", changedby=\"$currentuser\" $chdatestr$branchstr WHERE familyID = '$familyID'";
+      $query = "UPDATE $families_table SET marrdate=\"" . $info['MARR']['DATE'] . "\", marrdatetr=\"" . $info['MARR']['DATETR'] . "\", marrplace=\"" . $info['MARR']['PLAC'] . "\", marrtype=\"" . $info['MARR']['TYPE'] . "\", divdate=\"" . $info['DIV']['DATE'] . "\", divdatetr=\"" . $info['DIV']['DATETR'] . "\", divplace=\"" . $info['DIV']['PLAC'] . "\", husband=\"" . $info['HUSB'] . "\", wife=\"" . $info['WIFE'] . "\", sealdate=\"" . $info['SLGS']['DATE'] . "\", sealdatetr=\"" . $info['SLGS']['DATETR'] . "\", sealplace = '$slgsplace', changedby = '$currentuser' $chdatestr$branchstr WHERE familyID = '$familyID'";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $success = 1;
 

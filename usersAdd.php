@@ -11,14 +11,14 @@ if (!$allowAdd) {
   header("Location: admin_login.php?message=" . urlencode($message));
   exit;
 }
-$query = "SELECT count(userID) as ucount FROM $users_table";
+$query = "SELECT count(userID) AS ucount FROM $users_table";
 $result = tng_query($query);
 if ($result) {
   $row = tng_fetch_assoc($result);
 } else {
   $row['ucount'] = 0;
 }
-$revquery = "SELECT count(userID) as ucount FROM $users_table WHERE allow_living = \"-1\"";
+$revquery = "SELECT count(userID) AS ucount FROM $users_table WHERE allow_living = \"-1\"";
 $revresult = tng_query($revquery) or die(uiTextSnippet('cannotexecutequery') . ": $revquery");
 $revrow = tng_fetch_assoc($revresult);
 $revstar = $revrow['ucount'] ? " *" : "";
@@ -270,7 +270,7 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
   var orgusername = "yyy";
   var orgpassword = "zzz";
 
-  <?php include("branchlibjs.php"); ?>
+  <?php require "branchlibjs.php"; ?>
   <?php if ($row['ucount']) { ?>
     var tree = getTree();
     if (tree) {

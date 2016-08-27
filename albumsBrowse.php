@@ -43,7 +43,7 @@ $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(albumID) as acount FROM $albums_table $wherestr";
+  $query = "SELECT count(albumID) AS acount FROM $albums_table $wherestr";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['acount'];
@@ -130,7 +130,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
                   }
                   echo "</td>\n";
 
-                  $query = "SELECT count(albumlinkID) as acount FROM $albumlinks_table WHERE albumID = \"{$row['albumID']}\"";
+                  $query = "SELECT count(albumlinkID) AS acount FROM $albumlinks_table WHERE albumID = \"{$row['albumID']}\"";
                   $cresult = tng_query($query);
                   $crow = tng_fetch_assoc($cresult);
                   $acount = $crow['acount'];
@@ -144,13 +144,12 @@ $headSection->setTitle(uiTextSnippet('albums'));
                   $active = $row['active'] ? uiTextSnippet('yes') : uiTextSnippet('no');
                   echo "<td>$active</td>\n";
 
-                  $query = "SELECT people.personID as personID2, familyID, husband, wife, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.prefix as prefix, people.suffix as suffix, nameorder, $album2entities_table.entityID as personID, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame
-                      FROM $album2entities_table
-                      LEFT JOIN $people_table AS people ON $album2entities_table.entityID = people.personID
-                      LEFT JOIN $families_table ON $album2entities_table.entityID = $families_table.familyID
-                      LEFT JOIN $sources_table ON $album2entities_table.entityID = $sources_table.sourceID
-                      LEFT JOIN $repositories_table ON ($album2entities_table.entityID = $repositories_table.repoID)
-                      WHERE albumID = '{$row['albumID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT 10";
+                  $query = "SELECT people.personID AS personID2, familyID, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, $album2entities_table.entityID AS personID, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame FROM $album2entities_table "
+                      . "LEFT JOIN $people_table AS people ON $album2entities_table.entityID = people.personID "
+                      . "LEFT JOIN $families_table ON $album2entities_table.entityID = $families_table.familyID "
+                      . "LEFT JOIN $sources_table ON $album2entities_table.entityID = $sources_table.sourceID "
+                      . "LEFT JOIN $repositories_table ON ($album2entities_table.entityID = $repositories_table.repoID) "
+                      . "WHERE albumID = '{$row['albumID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT 10";
                   $presult = tng_query($query);
                   $alinktext = "";
                   while ($prow = tng_fetch_assoc($presult)) {

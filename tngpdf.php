@@ -12,8 +12,6 @@ if (!class_exists('TNGPDF')) {
     // Private properties
     var $charset;         // character set being used
 
-    // Public methods
-
     function TNGPDF($orientation = 'P', $unit = 'mm', $format = 'A4') {
       global $session_charset;
 
@@ -340,7 +338,7 @@ if (!class_exists('TNGPDF')) {
       if (!is_file($this->_getfontpath() . $family . $subdir . '/' . $file)) {
         $file = str_replace(' ', '', $family) . '.php';
       }
-      include($this->_getfontpath() . $family . $subdir . '/' . $file);
+      include $this->_getfontpath() . $family . $subdir . '/' . $file;
       if (!isset($name)) {
         $this->Error('Could not include font definition file: ' . $file);
       }

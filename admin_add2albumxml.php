@@ -94,12 +94,12 @@ if (isset($offset) && $offset != 0) {
   $page = 1;
 }
 
-$query = "SELECT $media_table.mediaID as mediaID, $medialinkID description, notes, thumbpath, mediatypeID, usecollfolder, datetaken FROM $media_table $join $wherestr ORDER BY description LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT $media_table.mediaID AS mediaID, $medialinkID description, notes, thumbpath, mediatypeID, usecollfolder, datetaken FROM $media_table $join $wherestr ORDER BY description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count($media_table.mediaID) as mcount FROM $media_table $join $wherestr";
+  $query = "SELECT count($media_table.mediaID) AS mcount FROM $media_table $join $wherestr";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['mcount'];

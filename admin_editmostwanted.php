@@ -8,12 +8,10 @@ require 'version.php';
 
 $m = $mostwanted_table;
 if ($ID) {
-  $query = "SELECT $m.title as title, $m.personID as personID, $m.description as description, $m.mediaID as mediaID, mwtype, thumbpath,
-    usecollfolder, $media_table.description as mtitle, $media_table.notes as mdesc, mediatypeID
-    FROM $m
-    LEFT JOIN $media_table ON $m.mediaID = $media_table.mediaID
-    LEFT JOIN $people_table ON $m.personID = $people_table.personID
-    WHERE $m.ID = \"$ID\"";
+  $query = "SELECT $m.title AS title, $m.personID AS personID, $m.description AS description, $m.mediaID AS mediaID, mwtype, thumbpath, usecollfolder, $media_table.description AS mtitle, $media_table.notes AS mdesc, mediatypeID FROM $m "
+      . "LEFT JOIN $media_table ON $m.mediaID = $media_table.mediaID "
+      . "LEFT JOIN $people_table ON $m.personID = $people_table.personID "
+      . "WHERE $m.ID = '$ID'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   tng_free_result($result);

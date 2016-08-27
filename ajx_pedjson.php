@@ -283,7 +283,6 @@ function xmlFamily($famc, $backperson, $generation) {
   }
 }
 
-// subroutine to get father/mother ids and names
 function getParentInfo($famid) {
   $parentarray = [];
   $parentresult = getParentSimple($famid, 'husband');

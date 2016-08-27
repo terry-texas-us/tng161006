@@ -9,7 +9,7 @@ require 'checklogin.php';
 if ($albumID) {
   $query2 = "SELECT entityID FROM $album2entities_table WHERE albumID = '$albumID' AND linktype = '$linktype'";
 } else {
-  $query2 = "SELECT personID as entityID FROM $medialinks_table WHERE mediaID = '$mediaID' AND linktype = '$linktype'";
+  $query2 = "SELECT personID AS entityID FROM $medialinks_table WHERE mediaID = '$mediaID' AND linktype = '$linktype'";
 }
 $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
 $alreadygot = [];
@@ -158,7 +158,8 @@ function doFamilies($husbname, $wifename) {
 
   $joinonwife = "LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID";
   $joinonhusb = "LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID";
-  $query = "SELECT familyID, wifepeople.personID as wpersonID, wifepeople.firstname as wfirstname, wifepeople.lnprefix as wlnprefix, wifepeople.lastname as wlastname, wifepeople.prefix as wprefix, wifepeople.suffix as wsuffix, wifepeople.nameorder as wnameorder, husbpeople.personID as hpersonID, husbpeople.firstname as hfirstname, husbpeople.lnprefix as hlnprefix, husbpeople.lastname as hlastname, husbpeople.prefix as hprefix, husbpeople.suffix as hsuffix, husbpeople.nameorder as hnameorder FROM $families_table $joinonwife $joinonhusb WHERE $allwhere $allwhere2 ORDER BY hlastname, hlnprefix, hfirstname LIMIT $maxsearchresults";
+  $query = "SELECT familyID, wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.prefix AS wprefix, wifepeople.suffix AS wsuffix, wifepeople.nameorder AS wnameorder, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.prefix AS hprefix, husbpeople.suffix AS hsuffix, husbpeople.nameorder AS hnameorder FROM $families_table $joinonwife $joinonhusb "
+      . "WHERE $allwhere $allwhere2 ORDER BY hlastname, hlnprefix, hfirstname LIMIT $maxsearchresults";
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {

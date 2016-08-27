@@ -203,13 +203,11 @@ function getNotes($id) {
   global $events_table;
   global $xnotes;
 
-  $query = "SELECT $notelinks_table.ID as ID, secret, $xnotes_table.note as note, $xnotes_table.noteID as noteID, $notelinks_table.eventID
-      FROM $notelinks_table
-      LEFT JOIN  $xnotes_table ON $notelinks_table.xnoteID = $xnotes_table.ID
-      LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID
-      LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID
-      WHERE $notelinks_table.persfamID = '$id'
-      ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum";
+  $query = "SELECT $notelinks_table.ID AS ID, secret, $xnotes_table.note AS note, $xnotes_table.noteID AS noteID, $notelinks_table.eventID FROM $notelinks_table "
+      . "LEFT JOIN  $xnotes_table ON $notelinks_table.xnoteID = $xnotes_table.ID "
+      . "LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID "
+      . "LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID "
+      . "WHERE $notelinks_table.persfamID = '$id' ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum";
   $notelinks = tng_query($query);
   $notearray = [];
   while ($notelink = tng_fetch_assoc($notelinks)) {
@@ -341,7 +339,7 @@ function getFamily($person, $parents, $generation) {
   global $lineending;
   global $gotfamily;
 
-  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate FROM $families_table WHERE familyID = '$parents'";
+  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM $families_table WHERE familyID = '$parents'";
   $result = tng_query($query);
   if ($result) {
     $family = tng_fetch_assoc($result);
@@ -353,7 +351,7 @@ function getFamily($person, $parents, $generation) {
 
       if ($family['husband']) {
         getAncestor($family['husband'], $generation);
-        $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate FROM $families_table WHERE husband = \"{$family['husband']}\" ORDER BY husborder";
+        $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM $families_table WHERE husband = \"{$family['husband']}\" ORDER BY husborder";
         $result = tng_query($query);
         if ($result) {
           while ($spouse = tng_fetch_assoc($result)) {
@@ -376,7 +374,7 @@ function getFamily($person, $parents, $generation) {
 
       if ($family['wife']) {
         getAncestor($family['wife'], $generation);
-        $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate FROM $families_table WHERE wife = \"{$family['wife']}\" ORDER BY wifeorder";
+        $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM $families_table WHERE wife = \"{$family['wife']}\" ORDER BY wifeorder";
         $result = tng_query($query);
         if ($result) {
           while ($spouse = tng_fetch_assoc($result)) {
@@ -397,7 +395,7 @@ function getFamily($person, $parents, $generation) {
         }
       }
       if ($generation > 1) {
-        $query = "SELECT familyID, $children_table.personID as personID, sealdate, sealplace, mrel, frel, living, private, branch FROM $children_table, $people_table WHERE familyID = '$parents' AND $children_table.personID = $people_table.personID ORDER BY ordernum";
+        $query = "SELECT familyID, $children_table.personID AS personID, sealdate, sealplace, mrel, frel, living, private, branch FROM $children_table, $people_table WHERE familyID = '$parents' AND $children_table.personID = $people_table.personID ORDER BY ordernum";
         $result = tng_query($query);
         if ($result) {
           while ($child = tng_fetch_assoc($result)) {
@@ -481,7 +479,7 @@ function writeIndividual($person) {
   global $lineending;
   global $private;
 
-  $query = "SELECT lastname, lnprefix, firstname, sex, title, prefix, suffix, nameorder, nickname, birthdate, birthplace, altbirthdate, altbirthplace, deathdate, deathplace, burialdate, burialplace, burialtype, baptdate, baptplace, confdate, confplace, initdate, initplace, endldate, endlplace, famc, living, private, branch, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate FROM $people_table WHERE personID = '$person'";
+  $query = "SELECT lastname, lnprefix, firstname, sex, title, prefix, suffix, nameorder, nickname, birthdate, birthplace, altbirthdate, altbirthplace, deathdate, deathplace, burialdate, burialplace, burialtype, baptdate, baptplace, confdate, confplace, initdate, initplace, endldate, endlplace, famc, living, private, branch, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM $people_table WHERE personID = '$person'";
   $result = tng_query($query);
   if ($result) {
     $ind = tng_fetch_assoc($result);
@@ -885,7 +883,7 @@ function getDescendant($person, $generation) {
     $orderby = "";
   }
   tng_free_result($result);
-  $query = "(SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate FROM $families_table WHERE husband = '$person') UNION (SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") as changedate FROM $families_table WHERE wife = \"$person\")$orderby";
+  $query = "(SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM $families_table WHERE husband = '$person') UNION (SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM $families_table WHERE wife = \"$person\")$orderby";
   $result = tng_query($query);
   if ($result) {
     while ($family = tng_fetch_assoc($result)) {
@@ -908,7 +906,7 @@ function getDescendant($person, $generation) {
           $indarray[$person] .= "1 FAMS @{$family['familyID']}@$lineending";
         }
         if ($generation > 0) {
-          $query = "SELECT $children_table.personID as personID, familyID, mrel, frel, living, private, branch FROM $children_table, $people_table WHERE familyID = \"{$family['familyID']}\" AND $children_table.personID = $people_table.personID ORDER BY ordernum";
+          $query = "SELECT $children_table.personID AS personID, familyID, mrel, frel, living, private, branch FROM $children_table, $people_table WHERE familyID = \"{$family['familyID']}\" AND $children_table.personID = $people_table.personID ORDER BY ordernum";
           $result2 = tng_query($query);
           if ($result2) {
             while ($child = tng_fetch_assoc($result2)) {
@@ -1131,7 +1129,7 @@ if ($maxgcgen > 0 || $type == "all") {
         while ($fam = tng_fetch_assoc($result)) {
           $famarray[$fam['familyID']] = writeFamily($fam);
 
-          $query = "SELECT personID as personID, mrel, frel FROM $children_table WHERE familyID = \"{$fam['familyID']}\" ORDER BY ordernum";
+          $query = "SELECT personID AS personID, mrel, frel FROM $children_table WHERE familyID = \"{$fam['familyID']}\" ORDER BY ordernum";
           $result2 = tng_query($query);
           if ($result2) {
             while ($child = tng_fetch_assoc($result2)) {

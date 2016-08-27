@@ -120,12 +120,13 @@ if ($allwhere2) {
 if ($living == "yes") {
   $allwhere .= " AND $families_table.living = \"1\"";
 }
-$query = "SELECT $families_table.ID as ID, familyID, husband, wife, marrdate $otherfields FROM ($families_table $people_join) WHERE $allwhere ORDER BY $sortstr familyID LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT $families_table.ID AS ID, familyID, husband, wife, marrdate $otherfields FROM ($families_table $people_join) "
+    . "WHERE $allwhere ORDER BY $sortstr familyID LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count($families_table.ID) as fcount FROM ($families_table $people_join) WHERE $allwhere";
+  $query = "SELECT count($families_table.ID) AS fcount FROM ($families_table $people_join) WHERE $allwhere";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['fcount'];
@@ -153,7 +154,7 @@ $headSection->setTitle(uiTextSnippet('families'));
     echo $navList->build("findfamily");
     ?>
     <div>
-      <?php include '_/components/php/findFamilyForm.php'; ?>
+      <?php require '_/components/php/findFamilyForm.php'; ?>
       <?php
       $numrowsplus = $numrows + $offset;
       if (!$numrowsplus) {

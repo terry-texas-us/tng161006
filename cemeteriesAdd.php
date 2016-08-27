@@ -1,6 +1,6 @@
 <?php
 require 'begin.php';
-include $subroot . 'mapconfig.php';
+require $subroot . 'mapconfig.php';
 require 'adminlib.php';
 
 $adminLogin = 1;

@@ -40,7 +40,7 @@ $result = tng_query($query);
 $numrows = tng_num_rows($result);
 
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(sourceID) as scount FROM $sources_table $wherestr";
+  $query = "SELECT count(sourceID) AS scount FROM $sources_table $wherestr";
 
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);

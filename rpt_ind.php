@@ -1,9 +1,5 @@
 <?php
 
-// PDF Individual Report
-// Author: Bret Rumsey
-// Thanks to J. Kraber for his original implementation of this report.
-//
 require 'tng_begin.php';
 $tngprint = 1;
 
@@ -437,11 +433,8 @@ else {
     }
   }
 }
-
-// print it out
 $pdf->Output();
 
-// childLine
 function childLine($childnum, $data, $cite = '') {
   global $pdf, $paperdim, $lftmrg, $rtmrg, $lineheight;
   global $rptFont, $rptFontSize, $lblFont, $lblFontSize, $citefontsub;
@@ -464,7 +457,6 @@ function childLine($childnum, $data, $cite = '') {
   $pdf->Ln($lineheight);
 }
 
-// singleLine
 function singleLine($label, $data, $datastyle = '', $cite = '') {
   global $pdf, $paperdim, $lftmrg, $rtmrg, $lineheight;
   global $rptFont, $rptFontSize, $lblFont, $lblFontSize, $citefontsub;
@@ -544,7 +536,6 @@ function nameLine($label1, $data1, $label2, $data2, $cite = '') {
   $pdf->Ln($lineheight);
 }
 
-// doubleLine
 function doubleLine($label1, $data1, $label2, $data2, $cite = '') {
   global $pdf, $paperdim, $lftmrg, $rtmrg, $lineheight;
   global $rptFont, $rptFontSize, $lblFont, $lblFontSize, $citefontsub;

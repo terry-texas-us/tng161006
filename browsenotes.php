@@ -41,14 +41,13 @@ if ($notesearch) {
   $wherestr .= " match($xnotes_table.note) against( \"$notesearch2\" in boolean mode)";
 }
 
-$query = "SELECT $xnotes_table.ID as ID, $xnotes_table.note as note, $notelinks_table.persfamID as personID
-    FROM ($xnotes_table, $notelinks_table) $wherestr ORDER BY note LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT $xnotes_table.ID AS ID, $xnotes_table.note AS note, $notelinks_table.persfamID AS personID FROM ($xnotes_table, $notelinks_table) $wherestr ORDER BY note LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count($xnotes_table.ID) as scount FROM ($xnotes_table, $notelinks_table) $wherestr";
+  $query = "SELECT count($xnotes_table.ID) AS scount FROM ($xnotes_table, $notelinks_table) $wherestr";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['scount'];
@@ -108,7 +107,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
               $row2 = tng_fetch_assoc($result2);
 
               if (!$row2['living'] || !$row2['private']) {
-                $query = "SELECT count(personID) as ccount FROM $citations_table, $people_table
+                $query = "SELECT count(personID) AS ccount FROM $citations_table, $people_table
               WHERE $citations_table.sourceID = '{$nrow['personID']}' AND $citations_table.persfamID = $people_table.personID AND (living = '1' OR private = '1')";
                 $nresult2 = tng_query($query);
                 $nrow2 = tng_fetch_assoc($nresult2);

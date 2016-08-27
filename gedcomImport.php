@@ -351,7 +351,7 @@ function deleteLinksOnMatch($entityID) {
   global $address_table;
   global $assoc_table;
 
-  $query = "SELECT addressID from $events_table WHERE persfamID = '$entityID'";
+  $query = "SELECT addressID FROM $events_table WHERE persfamID = '$entityID'";
   $result = tng_query($query);
   while ($row = tng_fetch_assoc($result)) {
     $query = "DELETE from $address_table WHERE addressID = '{$row['addressID']}'";
@@ -365,7 +365,7 @@ function deleteLinksOnMatch($entityID) {
   $query = "DELETE from $assoc_table WHERE personID = '$entityID'";
   tng_query($query);
 
-  $query = "SELECT xnoteID from $notelinks_table WHERE persfamID = '$entityID'";
+  $query = "SELECT xnoteID FROM $notelinks_table WHERE persfamID = '$entityID'";
   $result = tng_query($query);
   while ($row = tng_fetch_assoc($result)) {
     $query = "DELETE from $xnotes_table WHERE ID = '{$row['xnoteID']}'";
@@ -650,7 +650,6 @@ function incrCounter($prefix) {
   }
 }
 
-//media
 function adjustMediaFileName($mm) {
   global $assignnames, $wholepath;
 
@@ -913,7 +912,7 @@ function processMedia($mmcount, $mminfo, $persfamID, $eventID) {
       }
     }
     //get ordernum according to collection/mediatypeID
-    $query = "SELECT count(medialinkID) as count from ($medialinks_table, $media_table) WHERE $media_table.mediaID = $medialinks_table.mediaID AND personID = '$persfamID' AND mediatypeID = \"{$mm['mediatypeID']}\"";
+    $query = "SELECT count(medialinkID) AS count FROM ($medialinks_table, $media_table) WHERE $media_table.mediaID = $medialinks_table.mediaID AND personID = '$persfamID' AND mediatypeID = \"{$mm['mediatypeID']}\"";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     $row = tng_fetch_assoc($result);
     $orderctr = $row['count'] ? $row['count'] + 1 : 1;
@@ -1126,7 +1125,6 @@ function getMultimediaRecord($objectID, $prevlevel) {
   }
 }
 
-//sources
 function processCitations($persfamID, $eventID, $citearray) {
   if (is_array($citearray)) {
     foreach ($citearray as $cite) {
@@ -1146,7 +1144,6 @@ function saveCitation($persfamID, $eventID, $cite) {
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 }
 
-//notes
 function processNotes($persfamID, $eventID, $notearray) {
   if (is_array($notearray)) {
     foreach ($notearray as $note) {
@@ -1264,7 +1261,6 @@ function dumpnotes($notearray) {
   }
 }
 
-//custom events
 function saveCustEvents($prefix, $persfamID, $events, $totevents) {
   global $events_table;
   global $eventtypes_table;

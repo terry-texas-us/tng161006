@@ -6,7 +6,7 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-$query = "SELECT userID, description, username, gedcom, branch, allow_edit, allow_add, allow_delete, allow_living, allow_lds, allow_ged, realname, email, DATE_FORMAT(dt_registered,\"%d %b %Y %H:%i:%s\") as dt_registered_fmt FROM $users_table WHERE allow_living = \"-1\"ORDER BY dt_registered DESC";
+$query = "SELECT userID, description, username, gedcom, branch, allow_edit, allow_add, allow_delete, allow_living, allow_lds, allow_ged, realname, email, DATE_FORMAT(dt_registered,\"%d %b %Y %H:%i:%s\") AS dt_registered_fmt FROM $users_table WHERE allow_living = \"-1\"ORDER BY dt_registered DESC";
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);

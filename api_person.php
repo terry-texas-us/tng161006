@@ -10,8 +10,7 @@ require 'log.php';
 
 header("Content-Type: application/json; charset=" . $session_charset);
 
-$query = "SELECT *, DATE_FORMAT(changedate,\"%e %b %Y\") as changedate
-    FROM $people_table WHERE personID = '$personID'";
+$query = "SELECT *, DATE_FORMAT(changedate,\"%e %b %Y\") AS changedate FROM $people_table WHERE personID = '$personID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 if (!tng_num_rows($result)) {

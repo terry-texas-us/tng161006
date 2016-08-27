@@ -229,9 +229,7 @@ $earliest = date('Y');
 $latest = 0;
 foreach ($timeline as $timeentry) {
   parse_str($timeentry);
-  $query = "SELECT firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch, sex, IF(birthdatetr !='0000-00-00',YEAR(birthdatetr),YEAR(altbirthdatetr)) as birth,
-    IF(deathdatetr !='0000-00-00',YEAR(deathdatetr),YEAR(burialdatetr)) as death, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, deathdatetr, burialdate, burialdatetr
-    FROM $people_table WHERE personID = '$timeperson'";
+  $query = "SELECT firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch, sex, IF(birthdatetr !='0000-00-00',YEAR(birthdatetr),YEAR(altbirthdatetr)) AS birth, IF(deathdatetr != '0000-00-00', YEAR(deathdatetr), YEAR(burialdatetr)) as death, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, deathdatetr, burialdate, burialdatetr FROM $people_table WHERE personID = '$timeperson'";
   $result2 = tng_query($query);
   if ($result2) {
     $row2 = tng_fetch_assoc($result2);
@@ -278,11 +276,8 @@ foreach ($timeline as $timeentry) {
 //get all events that fall in time period
 //loop through and use year as index in array
 //append if duplicate years
-$tlquery = "SELECT evday, evmonth, evyear, evtitle, evdetail, endday, endmonth, endyear
-    FROM $tlevents_table
-    WHERE (evyear <= \"$latest\" AND endyear >= \"$earliest\") OR (endyear = \"\" AND (evyear BETWEEN \"$earliest\" AND \"$latest\"))
-    ORDER BY evyear, evmonth, evday";
-//WHERE (evyear BETWEEN \"$earliest\" AND \"$latest\") OR (endyear BETWEEN \"$earliest\" AND \"$latest\") OR ((evyear <= \"$earliest\") AND (endyear >= \"$latest\"))
+$tlquery = "SELECT evday, evmonth, evyear, evtitle, evdetail, endday, endmonth, endyear FROM $tlevents_table "
+    . "WHERE (evyear <= \"$latest\" AND endyear >= \"$earliest\") OR (endyear = \"\" AND (evyear BETWEEN \"$earliest\" AND \"$latest\")) ORDER BY evyear, evmonth, evday";
 
 $tlresult = tng_query($tlquery) or die(uiTextSnippet('cannotexecutequery') . ": $tlquery");
 $tlevents = [];

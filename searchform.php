@@ -38,14 +38,14 @@ initMediaTypes();
 function buildSelectInputGroup($label, $formName, $selectName, $value, $options, $selected) {
   $out = "<label for='" . $formName . "'>" . uiTextSnippet($label) . "</label>\n";
   $out .= "<div class='input-group' style='width: 100%;'>\n";
-    $out .= "<input class='form-control' name='" . $formName . "' type='text' value='" . $value . "' placeholder='" . uiTextSnippet($label) . "'>\n";
-    $out .= "<span class='input-group-select'>\n";
-      $out .= "<select class='form-control' name='" . $selectName . "'>\n";
-        foreach ($options as $option) {
-          $out .= "<option value='$option'" . ($selected == $option ? ' selected' : '') . ">" . uiTextSnippet($option) . "</option>\n";
-        }
-      $out .= "</select>\n";
-    $out .= "</span>\n";
+  $out .= "<input class='form-control' name='" . $formName . "' type='text' value='" . $value . "' placeholder='" . uiTextSnippet($label) . "'>\n";
+  $out .= "<span class='input-group-select'>\n";
+  $out .= "<select class='form-control' name='" . $selectName . "'>\n";
+  foreach ($options as $option) {
+    $out .= "<option value='$option'" . ($selected == $option ? ' selected' : '') . ">" . uiTextSnippet($option) . "</option>\n";
+  }
+  $out .= "</select>\n";
+  $out .= "</span>\n";
   $out .= "</div>\n";
   return $out;
 }

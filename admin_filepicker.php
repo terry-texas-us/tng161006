@@ -100,38 +100,38 @@ function frmFiles() {
               $file_ext = strtoupper($fileparts["extension"]);
               if ($nImageNr >= $lStartRec && $nImageShowed < $pagetotal) {
                 echo "<tr id=\"row_$nImageNr\">\n";
-                  echo "<td>\n";
-                    echo "<div class='action-btns'>\n";
-                      echo "<a href=\"javascript:ReturnFile('$img$subdir" . addslashes($file) . "')\" title='" . uiTextSnippet('select') . "'>\n";
-                      echo "<img class='icon-sm' src='svg/new-message.svg'>\n";
-                      echo "</a>";
-                      if ($allowDelete) {
-                        echo "<a href='#' onclick=\"return deleteIt('file','$nImageNr','$tngpath/$subdir" . addslashes($file) . "');\" title='" . uiTextSnippet('delete') . "'>\n";
-                        echo "<img class='icon-sm' src='svg/trash.svg'>\n";
-                        echo "</a>\n";
-                      }
-                      echo "<a href=\"javascript:ShowFile('$tngpath/$subdir" . addslashes($file) . "')\" title=\"" . uiTextSnippet('preview') . "\">\n";
-                        echo "<img class='icon-sm' src='svg/eye.svg'>\n";
-                      echo "</a>\n";
-                    echo "</div>\n";
-                  echo "</td>\n";
-                  echo "<td>$file</td>\n";
-                  echo "<td>" . date($datefmt, filemtime($file)) . "</td>\n";
-                  echo "<td>" . display_size(filesize($file)) . "</td>\n";
+                echo "<td>\n";
+                echo "<div class='action-btns'>\n";
+                echo "<a href=\"javascript:ReturnFile('$img$subdir" . addslashes($file) . "')\" title='" . uiTextSnippet('select') . "'>\n";
+                echo "<img class='icon-sm' src='svg/new-message.svg'>\n";
+                echo "</a>";
+                if ($allowDelete) {
+                  echo "<a href='#' onclick=\"return deleteIt('file','$nImageNr','$tngpath/$subdir" . addslashes($file) . "');\" title='" . uiTextSnippet('delete') . "'>\n";
+                  echo "<img class='icon-sm' src='svg/trash.svg'>\n";
+                  echo "</a>\n";
+                }
+                echo "<a href=\"javascript:ShowFile('$tngpath/$subdir" . addslashes($file) . "')\" title=\"" . uiTextSnippet('preview') . "\">\n";
+                echo "<img class='icon-sm' src='svg/eye.svg'>\n";
+                echo "</a>\n";
+                echo "</div>\n";
+                echo "</td>\n";
+                echo "<td>$file</td>\n";
+                echo "<td>" . date($datefmt, filemtime($file)) . "</td>\n";
+                echo "<td>" . displaySize(filesize($file)) . "</td>\n";
                   
-                  if (in_array($file_ext, $ImageFileTypes)) {
-                    $size = getimagesize($filename);
-                  } else {
-                    $size = "";
-                  }
-                  if ($size) {
-                    $imagesize1 = $size[0];
-                    $imagesize2 = $size[1];
-                    $imagesize = "$imagesize1 x $imagesize2";
-                  } else {
-                    $imagesize = "";
-                  }
-                  echo "<td>$imagesize</td>\n";
+                if (in_array($file_ext, $ImageFileTypes)) {
+                  $size = getimagesize($filename);
+                } else {
+                  $size = "";
+                }
+                if ($size) {
+                  $imagesize1 = $size[0];
+                  $imagesize2 = $size[1];
+                  $imagesize = "$imagesize1 x $imagesize2";
+                } else {
+                  $imagesize = "";
+                }
+                echo "<td>$imagesize</td>\n";
                 echo "</tr>\n";
                 $nImageShowed++;
               }
@@ -249,7 +249,7 @@ function frmFilesHdFt($nCurrentPage, $nPages) {
   }
 }
 
-function display_size($file_size) {
+function displaySize($file_size) {
   if ($file_size >= 1073741824) {
     $file_size = round($file_size / 1073741824 * 100) / 100 . "g";
   } elseif ($file_size >= 1048576) {

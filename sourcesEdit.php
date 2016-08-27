@@ -15,7 +15,7 @@ initMediaTypes();
 
 $sourceID = ucfirst($sourceID);
 
-$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") as changedate FROM $sources_table WHERE sourceID = '$sourceID'";
+$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $sources_table WHERE sourceID = '$sourceID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -29,7 +29,7 @@ $row['actualtext'] = preg_replace("/\"/", "&#34;", $row['actualtext']);
 $sourcename = $row['title'] ? $row['title'] : $row['shorttitle'];
 $row['allow_living'] = 1;
 
-$query = "SELECT DISTINCT eventID as eventID FROM $notelinks_table WHERE persfamID = '$sourceID'";
+$query = "SELECT DISTINCT eventID AS eventID FROM $notelinks_table WHERE persfamID = '$sourceID'";
 $notelinks = tng_query($query);
 $gotnotes = [];
 while ($note = tng_fetch_assoc($notelinks)) {

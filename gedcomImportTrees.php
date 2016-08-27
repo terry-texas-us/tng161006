@@ -27,9 +27,9 @@ function ClearData($tree) {
           $sources_table,
           $xnotes_table
   ];
-  $query = "SELECT COUNT(*) as trees FROM $treesTable";
+  $query = "SELECT COUNT(*) AS trees FROM $treesTable";
   if (!($result = tng_query($query))) {
-    die (uiTextSnippet('cannotexecutequery') . ": $query");
+    die(uiTextSnippet('cannotexecutequery') . ": $query");
   }
   $row = tng_fetch_assoc($result);
   $tree_cnt = $row['trees'];
@@ -38,7 +38,7 @@ function ClearData($tree) {
     $query = (($tree_cnt >= 2) ? "DELETE FROM " : "TRUNCATE ") . $clear_files[$i];
     
     if (!($result = tng_query($query))) {
-      die (uiTextSnippet('cannotexecutequery') . ": $query");
+      die(uiTextSnippet('cannotexecutequery') . ": $query");
     }
   } // End for
 

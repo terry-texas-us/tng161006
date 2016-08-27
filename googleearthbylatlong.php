@@ -1,8 +1,5 @@
 <?php
-// RM - this file is from Dan Bodor. It is what makes the Google Earth link on
-// peopleShowPerson.php work to create the file that Google Earth opens to fly to.
 
-//code for making a KML file from long lat inputs m=world n=$place   lon=$lon   lat=$lat
 require 'tng_begin.php';
 
 $name = $_REQUEST['n'];

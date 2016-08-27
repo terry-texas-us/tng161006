@@ -538,14 +538,14 @@ if (!$result) {
     if ($numrows == $maxsearchresults || $offsetplus > 1) {
       if ($rrow['sqlselect']) {
         if ($gotpersonid) {
-          $query = "SELECT count( $people_table.personID ) as rcount $from";
+          $query = "SELECT count( $people_table.personID ) AS rcount $from";
         } else {
           $result2 = tng_query($query);
           $totrows = tng_num_rows($result2);
           $query = "";
         }
       } else {
-        $query = "SELECT count($people_table.personID) as rcount FROM ($people_table $trees_join) $families_join $children_join $cejoin $criteriastr $treestr";
+        $query = "SELECT count($people_table.personID) AS rcount FROM ($people_table $trees_join) $families_join $children_join $cejoin $criteriastr $treestr";
       }
       if ($query) {
         $result2 = tng_query($query);

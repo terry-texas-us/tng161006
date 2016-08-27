@@ -86,12 +86,12 @@ if ($unlinked) {
 if ($wherestr) {
   $wherestr = "WHERE $wherestr";
 }
-$query = "SELECT $media_table.mediaID as mediaID, $medialinkID description, notes, thumbpath, mediatypeID, usecollfolder, latitude, longitude, zoom FROM $media_table $join $wherestr ORDER BY description LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT $media_table.mediaID AS mediaID, $medialinkID description, notes, thumbpath, mediatypeID, usecollfolder, latitude, longitude, zoom FROM $media_table $join $wherestr ORDER BY description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count($media_table.mediaID) as mcount FROM $media_table $join $wherestr";
+  $query = "SELECT count($media_table.mediaID) AS mcount FROM $media_table $join $wherestr";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['mcount'];
@@ -373,13 +373,12 @@ $headSection->setTitle(uiTextSnippet('media'));
               $label = uiTextSnippet($mtypeID) ? uiTextSnippet($mtypeID) : $mediatypes_display[$mtypeID];
               echo "<td>" . $label . "</td>\n";
             }
-            $query = "SELECT people.personID as personID2, familyID, husband, wife, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.prefix as prefix, people.suffix as suffix, nameorder, $medialinks_table.personID as personID, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame, linktype
-              FROM $medialinks_table
-              LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID
-              LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID
-              LEFT JOIN $sources_table ON $medialinks_table.personID = $sources_table.sourceID
-              LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID)
-              WHERE mediaID = '{$row['mediaID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT 10";
+            $query = "SELECT people.personID AS personID2, familyID, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, $medialinks_table.personID AS personID, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame, linktype FROM $medialinks_table "
+                . "LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID "
+                . "LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID "
+                . "LEFT JOIN $sources_table ON $medialinks_table.personID = $sources_table.sourceID "
+                . "LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID) "
+                . "WHERE mediaID = '{$row['mediaID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT 10";
             $presult = tng_query($query);
             $medialinktext = "";
             while ($prow = tng_fetch_assoc($presult)) {

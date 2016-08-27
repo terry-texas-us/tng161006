@@ -6,7 +6,7 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-$query = "SELECT *, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") as postdate FROM $temp_events_table WHERE tempID = '$tempID'";
+$query = "SELECT *, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") AS postdate FROM $temp_events_table WHERE tempID = '$tempID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -209,7 +209,7 @@ if (is_numeric($eventID)) {
   $evrow = tng_fetch_assoc($result);
   tng_free_result($result);
 
-  $query = "SELECT count(eventID) as evcount FROM $events_table WHERE persfamID = '$persfamID' AND eventID = '$eventID'";
+  $query = "SELECT count(eventID) AS evcount FROM $events_table WHERE persfamID = '$persfamID' AND eventID = '$eventID'";
   $morelinks = tng_query($query);
   $more = tng_fetch_assoc($morelinks);
   $gotmore = $more['evcount'] ? "*" : "";
@@ -217,13 +217,13 @@ if (is_numeric($eventID)) {
 
   $displayval = uiTextSnippet($eventID);
 }
-$query = "SELECT count(ID) as notecount FROM $notelinks_table WHERE persfamID = '$persfamID' AND eventID = '$eventID'";
+$query = "SELECT count(ID) AS notecount FROM $notelinks_table WHERE persfamID = '$persfamID' AND eventID = '$eventID'";
 $notelinks = tng_query($query);
 $note = tng_fetch_assoc($notelinks);
 $gotnotes = $note['notecount'] ? "*" : "";
 tng_free_result($notelinks);
 
-$citequery = "SELECT count(citationID) as citecount FROM $citations_table WHERE persfamID = '$persfamID' AND eventID = '$eventID'";
+$citequery = "SELECT count(citationID) AS citecount FROM $citations_table WHERE persfamID = '$persfamID' AND eventID = '$eventID'";
 $citeresult = tng_query($citequery) or die(uiTextSnippet('cannotexecutequery') . ": $citequery");
 $cite = tng_fetch_assoc($citeresult);
 $gotcites = $cite['citecount'] ? "*" : "";

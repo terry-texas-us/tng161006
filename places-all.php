@@ -23,7 +23,7 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": " . uiTextSnippet('allpla
     $offset = 1;
 
     $linkstr = "";
-    $query = "SELECT distinct ucase(left(trim(substring_index(place,',',-$offset)),1)) as firstchar FROM $places_table GROUP BY firstchar ORDER by firstchar";
+    $query = "SELECT distinct ucase(left(trim(substring_index(place,',',-$offset)),1)) AS firstchar FROM $places_table GROUP BY firstchar ORDER by firstchar";
     $result = tng_query($query);
     if ($result) {
       $initialchar = 1;
@@ -73,7 +73,7 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": " . uiTextSnippet('allpla
             <tr>
               <td class="plcol">
                 <?php
-                $query = "SELECT trim(substring_index(place,',',-$offset)) as myplace, count(place) as placecount FROM $places_table WHERE trim(substring_index(place,',',-$offset)) LIKE \"$urlfirstchar%\" GROUP BY myplace ORDER by myplace";
+                $query = "SELECT trim(substring_index(place,',',-$offset)) AS myplace, count(place) AS placecount FROM $places_table WHERE trim(substring_index(place,',',-$offset)) LIKE \"$urlfirstchar%\" GROUP BY myplace ORDER by myplace";
                 $result = tng_query($query);
                 $topnum = tng_num_rows($result);
                 if ($result) {
@@ -102,7 +102,7 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": " . uiTextSnippet('allpla
                       $placetitle = $place['myplace'];
                     }
 
-                    $query = "SELECT count(place) as placecount FROM $places_table WHERE place = '$place3'";
+                    $query = "SELECT count(place) AS placecount FROM $places_table WHERE place = '$place3'";
                     $result2 = tng_query($query);
                     $countrow = tng_fetch_assoc($result2);
                     $specificcount = $countrow['placecount'];
