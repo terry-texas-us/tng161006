@@ -11,7 +11,7 @@ function getLine() {
     if ($saveimport) {
       $savestate['len'] = strlen($line);
     }
-   // [ts] first 3 characters in gedcom file are ï»¿ - tried adding to preg_replace - does not work so 0 HEAD is skipped!
+    $line = ltrim($line, "\xEF\xBB\xBF"); // [ts] characters are only encountered at file head (at least on RM gedcom)
     $patterns = ["/®®.*¯¯/", "/®®.*/", "/.*¯¯/", "/@@/"]; 
     $replacements = ["", "", "", "@"];
     $line = preg_replace($patterns, $replacements, $line);
@@ -376,6 +376,24 @@ function deleteLinksOnMatch($entityID) {
   tng_query($query);
   $query = "DELETE from $citations_table WHERE persfamID = '$entityID'";
   tng_query($query);
+}
+
+function getHeadRecord() {
+  $lineinfo = getLine();
+
+  while ($lineinfo['tag'] && $lineinfo['level'] > 0) {
+    $lineinfo = getLine();
+  }
+  return $lineinfo;
+}
+
+function getEventDefinitionRecord($event) {
+  $lineinfo = getLine();
+
+  while ($lineinfo['tag'] && $lineinfo['level'] > 0) {
+    $lineinfo = getLine();
+  }
+  return $lineinfo;
 }
 
 function getPlaceRecord($place, $prevlevel) {

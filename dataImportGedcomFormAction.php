@@ -313,7 +313,8 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
         if ($lineinfo['level'] == 0) {
           preg_match("/^@(\S+)@/", $lineinfo['tag'], $matches);
           $id = $matches[1];
-          switch (trim($lineinfo['rest'])) {
+          $rest = trim($lineinfo['rest']);
+          switch ($rest) {
             case "FAM":
               getFamilyRecord($id, 0);
               break;
@@ -342,6 +343,10 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
                 getNoteRecord($id, 0);
               } elseif ($lineinfo['tag'] == "_PLAC" || $lineinfo['tag'] == "_PLAC_DEFN" || $lineinfo['tag'] == "PLAC") {
                 getPlaceRecord($lineinfo['rest'], 0);
+              } elseif ($lineinfo['tag'] == "HEAD") {
+                getHeadRecord();
+              } elseif ($lineinfo['tag'] == "_EVDEF") { // [ts] RM extention
+                $lineinfo = getEventDefinitionRecord($rest);
               } else {
                 $lineinfo = getLine();
               }
