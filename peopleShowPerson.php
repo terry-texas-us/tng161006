@@ -620,8 +620,7 @@ $headSection->setTitle($headTitle);
                     $usedplaces[] = $place;
                     $savedplaces[] = ["place" => $place, "key" => $key];
                     $locations2map[$key]['htmlcontent'] = "<div class=\"mapballoon\"><strong>{$val['fixedplace']}</strong><br><br>$event: $dateforlocalballoon";
-                    $locations2map[$key]['htmlcontent'] .= "<br><br><a href=\"https://maps.google.com/maps?f=q" .
-                        uiTextSnippet('glang') . "$mcharsetstr&amp;daddr=$lat,$long($directionballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">" .
+                    $locations2map[$key]['htmlcontent'] .= "<br><br><a href=\"https://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($directionballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">" .
                         uiTextSnippet('getdirections') . "</a>" . uiTextSnippet('directionsto') . " $directionplace</div>";
                     $thismarker = $markerIcon;
                   }
@@ -636,7 +635,7 @@ $headSection->setTitle($headTitle);
                       }
                     }
                   }
-                  $persontext .= "<a href=\"https://maps.google.com/maps?f=q" . uiTextSnippet('glang') . "$mcharsetstr&amp;daddr=$lat,$long($directionballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target= \"_blank\">\n";
+                  $persontext .= "<a href=\"https://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($directionballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target= \"_blank\">\n";
                     $persontext .= "<img src='google_marker.php?image=$pinplacelevel.png&amp;text=$thismarker' alt='" . uiTextSnippet('googlemaplink') . "' width= '20' height='34'>\n";
                   $persontext .= "</a>\n";
                   $map['pins'] ++;
@@ -792,7 +791,7 @@ $headSection->setTitle($headTitle);
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
 <script src="js/peopleShowPerson.js"></script>
 <?php if ($map['key']) { ?>
-  <script src='https://maps.googleapis.com/maps/api/js?language="<?php echo uiTextSnippet('glang'); ?>"'></script>
+  <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAlWTL2QZDQv9BWXBvCwdAuhq1Lak8jSwU&amp;<?php echo uiTextSnippet('localize'); ?>'></script>
 <?php } ?>
 <script>
   'use strict';

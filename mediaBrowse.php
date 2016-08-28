@@ -76,7 +76,7 @@ if ($hsstat != "all") {
   }
 }
 if ($cemeteryID) {
-  $wherestr .= $wherestr ? " AND cemeteryID = \"$cemeteryID\"" : "cemeteryID = \"$cemeteryID\"";
+  $wherestr .= $wherestr ? " AND cemeteryID = '$cemeteryID'" : "cemeteryID = '$cemeteryID'";
 }
 if ($unlinked) {
   $join = "LEFT JOIN $medialinks_table ON $media_table.mediaID = $medialinks_table.mediaID";

@@ -23,7 +23,7 @@ if ($offset) {
   $page = 1;
 }
 if ($cemeteryID) {
-  $query = "SELECT cemname, city, county, state, country, maplink, notes, latitude, longitude, zoom, place FROM $cemeteries_table WHERE cemeteryID = \"$cemeteryID\"";
+  $query = "SELECT cemname, city, county, state, country, maplink, notes, latitude, longitude, zoom, place FROM $cemeteries_table WHERE cemeteryID = '$cemeteryID'";
   $cemresult = tng_query($query);
 
   if (!tng_num_rows($cemresult)) {
@@ -118,7 +118,7 @@ $headSection->setTitle($location);
           $localballooncemeteryplace = htmlspecialchars($cemeteryplace, ENT_QUOTES, $session_charset);
           $remoteballoontext = htmlspecialchars(str_replace($banish, $banreplace, "{$cemetery['cemname']}, $cemeteryplace"), ENT_QUOTES, $session_charset);
           $codednotes = $cemetery['notes'] ? "<br><br>" . tng_real_escape_string(uiTextSnippet('notes') . ": " . $cemetery['notes']) : "";
-          $codednotes .= "<br><br><a href=\"https://maps.google.com/maps?f=q" . uiTextSnippet('glang') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)\" target=\"_blank\">" .
+          $codednotes .= "<br><br><a href=\"https://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)\" target=\"_blank\">" .
                   uiTextSnippet('getdirections') . "</a>" . uiTextSnippet('directionsto') . " $localballooncemeteryname";
           $locations2map[$l2mCount] = [
             "zoom" => $zoom,
@@ -129,7 +129,7 @@ $headSection->setTitle($location);
           ];
           $cemcoords = true;
           $body .= "<div style=\"padding-bottom:15px\">\n";
-          $body .= "<a href=\"https://maps.google.com/maps?f=q" . uiTextSnippet('glang') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target='_blank'>\n";
+          $body .= "<a href=\"https://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target='_blank'>\n";
           $body .= "<img src=\"google_marker.php?image=$pinplacelevel2.png&amp;text=1\" alt=''>\n";
           $body .= "</a>";
           $map['pins']++;
@@ -140,7 +140,7 @@ $headSection->setTitle($location);
     if ($infoblock) {
       $body .= "<div class=\"titlebox\">$infoblock</div>\n<br>\n";
     }
-    $query = "SELECT mediaID, thumbpath, description, notes, usecollfolder, mediatypeID, path, form, abspath, newwindow FROM $media_table WHERE cemeteryID = \"$cemeteryID\" AND (mediatypeID != \"headstones\" OR linktocem = \"1\") ORDER BY description";
+    $query = "SELECT mediaID, thumbpath, description, notes, usecollfolder, mediatypeID, path, form, abspath, newwindow FROM $media_table WHERE cemeteryID = '$cemeteryID' AND (mediatypeID != 'headstones' OR linktocem = '1') ORDER BY description";
     $hsresult = tng_query($query);
     $gotImageJpeg = function_exists(imageJpeg);
     if (tng_num_rows($hsresult)) {
@@ -394,7 +394,7 @@ $headSection->setTitle($location);
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
   <?php if ($map['key']) { ?>
-    <script src='https://maps.googleapis.com/maps/api/js?language="<?php echo uiTextSnippet('glang'); ?>"'></script>
+    <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAlWTL2QZDQv9BWXBvCwdAuhq1Lak8jSwU&amp;<?php echo uiTextSnippet('localize'); ?>'></script>
   <?php 
   }
   if ($map['key'] && $map['pins']) {

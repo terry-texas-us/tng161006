@@ -116,7 +116,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
     }
     if ($map['key']) {
     ?>
-      <script src='https://maps.googleapis.com/maps/api/js?language="<?php echo uiTextSnippet('glang'); ?>"'></script>
+      <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAlWTL2QZDQv9BWXBvCwdAuhq1Lak8jSwU&amp;<?php echo uiTextSnippet('localize'); ?>'></script>
     <?php }
     $onload = $onunload = "";
     if ($isphoto && !$row['abspath']) {

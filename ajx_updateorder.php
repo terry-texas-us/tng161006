@@ -312,11 +312,11 @@ switch ($action) {
     $rval = $link;
     break;
   case "addcemlink":
-    $query = "UPDATE $cemeteries_table SET place = \"" . urldecode($place) . "\" WHERE cemeteryID = \"$cemeteryID\"";
+    $query = "UPDATE $cemeteries_table SET place = \"" . urldecode($place) . "\" WHERE cemeteryID = '$cemeteryID'";
     $result = tng_query($query);
 
     //get cemname, location from cemetery, pass back in json
-    $query = "SELECT cemname, city, county, state, country FROM $cemeteries_table WHERE cemeteryID = \"$cemeteryID\"";
+    $query = "SELECT cemname, city, county, state, country FROM $cemeteries_table WHERE cemeteryID = '$cemeteryID'";
     $result = tng_query($query);
     $cemrow = tng_fetch_assoc($result);
     $location = $cemrow['cemname'];
@@ -348,7 +348,7 @@ switch ($action) {
     tng_free_result($result);
     break;
   case "geocopy":
-    $query = "UPDATE $cemeteries_table SET latitude = \"$latitude\", longitude = \"$longitude\", zoom=\"$zoom\" WHERE cemeteryID = \"$cemeteryID\"";
+    $query = "UPDATE $cemeteries_table SET latitude = '$latitude', longitude = '$longitude', zoom = '$zoom' WHERE cemeteryID = '$cemeteryID'";
     $result = tng_query($query);
 
     $success = $result ? "1" : "0";

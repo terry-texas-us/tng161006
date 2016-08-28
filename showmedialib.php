@@ -105,7 +105,7 @@ function getMediaInfo($mediatypeID, $mediaID, $personID, $albumID, $albumlinkID,
     if ($tnggallery) {
       $wherestr .= " AND thumbpath != \"\"";
     }
-    $cemwhere = $cemeteryID ? " AND cemeteryID = \"$cemeteryID\"" : "";
+    $cemwhere = $cemeteryID ? " AND cemeteryID = '$cemeteryID'" : "";
 
     $query = "SELECT DISTINCT $media_table.mediaID, path, map, description, notes, width, height, datetaken, placetaken, owner, alwayson, abspath, usecollfolder, status, plot, cemeteryID, showmap, bodytext, form, newwindow, usenl, latitude, longitude, mediatypeID FROM $media_table $wherestr $cemwhere ORDER BY description";
 

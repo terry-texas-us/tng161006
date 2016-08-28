@@ -98,8 +98,7 @@ $headSection->setTitle($psearchns);
           $codedplace = htmlspecialchars(str_replace($banish, $banreplace, $psearchns), ENT_QUOTES, $session_charset);
           $codednotes = $prow['notes'] ? "<br><br>" . tng_real_escape_string(uiTextSnippet('notes') . ": " . $prow['notes']) : "";
           // add external link to Google Maps for Directions in the balloon
-          $codednotes .= "<br><br><a href=\"{$http}://maps.google.com/maps?f=q" . uiTextSnippet('glang') .
-                  "$mcharsetstr&amp;daddr=$lat,$long($codedplace)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">" . uiTextSnippet('getdirections') . "</a>" . uiTextSnippet('directionsto') . " $codedplace";
+          $codednotes .= "<br><br><a href=\"{$http}://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($codedplace)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">" . uiTextSnippet('getdirections') . "</a>" . uiTextSnippet('directionsto') . " $codedplace";
           if ($lat && $long) {
             $uniqueplace = $psearch . $lat . $long;
             if ($map['showallpins'] || !in_array($uniqueplace, $usedplaces)) {
@@ -108,7 +107,7 @@ $headSection->setTitle($psearchns);
               $l2mCount++;
             }
           }
-          echo "<a href=\"{$http}://maps.google.com/maps?f=q" . uiTextSnippet('glang') . "$mcharsetstr&amp;daddr=$lat,$long($codedplace)&amp;z=12&amp;om=1&amp;iwloc=addr\" target=\"_blank\">\n";
+          echo "<a href=\"{$http}://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($codedplace)&amp;z=12&amp;om=1&amp;iwloc=addr\" target=\"_blank\">\n";
           echo "<img src=\"google_marker.php?image=$pinplacelevel.png&amp;text=$l2mCount\" alt=''></a><strong>$placeleveltext</strong><span><strong>" .
                   uiTextSnippet('latitude') . ":</strong> {$prow['latitude']}, <strong>" . uiTextSnippet('longitude') . ":</strong> {$prow['longitude']}</span><br><br>";
           $map['pins']++;
@@ -203,7 +202,7 @@ $headSection->setTitle($psearchns);
   <?php
   if ($map['key']) {
   ?>
-    <script src='https://maps.googleapis.com/maps/api/js?language="<?php echo uiTextSnippet('glang'); ?>"'></script>
+    <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAlWTL2QZDQv9BWXBvCwdAuhq1Lak8jSwU&amp;<?php echo uiTextSnippet('localize'); ?>'></script>
   <?php
   }
   if ($map['key'] && $map['pins']) {

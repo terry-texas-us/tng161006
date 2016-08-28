@@ -214,7 +214,7 @@ if ($location) {
           $localballooncemeteryplace = htmlspecialchars($cemeteryplace, ENT_QUOTES, $session_charset);
           $remoteballoontext = htmlspecialchars(str_replace($banish, $banreplace, "{$cemetery['cemname']}, $cemeteryplace"), ENT_QUOTES, $session_charset);
           $codednotes = $cemetery['notes'] ? "<br><br>" . tng_real_escape_string(uiTextSnippet('notes') . ": " . $cemetery['notes']) : "";
-          $codednotes .= "<br><br><a href=\"{$http}://maps.google.com/maps?f=q" . uiTextSnippet('glang') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)\" target=\"_blank\">" .
+          $codednotes .= "<br><br><a href=\"{$http}://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)\" target=\"_blank\">" .
                   uiTextSnippet('getdirections') . "</a>" . uiTextSnippet('directionsto') . " $localballooncemeteryname";
           $locations2map[$l2mCount] = [
             "zoom" => $zoom,
@@ -225,7 +225,7 @@ if ($location) {
             "htmlcontent" => "<div class=\"mapballoon\"><a href=\"cemeteriesShowCemetery.php?cemeteryID={$cemetery['cemeteryID']}\">$localballooncemeteryname</a><br>$localballooncemeteryplace$codednotes</div>"
           ];
           $l2mCount++;
-          $body .= "<a href=\"https://maps.google.com/maps?f=q" . uiTextSnippet('glang') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">\n";
+          $body .= "<a href=\"https://maps.google.com/maps?f=q&amp" . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">\n";
           $body .= "<img src=\"google_marker.php?image=$pinplacelevel2.png&amp;text=$l2mCount\" alt='' style=\"padding-right:5px\">\n";
           $body .= "</a>";
           $map['pins']++;
@@ -357,7 +357,7 @@ if ($location) {
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
   <?php if ($map['key']) { ?>
-    <script src='https://maps.googleapis.com/maps/api/js?language="<?php echo uiTextSnippet('glang'); ?>"'></script>
+    <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAlWTL2QZDQv9BWXBvCwdAuhq1Lak8jSwU&amp;<?php echo uiTextSnippet('localize'); ?>'></script>
   <?php 
   }
   if ($map['key'] && $map['pins']) {

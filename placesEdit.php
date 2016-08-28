@@ -64,21 +64,15 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
           }
           echo "> " . uiTextSnippet('istemple') . "</td></tr>\n";
         }
-        if ($map['key']) {
-          ?>
+        if ($map['key']) { ?>
           <tr>
             <td colspan='2'>
               <div style="padding:10px">
-                <?php
-                // draw the map here
-                include "googlemapdrawthemap.php";
-                ?>
+                <?php include "googlemapdrawthemap.php"; ?>
               </div>
             </td>
           </tr>
-          <?php
-        }
-        ?>
+        <?php } ?>
         <tr>
           <td><?php echo uiTextSnippet('latitude'); ?>:</td>
           <td><input id='latbox' name='latitude' type='text' value="<?php echo $row['latitude']; ?>"></td>
@@ -87,9 +81,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
           <td><?php echo uiTextSnippet('longitude'); ?>:</td>
           <td><input id='lonbox' name='longitude' type='text' value="<?php echo $row['longitude']; ?>"></td>
         </tr>
-        <?php
-        if ($map['key']) {
-          ?>
+        <?php if ($map['key']) { ?>
           <tr>
             <td><?php echo uiTextSnippet('zoom'); ?>:</td>
             <td>
@@ -170,9 +162,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
               <img class='icon-sm-inline' src='svg/globe.svg' title="<?php echo uiTextSnippet('geocopy'); ?>">
             </td>
           </tr>
-          <?php
-        }
-        ?>
+        <?php } ?>
         <tr>
           <td><?php echo uiTextSnippet('notes'); ?>:</td>
           <td>
@@ -216,7 +206,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
 <?php if ($map['key']) { ?>
-  <script src='https://maps.googleapis.com/maps/api/js?language="<?php echo uiTextSnippet('glang'); ?>"'></script>
+  <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAlWTL2QZDQv9BWXBvCwdAuhq1Lak8jSwU&amp;<?php echo uiTextSnippet('localize'); ?>'></script>
 <?php } ?>
 <script src="js/admin.js"></script>
 <script>
