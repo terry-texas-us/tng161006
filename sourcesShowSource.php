@@ -274,9 +274,7 @@ $headSection->setTitle($headtext);
         return false;
       }
     </script>
-    <?php
-    echo $sourcetext;
-    ?>
+    <?php echo $sourcetext; ?>
     <?php echo $publicFooterSection->build(); ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>

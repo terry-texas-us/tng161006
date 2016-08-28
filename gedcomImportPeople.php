@@ -55,7 +55,8 @@ function getIndividualRecord($personID, $prevlevel) {
   $prevlevel++;
   $assocarr = [];
   $living = $private = 0;
-
+  $familySearchID = '';
+  
   static $arrayLower = ['á','à','ä','é','è','ó','ò','ö','ú','ù','ü'];
   static $arrayUpper = ['Á','À','Ä','É','È','Ó','Ò','Ö','Ú','Ù','Ü'];
 
@@ -404,6 +405,10 @@ function getIndividualRecord($personID, $prevlevel) {
         case "_UID":
           $lineinfo = getLine();
           break;
+        case "_FSFTID": // RM Family Search ID
+          $familySearchID = strtoupper(trim($lineinfo['rest']));
+          $lineinfo = getLine();
+          break;
         default:
           //custom event -- should be 1 TAG
           $custeventctr++;
@@ -537,13 +542,7 @@ function getIndividualRecord($personID, $prevlevel) {
   if (!$info['ENDL']['DATETR']) {
     $info['ENDL']['DATETR'] = "0000-00-00";
   }
-  $query = "INSERT IGNORE INTO $people_table (personID, lastname, lnprefix, firstname, living, private, sex, birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, nickname, title, prefix, suffix, baptdate, baptdatetr, baptplace, confdate, confdatetr, confplace, initdate, initdatetr, initplace, endldate, endldatetr, endlplace, changedate, famc, metaphone, branch, changedby, edituser, edittime)
-    VALUES(\"$personID\", \"{$info['SURN']}\", \"{$info['lnprefix']}\", \"{$info['GIVN']}\", \"$living\", \"$private\", \"{$info['SEX']}\", \"" . $info['BIRT']['DATE'] . "\", \"" . $info['BIRT']['DATETR'] . "\",
-    \"" . $info['BIRT']['PLAC'] . "\", \"" . $info['CHR']['DATE'] . "\", \"" . $info['CHR']['DATETR'] . "\", \"" . $info['CHR']['PLAC'] . "\",
-    \"" . $info['DEAT']['DATE'] . "\", \"" . $info['DEAT']['DATETR'] . "\", \"" . $info['DEAT']['PLAC'] . "\", \"" . $info['BURI']['DATE'] . "\", \"" . $info['BURI']['DATETR'] . "\", \"" . $info['BURI']['PLAC'] . "\", $burialtype,
-    \"{$info['NICK']}\", \"{$info['TITL']}\", \"{$info['NPFX']}\", \"{$info['NSFX']}\", \"" . $info['BAPL']['DATE'] . "\", \"" . $info['BAPL']['DATETR'] . "\", \"$baplplace\",
-    \"" . $info['CONL']['DATE'] . "\", \"" . $info['CONL']['DATETR'] . "\", \"$confplace\",\"" . $info['INIT']['DATE'] . "\", \"" . $info['INIT']['DATETR'] . "\", \"$initplace\",
-    \"" . $info['ENDL']['DATE'] . "\", \"" . $info['ENDL']['DATETR'] . "\", \"$endlplace\", \"$inschangedt\", \"$prifamily\", \"$meta\", \"{$savestate['branch']}\", \"$currentuser\", \"\", \"0\" )";
+  $query = "INSERT IGNORE INTO $people_table (personID, lastname, lnprefix, firstname, living, private, sex, birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, nickname, title, prefix, suffix, baptdate, baptdatetr, baptplace, confdate, confdatetr, confplace, initdate, initdatetr, initplace, endldate, endldatetr, endlplace, changedate, famc, metaphone, branch, changedby, edituser, edittime) VALUES('$personID', \"{$info['SURN']}\", \"{$info['lnprefix']}\", \"{$info['GIVN']}\", '$living', '$private', \"{$info['SEX']}\", \"" . $info['BIRT']['DATE'] . "\", \"" . $info['BIRT']['DATETR'] . "\", \"" . $info['BIRT']['PLAC'] . "\", \"" . $info['CHR']['DATE'] . "\", \"" . $info['CHR']['DATETR'] . "\", \"" . $info['CHR']['PLAC'] . "\", \"" . $info['DEAT']['DATE'] . "\", \"" . $info['DEAT']['DATETR'] . "\", \"" . $info['DEAT']['PLAC'] . "\", \"" . $info['BURI']['DATE'] . "\", \"" . $info['BURI']['DATETR'] . "\", \"" . $info['BURI']['PLAC'] . "\", $burialtype, \"{$info['NICK']}\", \"{$info['TITL']}\", \"{$info['NPFX']}\", \"{$info['NSFX']}\", \"" . $info['BAPL']['DATE'] . "\", \"" . $info['BAPL']['DATETR'] . "\", '$baplplace', \"" . $info['CONL']['DATE'] . "\", \"" . $info['CONL']['DATETR'] . "\", '$confplace',\"" . $info['INIT']['DATE'] . "\", \"" . $info['INIT']['DATETR'] . "\", \"$initplace\", \"" . $info['ENDL']['DATE'] . "\", \"" . $info['ENDL']['DATETR'] . "\", '$endlplace', '$inschangedt', '$prifamily', '$meta', \"{$savestate['branch']}\", '$currentuser', '', '0' )";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   $success = tng_affected_rows();
   if (!$success && $savestate['del'] != "no") {
@@ -564,17 +563,7 @@ function getIndividualRecord($personID, $prevlevel) {
     if ($goahead) {
       $chdatestr = $inschangedt ? ", changedate=\"$inschangedt\"" : "";
       $branchstr = $savestate['branch'] ? ", branch=\"{$savestate['branch']}\"" : "";
-      $query = "UPDATE $people_table SET firstname=\"{$info['GIVN']}\", lnprefix=\"{$info['lnprefix']}\", lastname=\"{$info['SURN']}\"" . $livingstrupd . ",
-        nickname=\"{$info['NICK']}\", prefix=\"{$info['NPFX']}\", suffix=\"{$info['NSFX']}\", title=\"{$info['TITL']}\",
-        birthdate=\"" . $info['BIRT']['DATE'] . "\", birthdatetr=\"" . $info['BIRT']['DATETR'] . "\", birthplace=\"" . $info['BIRT']['PLAC'] . "\",
-        sex=\"{$info['SEX']}\", altbirthdate=\"" . $info['CHR']['DATE'] . "\", altbirthdatetr=\"" . $info['CHR']['DATETR'] . "\", altbirthplace=\"" . $info['CHR']['PLAC'] . "\",
-        deathdate=\"" . $info['DEAT']['DATE'] . "\", deathdatetr=\"" . $info['DEAT']['DATETR'] . "\", deathplace=\"" . $info['DEAT']['PLAC'] . "\",
-        burialdate=\"" . $info['BURI']['DATE'] . "\", burialdatetr=\"" . $info['BURI']['DATETR'] . "\", burialplace=\"" . $info['BURI']['PLAC'] . "\",
-        baptdate=\"" . $info['BAPL']['DATE'] . "\", baptdatetr=\"" . $info['BAPL']['DATETR'] . "\", baptplace=\"$baplplace\",
-        confdate=\"" . $info['CONL']['DATE'] . "\", confdatetr=\"" . $info['CONL']['DATETR'] . "\", confplace=\"$confplace\",
-        initdate=\"" . $info['INIT']['DATE'] . "\", initdatetr=\"" . $info['INIT']['DATETR'] . "\", initplace=\"$initplace\",
-        endldate=\"" . $info['ENDL']['DATE'] . "\", endldatetr=\"" . $info['ENDL']['DATETR'] . "\", endlplace=\"$endlplace\",
-        changedby=\"$currentuser\" $chdatestr$branchstr";
+      $query = "UPDATE $people_table SET firstname=\"{$info['GIVN']}\", lnprefix=\"{$info['lnprefix']}\", lastname=\"{$info['SURN']}\"" . $livingstrupd . ", nickname=\"{$info['NICK']}\", prefix=\"{$info['NPFX']}\", suffix=\"{$info['NSFX']}\", title=\"{$info['TITL']}\", birthdate=\"" . $info['BIRT']['DATE'] . "\", birthdatetr=\"" . $info['BIRT']['DATETR'] . "\", birthplace=\"" . $info['BIRT']['PLAC'] . "\", sex=\"{$info['SEX']}\", altbirthdate=\"" . $info['CHR']['DATE'] . "\", altbirthdatetr=\"" . $info['CHR']['DATETR'] . "\", altbirthplace=\"" . $info['CHR']['PLAC'] . "\", deathdate=\"" . $info['DEAT']['DATE'] . "\", deathdatetr=\"" . $info['DEAT']['DATETR'] . "\", deathplace=\"" . $info['DEAT']['PLAC'] . "\", burialdate=\"" . $info['BURI']['DATE'] . "\", burialdatetr=\"" . $info['BURI']['DATETR'] . "\", burialplace=\"" . $info['BURI']['PLAC'] . "\", baptdate=\"" . $info['BAPL']['DATE'] . "\", baptdatetr=\"" . $info['BAPL']['DATETR'] . "\", baptplace=\"$baplplace\", confdate=\"" . $info['CONL']['DATE'] . "\", confdatetr=\"" . $info['CONL']['DATETR'] . "\", confplace=\"$confplace\", initdate=\"" . $info['INIT']['DATE'] . "\", initdatetr=\"" . $info['INIT']['DATETR'] . "\", initplace=\"$initplace\", endldate=\"" . $info['ENDL']['DATE'] . "\", endldatetr=\"" . $info['ENDL']['DATETR'] . "\", endlplace=\"$endlplace\", changedby=\"$currentuser\" $chdatestr$branchstr";
       if ($prifamily) {
         $query .= ", famc=\"$prifamily\"";
       }
@@ -589,6 +578,11 @@ function getIndividualRecord($personID, $prevlevel) {
     }
   }
   if ($success) {
+    $rmID = tng_insert_id();
+    if ($rmID != 0) {
+      $query = "INSERT INTO extlinks (rmID, extID) VALUES ($rmID, '$familySearchID')";
+      tng_query($query);
+    }
     if ($savestate['branch']) {
       $query = "INSERT IGNORE INTO $branchlinks_table (branch, persfamID) VALUES(\"{$savestate['branch']}\", '$personID')";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
