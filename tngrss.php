@@ -106,7 +106,7 @@ function doMedia($mediatypeID) {
         $mediatext = uiTextSnippet('family') . ": " . getFamilyName($prow);
       } elseif ($prow['sourceID'] != null) {
         $mediatext = $prow['title'] ? uiTextSnippet('source') . ": {$prow['title']}" : uiTextSnippet('source') . ": {$prow['sourceID']}";
-        $medialink = "showsource.php?sourceID={$prow['sourceID']}";
+        $medialink = "sourcesShowSource.php?sourceID={$prow['sourceID']}";
       } elseif ($prow['repoID'] != null) {
         $mediatext = $prow['reponame'] ? uiTextSnippet('repository') . ": " . $prow['reponame'] : uiTextSnippet('repository') . ": " . $prow['repoID'];
         $medialink = "repositoriesShowItem.php?repoID={$prow['repoID']}";

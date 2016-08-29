@@ -249,7 +249,7 @@ $headSection->setTitle($titlestr);
             }
           } elseif ($prow['sourceID'] != null) {
             $sourcetext = $prow['title'] ? uiTextSnippet('source') . ": " . $prow['title'] : uiTextSnippet('source') . ": " . $prow['sourceID'];
-            $medialinktext .= "<li><a href=\"showsource.php?sourceID={$prow['personID']}\">$sourcetext\n";
+            $medialinktext .= "<li><a href=\"sourcesShowSource.php?sourceID={$prow['personID']}\">$sourcetext\n";
           } elseif ($prow['repoID'] != null) {
             $repotext = $prow['reponame'] ? uiTextSnippet('repository') . ": " . $prow['reponame'] : uiTextSnippet('repository') . ": " . $prow['repoID'];
             $medialinktext .= "<li><a href=\"repositoriesShowItem.php?repoID={$prow['personID']}\">$repotext";

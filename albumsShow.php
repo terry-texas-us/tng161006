@@ -158,7 +158,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
               $medialinktext .= getName($prow) . "</a></li>\n";
             } elseif ($prow['sourceID'] != null) {
               $sourcetext = $prow['title'] ? uiTextSnippet('source') . ": {$prow['title']}" : uiTextSnippet('source') . ": {$prow['sourceID']}";
-              $medialinktext .= "<li><a href=\"showsource.php?sourceID={$prow['personID']}\">$sourcetext</a></li>\n";
+              $medialinktext .= "<li><a href=\"sourcesShowSource.php?sourceID={$prow['personID']}\">$sourcetext</a></li>\n";
             } elseif ($prow['repoID'] != null) {
               $repotext = $prow['reponame'] ? uiTextSnippet('repository') . ": {$prow['reponame']}" : uiTextSnippet('repository') . ": {$prow['repoID']}";
               $medialinktext .= "<li><a href=\"repositoriesShowItem.php?repoID={$prow['personID']}\">$repotext</a></li>\n";

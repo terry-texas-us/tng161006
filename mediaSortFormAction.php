@@ -47,7 +47,7 @@ switch ($linktype) {
     }
     $person['branch'] = "";
     tng_free_result($result2);
-    $test_url = "showsource.php?";
+    $test_url = "sourcesShowSource.php?";
     $testID = "sourceID";
     break;
   case 'R':

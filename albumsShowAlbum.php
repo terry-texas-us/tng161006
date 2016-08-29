@@ -77,7 +77,7 @@ function getAlbumLinkText($albumID) {
       $links .= getName($prow) . "</a>";
     } elseif ($prow['sourceID'] != null) {
       $sourcetext = $prow['title'] ? $prow['title'] : uiTextSnippet('source') . ": {$prow['sourceID']}";
-      $links .= "<a href=\"showsource.php?sourceID={$prow['sourceID']}\">" . $sourcetext . "</a>";
+      $links .= "<a href=\"sourcesShowSource.php?sourceID={$prow['sourceID']}\">" . $sourcetext . "</a>";
     } elseif ($prow['repoID'] != null) {
       $repotext = $prow['reponame'] ? $prow['reponame'] : uiTextSnippet('repository') . ": {$prow['repoID']}";
       $links .= "<a href=\"repositoriesShowItem.php?repoID={$prow['repoID']}\">" . $repotext . "</a>";
@@ -315,7 +315,7 @@ preparebookmark($logstring);
             }
           } elseif ($prow['sourceID'] != null) {
             $sourcetext = $prow['title'] ? $prow['title'] : uiTextSnippet('source') . ": " . $prow['sourceID'];
-            $medialinktext .= "<li><a href=\"showsource.php?sourceID={$prow['sourceID']}\">$sourcetext";
+            $medialinktext .= "<li><a href=\"sourcesShowSource.php?sourceID={$prow['sourceID']}\">$sourcetext";
           } elseif ($prow['repoID'] != null) {
             $repotext = $prow['reponame'] ? $prow['reponame'] : uiTextSnippet('repository') . ": " . $prow['repoID'];
             $medialinktext .= "<li><a href=\"repositoriesShowItem.php?repoID={$prow['repoID']}\">$repotext";

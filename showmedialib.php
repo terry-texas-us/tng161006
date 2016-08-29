@@ -240,7 +240,7 @@ function getMediaNavigation($mediaID, $personID, $albumlinkID, $result, $showlin
       if ($linktype == 'F') {
         $pagenav .= "<a href=\"familiesShowFamily.php?familyID=$personID\">&raquo; " . uiTextSnippet('groupsheet') . "</a>  &nbsp;&nbsp;&nbsp;";
       } elseif ($linktype == 'S') {
-        $pagenav .= "<a href=\"showsource.php?sourceID=$personID\">&raquo; " . uiTextSnippet('source') . "</a>  &nbsp;&nbsp;&nbsp;";
+        $pagenav .= "<a href=\"sourcesShowSource.php?sourceID=$personID\">&raquo; " . uiTextSnippet('source') . "</a>  &nbsp;&nbsp;&nbsp;";
       } elseif ($linktype == 'R') {
         $pagenav .= "<a href=\"repositoriesShowItem.php?repoID=$personID\">&raquo; " . uiTextSnippet('repository') . "</a>  &nbsp;&nbsp;&nbsp;";
       } elseif ($linktype == 'L') {
@@ -365,7 +365,7 @@ function getMediaLinkText($mediaID, $ioffset) {
       $medialinktext .= getName($prow) . "</a>";
     } elseif ($prow['sourceID'] != null) {
       $sourcetext = $prow['title'] ? $prow['title'] : uiTextSnippet('source') . ": " . $prow['sourceID'];
-      $medialinktext .= "<a href=\"showsource.php?sourceID={$prow['sourceID']}\">" . $sourcetext . "</a>";
+      $medialinktext .= "<a href=\"sourcesShowSource.php?sourceID={$prow['sourceID']}\">" . $sourcetext . "</a>";
     } elseif ($prow['repoID'] != null) {
       $repotext = $prow['reponame'] ? $prow['reponame'] : uiTextSnippet('repository') . ": " . $prow['repoID'];
       $medialinktext .= "<a href=\"repositoriesShowItem.php?repoID={$prow['repoID']}\">" . $repotext . "</a>";

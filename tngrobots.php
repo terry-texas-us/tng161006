@@ -80,7 +80,7 @@ if ($tngprint) {
     case "cemeteriesShowCemetery":
     case "showphoto":
     case "repositoriesShowItem":
-    case "showsource":
+    case "sourcesShowSource":
     case "showtree":
     case "surnames":
     case "surnames-all":

@@ -90,7 +90,7 @@ function getCitations($persfamID, $shortcite = 1) {
   $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
 
   while ($citrow = tng_fetch_assoc($citresult)) {
-    $source = $citrow['sourceID'] ? "[<a href=\"showsource.php?sourceID={$citrow['sourceID']}\">{$citrow['sourceID']}</a>] " : "";
+    $source = $citrow['sourceID'] ? "[<a href=\"sourcesShowSource.php?sourceID={$citrow['sourceID']}\">{$citrow['sourceID']}</a>] " : "";
     $newstring = $source ? "" : $citrow['description'];
     $key = $persfamID . "_" . $citrow['eventID'];
     $citationsctr++;

@@ -162,7 +162,7 @@ function tng_menu($enttype, $currpage, $entityID) {
     $menu .= doMenuItem($nexttab++, "familiesShowFamily.php?familyID=$entityID", "svg/users.svg", uiTextSnippet('family'), $currpage, "family");
     $editstr = "familiesEdit.php?family";
   } elseif ($enttype == 'S') {
-    $menu .= doMenuItem($nexttab++, "showsource.php?sourceID=$entityID", "svg/folder.svg", uiTextSnippet('source'), $currpage, "source");
+    $menu .= doMenuItem($nexttab++, "sourcesShowSource.php?sourceID=$entityID", "svg/folder.svg", uiTextSnippet('source'), $currpage, "source");
     $editstr = "admin_editsource.php?source";
   } elseif ($enttype == 'R') {
     $menu .= doMenuItem($nexttab++, "repositoriesShowItem.php?repoID=$entityID", "svg/folder.svg", uiTextSnippet('repository'), $currpage, "repo");

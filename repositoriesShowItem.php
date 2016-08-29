@@ -97,7 +97,7 @@ $headSection->setTitle($reporow['reponame']);
         $repolinktext .= "\n";
       }
       $title = $srow['shorttitle'] ? $srow['shorttitle'] : $srow['title'];
-      $repolinktext .= "<a href=\"showsource.php?sourceID={$srow['sourceID']}\">$title</a>";
+      $repolinktext .= "<a href=\"sourcesShowSource.php?sourceID={$srow['sourceID']}\">$title</a>";
     }
     if ($numrows >= $maxsearchresults) {
       $repolinktext .= "\n[<a href=\"repositoriesShowItem.php?repoID=$repoID&amp;foffset=$foffset&amp;soffset=" . ($newsoffset + $maxsearchresults) . "\">" . uiTextSnippet('moresrc') . "</a>]";

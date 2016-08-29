@@ -284,7 +284,7 @@ if ($location) {
             $hslinktext .= "<a href=\"familiesShowFamily.php?familyID={$prow['familyID']}<br>}\">" . uiTextSnippet('family') . ": " . getFamilyName($prow);
           } elseif ($prow['sourceID'] != null) {
             $sourcetext = $prow['title'] ? uiTextSnippet('source') . ": {$prow['title']}" : uiTextSnippet('source') . ": {$prow['sourceID']}";
-            $hslinktext .= "<a href=\"showsource.php?sourceID={$prow['sourceID']}\">$sourcetext";
+            $hslinktext .= "<a href=\"sourcesShowSource.php?sourceID={$prow['sourceID']}\">$sourcetext";
           } elseif ($prow['repoID'] != null) {
             $repotext = $prow['reponame'] ? uiTextSnippet('repository') . ": {$prow['reponame']}" : uiTextSnippet('repository') . ": {$prow['repoID']}";
             $hslinktext .= "<a href=\"repositoriesShowItem.php?repoID={$prow['repoID']}\">$repotext";

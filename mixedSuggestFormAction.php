@@ -71,7 +71,7 @@ if ($enttype == 'I') {
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   $name = uiTextSnippet('source') . ": {$row['title']} ($ID)";
-  $pagelink = "$tngwebsite/" . "showsource.php?sourceID=$ID";
+  $pagelink = "$tngwebsite/" . "sourcesShowSource.php?sourceID=$ID";
   tng_free_result($result);
 } elseif ($enttype == 'R') {
   $query = "SELECT reponame FROM $repositories_table WHERE repoID = '$ID'";
