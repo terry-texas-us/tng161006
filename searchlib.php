@@ -119,7 +119,11 @@ function buildYearCriteria($column, $colvar, $qualifyvar, $altcolumn, $qualifier
 }
 
 function addtoQuery($textstr, $colvar, $criteria, $qualifyvar, $qualifier, $qualifystr, $value) {
-  global $allwhere, $mybool, $querystring, $urlstring, $mybooltext;
+  global $allwhere;
+  global $mybool;
+  global $querystring;
+  global $urlstring;
+  global $mybooltext;
 
   if ($urlstring) {
     $urlstring .= "&amp;";

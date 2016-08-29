@@ -1,6 +1,7 @@
 <?php
 function handleSource($persfamID, $prevlevel) {
-  global $lineinfo, $savestate;
+  global $lineinfo;
+  global $savestate;
 
   $cite = [];
   preg_match("/^@(\S+)@/", $lineinfo['rest'], $matches);
@@ -144,8 +145,73 @@ function getSourceRecord($sourceID, $prevlevel) {
             $info['CALN'] .= getContinued();
           }
           break;
-        default:
-          //custom event -- should be 1 TAG
+        case "_SUBQ": // RM subsequent quote
+        case "_BIBL": // RM bibliography
+          $info[$tag] = addslashes($lineinfo['rest']);
+          $info[$tag] .= getContinued();
+          break;
+        case "_TMPLT": // RM template 
+          $lineinfo = getLine();
+          while ($lineinfo['level'] > $prevlevel) {
+            if ($lineinfo['level'] == $prevlevel + 2) {
+              $name = strtoupper($lineinfo['rest']);
+              $lineinfo = getLine();
+              $value = addslashes($lineinfo['rest']);
+              switch ($name) {
+                case 'AUTHOR':
+                  $info['AUTH'] = $value;
+                  $info['AUTH'] .= getContinued();
+                  break;
+                case 'ROLE':
+                  $role = $value;
+                  break;
+                case 'TITLE':
+                  $info['TITL'] = $value;
+                  $info['TITL'] .= getContinued();
+                  break;
+                case 'SUBTITLE':
+                  $subtitle = $value;
+                  $subtitle .= getContinued();
+                  break;
+                case 'PUBPLACE':
+                  $publisherPlace = $value;
+                  $publisherPlace .= getContinued();
+                  break;
+                case 'PUBLISHER':
+                  $info['PUBL'] = $value;
+                  $info['PUBL'] .= getContinued();
+                  break;
+                case 'PUBDATE':
+                  $publisherDate = $value;
+                  $publisherDate .= getContinued();
+                  break;
+                default;
+                  break;
+              }
+            } else {
+              $lineinfo = getLine();
+            }
+          }
+          if ($info['AUTH'] && $role) {
+            $info['AUTH'] .= ', ' . $role;
+          }
+          if ($info['TITL']) { // RM generated ABBR and TITL replaced by _TMPLT values
+            $info['ABBR'] = $info['TITL'];
+            if ($subtitle) {
+              $info['TITL'] .= ': ' . $subtitle;
+            }
+          }
+          if ($info['PUBL']) {
+            if ($publisherPlace) {
+              $info['PUBL'] = $publisherPlace . ': ' . $info['PUBL'];
+            }
+            if ($publisherDate) {
+              $info['PUBL'] .= ', ' . $publisherDate;
+            }
+          }
+          break;
+
+        default: //custom event -- should be 1 TAG
           $custeventctr++;
           $events[$custeventctr] = handleCustomEvent($sourceID, $prefix, $tag);
           break;
@@ -161,7 +227,7 @@ function getSourceRecord($sourceID, $prevlevel) {
   $success = tng_affected_rows();
   if (!$success && $savestate['del'] != "no") {
     if ($savestate['neweronly'] && $inschangedt) {
-      $query = "SELECT changedate FROM $sources_table WHERE sourceID='$sourceID'";
+      $query = "SELECT changedate FROM $sources_table WHERE sourceID = '$sourceID'";
       $result = tng_query($query);
       $srcrow = tng_fetch_assoc($result);
       $goahead = $inschangedt > $srcrow['changedate'] ? 1 : 0;
@@ -172,8 +238,8 @@ function getSourceRecord($sourceID, $prevlevel) {
       $goahead = 1;
     }
     if ($goahead) {
-      $chdatestr = $inschangedt ? ", changedate=\"$inschangedt\"" : "";
-      $query = "UPDATE $sources_table SET callnum=\"{$info['CALN']}\", title=\"{$info['TITL']}\", author=\"{$info['AUTH']}\", publisher=\"{$info['PUBL']}\", shorttitle=\"{$info['ABBR']}\", repoID=\"{$info['REPO']}\", actualtext=\"" . trim($info['TEXT']) . "\", changedby=\"$currentuser\" $chdatestr WHERE sourceID = '$sourceID'";
+      $chdatestr = $inschangedt ? ", changedate='$inschangedt'" : "";
+      $query = "UPDATE $sources_table SET callnum = '{$info['CALN']}', title='{$info['TITL']}', author='{$info['AUTH']}', publisher='{$info['PUBL']}', shorttitle='{$info['ABBR']}', repoID='{$info['REPO']}', actualtext=\"" . trim($info['TEXT']) . "\", changedby='$currentuser' $chdatestr WHERE sourceID = '$sourceID'";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $success = 1;
 
@@ -201,7 +267,8 @@ function getSourceRecord($sourceID, $prevlevel) {
 }
 
 function getRestOfSource($sourceID, $prevlevel) {
-  global $lineinfo, $lineending;
+  global $lineinfo;
+  global $lineending;
 
   $continued = "";
   $lasttag = "";
@@ -325,7 +392,7 @@ function getRepoRecord($repoID, $prevlevel) {
     }
   }
   $inschangedt = $changedate ? $changedate : ($tngimpcfg['chdate'] ? "" : $today);
-  $query = "INSERT IGNORE INTO $repositories_table (repoID, reponame, changedate, changedby)  VALUES('$repoID', \"{$info['NAME']}\", '$inschangedt', '$currentuser')";
+  $query = "INSERT IGNORE INTO $repositories_table (repoID, reponame, changedate, changedby)  VALUES('$repoID', '{$info['NAME']}', '$inschangedt', '$currentuser')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   $success = tng_affected_rows();
   if (!$success && $savestate['del'] != "no") {
@@ -341,11 +408,11 @@ function getRepoRecord($repoID, $prevlevel) {
       $goahead = 1;
     }
     if ($goahead) {
-      $chdatestr = $inschangedt ? ", changedate=\"$inschangedt\"" : "";
+      $chdatestr = $inschangedt ? ", changedate='$inschangedt'" : "";
       if (!isset($info['ADDR'])) {
         $info['ADDR'] = 0;
       }
-      $query = "UPDATE $repositories_table SET reponame=\"{$info['NAME']}\", addressID=\"{$info['ADDR']}\", changedby=\"$currentuser\" $chdatestr WHERE repoID = '$repoID'";
+      $query = "UPDATE $repositories_table SET reponame='{$info['NAME']}', addressID='{$info['ADDR']}', changedby='$currentuser' $chdatestr WHERE repoID = '$repoID'";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $success = 1;
 
@@ -372,7 +439,7 @@ function getRepoRecord($repoID, $prevlevel) {
           . "VALUES('{$address['ADR1']}', '{$address['ADR2']}', '{$address['CITY']}', '{$address['STAE']}', '{$address['POST']}',  '{$address['CTRY']}', '{$address['WWW']}', '{$address['EMAIL']}', '{$address['PHON']}')";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $info['ADDR'] = tng_insert_id();
-      $query = "UPDATE $repositories_table SET addressID=\"{$info['ADDR']}\" WHERE repoID = '$repoID'";
+      $query = "UPDATE $repositories_table SET addressID='{$info['ADDR']}' WHERE repoID = '$repoID'";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     }
   }

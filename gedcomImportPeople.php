@@ -409,6 +409,10 @@ function getIndividualRecord($personID, $prevlevel) {
           $familySearchID = strtoupper(trim($lineinfo['rest']));
           $lineinfo = getLine();
           break;
+        case "_COLOR": // RM Person Color Code
+          $personColorCode = strtoupper(trim($lineinfo['rest']));
+          $lineinfo = getLine();
+          break;
         default:
           //custom event -- should be 1 TAG
           $custeventctr++;

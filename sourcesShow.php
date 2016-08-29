@@ -92,7 +92,7 @@ $headSection->setTitle(uiTextSnippet('sources'));
         echo "<tr>\n";
           echo "<td>$i</td>\n";
           echo "<td><a href='sourcesShowSource.php?sourceID={$row['sourceID']}'>{$row['sourceID']}</a></td>\n";
-          echo "<td>$sourcetitle<br>{$row['author']}</td>\n";
+          echo "<td><em>$sourcetitle</em>, {$row['author']}</td>\n";
         echo "</tr>\n";
         $i++;
       }

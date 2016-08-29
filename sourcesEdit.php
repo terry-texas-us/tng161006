@@ -93,69 +93,88 @@ $headSection->setTitle(uiTextSnippet('modifysource'));
           </div>
         </div>
       </header>
-      <table class='table table-sm'>
-        <tr>
-          <td><?php echo uiTextSnippet('shorttitle'); ?>:</td>
-          <td>
-            <input name='shorttitle' type='text' size='40' value="<?php echo $row['shorttitle']; ?>">
-            (<?php echo uiTextSnippet('required'); ?>)
-          </td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('longtitle'); ?>:</td>
-          <td><input name='title' type='text' size='50' value="<?php echo $row['title']; ?>"></td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('author'); ?>:</td>
-          <td><input name='author' type='text' size='40' value="<?php echo $row['author']; ?>"></td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('callnumber'); ?>:</td>
-          <td><input name='callnum' type='text' value="<?php echo $row['callnum']; ?>"></td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('publisher'); ?>:</td>
-          <td><input name='publisher' type='text' size='40' value="<?php echo $row['publisher']; ?>">
-          </td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('repository'); ?>:</td>
-          <td>
-            <select name="repoID">
-              <option value=''></option>
-              <?php
-              $query = "SELECT repoID, reponame FROM $repositories_table ORDER BY reponame";
-              $reporesult = tng_query($query);
-              while ($reporow = tng_fetch_assoc($reporesult)) {
-                echo "    <option value=\"{$reporow['repoID']}\"";
-                if ($reporow['repoID'] == $row['repoID']) {
-                  echo " selected";
-                }
-                echo ">{$reporow['reponame']}</option>\n";
-              }
-              tng_free_result($reporesult);
-              ?>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('actualtext'); ?>:</td>
-          <td>
-            <textarea rows="5" name="actualtext"><?php echo $row['actualtext']; ?></textarea>
-          </td>
-        </tr>
-        <tr>
-          <td colspan='2'></td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('otherevents'); ?>:</td>
-          <td>
+      <div class='row'>
+        <div class='col-md-3'>
+          <?php echo uiTextSnippet('shorttitle'); ?>:
+        </div>
+        <div class='col-md-9'>
+          <input class='form-control' name='shorttitle' type='text' size='40'  value="<?php echo $row['shorttitle']; ?>" placeholder="<?php echo uiTextSnippet('required'); ?>">
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-3'>
+          <?php echo uiTextSnippet('longtitle'); ?>:
+        </div>
+        <div class='col-md-9'>
+          <input class='form-control' name='title' type='text' size='50'  value='<?php echo $row['title']; ?>'>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-3'>
+          <?php echo uiTextSnippet('author'); ?>:
+        </div>
+        <div class='col-md-9'>
+          <input class='form-control' name='author' type='text' size='40' value='<?php echo $row['author']; ?>'>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-3'>
+          <?php echo uiTextSnippet('callnumber'); ?>:
+        </div>
+        <div class='col-md-9'>
+          <input class='form-control' name='callnum' type='text' value='<?php echo $row['callnum']; ?>'>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-3'>
+          <?php echo uiTextSnippet('publisher'); ?>:
+        </div>
+        <div class='col-md-9'>
+          <input class='form-control' name='publisher' type='text' size='40' value='<?php echo $row['publisher']; ?>'>
+        </div>
+      </div>
+      
+      <div class='row'>
+        <div class='col-md-3'>
+          <?php echo uiTextSnippet('repository'); ?>:
+        </div>
+        <div class='col-md-9'>
+          <select class='form-control' name="repoID">
+            <option value=''></option>
             <?php
-            echo "<input type='button' value=\"  " . uiTextSnippet('addnew') . "  \" onClick=\"newEvent('S','$sourceID',);\">&nbsp;\n";
+            $query = "SELECT repoID, reponame FROM $repositories_table ORDER BY reponame";
+            $reporesult = tng_query($query);
+            while ($reporow = tng_fetch_assoc($reporesult)) {
+              echo "    <option value='{$reporow['repoID']}'";
+              if ($reporow['repoID'] == $row['repoID']) {
+                echo " selected";
+              }
+              echo ">{$reporow['reponame']}</option>\n";
+            }
+            tng_free_result($reporesult);
             ?>
-          </td>
-        </tr>
-      </table>
+          </select>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='col-md-3'>
+          <?php echo uiTextSnippet('actualtext'); ?>:
+        </div>
+        <div class='col-md-9'>
+          <textarea name='actualtext' cols='50' rows='5'></textarea>
+        </div>    
+      </div>
+      <br>
+      <div class='row'>
+        <div class='col-md-3'>
+          <?php echo uiTextSnippet('otherevents'); ?>:
+        </div>
+        <div class='col-md-9'>
+          <?php echo "<input class='btn btn-outline-primary' type='button' value=\"  " . uiTextSnippet('addnew') . "  \" onClick=\"newEvent('S', '$sourceID',);\">&nbsp;\n"; ?>
+        </div>    
+      </div>
+      <hr>
       <?php showCustEvents($sourceID); ?>
       <p>
         <?php

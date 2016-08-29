@@ -261,7 +261,6 @@ $headSection->setTitle(uiTextSnippet('families'));
     
     function resetFamiliesSearch() {
       document.form1.searchstring.value = '';
-      document.form1.tree.selectedIndex = 0;
       document.form1.living.checked = false;
       document.form1.exactmatch.checked = false;    
       document.form1.spousename.selectedIndex = 0;

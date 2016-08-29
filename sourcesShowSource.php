@@ -68,7 +68,7 @@ $headSection->setTitle($headtext);
     $srcmedia = getMedia($srcrow, 'S');
     $srcalbums = getAlbums($srcrow, 'S');
     $photostr = showSmallPhoto($sourceID, $headtext, $rights['both'], 0);
-    echo tng_DrawHeading($photostr, $srcrow['shorttitle'], "");
+    echo tng_DrawHeading($photostr, $srcrow['title'], "");
 
     $sourcetext = "";
     $sourcetext .= "<ul class='nopad'>\n";

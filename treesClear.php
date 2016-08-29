@@ -13,55 +13,52 @@ if (!$allowDelete) {
 }
 require 'adminlog.php';
 
-$query = "DELETE from $people_table";
+tng_query("DELETE FROM $people_table");
+tng_query("ALTER TABLE $people_table AUTO_INCREMENT = 1");
+
+tng_query("DELETE FROM extlinks");
+tng_query("ALTER TABLE extlinks AUTO_INCREMENT = 1");
+
+tng_query("DELETE FROM $families_table");
+tng_query("ALTER TABLE $families_table AUTO_INCREMENT = 1");
+
+tng_query("DELETE FROM $children_table");
+tng_query("ALTER TABLE $children_table AUTO_INCREMENT = 1");
+
+tng_query("DELETE FROM $assoc_table");
+tng_query("ALTER TABLE $assoc_table AUTO_INCREMENT = 1");
+
+tng_query("DELETE FROM $address_table");
+tng_query("ALTER TABLE $address_table AUTO_INCREMENT = 1");
+
+tng_query("DELETE FROM $sources_table");
+tng_query("ALTER TABLE $sources_table AUTO_INCREMENT = 1");
+
+tng_query("DELETE FROM $repositories_table");
+tng_query("ALTER TABLE $repositories_table AUTO_INCREMENT = 1");
+
+tng_query("DELETE FROM $events_table");
+tng_query("ALTER TABLE $events_table AUTO_INCREMENT = 1");
+
+tng_query("DELETE FROM $notelinks_table");
+tng_query("ALTER TABLE $notelinks_table AUTO_INCREMENT = 1");
+
+tng_query("DELETE FROM $xnotes_table");
+tng_query("ALTER TABLE $xnotes_table AUTO_INCREMENT = 1");
+
+tng_query("DELETE FROM $citations_table");
+tng_query("ALTER TABLE $citations_table AUTO_INCREMENT = 1");
+
+tng_query("DELETE FROM $places_table");
+tng_query("ALTER TABLE $places_table AUTO_INCREMENT = 1");
+
+$query = "UPDATE $people_table SET branch = '' WHERE branch = '$branch'";
 $result = tng_query($query);
 
-tng_query("ALTER TABLE `tgn`.`people` AUTO_INCREMENT = 1");
-
-$query = "DELETE from $families_table";
+$query = "UPDATE $families_table SET branch = '' WHERE branch = '$branch'";
 $result = tng_query($query);
 
-$query = "DELETE from $children_table";
-$result = tng_query($query);
-
-$query = "DELETE from $assoc_table";
-$result = tng_query($query);
-
-$query = "DELETE from $address_table";
-$result = tng_query($query);
-
-$query = "DELETE from $sources_table";
-$result = tng_query($query);
-
-$query = "DELETE from $repositories_table";
-$result = tng_query($query);
-
-$query = "DELETE from $events_table";
-$result = tng_query($query);
-
-tng_query("ALTER TABLE `tgn`.`events` AUTO_INCREMENT = 1");
-
-$query = "DELETE from $notelinks_table";
-$result = tng_query($query);
-
-$query = "DELETE from $xnotes_table";
-$result = tng_query($query);
-
-$query = "DELETE from $citations_table";
-$result = tng_query($query);
-
-$query = "DELETE from $places_table";
-$result = tng_query($query);
-
-tng_query("ALTER TABLE `tgn`.`places` AUTO_INCREMENT = 1");
-
-$query = "UPDATE $people_table SET branch=\"\" WHERE branch = '$branch'";
-$result = tng_query($query);
-
-$query = "UPDATE $families_table SET branch=\"\" WHERE branch = '$branch'";
-$result = tng_query($query);
-
-$query = "DELETE from $branchlinks_table WHERE branch = '$branch'";
+$query = "DELETE FROM $branchlinks_table WHERE branch = '$branch'";
 $result = tng_query($query);
 
 $message = uiTextSnippet('tree') . " $gedcom " . uiTextSnippet('succcleared') . '.';

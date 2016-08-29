@@ -289,7 +289,6 @@ $headSection->setTitle(uiTextSnippet('people'));
 
     function resetPeople() {
       document.form1.searchstring.value = '';
-      document.form1.tree.selectedIndex = 0;
       document.form1.living.checked = false;
       document.form1.exactmatch.checked = false;
       document.form1.nokids.checked = false;

@@ -201,7 +201,6 @@ $headSection->setTitle(uiTextSnippet('repositories'));
 
     function resetRepositioriesSearch() {
       document.form1.searchstring.value = '';
-      document.form1.tree.selectedIndex = 0;
       document.form1.exactmatch.checked = false;
     }
   </script>

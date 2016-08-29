@@ -457,7 +457,6 @@ $headSection->setTitle(uiTextSnippet('media'));
 
   function resetForm() {
     document.form1.searchstring.value = '';
-    document.form1.tree.selectedIndex = 0;
     document.form1.mediatypeID.selectedIndex = 0;
     document.form1.fileext.value = '';
     document.form1.unlinked.checked = false;

@@ -273,9 +273,6 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
   <script>
     var searchByTree = "false";
     function resetValues() {
-      if (searchByTree) {
-        document.search.tree.selectedIndex = 0;
-      }
       document.search.lnqualify.selectedIndex = 0;
       document.search.fnqualify.selectedIndex = 0;
       document.search.nnqualify.selectedIndex = 0;

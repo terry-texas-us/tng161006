@@ -2,14 +2,14 @@
 
 var searchtimer;
 
-function closePersonPreview(personID, tree, event) {
+function closePersonPreview(personID, event) {
     'use strict';
     clearTimeout(searchtimer);
-    var entitystr = tree + '_' + personID;
+    var entitystr = '_' + personID;
     if (event) {
         entitystr += "_" + event;
     }
-    //new Effect.Fade('prev'+entitystr,{duration:.01});
+
     $('#prev' + entitystr).css('visibility', 'hidden');
 }
 
@@ -17,17 +17,16 @@ $(document).ready(function () {
     'use strict';
     $('a.pers').each(function (index, item) {
         var matches = /p(\w*)_t(\w*):*(\w*)/.exec(item.id),
-          personID = matches[1],
-          tree = matches[2],
-          event = matches[3];
+            personID = matches[1],
+            event = matches[3];
         item.onmouseover = function () {
-            searchtimer = setTimeout('showPersonPreview(\'' + personID + '\',\'' + tree + '\',\'' + event + '\')', 1000);
+            searchtimer = setTimeout('showPersonPreview(\'' + personID + '\',\'' + event + '\')', 1000);
         };
         item.onmouseout = function () {
-            closePersonPreview(personID, tree, event);
+            closePersonPreview(personID, event);
         };
         item.onclick = function () {
-            closePersonPreview(personID, tree, event);
+            closePersonPreview(personID, event);
         };
     });
     $('a.pl').each(function (index, item) {
@@ -35,10 +34,10 @@ $(document).ready(function () {
     });
 });
 
-function showPersonPreview(personID, tree, event) {
+function showPersonPreview(personID, event) {
     'use strict';
-    var entitystr = tree + '_' + personID,
-      params;
+    var entitystr = '_' + personID,
+        params;
     if (event) {
         entitystr += "_" + event;
     }
@@ -46,7 +45,7 @@ function showPersonPreview(personID, tree, event) {
     if (!$('#prev' + entitystr).html()) {
         $('#prev' + entitystr).html('<div class="person-inner" id="ld' + entitystr + '"><img src="img/spinner.gif" style="border:0" alt=""> ' + textSnippet('loading') + '</div>');
 
-        params = {personID: personID, tree: tree};
+        params = {personID: personID};
         $.ajax({
             url: 'ajx_perspreview.php',
             data: params,

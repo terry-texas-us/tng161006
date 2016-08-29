@@ -21,7 +21,7 @@ $headSection->setTitle(uiTextSnippet('places'));
     $navList->appendItem([true, "placesBrowse.php", uiTextSnippet('browse'), "findplace"]);
     $navList->appendItem([$allowAdd, "placesAdd.php", uiTextSnippet('add'), "addplace"]);
     $navList->appendItem([$allowEdit && $allowDelete, "placesMerge.php", uiTextSnippet('merge'), "merge"]);
-    // [ts] $navList->appendItem([$allowEdit, "admin_geocodeform.php", uiTextSnippet('geocode'), "geo"]);
+    // $navList->appendItem([$allowEdit, "admin_geocodeform.php", uiTextSnippet('geocode'), "geo"]);
     echo $navList->build("geo");
     ?>
 

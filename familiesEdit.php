@@ -498,8 +498,7 @@ var tnglitbox;
     var params = {
       sequence: childrenlist.join(','),
       action: 'childorder',
-      familyID: document.form1.familyID.value,
-      tree: document.form1.tree.value
+      familyID: document.form1.familyID.value
     };
     $.ajax({
       url: 'ajx_updateorder.php',
@@ -514,7 +513,6 @@ var tnglitbox;
       var params = {
         personID: personID,
         familyID: document.form1.familyID.value,
-        desc: document.form1.tree.value,
         t: action
       };
       $.ajax({

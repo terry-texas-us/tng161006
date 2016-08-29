@@ -239,9 +239,6 @@ $headSection->setTitle(uiTextSnippet('places'));
 
     function resetPlacesSearch() {
       document.form1.searchstring.value = '';
-      if (document.form1.tree) {
-        document.form1.tree.selectedIndex = 0;
-      }
       document.form1.exactmatch.checked = false;
       document.form1.nocoords.checked = false;
       document.form1.temples.checked = false;

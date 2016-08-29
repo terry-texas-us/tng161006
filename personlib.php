@@ -96,24 +96,24 @@ function getCitations($persfamID, $shortcite = 1) {
     $citationsctr++;
     $citations[$key] .= $citations[$key] ? ",$citationsctr" : $citationsctr;
 
-    if ($citrow['shorttitle']) {
-      if ($newstring) {
-        $newstring .= ", ";
-      }
-      $newstring .= $citrow['shorttitle'];
-    } else {
-      if ($citrow['title']) {
-        if ($newstring) {
-          $newstring .= ", ";
-        }
-        $newstring .= $citrow['title'];
-      }
-    }
     if ($citrow['author']) {
       if ($newstring) {
         $newstring .= ", ";
       }
       $newstring .= $citrow['author'];
+    }
+    if ($citrow['title']) {
+      if ($newstring) {
+        $newstring .= ", ";
+      }
+      $newstring .= $citrow['title'];
+    } else {
+      if ($citrow['shorttitle']) {
+        if ($newstring) {
+          $newstring .= ", ";
+        }
+        $newstring .= $citrow['shorttitle'];
+      }
     }
     if ($citrow['publisher']) {
       if ($newstring) {
