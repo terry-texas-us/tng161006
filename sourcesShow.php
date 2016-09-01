@@ -8,12 +8,7 @@ function doSourceSearch($instance, $pagenav) {
 
   $str = "<div>\n";
   $str .= buildFormElement("sourcesShow", "get", "SourceSearch$instance");
-  $str .= "<input name='sourcesearch' type='text' value=\"$sourcesearch\"> \n";
-  $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . "\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
   $str .= $pagenav;
-  if ($sourcesearch) {
-    $str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='sourcesShow.php'>" . uiTextSnippet('browseallsources') . "</a>";
-  }
   $str .= "</form></div>\n";
 
   return $str;
@@ -69,14 +64,29 @@ $headSection->setTitle(uiTextSnippet('sources'));
     <h2><img class='icon-md' src='svg/archive.svg'><?php echo uiTextSnippet('sources'); ?></h2>
     <br clear='left'>
     <?php
-
-    if ($totrows) {
-      echo "<p><span>" . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</span></p>";
-    }
     $pagenav = buildSearchResultPagination($totrows, "sourcesShow.php?sourcesearch=$sourcesearch&amp;offset", $maxsearchresults, $max_browsesource_pages);
     if ($pagenav || $sourcesearch) {
-      echo doSourceSearch(1, $pagenav);
-      echo "<br>\n";
+    ?>      
+      <form action='sourcesShow.php' method="get" name='SourceSearch1'>
+        <div class='row'>
+          <div class='col-md-6'>
+            <input class='form-control' name='sourcesearch' type='text' value='<?php echo $sourcesearch; ?>'>
+          </div>
+          <div class='col-md-3'>
+            <input class='form-control' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
+          </div>
+          <div class='col-md-3'>
+            <?php if ($sourcesearch) { ?>
+              <a href='sourcesShow.php'><?php echo uiTextSnippet('browseallsources'); ?></a>
+            <?php } ?>
+          </div>
+        </div>
+      </form>
+      <br>
+    <?php 
+    }
+    if ($totrows) {
+      echo "<p><span>" . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</span></p>";
     }
     ?>
     <table class="table table-sm table-striped">
@@ -92,7 +102,7 @@ $headSection->setTitle(uiTextSnippet('sources'));
         echo "<tr>\n";
           echo "<td>$i</td>\n";
           echo "<td><a href='sourcesShowSource.php?sourceID={$row['sourceID']}'>{$row['sourceID']}</a></td>\n";
-          echo "<td><em>$sourcetitle</em>, {$row['author']}</td>\n";
+          echo "<td>$sourcetitle, {$row['author']}</td>\n";
         echo "</tr>\n";
         $i++;
       }
@@ -100,11 +110,12 @@ $headSection->setTitle(uiTextSnippet('sources'));
       ?>
     </table>
     <br>
-    <?php
-    if ($pagenav || $sourcesearch) {
-      echo doSourceSearch(2, $pagenav) . "<br>\n";
-    }
-    ?>
+    <?php if ($pagenav || $sourcesearch) { ?>
+      <form action='sourcesShow.php' method="get" name='SourceSearch2'>
+        <?php echo $pagenav; ?>
+      </form>
+      <br>
+    <?php } ?>
     <?php echo $publicFooterSection->build(); ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>

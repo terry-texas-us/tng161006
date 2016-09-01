@@ -40,8 +40,6 @@ $publicHeaderSection->setImageUrl($tmp['headimage']);
 $publicNavSection = new PublicNavElementSection('public');
 
 $publicFooterSection = new FooterElementSection('public');
-$publicFooterSection->poweredBy = uiTextSnippet('pwrdby');
-$publicFooterSection->writtenBy = uiTextSnippet('writby');
 
 function getSmallPhoto($medialink) {
   global $rootpath;

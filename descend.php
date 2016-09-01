@@ -521,10 +521,8 @@ function getData($key, $sex, $level) {
       $stats['slots'] += $famslots;
       $vkey = $row['familyID'] . "-$level";
       $vslots[$vkey] = $famslots;
-      //echo "key=$vkey, slots=" . $vslots[$vkey] . "<br>";
       $stats['es'] = $fam_es;
       $vendspouses[$vkey] = $stats[es];
-      //echo "fam=$row[familyID], stats = $stats[es], fames=$fames, es=$endspouseslots, slots=$famslots <br>";
     }
   }
   tng_free_result($result);
@@ -532,7 +530,6 @@ function getData($key, $sex, $level) {
     $stats['slots'] = 1;
     $vkey = $key . "-$level";
     $vslots[$vkey] = 1;
-    //echo "key=$vkey, slots=" . $vslots[$vkey] . "<br>";
     $stats['es'] = 0; //do I need this?
     $vendspouses[$vkey] = 0;
   }

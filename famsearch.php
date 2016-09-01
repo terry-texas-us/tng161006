@@ -62,9 +62,9 @@ $mybooltext = $mybool == "AND" ? uiTextSnippet('cap_and') : uiTextSnippet('cap_o
 
 if ($order == "marr") {
   $orderstr = "marrdatetr, marrplace, father.lastname, father.firstname";
-  $marrsort = "<a href=\"search.php?$currargs&order=marrup\">" . uiTextSnippet('married') . " <img src=\"img/tng_sort_desc.gif\" width=\"15\" height=\"8\"></a>";
+  $marrsort = "<a href=\"famsearch.php?$currargs&amp;order=marrup\">" . uiTextSnippet('married') . " <img src='img/tng_sort_desc.gif' width='15' height='8'></a>";
 } else {
-  $marrsort = "<a href=\"search.php?$currargs&order=marr\">" . uiTextSnippet('married') . " <img src=\"img/tng_sort_asc.gif\" width=\"15\" height=\"8\"></a>";
+  $marrsort = "<a href=\"famsearch.php?$currargs&amp;order=marr\">" . uiTextSnippet('married') . " <img src='img/tng_sort_asc.gif' width='15' height='8'></a>";
   if ($order == "marrup") {
     $orderstr = "marrdatetr DESC, marrplace DESC, father.lastname, father.firstname";
   }
@@ -72,9 +72,9 @@ if ($order == "marr") {
 
 if ($order == "div") {
   $orderstr = "divdatetr, divplace, father.lastname, father.firstname, marrdatetr";
-  $divsort = "<a href=\"search.php?$currargs&order=divup\">" . uiTextSnippet('divorced') . " <img src=\"img/tng_sort_desc.gif\" width=\"15\" height=\"8\"></a>";
+  $divsort = "<a href=\"famsearch.php?$currargs&amp;order=divup\">" . uiTextSnippet('divorced') . " <img src='img/tng_sort_desc.gif' width='15' height='8'></a>";
 } else {
-  $divsort = "<a href=\"search.php?$currargs&order=div\">" . uiTextSnippet('divorced') . " <img src=\"img/tng_sort_asc.gif\" width=\"15\" height=\"8\"></a>";
+  $divsort = "<a href=\"famsearch.php?$currargs&amp;order=div\">" . uiTextSnippet('divorced') . " <img src='img/tng_sort_asc.gif' width='15' height='8'></a>";
   if ($order == "divup") {
     $orderstr = "divdatetr DESC, divplace DESC, father.lastname, father.firstname, marrdatetr";
   }
@@ -82,9 +82,9 @@ if ($order == "div") {
 
 if ($order == "fname") {
   $orderstr = "father.lastname, father.firstname, marrdatetr";
-  $fnamesort = "<a href=\"search.php?$currargs&order=fnameup\">" . uiTextSnippet('fathername') . " <img src=\"img/tng_sort_desc.gif\" width=\"15\" height=\"8\"></a>";
+  $fnamesort = "<a href=\"famsearch.php?$currargs&amp;order=fnameup\">" . uiTextSnippet('fathername') . " <img src='img/tng_sort_desc.gif' width='15' height='8'></a>";
 } else {
-  $fnamesort = "<a href=\"search.php?$currargs&order=fname\">" . uiTextSnippet('fathername') . " <img src=\"img/tng_sort_asc.gif\" width=\"15\" height=\"8\"></a>";
+  $fnamesort = "<a href=\"famsearch.php?$currargs&amp;order=fname\">" . uiTextSnippet('fathername') . " <img src=\"img/tng_sort_asc.gif\" width=\"15\" height=\"8\"></a>";
   if ($order == "fnameup") {
     $orderstr = "father.lastname DESC, father.firstname DESC, marrdatetr";
   }
@@ -92,16 +92,18 @@ if ($order == "fname") {
 
 if ($order == "mname") {
   $orderstr = "mother.lastname, mother.firstname, marrdatetr";
-  $mnamesort = "<a href=\"search.php?$currargs&order=mnameup\">" . uiTextSnippet('mothername') . " <img src=\"img/tng_sort_desc.gif\" width=\"15\" height=\"8\"></a>";
+  $mnamesort = "<a href=\"famsearch.php?$currargs&amp;order=mnameup\">" . uiTextSnippet('mothername') . " <img src='img/tng_sort_desc.gif' width='15' height='8'></a>";
 } else {
-  $mnamesort = "<a href=\"search.php?$currargs&order=mname\">" . uiTextSnippet('mothername') . " <img src=\"img/tng_sort_asc.gif\" width=\"15\" height=\"8\"></a>";
+  $mnamesort = "<a href=\"famsearch.php?$currargs&amp;order=mname\">" . uiTextSnippet('mothername') . " <img src=\"img/tng_sort_asc.gif\" width=\"15\" height=\"8\"></a>";
   if ($order == "mnameup") {
     $orderstr = "mother.lastname DESC, mother.firstname DESC, marrdatetr";
   }
 }
 
 function buildCriteria($column, $colvar, $qualifyvar, $qualifier, $value, $textstr) {
-  global $lnprefixes, $criteria_limit, $criteria_count;
+  global $lnprefixes;
+  global $criteria_limit;
+  global $criteria_count;
 
   if ($qualifier == 'exists' || $qualifier == "dnexist") {
     $value = $usevalue = "";
@@ -127,7 +129,6 @@ function buildCriteria($column, $colvar, $qualifyvar, $qualifier, $value, $texts
 
   addtoQuery($textstr, $colvar, $criteria, $qualifyvar, $qualifier, $qualifystr, $value);
 }
-
 $querystring = "";
 
 if ($myflastname || $flnqualify == 'exists' || $flnqualify == "dnexist") {
@@ -175,20 +176,17 @@ $dontdo = ["MARR", "DIV"];
 $cejoin = doCustomEvents('F');
 
 $gotInput = $mymarrplace || $mydivplace || $mymarryear || $mydivyear || $ecount;
-$more = getLivingPrivateRestrictions('F', false, $gotInput);
+$livingPrivateCondition = getLivingPrivateRestrictions('f', false, $gotInput);
 
-$allwhere = "";
-if ($more) {
+if ($livingPrivateCondition) {
   if ($allwhere) {
     $allwhere = "($allwhere) AND ";
   }
-  $allwhere .= $more;
+  $allwhere .= $livingPrivateCondition;
 }
 if ($allwhere) {
-  $allwhere = "WHERE " . $allwhere . " AND ";
+  $allwhere = "WHERE " . $allwhere;
   $querystring = uiTextSnippet('text_for') . " $querystring";
-} else {
-  $allwhere = "WHERE ";
 }
 
 $max_browsesearch_pages = 5;
@@ -203,11 +201,11 @@ if ($offset) {
 
 $query = "SELECT f.ID, familyID, husband, wife, marrdate, marrplace, divdate, divplace, f.living, f.private, f.branch, father.lastname AS flastname, father.lnprefix AS flnprefix, father.firstname AS ffirstname, father.living AS fliving, father.private AS fprivate, father.branch AS fbranch, mother.lastname AS mlastname, mother.lnprefix AS mlnprefix, mother.firstname AS mfirstname, mother.living AS mliving, mother.private AS fprivate, mother.branch AS mbranch FROM ($families_table AS f) $cejoin "
     . "LEFT JOIN $people_table AS father ON husband = father.personID "
-    . "LEFT JOIN $people_table AS mother ON wife = mother.personID $allwhere (1=1) "
+    . "LEFT JOIN $people_table AS mother ON wife = mother.personID $allwhere "
     . "ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
 $query2 = "SELECT count(f.ID) AS fcount FROM ($families_table AS f) $cejoin "
     . "LEFT JOIN $people_table AS father ON husband = father.personID LEFT JOIN $people_table AS mother ON wife = mother.personID "
-    . "$allwhere (1=1)";
+    . "$allwhere";
 
 $result = tng_query($query);
 $numrows = tng_num_rows($result);
@@ -241,7 +239,7 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
     <?php echo $publicHeaderSection->build(); ?>
     <h2><img class='icon-md' src='svg/magnifying-glass.svg'><?php echo uiTextSnippet('searchresults'); ?></h2>
     <?php
-    $logstring = "<a href=\"search.php?" . $_SERVER['QUERY_STRING'] . "\">" . xmlcharacters(uiTextSnippet('searchresults') . " $querystring") . "</a>";
+    $logstring = "<a href=\"famsearch.php?" . $_SERVER['QUERY_STRING'] . "\">" . xmlcharacters(uiTextSnippet('searchresults') . " $querystring") . "</a>";
     writelog($logstring);
     preparebookmark($logstring);
 
@@ -264,7 +262,6 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
       </thead>
       <?php
       $i = $offsetplus;
-      $chartlink = "<img src=\"img/Chart.gif\" class=\"chartimg\">";
       while ($row = tng_fetch_assoc($result)) {
         //assemble frow and mrow, override family living flag if allow_living for either of these is no
         $frow = [
@@ -294,29 +291,35 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
         $rights = determineLivingPrivateRights($row);
         if ($rights['both']) {
           $marrdate = $row['marrdate'] ? displayDate($row['marrdate']) : "";
-          $marrplace = $row['marrplace'] ? $row['marrplace'] . " " . placeImage($row['marrplace']) : "";
+          $marrplace = $row['marrplace'] ? buildSilentPlaceLink($row['marrplace']) : "";
           $divdate = $row['divdate'] ? displayDate($row['divdate']) : "";
-          $divplace = $row['divplace'] ? $row['divplace'] . " " . placeImage($row['divplace']) : "";
+          $divplace = $row['divplace'] ? buildSilentPlaceLink($row['divplace']) : "";
         } else {
           $marrdate = $marrplace = $divdate = $divplace = $livingOK = "";
         }
         $fname = getNameRev($frow);
         $mname = getNameRev($mrow);
 
-        $famidstr = "<a href=\"familiesShowFamily.php?familyID={$row['familyID']}\" class=\"fam\" id=\"f{$row['familyID']}_t\">{$row['familyID']} </a>";
+        $familyID = $row['familyID'];
+        $famidstr = "<a href=\"familiesShowFamily.php?familyID={$familyID}\" class='fam' id=\"f{$familyID}\">{$familyID} </a>";
 
         echo "<tr>";
         echo "<td>$i</td>\n";
         $i++;
         echo "<td>$famidstr";
-          echo "<div class='person-img' id=\"mi_{$row['familyID']}\">\n";
-            echo "<div class='person-prev' id=\"prev_{$row['familyID']}\"></div>\n";
+          echo "<div class='person-img' id=\"mi_{$familyID}\">\n";
+            echo "<div class='person-prev' id=\"prev_{$familyID}\"></div>\n";
           echo "</div>\n";
+
         echo "</td>";
-        echo "<td>$fname</td><td>$mname</td>";
-        echo "<td>$marrdate</td><td>$marrplace</td>";
+        
+        echo "<td><a class='family-link-silent' href='familiesShowFamily.php?familyID={$familyID}'>$fname</a></td>\n";
+        echo  "<td><a class='family-link-silent' href='familiesShowFamily.php?familyID={$familyID}'>$mname</a></td>";
+        echo "<td>$marrdate</td>\n";
+        echo "<td>$marrplace</td>";
         if ($mydivyear || $mydivplace) {
-          echo "<td>$divdate </td><td>$divplace</td>";
+          echo "<td>$divdate</td>\n";
+          echo "<td>$divplace</td>";
         }
         echo "</tr>\n";
       }
@@ -324,7 +327,7 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
       ?>
     </table>
     <?php
-    echo buildSearchResultPagination($totrows, "search.php?$urlstring&amp;mybool=$mybool&amp;nr=$maxsearchresults&amp;showspouse=$showspouse&amp;showdeath=$showdeath&amp;offset", $maxsearchresults, $max_browsesearch_pages);
+    echo buildSearchResultPagination($totrows, "famsearch.php?$urlstring&amp;mybool=$mybool&amp;nr=$maxsearchresults&amp;showspouse=$showspouse&amp;showdeath=$showdeath&amp;offset", $maxsearchresults, $max_browsesearch_pages);
     echo $publicFooterSection->build();
     ?>
   </section> <!-- .container -->
@@ -333,46 +336,44 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
     var searchtimer;
     $(document).ready(function () {
       $('a.fam').each(function (index, item) {
-        var matches = /f(\w*)_t(\w*)/.exec(item.id);
+        var matches = /f(\w*)/.exec(item.id);
         var familyID = matches[1];
-        var tree = matches[2];
         item.onmouseover = function () {
-          searchtimer = setTimeout('showFamilyPreview(\'' + familyID + '\',\'' + tree + '\')', 1000);
+          searchtimer = setTimeout('showFamilyPreview(\'' + familyID + '\')', 1000);
         };
         item.onmouseout = function () {
-          closeFamilyPreview(familyID, tree);
+          closeFamilyPreview(familyID);
         };
         item.onclick = function () {
-          closeFamilyPreview(familyID, tree);
+          closeFamilyPreview(familyID);
         };
-      });
-      $('a.fl').each(function (index, item) {
-        item.title = textSnippet('findplaces');
       });
     });
 
-    function showFamilyPreview(familyID, tree) {
-      var entitystr = tree + "_" + familyID;
-      $('#prev' + entitystr).css('visibility', 'visible');
-      if (!$('#prev' + entitystr).html()) {
-        $('#prev' + entitystr).html('<div id="ld' + entitystr + '" class="person-inner"><img src="img/spinner.gif" style="border:0"> ' + textSnippet('loading') + '</div>');
-        var params = {familyID: familyID, tree: tree};
-        $.ajax({
-          url: 'ajx_fampreview.php',
-          data: params,
-          dataType: 'html',
-          success: function (req) {
-            $('#ld' + entitystr).html(req);
-          }
-        });
-      }
-      return false;
+    function showFamilyPreview(familyID) {
+        'use strict';
+        var entitystr = "_" + familyID;
+        $('#prev' + entitystr).css('visibility', 'visible');
+        if (!$('#prev' + entitystr).html()) {
+            $('#prev' + entitystr).html('<div id="ld' + entitystr + '" class="person-inner"><img src="img/spinner.gif" style="border:0"> ' + textSnippet('loading') + '</div>');
+            var params = {familyID: familyID};
+            $.ajax({
+                url: 'ajx_fampreview.php',
+                data: params,
+                dataType: 'html',
+                success: function (req) {
+                    $('#ld' + entitystr).html(req);
+                }
+            });
+        }
+        return false;
     }
 
-    function closeFamilyPreview(familyID, tree) {
-      clearTimeout(searchtimer);
-      var entitystr = tree + '_' + familyID;
-      $('#prev' + entitystr).css('visibility', 'hidden');
+    function closeFamilyPreview(familyID) {
+        'use strict';
+        clearTimeout(searchtimer);
+        var entitystr = '_' + familyID;
+        $('#prev' + entitystr).css('visibility', 'hidden');
     }
   </script>
 </body>

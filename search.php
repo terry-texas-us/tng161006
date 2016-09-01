@@ -204,13 +204,13 @@ $dontdo = ["ADDR", "BIRT", "CHR", "DEAT", "BURI", "NICK", "TITL", "NSFX"];
 $cejoin = doCustomEvents('I');
 
 $gotInput = $mytitle || $myprefix || $mysuffix || $mynickname || $mybirthplace || $mydeathplace || $mybirthyear || $mydeathyear || $ecount;
-$more = getLivingPrivateRestrictions("p", $myfirstname, $gotInput);
+$livingPrivateCondition = getLivingPrivateRestrictions("p", $myfirstname, $gotInput);
 
-if ($more) {
+if ($livingPrivateCondition) {
   if ($allwhere) {
     $allwhere = "($allwhere) AND ";
   }
-  $allwhere .= $more;
+  $allwhere .= $livingPrivateCondition;
 }
 if ($allwhere) {
   $allwhere = "WHERE " . $allwhere;
@@ -319,7 +319,6 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
       <?php
       $i = $offsetplus;
       
-      $chartlink = "<img src='img/Chart.gif' class='chartimg' alt=''>";
       while ($row = tng_fetch_assoc($result)) {
         $rights = determineLivingPrivateRights($row);
         $row['allow_living'] = $rights['living'];
@@ -327,11 +326,11 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
         if ($rights['both']) {
           if ($row['birthdate'] || ($row['birthplace'] && !$row['altbirthdate'])) {
             $birthdate = uiTextSnippet('birthabbr', ['html' => 'strong']) . " " . displayDate($row['birthdate']);
-            $birthplace = $row['birthplace'] ? $row['birthplace'] . " " . placeImage($row['birthplace']) : "";
+            $birthplace = $row['birthplace'] ? buildSilentPlaceLink($row['birthplace']) : "";
           } else {
             if ($row['altbirthdate'] || $row['altbirthplace']) {
               $birthdate = uiTextSnippet('chrabbr', ['html' => 'strong']) . " " . displayDate($row['altbirthdate']);
-              $birthplace = $row['altbirthplace'] ? $row['altbirthplace'] . " " . placeImage($row['altbirthplace']) : "";
+              $birthplace = $row['altbirthplace'] ? buildSilentPlaceLink($row['altbirthplace']) : "";
             } else {
               $birthdate = "";
               $birthplace = "";
@@ -339,11 +338,11 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
           }
           if ($row['deathdate'] || ($row['deathplace'] && !$row['burialdate'])) {
             $deathdate = uiTextSnippet('deathabbr', ['html' => 'strong']) . " " . displayDate($row['deathdate']);
-            $deathplace = $row['deathplace'] ? $row['deathplace'] . " " . placeImage($row['deathplace']) : "";
+            $deathplace = $row['deathplace'] ? buildSilentPlaceLink($row['deathplace']) : "";
           } else {
             if ($row['burialdate'] || $row['burialplace']) {
               $deathdate = uiTextSnippet('burialabbr', ['html' => 'strong']) . " " . displayDate($row['burialdate']);
-              $deathplace = $row['burialplace'] ? $row['burialplace'] . " " . placeImage($row['burialplace']) : "";
+              $deathplace = $row['burialplace'] ? $row['burialplace'] . " " . buildSilentPlaceLink($row['burialplace']) : "";
             } else {
               $deathdate = "";
               $deathplace = "";
@@ -356,18 +355,13 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
         } else {
           $prefix = $suffix = $title = $nickname = $birthdate = $birthplace = $deathdate = $deathplace = "";
         }
+        $personID = $row['personID'];
         echo "<tr>";
         $name = getNameRev($row);
         echo "<td>$i</td>\n";
         $i++;
         echo "<td>\n";
-          echo "<div class='person-img' id=\"mi_{$row['personID']}\">\n";
-            echo "<div class='person-prev' id=\"prev_{$row['personID']}\"></div>\n";
-          echo "</div>\n";
-          echo "<a href=\"pedigree.php?personID={$row['personID']}\">$chartlink</a> ";
-          echo "<a href=\"peopleShowPerson.php?personID={$row['personID']}\" class=\"pers\" id=\"p{$row['personID']}_t\">$name</a>";
-          echo "<br>";
-          echo "{$row['personID']}";
+        echo "<a tabindex='0' class='btn btn-sm btn-outline-primary person-popover' role='button' data-toggle='popover' data-placement='bottom' data-person-id='$personID'>$name</a>\n";
         echo "</td>";
 
         if ($showspouse) {
@@ -422,5 +416,10 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
   <script src="js/search.js"></script>
+  <script>
+   $(function () {
+        $('[data-toggle="popover"]').popover();
+    });
+  </script>
 </body>
 </html>

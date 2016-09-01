@@ -20,7 +20,7 @@ tng_free_result($result);
 header("Content-type:text/html; charset=" . $session_charset);
 
 initMediaTypes();
-//echo "<div style=\"position:absolute;top:50%;margin-top:-200px\">\n";
+
 $photostr = showSmallPhoto($personID, $namestr, $rights['both'], 0, false, $row['sex']);
 echo tng_DrawHeading($photostr, $namestr, getYears($row));
 
@@ -73,7 +73,7 @@ if ($parents && tng_num_rows($parents)) {
 
     if ($gotfather) {
       $fathrow = tng_fetch_assoc($gotfather);
-      $birthinfo = getBirthInfo($fathrow, 1);
+      $birthinfo = getBirthInfo($fathrow);
       $frights = determineLivingPrivateRights($fathrow);
       $fathrow['allow_living'] = $frights['living'];
       $fathrow['allow_private'] = $frights['private'];
@@ -98,7 +98,7 @@ if ($parents && tng_num_rows($parents)) {
 
     if ($gotmother) {
       $mothrow = tng_fetch_assoc($gotmother);
-      $birthinfo = getBirthInfo($mothrow, 1);
+      $birthinfo = getBirthInfo($mothrow);
       $mrights = determineLivingPrivateRights($mothrow);
       $mothrow['allow_living'] = $mrights['living'];
       $mothrow['allow_private'] = $mrights['private'];
@@ -177,7 +177,7 @@ while ($marriagerow = tng_fetch_assoc($marriages)) {
   if ($marriagerow[$spouse]) {
     $spouseresult = getPersonData($marriagerow[$spouse]);
     $spouserow = tng_fetch_assoc($spouseresult);
-    $birthinfo = getBirthInfo($spouserow, 1);
+    $birthinfo = getBirthInfo($spouserow);
     $srights = determineLivingPrivateRights($spouserow);
     $spouserow['allow_living'] = $srights['living'];
     $spouserow['allow_private'] = $srights['private'];
@@ -228,7 +228,7 @@ while ($marriagerow = tng_fetch_assoc($marriages)) {
     $persontext .= "<table cellpadding = \"0\" cellspacing = \"0\">\n";
     while ($child = tng_fetch_assoc($children)) {
       $ifkids = $child['haskids'] ? "<strong>+</strong>" : "&nbsp;";
-      $birthinfo = getBirthInfo($child, 1);
+      $birthinfo = getBirthInfo($child);
       $crights = determineLivingPrivateRights($child);
       $child['allow_living'] = $crights['living'];
       $child['allow_private'] = $crights['private'];

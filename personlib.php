@@ -3,15 +3,9 @@
 $nodate_all = "0000-00-00";
 $eventctr_all = 1;
 
-function getBirthInfo($thisperson, $noicon = null) {
+function getBirthInfo($thisperson) {
   $birthstring = "";
 
-  if (!$noicon) {
-    $findPlaces_ui = uiTextSnippet('findplaces');
-    $icon = "<img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt='$findPlaces_ui'>";
-    $placelinkbegin = " <a href='placesearch.php?psearch=";
-    $placelinkend = "' title='$findPlaces_ui'>$icon</a>";
-  }
   if ($thisperson['birthdate'] || ($thisperson['birthplace'] && !$thisperson['altbirthdate'])) {
     $birthstring .= ", " . uiTextSnippet('birthabbr', ['html' => 'strong']) . " ";
     if ($thisperson['birthdate']) {
@@ -21,10 +15,7 @@ function getBirthInfo($thisperson, $noicon = null) {
       if ($thisperson['birthdate']) {
         $birthstring .= ", ";
       }
-      $birthstring .= $thisperson['birthplace'];
-      if (!$noicon) {
-        $birthstring .= $placelinkbegin . urlencode($thisperson['birthplace']) . $placelinkend;
-      }
+      $birthstring .= buildSilentPlaceLink($thisperson['birthplace']);
     }
   } else {
     if ($thisperson['altbirthdate'] || $thisperson['altbirthplace']) {
@@ -36,40 +27,33 @@ function getBirthInfo($thisperson, $noicon = null) {
         if ($thisperson['altbirthdate']) {
           $birthstring .= ", ";
         }
-        $birthstring .= $thisperson['altbirthplace'];
-        if (!$noicon) {
-          $birthstring .= $placelinkbegin . urlencode($thisperson['altbirthplace']) . $placelinkend;
-        }
+        $birthstring .= buildSilentPlaceLink($thisperson['altbirthplace']);
       }
     }
   }
-  //the "noicon" flag is only set in the person preview screen. We don't want to see death info there (to keep it short)
-  if (!$noicon) {
-    if ($thisperson['deathdate'] || ($thisperson['deathplace'] && !$thisperson['burialdate'])) {
-      $birthstring .= ", " . uiTextSnippet('deathabbr', ['html' => 'strong']) . " ";
+
+  if ($thisperson['deathdate'] || ($thisperson['deathplace'] && !$thisperson['burialdate'])) {
+    $birthstring .= ", " . uiTextSnippet('deathabbr', ['html' => 'strong']) . " ";
+    if ($thisperson['deathdate']) {
+      $birthstring .= displayDate($thisperson['deathdate']);
+    }
+    if ($thisperson['deathplace']) {
       if ($thisperson['deathdate']) {
-        $birthstring .= displayDate($thisperson['deathdate']);
+        $birthstring .= ", ";
       }
-      if ($thisperson['deathplace']) {
-        if ($thisperson['deathdate']) {
+      $birthstring .= buildSilentPlaceLink($thisperson['deathplace']);
+    }
+  } else {
+    if ($thisperson['burialdate'] || $thisperson['burialplace']) {
+      $birthstring .= ", " . uiTextSnippet('burialabbr', ['html' => 'strong']) . " ";
+      if ($thisperson['burialdate']) {
+        $birthstring .= displayDate($thisperson['burialdate']);
+      }
+      if ($thisperson['burialplace']) {
+        if ($thisperson['burialdate']) {
           $birthstring .= ", ";
         }
-        $birthstring .= $thisperson['deathplace'];
-        $birthstring .= $placelinkbegin . urlencode($thisperson['deathplace']) . $placelinkend;
-      }
-    } else {
-      if ($thisperson['burialdate'] || $thisperson['burialplace']) {
-        $birthstring .= ", " . uiTextSnippet('burialabbr', ['html' => 'strong']) . " ";
-        if ($thisperson['burialdate']) {
-          $birthstring .= displayDate($thisperson['burialdate']);
-        }
-        if ($thisperson['burialplace']) {
-          if ($thisperson['burialdate']) {
-            $birthstring .= ", ";
-          }
-          $birthstring .= $thisperson['burialplace'];
-          $birthstring .= $placelinkbegin . urlencode($thisperson['burialplace']) . $placelinkend;
-        }
+        $birthstring .= buildSilentPlaceLink($thisperson['burialplace']);
       }
     }
   }
@@ -472,7 +456,7 @@ function setEvent($data, $datetr) {
 
     $safeplace = tng_real_escape_string($data['place']);
     $query = "SELECT place, placelevel, latitude, longitude, zoom, notes FROM $places_table "
-        . "WHERE $places_table.place = '$safeplace' and (latitude is not null and latitude != '') and (longitude is not null and longitude != '')";
+        . "WHERE $places_table.place = '$safeplace' AND (latitude is not null and latitude != '') AND (longitude is not null and longitude != '')";
     $custevents = tng_query($query);
 
     $numrows = tng_num_rows($custevents);
@@ -564,34 +548,35 @@ function showEvent($data) {
   $cite = $data['entity'] ? reorderCitation($data['entity'] . "_" . $data['event']) : "";
 
   if ($dateplace) {
+    $output .= "<td>";
     if ($data['date']) {
-      $output .= "<td ";
-      if (!$data['place']) {
-        $output .= " colspan='2'";
-      }
-      $output .= ">" . displayDate($data['date']);
+      $output .= "<span class='date'>";
+      $output .= displayDate($data['date']);
       if (!$data['place'] && $cite) {
         $output .= "<sup> $cite</sup>";
         $cite = "";
       }
+      $output .= "</span>";
+    }
+    $data['stacked'] = true;
+    if ($data['stacked']) {
+      $output .= "<br>";
+    } else {
       $output .= "</td>\n";
+      $output .= "<td>\n";
     }
     if ($data['place']) {
-      $output .= "<td ";
       if ($cite) {
         $cite = "<sup> $cite</sup>";
       }
-      if (!$data['date']) {
-        $output .= " colspan='2'";
-      }
-      $output .= ">" . $data['place'];
-      if (!isset($data['np'])) {
-        $output .= " <a href=\"placesearch.php?psearch=" . urlencode($data['place']) . "\" title=\"" . uiTextSnippet('findplaces') . "\">\n";
-        $output .= "<img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=\"" . uiTextSnippet('findplaces') . "\">\n";
-        $output .= "</a>$cite</td>\n";
+      if (isset($data['np'])) {
+        $output .= "<span class='place'>{$data['place']}</span>";
       } else {
-        $output .= "</td>\n";
+        $output .= " <a  class='place' href=\"placesearch.php?psearch=" . urlencode($data['place']) . "\" title=\"" . uiTextSnippet('findplaces') . "\">\n";
+        $output .= "<span>{$data['place']}</span>";
+        $output .= "</a>$cite</td>\n";
       }
+      $output .= "</td>\n";
       $cite = "";
     }
     $output .= "</tr>\n";

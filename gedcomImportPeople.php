@@ -546,6 +546,9 @@ function getIndividualRecord($personID, $prevlevel) {
   if (!$info['ENDL']['DATETR']) {
     $info['ENDL']['DATETR'] = "0000-00-00";
   }
+  if (!$info['SEX']) {
+    $info['SEX'] = 'U';
+  }
   $query = "INSERT IGNORE INTO $people_table (personID, lastname, lnprefix, firstname, living, private, sex, birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, nickname, title, prefix, suffix, baptdate, baptdatetr, baptplace, confdate, confdatetr, confplace, initdate, initdatetr, initplace, endldate, endldatetr, endlplace, changedate, famc, metaphone, branch, changedby, edituser, edittime) VALUES('$personID', \"{$info['SURN']}\", \"{$info['lnprefix']}\", \"{$info['GIVN']}\", '$living', '$private', \"{$info['SEX']}\", \"" . $info['BIRT']['DATE'] . "\", \"" . $info['BIRT']['DATETR'] . "\", \"" . $info['BIRT']['PLAC'] . "\", \"" . $info['CHR']['DATE'] . "\", \"" . $info['CHR']['DATETR'] . "\", \"" . $info['CHR']['PLAC'] . "\", \"" . $info['DEAT']['DATE'] . "\", \"" . $info['DEAT']['DATETR'] . "\", \"" . $info['DEAT']['PLAC'] . "\", \"" . $info['BURI']['DATE'] . "\", \"" . $info['BURI']['DATETR'] . "\", \"" . $info['BURI']['PLAC'] . "\", $burialtype, \"{$info['NICK']}\", \"{$info['TITL']}\", \"{$info['NPFX']}\", \"{$info['NSFX']}\", \"" . $info['BAPL']['DATE'] . "\", \"" . $info['BAPL']['DATETR'] . "\", '$baplplace', \"" . $info['CONL']['DATE'] . "\", \"" . $info['CONL']['DATETR'] . "\", '$confplace',\"" . $info['INIT']['DATE'] . "\", \"" . $info['INIT']['DATETR'] . "\", \"$initplace\", \"" . $info['ENDL']['DATE'] . "\", \"" . $info['ENDL']['DATETR'] . "\", '$endlplace', '$inschangedt', '$prifamily', '$meta', \"{$savestate['branch']}\", '$currentuser', '', '0' )";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   $success = tng_affected_rows();

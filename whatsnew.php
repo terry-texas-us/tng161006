@@ -83,29 +83,25 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
         <table class='table table-sm table-striped'>
           <thead>
             <tr>
-              <th><?php echo uiTextSnippet('id'); ?></th>
               <th><?php echo uiTextSnippet('lastfirst'); ?></th>
               <th colspan='2'><?php echo($tngconfig['hidechr'] ? uiTextSnippet('born') : uiTextSnippet('bornchr')); ?></th>
               <th><?php echo uiTextSnippet('lastmodified'); ?></th>
             </tr>
           </thead>
           <?php
-          $chartlinkimg = getimagesize("img/Chart.gif");
-          $chartlink = "<img src='img/Chart.gif' alt='' $chartlinkimg[3]>";
           while ($row = tng_fetch_assoc($result)) {
             $rights = determineLivingPrivateRights($row);
             $row['allow_living'] = $rights['living'];
             $row['allow_private'] = $rights['private'];
             $namestr = getNameRev($row);
-            $birthplacestr = "";
             if ($rights['both']) {
               if ($row['birthdate'] || $row['birthplace']) {
                 $birthdate = uiTextSnippet('birthabbr') . " " . displayDate($row['birthdate']);
-                $birthplace = $row['birthplace'];
+                $birthplace = $row['birthplace']? buildSilentPlaceLink($row['birthplace']) : "";
               } else {
                 if ($row['altbirthdate'] || $row['altbirthplace']) {
                   $birthdate = uiTextSnippet('chrabbr') . " " . displayDate($row['altbirthdate']);
-                  $birthplace = $row['altbirthplace'];
+                  $birthplace = $row['altbirthplace'] ? buildSilentPlaceLink($row['altbirthplace']) : "";
                 } else {
                   $birthdate = "";
                   $birthplace = "";
@@ -114,20 +110,11 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
             } else {
               $birthdate = $birthplace = "";
             }
-            if ($birthplace) {
-              $birthplacestr = $birthplace . " <a href=\"placesearch.php?";
-              $birthplacestr .= "psearch=" . urlencode($birthplace) . "\"><img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=''></a>";
-            }
             echo "<tr>\n";
-              echo "<td><a href=\"peopleShowPerson.php?personID={$row['personID']}\">{$row['personID']}</a></td>";
             echo "<td>\n";
-              echo "<div class='person-img' id=\"mi_{$row['personID']}\">\n";
-                echo "<div class='person-prev' id=\"prev_{$row['personID']}\"></div>\n";
-              echo "</div>\n";
-              echo "<a href=\"pedigree.php?personID={$row['personID']}\">$chartlink</a>\n";
-              echo "<a href=\"peopleShowPerson.php?personID={$row['personID']}\" class='pers' id=\"p{$row['personID']}_t\">$namestr</a>\n";
+            echo "<a tabindex='0' class='btn btn-sm btn-outline-primary person-popover' role='button' data-toggle='popover' data-placement='bottom' data-person-id={$row['personID']}>$namestr</a>\n";
             echo "</td>\n";
-            echo "<td>$birthdate</td><td>$birthplacestr</td>";
+            echo "<td>$birthdate</td><td>$birthplace</td>";
             echo "<td>" . displayDate($row['changedatef']) . ($currentuser ? " ({$row['changedby']})" : "") . "</td></tr>\n";
           }
           tng_free_result($result);

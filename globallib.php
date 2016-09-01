@@ -949,8 +949,9 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
   return $photo;
 }
 
-function placeImage($place) {
-  return "<a href=\"placesearch.php?psearch=" . urlencode($place) . "\" class=\"pl\"><img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=''></a>";
+function buildSilentPlaceLink($place) {
+  $findPlacesSnippet = uiTextSnippet('findplaces');
+  return "<a class='place' href='placesearch.php?psearch=" . urlencode($place) . "' title='$findPlacesSnippet'>$place</a>";
 }
 
 function checkMaintenanceMode($area) {

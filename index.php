@@ -22,9 +22,15 @@ $headSection->setTitle($sitename ? "" : uiTextSnippet('mnuheader'));
   <section class='container'>
     <?php
     echo $publicHeaderSection->build();
-    $chooseLanguage = new ChooseLanguage();
-    echo $chooseLanguage->buildForm($instance);
+    echo "<br>";
+    echo "<div class='row'>\n";
+    echo "<div class='offset-md-6 col-md-6'>";
+    $form = new PersonSearchForm();
+    echo $form->get();
+    echo "</div>\n";
+    echo "</div>\n";
     ?>
+    <hr>
     <div class='row'>
       <section>
         <article class='col-lg-4 text-xs-center'>
@@ -43,28 +49,23 @@ $headSection->setTitle($sitename ? "" : uiTextSnippet('mnuheader'));
           </div> <!-- .card -->
         </article>
         <article class='col-lg-4 text-xs-center'>
-          <div class='card'>
-            <img class='card-img-top' style='width:100%' src="<?php echo $tmp['photor']; ?>" alt="">
-            <div class='card-block'>
-              <h3 class='card-title'>
-                <a href="<?php echo $tmp['featurelink2']; ?>"><?php echo getTemplateMessage('phototitler'); ?></a>
-              </h3>
-              <p class='card-text'><?php echo getTemplateMessage('photocaptionr'); ?></p>
-            </div> <!-- .card-block -->
+          <div class='card card-block'>
+            <h3 class='card-header'><?php echo getTemplateMessage('topsurnames'); ?></h3>
+            <?php
+            $nc = new Surname_cloud();
+            $nc->display(32);
+            ?>
           </div> <!-- .card -->
         </article>
       </section>
     </div> <!-- .row -->
-    <div class='card card-block text-xs-center'>
-      <h3 class='card-header'><?php echo getTemplateMessage('topsurnames'); ?></h3>
-      <?php
-      $nc = new Surname_cloud();
-      $nc->display(32);
-      ?>
-    </div> <!-- .card -->
     <?php
-    $form = new PersonSearchForm();
-    echo $form->get();
+    echo "<div class='row'>\n";
+    echo "<div class='offset-md-8 col-md-3'>";
+    $chooseLanguage = new ChooseLanguage();
+    echo $chooseLanguage->buildForm($instance);
+    echo "</div>\n";
+    echo "</div>\n";
     echo $publicFooterSection->build();
     ?>
   </section> <!-- .container -->

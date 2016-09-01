@@ -15,45 +15,35 @@ function closePersonPreview(personID, event) {
 
 $(document).ready(function () {
     'use strict';
-    $('a.pers').each(function (index, item) {
-        var matches = /p(\w*)_t(\w*):*(\w*)/.exec(item.id),
-            personID = matches[1],
-            event = matches[3];
-        item.onmouseover = function () {
-            searchtimer = setTimeout('showPersonPreview(\'' + personID + '\',\'' + event + '\')', 1000);
-        };
-        item.onmouseout = function () {
-            closePersonPreview(personID, event);
-        };
-        item.onclick = function () {
-            closePersonPreview(personID, event);
-        };
-    });
-    $('a.pl').each(function (index, item) {
-        item.title = "<?php echo $text['findplaces']; ?>";
-    });
-});
 
-function showPersonPreview(personID, event) {
-    'use strict';
-    var entitystr = '_' + personID,
-        params;
-    if (event) {
-        entitystr += "_" + event;
-    }
-    $('#prev' + entitystr).css('visibility', 'visible');
-    if (!$('#prev' + entitystr).html()) {
-        $('#prev' + entitystr).html('<div class="person-inner" id="ld' + entitystr + '"><img src="img/spinner.gif" style="border:0" alt=""> ' + textSnippet('loading') + '</div>');
+    $('.popover-dismiss').popover({
+        trigger: 'focus'
+    });
+    
+    $(".person-popover").popover({
+        title: 'Default title',
+        content: 'Default content'
+    });
 
-        params = {personID: personID};
+    $('.person-popover').on('click', function () {
+        var personId = $(this).data('personId');
+        var id = $(this).attr('aria-describedby');
+        var titleStart, titleEnd, title, content;
+
+        var params = {personID : personId};
+
         $.ajax({
-            url: 'ajx_perspreview.php',
+            url: 'ajx_BuildPersonContent.php',
             data: params,
             dataType: 'html',
             success: function (req) {
-                $('#ld' + entitystr).html(req);
+                titleStart = req.search('>') + 1;
+                titleEnd = req.search('</div>');
+                title = req.slice(titleStart, titleEnd);
+                content = req.slice(titleEnd + 6);
+                $('#' + id + ' .popover-title').html(title.trim());
+                $('#' + id + ' .popover-content').html(content.trim());
             }
         });
-    }
-    return false;
-}
+    });
+});

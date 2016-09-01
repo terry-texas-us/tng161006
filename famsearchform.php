@@ -27,6 +27,29 @@ $dontdo = ["MARR", "DIV"];
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
+function buildSelectInputGroup($label, $formName, $selectName, $value, $options, $selected) {
+  $out = "<label for='" . $formName . "'>" . uiTextSnippet($label) . "</label>\n";
+  $out .= "<div class='input-group'>\n";
+  $out .= "<input class='form-control search-qualify-combo' name='" . $formName . "' type='text' value='" . $value . "' placeholder='" . uiTextSnippet($label) . "'>\n";
+  $out .= "<span class='input-group-select'>\n";
+  $out .= "<select class='form-control' name='" . $selectName . "'>\n";
+  foreach ($options as $option) {
+    $out .= "<option value='$option'" . ($selected == $option ? ' selected' : '') . ">" . uiTextSnippet($option) . "</option>\n";
+  }
+  $out .= "</select>\n";
+  $out .= "</span>\n";
+  $out .= "</div>\n";
+  
+  return $out;
+}
+
+$idOptions = ['contains', 'equals', 'startswith', 'endswith'];
+$placeOptions = ['contains', 'equals', 'startswith', 'endswith', 'exists', 'dnexist'];
+$fnOptions = ['contains', 'equals', 'startswith', 'endswith', 'exists', 'dnexist', 'soundexof'];
+$lnOptions = ['contains', 'equals', 'startswith', 'endswith', 'exists', 'dnexist', 'soundexof', 'metaphoneof'];
+
+$yearOptions = ['equals', 'plusminus2', 'plusminus5', 'plusminus10', 'lessthan', 'greaterthan', 'lessthanequal', 'greaterthanequal', 'exists', 'dnexist'];
+
 header("Content-type: text/html; charset=" . $session_charset);
 $headSection->setTitle(uiTextSnippet('searchfams'));
 ?>
@@ -48,193 +71,53 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
           <fieldset>
             <legend><?php echo uiTextSnippet('fathername'); ?></legend>
             <div class='row'>
-              <label class='form-control-label col-sm-2' for='myflastname'><?php echo uiTextSnippet('lastname'); ?>:</label>
-              <div class='col-sm-3'>
-                <select class='form-control' name='flnqualify'>
-                  <?php
-                  $item_array = [[uiTextSnippet('contains'), "contains"], [uiTextSnippet('equals'), "equals"], [uiTextSnippet('startswith'), "startswith"], [uiTextSnippet('endswith'), "endswith"], [uiTextSnippet('exists'), "exists"], [uiTextSnippet('dnexist'), "dnexist"], [uiTextSnippet('soundexof'), "soundexof"], [uiTextSnippet('metaphoneof'), "metaphoneof"]];
-                  foreach ($item_array as $item) {
-                    echo "<option value='$item[1]'";
-                    if ($flnqualify == $item[1]) {
-                      echo " selected";
-                    }
-                    echo ">$item[0]</option>\n";
-                  }
-                  ?>
-                </select>
+              <div class='col-sm-6'>
+                <?php echo buildSelectInputGroup('lastname', 'myflastname', 'flnqualify', $myflastname, $lnOptions, $flnqualify); ?>
               </div>
               <div class='col-sm-6'>
-                <input class='form-control' name='myflastname' type='text' value="<?php echo $myflastname; ?>">
+                <?php echo buildSelectInputGroup('firstname', 'myffirstname', 'ffnqualify', $myffirstname, $fnOptions, $ffnqualify); ?>
               </div>
-            </div>        
-            <div class='row'>
-              <label class='form-control-label col-sm-2' for='myffirstname'><?php echo uiTextSnippet('firstname'); ?>:</label>
-              <div class='col-sm-3'>
-                <select class='form-control' name="ffnqualify">
-                  <?php
-                  $item_array = [[uiTextSnippet('contains'), "contains"], [uiTextSnippet('equals'), "equals"], [uiTextSnippet('startswith'), "startswith"], [uiTextSnippet('endswith'), "endswith"], [uiTextSnippet('exists'), "exists"], [uiTextSnippet('dnexist'), "dnexist"], [uiTextSnippet('soundexof'), "soundexof"]];
-                  foreach ($item_array as $item) {
-                    echo "<option value='$item[1]'";
-                    if ($ffnqualify == $item[1]) {
-                      echo " selected";
-                    }
-                    echo ">$item[0]</option>\n";
-                  }
-                  ?>
-                </select>
-              </div>
-              <div class='col-sm-6'>
-                <input class='form-control' name='myffirstname' type='text' value="<?php echo $myffirstname; ?>">
-              </div>
-            </div>
           </fieldset>
         </div>
         <div class='mother-name'>
           <fieldset>
             <legend><?php echo uiTextSnippet('mothername'); ?></legend>
             <div class='row'>
-              <label class='form-control-label col-sm-2' for='mymlastname'><?php echo uiTextSnippet('lastname'); ?>:</label>
-              <div class='col-sm-3'>
-                <select class='form-control' name='mlnqualify'>
-                  <?php
-                  $item_array = [[uiTextSnippet('contains'), "contains"], [uiTextSnippet('equals'), "equals"], [uiTextSnippet('startswith'), "startswith"], [uiTextSnippet('endswith'), "endswith"], [uiTextSnippet('exists'), "exists"], [uiTextSnippet('dnexist'), "dnexist"], [uiTextSnippet('soundexof'), "soundexof"], [uiTextSnippet('metaphoneof'), "metaphoneof"]];
-                  foreach ($item_array as $item) {
-                    echo "<option value='$item[1]'";
-                    if ($mlnqualify == $item[1]) {
-                      echo " selected";
-                    }
-                    echo ">$item[0]</option>\n";
-                  }
-                  ?>
-                </select>
+              <div class='col-sm-6'>
+                <?php echo buildSelectInputGroup('lastname', 'mymlastname', 'mlnqualify', $mymlastname, $lnOptions, $mlnqualify); ?>
               </div>
               <div class='col-sm-6'>
-                <input class='form-control' name='mymlastname' type='text' value="<?php echo $mymlastname; ?>">
-              </div>
-            </div>
-            <div class='row'>
-              <div class='form-control-label col-sm-2'><?php echo uiTextSnippet('firstname'); ?>:</div>
-              <div class='col-sm-3'>
-                <select class='form-control' name='mfnqualify'>
-                  <?php
-                  $item_array = [[uiTextSnippet('contains'), "contains"], [uiTextSnippet('equals'), "equals"], [uiTextSnippet('startswith'), "startswith"], [uiTextSnippet('endswith'), "endswith"], [uiTextSnippet('exists'), "exists"], [uiTextSnippet('dnexist'), "dnexist"], [uiTextSnippet('soundexof'), "soundexof"]];
-                  foreach ($item_array as $item) {
-                    echo "<option value='$item[1]'";
-                    if ($mfnqualify == $item[1]) {
-                      echo " selected";
-                    }
-                    echo ">$item[0]</option>\n";
-                  }
-                  ?>
-                </select>
-              </div>
-              <div class='col-sm-6'>
-                <input class='form-control' name='mymfirstname' type='text' value="<?php echo $mymfirstname; ?>">
+                <?php echo buildSelectInputGroup('firstname', 'mymfirstname', 'mfnqualify', $mymfirstname, $fnOptions, $mfnqualify); ?>
               </div>
             </div>
           </fieldset>
         </div>
-        <div class='form-group row'>
-          <label class='form-control-label col-sm-2' for='myfamilyid'><?php echo uiTextSnippet('familyid'); ?>:</label>
-          <div class='col-sm-3'>
-            <select class='form-control' name='fidqualify' title='<?php echo $fidqualify; ?>'>
-              <?php
-              $item_array = [[uiTextSnippet('equals'), "equals"], [uiTextSnippet('contains'), "contains"], [uiTextSnippet('startswith'), "startswith"], [uiTextSnippet('endswith'), "endswith"]];
-              foreach ($item_array as $item) {
-                echo "<option value='$item[1]'";
-                if ($fidqualify == $item[1]) {
-                  echo " selected";
-                }
-                echo ">$item[0]</option>\n";
-              }
-              ?>
-            </select>
+        <div class='row'>
+          <div class='col-sm-6'>
+            <?php echo buildSelectInputGroup('familyid', 'myfamilyid', 'fidqualify', $myfamilyid, $idOptions, $fidqualify); ?>
+          </div>
+        </div>
+          <br>
+          <hr>
+          <br>
+        <div class='row'>
+          <div class='col-sm-6'>
+            <?php echo buildSelectInputGroup('marrplace', 'mymarrplace', 'mpqualify', $mymarrplace, $placeOptions, $mpqualify); ?>
           </div>
           <div class='col-sm-6'>
-            <input class='form-control' name='myfamilyid' type='text' value="<?php echo $myfamilyid; ?>">
+            <?php echo buildSelectInputGroup('marrdatetr', 'mymarryear', 'myqualify', $mymarryear, $yearOptions, $myqualify); ?>
+
           </div>
         </div>
         <div class='row'>
-          <label class='form-control-label col-sm-2' for='mymarrplace'><?php echo uiTextSnippet('marrplace'); ?>:</label>
-          <div class='col-sm-3'>
-            <select class='form-control' name='mpqualify'>
-              <?php
-              $item_array = [[uiTextSnippet('contains'), "contains"], [uiTextSnippet('equals'), "equals"], [uiTextSnippet('startswith'), "startswith"], [uiTextSnippet('endswith'), "endswith"], [uiTextSnippet('exists'), "exists"], [uiTextSnippet('dnexist'), "dnexist"]];
-              foreach ($item_array as $item) {
-                echo "<option value='$item[1]'";
-                if ($mpqualify == $item[1]) {
-                  echo " selected";
-                }
-                echo ">$item[0]</option>\n";
-              }
-              ?>
-            </select>
+          <div class='col-sm-6'>
+            <?php echo buildSelectInputGroup('divplace', 'mydivplace', 'dvpqualify', $mydivplace, $placeOptions, $dvpqualify); ?>
           </div>
           <div class='col-sm-6'>
-            <input class='form-control' name='mymarrplace' type='text' value='<?php echo $mymarrplace; ?>'>
+            <?php echo buildSelectInputGroup('divdatetr', 'mydivyear', 'dvyqualify', $mydivyear, $yearOptions, $dvyqualify); ?>
           </div>
         </div>
-        <div class='row'>
-          <label class='form-control-label col-sm-2' for='mymarryear'><?php echo uiTextSnippet('marrdatetr'); ?>:</label>
-          <div class='col-sm-3'>
-            <select class='form-control' name='myqualify'>
-              <?php
-              $item2_array = [[uiTextSnippet('equals'), ""], [uiTextSnippet('plusminus2'), "plusminus2"], [uiTextSnippet('plusminus5'), "plusminus5"], [uiTextSnippet('plusminus10'), "plusminus10"], [uiTextSnippet('lessthan'), "lessthan"], [uiTextSnippet('greaterthan'), "greaterthan"], [uiTextSnippet('lessthanequal'), "lessthanequal"], [uiTextSnippet('greaterthanequal'), "greaterthanequal"], [uiTextSnippet('exists'), "exists"], [uiTextSnippet('dnexist'), "dnexist"]];
-              foreach ($item2_array as $item) {
-                echo "<option value='$item[1]'";
-                if ($myqualify == $item[1]) {
-                  echo " selected";
-                }
-                echo ">$item[0]</option>\n";
-              }
-              ?>
-            </select>
-          </div>
-          <div class='col-sm-6'>
-            <input class='form-control' name='mymarryear' type='text' value='<?php echo $mymarryear; ?>'>
-          </div>
-        </div>
-        <div class='row'>
-          <label class='form-control-label col-sm-2' for='mydivplace'><?php echo uiTextSnippet('divplace'); ?>:</label>
-          <div class='col-sm-3'>
-            <select class='form-control' name='dvpqualify'>
-              <?php
-              $item_array = [[uiTextSnippet('contains'), "contains"], [uiTextSnippet('equals'), "equals"], [uiTextSnippet('startswith'), "startswith"], [uiTextSnippet('endswith'), "endswith"], [uiTextSnippet('exists'), "exists"], [uiTextSnippet('dnexist'), "dnexist"]];
-              foreach ($item_array as $item) {
-                echo "<option value='$item[1]'";
-                if ($dvpqualify == $item[1]) {
-                  echo " selected";
-                }
-                echo ">$item[0]</option>\n";
-              }
-              ?>
-            </select>
-          </div>
-          <div class='col-sm-6'>
-            <input class='form-control' name='mydivplace' type='text' value='<?php echo $mydivplace; ?>'>
-          </div>
-        </div>
-        <div class='row'>
-          <label class='form-control-label col-sm-2' for='mydivyear'><?php echo uiTextSnippet('divdatetr'); ?>:</label>
-          <div class='col-sm-3'>
-            <select class='form-control' name='dvyqualify'>
-              <?php
-              $item2_array = [[uiTextSnippet('equals'), ""], [uiTextSnippet('plusminus2'), "plusminus2"], [uiTextSnippet('plusminus5'), "plusminus5"], [uiTextSnippet('plusminus10'), "plusminus10"], [uiTextSnippet('lessthan'), "lessthan"], [uiTextSnippet('greaterthan'), "greaterthan"], [uiTextSnippet('lessthanequal'), "lessthanequal"], [uiTextSnippet('greaterthanequal'), "greaterthanequal"], [uiTextSnippet('exists'), "exists"], [uiTextSnippet('dnexist'), "dnexist"]];
-              foreach ($item2_array as $item) {
-                echo "<option value='$item[1]'";
-                if ($dvyqualify == $item[1]) {
-                  echo " selected";
-                }
-                echo ">$item[0]</option>\n";
-              }
-              ?>
-            </select>
-          </div>
-          <div class='col-sm-6'>
-            <input class='form-control' name='mydivyear' type='text' value='<?php echo $mydivyear; ?>'>
-          </div>
-        </div>
-     
+
         <input name='offset' type='hidden' value='0'>
 
         <section class='custom-events'>
@@ -325,47 +208,43 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
           </div>
         </section> <!-- .custom-events -->
       </div>
-      <div class="searchsidebar">
-        <div class='row'>
-          <div class='col-sm-3'><?php echo uiTextSnippet('joinwith'); ?>:</div>
-          <div class='col-sm-3'>
-            <select class='form-control' name='mybool'>
-              <?php
-              $item3_array = [[uiTextSnippet('cap_and'), "AND"], [uiTextSnippet('cap_or'), "OR"]];
-              foreach ($item3_array as $item) {
-                echo "<option value='$item[1]'";
-                if ($mybool == $item[1]) {
-                  echo " selected";
-                }
-                echo ">$item[0]</option>\n";
-              }
-              ?>
-            </select>
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-sm-3'><?php echo uiTextSnippet('numresults'); ?>:</div>
-          <div class='col-sm-3'>
-            <select class='form-control' name="nr">
-              <?php
-              $item3_array = [[25, 25], [50, 50], [100, 100], [200, 200]];
-              foreach ($item3_array as $item) {
-                echo "<option value='$item[1]'";
-                if ($nr == $item[1]) {
-                  echo " selected";
-                }
-                echo ">$item[0]</option>\n";
-              }
-              ?>
-            </select>
-          </div>
-        </div>
-      </div>
+      <br>
+      <hr>
       <footer class='row'>
-        <div class='offset-sm-6 col-sm-3'>
+        <div class='col-sm-2'><?php echo uiTextSnippet('numresults'); ?>:</div>
+        <div class='col-sm-2'>
+          <select class='form-control' name="nr">
+            <?php
+            $item3_array = [[25, 25], [50, 50], [100, 100], [200, 200]];
+            foreach ($item3_array as $item) {
+              echo "<option value='$item[1]'";
+              if ($nr == $item[1]) {
+                echo " selected";
+              }
+              echo ">$item[0]</option>\n";
+            }
+            ?>
+          </select>
+        </div>
+        <div class='col-sm-2'><?php echo uiTextSnippet('joinwith'); ?>:</div>
+        <div class='col-sm-2'>
+          <select class='form-control' name='mybool'>
+            <?php
+            $item3_array = [[uiTextSnippet('cap_and'), "AND"], [uiTextSnippet('cap_or'), "OR"]];
+            foreach ($item3_array as $item) {
+              echo "<option value='$item[1]'";
+              if ($mybool == $item[1]) {
+                echo " selected";
+              }
+              echo ">$item[0]</option>\n";
+            }
+            ?>
+          </select>
+        </div>
+        <div class='col-sm-2'>
           <button class='btn btn-outline-primary' id='searchbtn' type='submit'><?php echo uiTextSnippet('search'); ?></button>
         </div>
-        <div class='col-sm-3'>
+        <div class='col-sm-2'>
           <button class='btn btn-outline-warning' id='resetbtn' type='button' 
                   onclick="resetValues();"><?php echo uiTextSnippet('tng_reset'); ?></button>
         </div>

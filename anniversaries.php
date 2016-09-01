@@ -352,36 +352,28 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
               <td></td>
               <th><?php echo uiTextSnippet('lastfirst'); ?></th>
               <th colspan='2'><?php echo $datetxt; ?></th>
-              <th><?php echo uiTextSnippet('personid'); ?></th>
             </tr>
 
             <?php
             $i = $offsetplus;
-            $chartlinkimg = getimagesize("img/Chart.gif");
-            $chartlink = "<img src=\"img/Chart.gif\" alt='' $chartlinkimg[3]>";
             while ($row = tng_fetch_assoc($result)) {
               $rights = determineLivingPrivateRights($row);
               $row['allow_living'] = $rights['living'];
               $row['allow_private'] = $rights['private'];
               if ($rights['both']) {
-                $placetxt = $row[$place] ? $row[$place] . " <a href='placesearch.php?psearch=" . urlencode($row[$place]) . "' title='" . uiTextSnippet('findplaces') . "'>"
-                  . "<img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt='" . uiTextSnippet('findplaces') . "'></a>" : truncateIt($row['info'], 75);
+                $placetxt = $row[$place] ? buildSilentPlaceLink($row[$place]) : truncateIt($row['info'], 75);
                 $dateval = $row[$datefield];
               } else {
                 $dateval = $placetxt = $prefix = $suffix = $title = $nickname = $birthdate = $birthplace = $deathdate = $deathplace = $livingOK = "";
               }
               echo "<tr>";
               $name = getNameRev($row);
-
               echo "<td>$i</td>\n";
               $i++;
               echo "<td>\n";
-                echo "<div class='person-img' id=\"mi_{$row['personID']}_$tngevent\">\n";
-                  echo "<div class='person-prev' id=\"prev_{$row['personID']}_$tngevent\"></div>\n";
-                echo "</div>\n";
-                echo "<a href=\"pedigree.php?personID={$row['personID']}\">$chartlink</a> <a href=\"peopleShowPerson.php?personID={$row['personID']}\" class=\"pers\" id=\"p{$row['personID']}_t:$tngevent\">$name</a>&nbsp;</td>\n";
+              echo "<a tabindex='0' class='btn btn-sm btn-outline-primary person-popover' role='button' data-toggle='popover' data-placement='bottom' data-person-id={$row['personID']}>$name</a>\n";
+              echo "</td>\n";
               echo "<td>" . displayDate($dateval) . "</td><td>$placetxt</td>";
-              echo "<td>{$row['personID']} </td>";
               echo "</tr>\n";
             }
             tng_free_result($result);
@@ -405,6 +397,10 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
 <script src="js/search.js"></script>
 <script>
+   $(function () {
+        $('[data-toggle="popover"]').popover();
+    });
+
   function resetForm() {
     var myform = document.form1;
 

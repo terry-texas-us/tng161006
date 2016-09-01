@@ -345,8 +345,7 @@ $headSection->setTitle($location);
         $body .= "<tr>\n";
         $body .= "<th></th>\n";
         $body .= "<th>" . uiTextSnippet('lastfirst') . "</th>\n";
-        $body .= "<th colspan='2'>" . uiTextSnippet('buried') . "</th>\n";
-        $body .= "<th>" . uiTextSnippet('personid') . "</th>\n";
+        $body .= "<th>" . uiTextSnippet('buried') . "</th>\n";
         $body .= "</tr>\n";
 
         $i = 1;
@@ -358,16 +357,14 @@ $headSection->setTitle($location);
           $row['allow_private'] = $rights['private'];
 
           $name = getNameRev($row);
-          $body .= "<tr><td>$i</td>\n";
-            $body .= "<td>\n";
-              $body .= "<a href=\"pedigree.php?personID={$row['personID']}\">$chartlink </a>\n"; // [ts] $chartlink undefined .. no chart icon displayed with link
-              $body .= "<a href=\"peopleShowPerson.php?personID={$row['personID']}\">$name</a>\n";
+          $body .= "<tr>\n";
+          $body .= "<td>$i</td>\n";
+          $body .= "<td>\n";
+          $body .= "<a tabindex='0' class='btn btn-sm btn-outline-primary person-popover' role='button' data-toggle='popover' data-placement='bottom' data-person-id='{$row['personID']}'>$name</a>\n";
           $body .= "</td>\n";
 
-          $placetxt = $row['burialplace'];
-          $placetxt .= "<a href=\"placesearch.php?psearch=" . urlencode($row['burialplace']) . "\" title=\"" . uiTextSnippet('findplaces') . "\">\n";
-          $placetxt .= "<img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=\"" . uiTextSnippet('findplaces') . "\"></a>\n";
-
+          $burialPlace = $row['burialplace'] ? buildSilentPlaceLink($row['burialplace']) : "";
+          
           $deathdate = $row['burialdate'] ? $row['burialdate'] : $row['deathdate'];
           if ($row['burialdate']) {
             $abbrev = uiTextSnippet('burialabbr', ['html' => 'strong']);
@@ -376,8 +373,7 @@ $headSection->setTitle($location);
           }
           $burialdate = $deathdate ? "$abbrev " . displayDate($deathdate) : "";
 
-          $body .= "<td colspan='2'>$burialdate<br>$placetxt</td>\n";
-          $body .= "<td>{$row['personID']}</td>\n";
+          $body .= "<td>$burialdate<br>$burialPlace</td>\n";
           $i++;
         }
         $body .= "</table>\n";
@@ -401,5 +397,11 @@ $headSection->setTitle($location);
     tng_map_pins();
   }
   ?>
+  <script src="js/search.js"></script>
+  <script>
+   $(function () {
+        $('[data-toggle="popover"]').popover();
+    });
+  </script>
 </body>
 </html>

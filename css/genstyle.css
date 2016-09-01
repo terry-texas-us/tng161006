@@ -164,11 +164,34 @@ body.admin-login {
   padding: 0;
   display: table-cell; }
 
+.search-qualify-combo {
+  line-height: 1.375rem; }
+
 .input-group .form-control:last-child {
-  font-size: .96rem;
   margin-left: -1px;
-  border-top-right-radius: .25rem;
-  border-bottom-right-radius: .25rem; }
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  min-width: 8rem;
+  max-width: 8rem; }
+
+.family-link-silent {
+  color: #373a3c; }
+
+.popover {
+  width: 300px; }
+
+.popover .years {
+  font-size: smaller;
+  font-weight: normal; }
+
+.popover .place {
+  font-size: smaller; }
+
+.person-popover {
+  min-width: 200px; }
+
+.place {
+  color: #373a3c; }
 
 html {
   font-size: 15px; }

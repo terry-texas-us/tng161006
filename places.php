@@ -140,13 +140,10 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
         <tr>
           <th></th>
           <th><?php echo $namestr; ?></th>
-          <th colspan='2'><?php echo $datestr; ?></th>
-          <th><?php echo uiTextSnippet($idtext); ?></th>
+          <th><?php echo $datestr; ?></th>
         </tr>
         <?php
         $i = $offsetplus;
-        $chartlinkimg = getimagesize("img/Chart.gif");
-        $chartlink = "<img src='img/Chart.gif' $chartlinkimg[3] alt=''>";
         while ($row = tng_fetch_assoc($result)) {
           $rights = determineLivingPrivateRights($row);
           $row['allow_living'] = $rights['living'];
@@ -166,12 +163,10 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
             echo "<a href=\"familiesShowFamily.php?familyID={$row['familyID']}\">{$row['p1lastname']} / {$row['p2lastname']}</a>\n";
           } elseif ($prefix == 'I') {
             $name = getNameRev($row);
-            echo "<a href=\"pedigree.php?personID={$row['personID']}\">$chartlink </a>\n";
-            echo "<a href=\"peopleShowPerson.php?personID={$row['personID']}\">$name</a>\n";
+            echo "<a tabindex='0' class='btn btn-sm btn-outline-primary person-popover' role='button' data-toggle='popover' data-placement='bottom' data-person-id='{$row['personID']}'>$name</a>\n";
           }
           echo "</td>";
-          echo "<td colspan='2'>" . displayDate($dateval) . "<br>$placetxt</td>\n";
-          echo "<td>{$row[$idfield]} </td>\n";
+          echo "<td>" . displayDate($dateval) . "<br>$placetxt</td>\n";
           echo "</tr>\n";
         }
         tng_free_result($result);

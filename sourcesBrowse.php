@@ -105,27 +105,13 @@ $headSection->setTitle(uiTextSnippet('sources'));
     <?php
     echo $adminHeaderSection->build('sources', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "sourcesBrowse.php", uiTextSnippet('browse'), "findsource"]);
+    // $navList->appendItem([true, "sourcesBrowse.php", uiTextSnippet('browse'), "findsource"]);
     $navList->appendItem([$allowAdd, "sourcesAdd.php", uiTextSnippet('add'), "addsource"]);
     $navList->appendItem([$allowEdit && $allowDelete, "sourcesMerge.php", uiTextSnippet('merge'), "merge"]);
     echo $navList->build("findsource");
+    require '_/components/php/findSourcesForm.php';
     ?>
     <div class="row">
-      <form action="sourcesBrowse.php" name='form1' id='form1'>
-        <label for='searchstring'>
-          <?php echo uiTextSnippet('searchfor'); ?>
-          <input name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>">
-        </label>
-        <input name='submit' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
-        <input name='submit' type='submit' value="<?php echo uiTextSnippet('reset'); ?>"
-            onClick="resetSourcesSearch()">
-        <span>
-          <input name='exactmatch' type='checkbox' value='yes'<?php if ($exactmatch == "yes") {echo " checked";} ?>>
-          <?php echo uiTextSnippet('exactmatch'); ?>
-        </span>
-        <input name='findsource' type='hidden' value='1'>
-        <input name='newsearch' type='hidden' value='1'>
-      </form>
       <?php
       $numrowsplus = $numrows + $offset;
       if (!$numrowsplus) {
@@ -136,12 +122,9 @@ $headSection->setTitle(uiTextSnippet('sources'));
       <form action="admin_deleteselected.php" method='post' name="form2">
         <?php if ($allowDelete) { ?>
           <p>
-            <input name='selectall' type='button' value="<?php echo uiTextSnippet('selectall'); ?>" 
-                onClick="toggleAll(1);">
-            <input name='clearall' type='button' value="<?php echo uiTextSnippet('clearall'); ?>"
-                onClick="toggleAll(0);">
-            <input name='xsrcaction' type='submit' value="<?php echo uiTextSnippet('deleteselected'); ?>"
-                onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');">
+          <button class='btn btn-secondary' id='selectall-sources' name='selectall' type='button'><?php echo uiTextSnippet('selectall'); ?></button>
+          <button class='btn btn-secondary' id='clearall-sources' name='clearall' type='button'><?php echo uiTextSnippet('clearall'); ?></button>
+          <button class='btn btn-outline-danger' id='deleteselected-sources' name='xsrcaction' type='submit' value='true'><?php echo uiTextSnippet('deleteselected'); ?></button>
           </p>
         <?php } ?>
 
@@ -207,10 +190,20 @@ $headSection->setTitle(uiTextSnippet('sources'));
       }
       return false;
     }
+    $('#selectall-sources').on('click', function () {
+        toggleAll(1);
+    });
+
+    $('#clearall-sources').on('click', function () {
+        toggleAll(0);
+    });
+
+    $('#deleteselected-sources').on('click', function () {
+        return confirm(textSnippet('confdeleterecs'));
+    });    
     
     function resetSourcesSearch() {
       document.form1.searchstring.value = '';
-      document.form1.tree.selectedIndex = 0;
       document.form1.exactmatch.checked = false;
     }
   </script>

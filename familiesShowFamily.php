@@ -4,8 +4,6 @@ require 'tng_begin.php';
 require 'personlib.php';
 require 'families.php';
 
-$placelinkend = "\" title=\"" . uiTextSnippet('findplaces') . "\"><img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=\"" . uiTextSnippet('findplaces') . "\"></a>";
-
 $firstsection = 0;
 $tableid = "";
 $cellnumber = 0;
@@ -39,7 +37,6 @@ function showDatePlace($event) {
   global $cellnumber;
   global $tentative_edit;
   global $familyID;
-  global $placelinkend;
 
   $dptext = "";
   if (!$cellnumber) {
@@ -68,9 +65,9 @@ function showDatePlace($event) {
       $dptext .= " colspan='4'";
     }
   }
-  $dptext .= "{$event['place']}$pcitestr&nbsp;";
+  $dptext .= "$pcitestr&nbsp;";
   if ($event['place']) {
-    $dptext .= "<a href=\"placesearch.php?psearch=" . urlencode($event['place']) . $placelinkend;
+    $dptext .= buildSilentPlaceLink($event['place']);
   }
   $dptext .= "</td>\n";
   if ($allow_lds_this && $event['ldstext']) {
@@ -81,9 +78,9 @@ function showDatePlace($event) {
     $editicon = $tentative_edit && $event['eventlds'] ? "<img class='icon-sm' src='svg/new-message.svg' alt=\"" . uiTextSnippet('editevent') . "\" onclick=\"tnglitbox = new ModalDialog('ajx_tentedit.php?persfamID={$event['ID']}&amp;type={$event['type']}&amp;event={$event['eventlds']}&amp;title={$event['ldstext']}');\" class=\"fakelink\">" : "";
     $dptext .= "<td>" . $event['ldstext'] . "$editicon</td>\n";
     $dptext .= "<td><span>" . displayDate($event['ldsdate']) . "&nbsp;</span></td>\n";
-    $dptext .= "<td><span>{$event['ldsplace']}&nbsp;";
+    $dptext .= "<td><span>";
     if ($event['ldsplace'] && $event['ldsplace'] != uiTextSnippet('place')) {
-      $dptext .= "<a href=\"placesearch.php?psearch=" . urlencode($event['ldsplace']) . $placelinkend;
+      $dptext .= buildSilentPlaceLink($event['ldsplace']);
     }
     $dptext .= "</span>\n";
     $dptext .= "</td>\n";

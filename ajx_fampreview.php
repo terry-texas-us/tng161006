@@ -262,8 +262,11 @@ $namestr = uiTextSnippet('family') . ": " . $famname;
 
 $years = $famrow['marrdate'] && $frights['both'] ? uiTextSnippet('marrabbr') . " " . displayDate($famrow['marrdate']) : "";
 
-$photostr = showSmallPhoto($familyID, $famname, $famrow['allow_living'], 0);
-echo tng_DrawHeading($photostr, $namestr, $years);
+echo "<h4 class='header fn' id='nameheader'>$namestr</h4>";
+if ($years) {
+  echo "<span>$years</span><br>\n";
+}
+echo "<br clear='all'>\n";
 
 $famtext = "";
 $personID = $famrow['husband'] ? $famrow['husband'] : $famrow['wife'];

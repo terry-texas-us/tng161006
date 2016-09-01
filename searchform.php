@@ -37,8 +37,8 @@ initMediaTypes();
 
 function buildSelectInputGroup($label, $formName, $selectName, $value, $options, $selected) {
   $out = "<label for='" . $formName . "'>" . uiTextSnippet($label) . "</label>\n";
-  $out .= "<div class='input-group' style='width: 100%;'>\n";
-  $out .= "<input class='form-control' name='" . $formName . "' type='text' value='" . $value . "' placeholder='" . uiTextSnippet($label) . "'>\n";
+  $out .= "<div class='input-group'>\n";
+  $out .= "<input class='form-control search-qualify-combo' name='" . $formName . "' type='text' value='" . $value . "' placeholder='" . uiTextSnippet($label) . "'>\n";
   $out .= "<span class='input-group-select'>\n";
   $out .= "<select class='form-control' name='" . $selectName . "'>\n";
   foreach ($options as $option) {
@@ -47,10 +47,11 @@ function buildSelectInputGroup($label, $formName, $selectName, $value, $options,
   $out .= "</select>\n";
   $out .= "</span>\n";
   $out .= "</div>\n";
+  
   return $out;
 }
 $idOptions = ['contains', 'equals', 'startswith', 'endswith'];
-$bpOptions = ['contains', 'equals', 'startswith', 'endswith', 'exists', 'dnexist'];
+$placeOptions = ['contains', 'equals', 'startswith', 'endswith', 'exists', 'dnexist'];
 $fnOptions = ['contains', 'equals', 'startswith', 'endswith', 'exists', 'dnexist', 'soundexof'];
 $lnOptions = ['contains', 'equals', 'startswith', 'endswith', 'exists', 'dnexist', 'soundexof', 'metaphoneof'];
 
@@ -71,8 +72,8 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
     if ($msg) {
       echo "<b class='msgerror h4' id='errormsg'>" . stripslashes(strip_tags($msg)) . "</b>";
     }
-    beginFormElement("search", "", "search", "", "return makeURL();");
     ?>
+    <form action='search.php' name='search' onsubmit='return makeURL();'>
       <div class="searchform">
         <div class='row'>
           <div class='col-sm-6'>
@@ -88,10 +89,10 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
             <?php echo buildSelectInputGroup('firstname', 'myfirstname', 'fnqualify', $myfirstname, $fnOptions, $fnqualify); ?>
           </div>
         </div>
-
+        <br>
         <div class='row'>
           <div class='col-sm-6'>
-            <?php echo buildSelectInputGroup('birthplace', 'mybirthplace', 'bpqualify', $mybirthplace, $bpOptions, $bpqualify); ?>
+            <?php echo buildSelectInputGroup('birthplace', 'mybirthplace', 'bpqualify', $mybirthplace, $placeOptions, $bpqualify); ?>
           </div>
           <div class='col-sm-6'>
             <?php echo buildSelectInputGroup('birthdatetr', 'mybirthyear', 'byqualify', $mybirthyear, $yearOptions, $byqualify); ?>
@@ -100,7 +101,7 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
 
         <div class='row'<?php if ($tngconfig['hidechr']) {echo " style='display: none'";} ?>>
           <div class='col-sm-6'>
-            <?php echo buildSelectInputGroup('altbirthplace', 'myaltbirthplace', 'cpqualify', $myaltbirthplace, $bpOptions, $cpqualify); ?>
+            <?php echo buildSelectInputGroup('altbirthplace', 'myaltbirthplace', 'cpqualify', $myaltbirthplace, $placeOptions, $cpqualify); ?>
           </div>
           <div class='col-sm-6'>
             <?php echo buildSelectInputGroup('altbirthdatetr', 'myaltbirthyear', 'cyqualify', $myaltbirthyear, $yearOptions, $cyqualify); ?>
@@ -109,7 +110,7 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
 
         <div class='row'>
           <div class='col-sm-6'>
-            <?php echo buildSelectInputGroup('deathplace', 'mydeathplace', 'dpqualify', $mydeathplace, $bpOptions, $dpqualify); ?>
+            <?php echo buildSelectInputGroup('deathplace', 'mydeathplace', 'dpqualify', $mydeathplace, $placeOptions, $dpqualify); ?>
           </div>
           <div class='col-sm-6'>
             <?php echo buildSelectInputGroup('deathdatetr', 'mydeathyear', 'dyqualify', $mydeathyear, $yearOptions, $dyqualify); ?>
@@ -118,7 +119,7 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
 
         <div class='row'>
           <div class='col-sm-6'>
-            <?php echo buildSelectInputGroup('burialplace', 'myburialplace', 'brpqualify', $myburialplace, $bpOptions, $brpqualify); ?>
+            <?php echo buildSelectInputGroup('burialplace', 'myburialplace', 'brpqualify', $myburialplace, $placeOptions, $brpqualify); ?>
           </div>
           <div class='col-sm-6'>
             <?php echo buildSelectInputGroup('burialdatetr', 'myburialyear', 'bryqualify', $myburialyear, $yearOptions, $bryqualify); ?>
@@ -161,18 +162,18 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
           <section style="display: none" id="otherevents">
             <div class='row'>
               <div class='col-sm-6'>
-                <?php echo buildSelectInputGroup('nickname', 'mynickname', 'nnqualify', $mynickname, $bpOptions, $nnqualify); ?>
+                <?php echo buildSelectInputGroup('nickname', 'mynickname', 'nnqualify', $mynickname, $placeOptions, $nnqualify); ?>
               </div>
               <div class='col-sm-6'>
-                <?php echo buildSelectInputGroup('title', 'mytitle', 'tqualify', $mytitle, $bpOptions, $tqualify); ?>
+                <?php echo buildSelectInputGroup('title', 'mytitle', 'tqualify', $mytitle, $placeOptions, $tqualify); ?>
               </div>
             </div>          
             <div class='row'>
               <div class='col-sm-6'>
-                <?php echo buildSelectInputGroup('prefix', 'myprefix', 'pfqualify', $myprefix, $bpOptions, $pfqualify); ?>
+                <?php echo buildSelectInputGroup('prefix', 'myprefix', 'pfqualify', $myprefix, $placeOptions, $pfqualify); ?>
               </div>
               <div class='col-sm-6'>
-                <?php echo buildSelectInputGroup('suffix', 'mysuffix', 'sfqualify', $mysuffix, $bpOptions, $sfqualify); ?>
+                <?php echo buildSelectInputGroup('suffix', 'mysuffix', 'sfqualify', $mysuffix, $placeOptions, $sfqualify); ?>
               </div>
             </div>              
             <br>
@@ -197,12 +198,12 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
                 echo "<div class='col-md-4'>\n";
                   $formName = 'cef' . $row['eventtypeID'];
                   $selectName = 'cfq' . $row['eventtypeID'];
-                  echo buildSelectInputGroup('fact', $formName, $selectName, '', $bpOptions, '');
+                  echo buildSelectInputGroup('fact', $formName, $selectName, '', $placeOptions, '');
                 echo "</div>\n";
                 echo "<div class='col-md-4'>\n";
                   $formName = 'cep' . $row['eventtypeID'];
                   $selectName = 'cpq' . $row['eventtypeID'];
-                  echo buildSelectInputGroup('place', $formName, $selectName, '', $bpOptions, '');
+                  echo buildSelectInputGroup('place', $formName, $selectName, '', $placeOptions, '');
                 echo "</div>\n";
                 echo "<div class='col-md-4'>\n";
                   $formName = 'cey' . $row['eventtypeID'];
@@ -217,56 +218,55 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
           </section>
         </section>  <!-- .custom-events --> 
       </div>
-      <div class="searchsidebar">
-        <table>
-          <tr>
-            <td><?php echo uiTextSnippet('joinwith'); ?>:</td>
-            <td>
-              <select name="mybool">
-                <?php
-                $item3_array = [[uiTextSnippet('cap_and'), "AND"], [uiTextSnippet('cap_or'), "OR"]];
-                foreach ($item3_array as $item) {
-                  echo "<option value='$item[1]'";
-                  if ($mybool == $item[1]) {
-                    echo " selected";
-                  }
-                  echo ">$item[0]</option>\n";
-                }
-                ?>
-              </select>
-            </td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('numresults'); ?>:</td>
-            <td>
-              <select name="nr">
-                <?php
-                $item3_array = [[25, 25], [50, 50], [100, 100], [200, 200]];
-                foreach ($item3_array as $item) {
-                  echo "<option value='$item[1]'";
-                  if ($nr == $item[1]) {
-                    echo " selected";
-                  }
-                  echo ">$item[0]</option>\n";
-                }
-                ?>
-              </select>
-            </td>
-            <td></td>
-          </tr>
-        </table>
-        <p>
-          <input name='showspouse' type='checkbox' value='yes'<?php if ($showspouse == "yes") {echo " checked"; } ?> /> <?php echo uiTextSnippet('showspouse'); ?>
-          <br>
-          <br>
-          <input id='searchbtn' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
-          <input id='resetbtn' type='button' value="<?php echo uiTextSnippet('tng_reset'); ?>" 
-                 onclick="resetValues();"/>
-        </p>
+      <div class='row'>
+        <div class='col-sm-3'><?php echo uiTextSnippet('numresults'); ?>:</div>
+        <div class='col-sm-3'>
+          <select class='form-control' name="nr">
+            <?php
+            $item3_array = [[25, 25], [50, 50], [100, 100], [200, 200]];
+            foreach ($item3_array as $item) {
+              echo "<option value='$item[1]'";
+              if ($nr == $item[1]) {
+                echo " selected";
+              }
+              echo ">$item[0]</option>\n";
+            }
+            ?>
+          </select>
+        </div>
+        <div class='col-sm-6'><?php echo uiTextSnippet('joinwith'); ?>:<br>
+          <!--<fieldset class="form-group">-->
+            <label class='form-check-inline'>
+              <?php
+              echo "<input type='radio' name='mybool' id='joinsWithAND' value='AND'";
+              echo $mybool == 'AND' ? ' checked> ' : '> ';
+              echo uiTextSnippet('cap_and');
+              ?>
+            </label>
+            <label class='form-check-inline'>
+              <?php
+              echo "<input type='radio' name='mybool' id='joinsWithOR' value='OR'";
+              echo $mybool == 'OR' ? ' checked> ' : '> ';
+              echo uiTextSnippet('cap_or');
+              ?>
+            </label>
+          <!--</fieldset>-->
+        </div>
       </div>
-    <?php endFormElement(); ?>
-      <br clear='all'>
+      <div class='row'>
+        <div class='col-sm-12'>
+          <input name='showspouse' type='checkbox' value='yes'<?php if ($showspouse == "yes") {echo " checked"; } ?> /> <?php echo uiTextSnippet('showspouse'); ?>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-sm-2'>  
+          <button class='btn btn-outline-primary' id='searchbtn' type='submit'><?php echo uiTextSnippet('search'); ?></button>
+        </div>
+        <div class='col-sm-2'>
+          <button class='btn btn-outline-primary' id='resetbtn' type='button' onclick="resetValues();"><?php echo uiTextSnippet('tng_reset'); ?></button> 
+        </div>
+      </div>
+    </form>
     <?php echo $publicFooterSection->build(); ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
@@ -332,7 +332,7 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
       var thisfield;
       var found = 0;
 
-      if (thisform.mysplname.value !== "" && (thisform.mygender.selectedIndex < 1 || thisform.mygender.selectedIndex > 2)) {
+      if (thisform.mysplname.value !== "" && (thisform.mygender.value === "")) {
         alert(textSnippet('spousemore'));
         return false;
       }

@@ -199,9 +199,7 @@ $headSection->setTitle($psearchns);
     ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
-  <?php
-  if ($map['key']) {
-  ?>
+  <?php if ($map['key']) { ?>
     <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAlWTL2QZDQv9BWXBvCwdAuhq1Lak8jSwU&amp;<?php echo uiTextSnippet('localize'); ?>'></script>
   <?php
   }
@@ -209,5 +207,11 @@ $headSection->setTitle($psearchns);
     tng_map_pins();
   }
   ?>
+  <script src="js/search.js"></script>
+  <script>
+   $(function () {
+        $('[data-toggle="popover"]').popover();
+    });
+  </script>
 </body>
 </html>
