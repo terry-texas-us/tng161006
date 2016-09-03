@@ -1294,16 +1294,6 @@ function endListItem($section) {
   return "</li> <!-- #$section -->\n";
 }
 
-function buildPersonListItem($index, $link, $icon, $label, $page, $thispage) {
-  $out = '';
-  if ($page != $thispage) {
-    $out .= "<li>\n";
-      $out .= "<a id=\"a$index\" href=\"$link\"><img class='icon-sm' src='{$icon}'>$label</a>\n";
-    $out .= "</li>\n";
-  }
-  return $out;
-}
-
 function buildPersonMenu($currpage, $entityID) {
   global $disallowgedcreate;
   global $allowEdit;
@@ -1311,30 +1301,33 @@ function buildPersonMenu($currpage, $entityID) {
   global $allow_ged;
   global $emailaddr;
 
-  $nexttab = 0;
   $menu = "<div id='tngmenu'>\n";
 
   if ($allowEdit && $rightbranch) {
-    $menu .= "<a id=\"a$nexttab\" href=\"peopleEdit.php?personID=$entityID&amp;cw=1\" title='" . uiTextSnippet('edit') . "'>\n";
-      $menu .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
-    $menu .= "</a>\n";
+    $menu .= "<a href=\"peopleEdit.php?personID=$entityID&amp;cw=1\" title='" . uiTextSnippet('edit') . "'><img class='icon-sm' src='svg/new-message.svg'></a>\n";
   } elseif ($emailaddr && $currpage != 'suggest') {
-    $menu .= "<a id='a$nexttab' href='personSuggest.php?ID=$entityID' title='" . uiTextSnippet('suggest') . "'>\n";
-      $menu .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
-    $menu .= "</a>\n";
+    $menu .= "<a href='personSuggest.php?ID=$entityID' title='" . uiTextSnippet('suggest') . "'><img class='icon-sm' src='svg/new-message.svg'></a>\n";
   }
-  $menu .= "<ul id='tngnav'>\n";
-
-  $menu .= buildPersonListItem($nexttab++, "peopleShowPerson.php?personID=$entityID", "svg/user.svg", uiTextSnippet('indinfo'), $currpage, "person");
-  $menu .= buildPersonListItem($nexttab++, "pedigree.php?personID=$entityID", "svg/flow-split-horizontal.svg", uiTextSnippet('ancestors'), $currpage, "pedigree");
-  $menu .= buildPersonListItem($nexttab++, "descend.php?personID=$entityID", "svg/flow-cascade.svg", uiTextSnippet('descendants'), $currpage, "descend");
-  $menu .= buildPersonListItem($nexttab++, "relateform.php?primaryID=$entityID", "svg/users.svg", uiTextSnippet('relationship'), $currpage, "relate");
-  $menu .= buildPersonListItem($nexttab++, "timeline.php?primaryID=$entityID", "svg/project.svg", uiTextSnippet('timeline'), $currpage, "timeline");
-
   if (!$disallowgedcreate || ($allow_ged && $rightbranch)) {
-    $menu .= buildPersonListItem($nexttab++, "gedform.php?personID=$entityID", "svg/folder.svg", uiTextSnippet('extractgedcom'), $currpage, "gedcom");
+    if ($currpage != 'gedcom') {
+      $menu .= "<a href='gedform.php?personID=$entityID' title='" . uitextSnippet('extractgedcom') . "'><img class='icon-sm' src='svg/folder.svg'></a>\n";
+    }
   }
-  $menu .= "</ul>\n";
+  if ($currpage != 'person') {
+    $menu .= "<a href='peopleShowPerson.php?personID=$entityID'><img class='icon-sm' src='svg/user.svg' title='" . uitextSnippet('indinfo') . "'></a>\n";
+  }
+  if ($currpage != 'pedigree') {
+    $menu .= "<a href='pedigree.php?personID=$entityID'><img class='icon-sm' src='svg/flow-split-horizontal.svg' title='" . uitextSnippet('ancestors') . "'></a>\n";
+  }
+  if ($currpage != 'descend') {
+    $menu .= "<a href='descend.php?personID=$entityID'><img class='icon-sm' src='svg/flow-cascade.svg' title='" . uitextSnippet('descendants') . "'></a>\n";
+  }
+  if ($currpage != 'relate') {
+    $menu .= "<a href='relateform.php?primaryID=$entityID'><img class='icon-sm' src='svg/users.svg' title='" . uitextSnippet('relationship') . "'></a>\n";
+  }
+  if ($currpage != 'timeline') {
+    $menu .= "<a href='timeline.php?primaryID=$entityID'><img class='icon-sm' src='svg/project.svg' title='" . uitextSnippet('timeline') . "'></a>\n";
+  }
   $menu .= "</div>\n";
   return $menu;
 }

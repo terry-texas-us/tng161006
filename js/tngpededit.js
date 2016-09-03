@@ -5,10 +5,11 @@ function editPerson(personID, slot, gender) {
         allow_cites = true;
         allow_notes = true;
         newpersongender = gender;
-        if (gender === 'M')
+        if (gender === 'M') {
             spouseorder = 'husborder';
-        else if (gender === 'F')
+        } else if (gender === 'F') {
             spouseorder = 'wifeorder';
+        }
         persfamID = personID;
         tnglitbox = new ModalDialog('ajx_editperson.php?personID=' + personID + '&slot=' + slot, {size: 'modal-lg'});
         startSortPerson();
@@ -142,7 +143,7 @@ function updateFamily(form, slot, script) {
             $.ajax({
                 url: 'ajx_pedjson.php?',
                 data: params,
-                dataType: 'html',
+                dataType: 'json',
                 success: function (req) {
                     addNewPeople(req);
                     if (script === "familiesAddFormAction.php")
@@ -158,7 +159,7 @@ function updateFamily(form, slot, script) {
                         if (notfound)
                             people[form.lastperson.value].famc = -1;
                     }
-                    DisplayChart();
+                    displayChart();
                 }
             });
             tnglitbox.remove();

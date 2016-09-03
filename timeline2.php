@@ -212,9 +212,8 @@ function getEvents($person) {
   //loop through and format
   ksort($events);
   foreach ($events as $event) {
-    //$eventstr .= "<div style=\"position:relative; top:0px; left:$event['left']px; width:$maxleft" . "px;\">\n";
     $eventstr .= "<div class=\"tlevent\" style=\"margin-left:{$event['left']}px;\">\n";
-    $eventstr .= "<table cellpadding=\"1\"><tr><td class=\"pboxpopup\"><span>&gt; ";
+    $eventstr .= "<table><tr><td class='pboxpopup'><span>&gt; ";
     $eventstr .= "{$event['year']} - {$event['text']} {$event['date']} &nbsp;</span></td></tr></table></div>\n";
   }
 
@@ -447,7 +446,7 @@ foreach ($keeparray as $timeentry) {
   echo "</div>\n";
 
   echo "<div id=\"popup$numlines\" class=\"popup\" style=\"background-color:{$pedigree['popupcolor']}; top:" . ($top + 25) . "px; left:" . ($spanleft - 5) . "px;\" onmouseover=\"cancelTimer($numlines)\" onmouseout=\"setTimer($numlines)\">\n";
-  echo "<table class=\"popuptable\" style=\"border-color: {$pedigree['bordercolor']};\" cellpadding=\"1\"><tr><td>\n";
+  echo "<table class='popuptable' style=\"border-color: {$pedigree['bordercolor']};\"><tr><td>\n";
 
   $eventinfo = getEvents($timeentry);
   echo "$eventinfo</td></tr></table></div>\n";

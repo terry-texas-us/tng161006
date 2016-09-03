@@ -567,7 +567,7 @@ $headSection->setTitle($headTitle);
       $persontext .= "</tr>\n";
       $persontext .= "<tr>\n";
       $persontext .= "<td class='mapcol' colspan='2'>\n";
-        $persontext .= "<div id='map' class='rounded10' style='width: {$map['indw']}; height: {$map['indh']};'>";
+        $persontext .= "<div id='map' style='width: {$map['indw']}; height: {$map['indh']};'>";
           if ($map['pstartoff']) {
             $persontext .= "<a href='#' onclick='ShowTheMap(); return false;'>\n";
               $persontext .= "<div class='loadmap'>" . uiTextSnippet('loadmap') . "<br>\n";
@@ -753,26 +753,26 @@ $headSection->setTitle($headTitle);
     $persontext .= "</ul>\n";
 
     if ($media || $notes || $citedispctr || $map['key']) {
-      $innermenu = "<a href='#' onclick=\"return infoToggle('info');\">" . uiTextSnippet('persinfo') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
+      $innermenu = "<a class='navigation-item' href='#' onclick=\"return infoToggle('info');\">" . uiTextSnippet('persinfo') . "</a>\n";
       if ($media) {
-        $innermenu .= "<a href='#' onclick=\"return infoToggle('media');\">" . uiTextSnippet('media') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
+        $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('media');\">" . uiTextSnippet('media') . "</a>\n";
       }
       if ($notes) {
-        $innermenu .= "<a href='#' onclick=\"return infoToggle('notes');\">" . uiTextSnippet('notes') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
+        $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('notes');\">" . uiTextSnippet('notes') . "</a>\n";
       }
       if ($citedispctr) {
-        $innermenu .= "<a href='#' onclick=\"return infoToggle('sources');\">" . uiTextSnippet('sources') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
+        $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('sources');\">" . uiTextSnippet('sources') . "</a>\n";
       }
       if ($map['key'] && $locations2map) {
-        $innermenu .= "<a href='#' onclick=\"return infoToggle('eventmap');\">" . uiTextSnippet('gmapevent') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
+        $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('eventmap');\">" . uiTextSnippet('gmapevent') . "</a>\n";
       }
-      $innermenu .= "<a href='#' onclick=\"return infoToggle('all');\" id=\"tng_alink\">" . uiTextSnippet('all') . "</a>\n";
+      $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('all');\" id=\"tng_alink\">" . uiTextSnippet('all') . "</a>\n";
     }
     else {
       $innermenu = "<span>" . uiTextSnippet('persinfo') . "</span>\n";
     }
     if ($allowpdf) {
-      $innermenu .= " &nbsp;&nbsp; | &nbsp;&nbsp; <a href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ind&amp;personID=$personID');return false;\">PDF</a>\n";
+      $innermenu .= "<a  class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ind&amp;personID=$personID');return false;\">PDF</a>\n";
     }
     $rightbranch = $org_rightbranch;
 

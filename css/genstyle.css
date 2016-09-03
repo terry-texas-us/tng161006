@@ -103,6 +103,67 @@ body.admin-login {
   border-top-left-radius: 0;
   border-top-right-radius: 0; }
 
+#vcontainer {
+  position: relative;
+  overflow: auto; }
+
+#vcontainer div.ascender {
+  position: absolute;
+  border-top: 1px solid black; }
+
+#vcontainer div.father {
+  border-right: 1px solid black; }
+
+#vcontainer div.mother {
+  border-left: 1px solid black; }
+
+#vcontainer div.descender_container {
+  position: absolute; }
+
+#vcontainer div.descender {
+  width: 50%;
+  border-bottom: 1px solid black; }
+
+#vcontainer div.husband {
+  border-left: 1px solid black;
+  float: right; }
+
+#vcontainer div.wife {
+  border-right: 1px solid black; }
+
+#vcontainer div.single {
+  border-right: 1px solid black;
+  width: 0; }
+
+#vcontainer div.box {
+  position: absolute;
+  text-align: center; }
+
+#vcontainer div.box div.inner {
+  width: 240px;
+  line-height: 1.2em;
+  overflow: hidden;
+  border: 1px solid black;
+  border-radius: 0.2rem;
+  font-size: 7pt;
+  padding: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 2px 2px 2px 1px #ccc; }
+
+#vcontainer div.box div.inner div {
+  display: table-cell;
+  vertical-align: middle; }
+
+@media print {
+  #vcontainer div.box div.inner {
+    border-color: black; }
+
+  #vcontainer div.box div.fieldnameback {
+    background-color: white; }
+
+  #vcontainer div.box div.fieldname {
+    color: black; } }
 .form-suggest .form-container {
   background-color: #eee;
   max-width: 420px;
@@ -309,6 +370,9 @@ div#branchedit-person {
   border-radius: 8px; }
 
 /*boxes on pedigree chart*/
+.pedigree-chart-text {
+  font-size: 12px; }
+
 .pedbox {
   position: absolute;
   z-index: 5;
@@ -322,21 +386,15 @@ div#branchedit-person {
   width: 100%;
   float: left; }
 
-.rounded10 {
-  border-radius: 10px; }
+.chart-border-radius {
+  border-radius: 0.25rem; }
 
-.rounded4 {
-  border-radius: 4px; }
+.chart-border-radius-sm {
+  border-radius: 0.2rem; }
 
 .trackerbox {
   border: 1px solid black;
   overflow: hidden; }
-
-.smaller {
-  font-size: 11px; }
-
-.verysmall {
-  font-size: 9px; }
 
 button.help {
   padding: 0 8px;
@@ -775,12 +833,18 @@ form[action="places-oneletter.php"] {
   border-right: 1px solid #818a91;
   border-bottom: 1px solid #818a91; }
 
-pub-innermenu {
+.pub-innermenu {
   margin: 0 1px 0 1px;
   clear: both;
-  padding: 0.3em 0 0.3em .7em;
-  border-right: 1px solid #818a91;
-  border-bottom: 1px solid #818a91; }
+  padding: 0.3em 0 0.3em .7em; }
+
+.pub-innermenu .navigation-item:not(:first-child):before {
+  content: " | ";
+  padding-left: 0.4em;
+  padding-right: 0.4em; }
+
+.pub-innermenu a {
+  text-decoration: none; }
 
 .fakelink {
   cursor: pointer; }
@@ -795,6 +859,24 @@ pub-innermenu {
   position: absolute;
   z-index: 3;
   overflow: hidden; }
+
+.pedigree-connectors-father {
+  position: absolute;
+  z-index: 3;
+  overflow: hidden;
+  border-left: 1px solid;
+  border-top: 1px solid;
+  background-color: #fff;
+  border-top-left-radius: 0.3rem; }
+
+.pedigree-connectors-mother {
+  position: absolute;
+  z-index: 3;
+  overflow: hidden;
+  border-left: 1px solid;
+  border-bottom: 1px solid;
+  background-color: #fff;
+  border-bottom-left-radius: 0.3rem; }
 
 .boxshadow {
   position: absolute;

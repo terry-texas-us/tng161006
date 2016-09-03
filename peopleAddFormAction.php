@@ -188,14 +188,14 @@ if ($type == "child") {
 
   $rval = "<div class='sortrow' id='child_$personID' style='width: 500px; clear: both; display: none'";
   $rval .= " onmouseover=\"$('unlinkc_$personID').style.visibility='visible';\" onmouseout=\"$('unlinkc_$personID').style.visibility='hidden';\">\n";
-  $rval .= "<table width=\"100%\" cellpadding=\"5\" cellspacing=\"1\"><tr>\n";
+  $rval .= "<table width='100%'><tr>\n";
   $rval .= "<td class='dragarea'>";
   $rval .= "<img src='img/admArrowUp.gif' alt=''>" . uiTextSnippet('drag') . "\n";
   $rval .= "<img src='img/admArrowDown.gif' alt=''>\n";
   $rval .= "</td>\n";
   $rval .= "<td class='childblock'>\n";
 
-  $rval .= "<div id=\"unlinkc_$personID\" class=\"small hide-right\">\n";
+  $rval .= "<div id='unlinkc_$personID' class='small hide-right'>\n";
   $rval .= "<a href='#' onclick=\"return unlinkChild('$personID','child_unlink');\">" . uiTextSnippet('remove') . "</a> &nbsp; | &nbsp; \n";
   $rval .= "<a href='#' onclick=\"return unlinkChild('$personID','child_delete');\">" . uiTextSnippet('delete') . "</a></div>";
   $personlink = getName($row);

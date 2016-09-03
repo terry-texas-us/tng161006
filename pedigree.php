@@ -56,7 +56,7 @@ if (!$display) {
   }
 }
 
-$rounded = $display == "compact" ? "rounded4" : 'rounded10';
+$rounded = $display == "compact" ? "chart-border-radius-sm" : "chart-border-radius";
 
 if ($display == "standard") {
   $scrolldown = -200;
@@ -115,7 +115,6 @@ if ($display == "compact") {
   $pedigree['cellpad'] = 0;
   $pedigree['boxwidth'] -= 50;
   $pedigree['boxVsep'] = 5;
-  $pedigree['shadowoffset'] = 1;
   $namepad = "&nbsp;";
 } else {
   $pedigree['boxnamesize'] = 9;
@@ -130,8 +129,8 @@ if ($display == "compact") {
   if ($pedigree['boxHsep'] < 7) {
     $pedigree['boxHsep'] = 7;
   }
-  if ($pedigree['boxVsep'] < 3 + $pedigree['shadowoffset'] + (2 * $pedigree['borderwidth']) + ($pedigree['downarrow'] ? $pedigree['downarrowh'] : 15)) {
-    $pedigree['boxVsep'] = 3 + $pedigree['shadowoffset'] + (2 * $pedigree['borderwidth']) + ($pedigree['downarrow'] ? $pedigree['downarrowh'] : 15);
+  if ($pedigree['boxVsep'] < 3 + (2 * $pedigree['borderwidth']) + ($pedigree['downarrow'] ? $pedigree['downarrowh'] : 15)) {
+    $pedigree['boxVsep'] = 3 + (2 * $pedigree['borderwidth']) + ($pedigree['downarrow'] ? $pedigree['downarrowh'] : 15);
   }
   $namepad = "";
 }
@@ -159,7 +158,7 @@ if ($pedigree['linewidth'] < 1) {
   $pedigree['linewidth'] = 1;
 }
 
-// negative numbers ok for $pedigree['shadowoffset'], $pedigree['colorshift'], $fontshift)
+// negative numbers ok for $pedigree['colorshift'], $fontshift)
 // some values should be odd numbers ...    
 if ($pedigree['boxwidth'] % 2 == 0) {
   $pedigree['boxwidth']++;
@@ -230,8 +229,7 @@ if (!$pedigree['hideempty']) {
   $pedigree['hideempty'] = 0;
 }
 
-function getColor($shifts)
-{
+function getColor($shifts) {
   global $pedigree;
 
   $shiftval = $shifts * $pedigree['colorshift'];
@@ -262,15 +260,13 @@ function getColor($shifts)
   return "#$R$G$B";
 }
 
-function showBox($generation, $slot)
-{
+function showBox($generation, $slot) {
   global $chartStyle;
-  
+  global $display;
   global $pedigree;
   global $generations;
   global $pedmax;
   global $boxes;
-  global $flags;
   global $offpageimgh;
   global $offpageimgw;
   global $rounded;
@@ -330,18 +326,18 @@ function showBox($generation, $slot)
     $popupinfosizetouse = 7;
   }
 
-  //... include trace (maybe)
-  $boxes .= "\n<!-- box for slot $slot -->\n";
+  $boxes .= "\n<!-- slot $slot -->\n";
   if ($slot == 1) {
-    $chartStyle .= "#leftarrow {position:absolute; visibility:hidden; top:" . ($offsetV + intval(($boxheighttouse - $offpageimgh) / 2) + 1) . "px; left:$offsetH" . "px;z-index:5;}\n";
-    $boxes .= "<div id=\"leftarrow\">\n";
+    $top = ($offsetV + intval(($boxheighttouse - $offpageimgh) / 2) + 1) . "px";
+    $chartStyle .= "#leftarrow {position: absolute; visibility: hidden; top: {$top}; left: $offsetH" . "px; z-index: 5;}\n";
+    $boxes .= "<div id='leftarrow'>\n";
+    $boxes .= "</div>\n";
+    $left = ($offsetH - $pedigree['borderwidth']) . "px";
+    $boxes .= "<div class='popup' id='popupleft' style='top: {$top}; left: {$left};'>\n";
     $boxes .= "</div>\n";
 
-    $boxes .= "<div class=\"popup\" id=\"popupleft\" style=\"top:" . ($offsetV + intval(($boxheighttouse - $offpageimgh) / 2) + 1) . "px; left:" . ($offsetH - $pedigree['borderwidth'] + round($pedigree['shadowoffset'] / 2)) . "px;\" onmouseover=\"cancelTimer('left')\" onmouseout=\"setTimer('left')\">\n";
-    $boxes .= "</div>\n";
-
-    $pedigree['leftindent'] += $offpageimgw + $pedigree['shadowoffset'] + 3;
-    $offsetH += $offpageimgw + $pedigree['shadowoffset'] + 3;
+    $pedigree['leftindent'] += $offpageimgw + 3;
+    $offsetH += $offpageimgw + 3;
     $chartStyle .= "#popleft {font-size:$popupinfosizetouse" . "pt;}\n";
     $chartStyle .= "#popabbrleft {font-size:$popupinfosizetouse" . "pt;}\n";
   }
@@ -349,63 +345,57 @@ function showBox($generation, $slot)
   $chartStyle .= "#img$slot {max-width:" . $maxside . "px; max-height:" . $maxside . "px;}\n";
 
   //start box
-  $icons = $display != "box" ? " onmouseover=\"if($('#ic$slot').length) $('#ic$slot').show();\" onmouseout=\"if($('#ic$slot').length) $('#ic$slot').hide();\"" : "";
-  $boxes .= "<div id=\"box$slot\" class=\"pedbox $rounded\" style=\"background-color:$boxcolortouse; top:" . ($offsetV - $pedigree['borderwidth']) . "px; left:" . ($offsetH - $pedigree['borderwidth']) . "px; height:$boxheighttouse" . "px; width:{$pedigree['boxwidth']}px; border:{$pedigree['borderwidth']}px solid {$pedigree['bordercolor']};\"$icons></div>\n";
+  $top = ($offsetV - $pedigree['borderwidth']) . "px";
+  $left = ($offsetH - $pedigree['borderwidth']) . "px";
+  $boxes .= "<div class='pedbox $rounded' id='box$slot' style=\"background-color: $boxcolortouse; top: {$top}; left: {$left}; height: {$boxheighttouse}px; width: {$pedigree['boxwidth']}px; border: {$pedigree['borderwidth']}px solid {$pedigree['bordercolor']};\" data-slot='{$slot}' data-display='{$display}'></div>\n";
   //end box
-  // build the pop-up information box
-  $boxes .= "\n<!-- popup for $name -->\n\n";
 
   // lay a down arrow below the box to indicate a drop-down has data
   $cancelt = $pedigree['event'] == "over" ? " onmouseout=\"cancelTimer($slot)\"" : "";
-  $boxes .= "<div class=\"downarrow\" id=\"downarrow$slot\" onmouse{$pedigree['event']}=\"setPopup($slot, $offsetV,$boxheighttouse)\"$cancelt style=\"width:{$pedigree['boxwidth']}" . "px; text-align:center; top:" . ($offsetV + $boxheighttouse + $pedigree['borderwidth'] + $pedigree['shadowoffset'] + 1) . "px;left:" . ($offsetH - 1) . "px;\">\n";
+  $onMouse = "onmouse{$pedigree['event']}=\"setPopup($slot, $offsetV, $boxheighttouse)\"$cancelt";
 
-  $boxes .= "<img src='img/ArrowDown.gif' width=\"{$pedigree['downarroww']}\" height=\"{$pedigree['downarrowh']}\"  alt=''></div>\n";
+  $top = ($offsetV + $boxheighttouse + $pedigree['borderwidth'] + 1) . "px";
+  $left = ($offsetH - 1) . "px";
+  $boxes .= "<div class='downarrow' id='downarrow$slot' {$onMouse} style='width: {$pedigree['boxwidth']}px; top: {$top}; left: {$left}'>\n";
+  $boxes .= "<img src='img/ArrowDown.gif' width=\"{$pedigree['downarroww']}\" height=\"{$pedigree['downarrowh']}\"  alt=''>\n";
+  $boxes .= "</div>\n";
 
-  if ($pedigree['usepopups_real']) {
-    //start the block
-    $boxes .= "<div class=\"popup\" id=\"popup$slot\" style=\"left:" . ($offsetH - $pedigree['borderwidth'] + round($pedigree['shadowoffset'] / 2)) . "px;\" onmouseover=\"cancelTimer($slot)\" onmouseout=\"setTimer($slot)\">\n";
-
-    //end popup
+  if ($pedigree['usepopups_real']) { // start the block
+    $boxes .= "<div class='popup' id='popup$slot' style=\"left:" . ($offsetH - $pedigree['borderwidth']) . "px;\" onmouseover=\"cancelTimer($slot)\" onmouseout=\"setTimer($slot)\">\n";
     $boxes .= "</div>\n";
+  } // end popup
+
+  // connectors for the boxes
+  $vertboxstart = $offsetV + intval($boxheighttouse / 2) - intval($pedigree['linewidth'] / 2) . "px";
+
+  if ($generation != $generations) { // horizontal connector from child box (right side) to middle of vertical line
+    $left = ($offsetH + $pedigree['boxwidth']) . "px";
+    $width = (intval($pedigree['boxHsep'] / 2) + 1) . "px";
+    $boxes .= "<div class='boxborder pedigree-connectors-child' style='top: {$vertboxstart}; left: {$left}; height: {$pedigree['linewidth']}px; width: {$width};'></div>\n";
   }
-
-  $boxes .= "\n<!-- box outline and shadow for slot $slot -->\n";
-
-  //line & shadow
-  //$boxes .= "<div class=\"border\" id=\"border$slot" . "_1\" style=\"top:" . ($offsetV-$pedigree['borderwidth']) . "px; left:" . ($offsetH-$pedigree['borderwidth']) . "px; height:" . ($boxheighttouse+(2*$pedigree['borderwidth'])) . "px; width:" . ($pedigree['boxwidth']+(2*$pedigree['borderwidth'])) . "px; z-index:4;\"></div>\n";
-  $boxes .= "<div class=\"boxshadow pedshadow $rounded\" id=\"shadow$slot" . "_1\" style=\"top:" . ($offsetV - $pedigree['borderwidth'] + $pedigree['shadowoffset']) . "px; left:" . ($offsetH - $pedigree['borderwidth'] + $pedigree['shadowoffset']) . "px; height:" . ($boxheighttouse + (2 * $pedigree['borderwidth'])) . "px; width:" . ($pedigree['boxwidth'] + (2 * $pedigree['borderwidth'])) . "px;\"></div>\n";
-
-  // build left horizontal lines & shadows (except for first generation)
-  $vertboxstart = $offsetV + intval($boxheighttouse / 2) - intval($pedigree['linewidth'] / 2);
-  $halfhorzsep = intval($pedigree['boxHsep'] / 2);
 
   if ($generation != 1) {
-    $boxes .= "<div class=\"boxborder pedborder\" id=\"border$slot" . "_2\" style=\"top:" . $vertboxstart . "px; left:" . ($offsetH - $halfhorzsep) . "px; height:{$pedigree['linewidth']}px; width:" . ($halfhorzsep + 2) . "px;\"></div>\n";
-    $boxes .= "<div class=\"boxshadow pedshadow\" id=\"shadow$slot" . "_2\" style=\"top:" . ($vertboxstart + $pedigree['shadowoffset'] + 1) . "px;left:" . (($offsetH - $halfhorzsep) + $pedigree['shadowoffset'] + 1) . "px; height:{$pedigree['linewidth']}px; width:" . ($halfhorzsep + 2) . "px;\"></div>\n";
-  }
-
-  // build right horizontal line & shadow (except for last generation)
-  if ($generation != $generations) {
-    $boxes .= "<div class=\"boxborder pedborder\" id=\"border$slot" . "_3\" style=\"top:" . $vertboxstart . "px; left:" . ($offsetH + $pedigree['boxwidth']) . "px; height:{$pedigree['linewidth']}px; width:" . (intval($pedigree['boxHsep'] / 2) + 1) . "px;\"></div>\n";
-    $boxes .= "<div class=\"boxshadow pedshadow\" id=\"shadow$slot" . "_3\" style=\"top:" . ($vertboxstart + $pedigree['shadowoffset'] + 1) . "px; left:" . ($offsetH + $pedigree['boxwidth'] + $pedigree['shadowoffset'] + 1) . "px; height:{$pedigree['linewidth']}px; width:" . ($halfhorzsep + 1) . "px;\"></div>\n";
-  }
-
-  // build vertical line & shadow
-  if ($generation != 1) {
-    if ($slot % 2 == 0) {    //father
-      $boxes .= "<div class=\"boxborder pedborder\" id=\"border$slot" . "_4\" style=\"top:" . $vertboxstart . "px; left:" . ($offsetH - intval($pedigree['boxHsep'] / 2)) . "px; height:" . intval(1 + ($sepV + $boxheighttouse) / 2) . "px; width:{$pedigree['linewidth']}px;\"></div>\n";
-      $boxes .= "<div class=\"boxshadow pedshadow\" id=\"shadow$slot" . "_4\" style=\"top:" . ($vertboxstart + $pedigree['shadowoffset'] + 1) . "px; left:" . ($offsetH - $halfhorzsep + $pedigree['shadowoffset'] + 1) . "px; height:" . intval(1 + ($sepV + $boxheighttouse) / 2) . "px; width:{$pedigree['linewidth']}px;\"></div>\n";
-    } else { //mother
-      $boxes .= "<div class=\"boxborder pedborder\" id=\"border$slot" . "_5\" style=\"top:" . ($offsetV - intval($pedigree['linewidth'] / 2) - intval($sepV / 2)) . "px; left:" . ($offsetH - $halfhorzsep) . "px; height:" . intval(($sepV + $boxheighttouse) / 2) . "px; width:{$pedigree['linewidth']}px;\"></div>\n";
-      $boxes .= "<div class=\"boxshadow pedshadow\" id=\"shadow$slot" . "_5\" style=\"top:" . ($offsetV - intval($pedigree['linewidth'] / 2) - intval($sepV / 2) + $pedigree['shadowoffset'] + 1) . "px; left:" . ($offsetH - intval($pedigree['boxHsep'] / 2) + $pedigree['shadowoffset'] + 1) . "px; height:" . intval(($sepV + $boxheighttouse) / 2) . "px; width:{$pedigree['linewidth']}px;\"></div>\n";
+    $left = ($offsetH - intval($pedigree['boxHsep'] / 2)) . "px";
+    $width = (intval($pedigree['boxHsep'] / 2) + 1) . "px";
+    if ($slot % 2 == 0) { // vertical line from child horizontal connector up to father horizontal connector
+      $top = $vertboxstart;
+      $height = intval(1 + ($sepV + $boxheighttouse) / 2) . "px";
+      $boxes .= "<div class='pedigree-connectors-father' style='top: {$top}; left: {$left}; height: {$height}; width: {$width};'></div>\n";
+    } else { // vertical line from child horizontal connector down to mother horizontal connector 
+      $top = ($offsetV - intval($pedigree['linewidth'] / 2) - intval($sepV / 2)) . "px";
+      $height = intval(($sepV + $boxheighttouse) / 2) . "px";
+      $boxes .= "<div class='pedigree-connectors-mother' style='top: {$top}; left: {$left}; height: {$height}; width: {$width};'></div>\n";
     }
   }
 
   // see if we should include off-page connector
   if (($nextslot >= $pedmax)) {
-    $boxes .= "<div class=\"offpagearrow\" id=\"offpage$slot\" style=\"top:" . ($offsetV + intval(($boxheighttouse - $offpageimgh) / 2) + 1) . "px; left:" . ($offsetH + $pedigree['boxwidth'] + $pedigree['borderwidth'] + $pedigree['shadowoffset'] + 3) . "px;\"><a href=\"javascript:getNewFamilies(";
-    $boxes .= $slot < (pow(2, $generations - 1) * 3 / 2) ? "topparams,1,'M'" : "botparams,1,'F'";
-    $boxes .= ");\">{$pedigree['offpagelink']}</a></div>\n";
+    $top = ($offsetV + intval(($boxheighttouse - $offpageimgh) / 2) + 1) . "px";
+    $left = ($offsetH + $pedigree['boxwidth'] + $pedigree['borderwidth'] + 3) . "px";
+    $boxes .= "<div class='offpagearrow' id='offpage$slot' style=\"top: {$top}; left: {$left};\">\n";
+    $params = $slot < (pow(2, $generations - 1) * 3 / 2) ? "topparams, 1, \"M\"" : "botparams, 1, \"F\"";
+    $boxes .= "<a href='javascript:getNewFamilies({$params});'>{$pedigree['offpagelink']}</a>\n";
+    $boxes .= "</div>\n";
   }
   // do the look-ahead
   $generation++;
@@ -419,8 +409,9 @@ if (!$tngprint) {
   $tngprint = 0;
 }
 $chartStyle = "<style>\n";
-$chartStyle .= ".pedborder {background-color:{$pedigree['bordercolor']};}\n";
-$chartStyle .= ".pedshadow {background-color:{$pedigree['shadowcolor']};}\n";
+$chartStyle .= ".pedigree-connectors-child {background-color:{$pedigree['bordercolor']};}\n";
+$chartStyle .= ".pedigree-connectors-father {border-color: {$pedigree['bordercolor']}; border-left-width: {$pedigree['linewidth']}px; border-top-width: {$pedigree['linewidth']}px;}\n";
+$chartStyle .= ".pedigree-connectors-mother {border-color: {$pedigree['bordercolor']}; border-left-width: {$pedigree['linewidth']}px; border-bottom-width: {$pedigree['linewidth']}px;}\n";
 $chartStyle .= ".popup { position:absolute; visibility:hidden; background-color:{$pedigree['popupcolor']}; z-index:8 }\n";
 $chartStyle .= ".pboxname { font-size:{$pedigree['boxnamesize']}pt; text-align:{$pedigree['boxalign']}; }\n";
 $slot = 1;
@@ -429,8 +420,8 @@ showBox(1, $slot);
 $chartStyle .= "</style>\n";
 
 $gentext = xmlcharacters(uiTextSnippet('generations'));
-writelog("<a href=\"pedigree.php?personID=$personID&amp;generations=$generations&amp;display=$display\">" . xmlcharacters(uiTextSnippet('pedigreefor') . " $logname ($personID)") . "</a> $generations " . $gentext);
-preparebookmark("<a href=\"pedigree.php?personID=$personID&amp;generations=$generations&amp;display=$display\">" . xmlcharacters(uiTextSnippet('pedigreefor') . " $pedname ($personID)") . "</a> $generations " . $gentext);
+writelog("<a href='pedigree.php?personID=$personID&amp;generations=$generations&amp;display=$display'>" . xmlcharacters(uiTextSnippet('pedigreefor') . " $logname ($personID)") . "</a> $generations " . $gentext);
+preparebookmark("<a href='pedigree.php?personID=$personID&amp;generations=$generations&amp;display=$display'>" . xmlcharacters(uiTextSnippet('pedigreefor') . " $pedname ($personID)") . "</a> $generations " . $gentext);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
@@ -451,29 +442,30 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
     echo tng_DrawHeading($photostr, $pedname, getYears($row));
 
     $innermenu = uiTextSnippet('generations') . ": &nbsp;";
-    $innermenu .= "<select name=\"generations\" class=\"small\" onchange=\"window.location.href='pedigree.php?personID=' + firstperson + '&amp;parentset=$parentset&amp;display=$display&amp;generations=' + this.options[this.selectedIndex].value\">\n";
+    $innermenu .= "<select name='generations' class='small' onchange=\"window.location.href='pedigree.php?personID=' + firstperson + '&amp;parentset=$parentset&amp;display=$display&amp;generations=' + this.options[this.selectedIndex].value\">\n";
     for ($i = 2; $i <= $pedigree['maxgen']; $i++) {
-      $innermenu .= "<option value=\"$i\"";
+      $innermenu .= "<option value='$i'";
       if ($i == $generations) {
         $innermenu .= " selected";
       }
       $innermenu .= ">$i</option>\n";
     }
-    $innermenu .= "</select>&nbsp;&nbsp;&nbsp;\n";
-    $innermenu .= "<a href=\"pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=standard&amp;generations=$generations\" id=\"stdpedlnk\">" . uiTextSnippet('pedstandard') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"verticalchart.php?personID=$personID&amp;parentset=$parentset&amp;display=vertical&amp;generations=$generations\" id=\"pedchartlnk\">" . uiTextSnippet('pedvertical') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=compact&amp;generations=$generations\" id=\"compedlnk\">" . uiTextSnippet('pedcompact') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=box&amp;generations=$generations\" id=\"boxpedlnk\">" . uiTextSnippet('pedbox') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"pedigreetext.php?personID=$personID&amp;parentset=$parentset&amp;generations=$generations\" id=\"textlnk\">" . uiTextSnippet('pedtextonly') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"ahnentafel.php?personID=$personID&amp;parentset=$parentset&amp;generations=$generations\" id=\"ahnlnk\">" . uiTextSnippet('ahnentafel') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"extrastree.php?personID=$personID&amp;parentset=$parentset&amp;showall=1&amp;generations=$generations\" id=\"extralnk\">" . uiTextSnippet('media') . "</a>\n";
+    $innermenu .= "</select>\n";
+    
+    $innermenu .= "<a class='navigation-item' href='pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=standard&amp;generations=$generations' id='stdpedlnk'>" . uiTextSnippet('pedstandard') . "</a>\n";
+    $innermenu .= "<a class='navigation-item' href='verticalchart.php?personID=$personID&amp;parentset=$parentset&amp;display=vertical&amp;generations=$generations' id='pedchartlnk'>" . uiTextSnippet('pedvertical') . "</a>\n";
+    $innermenu .= "<a class='navigation-item' href='pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=compact&amp;generations=$generations' id='compedlnk'>" . uiTextSnippet('pedcompact') . "</a>\n";
+    $innermenu .= "<a class='navigation-item' href='pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=box&amp;generations=$generations' id='boxpedlnk'>" . uiTextSnippet('pedbox') . "</a>\n";
+    $innermenu .= "<a class='navigation-item' href='pedigreetext.php?personID=$personID&amp;parentset=$parentset&amp;generations=$generations' id='textlnk'>" . uiTextSnippet('pedtextonly') . "</a>\n";
+    $innermenu .= "<a class='navigation-item' href='ahnentafel.php?personID=$personID&amp;parentset=$parentset&amp;generations=$generations' id='ahnlnk'>" . uiTextSnippet('ahnentafel') . "</a>\n";
+    $innermenu .= "<a class='navigation-item' href='extrastree.php?personID=$personID&amp;parentset=$parentset&amp;showall=1&amp;generations=$generations' id='extralnk'>" . uiTextSnippet('media') . "</a>\n";
     if ($generations <= 6 && $allowpdf) {
-      $innermenu .= " &nbsp;&nbsp; | &nbsp;&nbsp; <a href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ped&amp;personID=' + firstperson + '&amp;generations=$generations');return false;\">PDF</a>\n";
+      $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ped&amp;personID=' + firstperson + '&amp;generations=$generations');return false;\">PDF</a>\n";
     }
     beginFormElement("pedigree", "", "form1", "form1");
     echo buildPersonMenu("pedigree", $personID);
     echo "<div class='pub-innermenu small'>\n";
-      echo $innermenu;
+    echo $innermenu;
     echo "</div>\n";
     echo "<br>\n";
     endFormElement();
@@ -490,27 +482,19 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
     }
     ?>
     <br>
-    <div align="left" style="position:relative;margin-top:8px" id="outer">
-      <div id="loading"><img src="img/spinner.gif" alt=""> <?php echo uiTextSnippet('loading'); ?></div>
-      <?php echo $boxes; ?>
-
-      <table width="<?php echo($pedigree['borderwidth'] + ($pedigree['maxwidth'] - $pedigree['boxHsep']) + $pedigree['shadowoffset'] + $pedigree['leftindent'] + $offpageimgw + 3); ?>"
-             style="height: <?php echo(20 + $pedigree['borderwidth'] + ($pedigree['maxheight'] - $pedigree['boxVsep']) + $pedigree['shadowoffset']); ?>px;">
-        <tr>
-          <td></td>
-        </tr>
-      </table>
+    <?php 
+    $height = 20 + $pedigree['borderwidth'] + ($pedigree['maxheight'] - $pedigree['boxVsep']); 
+    echo "<div id='outer' align='left' style='position: relative; margin-top: 8px; height: {$height}px'>";
+    echo $boxes; ?>
     </div>
     <?php echo $publicFooterSection->build(); ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
   <script>
-    var lastpopup = '';
     var tnglitbox;
     var slotceiling = <?php echo $pedmax ?>;
     var slotceiling_minus1 = <?php echo (pow(2, $generations - 1)) ?>;
     var display = '<?php echo $display ?>';
-    var pedcellpad = <?php echo $pedigree['cellpad'] ?>;
     var pedboxalign = '<?php echo $pedigree['boxalign'] ?>';
     var usepopups = <?php echo $pedigree['usepopups_real'] ?>;
     var popupchartlinks = <?php echo $pedigree['popupchartlinks'] ?>;
@@ -518,7 +502,6 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
     var popupspouses = <?php echo $pedigree['popupspouses'] ?>;
     var popuptimer = <?php echo $pedigree['popuptimer'] ?>;
     var pedborderwidth = <?php echo $pedigree['borderwidth'] ?>;
-    var pedbordercolor = '<?php echo $pedigree['bordercolor'] ?>';
     var pedbullet = '<?php echo $pedigree['bullet'] ?>';
     var emptycolor = '<?php echo $pedigree['emptycolor'] ?>';
     var hideempty = <?php echo $pedigree['hideempty'] ?>;
@@ -535,18 +518,10 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
       var allow_cites = true;
       var allow_notes = true;
     }
-    var unknown = textSnippet('unknownlit');
+    $(function () {
+        $('[data-toggle="popover"]').popover();
+    });
 
-    var families = new Array(),
-      people = new Array(),
-      endslots = new Array(),
-      slots = new Array();
-    var endslotctr;
-    var firstperson = '',
-      topparams = '',
-      botparams = '',
-      toplinks = '',
-      botlinks = '';
   </script>
   <script src='js/tngpedigree.js'></script>
   <?php if($allowEdit || $allowAdd) { ?>
@@ -579,6 +554,27 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
       ?>
       openCreatePersonForm();
       <?php } ?>
+    
+      $('.pedbox').on('mouseover', function () {
+          slot = '#ic' + $(this).data('slot');
+          if ($(this).data('display') !== 'box' && $(slot).length) {
+              $(slot).show();
+          }
+      });
+      $('.pedbox').on('mouseout', function () {
+          slot = '#ic' + $(this).data('slot');
+          if ($(this).data('display') !== 'box' && $(slot).length) {
+              $(slot).hide();
+          }
+      });
+      
+      $('#popupleft').on('mouseover', function () {
+          cancelTimer('left');
+      });
+      $('#popupleft').on('mouseout', function () {
+          setTimer('left');
+      });
+
     });
   </script>
 

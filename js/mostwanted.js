@@ -78,7 +78,7 @@ function updateMostWanted(form) {
                 } else {
                     //if it's new, then insert row at bottom
                     newcontent = '<div class="sortrow" id="order' + vars.mwtype + 'divs_' + vars.ID + '" style="clear:both" onmouseover="showEditDelete(\'' + vars.ID + '\');" onmouseout="hideEditDelete(\'' + vars.ID + '\');">\n';
-                    newcontent += '<table width="100%" cellpadding="5" cellspacing="1"><tr id="row_' + vars.ID + '">\n';
+                    newcontent += '<table width="100%"><tr id="row_' + vars.ID + '">\n';
                     newcontent += '<td class="dragarea">\n';
                     newcontent += '<img src="img/admArrowUp.gif" alt=""><br>' + textSnippet('drag') + '<br>\n';
                     newcontent += '<img src="img/admArrowDown.gif" alt="">\n';

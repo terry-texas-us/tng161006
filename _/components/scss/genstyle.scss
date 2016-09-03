@@ -8,6 +8,7 @@
  @import 'admin.scss';
  @import 'login.scss';
  @import 'users.scss';
+ @import 'verticalchart.scss';
  @import 'suggest.scss';
  @import 'gedcom.scss';
  
@@ -117,21 +118,20 @@ div#branchedit-person {z-index: 1060;}
 .popup {box-shadow: 1px 1px 3px 0 #666;  border-radius: 8px;}
 
 /*boxes on pedigree chart*/
+.pedigree-chart-text {
+  font-size: 12px;
+}
+
 .pedbox {position: absolute; z-index: 5; overflow: hidden;}
 
 .pedborderleft {border-left: solid 1px black;}
 
 .pedboxtable {height: 100%; width: 100%; float: left;}
 
-.rounded10 {border-radius: 10px;}
-
-.rounded4 {border-radius: 4px;}
+.chart-border-radius {border-radius: $border-radius;}
+.chart-border-radius-sm {border-radius: $border-radius-sm;}
 
 .trackerbox {border: 1px solid black; overflow: hidden;}
-
-.smaller {font-size: 11px;}
-
-.verysmall {font-size: 9px;}
 
 // [ts] looking at rules for context help up next to close on modals (only used on "more" dialog while testing)
 button.help {padding: 0 8px; cursor: pointer; background: transparent; border: 0;}
@@ -273,7 +273,7 @@ input.verylongfield {width: 550px;}
 .yellow {color: yellow;}
 
 /*arrow underneath pedigree boxes*/
-.downarrow {position: absolute; z-index: 7; cursor: pointer; visibility: hidden; text-align: center;}
+.downarrow {position: absolute; z-index: 7; cursor: pointer; visibility: hidden; text-align: center; margin-top: -0.75rem;}
 
 /*right-facing arrows indicating continuing pedigree charts*/
 .offpagearrow {position: absolute; visibility: hidden; z-index: 5;}
@@ -347,14 +347,17 @@ form[action="places-oneletter.php"] {margin: 10px 0;}
 #adm-innermenu {margin: 0 2px 2px 2px; clear: both; padding: .2em 0 .3em .7em;
 	border-right: 1px solid $gray-light; border-bottom: 1px solid $gray-light;}
 
-pub-innermenu {margin: 0 1px 0 1px; clear: both; padding: 0.3em 0 0.3em .7em;
-	border-right: 1px solid $gray-light; border-bottom: 1px solid $gray-light;}
+.pub-innermenu {margin: 0 1px 0 1px; clear: both; padding: 0.3em 0 0.3em .7em;}
+.pub-innermenu .navigation-item:not(:first-child):before{content: " | "; padding-left: 0.4em; padding-right: 0.4em;}
+.pub-innermenu a {text-decoration: none;}
 
 .fakelink {cursor: pointer;}
 
 .toggleicon {cursor: pointer; float: right; padding-top: 4px;} /* [ts][jquery selector] */
 
 .boxborder {position: absolute; z-index: 3; overflow: hidden;}
+.pedigree-connectors-father {position: absolute; z-index: 3; overflow: hidden; border-left: 1px solid; border-top: 1px solid; background-color: $body-bg; border-top-left-radius: $border-radius-lg;}
+.pedigree-connectors-mother {position: absolute; z-index: 3; overflow: hidden; border-left: 1px solid; border-bottom: 1px solid; background-color: $body-bg; border-bottom-left-radius: $border-radius-lg;}
 
 .boxshadow {position: absolute; z-index: 1; overflow: hidden;}
 

@@ -414,7 +414,7 @@ function showMediaSource($imgrow, $ss = false) {
     $imgrow['form'] = strtoupper($matches[1]);
   }
   if ($ss) {
-    echo "<div class='slidepane rounded10'>\n";
+    echo "<div class='slidepane'>\n";
   }
   if (!$ss && $imgrow['map']) {
     echo "<map name=\"tngmap_{$imgrow['mediaID']}\" id=\"tngmap_{$imgrow['mediaID']}\">{$imgrow['map']}</map>\n";
@@ -488,7 +488,7 @@ function showMediaSource($imgrow, $ss = false) {
           if (!$imgviewer || in_array($imgrow['mediatypeID'], $mediatypes_like[$imgviewer])) {
             $maxvh = $tngconfig['imgvheight'];
             $calcHeight = $maxvh ? ($height > $maxvh ? $maxvh : $height) : 1;
-            echo "<div id=\"loadingdiv2\" class='rounded10' style=\"position:static;\">" . uiTextSnippet('loading') . "</div><iframe name=\"iframe1\" id=\"iframe1\" src=\"" . "img_viewer.php?mediaID={$imgrow['mediaID']}&amp;medialinkID={$imgrow['medialinkID']}\" width=\"100%\" height=\"1\" onload=\"calcHeight($calcHeight)\" frameborder=\"0\" marginheight=\"0\" marginwidth=\"0\" scrolling=\"no\"></iframe>";
+            echo "<div id='loadingdiv2' style=\"position:static;\">" . uiTextSnippet('loading') . "</div><iframe name=\"iframe1\" id=\"iframe1\" src=\"" . "img_viewer.php?mediaID={$imgrow['mediaID']}&amp;medialinkID={$imgrow['medialinkID']}\" width=\"100%\" height=\"1\" onload=\"calcHeight($calcHeight)\" frameborder=\"0\" marginheight=\"0\" marginwidth=\"0\" scrolling=\"no\"></iframe>";
           } else {
             echo "<div class=\"titlebox mediaalign\" id=\"imgdiv\"><img src=\"$mediasrc\" id=\"theimage\" $mapstr alt=\"$description\"></div>\n";
           }

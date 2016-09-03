@@ -13,7 +13,7 @@ header("Content-type:text/html; charset=" . $session_charset);
   <header class='modal-header'></header>
   <div class='modal-body'>
     <div id='slideshow'>
-      <div id='loadingdiv' class='rounded10' style='display: none'><?php echo uiTextSnippet('loading'); ?></div>
+      <div id='loadingdiv' style='display: none'><?php echo uiTextSnippet('loading'); ?></div>
       <div id='div1' class='slide'>
         <?php
         initMediaTypes();

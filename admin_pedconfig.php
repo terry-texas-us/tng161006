@@ -420,23 +420,12 @@ $headSection->setTitle(uiTextSnippet('modifypedsettings'));
                         </td>
                       </tr>
                       <tr>
-                        <td><?php echo uiTextSnippet('shadowcolor'); ?>:</td>
-                        <td>
-                            <input id='shadowcolor' name='shadowcolor' type='color' <?php echo "value='" . $pedigree['shadowcolor'] . "'"; ?>>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><?php echo uiTextSnippet('shadowoffset'); ?>:</td>
-                        <td><input name='shadowoffset' type='text' value="<?php echo $pedigree['shadowoffset']; ?>" size='10'></td>
-                      </tr>
-                      <tr>
                         <td><?php echo uiTextSnippet('boxHsep'); ?>:</td>
                         <td><input name='boxHsep' type='text' value="<?php echo $pedigree['boxHsep']; ?>" size='10'></td>
                       </tr>
                       <tr>
                         <td><?php echo uiTextSnippet('boxVsep'); ?>:</td>
-                        <td><input type='text' value="<?php echo $pedigree['boxVsep']; ?>"
-                                   name="boxVsep" size='10'></td>
+                        <td><input name="boxVsep" type='text' value="<?php echo $pedigree['boxVsep']; ?>" size='10'></td>
                       </tr>
                       <tr>
                         <td><?php echo uiTextSnippet('defpgsize'); ?>:</td>

@@ -2,7 +2,7 @@
 
 echo "<input type='button' onclick=\"return divbox('mapcontainer');\" value=\"" . uiTextSnippet('showhidemap') . "\"> <span>" . uiTextSnippet('getcoords') . "</span>\n";
 
-echo "<div id='mapcontainer' style=\"display: none; width:{$map['admw']};\" class='mappad5 rounded10'>\n";
+echo "<div class='mappad5' id='mapcontainer' style=\"display: none; width:{$map['admw']};\">\n";
 $searchstring = $row['place'] ? $row['place'] : uiTextSnippet('searchstring');
 echo "<span>" . uiTextSnippet('googleplace') . '.';
 
@@ -13,7 +13,7 @@ if (!$row['place']) {
 echo ">\n";
 echo "<input type='button' value=\"" . uiTextSnippet('gobutton') . "\" onclick=\"showAddress(document.form1.address.value); return false\" /><br><br></span>\n";
 
-echo "<div id='map' style=\"width: {$map['admw']}; height: {$map['admh']}\" class='rounded10'></div>\n";
+echo "<div id='map' style=\"width: {$map['admw']}; height: {$map['admh']}\"></div>\n";
 $maphelplang = findhelp("places_googlemap_help.php");
 echo "<span><br><a href=\"javascript:newwindow=window.open('https://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "$mcharsetstr&amp;q=" . $row['place'] . "', 'googlehelp'); newwindow.focus();\"> " .
         uiTextSnippet('difficultmap') . "</a> | <a href=\"javascript:newwindow=window.open('$maphelplang/places_googlemap_help.php', 'newwindow', 'height=500, width=600, resizable=yes, scrollbars=yes'); newwindow.focus();\">" .

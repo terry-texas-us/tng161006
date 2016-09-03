@@ -32,7 +32,7 @@ if ($noneliving || $imgrow['alwayson']) {
   showMediaSource($imgrow, true);
 } else {
   ?>
-  <div class='livingbox rounded10'><?php echo uiTextSnippet('living'); ?></div>
+  <div class='livingbox'><?php echo uiTextSnippet('living'); ?></div>
   <?php
 }
 ?>

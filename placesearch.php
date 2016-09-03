@@ -81,7 +81,7 @@ $headSection->setTitle($psearchns);
     while ($prow = tng_fetch_assoc($presult)) {
       if ($prow['notes'] || $prow['latitude'] || $prow['longitude']) {
         if (($prow['latitude'] || $prow['longitude']) && $map['key'] && !$mapdrawn) {
-          echo "<br><div id='map' style=\"width: {$map['hstw']}; height: {$map['hsth']}; margin-bottom:20px;\" class=\"rounded10\"></div>\n";
+          echo "<br><div id='map' style=\"width: {$map['hstw']}; height: {$map['hsth']}; margin-bottom:20px;\"></div>\n";
           $usedplaces = [];
           $mapdrawn = true;
         }

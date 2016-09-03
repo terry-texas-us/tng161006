@@ -46,17 +46,11 @@ function addNote(form) {
                 var newtr;
                 var cell1;
                 var cell2;
-//                newnotetbl.className = "normal";
-//                newnotetbl.cellPadding = 3;
-//                newnotetbl.cellSpacing = 1;
-//                newnotetbl.border = 0;
                 newtr = newnotetbl.insertRow(0);
                 newtr.id = "row_" + vars.id;
                 insertCell(newtr, 0, "dragarea", '<img src="img/admArrowUp.gif" alt=""><br><img src="img/admArrowDown.gif" alt="">');
                 cell1 = insertCell(newtr, 1, "", getActionButtons(vars, 'Note'));
-//                cell1.width = "80";
                 cell2 = insertCell(newtr, 2, "", vars.display);
-//                cell2.width = "435";
                 div.append(newnotetbl);
                 $('#notes').append(div);
                 initNoteSort();

@@ -342,7 +342,7 @@ if ($location) {
       }
     }
     if ($map['key'] && $map['pins']) {
-      echo "<div id='map' style='width: {$map['hstw']}; height: {$map['hsth']}; margin-bottom: 20px;' class='rounded10'></div>\n";
+      echo "<div id='map' style='width: {$map['hstw']}; height: {$map['hsth']}; margin-bottom: 20px;'></div>\n";
     }
     if ($toppagenav) {
       echo "<p>$toppagenav</p>\n$body\n<p>$toppagenav</p>";

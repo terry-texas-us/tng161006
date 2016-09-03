@@ -331,8 +331,6 @@ $families = [];
 $familylist = [];
 
 header("Content-Type: application/json; charset=" . $session_charset);
-echo "{\n";
-
 $generation = 1;
 $newfam = 1;
 $backperson = "";
@@ -349,15 +347,16 @@ if ($personID) {
   }
 }
 
+echo "{";
+
 $numfamilies = count($families);
 if (count($people)) {
-  echo "\"people\":[" . implode(",\n", $people) . "]";
+  echo "\"people\":[" . implode(",", $people) . "]";
   if ($numfamilies) {
     echo ",";
   }
-  echo "\n";
 }
 if ($numfamilies) {
-  echo "\"families\":[" . implode(",\n", $families) . "]\n";
+  echo "\"families\":[" . implode(",", $families) . "]";
 }
 echo "}";

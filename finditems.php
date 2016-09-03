@@ -336,7 +336,7 @@ switch ($type) {
 }
 
 if (tng_num_rows($result)) {
-  echo "<table cellpadding=\"3\" cellspacing=\"1\" width=\"585\">\n$lines\n</table>\n";
+  echo "<table width='585'>\n$lines\n</table>\n";
 } else {
   echo uiTextSnippet('noresults');
 }

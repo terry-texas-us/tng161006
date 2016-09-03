@@ -68,7 +68,7 @@ function drawBox($person, $box) {
   $nameinfo = "<a href=\"peopleShowPerson.php?personID={$person['personID']}\">$name</a>";
   if ($person['personID'] && $pedigree['inclphotos']) {
     $constoffset = 0;
-    $photohtouse = $pedigree['puboxheight'] - $constoffset - ($pedigree['cellpad'] * 2) - 2; // take cellpadding into account
+    $photohtouse = $pedigree['puboxheight'] - $constoffset - ($pedigree['cellpad'] * 2) - 2;
     echo showSmallPhoto($person['personID'], $name, $person['allow_living'] && $person['allow_private'], $photohtouse, false, $person['sex']);
   }
   if ($person['allow_living'] && $person['allow_private']) {
@@ -337,13 +337,10 @@ if (!$generations) {
   }
 }
 
-$innermenu = "<a href=\"descend.php?personID=$personID&amp;display=standard&amp;generations=$generations\">" .
-        uiTextSnippet('pedstandard') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-$innermenu .= "<a href=\"descend.php?personID=$personID&amp;display=compact&amp;generations=$generations\">" .
-        uiTextSnippet('pedcompact') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-$innermenu .= "<a href=\"descendtext.php?personID=$personID&amp;generations=$generations\">" .
-        uiTextSnippet('pedtextonly') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-$innermenu .= "<a href=\"register.php?personID=$personID&amp;generations=$generations\">" . uiTextSnippet('regformat') . "</a>\n";
+$innermenu = "<a class='navigation-item' href='descend.php?personID=$personID&amp;display=standard&amp;generations=$generations'>" . uiTextSnippet('pedstandard') . "</a>\n";
+$innermenu .= "<a class='navigation-item' href='descend.php?personID=$personID&amp;display=compact&amp;generations=$generations'>" . uiTextSnippet('pedcompact') . "</a>\n";
+$innermenu .= "<a class='navigation-item' href='descendtext.php?personID=$personID&amp;generations=$generations'>" . uiTextSnippet('pedtextonly') . "</a>\n";
+$innermenu .= "<a class='navigation-item' href='register.php?personID=$personID&amp;generations=$generations'>" . uiTextSnippet('regformat') . "</a>\n";
 
 beginFormElement("descend", "GET", "form1", "form1");
 echo buildPersonMenu("descend", $personID);

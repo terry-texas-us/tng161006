@@ -65,37 +65,39 @@ function displayIndividual($key, $generation, $slot) {
   }
 
   if ($slot > 1 && $slot % 2 != 0) {
-    echo "<td rowspan=\"$rowspan\">\n";
+    echo "<td rowspan='$rowspan'>\n";
   } elseif ($slot % 2 == 0) {
-    echo "<td rowspan=\"$rowspan\">\n";
+    echo "<td rowspan='$rowspan'>\n";
   } else {
-    echo "<td rowspan=\"$rowspan\">\n";
+    echo "<td rowspan='$rowspan'>\n";
   }
 
   if ($slot > 1 && $slot % 2 != 0) {
-    echo "<table>\n<tr>\n";
-    echo "<td width=\"1\"><img src=\"img/black.gif\" alt='' height=\"$vertfill\" width=\"1\"></td>\n";
-    echo "<td></td>\n</tr>\n</table>\n";
+    echo "<table>\n";
+    echo "<tr>\n";
+    echo "<td width='1'><img src='img/black.gif' alt='' height='$vertfill' width='1'></td>\n";
+    echo "<td></td>\n</tr>\n";
+    echo "</table>\n";
   } else {
     echo "<table>\n<tr>\n";
-    echo "<td colspan='2'><img src=\"img/spacer.gif\" alt=''  height=\"$vertfill\" width=\"1\"></td>\n</tr>\n</table>\n";
+    echo "<td colspan='2'><img src='img/spacer.gif' alt=''  height='$vertfill' width='1'></td>\n</tr>\n</table>\n";
   }
 
-  echo "<table width=\"100%\">\n";
+  echo "<table width='100%'>\n";
   echo "<tr>\n";
-  $pedborder = $slot % 2 && $slot != 1 ? "class=\"pedborderleft\"" : "";
-  echo "<td colspan='2' $pedborder><span>&nbsp;$slot. <a href=\"peopleShowPerson.php?personID=$key\">$name</a>&nbsp;</span></td>\n";
+  $pedborder = $slot % 2 && $slot != 1 ? "class='pedborderleft'" : "";
+  echo "<td colspan='2' $pedborder><span>&nbsp;$slot. <a href='peopleShowPerson.php?personID=$key'>$name</a>&nbsp;</span></td>\n";
 
   //arrow goes here in own cell
   if ($nextslot >= $pedmax && $row['famc']) {
-    echo "<td><a href=\"pedigree.php?personID=$key&amp;display=textonly\" title=\"" . uiTextSnippet('popupnote2') . "\">=&gt;</a></td>\n";
+    echo "<td><a href='pedigree.php?personID=$key&amp;display=textonly' title=\"" . uiTextSnippet('popupnote2') . "\">=&gt;</a></td>\n";
   }
 
   echo "</tr>\n";
-  echo "<tr>\n<td colspan='2'><img src=\"img/black.gif\" alt='' width=\"100%\" height=\"1\"></td>\n</tr>\n";
+  echo "<tr>\n<td colspan='2'><img src='img/black.gif' alt='' width='100%' height='1'></td>\n</tr>\n";
   echo "<tr>\n";
 
-  $pedborder = $slot % 2 ? "" : "class=\"pedborderleft\"";
+  $pedborder = $slot % 2 ? "" : "class='pedborderleft'";
   if ($rights['both']) {
     if ($row['birthdate'] || $row['altbirthdate'] || $row['altbirthplace'] || $row['deathdate'] || $row['burialdate'] || $row['burialplace'] || ($slot % 2 == 0 && ($marrdate[$slot] || $marrplace[$slot]))) {
       $dataflag = 1;
@@ -117,9 +119,9 @@ function displayIndividual($key, $generation, $slot) {
     }
     if ($slot % 2 == 0) {
       if ($dataflag) {
-        echo "<tr>\n<td class=\"pedborderleft\"><span>&nbsp;" . uiTextSnippet('capmarrabbr') . ":</span></td>\n";
+        echo "<tr>\n<td class='pedborderleft'><span>&nbsp;" . uiTextSnippet('capmarrabbr') . ":</span></td>\n";
         echo "<td><span>" . displayDate($marrdate[$slot]) . "&nbsp;</span></td>\n</tr>\n";
-        echo "<tr>\n<td class=\"pedborderleft\"><span>&nbsp;" . uiTextSnippet('capplaceabbr') . ":&nbsp;</span></td>\n";
+        echo "<tr>\n<td class='pedborderleft'><span>&nbsp;" . uiTextSnippet('capplaceabbr') . ":&nbsp;</span></td>\n";
         echo "<td><span>{$marrplace[$slot]}&nbsp;</span></td>\n</tr>\n";
       } else {
         echo "<tr>\n";
@@ -143,7 +145,6 @@ function displayIndividual($key, $generation, $slot) {
       echo "</table>\n";
     }
   } else {
-    //echo "<tr>\n";
     showBlank($pedborder);
     if ($slot % 2 == 0) {
       echo "<tr>\n";
@@ -156,11 +157,11 @@ function displayIndividual($key, $generation, $slot) {
 
   if ($slot % 2 == 0) {
     echo "<table>\n<tr>\n";
-    echo "<td width=\"1\"><img src=\"img/black.gif\" alt=''  height=\"$vertfill\" width=\"1\"></td>\n";
+    echo "<td width='1'><img src='img/black.gif' alt=''  height='$vertfill' width='1'></td>\n";
     echo "<td></td>\n</tr>\n</table>\n";
   } else {
     echo "<table>\n<tr>\n";
-    echo "<td colspan='2'><img src=\"img/spacer.gif\" alt='' height=\"$vertfill\" width=\"1\"></td>\n</tr>\n</table>\n";
+    echo "<td colspan='2'><img src='img/spacer.gif' alt='' height='$vertfill' width='1'></td>\n</tr>\n</table>\n";
   }
   echo "</td>\n";
 
@@ -251,8 +252,8 @@ $pedmax = pow(2, intval($generations));
 $key = $personID;
 
 $gentext = xmlcharacters(uiTextSnippet('generations'));
-writelog("<a href=\"pedigree.php?personID=$personID&amp;generations=$generations&amp;display=textonly\">" . xmlcharacters(uiTextSnippet('pedigreefor') . " $logname ($personID)") . "</a> $generations " . $gentext);
-preparebookmark("<a href=\"pedigree.php?personID=$personID&amp;generations=$generations&amp;display=textonly\">" . xmlcharacters(uiTextSnippet('pedigreefor') . " $pedname ($personID)") . "</a> $generations " . $gentext);
+writelog("<a href='pedigree.php?personID=$personID&amp;generations=$generations&amp;display=textonly'>" . xmlcharacters(uiTextSnippet('pedigreefor') . " $logname ($personID)") . "</a> $generations " . $gentext);
+preparebookmark("<a href='pedigree.php?personID=$personID&amp;generations=$generations&amp;display=textonly'>" . xmlcharacters(uiTextSnippet('pedigreefor') . " $pedname ($personID)") . "</a> $generations " . $gentext);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
@@ -264,7 +265,6 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
 <html>
 <?php echo $headSection->build($flags, 'public', $session_charset); ?>
 <body id='public'>
-  <section class='container'>
     <?php
     echo $publicHeaderSection->build();
 
@@ -272,24 +272,24 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
     echo tng_DrawHeading($photostr, $pedname, getYears($row));
 
     $innermenu = uiTextSnippet('generations') . ": &nbsp;";
-    $innermenu .= "<select name=\"generations\" class=\"small\" onchange=\"window.location.href='pedigreetext.php?personID=$personID&amp;parentset=$parentset&amp;display=$display&amp;generations=' + this.options[this.selectedIndex].value\">\n";
+    $innermenu .= "<select name='generations' class='small' onchange=\"window.location.href='pedigreetext.php?personID=$personID&amp;parentset=$parentset&amp;display=$display&amp;generations=' + this.options[this.selectedIndex].value\">\n";
     for ($i = 1; $i <= $pedigree['maxgen']; $i++) {
-      $innermenu .= "<option value=\"$i\"";
+      $innermenu .= "<option value='$i'";
       if ($i == $generations) {
         $innermenu .= " selected";
       }
       $innermenu .= ">$i</option>\n";
     }
-    $innermenu .= "</select>&nbsp;&nbsp;&nbsp;\n";
-    $innermenu .= "<a href=\"pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=standard&amp;generations=$generations\" id=\"stdpedlnk\">" . uiTextSnippet('pedstandard') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"verticalchart.php?personID=$personID&amp;parentset=$parentset&amp;display=vertical&amp;generations=$generations\" id=\"pedchartlnk\">" . uiTextSnippet('pedvertical') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=compact&amp;generations=$generations\" id=\"compedlnk\">" . uiTextSnippet('pedcompact') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=box&amp;generations=$generations\" id=\"boxpedlnk\">" . uiTextSnippet('pedbox') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"pedigreetext.php?personID=$personID&amp;parentset=$parentset&amp;generations=$generations\">" . uiTextSnippet('pedtextonly') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"ahnentafel.php?personID=$personID&amp;parentset=$parentset&amp;generations=$generations\">" . uiTextSnippet('ahnentafel') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"extrastree.php?personID=$personID&amp;parentset=$parentset&amp;showall=1&amp;generations=$generations\">" . uiTextSnippet('media') . "</a>\n";
+    $innermenu .= "</select>\n";
+    $innermenu .= "<a class='navigation-item' href='pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=standard&amp;generations=$generations' id='stdpedlnk'>" . uiTextSnippet('pedstandard') . "</a>\n";
+    $innermenu .= "<a class='navigation-item' href='verticalchart.php?personID=$personID&amp;parentset=$parentset&amp;display=vertical&amp;generations=$generations' id='pedchartlnk'>" . uiTextSnippet('pedvertical') . "</a>\n";
+    $innermenu .= "<a class='navigation-item' href='pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=compact&amp;generations=$generations' id='compedlnk'>" . uiTextSnippet('pedcompact') . "</a>\n";
+    $innermenu .= "<a class='navigation-item' href='pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=box&amp;generations=$generations' id='boxpedlnk'>" . uiTextSnippet('pedbox') . "</a>\n";
+//    $innermenu .= "<a class='navigation-item' href='pedigreetext.php?personID=$personID&amp;parentset=$parentset&amp;generations=$generations'>" . uiTextSnippet('pedtextonly') . "</a>\n";
+    $innermenu .= "<a class='navigation-item' href='ahnentafel.php?personID=$personID&amp;parentset=$parentset&amp;generations=$generations'>" . uiTextSnippet('ahnentafel') . "</a>\n";
+    $innermenu .= "<a class='navigation-item' href='extrastree.php?personID=$personID&amp;parentset=$parentset&amp;showall=1&amp;generations=$generations'>" . uiTextSnippet('media') . "</a>\n";
     if ($generations <= 6 && $allowpdf) {
-      $innermenu .= " &nbsp;&nbsp; | &nbsp;&nbsp; <a href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ped&amp;personID=$personID&amp;generations=$generations');return false;\">PDF</a>\n";
+      $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ped&amp;personID=$personID&amp;generations=$generations');return false;\">PDF</a>\n";
     }
     beginFormElement("pedigree", "", "form1", "form1");
     echo buildPersonMenu("pedigree", $personID);
@@ -299,7 +299,7 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
     echo "<br>\n";
     endFormElement();
     ?>
-    <table class='table table-sm'>
+    <table class="pedigree-chart-text">
       <tr>
         <?php
         $slot = 1;
@@ -308,7 +308,6 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
       </tr>
     </table>
     <?php echo $publicFooterSection->build(); ?>
-  </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
   <script src="js/rpt_utils.js"></script>
   <script>

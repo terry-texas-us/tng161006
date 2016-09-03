@@ -176,7 +176,7 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
                   $truncated = substr($lrow['notes'], 0, 90);
                   $truncated = strlen($lrow['notes']) > 90 ? substr($truncated, 0, strrpos($truncated, ' ')) . '&hellip;' : $lrow['notes'];
                   echo "<div class=\"sortrow\" id=\"orderdivs_{$lrow['albumlinkID']}\" style=\"clear:both;position:relative\" onmouseover=\"$('#del_{$lrow['albumlinkID']}').css('visibility','visible');\" onmouseout=\"$('#del_{$lrow['albumlinkID']}').css('visibility','hidden');\">";
-                  echo "<table width=\"100%\" cellpadding=\"5\" cellspacing=\"1\"><tr>\n";
+                  echo "<table width='100%'><tr>\n";
                   echo "<td class='dragarea'>";
                   echo "<img src='img/admArrowUp.gif' alt=''>" . uiTextSnippet('drag') . "\n";
                   echo "<img src='img/admArrowDown.gif' alt=''>\n";

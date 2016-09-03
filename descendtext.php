@@ -206,25 +206,21 @@ $headSection->setTitle(uiTextSnippet('descendfor') . " $namestr");
     }
 
     $innermenu = uiTextSnippet('generations') . ": &nbsp;";
-    $innermenu .= "<select name=\"generations\" class=\"small\" onchange=\"window.location.href='descendtext.php?personID=$personID&amp;display=$display&amp;generations=' + this.options[this.selectedIndex].value\">\n";
+    $innermenu .= "<select name='generations' class='small' onchange=\"window.location.href='descendtext.php?personID=$personID&amp;display=$display&amp;generations=' + this.options[this.selectedIndex].value\">\n";
     for ($i = 1; $i <= $pedigree['maxdesc']; $i++) {
-      $innermenu .= "<option value=\"$i\"";
+      $innermenu .= "<option value='$i'";
       if ($i == $generations) {
         $innermenu .= " selected";
       }
       $innermenu .= ">$i</option>\n";
     }
-    $innermenu .= "</select>&nbsp;&nbsp;&nbsp;\n";
-    $innermenu .= "<a href=\"descend.php?personID=$personID&amp;display=standard&amp;generations=$generations\">" .
-            uiTextSnippet('pedstandard') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"descend.php?personID=$personID&amp;display=compact&amp;generations=$generations\">" .
-            uiTextSnippet('pedcompact') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"descendtext.php?personID=$personID&amp;generations=$generations\">" .
-            uiTextSnippet('pedtextonly') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"register.php?personID=$personID&amp;generations=$generations\">" .
-            uiTextSnippet('regformat') . "</a>\n";
+    $innermenu .= "</select>\n";
+    $innermenu .= "<a class='navigation-item' href='descend.php?personID=$personID&amp;display=standard&amp;generations=$generations'>" . uiTextSnippet('pedstandard') . "</a>\n";
+    $innermenu .= "<a class='navigation-item' href='descend.php?personID=$personID&amp;display=compact&amp;generations=$generations'>" . uiTextSnippet('pedcompact') . "</a>\n";
+    $innermenu .= "<a class='navigation-item' href='descendtext.php?personID=$personID&amp;generations=$generations'>" . uiTextSnippet('pedtextonly') . "</a>\n";
+    $innermenu .= "<a class='navigation-item' href='register.php?personID=$personID&amp;generations=$generations'>" . uiTextSnippet('regformat') . "</a>\n";
     if ($generations <= 12 && $allowpdf) {
-      $innermenu .= " &nbsp;&nbsp; | &nbsp;&nbsp; <a href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=desc&amp;personID=$personID&amp;generations=$generations');return false;\">PDF</a>\n";
+      $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=desc&amp;personID=$personID&amp;generations=$generations');return false;\">PDF</a>\n";
     }
 
     beginFormElement("descend", "get", "form1", "form1");

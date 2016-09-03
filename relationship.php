@@ -5,6 +5,8 @@ require $subroot . 'pedconfig.php';
 require 'pedbox.php';
 require 'prefixes.php';
 
+require 'personlib.php';
+
 $totalRelationships = 0;
 $needmore = true;
 
@@ -188,7 +190,7 @@ class Relationship
     }
     if ($gender1 == 'M') {
       $reldesc = $messages['0'];
-    } elseif ($gender1 = 'F') {
+    } elseif ($gender1 == 'F') {
       $reldesc = $messages['1'];
     } else {
       $reldesc = $messages['2'];
@@ -200,7 +202,7 @@ class Relationship
     return $gender == 'M' ? 'F' : ($gender == 'F' ? 'M' : $gender);
   }
 
-  function buildUp[] {
+  function buildUparray() {
     $this->uparray = [];
     $index = $this->upptr;
     $upcount = $this->upcount - 1;
@@ -317,26 +319,22 @@ function drawCouple($couple, $topflag, $linedown) {
       //short line below box of first couple
       if ($linedown) {
         echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV + $pedigree['puboxheight'] - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($gens->offsetH + intval($pedigree['puboxwidth'] / 2)) . "px;height:" . (2 * $pedigree['boxVsep']) . "px;width:{$pedigree['linewidth']}px;\"></div>\n";
-        echo "<div class=\"boxshadow\" style=\"background-color:{$pedigree['shadowcolor']}; top:" . ($gens->offsetV + $pedigree['puboxheight'] - intval($pedigree['linewidth'] / 2) + $pedigree['shadowoffset'] + 1) . "px;left:" . ($gens->offsetH + intval($pedigree['puboxwidth'] / 2) + $pedigree['shadowoffset'] + 1) . "px;height:" . (2 * $pedigree['boxVsep']) . "px;width:{$pedigree['linewidth']}px;\"></div>\n";
       }
       $gens->firstone = 0;
     } else {
       //line coming up from top of other boxes
       echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV - (2 * $pedigree['boxVsep']) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($gens->offsetH + intval($pedigree['puboxwidth'] / 2)) . "px;height:" . (2 * $pedigree['boxVsep']) . "px;width:{$pedigree['linewidth']}px;\"></div>\n";
-      echo "<div class=\"boxshadow\" style=\"background-color:{$pedigree['shadowcolor']}; top:" . ($gens->offsetV - (2 * $pedigree['boxVsep']) - intval($pedigree['linewidth'] / 2) + $pedigree['shadowoffset'] + 1) . "px;left:" . ($gens->offsetH + intval($pedigree['puboxwidth'] / 2) + $pedigree['shadowoffset'] + 1) . "px;height:" . (2 * $pedigree['boxVsep']) . "px;width:{$pedigree['linewidth']}px;\"></div>\n";
     }
   }
   $spouseID = $couple['spouse'];
   if ($spouseID) {
     echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV + intval($pedigree['puboxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($gens->offsetH + $pedigree['puboxwidth']) . "px;height:{$pedigree['linewidth']}px;width:" . (intval($pedigree['boxHsep'] / 2) + 1) . "px;z-index:3;overflow:hidden;\"></div>\n";
-    echo "<div class=\"boxshadow\" style=\"background-color:{$pedigree['shadowcolor']}; top:" . ($gens->offsetV + intval($pedigree['puboxheight'] / 2) - intval($pedigree['linewidth'] / 2) + $pedigree['shadowoffset'] + 1) . "px;left:" . ($gens->offsetH + $pedigree['puboxwidth'] + $pedigree['shadowoffset'] + 1) . "px;height:{$pedigree['linewidth']}px;width:" . (intval($pedigree['boxHsep'] / 2) + 1) . "px;\"></div>\n";
     $gens->offsetH = $gens->offsetH + $pedigree['puboxwidth'] + intval($pedigree['boxHsep'] / 2);
     drawBox($spouseID, 1, $topflag);
   }
   if ($topflag) {
     //long connecting line
     echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV + $pedigree['puboxheight'] + (2 * $pedigree['boxVsep']) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($pedigree['leftindent'] + intval($pedigree['puboxwidth'] / 2)) . "px;height:{$pedigree['linewidth']}px;width:" . ((2 * $pedigree['puboxwidth']) + $pedigree['boxHsep'] + $pedigree['leftindent'] + 1) . "px;\"></div>\n";
-    echo "<div class=\"boxshadow\" style=\"background-color:{$pedigree['shadowcolor']}; top:" . ($gens->offsetV + $pedigree['puboxheight'] + (2 * $pedigree['boxVsep']) - intval($pedigree['linewidth'] / 2) + $pedigree['shadowoffset'] + 1) . "px;left:" . ($pedigree['leftindent'] + intval($pedigree['puboxwidth'] / 2) + $pedigree['shadowoffset'] + 1) . "px;height:{$pedigree['linewidth']}px;width:" . ((2 * $pedigree['puboxwidth']) + $pedigree['boxHsep'] + $pedigree['leftindent'] + 1) . "px;\"></div>\n";
     $gens->offsetV += (2 * $pedigree['boxVsep']);
   }
   echo "\n\n";
@@ -387,13 +385,14 @@ function drawBox($drawpersonID, $spouseflag, $topflag) {
     } else {
       $iconactions = $iconlinks = "";
     }
-    echo "<div class='pedbox rounded10' style=\"background-color:$boxcolortouse; top:" . $gens->offsetV . "px; left:" . $gens->offsetH . "px; height:{$pedigree['puboxheight']}" . "px; width:{$pedigree['puboxwidth']}" . "px;border:{$pedigree['borderwidth']}px solid {$pedigree['bordercolor']};\"$iconactions>\n";
+    $border = "{$pedigree['borderwidth']}px solid {$pedigree['bordercolor']}";
+    echo "<div class='pedbox chart-border-radius' style=\"background-color: $boxcolortouse; top:" . $gens->offsetV . "px; left:" . $gens->offsetH . "px; height: {$pedigree['puboxheight']}" . "px; width: {$pedigree['puboxwidth']}" . "px; border: {$border}; \"$iconactions>\n";
     $tableheight = $pedigree['puboxheight'];
-    echo "$iconlinks<table cellpadding=\"5\" align=\"{$pedigree['puboxalign']}\" class=\"pedboxtable\"><tr>";
+    echo "$iconlinks<table class='pedboxtable' align=\"{$pedigree['puboxalign']}\"><tr>";
 
     // implant a picture (maybe)
     if ($pedigree['inclphotos']) {
-      $photohtouse = $pedigree['puboxheight'] - ($pedigree['cellpad'] * 2); // take cellpadding into account
+      $photohtouse = $pedigree['puboxheight'] - ($pedigree['cellpad'] * 2);
       $photoInfo = getPhotoSrc($row['personID'], $rights['both'], $row['sex']);
       if ($photoInfo['ref']) {
         $imagestr = "<img src=\"{$photoInfo['ref']}\" style=\"max-height:{$photohtouse}px;max-width:{$photohtouse}px\" alt='' class=\"smallimg\">";
@@ -411,7 +410,6 @@ function drawBox($drawpersonID, $spouseflag, $topflag) {
     echo "</table></div>\n";
     //end box
 
-    echo "<div class='rounded10' style=\"position:absolute; background-color:{$pedigree['shadowcolor']}; top:" . ($gens->offsetV - $pedigree['borderwidth'] + $pedigree['shadowoffset']) . "px;left:" . ($gens->offsetH - $pedigree['borderwidth'] + $pedigree['shadowoffset']) . "px;height:" . ($pedigree['puboxheight'] + (2 * $pedigree['borderwidth'])) . "px;width:" . ($pedigree['puboxwidth'] + (2 * $pedigree['borderwidth'])) . "px;z-index:1\"></div>\n";
     //keep track of total chart height
     tng_free_result($result);
   }
@@ -421,7 +419,6 @@ function doMultSpouse($prispouse1, $prispouse2, $otherspouse) {
   global $pedigree, $gens;
 
   echo "<div style=\"position:absolute;background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($pedigree['leftindent'] + intval($pedigree['puboxwidth'] / 2)) . "px;height:{$pedigree['linewidth']}px;width:" . ((2 * $pedigree['puboxwidth']) + $pedigree['boxHsep'] + $pedigree['leftindent'] + 1) . "px;z-index:3;overflow:hidden;\"></div>\n";
-  echo "<div style=\"position:absolute;background-color:{$pedigree['shadowcolor']}; top:" . ($gens->offsetV - intval($pedigree['linewidth'] / 2) + $pedigree['shadowoffset'] + 1) . "px;left:" . ($pedigree['leftindent'] + intval($pedigree['puboxwidth'] / 2) + $pedigree['shadowoffset'] + 1) . "px;height:{$pedigree['linewidth']}px;width:" . ((2 * $pedigree['puboxwidth']) + $pedigree['boxHsep'] + $pedigree['leftindent'] + 1) . "px;z-index:1;overflow:hidden;\"></div>\n";
   $gens->offsetV -= $pedigree['puboxheight'];
 
   $couple['person'] = $prispouse1;
@@ -574,7 +571,7 @@ function checkpersonup($nextcouple) {
 
   $lastup = $gens->upcount;
   $gens->upcount += 1;
-  $gens->buildUp[];
+  $gens->buildUparray();
 
   if (!isset($gens->uplist[$gens->upcount])) {
     $gens->uplist[$gens->upcount] = [];
@@ -835,17 +832,17 @@ echo "<body id='public'>\n";
     $innermenu .= "</select>&nbsp;&nbsp;&nbsp;\n";
 
     $innermenu .= uiTextSnippet('generations') . ": &nbsp;";
-    $innermenu .= "<select name=\"generations\" class=\"small\">\n";
+    $innermenu .= "<select name='generations' class='small'>\n";
     for ($i = 1; $i <= $pedigree['maxupgen']; $i++) {
-      $innermenu .= "<option value=\"$i\"";
+      $innermenu .= "<option value='$i'";
       if ($i == $generations) {
         $innermenu .= " selected";
       }
       $innermenu .= ">$i</option>\n";
     }
-    $innermenu .= "</select>&nbsp;&nbsp;&nbsp;\n";
-    $innermenu .= "<a href='#' onclick=\"document.form1.submit();\">" . uiTextSnippet('refresh') . "</a> &nbsp;&nbsp; | &nbsp;&nbsp; \n";
-    $innermenu .= "<a href=\"relateform.php?primaryID=$primarypersonID\">" . uiTextSnippet('findanother') . "</a>\n";
+    $innermenu .= "</select>\n";
+    $innermenu .= "<a class='navigation-item' href='#' onclick=\"document.form1.submit();\">" . uiTextSnippet('refresh') . "</a>\n";
+    $innermenu .= "<a class='navigation-item' href='relateform.php?primaryID=$primarypersonID'>" . uiTextSnippet('findanother') . "</a>\n";
 
     beginFormElement("relationship2", "get", "form1", "form1");
     echo buildPersonMenu("relate", $primarypersonID);

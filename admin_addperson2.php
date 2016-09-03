@@ -175,16 +175,15 @@ if ($result && tng_num_rows($result)) {
         $birthdate = "";
       }
     }
-    $rval = "<div class='sortrow' id=\"child_$personID\" style='width: 500px; clear: both; display: none'";
+    $rval = "<div class='sortrow' id='child_$personID' style='width: 500px; clear: both; display: none'";
     $rval .= " onmouseover=\"$('#unlinkc_$personID').css('visibility','visible');\" onmouseout=\"$('#unlinkc_$personID').css('visibility','hidden');\">\n";
-    $rval .= "<table width=\"100%\" cellpadding=\"5\" cellspacing=\"1\"><tr>\n";
+    $rval .= "<table width='100%'><tr>\n";
     $rval .= "<td class='dragarea'>";
     $rval .= "<img src='img/admArrowUp.gif' alt=''>" . uiTextSnippet('drag') . "\n";
     $rval .= "<img src='img/admArrowDown.gif' alt=''>\n";
     $rval .= "</td>\n";
-    $rval .= "<td class=\"childblock\">\n";
+    $rval .= "<td class='childblock'>\n";
 
-    //$name = $session_charset == "UTF-8" ? getName($row) : utf8_encode(getName($row));
     $name = getName($row);
     $rval .= "<div id=\"unlinkc_$personID\" class=\"small hide-right\"><a href='#' onclick=\"return unlinkChild('$personID','child_unlink');\">" . uiTextSnippet('remove') . "</a> &nbsp; | &nbsp; <a href='#' onclick=\"return unlinkChild('$personID','child_delete');\">" . uiTextSnippet('delete') . "</a></div>";
     $rval .= "<a href='#' onclick=\"EditChild('$personID');\">" . $name . "</a> - $personID<br>$birthdate</div>\n</td>\n</tr>\n</table>\n</div>\n";

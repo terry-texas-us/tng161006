@@ -225,7 +225,7 @@ while ($marriagerow = tng_fetch_assoc($marriages)) {
     $persontext .= "<td colspan='2'>\n";
 
     $kidcount = 1;
-    $persontext .= "<table cellpadding = \"0\" cellspacing = \"0\">\n";
+    $persontext .= "<table>\n";
     while ($child = tng_fetch_assoc($children)) {
       $ifkids = $child['haskids'] ? "<strong>+</strong>" : "&nbsp;";
       $birthinfo = getBirthInfo($child);

@@ -558,20 +558,20 @@ $headSection->setTitle($headTitle);
       if ($tngconfig['istart']) {
       } else {
       }
-      $innermenu = "<a href='#' onclick=\"return infoToggle('info');\">" . uiTextSnippet('faminfo') . "</a>&nbsp;&nbsp;|&nbsp;&nbsp;\n";
+      $innermenu = "<a class='navigation-item' href='#' onclick=\"return infoToggle('info');\">" . uiTextSnippet('faminfo') . "</a>\n";
       if ($media) {
-        $innermenu .= "<a href='#' onclick=\"return infoToggle('media');\">" . uiTextSnippet('media') . "</a>&nbsp;&nbsp;|&nbsp;&nbsp;\n";
+        $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('media');\">" . uiTextSnippet('media') . "</a>\n";
       }
       if ($assoctext) {
-        $innermenu .= "<a href='#' onclick=\"return infoToggle('assoc');\">" . uiTextSnippet('association') . "</a>&nbsp;&nbsp;|&nbsp;&nbsp;\n";
+        $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('assoc');\">" . uiTextSnippet('association') . "</a>\n";
       }
       if ($notes) {
-        $innermenu .= "<a href='#' onclick=\"return infoToggle('notes');\">" . uiTextSnippet('notes') . "</a>&nbsp;&nbsp;|&nbsp;&nbsp;\n";
+        $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('notes');\">" . uiTextSnippet('notes') . "</a>\n";
       }
       if ($citedispctr) {
-        $innermenu .= "<a href='#' onclick=\"return infoToggle('citations');\">" . uiTextSnippet('citations') . "</a>&nbsp;&nbsp;|&nbsp;&nbsp;\n";
+        $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('citations');\">" . uiTextSnippet('citations') . "</a>\n";
       }
-      $innermenu .= "<a href='#' onclick=\"return infoToggle('all');\">" . uiTextSnippet('all') . "</a>\n";
+      $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('all');\">" . uiTextSnippet('all') . "</a>\n";
     } else {
       $innermenu = "<span>" . uiTextSnippet('faminfo') . "</span>\n";
     }
@@ -581,7 +581,7 @@ $headSection->setTitle($headTitle);
     tng_free_result($treeResult);
 
     if ($allowpdf) {
-      $innermenu .= " &nbsp;&nbsp; | &nbsp;&nbsp; <a href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=fam&amp;familyID=$familyID');return false;\">PDF</a>\n";
+      $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=fam&amp;familyID=$familyID');return false;\">PDF</a>\n";
     }
     echo buildFamilyMenu("family", $familyID);
     echo "<div class='pub-innermenu small'>\n";

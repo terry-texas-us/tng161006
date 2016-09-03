@@ -382,7 +382,7 @@ $headSection->setTitle($location);
       tng_free_result($result);
     }
     if ($map['key'] && $map['pins']) {
-      echo "<div id='map' style=\"width: {$map['hstw']}; height: {$map['hsth']};margin-bottom:20px;\" class='rounded10'></div>\n";
+      echo "<div id='map' style=\"width: {$map['hstw']}; height: {$map['hsth']};margin-bottom:20px;\"></div>\n";
     }
     echo $body;
     ?>

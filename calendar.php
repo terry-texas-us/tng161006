@@ -355,7 +355,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     <?php
       }
     ?>
-    <table class='calendar rounded10'>
+    <table class='calendar'>
     <tr>
     <?php
     // Weekday name headers
@@ -434,7 +434,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     </td>
     </tr></table>
 
-    <div id="calLegend" class='rounded10'>
+    <div id='calLegend'>
     <ul class="flat">
     <?php
       // make sure the custom text key is set

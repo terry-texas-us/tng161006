@@ -26,7 +26,7 @@ function showDiv($type) {
 
 
   echo "<div id=\"order$type" . "divs\">\n";
-  echo "<table id=\"order$type" . "tbl\" width=\"100%\" cellpadding=\"3\" cellspacing=\"1\">\n";
+  echo "<table id=\"order$type" . "tbl\" width='100%'>\n";
   echo "<tr>\n";
   echo "<td style='width: 55px'>" . uiTextSnippet('text_sort') . "</td>\n";
   echo "<td style='width: " . ($thumbmaxw + 10) . "px'>" . uiTextSnippet('thumb') . "</td>\n";
@@ -49,7 +49,7 @@ function showDiv($type) {
     $truncated = substr($lrow['mwdesc'], 0, 90);
     $truncated = strlen($lrow['mwdesc']) > 90 ? substr($truncated, 0, strrpos($truncated, ' ')) . '&hellip;' : $lrow['mwdesc'];
     echo "<div class='sortrow' id=\"order{$lrow['mwtype']}" . "divs_{$lrow['mwID']}\" style='clear: both' onmouseover=\"showEditDelete('{$lrow['mwID']}');\" onmouseout=\"hideEditDelete('{$lrow['mwID']}');\">";
-    echo "<table width=\"100%\" cellpadding=\"5\" cellspacing=\"1\"><tr id=\"row_{$lrow['mwID']}\">\n";
+    echo "<table width='100%'><tr id=\"row_{$lrow['mwID']}\">\n";
     echo "<td class='dragarea'>";
       echo "<img src='img/admArrowUp.gif' alt=''>" . uiTextSnippet('drag') . "\n";
       echo "<img src='img/admArrowDown.gif' alt=''>\n";

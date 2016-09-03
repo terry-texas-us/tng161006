@@ -306,4 +306,4 @@ switch ($linktype) {
 }
 
 header("Content-type:text/html; charset=" . $session_charset);
-echo "<table cellpadding=\"3\" cellspacing=\"1\" width=\"585\">\n$lines\n</table>\n";
+echo "<table width='585'>\n$lines\n</table>\n";

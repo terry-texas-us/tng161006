@@ -150,7 +150,7 @@ $headSection->setTitle(uiTextSnippet($sortstr));
               $truncated = substr($row['description'], 0, 90);
               $truncated = strlen($row['description']) > 90 ? substr($truncated, 0, strrpos($truncated, ' ')) . '&hellip;' : $row['description'];
               echo "<div class=\"sortrow\" id=\"orderdivs_{$row['alinkID']}\" style=\"clear:both;position:relative\" onmouseover=\"$('#md_{$row['albumID']}').css('visibility','visible');\" onmouseout=\"$('#md_{$row['albumID']}').css('visibility','hidden');\">";
-              echo "<table width=\"100%\" cellpadding=\"5\" cellspacing=\"1\"><tr>\n";
+              echo "<table width='100%'><tr>\n";
               echo "<td class='dragarea'>";
                 echo "<img src='img/admArrowUp.gif' alt=''>" . uiTextSnippet('drag') . "\n";
                 echo "<img src='img/admArrowDown.gif' alt=''>\n";
