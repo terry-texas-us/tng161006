@@ -26,16 +26,10 @@ $country = addslashes($country);
 $zip = addslashes($zip);
 $phone = addslashes($phone);
 
-if (!$disallowgedcreate) {
-  $disallowgedcreate = 0;
-}
-if (!$disallowpdf) {
-  $disallowpdf = 0;
-}
 if (!$private) {
   $private = 0;
 }
-$query = "UPDATE $treesTable SET treename=\"$treename\",description=\"$description\",owner=\"$owner\",email=\"$email\",address=\"$address\",city=\"$city\",state=\"$state\",country=\"$country\",zip=\"$zip\",phone=\"$phone\",secret=\"$private\",disallowgedcreate=\"$disallowgedcreate\",disallowpdf=\"$disallowpdf\"";
+$query = "UPDATE $treesTable SET treename = '$treename', description = '$description', owner = '$owner', email = '$email', address = '$address', city = '$city', state = '$state', country = '$country', zip = '$zip', phone = '$phone', secret = '$private'";
 $result = tng_query($query);
 
 adminwritelog("<a href='treesEdit.php'>" . uiTextSnippet('modifytree') . ": $tree</a>");

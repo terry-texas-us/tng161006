@@ -47,28 +47,21 @@ $org_rightbranch = $rightbranch;
 $namestr = getName($row);
 $nameformap = $namestr;
 
-$treeResult = getTreeSimple();
-$treerow = tng_fetch_assoc($treeResult);
-$disallowgedcreate = $treerow['disallowgedcreate'];
-$allowpdf = !$treerow['disallowpdf'] || ($allow_pdf && $rightbranch);
-tng_free_result($treeResult);
-
 $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $namestr);
 $treestr = "<a href='showtree.php'>{$treerow['treename']}</a>";
 if ($row['branch']) {
-    //explode on commas
     $branches = explode(",", $row['branch']);
     $count = 0;
     $branchstr = "";
     foreach ($branches as $branch) {
-    $count++;
-    $brresult = getBranchesSimple($branch);
-    $brrow = tng_fetch_assoc($brresult);
-    $branchstr .= $brrow['description'] ? $brrow['description'] : $branch;
-    if ($count < count($branches)) {
-      $branchstr .= ", ";
-    }
-    tng_free_result($brresult);
+      $count++;
+      $brresult = getBranchesSimple($branch);
+      $brrow = tng_fetch_assoc($brresult);
+      $branchstr .= $brrow['description'] ? $brrow['description'] : $branch;
+      if ($count < count($branches)) {
+        $branchstr .= ", ";
+      }
+      tng_free_result($brresult);
     }
     if ($branchstr) {
       $treestr = $treestr . " | $branchstr";
@@ -106,7 +99,6 @@ $headSection->setTitle($headTitle);
 <body id='public'>
   <section class='container'>
     <?php
-
     echo $publicHeaderSection->build();
 
     $indmedia = getMedia($row, 'I');
@@ -125,7 +117,7 @@ $headSection->setTitle($headTitle);
     echo tng_DrawHeading($photostr, $namestr, getYears($row));
 
     $persontext = "";
-    $persontext .= "<ul class='nopad'>\n";
+    $persontext .= "<ul>\n";
 
     if ($tng_extras) {
       $media = doMediaSection($personID, $indmedia, $indalbums);
@@ -135,7 +127,6 @@ $headSection->setTitle($headTitle);
         $persontext .= endListItem('media');
       }
     }
-
     $persontext .= beginListItem('info');
     $persontext .= "<table class='table table-sm'>\n";
     resetEvents();
@@ -164,17 +155,15 @@ $headSection->setTitle($headTitle);
       $spouse = 'wife';
       $self = 'husband';
       $spouseorder = 'husborder';
+    } else if ($row['sex'] == 'F') {
+        $sex = uiTextSnippet('female');
+        $spouse = 'husband';
+        $self = 'wife';
+        $spouseorder = 'wifeorder';
+    } else {
+        $sex = uiTextSnippet('unknown');
+        $spouseorder = "";
     }
-    else {if ($row['sex'] == 'F') {
-      $sex = uiTextSnippet('female');
-      $spouse = 'husband';
-      $self = 'wife';
-      $spouseorder = 'wifeorder';
-    }
-    else {
-      $sex = uiTextSnippet('unknown');
-      $spouseorder = "";
-    }}
     setEvent(["text" => uiTextSnippet('gender'), "fact" => $sex], $nodate);
 
     if ($rights['both']) {
@@ -771,7 +760,7 @@ $headSection->setTitle($headTitle);
     else {
       $innermenu = "<span>" . uiTextSnippet('persinfo') . "</span>\n";
     }
-    if ($allowpdf) {
+    if ($allow_pdf && $rightbranch) {
       $innermenu .= "<a  class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ind&amp;personID=$personID');return false;\">PDF</a>\n";
     }
     $rightbranch = $org_rightbranch;

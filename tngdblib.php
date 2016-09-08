@@ -281,14 +281,6 @@ function getPersonSimple($personID) {
   return tng_query($query);
 }
 
-function getTreeSimple() {
-  global $treesTable;
-
-  $query = "SELECT disallowgedcreate, disallowpdf FROM $treesTable";
-
-  return tng_query($query);
-}
-
 function getBranchesSimple($branch) {
   global $branches_table;
 

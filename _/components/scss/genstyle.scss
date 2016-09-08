@@ -118,15 +118,24 @@ div#branchedit-person {z-index: 1060;}
 .popup {box-shadow: 1px 1px 3px 0 #666;  border-radius: 8px;}
 
 /*boxes on pedigree chart*/
-.pedigree-chart-text {
+.pedigree-chart {
   font-size: 12px;
 }
+.pedigree-chart.male-background {background-color: rgb(234, 204, 209);}
+.pedigree-chart.female-background {background-color: rgb(201, 214, 220);}
 
-.pedbox {position: absolute; z-index: 5; overflow: hidden;}
+.pedigree-chart.slot-name {font-weight: bold;}
+
+a.pedigree-chart.slot-name:hover {text-decoration: none;}
+
+.pedigree-chart.event-tag {font-size: smaller; font-weight: bold;}
+
+.pedigree-chart.event-date:before{content: "d"; padding-right: 0.25rem; font-size: smaller;}
+.pedigree-chart.event-place:before{content: "p"; padding-right: 0.25rem; font-size: smaller;}
+
+.chart-box {position: absolute; z-index: 5; overflow: hidden;}
 
 .pedborderleft {border-left: solid 1px black;}
-
-.pedboxtable {height: 100%; width: 100%; float: left;}
 
 .chart-border-radius {border-radius: $border-radius;}
 .chart-border-radius-sm {border-radius: $border-radius-sm;}

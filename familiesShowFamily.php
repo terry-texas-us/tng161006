@@ -575,12 +575,7 @@ $headSection->setTitle($headTitle);
     } else {
       $innermenu = "<span>" . uiTextSnippet('faminfo') . "</span>\n";
     }
-    $treeResult = getTreeSimple();
-    $treerow = tng_fetch_assoc($treeResult);
-    $allowpdf = !$treerow['disallowpdf'] || ($allow_pdf && $rightbranch);
-    tng_free_result($treeResult);
-
-    if ($allowpdf) {
+    if ($allow_pdf && $rightbranch) {
       $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=fam&amp;familyID=$familyID');return false;\">PDF</a>\n";
     }
     echo buildFamilyMenu("family", $familyID);

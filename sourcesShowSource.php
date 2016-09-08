@@ -71,7 +71,7 @@ $headSection->setTitle($headtext);
     echo tng_DrawHeading($photostr, $srcrow['title'], "");
 
     $sourcetext = "";
-    $sourcetext .= "<ul class='nopad'>\n";
+    $sourcetext .= "<ul>\n";
     $sourcetext .= beginListItem('info');
     $sourcetext .= "<table class='table'>\n";
     $sourcetext .= "<col class='labelcol'>\n";

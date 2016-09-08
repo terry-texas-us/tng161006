@@ -53,12 +53,6 @@ $row['number'] = 1;
 $row['spouses'] = getSpouses($personID, $row['sex']);
 $lastlastgen[$personID] = 1;
 
-$treeResult = getTreeSimple();
-$treerow = tng_fetch_assoc($treeResult);
-$disallowgedcreate = $treerow['disallowgedcreate'];
-$allowpdf = !$treerow['disallowpdf'] || ($allow_pdf && $rightbranch);
-tng_free_result($treeResult);
-
 writelog("<a href=\"ahnentafel.php?personID=$personID\">" . xmlcharacters(uiTextSnippet('ahnentafel') . ": $logname ($personID)") . "</a>");
 preparebookmark("<a href=\"ahnentafel.php?personID=$personID\">" . xmlcharacters(uiTextSnippet('ahnentafel') . ": " . $row['name'] . " ($personID)") . "</a>");
 
@@ -104,9 +98,8 @@ $headSection->setTitle($row['name']);
     $innermenu .= "<a class='navigation-item' href='pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=compact&amp;generations=$generations' id='compedlnk'>" . uiTextSnippet('pedcompact') . "</a>\n";
     $innermenu .= "<a class='navigation-item' href='pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=box&amp;generations=$generations' id='boxpedlnk'>" . uiTextSnippet('pedbox') . "</a>\n";
     $innermenu .= "<a class='navigation-item' href='pedigreetext.php?personID=$personID&amp;parentset=$parentset&amp;generations=$generations'>" . uiTextSnippet('pedtextonly') . "</a>\n";
-//    $innermenu .= "<a class='navigation-item' href='ahnentafel.php?personID=$personID&amp;parentset=$parentset&amp;generations=$generations'>" . uiTextSnippet('ahnentafel') . "</a>\n";
     $innermenu .= "<a class='navigation-item' href='extrastree.php?personID=$personID&amp;parentset=$parentset&amp;showall=1&amp;generations=$generations'>" . uiTextSnippet('media') . "</a>\n";
-    if ($generations <= 6 && $allowpdf) {
+    if ($generations <= 6 && $allow_pdf && $rightbranch) {
       $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ped&amp;personID=$personID&amp;generations=$generations');return false;\">PDF</a>\n";
     }
     beginFormElement('pedigree', '', 'form1', 'form1');

@@ -163,12 +163,6 @@ if ($result) {
   $namestr = getName($row);
   $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $namestr);
 }
-$treeResult = getTreeSimple();
-$treerow = tng_fetch_assoc($treeResult);
-$disallowgedcreate = $treerow['disallowgedcreate'];
-$allowpdf = !$treerow['disallowpdf'] || ($allow_pdf && $rightbranch);
-tng_free_result($treeResult);
-
 writelog("<a href=\"descendtext.php?personID=$personID\">" . uiTextSnippet('descendfor') . " $logname ($personID)</a>");
 preparebookmark("<a href=\"descendtext.php?personID=$personID\">" . uiTextSnippet('descendfor') . " $namestr ($personID)</a>");
 
@@ -217,9 +211,8 @@ $headSection->setTitle(uiTextSnippet('descendfor') . " $namestr");
     $innermenu .= "</select>\n";
     $innermenu .= "<a class='navigation-item' href='descend.php?personID=$personID&amp;display=standard&amp;generations=$generations'>" . uiTextSnippet('pedstandard') . "</a>\n";
     $innermenu .= "<a class='navigation-item' href='descend.php?personID=$personID&amp;display=compact&amp;generations=$generations'>" . uiTextSnippet('pedcompact') . "</a>\n";
-    $innermenu .= "<a class='navigation-item' href='descendtext.php?personID=$personID&amp;generations=$generations'>" . uiTextSnippet('pedtextonly') . "</a>\n";
     $innermenu .= "<a class='navigation-item' href='register.php?personID=$personID&amp;generations=$generations'>" . uiTextSnippet('regformat') . "</a>\n";
-    if ($generations <= 12 && $allowpdf) {
+    if ($generations <= 12 && $allow_pdf && $rightbranch) {
       $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=desc&amp;personID=$personID&amp;generations=$generations');return false;\">PDF</a>\n";
     }
 

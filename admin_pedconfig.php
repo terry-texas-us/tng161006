@@ -32,19 +32,6 @@ $headSection->setTitle(uiTextSnippet('modifypedsettings'));
     $navList->appendItem([true, "admin_setup.php?sub=tablecreation", uiTextSnippet('tablecreation'), "tablecreation"]);
     $navList->appendItem([true, "#", uiTextSnippet('pedconfigsettings'), "ped"]);
     echo $navList->build("ped");
-    
-    if (!isset($pedigree['vwidth'])) {
-      $pedigree['vwidth'] = 100;
-    }
-    if (!isset($pedigree['vheight'])) {
-      $pedigree['vheight'] = 42;
-    }
-    if (!isset($pedigree['vspacing'])) {
-      $pedigree['vspacing'] = 20;
-    }
-    if (!isset($pedigree['vfontsize'])) {
-      $pedigree['vfontsize'] = 7;
-    }
     ?>
     <div class='small'>
       <a href='#' onClick="toggleAll('on');"><?php echo uiTextSnippet('expandall'); ?></a>
@@ -132,56 +119,10 @@ $headSection->setTitle(uiTextSnippet('modifypedsettings'));
                   <td><?php echo uiTextSnippet('boxheight'); ?>:</td>
                   <td><input name='boxheight' type='text' value="<?php echo $pedigree['boxheight']; ?>" size='10'></td>
                 </tr>
-                <tr>
-                  <td><?php echo uiTextSnippet('boxalign'); ?>:</td>
-                  <td>
-                    <select name="boxalign">
-                      <option value="center"<?php if ($pedigree['boxalign'] == "center") {echo " selected";} ?>>
-                        <?php echo uiTextSnippet('center'); ?>
-                      </option>
-                      <option value="left"<?php if ($pedigree['boxalign'] == "left") {echo " selected";} ?>>
-                        <?php echo uiTextSnippet('left'); ?>
-                      </option>
-                      <option value="right"<?php if ($pedigree['boxalign'] == "right") {echo " selected";} ?>>
-                        <?php echo uiTextSnippet('right'); ?>
-                      </option>
-                    </select>
-                  </td>
-                </tr>
-                <tr>
-                  <td><?php echo uiTextSnippet('boxheightshift'); ?>:</td>
-                  <td>
-                    <input type='text' value="<?php echo $pedigree['boxheightshift']; ?>" name="boxheightshift" size='10'>
-                  </td>
-                </tr>
-              </table>
-
-              <p><strong><?php echo uiTextSnippet('vchart'); ?></strong></p>
-              <table>
-                <tr>
-                  <td><?php echo uiTextSnippet('vboxwidth'); ?>:</td>
-                  <td>
-                    <input name='vwidth' type='text' value="<?php echo $pedigree['vwidth']; ?>" size='5'>
-                  </td>
-                </tr>
-                <tr>
-                  <td><?php echo uiTextSnippet('vboxheight'); ?>:</td>
-                  <td><input name='vheight' type='text' value="<?php echo $pedigree['vheight']; ?>" size='5'></td>
-                </tr>
-                <tr>
-                  <td><?php echo uiTextSnippet('vspacing'); ?>:</td>
-                  <td><input name='vspacing' type='text' value="<?php echo $pedigree['vspacing']; ?>" size='5'></td>
-                </tr>
-                <tr>
-                  <td><?php echo uiTextSnippet('boxnamesize'); ?>:</td>
-                  <td><input name='vfontsize' type='text' value="<?php echo $pedigree['vfontsize']; ?>" size='5'></td>
-                </tr>
               </table>
             </div>
-
           </td>
         </tr>
-
         <tr>
           <td>
             <?php echo displayToggle("plus1", 0, "desc", uiTextSnippet('descchart'), ""); ?>
@@ -403,11 +344,6 @@ $headSection->setTitle(uiTextSnippet('modifypedsettings'));
                         </td>
                       </tr>
                       <tr>
-                        <td><?php echo uiTextSnippet('colorshift'); ?>:</td>
-                        <td><input type='text' value="<?php echo $pedigree['colorshift']; ?>"
-                                   name="colorshift" size='10'></td>
-                      </tr>
-                      <tr>
                         <td><?php echo uiTextSnippet('emptycolor'); ?>:</td>
                         <td>
                             <input id='emptycolor' name='emptycolor' type='color' <?php echo "value='" . $pedigree['emptycolor'] . "'"; ?>>
@@ -418,14 +354,6 @@ $headSection->setTitle(uiTextSnippet('modifypedsettings'));
                         <td>
                             <input id='bordercolor' name='bordercolor' type='color' <?php echo "value='" . $pedigree['bordercolor'] . "'"; ?>>
                         </td>
-                      </tr>
-                      <tr>
-                        <td><?php echo uiTextSnippet('boxHsep'); ?>:</td>
-                        <td><input name='boxHsep' type='text' value="<?php echo $pedigree['boxHsep']; ?>" size='10'></td>
-                      </tr>
-                      <tr>
-                        <td><?php echo uiTextSnippet('boxVsep'); ?>:</td>
-                        <td><input name="boxVsep" type='text' value="<?php echo $pedigree['boxVsep']; ?>" size='10'></td>
                       </tr>
                       <tr>
                         <td><?php echo uiTextSnippet('defpgsize'); ?>:</td>
@@ -500,22 +428,6 @@ $headSection->setTitle(uiTextSnippet('modifypedsettings'));
                         <td><span><?php echo uiTextSnippet('puboxheight'); ?>:</span></td>
                         <td><input type='text' value="<?php echo $pedigree['puboxheight']; ?>"
                                    name="puboxheight" size='10'></td>
-                      </tr>
-                      <tr>
-                        <td><span><?php echo uiTextSnippet('puboxalign'); ?>:</span></td>
-                        <td>
-                          <select name="puboxalign">
-                            <option value="center"<?php if ($pedigree['puboxalign'] == "center") {echo " selected";} ?>>
-                              <?php echo uiTextSnippet('center'); ?>
-                            </option>
-                            <option value="left"<?php if ($pedigree['puboxalign'] == "left") {echo " selected";} ?>>
-                              <?php echo uiTextSnippet('left'); ?>
-                            </option>
-                            <option value="right"<?php if ($pedigree['puboxalign'] == "right") {echo " selected";} ?>>
-                              <?php echo uiTextSnippet('right'); ?>
-                            </option>
-                          </select>
-                        </td>
                       </tr>
                       <tr>
                         <td><span><?php echo uiTextSnippet('puboxheightshift'); ?>:</span>

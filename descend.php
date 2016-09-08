@@ -79,74 +79,37 @@ if (file_exists($arrltpath)) {
   $pedigree['leftindent'] += 16;
 }
 
+$chartBoxContentsAlign = $display === 'box' ? 'left' : 'center';
+$chartBoxHorizontalSpacing = $display === 'compact' ? 15 : 31;
+$chartBoxVerticalSpacing = $display === 'compact' ? 7 : 15;
 
 if ($display == "compact") {
   $pedigree['inclphotos'] = 0;
   $pedigree['usepopups'] = 0;
-  $pedigree['boxHsep'] = 15;
   $pedigree['boxheight'] = 16;
   $pedigree['boxnamesize'] = 8;
   $pedigree['cellpad'] = 0;
   $pedigree['boxwidth'] -= 50;
-  $pedigree['boxVsep'] = 5;
   $pedigree['spacer'] = "&nbsp;";
   $pedigree['gendalign'] = -2;
   $spouseoffset = 20;
-  $pedigree['diff'] = $pedigree['boxheight'] + $pedigree['boxVsep'] + $pedigree['linewidth'];
-} else {
+  $pedigree['diff'] = $pedigree['boxheight'] + $chartBoxVerticalSpacing + $pedigree['linewidth'];
+} elseif ($display === "standard") {
   $pedigree['boxnamesize'] = 10;
   $pedigree['usepopups'] = 1;
   $pedigree['boxheight'] = $pedigree['puboxheight'];
   $pedigree['boxwidth'] = $pedigree['puboxwidth'];
-  $pedigree['boxalign'] = $pedigree['puboxalign'];
   $pedigree['spacer'] = "";
   $pedigree['gendalign'] = -1;
   $spouseoffset = 40;
-  $pedigree['diff'] = $pedigree['boxheight'] + $pedigree['boxVsep'] + $pedigree['linewidth'] + $pedigree['downarrowh'];
+  $pedigree['diff'] = $pedigree['boxheight'] + $chartBoxVerticalSpacing + $pedigree['linewidth'] + $pedigree['downarrowh'];
 }
-
-$pedigree['baseR'] = hexdec(substr($pedigree['boxcolor'], 1, 2));
-$pedigree['baseG'] = hexdec(substr($pedigree['boxcolor'], 3, 2));
-$pedigree['baseB'] = hexdec(substr($pedigree['boxcolor'], 5, 2));
-if ($pedigree['colorshift'] > 0) {
-  $extreme = $pedigree['baseR'] < $pedigree['baseG'] ? $pedigree['baseR'] : $pedigree['baseG'];
-  $extreme = $extreme < $pedigree['baseB'] ? $extreme : $pedigree['baseB'];
-} elseif ($pedigree['colorshift'] < 0) {
-  $extreme = $pedigree['baseR'] > $pedigree['baseG'] ? $pedigree['baseR'] : $pedigree['baseG'];
-  $extreme = $extreme > $pedigree['baseB'] ? $extreme : $pedigree['baseB'];
-}
-$pedigree['colorshift'] = round($pedigree['colorshift'] / 100 * $extreme / 5);
 $pedigree['url'] = "pedigree.php?";
 
 function getColor($shifts) {
   global $pedigree;
 
-  $shiftval = $shifts * $pedigree['colorshift'];
-  $R = $pedigree['baseR'] + $shiftval;
-  $G = $pedigree['baseG'] + $shiftval;
-  $B = $pedigree['baseB'] + $shiftval;
-  if ($R > 255) {
-    $R = 255;
-  }
-  if ($R < 0) {
-    $R = 0;
-  }
-  if ($G > 255) {
-    $G = 255;
-  }
-  if ($G < 0) {
-    $G = 0;
-  }
-  if ($B > 255) {
-    $B = 255;
-  }
-  if ($B < 0) {
-    $B = 0;
-  }
-  $R = str_pad(dechex($R), 2, "0", STR_PAD_LEFT);
-  $G = str_pad(dechex($G), 2, "0", STR_PAD_LEFT);
-  $B = str_pad(dechex($B), 2, "0", STR_PAD_LEFT);
-  return "#$R$G$B";
+  return $pedigree['boxcolor'];
 }
 
 function getParents($personID) {
@@ -193,6 +156,8 @@ function getNewChart($personID) {
 }
 
 function doBox($level, $person, $spouseflag, $kidsflag) {
+  global $chartBoxHorizontalSpacing;
+  global $chartBoxContentsAlign;
   global $pedigree;
   global $topmarker;
   global $botmarker;
@@ -215,8 +180,8 @@ function doBox($level, $person, $spouseflag, $kidsflag) {
     $maxheight = $top;
   }
   $topmarker[$level] += $pedigree['diff'];
-  $left = $pedigree['leftindent'] + ($pedigree['boxwidth'] + $pedigree['boxHsep'] + $spouseoffset) * ($level - 1);
-  $farleft = $left + $pedigree['boxwidth'] + $pedigree['boxHsep'] + $spouseoffset;
+  $left = $pedigree['leftindent'] + ($pedigree['boxwidth'] + $chartBoxHorizontalSpacing + $spouseoffset) * ($level - 1);
+  $farleft = $left + $pedigree['boxwidth'] + $chartBoxHorizontalSpacing + $spouseoffset;
   if ($spouseflag) {
     $left += $spouseoffset;
     $bgcolor = getColor(3);
@@ -251,8 +216,8 @@ function doBox($level, $person, $spouseflag, $kidsflag) {
   } else {
     $iconactions = $iconlinks = "";
   }
-  $boxstr .= "<div class=\"pedbox $rounded\" id=\"box$numboxes\" style=\"background-color:$bgcolor; top:" . $top . "px; left:" . ($left - $pedigree['borderwidth']) . "px; height:" . $pedigree['boxheight'] . "px; width:{$pedigree['boxwidth']}" . "px; border:{$pedigree['borderwidth']}px solid {$pedigree['bordercolor']};\"$iconactions>\n";
-  $boxstr .= "$iconlinks<table class='pedboxtable' align='center'><tr>";
+  $boxstr .= "<div class='chart-box $rounded' id='box$numboxes' style=\"background-color:$bgcolor; top:" . $top . "px; left:" . ($left - $pedigree['borderwidth']) . "px; height:" . $pedigree['boxheight'] . "px; width:{$pedigree['boxwidth']}" . "px; border:{$pedigree['borderwidth']}px solid {$pedigree['bordercolor']};\"$iconactions>\n";
+  $boxstr .= "$iconlinks<table align='center'><tr>";
 
   // implant a picture (maybe)
   if ($pedigree['inclphotos'] && $pedigree['usepopups']) {
@@ -268,9 +233,9 @@ function doBox($level, $person, $spouseflag, $kidsflag) {
   }
   // name info
   if ($person['name']) {
-    $boxstr .= "<td class=\"pboxname\" align=\"{$pedigree['boxalign']}\"><span style=\"font-size:{$pedigree['boxnamesize']}" . "pt;\">{$pedigree['spacer']}<a href=\"peopleShowPerson.php?personID={$person['personID']}" . "\">{$person['name']}</a> " . getGenderIcon($person['sex'], $pedigree['gendalign']) . getNewChart($person['personID']) . "</span></td></tr></table></div>\n";
+    $boxstr .= "<td class='pboxname' align='{$chartBoxContentsAlign}'><span style=\"font-size:{$pedigree['boxnamesize']}" . "pt;\">{$pedigree['spacer']}<a href=\"peopleShowPerson.php?personID={$person['personID']}" . "\">{$person['name']}</a> " . getGenderIcon($person['sex'], $pedigree['gendalign']) . getNewChart($person['personID']) . "</span></td></tr></table></div>\n";
   } else {
-    $boxstr .= "<td class=\"pboxname\"><span style=\"font-size:{$pedigree['boxnamesize']}" . "pt;\">" . uiTextSnippet('unknownlit') . "</span></td></tr></table></div>\n";
+    $boxstr .= "<td class=\"pboxname\"><span style=\"font-size:{$pedigree['boxnamesize']}" . "pt;\">" . uiTextSnippet('unknown') . "</span></td></tr></table></div>\n";
   }
 
   if ($display != "compact" && $pedigree['usepopups']) {
@@ -285,13 +250,13 @@ function doBox($level, $person, $spouseflag, $kidsflag) {
     }
   }
   if (!$spouseflag && $person['personID'] != $personID) {
-    $boxstr .= "<div class=\"boxborder\" style=\"top:" . ($top + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($left - intval($pedigree['boxHsep'] / 2)) . "px;height:" . $pedigree['linewidth'] . "px;width:" . (intval($pedigree['boxHsep'] / 2) + 2) . "px;z-index:3;overflow:hidden\"></div>\n";
+    $boxstr .= "<div class=\"boxborder\" style=\"top:" . ($top + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($left - intval($chartBoxHorizontalSpacing / 2)) . "px;height:" . $pedigree['linewidth'] . "px;width:" . (intval($chartBoxHorizontalSpacing / 2) + 2) . "px;z-index:3;overflow:hidden\"></div>\n";
   }
   if ($spouseflag) {
     $boxstr .= "<div class=\"boxborder\" style=\"top:" . ($top + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($left - intval($spouseoffset / 2)) . "px;height:" . $pedigree['linewidth'] . "px;width:" . (intval($spouseoffset / 2) + 2) . "px;z-index:3;overflow:hidden\"></div>\n";
     if ($kidsflag) {
       if ($level < $generations) {
-        $boxstr .= "<div class=\"boxborder\" style=\"top:" . ($top + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($left + $pedigree['boxwidth']) . "px;height:" . $pedigree['linewidth'] . "px;width:" . (intval($pedigree['boxHsep'] / 2) + 1) . "px;z-index:3;overflow:hidden\"></div>\n";
+        $boxstr .= "<div class=\"boxborder\" style=\"top:" . ($top + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($left + $pedigree['boxwidth']) . "px;height:" . $pedigree['linewidth'] . "px;width:" . (intval($chartBoxHorizontalSpacing / 2) + 1) . "px;z-index:3;overflow:hidden\"></div>\n";
       } else {
         $boxstr .= "<div style=\"position: absolute; top:" . ($top + $pedigree['borderwidth'] + intval(($pedigree['boxheight'] - $pedigree['offpageimgh']) / 2) + 1) . "px;left:" . ($left + $pedigree['boxwidth'] + $pedigree['borderwidth'] + 3) . "px;z-index:5\">\n";
         $boxstr .= "<a href=\"descend.php?personID=$spouseflag&amp;generations=$generations&amp;display=$display\" title=\"" . uiTextSnippet('popupnote3') . "\">{$pedigree['offpagelink']}</a></div>\n";
@@ -303,6 +268,7 @@ function doBox($level, $person, $spouseflag, $kidsflag) {
 }
 
 function doIndividual($person, $level) {
+  global $chartBoxHorizontalSpacing;
   global $generations;
   global $pedigree;
   global $chart;
@@ -366,7 +332,7 @@ function doIndividual($person, $level) {
 
       if ($numkids) {
         $needtop[$level + 1] = 1;
-        $childleft = $pedigree['leftindent'] + ($pedigree['boxwidth'] + $pedigree['boxHsep'] + $spouseoffset) * $level;
+        $childleft = $pedigree['leftindent'] + ($pedigree['boxwidth'] + $chartBoxHorizontalSpacing + $spouseoffset) * $level;
         while ($crow = tng_fetch_assoc($result2)) {
           //recurse on each child (next level)
           doIndividual($crow['personID'], $level + 1);
@@ -384,7 +350,7 @@ function doIndividual($person, $level) {
           }
         }
         if ($vheight) {
-          $chart .= "<div class=\"boxborder\" style=\"top:" . ($starttop[$level + 1] + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($childleft - intval($pedigree['boxHsep'] / 2)) . "px;height:" . $vheight . "px;width:" . $pedigree['linewidth'] . "px;z-index:3\"></div>\n";
+          $chart .= "<div class=\"boxborder\" style=\"top:" . ($starttop[$level + 1] + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($childleft - intval($chartBoxHorizontalSpacing / 2)) . "px;height:" . $vheight . "px;width:" . $pedigree['linewidth'] . "px;z-index:3\"></div>\n";
         }
         tng_free_result($result2);
         setTopMarker($level, $starttop[$level + 1] + intval($vheight / 2), "increasing, half of box height, 356");
@@ -422,7 +388,7 @@ function doIndividual($person, $level) {
     //do box for other spouse
     //lines down from primary spouse
     $vheight = $topmarker[$level] - $thistop - intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2);
-    $childleft = $pedigree['leftindent'] + ($pedigree['boxwidth'] + $pedigree['boxHsep'] + $spouseoffset) * ($level - 1);
+    $childleft = $pedigree['leftindent'] + ($pedigree['boxwidth'] + $chartBoxHorizontalSpacing + $spouseoffset) * ($level - 1);
     $chart .= "<div class=\"boxborder\" style=\"top:" . ($thistop + $pedigree['boxheight']) . "px;left:" . ($childleft + intval($spouseoffset / 2)) . "px;height:" . $vheight . "px;width:" . $pedigree['linewidth'] . "px;z-index:3\"></div>\n";
     $thistop = $topmarker[$level] - intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2);
     $chart .= doBox($level, $spouserow, $person, $numkids);
@@ -607,12 +573,6 @@ if ($result) {
   $row['name'] = getName($row);
   $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $row['name']);
 }
-$treeResult = getTreeSimple();
-$treerow = tng_fetch_assoc($treeResult);
-$disallowgedcreate = $treerow['disallowgedcreate'];
-$allowpdf = !$treerow['disallowpdf'] || ($allow_pdf && $rightbranch);
-tng_free_result($treeResult);
-
 writelog("<a href=\"descend.php?personID=$personID&amp;display=$display\">" . xmlcharacters(uiTextSnippet('descendfor') . " $logname ($personID)") . "</a>");
 preparebookmark("<a href=\"descend.php?personID=$personID&amp;display=$display\">" . uiTextSnippet('descendfor') . " " . $row['name'] . " ($personID)</a>");
 
@@ -672,7 +632,7 @@ $headSection->setTitle(uiTextSnippet('descendfor') . " " . $row['name']);
     $innermenu .= "<a class='navigation-item' href='descend.php?personID=$personID&amp;display=compact&amp;generations=$generations'>" . uiTextSnippet('pedcompact') . "</a>\n";
     $innermenu .= "<a class='navigation-item' href='descendtext.php?personID=$personID&amp;generations=$generations'>" . uiTextSnippet('pedtextonly') . "</a>\n";
     $innermenu .= "<a class='navigation-item' href='register.php?personID=$personID&amp;generations=$generations'>" . uiTextSnippet('regformat') . "</a>\n";
-    if ($generations <= 12 && $allowpdf) {
+    if ($generations <= 12 && $allow_pdf && $rightbranch) {
       $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=desc&amp;personID=$personID&amp;generations=$generations');return false;\">PDF</a>\n";
     }
     beginFormElement("descend", "get", "form1", "form1");

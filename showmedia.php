@@ -85,7 +85,7 @@ if ($personID && !$albumlinkID) {
     } elseif ($linktype == 'R') {
       $query = "SELECT reponame FROM $repositories_table WHERE repoID = '$personID'";
     } elseif ($linktype == 'I') {
-      $query = "SELECT lastname, firstname, prefix, suffix, title, lnprefix, living, private, branch, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, deathdatetr, burialdate, burialdatetr, sex, disallowgedcreate, IF(birthdatetr !='0000-00-00', YEAR(birthdatetr), YEAR(altbirthdatetr)) AS birth, IF(deathdatetr !='0000-00-00', YEAR(deathdatetr), YEAR(burialdatetr)) AS death FROM $people_table, $treesTable WHERE personID = '$personID'";
+      $query = "SELECT lastname, firstname, prefix, suffix, title, lnprefix, living, private, branch, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, deathdatetr, burialdate, burialdatetr, sex, IF(birthdatetr !='0000-00-00', YEAR(birthdatetr), YEAR(altbirthdatetr)) AS birth, IF(deathdatetr !='0000-00-00', YEAR(deathdatetr), YEAR(burialdatetr)) AS death FROM $people_table, $treesTable WHERE personID = '$personID'";
     }
     $result2 = tng_query($query);
     if ($result2) {
@@ -98,7 +98,6 @@ if ($personID && !$albumlinkID) {
         $rights = determineLivingPrivateRights($row, $rightbranch);
         $row['allow_living'] = $rights['living'];
         $row['allow_private'] = $rights['private'];
-        $disallowgedcreate = $row['disallowgedcreate'];
       }
       tng_free_result($result2);
     }

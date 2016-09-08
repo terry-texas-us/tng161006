@@ -89,15 +89,6 @@ $headSection->setTitle(uiTextSnippet('modifytree'));
           </div>
           <div class='footer'>
             <div class='row form-group'>
-              <div class='col col-sm-6'>
-                <label>
-                  <input name='disallowgedcreate' type='checkbox' value='1'<?php if ($row['disallowgedcreate']) {echo " checked";} ?>> <?php echo uiTextSnippet('gedcomextraction'); ?>
-                </label>
-                <br>
-                <label>
-                  <input name='disallowpdf' type='checkbox' value='1'<?php if ($row['disallowpdf']) {echo " checked";} ?>> <?php echo uiTextSnippet('nopdf'); ?>
-                </label>
-              </div>
               <div class='col col-sm-3'>
                 <?php echo uiTextSnippet('people') . ": $pcount\n"; ?>
                 <br>

@@ -127,8 +127,7 @@ function getMoreInfo($persfamID, $prevlevel, $prevtag, $prevtype) {
           break;
         case "PLAC":
         case "TEMP":
-          $moreinfo['PLAC'] = addslashes($lineinfo['rest']);
-          getPlaceRecord($lineinfo['rest'], $lineinfo['level']);
+          $moreinfo['PLAC'] = getPlaceRecord($lineinfo['rest'], $lineinfo['level']);
           //savePlace( $moreinfo['PLAC'] );
           //$lineinfo = getLine();
           break;
@@ -401,7 +400,6 @@ function getPlaceRecord($place, $prevlevel) {
   global $lineinfo;
   global $places_table;
 
-  $place = addslashes($place);
   $note = "";
   $map = [];
   $map['long'] = "";
@@ -412,6 +410,12 @@ function getPlaceRecord($place, $prevlevel) {
   $prevlevel++;
 
   $lineinfo = getLine();
+  
+  if ($lineinfo['tag'] == 'ADDR' && $lineinfo['level'] == 2/* && $headSOUR == 'RootsMagic'*/) { // RM prepend place detail
+    $place = $lineinfo['rest'] . ', ' . $place;
+    $lineinfo = getLine();
+  }
+  $place = addslashes($place);
   while ($lineinfo['tag'] && $lineinfo['level'] >= $prevlevel) {
     if ($lineinfo['level'] == $prevlevel) {
       $tag = $lineinfo['tag'];
@@ -492,6 +496,7 @@ function getPlaceRecord($place, $prevlevel) {
     if ($mmcount) {
       processMedia($mmcount, $mminfo, $place, "");
     }
+    return $place;
   } else {
     $info = [];
     $info['MAP'] = $map;

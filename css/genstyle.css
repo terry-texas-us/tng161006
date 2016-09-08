@@ -121,8 +121,7 @@ body.admin-login {
   position: absolute; }
 
 #vcontainer div.descender {
-  width: 50%;
-  border-bottom: 1px solid black; }
+  width: 50%; }
 
 #vcontainer div.husband {
   border-left: 1px solid black;
@@ -370,21 +369,42 @@ div#branchedit-person {
   border-radius: 8px; }
 
 /*boxes on pedigree chart*/
-.pedigree-chart-text {
+.pedigree-chart {
   font-size: 12px; }
 
-.pedbox {
+.pedigree-chart.male-background {
+  background-color: #eaccd1; }
+
+.pedigree-chart.female-background {
+  background-color: #c9d6dc; }
+
+.pedigree-chart.slot-name {
+  font-weight: bold; }
+
+a.pedigree-chart.slot-name:hover {
+  text-decoration: none; }
+
+.pedigree-chart.event-tag {
+  font-size: smaller;
+  font-weight: bold; }
+
+.pedigree-chart.event-date:before {
+  content: "d";
+  padding-right: 0.25rem;
+  font-size: smaller; }
+
+.pedigree-chart.event-place:before {
+  content: "p";
+  padding-right: 0.25rem;
+  font-size: smaller; }
+
+.chart-box {
   position: absolute;
   z-index: 5;
   overflow: hidden; }
 
 .pedborderleft {
   border-left: solid 1px black; }
-
-.pedboxtable {
-  height: 100%;
-  width: 100%;
-  float: left; }
 
 .chart-border-radius {
   border-radius: 0.25rem; }
@@ -684,7 +704,8 @@ input.verylongfield {
   z-index: 7;
   cursor: pointer;
   visibility: hidden;
-  text-align: center; }
+  text-align: center;
+  margin-top: -0.75rem; }
 
 /*right-facing arrows indicating continuing pedigree charts*/
 .offpagearrow {

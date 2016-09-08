@@ -53,7 +53,7 @@ $headSection->setTitle($reporow['reponame']);
     echo tng_DrawHeading($photostr, $reporow['reponame'], "");
 
     $repotext = "";
-    $repotext .= "<ul class='nopad'>\n";
+    $repotext .= "<ul>\n";
     $repotext .= beginListItem('info');
     $repotext .= "<table class=\"table tfixed\">\n";
     $repotext .= "<col class=\"labelcol\"/><col style=\"width:{$datewidth}px\"/><col/>\n";

@@ -31,11 +31,6 @@ if ($result) {
   }
   $namestr = getName($row);
 
-  $treeResult = getTreeSimple();
-  $treerow = tng_fetch_assoc($treeResult);
-  $disallowgedcreate = $treerow['disallowgedcreate'];
-  tng_free_result($treeResult);
-
   tng_free_result($result);
 }
 

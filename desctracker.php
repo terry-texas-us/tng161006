@@ -231,50 +231,12 @@ function getBox($childcount, $totkids, $thisisit, $gotnext) {
 function getColor($shifts) {
   global $pedigree;
 
-  $shiftval = $shifts * $pedigree['colorshift'];
-  $R = $pedigree['baseR'] + $shiftval;
-  $G = $pedigree['baseG'] + $shiftval;
-  $B = $pedigree['baseB'] + $shiftval;
-  if ($R > 255) {
-    $R = 255;
-  }
-  if ($R < 0) {
-    $R = 0;
-  }
-  if ($G > 255) {
-    $G = 255;
-  }
-  if ($G < 0) {
-    $G = 0;
-  }
-  if ($B > 255) {
-    $B = 255;
-  }
-  if ($B < 0) {
-    $B = 0;
-  }
-  $R = str_pad(dechex($R), 2, "0", STR_PAD_LEFT);
-  $G = str_pad(dechex($G), 2, "0", STR_PAD_LEFT);
-  $B = str_pad(dechex($B), 2, "0", STR_PAD_LEFT);
-  return "#$R$G$B";
-}
-
-$pedigree['baseR'] = hexdec(substr($pedigree['boxcolor'], 1, 2));
-$pedigree['baseG'] = hexdec(substr($pedigree['boxcolor'], 3, 2));
-$pedigree['baseB'] = hexdec(substr($pedigree['boxcolor'], 5, 2));
-
-if ($pedigree['colorshift'] > 0) {
-  $extreme = $pedigree['baseR'] < $pedigree['baseG'] ? $pedigree['baseR'] : $pedigree['baseG'];
-  $extreme = $extreme < $pedigree['baseB'] ? $extreme : $pedigree['baseB'];
-} elseif ($pedigree['colorshift'] < 0) {
-  $extreme = $pedigree['baseR'] > $pedigree['baseG'] ? $pedigree['baseR'] : $pedigree['baseG'];
-  $extreme = $extreme > $pedigree['baseB'] ? $extreme : $pedigree['baseB'];
+  return $pedigree['boxcolor'];
 }
 
 $boxheight = $pedigree['puboxheight'] + 12;
 $boxwidth = $pedigree['puboxwidth'];
 
-$pedigree['colorshift'] = 33;
 $pedigree['cellpad'] = 5;
 $pedigree['puboxheight'] += 24;
 
@@ -294,11 +256,6 @@ if ($nextperson) {
     $descname = getName($row);
     $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $descname);
   }
-
-  $treeResult = getTreeSimple();
-  $treerow = tng_fetch_assoc($treeResult);
-  $disallowgedcreate = $treerow['disallowgedcreate'];
-  tng_free_result($treeResult);
 
   writelog("<a href=\"desctracker.php?trail=$trail\">" . uiTextSnippet('descendfor') . " $logname ($personID)</a>");
   preparebookmark("<a href=\"desctracker.php?trail=$trail\">" . uiTextSnippet('descendfor') . " $descname ($personID)</a>");

@@ -1,5 +1,5 @@
 // [ts] global functions and variables for jsLint
-/*global slotceiling, slotceiling_minus1, display, pedboxalign, usepopups, popupchartlinks, popupkids, popupspouses, pedborderwidth, pedbullet, emptycolor, hideempty, leftarrowimg, namepad, allow_add, allow_edit,
+/*global slotceiling, slotceiling_minus1, display, usepopups, popupchartlinks, popupkids, popupspouses, pedborderwidth, pedbullet, emptycolor, hideempty, leftarrowimg, namepad, allow_add, allow_edit,
          chartlink, tngprint, personID, parentset, generations */
 var lastpopup = 0;
 var firstperson = "";
@@ -12,6 +12,14 @@ var endslotctr;
 var endslots;
 var topparams = "";
 var botparams = "";
+
+var snippets = {
+    "editperson": textSnippet('editperson'),
+    "editfamily": textSnippet('editfamily'),
+    "popupnote2": textSnippet('popupnote2'),
+    "unknown": textSnippet('unknown'),
+    "addnewfamily": textSnippet('addnewfamily')
+};
 
 var h;
 for (h = 1; h < slotceiling; h += 1) {
@@ -50,33 +58,36 @@ function editIcon(type, slot, personID, familyID, gender) {
     var editicon = '<img src="svg/pencil.svg" width="10" height="10">';
 
     if (type === "P") {
-        iconlink = ' <a href="#" onclick="return editPerson(\'' + personID + '\',' + slot + ',\'' + gender + '\');" title="' + textSnippet('editperson') + '">' + editicon + '</a>';
+        iconlink = ' <a href="#" onclick="return editPerson(\'' + personID + '\',' + slot + ',\'' + gender + '\');" title="' + snippets.editperson + '">' + editicon + '</a>';
     } else {
         var famc = personID ? people[personID].famc : familyID;
-        iconlink = ' <a href="#" onclick="return editFamily(\'' + familyID + '\',' + slot + ',\'' + personID + '\',\'' + famc + '\');" title="' + textSnippet('editfam') + '">' + editicon + '</a>';
+        iconlink = ' <a href="#" onclick="return editFamily(\'' + familyID + '\',' + slot + ',\'' + personID + '\',\'' + famc + '\');" title="' + snippets.editfamily + '">' + editicon + '</a>';
     }
     return iconlink;
 }
 
-function doRow(slot, slotabbr, slotevent1, slotevent2) {
+function buildPersonVitalEvent(slot, eventTag, eventDate, eventPlace) {
     "use strict";
-    var rstr = "";
-    slotabbr += ":";
-    if (slotevent1) {
-        rstr += '<tr><td class="pboxpopup" align="right" id="popabbr' + slot + '">' + slotabbr + '</td><td class="pboxpopup" colspan="3" id="pop' + slot + '">' + slotevent1 + '</td></tr>';
+    var rstr = '<tr>';
+    rstr += '<td><span class="pedigree-chart event-tag" id="popabbr' + slot + '">' + eventTag + '</span>';
+    if (eventDate) {
+        rstr += '<span class="pedigree-chart event-date" colspan="3" id="pop' + slot + '">' + eventDate + '</span>';
     }
-    if (slotevent2) {
-        if (slotevent1) {
-            slotabbr = '&nbsp;';
+    rstr += '<br>';
+    if (eventPlace) {
+        if (eventDate) {
+            rstr += '<span class="pedigree-chart event-tag">' + eventTag + '</span>';
         }
-        rstr += '<tr><td class="pboxpopup" align="right" id="popabbr' + slot + '">' + slotabbr + '</td><td class="pboxpopup" colspan="3" id="pop' + slot + '">' + slotevent2 + '</td></tr>';
+        rstr += '<span class="pedigree-chart event-place" colspan="3" id="pop' + slot + '">' + eventPlace + '</span>';
     }
+    rstr += '</td>';
+    rstr += '</tr>';
     return rstr;
 }
 
 function pedIcon(personID) {
     "use strict";
-    return ' <a href="pedigree.php?personID=' + personID + '&amp;display=' + display + '&amp;generations=' + generations + '" title="' + textSnippet('popupnote2') + '">' + chartlink + '</a>';
+    return ' <a href="pedigree.php?personID=' + personID + '&amp;display=' + display + '&amp;generations=' + generations + '" title="' + snippets.popupnote + '">' + chartlink + '</a>';
 }
 
 function doBMD(slot, slotperson) {
@@ -97,11 +108,11 @@ function doBMD(slot, slotperson) {
     } else {
         content += '<table width="100%">\n';
     }
-    content += doRow(slot, slotperson.babbr, slotperson.bdate, slotperson.bplace);
+    content += buildPersonVitalEvent(slot, slotperson.babbr, slotperson.bdate, slotperson.bplace);
     if (famID) {
-        content += doRow(slot, families[famID].mabbr, families[famID].mdate, families[famID].mplace);
+        content += buildPersonVitalEvent(slot, families[famID].mabbr, families[famID].mdate, families[famID].mplace);
     }
-    content += doRow(slot, slotperson.dabbr, slotperson.ddate, slotperson.dplace);
+    content += buildPersonVitalEvent(slot, slotperson.dabbr, slotperson.ddate, slotperson.dplace);
     content += '</table>';
     if (display === "standard") {
         content += '</div>';
@@ -177,7 +188,7 @@ function getPopup(slot) {
                     sppedlink = pedIcon(fam.spID);
                 }
             } else {
-                spouselink = textSnippet('unknown');
+                spouselink = snippets.unknown;
             }
 
             popupcontent += '<tr><td class="pboxpopup" id="popabbr' + slot + '"><b>' + count + '</b></td>';
@@ -263,7 +274,7 @@ function getBackPopup() {
             if (fam.spID && fam.spID !== '-1') {
                 spouselink = fam.spname;
             } else {
-                spouselink = textSnippet('unknownlit');
+                spouselink = snippets.unknown;
             }
 
             popupcontent += '<tr><td class="pboxpopup" id="popabbrleft"><b>' + count + '</b></td>';
@@ -395,6 +406,8 @@ function fillSlot(slot, currperson, lastperson) {
             currentBox.style.visibility = 'visible';
             toggleLines(slot, slotperson.famc, 'visible');
         }
+        currentBox.style.backgroundColor = (slotperson.gender === "M" ? 'rgb(237,247,253)' : 'rgb(233,218,241)');
+
         if (slotperson.photosrc && slotperson.photosrc !== "-1") {
             content = '<img src="' + slotperson.photosrc + '" id="img' + slot + '"' + ' class="smallimg">';
             if (slotperson.photolink && slotperson.photolink !== "-1") {
@@ -402,7 +415,7 @@ function fillSlot(slot, currperson, lastperson) {
             }
             content = '<td class="lefttop">' + content + '</td>';
         }
-        content += '<td class="pboxname" id="td' + slot + '">' + namepad + '<a href="peopleShowPerson.php?personID=' + slotperson.personID + '" id="tdlink' + slot + '">' + slotperson.name + '</a>';
+        content += '<td class="pboxname" id="td' + slot + '">' + namepad + '<a class="pedigree-chart slot-name" id="tdlink' + slot + '" href="peopleShowPerson.php?personID=' + slotperson.personID + '">' + '<span>' + slotperson.name + '</span></a>';
         content += getGenderIcon(slotperson.gender);
 
         //put small pedigree link in every box except for primary individual
@@ -429,7 +442,7 @@ function fillSlot(slot, currperson, lastperson) {
             }
         }
         content += '</td>';
-        currentBox.style.backgroundColor = currentBox.oldcolor;
+//        currentBox.style.backgroundColor = currentBox.oldcolor;
 
         if (usepopups) {
             if (slotperson.spfams || slotperson.bdate || slotperson.bplace || slotperson.ddate || slotperson.dplace || slotperson.parents) {
@@ -448,11 +461,11 @@ function fillSlot(slot, currperson, lastperson) {
             if (allow_edit && lastperson && people[lastperson].famc !== '-1') {
                 var twoback = people[lastperson].backperson;
                 var twobackfam = people[twoback] ? people[twoback].famc : "";
-                content = '<td class="pboxname" id="td' + slot + '" align="' + pedboxalign + '">' + namepad + '<a href="#" onclick="return editFamily(\'' + people[lastperson].famc + '\', ' + slot + ',\'' + people[lastperson].personID + '\',\'' + twobackfam + '\');">' + textSnippet('editfam') + '</a></td>';
+                content = '<td class="pboxname" id="td' + slot + '" align="left">' + namepad + '<a href="#" onclick="return editFamily(\'' + people[lastperson].famc + '\', ' + slot + ',\'' + people[lastperson].personID + '\',\'' + twobackfam + '\');">' + snippets.editfamily + '</a></td>';
             } else if (allow_add && lastperson && people[lastperson].famc === '-1') {
-                content = '<td class="pboxname" id="td' + slot + '" align="' + pedboxalign + '">' + namepad + '<a href="#" onclick="return newFamily(' + slot + ',\'' + people[lastperson].personID + '\');">' + textSnippet('addnewfam') + '</a></td>';
+                content = '<td class="pboxname" id="td' + slot + '" align="left">' + namepad + '<a href="#" onclick="return newFamily(' + slot + ',\'' + people[lastperson].personID + '\');">' + snippets.addnewfamily + '</a></td>';
             } else {
-                content = '<td class="pboxname" id="td' + slot + '" align="' + pedboxalign + '">' + namepad + textSnippet('unknownlit') + '</td>';
+                content = '<td class="pboxname" id="td' + slot + '" align="left">' + namepad + snippets.unknown + '</td>';
             }
             currentBox.style.backgroundColor = emptycolor;
         }
@@ -461,7 +474,7 @@ function fillSlot(slot, currperson, lastperson) {
             popup.html("");
         }
     }
-    currentBox.innerHTML = content ? icons + '<table class="pedboxtable" align="' + pedboxalign + '"><tr>' + content + '</tr></table>' : "";
+    currentBox.innerHTML = content ? icons + '<table align="left"><tr>' + content + '</tr></table>' : "";
 
     var nextslot = slot * 2;
     if (slotperson.famc !== '-1' && families[slotperson.famc]) {
@@ -628,3 +641,28 @@ function getBackPerson(nxtpersonID) {
     hidePopup('left');
     getNewChart(nxtpersonID, generations, 0);
 }
+
+$('.chart-box').on('mouseover', function () {
+    "use strict";
+    var slot = '#ic' + $(this).data('slot');
+    if ($(this).data('display') !== 'box' && $(slot).length) {
+        $(slot).show();
+    }
+});
+$('.chart-box').on('mouseout', function () {
+    "use strict";
+    var slot = '#ic' + $(this).data('slot');
+    if ($(this).data('display') !== 'box' && $(slot).length) {
+        $(slot).hide();
+    }
+});
+
+$('#popupleft').on('mouseover', function () {
+    "use strict";
+    cancelTimer('left');
+});
+
+$('#popupleft').on('mouseout', function () {
+    "use strict";
+    setTimer('left');
+});

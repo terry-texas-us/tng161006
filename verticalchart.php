@@ -31,12 +31,6 @@ $row['name'] = getName($row);
 
 $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $row['name']);
 
-$treeResult = getTreeSimple();
-$treerow = tng_fetch_assoc($treeResult);
-$disallowgedcreate = $treerow['disallowgedcreate'];
-$allowpdf = !$treerow['disallowpdf'] || ($allow_pdf && $rightbranch);
-tng_free_result($treeResult);
-
 function initChart() {
   global $gens;
   global $gedcom;
@@ -52,8 +46,8 @@ function initChart() {
 }
 
 function get_details(&$gens, $generation, $max_generations) {
-  global $width;
-  global $spacing;
+  global $chartBoxWidth;
+  global $chartBoxVerticalSpacing;
   global $person_count;
   global $people_table;
   global $families_table;
@@ -67,8 +61,8 @@ function get_details(&$gens, $generation, $max_generations) {
       if ($result && tng_num_rows($result)) {
         $result = tng_fetch_assoc($result);
         if (isset($result['personID'])) {
-          $result['xpos'] = ($width + $spacing) * (pow(2, $max_generations - $generation)) * ($num - 0.5);
-          $result['spacer_xwidth'] = ($width + $spacing) * (pow(2, $max_generations - $generation - 1));
+          $result['xpos'] = ($chartBoxWidth + $chartBoxVerticalSpacing) * (pow(2, $max_generations - $generation)) * ($num - 0.5);
+          $result['spacer_xwidth'] = ($chartBoxWidth + $chartBoxVerticalSpacing) * (pow(2, $max_generations - $generation - 1));
 
           $rights = determineLivingPrivateRights($result);
           $result['display'] = $rights['both'];
@@ -106,12 +100,12 @@ function is_male($num) {
 }
 
 function move_one_person(&$gens, $gen_num, $num) {
-  global $width;
-  global $spacing;
+  global $chartBoxWidth;
+  global $chartBoxVerticalSpacing;
 
   $previous = get_previous_person($gens[$gen_num], $num);
   if ($previous) {
-    $distance = $gens[$gen_num][$num]['xpos'] - ($gens[$gen_num][$previous]['xpos'] + $width + $spacing);
+    $distance = $gens[$gen_num][$num]['xpos'] - ($gens[$gen_num][$previous]['xpos'] + $chartBoxWidth + $chartBoxVerticalSpacing);
   } else {
     $distance = $gens[$gen_num][$num]['xpos'];
   }
@@ -140,7 +134,7 @@ function move_one_person(&$gens, $gen_num, $num) {
 }
 
 function close_parents(&$gens) {
-  global $width, $spacing;
+  global $chartBoxWidth, $chartBoxVerticalSpacing;
   $max_generations = count($gens);
   for ($gen_num = $max_generations; $gen_num > 1; $gen_num--) {
     $generation_exists = false;
@@ -162,7 +156,7 @@ function close_parents(&$gens) {
             $left = get_previous_person($gens[$loop], $this_person);
             $right = get_next_person($gens[$loop], $this_person - 1);
             if ($left && $right) {
-              $new_distance = $gens[$loop][$right]['xpos'] - $gens[$loop][$left]['xpos'] - $width - $spacing;
+              $new_distance = $gens[$loop][$right]['xpos'] - $gens[$loop][$left]['xpos'] - $chartBoxWidth - $chartBoxVerticalSpacing;
             } elseif (!$left & $right) {
               $new_distance = $gens[$loop][$right]['xpos'];
             }
@@ -197,7 +191,7 @@ function close_parents(&$gens) {
 }
 
 function remove_margins(&$gens) {
-  global $spacing;
+  global $chartBoxVerticalSpacing;
   $left_most_xpos = 999999999;
   foreach ($gens as $gen_num => $generation) {
     $next = get_next_person($generation, 0);
@@ -205,7 +199,7 @@ function remove_margins(&$gens) {
       $left_most_xpos = $generation[$next]['xpos'];
     }
   }
-  move_left($gens, 1, 1, $left_most_xpos - $spacing);
+  move_left($gens, 1, 1, $left_most_xpos - $chartBoxVerticalSpacing);
 }
 
 function get_previous_person($generation, $num) {
@@ -237,7 +231,7 @@ function move_left(&$gens, $gen_num, $num, $distance) {
 }
 
 function move_descendant(&$gens, $gen_num, $num) {
-  global $width, $spacing;
+  global $chartBoxWidth, $chartBoxVerticalSpacing;
   if ($gen_num == 1) {
     return;
   }
@@ -260,7 +254,7 @@ function move_descendant(&$gens, $gen_num, $num) {
   $limit = 9999999999;
   $previous_child = get_previous_person($gens[$gen_num - 1], ceil($num / 2));
   if ($previous_child) {
-    $min_xpos = $gens[$gen_num - 1][$previous_child]['xpos'] + $width + $spacing;
+    $min_xpos = $gens[$gen_num - 1][$previous_child]['xpos'] + $chartBoxWidth + $chartBoxVerticalSpacing;
     if ($child['xpos'] < $min_xpos) {
       $limit = $orig_child_xpos - $min_xpos;
       $child['xpos'] = $min_xpos;
@@ -284,19 +278,18 @@ function move_descendant(&$gens, $gen_num, $num) {
 }
 
 function do_chart($gens, $output = false) {
-  global $width;
-  global $height;
-  global $spacing;
-  global $fontsize;
+  global $chartBoxWidth;
+  global $chartBoxHeight;
+  global $chartBoxVerticalSpacing;
   global $containerheight;
 
   $rows = sizeof($gens);
   $ignore = isset($_GET['ignorestart']);
   foreach ($gens as $gen_num => $generation) {
     $row [$rows - $gen_num] = '';
-    $ypos = ($rows - $gen_num) * ($height + ($spacing * 2)) + $spacing;
-    $spacer_ypos = (($rows - $gen_num) * ($height + ($spacing * 2)));
-    $line_ypos = (($rows - $gen_num) * ($height + ($spacing * 2))) + $height + $spacing;
+    $ypos = ($rows - $gen_num) * ($chartBoxHeight + ($chartBoxVerticalSpacing * 2)) + $chartBoxVerticalSpacing;
+    $spacer_ypos = (($rows - $gen_num) * ($chartBoxHeight + ($chartBoxVerticalSpacing * 2)));
+    $line_ypos = (($rows - $gen_num) * ($chartBoxHeight + ($chartBoxVerticalSpacing * 2))) + $chartBoxHeight + $chartBoxVerticalSpacing;
     foreach ($generation as $num => $person) {
       if (isset($person['personID'])) {
         if (is_male($num)) {
@@ -341,13 +334,13 @@ function do_chart($gens, $output = false) {
           $bio .= $person['burialplace'];
         }
         if ($spacer_ypos > 0 && (isset($gens[$gen_num + 1][($num * 2) - 1]['name']))) {
-          $row [$rows - $gen_num] .= "\t\t<div class=\"ascender father\" style=\"left:" . ($person['xpos'] - (($person['spacer_xwidth'] - $width) / 2)) . "px;top:{$spacer_ypos}px;width:" . ($person['spacer_xwidth'] / 2) . "px\"></div>\r\n";
+          $row [$rows - $gen_num] .= "\t\t<div class=\"ascender father\" style=\"left:" . ($person['xpos'] - (($person['spacer_xwidth'] - $chartBoxWidth) / 2)) . "px;top:{$spacer_ypos}px;width:" . ($person['spacer_xwidth'] / 2) . "px\"></div>\r\n";
         }
         if ($spacer_ypos > 0 && (isset($gens[$gen_num + 1][$num * 2]['name']))) {
-          $row [$rows - $gen_num] .= "\t\t<div class=\"ascender mother\" style=\"left:" . ($person['xpos'] + ($width) / 2) . "px;top:" . ($ypos - $spacing) . "px;width:" . ($person['spacer_xwidth'] / 2) . "px\"></div>\r\n";
+          $row [$rows - $gen_num] .= "\t\t<div class=\"ascender mother\" style=\"left:" . ($person['xpos'] + ($chartBoxWidth) / 2) . "px;top:" . ($ypos - $chartBoxVerticalSpacing) . "px;width:" . ($person['spacer_xwidth'] / 2) . "px\"></div>\r\n";
         }
         if (!$ignore || $gen_num > 1) {
-          $row [$rows - $gen_num] .= "\t\t<div class=\"box\" style=\"left:{$person['xpos']}px;top:{$ypos}px;width:{$width}px\">\r\n\t\t\t<div class=\"inner\">\r\n\t\t\t\t<div>\r\n\t\t\t\t\t";
+          $row [$rows - $gen_num] .= "\t\t<div class=\"box\" style=\"left:{$person['xpos']}px;top:{$ypos}px;width:{$chartBoxWidth}px\">\r\n\t\t\t<div class=\"inner\">\r\n\t\t\t\t<div>\r\n\t\t\t\t\t";
           $url = htmlentities("peopleShowPerson.php?personID={$person['personID']}");
           $row [$rows - $gen_num] .= "<a" . ($person['display'] ? " title=\"{$bio}\"" : "") . " href=\"{$url}\">{$person['name']}</a><br>" . getGenderIcon($person['sex'], -2);
           if ($person['display']) {
@@ -358,7 +351,7 @@ function do_chart($gens, $output = false) {
           $row[$rows - $gen_num] .= "\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n";
         }
         if ($gen_num > 1) {
-          $row[$rows - $gen_num] .= "\t\t<div class=\"descender_container\" style=\"left:{$person['xpos']}px;top:{$line_ypos}px;height:{$spacing}px\">\r\n";
+          $row[$rows - $gen_num] .= "\t\t<div class=\"descender_container\" style=\"left:{$person['xpos']}px;top:{$line_ypos}px;height:{$chartBoxVerticalSpacing}px\">\r\n";
           $row[$rows - $gen_num] .= "\t\t\t<div class=\"descender {$type}\"></div>\r\n";
           $row[$rows - $gen_num] .= "\t\t</div>\r\n";
         }
@@ -372,30 +365,30 @@ function do_chart($gens, $output = false) {
     height:' . $containerheight . 'px;
     }
     #vcontainer div.ascender {
-    height:' . $spacing . 'px;
+    height:' . $chartBoxVerticalSpacing . 'px;
     }
     #vcontainer div.descender_container {
-    height:' . $spacing . 'px;
-    width:' . $width . 'px;
+    height:' . $chartBoxVerticalSpacing . 'px;
+    width:' . $chartBoxWidth . 'px;
     }
     #vcontainer div.descender {
-    height:' . $spacing . 'px;
+    height:' . $chartBoxVerticalSpacing . 'px;
     }
     #vcontainer div.single {
-    margin-left: ' . ($width / 2) . 'px;
+    margin-left: ' . ($chartBoxWidth / 2) . 'px;
     }
     #vcontainer div.box {
-    height:' . $height . 'px;
-    padding-right:' . (int)($spacing / 2) . 'px;
+    height:' . $chartBoxHeight . 'px;
+    padding-right:' . (int)($chartBoxVerticalSpacing / 2) . 'px;
     }
     #vcontainer div.box div.inner {
-    font-size: ' . $fontsize . 'pt;
-    width:' . $width . 'px;
-    height:' . ($height - 6) . 'px;
+    font-size: 0.75rem;
+    width:' . $chartBoxWidth . 'px;
+    height:' . ($chartBoxHeight - 6) . 'px;
     }
     #vcontainer div.box div.inner div {
-    width:' . $width . 'px;
-    height:' . ($height - 6) . 'px;
+    width:' . $chartBoxWidth . 'px;
+    height:' . ($chartBoxHeight - 6) . 'px;
     }
     </style>
     <div id="vcontainer">';
@@ -437,16 +430,14 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " " . $row['name']);
     }
     $innermenu .= "</select>\n";
     $innermenu .= "<a class='navigation-item' href='pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=standard&amp;generations=$generations' id='stdpedlnk'>" . uiTextSnippet('pedstandard') . "</a>\n";
-//    $innermenu .= "<a class='navigation-item' href='verticalchart.php?personID=$personID&amp;parentset=$parentset&amp;display=vertical&amp;generations=$generations' id='pedchartlnk'>" . uiTextSnippet('pedvertical') . "</a>\n";
     $innermenu .= "<a class='navigation-item' href='pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=compact&amp;generations=$generations' id='compedlnk'>" . uiTextSnippet('pedcompact') . "</a>\n";
     $innermenu .= "<a class='navigation-item' href='pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=box&amp;generations=$generations' id='boxpedlnk'>" . uiTextSnippet('pedbox') . "</a>\n";
     $innermenu .= "<a class='navigation-item' href='pedigreetext.php?personID=$personID&amp;parentset=$parentset&amp;generations=$generations'>" . uiTextSnippet('pedtextonly') . "</a>\n";
     $innermenu .= "<a class='navigation-item' href='ahnentafel.php?personID=$personID&amp;parentset=$parentset&amp;generations=$generations'>" . uiTextSnippet('ahnentafel') . "</a>\n";
     $innermenu .= "<a class='navigation-item' href='extrastree.php?personID=$personID&amp;parentset=$parentset&amp;showall=1&amp;generations=$generations'>" . uiTextSnippet('media') . "</a>\n";
-    if ($gens <= 6 && $allowpdf) {
+    if ($gens <= 6 && $allow_pdf && $rightbranch) {
       $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ped&amp;personID=$personID&amp;generations=$generations');return false;\">PDF</a>\n";
     }
-
     beginFormElement("pedigree", "", "form1", "form1");
     echo buildPersonMenu("pedigree", $personID);
     echo "<div class='pub-innermenu small'>\n";
@@ -455,12 +446,11 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " " . $row['name']);
     echo "<br>\n";
     endFormElement();
 
-    $height = $pedigree['vheight'] ? $pedigree['vheight'] : 42;
-    $width = $pedigree['vwidth'] ? $pedigree['vwidth'] : 100;
-    $spacing = $pedigree['vspacing'] ? $pedigree['vspacing'] : 20;
-    $fontsize = $pedigree['vfontsize'] ? $pedigree['vfontsize'] : 7;
+    $chartBoxHeight = 60;
+    $chartBoxWidth = 120;
+    $chartBoxVerticalSpacing = 20;
 
-    $containerheight = ($generations * ($height + ($spacing * 2))) + $spacing;
+    $containerheight = ($generations * ($chartBoxHeight + ($chartBoxVerticalSpacing * 2))) + $chartBoxVerticalSpacing;
 
     initChart();
     ?>

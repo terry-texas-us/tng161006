@@ -20,15 +20,6 @@
           <input class='form-control' name='description' type='text' placeholder="<?php echo uiTextSnippet('description'); ?>">
         </div>
       </div>
-      <div class='footer'>
-        <label>
-          <input name='disallowgedcreate' type='checkbox' value='1'<?php if ($disallowgedcreate) {echo " checked";} ?>> <?php echo uiTextSnippet('gedcomextraction'); ?>
-        </label>
-        <br>
-        <label>
-          <input name='disallowpdf' type='checkbox' value='1'<?php if ($disallowpdf) {echo " checked";} ?>> <?php echo uiTextSnippet('nopdf'); ?>
-        </label>
-      </div>
     </div>
   </section> <!-- .card -->
   

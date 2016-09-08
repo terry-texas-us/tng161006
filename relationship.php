@@ -247,11 +247,6 @@ if (tng_num_rows($result)) {
   $namestr = getName($row);
   $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $namestr);
   $gender1 = $row['sex'];
-
-  $treeResult = getTreeSimple();
-  $treerow = tng_fetch_assoc($treeResult);
-  $disallowgedcreate = $treerow['disallowgedcreate'];
-  tng_free_result($treeResult);
 } else {
   $error = $primarypersonID;
 }
@@ -286,6 +281,10 @@ if (file_exists("img/Chart.gif")) {
 } else {
   $pedigree['chartlink'] = "<span><b>P</b></span>";
 }
+
+$chartBoxHorizontalSpacing = 31;
+$chartBoxVerticalSpacing = 15;
+
 if ($pedigree['usepopups'] == 1) {
   $pedigree['display'] = "standard";
 } elseif ($pedigree['usepopups'] == 0) {
@@ -294,55 +293,46 @@ if ($pedigree['usepopups'] == 1) {
   $pedigree['display'] = "compact";
 }
 
-$pedigree['baseR'] = hexdec(substr($pedigree['boxcolor'], 1, 2));
-$pedigree['baseG'] = hexdec(substr($pedigree['boxcolor'], 3, 2));
-$pedigree['baseB'] = hexdec(substr($pedigree['boxcolor'], 5, 2));
-
-if ($pedigree['colorshift'] > 0) {
-  $extreme = $pedigree['baseR'] < $pedigree['baseG'] ? $pedigree['baseR'] : $pedigree['baseG'];
-  $extreme = $extreme < $pedigree['baseB'] ? $extreme : $pedigree['baseB'];
-} elseif ($pedigree['colorshift'] < 0) {
-  $extreme = $pedigree['baseR'] > $pedigree['baseG'] ? $pedigree['baseR'] : $pedigree['baseG'];
-  $extreme = $extreme > $pedigree['baseB'] ? $extreme : $pedigree['baseB'];
-}
-$pedigree['colorshift'] = round($pedigree['colorshift'] / 100 * $extreme / 4);
-
 function drawCouple($couple, $topflag, $linedown) {
-  global $pedigree, $gens;
+  global $pedigree;
+  global $chartBoxHorizontalSpacing;
+  global $chartBoxVerticalSpacing;
+  global $gens;
 
   $drawpersonID = $couple['person'];
-  $gens->offsetH = $topflag ? $pedigree['leftindent'] + $pedigree['puboxwidth'] + $pedigree['boxHsep'] : $pedigree['leftindent'];
+  $gens->offsetH = $topflag ? $pedigree['leftindent'] + $pedigree['puboxwidth'] + $chartBoxHorizontalSpacing : $pedigree['leftindent'];
 
   if ($drawpersonID) {
     drawBox($drawpersonID, 0, $topflag);
     if ($gens->firstone) {
       //short line below box of first couple
       if ($linedown) {
-        echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV + $pedigree['puboxheight'] - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($gens->offsetH + intval($pedigree['puboxwidth'] / 2)) . "px;height:" . (2 * $pedigree['boxVsep']) . "px;width:{$pedigree['linewidth']}px;\"></div>\n";
+        echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV + $pedigree['puboxheight'] - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($gens->offsetH + intval($pedigree['puboxwidth'] / 2)) . "px;height:" . (2 * $chartBoxVerticalSpacing) . "px;width:{$pedigree['linewidth']}px;\"></div>\n";
       }
       $gens->firstone = 0;
     } else {
       //line coming up from top of other boxes
-      echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV - (2 * $pedigree['boxVsep']) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($gens->offsetH + intval($pedigree['puboxwidth'] / 2)) . "px;height:" . (2 * $pedigree['boxVsep']) . "px;width:{$pedigree['linewidth']}px;\"></div>\n";
+      echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV - (2 * $chartBoxVerticalSpacing) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($gens->offsetH + intval($pedigree['puboxwidth'] / 2)) . "px;height:" . (2 * $chartBoxVerticalSpacing) . "px;width:{$pedigree['linewidth']}px;\"></div>\n";
     }
   }
   $spouseID = $couple['spouse'];
   if ($spouseID) {
-    echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV + intval($pedigree['puboxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($gens->offsetH + $pedigree['puboxwidth']) . "px;height:{$pedigree['linewidth']}px;width:" . (intval($pedigree['boxHsep'] / 2) + 1) . "px;z-index:3;overflow:hidden;\"></div>\n";
-    $gens->offsetH = $gens->offsetH + $pedigree['puboxwidth'] + intval($pedigree['boxHsep'] / 2);
+    echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV + intval($pedigree['puboxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($gens->offsetH + $pedigree['puboxwidth']) . "px;height:{$pedigree['linewidth']}px;width:" . (intval($chartBoxHorizontalSpacing / 2) + 1) . "px;z-index:3;overflow:hidden;\"></div>\n";
+    $gens->offsetH = $gens->offsetH + $pedigree['puboxwidth'] + intval($chartBoxHorizontalSpacing / 2);
     drawBox($spouseID, 1, $topflag);
   }
   if ($topflag) {
     //long connecting line
-    echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV + $pedigree['puboxheight'] + (2 * $pedigree['boxVsep']) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($pedigree['leftindent'] + intval($pedigree['puboxwidth'] / 2)) . "px;height:{$pedigree['linewidth']}px;width:" . ((2 * $pedigree['puboxwidth']) + $pedigree['boxHsep'] + $pedigree['leftindent'] + 1) . "px;\"></div>\n";
-    $gens->offsetV += (2 * $pedigree['boxVsep']);
+    echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV + $pedigree['puboxheight'] + (2 * $chartBoxVerticalSpacing) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($pedigree['leftindent'] + intval($pedigree['puboxwidth'] / 2)) . "px;height:{$pedigree['linewidth']}px;width:" . ((2 * $pedigree['puboxwidth']) + $chartBoxHorizontalSpacing + $pedigree['leftindent'] + 1) . "px;\"></div>\n";
+    $gens->offsetV += (2 * $chartBoxVerticalSpacing);
   }
   echo "\n\n";
 }
 
 function drawBox($drawpersonID, $spouseflag, $topflag) {
-  global $gens;
   global $pedigree;
+  global $chartBoxVerticalSpacing;
+  global $gens;
   global $personID1;
   global $primarypersonID;
   global $slot;
@@ -372,7 +362,7 @@ function drawBox($drawpersonID, $spouseflag, $topflag) {
     }
     $pedigree['namelink'] = "<a href=\"peopleShowPerson.php?personID={$row['personID']}\">$nameinfo</a>";
 
-    $newoffset = $spouseflag ? $gens->offsetV : $gens->offsetV + $pedigree['puboxheight'] + 2 * $pedigree['boxVsep'];
+    $newoffset = $spouseflag ? $gens->offsetV : $gens->offsetV + $pedigree['puboxheight'] + 2 * $chartBoxVerticalSpacing;
     $gens->offsetV = $gens->offsetV == -1 ? 0 : $newoffset;
 
     //$gens->offsetV = 200;
@@ -386,9 +376,9 @@ function drawBox($drawpersonID, $spouseflag, $topflag) {
       $iconactions = $iconlinks = "";
     }
     $border = "{$pedigree['borderwidth']}px solid {$pedigree['bordercolor']}";
-    echo "<div class='pedbox chart-border-radius' style=\"background-color: $boxcolortouse; top:" . $gens->offsetV . "px; left:" . $gens->offsetH . "px; height: {$pedigree['puboxheight']}" . "px; width: {$pedigree['puboxwidth']}" . "px; border: {$border}; \"$iconactions>\n";
+    echo "<div class='chart-box chart-border-radius' style=\"background-color: $boxcolortouse; top:" . $gens->offsetV . "px; left:" . $gens->offsetH . "px; height: {$pedigree['puboxheight']}" . "px; width: {$pedigree['puboxwidth']}" . "px; border: {$border}; \"$iconactions>\n";
     $tableheight = $pedigree['puboxheight'];
-    echo "$iconlinks<table class='pedboxtable' align=\"{$pedigree['puboxalign']}\"><tr>";
+    echo "$iconlinks<table align='center'><tr>";
 
     // implant a picture (maybe)
     if ($pedigree['inclphotos']) {
@@ -404,7 +394,7 @@ function drawBox($drawpersonID, $spouseflag, $topflag) {
     }
 
     // name info
-    echo "<td align=\"{$pedigree['puboxalign']}\" class=\"pboxname\" style=\"height:$tableheight\">{$pedigree['begnamefont']}" . $pedigree['namelink'] . $pedigree['endfont'];
+    echo "<td class='pboxname' align='center' style=\"height:$tableheight\">{$pedigree['begnamefont']}" . $pedigree['namelink'] . $pedigree['endfont'];
 
     echo "</td></tr>\n";
     echo "</table></div>\n";
@@ -416,9 +406,12 @@ function drawBox($drawpersonID, $spouseflag, $topflag) {
 }
 
 function doMultSpouse($prispouse1, $prispouse2, $otherspouse) {
-  global $pedigree, $gens;
+  global $pedigree;
+  global $chartBoxHorizontalSpacing;
+  global $chartBoxVerticalSpacing;
+  global $gens;
 
-  echo "<div style=\"position:absolute;background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($pedigree['leftindent'] + intval($pedigree['puboxwidth'] / 2)) . "px;height:{$pedigree['linewidth']}px;width:" . ((2 * $pedigree['puboxwidth']) + $pedigree['boxHsep'] + $pedigree['leftindent'] + 1) . "px;z-index:3;overflow:hidden;\"></div>\n";
+  echo "<div style=\"position:absolute;background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($pedigree['leftindent'] + intval($pedigree['puboxwidth'] / 2)) . "px;height:{$pedigree['linewidth']}px;width:" . ((2 * $pedigree['puboxwidth']) + $chartBoxHorizontalSpacing + $pedigree['leftindent'] + 1) . "px;z-index:3;overflow:hidden;\"></div>\n";
   $gens->offsetV -= $pedigree['puboxheight'];
 
   $couple['person'] = $prispouse1;
@@ -426,16 +419,22 @@ function doMultSpouse($prispouse1, $prispouse2, $otherspouse) {
   $gens->firstone = 0;
   drawCouple($couple, 0, 0);
   $saveindent = $pedigree['leftindent'];
-  $pedigree['leftindent'] += (2 * $pedigree['puboxwidth']) + $pedigree['boxHsep'] + $pedigree['leftindent'];
+  $pedigree['leftindent'] += (2 * $pedigree['puboxwidth']) + $chartBoxHorizontalSpacing + $pedigree['leftindent'];
   $couple['spouse'] = $otherspouse;
-  $gens->offsetV -= $pedigree['puboxheight'] + 2 * $pedigree['boxVsep'];
+  $gens->offsetV -= $pedigree['puboxheight'] + 2 * $chartBoxVerticalSpacing;
   drawCouple($couple, 0, 0);
   $pedigree['leftindent'] = $saveindent;
   $gens->half = true;
 }
 
 function finishRelationship($couple) {
-  global $pedigree, $totalRelationships, $needmore, $gens, $maxrels;
+  global $pedigree;
+  global $chartBoxHorizontalSpacing;
+  global $chartBoxVerticalSpacing;
+  global $totalRelationships;
+  global $needmore;
+  global $gens;
+  global $maxrels;
 
   if ($totalRelationships) {
     echo "<hr/><br><br>\n";
@@ -458,14 +457,14 @@ function finishRelationship($couple) {
     $downcount -= 1;
   }
 
-  $maxwidth = $pedigree['borderwidth'] + $pedigree['puboxwidth'] + $pedigree['boxHsep'] + $saveindent;
+  $maxwidth = $pedigree['borderwidth'] + $pedigree['puboxwidth'] + $chartBoxHorizontalSpacing + $saveindent;
   $maxwidth = $gens->upcount ? 2 * $maxwidth : $maxwidth;
-  $maxheight = $pedigree['borderwidth'] + $pedigree['puboxheight'] + (2 * $pedigree['boxVsep']);
+  $maxheight = $pedigree['borderwidth'] + $pedigree['puboxheight'] + (2 * $chartBoxVerticalSpacing);
   if (!$gens->spouses) {
     $maxheight = $upcount > $downcount ? ($upcount + 1) * $maxheight : ($downcount + 1) * $maxheight;
   }
   if ($gens->split || $gens->multparents) {
-    $maxheight += $pedigree['borderwidth'] + (2 * $pedigree['boxVsep']);
+    $maxheight += $pedigree['borderwidth'] + (2 * $chartBoxVerticalSpacing);
   }
   echo "<table style=\"width:{$maxwidth}px; height:{$maxheight}px\"><tr><td></td></tr></table>\n";
 
@@ -486,7 +485,7 @@ function finishRelationship($couple) {
         drawCouple($nextcouple, 0, 1);
         $upcount--;
       }
-      $pedigree['leftindent'] += (2 * $pedigree['puboxwidth']) + $pedigree['boxHsep'] + $pedigree['leftindent'];
+      $pedigree['leftindent'] += (2 * $pedigree['puboxwidth']) + $chartBoxHorizontalSpacing + $pedigree['leftindent'];
       $gens->offsetV = $getoffsetV;
     }
 
@@ -750,32 +749,7 @@ function checkpersondown($checkpersonID) {
 function getColor($shifts) {
   global $pedigree;
 
-  $shiftval = $shifts * $pedigree['colorshift'];
-  $R = $pedigree['baseR'] + $shiftval;
-  $G = $pedigree['baseG'] + $shiftval;
-  $B = $pedigree['baseB'] + $shiftval;
-  if ($R > 255) {
-    $R = 255;
-  }
-  if ($R < 0) {
-    $R = 0;
-  }
-  if ($G > 255) {
-    $G = 255;
-  }
-  if ($G < 0) {
-    $G = 0;
-  }
-  if ($B > 255) {
-    $B = 255;
-  }
-  if ($B < 0) {
-    $B = 0;
-  }
-  $R = str_pad(dechex($R), 2, "0", STR_PAD_LEFT);
-  $G = str_pad(dechex($G), 2, "0", STR_PAD_LEFT);
-  $B = str_pad(dechex($B), 2, "0", STR_PAD_LEFT);
-  return "#$R$G$B";
+  return $pedigree['boxcolor'];
 }
 
 function swapPeople() {

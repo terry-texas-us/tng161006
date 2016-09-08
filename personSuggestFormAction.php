@@ -39,7 +39,7 @@ if (!$youremail || !$comments || !$yourname) {
 killBlockedAddress($youremail);
 killBlockedMessageContent($comments);
 
-$query = "SELECT firstname, lnprefix, lastname, prefix, suffix, sex, nameorder, living, private, branch, disallowgedcreate, IF(birthdatetr !='0000-00-00',YEAR(birthdatetr),YEAR(altbirthdatetr)) AS birth, IF(deathdatetr !='0000-00-00',YEAR(deathdatetr),YEAR(burialdatetr)) AS death FROM $people_table, $treesTable WHERE personID = '$ID'";
+$query = "SELECT firstname, lnprefix, lastname, prefix, suffix, sex, nameorder, living, private, branch, IF(birthdatetr !='0000-00-00',YEAR(birthdatetr),YEAR(altbirthdatetr)) AS birth, IF(deathdatetr !='0000-00-00',YEAR(deathdatetr),YEAR(burialdatetr)) AS death FROM $people_table, $treesTable WHERE personID = '$ID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 

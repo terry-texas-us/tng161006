@@ -13,12 +13,7 @@ if ($result) {
   $name = getName($row);
   tng_free_result($result);
 }
-$treeResult = getTreeSimple();
-$treerow = tng_fetch_assoc($treeResult);
-$disallowgedcreate = $row['disallowgedcreate'];
-tng_free_result($treeResult);
-
-if ($disallowgedcreate && (!$allow_ged || !$rightbranch)) {
+if (!$allow_ged || !$rightbranch) {
   exit;
 }
 initMediaTypes();

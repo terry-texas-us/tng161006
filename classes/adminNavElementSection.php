@@ -20,9 +20,7 @@ class AdminNavElementSection extends NavElementSection {
       case 'admin':
       case 'mostrecentactions':
         if (NavElementSection::$allowAdmin) {
-          $this->out .= "<li class='nav-item'>\n";
-          $this->out .=    "<a class='nav-link' href='adminshowlog.php' target='main'>$this->showlog</a>\n";
-          $this->out .=  "</li>\n";
+          $this->out .= "<li class='nav-item'><a class='nav-link' href='adminshowlog.php' target='main'>$this->showlog</a></li>\n";
         }
         break;
 
@@ -52,16 +50,12 @@ class AdminNavElementSection extends NavElementSection {
     $helpFile = $topLevel . "_help.php";
     $helpPath = findhelp($helpFile) . '/' . $helpFile;
 
-    $this->out .= "<li class='nav-item'>\n";
-      $this->out .= "<a class='nav-link' href='#' onclick=\"return openHelp('$helpPath');\">" . uiTextSnippet('help') . "</a>";
-    $this->out .= "</li>\n";
+    $this->out .= "<li class='nav-item'><a class='nav-link' href='#' onclick=\"return openHelp('$helpPath');\">" . uiTextSnippet('help') . "</a></li>\n";
 
     // [ts] not a linking menu item. move to section below header as in public
 
     if (NavElementSection::$maintenanceIsOn) {
-      $this->out .= "<li class='nav-item'>\n";
-        $this->out .= "<strong class='yellow'>" . NavElementSection::$maintenanceMessage . "</strong>\n";
-      $this->out .= "</li>\n";
+      $this->out .= "<li class='nav-item'><strong class='yellow'>" . NavElementSection::$maintenanceMessage . "</strong></li>\n";
     }
     $this->out .= "</ul>\n";
     $this->out .= "</div> <!-- .navbar-collapse -->\n";

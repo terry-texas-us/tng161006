@@ -11,8 +11,8 @@ function getPhotoSrc($persfamID, $living, $gender) {
 
   $photo = [];
 
-  $query = "SELECT $media_table.mediaID, medialinkID, alwayson, thumbpath, mediatypeID, usecollfolder FROM ($media_table, $medialinks_table)
-    WHERE personID = '$persfamID' AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
+  $query = "SELECT $media_table.mediaID, medialinkID, alwayson, thumbpath, mediatypeID, usecollfolder FROM ($media_table, $medialinks_table) "
+      . "WHERE personID = '$persfamID' AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
 
@@ -33,9 +33,9 @@ function getPhotoSrc($persfamID, $living, $gender) {
   if (!$gotfile) {
     if ($gender && $tngconfig['usedefthumbs']) {
       if ($gender == 'M') {
-        $photocheck = "img/male.jpg";
+        $photocheck = "img/silhouette_male_small.png";
       } elseif ($gender == 'F') {
-        $photocheck = "img/female.jpg";
+        $photocheck = "img/silhouette_female_small.png";
       }
       $photoref = $photocheck;
       $gotfile = file_exists("$rootpath$photocheck");

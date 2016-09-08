@@ -54,10 +54,6 @@ if ($result) {
   $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $namestr);
   tng_free_result($result);
 }
-$treeResult = getTreeSimple();
-$treerow = tng_fetch_assoc($treeResult);
-$disallowgedcreate = $treerow['disallowgedcreate'];
-tng_free_result($treeResult);
 
 function getEvents($person) {
   global $ratio;

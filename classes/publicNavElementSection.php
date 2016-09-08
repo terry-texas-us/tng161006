@@ -7,9 +7,7 @@ class PublicNavElementSection extends NavElementSection {
   private function buildListItem($link, $id, $label) {
     $title = htmlspecialchars(uiTextSnippet($label), ENT_QUOTES);
     
-    $out =  "<li class='nav-item'>\n";
-    $out .=   "<a class='nav-link' tabindex='-1' title='$title' href='$link'><img class='icon-sm icon-menu' src='$id'>$title</a>\n";
-    $out .= "</li>\n";
+    $out =  "<li class='nav-item'><a class='nav-link' tabindex='-1' title='$title' href='$link'><img class='icon-sm icon-menu' src='$id'>$title</a></li>\n";
 
     return $out;
   }

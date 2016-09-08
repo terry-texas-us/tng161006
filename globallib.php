@@ -879,10 +879,7 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
   $photocheck = "";
 
   $query = "SELECT $media_table.mediaID, medialinkID, alwayson, thumbpath, mediatypeID, usecollfolder, newwindow "
-          . "FROM ($media_table, $medialinks_table) "
-          . "WHERE personID = \"$persfamID\" "
-          . "AND $media_table.mediaID = $medialinks_table.mediaID "
-          . "AND defphoto = '1'";
+      . "FROM ($media_table, $medialinks_table) WHERE personID = \"$persfamID\" AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
 
@@ -909,12 +906,8 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
   $gotfile = $photocheck ? file_exists("$rootpath$photocheck") : false;
   if (!$gotfile) {
     if ($type) {
-      $query = "SELECT medialinkID "
-              . "FROM ($media_table, $medialinks_table) "
-              . "WHERE personID = \"$persfamID\" "
-              . "AND $media_table.mediaID = $medialinks_table.mediaID "
-              . "AND mediatypeID = \"photos\" "
-              . "AND thumbpath != \"\"";
+      $query = "SELECT medialinkID FROM ($media_table, $medialinks_table) "
+          . "WHERE personID = \"$persfamID\" AND $media_table.mediaID = $medialinks_table.mediaID AND mediatypeID = \"photos\" AND thumbpath != \"\"";
       $result2 = tng_query($query);
       $numphotos = tng_num_rows($result2);
       tng_free_result($result2);
@@ -923,9 +916,9 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
         $photo = "<a href=\"mediaSortFormAction.php?newlink1=$persfamID&amp;mediatypeID=photos&amp;linktype1=$type\" class=\"small\" style=\"display:block;padding:8px;border:1px solid black;margin-right:6px;text-align:center\">" . uiTextSnippet('choosedef') . "</a>";
       } elseif ($gender && $tngconfig['usedefthumbs']) {
         if ($gender == 'M') {
-          $photocheck = "img/male.jpg";
+          $photocheck = "img/silhouette_male.png";
         } elseif ($gender == 'F') {
-          $photocheck = "img/female.jpg";
+          $photocheck = "img/silhouette_female.png";
         }
         $photoref = $photocheck;
         $gotfile = file_exists("$rootpath$photocheck");

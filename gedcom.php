@@ -15,10 +15,10 @@ $gotfamily = [];
 
 $ldsOK = determineLDSRights();
 
-$query = "SELECT disallowgedcreate, email, owner FROM $treesTable";
+$query = "SELECT email, owner FROM $treesTable";
 $treeresult = tng_query($query);
 $treerow = tng_fetch_assoc($treeresult);
-if ($treerow['disallowgedcreate'] && (!$allow_ged)) {
+if (!$allow_ged) {
   exit;
 }
 tng_free_result($treeresult);

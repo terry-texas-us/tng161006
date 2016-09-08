@@ -15,8 +15,7 @@ if (isset($parentset)) {
   $parentset = intval($parentset);
 }
 
-function showBlank($pedborder)
-{
+function showBlank($pedborder) {
   echo "<td $pedborder><span>&nbsp;</span></td>\n";
   echo "<td><span>&nbsp;</span></td>\n</tr>\n";
   echo "<tr>\n<td $pedborder><span>&nbsp;</span></td>\n";
@@ -231,12 +230,6 @@ if ($result) {
   $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $pedname);
   tng_free_result($result);
 }
-$treeResult = getTreeSimple();
-$treerow = tng_fetch_assoc($treeResult);
-$disallowgedcreate = $treerow['disallowgedcreate'];
-$allowpdf = !$treerow['disallowpdf'] || ($allow_pdf && $rightbranch);
-tng_free_result($treeResult);
-
 if (!$pedigree['maxgen']) {
   $pedigree['maxgen'] = 6;
 }
@@ -285,10 +278,9 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
     $innermenu .= "<a class='navigation-item' href='verticalchart.php?personID=$personID&amp;parentset=$parentset&amp;display=vertical&amp;generations=$generations' id='pedchartlnk'>" . uiTextSnippet('pedvertical') . "</a>\n";
     $innermenu .= "<a class='navigation-item' href='pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=compact&amp;generations=$generations' id='compedlnk'>" . uiTextSnippet('pedcompact') . "</a>\n";
     $innermenu .= "<a class='navigation-item' href='pedigree.php?personID=$personID&amp;parentset=$parentset&amp;display=box&amp;generations=$generations' id='boxpedlnk'>" . uiTextSnippet('pedbox') . "</a>\n";
-//    $innermenu .= "<a class='navigation-item' href='pedigreetext.php?personID=$personID&amp;parentset=$parentset&amp;generations=$generations'>" . uiTextSnippet('pedtextonly') . "</a>\n";
     $innermenu .= "<a class='navigation-item' href='ahnentafel.php?personID=$personID&amp;parentset=$parentset&amp;generations=$generations'>" . uiTextSnippet('ahnentafel') . "</a>\n";
     $innermenu .= "<a class='navigation-item' href='extrastree.php?personID=$personID&amp;parentset=$parentset&amp;showall=1&amp;generations=$generations'>" . uiTextSnippet('media') . "</a>\n";
-    if ($generations <= 6 && $allowpdf) {
+    if ($generations <= 6 && $allow_pdf && $rightbranch) {
       $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ped&amp;personID=$personID&amp;generations=$generations');return false;\">PDF</a>\n";
     }
     beginFormElement("pedigree", "", "form1", "form1");
@@ -299,7 +291,7 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
     echo "<br>\n";
     endFormElement();
     ?>
-    <table class="pedigree-chart-text">
+    <table class="pedigree-chart">
       <tr>
         <?php
         $slot = 1;

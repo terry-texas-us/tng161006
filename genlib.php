@@ -136,7 +136,6 @@ function doMenuItem($index, $link, $icon, $label, $page, $thispage) {
 }
 
 function tng_menu($enttype, $currpage, $entityID) {
-  global $disallowgedcreate;
   global $allowEdit;
   global $rightbranch;
   global $allow_ged;
@@ -152,7 +151,7 @@ function tng_menu($enttype, $currpage, $entityID) {
     $menu .= doMenuItem($nexttab++, "relateform.php?primaryID=$entityID", "svg/users.svg", uiTextSnippet('relationship'), $currpage, "relate");
     $menu .= doMenuItem($nexttab++, "timeline.php?primaryID=$entityID", "svg/project.svg", uiTextSnippet('timeline'), $currpage, "timeline");
 
-    if (!$disallowgedcreate || ($allow_ged && $rightbranch)) {
+    if ($allow_ged && $rightbranch) {
       $menu .= doMenuItem($nexttab++, "gedform.php?personID=$entityID", "svg/folder.svg", uiTextSnippet('extractgedcom'), $currpage, "gedcom");
     }
     $editstr = "peopleEdit.php?person";

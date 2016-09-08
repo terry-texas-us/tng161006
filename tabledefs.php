@@ -655,8 +655,8 @@ $query = "CREATE TABLE $treesTable (
     zip VARCHAR(20) NOT NULL,
     phone VARCHAR(30) NOT NULL,
     secret TINYINT(4) NOT NULL,
-    disallowgedcreate TINYINT(4) NOT NULL,
-    disallowpdf TINYINT(4) NOT NULL,
+    disallowgedcreate TINYINT(4) NOT NULL DEFAULT 0,
+    disallowpdf TINYINT(4) NOT NULL DEFAULT 0,
     lastimportdate DATETIME NOT NULL,
     importfilename VARCHAR(100) NOT NULL,
     PRIMARY KEY (gedcom)

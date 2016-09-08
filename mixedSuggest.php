@@ -19,11 +19,6 @@ if ($enttype == 'I') {
     $name = getName($row) . " ($ID)";
     tng_free_result($result);
   }
-  $treeResult = getTreeSimple();
-  $treerow = tng_fetch_assoc($treeResult);
-  $disallowgedcreate = $treerow['disallowgedcreate'];
-  tng_free_result($treeResult);
-
   $years = getYears($row);
 } elseif ($enttype == 'F') {
   $typestr = "family";

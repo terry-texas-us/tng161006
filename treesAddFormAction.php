@@ -28,17 +28,11 @@ $country = addslashes($country);
 $zip = addslashes($zip);
 $phone = addslashes($phone);
 
-if (!$disallowgedcreate) {
-  $disallowgedcreate = 0;
-}
-if (!$disallowpdf) {
-  $disallowpdf = 0;
-}
 if (!$private) {
   $private = 0;
 }
-$query = "INSERT IGNORE INTO $treesTable (treename, description, owner, email, address, city, state, country, zip, phone, secret, disallowgedcreate, disallowpdf) "
-    . "VALUES ('$treename', '$description', '$owner', '$email', '$address', '$city', '$state', '$country', '$zip', '$phone', '$private', '$disallowgedcreate', '$disallowpdf')";
+$query = "INSERT IGNORE INTO $treesTable (treename, description, owner, email, address, city, state, country, zip, phone, secret) "
+    . "VALUES ('$treename', '$description', '$owner', '$email', '$address', '$city', '$state', '$country', '$zip', '$phone', '$private')";
 $result = tng_query($query);
 $success = tng_affected_rows();
 if ($success) {
@@ -55,6 +49,6 @@ if ($success) {
   if ($beforeimport) {
     echo $message;
   } else {
-    header("Location: treesAdd.php?message=" . urlencode($message) . "&treename=$treename&description=$description&owner=$owner&email=$email&address=$address&city=$city&state=$state&country=$country&zip=$zip&phone=$phone&private=$private&disallowgedcreate=$disallowgedcreate");
+    header("Location: treesAdd.php?message=" . urlencode($message) . "&treename=$treename&description=$description&owner=$owner&email=$email&address=$address&city=$city&state=$state&country=$country&zip=$zip&phone=$phone&private=$private");
   }
 }

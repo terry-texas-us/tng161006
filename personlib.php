@@ -1295,7 +1295,6 @@ function endListItem($section) {
 }
 
 function buildPersonMenu($currpage, $entityID) {
-  global $disallowgedcreate;
   global $allowEdit;
   global $rightbranch;
   global $allow_ged;
@@ -1308,7 +1307,7 @@ function buildPersonMenu($currpage, $entityID) {
   } elseif ($emailaddr && $currpage != 'suggest') {
     $menu .= "<a href='personSuggest.php?ID=$entityID' title='" . uiTextSnippet('suggest') . "'><img class='icon-sm' src='svg/new-message.svg'></a>\n";
   }
-  if (!$disallowgedcreate || ($allow_ged && $rightbranch)) {
+  if ($allow_ged && $rightbranch) {
     if ($currpage != 'gedcom') {
       $menu .= "<a href='gedform.php?personID=$entityID' title='" . uitextSnippet('extractgedcom') . "'><img class='icon-sm' src='svg/folder.svg'></a>\n";
     }
