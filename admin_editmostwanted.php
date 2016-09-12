@@ -69,8 +69,8 @@ header("Content-type:text/html; charset=" . $session_charset);
           </td>
         </tr>
       </table>
-      <br><input type='button' value="<?php echo uiTextSnippet('selphoto'); ?>"
-                  onclick="return openMostWantedMediaFind(document.editmostwanted.mwtree.options[document.editmostwanted.mwtree.selectedIndex].value);"/>
+      <br>
+      <input type='button' value="<?php echo uiTextSnippet('selphoto'); ?>" onclick="return openMostWantedMediaFind();"/>
       <div id='mwphoto'>
         <table class='table table-sm'>
           <tr>

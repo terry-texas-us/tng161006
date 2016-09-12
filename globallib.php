@@ -420,7 +420,7 @@ function checkLivingLinks($itemID) {
   }
   $icriteria = $fcriteria = "";
   if (!$allow_living && !$allow_private) {
-    // Viewer can not see media of Living individuals regardless of tree/branch,
+    // Viewer can not see media of Living individuals regardless of branch,
     // So need to check all links to this media for living individuals (don't narrow the search.)
     $icriteria = $fcriteria = "AND (living = 1 OR private = 1)";
   } else {
@@ -1104,17 +1104,18 @@ function buildParentRow($parent, $spouse, $label) {
 }
 
 function buildSexSelectControl($sex) {
-  $out = "<label>" . uiTextSnippet('sex') . "</label>\n";
-  $out .= "<select class='form-control' name='sex'>\n";
-    $out .= "<option value='U'" . (($sex == 'U') ? " selected>" : ">");
-      $out .= uiTextSnippet('unknown');
-    $out .= "</option>\n";
-    $out .= "<option value='M'" . (($sex == 'M') ? " selected>" : ">");
-      $out .= uiTextSnippet('male');
-    $out .= "</option>\n";
-    $out .= "<option value='F'" . (($sex == 'F') ? " selected>" : ">");
-      $out .= uiTextSnippet('female');
-    $out .= "</option>\n";
-  $out .= "</select>\n";
+  $out = "<label class='form-check-inline'>\n";
+  $out .= "<input class='form-check-input' name ='sex' type='radio' value='M'" . (($sex == 'M') ? " checked>" : ">");
+  $out .= uiTextSnippet('male');
+  $out .= "</label>\n";
+  $out .= "<label class='form-check-inline'>\n";
+  $out .= "<input class='form-check-input' name ='sex' type='radio' value='F'" . (($sex == 'F') ? " checked>" : ">");
+  $out .= uiTextSnippet('female');
+  $out .= "</label>\n";
+  $out .= "<label class='form-check-inline'>\n";
+  $out .= "<input class='form-check-input' name ='sex' type='radio' value='U'" . (($sex == 'U') ? " checked>" : ">");
+  $out .= uiTextSnippet('unknown');
+  $out .= "</label>\n";
+  
   return $out;
 }

@@ -480,25 +480,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
               <div id="imagemapdiv" style="display:none">
                 <br>
                 <p><?php echo uiTextSnippet('mapinstr3'); ?></p>
-                <table class='table table-sm'>
-                  <tr>
-                    <td><?php echo uiTextSnippet('tree'); ?>:</td>
-                    <td>
-                      <select name="maptree" id="maptree">
-                        <?php
-                        for ($j = 1; $j <= $treenum; $j++) {
-                          echo "  <option value=\"$trees[$j]\">$treename[$j]</option>\n";
-                        }
-                        ?>
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan='2'>
-                      <?php echo "<strong>" . uiTextSnippet('forrects') . ":</strong><br>" . uiTextSnippet('rectinstr'); ?>
-                    </td>
-                  </tr>
-                </table>
+                <?php echo "<strong>" . uiTextSnippet('forrects') . ":</strong><br>" . uiTextSnippet('rectinstr'); ?>
                 <br>
                 <?php
                 $width = $size[0];

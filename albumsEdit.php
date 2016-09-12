@@ -393,7 +393,6 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
   var tnglitbox;
   var album = "<?php echo $albumID; ?>";
   var entity = "";
-  var tree = "";
   var type = "album";
   var thumbmaxw = parseInt("<?php echo $thumbmaxw; ?>");
   var remove_text = "<?php echo uiTextSnippet('remove'); ?>";

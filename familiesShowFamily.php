@@ -51,24 +51,23 @@ function showDatePlace($event) {
     $citekey = $familyID . "_" . $event['event'];
     $cite = reorderCitation($citekey);
     if ($cite) {
-      $dcitestr = $event['date'] ? "&nbsp; <span><sup>$cite</sup></span>" : "";
-      $pcitestr = $event['place'] ? "&nbsp; <span><sup>[$cite]</sup></span>" : "";
+      $dcitestr = $event['date'] ? "<sup>$cite</sup>" : '';
+      $pcitestr = $event['place'] ? "<sup>$cite</sup>" : '';
     }
   }
   $dptext .= "<tr>\n";
   $editicon = $tentative_edit ? "<img class='icon-sm' src='svg/new-message.svg' alt=\"" . uiTextSnippet('editevent') . "\" onclick=\"tnglitbox = new ModalDialog('ajx_tentedit.php?persfamID={$event['ID']}&amp;type={$event['type']}&amp;event={$event['event']}&amp;title={$event['text']}');\" class=\"fakelink\">" : "";
-  $dptext .= "<td $cellid><span>" . $event['text'] . "&nbsp;$editicon</span></td>\n";
-  $dptext .= "<td colspan='2'>" . displayDate($event['date']) . "$dcitestr<br>\n";
+  $dptext .= "<td $cellid><span>" . $event['text'] . "$editicon</span></td>\n";
+  $dptext .= "<td colspan='2'>" . displayDate($event['date']) . " $dcitestr<br>\n";
   if ($allow_lds_this && $event['ldstext']) {
-
     if ($event['eventlds'] == "div") {
       $dptext .= " colspan='4'";
     }
   }
-  $dptext .= "$pcitestr&nbsp;";
   if ($event['place']) {
     $dptext .= buildSilentPlaceLink($event['place']);
   }
+  $dptext .= " $pcitestr";
   $dptext .= "</td>\n";
   if ($allow_lds_this && $event['ldstext']) {
     if ($event['type2']) {
@@ -289,7 +288,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   if ($ind['sex'] == 'M') {
     $query .= "LEFT JOIN $people_table ON $families_table.wife = $people_table.personID WHERE husband = '{$ind['personID']}' $restriction ORDER BY husborder";
   } else {
-    if ($ind['sex'] = 'F') {
+    if ($ind['sex'] == 'F') {
       $query .= "LEFT JOIN $people_table ON $families_table.husband = $people_table.personID WHERE wife = '{$ind['personID']}' $restriction ORDER BY wifeorder";
     } else {
       $query .= "LEFT JOIN $people_table ON ($families_table.husband = $people_table.personID OR $families_table.wife = $people_table.personID) WHERE (wife = '{$ind['personID']}' && husband = '{$ind['personID']}')";
@@ -421,7 +420,7 @@ $headSection->setTitle($headTitle);
 <html>
 <?php echo $headSection->build($flags, 'public', $session_charset); ?>
 <body id='public'>
-  <section class='container'>;
+  <section class='container'>
     <?php
     echo $publicHeaderSection->build();
     $photostr = showSmallPhoto($familyID, $famname, $rights['both'], 0);
@@ -432,7 +431,7 @@ $headSection->setTitle($headTitle);
     $fammedia = getMedia($famrow, 'F');
     $famalbums = getAlbums($famrow, 'F');
 
-    //    $famtext .= "<ul class='nopad'>\n";
+    //    $famtext .= "<ul>\n";
     //    $famtext .= beginListItem('info');
 
     //get husband & spouses
@@ -588,7 +587,7 @@ $headSection->setTitle($headTitle);
     <?php echo $publicFooterSection->build(); ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
-  <script src="js/rpt_utils.js"></script>\n";
+  <script src="js/rpt_utils.js"></script>
   <?php if ($tentative_edit) { ?>
     <script>
       var preferEuro = <?php echo ($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;

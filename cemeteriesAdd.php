@@ -165,9 +165,6 @@ $headSection->setTitle(uiTextSnippet('addnewcemetery'));
 <script src='js/mediautils.js'></script>
 <script src='js/admin.js'></script>
 <script src='js/cemeteries.js'></script>
-<script>
-  var tree = '';
-</script>
 <?php
 if ($map['key']) {
   include "googlemaplib2.php";

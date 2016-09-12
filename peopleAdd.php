@@ -50,30 +50,11 @@ $headSection->setTitle(uiTextSnippet('addnewperson'));
           <div class='col-sm-2'>
             <button class='btn btn-outline-primary' id='lockid' name='submit' type='submit'><?php echo uiTextSnippet('lockid'); ?></button>
           </div>
-          <div class='col-sm-4'>
-            <label class='checkbox-inline'>
-              <input name='living' type='checkbox' value='1' checked>
-              <?php echo uiTextSnippet('living'); ?>
-            </label>
-            <label class='checkbox-inline'>
-              <input name='private' type='checkbox' value='1'>
-              <?php echo uiTextSnippet('private'); ?>
-            </label>
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-6'>
-            
-          </div>
-          <div class='col-md-6'>
-            <br>
-            <?php echo buildBranchSelectControl($row, $assignedbranch, $branches_table); ?>
-          </div>
         </div>
       </header>
       <div id='person-names'>
         <div class='row'>
-          <div class='col-md-3'>
+          <div class='col-md-4'>
             <label><?php echo uiTextSnippet('givennames'); ?></label>
             <input class='form-control' name='firstname' type='text'>
           </div>
@@ -92,9 +73,6 @@ $headSection->setTitle(uiTextSnippet('addnewperson'));
               <input class='form-control' name='lastname' type='text'>
             </div>
           <?php } ?>
-          <div class='col-md-2'>
-            <?php echo buildSexSelectControl('unknown'); ?>
-          </div>
         </div>
         <br>
         <div class='row'>
@@ -122,6 +100,25 @@ $headSection->setTitle(uiTextSnippet('addnewperson'));
               <option value="2"><?php echo uiTextSnippet('oriental'); ?></option>
               <option value="3"><?php echo uiTextSnippet('lnfirst'); ?></option>
             </select>          </div>
+        </div>
+        <br>
+        <div class='row'>
+          <div class='col-md-4'>
+            <?php echo buildBranchSelectControl($row, $assignedbranch, $branches_table); ?>
+          </div>
+          <div class='col-sm-4'>
+            <label class='form-check-inline'>
+              <input class='form-check-input' name='living' type='checkbox' value='1' checked>
+                <?php echo uiTextSnippet('living'); ?>
+            </label>
+            <label class='form-check-inline'>
+              <input class='form-check-input' name='private' type='checkbox' value='1'>
+                <?php echo uiTextSnippet('private'); ?>
+            </label>
+          </div>
+          <div class='col-lg-4'>
+            <?php echo buildSexSelectControl('unknown'); ?>
+          </div>
         </div>
       </div>
       <div id='person-events'>
@@ -171,23 +168,23 @@ var allow_notes = false;
 var persfamID = "";
 
 $(document).ready(function() {
-    generateID('person', document.form1.personID, document.form1.tree1);
+    generateID('person', document.form1.personID);
     $('#person-id').addClass('form-control-success').css({'z-index' : '10'}).parent().addClass('has-success');
 });
 
 $('#generate').on('click', function () {
-    generateID('person', document.form1.personID, document.form1.tree1);
+    generateID('person', document.form1.personID);
     $('#person-id').removeClass('form-control-warning').addClass('form-control-success')
         .parent().removeClass('has-warning').addClass('has-success');
 });
 
 $('#person-id').on('blur', function () {
     this.value = (isNaN(Number(this.value))) ? this.value.toUpperCase() : 'I' + this.value;
-    checkPersonId(document.form1.personID, document.form1.tree1);
+    checkPersonId(document.form1.personID);
 });
 
 $('#check').on('click', function () {
-    checkPersonId(document.form1.personID, document.form1.tree1);
+    checkPersonId(document.form1.personID);
 });
 
 $('#lockid').on('click', function () {
@@ -244,7 +241,7 @@ function trimCheckPersonRequired() {
 ?>
 $('#gedcom').on('change', function () {
     <?php echo $swapbranches; ?>
-    generateID('person', document.form1.personID, document.form1.tree1);
+    generateID('person', document.form1.personID);
 });
 
 </script>

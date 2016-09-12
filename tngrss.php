@@ -186,22 +186,23 @@ if ($personID) {
 $item .= "<link>$tngdomain</link>\n";
 $item .= "<managingEditor>$emailaddr ($dbowner)</managingEditor>\n";
 $item .= "<webMaster>$emailaddr ($dbowner)</webMaster>\n";
-if ($rssimage) {                            // define $rssimage in your customconfig.php file this will allow you to put a logo on your feed once you have subscribed
-  $item .= "<image>\n";
-  $item .= "<url>" . $tngdomain . $rssimage . "</url>\n";     // path for the logo
-  if ($personID) {
-    $item .= "<title>" . trim($sitename . " " . uiTextSnippet('indinfo')) . ": $personID</title>\n";  // images require a title (match it with either the personID)
-  } elseif ($familyID) {
-    $item .= "<title>" . trim($sitename . " " . uiTextSnippet('family')) . ": $familyID</title>\n";    // the familyID
-  } else {
-    $item .= "<title>$sitename</title>\n";                      // or just the site name
-  }
-  $item .= "<link>" . $tngdomain . "</link>\n";                  // images also require the site link so that if you click on the image you go to the site
-  $item .= "</image>\n";
-}
+// [ts] define $rssimage to use this. (allows a logo on your feed once you have subscribed)
+//if ($rssimage) {
+//  $item .= "<image>\n";
+//  $item .= "<url>" . $tngdomain . $rssimage . "</url>\n";     // path for the logo
+//  if ($personID) {
+//    $item .= "<title>" . trim($sitename . " " . uiTextSnippet('indinfo')) . ": $personID</title>\n";  // images require a title (match it with either the personID)
+//  } elseif ($familyID) {
+//    $item .= "<title>" . trim($sitename . " " . uiTextSnippet('family')) . ": $familyID</title>\n";    // the familyID
+//  } else {
+//    $item .= "<title>$sitename</title>\n";                      // or just the site name
+//  }
+//  $item .= "<link>" . $tngdomain . "</link>\n";                  // images also require the site link so that if you click on the image you go to the site
+//  $item .= "</image>\n";
+//}
 echo $item;
 
-//you will need to define $rsslang in your customconfig.php file before you can use this
+// [ts] define $rsslang to use this
 //echo "<language>$rsslang</language>\n";
 
 $text['pastxdays'] = preg_replace("/xx/", "$change_cutoff", $text['pastxdays']);

@@ -206,8 +206,6 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
 <script src='js/admin.js'></script>
 <script src='js/cemeteries.js'></script>
 <script>
-  var tree = '';
-
   var loaded = false;
 </script>
 <?php

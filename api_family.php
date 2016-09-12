@@ -16,7 +16,7 @@ $result = tng_query($query);
 $famrow = tng_fetch_assoc($result);
 if (!tng_num_rows($result)) {
   tng_free_result($result);
-  echo "{\"error\":\"No one in database with that ID and tree\"}";
+  echo "{\"error\":\"No one in database with that ID\"}";
   exit;
 } else {
   tng_free_result($result);
@@ -34,7 +34,7 @@ $namestr = uiTextSnippet('family') . ": " . $famname;
 $logstring = "<a href=\"familiesShowFamily.php?familyID=$familyID\">" . uiTextSnippet('familygroupfor') . " $famname</a>";
 writelog($logstring);
 
-$family = "\"id\":\"{$famrow['familyID']}\",\"tree\":\"{$famrow['gedcom']}\"";
+$family = "\"id\":\"{$famrow['familyID']}\"";
 //get husband & spouses
 if ($famrow['husband']) {
   $query = "SELECT * FROM $people_table WHERE personID = \"{$famrow['husband']}\"";

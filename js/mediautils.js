@@ -278,15 +278,6 @@ function init() {
     }
 }
 
-function getTree(treeobj) {
-    'use strict';
-    if (treeobj.options.length) {
-        return treeobj.options[treeobj.selectedIndex].value;
-    }
-    alert(textSnippet('selecttree'));
-    return false;
-}
-
 function generateThumbs(form) {
     'use strict';
     $('#thumbresults').html("");

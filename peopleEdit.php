@@ -164,50 +164,25 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
         <div id='person-names'>
           <div class='row'>
             <div class='col-md-4'>
-            </div>
-            <div class='col-md-4'>
-              <?php include_once 'branches.php'; ?>
-              <?php echo buildBranchSelectControl($row, $assignedbranch, $branches_table); ?>
-            </div>
-            <div class='col-md-4'>
-              <div class='checkbox-inline'>
-                <label>
-                  <input name='living' type='checkbox' value='1'<?php if ($row['living']) {echo " checked";} ?>>
-                  <?php echo uiTextSnippet('living'); ?>
-                </label>
-              </div>
-              <div class='checkbox-inline'>
-                <label>
-                  <input name='private' type='checkbox' value='1'<?php if ($row['private']) {echo " checked";} ?>>
-                  <?php echo uiTextSnippet('private'); ?>
-                </label>
-              </div>        
-            </div>
-          </div>
-          <div class='row'>
-            <div class='col-md-3'>
-              <?php echo uiTextSnippet('givennames'); ?>
+              <label><?php echo uiTextSnippet('givennames'); ?></label>
               <input class='form-control' name='firstname' type='text' value="<?php echo $row['firstname']; ?>">
             </div>
             <?php if ($lnprefixes) { ?>
               <div class='col-md-2'>
-                <?php echo uiTextSnippet('lnprefix'); ?>
+                <label><?php echo uiTextSnippet('lnprefix'); ?></label>
                 <input class='form-control' name='lnprefix' type='text' value="<?php echo $row['lnprefix']; ?>">
               </div>
               <div class='col-md-3'>
-                <?php echo uiTextSnippet('surname'); ?>
+                <label><?php echo uiTextSnippet('surname'); ?></label>
                 <input class='form-control' name='lastname' type='text' value="<?php echo $row['lastname']; ?>">
               </div>
             <?php } else { ?>
               <div class='col-md-5'>
-                <?php echo uiTextSnippet('surname'); ?>
+                <label><?php echo uiTextSnippet('surname'); ?></label>
                 <input class='form-control' name='lastname' type='text' value="<?php echo $row['lastname']; ?>">
               </div>
             <?php } ?>
-            <div class='col-md-2'>
-              <?php echo buildSexSelectControl($row['sex']); ?>
-            </div>
-            <div class='col-md-2'>
+            <div class='col-md-3'>
               <br>
               <?php
               $iconColor = $gotnotes['NAME'] ? "icon-info" : "icon-muted";
@@ -222,25 +197,26 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
               ?>
             </div>
           </div>
+          <br>
           <div class='row'>
             <div class='col-md-3'>
-              <?php echo uiTextSnippet('nickname'); ?>
+              <label><?php echo uiTextSnippet('nickname'); ?></label>
               <input class='form-control' name='nickname' type='text' value="<?php echo $row['nickname']; ?>">
             </div>
             <div class='col-md-2'>
-              <?php echo uiTextSnippet('title'); ?>
+              <label><?php echo uiTextSnippet('title'); ?></label>
               <input class='form-control' name='title' type='text' value="<?php echo $row['title']; ?>">
             </div>
             <div class='col-md-2'>
-              <?php echo uiTextSnippet('prefix'); ?>
+              <label><?php echo uiTextSnippet('prefix'); ?></label>
               <input class='form-control' name='prefix' type='text' value="<?php echo $row['prefix']; ?>">
             </div>
             <div class='col-md-2'>
-              <?php echo uiTextSnippet('suffix'); ?>
+              <label><?php echo uiTextSnippet('suffix'); ?></label>
               <input class='form-control' name='suffix' type='text' value="<?php echo $row['suffix']; ?>">
             </div>
             <div class='col-md-3'>
-              <?php echo uiTextSnippet('nameorder'); ?>
+              <label><?php echo uiTextSnippet('nameorder'); ?></label>
               <select class='form-control' name="pnameorder">
                 <option value='0'>
                   <?php echo uiTextSnippet('default'); ?>
@@ -255,6 +231,26 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                   <?php echo uiTextSnippet('lnfirst'); ?>
                 </option>
               </select>
+            </div>
+          </div>
+          <br>
+          <div class='row'>
+            <div class='col-md-4'>
+              <?php include_once 'branches.php'; ?>
+              <?php echo buildBranchSelectControl($row, $assignedbranch, $branches_table); ?>
+            </div>
+            <div class='col-md-4'>
+              <label class='form-check-inline'>
+                <input class='form-check-input' name='living' type='checkbox' value='1'<?php if ($row['living']) {echo " checked";} ?>>
+                <?php echo uiTextSnippet('living'); ?>
+              </label>
+              <label class='form-check-inline'>
+                <input class='form-check-input' name='private' type='checkbox' value='1'<?php if ($row['private']) {echo " checked";} ?>>
+                <?php echo uiTextSnippet('private'); ?>
+              </label>
+            </div>
+            <div class='col-lg-4'>
+              <?php echo buildSexSelectControl($row['sex']); ?>
             </div>
           </div>
         </div> <!-- #person-names -->
@@ -432,7 +428,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                               <span>
                                 <?php
                                 if (isset($spouserow['personID']) && $spouserow['personID']) {
-                                  echo "<a href=\"peopleEdit.php?personID={$spouserow['personID']}&amp;cw=$cw\">" . getName($spouserow) . " - {$spouserow['personID']}</a>$birthinfo";
+                                  echo "<a href=\"peopleEdit.php?personID={$spouserow['personID']}&amp;cw=$cw\">" . getName($spouserow) . "</a>$birthinfo";
                                 }
                                 ?>
                               </span>
@@ -459,13 +455,13 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                                       echo "<div class='col-md-8'>$kidcount. ";
                                         if ($crights['both']) {
                                           if ($rightbranch) {
-                                            echo "<a href=\"peopleEdit.php?personID={$child['pID']}&amp;cw=$cw\">" . getName($child) . " - {$child['pID']}</a>";
+                                            echo "<a href=\"peopleEdit.php?personID={$child['pID']}&amp;cw=$cw\">" . getName($child) . "</a>";
                                           } else {
                                             echo getName($child) . " - " . $child['pID'];
                                           }
                                           echo $child['birthdate'] ? " (" . uiTextSnippet('birthabbr') . " " . displayDate($child['birthdate']) . ")" : "";
                                         } else {
-                                          echo ($child['private'] ? uiTextSnippet('private') : uiTextSnippet('living')) . " - " . $child['pID'];
+                                          echo ($child['private'] ? uiTextSnippet('private') : uiTextSnippet('living'));
                                         }
                                       echo "</div>\n";
                                     echo "</div>\n";
@@ -488,48 +484,65 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
               </td>
             </tr>
           <?php } ?>
-          <tr>
-            <td>
-              <p>
-                <?php
-                echo uiTextSnippet('onsave') . ":<br>";
-                if ($allowAdd) {
-                  echo "<input id='radiochild' name='newfamily' type='radio' value='child'>" . uiTextSnippet('gotonewfamily') . " ($personID) " . uiTextSnippet('aschild') . "<br>\n";
-                  if ($row['sex']) {
-                    echo "<input id=\"radio$self\" name='newfamily' type='radio' value=\"$self\">" . uiTextSnippet('gotonewfamily') . " ($personID) $selfdisplay<br>\n";
-                  }
-                }
-                echo "<input name='newfamily' type='radio' value='return'> " . uiTextSnippet('savereturn') . "<br>\n";
-                if ($cw) {
-                  echo "<input name='newfamily' type='radio' value='close' checked> " . uiTextSnippet('closewindow') . "\n";
-                } else {
-                  echo "<input name='newfamily' type='radio' value='none' checked> " . uiTextSnippet('saveback') . "\n";
-                }
-                ?>
-              </p>
-              <input id='newmedia' name='media' type='hidden' value=''>
-              <input name='added' type='hidden' value="<?php echo $added; ?>">
-              <input name='personID' type='hidden' value="<?php echo "$personID"; ?>">
-              <input name='submit2' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
-              <?php
-              if (!$lnprefixes) {
-                echo "<input name='lnprefix' type='hidden' value=\"{$row['lnprefix']}\">";
-              }
-              if (!$rights['lds']) {
-              ?>
-                <input name='baptdate' type='hidden' value="<?php echo $row['baptdate']; ?>">
-                <input name='baptplace' type='hidden' value="<?php echo $row['baptplace']; ?>">
-                <input name='confdate' type='hidden' value="<?php echo $row['confdate']; ?>">
-                <input name='confplace' type='hidden' value="<?php echo $row['confplace']; ?>">
-                <input name='initdate' type='hidden' value="<?php echo $row['initdate']; ?>">
-                <input name='initplace' type='hidden' value="<?php echo $row['initplace']; ?>">
-                <input name='endldate' type='hidden' value="<?php echo $row['endldate']; ?>">
-                <input name='endlplace' type='hidden' value="<?php echo $row['endlplace']; ?>">
-              <?php } ?>
-              <input name='cw' type='hidden' value="<?php echo "$cw"; ?>">
-            </td>
-          </tr>
         </table>
+        <div class='footer'>
+          <h6><?php echo uiTextSnippet('onsave'); ?></h6>
+          <?php
+          if ($allowAdd) {
+            echo "<div class='form-check'>\n";
+            echo "<label class='form-check-label'>\n";
+            echo "<input class='form-check-input' id='radiochild' name='newfamily' type='radio' value='child'>\n";
+            echo uiTextSnippet('gotonewfamily') . " ($namestr) " . uiTextSnippet('aschild') . "\n";
+            echo "</label>\n";
+            echo "</div>\n";
+            if ($row['sex']) {
+              echo "<div class='form-check'>\n";
+              echo "<label class='form-check-label'>\n";
+              echo "<input class='form-check-input' id=\"radio$self\" name='newfamily' type='radio' value=\"$self\">\n";
+              echo uiTextSnippet('gotonewfamily') . " ($namestr) $selfdisplay\n";
+              echo "</label>\n";
+              echo "</div>\n";
+            }
+          }
+          echo "<div class='form-check'>\n";
+          echo "<label class='form-check-label'>\n";
+          echo "<input class='form-check-input' name='newfamily' type='radio' value='return'>\n";
+          echo uiTextSnippet('savereturn') . "\n";
+          echo "</label>\n";
+          echo "</div>\n";
+          echo "<div class='form-check'>\n";
+          echo "<label class='form-check-label'>\n";
+//          if ($cw) {
+//            echo "<input class='form-check-input' name='newfamily' type='radio' value='close' checked>\n";
+//            echo uiTextSnippet('closewindow') . "\n";
+//          } else {
+            echo "<input class='form-check-input' name='newfamily' type='radio' value='none' checked>\n";
+            echo uiTextSnippet('saveback') . "\n";
+//          }
+          echo "</label>\n";
+          echo "</div>\n";
+          ?>
+          <input id='newmedia' name='media' type='hidden' value=''>
+          <input name='added' type='hidden' value="<?php echo $added; ?>">
+          <input name='personID' type='hidden' value="<?php echo "$personID"; ?>">
+          <input class='btn btn-primary' name='submit2' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
+          <?php
+          if (!$lnprefixes) {
+            echo "<input name='lnprefix' type='hidden' value=\"{$row['lnprefix']}\">";
+          }
+          if (!$rights['lds']) {
+          ?>
+            <input name='baptdate' type='hidden' value="<?php echo $row['baptdate']; ?>">
+            <input name='baptplace' type='hidden' value="<?php echo $row['baptplace']; ?>">
+            <input name='confdate' type='hidden' value="<?php echo $row['confdate']; ?>">
+            <input name='confplace' type='hidden' value="<?php echo $row['confplace']; ?>">
+            <input name='initdate' type='hidden' value="<?php echo $row['initdate']; ?>">
+            <input name='initplace' type='hidden' value="<?php echo $row['initplace']; ?>">
+            <input name='endldate' type='hidden' value="<?php echo $row['endldate']; ?>">
+            <input name='endlplace' type='hidden' value="<?php echo $row['endlplace']; ?>">
+          <?php } ?>
+          <input name='cw' type='hidden' value="<?php echo "$cw"; ?>">
+        </div>
       <?php } // ?editconflict ?>
     </form>
     <p class="smallest"><?php echo uiTextSnippet('lastmodified') . ": {$row['changedate']} ({$row['changedby']})"; ?></p>
@@ -556,7 +569,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
   var spouseOrder = '<?php echo $spouseorder; ?>';
   
   $(document).ready( function() {
-      startPersonSorts(tree, spouseOrder);
+      startPersonSorts(spouseOrder);
   });
 
   function lockExpiring() {

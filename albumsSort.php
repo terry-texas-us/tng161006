@@ -80,16 +80,6 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
       }
       return rval;
     }
-
-    function getTree(treeobj) {
-      if (treeobj.options.length)
-        return treeobj.options['treeobj.selectedIndex'].value;
-      else {
-        alert(textSnippet('selecttree'));
-        return false;
-      }
-    }
-
     var gsControlName = "";
   </script>
 </body>

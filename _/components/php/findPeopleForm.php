@@ -12,20 +12,20 @@
         </div>
       </div>
       <div class='row form-group'>
-        <label class='checkbox-inline'>
-          <input name='living' type='checkbox' value='yes'<?php if ($living == "yes") {echo " checked";} ?>>
+        <label class='form-check-inline'>
+          <input class='form-check-input' name='living' type='checkbox' value='yes'<?php if ($living == "yes") {echo " checked";} ?>>
           <?php echo uiTextSnippet('livingonly'); ?>
         </label>
-        <label class='checkbox-inline'>
-          <input name='nokids' type='checkbox' value='yes'<?php if ($nokids == "yes") {echo " checked";} ?>>
+        <label class='form-check-inline'>
+          <input class='form-check-input' name='nokids' type='checkbox' value='yes'<?php if ($nokids == "yes") {echo " checked";} ?>>
           <?php echo uiTextSnippet('nokids'); ?>
         </label>
-        <label class='checkbox-inline'>
-          <input name='noparents' type='checkbox' value='yes'<?php if ($noparents == "yes") {echo " checked";} ?>>
+        <label class='form-check-inline'>
+          <input class='form-check-input' name='noparents' type='checkbox' value='yes'<?php if ($noparents == "yes") {echo " checked";} ?>>
           <?php echo uiTextSnippet('noparents'); ?>
         </label>
-        <label class='checkbox-inline'>
-          <input name='nospouse' type='checkbox' value='yes'<?php if ($nospouse == "yes") {echo " checked";} ?>>
+        <label class='form-check-inline'>
+          <input class='form-check-input' name='nospouse' type='checkbox' value='yes'<?php if ($nospouse == "yes") {echo " checked";} ?>>
           <?php echo uiTextSnippet('nospouse'); ?>
         </label>
       </div>

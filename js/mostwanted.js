@@ -42,9 +42,9 @@ function openMostWanted(mwtype, ID) {
     return false;
 }
 
-function openMostWantedMediaFind(tree) {
+function openMostWantedMediaFind() {
     'use strict';
-    tnglitbox = new ModalDialog('admin_findmwmedia.php?tree=' + tree);
+    tnglitbox = new ModalDialog('admin_findmwmedia.php');
     return false;
 }
 

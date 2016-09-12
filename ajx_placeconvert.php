@@ -13,7 +13,6 @@ require 'adminlog.php';
 
 header("Content-type:text/html; charset=" . $session_charset);
 if ($action == "convert") {
-  //use trees again, assign every place a tree
   $query = "UPDATE $places_table SET gedcom = \"$placetree\" WHERE gedcom = \"\"";
   $result = tng_query($query) or die("Cannot complete this operation because place records were never merged.");
   $logmsg = "All places assigned to tree: $placetree";

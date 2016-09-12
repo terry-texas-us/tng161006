@@ -121,7 +121,7 @@ $headSection->setTitle(uiTextSnippet('modifytree'));
       <input type='button' value="<?php echo uiTextSnippet('addlabels'); ?>"
              onclick="return startLabels(document.form1);">
       <input type='button' value="<?php echo uiTextSnippet('showpeople'); ?>"
-             onclick="return showBranchPeople(document.form1.tree.value, document.form1.branch.value, document.form1.description.value);">
+             onclick="return showBranchPeople(document.form1.branch.value, document.form1.description.value);">
     </form>
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->
@@ -143,7 +143,7 @@ function validateForm() {
 function startLabels(form) {
     'use strict';
     var args = '&personID=' + form.personID.value + '&agens=' + form.agens.value + '&dagens=' + form.dagens.value + '&dgens=' + form.dgens.value + '&dospouses=' + form.dospouses.value;
-    var url = 'ajx_branchmenu.php?branch=' + form.branch.value + '&tree=' + form.tree.value + args;
+    var url = 'ajx_branchmenu.php?branch=' + form.branch.value + args;
 
     if (form.personID.value.length === 0) {
         textSnippetAlert('enterstartingind');
@@ -155,9 +155,9 @@ function startLabels(form) {
     return false;
 }
 
-function showBranchPeople(tree, branch, description) {
+function showBranchPeople(branch, description) {
     'use strict';
-    var url = 'ajx_showbranch.php?branch=' + branch + '&description=' + encodeURIComponent(description) + '&tree=' + tree;
+    var url = 'ajx_showbranch.php?branch=' + branch + '&description=' + encodeURIComponent(description);
     tnglitbox = new ModalDialog(url);
     return false;
 }
@@ -177,7 +177,6 @@ function addLabels() {
         dagens: $('#dagens').val(),
         dgens: form1.dgens.value,
         dospouses: $('#dospouses').attr('checked') ? true : "",
-        tree: tree,
         branch: branch
     };
     $.ajax({

@@ -94,7 +94,7 @@ $timeOffset = "0";
 $tngconfig['edit_timeout'] = "";
 $requirelogin = "0";
 $livedefault = "0";
-$ldsdefault = "0";
+$ldsdefault = "2";
 $chooselang = "1";
 $nonames = "0";
 $tngconfig['nnpriv'] = "0";
@@ -125,10 +125,7 @@ $change_cutoff = "0";
 $change_limit = "10";
 $tngconfig['preferEuro'] = "false";
 $tngconfig['calstart'] = "0";
-$tngconfig['pardata'] = "2";
+$tngconfig['pardata'] = "1";
 $tngconfig['oldids'] = "";
 $tngconfig['lastimport'] = "";
 $tng_notinstalled = "";
-
-
-require $subroot . "customconfig.php";

@@ -87,6 +87,7 @@ if ($rights['both']) {
       $headTitle .= " " . $row['deathplace'];
     }
 }
+
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
@@ -232,8 +233,9 @@ $headSection->setTitle($headTitle);
         $cellnumber = 0;
         resetEvents();
         getCitations($personID . "::" . $parent['familyID']);
-        $gotfather = getParentData($parent['familyID'], 'husband');
 
+        $fatherHtml = '';
+        $gotfather = getParentData($parent['familyID'], 'husband');
         if ($gotfather) {
           $fathrow = tng_fetch_assoc($gotfather);
           $birthinfo = getBirthInfo($fathrow);
@@ -257,16 +259,17 @@ $headSection->setTitle($headTitle);
             }
           }
           $label = $fathrow['sex'] == 'F' ? uiTextSnippet('mother') : uiTextSnippet('father');
-          $persontext .= showEvent(["text" => $label, "fact" => $fatherlink]);
+          $fatherHtml .= showEvent(["text" => $label, "fact" => $fatherlink]);
           if ($rights['both'] && $parent['frel']) {
             $rel = $parent['frel'];
             $relstr = uiTextSnippet($rel) ? uiTextSnippet($rel) : $rel;
-            $persontext .= showEvent(["text" => uiTextSnippet('relationship2'), "fact" => $relstr]);
+            $fatherHtml .= showEvent(["text" => uiTextSnippet('relationship2'), "fact" => $relstr]);
           }
           tng_free_result($gotfather);
         }
-        $gotmother = getParentData($parent['familyID'], 'wife');
 
+        $motherHtml = '';
+        $gotmother = getParentData($parent['familyID'], 'wife');
         if ($gotmother) {
           $mothrow = tng_fetch_assoc($gotmother);
           $birthinfo = getBirthInfo($mothrow);
@@ -290,14 +293,18 @@ $headSection->setTitle($headTitle);
             }
           }
           $label = $mothrow['sex'] == 'M' ? uiTextSnippet('father') : uiTextSnippet('mother');
-          $persontext .= showEvent(["text" => uiTextSnippet('mother'), "fact" => $motherlink]);
+          $motherHtml .= showEvent(["text" => uiTextSnippet('mother'), "fact" => $motherlink]);
           if ($rights['both'] && $parent['mrel']) {
             $rel = $parent['mrel'];
             $relstr = uiTextSnippet($rel) ? uiTextSnippet($rel) : $rel;
-            $persontext .= showEvent(["text" => uiTextSnippet('relationship2'), "fact" => $relstr]);
+            $motherHtml .= showEvent(["text" => uiTextSnippet('relationship2'), "fact" => $relstr]);
           }
           tng_free_result($gotmother);
         }
+
+// parents events
+        
+        $parentsEventsHtml = '';
         if ($rights['both'] && $rights['lds'] && $tngconfig['pardata'] < 2) {
           setEvent(["text" => uiTextSnippet('sealedplds'), "date" => $parent['sealdate'], "place" => $parent['sealplace'], "event" => "SLGC", "entity" => "$personID::{$parent['familyID']}", "type" => "C", "nomap" => 1], $parent['sealdatetr']);
         }
@@ -306,13 +313,13 @@ $headSection->setTitle($headTitle);
         tng_free_result($gotparents);
         $parent['personID'] = "";
 
-        if ($tngconfig['pardata'] < 2) {
+        if ($tngconfig['pardata'] < 2) { // [ts] 0 all events or 1 standard events only
           $prights = determineLivingPrivateRights($parentrow);
           $parentrow['allow_living'] = $prights['living'];
           $parentrow['allow_private'] = $prights['private'];
 
           if ($prights['both'] && (!$gotfather || $frights['both']) && (!$gotmother || $mrights['both'])) {
-            if (!$tngconfig['pardata']) {
+            if (!$tngconfig['pardata']) { // [ts] 0 non-standard events
               $famnotes = getNotes($parent['familyID'], 'F');
               getCitations($parent['familyID']);
               $stdexf = getStdExtras($parent['familyID']);
@@ -335,11 +342,11 @@ $headSection->setTitle($headTitle);
             }
             ksort($events);
             foreach ($events as $event) {
-              $persontext .= showEvent($event);
+              $parentsEventsHtml .= showEvent($event);
             }
             $assocresult = getAssociations($parent['familyID']);
             while ($assoc = tng_fetch_assoc($assocresult)) {
-              $persontext .= showEvent(["text" => uiTextSnippet('association'), "fact" => formatAssoc($assoc)]);
+              $parentsEventsHtml .= showEvent(["text" => uiTextSnippet('association'), "fact" => formatAssoc($assoc)]);
             }
             tng_free_result($assocresult);
 
@@ -352,19 +359,23 @@ $headSection->setTitle($headTitle);
                 $famnotes2 = buildGenNotes($famnotes, $parent['familyID'], "--x-general-x--");
               }
               if ($famnotes2) {
-                $persontext .= "<tr>\n";
-                $persontext .= "<td>" . uiTextSnippet('notes') . "</td>\n";
-                $persontext .= "<td colspan='2'><span><div class='notearea'>$famnotes2</div></span></td>\n";
-                $persontext .= "</tr>\n";
+                $parentsEventsHtml .= "<tr>\n";
+                $parentsEventsHtml .= "<td>" . uiTextSnippet('notes') . "</td>\n";
+                $parentsEventsHtml .= "<td colspan='2'><span><div class='notearea'>$famnotes2</div></span></td>\n";
+                $parentsEventsHtml .= "</tr>\n";
               }
               foreach ($mediatypes as $mediatype) {
                 $mediatypeID = $mediatype['ID'];
-                $persontext .= writeMedia($fammedia, $mediatypeID, "p");
+                $parentsEventsHtml .= writeMedia($fammedia, $mediatypeID, "p");
               }
-              $persontext .= writeAlbums($famalbums);
+              $parentsEventsHtml .= writeAlbums($famalbums);
             }
           }
         }
+        $persontext .= $fatherHtml;
+        $persontext .= $motherHtml;
+
+        $persontext .= $parentsEventsHtml;
         $persontext .= showEvent(["text" => uiTextSnippet('familyid'), "date" => $parent['familyID'], "place" => "<a href=\"familiesShowFamily.php?familyID={$parent['familyID']}\">" . uiTextSnippet('groupsheet') . "</a>", "np" => 1]);
         $persontext .= "</table>\n";
         $persontext .= "<br>\n";

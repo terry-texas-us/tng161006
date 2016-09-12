@@ -15,7 +15,7 @@ $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 if (!tng_num_rows($result)) {
   tng_free_result($result);
-  echo "{\"error\":\"No one in database with that ID and tree\"}";
+  echo "{\"error\":\"No one in database with that ID\"}";
   exit;
 } else {
   tng_free_result($result);

@@ -36,7 +36,7 @@
 var MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 var DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 function LZ(x) {
-    return(x < 0 || x > 9 ? "" : "0") + x
+    return(x < 0 || x > 9 ? "" : "0") + x;
 }
 
 // ------------------------------------------------------------------
@@ -61,8 +61,8 @@ function isDate(val, format) {
 //  -1 if either of the dates is in an invalid format
 // -------------------------------------------------------------------
 function compareDates(date1, dateformat1, date2, dateformat2) {
-    var d1 = getDateFromFormat(date1, dateformat1);
-    var d2 = getDateFromFormat(date2, dateformat2);
+    var d1 = getDateFromFormat(date1, dateformat1),
+        d2 = getDateFromFormat(date2, dateformat2);
     if (d1 === 0 || d2 === 0) {
         return -1;
     } else if (d1 > d2) {
@@ -78,68 +78,67 @@ function compareDates(date1, dateformat1, date2, dateformat2) {
 // ------------------------------------------------------------------
 function formatDate(date, format) {
     format = format + "";
-    var result = "";
-    var i_format = 0;
-    var c = "";
-    var token = "";
-    var y = date.getFullYear() + "";
-    var M = date.getMonth() + 1;
-    var d = date.getDate();
-    var E = date.getDay();
-    var H = date.getHours();
-    var m = date.getMinutes();
-    var s = date.getSeconds();
-    var yyyy, yy, MMM, MM, dd, hh, h, mm, ss, ampm, HH, H, KK, K, kk, k;
+    var result = "",
+        i_format = 0,
+        c = "",
+        token = "",
+        y = date.getFullYear() + "",
+        M = date.getMonth() + 1,
+        d = date.getDate(),
+        E = date.getDay(),
+        H = date.getHours(),
+        m = date.getMinutes(),
+        s = date.getSeconds(),
+        value = new Object();
     // Convert real date parts into formatted versions
-    var value = new Object();
     if (y.length < 3 || y < 0) {
         y = "" + (y - 0 + 1900);
     }
-    value["y"] = "" + y;
-    value["yyyy"] = y;
-    value["yy"] = y.substring(2, 4);
-    value["M"] = M;
-    value["MM"] = LZ(M);
-    value["MMM"] = MONTH_NAMES[M - 1];
-    value["NNN"] = MONTH_NAMES[M + 11];
-    value["d"] = d;
-    value["dd"] = LZ(d);
-    value["E"] = DAY_NAMES[E + 7];
-    value["EE"] = DAY_NAMES[E];
-    value["H"] = H;
-    value["HH"] = LZ(H);
+    value.y = "" + y;
+    value.yyyy = y;
+    value.yy = y.substring(2, 4);
+    value.M = M;
+    value.MM = LZ(M);
+    value.MMM = MONTH_NAMES[M - 1];
+    value.NNN = MONTH_NAMES[M + 11];
+    value.d = d;
+    value.dd = LZ(d);
+    value.E = DAY_NAMES[E + 7];
+    value.EE = DAY_NAMES[E];
+    value.H = H;
+    value.HH = LZ(H);
     if (H === 0) {
-        value["h"] = 12;
+        value.h = 12;
     } else if (H > 12) {
-        value["h"] = H - 12;
+        value.h = H - 12;
     } else {
-        value["h"] = H;
+        value.h = H;
     }
-    value["hh"] = LZ(value["h"]);
+    value.hh = LZ(value.h);
     if (H > 11) {
-        value["K"] = H - 12;
+        value.K = H - 12;
     } else {
-        value["K"] = H;
+        value.K = H;
     }
-    value["k"] = H + 1;
-    value["KK"] = LZ(value["K"]);
-    value["kk"] = LZ(value["k"]);
+    value.k = H + 1;
+    value.KK = LZ(value.K);
+    value.kk = LZ(value.k);
     if (H > 11) {
-        value["a"] = "PM";
+        value.a = "PM";
     } else {
-        value["a"] = "AM";
+        value.a = "AM";
     }
-    value["m"] = m;
-    value["mm"] = LZ(m);
-    value["s"] = s;
-    value["ss"] = LZ(s);
+    value.m = m;
+    value.mm = LZ(m);
+    value.s = s;
+    value.ss = LZ(s);
     while (i_format < format.length) {
         c = format.charAt(i_format);
         token = "";
         while ((format.charAt(i_format) === c) && (i_format < format.length)) {
             token += format.charAt(i_format++);
         }
-        if (value[token] !== null) {
+        if (value[token] != null) {
             result = result + value[token];
         } else {
             result = result + token;
@@ -151,22 +150,28 @@ function formatDate(date, format) {
 // ------------------------------------------------------------------
 // Utility functions for parsing in getDateFromFormat()
 // ------------------------------------------------------------------
-function _isInteger(val) {
-    var digits = "1234567890";
-    for (var i = 0; i < val.length; i++) {
-        if (digits.indexOf(val.charAt(i)) == -1) {
+function isInteger(val) {
+    "use strict";
+    var digits = "1234567890",
+        i;
+    for (i = 0; i < val.length; i += 1) {
+        if (digits.indexOf(val.charAt(i)) === -1) {
             return false;
         }
     }
     return true;
 }
-function _getInt(str, i, minlength, maxlength) {
-    for (var x = maxlength; x >= minlength; x--) {
-        var token = str.substring(i, i + x);
+
+function getInteger(str, i, minlength, maxlength) {
+    "use strict";
+    var x,
+        token;
+    for (x = maxlength; x >= minlength; x -= 1) {
+        token = str.substring(i, i + x);
         if (token.length < minlength) {
             return null;
         }
-        if (_isInteger(token)) {
+        if (isInteger(token)) {
             return token;
         }
     }
@@ -183,20 +188,20 @@ function _getInt(str, i, minlength, maxlength) {
 function getDateFromFormat(val, format) {
     val = val + "";
     format = format + "";
-    var i_val = 0;
-    var i_format = 0;
-    var c = "";
-    var token = "";
-    var token2 = "";
-    var x, y;
-    var now = new Date();
-    var year = now.getFullYear();
-    var month = now.getMonth() + 1;
-    var date = 1;
-    var hh = now.getHours();
-    var mm = now.getMinutes();
-    var ss = now.getSeconds();
-    var ampm = "";
+    var i_val = 0,
+        i_format = 0,
+        c = "",
+        token = "",
+        x,
+        y,
+        now = new Date(),
+        year = now.getFullYear(),
+        month = now.getMonth() + 1,
+        date = 1,
+        hh = now.getHours(),
+        mm = now.getMinutes(),
+        ss = now.getSeconds(),
+        ampm = "";
 
     while (i_format < format.length) {
         // Get next token from format string
@@ -206,20 +211,20 @@ function getDateFromFormat(val, format) {
             token += format.charAt(i_format++);
         }
         // Extract contents of value based on format token
-        if (token == "yyyy" || token == "yy" || token == "y") {
-            if (token == "yyyy") {
+        if (token === "yyyy" || token === "yy" || token === "y") {
+            if (token === "yyyy") {
                 x = 4;
                 y = 4;
             }
-            if (token == "yy") {
+            if (token === "yy") {
                 x = 2;
                 y = 2;
             }
-            if (token == "y") {
+            if (token === "y") {
                 x = 2;
                 y = 4;
             }
-            year = _getInt(val, i_val, x, y);
+            year = getInteger(val, i_val, x, y);
             if (year == null) {
                 return 0;
             }
@@ -231,12 +236,12 @@ function getDateFromFormat(val, format) {
                     year = 2000 + (year - 0);
                 }
             }
-        } else if (token == "MMM" || token == "NNN") {
+        } else if (token === "MMM" || token === "NNN") {
             month = 0;
             for (var i = 0; i < MONTH_NAMES.length; i++) {
                 var month_name = MONTH_NAMES[i];
                 if (val.substring(i_val, i_val + month_name.length).toLowerCase() == month_name.toLowerCase()) {
-                    if (token == "MMM" || (token == "NNN" && i > 11)) {
+                    if (token === "MMM" || (token === "NNN" && i > 11)) {
                         month = i + 1;
                         if (month > 12) {
                             month -= 12;
@@ -249,7 +254,7 @@ function getDateFromFormat(val, format) {
             if ((month < 1) || (month > 12)) {
                 return 0;
             }
-        } else if (token == "EE" || token == "E") {
+        } else if (token === "EE" || token === "E") {
             for (var i = 0; i < DAY_NAMES.length; i++) {
                 var day_name = DAY_NAMES[i];
                 if (val.substring(i_val, i_val + day_name.length).toLowerCase() == day_name.toLowerCase()) {
@@ -257,56 +262,56 @@ function getDateFromFormat(val, format) {
                     break;
                 }
             }
-        } else if (token == "MM" || token == "M") {
-            month = _getInt(val, i_val, token.length, 2);
+        } else if (token === "MM" || token === "M") {
+            month = getInteger(val, i_val, token.length, 2);
             if (month == null || (month < 1) || (month > 12)) {
                 return 0;
             }
             i_val += month.length;
-        } else if (token == "dd" || token == "d") {
-            date = _getInt(val, i_val, token.length, 2);
+        } else if (token === "dd" || token === "d") {
+            date = getInteger(val, i_val, token.length, 2);
             if (date == null || (date < 1) || (date > 31)) {
                 return 0;
             }
             i_val += date.length;
-        } else if (token == "hh" || token == "h") {
-            hh = _getInt(val, i_val, token.length, 2);
+        } else if (token === "hh" || token === "h") {
+            hh = getInteger(val, i_val, token.length, 2);
             if (hh == null || (hh < 1) || (hh > 12)) {
                 return 0;
             }
             i_val += hh.length;
-        } else if (token == "HH" || token == "H") {
-            hh = _getInt(val, i_val, token.length, 2);
+        } else if (token === "HH" || token === "H") {
+            hh = getInteger(val, i_val, token.length, 2);
             if (hh == null || (hh < 0) || (hh > 23)) {
                 return 0;
             }
             i_val += hh.length;
-        } else if (token == "KK" || token == "K") {
-            hh = _getInt(val, i_val, token.length, 2);
+        } else if (token === "KK" || token === "K") {
+            hh = getInteger(val, i_val, token.length, 2);
             if (hh == null || (hh < 0) || (hh > 11)) {
                 return 0;
             }
             i_val += hh.length;
-        } else if (token == "kk" || token == "k") {
-            hh = _getInt(val, i_val, token.length, 2);
+        } else if (token === "kk" || token === "k") {
+            hh = getInteger(val, i_val, token.length, 2);
             if (hh == null || (hh < 1) || (hh > 24)) {
                 return 0;
             }
             i_val += hh.length;
             hh--;
-        } else if (token == "mm" || token == "m") {
-            mm = _getInt(val, i_val, token.length, 2);
+        } else if (token === "mm" || token === "m") {
+            mm = getInteger(val, i_val, token.length, 2);
             if (mm == null || (mm < 0) || (mm > 59)) {
                 return 0;
             }
             i_val += mm.length;
-        } else if (token == "ss" || token == "s") {
-            ss = _getInt(val, i_val, token.length, 2);
+        } else if (token === "ss" || token === "s") {
+            ss = getInteger(val, i_val, token.length, 2);
             if (ss == null || (ss < 0) || (ss > 59)) {
                 return 0;
             }
             i_val += ss.length;
-        } else if (token == "a") {
+        } else if (token === "a") {
             if (val.substring(i_val, i_val + 2).toLowerCase() == "am") {
                 ampm = "AM";
             } else if (val.substring(i_val, i_val + 2).toLowerCase() == "pm") {

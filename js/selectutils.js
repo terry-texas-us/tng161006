@@ -1,5 +1,5 @@
 // [ts] global functions and/or variables for JSLint
-/*global ModalDialog, textSnippet */
+/*global ModalDialog, textSnippet, updateChildrenOrder */
 var allow_notes, allow_cites, persfamID, tnglitbox, tree;
 
 function AddtoDisplay(source, dest) {
@@ -29,8 +29,8 @@ function RemovefromDisplay(fieldlist) {
 
 function Move(fieldlist, dir) {
     'use strict';
-    var tempval = fieldlist.options[fieldlist.selectedIndex].value;
-    var temptxt = fieldlist.options[fieldlist.selectedIndex].text;
+    var tempval = fieldlist.options[fieldlist.selectedIndex].value,
+        temptxt = fieldlist.options[fieldlist.selectedIndex].text;
 
     if (dir) {
         fieldlist.options[fieldlist.selectedIndex].value = fieldlist.options[fieldlist.selectedIndex - 1].value;
@@ -65,42 +65,28 @@ function getTree(treefield) {
     return tree; // !global
 }
 
-function generateID(type, dest, treefield) {
+function generateID(type, dest) {
     'use strict';
-    var tree = getTree(treefield);
-    var params;
-    if (tree !== false) {
-        params = {type: type, tree: tree};
-        $.ajax({
-            url: 'admin_generateID.php',
-            data: params,
-            dataType: 'html',
-            success: function (req) {
-                $(dest).val(req);
-            }
-        });
-    }
+    $.ajax({
+        url: 'admin_generateID.php',
+        data: {type: type},
+        dataType: 'html',
+        success: function (req) {
+            $(dest).val(req);
+        }
+    });
 }
 
-function checkID(id, type, dest, treefield) {
+function checkID(id, type, dest) {
     'use strict';
-    var tree = getTree(treefield);
-    var params;
-    if (tree !== false) {
-        params = {
-            checkID: id,
-            type: type,
-            tree: tree
-        };
-        $.ajax({
-            url: 'admin_checkID.php',
-            data: params,
-            dataType: 'html',
-            success: function (req) {
-                $('#' + dest).html(req);
-            }
-        });
-    }
+    $.ajax({
+        url: 'admin_checkID.php',
+        data: {checkID: id, type: type},
+        dataType: 'html',
+        success: function (req) {
+            $('#' + dest).html(req);
+        }
+    });
 }
 
 function insertCell(row, index, classname, content) {
@@ -113,8 +99,8 @@ function insertCell(row, index, classname, content) {
 
 function getActionButtons(vars, type) {
     'use strict';
-    var celltext = "";
-    var iconColor = type === "Citation" ? "icon-info" : "icon-muted";
+    var celltext = "",
+        iconColor = type === "Citation" ? "icon-info" : "icon-muted";
 
     if (vars.allow_edit) {
         celltext += "<a href='#' onclick=\"return edit" + type + "('" + vars.id + "');\" title=\"" + textSnippet('edit') + "\">";
@@ -148,9 +134,9 @@ function addEvent(form) {
             type: 'POST',
             dataType: 'json',
             success: function (vars) {
-                var eventtbl = document.getElementById('custeventstbl');
-                var newtr = eventtbl.insertRow(eventtbl.rows.length);
-                var buttons;
+                var eventtbl = document.getElementById('custeventstbl'),
+                    newtr = eventtbl.insertRow(eventtbl.rows.length),
+                    buttons;
                 newtr.id = "row_" + vars.id;
                 buttons = getActionButtons(vars, 'Event', allow_notes, allow_cites);
                 insertCell(newtr, 0, "nw", buttons);
@@ -169,8 +155,8 @@ function addEvent(form) {
 
 function updateEvent(form) {
     'use strict';
-    var eventID = form.eventID.value;
-    var params = $(form).serialize();
+    var eventID = form.eventID.value,
+        params = $(form).serialize();
     $.ajax({
         url: 'admin_updateevent.php',
         data: params,
@@ -210,10 +196,9 @@ function deleteEvent(eventID) {
         $.each(tds, function (index, item) {
             $(item).effect('highlight', {color: '#ff9999'}, 200);
         });
-        var params = {eventID: eventID};
         $.ajax({
             url: 'admin_deleteevent.php',
-            data: params,
+            data: {eventID: eventID},
             dataType: 'html',
             success: function (req) {
                 $('#row_' + eventID).fadeOut(200);
@@ -237,13 +222,9 @@ function removePrefixFromArray(arr, prefix) {
 function updateCitationOrder(event, ui) {
     'use strict';
     var citelist = removePrefixFromArray($('#cites').sortable('toArray'), 'citations_');
-    var params = {
-        sequence: citelist.join(','),
-        action: 'citeorder'
-    };
     $.ajax({
         url: 'ajx_updateorder.php',
-        data: params,
+        data: {sequence: citelist.join(','), action: 'citeorder'},
         dataType: 'html'
     });
 }
@@ -283,15 +264,9 @@ function showCitationsInside(eventID, noteID, persfamID) {
     'use strict';
     subpage = true;
     var xnote = noteID !== "" ? noteID : "";
-    var params = {
-        eventID: eventID,
-        persfamID: persfamID,
-        noteID: xnote,
-        tree: tree
-    };
     $.ajax({
         url: 'admin_citations.php',
-        data: params,
+        data: {eventID: eventID, persfamID: persfamID, noteID: xnote},
         dataType: 'html',
         success: function (req) {
             $('#citationslist').html(req);
@@ -319,8 +294,8 @@ function editCitation(citationID) {
 
 function updateCitation(form) {
     'use strict';
-    var citationID = form.citationID.value;
-    var params = $(form).serialize();
+    var citationID = form.citationID.value,
+        params = $(form).serialize();
     $.ajax({
         url: 'admin_updatecitation.php',
         data: params,
@@ -347,9 +322,9 @@ function showBranchEdit(branchdiv) {
 
 function updateBranchList(branchselect, branchdiv, branchlistdiv) {
     'use strict';
-    var branchlist = "";
-    var gotnone = false;
-    var firstone = null;
+    var branchlist = "",
+        gotnone = false,
+        firstone = null;
     $('#' + branchselect + ' >option:selected').each(function (index, option) {
         if (!option.value) {
             gotnone = true;
@@ -434,8 +409,8 @@ var seclitbox;
 function openFindPlaceForm(field, temple) {
     'use strict';
     activebox = field;
-    var value = $('#' + field).val();
-    var templestr = temple ? "&temple=1" : "";
+    var value = $('#' + field).val(),
+        templestr = temple ? "&temple=1" : "";
     seclitbox = new ModalDialog('findplaceform.php?tree=' + tree + '&place=' + encodeURIComponent(value) + templestr);
     initFilter(null, seclitbox, field, null);
     if (value) {
@@ -449,11 +424,11 @@ function openFindPlaceForm(field, temple) {
 
 function findItem(type, field, titlediv, branch, media) {
     'use strict';
-    var url;
-    var branchstr = branch ? 'branch=' + branch : '';
-    var mediastr = '';
-    var mediaparts;
-    var startfield;
+    var url,
+        branchstr = branch ? 'branch=' + branch : '',
+        mediastr = '',
+        mediaparts,
+        startfield;
 
     if (media) {
         if (branch) {
@@ -501,9 +476,9 @@ function findItem(type, field, titlediv, branch, media) {
 function fillCemetery(value) {
     'use strict';
     //explode place
-    var parts = value.split(',');
-    var ptr;
-    var current;
+    var parts = value.split(','),
+        ptr,
+        current;
     if (parts.length > 0) {
         ptr = parts.length - 1;
         current = parts[ptr].trim();
@@ -583,18 +558,17 @@ function filterChanged(event, options) {
 
 function retItem(id, place) {
     'use strict';
-    var returntext = $('#item_' + id).text();
-    var childcount;
-    var params;
-    var current;
-    var pos;
-    var imgpos;
-    var x1;
-    var y1;
-    var x2;
-    var y2;
-    var maptree;
-    var area;
+    var returntext = $('#item_' + id).text(),
+        childcount,
+        params,
+        current,
+        pos,
+        imgpos,
+        x1,
+        y1,
+        x2,
+        y2,
+        area;
     if (itemIDField === "children") {
         childcount = parseInt($('#childcount').html(), 10) + 1;
         returntext += "| - " + id + "<br>" + $('#birth_' + id).html();
@@ -603,7 +577,6 @@ function retItem(id, place) {
             personID: id,
             display: returntext,
             familyID: persfamID,
-            tree: tree,
             order: childcount,
             action: 'addchild'
         };
@@ -629,7 +602,6 @@ function retItem(id, place) {
         x2 = x1 + current.width();
         y2 = y1 + current.height();
 
-        maptree = $('#maptree').val();
         area = '<area coords=\"' + x1 + ',' + y1 + ',' + x2 + ',' + y2 + '\" href=\"' + 'peopleShowPerson.php?personID=' + id + '\" title=\"' + returntext.replace(/\"/g, "'") + '\" />';
         $('#imagemap').val($('#imagemap').val() + area);
 

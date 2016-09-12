@@ -132,13 +132,13 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
                   <input name='familyID' type='text' value="<?php echo $newID; ?>" size='10'
                          onBlur="this.value = this.value.toUpperCase()">
                   <input type='button' value="<?php echo uiTextSnippet('generate'); ?>"
-                         onClick="generateID('family', document.form1.familyID, document.form1.tree1);">
+                         onClick="generateID('family', document.form1.familyID);">
                   <input name='lock' type='button' value="<?php echo uiTextSnippet('lockid'); ?>" onClick="document.form1.newfamily[0].checked = true;
                       if (gatherChildren()) {
                         document.form1.submit();
                       }">
                   <input type='button' value="<?php echo uiTextSnippet('check'); ?>"
-                         onClick="checkID(document.form1.familyID.value, 'family', 'checkmsg', document.form1.tree1);">
+                         onClick="checkID(document.form1.familyID.value, 'family', 'checkmsg');">
                   <span id="checkmsg"></span>
                 </td>
               </tr>
@@ -253,7 +253,7 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
   var allow_notes = false;
 
   $(document).ready(function() {
-      generateID('family', document.form1.familyID, document.form1.tree1);
+      generateID('family', document.form1.familyID);
   });
   
   function toggleAll(display) {
@@ -272,7 +272,7 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
 
   $('#gedcom').on('change', function () {
      <?php echo $swapbranches; ?>
-     generateID('family', document.form1.familyID, document.form1.tree1);
+     generateID('family', document.form1.familyID);
   });
 
   function validateFamily(form) {
@@ -287,7 +287,6 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
   }
 
   function EditSpouse(field) {
-    var tree = getTree(document.form1.tree1);
     if (field.value.length)
       deepOpen('peopleEdit.php?personID=' + field.value + '&cw=1', 'editspouse');
   }
@@ -303,9 +302,9 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
   function openCreatePersonForm(idfield, namefield, type, gender) {
     activeidbox = idfield;
     activenamebox = namefield;
-    var url = 'admin_newperson2.php?tree=' + document.form1.tree1.options[document.form1.tree1.selectedIndex].value + '&type=' + type + '&familyID=' + persfamID + '&gender=' + gender; 
+    var url = 'admin_newperson2.php?type=' + type + '&familyID=' + persfamID + '&gender=' + gender; 
     tnglitbox = new ModalDialog(url);
-//      generateID('person', document.npform.personID, document.form1.tree1);
+//      generateID('person', document.npform.personID);
     $('#firstname').focus();
     return false;
   }

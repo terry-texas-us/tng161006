@@ -4,11 +4,8 @@ var tnglitbox;
 
 function updateNoteOrder(event, ui) {
     'use strict';
-    var notelist = removePrefixFromArray($('#notes').sortable('toArray'), 'notes_');
-    var params = {
-        sequence: notelist.join(','),
-        action: 'noteorder'
-    };
+    var notelist = removePrefixFromArray($('#notes').sortable('toArray'), 'notes_'),
+        params = {sequence: notelist.join(','), action: 'noteorder'};
     $.ajax({
         url: 'ajx_updateorder.php',
         data: params,
@@ -23,7 +20,7 @@ function initNoteSort() {
 
 function showNotes(eventID, persfamID) {
     'use strict';
-    tnglitbox = new ModalDialog('admin_notes.php?eventID=' + eventID + '&persfamID=' + persfamID + '&tree=' + tree, {doneLoading: initNoteSort});
+    tnglitbox = new ModalDialog('admin_notes.php?eventID=' + eventID + '&persfamID=' + persfamID, {doneLoading: initNoteSort});
     return false;
 }
 
@@ -41,16 +38,14 @@ function addNote(form) {
             success: function (vars) {
                 vars.allow_cite = 1;
 
-                var div = $('<div id="notes_' + vars.id + '" class="sortrow"></div>');
-                var newnotetbl = document.createElement("table");
-                var newtr;
-                var cell1;
-                var cell2;
+                var div = $('<div id="notes_' + vars.id + '" class="sortrow"></div>'),
+                    newnotetbl = document.createElement("table"),
+                    newtr;
                 newtr = newnotetbl.insertRow(0);
                 newtr.id = "row_" + vars.id;
                 insertCell(newtr, 0, "dragarea", '<img src="img/admArrowUp.gif" alt=""><br><img src="img/admArrowDown.gif" alt="">');
-                cell1 = insertCell(newtr, 1, "", getActionButtons(vars, 'Note'));
-                cell2 = insertCell(newtr, 2, "", vars.display);
+                insertCell(newtr, 1, "", getActionButtons(vars, 'Note'));
+                insertCell(newtr, 2, "", vars.display);
                 div.append(newnotetbl);
                 $('#notes').append(div);
                 initNoteSort();
@@ -69,14 +64,12 @@ function deleteNote(noteID, personID, eventID) {
     'use strict';
     if (confirm(textSnippet('confdeletenote'))) {
         var tds = $('tr#row_' + noteID + ' td');
-        var params;
         tds.each(function (index, item) {
             $(item).effect('highlight', {color: '#ff9999'}, 100);
         });
-        params = {noteID: noteID, personID: personID, eventID: eventID};
         $.ajax({
             url: 'admin_deletenote.php',
-            data: params,
+            data: {noteID: noteID, personID: personID, eventID: eventID},
             dataType: 'html',
             success: function (req) {
                 $('#row_' + noteID).fadeOut(200);
@@ -109,8 +102,8 @@ function updateNote(form) {
     if (form.note.value.length === 0) {
         alert(textSnippet('enternote'));
     } else {
-        var noteID = form.ID.value;
-        var params = $(form).serialize();
+        var noteID = form.ID.value,
+            params = $(form).serialize();
         $.ajax({
             url: 'admin_updatenote.php',
             data: params,
@@ -161,8 +154,8 @@ $('#sources-notes').on('click', function () {
 
 $('.event-notes').on('click', function () {
     'use strict';
-    var $eventId = $(this).data('eventId');
-    var $persfamId = $(this).data('persfamId');
+    var $eventId = $(this).data('eventId'),
+        $persfamId = $(this).data('persfamId');
     return showNotes($eventId, $persfamId);
 });
 

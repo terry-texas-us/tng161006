@@ -254,7 +254,6 @@ $headSection->setTitle(uiTextSnippet('notes'));
 
     function resetForm() {
       document.form1.searchstring.value = '';
-      document.form1.tree.selectedIndex = 0;
     }
   </script>
   <script src="js/admin.js"></script>

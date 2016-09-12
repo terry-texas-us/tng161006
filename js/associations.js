@@ -1,6 +1,6 @@
 // [ts] global functions and variables for jsLint
 /*global textSnippet, insertCell, getActionButtons, gotoSection, ModalDialog, SVGInjector */
-var tnglitbox, tree;
+var tnglitbox;
 
 function addAssociation(form) {
     'use strict';
@@ -15,8 +15,8 @@ function addAssociation(form) {
             data: params,
             dataType: 'json',
             success: function (vars) {
-                var associationstbl = document.getElementById('associationstbl');
-                var newtr = associationstbl.insertRow(associationstbl.rows.length);
+                var associationstbl = document.getElementById('associationstbl'),
+                    newtr = associationstbl.insertRow(associationstbl.rows.length);
                 newtr.id = "row_" + vars.id;
                 insertCell(newtr, 0, "", getActionButtons(vars, 'Association'));
                 insertCell(newtr, 1, "", vars.display);
@@ -48,8 +48,8 @@ function editAssociation(assocID) {
 
 function updateAssociation(form) {
     'use strict';
-    var assocID = form.assocID.value;
-    var params = $(form).serialize();
+    var assocID = form.assocID.value,
+        params = $(form).serialize();
     $.ajax({
         url: 'admin_updateassoc.php',
         data: params,
@@ -69,8 +69,8 @@ function updateAssociation(form) {
 function deleteAssociation(assocID, personID) {
     'use strict';
     if (confirm(textSnippet('confdeleteassoc'))) {
-        var tds = $('tr#row_' + assocID + ' td');
-        var params;
+        var tds = $('tr#row_' + assocID + ' td'),
+            params;
         $.each(tds, function (index, item) {
             $(item).effect('highlight', {color: '#ff9999'}, 200);
         });

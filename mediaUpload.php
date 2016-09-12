@@ -197,15 +197,6 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
       return rval;
     }
 
-    function getTree(treeobj) {
-      if (treeobj.options.length)
-        return treeobj.options[treeobj.selectedIndex].value;
-      else {
-        alert(textSnippet('selecttree'));
-        return false;
-      }
-    }
-
     function confirmDelete(event) {
       if (confirm('<?php echo uiTextSnippet('confdeletemedia'); ?>'))
         return true;

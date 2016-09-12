@@ -108,8 +108,6 @@ $headSection->setTitle(uiTextSnippet('addnewbranch'));
 <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
 <script src="js/selectutils.js"></script>
 <script>
-  var tree = '';
-
   function validateForm() {
     var rval = true;
 

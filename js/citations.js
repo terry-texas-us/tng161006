@@ -13,9 +13,9 @@ function addCitation(form) {
             type: 'POST',
             dataType: 'json',
             success: function (vars) {
-                var div = $('<div id="citations_' + vars.id + '" class="sortrow"></div>');
-                var newcitetbl = document.createElement("table");
-                var newtr;
+                var div = $('<div id="citations_' + vars.id + '" class="sortrow"></div>'),
+                    newcitetbl = document.createElement("table"),
+                    newtr;
 
                 newtr = newcitetbl.insertRow(0);
                 newtr.id = "row_" + vars.id;
@@ -40,14 +40,12 @@ function deleteCitation(citationID, personID, eventID) {
     'use strict';
     if (confirm(textSnippet('confdeletecite'))) {
         var tds = $('tr#row_' + citationID + ' td');
-        var params;
         $.each(tds, function (index, item) {
             $(item).effect('highlight', {color: '#ff9999'}, 2500);
         });
-        params = {citationID: citationID, personID: personID, eventID: eventID};
         $.ajax({
             url: 'admin_deletecitation.php',
-            data: params,
+            data: {citationID: citationID, personID: personID, eventID: eventID},
             dataType: 'html',
             success: function (req) {
                 $('#row_' + citationID).fadeOut(200);
@@ -80,8 +78,8 @@ $('#family-citations').on('click', function () {
 
 $('.event-citations').on('click', function () {
     'use strict';
-    var $eventId = $(this).data('eventId');
-    var $persfamId = $(this).data('persfamId');
+    var $eventId = $(this).data('eventId'),
+        $persfamId = $(this).data('persfamId');
     return showCitations($eventId, $persfamId);
 });
 

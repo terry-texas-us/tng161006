@@ -21,12 +21,12 @@
           <option value="none"<?php if ($spousename == "none") {echo " selected";} ?>>
             <?php echo uiTextSnippet('noname'); ?></option>
         </select>
-        <label class='checkbox-inline'>
-          <input name='living' type='checkbox' value='yes'<?php if ($living == "yes") {echo " checked";} ?>>
+        <label class='form-check-inline'>
+          <input class='form-check-input' name='living' type='checkbox' value='yes'<?php if ($living == "yes") {echo " checked";} ?>>
           <?php echo uiTextSnippet('livingonly'); ?>
         </label>
-        <label class='checkbox-inline'>
-          <input name='exactmatch' type='checkbox' value='yes'<?php if ($exactmatch == "yes") {echo " checked";} ?>>
+        <label class='form-check-inline'>
+          <input class='form-check-input' name='exactmatch' type='checkbox' value='yes'<?php if ($exactmatch == "yes") {echo " checked";} ?>>
           <?php echo uiTextSnippet('exactmatch'); ?>
         </label>
       </div>

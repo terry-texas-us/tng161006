@@ -1,5 +1,5 @@
 // [ts] global functions and variables for jsLint
-var album, entity, tree;
+var album, entity;
 
 function numberWithCommas(x) {
     'use strict';
@@ -103,7 +103,6 @@ function makeDefault(photo) {
     var params = {
         media: photo.value.substr(1),
         entity: entity,
-        tree: tree,
         album: album,
         action: 'setdef'
     };
@@ -134,7 +133,7 @@ function removeDefault() {
             document.form1.rthumbs[i].checked = '';
         }
     }
-    params = {entity: entity, tree: tree, album: album, action: 'deldef'};
+    params = {entity: entity, album: album, action: 'deldef'};
     $.ajax({
         url: 'ajx_updateorder.php',
         data: params

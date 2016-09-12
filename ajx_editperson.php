@@ -134,46 +134,25 @@ require_once 'eventlib.php';
         <div id="person-names">
           <div class='row'>
             <div class='col-md-4'>
-            </div>                
-            <div class='col-md-4'>
-              <?php include_once 'branches.php'; ?>
-              <?php echo buildBranchSelectControl($row, $assignedbranch, $branches_table); ?>
-            </div>
-            <div class='col-md-4'>
-              <label class='checkbox-inline'>
-                <input name='living' type='checkbox' value='1'<?php if ($row['living']) {echo " checked";} ?>>
-                <?php echo uiTextSnippet('living'); ?>
-              </label>
-              <label class='checkbox-inline'>
-                <input name='private' type='checkbox' value='1'<?php if ($row['private']) {echo " checked";} ?>>
-                <?php echo uiTextSnippet('private'); ?>
-              </label>
-            </div>
-          </div>                
-          <div class='row'>
-            <div class='col-md-3'>
-              <?php echo uiTextSnippet('givennames'); ?>
+              <label><?php echo uiTextSnippet('givennames'); ?></label>
               <input class='form-control' name='firstname' type='text' value="<?php echo $row['firstname']; ?>">
             </div>
             <?php if ($lnprefixes) { ?>
               <div class='col-md-2'>
-                <?php echo uiTextSnippet('lnprefix'); ?>
+                <label><?php echo uiTextSnippet('lnprefix'); ?></label>
                 <input class='form-control' name='lnprefix' type='text' value="<?php echo $row['lnprefix']; ?>">
               </div>
               <div class='col-md-3'>
-                <?php echo uiTextSnippet('surname'); ?>
+                <label><?php echo uiTextSnippet('surname'); ?></label>
                 <input class='form-control' name='lastname' type='text' value="<?php echo $row['lastname']; ?>">
               </div>  
             <?php } else { ?>
               <div class='col-md-5'>
-                <?php echo uiTextSnippet('surname'); ?>
+                <label><?php echo uiTextSnippet('surname'); ?></label>
                 <input class='form-control' name='lastname' type='text' value="<?php echo $row['lastname']; ?>">
               </div>
             <?php } ?>
-            <div class='col-md-2'>
-              <?php echo buildSexSelectControl($row['sex']); ?>
-            </div>
-            <div class='col-md-2'>
+            <div class='col-md-3'>
               <br>
               <?php
               $iconColor = $gotnotes['NAME'] ? "icon-info" : "icon-muted";
@@ -188,25 +167,26 @@ require_once 'eventlib.php';
               ?>
             </div>
           </div>
+          <br>
           <div class='row'>
             <div class='col-md-3'>
-              <?php echo uiTextSnippet('nickname'); ?>
+              <label><?php echo uiTextSnippet('nickname'); ?></label>
               <input class='form-control' name='nickname' type='text' value="<?php echo $row['nickname']; ?>">
             </div>
             <div class='col-md-2'>
-              <?php echo uiTextSnippet('title'); ?>
+              <label><?php echo uiTextSnippet('title'); ?></label>
               <input class='form-control' name='title' type='text' value="<?php echo $row['title']; ?>">
             </div>
             <div class='col-md-2'>
-              <?php echo uiTextSnippet('prefix'); ?>
+              <label><?php echo uiTextSnippet('prefix'); ?></label>
               <input class='form-control' name='prefix' type='text' value="<?php echo $row['prefix']; ?>">
             </div>
             <div class='col-md-2'>
-              <?php echo uiTextSnippet('suffix'); ?>
+              <label><?php echo uiTextSnippet('suffix'); ?></label>
               <input class='form-control' name='suffix' type='text' value="<?php echo $row['suffix']; ?>">
             </div>
             <div class='col-md-3'>
-              <?php echo uiTextSnippet('nameorder'); ?>
+              <label><?php echo uiTextSnippet('nameorder'); ?></label>
               <select class='form-control' name='pnameorder'>
                 <option value='0'>
                   <?php echo uiTextSnippet('default'); ?>
@@ -223,6 +203,26 @@ require_once 'eventlib.php';
               </select>
             </div>
           </div>
+          <br>
+          <div class='row'>
+            <div class='col-md-4'>
+              <?php include_once 'branches.php'; ?>
+              <?php echo buildBranchSelectControl($row, $assignedbranch, $branches_table); ?>
+            </div>
+            <div class='col-md-4'>
+              <label class='form-check-inline'>
+                <input class='form-check-input' name='living' type='checkbox' value='1'<?php if ($row['living']) {echo " checked";} ?>>
+                <?php echo uiTextSnippet('living'); ?>
+              </label>
+              <label class='form-check-inline'>
+                <input class='form-check-input' name='private' type='checkbox' value='1'<?php if ($row['private']) {echo " checked";} ?>>
+                <?php echo uiTextSnippet('private'); ?>
+              </label>
+            </div>
+            <div class='col-lg-4'>
+              <?php echo buildSexSelectControl($row['sex']); ?>
+            </div>
+          </div>                
         </div> <!-- #person-names -->
 
         <?php echo displayToggle("plus1", 1, "person-events", uiTextSnippet('events'), ""); ?>

@@ -15,8 +15,8 @@ $('#trees-search-reset').on('click', function () {
 
 $('#trees-add').on('submit', function () {
     'use strict';
-    var form = document.treeform;
-    var rval = true;
+    var form = document.treeform,
+        rval = true;
     if (form.gedcom.value.length === 0) {
         alert(textSnippet('entertreeid'));
         rval = false;
@@ -34,7 +34,7 @@ $('#treeschange #newtree').on('change', function () {
     'use strict';
     var entity = $(this).data('entity');
     if (document.treeschange.newtree.selectedIndex > 0) {
-        generateID(entity, document.treeschange.newID, document.treeschange.newtree);
+        generateID(entity, document.treeschange.newID);
     }
 });
 
@@ -46,7 +46,7 @@ $('#treeschange #newID').on('blur', function () {
 $('#treeschange #generate').on('click', function () {
     'use strict';
     if (document.treeschange.newtree.selectedIndex > 0) {
-        generateID('person', document.treeschange.newID, document.treeschange.newtree);
+        generateID('person', document.treeschange.newID);
     }
 });
 

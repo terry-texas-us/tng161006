@@ -25,8 +25,8 @@ function updateMore(form) {
 
 $('.event-more').on('click', function () {
     'use strict';
-    var eventId = $(this).data('eventId');
-    var persfamId = $(this).data('persfamId');
+    var eventId = $(this).data('eventId'),
+        persfamId = $(this).data('persfamId');
 
     tnglitbox = new ModalDialog('admin_editmore.php?eventID=' + eventId + '&persfamID=' + persfamId);
     return false;

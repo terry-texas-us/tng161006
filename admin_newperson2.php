@@ -49,11 +49,11 @@ header("Content-type:text/html; charset=" . $session_charset);
         <div class='col-md-6'>
           <div class='input-group'>
             <span class='input-group-btn'>
-              <button class='btn' type='button' value="<?php echo uiTextSnippet('generate'); ?>" onclick="generateID('person', document.npform.personID, document.form1.tree1);"><?php echo uiTextSnippet('generate'); ?></button>
+              <button class='btn' type='button' value="<?php echo uiTextSnippet('generate'); ?>" onclick="generateID('person', document.npform.personID);"><?php echo uiTextSnippet('generate'); ?></button>
             </span>
             <input class='form-control' id='personID' name='personID' type='text' onBlur="this.value = this.value.toUpperCase()">
             <span class='input-group-btn'>
-              <button class='btn' type='button' value="<?php echo uiTextSnippet('check'); ?>" onclick="checkID(document.npform.personID.value, 'person', 'checkmsg2', document.form1.tree1);"><?php echo uiTextSnippet('check'); ?></button>
+              <button class='btn' type='button' value="<?php echo uiTextSnippet('check'); ?>" onclick="checkID(document.npform.personID.value, 'person', 'checkmsg2');"><?php echo uiTextSnippet('check'); ?></button>
             </span>
           </div>
         </div>

@@ -35,11 +35,11 @@ $headSection->setTitle(uiTextSnippet('addnewrepo'));
           <div class='col-sm-6'>
             <div class='input-group'>
               <span class='input-group-btn'>
-                <button class='btn' id='generate' type='button' onClick="generateID('repo', document.form1.repoID, document.form1.tree1);"><?php echo uiTextSnippet('generate'); ?></button>
+                <button class='btn' id='generate' type='button' onClick="generateID('repo', document.form1.repoID);"><?php echo uiTextSnippet('generate'); ?></button>
               </span>
               <input class='form-control' name='repoID' type='text' onBlur="this.value = this.value.toUpperCase()" required>
               <span class='input-group-btn'>
-                <button class='btn' id='check' type='button' onClick="checkID(document.form1.repoID.value, 'repo', 'checkmsg', document.form1.tree1);"><?php echo uiTextSnippet('check'); ?></button>
+                <button class='btn' id='check' type='button' onClick="checkID(document.form1.repoID.value, 'repo', 'checkmsg');"><?php echo uiTextSnippet('check'); ?></button>
               </span>
             </div>
           </div>
@@ -100,7 +100,7 @@ $headSection->setTitle(uiTextSnippet('addnewrepo'));
 <script src="js/selectutils.js"></script>
 <script>
   $(document).ready(function() {
-      generateID('repo', document.form1.repoID, document.form1.tree1);
+      generateID('repo', document.form1.repoID);
   });
 
   function validateForm() {

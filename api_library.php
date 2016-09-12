@@ -33,7 +33,7 @@ function api_person($row, $fullevents = false) {
   global $rights;
   global $events;
 
-  $person = "\"id\":\"{$row['personID']}\",\"tree\":\"{$row['gedcom']}\",";
+  $person = "\"id\":\"{$row['personID']}\",";
   if ($row['allow_living']) {
     $firstname = $row['firstname'];
     $lnprefix = $lnprefixes ? $row['lnprefix'] : "";

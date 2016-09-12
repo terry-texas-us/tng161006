@@ -1,5 +1,5 @@
 // [ts] global functions and/or variables for JSLint
-/*global checkDate, closeBranchEdit, ModalDialog, newEvent, openFindPlaceForm, getTree, quitBranchEdit,
+/*global checkDate, closeBranchEdit, ModalDialog, newEvent, openFindPlaceForm, quitBranchEdit,
          removePrefixFromArray, showBranchEdit, showCitations, textSnippet */
 var branchtimer, tnglitbox;
 
@@ -102,33 +102,31 @@ $('#spouses .sortrow').on('mouseout', function () {
     $('#unlinks_' + $familyId).hide();
 });
 
-function checkPersonId(personIdInput, treeSelect) {
+function checkPersonId(personIdInput) {
     'use strict';
-    var tree = getTree(treeSelect);
-    if (tree !== false) {
-        var $personIdInput = $(personIdInput);
+    var $personIdInput = $(personIdInput);
 
-        $.ajax({
-            url: '_/components/ajax/checkPersonId.php',
-            data: {checkID: $personIdInput.val(), tree: tree},
-            success: function (data) {
-                var result = JSON.parse(data).result;
-                personIdInput.dataset.checkResult = result;
+    $.ajax({
+        url: '_/components/ajax/checkPersonId.php',
+        data: {checkID: $personIdInput.val()},
+        success: function (data) {
+            var result = JSON.parse(data).result,
+                parentElement = $personIdInput.parent();
 
-                var parentElement = $personIdInput.parent();
-                if (result === 'idok') {
-                    parentElement.removeClass('has-warning').addClass('has-success');
-                    $personIdInput.removeClass('form-control-warning').addClass('form-control-success');
-                } else {
-                    parentElement.removeClass('has-success').addClass('has-warning');
-                    $personIdInput.removeClass('form-control-success').addClass('form-control-warning');
-                    $personIdInput.attr('placeholder', $personIdInput.val() + ' ' + JSON.parse(data).message);
-                    $personIdInput.val('');
-                }
-            },
-            dataType: 'html'
-        });
-    }
+            personIdInput.dataset.checkResult = result;
+
+            if (result === 'idok') {
+                parentElement.removeClass('has-warning').addClass('has-success');
+                $personIdInput.removeClass('form-control-warning').addClass('form-control-success');
+            } else {
+                parentElement.removeClass('has-success').addClass('has-warning');
+                $personIdInput.removeClass('form-control-success').addClass('form-control-warning');
+                $personIdInput.attr('placeholder', $personIdInput.val() + ' ' + JSON.parse(data).message);
+                $personIdInput.val('');
+            }
+        },
+        dataType: 'html'
+    });
 }
 
 function addNewFamily(radioval, args) {
@@ -142,16 +140,16 @@ function addNewFamily(radioval, args) {
 
 $('#addnew-parents').on('click', function () {
     'use strict';
-    var $personId = $(this).data('personId');
-    var $cw = $(this).data('cw');
+    var $personId = $(this).data('personId'),
+        $cw = $(this).data('cw');
     return addNewFamily('child', 'child=' + $personId + '&cw=' + $cw);
 });
 
 $('#addnew-family-spouses').on('click', function () {
     'use strict';
-    var $self = $(this).data('self');
-    var $personId = $(this).data('personId');
-    var $cw = $(this).data('cw');
+    var $self = $(this).data('self'),
+        $personId = $(this).data('personId'),
+        $cw = $(this).data('cw');
     return addNewFamily($self, $self + '=' + $personId + '&cw=' + $cw);
 });
 
@@ -168,12 +166,12 @@ $('#find-place-seal').on('click', function () {
 
 $('#parents .lds-seal-citations').on('click', function () {
     'use strict';
-    var $personId = $(this).data('personId');
-    var $familyId = $(this).data('familyId');
+    var $personId = $(this).data('personId'),
+        $familyId = $(this).data('familyId');
     return showCitations('SLGC', $personId + '::' + $familyId);
 });
 
-function startPersonSorts(tree, spouseOrder) {
+function startPersonSorts(spouseOrder) {
     'use strict';
     if ($('div#parents div').length > 1) {
         $('#parents').sortable({
@@ -182,14 +180,12 @@ function startPersonSorts(tree, spouseOrder) {
             scroll: false,
             items: '.sortrow',
             update: function (event, ui) {
-                var parentlist = removePrefixFromArray($('#parents').sortable('toArray'), 'parents_');
-
-                var params = {
-                    sequence: parentlist.join(','),
-                    action: 'parentorder',
-                    personID: document.form1.personID.value,
-                    tree: tree
-                };
+                var parentlist = removePrefixFromArray($('#parents').sortable('toArray'), 'parents_'),
+                    params = {
+                        sequence: parentlist.join(','),
+                        action: 'parentorder',
+                        personID: document.form1.personID.value
+                    };
                 $.ajax({
                     url: 'ajx_updateorder.php',
                     data: params,
@@ -208,14 +204,12 @@ function startPersonSorts(tree, spouseOrder) {
             scroll: false,
             items: '.sortrow',
             update: function (event, ui) {
-                var spouselist = removePrefixFromArray($('#spouses').sortable('toArray'), 'spouses_');
-
-                var params = {
-                    sequence: spouselist.join(','),
-                    action: 'spouseorder',
-                    tree: tree,
-                    spouseorder: spouseOrder
-                };
+                var spouselist = removePrefixFromArray($('#spouses').sortable('toArray'), 'spouses_'),
+                    params = {
+                        sequence: spouselist.join(','),
+                        action: 'spouseorder',
+                        spouseorder: spouseOrder
+                    };
                 $.ajax({
                     url: 'ajx_updateorder.php',
                     data: params,
@@ -264,7 +258,7 @@ function unlinkChildFamily(familyID) {
         var params = {
             action: 'parentunlink',
             familyID: familyID,
-            personID: document.form1.personID.value,
+            personID: document.form1.personID.value
         };
         $.ajax({
             url: 'ajx_updateorder.php',

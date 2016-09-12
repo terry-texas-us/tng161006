@@ -1026,15 +1026,6 @@ $headSection->setTitle(uiTextSnippet('merge'));
       return rval;
     }
 
-    function getTree(treefield) {
-      if (treefield.options.length)
-        return treefield.options['treefield.selectedIndex'].value;
-      else {
-        alert(textSnippet('selecttree'));
-        return false;
-      }
-    }
-
     function switchpeople() {
       var formname = document.form1;
 

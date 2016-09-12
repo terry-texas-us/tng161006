@@ -1,7 +1,7 @@
 <?php
 //Change these vars to affect max width & height of your photo. Aspect ratio will be maintained. Leaving
 //these values blank will cause your photo to be displayed actual size.
-//***To avoid having to change these values every time this script is updated, set your custom values in customconfig.php
+
 if (!$rp_maxwidth) {
   $rp_maxwidth = "175";
 }

@@ -662,8 +662,6 @@ function checkpersondown($checkpersonID) {
 
   $gens->downcount += 1;
   $gensdown = $gens->downcount;
-  //if( $gensdown > $lowest ) $lowest = $gensdown;
-  //echo "down: person=$checkpersonID, target=$targetID, down=$gensdown, up = $gensup<br>\n";
   //check person
   if ($checkpersonID != $targetID) {
     //get sex of each individual

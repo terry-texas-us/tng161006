@@ -99,7 +99,6 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
   var album = '';
   var media = '';
   var type = "media";
-  //var formname = "find";
   var findform = "find";
   var resheremsg = '<span>' + textSnippet('reshere') + '</span>';
 
@@ -111,15 +110,6 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
       rval = false;
     }
     return rval;
-  }
-
-  function getTree(treeobj) {
-    if (treeobj.options.length)
-      return treeobj.options[treeobj.selectedIndex].value;
-    else {
-      alert(textSnippet('selecttree'));
-      return false;
-    }
   }
 </script>
 </body>

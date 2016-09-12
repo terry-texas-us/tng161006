@@ -34,11 +34,11 @@ $headSection->setTitle(uiTextSnippet('addnewsource'));
         <div class='col-md-6'>
           <div class='input-group'>
             <span class='input-group-btn'>
-              <button class='btn btn-secondary' id='generate' type='button' onClick="generateID('source', document.form1.sourceID, document.form1.tree1);"><?php echo uiTextSnippet('generate'); ?></button>
+              <button class='btn btn-secondary' id='generate' type='button' onClick="generateID('source', document.form1.sourceID);"><?php echo uiTextSnippet('generate'); ?></button>
             </span>
             <input class='form-control' id='source-id' name='sourceID' type='text' onBlur="this.value = this.value.toUpperCase()" data-check-result=''>
             <span class='input-group-btn'>
-              <button class='btn btn-secondary' id='check' type='button' onClick="checkID(document.form1.sourceID.value, 'source', 'checkmsg', document.form1.tree1);"><?php echo uiTextSnippet('check'); ?></button>
+              <button class='btn btn-secondary' id='check' type='button' onClick="checkID(document.form1.sourceID.value, 'source', 'checkmsg');"><?php echo uiTextSnippet('check'); ?></button>
             </span>
           </div>
         </div>
@@ -58,7 +58,7 @@ $headSection->setTitle(uiTextSnippet('addnewsource'));
 <script src="js/selectutils.js"></script>
 <script>
   $(document).ready(function() {
-      generateID('source', document.form1.sourceID, document.form1.tree1);
+      generateID('source', document.form1.sourceID);
   });
   
   function validateForm() {

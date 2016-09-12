@@ -52,7 +52,7 @@ $cemeteryID = tng_insert_id();
 
 $place = trim($place);
 if ($place) {
-  //first check to see if any place exists in any tree with new place name
+  //first check to see if any place exists with new place name
   $query = "SELECT * FROM $places_table WHERE place = '$place'";
   $result = tng_query($query);
 

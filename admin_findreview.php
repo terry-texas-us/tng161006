@@ -141,7 +141,7 @@ $headSection->setTitle(uiTextSnippet('review'));
             <td>
               <input name='submit' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
               <input name='submit' type='submit' value="<?php echo uiTextSnippet('reset'); ?>"
-                     onClick="document.form1.reviewuser.value = ''; document.form1.tree.selectedIndex = 0; document.form1.living.checked = false; document.form1.exactmatch.checked = false;">
+                     onClick="document.form1.reviewuser.value = ''; document.form1.living.checked = false; document.form1.exactmatch.checked = false;">
             </td>
           </tr>
         </table>

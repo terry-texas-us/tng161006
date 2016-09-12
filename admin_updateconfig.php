@@ -201,8 +201,6 @@ fwrite($fp, "\$tngconfig['oldids'] = \"$oldids\";\n");
 fwrite($fp, "\$tngconfig['lastimport'] = \"$lastimport\";\n");
 fwrite($fp, "\$tng_notinstalled = \"$tng_notinstalled\";\n");
 fwrite($fp, "\n");
-fwrite($fp, "\n");
-fwrite($fp, "require \$subroot . \"customconfig.php\";\n");
 
 flock($fp, LOCK_UN);
 fclose($fp);
