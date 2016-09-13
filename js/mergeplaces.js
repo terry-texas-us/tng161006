@@ -9,7 +9,7 @@ function validateForm1() {
 
 function validateForm2(form) {
     var rval = false;
-    var keepid = "";
+    var keepid = '';
 
     blankMsg();
     for (var i = 0; i < form.keep.length; i++) {
@@ -83,7 +83,7 @@ function handleRadio(id) {
     blankMsg();
     var trs = $('tr.mergerows');
     $.each(trs, function (index, row) {
-        newcolor = "";
+        newcolor = '';
         currID = parseInt(row.id.substr(4));
         if (id == currID)
             newcolor = keepcolor;

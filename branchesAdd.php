@@ -8,10 +8,10 @@ require 'version.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('addnewbranch'));
 ?>
 <!DOCTYPE html>
@@ -22,9 +22,9 @@ $headSection->setTitle(uiTextSnippet('addnewbranch'));
     <?php
     echo $adminHeaderSection->build('branches-addnewbranch', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "branchesBrowse.php", uiTextSnippet('browse'), "findbranch"]);
-    //    $navList->appendItem([$allowAdd, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
-    echo $navList->build("addbranch");
+    $navList->appendItem([true, 'branchesBrowse.php', uiTextSnippet('browse'), 'findbranch']);
+    //    $navList->appendItem([$allowAdd, 'branchesAdd.php', uiTextSnippet('add'), 'addbranch']);
+    echo $navList->build('addbranch');
     ?>
     <form action="branchesAddFormAction.php" method='post' name="form1" onsubmit="return validateForm();">
       <table>
@@ -79,10 +79,10 @@ $headSection->setTitle(uiTextSnippet('addnewbranch'));
               <select name='dagens'>
                 <option value='0'>0</option>
                 <option value='1' selected>1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
               </select>
             </div>
           </td>
@@ -111,7 +111,7 @@ $headSection->setTitle(uiTextSnippet('addnewbranch'));
   function validateForm() {
     var rval = true;
 
-    document.form1.branch.value = document.form1.branch.value.replace(/[^a-zA-Z0-9-_]+/g, "");
+    document.form1.branch.value = document.form1.branch.value.replace(/[^a-zA-Z0-9-_]+/g, '');
     if (document.form1.branch.value.length === 0) {
       alert(textSnippet('enterbranchid'));
       rval = false;

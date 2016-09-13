@@ -8,7 +8,7 @@ require 'version.php';
 
 require 'adminlog.php';
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('secondarymaint'));
 ?>
 <!DOCTYPE html>
@@ -18,10 +18,10 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
   <?php
   echo $adminHeaderSection->build('datamaint-secondarymaint-' . $secaction, $message);
   $navList = new navList('');
-  $navList->appendItem([true, "dataImportGedcom.php", uiTextSnippet('import'), "import"]);
-  $navList->appendItem([true, "dataExportGedcom.php", uiTextSnippet('export'), "export"]);
-  //  $navList->appendItem([true, "dataSecondaryProcesses.php", uiTextSnippet('secondarymaint'), "second"]);
-  echo $navList->build("second");
+  $navList->appendItem([true, 'dataImportGedcom.php', uiTextSnippet('import'), 'import']);
+  $navList->appendItem([true, 'dataExportGedcom.php', uiTextSnippet('export'), 'export']);
+  //  $navList->appendItem([true, 'dataSecondaryProcesses.php', uiTextSnippet('secondarymaint'), 'second']);
+  echo $navList->build('second');
   ?>
   <div>
     <div>
@@ -29,7 +29,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
       <?php
       set_time_limit(0);
       if ($secaction == uiTextSnippet('sortchildren')) {
-        echo "<p>" . uiTextSnippet('sortingchildren') . "</p>";
+        echo '<p>' . uiTextSnippet('sortingchildren') . '</p>';
         echo uiTextSnippet('families') . ":<br>\n";
         $fcount = 0;
         $query = "SELECT familyID FROM $families_table";
@@ -51,10 +51,10 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
           tng_free_result($fresult);
         }
         tng_free_result($result);
-        echo "<br><br>" . uiTextSnippet('finishedsortingchildren') . "<br>";
+        echo '<br><br>' . uiTextSnippet('finishedsortingchildren') . '<br>';
       } elseif ($secaction == uiTextSnippet('sortspouses')) {
 
-        echo "<p>" . uiTextSnippet('sortingspouses') . "</p>";
+        echo '<p>' . uiTextSnippet('sortingspouses') . '</p>';
         echo uiTextSnippet('people') . ":<br>\n";
         $fcount = 0;
         //first do husbands
@@ -96,24 +96,24 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
           tng_free_result($fresult);
         }
         tng_free_result($result);
-        echo "<br><br>" . uiTextSnippet('finishedsortingspouses') . "<br>";
+        echo '<br><br>' . uiTextSnippet('finishedsortingspouses') . '<br>';
       } elseif ($secaction == uiTextSnippet('creategendex')) {
 
         //create gendex file
         function getVitals($person) {
           if ($person['birthdate']) {
-            $info = $person['birthdate'] . "|" . $person['birthplace'] . "|";
+            $info = $person['birthdate'] . '|' . $person['birthplace'] . '|';
           } else {
-            $info = $person['altbirthdate'] . "|" . $person['altbirthplace'] . "|";
+            $info = $person['altbirthdate'] . '|' . $person['altbirthplace'] . '|';
           }
           if ($person['deathdate']) {
-            $info .= $person['deathdate'] . "|" . $person['deathplace'] . "|";
+            $info .= $person['deathdate'] . '|' . $person['deathplace'] . '|';
           } else {
-            $info .= $person['burialdate'] . "|" . $person['burialplace'] . "|";
+            $info .= $person['burialdate'] . '|' . $person['burialplace'] . '|';
           }
           return $info;
         }
-        echo "<p>" . uiTextSnippet('creatinggendex') . "</p>";
+        echo '<p>' . uiTextSnippet('creatinggendex') . '</p>';
         $gendexout = "$rootpath$gendexfile/gendex.txt";
         $gendexURL = "$tngdomain/$gendexfile/gendex.txt";
 
@@ -121,7 +121,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         $result = tng_query($query);
         if ($result) {
           //open file (overwrite any contents)
-          $fp2 = fopen($gendexout, "w");
+          $fp2 = fopen($gendexout, 'w');
           if (!$fp2) {
             die(uiTextSnippet('cannotopen') . " $gendexout");
           }
@@ -130,15 +130,15 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
           $tcount = 0;
           while ($person = tng_fetch_assoc($result)) {
             if (!$person['private'] && (!$person['living'] || $nonames != 1)) {
-              $uclast = tng_strtoupper(trim($person['lnprefix'] . " " . $person['lastname']));
+              $uclast = tng_strtoupper(trim($person['lnprefix'] . ' ' . $person['lastname']));
               $person['lastname'] = $uclast;
-              $info = $person['living'] ? "||||" : getVitals($person);
+              $info = $person['living'] ? '||||' : getVitals($person);
               if ($person['living'] && $nonames == 2) {
                 $line = $person['personID'] . "&tree=master|$uclast|" . initials($person['firstname']) . " /$uclast/|$info\n";
               } else {
                 $line = $person['personID'] . "&tree=master|$uclast|{$person['firstname']} /$uclast/|$info\n";
               }
-              if ($session_charset == "UTF-8") {
+              if ($session_charset == 'UTF-8') {
                 $line = utf8_decode($line);
               }
               fwrite($fp2, "$line");
@@ -156,7 +156,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         ?>
         <br><br>
         <?php
-        echo "<p>" . uiTextSnippet('finishedgendex') . "<br>\n";
+        echo '<p>' . uiTextSnippet('finishedgendex') . "<br>\n";
         echo uiTextSnippet('filename') . ": $gendexURL</p>\n";
         ?>
         <p><?php echo uiTextSnippet('postgdx'); ?>:<br>
@@ -165,7 +165,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         </p>
         <?php
       } elseif ($secaction == uiTextSnippet('tracklines')) {
-        echo "<p>" . uiTextSnippet('trackinglines') . "</p>";
+        echo '<p>' . uiTextSnippet('trackinglines') . '</p>';
         echo uiTextSnippet('families') . ":<br>\n";
 
         $query = "UPDATE $children_table SET haskids = 0";
@@ -175,11 +175,11 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         $query = "SELECT distinct ($families_table.familyID), husband, wife FROM ($children_table, $families_table) WHERE $families_table.familyID = $children_table.familyID";
         $result = tng_query($query);
         while ($family = tng_fetch_assoc($result)) {
-          if ($family['husband'] != "") {
+          if ($family['husband'] != '') {
             $query = "UPDATE $children_table SET haskids = 1 WHERE personID = '{$family['husband']}'";
             $result2 = tng_query($query);
           }
-          if ($family['wife'] != "") {
+          if ($family['wife'] != '') {
             $query = "UPDATE $children_table SET haskids = 1 WHERE personID = '{$family['wife']}'";
             $result2 = tng_query($query);
           }
@@ -189,9 +189,9 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
           }
         }
         tng_free_result($result);
-        echo "<br><br>" . uiTextSnippet('finishedtracking') . "<br>";
+        echo '<br><br>' . uiTextSnippet('finishedtracking') . '<br>';
       } elseif ($secaction == uiTextSnippet('relabelbranches')) {
-        echo "<p>" . uiTextSnippet('relabeling') . "</p>";
+        echo '<p>' . uiTextSnippet('relabeling') . '</p>';
         $query = "SELECT branch, persfamID FROM $branchlinks_table";
         $result = tng_query($query);
         while ($branch = tng_fetch_assoc($result)) {
@@ -201,12 +201,12 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
             $result2 = tng_query($query);
             if (tng_num_rows($result2)) {
               $row = tng_fetch_assoc($result2);
-              $oldbranches = explode(",", $row['branch']);
+              $oldbranches = explode(',', $row['branch']);
               if ($row['branch']) {
                 if (in_array($branch['branch'], $oldbranches)) {
                   $label = $row['branch'];
                 } else {
-                  $label = $row['branch'] . "," . $branch['branch'];
+                  $label = $row['branch'] . ',' . $branch['branch'];
                 }
               } else {
                 $label = $branch['branch'];
@@ -222,12 +222,12 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
             $result2 = tng_query($query);
             if (tng_num_rows($result2)) {
               $row = tng_fetch_assoc($result2);
-              $oldbranches = explode(",", $row['branch']);
+              $oldbranches = explode(',', $row['branch']);
               if ($row['branch']) {
                 if (in_array($branch['branch'], $oldbranches)) {
                   $label = $row['branch'];
                 } else {
-                  $label = $row['branch'] . "," . $branch['branch'];
+                  $label = $row['branch'] . ',' . $branch['branch'];
                 }
               } else {
                 $label = $branch['branch'];
@@ -247,7 +247,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         }
         tng_free_result($result);
       } elseif ($secaction == uiTextSnippet('evalmedia')) {
-        echo "<p>" . uiTextSnippet('evaluating') . "...</p>";
+        echo '<p>' . uiTextSnippet('evaluating') . '...</p>';
         //loop through each media type
         $query = "SELECT * FROM $mediatypes_table ORDER BY ordernum, display";
         $result = tng_query($query);
@@ -259,7 +259,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
           $display = $row['display'] ? $row['display'] : uiTextSnippet($row['mediatypeID']);
           echo "$display: " . number_format($row2['counter']);
           if (!$row2['counter']) {
-            echo " ... " . uiTextSnippet('disabled');
+            echo ' ... ' . uiTextSnippet('disabled');
             $disabled = 1;
           } else {
             $disabled = 0;
@@ -270,7 +270,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
           tng_free_result($result2);
         }
         tng_free_result($result);
-        echo "<br><br>" . uiTextSnippet('finished') . "<br>";
+        echo '<br><br>' . uiTextSnippet('finished') . '<br>';
       }
 
       adminwritelog(uiTextSnippet('secondary') . ": $secaction");

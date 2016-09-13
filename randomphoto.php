@@ -3,13 +3,13 @@
 //these values blank will cause your photo to be displayed actual size.
 
 if (!$rp_maxwidth) {
-  $rp_maxwidth = "175";
+  $rp_maxwidth = '175';
 }
 if (!$rp_maxheight) {
-  $rp_maxheight = "175";
+  $rp_maxheight = '175';
 }
 if (!isset($rp_mediatypeID) || !$rp_mediatypeID) {
-  $rp_mediatypeID = "photos";
+  $rp_mediatypeID = 'photos';
 }
 $query = "SELECT DISTINCT $media_table.mediaID, $media_table.description, path, alwayson, usecollfolder, mediatypeID FROM $media_table WHERE mediatypeID = \"$rp_mediatypeID\" AND (abspath is NULL OR abspath = \"0\") ORDER BY RAND()";
 $result = tng_query($query);
@@ -61,6 +61,6 @@ if ($rp_maxwidth && $photowtouse > $rp_maxwidth) {
 $width = "width=\"" . ($photowtouse + 10) . "\"";
 
 echo "<table class=\"indexphototable\">";
-echo "<tr><td><a href=\"${showmedia_url}mediaID={$imgrow['mediaID']}\"><img class=\"indexphoto\" src=\"$usefolder/" . str_replace("%2F", "/", rawurlencode($imgrow['path'])) . "\" width=\"$photowtouse\" height=\"$photohtouse\" alt=\"{$imgrow['description']}\" title=\"{$imgrow['description']}\"></a></td></tr>";
+echo "<tr><td><a href=\"${showmedia_url}mediaID={$imgrow['mediaID']}\"><img class=\"indexphoto\" src=\"$usefolder/" . str_replace('%2F', '/', rawurlencode($imgrow['path'])) . "\" width=\"$photowtouse\" height=\"$photohtouse\" alt=\"{$imgrow['description']}\" title=\"{$imgrow['description']}\"></a></td></tr>";
 echo "<tr><td $width><a href=\"${showmedia_url}mediaID={$imgrow['mediaID']}\">{$imgrow['description']}</a></td></tr>";
-echo "</table>";
+echo '</table>';

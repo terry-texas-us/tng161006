@@ -7,7 +7,7 @@ require 'checklogin.php';
 
 if (!$allowMediaEdit && !$allowMediaAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 require 'adminlog.php';
@@ -40,7 +40,7 @@ if (function_exists(imageJpeg)) {
 }
 $usefolder = $usecollfolder ? $mediatypes_assoc[$mediatypeID] : $mediapath;
 
-if (substr($thumbpath, 0, 1) == "/") {
+if (substr($thumbpath, 0, 1) == '/') {
   $thumbpath = substr($thumbpath, 1);
 }
 $newthumbpath = "$rootpath$usefolder/$thumbpath";
@@ -66,7 +66,7 @@ if ($latitude && $longitude && !$zoom) {
 }
 $fileparts = pathinfo($path);
 $form = strtoupper($fileparts['extension']);
-$newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
+$newdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
 
 if ($abspath) {
   $path = $mediaurl;
@@ -74,7 +74,7 @@ if ($abspath) {
   $abspath = 0;
 }
 if (!$showmap) {
-  $showmap = "0";
+  $showmap = '0';
 }
 if (!$usenl) {
   $usenl = 0;
@@ -125,45 +125,43 @@ $mediakey = $path && $path != $path_org ? "$usefolder/$path" : $mediakey_org;
 if (!$mediakey) {
   $mediakey = time();
 }
-if (substr($path, 0, 1) == "/") {
+if (substr($path, 0, 1) == '/') {
   $path = substr($path, 1);
 }
 $newpath = "$rootpath$usefolder/$path";
 
-if ($newfile && $newfile != "none") {
+if ($newfile && $newfile != 'none') {
   if (move_uploaded_file($newfile, $newpath)) {
     chmod($newpath, 0644);
   } else {
     //improper permissions or folder doesn't exist (root path may be wrong)
     $message = uiTextSnippet('notcopied') . " $newpath " . uiTextSnippet('improperpermissions') . '.';
-    header("Location: mediaBrowse.php?message=" . urlencode($message));
+    header('Location: mediaBrowse.php?message=' . urlencode($message));
     exit;
   }
 }
-if (function_exists(imageJpeg) && $thumbcreate == "auto") {
-  //$cleanpath = $session_charset == "UTF-8" ? utf8_decode($newpath) : $newpath;
-  //$cleannewthumbpath = $session_charset == "UTF-8" ? utf8_decode($newthumbpath) : $newthumbpath;
+if (function_exists(imageJpeg) && $thumbcreate == 'auto') {
   if (image_createThumb($newpath, $newthumbpath, $thumbmaxw, $thumbmaxh, $thumbquality)) {
     $destInfo = pathInfo($newthumbpath);
-    if (strtoupper($destInfo['extension']) == "GIF") {
+    if (strtoupper($destInfo['extension']) == 'GIF') {
       $thumbpath = substr_replace($thumbpath, 'jpg', -3);
       $newthumbpath = substr_replace($newthumbpath, 'jpg', -3);
     }
     chmod($newthumbpath, 0644);
   } else {
     //could not create thumbnail (size or type problem) or permissions (root path may be wrong)
-    $message = uiTextSnippet('thumbnailnotcopied') . " $newthumbpath " . uiTextSnippet('improper2') . ".";
-    header("Location: mediaBrowse.php?message=" . urlencode($message));
+    $message = uiTextSnippet('thumbnailnotcopied') . " $newthumbpath " . uiTextSnippet('improper2') . '.';
+    header('Location: mediaBrowse.php?message=' . urlencode($message));
     exit;
   }
 } else {
-  if ($newthumb && $newthumb != "none") {
+  if ($newthumb && $newthumb != 'none') {
     if (move_uploaded_file($newthumb, $newthumbpath)) {
       chmod($newthumbpath, 0644);
     } else {
       //improper permissions or folder doesn't exist (root path may be wrong)
       $message = uiTextSnippet('thumbnailnotcopied') . " $newthumbpath " . uiTextSnippet('improperpermissions') . '.';
-      header("Location: mediaBrowse.php?message=" . urlencode($message));
+      header('Location: mediaBrowse.php?message=' . urlencode($message));
       exit;
     }
   }
@@ -197,10 +195,10 @@ if ($mediatypeID != $mediatypeID_org) {
 }
 adminwritelog("<a href=\"mediaEdit.php?mediaID=$mediaID\">" . uiTextSnippet('modifymedia') . ": $mediaID</a>");
 
-if ($newmedia == "return") {
+if ($newmedia == 'return') {
   header("Location: mediaEdit.php?mediaID=$mediaID&cw=$cw");
 } else {
-  if ($newmedia == "close") {
+  if ($newmedia == 'close') {
   ?>
     <!DOCTYPE html>
     <html>
@@ -213,6 +211,6 @@ if ($newmedia == "return") {
   <?php
   } else {
     $message = uiTextSnippet('changestoitem') . " $mediaID " . uiTextSnippet('succsaved') . '.';
-    header("Location: mediaBrowse.php?message=" . urlencode($message));
+    header('Location: mediaBrowse.php?message=' . urlencode($message));
   }
 }

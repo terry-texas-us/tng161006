@@ -11,7 +11,7 @@ require 'mail.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 $description = addslashes($description);
@@ -69,10 +69,10 @@ if (!$no_email) {
 if (!$disabled) {
   $disabled = 0;
 }
-$today = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
+$today = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
 
 $duplicate = false;
-$emailstr = $email ? " OR LOWER(email) = LOWER(\"$email\")" : "";
+$emailstr = $email ? " OR LOWER(email) = LOWER(\"$email\")" : '';
 $query = "SELECT username FROM $users_table WHERE LOWER(username) = LOWER(\"$username\")$emailstr";
 $result = tng_query($query);
 
@@ -86,7 +86,7 @@ if (!$duplicate) {
   $result = tng_query($query);
 
   if ($notify && $email) {
-    $owner = preg_replace("/,/", "", ($sitename ? $sitename : ($dbowner ? $dbowner : "TNG")));
+    $owner = preg_replace("/,/", '', ($sitename ? $sitename : ($dbowner ? $dbowner : 'TNG')));
 
     tng_sendmail($owner, $emailaddr, $realname, $email, uiTextSnippet('activated'), $welcome, $emailaddr, $emailaddr);
   }
@@ -94,15 +94,15 @@ if (!$duplicate) {
   if (tng_affected_rows()) {
     $userID = tng_insert_id();
     adminwritelog("<a href=\"usersEdit.php?userID=$userID\">" . uiTextSnippet('addnewuser') . ": $username</a>");
-    $message = uiTextSnippet('user') . " $username " . uiTextSnippet('succadded') . ".";
-    if ($currentuser == "Administrator-No-Users-Yet") {
+    $message = uiTextSnippet('user') . " $username " . uiTextSnippet('succadded') . '.';
+    if ($currentuser == 'Administrator-No-Users-Yet') {
       $_SESSION['currentuser'] = $username;
       $_SESSION['currentuserdesc'] = $description;
     }
   } else {
-    $message = uiTextSnippet('userfailed') . ".";
+    $message = uiTextSnippet('userfailed') . '.';
   }
 } else {
   $message = uiTextSnippet('duplicate');
 }
-header("Location: usersBrowse.php?message=" . urlencode($message));
+header('Location: usersBrowse.php?message=' . urlencode($message));

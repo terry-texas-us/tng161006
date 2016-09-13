@@ -13,7 +13,7 @@ $result = getFamilyData($ID);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
 
-$hname = $wname = "";
+$hname = $wname = '';
 $rights = determineLivingPrivateRights($row);
 $row['allow_living'] = $rights['living'];
 $row['allow_private'] = $rights['private'];
@@ -37,14 +37,14 @@ if ($row['wife']) {
   $wname = getName($prow);
 }
 
-$plus = $hname && $wname ? " + " : "";
+$plus = $hname && $wname ? ' + ' : '';
 $name = uiTextSnippet('family') . ": $hname$plus$wname ($ID)";
 
-$years = $years = $row['marrdate'] && $row['allow_living'] && $row['allow_private'] ? uiTextSnippet('marrabbr') . " " . displayDate($row['marrdate']) : "";
+$years = $years = $row['marrdate'] && $row['allow_living'] && $row['allow_private'] ? uiTextSnippet('marrabbr') . ' ' . displayDate($row['marrdate']) : '';
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 
 $headTitle = uiTextSnippet('suggestchange') . ": $name";
 $headSection->setTitle($headTitle);

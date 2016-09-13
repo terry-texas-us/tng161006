@@ -10,14 +10,14 @@ if ($mediaID) {
   if ($albumID) {
     $mediaoption = ",albumID:'$albumID'";
   } else {
-    $mediaoption = "";
+    $mediaoption = '';
   }
 }
 $bailtext = $mediaoption ? uiTextSnippet('finish') : uiTextSnippet('cancel');
 
 $applyfilter = "applyFilter({form:'findsourceform1', fieldId:'mytitle', type:'S', destdiv:'sourceresults'$mediaoption});";
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <div id='findsourcediv'>
   <form id='findsourceform1' name='findsourceform1' action='' method='post' onsubmit="return <?php echo $applyfilter; ?>">

@@ -7,7 +7,7 @@ require 'checklogin.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
@@ -22,16 +22,16 @@ if (!$exportas) {
   if (substr($exportas, -1) == 'S') {
     $exportas = substr($exportas, 0, -1);
   }
-  if ($exportas == "HISTORIE") {
-    $exportas = "HISTORY";
+  if ($exportas == 'HISTORIE') {
+    $exportas = 'HISTORY';
   }
 }
 
-$helplang = findhelp("collections_help.php");
+$helplang = findhelp('collections_help.php');
 
 initMediaTypes();
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 
 <div style="margin:10px;border:0" id="editcollection">
@@ -90,9 +90,9 @@ header("Content-type:text/html; charset=" . $session_charset);
                     $msgID = $mediatype['ID'];
                     echo "  <option value=\"$msgID\"";
                     if ($msgID == $row['liketype']) {
-                      echo " selected";
+                      echo ' selected';
                     }
-                    echo ">" . $mediatype['display'] . "</option>\n";
+                    echo '>' . $mediatype['display'] . "</option>\n";
                   }
                 }
                 ?>

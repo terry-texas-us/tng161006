@@ -6,7 +6,7 @@ require 'checklogin.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 $query = "SELECT passocID, relationship, reltype FROM $assoc_table WHERE assocID = '$assocID'";
@@ -15,9 +15,9 @@ $row = tng_fetch_assoc($result);
 tng_free_result($result);
 $row['relationship'] = preg_replace('/\"/', '&#34;', $row['relationship']);
 
-$helplang = findhelp("assoc_help.php");
+$helplang = findhelp('assoc_help.php');
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <form action='' name='findassocform1' onSubmit="return updateAssociation(this);">
   <header class='modal-header'>
@@ -28,9 +28,9 @@ header("Content-type:text/html; charset=" . $session_charset);
     <table class='table table-sm'>
       <tr>
         <td colspan='2'>
-          <input name='reltype' type='radio' value='I'<?php if ($row['reltype'] == 'I') {echo " checked";} ?>
+          <input name='reltype' type='radio' value='I'<?php if ($row['reltype'] == 'I') {echo ' checked';} ?>
                  onclick="activateAssocType('I');"/> <?php echo uiTextSnippet('person'); ?> &nbsp;&nbsp;
-          <input name='reltype' type='radio' value='F'<?php if ($row['reltype'] == 'F') {echo " checked";} ?>
+          <input name='reltype' type='radio' value='F'<?php if ($row['reltype'] == 'F') {echo ' checked';} ?>
                  onclick="activateAssocType('F');"/> <?php echo uiTextSnippet('family'); ?>
         </td>
       </tr>

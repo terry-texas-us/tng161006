@@ -20,7 +20,7 @@ $placelist = [];
 if (!$exportmedia) {
   $exportmedia = 0;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('gedexport'));
 ?>
 <!DOCTYPE html>
@@ -35,7 +35,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       if (isset($incl[$msgID])) {
         eval("\$exppath['$msgID'] = \${'exp_path_" . $msgID . "'};");
         if ($exppath[$msgID]) {
-          if (strpos($exppath[$msgID], "/") !== false) {
+          if (strpos($exppath[$msgID], '/') !== false) {
             $expdir[$msgID] = 1;
           } elseif (strpos($exppath[$msgID], "\\") !== false) {
             $expdir[$msgID] = -1;
@@ -43,18 +43,18 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
             $expdir[$msgID] = 0;
           }
           //1 = do forward slashes, -1 = backslashes
-          if (substr($exppath[$msgID], -1) != "/" && substr($exppath[$msgID], -1) != "\\") {
-            $exppath[$msgID] .= "/";
+          if (substr($exppath[$msgID], -1) != '/' && substr($exppath[$msgID], -1) != "\\") {
+            $exppath[$msgID] .= '/';
           }
         }
       }
     }
     echo $adminHeaderSection->build('datamaint-gedexport', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "dataImportGedcom.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([true, "dataExportGedcom.php", uiTextSnippet('export'), "export"]);
-    $navList->appendItem([true, "dataSecondaryProcesses.php", uiTextSnippet('secondarymaint'), "second"]);
-    echo $navList->build("export");
+    $navList->appendItem([true, 'dataImportGedcom.php', uiTextSnippet('import'), 'import']);
+    $navList->appendItem([true, 'dataExportGedcom.php', uiTextSnippet('export'), 'export']);
+    $navList->appendItem([true, 'dataSecondaryProcesses.php', uiTextSnippet('secondarymaint'), 'second']);
+    echo $navList->build('export');
 
     function getCitations($persfamID) {
       global $citations_table;
@@ -64,8 +64,8 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
       while ($cite = tng_fetch_assoc($citresult)) {
-        $eventID = $cite['eventID'] ? $cite['eventID'] : "NAME";
-        $citations[$eventID][] = ["page" => $cite['page'], "quay" => $cite['quay'], "citedate" => $cite['citedate'], "citetext" => $cite['citetext'], "note" => $cite['note'], "sourceID" => $cite['sourceID'], "description" => $cite['description']];
+        $eventID = $cite['eventID'] ? $cite['eventID'] : 'NAME';
+        $citations[$eventID][] = ['page' => $cite['page'], 'quay' => $cite['quay'], 'citedate' => $cite['citedate'], 'citetext' => $cite['citetext'], 'note' => $cite['note'], 'sourceID' => $cite['sourceID'], 'description' => $cite['description']];
       }
       return $citations;
     }
@@ -74,7 +74,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       global $allsources, $branch, $lineending;
 
       $levelplus1 = $level + 1;
-      $citestr = "";
+      $citestr = '';
 
       $citecount = count($citelist);
       if ($citecount) {
@@ -91,23 +91,23 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
                 $citestr .= "$levelplus2 DATE {$cite['citedate']}$lineending";
               }
               if ($cite['citetext']) {
-                $citestr .= doNote($levelplus2, "TEXT", $cite['citetext']);
+                $citestr .= doNote($levelplus2, 'TEXT', $cite['citetext']);
               }
             }
           } else {
             $citestr = "$level SOUR {$cite['description']}$lineending";
             if ($cite['citetext']) {
-              $citestr .= doNote($levelplus1, "TEXT", $cite['citetext']);
+              $citestr .= doNote($levelplus1, 'TEXT', $cite['citetext']);
             }
           }
           if ($cite['page']) {
-            $citestr .= doNote($levelplus1, "PAGE", $cite['page']);
+            $citestr .= doNote($levelplus1, 'PAGE', $cite['page']);
           }
-          if ($cite['quay'] && $cite['quay'] != "0") {
+          if ($cite['quay'] && $cite['quay'] != '0') {
             $citestr .= "$levelplus1 QUAY {$cite['quay']}$lineending";
           }
           if ($cite['note']) {
-            $citestr .= doNote($levelplus1, "NOTE", $cite['note']);
+            $citestr .= doNote($levelplus1, 'NOTE', $cite['note']);
           }
         }
       }
@@ -118,7 +118,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       global $address_table;
       global $lineending;
 
-      $fact = "";
+      $fact = '';
       if ($row['age']) {
         $fact .= "$level AGE {$row['age']}$lineending";
       }
@@ -132,7 +132,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         $query = "SELECT address1, address2, city, state, zip, country, phone, email, www FROM $address_table WHERE addressID = \"{$row['addressID']}\"";
         $addrresults = tng_query($query);
         $addr = tng_fetch_assoc($addrresults);
-        if ($row['tag'] != "ADDR") {
+        if ($row['tag'] != 'ADDR') {
           $fact .= "$level ADDR$lineending";
           $level++;
         }
@@ -183,7 +183,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       global $lineending;
 
       $infolen = strlen($custevent['info']);
-      if ($custevent['tag'] != "EVEN" || $infolen < 150) {
+      if ($custevent['tag'] != 'EVEN' || $infolen < 150) {
         $info = doNote($level, $custevent['tag'], $custevent['info']);
       } else {
         $info = "$level " . $custevent['tag'] . $lineending;
@@ -198,8 +198,8 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       if ($custevent['eventplace']) {
         $info .= writePlace($custevent['eventplace'], 2);
       }
-      if ($custevent['tag'] == "EVEN" && $infolen >= 150) {
-        $info .= doNote($nextlevel, "NOTE", $custevent['info']);
+      if ($custevent['tag'] == 'EVEN' && $infolen >= 150) {
+        $info .= doNote($nextlevel, 'NOTE', $custevent['info']);
       }
 
       return $info;
@@ -220,7 +220,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       $notelinks = tng_query($query);
       $notearray = [];
       while ($notelink = tng_fetch_assoc($notelinks)) {
-        $eventid = $notelink['eventID'] ? $notelink['eventID'] : "-x--general--x-";
+        $eventid = $notelink['eventID'] ? $notelink['eventID'] : '-x--general--x-';
         $newnote = $notelink['noteID'] ? "@{$notelink['noteID']}@" : $notelink['note'];
         if (!is_array($notearray[$eventid])) {
           $notearray[$eventid] = [];
@@ -243,18 +243,18 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     function getNoteLine($level, $label, $note, $delta) {
       global $lineending, $session_charset;
 
-      $noteconc = "";
+      $noteconc = '';
       $notelen = strlen($note);
       if ($notelen > 245) {
         $orgnote = trim($note);
         $offset = 245;
-        if ($session_charset == "UTF-8" && function_exists(mb_substr)) {
-          while (mb_substr($orgnote, $offset, 1, 'UTF-8') == " " || mb_substr($orgnote, $offset - 1, 1, 'UTF-8') == " ") {
+        if ($session_charset == 'UTF-8' && function_exists(mb_substr)) {
+          while (mb_substr($orgnote, $offset, 1, 'UTF-8') == ' ' || mb_substr($orgnote, $offset - 1, 1, 'UTF-8') == ' ') {
             $offset--;
           }
           $note = mb_substr($note, 0, $offset, 'UTF-8');
         } else {
-          while (substr($orgnote, $offset, 1) == " " || substr($orgnote, $offset - 1, 1) == " ") {
+          while (substr($orgnote, $offset, 1) == ' ' || substr($orgnote, $offset - 1, 1) == ' ') {
             $offset--;
           }
           $note = substr($note, 0, $offset);
@@ -262,13 +262,13 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         $newlevel = $level + $delta;
         while ($offset < $notelen) {
           $endnext = 245;
-          if ($session_charset == "UTF-8" && function_exists(mb_substr)) {
-            while (mb_substr($orgnote, $offset + $endnext, 1, 'UTF-8') == " " || mb_substr($orgnote, $offset + $endnext - 1, 1, 'UTF-8') == " ") {
+          if ($session_charset == 'UTF-8' && function_exists(mb_substr)) {
+            while (mb_substr($orgnote, $offset + $endnext, 1, 'UTF-8') == ' ' || mb_substr($orgnote, $offset + $endnext - 1, 1, 'UTF-8') == ' ') {
               $offset--;
             }
             $nextpart = trim(mb_substr($orgnote, $offset, $endnext, 'UTF-8'), $lineending);
           } else {
-            while (substr($orgnote, $offset + $endnext, 1) == " " || substr($orgnote, $offset + $endnext - 1, 1) == " ") {
+            while (substr($orgnote, $offset + $endnext, 1) == ' ' || substr($orgnote, $offset + $endnext - 1, 1) == ' ') {
               $endnext--;
             }
             $nextpart = trim(substr($orgnote, $offset, $endnext), $lineending);
@@ -281,29 +281,29 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       return trim("$level $label $note") . "$lineending$noteconc";
     }
 
-    function doNote($level, $label, $notetxt, $private = "") {
+    function doNote($level, $label, $notetxt, $private = '') {
       global $savestate;
       global $saveimport;
       global $saveimport_table;
 
-      $noteinfo = "";
-      $notetxt = str_replace("\r", "", $notetxt);
+      $noteinfo = '';
+      $notetxt = str_replace("\r", '', $notetxt);
       if (!preg_match('/^@.+@$/', $notetxt)) {
-        $notetxt = str_replace("@", "@@", $notetxt);
+        $notetxt = str_replace('@', '@@', $notetxt);
       }
       $notes = preg_split('/\r\n|\n/', $notetxt);
-      //$note = trim( array_shift( $notes ) );
+
       if ($level) {
         $note = array_shift($notes);
         $noteinfo .= getNoteLine($level, $label, $note, 1);
       }
       $level++;
       foreach ($notes as $note) {
-        //$note = trim($note);
-        $noteinfo .= getNoteLine($level, "CONT", $note, 0);
+
+        $noteinfo .= getNoteLine($level, 'CONT', $note, 0);
       }
       if ($private) {
-        $noteinfo .= getNoteLine($level, "_PRIVATE", "Y", 0);
+        $noteinfo .= getNoteLine($level, '_PRIVATE', 'Y', 0);
       }
 
       $savestate['ncount']++;
@@ -321,7 +321,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     function writeNote($level, $label, $notes) {
       global $citations;
 
-      $noteinfo = "";
+      $noteinfo = '';
       if (is_array($notes)) {
         foreach ($notes as $notearray) {
           $noteinfo .= doNote($level, $label, $notearray['text'], $notearray['private']);
@@ -342,7 +342,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       global $exliving;
       global $exprivate;
 
-      $xnotestr = "";
+      $xnotestr = '';
 
       //if excluding private or living
       //join xnotes and notelinks
@@ -378,11 +378,11 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       global $saveimport;
       global $saveimport_table;
 
-      $xnotestr = "";
+      $xnotestr = '';
 
       $xnotestr .= "0 @{$xnotetxt['noteID']}@ NOTE$lineending";
 
-      $xnotestr .= doNote(0, "NOTE", $xnotetxt['note']);
+      $xnotestr .= doNote(0, 'NOTE', $xnotetxt['note']);
       $citations = getCitations($xnotetxt['noteID']);
       $xnotestr .= writeCitation($citations['NAME'], $level + 2);
 
@@ -411,25 +411,22 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         while ($prow = tng_fetch_assoc($media)) {
           $mediatypeID = $prow['mediatypeID'];
           if (isset($incl[$mediatypeID])) {
-            $eventID = $prow['eventID'] ? $prow['eventID'] : "-x--general--x-";
+            $eventID = $prow['eventID'] ? $prow['eventID'] : '-x--general--x-';
             if ($prow['abspath']) {
-              preg_match("/\.(.+)$/", $prow['path'], $matches);
+              preg_match('/\.(.+)$/', $prow['path'], $matches);
               $prow['form'] = $matches[1];
             } else {
               $thisexppath = $exppath[$mediatypeID];
               $thisexpdir = $expdir[$mediatypeID];
-              //$linktxt .= "1 OBJE$lineending";
+
               if (!$prow['form']) {
-                preg_match("/\.(.+)$/", $prow['path'], $matches);
+                preg_match('/\.(.+)$/', $prow['path'], $matches);
                 $prow['form'] = $matches[1];
               }
-
-              //strip $prow['path'] down to just the file name
-              //$filename = basename( $prow['path'] );
-              if (!$thisexpdir && strpos($prow['path'], "/")) {
+              if (!$thisexpdir && strpos($prow['path'], '/')) {
                 $thisexpdir = 1;
               }
-              $prow['path'] = $thisexpdir == 1 ? str_replace("\\", "/", $thisexppath . $prow['path']) : str_replace("/", "\\", $thisexppath . $prow['path']);
+              $prow['path'] = $thisexpdir == 1 ? str_replace("\\", '/', $thisexppath . $prow['path']) : str_replace('/', "\\", $thisexppath . $prow['path']);
             }
             $prow['title'] = $prow['altdescription'] ? $prow['altdescription'] : $prow['description'];
 
@@ -449,12 +446,12 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     function writeMediaLinks($media_array, $level) {
       global $lineending, $savestate, $mediatypeObjs;
 
-      $linktxt = "";
+      $linktxt = '';
       $newlevel = $level + 1;
       foreach ($media_array as $media) {
         if ($media['form']) {
-          $mediatitle = preg_replace("/\n/", " ", $media['title']);
-          $mediatitle = preg_replace("/\r/", " ", $mediatitle);
+          $mediatitle = preg_replace('/\n/', ' ', $media['title']);
+          $mediatitle = preg_replace('/\r/', ' ', $mediatitle);
           $linktxt .= "$level OBJE$lineending";
           $linktxt .= "$newlevel FORM {$media['form']}$lineending";
           $linktxt .= "$newlevel FILE {$media['path']}$lineending";
@@ -469,12 +466,12 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
             if (substr($exportas, -1) == 'S') {
               $exportas = substr($exportas, 0, -1);
             }
-            if ($exportas == "HISTORIE") {
-              $exportas = "HISTORY";
+            if ($exportas == 'HISTORIE') {
+              $exportas = 'HISTORY';
             }
           }
           $linktxt .= "$newlevel _TYPE $exportas$lineending";
-          $linktxt .= writeNote($newlevel, "NOTE", $media['notes']);
+          $linktxt .= writeNote($newlevel, 'NOTE', $media['notes']);
           $savestate['mcount']++;
           if ($savestate['mcount'] % 10 == 0) {
             echo "<strong>M{$savestate['mcount']}</strong> ";
@@ -504,10 +501,10 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
               $info .= "2 DATE {$child['sealdate']}$lineending";
             }
             if ($child['sealplace']) {
-              $tok = strtok($child['sealplace'], " ");
+              $tok = strtok($child['sealplace'], ' ');
               if (strlen($tok) == 5) {
                 $info .= "2 TEMP $tok$lineending";
-                $tok = strtok(" ");
+                $tok = strtok(' ');
                 if ($tok) {
                   $info .= writePlace($tok, 2);
                 }
@@ -516,7 +513,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
               }
             }
             if ($childnotes['SLGC']) {
-              $info .= writeNote(2, "NOTE", $childnotes['SLGC']);
+              $info .= writeNote(2, 'NOTE', $childnotes['SLGC']);
             }
             if ($citations['SLGC']) {
               $info .= writeCitation($citations['SLGC'], 2);
@@ -531,20 +528,20 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     function getEligibility($ind) {
       $rval = 0;
 
-      $birthdate = $ind['birthdatetr'] != "0000-00-00" ? $ind['birthdatetr'] : $ind['altbirthdatetr'];
+      $birthdate = $ind['birthdatetr'] != '0000-00-00' ? $ind['birthdatetr'] : $ind['altbirthdatetr'];
       $birthplace = $ind['birthplace'] ? $ind['birthplace'] : $ind['altbirthplace'];
-      if ($birthplace && $birthdate > "1500-00-00") {
-        $deathdate = $ind['deathdatetr'] != "0000-00-00" ? $ind['deathdatetr'] : $ind['burialdatetr'];
-        if ($deathdate != "0000-00-00") {
-          $deathinfo = split("-", $deathdate);
-          $deathyeardiff = date("Y") - $deathinfo[0];
-          if ($deathyeardiff > 1 || ($deathyeardiff && (date("m") > $deathinfo[1] || (date("m") == $deathinfo[1] && date("d") > $deathinfo[2])))) {
+      if ($birthplace && $birthdate > '1500-00-00') {
+        $deathdate = $ind['deathdatetr'] != '0000-00-00' ? $ind['deathdatetr'] : $ind['burialdatetr'];
+        if ($deathdate != '0000-00-00') {
+          $deathinfo = split('-', $deathdate);
+          $deathyeardiff = date('Y') - $deathinfo[0];
+          if ($deathyeardiff > 1 || ($deathyeardiff && (date('m') > $deathinfo[1] || (date('m') == $deathinfo[1] && date('d') > $deathinfo[2])))) {
             $rval = 1;
           }
         } else {
-          $birthinfo = split("-", $birthdate);
-          $birthyeardiff = date("Y") - $birthinfo[0];
-          if ($birthyeardiff > 110 || ($birthyeardiff == 110 && (date("m") > $birthinfo[1] || (date("m") == $birthinfo[1] && date("d") > $birthinfo[2])))) {
+          $birthinfo = split('-', $birthdate);
+          $birthyeardiff = date('Y') - $birthinfo[0];
+          if ($birthyeardiff > 110 || ($birthyeardiff == 110 && (date('m') > $birthinfo[1] || (date('m') == $birthinfo[1] && date('d') > $birthinfo[2])))) {
             $rval = 1;
           }
         }
@@ -554,9 +551,9 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     }
 
     function doNotesAndMedia($notes, $media, $tag, $level) {
-      $rval = "";
+      $rval = '';
       if ($notes[$tag]) {
-        $rval .= writeNote($level, "NOTE", $notes[$tag]);
+        $rval .= writeNote($level, 'NOTE', $notes[$tag]);
       }
       if ($media[$tag]) {
         $rval .= writeMediaLinks($media[$tag], $level);
@@ -569,7 +566,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       global $assoc_table;
       global $lineending;
 
-      $assocstr = "";
+      $assocstr = '';
       $query = "SELECT passocID, relationship FROM $assoc_table WHERE personID = '$entityID'";
       $assocresult = tng_query($query);
       while ($assoc = tng_fetch_assoc($assocresult)) {
@@ -611,22 +608,22 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       if ($doit && $templeready) {
         $doit = getEligibility($ind);
       }
-      $spousedata = "";
+      $spousedata = '';
       if ($ind['sex'] == 'M') {
-        $orderfield = ", wifeorder";
-        $orderby = " ORDER BY wifeorder";
+        $orderfield = ', wifeorder';
+        $orderby = ' ORDER BY wifeorder';
       } elseif ($ind['sex'] == 'F') {
-        $orderfield = ", husborder";
-        $orderby = " ORDER BY husborder";
+        $orderfield = ', husborder';
+        $orderby = ' ORDER BY husborder';
       } else {
-        $orderfield = $orderby = "";
+        $orderfield = $orderby = '';
       }
       $query = "(SELECT familyID, changedate, sealdate, sealplace, marrplace, marrdatetr$orderfield FROM $families_table WHERE husband = \"{$ind['personID']}\" $exlivingstr $exprivatestr) UNION (SELECT familyID, changedate, sealdate, sealplace, marrplace, marrdatetr$orderfield FROM $families_table WHERE wife = \"{$ind['personID']}\" $exlivingstr $exprivatestr)$orderby";
 
       $result2 = tng_query($query);
       while ($spouse = tng_fetch_assoc($result2)) {
         $spousedata .= "1 FAMS @{$spouse['familyID']}@$lineending";
-        if (!$doit && !$spouse['sealdate'] && !$spouse['sealplace'] && $spouse['marrplace'] && $spouse['marrdatetr'] > "1500-00-00") {
+        if (!$doit && !$spouse['sealdate'] && !$spouse['sealplace'] && $spouse['marrplace'] && $spouse['marrdatetr'] > '1500-00-00') {
           $doit = 1;
         }
         //if $doit still false, loop through children to see if sealing needs to be done for any of them
@@ -650,7 +647,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       }
       tng_free_result($result2);
 
-      $childdata = "";
+      $childdata = '';
       $query = "SELECT * FROM $children_table WHERE personID = \"{$ind['personID']}\" ORDER BY parentorder";
       $children = tng_query($query);
       if ($children) {
@@ -678,7 +675,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         $info = "0 @{$ind['personID']}@ INDI$lineending";
         $nonamesloc = showNames($ind);
         if ($rights['both'] || !$nonamesloc) {
-          $info .= "1 NAME {$ind['firstname']} /" . trim($ind['lnprefix'] . " " . $ind['lastname']) . "/";
+          $info .= "1 NAME {$ind['firstname']} /" . trim($ind['lnprefix'] . ' ' . $ind['lastname']) . '/';
           $info .= $ind['suffix'] ? " {$ind['suffix']}$lineending" : $lineending;
           if ($ind['firstname']) {
             $info .= "2 GIVN {$ind['firstname']}$lineending";
@@ -690,25 +687,25 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
             $info .= "2 SURN {$ind['lastname']}$lineending";
           }
 
-          $info .= doNotesAndMedia($indnotes, $indmedia, "NAME", 2);
+          $info .= doNotesAndMedia($indnotes, $indmedia, 'NAME', 2);
           //if( $indnotes['NAME'] )
-          //  $info .= writeNote( 2, "NOTE", $indnotes['NAME'] );
+          //  $info .= writeNote( 2, 'NOTE', $indnotes['NAME'] );
           if ($ind['prefix']) {
             $info .= "2 NPFX {$ind['prefix']}$lineending";
             if ($indnotes['NPFX']) {
-              $info .= writeNote(3, "NOTE", $indnotes['NPFX']);
+              $info .= writeNote(3, 'NOTE', $indnotes['NPFX']);
             }
           }
           if ($ind['suffix']) {
             $info .= "2 NSFX {$ind['suffix']}$lineending";
             if ($indnotes['NSFX']) {
-              $info .= writeNote(3, "NOTE", $indnotes['NSFX']);
+              $info .= writeNote(3, 'NOTE', $indnotes['NSFX']);
             }
           }
           if ($ind['nickname']) {
             $info .= "2 NICK {$ind['nickname']}$lineending";
             if ($indnotes['NICK']) {
-              $info .= writeNote(3, "NOTE", $indnotes['NICK']);
+              $info .= writeNote(3, 'NOTE', $indnotes['NICK']);
             }
           }
           if ($citations['NAME']) {
@@ -717,7 +714,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           if ($ind['title']) {
             $info .= "1 TITL {$ind['title']}$lineending";
             if ($indnotes['TITL']) {
-              $info .= writeNote(2, "NOTE", $indnotes['TITL']);
+              $info .= writeNote(2, 'NOTE', $indnotes['TITL']);
             }
           }
           $info .= "1 SEX {$ind['sex']}$lineending";
@@ -731,14 +728,14 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
             $info .= writeCitation($citations['-x--general--x-'], 1);
           }
         } elseif ($nonamesloc == 2) {
-          $info .= "1 NAME " . initials($ind['firstname']) . " /" . trim($ind['lnprefix'] . " " . $ind['lastname']) . "/$lineending";
+          $info .= '1 NAME ' . initials($ind['firstname']) . ' /' . trim($ind['lnprefix'] . ' ' . $ind['lastname']) . "/$lineending";
         } else {
-          $info .= "1 NAME " . uiTextSnippet('living') . " //$lineending";
+          $info .= '1 NAME ' . uiTextSnippet('living') . " //$lineending";
         }
 
         if ($rights['both']) {
           if ($ind['birthdate'] || $ind['birthplace'] || $indnotes['BIRT'] || $citations['BIRT'] || $extras['BIRT']) {
-            if ($ind['birthdate'] == "Y" || (!$ind['birthdate'] && !$ind['birthplace'])) {
+            if ($ind['birthdate'] == 'Y' || (!$ind['birthdate'] && !$ind['birthplace'])) {
               $info .= "1 BIRT Y$lineending";
             } else {
               $info .= "1 BIRT$lineending";
@@ -749,14 +746,14 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
                 $info .= writePlace($ind['birthplace'], 2);
               }
             }
-            $info .= doNotesAndMedia($indnotes, $indmedia, "BIRT", 2);
+            $info .= doNotesAndMedia($indnotes, $indmedia, 'BIRT', 2);
             if ($citations['BIRT']) {
               $info .= writeCitation($citations['BIRT'], 2);
             }
             $info .= $extras['BIRT'];
           }
           if ($ind['altbirthdate'] || $ind['altbirthplace'] || $indnotes['CHR'] || $citations['CHR'] || $extras['CHR']) {
-            if ($ind['altbirthdate'] == "Y" || (!$ind['altbirthdate'] && !$ind['altbirthplace'])) {
+            if ($ind['altbirthdate'] == 'Y' || (!$ind['altbirthdate'] && !$ind['altbirthplace'])) {
               $info .= "1 CHR Y$lineending";
             } else {
               $info .= "1 CHR$lineending";
@@ -767,7 +764,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
                 $info .= writePlace($ind['altbirthplace'], 2);
               }
             }
-            $info .= doNotesAndMedia($indnotes, $indmedia, "CHR", 2);
+            $info .= doNotesAndMedia($indnotes, $indmedia, 'CHR', 2);
             if ($citations['CHR']) {
               $info .= writeCitation($citations['CHR'], 2);
             }
@@ -775,7 +772,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           }
         }
         if ($ind['deathdate'] || $ind['deathplace'] || $indnotes['DEAT'] || $citations['DEAT'] || $extras['DEAT']) {
-          if ($ind['deathdate'] == "Y" || (!$ind['deathdate'] && !$ind['deathplace'])) {
+          if ($ind['deathdate'] == 'Y' || (!$ind['deathdate'] && !$ind['deathplace'])) {
             $info .= "1 DEAT Y$lineending";
           } else {
             $info .= "1 DEAT$lineending";
@@ -786,15 +783,15 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
               $info .= writePlace($ind['deathplace'], 2);
             }
           }
-          $info .= doNotesAndMedia($indnotes, $indmedia, "DEAT", 2);
+          $info .= doNotesAndMedia($indnotes, $indmedia, 'DEAT', 2);
           if ($citations['DEAT']) {
             $info .= writeCitation($citations['DEAT'], 2);
           }
           $info .= $extras['DEAT'];
         }
         if ($ind['burialdate'] || $ind['burialplace'] || $indnotes['BURI'] || $citations['BURI'] || $extras['BURI']) {
-          $btag = $ind['burialtype'] ? "CREM" : "BURI";
-          if ($ind['burialdate'] == "Y" || (!$ind['burialdate'] && !$ind['burialplace'])) {
+          $btag = $ind['burialtype'] ? 'CREM' : 'BURI';
+          if ($ind['burialdate'] == 'Y' || (!$ind['burialdate'] && !$ind['burialplace'])) {
             $info .= "1 $btag Y$lineending";
           } else {
             $info .= "1 $btag$lineending";
@@ -805,7 +802,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
               $info .= writePlace($ind['burialplace'], 2);
             }
           }
-          $info .= doNotesAndMedia($indnotes, $indmedia, "BURI", 2);
+          $info .= doNotesAndMedia($indnotes, $indmedia, 'BURI', 2);
           if ($citations['BURI']) {
             $info .= writeCitation($citations['BURI'], 2);
           }
@@ -827,15 +824,15 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           }
 
           if ($rights['lds']) {
-            $info .= doLDSEvent("BAPL", "bapt", $indnotes, $indmedia, $citations['BAPL'], $extras['BAPL'], $ind);
-            $info .= doLDSEvent("CONL", "conf", $indnotes, $indmedia, $citations['CONL'], $extras['CONL'], $ind);
-            $info .= doLDSEvent("INIT", "init", $indnotes, $indmedia, $citations['INIT'], $extras['INIT'], $ind);
-            $info .= doLDSEvent("ENDL", "endl", $indnotes, $indmedia, $citations['ENDL'], $extras['ENDL'], $ind);
+            $info .= doLDSEvent('BAPL', 'bapt', $indnotes, $indmedia, $citations['BAPL'], $extras['BAPL'], $ind);
+            $info .= doLDSEvent('CONL', 'conf', $indnotes, $indmedia, $citations['CONL'], $extras['CONL'], $ind);
+            $info .= doLDSEvent('INIT', 'init', $indnotes, $indmedia, $citations['INIT'], $extras['INIT'], $ind);
+            $info .= doLDSEvent('ENDL', 'endl', $indnotes, $indmedia, $citations['ENDL'], $extras['ENDL'], $ind);
           }
           $info .= doAssociations($ind['personID']);
 
           if ($indnotes['-x--general--x-']) {
-            $info .= writeNote(1, "NOTE", $indnotes['-x--general--x-']);
+            $info .= writeNote(1, 'NOTE', $indnotes['-x--general--x-']);
           }
 
           if ($indmedia['-x--general--x-']) {
@@ -862,18 +859,18 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     function doLDSEvent($tag, $key, $notes, $media, $citations, $extras, $row) {
       global $lineending;
 
-      $event = "";
-      $prefix = $tag == "INIT" ? "_" : "";
+      $event = '';
+      $prefix = $tag == 'INIT' ? '_' : '';
       if ($ind[$key . 'date'] || $ind[$key . 'place']) {
         $event .= "1 $prefix$tag$lineending";
         if ($row[$key . 'date']) {
           $event .= "2 DATE {$row[$key . 'date']}$lineending";
         }
         if ($row[$key . 'place']) {
-          $tok = strtok($row[$key . 'place'], " ");
+          $tok = strtok($row[$key . 'place'], ' ');
           if (strlen($tok) == 5) {
             $event .= "2 TEMP $tok$lineending";
-            $tok = strtok(" ");
+            $tok = strtok(' ');
             if ($tok) {
               $event .= writePlace($tok, 2);
             }
@@ -904,11 +901,11 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       $familyID = $family['familyID'];
       $doit = !$templeready;
 
-      if (!$doit && !$family['sealdate'] && !$family['sealplace'] && $family['marrplace'] && $family['marrdatetr'] > "1500-00-00") {
+      if (!$doit && !$family['sealdate'] && !$family['sealplace'] && $family['marrplace'] && $family['marrdatetr'] > '1500-00-00') {
         $doit = 1;
       }
 
-      $childdata = "";
+      $childdata = '';
       $query = "SELECT personID, sealdate, sealplace, mrel, frel FROM $children_table WHERE familyID = \"$familyID\" AND personID != \"\" ORDER BY ordernum";
       $result = tng_query($query);
       if ($result) {
@@ -964,7 +961,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           $fammedia = getMediaLinks($familyID);
           $extras = getStdExtras($familyID, 2);
           if ($family['marrdate'] || $family['marrplace'] || $famnotes['MARR'] || $citations['MARR'] || $extras['MARR'] || $family['marrtype']) {
-            if ($family['marrdate'] == "Y" || (!$family['marrdate'] && !$family['marrplace'])) {
+            if ($family['marrdate'] == 'Y' || (!$family['marrdate'] && !$family['marrplace'])) {
               $info .= "1 MARR Y$lineending";
             } else {
               $info .= "1 MARR$lineending";
@@ -976,16 +973,16 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
               }
             }
             if ($family['marrtype']) {
-              $info .= "2 TYPE " . $family['marrtype'] . $lineending;
+              $info .= '2 TYPE ' . $family['marrtype'] . $lineending;
             }
-            $info .= doNotesAndMedia($famnotes, $fammedia, "MARR", 2);
+            $info .= doNotesAndMedia($famnotes, $fammedia, 'MARR', 2);
             if ($citations['MARR']) {
               $info .= writeCitation($citations['MARR'], 2);
             }
             $info .= $extras['MARR'];
           }
           if ($family['divdate'] || $family['divplace'] || $famnotes['DIV'] || $citations['DIV'] || $extras['DIV']) {
-            if ($family['divdate'] == "Y" || (!$family['divdate'] && !$family['divplace'])) {
+            if ($family['divdate'] == 'Y' || (!$family['divdate'] && !$family['divplace'])) {
               $info .= "1 DIV Y$lineending";
             } else {
               $info .= "1 DIV$lineending";
@@ -996,7 +993,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
                 $info .= writePlace($family['divplace'], 2);
               }
             }
-            $info .= doNotesAndMedia($famnotes, $fammedia, "DIV", 2);
+            $info .= doNotesAndMedia($famnotes, $fammedia, 'DIV', 2);
             if ($citations['DIV']) {
               $info .= writeCitation($citations['DIV'], 2);
             }
@@ -1022,10 +1019,10 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
                 $info .= "2 DATE {$family['sealdate']}$lineending";
               }
               if ($family['sealplace']) {
-                $tok = strtok($family['sealplace'], " ");
+                $tok = strtok($family['sealplace'], ' ');
                 if (strlen($tok) == 5) {
                   $info .= "2 TEMP $tok$lineending";
-                  $tok = strtok(" ");
+                  $tok = strtok(' ');
                   if ($tok) {
                     $info .= writePlace($tok, 2);
                   }
@@ -1033,7 +1030,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
                   $info .= writePlace($family['sealplace'], 2);
                 }
               }
-              $info .= doNotesAndMedia($famnotes, $fammedia, "SLGS", 2);
+              $info .= doNotesAndMedia($famnotes, $fammedia, 'SLGS', 2);
               if ($citations['SLGS']) {
                 $info .= writeCitation($citations['SLGS'], 2);
               }
@@ -1047,7 +1044,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           }
 
           if ($famnotes['-x--general--x-']) {
-            $info .= writeNote(1, "NOTE", $famnotes['-x--general--x-']);
+            $info .= writeNote(1, 'NOTE', $famnotes['-x--general--x-']);
           }
 
           if ($fammedia['-x--general--x-']) {
@@ -1079,7 +1076,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       global $allrepos;
       global $branch;
 
-      $sourcestr = "";
+      $sourcestr = '';
       if ($branch) {
         $newsources = array_unique($allsources);
         if ($newsources) {
@@ -1124,7 +1121,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       global $saveimport;
       global $fp;
 
-      $sourcestr = "";
+      $sourcestr = '';
       $srcnotes = getNotes($source['sourceID']);
       $srcmedia = getMediaLinks($source['sourceID']);
 
@@ -1162,10 +1159,10 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       tng_free_result($custevents);
 
       if ($source['actualtext']) {
-        $sourcestr .= writeNote(1, "TEXT", $source['actualtext']);
+        $sourcestr .= writeNote(1, 'TEXT', $source['actualtext']);
       }
       if ($srcnotes['-x--general--x-']) {
-        $sourcestr .= writeNote(1, "NOTE", $srcnotes['-x--general--x-']);
+        $sourcestr .= writeNote(1, 'NOTE', $srcnotes['-x--general--x-']);
       }
 
       if ($srcmedia['-x--general--x-']) {
@@ -1193,7 +1190,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       global $reposuffix;
       global $allrepos;
 
-      $repostr = "";
+      $repostr = '';
 
       if ($branch) {
         $newrepos = array_unique($allrepos);
@@ -1235,7 +1232,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       global $lineending;
       global $saveimport_table;
 
-      $repostr = "";
+      $repostr = '';
       $reponotes = getNotes($repo['repoID']);
       $repomedia = getMediaLinks($repo['repoID']);
 
@@ -1255,7 +1252,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       tng_free_result($custevents);
 
       if ($reponotes['-x--general--x-']) {
-        $repostr .= writeNote(1, "NOTE", $reponotes['-x--general--x-']);
+        $repostr .= writeNote(1, 'NOTE', $reponotes['-x--general--x-']);
       }
 
       if ($repomedia['-x--general--x-']) {
@@ -1322,7 +1319,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         }
         tng_free_result($result);
       }
-      $placestr = "";
+      $placestr = '';
       foreach ($places as $place) {
         $placemedia = getMediaLinks($place['place']);
         //export
@@ -1335,7 +1332,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           $placestr .= "2 PLEV {$place['placelevel']}$lineending";
         }
         if ($place['notes']) {
-          $placestr .= writeNote(1, "NOTE", $place['notes']);
+          $placestr .= writeNote(1, 'NOTE', $place['notes']);
         }
         if ($placemedia) {
           $placestr .= writeMediaLinks($placemedia['-x--general--x-'], 1);
@@ -1356,7 +1353,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     <p><strong><?php echo uiTextSnippet('exporting'); ?></strong></p>
     <?php
     if ($saveimport) {
-      echo "<p>" . uiTextSnippet('ifexportfails') . " <a href=\"dataExportGedcomFormAction.php?resume=1\">" . uiTextSnippet('clickresume') . "</a>.</p>$lineending";
+      echo '<p>' . uiTextSnippet('ifexportfails') . " <a href=\"dataExportGedcomFormAction.php?resume=1\">" . uiTextSnippet('clickresume') . "</a>.</p>$lineending";
     }
     set_time_limit(0);
     $xnotes = [];
@@ -1385,32 +1382,32 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           $savestate['pcount'] = $row['pcount'];
           //retrieve entity type (I = 1, F = 2, S = 3, X = 4, R = 5)
           $savestate['lasttype'] = $row['lasttype'];
-          $prefix = $suffix = "";
+          $prefix = $suffix = '';
           switch ($savestate['lasttype']) {
             case 1:
               $prefix = $personprefix;
               $suffix = $personsuffix;
-              $idstring = "personID";
+              $idstring = 'personID';
               break;
             case 2:
               $prefix = $familyprefix;
               $suffix = $familysuffix;
-              $idstring = "familyID";
+              $idstring = 'familyID';
               break;
             case 3:
               $prefix = $sourceprefix;
               $suffix = $sourcesuffix;
-              $idstring = "sourceID";
+              $idstring = 'sourceID';
               break;
             case 4:
               $prefix = $noteprefix;
               $suffix = $notesuffix;
-              $idstring = "noteID";
+              $idstring = 'noteID';
               break;
             case 5:
               $prefix = $repoprefix;
               $suffix = $reposuffix;
-              $idstring = "repoID";
+              $idstring = 'repoID';
               break;
           }
           if ($prefix) {
@@ -1432,13 +1429,13 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       }
     }
     if ($found) {
-      $fp = fopen($filename, "r+");
+      $fp = fopen($filename, 'r+');
       fseek($fp, $savestate['offset']);
     } else {
       if (file_exists($filename)) {
         unlink($filename);
       }
-      $fp = fopen($filename, "w");
+      $fp = fopen($filename, 'w');
       $savestate['lasttype'] = 1;
       $savestate['icount'] = 0;
       $savestate['fcount'] = 0;
@@ -1450,7 +1447,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       $savestate['media'] = $exportmedia;
     }
     if (!$fp) {
-      die(uiTextSnippet('cannotopen') . " " . $filename);
+      die(uiTextSnippet('cannotopen') . ' ' . $filename);
     }
     flock($fp, LOCK_EX);
 
@@ -1479,7 +1476,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
               . "1 GEDC$lineending"
               . "2 VERS 5.5$lineending"
               . "2 FORM LINEAGE-LINKED$lineending"
-              . "1 CHAR " . ($session_charset == "UTF-8" ? "UTF-8" : "ANSI") . $lineending
+              . '1 CHAR ' . ($session_charset == 'UTF-8' ? 'UTF-8' : 'ANSI') . $lineending
               . "1 SUBM @SUB1@$lineending"
               . "0 @SUB1@ SUBM$lineending"
               . "1 NAME $ownername$lineending"
@@ -1488,9 +1485,9 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       fwrite($fp, "$firstpart");
     }
     $prefixlen = strlen($personprefix) + 1;
-    $branchstr = $branch ? " AND branch LIKE \"%$branch%\"" : "";
-    $exlivingstr = $exliving ? " AND living != \"1\"" : "";
-    $exprivatestr = $exprivate ? " AND private != \"1\"" : "";
+    $branchstr = $branch ? " AND branch LIKE \"%$branch%\"" : '';
+    $exlivingstr = $exliving ? " AND living != \"1\"" : '';
+    $exprivatestr = $exprivate ? " AND private != \"1\"" : '';
 
     if ($savestate['lasttype'] < 2) {
       $nextchunk = -1;
@@ -1507,7 +1504,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         $query = "SELECT personID, $numstr AS num, lastname, lnprefix, firstname, sex, title, prefix, suffix, nickname, birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, baptdate, baptplace, endldate, endlplace, famc, living, private, branch, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate "
           . "FROM $people_table "
           . "WHERE 1 $branchstr $exlivingstr $exprivatestr {$savestate['wherestr']} "
-          . "ORDER BY num "
+          . 'ORDER BY num '
           . "LIMIT $nextone, $largechunk";
         $result = tng_query($query);
         if ($result) {
@@ -1526,7 +1523,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         }
       } while ($numrows);
       $savestate['lasttype'] = 2;
-      $savestate['wherestr'] = "";
+      $savestate['wherestr'] = '';
     }
     $prefixlen = strlen($familyprefix) + 1;
 
@@ -1546,7 +1543,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         $query = "SELECT *, (0+SUBSTRING(familyID,$prefixlen)) AS num, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate "
           . "FROM $families_table "
           . "WHERE 1 $branchstr {$savestate['wherestr']} $exlivingstr $exprivatestr "
-          . "ORDER BY num "
+          . 'ORDER BY num '
           . "LIMIT $nextone, $largechunk";
         $result = tng_query($query);
         if ($result) {
@@ -1565,27 +1562,27 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         }
       } while ($numrows);
       $savestate['lasttype'] = 3;
-      $savestate['wherestr'] = "";
+      $savestate['wherestr'] = '';
     }
     if ($savestate['lasttype'] < 4) {
       fwrite($fp, doSources());
       $savestate['lasttype'] = 4;
-      $savestate['wherestr'] = "";
+      $savestate['wherestr'] = '';
     }
     if ($savestate['lasttype'] < 5) {
       fwrite($fp, doXNotes());
       $savestate['lasttype'] = 5;
-      $savestate['wherestr'] = "";
+      $savestate['wherestr'] = '';
     }
     if ($savestate['lasttype'] < 6) {
       fwrite($fp, doRepositories());
       $savestate['lasttype'] = 6;
-      $savestate['wherestr'] = "";
+      $savestate['wherestr'] = '';
     }
     if ($savestate['lasttype'] < 7) {
       fwrite($fp, doPlaces());
       $savestate['lasttype'] = 7;
-      $savestate['wherestr'] = "";
+      $savestate['wherestr'] = '';
     }
     fwrite($fp, "0 TRLR$lineending");
 
@@ -1613,7 +1610,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       ?>
     </p>
     <p>
-      <a href="<?php echo "$gedpath/$tree" . ".ged" ?>"><?php echo uiTextSnippet('downloadged'); ?></a>
+      <a href="<?php echo "$gedpath/$tree" . '.ged' ?>"><?php echo uiTextSnippet('downloadged'); ?></a>
     </p>
     <?php echo $adminFooterSection->build(); ?>
   </section>

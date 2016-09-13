@@ -30,7 +30,7 @@ $mysplname = $_SESSION['tng_search_mysplname'];
 $spqualify = $_SESSION['tng_search_spqualify'];
 $nr = $_SESSION['tng_nr'];
 
-$dontdo = ["ADDR", "BIRT", "CHR", "DEAT", "BURI", "NICK", "TITL", "NSFX", "NPFX"];
+$dontdo = ['ADDR', 'BIRT', 'CHR', 'DEAT', 'BURI', 'NICK', 'TITL', 'NSFX', 'NPFX'];
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
@@ -42,7 +42,7 @@ function buildSelectInputGroup($label, $formName, $selectName, $value, $options,
   $out .= "<span class='input-group-select'>\n";
   $out .= "<select class='form-control' name='" . $selectName . "'>\n";
   foreach ($options as $option) {
-    $out .= "<option value='$option'" . ($selected == $option ? ' selected' : '') . ">" . uiTextSnippet($option) . "</option>\n";
+    $out .= "<option value='$option'" . ($selected == $option ? ' selected' : '') . '>' . uiTextSnippet($option) . "</option>\n";
   }
   $out .= "</select>\n";
   $out .= "</span>\n";
@@ -57,7 +57,7 @@ $lnOptions = ['contains', 'equals', 'startswith', 'endswith', 'exists', 'dnexist
 
 $yearOptions = ['equals', 'plusminus2', 'plusminus5', 'plusminus10', 'lessthan', 'greaterthan', 'lessthanequal', 'greaterthanequal', 'exists', 'dnexist'];
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('searchnames'));
 ?>
 <!DOCTYPE html>
@@ -70,7 +70,7 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
     <br>
     <?php
     if ($msg) {
-      echo "<b class='msgerror h4' id='errormsg'>" . stripslashes(strip_tags($msg)) . "</b>";
+      echo "<b class='msgerror h4' id='errormsg'>" . stripslashes(strip_tags($msg)) . '</b>';
     }
     ?>
     <form action='search.php' name='search' onsubmit='return makeURL();'>
@@ -137,10 +137,10 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
             </select>
             <select class='form-control' name="mygender">
               <option value=''>&nbsp;</option>
-              <option value='M'<?php if ($mygender == 'M') {echo " selected";} ?>><?php echo uiTextSnippet('male'); ?></option>
-              <option value='F'<?php if ($mygender == 'F') {echo " selected";} ?>><?php echo uiTextSnippet('female'); ?></option>
-              <option value='U'<?php if ($mygender == 'U') {echo " selected";} ?>><?php echo uiTextSnippet('unknown'); ?></option>
-              <option value='N'<?php if ($mygender == 'N') {echo " selected";} ?>><?php echo uiTextSnippet('none'); ?></option>
+              <option value='M'<?php if ($mygender == 'M') {echo ' selected';} ?>><?php echo uiTextSnippet('male'); ?></option>
+              <option value='F'<?php if ($mygender == 'F') {echo ' selected';} ?>><?php echo uiTextSnippet('female'); ?></option>
+              <option value='U'<?php if ($mygender == 'U') {echo ' selected';} ?>><?php echo uiTextSnippet('unknown'); ?></option>
+              <option value='N'<?php if ($mygender == 'N') {echo ' selected';} ?>><?php echo uiTextSnippet('none'); ?></option>
             </select>
           </div>
         </div>
@@ -159,7 +159,7 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
             </span>
           </div>
           
-          <section style="display: none" id="otherevents">
+          <section style='display: none' id="otherevents">
             <div class='row'>
               <div class='col-sm-6'>
                 <?php echo buildSelectInputGroup('nickname', 'mynickname', 'nnqualify', $mynickname, $placeOptions, $nnqualify); ?>
@@ -184,7 +184,7 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
             while ($row = tng_fetch_assoc($result)) {
               if (!in_array($row['tag'], $dontdo)) {
                 $row['displaymsg'] = getEventDisplay($row['display']);
-                $displaymsg = strtoupper($row['displaymsg']) . "_" . $row['eventtypeID'];
+                $displaymsg = strtoupper($row['displaymsg']) . '_' . $row['eventtypeID'];
                 $eventtypes[$displaymsg] = $row;
               }
             }
@@ -227,7 +227,7 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
             foreach ($item3_array as $item) {
               echo "<option value='$item[1]'";
               if ($nr == $item[1]) {
-                echo " selected";
+                echo ' selected';
               }
               echo ">$item[0]</option>\n";
             }
@@ -255,7 +255,7 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
       </div>
       <div class='row'>
         <div class='col-sm-12'>
-          <input name='showspouse' type='checkbox' value='yes'<?php if ($showspouse == "yes") {echo " checked"; } ?> /> <?php echo uiTextSnippet('showspouse'); ?>
+          <input name='showspouse' type='checkbox' value='yes'<?php if ($showspouse == 'yes') {echo ' checked'; } ?> /> <?php echo uiTextSnippet('showspouse'); ?>
         </div>
       </div>
       <div class='row'>
@@ -290,23 +290,23 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
       document.search.mybool.selectedIndex = 0;
       document.search.idqualify.selectedIndex = 0;
 
-      document.search.mylastname.value = "";
-      document.search.myfirstname.value = "";
-      document.search.mynickname.value = "";
-      document.search.myprefix.value = "";
-      document.search.mysuffix.value = "";
-      document.search.mytitle.value = "";
-      document.search.mybirthplace.value = "";
-      document.search.mybirthyear.value = "";
-      document.search.myaltbirthplace.value = "";
-      document.search.myaltbirthyear.value = "";
-      document.search.mydeathplace.value = "";
-      document.search.mydeathyear.value = "";
-      document.search.myburialplace.value = "";
-      document.search.myburialyear.value = "";
+      document.search.mylastname.value = '';
+      document.search.myfirstname.value = '';
+      document.search.mynickname.value = '';
+      document.search.myprefix.value = '';
+      document.search.mysuffix.value = '';
+      document.search.mytitle.value = '';
+      document.search.mybirthplace.value = '';
+      document.search.mybirthyear.value = '';
+      document.search.myaltbirthplace.value = '';
+      document.search.myaltbirthyear.value = '';
+      document.search.mydeathplace.value = '';
+      document.search.mydeathyear.value = '';
+      document.search.myburialplace.value = '';
+      document.search.myburialyear.value = '';
       document.search.mygender.selectedIndex = 0;
-      document.search.mysplname.value = "";
-      document.search.mypersonid.value = "";
+      document.search.mysplname.value = '';
+      document.search.mypersonid.value = '';
 
       document.search.showdeath.checked = false;
       document.search.showspouse.checked = false;
@@ -332,12 +332,12 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
       var thisfield;
       var found = 0;
 
-      if (thisform.mysplname.value !== "" && (thisform.mygender.value === "")) {
+      if (thisform.mysplname.value !== '' && (thisform.mygender.value === '')) {
         alert(textSnippet('spousemore'));
         return false;
       }
 
-      if (thisform.mysplname.value !== "" && thisform.mybool.selectedIndex > 0) {
+      if (thisform.mysplname.value !== '' && thisform.mybool.selectedIndex > 0) {
         alert(textSnippet('joinor'));
         return false;
       }
@@ -349,14 +349,14 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
         URL = URL + "&showspouse=yes";
 
       <?php
-      $qualifiers = ["ln", "fn", "id", "bp", "by", "cp", "cy", "dp", "dy", "brp", "bry", "nn", "t", "pf", "sf", "sp", "ge"];
-      $criteria = ["lastname", "firstname", "personid", "birthplace", "birthyear", "altbirthplace", "altbirthyear", "deathplace", "deathyear", "burialplace", "burialyear", "nickname", "title", "prefix", "suffix", "splname", "gender"];
+      $qualifiers = ['ln', 'fn', 'id', 'bp', 'by', 'cp', 'cy', 'dp', 'dy', 'brp', 'bry', 'nn', 't', 'pf', 'sf', 'sp', 'ge'];
+      $criteria = ['lastname', 'firstname', 'personid', 'birthplace', 'birthyear', 'altbirthplace', 'altbirthyear', 'deathplace', 'deathyear', 'burialplace', 'burialyear', 'nickname', 'title', 'prefix', 'suffix', 'splname', 'gender'];
 
       $qcount = 0;
       $found = 0;
       foreach ($criteria as $criterion) {
       ?>
-      if (thisform.my<?php echo $criterion; ?>.value !== "" || thisform.<?php echo $qualifiers[$qcount]; ?>qualify.value === 'exists' || thisform.<?php echo $qualifiers[$qcount]; ?>qualify.value === "dnexist") {
+      if (thisform.my<?php echo $criterion; ?>.value !== '' || thisform.<?php echo $qualifiers[$qcount]; ?>qualify.value === 'exists' || thisform.<?php echo $qualifiers[$qcount]; ?>qualify.value === 'dnexist') {
         URL = URL + "&my<?php echo $criterion; ?>=" + thisform.my<?php echo $criterion; ?>.value;
         URL = URL + "&<?php echo $qualifiers[$qcount]; ?>qualify=" + thisform.<?php echo $qualifiers[$qcount]; ?>qualify[thisform.<?php echo $qualifiers[$qcount]; ?>qualify.selectedIndex].value;
         found++;
@@ -371,15 +371,15 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
       while ($row = tng_fetch_assoc($etresult)) {
       if (!in_array($row[tag], $dontdo)) {
       ?>
-      if (thisform.cef<?php echo $row['eventtypeID']; ?>.value !== "" || thisform.cfq<?php echo $row['eventtypeID']; ?>.value === 'exists' || thisform.cfq<?php echo $row['eventtypeID']; ?>.value === "dnexist") {
+      if (thisform.cef<?php echo $row['eventtypeID']; ?>.value !== '' || thisform.cfq<?php echo $row['eventtypeID']; ?>.value === 'exists' || thisform.cfq<?php echo $row['eventtypeID']; ?>.value === 'dnexist') {
         URL = URL + "&cef<?php echo $row['eventtypeID']; ?>=" + thisform.cef<?php echo $row['eventtypeID']; ?>.value;
         URL = URL + "&cfq<?php echo $row['eventtypeID']; ?>=" + thisform.cfq<?php echo $row['eventtypeID']; ?>[thisform.cfq<?php echo $row['eventtypeID']; ?>.selectedIndex].value;
       }
-      if (thisform.cep<?php echo $row['eventtypeID']; ?>.value !== "" || thisform.cpq<?php echo $row['eventtypeID']; ?>.value === 'exists' || thisform.cpq<?php echo $row['eventtypeID']; ?>.value === "dnexist") {
+      if (thisform.cep<?php echo $row['eventtypeID']; ?>.value !== '' || thisform.cpq<?php echo $row['eventtypeID']; ?>.value === 'exists' || thisform.cpq<?php echo $row['eventtypeID']; ?>.value === 'dnexist') {
         URL = URL + "&cep<?php echo $row['eventtypeID']; ?>=" + thisform.cep<?php echo $row['eventtypeID']; ?>.value;
         URL = URL + "&cpq<?php echo $row['eventtypeID']; ?>=" + thisform.cpq<?php echo $row['eventtypeID']; ?>[thisform.cpq<?php echo $row['eventtypeID']; ?>.selectedIndex].value;
       }
-      if (thisform.cey<?php echo $row['eventtypeID']; ?>.value !== "" || thisform.cyq<?php echo $row['eventtypeID']; ?>.value === 'exists' || thisform.cyq<?php echo $row['eventtypeID']; ?>.value === "dnexist") {
+      if (thisform.cey<?php echo $row['eventtypeID']; ?>.value !== '' || thisform.cyq<?php echo $row['eventtypeID']; ?>.value === 'exists' || thisform.cyq<?php echo $row['eventtypeID']; ?>.value === 'dnexist') {
         URL = URL + "&cey<?php echo $row['eventtypeID']; ?>=" + thisform.cey<?php echo $row['eventtypeID']; ?>.value;
         URL = URL + "&cyq<?php echo $row['eventtypeID']; ?>=" + thisform.cyq<?php echo $row['eventtypeID']; ?>[thisform.cyq<?php echo $row['eventtypeID']; ?>.selectedIndex].value;
       }

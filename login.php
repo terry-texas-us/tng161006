@@ -1,7 +1,7 @@
 <?php
 
 require 'begin.php';
-$tngconfig['maint'] = "";
+$tngconfig['maint'] = '';
 require 'genlib.php';
 require 'getlang.php';
 
@@ -10,12 +10,12 @@ require 'loginlib.php';
 
 session_start();
 
-$flags['error'] = "";
+$flags['error'] = '';
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('login'));
 ?>
 <!DOCTYPE html>

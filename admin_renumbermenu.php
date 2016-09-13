@@ -6,7 +6,7 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('backuprestore'));
 ?>
 <!DOCTYPE html>
@@ -17,10 +17,10 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
     <?php
     echo $adminHeaderSection->build('backuprestore-renumber', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_utilities.php?sub=tables", uiTextSnippet('tables'), "tables"]);
-    $navList->appendItem([true, "admin_utilities.php?sub=structure", uiTextSnippet('tablestruct'), "structure"]);
-    $navList->appendItem([true, "admin_renumbermenu.php", uiTextSnippet('renumber'), "renumber"]);
-    echo $navList->build("renumber");
+    $navList->appendItem([true, 'admin_utilities.php?sub=tables', uiTextSnippet('tables'), 'tables']);
+    $navList->appendItem([true, 'admin_utilities.php?sub=structure', uiTextSnippet('tablestruct'), 'structure']);
+    $navList->appendItem([true, 'admin_renumbermenu.php', uiTextSnippet('renumber'), 'renumber']);
+    echo $navList->build('renumber');
     ?>
     <p><?php echo uiTextSnippet('reseqwarn'); ?></p>
 
@@ -57,14 +57,14 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
       </table>
       <br>
       <input name='start' type='hidden' value='1'/>
-      <input type='submit' value="<?php echo uiTextSnippet('renumber'); ?>"<?php if (!$tngconfig['maint']) {echo " disabled";} ?>>
+      <input type='submit' value="<?php echo uiTextSnippet('renumber'); ?>"<?php if (!$tngconfig['maint']) {echo ' disabled';} ?>>
       <?php
       if (!$tngconfig['maint']) {
-        echo "<span>" . uiTextSnippet('needmaint') . "</span>";
+        echo '<span>' . uiTextSnippet('needmaint') . '</span>';
       }
       ?>
       <br><br>
-      <?php echo "<p>*" . uiTextSnippet('niprefix') . "</p>\n"; ?>
+      <?php echo '<p>*' . uiTextSnippet('niprefix') . "</p>\n"; ?>
     </form>
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->

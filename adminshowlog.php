@@ -8,9 +8,9 @@ require 'version.php';
 
 require $subroot . 'logconfig.php';
 
-$loglines = $adminmaxloglines ? $adminmaxloglines : "";
+$loglines = $adminmaxloglines ? $adminmaxloglines : '';
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('adminlogfile'));
 ?>
 <!DOCTYPE html>

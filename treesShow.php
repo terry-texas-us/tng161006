@@ -9,7 +9,7 @@ $result = tng_query($query);
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('trees'));
 ?>
 <!DOCTYPE html>
@@ -50,9 +50,9 @@ $headSection->setTitle(uiTextSnippet('trees'));
           echo "<td>$i</td>\n";
           echo "<td><a href=\"showtree.php?tree=$row[gedcom]\">{$row['treename']}</a></td>";
           echo "<td>{$row['description']}</td>";
-          echo "<td><a href=\"search.php\">" . number_format($prow['pcount']) . "</a></td>";
-          echo "<td><a href=\"famsearch.php\">" . number_format($frow['fcount']) . "</a></td>";
-          echo "<td><a href=\"sourcesShow.php\">" . number_format($srow['scount']) . "</a></td>";
+          echo "<td><a href='search.php'>" . number_format($prow['pcount']) . '</a></td>';
+          echo "<td><a href='famsearch.php'>" . number_format($frow['fcount']) . '</a></td>';
+          echo "<td><a href='sourcesShow.php'>" . number_format($srow['scount']) . '</a></td>';
         echo "</tr>\n";
         $i++;
       }

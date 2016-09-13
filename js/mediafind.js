@@ -62,7 +62,7 @@ function toggleEventLink(index) {
     }
     //blank out ID box
     if (index >= 0) {
-        newlink.value = "";
+        newlink.value = '';
     }
 
     //hide/reveal checkbox
@@ -137,7 +137,7 @@ function fillList() {
         displayval = evnodes['display'].firstChild.nodeValue;
         info = evnodes['info'].firstChild.nodeValue;
         if (info !== "-1")
-            displaystr = displayval + ": " + info;
+            displaystr = displayval + ': ' + info;
         else
             displaystr = displayval;
 
@@ -150,7 +150,7 @@ function getTextNodes(node) {
     var textNodes = new Array();
 
     for (var i = 0; i < node.childNodes.length; i++) {
-        if (node.childNodes[i].nodeType === "1") {
+        if (node.childNodes[i].nodeType === '1') {
             textNodes[node.childNodes[i].nodeName] = node.childNodes[i];
         }
     }
@@ -245,10 +245,10 @@ function addMedia2EntityLink(form, newEntityID, num) {
             data: params,
             dataType: 'html',
             success: function (req) {
-                if (req === "1") {
+                if (req === '1') {
                     $('#alink_error').html(textSnippet('duplinkmsg'));
                     $('#alink_error').fadeIn(200);
-                } else if (req.responseText === "2") {
+                } else if (req.responseText === '2') {
                     $('#alink_error').html(textSnippet('invlinkmsg'));
                     $('#alink_error').fadeIn(200);
                 } else {
@@ -263,7 +263,7 @@ function addMedia2EntityLink(form, newEntityID, num) {
 
                     var linkID = parseInt(req);
                     var newrow;
-                    var displayID = linktype !== 'L' ? ' (' + entityID + ')' : "";
+                    var displayID = linktype !== 'L' ? ' (' + entityID + ')' : '';
                     var dims = "width=\"20\" height=\"20\" class=\"icon-sm\"";
                     var treename = form.tree1.options[form.tree1.selectedIndex].text;
                     var treeID = form.tree1.options[form.tree1.selectedIndex].value;
@@ -299,7 +299,7 @@ function addMedia2EntityLink(form, newEntityID, num) {
                     if (type === "media") {
                         var td5 = insertCell(newtr, 5, "normal", '&nbsp;')
                         td5.id = 'alt_' + linkID;
-                        //var defphoto = vars[2] == "1" ? textSnippet('yes') : "";
+
                         var td6 = insertCell(newtr, 6, "normal", '<input id="defc' + linkID + '" name="defc' + linkID + '" type="checkbox" onclick="toggleDefault(this,\'' + entityID + '\');" value="1"/>');
                         td6.id = 'def_' + linkID;
                         td6.setAttribute('align', 'center');
@@ -319,7 +319,7 @@ function addMedia2EntityLink(form, newEntityID, num) {
                     var id = linktype === 'L' ? num : entityID;
                     if ($('#link_' + id).length) {
                         $('#link_' + id).hide();
-                        if (hasthumb === "1" && type === "media")
+                        if (hasthumb === '1' && type === "media")
                             $('#sdef_' + entityID).html('<a href="#" onclick="return setDefault(' + linkID + ',\'' + entityID + '\');" class="smallest">' + textSnippet('makedefault') + '</a>');
                         $('#linked_' + id).fadeIn(400);
                     }

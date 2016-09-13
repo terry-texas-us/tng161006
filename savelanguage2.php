@@ -19,11 +19,11 @@ if (file_exists($languagesPath . $row['folder'])) {
   $newroot = preg_replace('/ /', '', $newroot);
   $newroot = preg_replace('/\./', '', $newroot);
 
-  setcookie("tnglang_$newroot", $row['folder'], time() + 31536000, "/");
-  setcookie("tngchar_$newroot", $row['charset'], time() + 31536000, "/");
+  setcookie("tnglang_$newroot", $row['folder'], time() + 31536000, '/');
+  setcookie("tngchar_$newroot", $row['charset'], time() + 31536000, '/');
 }
 if ($_SESSION['destinationpage8']) {
-  header("Location: " . $_SESSION['destinationpage8']);
+  header('Location: ' . $_SESSION['destinationpage8']);
 } else {
-  header("Location: " . $_SERVER['HTTP_REFERER']);
+  header('Location: ' . $_SERVER['HTTP_REFERER']);
 }

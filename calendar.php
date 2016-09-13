@@ -2,13 +2,13 @@
 
 require 'tng_begin.php';
 
-$logstring = "<a href=\"calendar.php?living=$living&amp;hide=$hide&amp;m=$m&amp;year=$year\">" . xmlcharacters(uiTextSnippet('calendar')) . "</a>";
+$logstring = "<a href=\"calendar.php?living=$living&amp;hide=$hide&amp;m=$m&amp;year=$year\">" . xmlcharacters(uiTextSnippet('calendar')) . '</a>';
 writelog($logstring);
 preparebookmark($logstring);
 
 $ucharset = strtoupper($session_charset);
 function substr_unicode($str, $start, $len = null) {
-    return join("", array_slice(preg_split("//u", $str, -1, PREG_SPLIT_NO_EMPTY), $start, $len));
+    return join('', array_slice(preg_split("//u", $str, -1, PREG_SPLIT_NO_EMPTY), $start, $len));
 }
 
 $flags['styles'] = "<link href=\"css/calendar.css\" rel=\"stylesheet\" type=\"text/css\" />\n";
@@ -16,7 +16,7 @@ $flags['styles'] = "<link href=\"css/calendar.css\" rel=\"stylesheet\" type=\"te
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('calendar'));
 ?>
 <!DOCTYPE html>
@@ -37,8 +37,8 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     $current = getdate(time());
 
     $thisMonth = ( is_numeric($_GET['m']) && ($_GET['m'] < 13) )
-      ? sprintf("%02d", $_GET['m'])
-      : sprintf("%02d", $current['mon']);
+      ? sprintf('%02d', $_GET['m'])
+      : sprintf('%02d', $current['mon']);
 
     $thisYear = ( is_numeric($_GET['y']) && ($_GET['y'] > 1000) && ($_GET['y'] < 3000) )
       ? $_GET['y']
@@ -54,11 +54,11 @@ $headSection->setTitle(uiTextSnippet('calendar'));
 
     $thisMonthName  = uiTextSnippet(strtoupper(date('F', $time)));
 
-    $nextMonth  = date('n', strtotime($dateString . " +1 month"));
+    $nextMonth  = date('n', strtotime($dateString . ' +1 month'));
     $nextMonthYear  = $nextMonth == 1 ? $thisYear + 1 : $thisYear;
     $nextYear  = $thisYear + 1;
 
-    $lastMonth  = date('n', strtotime($dateString . " -1 month"));
+    $lastMonth  = date('n', strtotime($dateString . ' -1 month'));
     $lastMonthYear  = $lastMonth == 12 ? $thisYear - 1 : $thisYear;
     $lastYear  = $thisYear - 1;
 
@@ -74,15 +74,15 @@ $headSection->setTitle(uiTextSnippet('calendar'));
       if (in_array($key, $hideEvents)) {
         continue;
       }
-      $select[] = $key . "date";
-      $select[] = $key . "datetr";
-      $select[] = $key . "place";
+      $select[] = $key . 'date';
+      $select[] = $key . 'datetr';
+      $select[] = $key . 'place';
       $where[] = $key . "datetr LIKE '%-$thisMonth-%'";
     }
     if (! empty($where)) {
       $sql = "SELECT personID, gedcom, firstname, nickname, lnprefix, lastname, suffix, living, branch, private, " . implode(', ', $select) . "
         FROM $people_table
-        WHERE (" . implode(' OR ', $where) . ")";
+        WHERE (" . implode(' OR ', $where) . ')';
 
       if ($showLiving == '1') {
         $sql .= ' AND living = 1';
@@ -107,7 +107,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
             continue;
           } else {
             $longname = getName($row);
-            if ($ucharset == "UTF-8") {
+            if ($ucharset == 'UTF-8') {
               $name = (mb_strlen($longname) > $truncateNameAfter)
                 ? substr_unicode($longname, 0, $truncateNameAfter) . '...'
                 : $longname;
@@ -125,7 +125,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
                 $date = substr($row[$field], 5);
                 $html = '<img src="' . 'img/' . $val . '" class="calIcon" alt=""><a href="peopleShowPerson.php?personID=' . $row['personID'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
 
-                if (strpos($date, "-00")) {
+                if (strpos($date, '-00')) {
                   $html = '<span>' . $html . '</span>';
                 }
                 $events[$date][$key][$row['gedcom']][$row['personID']] = $html;
@@ -153,7 +153,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     if (! empty($where)) {
       $sql = "SELECT familyID, gedcom, husband, wife, living, private, " . implode(', ', $select) . "
         FROM $families_table
-        WHERE (" . implode(' OR ', $where) . ")";
+        WHERE (" . implode(' OR ', $where) . ')';
 
       if ($showLiving == '1') {
         $sql .= ' AND living = 1';
@@ -163,7 +163,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
       $result = tng_query($sql);
       # BREAK
       if (!$result) {
-        echo "Err 2<br>";
+        echo 'Err 2<br>';
         echo tng_error();
         exit;
       }
@@ -180,7 +180,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
             continue;
           } else {
             $longname = getFamilyName($row);
-            if($ucharset == "UTF-8") {
+            if($ucharset == 'UTF-8') {
               $name = (mb_strlen($longname) > $truncateNameAfter)
                 ? substr_unicode($longname, 0, $truncateNameAfter) . '...'
                 : $longname;
@@ -198,7 +198,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
                 $date = substr($row[$field], 5);
                 $html = '<img src="' . 'img/' . $val . '" class="calIcon" alt=""><a href="familiesShowFamily.php?familyID=' . $row['familyID'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
 
-                if (strpos($date, "-00")) {
+                if (strpos($date, '-00')) {
                   $html = '<span>' . $html . '</span>';
                 }
                 $events[$date][$key][$row['gedcom']][$row['familyID']] = $html;
@@ -225,7 +225,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
       $result = tng_query($sql);
       # BREAK
       if (!$result) {
-        echo "Err 3<br>";
+        echo 'Err 3<br>';
         echo tng_error();
         exit;
       }
@@ -248,7 +248,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
 
             # BREAK
             if (!$result2) {
-              echo "Err 4<br>";
+              echo 'Err 4<br>';
               echo tng_error();
               exit;
             }
@@ -268,7 +268,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
 
             # BREAK
             if (!$result3) {
-              echo "Err 5<br>";
+              echo 'Err 5<br>';
               echo tng_error();
               exit;
             }
@@ -302,7 +302,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
       }
     }
 
-    $args = "?living=$showLiving&amp;hide=" . implode(',', $hideEvents) . "&amp;";
+    $args = "?living=$showLiving&amp;hide=" . implode(',', $hideEvents) . '&amp;';
 
     // Write the calendar
     ?> <div id="calWrapper"> <?php
@@ -341,12 +341,12 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     <div style="text-align: right;">
     <div style="float: left;">
     <?php
-      echo "<a href=\"anniversaries.php?tngmonth=$m&amp;tngneedresults=1\"><b>&gt;&gt; " . uiTextSnippet('anniversaries') . "</b></a>";
+      echo "<a href=\"anniversaries.php?tngmonth=$m&amp;tngneedresults=1\"><b>&gt;&gt; " . uiTextSnippet('anniversaries') . '</b></a>';
     ?>
     </div>
     <?php
         echo '<b>' . uiTextSnippet('filter') . ':</b>&nbsp; ';
-        $args = "&amp;hide=" . implode(',', $hideEvents) . "&amp;m=$thisMonth&amp;year=$thisYear";
+        $args = '&amp;hide=' . implode(',', $hideEvents) . "&amp;m=$thisMonth&amp;year=$thisYear";
         echo $showLiving == 2 ? '<b>' . uiTextSnippet('all') . '</b> &nbsp;|&nbsp; ' : '<a href="?living=2' . $args . '">' . uiTextSnippet('all') . '</a> &nbsp;|&nbsp; ';
         echo $showLiving == 1 ? '<b>' . uiTextSnippet('living') . '</b> &nbsp;|&nbsp; ' : '<a href="?living=1' . $args . '">' . uiTextSnippet('living') . '</a> &nbsp;|&nbsp; ';
         echo !$showLiving ? '<b>' . uiTextSnippet('notliving') . '</b>': '<a href="?living=0' . $args . '">' . uiTextSnippet('notliving') . '</a>';
@@ -384,7 +384,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
         echo "<td class=\"$class\">\n";
         echo "<a href=\"anniversaries.php?tngdaymonth=$thisDay&amp;tngmonth=$thisMonth&amp;tngneedresults=1\" class=\"calDate\">$thisDay</a><br>\n<div class=\"calEvents\">\n";
 
-        $thisDate = "$thisMonth-" . sprintf("%02d", $thisDay);
+        $thisDate = "$thisMonth-" . sprintf('%02d', $thisDay);
         if (array_key_exists($thisDate, $events)) {
           $j = 0;
           foreach ( array_keys($events[$thisDate]) as $event) {
@@ -448,7 +448,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
         $result = tng_query($sql);
         # BREAK
         if (!$result) {
-          echo "Err 6<br>";
+          echo 'Err 6<br>';
           echo tng_error();
           exit;
         }

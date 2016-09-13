@@ -11,7 +11,7 @@ $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('users'));
 ?>
 <!DOCTYPE html>
@@ -22,15 +22,15 @@ $headSection->setTitle(uiTextSnippet('users'));
     <?php
     echo $adminHeaderSection->build('users-review', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "usersBrowse.php", uiTextSnippet('search'), "finduser"]);
-    $navList->appendItem([$allowAdd, "usersAdd.php", uiTextSnippet('add'), "adduser"]);
-    //    $navList->appendItem([$allowEdit, "usersReview.php", uiTextSnippet('review') . $revstar, "review"]);
-    $navList->appendItem([true, "usersSendMail.php", uiTextSnippet('email'), "mail"]);
-    echo $navList->build("review");
+    $navList->appendItem([true, 'usersBrowse.php', uiTextSnippet('search'), 'finduser']);
+    $navList->appendItem([$allowAdd, 'usersAdd.php', uiTextSnippet('add'), 'adduser']);
+    //    $navList->appendItem([$allowEdit, 'usersReview.php', uiTextSnippet('review') . $revstar, 'review']);
+    $navList->appendItem([true, 'usersSendMail.php', uiTextSnippet('email'), 'mail']);
+    echo $navList->build('review');
     ?>
     <em><?php echo uiTextSnippet('editnewusers'); ?></em><br><br>
     <?php
-    echo "<p>" . uiTextSnippet('matches') . ": <span class=\"restotal\">$numrows</span></p>";
+    echo '<p>' . uiTextSnippet('matches') . ": <span class=\"restotal\">$numrows</span></p>";
     ?>
     <form id='users-review' name='form2' action='userDeleteSelectedFormAction.php' method='post'>
       <?php if ($allowDelete) { ?>
@@ -49,12 +49,12 @@ $headSection->setTitle(uiTextSnippet('users'));
               <?php } ?>
               <th><?php echo uiTextSnippet('username'); ?></th>
               <th><?php echo uiTextSnippet('description'); ?></th>
-              <th><?php echo uiTextSnippet('realname') . " / " . uiTextSnippet('email'); ?></th>
+              <th><?php echo uiTextSnippet('realname') . ' / ' . uiTextSnippet('email'); ?></th>
               <th><?php echo uiTextSnippet('dtregistered'); ?></th>
             </tr>
           </thead>
           <?php
-          $actionstr = "";
+          $actionstr = '';
           if ($allowEdit) {
             $actionstr .= "<a href=\"usersEdit.php?newuser=1&amp;userID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
@@ -63,10 +63,10 @@ $headSection->setTitle(uiTextSnippet('users'));
           if ($allowDelete) {
             $actionstr .= "<a id='delete' href='#' title='" . uiTextSnippet('delete') . "' data-user-id='xxx'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
-            $actionstr .= "</a>";
+            $actionstr .= '</a>';
           }
           while ($row = tng_fetch_assoc($result)) {
-            $newactionstr = preg_replace("/xxx/", $row['userID'], $actionstr);
+            $newactionstr = preg_replace('/xxx/', $row['userID'], $actionstr);
             echo "<tr id=\"row_{$row['userID']}\">\n";
               echo "<td><span>$newactionstr</span></td>\n";
               if ($allowDelete) {
@@ -76,7 +76,7 @@ $headSection->setTitle(uiTextSnippet('users'));
               echo "<td><span>{$row['description']}</span></td>\n";
               echo "<td><span>{$row['realname']}";
               if ($row['realname'] && $row['email']) {
-                echo "<br>";
+                echo '<br>';
               }
               echo "<a href=\"mailto:" . $row['email'] . "\">" . $row['email'] . "</a></span></td>\n";
               echo "<td><span>{$row['dt_registered_fmt']}</span></td>\n";

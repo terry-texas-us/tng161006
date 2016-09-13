@@ -10,11 +10,11 @@ $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
 
-$row['note'] = str_replace("&", "&amp;", $row['note']);
-$row['note'] = preg_replace("/\"/", "&#34;", $row['note']);
+$row['note'] = str_replace('&', '&amp;', $row['note']);
+$row['note'] = preg_replace('/\"/', '&#34;', $row['note']);
 
-$helplang = findhelp("notes_help.php");
-header("Content-type:text/html; charset=" . $session_charset);
+$helplang = findhelp('notes_help.php');
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <form name='form3' action='' onSubmit="return updateNote(this);">
   <div style='float: right; text-align: center'>
@@ -41,9 +41,9 @@ header("Content-type:text/html; charset=" . $session_charset);
         <?php
         echo "<input name='private' type='checkbox' value='1'";
         if ($row['secret']) {
-          echo " checked";
+          echo ' checked';
         }
-        echo "> " . uiTextSnippet('private');
+        echo '> ' . uiTextSnippet('private');
         ?>
       </td>
     </tr>

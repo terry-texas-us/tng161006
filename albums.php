@@ -20,7 +20,7 @@ function getAlbumPhoto($albumID, $albumname) {
   $tusefolder = $trow['usecollfolder'] ? $mediatypes_assoc[$tmediatypeID] : $mediapath;
   tng_free_result($result2);
 
-  $imgsrc = "";
+  $imgsrc = '';
   if ($trow['thumbpath'] && file_exists("$rootpath$tusefolder/" . $trow['thumbpath'])) {
     $foundliving = 0;
     $foundprivate = 0;
@@ -80,7 +80,7 @@ function getAlbumPhoto($albumID, $albumname) {
       if (function_exists(imageJpeg)) {
         $imgsrc .= " onmouseover=\"showPreview('$albumID','" . urlencode("$tusefolder/{$trow['path']}") . "','');\" onmouseout=\"closePreview('$albumID','');\" onclick=\"closePreview('$albumID','');\"";
       }
-      $imgsrc .= "><img src=\"$tusefolder/" . str_replace("%2F", "/", rawurlencode($trow['thumbpath'])) . "\" class=\"thumb\" $size[3] alt=\"$albumname\"></a>";
+      $imgsrc .= "><img src=\"$tusefolder/" . str_replace('%2F', '/', rawurlencode($trow['thumbpath'])) . "\" class=\"thumb\" $size[3] alt=\"$albumname\"></a>";
     }
   }
   return $imgsrc;

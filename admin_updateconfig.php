@@ -5,12 +5,12 @@ require 'processvars.php';
 require 'adminlib.php';
 
 if (!count($_POST)) {
-  header("Location: admin.php");
+  header('Location: admin.php');
   exit;
 }
 
 if (!$safety) {
-  header("Location: admin_login.php");
+  header('Location: admin_login.php');
   exit;
 }
 
@@ -21,7 +21,7 @@ if ($link) {
 
   if (!$allowEdit) {
     $message = uiTextSnippet('norights');
-    header("Location: admin_login.php?message=" . urlencode($message));
+    header('Location: admin_login.php?message=' . urlencode($message));
     exit;
   }
 }
@@ -30,23 +30,23 @@ $sitename = stripslashes($sitename);
 $site_desc = stripslashes($site_desc);
 $dbowner = stripslashes($dbowner);
 
-$sitename = preg_replace("/\"/", "\\\"", $sitename);
-$site_desc = preg_replace("/\"/", "\\\"", $site_desc);
-$dbowner = preg_replace("/\"/", "\\\"", $dbowner);
+$sitename = preg_replace('/\"/', '\\\"', $sitename);
+$site_desc = preg_replace('/\"/', '\\\"', $site_desc);
+$dbowner = preg_replace('/\"/', '\\\"', $dbowner);
 
 $doctype = addslashes($doctype);
 
 require 'adminlog.php';
 
-$fp = fopen($subroot . "config.php", "w", 1);
+$fp = fopen($subroot . 'config.php', 'w', 1);
 if (!$fp) {
-  die(uiTextSnippet('cannotopen') . " config.php");
+  die(uiTextSnippet('cannotopen') . ' config.php');
 }
 
 flock($fp, LOCK_EX);
 
 if ($new_database_username) {
-  $tng_notinstalled = "";
+  $tng_notinstalled = '';
 }
 
 fwrite($fp, "<?php\n");
@@ -101,7 +101,7 @@ fwrite($fp, "\$sitename = \"$sitename\";\n");
 fwrite($fp, "\$site_desc = \"$site_desc\";\n");
 fwrite($fp, "\$tngconfig['doctype'] = \"$doctype\";\n");
 if (!$target) {
-  $target = "_self";
+  $target = '_self';
 }
 fwrite($fp, "\$target = \"$target\";\n");
 fwrite($fp, "\$language = \"$language\";\n");
@@ -161,8 +161,8 @@ fwrite($fp, "\$chooselang = \"$chooselang\";\n");
 if (!$chooselang) {
   $session_language = $_SESSION['session_language'] = $language;
   $session_charset = $_SESSION['session_charset'] = $charset;
-  setcookie("tnglangfolder", $language, time() + 31536000, "/");
-  setcookie("tngcharset", $charset, time() + 31536000, "/");
+  setcookie('tnglangfolder', $language, time() + 31536000, "/");
+  setcookie('tngcharset', $charset, time() + 31536000, "/");
 }
 fwrite($fp, "\$nonames = \"$nonames\";\n");
 fwrite($fp, "\$tngconfig['nnpriv'] = \"$nnpriv\";\n");
@@ -205,7 +205,7 @@ fwrite($fp, "\n");
 flock($fp, LOCK_UN);
 fclose($fp);
 
-$fp = fopen("subroot.php", "w", 1);
+$fp = fopen('subroot.php', 'w', 1);
 if ($fp) {
   flock($fp, LOCK_EX);
   fwrite($fp, "<?php\n");
@@ -218,5 +218,5 @@ if ($fp) {
 }
 adminwritelog(uiTextSnippet('modifysettings'));
 
-$oldsubroot = $newsubroot != $subroot ? "?sr=$subroot" : "";
+$oldsubroot = $newsubroot != $subroot ? "?sr=$subroot" : '';
 header("Location: admin_setup.php$oldsubroot");

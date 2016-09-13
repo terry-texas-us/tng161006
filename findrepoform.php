@@ -10,14 +10,14 @@ if ($mediaID) {
   if ($albumID) {
     $mediaoption = ",albumID:'$albumID'";
   } else {
-    $mediaoption = "";
+    $mediaoption = '';
   }
 }
 $bailtext = $mediaoption ? uiTextSnippet('finish') : uiTextSnippet('cancel');
 
 $applyfilter = "applyFilter({form:'findrepoform1', fieldId:'mytitle', type:'R', destdiv:'reporesults'$mediaoption});";
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <div id='findrepodiv'>
   <form id='findrepoform1' name='findrepoform1' action='' method='post' onsubmit="return <?php echo $applyfilter; ?>">

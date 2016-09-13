@@ -7,7 +7,7 @@ require 'checklogin.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 require 'adminlog.php';
@@ -25,9 +25,9 @@ $personID = $row['personID'];
 $familyID = $row['familyID'];
 $eventID = $row['eventID'];
 
-$persfamID = $personID ? uiTextSnippet('person') . " " . $personID : uiTextSnippet('family') . " " . $familyID;
+$persfamID = $personID ? uiTextSnippet('person') . ' ' . $personID : uiTextSnippet('family') . ' ' . $familyID;
 
-$changedate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
+$changedate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
 $eventdatetr = convertDate($eventdate);
 //don't forget to save date
 
@@ -46,73 +46,73 @@ if ($choice == uiTextSnippet('savedel')) {
     $needfamilies = 0;
     $needchildren = 0;
     switch ($eventID) {
-      case "TITL":
+      case 'TITL':
         $factfield = "title = \"$info\"";
         break;
-      case "NPFX":
+      case 'NPFX':
         $factfield = "prefix = \"$info\"";
         break;
-      case "NSFX":
+      case 'NSFX':
         $factfield = "suffix = \"$info\"";
         break;
-      case "NICK":
+      case 'NICK':
         $factfield = "nickname = \"$info\"";
         break;
-      case "BIRT":
+      case 'BIRT':
         $datefield = "birthdate = \"$eventdate\", birthdatetr = \"$eventdatetr\"";
         $placefield = "birthplace = \"$eventplace\"";
         break;
-      case "CHR":
+      case 'CHR':
         $datefield = "altbirthdate = \"$eventdate\", altbirthdatetr = \"$eventdatetr\"";
         $placefield = "altbirthplace = \"$eventplace\"";
         break;
-      case "BAPL":
+      case 'BAPL':
         $datefield = "baptdate = \"$eventdate\", baptdatetr = \"$eventdatetr\"";
         $placefield = "baptplace = \"$eventplace\"";
         break;
-      case "CONF":
+      case 'CONF':
         $datefield = "confdate = \"$eventdate\", confdatetr = \"$eventdatetr\"";
         $placefield = "confplace = \"$eventplace\"";
         break;
-      case "INIT":
+      case 'INIT':
         $datefield = "initdate = \"$eventdate\", initdatetr = \"$eventdatetr\"";
         $placefield = "initplace = \"$eventplace\"";
         break;
-      case "ENDL":
+      case 'ENDL':
         $datefield = "endldate = \"$eventdate\", endldatetr = \"$eventdatetr\"";
         $placefield = "endlplace = \"$eventplace\"";
         break;
-      case "DEAT":
+      case 'DEAT':
         $datefield = "deathdate = \"$eventdate\", deathdatetr = \"$eventdatetr\"";
         $placefield = "deathplace = \"$eventplace\"";
         break;
-      case "BURI":
+      case 'BURI':
         $datefield = "burialdate = \"$eventdate\", burialdatetr = \"$eventdatetr\"";
         $placefield = "burialplace = \"$eventplace\"";
         break;
-      case "MARR":
+      case 'MARR':
         $datefield = "marrdate = \"$eventdate\", marrdatetr = \"$eventdatetr\"";
         $placefield = "marrplace = \"$eventplace\"";
         $factfield = "marrtype = \"$info\"";
         $needfamilies = 1;
         break;
-      case "DIV":
+      case 'DIV':
         $datefield = "divdate = \"$eventdate\", divdatetr = \"$eventdatetr\"";
         $placefield = "divplace = \"$eventplace\"";
         $needfamilies = 1;
         break;
-      case "SLGS":
+      case 'SLGS':
         $datefield = "sealdate = \"$eventdate\", sealdatetr = \"$eventdatetr\"";
         $placefield = "sealplace = \"$eventplace\"";
         $needfamilies = 1;
         break;
-      case "SLGC":
+      case 'SLGC':
         $datefield = "sealdate = \"$eventdate\", sealdatetr = \"$eventdatetr\"";
         $placefield = "sealplace = \"$eventplace\"";
         $needchildren = 1;
         break;
     }
-    $fieldstr = $needchildren ? "" : "changedate = \"$changedate\", changedby = \"{$row['user']}\"";
+    $fieldstr = $needchildren ? '' : "changedate = \"$changedate\", changedby = \"{$row['user']}\"";
     if ($datefield) {
       $fieldstr .= $fieldstr ? ", $datefield" : $datefield;
     }
@@ -147,8 +147,8 @@ if ($choice != uiTextSnippet('postpone')) {
     $succmsg = uiTextSnippet('tentdel');
   }
 } else {
-  $succmsg = "";
-  $message = "";
+  $succmsg = '';
+  $message = '';
 }
 if ($succmsg) {
   if ($row['type'] == 'F') {

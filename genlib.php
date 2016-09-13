@@ -20,7 +20,7 @@ require 'tngrobots.php';
 $gotlastpage = false;
 $flags['error'] = $error;
 
-$tree = "";
+$tree = '';
 
 require_once 'classes/HeadElementSection.php';
 require_once 'classes/publicNavElementSection.php';
@@ -30,7 +30,7 @@ require_once 'classes/scriptsManager.php';
 
 $headSection = new HeadElementSection($sitename);
 
-NavElementSection::maintenanceState(isset($tngconfig['maint']) && $tngconfig['maint'] != "", uiTextSnippet('mainton'));
+NavElementSection::maintenanceState(isset($tngconfig['maint']) && $tngconfig['maint'] != '', uiTextSnippet('mainton'));
 
 $publicHeaderSection = new PublicHeaderElementSection();
 $publicHeaderSection->setTitle(getTemplateMessage('headtitle'));
@@ -54,7 +54,7 @@ function getSmallPhoto($medialink) {
   //determine $usefolder based on mediatypeID and usecollfolder
 
   if ($medialink['allow_living'] && $medialink['thumbpath'] && file_exists("$rootpath$usefolder/" . $medialink['thumbpath'])) {
-    $thumb = "$usefolder/" . str_replace("%2F", "/", rawurlencode($medialink['thumbpath']));
+    $thumb = "$usefolder/" . str_replace('%2F', '/', rawurlencode($medialink['thumbpath']));
     $photoinfo = getimagesize("$rootpath$usefolder/" . $medialink['thumbpath']);
     if ($photoinfo[0] <= $thumbmaxw && $photoinfo[1] <= $thumbmaxh) {
       $photohtouse = $photoinfo[1];
@@ -72,10 +72,10 @@ function getSmallPhoto($medialink) {
     $class = " class=\"thumb\"";
   } else {
     $thumb = "img/" . $mediatypes_thumbs[$mediatypeID];
-    $dimensions = $class = "";
+    $dimensions = $class = '';
   }
 
-  $cleantitle = $medialink['allow_living'] ? str_replace("\"", "'", $medialink['description']) : "";
+  $cleantitle = $medialink['allow_living'] ? str_replace("\"", "'", $medialink['description']) : '';
   $imgsrc = "<img src=\"$thumb\" $dimensions alt=\"$cleantitle\" title=\"$cleantitle\"$class>";
 
   return $imgsrc;
@@ -100,7 +100,7 @@ function getSurnameOnly($row) {
 
   $nonames = showNames($row);
   if ($row['allow_living'] || $nonames != 1) {
-    $namestr = trim($row['lnprefix'] . " " . $row['lastname']);
+    $namestr = trim($row['lnprefix'] . ' ' . $row['lastname']);
     if ($tngconfig['ucsurnames']) {
       $namestr = tng_strtoupper($namestr);
     }
@@ -116,7 +116,7 @@ function getSurnameOnly($row) {
 function getFirstNameOnly($row) {
   $nonames = showNames($row);
   if (($row['allow_living'] && $row['allow_private']) || !$nonames) {
-    $namestr = strtok($row['firstname'], " ");
+    $namestr = strtok($row['firstname'], ' ');
   } elseif ($nonames == 2) {
     $namestr = initials($row['firstname']);
   } elseif ($row['private']) {
@@ -129,8 +129,8 @@ function getFirstNameOnly($row) {
 }
 
 function doMenuItem($index, $link, $icon, $label, $page, $thispage) {
-  $class = $page == $thispage ? " class=\"here\"" : "";
-  $imagetext = $icon ? "<img class='icon-sm' src='{$icon}'>" : "";
+  $class = $page == $thispage ? " class=\"here\"" : '';
+  $imagetext = $icon ? "<img class='icon-sm' src='{$icon}'>" : '';
 
   return "<li><a id=\"a$index\" href=\"$link\"$class>$imagetext$label</a></li>\n";
 }
@@ -145,35 +145,35 @@ function tng_menu($enttype, $currpage, $entityID) {
   $menu = "<div id='tngmenu'>\n";
   $menu .= "<ul id='tngnav'>\n";
   if ($enttype == 'I') {
-    $menu .= doMenuItem($nexttab++, "peopleShowPerson.php?personID=$entityID", "svg/user.svg", uiTextSnippet('indinfo'), $currpage, "person");
-    $menu .= doMenuItem($nexttab++, "pedigree.php?personID=$entityID", "svg/flow-split-horizontal.svg", uiTextSnippet('ancestors'), $currpage, "pedigree");
-    $menu .= doMenuItem($nexttab++, "descend.php?personID=$entityID", "svg/flow-cascade.svg", uiTextSnippet('descendants'), $currpage, "descend");
-    $menu .= doMenuItem($nexttab++, "relateform.php?primaryID=$entityID", "svg/users.svg", uiTextSnippet('relationship'), $currpage, "relate");
-    $menu .= doMenuItem($nexttab++, "timeline.php?primaryID=$entityID", "svg/project.svg", uiTextSnippet('timeline'), $currpage, "timeline");
+    $menu .= doMenuItem($nexttab++, "peopleShowPerson.php?personID=$entityID", 'svg/user.svg', uiTextSnippet('indinfo'), $currpage, 'person');
+    $menu .= doMenuItem($nexttab++, "pedigree.php?personID=$entityID", 'svg/flow-split-horizontal.svg', uiTextSnippet('ancestors'), $currpage, 'pedigree');
+    $menu .= doMenuItem($nexttab++, "descend.php?personID=$entityID", 'svg/flow-cascade.svg', uiTextSnippet('descendants'), $currpage, 'descend');
+    $menu .= doMenuItem($nexttab++, "relateform.php?primaryID=$entityID", 'svg/users.svg', uiTextSnippet('relationship'), $currpage, 'relate');
+    $menu .= doMenuItem($nexttab++, "timeline.php?primaryID=$entityID", 'svg/project.svg', uiTextSnippet('timeline'), $currpage, 'timeline');
 
     if ($allow_ged && $rightbranch) {
-      $menu .= doMenuItem($nexttab++, "gedform.php?personID=$entityID", "svg/folder.svg", uiTextSnippet('extractgedcom'), $currpage, "gedcom");
+      $menu .= doMenuItem($nexttab++, "gedform.php?personID=$entityID", 'svg/folder.svg', uiTextSnippet('extractgedcom'), $currpage, 'gedcom');
     }
-    $editstr = "peopleEdit.php?person";
+    $editstr = 'peopleEdit.php?person';
   } elseif ($enttype == 'F') {
-    $menu .= doMenuItem($nexttab++, "familiesShowFamily.php?familyID=$entityID", "svg/users.svg", uiTextSnippet('family'), $currpage, "family");
-    $editstr = "familiesEdit.php?family";
+    $menu .= doMenuItem($nexttab++, "familiesShowFamily.php?familyID=$entityID", 'svg/users.svg', uiTextSnippet('family'), $currpage, 'family');
+    $editstr = 'familiesEdit.php?family';
   } elseif ($enttype == 'S') {
-    $menu .= doMenuItem($nexttab++, "sourcesShowSource.php?sourceID=$entityID", "svg/folder.svg", uiTextSnippet('source'), $currpage, "source");
-    $editstr = "admin_editsource.php?source";
+    $menu .= doMenuItem($nexttab++, "sourcesShowSource.php?sourceID=$entityID", 'svg/folder.svg', uiTextSnippet('source'), $currpage, 'source');
+    $editstr = 'admin_editsource.php?source';
   } elseif ($enttype == 'R') {
-    $menu .= doMenuItem($nexttab++, "repositoriesShowItem.php?repoID=$entityID", "svg/folder.svg", uiTextSnippet('repository'), $currpage, "repo");
-    $editstr = "repositoriesEdit.php?repo";
+    $menu .= doMenuItem($nexttab++, "repositoriesShowItem.php?repoID=$entityID", 'svg/folder.svg', uiTextSnippet('repository'), $currpage, 'repo');
+    $editstr = 'repositoriesEdit.php?repo';
   } elseif ($enttype == 'L') {
 
-    $menu .= doMenuItem($nexttab++, "placesearch.php?psearch=$entityID", "svg/home.svg", uiTextSnippet('place'), $currpage, "place");
-    $editstr = "admin_editplace.php?";
+    $menu .= doMenuItem($nexttab++, "placesearch.php?psearch=$entityID", 'svg/home.svg', uiTextSnippet('place'), $currpage, 'place');
+    $editstr = 'admin_editplace.php?';
     $entityID = urlencode($entityID);
   }
   if ($allowEdit && $rightbranch) {
-    $menu .= doMenuItem($nexttab, "$editstr" . "ID=$entityID&amp;cw=1\" target=\"_blank", "svg/new-message.svg", uiTextSnippet('edit'), $currpage, "");
+    $menu .= doMenuItem($nexttab, "$editstr" . "ID=$entityID&amp;cw=1\" target=\"_blank", 'svg/new-message.svg', uiTextSnippet('edit'), $currpage, '');
   } elseif ($emailaddr) {
-    $menu .= doMenuItem($nexttab, "mixedSuggest.php?enttype=$enttype&amp;ID=$entityID", "svg/new-message.svg", uiTextSnippet('suggest'), $currpage, "suggest");
+    $menu .= doMenuItem($nexttab, "mixedSuggest.php?enttype=$enttype&amp;ID=$entityID", 'svg/new-message.svg', uiTextSnippet('suggest'), $currpage, 'suggest');
   }
   $menu .= "</ul>\n";
   $menu .= "</div>\n";
@@ -195,10 +195,10 @@ function tng_getRightIcons() {
   }
   if (!$tngconfig['showprint']) {
     $print_url = getScriptName();
-    if (preg_match("/\?/", $print_url)) {
-      $print_url .= "&amp;tngprint=1";
+    if (preg_match('/\?/', $print_url)) {
+      $print_url .= '&amp;tngprint=1';
     } else {
-      $print_url .= "?tngprint=1";
+      $print_url .= '?tngprint=1';
     }
     $onclick = "onclick=\"newwindow = window.open('$print_url', 'tngprint', 'width = 900, height = 600, status = no, resizable = yes, scrollbars = yes'); newwindow.focus(); return false;\"";
     $title = uiTextSnippet('tngprint');
@@ -216,7 +216,7 @@ function tng_getRightIcons() {
   }
   $right_icons .= "</div>\n";
 
-  $sharemenu = "";
+  $sharemenu = '';
   if ($tngconfig['showshare']) {
     $sharemenu .= "<div id=\"shareicons\" style=\"display:none\">\n";
     $sharemenu .= "<span class='st_facebook_hcount' displayText='Facebook'></span>\n";
@@ -238,36 +238,36 @@ function getMediaHREF($row, $mlflag) {
   global $videotypes;
   global $recordingtypes;
 
-  $uselink = "";
+  $uselink = '';
 
   if ($row['form']) {
     $form = strtoupper($row['form']);
   } else {
-    preg_match("/\.(.+)$/", $row['path'], $matches);
+    preg_match('/\.(.+)$/', $row['path'], $matches);
     $form = strtoupper($matches[1]);
   }
   $thismediatype = $row['mediatypeID'];
   $usefolder = $row['usecollfolder'] ? $mediatypes_assoc[$thismediatype] : $mediapath;
 
   if (!$row['abspath'] && (in_array($form, $imagetypes) || in_array($form, $videotypes) || in_array($form, $recordingtypes) || !$form)) {
-    $uselink = "showmedia.php?mediaID=" . $row['mediaID'];
+    $uselink = 'showmedia.php?mediaID=' . $row['mediaID'];
     if ($mlflag == 1) {
-      $uselink .= "&amp;medialinkID=" . $row['medialinkID'];
+      $uselink .= '&amp;medialinkID=' . $row['medialinkID'];
     } elseif ($mlflag == 2) {
-      $uselink .= "&amp;albumlinkID=" . $row['albumlinkID'];
+      $uselink .= '&amp;albumlinkID=' . $row['albumlinkID'];
     } elseif ($mlflag == 3) {
-      $uselink .= "&amp;cemeteryID=" . $row['cemeteryID'];
+      $uselink .= '&amp;cemeteryID=' . $row['cemeteryID'];
     }
   } else {
-    if ($row['abspath'] || substr($row['path'], 0, 4) == "http" || substr($row['path'], 0, 1) == "/") {
+    if ($row['abspath'] || substr($row['path'], 0, 4) == 'http' || substr($row['path'], 0, 1) == '/') {
       $uselink = $row['path'];
     } else {
       $url = rawurlencode($row['path']);
-      $url = str_replace("%2F", "/", $url);
-      $url = str_replace("%3F", "?", $url);
-      $url = str_replace("%23", "#", $url);
-      $url = str_replace("%26", "&", $url);
-      $url = str_replace("%3D", "=", $url);
+      $url = str_replace('%2F', '/', $url);
+      $url = str_replace('%3F', '?', $url);
+      $url = str_replace('%23', '#', $url);
+      $url = str_replace('%26', '&', $url);
+      $url = str_replace('%3D', '=', $url);
       $uselink = "$usefolder/$url";
     }
   }
@@ -280,11 +280,11 @@ function getMediaHREF($row, $mlflag) {
 function insertLinks($notes) {
   if ($notes) {
     $pos = 0;
-    while (($pos = strpos($notes, "http", $pos)) !== false) {
+    while (($pos = strpos($notes, 'http', $pos)) !== false) {
       if ($pos) {
         $prevchar = substr($notes, $pos - 1, 1);
       }
-      if ($pos == 0 || ($prevchar != "\"" && $prevchar != "=")) {
+      if ($pos == 0 || ($prevchar != "\"" && $prevchar != '=')) {
         $notepos[] = $pos++;
       } else {
         $pos++;
@@ -298,7 +298,7 @@ function insertLinks($notes) {
       $rest = substr($notes, $pos);
       $linkstr = strtok($rest, " <\n\r");
       $lastchar = substr($linkstr, -1);
-      if ($lastchar == "." || $lastchar == ",") {
+      if ($lastchar == '.' || $lastchar == ',') {
         $linkstr = substr($linkstr, 0, -1);
       }
       $lastpart = substr($notes, $pos + strlen($linkstr));
@@ -314,19 +314,19 @@ function getTemplateMessage($key) {
   global $tmp;
   global $session_language;
 
-  $langkey = $key . "_" . $session_language;
+  $langkey = $key . '_' . $session_language;
 
   return isset($tmp[$langkey]) ? $tmp[$langkey] : $tmp[$key];
 }
 
 function showLinks($linkList) {
   $links = explode("\r", $linkList);
-  $finishedList = "";
+  $finishedList = '';
   if (count($links) == 1) {
     $links = explode("\n", $linkList);
   }
   foreach ($links as $link) {
-    $parts = explode(",", $link);
+    $parts = explode(',', $link);
     $len = count($parts);
     if ($len == 1) {
       $title = $href = $parts[0];
@@ -335,7 +335,7 @@ function showLinks($linkList) {
       $href = trim($parts[1]);
     } else {
       $href = trim(array_pop($parts));
-      $title = implode("", $parts);
+      $title = implode('', $parts);
     }
     $finishedList .= "<li><a href=\"$href\" title=\"$title\" target='_blank'>$title</a></li>\n";
   }

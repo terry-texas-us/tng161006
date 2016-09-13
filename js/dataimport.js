@@ -41,12 +41,12 @@ function stopimport() {
 
 function checkFile(form) {
     'use strict';
-    var rval = true;
-    var treeselect = document.form1.tree1;
+    var rval = true,
+        treeselect = document.form1.tree1;
     if (form.remotefile.value.length === 0 && form.database.value.length === 0) {
         alert(textSnippet('selectimportfile'));
         rval = false;
-    } else if (form.tree1.selectedIndex === 0 && form.tree1.options[form.tree1.selectedIndex].value === "" && !form.eventsonly.checked) {
+    } else if (form.tree1.selectedIndex === 0 && form.tree1.options[form.tree1.selectedIndex].value === '' && !form.eventsonly.checked) {
         alert(textSnippet('selectdesttree'));
         rval = false;
     }
@@ -73,10 +73,10 @@ function checkFile(form) {
             popup += '<div class="imp"><span class="implabel">' + textSnippet('media') + ': </span><span id="mediacount" class="impctr">0</span></div>\n';
             popup += '<div class="imp"><span class="implabel">' + textSnippet('places') + ': </span><span id="placecount" class="impctr">0</span></div>\n';
             popup += '</p><br><br>';
-            popup += '<progress class="progress progress-info" id="gedcom-progress" value="0" max="500"></progress>\n';
+            popup += '<progress class="progress progress-info" id="gedcom-progress" value='0' max="500"></progress>\n';
             popup += '</div>\n';
             popup += '<br><div id="implinks"><a class="btn btn-outline-secondary" href="#" onclick="return suspendimport();">' + textSnippet('stop') + '</a>';
-            if (saveimport === "1") {
+            if (saveimport === '1') {
                 treeval = treeselect.options[treeselect.selectedIndex].value;
                 popup += ' <a class="btn btn-outline-primary" href="dataImportGedcomFormAction.php?tree=' + treeval + '&resuming=1" id="resumelink" target="results" onclick="resumeimport();">' + textSnippet('resume') + '</a>';
             }
@@ -200,7 +200,7 @@ function validateTreeForm(form) {
             data: params,
             dataType: 'html',
             success: function (req) {
-                if (req === "1") {
+                if (req === '1') {
                     // tnglitbox.remove();
                     $('#myModal').modal('hide');
                     var treeselect = document.form1.tree1;
@@ -247,12 +247,12 @@ function toggleSections(flag) {
     $('#ioptions').toggle(400);
     document.form1.action = flag ? 'dataImportGedcomFormActionOnlyEventTypes.php' : 'dataImportGedcomFormAction.php';
     if (flag) {
-        document.form1.allevents.checked = "";
+        document.form1.allevents.checked = '';
     }
 }
 
 // [ts] duplicate of code in mediautils
-var gsControlName = "";
+var gsControlName = '';
 function filePicker(sControl, collection, folders) {
     'use strict';
     gsControlName = sControl;
@@ -269,14 +269,14 @@ function filePicker(sControl, collection, folders) {
 
         if (searchstring.value) {
             if (searchstring.value === origsearch.value || searchstring.value === lastsearch.value) {
-                sendstring = "";
-                lastsearch.value = "";
+                sendstring = '';
+                lastsearch.value = '';
             } else {
                 lastsearch.value = searchstring.value;
             }
         }
     } else {
-        sendstring = "";
+        sendstring = '';
     }
     folderstr = folders ? '&folders=1' : '';
     var url = 'admin_filepicker.php?path=' + collection + '&searchstring=' + sendstring + folderstr;
@@ -338,7 +338,7 @@ $('#appendall').on('click', function () {
 $('#oldimport').on('click', function () {
     'use strict';
     if (document.form1.target) {
-        document.form1.target = "";
+        document.form1.target = '';
     } else {
         document.form1.target = "results";
     }
@@ -367,7 +367,7 @@ function getBranches(treeselect, selected) {
                 data: params,
                 dataType: 'html',
                 success: function (req) {
-                    branchcounts[treeidx] = req === "0" ? 0 : 1;
+                    branchcounts[treeidx] = req === '0' ? 0 : 1;
                     if (branchcounts[treeidx]) {
                         branches[treeidx] = req;
                     }

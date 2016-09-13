@@ -6,7 +6,7 @@ require 'personlib.php';
 $result = getPersonFullPlusDates($personID);
 if (!tng_num_rows($result)) {
   tng_free_result($result);
-  header("Location: thispagedoesnotexist.html");
+  header('Location: thispagedoesnotexist.html');
   exit;
 }
 $row = tng_fetch_assoc($result);
@@ -17,7 +17,7 @@ $namestr = getName($row);
 
 tng_free_result($result);
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 
 initMediaTypes();
 
@@ -37,21 +37,21 @@ if ($years) {
 }
 echo $outputstr;
 
-echo "</div>";
+echo '</div>';
 
-$persontext = "";
+$persontext = '';
 
 $persontext .= "<table class='table table-sm'>\n";
 resetEvents();
 if ($rights['both']) {
   if ($row['nickname']) {
-    $persontext .= showEvent(["text" => uiTextSnippet('nickname'), "fact" => $row['nickname'], "event" => "NICK", "entity" => $personID, "type" => 'I']);
+    $persontext .= showEvent(['text' => uiTextSnippet('nickname'), 'fact' => $row['nickname'], 'event' => 'NICK', 'entity' => $personID, 'type' => 'I']);
   }
-  setEvent(["text" => uiTextSnippet('birth'), "fact" => $stdex['BIRT'], "date" => $row['birthdate'], "place" => $row['birthplace'], "event" => "BIRT", "entity" => $personID, "type" => 'I', "np" => 1], $row['birthdatetr']);
-  setEvent(["text" => uiTextSnippet('christened'), "fact" => $stdex['CHR'], "date" => $row['altbirthdate'], "place" => $row['altbirthplace'], "event" => "CHR", "entity" => $personID, "type" => 'I', "np" => 1], $row['altbirthdatetr']);
-  setEvent(["text" => uiTextSnippet('died'), "fact" => $stdex['DEAT'], "date" => $row['deathdate'], "place" => $row['deathplace'], "event" => "DEAT", "entity" => $personID, "type" => 'I', "np" => 1], $row['deathdatetr']);
+  setEvent(['text' => uiTextSnippet('birth'), 'fact' => $stdex['BIRT'], 'date' => $row['birthdate'], 'place' => $row['birthplace'], 'event' => 'BIRT', 'entity' => $personID, 'type' => 'I', 'np' => 1], $row['birthdatetr']);
+  setEvent(['text' => uiTextSnippet('christened'), 'fact' => $stdex['CHR'], 'date' => $row['altbirthdate'], 'place' => $row['altbirthplace'], 'event' => 'CHR', 'entity' => $personID, 'type' => 'I', 'np' => 1], $row['altbirthdatetr']);
+  setEvent(['text' => uiTextSnippet('died'), 'fact' => $stdex['DEAT'], 'date' => $row['deathdate'], 'place' => $row['deathplace'], 'event' => 'DEAT', 'entity' => $personID, 'type' => 'I', 'np' => 1], $row['deathdatetr']);
   $burialmsg = $row['burialtype'] ? uiTextSnippet('cremated') : uiTextSnippet('buried');
-  setEvent(["text" => $burialmsg, "fact" => $stdex['BURI'], "date" => $row['burialdate'], "place" => $row['burialplace'], "event" => "BURI", "entity" => $personID, "type" => 'I', "np" => 1], $row['burialdatetr']);
+  setEvent(['text' => $burialmsg, 'fact' => $stdex['BURI'], 'date' => $row['burialdate'], 'place' => $row['burialplace'], 'event' => 'BURI', 'entity' => $personID, 'type' => 'I', 'np' => 1], $row['burialdatetr']);
 }
 
 if (count($events)) {

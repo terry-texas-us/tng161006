@@ -8,7 +8,7 @@ require 'version.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 $query = "SELECT count(userID) AS ucount FROM $users_table";
@@ -21,10 +21,10 @@ if ($result) {
 $revquery = "SELECT count(userID) AS ucount FROM $users_table WHERE allow_living = \"-1\"";
 $revresult = tng_query($revquery) or die(uiTextSnippet('cannotexecutequery') . ": $revquery");
 $revrow = tng_fetch_assoc($revresult);
-$revstar = $revrow['ucount'] ? " *" : "";
+$revstar = $revrow['ucount'] ? ' *' : '';
 tng_free_result($revresult);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('addnewuser'));
 ?>
 <!DOCTYPE html>
@@ -35,11 +35,11 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
     <?php
     echo $adminHeaderSection->build('users-add', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "usersBrowse.php", uiTextSnippet('search'), "finduser"]);
-    //    $navList->appendItem([$allowAdd, "usersAdd.php", uiTextSnippet('add'), "adduser"]);
-    $navList->appendItem([$allowEdit, "usersReview.php", uiTextSnippet('review') . $revstar, "review"]);
-    $navList->appendItem([true, "usersSendMail.php", uiTextSnippet('email'), "mail"]);
-    echo $navList->build("adduser");
+    $navList->appendItem([true, 'usersBrowse.php', uiTextSnippet('search'), 'finduser']);
+    //    $navList->appendItem([$allowAdd, 'usersAdd.php', uiTextSnippet('add'), 'adduser']);
+    $navList->appendItem([$allowEdit, 'usersReview.php', uiTextSnippet('review') . $revstar, 'review']);
+    $navList->appendItem([true, 'usersSendMail.php', uiTextSnippet('email'), 'mail']);
+    echo $navList->build('adduser');
     ?>
     <form id='users-add' name='form1' action="usersAddFormAction.php" method='post'>
       <div class='row'>
@@ -127,23 +127,23 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
           <?php if ($row['ucount']) { ?>
             <p>
               <input name='role' type='radio' value='guest' checked data-role='guest'>
-              <?php echo uiTextSnippet('usrguest') . "<br><em class='small indent'>" . uiTextSnippet('usrguestd') . " " . uiTextSnippet('noadmin') . "</em>"; ?>
+              <?php echo uiTextSnippet('usrguest') . "<br><em class='small indent'>" . uiTextSnippet('usrguestd') . ' ' . uiTextSnippet('noadmin') . '</em>'; ?>
             </p>
             <p>
               <input name='role' type='radio' value='subm'  data-role='subm'>
-              <?php echo uiTextSnippet('usrsubm') . "<br><em class='small indent'>" . uiTextSnippet('usrsubmd') . " " . uiTextSnippet('noadmin') . "</em>"; ?>
+              <?php echo uiTextSnippet('usrsubm') . "<br><em class='small indent'>" . uiTextSnippet('usrsubmd') . ' ' . uiTextSnippet('noadmin') . '</em>'; ?>
             </p>
             <p>
               <input name='role' type='radio' value='contrib' data-role='contrib'>
-              <?php echo uiTextSnippet('usrcontrib') . "<br><em class='small indent'>" . uiTextSnippet('usrcontribd') . "</em>"; ?>
+              <?php echo uiTextSnippet('usrcontrib') . "<br><em class='small indent'>" . uiTextSnippet('usrcontribd') . '</em>'; ?>
             </p>
             <p>
               <input name='role' type='radio' value='editor'  data-role='editor'>
-              <?php echo uiTextSnippet('usreditor') . "<br><em class='small indent'>" . uiTextSnippet('usreditord') . "</em>"; ?>
+              <?php echo uiTextSnippet('usreditor') . "<br><em class='small indent'>" . uiTextSnippet('usreditord') . '</em>'; ?>
             </p>
             <p>
               <input name='role' type='radio' value='mcontrib' data-role='mcontrib'>
-              <?php echo uiTextSnippet('usrmcontrib') . "<br><em class='small indent'>" . uiTextSnippet('usrmcontribd') . "</em>"; ?>
+              <?php echo uiTextSnippet('usrmcontrib') . "<br><em class='small indent'>" . uiTextSnippet('usrmcontribd') . '</em>'; ?>
             </p>
             <p>
               <input name='role' type='radio' value='meditor'  data-role='meditor'>
@@ -155,24 +155,24 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
             </p>
           <?php } ?>
           <p>
-            <input name='role' type='radio' value="admin"<?php if (!$row['ucount']) {echo " checked";} ?> data-role='admin'>
-            <?php echo uiTextSnippet('usradmin') . "<br><em class='small indent'>" . uiTextSnippet('usradmind') . "</em>"; ?>
+            <input name='role' type='radio' value="admin"<?php if (!$row['ucount']) {echo ' checked';} ?> data-role='admin'>
+            <?php echo uiTextSnippet('usradmin') . "<br><em class='small indent'>" . uiTextSnippet('usradmind') . '</em>'; ?>
           </p>
         </div>
         <div class='col-md-6'>
           <p><strong><?php echo uiTextSnippet('rights'); ?></strong></p>
           <p>
-            <input class='rights' name='form_allow_add' type='radio' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_add'); ?>
+            <input class='rights' name='form_allow_add' type='radio' value='1'<?php if (!$row['ucount']) {echo ' checked';} ?>> <?php echo uiTextSnippet('allow_add'); ?>
             <br>
             <?php if ($row['ucount']) { ?>
-              <input class='rights' name='form_allow_add' type='radio' value="3"> <?php echo uiTextSnippet('allow_media_add'); ?>
+              <input class='rights' name='form_allow_add' type='radio' value='3'> <?php echo uiTextSnippet('allow_media_add'); ?>
               <br>
               <input class='rights' name='form_allow_add' type='radio' value='0' checked> <?php echo uiTextSnippet('no_add'); ?>
               <br>
             <?php } ?>
           </p>
           <p>
-            <input class='rights' name='form_allow_edit' type='radio' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_edit'); ?>
+            <input class='rights' name='form_allow_edit' type='radio' value='1'<?php if (!$row['ucount']) {echo ' checked';} ?>> <?php echo uiTextSnippet('allow_edit'); ?>
             <br>
             <?php if ($row['ucount']) { ?>
               <input class='rights' name='form_allow_edit' type='radio' value='3'> <?php echo uiTextSnippet('allow_media_edit'); ?>
@@ -184,7 +184,7 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
             <?php } ?>
           </p>
           <p>
-            <input class='rights' name='form_allow_delete' type='radio' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_delete'); ?>
+            <input class='rights' name='form_allow_delete' type='radio' value='1'<?php if (!$row['ucount']) {echo ' checked';} ?>> <?php echo uiTextSnippet('allow_delete'); ?>
             <br>
             <?php if ($row['ucount']) { ?>
               <input class='rights' name='form_allow_delete' type='radio' value='3'> <?php echo uiTextSnippet('allow_media_delete'); ?>
@@ -195,24 +195,24 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
           </p>
           <hr>
           <p>
-            <input name='form_allow_living' type='checkbox' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_living'); ?>
+            <input name='form_allow_living' type='checkbox' value='1'<?php if (!$row['ucount']) {echo ' checked';} ?>> <?php echo uiTextSnippet('allow_living'); ?>
             <br>
-            <input name='form_allow_private' type='checkbox' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_private'); ?>
+            <input name='form_allow_private' type='checkbox' value='1'<?php if (!$row['ucount']) {echo ' checked';} ?>> <?php echo uiTextSnippet('allow_private'); ?>
             <br>
-            <input name='form_allow_ged' type='checkbox' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_ged'); ?>
+            <input name='form_allow_ged' type='checkbox' value='1'<?php if (!$row['ucount']) {echo ' checked';} ?>> <?php echo uiTextSnippet('allow_ged'); ?>
             <br>
-            <input name='form_allow_pdf' type='checkbox' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_pdf'); ?>
+            <input name='form_allow_pdf' type='checkbox' value='1'<?php if (!$row['ucount']) {echo ' checked';} ?>> <?php echo uiTextSnippet('allow_pdf'); ?>
             <br>
-            <input name='form_allow_lds' type='checkbox' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_lds'); ?>
+            <input name='form_allow_lds' type='checkbox' value='1'<?php if (!$row['ucount']) {echo ' checked';} ?>> <?php echo uiTextSnippet('allow_lds'); ?>
             <br>
-            <input name='form_allow_profile' type='checkbox' value='1'<?php if (!$row['ucount']) {echo " checked";} ?>> <?php echo uiTextSnippet('allow_profile'); ?>
+            <input name='form_allow_profile' type='checkbox' value='1'<?php if (!$row['ucount']) {echo ' checked';} ?>> <?php echo uiTextSnippet('allow_profile'); ?>
           </p>
         </div>
       </div>
       <hr>
       <?php
       if ($row['ucount']) {
-        echo "<strong>" . uiTextSnippet('accesslimits') . "</strong><br>\n";
+        echo '<strong>' . uiTextSnippet('accesslimits') . "</strong><br>\n";
         ?>
         <input name='administrator' type='radio' value='1' data-admin-access='allow'> <?php echo uiTextSnippet('allow_admin'); ?>
         <br>
@@ -241,7 +241,7 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
         </div>
         <?php
       } else {
-        echo "<b>" . uiTextSnippet('firstuser') . "</b>\n";
+        echo '<b>' . uiTextSnippet('firstuser') . "</b>\n";
         echo "<input name='branch' type='hidden' value=''>";
       }
       ?>
@@ -249,9 +249,9 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
       <input name='notify' type='checkbox' value='1'>
       <?php echo uiTextSnippet('notify'); ?>
       <br>
-      <textarea class='form-control' name='welcome' rows='4' style="display: none">
+      <textarea class='form-control' name='welcome' rows='4' style='display: none'>
         <?php
-        echo uiTextSnippet('hello') . " xxx,\r\n\r\n" . uiTextSnippet('activated') . " " . uiTextSnippet('infois') . ":\r\n\r\n" .
+        echo uiTextSnippet('hello') . " xxx,\r\n\r\n" . uiTextSnippet('activated') . ' ' . uiTextSnippet('infois') . ":\r\n\r\n" .
              uiTextSnippet('username') . ": yyy\r\n" . uiTextSnippet('password') . ": zzz\r\n\r\n$dbowner\r\n$tngdomain"; 
         ?>
       </textarea>
@@ -270,7 +270,7 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
   var orgusername = "yyy";
   var orgpassword = "zzz";
 
-  <?php require "branchlibjs.php"; ?>
+  <?php require 'branchlibjs.php'; ?>
   <?php if ($row['ucount']) { ?>
     var tree = getTree();
     if (tree) {

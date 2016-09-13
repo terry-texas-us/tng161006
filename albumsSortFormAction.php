@@ -15,7 +15,7 @@ $personID = ucfirst($newlink1);
 $linktype = $linktype1;
 $eventID = $event1;
 
-$sortstr = preg_replace("/xxx/", uiTextSnippet('albums'), uiTextSnippet('sortmedia'));
+$sortstr = preg_replace('/xxx/', uiTextSnippet('albums'), uiTextSnippet('sortmedia'));
 
 switch ($linktype) {
   case 'I':
@@ -39,9 +39,9 @@ switch ($linktype) {
     $person = tng_fetch_assoc($result2);
     $namestr = uiTextSnippet('source') . ": $personID";
     if ($person['title']) {
-      $namestr .= ", " . $person['title'];
+      $namestr .= ', ' . $person['title'];
     }
-    $person['branch'] = "";
+    $person['branch'] = '';
     tng_free_result($result2);
     break;
   case 'R':
@@ -50,27 +50,27 @@ switch ($linktype) {
     $person = tng_fetch_assoc($result2);
     $namestr = uiTextSnippet('repository') . ": $personID";
     if ($person['reponame']) {
-      $namestr .= ", " . $person['reponame'];
+      $namestr .= ', ' . $person['reponame'];
     }
-    $person['branch'] = "";
+    $person['branch'] = '';
     tng_free_result($result2);
     break;
   case 'L':
     $namestr = $personID;
-    $person['branch'] = "";
+    $person['branch'] = '';
     break;
 }
 
 if (!checkbranch($person['branch'])) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
 adminwritelog("<a href=\"ordermedia.php?personID=$personID\">$sortstr: $action</a>");
 
 $photofound = 0;
-$photo = "";
+$photo = '';
 
 $query = "SELECT alwayson, thumbpath, $media_table.mediaID AS mediaID, usecollfolder, mediatypeID, medialinkID FROM ($media_table, $medialinks_table)
     WHERE personID = \"$personID\" AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
@@ -97,7 +97,7 @@ if (file_exists("$rootpath$photoref")) {
     $photohtouse = $thumbmaxh;
     $photowtouse = intval($thumbmaxh * $photoinfo[0] / $photoinfo[1]);
   }
-  $photo = "<img src=\"" . str_replace("%2F", "/", rawurlencode($photoref)) . "?" . time() . "\" alt='' width=\"$photowtouse\" height=\"$photohtouse\" style=\"margin-right:10px\">";
+  $photo = "<img src=\"" . str_replace('%2F', '/', rawurlencode($photoref)) . '?' . time() . "\" alt='' width=\"$photowtouse\" height=\"$photohtouse\" style=\"margin-right:10px\">";
   $photofound = 1;
 }
 
@@ -111,7 +111,7 @@ if (!$numrows) {
   header("Location: albumsSort.php?personID=$personID&message=" . urlencode($message));
   exit;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet($sortstr));
 ?>
 <!DOCTYPE html>
@@ -121,10 +121,10 @@ $headSection->setTitle(uiTextSnippet($sortstr));
   <?php
   echo $adminHeaderSection->build('albums-text_sort', $message);
   $navList = new navList('');
-  $navList->appendItem([true, "albumsBrowse.php", uiTextSnippet('browse'), "findalbum"]);
-  $navList->appendItem([$allowAdd, "albumsAdd.php", uiTextSnippet('add'), "addalbum"]);
-  $navList->appendItem([$allowEdit, "albumsSort.php", uiTextSnippet('text_sort'), "sortalbums"]);
-  echo $navList->build("sortalbums");
+  $navList->appendItem([true, 'albumsBrowse.php', uiTextSnippet('browse'), 'findalbum']);
+  $navList->appendItem([$allowAdd, 'albumsAdd.php', uiTextSnippet('add'), 'addalbum']);
+  $navList->appendItem([$allowEdit, 'albumsSort.php', uiTextSnippet('text_sort'), 'sortalbums']);
+  echo $navList->build('sortalbums');
   ?>
   <table class='table table-sm'>
     <tr>
@@ -174,12 +174,12 @@ $headSection->setTitle(uiTextSnippet($sortstr));
 
               if ($trow['thumbpath'] && file_exists("$rootpath$tusefolder/" . $trow['thumbpath'])) {
                 $size = getimagesize("$rootpath$tusefolder/" . $trow['thumbpath']);
-                echo "<a href=\"albumsEdit.php?albumID={$row['albumID']}\"><img src=\"$tusefolder/" . str_replace("%2F", "/", rawurlencode($trow['thumbpath'])) . "\" $size[3] alt=\"{$row['albumname']}\"></a>";
+                echo "<a href=\"albumsEdit.php?albumID={$row['albumID']}\"><img src=\"$tusefolder/" . str_replace('%2F', '/', rawurlencode($trow['thumbpath'])) . "\" $size[3] alt=\"{$row['albumname']}\"></a>";
               } else {
-                echo "&nbsp;";
+                echo '&nbsp;';
               }
               echo "</td>\n";
-              $checked = $row['defphoto'] ? " checked" : "";
+              $checked = $row['defphoto'] ? " checked" : '';
               echo "<td><a href=\"editalbum.php?albumID={$row['albumID']}\">{$row['albumname']}</a><br>$truncated<br>";
               echo "<span id=\"md_{$row['albumID']}\" class=\"small\" style=\"visibility:hidden\"><a href='#' onclick=\"return removeFromSort('album','{$row['alinkID']}');\">" .
                       uiTextSnippet('remove') . "</a></span></td>\n";

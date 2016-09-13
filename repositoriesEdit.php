@@ -8,7 +8,7 @@ require 'version.php';
 
 if ((!$allowEdit && (!$allowAdd || !$added))) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 $repoID = ucfirst($repoID);
@@ -19,7 +19,7 @@ $query = "SELECT reponame, changedby, $repositories_table.addressID, address1, a
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
-$row['reponame'] = preg_replace("/\"/", "&#34;", $row['reponame']);
+$row['reponame'] = preg_replace('/\"/', '&#34;', $row['reponame']);
 
 $row['allow_living'] = 1;
 
@@ -28,11 +28,11 @@ $notelinks = tng_query($query);
 $gotnotes = [];
 while ($note = tng_fetch_assoc($notelinks)) {
   if (!$note['eventID']) {
-    $note['eventID'] = "general";
+    $note['eventID'] = 'general';
   }
-  $gotnotes[$note['eventID']] = "*";
+  $gotnotes[$note['eventID']] = '*';
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifyrepo'));
 ?>
 <!DOCTYPE html>
@@ -47,11 +47,11 @@ $headSection->setTitle(uiTextSnippet('modifyrepo'));
     <?php
     echo $adminHeaderSection->build('repositories-modifyrepo', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "repositoriesBrowse.php", uiTextSnippet('search'), "findrepo"]);
-    $navList->appendItem([$allowAdd, "repositoriesAdd.php", uiTextSnippet('add'), "addrepo"]);
-    $navList->appendItem([$allowEdit && $allowDelete, "repositoriesMerge.php", uiTextSnippet('merge'), "merge"]);
-    //    $navList->appendItem([$allowEdit, "repositoriesEdit.php?repoID=$repoID", uiTextSnippet('edit'), "edit"]);
-    echo $navList->build("edit");
+    $navList->appendItem([true, 'repositoriesBrowse.php', uiTextSnippet('search'), 'findrepo']);
+    $navList->appendItem([$allowAdd, 'repositoriesAdd.php', uiTextSnippet('add'), 'addrepo']);
+    $navList->appendItem([$allowEdit && $allowDelete, 'repositoriesMerge.php', uiTextSnippet('merge'), 'merge']);
+    //    $navList->appendItem([$allowEdit, "repositoriesEdit.php?repoID=$repoID", uiTextSnippet('edit'), 'edit']);
+    echo $navList->build('edit');
     ?>
     <br>
     <a href="repositoriesShowItem.php?repoID=<?php echo $repoID; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
@@ -61,13 +61,13 @@ $headSection->setTitle(uiTextSnippet('modifyrepo'));
       <a href="admin_newmedia.php?personID=<?php echo $repoID; ?>&amp;linktype=R"><?php echo uiTextSnippet('addmedia'); ?></a>
     <?php } ?>
     <form id='repositories-edit' name='form1' action='repositoriesEditFormAction.php' method='post'>
-      <div id="thumbholder" style="margin-right:5px; <?php if (!$photo) {echo "display: none";} ?>">
+      <div id="thumbholder" style="margin-right:5px; <?php if (!$photo) {echo 'display: none';} ?>">
         <?php echo $photo; ?>
       </div>
       <h4><?php echo $row['reponame'] . " ($repoID)"; ?></h4>
       <div class='smallest'>
         <?php
-        $iconColor = $gotnotes['general'] ? "icon-info" : "icon-muted";
+        $iconColor = $gotnotes['general'] ? 'icon-info' : 'icon-muted';
         echo "<a id='repository-notes' href='#' title='" . uiTextSnippet('notes') . "' data-repository-id='$repoID'>\n";
         echo "<img class='icon-sm icon-right icon-notes $iconColor' data-src='svg/documents.svg'>\n";
         echo "</a>\n";
@@ -136,7 +136,7 @@ $headSection->setTitle(uiTextSnippet('modifyrepo'));
       ?>
       <p>
         <?php
-        echo uiTextSnippet('onsave') . ":<br>";
+        echo uiTextSnippet('onsave') . ':<br>';
         echo "<input name='newscreen' type='radio' value='return'> " . uiTextSnippet('savereturn') . "<br>\n";
         if ($cw) {
           echo "<input name='newscreen' type='radio' value='close' checked> " . uiTextSnippet('closewindow') . "\n";
@@ -156,7 +156,7 @@ $headSection->setTitle(uiTextSnippet('modifyrepo'));
 <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
 <script>
   var tnglitbox;
-  var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;
+  var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : 'false'); ?>;
   var preferDateFormat = '<?php echo $preferDateFormat; ?>';
 </script>
 <script src="js/selectutils.js"></script>

@@ -1,12 +1,12 @@
 <?php
 
-$mylanguage = "";
+$mylanguage = '';
 if ($session_language) {
   $mylanguage = $languagesPath . $session_language;
 } else {
-  $newroot = preg_replace("/\//", "", $rootpath); // [ts] no backslashes
-  $newroot = preg_replace("/ /", "", $newroot);   // [ts] no spaces
-  $newroot = preg_replace("/\./", "", $newroot);  // [ts] no dots
+  $newroot = preg_replace('/\//', '', $rootpath); // [ts] no backslashes
+  $newroot = preg_replace('/ /', '', $newroot);   // [ts] no spaces
+  $newroot = preg_replace('/\./', '', $newroot);  // [ts] no dots
   $langcookiename = "tnglang_$newroot";
   $charcookiename = "tngchar_$newroot";
 
@@ -26,5 +26,5 @@ if (!$mylanguage) {
 $session_language = $_SESSION['session_language'];
 
 if (!$session_charset) {
-  $session_charset = $_SESSION['session_charset'] = ($charset ? $charset : "ISO-8859-1");
+  $session_charset = $_SESSION['session_charset'] = ($charset ? $charset : 'ISO-8859-1');
 }

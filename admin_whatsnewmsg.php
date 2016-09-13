@@ -10,7 +10,7 @@ $file = "$rootpath/whatsnew.txt";
 
 $contents = file($file);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('whatsnew'));
 ?>
 <!DOCTYPE html>
@@ -21,11 +21,11 @@ $headSection->setTitle(uiTextSnippet('whatsnew'));
     <?php
     echo $adminHeaderSection->build('misc-whatsnewmsg', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_misc.php", uiTextSnippet('menu'), "misc"]);
-    $navList->appendItem([true, "admin_notelist.php", uiTextSnippet('notes'), "notes"]);
-    $navList->appendItem([true, "admin_whatsnewmsg.php", uiTextSnippet('whatsnew'), "whatsnew"]);
-    $navList->appendItem([true, "admin_mostwanted.php", uiTextSnippet('mostwanted'), "mostwanted"]);
-    echo $navList->build("whatsnew");
+    $navList->appendItem([true, 'admin_misc.php', uiTextSnippet('menu'), 'misc']);
+    $navList->appendItem([true, 'admin_notelist.php', uiTextSnippet('notes'), 'notes']);
+    $navList->appendItem([true, 'admin_whatsnewmsg.php', uiTextSnippet('whatsnew'), 'whatsnew']);
+    $navList->appendItem([true, 'admin_mostwanted.php', uiTextSnippet('mostwanted'), 'mostwanted']);
+    echo $navList->build('whatsnew');
     $messageClass = "class='";
     if (isset($color) && $color != '') {
       $messageClass .= "$color'";

@@ -12,8 +12,8 @@ $tngconfig['showbmarks'] = 1;
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
-$headSection->setTitle($sitename ? "" : uiTextSnippet('mnuheader'));
+header('Content-type: text/html; charset=' . $session_charset);
+$headSection->setTitle($sitename ? '' : uiTextSnippet('mnuheader'));
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,7 +22,7 @@ $headSection->setTitle($sitename ? "" : uiTextSnippet('mnuheader'));
   <section class='container'>
     <?php
     echo $publicHeaderSection->build();
-    echo "<br>";
+    echo '<br>';
     echo "<div class='row'>\n";
     echo "<div class='offset-md-6 col-md-6'>";
     $form = new PersonSearchForm();

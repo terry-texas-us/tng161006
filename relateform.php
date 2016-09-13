@@ -14,12 +14,12 @@ if ($result) {
   $row['allow_living'] = $rights['living'];
   $row['allow_private'] = $rights['private'];
   if ($rights['both']) {
-    $birthdate = "";
+    $birthdate = '';
     if ($row['birthdate']) {
-      $birthdate = uiTextSnippet('birthabbr') . " " . displayDate($row['birthdate']);
+      $birthdate = uiTextSnippet('birthabbr') . ' ' . displayDate($row['birthdate']);
     } else {
       if ($row['altbirthdate']) {
-        $birthdate = uiTextSnippet('chrabbr') . " " . displayDate($row['altbirthdate']);
+        $birthdate = uiTextSnippet('chrabbr') . ' ' . displayDate($row['altbirthdate']);
       }
     }
     if ($birthdate) {
@@ -37,7 +37,7 @@ if ($result) {
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('relcalc'));
 ?>
 <!DOCTYPE html>
@@ -51,15 +51,15 @@ echo "<body id='public'>\n";
     $photostr = showSmallPhoto($primaryID, $namestr, $rights['both'], 0, false, $row['sex']);
     echo tng_DrawHeading($photostr, $namestr, getYears($row));
 
-    echo buildPersonMenu("relate", $primaryID);
+    echo buildPersonMenu('relate', $primaryID);
     echo "<br>\n";
 
     $namestr .= $namestrplus;
 
-    beginFormElement("relationship", "get", "form1", "form1");
+    beginFormElement('relationship', 'get', 'form1', 'form1');
 
     $maxupgen = $pedigree['maxupgen'] ? $pedigree['maxupgen'] : 15;
-    $newstr = preg_replace("/xxx/", $maxupgen, uiTextSnippet('findrelinstr'));
+    $newstr = preg_replace('/xxx/', $maxupgen, uiTextSnippet('findrelinstr'));
     ?>
       <h4><?php echo uiTextSnippet('findrel'); ?></h4>
       <p><?php echo $newstr; ?></p>
@@ -99,14 +99,14 @@ echo "<body id='public'>\n";
                         $birthdate = $row2['birthdate'] ? $row2['birthdate'] : $row2['altbirthdate'];
                         $birthdate = " ($birthdate)";
                       } else {
-                        $birthdate = "";
+                        $birthdate = '';
                       }
                       $namestr2 = getName($row2) . "$birthdate - $relatepersonID";
                       tng_free_result($result2);
                     }
                   }
                   echo "<div id=\"name2\">$namestr2</div><input name='savedpersonID' type='hidden' value=\"$relatepersonID\" /></td></tr>\n";
-                  echo "<tr><td>" . uiTextSnippet('changeto') . " </td><td>";
+                  echo '<tr><td>' . uiTextSnippet('changeto') . ' </td><td>';
                   ?>
                   <input id='secondpersonID' name='secondpersonID' type='text' size='10'>
                   <input id='findSecondPerson' name='find2' type='button' value="<?php echo uiTextSnippet('find'); ?>">
@@ -128,7 +128,7 @@ echo "<body id='public'>\n";
                       for ($i = 1; $i <= $maxrels; $i++) {
                         echo "<option value=\"$i\"";
                         if ($i == $dorels) {
-                          echo " selected";
+                          echo ' selected';
                         }
                         echo ">$i</option>\n";
                       }
@@ -147,14 +147,14 @@ echo "<body id='public'>\n";
                       $dospouses = $dospouses ? $dospouses : 1;
                       echo "<option value=\"0\"";
                       if ($dospouses) {
-                        echo " selected";
+                        echo ' selected';
                       }
-                      echo ">" . uiTextSnippet('yes') . "</option>\n";
+                      echo '>' . uiTextSnippet('yes') . "</option>\n";
                       echo "<option value='1'";
                       if (!$dospouses) {
-                        echo " selected";
+                        echo ' selected';
                       }
-                      echo ">" . uiTextSnippet('no') . "</option>\n";
+                      echo '>' . uiTextSnippet('no') . "</option>\n";
                       ?>
                     </select>
                   </td>
@@ -172,7 +172,7 @@ echo "<body id='public'>\n";
                       for ($i = 1; $i <= $maxgens; $i++) {
                         echo "<option value=\"$i\"";
                         if ($i == $dogens) {
-                          echo " selected";
+                          echo ' selected';
                         }
                         echo ">$i</option>\n";
                       }
@@ -192,7 +192,7 @@ echo "<body id='public'>\n";
     <?php
     endFormElement();
     echo $publicFooterSection->build();
-  echo "</section> <!-- .container -->";
+  echo '</section> <!-- .container -->';
   echo scriptsManager::buildScriptElements($flags, 'public');
   ?>
   <script>

@@ -6,24 +6,24 @@ require 'checklogin.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 switch ($entity) {
-  case "person":
+  case 'person':
     $IDlabel = uiTextSnippet('personid');
     break;
-  case "source":
+  case 'source':
     $IDlabel = uiTextSnippet('sourceid');
     break;
-  case "repo":
+  case 'repo':
     $IDlabel = uiTextSnippet('repoid');
     break;
 }
 //use passed in type, gedcom & id to get name
 //get list of trees, omit current tree from list in dropdown
 $treelist = "  <option value=''></option>\n";
-$currenttree = "";
+$currenttree = '';
 
 $query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $result = tng_query($query);
@@ -35,7 +35,7 @@ while ($row = tng_fetch_assoc($result)) {
     $currenttree = $row['treename'];
   }
 }
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <form id='treeschange' name='treeschange' action='treesChangeFormAction.php'>
   <header class='modal-header'>

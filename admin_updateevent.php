@@ -13,7 +13,7 @@ require 'adminlog.php';
 
 require 'geocodelib.php';
 
-if ($session_charset != "UTF-8") {
+if ($session_charset != 'UTF-8') {
   $eventplace = tng_utf8_decode($eventplace);
   $info = tng_utf8_decode($info);
   $age = tng_utf8_decode($age);
@@ -50,7 +50,7 @@ if ($addressID) {
     $query = "UPDATE $address_table SET address1 = '$address1', address2 = '$address2', city = '$city', state = '$state', zip = '$zip\", country = '$country', gedcom = '', phone = '$phone', email = '$email', www = '$www' WHERE addressID = '$addressID'";
   } else {
     $query = "DELETE FROM $address_table WHERE addressID = '$addressID'";
-    $addressID = "";
+    $addressID = '';
   }
   $result = tng_query($query);
 } elseif ($address1 || $address2 || $city || $state || $zip || $country || $phone || $email || $www) {
@@ -79,10 +79,10 @@ $row = tng_fetch_assoc($result);
 
 $display = htmlspecialchars(getEventDisplay($row['display']), ENT_QUOTES, $session_charset);
 
-$info = str_replace("\r", " ", $info);
-$info = htmlspecialchars(str_replace("\n", " ", $info), ENT_QUOTES, $session_charset);
+$info = str_replace("\r", ' ', $info);
+$info = htmlspecialchars(str_replace("\n", ' ', $info), ENT_QUOTES, $session_charset);
 $truncated = substr($info, 0, 90);
 $info = strlen($info) > 90 ? substr($truncated, 0, strrpos($truncated, ' ')) . '&hellip;' : $info;
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 echo "{\"display\":\"$display\",\"eventdate\":\"$eventdate\",\"eventplace\":\"" . stripslashes($eventplace) . "\",\"info\":\"" . stripslashes($info) . "\"}";

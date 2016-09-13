@@ -20,17 +20,17 @@ $keeplong = $row['longitude'];
 $keeplevel = $row['placelevel'];
 $keepzoom = $row['zoom'];
 $keepnotes = $row['notes'];
-$latlongstr = ", latitude, longitude, placelevel, zoom";
+$latlongstr = ', latitude, longitude, placelevel, zoom';
 tng_free_result($result);
 
 $dquery = "DELETE FROM $places_table WHERE ";
 
-$addtoquery = "";
+$addtoquery = '';
 $mergelist = explode(',', $places);
 
 foreach ($mergelist as $val) {
   if ($addtoquery) {
-    $addtoquery .= " OR ";
+    $addtoquery .= ' OR ';
   }
   $addtoquery .= "ID=\"$val\"";
 
@@ -57,7 +57,7 @@ foreach ($mergelist as $val) {
         }
         $query = "UPDATE $places_table SET latitude = \"$keeplat\", longitude = \"$keeplong\", placelevel = \"$keeplevel\", zoom = \"$keepzoom\" WHERE ID = \"$keep\"";
         $result = tng_query($query);
-        $latlongstr = "";  //just do the first one we get
+        $latlongstr = '';  //just do the first one we get
       }
     }
     if ($row['notes']) {
@@ -122,5 +122,5 @@ if ($addtoquery) {
 
   $message = uiTextSnippet('pmsucc') . ": $newplace.";
 }
-header("Content-Type: application/json; charset=" . $session_charset);
+header('Content-Type: application/json; charset=' . $session_charset);
 echo "{\"latitude\":\"$keeplat\", \"longitude\":\"$keeplong\"}";

@@ -12,12 +12,12 @@ function get_item_id($result, $offset, $itemname) {
 function get_item_id_pair($result, $offset, $itemname, $needamp) {
   $item = get_item_id($result, $offset, $itemname);
   if ($item) {
-    $str = $itemname . "=" . $item;
+    $str = $itemname . '=' . $item;
     if ($needamp) {
-      $str = "&amp;" . $str;
+      $str = '&amp;' . $str;
     }
   } else {
-    $str = "";
+    $str = '';
   }
 
   return $str;
@@ -46,17 +46,17 @@ function get_media_offsets($result, $mediaID) {
 function get_media_link($result, $address, $page, $jumpfunc, $title, $label, $allstr, $showlinks) {
   global $cemeteryID;
 
-  $mediaID = get_item_id($result, $page - 1, "mediaID");
-  $medialinkID = get_item_id($result, $page - 1, "medialinkID");
-  $albumlinkID = get_item_id($result, $page - 1, "albumlinkID");
+  $mediaID = get_item_id($result, $page - 1, 'mediaID');
+  $medialinkID = get_item_id($result, $page - 1, 'medialinkID');
+  $albumlinkID = get_item_id($result, $page - 1, 'albumlinkID');
 
   if ($showlinks) {
-    $href = $mediaID ? "&amp;mediaID=" . $mediaID : "";
-    $href .= $medialinkID ? "&amp;medialinkID=" . $medialinkID : "";
-    $href .= $albumlinkID ? "&amp;albumlinkID=" . $albumlinkID : "";
-    $href .= $cemeteryID ? "&amp;cemeteryID=" . get_item_id($result, $page - 1, "cemeteryID") : "";
+    $href = $mediaID ? '&amp;mediaID=' . $mediaID : '';
+    $href .= $medialinkID ? '&amp;medialinkID=' . $medialinkID : '';
+    $href .= $albumlinkID ? '&amp;albumlinkID=' . $albumlinkID : '';
+    $href .= $cemeteryID ? '&amp;cemeteryID=' . get_item_id($result, $page - 1, 'cemeteryID') : '';
     $href .= $allstr . "&amp;tngpage=$page";
-    if (substr($href, 0, 5) == "&amp;") {
+    if (substr($href, 0, 5) == '&amp;') {
       $href = substr($href, 5);
     }
     $link = " <a href=\"$address$href\" title=\"$title\">$label</a> ";
@@ -83,11 +83,11 @@ function doMedia($mediatypeID) {
   global $rootpath, $mediapath, $header, $footer, $cemeteries_table, $mediatypes_assoc, $mediatypes_display;
   global $whatsnew, $thumbmaxw, $events_table, $eventtypes_table, $altstr, $tngconfig;
 
-  if ($mediatypeID == "headstones") {
+  if ($mediatypeID == 'headstones') {
     $hsfields = ", $media_table.cemeteryID, cemname, city";
     $hsjoin = "LEFT JOIN $cemeteries_table ON $media_table.cemeteryID = $cemeteries_table.cemeteryID";
   } else {
-    $hsfields = $hsjoin = "";
+    $hsfields = $hsjoin = '';
   }
 
   $query = "SELECT distinct $media_table.mediaID AS mediaID, description $altstr, $media_table.notes, thumbpath, path, form, mediatypeID, alwayson, usecollfolder, DATE_FORMAT(changedate,'%e %b %Y') AS changedatef, changedby, status, plot, abspath, newwindow $hsfields FROM $media_table $hsjoin";
@@ -95,10 +95,10 @@ function doMedia($mediatypeID) {
     $query .= " LEFT JOIN $medialinks_table ON $media_table.mediaID = $medialinks_table.mediaID";
   }
   $query .= " WHERE $cutoffstr $wherestr mediatypeID = \"$mediatypeID\" ORDER BY ";
-  if (strpos($_SERVER['SCRIPT_NAME'], "placesearch") !== false) {
-    $query .= "ordernum";
+  if (strpos($_SERVER['SCRIPT_NAME'], 'placesearch') !== false) {
+    $query .= 'ordernum';
   } else {
-    $query .= "changedate DESC, description";
+    $query .= 'changedate DESC, description';
   }
   $query .= " LIMIT $change_limit";
   $mediaresult = tng_query($query);
@@ -106,7 +106,7 @@ function doMedia($mediatypeID) {
   $titlemsg = uiTextSnippet($mediatypeID) ? uiTextSnippet($mediatypeID) : $mediatypes_display[$mediatypeID];
   $mediaheader = "<div class=\"titlebox\"><h4>$titlemsg</h4>\n" . $header;
 
-  $mediatext = "";
+  $mediatext = '';
   $thumbcount = 0;
   $gotImageJpeg = function_exists(imageJpeg);
 
@@ -128,7 +128,7 @@ function doMedia($mediatypeID) {
     $presult = tng_query($query);
     $foundliving = 0;
     $foundprivate = 0;
-    $medialinktext = "";
+    $medialinktext = '';
     while ($prow = tng_fetch_assoc($presult)) {
       if ($prow['fbranch'] != null) {
         $prow['branch'] = $prow['fbranch'];
@@ -161,26 +161,26 @@ function doMedia($mediatypeID) {
         $foundprivate = 1;
       }
 
-      $hstext = "";
+      $hstext = '';
       if ($prow['personID2'] != null) {
         $medialinktext .= "<li><a href=\"peopleShowPerson.php?personID={$prow['personID2']}\">";
         $medialinktext .= getName($prow);
-        if ($mediatypeID == "headstones") {
+        if ($mediatypeID == 'headstones') {
           $deathdate = $prow['deathdate'] ? $prow['deathdate'] : $prow['burialdate'];
           if ($prow['deathdate']) {
             $abbrev = uiTextSnippet('deathabbr');
           } elseif ($prow['burialdate']) {
             $abbrev = uiTextSnippet('burialabbr');
           }
-          $hstext = $deathdate ? " ($abbrev " . displayDate($deathdate) . ")" : "";
+          $hstext = $deathdate ? " ($abbrev " . displayDate($deathdate) . ')' : '';
         }
       } elseif ($prow['familyID'] != null) {
-        $medialinktext .= "<li><a href=\"familiesShowFamily.php?familyID={$prow['familyID']}\">" . uiTextSnippet('family') . ": " . getFamilyName($prow);
+        $medialinktext .= "<li><a href=\"familiesShowFamily.php?familyID={$prow['familyID']}\">" . uiTextSnippet('family') . ': ' . getFamilyName($prow);
       } elseif ($prow['sourceID'] != null) {
-        $sourcetext = $prow['title'] ? uiTextSnippet('source') . ": " . $prow['title'] : uiTextSnippet('source') . ": " . $prow['sourceID'];
+        $sourcetext = $prow['title'] ? uiTextSnippet('source') . ': ' . $prow['title'] : uiTextSnippet('source') . ': ' . $prow['sourceID'];
         $medialinktext .= "<li><a href=\"sourcesShowSource.php?sourceID={$prow['sourceID']}\">$sourcetext";
       } elseif ($prow['repoID'] != null) {
-        $repotext = $prow['reponame'] ? uiTextSnippet('repository') . ": " . $prow['reponame'] : uiTextSnippet('repository') . ": " . $prow['repoID'];
+        $repotext = $prow['reponame'] ? uiTextSnippet('repository') . ': ' . $prow['reponame'] : uiTextSnippet('repository') . ': ' . $prow['repoID'];
         $medialinktext .= "<li><a href=\"repositoriesShowItem.php?repoID={$prow['repoID']}\">$repotext";
       } else {
         $medialinktext .= "<li><a href=\"placesearch.php?psearch=" . urlencode($prow['personID']);
@@ -214,14 +214,14 @@ function doMedia($mediatypeID) {
       $nonamesloc = $row['private'] ? $tngconfig['nnpriv'] : $nonames;
       if ($nonamesloc) {
         $description = uiTextSnippet('livingphoto');
-        $notes = "";
+        $notes = '';
       } else {
-        $notes = $notes ? $notes . "<br>(" . uiTextSnippet('livingphoto') . ")" : "(" . uiTextSnippet('livingphoto') . ")";
+        $notes = $notes ? $notes . '<br>(' . uiTextSnippet('livingphoto') . ')' : '(' . uiTextSnippet('livingphoto') . ')';
       }
-      $href = "";
+      $href = '';
     }
 
-    $mediatext .= "<tr>";
+    $mediatext .= '<tr>';
     $row['mediatypeID'] = $mediatypeID;
     $imgsrc = getSmallPhoto($row);
     if ($imgsrc) {
@@ -236,22 +236,22 @@ function doMedia($mediatypeID) {
       } else {
         $mediatext .= $imgsrc;
       }
-      $mediatext .= "</td><td>";
+      $mediatext .= '</td><td>';
       $thumbcount++;
     } else {
-      $mediatext .= "<td>&nbsp;</td><td>";
+      $mediatext .= '<td>&nbsp;</td><td>';
     }
 
     $mediatext .= "$description<br>$notes&nbsp;</td>";
-    if ($mediatypeID == "headstones") {
+    if ($mediatypeID == 'headstones') {
       if (!$row['cemname']) {
         $row['cemname'] = $row['city'];
       }
       $mediatext .= "<td><a href=\"cemeteriesShowCemetery.php?cemeteryID={$row['cemeteryID']}\">{$row['cemname']}</a>";
       if ($row['plot']) {
-        $mediatext .= "<br>";
+        $mediatext .= '<br>';
       }
-      $mediatext .= nl2br($row['plot']) . "&nbsp;</td>";
+      $mediatext .= nl2br($row['plot']) . '&nbsp;</td>';
       $mediatext .= "<td>{$row['status']}&nbsp;</td>";
       $mediatext .= "<td>\n";
     } else {
@@ -260,16 +260,16 @@ function doMedia($mediatypeID) {
     $mediatext .= $medialinktext;
     $mediatext .= "&nbsp;</td>\n";
     if ($whatsnew) {
-      $mediatext .= "<td>" . displayDate($row['changedatef']) . ($currentuser ? " ({$row['changedby']})" : "") . "</td></tr>\n";
+      $mediatext .= '<td>' . displayDate($row['changedatef']) . ($currentuser ? " ({$row['changedby']})" : '') . "</td></tr>\n";
     }
     //ereg if no thumbs
   }
   if (!$thumbcount) {
-    $mediaheader = str_replace("<td>" . uiTextSnippet('thumb') . "</td>", "", $mediaheader);
-    $mediatext = str_replace("<td>&nbsp;</td><td>", "<td>", $mediatext);
+    $mediaheader = str_replace('<td>' . uiTextSnippet('thumb') . '</td>', '', $mediaheader);
+    $mediatext = str_replace('<td>&nbsp;</td><td>', '<td>', $mediatext);
   }
   tng_free_result($mediaresult);
-  $media = $mediatext ? $mediaheader . $mediatext . $footer . "</div>\n<br>\n" : "";
+  $media = $mediatext ? $mediaheader . $mediatext . $footer . "</div>\n<br>\n" : '';
 
   return $media;
 }

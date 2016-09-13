@@ -14,13 +14,13 @@ tng_free_result($result);
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-$row['note'] = str_replace("&", "&amp;", $row['note']);
-$row['note'] = preg_replace("/\"/", "&#34;", $row['note']);
+$row['note'] = str_replace('&', '&amp;', $row['note']);
+$row['note'] = preg_replace('/\"/', '&#34;', $row['note']);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifynote'));
 ?>
 <!DOCTYPE html>
@@ -31,12 +31,12 @@ $headSection->setTitle(uiTextSnippet('modifynote'));
     <?php
     echo $adminHeaderSection->build('misc-modifynote', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_misc.php", uiTextSnippet('menu'), "misc"]);
-    $navList->appendItem([true, "admin_notelist.php", uiTextSnippet('notes'), "notes"]);
-    $navList->appendItem([true, "admin_whatsnewmsg.php", uiTextSnippet('whatsnew'), "whatsnew"]);
-    $navList->appendItem([true, "admin_mostwanted.php", uiTextSnippet('mostwanted'), "mostwanted"]);
-    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
-    echo $navList->build("edit");
+    $navList->appendItem([true, 'admin_misc.php', uiTextSnippet('menu'), 'misc']);
+    $navList->appendItem([true, 'admin_notelist.php', uiTextSnippet('notes'), 'notes']);
+    $navList->appendItem([true, 'admin_whatsnewmsg.php', uiTextSnippet('whatsnew'), 'whatsnew']);
+    $navList->appendItem([true, 'admin_mostwanted.php', uiTextSnippet('mostwanted'), 'mostwanted']);
+    $navList->appendItem([$allowEdit, '#', uiTextSnippet('edit'), 'edit']);
+    echo $navList->build('edit');
     ?>
     <table class='table table-sm'>
       <tr>
@@ -55,9 +55,9 @@ $headSection->setTitle(uiTextSnippet('modifynote'));
                   <?php
                   echo "<input name='private' type='checkbox' value='1'";
                   if ($row['secret']) {
-                    echo " checked";
+                    echo ' checked';
                   }
-                  echo "> " . uiTextSnippet('private');
+                  echo '> ' . uiTextSnippet('private');
                   ?>
                 </td>
               </tr>

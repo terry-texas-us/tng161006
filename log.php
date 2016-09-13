@@ -14,12 +14,12 @@ function writelog($string)
   if (!isset($_SERVER['REMOTE_HOST'])) {
     $_SERVER['REMOTE_HOST'] = '';
   }
-  $string = str_replace(["\n", "\r"], " ", $string);
-  if (strpos($string, "http") !== false || strpos($string, "www") !== false) {
+  $string = str_replace(["\n", "\r"], ' ', $string);
+  if (strpos($string, 'http') !== false || strpos($string, 'www') !== false) {
     return;
   }
   if ($exusers) {
-    $users = explode(",", $exusers);
+    $users = explode(',', $exusers);
     if (in_array($currentuser, $users)) {
       return;
     }
@@ -37,7 +37,7 @@ function writelog($string)
     }
   }
   if ($badhosts && $remhost) {
-    $terms = explode(",", $badhosts);
+    $terms = explode(',', $badhosts);
     foreach ($terms as $term) {
       if ($term) {
         if (strstr($remhost, trim($term))) {
@@ -46,11 +46,11 @@ function writelog($string)
       }
     }
   }
-  $string .= " " . uiTextSnippet('accessedby') . " $remhost";
+  $string .= ' ' . uiTextSnippet('accessedby') . " $remhost";
   if ($currentuser) {
-    $string .= " (" . uiTextSnippet('user') . ": $currentuserdesc)";
+    $string .= ' (' . uiTextSnippet('user') . ": $currentuserdesc)";
   }
-  $fp = fopen($logfile, "r+");
+  $fp = fopen($logfile, 'r+');
   if ($fp) {
     $locked = getLock($fp, LOCK_SH);
     if ($locked) {
@@ -67,10 +67,10 @@ function writelog($string)
           }
           if (function_exists('current_time')) {
             // we're in a WordPress Environment
-            $updated = date("D d M Y h:i:s A", current_time('timestamp', 0));
+            $updated = date('D d M Y h:i:s A', current_time('timestamp', 0));
           } else {
             // it's not a WordPress Environment
-            $updated = date("D d M Y h:i:s A", time() + (3600 * $timeOffset));
+            $updated = date('D d M Y h:i:s A', time() + (3600 * $timeOffset));
           } //End of addition for time stamp discrepancies with WordPress
           array_unshift($lines, "$updated $string.\n");
           $towrite = join('', $lines);

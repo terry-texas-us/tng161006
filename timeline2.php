@@ -10,7 +10,7 @@ if (!is_array($timeline)) {
   header("Location: timeline.php?primaryID=$primaryID");
   exit;
 }
-$tlmonths[0] = "";
+$tlmonths[0] = '';
 $tlmonths[1] = uiTextSnippet('JAN');
 $tlmonths[2] = uiTextSnippet('FEB');
 $tlmonths[3] = uiTextSnippet('MAR');
@@ -60,7 +60,7 @@ function getEvents($person) {
 
   $personID = $person['personID'];
   $events = [];
-  $eventstr = "";
+  $eventstr = '';
   $leftoffset = 3;
   $maxleft = 0;
   $perswidth = 300;
@@ -70,11 +70,11 @@ function getEvents($person) {
   if ($person['birthdate']) {
     $index = $person['birthdatetr'];
     $events[$index]['date'] = displayDate($person['birthdate']);
-    $events[$index]['text'] = uiTextSnippet('born') . ":";
+    $events[$index]['text'] = uiTextSnippet('born') . ':';
   } elseif ($person['altbirthdate']) {
     $index = $person['altbirthdatetr'];
     $events[$index]['date'] = displayDate($person['altbirthdate']);
-    $events[$index]['text'] = uiTextSnippet('christened') . ":";
+    $events[$index]['text'] = uiTextSnippet('christened') . ':';
   }
   $events[$index]['year'] = $person['birth'];
   $events[$index]['left'] = $leftoffset;
@@ -93,9 +93,9 @@ function getEvents($person) {
     $spouse = 'husband';
     $spouseorder = 'wifeorder';
   } else {
-    $self = "";
-    $spouse = "";
-    $spouseorder = "";
+    $self = '';
+    $spouse = '';
+    $spouseorder = '';
   }
   //get and loop through all marriages (link to people table on opposite spouse) for this person based on gender
   if ($spouseorder) {
@@ -124,7 +124,7 @@ function getEvents($person) {
       }
       tng_free_result($spouseresult);
     } else {
-      $spouselink = "";
+      $spouselink = '';
     }
     $rightfbranch = checkbranch($marriagerow['branch']) ? 1 : 0;
     $mrights = determineLivingPrivateRights($marriagerow, $rightfbranch);
@@ -132,8 +132,8 @@ function getEvents($person) {
     $marriagerow['allow_private'] = $mrights['private'];
 
     if ($mrights['both']) {
-      $index = str_replace("/", "-", $marriagerow['marrdatetr']);
-      if ($index != "0000-00-00") {
+      $index = str_replace('/', '-', $marriagerow['marrdatetr']);
+      if ($index != '0000-00-00') {
         $events[$index]['date'] = displayDate($marriagerow['marrdate']);
         $events[$index]['text'] = uiTextSnippet('married') . " $spouselink:";
         $events[$index]['year'] = $marriagerow['marryear'];
@@ -157,18 +157,18 @@ function getEvents($person) {
           $childname = getName($child);
           $childlink = "<a href=\"peopleShowPerson.php?personID={$child['personID']}\">$childname</a>";
         } else {
-          $childlink = "";
+          $childlink = '';
         }
         if ($child['birthdate']) {
-          $index = str_replace("/", "-", $child['birthdatetr']) . sprintf("%2d", $child['ordernum']);
+          $index = str_replace('/', '-', $child['birthdatetr']) . sprintf('%2d', $child['ordernum']);
           $events[$index]['date'] = displayDate($child['birthdate']);
           $events[$index]['text'] = uiTextSnippet('child') . " $childlink " . uiTextSnippet('birthabbr');
         } elseif ($child['altbirthdate']) {
-          $index = str_replace("/", "-", $child['altbirthdatetr']) . sprintf("%2d", $child['ordernum']);
+          $index = str_replace('/', '-', $child['altbirthdatetr']) . sprintf('%2d', $child['ordernum']);
           $events[$index]['date'] = displayDate($child['altbirthdate']);
           $events[$index]['text'] = uiTextSnippet('child') . " $childlink " . uiTextSnippet('chrabbr');
         } else {
-          $index = "";
+          $index = '';
         }
         if ($index) {
           $events[$index]['year'] = $child['birth'];
@@ -187,15 +187,15 @@ function getEvents($person) {
   //died OR buried
   if ($person['deathdate'] || $person['burialdate']) {
     if ($person['deathdate']) {
-      $index = str_replace("/", "-", $person['deathdatetr']);
+      $index = str_replace('/', '-', $person['deathdatetr']);
       $events[$index]['date'] = displayDate($person['deathdate']);
-      $events[$index]['text'] = uiTextSnippet('died') . ":";
+      $events[$index]['text'] = uiTextSnippet('died') . ':';
     } elseif ($person['burialdate']) {
       $index = $person['burialdatetr'];
       $events[$index]['date'] = displayDate($person['burialdate']);
-      $events[$index]['text'] = uiTextSnippet('buried') . ":";
+      $events[$index]['text'] = uiTextSnippet('buried') . ':';
     } else {
-      $index = "";
+      $index = '';
     }
     if ($index) {
       $events[$index]['year'] = $person['death'];
@@ -230,7 +230,7 @@ foreach ($timeline as $timeentry) {
     $row2 = tng_fetch_assoc($result2);
     $newtimeentry = [];
     $newtimeentry['personID'] = $timeperson;
-    $displaydeath = $row2['death'] ? $row2['death'] : "";
+    $displaydeath = $row2['death'] ? $row2['death'] : '';
     $rights2 = determineLivingPrivateRights($row2);
     $row2['allow_living'] = $rights2['living'];
     $row2['allow_private'] = $rights2['private'];
@@ -242,7 +242,7 @@ foreach ($timeline as $timeentry) {
       if ($row2['death']) {
         $newtimeentry['death'] = $row2['death'];
       } else {
-        $defaultage = intval(date("Y")) - intval($row2['birth']);
+        $defaultage = intval(date('Y')) - intval($row2['birth']);
         $newtimeentry['death'] = intval($row2['birth']) + ($defaultage < 110 ? $defaultage : 110);
       }
       $newtimeentry['lifespan'] = $newtimeentry['death'] - $newtimeentry['birth'];
@@ -285,31 +285,31 @@ while ($tlrow = tng_fetch_assoc($tlresult)) {
   if ($tlrow['endyear'] > $latest) {
     $latest = $tlrow['endyear'];
   }
-  if ($tlrow['evday'] == "0") {
-    $tlrow['evday'] = "";
+  if ($tlrow['evday'] == '0') {
+    $tlrow['evday'] = '';
   }
-  if ($tlrow['endday'] == "0") {
-    $tlrow['endday'] = "";
+  if ($tlrow['endday'] == '0') {
+    $tlrow['endday'] = '';
   }
 
-  $daymonth = trim($tlrow['evday'] . " " . $tlmonths[$tlrow['evmonth']]);
-  $daymonth .= $daymonth ? " " . $evyear : $evyear;
+  $daymonth = trim($tlrow['evday'] . ' ' . $tlmonths[$tlrow['evmonth']]);
+  $daymonth .= $daymonth ? ' ' . $evyear : $evyear;
 
-  $enddate = trim($tlrow['endday'] . " " . $tlmonths[$tlrow['endmonth']] . " " . $tlrow['endyear']);
-  $enddate = $enddate ? "&mdash;$enddate" : "";
+  $enddate = trim($tlrow['endday'] . ' ' . $tlmonths[$tlrow['endmonth']] . ' ' . $tlrow['endyear']);
+  $enddate = $enddate ? "&mdash;$enddate" : '';
 
-  $newentry = $tlevents[$evyear] ? $tlevents[$evyear] . "\n - " : " - ";
+  $newentry = $tlevents[$evyear] ? $tlevents[$evyear] . "\n - " : ' - ';
   if ($daymonth || $enddate) {
-    $newentry .= $daymonth . $enddate . " ";
+    $newentry .= $daymonth . $enddate . ' ';
   }
   if ($tlrow['evtitle']) {
     $evtitle = $tlrow['evtitle'];
-    $evdetail = $tlrow['evdetail'] ? "<br>" . $tlrow['evdetail'] : "";
+    $evdetail = $tlrow['evdetail'] ? '<br>' . $tlrow['evdetail'] : '';
   } else {
     $evtitle = $tlrow['evdetail'];
-    $evdetail = "";
+    $evdetail = '';
   }
-  $tlevents[$evyear] = $newentry . preg_replace("/\"/", "&#34;", $evtitle);
+  $tlevents[$evyear] = $newentry . preg_replace('/\"/', '&#34;', $evtitle);
   $newstring = $daymonth || $enddate ? "<li>$daymonth$enddate" . ": $evtitle$evdetail</li>" : "<li>$evtitle$evdetail</li>";
   $tlevents2[$evyear] = $tlevents2[$evyear] ? $tlevents2[$evyear] . "\n$newstring" : $newstring;
 }
@@ -327,7 +327,7 @@ $flags['styles'] = "<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('timeline') . ": $namestr");
 ?>
 <!DOCTYPE html>
@@ -340,19 +340,19 @@ echo $publicHeaderSection->build();
 $photostr = showSmallPhoto($primaryID, $namestr, $rights['both'], 0, false, $row['sex']);
 echo tng_DrawHeading($photostr, $namestr, getYears($row));
 
-beginFormElement("timeline", "post", "form1", "form1");
+beginFormElement('timeline', 'post', 'form1', 'form1');
 
-$innermenu = uiTextSnippet('chartwidth') . ": &nbsp;";
+$innermenu = uiTextSnippet('chartwidth') . ': &nbsp;';
 $innermenu .= "<input class='small' name='newwidth' type='text' value=\"$chartwidth\" maxlength='4' size='4'> &nbsp;&nbsp; ";
 $innermenu .= "<a href='#' onclick=\"document.form1.submit();\">" . uiTextSnippet('refresh') . "</a>\n";
 
-echo buildPersonMenu("timeline", $primaryID);
+echo buildPersonMenu('timeline', $primaryID);
 echo "<div class='pub-innermenu small'>\n";
   echo $innermenu;
 echo "</div>\n";
 echo "<br>\n";
 
-echo "<h4>" . uiTextSnippet('timeline') . "</h4><br>\n";
+echo '<h4>' . uiTextSnippet('timeline') . "</h4><br>\n";
 
 if ($pedigree['simile']) {
   echo "<div id=\"tngtimeline\" style=\"height: {$pedigree['tcheight']}px;\"></div>\n";
@@ -360,15 +360,15 @@ if ($pedigree['simile']) {
 
 if ($tng_message) {
   echo "<p><span><strong>$tng_message</strong></span></p>";
-  $tng_message = $_SESSION['tng_message'] = "";
+  $tng_message = $_SESSION['tng_message'] = '';
 }
-echo "<div id=\"tngchart\">";
+echo "<div id='tngchart'>";
 
 $year = $earliest;
 $displayyear = $year;
 for ($i = $lineoffset; $i <= ($lineoffset + $chartwidth); $i+=($chartwidth / $divisions)) {
   $iadj = $i - 12;
-  echo "<div class=\"yeardiv\" style=\"left:$iadj" . "px;\">";
+  echo "<div class='yeardiv' style=\"left:$iadj" . "px;\">";
   if ($pedigree['simile']) {
     echo "<a href='#' onclick=\"return centerTimeline($displayyear);\">$displayyear</a>";
   } else {
@@ -410,14 +410,13 @@ foreach ($tlevents as $key => $value) {
     echo "<a href=\"#events\" title=\"$key:\n$value\">$counter</a>\n";
   echo "</div>\n";
 }
-
-$enddiv = "</div>";
+$enddiv = '</div>';
 
 echo "<span><br><br>\n";
 if (count($timeline) > 1) {
   echo uiTextSnippet('delete');
 } else {
-  echo "&nbsp;";
+  echo '&nbsp;';
 }
 echo "</span>\n";
 
@@ -430,7 +429,7 @@ foreach ($keeparray as $timeentry) {
   $spanwidth = intval($ratio * $timeentry['lifespan']);
   echo "<div id=\"cb$numlines\" class=\"tlbar cb\" style=\"top:$top" . "px;width:$spanwidth" . "px;\">\n";
   if ($timeentry['personID'] == $primaryID) {
-    echo "&nbsp;";
+    echo '&nbsp;';
   } else {
     echo "<input name=\"{$timeentry['tree']}_{$timeentry['personID']}\" type='checkbox' value='1'>\n";
   }
@@ -441,16 +440,16 @@ foreach ($keeparray as $timeentry) {
   echo "</table>\n";
   echo "</div>\n";
 
-  echo "<div id=\"popup$numlines\" class=\"popup\" style=\"background-color:{$pedigree['popupcolor']}; top:" . ($top + 25) . "px; left:" . ($spanleft - 5) . "px;\" onmouseover=\"cancelTimer($numlines)\" onmouseout=\"setTimer($numlines)\">\n";
+  echo "<div id=\"popup$numlines\" class=\"popup\" style=\"background-color:{$pedigree['popupcolor']}; top:" . ($top + 25) . 'px; left:' . ($spanleft - 5) . "px;\" onmouseover=\"cancelTimer($numlines)\" onmouseout=\"setTimer($numlines)\">\n";
   echo "<table class='popuptable' style=\"border-color: {$pedigree['bordercolor']};\"><tr><td>\n";
 
   $eventinfo = getEvents($timeentry);
   echo "$eventinfo</td></tr></table></div>\n";
 }
 if ($highestll == 1) {
-  echo "<br><br>";
+  echo '<br><br>';
 } elseif ($highestll == 2) {
-  echo "<br><br><br>";
+  echo '<br><br><br>';
 }
 echo "<table width=\"" . ($chartwidth + $lineoffset + 20) . "\" style=\"height:$top" . "px\"><tr><td>&nbsp;</td></tr></table>";
 ?>
@@ -463,18 +462,18 @@ echo "<table width=\"" . ($chartwidth + $lineoffset + 20) . "\" style=\"height:$
 <input type='submit' value="<?php echo uiTextSnippet('refresh'); ?>" />
 <div id="addmorediv" style="display:none;">
 <?php
-echo "<span><br><br>";
+echo '<span><br><br>';
 $query = "SELECT gedcom, treename FROM $treesTable ORDER BY treename";
 $treeresult = tng_query($query);
 $numrows = tng_num_rows($treeresult);
 $newtime = time();
 for ($x = 2; $x < 6; $x++) {
-  echo uiTextSnippet('addperson') . ": ";
+  echo uiTextSnippet('addperson') . ': ';
   if ($numrows > 1) {
     echo "<select name=\"nexttree$x\">\n";
     while ($treerow = tng_fetch_assoc($treeresult)) {
       echo "  <option value=\"{$treerow['gedcom']}\"";
-      echo " selected";
+      echo ' selected';
       echo ">{$treerow['treename']}</option>\n";
     }
     echo "</select>\n";
@@ -529,7 +528,7 @@ $mpixels = $pedigree['mpixels'] ? $pedigree['mpixels'] : 50;
 if ($row['death']) {
   $deathage = intval($row['death']) - intval($row['birth']);
 } else {
-  $defaultage = intval(date("Y")) - intval($row['birth']);
+  $defaultage = intval(date('Y')) - intval($row['birth']);
   $deathage = $defaultage < 110 ? $defaultage : 110;
 }
 echo scriptsManager::buildScriptElements($flags, 'public');
@@ -552,7 +551,7 @@ echo scriptsManager::buildScriptElements($flags, 'public');
 <script src="js/timeline.js"></script>
 <script src="timeline_2.3.0/timeline_js/timeline-api.js"></script>
 <script>
-  var lastpopup = "";
+  var lastpopup = '';
   var tnglitbox;
   for (var h = 1; h <= <?php echo $numlines; ?>; h++) {
     eval('var timer' + h + '=false');

@@ -2,25 +2,25 @@
 require 'tng_begin.php';
 require 'functions.php';
 
-$_SESSION['tng_mediasearch'] = "";
+$_SESSION['tng_mediasearch'] = '';
 
 $flags['imgprev'] = true;
 
 if (!$change_cutoff) {
   $change_cutoff = 0;
 }
-$pastxdays = $change_cutoff ? " " . preg_replace("/xx/", $change_cutoff, uiTextSnippet('pastxdays')) : "";
+$pastxdays = $change_cutoff ? ' ' . preg_replace('/xx/', $change_cutoff, uiTextSnippet('pastxdays')) : '';
 $whatsnew = 1;
 
-$logstring = "<a href='whatsnew.php?'>" . xmlcharacters(uiTextSnippet('whatsnew') . $pastxdays) . "</a>";
+$logstring = "<a href='whatsnew.php?'>" . xmlcharacters(uiTextSnippet('whatsnew') . $pastxdays) . '</a>';
 writelog($logstring);
 preparebookmark($logstring);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
-$headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
+header('Content-type: text/html; charset=' . $session_charset);
+$headSection->setTitle(uiTextSnippet('whatsnew') . ' ' . $pastxdays);
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,18 +28,18 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
 <body id='public'>
   <section class='container'>
     <?php echo $publicHeaderSection->build(); ?>
-    <h2><img class='icon-md' src='svg/megaphone.svg'><?php echo uiTextSnippet('whatsnew') . " " . $pastxdays; ?></h2>
+    <h2><img class='icon-md' src='svg/megaphone.svg'><?php echo uiTextSnippet('whatsnew') . ' ' . $pastxdays; ?></h2>
     <br clear='left'>
     <?php
 
     $header1 = "<table class='table table-sm'>\n";
     $header1 .= "<tr>\n";
-    $header1 .= "<th>" . uiTextSnippet('thumb') . "</th>\n";
-    $header1 .= "<th>" . uiTextSnippet('description') . "</th>\n";
-    $hsheader = "<th>" . uiTextSnippet('cemetery') . "</th>\n";
-    $hsheader .= "<th>" . uiTextSnippet('status') . "</th>\n";
-    $header2 = "<th>" . uiTextSnippet('indlinked') . "</th>\n";
-    $header2 .= "<th width=\"130\">" . uiTextSnippet('lastmodified') . "</th>\n";
+    $header1 .= '<th>' . uiTextSnippet('thumb') . "</th>\n";
+    $header1 .= '<th>' . uiTextSnippet('description') . "</th>\n";
+    $hsheader = '<th>' . uiTextSnippet('cemetery') . "</th>\n";
+    $hsheader .= '<th>' . uiTextSnippet('status') . "</th>\n";
+    $header2 = '<th>' . uiTextSnippet('indlinked') . "</th>\n";
+    $header2 .= "<th width='130'>" . uiTextSnippet('lastmodified') . "</th>\n";
     $header2 .= "</tr>\n";
     $footer = "</table>\n";
 
@@ -50,10 +50,10 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
       $cutoffstr = "TO_DAYS(NOW()) - TO_DAYS(changedate) <= $change_cutoff AND ";
       $famcutoffstr = "TO_DAYS(NOW()) - TO_DAYS($families_table.changedate) <= $change_cutoff AND ";
     } else {
-      $cutoffstr = $famcutoffstr = "";
+      $cutoffstr = $famcutoffstr = '';
     }
     //check for custom message
-    $file = $rootpath . "whatsnew.txt";
+    $file = $rootpath . 'whatsnew.txt';
     if (file_exists($file)) {
       $contents = file($file);
       foreach ($contents as $line) {
@@ -64,14 +64,14 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
     }
     foreach ($mediatypes as $mediatype) {
       $mediatypeID = $mediatype['ID'];
-      $header = $mediatypeID == "headstones" ? $header1 . $hsheader . $header2 : $header1 . $header2;
+      $header = $mediatypeID == 'headstones' ? $header1 . $hsheader . $header2 : $header1 . $header2;
       echo doMedia($mediatypeID);
     }
-    $allwhere = "";
+    $allwhere = '';
 
-    $more = getLivingPrivateRestrictions("p", false, false);
+    $more = getLivingPrivateRestrictions('p', false, false);
     if ($more) {
-      $allwhere .= " AND " . $more;
+      $allwhere .= ' AND ' . $more;
     }
     $query = "SELECT p.personID, lastname, lnprefix, firstname, birthdate, prefix, suffix, nameorder, living, private, branch, DATE_FORMAT(changedate,'%e %b %Y') AS changedatef, changedby, LPAD(SUBSTRING_INDEX(birthdate, ' ', -1),4,'0') AS birthyear, birthplace, altbirthdate, LPAD(SUBSTRING_INDEX(altbirthdate, ' ', -1),4,'0') AS altbirthyear, altbirthplace FROM $people_table as p "
         . "WHERE $cutoffstr 1=1 $allwhere ORDER BY changedate DESC, lastname, firstname, birthyear, altbirthyear LIMIT $change_limit";
@@ -96,26 +96,26 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
             $namestr = getNameRev($row);
             if ($rights['both']) {
               if ($row['birthdate'] || $row['birthplace']) {
-                $birthdate = uiTextSnippet('birthabbr') . " " . displayDate($row['birthdate']);
-                $birthplace = $row['birthplace']? buildSilentPlaceLink($row['birthplace']) : "";
+                $birthdate = uiTextSnippet('birthabbr') . ' ' . displayDate($row['birthdate']);
+                $birthplace = $row['birthplace']? buildSilentPlaceLink($row['birthplace']) : '';
               } else {
                 if ($row['altbirthdate'] || $row['altbirthplace']) {
-                  $birthdate = uiTextSnippet('chrabbr') . " " . displayDate($row['altbirthdate']);
-                  $birthplace = $row['altbirthplace'] ? buildSilentPlaceLink($row['altbirthplace']) : "";
+                  $birthdate = uiTextSnippet('chrabbr') . ' ' . displayDate($row['altbirthdate']);
+                  $birthplace = $row['altbirthplace'] ? buildSilentPlaceLink($row['altbirthplace']) : '';
                 } else {
-                  $birthdate = "";
-                  $birthplace = "";
+                  $birthdate = '';
+                  $birthplace = '';
                 }
               }
             } else {
-              $birthdate = $birthplace = "";
+              $birthdate = $birthplace = '';
             }
             echo "<tr>\n";
             echo "<td>\n";
             echo "<a tabindex='0' class='btn btn-sm btn-outline-primary person-popover' role='button' data-toggle='popover' data-placement='bottom' data-person-id={$row['personID']}>$namestr</a>\n";
             echo "</td>\n";
             echo "<td>$birthdate</td><td>$birthplace</td>";
-            echo "<td>" . displayDate($row['changedatef']) . ($currentuser ? " ({$row['changedby']})" : "") . "</td></tr>\n";
+            echo '<td>' . displayDate($row['changedatef']) . ($currentuser ? " ({$row['changedby']})" : '') . "</td></tr>\n";
           }
           tng_free_result($result);
           ?>
@@ -123,11 +123,11 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
       </div>
       <?php
     }
-    $allwhere = "1=1";
+    $allwhere = '1=1';
 
     $more = getLivingPrivateRestrictions($families_table, false, false);
     if ($more) {
-      $allwhere .= " AND " . $more;
+      $allwhere .= ' AND ' . $more;
     }
     $query = "SELECT familyID, husband, wife, marrdate, firstname, lnprefix, lastname, prefix, suffix, nameorder, $families_table.living AS fliving, $families_table.private AS fprivate, $people_table.living AS living, $people_table.private AS private, $people_table.branch AS branch, $families_table.branch AS fbranch, DATE_FORMAT($families_table.changedate,'%e %b %Y') AS changedatef, $families_table.changedby FROM ($families_table) "
         . "LEFT JOIN $people_table ON $people_table.personID = husband "
@@ -166,7 +166,7 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
               echo "<a href=\"peopleShowPerson.php?personID={$row['husband']}\">$name</a>\n";
             echo "</td>\n";
             echo "<td><a href=\"peopleShowPerson.php?personID={$row['wife']}\">{$row['wife']}</a></td>\n";
-            echo "<td>";
+            echo '<td>';
             if ($rights['both']) {
               $row['branch'] = $row['fbranch'];
               $row['living'] = $row['fliving'];
@@ -179,7 +179,7 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . " " . $pastxdays);
               }
             }
             echo "</td>\n";
-            echo "<td>" . displayDate($row['changedatef']) . ($currentuser ? " ({$row['changedby']})" : "") . "</td></tr>\n";
+            echo '<td>' . displayDate($row['changedatef']) . ($currentuser ? " ({$row['changedby']})" : '') . "</td></tr>\n";
           }
           tng_free_result($famresult);
           ?>

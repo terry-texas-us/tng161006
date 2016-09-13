@@ -330,10 +330,10 @@ function sizeController(frameHeight) {
 
     if (!showController) {
         controllerContainer.style.display = "none";
-        enableContainer.style.display = "";
+        enableContainer.style.display = '';
     } else {
         enableContainer.style.display = "none";
-        controllerContainer.style.display = "";
+        controllerContainer.style.display = '';
     }
     if (subOffset === true)
         img.bodyh -= canvas.offsetTop;
@@ -633,7 +633,7 @@ function imageViewer(baseID, imgURL, fullWidth, fullHeight, standalone, mediaID,
     onoffbtn.title = textSnippet('vwrctrls');
     onoffbtn.onclick = function () {
         enableContainer.style.display = "none";
-        controllerContainer.style.display = "";
+        controllerContainer.style.display = '';
     }
     enableContainer.appendChild(onoffbtn);
 
@@ -645,7 +645,7 @@ function imageViewer(baseID, imgURL, fullWidth, fullHeight, standalone, mediaID,
     closeimg.alt = textSnippet('vwrclose');
     closeimg.src = 'img/img_close.gif';
     closeimg.onclick = function () {
-        enableContainer.style.display = "";
+        enableContainer.style.display = '';
         controllerContainer.style.display = "none";
 
         // need to shrink (or expand) the image to fit height (which will 

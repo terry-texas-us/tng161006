@@ -50,7 +50,7 @@ function getNewMedia(form, flag) {
             searchtree: searchtree,
             mediatypeID: mediatypeID
         };
-        if (mediatypeID === "headstones") {
+        if (mediatypeID === 'headstones') {
             var hsstat = form.hsstat.options[form.hsstat.selectedIndex].value;
             var cemeteryID = form.cemeteryID.options[form.cemeteryID.selectedIndex].value;
             params.hsstat = hsstat;
@@ -113,7 +113,7 @@ function finishAddToAlbum(req) {
     newrow += '<td style="width:' + (thumbmaxw + 6) + 'px;text-align:center;">' + $('#thumbcell_' + media).html() + '</td>\n';
     newrow += '<td>' + $('#desc_' + media).html();
     newrow += '<div id="del_' + albumlink + '" class="small" style="color:gray;visibility:hidden">';
-    if ($('#thumbcell_' + media).html() !== "&nbsp;") {
+    if ($('#thumbcell_' + media).html() !== '&nbsp;') {
         newrow += '<input name="rthumbs" type="radio" value="r' + media + '" onclick="makeDefault(this);">' + textSnippet('makedefault');
         newrow += ' &nbsp;|&nbsp; ';
     }
@@ -123,7 +123,7 @@ function finishAddToAlbum(req) {
     newrow += '</tr></table>';
 
     $('#add_' + media).hide();
-    if ($('#added_' + media).html() === "") {
+    if ($('#added_' + media).html() === '') {
         $('#added_' + media).html('<img class="icon-sm" src="svg/eye.svg" alt="">');
     }
     $('#added_' + media).fadeIn(400);

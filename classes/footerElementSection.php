@@ -3,9 +3,9 @@
 class FooterElementSection {
 
   private $out;
-  private $id = "admin";
-  private $title = "Hueman Heritage";
-  private $version = "0.8";
+  private $id = 'admin';
+  private $title = 'Hueman Heritage';
+  private $version = '0.09';
 
   private $data = []; // [ts] overloaded data
 
@@ -38,7 +38,7 @@ class FooterElementSection {
     $this->out .= "<span class='pull-xs-right'>\n";
     $this->out .= "<strong>$this->title</strong>  v.$this->version, " . date('Y');
     if ($this->id === 'admin') {
-      $this->out .= " (Admin interface)";
+      $this->out .= ' (Admin interface)';
     }
     $this->out .= "</span>\n";
     $this->out .= "</footer>\n";

@@ -8,20 +8,20 @@ require 'checklogin.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 require 'adminlog.php';
 
 $original_name = $newitem;
-if ($session_charset != "UTF-8") {
+if ($session_charset != 'UTF-8') {
   $newitem = tng_utf8_decode($newitem);
 }
 $newname = addslashes($newitem);
 
-if ($entity == "state") {
+if ($entity == 'state') {
   $query = "INSERT INTO $states_table (state) VALUES (\"$newname\")";
-} elseif ($entity == "country") {
+} elseif ($entity == 'country') {
   $query = "INSERT INTO $countries_table (country) VALUES (\"$newname\")";
 }
 $result = tng_query($query);

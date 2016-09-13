@@ -7,7 +7,7 @@ define('FPDF_FONTPATH', $rootpath . $endrootpath . 'font/');
 require 'tngpdf.php';
 require 'rpt_utils.php';
 $pdf = new TNGPDF($orient, 'in', $pagesize);
-setcookie("tng_pagesize", $pagesize, time() + 31536000, "/");
+setcookie('tng_pagesize', $pagesize, time() + 31536000, '/');
 
 // define formatting defaults
 $lineheight = $pdf->GetFontSize($rptFont, $rptFontSize) + 0.1;
@@ -308,7 +308,7 @@ function getVitalDates($row) {
   if ($getPlace == 2) {
     return;
   }
-  $vitalinfo = "";
+  $vitalinfo = '';
   if ($row['allow_living'] && $row['allow_private']) {
     if ($row['birthdate']) {
       $vitalinfo .= uiTextSnippet('birthabbr') . ' ' . displayDate($row['birthdate']) . ', ';
@@ -338,7 +338,7 @@ function getVitalDates($row) {
   }
 
   // get rid of trailing commas
-  if (substr($vitalinfo, -2) == ", ") {
+  if (substr($vitalinfo, -2) == ', ') {
     $vitalinfo = substr_replace($vitalinfo, '', -2, 2);
   }
   return $vitalinfo;

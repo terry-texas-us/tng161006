@@ -6,11 +6,11 @@ class Surname_cloud {
 
   }
 
-  function display($top = "50", $surnameBranch = "") {
+  function display($top = '50', $surnameBranch = '') {
     global $people_table;
     global $lnprefixes;
 
-    $treeBranchUrlString = "";
+    $treeBranchUrlString = '';
 
     // If you have surnames you wish to exclude enter them here
     $wherestr = "WHERE lastname<>\"\" AND lastname<>\"Unknown\"AND lastname<>'[--?--]'";  // Ignore these last names
@@ -18,22 +18,22 @@ class Surname_cloud {
     $more = getLivingPrivateRestrictions($people_table, false, false);
 
     if ($more) {
-      $wherestr .= $wherestr ? " AND " . $more : "WHERE $more";
+      $wherestr .= $wherestr ? ' AND ' . $more : "WHERE $more";
     }
-    if ($surnameBranch != "") {
-      $branchString = "branch = \"" . $surnameBranch . "\"";
-      $wherestr .= $wherestr ? " AND " . $branchString : "WHERE " . $branchString;
+    if ($surnameBranch != '') {
+      $branchString = 'branch = \"' . $surnameBranch . '\"';
+      $wherestr .= $wherestr ? ' AND ' . $branchString : 'WHERE ' . $branchString;
       $treeBranchUrlString .= "&amp;branch=$surnameBranch";
     }
 
     // Get all unique surnames
-    $surnamestr = $lnprefixes ? "TRIM(CONCAT_WS(' ',lnprefix,lastname) )" : "lastname";
+    $surnamestr = $lnprefixes ? "TRIM(CONCAT_WS(' ',lnprefix,lastname) )" : 'lastname';
     $query = "SELECT ucase( $binary $surnamestr ) AS surnameuc, $surnamestr AS surname, count( ucase($binary lastname ) ) AS count, lastname "
             . "FROM $people_table $wherestr GROUP BY surname   ORDER by lastname";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
     if (!$result) {
-      return "";
+      return '';
     }
     // Fetch all surnames into an array
     $surnames = [];
@@ -50,7 +50,7 @@ class Surname_cloud {
       $tempArray[$key] = $row['count'];
     }
     array_multisort($tempArray, SORT_DESC, $countArray);
-    $tempArray[] = "";
+    $tempArray[] = '';
 
     $SurnameMax = $countArray[0]['count']; // First record should have the most
 
@@ -106,11 +106,11 @@ class Surname_cloud {
         $output .= "<a class='surnames-cloud size" . $name['class'] . "' ";
         $output .= "href=\"search.php?mylastname=$surname2&amp;lnqualify=equals&amp;mybool=AND$treeBranchUrlString\">";
         $output .= $name['surname'];
-        $output .= "</a>";
+        $output .= '</a>';
         $output .= "</span>\n";
       }
     }
-    $output .= "</div>";
+    $output .= '</div>';
     echo ($output);
   }
 }

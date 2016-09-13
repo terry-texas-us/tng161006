@@ -8,7 +8,7 @@ require 'checklogin.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 require 'adminlog.php';
@@ -23,4 +23,4 @@ $languageID = tng_insert_id();
 adminwritelog("<a href=\"languagesEdit.php?languageID=$languageID\">" . uiTextSnippet('addnewlanguage') . ": $display/$folder</a>");
 
 $message = uiTextSnippet('language') . " $display " . uiTextSnippet('succadded') . '.';
-header("Location: languagesBrowse.php?message=" . urlencode($message));
+header('Location: languagesBrowse.php?message=' . urlencode($message));

@@ -6,7 +6,7 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('secondary'));
 ?>
 <!DOCTYPE html>
@@ -18,10 +18,10 @@ $headSection->setTitle(uiTextSnippet('secondary'));
     $allow_export = 1;
     echo $adminHeaderSection->build('datamaint-secondary', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "dataImportGedcom.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allow_export, "dataExportGedcom.php", uiTextSnippet('export'), "export"]);
-    //    $navList->appendItem([true, "dataSecondaryProcesses.php", uiTextSnippet('secondarymaint'), "second"]);
-    echo $navList->build("second");
+    $navList->appendItem([true, 'dataImportGedcom.php', uiTextSnippet('import'), 'import']);
+    $navList->appendItem([$allow_export, 'dataExportGedcom.php', uiTextSnippet('export'), 'export']);
+    //    $navList->appendItem([true, 'dataSecondaryProcesses.php', uiTextSnippet('secondarymaint'), 'second']);
+    echo $navList->build('second');
     ?>
     <form action="dataSecondaryProcessesFormAction.php" method='post' name='form1'>
       <input class='btn btn-outline-secondary' name='secaction' type='submit' value="<?php echo uiTextSnippet('tracklines'); ?>">

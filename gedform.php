@@ -18,8 +18,8 @@ if (!$allow_ged || !$rightbranch) {
 }
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
-$headSection->setTitle(uiTextSnippet('creategedfor') . ": " . uiTextSnippet('gedstartfrom') . " $name");
+header('Content-type: text/html; charset=' . $session_charset);
+$headSection->setTitle(uiTextSnippet('creategedfor') . ': ' . uiTextSnippet('gedstartfrom') . " $name");
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,10 +32,10 @@ $headSection->setTitle(uiTextSnippet('creategedfor') . ": " . uiTextSnippet('ged
     $photostr = showSmallPhoto($personID, $name, $rights['both'], 0, false, $row['sex']);
     echo tng_DrawHeading($photostr, $name, getYears($row));
 
-    echo buildPersonMenu("gedcom", $personID);
+    echo buildPersonMenu('gedcom', $personID);
     echo "<br>\n";
 
-    $onSubmit = ($currentuser) ? "" : "onsubmit='return validateForm();'";
+    $onSubmit = ($currentuser) ? '' : "onsubmit='return validateForm();'";
     ?>
     <form action="gedcom.php" method='get' name="gedform"<?php echo $onSubmit; ?>>
       <div class='form-container'>
@@ -92,7 +92,7 @@ $headSection->setTitle(uiTextSnippet('creategedfor') . ": " . uiTextSnippet('ged
 <script>
   'use strict';
   function validateForm() {
-      if (document.gedform.email.value === "") {
+      if (document.gedform.email.value === '') {
           alert(textSnippet('enteremail'));
           return false;
       }

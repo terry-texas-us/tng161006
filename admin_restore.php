@@ -27,7 +27,7 @@ function restore($table) {
     array_unshift($lines, $fields);    // no - so put the line back on the lines array and build field list from table
     $query = "SELECT * FROM $table"; // table is empty
     $result = tng_query($query);
-    $fields = "";
+    $fields = '';
     $nflds = tng_num_fields($result);
     for ($i = 0; $i < $nflds; $i++) {
       $fields .= tng_field_info($result, $i, 'name') . ',';
@@ -36,31 +36,31 @@ function restore($table) {
   }
 
   $counter = 0;
-  $values = "";
-  $saveline = "";
+  $values = '';
+  $saveline = '';
   $prevendquote = 0;
 
   foreach ($lines as $line) {
     $startquote = substr($line, 0, 1) == "\"" ? 1 : 0;
     if ($startquote && $prevendquote) {
-      $values .= sprintf("(%s),", rtrim($saveline));
+      $values .= sprintf('(%s),', rtrim($saveline));
       $counter++;
       if ($counter == $largechunk) {
         writechunk($table, $fields, $values);
         $counter = 0;
-        $values = "";
+        $values = '';
       }
-      $saveline = "";
+      $saveline = '';
     }
     $prevendquote = substr(rtrim($line), -1) == "\"" && (substr(rtrim($line), -3) == "\\\\\"" || substr(rtrim($line), -2) != "\\\"") ? 1 : 0;
     $saveline .= $line;
   }
 
   if ($saveline) {
-    $values .= sprintf("(%s),", rtrim($saveline));
+    $values .= sprintf('(%s),', rtrim($saveline));
     writechunk($table, $fields, $values);
   }
-  return "";
+  return '';
 }
 
 function writechunk($table, $fields, $values) {
@@ -71,52 +71,52 @@ function writechunk($table, $fields, $values) {
 }
 
 $largechunk = 100;
-$ajaxmsg = $msg = "";
+$ajaxmsg = $msg = '';
 
-if ($table == "struct") {
+if ($table == 'struct') {
   $filename = "$rootpath$backuppath/tng_tablestructure.bak";
   $lines = file($filename);
-  $query = "";
+  $query = '';
   foreach ($lines as $line) {
     $query .= $line;
-    if (substr(trim($line), -1) == ";") {
+    if (substr(trim($line), -1) == ';') {
       $result = tng_query($query);
-      $query = "";
+      $query = '';
     }
   }
 
-  $message = uiTextSnippet('tablestruct') . " " . uiTextSnippet('succrestored') . ".";
-  adminwritelog(uiTextSnippet('restore') . ": " . uiTextSnippet('tablestruct'));
+  $message = uiTextSnippet('tablestruct') . ' ' . uiTextSnippet('succrestored') . '.';
+  adminwritelog(uiTextSnippet('restore') . ': ' . uiTextSnippet('tablestruct'));
 } else {
-  if ($table == "all") {
+  if ($table == 'all') {
     $tablelist = [$address_table, $albums_table, $albumlinks_table, $album2entities_table, $assoc_table, $branches_table, $branchlinks_table, $cemeteries_table, $people_table, $families_table, $children_table, $languagesTable, $places_table, $states_table, $countries_table, $sources_table, $repositories_table, $citations_table, $reports_table, $events_table, $eventtypes_table, $treesTable, $notelinks_table, $xnotes_table, $users_table, $tlevents_table, $saveimport_table, $temp_events_table, $media_table, $medialinks_table, $mediatypes_table, $mostwanted_table];
     $tablename = uiTextSnippet('alltables');
-    $message = "";
+    $message = '';
     foreach ($tablelist as $table) {
       eval("\$dothistable = \"\$$table\";");
       if ($dothistable) {
         $msg = restore($table);
         if ($msg) {
-          $message = $message ? $message . "<br>" . $msg : $msg;
+          $message = $message ? $message . '<br>' . $msg : $msg;
         }
       }
     }
     if (!$message) {
-      $message = "$tablename " . uiTextSnippet('succrestored') . ".";
+      $message = "$tablename " . uiTextSnippet('succrestored') . '.';
     }
   } else {
     $tablelist = ["$table"];
     $tablename = $table;
-    $message = uiTextSnippet('table') . " $tablename " . uiTextSnippet('succrestored') . ".";
+    $message = uiTextSnippet('table') . " $tablename " . uiTextSnippet('succrestored') . '.';
     $ajaxmsg = restore($table);
     $ajaxmsg = "$tablename&" . (($ajaxmsg) ? $ajaxmsg : uiTextSnippet('succrestored'));
   }
   adminwritelog(uiTextSnippet('restore') . ": $tablename");
 }
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 if ($ajaxmsg) {
   echo $ajaxmsg;
 } else {
-  header("Location: admin_utilities.php?message=" . urlencode($message));
+  header('Location: admin_utilities.php?message=' . urlencode($message));
 }

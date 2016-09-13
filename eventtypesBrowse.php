@@ -39,14 +39,14 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $tngpage = 1;
 }
-$wherestr = $searchstring ? "(tag LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR display LIKE \"%$searchstring%\")" : "";
+$wherestr = $searchstring ? "(tag LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR display LIKE \"%$searchstring%\")" : '';
 if ($etype) {
   $wherestr .= $wherestr ? " AND type = \"$etype\"" : "type = \"$etype\"";
 }
-if ($onimport || $onimport === "0") {
+if ($onimport || $onimport === '0') {
   $wherestr .= $wherestr ? " AND keep = \"$onimport\"" : "keep = \"$onimport\"";
 }
 if ($wherestr) {
@@ -65,7 +65,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 } else {
   $totrows = $numrows;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('eventtypes'));
 ?>
 <!DOCTYPE html>
@@ -76,9 +76,9 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
     <?php
     echo $adminHeaderSection->build('customeventtypes', $message);
     $navList = new navList('');
-    //    $navList->appendItem([true, "eventtypesBrowse.php", uiTextSnippet('browse'), "findevent"]);
-    $navList->appendItem([$allowAdd, "eventtypesAdd.php", uiTextSnippet('add'), "addevent"]);
-    echo $navList->build("findevent");
+    //    $navList->appendItem([true, 'eventtypesBrowse.php', uiTextSnippet('browse'), 'findevent']);
+    $navList->appendItem([$allowAdd, 'eventtypesAdd.php', uiTextSnippet('add'), 'addevent']);
+    echo $navList->build('findevent');
     ?>
     <hr>
     <form name='form1' action='eventtypesBrowse.php'>
@@ -100,16 +100,16 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
         <div class='col-md-4'>
           <select class='form-control' name='etype'>
             <option value=''><?php echo uiTextSnippet('all'); ?></option>
-            <option value='I'<?php if ($etype == 'I') {echo " selected";} ?>><?php echo uiTextSnippet('individual'); ?></option>
-            <option value='F'<?php if ($etype == 'F') {echo " selected";} ?>><?php echo uiTextSnippet('family'); ?></option>
-            <option value='S'<?php if ($etype == 'S') {echo " selected";} ?>><?php echo uiTextSnippet('source'); ?></option>
-            <option value='R'<?php if ($etype == 'R') {echo " selected";} ?>><?php echo uiTextSnippet('repository'); ?></option>
+            <option value='I'<?php if ($etype == 'I') {echo ' selected';} ?>><?php echo uiTextSnippet('individual'); ?></option>
+            <option value='F'<?php if ($etype == 'F') {echo ' selected';} ?>><?php echo uiTextSnippet('family'); ?></option>
+            <option value='S'<?php if ($etype == 'S') {echo ' selected';} ?>><?php echo uiTextSnippet('source'); ?></option>
+            <option value='R'<?php if ($etype == 'R') {echo ' selected';} ?>><?php echo uiTextSnippet('repository'); ?></option>
           </select>
         </div>
         <div class='col-md-6'>
-          <input name='onimport' type='radio' value='1'<?php if ($onimport) {echo " checked";} ?>> <?php echo uiTextSnippet('accept'); ?>
-          <input name='onimport' type='radio' value='0'<?php if ($onimport === "0") {echo " checked";} ?>> <?php echo uiTextSnippet('ignore'); ?>
-          <input name='onimport' type='radio' value=''<?php if ($onimport === null || $onimport === "") {echo " checked";} ?>> <?php echo uiTextSnippet('all'); ?>
+          <input name='onimport' type='radio' value='1'<?php if ($onimport) {echo ' checked';} ?>> <?php echo uiTextSnippet('accept'); ?>
+          <input name='onimport' type='radio' value='0'<?php if ($onimport === '0') {echo ' checked';} ?>> <?php echo uiTextSnippet('ignore'); ?>
+          <input name='onimport' type='radio' value=''<?php if ($onimport === null || $onimport === '') {echo ' checked';} ?>> <?php echo uiTextSnippet('all'); ?>
         </div>
       </div>
       <input name='findeventtype' type='hidden' value='1'>
@@ -156,7 +156,7 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
             </tr>
           </thead>
           <?php
-          $actionstr = "";
+          $actionstr = '';
           if ($allowEdit) {
             $actionstr .= "<a href=\"eventtypesEdit.php?eventtypeID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
@@ -184,10 +184,10 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
                 $type = uiTextSnippet('repository');
                 break;
             }
-            $dispvalues = explode("|", $row['display']);
+            $dispvalues = explode('|', $row['display']);
             $numvalues = count($dispvalues);
             if ($numvalues > 1) {
-              $displayval = "";
+              $displayval = '';
               for ($i = 0; $i < $numvalues; $i += 2) {
                 $lang = $dispvalues[$i];
                 if ($mylanguage == $languagesPath . $lang) {
@@ -198,7 +198,7 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
             } else {
               $displayval = $row['display'];
             }
-            $newactionstr = preg_replace("/xxx/", $row['eventtypeID'], $actionstr);
+            $newactionstr = preg_replace('/xxx/', $row['eventtypeID'], $actionstr);
             echo "<tr id=\"row_{$row['eventtypeID']}\">\n";
             echo "<td>\n";
             echo "<div class='action-btns2'>\n$newactionstr</div>\n";

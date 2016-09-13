@@ -48,28 +48,28 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $page = 1;
 }
-$allwhere = "1=1";
+$allwhere = '1=1';
 
 if ($assignedbranch) {
   $allwhere .= " AND branch LIKE \"%$assignedbranch%\"";
 }
-if ($reviewuser != "") {
+if ($reviewuser != '') {
   $allwhere .= " AND user = \"$reviewuser\"";
 }
 if ($type == 'I') {
   $allwhere .= " AND $people_table.personID = $temp_events_table.personID AND (type = 'I' OR type = 'C')";
   $query = "SELECT tempID, $temp_events_table.personID AS personID, lastname, firstname, lnprefix, prefix, suffix, nameorder, eventID, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") AS postdate, living, private, branch FROM $people_table, $treesTable, $temp_events_table "
       . "WHERE $allwhere ORDER BY postdate DESC";
-  $returnpage = "people.php";
+  $returnpage = 'people.php';
   $totquery = "SELECT count(tempID) AS tcount FROM $people_table, $treesTable, $temp_events_table WHERE $allwhere";
 } elseif ($type == 'F') {
   $allwhere .= " AND $families_table.familyID = $temp_events_table.familyID AND type = 'F'";
   $query = "SELECT tempID, $temp_events_table.familyID AS familyID, husband, wife, eventID, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") AS postdate FROM $families_table, $treesTable, $temp_events_table "
       . "WHERE $allwhere ORDER BY postdate DESC";
-  $returnpage = "families.php";
+  $returnpage = 'families.php';
   $totquery = "SELECT count(tempID) AS tcount FROM $people_table, $treesTable, $temp_events_table WHERE $allwhere";
 }
 $result = tng_query($query);
@@ -84,7 +84,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
   $totrows = $numrows;
 }
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('review'));
 ?>
 <!DOCTYPE html>
@@ -97,18 +97,18 @@ $headSection->setTitle(uiTextSnippet('review'));
     $navList = new navList('');
     if ($type == 'I') {
       $hmsg = 'people';
-      $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
-      $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
-      $navList->appendItem([$allowEdit, "admin_findreview.php?type=I", uiTextSnippet('review'), "review"]);
-      $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
+      $navList->appendItem([true, 'peopleBrowse.php', uiTextSnippet('browse'), 'findperson']);
+      $navList->appendItem([$allowAdd, 'peopleAdd.php', uiTextSnippet('add'), 'addperson']);
+      $navList->appendItem([$allowEdit, 'admin_findreview.php?type=I', uiTextSnippet('review'), 'review']);
+      $navList->appendItem([$allowEdit && $allowDelete, 'peopleMerge.php', uiTextSnippet('merge'), 'merge']);
     } else {
       $hmsg = 'families';
       
-      $navList->appendItem([true, "familiesBrowse.php", uiTextSnippet('browse'), "findperson"]);
-      $navList->appendItem([$allowAdd, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
-      $navList->appendItem([$allowEdit, "admin_findreview.php?type=F", uiTextSnippet('review'), "review"]);
+      $navList->appendItem([true, 'familiesBrowse.php', uiTextSnippet('browse'), 'findperson']);
+      $navList->appendItem([$allowAdd, 'familiesAdd.php', uiTextSnippet('add'), 'addfamily']);
+      $navList->appendItem([$allowEdit, 'admin_findreview.php?type=F', uiTextSnippet('review'), 'review']);
     }
-    echo $navList->build("review");
+    echo $navList->build('review');
     ?>
     <h4><?php echo uiTextSnippet('selectevaction'); ?></h4>
     <div>
@@ -125,7 +125,7 @@ $headSection->setTitle(uiTextSnippet('review'));
                 while ($userrow = tng_fetch_assoc($userresult)) {
                   echo "  <option value=\"{$userrow['username']}\"";
                   if ($userrow['username'] == $reviewuser) {
-                    echo " selected";
+                    echo ' selected';
                   }
                   echo ">{$userrow['description']}</option>\n";
                 }
@@ -155,7 +155,7 @@ $headSection->setTitle(uiTextSnippet('review'));
       if (!$numrowsplus) {
         $offsetplus = 0;
       }
-      echo "<p>" . uiTextSnippet('matches') . ": $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows";
+      echo '<p>' . uiTextSnippet('matches') . ": $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows";
       ?>
       <table class="table table-sm table-striped">
         <tr>
@@ -169,11 +169,11 @@ $headSection->setTitle(uiTextSnippet('review'));
         <?php
         $actionstr = "<a href=\"admin_review.php?tempID=xxx\" title='" . uiTextSnippet('review') . "'>\n";
         $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
-        $actionstr .= "</a>";
+        $actionstr .= '</a>';
         if ($allowDelete) {
           $actionstr .= "<a href='#' onclick=\"return confirmDelete('xxx');\" title='" . uiTextSnippet('delete') . "'>\n";
           $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
-          $actionstr .= "</a>";
+          $actionstr .= '</a>';
         }
 
         while ($row = tng_fetch_assoc($result)) {
@@ -183,10 +183,10 @@ $headSection->setTitle(uiTextSnippet('review'));
             $evrow = tng_fetch_assoc($evresult);
 
             if ($evrow['display']) {
-              $dispvalues = explode("|", $evrow['display']);
+              $dispvalues = explode('|', $evrow['display']);
               $numvalues = count($dispvalues);
               if ($numvalues > 1) {
-                $displayval = "";
+                $displayval = '';
                 for ($i = 0; $i < $numvalues; $i += 2) {
                   $lang = $dispvalues[$i];
                   if ($mylanguage == $languagesPath . $lang) {
@@ -213,7 +213,7 @@ $headSection->setTitle(uiTextSnippet('review'));
             $name = getName($row);
             $persfamID = $row['personID'];
           } elseif ($type == 'F') {
-            $hname = $wname = "";
+            $hname = $wname = '';
             if ($row['husband']) {
               $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, living, private, branch FROM $people_table WHERE personID = '{$row['husband']}'";
               $hresult = tng_query($query);
@@ -234,11 +234,11 @@ $headSection->setTitle(uiTextSnippet('review'));
               $prow['allow_private'] = $prights['private'];
               $wname = getName($prow);
             }
-            $plus = $hname && $wname ? " + " : "";
+            $plus = $hname && $wname ? ' + ' : '';
             $name = "$hname$plus$wname";
             $persfamID = $row['familyID'];
           }
-          $newactionstr = str_replace("xxx", $row['tempID'], $actionstr);
+          $newactionstr = str_replace('xxx', $row['tempID'], $actionstr);
           echo "<tr id=\"row_{$row['tempID']}\"><td><span>$newactionstr</span></td>\n";
           echo "<td><span>$persfamID</span></td>\n";
           echo "<td><span>$name</span></td>\n";

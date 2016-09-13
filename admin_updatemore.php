@@ -12,7 +12,7 @@ require 'adminlog.php';
 
 $rval = 0;
 
-if ($session_charset != "UTF-8") {
+if ($session_charset != 'UTF-8') {
   $eventplace = tng_utf8_decode($eventplace);
   $info = tng_utf8_decode($info);
   $age = tng_utf8_decode($age);
@@ -53,7 +53,7 @@ if ($addressID) {
     $query = "DELETE FROM $address_table WHERE addressID = '$addressID'";
     $result = tng_query($query);
     adminwritelog(uiTextSnippet('deleteaddress') . ": $addressID");
-    $addressID = "";
+    $addressID = '';
   }
 } elseif ($address1 || $address2 || $city || $state || $zip || $country || $phone || $email || $www) {
   $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, phone, email, www)  "

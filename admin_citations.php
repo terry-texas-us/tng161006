@@ -11,10 +11,10 @@ $eventtypes = tng_query($query);
 $eventtype = tng_fetch_assoc($eventtypes);
 
 if ($eventtype['display']) {
-  $dispvalues = explode("|", $eventtype['display']);
+  $dispvalues = explode('|', $eventtype['display']);
   $numvalues = count($dispvalues);
   if ($numvalues > 1) {
-    $displayval = "";
+    $displayval = '';
     for ($i = 0; $i < $numvalues; $i += 2) {
       $lang = $dispvalues[$i];
       if ($mylanguage == $languagesPath . $lang) {
@@ -34,11 +34,11 @@ if ($eventtype['display']) {
 }
 tng_free_result($eventtypes);
 
-$helplang = findhelp("citations_help.php");
+$helplang = findhelp('citations_help.php');
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 
-$xnotestr = $noteID ? " OR persfamID = '$noteID'" : "";
+$xnotestr = $noteID ? " OR persfamID = '$noteID'" : '';
 $query = "SELECT citationID, $citations_table.sourceID AS sourceID, description, title, shorttitle FROM $citations_table "
     . "LEFT JOIN $sources_table ON $citations_table.sourceID = $sources_table.sourceID "
     . "WHERE ((persfamID = '$persfamID' AND eventID = '$eventID')$xnotestr) ORDER BY ordernum, citationID";
@@ -87,12 +87,12 @@ $citationcount = tng_num_rows($citresult);
             if ($allowEdit) {
               $actionstr .= "<a href='#' onclick=\"return editCitation({$citation['citationID']});\" title='" . uiTextSnippet('edit') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
-              $actionstr .= "</a>";
+              $actionstr .= '</a>';
             }
             if ($allowDelete) {
               $actionstr .= "<a href='#' onclick=\"return deleteCitation({$citation['citationID']},'$persfamID','$eventID');\" title='" . uiTextSnippet('delete') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
-              $actionstr .= "</a>";
+              $actionstr .= '</a>';
             }
             echo "<div class=\"sortrow\" id=\"citations_{$citation['citationID']}\">";
               echo "<table class='table table-sm'>";
@@ -158,8 +158,8 @@ $citationcount = tng_num_rows($citresult);
               <option value=''></option>
               <option value='0'>0</option>
               <option value='1'>1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
+              <option value='2'>2</option>
+              <option value='3'>3</option>
             </select> (<?php echo uiTextSnippet('relyexplain'); ?>)
           </td>
         </tr>

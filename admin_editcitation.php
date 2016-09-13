@@ -10,13 +10,13 @@ $query = "SELECT $citations_table.sourceID AS sourceID, description, page, quay,
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
-$row['page'] = preg_replace("/\"/", "&#34;", $row['page']);
-$row['citetext'] = preg_replace("/\"/", "&#34;", $row[citetext]);
-$row['note'] = preg_replace("/\"/", "&#34;", $row[note]);
+$row['page'] = preg_replace('/\"/', '&#34;', $row['page']);
+$row['citetext'] = preg_replace('/\"/', '&#34;', $row[citetext]);
+$row['note'] = preg_replace('/\"/', '&#34;', $row[note]);
 
-$helplang = findhelp("citations_help.php");
+$helplang = findhelp('citations_help.php');
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <form action='' name='citeform3' onsubmit="return updateCitation(this);">
   <header class='modal-header'>
@@ -44,7 +44,7 @@ header("Content-type:text/html; charset=" . $session_charset);
         </tr>
       <?php
       } else {
-        echo "<tr><td>" . uiTextSnippet('description') . ":</td><td>\n";
+        echo '<tr><td>' . uiTextSnippet('description') . ":</td><td>\n";
         echo "<input name='description' type='text' value=\"{$row['description']}\">\n";
         echo "<input name='sourceID' type='hidden' value=''></td>\n";
       }
@@ -58,10 +58,10 @@ header("Content-type:text/html; charset=" . $session_charset);
         <td>
           <select name="quay">
             <option value=''></option>
-            <option value='0'<?php if ($row['quay'] == "0") {echo " selected";} ?>>0</option>
-            <option value='1'<?php if ($row['quay'] == "1") {echo " selected";} ?>>1</option>
-            <option value="2"<?php if ($row['quay'] == "2") {echo " selected";} ?>>2</option>
-            <option value="3"<?php if ($row['quay'] == "3") {echo " selected";} ?>>3</option>
+            <option value='0'<?php if ($row['quay'] == '0') {echo ' selected';} ?>>0</option>
+            <option value='1'<?php if ($row['quay'] == '1') {echo ' selected';} ?>>1</option>
+            <option value='2'<?php if ($row['quay'] == '2') {echo ' selected';} ?>>2</option>
+            <option value='3'<?php if ($row['quay'] == '3') {echo ' selected';} ?>>3</option>
           </select> <span>(<?php echo uiTextSnippet('relyexplain'); ?>)</span>
         </td>
       </tr>

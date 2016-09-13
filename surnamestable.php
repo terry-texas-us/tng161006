@@ -3,14 +3,14 @@
   <tr>
     <td class="sncol">
       <?php
-      $wherestr = "";
+      $wherestr = '';
 
       $more = getLivingPrivateRestrictions($people_table, false, false);
       if ($more) {
-        $wherestr .= $wherestr ? " AND " . $more : "WHERE $more";
+        $wherestr .= $wherestr ? ' AND ' . $more : "WHERE $more";
       }
       $topnum = $topnum ? $topnum : 100;
-      $surnamestr = $lnprefixes ? "TRIM(CONCAT_WS(' ',lnprefix,lastname) )" : "lastname";
+      $surnamestr = $lnprefixes ? "TRIM(CONCAT_WS(' ',lnprefix,lastname) )" : 'lastname';
       if ($tngconfig['ucsurnames']) {
         $surnamestr = "ucase($surnamestr)";
       }
@@ -30,7 +30,7 @@
         $nosurname = urlencode(uiTextSnippet('nosurname'));
         while ($surname = tng_fetch_assoc($result)) {
           $surname2 = urlencode($surname['lastname']);
-          $name = $surname[lastname] ? "<a href=\"search.php?mylastname=$surname2&amp;lnqualify=equals&amp;mybool=AND$treestr\">{$surname['lowername']}</a>" : "<a href=\"search.php?mylastname=$nosurname&amp;lnqualify=equals&amp;mybool=AND$treestr\">" . uiTextSnippet('nosurname') . "</a>";
+          $name = $surname[lastname] ? "<a href=\"search.php?mylastname=$surname2&amp;lnqualify=equals&amp;mybool=AND$treestr\">{$surname['lowername']}</a>" : "<a href=\"search.php?mylastname=$nosurname&amp;lnqualify=equals&amp;mybool=AND$treestr\">" . uiTextSnippet('nosurname') . '</a>';
           echo "$counter. $name ({$surname['lncount']})<br>\n";
           $counter++;
           $num_in_col_ctr++;

@@ -8,10 +8,10 @@ require 'version.php';
 
 if (!$allowMediaEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('sortmedia'));
 ?>
 <!DOCTYPE html>
@@ -22,13 +22,13 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
     <?php
     echo $adminHeaderSection->build('media-text_sort', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('browse'), "findmedia"]);
-    $navList->appendItem([$allowMediaAdd, "mediaAdd.php", uiTextSnippet('add'), "addmedia"]);
-    //    $navList->appendItem([$allowMediaEdit, "mediaSort.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    $navList->appendItem([$allowMediaEdit, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-    $navList->appendItem([$allowMediaAdd, "mediaImport.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allowMediaAdd, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
-    echo $navList->build("sortmedia");
+    $navList->appendItem([true, 'mediaBrowse.php', uiTextSnippet('browse'), 'findmedia']);
+    $navList->appendItem([$allowMediaAdd, 'mediaAdd.php', uiTextSnippet('add'), 'addmedia']);
+    //    $navList->appendItem([$allowMediaEdit, 'mediaSort.php', uiTextSnippet('text_sort'), 'sortmedia']);
+    $navList->appendItem([$allowMediaEdit, 'mediaThumbnails.php', uiTextSnippet('thumbnails'), 'thumbs']);
+    $navList->appendItem([$allowMediaAdd, 'mediaImport.php', uiTextSnippet('import'), 'import']);
+    $navList->appendItem([$allowMediaAdd, 'mediaUpload.php', uiTextSnippet('upload'), 'upload']);
+    echo $navList->build('sortmedia');
     ?>
     <form name='find' action='mediaSortFormAction.php' method='get' onsubmit="return validateForm();">
       <h4><?php echo uiTextSnippet('sortmediaind'); ?></h4>
@@ -55,9 +55,9 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
                 $msgID = $mediatype['ID'];
                 echo " <option value=\"$msgID\"";
                 if ($msgID == $mediatypeID) {
-                  echo " selected";
+                  echo ' selected';
                 }
-                echo ">" . $mediatype['display'] . "</option>\n";
+                echo '>' . $mediatype['display'] . "</option>\n";
               }
               ?>
             </select>

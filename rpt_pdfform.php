@@ -3,8 +3,8 @@ $tngprint = 1;
 require 'tng_begin.php';
 require $subroot . 'pedconfig.php';
 
-if ($pdftype == "ped") {
-  $dest = "rpt_pedigree";
+if ($pdftype == 'ped') {
+  $dest = 'rpt_pedigree';
   $genmax = !$pedigree['maxgen'] || $pedigree['maxgen'] > 6 ? 6 : $pedigree['maxgen'];
   $genmin = 2;
   $allow_blank = 1;
@@ -13,8 +13,8 @@ if ($pdftype == "ped") {
   $hdrFontDefault = 12;
   $rptFontSizes = [8];
   $titleidx = 'pedigreefor';
-} elseif ($pdftype == "desc") {
-  $dest = "rpt_descend";
+} elseif ($pdftype == 'desc') {
+  $dest = 'rpt_descend';
   $genmin = 2;
   $genmax = !$pedigree['maxdesc'] || $pedigree['maxdesc'] > 12 ? 12 : $pedigree['maxdesc'];
   $allow_blank = 0;
@@ -24,8 +24,8 @@ if ($pdftype == "ped") {
   $rptFontSizes = [9, 10, 12, 14];
   $rptFontDefault = 10;
   $titleidx = 'descendfor';
-} elseif ($pdftype == "fam") {
-  $dest = "rpt_fam";
+} elseif ($pdftype == 'fam') {
+  $dest = 'rpt_fam';
   $genmin = 0;
   $genmax = 0;
   $allow_blank = 1;
@@ -37,7 +37,7 @@ if ($pdftype == "ped") {
   $rptFontDefault = 10;
   $titleidx = 'familygroupfor';
 } else {
-  $dest = "rpt_ind";
+  $dest = 'rpt_ind';
   $genmin = 0;         // no generations option
   $genmax = 0;
   $allow_blank = 1;
@@ -55,7 +55,7 @@ function doGenOptions($generations, $first, $last) {
   for ($i = $first; $i <= $last; $i++) {
     echo "<option value=\"$i\"";
     if ($i == $generations) {
-      echo " selected";
+      echo ' selected';
     }
     echo ">$i</option>\n";
   }
@@ -71,7 +71,7 @@ function doFontOptions($field, $default = 'helvetica') {
   foreach ($fonts as $font) {
     echo "<option value=\"$font\"";
     if ($font == $default) {
-      print " selected";
+      print ' selected';
     }
     echo ">$font_list[$font]</option>";
   }
@@ -87,7 +87,7 @@ function doFontSizeOptions($field, $options, $default) {
     foreach ($options as $size) {
       echo "<option value=\"$size\"";
       if ($default == $size) {
-        print " selected";
+        print ' selected';
       }
       echo ">$size</option>";
     }
@@ -117,7 +117,7 @@ if (is_dir($font_dir)) {
 }
 $pdftype = $savetype;
 
-if ($pdftype == "fam") {
+if ($pdftype == 'fam') {
   $result = getFamilyData($familyID);
   $famrow = tng_fetch_assoc($result);
   $titletext = getFamilyName($famrow);
@@ -135,10 +135,10 @@ if ($pdftype == "fam") {
     $titletext = "$pedname ($personID)";
   }
 }
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <div id='finddiv'>
-  <?php beginFormElement($dest, "post", "pdfform", "pdfform"); ?>
+  <?php beginFormElement($dest, 'post', 'pdfform', 'pdfform'); ?>
     <header class='modal-header'>
       <h4><?php echo uiTextSnippet('pdfgen'); ?></h4>
       <p><span><?php echo uiTextSnippet($titleidx); ?> </span><?php echo $titletext; ?></p>
@@ -170,7 +170,7 @@ header("Content-type:text/html; charset=" . $session_charset);
             </td>
           </tr>
           <?php
-          if ($pdftype == "ped" || $pdftype == "desc") {
+          if ($pdftype == 'ped' || $pdftype == 'desc') {
             ?>
             <tr>
               <td class="ws">
@@ -202,13 +202,13 @@ header("Content-type:text/html; charset=" . $session_charset);
         </div>
         <?php
       }
-      if ($pdftype == "fam") {
+      if ($pdftype == 'fam') {
         echo "<input name='familyID' type='hidden' value=\"$familyID\"/>\n";
       } else {
         echo "<input name='personID' type='hidden' value=\"$personID\"/>\n";
       }
       // options specific to certain report types
-      if ($pdftype == "desc") {
+      if ($pdftype == 'desc') {
         ?>
         <div class='pdfblock h4'>
           <a href="#" onClick="return toggleSection('dispopts', 'dispicon', '');" class="pdftoggle">
@@ -224,8 +224,8 @@ header("Content-type:text/html; charset=" . $session_charset);
               <td>
                 <select name="getPlace">
                   <option value='1' selected><?php echo uiTextSnippet('borchr'); ?></option>
-                  <option value="2"><?php echo uiTextSnippet('nobd'); ?></option>
-                  <option value="3"><?php echo uiTextSnippet('bcdb'); ?></option>
+                  <option value='2'><?php echo uiTextSnippet('nobd'); ?></option>
+                  <option value='3'><?php echo uiTextSnippet('bcdb'); ?></option>
                 </select>
               </td>
             </tr>
@@ -236,9 +236,9 @@ header("Content-type:text/html; charset=" . $session_charset);
               <select name="numbering">
                 <option value='0'><?php echo uiTextSnippet('none'); ?></option>
                 <option value='1' selected><?php echo uiTextSnippet('gennums'); ?></option>
-                <option value="2"><?php echo uiTextSnippet('henrynums'); ?></option>
-                <option value="3"><?php echo uiTextSnippet('abovnums'); ?></option>
-                <option value="4"><?php echo uiTextSnippet('devnums'); ?></option>
+                <option value='2'><?php echo uiTextSnippet('henrynums'); ?></option>
+                <option value='3'><?php echo uiTextSnippet('abovnums'); ?></option>
+                <option value='4'><?php echo uiTextSnippet('devnums'); ?></option>
               </select>
             </td>
             <tr>
@@ -327,15 +327,11 @@ header("Content-type:text/html; charset=" . $session_charset);
             </td>
             <td>
               <select name="pagesize">
-                <option value="a3"<?php if ($pagesize == "a3") {echo " selected";} ?>>A3</option>
-                <option value="a4"<?php if ($pagesize == "a4") {echo " selected";} ?>>A4</option>
-                <option value="a5"<?php if ($pagesize == "a5") {echo " selected";} ?>>A5</option>
-                <option value="letter"<?php if (!$pagesize || $pagesize == "letter") {echo " selected";} ?>>
-                  <?php echo uiTextSnippet('letter'); ?>
-                </option>
-                <option value="legal<?php if ($pagesize == "legal") {echo " selected";} ?>">
-                  <?php echo uiTextSnippet('legal'); ?>
-                </option>
+                <option value='a3'<?php if ($pagesize == 'a3') {echo ' selected';} ?>>A3</option>
+                <option value='a4'<?php if ($pagesize == 'a4') {echo ' selected';} ?>>A4</option>
+                <option value='a5'<?php if ($pagesize == 'a5') {echo ' selected';} ?>>A5</option>
+                <option value='letter'<?php if (!$pagesize || $pagesize == 'letter') {echo ' selected';} ?>><?php echo uiTextSnippet('letter'); ?></option>
+                <option value='legal'<?php if ($pagesize == 'legal') {echo ' selected';} ?>><?php echo uiTextSnippet('legal'); ?></option>
               </select>
             </td>
           </tr>

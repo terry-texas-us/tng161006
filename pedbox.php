@@ -16,7 +16,7 @@ function getPhotoSrc($persfamID, $living, $gender) {
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
 
-  $photocheck = "";
+  $photocheck = '';
   if ($row['thumbpath']) {
     if ($row['alwayson'] || checkLivingLinks($row['mediaID'])) {
       $mediatypeID = $row['mediatypeID'];
@@ -27,7 +27,7 @@ function getPhotoSrc($persfamID, $living, $gender) {
     }
   } elseif ($living) {
     $photoref = $photocheck = "$photopath/$persfamID.$photosext";
-    $photolink = "";
+    $photolink = '';
   }
   $gotfile = $photocheck ? file_exists("$rootpath$photocheck") : false;
   if (!$gotfile) {
@@ -45,8 +45,8 @@ function getPhotoSrc($persfamID, $living, $gender) {
     $photo['ref'] = $photoref;
     $photo['link'] = $photolink;
   } else {
-    $photo['ref'] = "";
-    $photo['link'] = "";
+    $photo['ref'] = '';
+    $photo['link'] = '';
   }
 
   return $photo;

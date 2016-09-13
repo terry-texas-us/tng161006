@@ -7,7 +7,7 @@ require 'checklogin.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 require 'adminlog.php';
@@ -18,8 +18,8 @@ $zoom = addslashes($zoom);
 $notes = addslashes($notes);
 $orgplace = addslashes($orgplace);
 
-$latitude = preg_replace("/,/", ".", addslashes($latitude));
-$longitude = preg_replace("/,/", ".", addslashes($longitude));
+$latitude = preg_replace('/,/', '.', addslashes($latitude));
+$longitude = preg_replace('/,/', '.', addslashes($longitude));
 
 if ($latitude && $longitude && $placelevel && !$zoom) {
   $zoom = 13;
@@ -37,7 +37,7 @@ $query = "UPDATE $places_table SET place = '$place', placelevel = '$placelevel',
 $result = tng_query($query);
 if (!$result) {
   $message = uiTextSnippet('duplicate');
-  header("Location: placesBrowse.php?message=" . urlencode($message));
+  header('Location: placesBrowse.php?message=' . urlencode($message));
   exit;
 }
 if ($propagate && trim($orgplace)) {
@@ -81,9 +81,9 @@ if ($propagate && trim($orgplace)) {
 }
 adminwritelog("<a href=\"placesEdit.php?ID=$ID\">" . uiTextSnippet('modifyplace') . ": $place</a>");
 
-if ($newscreen == "return") {
+if ($newscreen == 'return') {
   header("Location: placesEdit.php?ID=$ID");
-} elseif ($newscreen == "close") {
+} elseif ($newscreen == 'close') {
 ?>
   <!DOCTYPE html>
   <html>
@@ -96,5 +96,5 @@ if ($newscreen == "return") {
 <?php
 } else {
   $message = uiTextSnippet('changestoplace') . " $place " . uiTextSnippet('succsaved') . '.';
-  header("Location: placesBrowse.php?message=" . urlencode($message));
+  header('Location: placesBrowse.php?message=' . urlencode($message));
 }

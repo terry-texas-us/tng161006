@@ -1,31 +1,31 @@
 <?php
 
-$nodate_all = "0000-00-00";
+$nodate_all = '0000-00-00';
 $eventctr_all = 1;
 
 function getBirthInfo($thisperson) {
-  $birthstring = "";
+  $birthstring = '';
 
   if ($thisperson['birthdate'] || ($thisperson['birthplace'] && !$thisperson['altbirthdate'])) {
-    $birthstring .= ", " . uiTextSnippet('birthabbr', ['html' => 'strong']) . " ";
+    $birthstring .= ', ' . uiTextSnippet('birthabbr', ['html' => 'strong']) . ' ';
     if ($thisperson['birthdate']) {
       $birthstring .= displayDate($thisperson['birthdate']);
     }
     if ($thisperson['birthplace']) {
       if ($thisperson['birthdate']) {
-        $birthstring .= ", ";
+        $birthstring .= ', ';
       }
       $birthstring .= buildSilentPlaceLink($thisperson['birthplace']);
     }
   } else {
     if ($thisperson['altbirthdate'] || $thisperson['altbirthplace']) {
-      $birthstring .= ", " . uiTextSnippet('chrabbr', ['html' => 'strong']) . " ";
+      $birthstring .= ', ' . uiTextSnippet('chrabbr', ['html' => 'strong']) . ' ';
       if ($thisperson['altbirthdate']) {
         $birthstring .= displayDate($thisperson['altbirthdate']);
       }
       if ($thisperson['altbirthplace']) {
         if ($thisperson['altbirthdate']) {
-          $birthstring .= ", ";
+          $birthstring .= ', ';
         }
         $birthstring .= buildSilentPlaceLink($thisperson['altbirthplace']);
       }
@@ -33,25 +33,25 @@ function getBirthInfo($thisperson) {
   }
 
   if ($thisperson['deathdate'] || ($thisperson['deathplace'] && !$thisperson['burialdate'])) {
-    $birthstring .= ", " . uiTextSnippet('deathabbr', ['html' => 'strong']) . " ";
+    $birthstring .= ', ' . uiTextSnippet('deathabbr', ['html' => 'strong']) . ' ';
     if ($thisperson['deathdate']) {
       $birthstring .= displayDate($thisperson['deathdate']);
     }
     if ($thisperson['deathplace']) {
       if ($thisperson['deathdate']) {
-        $birthstring .= ", ";
+        $birthstring .= ', ';
       }
       $birthstring .= buildSilentPlaceLink($thisperson['deathplace']);
     }
   } else {
     if ($thisperson['burialdate'] || $thisperson['burialplace']) {
-      $birthstring .= ", " . uiTextSnippet('burialabbr', ['html' => 'strong']) . " ";
+      $birthstring .= ', ' . uiTextSnippet('burialabbr', ['html' => 'strong']) . ' ';
       if ($thisperson['burialdate']) {
         $birthstring .= displayDate($thisperson['burialdate']);
       }
       if ($thisperson['burialplace']) {
         if ($thisperson['burialdate']) {
-          $birthstring .= ", ";
+          $birthstring .= ', ';
         }
         $birthstring .= buildSilentPlaceLink($thisperson['burialplace']);
       }
@@ -67,75 +67,75 @@ function getCitations($persfamID, $shortcite = 1) {
   global $citationsctr;
   global $citedisplay;
 
-  $actualtext = $shortcite ? "" : ", actualtext";
+  $actualtext = $shortcite ? '' : ', actualtext';
   $citquery = "SELECT citationID, title, shorttitle, author, other, publisher, callnum, page, quay, citedate, citetext, $citations_table.note AS note, $citations_table.sourceID, description, eventID{$actualtext} FROM $citations_table "
       . "LEFT JOIN $sources_table ON $citations_table.sourceID = $sources_table.sourceID "
       . "WHERE persfamID = '$persfamID' ORDER BY ordernum, citationID";
   $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
 
   while ($citrow = tng_fetch_assoc($citresult)) {
-    $source = $citrow['sourceID'] ? "[<a href=\"sourcesShowSource.php?sourceID={$citrow['sourceID']}\">{$citrow['sourceID']}</a>] " : "";
-    $newstring = $source ? "" : $citrow['description'];
-    $key = $persfamID . "_" . $citrow['eventID'];
+    $source = $citrow['sourceID'] ? "[<a href=\"sourcesShowSource.php?sourceID={$citrow['sourceID']}\">{$citrow['sourceID']}</a>] " : '';
+    $newstring = $source ? '' : $citrow['description'];
+    $key = $persfamID . '_' . $citrow['eventID'];
     $citationsctr++;
     $citations[$key] .= $citations[$key] ? ",$citationsctr" : $citationsctr;
 
     if ($citrow['author']) {
       if ($newstring) {
-        $newstring .= ", ";
+        $newstring .= ', ';
       }
       $newstring .= $citrow['author'];
     }
     if ($citrow['title']) {
       if ($newstring) {
-        $newstring .= ", ";
+        $newstring .= ', ';
       }
       $newstring .= $citrow['title'];
     } else {
       if ($citrow['shorttitle']) {
         if ($newstring) {
-          $newstring .= ", ";
+          $newstring .= ', ';
         }
         $newstring .= $citrow['shorttitle'];
       }
     }
     if ($citrow['publisher']) {
       if ($newstring) {
-        $newstring .= ", ";
+        $newstring .= ', ';
       }
       $newstring .= "({$citrow['publisher']})";
     }
     if ($citrow['callnum']) {
       if ($newstring) {
-        $newstring .= ", ";
+        $newstring .= ', ';
       }
-      $newstring .= $citrow['callnum'] . ".";
+      $newstring .= $citrow['callnum'] . '.';
     }
     if ($citrow['other']) {
       if ($newstring) {
-        $newstring .= ", ";
+        $newstring .= ', ';
       }
       $newstring .= $citrow['other'];
     }
     if ($citrow['page']) {
       if ($newstring) {
-        $newstring .= ", ";
+        $newstring .= ', ';
       }
       $newstring .= nl2br(insertLinks($citrow['page']));
     }
-    if ($citrow['quay'] != "") {
+    if ($citrow['quay'] != '') {
       if ($newstring) {
-        $newstring .= " ";
+        $newstring .= ' ';
       }
-      $newstring .= "(" . uiTextSnippet('reliability') . ": {$citrow['quay']})";
+      $newstring .= '(' . uiTextSnippet('reliability') . ": {$citrow['quay']})";
     }
     if ($citrow['citedate']) {
       if ($newstring) {
-        $newstring .= ", ";
+        $newstring .= ', ';
       }
       $newstring .= displayDate($citrow['citedate']);
     }
-    $newstring .= substr($newstring, -1) == "." ? "" : ".";
+    $newstring .= substr($newstring, -1) == '.' ? '' : '.';
     if ($citrow['citetext']) {
       if ($newstring) {
         $newstring .= "<br>\n";
@@ -167,7 +167,7 @@ function reorderCitation($citekey, $withlink = 1) {
   global $citations;
   global $citedisplay;
 
-  $newstring = "";
+  $newstring = '';
   $newcitearr = [];
   if ($citations[$citekey]) {
     $citationlist = explode(',', $citations[$citekey]);
@@ -186,12 +186,12 @@ function reorderCitation($citekey, $withlink = 1) {
       }
       array_push($newcitearr, $newcitecnt);
     }
-    $citations[$citekey] = "";
+    $citations[$citekey] = '';
   }
   $newcitearr = array_unique($newcitearr);
   asort($newcitearr);
   foreach ($newcitearr as $newcite) {
-    $newstring .= $newstring ? ", " : "";
+    $newstring .= $newstring ? ', ' : '';
     if ($withlink) {
       $newstring .= "<a href=\"#cite$newcite\" onclick=\"$('citations').style.display = '';\">$newcite</a>";
     } else {
@@ -215,17 +215,17 @@ function getNotes($persfamID, $flag) {
   $finalnotesarray = [];
 
   if ($flag == 'I') {
-    $precusttitles = ["BIRT" => uiTextSnippet('born'), "CHR" => uiTextSnippet('christened'), "NAME" => uiTextSnippet('name'), "TITL" => uiTextSnippet('title'), "NPFX" => uiTextSnippet('prefix'), "NSFX" => uiTextSnippet('suffix'), "NICK" => uiTextSnippet('nickname'), "BAPL" => uiTextSnippet('baptizedlds'), "CONL" => uiTextSnippet('conflds'), "INIT" => uiTextSnippet('initlds'), "ENDL" => uiTextSnippet('endowedlds')];
-    $postcusttitles = ["DEAT" => uiTextSnippet('died'), "BURI" => uiTextSnippet('buried'), "SLGC" => uiTextSnippet('sealedplds')];
+    $precusttitles = ['BIRT' => uiTextSnippet('born'), 'CHR' => uiTextSnippet('christened'), 'NAME' => uiTextSnippet('name'), 'TITL' => uiTextSnippet('title'), 'NPFX' => uiTextSnippet('prefix'), 'NSFX' => uiTextSnippet('suffix'), 'NICK' => uiTextSnippet('nickname'), 'BAPL' => uiTextSnippet('baptizedlds'), 'CONL' => uiTextSnippet('conflds'), 'INIT' => uiTextSnippet('initlds'), 'ENDL' => uiTextSnippet('endowedlds')];
+    $postcusttitles = ['DEAT' => uiTextSnippet('died'), 'BURI' => uiTextSnippet('buried'), 'SLGC' => uiTextSnippet('sealedplds')];
   } elseif ($flag == 'F') {
-    $precusttitles = ["MARR" => uiTextSnippet('married'), "SLGS" => uiTextSnippet('sealedslds'), "DIV" => uiTextSnippet('divorced')];
+    $precusttitles = ['MARR' => uiTextSnippet('married'), 'SLGS' => uiTextSnippet('sealedslds'), 'DIV' => uiTextSnippet('divorced')];
     $postcusttitles = [];
   } else {
-    $precusttitles = ["ABBR" => uiTextSnippet('shorttitle'), "CALN" => uiTextSnippet('callnum'), "AUTH" => uiTextSnippet('author'), "PUBL" => uiTextSnippet('publisher'), "TITL" => uiTextSnippet('title')];
+    $precusttitles = ['ABBR' => uiTextSnippet('shorttitle'), 'CALN' => uiTextSnippet('callnum'), 'AUTH' => uiTextSnippet('author'), 'PUBL' => uiTextSnippet('publisher'), 'TITL' => uiTextSnippet('title')];
     $postcusttitles = [];
   }
 
-  $secretstr = $allow_private ? "" : " AND secret != \"1\"";
+  $secretstr = $allow_private ? '' : " AND secret != \"1\"";
   $query = "SELECT display, $xnotes_table.note AS note, $notelinks_table.eventID AS eventID, $notelinks_table.xnoteID AS xnoteID, $notelinks_table.ID AS ID, noteID FROM $notelinks_table "
       . "LEFT JOIN  $xnotes_table ON $notelinks_table.xnoteID = $xnotes_table.ID "
       . "LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID "
@@ -233,42 +233,40 @@ function getNotes($persfamID, $flag) {
       . "WHERE $notelinks_table.persfamID = '$persfamID' $secretstr ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum, ID";
   $notelinks = tng_query($query);
 
-  $currevent = "";
-  $currsig = "";
+  $currevent = '';
+  $currsig = '';
   $type = 0;
   while ($note = tng_fetch_assoc($notelinks)) {
     if ($note['noteID']) {
       getCitations($note['noteID']);
     }
-    //else
-    //getCitations( $note['ID'] );
     if (!$note['eventID']) {
-      $note['eventID'] = "--x-general-x--";
+      $note['eventID'] = '--x-general-x--';
     }
-    $signature = $note['eventID'] . "_" . $note['xnoteID'];
+    $signature = $note['eventID'] . '_' . $note['xnoteID'];
     if ($signature != $currsig) {
       $currsig = $signature;
       $currevent = $note['eventID'];
-      $currtitle = "";
+      $currtitle = '';
     }
     if (!$currtitle) {
       if ($note['display']) {
         $currtitle = getEventDisplay($note['display']);
         $key = "$currsig";
-        $custnotes[$key] = ["title" => $currtitle, "text" => ""];
+        $custnotes[$key] = ['title' => $currtitle, 'text' => ''];
         $type = 2;
       } else {
         if ($postcusttitles[$currevent]) {
           $currtitle = $postcusttitles[$currevent];
-          $postcustnotes[$currsig] = ["title" => $postcusttitles[$currevent], "text" => ""];
+          $postcustnotes[$currsig] = ['title' => $postcusttitles[$currevent], 'text' => ''];
           $type = 3;
         } else {
-          $currtitle = $precusttitles[$currevent] ? $precusttitles[$currevent] : " ";
-          if (substr($note['eventID'], 0, 15) == "--x-general-x--") {
-            $gennotes[$currsig] = ["title" => $precusttitles[$currevent], "text" => ""];
+          $currtitle = $precusttitles[$currevent] ? $precusttitles[$currevent] : ' ';
+          if (substr($note['eventID'], 0, 15) == '--x-general-x--') {
+            $gennotes[$currsig] = ['title' => $precusttitles[$currevent], 'text' => ''];
             $type = 0;
           } else {
-            $precustnotes[$currsig] = ["title" => $precusttitles[$currevent], "text" => ""];
+            $precustnotes[$currsig] = ['title' => $precusttitles[$currevent], 'text' => ''];
             $type = 1;
           }
         }
@@ -279,7 +277,7 @@ function getNotes($persfamID, $flag) {
         if ($gennotes[$currsig]['text']) {
           $gennotes[$currsig]['text'] .= "</li>\n";
         }
-        $gennotes[$currsig]['text'] .= "<li>" . nl2br($note['note']);
+        $gennotes[$currsig]['text'] .= '<li>' . nl2br($note['note']);
         $gennotes[$currsig]['cite'] .= "N{$note['ID']}";
         $gennotes[$currsig]['xnote'] .= $note['noteID'];
         break;
@@ -287,7 +285,7 @@ function getNotes($persfamID, $flag) {
         if ($precustnotes[$currsig]['text']) {
           $precustnotes[$currsig]['text'] .= "</li>\n";
         }
-        $precustnotes[$currsig]['text'] .= "<li>" . nl2br($note['note']);
+        $precustnotes[$currsig]['text'] .= '<li>' . nl2br($note['note']);
         $precustnotes[$currsig]['cite'] .= "N{$note['ID']}";
         $precustnotes[$currsig]['xnote'] .= $note['noteID'];
         break;
@@ -295,7 +293,7 @@ function getNotes($persfamID, $flag) {
         if ($custnotes[$key]['text']) {
           $custnotes[$key]['text'] .= "</li>\n";
         }
-        $custnotes[$key]['text'] .= "<li>" . nl2br($note['note']);
+        $custnotes[$key]['text'] .= '<li>' . nl2br($note['note']);
         $custnotes[$key]['cite'] .= "N{$note['ID']}";
         $custnotes[$key]['xnote'] .= $note['noteID'];
         break;
@@ -303,7 +301,7 @@ function getNotes($persfamID, $flag) {
         if ($postcustnotes[$currsig]['text']) {
           $postcustnotes[$currsig]['text'] .= "</li>\n";
         }
-        $postcustnotes[$currsig]['text'] .= "<li>" . nl2br($note['note']);
+        $postcustnotes[$currsig]['text'] .= '<li>' . nl2br($note['note']);
         $postcustnotes[$currsig]['cite'] .= "N{$note['ID']}";
         $postcustnotes[$currsig]['xnote'] .= $note['noteID'];
         break;
@@ -316,8 +314,8 @@ function getNotes($persfamID, $flag) {
 }
 
 function buildNotes($notearray, $entity) {
-  $notes = "";
-  $lasttitle = "---";
+  $notes = '';
+  $lasttitle = '---';
   foreach ($notearray as $key => $note) {
     if ($note['title'] != $lasttitle) {
       if ($notes) {
@@ -327,10 +325,10 @@ function buildNotes($notearray, $entity) {
         $notes .= "<a name=\"$key\"><span>{$note['title']}:</span></a><br>\n";
       }
     }
-    $cite = reorderCitation($entity . "_" . $note['cite']);
+    $cite = reorderCitation($entity . '_' . $note['cite']);
     if ($note['xnote']) {
-      $cite2 = reorderCitation($note['xnote'] . "_");
-      $cite = $cite && $cite2 ? $cite . "," . $cite2 : $cite . $cite2;
+      $cite2 = reorderCitation($note['xnote'] . '_');
+      $cite = $cite && $cite2 ? $cite . ',' . $cite2 : $cite . $cite2;
     }
     if ($cite) {
       $cite = " [$cite]";
@@ -348,16 +346,16 @@ function buildNotes($notearray, $entity) {
 }
 
 function buildGenNotes($notearray, $entity, $eventlist) {
-  $notes = "";
-  $lasttitle = "---";
+  $notes = '';
+  $lasttitle = '---';
   if (is_array($notearray)) {
-    $events = explode(",", $eventlist);
+    $events = explode(',', $eventlist);
     $eventctr = 0;
     foreach ($events as $event) {
       //$eventlen = strlen( $event );
       foreach ($notearray as $key => $note) {
         //if( substr($key,0,$eventlen) == $event ) {
-        if (strtok($key, "_") == $event) {
+        if (strtok($key, '_') == $event) {
           if ($note['title'] != $lasttitle && $eventctr) {
             if ($notes) {
               $notes .= "</ul>\n<br>\n";
@@ -366,10 +364,10 @@ function buildGenNotes($notearray, $entity, $eventlist) {
               $notes .= "<a name=\"$key\"><span>{$note['title']}:</span></a><br>\n";
             }
           }
-          $cite = reorderCitation($entity . "_" . $note['cite']);
+          $cite = reorderCitation($entity . '_' . $note['cite']);
           if ($note['xnote']) {
-            $cite2 = reorderCitation($note['xnote'] . "_");
-            $cite = $cite && $cite2 ? $cite . "," . $cite2 : $cite . $cite2;
+            $cite2 = reorderCitation($note['xnote'] . '_');
+            $cite = $cite && $cite2 ? $cite . ',' . $cite2 : $cite . $cite2;
           }
           if ($cite) {
             $cite = " [$cite]";
@@ -394,7 +392,7 @@ function checkXnote($fact) {
   global $xnotes_table;
 
   $newfact = [];
-  preg_match("/^@(\S+)@/", $fact, $matches);
+  preg_match('/^@(\S+)@/', $fact, $matches);
   if ($matches[1]) {
     $query = "SELECT note, ID FROM $xnotes_table WHERE noteID = \"$matches[1]\"";
     $xnoteres = tng_query($query);
@@ -417,7 +415,7 @@ function resetEvents() {
   global $nodate;
 
   $events = [];
-  $nodate = "0000-00-00";
+  $nodate = '0000-00-00';
   $eventctr = 1;
 }
 
@@ -431,20 +429,20 @@ function setEvent($data, $datetr) {
 
   //make a copy of datetr
   $datetr_all = $datetr;
-  if ($datetr_all == "0000-00-00") {
+  if ($datetr_all == '0000-00-00') {
     $datetr_all = $nodate_all;
   } elseif ($datetr_all > $nodate_all) {
     $nodate_all = $datetr_all;
   }
-  $index_all = $datetr_all . sprintf("%03d", $eventctr_all);
+  $index_all = $datetr_all . sprintf('%03d', $eventctr_all);
   $eventctr_all++;
 
-  if ($datetr == "0000-00-00") {
+  if ($datetr == '0000-00-00') {
     $datetr = $nodate;
   } elseif ($datetr > $nodate) {
     $nodate = $datetr;
   }
-  $index = $datetr . sprintf("%03d", $eventctr);
+  $index = $datetr . sprintf('%03d', $eventctr);
   $events[$index] = $data;
   $eventctr++;
 
@@ -464,21 +462,21 @@ function setEvent($data, $datetr) {
       $fixedplace = htmlspecialchars($safeplace, ENT_QUOTES);
       $custevent = tng_fetch_assoc($custevents);
       $info = $data['fact'];
-      $pinplacelevel = $custevent['placelevel'] ? ${"pinplacelevel" . $custevent['placelevel']} : $pinplacelevel0;
+      $pinplacelevel = $custevent['placelevel'] ? ${'pinplacelevel' . $custevent['placelevel']} : $pinplacelevel0;
       //using $index above will ensure that this array gets sorted in the same order as the events on the page
       $locations2map[$l2mCount] = [$index_all,
-              "placelevel" => $custevent['placelevel'],
-              "pinplacelevel" => $pinplacelevel,
-              "event" => $data['text'],
-              "htmlcontent" => "",
-              "lat" => $custevent['latitude'],
-              "long" => $custevent['longitude'],
-              "zoom" => $custevent['zoom'],
-              "place" => $custevent['place'],
-              "notes" => truncateIt($custevent['notes'], 600),
-              "eventdate" => $data['date'],
-              "description" => $info[0],
-              "fixedplace" => $fixedplace
+              'placelevel' => $custevent['placelevel'],
+              'pinplacelevel' => $pinplacelevel,
+              'event' => $data['text'],
+              'htmlcontent' => '',
+              'lat' => $custevent['latitude'],
+              'long' => $custevent['longitude'],
+              'zoom' => $custevent['zoom'],
+              'place' => $custevent['place'],
+              'notes' => truncateIt($custevent['notes'], 600),
+              'eventdate' => $data['date'],
+              'description' => $info[0],
+              'fixedplace' => $fixedplace
       ];
       $l2mCount++;
     }
@@ -531,36 +529,36 @@ function showEvent($data) {
   }
   $dateplace = $data['date'] || $data['place'] ? 1 : 0;
   $eventcounter += 1;
-  $toggle = $data['collapse'] ? " style=\"display:none\"" : "";
-  $notes = $notestogether && $data['event'] ? buildGenNotes($notearray, $data['entity'], $data['event']) : "";
+  $toggle = $data['collapse'] ? " style=\"display:none\"" : '';
+  $notes = $notestogether && $data['event'] ? buildGenNotes($notearray, $data['entity'], $data['event']) : '';
   $rows = $dateplace;
   if ($tableid && !$cellnumber && ($dateplace || $data['fact'] || $notes)) {
     $cellid = " id=\"$tableid" . "1\"";
     $cellnumber++;
   } else {
-    $cellid = "";
+    $cellid = '';
   }
 
   if ($data['fact']) {
     $rows += is_array($data['fact']) ? count($data['fact']) : 1;
   }
-  $output = "";
-  $cite = $data['entity'] ? reorderCitation($data['entity'] . "_" . $data['event']) : "";
+  $output = '';
+  $cite = $data['entity'] ? reorderCitation($data['entity'] . '_' . $data['event']) : '';
 
   if ($dateplace) {
-    $output .= "<td>";
+    $output .= '<td>';
     if ($data['date']) {
       $output .= "<span class='date'>";
       $output .= displayDate($data['date']);
       if (!$data['place'] && $cite) {
         $output .= "<sup> $cite</sup>";
-        $cite = "";
+        $cite = '';
       }
-      $output .= "</span>";
+      $output .= '</span>';
     }
     $data['stacked'] = true;
     if ($data['stacked']) {
-      $output .= "<br>";
+      $output .= '<br>';
     } else {
       $output .= "</td>\n";
       $output .= "<td>\n";
@@ -577,15 +575,15 @@ function showEvent($data) {
         $output .= "</a>$cite</td>\n";
       }
       $output .= "</td>\n";
-      $cite = "";
+      $cite = '';
     }
     $output .= "</tr>\n";
-  } elseif ($data['fact'] == "" && $cite) {
+  } elseif ($data['fact'] == '' && $cite) {
     $data['fact'] = uiTextSnippet('yesabbr');
     $rows++;
   }
-  if ($data['fact'] != "") {
-    $cite .= $data['xnote'] ? reorderCitation($data['xnote'] . "_") : "";
+  if ($data['fact'] != '') {
+    $cite .= $data['xnote'] ? reorderCitation($data['xnote'] . '_') : '';
     if (is_array($data['fact'])) {
       for ($i = 0; $i < count($data['fact']); $i++) {
         if ($output) {
@@ -595,20 +593,20 @@ function showEvent($data) {
           $cite = "<sup> $cite</sup>";
         }
         $output .= "<td colspan='2'>" . nl2br(insertLinks($data['fact'][$i])) . "$cite</td></tr>\n";
-        $cite = "";
+        $cite = '';
       }
     } else {
       if ($output) {
         $output .= "<tr class=\"t{$eventcounter}\"$toggle>\n";
       }
-      if (strpos($data['fact'], "http") === false && strpos($data['fact'], "www") === false) {
-        preg_match("/(.*)\s*\/(.*)\/$/", $data['fact'], $matches);
+      if (strpos($data['fact'], 'http') === false && strpos($data['fact'], 'www') === false) {
+        preg_match('/(.*)\s*\/(.*)\/$/', $data['fact'], $matches);
         $count = count($matches);
         if ($count) {
-          $newfact = "";
+          $newfact = '';
           for ($i = 1; $i <= $count; $i++) {
             if ($newfact) {
-              $newfact .= " ";
+              $newfact .= ' ';
             }
             $newfact .= addslashes($matches[$i]);
           }
@@ -619,7 +617,7 @@ function showEvent($data) {
         $cite = "<sup> $cite</sup>";
       }
       $output .= "<td colspan='2'>" . nl2br(insertLinks($data['fact'])) . "$cite</td></tr>\n";
-      $cite = "";
+      $cite = '';
     }
   }
   if ($notestogether) {
@@ -642,7 +640,7 @@ function showEvent($data) {
   }
   $media_array = array_merge($media[$event], $albums[$event]);
 
-  $mediaoutput = "";
+  $mediaoutput = '';
   $thumbcount = 0;
   if (count($media_array)) {
     foreach ($media_array as $item) {
@@ -654,25 +652,25 @@ function showEvent($data) {
         $mediaoutput .= "<td>{$item['imgsrc']}</td>\n";
         $thumbcount++;
       } else {
-        $mediaoutput .= "<td></td>";
+        $mediaoutput .= '<td></td>';
       }
       $mediaoutput .= "<td>{$item['name']}<br>" . nl2br($item['description']) . "</td>\n";
       $mediaoutput .= "</tr>\n";
     }
     if (!$thumbcount) {
-      $mediaoutput = str_replace("<td></td><td>", "<td colspan='2'>", $mediaoutput);
+      $mediaoutput = str_replace('<td></td><td>', "<td colspan='2'>", $mediaoutput);
     }
     $output .= $mediaoutput;
   }
   if ($output) {
-    $editicon = $tentative_edit && $data['event'] && $data['event'] != "NAME" ? "<img class='icon-sm' src='svg/new-message.svg' alt=\"" . uiTextSnippet('editevent') . "\" title=\"" . uiTextSnippet('editevent') . "\" onclick=\"tnglitbox = new ModalDialog('ajx_tentedit.php?persfamID={$data['entity']}&amp;type={$data['type']}&amp;event={$data['event']}&amp;title={$data['text']}');\" class=\"fakelink\">" : "";
-    $toggleicon = $data['collapse'] && $rows > 1 ? "<img src=\"img/tng_sort_desc.gif\" class=\"toggleicon\" id=\"t{$eventcounter}\" title=\"" . uiTextSnippet('expand') . "\">" : "";
-    $class = $cellid ? "indleftcol" : "";
-    $rowspan = $rows > 1 && !$data['collapse'] ? " rowspan=\"$rows\"" : "";
+    $editicon = $tentative_edit && $data['event'] && $data['event'] != 'NAME' ? "<img class='icon-sm' src='svg/new-message.svg' alt=\"" . uiTextSnippet('editevent') . "\" title=\"" . uiTextSnippet('editevent') . "\" onclick=\"tnglitbox = new ModalDialog('ajx_tentedit.php?persfamID={$data['entity']}&amp;type={$data['type']}&amp;event={$data['event']}&amp;title={$data['text']}');\" class=\"fakelink\">" : '';
+    $toggleicon = $data['collapse'] && $rows > 1 ? "<img src=\"img/tng_sort_desc.gif\" class=\"toggleicon\" id=\"t{$eventcounter}\" title=\"" . uiTextSnippet('expand') . "\">" : '';
+    $class = $cellid ? 'indleftcol' : '';
+    $rowspan = $rows > 1 && !$data['collapse'] ? " rowspan=\"$rows\"" : '';
     $preoutput = "<tr>\n<td class=\"$class lt{$eventcounter}\" $rowspan$cellid>$toggleicon<span>{$data['text']}$editicon</span></td>\n";
     $final = $preoutput . $output;
   } else {
-    $final = "";
+    $final = '';
   }
 
   return $final;
@@ -703,8 +701,8 @@ function doCustomEvents($entityID, $type, $nomap = 0) {
       }
     }
     $extras = getFact($custevent);
-    $fact = (count($fact) && $fact[0] != "") ? array_merge($fact, $extras) : $extras;
-    setEvent(["text" => $displayval, "date" => $custevent['eventdate'], "place" => $custevent['eventplace'], "fact" => $fact, "xnote" => $xnote, "event" => $eventID, "entity" => $entityID, "type" => $type, "nomap" => $nomap, "collapse" => $custevent['collapse'] && !$tngprint], $custevent['eventdatetr']);
+    $fact = (count($fact) && $fact[0] != '') ? array_merge($fact, $extras) : $extras;
+    setEvent(['text' => $displayval, 'date' => $custevent['eventdate'], 'place' => $custevent['eventplace'], 'fact' => $fact, 'xnote' => $xnote, 'event' => $eventID, 'entity' => $entityID, 'type' => $type, 'nomap' => $nomap, 'collapse' => $custevent['collapse'] && !$tngprint], $custevent['eventdatetr']);
   }
   tng_free_result($custevents);
 }
@@ -715,8 +713,8 @@ function doMediaSection($entity, $medialist, $albums) {
   global $tableid;
   global $datewidth;
 
-  $media = "";
-  $tableid = "media";
+  $media = '';
+  $tableid = 'media';
   $cellnumber = 0;
   foreach ($mediatypes as $mediatype) {
     $mediatypeID = $mediatype['ID'];
@@ -748,23 +746,23 @@ function getLinkTypeMisc($entity, $linktype) {
   switch ($linktype) {
     case 'I':
       $misc['personID'] = $entity['personID'];
-      $misc['always'] = $entity['allow_living'] && $entity['allow_private'] ? "" : "AND alwayson = \"1\"";
+      $misc['always'] = $entity['allow_living'] && $entity['allow_private'] ? '' : "AND alwayson = \"1\"";
       break;
     case 'F':
       $misc['personID'] = $entity['familyID'];
-      $misc['always'] = $entity['allow_living'] && $entity['allow_private'] ? "" : "AND alwayson = \"1\"";
+      $misc['always'] = $entity['allow_living'] && $entity['allow_private'] ? '' : "AND alwayson = \"1\"";
       break;
     case 'S':
       $misc['personID'] = $entity['sourceID'];
-      $misc['always'] = "";
+      $misc['always'] = '';
       break;
     case 'R':
       $misc['personID'] = $entity['repoID'];
-      $misc['always'] = "";
+      $misc['always'] = '';
       break;
     case 'L':
       $misc['personID'] = $entity;
-      $misc['always'] = "";
+      $misc['always'] = '';
       break;
   }
 
@@ -791,7 +789,7 @@ function getAlbums($entity, $linktype) {
 
   while ($albumlink = tng_fetch_assoc($albumlinks)) {
     $thisalbum = [];
-    $eventID = $albumlink['eventID'] && $entity['allow_living'] && $entity['allow_private'] ? $albumlink['eventID'] : "-x--general--x-";
+    $eventID = $albumlink['eventID'] && $entity['allow_living'] && $entity['allow_private'] ? $albumlink['eventID'] : '-x--general--x-';
 
     //check to see if we have rights to view this album
     $query = "SELECT $album2entities_table.entityID AS personID, people.living AS living, people.private AS private, people.branch AS branch, families.branch AS fbranch, families.living AS fliving, families.private AS fprivate, familyID, people.personID AS personID2 FROM $album2entities_table "
@@ -842,9 +840,9 @@ function getAlbums($entity, $linktype) {
       $thisalbum['name'] = "<a href=\"albumsShowAlbum.php?albumID={$albumlink['albumID']}\">{$albumlink['albumname']}</a> ({$arow['acount']})";
       $thisalbum['description'] = $albumlink['description'];
     } else {
-      $thisalbum['imgsrc'] = "";
+      $thisalbum['imgsrc'] = '';
       $thisalbum['name'] = uiTextSnippet('living');
-      $thisalbum['description'] = "(" . uiTextSnippet('livingphoto') . ")";
+      $thisalbum['description'] = '(' . uiTextSnippet('livingphoto') . ')';
     }
 
     if (!isset($albums[$eventID])) {
@@ -860,15 +858,15 @@ function getAlbums($entity, $linktype) {
 function writeAlbums($albums_array) {
   global $tableid, $cellnumber, $datewidth;
 
-  $albumtext = "";
+  $albumtext = '';
   $albums = $albums_array['-x--general--x-'];
 
-  $cellid = $tableid && !$cellnumber ? " id=\"$tableid" . "1\"" : "";
+  $cellid = $tableid && !$cellnumber ? " id=\"$tableid" . "1\"" : '';
 
   if (is_array($albums)) {
     $totalalbums = count($albums);
     $albumcount = 0;
-    $albumrows = "";
+    $albumrows = '';
 
     if ($totalalbums) {
       $cellnumber++;
@@ -876,7 +874,7 @@ function writeAlbums($albums_array) {
 
       foreach ($albums as $item) {
         if ($albumcount) {
-          $albumrows .= "<tr>";
+          $albumrows .= '<tr>';
         }
         if ($item['imgsrc']) {
           $albumrows .= "<td style=\"width:$datewidth" . "px\">{$item['imgsrc']}</td><td>";
@@ -922,21 +920,21 @@ function getMedia($entity, $linktype) {
   $gotImageJpeg = function_exists(imageJpeg);
 
   while ($medialink = tng_fetch_assoc($medialinks)) {
-    $imgsrc = "";
+    $imgsrc = '';
     $thismedia = [];
-    $eventID = $medialink['eventID'] && $entity['allow_living'] ? $medialink['eventID'] : "-x--general--x-";
+    $eventID = $medialink['eventID'] && $entity['allow_living'] ? $medialink['eventID'] : '-x--general--x-';
     $mediatypeID = $medialink['mediatypeID'];
     $usefolder = $medialink['usecollfolder'] ? $mediatypes_assoc[$mediatypeID] : $mediapath;
     $medialink['allow_living'] = $medialink['alwayson'] || checkLivingLinks($medialink['mediaID']) ? 1 : 0;
     $thismedia['imgsrc'] = getSmallPhoto($medialink);
     if (!$medialink['allow_living'] && ($nonames || $tngconfig['nnpriv'])) {
       $thismedia['name'] = uiTextSnippet('livingphoto');
-      $thismedia['description'] = "";
+      $thismedia['description'] = '';
     } else {
       $thismedia['name'] = $medialink['altdescription'] ? $medialink['altdescription'] : $medialink['description'];
       $thismedia['description'] = truncateIt(getXrefNotes(($medialink['altnotes'] ? $medialink['altnotes'] : $medialink['notes'])), $tngconfig['maxnoteprev']);
       if (!$medialink['allow_living']) {
-        $thismedia['description'] .= " (" . uiTextSnippet('livingphoto') . ")";
+        $thismedia['description'] .= ' (' . uiTextSnippet('livingphoto') . ')';
       } else {
         $thismedia['href'] = getMediaHREF($medialink, 1);
         if ($thismedia['name']) {
@@ -958,9 +956,9 @@ function getMedia($entity, $linktype) {
 
       if ($medialink['plot']) {
         if ($thismedia['description']) {
-          $thismedia['description'] .= "<br>";
+          $thismedia['description'] .= '<br>';
         }
-        $thismedia['description'] .= "<strong>" . uiTextSnippet('plot') . ": </strong>" . $medialink['plot'];
+        $thismedia['description'] .= '<strong>' . uiTextSnippet('plot') . ': </strong>' . $medialink['plot'];
       }
     }
     if ($medialink['eventID'] && $entity['allow_living'] && $entity['allow_private']) {
@@ -980,23 +978,23 @@ function getMedia($entity, $linktype) {
   return $media;
 }
 
-function writeMedia($media_array, $mediatypeID, $prefix = "") {
+function writeMedia($media_array, $mediatypeID, $prefix = '') {
   global $tableid;
   global $cellnumber;
   global $datewidth;
   global $mediatypes_display;
   global $tngconfig;
 
-  $mediatext = "";
+  $mediatext = '';
   $media = $media_array['-x--general--x-'][$mediatypeID];
 
-  $cellid = $tableid && !$cellnumber ? " id=\"$tableid" . "1\"" : "";
+  $cellid = $tableid && !$cellnumber ? " id=\"$tableid" . "1\"" : '';
 
   if (is_array($media)) {
     $totalmedia = count($media);
     $mediacount = 0;
-    $slidelink = "";
-    $mediarows = "";
+    $slidelink = '';
+    $mediarows = '';
     $gotHref = false;
 
     if ($totalmedia) {
@@ -1012,7 +1010,7 @@ function writeMedia($media_array, $mediatypeID, $prefix = "") {
       }
       foreach ($media as $item) {
         if ($item['href'] && !$gotHref) {
-          $goodone = strpos($item['href'], "showmedia.php");
+          $goodone = strpos($item['href'], 'showmedia.php');
           if ($goodone !== false) {
             $slidelink = $item['href'];
             $gotHref = true;
@@ -1023,7 +1021,7 @@ function writeMedia($media_array, $mediatypeID, $prefix = "") {
           if ($hidemedia) {
             $mediarows .= " style=\"display:none\"";
           }
-          $mediarows .= ">";
+          $mediarows .= '>';
         }
         if ($item['imgsrc']) {
           $mediarows .= "<td style=\"width:$datewidth" . "px\">{$item['imgsrc']}</td><td>";
@@ -1042,12 +1040,12 @@ function writeMedia($media_array, $mediatypeID, $prefix = "") {
         if (strpos($slidelink, "\" target=") !== false) {
           $slidelink = str_replace("\" target=", "&amp;ss=1\" target=", $slidelink);
         } else {
-          $slidelink .= "&amp;ss=1";
+          $slidelink .= '&amp;ss=1';
         }
         $titlemsg .= "><br><a href=\"$slidelink\" class=\"small\">&raquo; " . uiTextSnippet('slidestart') . "</a></div>\n";
       }
       $mediatext .= "<tr>\n";
-      $toggleicon = $hidemedia ? "<img src=\"img/tng_sort_desc.gif\" class=\"toggleicon\" id=\"m{$prefix}{$mediatypeID}\" title=\"" . uiTextSnippet('expand') . "\">" : "";
+      $toggleicon = $hidemedia ? "<img src=\"img/tng_sort_desc.gif\" class=\"toggleicon\" id=\"m{$prefix}{$mediatypeID}\" title=\"" . uiTextSnippet('expand') . "\">" : '';
       $mediatext .= "<td class=\"indleftcol lm{$prefix}{$mediatypeID}\"$cellid";
       if (!$hidemedia) {
         $mediatext .= " rowspan=\"$totalmedia\"";
@@ -1086,7 +1084,7 @@ function getAlbumPhoto($albumID, $albumname) {
   $tusefolder = $trow['usecollfolder'] ? $mediatypes_assoc[$tmediatypeID] : $mediapath;
   tng_free_result($result2);
 
-  $imgsrc = "";
+  $imgsrc = '';
   if ($trow['thumbpath'] && file_exists("$rootpath$tusefolder/{$trow['thumbpath']}")) {
     $foundliving = 0;
     $foundprivate = 0;
@@ -1141,14 +1139,14 @@ function getAlbumPhoto($albumID, $albumname) {
     }
     if (!$foundliving && !$foundprivate) {
       $size = getimagesize("$rootpath$tusefolder/{$trow['thumbpath']}");
-      $imgsrc = "<div class=\"media-img\">";
+      $imgsrc = "<div class='media-img'>";
       $imgsrc .= "<div class=\"media-prev\" id=\"prev$albumID\" style=\"display:none\"></div>";
       $imgsrc .= "</div>\n";
       $imgsrc .= "<a href=\"albumsShowAlbum.php?albumID=$albumID\" title=\"" . uiTextSnippet('albclicksee') . "\"";
       if (function_exists(imageJpeg)) {
         $imgsrc .= " class=\"media-preview\" id=\"img-{$albumID}-0-" . urlencode("$tusefolder/{$trow['path']}") . "\"";
       }
-      $imgsrc .= "><img src=\"$tusefolder/" . str_replace("%2F", "/", rawurlencode($trow['thumbpath'])) . "\" class=\"thumb\" $size[3] alt=\"$albumname\"></a>";
+      $imgsrc .= "><img src=\"$tusefolder/" . str_replace('%2F', '/', rawurlencode($trow['thumbpath'])) . "\" class=\"thumb\" $size[3] alt=\"$albumname\"></a>";
     }
   }
   return $imgsrc;
@@ -1160,54 +1158,54 @@ function getFact($row) {
   $fact = [];
   $i = 0;
   if ($row['age']) {
-    $fact[$i++] = uiTextSnippet('age') . ": " . $row['age'];
+    $fact[$i++] = uiTextSnippet('age') . ': ' . $row['age'];
   }
   if ($row['agency']) {
-    $fact[$i++] = uiTextSnippet('agency') . ": " . $row['agency'];
+    $fact[$i++] = uiTextSnippet('agency') . ': ' . $row['agency'];
   }
   if ($row['cause']) {
-    $fact[$i++] = uiTextSnippet('cause') . ": " . $row['cause'];
+    $fact[$i++] = uiTextSnippet('cause') . ': ' . $row['cause'];
   }
   if ($row['addressID']) {
-    $fact[$i] = $row['isrepo'] ? "" : uiTextSnippet('address') . ":";
+    $fact[$i] = $row['isrepo'] ? '' : uiTextSnippet('address') . ':';
     $query = "SELECT address1, address2, city, state, zip, country, www, email, phone FROM $address_table WHERE addressID = \"{$row['addressID']}\"";
     $addrresults = tng_query($query);
     $addr = tng_fetch_assoc($addrresults);
     if ($addr['address1']) {
-      $fact[$i] .= ($fact[$i] ? "<br>" : "") . $addr['address1'];
+      $fact[$i] .= ($fact[$i] ? '<br>' : '') . $addr['address1'];
     }
     if ($addr['address2']) {
-      $fact[$i] .= ($fact[$i] ? "<br>" : "") . $addr['address2'];
+      $fact[$i] .= ($fact[$i] ? '<br>' : '') . $addr['address2'];
     }
     if ($addr['city']) {
-      $fact[$i] .= ($fact[$i] ? "<br>" : "") . $addr['city'];
+      $fact[$i] .= ($fact[$i] ? '<br>' : '') . $addr['city'];
     }
     if ($addr['state']) {
       if ($addr['city']) {
-        $fact[$i] .= ", " . $addr['state'];
+        $fact[$i] .= ', ' . $addr['state'];
       } else {
-        $fact[$i] .= ($fact[$i] ? "<br>" : "") . $addr['state'];
+        $fact[$i] .= ($fact[$i] ? '<br>' : '') . $addr['state'];
       }
     }
     if ($addr['zip']) {
       if ($addr['city'] || $addr['state']) {
-        $fact[$i] .= " " . $addr['zip'];
+        $fact[$i] .= ' ' . $addr['zip'];
       } else {
-        $fact[$i] .= ($fact[$i] ? "<br>" : "") . $addr['zip'];
+        $fact[$i] .= ($fact[$i] ? '<br>' : '') . $addr['zip'];
       }
     }
     if ($addr['country']) {
-      $fact[$i] .= ($fact[$i] ? "<br>" : "") . $addr['country'];
+      $fact[$i] .= ($fact[$i] ? '<br>' : '') . $addr['country'];
     }
     if ($addr['phone']) {
-      $fact[$i] .= ($fact[$i] ? "<br>" : "") . $addr['phone'];
+      $fact[$i] .= ($fact[$i] ? '<br>' : '') . $addr['phone'];
     }
     if ($addr['email']) {
-      $fact[$i] .= ($fact[$i] ? "<br>" : "") . "<a href=\"mailto:{$addr['email']}\">{$addr['email']}</a>";
+      $fact[$i] .= ($fact[$i] ? '<br>' : '') . "<a href=\"mailto:{$addr['email']}\">{$addr['email']}</a>";
     }
     if ($addr['www']) {
-      $link = strpos($addr['www'], "http") !== 0 ? "http://" . $addr['www'] : $addr['www'];
-      $fact[$i] .= ($fact[$i] ? "<br>" : "") . "<a href=\"$link\">{$addr['www']}</a>";
+      $link = strpos($addr['www'], 'http') !== 0 ? "http://" . $addr['www'] : $addr['www'];
+      $fact[$i] .= ($fact[$i] ? "<br>" : '') . "<a href=\"$link\">{$addr['www']}</a>";
     }
   }
   return $fact;
@@ -1229,9 +1227,9 @@ function formatAssoc($assoc) {
   global $people_table;
   global $families_table;
 
-  $assocstr = $namestr = "";
+  $assocstr = $namestr = '';
 
-  if ($assoc['reltype'] == 'I' || $assoc['reltype'] == "") {
+  if ($assoc['reltype'] == 'I' || $assoc['reltype'] == '') {
     $query = "SELECT firstname, lastname, lnprefix, prefix, suffix, nameorder, living, private, branch FROM $people_table WHERE personID = '{$assoc['passocID']}'";
     $result = tng_query($query);
 
@@ -1262,7 +1260,7 @@ function formatAssoc($assoc) {
     }
     $assocstr = "<a href=\"familiesShowFamily.php?familyID={$assoc['passocID']}\">" . uiTextSnippet('family') . ": $assocstr</a>";
   }
-  $assocstr .= $assoc['relationship'] ? " (" . uiTextSnippet('relationship2') . ": {$assoc['relationship']})" : "";
+  $assocstr .= $assoc['relationship'] ? ' (' . uiTextSnippet('relationship2') . ": {$assoc['relationship']})" : '';
 
   return $assocstr;
 }
@@ -1274,7 +1272,7 @@ function beginListItem($section) {
   global $firstsectionsave;
   global $tngconfig;
 
-  $sectext = "";
+  $sectext = '';
   $tableid = $section;
   $cellnumber = 0;
   if ($firstsection) {
@@ -1283,7 +1281,7 @@ function beginListItem($section) {
   }
   $sectext .= "<li id='$section' style='list-style-type: none; ";
   if ($tngconfig['istart'] && $section != 'info') {
-    $sectext .= "display: none;";
+    $sectext .= 'display: none;';
   }
   $sectext .= "'>\n";
 

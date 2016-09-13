@@ -3,7 +3,7 @@
 
 function addCitation(form) {
     'use strict';
-    if (form.sourceID.value === "") {
+    if (form.sourceID.value === '') {
         alert(textSnippet('selectsource'));
     } else {
         var params = $(form).serialize();
@@ -20,8 +20,8 @@ function addCitation(form) {
                 newtr = newcitetbl.insertRow(0);
                 newtr.id = "row_" + vars.id;
                 insertCell(newtr, 0, "dragarea", '<img src="img/admArrowUp.gif" alt=""><br><img src="img/admArrowDown.gif" alt="">');
-                insertCell(newtr, 1, "", getActionButtons(vars, 'Citation'));
-                insertCell(newtr, 2, "", vars.display);
+                insertCell(newtr, 1, '', getActionButtons(vars, 'Citation'));
+                insertCell(newtr, 2, '', vars.display);
                 div.append(newcitetbl);
                 $('#cites').append(div);
                 initCitationSort();

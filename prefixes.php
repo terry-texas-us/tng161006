@@ -4,20 +4,20 @@
 
 //people
 $personprefix = 'I';
-$personsuffix = "";
+$personsuffix = '';
 
 //families
 $familyprefix = 'F';
-$familysuffix = "";
+$familysuffix = '';
 
 //sources
 $sourceprefix = 'S';
-$sourcesuffix = "";
+$sourcesuffix = '';
 
 //notes
 $noteprefix = 'N';
-$notesuffix = "";
+$notesuffix = '';
 
 //repositories
-$repoprefix = "REPO";
-$reposuffix = "";
+$repoprefix = 'REPO';
+$reposuffix = '';

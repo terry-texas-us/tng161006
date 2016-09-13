@@ -8,7 +8,7 @@ require 'checklogin.php';
 
 if ($assignedbranch || !$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 require 'adminlog.php';
@@ -27,8 +27,8 @@ $success = tng_affected_rows();
 adminwritelog(uiTextSnippet('addnewbranch') . " : $description");
 
 if ($submitx) {
-  $message = uiTextSnippet('branch') . " $description " . uiTextSnippet('succadded') . ".";
-  header("Location: branchesBrowse.php?message=" . urlencode($message));
+  $message = uiTextSnippet('branch') . " $description " . uiTextSnippet('succadded') . '.';
+  header('Location: branchesBrowse.php?message=' . urlencode($message));
 } else {
   header("Location: branchesEdit.php?branch=$branch");
 }

@@ -5,29 +5,29 @@ require $subroot . 'pedconfig.php';
 require 'personlib.php';
 
 if (!$personID) {
-  die("no args");
+  die('no args');
 }
-if ($display == "textonly" || (!$display && !$pedigree['defdesc'])) {
+if ($display == 'textonly' || (!$display && !$pedigree['defdesc'])) {
   header("Location: descendtext.php?personID=$personID&amp;generations=$generations");
   exit;
-} elseif ($display == "register" || (!$display && $pedigree['defdesc'] == 1)) {
+} elseif ($display == 'register' || (!$display && $pedigree['defdesc'] == 1)) {
   header("Location: register.php?personID=$personID&amp;generations=$generations");
   exit;
 }
 require 'pedbox.php';
 
-if ($pedigree['defdesc'] == "") {
+if ($pedigree['defdesc'] == '') {
   $pedigree['defdesc'] = 2;
 }
 if (!$display) {
   if ($pedigree['defdesc'] == 2) {
-    $display = "standard";
+    $display = 'standard';
   } else {
-    $display = "compact";
+    $display = 'compact';
   }
 }
 
-$rounded = $display == "compact" ? "chart-border-radius-sm" : 'chart-border-radius';
+$rounded = $display == 'compact' ? 'chart-border-radius-sm' : 'chart-border-radius';
 $slot = 0;
 
 function setTopMarker($level, $value, $debug) {
@@ -46,27 +46,27 @@ $starttop = [];
 $needtop = [];
 $numboxes = 0;
 
-$arrdnpath = $rootpath . $endrootpath . "img/ArrowDown.gif";
+$arrdnpath = $rootpath . $endrootpath . 'img/ArrowDown.gif';
 if (file_exists($arrdnpath)) {
   $downarrow = getimagesize($arrdnpath);
   $pedigree['downarroww'] = $downarrow[0];
   $pedigree['downarrowh'] = $downarrow[1];
   $pedigree['downarrow'] = "<img src=\"" . "img/ArrowDown.gif\" width=\"{$pedigree['downarroww']}\" height=\"{$pedigree['downarrowh']}\" alt=''>";
 } else {
-  $pedigree['downarrow'] = "";
+  $pedigree['downarrow'] = '';
 }
 
-$arrrtpath = $rootpath . $endrootpath . "img/ArrowRight.gif";
+$arrrtpath = $rootpath . $endrootpath . 'img/ArrowRight.gif';
 if (file_exists($arrrtpath)) {
   $offpageimg = getimagesize($arrrtpath);
   $pedigree['offpagelink'] = "<img src=\"" . "img/ArrowRight.gif\" $offpageimg[3] alt=\"" . uiTextSnippet('popupnote3') . "\">";
   $pedigree['offpageimgw'] = $offpageimg[0];
   $pedigree['offpageimgh'] = $offpageimg[1];
 } else {
-  $pedigree['offpagelink'] = "<b>&gt;</b>";
+  $pedigree['offpagelink'] = '<b>&gt;</b>';
 }
 
-$arrltpath = $rootpath . $endrootpath . "img/ArrowRight.gif";
+$arrltpath = $rootpath . $endrootpath . 'img/ArrowRight.gif';
 if (file_exists($arrltpath)) {
   $leftarrowimg = getimagesize($arrltpath);
   $pedigree['leftarrowimgw'] = $leftarrowimg[0];
@@ -75,7 +75,7 @@ if (file_exists($arrltpath)) {
           uiTextSnippet('popupnote3') . "\" alt=\"" . uiTextSnippet('popupnote3') . "\" style=\"margin-right:5px\"/>";
   $pedigree['leftindent'] += $pedigree['leftarrowimgw'] + 6;
 } else {
-  $pedigree['leftarrowlink'] = "<b>&lt;</b>";
+  $pedigree['leftarrowlink'] = '<b>&lt;</b>';
   $pedigree['leftindent'] += 16;
 }
 
@@ -83,28 +83,28 @@ $chartBoxContentsAlign = $display === 'box' ? 'left' : 'center';
 $chartBoxHorizontalSpacing = $display === 'compact' ? 15 : 31;
 $chartBoxVerticalSpacing = $display === 'compact' ? 7 : 15;
 
-if ($display == "compact") {
+if ($display == 'compact') {
   $pedigree['inclphotos'] = 0;
   $pedigree['usepopups'] = 0;
   $pedigree['boxheight'] = 16;
   $pedigree['boxnamesize'] = 8;
   $pedigree['cellpad'] = 0;
   $pedigree['boxwidth'] -= 50;
-  $pedigree['spacer'] = "&nbsp;";
+  $pedigree['spacer'] = '&nbsp;';
   $pedigree['gendalign'] = -2;
   $spouseoffset = 20;
   $pedigree['diff'] = $pedigree['boxheight'] + $chartBoxVerticalSpacing + $pedigree['linewidth'];
-} elseif ($display === "standard") {
+} elseif ($display === 'standard') {
   $pedigree['boxnamesize'] = 10;
   $pedigree['usepopups'] = 1;
   $pedigree['boxheight'] = $pedigree['puboxheight'];
   $pedigree['boxwidth'] = $pedigree['puboxwidth'];
-  $pedigree['spacer'] = "";
+  $pedigree['spacer'] = '';
   $pedigree['gendalign'] = -1;
   $spouseoffset = 40;
   $pedigree['diff'] = $pedigree['boxheight'] + $chartBoxVerticalSpacing + $pedigree['linewidth'] + $pedigree['downarrowh'];
 }
-$pedigree['url'] = "pedigree.php?";
+$pedigree['url'] = 'pedigree.php?';
 
 function getColor($shifts) {
   global $pedigree;
@@ -117,7 +117,7 @@ function getParents($personID) {
   global $display;
   global $generations;
 
-  $parentinfo = "";
+  $parentinfo = '';
   $result = getChildParentsFamilyMinimal($personID);
   while ($parents = tng_fetch_assoc($result)) {
     if ($parents['husband']) {
@@ -152,7 +152,7 @@ function getNewChart($personID) {
   global $generations;
   global $display;
 
-  return $kidsflag ? "<a href=\"descend.php?personID=$personID&amp;generations=$generations&amp;display=$display\"><img src=\"img/dchart.gif\" width='10' height='9' alt=\"" . uiTextSnippet('popupnote3') . "\"></a>" : "";
+  return $kidsflag ? "<a href=\"descend.php?personID=$personID&amp;generations=$generations&amp;display=$display\"><img src=\"img/dchart.gif\" width='10' height='9' alt=\"" . uiTextSnippet('popupnote3') . "\"></a>" : '';
 }
 
 function doBox($level, $person, $spouseflag, $kidsflag) {
@@ -173,7 +173,7 @@ function doBox($level, $person, $spouseflag, $kidsflag) {
 
   $numboxes++;
   if (!$topmarker[$level]) {
-    setTopMarker($level, 0, "initialize, 183");
+    setTopMarker($level, 0, 'initialize, 183');
   }
   $top = $topmarker[$level];
   if ($top > $maxheight) {
@@ -192,7 +192,7 @@ function doBox($level, $person, $spouseflag, $kidsflag) {
   if ($farleft > $maxwidth) {
     $maxwidth = $farleft;
   }
-  $boxstr = "";
+  $boxstr = '';
   if ($person['personID'] == $personID) {
     $parentinfo = getParents($personID);
     if ($parentinfo) {
@@ -214,9 +214,9 @@ function doBox($level, $person, $spouseflag, $kidsflag) {
     $iconlinks .= "</div>\n";
     $slot++;
   } else {
-    $iconactions = $iconlinks = "";
+    $iconactions = $iconlinks = '';
   }
-  $boxstr .= "<div class='chart-box $rounded' id='box$numboxes' style=\"background-color:$bgcolor; top:" . $top . "px; left:" . ($left - $pedigree['borderwidth']) . "px; height:" . $pedigree['boxheight'] . "px; width:{$pedigree['boxwidth']}" . "px; border:{$pedigree['borderwidth']}px solid {$pedigree['bordercolor']};\"$iconactions>\n";
+  $boxstr .= "<div class='chart-box $rounded' id='box$numboxes' style=\"background-color:$bgcolor; top:" . $top . 'px; left:' . ($left - $pedigree['borderwidth']) . 'px; height:' . $pedigree['boxheight'] . "px; width:{$pedigree['boxwidth']}" . "px; border:{$pedigree['borderwidth']}px solid {$pedigree['bordercolor']};\"$iconactions>\n";
   $boxstr .= "$iconlinks<table align='center'><tr>";
 
   // implant a picture (maybe)
@@ -238,11 +238,11 @@ function doBox($level, $person, $spouseflag, $kidsflag) {
     $boxstr .= "<td class=\"pboxname\"><span style=\"font-size:{$pedigree['boxnamesize']}" . "pt;\">" . uiTextSnippet('unknown') . "</span></td></tr></table></div>\n";
   }
 
-  if ($display != "compact" && $pedigree['usepopups']) {
+  if ($display != 'compact' && $pedigree['usepopups']) {
     $vitalinfo = getVitalDates($person);
     if ($vitalinfo) {
-      $boxstr .= "<div style=\"position: absolute; top:" . ($top + $pedigree['boxheight'] + (2 * $pedigree['borderwidth']) + 1) . "px;left:" . ($left + intval(($pedigree['boxwidth'] - $pedigree['downarroww']) / 2) - 1) . "px;z-index:7;\" class=\"fakelink\">";
-      $boxstr .= "<a href='#' onmouse{$pedigree['event']}=\"showPopup($numboxes,$top," . $pedigree['boxheight'] . ")\">" . $pedigree['downarrow'] . "</a></div>";
+      $boxstr .= "<div style=\"position: absolute; top:" . ($top + $pedigree['boxheight'] + (2 * $pedigree['borderwidth']) + 1) . 'px;left:' . ($left + intval(($pedigree['boxwidth'] - $pedigree['downarroww']) / 2) - 1) . "px;z-index:7;\" class=\"fakelink\">";
+      $boxstr .= "<a href='#' onmouse{$pedigree['event']}=\"showPopup($numboxes,$top," . $pedigree['boxheight'] . ")\">" . $pedigree['downarrow'] . '</a></div>';
 
       $boxstr .= "<div class=\"popup\" id=\"popup$numboxes\" style=\"position:absolute; visibility:hidden; background-color:{$pedigree['popupcolor']}; left:" . ($left - $pedigree['borderwidth']) . "px;z-index:8\" onmouseover=\"cancelTimer($numboxes)\" onmouseout=\"setTimer($numboxes)\">\n";
       $boxstr .= "<div><div class=\"popinner\"><div class=\"pboxpopupdiv\">\n<table width='100%'>\n";
@@ -250,15 +250,15 @@ function doBox($level, $person, $spouseflag, $kidsflag) {
     }
   }
   if (!$spouseflag && $person['personID'] != $personID) {
-    $boxstr .= "<div class=\"boxborder\" style=\"top:" . ($top + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($left - intval($chartBoxHorizontalSpacing / 2)) . "px;height:" . $pedigree['linewidth'] . "px;width:" . (intval($chartBoxHorizontalSpacing / 2) + 2) . "px;z-index:3;overflow:hidden\"></div>\n";
+    $boxstr .= "<div class=\"boxborder\" style=\"top:" . ($top + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . 'px;left:' . ($left - intval($chartBoxHorizontalSpacing / 2)) . 'px;height:' . $pedigree['linewidth'] . 'px;width:' . (intval($chartBoxHorizontalSpacing / 2) + 2) . "px;z-index:3;overflow:hidden\"></div>\n";
   }
   if ($spouseflag) {
-    $boxstr .= "<div class=\"boxborder\" style=\"top:" . ($top + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($left - intval($spouseoffset / 2)) . "px;height:" . $pedigree['linewidth'] . "px;width:" . (intval($spouseoffset / 2) + 2) . "px;z-index:3;overflow:hidden\"></div>\n";
+    $boxstr .= "<div class=\"boxborder\" style=\"top:" . ($top + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . 'px;left:' . ($left - intval($spouseoffset / 2)) . 'px;height:' . $pedigree['linewidth'] . 'px;width:' . (intval($spouseoffset / 2) + 2) . "px;z-index:3;overflow:hidden\"></div>\n";
     if ($kidsflag) {
       if ($level < $generations) {
-        $boxstr .= "<div class=\"boxborder\" style=\"top:" . ($top + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($left + $pedigree['boxwidth']) . "px;height:" . $pedigree['linewidth'] . "px;width:" . (intval($chartBoxHorizontalSpacing / 2) + 1) . "px;z-index:3;overflow:hidden\"></div>\n";
+        $boxstr .= "<div class=\"boxborder\" style=\"top:" . ($top + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . 'px;left:' . ($left + $pedigree['boxwidth']) . 'px;height:' . $pedigree['linewidth'] . 'px;width:' . (intval($chartBoxHorizontalSpacing / 2) + 1) . "px;z-index:3;overflow:hidden\"></div>\n";
       } else {
-        $boxstr .= "<div style=\"position: absolute; top:" . ($top + $pedigree['borderwidth'] + intval(($pedigree['boxheight'] - $pedigree['offpageimgh']) / 2) + 1) . "px;left:" . ($left + $pedigree['boxwidth'] + $pedigree['borderwidth'] + 3) . "px;z-index:5\">\n";
+        $boxstr .= "<div style=\"position: absolute; top:" . ($top + $pedigree['borderwidth'] + intval(($pedigree['boxheight'] - $pedigree['offpageimgh']) / 2) + 1) . 'px;left:' . ($left + $pedigree['boxwidth'] + $pedigree['borderwidth'] + 3) . "px;z-index:5\">\n";
         $boxstr .= "<a href=\"descend.php?personID=$spouseflag&amp;generations=$generations&amp;display=$display\" title=\"" . uiTextSnippet('popupnote3') . "\">{$pedigree['offpagelink']}</a></div>\n";
       }
     }
@@ -302,7 +302,7 @@ function doIndividual($person, $level) {
       $spouse = 'husband';
       $spouseorder = 'wifeorder';
     } else {
-      $self = $spouse = $spouseorder = "";
+      $self = $spouse = $spouseorder = '';
     }
   }
   //look up spouse-families
@@ -314,7 +314,7 @@ function doIndividual($person, $level) {
   $marrtot = tng_num_rows($result);
   if ($spouse && !$marrtot) {
     $result = getSpouseFamilyMinimalUnion($person);
-    $self = $spouse = $spouseorder = "";
+    $self = $spouse = $spouseorder = '';
   }
   //for each family
   $needperson = 1;
@@ -346,21 +346,21 @@ function doIndividual($person, $level) {
         }
         if ($numkids == 1 && $spousecount < 2 && !$spouses_for_next_gen[$level + 1]) {
           for ($i = $level + 1; $i <= $generations; $i++) {
-            setTopMarker($i, $topmarker[$i] + $pedigree['diff'], "lowering previous gens, 348");
+            setTopMarker($i, $topmarker[$i] + $pedigree['diff'], 'lowering previous gens, 348');
           }
         }
         if ($vheight) {
-          $chart .= "<div class=\"boxborder\" style=\"top:" . ($starttop[$level + 1] + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($childleft - intval($chartBoxHorizontalSpacing / 2)) . "px;height:" . $vheight . "px;width:" . $pedigree['linewidth'] . "px;z-index:3\"></div>\n";
+          $chart .= "<div class='boxborder' style=\"top:" . ($starttop[$level + 1] + intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . 'px;left:' . ($childleft - intval($chartBoxHorizontalSpacing / 2)) . 'px;height:' . $vheight . 'px;width:' . $pedigree['linewidth'] . "px;z-index:3\"></div>\n";
         }
         tng_free_result($result2);
-        setTopMarker($level, $starttop[$level + 1] + intval($vheight / 2), "increasing, half of box height, 356");
+        setTopMarker($level, $starttop[$level + 1] + intval($vheight / 2), 'increasing, half of box height, 356');
       }
     }
     if ($needperson) {
       //set "top"
       //take number of "vslots" for this family
       if ($numkids && $level < $generations) {
-        setTopMarker($level, $topmarker[$level] - intval(($pedigree['diff']) / 2), "decreasing, moving down to center,365");
+        setTopMarker($level, $topmarker[$level] - intval(($pedigree['diff']) / 2), 'decreasing, moving down to center,365');
       }
       if ($needtop[$level]) {
         $starttop[$level] = $topmarker[$level];
@@ -389,7 +389,7 @@ function doIndividual($person, $level) {
     //lines down from primary spouse
     $vheight = $topmarker[$level] - $thistop - intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2);
     $childleft = $pedigree['leftindent'] + ($pedigree['boxwidth'] + $chartBoxHorizontalSpacing + $spouseoffset) * ($level - 1);
-    $chart .= "<div class=\"boxborder\" style=\"top:" . ($thistop + $pedigree['boxheight']) . "px;left:" . ($childleft + intval($spouseoffset / 2)) . "px;height:" . $vheight . "px;width:" . $pedigree['linewidth'] . "px;z-index:3\"></div>\n";
+    $chart .= "<div class='boxborder' style=\"top:" . ($thistop + $pedigree['boxheight']) . 'px;left:' . ($childleft + intval($spouseoffset / 2)) . 'px;height:' . $vheight . 'px;width:' . $pedigree['linewidth'] . "px;z-index:3\"></div>\n";
     $thistop = $topmarker[$level] - intval($pedigree['boxheight'] / 2) - intval($pedigree['linewidth'] / 2);
     $chart .= doBox($level, $spouserow, $person, $numkids);
 
@@ -398,7 +398,7 @@ function doIndividual($person, $level) {
       setTopMarker($level, $originaltop + ($vslots[$vkey] * $pedigree['diff']), "raising, diff=$pedigree[diff], slots=" . $vslots[$vkey] . ", key=$vkey, 401");
     } else {
       for ($i = $level + 1; $i <= $generations; $i++) {
-        setTopMarker($i, $topmarker[$level], "lowering previous gens, no kids, 405");
+        setTopMarker($i, $topmarker[$level], 'lowering previous gens, no kids, 405');
       }
     }
   }
@@ -412,7 +412,7 @@ function doIndividual($person, $level) {
     }
     $chart .= doBox($level, $row, 0, 0);
     for ($i = $level + 1; $i <= $generations; $i++) {
-      setTopMarker($i, $topmarker[$level], "lowering all previous gens, 418");
+      setTopMarker($i, $topmarker[$level], 'lowering all previous gens, 418');
     }
   }
   tng_free_result($result);
@@ -430,7 +430,7 @@ function getData($key, $sex, $level) {
     $self = 'wife';
     $spouseorder = 'wifeorder';
   } else {
-    $self = $spouseorder = "";
+    $self = $spouseorder = '';
   }
   $gotafamily = 0;
   $stats = [];
@@ -496,7 +496,7 @@ function getData($key, $sex, $level) {
 }
 
 function getVitalDates($row) {
-  $vitalinfo = "";
+  $vitalinfo = '';
 
   if ($row['allow_living'] && $row['allow_private']) {
     if ($row['birthdate'] || $row['altbirthdate'] || $row['altbirthplace'] || $row['deathdate'] || $row['burialdate'] || $row['burialplace']) {
@@ -509,38 +509,38 @@ function getVitalDates($row) {
     if ($row['altbirthdate'] && !$row['birthdate']) {
       $bd = $row['altbirthdate'];
       $bp = $row['altbirthplace'];
-      $birthabbr = uiTextSnippet('capaltbirthabbr') . ":";
+      $birthabbr = uiTextSnippet('capaltbirthabbr') . ':';
     } elseif ($dataflag) {
       $bd = $row['birthdate'];
       $bp = $row['birthplace'];
-      $birthabbr = uiTextSnippet('capbirthabbr') . ":";
+      $birthabbr = uiTextSnippet('capbirthabbr') . ':';
     } else {
-      $bd = "";
-      $bp = "";
-      $birthabbr = "";
+      $bd = '';
+      $bp = '';
+      $birthabbr = '';
     }
 
     // get death/burial date info
     if ($row['burialdate'] && !$row['deathdate']) {
       $dd = $row['burialdate'];
       $dp = $row['burialplace'];
-      $deathabbr = uiTextSnippet('capburialabbr') . ":";
+      $deathabbr = uiTextSnippet('capburialabbr') . ':';
     } elseif ($dataflag) {
       $dd = $row['deathdate'];
       $dp = $row['deathplace'];
-      $deathabbr = uiTextSnippet('capdeathabbr') . ":";
+      $deathabbr = uiTextSnippet('capdeathabbr') . ':';
     } else {
-      $dd = "";
-      $dp = "";
-      $deathabbr = "";
+      $dd = '';
+      $dp = '';
+      $deathabbr = '';
     }
   } else {
-    $bd = $bp = $birthabbr = $dd = $dp = $deathabbr = $md = $mp = $marrabbr = "";
+    $bd = $bp = $birthabbr = $dd = $dp = $deathabbr = $md = $mp = $marrabbr = '';
   }
   if ($bd) {
     $vitalinfo .= "<tr>\n<td class=\"pboxpopup\" align=\"right\">$birthabbr</td>\n";
-    $vitalinfo .= "<td class=\"pboxpopup\">" . displayDate($bd) . "</td></tr>\n";
-    $birthabbr = "&nbsp;";
+    $vitalinfo .= "<td class='pboxpopup'>" . displayDate($bd) . '</td></tr>\n';
+    $birthabbr = '&nbsp;';
   }
   if ($bp) {
     $vitalinfo .= "<tr>\n<td class=\"pboxpopup\" align=\"right\">$birthabbr</td>\n";
@@ -548,8 +548,8 @@ function getVitalDates($row) {
   }
   if ($dd) {
     $vitalinfo .= "<tr>\n<td class=\"pboxpopup\" align=\"right\">$deathabbr</td>\n";
-    $vitalinfo .= "<td class=\"pboxpopup\">" . displayDate($dd) . "</td></tr>\n";
-    $deathabbr = "&nbsp;";
+    $vitalinfo .= "<td class='pboxpopup'>" . displayDate($dd) . "</td></tr>\n";
+    $deathabbr = '&nbsp;';
   }
   if ($dp) {
     $vitalinfo .= "<tr>\n<td class=\"pboxpopup\" align=\"right\">$deathabbr</td>\n";
@@ -573,14 +573,14 @@ if ($result) {
   $row['name'] = getName($row);
   $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $row['name']);
 }
-writelog("<a href=\"descend.php?personID=$personID&amp;display=$display\">" . xmlcharacters(uiTextSnippet('descendfor') . " $logname ($personID)") . "</a>");
-preparebookmark("<a href=\"descend.php?personID=$personID&amp;display=$display\">" . uiTextSnippet('descendfor') . " " . $row['name'] . " ($personID)</a>");
+writelog("<a href=\"descend.php?personID=$personID&amp;display=$display\">" . xmlcharacters(uiTextSnippet('descendfor') . " $logname ($personID)") . '</a>');
+preparebookmark("<a href=\"descend.php?personID=$personID&amp;display=$display\">" . uiTextSnippet('descendfor') . ' ' . $row['name'] . " ($personID)</a>");
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
-$headSection->setTitle(uiTextSnippet('descendfor') . " " . $row['name']);
+header('Content-type: text/html; charset=' . $session_charset);
+$headSection->setTitle(uiTextSnippet('descendfor') . ' ' . $row['name']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -616,14 +616,14 @@ $headSection->setTitle(uiTextSnippet('descendfor') . " " . $row['name']);
       $generations = intval($generations);
     }
     for ($i = 0; $i < $generations; $i++) {
-      setTopMarker($i, 0, "initializing");
+      setTopMarker($i, 0, 'initializing');
     }
-    $innermenu = uiTextSnippet('generations') . ": &nbsp;";
+    $innermenu = uiTextSnippet('generations') . ': &nbsp;';
     $innermenu .= "<select name='generations' class='small' onchange=\"window.location.href='descend.php?personID=$personID&amp;display=$display&amp;generations=' + this.options[this.selectedIndex].value\">\n";
     for ($i = 1; $i <= $pedigree['maxdesc']; $i++) {
       $innermenu .= "<option value='$i'";
       if ($i == $generations) {
-        $innermenu .= " selected";
+        $innermenu .= ' selected';
       }
       $innermenu .= ">$i</option>\n";
     }
@@ -635,8 +635,8 @@ $headSection->setTitle(uiTextSnippet('descendfor') . " " . $row['name']);
     if ($generations <= 12 && $allow_pdf && $rightbranch) {
       $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=desc&amp;personID=$personID&amp;generations=$generations');return false;\">PDF</a>\n";
     }
-    beginFormElement("descend", "get", "form1", "form1");
-    echo buildPersonMenu("descend", $personID);
+    beginFormElement('descend', 'get', 'form1', 'form1');
+    echo buildPersonMenu('descend', $personID);
     echo "<div class='pub-innermenu small'>\n";
       echo $innermenu;
     echo "</div>\n";
@@ -652,7 +652,7 @@ $headSection->setTitle(uiTextSnippet('descendfor') . " " . $row['name']);
       ?>)
     </p>
     <?php
-    $chart = "";
+    $chart = '';
     getData($key, $row['sex'], 1);
     doIndividual($personID, 1);
 
@@ -694,9 +694,9 @@ $headSection->setTitle(uiTextSnippet('descendfor') . " " . $row['name']);
       eval("timer" + slot + "=false;");
     }
   </script>
-  <?php if ($display != "compact" && $pedigree['usepopups']) { ?>
+  <?php if ($display != 'compact' && $pedigree['usepopups']) { ?>
     <script>
-      var lastpopup = "";
+      var lastpopup = '';
       for (var h = 1; h <= <?php echo $numboxes; ?>; h++) {
         eval('var timer' + h + '=false');
       }

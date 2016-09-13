@@ -16,7 +16,7 @@ $session_charset = $_SESSION['session_charset'] = $row['charset'];
 $newroot = preg_replace('/\//', '', $rootpath);
 $newroot = preg_replace('/ /', '', $newroot);
 $newroot = preg_replace('/\./', '', $newroot);
-setcookie("tnglang_$newroot", $row['folder'], time() + 31536000, "/");
-setcookie("tngchar_$newroot", $row['charset'], time() + 31536000, "/");
+setcookie("tnglang_$newroot", $row['folder'], time() + 31536000, '/');
+setcookie("tngchar_$newroot", $row['charset'], time() + 31536000, '/');
 
 header("Location: $homepage");

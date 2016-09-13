@@ -8,10 +8,10 @@ require 'version.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('addnewlanguage'));
 ?>
 <!DOCTYPE html>
@@ -22,9 +22,9 @@ $headSection->setTitle(uiTextSnippet('addnewlanguage'));
     <?php
     echo $adminHeaderSection->build('languages-addnewlanguage', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "languagesBrowse.php", uiTextSnippet('browse'), "findlang"]);
-    //    $navList->appendItem([$allowAdd, "languagesAdd.php", uiTextSnippet('add'), "addlanguage"]);
-    echo $navList->build("addlanguage");
+    $navList->appendItem([true, 'languagesBrowse.php', uiTextSnippet('browse'), 'findlang']);
+    //    $navList->appendItem([$allowAdd, 'languagesAdd.php', uiTextSnippet('add'), 'addlanguage']);
+    echo $navList->build('addlanguage');
     ?>
     <table class='table table-sm'>
       <tr>

@@ -8,7 +8,7 @@ require 'checklogin.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
@@ -35,4 +35,4 @@ $result = tng_query($query);
 adminwritelog("<a href='treesEdit.php'>" . uiTextSnippet('modifytree') . ": $tree</a>");
 
 $message = uiTextSnippet('changestotree') . " $treenamedisp " . uiTextSnippet('succsaved') . '.';
-header("Location: treesBrowse.php?message=" . urlencode($message));
+header('Location: treesBrowse.php?message=' . urlencode($message));

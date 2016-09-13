@@ -8,10 +8,10 @@ require 'version.php';
 
 if (!$allowMediaAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('mediaimport'));
 ?>
 <!DOCTYPE html>
@@ -21,7 +21,7 @@ $headSection->setTitle(uiTextSnippet('mediaimport'));
   <section class='container'>
     <?php
     $standardtypes = [];
-    $moptions = "";
+    $moptions = '';
     $likearray = "var like = new Array();\n";
     foreach ($mediatypes as $mediatype) {
       if (!$mediatype['type']) {
@@ -30,24 +30,24 @@ $headSection->setTitle(uiTextSnippet('mediaimport'));
       $msgID = $mediatype['ID'];
       $moptions .= "  <option value=\"$msgID\"";
       if ($msgID == $mediatypeID) {
-        $moptions .= " selected";
+        $moptions .= ' selected';
       }
-      $moptions .= ">" . $mediatype['display'] . "</option>\n";
+      $moptions .= '>' . $mediatype['display'] . "</option>\n";
       $likearray .= "like['$msgID'] = '{$mediatype['liketype']}';\n";
     }
-    $sttypestr = implode(",", $standardtypes);
+    $sttypestr = implode(',', $standardtypes);
     ?>
 
     <?php
     echo $adminHeaderSection->build('media-import', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('search'), "findmedia"]);
-    $navList->appendItem([$allowMediaAdd, "admin_newmedia.php", uiTextSnippet('addnew'), "addmedia"]);
-    $navList->appendItem([$allowMediaEdit, "admin_ordermediaform.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    $navList->appendItem([$allowMediaEdit, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-    //    $navList->appendItem([$allowMediaAdd, "mediaImport.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allowMediaAdd, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
-    echo $navList->build("import");
+    $navList->appendItem([true, 'mediaBrowse.php', uiTextSnippet('search'), 'findmedia']);
+    $navList->appendItem([$allowMediaAdd, 'admin_newmedia.php', uiTextSnippet('addnew'), 'addmedia']);
+    $navList->appendItem([$allowMediaEdit, 'admin_ordermediaform.php', uiTextSnippet('text_sort'), 'sortmedia']);
+    $navList->appendItem([$allowMediaEdit, 'mediaThumbnails.php', uiTextSnippet('thumbnails'), 'thumbs']);
+    //    $navList->appendItem([$allowMediaAdd, 'mediaImport.php', uiTextSnippet('import'), 'import']);
+    $navList->appendItem([$allowMediaAdd, 'mediaUpload.php', uiTextSnippet('upload'), 'upload']);
+    echo $navList->build('import');
     ?>
 
     <form action="mediaImportFormAction.php" method='post' name='form1'>
@@ -68,10 +68,10 @@ $headSection->setTitle(uiTextSnippet('mediaimport'));
               <input name='addnewmediatype' type='button' value="<?php echo uiTextSnippet('addnewcoll'); ?>"
                      onclick="tnglitbox = new ModalDialog('admin_newcollection.php?field=mediatypeID');">
               <input id='editmediatype' name='editmediatype' type='button' value="<?php echo uiTextSnippet('edit'); ?>"
-                     style="display: none"
+                     style='display: none'
                      onclick="editMediatype(document.form1.mediatypeID);">
               <input id='delmediatype' name='delmediatype' type='button' value="<?php echo uiTextSnippet('delete'); ?>"
-                     style="display: none"
+                     style='display: none'
                      onclick="confirmDeleteMediatype(document.form1.mediatypeID);">
             <?php } ?>
           </td>
@@ -87,8 +87,8 @@ $headSection->setTitle(uiTextSnippet('mediaimport'));
 <script>
   var tnglitbox;
   var stmediatypes = new Array(<?php echo $sttypestr; ?>);
-  var allow_edit = <?php echo($allowEdit ? "1" : "0"); ?>;
-  var allow_delete = <?php echo($allowDelete ? "1" : "0"); ?>;
+  var allow_edit = <?php echo($allowEdit ? '1' : '0'); ?>;
+  var allow_delete = <?php echo($allowDelete ? '1' : '0'); ?>;
   var manage = 1;
   <?php echo $likearray; ?>
 </script>

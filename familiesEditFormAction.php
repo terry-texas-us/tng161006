@@ -16,13 +16,13 @@ tng_free_result($result);
 
 if (!$allowEdit || !checkbranch($row['branch'])) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 $editconflict = determineConflict($row, $families_table);
 
 if (!$editconflict) {
-  if ($newfamily == "ajax" && $session_charset != "UTF-8") {
+  if ($newfamily == 'ajax' && $session_charset != 'UTF-8') {
     $marrplace = tng_utf8_decode($marrplace);
     $divplace = tng_utf8_decode($divplace);
     $sealplace = tng_utf8_decode($sealplace);
@@ -59,7 +59,7 @@ if (!$editconflict) {
   if (!$private) {
     $private = 0;
   }
-  $newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
+  $newdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
 
   if (is_array($branch)) {
     foreach ($branch as $b) {
@@ -72,7 +72,7 @@ if (!$editconflict) {
     $branch = [$branch];
   }
   if ($allbranches != $orgbranch) {
-    $oldbranches = explode(",", $orgbranch);
+    $oldbranches = explode(',', $orgbranch);
     foreach ($oldbranches as $b) {
       if ($b && !in_array($b, $branch)) {
         $query = "DELETE FROM $branchlinks_table WHERE persfamID = '$familyID' AND branch = \"$b\"";
@@ -111,12 +111,12 @@ if (!$editconflict) {
 } else {
   $message = uiTextSnippet('notsaved');
 }
-if ($media == "1") {
+if ($media == '1') {
   header("Location: admin_newmedia.php?personID=$familyID&amp;linktype=F&amp;cw=$cw");
-} elseif ($newfamily == "return") {
+} elseif ($newfamily == 'return') {
   header("Location: familiesEdit.php?familyID=$familyID&amp;cw=$cw");
 } else {
-  if ($newfamily == "close") {
+  if ($newfamily == 'close') {
   ?>
     <!DOCTYPE html>
     <html>
@@ -127,10 +127,10 @@ if ($media == "1") {
     </body>
     </html>
   <?php
-  } elseif ($newfamily == "ajax") {
+  } elseif ($newfamily == 'ajax') {
     echo 1;
   } else {
     $message = uiTextSnippet('changestofamily') . " $familyID " . uiTextSnippet('succsaved') . '.';
-    header("Location: familiesBrowse.php?message=" . urlencode($message));
+    header('Location: familiesBrowse.php?message=' . urlencode($message));
   }
 }

@@ -16,7 +16,7 @@ if ($place) {
   }
   $query = "SELECT ID, place, longitude, latitude, gedcom FROM $places_table
     WHERE ";
-  $query .= $pwherestr . " ORDER BY place, gedcom, ID";
+  $query .= $pwherestr . ' ORDER BY place, gedcom, ID';
   $result = tng_query($query);
 
   $numrows = tng_num_rows($result);
@@ -32,7 +32,7 @@ if ($place) {
     $place = $_COOKIE['tng_search_places_post']['search'];
   }
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('mergeplaces'));
 ?>
 <!DOCTYPE html>
@@ -43,11 +43,11 @@ $headSection->setTitle(uiTextSnippet('mergeplaces'));
     <?php
     echo $adminHeaderSection->build('places-mergeplaces', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "placesBrowse.php", uiTextSnippet('browse'), "findplace"]);
-    $navList->appendItem([$allowAdd, "placesAdd.php", uiTextSnippet('add'), "addplace"]);
-    $navList->appendItem([$allowEdit && $allowDelete, "placesMerge.php", uiTextSnippet('merge'), "merge"]);
-    $navList->appendItem([$allowEdit, "admin_geocodeform.php", uiTextSnippet('geocode'), "geo"]);
-    echo $navList->build("merge");
+    $navList->appendItem([true, 'placesBrowse.php', uiTextSnippet('browse'), 'findplace']);
+    $navList->appendItem([$allowAdd, 'placesAdd.php', uiTextSnippet('add'), 'addplace']);
+    $navList->appendItem([$allowEdit && $allowDelete, 'placesMerge.php', uiTextSnippet('merge'), 'merge']);
+    $navList->appendItem([$allowEdit, 'admin_geocodeform.php', uiTextSnippet('geocode'), 'geo']);
+    echo $navList->build('merge');
     ?>
 
     <h4>1. <?php echo uiTextSnippet('findmerge'); ?></h4>
@@ -78,7 +78,7 @@ $headSection->setTitle(uiTextSnippet('mergeplaces'));
       <form name='form2' action='' method='post' onSubmit="return validateForm2(this);">
         <p>
           <input type='submit' value="<?php echo uiTextSnippet('mergeplaces'); ?>"> 
-          <img src="img/spinner.gif" id="placespin" style="display: none">
+          <img src="img/spinner.gif" id="placespin" style='display: none'>
           <span class='msgapproved' id='successmsg1'></span></p>
         <table class='table table-sm'>
           <thead>
@@ -96,8 +96,8 @@ $headSection->setTitle(uiTextSnippet('mergeplaces'));
             echo "<td><input class='mc' name=\"mc{$row['ID']}\" type='checkbox' onclick=\"handleCheck({$row['ID']});\" value=\"{$row['ID']}\"></td>\n";
             echo "<td><input id=\"r{$row['ID']}\" name='keep' type='radio' onclick=\"handleRadio({$row['ID']});\" value=\"{$row['ID']}\"></td>\n";
             $display = $row['place'];
-            $display = preg_replace("/</", "&lt;", $display);
-            $display = preg_replace("/>/", "&gt;", $display);
+            $display = preg_replace('/</', '&lt;', $display);
+            $display = preg_replace('/>/', '&gt;', $display);
             echo "<td>$display&nbsp;</td>\n";
             echo "<td id=\"lat_{$row['ID']}\">{$row['latitude']}&nbsp;</td>\n";
             echo "<td id=\"long_{$row['ID']}\">{$row['longitude']}&nbsp;</td>\n";

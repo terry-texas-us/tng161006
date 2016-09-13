@@ -2,14 +2,14 @@
 
 require 'tng_begin.php';
 
-$logstring = "<a href='statistics.php'>" . xmlcharacters(uiTextSnippet('databasestatistics')) . "</a>";
+$logstring = "<a href='statistics.php'>" . xmlcharacters(uiTextSnippet('databasestatistics')) . '</a>';
 writelog($logstring);
 preparebookmark($logstring);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('databasestatistics'));
 ?>
 <!DOCTYPE html>
@@ -155,57 +155,57 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
       $females = number_format($females);
       $unknownsex = number_format($unknownsex);
 
-      echo "<tr><td>" . uiTextSnippet('totindividuals') . "</td>\n";
+      echo '<tr><td>' . uiTextSnippet('totindividuals') . "</td>\n";
       echo "<td>$totalpeople</td></tr>\n";
 
-      echo "<tr><td>" . uiTextSnippet('totmales') . "</td>\n";
+      echo '<tr><td>' . uiTextSnippet('totmales') . "</td>\n";
       echo "<td>$males ($percentmales%)</td></tr>\n";
 
-      echo "<tr><td>" . uiTextSnippet('totfemales') . "</td>\n";
+      echo '<tr><td>' . uiTextSnippet('totfemales') . "</td>\n";
       echo "<td>$females ($percentfemales%)</td></tr>\n";
 
-      echo "<tr><td>" . uiTextSnippet('totunknown') . "</td>\n";
+      echo '<tr><td>' . uiTextSnippet('totunknown') . "</td>\n";
       echo "<td>$unknownsex ($percentunknownsex%)</td></tr>\n";
 
-      echo "<tr><td>" . uiTextSnippet('totliving') . "</td>\n";
+      echo '<tr><td>' . uiTextSnippet('totliving') . "</td>\n";
       echo "<td>$numliving</td></tr>\n";
 
-      echo "<tr><td>" . uiTextSnippet('totfamilies') . "</td>\n";
+      echo '<tr><td>' . uiTextSnippet('totfamilies') . "</td>\n";
       echo "<td>$totalfamilies</td></tr>\n";
 
-      echo "<tr><td>" . uiTextSnippet('totuniquesn') . "</td>\n";
+      echo '<tr><td>' . uiTextSnippet('totuniquesn') . "</td>\n";
       echo "<td>$uniquesurnames</td></tr>\n";
 
       foreach ($mediatypes as $mediatype) {
         $mediatypeID = $mediatype['ID'];
         $titlestr = uiTextSnippet($mediatypeID) ? uiTextSnippet($mediatypeID) : $mediatypes_display[$mediatypeID];
-        echo "<tr><td>" . uiTextSnippet('total') . " $titlestr</td>\n";
-        echo "<td>" . $totalmedia[$mediatypeID] . "</td></tr>\n";
+        echo '<tr><td>' . uiTextSnippet('total') . " $titlestr</td>\n";
+        echo '<td>' . $totalmedia[$mediatypeID] . "</td></tr>\n";
       }
 
-      echo "<tr><td>" . uiTextSnippet('totsources') . "</td>\n";
+      echo '<tr><td>' . uiTextSnippet('totsources') . "</td>\n";
       echo "<td>$totalsources</td></tr>\n";
 
-      echo "<tr><td>" . uiTextSnippet('avglifespan') . "<sup><font size=\"1\">1</font></sup></td>\n";
+      echo '<tr><td>' . uiTextSnippet('avglifespan') . "<sup><font size=\"1\">1</font></sup></td>\n";
       echo "<td>$avgyears " . uiTextSnippet('years') . ", $avgdays " . uiTextSnippet('days') . "</td></tr>\n";
 
-      echo "<tr><td>" . uiTextSnippet('earliestbirth');
+      echo '<tr><td>' . uiTextSnippet('earliestbirth');
       if ($firstallowed) {
         echo " (<a href=\"peopleShowPerson.php?personID=$firstbirthpersonid\">$firstbirthfirstname $firstbirthlnprefix $firstbirthlastname</a>)";
       }
       echo "</td>\n";
-      echo "<td>" . displayDate($firstbirthdate) . "</td></tr>\n";
+      echo '<td>' . displayDate($firstbirthdate) . "</td></tr>\n";
 
       if ($tngconfig['lastimport'] && $treerow['treename'] && $lastimportdate) {
-        echo "<tr><td>" . uiTextSnippet('lastimportdate') . "</td>\n";
+        echo '<tr><td>' . uiTextSnippet('lastimportdate') . "</td>\n";
 
         $importtime = strtotime($lastimportdate);
-        if (substr($lastimport, 11, 8) != "00:00:00") {
+        if (substr($lastimport, 11, 8) != '00:00:00') {
           $importtime += ($timeOffset * 3600);
         }
-        $importdate = strftime("%d %b %Y %H:%M:%S", $importtime);
+        $importdate = strftime('%d %b %Y %H:%M:%S', $importtime);
 
-        echo "<td>" . displayDate($importdate) . "</td></tr>\n";
+        echo '<td>' . displayDate($importdate) . "</td></tr>\n";
       }
       ?>
     </table>
@@ -250,9 +250,9 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
           echo uiTextSnippet('living');
         }
         echo "</a></td>\n";
-        echo "<td>";
+        echo '<td>';
         if ($yearsold) {
-          echo number_format($yearsold) . " " . uiTextSnippet('years');
+          echo number_format($yearsold) . ' ' . uiTextSnippet('years');
         }
         if ($daysold) {
           echo " $daysold " . uiTextSnippet('days');

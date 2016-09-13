@@ -21,7 +21,7 @@ $name = uiTextSnippet('repository') . ": {$row['reponame']} ($ID)";
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 
 $headTitle = uiTextSnippet('suggestchange') . ": $name";
 $headSection->setTitle($headTitle);

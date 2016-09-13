@@ -18,11 +18,11 @@ function getNewID($type, $table) {
     $lastid = 0;
   }
   $found = false;
-  eval("\$prefix = \$$type" . "prefix;");
-  eval("\$suffix = \$$type" . "suffix;");
+  eval("\$prefix = \$$type" . 'prefix;');
+  eval("\$suffix = \$$type" . 'suffix;');
 
   if (!isset($tngconfig['oldids'])) {
-    $tngconfig['oldids'] = "";
+    $tngconfig['oldids'] = '';
   }
   if ($tngconfig['oldids']) {
     while (!$found) {
@@ -37,23 +37,23 @@ function getNewID($type, $table) {
     }
     $newnum = $lastid;
   } else {
-    $typestr = $type . "ID";
+    $typestr = $type . 'ID';
     if ($prefix) {
       $preflen = strlen($prefix);
-      $numpart = "CAST(SUBSTRING($typestr," . ($preflen + 1) . ") as SIGNED)";
+      $numpart = "CAST(SUBSTRING($typestr," . ($preflen + 1) . ') as SIGNED)';
       $wherestr = "$numpart >= $lastid";
     } elseif ($suffix) {
       $suflen = strlen($suffix);
-      $numpart = "CAST(SUBSTRING($typestr,0,LENGTH($typestr - " . ($sufflen + 1) . ")) as SIGNED)";
+      $numpart = "CAST(SUBSTRING($typestr,0,LENGTH($typestr - " . ($sufflen + 1) . ')) as SIGNED)';
       $wherestr = "$numpart >= $lastid";
     } else {
       $numpart = $typestr;
-      $wherestr = "";
+      $wherestr = '';
     }
 
     $maxrows = 10000;
     $nextone = 0;
-    $newnum = "";
+    $newnum = '';
     do {
       $query = "SELECT $typestr FROM $table WHERE $wherestr
         ORDER BY $numpart
@@ -89,17 +89,17 @@ function getNewID($type, $table) {
 }
 
 switch ($type) {
-  case "person":
-    $newID = getNewID("person", $people_table);
+  case 'person':
+    $newID = getNewID('person', $people_table);
     break;
-  case "family":
-    $newID = getNewID("family", $families_table);
+  case 'family':
+    $newID = getNewID('family', $families_table);
     break;
-  case "source":
-    $newID = getNewID("source", $sources_table);
+  case 'source':
+    $newID = getNewID('source', $sources_table);
     break;
-  case "repo":
-    $newID = getNewID("repo", $repositories_table);
+  case 'repo':
+    $newID = getNewID('repo', $repositories_table);
     break;
 }
 echo $newID;

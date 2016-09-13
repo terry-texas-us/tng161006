@@ -1,8 +1,8 @@
 <?php
 if (function_exists('mbtng_filename')) {
-  $tngscript = basename(mbtng_filename(), ".php");
+  $tngscript = basename(mbtng_filename(), '.php');
 } else {
-  $tngscript = basename($_SERVER['SCRIPT_NAME'], ".php");
+  $tngscript = basename($_SERVER['SCRIPT_NAME'], '.php');
 }
 //No index only
 $NOI = "<meta name=\"robots\" content=\"noindex\" />\n";
@@ -19,79 +19,79 @@ if ($tngprint) {
 } else {
   switch ($tngscript) {
     //no index, no follow
-    case "addnewacct":
-    case "ahnentafel":
-    case "anniversaries":
-    case "calendar":
-    case "treesShow":
-    case "changelanguage":
-    case "descend":
-    case "descendtext":
-    case "desctracker":
-    case "gedform":
-    case "login":
-    case "newacctform":
-    case "pdfform":
-    case "pedigree":
-    case "pedigreetext":
-    case "places-all":
-    case "places-oneletter":
-    case "places":
-    case "placesearch":
-    case "places100":
-    case "register":
-    case "relateform":
-    case "relationship":
-    case "savelanguage2":
-    case "searchform":
-    case "sendlogin":
-    case "showlog":
-    case "suggest":
-    case "timeline":
-    case "timeline2":
-    case "ultraped":
+    case 'addnewacct':
+    case 'ahnentafel':
+    case 'anniversaries':
+    case 'calendar':
+    case 'treesShow':
+    case 'changelanguage':
+    case 'descend':
+    case 'descendtext':
+    case 'desctracker':
+    case 'gedform':
+    case 'login':
+    case 'newacctform':
+    case 'pdfform':
+    case 'pedigree':
+    case 'pedigreetext':
+    case 'places-all':
+    case 'places-oneletter':
+    case 'places':
+    case 'placesearch':
+    case 'places100':
+    case 'register':
+    case 'relateform':
+    case 'relationship':
+    case 'savelanguage2':
+    case 'searchform':
+    case 'sendlogin':
+    case 'showlog':
+    case 'suggest':
+    case 'timeline':
+    case 'timeline2':
+    case 'ultraped':
       $flags['norobots'] = $NOINOF;
       break;
 
     //no indexing, but allow link following
-    case "mediaShow":
-    case "browsedocs":
-    case "browseheadstones":
-    case "browsenotes":
-    case "browsephotos":
-    case "repositoriesShow":
-    case "sourcesShow":
-    case "extrastree":
-    case "reportsShow":
-    case "search":
-    case "reportsShowReport":
-    case "surnames100":
-    case "whatsnew":
+    case 'mediaShow':
+    case 'browsedocs':
+    case 'browseheadstones':
+    case 'browsenotes':
+    case 'browsephotos':
+    case 'repositoriesShow':
+    case 'sourcesShow':
+    case 'extrastree':
+    case 'reportsShow':
+    case 'search':
+    case 'reportsShowReport':
+    case 'surnames100':
+    case 'whatsnew':
       $flags['norobots'] = $NOI;
       break;
 
     //allow full indexing
-    case "cemeteriesShow":
-    case "peopleShowPerson":
-    case "familiesShowFamily":
-    case "headstones":
-    case "mostwanted":
-    case "showmedia":
-    case "cemeteriesShowCemetery":
-    case "showphoto":
-    case "repositoriesShowItem":
-    case "sourcesShowSource":
-    case "showtree":
-    case "surnames":
-    case "surnames-all":
-    case "surnames-oneletter":
-      $flags['norobots'] = "";
+    case 'cemeteriesShow':
+    case 'peopleShowPerson':
+    case 'familiesShowFamily':
+    case 'headstones':
+    case 'mostwanted':
+    case 'showmedia':
+    case 'cemeteriesShowCemetery':
+    case 'showphoto':
+    case 'repositoriesShowItem':
+    case 'sourcesShowSource':
+    case 'showtree':
+    case 'surnames':
+    case 'surnames-all':
+    case 'surnames-oneletter':
+      $flags['norobots'] = '';
       break;
 
     //all pages not named get full indexing as well
     //no pages come in here unless they include genlib.php
     default:
-      //$flags['norobots'] = "";
+      //$flags['norobots'] = '';
       break;
   }
 }

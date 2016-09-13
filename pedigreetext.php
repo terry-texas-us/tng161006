@@ -6,7 +6,7 @@ require $subroot . 'pedconfig.php';
 require 'personlib.php';
 
 if (!$personID) {
-  die("no args");
+  die('no args');
 }
 if (isset($generations)) {
   $generations = intval($generations);
@@ -30,15 +30,15 @@ function displayIndividual($key, $generation, $slot) {
   global $parentset;
 
   $nextslot = $slot * 2;
-  $name = "";
-  $row['birthdate'] = "";
-  $row['birthplace'] = "";
-  $row['altbirthdate'] = "";
-  $row['altbirthplace'] = "";
-  $row['deathdate'] = "";
-  $row['deathplace'] = "";
-  $row['burialdate'] = "";
-  $row['burialplace'] = "";
+  $name = '';
+  $row['birthdate'] = '';
+  $row['birthplace'] = '';
+  $row['altbirthdate'] = '';
+  $row['altbirthplace'] = '';
+  $row['deathdate'] = '';
+  $row['deathplace'] = '';
+  $row['burialdate'] = '';
+  $row['burialplace'] = '';
 
   if ($key) {
     $result = getPersonData($key);
@@ -84,7 +84,7 @@ function displayIndividual($key, $generation, $slot) {
 
   echo "<table width='100%'>\n";
   echo "<tr>\n";
-  $pedborder = $slot % 2 && $slot != 1 ? "class='pedborderleft'" : "";
+  $pedborder = $slot % 2 && $slot != 1 ? "class='pedborderleft'" : '';
   echo "<td colspan='2' $pedborder><span>&nbsp;$slot. <a href='peopleShowPerson.php?personID=$key'>$name</a>&nbsp;</span></td>\n";
 
   //arrow goes here in own cell
@@ -96,7 +96,7 @@ function displayIndividual($key, $generation, $slot) {
   echo "<tr>\n<td colspan='2'><img src='img/black.gif' alt='' width='100%' height='1'></td>\n</tr>\n";
   echo "<tr>\n";
 
-  $pedborder = $slot % 2 ? "" : "class='pedborderleft'";
+  $pedborder = $slot % 2 ? '' : "class='pedborderleft'";
   if ($rights['both']) {
     if ($row['birthdate'] || $row['altbirthdate'] || $row['altbirthplace'] || $row['deathdate'] || $row['burialdate'] || $row['burialplace'] || ($slot % 2 == 0 && ($marrdate[$slot] || $marrplace[$slot]))) {
       $dataflag = 1;
@@ -105,12 +105,12 @@ function displayIndividual($key, $generation, $slot) {
     }
     if ($row['altbirthdate'] && !$row['birthdate']) {
       echo "<td $pedborder><span>&nbsp;" . uiTextSnippet('capaltbirthabbr') . ":</span></td>\n";
-      echo "<td><span>" . displayDate($row['altbirthdate']) . "&nbsp;</span></td>\n</tr>\n";
+      echo '<td><span>' . displayDate($row['altbirthdate']) . "&nbsp;</span></td>\n</tr>\n";
       echo "<tr>\n<td $pedborder><span>&nbsp;" . uiTextSnippet('capplaceabbr') . ":&nbsp;</span></td>\n";
       echo "<td><span>{$row['altbirthplace']}&nbsp;</span></td>\n</tr>\n";
     } elseif ($dataflag) {
       echo "<td $pedborder><span>&nbsp;" . uiTextSnippet('capbirthabbr') . ":</span></td>\n";
-      echo "<td><span>" . displayDate($row['birthdate']) . "&nbsp;</span></td></tr>\n";
+      echo '<td><span>' . displayDate($row['birthdate']) . "&nbsp;</span></td></tr>\n";
       echo "<tr>\n<td $pedborder><span>&nbsp;" . uiTextSnippet('capplaceabbr') . ":&nbsp;</span></td>\n";
       echo "<td><span>{$row['birthplace']}&nbsp;</span></td>\n</tr>\n";
     } else {
@@ -119,7 +119,7 @@ function displayIndividual($key, $generation, $slot) {
     if ($slot % 2 == 0) {
       if ($dataflag) {
         echo "<tr>\n<td class='pedborderleft'><span>&nbsp;" . uiTextSnippet('capmarrabbr') . ":</span></td>\n";
-        echo "<td><span>" . displayDate($marrdate[$slot]) . "&nbsp;</span></td>\n</tr>\n";
+        echo '<td><span>' . displayDate($marrdate[$slot]) . "&nbsp;</span></td>\n</tr>\n";
         echo "<tr>\n<td class='pedborderleft'><span>&nbsp;" . uiTextSnippet('capplaceabbr') . ":&nbsp;</span></td>\n";
         echo "<td><span>{$marrplace[$slot]}&nbsp;</span></td>\n</tr>\n";
       } else {
@@ -129,12 +129,12 @@ function displayIndividual($key, $generation, $slot) {
     }
     if ($row['burialdate'] && !$row['deathdate']) {
       echo "<tr>\n<td $pedborder><span>&nbsp;" . uiTextSnippet('capburialabbr') . ":</span></td>\n";
-      echo "<td><span>" . displayDate($row['burialdate']) . "&nbsp;</span></td>\n</tr>\n";
+      echo '<td><span>' . displayDate($row['burialdate']) . "&nbsp;</span></td>\n</tr>\n";
       echo "<tr>\n<td $pedborder><span>&nbsp;" . uiTextSnippet('capplaceabbr') . ":&nbsp;</span></td>\n";
       echo "<td><span>{$row['burialplace']}&nbsp;</span></td>\n</tr>\n</table>\n";
     } elseif ($dataflag) {
       echo "<tr>\n<td $pedborder><span>&nbsp;" . uiTextSnippet('capdeathabbr') . ":</span></td>\n";
-      echo "<td><span>" . displayDate($row['deathdate']) . "&nbsp;</span></td></tr>\n";
+      echo '<td><span>' . displayDate($row['deathdate']) . "&nbsp;</span></td></tr>\n";
       echo "<tr>\n<td $pedborder><span>&nbsp;" . uiTextSnippet('capplaceabbr') . ":&nbsp;</span></td>\n";
       echo "<td><span>{$row['deathplace']}&nbsp;</span></td>\n</tr>\n</table>\n";
     } else {
@@ -166,17 +166,17 @@ function displayIndividual($key, $generation, $slot) {
 
   $generation++;
   if ($nextslot < $pedmax) {
-    $husband = "";
-    $wife = "";
-    $marrdate[$nextslot] = "";
-    $marrplace[$nextslot] = "";
+    $husband = '';
+    $wife = '';
+    $marrdate[$nextslot] = '';
+    $marrplace[$nextslot] = '';
 
     if ($key) {
-      $parentfamID = "";
+      $parentfamID = '';
       $locparentset = $parentset;
       $parentscount = 0;
       $parentfamIDs = [];
-      $parents = getChildFamily($key, "parentorder");
+      $parents = getChildFamily($key, 'parentorder');
       if ($parents) {
         $parentscount = tng_num_rows($parents);
         if ($parentscount > 0) {
@@ -208,8 +208,8 @@ function displayIndividual($key, $generation, $slot) {
           $marrdate[$nextslot] = $newrow['marrdate'];
           $marrplace[$nextslot] = $newrow['marrplace'];
         } else {
-          $marrdate[$nextslot] = "";
-          $marrplace[$nextslot] = "";
+          $marrdate[$nextslot] = '';
+          $marrplace[$nextslot] = '';
         }
         tng_free_result($result2);
       }
@@ -251,7 +251,7 @@ preparebookmark("<a href='pedigree.php?personID=$personID&amp;generations=$gener
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
 ?>
 <!DOCTYPE html>
@@ -264,12 +264,12 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
     $photostr = showSmallPhoto($personID, $pedname, $rights['both'], 0, false, $row['sex']);
     echo tng_DrawHeading($photostr, $pedname, getYears($row));
 
-    $innermenu = uiTextSnippet('generations') . ": &nbsp;";
+    $innermenu = uiTextSnippet('generations') . ': &nbsp;';
     $innermenu .= "<select name='generations' class='small' onchange=\"window.location.href='pedigreetext.php?personID=$personID&amp;parentset=$parentset&amp;display=$display&amp;generations=' + this.options[this.selectedIndex].value\">\n";
     for ($i = 1; $i <= $pedigree['maxgen']; $i++) {
       $innermenu .= "<option value='$i'";
       if ($i == $generations) {
-        $innermenu .= " selected";
+        $innermenu .= ' selected';
       }
       $innermenu .= ">$i</option>\n";
     }
@@ -283,8 +283,8 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
     if ($generations <= 6 && $allow_pdf && $rightbranch) {
       $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ped&amp;personID=$personID&amp;generations=$generations');return false;\">PDF</a>\n";
     }
-    beginFormElement("pedigree", "", "form1", "form1");
-    echo buildPersonMenu("pedigree", $personID);
+    beginFormElement('pedigree', '', 'form1', 'form1');
+    echo buildPersonMenu('pedigree', $personID);
     echo "<div class='pub-innermenu small'>\n";
       echo $innermenu;
     echo "</div>\n";

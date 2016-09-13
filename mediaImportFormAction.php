@@ -9,7 +9,7 @@ require 'adminlog.php';
 
 if (!$allowMediaAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
@@ -26,8 +26,8 @@ function importFrom($tngpath, $orgpath, $needsubdirs) {
   $subdirs = [];
 
   if ($orgpath) {
-    $path = $tngpath . "/" . $orgpath;
-    $orgpath .= "/";
+    $path = $tngpath . '/' . $orgpath;
+    $orgpath .= '/';
   } else {
     $path = $tngpath;
   }
@@ -36,12 +36,12 @@ function importFrom($tngpath, $orgpath, $needsubdirs) {
     while ($filename = readdir($handle)) {
       if (is_file($filename)) {
         if (($thumbprefix && strpos($filename, $thumbprefix) !== 0) || ($thumbsuffix && substr($filename, -strlen($thumbsuffix)) != $thumbsuffix)) {
-          //$cleanfile = $session_charset == "UTF-8" ? utf8_encode($filename) : $filename;
+          //$cleanfile = $session_charset == 'UTF-8' ? utf8_encode($filename) : $filename;
           echo "Inserting $path/$filename ... ";
           //insert ignore into database
           $fileparts = pathinfo($filename);
-          $form = strtoupper($fileparts["extension"]);
-          $newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
+          $form = strtoupper($fileparts['extension']);
+          $newdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
           $query = "INSERT IGNORE INTO $media_table (mediatypeID, mediakey, path, thumbpath, description, notes, width, height, datetaken, placetaken, owner, changedate, form, alwayson, map, abspath, status, cemeteryID, showmap, linktocem, latitude, longitude, zoom, bodytext, usenl, newwindow, usecollfolder) "
               . "VALUES ('$mediatypeID', '$path/$filename', '$orgpath$filename', '', '$orgpath$filename', '', '', '', '', '', '', '$newdate', '$form', '0', '', '0', '', '', '0', '0', '', '', '0', '', '0', '0', '1')";
           tng_query($query);
@@ -63,9 +63,9 @@ function importFrom($tngpath, $orgpath, $needsubdirs) {
 
   return $subdirs;
 }
-adminwritelog(uiTextSnippet('media') . " &gt;&gt; " . uiTextSnippet('import') . " ($mediatypeID)");
+adminwritelog(uiTextSnippet('media') . ' &gt;&gt; ' . uiTextSnippet('import') . " ($mediatypeID)");
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('mediaimport'));
 ?>
 <!DOCTYPE html>
@@ -78,13 +78,13 @@ $headSection->setTitle(uiTextSnippet('mediaimport'));
 
     echo $adminHeaderSection->build('media-import', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('search'), "findmedia"]);
-    $navList->appendItem([$allowMediaAdd, "admin_newmedia.php", uiTextSnippet('addnew'), "addmedia"]);
-    $navList->appendItem([$allowMediaEdit, "admin_ordermediaform.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    $navList->appendItem([$allowMediaEdit, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-    $navList->appendItem([$allowMediaAdd, "mediaImport.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allowMediaAdd, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
-    echo $navList->build("import");
+    $navList->appendItem([true, 'mediaBrowse.php', uiTextSnippet('search'), 'findmedia']);
+    $navList->appendItem([$allowMediaAdd, 'admin_newmedia.php', uiTextSnippet('addnew'), 'addmedia']);
+    $navList->appendItem([$allowMediaEdit, 'admin_ordermediaform.php', uiTextSnippet('text_sort'), 'sortmedia']);
+    $navList->appendItem([$allowMediaEdit, 'mediaThumbnails.php', uiTextSnippet('thumbnails'), 'thumbs']);
+    $navList->appendItem([$allowMediaAdd, 'mediaImport.php', uiTextSnippet('import'), 'import']);
+    $navList->appendItem([$allowMediaAdd, 'mediaUpload.php', uiTextSnippet('upload'), 'upload']);
+    echo $navList->build('import');
     ?>
     <table class='table table-sm'>
       <tr>

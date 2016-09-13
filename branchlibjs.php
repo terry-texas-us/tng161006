@@ -4,8 +4,8 @@ echo "branchids['none'] = new Array(\"\");\n";
 echo "var branchnames = new Array();\n";
 echo "branchnames['none'] = new Array(\"" . uiTextSnippet('allbranches') . "\");\n";
 $swapbranches = "swapBranches();\n";
-$dispid = "";
-$dispname = "";
+$dispid = '';
+$dispname = '';
 
 $query = "SELECT gedcom FROM $treesTable $wherestr";
 $treeresult = tng_query($query);

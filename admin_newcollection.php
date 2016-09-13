@@ -7,15 +7,15 @@ require 'checklogin.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
-$helplang = findhelp("collections_help.php");
+$helplang = findhelp('collections_help.php');
 
 initMediaTypes();
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <div id='newcollection'>
   <form id='collform' name='collform' action='admin_addcollection.php' method='post' onsubmit="return addCollection(this);">

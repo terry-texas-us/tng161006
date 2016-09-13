@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 
 $query = "SELECT cemeteryID, cemname, city, county, state, country FROM $cemeteries_table WHERE place = \"\" ORDER BY country, state, county, city, cemname";
 $result = tng_query($query);
@@ -25,25 +25,25 @@ $result = tng_query($query);
               $location = $cemrow['country'];
               if ($cemrow['state']) {
                 if ($location) {
-                  $location .= ", ";
+                  $location .= ', ';
                 }
                 $location .= $cemrow['state'];
               }
               if ($cemrow['county']) {
                 if ($location) {
-                  $location .= ", ";
+                  $location .= ', ';
                 }
                 $location .= $cemrow['county'];
               }
               if ($cemrow['city']) {
                 if ($location) {
-                  $location .= ", ";
+                  $location .= ', ';
                 }
                 $location .= $cemrow['city'];
               }
               if ($cemrow['cemname']) {
                 if ($location) {
-                  $location .= ", ";
+                  $location .= ', ';
                 }
                 $location .= $cemrow['cemname'];
               }

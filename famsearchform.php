@@ -22,7 +22,7 @@ $mydivyear = $_SESSION['tng_search_divyear'];
 $mybool = $_SESSION['tng_search_fbool'];
 $nr = $_SESSION['tng_nr'];
 
-$dontdo = ["MARR", "DIV"];
+$dontdo = ['MARR', 'DIV'];
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
@@ -34,7 +34,7 @@ function buildSelectInputGroup($label, $formName, $selectName, $value, $options,
   $out .= "<span class='input-group-select'>\n";
   $out .= "<select class='form-control' name='" . $selectName . "'>\n";
   foreach ($options as $option) {
-    $out .= "<option value='$option'" . ($selected == $option ? ' selected' : '') . ">" . uiTextSnippet($option) . "</option>\n";
+    $out .= "<option value='$option'" . ($selected == $option ? ' selected' : '') . '>' . uiTextSnippet($option) . "</option>\n";
   }
   $out .= "</select>\n";
   $out .= "</span>\n";
@@ -50,7 +50,7 @@ $lnOptions = ['contains', 'equals', 'startswith', 'endswith', 'exists', 'dnexist
 
 $yearOptions = ['equals', 'plusminus2', 'plusminus5', 'plusminus10', 'lessthan', 'greaterthan', 'lessthanequal', 'greaterthanequal', 'exists', 'dnexist'];
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('searchfams'));
 ?>
 <!DOCTYPE html>
@@ -62,7 +62,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
     <h2><img class='icon-md' src='svg/magnifying-glass.svg'><?php echo uiTextSnippet('searchfams'); ?></h2>
     <?php
     if ($msg) {
-      echo "<b id='errormsg' class='msgerror h4'>" . stripslashes(strip_tags($msg)) . "</b>";
+      echo "<b id='errormsg' class='msgerror h4'>" . stripslashes(strip_tags($msg)) . '</b>';
     }
     ?>
     <form action="famsearch.php" name="famsearch" onsubmit="return makeURL();">
@@ -139,7 +139,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
             while ($row = tng_fetch_assoc($result)) {
               if (!in_array($row['tag'], $dontdo)) {
                 $row['displaymsg'] = getEventDisplay($row['display']);
-                $displaymsg = strtoupper($row['displaymsg']) . "_" . $row['eventtypeID'];
+                $displaymsg = strtoupper($row['displaymsg']) . '_' . $row['eventtypeID'];
                 $eventtypes[$displaymsg] = $row;
               }
             }
@@ -183,7 +183,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
                   echo "<div class='offset-sm-1 col-sm-2'>" . uiTextSnippet('year') . ":</div>\n";
                   echo "<div class='col-sm-3'>\n";
                     echo "<select class='form-control' name=\"cyq{$row['eventtypeID']}\">\n";
-                      $item2_array = [[uiTextSnippet('equals'), ""], [uiTextSnippet('plusminus2'), "plusminus2"], [uiTextSnippet('plusminus5'), "plusminus5"], [uiTextSnippet('plusminus10'), "plusminus10"], [uiTextSnippet('lessthan'), "lessthan"], [uiTextSnippet('greaterthan'), "greaterthan"], [uiTextSnippet('lessthanequal'), "lessthanequal"], [uiTextSnippet('greaterthanequal'), "greaterthanequal"], [uiTextSnippet('exists'), "exists"], [uiTextSnippet('dnexist'), "dnexist"]];
+                      $item2_array = [[uiTextSnippet('equals'), ''], [uiTextSnippet('plusminus2'), 'plusminus2'], [uiTextSnippet('plusminus5'), 'plusminus5'], [uiTextSnippet('plusminus10'), 'plusminus10'], [uiTextSnippet('lessthan'), 'lessthan'], [uiTextSnippet('greaterthan'), 'greaterthan'], [uiTextSnippet('lessthanequal'), 'lessthanequal'], [uiTextSnippet('greaterthanequal'), 'greaterthanequal'], [uiTextSnippet('exists'), 'exists'], [uiTextSnippet('dnexist'), 'dnexist']];
                       foreach ($item2_array as $item) {
                         echo "<option value='$item[1]'";
                         echo ">$item[0]</option>\n";
@@ -219,7 +219,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
             foreach ($item3_array as $item) {
               echo "<option value='$item[1]'";
               if ($nr == $item[1]) {
-                echo " selected";
+                echo ' selected';
               }
               echo ">$item[0]</option>\n";
             }
@@ -230,11 +230,11 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
         <div class='col-sm-2'>
           <select class='form-control' name='mybool'>
             <?php
-            $item3_array = [[uiTextSnippet('cap_and'), "AND"], [uiTextSnippet('cap_or'), "OR"]];
+            $item3_array = [[uiTextSnippet('cap_and'), 'AND'], [uiTextSnippet('cap_or'), 'OR']];
             foreach ($item3_array as $item) {
               echo "<option value='$item[1]'";
               if ($mybool == $item[1]) {
-                echo " selected";
+                echo ' selected';
               }
               echo ">$item[0]</option>\n";
             }
@@ -266,15 +266,15 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
       document.famsearch.mybool.selectedIndex = 0;
       document.famsearch.fidqualify.selectedIndex = 0;
 
-      document.famsearch.myflastname.value = "";
-      document.famsearch.myffirstname.value = "";
-      document.famsearch.mymlastname.value = "";
-      document.famsearch.mymfirstname.value = "";
-      document.famsearch.mymarrplace.value = "";
-      document.famsearch.mymarryear.value = "";
-      document.famsearch.mydivplace.value = "";
-      document.famsearch.mydivyear.value = "";
-      document.famsearch.myfamilyid.value = "";
+      document.famsearch.myflastname.value = '';
+      document.famsearch.myffirstname.value = '';
+      document.famsearch.mymlastname.value = '';
+      document.famsearch.mymfirstname.value = '';
+      document.famsearch.mymarrplace.value = '';
+      document.famsearch.mymarryear.value = '';
+      document.famsearch.mydivplace.value = '';
+      document.famsearch.mydivyear.value = '';
+      document.famsearch.myfamilyid.value = '';
       $('errormsg').style.display = "none";
     }
 
@@ -300,14 +300,14 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
       URL = "mybool=" + thisform.mybool[thisform.mybool.selectedIndex].value;
       URL = URL + "&nr=" + thisform.nr[thisform.nr.selectedIndex].value;
       <?php
-      $qualifiers = ["fln", "ffn", "mln", "mfn", "fid", "mp", "my", "dvp", "dvy"];
-      $criteria = ["flastname", "ffirstname", "mlastname", "mfirstname", "familyid", "marrplace", "marryear", "divplace", "divyear"];
+      $qualifiers = ['fln', 'ffn', 'mln', 'mfn', 'fid', 'mp', 'my', 'dvp', 'dvy'];
+      $criteria = ['flastname', 'ffirstname', 'mlastname', 'mfirstname', 'familyid', 'marrplace', 'marryear', 'divplace', 'divyear'];
 
       $qcount = 0;
       $found = 0;
       foreach ($criteria as $criterion) {
       ?>
-      if (thisform.my<?php echo $criterion; ?>.value !== "" || thisform.<?php echo $qualifiers[$qcount]; ?>qualify.value === 'exists' || thisform.<?php echo $qualifiers[$qcount]; ?>qualify.value === "dnexist") {
+      if (thisform.my<?php echo $criterion; ?>.value !== '' || thisform.<?php echo $qualifiers[$qcount]; ?>qualify.value === 'exists' || thisform.<?php echo $qualifiers[$qcount]; ?>qualify.value === 'dnexist') {
         URL = URL + "&my<?php echo $criterion; ?>=" + thisform.my<?php echo $criterion; ?>.value;
         URL = URL + "&<?php echo $qualifiers[$qcount]; ?>qualify=" + thisform.<?php echo $qualifiers[$qcount]; ?>qualify[thisform.<?php echo $qualifiers[$qcount]; ?>qualify.selectedIndex].value;
         found++;
@@ -321,15 +321,15 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
       while ($row = tng_fetch_assoc($etresult)) {
       if (!in_array($row[tag], $dontdo)) {
       ?>
-      if (thisform.cef<?php echo $row['eventtypeID']; ?>.value !== "" || thisform.cfq<?php echo $row['eventtypeID']; ?>.value === 'exists' || thisform.cfq<?php echo $row['eventtypeID']; ?>.value === "dnexist") {
+      if (thisform.cef<?php echo $row['eventtypeID']; ?>.value !== '' || thisform.cfq<?php echo $row['eventtypeID']; ?>.value === 'exists' || thisform.cfq<?php echo $row['eventtypeID']; ?>.value === 'dnexist') {
         URL = URL + "&cef<?php echo $row['eventtypeID']; ?>=" + thisform.cef<?php echo $row['eventtypeID']; ?>.value;
         URL = URL + "&cfq<?php echo $row['eventtypeID']; ?>=" + thisform.cfq<?php echo $row['eventtypeID']; ?>[thisform.cfq<?php echo $row['eventtypeID']; ?>.selectedIndex].value;
       }
-      if (thisform.cep<?php echo $row['eventtypeID']; ?>.value !== "" || thisform.cpq<?php echo $row['eventtypeID']; ?>.value === 'exists' || thisform.cpq<?php echo $row['eventtypeID']; ?>.value === "dnexist") {
+      if (thisform.cep<?php echo $row['eventtypeID']; ?>.value !== '' || thisform.cpq<?php echo $row['eventtypeID']; ?>.value === 'exists' || thisform.cpq<?php echo $row['eventtypeID']; ?>.value === 'dnexist') {
         URL = URL + "&cep<?php echo $row['eventtypeID']; ?>=" + thisform.cep<?php echo $row['eventtypeID']; ?>.value;
         URL = URL + "&cpq<?php echo $row['eventtypeID']; ?>=" + thisform.cpq<?php echo $row['eventtypeID']; ?>[thisform.cpq<?php echo $row['eventtypeID']; ?>.selectedIndex].value;
       }
-      if (thisform.cey<?php echo $row['eventtypeID']; ?>.value !== "" || thisform.cyq<?php echo $row['eventtypeID']; ?>.value === 'exists' || thisform.cyq<?php echo $row['eventtypeID']; ?>.value === "dnexist") {
+      if (thisform.cey<?php echo $row['eventtypeID']; ?>.value !== '' || thisform.cyq<?php echo $row['eventtypeID']; ?>.value === 'exists' || thisform.cyq<?php echo $row['eventtypeID']; ?>.value === 'dnexist') {
         URL = URL + "&cey<?php echo $row['eventtypeID']; ?>=" + thisform.cey<?php echo $row['eventtypeID']; ?>.value;
         URL = URL + "&cyq<?php echo $row['eventtypeID']; ?>=" + thisform.cyq<?php echo $row['eventtypeID']; ?>[thisform.cyq<?php echo $row['eventtypeID']; ?>.selectedIndex].value;
       }

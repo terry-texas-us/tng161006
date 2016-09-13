@@ -7,7 +7,7 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('places'));
 ?>
 <!DOCTYPE html>
@@ -18,11 +18,11 @@ $headSection->setTitle(uiTextSnippet('places'));
     <?php
     echo $adminHeaderSection->build('places-geocode', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "placesBrowse.php", uiTextSnippet('browse'), "findplace"]);
-    $navList->appendItem([$allowAdd, "placesAdd.php", uiTextSnippet('add'), "addplace"]);
-    $navList->appendItem([$allowEdit && $allowDelete, "placesMerge.php", uiTextSnippet('merge'), "merge"]);
-    // $navList->appendItem([$allowEdit, "admin_geocodeform.php", uiTextSnippet('geocode'), "geo"]);
-    echo $navList->build("geo");
+    $navList->appendItem([true, 'placesBrowse.php', uiTextSnippet('browse'), 'findplace']);
+    $navList->appendItem([$allowAdd, 'placesAdd.php', uiTextSnippet('add'), 'addplace']);
+    $navList->appendItem([$allowEdit && $allowDelete, 'placesMerge.php', uiTextSnippet('merge'), 'merge']);
+    // $navList->appendItem([$allowEdit, 'admin_geocodeform.php', uiTextSnippet('geocode'), 'geo']);
+    echo $navList->build('geo');
     ?>
 
     <table class='table table-sm'>

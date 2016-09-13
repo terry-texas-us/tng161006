@@ -7,7 +7,7 @@ require 'checklogin.php';
 
 if (!$allowEdit || $assignedbranch) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 $query = "SELECT action FROM $branches_table WHERE branch = '$branch'";
@@ -15,7 +15,7 @@ $result = tng_query($query);
 $brow = tng_fetch_assoc($result);
 tng_free_result($result);
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <div class='container'>
   <form id='form2' name='form2' action='#' method='post' onsubmit="return addLabels();">
@@ -55,9 +55,9 @@ header("Content-type:text/html; charset=" . $session_charset);
                 <?php
                 $action = $brow['action'] ? $brow['action'] : 2;
                 ?>
-                <option value="2" <?php if ($action == 2) {echo " selected";} ?>><?php echo uiTextSnippet('append'); ?></option>
-                <option value='1' <?php if ($action == 1) {echo " selected";} ?>><?php echo uiTextSnippet('overwrite'); ?></option>
-                <option value='0' <?php if ($action == 0) {echo " selected";} ?>><?php echo uiTextSnippet('leave'); ?></option>
+                <option value='2' <?php if ($action == 2) {echo ' selected';} ?>><?php echo uiTextSnippet('append'); ?></option>
+                <option value='1' <?php if ($action == 1) {echo ' selected';} ?>><?php echo uiTextSnippet('overwrite'); ?></option>
+                <option value='0' <?php if ($action == 0) {echo ' selected';} ?>><?php echo uiTextSnippet('leave'); ?></option>
               </select>
             </div>
           </td>

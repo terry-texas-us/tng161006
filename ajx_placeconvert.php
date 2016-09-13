@@ -11,13 +11,13 @@ if (!$allowEdit) {
 
 require 'adminlog.php';
 
-header("Content-type:text/html; charset=" . $session_charset);
-if ($action == "convert") {
+header('Content-type:text/html; charset=' . $session_charset);
+if ($action == 'convert') {
   $query = "UPDATE $places_table SET gedcom = \"$placetree\" WHERE gedcom = \"\"";
-  $result = tng_query($query) or die("Cannot complete this operation because place records were never merged.");
+  $result = tng_query($query) or die('Cannot complete this operation because place records were never merged.');
   $logmsg = "All places assigned to tree: $placetree";
 } else {
-  if ($action == "merge") {
+  if ($action == 'merge') {
     //stop using trees, blank out the gedcom field for every place
     $query = "SELECT * FROM $places_table WHERE gedcom != \"\"";
     $result = tng_query($query);

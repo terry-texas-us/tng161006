@@ -3,7 +3,7 @@ require 'begin.php';
 require $subroot . 'templateconfig.php';
 require 'adminlib.php';
 
-$templatespath = "templates";
+$templatespath = 'templates';
 
 if ($link) {
   $adminLogin = 1;
@@ -12,14 +12,14 @@ if ($link) {
 
   if (!$allowEdit) {
     $message = uiTextSnippet('norights');
-    header("Location: admin_login.php?message=" . urlencode($message));
+    header('Location: admin_login.php?message=' . urlencode($message));
     exit;
   }
 }
 $languageArray = [];
 $query = "SELECT display, folder FROM $languagesTable ORDER BY display";
 $result = tng_query($query);
-$languageList = tng_num_rows($result) ? "<option value=''></option>\n" : "";
+$languageList = tng_num_rows($result) ? "<option value=''></option>\n" : '';
 while ($row = tng_fetch_assoc($result)) {
   $key = $row['folder'];
   $languageList .= "<option value=\"$key\">{$row['display']}</option>\n";
@@ -27,7 +27,7 @@ while ($row = tng_fetch_assoc($result)) {
 }
 tng_free_result($result);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
 ?>
 <!DOCTYPE html>
@@ -38,11 +38,11 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
     <?php
     echo $adminHeaderSection->build('setup-configuration-templateconfigsettings', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_setup.php", uiTextSnippet('configuration'), "configuration"]);
-    $navList->appendItem([true, "admin_diagnostics.php", uiTextSnippet('diagnostics'), "diagnostics"]);
-    $navList->appendItem([true, "admin_setup.php?sub=tablecreation", uiTextSnippet('tablecreation'), "tablecreation"]);
-    $navList->appendItem([true, "#", uiTextSnippet('templateconfigsettings'), "template"]);
-    echo $navList->build("template");
+    $navList->appendItem([true, 'admin_setup.php', uiTextSnippet('configuration'), 'configuration']);
+    $navList->appendItem([true, 'admin_diagnostics.php', uiTextSnippet('diagnostics'), 'diagnostics']);
+    $navList->appendItem([true, 'admin_setup.php?sub=tablecreation', uiTextSnippet('tablecreation'), 'tablecreation']);
+    $navList->appendItem([true, '#', uiTextSnippet('templateconfigsettings'), 'template']);
+    echo $navList->build('template');
     ?>
     <form action="admin_updatetemplateconfig.php" method='post' name="form1" ENCTYPE="multipart/form-data">
       <table class='table table-sm'>
@@ -50,7 +50,7 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
           <td>
             <label for="form_templateswitching"><?php echo uiTextSnippet('templateswitching'); ?>:</label>
             <select name="form_templateswitching" id="form_templateswitching">
-              <option value='0'<?php echo " selected"; ?>><?php echo uiTextSnippet('no'); ?></option>
+              <option value='0'<?php echo ' selected'; ?>><?php echo uiTextSnippet('no'); ?></option>
             </select>
           </td>
         </tr>
@@ -65,10 +65,10 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
             $folders = [];
             if ($handle = opendir('.')) {
               while ($filename = readdir($handle)) {
-                if (is_dir($filename) && $filename != "." && $filename != "..") {
-                  $i = substr($filename, 0, 8) == "template" && is_numeric(substr($filename, 8)) ? substr($filename, 8) : $filename;
+                if (is_dir($filename) && $filename != '.' && $filename != '..') {
+                  $i = substr($filename, 0, 8) == 'template' && is_numeric(substr($filename, 8)) ? substr($filename, 8) : $filename;
                   $totaltemplates++;
-                  $sections['t' . $i] = "";
+                  $sections['t' . $i] = '';
                   $entries[] = $i;
                   $folders['t' . $i] = $filename;
                 }
@@ -83,10 +83,10 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
               <?php
               foreach ($entries as $entry) {
                 echo "<option value=\"$entry\"";
-                if ("" == $entry) {
-                  echo " selected";
+                if ('' == $entry) {
+                  echo ' selected';
                 }
-                $tprefix = is_numeric($entry) ? uiTextSnippet('template') . " " : "";
+                $tprefix = is_numeric($entry) ? uiTextSnippet('template') . ' ' : '';
                 echo ">$tprefix$entry</option>\n";
               }
               ?>
@@ -101,7 +101,7 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
               <div style="position:absolute">
                 <?php
                 foreach ($entries as $i) {
-                  $newtemplatepfx = is_numeric($i) ? "template" : "";
+                  $newtemplatepfx = is_numeric($i) ? 'template' : '';
                   echo "<div class=\"prevdiv\" id=\"prev$i\"><span class=\"prevnum\">$i:</span>";
                   if (file_exists("{$rootpath}{$endrootpath}templates/$newtemplatepfx$i/img/preview1sm.jpg")) {
                     echo "<img src=\"templates/$newtemplatepfx$i/img/preview1sm.jpg\" id=\"preview-$i\" class=\"temppreview\">";
@@ -121,39 +121,39 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
             //needtrans: these fields can be duplicated in another language
             $needtrans = ['headline', 'maintitle', 'welcome', 'hisside', 'herside', 'headtitle1', 'headtitle2', 'headtitle3', 'momside', 'dadside', 'mainpara', 'featurepara', 'searchpara', 'fhpara', 'mwpara', 'respara', 'headtitle', 'headsubtitle', 'latestnews', 'featuretitle1', 'featuretitle2', 'featuretitle3', 'featuretitle4', 'featurepara1', 'featurepara2', 'featurepara3', 'featurepara4', 'photocaption', 'newstext', 'menutitle', 'phototitlel', 'photocaptionl', 'phototitler', 'photocaptionr', 'topsurnames', 'featurespara'];
             foreach ($tmp as $key => $value) {
-              $parts = explode("_", $key);
+              $parts = explode('_', $key);
               $n = $parts[0];
               $label = $parts[1];
-              $value = preg_replace("/\"/", "&#34;", $value);
+              $value = preg_replace('/\"/', '&#34;', $value);
               $sections[$n] .= "<tr id=\"$key\">\n";
               if (in_array($label, $textareas)) {
-                $type = "textarea";
-                $align = "";
+                $type = 'textarea';
+                $align = '';
               } else {
-                $type = "text";
-                $align = "";
+                $type = 'text';
+                $align = '';
               }
               $sections[$n] .= "<td$align>";
-              $sections[$n] .= isset($parts[2]) ? "&nbsp;&nbsp;" . uiTextSnippet($label) . ":" : uiTextSnippet($label) . ":";
-              $sections[$n] .= isset($parts[2]) ? "<br>&nbsp;&nbsp;&nbsp;&nbsp;(" . $languageArray[$parts[2]] . ")" : "";
+              $sections[$n] .= isset($parts[2]) ? '&nbsp;&nbsp;' . uiTextSnippet($label) . ':' : uiTextSnippet($label) . ':';
+              $sections[$n] .= isset($parts[2]) ? '<br>&nbsp;&nbsp;&nbsp;&nbsp;(' . $languageArray[$parts[2]] . ')' : '';
               $sections[$n] .= "</td>\n";
-              $sections[$n] .= "<td>";
-              if ($type == "textarea") {
+              $sections[$n] .= '<td>';
+              if ($type == 'textarea') {
                 $sections[$n] .= "<textarea name=\"form_$key\" id=\"form_$key\" rows=\"5\" cols=\"80\">$value</textarea>\n";
-              } elseif ($label == "titlechoice") {
+              } elseif ($label == 'titlechoice') {
                 $sections[$n] .= "<input id=\"form_{$key}_image\" name=\"form_$key\" type='radio' value=\"image\"";
-                if ($value == "image") {
-                  $sections[$n] .= " checked";
+                if ($value == 'image') {
+                  $sections[$n] .= ' checked';
                 }
-                $sections[$n] .= "> <label for=\"form_{$key}_image\">" . uiTextSnippet('ttitleimage') . "</label> &nbsp;";
+                $sections[$n] .= "> <label for=\"form_{$key}_image\">" . uiTextSnippet('ttitleimage') . '</label> &nbsp;';
                 $sections[$n] .= "<input id=\"form_{$key}_text\" name=\"form_$key\" type='radio' value=\"text\"";
-                if ($value == "text") {
-                  $sections[$n] .= " checked";
+                if ($value == 'text') {
+                  $sections[$n] .= ' checked';
                 }
-                $sections[$n] .= "> <label for=\"form_{$key}_text\">" . uiTextSnippet('ttitletext') . "</label> &nbsp;";
+                $sections[$n] .= "> <label for=\"form_{$key}_text\">" . uiTextSnippet('ttitletext') . '</label> &nbsp;';
               } else {
                 $sections[$n] .= "<input class='longfield' id=\"form_$key\" name=\"form_$key\" type='text' value=\"$value\"/>\n";
-                if (strpos($key, "img") !== false || strpos($key, "image") !== false || strpos($key, "thumb") !== false || strpos($key, "photol") !== false || strpos($key, "photor") !== false) {
+                if (strpos($key, 'img') !== false || strpos($key, 'image') !== false || strpos($key, 'thumb') !== false || strpos($key, 'photol') !== false || strpos($key, 'photor') !== false) {
                   $sections[$n] .= " <input type='button' onclick=\"return preview('templates/{$folders[$n]}/$value');\" value=\"" .
                           uiTextSnippet('preview') . "\" /> <input type='button' onclick=\"return showUploadBox('$key','{$folders[$n]}');\" value=\"" .
                           uiTextSnippet('change') . "\" />\n";
@@ -167,8 +167,8 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
                 }
               }
               if ($languageList && !isset($parts[2]) && in_array($label, $needtrans)) {
-                if ($type == "textarea") {
-                  $sections[$n] .= "<br>";
+                if ($type == 'textarea') {
+                  $sections[$n] .= '<br>';
                 }
                 $sections[$n] .= uiTextSnippet('createcopy') . ": \n<select id=\"lang_$key\">\n$languageList\n</select> <input type='button' value=\"" .
                         uiTextSnippet('go') . "\" onclick=\"return insertLangRow('$key','$type');\" />\n";
@@ -179,10 +179,10 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
             foreach ($entries as $i) {
               $section = $sections['t' . $i];
               if ($section) {
-                $dispstr = "" != $i ? " style=\"display:none\"" : "";
+                $dispstr = '' != $i ? " style=\"display:none\"" : '';
                 echo "<div$dispstr class=\"tsection\" id=\"t$i\">\n<table class=\"tstable\">\n";
-                $newtemplatepfx = is_numeric($i) ? "template" : "";
-                $imagetext = "";
+                $newtemplatepfx = is_numeric($i) ? 'template' : '';
+                $imagetext = '';
                 if (file_exists("{$rootpath}templates/$newtemplatepfx$i/img/preview1.jpg")) {
                   $imagetext .= "<img src=\"templates/$newtemplatepfx$i/img/preview1.jpg\" id=\"preview1\" class=\"temppreview\"> ";
                 }
@@ -192,7 +192,7 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
                 if ($imagetext) {
                   echo "$imagetext<br>";
                 }
-                echo "<p><b>" . uiTextSnippet('folder') . ": templates/" . $folders['t' . $i] . "</b></p>";
+                echo '<p><b>' . uiTextSnippet('folder') . ': templates/' . $folders['t' . $i] . '</b></p>';
                 echo "$section</table>\n</div>\n";
               }
             }
@@ -235,9 +235,9 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
         var newtr = table.insertRow(row.rowIndex + 1);
         var label = "&nbsp;&nbsp;" + $('#' + rowID + ' :first-child').html();
         insertCell(newtr, 0, label + "<br>&nbsp;&nbsp;&nbsp;(" + langDisplay + ")");
-        var inputstr = type === "textarea" ? "<textarea name=\"form_" + rowID + "_" + langVal + "\" id=\"form_" + rowID + "_" + langVal + "\" rows=\"3\" cols=\"80\"></textarea>" : "<input class='longfield' id=\"form_" + rowID + "_" + langVal + "\" name=\"form_" + rowID + "_" + langVal + "\" type='text'>";
+        var inputstr = type === "textarea" ? "<textarea name=\"form_" + rowID + '_' + langVal + "\" id=\"form_" + rowID + '_' + langVal + "\" rows=\"3\" cols=\"80\"></textarea>" : "<input class='longfield' id=\"form_" + rowID + '_' + langVal + "\" name=\"form_" + rowID + '_' + langVal + "\" type='text'>";
         insertCell(newtr, 1, inputstr);
-        insertCell(newtr, 2, "");
+        insertCell(newtr, 2, '');
       }
       return false;
     }

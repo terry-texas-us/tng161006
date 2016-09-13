@@ -15,24 +15,24 @@ if ($ID) {
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   tng_free_result($result);
-  $row['title'] = preg_replace("/\"/", "&#34;", $row['title']);
-  $row['description'] = preg_replace("/\"/", "&#34;", $row['description']);
+  $row['title'] = preg_replace('/\"/', '&#34;', $row['title']);
+  $row['description'] = preg_replace('/\"/', '&#34;', $row['description']);
 } else {
-  $row['title'] = "";
-  $row['description'] = "";
+  $row['title'] = '';
+  $row['description'] = '';
 }
-$helplang = findhelp("mostwanted_help.php");
+$helplang = findhelp('mostwanted_help.php');
 if ($row['mwtype']) {
   $mwtype = $row['mwtype'];
 }
-$typemsg = $mwtype == "person" ? uiTextSnippet('mysperson') : uiTextSnippet('mysphoto');
+$typemsg = $mwtype == 'person' ? uiTextSnippet('mysperson') : uiTextSnippet('mysphoto');
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <div id='more'>
   <form name='editmostwanted' action='' onsubmit="return updateMostWanted(this);">
     <header class='modal-header'>
-      <h4><?php echo uiTextSnippet('mostwanted') . ": " . $typemsg; ?> |
+      <h4><?php echo uiTextSnippet('mostwanted') . ': ' . $typemsg; ?> |
         <a href='#' onclick="return openHelp('<?php echo $helplang; ?>/mostwanted_help.php');"><?php echo uiTextSnippet('help'); ?></a>
       </h4>
     </header>
@@ -90,16 +90,16 @@ header("Content-type:text/html; charset=" . $session_charset);
                   $photohtouse = 50;
                   $photowtouse = intval(50 * $photoinfo[0] / $photoinfo[1]);
                 }
-                echo "<img src=\"$usefolder/" . str_replace("%2F", "/", rawurlencode($row['thumbpath'])) . "\" width=\"$photowtouse\" height=\"$photohtouse\" id=\"img_$ID\" alt=\"{$row['mtitle']}\">";
+                echo "<img src=\"$usefolder/" . str_replace('%2F', '/', rawurlencode($row['thumbpath'])) . "\" width=\"$photowtouse\" height=\"$photohtouse\" id=\"img_$ID\" alt=\"{$row['mtitle']}\">";
               } else {
-                echo "&nbsp;";
+                echo '&nbsp;';
               }
               $row['mdesc'] = xmlcharacters($row['mdesc']);
               $truncated = substr($row['mdesc'], 0, 90);
               $truncated = strlen($row['mdesc']) > 90 ? substr($truncated, 0, strrpos($truncated, ' ')) . '&hellip;' : $row['mdesc'];
               ?>
             </td>
-            <td id="mwdetails"><?php echo "<u>" . xmlcharacters($row['mtitle']) . "</u><br>" . $truncated; ?>
+            <td id="mwdetails"><?php echo '<u>' . xmlcharacters($row['mtitle']) . '</u><br>' . $truncated; ?>
               &nbsp;</td>
           </tr>
         </table>

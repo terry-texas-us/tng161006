@@ -5,11 +5,11 @@ require 'getlang.php';
 
 require 'checklogin.php';
 
-if ($session_charset != "UTF-8") {
+if ($session_charset != 'UTF-8') {
   $myfirstname = tng_utf8_decode($myfirstname);
   $mylastname = tng_utf8_decode($mylastname);
 }
-$allwhere = "1";
+$allwhere = '1';
 if ($personID) {
   $allwhere .= " AND personID = \"$personID\"";
 }
@@ -39,7 +39,7 @@ $query = "SELECT personID, lastname, firstname, lnprefix, birthdate, altbirthdat
         . "FROM $people_table WHERE $allwhere ORDER BY lastname, lnprefix, firstname LIMIT 250";
 $result = tng_query($query);
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <div id='findpersonresdiv'>
   <table class='table table-sm'>
@@ -59,7 +59,7 @@ header("Content-type:text/html; charset=" . $session_charset);
   <table class='table table-sm'>
     <?php
     while ($row = tng_fetch_assoc($result)) {
-      $birthdate = $deathdate = "";
+      $birthdate = $deathdate = '';
       $row['allow_living'] = determineLivingRights($row);
 
       if ($row['allow_living']) {
@@ -86,7 +86,7 @@ header("Content-type:text/html; charset=" . $session_charset);
         $namestr = addslashes($name) . "| - {$row['personID']}<br>$birthdate";
       } elseif ($textchange) {
         $birthdatestr = displayDate($birthdate);
-        $namestr = addslashes(preg_replace('/\"/', '&#34;', getName($row) . ($birthdatestr ? " (" . displayDate($birthdate) . ")" : "") . " - $row[personID]"));
+        $namestr = addslashes(preg_replace('/\"/', '&#34;', getName($row) . ($birthdatestr ? ' (' . displayDate($birthdate) . ')' : '') . " - $row[personID]"));
         $nameplusid = $textchange;
       } elseif ($nameplusid == 1) {
         $namestr = addslashes("$name");

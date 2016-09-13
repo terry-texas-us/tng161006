@@ -53,14 +53,14 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $tngpage = 1;
 }
-$orgwherestr = "";
+$orgwherestr = '';
 
-$originalstring = preg_replace("/\"/", "&#34;", $searchstring);
+$originalstring = preg_replace('/\"/', '&#34;', $searchstring);
 $searchstring = addslashes($searchstring);
-$wherestr = $searchstring ? "($media_table.mediaID LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR path LIKE \"%$searchstring%\" OR notes LIKE \"%$searchstring%\" OR bodytext LIKE \"%$searchstring%\")" : "";
+$wherestr = $searchstring ? "($media_table.mediaID LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR path LIKE \"%$searchstring%\" OR notes LIKE \"%$searchstring%\" OR bodytext LIKE \"%$searchstring%\")" : '';
 
 if ($mediatypeID) {
   $wherestr .= $wherestr ? " AND mediatypeID = \"$mediatypeID\"" : "mediatypeID = \"$mediatypeID\"";
@@ -68,7 +68,7 @@ if ($mediatypeID) {
 if ($fileext) {
   $wherestr .= $wherestr ? " AND form = \"$fileext\"" : "form = \"$fileext\"";
 }
-if ($hsstat != "all") {
+if ($hsstat != 'all') {
   if ($hsstat) {
     $wherestr .= $wherestr ? " AND status = \"$hsstat\"" : "status = \"$hsstat\"";
   } else {
@@ -80,8 +80,8 @@ if ($cemeteryID) {
 }
 if ($unlinked) {
   $join = "LEFT JOIN $medialinks_table ON $media_table.mediaID = $medialinks_table.mediaID";
-  $medialinkID = "medialinkID,";
-  $wherestr .= $wherestr ? " AND medialinkID is NULL" : "medialinkID is NULL";
+  $medialinkID = 'medialinkID,';
+  $wherestr .= $wherestr ? ' AND medialinkID is NULL' : 'medialinkID is NULL';
 }
 if ($wherestr) {
   $wherestr = "WHERE $wherestr";
@@ -99,7 +99,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 } else {
   $totrows = $numrows;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('media'));
 ?>
 <!DOCTYPE html>
@@ -114,17 +114,17 @@ $headSection->setTitle(uiTextSnippet('media'));
         $standardtypes[] = "\"" . $mediatype['ID'] . "\"";
       }
     }
-    $sttypestr = implode(",", $standardtypes);
+    $sttypestr = implode(',', $standardtypes);
 
     echo $adminHeaderSection->build('media', $message);
     $navList = new navList('');
-    //    $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('browse'), "findmedia"]);
-    $navList->appendItem([$allowMediaAdd, "mediaAdd.php", uiTextSnippet('add'), "addmedia"]);
-    $navList->appendItem([$allowMediaEdit, "mediaSort.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    $navList->appendItem([$allowMediaEdit, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-    $navList->appendItem([$allowMediaAdd, "mediaImport.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allowMediaAdd, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
-    echo $navList->build("findmedia");
+    //    $navList->appendItem([true, 'mediaBrowse.php', uiTextSnippet('browse'), 'findmedia']);
+    $navList->appendItem([$allowMediaAdd, 'mediaAdd.php', uiTextSnippet('add'), 'addmedia']);
+    $navList->appendItem([$allowMediaEdit, 'mediaSort.php', uiTextSnippet('text_sort'), 'sortmedia']);
+    $navList->appendItem([$allowMediaEdit, 'mediaThumbnails.php', uiTextSnippet('thumbnails'), 'thumbs']);
+    $navList->appendItem([$allowMediaAdd, 'mediaImport.php', uiTextSnippet('import'), 'import']);
+    $navList->appendItem([$allowMediaAdd, 'mediaUpload.php', uiTextSnippet('upload'), 'upload']);
+    echo $navList->build('findmedia');
     ?>
     <div class='row'>
       <form action="mediaBrowse.php" name='form1' id='form1'>
@@ -149,7 +149,7 @@ $headSection->setTitle(uiTextSnippet('media'));
             <label class='form-control-label' for='fileext'><?php echo uiTextSnippet('fileext'); ?>:</label>
             <input class='form-control' name='fileext' type='text' value="<?php echo $fileext; ?>">
             <br>
-            <input name='unlinked' type='checkbox' value='1'<?php if ($unlinked) {echo " checked";} ?>> <?php echo uiTextSnippet('unlinked'); ?>
+            <input name='unlinked' type='checkbox' value='1'<?php if ($unlinked) {echo ' checked';} ?>> <?php echo uiTextSnippet('unlinked'); ?>
           </div>
           <div class='col-md-6'>
             <label for='mediatyeID'>
@@ -161,7 +161,7 @@ $headSection->setTitle(uiTextSnippet('media'));
                   $msgID = $mediatype['ID'];
                   echo "<option value=\"$msgID\"";
                   if ($msgID == $mediatypeID) {
-                    echo " selected";
+                    echo ' selected';
                   }
                   echo ">\n";
                   echo $mediatype['display'] . "</option>\n";
@@ -171,8 +171,8 @@ $headSection->setTitle(uiTextSnippet('media'));
             </label>
             <?php if ($allowAdd && $allowEdit && $allowDelete) { ?>
               <button class='btn btn-secondary' name='addnewmediatype' type='button' onclick="tnglitbox = new ModalDialog('admin_newcollection.php?field=mediatypeID');"><?php echo uiTextSnippet('addnewcoll'); ?></button>
-              <button class='btn btn-secondary' id='editmediatype' name='editmediatype' type='button' style="display: none" onclick="editMediatype(document.form1.mediatypeID);"><?php echo uiTextSnippet('edit'); ?></button>
-              <button class='btn btn-outline-danger' id='delmediatype' name='delmediatype' type='button' style="display: none" onclick="confirmDeleteMediatype(document.form1.mediatypeID);"><?php echo uiTextSnippet('delete'); ?></button>
+              <button class='btn btn-secondary' id='editmediatype' name='editmediatype' type='button' style='display: none' onclick="editMediatype(document.form1.mediatypeID);"><?php echo uiTextSnippet('edit'); ?></button>
+              <button class='btn btn-outline-danger' id='delmediatype' name='delmediatype' type='button' style='display: none' onclick="confirmDeleteMediatype(document.form1.mediatypeID);"><?php echo uiTextSnippet('delete'); ?></button>
             <?php } ?>
           </div>
         </div>
@@ -182,23 +182,23 @@ $headSection->setTitle(uiTextSnippet('media'));
               <label for='hsstat'>
                 <span><?php echo uiTextSnippet('status'); ?>:</span>
                 <select class='form-control' name="hsstat">
-                  <option value="all"<?php if ($hsstat == "all") {echo " selected";} ?>></option>
-                  <option value=''<?php if (!$hsstat) {echo " selected";} ?>>
+                  <option value='all'<?php if ($hsstat == 'all') {echo ' selected';} ?>></option>
+                  <option value=''<?php if (!$hsstat) {echo ' selected';} ?>>
                     <?php echo uiTextSnippet('nostatus'); ?>
                   </option>
-                  <option value="notyetlocated"<?php if ($hsstat == "notyetlocated") {echo " selected";} ?>>
+                  <option value='notyetlocated'<?php if ($hsstat == 'notyetlocated') {echo ' selected';} ?>>
                     <?php echo uiTextSnippet('notyetlocated'); ?>
                   </option>
-                  <option value="located"<?php if ($hsstat == "located") {echo " selected";} ?>>
+                  <option value='located'<?php if ($hsstat == 'located') {echo ' selected';} ?>>
                     <?php echo uiTextSnippet('located'); ?>
                   </option>
-                  <option value="unmarked"<?php if ($hsstat == "unmarked") {echo " selected";} ?>>
+                  <option value='unmarked'<?php if ($hsstat == 'unmarked') {echo ' selected';} ?>>
                     <?php echo uiTextSnippet('unmarked'); ?>
                   </option>
-                  <option value="missing"<?php if ($hsstat == "missing") {echo " selected";} ?>>
+                  <option value='missing'<?php if ($hsstat == 'missing') {echo ' selected';} ?>>
                     <?php echo uiTextSnippet('missing'); ?>
                   </option>
-                  <option value="cremated"<?php if ($hsstat == "cremated") {echo " selected";} ?>>
+                  <option value='cremated'<?php if ($hsstat == 'cremated') {echo ' selected';} ?>>
                     <?php echo uiTextSnippet('cremated'); ?>
                   </option>
                 </select>
@@ -218,7 +218,7 @@ $headSection->setTitle(uiTextSnippet('media'));
                       $cemetery = "{$cemrow['country']}, {$cemrow['state']}, {$cemrow['county']}, {$cemrow['city']}, {$cemrow['cemname']}";
                       echo "    <option value=\"{$cemrow['cemeteryID']}\"";
                       if ($cemeteryID == $cemrow['cemeteryID']) {
-                        echo " selected";
+                        echo ' selected';
                       }
                       echo ">$cemetery</option>\n";
                     }
@@ -297,7 +297,7 @@ $headSection->setTitle(uiTextSnippet('media'));
                 <th><?php echo uiTextSnippet('select'); ?></th>
               <?php } ?>
               <th><?php echo uiTextSnippet('thumb'); ?></th>
-              <th><?php echo uiTextSnippet('title') . ", " . uiTextSnippet('description'); ?></th>
+              <th><?php echo uiTextSnippet('title') . ', ' . uiTextSnippet('description'); ?></th>
               <?php if ($map['key']) { ?>
                 <th><?php echo uiTextSnippet('googleplace'); ?></th>
               <?php } ?>
@@ -309,7 +309,7 @@ $headSection->setTitle(uiTextSnippet('media'));
           </thead>
           <?php
           if ($numrows) {
-          $actionstr = "";
+          $actionstr = '';
           if ($allowMediaEdit) {
             $actionstr .= "<a href=\"mediaEdit.php?mediaID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
@@ -318,22 +318,22 @@ $headSection->setTitle(uiTextSnippet('media'));
           if ($allowMediaDelete) {
             $actionstr .= "<a href='#' onClick=\"return confirmDelete('xxx');\" title='" . uiTextSnippet('delete') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
-            $actionstr .= "</a>";
+            $actionstr .= '</a>';
           }
           $actionstr .= "<a href=\"showmedia.php?mediaID=xxx\" title='" . uiTextSnippet('preview') . "'>\n";
           $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
           $actionstr .= "</a>\n";
 
           while ($row = tng_fetch_assoc($result)) {
-            //$cleanfile = $session_charset == "UTF-8" ? utf8_decode($row['thumbpath']) : $row['thumbpath'];
+            //$cleanfile = $session_charset == 'UTF-8' ? utf8_decode($row['thumbpath']) : $row['thumbpath'];
             $mtypeID = $row['mediatypeID'];
             $usefolder = $row['usecollfolder'] ? $mediatypes_assoc[$mtypeID] : $mediapath;
-            $newactionstr = preg_replace("/xxx/", $row['mediaID'], $actionstr);
+            $newactionstr = preg_replace('/xxx/', $row['mediaID'], $actionstr);
             echo "<tr id=\"row_{$row['mediaID']}\"><td><div class=\"action-btns\">$newactionstr</div></td>\n";
             if ($allowEdit || $allowMediaEdit || $allowDelete || $allowMediaDelete) {
               echo "<td><input name=\"ph{$row['mediaID']}\" type='checkbox' value='1'></td>";
             }
-            echo "<td>";
+            echo '<td>';
             if ($row['thumbpath'] && file_exists("$rootpath$usefolder/" . $row['thumbpath'])) {
               $photoinfo = getimagesize("$rootpath$usefolder/" . $row['thumbpath']);
               if ($photoinfo['1'] < 50) {
@@ -343,35 +343,35 @@ $headSection->setTitle(uiTextSnippet('media'));
                 $photohtouse = 50;
                 $photowtouse = intval(50 * $photoinfo['0'] / $photoinfo['1']);
               }
-              echo "<span>";
-              echo "<img src=\"$usefolder/" . str_replace("%2F", "/", rawurlencode($row['thumbpath'])) . "\" width=\"$photowtouse\" height=\"$photohtouse\"></span>\n";
+              echo '<span>';
+              echo "<img src=\"$usefolder/" . str_replace('%2F', '/', rawurlencode($row['thumbpath'])) . "\" width=\"$photowtouse\" height=\"$photohtouse\"></span>\n";
             }
             echo "</td>\n";
             $description = $allowEdit || $allowMediaEdit ? "<a href=\"mediaEdit.php?mediaID={$row['mediaID']}\">{$row['description']}</a>" : $row['description'];
             echo "<td><span>$description<br>" . truncateIt(getXrefNotes($row['notes']), $maxnoteprev) . "</span></td>\n";
             if ($map['key']) {
-              echo "<td><span>";
-              $geo = "";
+              echo '<td><span>';
+              $geo = '';
               if ($row['latitude']) {
-                $geo .= uiTextSnippet('latitude') . ": " . number_format($row['latitude'], 3);
+                $geo .= uiTextSnippet('latitude') . ': ' . number_format($row['latitude'], 3);
               }
               if ($row['longitude']) {
                 if ($geo) {
-                  $geo .= "<br>";
+                  $geo .= '<br>';
                 }
-                $geo .= uiTextSnippet('longitude') . ": " . number_format($row['longitude'], 3);
+                $geo .= uiTextSnippet('longitude') . ': ' . number_format($row['longitude'], 3);
               }
               if ($row['zoom']) {
                 if ($geo) {
-                  $geo .= "<br>";
+                  $geo .= '<br>';
                 }
-                $geo .= uiTextSnippet('zoom') . ": " . $row['zoom'];
+                $geo .= uiTextSnippet('zoom') . ': ' . $row['zoom'];
               }
               echo "$geo</span></td>\n";
             }
             if (!$mediatypeID) {
               $label = uiTextSnippet($mtypeID) ? uiTextSnippet($mtypeID) : $mediatypes_display[$mtypeID];
-              echo "<td>" . $label . "</td>\n";
+              echo '<td>' . $label . "</td>\n";
             }
             $query = "SELECT people.personID AS personID2, familyID, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, $medialinks_table.personID AS personID, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame, linktype FROM $medialinks_table "
                 . "LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID "
@@ -380,13 +380,13 @@ $headSection->setTitle(uiTextSnippet('media'));
                 . "LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID) "
                 . "WHERE mediaID = '{$row['mediaID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT 10";
             $presult = tng_query($query);
-            $medialinktext = "";
+            $medialinktext = '';
             while ($prow = tng_fetch_assoc($presult)) {
               $prights = determineLivingPrivateRights($prow);
               $prow['allow_living'] = $prights['living'];
               $prow['allow_private'] = $prights['private'];
               if ($prow['personID2'] != null) {
-                $medialinktext .= "<li>" . getName($prow) . " ({$prow['personID2']})</li>\n";
+                $medialinktext .= '<li>' . getName($prow) . " ({$prow['personID2']})</li>\n";
               } elseif ($prow['sourceID'] != null) {
                 $sourcetext = $prow['title'] ? uiTextSnippet('source') . ": {$prow['title']}" : uiTextSnippet('source') . ": {$prow['sourceID']}";
                 $medialinktext .= "<li>$sourcetext ({$prow['sourceID']})</li>\n";
@@ -394,12 +394,12 @@ $headSection->setTitle(uiTextSnippet('media'));
                 $repotext = $prow['reponame'] ? uiTextSnippet('repository') . ": {$prow['reponame']}" : uiTextSnippet('repository') . ": {$prow['repoID']}";
                 $medialinktext .= "<li>$repotext ({$prow['repoID']})</li>\n";
               } elseif ($prow['familyID'] != null) {
-                $medialinktext .= "<li>" . uiTextSnippet('family') . ": " . getFamilyName($prow) . "</li>\n";
+                $medialinktext .= '<li>' . uiTextSnippet('family') . ': ' . getFamilyName($prow) . "</li>\n";
               } else {
                 $medialinktext .= "<li>{$prow['personID']}</li>";
               }
             }
-            $medialinktext = $medialinktext ? "<ul>\n$medialinktext\n</ul>\n" : "";
+            $medialinktext = $medialinktext ? "<ul>\n$medialinktext\n</ul>\n" : '';
             echo "<td>$medialinktext</td>\n";
             echo "</tr>\n";
           }
@@ -424,10 +424,10 @@ $headSection->setTitle(uiTextSnippet('media'));
   var tnglitbox;
   var stmediatypes = new Array(<?php echo $sttypestr; ?>);
   var manage = 1;
-  var allow_media_edit = <?php echo($allowMediaEdit ? "1" : "0"); ?>;
-  var allow_media_delete = <?php echo($allowMediaDelete ? "1" : "0"); ?>;
-  var allow_edit = <?php echo($allowEdit ? "1" : "0"); ?>;
-  var allow_delete = <?php echo($allowDelete ? "1" : "0"); ?>;
+  var allow_media_edit = <?php echo($allowMediaEdit ? '1' : '0'); ?>;
+  var allow_media_delete = <?php echo($allowMediaDelete ? '1' : '0'); ?>;
+  var allow_edit = <?php echo($allowEdit ? '1' : '0'); ?>;
+  var allow_delete = <?php echo($allowDelete ? '1' : '0'); ?>;
 
   function toggleHeadstoneCriteria(mediatypeID) {
     var hsstatus = document.getElementById('hsstatrow');

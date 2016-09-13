@@ -7,12 +7,12 @@ function doBranchSearch($instance, $pagenav) {
   global $branchsearch;
 
   $str = "<span>\n";
-  $str .= buildFormElement("branchesShow", "GET", "BranchSearch$instance");
+  $str .= buildFormElement('branchesShow', 'get', "BranchSearch$instance");
   $str .= "<input name='branchsearch' type='text' value=\"$branchsearch\"> \n";
   $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . "\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
   $str .= $pagenav;
   if ($branchsearch) {
-    $str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='branchesShow.php'>" . uiTextSnippet('browsealltrees') . "</a>";
+    $str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='branchesShow.php'>" . uiTextSnippet('browsealltrees') . '</a>';
   }
   $str .= "</form></span>\n";
 
@@ -25,7 +25,7 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $page = 1;
 }
 $whereClause = ($branchsearch) ? "WHERE (branch LIKE '%$branchsearch%' OR b.description LIKE '%$branchsearch%')" : '';
@@ -45,14 +45,14 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 }
 $numrowsplus = $numrows + $offset;
 
-$logstring = "<a href=\"branchesShow.php?offset=$offset&amp;branchsearch=$branchsearch\">" . xmlcharacters(uiTextSnippet('branches')) . "</a>";
+$logstring = "<a href=\"branchesShow.php?offset=$offset&amp;branchsearch=$branchsearch\">" . xmlcharacters(uiTextSnippet('branches')) . '</a>';
 writelog($logstring);
 preparebookmark($logstring);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('branches'));
 ?>
 <!DOCTYPE html>
@@ -65,7 +65,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
     <br clear='left'>
     <?php
     if ($totrows) {
-      echo "<p><span>" . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</span></p>";
+      echo '<p><span>' . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</span></p>";
     }
     $pagenav = buildSearchResultPagination($totrows, "branchesShow.php?branchsearch=$branchsearch&amp;offset", $maxsearchresults, $max_browsebranch_pages);
     if ($pagenav || $branchsearch) {
@@ -86,11 +86,11 @@ $headSection->setTitle(uiTextSnippet('branches'));
         $i = $offsetplus;
         $peoplewhere = getLivingPrivateRestrictions($people_table, false, false);
         if ($peoplewhere) {
-          $peoplewhere = "AND " . $peoplewhere;
+          $peoplewhere = 'AND ' . $peoplewhere;
         }
         $familywhere = getLivingPrivateRestrictions($families_table, false, false);
         if ($familywhere) {
-          $familywhere = "AND " . $familywhere;
+          $familywhere = 'AND ' . $familywhere;
         }
 
         while ($row = tng_fetch_assoc($result)) {

@@ -2,9 +2,9 @@
 require 'begin.php';
 require 'globallib.php';
 
-header("Content-type: image/png");
+header('Content-type: image/png');
 
-$image_name = $rootpath . $endrootpath . "img/" . $_GET['image'];
+$image_name = $rootpath . $endrootpath . 'img/' . $_GET['image'];
 
 $im = imagecreatefrompng($image_name);
 

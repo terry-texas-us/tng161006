@@ -12,7 +12,7 @@ function getSpouses($personID, $sex) {
       $spouse = 'husband';
       $spouseorder = 'wifeorder';
     } else {
-      $self = $spouse = $spouseorder = "";
+      $self = $spouse = $spouseorder = '';
     }
   }
   if ($spouse) {
@@ -23,7 +23,7 @@ function getSpouses($personID, $sex) {
   $marrtot = tng_num_rows($result);
   if (!$marrtot) {
     $result = getSpouseFamilyDataUnion($personID);
-    $self = $spouse = $spouseorder = "";
+    $self = $spouse = $spouseorder = '';
   }
   while ($row = tng_fetch_assoc($result)) {
     if (!$spouse) {
@@ -63,12 +63,12 @@ function getSpouseParents($personID, $sex) {
     }
   }
 
-  $allparents = "";
-  $parents = getChildFamily($personID, "ordernum");
+  $allparents = '';
+  $parents = getChildFamily($personID, 'ordernum');
 
   if ($parents && tng_num_rows($parents)) {
     while ($parent = tng_fetch_assoc($parents)) {
-      $parentstr = "";
+      $parentstr = '';
       $gotfather = getParentData($parent['familyID'], 'husband');
 
       if ($gotfather) {
@@ -106,7 +106,7 @@ function getSpouseParents($personID, $sex) {
             $mothrow['firstname'] = uiTextSnippet('private');
           }
           if ($parentstr) {
-            $parentstr .= " " . uiTextSnippet('and') . " ";
+            $parentstr .= ' ' . uiTextSnippet('and') . ' ';
           }
           $parentstr .= "<a href='#' onclick=\"if(jQuery('#p{$mothrow['personID']}').length) {jQuery('html, body').animate({scrollTop: jQuery('#p{$mothrow['personID']}').offset().top-10},'slow');}else{window.location.href='peopleShowPerson.php?personID={$mothrow['personID']}';} return false;\">$mothname</a>";
         }
@@ -127,88 +127,88 @@ function getSpouseParents($personID, $sex) {
 }
 
 function getVitalDates($row, $needparents = null) {
-  $vitalinfo = "";
+  $vitalinfo = '';
 
   if ($row['allow_living'] && $row['allow_private']) {
     if ($row['birthdate'] || $row['birthplace']) {
-      $vitalinfo .= " " . uiTextSnippet('wasborn') . " " . displayDate($row['birthdate']);
+      $vitalinfo .= ' ' . uiTextSnippet('wasborn') . ' ' . displayDate($row['birthdate']);
       if ($row['birthdate'] && $row['birthplace']) {
-        $vitalinfo .= ", ";
+        $vitalinfo .= ', ';
       }
       $vitalinfo .= $row['birthplace'];
     }
     if ($row['altbirthdate'] || $row['altbirthplace']) {
       if ($vitalinfo) {
-        $vitalinfo .= ";";
+        $vitalinfo .= ';';
       }
-      $vitalinfo .= " " . tng_strtolower(uiTextSnippet('waschristened')) . " " . displayDate($row['altbirthdate']);
+      $vitalinfo .= ' ' . tng_strtolower(uiTextSnippet('waschristened')) . ' ' . displayDate($row['altbirthdate']);
       if ($row['altbirthdate'] && $row['altbirthplace']) {
-        $vitalinfo .= ", ";
+        $vitalinfo .= ', ';
       }
       $vitalinfo .= $row['altbirthplace'];
     }
     if ($needparents) {
       $spparents = getSpouseParents($row['personID'], $row['sex']);
       if ($spparents) {
-        $vitalinfo .= " " . $spparents;
+        $vitalinfo .= ' ' . $spparents;
       }
     }
 
     if ($row['deathdate'] || $row['deathplace']) {
       if ($vitalinfo) {
-        $vitalinfo .= ";";
+        $vitalinfo .= ';';
       }
-      $vitalinfo .= " " . tng_strtolower(uiTextSnippet('anddied')) . " " . displayDate($row['deathdate']);
+      $vitalinfo .= ' ' . tng_strtolower(uiTextSnippet('anddied')) . ' ' . displayDate($row['deathdate']);
       if ($row['deathdate'] && $row['deathplace']) {
-        $vitalinfo .= ", ";
+        $vitalinfo .= ', ';
       }
       $vitalinfo .= $row['deathplace'];
     }
     if ($row['burialdate'] || $row['burialplace']) {
       if ($vitalinfo) {
-        $vitalinfo .= ";";
+        $vitalinfo .= ';';
       }
       $burialmsg = $row['burialtype'] ? uiTextSnippet('wascremated') : uiTextSnippet('wasburied');
-      $vitalinfo .= " " . tng_strtolower($burialmsg) . " " . displayDate($row['burialdate']);
+      $vitalinfo .= ' ' . tng_strtolower($burialmsg) . ' ' . displayDate($row['burialdate']);
       if ($row['burialdate'] && $row['burialplace']) {
-        $vitalinfo .= ", ";
+        $vitalinfo .= ', ';
       }
       $vitalinfo .= $row['burialplace'];
     }
   }
   if ($vitalinfo) {
-    $vitalinfo .= ". ";
+    $vitalinfo .= '. ';
   }
   return $vitalinfo;
 }
 
 function getSpouseDates($row) {
-  $spouseinfo = "";
+  $spouseinfo = '';
 
   if ($row['allow_living'] && $row['allow_private']) {
     if ($row['marrdate'] || $row['marrplace'] || $row['marrtype']) {
-      $spouseinfo .= " " . displayDate($row['marrdate']);
+      $spouseinfo .= ' ' . displayDate($row['marrdate']);
       if ($row['marrtype']) {
         $spouseinfo .= " ({$row['marrtype']})";
       }
       if (($row['marrdate'] || $row['marrtype']) && $row['marrplace']) {
-        $spouseinfo .= ", ";
+        $spouseinfo .= ', ';
       }
       $spouseinfo .= $row['marrplace'];
     }
     if ($row['divdate'] || $row['divplace']) {
-      $spouseinfo .= "; " . strtolower(uiTextSnippet('divorced')) . " ";
+      $spouseinfo .= '; ' . strtolower(uiTextSnippet('divorced')) . ' ';
       if ($row['divdate']) {
         $spouseinfo .= displayDate($row['divdate']);
         if ($row['divplace']) {
-          $spouseinfo .= ", ";
+          $spouseinfo .= ', ';
         }
       }
       $spouseinfo .= $row['divplace'];
     }
   }
   if ($spouseinfo) {
-    $spouseinfo .= ".";
+    $spouseinfo .= '.';
   }
   return $spouseinfo;
 }
@@ -218,7 +218,7 @@ function getOtherEvents($row) {
   global $events_table;
   global $pedigree;
 
-  $otherEvents = "";
+  $otherEvents = '';
   if ($pedigree['regnotes'] && $row['allow_living'] && $row['allow_private']) {
     $query = "SELECT display, eventdate, eventdatetr, eventplace, age, agency, cause, addressID, info, tag, description, eventID FROM ($events_table, $eventtypes_table) WHERE persfamID = \"{$row['personID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND keep = \"1\" AND parenttag = \"\" ORDER BY eventdatetr, ordernum, tag, description, info, eventID";
     $custevents = tng_query($query);
@@ -233,18 +233,18 @@ function getOtherEvents($row) {
         }
       }
       $extras = getFact($custevent);
-      $fact = (count($fact) && $fact[0] != "") ? array_merge($fact, $extras) : $extras;
-      $thisEvent = $custevent['eventdate'] ? displayDate($custevent['eventdate']) : "";
+      $fact = (count($fact) && $fact[0] != '') ? array_merge($fact, $extras) : $extras;
+      $thisEvent = $custevent['eventdate'] ? displayDate($custevent['eventdate']) : '';
       if ($custevent['eventplace']) {
         if ($thisEvent) {
-          $thisEvent .= ", ";
+          $thisEvent .= ', ';
         }
         $thisEvent .= $custevent['eventplace'];
       }
       if (count($fact)) {
         foreach ($fact as $f) {
           if ($thisEvent) {
-            $thisEvent .= "; ";
+            $thisEvent .= '; ';
           }
           $thisEvent .= $f;
         }
@@ -254,7 +254,7 @@ function getOtherEvents($row) {
     tng_free_result($custevents);
   }
   if ($otherEvents) {
-    $otherEvents = "<p>" . uiTextSnippet('otherevents') . ":\n<ul class=\"regevents\">$otherEvents</ul></p>\n";
+    $otherEvents = '<p>' . uiTextSnippet('otherevents') . ":\n<ul class=\"regevents\">$otherEvents</ul></p>\n";
   }
   return $otherEvents;
 }
@@ -271,16 +271,13 @@ function getRegNotes($persfamID, $flag) {
   $postcustnotes = [];
 
   if ($flag == 'I') {
-    $precusttitles = ["BIRT" => uiTextSnippet('birth'), "CHR" => uiTextSnippet('christened'), "NAME" => uiTextSnippet('name'),
-            "TITL" => uiTextSnippet('title'), "NSFX" => uiTextSnippet('suffix'), "NICK" => uiTextSnippet('nickname'),
-            "BAPL" => uiTextSnippet('baptizedlds'), "CONL" => uiTextSnippet('conflds'), "INIT" => uiTextSnippet('initlds'), "ENDL" => uiTextSnippet('endowedlds')];
-    $postcusttitles = ["DEAT" => uiTextSnippet('died'), "BURI" => uiTextSnippet('buried'), "SLGC" => uiTextSnippet('sealedplds')];
+    $precusttitles = ['BIRT' => uiTextSnippet('birth'), 'CHR' => uiTextSnippet('christened'), 'NAME' => uiTextSnippet('name'), 'TITL' => uiTextSnippet('title'), 'NSFX' => uiTextSnippet('suffix'), 'NICK' => uiTextSnippet('nickname'), 'BAPL' => uiTextSnippet('baptizedlds'), 'CONL' => uiTextSnippet('conflds'), 'INIT' => uiTextSnippet('initlds'), 'ENDL' => uiTextSnippet('endowedlds')];
+    $postcusttitles = ['DEAT' => uiTextSnippet('died'), 'BURI' => uiTextSnippet('buried'), 'SLGC' => uiTextSnippet('sealedplds')];
   } elseif ($flag == 'F') {
-    $precusttitles = ["MARR" => uiTextSnippet('married'), "SLGS" => uiTextSnippet('sealedslds'), "DIV" => uiTextSnippet('divorced')];
+    $precusttitles = ['MARR' => uiTextSnippet('married'), 'SLGS' => uiTextSnippet('sealedslds'), 'DIV' => uiTextSnippet('divorced')];
     $postcusttitles = [];
   } else {
-    $precusttitles = ["ABBR" => uiTextSnippet('shorttitle'), "CALN" => uiTextSnippet('callnum'), "AUTH" => uiTextSnippet('author'),
-            "PUBL" => uiTextSnippet('publisher'), "TITL" => uiTextSnippet('title')];
+    $precusttitles = ['ABBR' => uiTextSnippet('shorttitle'), 'CALN' => uiTextSnippet('callnum'), 'AUTH' => uiTextSnippet('author'), 'PUBL' => uiTextSnippet('publisher'), 'TITL' => uiTextSnippet('title')];
     $postcusttitles = [];
   }
 
@@ -291,34 +288,34 @@ function getRegNotes($persfamID, $flag) {
       . "WHERE $notelinks_table.persfamID = '$persfamID' AND secret != '1' ORDER BY eventdatetr, $eventtypes_table.ordernum, tag";
   $notelinks = tng_query($query);
 
-  $currevent = "";
+  $currevent = '';
   $type = 0;
   while ($note = tng_fetch_assoc($notelinks)) {
     if (!$note['eventID']) {
-      $note['eventID'] = "--x-general-x--";
+      $note['eventID'] = '--x-general-x--';
     }
     if ($note['eventID'] != $currevent) {
       $currevent = $note['eventID'];
-      $currtitle = "";
+      $currtitle = '';
     }
     if (!$currtitle) {
       if ($note['display']) {
         $currtitle = getEventDisplay($note['display']);
         $key = "cust$currevent";
-        $custnotes[$key] = ["title" => $currtitle, "text" => ""];
+        $custnotes[$key] = ['title' => $currtitle, 'text' => ''];
         $type = 2;
       } else {
         if ($postcusttitles[$currevent]) {
           $currtitle = $postcusttitles[$currevent];
-          $postcustnotes[$currevent] = ["title" => $postcusttitles[$currevent], "text" => ""];
+          $postcustnotes[$currevent] = ['title' => $postcusttitles[$currevent], 'text' => ''];
           $type = 3;
         } else {
-          $currtitle = $precusttitles[$currevent] ? $precusttitles[$currevent] : " ";
-          if ($note['eventID'] == "--x-general-x--") {
-            $gennotes[$currevent] = ["title" => $precusttitles[$currevent], "text" => ""];
+          $currtitle = $precusttitles[$currevent] ? $precusttitles[$currevent] : ' ';
+          if ($note['eventID'] == '--x-general-x--') {
+            $gennotes[$currevent] = ['title' => $precusttitles[$currevent], 'text' => ''];
             $type = 0;
           } else {
-            $precustnotes[$currevent] = ["title" => $precusttitles[$currevent], "text" => ""];
+            $precustnotes[$currevent] = ['title' => $precusttitles[$currevent], 'text' => ''];
             $type = 1;
           }
         }
@@ -327,25 +324,25 @@ function getRegNotes($persfamID, $flag) {
     switch ($type) {
       case 0:
         if ($gennotes[$currevent]['text']) {
-          $gennotes[$currevent]['text'] .= "<br><br>";
+          $gennotes[$currevent]['text'] .= '<br><br>';
         }
         $gennotes[$currevent]['text'] .= nl2br($note['note']) . "\n";
         break;
       case 1:
         if ($precustnotes[$currevent]['text']) {
-          $precustnotes[$currevent]['text'] .= "<br><br>";
+          $precustnotes[$currevent]['text'] .= '<br><br>';
         }
         $precustnotes[$currevent]['text'] .= nl2br($note['note']) . "\n";
         break;
       case 2:
         if ($custnotes[$key]['text']) {
-          $custnotes[$key]['text'] .= "<br><br>";
+          $custnotes[$key]['text'] .= '<br><br>';
         }
         $custnotes[$key]['text'] .= nl2br($note['note']) . "\n";
         break;
       case 3:
         if ($postcustnotes[$currevent]['text']) {
-          $postcustnotes[$currevent]['text'] .= "<br><br>";
+          $postcustnotes[$currevent]['text'] .= '<br><br>';
         }
         $postcustnotes[$currevent]['text'] .= nl2br($note['note']) . "\n";
         break;
@@ -358,7 +355,7 @@ function getRegNotes($persfamID, $flag) {
 }
 
 function buildRegNotes($notearray) {
-  $notes = "";
+  $notes = '';
   foreach ($notearray as $key => $note) {
     if ($notes) {
       $notes .= "<br><br>\n";

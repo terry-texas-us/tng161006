@@ -14,7 +14,7 @@ define('FPDF_FONTPATH', $rootpath . $endrootpath . 'font/');
 require 'tngpdf.php';
 require 'rpt_utils.php';
 $pdf = new TNGPDF($orient, 'in', $pagesize);
-setcookie("tng_pagesize", $pagesize, time() + 31536000, "/");
+setcookie('tng_pagesize', $pagesize, time() + 31536000, '/');
 
 // define formatting defaults
 $lineheight = $pdf->GetFontSize($rptFont, $rptFontSize) + 0.1;    // height of each row on the page
@@ -132,7 +132,7 @@ if ($blankform == 1) {
 else {
   if ($rights['both'] && $citesources) {
     getCitations($familyID, 0);
-    $citekey = $familyID . "_";
+    $citekey = $familyID . '_';
     $cite = reorderCitation($citekey);
   }
 
@@ -177,11 +177,11 @@ else {
       }
       $notes .= $note['text'];
     }
-    $notes = preg_replace("/&nbsp;/", ' ', $notes);
-    $notes = preg_replace("/<li>/", '* ', $notes);
-    $notes = preg_replace("/<br\s*\/?>/", "", $notes);
+    $notes = preg_replace('/&nbsp;/', ' ', $notes);
+    $notes = preg_replace('/<li>/', '* ', $notes);
+    $notes = preg_replace('/<br\s*\/?>/', '', $notes);
     if (!isset($allowable_tags)) {
-      $allowable_tags = "<a>";
+      $allowable_tags = '<a>';
     }
     $notes = strip_tags($notes, $allowable_tags);
 
@@ -206,7 +206,7 @@ else {
     $citectr = 1;
     foreach ($citestring as $cite) {
       $cite = strip_tags($cite);
-      $cite = preg_replace("/\n/", " ", $cite);
+      $cite = preg_replace("/\n/", ' ', $cite);
       $pdf->MultiCell($paperdim['w'] - $rtmrg - ($lftmrg * 1.5), $pdf->GetFontSize(), "$citectr. $cite\n\n", 0, 'L', 0, 0);
       //$pdf->WriteHTML("<br>$citectr. $cite<br>");
       $citectr++;
@@ -239,26 +239,26 @@ function displayChild($personID, $childcount) {
   }
 
   // name
-  $cite = reorderCitation($personID . "_NAME", 0);
+  $cite = reorderCitation($personID . '_NAME', 0);
   childNameLine($childcount, $ind['sex'], getName($ind), $cite);
 
   // birth
   if ($rights['both']) {
-    $cite = reorderCitation($personID . "_BIRT", 0);
+    $cite = reorderCitation($personID . '_BIRT', 0);
     dateLine(uiTextSnippet('born'), displayDate($ind['birthdate']), $ind['birthplace'], $cite);
   } else {
     dateLine(uiTextSnippet('born'), '', '');
   }
   // christening
   if ($rights['both']) {
-    $cite = reorderCitation($personID . "_CHR", 0);
+    $cite = reorderCitation($personID . '_CHR', 0);
     dateLine(uiTextSnippet('christened'), displayDate($ind['altbirthdate']), $ind['altbirthplace'], $cite);
   } else {
     dateLine(uiTextSnippet('christened'), '', '');
   }
   // death
   if ($rights['both']) {
-    $cite = reorderCitation($personID . "_DEAT", 0);
+    $cite = reorderCitation($personID . '_DEAT', 0);
     dateLine(uiTextSnippet('died'), displayDate($ind['deathdate']), $ind['deathplace'], $cite);
   } else {
     dateLine(uiTextSnippet('died'), '', '');
@@ -266,27 +266,27 @@ function displayChild($personID, $childcount) {
   // buried
   $burialmsg = $ind['burialtype'] ? uiTextSnippet('cremated') : uiTextSnippet('buried');
   if ($rights['both']) {
-    $cite = reorderCitation($personID . "_BURI", 0);
+    $cite = reorderCitation($personID . '_BURI', 0);
     dateLine($burialmsg, displayDate($ind['burialdate']), $ind['burialplace'], $cite);
   } else {
     dateLine($burialmsg, '', '');
   }
   if ($rights['lds']) {
     if ($rights['both']) {
-      $cite = reorderCitation($personID . "_BAPL", 0);
+      $cite = reorderCitation($personID . '_BAPL', 0);
       dateLine(uiTextSnippet('baptizedlds'), displayDate($ind['baptdate']), $ind['baptplace'], $cite);
-      $cite = reorderCitation($personID . "_CONF", 0);
+      $cite = reorderCitation($personID . '_CONF', 0);
       dateLine(uiTextSnippet('conflds'), displayDate($row['confdate']), $ind['confplace'], $cite);
-      $cite = reorderCitation($personID . "_INIT", 0);
+      $cite = reorderCitation($personID . '_INIT', 0);
       dateLine(uiTextSnippet('initlds'), displayDate($row['initdate']), $ind['initplace'], $cite);
-      $cite = reorderCitation($personID . "_ENDL", 0);
+      $cite = reorderCitation($personID . '_ENDL', 0);
       dateLine(uiTextSnippet('endowedlds'), displayDate($ind['endldate']), $ind['endlplace'], $cite);
 
       $query = "SELECT sealdate, sealplace FROM $children_table WHERE familyID = \"{$ind['famc']}\" AND personID = '$personID'";
       $chresult = tng_query($query);
       $child = tng_fetch_assoc($chresult);
-      getCitations($personID . "::" . $ind['famc'], 0);
-      $cite = reorderCitation($personID . "::" . $ind['famc'] . "_SLGC", 0);
+      getCitations($personID . '::' . $ind['famc'], 0);
+      $cite = reorderCitation($personID . '::' . $ind['famc'] . '_SLGC', 0);
       dateLine(uiTextSnippet('sealedplds'), displayDate($child['sealdate']), $child['sealplace'], $cite);
       tng_free_result($chresult);
     } else {
@@ -321,7 +321,7 @@ function displayChild($personID, $childcount) {
 
     $frights = determineLivingPrivateRights($fam);
 
-    $marrplace = "";
+    $marrplace = '';
     if ($frights['both']) {
       $marrplace = $fam['marrdate'];
       if (!empty($fam['marrplace'])) {
@@ -335,8 +335,8 @@ function displayChild($personID, $childcount) {
     if ($citesources && $frights['both']) {
       getCitations($fam['familyID'], 0);
       getCitations($fam['personID'], 0);
-      $cite1 = reorderCitation($fam['personID'] . "_NAME", 0);
-      $cite2 = reorderCitation($fam['familyID'] . "_MARR", 0);
+      $cite1 = reorderCitation($fam['personID'] . '_NAME', 0);
+      $cite2 = reorderCitation($fam['familyID'] . '_MARR', 0);
     }
     spouseLine(uiTextSnippet('spouse'), $spousename, $marrplace, $cite1, $cite2);
     if ($frights['lds']) {
@@ -373,32 +373,32 @@ function displayIndividual($personID, $showparents, $showmarriage) {
   }
 
   // name
-  $cite = reorderCitation($personID . "_NAME", 0);
+  $cite = reorderCitation($personID . '_NAME', 0);
   nameLine($label, getName($ind), 1, $cite);
   // birth
   if ($rights['both']) {
-    $cite = reorderCitation($personID . "_BIRT", 0);
+    $cite = reorderCitation($personID . '_BIRT', 0);
     dateLine(uiTextSnippet('born'), displayDate($ind['birthdate']), $ind['birthplace'], $cite);
   } else {
     dateLine(uiTextSnippet('born'), '', '', '');
   }
   // christening
   if ($rights['both']) {
-    $cite = reorderCitation($personID . "_CHR", 0);
+    $cite = reorderCitation($personID . '_CHR', 0);
     dateLine(uiTextSnippet('christened'), displayDate($ind['altbirthdate']), $ind['altbirthplace'], $cite);
   } else {
     dateLine(uiTextSnippet('christened'), '', '');
   }
   // death
   if ($rights['both']) {
-    $cite = reorderCitation($personID . "_DEAT", 0);
+    $cite = reorderCitation($personID . '_DEAT', 0);
     dateLine(uiTextSnippet('died'), displayDate($ind['deathdate']), $ind['deathplace'], $cite);
   } else {
     dateLine(uiTextSnippet('died'), '', '');
   }
   // buried
   if ($rights['both']) {
-    $cite = reorderCitation($personID . "_BURI", 0);
+    $cite = reorderCitation($personID . '_BURI', 0);
     $burialmsg = $ind['burialtype'] ? uiTextSnippet('cremated') : uiTextSnippet('buried');
     dateLine($burialmsg, displayDate($ind['burialdate']), $ind['burialplace'], $cite);
   } else {
@@ -406,13 +406,13 @@ function displayIndividual($personID, $showparents, $showmarriage) {
   }
   if ($rights['lds']) {
     if ($rights['both']) {
-      $cite = reorderCitation($personID . "_BAPL", 0);
+      $cite = reorderCitation($personID . '_BAPL', 0);
       dateLine(uiTextSnippet('baptizedlds'), displayDate($ind['baptdate']), $ind['baptplace'], $cite);
-      $cite = reorderCitation($personID . "_CONF", 0);
+      $cite = reorderCitation($personID . '_CONF', 0);
       dateLine(uiTextSnippet('conflds'), displayDate($row['confdate']), $ind['confplace'], $cite);
-      $cite = reorderCitation($personID . "_INIT", 0);
+      $cite = reorderCitation($personID . '_INIT', 0);
       dateLine(uiTextSnippet('initlds'), displayDate($row['initdate']), $ind['initplace'], $cite);
-      $cite = reorderCitation($personID . "_ENDL", 0);
+      $cite = reorderCitation($personID . '_ENDL', 0);
       dateLine(uiTextSnippet('endowedlds'), displayDate($ind['endldate']), $ind['endlplace'], $cite);
     } else {
       dateLine(uiTextSnippet('baptizedlds'), '', '');
@@ -422,7 +422,7 @@ function displayIndividual($personID, $showparents, $showmarriage) {
 
   if ($showparents) {
     //show parents (for hus&wif)
-    $cite1 = $cite2 = "";
+    $cite1 = $cite2 = '';
     $query = "SELECT YEAR(birthdatetr) AS birthyear, YEAR(deathdatetr) AS deathyear, familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, $people_table.living, $people_table.private, $people_table.branch FROM ($families_table, $people_table) WHERE $families_table.familyID = \"{$ind['famc']}\" AND $people_table.personID = $families_table.husband";
     $presult = tng_query($query);
     $parent = tng_fetch_assoc($presult);
@@ -437,7 +437,7 @@ function displayIndividual($personID, $showparents, $showmarriage) {
 
     if ($citesources && $prights['both']) {
       getCitations($fatherID, 0);
-      $cite1 = reorderCitation($fatherID . "_NAME", 0);
+      $cite1 = reorderCitation($fatherID . '_NAME', 0);
     }
 
     $query = "SELECT YEAR(birthdatetr) AS birthyear, YEAR(deathdatetr) AS deathyear, familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, $people_table.living, $people_table.private, $people_table.branch FROM ($families_table, $people_table) WHERE $families_table.familyID = \"{$ind['famc']}\" AND $people_table.personID = $families_table.wife";
@@ -454,14 +454,14 @@ function displayIndividual($personID, $showparents, $showmarriage) {
 
     if ($citesources && $prights['both']) {
       getCitations($motherID, 0);
-      $cite2 = reorderCitation($motherID . "_NAME", 0);
+      $cite2 = reorderCitation($motherID . '_NAME', 0);
     }
     parentLine(uiTextSnippet('father'), $fathername, uiTextSnippet('mother'), $mothername, $cite1, $cite2);
     if ($rights['lds'] && $rights['both']) {
       $query = "SELECT sealdate, sealplace FROM $children_table WHERE familyID = \"{$ind['famc']}\" AND personID = '$personID'";
       $chresult = tng_query($query);
       $child = tng_fetch_assoc($chresult);
-      $cite = reorderCitation($personID . "::" . $ind['famc'] . "_SLGC", 0);
+      $cite = reorderCitation($personID . '::' . $ind['famc'] . '_SLGC', 0);
       dateLine(uiTextSnippet('sealedplds'), displayDate($child['sealdate']), $child['sealplace'], $cite);
       tng_free_result($chresult);
     }
@@ -481,7 +481,7 @@ function displayIndividual($personID, $showparents, $showmarriage) {
 
     // married
     if ($frights['both']) {
-      $cite = reorderCitation($familyID . "_MARR", 0);
+      $cite = reorderCitation($familyID . '_MARR', 0);
       dateLine(uiTextSnippet('married'), displayDate($fam['marrdate']), $fam['marrplace'], $cite);
     } else {
       dateLine(uiTextSnippet('married'), '', '');

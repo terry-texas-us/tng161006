@@ -6,7 +6,7 @@ require 'personlib.php';
 $result = getPersonFullPlusDates($personID);
 if (!tng_num_rows($result)) {
   tng_free_result($result);
-  header("Location: thispagedoesnotexist.html");
+  header('Location: thispagedoesnotexist.html');
   exit;
 }
 $row = tng_fetch_assoc($result);
@@ -17,14 +17,14 @@ $namestr = getName($row);
 
 tng_free_result($result);
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 
 initMediaTypes();
 
 $photostr = showSmallPhoto($personID, $namestr, $rights['both'], 0, false, $row['sex']);
 echo tng_DrawHeading($photostr, $namestr, getYears($row));
 
-$persontext = "";
+$persontext = '';
 $persontext .= "<ul>\n";
 
 $persontext .= beginListItem('info');
@@ -32,13 +32,13 @@ $persontext .= "<table>\n";
 resetEvents();
 if ($rights['both']) {
   if ($row['nickname']) {
-    $persontext .= showEvent(["text" => uiTextSnippet('nickname'), "fact" => $row['nickname'], "event" => "NICK", "entity" => $personID, "type" => 'I']);
+    $persontext .= showEvent(['text' => uiTextSnippet('nickname'), 'fact' => $row['nickname'], 'event' => 'NICK', 'entity' => $personID, 'type' => 'I']);
   }
-  setEvent(["text" => uiTextSnippet('birth'), "fact" => $stdex['BIRT'], "date" => $row['birthdate'], "place" => $row['birthplace'], "event" => "BIRT", "entity" => $personID, "type" => 'I', "np" => 1], $row['birthdatetr']);
-  setEvent(["text" => uiTextSnippet('christened'), "fact" => $stdex['CHR'], "date" => $row['altbirthdate'], "place" => $row['altbirthplace'], "event" => "CHR", "entity" => $personID, "type" => 'I', "np" => 1], $row['altbirthdatetr']);
-  setEvent(["text" => uiTextSnippet('died'), "fact" => $stdex['DEAT'], "date" => $row['deathdate'], "place" => $row['deathplace'], "event" => "DEAT", "entity" => $personID, "type" => 'I', "np" => 1], $row['deathdatetr']);
+  setEvent(['text' => uiTextSnippet('birth'), 'fact' => $stdex['BIRT'], 'date' => $row['birthdate'], 'place' => $row['birthplace'], 'event' => 'BIRT', 'entity' => $personID, 'type' => 'I', 'np' => 1], $row['birthdatetr']);
+  setEvent(['text' => uiTextSnippet('christened'), 'fact' => $stdex['CHR'], 'date' => $row['altbirthdate'], 'place' => $row['altbirthplace'], 'event' => 'CHR', 'entity' => $personID, 'type' => 'I', 'np' => 1], $row['altbirthdatetr']);
+  setEvent(['text' => uiTextSnippet('died'), 'fact' => $stdex['DEAT'], 'date' => $row['deathdate'], 'place' => $row['deathplace'], 'event' => 'DEAT', 'entity' => $personID, 'type' => 'I', 'np' => 1], $row['deathdatetr']);
   $burialmsg = $row['burialtype'] ? uiTextSnippet('cremated') : uiTextSnippet('buried');
-  setEvent(["text" => $burialmsg, "fact" => $stdex['BURI'], "date" => $row['burialdate'], "place" => $row['burialplace'], "event" => "BURI", "entity" => $personID, "type" => 'I', "np" => 1], $row['burialdatetr']);
+  setEvent(['text' => $burialmsg, 'fact' => $stdex['BURI'], 'date' => $row['burialdate'], 'place' => $row['burialplace'], 'event' => 'BURI', 'entity' => $personID, 'type' => 'I', 'np' => 1], $row['burialdatetr']);
 }
 if ($row['sex'] == 'M') {
   $spouse = 'wife';
@@ -50,7 +50,7 @@ if ($row['sex'] == 'M') {
     $self = 'wife';
     $spouseorder = 'wifeorder';
   } else {
-    $spouseorder = "";
+    $spouseorder = '';
   }
 }
 
@@ -60,7 +60,7 @@ if (count($events)) {
     $persontext .= showEvent($event);
   }
 
-  $persontext .= showBreak("smallbreak");
+  $persontext .= showBreak('smallbreak');
 }
 
 //do parents
@@ -80,16 +80,16 @@ if ($parents && tng_num_rows($parents)) {
       if ($fathrow['firstname'] || $fathrow['lastname']) {
         $fatherlink = getName($fathrow);
       } else {
-        $fatherlink = "";
+        $fatherlink = '';
       }
       if ($frights['both']) {
         $fatherlink .= $birthinfo;
       }
-      $persontext .= showEvent(["text" => uiTextSnippet('father'), "fact" => $fatherlink]);
+      $persontext .= showEvent(['text' => uiTextSnippet('father'), 'fact' => $fatherlink]);
       if ($rights['both'] && $parent['frel']) {
         $rel = $parent['frel'];
         $relstr = uiTextSnippet($rel) ? uiTextSnippet($rel) : $rel;
-        $persontext .= showEvent(["text" => uiTextSnippet('relationship2'), "fact" => $relstr]);
+        $persontext .= showEvent(['text' => uiTextSnippet('relationship2'), 'fact' => $relstr]);
       }
       tng_free_result($gotfather);
     }
@@ -105,16 +105,16 @@ if ($parents && tng_num_rows($parents)) {
       if ($mothrow['firstname'] || $mothrow['lastname']) {
         $motherlink = getName($mothrow);
       } else {
-        $motherlink = "";
+        $motherlink = '';
       }
       if ($mrights['both']) {
         $motherlink .= $birthinfo;
       }
-      $persontext .= showEvent(["text" => uiTextSnippet('mother'), "fact" => $motherlink]);
+      $persontext .= showEvent(['text' => uiTextSnippet('mother'), 'fact' => $motherlink]);
       if ($rights['both'] && $parent['mrel']) {
         $rel = $parent['mrel'];
         $relstr = uiTextSnippet($rel) ? uiTextSnippet($rel) : $rel;
-        $persontext .= showEvent(["text" => uiTextSnippet('relationship2'), "fact" => $relstr]);
+        $persontext .= showEvent(['text' => uiTextSnippet('relationship2'), 'fact' => $relstr]);
       }
 
       tng_free_result($gotmother);
@@ -123,14 +123,14 @@ if ($parents && tng_num_rows($parents)) {
     $gotparents = getFamilyData($parent['familyID']);
     $parentrow = tng_fetch_assoc($gotparents);
     tng_free_result($gotparents);
-    $parent['personID'] = "";
+    $parent['personID'] = '';
 
     if ($tngconfig['pardata'] < 2) {
       $prights = determineLivingPrivateRights($parentrow);
 
       if ($prights['both']) {
-        setEvent(["text" => uiTextSnippet('married'), "fact" => $stdexf['MARR'], "date" => $parentrow['marrdate'], "place" => $parentrow['marrplace'], "event" => "MARR", "entity" => $parentrow['familyID'], "type" => 'F', "nomap" => 1, "np" => 1], $parentrow['marrdatetr']);
-        setEvent(["text" => uiTextSnippet('divorced'), "fact" => $stdexf['DIV'], "date" => $parentrow['divdate'], "place" => $parentrow['divplace'], "event" => "DIV", "entity" => $parentrow['familyID'], "type" => 'F', "nomap" => 1, "np" => 1], $parentrow['divdatetr']);
+        setEvent(['text' => uiTextSnippet('married'), 'fact' => $stdexf['MARR'], 'date' => $parentrow['marrdate'], 'place' => $parentrow['marrplace'], 'event' => 'MARR', 'entity' => $parentrow['familyID'], 'type' => 'F', 'nomap' => 1, 'np' => 1], $parentrow['marrdatetr']);
+        setEvent(['text' => uiTextSnippet('divorced'), 'fact' => $stdexf['DIV'], 'date' => $parentrow['divdate'], 'place' => $parentrow['divplace'], 'event' => 'DIV', 'entity' => $parentrow['familyID'], 'type' => 'F', 'nomap' => 1, 'np' => 1], $parentrow['divdatetr']);
 
         ksort($events);
         foreach ($events as $event) {
@@ -139,7 +139,7 @@ if ($parents && tng_num_rows($parents)) {
       }
     }
 
-    $persontext .= showBreak("smallbreak");
+    $persontext .= showBreak('smallbreak');
   }
   tng_free_result($parents);
 }
@@ -166,7 +166,7 @@ while ($marriagerow = tng_fetch_assoc($marriages)) {
     if (!is_array($stdexf['MARR'])) {
       $stdexf['MARR'] = [];
     }
-    array_unshift($stdexf['MARR'], uiTextSnippet('type') . ": " . $marriagerow['marrtype']);
+    array_unshift($stdexf['MARR'], uiTextSnippet('type') . ': ' . $marriagerow['marrtype']);
   }
 
   if (!$spouseorder) {
@@ -184,19 +184,19 @@ while ($marriagerow = tng_fetch_assoc($marriages)) {
     if ($spouserow['firstname'] || $spouserow['lastname']) {
       $spouselink = getName($spouserow);
     } else {
-      $spouselink = "";
+      $spouselink = '';
     }
     if ($srights['both']) {
       $spouselink .= $birthinfo;
     }
   } else {
-    $spouselink = "";
+    $spouselink = '';
   }
-  $marrstr = $marrtot > 1 ? " $marrcount" : "";
+  $marrstr = $marrtot > 1 ? " $marrcount" : '';
   if ($spouserow['allow_living']) {
-    $persontext .= showEvent(["text" => uiTextSnippet('family') . "$marrstr", "fact" => $spouselink, "entity" => $marriagerow['familyID'], "type" => 'F']);
+    $persontext .= showEvent(['text' => uiTextSnippet('family') . "$marrstr", 'fact' => $spouselink, 'entity' => $marriagerow['familyID'], 'type' => 'F']);
   } else {
-    $persontext .= showEvent(["text" => uiTextSnippet('family') . "$marrstr", "fact" => $spouselink]);
+    $persontext .= showEvent(['text' => uiTextSnippet('family') . "$marrstr", 'fact' => $spouselink]);
   }
 
   $marrights = determineLivingPrivateRights($marriagerow);
@@ -205,8 +205,8 @@ while ($marriagerow = tng_fetch_assoc($marriages)) {
   if ($marrights['both']) {
     resetEvents();
 
-    setEvent(["text" => uiTextSnippet('married'), "fact" => $stdexf['MARR'], "date" => $marriagerow['marrdate'], "place" => $marriagerow['marrplace'], "event" => "MARR", "entity" => $marriagerow['familyID'], "type" => 'F', "np" => 1], $marriagerow['marrdatetr']);
-    setEvent(["text" => uiTextSnippet('divorced'), "fact" => $stdexf['DIV'], "date" => $marriagerow['divdate'], "place" => $marriagerow['divplace'], "event" => "DIV", "entity" => $marriagerow['familyID'], "type" => 'F', "np" => 1], $marriagerow['divdatetr']);
+    setEvent(['text' => uiTextSnippet('married'), 'fact' => $stdexf['MARR'], 'date' => $marriagerow['marrdate'], 'place' => $marriagerow['marrplace'], 'event' => 'MARR', 'entity' => $marriagerow['familyID'], 'type' => 'F', 'np' => 1], $marriagerow['marrdatetr']);
+    setEvent(['text' => uiTextSnippet('divorced'), 'fact' => $stdexf['DIV'], 'date' => $marriagerow['divdate'], 'place' => $marriagerow['divplace'], 'event' => 'DIV', 'entity' => $marriagerow['familyID'], 'type' => 'F', 'np' => 1], $marriagerow['divdatetr']);
 
 
     ksort($events);
@@ -221,13 +221,13 @@ while ($marriagerow = tng_fetch_assoc($marriages)) {
 
   if ($children && tng_num_rows($children)) {
     $persontext .= "<tr>\n";
-    $persontext .= "<td>" . uiTextSnippet('children') . "</td>\n";
+    $persontext .= '<td>' . uiTextSnippet('children') . "</td>\n";
     $persontext .= "<td colspan='2'>\n";
 
     $kidcount = 1;
     $persontext .= "<table>\n";
     while ($child = tng_fetch_assoc($children)) {
-      $ifkids = $child['haskids'] ? "<strong>+</strong>" : "&nbsp;";
+      $ifkids = $child['haskids'] ? "<strong>+</strong>" : '&nbsp;';
       $birthinfo = getBirthInfo($child);
       $crights = determineLivingPrivateRights($child);
       $child['allow_living'] = $crights['living'];
@@ -248,7 +248,7 @@ while ($marriagerow = tng_fetch_assoc($marriages)) {
 
     tng_free_result($children);
   }
-  $persontext .= showBreak("smallbreak");
+  $persontext .= showBreak('smallbreak');
 }
 tng_free_result($marriages);
 

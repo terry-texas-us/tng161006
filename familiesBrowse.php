@@ -39,7 +39,7 @@ if ($newsearch) {
     setcookie("tng_search_families_post[offset]", $offset, $exptime);
   }
 }
-$searchstring_noquotes = preg_replace("/\"/", "&#34;", $searchstring);
+$searchstring_noquotes = preg_replace('/\"/', '&#34;', $searchstring);
 $searchstring = addslashes($searchstring);
 
 if ($offset) {
@@ -47,21 +47,21 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $tngpage = 1;
 }
 
 function addCriteria($field, $value, $operator) {
-  $criteria = "";
+  $criteria = '';
 
-  if ($operator == "=") {
+  if ($operator == '=') {
     $criteria = " OR $field $operator \"$value\"";
   } else {
-    $innercriteria = "";
+    $innercriteria = '';
     $terms = explode(' ', $value);
     foreach ($terms as $term) {
       if ($innercriteria) {
-        $innercriteria .= " AND ";
+        $innercriteria .= ' AND ';
       }
       $innercriteria .= "$field $operator \"%$term%\"";
     }
@@ -73,27 +73,27 @@ function addCriteria($field, $value, $operator) {
   return $criteria;
 }
 
-$allwhere = "1=1";
-$allwhere2 = "";
+$allwhere = '1=1';
+$allwhere2 = '';
 
 if ($searchstring) {
-  $allwhere .= " AND (1=0 ";
-  if ($exactmatch == "yes") {
-    $frontmod = "=";
+  $allwhere .= ' AND (1=0 ';
+  if ($exactmatch == 'yes') {
+    $frontmod = '=';
   } else {
-    $frontmod = "LIKE";
+    $frontmod = 'LIKE';
   }
 
-  $allwhere .= addCriteria("familyID", $searchstring, $frontmod);
+  $allwhere .= addCriteria('familyID', $searchstring, $frontmod);
   $allwhere .= addCriteria('husband', $searchstring, $frontmod);
   $allwhere .= addCriteria('wife', $searchstring, $frontmod);
 
   if ($spousename == 'husband') {
-    $allwhere .= addCriteria("CONCAT_WS(' ',TRIM(firstname)" . ($lnprefixes ? ",TRIM(lnprefix)" : "") . ",TRIM(lastname))", $searchstring, $frontmod);
+    $allwhere .= addCriteria("CONCAT_WS(' ',TRIM(firstname)" . ($lnprefixes ? ',TRIM(lnprefix)' : '') . ',TRIM(lastname))', $searchstring, $frontmod);
   } elseif ($spousename == 'wife') {
-    $allwhere .= addCriteria("CONCAT_WS(' ',TRIM(firstname)" . ($lnprefixes ? ",TRIM(lnprefix)" : "") . ",TRIM(lastname))", $searchstring, $frontmod);
+    $allwhere .= addCriteria("CONCAT_WS(' ',TRIM(firstname)" . ($lnprefixes ? ',TRIM(lnprefix)' : '') . ',TRIM(lastname))', $searchstring, $frontmod);
   }
-  $allwhere .= ")";
+  $allwhere .= ')';
 }
 if ($spousename == 'husband') {
   $allwhere2 .= "AND $people_table.personID = husband ";
@@ -102,22 +102,22 @@ if ($spousename == 'husband') {
 }
 
 if ($allwhere2) {
-  $allwhere2 .= "AND 1=1";
+  $allwhere2 .= 'AND 1=1';
   $allwhere .= " $allwhere2";
-  $allwhere .= " ";
+  $allwhere .= ' ';
 
   if ($assignedbranch) {
     $allwhere .= " AND $families_table.branch LIKE \"%$assignedbranch%\"";
   }
   $people_join = ", $people_table";
-  $otherfields = ", firstname, lnprefix, lastname, prefix, suffix, nameorder";
-  $sortstr = "lastname, lnprefix, firstname,";
+  $otherfields = ', firstname, lnprefix, lastname, prefix, suffix, nameorder';
+  $sortstr = 'lastname, lnprefix, firstname,';
 } else {
-  $people_join = "";
-  $otherfields = "";
-  $sortstr = "";
+  $people_join = '';
+  $otherfields = '';
+  $sortstr = '';
 }
-if ($living == "yes") {
+if ($living == 'yes') {
   $allwhere .= " AND $families_table.living = \"1\"";
 }
 $query = "SELECT $families_table.ID AS ID, familyID, husband, wife, marrdate $otherfields FROM ($families_table $people_join) "
@@ -137,7 +137,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 
 $revstar = checkReview('F');
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('families'));
 ?>
 <!DOCTYPE html>
@@ -148,10 +148,10 @@ $headSection->setTitle(uiTextSnippet('families'));
     <?php
     echo $adminHeaderSection->build('families', $message);
     $navList = new navList('');
-    //    $navList->appendItem([true, "familiesBrowse.php", uiTextSnippet('browse'), "findfamily"]);
-    $navList->appendItem([$allowAdd, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
-    $navList->appendItem([$allowEdit, "admin_findreview.php?type=F", uiTextSnippet('review') . $revstar, "review"]);
-    echo $navList->build("findfamily");
+    //    $navList->appendItem([true, 'familiesBrowse.php', uiTextSnippet('browse'), 'findfamily']);
+    $navList->appendItem([$allowAdd, 'familiesAdd.php', uiTextSnippet('add'), 'addfamily']);
+    $navList->appendItem([$allowEdit, 'admin_findreview.php?type=F', uiTextSnippet('review') . $revstar, 'review']);
+    echo $navList->build('findfamily');
     ?>
     <div>
       <?php require '_/components/php/findFamilyForm.php'; ?>
@@ -191,7 +191,7 @@ $headSection->setTitle(uiTextSnippet('families'));
               <th><?php echo uiTextSnippet('marrdate'); ?></th>
             </tr>
             <?php
-            $actionstr = "";
+            $actionstr = '';
             if ($allowEdit) {
               $actionstr .= "<a href=\"familiesEdit.php?familyID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
@@ -207,14 +207,14 @@ $headSection->setTitle(uiTextSnippet('families'));
             $actionstr .= "</a>\n";
 
             while ($row = tng_fetch_assoc($result)) {
-              $newactionstr = preg_replace("/xxx/", $row['familyID'], $actionstr);
-              $newactionstr = preg_replace("/zzz/", $row['ID'], $newactionstr);
+              $newactionstr = preg_replace('/xxx/', $row['familyID'], $actionstr);
+              $newactionstr = preg_replace('/zzz/', $row['ID'], $newactionstr);
               $rights = determineLivingPrivateRights($row);
               $row['allow_living'] = $rights['living'];
               $row['allow_private'] = $rights['private'];
 
               $editlink = "familiesEdit.php?familyID={$row['familyID']}";
-              $id = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['familyID'] . "</a>" : $row['familyID'];
+              $id = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['familyID'] . '</a>' : $row['familyID'];
 
               echo "<tr id=\"row_{$row['ID']}\">\n";
               echo "<td>\n";
@@ -226,11 +226,11 @@ $headSection->setTitle(uiTextSnippet('families'));
               echo "<td>$id</td>\n";
               echo "<td>{$row['husband']}</td>\n";
               if ($spousename == 'husband') {
-                echo "<td>" . getName($row) . "</td>\n";
+                echo '<td>' . getName($row) . "</td>\n";
               }
               echo "<td>{$row['wife']}</td>\n";
               if ($spousename == 'wife') {
-                echo "<td>" . getName($row) . "</td>\n";
+                echo '<td>' . getName($row) . "</td>\n";
               }
               echo "<td>{$row['marrdate']}</td>\n";
               echo "</tr>\n";

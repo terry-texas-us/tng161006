@@ -8,7 +8,7 @@ require 'version.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 $query = "SELECT treename FROM $treesTable";
@@ -24,7 +24,7 @@ tng_free_result($result);
 $query = "SELECT personID, firstname, lastname, lnprefix, prefix, suffix, branch, nameorder, living, private FROM $people_table WHERE branch LIKE \"%$branch%\" ORDER BY lastname, firstname";
 $brresult = tng_query($query);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('labelbranches'));
 ?>
 <!DOCTYPE html>
@@ -35,10 +35,10 @@ $headSection->setTitle(uiTextSnippet('labelbranches'));
     <?php
     echo $adminHeaderSection->build('branches-labelbranches', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "branchesBrowse.php", uiTextSnippet('browse'), "findbranch"]);
-    $navList->appendItem([$allowAdd, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
-    $navList->appendItem([$allowEdit, "#", uiTextSnippet('labelbranches'), "label"]);
-    echo $navList->build("label");
+    $navList->appendItem([true, 'branchesBrowse.php', uiTextSnippet('browse'), 'findbranch']);
+    $navList->appendItem([$allowAdd, 'branchesAdd.php', uiTextSnippet('add'), 'addbranch']);
+    $navList->appendItem([$allowEdit, '#', uiTextSnippet('labelbranches'), 'label']);
+    echo $navList->build('label');
     ?>
     <table class='table table-sm'>
       <tr>

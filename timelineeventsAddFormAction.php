@@ -8,7 +8,7 @@ require 'checklogin.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
@@ -18,16 +18,16 @@ $evdetail = addslashes($evdetail);
 $evtitle = addslashes($evtitle);
 
 if (!$evday) {
-  $evday = "0";
+  $evday = '0';
 }
 if (!$evmonth) {
-  $evmonth = "0";
+  $evmonth = '0';
 }
 if (!$endday) {
-  $endday = "0";
+  $endday = '0';
 }
 if (!$endmonth) {
-  $endmonth = "0";
+  $endmonth = '0';
 }
 $query = "INSERT INTO $tlevents_table (evday,evmonth,evyear,endday,endmonth,endyear,evtitle,evdetail) VALUES (\"$evday\",\"$evmonth\",\"$evyear\",\"$endday\",\"$endmonth\",\"$endyear\",\"$evtitle\",\"$evdetail\")";
 $result = tng_query($query);
@@ -36,4 +36,4 @@ $tleventID = tng_insert_id();
 adminwritelog(uiTextSnippet('addnewtlevent') . ": $tleventID - $evdetail");
 
 $message = uiTextSnippet('tlevent') . " $tleventID " . uiTextSnippet('succadded') . '.';
-header("Location: timelineeventsBrowse.php?message=" . urlencode($message));
+header('Location: timelineeventsBrowse.php?message=' . urlencode($message));

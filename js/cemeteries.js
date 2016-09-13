@@ -48,7 +48,7 @@ function populatePath(source, dest) {
     var lastslash;
     var temp;
 
-    dest.value = "";
+    dest.value = '';
     temp = source.value.replace(/\\/g, "/");
     lastslash = temp.lastIndexOf("/") + 1;
     if (lastslash) {
@@ -61,22 +61,22 @@ function fillPlace(form) {
     var place = form.cemname.value;
 
     if (place && form.city.value) {
-        place += ", ";
+        place += ', ';
     }
     place += form.city.value;
 
     if (place && form.county.value) {
-        place += ", ";
+        place += ', ';
     }
     place += form.county.value;
 
     if (place && form.state.options[form.state.selectedIndex].value) {
-        place += ", ";
+        place += ', ';
     }
     place += form.state.options[form.state.selectedIndex].value;
 
     if (place && form.country.selectedIndex > 0) {
-        place += ", ";
+        place += ', ';
     }
     place += form.country.options[form.country.selectedIndex].value;
 

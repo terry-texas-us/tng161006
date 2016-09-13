@@ -1,4 +1,5 @@
 <?php
+$database_host = 'localhost';
 $database_host = "localhost";
 $database_name = "tgn";
 $database_username = "root";
@@ -53,7 +54,7 @@ $lineendingdisplay = "\\r\\n";
 $lineending = "\r\n";
 $gendexfile = "gendex";
 $mediapath = "media";
-$headstonepath = "headstones";
+$headstonepath = 'headstones';
 $historypath = "histories";
 $backuppath = "backups-ss";
 $documentpath = "documents";
@@ -129,3 +130,4 @@ $tngconfig['pardata'] = "1";
 $tngconfig['oldids'] = "";
 $tngconfig['lastimport'] = "";
 $tng_notinstalled = "";
+

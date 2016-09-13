@@ -13,13 +13,13 @@ require 'adminlog.php';
 
 $display_org = stripslashes($display);
 
-if ($session_charset != "UTF-8") {
+if ($session_charset != 'UTF-8') {
   $display = tng_utf8_decode($display);
 }
 
 $display = addslashes($display);
 
-$stdcolls = ["photos", "histories", "headstones", "documents", "recordings", "videos"];
+$stdcolls = ['photos', 'histories', 'headstones', 'documents', 'recordings', 'videos'];
 $collid = cleanID($collid);
 $newcollid = 0;
 if (!in_array($collid, $stdcolls)) {

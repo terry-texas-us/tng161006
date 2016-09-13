@@ -4,13 +4,13 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-if ($session_charset != "UTF-8") {
+if ($session_charset != 'UTF-8') {
   $mytitle = tng_utf8_decode($mytitle);
 }
 $query = "SELECT repoID, reponame FROM $repositories_table WHERE reponame LIKE \"%$mytitle%\" ORDER BY reponame LIMIT 250";
 $result = tng_query($query);
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <div id='findreporesdiv'>
   <table class='table table-sm'>

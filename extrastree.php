@@ -19,7 +19,7 @@ function displayIndividual($key, $generation, $slot, $column) {
   global $parentset;
 
   $nextslot = $slot * 2;
-  $name = "";
+  $name = '';
 
   if ($key) {
     $result = getPersonDataPlusDates($key);
@@ -28,7 +28,7 @@ function displayIndividual($key, $generation, $slot, $column) {
       $rights = determineLivingPrivateRights($row);
       $row['allow_living'] = $rights['living'];
       $row['allow_private'] = $rights['private'];
-      $lastname = trim($row['lnprefix'] . " " . $row['lastname']);
+      $lastname = trim($row['lnprefix'] . ' ' . $row['lastname']);
 
       if ($generation == 2) {
         if ($slot == 2) {
@@ -51,10 +51,10 @@ function displayIndividual($key, $generation, $slot, $column) {
       if ($mediarow['mediacount'] || $showall) {
         if (!isset($columns[$column][$generation])) {
           $gentext = "gen$generation";
-          $columns[$column][$generation] = "<span>" . uiTextSnippet($gentext) . "<br></span>\n<ul>\n";
+          $columns[$column][$generation] = '<span>' . uiTextSnippet($gentext) . "<br></span>\n<ul>\n";
         }
         $namestr = getNameRev($row);
-        $columns[$column][$generation] .= "<li><span><a href=\"peopleShowPerson.php?tng_extras=1&amp;personID=$key\">$namestr</a> (" . trim(getYears($row)) . ")";
+        $columns[$column][$generation] .= "<li><span><a href=\"peopleShowPerson.php?tng_extras=1&amp;personID=$key\">$namestr</a> (" . trim(getYears($row)) . ')';
         if ($mediarow['mediacount']) {
           $columns[$column][$generation] .= " <a href=\"peopleShowPerson.php?tng_extras=1&amp;personID=$key\" title=\"" . uiTextSnippet('mediaavail') . "\">\n";
           $columns[$column][$generation] .= "<img class='icon-sm' src='svg/camera.svg' alt=\"" . uiTextSnippet('mediaavail') . "\"></a>";
@@ -68,14 +68,14 @@ function displayIndividual($key, $generation, $slot, $column) {
 
   $generation++;
   if ($nextslot < $pedmax) {
-    $husband = "";
-    $wife = "";
+    $husband = '';
+    $wife = '';
 
     if ($key) {
-      $parentfamID = "";
+      $parentfamID = '';
       $locparentset = $parentset;
       $parentfamIDs = [];
-      $parents = getChildFamily($key, "parentorder");
+      $parents = getChildFamily($key, 'parentorder');
       if ($parents) {
         $parentscount = tng_num_rows($parents);
         if ($parentscount > 0) {
@@ -138,8 +138,8 @@ preparebookmark("<a href=\"extrastree.php?personID=$personID\">" . uiTextSnippet
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
-$headSection->setTitle(uiTextSnippet('media') . ": " . uiTextSnippet('familyof') . " $pedname");
+header('Content-type: text/html; charset=' . $session_charset);
+$headSection->setTitle(uiTextSnippet('media') . ': ' . uiTextSnippet('familyof') . " $pedname");
 ?>
 <!DOCTYPE html>
 <html>
@@ -152,7 +152,7 @@ $headSection->setTitle(uiTextSnippet('media') . ": " . uiTextSnippet('familyof')
     $photostr = showSmallPhoto($personID, $pedname, $rights['both'], 0, false, $row['sex']);
     echo tng_DrawHeading($photostr, $pedname, getYears($row));
 
-    $innermenu = uiTextSnippet('generations') . ": &nbsp;";
+    $innermenu = uiTextSnippet('generations') . ': &nbsp;';
     if ($generations > $pedigree['maxgen']) {
       $generations = $pedigree['maxgen'];
     }
@@ -160,7 +160,7 @@ $headSection->setTitle(uiTextSnippet('media') . ": " . uiTextSnippet('familyof')
     for ($i = 1; $i <= $pedigree['maxgen']; $i++) {
       $innermenu .= "<option value='$i'";
       if ($i == $generations) {
-        $innermenu .= " selected";
+        $innermenu .= ' selected';
       }
       $innermenu .= ">$i</option>\n";
     }
@@ -175,18 +175,18 @@ $headSection->setTitle(uiTextSnippet('media') . ": " . uiTextSnippet('familyof')
       $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ped&amp;personID=$personID&amp;generations=$generations');return false;\">PDF</a>\n";
     }
 
-    beginFormElement("pedigree", "", "form1", "form1");
-    echo buildPersonMenu("pedigree", $personID);
+    beginFormElement('pedigree', '', 'form1', 'form1');
+    echo buildPersonMenu('pedigree', $personID);
     echo "<div class='pub-innermenu small'>\n";
       echo $innermenu;
     echo "</div>\n";
     echo "<br>\n";
     endFormElement();
 
-    echo "<h4>" . uiTextSnippet('media') . ": " . uiTextSnippet('familyof') . " $pedname</h4>";
+    echo '<h4>' . uiTextSnippet('media') . ': ' . uiTextSnippet('familyof') . " $pedname</h4>";
 
     if ($showall) {
-      echo "<p><img class='icon-sm' src='svg/camera.svg' alt=\"" . uiTextSnippet('mediaavail') . "\"> " . uiTextSnippet('extrasexpl') . "</p>";
+      echo "<p><img class='icon-sm' src='svg/camera.svg' alt=\"" . uiTextSnippet('mediaavail') . "\"> " . uiTextSnippet('extrasexpl') . '</p>';
     }
     $slot = 1;
     displayIndividual($personID, 1, $slot, 0);

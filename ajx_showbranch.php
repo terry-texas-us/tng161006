@@ -7,13 +7,13 @@ require 'checklogin.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 $query = "SELECT personID, firstname, lastname, lnprefix, prefix, suffix, branch, nameorder, living, private FROM $people_table WHERE branch LIKE \"%$branch%\" ORDER BY lastname, firstname";
 $brresult = tng_query($query);
 $numresults = tng_num_rows($brresult);
-$names = "";
+$names = '';
 $counter = $fcounter = 0;
 
 while ($row = tng_fetch_assoc($brresult)) {
@@ -44,9 +44,9 @@ while ($row = tng_fetch_assoc($brresult)) {
 tng_free_result($brresult);
 
 if (!$names) {
-  $names = "<p>" . uiTextSnippet('norecords') . "</p>";
+  $names = '<p>' . uiTextSnippet('norecords') . '</p>';
 }
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <header class='modal-header'>
   <h4><?php echo uiTextSnippet('branchid') . ': ' . $branch ?></h4>

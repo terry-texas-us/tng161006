@@ -66,7 +66,7 @@ class Relationship
     global $namestr;
     global $namestr2;
 
-    $spousemsg = "";
+    $spousemsg = '';
     $name1 = $namestr;
     $name2 = $namestr2;
     $g1 = $gender1;
@@ -100,41 +100,41 @@ class Relationship
               $reldesc = $greats ? uiTextSnippet('gstepgchild') : uiTextSnippet('stepgchild');
             }
 
-            $greatmsg = $greats > 1 ? "$greats x" : "";
-            $reldesc = preg_replace("/xxx/", $greatmsg, $reldesc);
+            $greatmsg = $greats > 1 ? "$greats x" : '';
+            $reldesc = preg_replace('/xxx/', $greatmsg, $reldesc);
           } else {
-            $reldesc = "[undetermined relationship]"; //shouldn't ever get here.
+            $reldesc = '[undetermined relationship]'; //shouldn't ever get here.
           }
           $relmsg = "$name1 " . uiTextSnippet('is') . " $reldesc $name2";
         } elseif ($this->upcount == 1) {
           $greats = $this->downcount - 2;
           $relarray = $greats ? [uiTextSnippet('guncle'), uiTextSnippet('gaunt'), uiTextSnippet('guncleaunt')] : [uiTextSnippet('uncle'), uiTextSnippet('aunt'), uiTextSnippet('uncleaunt')];
-          $greatmsg = $greats > 1 ? "$greats x" : "";
+          $greatmsg = $greats > 1 ? "$greats x" : '';
           $relmsg = $this->getRelMsg($this->spouseflag, $name1, $g1, $name2, $g2, $relarray);
-          $relmsg = preg_replace("/xxx/", $greatmsg, $relmsg);
+          $relmsg = preg_replace('/xxx/', $greatmsg, $relmsg);
         } elseif ($this->downcount == 1) {
           $greats = $this->upcount - 2;
           $relarray = $greats ? [uiTextSnippet('gnephew'), uiTextSnippet('gniece'), uiTextSnippet('gnephnc')] : [uiTextSnippet('nephew'), uiTextSnippet('niece'), uiTextSnippet('nephnc')];
-          $greatmsg = $greats > 1 ? "$greats x" : "";
+          $greatmsg = $greats > 1 ? "$greats x" : '';
           $relmsg = $this->getRelMsg($this->spouseflag, $name1, $g1, $name2, $g2, $relarray);
-          $relmsg = preg_replace("/xxx/", $greatmsg, $relmsg);
+          $relmsg = preg_replace('/xxx/', $greatmsg, $relmsg);
         } else {
           //they're cousins
           $cousins = $this->downcount <= $this->upcount ? $this->downcount - 1 : $this->upcount - 1;
           //get sex of person1 to determine male cousin or female cousin (for languages with gender)
-          $cousinmsg = $cousins > 1 ? "$cousins x" : "";
+          $cousinmsg = $cousins > 1 ? "$cousins x" : '';
           $msgarray = $this->half ? [uiTextSnippet('mhalfcousin'), uiTextSnippet('fhalfcousin'), uiTextSnippet('halfcousin')] : [uiTextSnippet('mcousin'), uiTextSnippet('fcousin'), uiTextSnippet('cousin')];
           $relmsg = $this->getRelMsg($this->spouseflag, $name1, $g1, $name2, $g2, $msgarray);
-          $relmsg = preg_replace("/xxx/", $cousinmsg, $relmsg);
+          $relmsg = preg_replace('/xxx/', $cousinmsg, $relmsg);
           $removed = abs($this->downcount - $this->upcount);
           if ($removed > 1) {
             $remmsg = " $removed " . uiTextSnippet('removed');
           } elseif ($removed == 1) {
-            $remmsg = " " . uiTextSnippet('oneremoved');
+            $remmsg = ' ' . uiTextSnippet('oneremoved');
           } else {
-            $remmsg = "";
+            $remmsg = '';
           }
-          $relmsg = preg_replace("/yyy/", $remmsg, $relmsg);
+          $relmsg = preg_replace('/yyy/', $remmsg, $relmsg);
         }
       } else {
         //direct relationship
@@ -173,13 +173,13 @@ class Relationship
             $greats = $this->upcount - 2;
             $relarray = $greats ? [uiTextSnippet('ggson'), uiTextSnippet('ggdau'), uiTextSnippet('ggsondau')] : [uiTextSnippet('gson'), uiTextSnippet('gdau'), uiTextSnippet('gsondau')];
           }
-          $greatmsg = $greats > 1 ? "$greats x" : "";
+          $greatmsg = $greats > 1 ? "$greats x" : '';
           $relmsg = $this->getRelMsg($this->spouseflag, $name1, $g1, $name2, $g2, $relarray);
-          $relmsg = preg_replace("/xxx/", $greatmsg, $relmsg);
+          $relmsg = preg_replace('/xxx/', $greatmsg, $relmsg);
         }
       }
     }
-    echo "<p>" . $relmsg . "</p>\n";
+    echo '<p>' . $relmsg . "</p>\n";
   }
 
   function getRelMsg($spouseflag, $namestr, $gender1, $namestr2, $gender2, $messages) {
@@ -269,28 +269,28 @@ tng_free_result($result2);
 writelog("<a href=\"relationship.php?altprimarypersonID=$primarypersonID&amp;secondpersonID=$secondpersonID\">" . uiTextSnippet('relcalc') . ": $logname ($primarypersonID) =&gt;$logname2 ($secondpersonID)</a>");
 preparebookmark("<a href=\"relationship.php?altprimarypersonID=$primarypersonID&amp;secondpersonID=$secondpersonID\">" . uiTextSnippet('relcalc') . ": $namestr ($primarypersonID) =&gt;$namestr2 ($secondpersonID)</a>");
 
-$pedigree['url'] = "pedigree.php?";
+$pedigree['url'] = 'pedigree.php?';
 $pedigree['cellpad'] = 5;
 
-if ($pedigree['inclphotos'] && (trim($photopath) == "" || trim($photosext) == "")) {
+if ($pedigree['inclphotos'] && (trim($photopath) == '' || trim($photosext) == '')) {
   $pedigree['inclphotos'] = false;
 }
-if (file_exists("img/Chart.gif")) {
-  $chartlinkimg = getimagesize("img/Chart.gif");
+if (file_exists('img/Chart.gif')) {
+  $chartlinkimg = getimagesize('img/Chart.gif');
   $pedigree['chartlink'] = "<img src=\"img/Chart.gif\" $chartlinkimg[3] title=\"" . uiTextSnippet('popupnote2') . "\" alt=''>";
 } else {
-  $pedigree['chartlink'] = "<span><b>P</b></span>";
+  $pedigree['chartlink'] = '<span><b>P</b></span>';
 }
 
 $chartBoxHorizontalSpacing = 31;
 $chartBoxVerticalSpacing = 15;
 
 if ($pedigree['usepopups'] == 1) {
-  $pedigree['display'] = "standard";
+  $pedigree['display'] = 'standard';
 } elseif ($pedigree['usepopups'] == 0) {
-  $pedigree['display'] = "box";
+  $pedigree['display'] = 'box';
 } else {
-  $pedigree['display'] = "compact";
+  $pedigree['display'] = 'compact';
 }
 
 function drawCouple($couple, $topflag, $linedown) {
@@ -307,23 +307,23 @@ function drawCouple($couple, $topflag, $linedown) {
     if ($gens->firstone) {
       //short line below box of first couple
       if ($linedown) {
-        echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV + $pedigree['puboxheight'] - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($gens->offsetH + intval($pedigree['puboxwidth'] / 2)) . "px;height:" . (2 * $chartBoxVerticalSpacing) . "px;width:{$pedigree['linewidth']}px;\"></div>\n";
+        echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV + $pedigree['puboxheight'] - intval($pedigree['linewidth'] / 2)) . 'px;left:' . ($gens->offsetH + intval($pedigree['puboxwidth'] / 2)) . 'px;height:' . (2 * $chartBoxVerticalSpacing) . "px;width:{$pedigree['linewidth']}px;\"></div>\n";
       }
       $gens->firstone = 0;
     } else {
       //line coming up from top of other boxes
-      echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV - (2 * $chartBoxVerticalSpacing) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($gens->offsetH + intval($pedigree['puboxwidth'] / 2)) . "px;height:" . (2 * $chartBoxVerticalSpacing) . "px;width:{$pedigree['linewidth']}px;\"></div>\n";
+      echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV - (2 * $chartBoxVerticalSpacing) - intval($pedigree['linewidth'] / 2)) . 'px;left:' . ($gens->offsetH + intval($pedigree['puboxwidth'] / 2)) . 'px;height:' . (2 * $chartBoxVerticalSpacing) . "px;width:{$pedigree['linewidth']}px;\"></div>\n";
     }
   }
   $spouseID = $couple['spouse'];
   if ($spouseID) {
-    echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV + intval($pedigree['puboxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($gens->offsetH + $pedigree['puboxwidth']) . "px;height:{$pedigree['linewidth']}px;width:" . (intval($chartBoxHorizontalSpacing / 2) + 1) . "px;z-index:3;overflow:hidden;\"></div>\n";
+    echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV + intval($pedigree['puboxheight'] / 2) - intval($pedigree['linewidth'] / 2)) . 'px;left:' . ($gens->offsetH + $pedigree['puboxwidth']) . "px;height:{$pedigree['linewidth']}px;width:" . (intval($chartBoxHorizontalSpacing / 2) + 1) . "px;z-index:3;overflow:hidden;\"></div>\n";
     $gens->offsetH = $gens->offsetH + $pedigree['puboxwidth'] + intval($chartBoxHorizontalSpacing / 2);
     drawBox($spouseID, 1, $topflag);
   }
   if ($topflag) {
     //long connecting line
-    echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV + $pedigree['puboxheight'] + (2 * $chartBoxVerticalSpacing) - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($pedigree['leftindent'] + intval($pedigree['puboxwidth'] / 2)) . "px;height:{$pedigree['linewidth']}px;width:" . ((2 * $pedigree['puboxwidth']) + $chartBoxHorizontalSpacing + $pedigree['leftindent'] + 1) . "px;\"></div>\n";
+    echo "<div class=\"boxborder\" style=\"background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV + $pedigree['puboxheight'] + (2 * $chartBoxVerticalSpacing) - intval($pedigree['linewidth'] / 2)) . 'px;left:' . ($pedigree['leftindent'] + intval($pedigree['puboxwidth'] / 2)) . "px;height:{$pedigree['linewidth']}px;width:" . ((2 * $pedigree['puboxwidth']) + $chartBoxHorizontalSpacing + $pedigree['leftindent'] + 1) . "px;\"></div>\n";
     $gens->offsetV += (2 * $chartBoxVerticalSpacing);
   }
   echo "\n\n";
@@ -345,7 +345,7 @@ function drawBox($drawpersonID, $spouseflag, $topflag) {
 
   $namefontsztouse = $pedigree['boxnamesize'] - 2;
   $pedigree['begnamefont'] = "<span style=\"font-size:$namefontsztouse" . "pt\">";
-  $pedigree['endfont'] = "</span>";
+  $pedigree['endfont'] = '</span>';
 
   $result = getPersonData($drawpersonID);
   if ($result) {
@@ -368,15 +368,15 @@ function drawBox($drawpersonID, $spouseflag, $topflag) {
     //$gens->offsetV = 200;
     if ($row['famc'] && $pedigree['popupchartlinks']) {
       $iconactions = " onmouseover=\"if($('ic$slot')) $('ic$slot').style.display='';\" onmouseout=\"if($('ic$slot')) $('ic$slot').style.display='none';\"";
-      $iconlinks = "<div class=\"floverlr\" id=\"ic$slot\" style=\"left:" . ($pedigree['puboxwidth'] - 35) . "px;top:" . ($pedigree['puboxheight'] - 15) . "px;display:none;background-color:$boxcolortouse\">";
+      $iconlinks = "<div class=\"floverlr\" id=\"ic$slot\" style=\"left:" . ($pedigree['puboxwidth'] - 35) . 'px;top:' . ($pedigree['puboxheight'] - 15) . "px;display:none;background-color:$boxcolortouse\">";
       $iconlinks .= "<a href=\"{$pedigree['url']}personID=$drawpersonID&amp;display=standard&amp;generations=" . $pedigree['initpedgens'] . "\" title=\"" . uiTextSnippet('popupnote2') . "\">{$pedigree['chartlink']}</a>\n";
       $iconlinks .= "</div>\n";
       $slot++;
     } else {
-      $iconactions = $iconlinks = "";
+      $iconactions = $iconlinks = '';
     }
     $border = "{$pedigree['borderwidth']}px solid {$pedigree['bordercolor']}";
-    echo "<div class='chart-box chart-border-radius' style=\"background-color: $boxcolortouse; top:" . $gens->offsetV . "px; left:" . $gens->offsetH . "px; height: {$pedigree['puboxheight']}" . "px; width: {$pedigree['puboxwidth']}" . "px; border: {$border}; \"$iconactions>\n";
+    echo "<div class='chart-box chart-border-radius' style=\"background-color: $boxcolortouse; top:" . $gens->offsetV . 'px; left:' . $gens->offsetH . "px; height: {$pedigree['puboxheight']}" . "px; width: {$pedigree['puboxwidth']}" . "px; border: {$border}; \"$iconactions>\n";
     $tableheight = $pedigree['puboxheight'];
     echo "$iconlinks<table align='center'><tr>";
 
@@ -411,7 +411,7 @@ function doMultSpouse($prispouse1, $prispouse2, $otherspouse) {
   global $chartBoxVerticalSpacing;
   global $gens;
 
-  echo "<div style=\"position:absolute;background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV - intval($pedigree['linewidth'] / 2)) . "px;left:" . ($pedigree['leftindent'] + intval($pedigree['puboxwidth'] / 2)) . "px;height:{$pedigree['linewidth']}px;width:" . ((2 * $pedigree['puboxwidth']) + $chartBoxHorizontalSpacing + $pedigree['leftindent'] + 1) . "px;z-index:3;overflow:hidden;\"></div>\n";
+  echo "<div style=\"position:absolute;background-color:{$pedigree['bordercolor']}; top:" . ($gens->offsetV - intval($pedigree['linewidth'] / 2)) . 'px;left:' . ($pedigree['leftindent'] + intval($pedigree['puboxwidth'] / 2)) . "px;height:{$pedigree['linewidth']}px;width:" . ((2 * $pedigree['puboxwidth']) + $chartBoxHorizontalSpacing + $pedigree['leftindent'] + 1) . "px;z-index:3;overflow:hidden;\"></div>\n";
   $gens->offsetV -= $pedigree['puboxheight'];
 
   $couple['person'] = $prispouse1;
@@ -535,10 +535,10 @@ function checkOtherSpouse($parentrow, $parent, $spouse) {
       }
       tng_free_result($childresult);
 
-      $gens->multspouse2 = "";
+      $gens->multspouse2 = '';
     }
-    $gens->multparent1 = "";
-    $gens->multspouse1 = "";
+    $gens->multparent1 = '';
+    $gens->multspouse1 = '';
     tng_free_result($osresult);
   }
 }
@@ -577,7 +577,7 @@ function checkpersonup($nextcouple) {
   }
   $gensup = $gens->upcount;
 
-  $familyresult = getChildFamily($checkpersonID, "ordernum");
+  $familyresult = getChildFamily($checkpersonID, 'ordernum');
   while ($familyrow = tng_fetch_assoc($familyresult)) {
     $parentsresult = getFamilyMinimal($familyrow['familyID']);
 
@@ -591,7 +591,7 @@ function checkpersonup($nextcouple) {
         $couple['spouse'] = $parentrow['wife'];
       } else {
         $couple['person'] = $parentrow['wife'];
-        $couple['spouse'] = "";
+        $couple['spouse'] = '';
       }
       array_push($gens->downarray, $couple);
       //we're going down again, so we're assuming cousins or siblings
@@ -613,10 +613,10 @@ function checkpersonup($nextcouple) {
       //if found, then draw original parents on left, other parents to right with line connecting the common spouse
     }
     if ($parentrow['husband'] && ($gensup < $maxupgen)) {
-      array_push($gens->uplist[$gensup], ["person" => $parentrow['husband'], "spouse" => $parentrow['wife'], "childindex" => $gens->upptr]);
+      array_push($gens->uplist[$gensup], ['person' => $parentrow['husband'], 'spouse' => $parentrow['wife'], 'childindex' => $gens->upptr]);
     }
     if ($parentrow['wife'] && ($gensup < $maxupgen)) {
-      array_push($gens->uplist[$gensup], ["person" => $parentrow['wife'], "spouse" => $parentrow['husband'], "childindex" => $gens->upptr]);
+      array_push($gens->uplist[$gensup], ['person' => $parentrow['wife'], 'spouse' => $parentrow['husband'], 'childindex' => $gens->upptr]);
     }
 
     tng_free_result($parentsresult);
@@ -678,7 +678,7 @@ function checkpersondown($checkpersonID) {
           $self = 'wife';
           $spouseorder = 'wifeorder';
         } else {
-          $spouseorder = "";
+          $spouseorder = '';
         }
       }
       if ($spouseorder) {
@@ -736,7 +736,7 @@ function checkpersondown($checkpersonID) {
     //echo "got match 2<br>\n";
     $gens->match = 1;
     $couple['person'] = $checkpersonID;
-    $couple['spouse'] = "";
+    $couple['spouse'] = '';
     array_push($gens->downarray, $couple);
     finishRelationship($couple);
     array_pop($gens->downarray);
@@ -764,7 +764,7 @@ function swapPeople() {
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('relcalc'));
 ?>
 <!DOCTYPE html>
@@ -778,37 +778,37 @@ echo "<body id='public'>\n";
     $photostr = showSmallPhoto($primarypersonID, $namestr, $rights['both'], 0, false, $row['sex']);
     echo tng_DrawHeading($photostr, $namestr, getYears($row));
 
-    $innermenu = uiTextSnippet('rels') . ": &nbsp;";
+    $innermenu = uiTextSnippet('rels') . ': &nbsp;';
     $innermenu .= "<select name=\"maxrels\" class=\"small\">\n";
     for ($i = 1; $i <= $pedigree['maxrels']; $i++) {
       $innermenu .= "<option value=\"$i\"";
       if ($i == $maxrels) {
-        $innermenu .= " selected";
+        $innermenu .= ' selected';
       }
       $innermenu .= ">$i</option>\n";
     }
     $innermenu .= "</select>&nbsp;&nbsp;&nbsp;\n";
 
-    $innermenu .= uiTextSnippet('dospouses2') . ": &nbsp;";
+    $innermenu .= uiTextSnippet('dospouses2') . ': &nbsp;';
     $innermenu .= "<select name=\"disallowspouses\" class=\"small\">\n";
-    $innermenu .= "<option value=\"0\"";
+    $innermenu .= "<option value='0'";
     if (!$disallowspouses) {
-      $innermenu .= " selected";
+      $innermenu .= ' selected';
     }
-    $innermenu .= ">" . uiTextSnippet('yes') . "</option>\n";
+    $innermenu .= '>' . uiTextSnippet('yes') . "</option>\n";
     $innermenu .= "<option value='1'";
     if ($disallowspouses) {
-      $innermenu .= " selected";
+      $innermenu .= ' selected';
     }
-    $innermenu .= ">" . uiTextSnippet('no') . "</option>\n";
+    $innermenu .= '>' . uiTextSnippet('no') . "</option>\n";
     $innermenu .= "</select>&nbsp;&nbsp;&nbsp;\n";
 
-    $innermenu .= uiTextSnippet('generations') . ": &nbsp;";
+    $innermenu .= uiTextSnippet('generations') . ': &nbsp;';
     $innermenu .= "<select name='generations' class='small'>\n";
     for ($i = 1; $i <= $pedigree['maxupgen']; $i++) {
       $innermenu .= "<option value='$i'";
       if ($i == $generations) {
-        $innermenu .= " selected";
+        $innermenu .= ' selected';
       }
       $innermenu .= ">$i</option>\n";
     }
@@ -816,8 +816,8 @@ echo "<body id='public'>\n";
     $innermenu .= "<a class='navigation-item' href='#' onclick=\"document.form1.submit();\">" . uiTextSnippet('refresh') . "</a>\n";
     $innermenu .= "<a class='navigation-item' href='relateform.php?primaryID=$primarypersonID'>" . uiTextSnippet('findanother') . "</a>\n";
 
-    beginFormElement("relationship2", "get", "form1", "form1");
-    echo buildPersonMenu("relate", $primarypersonID);
+    beginFormElement('relationship2', 'get', 'form1', 'form1');
+    echo buildPersonMenu('relate', $primarypersonID);
     echo "<div class='pub-innermenu small'>\n";
       echo $innermenu;
     echo "</div>\n";
@@ -832,7 +832,7 @@ echo "<body id='public'>\n";
     if ($error) {
       echo "<p>$error " . uiTextSnippet('notvalid') . "</p>\n";
     } elseif ($primarypersonID == $secondpersonID) {
-      echo "<p>" . uiTextSnippet('sameperson') . "</p>\n";
+      echo '<p>' . uiTextSnippet('sameperson') . "</p>\n";
     } else {
       $gens = new Relationship();
 
@@ -842,7 +842,7 @@ echo "<body id='public'>\n";
 
       checkpersondown($primarypersonID);
       $couple['person'] = $primarypersonID;
-      $couple['spouse'] = "";
+      $couple['spouse'] = '';
       $couple['childindex'] = 0;
       $gens->uplist[0] = [];
       array_push($gens->uplist[0], $couple); //exp
@@ -860,7 +860,7 @@ echo "<body id='public'>\n";
 
         checkpersondown($secondpersonID);
         $couple['person'] = $secondpersonID;
-        $couple['spouse'] = "";
+        $couple['spouse'] = '';
         $couple['childindex'] = 0;
         $gens->uplist[0] = [];
         array_push($gens->uplist[0], $couple);
@@ -869,14 +869,14 @@ echo "<body id='public'>\n";
       }
 
       if (!$totalRelationships) {
-        $newstr = preg_replace("/xxx/", $generations, uiTextSnippet('notrelated'));
+        $newstr = preg_replace('/xxx/', $generations, uiTextSnippet('notrelated'));
         echo "<p>$newstr</p>\n";
       }
     }
     ?>
     <?php echo $publicFooterSection->build(); ?>
   <?php
-  echo "</section> <!-- .container -->";
+  echo '</section> <!-- .container -->';
   echo scriptsManager::buildScriptElements($flags, 'public');
   ?>
   <script>

@@ -8,7 +8,7 @@ require 'version.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
@@ -18,7 +18,7 @@ $row = tng_fetch_assoc($result);
 $row['description'] = preg_replace('/\"/', '&#34;', $row['description']);
 tng_free_result($result);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifytree'));
 ?>
 <!DOCTYPE html>
@@ -29,10 +29,10 @@ $headSection->setTitle(uiTextSnippet('modifytree'));
     <?php
     echo $adminHeaderSection->build('branches-modifybranch', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "branchesBrowse.php", uiTextSnippet('browse'), "findbranch"]);
-    $navList->appendItem([$allowAdd, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
-    //    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
-    echo $navList->build("edit");
+    $navList->appendItem([true, 'branchesBrowse.php', uiTextSnippet('browse'), 'findbranch']);
+    $navList->appendItem([$allowAdd, 'branchesAdd.php', uiTextSnippet('add'), 'addbranch']);
+    //    $navList->appendItem([$allowEdit, '#', uiTextSnippet('edit'), 'edit']);
+    echo $navList->build('edit');
     ?>
     <form id='form1' name='form1' action='branchesEditFormAction.php' method='post' onSubmit="return validateForm();">
       <table class='table table-sm'>
@@ -86,11 +86,11 @@ $headSection->setTitle(uiTextSnippet('modifytree'));
               &nbsp;&nbsp; <?php echo uiTextSnippet('descofanc'); ?>:
               <select name="dagens" id="dagens">
                 <?php
-                $dagens = $row['dagens'] != "" ? $row['dagens'] : 1;
+                $dagens = $row['dagens'] != '' ? $row['dagens'] : 1;
                 for ($i = 0; $i < 6; $i++) {
                   echo "<option value=\"$i\"";
                   if ($i == $dagens) {
-                    echo " selected";
+                    echo ' selected';
                   }
                   echo ">$i</option>";
                 }
@@ -107,7 +107,7 @@ $headSection->setTitle(uiTextSnippet('modifytree'));
             <div id='numgens5'>
               <input name='dgens' type='text' size='3' maxlength='3' value="<?php echo $row['dgens'] ? $row['dgens'] : 0; ?>"/>
               &nbsp;&nbsp;
-              <input id='dospouses' name='dospouses' type='checkbox'<?php if ($row['inclspouses']) {echo " checked";} ?> value='1'/> <?php echo uiTextSnippet('inclspouses'); ?>
+              <input id='dospouses' name='dospouses' type='checkbox'<?php if ($row['inclspouses']) {echo ' checked';} ?> value='1'/> <?php echo uiTextSnippet('inclspouses'); ?>
             </div>
           </td>
         </tr>
@@ -176,7 +176,7 @@ function addLabels() {
         agens: form1.agens.value,
         dagens: $('#dagens').val(),
         dgens: form1.dgens.value,
-        dospouses: $('#dospouses').attr('checked') ? true : "",
+        dospouses: $('#dospouses').attr('checked') ? true : '',
         branch: branch
     };
     $.ajax({

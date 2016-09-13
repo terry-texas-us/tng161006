@@ -22,7 +22,7 @@ function killBlockedAddress($address)
     foreach ($blockedAddresses as $blockedAddress) {
       if ($blockedAddress) {
         if (strstr($address, trim($blockedAddress))) {
-          die("sorry");
+          die('sorry');
         }
       }
     }
@@ -39,7 +39,7 @@ function killBlockedMessageContent($comments)
     foreach ($snippets as $snippet) {
       if ($snippet) {
         if (strstr($comments, trim($snippet))) {
-          die("sorry");
+          die('sorry');
         }
       }
     }
@@ -52,8 +52,8 @@ function echoResponseMessage($message, $sowner, $ssendemail)
     $newmessage = uiTextSnippet($message);
     if ($message == 'mailsent') {
       $newmessage = "<div class='alert alert-success' role='alert'>$newmessage</div>";
-    } else if ($message == "mailnotsent") {
-      $newmessage = "<div class='alert alert-danger' role='alert'>" . sprintf($newmessage, $sowner, $ssendemail) . "</div>";
+    } else if ($message == 'mailnotsent') {
+      $newmessage = "<div class='alert alert-danger' role='alert'>" . sprintf($newmessage, $sowner, $ssendemail) . '</div>';
     }
     echo "$newmessage\n";
   }

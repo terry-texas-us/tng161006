@@ -1,11 +1,11 @@
 <?php
 function chkgd2() {
-  $testGD = get_extension_funcs("gd"); // Grab function list
+  $testGD = get_extension_funcs('gd'); // Grab function list
   if (!$testGD) {
-    echo "GD not installed.";
+    echo 'GD not installed.';
     exit;
   }
-  if (in_array("imagegd2", $testGD)) {
+  if (in_array('imagegd2', $testGD)) {
     return true;
   } else {
     return false;
@@ -15,7 +15,7 @@ function chkgd2() {
 function image_createThumb($src, $dest, $maxWidth, $maxHeight, $quality) {
   if (file_exists($src) && isset($dest)) {
     $destInfo = pathInfo($dest);
-    if ($session_charset == "UTF-8") {
+    if ($session_charset == 'UTF-8') {
       $dest = utf8_decode($dest);
     }
     $srcSize = getimagesize($src);
@@ -42,7 +42,7 @@ function image_createThumb($src, $dest, $maxWidth, $maxHeight, $quality) {
       $destSize[1] = $maxWidth / $srcRatio;
     }
 
-    if (strtoupper($destInfo['extension']) == "GIF") {
+    if (strtoupper($destInfo['extension']) == 'GIF') {
       $dest = substr_replace($dest, 'jpg', -3);
     }
 

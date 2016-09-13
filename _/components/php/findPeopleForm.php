@@ -7,25 +7,25 @@
         <div class='input-group col-md-6'>
           <input class="form-control" id='searchstring' name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>">
           <span class='input-group-addon'>
-            <input name='exactmatch' type='checkbox' value='yes' title='<?php echo uiTextSnippet('exactmatch'); ?>' <?php if ($exactmatch == "yes") {echo "checked";} ?>>
+            <input name='exactmatch' type='checkbox' value='yes' title='<?php echo uiTextSnippet('exactmatch'); ?>' <?php if ($exactmatch == 'yes') {echo 'checked';} ?>>
           </span>
         </div>
       </div>
       <div class='row form-group'>
         <label class='form-check-inline'>
-          <input class='form-check-input' name='living' type='checkbox' value='yes'<?php if ($living == "yes") {echo " checked";} ?>>
+          <input class='form-check-input' name='living' type='checkbox' value='yes'<?php if ($living == 'yes') {echo ' checked';} ?>>
           <?php echo uiTextSnippet('livingonly'); ?>
         </label>
         <label class='form-check-inline'>
-          <input class='form-check-input' name='nokids' type='checkbox' value='yes'<?php if ($nokids == "yes") {echo " checked";} ?>>
+          <input class='form-check-input' name='nokids' type='checkbox' value='yes'<?php if ($nokids == 'yes') {echo ' checked';} ?>>
           <?php echo uiTextSnippet('nokids'); ?>
         </label>
         <label class='form-check-inline'>
-          <input class='form-check-input' name='noparents' type='checkbox' value='yes'<?php if ($noparents == "yes") {echo " checked";} ?>>
+          <input class='form-check-input' name='noparents' type='checkbox' value='yes'<?php if ($noparents == 'yes') {echo ' checked';} ?>>
           <?php echo uiTextSnippet('noparents'); ?>
         </label>
         <label class='form-check-inline'>
-          <input class='form-check-input' name='nospouse' type='checkbox' value='yes'<?php if ($nospouse == "yes") {echo " checked";} ?>>
+          <input class='form-check-input' name='nospouse' type='checkbox' value='yes'<?php if ($nospouse == 'yes') {echo ' checked';} ?>>
           <?php echo uiTextSnippet('nospouse'); ?>
         </label>
       </div>

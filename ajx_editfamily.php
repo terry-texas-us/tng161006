@@ -2,7 +2,7 @@
 require 'begin.php';
 require 'adminlib.php';
 if (!$familyID) {
-  die("no args");
+  die('no args');
 }
 require 'checklogin.php';
 
@@ -10,7 +10,7 @@ initMediaTypes();
 
 function getBirth($row) {
 
-  $birthdate = "";
+  $birthdate = '';
   if ($row['birthdate']) {
     $birthdate = uiTextSnippet('birthabbr') . ' ' . displayDate($row['birthdate']);
   } else {
@@ -29,14 +29,14 @@ $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate 
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
-$row['marrplace'] = preg_replace("/\"/", "&#34;", $row['marrplace']);
-$row['sealplace'] = preg_replace("/\"/", "&#34;", $row['sealplace']);
-$row['divplace'] = preg_replace("/\"/", "&#34;", $row['divplace']);
-$row['notes'] = preg_replace("/\"/", "&#34;", $row['notes']);
+$row['marrplace'] = preg_replace('/\"/', '&#34;', $row['marrplace']);
+$row['sealplace'] = preg_replace('/\"/', '&#34;', $row['sealplace']);
+$row['divplace'] = preg_replace('/\"/', '&#34;', $row['divplace']);
+$row['notes'] = preg_replace('/\"/', '&#34;', $row['notes']);
 
 if ((!$allowEdit && (!$allowAdd || !$added)) || !checkbranch($row['branch'])) {
   $message = uiTextSnippet('norights');
-  header("Location: ajx_login.php?message=" . urlencode($message));
+  header('Location: ajx_login.php?message=' . urlencode($message));
   exit;
 }
 $editconflict = determineConflict($row, $families_table);
@@ -53,65 +53,65 @@ $notelinks = tng_query($query);
 $gotnotes = [];
 while ($note = tng_fetch_assoc($notelinks)) {
   if (!$note['eventID']) {
-    $note['eventID'] = "general";
+    $note['eventID'] = 'general';
   }
-  $gotnotes[$note['eventID']] = "*";
+  $gotnotes[$note['eventID']] = '*';
 }
 $citquery = "SELECT DISTINCT eventID FROM $citations_table WHERE persfamID = '$familyID'";
 $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
 $gotcites = [];
 while ($cite = tng_fetch_assoc($citresult)) {
   if (!$cite['eventID']) {
-    $cite['eventID'] = "general";
+    $cite['eventID'] = 'general';
   }
-  $gotcites[$cite['eventID']] = "*";
+  $gotcites[$cite['eventID']] = '*';
 }
 $assocquery = "SELECT count(assocID) AS acount FROM $assoc_table WHERE personID = '$familyID'";
 $assocresult = tng_query($assocquery) or die(uiTextSnippet('cannotexecutequery') . ": $assocquery");
 $assocrow = tng_fetch_assoc($assocresult);
-$gotassoc = $assocrow['acount'] ? "*" : "";
+$gotassoc = $assocrow['acount'] ? '*' : '';
 tng_free_result($assocresult);
 
 $query = "SELECT parenttag FROM $events_table WHERE persfamID = '$familyID'";
 $morelinks = tng_query($query);
 $gotmore = [];
 while ($more = tng_fetch_assoc($morelinks)) {
-  $gotmore[$more['parenttag']] = "*";
+  $gotmore[$more['parenttag']] = '*';
 }
 $query = "SELECT $people_table.personID AS pID, firstname, lastname, lnprefix, prefix, suffix, nameorder, birthdate, altbirthdate, living, private, branch FROM $people_table, $children_table WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = '$familyID' ORDER BY ordernum";
 $children = tng_query($query);
 
 $kidcount = tng_num_rows($children);
 
-$helplang = findhelp("families_help.php");
+$helplang = findhelp('families_help.php');
 
 $photo = showSmallPhoto($familyID, $namestr, 1, 0, true);
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 
 require_once 'eventlib.php';
 ?>
 <form id='famform1' name='famform1' action='' method='post' onsubmit="return updateFamily(this, <?php echo $slot; ?>, 'familiesEditFormAction.php');">
   <header class='modal-header'>
-    <div id='thumbholder' style="margin-right: 5px; <?php if (!$photo) {echo "display: none";} ?>">
+    <div id='thumbholder' style="margin-right: 5px; <?php if (!$photo) {echo 'display: none';} ?>">
       <?php echo $photo; ?>
     </div>
     <h4><?php echo $namestr; ?></h4>
     <div class='smallest'>
       <?php
       if ($editconflict) {
-        echo "<br><p>" . uiTextSnippet('editconflict') . "</p>";
+        echo '<br><p>' . uiTextSnippet('editconflict') . '</p>';
       } else {
-        $iconColor = $gotassoc ? "icon-info" : "icon-muted";
+        $iconColor = $gotassoc ? 'icon-info' : 'icon-muted';
         echo "<a id='family-associations' href='#' data-family-id='$familyID' title='" . uiTextSnippet('associations') . "'>\n";
         echo "<img class='icon-md icon-associations $iconColor' data-src='svg/connections.svg'>\n";
         echo "</a>\n";
 
-        $iconColor = $gotnotes['general'] ? "icon-info" : "icon-muted";
+        $iconColor = $gotnotes['general'] ? 'icon-info' : 'icon-muted';
         echo "<a id='family-notes' href='#' data-family-id='$familyID' title='" . uiTextSnippet('notes') . "'>\n";
         echo "<img class='icon-sm icon-right icon-notes $iconColor' data-src='svg/documents.svg'>\n";
         echo "</a>\n";
         
-        $iconColor = $gotcites['general'] ? "icon-info" : "icon-muted";
+        $iconColor = $gotcites['general'] ? 'icon-info' : 'icon-muted';
         echo "<a id='family-citations' href='#' data-family-id='$familyID' title='" . uiTextSnippet('citations') . "'>\n";
         echo "<img class='icon-sm icon-right icon-citations $iconColor' data-src='svg/archive.svg'>\n";
         echo "</a>\n";
@@ -126,7 +126,7 @@ require_once 'eventlib.php';
       <?php if (!$editconflict) { ?>
         <tr>
           <td>
-            <?php echo displayToggle("plus0", 1, "spouses", uiTextSnippet('spouses'), ""); ?>
+            <?php echo displayToggle('plus0', 1, 'spouses', uiTextSnippet('spouses'), ''); ?>
 
             <div id="spouses">
               <table class='table table-sm'>
@@ -141,7 +141,7 @@ require_once 'eventlib.php';
                   $hrights = determineLivingPrivateRights($spouserow);
                   $spouserow['allow_living'] = $hrights['living'];
                   $spouserow['allow_private'] = $hrights['private'];
-                  $husbstr = getName($spouserow) . getBirth($spouserow) . " - " . $row['husband'];
+                  $husbstr = getName($spouserow) . getBirth($spouserow) . ' - ' . $row['husband'];
                 }
                 if (!isset($husbstr)) {
                   $husbstr = uiTextSnippet('clickfind');
@@ -165,13 +165,13 @@ require_once 'eventlib.php';
                   $spouserow = tng_fetch_assoc($spouseresult);
                   tng_free_result($spouseresult);
                 } else {
-                  $spouserow = "";
+                  $spouserow = '';
                 }
                 if ($row['wife']) {
                   $wrights = determineLivingPrivateRights($spouserow);
                   $spouserow['allow_living'] = $wrights['living'];
                   $spouserow['allow_private'] = $wrights['private'];
-                  $wifestr = getName($spouserow) . getBirth($spouserow) . " - " . $row['wife'];
+                  $wifestr = getName($spouserow) . getBirth($spouserow) . ' - ' . $row['wife'];
                 }
                 if (!isset($wifestr)) {
                   $wifestr = uiTextSnippet('clickfind');
@@ -193,24 +193,24 @@ require_once 'eventlib.php';
               <table class='table table-sm'>
                 <tr>
                   <td>
-                    <input name='living' type='checkbox' value='1'<?php if ($row['living']) {echo " checked";} ?>> <?php echo uiTextSnippet('living'); ?>
+                    <input name='living' type='checkbox' value='1'<?php if ($row['living']) {echo ' checked';} ?>> <?php echo uiTextSnippet('living'); ?>
                     &nbsp;&nbsp;
                     <input name='private' type='checkbox' value='1'<?php if ($row['private']) {echo " checked=\"$checked\"";} ?>> <?php echo uiTextSnippet('private'); ?>
                   </td>
                   <td></td>
-                  <td><?php echo uiTextSnippet('branch') . ": "; ?>
+                  <td><?php echo uiTextSnippet('branch') . ': '; ?>
 
                     <?php
                     $query = "SELECT branch, description FROM $branches_table ORDER BY description";
                     $branchresult = tng_query($query);
-                    $branchlist = explode(",", $row['branch']);
+                    $branchlist = explode(',', $row['branch']);
 
                     $descriptions = [];
-                    $options = "";
+                    $options = '';
                     while ($branchrow = tng_fetch_assoc($branchresult)) {
                       $options .= "  <option value=\"{$branchrow['branch']}\"";
                       if (in_array($branchrow['branch'], $branchlist)) {
-                        $options .= " selected";
+                        $options .= ' selected';
                         $descriptions[] = $branchrow['description'];
                       }
                       $options .= ">{$branchrow['description']}</option>\n";
@@ -223,18 +223,18 @@ require_once 'eventlib.php';
                         $totbranches = 2;
                       }
                       $selectnum = $totbranches < 8 ? $totbranches : 8;
-                      $select = $totbranches >= 8 ? uiTextSnippet('scrollbranch') . "<br>" : "";
+                      $select = $totbranches >= 8 ? uiTextSnippet('scrollbranch') . '<br>' : '';
                       $select .= "<select id='branch' name=\"branch[]\" multiple size=\"$selectnum\" style=\"overflow:auto\">\n";
                       $select .= "  <option value=''";
-                      if ($row['branch'] == "") {
-                        $select .= " selected";
+                      if ($row['branch'] == '') {
+                        $select .= ' selected';
                       }
-                      $select .= ">" . uiTextSnippet('nobranch') . "</option>\n";
+                      $select .= '>' . uiTextSnippet('nobranch') . "</option>\n";
 
                       $select .= "$options</select>\n";
 
                       echo " &nbsp;<span>(<a id='show-branchedit' href='#'>\n";
-                      echo "<img src='img/ArrowDown.gif'>" . uiTextSnippet('edit') . "</a> )</span><br>";
+                      echo "<img src='img/ArrowDown.gif'>" . uiTextSnippet('edit') . '</a> )</span><br>';
                       ?>
                       <div id='branchedit' style='position: absolute; display: none;'>
                         <?php echo $select; ?>
@@ -253,7 +253,7 @@ require_once 'eventlib.php';
         </tr>
         <tr>
           <td>
-            <?php echo displayToggle("plus1", 1, "events", uiTextSnippet('events'), ""); ?>
+            <?php echo displayToggle('plus1', 1, 'events', uiTextSnippet('events'), ''); ?>
 
             <div id='events'>
               <p class='smallest'><?php echo uiTextSnippet('datenote'); ?></p>
@@ -295,7 +295,7 @@ require_once 'eventlib.php';
         </tr>
         <tr>
           <td>
-            <?php echo displayToggle("plus2", 1, "children", uiTextSnippet('children') . " (<span id=\"childcount\">$kidcount</span>)", ""); ?>
+            <?php echo displayToggle('plus2', 1, 'children', uiTextSnippet('children') . " (<span id=\"childcount\">$kidcount</span>)", ''); ?>
             <div id='children'>
               <table id="ordertbl">
                 <tr>
@@ -325,14 +325,14 @@ require_once 'eventlib.php';
                                 echo "<div class='small hide-right' id=\"unlinkc_{$childId}\">\n";
                                   echo "<a id='remove-child' href='#' data-child-id='{$childId}'>" . uiTextSnippet('remove') . "</a> &nbsp; | &nbsp;\n";
                                   echo "<a id='delete-child' href='#' data-child-id='{$childId}'>" . uiTextSnippet('delete') . "</a>\n";
-                                echo "</div>";
+                                echo '</div>';
                               }
                               if ($crights['both']) {
                                 if ($child['birthdate']) {
-                                  $birthstring = uiTextSnippet('birthabbr') . " " . displayDate($child['birthdate']);
+                                  $birthstring = uiTextSnippet('birthabbr') . ' ' . displayDate($child['birthdate']);
                                 } else {
                                   if ($child['altbirthdate']) {
-                                    $birthstring = uiTextSnippet('chrabbr') . " " . displayDate($child['altbirthdate']);
+                                    $birthstring = uiTextSnippet('chrabbr') . ' ' . displayDate($child['altbirthdate']);
                                   } else {
                                     $birthstring = uiTextSnippet('nobirthinfo');
                                   }
@@ -340,7 +340,7 @@ require_once 'eventlib.php';
                                 echo getName($child);
                                 echo " - {$childId}<br>$birthstring";
                               } else {
-                                echo uiTextSnippet('living') . " - " . $childId;
+                                echo uiTextSnippet('living') . ' - ' . $childId;
                               }
                             echo "</td>\n";
                           echo "</tr>\n";

@@ -8,7 +8,7 @@ require 'version.php';
 
 if (!$allowMediaEdit && (!$allowMediaAdd || !$added)) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 $tng_search_places = $_SESSION['tng_search_album'];
@@ -17,8 +17,8 @@ $query = "SELECT * FROM $albums_table WHERE albumID = \"$albumID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
-$row['description'] = preg_replace("/\"/", "&#34;", $row['description']);
-$row['keywords'] = preg_replace("/\"/", "&#34;", $row['keywords']);
+$row['description'] = preg_replace('/\"/', '&#34;', $row['description']);
+$row['keywords'] = preg_replace('/\"/', '&#34;', $row['keywords']);
 
 $query2 = "SELECT albumlinkID, thumbpath, $media_table.mediaID AS mediaID, usecollfolder, mediatypeID, notes, description, datetaken, placetaken, defphoto FROM ($media_table, $albumlinks_table)
     WHERE albumID = \"$albumID\" AND $media_table.mediaID = $albumlinks_table.mediaID order by ordernum, description";
@@ -39,7 +39,7 @@ $numlinks = tng_num_rows($result3);
 if (!$thumbmaxw) {
   $thumbmaxw = 50;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifyalbum'));
 ?>
 <!DOCTYPE html>
@@ -48,7 +48,7 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
 <body onload="startMediaSort()">
   <section class='container'>
     <?php
-    $photo = "";
+    $photo = '';
 
     $query = "SELECT alwayson, thumbpath, $media_table.mediaID AS mediaID, usecollfolder, mediatypeID, albumlinkID FROM ($media_table, $albumlinks_table)
       WHERE albumID = '$albumID' AND $media_table.mediaID = $albumlinks_table.mediaID AND defphoto = '1'";
@@ -71,17 +71,17 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
         $photohtouse = $thumbmaxh;
         $photowtouse = intval($thumbmaxh * $photoinfo[0] / $photoinfo[1]);
       }
-      $photo = "<img src=\"" . str_replace("%2F", "/", rawurlencode($photoref)) . "?" . time() . "\" alt='' width=\"$photowtouse\" height=\"$photohtouse\" style='margin-right: 10px; margin-bottom: 4px;'>";
+      $photo = "<img src=\"" . str_replace('%2F', '/', rawurlencode($photoref)) . '?' . time() . "\" alt='' width=\"$photowtouse\" height=\"$photohtouse\" style='margin-right: 10px; margin-bottom: 4px;'>";
     }
     ?>
     <?php
     echo $adminHeaderSection->build('albums-modifyalbum', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "albumsBrowse.php", uiTextSnippet('browse'), "findalbum"]);
-    $navList->appendItem([$allowAdd, "albumsAdd.php", uiTextSnippet('add'), "addalbum"]);
-    $navList->appendItem([$allowEdit, "albumsSort.php", uiTextSnippet('text_sort'), "sortalbums"]);
-    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
-    echo $navList->build("edit");
+    $navList->appendItem([true, 'albumsBrowse.php', uiTextSnippet('browse'), 'findalbum']);
+    $navList->appendItem([$allowAdd, 'albumsAdd.php', uiTextSnippet('add'), 'addalbum']);
+    $navList->appendItem([$allowEdit, 'albumsSort.php', uiTextSnippet('text_sort'), 'sortalbums']);
+    $navList->appendItem([$allowEdit, '#', uiTextSnippet('edit'), 'edit']);
+    echo $navList->build('edit');
     ?>
     <div class='small'>
       <a href='#' onClick="toggleAll('on');"><?php echo uiTextSnippet('expandall'); ?></a>
@@ -90,20 +90,20 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
 
     <form action="albumsEditFormAction.php" method='post' name='form1' id='form1' onSubmit="return validateForm();">
       <div>
-        <div id="thumbholder" style="float: left; <?php if (!$photo) {echo "display: none";} ?>">
+        <div id="thumbholder" style="float: left; <?php if (!$photo) {echo 'display: none';} ?>">
           <?php echo $photo; ?>
         </div>
-        <span><?php echo $row['albumname'] . ": </span><br>" . $row['description']; ?>
+        <span><?php echo $row['albumname'] . ': </span><br>' . $row['description']; ?>
       </div>
       <?php
       echo "<a class='small' id='removedefault' href='#' onclick=\"return removeDefault();\"";
       if (!$photo) {
         echo " style=\"visibility:hidden\"";
       }
-      echo ">" . uiTextSnippet('removedef') . "</a>\n";
+      echo '>' . uiTextSnippet('removedef') . "</a>\n";
       ?>
       <section id='album-info'>
-<!--        <?php echo displayToggle("plus0", 1, "details", uiTextSnippet('existingalbuminfo'), uiTextSnippet('infosubt')); ?>
+<!--        <?php echo displayToggle('plus0', 1, 'details', uiTextSnippet('existingalbuminfo'), uiTextSnippet('infosubt')); ?>
 
         <div id="details">-->
           <div class='row'>
@@ -127,13 +127,13 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
           <div class='row'>
             <div class='col-sm-2'><?php echo uiTextSnippet('active'); ?>:</div>
             <div class='col-sm-4'>
-              <input class='form-control-inline' name='active' type='radio' value='1'<?php if ($row['active']) {echo " checked";} ?>> <?php echo uiTextSnippet('yes'); ?>
-              <input class='form-control-inline' name='active' type='radio' value='0'<?php if (!$row['active']) {echo " checked";} ?>> <?php echo uiTextSnippet('no'); ?>
+              <input class='form-control-inline' name='active' type='radio' value='1'<?php if ($row['active']) {echo ' checked';} ?>> <?php echo uiTextSnippet('yes'); ?>
+              <input class='form-control-inline' name='active' type='radio' value='0'<?php if (!$row['active']) {echo ' checked';} ?>> <?php echo uiTextSnippet('no'); ?>
             </div>
             <div class='col-sm-6'>
               <div class='checkbox'>
               <label>
-                <input name='alwayson' type='checkbox' value='1'<?php if ($row['alwayson']) {echo " checked";} ?>> 
+                <input name='alwayson' type='checkbox' value='1'<?php if ($row['alwayson']) {echo ' checked';} ?>> 
                 <?php echo uiTextSnippet('alwayson'); ?>
               </label>
               </div>
@@ -146,12 +146,12 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
         
         <tr>
           <td>
-            <?php echo displayToggle("plus1", 1, "addmedia", uiTextSnippet('albmedia') . " (<span id=\"mediacount\">$numrows</span>)", uiTextSnippet('mediasubt')); ?>
+            <?php echo displayToggle('plus1', 1, 'addmedia', uiTextSnippet('albmedia') . " (<span id=\"mediacount\">$numrows</span>)", uiTextSnippet('mediasubt')); ?>
 
             <div id="addmedia">
               <p style="padding-top:12px">
                 <input type='button' value="<?php echo uiTextSnippet('addmedia'); ?>"
-                       onclick="return openAlbumMediaFind();"> <?php echo uiTextSnippet('selmedia') . " (<a href=\"admin_newmedia.php\" target='_blank'>" . uiTextSnippet('uploadfirst') . "</a>)"; ?>
+                       onclick="return openAlbumMediaFind();"> <?php echo uiTextSnippet('selmedia') . " (<a href=\"admin_newmedia.php\" target='_blank'>" . uiTextSnippet('uploadfirst') . '</a>)'; ?>
               </p>
 
               <p>&nbsp;<strong><?php echo uiTextSnippet('inclmedia'); ?>
@@ -192,25 +192,25 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
                   echo "<td style=\"width:" . ($thumbmaxw + 6) . "px;text-align:center;\">";
                   if ($lrow['thumbpath'] && file_exists("$rootpath$usefolder/" . $lrow['thumbpath'])) {
                     $size = getimagesize("$rootpath$usefolder/" . $lrow['thumbpath']);
-                    echo "<a href=\"admin_editmedia.php?mediaID={$lrow['mediaID']}\"><img src=\"$usefolder/" . str_replace("%2F", "/", rawurlencode($lrow['thumbpath'])) . "\" $size[3] alt=\"" . htmlentities($lrow['description'], ENT_QUOTES) . " \"></a>";
+                    echo "<a href=\"admin_editmedia.php?mediaID={$lrow['mediaID']}\"><img src=\"$usefolder/" . str_replace('%2F', '/', rawurlencode($lrow['thumbpath'])) . "\" $size[3] alt=\"" . htmlentities($lrow['description'], ENT_QUOTES) . " \"></a>";
                     $foundthumb = true;
                   } else {
-                    echo "&nbsp;";
+                    echo '&nbsp;';
                     $foundthumb = false;
                   }
                   echo "</td>\n";
-                  $checked = $lrow['defphoto'] ? " checked" : "";
-                  echo "<td><a href=\"admin_editmedia.php?mediaID={$lrow['mediaID']}\">{$lrow['description']}</a><br>" . strip_tags($truncated) . "<br>";
+                  $checked = $lrow['defphoto'] ? ' checked' : '';
+                  echo "<td><a href=\"admin_editmedia.php?mediaID={$lrow['mediaID']}\">{$lrow['description']}</a><br>" . strip_tags($truncated) . '<br>';
                   echo "<div id=\"del_{$lrow['albumlinkID']}\" class=\"small\" style=\"color:gray;visibility:hidden\">";
                   if ($foundthumb) {
                     echo "<input name='rthumbs' type='radio' value=\"r{$lrow['mediaID']}\"$checked onclick=\"makeDefault(this);\">" . uiTextSnippet('makedefault');
-                    echo " &nbsp;|&nbsp; ";
+                    echo ' &nbsp;|&nbsp; ';
                   }
-                  echo "<a href='#' onclick=\"return removeFromAlbum('{$lrow['mediaID']}','{$lrow['albumlinkID']}');\">" . uiTextSnippet('remove') . "</a>";
+                  echo "<a href='#' onclick=\"return removeFromAlbum('{$lrow['mediaID']}','{$lrow['albumlinkID']}');\">" . uiTextSnippet('remove') . '</a>';
                   echo "</div></td>\n";
                   echo "<td style=\"width:150px;\">{$lrow['datetaken']}&nbsp;</td>\n";
                   echo "<td style=\"width:100px;\">" . uiTextSnippet($lmediatypeID) . "&nbsp;</td>\n";
-                  echo "</tr></table>";
+                  echo '</tr></table>';
                   echo "</div>\n";
                   $count++;
                 }
@@ -230,7 +230,7 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
 
         <tr>
           <td>
-            <?php echo displayToggle("plus2", 1, "albumlinks", uiTextSnippet('albumlinks') . " (<span id=\"linkcount\">$numlinks</span>)", uiTextSnippet('linkssubt')); ?>
+            <?php echo displayToggle('plus2', 1, 'albumlinks', uiTextSnippet('albumlinks') . " (<span id=\"linkcount\">$numlinks</span>)", uiTextSnippet('linkssubt')); ?>
 
             <div id="albumlinks">
               <table style="padding-top:12px">
@@ -276,7 +276,7 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
                 <tr>
                   <th><?php echo uiTextSnippet('action'); ?></th>
                   <th><?php echo uiTextSnippet('linktype'); ?></th>
-                  <th><?php echo uiTextSnippet('name') . ", " . uiTextSnippet('id'); ?></th>
+                  <th><?php echo uiTextSnippet('name') . ', ' . uiTextSnippet('id'); ?></th>
                   <th><?php echo uiTextSnippet('event'); ?></th>
                 </tr>
                 <?php
@@ -286,11 +286,11 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
                     $oldlinks++;
                     $plink['allow_living'] = 1;
                     if ($plink['personID'] != null) {
-                      $type = "person";
-                      $id = " (" . $plink['personID'] . ")";
+                      $type = 'person';
+                      $id = ' (' . $plink['personID'] . ')';
                       $name = getName($plink);
                     } elseif ($plink['familyID'] != null) {
-                      $type = "family";
+                      $type = 'family';
                       $husb['firstname'] = $plink['hfirstname'];
                       $husb['lnprefix'] = $plink['hlnprefix'];
                       $husb['lastname'] = $plink['hlastname'];
@@ -309,29 +309,29 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
                       $wifename = getName($wife);
                       if ($wifename) {
                         if ($name) {
-                          $name .= ", ";
+                          $name .= ', ';
                         }
                         $name .= $wifename;
                       }
-                      $id = " (" . $plink['familyID'] . ")";
+                      $id = ' (' . $plink['familyID'] . ')';
                     } elseif ($plink['sourceID'] != null) {
-                      $type = "source";
-                      $id = " (" . $plink['sourceID'] . ")";
+                      $type = 'source';
+                      $id = ' (' . $plink['sourceID'] . ')';
                       $name = substr($plink['title'], 0, 25);
                     } elseif ($plink['repoID'] != null) {
-                      $type = "repository";
-                      $id = " (" . $plink['repoID'] . ")";
+                      $type = 'repository';
+                      $id = ' (' . $plink['repoID'] . ')';
                       $name = substr($plink['reponame'], 0, 25);
                     } else { //place
-                      $type = "place";
-                      $id = "";
+                      $type = 'place';
+                      $id = '';
                       $name = $plink['entityID'];
                     }
 
                     include 'eventmicro.php';
 
                     echo "<tr id=\"alink_{$plink['alinkID']}\"><td>\n";
-                    if ($type != "place") {
+                    if ($type != 'place') {
                       echo "<a href='#' onclick=\"return editMedia2EntityLink({$plink['alinkID']});\" title='" . uiTextSnippet('edit') . "'>\n";
                       echo "<img class='icon-sm' src='svg/new-message.svg'>\n";
                       echo "</a>\n";
@@ -340,7 +340,7 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
                     echo "<img class='icon-sm' src='svg/link.svg'>\n";
                     echo "</a>\n";
                     echo "</td>\n";
-                    echo "<td>" . uiTextSnippet($type) . "</td>\n";
+                    echo '<td>' . uiTextSnippet($type) . "</td>\n";
                     echo "<td>$name$id</td>\n";
                     echo "<td id=\"event_{$plink['alinkID']}\">$eventstr&nbsp;</td>\n";
                     echo "</tr>\n";
@@ -365,7 +365,7 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
           <td>
             <p>
               <?php
-              echo uiTextSnippet('onsave') . ":<br>";
+              echo uiTextSnippet('onsave') . ':<br>';
               echo "<input name='newscreen' type='radio' value='return'> " . uiTextSnippet('savereturn') . "<br>\n";
               if ($cw) {
                 echo "<input name='newscreen' type='radio' value='close' checked> " . uiTextSnippet('closewindow') . "\n";
@@ -392,7 +392,7 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
 <script>
   var tnglitbox;
   var album = "<?php echo $albumID; ?>";
-  var entity = "";
+  var entity = '';
   var type = "album";
   var thumbmaxw = parseInt("<?php echo $thumbmaxw; ?>");
   var remove_text = "<?php echo uiTextSnippet('remove'); ?>";

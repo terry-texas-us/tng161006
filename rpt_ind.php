@@ -9,7 +9,7 @@ define('FPDF_FONTPATH', $rootpath . $endrootpath . 'font/');
 require 'tngpdf.php';
 require 'rpt_utils.php';
 $pdf = new TNGPDF($orient, 'in', $pagesize);
-setcookie("tng_pagesize", $pagesize, time() + 31536000, "/");
+setcookie('tng_pagesize', $pagesize, time() + 31536000, '/');
 
 // define formatting defaults
 $lineheight = $pdf->GetFontSize($rptFont, $rptFontSize) + 0.1; // height of each row on the page
@@ -118,8 +118,8 @@ else {
   }
 
   //$y = $pdf->GetY();
-  $cite = reorderCitation($personID . "_", 0);
-  $cite2 = reorderCitation($personID . "_NAME", 0);
+  $cite = reorderCitation($personID . '_', 0);
+  $cite2 = reorderCitation($personID . '_NAME', 0);
   if ($cite2) {
     $cite .= $cite ? ", $cite2" : $cite2;
   }
@@ -141,11 +141,11 @@ else {
 
   // birth
   if ($rights['both']) {
-    $cite = reorderCitation($personID . "_BIRT", 0);
+    $cite = reorderCitation($personID . '_BIRT', 0);
     doubleLine(uiTextSnippet('born'), displayDate($row['birthdate']), uiTextSnippet('place'), $row['birthplace'], $cite);
 
     if (!$tngconfig['hidechr']) {
-      $cite = reorderCitation($personID . "_CHR", 0);
+      $cite = reorderCitation($personID . '_CHR', 0);
       doubleLine(uiTextSnippet('christened'), displayDate($row['altbirthdate']), uiTextSnippet('place'), $row['altbirthplace'], $cite);
     }
 
@@ -162,26 +162,26 @@ else {
       }
       $done = false;
       if ($custevent['eventdate'] || $custevent['eventplace']) {
-        $cite = reorderCitation($personID . "_" . $custevent['eventID'], 0);
+        $cite = reorderCitation($personID . '_' . $custevent['eventID'], 0);
         doubleLine($displayval, displayDate($custevent['eventdate']), uiTextSnippet('place'), $custevent['eventplace'], $cite);
         $done = true;
       }
       if ($custevent['info']) {
         if ($done) {
-          $cite = reorderCitation($personID . "_" . $custevent['eventID'], 0);
+          $cite = reorderCitation($personID . '_' . $custevent['eventID'], 0);
           $displayval = uiTextSnippet('cont');
         } else {
-          $cite = "";
+          $cite = '';
         }
-        singleLine($displayval, $custevent['info'], "", $cite);
+        singleLine($displayval, $custevent['info'], '', $cite);
       }
     }
     tng_free_result($custevents);
 
-    $cite = reorderCitation($personID . "_DEAT", 0);
+    $cite = reorderCitation($personID . '_DEAT', 0);
     doubleLine(uiTextSnippet('died'), displayDate($row['deathdate']), uiTextSnippet('place'), $row['deathplace'], $cite);
 
-    $cite = reorderCitation($personID . "_BURI", 0);
+    $cite = reorderCitation($personID . '_BURI', 0);
     $burialmsg = $row['burialtype'] ? uiTextSnippet('cremated') : uiTextSnippet('buried');
     doubleLine($burialmsg, displayDate($row['burialdate']), uiTextSnippet('place'), $row['burialplace'], $cite);
   } else {
@@ -195,13 +195,13 @@ else {
 
   if ($rights['lds']) {
     if ($rights['both']) {
-      $cite = reorderCitation($personID . "_BAPL", 0);
+      $cite = reorderCitation($personID . '_BAPL', 0);
       doubleLine(uiTextSnippet('baptizedlds'), displayDate($row['baptdate']), uiTextSnippet('place'), $row['baptplace'], $cite);
-      $cite = reorderCitation($personID . "_CONF", 0);
+      $cite = reorderCitation($personID . '_CONF', 0);
       doubleLine(uiTextSnippet('conflds'), displayDate($row['confdate']), uiTextSnippet('place'), $row['confplace'], $cite);
-      $cite = reorderCitation($personID . "_INIT", 0);
+      $cite = reorderCitation($personID . '_INIT', 0);
       doubleLine(uiTextSnippet('initlds'), displayDate($row['initdate']), uiTextSnippet('place'), $row['initplace'], $cite);
-      $cite = reorderCitation($personID . "_ENDL", 0);
+      $cite = reorderCitation($personID . '_ENDL', 0);
       doubleLine(uiTextSnippet('endowedlds'), displayDate($row['endldate']), uiTextSnippet('place'), $row['endlplace'], $cite);
     } else {
       doubleLine(uiTextSnippet('baptizedlds'), '', uiTextSnippet('place'), '');
@@ -235,8 +235,8 @@ else {
         if ($citesources && $frights['both']) {
           getCitations($fathrow['personID'], 0);
         }
-        $cite = reorderCitation($fathrow['personID'] . "_", 0);
-        $cite2 = reorderCitation($fathrow['personID'] . "_NAME", 0);
+        $cite = reorderCitation($fathrow['personID'] . '_', 0);
+        $cite2 = reorderCitation($fathrow['personID'] . '_NAME', 0);
         if ($cite2) {
           $cite .= $cite ? ", $cite2" : $cite2;
         }
@@ -260,8 +260,8 @@ else {
         if ($citesources && $mrights['both']) {
           getCitations($mothrow['personID'], 0);
         }
-        $cite = reorderCitation($mothrow['personID'] . "_", 0);
-        $cite2 = reorderCitation($mothrow['personID'] . "_NAME", 0);
+        $cite = reorderCitation($mothrow['personID'] . '_', 0);
+        $cite2 = reorderCitation($mothrow['personID'] . '_NAME', 0);
         if ($cite2) {
           $cite .= $cite ? ", $cite2" : $cite2;
         }
@@ -329,22 +329,22 @@ else {
       if ($citesources && $srights['both']) {
         getCitations($marriagerow[$spouse], 0);
       }
-      $cite = reorderCitation($marriagerow[$spouse] . "_", 0);
-      $cite2 = reorderCitation($marriagerow[$spouse] . "_NAME", 0);
+      $cite = reorderCitation($marriagerow[$spouse] . '_', 0);
+      $cite2 = reorderCitation($marriagerow[$spouse] . '_NAME', 0);
       if ($cite2) {
         $cite .= $cite ? ", $cite2" : $cite2;
       }
       singleLine(uiTextSnippet('spouse'), "$namestr $spousetext", '', $cite);
     }
     if ($mrights['both']) {
-      $cite = reorderCitation($marriagerow['familyID'] . "_MARR", 0);
+      $cite = reorderCitation($marriagerow['familyID'] . '_MARR', 0);
       doubleLine(uiTextSnippet('married'), displayDate($marriagerow['marrdate']), uiTextSnippet('place'), $marriagerow['marrplace'], $cite);
     } else {
       doubleLine(uiTextSnippet('married'), '', uiTextSnippet('place'), '');
     }
     if ($mrights['lds']) {
       if ($mrights['both']) {
-        $cite = reorderCitation($marriagerow['familyID'] . "_SLGS", 0);
+        $cite = reorderCitation($marriagerow['familyID'] . '_SLGS', 0);
         doubleLine(uiTextSnippet('sealedslds'), displayDate($marriagerow['sealdate']), uiTextSnippet('place'), $marriagerow['sealplace'], $cite);
       } else {
         doubleLine(uiTextSnippet('sealedslds'), '', uiTextSnippet('place'), '');
@@ -365,7 +365,7 @@ else {
         if ($citesources && $crights['both']) {
           getCitations($child['pID'], 0);
         }
-        $cite = reorderCitation($child['pID'] . "_NAME", 0);
+        $cite = reorderCitation($child['pID'] . '_NAME', 0);
         childLine($childcnt, "$namestr $childtext", $cite);
         $childcnt++;
       }
@@ -396,12 +396,10 @@ else {
       }
       $notes .= $note['text'];
     }
-    $notes = preg_replace("/&nbsp;/", ' ', $notes);
-    $notes = preg_replace("/<li>/", '* ', $notes);
-    $notes = preg_replace("/<br\s*\/?>/", "", $notes);
-    //if(!isset($allowable_tags))
-    //$allowable_tags = "<a>";
-    $allowable_tags = "";
+    $notes = preg_replace('/&nbsp;/', ' ', $notes);
+    $notes = preg_replace('/<li>/', '* ', $notes);
+    $notes = preg_replace('/<br\s*\/?>/', '', $notes);
+    $allowable_tags = '';
     $notes = strip_tags($notes, $allowable_tags);
 
     $pdf->Ln(0.05);
@@ -445,7 +443,7 @@ function childLine($childnum, $data, $cite = '') {
   $pdf->Cell($labelwidth, $lineheight, "$childnum", 1, 0, 'R');
   if ($childnum == 1) {
     $pdf->SetX($lftmrg);
-    $pdf->Cell($labelwidth, $lineheight, uiTextSnippet('children') . ":", 0, 0, 'L');
+    $pdf->Cell($labelwidth, $lineheight, uiTextSnippet('children') . ':', 0, 0, 'L');
   }
   $pdf->SetFont($rptFont, '', $rptFontSize);
   $pdf->Cell($paperdim['w'] - $pdf->GetX() - $rtmrg, $lineheight, $data, 1, 0, 'L');
@@ -463,7 +461,7 @@ function singleLine($label, $data, $datastyle = '', $cite = '') {
   global $labelwidth;
 
   if ($label) {
-    $label .= ":";
+    $label .= ':';
   }
 
   $spaceWidth = $paperdim['w'] - $lftmrg - $rtmrg - $labelwidth;
@@ -483,7 +481,7 @@ function singleLine($label, $data, $datastyle = '', $cite = '') {
     $diff = $lowerY - $topY;
     $pdf->SetY($topY);
     if ($diff > 0) {
-      $pdf->Cell($labelwidth, $diff, "", 1, 0, 'L');
+      $pdf->Cell($labelwidth, $diff, '', 1, 0, 'L');
     }
     $pdf->SetY($lowerY);
     $lineWidth = $spaceWidth - .2;    //for citations
@@ -519,7 +517,7 @@ function nameLine($label1, $data1, $label2, $data2, $cite = '') {
   $label2width = $pdf->GetStringWidth($label2 . ':  ');
 
   $pdf->SetFont($lblFont, 'B', $lblFontSize);
-  $pdf->Cell($labelwidth, $lineheight, $label1 . ":", 1, 0, 'L');
+  $pdf->Cell($labelwidth, $lineheight, $label1 . ':', 1, 0, 'L');
   $pdf->SetFont($rptFont, 'B', $rptFontSize);
   $pdf->CellFit($paperdim['w'] - $rtmrg - $lftmrg - $genderwidth - $label2width - $labelwidth, $lineheight, $data1, 1, 0, 'L', 0, '', 1, 0);
   if ($cite != '') {
@@ -530,7 +528,7 @@ function nameLine($label1, $data1, $label2, $data2, $cite = '') {
     $pdf->SetX($x);
   }
   $pdf->SetFont($lblFont, 'B', $lblFontSize);
-  $pdf->Cell($label2width, $lineheight, $label2 . ":", 1, 0, 'L');
+  $pdf->Cell($label2width, $lineheight, $label2 . ':', 1, 0, 'L');
   $pdf->SetFont($rptFont, '', $rptFontSize);
   $pdf->CellFit($genderwidth, $lineheight, $data2, 1, 0, 'L', 0, '', 1, 0);
   $pdf->Ln($lineheight);
@@ -546,11 +544,11 @@ function doubleLine($label1, $data1, $label2, $data2, $cite = '') {
   $placewidth = $pdf->GetStringWidth($label2 . ':  ');
 
   $pdf->SetFont($lblFont, 'B', $lblFontSize);
-  $pdf->CellFit($labelwidth, $lineheight, $label1 . ":", 1, 0, 'L', 0, '', 1, 0);
+  $pdf->CellFit($labelwidth, $lineheight, $label1 . ':', 1, 0, 'L', 0, '', 1, 0);
   $pdf->SetFont($rptFont, '', $rptFontSize);
   $pdf->CellFit($datewidth, $lineheight, $data1, 1, 0, 'L', 0, '', 1, 0);
   $pdf->SetFont($lblFont, 'B', $lblFontSize);
-  $pdf->Cell($placewidth, $lineheight, $label2 . ":", 1, 0, 'L');
+  $pdf->Cell($placewidth, $lineheight, $label2 . ':', 1, 0, 'L');
   $pdf->SetFont($rptFont, '', $rptFontSize);
   $pdf->CellFit($paperdim['w'] - $pdf->GetX() - $rtmrg, $lineheight, $data2, 1, 0, 'L', 0, '', 1, 0);
   if ($cite != '') {

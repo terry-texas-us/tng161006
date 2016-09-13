@@ -29,10 +29,10 @@ $('#edit-husband').on('click', function () {
 
 $('#remove-husband').on('click', function () {
     'use strict';
-    var spouse = document.form1.husband;
-    var spousedisplay = document.form1.husbnameplusid;
-    spouse.value = "";
-    spousedisplay.value = "";
+    var spouse = document.form1.husband,
+        spousedisplay = document.form1.husbnameplusid;
+    spouse.value = '';
+    spousedisplay.value = '';
 });
 
 $('#find-wife').on('click', function () {
@@ -62,10 +62,10 @@ $('#edit-wife').on('click', function () {
 
 $('#remove-wife').on('click', function () {
     'use strict';
-    var spouse = document.form1.wife;
-    var spousedisplay = document.form1.wifenameplusid;
-    spouse.value = "";
-    spousedisplay.value = "";
+    var spouse = document.form1.wife,
+        spousedisplay = document.form1.wifenameplusid;
+    spouse.value = '';
+    spousedisplay.value = '';
 });
 
 $('#childrenlist .sortrow').on('mouseover', function () {

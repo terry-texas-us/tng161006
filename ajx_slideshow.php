@@ -7,7 +7,7 @@ require 'functions.php';
 require 'checklogin.php';
 require 'showmedialib.php';
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <div id='slideshell'>
   <header class='modal-header'></header>
@@ -21,7 +21,7 @@ header("Content-type:text/html; charset=" . $session_charset);
         require 'showmediaxmllib.php';
 
         echo "<p class='topmargin'>$pagenav</p>";
-        echo "<h4>" . truncateIt($description, 100) . "</h4>\n";
+        echo '<h4>' . truncateIt($description, 100) . "</h4>\n";
 
         if ($noneliving || $imgrow['alwayson']) {
           showMediaSource($imgrow, true);

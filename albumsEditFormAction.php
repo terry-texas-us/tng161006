@@ -7,7 +7,7 @@ require 'checklogin.php';
 
 if (!$allowMediaEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 require 'adminlog.php';
@@ -24,10 +24,10 @@ $result = tng_query($query);
 
 adminwritelog(uiTextSnippet('modifyalbum') . ": $albumID");
 
-if ($newscreen == "return") {
+if ($newscreen == 'return') {
   header("Location: albumsEdit.php?albumID=$albumID");
 } else {
-  if ($newscreen == "close") {
+  if ($newscreen == 'close') {
   ?>
     <!DOCTYPE html>
     <html>
@@ -40,6 +40,6 @@ if ($newscreen == "return") {
   <?php
   } else {
     $message = uiTextSnippet('changestoalbum') . " $albumID " . uiTextSnippet('succsaved') . '.';
-    header("Location: albumsBrowse.php?message=" . urlencode($message));
+    header('Location: albumsBrowse.php?message=' . urlencode($message));
   }
 }

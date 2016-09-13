@@ -8,10 +8,10 @@ require 'version.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('addnewtlevent'));
 ?>
 <!DOCTYPE html>
@@ -22,9 +22,9 @@ $headSection->setTitle(uiTextSnippet('addnewtlevent'));
     <?php
     echo $adminHeaderSection->build('tlevents-addnewtlevent', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "timelineeventsBrowse.php", uiTextSnippet('browse'), "findtimeline"]);
-    $navList->appendItem([$allowAdd, "timelineeventsAdd.php", uiTextSnippet('add'), "addtlevent"]);
-    echo $navList->build("addtlevent");
+    $navList->appendItem([true, 'timelineeventsBrowse.php', uiTextSnippet('browse'), 'findtimeline']);
+    $navList->appendItem([$allowAdd, 'timelineeventsAdd.php', uiTextSnippet('add'), 'addtlevent']);
+    echo $navList->build('addtlevent');
     ?>
     <form name='form1' action='timelineeventsAddFormAction.php' method='post' onSubmit="return validateForm();">
       <table class='table table-sm'>
@@ -43,10 +43,10 @@ $headSection->setTitle(uiTextSnippet('addnewtlevent'));
               <select name="<?php echo $monthname; ?>">
                 <option value=''></option>
                 <option value='1'><?php echo uiTextSnippet('JAN'); ?></option>
-                <option value="2"><?php echo uiTextSnippet('FEB'); ?></option>
-                <option value="3"><?php echo uiTextSnippet('MAR'); ?></option>
-                <option value="4"><?php echo uiTextSnippet('APR'); ?></option>
-                <option value="5"><?php echo uiTextSnippet('MAY'); ?></option>
+                <option value='2'><?php echo uiTextSnippet('FEB'); ?></option>
+                <option value='3'><?php echo uiTextSnippet('MAR'); ?></option>
+                <option value='4'><?php echo uiTextSnippet('APR'); ?></option>
+                <option value='5'><?php echo uiTextSnippet('MAY'); ?></option>
                 <option value="6"><?php echo uiTextSnippet('JUN'); ?></option>
                 <option value="7"><?php echo uiTextSnippet('JUL'); ?></option>
                 <option value="8"><?php echo uiTextSnippet('AUG'); ?></option>
@@ -61,8 +61,8 @@ $headSection->setTitle(uiTextSnippet('addnewtlevent'));
           </tr>
           <?php
         }
-        doEventRow(uiTextSnippet('startdt'), "evday", "evmonth", "evyear", uiTextSnippet('yrreq'));
-        doEventRow(uiTextSnippet('enddt'), "endday", "endmonth", "endyear", "");
+        doEventRow(uiTextSnippet('startdt'), 'evday', 'evmonth', 'evyear', uiTextSnippet('yrreq'));
+        doEventRow(uiTextSnippet('enddt'), 'endday', 'endmonth', 'endyear', '');
         ?>
         <tr>
           <td><?php echo uiTextSnippet('evtitle'); ?>:</td>

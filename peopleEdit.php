@@ -12,27 +12,27 @@ $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate 
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
-$row['firstname'] = preg_replace("/\"/", "&#34;", $row['firstname']);
-$row['lastname'] = preg_replace("/\"/", "&#34;", $row['lastname']);
-$row['nickname'] = preg_replace("/\"/", "&#34;", $row['nickname']);
-$row['suffix'] = preg_replace("/\"/", "&#34;", $row['suffix']);
-$row['title'] = preg_replace("/\"/", "&#34;", $row['title']);
-$row['birthplace'] = preg_replace("/\"/", "&#34;", $row['birthplace']);
-$row['altbirthplace'] = preg_replace("/\"/", "&#34;", $row['altbirthplace']);
-$row['deathplace'] = preg_replace("/\"/", "&#34;", $row['deathplace']);
-$row['burialplace'] = preg_replace("/\"/", "&#34;", $row['burialplace']);
-$row['baptplace'] = preg_replace("/\"/", "&#34;", $row['baptplace']);
-$row['confplace'] = preg_replace("/\"/", "&#34;", $row['confplace']);
-$row['initplace'] = preg_replace("/\"/", "&#34;", $row['initplace']);
-$row['endlplace'] = preg_replace("/\"/", "&#34;", $row['endlplace']);
+$row['firstname'] = preg_replace('/\"/', '&#34;', $row['firstname']);
+$row['lastname'] = preg_replace('/\"/', '&#34;', $row['lastname']);
+$row['nickname'] = preg_replace('/\"/', '&#34;', $row['nickname']);
+$row['suffix'] = preg_replace('/\"/', '&#34;', $row['suffix']);
+$row['title'] = preg_replace('/\"/', '&#34;', $row['title']);
+$row['birthplace'] = preg_replace('/\"/', '&#34;', $row['birthplace']);
+$row['altbirthplace'] = preg_replace('/\"/', '&#34;', $row['altbirthplace']);
+$row['deathplace'] = preg_replace('/\"/', '&#34;', $row['deathplace']);
+$row['burialplace'] = preg_replace('/\"/', '&#34;', $row['burialplace']);
+$row['baptplace'] = preg_replace('/\"/', '&#34;', $row['baptplace']);
+$row['confplace'] = preg_replace('/\"/', '&#34;', $row['confplace']);
+$row['initplace'] = preg_replace('/\"/', '&#34;', $row['initplace']);
+$row['endlplace'] = preg_replace('/\"/', '&#34;', $row['endlplace']);
 
 if ((!$allowEdit && (!$allowAdd || !$added)) || !checkbranch($row['branch'])) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 $editconflict = determineConflict($row, $people_table);
-if ($tngconfig['edit_timeout'] === "") {
+if ($tngconfig['edit_timeout'] === '') {
   $tngconfig['edit_timeout'] = 15;
 }
 $warnsecs = (intval($tngconfig['edit_timeout']) - 2) * 60 * 1000;
@@ -49,9 +49,9 @@ if ($row['sex'] == 'M') {
     $spouseorder = 'wifeorder';
     $selfdisplay = uiTextSnippet('aswife');
   } else {
-    $spouse = "";
-    $self = "";
-    $spouseorder = "";
+    $spouse = '';
+    $self = '';
+    $spouseorder = '';
     $selfdisplay = uiTextSnippet('asspouse');
   }
 }
@@ -70,9 +70,9 @@ $notelinks = tng_query($query);
 $gotnotes = [];
 while ($note = tng_fetch_assoc($notelinks)) {
   if (!$note['eventID']) {
-    $note['eventID'] = "general";
+    $note['eventID'] = 'general';
   }
-  $gotnotes[$note['eventID']] = "*";
+  $gotnotes[$note['eventID']] = '*';
 }
 tng_free_result($notelinks);
 
@@ -81,27 +81,27 @@ $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . "
 $gotcites = [];
 while ($cite = tng_fetch_assoc($citresult)) {
   if (!$cite['eventID']) {
-    $cite['eventID'] = "general";
+    $cite['eventID'] = 'general';
   }
-  $gotcites[$cite['eventID']] = "*";
+  $gotcites[$cite['eventID']] = '*';
 }
 tng_free_result($citresult);
 
 $assocquery = "SELECT count(assocID) AS acount FROM $assoc_table WHERE personID = '$personID'";
 $assocresult = tng_query($assocquery) or die(uiTextSnippet('cannotexecutequery') . ": $assocquery");
 $assocrow = tng_fetch_assoc($assocresult);
-$gotassoc = $assocrow['acount'] ? "*" : "";
+$gotassoc = $assocrow['acount'] ? '*' : '';
 tng_free_result($assocresult);
 
 $query = "SELECT parenttag FROM $events_table WHERE persfamID = '$personID'";
 $morelinks = tng_query($query);
 $gotmore = [];
 while ($more = tng_fetch_assoc($morelinks)) {
-  $gotmore[$more['parenttag']] = "*";
+  $gotmore[$more['parenttag']] = '*';
 }
 $revstar = checkReview('I');
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifyperson'));
 ?>
 <!DOCTYPE html>
@@ -111,39 +111,39 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
   <section class='container'>
     <?php
     $photo = showSmallPhoto($personID, $namestr, 1, 0, 'I', $row['sex']);
-    
+
     require_once 'eventlib.php';
-    
+
     echo $adminHeaderSection->build('people-modifyperson', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
-    $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
-    $navList->appendItem([$allowEdit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
-    $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
-    //    $navList->appendItem([$allowEdit, "peopleEdit.php?personID=$personID", uiTextSnippet('edit'), "edit"]);
-    echo $navList->build("edit");
+    $navList->appendItem([true, 'peopleBrowse.php', uiTextSnippet('browse'), 'findperson']);
+    $navList->appendItem([$allowAdd, 'peopleAdd.php', uiTextSnippet('add'), 'addperson']);
+    $navList->appendItem([$allowEdit, 'admin_findreview.php?type=I', uiTextSnippet('review') . $revstar, 'review']);
+    $navList->appendItem([$allowEdit && $allowDelete, 'peopleMerge.php', uiTextSnippet('merge'), 'merge']);
+    // $navList->appendItem([$allowEdit, 'peopleEdit.php?personID=$personID', uiTextSnippet('edit'), 'edit']);
+    echo $navList->build('edit');
     ?>
-    <div id="thumbholder" style="margin-right: 5px; <?php if (!$photo) {echo "display: none";} ?>">
+    <div id="thumbholder" style="margin-right: 5px; <?php if (!$photo) {echo 'display: none';} ?>">
       <?php echo $photo; ?>
     </div>
-    <?php echo "<h4>$namestr ($personID)</h4><p>" . getYears($row) . "</p>\n" ?>
+    <?php echo "<h4>$namestr ($personID)</h4><p>" . getYears($row) . "</p>\n"; ?>
     <div class='smallest'>
       <?php
       if ($editconflict) {
-        echo "<br><p>" . uiTextSnippet('editconflict') . "</p>\n";
+        echo '<br><p>' . uiTextSnippet('editconflict') . '</p>\n';
         echo "<p><strong><a href='peopleEdit.php?personID=$personID'>" . uiTextSnippet('retry') . "</a></strong></p>\n";
       } else {
-        $iconColor = $gotassoc ? "icon-info" : "icon-muted";
+        $iconColor = $gotassoc ? 'icon-info' : 'icon-muted';
         echo "<a id='person-associations' href='#' title='" . uiTextSnippet('associations') . "' data-person-id='$personID'>\n";
         echo "<img class='icon-md icon-associations $iconColor' data-src='svg/connections.svg'>\n";
         echo "</a>\n";
 
-        $iconColor = $gotnotes['general'] ? "icon-info" : "icon-muted";
+        $iconColor = $gotnotes['general'] ? 'icon-info' : 'icon-muted';
         echo "<a id='person-notes' href='#' title='" . uiTextSnippet('notes') . "' data-person-id='$personID'>\n";
         echo "<img class='icon-sm icon-right icon-notes $iconColor' data-src='svg/documents.svg'>\n";
         echo "</a>\n";
 
-        $iconColor = $gotcites['general'] ? "icon-info" : "icon-muted";
+        $iconColor = $gotcites['general'] ? 'icon-info' : 'icon-muted';
         echo "<a id='person-citations' href='#' title='" . uiTextSnippet('citations') . "' data-person-id='$personID'>\n";
         echo "<img class='icon-sm icon-right icon-citations $iconColor' data-src='svg/archive.svg'>\n";
         echo "</a>\n";
@@ -185,12 +185,12 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
             <div class='col-md-3'>
               <br>
               <?php
-              $iconColor = $gotnotes['NAME'] ? "icon-info" : "icon-muted";
+              $iconColor = $gotnotes['NAME'] ? 'icon-info' : 'icon-muted';
               echo "<a id='person-notes-name' href='#' title='" . uiTextSnippet('notes') . "' data-person-id='$personID'>\n";
               echo "<img class='icon-sm icon-right icon-notes $iconColor' data-src='svg/documents.svg'>\n";
               echo "</a>\n";
-              
-              $iconColor = $gotcites['NAME'] ? "icon-info" : "icon-muted";
+
+              $iconColor = $gotcites['NAME'] ? 'icon-info' : 'icon-muted';
               echo "<a id='person-citations-name' href='#' title='" . uiTextSnippet('citations') . "' data-person-id='$personID' >\n";
               echo "<img class='icon-sm icon-right icon-citations $iconColor' data-src='svg/archive.svg'>\n";
               echo "</a>\n";
@@ -221,13 +221,13 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                 <option value='0'>
                   <?php echo uiTextSnippet('default'); ?>
                 </option>
-                <option value='1' <?php if ($row['nameorder'] == "1") {echo "selected";} ?>>
+                <option value='1' <?php if ($row['nameorder'] == '1') {echo 'selected';} ?>>
                   <?php echo uiTextSnippet('western'); ?>
                 </option>
-                <option value="2" <?php if ($row['nameorder'] == "2") {echo "selected";} ?>>
+                <option value='2' <?php if ($row['nameorder'] == '2') {echo 'selected';} ?>>
                   <?php echo uiTextSnippet('oriental'); ?>
                 </option>
-                <option value="3" <?php if ($row['nameorder'] == "3") {echo "selected";} ?>>
+                <option value='3' <?php if ($row['nameorder'] == '3') {echo 'selected';} ?>>
                   <?php echo uiTextSnippet('lnfirst'); ?>
                 </option>
               </select>
@@ -241,11 +241,11 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
             </div>
             <div class='col-md-4'>
               <label class='form-check-inline'>
-                <input class='form-check-input' name='living' type='checkbox' value='1'<?php if ($row['living']) {echo " checked";} ?>>
+                <input class='form-check-input' name='living' type='checkbox' value='1'<?php if ($row['living']) {echo ' checked';} ?>>
                 <?php echo uiTextSnippet('living'); ?>
               </label>
               <label class='form-check-inline'>
-                <input class='form-check-input' name='private' type='checkbox' value='1'<?php if ($row['private']) {echo " checked";} ?>>
+                <input class='form-check-input' name='private' type='checkbox' value='1'<?php if ($row['private']) {echo ' checked';} ?>>
                 <?php echo uiTextSnippet('private'); ?>
               </label>
             </div>
@@ -259,7 +259,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
           <a href='#' id='expandall-editperson'><?php echo uiTextSnippet('expandall'); ?></a>
           <a href='#' id='collapseall-editperson'><?php echo uiTextSnippet('collapseall'); ?></a>
         </div>
-        <?php echo displayToggle("plus1", 1, "person-events", uiTextSnippet('events'), ""); ?>
+        <?php echo displayToggle('plus1', 1, 'person-events', uiTextSnippet('events'), ''); ?>
         <div id='person-events'>
           <p><?php echo uiTextSnippet('datenote'); ?></p>
           <?php
@@ -269,7 +269,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
           }
           echo buildEventRow('deathdate', 'deathplace', 'DEAT', $personID);
           echo buildEventRow('burialdate', 'burialplace', 'BURI', $personID);
-          $checked = $row['burialtype'] == 1 ? " checked" : "";
+          $checked = $row['burialtype'] == 1 ? ' checked' : '';
               echo "<input id='burialtype' name='burialtype' type='checkbox' value='1'$checked> \n";
               echo "<label for='burialtype'>" . uiTextSnippet('cremated') . "</label>\n";
           if ($rights['lds']) {
@@ -291,9 +291,8 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
         $parents = tng_query($query);
         $parentcount = tng_num_rows($parents);
         $addNewFamilyTitle = "title='" . uiTextSnippet('gotonewfamily') . " ($personID) " . uiTextSnippet('aschild') . "'";
-        $newparents = $allowAdd ? 
-          "&nbsp; <a id='addnew-parents' href='#' $addNewFamilyTitle data-person-id='$personID' data-cw='$cw'>" . uiTextSnippet('addnew') . "</a>\n" : "";
-        echo displayToggle("plus2", 1, "parents", uiTextSnippet('parents') . " (<span id=\"parentcount\">$parentcount</span>) $newparents", "");
+        $newparents = $allowAdd ? "&nbsp; <a id='addnew-parents' href='#' $addNewFamilyTitle data-person-id='$personID' data-cw='$cw'>" . uiTextSnippet('addnew') . "</a>\n" : '';
+        echo displayToggle('plus2', 1, 'parents', uiTextSnippet('parents') . " (<span id=\"parentcount\">$parentcount</span>) $newparents", '');
         ?>
         <div id='parents'>
           <?php
@@ -314,16 +313,16 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                     echo "<div id='unlinkp_$familyId' style='float: right; display: none'>\n";
                       echo "<a id='unlink-from-family' href='#'  data-family-id='$familyId'>" . uiTextSnippet('unlinkindividual') . " ($personID) " . uiTextSnippet('aschild') . "</a>\n";
                     echo "</div>\n";
-                    echo "<strong>" . uiTextSnippet('family') . ":</strong>\n";
+                    echo '<strong>' . uiTextSnippet('family') . ":</strong>\n";
                     echo "<a href=\"familiesEdit.php?familyID={$familyId}&amp;cw=$cw\">{$familyId}</a>\n";
-                    
+
                     echo buildParentRow($parent, 'husband', 'father');
                     echo buildParentRow($parent, 'wife', 'mother');
-                    $parent['sealplace'] = preg_replace("/\"/", "&#34;", $parent['sealplace']);
+                    $parent['sealplace'] = preg_replace('/\"/', '&#34;', $parent['sealplace']);
                     if ($rights['lds']) {
-                      $citquery = "SELECT citationID FROM $citations_table WHERE persfamID = \"$personID" . "::" . "{$familyId}\"";
+                      $citquery = "SELECT citationID FROM $citations_table WHERE persfamID = \"$personID" . '::' . "{$familyId}\"";
                       $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
-                      $iconColor = tng_num_rows($citresult) ? "icon-info" : "icon-muted";
+                      $iconColor = tng_num_rows($citresult) ? 'icon-info' : 'icon-muted';
                       tng_free_result($citresult);
 
                       echo "<div class='row'>\n";
@@ -373,8 +372,8 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                 <?php
                 $newspouse = $allowAdd && $row['sex'] 
                   ? "&nbsp; <a id='addnew-family-spouses' href='#' data-self='$self' data-person-id='$personID' data-cw='$cw' title=\"" . uiTextSnippet('gotonewfamily') . " ($personID) $selfdisplay\">" . uiTextSnippet('addnew') . "</a>\n" 
-                  : "";
-                echo displayToggle("plus3", 1, "spouses", uiTextSnippet('spouses') . " (<span id=\"marrcount\">$marrcount</span>) $newspouse", "");
+                  : '';
+                echo displayToggle('plus3', 1, 'spouses', uiTextSnippet('spouses') . " (<span id=\"marrcount\">$marrcount</span>) $newspouse", '');
                 ?>
                 <div id='spouses'>
                   <?php
@@ -404,7 +403,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                             ?> <td>
                               
                               <?php
-                              echo "<strong>" . uiTextSnippet('family') . ":</strong>\n";
+                              echo '<strong>' . uiTextSnippet('family') . ":</strong>\n";
                               echo "<div id='unlinks_$familyId' style='float: right; display: none'>\n";
                                 echo "<a id='unlink-from-family' href='#' data-family-id='$familyId'>" . uiTextSnippet('unlinkindividual') . " ($personID) " . uiTextSnippet('asspouse') . "</a>\n";
                               echo "</div>\n";
@@ -419,9 +418,9 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                                 $spouserow['allow_living'] = $srights['living'];
                                 $spouserow['allow_private'] = $srights['private'];
 
-                                $birthinfo = $spouserow['birthdate'] ? " (" . uiTextSnippet('birthabbr') . " " . displayDate($spouserow['birthdate']) . ")" : "";
+                                $birthinfo = $spouserow['birthdate'] ? ' (' . uiTextSnippet('birthabbr') . ' ' . displayDate($spouserow['birthdate']) . ')' : '';
                               } else {
-                                $spouserow = $birthinfo = "";
+                                $spouserow = $birthinfo = '';
                               }
                               ?>                              
                               <span><br><?php echo uiTextSnippet('spouse'); ?>:</span>
@@ -441,11 +440,11 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                               $children = tng_query($query);
 
                               if ($children && tng_num_rows($children)) {
-                                echo "<p>" . uiTextSnippet('children') . "</p>";
+                                echo '<p>' . uiTextSnippet('children') . '</p>';
                               
                                 $kidcount = 1;
                                 while ($child = tng_fetch_assoc($children)) {
-                                  $ifkids = $child['haskids'] ? "+" : "&nbsp;";
+                                  $ifkids = $child['haskids'] ? '+' : '&nbsp;';
                                   $crights = determineLivingPrivateRights($child);
                                   $child['allow_living'] = $crights['living'];
                                   $child['allow_private'] = $crights['private'];
@@ -455,11 +454,11 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                                       echo "<div class='col-md-8'>$kidcount. ";
                                         if ($crights['both']) {
                                           if ($rightbranch) {
-                                            echo "<a href=\"peopleEdit.php?personID={$child['pID']}&amp;cw=$cw\">" . getName($child) . "</a>";
+                                            echo "<a href=\"peopleEdit.php?personID={$child['pID']}&amp;cw=$cw\">" . getName($child) . '</a>';
                                           } else {
-                                            echo getName($child) . " - " . $child['pID'];
+                                            echo getName($child) . ' - ' . $child['pID'];
                                           }
-                                          echo $child['birthdate'] ? " (" . uiTextSnippet('birthabbr') . " " . displayDate($child['birthdate']) . ")" : "";
+                                          echo $child['birthdate'] ? ' (' . uiTextSnippet('birthabbr') . ' ' . displayDate($child['birthdate']) . ')' : '';
                                         } else {
                                           echo ($child['private'] ? uiTextSnippet('private') : uiTextSnippet('living'));
                                         }
@@ -560,7 +559,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
 <script src='js/people.js'></script>
 <script>
   var tnglitbox;
-  var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;
+  var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : 'false'); ?>;
   var preferDateFormat = '<?php echo $preferDateFormat; ?>';
 
   var allow_cites = true;

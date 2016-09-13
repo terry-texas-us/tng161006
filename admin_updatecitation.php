@@ -9,12 +9,12 @@ require 'datelib.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 require 'adminlog.php';
 
-if ($session_charset != "UTF-8") {
+if ($session_charset != 'UTF-8') {
   $citepage = tng_utf8_decode($citepage);
   $citetext = tng_utf8_decode($citetext);
   $citenote = tng_utf8_decode($citenote);
@@ -47,5 +47,5 @@ if ($sourceID) {
 
 $citationsrc = cleanIt($citationsrc);
 $truncated = truncateIt($citationsrc, 75);
-header("Content-Type: application/json; charset=" . $session_charset);
+header('Content-Type: application/json; charset=' . $session_charset);
 echo "{\"display\":\"$truncated\"}";

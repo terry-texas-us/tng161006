@@ -2,7 +2,7 @@
 require 'begin.php';
 require 'adminlib.php';
 if (!$personID) {
-  die("no args");
+  die('no args');
 }
 require 'checklogin.php';
 
@@ -19,7 +19,7 @@ $row['allow_private'] = $rights['private'];
 $namestr = getName($row);
 tng_free_result($result);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 
 require_once 'eventlib.php';
 ?>
@@ -47,9 +47,9 @@ require_once 'eventlib.php';
             echo buildParentRow($parent, 'husband', 'father');
             echo buildParentRow($parent, 'wife', 'mother');
 
-            $citquery = "SELECT citationID FROM $citations_table WHERE persfamID = \"$personID" . "::" . "{$familyId}\"";
+            $citquery = "SELECT citationID FROM $citations_table WHERE persfamID = \"$personID" . '::' . "{$familyId}\"";
             $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
-            $iconColor = tng_num_rows($citresult) ? "icon-info" : "icon-muted";
+            $iconColor = tng_num_rows($citresult) ? 'icon-info' : 'icon-muted';
             tng_free_result($citresult);
 
             echo "<div class='row'>\n";

@@ -1,15 +1,15 @@
 <?php
 require 'tng_begin.php';
 
-$logstring = "<a href='places-all.php'>" . uiTextSnippet('allplaces') . "</a>";
+$logstring = "<a href='places-all.php'>" . uiTextSnippet('allplaces') . '</a>';
 writelog($logstring);
 preparebookmark($logstring);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
-$headSection->setTitle(uiTextSnippet('placelist') . ": " . uiTextSnippet('allplaces'));
+header('Content-type: text/html; charset=' . $session_charset);
+$headSection->setTitle(uiTextSnippet('placelist') . ': ' . uiTextSnippet('allplaces'));
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,12 +17,12 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": " . uiTextSnippet('allpla
 <body id='public'>
   <section class='container'>
     <?php echo $publicHeaderSection->build(); ?>
-    <h2><img class='icon-md' src='svg/location.svg'><?php echo uiTextSnippet('placelist') . ": " . uiTextSnippet('allplaces'); ?></h2>
+    <h2><img class='icon-md' src='svg/location.svg'><?php echo uiTextSnippet('placelist') . ': ' . uiTextSnippet('allplaces'); ?></h2>
     <br class='clearleft'>
     <?php
     $offset = 1;
 
-    $linkstr = "";
+    $linkstr = '';
     $query = "SELECT distinct ucase(left(trim(substring_index(place,',',-$offset)),1)) AS firstchar FROM $places_table GROUP BY firstchar ORDER by firstchar";
     $result = tng_query($query);
     if ($result) {
@@ -30,9 +30,9 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": " . uiTextSnippet('allpla
 
       while ($place = tng_fetch_assoc($result)) {
         if ($initialchar != 1) {
-          $linkstr .= " ";
+          $linkstr .= ' ';
         }
-        if ($place['firstchar'] != "" && $place['firstchar'] != "_") {
+        if ($place['firstchar'] != '' && $place['firstchar'] != '_') {
           $linkstr .= "<a href=\"#char$initialchar\">{$place['firstchar']}</a> ";
           $firstchars[$initialchar] = $place['firstchar'];
           $initialchar++;
@@ -49,14 +49,14 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": " . uiTextSnippet('allpla
         <p class="firstchars"><?php echo $linkstr; ?></p>
       </div>
       <?php
-      beginFormElement("places-oneletter", "get");
+      beginFormElement('places-oneletter', 'get');
       echo uiTextSnippet('placescont') . ": <input name='psearch' type='text' />\n";
       echo "<input name='stretch' type='hidden' value='1'>\n";
       echo "<input name='pgo' type='submit' value=\"" . uiTextSnippet('go') . "\" />\n";
       endFormElement();
       ?>
 
-      <br><?php echo "<a href='placesMain.php'>" . uiTextSnippet('mainplacepage') . "</a>"; ?>
+      <br><?php echo "<a href='placesMain.php'>" . uiTextSnippet('mainplacepage') . '</a>'; ?>
     </div>
     <br>
     <p class="small"><?php echo uiTextSnippet('showmatchingplaces'); ?></p>
@@ -91,7 +91,7 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": " . uiTextSnippet('allpla
                   while ($place = tng_fetch_assoc($result)) {
                     $place2 = urlencode($place['myplace']);
                     $commaOnEnd = false;
-                    $poffset = $stretch ? "" : "offset=$offset&amp;";
+                    $poffset = $stretch ? '' : "offset=$offset&amp;";
                     if (substr($place['wholeplace'], 0, 1) == ',' && trim(substr($place[wholeplace], 1)) == $place['myplace']) {
                       $place3 = addslashes($place['wholeplace']);
                       $commaOnEnd = true;
@@ -109,10 +109,10 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": " . uiTextSnippet('allpla
                     tng_free_result($result2);
 
                     $searchlink = $specificcount ? " <a href=\"placesearch.php?psearch=$place2\" title=\"" .
-                            uiTextSnippet('findplaces') . "\"><img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=\"uiTextSnippet(findplaces)\"></a>" : "";
+                            uiTextSnippet('findplaces') . "\"><img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=\"uiTextSnippet(findplaces)\"></a>" : '';
                     if ($place['placecount'] > 1 || ($place['myplace'] != $place['wholeplace'] && !$commaOnEnd)) {
                       $name = "<a href=\"places-oneletter.php?" . $poffset;
-                      $name .= "psearch=$place2\">" . str_replace(["<", ">"], ["&lt;", "&gt;"], $place['myplace']) . "</a>";
+                      $name .= "psearch=$place2\">" . str_replace(['<', '>'], ['&lt;', '&gt;'], $place['myplace']) . '</a>';
                       echo "$snnum. $name ({$place['placecount']})$searchlink<br>\n";
                     } else {
                       echo "$snnum. $placetitle$searchlink<br>\n";

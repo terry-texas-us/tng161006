@@ -8,7 +8,7 @@ require 'checklogin.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
@@ -26,4 +26,4 @@ $reportID = tng_insert_id();
 adminwritelog("<a href=\"reportsEdit.php?reportID=$reportID\">" . uiTextSnippet('addnewreport') . ": $reportID/$reportname</a>");
 
 $message = uiTextSnippet('report') . " $reportID " . uiTextSnippet('succadded') . '.';
-header("Location: reportsBrowse.php?message=" . urlencode($message));
+header('Location: reportsBrowse.php?message=' . urlencode($message));

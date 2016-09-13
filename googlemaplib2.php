@@ -17,7 +17,7 @@ if (!$startzoom) {
 }
 $foundzoom = $map['foundzoom'] ? $map['foundzoom'] : 13;
 if (!$map['displaytype']) {
-  $map['displaytype'] = "TERRAIN";
+  $map['displaytype'] = 'TERRAIN';
 }
 
 if (empty($row['placelevel'])) {
@@ -57,7 +57,7 @@ $mcharsetstr = "&amp;oe=$session_charset";
     });
 
     google.maps.event.addListener(map, 'zoom_changed', getNewZoomLevel);
-    if ($('#location').val() && $('#latbox').val() === "" && $('#lonbox').val() === "")
+    if ($('#location').val() && $('#latbox').val() === '' && $('#lonbox').val() === '')
       showAddress($('#location').val());
 
     maploaded = true;

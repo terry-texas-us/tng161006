@@ -5,7 +5,7 @@ require 'adminlib.php';
 $adminLogin = 1;
 require 'checklogin.php';
 
-if ($type == "album") {
+if ($type == 'album') {
   $query = "SELECT eventID, linktype, entityID FROM $album2entities_table WHERE alinkID = '$linkID'";
 } else {
   $query = "SELECT eventID, altdescription, altnotes, defphoto, linktype, personID, dontshow FROM $medialinks_table WHERE medialinkID = '$linkID'";
@@ -14,36 +14,36 @@ $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
 $meventID = $row['eventID'];
-$entityID = $type == "album" ? $row['entityID'] : $row['personID'];
+$entityID = $type == 'album' ? $row['entityID'] : $row['personID'];
 
 $ldsOK = determineLDSRights();
 
 function doEvent($eventID, $displayval, $info) {
   global $meventID;
-  return "<option value=\"$eventID\"" . ($eventID == $meventID ? " selected" : "") . ">$displayval" . ($info ? ": $info" : "") . "</option>\n";
+  return "<option value=\"$eventID\"" . ($eventID == $meventID ? ' selected' : '') . ">$displayval" . ($info ? ": $info" : '') . "</option>\n";
 }
 
-$options = "<option value=''>" . uiTextSnippet('none') . "</option>";
+$options = "<option value=''>" . uiTextSnippet('none') . '</option>';
 if ($row['linktype'] == 'I') {
   //standard people events
-  $list = ["NAME", "BIRT", "CHR", "DEAT", "BURI"];
+  $list = ['NAME', 'BIRT', 'CHR', 'DEAT', 'BURI'];
   foreach ($list as $eventtype) {
     $options .= doEvent($eventtype, uiTextSnippet($eventtype), '');
   }
   if ($ldsOK) {
-    $ldslist = ["BAPL", "CONL", "INIT", "ENDL", "SLGC"];
+    $ldslist = ['BAPL', 'CONL', 'INIT', 'ENDL', 'SLGC'];
     foreach ($ldslist as $eventtype) {
       $options .= doEvent($eventtype, uiTextSnippet($eventtype), '');
     }
   }
 } elseif ($row['linktype'] == 'F') {
   //standard family events
-  $list = ["MARR", "DIV"];
+  $list = ['MARR', 'DIV'];
   foreach ($list as $eventtype) {
     $options .= doEvent($eventtype, uiTextSnippet($eventtype), '');
   }
   if ($ldsOK) {
-    $ldslist = ["SLGS"];
+    $ldslist = ['SLGS'];
     foreach ($ldslist as $eventtype) {
       $options .= doEvent($eventtype, uiTextSnippet($eventtype), '');
     }
@@ -55,7 +55,7 @@ $query = "SELECT display, eventdate, eventplace, info, eventID FROM $events_tabl
 $custevents = tng_query($query);
 while ($custevent = tng_fetch_assoc($custevents)) {
   $displayval = getEventDisplay($custevent['display']);
-  $info = "";
+  $info = '';
   if ($custevent['eventdate']) {
     $info = displayDate($custevent['eventdate']);
   } elseif ($custevent['eventplace']) {
@@ -67,7 +67,7 @@ while ($custevent = tng_fetch_assoc($custevents)) {
 }
 tng_free_result($custevents);
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <form id='editlinkform' name='editlinkform' action='' method='post' onsubmit="return updateMedia2EntityLink(this);">
   <header class='modal-header'>
@@ -83,7 +83,7 @@ header("Content-type:text/html; charset=" . $session_charset);
           </select>
         </td>
       </tr>
-      <?php if ($type != "album") { ?>
+      <?php if ($type != 'album') { ?>
         <tr>
           <td><?php echo uiTextSnippet('alttitle'); ?>:</td>
           <td>
@@ -98,9 +98,9 @@ header("Content-type:text/html; charset=" . $session_charset);
         </tr>
         <tr>
           <td colspan='2'>
-            <input name='defphoto' type='checkbox' value='1'<?php if ($row['defphoto']) {echo " checked";} ?>> <?php echo uiTextSnippet('makedefault'); ?>
+            <input name='defphoto' type='checkbox' value='1'<?php if ($row['defphoto']) {echo ' checked';} ?>> <?php echo uiTextSnippet('makedefault'); ?>
             *
-            <input name='show' type='checkbox' value='1'<?php if (!$row['dontshow']) {echo " checked";} ?>> <?php echo uiTextSnippet('show'); ?>
+            <input name='show' type='checkbox' value='1'<?php if (!$row['dontshow']) {echo ' checked';} ?>> <?php echo uiTextSnippet('show'); ?>
           </td>
         </tr>
       <?php } ?>
@@ -112,7 +112,7 @@ header("Content-type:text/html; charset=" . $session_charset);
     <p>
       <?php
       if ($type != 'album') {
-        echo "*" . uiTextSnippet('defphotonote') . "\n";
+        echo '*' . uiTextSnippet('defphotonote') . "\n";
       }
       ?>
     </p>

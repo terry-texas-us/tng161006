@@ -11,23 +11,23 @@ if (isset($_SESSION['postvars']) && is_array($_SESSION['postvars'])) {
   foreach ($_SESSION['postvars'] as $key => $value) {
     ${$key} = $value;
   }
-  $postvars = $_SESSION['postvars'] = "";
+  $postvars = $_SESSION['postvars'] = '';
 } elseif (!$adminLogin) {
   $postvars = $_SESSION['postvars'] = $_POST;
-  $nodest_array = ["admi", "ajx_", "rpt_", "find", "tngr", "gedc", "goog", "img_"];
+  $nodest_array = ['admi', 'ajx_', 'rpt_', 'find', 'tngr', 'gedc', 'goog', 'img_'];
   if (!$tngprint && !in_array(substr(basename($thispage), 0, 4), $nodest_array) && !$maintenance_mode) {
-    $protocol = $_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off" ? "https://" : "http://";
+    $protocol = $_SERVER['HTTPS'] && $_SERVER['HTTPS'] != 'off' ? 'https://' : 'http://';
     $destinationpage = $_SESSION['destinationpage8'] = $protocol . $_SERVER['HTTP_HOST'];
     $destinationpage = $_SESSION['destinationpage8'] .= $thispage;
   }
 }
 
 if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$adminLogin || ($_SESSION['allow_admin'] && $currentuser))) {
-  if ($currentuser == "Administrator-No-Users-Yet") {
+  if ($currentuser == 'Administrator-No-Users-Yet') {
     $query = "SELECT userID FROM $users_table";
     $result = tng_query_noerror($query);
     if ($result && tng_num_rows($result)) {
-      echo "$currentuser" . " is not a valid user";
+      echo "$currentuser" . ' is not a valid user';
       exit;
     }
     if ($result) {
@@ -67,43 +67,43 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$adminLo
     $allow_private = 1;
     $allow_ged = $allow_pdf = $allow_profile = 1;
     $allow_lds = 1;
-    $_SESSION['currentuser'] = "Administrator-No-Users-Yet";
-    $_SESSION['currentuserdesc'] = "Administrator";
+    $_SESSION['currentuser'] = 'Administrator-No-Users-Yet';
+    $_SESSION['currentuserdesc'] = 'Administrator';
     $logged_in = $_SESSION['logged_in'] = 1;
     $_SESSION['session_rp'] = $rootpath;
-    $_SESSION['tngrole'] = "admin";
+    $_SESSION['tngrole'] = 'admin';
   } else {
     if ($adminLogin == 1) {
       $postvars = $_SESSION['postvars'] = $_POST;
-      $protocol = $_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off" ? "https://" : "http://";
+      $protocol = $_SERVER['HTTPS'] && $_SERVER['HTTPS'] != 'off' ? 'https://' : 'http://';
       $destinationpage = $_SESSION['destinationpage8'] = $protocol . $_SERVER['HTTP_HOST'];
-      $destinationpage = $_SESSION['destinationpage8'] .= $_SERVER['REQUEST_URI'] ? $_SERVER['REQUEST_URI'] : $_SERVER['SCRIPT_NAME'] . "?" . $_SERVER['QUERY_STRING'];
+      $destinationpage = $_SESSION['destinationpage8'] .= $_SERVER['REQUEST_URI'] ? $_SERVER['REQUEST_URI'] : $_SERVER['SCRIPT_NAME'] . '?' . $_SERVER['QUERY_STRING'];
     }
-    $newroot = preg_replace("/\//", "", $rootpath);
-    $newroot = preg_replace("/ /", "", $newroot);
-    $newroot = preg_replace("/\./", "", $newroot);
+    $newroot = preg_replace('/\//', '', $rootpath);
+    $newroot = preg_replace('/ /', '', $newroot);
+    $newroot = preg_replace('/\./', '', $newroot);
     $usercookiename = "tnguser_$newroot";
     if ($_COOKIE[$usercookiename]) {
       $passcookiename = "tngpass_$newroot";
       $passtype = "tngpasstype_$newroot";
-      $adminloginstr = $adminLogin ? "adminLogin=1&amp;continue=1&amp;" : "";
-      header("Location: " . "processlogin.php?{$adminloginstr}tngusername=" . $_COOKIE[$usercookiename] . "&tngpassword=" . $_COOKIE[$passcookiename] . "&encrypted=encrypted");
+      $adminloginstr = $adminLogin ? 'adminLogin=1&amp;continue=1&amp;' : '';
+      header('Location: ' . "processlogin.php?{$adminloginstr}tngusername=" . $_COOKIE[$usercookiename] . '&tngpassword=' . $_COOKIE[$passcookiename] . '&encrypted=encrypted');
       exit;
     }
     if ($adminLogin) {
-      header("Location: admin_login.php?continue=1");
+      header('Location: admin_login.php?continue=1');
       exit;
     } elseif ($requirelogin) {
-      if (!substr_count($_SERVER['SCRIPT_NAME'], "/index.") && !substr_count($_SERVER['SCRIPT_NAME'], "/ajx_tnginstall.php")) {
-        header("Location: login.php");
+      if (!substr_count($_SERVER['SCRIPT_NAME'], '/index.') && !substr_count($_SERVER['SCRIPT_NAME'], '/ajx_tnginstall.php')) {
+        header('Location: login.php');
         exit;
       }
     } else {
-      $_SESSION['currentuser'] = "";
-      $_SESSION['currentuserdesc'] = "";
-      $_SESSION['mygedcom'] = "";
-      $_SESSION['mypersonID'] = "";
-      $_SESSION['tngrole'] = "guest";
+      $_SESSION['currentuser'] = '';
+      $_SESSION['currentuserdesc'] = '';
+      $_SESSION['mygedcom'] = '';
+      $_SESSION['mypersonID'] = '';
+      $_SESSION['tngrole'] = 'guest';
 
       $allow_admin = 0;
       $allowEdit = $allowAdd = $tentative_edit = $allowDelete = $allowMediaAdd = $allowMediaEdit = $allowMediaDelete = 0;
@@ -138,5 +138,5 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$adminLo
   $_SESSION['allow_profile'] = $allow_profile;
 }
 
-$postvars = $_SESSION['postvars'] = "";
+$postvars = $_SESSION['postvars'] = '';
 unset($_SESSION['postvars']);

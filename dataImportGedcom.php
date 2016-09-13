@@ -9,7 +9,7 @@ require $subroot . 'importconfig.php';
 
 if (!$allowAdd || !$allowEdit || $assignedbranch) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 $query = "SELECT gedcom FROM $treesTable";
@@ -25,7 +25,7 @@ while ($treerow = tng_fetch_assoc($result)) {
 }
 tng_free_result($result);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('datamaint'));
 
 $allow_export = 1;
@@ -38,10 +38,10 @@ $allow_export = 1;
     <?php
     echo $adminHeaderSection->build('datamaint-gedimport', $message);
     $navList = new navList('');
-    //    $navList->appendItem([true, "dataImportGedcom.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allow_export, "dataExportGedcom.php", uiTextSnippet('export'), "export"]);
-    $navList->appendItem([true, "dataSecondaryProcesses.php", uiTextSnippet('secondarymaint'), "second"]);
-    echo $navList->build("import");
+    //    $navList->appendItem([true, 'dataImportGedcom.php', uiTextSnippet('import'), 'import']);
+    $navList->appendItem([$allow_export, 'dataExportGedcom.php', uiTextSnippet('export'), 'export']);
+    $navList->appendItem([true, 'dataSecondaryProcesses.php', uiTextSnippet('secondarymaint'), 'second']);
+    echo $navList->build('import');
     ?>
     <form name='form1' action='dataImportGedcomFormAction.php' target='results' method='post' ENCTYPE='multipart/form-data' onsubmit="return checkFile(this);">
       <em><?php echo uiTextSnippet('addreplacedata'); ?></em>
@@ -68,7 +68,7 @@ $allow_export = 1;
         <div class='col-md-3'>
           <input id='database_org' type='hidden' value=''>
           <input id='database_last' type='hidden' value=''> 
-          <button class='btn btn-outline-primary' id='gedselect' name='gedselect' type='button'><?php echo uiTextSnippet('select') . "..."; ?></button>
+          <button class='btn btn-outline-primary' id='gedselect' name='gedselect' type='button'><?php echo uiTextSnippet('select') . '...'; ?></button>
         </div>
       </div>
       <br>
@@ -119,10 +119,10 @@ $allow_export = 1;
       <div class='row' id='replace'>
         <div class='col-md-12'>
           <h4><?php echo uiTextSnippet('replace'); ?>:</h4>
-          <input id='allcurrentdata' name='del' type='radio' value='yes'<?php if ($tngimpcfg['defimpopt'] == 1) {echo " checked";} ?>> <?php echo uiTextSnippet('allcurrentdata'); ?> &nbsp;
-          <input id='matchingonly' name='del' type='radio' value="match"<?php if (!$tngimpcfg['defimpopt']) {echo " checked";} ?>> <?php echo uiTextSnippet('matchingonly'); ?> &nbsp;
-          <input id='donotreplace' name='del' type='radio' value="no"<?php if ($tngimpcfg['defimpopt'] == 2) {echo " checked";} ?>> <?php echo uiTextSnippet('donotreplace'); ?> &nbsp;
-          <input id='appendall' name='del' type='radio' value="append"<?php if ($tngimpcfg['defimpopt'] == 3) {echo " checked";} ?>> <?php echo uiTextSnippet('appendall'); ?><br><br>
+          <input id='allcurrentdata' name='del' type='radio' value='yes'<?php if ($tngimpcfg['defimpopt'] == 1) {echo ' checked';} ?>> <?php echo uiTextSnippet('allcurrentdata'); ?> &nbsp;
+          <input id='matchingonly' name='del' type='radio' value="match"<?php if (!$tngimpcfg['defimpopt']) {echo ' checked';} ?>> <?php echo uiTextSnippet('matchingonly'); ?> &nbsp;
+          <input id='donotreplace' name='del' type='radio' value="no"<?php if ($tngimpcfg['defimpopt'] == 2) {echo ' checked';} ?>> <?php echo uiTextSnippet('donotreplace'); ?> &nbsp;
+          <input id='appendall' name='del' type='radio' value="append"<?php if ($tngimpcfg['defimpopt'] == 3) {echo ' checked';} ?>> <?php echo uiTextSnippet('appendall'); ?><br><br>
           <span class="small"><em><?php echo uiTextSnippet('imphints'); ?></em></span>
         </div>
       </div>
@@ -174,7 +174,7 @@ $allow_export = 1;
   <?php
   $treectr = 0;
   for ($i = 0; $i < $treenum; $i++) {
-    $treeref = $trees[$i] ? $trees[$i] : "none";
+    $treeref = $trees[$i] ? $trees[$i] : 'none';
     echo "branchcounts['$treeref']=-1;\n";
     $treectr++;
   }
@@ -188,7 +188,7 @@ $allow_export = 1;
 <?php if ($debug) { ?>
   <iframe id="results" height="300" width="400" name="results" onload="iframeLoaded();"></iframe>
 <?php } else { ?>
-  <iframe id="results" height="0" width="0" name="results" onload="iframeLoaded();"></iframe>
+  <iframe id="results" height='0' width='0' name="results" onload="iframeLoaded();"></iframe>
 <?php } ?>
 </body>
 </html>

@@ -7,7 +7,7 @@ function doSourceSearch($instance, $pagenav) {
   global $sourcesearch;
 
   $str = "<div>\n";
-  $str .= buildFormElement("sourcesShow", "get", "SourceSearch$instance");
+  $str .= buildFormElement('sourcesShow', 'get', "SourceSearch$instance");
   $str .= $pagenav;
   $str .= "</form></div>\n";
 
@@ -20,14 +20,14 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $page = 1;
 }
 $sourcesearch = trim($sourcesearch);
 if ($sourcesearch) {
   $wherestr = "WHERE title LIKE \"%$sourcesearch%\" OR shorttitle LIKE \"%$sourcesearch%\" OR author LIKE \"%$sourcesearch%\"";
 } else {
-  $wherestr = "";
+  $wherestr = '';
 }
 $query = "SELECT sourceID, title, shorttitle, author FROM $sources_table $wherestr ORDER BY title LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
@@ -45,14 +45,14 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 }
 $numrowsplus = $numrows + $offset;
 
-$logstring = "<a href=\"sourcesShow.php?offset=$offset&amp;sourcesearch=$sourcesearch\">" . xmlcharacters(uiTextSnippet('sources')) . "</a>";
+$logstring = "<a href=\"sourcesShow.php?offset=$offset&amp;sourcesearch=$sourcesearch\">" . xmlcharacters(uiTextSnippet('sources')) . '</a>';
 writelog($logstring);
 preparebookmark($logstring);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('sources'));
 ?>
 <!DOCTYPE html>
@@ -86,14 +86,14 @@ $headSection->setTitle(uiTextSnippet('sources'));
     <?php 
     }
     if ($totrows) {
-      echo "<p><span>" . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</span></p>";
+      echo '<p><span>' . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</span></p>";
     }
     ?>
     <table class="table table-sm table-striped">
       <tr>
         <th></th>
         <th><?php echo uiTextSnippet('sourceid'); ?></th>
-        <th><?php echo uiTextSnippet('title') . ", " . uiTextSnippet('author'); ?></th>
+        <th><?php echo uiTextSnippet('title') . ', ' . uiTextSnippet('author'); ?></th>
       </tr>
       <?php
       $i = $offsetplus;

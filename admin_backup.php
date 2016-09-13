@@ -22,7 +22,7 @@ function backup($table) {
   if (file_exists($filename)) {
     unlink($filename);
   }
-  $fp = fopen($filename, "w");
+  $fp = fopen($filename, 'w');
   if ($fp) {
     flock($fp, LOCK_EX);
     $nextone = $largechunk * -1;
@@ -44,11 +44,11 @@ function backup($table) {
       while ($row = tng_fetch_array($result, 'num')) {
         $line = '';
         for ($i = 0; $i < $nflds; $i++) {
-          if ($row[$i] == "" && ($fieldtypes[$i] == 3 || $fieldtypes[$i] == 2 || $fieldtypes[$i] == 1)) {
-            $row[$i] = "0";
+          if ($row[$i] == '' && ($fieldtypes[$i] == 3 || $fieldtypes[$i] == 2 || $fieldtypes[$i] == 1)) {
+            $row[$i] = '0';
           }
-          if ($row[$i] == "" && ($fieldtypes[$i] == 12)) {
-            $row[$i] = "0000-00-00 00:00:00";
+          if ($row[$i] == '' && ($fieldtypes[$i] == 12)) {
+            $row[$i] = '0000-00-00 00:00:00';
           }
           $line .= '"' . addslashes($row[$i]) . '",';
         }
@@ -60,7 +60,7 @@ function backup($table) {
     flock($fp, LOCK_UN);
     fclose($fp);
     chmod($filename, 0664);
-    return "";
+    return '';
   } else {
     return uiTextSnippet('cannotopen') . " $filename.";
   }
@@ -78,10 +78,10 @@ function delbackup($table) {
 function getfiletime($filename) {
   global $fileflag, $timeOffset;
 
-  $filemodtime = "";
+  $filemodtime = '';
   if ($fileflag) {
     $filemod = filemtime($filename) + (3600 * $timeOffset);
-    $filemodtime = date("F j, Y h:i:s A", $filemod);
+    $filemodtime = date('F j, Y h:i:s A', $filemod);
   }
   return $filemodtime;
 }
@@ -89,9 +89,9 @@ function getfiletime($filename) {
 function getfilesize($filename) {
   global $fileflag;
 
-  $filesize = "";
+  $filesize = '';
   if ($fileflag) {
-    $filesize = ceil(filesize($filename) / 1000) . " Kb";
+    $filesize = ceil(filesize($filename) / 1000) . ' Kb';
   }
   return $filesize;
 }
@@ -99,14 +99,14 @@ function getfilesize($filename) {
 set_time_limit(0);
 $largechunk = 10000;
 $tablelist = [$address_table, $albums_table, $albumlinks_table, $album2entities_table, $assoc_table, $branches_table, $branchlinks_table, $cemeteries_table, $people_table, $families_table, $children_table, $languagesTable, $places_table, $states_table, $countries_table, $sources_table, $repositories_table, $citations_table, $reports_table, $events_table, $eventtypes_table, $treesTable, $notelinks_table, $xnotes_table, $users_table, $tlevents_table, $saveimport_table, $temp_events_table, $media_table, $medialinks_table, $mediatypes_table, $mostwanted_table];
-$ajaxmsg = $msg = "";
+$ajaxmsg = $msg = '';
 
-if ($table == "struct") {
+if ($table == 'struct') {
   $filename = "$rootpath$backuppath/tng_tablestructure.bak";
   if (file_exists($filename)) {
     unlink($filename);
   }
-  $fp = fopen($filename, "w");
+  $fp = fopen($filename, 'w');
   if (!$fp) {
     die(uiTextSnippet('cannotopen') . " $filename");
   }
@@ -125,10 +125,10 @@ if ($table == "struct") {
   chmod($filename, 0664);
 
   $message = uiTextSnippet('tablestruct') . ' ' . uiTextSnippet('succbackedup') . '.';
-  adminwritelog(uiTextSnippet('backup') . ": " . uiTextSnippet('tablestruct'));
-} elseif ($table == "del") {
+  adminwritelog(uiTextSnippet('backup') . ': ' . uiTextSnippet('tablestruct'));
+} elseif ($table == 'del') {
   $tablename = uiTextSnippet('alltables');
-  $message = "$tablename " . uiTextSnippet('succdel') . ".";
+  $message = "$tablename " . uiTextSnippet('succdel') . '.';
 
   foreach ($tablelist as $table) {
     eval("\$dothistable = \"\$$table\";");
@@ -137,7 +137,7 @@ if ($table == "struct") {
     }
   }
 } else {
-  if ($table == "all") {
+  if ($table == 'all') {
     $tablename = uiTextSnippet('alltables');
     $message = "$tablename " . uiTextSnippet('succbackedup') . '.';
 
@@ -164,10 +164,10 @@ if ($table == "struct") {
   adminwritelog(uiTextSnippet('backup') . ": $tablename");
 }
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 if ($ajaxmsg) {
   echo $ajaxmsg;
 } else {
-  $sub = ($orgtable == "struct") ? "sub=structure&" : "";
-  header("Location: admin_utilities.php?$sub" . "message=" . urlencode($message));
+  $sub = ($orgtable == 'struct') ? 'sub=structure&' : '';
+  header("Location: admin_utilities.php?$sub" . 'message=' . urlencode($message));
 }

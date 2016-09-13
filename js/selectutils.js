@@ -49,8 +49,8 @@ function Move(fieldlist, dir) {
 
 function TrimString(sInString) {
     'use strict';
-    sInString = sInString.replace(/^\s+/g, "");// strip leading
-    return sInString.replace(/\s+$/g, "");// strip trailing
+    sInString = sInString.replace(/^\s+/g, '');// strip leading
+    return sInString.replace(/\s+$/g, '');// strip trailing
 }
 
 function getTree(treefield) {
@@ -99,23 +99,23 @@ function insertCell(row, index, classname, content) {
 
 function getActionButtons(vars, type) {
     'use strict';
-    var celltext = "",
-        iconColor = type === "Citation" ? "icon-info" : "icon-muted";
+    var celltext = '',
+        iconColor = type === "Citation" ? 'icon-info' : 'icon-muted';
 
     if (vars.allow_edit) {
         celltext += "<a href='#' onclick=\"return edit" + type + "('" + vars.id + "');\" title=\"" + textSnippet('edit') + "\">";
         celltext += "<img class='icon-sm' src='svg/new-message.svg'>";
-        celltext += "</a>";
+        celltext += '</a>';
     }
     if (vars.allow_delete) {
         celltext += "<a href='#' onclick=\"return delete" + type + "('" + vars.id + "','" + vars.persfamID + "','" + vars.tree + "','" + vars.eventID + "');\" title=\"" + textSnippet('delete') + "\">";
         celltext += "<img class='icon-sm' src='svg/trash.svg'>";
-        celltext += "</a>";
+        celltext += '</a>';
     }
     if (vars.allow_cite) {
         celltext += "<a class='icon-sm icon-citations iconColor' id=\"citesiconN" + vars.id + "\" href='#' onclick=\"return showCitationsInside('N" + vars.id + "','','" + vars.persfamID + "');\" title=\"" + textSnippet('citations') + "\">";
         celltext += "<img class='icon-sm icon-right " + iconColor + "' data-src='svg/archive.svg'>";
-        celltext += "</a>";
+        celltext += '</a>';
     }
     return celltext;
 }
@@ -140,10 +140,10 @@ function addEvent(form) {
                 newtr.id = "row_" + vars.id;
                 buttons = getActionButtons(vars, 'Event', allow_notes, allow_cites);
                 insertCell(newtr, 0, "nw", buttons);
-                insertCell(newtr, 1, "", vars.display);
-                insertCell(newtr, 2, "", vars.eventdate + "&nbsp;");
-                insertCell(newtr, 3, "", vars.eventplace + "&nbsp;");
-                insertCell(newtr, 4, "", vars.info + "&nbsp;");
+                insertCell(newtr, 1, '', vars.display);
+                insertCell(newtr, 2, '', vars.eventdate + '&nbsp;');
+                insertCell(newtr, 3, '', vars.eventplace + '&nbsp;');
+                insertCell(newtr, 4, '', vars.info + '&nbsp;');
 
                 eventtbl.style.display = '';
                 tnglitbox.remove();
@@ -164,10 +164,10 @@ function updateEvent(form) {
         dataType: 'json',
         success: function (vars) {
             var tds = $('tr#row_' + eventID + ' td');
-            tds.eq(1).html(vars.display + "&nbsp;");
-            tds.eq(2).html(vars.eventdate + "&nbsp;");
-            tds.eq(3).html(vars.eventplace + "&nbsp;");
-            tds.eq(4).html(vars.info + "&nbsp;");
+            tds.eq(1).html(vars.display + '&nbsp;');
+            tds.eq(2).html(vars.eventdate + '&nbsp;');
+            tds.eq(3).html(vars.eventplace + '&nbsp;');
+            tds.eq(4).html(vars.info + '&nbsp;');
             tnglitbox.remove();
             $.each(tds, function (index, item) {
                 $(item).effect('highlight', {}, 200);
@@ -263,7 +263,7 @@ var subpage = false;
 function showCitationsInside(eventID, noteID, persfamID) {
     'use strict';
     subpage = true;
-    var xnote = noteID !== "" ? noteID : "";
+    var xnote = noteID !== '' ? noteID : '';
     $.ajax({
         url: 'admin_citations.php',
         data: {eventID: eventID, persfamID: persfamID, noteID: xnote},
@@ -322,7 +322,7 @@ function showBranchEdit(branchdiv) {
 
 function updateBranchList(branchselect, branchdiv, branchlistdiv) {
     'use strict';
-    var branchlist = "",
+    var branchlist = '',
         gotnone = false,
         firstone = null;
     $('#' + branchselect + ' >option:selected').each(function (index, option) {
@@ -332,11 +332,11 @@ function updateBranchList(branchselect, branchdiv, branchlistdiv) {
         }
         if (branchlist) {
             if (gotnone) {
-                branchlist = "";
+                branchlist = '';
                 firstone.selected = false;
                 gotnone = false;
             } else {
-                branchlist += ", ";
+                branchlist += ', ';
             }
         }
         branchlist += option.text;
@@ -355,14 +355,14 @@ function closeBranchEdit(branchselect, branchdiv, branchlistdiv) {
     branchtimer = setTimeout("updateBranchList('" + branchselect + "','" + branchdiv + "','" + branchlistdiv + "')", 500);
 }
 
-var lastFilter = "";
+var lastFilter = '';
 var lastCriteria = "c";
 var filterStartSection, filterEndSection, itemIDField, itemTitleDiv;
 var timeoutId = 0;
 
 function initFilter(start, end, idfield, titlediv) {
     'use strict';
-    lastCriteria = "";
+    lastCriteria = '';
     filterStartSection = end;
     filterEndSection = start;
     itemIDField = idfield;
@@ -410,7 +410,7 @@ function openFindPlaceForm(field, temple) {
     'use strict';
     activebox = field;
     var value = $('#' + field).val(),
-        templestr = temple ? "&temple=1" : "";
+        templestr = temple ? "&temple=1" : '';
     seclitbox = new ModalDialog('findplaceform.php?tree=' + tree + '&place=' + encodeURIComponent(value) + templestr);
     initFilter(null, seclitbox, field, null);
     if (value) {
@@ -610,10 +610,10 @@ function retItem(id, place) {
         $('#' + itemIDField).val(place ? returntext : id);
         if (itemTitleDiv && $('#' + itemTitleDiv).length) {
             if ($('#birth_' + id).length && $('#birth_' + id).html()) {
-                returntext += " (" + $('#birth_' + id).html() + ")";
+                returntext += ' (' + $('#birth_' + id).html() + ")";
             }
             if ($('#id_' + id).length) {
-                returntext += " - " + id;
+                returntext += ' - ' + id;
             }
             if ($('#' + itemTitleDiv).attr('type') === "text") {
                 $('#' + itemTitleDiv).val(returntext);
@@ -684,7 +684,7 @@ function copylast(form, citationID) {
             //fill in form values
             form.sourceID.value = vars.sourceID;
             form.citepage.value = vars.citepage;
-            form.quay.selectedIndex = vars.quay === "" ? 0 : parseInt(vars.quay, 10) + 1;
+            form.quay.selectedIndex = vars.quay === '' ? 0 : parseInt(vars.quay, 10) + 1;
             form.citedate.value = vars.citedate;
             form.citetext.value = vars.citetext;
             form.citenote.value = vars.citenote;

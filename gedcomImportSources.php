@@ -4,13 +4,13 @@ function handleSource($persfamID, $prevlevel) {
   global $savestate;
 
   $cite = [];
-  preg_match("/^@(\S+)@/", $lineinfo['rest'], $matches);
+  preg_match('/^@(\S+)@/', $lineinfo['rest'], $matches);
   if ($matches[1]) {
     $cite['sourceID'] = adjustID($matches[1], $savestate['soffset']);
-    $cite['desc'] = "";
+    $cite['desc'] = '';
     $lineinfo = getLine();
   } else {
-    $cite['sourceID'] = "";
+    $cite['sourceID'] = '';
     $cite['desc'] = addslashes($lineinfo['rest']);
     $cite['desc'] .= getContinued();
   }
@@ -19,22 +19,22 @@ function handleSource($persfamID, $prevlevel) {
   while ($lineinfo['level'] >= $prevlevel) {
     $tag = $lineinfo['tag'];
     switch ($tag) {
-      case "DATE":
+      case 'DATE':
         $cite['DATE'] = addslashes($lineinfo['rest']);
         $cite['DATETR'] = convertDate($cite['DATE']);
         $lineinfo = getLine();
         break;
-      case "PAGE":
-      case "QUAY":
+      case 'PAGE':
+      case 'QUAY':
         $cite[$tag] = addslashes($lineinfo['rest']);
         $cite[$tag] .= getContinued();
         break;
-      case "TEXT":
-      case "NOTE":
+      case 'TEXT':
+      case 'NOTE':
         $notecount++;
-        preg_match("/^@(\S+)@/", $lineinfo['rest'], $matches);
+        preg_match('/^@(\S+)@/', $lineinfo['rest'], $matches);
         if ($matches[1]) {
-          $cite[$tag] = "@" . adjustID($matches[1], $savestate['noffset']) . "@";
+          $cite[$tag] = '@' . adjustID($matches[1], $savestate['noffset']) . '@';
           $lineinfo = getLine();
         } else {
           $cite[$tag] = addslashes($lineinfo['rest']);
@@ -63,8 +63,8 @@ function getSourceRecord($sourceID, $prevlevel) {
   $sourceID = adjustID($sourceID, $savestate['soffset']);
 
   $prefix = 'S';
-  $info = "";
-  $changedate = "";
+  $info = '';
+  $changedate = '';
   $events = [];
   $stdnotes = [];
   $notecount = 0;
@@ -78,54 +78,54 @@ function getSourceRecord($sourceID, $prevlevel) {
     if ($lineinfo['level'] == $prevlevel) {
       $tag = $lineinfo['tag'];
       switch ($tag) {
-        case "ABBR":
-        case "AUTH":
-        case "CALN":
-        case "PUBL":
-        case "TITL":
+        case 'ABBR':
+        case 'AUTH':
+        case 'CALN':
+        case 'PUBL':
+        case 'TITL':
           $info[$tag] = addslashes($lineinfo['rest']);
           $info[$tag] .= getContinued();
           break;
-        case "CHAN":
+        case 'CHAN':
           $lineinfo = getLine();
           $changedate = addslashes($lineinfo['rest']);
           if ($changedate) {
             $lineinfo = getLine();
-            if ($lineinfo['tag'] == "TIME") {
-              $changedate .= " " . $lineinfo['rest'];
+            if ($lineinfo['tag'] == 'TIME') {
+              $changedate .= ' ' . $lineinfo['rest'];
               $lineinfo = getLine();
             }
-            $changedate = date("Y-m-d H:i:s", strtotime($changedate));
+            $changedate = date('Y-m-d H:i:s', strtotime($changedate));
           }
           break;
-        case "DATA":
+        case 'DATA':
           $lineinfo = getLine(); //text should start on next line;
-        case "TEXT":
+        case 'TEXT':
           $info['TEXT'] = addslashes($lineinfo['rest']);
           $info['TEXT'] .= getContinued();
           break;
-        case "NOTE":
+        case 'NOTE':
           $notecount++;
-          $stdnotes[$notecount]['TAG'] = "";
-          preg_match("/^@(\S+)@/", $lineinfo['rest'], $matches);
+          $stdnotes[$notecount]['TAG'] = '';
+          preg_match('/^@(\S+)@/', $lineinfo['rest'], $matches);
           if ($matches[1]) {
             $stdnotes[$notecount]['XNOTE'] = adjustID($matches[1], $savestate['noffset']);
-            $stdnotes[$notecount]['NOTE'] = "";
+            $stdnotes[$notecount]['NOTE'] = '';
             $lineinfo = getLine();
           } else {
-            $stdnotes[$notecount]['XNOTE'] = "";
+            $stdnotes[$notecount]['XNOTE'] = '';
             $stdnotes[$notecount]['NOTE'] .= addslashes($lineinfo['rest']);
             $stdnotes[$notecount]['NOTE'] .= getContinued();
           }
           $ncitecount = 0;
-          while ($lineinfo['level'] >= $prevlevel && $lineinfo['tag'] == "SOUR") {
+          while ($lineinfo['level'] >= $prevlevel && $lineinfo['tag'] == 'SOUR') {
             $ncitecount++;
             $stdnotes[$notecount]['SOUR'][$ncitecount] = handleSource($sourceID, $prevlevel + 1);
           }
           break;
-        case "OBJE":
+        case 'OBJE':
           if ($savestate['media']) {
-            preg_match("/^@(\S+)@/", $lineinfo['rest'], $matches);
+            preg_match('/^@(\S+)@/', $lineinfo['rest'], $matches);
             $mmcount++;
             $mminfo[$mmcount] = getMoreMMInfo($lineinfo['level'], $mmcount);
             $mminfo[$mmcount]['OBJE'] = $matches[1] ? $matches[1] : $mminfo[$mmcount]['FILE'];
@@ -134,23 +134,23 @@ function getSourceRecord($sourceID, $prevlevel) {
             $lineinfo = getLine();
           }
           break;
-        case "REPO":
-          preg_match("/^@(\S+)@/", $lineinfo['rest'], $matches);
+        case 'REPO':
+          preg_match('/^@(\S+)@/', $lineinfo['rest'], $matches);
           if ($matches[1]) {
             $info['REPO'] = $matches[1];
           }
           $lineinfo = getLine();
-          if ($lineinfo['tag'] == "CALN") {
+          if ($lineinfo['tag'] == 'CALN') {
             $info['CALN'] = addslashes($lineinfo['rest']);
             $info['CALN'] .= getContinued();
           }
           break;
-        case "_SUBQ": // RM subsequent quote
-        case "_BIBL": // RM bibliography
+        case '_SUBQ': // RM subsequent quote
+        case '_BIBL': // RM bibliography
           $info[$tag] = addslashes($lineinfo['rest']);
           $info[$tag] .= getContinued();
           break;
-        case "_TMPLT": // RM template 
+        case '_TMPLT': // RM template 
           $lineinfo = getLine();
           while ($lineinfo['level'] > $prevlevel) {
             if ($lineinfo['level'] == $prevlevel + 2) {
@@ -220,12 +220,12 @@ function getSourceRecord($sourceID, $prevlevel) {
       $lineinfo = getLine();
     }
   }
-  $inschangedt = $changedate ? $changedate : ($tngimpcfg['chdate'] ? "" : $today);
+  $inschangedt = $changedate ? $changedate : ($tngimpcfg['chdate'] ? '' : $today);
   $query = "INSERT IGNORE INTO $sources_table (sourceID, callnum, title, author, publisher, shorttitle, repoID, actualtext, changedate, changedby, type, other, comments) "
       . "VALUES('$sourceID', '{$info['CALN']}', '{$info['TITL']}', '{$info['AUTH']}', '{$info['PUBL']}', '{$info['ABBR']}', '{$info['REPO']}', \"" . trim($info['TEXT']) . "\", '$changedate', '$currentuser', '', '', '')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   $success = tng_affected_rows();
-  if (!$success && $savestate['del'] != "no") {
+  if (!$success && $savestate['del'] != 'no') {
     if ($savestate['neweronly'] && $inschangedt) {
       $query = "SELECT changedate FROM $sources_table WHERE sourceID = '$sourceID'";
       $result = tng_query($query);
@@ -238,12 +238,12 @@ function getSourceRecord($sourceID, $prevlevel) {
       $goahead = 1;
     }
     if ($goahead) {
-      $chdatestr = $inschangedt ? ", changedate='$inschangedt'" : "";
+      $chdatestr = $inschangedt ? ", changedate='$inschangedt'" : '';
       $query = "UPDATE $sources_table SET callnum = '{$info['CALN']}', title='{$info['TITL']}', author='{$info['AUTH']}', publisher='{$info['PUBL']}', shorttitle='{$info['ABBR']}', repoID='{$info['REPO']}', actualtext=\"" . trim($info['TEXT']) . "\", changedby='$currentuser' $chdatestr WHERE sourceID = '$sourceID'";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $success = 1;
 
-      if ($savestate['del'] == "match") {
+      if ($savestate['del'] == 'match') {
         //delete all custom events & notelinks for this source because we didn't before
         deleteLinksOnMatch($sourceID);
       }
@@ -259,7 +259,7 @@ function getSourceRecord($sourceID, $prevlevel) {
       }
     }
     if ($mmcount) {
-      processMedia($mmcount, $mminfo, $sourceID, "");
+      processMedia($mmcount, $mminfo, $sourceID, '');
     }
 
     incrCounter($prefix);
@@ -270,15 +270,15 @@ function getRestOfSource($sourceID, $prevlevel) {
   global $lineinfo;
   global $lineending;
 
-  $continued = "";
-  $lasttag = "";
+  $continued = '';
+  $lasttag = '';
 
   $lineinfo = getLine();
   while ($lineinfo['level'] > $prevlevel) {
     if ($lineinfo['rest']) {
-      if ($lineinfo['tag'] == "CONC") {
+      if ($lineinfo['tag'] == 'CONC') {
         $continued .= addslashes($lineinfo['rest']);
-      } elseif ($lineinfo['tag'] == "CONT") {
+      } elseif ($lineinfo['tag'] == 'CONT') {
         if ($continued) {
           $lineinfo['rest'] = "\n" . $lineinfo['rest'];
         }
@@ -288,7 +288,7 @@ function getRestOfSource($sourceID, $prevlevel) {
           if ($continued) {
             $continued .= $lineending;
           }
-          $continued .= $lineinfo['tag'] . ":";
+          $continued .= $lineinfo['tag'] . ':';
           $lasttag = $lineinfo['tag'];
         }
         if ($continued) {
@@ -317,8 +317,8 @@ function getRepoRecord($repoID, $prevlevel) {
   $repoID = adjustID($repoID, $savestate['roffset']);
 
   $prefix = 'R';
-  $info = "";
-  $changedate = "";
+  $info = '';
+  $changedate = '';
   $events = [];
   $stdnotes = [];
   $notecount = 0;
@@ -332,47 +332,47 @@ function getRepoRecord($repoID, $prevlevel) {
     if ($lineinfo['level'] == $prevlevel) {
       $tag = $lineinfo['tag'];
       switch ($tag) {
-        case "NAME":
+        case 'NAME':
           $info['NAME'] = addslashes($lineinfo['rest']) . getContinued();
           break;
-        case "ADDR":
+        case 'ADDR':
           $address = handleAddress($lineinfo['level'], 1);
           $info['extra'] = 1;
           break;
-        case "CHAN":
+        case 'CHAN':
           $lineinfo = getLine();
           $changedate = addslashes($lineinfo['rest']);
           if ($changedate) {
             $lineinfo = getLine();
-            if ($lineinfo['tag'] == "TIME") {
-              $changedate .= " " . $lineinfo['rest'];
+            if ($lineinfo['tag'] == 'TIME') {
+              $changedate .= ' ' . $lineinfo['rest'];
               $lineinfo = getLine();
             }
-            $changedate = date("Y-m-d H:i:s", strtotime($changedate));
+            $changedate = date('Y-m-d H:i:s', strtotime($changedate));
           }
           break;
-        case "NOTE":
+        case 'NOTE':
           $notecount++;
-          $stdnotes[$notecount]['TAG'] = "";
-          preg_match("/^@(\S+)@/", $lineinfo['rest'], $matches);
+          $stdnotes[$notecount]['TAG'] = '';
+          preg_match('/^@(\S+)@/', $lineinfo['rest'], $matches);
           if ($matches[1]) {
             $stdnotes[$notecount]['XNOTE'] = adjustID($matches[1], $savestate['noffset']);
-            $stdnotes[$notecount]['NOTE'] = "";
+            $stdnotes[$notecount]['NOTE'] = '';
             $lineinfo = getLine();
           } else {
-            $stdnotes[$notecount]['XNOTE'] = "";
+            $stdnotes[$notecount]['XNOTE'] = '';
             $stdnotes[$notecount]['NOTE'] .= addslashes($lineinfo['rest']);
             $stdnotes[$notecount]['NOTE'] .= getContinued();
           }
           $ncitecount = 0;
-          while ($lineinfo['level'] >= $prevlevel && $lineinfo['tag'] == "SOUR") {
+          while ($lineinfo['level'] >= $prevlevel && $lineinfo['tag'] == 'SOUR') {
             $ncitecount++;
             $stdnotes[$notecount]['SOUR'][$ncitecount] = handleSource($repoID, $prevlevel + 1);
           }
           break;
-        case "OBJE":
+        case 'OBJE':
           if ($savestate['media']) {
-            preg_match("/^@(\S+)@/", $lineinfo['rest'], $matches);
+            preg_match('/^@(\S+)@/', $lineinfo['rest'], $matches);
             $mmcount++;
             $mminfo[$mmcount] = getMoreMMInfo($lineinfo['level'], $mmcount);
             $mminfo[$mmcount]['OBJE'] = $matches[1] ? $matches[1] : $mminfo[$mmcount]['FILE'];
@@ -391,11 +391,11 @@ function getRepoRecord($repoID, $prevlevel) {
       $lineinfo = getLine();
     }
   }
-  $inschangedt = $changedate ? $changedate : ($tngimpcfg['chdate'] ? "" : $today);
+  $inschangedt = $changedate ? $changedate : ($tngimpcfg['chdate'] ? '' : $today);
   $query = "INSERT IGNORE INTO $repositories_table (repoID, reponame, changedate, changedby)  VALUES('$repoID', '{$info['NAME']}', '$inschangedt', '$currentuser')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   $success = tng_affected_rows();
-  if (!$success && $savestate['del'] != "no") {
+  if (!$success && $savestate['del'] != 'no') {
     if ($savestate['neweronly'] && $inschangedt) {
       $query = "SELECT changedate FROM $repositories_table WHERE repoID = '$repoID'";
       $result = tng_query($query);
@@ -408,7 +408,7 @@ function getRepoRecord($repoID, $prevlevel) {
       $goahead = 1;
     }
     if ($goahead) {
-      $chdatestr = $inschangedt ? ", changedate='$inschangedt'" : "";
+      $chdatestr = $inschangedt ? ", changedate='$inschangedt'" : '';
       if (!isset($info['ADDR'])) {
         $info['ADDR'] = 0;
       }
@@ -416,7 +416,7 @@ function getRepoRecord($repoID, $prevlevel) {
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $success = 1;
 
-      if ($savestate['del'] == "match") {
+      if ($savestate['del'] == 'match') {
         //delete all custom events & notelinks for this source because we didn't before
         deleteLinksOnMatch($repoID);
       }
@@ -432,7 +432,7 @@ function getRepoRecord($repoID, $prevlevel) {
       }
     }
     if ($mmcount) {
-      processMedia($mmcount, $mminfo, $repoID, "");
+      processMedia($mmcount, $mminfo, $repoID, '');
     }
     if (is_array($address)) {
       $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, www, email, phone) "

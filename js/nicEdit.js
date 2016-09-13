@@ -449,7 +449,7 @@ var nicEditorInstance = bkClass.extend({
 	
 	init : function() {
 		this.elm.setAttribute('contentEditable','true');	
-		if(this.getContent() === "") {
+		if(this.getContent() === '') {
 			this.setContent('<br />');
 		}
 		this.instanceDoc = document.defaultView;
@@ -1201,7 +1201,7 @@ var nicLinkButton = nicEditorAdvancedButton.extend({
 	
 	submit : function(e) {
 		var url = this.inputs['href'].value;
-		if(url === "http://" || url === "") {
+		if(url === "http://" || url === '') {
 			alert("You must enter a URL to Create a Link");
 			return false;
 		}
@@ -1306,7 +1306,7 @@ var nicImageButton = nicEditorAdvancedButton.extend({
 	
 	submit : function(e) {
 		var src = this.inputs['src'].value;
-		if(src === "" || src === "http://") {
+		if(src === '' || src === "http://") {
 			alert("You must enter a Image URL to insert");
 			return false;
 		}

@@ -9,7 +9,7 @@ require 'version.php';
 
 if ($assignedbranch) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
@@ -19,7 +19,7 @@ function getBranchCount($branch, $table) {
   $row = tng_fetch_assoc($result);
   $count = $row['count'];
   if (!$count) {
-    $count = "0";
+    $count = '0';
   }
   tng_free_result($result);
 
@@ -46,7 +46,7 @@ if ($newsearch) {
     setcookie("tng_search_branches_post[offset]", $offset, $exptime);
   }
 }
-$searchstring_noquotes = preg_replace("/\"/", "&#34;", $searchstring);
+$searchstring_noquotes = preg_replace('/\"/', '&#34;', $searchstring);
 $searchstring = addslashes($searchstring);
 
 if ($offset) {
@@ -54,10 +54,10 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $tngpage = 1;
 }
-$whereClause = $searchstring ? "WHERE (branch LIKE '%$searchstring%' OR $branches_table.description LIKE '%$searchstring%')" : "";
+$whereClause = $searchstring ? "WHERE (branch LIKE '%$searchstring%' OR $branches_table.description LIKE '%$searchstring%')" : '';
 $query = "SELECT branch, $branches_table.description AS description, personID FROM $branches_table $whereClause ORDER BY $branches_table.description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
@@ -71,7 +71,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 } else {
   $totrows = $numrows;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('branches'));
 ?>
 <!DOCTYPE html>
@@ -82,9 +82,9 @@ $headSection->setTitle(uiTextSnippet('branches'));
     <?php
     echo $adminHeaderSection->build('branches', $message);
     $navList = new navList('');
-    //    $navList->appendItem([true, "branchesBrowse.php", uiTextSnippet('browse'), "findbranch"]);
-    $navList->appendItem([$allowAdd, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
-    echo $navList->build("findbranch");
+    //    $navList->appendItem([true, 'branchesBrowse.php', uiTextSnippet('browse'), 'findbranch']);
+    $navList->appendItem([$allowAdd, 'branchesAdd.php', uiTextSnippet('add'), 'addbranch']);
+    echo $navList->build('findbranch');
     ?>
     <form id='form1' name='form1' action='branchesBrowse.php'>
       <input name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>">
@@ -130,7 +130,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
         </thead>
         <?php
         if ($numrows) {
-          $actionstr = "";
+          $actionstr = '';
           if ($allowEdit) {
             $actionstr .= "<a href=\"branchesEdit.php?branch=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
@@ -142,7 +142,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
             $actionstr .= "</a>\n";
           }
           while ($row = tng_fetch_assoc($result)) {
-            $newactionstr = str_replace("xxx", $row['branch'], $actionstr);
+            $newactionstr = str_replace('xxx', $row['branch'], $actionstr);
             echo "<tr id=\"row_{$row['branch']}\">\n";
             echo "<td>\n";
             echo "<div>\n$newactionstr</div>\n";
@@ -151,7 +151,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
               echo "<td><input name=\"del{$row['branch']}\" type='checkbox' value='1'></td>";
             }
             $editlink = "branchesEdit.php?branch={$row['branch']}";
-            $id = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['branch'] . "</a>" : $row['branch'];
+            $id = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['branch'] . '</a>' : $row['branch'];
 
             echo "<td>$id</td>\n";
             echo "<td>&nbsp;{$row['description']}</td>\n";

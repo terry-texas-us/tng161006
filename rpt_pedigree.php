@@ -7,7 +7,7 @@ define('FPDF_FONTPATH', $rootpath . $endrootpath . 'font/');
 require 'tngpdf.php';
 require 'rpt_utils.php';
 $pdf = new TNGPDF($orient, 'in', $pagesize);
-setcookie("tng_pagesize", $pagesize, time() + 31536000, "/");
+setcookie('tng_pagesize', $pagesize, time() + 31536000, '/');
 
 // define formatting defaults
 $textindent = 0.16;    // amount to move text in from the line prefix
@@ -22,7 +22,7 @@ if ($blankform) {
   $title = uiTextSnippet('pedigreech');
 } else {
   $infoAncestors = getMyAncestors($personID, $genperpage);
-  $title = uiTextSnippet('pedigreefor') . " " . getName($infoAncestors[0][0]);
+  $title = uiTextSnippet('pedigreefor') . ' ' . getName($infoAncestors[0][0]);
 }
 $pdf->SetTitle($title);
 $titleConfig = ['title' => $title,
@@ -540,7 +540,7 @@ function drawBox($x, $y, $w, $h, $num, $list) {
   $pdf->Cell(0, $lineheight, "$num", 0, 1, 'L');
   foreach ($list as $letter) {
     $pdf->SetX($x + $textin);
-    $pdf->Cell(0, $lineheight, $letter . ":", 0, 1, 'L');
+    $pdf->Cell(0, $lineheight, $letter . ':', 0, 1, 'L');
   }
 }
 

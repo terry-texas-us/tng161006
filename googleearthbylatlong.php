@@ -24,42 +24,42 @@ $name = stripslashes($name);
 // tried to switch encoding in the XML code, but this didn't work for me and I switched it back
 // CURRENTLY TAKES CARE OF CROATIAN AND GERMAN SPECIAL CHARACTERS - CAN ADD MORE FROM ONLINE CHARTS
 // CAREFUL - SOME EDITING PROGRAMS INCLUDING FRONTPAGE MAY DAMAGE FOLLOWING CODE BY REMOVING THE FOREIGN CHARACTERS - DO NOT CLICK SAVE IF THESE HAVE BEEN REPLACED BY QUESTION MARKS - EDIT IN WORD OR NOTEPAD
-$name = preg_replace("/�/", "&#x0161;", $name);
-$name = preg_replace("/�/", "&#x0160;", $name);
-$name = preg_replace("/�/", "&#x0107;", $name);
-$name = preg_replace("/�/", "&#x0106;", $name);
-$name = preg_replace("/�/", "&#x017E;", $name);
-$name = preg_replace("/�/", "&#x017D;", $name);
-$name = preg_replace("/�/", "&#x010D;", $name);
-$name = preg_replace("/�/", "&#x010C;", $name);
-$name = preg_replace("/�/", "&#x0111;", $name);
-$name = preg_replace("/�/", "&#x0110;", $name);
-$name = preg_replace("/�/", "&#x00FC;", $name);
-$name = preg_replace("/�/", "&#x00DC;", $name);
-$name = preg_replace("/�/", "&#x00F6;", $name);
-$name = preg_replace("/�/", "&#x00D6;", $name);
-$name = preg_replace("/�/", "&#x00E4;", $name);
-$name = preg_replace("/�/", "&#x00C4;", $name);
-$name = preg_replace("/�/", "&#x00DF;", $name);
+  $name = preg_replace('/š/', '&#x0161;', $name);
+  $name = preg_replace('/Š/', '&#x0160;', $name);
+  $name = preg_replace('/æ/', '&#x0107;', $name);
+  $name = preg_replace('/Æ/', '&#x0106;', $name);
+  $name = preg_replace('/ž/', '&#x017E;', $name);
+  $name = preg_replace('/Ž/', '&#x017D;', $name);
+  $name = preg_replace('/è/', '&#x010D;', $name);
+  $name = preg_replace('/È/', '&#x010C;', $name);
+  $name = preg_replace('/ð/', '&#x0111;', $name);
+  $name = preg_replace('/Ð/', '&#x0110;', $name);
+  $name = preg_replace('/ü/', '&#x00FC;', $name);
+  $name = preg_replace('/Ü/', '&#x00DC;', $name);
+  $name = preg_replace('/ö/', '&#x00F6;', $name);
+  $name = preg_replace('/Ö/', '&#x00D6;', $name);
+  $name = preg_replace('/ä/', '&#x00E4;', $name);
+  $name = preg_replace('/Ä/', '&#x00C4;', $name);
+  $name = preg_replace('/ß/', '&#x00DF;', $name);
 //Added ISO-8859-2
-$name = preg_replace("/�/", "&#x0105;", $name);
-$name = preg_replace("/�/", "&#x0104;", $name);
-$name = preg_replace("/�/", "&#x0107;", $name);
-$name = preg_replace("/�/", "&#x0106;", $name);
-$name = preg_replace("/�/", "&#x0119;", $name);
-$name = preg_replace("/�/", "&#x0118;", $name);
-$name = preg_replace("/�/", "&#x0142;", $name);
-$name = preg_replace("/�/", "&#x0141;", $name);
-$name = preg_replace("/�/", "&#x00F3;", $name);
-$name = preg_replace("/�/", "&#x00D3;", $name);
-$name = preg_replace("/�/", "&#x015B;", $name);
-$name = preg_replace("/�/", "&#x015A;", $name);
-$name = preg_replace("/�/", "&#x017C;", $name);
-$name = preg_replace("/�/", "&#x017B;", $name);
-$name = preg_replace("/�/", "&#x017A;", $name);
-$name = preg_replace("/�/", "&#x0179;", $name);
-$name = preg_replace("/�/", "&#x0144;", $name);
-$name = preg_replace("/�/", "&#x0143;", $name);
+  $name = preg_replace('/±/', '&#x0105;', $name);
+  $name = preg_replace('/¡/', '&#x0104;', $name);
+  $name = preg_replace('/æ/', '&#x0107;', $name);
+  $name = preg_replace('/Æ/', '&#x0106;', $name);
+  $name = preg_replace('/ê/', '&#x0119;', $name);
+  $name = preg_replace('/Ê/', '&#x0118;', $name);
+  $name = preg_replace('/³/', '&#x0142;', $name);
+  $name = preg_replace('/£/', '&#x0141;', $name);
+  $name = preg_replace('/ó/', '&#x00F3;', $name);
+  $name = preg_replace('/Ó/', '&#x00D3;', $name);
+  $name = preg_replace('/¶/', '&#x015B;', $name);
+  $name = preg_replace('/¦/', '&#x015A;', $name);
+  $name = preg_replace('/¿/', '&#x017C;', $name);
+  $name = preg_replace('/¯/', '&#x017B;', $name);
+  $name = preg_replace('/¼/', '&#x017A;', $name);
+  $name = preg_replace('/¬/', '&#x0179;', $name);
+  $name = preg_replace('/ñ/', '&#x0144;', $name);
+  $name = preg_replace('/Ñ/', '&#x0143;', $name);
 
 // note - In the KML CODE below, keep in mind that as tilt is increased, viewing distance is inadvertantly increased if range is constant
 

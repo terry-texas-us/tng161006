@@ -5,14 +5,14 @@ $query = "SELECT reportname, reportdesc, reportID FROM $reports_table WHERE acti
 $result = tng_query($query);
 $numrows = tng_num_rows($result);
 
-$logstring = "<a href='reportsShow.php'>" . xmlcharacters(uiTextSnippet('reports')) . "</a>";
+$logstring = "<a href='reportsShow.php'>" . xmlcharacters(uiTextSnippet('reports')) . '</a>';
 writelog($logstring);
 preparebookmark($logstring);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('reports'));
 ?>
 <!DOCTYPE html>

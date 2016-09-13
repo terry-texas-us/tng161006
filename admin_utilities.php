@@ -9,10 +9,10 @@ require 'version.php';
 function getfiletime($filename) {
   global $fileflag, $timeOffset;
 
-  $filemodtime = "";
+  $filemodtime = '';
   if ($fileflag) {
     $filemod = filemtime($filename) + (3600 * $timeOffset);
-    $filemodtime = date("F j, Y h:i:s A", $filemod);
+    $filemodtime = date('F j, Y h:i:s A', $filemod);
   }
   return $filemodtime;
 }
@@ -20,9 +20,9 @@ function getfiletime($filename) {
 function getfilesize($filename) {
   global $fileflag;
 
-  $filesize = "";
+  $filesize = '';
   if ($fileflag) {
-    $filesize = ceil(filesize($filename) / 1000) . " Kb";
+    $filesize = ceil(filesize($filename) / 1000) . ' Kb';
   }
   return $filesize;
 }
@@ -36,19 +36,19 @@ function doRow($table_name, $display_name) {
 
   echo "<tr>\n";
   echo "<td>\n";
-    echo "<div class='action-btns'>\n";
-      echo "<a href='#' onclick=\"return startOptimize('$table_name');\" title=\"" . uiTextSnippet('optimize') . "\">\n";
-        echo "<img class='icon-sm' src='svg/oil-can.svg'>\n";
-      echo "</a>";
-      echo "<a href='#' onclick=\"return startBackup('$table_name');\" title=\"" . uiTextSnippet('backup') . "\">\n";
-        echo "<img class='icon-sm' src='svg/upload.svg'>\n";
-      echo "</a>";
-      echo "<a id=\"rst_$table_name\" href='#' onclick=\"if( confirm('" . uiTextSnippet('surerestore') . "') ) {startRestore('$table_name') ;} return false;\" title=\"" . uiTextSnippet('restore') . "\"";
-        echo $fileflag ? ">" : " style='visibility: hidden'>";
-        echo "<img class='icon-sm' src='svg/download.svg'>\n";
-      echo "</a>";
-    echo "</div>\n";
-  echo "</td>";
+  echo "<div class='action-btns'>\n";
+  echo "<a href='#' onclick=\"return startOptimize('$table_name');\" title=\"" . uiTextSnippet('optimize') . "\">\n";
+  echo "<img class='icon-sm' src='svg/oil-can.svg'>\n";
+  echo '</a>';
+  echo "<a href='#' onclick=\"return startBackup('$table_name');\" title=\"" . uiTextSnippet('backup') . "\">\n";
+  echo "<img class='icon-sm' src='svg/upload.svg'>\n";
+  echo '</a>';
+  echo "<a id=\"rst_$table_name\" href='#' onclick=\"if( confirm('" . uiTextSnippet('surerestore') . "') ) {startRestore('$table_name') ;} return false;\" title=\"" . uiTextSnippet('restore') . "\"";
+  echo $fileflag ? '>' : " style='visibility: hidden'>";
+  echo "<img class='icon-sm' src='svg/download.svg'>\n";
+  echo '</a>';
+  echo "</div>\n";
+  echo '</td>';
   echo "<td><input class='tablechecks' name=\"$table_name\" type='checkbox' value='1' style=\"margin: 0; padding: 0;\"></td>\n";
   echo "<td>$display_name &nbsp;</td>\n";
   echo "<td><span id=\"time_$table_name\">" . getfiletime("$rootpath$backuppath/$table_name.bak") . "</span>&nbsp;</td>\n";
@@ -57,9 +57,9 @@ function doRow($table_name, $display_name) {
   echo "</tr>\n";
 }
 if (!$sub) {
-  $sub = "tables";
+  $sub = 'tables';
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('backuprestore'));
 ?>
 <!DOCTYPE html>
@@ -68,13 +68,13 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
 <body>
   <section class='container'>
     <?php
-    echo $adminHeaderSection->build('backuprestore-' . ($sub == "tables" ? 'backuprestoretables' : 'backupstruct'), $message);
+    echo $adminHeaderSection->build('backuprestore-' . ($sub == 'tables' ? 'backuprestoretables' : 'backupstruct'), $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_utilities.php?sub=tables", uiTextSnippet('tables'), "tables"]);
-    $navList->appendItem([true, "admin_utilities.php?sub=structure", uiTextSnippet('tablestruct'), "structure"]);
-    $navList->appendItem([true, "admin_renumbermenu.php", uiTextSnippet('renumber'), "renumber"]);
+    $navList->appendItem([true, 'admin_utilities.php?sub=tables', uiTextSnippet('tables'), 'tables']);
+    $navList->appendItem([true, 'admin_utilities.php?sub=structure', uiTextSnippet('tablestruct'), 'structure']);
+    $navList->appendItem([true, 'admin_renumbermenu.php', uiTextSnippet('renumber'), 'renumber']);
     echo $navList->build($sub);
-    if ($sub == "tables") {
+    if ($sub == 'tables') {
       ?>
       <p><i><?php echo uiTextSnippet('brinstructions'); ?></i></p>
 
@@ -144,7 +144,7 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
           </table>
         </form>
       </div>
-    <?php } elseif ($sub == "structure") { ?>
+    <?php } elseif ($sub == 'structure') { ?>
       <p><i><?php echo uiTextSnippet('brinstructions2'); ?></i></p>
 
       <h4><?php echo uiTextSnippet('backupstruct'); ?></h4>
@@ -177,7 +177,7 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
             </td>
             <?php
             if ($fileflag) {
-              echo "<td>" . getfiletime("$rootpath$backuppath/tng_tablestructure.bak") . "</td>\n";
+              echo '<td>' . getfiletime("$rootpath$backuppath/tng_tablestructure.bak") . "</td>\n";
               echo "<td align='right'><span>" . getfilesize("$rootpath$backuppath/tng_tablestructure.bak") . "</span></td>\n";
             } else {
               echo "<td></td>\n";

@@ -8,11 +8,11 @@ require 'checklogin.php';
 //permissions
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 switch ($entity) {
-  case "person":
+  case 'person':
     $url = "peopleEdit.php?personID=$newID";
 
     $query = "UPDATE $people_table SET gedcom=\"$newtree\", personID=\"$newID\" WHERE gedcom=\"$oldtree\" AND personID=\"$entityID\"";
@@ -46,7 +46,7 @@ switch ($entity) {
     $result = tng_query($query);
 
     break;
-  case "source":
+  case 'source':
     $url = "admin_editsource.php?sourceID=$newID&tree=$newtree";
 
     $query = "UPDATE $sources_table SET gedcom=\"$newtree\", sourceID=\"$newID\" WHERE gedcom=\"$oldtree\" AND sourceID=\"$entityID\"";
@@ -56,7 +56,7 @@ switch ($entity) {
     $result = tng_query($query);
 
     break;
-  case "repo":
+  case 'repo':
     $url = "repositoriesEdit.php?repoID=$newID";
 
     $query = "UPDATE $repositories_table SET gedcom=\"$newtree\", repoID=\"$newID\" WHERE gedcom=\"$oldtree\" AND repoID=\"$entityID\"";

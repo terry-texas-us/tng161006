@@ -82,12 +82,12 @@ class tsUploadHandler extends UploadHandler {
   private function handleDbTableEntries(&$file) {
     $fileparts = pathinfo($file->name);
     $form = strtoupper($fileparts['extension']);
-    $newdate = date("Y-m-d H:i:s", time() + (3600 * $this->time_offset));
-    $mediakey = $this->media_folder . "/" . $file->name;
+    $newdate = date('Y-m-d H:i:s', time() + (3600 * $this->time_offset));
+    $mediakey = $this->media_folder . '/' . $file->name;
 
     if ($this->options['subfolder']) {
-      $filepath = $this->options['subfolder'] . "/" . $file->name;
-      $thumbpath = $this->options['subfolder'] . "/" . $thumbpath;
+      $filepath = $this->options['subfolder'] . '/' . $file->name;
+      $thumbpath = $this->options['subfolder'] . '/' . $thumbpath;
     } else {
       $filepath = $file->name;
     }
@@ -102,7 +102,7 @@ class tsUploadHandler extends UploadHandler {
       $query = "UPDATE {$this->options['mediatypes_table']} SET disabled=\"0\" WHERE mediatypeID=\"{$this->mediatypeID}\"";
       tng_query($query);
     } else {
-      $file->mediaID = "";
+      $file->mediaID = '';
     }
   }
  

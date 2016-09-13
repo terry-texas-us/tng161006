@@ -53,7 +53,7 @@
       </div>
       <div class='footer'>
         <label>
-          <input name='private' type='checkbox' value='1'<?php if ($private) {echo " checked";} ?>> <?php echo uiTextSnippet('keepprivate'); ?>
+          <input name='private' type='checkbox' value='1'<?php if ($private) {echo ' checked';} ?>> <?php echo uiTextSnippet('keepprivate'); ?>
         </label>
       </div>
     </div>

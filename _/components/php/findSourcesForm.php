@@ -5,7 +5,7 @@
         <div class='input-group col-md-6'>
           <input class='form-control' name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>">
           <span class='input-group-addon'>
-            <input name='exactmatch' type='checkbox' value='yes' title='<?php echo uiTextSnippet('exactmatch'); ?>' <?php if ($exactmatch == "yes") {echo "checked";} ?>>
+            <input name='exactmatch' type='checkbox' value='yes' title='<?php echo uiTextSnippet('exactmatch'); ?>' <?php if ($exactmatch == 'yes') {echo 'checked';} ?>>
           </span>        
         </div>
       </div>

@@ -8,7 +8,7 @@ require 'personlib.php';
 require 'api_library.php';
 require 'log.php';
 
-header("Content-Type: application/json; charset=" . $session_charset);
+header('Content-Type: application/json; charset=' . $session_charset);
 
 //get family
 $query = "SELECT familyID, husband, wife, living, private, marrdate, gedcom, branch FROM $families_table WHERE familyID = '$familyID'";
@@ -29,7 +29,7 @@ $row['allow_living'] = $rights['living'];
 $row['allow_private'] = $rights['private'];
 
 $famname = getFamilyName($famrow);
-$namestr = uiTextSnippet('family') . ": " . $famname;
+$namestr = uiTextSnippet('family') . ': ' . $famname;
 
 $logstring = "<a href=\"familiesShowFamily.php?familyID=$familyID\">" . uiTextSnippet('familygroupfor') . " $famname</a>";
 writelog($logstring);
@@ -67,11 +67,11 @@ if ($famrow['wife']) {
 
 $events = [];
 if ($rights['both']) {
-  setMinEvent(["date" => $famrow['marrdate'], "place" => $famrow['marrplace'], "event" => "MARR"], $famrow['marrdatetr']);
-  setMinEvent(["date" => $famrow['divdate'], "place" => $famrow['divplace'], "event" => "DIV"], $famrow['divdatetr']);
+  setMinEvent(['date' => $famrow['marrdate'], 'place' => $famrow['marrplace'], 'event' => 'MARR'], $famrow['marrdatetr']);
+  setMinEvent(['date' => $famrow['divdate'], 'place' => $famrow['divplace'], 'event' => 'DIV'], $famrow['divdatetr']);
 
   if ($fullevents && $rights['lds']) {
-    setMinEvent(["date" => $famrow['sealdate'], "place" => $famrow['sealplace'], "event" => "SLGS"], $famrow['sealdatetr']);
+    setMinEvent(['date' => $famrow['sealdate'], 'place' => $famrow['sealplace'], 'event' => 'SLGS'], $famrow['sealdatetr']);
   }
 
   if ($fullevents) {
@@ -80,7 +80,7 @@ if ($rights['both']) {
 }
 $eventstr = processEvents($events);
 if ($eventstr) {
-  $family .= "," . $eventstr;
+  $family .= ',' . $eventstr;
 }
 
 //for each child
@@ -94,7 +94,7 @@ if ($children && tng_num_rows($children)) {
   $family .= ",\"children\":[";
   while ($childrow = tng_fetch_assoc($children)) {
     if ($childcount) {
-      $family .= ",";
+      $family .= ',';
     }
     $childcount++;
 
@@ -103,12 +103,12 @@ if ($children && tng_num_rows($children)) {
     $childrow['allow_private'] = $crights['private'];
 
     $events = [];
-    $family .= "{" . api_person($childrow, $fullevents) . "}";
+    $family .= '{' . api_person($childrow, $fullevents) . '}';
   }
-  $family .= "]";
+  $family .= ']';
 }
 tng_free_result($children);
 
 echo $family;
 
-echo "}";
+echo '}';

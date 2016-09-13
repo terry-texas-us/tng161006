@@ -5,14 +5,14 @@ if ($requirelogin && !$_SESSION['currentuser']) {
   exit;
 }
 
-$langstr = isset($_GET['lang']) ? "&amp;lang=$languagesPath" . $_GET['lang'] : "";
+$langstr = isset($_GET['lang']) ? "&amp;lang=$languagesPath" . $_GET['lang'] : '';
 
-ini_set("session.bug_compat_warn", "0");
+ini_set('session.bug_compat_warn', '0');
 
 require 'version.php';
 
-$date = date("r");
-$timezone = date("T");
+$date = date('r');
+$timezone = date('T');
 
 function doMedia($mediatypeID) {
   global $tngdomain;
@@ -37,11 +37,11 @@ function doMedia($mediatypeID) {
   global $events_table;
   global $eventtypes_table;
 
-  if ($mediatypeID == "headstones") {
+  if ($mediatypeID == 'headstones') {
     $hsfields = ", $media_table.cemeteryID, cemname";
     $hsjoin = "LEFT JOIN $cemeteries_table ON $media_table.cemeteryID = $cemeteries_table.cemeteryID";
   } else {
-    $hsfields = $hsjoin = "";
+    $hsfields = $hsjoin = '';
   }
   $query = "SELECT distinct $media_table.mediaID AS mediaID, description, $media_table.notes, thumbpath, path, form, mediatypeID, alwayson, usecollfolder, DATE_FORMAT(changedate,'%a, %d %b %Y %T') AS changedatef, status, abspath, newwindow $hsfields FROM $media_table $hsjoin "
       . "WHERE $cutoffstr $wherestr AND mediatypeID = \"$mediatypeID\" ORDER BY changedate DESC, description LIMIT $change_limit";
@@ -57,7 +57,7 @@ function doMedia($mediatypeID) {
     $presult = tng_query($query);
     $foundliving = 0;
     $foundprivate = 0;
-    $hstext = "";
+    $hstext = '';
     while ($prow = tng_fetch_assoc($presult)) {
       if ($prow['fbranch'] != null) {
         $prow['branch'] = $prow['fbranch'];
@@ -92,23 +92,23 @@ function doMedia($mediatypeID) {
       if ($prow['personID2'] != null) {
         $medialink = "peopleShowPerson.php?personID={$prow['personID2']}";
         $mediatext = getName($prow);
-        if ($mediatypeID == "headstones") {
+        if ($mediatypeID == 'headstones') {
           $deathdate = $prow['deathdate'] ? $prow['deathdate'] : $prow['burialdate'];
           if ($prow['deathdate']) {
             $abbrev = uiTextSnippet('deathabbr');
           } elseif ($prow['burialdate']) {
             $abbrev = uiTextSnippet('burialabbr');
           }
-          $hstext = $deathdate ? " ($abbrev " . displayDate($deathdate) . ")" : "";
+          $hstext = $deathdate ? " ($abbrev " . displayDate($deathdate) . ')' : '';
         }
       } elseif ($prow['familyID'] != null) {
         $medialink = "familiesShowFamily.php?familyID={$prow['familyID']}";
-        $mediatext = uiTextSnippet('family') . ": " . getFamilyName($prow);
+        $mediatext = uiTextSnippet('family') . ': ' . getFamilyName($prow);
       } elseif ($prow['sourceID'] != null) {
         $mediatext = $prow['title'] ? uiTextSnippet('source') . ": {$prow['title']}" : uiTextSnippet('source') . ": {$prow['sourceID']}";
         $medialink = "sourcesShowSource.php?sourceID={$prow['sourceID']}";
       } elseif ($prow['repoID'] != null) {
-        $mediatext = $prow['reponame'] ? uiTextSnippet('repository') . ": " . $prow['reponame'] : uiTextSnippet('repository') . ": " . $prow['repoID'];
+        $mediatext = $prow['reponame'] ? uiTextSnippet('repository') . ': ' . $prow['reponame'] : uiTextSnippet('repository') . ': ' . $prow['repoID'];
         $medialink = "repositoriesShowItem.php?repoID={$prow['repoID']}";
       } else {
         $medialink = "placesearch.php?psearch={$prow['personID']}";
@@ -126,16 +126,16 @@ function doMedia($mediatypeID) {
     tng_free_result($presult);
 
     $href = getMediaHREF($row, 0);
-    $href = str_replace("\" target=\"_blank", "", $href);  // fix the string in case someone might have used the "open in a new window" option on the media
+    $href = str_replace("\" target=\"_blank", '', $href);  // fix the string in case someone might have used the "open in a new window" option on the media
     if ((!$foundliving && !$foundprivate) || !$nonames || $row['alwayson']) {
       $description = strip_tags($row['description']);
       $notes = nl2br(strip_tags(getXrefNotes($row['notes'])));
       if (($foundliving || $foundprivate) && !$row['alwayson']) {
-        $notes .= " (" . uiTextSnippet('livingphoto') . ")";
+        $notes .= ' (' . uiTextSnippet('livingphoto') . ')';
       }
     } else {
       $description = uiTextSnippet('living');
-      $notes = "(" . uiTextSnippet('livingphoto') . ")";
+      $notes = '(' . uiTextSnippet('livingphoto') . ')';
     }
 
     if ($row['status']) {
@@ -144,17 +144,17 @@ function doMedia($mediatypeID) {
     $item = "\n<item>\n"; // build the $item string so that you can apply string functions more globally instead of piece meal, as required
 
     $typestr = uiTextSnippet($mediatypeID) ? uiTextSnippet($mediatypeID) : $mediatypes_display[$mediatypeID];
-    $item .= "<title>" . xmlcharacters($typestr) . ": " . xmlcharacters($description) . "</title>\n";
-    $item .= "<link>" . ($row['abspath'] ? "" : "$tngdomain/") . "$href$langstr" . "</link>\n";
+    $item .= '<title>' . xmlcharacters($typestr) . ': ' . xmlcharacters($description) . "</title>\n";
+    $item .= '<link>' . ($row['abspath'] ? '' : "$tngdomain/") . "$href$langstr" . "</link>\n";
 
-    if ($mediatypeID == "headstones") {
+    if ($mediatypeID == 'headstones') {
       $deathdate = $row['deathdate'] ? $row['deathdate'] : $row['burialdate'];
-      $item .= "<description>" . xmlcharacters($hstext . " " . htmlspecialchars($notes, ENT_NOQUOTES, $session_charset)) . "</description>\n";
-      $item .= "<category>" . uiTextSnippet('tree') . ": master</category>\n";
+      $item .= '<description>' . xmlcharacters($hstext . ' ' . htmlspecialchars($notes, ENT_NOQUOTES, $session_charset)) . "</description>\n";
+      $item .= '<category>' . uiTextSnippet('tree') . ": master</category>\n";
     } else {
-      $item .= "<description>" . xmlcharacters(htmlspecialchars($notes, ENT_NOQUOTES, $session_charset)) . "</description>\n";
+      $item .= '<description>' . xmlcharacters(htmlspecialchars($notes, ENT_NOQUOTES, $session_charset)) . "</description>\n";
     }
-    $changedate = date_format(date_create($row['changedatef']), "D, d M Y H:i:s");
+    $changedate = date_format(date_create($row['changedatef']), 'D, d M Y H:i:s');
     $item .= "<pubDate>$changedate $timezone</pubDate>\n";
 
     $item .= "<guid isPermaLink=\"false\">$tngdomain/{$row['mediaID']}-$changedate $timezone</guid>\n"; // using a guid improves the granularity of changes one ca monitor (ie: it allows for a changes minitus appart to be captures by the RSS feed)
@@ -170,16 +170,16 @@ $item .= "<rss version=\"2.0\" xmlns:atom=\"{$http}://www.w3.org/2005/Atom\">\n"
 $item .= "<channel>\n";
 $item .= "<atom:link href=\"" . $tngdomain . "/tngrss.php\" rel=\"self\" type=\"application/rss+xml\" />\n";
 
-$tngscript = basename($_SERVER['SCRIPT_NAME'], ".php");
+$tngscript = basename($_SERVER['SCRIPT_NAME'], '.php');
 
-$item .= "<copyright>$tng_title, v.$tng_version ($tng_date), Written by Darrin Lythgoe, $tng_copyright</copyright>\n";
+$item .= "<copyright>$tng_title, v.$tng_version ($tng_date), $tng_copyright</copyright>\n";
 $item .= "<lastBuildDate>$date</lastBuildDate>\n";
-$item .= "<description>" . xmlcharacters($site_desc) . "</description>\n";
+$item .= '<description>' . xmlcharacters($site_desc) . "</description>\n";
 
 if ($personID) {
-  $item .= "<title>" . trim($sitename . " " . uiTextSnippet('indinfo')) . ": $personID</title>\n";
+  $item .= '<title>' . trim($sitename . ' ' . uiTextSnippet('indinfo')) . ": $personID</title>\n";
 } elseif ($familyID) {
-  $item .= "<title>" . trim($sitename . " " . uiTextSnippet('family')) . ": $familyID</title>\n";
+  $item .= '<title>' . trim($sitename . ' ' . uiTextSnippet('family')) . ": $familyID</title>\n";
 } else {
   $item .= "<title>$sitename</title>\n";
 }
@@ -191,9 +191,9 @@ $item .= "<webMaster>$emailaddr ($dbowner)</webMaster>\n";
 //  $item .= "<image>\n";
 //  $item .= "<url>" . $tngdomain . $rssimage . "</url>\n";     // path for the logo
 //  if ($personID) {
-//    $item .= "<title>" . trim($sitename . " " . uiTextSnippet('indinfo')) . ": $personID</title>\n";  // images require a title (match it with either the personID)
+//    $item .= "<title>" . trim($sitename . ' ' . uiTextSnippet('indinfo')) . ": $personID</title>\n";  // images require a title (match it with either the personID)
 //  } elseif ($familyID) {
-//    $item .= "<title>" . trim($sitename . " " . uiTextSnippet('family')) . ": $familyID</title>\n";    // the familyID
+//    $item .= "<title>" . trim($sitename . ' ' . uiTextSnippet('family')) . ": $familyID</title>\n";    // the familyID
 //  } else {
 //    $item .= "<title>$sitename</title>\n";                      // or just the site name
 //  }
@@ -205,14 +205,14 @@ echo $item;
 // [ts] define $rsslang to use this
 //echo "<language>$rsslang</language>\n";
 
-$text['pastxdays'] = preg_replace("/xx/", "$change_cutoff", $text['pastxdays']);
+$text['pastxdays'] = preg_replace('/xx/', "$change_cutoff", $text['pastxdays']);
 if (!$change_cutoff) {
   $change_cutoff = 0;
 }
 if (!$change_limit) {
   $change_limit = 10;
 }
-$cutoffstr = $change_cutoff ? "TO_DAYS(NOW()) - TO_DAYS(changedate) <= $change_cutoff" : "1=1";
+$cutoffstr = $change_cutoff ? "TO_DAYS(NOW()) - TO_DAYS(changedate) <= $change_cutoff" : '1=1';
 
 if (!$personID && !$familyID) {             // only feed the changes when not monitoring an person or a family
   initMediaTypes();
@@ -221,11 +221,11 @@ if (!$personID && !$familyID) {             // only feed the changes when not mo
     echo doMedia($mediatypeID);
   }
 }
-$allwhere = "";
+$allwhere = '';
 
-$more = getLivingPrivateRestrictions("p", false, false);
+$more = getLivingPrivateRestrictions('p', false, false);
 if ($more) {
-  $allwhere .= " AND " . $more;
+  $allwhere .= ' AND ' . $more;
 }
 
 if (!$familyID) {    // if a family is NOT specified (ie: we are looking for a personID or the What's New
@@ -239,36 +239,36 @@ if (!$familyID) {    // if a family is NOT specified (ie: we are looking for a p
       $row['allow_living'] = $rights['living'];
       $row['allow_private'] = $rights['private'];
       $namestr = getNameRev($row);
-      $birthplacestr = "";
+      $birthplacestr = '';
       if ($rights['both']) {
         if ($row['birthdate']) {
-          $birthdate = uiTextSnippet('birthabbr') . " " . displayDate($row['birthdate']);
+          $birthdate = uiTextSnippet('birthabbr') . ' ' . displayDate($row['birthdate']);
           $birthplace = $row['birthplace'];
         } else {
           if ($row['altbirthdate']) {
-            $birthdate = uiTextSnippet('chrabbr') . " " . displayDate($row['altbirthdate']);
+            $birthdate = uiTextSnippet('chrabbr') . ' ' . displayDate($row['altbirthdate']);
             $birthplace = $row['altbirthplace'];
           } else {
-            $birthdate = "";
-            $birthplace = "";
+            $birthdate = '';
+            $birthplace = '';
           }
         }
       } else {
-        $birthdate = $birthplace = "";
+        $birthdate = $birthplace = '';
       }
       $item = "\n<item>\n";
-      $item .= "<title>";
-      $item .= xmlcharacters(uiTextSnippet('indinfo') . ": " . $namestr . " (" . $row['personID'] . ")");
+      $item .= '<title>';
+      $item .= xmlcharacters(uiTextSnippet('indinfo') . ': ' . $namestr . ' (' . $row['personID'] . ')');
       $item .= "</title>\n";
-      $item .= "<link>" . "$tngdomain/peopleShowPerson.php?personID=" . $row['personID'] . $langstr . "</link>\n";
-      $item .= "<description>";
+      $item .= '<link>' . "$tngdomain/peopleShowPerson.php?personID=" . $row['personID'] . $langstr . "</link>\n";
+      $item .= '<description>';
       if ($birthdate || $birthplace) {
         $item .= xmlcharacters("$birthdate, $birthplace") . "</description>\n";
       } else {
         $item .= xmlcharacters(uiTextSnippet('birthabbr')) . "</description>\n";
       }
-      $item .= "<category>" . uiTextSnippet('tree') . ": master</category>\n";
-      $changedate = date_format(date_create($row['changedatef']), "D, d M Y H:i:s");
+      $item .= '<category>' . uiTextSnippet('tree') . ": master</category>\n";
+      $changedate = date_format(date_create($row['changedatef']), 'D, d M Y H:i:s');
       $item .= "<pubDate>$changedate $timezone </pubDate>\n";
 
       $item .= "</item>\n";
@@ -295,19 +295,19 @@ if (!$personID) {
       $row['allow_private'] = $tngconfig['nnpriv'] == 2 && $row['private'] ? 0 : 1;
 
       $item = "\n<item>\n";
-      $item .= "<title>" . xmlcharacters(uiTextSnippet('family') . ": " . getFamilyName($row)) . "</title>\n";
-      $item .= "<link>" . "$tngdomain/familiesShowFamily.php?familyID={$row['familyID']}$langstr" . "</link>\n";
-      $item .= "<description>";
+      $item .= '<title>' . xmlcharacters(uiTextSnippet('family') . ': ' . getFamilyName($row)) . "</title>\n";
+      $item .= '<link>' . "$tngdomain/familiesShowFamily.php?familyID={$row['familyID']}$langstr" . "</link>\n";
+      $item .= '<description>';
 
       $item .= displayDate($row['marrdate']);
       if ($row['marrdate'] && $row['marrplace']) {
-        $item .= ", ";
+        $item .= ', ';
       }
       $item .= xmlcharacters($row['marrplace']);
 
       $item .= "</description>\n";
-      $item .= "<category>" . uiTextSnippet('tree') . ": master</category>\n";
-      $item .= "<pubDate>" . displayDate($row['changedatef']) . " $timezone </pubDate>\n";
+      $item .= '<category>' . uiTextSnippet('tree') . ": master</category>\n";
+      $item .= '<pubDate>' . displayDate($row['changedatef']) . " $timezone </pubDate>\n";
 
       $item .= "</item>\n";
       echo $item;

@@ -15,10 +15,10 @@ if (!$allowAdd) {
 require 'deletelib.php';
 
 //this line needed to prevent garbage chars in IS0-8859-2
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 $personID = ucfirst($personID);
 
-if ($session_charset != "UTF-8") {
+if ($session_charset != 'UTF-8') {
   $firstname = tng_utf8_decode($firstname);
   $lnprefix = tng_utf8_decode($lnprefix);
   $lastname = tng_utf8_decode($lastname);
@@ -60,7 +60,7 @@ $confdatetr = convertDate($confdate);
 $initdatetr = convertDate($initdate);
 $endldatetr = convertDate($endldate);
 
-$newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
+$newdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
 
 $query = "SELECT personID FROM $people_table WHERE personID = '$personID'";
 $result = tng_query($query);
@@ -70,7 +70,7 @@ deleteCitations($personID);
 deleteNoteLinks($personID);
 
 if ($result && tng_num_rows($result)) {
-  echo "error:" . uiTextSnippet('person') . " $personID " . uiTextSnippet('idexists');
+  echo 'error:' . uiTextSnippet('person') . " $personID " . uiTextSnippet('idexists');
 } else {
   $places = [];
   if (trim($birthplace) && !in_array($birthplace, $places)) {
@@ -121,8 +121,8 @@ if ($result && tng_num_rows($result)) {
     $burialtype = 0;
   }
   //$firstname = preg_replace('/%(['0-9a-f']{2})/ie', 'chr(hexdec($1))', (string) $firstname);
-  if ($type != "child") {
-    $familyID = "";
+  if ($type != 'child') {
+    $familyID = '';
   }
   $meta = metaphone($lnprefix . $lastname);
   $query = "INSERT INTO $people_table (personID, firstname, lnprefix, lastname, nickname, prefix, suffix, title, nameorder, living, private, birthdate, birthdatetr, birthplace, sex, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, baptdate, baptdatetr, baptplace, confdate, confdatetr, confplace, initdate, initdatetr, initplace, endldate, endldatetr, endlplace, changedate, branch, changedby, famc, metaphone, edituser, edittime)
@@ -142,7 +142,7 @@ if ($result && tng_num_rows($result)) {
   }
   $row['allow_living'] = $row['allow_private'] = 1;
 
-  if ($type == "child") {
+  if ($type == 'child') {
     if ($familyID) {
       $query = "SELECT personID FROM $children_table WHERE familyID = '$familyID'";
       $result = tng_query($query);
@@ -167,12 +167,12 @@ if ($result && tng_num_rows($result)) {
       tng_free_result($result);
     }
     if ($row['birthdate']) {
-      $birthdate = uiTextSnippet('birthabbr') . " " . $row['birthdate'];
+      $birthdate = uiTextSnippet('birthabbr') . ' ' . $row['birthdate'];
     } else {
       if ($row['altbirthdate']) {
-        $birthdate = uiTextSnippet('chrabbr') . " " . $row['altbirthdate'];
+        $birthdate = uiTextSnippet('chrabbr') . ' ' . $row['altbirthdate'];
       } else {
-        $birthdate = "";
+        $birthdate = '';
       }
     }
     $rval = "<div class='sortrow' id='child_$personID' style='width: 500px; clear: both; display: none'";
@@ -185,13 +185,12 @@ if ($result && tng_num_rows($result)) {
     $rval .= "<td class='childblock'>\n";
 
     $name = getName($row);
-    $rval .= "<div id=\"unlinkc_$personID\" class=\"small hide-right\"><a href='#' onclick=\"return unlinkChild('$personID','child_unlink');\">" . uiTextSnippet('remove') . "</a> &nbsp; | &nbsp; <a href='#' onclick=\"return unlinkChild('$personID','child_delete');\">" . uiTextSnippet('delete') . "</a></div>";
+    $rval .= "<div id=\"unlinkc_$personID\" class=\"small hide-right\"><a href='#' onclick=\"return unlinkChild('$personID','child_unlink');\">" . uiTextSnippet('remove') . "</a> &nbsp; | &nbsp; <a href='#' onclick=\"return unlinkChild('$personID','child_delete');\">" . uiTextSnippet('delete') . '</a></div>';
     $rval .= "<a href='#' onclick=\"EditChild('$personID');\">" . $name . "</a> - $personID<br>$birthdate</div>\n</td>\n</tr>\n</table>\n</div>\n";
     echo $rval;
-  } elseif ($type == "spouse") {
-    //$name = $session_charset == "UTF-8" ? getName($row) : utf8_encode(getName($row));
+  } elseif ($type == 'spouse') {
     $name = getName($row);
-    $name = preg_replace("/\"/", "\\\"", $name);
+    $name = preg_replace('/\"/', '\\\"', $name);
     echo "{\"id\":\"{$row['personID']}\",\"name\":\"$name\"}";
   } else {
 

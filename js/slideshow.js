@@ -105,9 +105,9 @@ function adjustTimeout(slide) {
 
 function getNextSlide(req) {
     var pair;
-    var mediaID = "";
-    var medialinkID = "";
-    var albumlinkID = "";
+    var mediaID = '';
+    var medialinkID = '';
+    var albumlinkID = '';
 
     var contentstart = req.indexOf('<');
     var arglist = req.substr(0, contentstart);
@@ -116,7 +116,7 @@ function getNextSlide(req) {
     arglist.replace('&amp;', '&');
     var args = arglist.split("&");
     for (i = 0; i < args.length; i++) {
-        pair = args[i].split("=");
+        pair = args[i].split('=');
         if (pair[0] == "mediaID")
             mediaID = pair[1];
         else if (pair[0] == "medialinkID")

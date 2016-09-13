@@ -7,7 +7,7 @@ function closePersonPreview(personID, event) {
     clearTimeout(searchtimer);
     var entitystr = '_' + personID;
     if (event) {
-        entitystr += "_" + event;
+        entitystr += '_' + event;
     }
 
     $('#prev' + entitystr).css('visibility', 'hidden');

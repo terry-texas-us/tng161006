@@ -1,6 +1,6 @@
-var Itypes = ["EVEN", "ADOP", "ADDR", "ALIA", "ANCI", "BARM", "BASM", "CAST", "CENS", "CHRA", "CONF", "CREM", "DESI", "DSCR", "EDUC", "EMIG", "FCOM", "GRAD", "IDNO", "IMMI", "LANG", "NATI", "NATU", "NCHI", "NMR", "OCCU", "ORDI", "ORDN", "PHON", "PROB", "PROP", "REFN", "RELI", "RESI", "RESN", "RETI", "RFN", "RIN", "SSN", "WILL"];
-var Ftypes = ["EVEN", "ANUL", "CENS", "DIV", "DIVF", "ENGA", "MARB", "MARC", "MARL", "MARS", "REFN", "RIN"];
-var Stypes = ["EVEN", "REFN", "RIN"];
+var Itypes = ['EVEN', "ADOP", 'ADDR', "ALIA", "ANCI", "BARM", "BASM", "CAST", "CENS", "CHRA", "CONF", "CREM", "DESI", "DSCR", "EDUC", "EMIG", "FCOM", "GRAD", "IDNO", "IMMI", "LANG", "NATI", "NATU", "NCHI", "NMR", "OCCU", "ORDI", "ORDN", "PHON", "PROB", "PROP", "REFN", "RELI", "RESI", "RESN", "RETI", "RFN", "RIN", "SSN", "WILL"];
+var Ftypes = ['EVEN', "ANUL", "CENS", "DIV", "DIVF", "ENGA", "MARB", "MARC", "MARL", "MARS", "REFN", "RIN"];
+var Stypes = ['EVEN', "REFN", "RIN"];
 var Rtypes = Stypes;
 var messages = [];
 
@@ -17,10 +17,10 @@ function populateTags(etype, match) {
             key = types[i - 1];
             message = messages[key];
             if (key == match) {
-                field.options[i] = new Option(key + " - " + message, key, false, true)
+                field.options[i] = new Option(key + ' - ' + message, key, false, true)
                 found = true;
             } else
-                field.options[i] = new Option(key + " - " + message, key, false, false)
+                field.options[i] = new Option(key + ' - ' + message, key, false, false)
         }
     } else if (navigator.appName == "Microsoft Internet Explorer") {
         var newElem = document.createElement("OPTION");
@@ -32,7 +32,7 @@ function populateTags(etype, match) {
 
             key = types[i - 1];
             message = messages[key];
-            newElem.text = key + " - " + message;
+            newElem.text = key + ' - ' + message;
             newElem.value = key;
             field.options.add(newElem);
             if (key == match) {
@@ -43,7 +43,7 @@ function populateTags(etype, match) {
     }
     if (!found && match)
         document.form1.tag2.value = match;
-    if (match == "EVEN")
+    if (match == 'EVEN')
         toggleTdesc(1);
     else
         toggleTdesc(0);

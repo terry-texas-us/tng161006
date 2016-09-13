@@ -10,11 +10,11 @@ if ($link) {
 
   if (!$allowEdit) {
     $message = uiTextSnippet('norights');
-    header("Location: admin_login.php?message=" . urlencode($message));
+    header('Location: admin_login.php?message=' . urlencode($message));
     exit;
   }
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifylogsettings'));
 ?>
 <!DOCTYPE html>
@@ -25,23 +25,23 @@ $headSection->setTitle(uiTextSnippet('modifylogsettings'));
     <?php
     echo $adminHeaderSection->build('setup-configuration-logconfigsettings', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_setup.php", uiTextSnippet('configuration'), "configuration"]);
-    $navList->appendItem([true, "admin_diagnostics.php", uiTextSnippet('diagnostics'), "diagnostics"]);
-    $navList->appendItem([true, "admin_setup.php?sub=tablecreation", uiTextSnippet('tablecreation'), "tablecreation"]);
-    $navList->appendItem([true, "#", uiTextSnippet('logconfigsettings'), "log"]);
-    echo $navList->build("log");
+    $navList->appendItem([true, 'admin_setup.php', uiTextSnippet('configuration'), 'configuration']);
+    $navList->appendItem([true, 'admin_diagnostics.php', uiTextSnippet('diagnostics'), 'diagnostics']);
+    $navList->appendItem([true, 'admin_setup.php?sub=tablecreation', uiTextSnippet('tablecreation'), 'tablecreation']);
+    $navList->appendItem([true, '#', uiTextSnippet('logconfigsettings'), 'log']);
+    echo $navList->build('log');
     ?>
     <form action="admin_updatelogconfig.php" method='post' name='form1'>
       <table class='table table-sm'>
         <tr>
           <td>
-            <span><?php echo uiTextSnippet('logfilename') . " " . uiTextSnippet('text_public'); ?>:</span>
+            <span><?php echo uiTextSnippet('logfilename') . ' ' . uiTextSnippet('text_public'); ?>:</span>
           </td>
           <td><input name='logname' type='text' value="<?php echo $logname; ?>"></td>
         </tr>
         <tr>
           <td>
-            <span><?php echo uiTextSnippet('maxloglines') . " " . uiTextSnippet('text_public'); ?>:</span>
+            <span><?php echo uiTextSnippet('maxloglines') . ' ' . uiTextSnippet('text_public'); ?>:</span>
           </td>
           <td><input name='maxloglines' type='text' value="<?php echo $maxloglines; ?>" size='5'></td>
         </tr>
@@ -54,13 +54,13 @@ $headSection->setTitle(uiTextSnippet('modifylogsettings'));
           <td><input name='exusers' type='text' value="<?php echo $exusers; ?>" size='80'></td>
         </tr>
         <tr>
-          <td><span><?php echo uiTextSnippet('logfilename') . " " . uiTextSnippet('admin'); ?>
+          <td><span><?php echo uiTextSnippet('logfilename') . ' ' . uiTextSnippet('admin'); ?>
               :</span></td>
           <td><input name='adminlogfile' type='text' value="<?php echo $adminlogfile; ?>">
           </td>
         </tr>
         <tr>
-          <td><span><?php echo uiTextSnippet('maxloglines') . " " . uiTextSnippet('admin'); ?>
+          <td><span><?php echo uiTextSnippet('maxloglines') . ' ' . uiTextSnippet('admin'); ?>
               :</span></td>
           <td><input name='adminmaxloglines' type='text' value="<?php echo $adminmaxloglines; ?>" size='5'></td>
         </tr>

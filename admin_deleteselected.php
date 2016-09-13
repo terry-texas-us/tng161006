@@ -8,7 +8,7 @@ require 'checklogin.php';
 
 if (!$allowDelete) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 require 'adminlog.php';
@@ -24,49 +24,49 @@ function getID($fields, $table, $id) {
 
 if ($xsrcaction) {
   $query = "DELETE FROM $sources_table";
-  $modmsg = "sources";
-  $id = "ID";
-  $location = "sourcesBrowse.php";
+  $modmsg = 'sources';
+  $id = 'ID';
+  $location = 'sourcesBrowse.php';
 } elseif ($xrepoaction) {
   $query = "DELETE FROM $repositories_table";
-  $modmsg = "repositories";
-  $id = "ID";
-  $location = "repositoriesBrowse.php";
+  $modmsg = 'repositories';
+  $id = 'ID';
+  $location = 'repositoriesBrowse.php';
 } elseif ($xperaction) {
   $query = "DELETE FROM $people_table";
-  $modmsg = "people";
-  $id = "ID";
-  $location = "peopleBrowse.php";
+  $modmsg = 'people';
+  $id = 'ID';
+  $location = 'peopleBrowse.php';
 } elseif ($xfamaction) {
   $query = "DELETE FROM $families_table";
-  $modmsg = "families";
-  $id = "ID";
-  $location = "familiesBrowse.php";
+  $modmsg = 'families';
+  $id = 'ID';
+  $location = 'familiesBrowse.php';
 } elseif ($xplacaction) {
   $query = "DELETE FROM $places_table";
-  $modmsg = "places";
-  $id = "ID";
-  $location = "placesBrowse.php";
+  $modmsg = 'places';
+  $id = 'ID';
+  $location = 'placesBrowse.php';
 } elseif ($xtimeaction) {
   $query = "DELETE FROM $tlevents_table";
-  $modmsg = "tlevents";
-  $id = "tleventID";
-  $location = "timelineeventsBrowse.php";
+  $modmsg = 'tlevents';
+  $id = 'tleventID';
+  $location = 'timelineeventsBrowse.php';
 } elseif ($xbranchaction) {
   $query = "DELETE FROM $branches_table";
-  $modmsg = "branches";
-  $id = "branch";
-  $location = "branchesBrowse.php";
+  $modmsg = 'branches';
+  $id = 'branch';
+  $location = 'branchesBrowse.php';
 } elseif ($xcemaction) {
   $query = "DELETE FROM $cemeteries_table";
-  $modmsg = "cemeteries";
-  $id = "cemeteryID";
-  $location = "cemeteriesBrowse.php";
+  $modmsg = 'cemeteries';
+  $id = 'cemeteryID';
+  $location = 'cemeteriesBrowse.php';
 } elseif ($xnoteaction) {
   $query = "DELETE FROM $xnotes_table";
-  $modmsg = "notes";
-  $id = "ID";
-  $location = "admin_notelist.php";
+  $modmsg = 'notes';
+  $id = 'ID';
+  $location = 'admin_notelist.php';
 }
 $modifymsg = uiTextSnippet($modmsg);
 $count = 0;
@@ -75,20 +75,20 @@ $items = [];
 $whereClause = '';
 
 foreach (array_keys($_POST) as $key) {
-  if (substr($key, 0, 3) == "del") {
+  if (substr($key, 0, 3) == 'del') {
     $count++;
     $thisid = substr($key, 3);
-    $whereClause .= $whereClause ? " OR " : " WHERE ";
+    $whereClause .= $whereClause ? ' OR ' : ' WHERE ';
     $whereClause .= "$id = '$thisid'";
 
     if ($xperaction) {
-      $row = getID("personID, branch, sex", $people_table, $thisid);
+      $row = getID('personID, branch, sex', $people_table, $thisid);
       $personID = $row['personID'];
       $items[] = $row['personID'];
 
       deletePersonPlus($personID, $row['sex']);
     } elseif ($xfamaction) {
-      $row = getID("familyID, branch", $families_table, $thisid);
+      $row = getID('familyID, branch', $families_table, $thisid);
       $familyID = $row['familyID'];
       $items[] = $row['familyID'];
 
@@ -107,7 +107,7 @@ foreach (array_keys($_POST) as $key) {
       deleteMediaLinks($familyID);
       deleteAlbumLinks($familyID);
     } elseif ($xsrcaction) {
-      $row = getID("sourceID", $sources_table, $thisid);
+      $row = getID('sourceID', $sources_table, $thisid);
       $sourceID = $row['sourceID'];
       $items[] = $row['sourceID'];
 
@@ -120,7 +120,7 @@ foreach (array_keys($_POST) as $key) {
       deleteMediaLinks($sourceID);
       deleteAlbumLinks($sourceID);
     } elseif ($xrepoaction) {
-      $row = getID("repoID", $repositories_table, $thisid);
+      $row = getID('repoID', $repositories_table, $thisid);
       $repoID = $row['repoID'];
       $items[] = $row['repoID'];
 
@@ -140,7 +140,7 @@ foreach (array_keys($_POST) as $key) {
       deleteMediaLinks($repoID);
       deleteAlbumLinks($repoID);
     } elseif ($xplacaction) {
-      $row = getID("place", $places_table, $thisid);
+      $row = getID('place', $places_table, $thisid);
       $place = $row['place'];
       $items[] = $row['place'];
 
@@ -170,11 +170,11 @@ foreach (array_keys($_POST) as $key) {
 $query .= $whereClause;
 $result = tng_query($query);
 
-adminwritelog(uiTextSnippet('deleted') . ": " . $modifymsg . " " . implode(', ', $items));
+adminwritelog(uiTextSnippet('deleted') . ': ' . $modifymsg . ' ' . implode(', ', $items));
 
 if ($count) {
-  $message = uiTextSnippet('changestoallitems') . " " . uiTextSnippet('succsaved') . ".";
+  $message = uiTextSnippet('changestoallitems') . ' ' . uiTextSnippet('succsaved') . '.';
 } else {
   $message = uiTextSnippet('nochanges');
 }
-header("Location: $location" . "?message=" . urlencode($message));
+header("Location: $location" . '?message=' . urlencode($message));

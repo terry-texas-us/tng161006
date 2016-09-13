@@ -8,10 +8,10 @@ require 'version.php';
 
 if (!$allowAdd) {
     $message = uiTextSnippet('norights');
-    header("Location: admin_login.php?message=" . urlencode($message));
+    header('Location: admin_login.php?message=' . urlencode($message));
     exit;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 ?>
 <header class='modal-header'>
   <h4><?php echo uiTextSnippet('addnewtree'); ?></h4>

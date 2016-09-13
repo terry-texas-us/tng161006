@@ -7,7 +7,7 @@ require 'checklogin.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 if ($father) {
@@ -16,7 +16,7 @@ if ($father) {
   $row = tng_fetch_assoc($result);
   tng_free_result($result);
 } else {
-  $row['lastname'] = $row['lnprefix'] = "";
+  $row['lastname'] = $row['lnprefix'] = '';
 }
 
 function relateSelect($label) {
@@ -24,19 +24,19 @@ function relateSelect($label) {
   $pout = "<select name=\"$fieldname\">\n";
   $pout .= "<option value=''></option>\n";
 
-  $reltypes = ["adopted", "birth", "foster", "sealing", "step"];
+  $reltypes = ['adopted', 'birth', 'foster', 'sealing', 'step'];
   foreach ($reltypes as $reltype) {
     $pout .= "<option value=\"$reltype\"";
     if ($parent[$fieldname] == $reltype || $parent[$fieldname] == uiTextSnippet($reltype)) {
-      $pout .= " selected";
+      $pout .= ' selected';
     }
-    $pout .= ">" . uiTextSnippet($reltype) . "</option>\n";
+    $pout .= '>' . uiTextSnippet($reltype) . "</option>\n";
   }
   $pout .= "</select>\n";
 
   return $pout;
 }
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <div id='newperson'>
   <form name='npform' method='post' <?php if ($needped) {echo "action='admin_addperson2.php'";} else {echo "action='' onsubmit='return saveNewPerson(this);'";} ?>>
@@ -136,10 +136,10 @@ header("Content-type:text/html; charset=" . $session_charset);
         echo buildEventRow('initdate', 'initplace', 'INIT', '');
         echo buildEventRow('endldate', 'endlplace', 'ENDL', '');
       }
-      if ($type == "child") {
+      if ($type == 'child') {
         echo "<br>\n";
-        echo uiTextSnippet('relationship') . " (" . uiTextSnippet('father') . "): " . relateSelect('father') . "&nbsp;&nbsp;";
-        echo uiTextSnippet('relationship') . " (" . uiTextSnippet('mother') . "): " . relateSelect('mother');
+        echo uiTextSnippet('relationship') . ' (' . uiTextSnippet('father') . '): ' . relateSelect('father') . '&nbsp;&nbsp;';
+        echo uiTextSnippet('relationship') . ' (' . uiTextSnippet('mother') . '): ' . relateSelect('mother');
       }
       ?>
       <div id='errormsg' class='red' style='display: none;'></div>
@@ -148,8 +148,8 @@ header("Content-type:text/html; charset=" . $session_charset);
     <footer class='modal-footer'>
       <input name='needped' type='hidden' value="<?php echo $needped; ?>">
       <input name='familyID' type='hidden' value="<?php echo $familyID; ?>">
-      <?php if ($type == "") {
-        $type = "text";
+      <?php if ($type == '') {
+        $type = 'text';
       } ?>
       <input name='type' type='hidden' value="<?php echo $type; ?>">
       <?php

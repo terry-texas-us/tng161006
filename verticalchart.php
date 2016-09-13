@@ -5,7 +5,7 @@ require $subroot . 'pedconfig.php';
 require 'personlib.php';
 
 if (!$personID && !isset($needperson)) {
-  die("no args");
+  die('no args');
 }
 if ($generations > $pedigree['maxgen']) {
   $generations = intval($pedigree['maxgen']);
@@ -18,7 +18,7 @@ if ($generations > $pedigree['maxgen']) {
 $result = getPersonFullPlusDates($personID);
 if (!tng_num_rows($result)) {
   tng_free_result($result);
-  header("Location: thispagedoesnotexist.html");
+  header('Location: thispagedoesnotexist.html');
   exit;
 }
 $row = tng_fetch_assoc($result);
@@ -308,28 +308,28 @@ function do_chart($gens, $output = false) {
         $person['xpos'] = round($person['xpos']);
         $bio = '';
         if ($person['birthdate'] || $person['birthplace']) {
-          $bio .= trim(uiTextSnippet('born') . ": " . displayDate($person['birthdate']));
+          $bio .= trim(uiTextSnippet('born') . ': ' . displayDate($person['birthdate']));
           if ($person['birthdate'] && $person['birthplace']) {
-            $bio .= ", ";
+            $bio .= ', ';
           }
           $bio .= $person['birthplace'];
         } elseif ($person['altbirthdate'] || $person['altbirthplace']) {
-          $bio .= trim(uiTextSnippet('christened') . ": " . displayDate($person['altbirthdate']));
+          $bio .= trim(uiTextSnippet('christened') . ': ' . displayDate($person['altbirthdate']));
           if ($person['altbirthdate'] && $person['altbirthplace']) {
-            $bio .= ", ";
+            $bio .= ', ';
           }
           $bio .= $person['altbirthplace'];
         }
         if ($person['deathdate'] || $person['deathplace']) {
-          $bio .= trim(($bio ? ' &#013;' : '') . uiTextSnippet('died') . ": " . displayDate($person['deathdate']));
+          $bio .= trim(($bio ? ' &#013;' : '') . uiTextSnippet('died') . ': ' . displayDate($person['deathdate']));
           if ($person['deathdate'] && $person['deathplace']) {
-            $bio .= ", ";
+            $bio .= ', ';
           }
           $bio .= $person['deathplace'];
         } elseif ($person['burialdate'] || $person['burialplace']) {
-          $bio .= trim(($bio ? ' &#013;' : '') . uiTextSnippet('buried') . ": " . displayDate($person['burialdate']));
+          $bio .= trim(($bio ? ' &#013;' : '') . uiTextSnippet('buried') . ': ' . displayDate($person['burialdate']));
           if ($person['burialdate'] && $person['burialplace']) {
-            $bio .= ", ";
+            $bio .= ', ';
           }
           $bio .= $person['burialplace'];
         }
@@ -337,15 +337,15 @@ function do_chart($gens, $output = false) {
           $row [$rows - $gen_num] .= "\t\t<div class=\"ascender father\" style=\"left:" . ($person['xpos'] - (($person['spacer_xwidth'] - $chartBoxWidth) / 2)) . "px;top:{$spacer_ypos}px;width:" . ($person['spacer_xwidth'] / 2) . "px\"></div>\r\n";
         }
         if ($spacer_ypos > 0 && (isset($gens[$gen_num + 1][$num * 2]['name']))) {
-          $row [$rows - $gen_num] .= "\t\t<div class=\"ascender mother\" style=\"left:" . ($person['xpos'] + ($chartBoxWidth) / 2) . "px;top:" . ($ypos - $chartBoxVerticalSpacing) . "px;width:" . ($person['spacer_xwidth'] / 2) . "px\"></div>\r\n";
+          $row [$rows - $gen_num] .= "\t\t<div class=\"ascender mother\" style=\"left:" . ($person['xpos'] + ($chartBoxWidth) / 2) . 'px;top:' . ($ypos - $chartBoxVerticalSpacing) . 'px;width:' . ($person['spacer_xwidth'] / 2) . "px\"></div>\r\n";
         }
         if (!$ignore || $gen_num > 1) {
           $row [$rows - $gen_num] .= "\t\t<div class=\"box\" style=\"left:{$person['xpos']}px;top:{$ypos}px;width:{$chartBoxWidth}px\">\r\n\t\t\t<div class=\"inner\">\r\n\t\t\t\t<div>\r\n\t\t\t\t\t";
           $url = htmlentities("peopleShowPerson.php?personID={$person['personID']}");
-          $row [$rows - $gen_num] .= "<a" . ($person['display'] ? " title=\"{$bio}\"" : "") . " href=\"{$url}\">{$person['name']}</a><br>" . getGenderIcon($person['sex'], -2);
+          $row [$rows - $gen_num] .= '<a' . ($person['display'] ? " title=\"{$bio}\"" : '') . " href=\"{$url}\">{$person['name']}</a><br>" . getGenderIcon($person['sex'], -2);
           if ($person['display']) {
             if ($person['birthdatetr'] != '0000-00-00' || $person['altbirthdatetr'] != '0000-00-00' || $person['deathdatetr'] != '0000-00-00' || $person['burialdatetr'] != '0000-00-00') {
-              $row [$rows - $gen_num] .= " " . (substr($person['birthdatetr'], 0, 4) != '0000' ? substr($person['birthdatetr'], 0, 4) : (substr($person['altbirthdatetr'], 0, 4) != '0000' ? substr($person['altbirthdatetr'], 0, 4) : '')) . '-' . (substr($person['deathdatetr'], 0, 4) != '0000' ? substr($person['deathdatetr'], 0, 4) : (substr($person['burialdatetr'], 0, 4) != '0000' ? substr($person['burialdatetr'], 0, 4) : ''));
+              $row [$rows - $gen_num] .= ' ' . (substr($person['birthdatetr'], 0, 4) != '0000' ? substr($person['birthdatetr'], 0, 4) : (substr($person['altbirthdatetr'], 0, 4) != '0000' ? substr($person['altbirthdatetr'], 0, 4) : '')) . '-' . (substr($person['deathdatetr'], 0, 4) != '0000' ? substr($person['deathdatetr'], 0, 4) : (substr($person['burialdatetr'], 0, 4) != '0000' ? substr($person['burialdatetr'], 0, 4) : ''));
             }
           }
           $row[$rows - $gen_num] .= "\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n";
@@ -405,8 +405,8 @@ preparebookmark("<a href=\"verticalchart.php?personID=$personID&amp;generations=
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
-$headSection->setTitle(uiTextSnippet('pedigreefor') . " " . $row['name']);
+header('Content-type: text/html; charset=' . $session_charset);
+$headSection->setTitle(uiTextSnippet('pedigreefor') . ' ' . $row['name']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -419,12 +419,12 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " " . $row['name']);
     $photostr = showSmallPhoto($personID, $row['name'], $rights['both'], 0, false, $row['sex']);
     echo tng_DrawHeading($photostr, $row['name'], getYears($row));
 
-    $innermenu = uiTextSnippet('generations') . ": &nbsp;";
+    $innermenu = uiTextSnippet('generations') . ': &nbsp;';
     $innermenu .= "<select name='generations' class='small' onchange=\"window.location.href='verticalchart.php?personID=$personID&amp;parentset=$parentset&amp;display=$display&amp;generations=' + this.options[this.selectedIndex].value\">\n";
     for ($i = 2; $i <= $pedigree['maxgen']; $i++) {
       $innermenu .= "<option value='$i'";
       if ($i == $generations) {
-        $innermenu .= " selected";
+        $innermenu .= ' selected';
       }
       $innermenu .= ">$i</option>\n";
     }
@@ -438,8 +438,8 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " " . $row['name']);
     if ($gens <= 6 && $allow_pdf && $rightbranch) {
       $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ped&amp;personID=$personID&amp;generations=$generations');return false;\">PDF</a>\n";
     }
-    beginFormElement("pedigree", "", "form1", "form1");
-    echo buildPersonMenu("pedigree", $personID);
+    beginFormElement('pedigree', '', 'form1', 'form1');
+    echo buildPersonMenu('pedigree', $personID);
     echo "<div class='pub-innermenu small'>\n";
       echo $innermenu;
     echo "</div>\n";

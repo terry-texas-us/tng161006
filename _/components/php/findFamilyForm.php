@@ -14,19 +14,19 @@
     <div class='card-block'>
       <div class='row form-group'>
         <select name="spousename">
-          <option value='husband'<?php if ($spousename == 'husband') {echo " selected";} ?>>
+          <option value='husband'<?php if ($spousename == 'husband') {echo ' selected';} ?>>
             <?php echo uiTextSnippet('husbname'); ?></option>
-          <option value='wife'<?php if ($spousename == 'wife') {echo " selected";} ?>>
+          <option value='wife'<?php if ($spousename == 'wife') {echo ' selected';} ?>>
             <?php echo uiTextSnippet('wifename'); ?></option>
-          <option value="none"<?php if ($spousename == "none") {echo " selected";} ?>>
+          <option value="none"<?php if ($spousename == 'none') {echo ' selected';} ?>>
             <?php echo uiTextSnippet('noname'); ?></option>
         </select>
         <label class='form-check-inline'>
-          <input class='form-check-input' name='living' type='checkbox' value='yes'<?php if ($living == "yes") {echo " checked";} ?>>
+          <input class='form-check-input' name='living' type='checkbox' value='yes'<?php if ($living == 'yes') {echo ' checked';} ?>>
           <?php echo uiTextSnippet('livingonly'); ?>
         </label>
         <label class='form-check-inline'>
-          <input class='form-check-input' name='exactmatch' type='checkbox' value='yes'<?php if ($exactmatch == "yes") {echo " checked";} ?>>
+          <input class='form-check-input' name='exactmatch' type='checkbox' value='yes'<?php if ($exactmatch == 'yes') {echo ' checked';} ?>>
           <?php echo uiTextSnippet('exactmatch'); ?>
         </label>
       </div>

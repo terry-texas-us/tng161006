@@ -7,24 +7,24 @@ require 'checklogin.php';
 //remove javascript. put that somewhere global
 
 if (!$currentuser) {
-  header("Location: login.php");
+  header('Location: login.php');
   exit;
 }
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 
 $query = "SELECT userID, username, password, realname, phone, email, website, address, city, state, country, zip FROM $users_table WHERE username = \"$currentuser\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
 
-$row['realname'] = preg_replace("/\"/", "&#34;", $row['realname']);
-$row['phone'] = preg_replace("/\"/", "&#34;", $row['phone']);
-$row['email'] = preg_replace("/\"/", "&#34;", $row['email']);
-$row['website'] = preg_replace("/\"/", "&#34;", $row['website']);
-$row['address'] = preg_replace("/\"/", "&#34;", $row['address']);
-$row['city'] = preg_replace("/\"/", "&#34;", $row['city']);
-$row['state'] = preg_replace("/\"/", "&#34;", $row['state']);
-$row['country'] = preg_replace("/\"/", "&#34;", $row['country']);
+$row['realname'] = preg_replace('/\"/', '&#34;', $row['realname']);
+$row['phone'] = preg_replace('/\"/', '&#34;', $row['phone']);
+$row['email'] = preg_replace('/\"/', '&#34;', $row['email']);
+$row['website'] = preg_replace('/\"/', '&#34;', $row['website']);
+$row['address'] = preg_replace('/\"/', '&#34;', $row['address']);
+$row['city'] = preg_replace('/\"/', '&#34;', $row['city']);
+$row['state'] = preg_replace('/\"/', '&#34;', $row['state']);
+$row['country'] = preg_replace('/\"/', '&#34;', $row['country']);
 
 $allow_user_change = true;
 ?>
@@ -75,7 +75,7 @@ $allow_user_change = true;
           <td>
             <?php echo uiTextSnippet('username');
             if ($allow_user_change) {
-              echo "*";
+              echo '*';
             } ?>:
           </td>
           <td>
@@ -85,7 +85,7 @@ $allow_user_change = true;
               <span id="checkmsg"></span>
             <?php
             } else {
-              echo "<strong>" . $row['username'] . "</strong>\n";
+              echo '<strong>' . $row['username'] . "</strong>\n";
               ?>
               <input name='username' type='hidden' value="<?php echo $row['username']; ?>">
             <?php } ?>

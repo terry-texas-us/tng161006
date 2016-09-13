@@ -3,17 +3,17 @@
 require 'begin.php';
 require 'getlang.php';
 
-$tngconfig['maint'] = "";
+$tngconfig['maint'] = '';
 require 'genlib.php';
 
 if ($adminLogin) {
-  $home_url = "admin.php";
-  $login_url = "admin_login.php?";
+  $home_url = 'admin.php';
+  $login_url = 'admin_login.php?';
   $dest_url = $_SESSION['destinationpage8'] && $continue ? $_SESSION['destinationpage8'] : $home_url;
 } else {
   $home_url = $homepage;
   $dest_url = isset($_SESSION['destinationpage8']) ? $_SESSION['destinationpage8'] : $home_url;
-  $login_url = $requirelogin || !isset($_SESSION['destinationpage8']) || strpos($_SESSION['destinationpage8'], $home_url) !== false || substr($_SESSION['destinationpage8'], -1) == "/" ? "login.php?message=loginfailed" : $dest_url;
+  $login_url = $requirelogin || !isset($_SESSION['destinationpage8']) || strpos($_SESSION['destinationpage8'], $home_url) !== false || substr($_SESSION['destinationpage8'], -1) == '/' ? "login.php?message=loginfailed" : $dest_url;
 }
 $query = "SELECT * FROM $users_table WHERE BINARY username = \"$tngusername\"";
 $result = tng_query($query) or die("Cannot execute query: $query");
@@ -33,19 +33,19 @@ if (tng_num_rows($result)) {
   $check = 0;
 }
 $headerstr = $login_url;
-$newroot = preg_replace("/\//", "", $rootpath);
-$newroot = preg_replace("/ /", "", $newroot);
-$newroot = preg_replace("/\./", "", $newroot);
+$newroot = preg_replace('/\//', '', $rootpath);
+$newroot = preg_replace('/ /', '', $newroot);
+$newroot = preg_replace('/\./', '', $newroot);
 
 if ($check) {
   if ($row['disabled']) {
-    setcookie("tngerror_$newroot", "disabled", 0, "/");
+    setcookie("tngerror_$newroot", 'disabled', 0, '/');
   } elseif ($row['allow_living'] == -1) { // this column uses -1 to indicate an inactive user account
-    setcookie("tngerror_$newroot", "logininactive", 0, "/");
+    setcookie("tngerror_$newroot", 'logininactive', 0, '/');
   } else {
     $allow_admin = $row['allow_edit'] || $row['allow_add'] || $row['allow_delete'] ? 1 : 0;
     if (!$adminLogin || $allow_admin) {
-      $newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
+      $newdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
       if ($resetpass && $newpassword && $row['allow_profile']) {
         $password_type = PasswordType();
         $query = "UPDATE $users_table SET password=\"" . PasswordEncode($newpassword) . "\", lastlogin=\"$newdate\", password_type=\"$password_type\" WHERE userID=\"{$row['userID']}\"";
@@ -54,12 +54,12 @@ if ($check) {
       }
       $uresult = tng_query($query) or die("Cannot execute query: $query");
       if ($remember) {
-        setcookie("tnguser_$newroot", $tngusername, time() + 31536000, "/");
-        setcookie("tngpass_$newroot", $row['password'], time() + 31536000, "/");
-        setcookie("tngpasstype_$newroot", $row['password_type'], time() + 31536000, "/");
+        setcookie("tnguser_$newroot", $tngusername, time() + 31536000, '/');
+        setcookie("tngpass_$newroot", $row['password'], time() + 31536000, '/');
+        setcookie("tngpasstype_$newroot", $row['password_type'], time() + 31536000, '/');
       }
       if ($adminLogin) {
-        setcookie("tngloggedin_$newroot", "1", 0, "/");
+        setcookie("tngloggedin_$newroot", '1', 0, '/');
       }
       $logged_in = $_SESSION['logged_in'] = 1;
 
@@ -104,11 +104,11 @@ if ($check) {
 
       $headerstr = $dest_url;
     } else {
-      setcookie("tngerror_$newroot", "norights", 0, "/");
+      setcookie("tngerror_$newroot", 'norights', 0, '/');
     }
   }
 } else {
-  setcookie("tngerror_$newroot", "loginfailed", 0, "/");
+  setcookie("tngerror_$newroot", 'loginfailed', 0, '/');
 }
 tng_free_result($result);
 header("Location: $headerstr");

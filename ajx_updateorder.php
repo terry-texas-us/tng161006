@@ -8,7 +8,7 @@ require 'checklogin.php';
 
 if (!$allowMediaEdit && !$allowMediaAdd && !$allowMediaDelete) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
@@ -25,7 +25,7 @@ function reorderMedia($query, $plink) {
   $result3 = tng_query($query);
   while ($personrow = tng_fetch_assoc($result3)) {
     $counter = 1;
-    if ($type == "media") {
+    if ($type == 'media') {
       $query = "SELECT medialinkID FROM ($medialinks_table, $media_table) WHERE personID = \"{$personrow['personID']}\" AND $media_table.mediaID = $medialinks_table.mediaID AND eventID = \"$eventID\" AND mediatypeID = \"{$plink['mediatypeID']}\" ORDER BY ordernum";
       $result4 = tng_query($query);
 
@@ -72,8 +72,8 @@ function setDefault($entity, $media, $album) {
 
 $rval = 1;
 switch ($action) {
-  case "order":
-    $links = explode(",", $sequence);
+  case 'order':
+    $links = explode(',', $sequence);
     $count = count($links);
     if ($album) {
       for ($i = 0; $i < $count; $i++) {
@@ -89,8 +89,8 @@ switch ($action) {
       }
     }
     break;
-  case "alborder":
-    $alinks = explode(",", $sequence);
+  case 'alborder':
+    $alinks = explode(',', $sequence);
     $count = count($alinks);
     for ($i = 0; $i < $count; $i++) {
       $order = $i + 1;
@@ -98,8 +98,8 @@ switch ($action) {
       $result = tng_query($query);
     }
     break;
-  case "mworder":
-    $links = explode(",", $sequence);
+  case 'mworder':
+    $links = explode(',', $sequence);
     $count = count($links);
     for ($i = 0; $i < $count; $i++) {
       $order = $i + 1;
@@ -107,8 +107,8 @@ switch ($action) {
       $result = tng_query($query);
     }
     break;
-  case "childorder":
-    $clinks = explode(",", $sequence);
+  case 'childorder':
+    $clinks = explode(',', $sequence);
     $count = count($clinks);
     for ($i = 0; $i < $count; $i++) {
       $order = $i + 1;
@@ -116,8 +116,8 @@ switch ($action) {
       $result2 = tng_query($query);
     }
     break;
-  case "parentorder":
-    $plinks = explode(",", $sequence);
+  case 'parentorder':
+    $plinks = explode(',', $sequence);
     $count = count($plinks);
     for ($i = 0; $i < $count; $i++) {
       $order = $i + 1;
@@ -125,8 +125,8 @@ switch ($action) {
       $result2 = tng_query($query);
     }
     break;
-  case "spouseorder":
-    $slinks = explode(",", $sequence);
+  case 'spouseorder':
+    $slinks = explode(',', $sequence);
     $count = count($slinks);
     for ($i = 0; $i < $count; $i++) {
       $order = $i + 1;
@@ -134,8 +134,8 @@ switch ($action) {
       $result2 = tng_query($query);
     }
     break;
-  case "noteorder":
-    $nlinks = explode(",", $sequence);
+  case 'noteorder':
+    $nlinks = explode(',', $sequence);
     $count = count($nlinks);
     for ($i = 0; $i < $count; $i++) {
       $order = $i + 1;
@@ -143,8 +143,8 @@ switch ($action) {
       $result2 = tng_query($query);
     }
     break;
-  case "citeorder":
-    $clinks = explode(",", $sequence);
+  case 'citeorder':
+    $clinks = explode(',', $sequence);
     $count = count($clinks);
     for ($i = 0; $i < $count; $i++) {
       $order = $i + 1;
@@ -152,7 +152,7 @@ switch ($action) {
       $result2 = tng_query($query);
     }
     break;
-  case "spouseunlink":
+  case 'spouseunlink':
     $query = "SELECT husband, wife FROM $families_table WHERE familyID = '$familyID'";
     $marriage = tng_query($query);
     $marriagerow = tng_fetch_assoc($marriage);
@@ -165,8 +165,8 @@ switch ($action) {
         //$spquery = "SELECT living FROM $people_table WHERE personID = \"$marriagerow[husband]\"";
         $delspousestr = "wife = \"\"";
       } else {
-        $spquery = "";
-        $delspousestr = "";
+        $spquery = '';
+        $delspousestr = '';
       }
     }
     if ($delspousestr) {
@@ -174,14 +174,14 @@ switch ($action) {
       $spouseresult = tng_query($query);
     }
     break;
-  case "parentunlink":
+  case 'parentunlink':
     $query = "DELETE FROM $children_table WHERE familyID = '$familyID' AND personID = '$personID'";
     $result2 = tng_query($query);
 
     $query = "UPDATE $people_table SET famc=\"\" WHERE personID = '$personID' AND famc = '$familyID'";
     $result2 = tng_query($query);
     break;
-  case "addchild":
+  case 'addchild':
     $haskids = getHasKids($personID);
 
     $query = "INSERT INTO $children_table (familyID, personID, ordernum, mrel, frel, haskids, parentorder, sealdate, sealdatetr, sealplace) "
@@ -213,15 +213,15 @@ switch ($action) {
     $rval .= "</td>\n";
     $rval .= "<td class=\"childblock\">\n";
 
-    $rval .= "<div id=\"unlinkc_$personID\" class=\"small hide-right\"><a href='#' onclick=\"return unlinkChild('$personID','child_unlink');\">" . uiTextSnippet('remove') . "</a>";
+    $rval .= "<div id=\"unlinkc_$personID\" class=\"small hide-right\"><a href='#' onclick=\"return unlinkChild('$personID','child_unlink');\">" . uiTextSnippet('remove') . '</a>';
     if ($allowDelete) {
-      $rval .= " &nbsp; | &nbsp; <a href='#' onclick=\"return unlinkChild('$personID','child_delete');\">" . uiTextSnippet('delete') . "</a>";
+      $rval .= " &nbsp; | &nbsp; <a href='#' onclick=\"return unlinkChild('$personID','child_delete');\">" . uiTextSnippet('delete') . '</a>';
     }
-    $rval .= "</div>";
-    $display = str_replace("|", "</a>", $display);
+    $rval .= '</div>';
+    $display = str_replace('|', '</a>', $display);
     $rval .= "<a href='#' onclick=\"EditChild('$personID');\">$display</div>\n</td>\n</tr>\n</table>\n</div>\n";
     break;
-  case "setdef":
+  case 'setdef':
     setDefault($entity, $media, $album);
 
     $query = "SELECT thumbpath, usecollfolder, mediatypeID FROM $media_table
@@ -249,20 +249,20 @@ switch ($action) {
         $photohtouse = $thumbmaxh;
         $photowtouse = intval($thumbmaxh * $photoinfo[0] / $photoinfo[1]);
       }
-      $rval = "<img src=\"" . str_replace("%2F", "/", rawurlencode($photoref)) . "?" . time() . "\" alt='' width=\"$photowtouse\" height=\"$photohtouse\" style=\"margin-right:10px\">";
+      $rval = "<img src=\"" . str_replace('%2F', '/', rawurlencode($photoref)) . "?" . time() . "\" alt='' width=\"$photowtouse\" height=\"$photohtouse\" style=\"margin-right:10px\">";
     }
     break;
-  case "setdef2":
+  case 'setdef2':
     setDefault($entity, $media, $album);
     break;
-  case "setdef3":
+  case 'setdef3':
     $query = "UPDATE $medialinks_table SET defphoto = '' WHERE defphoto = '1' AND personID = '$entity'";
     $result = tng_query($query);
 
     $query = "UPDATE $medialinks_table SET defphoto = '$toggle' WHERE medialinkID=\"$medialinkID\"";
     $result = tng_query($query);
     break;
-  case "deldef":
+  case 'deldef':
     //look for old style default, delete if exists
     if ($album) {
       $query = "SELECT thumbpath, usecollfolder, mediatypeID, albumlinkID FROM ($media_table, $albumlinks_table)
@@ -287,31 +287,31 @@ switch ($action) {
     }
     $result = tng_query($query);
     break;
-  case "show":
+  case 'show':
     $query = "UPDATE $medialinks_table SET dontshow = $toggle WHERE medialinkID=\"$medialinkID\"";
     $result = tng_query($query);
     break;
-  case "remalb":
+  case 'remalb':
     $query = "DELETE FROM $albumlinks_table WHERE albumlinkID=\"$albumlink\"";
     $result = tng_query($query);
-    $rval = $media . "&" . $albumlink;
+    $rval = $media . '&' . $albumlink;
     break;
-  case "remmostwanted":
+  case 'remmostwanted':
     $query = "DELETE FROM $mostwanted_table WHERE ID=\"$id\"";
     $result = tng_query($query);
     $rval = $id;
     break;
-  case "remsort":
-    if ($type == "album") {
+  case 'remsort':
+    if ($type == 'album') {
       $query = "DELETE FROM $album2entities_table WHERE alinkID=\"$link\"";
       $result = tng_query($query);
-    } elseif ($type == "media") {
+    } elseif ($type == 'media') {
       $query = "DELETE FROM $medialinks_table WHERE medialinkID=\"$link\"";
       $result = tng_query($query);
     }
     $rval = $link;
     break;
-  case "addcemlink":
+  case 'addcemlink':
     $query = "UPDATE $cemeteries_table SET place = \"" . urldecode($place) . "\" WHERE cemeteryID = '$cemeteryID'";
     $result = tng_query($query);
 
@@ -322,39 +322,39 @@ switch ($action) {
     $location = $cemrow['cemname'];
     if ($cemrow['city']) {
       if ($location) {
-        $location .= ", ";
+        $location .= ', ';
       }
       $location .= $cemrow['city'];
     }
     if ($cemrow['county']) {
       if ($location) {
-        $location .= ", ";
+        $location .= ', ';
       }
       $location .= $cemrow['county'];
     }
     if ($cemrow['state']) {
       if ($location) {
-        $location .= ", ";
+        $location .= ', ';
       }
       $location .= $cemrow['state'];
     }
     if ($cemrow['country']) {
       if ($location) {
-        $location .= ", ";
+        $location .= ', ';
       }
       $location .= $cemrow['country'];
     }
     $rval = "{\"location\":\"$location\"}";
     tng_free_result($result);
     break;
-  case "geocopy":
+  case 'geocopy':
     $query = "UPDATE $cemeteries_table SET latitude = '$latitude', longitude = '$longitude', zoom = '$zoom' WHERE cemeteryID = '$cemeteryID'";
     $result = tng_query($query);
 
-    $success = $result ? "1" : "0";
+    $success = $result ? '1' : '0';
     $rval = "{\"result\":\"$success\"}";
     break;
-  case "add":
+  case 'add':
     //add photo to album at end
     $query2 = "SELECT max(ordernum) AS maxordernum FROM $albumlinks_table WHERE albumID = \"$album\" GROUP BY albumID";
     $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
@@ -369,10 +369,10 @@ switch ($action) {
     }
     $result = tng_query($query);
     $albumlinkID = tng_insert_id();
-    $rval = $media . "&" . $albumlinkID;
+    $rval = $media . '&' . $albumlinkID;
     break;
-  case "dellink":
-    if ($type == "album") {
+  case 'dellink':
+    if ($type == 'album') {
       $query = "SELECT entityID FROM $album2entities_table WHERE alinkID = '$linkID'";
     } else {
       $query = "SELECT personID AS entityID, eventID, mediatypeID FROM ($medialinks_table, $media_table) WHERE medialinkID = '$linkID' AND $medialinks_table.mediaID = $media_table.mediaID";
@@ -383,7 +383,7 @@ switch ($action) {
 
     tng_free_result($result);
 
-    if ($type == "album") {
+    if ($type == 'album') {
       $query = "DELETE FROM $album2entities_table WHERE alinkID=\"$linkID\"";
     } else {
       $query = "DELETE FROM $medialinks_table WHERE medialinkID=\"$linkID\"";
@@ -402,22 +402,22 @@ switch ($action) {
     $query2 = "SELECT repoID AS personID FROM $repositories_table WHERE repoID = '$entityID'";
     reorderMedia($query2, $row);
 
-    $rval = $linkID . "&" . $entityID;
+    $rval = $linkID . '&' . $entityID;
     break;
-  case "updatelink":
+  case 'updatelink':
     //check if thumb exists before making default? We used to do that
-    if ($type == "album") {
+    if ($type == 'album') {
       $query = "UPDATE $album2entities_table SET eventID = '$eventID' WHERE alinkID = $linkID";
       $result = tng_query($query);
     } else {
-      if ($session_charset != "UTF-8") {
+      if ($session_charset != 'UTF-8') {
         $altdescription = tng_utf8_decode($altdescription);
         $altnotes = tng_utf8_decode($altnotes);
       }
       $altdescription = addslashes($altdescription);
       $altnotes = addslashes($altnotes);
 
-      $dontshow = $show ? "0" : "1";
+      $dontshow = $show ? '0' : '1';
       $query = "UPDATE $medialinks_table SET defphoto = '$defphoto', altdescription = '$altdescription', altnotes = '$altnotes', eventID = '$eventID', dontshow = $dontshow WHERE medialinkID = $linkID";
       $result = tng_query($query);
 
@@ -427,7 +427,7 @@ switch ($action) {
       }
     }
     break;
-  case "addlink":
+  case 'addlink':
     include 'prefixes.php';
     switch ($linktype) {
       case 'I':
@@ -447,7 +447,7 @@ switch ($action) {
         $suffix = $reposuffix;
         break;
       default:
-        $prefix = $suffix = "";
+        $prefix = $suffix = '';
         break;
     }
     $entityID = tng_utf8_decode(trim($entityID));
@@ -461,7 +461,7 @@ switch ($action) {
     if ($suffix && $entity_suffix != $suffix) {
       $entityID = $entityID . $suffix;
     }
-    if ($type == "album") {
+    if ($type == 'album') {
       $query = "SELECT count(alinkID) AS count FROM $album2entities_table WHERE entityID = \"$entityID\"";
     } else {
       $query = "SELECT count(medialinkID) AS count FROM $medialinks_table WHERE personID = \"$entityID\"";
@@ -496,7 +496,7 @@ switch ($action) {
             . "WHERE familyID = '$entityID'";
         $result = tng_query($query);
         $row = tng_fetch_assoc($result);
-        $name = "";
+        $name = '';
 
         if ($row['hpersonID']) {
           $person['personID'] = $row['hpersonID'];
@@ -514,7 +514,7 @@ switch ($action) {
 
           $name .= getName($person);
         }
-        $name .= ", ";
+        $name .= ', ';
         if ($row['wpersonID']) {
           $person['personID'] = $row['wpersonID'];
           $person['firstname'] = $row['wfirstname'];
@@ -573,7 +573,7 @@ switch ($action) {
     }
 
     if ($numrows) {
-      if ($type == "album") {
+      if ($type == 'album') {
         $query = "INSERT IGNORE INTO $album2entities_table (entityID, albumID, ordernum, linktype) "
             . "VALUES ('$entityID', '$albumID', '$newrow', '$linktype')";
       } else {
@@ -585,15 +585,15 @@ switch ($action) {
       $success = tng_affected_rows();
       if ($success) {
         $linkID = tng_insert_id();
-        $rval = $linkID . "|" . $name;
+        $rval = $linkID . '|' . $name;
         $query = "SELECT thumbpath, mediatypeID, usecollfolder FROM $media_table WHERE mediaID = \"$mediaID\"";
         $result = tng_query($query);
         $row = tng_fetch_assoc($result);
         $mediatypeID = $row['mediatypeID'];
         $usefolder = $row['usecollfolder'] ? $mediatypes_assoc[$mediatypeID] : $mediapath;
-        $rval .= "|";
-        $rval .= $row['thumbpath'] && file_exists("$rootpath$usefolder/" . $row['thumbpath']) ? "1" : "0";
-        $rval .= "|" . $row['mediatypeID'];
+        $rval .= '|';
+        $rval .= $row['thumbpath'] && file_exists("$rootpath$usefolder/" . $row['thumbpath']) ? '1' : '0';
+        $rval .= '|' . $row['mediatypeID'];
         tng_free_result($result);
       } else {
         $rval = 1;
@@ -602,7 +602,7 @@ switch ($action) {
       $rval = 2;
     }    //invalid
     break;
-  case "masslink":
+  case 'masslink':
     $entityID = tng_utf8_decode($newlink1);
     $query = "SELECT count(medialinkID) AS count FROM $medialinks_table WHERE personID = \"$entityID\"";
     $result = tng_query($query);
@@ -615,7 +615,7 @@ switch ($action) {
     }
 
     $newlinks = 0;
-    $mediaIDs = explode(",", $medialist);
+    $mediaIDs = explode(',', $medialist);
     foreach ($mediaIDs as $mediaID) {
       $query = "INSERT IGNORE INTO $medialinks_table (personID, mediaID, ordernum, linktype, eventID) "
           . "VALUES ('$entityID', '$mediaID', '$newrow', '$linktype1', '$event1')";
@@ -625,10 +625,10 @@ switch ($action) {
         $newrow += 1;
       }
     }
-    $rval = "Links created: " . $newlinks;
+    $rval = 'Links created: ' . $newlinks;
     break;
-  case "qmedia":
-    if ($session_charset != "UTF-8") {
+  case 'qmedia':
+    if ($session_charset != 'UTF-8') {
       $title = tng_utf8_decode($title);
       $description = tng_utf8_decode($description);
     }
@@ -644,9 +644,9 @@ switch ($action) {
 }
 
 if ($json) {
-  header("Content-Type: application/json; charset=" . $session_charset);
+  header('Content-Type: application/json; charset=' . $session_charset);
 } else {
-  header("Content-type:text/html; charset=" . $session_charset);
+  header('Content-type:text/html; charset=' . $session_charset);
 }
 
 echo $rval;

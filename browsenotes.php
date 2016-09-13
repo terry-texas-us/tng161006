@@ -7,12 +7,12 @@ function doNoteSearch($instance, $pagenav) {
   global $notesearch;
 
   $str = "<div>\n";
-  $str .= buildFormElement("browsenotes", "get", "notesearch$instance");
+  $str .= buildFormElement('browsenotes', 'get', "notesearch$instance");
   $str .= "<input name='notesearch' type='text' value=\"$notesearch\" /> \n";
   $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . "\" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
   $str .= $pagenav;
   if ($notesearch) {
-    $str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='browsenotes.php'>" . uiTextSnippet('browseallnotes') . "</a>";
+    $str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='browsenotes.php'>" . uiTextSnippet('browseallnotes') . '</a>';
   }
   $str .= "</form></div>\n";
 
@@ -25,7 +25,7 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $page = 1;
 }
 $wherestr = "WHERE $xnotes_table.ID = $notelinks_table.xnoteID";
@@ -37,7 +37,7 @@ if ($notesearch) {
   $notesearch2 = addslashes($notesearch);
   $notesearch = cleanIt($notesearch);
 
-  $wherestr .= $wherestr ? " AND" : "WHERE";
+  $wherestr .= $wherestr ? ' AND' : 'WHERE';
   $wherestr .= " match($xnotes_table.note) against( \"$notesearch2\" in boolean mode)";
 }
 
@@ -56,14 +56,14 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 }
 $numrowsplus = $numrows + $offset;
 
-$logstring = "<a href=\"browsenotes.php?offset=$offset&amp;notesearch=" . htmlentities(stripslashes($notesearch), ENT_QUOTES) . "\">" . xmlcharacters(uiTextSnippet('notes')) . "</a>";
+$logstring = "<a href=\"browsenotes.php?offset=$offset&amp;notesearch=" . htmlentities(stripslashes($notesearch), ENT_QUOTES) . "\">" . xmlcharacters(uiTextSnippet('notes')) . '</a>';
 writelog($logstring);
 preparebookmark($logstring);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('notes'));
 ?>
 <!DOCTYPE html>
@@ -76,7 +76,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
     <br clear='left'>
     <?php
     if ($totrows) {
-      echo "<p>" . uiTextSnippet('matches') . " " . number_format($offsetplus) . " " . uiTextSnippet('to') . " " . number_format($numrowsplus) . " " . uiTextSnippet('of') . " " . number_format($totrows) . "</p>";
+      echo '<p>' . uiTextSnippet('matches') . ' ' . number_format($offsetplus) . ' ' . uiTextSnippet('to') . ' ' . number_format($numrowsplus) . ' ' . uiTextSnippet('of') . ' ' . number_format($totrows) . '</p>';
     }
 
     $pagenav = buildSearchResultPagination($totrows, "browsenotes.php?notesearch=$notesearch&amp;offset", $maxsearchresults, $max_browsenote_pages);
@@ -92,7 +92,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
         <?php
         $i = $offsetplus;
         while ($nrow = tng_fetch_assoc($result)) {
-          $notelinktext = "";
+          $notelinktext = '';
           $noneliving = 1;
           $noneprivate = 1;
           $query2 = $query;
@@ -172,13 +172,13 @@ $headSection->setTitle(uiTextSnippet('notes'));
             }
           }
           echo "<tr><td>$i</td>\n";
-          echo "<td>";
+          echo '<td>';
           if ($noneliving && $noneprivate) {
             echo nl2br($nrow['note']);
           } else {
             echo uiTextSnippet('livingnote');
           }
-          echo "&nbsp;</td>";
+          echo '&nbsp;</td>';
           echo "<td width=\"175\">$notelinktext&nbsp;</td></tr>\n";
           $i++;
         }
@@ -188,7 +188,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
     <?php
     if ($pagenav || $notesearch) {
       echo doNoteSearch(2, $pagenav);
-      echo "<br>";
+      echo '<br>';
     }
     ?>
     <?php echo $publicFooterSection->build(); ?>

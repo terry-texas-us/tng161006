@@ -8,7 +8,7 @@ require 'checklogin.php';
 
 if (!$allowEdit || !$allowDelete) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
@@ -23,7 +23,7 @@ $xphaction = stripslashes($xphaction);
 if ($xphaction == uiTextSnippet('convto')) {
   //loop through each one
   foreach (array_keys($_POST) as $key) {
-    if (substr($key, 0, 2) == "ph") {
+    if (substr($key, 0, 2) == 'ph') {
       $count++;
       $mediaID = substr($key, 2);
 
@@ -101,7 +101,7 @@ if ($xphaction == uiTextSnippet('convto')) {
   }
 } elseif ($xphaction == uiTextSnippet('addtoalbum')) {
   foreach (array_keys($_POST) as $key) {
-    if (substr($key, 0, 2) == "ph") {
+    if (substr($key, 0, 2) == 'ph') {
       $count++;
       $mediaID = substr($key, 2);
 
@@ -128,7 +128,7 @@ if ($xphaction == uiTextSnippet('convto')) {
   $query = "DELETE FROM $media_table WHERE 1=0";
 
   foreach (array_keys($_POST) as $key) {
-    if (substr($key, 0, 2) == "ph") {
+    if (substr($key, 0, 2) == 'ph') {
       $count++;
       $mediaID = substr($key, 2);
       $query .= " OR mediaID=\"$mediaID\"";
@@ -145,11 +145,11 @@ if ($xphaction == uiTextSnippet('convto')) {
   $result = tng_query($query);
 }
 
-adminwritelog(uiTextSnippet('modifymedia') . ": " . uiTextSnippet('all'));
+adminwritelog(uiTextSnippet('modifymedia') . ': ' . uiTextSnippet('all'));
 
 if ($count) {
-  $message = uiTextSnippet('changestoallmedia') . " " . uiTextSnippet('succsaved') . ".";
+  $message = uiTextSnippet('changestoallmedia') . ' ' . uiTextSnippet('succsaved') . '.';
 } else {
   $message = uiTextSnippet('nochanges');
 }
-header("Location: mediaBrowse.php?message=" . urlencode($message));
+header('Location: mediaBrowse.php?message=' . urlencode($message));

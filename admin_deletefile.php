@@ -8,7 +8,7 @@ require 'checklogin.php';
 
 if (!$allowDelete) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 

@@ -8,7 +8,7 @@ require 'checklogin.php';
 
 if (!$allowDelete) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 require 'adminlog.php';
@@ -16,8 +16,8 @@ require 'adminlog.php';
 tng_query("DELETE FROM $people_table");
 tng_query("ALTER TABLE $people_table AUTO_INCREMENT = 1");
 
-tng_query("DELETE FROM extlinks");
-tng_query("ALTER TABLE extlinks AUTO_INCREMENT = 1");
+tng_query('DELETE FROM extlinks');
+tng_query('ALTER TABLE extlinks AUTO_INCREMENT = 1');
 
 tng_query("DELETE FROM $families_table");
 tng_query("ALTER TABLE $families_table AUTO_INCREMENT = 1");
@@ -63,6 +63,6 @@ $result = tng_query($query);
 
 $message = uiTextSnippet('tree') . " $gedcom " . uiTextSnippet('succcleared') . '.';
 
-adminwritelog(uiTextSnippet('deleted') . ": " . uiTextSnippet('tree') . " $tree");
+adminwritelog(uiTextSnippet('deleted') . ': ' . uiTextSnippet('tree') . " $tree");
 
-header("Location: treesBrowse.php?message=" . urlencode($message));
+header('Location: treesBrowse.php?message=' . urlencode($message));

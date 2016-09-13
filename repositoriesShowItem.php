@@ -2,7 +2,7 @@
 require 'tng_begin.php';
 
 if (!$repoID) {
-  header("Location: thispagedoesnotexist.html");
+  header('Location: thispagedoesnotexist.html');
   exit;
 }
 require 'personlib.php';
@@ -11,8 +11,8 @@ require 'repositories.php';
 $flags['imgprev'] = true;
 
 $firstsection = 1;
-$firstsectionsave = "";
-$tableid = "";
+$firstsectionsave = '';
+$tableid = '';
 $cellnumber = 0;
 
 $query = "SELECT * FROM $repositories_table WHERE repoID = '$repoID'";
@@ -20,7 +20,7 @@ $result = tng_query($query);
 $reporow = tng_fetch_assoc($result);
 if (!tng_num_rows($result)) {
   tng_free_result($result);
-  header("Location: thispagedoesnotexist.html");
+  header('Location: thispagedoesnotexist.html');
   exit;
 }
 tng_free_result($result);
@@ -37,7 +37,7 @@ preparebookmark($logstring);
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle($reporow['reponame']);
 ?>
 <!DOCTYPE html>
@@ -50,20 +50,20 @@ $headSection->setTitle($reporow['reponame']);
     $repomedia = getMedia($reporow, 'R');
     $repoalbums = getAlbums($reporow, 'R');
     $photostr = showSmallPhoto($repoID, $reporow['reponame'], $reporow['allow_living'], 0);
-    echo tng_DrawHeading($photostr, $reporow['reponame'], "");
+    echo tng_DrawHeading($photostr, $reporow['reponame'], '');
 
-    $repotext = "";
+    $repotext = '';
     $repotext .= "<ul>\n";
     $repotext .= beginListItem('info');
     $repotext .= "<table class=\"table tfixed\">\n";
     $repotext .= "<col class=\"labelcol\"/><col style=\"width:{$datewidth}px\"/><col/>\n";
     if ($reporow['reponame']) {
-      $repotext .= showEvent(["text" => uiTextSnippet('name'), "fact" => $reporow['reponame']]);
+      $repotext .= showEvent(['text' => uiTextSnippet('name'), 'fact' => $reporow['reponame']]);
     }
     if ($reporow['addressID']) {
       $reporow['isrepo'] = true;
       $extras = getFact($reporow);
-      $repotext .= showEvent(["text" => uiTextSnippet('address'), "fact" => $extras]);
+      $repotext .= showEvent(['text' => uiTextSnippet('address'), 'fact' => $extras]);
     }
 
     //do custom events
@@ -75,23 +75,23 @@ $headSection->setTitle($reporow['reponame']);
       $repotext .= showEvent($event);
     }
     if ($allow_admin && $allowEdit) {
-      $repotext .= showEvent(["text" => uiTextSnippet('repoid'), "date" => $repoID, "place" => "<a href=\"repositoriesEdit.php?repoID=$repoID&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>", "np" => 1]);
+      $repotext .= showEvent(['text' => uiTextSnippet('repoid'), 'date' => $repoID, 'place' => "<a href=\"repositoriesEdit.php?repoID=$repoID&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . '</a>', 'np' => 1]);
     } else {
-      $repotext .= showEvent(["text" => uiTextSnippet('repoid'), "date" => $repoID]);
+      $repotext .= showEvent(['text' => uiTextSnippet('repoid'), 'date' => $repoID]);
     }
 
     if ($soffset) {
       $soffsetstr = "$soffset, ";
       $newsoffset = $soffset + 1;
     } else {
-      $soffsetstr = "";
-      $newsoffset = "";
+      $soffsetstr = '';
+      $newsoffset = '';
     }
 
     $query = "SELECT sourceID, title, shorttitle FROM $sources_table WHERE repoID = '$repoID' ORDER BY title LIMIT $soffsetstr" . ($maxsearchresults + 1);
     $sresult = tng_query($query);
     $numrows = tng_num_rows($sresult);
-    $repolinktext = "";
+    $repolinktext = '';
     while ($srow = tng_fetch_assoc($sresult)) {
       if ($repolinktext) {
         $repolinktext .= "\n";
@@ -100,12 +100,12 @@ $headSection->setTitle($reporow['reponame']);
       $repolinktext .= "<a href=\"sourcesShowSource.php?sourceID={$srow['sourceID']}\">$title</a>";
     }
     if ($numrows >= $maxsearchresults) {
-      $repolinktext .= "\n[<a href=\"repositoriesShowItem.php?repoID=$repoID&amp;foffset=$foffset&amp;soffset=" . ($newsoffset + $maxsearchresults) . "\">" . uiTextSnippet('moresrc') . "</a>]";
+      $repolinktext .= "\n[<a href=\"repositoriesShowItem.php?repoID=$repoID&amp;foffset=$foffset&amp;soffset=" . ($newsoffset + $maxsearchresults) . "\">" . uiTextSnippet('moresrc') . '</a>]';
     }
     tng_free_result($sresult);
 
     if ($repolinktext) {
-      $repotext .= showEvent(["text" => uiTextSnippet('indlinked'), "fact" => $repolinktext]);
+      $repotext .= showEvent(['text' => uiTextSnippet('indlinked'), 'fact' => $repolinktext]);
     }
 
     $repotext .= "</table>\n";
@@ -119,7 +119,7 @@ $headSection->setTitle($reporow['reponame']);
       $repotext .= endListItem('media');
     }
 
-    $notes = buildNotes($reponotes, "");
+    $notes = buildNotes($reponotes, '');
     if ($notes) {
       $repotext .= beginListItem('notes');
       $repotext .= "<table class=\"table tfixed\">\n";

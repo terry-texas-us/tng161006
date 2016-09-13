@@ -1,14 +1,14 @@
 <?php
 require 'tng_begin.php';
 
-$factfield = $datefield = $placefield = "";
+$factfield = $datefield = $placefield = '';
 
-if ($type == 'I' || $type == "C") {
+if ($type == 'I' || $type == 'C') {
   if ($type == 'I') {
     $personID = $persfamID;
-    $familyID = "";
+    $familyID = '';
   } else { //type C
-    $ids = explode("::", $persfamID);
+    $ids = explode('::', $persfamID);
     $personID = $ids[0];
     $familyID = $ids[1];
   }
@@ -22,12 +22,12 @@ if ($type == 'I' || $type == "C") {
   $name = getName($namerow);
   tng_free_result($result);
 } elseif ($type == 'F') {
-  $personID = "";
+  $personID = '';
   $familyID = $persfamID;
 
   $result = getFamilyData($familyID);
   $frow = tng_fetch_assoc($result);
-  $hname = $wname = "";
+  $hname = $wname = '';
 
   $rights = determineLivingPrivateRights($frow);
   $frow['allow_living'] = $rights['living'];
@@ -57,15 +57,15 @@ if ($type == 'I' || $type == "C") {
   }
 
   $persfamID = $familyID;
-  $plus = $hname && $wname ? " + " : "";
+  $plus = $hname && $wname ? ' + ' : '';
   $name = uiTextSnippet('family') . " $familyID<br>$hname$plus$wname";
 }
 
 if (is_numeric($event)) {
   //custom event type
-  $datefield = "eventdate";
-  $placefield = "eventplace";
-  $factfield = "info";
+  $datefield = 'eventdate';
+  $placefield = 'eventplace';
+  $factfield = 'info';
 
   if ($rights['both']) {
     $query = "SELECT eventdate, eventplace, info FROM $events_table WHERE eventID = \"$event\"";
@@ -80,66 +80,66 @@ if (is_numeric($event)) {
   $needfamilies = 0;
   $needchildren = 0;
   switch ($event) {
-    case "TITL":
-      $factfield = "title";
+    case 'TITL':
+      $factfield = 'title';
       break;
-    case "NSFX":
-      $factfield = "suffix";
+    case 'NSFX':
+      $factfield = 'suffix';
       break;
-    case "NICK":
-      $factfield = "nickname";
+    case 'NICK':
+      $factfield = 'nickname';
       break;
-    case "BIRT":
-      $datefield = "birthdate";
-      $placefield = "birthplace";
+    case 'BIRT':
+      $datefield = 'birthdate';
+      $placefield = 'birthplace';
       break;
-    case "CHR":
-      $datefield = "altbirthdate";
-      $placefield = "altbirthplace";
+    case 'CHR':
+      $datefield = 'altbirthdate';
+      $placefield = 'altbirthplace';
       break;
-    case "BAPL":
-      $datefield = "baptdate";
-      $placefield = "baptplace";
+    case 'BAPL':
+      $datefield = 'baptdate';
+      $placefield = 'baptplace';
       break;
-    case "CONL":
-      $datefield = "confdate";
-      $placefield = "confplace";
+    case 'CONL':
+      $datefield = 'confdate';
+      $placefield = 'confplace';
       break;
-    case "INIT":
-      $datefield = "initdate";
-      $placefield = "initplace";
+    case 'INIT':
+      $datefield = 'initdate';
+      $placefield = 'initplace';
       break;
-    case "ENDL":
-      $datefield = "endldate";
-      $placefield = "endlplace";
+    case 'ENDL':
+      $datefield = 'endldate';
+      $placefield = 'endlplace';
       break;
-    case "DEAT":
-      $datefield = "deathdate";
-      $placefield = "deathplace";
+    case 'DEAT':
+      $datefield = 'deathdate';
+      $placefield = 'deathplace';
       break;
-    case "BURI":
-      $datefield = "burialdate";
-      $placefield = "burialplace";
+    case 'BURI':
+      $datefield = 'burialdate';
+      $placefield = 'burialplace';
       break;
-    case "MARR":
-      $datefield = "marrdate";
-      $placefield = "marrplace";
-      $factfield = "marrtype";
+    case 'MARR':
+      $datefield = 'marrdate';
+      $placefield = 'marrplace';
+      $factfield = 'marrtype';
       $needfamilies = 1;
       break;
-    case "DIV":
-      $datefield = "divdate";
-      $placefield = "divplace";
+    case 'DIV':
+      $datefield = 'divdate';
+      $placefield = 'divplace';
       $needfamilies = 1;
       break;
-    case "SLGS":
-      $datefield = "sealdate";
-      $placefield = "sealplace";
+    case 'SLGS':
+      $datefield = 'sealdate';
+      $placefield = 'sealplace';
       $needfamilies = 1;
       break;
-    case "SLGC":
-      $datefield = "sealdate";
-      $placefield = "sealplace";
+    case 'SLGC':
+      $datefield = 'sealdate';
+      $placefield = 'sealplace';
       $needchildren = 1;
       break;
   }
@@ -167,7 +167,7 @@ if (is_numeric($event)) {
     $row = [];
   }
 }
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 
 <div id='tentedit'>
@@ -184,22 +184,22 @@ header("Content-type:text/html; charset=" . $session_charset);
       <table class='table table-sm'>
         <?php
         if ($datefield) {
-          echo "<tr><td><span>" . uiTextSnippet('date') . ": </span></td><td><span>$row[$datefield]</span></td></tr>\n";
-          echo "<tr><td><span>" . uiTextSnippet('suggested') . ": </span></td><td><input name='newdate' type='text' value=\"$row[$datefield]\" onblur=\"checkDate(this);\"></td></tr>\n";
+          echo '<tr><td><span>' . uiTextSnippet('date') . ": </span></td><td><span>$row[$datefield]</span></td></tr>\n";
+          echo '<tr><td><span>' . uiTextSnippet('suggested') . ": </span></td><td><input name='newdate' type='text' value=\"$row[$datefield]\" onblur=\"checkDate(this);\"></td></tr>\n";
           echo "<tr><td colspan='2'>&nbsp;</td></tr>\n";
         }
         if ($placefield) {
-          $row[$placefield] = preg_replace("/\"/", "&#34;", $row[$placefield]);
-          echo "<tr><td><span>" . uiTextSnippet('place') . ": </span></td><td><span>$row[$placefield]</span></td></tr>\n";
-          echo "<tr><td><span>" . uiTextSnippet('suggested') . ": </span></td><td><input name='newplace' type='text' size='40' value=\"$row[$placefield]\"></td></tr>\n";
+          $row[$placefield] = preg_replace('/\"/', '&#34;', $row[$placefield]);
+          echo '<tr><td><span>' . uiTextSnippet('place') . ": </span></td><td><span>$row[$placefield]</span></td></tr>\n";
+          echo '<tr><td><span>' . uiTextSnippet('suggested') . ": </span></td><td><input name='newplace' type='text' size='40' value=\"$row[$placefield]\"></td></tr>\n";
           echo "<tr><td colspan='2'>&nbsp;</td></tr>\n";
         }
         if ($factfield) {
-          $row[$factfield] = preg_replace("/\"/", "&#34;", $row[$factfield]);
-          $factmsg = $event == "MARR" ? uiTextSnippet('type') : uiTextSnippet('detail');
+          $row[$factfield] = preg_replace('/\"/', '&#34;', $row[$factfield]);
+          $factmsg = $event == 'MARR' ? uiTextSnippet('type') : uiTextSnippet('detail');
           echo "<tr><td><span>$factmsg: </span></td><td><span>$row[$factfield]</span></td></tr>\n";
-          echo "<tr><td><span>" . uiTextSnippet('suggested') . ": </span></td><td>";
-          if ($event == "MARR") {
+          echo '<tr><td><span>' . uiTextSnippet('suggested') . ': </span></td><td>';
+          if ($event == 'MARR') {
             echo "<input name='newinfo' type='text' size='40' value=\"$row[$factfield]\">";
           } else {
             echo "<textarea cols=\"40\" rows=\"3\" name=\"newinfo\">$row[$factfield]</textarea>";
@@ -210,13 +210,13 @@ header("Content-type:text/html; charset=" . $session_charset);
         ?>
         <tr>
           <td><span><?php echo uiTextSnippet('notes'); ?>: </span></td>
-          <td><textarea cols="40" rows="3" name="usernote"></textarea></td>
+          <td><textarea cols="40" rows='3' name="usernote"></textarea></td>
         </tr>
       </table>
     </div> <!-- .modal-body -->
     <footer class='modal-footer'>
       <input type='submit' value="<?php echo uiTextSnippet('savechanges'); ?>"> 
-      <span id='tspinner' style="display: none"><img src="img/spinner.gif"></span>
+      <span id='tspinner' style='display: none'><img src="img/spinner.gif"></span>
     </footer>
   </form>
 </div>

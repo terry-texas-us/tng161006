@@ -10,18 +10,18 @@ require 'adminlog.php';
 
 if (!$allowEdit || !$allowDelete) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
 $deleteblankfamilies = 1;
 
-$wherestr = "";
+$wherestr = '';
 
 if ($assignedbranch) {
   $branchstr = " AND branch LIKE \"%$assignedbranch%\"";
 } else {
-  $branchstr = "";
+  $branchstr = '';
 }
 $ldsOK = determineLDSRights();
 
@@ -29,24 +29,24 @@ function doRow($field, $textmsg, $boxname) {
   global $p1row;
   global $p2row;
 
-  if ($field == "living") {
-    $p1field = isset($p1row[$field]) && $p1row[$field] ? "Yes" : "No";
-    $p2field = isset($p2row[$field]) && $p2row[$field] ? "Yes" : "No";
+  if ($field == 'living') {
+    $p1field = isset($p1row[$field]) && $p1row[$field] ? 'yes' : 'No';
+    $p2field = isset($p2row[$field]) && $p2row[$field] ? 'yes' : 'No';
   } else {
-    $p1field = isset($p1row[$field]) ? $p1row[$field] : "";
-    $p2field = isset($p2row[$field]) ? $p2row[$field] : "";
+    $p1field = isset($p1row[$field]) ? $p1row[$field] : '';
+    $p2field = isset($p2row[$field]) ? $p2row[$field] : '';
   }
 
   if ($p1field || $p2field) {
     echo "<tr>\n";
-    echo "<td width='15%'><span>" . uiTextSnippet($textmsg) . ":</span></td>";
+    echo "<td width='15%'><span>" . uiTextSnippet($textmsg) . ':</span></td>';
     echo "<td width=\"31%\"><span>$p1field&nbsp;</span></td>";
     if (is_array($p2row)) {
       echo "<td width='10'></td>";
-      echo "<td width='15%'><span>" . uiTextSnippet($textmsg) . ":</span></td>";
-      echo "<td width=\"5\"><span>";
+      echo "<td width='15%'><span>" . uiTextSnippet($textmsg) . ':</span></td>';
+      echo "<td width='5'><span>";
       //if it's a spouse and they're equal, do a hidden field for p1 & p2 and don't do the checkbox
-      if ($textmsg == "spouse") {
+      if ($textmsg == 'spouse') {
         if ($p1field && $p2field) {
           echo "<input name=\"xx$boxname\" type='hidden' value=\"$field\">";
         } elseif ($p2field) {
@@ -54,27 +54,27 @@ function doRow($field, $textmsg, $boxname) {
         }
       }
       if ($boxname) {
-        if ($p2field || $textmsg != "spouse") {
+        if ($p2field || $textmsg != 'spouse') {
           echo "<input name=\"$boxname\" type='checkbox' value=\"$field\"";
           if ($p2row[$field] && !$p1row[$field]) {
-            echo " checked";
+            echo ' checked';
           }
-          echo ">";
-        } elseif ($textmsg == "spouse") {
+          echo '>';
+        } elseif ($textmsg == 'spouse') {
           echo "<input name=\"zz$boxname\" type='checkbox' value=\"$field\">";
         }
       } else {
-        echo "&nbsp;";
+        echo '&nbsp;';
       }
-      echo "</span></td>";
+      echo '</span></td>';
       if (!$p2field) {
-        $p2field = "<span class=\"msgerror\">&laquo; " . uiTextSnippet('chkdel') . "</span>";
+        $p2field = "<span class=\"msgerror\">&laquo; " . uiTextSnippet('chkdel') . '</span>';
       }
       echo "<td width=\"31%\"><span>$p2field&nbsp;</span></td>";
     } else {
       echo "<td width='10'></td>";
-      echo "<td width='15%'><span>" . uiTextSnippet($textmsg) . ":</span></td>";
-      echo "<td width=\"5\"><span>&nbsp;</span></td>";
+      echo "<td width='15%'><span>" . uiTextSnippet($textmsg) . ':</span></td>';
+      echo "<td width='5'><span>&nbsp;</span></td>";
       echo "<td width=\"31%\"><span>&nbsp;</span></td>";
     }
     echo "</tr>\n";
@@ -84,10 +84,10 @@ function doRow($field, $textmsg, $boxname) {
 function getEvent($event) {
   global $mylanguage, $languagesPath;
 
-  $dispvalues = explode("|", $event['display']);
+  $dispvalues = explode('|', $event['display']);
   $numvalues = count($dispvalues);
   if ($numvalues > 1) {
-    $displayval = "";
+    $displayval = '';
     for ($i = 0; $i < $numvalues; $i += 2) {
       $lang = $dispvalues[$i];
       if ($mylanguage == $languagesPath . $lang) {
@@ -102,11 +102,11 @@ function getEvent($event) {
   $eventstr = "<strong>$displayval</strong>: ";
   $eventstr2 = $event['eventdate'];
   if ($eventstr2 && $event['eventplace']) {
-    $eventstr2 .= ", ";
+    $eventstr2 .= ', ';
   }
   $eventstr2 .= $event['eventplace'];
   if ($eventstr2 && $event['info']) {
-    $eventstr2 .= ". ";
+    $eventstr2 .= '. ';
   }
   $eventstr2 .= $event['info'] . "<br>\n";
   $eventstr .= $eventstr2;
@@ -118,7 +118,7 @@ function getSpouse($marriage, $spouse) {
   global $people_table;
   global $ldsOK;
 
-  $spousestr = "";
+  $spousestr = '';
   if ($marriage[$spouse]) {
     $query = "SELECT personID, lastname, firstname, prefix, suffix, nameorder FROM $people_table WHERE personID = \"{$marriage[$spouse]}\"";
     $gotspouse = tng_query($query);
@@ -128,23 +128,23 @@ function getSpouse($marriage, $spouse) {
     $spouserow['allow_living'] = $srights['living'];
     $spouserow['allow_private'] = $srights['private'];
 
-    $spousestr .= getName($spouserow) . " - " . $spouserow['personID'] . " ({$marriage['familyID']})<br>\n";
+    $spousestr .= getName($spouserow) . ' - ' . $spouserow['personID'] . " ({$marriage['familyID']})<br>\n";
     tng_free_result($gotspouse);
   } else {
     $spousestr = "({$marriage['familyID']})<br>\n";
   }
   if ($marriage['marrdate'] || $marriage['marrplace']) {
-    $spousestr .= "<strong>" . uiTextSnippet('MARR') . "</strong>: {$marriage['marrdate']}";
+    $spousestr .= '<strong>' . uiTextSnippet('MARR') . "</strong>: {$marriage['marrdate']}";
     if ($marriage['marrdate'] && $marriage['marrplace']) {
-      $spousestr .= ", ";
+      $spousestr .= ', ';
     }
     $spousestr .= "{$marriage['marrplace']}<br>\n";
   }
   if ($ldsOK) {
     if ($marriage['sealdate'] || $marriage['sealplace']) {
-      $spousestr .= "<strong>" . uiTextSnippet('SLGS') . ":</strong> {$marriage['sealdate']}";
+      $spousestr .= '<strong>' . uiTextSnippet('SLGS') . ":</strong> {$marriage['sealdate']}";
       if ($marriage['sealdate'] && $marriage['sealplace']) {
-        $spousestr .= ", ";
+        $spousestr .= ', ';
       }
       $spousestr .= "{$marriage['sealplace']}<br>\n";
     }
@@ -157,7 +157,7 @@ function getParents($parent) {
   global $families_table;
   global $ldsOK;
 
-  $parentstr = "";
+  $parentstr = '';
   $query = "SELECT personID, lastname, firstname, prefix, suffix, nameorder FROM $people_table, $families_table WHERE $people_table.personID = $families_table.husband AND $families_table.familyID = \"{$parent['familyID']}\"";
   $gotfather = tng_query($query);
 
@@ -168,7 +168,7 @@ function getParents($parent) {
     $fathrow['allow_living'] = $frights['living'];
     $fathrow['allow_private'] = $frights['private'];
 
-    $parentstr .= getName($fathrow) . " - " . $fathrow['personID'] . "<br>\n";
+    $parentstr .= getName($fathrow) . ' - ' . $fathrow['personID'] . "<br>\n";
     tng_free_result($gotfather);
   }
 
@@ -182,14 +182,14 @@ function getParents($parent) {
     $mothrow['allow_living'] = $mrights['living'];
     $mothrow['allow_private'] = $mrights['private'];
 
-    $parentstr .= getName($mothrow) . " - " . $mothrow['personID'] . "<br>\n";
+    $parentstr .= getName($mothrow) . ' - ' . $mothrow['personID'] . "<br>\n";
     tng_free_result($gotmother);
   }
   if ($ldsOK) {
     if ($parent['sealdate'] || $parent['sealplace']) {
-      $parentstr .= "<strong>" . uiTextSnippet('SLGC') . ":</strong> " . $parent['sealdate'];
+      $parentstr .= '<strong>' . uiTextSnippet('SLGC') . ':</strong> ' . $parent['sealdate'];
       if ($parent['sealdate'] && $parent['sealplace']) {
-        $parentstr .= ", ";
+        $parentstr .= ', ';
       }
       $parentstr .= "{$parent['sealplace']}<br>\n";
     }
@@ -201,32 +201,32 @@ function getParents($parent) {
 function addCriteria($row) {
   global $cfirstname, $clastname, $cbirthdate, $cbirthplace, $cdeathdate, $cdeathplace, $cignoreblanks, $csoundex;
 
-  $criteria = "";
-  $bsx = $csoundex ? "SOUNDEX(" : "";
-  $esx = $csoundex ? ")" : "";
-  if ($cfirstname == "yes") {
-    $criteria .= " AND $bsx" . "firstname" . "$esx = $bsx\"" . addslashes($row['firstname']) . "\"$esx";
-    $criteria .= $cignoreblanks == "yes" ? " AND firstname != \"\"" : "";
+  $criteria = '';
+  $bsx = $csoundex ? 'SOUNDEX(' : '';
+  $esx = $csoundex ? ')' : '';
+  if ($cfirstname == 'yes') {
+    $criteria .= " AND $bsx" . 'firstname' . "$esx = $bsx\"" . addslashes($row['firstname']) . "\"$esx";
+    $criteria .= $cignoreblanks == 'yes' ? " AND firstname != \"\"" : '';
   }
-  if ($clastname == "yes") {
-    $criteria .= " AND $bsx" . "lastname" . "$esx = $bsx\"" . addslashes($row['lastname']) . "\"$esx";
-    $criteria .= $cignoreblanks == "yes" ? " AND lastname != \"\"" : "";
+  if ($clastname == 'yes') {
+    $criteria .= " AND $bsx" . 'lastname' . "$esx = $bsx\"" . addslashes($row['lastname']) . "\"$esx";
+    $criteria .= $cignoreblanks == 'yes' ? " AND lastname != \"\"" : '';
   }
-  if ($cbirthdate == "yes") {
+  if ($cbirthdate == 'yes') {
     $criteria .= " AND birthdate = \"" . addslashes($row['birthdate']) . "\"";
-    $criteria .= $cignoreblanks == "yes" ? " AND birthdate != \"\"" : "";
+    $criteria .= $cignoreblanks == 'yes' ? " AND birthdate != \"\"" : '';
   }
-  if ($cbirthplace == "yes") {
+  if ($cbirthplace == 'yes') {
     $criteria .= " AND birthplace = \"" . addslashes($row['birthplace']) . "\"";
-    $criteria .= $cignoreblanks == "yes" ? " AND birthplace = \"\"" : "";
+    $criteria .= $cignoreblanks == 'yes' ? " AND birthplace = \"\"" : '';
   }
-  if ($cdeathdate == "yes") {
+  if ($cdeathdate == 'yes') {
     $criteria .= " AND deathdate = \"" . addslashes($row['deathdate']) . "\"";
-    $criteria .= $cignoreblanks == "yes" ? " AND deathdate != \"\" AND deathdate != \"Y\"" : "";
+    $criteria .= $cignoreblanks == 'yes' ? " AND deathdate != \"\" AND deathdate != \"Y\"" : '';
   }
-  if ($cdeathplace == "yes") {
+  if ($cdeathplace == 'yes') {
     $criteria .= " AND deathplace = \"" . addslashes($row['deathplace']) . "\"";
-    $criteria .= $cignoreblanks == "yes" ? " AND deathplace = \"\"" : "";
+    $criteria .= $cignoreblanks == 'yes' ? " AND deathplace = \"\"" : '';
   }
 
   return $criteria;
@@ -238,14 +238,14 @@ function doNotesCitations($persfam1, $persfam2, $varname) {
   global $citations_table;
 
   if ($varname) {
-    if ($varname == "general") {
-      $varname = "";
+    if ($varname == 'general') {
+      $varname = '';
     }
     $wherestr = " AND eventID = \"$varname\"";
   } else {
-    $wherestr = "";
+    $wherestr = '';
   }
-  if ($ccombinenotes != "yes") {
+  if ($ccombinenotes != 'yes') {
     $query = "SELECT xnoteID FROM $notelinks_table WHERE persfamID = '$persfam1' $wherestr";
     $noteresult = tng_query($query);
     while ($row = tng_fetch_assoc($noteresult)) {
@@ -287,7 +287,7 @@ function delAssociations($entity) {
   tng_query($query);
 }
 
-$p1row = $p2row = "";
+$p1row = $p2row = '';
 if ($personID1) {
   $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $people_table WHERE personID = '$personID1'";
   $result = tng_query($query);
@@ -296,28 +296,28 @@ if ($personID1) {
     $p1row['name'] = getName($p1row);
     tng_free_result($result);
   } else {
-    $personID1 = $personID2 = "";
+    $personID1 = $personID2 = '';
   }
 }
 
 set_time_limit(0);
 if (!$mergeaction) {
-  $cfirstname = "yes";
-  $clastname = "yes";
-  $ccombinenotes = "yes";
-  $ccombineextras = "yes";
+  $cfirstname = 'yes';
+  $clastname = 'yes';
+  $ccombinenotes = 'yes';
+  $ccombineextras = 'yes';
 }
 if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet('nextdup')) {
   if ($mergeaction == uiTextSnippet('nextmatch')) {
-    $wherestr2 = $personID2 ? " AND personID > \"$personID2\"" : "";
-    $wherestr2 .= $personID1 ? " AND personID > \"$personID1\"" : "";
+    $wherestr2 = $personID2 ? " AND personID > \"$personID2\"" : '';
+    $wherestr2 .= $personID1 ? " AND personID > \"$personID1\"" : '';
 
-    $wherestr = $personID1 ? "AND personID > \"$personID1\"" : "";
+    $wherestr = $personID1 ? "AND personID > \"$personID1\"" : '';
     $largechunk = 1000;
     $nextchunk = -1;
     $numrows = 0;
     $still_looking = 1;
-    $personID2 = "";
+    $personID2 = '';
 
     do {
       $nextone = $nextchunk + 1;
@@ -349,11 +349,11 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
       }
     } while ($numrows && $still_looking);
     if (!$personID2) {
-      $personID1 = $p1row = "";
+      $personID1 = $p1row = '';
     }
   } else {
     //search with personID1 for next duplicate
-    $wherestr2 = $personID2 ? " AND personID > \"$personID2\"" : "";
+    $wherestr2 = $personID2 ? " AND personID > \"$personID2\"" : '';
     $wherestr2 .= addCriteria($p1row);
 
     $query = "SELECT * FROM $people_table WHERE personID != \"{$p1row['personID']}\" $branchstr $wherestr2 ORDER BY personID, lastname, firstname LIMIT 1";
@@ -364,7 +364,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
       $p2row['name'] = getName($p2row);
       tng_free_result($result2);
     } else {
-      $personID2 = "";
+      $personID2 = '';
     }
   }
 } elseif ($personID2) {
@@ -376,11 +376,11 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
     tng_free_result($result2);
   } else {
     $mergeaction = uiTextSnippet('comprefresh');
-    $personID2 = "";
+    $personID2 = '';
   }
 }
 if ($mergeaction == uiTextSnippet('merge')) {
-  $updatestr = "";
+  $updatestr = '';
   $prifamily = 0;
 
   if ($p1row['sex'] == 'M') {
@@ -392,36 +392,36 @@ if ($mergeaction == uiTextSnippet('merge')) {
     $p1self = 'wife';
     $p1spouseorder = 'wifeorder';
   } else {
-    $p1spouse = "";
-    $p1self = "";
-    $p1spouseorder = "";
+    $p1spouse = '';
+    $p1self = '';
+    $p1spouseorder = '';
   }
 
   foreach ($_POST as $key => $value) {
     $prefix = substr($key, 0, 2);
     switch ($prefix) {
-      case "p2":
+      case 'p2':
         $varname = substr($key, 2);
         $p1row[$varname] = $p2row[$varname];
         $updatestr .= ", $varname = \"{$p1row[$varname]}\" ";
-        if (strpos($varname, "date")) {
-          $truevar = $varname . "tr";
+        if (strpos($varname, 'date')) {
+          $truevar = $varname . 'tr';
           $p1row[$truevar] = $p2row[$truevar];
           $updatestr .= ", $truevar = \"{$p1row[$truevar]}\" ";
-        } elseif ($varname == "firstname" || $varname == "lastname") {
-          $varname = "NAME";
+        } elseif ($varname == 'firstname' || $varname == 'lastname') {
+          $varname = 'NAME';
         }
         doNotesCitations($personID1, $personID2, $varname);
         break;
-      case "ev":
-        if (strpos($key, "::")) {
-          $halves = explode("::", substr($key, 5));
-          $varname = substr(strstr($halves[1], "_"), 1);
+      case 'ev':
+        if (strpos($key, '::')) {
+          $halves = explode('::', substr($key, 5));
+          $varname = substr(strstr($halves[1], '_'), 1);
           $query = "DELETE from $events_table WHERE persfamID = '$personID1' and eventID = \"$varname\"";
           $evresult = tng_query($query);
-          $varname = $halves['0'] != "event" ? substr(strstr($halves['0'], "_"), 1) : "";
+          $varname = $halves['0'] != 'event' ? substr(strstr($halves['0'], '_'), 1) : '';
         } else {
-          $varname = substr(strstr($key, "_"), 1);
+          $varname = substr(strstr($key, '_'), 1);
         }
         if ($varname) {
           $query = "SELECT eventID FROM $events_table WHERE persfamID = '$personID2' AND eventID = \"$varname\"";
@@ -435,7 +435,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
           $evresult = tng_query($query);
         }
         break;
-      case "pa":
+      case 'pa':
         $varname = substr($key, 7);
         $query = "DELETE from $children_table WHERE personID = '$personID1' and familyID = \"$varname\"";
         $evresult = tng_query($query);
@@ -449,7 +449,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
           $prifamily = 1;
         }
         break;
-      case "xx":
+      case 'xx':
         $samespouse = substr($key, 2);
         //remove family on right, but move children to left
         if (!$_POST[$samespouse] && $p1self) {
@@ -487,14 +487,14 @@ if ($mergeaction == uiTextSnippet('merge')) {
           }
 
           if ($ccombinenotes && $varname) {
-            doNotesCitations($sp1row['familyID'], $varname, "");
+            doNotesCitations($sp1row['familyID'], $varname, '');
           }
 
           $query = "UPDATE $events_table set persfamID = \"{$sp1row['familyID']}\" WHERE persfamID = '$varname'";
           $evresult = tng_query($query);
         }
         break;
-      case "yy":
+      case 'yy':
         $samespouse = substr($key, 2);
         //basically, we're keeping the right family, but we're removing the right person as a spouse. Corresponding box was not checked, so it's not merging left.
         if (!$_POST[$samespouse] && $p1self) {
@@ -504,14 +504,14 @@ if ($mergeaction == uiTextSnippet('merge')) {
           $chilresult = tng_query($query);
         }
         break;
-      case "zz":
+      case 'zz':
         $varname = substr($key, 8);
 
         //remove left person from family.
         $query = "UPDATE $families_table set $p1self = \"\", $p1spouseorder = \"\" WHERE familyID = '$varname'";
         $chilresult = tng_query($query);
         break;
-      case "sp":
+      case 'sp':
         $xx = "xx$key";
         if ($p1self) {
           if ($_POST[$xx]) {
@@ -553,7 +553,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
             }
 
             if ($ccombinenotes && $sp1row['familyID']) {
-              doNotesCitations($varname, $sp1row['familyID'], "");
+              doNotesCitations($varname, $sp1row['familyID'], '');
             }
 
             $query = "UPDATE $events_table set persfamID = \"{$sp1row['familyID']}\" WHERE persfamID = '$varname'";
@@ -584,7 +584,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
     }
   }
   if ($ccombinenotes) {
-    doNotesCitations($personID1, $personID2, "general");
+    doNotesCitations($personID1, $personID2, 'general');
 
     //convert all remaining notes and citations
     $query = "UPDATE $notelinks_table set persfamID = \"$personID1\" WHERE persfamID = '$personID2'";
@@ -595,7 +595,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
   }
   if ($updatestr) {
     $updatestr = substr($updatestr, 2);
-    $newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
+    $newdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
     $updatestr .= ", changedate = \"$newdate\"";
     $query = "UPDATE $people_table set $updatestr WHERE personID = '$personID1'";
     $combresult = tng_query($query);
@@ -653,8 +653,8 @@ if ($mergeaction == uiTextSnippet('merge')) {
     $query = "DELETE FROM $medialinks_table WHERE personID = '$personID2'";
     $mediaresult = tng_query($query);
   }
-  $personID2 = "";
-  $p2row = "";
+  $personID2 = '';
+  $p2row = '';
 
   //clean up: remove all families with husband blank and wife blank
   //remove all children from those families
@@ -676,7 +676,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
 }
 $revstar = checkReview('I');
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('merge'));
 ?>
 <!DOCTYPE html>
@@ -687,11 +687,11 @@ $headSection->setTitle(uiTextSnippet('merge'));
     <?php
     echo $adminHeaderSection->build('people-merge', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
-    $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
-    $navList->appendItem([$allowEdit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
-    //    $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
-    echo $navList->build("merge");
+    $navList->appendItem([true, 'peopleBrowse.php', uiTextSnippet('browse'), 'findperson']);
+    $navList->appendItem([$allowAdd, 'peopleAdd.php', uiTextSnippet('add'), 'addperson']);
+    $navList->appendItem([$allowEdit, 'admin_findreview.php?type=I', uiTextSnippet('review') . $revstar, 'review']);
+    //    $navList->appendItem([$allowEdit && $allowDelete, 'peopleMerge.php', uiTextSnippet('merge'), 'merge']);
+    echo $navList->build('merge');
     ?>
     <table class='table table-sm'>
       <tr>
@@ -750,41 +750,41 @@ $headSection->setTitle(uiTextSnippet('merge'));
                 <tr>
                   <td>
                     <span>
-                      <input name='cfirstname' type='checkbox' value='yes'<?php if ($cfirstname) {echo " checked";} ?>> <?php echo uiTextSnippet('firstname'); ?>
+                      <input name='cfirstname' type='checkbox' value='yes'<?php if ($cfirstname) {echo ' checked';} ?>> <?php echo uiTextSnippet('firstname'); ?>
                       <br>
-                      <input name='clastname' type='checkbox' value='yes'<?php if ($clastname) {echo " checked";} ?>> <?php echo uiTextSnippet('lastname'); ?>
+                      <input name='clastname' type='checkbox' value='yes'<?php if ($clastname) {echo ' checked';} ?>> <?php echo uiTextSnippet('lastname'); ?>
                     </span>
                   </td>
                   <td></td>
                   <td>
                     <span>
-                      <input name='cbirthdate' type='checkbox' value='yes'<?php if ($cbirthdate == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('birthdate'); ?>
+                      <input name='cbirthdate' type='checkbox' value='yes'<?php if ($cbirthdate == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('birthdate'); ?>
                       <br>
-                      <input name='cbirthplace' type='checkbox' value='yes'<?php if ($cbirthplace == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('birthplace'); ?>
+                      <input name='cbirthplace' type='checkbox' value='yes'<?php if ($cbirthplace == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('birthplace'); ?>
                     </span>
                   </td>
                   <td></td>
                   <td>
                     <span>
-                      <input name='cdeathdate' type='checkbox' value='yes'<?php if ($cdeathdate == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('deathdate'); ?>
+                      <input name='cdeathdate' type='checkbox' value='yes'<?php if ($cdeathdate == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('deathdate'); ?>
                       <br>
-                      <input name='cdeathplace' type='checkbox' value='yes'<?php if ($cdeathplace == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('deathplace'); ?>
+                      <input name='cdeathplace' type='checkbox' value='yes'<?php if ($cdeathplace == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('deathplace'); ?>
                     </span>
                   </td>
                   <td></td>
                   <td>
                     <span>
-                      <input name='cignoreblanks' type='checkbox' value='yes'<?php if ($cignoreblanks == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('ignoreblanks'); ?>
+                      <input name='cignoreblanks' type='checkbox' value='yes'<?php if ($cignoreblanks == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('ignoreblanks'); ?>
                       <br>
-                      <input name='csoundex' type='checkbox' value='yes'<?php if ($csoundex == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('usesoundex'); ?>*
+                      <input name='csoundex' type='checkbox' value='yes'<?php if ($csoundex == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('usesoundex'); ?>*
                     </span>
                   </td>
                   <td></td>
                   <td>
                     <span>
-                      <input name='ccombinenotes' type='checkbox' value='yes'<?php if ($ccombinenotes == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('combinenotes'); ?>
+                      <input name='ccombinenotes' type='checkbox' value='yes'<?php if ($ccombinenotes == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('combinenotes'); ?>
                       <br>
-                      <input name='ccombineextras' type='checkbox' value='yes'<?php if ($ccombineextras == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('combineextras'); ?>
+                      <input name='ccombineextras' type='checkbox' value='yes'<?php if ($ccombineextras == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('combineextras'); ?>
                     </span>
                   </td>
                 </tr>
@@ -816,7 +816,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                     if ($evresult && $eventcount) {
                       while ($event = tng_fetch_assoc($evresult)) {
                         $ekey = strtoupper("{$event['eventtypeID']}_{$event['eventdate']}_{$event['eventplace']}_" . substr($event['info'], 0, 100));
-                        $ekey = preg_replace("/\"/", "", $ekey);
+                        $ekey = preg_replace('/\"/', '', $ekey);
                         $ename = "event$ekey";
                         $p2row[$ename] .= getEvent($event);
                         $eventlist[$ekey] = "{$event['eventtypeID']}_{$event['eventID']}";
@@ -829,7 +829,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
 
                     if ($parents2 && tng_num_rows($parents2)) {
                       while ($parent = tng_fetch_assoc($parents2)) {
-                        $pname = "parents" . $parent['familyID'];
+                        $pname = 'parents' . $parent['familyID'];
                         $p2row[$pname] = getParents($parent);
                         if (!in_array($parent['familyID'], $parentsets)) {
                           array_push($parentsets, $parent['familyID']);
@@ -847,9 +847,9 @@ $headSection->setTitle(uiTextSnippet('merge'));
                         $p2self = 'wife';
                         $p2spouseorder = 'wifeorder';
                       } else {
-                        $p2spouse = "";
-                        $p2self = "";
-                        $p2spouseorder = "";
+                        $p2spouse = '';
+                        $p2self = '';
+                        $p2spouseorder = '';
                       }
 
                       if ($p2self) {
@@ -868,35 +868,35 @@ $headSection->setTitle(uiTextSnippet('merge'));
                     }
                   }
                   echo "</tr>\n";
-                  doRow("personID", "personid", "");
-                  doRow("firstname", "givennames", "p2firstname");
+                  doRow('personID', 'personid', '');
+                  doRow('firstname', 'givennames', 'p2firstname');
                   if ($lnprefixes) {
-                    doRow("lnprefix", "lnprefix", "p2lnprefix");
+                    doRow('lnprefix', 'lnprefix', 'p2lnprefix');
                   }
-                  doRow("lastname", "surname", "p2lastname");
-                  doRow("nickname", "nickname", "p2nickname");
-                  doRow("prefix", "prefix", "p2prefix");
-                  doRow("suffix", "suffix", "p2suffix");
-                  doRow("title", "title", "p2title");
-                  doRow("living", "living", "p2living");
-                  doRow("birthdate", "birthdate", "p2birthdate");
-                  doRow("birthplace", "birthplace", "p2birthplace");
-                  doRow("sex", "sex", "p2sex");
-                  doRow("altbirthdate", "chrdate", "p2altbirthdate");
-                  doRow("altbirthplace", "chrplace", "p2altbirthplace");
-                  doRow("deathdate", "deathdate", "p2deathdate");
-                  doRow("deathplace", "deathplace", "p2deathplace");
-                  doRow("burialdate", "burialdate", "p2burialdate");
+                  doRow('lastname', 'surname', 'p2lastname');
+                  doRow('nickname', 'nickname', 'p2nickname');
+                  doRow('prefix', 'prefix', 'p2prefix');
+                  doRow('suffix', 'suffix', 'p2suffix');
+                  doRow('title', 'title', 'p2title');
+                  doRow('living', 'living', 'p2living');
+                  doRow('birthdate', 'birthdate', 'p2birthdate');
+                  doRow('birthplace', 'birthplace', 'p2birthplace');
+                  doRow('sex', 'sex', 'p2sex');
+                  doRow('altbirthdate', 'chrdate', 'p2altbirthdate');
+                  doRow('altbirthplace', 'chrplace', 'p2altbirthplace');
+                  doRow('deathdate', 'deathdate', 'p2deathdate');
+                  doRow('deathplace', 'deathplace', 'p2deathplace');
+                  doRow('burialdate', 'burialdate', 'p2burialdate');
                   doRow("burialplace", "burialplace", "p2burialplace");
                   if ($ldsOK) {
-                    doRow("baptdate", "bapldate", "p2baptdate");
-                    doRow("baptplace", "baplplace", "p2baptplace");
-                    doRow("confdate", "confdate", "p2confdate");
-                    doRow("confplace", "confplace", "p2confplace");
-                    doRow("initdate", "initdate", "p2initdate");
-                    doRow("initplace", "initplace", "p2initplace");
-                    doRow("endldate", "endldate", "p2endldate");
-                    doRow("endlplace", "endlplace", "p2endlplace");
+                    doRow('baptdate', 'bapldate', 'p2baptdate');
+                    doRow('baptplace', 'baplplace', 'p2baptplace');
+                    doRow('confdate', 'confdate', 'p2confdate');
+                    doRow('confplace', 'confplace', 'p2confplace');
+                    doRow('initdate', 'initdate', 'p2initdate');
+                    doRow('initplace', 'initplace', 'p2initplace');
+                    doRow('endldate', 'endldate', 'p2endldate');
+                    doRow('endlplace', 'endlplace', 'p2endlplace');
                   }
                   $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID AS eventtypeID, $events_table.eventID AS eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$p1row['personID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
                   $evresult = tng_query($query);
@@ -905,13 +905,13 @@ $headSection->setTitle(uiTextSnippet('merge'));
                   if ($evresult && $eventcount) {
                     while ($event = tng_fetch_assoc($evresult)) {
                       $ekey = strtoupper("{$event['eventtypeID']}_{$event['eventdate']}_{$event['eventplace']}_" . substr($event['info'], 0, 100));
-                      $ekey = preg_replace("/\"/", "", $ekey);
+                      $ekey = preg_replace('/\"/', '', $ekey);
                       $ename = "event$ekey";
                       $p1row[$ename] .= getEvent($event);
                       if ($eventlist[$ekey]) {
-                        $eventlist[$ekey] .= "::" . "{$event['eventtypeID']}_{$event['eventID']}";
+                        $eventlist[$ekey] .= '::' . "{$event['eventtypeID']}_{$event['eventID']}";
                       } else {
-                        $eventlist[$ekey] = "::" . "{$event['eventtypeID']}_{$event['eventID']}";
+                        $eventlist[$ekey] = '::' . "{$event['eventtypeID']}_{$event['eventID']}";
                       }
                     }
                     tng_free_result($evresult);
@@ -922,8 +922,8 @@ $headSection->setTitle(uiTextSnippet('merge'));
                     //key may only need to be "event" + sequence number
                     $ename = "event$key";
                     $inputname = "event$event";
-                    //echo "key:$key<br>event=$event<br>";
-                    doRow($ename, "otherevents", $inputname);
+
+                    doRow($ename, 'otherevents', $inputname);
                   }
 
                   $query = "SELECT personID, familyID, sealdate, sealplace FROM $children_table WHERE personID = \"{$p1row['personID']}\"";
@@ -931,7 +931,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
 
                   if ($parents1 && tng_num_rows($parents1)) {
                     while ($parent = tng_fetch_assoc($parents1)) {
-                      $pname = "parents" . $parent['familyID'];
+                      $pname = 'parents' . $parent['familyID'];
                       $p1row[$pname] = getParents($parent);
                       if (!in_array($parent['familyID'], $parentsets)) {
                         array_push($parentsets, $parent['familyID']);
@@ -942,7 +942,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                   foreach ($parentsets as $parentset) {
                     $pname = "parents$parentset";
                     $inputname = "parents$parentset";
-                    doRow($pname, "parents", $inputname);
+                    doRow($pname, 'parents', $inputname);
                   }
 
                   if ($p1row['sex']) {
@@ -955,9 +955,9 @@ $headSection->setTitle(uiTextSnippet('merge'));
                       $p1self = 'wife';
                       $p1spouseorder = 'wifeorder';
                     } else {
-                      $p1spouse = "";
-                      $p1self = "";
-                      $p1spouseorder = "";
+                      $p1spouse = '';
+                      $p1self = '';
+                      $p1spouseorder = '';
                     }
 
                     if ($p1self) {
@@ -965,7 +965,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                       $marriages1 = tng_query($query);
 
                       while ($marriage = tng_fetch_assoc($marriages1)) {
-                        $mname = "spouse" . $marriage[$p1spouse];
+                        $mname = 'spouse' . $marriage[$p1spouse];
                         $p1row[$mname] = getSpouse($marriage, $p1spouse);
                         if (!in_array($marriage[$p1spouse], $spouses)) {
                           array_push($spouses, $marriage[$p1spouse]);
@@ -977,11 +977,11 @@ $headSection->setTitle(uiTextSnippet('merge'));
 
                   foreach ($spouses as $nextspouse) {
                     $mname = "spouse$nextspouse";
-                    $inputname = "spouse" . $marriages[$nextspouse];
-                    doRow($mname, "spouse", $inputname);
+                    $inputname = 'spouse' . $marriages[$nextspouse];
+                    doRow($mname, 'spouse', $inputname);
                   }
                 } else {
-                  echo "<tr><td>" . uiTextSnippet('nomatches') . "</td></tr>";
+                  echo '<tr><td>' . uiTextSnippet('nomatches') . '</td></tr>';
                 }
                 ?>
               </table>

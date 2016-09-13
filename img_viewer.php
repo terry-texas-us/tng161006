@@ -14,7 +14,7 @@ if ($medialinkID) {
   $ordernum = $row['ordernum'];
   $mediatypeID = $row['mediatypeID'];
   $linktype = $row['linktype'];
-  if ($linktype == "P") {
+  if ($linktype == 'P') {
     $linktype = 'I';
   }
   $eventID = $row['eventID'];
@@ -27,7 +27,7 @@ if ($medialinkID) {
 
 if (!tng_num_rows($result)) {
   tng_free_result($result);
-  header("Location: thispagedoesnotexist.html");
+  header('Location: thispagedoesnotexist.html');
 }
 require 'checklogin.php';
 require 'showmedialib.php';
@@ -40,7 +40,7 @@ $flags['styles'] = "<link href=\"css/img_viewer.css\" rel=\"stylesheet\" type=\"
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle($imgrow['description']);
 ?>
 <!DOCTYPE html>
@@ -51,13 +51,13 @@ echo "<body id='public'>\n";
   echo $publicHeaderSection->build();
 
   $usefolder = $imgrow['usecollfolder'] ? $mediatypes_assoc[$mediatypeID] : $mediapath;
-  if ($imgrow['abspath'] || substr($imgrow['path'], 0, 4) == "http" || substr($imgrow['path'], 0, 1) == "/") {
+  if ($imgrow['abspath'] || substr($imgrow['path'], 0, 4) == 'http' || substr($imgrow['path'], 0, 1) == '/') {
     $mediasrc = $imgrow['path'];
   } else {
-    $mediasrc = "$usefolder/" . str_replace("%2F", "/", rawurlencode($imgrow['path']));
+    $mediasrc = "$usefolder/" . str_replace('%2F', '/', rawurlencode($imgrow['path']));
   }
   // get image info
-  if (substr($imgrow['path'], 0, 4) == "http") {
+  if (substr($imgrow['path'], 0, 4) == 'http') {
     list($width, $height) = getimagesize($imgrow['path']);
   } else {
     list($width, $height) = getimagesize("$rootpath$usefolder/" . $imgrow['path']);
@@ -75,14 +75,14 @@ echo "<body id='public'>\n";
     $height = $maxh;
     $width = floor($height * $orgwidth / $orgheight);
   }
-  $float = strpos($_SERVER['HTTP_USER_AGENT'], "MSIE 7") > 0 ? " style=\"float:left\"" : "";
+  $float = strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 7') > 0 ? " style=\"float:left\"" : '';
   ?>
   <div id="imgviewer" <?php echo $float; ?>>
     <map name="imgMapViewer" id="imgMapViewer"><?php echo $imgrow['map']; ?></map>
     <?php
     // clean up the description
-    $imgrow['description'] = str_replace("\r\n", "<br>", $imgrow['description']);
-    $imgrow['description'] = str_replace("\n", "<br>", $imgrow['description']);
+    $imgrow['description'] = str_replace("\r\n", '<br>', $imgrow['description']);
+    $imgrow['description'] = str_replace("\n", '<br>', $imgrow['description']);
 
     // if running in standalone mode we need to display the title and notes info
     if (isset($_GET['sa'])) {

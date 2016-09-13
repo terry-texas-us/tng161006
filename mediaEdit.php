@@ -9,7 +9,7 @@ require 'version.php';
 
 if (!$allowMediaEdit && (!$allowMediaAdd || !$added)) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 require 'showmedialib.php';
@@ -18,20 +18,20 @@ $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate 
         . "FROM $media_table WHERE mediaID = \"$mediaID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
-$row['description'] = preg_replace("/\"/", "&#34;", $row['description']);
-$row['notes'] = preg_replace("/\"/", "&#34;", $row['notes']);
-$row['datetaken'] = preg_replace("/\"/", "&#34;", $row['datetaken']);
-$row['placetaken'] = preg_replace("/\"/", "&#34;", $row['placetaken']);
-$row['owner'] = preg_replace("/\"/", "&#34;", $row['owner']);
-$row['map'] = preg_replace("/\"/", "&#34;", $row['map']);
-$row['map'] = preg_replace("/>/", "&gt;", $row['map']);
-$row['map'] = preg_replace("/</", "&lt;", $row['map']);
+$row['description'] = preg_replace('/\"/', '&#34;', $row['description']);
+$row['notes'] = preg_replace('/\"/', '&#34;', $row['notes']);
+$row['datetaken'] = preg_replace('/\"/', '&#34;', $row['datetaken']);
+$row['placetaken'] = preg_replace('/\"/', '&#34;', $row['placetaken']);
+$row['owner'] = preg_replace('/\"/', '&#34;', $row['owner']);
+$row['map'] = preg_replace('/\"/', '&#34;', $row['map']);
+$row['map'] = preg_replace('/>/', '&gt;', $row['map']);
+$row['map'] = preg_replace('/</', '&lt;', $row['map']);
 
 if ($row['usenl']) {
   $row['bodytext'] = nl2br($row['bodytext']);
 }
 if ($row['abspath']) {
-  $row['path'] = preg_replace("/&/", "&amp;", $row['path']);
+  $row['path'] = preg_replace('/&/', '&amp;', $row['path']);
 }
 tng_free_result($result);
 
@@ -41,7 +41,7 @@ $thumbpath = stripslashes($thumbpath);
 if ($row['form']) {
   $form = strtoupper($row['form']);
 } else {
-  preg_match("/\.(.+)$/", $row['path'], $matches);
+  preg_match('/\.(.+)$/', $row['path'], $matches);
   $form = strtoupper($matches[1]);
 }
 $treequery = "SELECT gedcom FROM $treesTable";
@@ -66,7 +66,7 @@ $query = "SELECT $medialinks_table.medialinkID AS mlinkID, $medialinks_table.per
 $result2 = tng_query($query);
 $numlinks = tng_num_rows($result2);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifymedia'));
 ?>
 <!DOCTYPE html>
@@ -76,7 +76,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
   <section class='container'>
     <?php
     $standardtypes = [];
-    $moptions = "";
+    $moptions = '';
     $likearray = "var like = new Array();\n";
     foreach ($mediatypes as $mediatype) {
       if (!$mediatype['type']) {
@@ -85,12 +85,12 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
       $msgID = $mediatype['ID'];
       $moptions .= "  <option value=\"$msgID\"";
       if ($msgID == $mediatypeID) {
-        $moptions .= " selected";
+        $moptions .= ' selected';
       }
-      $moptions .= ">" . $mediatype['display'] . "</option>\n";
+      $moptions .= '>' . $mediatype['display'] . "</option>\n";
       $likearray .= "like['$msgID'] = '{$mediatype['liketype']}';\n";
     }
-    $sttypestr = implode(",", $standardtypes);
+    $sttypestr = implode(',', $standardtypes);
 
     $usefolder = $row['usecollfolder'] ? $mediatypes_assoc[$mediatypeID] : $mediapath;
 
@@ -103,28 +103,28 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
         $photohtouse = 50;
         $photowtouse = intval(50 * $photoinfo[0] / $photoinfo[1]);
       }
-      $photo = "<img src=\"$usefolder/" . str_replace("%2F", "/", rawurlencode($row['thumbpath'])) . "\" width=\"$photowtouse\" height=\"$photohtouse\" style=\"border-color:#000000;margin-right:6px\"></span>\n";
+      $photo = "<img src=\"$usefolder/" . str_replace('%2F', '/', rawurlencode($row['thumbpath'])) . "\" width=\"$photowtouse\" height=\"$photohtouse\" style=\"border-color:#000000;margin-right:6px\"></span>\n";
     } else {
-      $photo = "";
+      $photo = '';
     }
-    if ($row['path'] && ($form == "JPG" || $form == "JPEG" || $form == "GIF" || $form == "PNG")) {
+    if ($row['path'] && ($form == 'JPG' || $form == 'JPEG' || $form == 'GIF' || $form == 'PNG')) {
       $size = getimagesize("$rootpath$usefolder/" . $row['path']);
       $isphoto = true;
     } else {
-      $size = "";
+      $size = '';
       $isphoto = false;
     }
     if ($map['key']) {
     ?>
       <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAlWTL2QZDQv9BWXBvCwdAuhq1Lak8jSwU&amp;<?php echo uiTextSnippet('localize'); ?>'></script>
     <?php }
-    $onload = $onunload = "";
+    $onload = $onunload = '';
     if ($isphoto && !$row['abspath']) {
-      $onload = "init();";
+      $onload = 'init();';
     }
     $placeopen = 0;
     if ($map['key']) {
-      include "googlemaplib2.php";
+      include 'googlemaplib2.php';
       if (!$map['startoff']) {
         $onload .= "divbox('mapcontainer');";
         $placeopen = 1;
@@ -138,14 +138,14 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
     <?php
     echo $adminHeaderSection->build('media-existingmediainfo', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('browse'), "findmedia"]);
-    $navList->appendItem([$allowMediaAdd, "mediaAdd.php", uiTextSnippet('add'), "addmedia"]);
-    $navList->appendItem([$allowMediaEdit, "mediaSort.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    $navList->appendItem([$allowMediaEdit, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-    $navList->appendItem([$allowMediaAdd, "mediaImport.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allowMediaAdd, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
-    $navList->appendItem([$allowMediaEdit, "#", uiTextSnippet('edit'), "edit"]);
-    echo $navList->build("edit");
+    $navList->appendItem([true, 'mediaBrowse.php', uiTextSnippet('browse'), 'findmedia']);
+    $navList->appendItem([$allowMediaAdd, 'mediaAdd.php', uiTextSnippet('add'), 'addmedia']);
+    $navList->appendItem([$allowMediaEdit, 'mediaSort.php', uiTextSnippet('text_sort'), 'sortmedia']);
+    $navList->appendItem([$allowMediaEdit, 'mediaThumbnails.php', uiTextSnippet('thumbnails'), 'thumbs']);
+    $navList->appendItem([$allowMediaAdd, 'mediaImport.php', uiTextSnippet('import'), 'import']);
+    $navList->appendItem([$allowMediaAdd, 'mediaUpload.php', uiTextSnippet('upload'), 'upload']);
+    $navList->appendItem([$allowMediaEdit, '#', uiTextSnippet('edit'), 'edit']);
+    echo $navList->build('edit');
     ?>
     <br>
     <a href="showmedia.php?mediaID=<?php echo $mediaID; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
@@ -164,14 +164,14 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
             <table class='table table-sm'>
               <tr>
                 <td>
-                  <div id="thumbholder" style="margin-right: 5px; <?php if (!$photo) {echo "display: none";} ?>">
+                  <div id="thumbholder" style="margin-right: 5px; <?php if (!$photo) {echo 'display: none';} ?>">
                     <?php echo $photo; ?>
                   </div>
                 </td>
                 <td>
                   <h2><?php echo $row['description']; ?></h2><br>
                   <?php echo $row['notes']; ?>
-                  <p class="smallest"><?php echo uiTextSnippet('lastmodified') . ": " . $row['changedate'] . ($row['changedby'] ? " ({$row['changedby']})" : ""); ?></p>
+                  <p class="smallest"><?php echo uiTextSnippet('lastmodified') . ': ' . $row['changedate'] . ($row['changedby'] ? " ({$row['changedby']})" : ''); ?></p>
                 </td>
               </tr>
             </table>
@@ -179,7 +179,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
         </tr>
         <tr>
           <td>
-            <?php echo displayToggle("plus0", 1, "mediafile", uiTextSnippet('imagefile'), uiTextSnippet('uplsel')); ?>
+            <?php echo displayToggle('plus0', 1, 'mediafile', uiTextSnippet('imagefile'), uiTextSnippet('uplsel')); ?>
             <div id="mediafile">
               <br>
               <table class='table table-sm'>
@@ -192,9 +192,9 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                         $msgID = $mediatype['ID'];
                         echo "  <option value=\"$msgID\"";
                         if ($msgID == $mediatypeID) {
-                          echo " selected";
+                          echo ' selected';
                         }
-                        echo ">" . $mediatype['display'] . "</option>\n";
+                        echo '>' . $mediatype['display'] . "</option>\n";
                       }
                       ?>
                     </select>
@@ -212,7 +212,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                 </tr>
                 <tr>
                   <td colspan='2'>
-                    <input name='abspath' type='checkbox' value='1'<?php if ($row[abspath]) {echo " checked";} ?>
+                    <input name='abspath' type='checkbox' value='1'<?php if ($row[abspath]) {echo ' checked';} ?>
                            onClick="toggleMediaURL();"><span> <?php echo uiTextSnippet('abspath'); ?></span>
                   </td>
                 </tr>
@@ -231,7 +231,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                     <input id='path' name='path' type='text' value="<?php if (!$row['abspath']) {echo "$row[path]"; } ?>" size='60'>
                     <input id='path_org' name='path_org' type='hidden' value="<?php if (!$row['abspath']) {echo "$row[path]";} ?>">
                     <input id='path_last' name='path_last' type='hidden'>
-                    <input name='photoselect' type='button' value="<?php echo uiTextSnippet('select') . "..."; ?>"
+                    <input name='photoselect' type='button' value="<?php echo uiTextSnippet('select') . '...'; ?>"
                            onclick="javascript:FilePicker('path', document.form1.mediatypeID.options[document.form1.mediatypeID.selectedIndex].value);">
                   </td>
                 </tr>
@@ -249,7 +249,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                     <textarea wrap='soft' cols="100" rows="11" name="bodytext" id="bodytext"><?php echo $row['bodytext']; ?></textarea>
                   </td>
                 </tr>
-                <?php if (function_exists("imageJpeg")) { ?>
+                <?php if (function_exists('imageJpeg')) { ?>
                   <tr>
                     <td><strong><br><?php echo uiTextSnippet('thumbnailfile'); ?></strong></td>
                     <td><br>
@@ -277,15 +277,15 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                     <input id='thumbpath' name='thumbpath' type='text' value="<?php echo $row['thumbpath']; ?>" size='60'>
                     <input id='thumbpath_org' name='thumbpath_org' type='hidden' value="<?php if (!$row['abspath']) {echo "$row[thumbpath]";} ?>">
                     <input id='thumbpath_last' name='thumbpath_last' type='hidden'>
-                    <input name='thumbselect' type='button' value="<?php echo uiTextSnippet('select') . "..."; ?>"
+                    <input name='thumbselect' type='button' value="<?php echo uiTextSnippet('select') . '...'; ?>"
                            onClick="javascript:FilePicker('thumbpath', document.form1.mediatypeID.options[document.form1.mediatypeID.selectedIndex].value);">
                   </td>
                 </tr>
                 <tr>
                   <td><strong><br><?php echo uiTextSnippet('put_in'); ?></strong></td>
                   <td><br>
-                    <input name='usecollfolder' type='radio' value='0'<?php if (!$row['usecollfolder']) {echo " checked";} ?>> <?php echo uiTextSnippet('usemedia'); ?>&nbsp;
-                    <input name='usecollfolder' type='radio' value='1'<?php if ($row['usecollfolder']) {echo " checked";} ?>> <?php echo uiTextSnippet('usecollect'); ?>
+                    <input name='usecollfolder' type='radio' value='0'<?php if (!$row['usecollfolder']) {echo ' checked';} ?>> <?php echo uiTextSnippet('usemedia'); ?>&nbsp;
+                    <input name='usecollfolder' type='radio' value='1'<?php if ($row['usecollfolder']) {echo ' checked';} ?>> <?php echo uiTextSnippet('usecollect'); ?>
                   </td>
                 </tr>
                 <tr id="vidrow1">
@@ -301,8 +301,8 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
               </table>
               <p class="small">
                 <?php
-                echo "*" . uiTextSnippet('leaveblankphoto') . "<br>\n";
-                echo "**" . uiTextSnippet('requiredphoto') . "<br>\n";
+                echo '*' . uiTextSnippet('leaveblankphoto') . "<br>\n";
+                echo '**' . uiTextSnippet('requiredphoto') . "<br>\n";
                 ?>
               </p>
             </div>
@@ -310,20 +310,20 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
         </tr>
         <tr>
           <td>
-            <?php echo displayToggle("plus1", 1, "details", uiTextSnippet('newmediainfo'), uiTextSnippet('minfosubt')); ?>
+            <?php echo displayToggle('plus1', 1, 'details', uiTextSnippet('newmediainfo'), uiTextSnippet('minfosubt')); ?>
             <div id="details">
               <br>
               <table class='table table-sm'>
                 <tr>
                   <td><?php echo uiTextSnippet('title'); ?>:</td>
                   <td>
-                    <textarea wrap='soft' cols="70" rows="3" name='description'><?php echo $row['description']; ?></textarea>
+                    <textarea wrap='soft' cols="70" rows='3' name='description'><?php echo $row['description']; ?></textarea>
                   </td>
                 </tr>
                 <tr>
                   <td><?php echo uiTextSnippet('description'); ?>:</td>
                   <td>
-                    <textarea wrap='soft' cols="70" rows="5" name="notes"><?php echo $row['notes']; ?></textarea>
+                    <textarea wrap='soft' cols="70" rows='5' name="notes"><?php echo $row['notes']; ?></textarea>
                   </td>
                 </tr>
                 <tr>
@@ -343,10 +343,10 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                 <tr id="cemrow">
                   <td><?php echo uiTextSnippet('cemetery'); ?>:</td>
                   <td>
-                    <div id="cemchoice"<?php if ($row['cemeteryID'] || $mediatypeID == "headstones") {echo " style=\"display:none\"";} ?>>
+                    <div id="cemchoice"<?php if ($row['cemeteryID'] || $mediatypeID == 'headstones') {echo " style=\"display:none\"";} ?>>
                       <a href="#" onclick="return toggleCemSelect();"><?php echo uiTextSnippet('select'); ?></a>
                     </div>
-                    <div id="cemselect"<?php if (!$row['cemeteryID'] && $mediatypeID != "headstones") {echo " style=\"display:none\"";} ?>>
+                    <div id="cemselect"<?php if (!$row['cemeteryID'] && $mediatypeID != 'headstones') {echo " style=\"display:none\"";} ?>>
                       <select name="cemeteryID">
                         <option selected></option>
                         <?php
@@ -356,7 +356,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                           $cemetery = "{$cemrow['country']}, {$cemrow['state']}, {$cemrow['county']}, {$cemrow['city']}, {$cemrow['cemname']}";
                           echo "    <option value=\"{$cemrow['cemeteryID']}\"";
                           if ($row['cemeteryID'] == $cemrow['cemeteryID']) {
-                            echo " selected";
+                            echo ' selected';
                           }
                           echo ">$cemetery</option>\n";
                         }
@@ -368,7 +368,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                 <tr id="hsplotrow">
                   <td><?php echo uiTextSnippet('plot'); ?>:</td>
                   <td>
-                    <textarea wrap='soft' cols="70" rows="2" name="plot"><?php echo $row['plot']; ?></textarea>
+                    <textarea wrap='soft' cols="70" rows='2' name="plot"><?php echo $row['plot']; ?></textarea>
                   </td>
                 </tr>
                 <tr id="hsstatrow">
@@ -376,19 +376,19 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                   <td>
                     <select name="status">
                       <option value=''>&nbsp;</option>
-                      <option value="notyetlocated"<?php if ($row['status'] == 'notyetlocated') {echo " selected";} ?>>
+                      <option value="notyetlocated"<?php if ($row['status'] == 'notyetlocated') {echo ' selected';} ?>>
                         <?php echo uiTextSnippet('notyetlocated'); ?>
                       </option>
-                      <option value="located"<?php if ($row['status'] == 'located') {echo " selected";} ?>>
+                      <option value="located"<?php if ($row['status'] == 'located') {echo ' selected';} ?>>
                         <?php echo uiTextSnippet('located'); ?>
                       </option>
-                      <option value="unmarked"<?php if ($row['status'] == 'unmarked') {echo " selected";} ?>>
+                      <option value="unmarked"<?php if ($row['status'] == 'unmarked') {echo ' selected';} ?>>
                         <?php echo uiTextSnippet('unmarked'); ?>
                       </option>
-                      <option value="missing"<?php if ($row['status'] == 'missing') {echo " selected";} ?>>
+                      <option value="missing"<?php if ($row['status'] == 'missing') {echo ' selected';} ?>>
                         <?php echo uiTextSnippet('missing'); ?>
                       </option>
-                      <option value="cremated"<?php if ($row['status'] == 'cremated') {echo " selected";} ?>>
+                      <option value="cremated"<?php if ($row['status'] == 'cremated') {echo ' selected';} ?>>
                         <?php echo uiTextSnippet('cremated'); ?>
                       </option>
                     </select>
@@ -396,24 +396,24 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                 </tr>
                 <tr>
                   <td colspan='2'>
-                    <input name='alwayson' type='checkbox' value='1'<?php if ($row['alwayson']) {echo " checked";} ?>> <?php echo uiTextSnippet('alwayson'); ?>
+                    <input name='alwayson' type='checkbox' value='1'<?php if ($row['alwayson']) {echo ' checked';} ?>> <?php echo uiTextSnippet('alwayson'); ?>
                   </td>
                 </tr>
                 <!-- history section -->
                 <tr id="newwinrow">
                   <td colspan='2'>
-                    <input name='newwindow' type='checkbox' value='1'<?php if ($row['newwindow']) {echo " checked";} ?>> <?php echo uiTextSnippet('newwin'); ?>
+                    <input name='newwindow' type='checkbox' value='1'<?php if ($row['newwindow']) {echo ' checked';} ?>> <?php echo uiTextSnippet('newwin'); ?>
                   </td>
                 </tr>
                 <!-- headstone section -->
                 <tr id="linktocemrow">
                   <td colspan='2'>
-                    <input name='linktocem' type='checkbox' value='1'<?php if ($row['linktocem']) {echo " checked";} ?>> <?php echo uiTextSnippet('linktocem'); ?>
+                    <input name='linktocem' type='checkbox' value='1'<?php if ($row['linktocem']) {echo ' checked';} ?>> <?php echo uiTextSnippet('linktocem'); ?>
                   </td>
                 </tr>
                 <tr id="maprow">
                   <td colspan='2'>
-                    <input name='showmap' type='checkbox' value='1'<?php if ($row['showmap']) {echo " checked";} ?>> <?php echo uiTextSnippet('showmap'); ?>
+                    <input name='showmap' type='checkbox' value='1'<?php if ($row['showmap']) {echo ' checked';} ?>> <?php echo uiTextSnippet('showmap'); ?>
                   </td>
                 </tr>
               </table>
@@ -422,13 +422,13 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
         </tr>
         <tr>
           <td id="linkstd">
-            <?php echo displayToggle("plus2", 1, "links", uiTextSnippet('medialinks') . " (<span id=\"linkcount\">$numlinks</span>)", uiTextSnippet('linkssubt')); ?>
+            <?php echo displayToggle('plus2', 1, 'links', uiTextSnippet('medialinks') . " (<span id=\"linkcount\">$numlinks</span>)", uiTextSnippet('linkssubt')); ?>
             <?php require 'micro_medialinks.php'; ?>
           </td>
         </tr>
         <tr>
           <td>
-            <?php echo displayToggle("plus3", $placeopen, "placeinfo", uiTextSnippet('placetaken'), ""); ?>
+            <?php echo displayToggle('plus3', $placeopen, 'placeinfo', uiTextSnippet('placetaken'), ''); ?>
             <div id="placeinfo"<?php if (!$placeopen) {echo " style=\"display:none\"";} ?>>
               <table class='table table-sm'>
                 <tr>
@@ -444,7 +444,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                   <tr>
                     <td colspan='2'>
                       <div style="padding:0 10px 10px 0">
-                        <?php include "googlemapdrawthemap.php"; ?>
+                        <?php include 'googlemapdrawthemap.php'; ?>
                       </div>
                     </td>
                   </tr>
@@ -476,11 +476,11 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
         <?php if ($isphoto && !$row['abspath']) { ?>
           <tr>
             <td>
-              <?php echo displayToggle("plus4", 0, "imagemapdiv", uiTextSnippet('imgmap'), uiTextSnippet('mapinstr2')); ?>
+              <?php echo displayToggle('plus4', 0, 'imagemapdiv', uiTextSnippet('imgmap'), uiTextSnippet('mapinstr2')); ?>
               <div id="imagemapdiv" style="display:none">
                 <br>
                 <p><?php echo uiTextSnippet('mapinstr3'); ?></p>
-                <?php echo "<strong>" . uiTextSnippet('forrects') . ":</strong><br>" . uiTextSnippet('rectinstr'); ?>
+                <?php echo '<strong>' . uiTextSnippet('forrects') . ':</strong><br>' . uiTextSnippet('rectinstr'); ?>
                 <br>
                 <?php
                 $width = $size[0];
@@ -502,13 +502,13 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                 <br>
                 <div id="imgholder" style="position:relative">
                   <img id="myimg"
-                       src="<?php echo "$usefolder/" . str_replace("%2F", "/", rawurlencode($row['path'])); ?>" <?php echo "$widthstr $heightstr"; ?>
+                       src="<?php echo "$usefolder/" . str_replace('%2F', '/', rawurlencode($row['path'])); ?>" <?php echo "$widthstr $heightstr"; ?>
                        alt="<?php echo uiTextSnippet('circleinstr'); ?>"
                        style="cursor:crosshair;">
                 </div>
                 <p><?php echo uiTextSnippet('imgmap'); ?>:
                   <br>
-                  <textarea cols="80" rows="4" name="imagemap" id="imagemap"><?php echo $row['map']; ?></textarea>
+                  <textarea cols="80" rows='4' name="imagemap" id="imagemap"><?php echo $row['map']; ?></textarea>
                 </p>
               </div>
             </td>
@@ -520,7 +520,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
           <td>
             <p>
               <?php
-              echo uiTextSnippet('onsave') . ":<br>";
+              echo uiTextSnippet('onsave') . ':<br>';
               echo "<input name='newmedia' type='radio' value='return'> " . uiTextSnippet('savereturn') . "<br>\n";
               if ($cw) {
                 echo "<input name='newmedia' type='radio' value='close' checked> " . uiTextSnippet('closewindow') . "\n";
@@ -544,7 +544,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
   <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
 <script src="js/admin.js"></script>
 <script>
-  var tree = "",
+  var tree = '',
     type = "media",
     treename = new Array(),
     seclitbox,
@@ -562,14 +562,14 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
   <?php echo $likearray; ?>
 
   var stmediatypes = new Array(<?php echo $sttypestr; ?>);
-  var allow_edit = <?php echo($allowEdit ? "1" : "0"); ?>;
-  var allow_delete = <?php echo($allowDelete ? "1" : "0"); ?>;
+  var allow_edit = <?php echo($allowEdit ? '1' : '0'); ?>;
+  var allow_delete = <?php echo($allowDelete ? '1' : '0'); ?>;
 
   function validateForm() {
     var rval = true;
 
     var frm = document.form1;
-    if (frm.path.value.length === 0 && frm.mediaurl.value.length === 0 && frm.bodytext.value.length === 0 && frm.mediatypeID.options[frm.mediatypeID.selectedIndex].value !== "headstones") {
+    if (frm.path.value.length === 0 && frm.mediaurl.value.length === 0 && frm.bodytext.value.length === 0 && frm.mediatypeID.options[frm.mediatypeID.selectedIndex].value !== 'headstones') {
       alert(textSnippet('enterphotopath'));
       rval = false;
     } else if (frm.thumbpath.value.length === 0 && frm.thumbcreate[1].checked === true) {
@@ -615,7 +615,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
 <script src='js/selectutils.js'></script>
 <script src='js/datevalidation.js'></script>
 <script>
-  var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;
+  var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : 'false'); ?>;
   var preferDateFormat = '<?php echo $preferDateFormat; ?>';
   switchOnType(document.form1.mediatypeID.options[document.form1.mediatypeID.selectedIndex].value);
   toggleMediaURL();

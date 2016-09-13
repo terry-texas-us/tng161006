@@ -9,13 +9,13 @@ require 'datelib.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 require 'adminlog.php';
 
 $orgrelationship = $relationship;
-if ($session_charset != "UTF-8") {
+if ($session_charset != 'UTF-8') {
   $relationship = tng_utf8_decode($relationship);
 }
 $relationship = addslashes($relationship);
@@ -42,9 +42,9 @@ if ($reltype == 'I') {
   $row = tng_fetch_assoc($result);
   $name = getFamilyName($row);
 }
-$namestr = cleanIt($name . ": " . stripslashes($orgrelationship));
+$namestr = cleanIt($name . ': ' . stripslashes($orgrelationship));
 
 $namestr = truncateIt($namestr, 75);
 tng_free_result($result);
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 echo "{\"display\":\"$namestr\"}";

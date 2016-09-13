@@ -4,7 +4,7 @@ var album, entity;
 function numberWithCommas(x) {
     'use strict';
     var parts = x.toString().split(".");
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return parts.join(".");
 }
 
@@ -112,7 +112,7 @@ function makeDefault(photo) {
         dataType: 'html',
         success: function (req) {
             $('#removedefault').show();
-            if (req !== "1") {
+            if (req !== '1') {
                 $('#thumbholder').html(req);
                 $('#thumbholder').fadeIn(400);
                 $('#removedefault').css('visibility', 'visible');

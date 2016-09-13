@@ -9,8 +9,8 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-$file_uploads = (bool)ini_get("file_uploads");
-$safe_mode = (bool)ini_get("safe_mode");
+$file_uploads = (bool)ini_get('file_uploads');
+$safe_mode = (bool)ini_get('safe_mode');
 
 error_reporting(E_ERROR | E_PARSE); //  Disable error reporting for anything but critical errors
 
@@ -18,7 +18,7 @@ $red = "<img src=\"img/tng_close.gif\" width=\"18\" height=\"18\">";
 $orange = "<img src=\"img/orange.gif\" width=\"18\" height=\"18\">";
 $green = "<img src=\"img/tng_check.gif\" width=\"18\" height=\"18\">";
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('diagnostics'));
 ?>
 <!DOCTYPE html>
@@ -29,10 +29,10 @@ $headSection->setTitle(uiTextSnippet('diagnostics'));
     <?php
     echo $adminHeaderSection->build('setup-diagnostics', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_setup.php", uiTextSnippet('configuration'), "configuration"]);
-    $navList->appendItem([true, "admin_diagnostics.php", uiTextSnippet('diagnostics'), "diagnostics"]);
-    $navList->appendItem([true, "admin_setup.php?sub=tablecreation", uiTextSnippet('tablecreation'), "tablecreation"]);
-    echo $navList->build("diagnostics");
+    $navList->appendItem([true, 'admin_setup.php', uiTextSnippet('configuration'), 'configuration']);
+    $navList->appendItem([true, 'admin_diagnostics.php', uiTextSnippet('diagnostics'), 'diagnostics']);
+    $navList->appendItem([true, 'admin_setup.php?sub=tablecreation', uiTextSnippet('tablecreation'), 'tablecreation']);
+    echo $navList->build('diagnostics');
     ?>
 
     <table class='table table-sm'>
@@ -63,12 +63,12 @@ $headSection->setTitle(uiTextSnippet('diagnostics'));
           <?php
           if (extension_loaded('gd')) {
             if (ImageTypes() & IMG_GIF) {
-              echo "<p>$green&nbsp;" . uiTextSnippet('available') . "</p>";
+              echo "<p>$green&nbsp;" . uiTextSnippet('available') . '</p>';
             } else {
-              echo "<p>$orange&nbsp;" . uiTextSnippet('availnogif') . "</p>";
+              echo "<p>$orange&nbsp;" . uiTextSnippet('availnogif') . '</p>';
             }
           } else {
-            echo "<p>$red&nbsp;" . uiTextSnippet('notinst') . "</p>";
+            echo "<p>$red&nbsp;" . uiTextSnippet('notinst') . '</p>';
           }
           ?>
         </td>
@@ -78,9 +78,9 @@ $headSection->setTitle(uiTextSnippet('diagnostics'));
         <td>
           <?php
           if (!$safe_mode) {
-            echo "<p>$green&nbsp;" . uiTextSnippet('off') . "</p>";
+            echo "<p>$green&nbsp;" . uiTextSnippet('off') . '</p>';
           } else {
-            echo "<p>$orange&nbsp;" . uiTextSnippet('on') . "</p>";
+            echo "<p>$orange&nbsp;" . uiTextSnippet('on') . '</p>';
           }
           ?>
         </td>
@@ -92,9 +92,9 @@ $headSection->setTitle(uiTextSnippet('diagnostics'));
         <td>
           <?php
           if ($file_uploads) {
-            echo "<p>$green&nbsp;" . uiTextSnippet('perm') . "</p>";
+            echo "<p>$green&nbsp;" . uiTextSnippet('perm') . '</p>';
           } else {
-            echo "<p>$red&nbsp;" . uiTextSnippet('notperm') . "</p>";
+            echo "<p>$red&nbsp;" . uiTextSnippet('notperm') . '</p>';
           }
           ?>
         </td>
@@ -115,7 +115,7 @@ $headSection->setTitle(uiTextSnippet('diagnostics'));
               echo "<p>$red&nbsp;";
             }
           }
-          echo 'MySQL ' . tng_get_client_info() . " " . uiTextSnippet('client') . "</p>";
+          echo 'MySQL ' . tng_get_client_info() . ' ' . uiTextSnippet('client') . '</p>';
           $dbsi = tng_get_server_info();
           if ($dbsi >= '3.23') {
             echo "<p>$green&nbsp;";
@@ -126,7 +126,7 @@ $headSection->setTitle(uiTextSnippet('diagnostics'));
               echo "<p>$red&nbsp;";
             }
           }
-          echo 'MySQL ' . tng_get_server_info() . " " . uiTextSnippet('server') . "</p>";
+          echo 'MySQL ' . tng_get_server_info() . ' ' . uiTextSnippet('server') . '</p>';
           ?>
         </td>
       </tr>
@@ -135,7 +135,7 @@ $headSection->setTitle(uiTextSnippet('diagnostics'));
         <td>
           <?php
           echo "<p>$green&nbsp;";
-          echo $_SERVER['SERVER_SOFTWARE'] . "</p>";
+          echo $_SERVER['SERVER_SOFTWARE'] . '</p>';
           ?>
         </td>
       </tr>
@@ -176,29 +176,29 @@ $headSection->setTitle(uiTextSnippet('diagnostics'));
           $ftext = '';
           // check files
           if (!(fileReadWrite($myuserid, $mygroupid, $subroot . 'config.php'))) {
-            $text = "<p>$red&nbsp;" . uiTextSnippet('rofile') . " config.php</p>";
+            $text = "<p>$red&nbsp;" . uiTextSnippet('rofile') . ' config.php</p>';
           }
           $uselog = $logname;
           if (!(fileReadWrite($myuserid, $mygroupid, $uselog))) {
-            $ftext = "<p>$red&nbsp;" . uiTextSnippet('rofile') . " " . uiTextSnippet('publog') . " ($logname)</p>";
+            $ftext = "<p>$red&nbsp;" . uiTextSnippet('rofile') . ' ' . uiTextSnippet('publog') . " ($logname)</p>";
           }
           if (!(fileReadWrite($myuserid, $mygroupid, $adminlogfile))) {
-            $ftext .= "<p>$red&nbsp;" . uiTextSnippet('rofile') . " " . uiTextSnippet('admlog') . " ($adminlogfile)</p>";
+            $ftext .= "<p>$red&nbsp;" . uiTextSnippet('rofile') . ' ' . uiTextSnippet('admlog') . " ($adminlogfile)</p>";
           }
           if (!(fileReadWrite($myuserid, $mygroupid, $subroot . 'importconfig.php'))) {
-            $ftext .= "<p>$red&nbsp;" . uiTextSnippet('rofile') . " importconfig.php</p>";
+            $ftext .= "<p>$red&nbsp;" . uiTextSnippet('rofile') . ' importconfig.php</p>';
           }
           if (!(fileReadWrite($myuserid, $mygroupid, $subroot . 'logconfig.php'))) {
-            $ftext .= "<p>$red&nbsp;" . uiTextSnippet('rofile') . " logconfig.php</p>";
+            $ftext .= "<p>$red&nbsp;" . uiTextSnippet('rofile') . ' logconfig.php</p>';
           }
           if (!(fileReadWrite($myuserid, $mygroupid, $subroot . 'pedconfig.php'))) {
-            $ftext .= "<p>$red&nbsp;" . uiTextSnippet('rofile') . " pedconfig.php</p>";
+            $ftext .= "<p>$red&nbsp;" . uiTextSnippet('rofile') . ' pedconfig.php</p>';
           }
           if (!(fileReadWrite($myuserid, $mygroupid, $subroot . 'mapconfig.php'))) {
-            $ftext .= "<p>$red&nbsp;" . uiTextSnippet('rofile') . " mapconfig.php</p>";
+            $ftext .= "<p>$red&nbsp;" . uiTextSnippet('rofile') . ' mapconfig.php</p>';
           }
           if (!(fileReadWrite($myuserid, $mygroupid, $subroot . 'templateconfig.php'))) {
-            $ftext .= "<p>$red&nbsp;" . uiTextSnippet('rofile') . " templateconfig.php</p>";
+            $ftext .= "<p>$red&nbsp;" . uiTextSnippet('rofile') . ' templateconfig.php</p>';
           }
 
           // check folders
@@ -238,12 +238,12 @@ $headSection->setTitle(uiTextSnippet('diagnostics'));
             }
           }
           if ($ftext == '') {
-            $ftext = "<p>$green&nbsp;" . uiTextSnippet('keyrw') . "</p>";
+            $ftext = "<p>$green&nbsp;" . uiTextSnippet('keyrw') . '</p>';
           }
           echo $ftext;
 
           if ($text == '') {
-            echo "<p>$green&nbsp;" . uiTextSnippet('cfgrw') . "</p>";
+            echo "<p>$green&nbsp;" . uiTextSnippet('cfgrw') . '</p>';
           }
           echo $text;
           ?>

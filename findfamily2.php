@@ -4,24 +4,24 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-if ($session_charset != "UTF-8") {
+if ($session_charset != 'UTF-8') {
   $myhusbname = tng_utf8_decode($myhusbname);
   $mywifename = tng_utf8_decode($mywifename);
 }
 
-$allwhere = "1";
-$joinon = "";
+$allwhere = '1';
+$joinon = '';
 if ($assignedbranch) {
   $allwhere .= " AND $families_table.branch LIKE \"%$assignedbranch%\"";
 }
 
-$allwhere2 = "";
+$allwhere2 = '';
 
 if ($mywifename) {
   $terms = explode(' ', $mywifename);
   foreach ($terms as $term) {
     if ($allwhere2) {
-      $allwhere2 .= " AND ";
+      $allwhere2 .= ' AND ';
     }
     $allwhere2 .= "CONCAT_WS(' ',wifepeople.firstname,TRIM(CONCAT_WS(' ',wifepeople.lnprefix,wifepeople.lastname))) LIKE \"%$term%\"";
   }
@@ -31,12 +31,12 @@ if ($myhusbname) {
   $terms = explode(' ', $myhusbname);
   foreach ($terms as $term) {
     if ($allwhere2) {
-      $allwhere2 .= " AND ";
+      $allwhere2 .= ' AND ';
     }
     $allwhere2 .= "CONCAT_WS(' ',husbpeople.firstname,TRIM(CONCAT_WS(' ',husbpeople.lnprefix,husbpeople.lastname))) LIKE \"%$term%\"";
   }
 } else {
-  $joinonhusb = "";
+  $joinonhusb = '';
 }
 
 if ($allwhere2) {
@@ -48,7 +48,7 @@ $joinonhusb = "LEFT JOIN $people_table AS husbpeople ON $families_table.husband 
 $query = "SELECT familyID, wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.suffix AS wsuffix, wifepeople.nameorder AS wnameorder, wifepeople.living AS wliving, wifepeople.private AS wprivate, wifepeople.branch AS wbranch, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.suffix AS hsuffix, husbpeople.nameorder AS hnameorder, husbpeople.living AS hliving, husbpeople.private AS hprivate, husbpeople.branch AS hbranch FROM $families_table $joinonwife $joinonhusb WHERE $allwhere $allwhere2 ORDER BY hlastname, hlnprefix, hfirstname LIMIT 250";
 $result = tng_query($query);
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 
 <div id='findfamilyresdiv'>
@@ -70,7 +70,7 @@ header("Content-type:text/html; charset=" . $session_charset);
   <table class='table table-sm'>
     <?php
     while ($row = tng_fetch_assoc($result)) {
-      $thisfamily = "";
+      $thisfamily = '';
       if ($row['hpersonID']) {
         $person['firstname'] = $row['hfirstname'];
         $person['lnprefix'] = $row['hlnprefix'];
@@ -85,7 +85,7 @@ header("Content-type:text/html; charset=" . $session_charset);
       }
       if ($row['wpersonID']) {
         if ($thisfamily) {
-          $thisfamily .= "<br>";
+          $thisfamily .= '<br>';
         }
         $person['firstname'] = $row['wfirstname'];
         $person['lnprefix'] = $row['wlnprefix'];

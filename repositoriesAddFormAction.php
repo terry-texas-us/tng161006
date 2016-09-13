@@ -8,7 +8,7 @@ require 'checklogin.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 require 'adminlog.php';
@@ -26,7 +26,7 @@ $phone = addslashes($phone);
 $email = addslashes($email);
 $www = addslashes($www);
 
-$newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
+$newdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
 
 if ($address1 || $address2 || $city || $state || $zip || $country || $phone || $email || $www) {
   $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, phone, email, www) "
@@ -34,7 +34,7 @@ if ($address1 || $address2 || $city || $state || $zip || $country || $phone || $
   $result = tng_query($query);
   $addressID = tng_insert_id();
 } else {
-  $addressID = "";
+  $addressID = '';
 }
 if (!$addressID) {
   $addressID = 0;

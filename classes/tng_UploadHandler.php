@@ -167,10 +167,10 @@ class UploadHandler
       $suffix = $options['suffix'];
       $folder = $options['folder'];
     } else {
-      $prefix = $suffix = $folder = "";
+      $prefix = $suffix = $folder = '';
     }
     $file_name = $file_name ? $file_name : '';
-    $version_path = empty($version) ? '' : ($folder ? $folder . '/' : "");
+    $version_path = empty($version) ? '' : ($folder ? $folder . '/' : '');
     $upload_path = $this->options['upload_dir'] . $this->getUserPath() . $version_path;
     if ($file_name) {
       $upload_path .= $this->concat_file_name($prefix, $file_name, $suffix);
@@ -184,7 +184,7 @@ class UploadHandler
       $suffix = $options['suffix'];
       $folder = $options['folder'];
     } else {
-      $prefix = $suffix = $folder = "";
+      $prefix = $suffix = $folder = '';
     }
     if ($this->options['download_via_php']) {
       $url = 'admin_mediauploader.php?file=' . rawurlencode($file_name);
@@ -193,12 +193,12 @@ class UploadHandler
       }
       return $url . '&download=1';
     }
-    $version_path = empty($version) ? '' : ($folder ? rawurlencode($folder) . '/' : "");
-    return $this->options['media_folder'] . "/" . $version_path . $this->concat_file_name($prefix, $file_name, $suffix);
+    $version_path = empty($version) ? '' : ($folder ? rawurlencode($folder) . '/' : '');
+    return $this->options['media_folder'] . '/' . $version_path . $this->concat_file_name($prefix, $file_name, $suffix);
   }
 
   protected function set_file_delete_properties($file) {
-    $file->delete_url = 'admin_mediauploader.php?file=' . rawurlencode($file->name) . "&mediaID=" . $file->mediaID;
+    $file->delete_url = 'admin_mediauploader.php?file=' . rawurlencode($file->name) . '&mediaID=' . $file->mediaID;
     $file->delete_type = $this->options['delete_type'];
     if ($file->delete_type !== 'DELETE') {
       $file->delete_url .= '&_method=DELETE';
@@ -267,7 +267,7 @@ class UploadHandler
     $fileparts = pathinfo($file_name);
     $period = strrpos($fileparts['basename'], '.');
     $file_name_base = $period !== false ? substr($fileparts['basename'], 0, $period) : $fileparts['basename'];
-    $ext = "." . $fileparts['extension'];
+    $ext = '.' . $fileparts['extension'];
 
     return $prefix . $file_name_base . $suffix . $ext;
   }
@@ -504,7 +504,7 @@ class UploadHandler
         file_put_contents($file_path, fopen('php://input', 'r'), $append_file ? FILE_APPEND : 0);
       }
       $file_size = $this->getFileSize($file_path, $append_file);
-      $thumbpath = "";
+      $thumbpath = '';
       if ($file_size === $file->size) {
         if ($this->options['orient_image']) {
           $this->orient_image($file_path);
@@ -514,8 +514,8 @@ class UploadHandler
           if ($this->createScaledImage($file->name, $version, $options)) {
             if (!empty($version)) {
               $file->{$version . '_url'} = $this->getDownloadUrl($file->name, $version, $options);
-              if ($version == "thumbnail") {
-                $version_path = $options['folder'] ? rawurlencode($options['folder']) . '/' : "";
+              if ($version == 'thumbnail') {
+                $version_path = $options['folder'] ? rawurlencode($options['folder']) . '/' : '';
                 $thumbpath = $version_path . $this->concat_file_name($options['prefix'], $file->name, $options['suffix']);
               }
             } else {
@@ -536,18 +536,18 @@ class UploadHandler
         $imagesize2 = $size[1];
         $file->dims = "$imagesize1 x $imagesize2 px";
       } else {
-        $file->dims = "";
+        $file->dims = '';
       }
 
       //CREATE DATABASE RECORD HERE, PASS BACK MEDIA ID IN $file
       $fileparts = pathinfo($file->name);
       $form = strtoupper($fileparts['extension']);
-      $newdate = date("Y-m-d H:i:s", time() + (3600 * $this->options['time_offset']));
-      $mediakey = $this->options['media_folder'] . "/" . $file->name;
+      $newdate = date('Y-m-d H:i:s', time() + (3600 * $this->options['time_offset']));
+      $mediakey = $this->options['media_folder'] . '/' . $file->name;
 
       if ($this->options['subfolder']) {
-        $filepath = $this->options['subfolder'] . "/" . $file->name;
-        $thumbpath = $this->options['subfolder'] . "/" . $thumbpath;
+        $filepath = $this->options['subfolder'] . '/' . $file->name;
+        $thumbpath = $this->options['subfolder'] . '/' . $thumbpath;
       } else {
         $filepath = $file->name;
       }
@@ -562,7 +562,7 @@ class UploadHandler
         $query = "UPDATE {$this->options['mediatypes_table']} SET disabled=\"0\" WHERE mediatypeID=\"{$this->options['mediatypeID']}\"";
         tng_query($query);
       } else {
-        $file->mediaID = "";
+        $file->mediaID = '';
       }
 
       $this->set_file_delete_properties($file);
@@ -744,8 +744,8 @@ class UploadHandler
     tng_free_result($result);
 
     $this->options['media_folder'] = getMediaFolder($row['usecollfolder'], $row['mediatypeID']);
-    $this->options['upload_dir'] .= $this->options['media_folder'] . "/";
-    $this->options['upload_url'] .= $this->options['media_folder'] . "/";
+    $this->options['upload_dir'] .= $this->options['media_folder'] . '/';
+    $this->options['upload_url'] .= $this->options['media_folder'] . '/';
 
     $query = "DELETE FROM {$this->options['media_table']} WHERE mediaID = \"$mediaID\"";
     tng_query($query);

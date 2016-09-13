@@ -26,7 +26,7 @@ if ($newsearch) {
     setcookie("tng_search_tlevents_post[offset]", $offset, $exptime);
   }
 }
-$searchstring_noquotes = preg_replace("/\"/", "&#34;", $searchstring);
+$searchstring_noquotes = preg_replace('/\"/', '&#34;', $searchstring);
 $searchstring = addslashes($searchstring);
 
 if ($offset) {
@@ -34,11 +34,11 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $tngpage = 1;
 }
 
-$wherestr = $searchstring ? "WHERE evyear LIKE \"%$searchstring%\" OR evdetail LIKE \"%$searchstring%\"" : "";
+$wherestr = $searchstring ? "WHERE evyear LIKE \"%$searchstring%\" OR evdetail LIKE \"%$searchstring%\"" : '';
 $query = "SELECT tleventID, evyear, endyear, evtitle, evdetail FROM $tlevents_table $wherestr ORDER BY ABS(evyear), tleventID LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
@@ -52,7 +52,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 } else {
   $totrows = $numrows;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('tlevents'));
 ?>
 <!DOCTYPE html>
@@ -63,9 +63,9 @@ $headSection->setTitle(uiTextSnippet('tlevents'));
     <?php
     echo $adminHeaderSection->build('tlevents', $message);
     $navList = new navList('');
-    //    $navList->appendItem([true, "timelineeventsBrowse.php", uiTextSnippet('browse'), "findtimeline"]);
-    $navList->appendItem([$allowAdd, "timelineeventsAdd.php", uiTextSnippet('add'), "addtlevent"]);
-    echo $navList->build("findtimeline");
+    //    $navList->appendItem([true, 'timelineeventsBrowse.php', uiTextSnippet('browse'), 'findtimeline']);
+    $navList->appendItem([$allowAdd, 'timelineeventsAdd.php', uiTextSnippet('add'), 'addtlevent']);
+    echo $navList->build('findtimeline');
     ?>
     <table class='table table-sm'>
       <tr>
@@ -116,7 +116,7 @@ $headSection->setTitle(uiTextSnippet('tlevents'));
                 </tr>
                 <?php
                 if ($numrows) {
-                $actionstr = "";
+                $actionstr = '';
                 if ($allowEdit) {
                   $actionstr .= "<a href=\"timelineeventsEdit.php?tleventID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
                   $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
@@ -128,7 +128,7 @@ $headSection->setTitle(uiTextSnippet('tlevents'));
                   $actionstr .= "</a>\n";
                 }
                 while ($rowcount < $numrows && $row = tng_fetch_assoc($result)) {
-                  $newactionstr = preg_replace("/xxx/", $row['tleventID'], $actionstr);
+                  $newactionstr = preg_replace('/xxx/', $row['tleventID'], $actionstr);
                   echo "<tr id=\"row_{$row['tleventID']}\"><td><div class=\"action-btns2\">$newactionstr</div></td>\n";
                   if ($allowDelete) {
                     echo "<td><input name=\"del{$row['tleventID']}\" type='checkbox' value='1'></td>";

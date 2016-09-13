@@ -10,7 +10,7 @@ $hsresult = tng_query($query);
 $numhs = tng_num_rows($hsresult);
 tng_free_result($hsresult);
 
-$logstring = "<a href='cemeteriesShow.php'>" . uiTextSnippet('cemeteriesheadstones') . "</a>";
+$logstring = "<a href='cemeteriesShow.php'>" . uiTextSnippet('cemeteriesheadstones') . '</a>';
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -19,7 +19,7 @@ $flags['styles'] = "<link href=\"css/cemeteries.css\" rel=\"stylesheet\" type=\"
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
 ?>
 <!DOCTYPE html>
@@ -31,9 +31,9 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
     <h2><img class='icon-md' src='svg/headstone.svg'><?php echo uiTextSnippet('cemeteriesheadstones'); ?></h2>
     <br clear='all'>
     <?php
-    define("DUMMYPLACE", "@@@@@@");
-    define("NUMCOLS", 2);           //set as number of columns-1
-    define("DEFAULT_COLUMN_LENGTH", $numcems);
+    define('DUMMYPLACE', '@@@@@@');
+    define('NUMCOLS', 2);           //set as number of columns-1
+    define('DEFAULT_COLUMN_LENGTH', $numcems);
     $numrows = tng_num_rows($cemresult);
     $colsize = DEFAULT_COLUMN_LENGTH;
     $lastcountry = DUMMYPLACE;
@@ -121,7 +121,7 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
           $txt = $cemetery['state'] ? htmlspecialchars($cemetery['state'], ENT_QUOTES, $session_charset) : uiTextSnippet('nostate');
           if ($cemetery['state'] || !$tngconfig['cemblanks']) {
             $linectr += 2;        //Add extra line to allow for the <br> at the end
-            echo "<br><strong><a href=\"headstones.php?country=" . urlencode($cemetery['country']) . "&amp;state=" . urlencode($cemetery['state']) . "\">$txt</a></strong><br>\n";
+            echo "<br><strong><a href=\"headstones.php?country=" . urlencode($cemetery['country']) . '&amp;state=' . urlencode($cemetery['state']) . "\">$txt</a></strong><br>\n";
           } else {
             $linectr++;
             echo "<br>\n";

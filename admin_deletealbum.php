@@ -8,7 +8,7 @@ require 'checklogin.php';
 
 if (!$allowMediaDelete) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
@@ -20,7 +20,7 @@ $result = tng_query($query);
 $query = "DELETE FROM $albumlinks_table WHERE albumID=\"$albumID\"";
 $result = tng_query($query);
 
-adminwritelog(uiTextSnippet('deleted') . ": " . uiTextSnippet('album') . " $albumID");
+adminwritelog(uiTextSnippet('deleted') . ': ' . uiTextSnippet('album') . " $albumID");
 
-$message = uiTextSnippet('album') . " $albumID " . uiTextSnippet('succdeleted') . ".";
-header("Location: albumsBrowse.php?message=" . urlencode($message));
+$message = uiTextSnippet('album') . " $albumID " . uiTextSnippet('succdeleted') . '.';
+header('Location: albumsBrowse.php?message=' . urlencode($message));

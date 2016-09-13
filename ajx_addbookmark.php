@@ -10,16 +10,16 @@ $newroot = preg_replace('/ /', '', $newroot);
 $newroot = preg_replace('/\./', '', $newroot);
 $ref = "tngbookmarks_$newroot";
 
-$bookmarks = explode("|", $_COOKIE[$ref]);
+$bookmarks = explode('|', $_COOKIE[$ref]);
 $bookmarkstr = $_SESSION['tnglastpage'];
 foreach ($bookmarks as $bookmark) {
   if ($bookmark && stripslashes($bookmark) != stripslashes($_SESSION['tnglastpage'])) {
-    $bookmarkstr .= "|" . $bookmark;
+    $bookmarkstr .= '|' . $bookmark;
   }
 }
-setcookie($ref, stripslashes($bookmarkstr), time() + 31536000, "/");
+setcookie($ref, stripslashes($bookmarkstr), time() + 31536000, '/');
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <div id='bkmkdiv'>
   <form>

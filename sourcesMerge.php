@@ -10,20 +10,20 @@ require 'adminlog.php';
 
 if (!$allowEdit || !$allowDelete) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-$wherestr = "";
+$wherestr = '';
 
 function doRow($field, $textmsg, $boxname) {
   global $s1row;
   global $s2row;
   global $repositories_table;
 
-  $s1field = isset($s1row[$field]) ? $s1row[$field] : "";
-  $s2field = isset($s2row[$field]) ? $s2row[$field] : "";
+  $s1field = isset($s1row[$field]) ? $s1row[$field] : '';
+  $s2field = isset($s2row[$field]) ? $s2row[$field] : '';
 
-  if ($field == "repoID") {
+  if ($field == 'repoID') {
     if ($s1field) {
       $query = "SELECT reponame FROM $repositories_table WHERE repoID = '$s1field'";
       $result = tng_query($query);
@@ -42,30 +42,30 @@ function doRow($field, $textmsg, $boxname) {
 
   if ($s1field || $s2field) {
     echo "<tr>\n";
-    echo "<td width='15%'><span>" . uiTextSnippet($textmsg) . ":</span></td>";
+    echo "<td width='15%'><span>" . uiTextSnippet($textmsg) . ':</span></td>';
     echo "<td width=\"31%\"><span>$s1field&nbsp;</span></td>";
     if (is_array($s2row)) {
       echo "<td width='10'></td>";
-      echo "<td width='15%'><span>" . uiTextSnippet($textmsg) . ":</span></td>";
-      echo "<td width=\"5\"><span>";
+      echo "<td width='15%'><span>" . uiTextSnippet($textmsg) . ':</span></td>';
+      echo "<td width='5'><span>";
       if ($boxname) {
         if ($s2field) {
           echo "<input name=\"$boxname\" type='checkbox' value=\"$field\"";
           if ($s2row[$field] && !$s1row[$field]) {
-            echo " checked";
+            echo ' checked';
           }
-          echo ">";
+          echo '>';
         }
       } else {
-        echo "&nbsp;";
+        echo '&nbsp;';
       }
-      echo "</span></td>";
+      echo '</span></td>';
       echo "<td width=\"31%\"><span>$s2field&nbsp;</span></td>";
     } else {
       echo "<td width='10'></td>";
-      echo "<td width='15%'><span>" . uiTextSnippet($textmsg) . ":</span></td>";
-      echo "<td width=\"5\"><span>&nbsp;</span></td>";
-      echo "<td width=\"31%\"><span>&nbsp;</span></td>";
+      echo "<td width='15%'><span>" . uiTextSnippet($textmsg) . ':</span></td>';
+      echo "<td width='5'><span>&nbsp;</span></td>";
+      echo "<td width='31%'><span>&nbsp;</span></td>";
     }
     echo "</tr>\n";
   }
@@ -74,10 +74,10 @@ function doRow($field, $textmsg, $boxname) {
 function getEvent($event) {
   global $mylanguage, $languagesPath;
 
-  $dispvalues = explode("|", $event['display']);
+  $dispvalues = explode('|', $event['display']);
   $numvalues = count($dispvalues);
   if ($numvalues > 1) {
-    $displayval = "";
+    $displayval = '';
     for ($i = 0; $i < $numvalues; $i += 2) {
       $lang = $dispvalues[$i];
       if ($mylanguage == $languagesPath . $lang) {
@@ -92,11 +92,11 @@ function getEvent($event) {
   $eventstr = "<strong>$displayval</strong>: ";
   $eventstr2 = $event['eventdate'];
   if ($eventstr2 && $event['eventplace']) {
-    $eventstr2 .= ", ";
+    $eventstr2 .= ', ';
   }
   $eventstr2 .= $event['eventplace'];
   if ($eventstr2 && $event['info']) {
-    $eventstr2 .= ". ";
+    $eventstr2 .= '. ';
   }
   $eventstr2 .= $event['info'] . "<br>\n";
   $eventstr .= $eventstr2;
@@ -107,30 +107,30 @@ function getEvent($event) {
 function addCriteria($row) {
   global $cshorttitle, $clongtitle, $cauthor, $cpublisher, $crepository, $cactualtext, $cignoreblanks;
 
-  $criteria = "";
-  if ($cshorttitle == "yes") {
-    $criteria .= " AND " . "shorttitle" . " = \"" . addslashes($row['shorttitle']) . "\"";
-    $criteria .= $cignoreblanks == "yes" ? " AND shorttitle != \"\"" : "";
+  $criteria = '';
+  if ($cshorttitle == 'yes') {
+    $criteria .= ' AND shorttitle' . " = \"" . addslashes($row['shorttitle']) . "\"";
+    $criteria .= $cignoreblanks == 'yes' ? " AND shorttitle != \"\"" : '';
   }
-  if ($clongtitle == "yes") {
-    $criteria .= " AND " . "title" . " = \"" . addslashes($row['title']) . "\"";
-    $criteria .= $cignoreblanks == "yes" ? " AND title != \"\"" : "";
+  if ($clongtitle == 'yes') {
+    $criteria .= ' AND title' . " = \"" . addslashes($row['title']) . "\"";
+    $criteria .= $cignoreblanks == 'yes' ? " AND title != \"\"" : '';
   }
-  if ($cauthor == "yes") {
+  if ($cauthor == 'yes') {
     $criteria .= " AND author = \"" . addslashes($row['author']) . "\"";
-    $criteria .= $cignoreblanks == "yes" ? " AND author != \"\"" : "";
+    $criteria .= $cignoreblanks == 'yes' ? " AND author != \"\"" : '';
   }
-  if ($cpublisher == "yes") {
+  if ($cpublisher == 'yes') {
     $criteria .= " AND publisher = \"" . addslashes($row['publisher']) . "\"";
-    $criteria .= $cignoreblanks == "yes" ? " AND publisher = \"\"" : "";
+    $criteria .= $cignoreblanks == 'yes' ? " AND publisher = \"\"" : '';
   }
-  if ($crepository == "yes") {
+  if ($crepository == 'yes') {
     $criteria .= " AND repoID = \"" . addslashes($row['repoID']) . "\"";
-    $criteria .= $cignoreblanks == "yes" ? " AND repoID != \"\"" : "";
+    $criteria .= $cignoreblanks == 'yes' ? " AND repoID != \"\"" : '';
   }
-  if ($cactualtext == "yes") {
+  if ($cactualtext == 'yes') {
     $criteria .= " AND actualtext = \"" . addslashes($row['actualtext']) . "\"";
-    $criteria .= $cignoreblanks == "yes" ? " AND actualtext = \"\"" : "";
+    $criteria .= $cignoreblanks == 'yes' ? " AND actualtext = \"\"" : '';
   }
 
   return $criteria;
@@ -141,15 +141,15 @@ function doNotes($persfam1, $persfam2, $varname) {
   global $notelinks_table;
 
   if ($varname) {
-    if ($varname == "general") {
-      $varname = "";
+    if ($varname == 'general') {
+      $varname = '';
     }
     $wherestr = "AND eventID = \"$varname\"";
   } else {
-    $wherestr = "";
+    $wherestr = '';
   }
 
-  if ($ccombinenotes != "yes") {
+  if ($ccombinenotes != 'yes') {
     $query = "DELETE from $notelinks_table WHERE persfamID = '$persfam1' $wherestr";
     tng_query($query);
   }
@@ -157,7 +157,7 @@ function doNotes($persfam1, $persfam2, $varname) {
   tng_query($query);
 }
 
-$s1row = $s2row = "";
+$s1row = $s2row = '';
 if ($sourceID1) {
   $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $sources_table WHERE sourceID = '$sourceID1'";
   $result = tng_query($query);
@@ -165,26 +165,26 @@ if ($sourceID1) {
     $s1row = tng_fetch_assoc($result);
     tng_free_result($result);
   } else {
-    $sourceID1 = $sourceID2 = "";
+    $sourceID1 = $sourceID2 = '';
   }
 }
 
 set_time_limit(0);
 if (!$mergeaction) {
-  $cshorttitle = "yes";
-  $clongtitle = "yes";
+  $cshorttitle = 'yes';
+  $clongtitle = 'yes';
 }
 if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet('nextdup')) {
   if ($mergeaction == uiTextSnippet('nextmatch')) {
-    $wherestr2 = $sourceID2 ? " AND sourceID > \"$sourceID2\"" : "";
-    $wherestr2 .= $sourceID1 ? " AND sourceID > \"$sourceID1\"" : "";
+    $wherestr2 = $sourceID2 ? " AND sourceID > \"$sourceID2\"" : '';
+    $wherestr2 .= $sourceID1 ? " AND sourceID > \"$sourceID1\"" : '';
 
-    $wherestr = $sourceID1 ? "AND sourceID > \"$sourceID1\"" : "";
+    $wherestr = $sourceID1 ? "AND sourceID > \"$sourceID1\"" : '';
     $largechunk = 1000;
     $nextchunk = -1;
     $numrows = 0;
     $still_looking = 1;
-    $sourceID2 = "";
+    $sourceID2 = '';
 
     do {
       $nextone = $nextchunk + 1;
@@ -216,11 +216,11 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
       }
     } while ($numrows && $still_looking);
     if (!$sourceID2) {
-      $sourceID1 = $s1row = "";
+      $sourceID1 = $s1row = '';
     }
   } else {
     //search with sourceID1 for next duplicate
-    $wherestr2 = $sourceID2 ? " AND sourceID > \"$sourceID2\"" : "";
+    $wherestr2 = $sourceID2 ? " AND sourceID > \"$sourceID2\"" : '';
     $wherestr2 .= addCriteria($s1row);
 
     $query = "SELECT * FROM $sources_table WHERE sourceID != \"{$s1row['sourceID']}\" $wherestr2 ORDER BY sourceID LIMIT 1";
@@ -230,7 +230,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
       $sourceID2 = $s2row['sourceID'];
       tng_free_result($result2);
     } else {
-      $sourceID2 = "";
+      $sourceID2 = '';
     }
   }
 } elseif ($sourceID2) {
@@ -242,28 +242,28 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
     tng_free_result($result2);
   } else {
     $mergeaction = uiTextSnippet('comprefresh');
-    $sourceID2 = "";
+    $sourceID2 = '';
   }
 }
 if ($mergeaction == uiTextSnippet('merge')) {
-  $updatestr = "";
+  $updatestr = '';
 
   foreach ($_POST as $key => $value) {
     $prefix = substr($key, 0, 2);
     switch ($prefix) {
-      case "s2":
+      case 's2':
         $varname = substr($key, 2);
         $s1row[$varname] = $s2row[$varname];
         $updatestr .= ", $varname = \"$s1row[$varname]\" ";
         doNotes($sourceID1, $sourceID2, $varname);
         break;
-      case "ev":
-        if (strpos($key, "::")) {
-          $halves = explode("::", substr($key, 5));
-          $varname = substr(strstr($halves[0], "_"), 1);
+      case 'ev':
+        if (strpos($key, '::')) {
+          $halves = explode('::', substr($key, 5));
+          $varname = substr(strstr($halves[0], '_'), 1);
           $query = "DELETE from $events_table WHERE persfamID = '$sourceID1' AND eventID = '$varname'";
           $evresult = tng_query($query);
-          $varname = substr(strstr($halves[1], "_"), 1);
+          $varname = substr(strstr($halves[1], '_'), 1);
 
           $query = "SELECT eventID FROM $events_table WHERE persfamID = '$sourceID2' AND eventID = '$varname'";
           $evresult = tng_query($query);
@@ -282,7 +282,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
     }
   }
   if ($ccombinenotes) {
-    doNotes($sourceID1, $sourceID2, "general");
+    doNotes($sourceID1, $sourceID2, 'general');
 
     //convert all remaining notes and citations
     $query = "UPDATE $notelinks_table set persfamID = \"$sourceID1\" WHERE persfamID = '$sourceID2'";
@@ -331,11 +331,11 @@ if ($mergeaction == uiTextSnippet('merge')) {
       unlink($defaultphoto2);
     }
   }
-  $sourceID2 = "";
-  $s2row = "";
+  $sourceID2 = '';
+  $s2row = '';
   adminwritelog(uiTextSnippet('merge') . ": $sourceID2 => $sourceID1");
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('merge'));
 ?>
 <!DOCTYPE html>
@@ -346,10 +346,10 @@ $headSection->setTitle(uiTextSnippet('merge'));
     <?php
     echo $adminHeaderSection->build('sources-merge', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "sourcesBrowse.php", uiTextSnippet('browse'), "findsource"]);
-    $navList->appendItem([$allowAdd, "sourcesAdd.php", uiTextSnippet('add'), "addsource"]);
-    $navList->appendItem([$allowEdit && $allowDelete, "sourcesMerge.php", uiTextSnippet('merge'), "merge"]);
-    echo $navList->build("merge");
+    $navList->appendItem([true, 'sourcesBrowse.php', uiTextSnippet('browse'), 'findsource']);
+    $navList->appendItem([$allowAdd, 'sourcesAdd.php', uiTextSnippet('add'), 'addsource']);
+    $navList->appendItem([$allowEdit && $allowDelete, 'sourcesMerge.php', uiTextSnippet('merge'), 'merge']);
+    echo $navList->build('merge');
     ?>
     <div><em><?php echo uiTextSnippet('choosemergesources'); ?></em><br><br>
       <form id='form1' name='form1' action='sourcesMerge.php' method='post'>
@@ -398,39 +398,39 @@ $headSection->setTitle(uiTextSnippet('merge'));
           <tr>
             <td>
               <span>
-                <input name='cshorttitle' type='checkbox' value='yes'<?php if ($cshorttitle) {echo " checked";} ?>> <?php echo uiTextSnippet('shorttitle'); ?>
+                <input name='cshorttitle' type='checkbox' value='yes'<?php if ($cshorttitle) {echo ' checked';} ?>> <?php echo uiTextSnippet('shorttitle'); ?>
                 <br>
-                <input name='clongtitle' type='checkbox' value='yes'<?php if ($clongtitle) {echo " checked";} ?>> <?php echo uiTextSnippet('title'); ?>
+                <input name='clongtitle' type='checkbox' value='yes'<?php if ($clongtitle) {echo ' checked';} ?>> <?php echo uiTextSnippet('title'); ?>
               </span>
             </td>
             <td></td>
             <td>
               <span>
-                <input name='cauthor' type='checkbox' value='yes'<?php if ($cauthor == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('author'); ?>
+                <input name='cauthor' type='checkbox' value='yes'<?php if ($cauthor == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('author'); ?>
                 <br>
-                <input name='cpublisher' type='checkbox' value='yes'<?php if ($cpublisher == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('publisher'); ?>
+                <input name='cpublisher' type='checkbox' value='yes'<?php if ($cpublisher == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('publisher'); ?>
               </span>
             </td>
             <td></td>
             <td>
               <span>
-                <input name='crepository' type='checkbox' value='yes'<?php if ($crepository == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('repository'); ?>
+                <input name='crepository' type='checkbox' value='yes'<?php if ($crepository == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('repository'); ?>
                 <br>
-                <input name='cactualtext' type='checkbox' value='yes'<?php if ($cactualtext == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('actualtext'); ?>
+                <input name='cactualtext' type='checkbox' value='yes'<?php if ($cactualtext == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('actualtext'); ?>
               </span>
             </td>
             <td></td>
             <td>
               <span>
-                <input name='ccombinenotes' type='checkbox' value='yes'<?php if ($ccombinenotes == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('combinenotesonly'); ?>
+                <input name='ccombinenotes' type='checkbox' value='yes'<?php if ($ccombinenotes == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('combinenotesonly'); ?>
                 <br>
-                <input name='ccombineextras' type='checkbox' value='yes'<?php if ($ccombineextras == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('combineextras'); ?>
+                <input name='ccombineextras' type='checkbox' value='yes'<?php if ($ccombineextras == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('combineextras'); ?>
               </span>
             </td>
             <td></td>
             <td>
               <span>
-                <input name='cignoreblanks' type='checkbox' value='yes'<?php if ($cignoreblanks == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('ignoreblanks'); ?>
+                <input name='cignoreblanks' type='checkbox' value='yes'<?php if ($cignoreblanks == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('ignoreblanks'); ?>
                 <br>
               </span>
             </td>
@@ -465,7 +465,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                   $ename = "event$ekey";
                   $s2row[$ename] .= getEvent($event);
                   if ($eventlist[$ekey]) {
-                    $eventlist[$ekey] .= "::" . "{$event['eventtypeID']}_{$event['eventID']}";
+                    $eventlist[$ekey] .= '::' . "{$event['eventtypeID']}_{$event['eventID']}";
                   } else {
                     $eventlist[$ekey] = "{$event['eventtypeID']}_{$event['eventID']}";
                   }
@@ -474,14 +474,14 @@ $headSection->setTitle(uiTextSnippet('merge'));
               }
             }
             echo "</tr>\n";
-            doRow("sourceID", "sourceid", "");
-            doRow("shorttitle", "shorttitle", "s2shorttitle");
-            doRow("title", "title", "s2title");
-            doRow("author", "author", "s2author");
-            doRow("callnum", "callnumber", "s2callnum");
-            doRow("publisher", "publisher", "s2publisher");
-            doRow("repoID", "repository", "s2repository");
-            doRow("actualtext", "actualtext", "s2actualtext");
+            doRow('sourceID', 'sourceid', '');
+            doRow('shorttitle', 'shorttitle', 's2shorttitle');
+            doRow('title', 'title', 's2title');
+            doRow('author', 'author', 's2author');
+            doRow('callnum', 'callnumber', 's2callnum');
+            doRow('publisher', 'publisher', 's2publisher');
+            doRow('repoID', 'repository', 's2repository');
+            doRow('actualtext', 'actualtext', 's2actualtext');
             $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID AS eventtypeID, $events_table.eventID AS eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$s1row['sourceID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
             $evresult = tng_query($query);
             $eventcount = tng_num_rows($evresult);
@@ -492,7 +492,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                 $ename = "event$ekey";
                 $s1row[$ename] .= getEvent($event);
                 if ($eventlist[$ekey]) {
-                  $eventlist[$ekey] .= "::" . "{$event['eventtypeID']}_{$event['eventID']}";
+                  $eventlist[$ekey] .= '::' . "{$event['eventtypeID']}_{$event['eventID']}";
                 } else {
                   $eventlist[$ekey] = "{$event['eventtypeID']}_{$event['eventID']}";
                 }
@@ -503,10 +503,10 @@ $headSection->setTitle(uiTextSnippet('merge'));
             foreach ($eventlist as $key => $event) {
               $ename = "event$key";
               $inputname = "event$key";
-              doRow($ename, "otherevents", $inputname);
+              doRow($ename, 'otherevents', $inputname);
             }
           } else {
-            echo "<tr><td>" . uiTextSnippet('nomatches') . "</td></tr>";
+            echo '<tr><td>' . uiTextSnippet('nomatches') . '</td></tr>';
           }
           ?>
         </table>

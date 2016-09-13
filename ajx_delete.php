@@ -13,7 +13,7 @@ if (!$allowMediaDelete) {
 require 'adminlog.php';
 require 'deletelib.php';
 
-function getID($fields, $table, $id, $idname = "ID") {
+function getID($fields, $table, $id, $idname = 'ID') {
   $query = "SELECT $fields FROM $table WHERE $idname = '$id'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
@@ -21,10 +21,10 @@ function getID($fields, $table, $id, $idname = "ID") {
   return $row;
 }
 
-$logmsg = "";
+$logmsg = '';
 
 switch ($t) {
-  case "album":
+  case 'album':
     $query = "DELETE FROM $albums_table WHERE albumID = '$id'";
     $result = tng_query($query);
 
@@ -34,21 +34,21 @@ switch ($t) {
     $query = "DELETE FROM $album2entities_table WHERE albumID = '$id'";
     $result = tng_query($query);
 
-    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('album') . " $id";
+    $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('album') . " $id";
     break;
-  case "file":
+  case 'file':
     if (file_exists($rootpath . $desc)) { // $desc is the file name in filepicker
       $deleted = unlink($rootpath . $desc);
     }
     $logmsg = uiTextSnippet('deleted') . ": $desc";
     break;
-  case "language":
+  case 'language':
     $query = "DELETE FROM $languagesTable WHERE languageID = '$id'";
     $result = tng_query($query);
 
-    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('language') . " $id";
+    $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('language') . " $id";
     break;
-  case "media":
+  case 'media':
     include 'medialib.php';
 
     resortMedia($id);
@@ -59,25 +59,25 @@ switch ($t) {
     $query = "DELETE FROM $albumlinks_table WHERE mediaID = '$id'";
     $result = tng_query($query);
 
-    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('media') . " $id";
+    $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('media') . " $id";
     break;
-  case "tevent":
-    $row = getID("personID, familyID", $temp_events_table, $id, "tempID");
+  case 'tevent':
+    $row = getID('personID, familyID', $temp_events_table, $id, 'tempID');
     $personID = $row['personID'];
     $familyID = $row['familyID'];
 
     $query = "DELETE FROM $temp_events_table WHERE tempID = '$id'";
     $result = tng_query($query);
 
-    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('tentdata') . ' ' . ($row['personID'] ? $row['personID'] : $row['familyID']);
+    $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('tentdata') . ' ' . ($row['personID'] ? $row['personID'] : $row['familyID']);
     break;
-  case "tlevent":
+  case 'tlevent':
     $query = "DELETE FROM $tlevents_table WHERE tleventID = '$id'";
     $result = tng_query($query);
 
     $logmsg = uiTextSnippet('tlevent') . " $id " . uiTextSnippet('succdeleted');
     break;
-  case "note":
+  case 'note':
     $query = "DELETE FROM $notelinks_table WHERE xnoteID = '$id'";
     $result = tng_query($query);
 
@@ -86,8 +86,8 @@ switch ($t) {
 
     $logmsg = uiTextSnippet('note') . " $id " . uiTextSnippet('succdeleted');
     break;
-  case "person":
-    $row = getID("personID, branch, sex", $people_table, $id);
+  case 'person':
+    $row = getID('personID, branch, sex', $people_table, $id);
     $personID = $row['personID'];
 
     if (!checkbranch($row['branch'])) {
@@ -99,10 +99,10 @@ switch ($t) {
 
     deletePersonPlus($personID, $row['sex']);
 
-    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('person') . " $personID";
+    $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('person') . " $personID";
     break;
-  case "family":
-    $row = getID("familyID, branch", $families_table, $id);
+  case 'family':
+    $row = getID('familyID, branch', $families_table, $id);
     $familyID = $row['familyID'];
 
     if (!checkbranch($row['branch'])) {
@@ -127,10 +127,10 @@ switch ($t) {
     deleteMediaLinks($familyID);
     deleteAlbumLinks($familyID);
 
-    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('family') . " $familyID";
+    $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('family') . " $familyID";
     break;
-  case "source":
-    $row = getID("sourceID", $sources_table, $id);
+  case 'source':
+    $row = getID('sourceID', $sources_table, $id);
     $sourceID = $row['sourceID'];
 
     $query = "DELETE FROM $sources_table WHERE ID = '$id'";
@@ -145,10 +145,10 @@ switch ($t) {
     deleteMediaLinks($sourceID);
     deleteAlbumLinks($sourceID);
 
-    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('source') . " $sourceID";
+    $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('source') . " $sourceID";
     break;
-  case "repository":
-    $row = getID("repoID", $repositories_table, $id);
+  case 'repository':
+    $row = getID('repoID', $repositories_table, $id);
     $repoID = $row['repoID'];
 
     $query = "SELECT addressID FROM $repositories_table WHERE repoID = '$repoID'";
@@ -170,10 +170,10 @@ switch ($t) {
     deleteMediaLinks($repoID);
     deleteAlbumLinks($repoID);
 
-    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('person') . " $personID";
+    $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('person') . " $personID";
     break;
-  case "place":
-    $row = getID("place", $places_table, $id);
+  case 'place':
+    $row = getID('place', $places_table, $id);
     $place = $row['place'];
 
     $query = "DELETE FROM $places_table WHERE ID = '$id'";
@@ -182,9 +182,9 @@ switch ($t) {
     deleteMediaLinks($place);
     deleteAlbumLinks($place);
 
-    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('place') . " $place";
+    $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('place') . " $place";
     break;
-  case "cemetery":
+  case 'cemetery':
     $query = "SELECT maplink FROM $cemeteries_table WHERE cemeteryID = '$id'";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
@@ -193,9 +193,9 @@ switch ($t) {
     $query = "DELETE FROM $cemeteries_table WHERE cemeteryID = '$id'";
     $result = tng_query($query);
 
-    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('cemetery') . " $id";
+    $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('cemetery') . " $id";
     break;
-  case "user":
+  case 'user':
     $query3 = "SELECT username FROM $users_table WHERE userID = '$id'";
     $result3 = tng_query($query3);
     $urow = tng_fetch_assoc($result3);
@@ -204,38 +204,38 @@ switch ($t) {
     $query = "DELETE FROM $users_table WHERE userID = '$id'";
     $result = tng_query($query);
 
-    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('user') . " {$urow['username']}";
+    $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('user') . " {$urow['username']}";
     break;
-  case "branch":
+  case 'branch':
     $branch = $id;
     include 'branchlib.php';
 
-    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('branch') . " $id";
+    $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('branch') . " $id";
     break;
-  case "eventtype":
+  case 'eventtype':
     $query = "DELETE FROM $eventtypes_table WHERE eventtypeID = '$id'";
     $result = tng_query($query);
 
-    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('eventtype') . " $id";
+    $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('eventtype') . " $id";
     break;
-  case "report":
+  case 'report':
     $query = "DELETE FROM $reports_table WHERE reportID = '$id'";
     $result = tng_query($query);
 
-    $logmsg = uiTextSnippet('deleted') . ": " . uiTextSnippet('report') . " $id";
+    $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('report') . " $id";
     break;
-case "entity":
+case 'entity':
     $newname = addslashes($delitem);
-    if ($entity == "state") {
+    if ($entity == 'state') {
       $query = "DELETE FROM $states_table WHERE state = '$newname'";
-    } elseif ($entity == "country") {
+    } elseif ($entity == 'country') {
       $query = "DELETE FROM $countries_table WHERE country = '$newname'";
     }
     $result = tng_query($query);
 
     $logmsg = uiTextSnippet('deleted') . ": $entity: $delitem";
     break;
-  case "tree":
+  case 'tree':
     $query = "DELETE FROM $people_table WHERE gedcom = '$id'";
     $result = tng_query($query);
 
@@ -300,9 +300,9 @@ case "entity":
     $query = "UPDATE $users_table SET allow_living = '-1' WHERE gedcom = '$id'";
     $result = tng_query($query);
 
-    $logmsg = uiTextSnippet('deleted') . " $id " . uiTextSnippet('succdeleted') . ".";
+    $logmsg = uiTextSnippet('deleted') . " $id " . uiTextSnippet('succdeleted') . '.';
     break;
-  case "child_unlink":
+  case 'child_unlink':
     $query = "DELETE FROM $children_table WHERE familyID = '$familyID' AND personID = '$personID'";
     $result = tng_query($query);
 
@@ -313,7 +313,7 @@ case "entity":
 
     $logmsg = uiTextSnippet('chunlinked') . ": $personID/$familyID.";
     break;
-  case "child_delete":
+  case 'child_delete':
     $query = "SELECT sex FROM $people_table WHERE personID = '$personID'";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
@@ -326,13 +326,13 @@ case "entity":
 
     $logmsg = uiTextSnippet('deleted') . ": $personID/$familyID.";
     break;
-  case "mediatype":
+  case 'mediatype':
     $query = "DELETE FROM $mediatypes_table WHERE mediatypeID = '$id'";
     $result = tng_query($query);
 
     $logmsg = uiTextSnippet('deleted') . ": $id.";
     break;
-  case "cemlink":
+  case 'cemlink':
     $query = "UPDATE $cemeteries_table SET place='' WHERE cemeteryID = '$id'";
     $result = tng_query($query);
     break;

@@ -6,7 +6,7 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('misc'));
 ?>
 <!DOCTYPE html>
@@ -16,11 +16,11 @@ $headSection->setTitle(uiTextSnippet('misc'));
   <?php
   echo $adminHeaderSection->build('misc', $message);
   $navList = new navList('');
-  $navList->appendItem([true, "admin_misc.php", uiTextSnippet('menu'), "misc"]);
-  $navList->appendItem([true, "admin_notelist.php", uiTextSnippet('notes'), "notes"]);
-  $navList->appendItem([true, "admin_whatsnewmsg.php", uiTextSnippet('whatsnew'), "whatsnew"]);
-  $navList->appendItem([true, "admin_mostwanted.php", uiTextSnippet('mostwanted'), "mostwanted"]);
-  echo $navList->build("misc");
+  $navList->appendItem([true, 'admin_misc.php', uiTextSnippet('menu'), 'misc']);
+  $navList->appendItem([true, 'admin_notelist.php', uiTextSnippet('notes'), 'notes']);
+  $navList->appendItem([true, 'admin_whatsnewmsg.php', uiTextSnippet('whatsnew'), 'whatsnew']);
+  $navList->appendItem([true, 'admin_mostwanted.php', uiTextSnippet('mostwanted'), 'mostwanted']);
+  echo $navList->build('misc');
   ?>
   <div>
     <h4><img src="img/tng_expand.gif" width="15" height="15"> <a

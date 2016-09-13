@@ -10,12 +10,12 @@ if ($link) {
 
   if (!$allowEdit) {
     $message = uiTextSnippet('norights');
-    header("Location: admin_login.php?message=" . urlencode($message));
+    header('Location: admin_login.php?message=' . urlencode($message));
     exit;
   }
 }
 if (!$tngimpcfg['maxlivingage']) {
-  $tngimpcfg['maxlivingage'] = "110";
+  $tngimpcfg['maxlivingage'] = '110';
 }
 
 //for upgrading to 6
@@ -25,7 +25,7 @@ if ($localphotopathdisplay && !$locimppath['photos']) {
 if ($localdocpathdisplay && !$locimppath['histories']) {
   $locimppath['histories'] = $localdocpathdisplay;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifyimportsettings'));
 ?>
 <!DOCTYPE html>
@@ -36,11 +36,11 @@ $headSection->setTitle(uiTextSnippet('modifyimportsettings'));
     <?php
     echo $adminHeaderSection->build('setup-configuration-importconfigsettings', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_setup.php", uiTextSnippet('configuration'), "configuration"]);
-    $navList->appendItem([true, "admin_diagnostics.php", uiTextSnippet('diagnostics'), "diagnostics"]);
-    $navList->appendItem([true, "admin_setup.php?sub=tablecreation", uiTextSnippet('tablecreation'), "tablecreation"]);
-    $navList->appendItem([true, "#", uiTextSnippet('importconfigsettings'), "import"]);
-    echo $navList->build("import");
+    $navList->appendItem([true, 'admin_setup.php', uiTextSnippet('configuration'), 'configuration']);
+    $navList->appendItem([true, 'admin_diagnostics.php', uiTextSnippet('diagnostics'), 'diagnostics']);
+    $navList->appendItem([true, 'admin_setup.php?sub=tablecreation', uiTextSnippet('tablecreation'), 'tablecreation']);
+    $navList->appendItem([true, '#', uiTextSnippet('importconfigsettings'), 'import']);
+    echo $navList->build('import');
     ?>
     <form action="admin_updateimportconfig.php" method='post' name='form1'>
       <table class='table table-sm'>
@@ -55,7 +55,7 @@ $headSection->setTitle(uiTextSnippet('modifyimportsettings'));
         <tr>
           <td><?php echo uiTextSnippet('saveimportstate'); ?>:</td>
           <td>
-            <input name='saveimport' type='checkbox' value='1' <?php if ($saveimport) {echo "checked";} ?>> <?php echo uiTextSnippet('allowresume'); ?>
+            <input name='saveimport' type='checkbox' value='1' <?php if ($saveimport) {echo 'checked';} ?>> <?php echo uiTextSnippet('allowresume'); ?>
           </td>
         </tr>
         <tr>
@@ -67,16 +67,16 @@ $headSection->setTitle(uiTextSnippet('modifyimportsettings'));
           <td><?php echo uiTextSnippet('defimpopt'); ?>:</td>
           <td>
             <select name="defimpopt">
-              <option value='1'<?php if ($tngimpcfg['defimpopt'] == 1) {echo " selected";} ?>>
+              <option value='1'<?php if ($tngimpcfg['defimpopt'] == 1) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('allcurrentdata'); ?>
               </option>
-              <option value='0'<?php if (!$tngimpcfg['defimpopt']) {echo " selected";} ?>>
+              <option value='0'<?php if (!$tngimpcfg['defimpopt']) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('matchingonly'); ?>
               </option>
-              <option value="2"<?php if ($tngimpcfg['defimpopt'] == 2) {echo " selected";} ?>>
+              <option value='2'<?php if ($tngimpcfg['defimpopt'] == 2) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('donotreplace'); ?>
               </option>
-              <option value="3"<?php if ($tngimpcfg['defimpopt'] == 3) {echo " selected";} ?>>
+              <option value='3'<?php if ($tngimpcfg['defimpopt'] == 3) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('appendall'); ?>
               </option>
             </select>
@@ -86,10 +86,10 @@ $headSection->setTitle(uiTextSnippet('modifyimportsettings'));
           <td><?php echo uiTextSnippet('blankchangedt'); ?>:</td>
           <td>
             <select name="blankchangedt">
-              <option value='0'<?php if (!$tngimpcfg['chdate']) {echo " selected";} ?>>
+              <option value='0'<?php if (!$tngimpcfg['chdate']) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('usetoday'); ?>
               </option>
-              <option value='1'<?php if ($tngimpcfg['chdate']) {echo " selected";} ?>>
+              <option value='1'<?php if ($tngimpcfg['chdate']) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('useblank'); ?>
               </option>
             </select>
@@ -99,10 +99,10 @@ $headSection->setTitle(uiTextSnippet('modifyimportsettings'));
           <td><?php echo uiTextSnippet('nobirthdate'); ?>:</td>
           <td>
             <select name="livingreqbirth">
-              <option value='0'<?php if (!$tngimpcfg['livingreqbirth']) {echo " selected";} ?>>
+              <option value='0'<?php if (!$tngimpcfg['livingreqbirth']) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('persdead'); ?>
               </option>
-              <option value='1'<?php if ($tngimpcfg['livingreqbirth']) {echo " selected";} ?>>
+              <option value='1'<?php if ($tngimpcfg['livingreqbirth']) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('persliving'); ?>
               </option>
             </select>
@@ -119,7 +119,7 @@ $headSection->setTitle(uiTextSnippet('modifyimportsettings'));
         <tr>
           <td><?php echo uiTextSnippet('embeddedmedia'); ?>:</td>
           <td>
-            <input name='assignnames' type='checkbox' value='yes' <?php if ($assignnames) {echo "checked";} ?>> <?php echo uiTextSnippet('assignnames'); ?>
+            <input name='assignnames' type='checkbox' value='yes' <?php if ($assignnames) {echo 'checked';} ?>> <?php echo uiTextSnippet('assignnames'); ?>
           </td>
         </tr>
         <tr>
@@ -150,8 +150,8 @@ $headSection->setTitle(uiTextSnippet('modifyimportsettings'));
         <tr>
           <td><?php echo uiTextSnippet('nopathmatch'); ?>:</td>
           <td colspan='4'>
-            <input name='wholepath' type='radio' value='1' <?php if ($wholepath) {echo "checked";} ?>> <?php echo uiTextSnippet('wholepath'); ?>
-            <input name='wholepath' type='radio' value='0' <?php if (!$wholepath) {echo "checked";} ?>> <?php echo uiTextSnippet('justname'); ?>
+            <input name='wholepath' type='radio' value='1' <?php if ($wholepath) {echo 'checked';} ?>> <?php echo uiTextSnippet('wholepath'); ?>
+            <input name='wholepath' type='radio' value='0' <?php if (!$wholepath) {echo 'checked';} ?>> <?php echo uiTextSnippet('justname'); ?>
           </td>
         </tr>
         <tr>

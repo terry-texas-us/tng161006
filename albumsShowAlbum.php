@@ -24,14 +24,14 @@ function getAlbumLinkText($albumID) {
   global $eventtypes_table;
   global $maxsearchresults;
 
-  $links = "";
+  $links = '';
 
   if ($ioffset) {
     $ioffsetstr = "$ioffset, ";
     $newioffset = $ioffset + 1;
   } else {
-    $ioffsetstr = "";
-    $newioffset = "";
+    $ioffsetstr = '';
+    $newioffset = '';
   }
   $query = "SELECT $album2entities_table.alinkID, $album2entities_table.entityID AS personID, people.living AS living, people.private AS private, people.branch AS branch, $album2entities_table.eventID, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, people.nameorder, familyID, people.personID AS personID2, wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.prefix AS wprefix, wifepeople.suffix AS wsuffix, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.prefix AS hprefix, husbpeople.suffix AS hsuffix, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame FROM $album2entities_table "
       . "LEFT JOIN $people_table AS people ON $album2entities_table.entityID = people.personID "
@@ -56,7 +56,7 @@ function getAlbumLinkText($albumID) {
       $prow['private'] = $prow['fprivate'];
     }
     if ($links) {
-      $links .= ", ";
+      $links .= ', ';
     }
 
     $prights = determineLivingPrivateRights($prow);
@@ -74,18 +74,18 @@ function getAlbumLinkText($albumID) {
 
     if ($prow['personID2'] != null) {
       $links .= "<a href=\"peopleShowPerson.php?personID={$prow['personID2']}\">";
-      $links .= getName($prow) . "</a>";
+      $links .= getName($prow) . '</a>';
     } elseif ($prow['sourceID'] != null) {
       $sourcetext = $prow['title'] ? $prow['title'] : uiTextSnippet('source') . ": {$prow['sourceID']}";
-      $links .= "<a href=\"sourcesShowSource.php?sourceID={$prow['sourceID']}\">" . $sourcetext . "</a>";
+      $links .= "<a href=\"sourcesShowSource.php?sourceID={$prow['sourceID']}\">" . $sourcetext . '</a>';
     } elseif ($prow['repoID'] != null) {
       $repotext = $prow['reponame'] ? $prow['reponame'] : uiTextSnippet('repository') . ": {$prow['repoID']}";
-      $links .= "<a href=\"repositoriesShowItem.php?repoID={$prow['repoID']}\">" . $repotext . "</a>";
+      $links .= "<a href=\"repositoriesShowItem.php?repoID={$prow['repoID']}\">" . $repotext . '</a>';
     } elseif ($prow['familyID'] != null) {
-      $familyname = trim("{$prow['hlnprefix']} {$prow['hlastname']}") . "/" . trim("{$prow['wlnprefix']} {$prow['wlastname']}") . " ({$prow['familyID']})";
+      $familyname = trim("{$prow['hlnprefix']} {$prow['hlastname']}") . '/' . trim("{$prow['wlnprefix']} {$prow['wlastname']}") . " ({$prow['familyID']})";
       $links .= "<a href=\"familiesShowFamily.php?familyID={$prow['familyID']}\">" . uiTextSnippet('family') . ": $familyname</a>";
     } else {
-      $links .= "<a href=\"placesearch.php?psearch={$prow['personID']}\">" . $prow['personID'] . "</a>";
+      $links .= "<a href=\"placesearch.php?psearch={$prow['personID']}\">" . $prow['personID'] . '</a>';
     }
     if ($prow['eventID']) {
       $query = "SELECT description FROM $events_table, $eventtypes_table WHERE eventID = \"{$prow['eventID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID";
@@ -99,7 +99,7 @@ function getAlbumLinkText($albumID) {
   }
   tng_free_result($presult);
   if ($numrows > $maxsearchresults) {
-    $links .= "\n[<a href=\"albumsShowAlbum.php?albumID=$albumID&amp;ioffset=" . ($newioffset + $maxsearchresults) . "\">" . uiTextSnippet('morelinks') . "</a>]";
+    $links .= "\n[<a href=\"albumsShowAlbum.php?albumID=$albumID&amp;ioffset=" . ($newioffset + $maxsearchresults) . "\">" . uiTextSnippet('morelinks') . '</a>]';
   }
 
   return $links;
@@ -125,9 +125,9 @@ if ($tnggallery) {
     $tngconfig['thumbcols'] = 10;
   }
   $maxsearchresults *= 2;
-  $gallerymsg = "<a href=\"albumsShowAlbum.php?albumID=$albumID\">&raquo; " . uiTextSnippet('regphotos') . "</a>&nbsp;";
+  $gallerymsg = "<a href=\"albumsShowAlbum.php?albumID=$albumID\">&raquo; " . uiTextSnippet('regphotos') . '</a>&nbsp;';
 } else {
-  $gallerymsg = "<a href=\"albumsShowAlbum.php?albumID=$albumID&amp;tnggallery=1\">&raquo; " . uiTextSnippet('gallery') . "</a>&nbsp;";
+  $gallerymsg = "<a href=\"albumsShowAlbum.php?albumID=$albumID&amp;tnggallery=1\">&raquo; " . uiTextSnippet('gallery') . '</a>&nbsp;';
 }
 
 $_SESSION['tng_gallery'] = $tnggallery;
@@ -138,7 +138,7 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $page = 1;
 }
 
@@ -147,7 +147,7 @@ $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 if (!tng_num_rows($result) || (!$row['active'] && !$allow_admin)) {
   tng_free_result($result);
-  header("Location: thispagedoesnotexist.html");
+  header('Location: thispagedoesnotexist.html');
   exit;
 }
 $albumname = $row['albumname'];
@@ -157,8 +157,8 @@ tng_free_result($result);
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
-$headSection->setTitle(uiTextSnippet('albums') . ": " . $albumname);
+header('Content-type: text/html; charset=' . $session_charset);
+$headSection->setTitle(uiTextSnippet('albums') . ': ' . $albumname);
 ?>
 <!DOCTYPE html>
 <html>
@@ -167,8 +167,8 @@ $headSection->setTitle(uiTextSnippet('albums') . ": " . $albumname);
 <?php
 if (!$noneliving && !$noneprivate) {
     echo $publicHeaderSection->build();
-    echo tng_DrawHeading("", uiTextSnippet('albums') . ": " . $albumname, $description);
-    echo "<p>" . uiTextSnippet('livingphoto') . "</p>\n";
+    echo tng_DrawHeading('', uiTextSnippet('albums') . ': ' . $albumname, $description);
+    echo '<p>' . uiTextSnippet('livingphoto') . "</p>\n";
     echo $publicFooterSection->build();
   echo "</body>\n";
   echo "</html>\n";
@@ -211,10 +211,10 @@ preparebookmark($logstring);
     }
     $hiddenfields[0] = ['name' => 'albumID', 'value' => $albumID];
 
-    $toplinks = "<p>";
-    $toplinks .= $totrows ? uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows &nbsp;&nbsp; " : "";
+    $toplinks = '<p>';
+    $toplinks .= $totrows ? uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows &nbsp;&nbsp; " : '';
     $toplinks .= $gallerymsg;
-    $toplinks .= $allow_admin && $allowEdit ? "<a href=\"albumsEdit.php?albumID=$albumID&amp;cw=1\" target='_blank'>&raquo; " . uiTextSnippet('editalbum') . "</a> " : "";
+    $toplinks .= $allow_admin && $allowEdit ? "<a href=\"albumsEdit.php?albumID=$albumID&amp;cw=1\" target='_blank'>&raquo; " . uiTextSnippet('editalbum') . '</a> ' : '';
 
     $pagenav = buildSearchResultPagination($totrows, "albumsShowAlbum.php?albumID=$albumID&amp;tnggallery=$tnggallery&amp;offset", $maxsearchresults, $max_browsemedia_pages);
     $preheader = $pagenav . "</p>\n";
@@ -222,13 +222,13 @@ preparebookmark($logstring);
     if ($tnggallery) {
       $preheader .= "<div class=\"titlebox\">\n";
       $firstrow = 1;
-      $tablewidth = "";
-      $header = "";
+      $tablewidth = '';
+      $header = '';
     } else {
       $header = "<tr><td></td>\n";
       $header .= "<td width=\"$thumbmaxw\">" . uiTextSnippet('thumb') . "</td>\n";
       $header .= "<td width=\"80%\">" . uiTextSnippet('description') . "</td>\n";
-      $header .= "<td>" . uiTextSnippet('indlinked') . "</td>\n";
+      $header .= '<td>' . uiTextSnippet('indlinked') . "</td>\n";
       $header .= "</tr>\n";
       $tablewidth = " width=\"100%\"";
     }
@@ -237,8 +237,8 @@ preparebookmark($logstring);
 
     $i = $offsetplus;
     $maxplus = $maxsearchresults + 1;
-    $mediatext = "";
-    $firsthref = "";
+    $mediatext = '';
+    $firsthref = '';
     $thumbcount = 0;
     $gotImageJpeg = function_exists(imageJpeg);
     while ($row = tng_fetch_assoc($result)) {
@@ -252,7 +252,7 @@ preparebookmark($logstring);
           . "WHERE mediaID = '{$row['mediaID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT $maxplus";
       $presult = tng_query($query);
       $numrows = tng_num_rows($presult);
-      $medialinktext = "";
+      $medialinktext = '';
       $foundliving = 0;
       $foundprivate = 0;
       $count = 0;
@@ -300,27 +300,27 @@ preparebookmark($logstring);
         }
 
         if (!$tnggallery) {
-          $hstext = "";
+          $hstext = '';
           if ($prow['personID2'] != null) {
             $medialinktext .= "<li><a href=\"peopleShowPerson.php?personID={$prow['personID2']}\">";
             $medialinktext .= getName($prow);
-            if ($mediatypeID == "headstones") {
+            if ($mediatypeID == 'headstones') {
               $deathdate = $prow['deathdate'] ? $prow['deathdate'] : $prow['burialdate'];
               if ($prow['deathdate']) {
                 $abbrev = uiTextSnippet('deathabbr');
               } elseif ($prow['burialdate']) {
                 $abbrev = uiTextSnippet('burialabbr');
               }
-              $hstext = $deathdate ? " ($abbrev " . displayDate($deathdate) . ")" : "";
+              $hstext = $deathdate ? " ($abbrev " . displayDate($deathdate) . ')' : '';
             }
           } elseif ($prow['sourceID'] != null) {
-            $sourcetext = $prow['title'] ? $prow['title'] : uiTextSnippet('source') . ": " . $prow['sourceID'];
+            $sourcetext = $prow['title'] ? $prow['title'] : uiTextSnippet('source') . ': ' . $prow['sourceID'];
             $medialinktext .= "<li><a href=\"sourcesShowSource.php?sourceID={$prow['sourceID']}\">$sourcetext";
           } elseif ($prow['repoID'] != null) {
-            $repotext = $prow['reponame'] ? $prow['reponame'] : uiTextSnippet('repository') . ": " . $prow['repoID'];
+            $repotext = $prow['reponame'] ? $prow['reponame'] : uiTextSnippet('repository') . ': ' . $prow['repoID'];
             $medialinktext .= "<li><a href=\"repositoriesShowItem.php?repoID={$prow['repoID']}\">$repotext";
           } elseif ($prow['familyID'] != null) {
-            $medialinktext .= "<li><a href=\"familiesShowFamily.php?familyID={$prow['personID']}\">" . uiTextSnippet('family') . ": " . getFamilyName($prow);
+            $medialinktext .= "<li><a href=\"familiesShowFamily.php?familyID={$prow['personID']}\">" . uiTextSnippet('family') . ': ' . getFamilyName($prow);
           } else {
             $medialinktext .= "<li><a href=\"placesearch.php?psearch={$prow['personID']}\">" . $prow['personID'];
           }
@@ -346,7 +346,7 @@ preparebookmark($logstring);
       if ($showAlbumInfo) {
         $href = $uselink;
       } else {
-        $href = "";
+        $href = '';
       }
       if ($href && !$firsthref) {
         $firsthref = $href;
@@ -355,14 +355,14 @@ preparebookmark($logstring);
         $description = $showAlbumInfo ? "<a href=\"$href\">{$row['description']}</a>" : $row['description'];
         $notes = nl2br(truncateIt(getXrefNotes($row['notes']), $tngconfig['maxnoteprev']));
         if (!$showAlbumInfo) {
-          $notes .= "<br>(" . uiTextSnippet('livingphoto') . ")";
+          $notes .= '<br>(' . uiTextSnippet('livingphoto') . ')';
         }
       } else {
         $description = uiTextSnippet('living');
         $notes = uiTextSnippet('livingphoto');
       }
       if ($row['status']) {
-        $notes = uiTextSnippet('status') . ": " . $row['status'] . $notes;
+        $notes = uiTextSnippet('status') . ': ' . $row['status'] . $notes;
       }
 
       if (!$row['allow_living']) {
@@ -373,20 +373,20 @@ preparebookmark($logstring);
         if ($imgsrc) {
           if ($firstrow) {
             $firstrow = 0;
-            $mediatext .= "<tr>";
+            $mediatext .= '<tr>';
           } else {
             if (($i - 1) % $tngconfig['thumbcols'] == 0) {
               $mediatext .= "</tr>\n<tr>";
             }
           }
-          $mediatext .= "<td style=\"padding:10px\">";
+          $mediatext .= '<td style = "padding:10px">';
           $mediatext .= $href ? "<a href=\"$href\">$imgsrc</a></td>\n" : "$imgsrc</td>\n";
           $i++;
         }
       } else {
         $mediatext .= "<tr><td><span>$i</span></td>";
         if ($imgsrc) {
-          $mediatext .= "<td>";
+          $mediatext .= '<td>';
           $mediatext .= "<div class=\"media-img\"><div class=\"media-prev\" id=\"prev{$row['mediaID']}\" style=\"display:none\"></div></div>\n";
           if ($href) {
             $mediatext .= "<a href=\"$href\"";
@@ -397,10 +397,10 @@ preparebookmark($logstring);
           } else {
             $mediatext .= $imgsrc;
           }
-          $mediatext .= "</td><td>";
+          $mediatext .= '</td><td>';
           $thumbcount++;
         } else {
-          $mediatext .= "<td>&nbsp;</td><td>";
+          $mediatext .= '<td>&nbsp;</td><td>';
         }
 
         $mediatext .= "<span>$description<br>$notes&nbsp;</span></td>";
@@ -417,15 +417,15 @@ preparebookmark($logstring);
       }
     } else {
       if (!$thumbcount) {
-        $header = str_replace("<td>" . uiTextSnippet('thumb') . "</td>", "", $header);
-        $mediatext = str_replace("<td>&nbsp;</td><td>", "<td>", $mediatext);
+        $header = str_replace('<td>' . uiTextSnippet('thumb') . '</td>', '', $header);
+        $mediatext = str_replace('<td>&nbsp;</td><td>', '<td>', $mediatext);
       }
     }
 
     if ($firsthref) {
-      $toplinks .= " &nbsp;&nbsp; <a href=\"$firsthref&amp;ss=1\">&raquo; " . uiTextSnippet('slidestart') . "</a>";
+      $toplinks .= " &nbsp;&nbsp; <a href=\"$firsthref&amp;ss=1\">&raquo; " . uiTextSnippet('slidestart') . '</a>';
     }
-    $toplinks .= "</p>";
+    $toplinks .= '</p>';
     //print out the whole shootin' match right here, eh
     echo $toplinks . $preheader . $header . $mediatext;
     echo "</table>\n";
@@ -437,7 +437,7 @@ preparebookmark($logstring);
     echo "<br>\n";
     if ($pagenav) {
       echo $pagenav;
-      echo "<br>";
+      echo '<br>';
     }
     echo $albumlinktext;
 

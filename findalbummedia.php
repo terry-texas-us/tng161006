@@ -5,7 +5,7 @@ require 'adminlib.php';
 require 'checklogin.php';
 
 initMediaTypes();
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <div id='finddiv'>
     <form name='find2' onsubmit="getNewMedia(this,1); return false;">
@@ -65,7 +65,7 @@ header("Content-type:text/html; charset=" . $session_charset);
                 $cemetery = "{$cemrow['country']}, {$cemrow['state']}, {$cemrow['county']}, {$cemrow['city']}, {$cemrow['cemname']}";
                 echo "  <option value=\"{$cemrow['cemeteryID']}\"";
                 if ($cemeteryID == $cemrow['cemeteryID']) {
-                  echo " selected";
+                  echo ' selected';
                 }
                 echo ">$cemetery</option>\n";
               }

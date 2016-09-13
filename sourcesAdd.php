@@ -8,10 +8,10 @@ require 'version.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('addnewsource'));
 ?>
 <!DOCTYPE html>
@@ -22,10 +22,10 @@ $headSection->setTitle(uiTextSnippet('addnewsource'));
     <?php
     echo $adminHeaderSection->build('sources-addnewsource', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "sourcesBrowse.php", uiTextSnippet('browse'), "findsource"]);
-    $navList->appendItem([$allowAdd, "sourcesAdd.php", uiTextSnippet('add'), "addsource"]);
-    $navList->appendItem([$allowEdit && $allowDelete, "sourcesMerge.php", uiTextSnippet('merge'), "merge"]);
-    echo $navList->build("addsource");
+    $navList->appendItem([true, 'sourcesBrowse.php', uiTextSnippet('browse'), 'findsource']);
+    $navList->appendItem([$allowAdd, 'sourcesAdd.php', uiTextSnippet('add'), 'addsource']);
+    $navList->appendItem([$allowEdit && $allowDelete, 'sourcesMerge.php', uiTextSnippet('merge'), 'merge']);
+    echo $navList->build('addsource');
     ?>
     <form name='form1' action='sourcesAddFormAction.php' method='post' onSubmit="return validateForm();">
       <strong><?php echo uiTextSnippet('prefixsourceid'); ?></strong>
@@ -48,7 +48,7 @@ $headSection->setTitle(uiTextSnippet('addnewsource'));
         </div>          
       </div>
       <br>
-      <?php require "micro_newsource.php"; ?>
+      <?php require 'micro_newsource.php'; ?>
       <p><strong><?php echo uiTextSnippet('sevslater'); ?></strong></p>
         <input name='save' type='submit' value="<?php echo uiTextSnippet('savecont'); ?>">
     </form>

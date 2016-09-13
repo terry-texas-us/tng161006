@@ -6,7 +6,7 @@ $adminLogin = 1;
 require 'checklogin.php';
 
 initMediaTypes();
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <div id='finddiv'>
   <form name='find2' onsubmit="getNewMwMedia(this, 1); return false;">

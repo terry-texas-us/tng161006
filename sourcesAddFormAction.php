@@ -5,14 +5,14 @@ require 'adminlib.php';
 $adminLogin = 1;
 require 'checklogin.php';
 
-$error_pfx = $ajax ? "error:" : "";
+$error_pfx = $ajax ? 'error:' : '';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
   if ($ajax) {
     echo $error_pfx . $message;
   } else {
-    header("Location: admin_login.php?message=" . urlencode($message));
+    header('Location: admin_login.php?message=' . urlencode($message));
   }
   exit;
 }
@@ -20,7 +20,7 @@ require 'adminlog.php';
 
 $sourceID = ucfirst($sourceID);
 
-if ($session_charset != "UTF-8") {
+if ($session_charset != 'UTF-8') {
   $shorttitle = tng_utf8_decode($shorttitle);
   $title = tng_utf8_decode($title);
   $author = tng_utf8_decode($author);
@@ -35,7 +35,7 @@ $callnum = addslashes($callnum);
 $publisher = addslashes($publisher);
 $actualtext = addslashes($actualtext);
 
-$newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
+$newdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
 
 if (!$repoID) {
   $repoID = 0;

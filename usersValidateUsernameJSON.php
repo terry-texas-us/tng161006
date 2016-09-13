@@ -9,12 +9,12 @@ $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $que
 
 if ($result && tng_num_rows($result)) {
   $message = "<b>$checkuser</b> " . uiTextSnippet('idinuse');
-  $success = "false";
+  $success = 'false';
 } else {
   $message = "<b>$checkuser</b> " . uiTextSnippet('idok');
-  $success = "true";
+  $success = 'true';
 }
 tng_free_result($result);
 
-header("Content-Type: application/json; charset=" . $session_charset);
+header('Content-Type: application/json; charset=' . $session_charset);
 echo "{\"rval\":$success,\"html\":\"$message\"}";

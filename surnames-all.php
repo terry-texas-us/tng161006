@@ -2,15 +2,15 @@
 set_time_limit(0);
 require 'tng_begin.php';
 
-$logstring = "<a href='surnames-all.php'>" . uiTextSnippet('surnamelist') . ": " . uiTextSnippet('allsurnames') . "</a>";
+$logstring = "<a href='surnames-all.php'>" . uiTextSnippet('surnamelist') . ': ' . uiTextSnippet('allsurnames') . '</a>';
 writelog($logstring);
 preparebookmark($logstring);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
-$headSection->setTitle(uiTextSnippet('surnamelist') . " - " . uiTextSnippet('allsurnames'));
+header('Content-type: text/html; charset=' . $session_charset);
+$headSection->setTitle(uiTextSnippet('surnamelist') . ' - ' . uiTextSnippet('allsurnames'));
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,8 +21,8 @@ $headSection->setTitle(uiTextSnippet('surnamelist') . " - " . uiTextSnippet('all
     <h2><img class='icon-md' src='svg/person.svg'><?php echo uiTextSnippet('surnamelist'); ?></h2>
     <br class='clearleft'>
     <?php
-    $wherestr = "";
-    $wherestr2 = "";
+    $wherestr = '';
+    $wherestr2 = '';
 
     $allwhere = getLivingPrivateRestrictions($people_table, false, false);
 
@@ -30,7 +30,7 @@ $headSection->setTitle(uiTextSnippet('surnamelist') . " - " . uiTextSnippet('all
       $wherestr .= "WHERE $allwhere";
       $wherestr2 .= " AND $allwhere";
     }
-    $linkstr = "";
+    $linkstr = '';
     $nosurname = urlencode(uiTextSnippet('nosurname'));
     $query = "SELECT ucase(left(lastname,1)) AS firstchar, ucase( $binary left(lastname,1) ) AS binfirstchar FROM $people_table $wherestr GROUP BY binfirstchar ORDER by binfirstchar";
     $result = tng_query($query);
@@ -39,13 +39,13 @@ $headSection->setTitle(uiTextSnippet('surnamelist') . " - " . uiTextSnippet('all
 
       while ($surname = tng_fetch_assoc($result)) {
         if ($initialchar != 1) {
-          $linkstr .= " ";
+          $linkstr .= ' ';
         }
-        if ($surname['firstchar'] == "") {
+        if ($surname['firstchar'] == '') {
           $surname['firstchar'] = uiTextSnippet('nosurname');
-          $linkstr .= "<a href=\"search.php?mylastname=$nosurname&amp;lnqualify=equals&amp;mybool=AND$treestr\">" . uiTextSnippet('nosurname') . "</a> ";
+          $linkstr .= "<a href=\"search.php?mylastname=$nosurname&amp;lnqualify=equals&amp;mybool=AND$treestr\">" . uiTextSnippet('nosurname') . '</a> ';
         } else {
-          if ($surname['firstchar'] != "_") {
+          if ($surname['firstchar'] != '_') {
             $linkstr .= "<a href=\"#char$initialchar\">{$surname['firstchar']}</a>";
             $firstchars[$initialchar] = $surname['firstchar'];
             $initialchar++;
@@ -59,7 +59,7 @@ $headSection->setTitle(uiTextSnippet('surnamelist') . " - " . uiTextSnippet('all
       <div class="titlebox">
         <h4><?php echo uiTextSnippet('surnamesstarting'); ?></h4>
         <p class="firstchars"><?php echo $linkstr; ?></p>
-        <br><?php echo "<a href='surnames.php'>" . uiTextSnippet('mainsurnamepage') . "</a>"; ?>
+        <br><?php echo "<a href='surnames.php'>" . uiTextSnippet('mainsurnamepage') . '</a>'; ?>
       </div>
 
       <br>
@@ -74,7 +74,7 @@ $headSection->setTitle(uiTextSnippet('surnamelist') . " - " . uiTextSnippet('all
           <tr>
             <td class="sncol">
               <?php
-              $surnamestr = $lnprefixes ? "TRIM(CONCAT_WS(' ',lnprefix,lastname) )" : "lastname";
+              $surnamestr = $lnprefixes ? "TRIM(CONCAT_WS(' ',lnprefix,lastname) )" : 'lastname';
               if ($tngconfig['ucsurnames']) {
                 $surnamestr = "ucase($surnamestr)";
               }
@@ -91,7 +91,7 @@ $headSection->setTitle(uiTextSnippet('surnamelist') . " - " . uiTextSnippet('all
                 $num_in_col_ctr = 0;
                 while ($surname = tng_fetch_assoc($result)) {
                   $surname2 = urlencode($surname['lastname']);
-                  $name = $surname['lastname'] ? "<a href=\"search.php?mylastname=$surname2&amp;lnqualify=equals&amp;mybool=AND$treestr\">{$surname['lowername']}</a>" : "<a href=\"search.php?mylastname=$nosurname&amp;lnqualify=equals&amp;mybool=AND$treestr\">" . uiTextSnippet('nosurname') . "</a>";
+                  $name = $surname['lastname'] ? "<a href=\"search.php?mylastname=$surname2&amp;lnqualify=equals&amp;mybool=AND$treestr\">{$surname['lowername']}</a>" : "<a href=\"search.php?mylastname=$nosurname&amp;lnqualify=equals&amp;mybool=AND$treestr\">" . uiTextSnippet('nosurname') . '</a>';
                   echo "$snnum. $name ({$surname['lncount']})<br>\n";
                   $snnum++;
                   $num_in_col_ctr++;

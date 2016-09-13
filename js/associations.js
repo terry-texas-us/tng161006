@@ -4,9 +4,9 @@ var tnglitbox;
 
 function addAssociation(form) {
     'use strict';
-    if (form.passocID.value === "") {
+    if (form.passocID.value === '') {
         alert(textSnippet('enterassocpersonid'));
-    } else if (form.relationship.value === "") {
+    } else if (form.relationship.value === '') {
         alert(textSnippet('enterrela'));
     } else {
         var params = $(form).serialize();
@@ -18,8 +18,8 @@ function addAssociation(form) {
                 var associationstbl = document.getElementById('associationstbl'),
                     newtr = associationstbl.insertRow(associationstbl.rows.length);
                 newtr.id = "row_" + vars.id;
-                insertCell(newtr, 0, "", getActionButtons(vars, 'Association'));
-                insertCell(newtr, 1, "", vars.display);
+                insertCell(newtr, 0, '', getActionButtons(vars, 'Association'));
+                insertCell(newtr, 1, '', vars.display);
 
                 associationstbl.style.display = '';
                 gotoSection('addassociation', 'associations');

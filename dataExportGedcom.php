@@ -7,7 +7,7 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('gedexport'));
 ?>
 <!DOCTYPE html>
@@ -37,7 +37,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
             while ($branch = tng_fetch_assoc($branchresult)) {
               echo "  <option value=\"{$branch['branch']}\"";
               if ($row['branch'] == $branch['branch']) {
-                echo " selected";
+                echo ' selected';
               }
               echo ">{$branch['description']}</option>\n";
             }
@@ -55,7 +55,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       <input id='exportmedia' name='exportmedia' type='checkbox' value='1' onClick="toggleStuff();">
       <label for='exportmedia'><?php echo uiTextSnippet('exportmedia'); ?></label>
       <br>
-      <div id='exprows' style="display: none">
+      <div id='exprows' style='display: none'>
         <table class='table table-sm'>
           <tr>
             <td><?php echo uiTextSnippet('select'); ?></td>
@@ -67,19 +67,19 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
             $msgID = $mediatype['ID'];
             switch ($msgID) {
               case "photos":
-                $value = strtok($locimppath['photos'], ",");
+                $value = strtok($locimppath['photos'], ',');
                 break;
               case "histories":
-                $value = strtok($locimppath['histories'], ",");
+                $value = strtok($locimppath['histories'], ',');
                 break;
               case "documents":
-                $value = strtok($locimppath['documents'], ",");
+                $value = strtok($locimppath['documents'], ',');
                 break;
-              case "headstones":
-                $value = strtok($locimppath['headstones'], ",");
+              case 'headstones':
+                $value = strtok($locimppath['headstones'], ',');
                 break;
               default:
-                $value = strtok($locimppath['other'], ",");
+                $value = strtok($locimppath['other'], ',');
                 break;
             }
             echo "<tr><td>\n";

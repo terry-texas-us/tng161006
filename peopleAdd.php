@@ -8,14 +8,14 @@ require 'version.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 require_once 'branches.php';
 
 $revstar = checkReview('I');
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('addnewperson'));
 ?>
 <!DOCTYPE html>
@@ -26,11 +26,11 @@ $headSection->setTitle(uiTextSnippet('addnewperson'));
     <?php
     echo $adminHeaderSection->build('people-addnewperson', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
-    //    $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
-    $navList->appendItem([$allowEdit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
-    $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
-    echo $navList->build("addperson");
+    $navList->appendItem([true, 'peopleBrowse.php', uiTextSnippet('browse'), 'findperson']);
+    //    $navList->appendItem([$allowAdd, 'peopleAdd.php', uiTextSnippet('add'), 'addperson']);
+    $navList->appendItem([$allowEdit, 'admin_findreview.php?type=I', uiTextSnippet('review') . $revstar, 'review']);
+    $navList->appendItem([$allowEdit && $allowDelete, 'peopleMerge.php', uiTextSnippet('merge'), 'merge']);
+    echo $navList->build('addperson');
     ?>
     <form name="form1" action="peopleAddFormAction.php" method='post' onSubmit="return trimCheckPersonRequired();">
       <header id='person-header'>
@@ -97,8 +97,8 @@ $headSection->setTitle(uiTextSnippet('addnewperson'));
             <select class='form-control' name="pnameorder">
               <option value='0'><?php echo uiTextSnippet('default'); ?></option>
               <option value='1'><?php echo uiTextSnippet('western'); ?></option>
-              <option value="2"><?php echo uiTextSnippet('oriental'); ?></option>
-              <option value="3"><?php echo uiTextSnippet('lnfirst'); ?></option>
+              <option value='2'><?php echo uiTextSnippet('oriental'); ?></option>
+              <option value='3'><?php echo uiTextSnippet('lnfirst'); ?></option>
             </select>          </div>
         </div>
         <br>
@@ -159,13 +159,13 @@ $headSection->setTitle(uiTextSnippet('addnewperson'));
 <script src='js/people.js'></script>
 <script>
 var tnglitbox;
-var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;
+var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : 'false'); ?>;
 var preferDateFormat = '<?php echo $preferDateFormat; ?>';
 
 var allow_cites = false;
 var allow_notes = false;
 
-var persfamID = "";
+var persfamID = '';
 
 $(document).ready(function() {
     generateID('person', document.form1.personID);
@@ -220,8 +220,8 @@ function trimCheckPersonRequired() {
   <?php
   $swapbranches = "swapBranches(branchids, branchnames, document.form1.branch);\n";
   
-  $dispid = "";
-  $dispname = "";
+  $dispid = '';
+  $dispname = '';
 
   getBranchInfo($treesTable, $branches_table, $dispid, $dispname);
   
@@ -236,7 +236,7 @@ function trimCheckPersonRequired() {
     $branchresult = tng_query($query);
     $branch = tng_fetch_assoc($branchresult);
     $dispname = $branch['description'];
-    $swapbranches = "";
+    $swapbranches = '';
 }
 ?>
 $('#gedcom').on('change', function () {

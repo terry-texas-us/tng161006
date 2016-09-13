@@ -3,12 +3,12 @@ $needMap = true;
 require 'tng_begin.php';
 
 if (!$personID) {
-    header("Location: thispagedoesnotexist.html");
+    header('Location: thispagedoesnotexist.html');
     exit;
 }
 if ($tngprint) {
-    $tngconfig['istart'] = "";
-    $tngconfig['hidemedia'] = "";
+    $tngconfig['istart'] = '';
+    $tngconfig['hidemedia'] = '';
 }
 $defermap = $map['pstartoff'] || $tngconfig['istart'] ? 1 : 0;
 require 'personlib.php';
@@ -19,8 +19,8 @@ $citestring = [];
 $citationctr = 0;
 $citedispctr = 0;
 $firstsection = 1;
-$firstsectionsave = "";
-$tableid = "";
+$firstsectionsave = '';
+$tableid = '';
 $cellnumber = 0;
 
 $indnotes = getNotes($personID, 'I');
@@ -30,7 +30,7 @@ $stdex = getStdExtras($personID);
 $result = getPersonFullPlusDates($personID);
 if (!tng_num_rows($result)) {
     tng_free_result($result);
-    header("Location: thispagedoesnotexist.html");
+    header('Location: thispagedoesnotexist.html');
     exit;
 }
 $flags['imgprev'] = true;
@@ -41,7 +41,7 @@ $rights = determineLivingPrivateRights($row, $rightbranch);
 $row['allow_living'] = $rights['living'];
 $row['allow_private'] = $rights['private'];
 if (!$rightbranch) {
-    $tentative_edit = "";
+    $tentative_edit = '';
 }
 $org_rightbranch = $rightbranch;
 $namestr = getName($row);
@@ -50,16 +50,16 @@ $nameformap = $namestr;
 $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $namestr);
 $treestr = "<a href='showtree.php'>{$treerow['treename']}</a>";
 if ($row['branch']) {
-    $branches = explode(",", $row['branch']);
+    $branches = explode(',', $row['branch']);
     $count = 0;
-    $branchstr = "";
+    $branchstr = '';
     foreach ($branches as $branch) {
       $count++;
       $brresult = getBranchesSimple($branch);
       $brrow = tng_fetch_assoc($brresult);
       $branchstr .= $brrow['description'] ? $brrow['description'] : $branch;
       if ($count < count($branches)) {
-        $branchstr .= ", ";
+        $branchstr .= ', ';
       }
       tng_free_result($brresult);
     }
@@ -75,23 +75,23 @@ preparebookmark("<a href='peopleShowPerson.php?personID=$personID'>" . uiTextSni
 $headTitle = $namestr;
 if ($rights['both']) {
     if ($row['birthdate']) {
-    $headTitle .= " " . uiTextSnippet('birthabbr') . " " . displayDate($row['birthdate']);
+    $headTitle .= ' ' . uiTextSnippet('birthabbr') . ' ' . displayDate($row['birthdate']);
     }
     if ($row['birthplace']) {
-      $headTitle .= " " . $row['birthplace'];
+      $headTitle .= ' ' . $row['birthplace'];
     }
     if ($row['deathdate']) {
-      $headTitle .= " " . uiTextSnippet('deathabbr') . " " . displayDate($row['deathdate']);
+      $headTitle .= ' ' . uiTextSnippet('deathabbr') . ' ' . displayDate($row['deathdate']);
     }
     if ($row['deathplace']) {
-      $headTitle .= " " . $row['deathplace'];
+      $headTitle .= ' ' . $row['deathplace'];
     }
 }
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle($headTitle);
 ?>
 <!DOCTYPE html>
@@ -107,7 +107,7 @@ $headSection->setTitle($headTitle);
 
     $photostr = showSmallPhoto($personID, $namestr, $rights['both'], 0, 'I', $row['sex']);
     if ($rights['both']) {
-      $citekey = $personID . "_";
+      $citekey = $personID . '_';
       $cite = reorderCitation($citekey);
       
       if ($cite) {
@@ -117,7 +117,7 @@ $headSection->setTitle($headTitle);
     echo "<div class='vcard'>\n";
     echo tng_DrawHeading($photostr, $namestr, getYears($row));
 
-    $persontext = "";
+    $persontext = '';
     $persontext .= "<ul>\n";
 
     if ($tng_extras) {
@@ -132,24 +132,24 @@ $headSection->setTitle($headTitle);
     $persontext .= "<table class='table table-sm'>\n";
     resetEvents();
     if ($rights['both']) {
-      $persontext .= showEvent(["text" => uiTextSnippet('name'), "fact" => getName($row, true), "event" => "NAME", "entity" => $personID, "type" => 'I']);
+      $persontext .= showEvent(['text' => uiTextSnippet('name'), 'fact' => getName($row, true), 'event' => 'NAME', 'entity' => $personID, 'type' => 'I']);
       if ($row['title']) {
-        $persontext .= showEvent(["text" => uiTextSnippet('title'), "fact" => $row['title'], "event" => "TITL", "entity" => $personID, "type" => 'I']);
+        $persontext .= showEvent(['text' => uiTextSnippet('title'), 'fact' => $row['title'], 'event' => 'TITL', 'entity' => $personID, 'type' => 'I']);
       }
       if ($row['prefix']) {
-        $persontext .= showEvent(["text" => uiTextSnippet('prefix'), "fact" => $row['prefix'], "event" => "NPFX", "entity" => $personID, "type" => 'I']);
+        $persontext .= showEvent(['text' => uiTextSnippet('prefix'), 'fact' => $row['prefix'], 'event' => 'NPFX', 'entity' => $personID, 'type' => 'I']);
       }
       if ($row['suffix']) {
-        $persontext .= showEvent(["text" => uiTextSnippet('suffix'), "fact" => $row['suffix'], "event" => "NSFX", "entity" => $personID, "type" => 'I']);
+        $persontext .= showEvent(['text' => uiTextSnippet('suffix'), 'fact' => $row['suffix'], 'event' => 'NSFX', 'entity' => $personID, 'type' => 'I']);
       }
       if ($row['nickname']) {
-        $persontext .= showEvent(["text" => uiTextSnippet('nickname'), "fact" => $row['nickname'], "event" => "NICK", "entity" => $personID, "type" => 'I']);
+        $persontext .= showEvent(['text' => uiTextSnippet('nickname'), 'fact' => $row['nickname'], 'event' => 'NICK', 'entity' => $personID, 'type' => 'I']);
       }
       if ($row['private'] && $allowEdit && $allowAdd && $allowDelete) {
-        $persontext .= showEvent(["text" => uiTextSnippet('private'), "fact" => uiTextSnippet('yes')]);
+        $persontext .= showEvent(['text' => uiTextSnippet('private'), 'fact' => uiTextSnippet('yes')]);
       }
-      setEvent(["text" => uiTextSnippet('born'), "fact" => $stdex['BIRT'], "date" => $row['birthdate'], "place" => $row['birthplace'], "event" => "BIRT", "entity" => $personID, "type" => 'I'], $row['birthdatetr']);
-      setEvent(["text" => uiTextSnippet('christened'), "fact" => $stdex['CHR'], "date" => $row['altbirthdate'], "place" => $row['altbirthplace'], "event" => "CHR", "entity" => $personID, "type" => 'I'], $row['altbirthdatetr']);
+      setEvent(['text' => uiTextSnippet('born'), 'fact' => $stdex['BIRT'], 'date' => $row['birthdate'], 'place' => $row['birthplace'], 'event' => 'BIRT', 'entity' => $personID, 'type' => 'I'], $row['birthdatetr']);
+      setEvent(['text' => uiTextSnippet('christened'), 'fact' => $stdex['CHR'], 'date' => $row['altbirthdate'], 'place' => $row['altbirthplace'], 'event' => 'CHR', 'entity' => $personID, 'type' => 'I'], $row['altbirthdatetr']);
     }
     if ($row['sex'] == 'M') {
       $sex = uiTextSnippet('male');
@@ -163,22 +163,22 @@ $headSection->setTitle($headTitle);
         $spouseorder = 'wifeorder';
     } else {
         $sex = uiTextSnippet('unknown');
-        $spouseorder = "";
+        $spouseorder = '';
     }
-    setEvent(["text" => uiTextSnippet('gender'), "fact" => $sex], $nodate);
+    setEvent(['text' => uiTextSnippet('gender'), 'fact' => $sex], $nodate);
 
     if ($rights['both']) {
       if ($rights['lds']) {
-        setEvent(["text" => uiTextSnippet('baptizedlds'), "fact" => $stdex['BAPL'], "date" => $row['baptdate'], "place" => $row['baptplace'], "event" => "BAPL", "entity" => $personID, "type" => 'I'], $row['baptdatetr']);
-        setEvent(["text" => uiTextSnippet('conflds'), "fact" => $stdex['CONL'], "date" => $row['confdate'], "place" => $row['confplace'], "event" => "CONL", "entity" => $personID, "type" => 'I'], $row['confdatetr']);
-        setEvent(["text" => uiTextSnippet('initlds'), "fact" => $stdex['INIT'], "date" => $row['initdate'], "place" => $row['initplace'], "event" => "INIT", "entity" => $personID, "type" => 'I'], $row['initdatetr']);
-        setEvent(["text" => uiTextSnippet('endowedlds'), "fact" => $stdex['ENDL'], "date" => $row['endldate'], "place" => $row['endlplace'], "event" => "ENDL", "entity" => $personID, "type" => 'I'], $row['endldatetr']);
+        setEvent(['text' => uiTextSnippet('baptizedlds'), 'fact' => $stdex['BAPL'], 'date' => $row['baptdate'], 'place' => $row['baptplace'], 'event' => 'BAPL', 'entity' => $personID, 'type' => 'I'], $row['baptdatetr']);
+        setEvent(['text' => uiTextSnippet('conflds'), 'fact' => $stdex['CONL'], 'date' => $row['confdate'], 'place' => $row['confplace'], 'event' => 'CONL', 'entity' => $personID, 'type' => 'I'], $row['confdatetr']);
+        setEvent(['text' => uiTextSnippet('initlds'), 'fact' => $stdex['INIT'], 'date' => $row['initdate'], 'place' => $row['initplace'], 'event' => 'INIT', 'entity' => $personID, 'type' => 'I'], $row['initdatetr']);
+        setEvent(['text' => uiTextSnippet('endowedlds'), 'fact' => $stdex['ENDL'], 'date' => $row['endldate'], 'place' => $row['endlplace'], 'event' => 'ENDL', 'entity' => $personID, 'type' => 'I'], $row['endldatetr']);
       }
       doCustomEvents($personID, 'I');
 
-      setEvent(["text" => uiTextSnippet('died'), "fact" => $stdex['DEAT'], "date" => $row['deathdate'], "place" => $row['deathplace'], "event" => "DEAT", "entity" => $personID, "type" => 'I'], $row['deathdatetr']);
+      setEvent(['text' => uiTextSnippet('died'), 'fact' => $stdex['DEAT'], 'date' => $row['deathdate'], 'place' => $row['deathplace'], 'event' => 'DEAT', 'entity' => $personID, 'type' => 'I'], $row['deathdatetr']);
       $burialmsg = $row['burialtype'] ? uiTextSnippet('cremated') : uiTextSnippet('buried');
-      setEvent(["text" => $burialmsg, "fact" => $stdex['BURI'], "date" => $row['burialdate'], "place" => $row['burialplace'], "event" => "BURI", "entity" => $personID, "type" => 'I'], $row['burialdatetr']);
+      setEvent(['text' => $burialmsg, 'fact' => $stdex['BURI'], 'date' => $row['burialdate'], 'place' => $row['burialplace'], 'event' => 'BURI', 'entity' => $personID, 'type' => 'I'], $row['burialdatetr']);
     }
     ksort($events);
     foreach ($events as $event) {
@@ -187,14 +187,14 @@ $headSection->setTitle($headTitle);
     if ($rights['both']) {
       $assocresult = getAssociations($personID);
       while ($assoc = tng_fetch_assoc($assocresult)) {
-        $persontext .= showEvent(["text" => uiTextSnippet('association'), "fact" => formatAssoc($assoc)]);
+        $persontext .= showEvent(['text' => uiTextSnippet('association'), 'fact' => formatAssoc($assoc)]);
       }
       tng_free_result($assocresult);
     }
-    $notes = "";
+    $notes = '';
     if ($notestogether == 1) {
       if ($rights['both']) {
-        $notes = buildGenNotes($indnotes, $personID, "--x-general-x--");
+        $notes = buildGenNotes($indnotes, $personID, '--x-general-x--');
       }
       elseif ($row['living']) {
         $notes = uiTextSnippet('livingnote');
@@ -204,21 +204,21 @@ $headSection->setTitle($headTitle);
         $persontext .= "<td id='notes1'>" . uiTextSnippet('notes') . "</td>\n";
         $persontext .= "<td colspan='2'><div class='notearea'>$notes</div></td>\n";
         $persontext .= "</tr>\n";
-        $notes = ""; //wipe it out so we don't get a link at the top
+        $notes = ''; //wipe it out so we don't get a link at the top
       }
     }
     // [ts] stuffing $personID into `date` array element for pass to showEvent requires special text snippet processing
     //      determine if this is neccessary. 
-    $persontext .= showEvent(["text" => uiTextSnippet('personid'), "date" => $personID, "place" => $treestr, "np" => 1]);
+    $persontext .= showEvent(['text' => uiTextSnippet('personid'), 'date' => $personID, 'place' => $treestr, 'np' => 1]);
     if ($row['changedate'] || ( $allowEdit && $rightbranch )) {
       $row['changedate'] = displayDate($row['changedate'], false);
       if ($allowEdit && $rightbranch) {
         if ($row['changedate']) {
-          $row['changedate'] .= " | ";
+          $row['changedate'] .= ' | ';
         }
-        $row['changedate'] .= "<a href='peopleEdit.php?personID=$personID&amp;cw=1' target='_blank'>" . uiTextSnippet('edit') . "</a>";
+        $row['changedate'] .= "<a href='peopleEdit.php?personID=$personID&amp;cw=1' target='_blank'>" . uiTextSnippet('edit') . '</a>';
       }
-      $persontext .= showEvent(["text" => uiTextSnippet('lastmodified'), "fact" => $row['changedate']]);
+      $persontext .= showEvent(['text' => uiTextSnippet('lastmodified'), 'fact' => $row['changedate']]);
     }
     $persontext .= "</table>\n";
     $persontext .= "<br>\n";
@@ -229,10 +229,10 @@ $headSection->setTitle($headTitle);
     if ($parents && tng_num_rows($parents)) {
       while ($parent = tng_fetch_assoc($parents)) {
         $persontext .= "<table class='table table-sm'>\n";
-        $tableid = "fam" . $parent['familyID'] . "_";
+        $tableid = 'fam' . $parent['familyID'] . '_';
         $cellnumber = 0;
         resetEvents();
-        getCitations($personID . "::" . $parent['familyID']);
+        getCitations($personID . '::' . $parent['familyID']);
 
         $fatherHtml = '';
         $gotfather = getParentData($parent['familyID'], 'husband');
@@ -247,23 +247,23 @@ $headSection->setTitle($headTitle);
             $fatherlink = "<a href='peopleShowPerson.php?personID={$fathrow['personID']}'>$fathname</a>";
           }
           else {
-            $fatherlink = "";
+            $fatherlink = '';
           }
           if ($frights['both']) {
             $fatherlink .= $birthinfo;
             if ($fatherlink) {
               $age = age($fathrow);
               if ($age) {
-                $fatherlink .= " &nbsp;(" . uiTextSnippet('age') . " $age)";
+                $fatherlink .= ' &nbsp;(' . uiTextSnippet('age') . " $age)";
               }
             }
           }
           $label = $fathrow['sex'] == 'F' ? uiTextSnippet('mother') : uiTextSnippet('father');
-          $fatherHtml .= showEvent(["text" => $label, "fact" => $fatherlink]);
+          $fatherHtml .= showEvent(['text' => $label, 'fact' => $fatherlink]);
           if ($rights['both'] && $parent['frel']) {
             $rel = $parent['frel'];
             $relstr = uiTextSnippet($rel) ? uiTextSnippet($rel) : $rel;
-            $fatherHtml .= showEvent(["text" => uiTextSnippet('relationship2'), "fact" => $relstr]);
+            $fatherHtml .= showEvent(['text' => uiTextSnippet('relationship2'), 'fact' => $relstr]);
           }
           tng_free_result($gotfather);
         }
@@ -281,23 +281,23 @@ $headSection->setTitle($headTitle);
             $motherlink = "<a href=\"peopleShowPerson.php?personID={$mothrow['personID']}\">$mothname</a>";
           }
           else {
-            $motherlink = "";
+            $motherlink = '';
           }
           if ($mrights['both']) {
             $motherlink .= $birthinfo;
             if ($motherlink) {
               $age = age($mothrow);
               if ($age) {
-                $motherlink .= " &nbsp;(" . uiTextSnippet('age') . " $age)";
+                $motherlink .= ' &nbsp;(' . uiTextSnippet('age') . " $age)";
               }
             }
           }
           $label = $mothrow['sex'] == 'M' ? uiTextSnippet('father') : uiTextSnippet('mother');
-          $motherHtml .= showEvent(["text" => uiTextSnippet('mother'), "fact" => $motherlink]);
+          $motherHtml .= showEvent(['text' => uiTextSnippet('mother'), 'fact' => $motherlink]);
           if ($rights['both'] && $parent['mrel']) {
             $rel = $parent['mrel'];
             $relstr = uiTextSnippet($rel) ? uiTextSnippet($rel) : $rel;
-            $motherHtml .= showEvent(["text" => uiTextSnippet('relationship2'), "fact" => $relstr]);
+            $motherHtml .= showEvent(['text' => uiTextSnippet('relationship2'), 'fact' => $relstr]);
           }
           tng_free_result($gotmother);
         }
@@ -306,12 +306,12 @@ $headSection->setTitle($headTitle);
         
         $parentsEventsHtml = '';
         if ($rights['both'] && $rights['lds'] && $tngconfig['pardata'] < 2) {
-          setEvent(["text" => uiTextSnippet('sealedplds'), "date" => $parent['sealdate'], "place" => $parent['sealplace'], "event" => "SLGC", "entity" => "$personID::{$parent['familyID']}", "type" => "C", "nomap" => 1], $parent['sealdatetr']);
+          setEvent(['text' => uiTextSnippet('sealedplds'), 'date' => $parent['sealdate'], 'place' => $parent['sealplace'], 'event' => 'SLGC', 'entity' => "$personID::{$parent['familyID']}", 'type' => 'C', 'nomap' => 1], $parent['sealdatetr']);
         }
         $gotparents = getFamilyData($parent['familyID']);
         $parentrow = tng_fetch_assoc($gotparents);
         tng_free_result($gotparents);
-        $parent['personID'] = "";
+        $parent['personID'] = '';
 
         if ($tngconfig['pardata'] < 2) { // [ts] 0 all events or 1 standard events only
           $prights = determineLivingPrivateRights($parentrow);
@@ -327,11 +327,11 @@ $headSection->setTitle($headTitle);
                 if (!is_array($stdexf['MARR'])) {
                   $stdexf['MARR'] = [];
                 }
-                array_unshift($stdexf['MARR'], uiTextSnippet('type') . ": " . $parent['marrtype']);
+                array_unshift($stdexf['MARR'], uiTextSnippet('type') . ': ' . $parent['marrtype']);
               }
             }
-            setEvent(["text" => uiTextSnippet('married'), "fact" => $stdexf['MARR'], "date" => $parentrow['marrdate'], "place" => $parentrow['marrplace'], "event" => "MARR", "entity" => $parentrow['familyID'], "type" => 'F', "nomap" => 1], $parentrow['marrdatetr']);
-            setEvent(["text" => uiTextSnippet('divorced'), "fact" => $stdexf['DIV'], "date" => $parentrow['divdate'], "place" => $parentrow['divplace'], "event" => "DIV", "entity" => $parentrow['familyID'], "type" => 'F', "nomap" => 1], $parentrow['divdatetr']);
+            setEvent(['text' => uiTextSnippet('married'), 'fact' => $stdexf['MARR'], 'date' => $parentrow['marrdate'], 'place' => $parentrow['marrplace'], 'event' => 'MARR', 'entity' => $parentrow['familyID'], 'type' => 'F', 'nomap' => 1], $parentrow['marrdatetr']);
+            setEvent(['text' => uiTextSnippet('divorced'), 'fact' => $stdexf['DIV'], 'date' => $parentrow['divdate'], 'place' => $parentrow['divplace'], 'event' => 'DIV', 'entity' => $parentrow['familyID'], 'type' => 'F', 'nomap' => 1], $parentrow['divdatetr']);
 
             if (!$tngconfig['pardata']) {
               doCustomEvents($parent['familyID'], 'F', 1);
@@ -346,27 +346,27 @@ $headSection->setTitle($headTitle);
             }
             $assocresult = getAssociations($parent['familyID']);
             while ($assoc = tng_fetch_assoc($assocresult)) {
-              $parentsEventsHtml .= showEvent(["text" => uiTextSnippet('association'), "fact" => formatAssoc($assoc)]);
+              $parentsEventsHtml .= showEvent(['text' => uiTextSnippet('association'), 'fact' => formatAssoc($assoc)]);
             }
             tng_free_result($assocresult);
 
             if (!$tngconfig['pardata']) {
-              $famnotes2 = "";
+              $famnotes2 = '';
               if (!$notestogether) {
                 $famnotes2 = buildNotes($famnotes, $parent['familyID']);
               }
               else {
-                $famnotes2 = buildGenNotes($famnotes, $parent['familyID'], "--x-general-x--");
+                $famnotes2 = buildGenNotes($famnotes, $parent['familyID'], '--x-general-x--');
               }
               if ($famnotes2) {
                 $parentsEventsHtml .= "<tr>\n";
-                $parentsEventsHtml .= "<td>" . uiTextSnippet('notes') . "</td>\n";
+                $parentsEventsHtml .= '<td>' . uiTextSnippet('notes') . "</td>\n";
                 $parentsEventsHtml .= "<td colspan='2'><span><div class='notearea'>$famnotes2</div></span></td>\n";
                 $parentsEventsHtml .= "</tr>\n";
               }
               foreach ($mediatypes as $mediatype) {
                 $mediatypeID = $mediatype['ID'];
-                $parentsEventsHtml .= writeMedia($fammedia, $mediatypeID, "p");
+                $parentsEventsHtml .= writeMedia($fammedia, $mediatypeID, 'p');
               }
               $parentsEventsHtml .= writeAlbums($famalbums);
             }
@@ -376,7 +376,7 @@ $headSection->setTitle($headTitle);
         $persontext .= $motherHtml;
 
         $persontext .= $parentsEventsHtml;
-        $persontext .= showEvent(["text" => uiTextSnippet('familyid'), "date" => $parent['familyID'], "place" => "<a href=\"familiesShowFamily.php?familyID={$parent['familyID']}\">" . uiTextSnippet('groupsheet') . "</a>", "np" => 1]);
+        $persontext .= showEvent(['text' => uiTextSnippet('familyid'), 'date' => $parent['familyID'], 'place' => "<a href=\"familiesShowFamily.php?familyID={$parent['familyID']}\">" . uiTextSnippet('groupsheet') . '</a>', 'np' => 1]);
         $persontext .= "</table>\n";
         $persontext .= "<br>\n";
       }
@@ -401,7 +401,7 @@ $headSection->setTitle($headTitle);
 
     while ($marriagerow = tng_fetch_assoc($marriages)) {
       $persontext .= "<table class='table table-sm'>\n";
-      $tableid = "fam" . $marriagerow['familyID'] . "_";
+      $tableid = 'fam' . $marriagerow['familyID'] . '_';
       $cellnumber = 0;
       $famnotes = getNotes($marriagerow['familyID'], 'F');
       getCitations($marriagerow['familyID']);
@@ -410,7 +410,7 @@ $headSection->setTitle($headTitle);
         if (!is_array($stdexf['MARR'])) {
           $stdexf['MARR'] = [];
         }
-        array_unshift($stdexf['MARR'], uiTextSnippet('type') . ": " . $marriagerow['marrtype']);
+        array_unshift($stdexf['MARR'], uiTextSnippet('type') . ': ' . $marriagerow['marrtype']);
       }
 
       if (!$spouseorder) {
@@ -434,22 +434,22 @@ $headSection->setTitle($headTitle);
           if ($spouselink) {
             $age = age($spouserow);
             if ($age) {
-              $spouselink .= " &nbsp;(" . uiTextSnippet('age') . " $age)";
+              $spouselink .= ' &nbsp;(' . uiTextSnippet('age') . " $age)";
             }
           }
         }
         tng_free_result($spouseresult);
       }
       else {
-        $spouselink = "";
+        $spouselink = '';
         $srights['both'] = true;
       }
-      $marrstr = $marrtot > 1 ? " $marrcount" : "";
+      $marrstr = $marrtot > 1 ? " $marrcount" : '';
       if ($srights['both']) {
-        $persontext .= showEvent(["text" => uiTextSnippet('family') . "$marrstr", "fact" => $spouselink, "entity" => $marriagerow['familyID'], "type" => 'F']);
+        $persontext .= showEvent(['text' => uiTextSnippet('family') . "$marrstr", 'fact' => $spouselink, 'entity' => $marriagerow['familyID'], 'type' => 'F']);
       }
       else {
-        $persontext .= showEvent(["text" => uiTextSnippet('family') . "$marrstr", "fact" => $spouselink]);
+        $persontext .= showEvent(['text' => uiTextSnippet('family') . "$marrstr", 'fact' => $spouselink]);
       }
       $rightfbranch = checkbranch($marriagerow['branch']) ? 1 : 0;
       $marrights = determineLivingPrivateRights($marriagerow);
@@ -460,11 +460,11 @@ $headSection->setTitle($headTitle);
       if ($marrights['both'] && $srights['both']) {
         resetEvents();
 
-        setEvent(["text" => uiTextSnippet('married'), "fact" => $stdexf['MARR'], "date" => $marriagerow['marrdate'], "place" => $marriagerow['marrplace'], "event" => "MARR", "entity" => $marriagerow['familyID'], "type" => 'F'], $marriagerow['marrdatetr']);
-        setEvent(["text" => uiTextSnippet('divorced'), "fact" => $stdexf['DIV'], "date" => $marriagerow['divdate'], "place" => $marriagerow['divplace'], "event" => "DIV", "entity" => $marriagerow['familyID'], "type" => 'F'], $marriagerow['divdatetr']);
+        setEvent(['text' => uiTextSnippet('married'), 'fact' => $stdexf['MARR'], 'date' => $marriagerow['marrdate'], 'place' => $marriagerow['marrplace'], 'event' => 'MARR', 'entity' => $marriagerow['familyID'], 'type' => 'F'], $marriagerow['marrdatetr']);
+        setEvent(['text' => uiTextSnippet('divorced'), 'fact' => $stdexf['DIV'], 'date' => $marriagerow['divdate'], 'place' => $marriagerow['divplace'], 'event' => 'DIV', 'entity' => $marriagerow['familyID'], 'type' => 'F'], $marriagerow['divdatetr']);
 
         if ($marrights['lds']) {
-          setEvent(["text" => uiTextSnippet('sealedslds'), "fact" => $stdexf['SLGS'], "date" => $marriagerow['sealdate'], "place" => $marriagerow['sealplace'], "event" => "SLGS", "entity" => $marriagerow['familyID'], "type" => 'F'], $marriagerow['sealdatetr']);
+          setEvent(['text' => uiTextSnippet('sealedslds'), 'fact' => $stdexf['SLGS'], 'date' => $marriagerow['sealdate'], 'place' => $marriagerow['sealplace'], 'event' => 'SLGS', 'entity' => $marriagerow['familyID'], 'type' => 'F'], $marriagerow['sealdatetr']);
         }
         doCustomEvents($marriagerow['familyID'], 'F');
         ksort($events);
@@ -473,20 +473,20 @@ $headSection->setTitle($headTitle);
         }
         $assocresult = getAssociations($marriagerow['familyID']);
         while ($assoc = tng_fetch_assoc($assocresult)) {
-          $persontext .= showEvent(["text" => uiTextSnippet('association'), "fact" => formatAssoc($assoc)]);
+          $persontext .= showEvent(['text' => uiTextSnippet('association'), 'fact' => formatAssoc($assoc)]);
         }
         tng_free_result($assocresult);
 
-        $famnotes2 = "";
+        $famnotes2 = '';
         if (!$notestogether) {
           $famnotes2 = buildNotes($famnotes, $marriagerow['familyID']);
         }
         else {
-          $famnotes2 = buildGenNotes($famnotes, $marriagerow['familyID'], "--x-general-x--");
+          $famnotes2 = buildGenNotes($famnotes, $marriagerow['familyID'], '--x-general-x--');
         }
         if ($famnotes2) {
           $persontext .= "<tr>\n";
-          $persontext .= "<td>" . uiTextSnippet('notes') . "</td>\n";
+          $persontext .= '<td>' . uiTextSnippet('notes') . "</td>\n";
           $persontext .= "<td colspan='2'><span><div class=\"notearea\">$famnotes2</div></span></td>\n";
           $persontext .= "</tr>\n";
         }
@@ -498,7 +498,7 @@ $headSection->setTitle($headTitle);
 
       if ($children && tng_num_rows($children)) {
         $persontext .= "<tr>\n";
-        $persontext .= "<td>" . uiTextSnippet('children') . "</td>\n";
+        $persontext .= '<td>' . uiTextSnippet('children') . "</td>\n";
         $persontext .= "<td colspan='2'>\n";
 
         $kidcount = 1;
@@ -506,7 +506,7 @@ $headSection->setTitle($headTitle);
         while ($child = tng_fetch_assoc($children)) {
           $childID = $child['personID'];
           $child['gedcom'] = '';
-          $ifkids = $child['haskids'] ? "<a href=\"descend.php?personID=$childID\" title=\"" . uiTextSnippet('descendants') . "\" class=\"descindicator\"><strong>+</strong></a>" : "&nbsp;";
+          $ifkids = $child['haskids'] ? "<a href=\"descend.php?personID=$childID\" title=\"" . uiTextSnippet('descendants') . "\" class=\"descindicator\"><strong>+</strong></a>" : '&nbsp;';
           $birthinfo = getBirthInfo($child);
           $crights = determineLivingPrivateRights($child);
           $child['allow_living'] = $crights['living'];
@@ -520,7 +520,7 @@ $headSection->setTitle($headTitle);
               $persontext .= $birthinfo;
               $age = age($child);
               if ($age) {
-                $persontext .= " &nbsp;(" . uiTextSnippet('age') . " $age)";
+                $persontext .= ' &nbsp;(' . uiTextSnippet('age') . " $age)";
               }
             }
             $persontext .= "</span></td></tr>\n";
@@ -535,7 +535,7 @@ $headSection->setTitle($headTitle);
       }
       foreach ($mediatypes as $mediatype) {
         $mediatypeID = $mediatype['ID'];
-        $persontext .= writeMedia($fammedia, $mediatypeID, "s");
+        $persontext .= writeMedia($fammedia, $mediatypeID, 's');
       }
       $persontext .= writeAlbums($famalbums);
 
@@ -543,13 +543,13 @@ $headSection->setTitle($headTitle);
         $marriagerow['changedate'] = displayDate($marriagerow['changedate']);
         if ($allowEdit && $rightfbranch) {
           if ($marriagerow['changedate']) {
-            $marriagerow['changedate'] .= " | ";
+            $marriagerow['changedate'] .= ' | ';
           }
-          $marriagerow['changedate'] .= "<a href=\"familiesEdit.php?familyID={$marriagerow['familyID']}&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>";
+          $marriagerow['changedate'] .= "<a href=\"familiesEdit.php?familyID={$marriagerow['familyID']}&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . '</a>';
         }
-        $persontext .= showEvent(["text" => uiTextSnippet('lastmodified'), "fact" => $marriagerow['changedate']]);
+        $persontext .= showEvent(['text' => uiTextSnippet('lastmodified'), 'fact' => $marriagerow['changedate']]);
       }
-      $persontext .= showEvent(["text" => uiTextSnippet('familyid'), "date" => $marriagerow['familyID'], "place" => "<a href=\"familiesShowFamily.php?familyID={$marriagerow['familyID']}\">" . uiTextSnippet('groupsheet') . "</a>", "np" => 1]);
+      $persontext .= showEvent(['text' => uiTextSnippet('familyid'), 'date' => $marriagerow['familyID'], 'place' => "<a href=\"familiesShowFamily.php?familyID={$marriagerow['familyID']}\">" . uiTextSnippet('groupsheet') . '</a>', 'np' => 1]);
       $persontext .= "</table>\n";
       $persontext .= "<br>\n";
     }
@@ -573,11 +573,11 @@ $headSection->setTitle($headTitle);
               $persontext .= "<div class='loadmap'>" . uiTextSnippet('loadmap') . "<br>\n";
                 $persontext .= "<img src='img/loadmap.gif' width='150' height='150'>\n";
               $persontext .= "</div>\n";
-            $persontext .= "</a>";
+            $persontext .= '</a>';
           }
         $persontext .= "</div>\n";
       $persontext .= "</td>\n";
-      $mapheight = (intval($map['indh']) - 40) . "px";
+      $mapheight = (intval($map['indh']) - 40) . 'px';
       $persontext .= "<td>\n";
         $persontext .= "<div style='height:{$mapheight};' id='mapevents'>\n";
           $persontext .= "<table class='table table-sm'>\n";
@@ -608,7 +608,7 @@ $headSection->setTitle($headTitle);
               $dateforremoteballoon = $dateforeventtable = displayDate($val['eventdate']);
               $dateforlocalballoon = htmlspecialchars(tng_real_escape_string($dateforremoteballoon), ENT_QUOTES, $session_charset);
               $description = $val['description'];
-              $balloondesc = str_replace("\n", " ", $description);
+              $balloondesc = str_replace("\n", ' ', $description);
               if ($place) {
                 $persontext .= "<tr>\n";
                 $persontext .= "<td>\n";
@@ -618,10 +618,10 @@ $headSection->setTitle($headTitle);
                   if ($map['showallpins'] || !in_array($place, $usedplaces)) {
                     $markerIcon++;
                     $usedplaces[] = $place;
-                    $savedplaces[] = ["place" => $place, "key" => $key];
+                    $savedplaces[] = ['place' => $place, 'key' => $key];
                     $locations2map[$key]['htmlcontent'] = "<div class=\"mapballoon\"><strong>{$val['fixedplace']}</strong><br><br>$event: $dateforlocalballoon";
                     $locations2map[$key]['htmlcontent'] .= "<br><br><a href=\"https://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($directionballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">" .
-                        uiTextSnippet('getdirections') . "</a>" . uiTextSnippet('directionsto') . " $directionplace</div>";
+                        uiTextSnippet('getdirections') . '</a>' . uiTextSnippet('directionsto') . " $directionplace</div>";
                     $thismarker = $markerIcon;
                   }
                   else {
@@ -630,7 +630,7 @@ $headSection->setTitle($headTitle);
                       if ($savedplaces[$i]['place'] == $place) {
                         $thismarker = $i + 1;
                         $thiskey = $savedplaces[$i]['key'];
-                        $locations2map[$thiskey]['htmlcontent'] = str_replace("</div>", "<br>$event: $dateforlocalballoon</div>", $locations2map[$thiskey]['htmlcontent']);
+                        $locations2map[$thiskey]['htmlcontent'] = str_replace('</div>', "<br>$event: $dateforlocalballoon</div>", $locations2map[$thiskey]['htmlcontent']);
                         break;
                       }
                     }
@@ -641,7 +641,7 @@ $headSection->setTitle($headTitle);
                   $map['pins'] ++;
                 }
                 else {
-                  $persontext .= "&nbsp;";
+                  $persontext .= '&nbsp;';
                 }
                 $persontext .= "</td>\n";
                 $persontext .= "<td><span class='small'><strong>$event</strong>";
@@ -656,7 +656,7 @@ $headSection->setTitle($headTitle);
                 $persontext .= "</td>\n";
                 $persontext .= "</tr>\n";
                 if ($val['notes']) {
-                  $locations2map[$key]['htmlcontent'] = str_replace("</div>", "<br><br>" . tng_real_escape_string($val['notes']) . "</div>", $locations2map[$key]['htmlcontent']);
+                  $locations2map[$key]['htmlcontent'] = str_replace('</div>', '<br><br>' . tng_real_escape_string($val['notes']) . '</div>', $locations2map[$key]['htmlcontent']);
                 }
               }
             }
@@ -675,7 +675,7 @@ $headSection->setTitle($headTitle);
       $persontext .= "</table>\n";
       $persontext .= "</td>\n</tr>\n";
       if ($nonzeroplaces) {
-        $persontext .= "<tr><td>" . uiTextSnippet('gmaplegend') . "</td>\n";
+        $persontext .= '<tr><td>' . uiTextSnippet('gmaplegend') . "</td>\n";
         $persontext .= "<td colspan='2'><span class=\"small\">";
         for ($i = 1; $i < 7; $i++) {
           $persontext .= "<img src=\"img/" . ${"pinplacelevel" . $i} . ".png\" alt='' height=\"17\" width='10'>&nbsp;: " . uiTextSnippet("level$i") . " &nbsp;&nbsp;&nbsp;&nbsp;\n";
@@ -698,7 +698,7 @@ $headSection->setTitle($headTitle);
     }
     if ($notestogether != 1) {
       if ($rights['both']) {
-        $notes = $notestogether ? buildGenNotes($indnotes, $personID, "--x-general-x--") : buildNotes($indnotes, $personID);
+        $notes = $notestogether ? buildGenNotes($indnotes, $personID, '--x-general-x--') : buildNotes($indnotes, $personID);
       }
       else {
         $notes = uiTextSnippet('livingnote');
@@ -735,14 +735,14 @@ $headSection->setTitle($headTitle);
       foreach ($citestring as $cite) {
         $persontext .= "<li><a name='cite" . ++$citectr . "'></a>$cite<br>";
         if ($citectr < $count) {
-          $persontext .= "<br>";
+          $persontext .= '<br>';
         }
         $persontext .= "</li>\n";
       }
-      $persontext .= "</ol>";
+      $persontext .= '</ol>';
       
       if ($tngconfig['scrollcite']) {
-        $persontext .= "</div>";
+        $persontext .= '</div>';
       }
       $persontext .= "</td>\n";
       $persontext .= "</tr>\n";
@@ -769,14 +769,14 @@ $headSection->setTitle($headTitle);
       $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('all');\" id=\"tng_alink\">" . uiTextSnippet('all') . "</a>\n";
     }
     else {
-      $innermenu = "<span>" . uiTextSnippet('persinfo') . "</span>\n";
+      $innermenu = '<span>' . uiTextSnippet('persinfo') . "</span>\n";
     }
     if ($allow_pdf && $rightbranch) {
       $innermenu .= "<a  class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ind&amp;personID=$personID');return false;\">PDF</a>\n";
     }
     $rightbranch = $org_rightbranch;
 
-    echo buildPersonMenu("person", $personID);
+    echo buildPersonMenu('person', $personID);
     echo "<br>\n";
     echo "<div class='pub-innermenu small'>\n";
       echo $innermenu;
@@ -850,7 +850,7 @@ $headSection->setTitle($headTitle);
 
 <?php if ($tentative_edit) { ?>
   <script>
-    var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;
+    var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : 'false'); ?>;
     var preferDateFormat = '<?php echo $preferDateFormat; ?>';
   </script>
   <script src='js/tentedit.js'></script>

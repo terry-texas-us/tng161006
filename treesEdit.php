@@ -8,7 +8,7 @@ require 'version.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 $query = "SELECT * FROM $treesTable";
@@ -46,7 +46,7 @@ $nrow = tng_fetch_assoc($nresult);
 $ncount = number_format($nrow['ncount']);
 tng_free_result($nresult);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifytree'));
 ?>
 <!DOCTYPE html>
@@ -58,10 +58,10 @@ $headSection->setTitle(uiTextSnippet('modifytree'));
     echo $adminHeaderSection->build('trees-modifytree', $message);
     $navList = new navList('');
     $allow_add_tree = $allowAdd;
-    $navList->appendItem([true, 'treesBrowse.php', uiTextSnippet('search'), "findtree"]);
-    $navList->appendItem([$allow_add_tree, 'treesAdd.php', uiTextSnippet('add'), "addtree"]);
-    //    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
-    echo $navList->build("edit");
+    $navList->appendItem([true, 'treesBrowse.php', uiTextSnippet('search'), 'findtree']);
+    $navList->appendItem([$allow_add_tree, 'treesAdd.php', uiTextSnippet('add'), 'addtree']);
+    //    $navList->appendItem([$allowEdit, '#', uiTextSnippet('edit'), 'edit']);
+    echo $navList->build('edit');
     ?>
     <form name='form1' action="treesEditFormAction.php" method='post' onSubmit="return validateForm();">
       <section class='card'>
@@ -137,7 +137,7 @@ $headSection->setTitle(uiTextSnippet('modifytree'));
           </div>
           <div class='footer'>
             <label>
-              <input name='private' type='checkbox' value='1'<?php if ($row['secret']) {echo " checked";} ?>> <?php echo uiTextSnippet('keepprivate'); ?>
+              <input name='private' type='checkbox' value='1'<?php if ($row['secret']) {echo ' checked';} ?>> <?php echo uiTextSnippet('keepprivate'); ?>
             </label>
           </div>
         </div>

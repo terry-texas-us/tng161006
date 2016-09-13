@@ -6,7 +6,7 @@ require 'checklogin.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: login.php?message=" . urlencode($message));
+  header('Location: login.php?message=' . urlencode($message));
   exit;
 }
 
@@ -16,9 +16,9 @@ if ($father) {
   $row = tng_fetch_assoc($result);
   tng_free_result($result);
 } else {
-  $row['lastname'] = $row['lnprefix'] = "";
+  $row['lastname'] = $row['lnprefix'] = '';
 }
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 
 require_once 'eventlib.php';
 ?>
@@ -111,8 +111,8 @@ require_once 'eventlib.php';
           <select class='form-control' name="pnameorder">
             <option value='0'><?php echo uiTextSnippet('default'); ?></option>
             <option value='1'><?php echo uiTextSnippet('western'); ?></option>
-            <option value="2"><?php echo uiTextSnippet('oriental'); ?></option>
-            <option value="3"><?php echo uiTextSnippet('lnfirst'); ?></option>
+            <option value='2'><?php echo uiTextSnippet('oriental'); ?></option>
+            <option value='3'><?php echo uiTextSnippet('lnfirst'); ?></option>
           </select>
         </div>
       </div>
@@ -128,7 +128,7 @@ require_once 'eventlib.php';
       echo buildEventRow('deathdate', 'deathplace', 'DEAT', '');
       echo buildEventRow('burialdate', 'burialplace', 'BURI', '');
       if ($allow_lds) {
-        echo "<br>";
+        echo '<br>';
         echo buildEventRow('baptdate', 'baptplace', 'BAPL', '');
         echo buildEventRow('confdate', 'confplace', 'CONL', '');
         echo buildEventRow('initdate', 'initplace', 'INIT', '');

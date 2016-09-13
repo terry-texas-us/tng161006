@@ -1,4 +1,4 @@
-var newpersongender = "";
+var newpersongender = '';
 var spouseorder = '';
 function editPerson(personID, slot, gender) {
     if (personID) {
@@ -254,8 +254,8 @@ function unlinkChild(personID, action) {
 
 function removeSpouse(spouse, spousedisplay) {
     if (spouse.value) {
-        spouse.value = "";
-        spousedisplay.value = "";
+        spouse.value = '';
+        spousedisplay.value = '';
     }
 }
 

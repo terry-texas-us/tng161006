@@ -2,7 +2,7 @@
 require 'tng_begin.php';
 
 if (!$personID) {
-  die("no args");
+  die('no args');
 }
 require $subroot . 'pedconfig.php';
 require 'personlib.php';
@@ -16,9 +16,9 @@ if ($tngmore) {
 
 $detail_link = "ahnentafel.php?personID=$personID&parentset=$parentset&generations=$generations";
 if ($pedigree['regnotes']) {
-  $detail_link = "<a href=\"{$detail_link}&tngless=1\">" . uiTextSnippet('lessdetail') . "</a>";
+  $detail_link = "<a href=\"{$detail_link}&tngless=1\">" . uiTextSnippet('lessdetail') . '</a>';
 } else {
-  $detail_link = "<a href=\"{$detail_link}&tngmore=1\">" . uiTextSnippet('moredetail') . "</a>";
+  $detail_link = "<a href=\"{$detail_link}&tngmore=1\">" . uiTextSnippet('moredetail') . '</a>';
 }
 
 $generation = 1;
@@ -33,7 +33,7 @@ $lastlastgen = [];
 $result = getPersonFullPlusDates($personID);
 if (!tng_num_rows($result)) {
   tng_free_result($result);
-  header("Location: thispagedoesnotexist.html");
+  header('Location: thispagedoesnotexist.html');
   exit;
 }
 $row = tng_fetch_assoc($result);
@@ -48,18 +48,18 @@ $row['name'] = getName($row);
 $firstfirstname = getFirstNameOnly($row);
 
 $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $row['name']);
-$row['genlist'] = "";
+$row['genlist'] = '';
 $row['number'] = 1;
 $row['spouses'] = getSpouses($personID, $row['sex']);
 $lastlastgen[$personID] = 1;
 
-writelog("<a href=\"ahnentafel.php?personID=$personID\">" . xmlcharacters(uiTextSnippet('ahnentafel') . ": $logname ($personID)") . "</a>");
-preparebookmark("<a href=\"ahnentafel.php?personID=$personID\">" . xmlcharacters(uiTextSnippet('ahnentafel') . ": " . $row['name'] . " ($personID)") . "</a>");
+writelog("<a href=\"ahnentafel.php?personID=$personID\">" . xmlcharacters(uiTextSnippet('ahnentafel') . ": $logname ($personID)") . '</a>');
+preparebookmark("<a href=\"ahnentafel.php?personID=$personID\">" . xmlcharacters(uiTextSnippet('ahnentafel') . ': ' . $row['name'] . " ($personID)") . '</a>');
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle($row['name']);
 ?>
 <!DOCTYPE html>
@@ -83,12 +83,12 @@ $headSection->setTitle($row['name']);
     } else {
       $generations = intval($generations);
     }
-    $innermenu = uiTextSnippet('generations') . ": &nbsp;";
+    $innermenu = uiTextSnippet('generations') . ': &nbsp;';
     $innermenu .= "<select name='generations' class='small' onchange=\"window.location.href='ahnentafel.php?personID=$personID&amp;parentset=$parentset&amp;generations=' + this.options[this.selectedIndex].value\">\n";
     for ($i = 1; $i <= $pedigree['maxgen']; $i++) {
       $innermenu .= "<option value='$i'";
       if ($i == $generations) {
-        $innermenu .= " selected";
+        $innermenu .= ' selected';
       }
       $innermenu .= ">$i</option>\n";
     }
@@ -103,7 +103,7 @@ $headSection->setTitle($row['name']);
       $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ped&amp;personID=$personID&amp;generations=$generations');return false;\">PDF</a>\n";
     }
     beginFormElement('pedigree', '', 'form1', 'form1');
-    echo buildPersonMenu("pedigree", $personID);
+    echo buildPersonMenu('pedigree', $personID);
     echo "<div class='pub-innermenu small'>\n";
       echo $innermenu;
     echo "</div>\n";
@@ -114,9 +114,9 @@ $headSection->setTitle($row['name']);
       <div class="pull-xs-right"><?php echo $detail_link; ?></div>
       <?php
       //do self
-      echo "<h4>" . uiTextSnippet('generation') . ": 1</h4>\n";
+      echo '<h4>' . uiTextSnippet('generation') . ": 1</h4>\n";
       echo "<ol style=\"list-style-type:none; padding:0; margin:0;\">";
-      echo "<li>";
+      echo '<li>';
       echo "<table><tr><td width='40' align='right'>";
       echo "$personcount.&nbsp;&nbsp;</td><td>";
       echo showSmallPhoto($row['personID'], $row['name'], $rights['both'], 0);
@@ -126,11 +126,11 @@ $headSection->setTitle($row['name']);
       if ($rights['both'] && $pedigree['regnotes']) {
         $notes = buildRegNotes(getRegNotes($row['personID'], 'I'));
         if ($notes) {
-          echo "<p>" . uiTextSnippet('notes') . ":<br>";
+          echo '<p>' . uiTextSnippet('notes') . ':<br>';
           echo "<blockquote class=\"blocknote\">\n$notes</blockquote>\n</p>\n";
         }
       } else {
-        $notes = "";
+        $notes = '';
       }
 
       //do spouse
@@ -148,7 +148,7 @@ $headSection->setTitle($row['name']);
           $spparents = getSpouseParents($spouserow['personID'], $spouserow['sex']);
           echo " $spfirstfirstname $spparents $spouseinfo";
         }
-        echo " [<a href=\"familiesShowFamily.php?familyID={$spouserow['familyID']}\">" . uiTextSnippet('groupsheet') . "</a>]";
+        echo " [<a href=\"familiesShowFamily.php?familyID={$spouserow['familyID']}\">" . uiTextSnippet('groupsheet') . '</a>]';
         echo "</p>\n";
 
         if ($pedigree['regnotes']) {
@@ -156,7 +156,7 @@ $headSection->setTitle($row['name']);
           if ($famrights['both']) {
             $notes = buildRegNotes(getRegNotes($spouserow['familyID'], 'F'));
             if ($notes) {
-              echo "<p>" . uiTextSnippet('notes') . ":<br>";
+              echo '<p>' . uiTextSnippet('notes') . ':<br>';
               echo "<blockquote class=\"blocknote\">\n$notes</blockquote>\n</p>\n";
             }
           }
@@ -183,15 +183,15 @@ $headSection->setTitle($row['name']);
           tng_free_result($result2);
         }
       }
-      echo "</td></tr></table>";
+      echo '</td></tr></table>';
       echo "<br clear='all'></li>\n</ol>\n";
 
       //push famc (family of parents) to nextgen
-      $parentfamID = "";
+      $parentfamID = '';
       $locparentset = $parentset;
       $parentscount = 0;
       $parentfamIDs = [];
-      $parents = getChildFamily($personID, "parentorder");
+      $parents = getChildFamily($personID, 'parentorder');
       if ($parents) {
         $parentscount = tng_num_rows($parents);
         if ($parentscount > 0) {
@@ -221,7 +221,7 @@ $headSection->setTitle($row['name']);
       //loop through nextgen
       //while there's one to pop and we're less than maxgen
       while (count($currgen) && $generation <= $generations) {
-        echo "<h4>" . uiTextSnippet('generation') . ": $generation</h4>\n";
+        echo '<h4>' . uiTextSnippet('generation') . ": $generation</h4>\n";
         echo "<ol style=\"list-style-type:none; padding:0; margin:0;\">";
         while ($nextfamily = array_shift($currgen)) {
           $parents = getFamilyData($nextfamily);
@@ -248,7 +248,7 @@ $headSection->setTitle($row['name']);
                     $fathrow['firstname'] = uiTextSnippet('living');
                   }
 
-                  echo "<li>";
+                  echo '<li>';
                   echo "<table><tr><td width='40' align='right'>";
                   echo "$personcount.&nbsp;&nbsp;</td><td>";
                   echo showSmallPhoto($fathrow['personID'], $fathrow['name'], $frights['both'], 0);
@@ -258,11 +258,11 @@ $headSection->setTitle($row['name']);
                   if ($frights['both'] && $pedigree['regnotes']) {
                     $notes = buildRegNotes(getRegNotes($fathrow['personID'], 'I'));
                     if ($notes) {
-                      echo "<p>" . uiTextSnippet('notes') . ":<br>";
+                      echo '<p>' . uiTextSnippet('notes') . ':<br>';
                       echo "<blockquote class=\"blocknote\">\n$notes</blockquote>\n</p>\n";
                     }
                   } else {
-                    $notes = "";
+                    $notes = '';
                   }
                   if ($fathrow['famc']) {
                     if (!in_array($fathrow['famc'], $nextgen)) {
@@ -309,10 +309,10 @@ $headSection->setTitle($row['name']);
                       echo " $spfirstfirstname $spparents $spouseinfo";
                     }
                     echo " [<a href=\"familiesShowFamily.php?familyID=$nextfamily\">" . uiTextSnippet('groupsheet') . "</a>]</p>\n";
-                    echo "</td></tr></table>";
+                    echo '</td></tr></table>';
                     echo "<br clear='all'></li>\n";
                   }
-                  echo "<li>";
+                  echo '<li>';
                   echo "<table><tr><td width='40' align='right'>";
                   echo "$personcount.&nbsp;&nbsp;</td><td>";
                   echo showSmallPhoto($mothrow['personID'], $mothrow['name'], $mrights['both'], 0);
@@ -322,11 +322,11 @@ $headSection->setTitle($row['name']);
                   if ($mrights['both'] && $pedigree['regnotes']) {
                     $notes = buildRegNotes(getRegNotes($mothrow['personID'], 'I'));
                     if ($notes) {
-                      echo "<p>" . uiTextSnippet('notes') . ":<br>";
+                      echo '<p>' . uiTextSnippet('notes') . ':<br>';
                       echo "<blockquote class=\"blocknote\">\n$notes</blockquote>\n</p>\n";
                     }
                   } else {
-                    $notes = "";
+                    $notes = '';
                   }
                   //echo "</li>\n";
                   if ($mothrow['famc']) {
@@ -345,7 +345,7 @@ $headSection->setTitle($row['name']);
                 if ($prights['both']) {
                   $notes = buildRegNotes(getRegNotes($nextfamily, 'F'));
                   if ($notes) {
-                    echo "<p>" . uiTextSnippet('notes') . ":<br>";
+                    echo '<p>' . uiTextSnippet('notes') . ':<br>';
                     echo "<blockquote class=\"blocknote\">\n$notes</blockquote>\n</p>\n";
                   }
                 }
@@ -355,7 +355,7 @@ $headSection->setTitle($row['name']);
             //get children
             $result2 = getChildrenData($nextfamily);
             if ($result2 && tng_num_rows($result2)) {
-              echo "<table><tr><td>" . uiTextSnippet('children') . ":<br>\n<ol class=\"ahnblock\">\n";
+              echo '<table><tr><td>' . uiTextSnippet('children') . ":<br>\n<ol class=\"ahnblock\">\n";
               while ($childrow = tng_fetch_assoc($result2)) {
                 $crights = determineLivingPrivateRights($childrow);
                 $childrow['allow_living'] = $crights['living'];
@@ -364,7 +364,7 @@ $headSection->setTitle($row['name']);
 
                 echo "<li style=\"list-style-type:lower-roman\">";
                 if ($lastlastgen[$childrow['personID']]) {
-                  echo $lastlastgen[$childrow['personID']] . ". ";
+                  echo $lastlastgen[$childrow['personID']] . '. ';
                   echo "<a href='#' onclick=\"$('html, body').animate({scrollTop: $('#p{$childrow['personID']}').offset().top-10},'slow'); return false;\">{$childrow['name']}</a>";
                 } else {
                   echo "<a href=\"peopleShowPerson.php?personID={$childrow['personID']}\">{$childrow['name']}</a>";
@@ -375,7 +375,7 @@ $headSection->setTitle($row['name']);
               echo "</ol>\n</td></tr></table>\n";
               tng_free_result($result2);
             }
-            echo "</td></tr></table>";
+            echo '</td></tr></table>';
             echo "<br clear='all'></li>\n";
           }
         }

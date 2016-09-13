@@ -36,17 +36,17 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
   $successcount = 0;
   if ($prefix == 'I') {
     $table = $people_table;
-    $peoplejoin1 = $peoplejoin2 = "";
-    $idfield = "personID";
-    $idtext = "personid";
-    $namefield = "lastfirst";
+    $peoplejoin1 = $peoplejoin2 = '';
+    $idfield = 'personID';
+    $idtext = 'personid';
+    $namefield = 'lastfirst';
   } elseif ($prefix == 'F') {
     $table = $families_table;
     $peoplejoin1 = " LEFT JOIN $people_table as p1 ON p1.personID = $families_table.husband";
     $peoplejoin2 = " LEFT JOIN $people_table as p2 ON p2.personID = $families_table.wife";
-    $idfield = "familyID";
-    $idtext = "familyid";
-    $namefield = "family";
+    $idfield = 'familyID';
+    $idtext = 'familyid';
+    $namefield = 'family';
   }
   $livingPrivateCondition = getLivingPrivateRestrictions($table, false, false);
   $livingPrivateCondition .= ($livingPrivateCondition ? ' AND ' : '');
@@ -56,7 +56,7 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
     $newoffset = "$offset, ";
   } else {
     $offsetplus = 1;
-    $newoffset = "";
+    $newoffset = '';
     $page = 1;
   }
   $tngevents = $stdevents;
@@ -72,26 +72,26 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
   tng_free_result($result);
 
   foreach ($tngevents as $tngevent) {
-    $eventsjoin = "";
-    $allwhere2 = "";
+    $eventsjoin = '';
+    $allwhere2 = '';
     $placetxt = $displaymsgs[$tngevent];
 
     if (in_array($tngevent, $custevents)) {
       $eventsjoin = ", $events_table";
       $allwhere2 .= "$table.$idfield = $events_table.persfamID AND eventtypeID = '$tngevent' AND parenttag = '' AND ";
-      $tngevent = "event";
+      $tngevent = 'event';
     }
-    $datefield = $tngevent . "date";
-    $datefieldtr = $tngevent . "datetr";
-    $place = $tngevent . "place";
+    $datefield = $tngevent . 'date';
+    $datefieldtr = $tngevent . 'datetr';
+    $place = $tngevent . 'place';
     $allwhere2 .= "$place = '$psearch'";
 
     if ($prefix == 'F') {
-      if ($order == "name") {
+      if ($order == 'name') {
         $orderstr = "p1lastname, p2lastname, $datefieldtr";
-      } elseif ($order == "nameup") {
+      } elseif ($order == 'nameup') {
         $orderstr = "p1lastname DESC, p2lastname DESC, $datefieldtr DESC";
-      } elseif ($order == "date") {
+      } elseif ($order == 'date') {
         $orderstr = "$datefieldtr, p1lastname, p2lastname";
       } else {
         $orderstr = "$datefieldtr DESC, p1lastname DESC, p2lastname DESC";
@@ -99,11 +99,11 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
       $query = "SELECT $families_table.ID, familyID, $families_table.living, $families_table.private, $families_table.branch, p1.lastname AS p1lastname, p2.lastname AS p2lastname, $place, $datefield "
           . "FROM ($families_table $eventsjoin) $peoplejoin1 $peoplejoin2 WHERE $livingPrivateCondition $allwhere2 ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
     } elseif ($prefix == 'I') {
-      if ($order == "name") {
+      if ($order == 'name') {
         $orderstr = "lastname, firstname, $datefieldtr";
-      } elseif ($order == "nameup") {
+      } elseif ($order == 'nameup') {
         $orderstr = "lastname DESC, firstname DESC, $datefieldtr DESC";
-      } elseif ($order == "date") {
+      } elseif ($order == 'date') {
         $orderstr = "$datefieldtr, lastname, firstname";
       } else {
         $orderstr = "$datefieldtr DESC, lastname DESC, firstname DESC";
@@ -131,10 +131,10 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
       $numrowsplus = $numrows + $offset;
       $successcount++;
 
-      echo "<p>" . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</p>";
+      echo '<p>' . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</p>";
 
-      $namestr = preg_replace("/xxx/", uiTextSnippet($namefield), $namesort);
-      $datestr = preg_replace("/yyy/", $placetxt, $datesort);
+      $namestr = preg_replace('/xxx/', uiTextSnippet($namefield), $namesort);
+      $datestr = preg_replace('/yyy/', $placetxt, $datesort);
       ?>
       <table class="table table-sm table-striped">
         <tr>
@@ -149,10 +149,10 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
           $row['allow_living'] = $rights['living'];
           $row['allow_private'] = $rights['private'];
           if ($rights['both']) {
-            $placetxt = $row[$place] ? $row[$place] : "";
+            $placetxt = $row[$place] ? $row[$place] : '';
             $dateval = $row[$datefield];
           } else {
-            $dateval = $placetxt = "";
+            $dateval = $placetxt = '';
           }
           echo "<tr>\n";
 
@@ -165,8 +165,8 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
             $name = getNameRev($row);
             echo "<a tabindex='0' class='btn btn-sm btn-outline-primary person-popover' role='button' data-toggle='popover' data-placement='bottom' data-person-id='{$row['personID']}'>$name</a>\n";
           }
-          echo "</td>";
-          echo "<td>" . displayDate($dateval) . "<br>$placetxt</td>\n";
+          echo '</td>';
+          echo '<td>' . displayDate($dateval) . "<br>$placetxt</td>\n";
           echo "</tr>\n";
         }
         tng_free_result($result);

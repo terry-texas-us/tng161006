@@ -9,9 +9,9 @@ require 'checklogin.php';
 function doEvent($eventID, $displayval, $info) {
   echo "<event>\n";
   echo "<eventID>$eventID</eventID>\n";
-  echo "<display>" . xmlcharacters($displayval) . "</display>\n";
+  echo '<display>' . xmlcharacters($displayval) . "</display>\n";
   if ($info) {
-    echo "<info>" . xmlcharacters("($info)") . "</info>\n";
+    echo '<info>' . xmlcharacters("($info)") . "</info>\n";
   } else {
     echo "<info>-1</info>\n";
   }
@@ -33,26 +33,26 @@ echo "</targetlist>\n";
 
 if ($linktype == 'I') {
   //standard people events
-  $list = ["NAME", "BIRT", "CHR", "DEAT", "BURI"];
+  $list = ['NAME', 'BIRT', 'CHR', 'DEAT', 'BURI'];
   foreach ($list as $eventtype) {
-    doEvent($eventtype, uiTextSnippet($eventtype), "");
+    doEvent($eventtype, uiTextSnippet($eventtype), '');
   }
   if ($allow_lds) {
-    $ldslist = ["BAPL", "CONL", "INIT", "ENDL", "SLGC"];
+    $ldslist = ['BAPL', 'CONL', 'INIT', 'ENDL', 'SLGC'];
     foreach ($ldslist as $eventtype) {
-      doEvent($eventtype, uiTextSnippet($eventtype), "");
+      doEvent($eventtype, uiTextSnippet($eventtype), '');
     }
   }
 } elseif ($linktype == 'F') {
   //standard family events
-  $list = ["MARR", "DIV"];
+  $list = ['MARR', 'DIV'];
   foreach ($list as $eventtype) {
-    doEvent($eventtype, uiTextSnippet($eventtype), "");
+    doEvent($eventtype, uiTextSnippet($eventtype), '');
   }
   if ($allow_lds) {
-    $ldslist = ["SLGS"];
+    $ldslist = ['SLGS'];
     foreach ($ldslist as $eventtype) {
-      doEvent($eventtype, uiTextSnippet($eventtype), "");
+      doEvent($eventtype, uiTextSnippet($eventtype), '');
     }
   }
 }
@@ -67,10 +67,10 @@ while ($custevent = tng_fetch_assoc($custevents)) {
   } elseif ($custevent['eventplace']) {
     $info = $custevent['eventplace'];
   } elseif ($custevent['info']) {
-    $info = substr($custevent['info'], 0, 20) . "...";
+    $info = substr($custevent['info'], 0, 20) . '...';
   }
   doEvent($custevent['eventID'], $displayval, $info);
 }
 tng_free_result($custevents);
 
-echo "</eventlist>";
+echo '</eventlist>';

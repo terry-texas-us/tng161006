@@ -5,9 +5,9 @@ require 'adminlib.php';
 $adminLogin = 1;
 require 'checklogin.php';
 
-$helplang = findhelp("events_help.php");
+$helplang = findhelp('events_help.php');
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <form id='form1' name='form1' action='' method='post' onSubmit="return addEvent(this);">
   <header class='modal-header'>
@@ -34,11 +34,11 @@ header("Content-type:text/html; charset=" . $session_charset);
               $events = [];
               while ($eventtype = tng_fetch_assoc($evresult)) {
                 $display = getEventDisplay($eventtype['display']);
-                $option = $display . ($eventtype['tag'] != "EVEN" ? " ({$eventtype['tag']})" : "");
+                $option = $display . ($eventtype['tag'] != 'EVEN' ? " ({$eventtype['tag']})" : '');
                 $optionlen = strlen($option);
                 $option = substr($option, 0, 40);
                 if ($optionlen > strlen($option)) {
-                  $option .= "&hellip;";
+                  $option .= '&hellip;';
                 }
                 $events[$display] = "<option value=\"{$eventtype['eventtypeID']}\">$option</option>\n";
               }
@@ -69,10 +69,10 @@ header("Content-type:text/html; charset=" . $session_charset);
       </tr>
       <tr>
         <td><?php echo uiTextSnippet('detail'); ?>:</td>
-        <td><textarea name="info" rows="4" cols="40"></textarea></td>
+        <td><textarea name="info" rows='4' cols="40"></textarea></td>
       </tr>
     </table>
-    <?php echo displayToggle("plus9", 0, "more", uiTextSnippet('more'), ""); ?>
+    <?php echo displayToggle('plus9', 0, 'more', uiTextSnippet('more'), ''); ?>
     <div id='more' style='display: none'>
       <table class='table table-sm'>
         <tr>

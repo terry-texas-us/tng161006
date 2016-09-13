@@ -9,7 +9,7 @@ require 'version.php';
 require 'geocodelib.php';
 require 'adminlog.php';
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('places'));
 ?>
 <!DOCTYPE html>
@@ -20,11 +20,11 @@ $headSection->setTitle(uiTextSnippet('places'));
     <?php
     echo $adminHeaderSection->build('places-geocode', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "placesBrowse.php", uiTextSnippet('browse'), "findplace"]);
-    $navList->appendItem([$allowAdd, "placesAdd.php", uiTextSnippet('add'), "addplace"]);
-    $navList->appendItem([$allowEdit && $allowDelete, "placesMerge.php", uiTextSnippet('merge'), "merge"]);
-    $navList->appendItem([$allowEdit, "admin_geocodeform.php", uiTextSnippet('geocode'), "geo"]);
-    echo $navList->build("geo");
+    $navList->appendItem([true, 'placesBrowse.php', uiTextSnippet('browse'), 'findplace']);
+    $navList->appendItem([$allowAdd, 'placesAdd.php', uiTextSnippet('add'), 'addplace']);
+    $navList->appendItem([$allowEdit && $allowDelete, 'placesMerge.php', uiTextSnippet('merge'), 'merge']);
+    $navList->appendItem([$allowEdit, 'admin_geocodeform.php', uiTextSnippet('geocode'), 'geo']);
+    echo $navList->build('geo');
     ?>
     <table class='table table-sm'>
       <tr>
@@ -32,7 +32,7 @@ $headSection->setTitle(uiTextSnippet('places'));
           <h4><?php echo uiTextSnippet('geocoding'); ?></h4><br>
           <div>
             <?php
-            $limitstr = $limit ? "LIMIT $limit" : "";
+            $limitstr = $limit ? "LIMIT $limit" : '';
 
             $query = "SELECT ID, place FROM $places_table WHERE (latitude = \"\" OR latitude IS NULL) AND (longitude = \"\" OR longitude IS NULL) AND temple != \"1\" AND geoignore != \"1\" ORDER BY place $limitstr";
             $result = tng_query($query);
@@ -40,20 +40,20 @@ $headSection->setTitle(uiTextSnippet('places'));
             $delay = 0;
             $count = 0;
 
-            adminwritelog("<a href=\"admin_geocode.php\">" . uiTextSnippet('geoexpl') . " ($limit)</a>");
+            adminwritelog('<a href=\"admin_geocode.php\">' . uiTextSnippet('geoexpl') . " ($limit)</a>");
 
             while ($row = tng_fetch_assoc($result)) {
               $count++;
-              $address = trim($row["place"]);
+              $address = trim($row['place']);
               if ($address) {
-                $id = $row["ID"];
+                $id = $row['ID'];
                 $display = $address;
-                $display = preg_replace("/</", "&lt;", $display);
-                $display = preg_replace("/>/", "&gt;", $display);
+                $display = preg_replace('/</', '&lt;', $display);
+                $display = preg_replace('/>/', '&gt;', $display);
                 echo "<br>\n$count. $display ... &nbsp; ";
                 echo geocode($address, $multiples, $id);
               } else {
-                echo "<br>\n$count. " . uiTextSnippet('blankplace') . " &nbsp; <strong>" . uiTextSnippet('nogeocode') . "</strong>";
+                echo "<br>\n$count. " . uiTextSnippet('blankplace') . ' &nbsp; <strong>' . uiTextSnippet('nogeocode') . '</strong>';
               }
             }
             tng_free_result($result);

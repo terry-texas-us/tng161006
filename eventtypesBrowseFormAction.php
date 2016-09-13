@@ -7,12 +7,12 @@ require 'checklogin.php';
 
 if (!$allowEdit || !$allowDelete) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 require 'adminlog.php';
 
-$query = "";
+$query = '';
 if ($cetaction == uiTextSnippet('ignoreselected')) {
   $query = "UPDATE $eventtypes_table SET keep=\"0\" WHERE 1=0";
 } else {
@@ -30,13 +30,13 @@ if ($cetaction == uiTextSnippet('ignoreselected')) {
 }
 if ($query) {
   foreach (array_keys($_POST) as $key) {
-    if (substr($key, 0, 2) == "et") {
+    if (substr($key, 0, 2) == 'et') {
       $query .= " OR eventtypeID=\"" . substr($key, 2) . "\"";
     }
   }
   $result = tng_query($query);
 }
-adminwritelog(uiTextSnippet('modifyeventtype') . ": " . uiTextSnippet('all'));
+adminwritelog(uiTextSnippet('modifyeventtype') . ': ' . uiTextSnippet('all'));
 
-$message = uiTextSnippet('changestoallevtypes') . " " . uiTextSnippet('succsaved') . ".";
-header("Location: eventtypesBrowse.php?message=" . urlencode($message));
+$message = uiTextSnippet('changestoallevtypes') . ' ' . uiTextSnippet('succsaved') . '.';
+header('Location: eventtypesBrowse.php?message=' . urlencode($message));

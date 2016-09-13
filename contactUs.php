@@ -10,7 +10,7 @@ $preemail = getCurrentUserEmail($currentuser, $users_table);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 
 $headTitle = uiTextSnippet('contactus');
 $headSection->setTitle($headTitle);

@@ -10,15 +10,15 @@ if ($link) {
 
   if (!$allowEdit) {
     $message = uiTextSnippet('norights');
-    header("Location: admin_login.php?message=" . urlencode($message));
+    header('Location: admin_login.php?message=' . urlencode($message));
     exit;
   }
 }
 require 'adminlog.php';
 
-$fp = fopen($subroot . "pedconfig.php", "w", 1);
+$fp = fopen($subroot . 'pedconfig.php', 'w', 1);
 if (!$fp) {
-  die(uiTextSnippet('cannotopen') . " pedconfig.php");
+  die(uiTextSnippet('cannotopen') . ' pedconfig.php');
 }
 
 if (!$vwidth) {
@@ -116,4 +116,4 @@ fclose($fp);
 
 adminwritelog(uiTextSnippet('modifypedsettings'));
 
-header("Location: admin_setup.php");
+header('Location: admin_setup.php');

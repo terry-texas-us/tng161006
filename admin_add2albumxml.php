@@ -24,7 +24,7 @@ function getAlbumNav($total, $perpage, $pagenavpages) {
   }
 
   if ($total <= $perpage) {
-    return "";
+    return '';
   }
 
   $totalpages = ceil($total / $perpage);
@@ -35,7 +35,7 @@ function getAlbumNav($total, $perpage, $pagenavpages) {
   if ($page > 1) {
     $prevpage = $page - 1;
     $navoffset = (($prevpage * $perpage) - $perpage);
-    $prevlink = " <a href='#' onclick=\"return getMoreMedia('$searchstring', '$mediatypeID', '$hsstat', '$cemeteryID', '$navoffset', '$prevpage', '$albumID');\" title=\"" . uiTextSnippet('prev') . "\">&laquo;" . uiTextSnippet('prev') . "</a> ";
+    $prevlink = " <a href='#' onclick=\"return getMoreMedia('$searchstring', '$mediatypeID', '$hsstat', '$cemeteryID', '$navoffset', '$prevpage', '$albumID');\" title=\"" . uiTextSnippet('prev') . "\">&laquo;" . uiTextSnippet('prev') . '</a> ';
   }
   if ($page < $totalpages) {
     $nextpage = $page + 1;
@@ -64,7 +64,7 @@ function getAlbumNav($total, $perpage, $pagenavpages) {
   return $pagenav;
 }
 
-$wherestr = $searchstring ? "($media_table.mediaID LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR path LIKE \"%$searchstring%\" OR notes LIKE \"%$searchstring%\" OR owner LIKE \"%$searchstring%\" OR bodytext LIKE \"%$searchstring%\")" : "";
+$wherestr = $searchstring ? "($media_table.mediaID LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR path LIKE \"%$searchstring%\" OR notes LIKE \"%$searchstring%\" OR owner LIKE \"%$searchstring%\" OR bodytext LIKE \"%$searchstring%\")" : '';
 if ($searchtree) {
   $wherestr .= $wherestr ? " AND (gedcom = \"\" OR gedcom = \"$searchtree\")" : "(gedcom = \"\" OR gedcom = \"$searchtree\")";
 }
@@ -90,7 +90,7 @@ if (isset($offset) && $offset != 0) {
 } else {
   $offset = 0;
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $page = 1;
 }
 
@@ -120,13 +120,13 @@ if ($albumID) {
   $alreadygot[] = [];
 }
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 
 $numrowsplus = $numrows + $offset;
 if (!$numrowsplus) {
   $offsetplus = 0;
 }
-echo "<p>" . uiTextSnippet('matches') . ": $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows";
+echo '<p>' . uiTextSnippet('matches') . ": $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows";
 $pagenav = getAlbumNav($totrows, $maxsearchresults, 5);
 echo " &nbsp; <span>$pagenav</span></p>";
 ?>
@@ -149,9 +149,9 @@ echo " &nbsp; <span>$pagenav</span></p>";
         echo " style=\"display:none\"";
       }
       if ($albumID) {
-        echo "><a href='#' onclick=\"return addToAlbum('{$row['mediaID']}');\">" . uiTextSnippet('add') . "</a></div>";
+        echo "><a href='#' onclick=\"return addToAlbum('{$row['mediaID']}');\">" . uiTextSnippet('add') . '</a></div>';
       } else {
-        echo "><a href='#' onclick=\"return selectMedia('{$row['mediaID']}');\">" . uiTextSnippet('select') . "</a></div>";
+        echo "><a href='#' onclick=\"return selectMedia('{$row['mediaID']}');\">" . uiTextSnippet('select') . '</a></div>';
       }
       echo "<div id=\"added_{$row['mediaID']}\"";
       if (!$gotit) {
@@ -159,16 +159,16 @@ echo " &nbsp; <span>$pagenav</span></p>";
       } else {
         echo "><img class='icon-sm' src='svg/eye.svg' alt=''>";
       }
-      echo "</div>";
-      echo "&nbsp;</td>";
+      echo '</div>';
+      echo '&nbsp;</td>';
       echo "<td style=\"text-align:center\" id=\"thumbcell_{$row['mediaID']}\">";
       if ($row['thumbpath'] && file_exists("$rootpath$usefolder/" . $row['thumbpath'])) {
         $size = getimagesize("$rootpath$usefolder/" . $row['thumbpath']);
         echo "<a href=\"admin_editmedia.php?mediaID={$row['mediaID']}\" target='_blank'>\n";
-          echo "<img src=\"$usefolder/" . str_replace("%2F", "/", rawurlencode($row['thumbpath'])) . "\" $size[3]>\n";
+          echo "<img src=\"$usefolder/" . str_replace('%2F', '/', rawurlencode($row['thumbpath'])) . "\" $size[3]>\n";
         echo "</a>\n";
       } else {
-        echo "&nbsp;";
+        echo '&nbsp;';
       }
       echo "</td>\n";
       $truncated = substr($row['notes'], 0, 90);
@@ -181,5 +181,5 @@ echo " &nbsp; <span>$pagenav</span></p>";
     ?>
   </table>
 <?php
-echo "<p>" . uiTextSnippet('matches') . ": $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows";
+echo '<p>' . uiTextSnippet('matches') . ": $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows";
 echo " &nbsp; <span>$pagenav</span></p>";

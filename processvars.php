@@ -22,7 +22,7 @@ if (!$register_globals) {
 if ($_GET && is_array($_GET)) {
   foreach ($_GET as $key => $value) {
     if ($key == 'lang' || $key == 'mylanguage') {
-      die("sorry!");
+      die('sorry!');
     }
     if (is_string($value)) {
       ${$key} = strip_tags($value);
@@ -32,20 +32,20 @@ if ($_GET && is_array($_GET)) {
 if ($_POST && is_array($_POST)) {
   foreach ($_POST as $key => $value) {
     if ($key == 'lang' || $key == 'mylanguage') {
-      die("sorry!");
+      die('sorry!');
     }
     ${$key} = $value;
   }
 }
 if (isset($personID)) {
-  $personID = preg_replace("/[^A-Za-z0-9_\- ]/", '', $personID);
+  $personID = preg_replace('/[^A-Za-z0-9_\- ]/', '', $personID);
 }
 if (isset($familyID)) {
-  $familyID = preg_replace("/[^A-Za-z0-9_\- ]/", '', $familyID);
+  $familyID = preg_replace('/[^A-Za-z0-9_\- ]/', '', $familyID);
 }
 if (isset($sourceID)) {
-  $sourceID = preg_replace("/[^A-Za-z0-9_\- ]/", '', $sourceID);
+  $sourceID = preg_replace('/[^A-Za-z0-9_\- ]/', '', $sourceID);
 }
 if (isset($repoID)) {
-  $repoID = preg_replace("/[^A-Za-z0-9_\- ]/", '', $repoID);
+  $repoID = preg_replace('/[^A-Za-z0-9_\- ]/', '', $repoID);
 }

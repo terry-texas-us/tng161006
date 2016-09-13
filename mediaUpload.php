@@ -8,7 +8,7 @@ require 'version.php';
 
 if (!$allowMediaEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 $flags['styles'] .= "<!-- blueimp Gallery styles -->\n";
@@ -22,7 +22,7 @@ $flags['styles'] .= "<!-- CSS adjustments for browsers with JavaScript disabled 
 $flags['styles'] .= "<noscript><link rel=\"stylesheet\" href=\"css/jquery.fileupload-noscript.css\"></noscript>\n";
 $flags['styles'] .= "<noscript><link rel=\"stylesheet\" href=\"css/jquery.fileupload-ui-noscript.css\"></noscript>\n";
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('sortmedia'));
 ?>
 <!DOCTYPE html>
@@ -33,13 +33,13 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
     <?php
     echo $adminHeaderSection->build('media-upload', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('browse'), "findmedia"]);
-    $navList->appendItem([$allowMediaAdd, "mediaAdd.php", uiTextSnippet('add'), "addmedia"]);
-    $navList->appendItem([$allowMediaEdit, "mediaSort.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    $navList->appendItem([$allowMediaEdit, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-    $navList->appendItem([$allowMediaAdd, "mediaImport.php", uiTextSnippet('import'), "import"]);
-    //    $navList->appendItem([$allowMediaAdd, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
-    echo $navList->build("upload");
+    $navList->appendItem([true, 'mediaBrowse.php', uiTextSnippet('browse'), 'findmedia']);
+    $navList->appendItem([$allowMediaAdd, 'mediaAdd.php', uiTextSnippet('add'), 'addmedia']);
+    $navList->appendItem([$allowMediaEdit, 'mediaSort.php', uiTextSnippet('text_sort'), 'sortmedia']);
+    $navList->appendItem([$allowMediaEdit, 'mediaThumbnails.php', uiTextSnippet('thumbnails'), 'thumbs']);
+    $navList->appendItem([$allowMediaAdd, 'mediaImport.php', uiTextSnippet('import'), 'import']);
+    //    $navList->appendItem([$allowMediaAdd, 'mediaUpload.php', uiTextSnippet('upload'), 'upload']);
+    echo $navList->build('upload');
     ?>
     <table class='table table-sm'>
       <tr>
@@ -72,7 +72,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
                 </label>
               </div>          
               <div class='col-sm-3'>
-                <input name='folderselect' type='button' value="<?php echo uiTextSnippet('select') . "..."; ?>" onclick="FilePicker('folder', $('#mediatypeID').val(), 1);">
+                <input name='folderselect' type='button' value="<?php echo uiTextSnippet('select') . '...'; ?>" onclick="FilePicker('folder', $('#mediatypeID').val(), 1);">
               </div>          
             </div>
             <noscript><input name='redirect' type='hidden' value="$https://blueimp.github.io/jQuery-File-Upload/"></noscript>
@@ -104,7 +104,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
               <!-- The global progress state -->
               <div class="col-lg-5 fileupload-progress fade">
                 <!-- The global progress bar -->
-                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress progress-striped active" role="progressbar" aria-valuemin='0' aria-valuemax="100">
                   <div class="progress-bar progress-bar-success" style="width:0;"></div>
                 </div>
                 <!-- The extended global progress information -->
@@ -148,7 +148,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
                   <input name='eventlink1' type='checkbox' value='1' 
                          onclick="return toggleEventRow(this.checked);"/> <?php echo uiTextSnippet('eventlink'); ?>
                 </span><br>
-                <select id='eventrow1' name='event1' style="display: none">
+                <select id='eventrow1' name='event1' style='display: none'>
                   <option value=''></option>
                 </select>
               </div>
@@ -166,7 +166,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
   <script src='js/selectutils.js'></script>
   <script src='js/datevalidation.js'></script>
   <script>
-    var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;
+    var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : 'false'); ?>;
     var preferDateFormat = '<?php echo $preferDateFormat; ?>';
     var findopen;
     var album = '';
@@ -175,8 +175,8 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
 
     var findform = "find";
     var resheremsg = <?php echo "'<span>" . uiTextSnippet('reshere') . "</span>'"; ?>; // the snippet was undefined and i do not know what it should be
-    var tng_thumbmaxw = <?php echo($thumbmaxw ? $thumbmaxw : "80"); ?>;
-    var tng_thumbmaxh = <?php echo($thumbmaxh ? $thumbmaxh : "80"); ?>;
+    var tng_thumbmaxw = <?php echo($thumbmaxw ? $thumbmaxw : '80'); ?>;
+    var tng_thumbmaxh = <?php echo($thumbmaxh ? $thumbmaxh : '80'); ?>;
     var links_url = "ajx_medialinks.php";
     var findform;
     var remove_text = <?php echo "'" . uiTextSnippet('removelink') . "'" ?>;
@@ -225,10 +225,10 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
       $('#linker').click(function (e) {
         e.preventDefault();
         if ($('#newlink1').val()) {
-          var medialist = "";
+          var medialist = '';
 
           $('.mediacheck:checked').each(function () {
-            medialist += (medialist ? "," + this.id : this.id);
+            medialist += (medialist ? ',' + this.id : this.id);
           });
           if (medialist) {
             var linkermsg = $('#linkermsg');
@@ -272,7 +272,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
           <p class="size">Processing...</p>
         </td>
         <td>
-          <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>  
+          <div class="progress progress-striped active" role="progressbar" aria-valuemin='0' aria-valuemax="100" aria-valuenow='0'><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>  
         </td>
         <td>
           {% if (!i && !o.options.autoUpload) { %}
@@ -317,7 +317,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
         <td class="name">
           <form id="f{%=file.mediaID%}">
             <input class="uploadfield" id="t{%=file.mediaID%}" name="title" type='text' value="{%=file.name%}" onkeypress="enableSave('{%=file.mediaID%}');" onpaste="enableSave('{%=file.mediaID%}');"/><br>
-            <textarea id="d{%=file.mediaID%}" name='description' rows="3" class="uploadfield" onkeypress="enableSave('{%=file.mediaID%}');" onpaste="enableSave('{%=file.mediaID%}');"></textarea>
+            <textarea id="d{%=file.mediaID%}" name='description' rows='3' class="uploadfield" onkeypress="enableSave('{%=file.mediaID%}');" onpaste="enableSave('{%=file.mediaID%}');"></textarea>
             <input id="mediaID" name="mediaID" type='hidden' value="{%=file.mediaID%}">
             <table class="uploadmore">
               <tr>

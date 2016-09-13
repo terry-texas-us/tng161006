@@ -8,41 +8,41 @@ require $subroot . 'logconfig.php';
 require 'mail.php';
 require 'suggest.php';
 
-$valid_user_agent = isset($_SERVER["HTTP_USER_AGENT"]) && $_SERVER["HTTP_USER_AGENT"] != "";
+$valid_user_agent = isset($_SERVER['HTTP_USER_AGENT']) && $_SERVER['HTTP_USER_AGENT'] != '';
 
 $emailfield = $_SESSION['tng_email'];
 if (!$emailfield) {
-  header("location:newacctform.php");
+  header('location:newacctform.php');
   exit;
 }
 eval("\$email = \$$emailfield;");
-$_SESSION['tng_email'] = "";
+$_SESSION['tng_email'] = '';
 
 if (preg_match("/\n[[:space:]]*(to|bcc|cc|boundary)[[:space:]]*[:|=].*@/i", $email) || !$valid_user_agent) {
-  die("sorry!");
+  die('sorry!');
 }
-if (preg_match("/\r/i", $email) || preg_match("/\n/i", $email) || !preg_match("/@/i", $email)) {
-  die("sorry!");
+if (preg_match("/\r/i", $email) || preg_match("/\n/i", $email) || !preg_match('/@/i', $email)) {
+  die('sorry!');
 }
 if (preg_match("/\n[[:space:]]*(to|bcc|cc|boundary)[[:space:]]*[:|=].*@/i", $username) || !$valid_user_agent) {
-  die("sorry!");
+  die('sorry!');
 }
 if (preg_match("/\n/i", $username)) {
-  die("sorry!");
+  die('sorry!');
 }
 
-$realname = strtok($realname, ",;");
-if (strpos($email, ",") !== false || strpos($email, ";") !== false || !$email) {
-  die("sorry!");
+$realname = strtok($realname, ',;');
+if (strpos($email, ',') !== false || strpos($email, ';') !== false || !$email) {
+  die('sorry!');
 }
 
 killBlockedAddress($email);
 if ($msg_exclude) {
-  $bad_msgs = explode(",", $msg_exclude);
+  $bad_msgs = explode(',', $msg_exclude);
   foreach ($bad_msgs as $bad_msg) {
     if ($bad_msg) {
       if (strstr($username, trim($bad_msg)) || strstr($password, trim($bad_msg)) || strstr($realname, trim($bad_msg)) || strstr($notes, trim($bad_msg))) {
-        die("sorry");
+        die('sorry');
       }
     }
   }
@@ -64,11 +64,11 @@ $username = trim($username);
 $password = trim($password);
 $realname = trim($realname);
 $email = trim($email);
-$today = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
+$today = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
 
-$gedcom = "";
+$gedcom = '';
 
-if ($username && $password && $realname && $email && $fingerprint == "realperson") {
+if ($username && $password && $realname && $email && $fingerprint == 'realperson') {
   if ($tngconfig['autoapp']) {
     $allow_living_val = 0;
     $moreinfo = $deftext['accactive'];
@@ -90,7 +90,7 @@ if ($username && $password && $realname && $email && $fingerprint == "realperson
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('regnewacct'));
 ?>
 <!DOCTYPE html>
@@ -103,14 +103,14 @@ echo $publicHeaderSection->build();
 echo "<p class=\"header\">" . uiTextSnippet('regnewacct') . "</span></p><br>\n";
 echo "<span>\n";
 if ($success) {
-  echo "<p>" . uiTextSnippet('successfulregistration') . "</p>";
+  echo '<p>' . uiTextSnippet('successfulregistration') . '</p>';
   if ($emailaddr) {
     $emailtouse = $tngconfig['fromadmin'] == 1 ? $emailaddr : $email;
     $message = "{$deftext['name']}: $realname\n{$deftext['username']}: $username\n\n{$deftext['emailmsg']} $moreinfo\n\n" . uiTextSnippet('administration') . ": $tngdomain/admin.php";
-    $owner = preg_replace("/,/", "", ($sitename ? $sitename : ($dbowner ? $dbowner : "TNG")));
+    $owner = preg_replace('/,/', '', ($sitename ? $sitename : ($dbowner ? $dbowner : 'TNG')));
     tng_sendmail($owner, $emailtouse, $dbowner, $emailaddr, $deftext['emailsubject'], $message, $emailaddr, $email);
 
-    $welcome = "";
+    $welcome = '';
     if ($tngconfig['autoapp']) {
       //send email to user saying they're ready to go
       //include password if that feature not turned off
@@ -130,9 +130,9 @@ if ($success) {
     }
   }
 } else {
-  echo "<p>" . uiTextSnippet('failure') . "</p>";
+  echo '<p>' . uiTextSnippet('failure') . '</p>';
 }
-echo "</span>";
+echo '</span>';
 
 echo $publicFooterSection->build();
 echo scriptsManager::buildScriptElements($flags, 'public');

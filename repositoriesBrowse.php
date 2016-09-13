@@ -28,7 +28,7 @@ if ($newsearch) {
     setcookie("tng_search_repos_post[offset]", $offset, $exptime);
   }
 }
-$searchstring_noquotes = preg_replace("/\"/", "&#34;", $searchstring);
+$searchstring_noquotes = preg_replace('/\"/', '&#34;', $searchstring);
 $searchstring = addslashes($searchstring);
 
 if ($offset) {
@@ -36,21 +36,21 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $tngpage = 1;
 }
 
 function addCriteria($field, $value, $operator) {
-  $criteria = "";
+  $criteria = '';
 
-  if ($operator == "=") {
+  if ($operator == '=') {
     $criteria = " OR $field $operator \"$value\"";
   } else {
-    $innercriteria = "";
+    $innercriteria = '';
     $terms = explode(' ', $value);
     foreach ($terms as $term) {
       if ($innercriteria) {
-        $innercriteria .= " AND ";
+        $innercriteria .= ' AND ';
       }
       $innercriteria .= "$field $operator \"%$term%\"";
     }
@@ -60,18 +60,18 @@ function addCriteria($field, $value, $operator) {
   }
   return $criteria;
 }
-$allwhere = "1=1";
+$allwhere = '1=1';
 if ($searchstring) {
-  $allwhere .= " AND (1=0 ";
-  if ($exactmatch == "yes") {
-    $frontmod = "=";
+  $allwhere .= ' AND (1=0 ';
+  if ($exactmatch == 'yes') {
+    $frontmod = '=';
   } else {
-    $frontmod = "LIKE";
+    $frontmod = 'LIKE';
   }
 
-  $allwhere .= addCriteria("repoID", $searchstring, $frontmod);
-  $allwhere .= addCriteria("reponame", $searchstring, $frontmod);
-  $allwhere .= ")";
+  $allwhere .= addCriteria('repoID', $searchstring, $frontmod);
+  $allwhere .= addCriteria('reponame', $searchstring, $frontmod);
+  $allwhere .= ')';
 }
 $query = "SELECT ID, repoID, reponame FROM $repositories_table WHERE $allwhere ORDER BY reponame, repoID LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
@@ -86,7 +86,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 } else {
   $totrows = $numrows;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('repositories'));
 ?>
 <!DOCTYPE html>
@@ -97,10 +97,10 @@ $headSection->setTitle(uiTextSnippet('repositories'));
     <?php
     echo $adminHeaderSection->build('repositories', $message);
     $navList = new navList('');
-    //    $navList->appendItem([true, "repositoriesBrowse.php", uiTextSnippet('search'), "findrepo"]);
-    $navList->appendItem([$allowAdd, "repositoriesAdd.php", uiTextSnippet('add'), "addrepo"]);
-    $navList->appendItem([$allowEdit && $allowDelete, "repositoriesMerge.php", uiTextSnippet('merge'), "merge"]);
-    echo $navList->build("findrepo");
+    //    $navList->appendItem([true, 'repositoriesBrowse.php', uiTextSnippet('search'), 'findrepo']);
+    $navList->appendItem([$allowAdd, 'repositoriesAdd.php', uiTextSnippet('add'), 'addrepo']);
+    $navList->appendItem([$allowEdit && $allowDelete, 'repositoriesMerge.php', uiTextSnippet('merge'), 'merge']);
+    echo $navList->build('findrepo');
     ?>
     <div>
       <form id='form1' name='form1' action='repositoriesBrowse.php'>
@@ -110,7 +110,7 @@ $headSection->setTitle(uiTextSnippet('repositories'));
         <input name='submit' type='submit' value="<?php echo uiTextSnippet('reset'); ?>"
             onClick="resetRepositioriesSearch();">
         <span>
-          <input name='exactmatch' type='checkbox' value='yes'<?php if ($exactmatch == "yes") {echo " checked";} ?>>
+          <input name='exactmatch' type='checkbox' value='yes'<?php if ($exactmatch == 'yes') {echo ' checked';} ?>>
           <?php echo uiTextSnippet('exactmatch'); ?>
         </span>
         <input name='findrepo' type='hidden' value='1'>
@@ -148,26 +148,26 @@ $headSection->setTitle(uiTextSnippet('repositories'));
               <th><?php echo uiTextSnippet('name'); ?></th>
             </tr>
             <?php
-            $actionstr = "";
+            $actionstr = '';
             if ($allowEdit) {
               $actionstr .= "<a href=\"repositoriesEdit.php?repoID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
-              $actionstr .= "</a>";
+              $actionstr .= '</a>';
             }
             if ($allowDelete) {
               $actionstr .= "<a href='#' onclick=\"return confirmDelete('zzz');\" title='" . uiTextSnippet('delete') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
-              $actionstr .= "</a>";
+              $actionstr .= '</a>';
             }
             $actionstr .= "<a href=\"repositoriesShowItem.php?repoID=xxx\" title='" . uiTextSnippet('preview') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
             $actionstr .= "</a>\n";
 
             while ($row = tng_fetch_assoc($result)) {
-              $newactionstr = preg_replace("/xxx/", $row['repoID'], $actionstr);
-              $newactionstr = preg_replace("/zzz/", $row['ID'], $newactionstr);
+              $newactionstr = preg_replace('/xxx/', $row['repoID'], $actionstr);
+              $newactionstr = preg_replace('/zzz/', $row['ID'], $newactionstr);
               $editlink = "repositoriesEdit.php?repoID={$row['repoID']}";
-              $id = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['repoID'] . "</a>" : $row['repoID'];
+              $id = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['repoID'] . '</a>' : $row['repoID'];
 
               echo "<tr id=\"row_{$row['ID']}\"><td><div class=\"action-btns\">$newactionstr</div></td>\n";
               if ($allowDelete) {

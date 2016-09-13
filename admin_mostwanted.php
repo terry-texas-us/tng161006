@@ -30,7 +30,7 @@ function showDiv($type) {
   echo "<tr>\n";
   echo "<td style='width: 55px'>" . uiTextSnippet('text_sort') . "</td>\n";
   echo "<td style='width: " . ($thumbmaxw + 10) . "px'>" . uiTextSnippet('thumb') . "</td>\n";
-  echo "<td>" . uiTextSnippet('description') . "</td>\n";
+  echo '<td>' . uiTextSnippet('description') . "</td>\n";
   echo "</tr>\n";
   echo "</table>\n";
 
@@ -57,12 +57,12 @@ function showDiv($type) {
     echo "<td style=\"width:" . ($thumbmaxw + 6) . "px;text-align:center;\">";
     if ($lrow['thumbpath'] && file_exists("$rootpath$usefolder/" . $lrow['thumbpath'])) {
       $size = getimagesize("$rootpath$usefolder/" . $lrow['thumbpath']);
-      echo "<img src=\"$usefolder/" . str_replace("%2F", "/", rawurlencode($lrow['thumbpath'])) . "\" {$size[3]} id=\"img_{$lrow['mwID']}\" alt=\"{$lrow['mtitle']}\">";
+      echo "<img src=\"$usefolder/" . str_replace('%2F', '/', rawurlencode($lrow['thumbpath'])) . "\" {$size[3]} id=\"img_{$lrow['mwID']}\" alt=\"{$lrow['mtitle']}\">";
     } else {
-      echo "&nbsp;";
+      echo '&nbsp;';
     }
     echo "</td>\n";
-    echo "<td>";
+    echo '<td>';
     if ($allowEdit) {
       echo "<a href='#' onclick=\"return openMostWanted('{$lrow['mwtype']}','{$lrow['mwID']}');\" id=\"title_{$lrow['mwID']}\">{$lrow['title']}</a>";
     } else {
@@ -71,24 +71,24 @@ function showDiv($type) {
     echo "<br><span id=\"desc_{$lrow['mwID']}\">$truncated</span><br>";
     echo "<div id=\"del_{$lrow['mwID']}\" class=\"small\" style=\"color:gray;visibility:hidden\">";
     if ($allowEdit) {
-      echo "<a href='#' onclick=\"return openMostWanted('{$lrow['mwtype']}','{$lrow['mwID']}');\">" . uiTextSnippet('edit') . "</a>";
+      echo "<a href='#' onclick=\"return openMostWanted('{$lrow['mwtype']}','{$lrow['mwID']}');\">" . uiTextSnippet('edit') . '</a>';
       if ($allowDelete) {
-        echo " | ";
+        echo ' | ';
       }
     }
     if ($allowDelete) {
-      echo "<a href='#' onclick=\"return removeFromMostWanted('{$lrow['mwtype']}','{$lrow['mwID']}');\">" . uiTextSnippet('delete') . "</a>";
+      echo "<a href='#' onclick=\"return removeFromMostWanted('{$lrow['mwtype']}','{$lrow['mwID']}');\">" . uiTextSnippet('delete') . '</a>';
     }
-    echo "</div>";
+    echo '</div>';
     echo "</td>\n";
-    echo "</tr></table>";
+    echo '</tr></table>';
     echo "</div>\n";
   }
   tng_num_rows($result);
   tng_free_result($result);
   echo "</div>\n";
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('mostwanted'));
 ?>
 <!DOCTYPE html>
@@ -99,11 +99,11 @@ $headSection->setTitle(uiTextSnippet('mostwanted'));
     <?php
     echo $adminHeaderSection->build('misc-mostwanted', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_misc.php", uiTextSnippet('menu'), "misc"]);
-    $navList->appendItem([true, "admin_notelist.php", uiTextSnippet('notes'), "notes"]);
-    $navList->appendItem([true, "admin_whatsnewmsg.php", uiTextSnippet('whatsnew'), "whatsnew"]);
-    $navList->appendItem([true, "admin_mostwanted.php", uiTextSnippet('mostwanted'), "mostwanted"]);
-    echo $navList->build("mostwanted");
+    $navList->appendItem([true, 'admin_misc.php', uiTextSnippet('menu'), 'misc']);
+    $navList->appendItem([true, 'admin_notelist.php', uiTextSnippet('notes'), 'notes']);
+    $navList->appendItem([true, 'admin_whatsnewmsg.php', uiTextSnippet('whatsnew'), 'whatsnew']);
+    $navList->appendItem([true, 'admin_mostwanted.php', uiTextSnippet('mostwanted'), 'mostwanted']);
+    echo $navList->build('mostwanted');
     ?>
     <br>
     <a href="mostwanted.php" title='<?php echo uiTextSnippet('preview') ?>'>
@@ -113,14 +113,14 @@ $headSection->setTitle(uiTextSnippet('mostwanted'));
       <tr>
         <td>
           <?php
-          echo displayToggle("plus0", 1, "personarea", uiTextSnippet('mysperson'), "");
+          echo displayToggle('plus0', 1, 'personarea', uiTextSnippet('mysperson'), '');
           echo "<div id=\"personarea\">\n<br>\n";
           showDiv('person');
           echo "<br></div>\n";
 
           echo "<br>\n";
 
-          echo displayToggle("plus1", 1, "photoarea", uiTextSnippet('mysphoto'), "");
+          echo displayToggle('plus1', 1, 'photoarea', uiTextSnippet('mysphoto'), '');
           echo "<div id=\"photoarea\">\n<br>\n";
           showDiv('photo');
           echo "</div>\n";

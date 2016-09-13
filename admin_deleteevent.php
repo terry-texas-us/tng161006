@@ -45,5 +45,5 @@ if ($row['xcount'] == 1) {
 $query = "DELETE FROM $notelinks_table WHERE eventID=\"$eventID\"";
 $result = tng_query($query);
 
-adminwritelog(uiTextSnippet('deleted') . ": " . uiTextSnippet('event') . " $eventID");
+adminwritelog(uiTextSnippet('deleted') . ': ' . uiTextSnippet('event') . " $eventID");
 echo 1;

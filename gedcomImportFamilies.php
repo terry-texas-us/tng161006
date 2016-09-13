@@ -18,8 +18,8 @@ function getFamilyRecord($familyID, $prevlevel) {
   $familyID = adjustID($familyID, $savestate['foffset']);
 
   $prefix = 'F';
-  $info = "";
-  $changedate = "";
+  $info = '';
+  $changedate = '';
   $info['MARR'] = [];
   $info['SLGS'] = [];
   $events = [];
@@ -40,28 +40,28 @@ function getFamilyRecord($familyID, $prevlevel) {
     if ($lineinfo['level'] == $prevlevel) {
       $tag = $lineinfo['tag'];
       switch ($tag) {
-        case "HUSB":
-        case "WIFE":
-          preg_match("/^@(\S+)@/", $lineinfo['rest'], $matches);
+        case 'HUSB':
+        case 'WIFE':
+          preg_match('/^@(\S+)@/', $lineinfo['rest'], $matches);
           $info[$tag] = adjustID($matches[1], $savestate['ioffset']);
           $lineinfo = getLine();
           break;
-        case "MARR":
-        case "DIV":
-        case "SLGS":
+        case 'MARR':
+        case 'DIV':
+        case 'SLGS':
           if (isset($info[$tag]['more'])) {
             $custeventctr++;
             $events[$custeventctr] = [];
             $events[$custeventctr]['TAG'] = $tag;
-            $thisevent = $prefix . "_" . $tag . "_";
+            $thisevent = $prefix . '_' . $tag . '_';
             //make sure it's a keeper before continuing by checking against type_tag_desc list
             if (in_array($thisevent, $custeventlist)) {
-              $events[$custeventctr]['INFO'] = getMoreInfo($familyID, $lineinfo['level'], $tag, "");
+              $events[$custeventctr]['INFO'] = getMoreInfo($familyID, $lineinfo['level'], $tag, '');
             } else {
               $lineinfo = getLine();
             }
           } else {
-            $info[$tag] = getMoreInfo($familyID, $lineinfo['level'], $tag, "");
+            $info[$tag] = getMoreInfo($familyID, $lineinfo['level'], $tag, '');
             if (isset($info[$tag]['NOTES'])) {
               dumpnotes($info[$tag]['NOTES']);
             }
@@ -73,51 +73,51 @@ function getFamilyRecord($familyID, $prevlevel) {
               $custeventctr++;
               $events[$custeventctr] = [];
               $events[$custeventctr]['TAG'] = $tag;
-              $thisevent = $prefix . "_" . $tag . "_";
+              $thisevent = $prefix . '_' . $tag . '_';
               //make sure it's a keeper before continuing by checking against type_tag_desc list
               if (in_array($thisevent, $custeventlist)) {
                 $events[$custeventctr]['INFO'] = $info[$tag];
-                $events[$custeventctr]['INFO']['NOTES'] = "";
-                $events[$custeventctr]['INFO']['SOUR'] = "";
+                $events[$custeventctr]['INFO']['NOTES'] = '';
+                $events[$custeventctr]['INFO']['SOUR'] = '';
               }
             }
             $info[$tag]['more'] = 1;
           }
           break;
           break;
-        case "_LIVING":
-        case "_ALIV":
-        case "_FLAG":
-          $living = ($lineinfo['rest'] == "Y" || $lineinfo['rest'] == "J" || $lineinfo['rest'] == "LIVING") ? 1 : 0;
+        case '_LIVING':
+        case '_ALIV':
+        case '_FLAG':
+          $living = ($lineinfo['rest'] == 'Y' || $lineinfo['rest'] == 'J' || $lineinfo['rest'] == 'LIVING') ? 1 : 0;
           $lineinfo = getLine();
           break;
-        case "_PRIVATE":
-        case "_PRIV":
+        case '_PRIVATE':
+        case '_PRIV':
           $private = 1;
           $lineinfo = getLine();
           break;
-        case "CHAN":
+        case 'CHAN':
           $lineinfo = getLine();
           $changedate = addslashes($lineinfo['rest']);
           if ($changedate) {
             $lineinfo = getLine();
-            if ($lineinfo['tag'] == "TIME") {
-              $changedate .= " " . str_replace("\.", ":", $lineinfo['rest']);
+            if ($lineinfo['tag'] == 'TIME') {
+              $changedate .= ' ' . str_replace("\.", ':', $lineinfo['rest']);
               $lineinfo = getLine();
             }
-            $changedate = date("Y-m-d H:i:s", strtotime($changedate));
+            $changedate = date('Y-m-d H:i:s', strtotime($changedate));
           }
           break;
-        case "CHIL":
-          preg_match("/^@(\S+)@/", $lineinfo['rest'], $matches);
+        case 'CHIL':
+          preg_match('/^@(\S+)@/', $lineinfo['rest'], $matches);
           $child = adjustID($matches[1], $savestate['ioffset']);
-          $frelstr = $mrelstr = "";
+          $frelstr = $mrelstr = '';
           $startlevel = $lineinfo['level'];
           do {
             $lineinfo = getLine();
-            if ($lineinfo['tag'] == "_FREL") {
+            if ($lineinfo['tag'] == '_FREL') {
               $frelstr = ", frel=\"{$lineinfo['rest']}\"";
-            } elseif ($lineinfo['tag'] == "_MREL") {
+            } elseif ($lineinfo['tag'] == '_MREL') {
               $mrelstr = ", mrel=\"{$lineinfo['rest']}\"";
             }
           } while ($lineinfo['level'] > $startlevel);
@@ -126,8 +126,8 @@ function getFamilyRecord($familyID, $prevlevel) {
           $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
           $childorder++;
           break;
-        case "ASSO":
-          preg_match("/^@(\S+)@/", $lineinfo['rest'], $matches);
+        case 'ASSO':
+          preg_match('/^@(\S+)@/', $lineinfo['rest'], $matches);
           $thisassoc = [];
           if (substr($matches[1], 0, 1) == 'I' || substr($matches[1], -1) == 'I') {
             $countertouse = $savestate['ioffset'];
@@ -139,34 +139,34 @@ function getFamilyRecord($familyID, $prevlevel) {
           $thisassoc['asso'] = adjustID($matches[1], $countertouse);
           do {
             $lineinfo = getLine();
-            if ($lineinfo['tag'] == "RELA") {
+            if ($lineinfo['tag'] == 'RELA') {
               $thisassoc['rela'] = $lineinfo['rest'];
             }
           } while ($lineinfo['level'] > $prevlevel);
           array_push($assocarr, $thisassoc);
           break;
-        case "NOTE":
+        case 'NOTE':
           $notecount++;
-          $stdnotes[$notecount]['TAG'] = "";
-          preg_match("/^@(\S+)@/", $lineinfo['rest'], $matches);
+          $stdnotes[$notecount]['TAG'] = '';
+          preg_match('/^@(\S+)@/', $lineinfo['rest'], $matches);
           if ($matches[1]) {
             $stdnotes[$notecount]['XNOTE'] = adjustID($matches[1], $savestate['noffset']);
-            $stdnotes[$notecount]['NOTE'] = "";
+            $stdnotes[$notecount]['NOTE'] = '';
             $lineinfo = getLine();
           } else {
-            $stdnotes[$notecount]['XNOTE'] = "";
+            $stdnotes[$notecount]['XNOTE'] = '';
             $stdnotes[$notecount]['NOTE'] .= addslashes($lineinfo['rest']);
             $stdnotes[$notecount]['NOTE'] .= getContinued();
           }
           $ncitecount = 0;
-          while ($lineinfo['level'] >= $prevlevel && $lineinfo['tag'] == "SOUR") {
+          while ($lineinfo['level'] >= $prevlevel && $lineinfo['tag'] == 'SOUR') {
             $ncitecount++;
             $stdnotes[$notecount]['SOUR'][$ncitecount] = handleSource($familyID, $prevlevel + 1);
           }
           break;
-        case "OBJE":
+        case 'OBJE':
           if ($savestate['media']) {
-            preg_match("/^@(\S+)@/", $lineinfo['rest'], $matches);
+            preg_match('/^@(\S+)@/', $lineinfo['rest'], $matches);
             $mmcount++;
             $mminfo[$mmcount] = getMoreMMInfo($lineinfo['level'], $mmcount);
             $mminfo[$mmcount]['OBJE'] = $matches[1] ? $matches[1] : $mminfo[$mmcount]['FILE'];
@@ -175,7 +175,7 @@ function getFamilyRecord($familyID, $prevlevel) {
             $lineinfo = getLine();
           }
           break;
-        case "SOUR":
+        case 'SOUR':
           $citecount++;
           $cite[$citecount] = handleSource($familyID, $prevlevel, $prevtag, $prevtype);
           break;
@@ -190,23 +190,23 @@ function getFamilyRecord($familyID, $prevlevel) {
     }
   }
   //do TEMP + PLAC
-  $slgsplace = trim($info['SLGS']['TEMP'] . " " . $info['SLGS']['PLAC']);
+  $slgsplace = trim($info['SLGS']['TEMP'] . ' ' . $info['SLGS']['PLAC']);
 
-  $inschangedt = $changedate ? $changedate : ($tngimpcfg['chdate'] == "1" ? "0000-00-00 00:00:00" : $today);
+  $inschangedt = $changedate ? $changedate : ($tngimpcfg['chdate'] == '1' ? '0000-00-00 00:00:00' : $today);
   if (!$info['MARR']['DATETR']) {
-    $info['MARR']['DATETR'] = "0000-00-00";
+    $info['MARR']['DATETR'] = '0000-00-00';
   }
   if (!$info['DIV']['DATETR']) {
-    $info['DIV']['DATETR'] = "0000-00-00";
+    $info['DIV']['DATETR'] = '0000-00-00';
   }
   if (!$info['SLGS']['DATETR']) {
-    $info['SLGS']['DATETR'] = "0000-00-00";
+    $info['SLGS']['DATETR'] = '0000-00-00';
   }
   $query = "INSERT IGNORE INTO $families_table (familyID, marrdate, marrdatetr, marrplace, marrtype, divdate, divdatetr, divplace, husband, wife, sealdate, sealdatetr, sealplace, changedate, branch, living, private, changedby ) "
       . "VALUES('$familyID', \"" . $info['MARR']['DATE'] . "\", \"" . $info['MARR']['DATETR'] . "\", \"" . $info['MARR']['PLAC'] . "\", \"" . $info['MARR']['TYPE'] . "\", \"" . $info['DIV']['DATE'] . "\", \"" . $info['DIV']['DATETR'] . "\", \"" . $info['DIV']['PLAC'] . "\", \"" . $info['HUSB'] . "\", \"" . $info['WIFE'] . "\", \"" . $info['SLGS']['DATE'] . "\", \"" . $info['SLGS']['DATETR'] . "\", '$slgsplace', '$inschangedt', \"{$savestate['branch']}\", '$living', '$private', '$currentuser')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   $success = tng_affected_rows();
-  if (!$success && $savestate['del'] != "no") {
+  if (!$success && $savestate['del'] != 'no') {
     if ($savestate['neweronly'] && $inschangedt) {
       $query = "SELECT changedate FROM $families_table WHERE familyID = '$familyID'";
       $result = tng_query($query);
@@ -219,13 +219,13 @@ function getFamilyRecord($familyID, $prevlevel) {
       $goahead = 1;
     }
     if ($goahead) {
-      $chdatestr = $inschangedt ? ", changedate=\"$inschangedt\"" : "";
-      $branchstr = $savestate['branch'] ? ", branch=\"{$savestate['branch']}\"" : "";
+      $chdatestr = $inschangedt ? ", changedate=\"$inschangedt\"" : '';
+      $branchstr = $savestate['branch'] ? ", branch=\"{$savestate['branch']}\"" : '';
       $query = "UPDATE $families_table SET marrdate=\"" . $info['MARR']['DATE'] . "\", marrdatetr=\"" . $info['MARR']['DATETR'] . "\", marrplace=\"" . $info['MARR']['PLAC'] . "\", marrtype=\"" . $info['MARR']['TYPE'] . "\", divdate=\"" . $info['DIV']['DATE'] . "\", divdatetr=\"" . $info['DIV']['DATETR'] . "\", divplace=\"" . $info['DIV']['PLAC'] . "\", husband=\"" . $info['HUSB'] . "\", wife=\"" . $info['WIFE'] . "\", sealdate=\"" . $info['SLGS']['DATE'] . "\", sealdatetr=\"" . $info['SLGS']['DATETR'] . "\", sealplace = '$slgsplace', changedby = '$currentuser' $chdatestr$branchstr WHERE familyID = '$familyID'";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $success = 1;
 
-      if ($savestate['del'] == "match") {
+      if ($savestate['del'] == 'match') {
         //delete all custom events for this family because we didn't before
         deleteLinksOnMatch($familyID);
       }
@@ -240,7 +240,7 @@ function getFamilyRecord($familyID, $prevlevel) {
       saveCustEvents($prefix, $familyID, $events, $custeventctr);
     }
     if (isset($cite)) {
-      processCitations($familyID, "", $cite);
+      processCitations($familyID, '', $cite);
     }
     foreach ($fciteevents as $citeevent) {
       if (isset($info[$citeevent]['SOUR'])) {
@@ -262,7 +262,7 @@ function getFamilyRecord($familyID, $prevlevel) {
     }
 
     if ($mmcount) {
-      processMedia($mmcount, $mminfo, $familyID, "");
+      processMedia($mmcount, $mminfo, $familyID, '');
     }
 
     //do event-based media

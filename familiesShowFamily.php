@@ -5,10 +5,10 @@ require 'personlib.php';
 require 'families.php';
 
 $firstsection = 0;
-$tableid = "";
+$tableid = '';
 $cellnumber = 0;
 $notestogether = 0; //so they always show at the bottom
-$allow_lds_this = "";
+$allow_lds_this = '';
 
 $flags['imgprev'] = true;
 
@@ -25,7 +25,7 @@ $factcols = $totcols - 1;
 function showFact($text, $fact) {
   global $factcols;
   $facttext = "<tr>\n";
-  $facttext .= "<td>" . $text . "</td>\n";
+  $facttext .= '<td>' . $text . "</td>\n";
   $facttext .= "<td colspan=\"$factcols\"><span>$fact&nbsp;</span></td>\n";
   $facttext .= "</tr>\n";
 
@@ -38,17 +38,17 @@ function showDatePlace($event) {
   global $tentative_edit;
   global $familyID;
 
-  $dptext = "";
+  $dptext = '';
   if (!$cellnumber) {
     $cellid = " id='info1'";
     $cellnumber++;
   } else {
-    $cellid = "";
+    $cellid = '';
   }
 
-  $dcitestr = $pcitestr = "";
+  $dcitestr = $pcitestr = '';
   if ($event['date'] || $event['place']) {
-    $citekey = $familyID . "_" . $event['event'];
+    $citekey = $familyID . '_' . $event['event'];
     $cite = reorderCitation($citekey);
     if ($cite) {
       $dcitestr = $event['date'] ? "<sup>$cite</sup>" : '';
@@ -56,11 +56,11 @@ function showDatePlace($event) {
     }
   }
   $dptext .= "<tr>\n";
-  $editicon = $tentative_edit ? "<img class='icon-sm' src='svg/new-message.svg' alt=\"" . uiTextSnippet('editevent') . "\" onclick=\"tnglitbox = new ModalDialog('ajx_tentedit.php?persfamID={$event['ID']}&amp;type={$event['type']}&amp;event={$event['event']}&amp;title={$event['text']}');\" class=\"fakelink\">" : "";
+  $editicon = $tentative_edit ? "<img class='icon-sm' src='svg/new-message.svg' alt=\"" . uiTextSnippet('editevent') . "\" onclick=\"tnglitbox = new ModalDialog('ajx_tentedit.php?persfamID={$event['ID']}&amp;type={$event['type']}&amp;event={$event['event']}&amp;title={$event['text']}');\" class=\"fakelink\">" : '';
   $dptext .= "<td $cellid><span>" . $event['text'] . "$editicon</span></td>\n";
   $dptext .= "<td colspan='2'>" . displayDate($event['date']) . " $dcitestr<br>\n";
   if ($allow_lds_this && $event['ldstext']) {
-    if ($event['eventlds'] == "div") {
+    if ($event['eventlds'] == 'div') {
       $dptext .= " colspan='4'";
     }
   }
@@ -74,10 +74,10 @@ function showDatePlace($event) {
       $event['type'] = $event['type2'];
       $event['ID'] = $event['ID2'];
     }
-    $editicon = $tentative_edit && $event['eventlds'] ? "<img class='icon-sm' src='svg/new-message.svg' alt=\"" . uiTextSnippet('editevent') . "\" onclick=\"tnglitbox = new ModalDialog('ajx_tentedit.php?persfamID={$event['ID']}&amp;type={$event['type']}&amp;event={$event['eventlds']}&amp;title={$event['ldstext']}');\" class=\"fakelink\">" : "";
-    $dptext .= "<td>" . $event['ldstext'] . "$editicon</td>\n";
-    $dptext .= "<td><span>" . displayDate($event['ldsdate']) . "&nbsp;</span></td>\n";
-    $dptext .= "<td><span>";
+    $editicon = $tentative_edit && $event['eventlds'] ? "<img class='icon-sm' src='svg/new-message.svg' alt=\"" . uiTextSnippet('editevent') . "\" onclick=\"tnglitbox = new ModalDialog('ajx_tentedit.php?persfamID={$event['ID']}&amp;type={$event['type']}&amp;event={$event['eventlds']}&amp;title={$event['ldstext']}');\" class=\"fakelink\">" : '';
+    $dptext .= '<td>' . $event['ldstext'] . "$editicon</td>\n";
+    $dptext .= '<td><span>' . displayDate($event['ldsdate']) . "&nbsp;</span></td>\n";
+    $dptext .= '<td><span>';
     if ($event['ldsplace'] && $event['ldsplace'] != uiTextSnippet('place')) {
       $dptext .= buildSilentPlaceLink($event['ldsplace']);
     }
@@ -98,7 +98,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   global $people_table;
   global $personID;
 
-  $indtext = "";
+  $indtext = '';
 
   $rightbranch = checkbranch($ind['branch']);
   $rights = determineLivingPrivateRights($ind, $rightbranch);
@@ -106,8 +106,8 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   $ind['allow_private'] = $rights['private'];
 
   $allow_lds_this = $rights['lds'];
-  $haskids = $ind['haskids'] ? "X" : "&nbsp;";
-  $restriction = $familyID ? "AND familyID != \"$familyID\"" : "";
+  $haskids = $ind['haskids'] ? 'X' : '&nbsp;';
+  $restriction = $familyID ? "AND familyID != \"$familyID\"" : '';
   if ($ind['sex'] == 'M') {
     $sex = uiTextSnippet('male');
   } else {
@@ -131,19 +131,19 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   //show photo & name
   $indtext .= showSmallPhoto($ind['personID'], $namestr, $rights['both'], 0, false, $ind['sex']);
   $indtext .= "<span>$label | $sex</span>\n";
-  $indtext .= "<h4>";
+  $indtext .= '<h4>';
   if ($ind['haskids']) {
-    $indtext .= "+ ";
+    $indtext .= '+ ';
   }
   $indtext .= "<a href='peopleShowPerson.php?personID={$ind['personID']}'>$namestr</a>";
 
   if ($allowEdit && $rightbranch) {
-    $indtext .= " | <a href='peopleEdit.php?personID={$ind['personID']}&amp;cw=1' target='_blank'>" . uiTextSnippet('edit') . "</a>";
+    $indtext .= " | <a href='peopleEdit.php?personID={$ind['personID']}&amp;cw=1' target='_blank'>" . uiTextSnippet('edit') . '</a>';
   }
   $indtext .= "</h4>\n";
   $indtext .= "</div>\n"; // .card-header
 
-  $event = "";
+  $event = '';
 
   $indtext .= "<table class='table table-sm'>\n";
   $indtext .= "<colgroup>\n";
@@ -158,7 +158,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   }
   $indtext .= "</colgroup>\n";
   $event['text'] = uiTextSnippet('born');
-  $event['event'] = "BIRT";
+  $event['event'] = 'BIRT';
   $event['type'] = 'I';
   $event['ID'] = $personID;
   $event['ldstext'] = uiTextSnippet('ldsords');
@@ -172,11 +172,11 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   }
   $indtext .= showDatePlace($event);
 
-  $event = "";
-  $event['event'] = "CHR";
+  $event = '';
+  $event['event'] = 'CHR';
   $event['type'] = 'I';
   $event['ID'] = $personID;
-  $event['eventlds'] = "BAPL";
+  $event['eventlds'] = 'BAPL';
   $event['ldstext'] = uiTextSnippet('baptizedlds');
   if ($rights['both']) {
     $event['date'] = $ind['altbirthdate'];
@@ -191,12 +191,12 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
     $indtext .= showDatePlace($event);
   }
 
-  $event = "";
+  $event = '';
   $event['text'] = uiTextSnippet('died');
-  $event['event'] = "DEAT";
+  $event['event'] = 'DEAT';
   $event['type'] = 'I';
   $event['ID'] = $personID;
-  $event['eventlds'] = "ENDL";
+  $event['eventlds'] = 'ENDL';
   $event['ldstext'] = uiTextSnippet('endowedlds');
   if ($rights['both']) {
     $event['date'] = $ind['deathdate'];
@@ -208,12 +208,12 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   }
   $indtext .= showDatePlace($event);
 
-  $event = "";
+  $event = '';
   $event['text'] = $ind['burialtype'] ? uiTextSnippet('cremated') : uiTextSnippet('buried');
-  $event['event'] = "BURI";
+  $event['event'] = 'BURI';
   $event['type'] = 'I';
   $event['ID'] = $personID;
-  $event['eventlds'] = "SLGC";
+  $event['eventlds'] = 'SLGC';
   $event['ldstext'] = uiTextSnippet('sealedplds');
   if ($rights['both']) {
     $event['date'] = $ind['burialdate'];
@@ -227,7 +227,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
         $ind['sealplace'] = $sealinfo['sealplace'];
         tng_free_result($cresult);
       }
-      $event['type2'] = "C";
+      $event['type2'] = 'C';
       $event['ID2'] = "$personID::{$ind['famc']}";
       $event['ldsdate'] = $ind['sealdate'];
       $event['ldsplace'] = $ind['sealplace'];
@@ -247,13 +247,13 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
 
       tng_free_result($result);
 
-      $event = "";
-      $eventd = "";
+      $event = '';
+      $eventd = '';
       $event['text'] = uiTextSnippet('married');
-      $event['event'] = "MARR";
+      $event['event'] = 'MARR';
       $event['type'] = 'F';
       $event['ID'] = $familyID;
-      $event['eventlds'] = "SLGS";
+      $event['eventlds'] = 'SLGS';
       $event['ldstext'] = uiTextSnippet('sealedslds');
       if ($famrights['both'] && $rights['both']) {
         $event['date'] = $fam['marrdate'];
@@ -262,14 +262,14 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
           $event['ldsdate'] = $fam['sealdate'];
           $event['ldsplace'] = $fam['sealplace'];
         }
-        $eventd['event'] = "DIV";
+        $eventd['event'] = 'DIV';
         $eventd['text'] = uiTextSnippet('divorced');
         $eventd['date'] = $fam['divdate'];
         $eventd['place'] = $fam['divplace'];
       }
       $indtext .= showDatePlace($event);
-      $eventd['ldstext'] = "";
-      $eventd['eventlds'] = "div";
+      $eventd['ldstext'] = '';
+      $eventd['eventlds'] = 'div';
       if ($eventd['date'] || $eventd['place']) {
         $indtext .= showDatePlace($eventd);
       }
@@ -302,7 +302,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
     $fam['allow_private'] = $famrights['private'];
 
     $spousename = getName($fam);
-    $spouselink = $spousename ? "<a href=\"peopleShowPerson.php?personID={$fam['personID']}\">$spousename</a> | " : "";
+    $spouselink = $spousename ? "<a href=\"peopleShowPerson.php?personID={$fam['personID']}\">$spousename</a> | " : '';
     $spouselink .= "<a href=\"familiesShowFamily.php?familyID={$fam['familyID']}\">{$fam['familyID']}</a>";
 
     $fam['living'] = $fam['fliving'];
@@ -316,12 +316,12 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
     }
     $indtext .= showFact($spousetext, $spouselink);
 
-    $event = "";
+    $event = '';
     $event['text'] = uiTextSnippet('married');
-    $event['event'] = "MARR";
+    $event['event'] = 'MARR';
     $event['type'] = 'F';
     $event['ID'] = $fam['familyID'];
-    $event['eventlds'] = "SLGS";
+    $event['eventlds'] = 'SLGS';
     $event['ldstext'] = uiTextSnippet('sealedslds');
     if ($famrights['both'] && $rights['both']) {
       $event['date'] = $fam['marrdate'];
@@ -346,8 +346,8 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
 
     $fathername = getName($parent);
     tng_free_result($presult);
-    $fatherlink = $fathername ? "<a href=\"peopleShowPerson.php?personID={$parent['personID']}\">$fathername</a> | " : "";
-    $fatherlink .= $fathername ? "<a href=\"familiesShowFamily.php?familyID={$parent['familyID']}\">{$parent['familyID']} " . uiTextSnippet('groupsheet') . "</a>" : "";
+    $fatherlink = $fathername ? "<a href=\"peopleShowPerson.php?personID={$parent['personID']}\">$fathername</a> | " : '';
+    $fatherlink .= $fathername ? "<a href=\"familiesShowFamily.php?familyID={$parent['familyID']}\">{$parent['familyID']} " . uiTextSnippet('groupsheet') . '</a>' : '';
     $indtext .= showFact(uiTextSnippet('father'), $fatherlink);
 
     $query = "SELECT familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, $people_table.living, $people_table.private, $people_table.branch FROM ($families_table, $people_table) WHERE $families_table.familyID = \"{$ind['famc']}\" AND $people_table.personID = $families_table.wife";
@@ -360,8 +360,8 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
 
     $mothername = getName($parent);
     tng_free_result($presult);
-    $motherlink = $mothername ? "<a href=\"peopleShowPerson.php?personID={$parent['personID']}\">$mothername</a> | " : "";
-    $motherlink .= $mothername ? "<a href=\"familiesShowFamily.php?familyID={$parent['familyID']}\">{$parent['familyID']} " . uiTextSnippet('groupsheet') . "</a>" : "";
+    $motherlink = $mothername ? "<a href=\"peopleShowPerson.php?personID={$parent['personID']}\">$mothername</a> | " : '';
+    $motherlink .= $mothername ? "<a href=\"familiesShowFamily.php?familyID={$parent['familyID']}\">{$parent['familyID']} " . uiTextSnippet('groupsheet') . '</a>' : '';
     $indtext .= showFact(uiTextSnippet('mother'), $motherlink);
   }
   $indtext .= "</table>\n";
@@ -375,7 +375,7 @@ $result = tng_query($query);
 $famrow = tng_fetch_assoc($result);
 if (!tng_num_rows($result)) {
   tng_free_result($result);
-  header("Location: thispagedoesnotexist.html");
+  header('Location: thispagedoesnotexist.html');
   exit;
 } else {
   tng_free_result($result);
@@ -386,9 +386,9 @@ $famrow['allow_living'] = $rights['living'];
 $famrow['allow_private'] = $rights['private'];
 
 $famname = getFamilyName($famrow);
-$namestr = uiTextSnippet('family') . ": " . $famname;
+$namestr = uiTextSnippet('family') . ': ' . $famname;
 if (!$rightbranch) {
-  $tentative_edit = "";
+  $tentative_edit = '';
 }
 
 $logstring = "<a href=\"familiesShowFamily.php?familyID=$familyID\">" . uiTextSnippet('familygroupfor') . " $famname</a>";
@@ -397,10 +397,10 @@ preparebookmark($logstring);
 
 $famnotes = getNotes($familyID, 'F');
 
-$years = $famrow['marrdate'] && $rights['both'] ? uiTextSnippet('marrabbr') . " " . displayDate($famrow['marrdate']) : "";
+$years = $famrow['marrdate'] && $rights['both'] ? uiTextSnippet('marrabbr') . ' ' . displayDate($famrow['marrdate']) : '';
 if ($rights['both']) {
   getCitations($familyID);
-  $citekey = $familyID . "_";
+  $citekey = $familyID . '_';
   $cite = reorderCitation($citekey);
   if ($cite) {
     $namestr .= "<sup>&nbsp; [$cite]&nbsp;</sup>";
@@ -413,7 +413,7 @@ if ($rights['both']) {
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle($headTitle);
 ?>
 <!DOCTYPE html>
@@ -426,7 +426,7 @@ $headSection->setTitle($headTitle);
     $photostr = showSmallPhoto($familyID, $famname, $rights['both'], 0);
     echo tng_DrawHeading($photostr, $namestr, $years);
 
-    $famtext = "";
+    $famtext = '';
     $personID = $famrow['husband'] ? $famrow['husband'] : $famrow['wife'];
     $fammedia = getMedia($famrow, 'F');
     $famalbums = getAlbums($famrow, 'F');
@@ -462,7 +462,7 @@ $headSection->setTitle($headTitle);
       $childcount = 0;
       while ($childrow = tng_fetch_assoc($children)) {
         $childcount++;
-        $famtext .= displayIndividual($childrow, uiTextSnippet('child') . " $childcount", "", 1);
+        $famtext .= displayIndividual($childrow, uiTextSnippet('child') . " $childcount", '', 1);
       }
     }
     tng_free_result($children);
@@ -470,14 +470,14 @@ $headSection->setTitle($headTitle);
     //    $famtext .= endListItem('info');
 
     $firstsection = 1;
-    $firstsectionsave = "";
+    $firstsectionsave = '';
 
-    $assoctext = "";
+    $assoctext = '';
     if ($rights['both']) {
       $query = "SELECT passocID, relationship, reltype FROM $assoc_table WHERE personID = '$familyID'";
       $assocresult = tng_query($query);
       while ($assoc = tng_fetch_assoc($assocresult)) {
-        $assoctext .= showEvent(["text" => uiTextSnippet('association'), "fact" => formatAssoc($assoc)]);
+        $assoctext .= showEvent(['text' => uiTextSnippet('association'), 'fact' => formatAssoc($assoc)]);
       }
       tng_free_result($assocresult);
       if ($assoctext) {
@@ -527,7 +527,7 @@ $headSection->setTitle($headTitle);
         foreach ($citestring as $cite) {
           $famtext .= "<li><a name='cite" . ++$citectr . "'></a>$cite<br>";
           if ($citectr < $count) {
-            $famtext .= "<br>";
+            $famtext .= '<br>';
           }
           $famtext .= "</li>\n";
         }
@@ -572,12 +572,12 @@ $headSection->setTitle($headTitle);
       }
       $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('all');\">" . uiTextSnippet('all') . "</a>\n";
     } else {
-      $innermenu = "<span>" . uiTextSnippet('faminfo') . "</span>\n";
+      $innermenu = '<span>' . uiTextSnippet('faminfo') . "</span>\n";
     }
     if ($allow_pdf && $rightbranch) {
       $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=fam&amp;familyID=$familyID');return false;\">PDF</a>\n";
     }
-    echo buildFamilyMenu("family", $familyID);
+    echo buildFamilyMenu('family', $familyID);
     echo "<div class='pub-innermenu small'>\n";
       echo $innermenu;
     echo "</div>\n";
@@ -590,7 +590,7 @@ $headSection->setTitle($headTitle);
   <script src="js/rpt_utils.js"></script>
   <?php if ($tentative_edit) { ?>
     <script>
-      var preferEuro = <?php echo ($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;
+      var preferEuro = <?php echo ($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : 'false'); ?>;
       var preferDateFormat = '<?php echo $preferDateFormat; ?>';
     </script>
     <script src="js/tentedit.js"></script>

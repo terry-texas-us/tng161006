@@ -11,10 +11,10 @@ $eventtypes = tng_query($query);
 $eventtype = tng_fetch_assoc($eventtypes);
 
 if ($eventtype['display']) {
-  $dispvalues = explode("|", $eventtype['display']);
+  $dispvalues = explode('|', $eventtype['display']);
   $numvalues = count($dispvalues);
   if ($numvalues > 1) {
-    $displayval = "";
+    $displayval = '';
     for ($i = 0; $i < $numvalues; $i += 2) {
       $lang = $dispvalues[$i];
       if ($mylanguage == $languagesPath . $lang) {
@@ -34,9 +34,9 @@ if ($eventtype['display']) {
 }
 tng_free_result($eventtypes);
 
-$helplang = findhelp("notes_help.php");
+$helplang = findhelp('notes_help.php');
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 
 $query = "SELECT $notelinks_table.ID AS ID, $xnotes_table.note AS note, noteID, secret FROM ($notelinks_table, $xnotes_table)
     WHERE $notelinks_table.xnoteID = $xnotes_table.ID AND persfamID = '$persfamID' AND eventID = '$eventID' ORDER BY ordernum, ID";
@@ -80,7 +80,7 @@ $notecount = tng_num_rows($notelinks);
               $citquery .= "persfamID = \"$persfamID\" AND eventID = \"N{$note['ID']}\"";
             }
             $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
-            $iconColor = tng_num_rows($citresult) ? "icon-info" : "icon-muted";
+            $iconColor = tng_num_rows($citresult) ? 'icon-info' : 'icon-muted';
             tng_free_result($citresult);
 
             $note['note'] = cleanIt($note['note']);
@@ -89,23 +89,23 @@ $notecount = tng_num_rows($notelinks);
             if ($allowEdit) {
               $actionstr .= "<a href='#' onclick=\"return editNote({$note['ID']});\" title='" . uiTextSnippet('edit') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
-              $actionstr .= "</a>";
+              $actionstr .= '</a>';
             }
             if ($allowDelete) {
               $actionstr .= "<a href='#' onclick=\"return deleteNote({$note['ID']},'$persfamID','$eventID');\" title='" . uiTextSnippet('delete') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
-              $actionstr .= "</a>";
+              $actionstr .= '</a>';
             }
             $citesLink = "<a id=\"citesiconN{$note['ID']}\" href='#' onclick=\"return showCitationsInside('N{$note['ID']}','{$note['noteID']}', '$persfamID');\" title='" . uiTextSnippet('citations') . "'>\n";
             $citesLink .= "<img class='icon-sm icon-citations $iconColor' data-src='svg/archive.svg'>\n";
-            $citesLink .= "</a>";
+            $citesLink .= '</a>';
             echo "<div class=\"sortrow\" id=\"notes_{$note['ID']}\">";
               echo "<table class='table table-sm'>";
                 echo "<tr id=\"row_{$note['ID']}\">";
                   echo "<td class='dragarea'>\n";
                     echo "<img src='img/admArrowUp.gif' alt=''><br>\n";
                     echo "<img src='img/admArrowDown.gif' alt=''>\n";
-                  echo "</td>";
+                  echo '</td>';
                   echo "<td>$actionstr$citesLink</td>";
                   echo "<td>$truncated</td>";
                 echo "</tr>\n";

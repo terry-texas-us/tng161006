@@ -4,11 +4,11 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-if ($session_charset != "UTF-8") {
+if ($session_charset != 'UTF-8') {
   $myfirstname = tng_utf8_decode($myfirstname);
   $mylastname = tng_utf8_decode($mylastname);
 }
-$allwhere = "1";
+$allwhere = '1';
 if ($personID) {
   $allwhere .= " AND personID = \"$personID\"";
 }
@@ -26,7 +26,7 @@ $query = "SELECT personID, lastname, firstname, lnprefix, birthdate, altbirthdat
         . "FROM $people_table WHERE $allwhere ORDER BY lastname, lnprefix, firstname LIMIT 250";
 $result = tng_query($query);
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <div id='findpersonresdiv'>
   <table class='table table-sm'>
@@ -48,21 +48,21 @@ header("Content-type:text/html; charset=" . $session_charset);
     <?php
     while ($row = tng_fetch_assoc($result)) {
       if ($row['birthdate']) {
-        $birthdate = uiTextSnippet('birthabbr') . " " . $row['birthdate'];
+        $birthdate = uiTextSnippet('birthabbr') . ' ' . $row['birthdate'];
       } else {
         if ($row['altbirthdate']) {
-          $birthdate = uiTextSnippet('chrabbr') . " " . $row['altbirthdate'];
+          $birthdate = uiTextSnippet('chrabbr') . ' ' . $row['altbirthdate'];
         } else {
-          $birthdate = "";
+          $birthdate = '';
         }
       }
       if ($row['deathdate']) {
-        $deathdate = uiTextSnippet('deathabbr') . " " . $row['deathdate'];
+        $deathdate = uiTextSnippet('deathabbr') . ' ' . $row['deathdate'];
       } else {
         if ($row['burialdate']) {
-          $deathdate = uiTextSnippet('burialabbr') . " " . $row['burial'];
+          $deathdate = uiTextSnippet('burialabbr') . ' ' . $row['burial'];
         } else {
-          $deathdate = "";
+          $deathdate = '';
         }
       }
       if (!$birthdate && $deathdate) {

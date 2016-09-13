@@ -1,14 +1,14 @@
 <?php
 require 'tng_begin.php';
 
-$logstring = "<a href='placesMain.php'>" . uiTextSnippet('placelist') . "</a>";
+$logstring = "<a href='placesMain.php'>" . uiTextSnippet('placelist') . '</a>';
 writelog($logstring);
 preparebookmark($logstring);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('placelist'));
 ?>
 <!DOCTYPE html>
@@ -20,11 +20,11 @@ $headSection->setTitle(uiTextSnippet('placelist'));
     <h2><img class='icon-md' src='svg/location.svg'><?php echo uiTextSnippet('placelist'); ?></h2>
     <br class='clearleft'>
     <?php
-    $linkstr = "";
-    $linkstr2col1 = "";
-    $linkstr2col2 = "";
-    $linkstr3col1 = "";
-    $linkstr3col2 = "";
+    $linkstr = '';
+    $linkstr2col1 = '';
+    $linkstr2col2 = '';
+    $linkstr3col1 = '';
+    $linkstr3col2 = '';
     $collen = 10;
     $cols = 3;
 
@@ -39,11 +39,11 @@ $headSection->setTitle(uiTextSnippet('placelist'));
 
       while ($place = tng_fetch_assoc($result)) {
         if ($initialchar != 1) {
-          $linkstr .= " ";
+          $linkstr .= ' ';
         }
-        if ($place['firstchar'] != "") {
+        if ($place['firstchar'] != '') {
           $urlfirstchar = urlencode($place['firstchar']);
-          $countstr = uiTextSnippet('placesstarting') . ": " . $place['firstchar'] . " (" . number_format($place['placecount']) . " " . uiTextSnippet('totalnames') . ")";
+          $countstr = uiTextSnippet('placesstarting') . ': ' . $place['firstchar'] . ' (' . number_format($place['placecount']) . ' ' . uiTextSnippet('totalnames') . ')';
           $linkstr .= "<a href=\"places-oneletter.php?firstchar=$urlfirstchar&amp;offset=$offsetorg&amp;psearch=$psearch\" title=\"$countstr\">$place[firstchar]</a> ";
         }
         $initialchar++;
@@ -60,7 +60,7 @@ $headSection->setTitle(uiTextSnippet('placelist'));
       $col = -1;
       while ($place = tng_fetch_assoc($result)) {
         $place2 = urlencode($place['myplace']);
-        if ($place2 != "") {
+        if ($place2 != '') {
           if (!$maxcount) {
             $maxcount = $place['placecount'];
           }
@@ -73,8 +73,8 @@ $headSection->setTitle(uiTextSnippet('placelist'));
           $specificcount = $countrow['placecount'];
           tng_free_result($result2);
 
-          $searchlink = $specificcount ? " <a href='placesearch.php?psearch=$place2'><img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=''></a>" : "";
-          $name = $place['placecount'] > 1 || !$specificcount ? "<a href=\"places-oneletter.php?offset=$offset&amp;psearch=$place2\">" . str_replace(["<", ">"], ["&lt;", "&gt;"], $place['myplace']) . "</a> ($tally_fmt)" : $place['myplace'];
+          $searchlink = $specificcount ? " <a href='placesearch.php?psearch=$place2'><img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=''></a>" : '';
+          $name = $place['placecount'] > 1 || !$specificcount ? "<a href=\"places-oneletter.php?offset=$offset&amp;psearch=$place2\">" . str_replace(['<', '>'], ['&lt;', '&gt;'], $place['myplace']) . "</a> ($tally_fmt)" : $place['myplace'];
           if (($count - 1) % $collen == 0) {
             $col++;
           }
@@ -93,14 +93,14 @@ $headSection->setTitle(uiTextSnippet('placelist'));
         </h4>
         <p class="firstchars"><?php echo $linkstr; ?></p>
         <?php
-        beginFormElement("places-oneletter", "get");
+        beginFormElement('places-oneletter', 'get');
         echo uiTextSnippet('placescont') . ": <input name='psearch' type='text' />\n";
         echo "<input name='stretch' type='hidden' value='1'>\n";
         echo "<input name='pgo' type='submit' value=\"" . uiTextSnippet('go') . "\" />\n";
         endFormElement();
         ?>
         <br>
-        <?php echo "<a href='places-all.php'>" . uiTextSnippet('showallplaces') . "</a> (" . uiTextSnippet('sortedalpha') . ")"; ?>
+        <?php echo "<a href='places-all.php'>" . uiTextSnippet('showallplaces') . '</a> (' . uiTextSnippet('sortedalpha') . ')'; ?>
         </div>
     </div>
     <br>
@@ -109,7 +109,7 @@ $headSection->setTitle(uiTextSnippet('placelist'));
       <div class='card-block'>
         <h4 class="card-header">
           <?php
-          echo str_replace('{xxx}', '30', uiTextSnippet('top{xxx}places')) . " (" . uiTextSnippet('totalplaces') . "):"; 
+          echo str_replace('{xxx}', '30', uiTextSnippet('top{xxx}places')) . ' (' . uiTextSnippet('totalplaces') . '):'; 
           ?>
         </h4>
         <table class='table table-sm'>
@@ -134,7 +134,7 @@ $headSection->setTitle(uiTextSnippet('placelist'));
         </table>
         <div>
           <?php
-          beginFormElement("places100", "get");
+          beginFormElement('places100', 'get');
           echo uiTextSnippet('showtop');
           echo "<input name='topnum' type='text' value='100' size='4' maxlength='4'> " . uiTextSnippet('byoccurrence') . "\n";
           echo "<input type=\"submit\" value=\"" . uiTextSnippet('go') . "\" />\n";

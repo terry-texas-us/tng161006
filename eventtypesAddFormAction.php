@@ -7,7 +7,7 @@ require 'checklogin.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
@@ -32,10 +32,10 @@ $query = "INSERT INTO $eventtypes_table (tag,description,display,type,keep,colla
 $result = tng_query($query);
 if (tng_affected_rows() == 1) {
   $eventtypeID = tng_insert_id();
-  $message = uiTextSnippet('eventtype') . " $eventtypeID " . uiTextSnippet('succadded') . ".";
+  $message = uiTextSnippet('eventtype') . " $eventtypeID " . uiTextSnippet('succadded') . '.';
 
   adminwritelog(uiTextSnippet('addnewevtype') . ": $tag $type - $display");
 } else {
   $message = uiTextSnippet('eventtype') . " $eventtypeID " . uiTextSnippet('idexists') . '.';
 }
-header("Location: eventtypesBrowse.php?message=" . urlencode($message));
+header('Location: eventtypesBrowse.php?message=' . urlencode($message));

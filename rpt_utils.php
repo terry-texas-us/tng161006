@@ -144,7 +144,7 @@ function getMyAncestors($focalPerson, $gen) {
       if ($ancestorInfo[$i][$j]['personID'] != 'X' && $ancestorInfo[$i][$j]['personID'] != '') {
         // find the family for this person
         $personID = $ancestorInfo[$i][$j]['personID'];
-        $result = getChildFamily($personID, "parentorder");
+        $result = getChildFamily($personID, 'parentorder');
         if ($result) {
           $row = tng_fetch_assoc($result);
           $familyID = $row['familyID'];
@@ -164,7 +164,7 @@ function getMyAncestors($focalPerson, $gen) {
               $ancestorInfo[$i + 1][2 * $j]['personID'] = 'X';
             } else {
               if (!$rights['both']) {
-                $row['birthdate'] = $row['birthplace'] = $row['altbirthdate'] = $row['altbirthplace'] = $row['deathdate'] = $row['deathplace'] = $row['burialdate'] = $row['burialplace'] = $row['marrdate'] = $row['marrplace'] = "";
+                $row['birthdate'] = $row['birthplace'] = $row['altbirthdate'] = $row['altbirthplace'] = $row['deathdate'] = $row['deathplace'] = $row['burialdate'] = $row['burialplace'] = $row['marrdate'] = $row['marrplace'] = '';
               } else {
                 $row['birthdate'] = displayDate($row['birthdate']);
                 $row['altbirthdate'] = displayDate($row['altbirthdate']);
@@ -192,7 +192,7 @@ function getMyAncestors($focalPerson, $gen) {
               $ancestorInfo[$i + 1][2 * $j + 1]['personID'] = 'X';
             } else {
               if (!$rights['both']) {
-                $row['birthdate'] = $row['birthplace'] = $row['altbirthdate'] = $row['altbirthplace'] = $row['deathdate'] = $row['deathplace'] = $row['burialdate'] = $row['burialplace'] = $row['marrdate'] = $row['marrplace'] = "";
+                $row['birthdate'] = $row['birthplace'] = $row['altbirthdate'] = $row['altbirthplace'] = $row['deathdate'] = $row['deathplace'] = $row['burialdate'] = $row['burialplace'] = $row['marrdate'] = $row['marrplace'] = '';
               } else {
                 $row['birthdate'] = displayDate($row['birthdate']);
                 $row['altbirthdate'] = displayDate($row['altbirthdate']);
@@ -220,7 +220,7 @@ function getMyAncestors($focalPerson, $gen) {
 
     tng_free_result($result);
     if (!$rights['both']) {
-      $row['birthdate'] = $row['birthplace'] = $row['altbirthdate'] = $row['altbirthplace'] = $row['deathdate'] = $row['deathplace'] = $row['burialdate'] = $row['burialplace'] = $row['marrdate'] = $row['marrplace'] = "";
+      $row['birthdate'] = $row['birthplace'] = $row['altbirthdate'] = $row['altbirthplace'] = $row['deathdate'] = $row['deathplace'] = $row['burialdate'] = $row['burialplace'] = $row['marrdate'] = $row['marrplace'] = '';
     } else {
       $row['birthdate'] = displayDate($row['birthdate']);
       $row['altbirthdate'] = displayDate($row['altbirthdate']);

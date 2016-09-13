@@ -10,23 +10,23 @@ $query = "SELECT display, $events_table.eventtypeID AS eventtypeID, eventdate, e
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
-$row['eventplace'] = preg_replace("/\"/", "&#34;", $row['eventplace']);
-$row['info'] = preg_replace("/\"/", "&#34;", $row['info']);
-$row['age'] = preg_replace("/\"/", "&#34;", $row['age']);
-$row['agency'] = preg_replace("/\"/", "&#34;", $row['agency']);
-$row['cause'] = preg_replace("/\"/", "&#34;", $row['cause']);
-$row['address1'] = preg_replace("/\"/", "&#34;", $row['address1']);
-$row['address1'] = preg_replace("/\"/", "&#34;", $row['address1']);
-$row['city'] = preg_replace("/\"/", "&#34;", $row['city']);
-$row['state'] = preg_replace("/\"/", "&#34;", $row['state']);
-$row['zip'] = preg_replace("/\"/", "&#34;", $row['zip']);
-$row['country'] = preg_replace("/\"/", "&#34;", $row['country']);
+$row['eventplace'] = preg_replace('/\"/', '&#34;', $row['eventplace']);
+$row['info'] = preg_replace('/\"/', '&#34;', $row['info']);
+$row['age'] = preg_replace('/\"/', '&#34;', $row['age']);
+$row['agency'] = preg_replace('/\"/', '&#34;', $row['agency']);
+$row['cause'] = preg_replace('/\"/', '&#34;', $row['cause']);
+$row['address1'] = preg_replace('/\"/', '&#34;', $row['address1']);
+$row['address1'] = preg_replace('/\"/', '&#34;', $row['address1']);
+$row['city'] = preg_replace('/\"/', '&#34;', $row['city']);
+$row['state'] = preg_replace('/\"/', '&#34;', $row['state']);
+$row['zip'] = preg_replace('/\"/', '&#34;', $row['zip']);
+$row['country'] = preg_replace('/\"/', '&#34;', $row['country']);
 
 $display = getEventDisplay($row['display']);
 
-$helplang = findhelp("events_help.php");
+$helplang = findhelp('events_help.php');
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <form id='form1' name='form1' action='' method='post' onSubmit="return updateEvent(this);">
   <header class='modal-header'>
@@ -59,11 +59,11 @@ header("Content-type:text/html; charset=" . $session_charset);
       </tr>
       <tr>
         <td><?php echo uiTextSnippet('detail'); ?>:</td>
-        <td><textarea name="info" rows="4" cols="40"><?php echo $row['info']; ?></textarea>
+        <td><textarea name="info" rows='4' cols="40"><?php echo $row['info']; ?></textarea>
         </td>
       </tr>
     </table>
-    <?php echo displayToggle("plus9", 0, "more", uiTextSnippet('more'), ""); ?>
+    <?php echo displayToggle('plus9', 0, 'more', uiTextSnippet('more'), ''); ?>
     <div id='more' style='display: none'>
       <table class='table table-sm'>
         <tr>

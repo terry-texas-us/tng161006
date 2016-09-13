@@ -1,6 +1,6 @@
 <?php
 require 'begin.php';
-$tngconfig['maint'] = "";
+$tngconfig['maint'] = '';
 require 'genlib.php';
 require 'getlang.php';
 
@@ -10,7 +10,7 @@ require 'checklogin.php';
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('sitemaint'));
 ?>
 <!DOCTYPE html>
@@ -24,7 +24,7 @@ echo $publicHeaderSection->build();
 <br clear='all'>
 <?php
 
-echo "<p>" . uiTextSnippet('standby') . "</p><br><br>";
+echo '<p>' . uiTextSnippet('standby') . '</p><br><br>';
 
 echo $publicFooterSection->build();
 echo scriptsManager::buildScriptElements($flags, 'public');

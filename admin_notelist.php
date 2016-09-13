@@ -9,7 +9,7 @@ require 'version.php';
 
 $exptime = 0;
 
-$searchstring_noquotes = stripslashes(preg_replace("/\"/", "&#34;", $searchstring));
+$searchstring_noquotes = stripslashes(preg_replace('/\"/', '&#34;', $searchstring));
 $searchstring = addslashes($searchstring);
 
 if ($newsearch) {
@@ -38,7 +38,7 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $tngpage = 1;
 }
 $wherestr = "WHERE $xnotes_table.ID = $notelinks_table.xnoteID";
@@ -47,7 +47,7 @@ if ($private) {
   $wherestr .= " AND $notelinks_table.secret != 0";
 }
 if ($searchstring) {
-  $wherestr .= $wherestr ? " AND" : "WHERE";
+  $wherestr .= $wherestr ? ' AND' : 'WHERE';
   $wherestr .= " ($xnotes_table.note LIKE '%" . $searchstring . "%')";
 }
 $query = "SELECT $xnotes_table.ID AS ID, $xnotes_table.note AS note FROM ($xnotes_table, $notelinks_table)" . $wherestr . " ORDER BY note LIMIT $newoffset" . $maxsearchresults;
@@ -64,7 +64,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 } else {
   $totrows = $numrows;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('notes'));
 ?>
 <!DOCTYPE html>
@@ -75,11 +75,11 @@ $headSection->setTitle(uiTextSnippet('notes'));
     <?php
     echo $adminHeaderSection->build('misc-notes', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_misc.php", uiTextSnippet('menu'), "misc"]);
-    $navList->appendItem([true, "admin_notelist.php", uiTextSnippet('notes'), "notes"]);
-    $navList->appendItem([true, "admin_whatsnewmsg.php", uiTextSnippet('whatsnew'), "whatsnew"]);
-    $navList->appendItem([true, "admin_mostwanted.php", uiTextSnippet('mostwanted'), "mostwanted"]);
-    echo $navList->build("notes");
+    $navList->appendItem([true, 'admin_misc.php', uiTextSnippet('menu'), 'misc']);
+    $navList->appendItem([true, 'admin_notelist.php', uiTextSnippet('notes'), 'notes']);
+    $navList->appendItem([true, 'admin_whatsnewmsg.php', uiTextSnippet('whatsnew'), 'whatsnew']);
+    $navList->appendItem([true, 'admin_mostwanted.php', uiTextSnippet('mostwanted'), 'mostwanted']);
+    echo $navList->build('notes');
     ?>
     <div>
       <form action="admin_notelist.php" name='form1' id='form1'>
@@ -97,7 +97,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
           </tr>
           <tr>
             <td>&nbsp;</td>
-            <td><input name='private' type='checkbox' value='yes'<?php if ($private == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('private'); ?>
+            <td><input name='private' type='checkbox' value='yes'<?php if ($private == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('private'); ?>
             </td>
           </tr>
         </table>
@@ -139,7 +139,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
           </tr>
           <?php
           if ($numrows) {
-          $actionstr = "";
+          $actionstr = '';
           if ($allowEdit) {
             $actionstr .= "<a href=\"admin_editnote2.php?ID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
@@ -152,7 +152,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
           }
 
           while ($row = tng_fetch_assoc($result)) {
-            $newactionstr = preg_replace("/xxx/", $row['ID'], $actionstr);
+            $newactionstr = preg_replace('/xxx/', $row['ID'], $actionstr);
             echo "<tr id=\"row_{$row['ID']}\"><td><div class=\"action-btns2\">$newactionstr</div></td>\n";
             if ($allowDelete) {
               echo "<td><input name=\"del{$row['ID']}\" type='checkbox' value='1'></td>";
@@ -160,7 +160,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
             $query = "SELECT $notelinks_table.ID, $notelinks_table.persfamID AS personID, secret FROM $notelinks_table WHERE $notelinks_table.xnoteID = '{$row['ID']}' ";
 
             $nresult = tng_query($query);
-            $notelinktext = "";
+            $notelinktext = '';
             while ($nrow = tng_fetch_assoc($nresult)) {
               if (!$notelinktext) {
                 $query = "SELECT * FROM $people_table WHERE personID = \"{$nrow['personID']}\"";
@@ -211,7 +211,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
               $notetext = cleanIt($row['note']);
               $notetext = truncateIt($notetext, 500);
               if (!$notetext) {
-                $notetext = "&nbsp;";
+                $notetext = '&nbsp;';
               }
             } else {
               $notetext = uiTextSnippet('private');

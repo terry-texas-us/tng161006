@@ -9,7 +9,7 @@ $_SESSION['tng_yourname'] = generatePassword(1);
 $preemail = getCurrentUserEmail($currentuser, $users_table);
 
 if ($enttype == 'I') {
-  $typestr = "person";
+  $typestr = 'person';
   $result = getPersonDataPlusDates($ID);
   if ($result) {
     $row = tng_fetch_assoc($result);
@@ -21,12 +21,12 @@ if ($enttype == 'I') {
   }
   $years = getYears($row);
 } elseif ($enttype == 'F') {
-  $typestr = "family";
+  $typestr = 'family';
   $result = getFamilyData($ID);
   $row = tng_fetch_assoc($result);
   tng_free_result($result);
 
-  $hname = $wname = "";
+  $hname = $wname = '';
   $rights = determineLivingPrivateRights($row);
   $row['allow_living'] = $rights['living'];
   $row['allow_private'] = $rights['private'];
@@ -49,12 +49,12 @@ if ($enttype == 'I') {
     $prow['allow_private'] = $prights['private'];
     $wname = getName($prow);
   }
-  $plus = $hname && $wname ? " + " : "";
+  $plus = $hname && $wname ? ' + ' : '';
   $name = uiTextSnippet('family') . ": $hname$plus$wname ($ID)";
 
-  $years = $years = $row['marrdate'] && $row['allow_living'] && $row['allow_private'] ? uiTextSnippet('marrabbr') . " " . displayDate($row['marrdate']) : "";
+  $years = $years = $row['marrdate'] && $row['allow_living'] && $row['allow_private'] ? uiTextSnippet('marrabbr') . ' ' . displayDate($row['marrdate']) : '';
 } elseif ($enttype == 'S') {
-  $typestr = "source";
+  $typestr = 'source';
   $query = "SELECT title FROM $sources_table WHERE sourceID = '$ID'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
@@ -72,9 +72,9 @@ if ($enttype == 'I') {
   tng_free_result($sresult);
 
   $name = uiTextSnippet('source') . ": {$row['title']} ($ID)";
-  $years = "";
+  $years = '';
 } elseif ($enttype == 'R') {
-  $typestr = "repo";
+  $typestr = 'repo';
   $query = "SELECT reponame FROM $repositories_table WHERE repoID = '$ID'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
@@ -85,16 +85,16 @@ if ($enttype == 'I') {
 
   $name = uiTextSnippet('repository') . ": {$row['reponame']} ($ID)";
 } elseif ($enttype == 'L') {
-  $typestr = "place";
+  $typestr = 'place';
   $row['living'] = 0;
   $row['allow_living'] = $row['allow_private'] = 1;
   $name = $ID;
 } else {
-  $typestr = "";
+  $typestr = '';
 }
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 
 $headTitle = ($enttype) ? uiTextSnippet('suggestchange') . ": $name" : uiTextSnippet('contactus');
 $headSection->setTitle($headTitle);
@@ -112,7 +112,7 @@ $headSection->setTitle($headTitle);
       $photostr = showSmallPhoto($ID, $name, $row['allow_living'] && $row['allow_private'], 0, false, $row['sex']);
       echo tng_DrawHeading($photostr, $name, $years);
 
-      echo tng_menu($enttype, "suggest", $ID);
+      echo tng_menu($enttype, 'suggest', $ID);
       echo "<br>\n";
       $buttontext = uiTextSnippet('submitsugg');
     } else {

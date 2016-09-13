@@ -100,10 +100,10 @@ class SMTP
     if ($streamok) {
       $socket_context = stream_context_create($options);
       //Suppress errors; connection failures are handled at a higher level
-      $this->smtp_conn = stream_socket_client($host . ":" . $port, $errno, $errstr, $timeout, STREAM_CLIENT_CONNECT, $socket_context);
+      $this->smtp_conn = stream_socket_client($host . ':' . $port, $errno, $errstr, $timeout, STREAM_CLIENT_CONNECT, $socket_context);
     } else {
       //Fall back to fsockopen which should work in more places, but is missing some features
-      $this->edebug("Connection: stream_socket_client not available, falling back to fsockopen", self::DEBUG_CONNECTION);
+      $this->edebug('Connection: stream_socket_client not available, falling back to fsockopen', self::DEBUG_CONNECTION);
       $this->smtp_conn = fsockopen($host, $port, $errno, $errstr, $timeout);
     }
     // Verify we connected properly
@@ -193,10 +193,10 @@ class SMTP
         if (!$this->sendCommand('AUTH', 'AUTH LOGIN', 334)) {
           return false;
         }
-        if (!$this->sendCommand("Username", base64_encode($username), 334)) {
+        if (!$this->sendCommand('Username', base64_encode($username), 334)) {
           return false;
         }
-        if (!$this->sendCommand("Password", base64_encode($password), 235)) {
+        if (!$this->sendCommand('Password', base64_encode($password), 235)) {
           return false;
         }
         break;
@@ -445,7 +445,7 @@ class SMTP
     $this->last_reply = $this->getLines();
     // Fetch SMTP code and possible error code explanation
     $matches = [];
-    if (preg_match("/^([0-9]{3})[ -](?:([0-9]\\.[0-9]\\.[0-9]) )?/", $this->last_reply, $matches)) {
+    if (preg_match('/^([0-9]{3})[ -](?:([0-9]\\.[0-9]\\.[0-9]) )?/', $this->last_reply, $matches)) {
       $code = $matches[1];
       $code_ex = (count($matches) > 2 ? $matches[2] : null);
       // Cut off error code from each response line

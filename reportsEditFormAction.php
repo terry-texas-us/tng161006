@@ -8,7 +8,7 @@ require 'checklogin.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 require 'adminlog.php';
@@ -25,7 +25,7 @@ adminwritelog("<a href=\"reportsEdit.php?reportID=$reportID\">" . uiTextSnippet(
 
 if ($submitx) {
   $message = uiTextSnippet('changestoreport') . " $reportID " . uiTextSnippet('succsaved') . '.';
-  header("Location: reportsBrowse.php?message=" . urlencode($message));
+  header('Location: reportsBrowse.php?message=' . urlencode($message));
 } else {
   header("Location: reportsEdit.php?reportID=$reportID");
 }

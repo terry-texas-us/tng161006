@@ -35,11 +35,11 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $tngpage = 1;
 }
-$wherestr = $searchstring ? " AND (username LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR realname LIKE \"%$searchstring%\" OR email LIKE \"%$searchstring%\")" : "";
-$wherestr .= $adminonly ? " AND allow_add = \"1\" AND allow_edit = \"1\" AND allow_delete = \"1\" AND gedcom = \"\"" : "";
+$wherestr = $searchstring ? " AND (username LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR realname LIKE \"%$searchstring%\" OR email LIKE \"%$searchstring%\")" : '';
+$wherestr .= $adminonly ? " AND allow_add = \"1\" AND allow_edit = \"1\" AND allow_delete = \"1\" AND gedcom = \"\"" : '';
 $query = "SELECT *, DATE_FORMAT(lastlogin,\"%d %b %Y %H:%i:%s\") AS lastlogin FROM $users_table WHERE allow_living != \"-1\" $wherestr ORDER BY description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
@@ -56,10 +56,10 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 $revquery = "SELECT count(userID) AS ucount FROM $users_table WHERE allow_living = \"-1\"";
 $revresult = tng_query($revquery) or die(uiTextSnippet('cannotexecutequery') . ": $revquery");
 $revrow = tng_fetch_assoc($revresult);
-$revstar = $revrow['ucount'] ? " *" : "";
+$revstar = $revrow['ucount'] ? ' *' : '';
 tng_free_result($revresult);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('users'));
 ?>
 <!DOCTYPE html>
@@ -70,11 +70,11 @@ $headSection->setTitle(uiTextSnippet('users'));
     <?php
     echo $adminHeaderSection->build('users', $message);
     $navList = new navList('');
-    //    $navList->appendItem([true, "usersBrowse.php", uiTextSnippet('search'), "finduser"]);
-    $navList->appendItem([$allowAdd, "usersAdd.php", uiTextSnippet('add'), "adduser"]);
-    $navList->appendItem([$allowEdit, "usersReview.php", uiTextSnippet('review') . $revstar, "review"]);
-    $navList->appendItem([true, "usersSendMail.php", uiTextSnippet('email'), "mail"]);
-    echo $navList->build("finduser");
+    //    $navList->appendItem([true, 'usersBrowse.php', uiTextSnippet('search'), 'finduser']);
+    $navList->appendItem([$allowAdd, 'usersAdd.php', uiTextSnippet('add'), 'adduser']);
+    $navList->appendItem([$allowEdit, 'usersReview.php', uiTextSnippet('review') . $revstar, 'review']);
+    $navList->appendItem([true, 'usersSendMail.php', uiTextSnippet('email'), 'mail']);
+    echo $navList->build('finduser');
     ?>
     <form id='users-search' action='usersBrowse.php' name='form1'>
       <label for='searchstring'><?php echo uiTextSnippet('searchfor'); ?>: </label>
@@ -94,7 +94,7 @@ $headSection->setTitle(uiTextSnippet('users'));
       <div class='row'>
         <div class='col-sm-4 checkbox'>
           <label>
-            <input name='adminonly' type='checkbox' value='yes'<?php if ($adminonly == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('adminonly'); ?>
+            <input name='adminonly' type='checkbox' value='yes'<?php if ($adminonly == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('adminonly'); ?>
           </label>
         </div>
       </div>
@@ -126,7 +126,7 @@ $headSection->setTitle(uiTextSnippet('users'));
               <?php } ?>
               <th><?php echo uiTextSnippet('username'); ?></th>
               <th><?php echo uiTextSnippet('description'); ?></th>
-              <th><?php echo uiTextSnippet('realname') . " / " . uiTextSnippet('email'); ?></th>
+              <th><?php echo uiTextSnippet('realname') . ' / ' . uiTextSnippet('email'); ?></th>
               <!--<th><?php echo uiTextSnippet('admin'); ?></th>-->
               <th><?php echo uiTextSnippet('branch'); ?></th>
               <th><?php echo uiTextSnippet('role'); ?></th>
@@ -141,45 +141,45 @@ $headSection->setTitle(uiTextSnippet('users'));
           </thead>
 
           <?php
-          $actionstr = "";
+          $actionstr = '';
           if ($allowEdit) {
             $actionstr .= "<a href=\"usersEdit.php?userID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
-            $actionstr .= "</a>";
+            $actionstr .= '</a>';
           }
           if ($allowDelete) {
             $actionstr .= "<a href='#' onClick=\"return confirmDelete('xxx');\" title='" . uiTextSnippet('delete') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
-            $actionstr .= "</a>";
+            $actionstr .= '</a>';
           }
           while ($row = tng_fetch_assoc($result)) {
-            $form_allow_admin = $row['gedcom'] || (!$row['allow_edit'] && !$row['allow_add'] && !$row['allow_delete']) ? "" : uiTextSnippet('yes');
-            $form_allow_lds = $row['allow_lds'] ? uiTextSnippet('yes') : "";
-            $form_allow_living = $row['allow_living'] > 0 ? uiTextSnippet('yes') : "";
-            $form_allow_private = $row['allow_private'] > 0 ? uiTextSnippet('yes') : "";
-            $form_allow_ged = $row['allow_ged'] ? uiTextSnippet('yes') : "";
-            $form_allow_pdf = $row['allow_pdf'] ? uiTextSnippet('yes') : "";
-            $form_disabled = $row['disabled'] ? uiTextSnippet('yes') : "";
-            $newactionstr = preg_replace("/xxx/", $row['userID'], $actionstr);
+            $form_allow_admin = $row['gedcom'] || (!$row['allow_edit'] && !$row['allow_add'] && !$row['allow_delete']) ? '' : uiTextSnippet('yes');
+            $form_allow_lds = $row['allow_lds'] ? uiTextSnippet('yes') : '';
+            $form_allow_living = $row['allow_living'] > 0 ? uiTextSnippet('yes') : '';
+            $form_allow_private = $row['allow_private'] > 0 ? uiTextSnippet('yes') : '';
+            $form_allow_ged = $row['allow_ged'] ? uiTextSnippet('yes') : '';
+            $form_allow_pdf = $row['allow_pdf'] ? uiTextSnippet('yes') : '';
+            $form_disabled = $row['disabled'] ? uiTextSnippet('yes') : '';
+            $newactionstr = preg_replace('/xxx/', $row['userID'], $actionstr);
             echo "<tr id=\"row_{$row['userID']}\">\n";
             echo "<td><div class=\"action-btns2\">$newactionstr</div></td>\n";
             if ($allowDelete) {
               echo "<td><input name=\"del{$row['userID']}\" type='checkbox' value='1'></td>";
             }
             $editlink = "usersEdit.php?userID={$row['userID']}";
-            $username = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['username'] . "</a>" : $row['username'];
+            $username = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['username'] . '</a>' : $row['username'];
 
             echo "<td>$username</td>\n";
             echo "<td>{$row['description']}</td>\n";
-            echo "<td>" . $row['realname'];
+            echo '<td>' . $row['realname'];
             if ($row['realname'] && $row['email']) {
-              echo "<br>";
+              echo '<br>';
             }
             $rolestr = 'usr' . ($row['role'] ? $row['role'] : 'custom');
             echo "<a href=\"mailto:" . $row['email'] . "\">" . $row['email'] . "</a></td>\n";
 
             echo "<td>{$row['branch']}</td>\n";
-            echo "<td>" . uiTextSnippet($rolestr) . "</td>\n";
+            echo '<td>' . uiTextSnippet($rolestr) . "</td>\n";
             echo "<td>$form_allow_living</td>\n";
             echo "<td>$form_allow_private</td>\n";
             echo "<td>$form_allow_ged</td>\n";

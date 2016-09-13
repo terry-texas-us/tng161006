@@ -4,10 +4,10 @@ require 'tng_begin.php';
 function showFact($text, $fact, $numflag = 0)
 {
   echo "<tr>\n";
-  echo "<td>" . $text . "</td>\n";
+  echo '<td>' . $text . "</td>\n";
   echo "<td colspan='2' ";
-  echo $numflag ? " align=\"right\"" : "";
-  echo ">";
+  echo $numflag ? " align='right'" : '';
+  echo '>';
   echo $numflag ? number_format($fact) : $fact;
   echo "&nbsp;</td>\n";
   echo "</tr>\n";
@@ -23,8 +23,8 @@ preparebookmark("<a href='showtree.php'>" . uiTextSnippet('tree') . ": {$row['tr
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
-$headSection->setTitle(uiTextSnippet('tree') . ": " . $row['treename']);
+header('Content-type: text/html; charset=' . $session_charset);
+$headSection->setTitle(uiTextSnippet('tree') . ': ' . $row['treename']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,7 +32,7 @@ $headSection->setTitle(uiTextSnippet('tree') . ": " . $row['treename']);
 <body id='public'>
   <section class='container'>
     <?php echo $publicHeaderSection->build(); ?>
-    <h2><?php echo uiTextSnippet('tree') . ": " . $row['treename']; ?></h2>
+    <h2><?php echo uiTextSnippet('tree') . ': ' . $row['treename']; ?></h2>
     <br clear='all'>
 
       <table class="table table-sm">

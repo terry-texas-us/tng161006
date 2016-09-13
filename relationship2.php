@@ -5,4 +5,4 @@ require 'getlang.php';
 
 require 'checklogin.php';
 
-header("Location: relationship.php?" . $_SERVER['QUERY_STRING']);
+header('Location: relationship.php?' . $_SERVER['QUERY_STRING']);

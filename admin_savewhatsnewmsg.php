@@ -9,7 +9,7 @@ $whatsnewmsg = stripslashes($whatsnewmsg);
 
 $file = "$rootpath/whatsnew.txt";
 
-$fp = fopen($file, "w");
+$fp = fopen($file, 'w');
 if (!$fp) {
   die(uiTextSnippet('cannotopen') . " $file");
 }
@@ -19,6 +19,6 @@ fwrite($fp, $whatsnewmsg);
 flock($fp, LOCK_UN);
 fclose($fp);
 $message = uiTextSnippet('msgsaved');
-$color = "msgapproved";
+$color = 'msgapproved';
 
 header("Location: admin_whatsnewmsg.php?color=$color&message=" . urlencode($message));

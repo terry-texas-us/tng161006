@@ -6,7 +6,7 @@ require 'adminlib.php';
 require 'checklogin.php';
 require 'prefixes.php';
 
-if ($session_charset != "UTF-8") {
+if ($session_charset != 'UTF-8') {
   $criteria = tng_utf8_decode($criteria);
   $myffirstname = tng_utf8_decode($myffirstname);
   $myflastname = tng_utf8_decode($myflastname);
@@ -15,11 +15,11 @@ if ($session_charset != "UTF-8") {
 }
 
 $criteria = trim($criteria);
-$f = $filter == "c" ? "%" : "";
+$f = $filter == "c" ? "%" : '';
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 
-$mediaquery = "";
+$mediaquery = '';
 if ($albumID) {
   $mediaquery = "SELECT entityID FROM $album2entities_table WHERE albumID = '$albumID' AND linktype = '$type'";
 } else {
@@ -43,7 +43,7 @@ function showAction($entityID, $num = null) {
   global $mediaID;
 
   $id = $num ? $num : $entityID;
-  $lines = "<td>";
+  $lines = '<td>';
   $lines .= "<div id=\"link_$id\" style=\"text-align:center;width:50px;";
   if ($albumID || $mediaID) {
     $gotit = in_array($entityID, $alreadygot);
@@ -58,7 +58,7 @@ function showAction($entityID, $num = null) {
     $lines .= "\"><img class='icon-sm' src='svg/eye.svg' alt=''>\n";
     $lines .= "<div id=\"sdef_" . urlencode($entityID) . "\"></div>";
   } else {
-    $lines .= "\"><a href='#' onclick=\"selectEntity(document.find.newlink1, '$id');\">" . uiTextSnippet('select') . "</a>";
+    $lines .= "\"><a href='#' onclick=\"selectEntity(document.find.newlink1, '$id');\">" . uiTextSnippet('select') . '</a>';
   }
   $lines .= "</div>";
   $lines .= "</td>\n";
@@ -66,14 +66,14 @@ function showAction($entityID, $num = null) {
   return $lines;
 }
 
-$selectline = $mediaID || $albumID ? "<td width=\"50\">" . uiTextSnippet('select') . "</td>\n" : "";
+$selectline = $mediaID || $albumID ? "<td width=\"50\">" . uiTextSnippet('select') . "</td>\n" : '';
 
 switch ($type) {
   case 'I':
     $myffirstname = trim($myffirstname);
     $myflastname = trim($myflastname);
     $myfpersonID = trim($myfpersonID);
-    $allwhere = "1";
+    $allwhere = '1';
     if ($branch) {
       $allwhere .= " AND branch LIKE \"%$branch%\"";
     }
@@ -110,14 +110,14 @@ switch ($type) {
     if (tng_num_rows($result)) {
       $lines .= "<tr>\n";
       $lines .= $selectline;
-      $lines .= "<td>" . uiTextSnippet('personid') . "</td>\n";
-      $lines .= "<td>" . uiTextSnippet('name') . "</td>\n";
-      $lines .= "<td>" . uiTextSnippet('birthdate') . "</td>\n";
-      $lines .= "<td>" . uiTextSnippet('deathdate') . "</td>\n";
+      $lines .= '<td>' . uiTextSnippet('personid') . "</td>\n";
+      $lines .= '<td>' . uiTextSnippet('name') . "</td>\n";
+      $lines .= '<td>' . uiTextSnippet('birthdate') . "</td>\n";
+      $lines .= '<td>' . uiTextSnippet('deathdate') . "</td>\n";
       $lines .= "</tr>\n";
 
       while ($row = tng_fetch_assoc($result)) {
-        $birthdate = $deathdate = "";
+        $birthdate = $deathdate = '';
         $rights = determineLivingPrivateRights($row);
         $row['allow_living'] = $rights['living'];
         $row['allow_private'] = $rights['private'];
@@ -127,14 +127,14 @@ switch ($type) {
             $birthdate = uiTextSnippet('birthabbr') . ' ' . displayDate($row['birthdate']);
           } else {
             if ($row['altbirthdate']) {
-              $birthdate = uiTextSnippet('chrabbr') . " " . displayDate($row['altbirthdate']);
+              $birthdate = uiTextSnippet('chrabbr') . ' ' . displayDate($row['altbirthdate']);
             }
           }
           if ($row['deathdate']) {
-            $deathdate = uiTextSnippet('deathabbr') . " " . displayDate($row['deathdate']);
+            $deathdate = uiTextSnippet('deathabbr') . ' ' . displayDate($row['deathdate']);
           } else {
             if ($row['burialdate']) {
-              $deathdate = uiTextSnippet('burialabbr') . " " . displayDate($row['burialdate']);
+              $deathdate = uiTextSnippet('burialabbr') . ' ' . displayDate($row['burialdate']);
             }
           }
           if (!$birthdate && $deathdate) {
@@ -158,7 +158,7 @@ switch ($type) {
     $myhusbname = trim($myhusbname);
     $mywifename = trim($mywifename);
     $myfamilyID = trim($myfamilyID);
-    $allwhere = "1";
+    $allwhere = '1';
     if ($branch) {
       $allwhere .= " AND $families_table.branch LIKE \"%$branch%\"";
     }
@@ -169,12 +169,12 @@ switch ($type) {
       }
       $allwhere .= " AND familyID LIKE \"%$myfamilyID%\"";
     }
-    $joinon = "";
+    $joinon = '';
     if ($assignedbranch) {
       $allwhere .= " AND $families_table.branch LIKE \"%$assignedbranch%\"";
     }
 
-    $allwhere2 = "";
+    $allwhere2 = '';
 
     if ($mywifename) {
       $terms = explode(' ', $mywifename);
@@ -195,7 +195,7 @@ switch ($type) {
         $allwhere2 .= "CONCAT_WS(' ',husbpeople.firstname,TRIM(CONCAT_WS(' ',husbpeople.lnprefix,husbpeople.lastname))) LIKE \"$f$term%\"";
       }
     } else {
-      $joinonhusb = "";
+      $joinonhusb = '';
     }
 
     if ($allwhere2) {
@@ -211,13 +211,13 @@ switch ($type) {
     if (tng_num_rows($result)) {
       $lines = "<tr>\n";
       $lines .= $selectline;
-      $lines .= "<td>" . uiTextSnippet('familyid') . "</td>\n";
-      $lines .= "<td>" . uiTextSnippet('husbname') . "</td>\n";
-      $lines .= "<td>" . uiTextSnippet('wifename') . "</td>\n";
+      $lines .= '<td>' . uiTextSnippet('familyid') . "</td>\n";
+      $lines .= '<td>' . uiTextSnippet('husbname') . "</td>\n";
+      $lines .= '<td>' . uiTextSnippet('wifename') . "</td>\n";
       $lines .= "</tr>\n";
 
       while ($row = tng_fetch_assoc($result)) {
-        $thishusb = $thiswife = "";
+        $thishusb = $thiswife = '';
         if ($row['hpersonID']) {
           $person['firstname'] = $row['hfirstname'];
           $person['lnprefix'] = $row['hlnprefix'];
@@ -253,7 +253,7 @@ switch ($type) {
         if ($mediaquery) {
           $lines .= showAction($row['familyID']);
         }
-        $lines .= "<td>" . $row['familyID'] . "&nbsp;</td>\n";
+        $lines .= '<td>' . $row['familyID'] . "&nbsp;</td>\n";
         $lines .= "<td><a href='#' onclick=\"return retItem('{$row['familyID']}');\" id=\"item_{$row['familyID']}\">$thishusb</a>&nbsp;</td>\n";
         $lines .= "<td>$thiswife&nbsp;</td></tr>\n";
       }
@@ -267,7 +267,7 @@ switch ($type) {
       $lines = "<tr>\n";
       $lines .= $selectline;
       $lines .= "<td style=\"width:100px\">" . uiTextSnippet('sourceid') . "</td>\n";
-      $lines .= "<td>" . uiTextSnippet('title') . "</td>\n";
+      $lines .= '<td>' . uiTextSnippet('title') . "</td>\n";
       $lines .= "</tr>\n";
 
       while ($row = tng_fetch_assoc($result)) {
@@ -275,7 +275,7 @@ switch ($type) {
         if ($mediaquery) {
           $lines .= showAction($row['sourceID']);
         }
-        $lines .= "<td>" . $row['sourceID'] . "&nbsp;</td>\n";
+        $lines .= '<td>' . $row['sourceID'] . "&nbsp;</td>\n";
         $title = $row['title'] ? $row['title'] : $row['shorttitle'];
         $lines .= "<td><a href='#' onclick=\"return retItem('{$row['sourceID']}');\" id=\"item_{$row['sourceID']}\">" . truncateIt($title, 100) . "</a>&nbsp;</td></tr>\n";
       }
@@ -289,7 +289,7 @@ switch ($type) {
       $lines = "<tr>\n";
       $lines .= $selectline;
       $lines .= "<td style=\"width:100px\">" . uiTextSnippet('repoid') . "</td>\n";
-      $lines .= "<td>" . uiTextSnippet('title') . "</td>\n";
+      $lines .= '<td>' . uiTextSnippet('title') . "</td>\n";
       $lines .= "</tr>\n";
 
       while ($row = tng_fetch_assoc($result)) {
@@ -297,7 +297,7 @@ switch ($type) {
         if ($mediaquery) {
           $lines .= showAction($row['repoID']);
         }
-        $lines .= "<td>" . $row['repoID'] . "&nbsp;</td>\n";
+        $lines .= '<td>' . $row['repoID'] . "&nbsp;</td>\n";
         $lines .= "<td><a href='#' onclick=\"return retItem('{$row['repoID']}');\" id=\"item_{$row['repoID']}\">" . truncateIt($row['reponame'], 75) . "</a>&nbsp;</td></tr>\n";
       }
     }
@@ -316,14 +316,14 @@ switch ($type) {
     if (tng_num_rows($result)) {
       $lines = "<tr>\n";
       $lines .= $selectline;
-      $lines .= "<td>" . uiTextSnippet('place') . "</td>\n";
+      $lines .= '<td>' . uiTextSnippet('place') . "</td>\n";
       $lines .= "</tr>\n";
 
       $num = 1;
       while ($row = tng_fetch_assoc($result)) {
         $row['place'] = preg_replace("/'/", "&#39;", $row['place']);
-        $notes = $row['temple'] && $row['notes'] ? " (" . truncateIt($row['notes'], 75) . ")" : "";
-        $place_slashed = addslashes(preg_replace("/[^A-Za-z0-9]/", "_", $row['place']));
+        $notes = $row['temple'] && $row['notes'] ? ' (' . truncateIt($row['notes'], 75) . ')' : '';
+        $place_slashed = addslashes(preg_replace('/[^A-Za-z0-9]/', '_', $row['place']));
         $lines .= "<tr id=\"linkrow_{$row['ID']}\">\n";
         if ($mediaquery) {
           $lines .= showAction($row['place'], $num);

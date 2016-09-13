@@ -17,7 +17,7 @@ require 'geocodelib.php';
 $persfamID = ucfirst($persfamID);
 
 $orgplace = $eventplace;
-if ($session_charset != "UTF-8") {
+if ($session_charset != 'UTF-8') {
   $eventplace = tng_utf8_decode($eventplace);
   $info = tng_utf8_decode($info);
   $age = tng_utf8_decode($age);
@@ -65,7 +65,7 @@ if ($address1 || $address2 || $city || $state || $zip || $country || $phone || $
   $result = tng_query($query);
   $addressID = tng_insert_id();
 } else {
-  $addressID = "";
+  $addressID = '';
 }
 $query = "INSERT INTO $events_table (eventtypeID, persfamID, eventdate, eventdatetr, eventplace, age, agency, cause, addressID, info, parenttag) "
     . "VALUES('$eventtypeID', '$persfamID', '$eventdate', '$eventdatetr', '$eventplace', '$age', '$agency', '$cause', '$addressID', '$info', '')";
@@ -80,12 +80,12 @@ $row = tng_fetch_assoc($result);
 
 $display = htmlspecialchars(getEventDisplay($row['display']), ENT_QUOTES, $session_charset);
 
-$info = str_replace("\r", " ", $info);
-$info = htmlspecialchars(str_replace("\n", " ", $info), ENT_QUOTES, $session_charset);
+$info = str_replace("\r", ' ', $info);
+$info = htmlspecialchars(str_replace("\n", ' ', $info), ENT_QUOTES, $session_charset);
 $truncated = substr($info, 0, 90);
 $info = strlen($info) > 90 ? substr($truncated, 0, strrpos($truncated, ' ')) . '&hellip;' : $info;
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 $eventplace = stripslashes($eventplace);
 if ($eventID) {
   echo "{\"id\":\"$eventID\",\"persfamID\":\"$persfamID\",\"display\":\"$display\",\"eventdate\":\"$eventdate\",\"eventplace\":\"$eventplace\",\"info\":\"" . stripslashes($info) . "\",\"allow_edit\":$allowEdit,\"allow_delete\":$allowDelete}";

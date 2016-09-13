@@ -9,7 +9,7 @@ require 'version.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
@@ -19,7 +19,7 @@ $query = "SELECT * FROM $cemeteries_table WHERE cemeteryID = '$cemeteryID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
-$row['cemname'] = preg_replace("/\"/", "&#34;", $row['cemname']);
+$row['cemname'] = preg_replace('/\"/', '&#34;', $row['cemname']);
 
 $query = "SELECT state FROM $states_table";
 $stateresult = tng_query($query);
@@ -27,7 +27,7 @@ $stateresult = tng_query($query);
 $query = "SELECT country FROM $countries_table";
 $countryresult = tng_query($query);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifycemetery'));
 ?>
 <!DOCTYPE html>
@@ -38,10 +38,10 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
     <?php
     echo $adminHeaderSection->build('cemeteries-modifycemetery', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "cemeteriesBrowse.php", uiTextSnippet('browse'), "findcem"]);
-    $navList->appendItem([$allowAdd, "cemeteriesAdd.php", uiTextSnippet('add'), "addcemetery"]);
-    $navList->appendItem([$allowAdd, "#", uiTextSnippet('edit'), "edit"]);
-    echo $navList->build("edit");
+    $navList->appendItem([true, 'cemeteriesBrowse.php', uiTextSnippet('browse'), 'findcem']);
+    $navList->appendItem([$allowAdd, 'cemeteriesAdd.php', uiTextSnippet('add'), 'addcemetery']);
+    $navList->appendItem([$allowAdd, '#', uiTextSnippet('edit'), 'edit']);
+    echo $navList->build('edit');
     ?>
     <br>
     <a href="cemeteriesShowCemetery.php?cemeteryID=<?php echo $cemeteryID; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
@@ -67,7 +67,7 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
             <input id='maplink' name='maplink' type='text' value="<?php echo $row['maplink']; ?>" size='60'>
             <input id='maplink_org' type='hidden' value="<?php echo $row['maplink']; ?>">
             <input id='maplink_last' type="hidden">
-            <input type='button' value="<?php echo uiTextSnippet('select') . "..."; ?>"
+            <input type='button' value="<?php echo uiTextSnippet('select') . '...'; ?>"
                    onClick="FilePicker('maplink', 'headstones');">
           </td>
         </tr>
@@ -91,7 +91,7 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
               while ($staterow = tng_fetch_assoc($stateresult)) {
                 echo "  <option value=\"{$staterow['state']}\"";
                 if ($staterow['state'] == $row['state']) {
-                  echo " selected";
+                  echo ' selected';
                 }
                 echo ">{$staterow['state']}</option>\n";
               }
@@ -110,7 +110,7 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
               while ($countryrow = tng_fetch_assoc($countryresult)) {
                 echo "  <option value=\"{$countryrow['country']}\"";
                 if ($countryrow['country'] == $row['country']) {
-                  echo " selected";
+                  echo ' selected';
                 }
                 echo ">{$countryrow['country']}</option>\n";
               }
@@ -140,7 +140,7 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
           <tr>
             <td colspan='2'>
               <div style="padding:10px">
-                <?php include "googlemapdrawthemap.php"; ?>
+                <?php include 'googlemapdrawthemap.php'; ?>
               </div>
             </td>
           </tr>
@@ -169,7 +169,7 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
           <td colspan='2'>
             <span>
               <?php
-              echo uiTextSnippet('onsave') . ":<br>";
+              echo uiTextSnippet('onsave') . ':<br>';
               echo "<input name='newscreen' type='radio' value='return'> " . uiTextSnippet('savereturn') . "<br>\n";
               if ($cw) {
                 echo "<input name='newscreen' type='radio' value='close' checked> " . uiTextSnippet('closewindow') . "\n";
@@ -210,7 +210,7 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
 </script>
 <?php
 if ($map['key']) {
-  include "googlemaplib2.php";
+  include 'googlemaplib2.php';
 }
 ?>
 </body>

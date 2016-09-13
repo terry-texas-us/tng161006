@@ -16,8 +16,8 @@ $row['allow_private'] = $rights['private'];
 $namestr = getName($row);
 tng_free_result($result);
 
-$helplang = findhelp("assoc_help.php");
-header("Content-type:text/html; charset=" . $session_charset);
+$helplang = findhelp('assoc_help.php');
+header('Content-type:text/html; charset=' . $session_charset);
 
 $query = "SELECT assocID, passocID, relationship, reltype FROM $assoc_table WHERE personID = '$personID'";
 $assocresult = tng_query($query);
@@ -69,19 +69,19 @@ $assoccount = tng_num_rows($assocresult);
                 $assocname = getFamilyName($row);
                 tng_free_result($nameresult);
               }
-              $assocname .= ": " . $assoc['relationship'];
+              $assocname .= ': ' . $assoc['relationship'];
               $assocname = cleanIt($assocname);
               $truncated = truncateIt($assocname, 75);
               $actionstr = '';
               if ($allowEdit) {
                 $actionstr .= "<a href='#' onclick=\"return editAssociation({$assoc['assocID']});\" title='" . uiTextSnippet('edit') . "'>\n";
                 $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
-                $actionstr .= "</a>";
+                $actionstr .= '</a>';
               }
               if ($allowDelete) {
                 $actionstr .= "<a href='#' onclick=\"return deleteAssociation({$assoc['assocID']},'$personID');\" title='" . uiTextSnippet('delete') . "'>\n";
                 $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
-                $actionstr .= "</a>";
+                $actionstr .= '</a>';
               }
               echo "<tr id=\"row_{$assoc['assocID']}\">\n";
                 echo "<td>$actionstr</td>\n";

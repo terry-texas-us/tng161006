@@ -13,7 +13,7 @@ require 'adminlog.php';
 
 $display_org = stripslashes($display);
 
-if ($session_charset != "UTF-8") {
+if ($session_charset != 'UTF-8') {
   $display = tng_utf8_decode($display);
 }
 $display = addslashes($display);
@@ -23,7 +23,7 @@ $result = tng_query($query);
 
 if (tng_affected_rows()) {
   adminwritelog(uiTextSnippet('editcoll') . ": $display_org");
-  echo "1";
+  echo '1';
 } else {
-  echo "0";
+  echo '0';
 }

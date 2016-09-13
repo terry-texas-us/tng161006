@@ -8,10 +8,10 @@ require 'version.php';
 
 if (!$allowMediaEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('sortmedia'));
 ?>
 <!DOCTYPE html>
@@ -22,13 +22,13 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
     <?php
     echo $adminHeaderSection->build('media-thumbnails', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('search'), "findmedia"]);
-    $navList->appendItem([$allowAdd, "admin_newmedia.php", uiTextSnippet('addnew'), "addmedia"]);
-    $navList->appendItem([$allowEdit, "admin_ordermediaform.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    //    $navList->appendItem([$allowEdit, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-    $navList->appendItem([$allowMediaAdd, "mediaImport.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allowMediaAdd, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
-    echo $navList->build("thumbs");
+    $navList->appendItem([true, 'mediaBrowse.php', uiTextSnippet('search'), 'findmedia']);
+    $navList->appendItem([$allowAdd, 'admin_newmedia.php', uiTextSnippet('addnew'), 'addmedia']);
+    $navList->appendItem([$allowEdit, 'admin_ordermediaform.php', uiTextSnippet('text_sort'), 'sortmedia']);
+    //    $navList->appendItem([$allowEdit, 'mediaThumbnails.php', uiTextSnippet('thumbnails'), 'thumbs']);
+    $navList->appendItem([$allowMediaAdd, 'mediaImport.php', uiTextSnippet('import'), 'import']);
+    $navList->appendItem([$allowMediaAdd, 'mediaUpload.php', uiTextSnippet('upload'), 'upload']);
+    echo $navList->build('thumbs');
     ?>
     <div class='small'>
       <a href='#' onClick="toggleAll('on');"><?php echo uiTextSnippet('expandall'); ?></a>
@@ -38,7 +38,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
       <?php if (function_exists(imageJpeg)) { ?>
         <tr>
           <td>
-            <?php echo displayToggle("plus1", 1, "thumbs", uiTextSnippet('genthumbs'), uiTextSnippet('genthumbsdesc')); ?>
+            <?php echo displayToggle('plus1', 1, 'thumbs', uiTextSnippet('genthumbs'), uiTextSnippet('genthumbsdesc')); ?>
             <div id="thumbs">
               <br>
               <form action="admin_generatethumbs.php" method='post' onsubmit="return generateThumbs(this);">
@@ -46,7 +46,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
                 <input name='repath' type='checkbox' value='1'> <?php echo uiTextSnippet('repath'); ?>
                 <br><br>
                 <input name='submit' type='submit' value="<?php echo uiTextSnippet('generate'); ?>">
-                <img src="img/spinner.gif" id="thumbspin" style="display: none">
+                <img src="img/spinner.gif" id="thumbspin" style='display: none'>
               </form>
               <div id="thumbresults" style="display:none">
               </div>
@@ -56,16 +56,16 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
       <?php } ?>
       <tr>
         <td>
-          <?php echo displayToggle("plus2", 1, "defaults", uiTextSnippet('assigndefs'), uiTextSnippet('assigndefsdesc')); ?>
+          <?php echo displayToggle('plus2', 1, 'defaults', uiTextSnippet('assigndefs'), uiTextSnippet('assigndefsdesc')); ?>
           <div id="defaults">
             <br>
             <form action="defphotos.php" method='post' onsubmit="return assignDefaults(this);">
               <input name='overwritedefs' type='checkbox' value='1'> <?php echo uiTextSnippet('overwritedefs'); ?>
               <br><br>
               <input name='submit' type='submit' value="<?php echo uiTextSnippet('assign'); ?>">
-              <img src="img/spinner.gif" id="defspin" style="display: none">
+              <img src="img/spinner.gif" id="defspin" style='display: none'>
             </form>
-            <div id="defresults" style="display: none"></div>
+            <div id="defresults" style='display: none'></div>
           </div>
         </td>
       </tr>

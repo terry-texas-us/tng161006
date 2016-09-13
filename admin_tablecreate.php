@@ -10,14 +10,14 @@ if ($link) {
 
 require 'adminlog.php';
 
-$badtables = "";
-$collation = "";
+$badtables = '';
+$collation = '';
 require 'tabledefs.php';
 
 if (!$badtables) {
   adminwritelog(uiTextSnippet('createtables'));
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('tablecreation'));
 ?>
 <!DOCTYPE html>
@@ -27,10 +27,10 @@ $headSection->setTitle(uiTextSnippet('tablecreation'));
   <?php
   echo $adminHeaderSection->build('setup-tablecreation', $message);
   $navList = new navList('');
-  $navList->appendItem([true, "admin_setup.php", uiTextSnippet('configuration'), "configuration"]);
-  $navList->appendItem([true, "admin_setup.php?sub=diagnostics", uiTextSnippet('diagnostics'), "diagnostics"]);
-  $navList->appendItem([true, "admin_setup.php?sub=tablecreation", uiTextSnippet('tablecreation'), "tablecreation"]);
-  echo $navList->build("tablecreation");
+  $navList->appendItem([true, 'admin_setup.php', uiTextSnippet('configuration'), 'configuration']);
+  $navList->appendItem([true, 'admin_setup.php?sub=diagnostics', uiTextSnippet('diagnostics'), 'diagnostics']);
+  $navList->appendItem([true, 'admin_setup.php?sub=tablecreation', uiTextSnippet('tablecreation'), 'tablecreation']);
+  echo $navList->build('tablecreation');
   ?>
   <table class='table table-sm'>
     <tr>

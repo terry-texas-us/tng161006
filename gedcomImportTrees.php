@@ -35,7 +35,7 @@ function ClearData($tree) {
   $tree_cnt = $row['trees'];
 
   for ($i = 0; $i < sizeof($clear_files); $i++) {
-    $query = (($tree_cnt >= 2) ? "DELETE FROM " : "TRUNCATE ") . $clear_files[$i];
+    $query = (($tree_cnt >= 2) ? 'DELETE FROM ' : 'TRUNCATE ') . $clear_files[$i];
     
     if (!($result = tng_query($query))) {
       die(uiTextSnippet('cannotexecutequery') . ": $query");

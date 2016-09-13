@@ -29,20 +29,20 @@ function showAction($entityID, $num = null) {
   if ($albumID || $mediaID) {
     $gotit = in_array($entityID, $alreadygot);
     if ($gotit) {
-      $lines .= "display:none";
+      $lines .= 'display:none';
     }
-    $lines .= "\"><a href='#' onclick=\"return addMedia2EntityLink(findform, '" . urlencode($entityID) . "', '$num');\">" . uiTextSnippet('add') . "</a></div>";
+    $lines .= "\"><a href='#' onclick=\"return addMedia2EntityLink(findform, '" . urlencode($entityID) . "', '$num');\">" . uiTextSnippet('add') . '</a></div>';
     $lines .= "<div id=\"linked_$id\" style=\"text-align:center;width:50px;";
     if (!$gotit) {
-      $lines .= "display:none";
+      $lines .= 'display:none';
     }
     $lines .= "\"><img class='icon-sm' src='svg/eye.svg' alt=''>\n";
     $lines .= "<div id=\"sdef_" . urlencode($entityID) . "\"></div>";
   } else {
-    $lines .= "\"><a href='#' onclick=\"selectEntity(document.find.newlink1, '$id');\">" . uiTextSnippet('select') . "</a>";
+    $lines .= "\"><a href='#' onclick=\"selectEntity(document.find.newlink1, '$id');\">" . uiTextSnippet('select') . '</a>';
   }
-  $lines .= "</div>";
-  $lines .= "</td>";
+  $lines .= '</div>';
+  $lines .= '</td>';
 
   return $lines;
 }
@@ -55,13 +55,13 @@ function doPeople($firstname, $lastname) {
 
   $lines = "<tr>\n";
   $lines .= "<td width='50'>" . uiTextSnippet('select') . "</td>\n";
-  $lines .= "<td>" . uiTextSnippet('personid') . "</td>\n";
-  $lines .= "<td>" . uiTextSnippet('name') . "</td>\n";
-  $lines .= "<td>" . uiTextSnippet('birthdate') . "</td>\n";
-  $lines .= "<td>" . uiTextSnippet('deathdate') . "</td>\n";
+  $lines .= '<td>' . uiTextSnippet('personid') . "</td>\n";
+  $lines .= '<td>' . uiTextSnippet('name') . "</td>\n";
+  $lines .= '<td>' . uiTextSnippet('birthdate') . "</td>\n";
+  $lines .= '<td>' . uiTextSnippet('deathdate') . "</td>\n";
   $lines .= "</tr>\n";
 
-  $allwhere = "1";
+  $allwhere = '1';
   if ($assignedbranch) {
     $allwhere .= " AND branch LIKE \"%$assignedbranch%\"";
   }
@@ -81,19 +81,19 @@ function doPeople($firstname, $lastname) {
 
   while ($row = tng_fetch_assoc($result)) {
     if ($row['birthdate']) {
-      $birthdate = uiTextSnippet('birthabbr') . " " . $row['birthdate'];
+      $birthdate = uiTextSnippet('birthabbr') . ' ' . $row['birthdate'];
     } elseif ($row['altbirthdate']) {
-      $birthdate = uiTextSnippet('chrabbr') . " " . $row['altbirthdate'];
+      $birthdate = uiTextSnippet('chrabbr') . ' ' . $row['altbirthdate'];
     } else {
-      $birthdate = "";
+      $birthdate = '';
     }
 
     if ($row['deathdate']) {
-      $deathdate = uiTextSnippet('deathabbr') . " " . $row['deathdate'];
+      $deathdate = uiTextSnippet('deathabbr') . ' ' . $row['deathdate'];
     } elseif ($row['burialdate']) {
-      $deathdate = uiTextSnippet('burialabbr') . " " . $row['burial'];
+      $deathdate = uiTextSnippet('burialabbr') . ' ' . $row['burial'];
     } else {
-      $deathdate = "";
+      $deathdate = '';
     }
 
     if (!$birthdate && $deathdate) {
@@ -103,7 +103,7 @@ function doPeople($firstname, $lastname) {
     $name = getName($row);
 
     $lines .= showAction($row['personID']);
-    $lines .= "<td>" . $row['personID'] . "&nbsp;</td>\n";
+    $lines .= '<td>' . $row['personID'] . "&nbsp;</td>\n";
     $lines .= "<td>$name&nbsp;</td>\n";
     $lines .= "<td>$birthdate&nbsp;</td>\n";
     $lines .= "<td>$deathdate&nbsp;</td></tr>\n";
@@ -121,23 +121,23 @@ function doFamilies($husbname, $wifename) {
 
   $lines = "<tr>\n";
   $lines .= "<td width='50'>" . uiTextSnippet('select') . "</td>\n";
-  $lines .= "<td>" . uiTextSnippet('familyid') . "</td>\n";
-  $lines .= "<td>" . uiTextSnippet('husbname') . "</td>\n";
-  $lines .= "<td>" . uiTextSnippet('wifename') . "</td>\n";
+  $lines .= '<td>' . uiTextSnippet('familyid') . "</td>\n";
+  $lines .= '<td>' . uiTextSnippet('husbname') . "</td>\n";
+  $lines .= '<td>' . uiTextSnippet('wifename') . "</td>\n";
   $lines .= "</tr>\n";
 
-  $allwhere = "1";
+  $allwhere = '1';
 
   if ($assignedbranch) {
     $allwhere .= " AND $families_table.branch LIKE \"%$assignedbranch%\"";
   }
-  $allwhere2 = "";
+  $allwhere2 = '';
 
   if ($wifename) {
     $terms = explode(' ', $wifename);
     foreach ($terms as $term) {
       if ($allwhere2) {
-        $allwhere2 .= " AND ";
+        $allwhere2 .= ' AND ';
       }
       $allwhere2 .= "CONCAT_WS(' ',wifepeople.firstname,TRIM(CONCAT_WS(' ',wifepeople.lnprefix,wifepeople.lastname))) LIKE \"%$term%\"";
     }
@@ -146,7 +146,7 @@ function doFamilies($husbname, $wifename) {
     $terms = explode(' ', $husbname);
     foreach ($terms as $term) {
       if ($allwhere2) {
-        $allwhere2 .= " AND ";
+        $allwhere2 .= ' AND ';
       }
       $allwhere2 .= "CONCAT_WS(' ',husbpeople.firstname,TRIM(CONCAT_WS(' ',husbpeople.lnprefix,husbpeople.lastname))) LIKE \"%$term%\"";
     }
@@ -163,7 +163,7 @@ function doFamilies($husbname, $wifename) {
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {
-    $thishusb = $thiswife = "";
+    $thishusb = $thiswife = '';
     $person['allow_living'] = 1;
     if ($row['hpersonID']) {
       $person['firstname'] = $row['hfirstname'];
@@ -176,7 +176,7 @@ function doFamilies($husbname, $wifename) {
     }
     if ($row['wpersonID']) {
       if ($thisfamily) {
-        $thisfamily .= "<br>";
+        $thisfamily .= '<br>';
       }
       $person['firstname'] = $row['wfirstname'];
       $person['lnprefix'] = $row['wlnprefix'];
@@ -187,7 +187,7 @@ function doFamilies($husbname, $wifename) {
       $thiswife = getName($person);
     }
     $lines .= showAction($row['familyID']);
-    $lines .= "<td>" . $row['familyID'] . "&nbsp;</td>\n";
+    $lines .= '<td>' . $row['familyID'] . "&nbsp;</td>\n";
     $lines .= "<td>$thishusb&nbsp;</td>\n";
     $lines .= "<td>$thiswife&nbsp;</td></tr>\n";
   }
@@ -202,8 +202,8 @@ function doSources($title) {
 
   $lines = "<tr>\n";
   $lines .= "<td width='50'>" . uiTextSnippet('select') . "</td>\n";
-  $lines .= "<td>" . uiTextSnippet('sourceid') . "</td>\n";
-  $lines .= "<td>" . uiTextSnippet('title') . "</td>\n";
+  $lines .= '<td>' . uiTextSnippet('sourceid') . "</td>\n";
+  $lines .= '<td>' . uiTextSnippet('title') . "</td>\n";
   $lines .= "</tr>\n";
 
   $query = "SELECT sourceID, title FROM $sources_table WHERE title LIKE \"%$title%\" ORDER BY title LIMIT $maxsearchresults";
@@ -211,8 +211,8 @@ function doSources($title) {
 
   while ($row = tng_fetch_assoc($result)) {
     $lines .= showAction($row['sourceID']);
-    $lines .= "<td>" . $row['sourceID'] . "&nbsp;</td>\n";
-    $lines .= "<td>" . $row['title'] . "&nbsp;</td></tr>\n";
+    $lines .= '<td>' . $row['sourceID'] . "&nbsp;</td>\n";
+    $lines .= '<td>' . $row['title'] . "&nbsp;</td></tr>\n";
   }
   tng_free_result($result);
 
@@ -225,8 +225,8 @@ function doRepos($title) {
 
   $lines = "<tr>\n";
   $lines .= "<td width='50'>" . uiTextSnippet('select') . "</td>\n";
-  $lines .= "<td>" . uiTextSnippet('repoid') . "</td>\n";
-  $lines .= "<td>" . uiTextSnippet('title') . "</td>\n";
+  $lines .= '<td>' . uiTextSnippet('repoid') . "</td>\n";
+  $lines .= '<td>' . uiTextSnippet('title') . "</td>\n";
   $lines .= "</tr>\n";
 
   $query = "SELECT repoID, reponame FROM $repositories_table WHERE reponame LIKE \"%$title%\" ORDER BY reponame LIMIT $maxsearchresults";
@@ -234,8 +234,8 @@ function doRepos($title) {
 
   while ($row = tng_fetch_assoc($result)) {
     $lines .= showAction($row['repoID']);
-    $lines .= "<td>" . $row['repoID'] . "&nbsp;</td>\n";
-    $lines .= "<td>" . $row['reponame'] . "&nbsp;</td></tr>\n";
+    $lines .= '<td>' . $row['repoID'] . "&nbsp;</td>\n";
+    $lines .= '<td>' . $row['reponame'] . "&nbsp;</td></tr>\n";
   }
   tng_free_result($result);
 
@@ -248,10 +248,10 @@ function doPlaces($place) {
 
   $lines = "<tr>\n";
   $lines .= "<td width='50'>" . uiTextSnippet('select') . "</td>\n";
-  $lines .= "<td>" . uiTextSnippet('place') . "</td>\n";
+  $lines .= '<td>' . uiTextSnippet('place') . "</td>\n";
   $lines .= "</tr>\n";
 
-  $allwhere = "1";
+  $allwhere = '1';
   if ($place) {
     $allwhere .= " AND place LIKE \"%$place%\"";
   }
@@ -261,7 +261,7 @@ function doPlaces($place) {
   $num = 1;
   while ($row = tng_fetch_assoc($result)) {
     $lines .= showAction($row['place'], $num);
-    $lines .= "<td>" . $row['place'] . "&nbsp;</td></tr>\n";
+    $lines .= '<td>' . $row['place'] . "&nbsp;</td></tr>\n";
     $num++;
   }
   tng_free_result($result);
@@ -269,41 +269,41 @@ function doPlaces($place) {
   return $lines;
 }
 
-$lines = "";
+$lines = '';
 switch ($linktype) {
   case 'I':
-    if ($session_charset != "UTF-8") {
+    if ($session_charset != 'UTF-8') {
       $firstname = tng_utf8_decode($firstname);
       $lastname = tng_utf8_decode($lastname);
     }
     $lines = doPeople($firstname, $lastname);
     break;
   case 'F':
-    if ($session_charset != "UTF-8") {
+    if ($session_charset != 'UTF-8') {
       $husbname = tng_utf8_decode($husbname);
       $wifename = tng_utf8_decode($wifename);
     }
     $lines = doFamilies($husbname, $wifename);
     break;
   case 'S':
-    if ($session_charset != "UTF-8") {
+    if ($session_charset != 'UTF-8') {
       $title = tng_utf8_decode($title);
     }
     $lines = doSources($title);
     break;
   case 'R':
-    if ($session_charset != "UTF-8") {
+    if ($session_charset != 'UTF-8') {
       $title = tng_utf8_decode($title);
     }
     $lines = doRepos($title);
     break;
   case 'L':
-    if ($session_charset != "UTF-8") {
+    if ($session_charset != 'UTF-8') {
       $place = tng_utf8_decode($place);
     }
     $lines = doPlaces($place);
     break;
 }
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 echo "<table width='585'>\n$lines\n</table>\n";

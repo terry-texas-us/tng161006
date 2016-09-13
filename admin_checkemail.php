@@ -10,12 +10,12 @@ $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $que
 
 if ($result && tng_num_rows($result)) {
   $message = uiTextSnippet('isinuse');
-  $success = "msgerror";
+  $success = 'msgerror';
 } else {
   $message = uiTextSnippet('isok');
-  $success = "msgapproved";
+  $success = 'msgapproved';
 }
 tng_free_result($result);
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 echo "{\"result\":\"$success\",\"message\":\"$message\"}";

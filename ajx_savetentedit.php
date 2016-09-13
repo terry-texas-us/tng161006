@@ -5,12 +5,12 @@ require_once 'tngdblib.php';
 require 'checklogin.php';
 require 'mail.php';
 
-if ($session_charset != "UTF-8") {
+if ($session_charset != 'UTF-8') {
   $newplace = tng_utf8_decode($newplace);
   $newinfo = tng_utf8_decode($newinfo);
   $usernote = tng_utf8_decode($usernote);
 }
-$postdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
+$postdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
 $query = "INSERT INTO $temp_events_table (type, personID, familyID, eventID, eventdate, eventplace, info, note, user, postdate) "
     . "VALUES ('$type', '$personID', '$familyID', '$eventID', '$newdate', '$newplace', '$newinfo', '$usernote', '$currentuser', '$postdate')";
 $result = tng_query($query);
@@ -27,7 +27,7 @@ if ($tngconfig['revmail']) {
   } else {
     $result = getFamilyData($familyID);
     $frow = tng_fetch_assoc($result);
-    $hname = $wname = "";
+    $hname = $wname = '';
     $frights = determineLivingPrivateRights($frow);
     $frow['allow_living'] = $frights['living'];
     $frow['allow_private'] = $frights['private'];
@@ -52,7 +52,7 @@ if ($tngconfig['revmail']) {
     tng_free_result($result);
 
     $persfamID = $familyID;
-    $plus = $hname && $wname ? " + " : "";
+    $plus = $hname && $wname ? ' + ' : '';
     $namestr = uiTextSnippet('family') . ": $hname$plus$wname ($familyID)";
   }
   $query = "SELECT email, owner FROM $treesTable";
@@ -63,6 +63,6 @@ if ($tngconfig['revmail']) {
   tng_free_result($treeresult);
 
   $message = uiTextSnippet('reviewmsg') . "\n\n$namestr\n" . uiTextSnippet('user') . ": $currentuser\n\n" . uiTextSnippet('administration') . ": $tngdomain/admin.php";
-  tng_sendmail("TNG", $emailaddr, $owner, $sendemail, uiTextSnippet('revsubject'), $message, $emailaddr, $emailaddr);
+  tng_sendmail('TNG', $emailaddr, $owner, $sendemail, uiTextSnippet('revsubject'), $message, $emailaddr, $emailaddr);
 }
 echo 1;

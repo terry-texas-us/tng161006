@@ -7,7 +7,7 @@ require 'personlib.php';
 function doMediaSearch($instance, $pagenav) {
   global $mediasearch;
 
-  $str = buildFormElement("albumsShow", "get", "MediaSearch$instance");
+  $str = buildFormElement('albumsShow', 'get', "MediaSearch$instance");
   $str .= "<input name='mediasearch' type='text' value=\"$mediasearch\"> \n";
   $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . "\" /> \n";
   $str .= "<input type='button' value=\"" . uiTextSnippet('tng_reset') . "\" onclick=\"window.location.href='albumsShow.php';\" />&nbsp;&nbsp;&nbsp;";
@@ -23,7 +23,7 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $page = 1;
 }
 $wherestr = "WHERE active = \"1\"";
@@ -46,9 +46,9 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 }
 $numrowsplus = $numrows + $offset;
 
-$treestr = "";
+$treestr = '';
 $treestr = trim("$mediasearch $treestr");
-$treestr = $treestr ? " ($treestr)" : "";
+$treestr = $treestr ? " ($treestr)" : '';
 
 $logstring = "<a href=\"albumsShow.php?" . "offset=$offset&amp;mediasearch=$mediasearch\">" . uiTextSnippet('allalbums') . "$treestr</a>";
 writelog($logstring);
@@ -57,7 +57,7 @@ preparebookmark($logstring);
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('albums'));
 ?>
 <!DOCTYPE html>
@@ -70,20 +70,20 @@ $headSection->setTitle(uiTextSnippet('albums'));
     <br clear='all'>
     <?php
     if ($totrows) {
-      echo "<p>" . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</p>";
+      echo '<p>' . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</p>";
     }
-    $pagenav = buildSearchResultPagination($totrows, "albumsShow.php?" . "mediasearch=$mediasearch&amp;offset", $maxsearchresults, $max_browsemedia_pages);
+    $pagenav = buildSearchResultPagination($totrows, 'albumsShow.php?' . "mediasearch=$mediasearch&amp;offset", $maxsearchresults, $max_browsemedia_pages);
     echo doMediaSearch(1, $pagenav);
     echo "<br>\n";
     ?>
       <table class='table table-sm'>
         <?php
-        $albumtext = $header = "";
+        $albumtext = $header = '';
         $header .= "<tr><td></td>\n";
-        $header .= "<th>" . uiTextSnippet('thumb') . "</th>\n";
-        $header .= "<th>" . uiTextSnippet('description') . "</th>\n";
-        $header .= "<th>" . uiTextSnippet('numitems') . "</th>\n";
-        $header .= "<th>" . uiTextSnippet('indlinked') . "</th>\n";
+        $header .= '<th>' . uiTextSnippet('thumb') . "</th>\n";
+        $header .= '<th>' . uiTextSnippet('description') . "</th>\n";
+        $header .= '<th>' . uiTextSnippet('numitems') . "</th>\n";
+        $header .= '<th>' . uiTextSnippet('indlinked') . "</th>\n";
         $header .= "</tr>\n";
 
         $i = $offsetplus;
@@ -104,7 +104,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
               . "WHERE albumID = '{$row['albumID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT $maxplus";
           $presult = tng_query($query);
           $numrows = tng_num_rows($presult);
-          $medialinktext = "";
+          $medialinktext = '';
           $foundliving = 0;
           $foundprivate = 0;
           $count = 0;
@@ -163,7 +163,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
               $repotext = $prow['reponame'] ? uiTextSnippet('repository') . ": {$prow['reponame']}" : uiTextSnippet('repository') . ": {$prow['repoID']}";
               $medialinktext .= "<li><a href=\"repositoriesShowItem.php?repoID={$prow['personID']}\">$repotext</a></li>\n";
             } elseif ($prow['familyID'] != null) {
-              $medialinktext .= "<li><a href=\"familiesShowFamily.php?familyID={$prow['personID']}\">" . uiTextSnippet('family') . ": " . getFamilyName($prow) . "</a></li>\n";
+              $medialinktext .= "<li><a href=\"familiesShowFamily.php?familyID={$prow['personID']}\">" . uiTextSnippet('family') . ': ' . getFamilyName($prow) . "</a></li>\n";
             } else {
               $medialinktext .= "<li><a href=\"placesearch.php?psearch={$prow['personID']}\">{$prow['personID']}</a></li>\n";
             }
@@ -183,13 +183,13 @@ $headSection->setTitle(uiTextSnippet('albums'));
             $imgsrc = getAlbumPhoto($row['albumID'], $row['albumname']);
             $alblink = "<a href=\"albumsShowAlbum.php?albumID={$row['albumID']}\">{$row['albumname']}</a>";
           } else {
-            $imgsrc = "";
+            $imgsrc = '';
             $alblink = uiTextSnippet('living');
             $nonamesloc = $foundprivate ? $tngconfig['nnpriv'] : $nonames;
             if ($nonamesloc) {
               $description = uiTextSnippet('livingphoto');
             } else {
-              $description .= "(" . uiTextSnippet('livingphoto') . ")";
+              $description .= '(' . uiTextSnippet('livingphoto') . ')';
             }
           }
 
@@ -197,7 +197,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
             $albumtext .= "<td style=\"width:{$thumbmaxw}px\">$imgsrc</td>";
             $thumbcount++;
           } else {
-            $albumtext .= "<td>&nbsp;</td>";
+            $albumtext .= '<td>&nbsp;</td>';
           }
 
           $albumtext .= "<td><span>$alblink<br>$description&nbsp;</span></td>\n";
@@ -209,8 +209,8 @@ $headSection->setTitle(uiTextSnippet('albums'));
         tng_free_result($result);
 
         if (!$thumbcount) {
-          $header = str_replace("<td>" . uiTextSnippet('thumb') . "</td>", "", $header);
-          $albumtext = str_replace("<td>&nbsp;</td><td>", "<td>", $albumtext);
+          $header = str_replace('<td>' . uiTextSnippet('thumb') . '</td>', '', $header);
+          $albumtext = str_replace('<td>&nbsp;</td><td>', '<td>', $albumtext);
         }
         echo $header . $albumtext;
         ?>
@@ -218,7 +218,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
     <?php
     if ($totrows && ($pagenav || $mediasearch)) {
       echo doMediaSearch(2, $pagenav);
-      echo "<br>";
+      echo '<br>';
     }
     ?>
     <?php echo $publicFooterSection->build(); ?>

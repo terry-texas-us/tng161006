@@ -29,10 +29,10 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $tngpage = 1;
 }
-$wherestr = $searchstring ? "WHERE (gedcom LIKE \"%$searchstring%\" OR treename LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR owner LIKE \"%$searchstring%\")" : "";
+$wherestr = $searchstring ? "WHERE (gedcom LIKE \"%$searchstring%\" OR treename LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR owner LIKE \"%$searchstring%\")" : '';
 $query = "SELECT gedcom, treename, description, owner, DATE_FORMAT(lastimportdate,\"%d %b %Y %H:%i:%s\") AS lastimportdate, importfilename FROM $treesTable $wherestr ORDER BY treename LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
@@ -46,7 +46,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 } else {
   $totrows = $numrows;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('trees'));
 ?>
 <!DOCTYPE html>
@@ -59,8 +59,8 @@ $headSection->setTitle(uiTextSnippet('trees'));
     echo $adminHeaderSection->build('trees', $message);
     $navList = new navList('');
     //    $navList->appendItem([true, 'treesBrowse.php', uiTextSnippet('search'), 'findtree']);
-    $navList->appendItem([$allow_add_tree, "treesAdd.php", uiTextSnippet('add'), "addtree"]);
-    echo $navList->build("findtree");
+    $navList->appendItem([$allow_add_tree, 'treesAdd.php', uiTextSnippet('add'), 'addtree']);
+    echo $navList->build('findtree');
     ?>
     <form action='treesBrowse.php' name='form1'>
       <label for='searchstring'><?php echo uiTextSnippet('searchfor'); ?>: </label>
@@ -103,7 +103,7 @@ $headSection->setTitle(uiTextSnippet('trees'));
           </tr>
         </thead>
         <?php
-        $actionstr = "";
+        $actionstr = '';
         if ($allowEdit && !$assignedbranch) {
           $actionstr .= "<a href='treesEdit.php?tree=xxx' title='" . uiTextSnippet('edit') . "'>\n";
           $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
@@ -116,12 +116,12 @@ $headSection->setTitle(uiTextSnippet('trees'));
           
           $actionstr .= "<a href=\"treesClear.php?tree=xxx\" onClick=\"return confirm('" . uiTextSnippet('conftreeclear') . "' );\" title=\"" . uiTextSnippet('clear') . "\">\n";
           $actionstr .= "<img class='icon-sm' src='svg/axe.svg'>\n";
-          $actionstr .= "</a>";
+          $actionstr .= '</a>';
         }
         while ($row = tng_fetch_assoc($result)) {
-          $newactionstr = preg_replace("/xxx/", $row['gedcom'], $actionstr);
+          $newactionstr = preg_replace('/xxx/', $row['gedcom'], $actionstr);
           $editlink = "treesEdit.php?tree={$row['gedcom']}";
-          $gedcom = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['gedcom'] . "</a>" : $row['gedcom'];
+          $gedcom = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['gedcom'] . '</a>' : $row['gedcom'];
 
           $query = "SELECT count(personID) AS pcount FROM $people_table";
           $result2 = tng_query($query);
@@ -146,7 +146,7 @@ $headSection->setTitle(uiTextSnippet('trees'));
       <?php
       echo buildSearchResultPagination($totrows, "treesBrowse.php?searchstring=$searchstring&amp;offset", $maxsearchresults, 5);
     } else {
-      echo "<div class='alert alert-warning'>" . uiTextSnippet('notrees') . "</div>";
+      echo "<div class='alert alert-warning'>" . uiTextSnippet('notrees') . '</div>';
     }
     ?>
     <?php echo $adminFooterSection->build(); ?>

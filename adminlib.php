@@ -19,12 +19,12 @@ require_once 'classes/navList.php';
 
 $headSection = new HeadElementSection($sitename);
 
-NavElementSection::maintenanceState(isset($tngconfig['maint']) && $tngconfig['maint'] != "", uiTextSnippet('mainton'));
+NavElementSection::maintenanceState(isset($tngconfig['maint']) && $tngconfig['maint'] != '', uiTextSnippet('mainton'));
 
-//NavElementSection::allowAdmin(isset($allow_admin) && $allow_admin != "");
+//NavElementSection::allowAdmin(isset($allow_admin) && $allow_admin != '');
 NavElementSection::currentUser($currentuser);
 NavElementSection::homePage($homepage);
-NavElementSection::helpPath(findhelp('index_help.php') . "/index_help.php");
+NavElementSection::helpPath(findhelp('index_help.php') . '/index_help.php');
 
 $adminHeaderSection = new AdminHeaderElementSection();
 $adminHeaderSection->setTitle($tng_title);
@@ -52,8 +52,8 @@ $scriptsManager = new scriptsManager('admin');
 function getNewNumericID($type, $field, $table) {
   include 'prefixes.php';
 
-  eval("\$prefix = \$$type" . "prefix;");
-  eval("\$suffix = \$$type" . "suffix;");
+  eval("\$prefix = \$$type" . 'prefix;');
+  eval("\$suffix = \$$type" . 'suffix;');
   if ($prefix) {
     $prefixlen = strlen($prefix) + 1;
     $query = "SELECT MAX(0+SUBSTRING($field" . "ID,$prefixlen)) AS newID FROM $table WHERE $field" . "ID LIKE \"$prefix%\"";
@@ -73,7 +73,7 @@ function findhelp($helpfile) {
   global $mylanguage;
   global $language;
 
-  $helplang = "languages/English-UTF8";
+  $helplang = 'languages/English-UTF8';
 
   if (file_exists("$mylanguage/$helpfile")) {
     $helplang = $mylanguage;
@@ -104,7 +104,7 @@ function checkReview($type) {
   $revrow = tng_fetch_assoc($revresult);
   tng_free_result($revresult);
 
-  return $revrow['tcount'] ? " *" : "";
+  return $revrow['tcount'] ? ' *' : '';
 }
 
 function deleteNote($noteID, $flag) {
@@ -134,7 +134,7 @@ function deleteNote($noteID, $flag) {
 function displayToggle($id, $state, $target, $headline, $subhead) {
   $rval = "<p class='togglehead'>\n";
   $rval .= "<a href='#' onclick=\"return toggleSection('$target','$id');\">\n";
-  $rval .= "<img src=\"img/" . ($state ? "tng_collapse.gif" : "tng_expand.gif") . "\" title=\"" . uiTextSnippet('toggle') . "\" alt=\"" . uiTextSnippet('toggle') . "\" width='15' height='15' id=\"$id\" /></a>";
+  $rval .= "<img src=\"img/" . ($state ? 'tng_collapse.gif' : 'tng_expand.gif') . "\" title=\"" . uiTextSnippet('toggle') . "\" alt=\"" . uiTextSnippet('toggle') . "\" width='15' height='15' id=\"$id\" /></a>";
   $rval .= "<span class='th-indent'>$headline</span>\n";
   $rval .= "</p>\n";
   if ($subhead) {
@@ -144,7 +144,7 @@ function displayToggle($id, $state, $target, $headline, $subhead) {
 }
 
 function displayListLocation($start, $pagetotal, $grandtotal) {
-  $rval = "<p>" . uiTextSnippet('matches') . ': ' . number_format($start) . " " . uiTextSnippet('to') . " <span class='pagetotal'>" . number_format($pagetotal) . "</span> " . uiTextSnippet('of') . " <span class='restotal'>" . number_format($grandtotal) . "</span></p>\n";
+  $rval = '<p>' . uiTextSnippet('matches') . ': ' . number_format($start) . ' ' . uiTextSnippet('to') . " <span class='pagetotal'>" . number_format($pagetotal) . '</span> ' . uiTextSnippet('of') . " <span class='restotal'>" . number_format($grandtotal) . "</span></p>\n";
   return $rval;
 }
 
@@ -155,13 +155,13 @@ function showEventRow($datefield, $placefield, $label, $persfamID) {
   global $row;
   global $noclass;
 
-  $ldsarray = ["BAPL", "CONL", "INIT", "ENDL", "SLGS", "SLGC"];
+  $ldsarray = ['BAPL', 'CONL', 'INIT', 'ENDL', 'SLGS', 'SLGC'];
 
   $short = " style='width: 100px'";
   $long = $noclass ? " style='width: 270px'" : " class='longfield'";
 
   $tr = "<tr>\n";
-  $tr .= "<td>" . uiTextSnippet($label) . ":</td>\n";
+  $tr .= '<td>' . uiTextSnippet($label) . ":</td>\n";
   $tr .= "<td><input name=\"$datefield\" type='text' value=\"" . $row[$datefield] . "\" onblur=\"checkDate(this);\" maxlength=\"50\"$short /></td>\n";
   $tr .= "<td><input id=\"$placefield\"$long name=\"$placefield\" type='text' value=\"" . $row[$placefield] . "\" /></td>\n";
   if (in_array($label, $ldsarray)) {
@@ -179,7 +179,7 @@ function showEventRow($datefield, $placefield, $label, $persfamID) {
   if (isset($gotmore)) {
     $tr .= "<td>\n";
 
-    $iconColor = $gotmore[$label] ? "icon-info" : "icon-muted";
+    $iconColor = $gotmore[$label] ? 'icon-info' : 'icon-muted';
     $tr .= "<a class='event-more' href='#' title='" . uiTextSnippet('more') . "' data-event-id='$label' data-persfam-id='$persfamID'>\n";
     $tr .= "<img class='icon-sm icon-right icon-more $iconColor' data-event-id='$label' data-src='svg/plus.svg'>\n";
     $tr .= "</a>\n";
@@ -189,7 +189,7 @@ function showEventRow($datefield, $placefield, $label, $persfamID) {
   if (isset($gotnotes)) {
     $tr .= "<td>\n";
 
-    $iconColor = $gotnotes[$label] ? "icon-info" : "icon-muted";
+    $iconColor = $gotnotes[$label] ? 'icon-info' : 'icon-muted';
     $tr .= "<a class='event-notes' href='#' title='" . uiTextSnippet('notes') . "' data-event-id='$label' data-persfam-id='$persfamID'>\n";
     $tr .= "<img class='icon-sm icon-right icon-notes $iconColor' data-src='svg/documents.svg'>\n";
     $tr .= "</a>\n";
@@ -199,7 +199,7 @@ function showEventRow($datefield, $placefield, $label, $persfamID) {
   if (isset($gotcites)) {
     $tr .= "<td>\n";
 
-    $iconColor = $gotcites[$label] ? "icon-info" : "icon-muted";
+    $iconColor = $gotcites[$label] ? 'icon-info' : 'icon-muted';
     $tr .= "<a class='event-citations' href='#' title='" . uiTextSnippet('citations') . "' data-event-id='$label' data-persfam-id='$persfamID'>\n";
     $tr .= "<img class='icon-sm icon-right icon-citations $iconColor' data-src='svg/archive.svg'>\n";
     $tr .= "</a>\n";
@@ -216,7 +216,7 @@ function buildEventRow($datefield, $placefield, $label, $persfamID) {
   global $gotcites;
   global $row;
   
-  $ldsarray = ["BAPL", "CONL", "INIT", "ENDL", "SLGS", "SLGC"];
+  $ldsarray = ['BAPL', 'CONL', 'INIT', 'ENDL', 'SLGS', 'SLGC'];
 
   $out = "<div class='row'>\n";
   $out .= "<div class='col-md-2'>" . uiTextSnippet($label) . ":</div>\n";
@@ -239,19 +239,19 @@ function buildEventRow($datefield, $placefield, $label, $persfamID) {
     $out .= "</a>\n";
   }
   if (isset($gotmore)) {
-    $iconColor = $gotmore[$label] ? "icon-info" : "icon-muted";
+    $iconColor = $gotmore[$label] ? 'icon-info' : 'icon-muted';
     $out .= "<a class='event-more' href='#' title='" . uiTextSnippet('more') . "' data-event-id='$label' data-persfam-id='$persfamID'>\n";
     $out .= "<img class='icon-sm icon-right icon-more $iconColor' data-event-id='$label' data-src='svg/plus.svg'>\n";
     $out .= "</a>\n";
   }
   if (isset($gotnotes)) {
-    $iconColor = $gotnotes[$label] ? "icon-info" : "icon-muted";
+    $iconColor = $gotnotes[$label] ? 'icon-info' : 'icon-muted';
     $out .= "<a class='event-notes' href='#' title='" . uiTextSnippet('notes') . "' data-event-id='$label' data-persfam-id='$persfamID'>\n";
     $out .= "<img class='icon-sm icon-right icon-notes $iconColor' data-event-id='$label' data-src='svg/documents.svg'>\n";
     $out .= "</a>\n";
   }
   if (isset($gotcites)) {
-    $iconColor = $gotcites[$label] ? "icon-info" : "icon-muted";
+    $iconColor = $gotcites[$label] ? 'icon-info' : 'icon-muted';
     $out .= "<a class='event-citations' href='#' title='" . uiTextSnippet('citations') . "' data-event-id='$label' data-persfam-id='$persfamID'>\n";
     $out .= "<img class='icon-sm icon-right icon-citations $iconColor' data-event-id='$label' data-src='svg/archive.svg'>\n";
     $out .= "</a>\n";
@@ -272,7 +272,7 @@ function determineConflict($row, $table) {
   $editconflict = false;
   $currenttime = time();
   if ($row['edituser'] && $row['edituser'] != $currentuser) {
-    if ($tngconfig['edit_timeout'] === "") {
+    if ($tngconfig['edit_timeout'] === '') {
       $tngconfig['edit_timeout'] = 15;
     }
     $expiretime = $row['edittime'] + (intval($tngconfig['edit_timeout']) * 60);

@@ -27,7 +27,7 @@ if ($newsearch) {
     setcookie("tng_search_cemeteries_post[offset]", $offset, $exptime);
   }
 }
-$searchstring_noquotes = preg_replace("/\"/", "&#34;", $searchstring);
+$searchstring_noquotes = preg_replace('/\"/', '&#34;', $searchstring);
 $searchstring = addslashes($searchstring);
 
 if ($offset) {
@@ -35,21 +35,21 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $tngpage = 1;
 }
 
 function addCriteria($field, $value, $operator) {
-  $criteria = "";
+  $criteria = '';
 
-  if ($operator == "=") {
+  if ($operator == '=') {
     $criteria = " OR $field $operator \"$value\"";
   } else {
-    $innercriteria = "";
+    $innercriteria = '';
     $terms = explode(' ', $value);
     foreach ($terms as $term) {
       if ($innercriteria) {
-        $innercriteria .= " AND ";
+        $innercriteria .= ' AND ';
       }
       $innercriteria .= "$field $operator \"%$term%\"";
     }
@@ -59,16 +59,16 @@ function addCriteria($field, $value, $operator) {
   }
   return $criteria;
 }
-$frontmod = "LIKE";
-$allwhere = "WHERE 1=0";
+$frontmod = 'LIKE';
+$allwhere = 'WHERE 1=0';
 
 $allwhere .= addCriteria("$cemeteries_table.cemeteryID", $searchstring, $frontmod);
-$allwhere .= addCriteria("maplink", $searchstring, $frontmod);
-$allwhere .= addCriteria("cemname", $searchstring, $frontmod);
-$allwhere .= addCriteria("city", $searchstring, $frontmod);
-$allwhere .= addCriteria("state", $searchstring, $frontmod);
-$allwhere .= addCriteria("county", $searchstring, $frontmod);
-$allwhere .= addCriteria("country", $searchstring, $frontmod);
+$allwhere .= addCriteria('maplink', $searchstring, $frontmod);
+$allwhere .= addCriteria('cemname', $searchstring, $frontmod);
+$allwhere .= addCriteria('city', $searchstring, $frontmod);
+$allwhere .= addCriteria('state', $searchstring, $frontmod);
+$allwhere .= addCriteria('county', $searchstring, $frontmod);
+$allwhere .= addCriteria('country', $searchstring, $frontmod);
 
 $query = "SELECT cemeteryID,cemname,city,county,state,country,latitude,longitude,zoom FROM $cemeteries_table $allwhere ORDER BY cemname, city, county, state, country LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
@@ -84,7 +84,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
   $totrows = $numrows;
 }
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('cemeteries'));
 ?>
 <!DOCTYPE html>
@@ -95,9 +95,9 @@ $headSection->setTitle(uiTextSnippet('cemeteries'));
     <?php
     echo $adminHeaderSection->build('cemeteries', $message);
     $navList = new navList('');
-    //    $navList->appendItem([true, "cemeteriesBrowse.php", uiTextSnippet('browse'), "findcem"]);
-    $navList->appendItem([$allowAdd, "cemeteriesAdd.php", uiTextSnippet('add'), "addcemetery"]);
-    echo $navList->build("findcem");
+    //    $navList->appendItem([true, 'cemeteriesBrowse.php', uiTextSnippet('browse'), "findcem"]);
+    $navList->appendItem([$allowAdd, 'cemeteriesAdd.php', uiTextSnippet('add'), 'addcemetery']);
+    echo $navList->build('findcem');
     ?>
     <table class='table table-sm'>
       <tr>
@@ -158,16 +158,16 @@ $headSection->setTitle(uiTextSnippet('cemeteries'));
 
                 <?php
                 if ($numrows) {
-                $actionstr = "";
+                $actionstr = '';
                 if ($allowEdit) {
                   $actionstr .= "<a href=\"cemeteriesEdit.php?cemeteryID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
                   $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
-                  $actionstr .= "</a>";
+                  $actionstr .= '</a>';
                 }
                 if ($allowDelete) {
                   $actionstr .= "<a href='#' onClick=\"return confirmDelete('xxx');\" title=\"" . uiTextSnippet('delete') . "\">\n";
                   $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
-                  $actionstr .= "</a>";
+                  $actionstr .= '</a>';
                 }
                 $actionstr .= "<a href=\"cemeteriesShowCemetery.php?cemeteryID=xxx&amp;\" title='" . uiTextSnippet('preview') . "'>\n";
                 $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
@@ -177,50 +177,50 @@ $headSection->setTitle(uiTextSnippet('cemeteries'));
                   $location = $row['city'];
                   if ($row['county']) {
                     if ($location) {
-                      $location .= ", ";
+                      $location .= ', ';
                     }
                     $location .= $row['county'];
                   }
                   if ($row['state']) {
                     if ($location) {
-                      $location .= ", ";
+                      $location .= ', ';
                     }
                     $location .= $row['state'];
                   }
                   if ($row['country']) {
                     if ($location) {
-                      $location .= ", ";
+                      $location .= ', ';
                     }
                     $location .= $row['country'];
                   }
-                  $newactionstr = preg_replace("/xxx/", $row['cemeteryID'], $actionstr);
+                  $newactionstr = preg_replace('/xxx/', $row['cemeteryID'], $actionstr);
                   echo "<tr id=\"row_{$row['cemeteryID']}\"><td><div class=\"action-btns\">$newactionstr</div></td>\n";
                   if ($allowDelete) {
-                    echo "<td>"
+                    echo '<td>'
                     . "<input name=\"del{$row['cemeteryID']}\" type='checkbox' value='1'></td>";
                   }
                   $editlink = "cemeteriesEdit.php?cemeteryID={$row['cemeteryID']}";
-                  $cemname = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['cemname'] . "</a>" : $row['cemname'];
+                  $cemname = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['cemname'] . '</a>' : $row['cemname'];
 
                   echo "<td>$cemname</td>\n";
                   echo "<td>$location</td>\n";
                   if ($map['key']) {
-                    echo "<td>";
-                    $geo = "";
+                    echo '<td>';
+                    $geo = '';
                     if ($row['latitude']) {
-                      $geo .= uiTextSnippet('latitude') . ": " . number_format($row['latitude'], 3);
+                      $geo .= uiTextSnippet('latitude') . ': ' . number_format($row['latitude'], 3);
                     }
                     if ($row['longitude']) {
                       if ($geo) {
-                        $geo .= "<br>";
+                        $geo .= '<br>';
                       }
-                      $geo .= uiTextSnippet('longitude') . ": " . number_format($row['longitude'], 3);
+                      $geo .= uiTextSnippet('longitude') . ': ' . number_format($row['longitude'], 3);
                     }
                     if ($row['zoom']) {
                       if ($geo) {
-                        $geo .= "<br>";
+                        $geo .= '<br>';
                       }
-                      $geo .= uiTextSnippet('zoom') . ": " . $row['zoom'];
+                      $geo .= uiTextSnippet('zoom') . ': ' . $row['zoom'];
                     }
                     echo "$geo</td>\n";
                   } else {

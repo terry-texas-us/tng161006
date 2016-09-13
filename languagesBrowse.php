@@ -30,11 +30,11 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $tngpage = 1;
 }
 
-$wherestr = $searchstring ? "WHERE display LIKE \"%$searchstring%\" OR folder LIKE \"%$searchstring%\"" : "";
+$wherestr = $searchstring ? "WHERE display LIKE \"%$searchstring%\" OR folder LIKE \"%$searchstring%\"" : '';
 $query = "SELECT languageID, display, folder, charset FROM $languagesTable $wherestr ORDER BY display LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
@@ -48,7 +48,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 } else {
   $totrows = $numrows;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('languages'));
 ?>
 <!DOCTYPE html>
@@ -59,9 +59,9 @@ $headSection->setTitle(uiTextSnippet('languages'));
     <?php
     echo $adminHeaderSection->build('languages', $message);
     $navList = new navList('');
-    //    $navList->appendItem([true, "languagesBrowse.php", uiTextSnippet('browse'), "findlang"]);
-    $navList->appendItem([$allowAdd, "languagesAdd.php", uiTextSnippet('add'), "addlanguage"]);
-    echo $navList->build("findlang");
+    //    $navList->appendItem([true, 'languagesBrowse.php', uiTextSnippet('browse'), 'findlang']);
+    $navList->appendItem([$allowAdd, 'languagesAdd.php', uiTextSnippet('add'), 'addlanguage']);
+    echo $navList->build('findlang');
     ?>
     <div>
       <form name='form1' action='languagesBrowse.php'>
@@ -93,7 +93,7 @@ $headSection->setTitle(uiTextSnippet('languages'));
         </thead>
         <?php
         if ($numrows) {
-          $actionstr = "";
+          $actionstr = '';
           if ($allowEdit) {
             $actionstr .= "<a href=\"languagesEdit.php?languageID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
@@ -105,7 +105,7 @@ $headSection->setTitle(uiTextSnippet('languages'));
             $actionstr .= "</a>\n";
           }
           while ($row = tng_fetch_assoc($result)) {
-            $newactionstr = preg_replace("/xxx/", $row['languageID'], $actionstr);
+            $newactionstr = preg_replace('/xxx/', $row['languageID'], $actionstr);
             echo "<tr id=\"row_{$row['languageID']}\"><td>\n";
             echo "<div class='action-btns2'>\n$newactionstr</div>\n";
             echo "</td>\n";

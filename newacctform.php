@@ -15,7 +15,7 @@ $_SESSION['tng_email'] = generatePassword(1);
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('regnewacct'));
 ?>
 <!DOCTYPE html>
@@ -26,7 +26,7 @@ $headSection->setTitle(uiTextSnippet('regnewacct'));
     <?php echo $publicHeaderSection->build(); ?>
     <h2><img class='icon-md' src='svg/lock-open.svg' alt=""><?php echo uiTextSnippet('regnewacct'); ?></h2>
     <?php if (!$tngconfig['disallowreg']) { ?>
-      <?php $onsubmit = $ucount ? "return validateForm(this);" : "alert('" . uiTextSnippet('nousers') . "'); return false;"; ?>
+      <?php $onsubmit = $ucount ? 'return validateForm(this);' : "alert('" . uiTextSnippet('nousers') . "'); return false;"; ?>
       <form action="addnewacct.php" method="post" name="form1" onsubmit="<?php echo $onsubmit; ?>">
         <div class='form-container'>
           <div class='form-group row'>
@@ -101,7 +101,7 @@ $headSection->setTitle(uiTextSnippet('regnewacct'));
           <div class='form-group row'>
             <label class='form-control-label col-sm-12'><?php echo uiTextSnippet('acctcomments'); ?>:</label>
             <div class='col-sm-12'>
-              <textarea class='form-control' rows="4" name="notes"></textarea>
+              <textarea class='form-control' rows='4' name="notes"></textarea>
             </div>
           </div>
 <!--

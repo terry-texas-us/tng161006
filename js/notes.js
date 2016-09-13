@@ -44,8 +44,8 @@ function addNote(form) {
                 newtr = newnotetbl.insertRow(0);
                 newtr.id = "row_" + vars.id;
                 insertCell(newtr, 0, "dragarea", '<img src="img/admArrowUp.gif" alt=""><br><img src="img/admArrowDown.gif" alt="">');
-                insertCell(newtr, 1, "", getActionButtons(vars, 'Note'));
-                insertCell(newtr, 2, "", vars.display);
+                insertCell(newtr, 1, '', getActionButtons(vars, 'Note'));
+                insertCell(newtr, 2, '', vars.display);
                 div.append(newnotetbl);
                 $('#notes').append(div);
                 initNoteSort();

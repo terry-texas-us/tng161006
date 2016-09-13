@@ -9,15 +9,15 @@ if ($link) {
 
   if (!$allowEdit) {
     $message = uiTextSnippet('norights');
-    header("Location: admin_login.php?message=" . urlencode($message));
+    header('Location: admin_login.php?message=' . urlencode($message));
     exit;
   }
 }
 if (!$rootpath) {
   $rootpath = dirname(__FILE__);
-  $rootpath .= "/";
-  if (preg_match("/WIN/i", PHP_OS)) {
-    $rootpath = str_replace("\\", "/", $rootpath);
+  $rootpath .= '/';
+  if (preg_match('/WIN/i', PHP_OS)) {
+    $rootpath = str_replace('\\', '/', $rootpath);
   }
 }
 if (!$lineendingdisplay) {
@@ -32,12 +32,12 @@ if (!$lineendingdisplay) {
 if (!$tngconfig['maxdesc']) {
   $tngconfig['maxdesc'] = $maxdesc;
 }
-$tngconfig['doctype'] = preg_replace("/\"/", "&#34;", $tngconfig['doctype']);
-$sitename = preg_replace("/\"/", "&#34;", $sitename);
-$site_desc = preg_replace("/\"/", "&#34;", $site_desc);
-$dbowner = preg_replace("/\"/", "&#34;", $dbowner);
+$tngconfig['doctype'] = preg_replace('/\"/', '&#34;', $tngconfig['doctype']);
+$sitename = preg_replace('/\"/', '&#34;', $sitename);
+$site_desc = preg_replace('/\"/', '&#34;', $site_desc);
+$dbowner = preg_replace('/\"/', '&#34;', $dbowner);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifysettings'));
 ?>
 <!DOCTYPE html>
@@ -48,11 +48,11 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
     <?php
     echo $adminHeaderSection->build('setup-configuration-configsettings', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_setup.php", uiTextSnippet('configuration'), "configuration"]);
-    $navList->appendItem([true, "admin_diagnostics.php", uiTextSnippet('diagnostics'), "diagnostics"]);
-    $navList->appendItem([true, "admin_setup.php?sub=tablecreation", uiTextSnippet('tablecreation'), "tablecreation"]);
-    $navList->appendItem([true, "#", uiTextSnippet('configsettings'), "gen"]);
-    echo $navList->build("gen");
+    $navList->appendItem([true, 'admin_setup.php', uiTextSnippet('configuration'), 'configuration']);
+    $navList->appendItem([true, 'admin_diagnostics.php', uiTextSnippet('diagnostics'), 'diagnostics']);
+    $navList->appendItem([true, 'admin_setup.php?sub=tablecreation', uiTextSnippet('tablecreation'), 'tablecreation']);
+    $navList->appendItem([true, '#', uiTextSnippet('configsettings'), 'gen']);
+    echo $navList->build('gen');
     ?>
     <div class='small'>
       <a href='#' onClick="toggleAll('on');"><?php echo uiTextSnippet('expandall'); ?></a>
@@ -60,7 +60,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
     </div>
     <form action="admin_updateconfig.php" method='post' name='form1'>
 
-      <?php echo displayToggle("plus0", 0, "db", uiTextSnippet('dbsection'), ""); ?>
+      <?php echo displayToggle('plus0', 0, 'db', uiTextSnippet('dbsection'), ''); ?>
 
       <div id="db" style="display:none">
         <table>
@@ -101,17 +101,17 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
           <tr>
             <td><?php echo uiTextSnippet('maintmode'); ?>:</td>
             <td>
-              <select name="maint"<?php if (!$urow['ucount']) {echo " disabled";} ?>>
-                <option value=''<?php if (!$tngconfig['maint']) {echo " selected";} ?>><?php echo uiTextSnippet('off'); ?></option>
-                <option value='1'<?php if ($tngconfig['maint']) {echo " selected";} ?>><?php echo uiTextSnippet('on'); ?></option>
+              <select name="maint"<?php if (!$urow['ucount']) {echo ' disabled';} ?>>
+                <option value=''<?php if (!$tngconfig['maint']) {echo ' selected';} ?>><?php echo uiTextSnippet('off'); ?></option>
+                <option value='1'<?php if ($tngconfig['maint']) {echo ' selected';} ?>><?php echo uiTextSnippet('on'); ?></option>
               </select>
             </td>
           </tr>
         </table>
       </div>
-      <?php echo displayToggle("plus1", 0, "tables", uiTextSnippet('tablesection'), ""); ?>
+      <?php echo displayToggle('plus1', 0, 'tables', uiTextSnippet('tablesection'), ''); ?>
 
-      <div class='table table-sm' id='tables' style="display: none">
+      <div class='table table-sm' id='tables' style='display: none'>
         <table>
           <tr>
             <td>
@@ -259,7 +259,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
           </tr>
         </table>
       </div>
-      <?php echo displayToggle("plus2", 0, "folders", uiTextSnippet('foldersection'), ""); ?>
+      <?php echo displayToggle('plus2', 0, 'folders', uiTextSnippet('foldersection'), ''); ?>
       <div id="folders" style="display:none">
         <table>
           <tr>
@@ -337,7 +337,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
         </table>
       </div>
 
-      <?php echo displayToggle("plus3", 0, "site", uiTextSnippet('sitesection'), ""); ?>
+      <?php echo displayToggle('plus3', 0, 'site', uiTextSnippet('sitesection'), ''); ?>
       <div id="site" style="display:none">
         <table>
           <tr>
@@ -358,7 +358,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
           </tr>
           <tr>
             <td><?php echo uiTextSnippet('site_desc'); ?>:</td>
-            <td><textarea name="site_desc" rows="2" cols="65"><?php echo $site_desc; ?></textarea>
+            <td><textarea name="site_desc" rows='2' cols="65"><?php echo $site_desc; ?></textarea>
             </td>
           </tr>
           <tr>
@@ -389,9 +389,9 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('iconloc'); ?>:</td>
             <td>
               <select name="tng_menu">
-                <option value='0'<?php if (!$tngconfig['menu']) {echo " selected";} ?>><?php echo uiTextSnippet('topright'); ?></option>
-                <option value='1'<?php if ($tngconfig['menu'] == 1) {echo " selected";} ?>><?php echo uiTextSnippet('topleft'); ?></option>
-                <option value='2'<?php if ($tngconfig['menu'] == 2) {echo " selected";} ?>><?php echo uiTextSnippet('nodisplay'); ?></option>
+                <option value='0'<?php if (!$tngconfig['menu']) {echo ' selected';} ?>><?php echo uiTextSnippet('topright'); ?></option>
+                <option value='1'<?php if ($tngconfig['menu'] == 1) {echo ' selected';} ?>><?php echo uiTextSnippet('topleft'); ?></option>
+                <option value='2'<?php if ($tngconfig['menu'] == 2) {echo ' selected';} ?>><?php echo uiTextSnippet('nodisplay'); ?></option>
               </select>
             </td>
           </tr>
@@ -399,8 +399,8 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('showhome'); ?>:</td>
             <td>
               <select name="showhome">
-                <option value='0'<?php if (!$tngconfig['showhome']) {echo " selected";} ?>><?php echo uiTextSnippet('yes'); ?></option>
-                <option value='1'<?php if ($tngconfig['showhome']) {echo " selected";} ?>><?php echo uiTextSnippet('no'); ?></option>
+                <option value='0'<?php if (!$tngconfig['showhome']) {echo ' selected';} ?>><?php echo uiTextSnippet('yes'); ?></option>
+                <option value='1'<?php if ($tngconfig['showhome']) {echo ' selected';} ?>><?php echo uiTextSnippet('no'); ?></option>
               </select>
             </td>
           </tr>
@@ -408,8 +408,8 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('showsearch'); ?>:</td>
             <td>
               <select name='showsearch'>
-                <option value='0'<?php if (!$tngconfig['showsearch']) {echo " selected";} ?>><?php echo uiTextSnippet('yes'); ?></option>
-                <option value='1'<?php if ($tngconfig['showsearch']) {echo " selected";} ?>><?php echo uiTextSnippet('no'); ?></option>
+                <option value='0'<?php if (!$tngconfig['showsearch']) {echo ' selected';} ?>><?php echo uiTextSnippet('yes'); ?></option>
+                <option value='1'<?php if ($tngconfig['showsearch']) {echo ' selected';} ?>><?php echo uiTextSnippet('no'); ?></option>
               </select>
             </td>
           </tr>
@@ -417,8 +417,8 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('searchchoice'); ?>:</td>
             <td>
               <select name='searchchoice'>
-                <option value='0'<?php if (!$tngconfig['searchchoice']) {echo " selected";} ?>><?php echo uiTextSnippet('quicksearch'); ?></option>
-                <option value='1'<?php if ($tngconfig['searchchoice']) {echo " selected";} ?>><?php echo uiTextSnippet('advsearch'); ?></option>
+                <option value='0'<?php if (!$tngconfig['searchchoice']) {echo ' selected';} ?>><?php echo uiTextSnippet('quicksearch'); ?></option>
+                <option value='1'<?php if ($tngconfig['searchchoice']) {echo ' selected';} ?>><?php echo uiTextSnippet('advsearch'); ?></option>
               </select>
             </td>
           </tr>
@@ -426,8 +426,8 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('showlogin'); ?>:</td>
             <td>
               <select name='showlogin'>
-                <option value='0'<?php if (!$tngconfig['showlogin']) {echo " selected";} ?>><?php echo uiTextSnippet('yes'); ?></option>
-                <option value='1'<?php if ($tngconfig['showlogin']) {echo " selected";} ?>><?php echo uiTextSnippet('no'); ?></option>
+                <option value='0'<?php if (!$tngconfig['showlogin']) {echo ' selected';} ?>><?php echo uiTextSnippet('yes'); ?></option>
+                <option value='1'<?php if ($tngconfig['showlogin']) {echo ' selected';} ?>><?php echo uiTextSnippet('no'); ?></option>
               </select>
             </td>
           </tr>
@@ -435,8 +435,8 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('showshare'); ?>:</td>
             <td>
               <select name='showshare'>
-                <option value='1'<?php if ($tngconfig['showshare']) {echo " selected";} ?>><?php echo uiTextSnippet('yes'); ?></option>
-                <option value='0'<?php if (!$tngconfig['showshare']) {echo " selected";} ?>><?php echo uiTextSnippet('no'); ?></option>
+                <option value='1'<?php if ($tngconfig['showshare']) {echo ' selected';} ?>><?php echo uiTextSnippet('yes'); ?></option>
+                <option value='0'<?php if (!$tngconfig['showshare']) {echo ' selected';} ?>><?php echo uiTextSnippet('no'); ?></option>
               </select>
             </td>
           </tr>
@@ -444,8 +444,8 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('showprint'); ?>:</td>
             <td>
               <select name='showprint'>
-                <option value='0'<?php if (!$tngconfig['showprint']) {echo " selected";} ?>><?php echo uiTextSnippet('yes'); ?></option>
-                <option value='1'<?php if ($tngconfig['showprint']) {echo " selected";} ?>><?php echo uiTextSnippet('no'); ?></option>
+                <option value='0'<?php if (!$tngconfig['showprint']) {echo ' selected';} ?>><?php echo uiTextSnippet('yes'); ?></option>
+                <option value='1'<?php if ($tngconfig['showprint']) {echo ' selected';} ?>><?php echo uiTextSnippet('no'); ?></option>
               </select>
             </td>
           </tr>
@@ -453,8 +453,8 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('showbmarks'); ?>:</td>
             <td>
               <select name='showbmarks'>
-                <option value='0'<?php if (!$tngconfig['showbmarks']) {echo " selected";} ?>><?php echo uiTextSnippet('yes'); ?></option>
-                <option value='1'<?php if ($tngconfig['showbmarks']) {echo " selected";} ?>><?php echo uiTextSnippet('no'); ?></option>
+                <option value='0'<?php if (!$tngconfig['showbmarks']) {echo ' selected';} ?>><?php echo uiTextSnippet('yes'); ?></option>
+                <option value='1'<?php if ($tngconfig['showbmarks']) {echo ' selected';} ?>><?php echo uiTextSnippet('no'); ?></option>
               </select>
             </td>
           </tr>
@@ -462,15 +462,15 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('hidechr'); ?>:</td>
             <td>
               <select name='hidechr'>
-                <option value='0'<?php if (!$tngconfig['hidechr']) {echo " selected";} ?>><?php echo uiTextSnippet('no'); ?></option>
-                <option value='1'<?php if ($tngconfig['hidechr']) {echo " selected";} ?>><?php echo uiTextSnippet('yes'); ?></option>
+                <option value='0'<?php if (!$tngconfig['hidechr']) {echo ' selected';} ?>><?php echo uiTextSnippet('no'); ?></option>
+                <option value='1'<?php if ($tngconfig['hidechr']) {echo ' selected';} ?>><?php echo uiTextSnippet('yes'); ?></option>
               </select>
             </td>
           </tr>
           
         </table>
       </div>
-        <?php echo displayToggle("plus4", 0, "media", uiTextSnippet('media'), ""); ?>
+        <?php echo displayToggle('plus4', 0, 'media', uiTextSnippet('media'), ''); ?>
       <div id="media" style="display:none">
         <table>
           <tr>
@@ -480,10 +480,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('photosext'); ?>:</td>
             <td>
               <select name="photosext">
-                <option value="jpg"<?php if ($photosext == "jpg") {echo " selected";} ?>>.jpg</option>
-                <option value="gif"<?php if ($photosext == "gif") {echo " selected";} ?>>.gif</option>
-                <option value="png"<?php if ($photosext == "png") {echo " selected";} ?>>.png</option>
-                <option value="bmp"<?php if ($photosext == "bmp") {echo " selected";} ?>>.bmp</option>
+                <option value="jpg"<?php if ($photosext == 'jpg') {echo ' selected';} ?>>.jpg</option>
+                <option value="gif"<?php if ($photosext == 'gif') {echo ' selected';} ?>>.gif</option>
+                <option value="png"<?php if ($photosext == 'png') {echo ' selected';} ?>>.png</option>
+                <option value="bmp"<?php if ($photosext == 'bmp') {echo ' selected';} ?>>.bmp</option>
               </select>
             </td>
           </tr>
@@ -491,8 +491,8 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('showextended'); ?>:</td>
             <td>
               <select name='showextended'>
-                <option value='1'<?php if ($showextended) {echo " selected";} ?>><?php echo uiTextSnippet('yes'); ?></option>
-                <option value='0'<?php if (!$showextended) {echo " selected";} ?>><?php echo uiTextSnippet('no'); ?></option>
+                <option value='1'<?php if ($showextended) {echo ' selected';} ?>><?php echo uiTextSnippet('yes'); ?></option>
+                <option value='0'<?php if (!$showextended) {echo ' selected';} ?>><?php echo uiTextSnippet('no'); ?></option>
               </select>
             </td>
           </tr>
@@ -530,8 +530,8 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('usedefthumbs'); ?>:</td>
             <td>
               <select name='tng_usedefthumbs'>
-                <option value='0'<?php if (!$tngconfig['usedefthumbs']) {echo " selected";} ?>><?php echo uiTextSnippet('no'); ?></option>
-                <option value='1'<?php if ($tngconfig['usedefthumbs']) {echo " selected";} ?>><?php echo uiTextSnippet('yes'); ?></option>
+                <option value='0'<?php if (!$tngconfig['usedefthumbs']) {echo ' selected';} ?>><?php echo uiTextSnippet('no'); ?></option>
+                <option value='1'<?php if ($tngconfig['usedefthumbs']) {echo ' selected';} ?>><?php echo uiTextSnippet('yes'); ?></option>
               </select>
             </td>
           </tr>
@@ -549,8 +549,8 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('ssenabled'); ?>:</td>
             <td>
               <select name='tng_ssdisabled'>
-                <option value='0'<?php if (!$tngconfig['ssdisabled']) {echo " selected";} ?>><?php echo uiTextSnippet('yes'); ?></option>
-                <option value='1'<?php if ($tngconfig['ssdisabled']) {echo " selected";} ?>><?php echo uiTextSnippet('no'); ?></option>
+                <option value='0'<?php if (!$tngconfig['ssdisabled']) {echo ' selected';} ?>><?php echo uiTextSnippet('yes'); ?></option>
+                <option value='1'<?php if ($tngconfig['ssdisabled']) {echo ' selected';} ?>><?php echo uiTextSnippet('no'); ?></option>
               </select>
             </td>
           </tr>
@@ -558,10 +558,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('ssrepeat'); ?>:</td>
             <td>
               <select name='tng_ssrepeat'>
-                <option value='1'<?php if ($tngconfig['ssrepeat']) {echo " selected";} ?>>
+                <option value='1'<?php if ($tngconfig['ssrepeat']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('yes'); ?>
                 </option>
-                <option value='0'<?php if (!$tngconfig['ssrepeat']) {echo " selected";} ?>>
+                <option value='0'<?php if (!$tngconfig['ssrepeat']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('no'); ?>
                 </option>
               </select>
@@ -571,10 +571,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('imgviewer'); ?>:</td>
             <td>
               <select name='tng_imgviewer'>
-                <option value='0'<?php if (!$tngconfig['imgviewer']) {echo " selected";} ?>>
+                <option value='0'<?php if (!$tngconfig['imgviewer']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('ldson'); ?>
                 </option>
-                <option value="documents"<?php if ($tngconfig['imgviewer'] == "documents") {echo " selected";} ?>>
+                <option value="documents"<?php if ($tngconfig['imgviewer'] == 'documents') {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('docsonly'); ?>
                 </option>
               </select>
@@ -584,10 +584,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('imgvheight'); ?>:</td>
             <td>
               <select name='tng_imgvheight'>
-                <option value='0'<?php if ($tngconfig['imgvheight'] == 1) {echo " selected";} ?>>
+                <option value='0'<?php if ($tngconfig['imgvheight'] == 1) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('flex'); ?>
                 </option>
-                <option value='640'<?php if ($tngconfig['imgvheight'] == "640") {echo " selected";} ?>>
+                <option value='640'<?php if ($tngconfig['imgvheight'] == '640') {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('setheight'); ?>
                 </option>
               </select>
@@ -597,10 +597,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('hidemedia'); ?>:</td>
             <td>
               <select name="hidemedia">
-                <option value='1'<?php if ($tngconfig['hidemedia']) {echo " selected";} ?>>
+                <option value='1'<?php if ($tngconfig['hidemedia']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('yes'); ?>
                 </option>
-                <option value='0'<?php if (!$tngconfig['hidemedia']) {echo " selected";} ?>>
+                <option value='0'<?php if (!$tngconfig['hidemedia']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('no'); ?>
                 </option>
               </select>
@@ -608,7 +608,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
           </tr>
         </table>
       </div>
-      <?php echo displayToggle("plus5", 0, "lang", uiTextSnippet('language'), ""); ?>
+      <?php echo displayToggle('plus5', 0, 'lang', uiTextSnippet('language'), ''); ?>
       <div id="lang" style="display:none">
         <table>
           <tr>
@@ -632,7 +632,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
                   foreach ($dirs as $dir) {
                     echo "<option value=\"$dir\"";
                     if ($dir == $language) {
-                      echo " selected";
+                      echo ' selected';
                       $found_current = 1;
                     }
                     echo ">$dir</option>\n";
@@ -654,10 +654,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('chooselang'); ?>:</td>
             <td>
               <select name='chooselang'>
-                <option value='1'<?php if ($chooselang) {echo " selected";} ?>>
+                <option value='1'<?php if ($chooselang) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('allow'); ?>
                 </option>
-                <option value='0'<?php if (!$chooselang) {echo " selected";} ?>>
+                <option value='0'<?php if (!$chooselang) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('disallow'); ?>
                 </option>
               </select>
@@ -665,7 +665,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
           </tr>
         </table>
       </div>
-      <?php echo displayToggle("plus6", 0, "priv", uiTextSnippet('privsection'), ""); ?>
+      <?php echo displayToggle('plus6', 0, 'priv', uiTextSnippet('privsection'), ''); ?>
       <div id="priv" style="display:none">
         <table>
           <tr>
@@ -676,10 +676,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td>
               <select name='requirelogin'
                       onchange="flipTreeRestrict(this.options[this.selectedIndex].value);">
-                <option value='1'<?php if ($requirelogin) {echo " selected";} ?>>
+                <option value='1'<?php if ($requirelogin) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('yes'); ?>
                 </option>
-                <option value='0'<?php if (!$requirelogin) {echo " selected";} ?>>
+                <option value='0'<?php if (!$requirelogin) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('no'); ?>
                 </option>
               </select>
@@ -689,13 +689,13 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('ldsdefault'); ?>:</td>
             <td>
               <select name='ldsdefault'>
-                <option value='0'<?php if (!$ldsdefault) {echo " selected";} ?>>
+                <option value='0'<?php if (!$ldsdefault) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('ldson'); ?>
                 </option>
-                <option value='1'<?php if ($ldsdefault == 1) {echo " selected";} ?>>
+                <option value='1'<?php if ($ldsdefault == 1) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('ldsoff'); ?>
                 </option>
-                <option value="2"<?php if ($ldsdefault == 2) {echo " selected";} ?>>
+                <option value='2'<?php if ($ldsdefault == 2) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('ldspermit'); ?>
                 </option>
               </select>
@@ -705,13 +705,13 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('livedefault'); ?>:</td>
             <td>
               <select name='livedefault'>
-                <option value="2"<?php if ($livedefault == 2) {echo " selected";} ?>>
+                <option value='2'<?php if ($livedefault == 2) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('ldson'); ?>
                 </option>
-                <option value='1'<?php if ($livedefault == 1) {echo " selected";} ?>>
+                <option value='1'<?php if ($livedefault == 1) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('ldsoff'); ?>
                 </option>
-                <option value='0'<?php if (!$livedefault) {echo " selected";} ?>>
+                <option value='0'<?php if (!$livedefault) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('ldspermit'); ?>
                 </option>
               </select>
@@ -721,13 +721,13 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('shownames'); ?>:</td>
             <td>
               <select name='nonames'>
-                <option value='0'<?php if (!$nonames) {echo " selected";} ?>>
+                <option value='0'<?php if (!$nonames) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('yes'); ?>
                 </option>
-                <option value='1'<?php if ($nonames == 1) {echo " selected";} ?>>
+                <option value='1'<?php if ($nonames == 1) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('no'); ?>
                 </option>
-                <option value="2"<?php if ($nonames == 2) {echo " selected";} ?>>
+                <option value='2'<?php if ($nonames == 2) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('initials'); ?>
                 </option>
               </select>
@@ -737,13 +737,13 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('shownamespr'); ?>:</td>
             <td>
               <select name='nnpriv'>
-                <option value='0'<?php if (!$tngconfig['nnpriv']) {echo " selected";} ?>>
+                <option value='0'<?php if (!$tngconfig['nnpriv']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('yes'); ?>
                 </option>
-                <option value='1'<?php if ($tngconfig['nnpriv'] == 1) {echo " selected";} ?>>
+                <option value='1'<?php if ($tngconfig['nnpriv'] == 1) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('no'); ?>
                 </option>
-                <option value="2"<?php if ($tngconfig['nnpriv'] == 2) {echo " selected";} ?>>
+                <option value='2'<?php if ($tngconfig['nnpriv'] == 2) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('initials'); ?>
                 </option>
               </select>
@@ -751,7 +751,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
           </tr>
         </table>
       </div>
-      <?php echo displayToggle("plus7", 0, "names", uiTextSnippet('namesection'), ""); ?>
+      <?php echo displayToggle('plus7', 0, 'names', uiTextSnippet('namesection'), ''); ?>
       <div id="names" style="display:none">
         <table>
           <tr>
@@ -762,13 +762,13 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td>
               <select name='nameorder'>
                 <option value=''></option>
-                <option value='1'<?php if ($nameorder == 1) {echo " selected";} ?>>
+                <option value='1'<?php if ($nameorder == 1) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('western'); ?>
                 </option>
-                <option value="2"<?php if ($nameorder == 2) {echo " selected";} ?>>
+                <option value='2'<?php if ($nameorder == 2) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('oriental'); ?>
                 </option>
-                <option value="3"<?php if ($nameorder == 3) {echo " selected";} ?>>
+                <option value='3'<?php if ($nameorder == 3) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('lnfirst'); ?>
                 </option>
               </select>
@@ -778,10 +778,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('ucsurnames'); ?>:</td>
             <td>
               <select name='ucsurnames'>
-                <option value='0'<?php if (!$tngconfig['ucsurnames']) {echo " selected";} ?>>
+                <option value='0'<?php if (!$tngconfig['ucsurnames']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('no'); ?>
                 </option>
-                <option value='1'<?php if ($tngconfig['ucsurnames']) {echo " selected";} ?>>
+                <option value='1'<?php if ($tngconfig['ucsurnames']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('yes'); ?>
                 </option>
               </select>
@@ -791,10 +791,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('lnprefixes'); ?>:</td>
             <td>
               <select name='lnprefixes'>
-                <option value='0'<?php if (!$lnprefixes) {echo " selected";} ?>>
+                <option value='0'<?php if (!$lnprefixes) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('lntogether'); ?>
                 </option>
-                <option value='1'<?php if ($lnprefixes) {echo " selected";} ?>>
+                <option value='1'<?php if ($lnprefixes) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('lnapart'); ?>
                 </option>
               </select>
@@ -817,7 +817,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
           </tr>
         </table>
       </div>
-      <?php echo displayToggle("plus8", 0, "cemeteries", uiTextSnippet('cemeteries'), ""); ?>
+      <?php echo displayToggle('plus8', 0, 'cemeteries', uiTextSnippet('cemeteries'), ''); ?>
       <div id="cemeteries" style="display:none">
         <table>
           <tr>
@@ -831,10 +831,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('cemblanks'); ?>:</td>
             <td>
               <select name='cemblanks'>
-                <option value='0'<?php if (!$tngconfig['cemblanks']) {echo " selected";} ?>>
+                <option value='0'<?php if (!$tngconfig['cemblanks']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('no'); ?>
                 </option>
-                <option value='1'<?php if ($tngconfig['cemblanks']) {echo " selected";} ?>>
+                <option value='1'<?php if ($tngconfig['cemblanks']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('yes'); ?>
                 </option>
               </select>
@@ -842,7 +842,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
           </tr>
         </table>
       </div>
-      <?php echo displayToggle("plus9", 0, "mailreg", uiTextSnippet('mailreg'), ""); ?>
+      <?php echo displayToggle('plus9', 0, 'mailreg', uiTextSnippet('mailreg'), ''); ?>
       <div id="mailreg" style="display:none">
         <table>
           <tr>
@@ -854,10 +854,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('fromadmin'); ?>:</td>
             <td>
               <select name='fromadmin'>
-                <option value='0'<?php if (!$tngconfig['fromadmin']) {echo " selected";} ?>>
+                <option value='0'<?php if (!$tngconfig['fromadmin']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('no'); ?>
                 </option>
-                <option value='1'<?php if ($tngconfig['fromadmin']) {echo " selected";} ?>>
+                <option value='1'<?php if ($tngconfig['fromadmin']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('yes'); ?>
                 </option>
               </select>
@@ -867,10 +867,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('allowreg'); ?>:</td>
             <td>
               <select name='disallowreg' onchange="toggleAllowReg();">
-                <option value='0'<?php if (!$tngconfig['disallowreg']) {echo " selected";} ?>>
+                <option value='0'<?php if (!$tngconfig['disallowreg']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('yes'); ?>
                 </option>
-                <option value='1'<?php if ($tngconfig['disallowreg']) {echo " selected";} ?>>
+                <option value='1'<?php if ($tngconfig['disallowreg']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('no'); ?>
                 </option>
               </select>
@@ -880,10 +880,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('revmail'); ?>:</td>
             <td>
               <select name='revmail'>
-                <option value='0'<?php if (!$tngconfig['revmail']) {echo " selected";} ?>>
+                <option value='0'<?php if (!$tngconfig['revmail']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('no'); ?>
                 </option>
-                <option value='1'<?php if ($tngconfig['revmail']) {echo " selected";} ?>>
+                <option value='1'<?php if ($tngconfig['revmail']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('yes'); ?>
                 </option>
               </select>
@@ -893,10 +893,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('autoapp'); ?>:</td>
             <td>
               <select id='autoapp' name='autoapp' onchange="toggleAutoApprove();">
-                <option value='0'<?php if (!$tngconfig['autoapp']) {echo " selected";} ?>>
+                <option value='0'<?php if (!$tngconfig['autoapp']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('no'); ?>
                 </option>
-                <option value='1'<?php if ($tngconfig['autoapp']) {echo " selected";} ?>>
+                <option value='1'<?php if ($tngconfig['autoapp']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('yes'); ?>
                 </option>
               </select>
@@ -905,11 +905,11 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
           <tr>
             <td><?php echo uiTextSnippet('ackemail'); ?>:</td>
             <td>
-              <select id='ackemail' name='ackemail'<?php if ($tngconfig['autoapp']) {echo " disabled";} ?>>
-                <option value='0'<?php if (!$tngconfig['ackemail']) {echo " selected";} ?>>
+              <select id='ackemail' name='ackemail'<?php if ($tngconfig['autoapp']) {echo ' disabled';} ?>>
+                <option value='0'<?php if (!$tngconfig['ackemail']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('no'); ?>
                 </option>
-                <option value='1'<?php if ($tngconfig['ackemail']) {echo " selected";} ?>>
+                <option value='1'<?php if ($tngconfig['ackemail']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('yes'); ?>
                 </option>
               </select>
@@ -919,10 +919,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('inclpwd'); ?>:</td>
             <td>
               <select id='omitpwd' name='omitpwd'>
-                <option value='0'<?php if (!$tngconfig['omitpwd']) {echo " selected";} ?>>
+                <option value='0'<?php if (!$tngconfig['omitpwd']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('yes'); ?>
                 </option>
-                <option value='1'<?php if ($tngconfig['omitpwd']) {echo " selected";} ?>>
+                <option value='1'<?php if ($tngconfig['omitpwd']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('no'); ?>
                 </option>
               </select>
@@ -932,17 +932,17 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('usesmtp'); ?>:</td>
             <td>
               <select id='usesmtp' name='usesmtp' onchange="$('#smtpstuff').toggle(200);">
-                <option value='0'<?php if (!$tngconfig['usesmtp']) {echo " selected";} ?>>
+                <option value='0'<?php if (!$tngconfig['usesmtp']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('no'); ?>
                 </option>
-                <option value='1'<?php if ($tngconfig['usesmtp']) {echo " selected";} ?>>
+                <option value='1'<?php if ($tngconfig['usesmtp']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('yes'); ?>
                 </option>
               </select>
             </td>
           </tr>
         </table>
-        <table id="smtpstuff" style="margin-left: 5px;<?php if (!$tngconfig['usesmtp']) {echo " display: none";} ?>">
+        <table id="smtpstuff" style="margin-left: 5px;<?php if (!$tngconfig['usesmtp']) {echo ' display: none';} ?>">
           <tr>
             <td><?php echo uiTextSnippet('mailhost'); ?>:</td>
             <td><input name='mailhost' type='text' value="<?php echo $tngconfig['mailhost']; ?>" size='40'></td>
@@ -963,15 +963,15 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('mailenc'); ?>:</td>
             <td>
               <select name="mailenc" id="mailenc">
-                <option value=''<?php if (!$tngconfig['mailenc']) {echo " selected";} ?>></option>
-                <option value="ssl"<?php if ($tngconfig['mailenc'] == "ssl") {echo " selected";} ?>>ssl</option>
-                <option value="tls"<?php if ($tngconfig['mailenc'] == "tls") {echo " selected";} ?>>tls</option>
+                <option value=''<?php if (!$tngconfig['mailenc']) {echo ' selected';} ?>></option>
+                <option value="ssl"<?php if ($tngconfig['mailenc'] == 'ssl') {echo ' selected';} ?>>ssl</option>
+                <option value="tls"<?php if ($tngconfig['mailenc'] == 'tls') {echo ' selected';} ?>>tls</option>
               </select>
             </td>
           </tr>
         </table>
       </div>
-      <?php echo displayToggle("plus10", 0, "misc", uiTextSnippet('miscsection'), ""); ?>
+      <?php echo displayToggle('plus10', 0, 'misc', uiTextSnippet('miscsection'), ''); ?>
       <div id="misc" style="display:none">
         <table>
           <tr>
@@ -984,10 +984,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('indstart'); ?>:</td>
             <td>
               <select name="tng_istart">
-                <option value='0'<?php if (!$tngconfig['istart']) {echo " selected";} ?>>
+                <option value='0'<?php if (!$tngconfig['istart']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('allinfo'); ?>
                 </option>
-                <option value='1'<?php if ($tngconfig['istart']) {echo " selected";} ?>>
+                <option value='1'<?php if ($tngconfig['istart']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('persinfo'); ?>
                 </option>
               </select>
@@ -997,13 +997,13 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('shownotes'); ?>:</td>
             <td>
               <select name="notestogether">
-                <option value='0'<?php if (!$notestogether) {echo " selected";} ?>>
+                <option value='0'<?php if (!$notestogether) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('notesapart'); ?>
                 </option>
-                <option value='1'<?php if ($notestogether == 1) {echo " selected";} ?>>
+                <option value='1'<?php if ($notestogether == 1) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('notestogether'); ?>
                 </option>
-                <option value="2"<?php if ($notestogether == 2) {echo " selected";} ?>>
+                <option value='2'<?php if ($notestogether == 2) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('notestogether2'); ?>
                 </option>
               </select>
@@ -1013,10 +1013,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('scrollcite'); ?>:</td>
             <td>
               <select name="scrollcite">
-                <option value='1'<?php if ($tngconfig['scrollcite']) {echo " selected";} ?>>
+                <option value='1'<?php if ($tngconfig['scrollcite']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('yes'); ?>
                 </option>
-                <option value='0'<?php if (!$tngconfig['scrollcite']) {echo " selected";} ?>>
+                <option value='0'<?php if (!$tngconfig['scrollcite']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('no'); ?>
                 </option>
               </select>
@@ -1026,9 +1026,9 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('time_offset'); ?>:</td>
             <td>
               <input name='time_offset' type='text' value="<?php echo $timeOffset; ?>" size='5'>
-                <?php echo uiTextSnippet('servertime') . " <strong>" . date("D h:i a") . "</strong> ";
-                $new_U = date("U") + $timeOffset * 3600;
-                echo uiTextSnippet('sitetime') . " <strong>" . date("D h:i a", $new_U) . "</strong>"; ?>
+                <?php echo uiTextSnippet('servertime') . ' <strong>' . date('D h:i a') . '</strong> ';
+                $new_U = date('U') + $timeOffset * 3600;
+                echo uiTextSnippet('sitetime') . ' <strong>' . date('D h:i a', $new_U) . '</strong>'; ?>
             </td>
           </tr>
           <tr>
@@ -1060,10 +1060,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('datefmt'); ?>:</td>
             <td>
               <select name="prefereuro">
-                <option value="false"<?php if ($tngconfig['preferEuro'] == "false") {echo " selected";} ?>>
+                <option value="false"<?php if ($tngconfig['preferEuro'] == 'false') {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('monthfirst'); ?>
                 </option>
-                <option value="true"<?php if ($tngconfig['preferEuro'] == "true") {echo " selected";} ?>>
+                <option value="true"<?php if ($tngconfig['preferEuro'] == 'true') {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('dayfirst'); ?>
                 </option>
               </select>
@@ -1073,25 +1073,25 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('calstart'); ?>:</td>
             <td>
               <select name="calstart">
-                <option value='0'<?php if (!isset($tngconfig['calstart']) || $tngconfig['calstart'] == "0") {echo " selected";} ?>>
+                <option value='0'<?php if (!isset($tngconfig['calstart']) || $tngconfig['calstart'] == '0') {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('sunday'); ?>
                 </option>
-                <option value='1'<?php if ($tngconfig['calstart'] == "1") {echo " selected";} ?>>
+                <option value='1'<?php if ($tngconfig['calstart'] == '1') {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('monday'); ?>
                 </option>
-                <option value="2"<?php if ($tngconfig['calstart'] == "2") {echo " selected";} ?>>
+                <option value='2'<?php if ($tngconfig['calstart'] == '2') {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('tuesday'); ?>
                 </option>
-                <option value="3"<?php if ($tngconfig['calstart'] == "3") {echo " selected";} ?>>
+                <option value='3'<?php if ($tngconfig['calstart'] == '3') {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('wednesday'); ?>
                 </option>
-                <option value="4"<?php if ($tngconfig['calstart'] == "4") {echo " selected";} ?>>
+                <option value='4'<?php if ($tngconfig['calstart'] == '4') {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('thursday'); ?>
                 </option>
-                <option value="5"<?php if ($tngconfig['calstart'] == "5") {echo " selected";} ?>>
+                <option value='5'<?php if ($tngconfig['calstart'] == '5') {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('friday'); ?>
                 </option>
-                <option value="6"<?php if ($tngconfig['calstart'] == "6") {echo " selected";} ?>>
+                <option value="6"<?php if ($tngconfig['calstart'] == "6") {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('saturday'); ?>
                 </option>
               </select>
@@ -1101,12 +1101,12 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('pardata'); ?>:</td>
             <td>
               <select name='pardata'>
-                <option value='0'<?php if (!$tngconfig['pardata']) {echo " selected";} ?>>
+                <option value='0'<?php if (!$tngconfig['pardata']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('palldata'); ?></option>
-                <option value='1'<?php if ($tngconfig['pardata'] == 1) {echo " selected";} ?>>
+                <option value='1'<?php if ($tngconfig['pardata'] == 1) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('pstdonly'); ?>
                 </option>
-                <option value="2"<?php if ($tngconfig['pardata'] == 2) {echo " selected";} ?>>
+                <option value='2'<?php if ($tngconfig['pardata'] == 2) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('pnoevents'); ?>
                 </option>
               </select>
@@ -1127,7 +1127,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
                   $display = $encrtype != "none" ? $encrtype : uiTextSnippet('none');
                   echo "<option value=\"$encrtype\"";
                   if ($encrtype == $tngconfig['password_type']) {
-                    echo " selected";
+                    echo ' selected';
                   }
                   echo ">$display</option>\n";
                 }
@@ -1139,10 +1139,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('autogeo'); ?>:</td>
             <td>
               <select name='autogeo'>
-                <option value='0'<?php if (!$tngconfig['autogeo']) {echo " selected";} ?>>
+                <option value='0'<?php if (!$tngconfig['autogeo']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('no'); ?>
                 </option>
-                <option value='1'<?php if ($tngconfig['autogeo']) {echo " selected";} ?>>
+                <option value='1'<?php if ($tngconfig['autogeo']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('yes'); ?>
                 </option>
               </select>
@@ -1152,10 +1152,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('reuseids'); ?>:</td>
             <td>
               <select name='oldids'>
-                <option value=''<?php if (!$tngconfig['oldids']) {echo " selected";} ?>>
+                <option value=''<?php if (!$tngconfig['oldids']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('yes'); ?>
                 </option>
-                <option value='1'<?php if ($tngconfig['oldids']) {echo " selected";} ?>>
+                <option value='1'<?php if ($tngconfig['oldids']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('no'); ?>
                 </option>
               </select>
@@ -1165,10 +1165,10 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('lastimport'); ?>:</td>
             <td>
               <select name='lastimport'>
-                <option value=''<?php if (!$tngconfig['lastimport']) {echo " selected";} ?>>
+                <option value=''<?php if (!$tngconfig['lastimport']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('no'); ?>
                 </option>
-                <option value='1'<?php if ($tngconfig['lastimport']) {echo " selected";} ?>>
+                <option value='1'<?php if ($tngconfig['lastimport']) {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('yes'); ?>
                 </option>
               </select>

@@ -10,11 +10,11 @@ if ($link) {
 
   if (!$allowEdit) {
     $message = uiTextSnippet('norights');
-    header("Location: admin_login.php?message=" . urlencode($message));
+    header('Location: admin_login.php?message=' . urlencode($message));
     exit;
   }
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifymapsettings'));
 ?>
 <!DOCTYPE html>
@@ -25,11 +25,11 @@ $headSection->setTitle(uiTextSnippet('modifymapsettings'));
     <?php
     echo $adminHeaderSection->build('setup-configuration-mapconfigsettings', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_setup.php", uiTextSnippet('configuration'), "configuration"]);
-    $navList->appendItem([true, "admin_diagnostics.php", uiTextSnippet('diagnostics'), "diagnostics"]);
-    $navList->appendItem([true, "admin_setup.php?sub=tablecreation", uiTextSnippet('tablecreation'), "tablecreation"]);
-    $navList->appendItem([true, "#", uiTextSnippet('mapconfigsettings'), "map"]);
-    echo $navList->build("map");
+    $navList->appendItem([true, 'admin_setup.php', uiTextSnippet('configuration'), 'configuration']);
+    $navList->appendItem([true, 'admin_diagnostics.php', uiTextSnippet('diagnostics'), 'diagnostics']);
+    $navList->appendItem([true, 'admin_setup.php?sub=tablecreation', uiTextSnippet('tablecreation'), 'tablecreation']);
+    $navList->appendItem([true, '#', uiTextSnippet('mapconfigsettings'), 'map']);
+    echo $navList->build('map');
     ?>
     <form action="admin_updatemapconfig.php" method='post' name='form1'>
       <table>
@@ -37,10 +37,10 @@ $headSection->setTitle(uiTextSnippet('modifymapsettings'));
           <td><?php echo uiTextSnippet('mapkey'); ?>:</td>
           <td>
             <select name="mapkey">
-              <option value='1'<?php if ($map['key']) {echo " selected";} ?>>
+              <option value='1'<?php if ($map['key']) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('yes'); ?>
               </option>
-              <option value='0'<?php if (!$map['key']) {echo " selected";} ?>>
+              <option value='0'<?php if (!$map['key']) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('no'); ?>
               </option>
             </select>
@@ -50,16 +50,16 @@ $headSection->setTitle(uiTextSnippet('modifymapsettings'));
           <td><?php echo uiTextSnippet('maptype'); ?>:</td>
           <td>
             <select name="maptype">
-              <option value="TERRAIN"<?php if ($map['displaytype'] == "TERRAIN") {echo " selected";} ?>>
+              <option value="TERRAIN"<?php if ($map['displaytype'] == 'TERRAIN') {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('mapterrain'); ?>
               </option>
-              <option value="ROADMAP"<?php if ($map['displaytype'] == "ROADMAP") {echo " selected";} ?>>
+              <option value="ROADMAP"<?php if ($map['displaytype'] == 'ROADMAP') {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('maproadmap'); ?>
               </option>
-              <option value="HYBRID"<?php if ($map['displaytype'] == "HYBRID") {echo " selected";} ?>>
+              <option value="HYBRID"<?php if ($map['displaytype'] == 'HYBRID') {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('maphybrid'); ?>
               </option>
-              <option value="SATELLITE"<?php if ($map['displaytype'] == "SATELLITE") {echo " selected";} ?>>
+              <option value="SATELLITE"<?php if ($map['displaytype'] == 'SATELLITE') {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('mapsatellite'); ?>
               </option>
             </select>
@@ -87,7 +87,7 @@ $headSection->setTitle(uiTextSnippet('modifymapsettings'));
               for ($i = 0; $i <= 17; $i++) {
                 echo "<option value=\"$i\"";
                 if ($map['stzoom'] == $i) {
-                  echo " selected";
+                  echo ' selected';
                 }
                 echo ">$i</option>\n";
               }
@@ -103,7 +103,7 @@ $headSection->setTitle(uiTextSnippet('modifymapsettings'));
               for ($i = 0; $i <= 17; $i++) {
                 echo "<option value=\"$i\"";
                 if ($map['foundzoom'] == $i) {
-                  echo " selected";
+                  echo ' selected';
                 }
                 echo ">$i</option>\n";
               }
@@ -169,10 +169,10 @@ $headSection->setTitle(uiTextSnippet('modifymapsettings'));
           <td><?php echo uiTextSnippet('startoff'); ?>:</td>
           <td>
             <select name="startoff">
-              <option value='1'<?php if ($map['startoff']) {echo " selected";} ?>>
+              <option value='1'<?php if ($map['startoff']) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('yes'); ?>
               </option>
-              <option value='0'<?php if (!$map['startoff']) {echo " selected";} ?>>
+              <option value='0'<?php if (!$map['startoff']) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('no'); ?>
               </option>
             </select>
@@ -182,10 +182,10 @@ $headSection->setTitle(uiTextSnippet('modifymapsettings'));
           <td><?php echo uiTextSnippet('pstartoff'); ?>:</td>
           <td>
             <select name="pstartoff">
-              <option value='1'<?php if ($map['pstartoff']) {echo " selected";} ?>>
+              <option value='1'<?php if ($map['pstartoff']) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('yes'); ?>
               </option>
-              <option value='0'<?php if (!$map['pstartoff']) {echo " selected";} ?>>
+              <option value='0'<?php if (!$map['pstartoff']) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('no'); ?>
               </option>
             </select>
@@ -198,10 +198,10 @@ $headSection->setTitle(uiTextSnippet('modifymapsettings'));
           <td><?php echo uiTextSnippet('conslpins'); ?>:</td>
           <td>
             <select name="showallpins">
-              <option value='0'<?php if (!$map['showallpins']) {echo " selected";} ?>>
+              <option value='0'<?php if (!$map['showallpins']) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('yes'); ?>
               </option>
-              <option value='1'<?php if ($map['showallpins']) {echo " selected";} ?>>
+              <option value='1'<?php if ($map['showallpins']) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('no'); ?>
               </option>
             </select>
@@ -237,7 +237,7 @@ $headSection->setTitle(uiTextSnippet('modifymapsettings'));
       var c;
       var keep = "1234567890.-";     // Characters stripped out
       var i;
-      var returnString = "";
+      var returnString = '';
       for (i = 0; i < coord.length; i++) {  // Search through string and append to unfiltered values to returnString.
         c = coord.charAt(i);
         if (keep.indexOf(c) !== -1)

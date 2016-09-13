@@ -7,15 +7,15 @@ require 'checklogin.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <div class='container'>
   <form id='entityform' name='entityform' action='admin_addentity.php' method='post' onsubmit="return addEntity(this);">
     <header class='modal-header'>
-      <h4><?php echo uiTextSnippet('enternew') . " " . ucfirst(uiTextSnippet($entity)); ?></h4>
+      <h4><?php echo uiTextSnippet('enternew') . ' ' . ucfirst(uiTextSnippet($entity)); ?></h4>
     </header>
     <div id='modal-body'>
       <fieldset class='form-group'>

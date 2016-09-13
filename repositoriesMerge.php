@@ -10,36 +10,36 @@ require 'adminlog.php';
 
 if (!$allowEdit || !$allowDelete) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-$wherestr = "";
+$wherestr = '';
 
 function doRow($field, $textmsg, $boxname) {
   global $r1row;
   global $r2row;
 
-  if ($field == "addressID") {
+  if ($field == 'addressID') {
     if ($r1row[$field]) {
-      $r1field = "";
+      $r1field = '';
       if ($r1row['address1']) {
-        $r1field .= $r1row['address1'] . "<br>";
+        $r1field .= $r1row['address1'] . '<br>';
       }
       if ($r1row['address2']) {
-        $r1field .= $r1row['address2'] . "<br>";
+        $r1field .= $r1row['address2'] . '<br>';
       }
       if ($r1row['city']) {
         $r1field .= $r1row['city'];
       }
       if ($r1row['state']) {
         if ($r1row['city']) {
-          $r1field .= ", ";
+          $r1field .= ', ';
         }
         $r1field .= $r1row['state'];
       }
       if ($r1row['country']) {
         if ($r1row['city'] || $r1row['state']) {
-          $r1field .= ", ";
+          $r1field .= ', ';
         }
         $r1field .= $r1row['country'];
       }
@@ -48,25 +48,25 @@ function doRow($field, $textmsg, $boxname) {
       }
     }
     if ($r2row[$field]) {
-      $r2field = "";
+      $r2field = '';
       if ($r2row['address1']) {
-        $r2field .= $r2row['address1'] . "<br>";
+        $r2field .= $r2row['address1'] . '<br>';
       }
       if ($r2row['address2']) {
-        $r2field .= $r2row['address2'] . "<br>";
+        $r2field .= $r2row['address2'] . '<br>';
       }
       if ($r2row['city']) {
         $r2field .= $r2row['city'];
       }
       if ($r2row['state']) {
         if ($r2row['city']) {
-          $r2field .= ", ";
+          $r2field .= ', ';
         }
         $r2field .= $r2row['state'];
       }
       if ($r2row['country']) {
         if ($r2row['city'] || $r2row['state']) {
-          $r2field .= ", ";
+          $r2field .= ', ';
         }
         $r2field .= $r2row['country'];
       }
@@ -81,32 +81,32 @@ function doRow($field, $textmsg, $boxname) {
 
   if ($r1field || $r2field) {
     echo "<tr>\n";
-    echo "<td width='15%'><span>" . uiTextSnippet($textmsg) . ":</span></td>";
+    echo "<td width='15%'><span>" . uiTextSnippet($textmsg) . ':</span></td>';
     echo "<td width=\"31%\"><span>$r1field&nbsp;</span></td>";
     if (is_array($r2row)) {
       echo "<td width='10'></td>";
-      echo "<td width='15%'><span>" . uiTextSnippet($textmsg) . ":</span></td>";
-      echo "<td width=\"5\"><span>";
+      echo "<td width='15%'><span>" . uiTextSnippet($textmsg) . ':</span></td>';
+      echo "<td width='5'><span>";
       if ($boxname) {
         if ($r2field) {
           echo "<input name=\"$boxname\" type='checkbox' value=\"$field\"";
           if ($r2row[$field] && !$r1row[$field]) {
-            echo " checked";
+            echo ' checked';
           }
-          echo ">";
+          echo '>';
         } else {
-          echo "&nbsp;";
+          echo '&nbsp;';
         }
       } else {
-        echo "&nbsp;";
+        echo '&nbsp;';
       }
-      echo "</span></td>";
+      echo '</span></td>';
       echo "<td width=\"31%\"><span>$r2field&nbsp;</span></td>";
     } else {
       echo "<td width='10'></td>";
-      echo "<td width='15%'><span>" . uiTextSnippet($textmsg) . ":</span></td>";
-      echo "<td width=\"5\"><span>&nbsp;</span></td>";
-      echo "<td width=\"31%\"><span>&nbsp;</span></td>";
+      echo "<td width='15%'><span>" . uiTextSnippet($textmsg) . ':</span></td>';
+      echo "<td width='5'><span>&nbsp;</span></td>";
+      echo "<td width='31%'><span>&nbsp;</span></td>";
     }
     echo "</tr>\n";
   }
@@ -115,10 +115,10 @@ function doRow($field, $textmsg, $boxname) {
 function getEvent($event) {
   global $mylanguage, $languagesPath;
 
-  $dispvalues = explode("|", $event['display']);
+  $dispvalues = explode('|', $event['display']);
   $numvalues = count($dispvalues);
   if ($numvalues > 1) {
-    $displayval = "";
+    $displayval = '';
     for ($i = 0; $i < $numvalues; $i += 2) {
       $lang = $dispvalues[$i];
       if ($mylanguage == $languagesPath . $lang) {
@@ -133,11 +133,11 @@ function getEvent($event) {
   $eventstr = "<strong>$displayval</strong>: ";
   $eventstr2 = $event['eventdate'];
   if ($eventstr2 && $event['eventplace']) {
-    $eventstr2 .= ", ";
+    $eventstr2 .= ', ';
   }
   $eventstr2 .= $event['eventplace'];
   if ($eventstr2 && $event['info']) {
-    $eventstr2 .= ". ";
+    $eventstr2 .= '. ';
   }
   $eventstr2 .= $event['info'] . "<br>\n";
   $eventstr .= $eventstr2;
@@ -146,7 +146,7 @@ function getEvent($event) {
 }
 
 function addCriteria($row) {
-  $criteria = "";
+  $criteria = '';
   $criteria .= " AND reponame = \"" . addslashes($row['reponame']) . "\"";
 
   return $criteria;
@@ -157,15 +157,15 @@ function doNotes($persfam1, $persfam2, $varname) {
   global $notelinks_table;
 
   if ($varname) {
-    if ($varname == "general") {
-      $varname = "";
+    if ($varname == 'general') {
+      $varname = '';
     }
     $wherestr = "AND eventID = \"$varname\"";
   } else {
-    $wherestr = "";
+    $wherestr = '';
   }
 
-  if ($ccombinenotes != "yes") {
+  if ($ccombinenotes != 'yes') {
     $query = "DELETE from $notelinks_table WHERE persfamID = '$persfam1' $wherestr";
     tng_query($query);
   }
@@ -173,7 +173,7 @@ function doNotes($persfam1, $persfam2, $varname) {
   tng_query($query);
 }
 
-$r1row = $r2row = "";
+$r1row = $r2row = '';
 if ($repoID1) {
   $query = "SELECT reponame, repoID, $repositories_table.addressID AS addressID, address1, address2, city, state, zip, country, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $repositories_table "
       . "LEFT JOIN $address_table ON $repositories_table.addressID = $address_table.addressID "
@@ -183,22 +183,22 @@ if ($repoID1) {
     $r1row = tng_fetch_assoc($result);
     tng_free_result($result);
   } else {
-    $repoID1 = $repoID2 = "";
+    $repoID1 = $repoID2 = '';
   }
 }
 
 set_time_limit(0);
 if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet('nextdup')) {
   if ($mergeaction == uiTextSnippet('nextmatch')) {
-    $wherestr2 = $repoID2 ? " AND repoID > \"$repoID2\"" : "";
-    $wherestr2 .= $repoID1 ? " AND repoID > \"$repoID1\"" : "";
+    $wherestr2 = $repoID2 ? " AND repoID > \"$repoID2\"" : '';
+    $wherestr2 .= $repoID1 ? " AND repoID > \"$repoID1\"" : '';
 
-    $wherestr = $repoID1 ? "AND repoID > \"$repoID1\"" : "";
+    $wherestr = $repoID1 ? "AND repoID > \"$repoID1\"" : '';
     $largechunk = 1000;
     $nextchunk = -1;
     $numrows = 0;
     $still_looking = 1;
-    $repoID2 = "";
+    $repoID2 = '';
 
     do {
       $nextone = $nextchunk + 1;
@@ -228,11 +228,11 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
       }
     } while ($numrows && $still_looking);
     if (!$repoID2) {
-      $repoID1 = $r1row = "";
+      $repoID1 = $r1row = '';
     }
   } else {
     //search with repoID1 for next duplicate
-    $wherestr2 = $repoID2 ? " AND repoID > \"$repoID2\"" : "";
+    $wherestr2 = $repoID2 ? " AND repoID > \"$repoID2\"" : '';
     $wherestr2 .= addCriteria($r1row);
 
     $query = "SELECT * FROM $repositories_table WHERE repoID != \"{$r1row['repoID']}\" $wherestr2 ORDER BY repoID LIMIT 1";
@@ -242,7 +242,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
       $repoID2 = $r2row['repoID'];
       tng_free_result($result2);
     } else {
-      $repoID2 = "";
+      $repoID2 = '';
     }
   }
 } elseif ($repoID2) {
@@ -256,28 +256,28 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
     tng_free_result($result2);
   } else {
     $mergeaction = uiTextSnippet('comprefresh');
-    $repoID2 = "";
+    $repoID2 = '';
   }
 }
 if ($mergeaction == uiTextSnippet('merge')) {
-  $updatestr = "";
+  $updatestr = '';
 
   foreach ($_POST as $key => $value) {
     $prefix = substr($key, 0, 2);
     switch ($prefix) {
-      case "p2":
+      case 'p2':
         $varname = substr($key, 2);
         $r1row[$varname] = $r2row[$varname];
         $updatestr .= ", $varname = \"{$r1row[$varname]}\" ";
         doNotes($repoID1, $repoID2, $varname);
         break;
-      case "ev":
-        if (strpos($key, "::")) {
-          $halves = explode("::", substr($key, 5));
-          $varname = substr(strstr($halves[0], "_"), 1);
+      case 'ev':
+        if (strpos($key, '::')) {
+          $halves = explode('::', substr($key, 5));
+          $varname = substr(strstr($halves[0], '_'), 1);
           $query = "DELETE from $events_table WHERE persfamID = '$repoID1' and eventID = \"$varname\"";
           $evresult = tng_query($query);
-          $varname = substr(strstr($halves[1], "_"), 1);
+          $varname = substr(strstr($halves[1], '_'), 1);
 
           $query = "SELECT eventID FROM $events_table WHERE persfamID = '$repoID2' AND eventID = '$varname'";
           $evresult = tng_query($query);
@@ -296,7 +296,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
     }
   }
   if ($ccombinenotes) {
-    doNotes($repoID1, $repoID2, "general");
+    doNotes($repoID1, $repoID2, 'general');
 
     //convert all remaining notes and citations
     $query = "UPDATE $notelinks_table set persfamID = \"$repoID1\" WHERE persfamID = '$repoID2'";
@@ -344,11 +344,11 @@ if ($mergeaction == uiTextSnippet('merge')) {
     //if( file_exists( $defaultphoto2 ) )
     //unlink( $defaultphoto2 );
   }
-  $repoID2 = "";
-  $r2row = "";
+  $repoID2 = '';
+  $r2row = '';
   adminwritelog(uiTextSnippet('merge') . ": $repoID2 => $repoID1");
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('merge'));
 ?>
 <!DOCTYPE html>
@@ -359,10 +359,10 @@ $headSection->setTitle(uiTextSnippet('merge'));
     <?php
     echo $adminHeaderSection->build('repositories-merge', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "repositoriesBrowse.php", uiTextSnippet('search'), "findrepo"]);
-    $navList->appendItem([$allowAdd, "repositoriesAdd.php", uiTextSnippet('add'), "addrepo"]);
-    //    $navList->appendItem([$allowEdit && $allowDelete, "repositoriesMerge.php", uiTextSnippet('merge'), "merge"]);
-    echo $navList->build("merge");
+    $navList->appendItem([true, 'repositoriesBrowse.php', uiTextSnippet('search'), 'findrepo']);
+    $navList->appendItem([$allowAdd, 'repositoriesAdd.php', uiTextSnippet('add'), 'addrepo']);
+    //    $navList->appendItem([$allowEdit && $allowDelete, 'repositoriesMerge.php', uiTextSnippet('merge'), 'merge']);
+    echo $navList->build('merge');
     ?>
     <table class='table table-sm'>
       <tr>
@@ -407,9 +407,9 @@ $headSection->setTitle(uiTextSnippet('merge'));
               <tr>
                 <td>
                     <span>
-                      <input name='ccombinenotes' type='checkbox' value='yes'<?php if ($ccombinenotes == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('combinenotesonly'); ?>
+                      <input name='ccombinenotes' type='checkbox' value='yes'<?php if ($ccombinenotes == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('combinenotesonly'); ?>
                       <br>
-                      <input name='ccombineextras' type='checkbox' value='yes'<?php if ($ccombineextras == "yes") {echo " checked";} ?>> <?php echo uiTextSnippet('combineextras'); ?>
+                      <input name='ccombineextras' type='checkbox' value='yes'<?php if ($ccombineextras == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('combineextras'); ?>
                     </span>
                 </td>
               </tr>
@@ -443,7 +443,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                       $ename = "event$ekey";
                       $r2row[$ename] .= getEvent($event);
                       if ($eventlist[$ekey]) {
-                        $eventlist[$ekey] .= "::" . "{$event['eventtypeID']}_{$event['eventID']}";
+                        $eventlist[$ekey] .= '::' . "{$event['eventtypeID']}_{$event['eventID']}";
                       } else {
                         $eventlist[$ekey] = "{$event['eventtypeID']}_{$event['eventID']}";
                       }
@@ -452,9 +452,9 @@ $headSection->setTitle(uiTextSnippet('merge'));
                   }
                 }
                 echo "</tr>\n";
-                doRow("repoID", "repoid", "");
-                doRow("reponame", "name", "r2reponame");
-                doRow("addressID", "address", "r2addressID");
+                doRow('repoID', 'repoid', '');
+                doRow('reponame', 'name', 'r2reponame');
+                doRow('addressID', 'address', 'r2addressID');
                 $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID AS eventtypeID, $events_table.eventID AS eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$r1row['repoID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
                 $evresult = tng_query($query);
                 $eventcount = tng_num_rows($evresult);
@@ -465,7 +465,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                     $ename = "event$ekey";
                     $r1row[$ename] .= getEvent($event);
                     if ($eventlist[$ekey]) {
-                      $eventlist[$ekey] .= "::" . "{$event['eventtypeID']}_{$event['eventID']}";
+                      $eventlist[$ekey] .= '::' . "{$event['eventtypeID']}_{$event['eventID']}";
                     } else {
                       $eventlist[$ekey] = "{$event['eventtypeID']}_{$event['eventID']}";
                     }
@@ -476,10 +476,10 @@ $headSection->setTitle(uiTextSnippet('merge'));
                 foreach ($eventlist as $key => $event) {
                   $ename = "event$key";
                   $inputname = "event$key";
-                  doRow($ename, "otherevents", $inputname);
+                  doRow($ename, 'otherevents', $inputname);
                 }
               } else {
-                echo "<tr><td>" . uiTextSnippet('nomatches') . "</td></tr>";
+                echo '<tr><td>' . uiTextSnippet('nomatches') . '</td></tr>';
               }
               ?>
             </table>

@@ -9,13 +9,13 @@ $logstring = "<a href=\"places-oneletter.php?firstchar=$firstchar&amp;psearch=$p
 $offsetorg = $offset;
 $offset = $offset ? $offset + 1 : 1;
 
-$wherestr = "";
+$wherestr = '';
 if ($firstchar) {
   $wherestr .= "trim(substring_index(place,',',-$offset)) LIKE \"$firstchar%\"";
 }
 if ($psearch) {
   if ($wherestr) {
-    $wherestr .= " AND ";
+    $wherestr .= ' AND ';
   }
   $psearchslashed = addslashes($psearch);
   $wherestr .= $offsetorg ? "trim(substring_index(place,',',-$offsetorg)) = \"$psearchslashed\"" : "place LIKE \"%$psearch%\"";
@@ -26,10 +26,10 @@ if ($wherestr) {
 //if doing a locality search, link directly to placesearch
 if ($stretch) {
   $query = "SELECT distinct place AS myplace, place AS wholeplace, count( place ) AS placecount FROM $places_table $wherestr GROUP BY myplace ORDER by myplace";
-  $places_oneletter_url = "placesearch.php?";
+  $places_oneletter_url = 'placesearch.php?';
 } else {
   $query = "SELECT distinct trim(substring_index(place,',',-$offset)) AS myplace, trim(place) AS wholeplace, count(place) AS placecount FROM $places_table $wherestr GROUP BY myplace ORDER by myplace";
-  $places_oneletter_url = "places-oneletter.php?";
+  $places_oneletter_url = 'places-oneletter.php?';
 }
 $result = tng_query($query);
 if (tng_num_rows($result) == 1) {
@@ -48,7 +48,7 @@ $displaychar = $decodedfirstchar ? $decodedfirstchar : uiTextSnippet('all');
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('placelist') . ": $displaychar");
 ?>
 <!DOCTYPE html>
@@ -63,7 +63,7 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": $displaychar");
     $hiddenfields[] = ['name' => 'firstchar', 'value' => $firstchar];
     $hiddenfields[] = ['name' => 'psearch', 'value' => $psearch];
     $hiddenfields[] = ['name' => 'offset', 'value' => $offsetorg];
-    beginFormElement("places-oneletter", "get");
+    beginFormElement('places-oneletter', 'get');
     ?>
       <div class="card">
         <div class='card-header'>
@@ -73,13 +73,13 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": $displaychar");
           echo "<input name='pgo' type='submit' value=\"" . uiTextSnippet('go') . "\" />\n";
           ?>
         </div>
-        <br><br><?php echo "<a href=\"placesMain.php\">" . uiTextSnippet('mainplacepage') . "</a> &nbsp;|&nbsp; <a href=\"places-all.php\">" . uiTextSnippet('showallplaces') . "</a>"; ?>
+        <br><br><?php echo "<a href=\"placesMain.php\">" . uiTextSnippet('mainplacepage') . "</a> &nbsp;|&nbsp; <a href=\"places-all.php\">" . uiTextSnippet('showallplaces') . '</a>'; ?>
       </div>
     <?php endFormElement(); ?>
     <br>
     <div class="card">
       <div class='card-header'>
-        <h4><?php echo uiTextSnippet('placelist') . ": $decodedfirstchar, " . uiTextSnippet('sortedalpha') . " (" . uiTextSnippet('numoccurrences') . "):"; ?></h4>
+        <h4><?php echo uiTextSnippet('placelist') . ": $decodedfirstchar, " . uiTextSnippet('sortedalpha') . ' (' . uiTextSnippet('numoccurrences') . '):'; ?></h4>
         <p class="small"><?php echo uiTextSnippet('showmatchingplaces'); ?></p>
       </div>
       <table class="table table-sm">
@@ -119,12 +119,12 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": $displaychar");
                   tng_free_result($result2);
 
                   $searchlink = $specificcount ? " <a href=\"placesearch.php?psearch=$place2\" title=\"" . uiTextSnippet('findplaces') . "\">"
-                      . "<img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=\"" . uiTextSnippet('findplaces') . "\"></a>" : "";
+                      . "<img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=\"" . uiTextSnippet('findplaces') . "\"></a>" : '';
                   if ($place['placecount'] > 1 || ($place['myplace'] != $place['wholeplace'] && !$commaOnEnd)) {
                     $name = "<a href=\"$places_oneletter_url" . $poffset;
                     $name .= "psearch=$olplace\">";
                     $name .= $place['myplace'];
-                    $name .= "</a>";
+                    $name .= '</a>';
 
                     echo "$snnum. $name ({$place['placecount']})$searchlink<br>\n";
                   } else {

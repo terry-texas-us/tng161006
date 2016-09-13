@@ -1164,7 +1164,7 @@ class PHPMailer
       $altBodyEncoding = 'quoted-printable';
     }
     //Use this as a preamble in all multipart message types
-    $mimepre = "This is a multi-part message in MIME format." . $this->LE . $this->LE;
+    $mimepre = 'This is a multi-part message in MIME format.' . $this->LE . $this->LE;
     switch ($this->message_type) {
       case 'inline':
         $body .= $mimepre;
@@ -1646,7 +1646,7 @@ class PHPMailer
         // RFC 2047 section 5.3
         $pattern = '^A-Za-z0-9!*+\/ -';
         break;
-      /** @noinspection PhpMissingBreakStatementInspection */
+
       case 'comment':
         // RFC 2047 section 5.2
         $pattern = '\(\)"';

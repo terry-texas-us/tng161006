@@ -8,14 +8,14 @@ require 'version.php';
 
 $exptime = 0;
 if ($newsearch) {
-  setcookie("tng_search_people_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_people_post[living]", $living, $exptime);
-  setcookie("tng_search_people_post[exactmatch]", $exactmatch, $exptime);
-  setcookie("tng_search_people_post[nokids]", $nokids, $exptime);
-  setcookie("tng_search_people_post[noparents]", $noparents, $exptime);
-  setcookie("tng_search_people_post[nospouse]", $nospouse, $exptime);
-  setcookie("tng_search_people_post[tngpage]", 1, $exptime);
-  setcookie("tng_search_people_post[offset]", 0, $exptime);
+  setcookie('tng_search_people_post[search]', $searchstring, $exptime);
+  setcookie('tng_search_people_post[living]', $living, $exptime);
+  setcookie('tng_search_people_post[exactmatch]', $exactmatch, $exptime);
+  setcookie('tng_search_people_post[nokids]', $nokids, $exptime);
+  setcookie('tng_search_people_post[noparents]', $noparents, $exptime);
+  setcookie('tng_search_people_post[nospouse]', $nospouse, $exptime);
+  setcookie('tng_search_people_post[tngpage]', 1, $exptime);
+  setcookie('tng_search_people_post[offset]', 0, $exptime);
 } else {
   if (!$searchstring) {
     $searchstring = stripslashes($_COOKIE['tng_search_people_post']['search']);
@@ -39,11 +39,11 @@ if ($newsearch) {
     $tngpage = $_COOKIE['tng_search_people_post']['tngpage'];
     $offset = $_COOKIE['tng_search_people_post']['offset'];
   } else {
-    setcookie("tng_search_people_post[tngpage]", $tngpage, $exptime);
-    setcookie("tng_search_people_post[offset]", $offset, $exptime);
+    setcookie('tng_search_people_post[tngpage]', $tngpage, $exptime);
+    setcookie('tng_search_people_post[offset]', $offset, $exptime);
   }
 }
-$searchstring_noquotes = preg_replace("/\"/", "&#34;", $searchstring);
+$searchstring_noquotes = preg_replace('/\"/', '&#34;', $searchstring);
 $searchstring = addslashes($searchstring);
 
 if ($offset) {
@@ -51,22 +51,22 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $tngpage = 1;
 }
 
 function addCriteria($field, $value, $operator)
 {
-  $criteria = "";
+  $criteria = '';
 
-  if ($operator == "=") {
+  if ($operator == '=') {
     $criteria = " OR $field $operator \"$value\"";
   } else {
-    $innercriteria = "";
+    $innercriteria = '';
     $terms = explode(' ', $value);
     foreach ($terms as $term) {
       if ($innercriteria) {
-        $innercriteria .= " AND ";
+        $innercriteria .= ' AND ';
       }
       $innercriteria .= "$field $operator \"%$term%\"";
     }
@@ -77,54 +77,54 @@ function addCriteria($field, $value, $operator)
   return $criteria;
 }
 
-$allwhere = "1=1 ";
+$allwhere = '1=1 ';
 
 if ($assignedbranch) {
   $allwhere .= " AND $people_table.branch LIKE \"%$assignedbranch%\"";
 }
 if ($searchstring) {
-  $allwhere .= " AND (1=0";
-  if ($exactmatch == "yes") {
-    $frontmod = "=";
+  $allwhere .= ' AND (1=0';
+  if ($exactmatch == 'yes') {
+    $frontmod = '=';
   } else {
-    $frontmod = "LIKE";
+    $frontmod = 'LIKE';
   }
   $allwhere .= addCriteria("$people_table.personID", $searchstring, $frontmod);
-  $allwhere .= addCriteria("CONCAT_WS(' ',TRIM(firstname)" . ($lnprefixes ? ",IF(TRIM(lnprefix),TRIM(lnprefix),NULL)" : "") . ",TRIM(lastname))", $searchstring, $frontmod);
-  $allwhere .= ")";
+  $allwhere .= addCriteria("CONCAT_WS(' ', TRIM(firstname)" . ($lnprefixes ? ', IF(TRIM(lnprefix),TRIM(lnprefix),NULL)' : '') . ', TRIM(lastname))', $searchstring, $frontmod);
+  $allwhere .= ')';
 }
-if ($living == "yes") {
+if ($living == 'yes') {
   $allwhere .= " AND $people_table.living = \"1\"";
 }
 if ($noparents) {
   $noparentjoin = "LEFT JOIN $children_table as noparents ON $people_table.personID = noparents.personID";
-  $allwhere .= " AND noparents.familyID is NULL";
+  $allwhere .= ' AND noparents.familyID is NULL';
 } else {
-  $noparentjoin = "";
+  $noparentjoin = '';
 }
 if ($nospouse) {
   $nospousejoin = "LEFT JOIN $families_table as nospousef ON $people_table.personID = nospousef.husband "
           . "LEFT JOIN $families_table as nospousem ON $people_table.personID = nospousem.wife";
-  $allwhere .= " AND nospousef.familyID is NULL AND nospousem.familyID is NULL";
+  $allwhere .= ' AND nospousef.familyID is NULL AND nospousem.familyID is NULL';
 } else {
-  $nospousejoin = "";
+  $nospousejoin = '';
 }
 if ($nokids) {
   $nokidjoin = "LEFT OUTER JOIN $families_table AS familiesH ON $people_table.personID=familiesH.husband "
           . "LEFT OUTER JOIN $families_table AS familiesW ON $people_table.personID=familiesW.wife "
           . "LEFT OUTER JOIN $children_table AS childrenH ON familiesH.familyID=childrenH.familyID "
           . "LEFT OUTER JOIN $children_table AS childrenW ON familiesW.familyID=childrenW.familyID ";
-  $nokidhaving = "HAVING ChildrenCount = 0 ";
+  $nokidhaving = 'HAVING ChildrenCount = 0 ';
   $nokidgroup = "GROUP BY $people_table.personID, $people_table.lastname, $people_table.firstname, $people_table.firstname, $people_table.lnprefix, "
           . "$people_table.prefix, $people_table.suffix, $people_table.nameorder, $people_table.birthdate, birthyear, $people_table.birthplace, $people_table.altbirthdate, altbirthyear, "
           . "$people_table.altbirthplace ";
-  $nokidselect = ", SUM((childrenH.familyID is not NULL) + (childrenW.familyID is not NULL)) AS ChildrenCount ";
+  $nokidselect = ', SUM((childrenH.familyID is not NULL) + (childrenW.familyID is not NULL)) AS ChildrenCount ';
   $nokidgroup2 = "GROUP BY $people_table.personID, $people_table.lastname, $people_table.firstname, $people_table.firstname, $people_table.lnprefix ";
 } else {
-  $nokidjoin = "";
-  $nokidhaving = "";
-  $nokidgroup = "";
-  $nokidselect = "";
+  $nokidjoin = '';
+  $nokidhaving = '';
+  $nokidgroup = '';
+  $nokidselect = '';
 }
 $query = "SELECT $people_table.ID, $people_table.personID, lastname, firstname, lnprefix, prefix, suffix, nameorder, birthdate, LPAD(SUBSTRING_INDEX(birthdate, ' ', -1), 4, '0') AS birthyear, birthplace, altbirthdate, LPAD(SUBSTRING_INDEX(altbirthdate, ' ', -1), 4, '0') AS altbirthyear, altbirthplace, deathdate, LPAD(SUBSTRING_INDEX(deathdate, ' ', -1), 4, '0') AS deathyear, deathplace $nokidselect "
   . "FROM ($people_table) $nokidjoin $noparentjoin $nospousejoin "
@@ -152,7 +152,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 }
 $revstar = checkReview('I');
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('people'));
 ?>
 <!DOCTYPE html>
@@ -164,9 +164,9 @@ $headSection->setTitle(uiTextSnippet('people'));
     echo $adminHeaderSection->build('people', $message);
     $navList = new navList('people');
     //    $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
-    $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
-    $navList->appendItem([$allowEdit, "admin_findreview.php?type=I", uiTextSnippet('review') . $revstar, "review"]);
-    $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
+    $navList->appendItem([$allowAdd, 'peopleAdd.php', uiTextSnippet('add'), 'addperson']);
+    $navList->appendItem([$allowEdit, 'admin_findreview.php?type=I', uiTextSnippet('review') . $revstar, 'review']);
+    $navList->appendItem([$allowEdit && $allowDelete, 'peopleMerge.php', uiTextSnippet('merge'), 'merge']);
     echo $navList->build('findperson');
     require '_/components/php/findPeopleForm.php';
     
@@ -198,7 +198,7 @@ $headSection->setTitle(uiTextSnippet('people'));
           </thead>
           <tbody>
             <?php
-            $actionstr = "";
+            $actionstr = '';
             if ($allowEdit) {
               $actionstr .= "<a href=\"peopleEdit.php?personID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
@@ -218,23 +218,23 @@ $headSection->setTitle(uiTextSnippet('people'));
               $row['allow_living'] = $rights['living'];
               $row['allow_private'] = $rights['private'];
               if ($row['birthdate']) {
-                $birthdate = uiTextSnippet('birthabbr') . " " . $row['birthdate'];
+                $birthdate = uiTextSnippet('birthabbr') . ' ' . $row['birthdate'];
                 $birthplace = $row['birthplace'];
               } else {
                 if ($row['altbirthdate']) {
-                  $birthdate = uiTextSnippet('chrabbr') . " " . $row['altbirthdate'];
+                  $birthdate = uiTextSnippet('chrabbr') . ' ' . $row['altbirthdate'];
                   $birthplace = $row['altbirthplace'];
                 } else {
-                  $birthdate = "";
+                  $birthdate = '';
                   $birthplace = $row['birthplace'] ? $row['birthplace'] : $row['altbirthplace'];
                 }
               }
               if ($row['deathdate']) {
-                $deathdate = uiTextSnippet('deathabbr') . " " . $row['deathdate'];
+                $deathdate = uiTextSnippet('deathabbr') . ' ' . $row['deathdate'];
                 $deathplace = $row['deathplace'];
               }
-              $newactionstr = preg_replace("/xxx/", $row['personID'], $actionstr);
-              $newactionstr = preg_replace("/zzz/", $row['ID'], $newactionstr);
+              $newactionstr = preg_replace('/xxx/', $row['personID'], $actionstr);
+              $newactionstr = preg_replace('/zzz/', $row['ID'], $newactionstr);
 
               echo "<tr id=\"row_{$row['ID']}\">\n";
               echo "<td><div class=\"action-btns\">$newactionstr</div></td>\n";
@@ -244,8 +244,8 @@ $headSection->setTitle(uiTextSnippet('people'));
               }
               echo "<td>\n";
                 $editlink = "peopleEdit.php?personID={$row['personID']}";
-                echo $allowEdit ? "<a href='$editlink' title='" . uiTextSnippet('edit') . "'>" . getname($row) . "</a>" : getname($row);
-                echo "<br>";
+                echo $allowEdit ? "<a href='$editlink' title='" . uiTextSnippet('edit') . "'>" . getname($row) . '</a>' : getname($row);
+                echo '<br>';
                 echo "{$row['personID']}\n";
               echo "</td>\n";
               echo "<td>$birthdate, $birthplace<br>$deathdate, $deathplace</td>\n";

@@ -9,7 +9,7 @@ require 'adminlog.php';
 
 if (!$currentuser) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 $description = addslashes($description);
@@ -44,7 +44,7 @@ if ($proceed) {
     $password_type = PasswordType();
     $pwd_str = "password=\"$password\",password_type=\"$password_type\",";
   } else {
-    $pwd_str = "";
+    $pwd_str = '';
   }
 
   $query = "UPDATE $users_table SET username=\"$username\",{$pwd_str}realname=\"$realname\",phone=\"$phone\",email=\"$email\",website=\"$website\",address=\"$address\",city=\"$city\",state=\"$state\",zip=\"$zip\",country=\"$country\" WHERE userID=\"$userID\"";
@@ -54,11 +54,11 @@ if ($proceed) {
 
   if (tng_affected_rows() != -1 && ($password != $orgpwd || $username != $currentuser)) {
     $_SESSION['currentuser'] = $username;
-    $newroot = preg_replace("/\//", "", $rootpath);
-    $newroot = preg_replace("/ /", "", $newroot);
-    $newroot = preg_replace("/\./", "", $newroot);
-    setcookie("tnguser_$newroot", "", time() - 31536000, "/");
-    setcookie("tngpass_$newroot", "", time() - 31536000, "/");
+    $newroot = preg_replace('/\//', '', $rootpath);
+    $newroot = preg_replace('/ /', '', $newroot);
+    $newroot = preg_replace('/\./', '', $newroot);
+    setcookie("tnguser_$newroot", '', time() - 31536000, "/");
+    setcookie("tngpass_$newroot", '', time() - 31536000, "/");
   }
 }
-header("Location: " . $_SESSION['destinationpage8']);
+header('Location: ' . $_SESSION['destinationpage8']);

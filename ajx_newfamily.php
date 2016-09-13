@@ -6,7 +6,7 @@ require 'checklogin.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: login.php?message=" . urlencode($message));
+  header('Location: login.php?message=' . urlencode($message));
   exit;
 }
 if ($child) {
@@ -18,7 +18,7 @@ if ($child) {
     if ($wife) {
       $newperson = $wife;
     } else {
-      $newperson = "";
+      $newperson = '';
     }
   }
 }
@@ -41,7 +41,7 @@ if (!isset($husbstr)) {
 if (!isset($wifestr)) {
   $wifestr = uiTextSnippet('clickfind');
 }
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 
 require_once 'eventlib.php';
 ?>
@@ -100,30 +100,30 @@ require_once 'eventlib.php';
             <input name='private' type='checkbox' value='1'> <?php echo uiTextSnippet('private'); ?>
           </td>
           <td></td>
-          <td><?php echo uiTextSnippet('branch') . ": "; ?></td>
+          <td><?php echo uiTextSnippet('branch') . ': '; ?></td>
           <td style="height: 2em">
             <?php
             $query = "SELECT branch, description FROM $branches_table ORDER BY description";
             $branchresult = tng_query($query);
             $numbranches = tng_num_rows($branchresult);
-            $branchlist = explode(",", $row['branch']);
+            $branchlist = explode(',', $row['branch']);
 
             $descriptions = [];
-            $options = "";
+            $options = '';
             while ($branchrow = tng_fetch_assoc($branchresult)) {
               $options .= "  <option value=\"{$branchrow['branch']}\">{$branchrow['description']}</option>\n";
             }
             echo "<span id=\"fbranchlist\"></span>";
             if (!$assignedbranch) {
               if ($numbranches > 8) {
-                $select = uiTextSnippet('scrollbranch') . "<br>";
+                $select = uiTextSnippet('scrollbranch') . '<br>';
               }
               $select .= "<select name=\"branch[]\" id=\"fbranch\" multiple size=\"8\">\n";
               $select .= "  <option value=''";
-              if ($row['branch'] == "") {
-                $select .= " selected";
+              if ($row['branch'] == '') {
+                $select .= ' selected';
               }
-              $select .= ">" . uiTextSnippet('nobranch') . "</option>\n";
+              $select .= '>' . uiTextSnippet('nobranch') . "</option>\n";
 
               $select .= "$options</select>\n";
               echo "<span>(<a href='#' onclick=\"showBranchEdit('fbranchedit'); quitBranchEdit('fbranchedit'); return false;\"><img src='img/ArrowDown.gif'>" . uiTextSnippet('edit') . "</a> )</span><br>";

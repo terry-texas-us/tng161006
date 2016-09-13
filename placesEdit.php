@@ -20,9 +20,9 @@ $row = tng_fetch_assoc($result);
 tng_free_result($result);
 $orgplace = $row['place'];
 $ID = $row['ID'];
-$row['place'] = preg_replace("/\"/", "&#34;", $row['place']);
+$row['place'] = preg_replace('/\"/', '&#34;', $row['place']);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifyplace'));
 ?>
 <!DOCTYPE html>
@@ -33,13 +33,12 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
     <?php
     echo $adminHeaderSection->build('places-modifyplace', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "placesBrowse.php", uiTextSnippet('browse'), "findplace"]);
-    $navList->appendItem([$allowAdd, "placesAdd.php", uiTextSnippet('add'), "addplace"]);
-    $navList->appendItem([$allowEdit && $allowDelete, "placesMerge.php", uiTextSnippet('merge'), "merge"]);
-    $navList->appendItem([$allowEdit, "admin_geocodeform.php", uiTextSnippet('geocode'), "geo"]);
-    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
-
-    echo $navList->build("edit");
+    $navList->appendItem([true, 'placesBrowse.php', uiTextSnippet('browse'), 'findplace']);
+    $navList->appendItem([$allowAdd, 'placesAdd.php', uiTextSnippet('add'), 'addplace']);
+    $navList->appendItem([$allowEdit && $allowDelete, 'placesMerge.php', uiTextSnippet('merge'), 'merge']);
+    $navList->appendItem([$allowEdit, 'admin_geocodeform.php', uiTextSnippet('geocode'), 'geo']);
+    $navList->appendItem([$allowEdit, '#', uiTextSnippet('edit'), 'edit']);
+    echo $navList->build('edit');
     ?>
     <br>
     <a href="placesearch.php?psearch=<?php echo urlencode($orgplace); ?>" title='<?php echo uiTextSnippet('preview') ?>'>
@@ -60,15 +59,15 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
         if (determineLDSRights()) {
           echo "<tr><td>&nbsp;</td><td><input name='temple' type='checkbox' value='1'";
           if ($row['temple']) {
-            echo " checked";
+            echo ' checked';
           }
-          echo "> " . uiTextSnippet('istemple') . "</td></tr>\n";
+          echo '> ' . uiTextSnippet('istemple') . "</td></tr>\n";
         }
         if ($map['key']) { ?>
           <tr>
             <td colspan='2'>
               <div style="padding:10px">
-                <?php include "googlemapdrawthemap.php"; ?>
+                <?php include 'googlemapdrawthemap.php'; ?>
               </div>
             </td>
           </tr>
@@ -97,9 +96,9 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
                 for ($i = 1; $i < 7; $i++) {
                   echo "<option value=\"$i\"";
                   if ($i == $row['placelevel']) {
-                    echo " selected";
+                    echo ' selected';
                   }
-                  echo ">" . uiTextSnippet('level' . $i) . "</option>\n";
+                  echo '>' . uiTextSnippet('level' . $i) . "</option>\n";
                 }
                 ?>
               </select>
@@ -118,25 +117,25 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
                   $location = $cemrow['cemname'];
                   if ($cemrow['city']) {
                     if ($location) {
-                      $location .= ", ";
+                      $location .= ', ';
                     }
                     $location .= $cemrow['city'];
                   }
                   if ($cemrow['county']) {
                     if ($location) {
-                      $location .= ", ";
+                      $location .= ', ';
                     }
                     $location .= $cemrow['county'];
                   }
                   if ($cemrow['state']) {
                     if ($location) {
-                      $location .= ", ";
+                      $location .= ', ';
                     }
                     $location .= $cemrow['state'];
                   }
                   if ($cemrow['country']) {
                     if ($location) {
-                      $location .= ", ";
+                      $location .= ', ';
                     }
                     $location .= $cemrow['country'];
                   }
@@ -144,7 +143,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
                   if ($allowDelete) {
                     $actionstr .= "<a href='#' onclick=\"return deleteCemLink('{$cemrow['cemeteryID']}');\" title='" . uiTextSnippet('delete') . "'>\n";
                     $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
-                    $actionstr .= "</a>";
+                    $actionstr .= '</a>';
                   }
                   if ($allowEdit) {
                     $actionstr .= "<a href='#' onclick=\"return copyGeoInfo('{$cemrow['cemeteryID']}');\"><img class='icon-sm-inline' src='svg/globe.svg' id=\"geo{$cemrow['cemeteryID']}\" title=\"" . uiTextSnippet('geocopy') . "\" alt=\"" . uiTextSnippet('geocopy') . "\"></a>";
@@ -166,7 +165,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
         <tr>
           <td><?php echo uiTextSnippet('notes'); ?>:</td>
           <td>
-            <textarea wrap='soft' cols="50" rows="5" name="notes"><?php echo $row['notes']; ?></textarea>
+            <textarea wrap='soft' cols="50" rows='5' name="notes"><?php echo $row['notes']; ?></textarea>
           </td>
         </tr>
         <?php
@@ -186,7 +185,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
         <tr>
           <td colspan='2'>
             <?php
-            echo uiTextSnippet('onsave') . ":<br>";
+            echo uiTextSnippet('onsave') . ':<br>';
             echo "<input name='newscreen' type='radio' value='return'> " . uiTextSnippet('savereturn') . "<br>\n";
             if ($cw) {
               echo "<input name='newscreen' type='radio' value='close' checked> " . uiTextSnippet('closewindow') . "\n";
@@ -302,7 +301,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
 </script>
 <?php
 if ($map['key']) {
-  include "googlemaplib2.php";
+  include 'googlemaplib2.php';
 }
 ?>
 </body>

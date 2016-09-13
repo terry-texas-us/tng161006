@@ -472,8 +472,8 @@ if (!class_exists('TNGPDF')) {
       }
       $wmax = ($w - 2 * $this->cMargin) * 1000 / $this->FontSize;
       $s = str_replace("\r", '', $txt);
-      $s = str_replace("<i>", chr(1), $s);
-      $s = str_replace("</i>", chr(2), $s);
+      $s = str_replace('<i>', chr(1), $s);
+      $s = str_replace('</i>', chr(2), $s);
       $nb = strlen($s);
       if ($nb > 0 && $s[$nb - 1] == "\n") {
         $nb--;
@@ -502,7 +502,7 @@ if (!class_exists('TNGPDF')) {
       $ns = 0;
       $nl = 1;
 
-      $this->Cell($w, $h / 4, "", $b, 2, $align, $fill);
+      $this->Cell($w, $h / 4, '', $b, 2, $align, $fill);
       $b = $b2;
       while ($i < $nb) {
         //Get next character
@@ -589,7 +589,7 @@ if (!class_exists('TNGPDF')) {
       if ($border && strpos($border, 'B') !== false) {
         $b .= 'B';
       }
-      $this->Cell($w, $h / 4, "", $b, 2, $align, $fill);
+      $this->Cell($w, $h / 4, '', $b, 2, $align, $fill);
       $this->x = $this->lMargin;
     }
 

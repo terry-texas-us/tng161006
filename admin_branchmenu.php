@@ -8,7 +8,7 @@ require 'version.php';
 
 if (!$allowEdit || $assignedbranch) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
@@ -23,7 +23,7 @@ $prow = tng_fetch_assoc($result);
 $pcount = $prow['pcount'];
 tng_free_result($result);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('labelbranches'));
 ?>
 <!DOCTYPE html>
@@ -34,17 +34,17 @@ $headSection->setTitle(uiTextSnippet('labelbranches'));
     <?php
     echo $adminHeaderSection->build('branches-labelbranches', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "branchesBrowse.php", uiTextSnippet('browse'), "findbranch"]);
-    $navList->appendItem([$allowAdd, "branchesAdd.php", uiTextSnippet('add'), "addbranch"]);
-    $navList->appendItem([$allowEdit, "#", uiTextSnippet('labelbranches'), "label"]);
-    echo $navList->build("label");
+    $navList->appendItem([true, 'branchesBrowse.php', uiTextSnippet('browse'), 'findbranch']);
+    $navList->appendItem([$allowAdd, 'branchesAdd.php', uiTextSnippet('add'), 'addbranch']);
+    $navList->appendItem([$allowEdit, '#', uiTextSnippet('labelbranches'), 'label']);
+    echo $navList->build('label');
     ?>
     <form action="admin_branchlabels.php" method='post' id="form1" name="form1"
           onSubmit="return validateForm();">
       <table class='table table-sm'>
         <tr>
           <td><strong><?php echo uiTextSnippet('branch'); ?>:</strong></td>
-          <td><?php echo $brow['description'] . "<br>(" . uiTextSnippet('people') . " + " . uiTextSnippet('families') . " = $pcount*)"; ?>
+          <td><?php echo $brow['description'] . "<br>(" . uiTextSnippet('people') . ' + ' . uiTextSnippet('families') . " = $pcount*)"; ?>
             <input name='branch' type='hidden' value="<?php echo $branch; ?>"></td>
         </tr>
         <tr>
@@ -62,7 +62,7 @@ $headSection->setTitle(uiTextSnippet('labelbranches'));
         </tr>
         <tr>
           <td colspan='2'>
-            <div id="allpart" style="display: none">
+            <div id="allpart" style='display: none'>
               <input name='set' type='radio' value='all'
                      onClick="toggleAll();"> <?php echo uiTextSnippet('all'); ?>
               <input name='set' type='radio' value='partial' checked

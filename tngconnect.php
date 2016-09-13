@@ -12,12 +12,12 @@ function tng_db_connect($dbhost, $dbname, $dbusername, $dbpassword) {
     }
     return $link;
   } else {
-    if ($textpart != "setup" && $textpart != "index") {
+    if ($textpart != 'setup' && $textpart != 'index') {
       if (isset($tng_notinstalled) && $tng_notinstalled) {
-        header("Location:readme.html");
+        header('Location:readme.html');
         exit;
       } else {
-        echo "Error: TNG is not communicating with your database. Please check your database settings and try again.";
+        echo 'Error: Please check your database settings and try again.';
       }
       exit;
     }

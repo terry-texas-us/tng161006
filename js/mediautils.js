@@ -2,7 +2,7 @@
 /*global ModalDialog */
 var tnglitbox;
 
-var gsControlName = "";
+var gsControlName = '';
 function FilePicker(sControl, collection, folders) {
     'use strict';
     gsControlName = sControl;
@@ -19,14 +19,14 @@ function FilePicker(sControl, collection, folders) {
 
         if (searchstring.value) {
             if (searchstring.value === origsearch.value || searchstring.value === lastsearch.value) {
-                sendstring = "";
-                lastsearch.value = "";
+                sendstring = '';
+                lastsearch.value = '';
             } else {
                 lastsearch.value = searchstring.value;
             }
         }
     } else {
-        sendstring = "";
+        sendstring = '';
     }
     folderstr = folders ? '&folders=1' : '';
     var url = 'admin_filepicker.php?path=' + collection + '&searchstring=' + sendstring + folderstr;
@@ -85,7 +85,7 @@ function populatePath(source, dest) {
     var lastslash, temp;
     var lastperiod;
     var ext;
-    dest.value = "";
+    dest.value = '';
     temp = source.value.replace(/\\/g, "/");
     lastslash = temp.lastIndexOf("/") + 1;
     if (lastslash > 0) {
@@ -115,7 +115,7 @@ function prepopulateThumb() {
     var lastperiod = path.value.lastIndexOf(".");
     var thumbpath = document.form1.thumbpath;
 
-    thumbpath.value = "";
+    thumbpath.value = '';
     if (lastslash) {
         thumbpath.value = path.value.slice(0, lastslash);
     }
@@ -138,7 +138,7 @@ function toggleCemSelect() {
 function switchOnType(mtypeIndex) {
     'use strict';
     var mediatypeID = like[mtypeIndex];
-    if (mediatypeID === "headstones") {
+    if (mediatypeID === 'headstones') {
         $('#maprow').fadeIn(200);
         $('#linktocemrow').fadeIn(200);
         //new Effect.Appear('cemrow',{duration:.2});
@@ -233,13 +233,13 @@ function imageClick(photoID) {
         firstclick = false;
     } else {
         if (shape === "circle") {
-            x2 = "";
-            y2 = "";
+            x2 = '';
+            y2 = '';
             radius = Math.ceil(Math.sqrt(Math.pow(Coordinate_X_InImage - x1, 2) + Math.pow(Coordinate_Y_InImage - y1, 2)));
         } else {
             x2 = Coordinate_X_InImage;
             y2 = Coordinate_Y_InImage;
-            radius = "";
+            radius = '';
         }
         findItem('I', 'imagemap', '', assignedbranch);
         firstclick = true;
@@ -282,8 +282,8 @@ function generateThumbs(form) {
     'use strict';
     $('#thumbresults').html("");
     $('#thumbresults').hide();
-    var regenerate = form.regenerate.checked ? 1 : "";
-    var repath = form.repath.checked ? 1 : "";
+    var regenerate = form.regenerate.checked ? 1 : '';
+    var repath = form.repath.checked ? 1 : '';
     $('#thumbspin').show();
     var params = {regenerate: regenerate, repath: repath};
     $.ajax({
@@ -303,7 +303,7 @@ function assignDefaults(form) {
     'use strict';
     $('#defresults').html("");
     $('#defresults').hide();
-    var overwrite = form.overwritedefs.checked ? 1 : "";
+    var overwrite = form.overwritedefs.checked ? 1 : '';
     $('#defspin').show();
     var params = {overwritedefs: overwrite};
     $.ajax({
@@ -368,13 +368,13 @@ function addEntity(form) {
 
 function addCollection(form) {
     'use strict';
-    if (form.collid.value === "") {
+    if (form.collid.value === '') {
         alert(textSnippet('entercollid'));
-    } else if (form.display.value === "") {
+    } else if (form.display.value === '') {
         alert(textSnippet('entercolldisplay'));
-    } else if (form.path.value === "") {
+    } else if (form.path.value === '') {
         alert(entercollpath);
-    } else if (form.icon.value === "") {
+    } else if (form.icon.value === '') {
         alert(textSnippet('entercollicon'));
     } else {
         $('#cerrormsg').hide();
@@ -385,7 +385,7 @@ function addCollection(form) {
             type: 'POST',
             dataType: 'html',
             success: function (req) {
-                if (req !== "0") {
+                if (req !== '0') {
                     var field = document.form1.mediatypeID;
                     var i = field.options.length;
                     if (navigator.appName === "Netscape") {
@@ -426,11 +426,11 @@ function editMediatype(field) {
 
 function updateCollection(form) {
     'use strict';
-    if (form.display.value === "") {
+    if (form.display.value === '') {
         alert(textSnippet('entercolldisplay'));
-    } else if (form.path.value === "") {
+    } else if (form.path.value === '') {
         alert(entercollpath);
-    } else if (form.icon.value === "") {
+    } else if (form.icon.value === '') {
         alert(textSnippet('entercollicon'));
     } else {
         var params = $(form).serialize();
@@ -605,7 +605,7 @@ function switchLinktypes(select) {
         $('#newlines').html(resheremsg);
         $('#find2').children().each(function (index, item) {
             if (item.type === "text") {
-                item.value = "";
+                item.value = '';
             }
         });
     }

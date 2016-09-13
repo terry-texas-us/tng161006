@@ -15,7 +15,7 @@ $name = $ID;
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 
 $headTitle = uiTextSnippet('suggestchange') . ": $name";
 $headSection->setTitle($headTitle);
@@ -31,7 +31,7 @@ $headSection->setTitle($headTitle);
     $photostr = showSmallPhoto($ID, $name, $row['allow_living'] && $row['allow_private'], 0, false, $row['sex']);
     echo tng_DrawHeading($photostr, $name, $years);
 
-    echo buildPlaceMenu("suggest", $ID);
+    echo buildPlaceMenu('suggest', $ID);
     echo "<br style='clear: both;'>\n";
     echoResponseMessage($message, $sowner, $ssendemail);
     ?>

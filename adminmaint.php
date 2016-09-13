@@ -1,13 +1,13 @@
 <?php
 require 'begin.php';
-$tngconfig['maint'] = "";
+$tngconfig['maint'] = '';
 require 'adminlib.php';
 
 $maintenance_mode = true;
 require 'checklogin.php';
 require 'version.php';
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('maintmode'));
 ?>
 <!DOCTYPE html>

@@ -1,5 +1,5 @@
 <?php
-ini_set("auto_detect_line_endings", "1");
+ini_set('auto_detect_line_endings', '1');
 ini_set('memory_limit', '200M');
 $umfs = substr(ini_get('upload_max_filesize'), 0, -1);
 if ($umfs < 12) {
@@ -15,7 +15,7 @@ require 'version.php';
 
 if (!$allowAdd || !$allowEdit || $assignedbranch) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 require $subroot . 'importconfig.php';
@@ -26,7 +26,7 @@ require 'gedcomImportFamilies.php';
 require 'gedcomImportSources.php';
 require 'gedcomImportPeople.php';
 require 'adminlog.php';
-$today = date("Y-m-d H:i:s");
+$today = date('Y-m-d H:i:s');
 
 global $prefix;
 global $medialinks;
@@ -47,8 +47,8 @@ function getMediaLinksToSave() {
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {
-    $key = $row['persfamID'] . "::" . $row['eventtypeID'] . "::" . $row['eventdate'] . "::" . substr($row['eventplace'], 0, 40) . "::" . substr($row['info'], 0, 40);
-    $key = preg_replace("/[^A-Za-z0-9:]/", "", $key);
+    $key = $row['persfamID'] . '::' . $row['eventtypeID'] . '::' . $row['eventdate'] . '::' . substr($row['eventplace'], 0, 40) . '::' . substr($row['info'], 0, 40);
+    $key = preg_replace('/[^A-Za-z0-9:]/', '', $key);
     $value = $row['medialinkID'];
     $medialinks[$key][] = $value;
   }
@@ -65,15 +65,15 @@ function getAlbumLinksToSave() {
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {
-    $key = $row['entityID'] . "::" . $row['eventtypeID'] . "::" . $row['eventdate'] . "::" . substr($row['eventplace'], 0, 40) . "::" . substr($row['info'], 0, 40);
-    $key = preg_replace("/[^A-Za-z0-9:]/", "", $key);
+    $key = $row['entityID'] . '::' . $row['eventtypeID'] . '::' . $row['eventdate'] . '::' . substr($row['eventplace'], 0, 40) . '::' . substr($row['info'], 0, 40);
+    $key = preg_replace('/[^A-Za-z0-9:]/', '', $key);
     $value = $row['alinkID'];
     $albumlinks[$key][] = $value;
   }
   return $albumlinks;
 }
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('datamaint'));
 ?>
 <!DOCTYPE html>
@@ -87,29 +87,29 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
     if ($old) {
       echo $adminHeaderSection->build('datamaint-gedimport', $message);
       $navList = new navList('');
-      $navList->appendItem([true, "dataImportGedcom.php", uiTextSnippet('import'), "import"]);
-      $navList->appendItem([$allow_export, "dataExportGedcom.php", uiTextSnippet('export'), "export"]);
-      $navList->appendItem([true, "dataSecondaryProcesses.php", uiTextSnippet('secondarymaint'), "second"]);
-      echo $navList->build("import");
+      $navList->appendItem([true, 'dataImportGedcom.php', uiTextSnippet('import'), 'import']);
+      $navList->appendItem([$allow_export, 'dataExportGedcom.php', uiTextSnippet('export'), 'export']);
+      $navList->appendItem([true, 'dataSecondaryProcesses.php', uiTextSnippet('secondarymaint'), 'second']);
+      echo $navList->build('import');
     }
-    $stdevents = ["BIRT", "SEX", "DEAT", "BURI", "MARR", "SLGS", "SLGC", "NICK", "NSFX", "TITL", "BAPL", "CONL", "INIT", "ENDL", "CHAN", "CALN", "AUTH", "PUBL", "ABBR", "TEXT"];
-    $pciteevents = ["NAME", "BIRT", "CHR", "DEAT", "BURI", "BAPL", "CONL", "INIT", "ENDL", "SLGC"];
-    $fciteevents = ["MARR", "DIV", "SLGS"];
+    $stdevents = ['BIRT', 'SEX', 'DEAT', 'BURI', 'MARR', 'SLGS', 'SLGC', 'NICK', 'NSFX', 'TITL', 'BAPL', 'CONL', 'INIT', 'ENDL', 'CHAN', 'CALN', 'AUTH', 'PUBL', 'ABBR', 'TEXT'];
+    $pciteevents = ['NAME', 'BIRT', 'CHR', 'DEAT', 'BURI', 'BAPL', 'CONL', 'INIT', 'ENDL', 'SLGC'];
+    $fciteevents = ['MARR', 'DIV', 'SLGS'];
 
     set_time_limit(0);
     $fp = false;
-    $savestate['filename'] = "";
-    $openmsg = "";
-    $clearedtogo = "false";
-    if ($remotefile && $remotefile != "none") {
-      $basefilename = preg_replace("/[^a-zA-Z0-9\._-]/", "_", basename($_FILES['remotefile']['name']));
+    $savestate['filename'] = '';
+    $openmsg = '';
+    $clearedtogo = 'false';
+    if ($remotefile && $remotefile != 'none') {
+      $basefilename = preg_replace('/[^a-zA-Z0-9\._-]/', '_', basename($_FILES['remotefile']['name']));
       $gedfilename = "$rootpath$gedpath/$basefilename";
       $savegedfilename = $basefilename;
 
       if (move_uploaded_file($remotefile, $gedfilename)) {
         chmod($gedfilename, 0644);
 
-        $fp = fopen($gedfilename, "r");
+        $fp = fopen($gedfilename, 'r');
 
         if ($fp === false) {
           $openmsg = uiTextSnippet('cannotopen') . " $basefilename. " . uiTextSnippet('umps');
@@ -117,31 +117,31 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
           $fstat = fstat($fp);
           $openmsg = uiTextSnippet('importinggedcom');
           $savestate['filename'] = $gedfilename;
-          $clearedtogo = "true";
+          $clearedtogo = 'true';
           if ($old) {
             echo "<strong>$remotefile " . uiTextSnippet('opened') . "</strong><br>\n";
           }
         }
       } else {
-        $openmsg = uiTextSnippet('cannotupload') . " " . $_FILES['remotefile']['name'] . ". " . uiTextSnippet('invfperms');
+        $openmsg = uiTextSnippet('cannotupload') . ' ' . $_FILES['remotefile']['name'] . '. ' . uiTextSnippet('invfperms');
       }
     } elseif ($database) {
-      $gedfilename = $gedpath == "admin" || $gedpath == "" ? $database : "$rootpath$gedpath/$database";
+      $gedfilename = $gedpath == 'admin' || $gedpath == '' ? $database : "$rootpath$gedpath/$database";
       $savegedfilename = $database;
-      $fp = fopen($gedfilename, "r");
+      $fp = fopen($gedfilename, 'r');
       if ($fp === false) {
         $openmsg = uiTextSnippet('cannotopen') . " $database";
       } else {
         $fstat = fstat($fp);
         $openmsg = uiTextSnippet('importinggedcom');
         $savestate['filename'] = $gedfilename;
-        $clearedtogo = "true";
+        $clearedtogo = 'true';
         if ($old) {
           echo "<strong>$database " . uiTextSnippet('opened') . "</strong><br>\n";
         }
       }
     } elseif (!$resuming) {
-      $openmsg = uiTextSnippet('cannotopen') . ". " . uiTextSnippet('umps');
+      $openmsg = uiTextSnippet('cannotopen') . '. ' . uiTextSnippet('umps');
     }
     $allcount = 0;
     if ($savestate['filename']) {
@@ -149,30 +149,30 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       $query = "UPDATE $treesTable SET lastimportdate = '$today', importfilename = '$savegedfilename'";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
-      if ($del == "append") {
+      if ($del == 'append') {
         //calculate offsets
-        if ($offsetchoice == "auto") {
-          $savestate['ioffset'] = getNewNumericID("person", "person", $people_table);
-          $savestate['foffset'] = getNewNumericID("family", "family", $families_table);
-          $savestate['soffset'] = getNewNumericID("source", "source", $sources_table);
-          $savestate['noffset'] = getNewNumericID("note", "note", $xnotes_table);
-          $savestate['roffset'] = getNewNumericID("repo", "repo", $repositories_table);
+        if ($offsetchoice == 'auto') {
+          $savestate['ioffset'] = getNewNumericID('person', 'person', $people_table);
+          $savestate['foffset'] = getNewNumericID('family', 'family', $families_table);
+          $savestate['soffset'] = getNewNumericID('source', 'source', $sources_table);
+          $savestate['noffset'] = getNewNumericID('note', 'note', $xnotes_table);
+          $savestate['roffset'] = getNewNumericID('repo', 'repo', $repositories_table);
         } else {
           $savestate['ioffset'] = $savestate['foffset'] = $savestate['soffset'] = $savestate['noffset'] = $savestate['roffset'] = $useroffset;
         }
-        $savestate['del'] = "match";
+        $savestate['del'] = 'match';
       } else {
         $savestate['del'] = $del;
         $savestate['ioffset'] = $savestate['foffset'] = $savestate['soffset'] = $savestate['noffset'] = $savestate['roffset'] = 0;
         //get all medialinks+events where eventID is not blank
-        if ($del != "no") {
+        if ($del != 'no') {
           $medialinks = getMediaLinksToSave();
           $num_medialinks = count($medialinks);
 
           $albumlinks = getAlbumLinksToSave();
           $num_albumlinks = count($albumlinks);
         }
-        if ($del == "yes") {
+        if ($del == 'yes') {
           ClearData($tree);
         }
       }
@@ -228,19 +228,19 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
         $savestate['latlong'] = $row['media'] % 2;
         $savestate['branch'] = $row['branch'];
 
-        if ($savestate['del'] == "yes") {
-          $savestate['del'] = "match";
+        if ($savestate['del'] == 'yes') {
+          $savestate['del'] = 'match';
         }
         $gedfilename = $savestate['filename'];
-        $fp = fopen($savestate['filename'], "r");
+        $fp = fopen($savestate['filename'], 'r');
         if ($fp !== false) {
           $fstat = fstat($fp);
           fseek($fp, $savestate['offset']);
 
           $openmsg = uiTextSnippet('importinggedcom');
-          $clearedtogo = "true";
+          $clearedtogo = 'true';
 
-          if ($del != "no") {
+          if ($del != 'no') {
             $medialinks = getMediaLinksToSave();
             $num_medialinks = count($medialinks);
 
@@ -248,18 +248,18 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
             $num_albumlinks = count($albumlinks);
           }
         } else {
-          $openmsg = uiTextSnippet('cannotopen') . " " . $savestate['filename'] . " " . uiTextSnippet('toresume');
+          $openmsg = uiTextSnippet('cannotopen') . ' ' . $savestate['filename'] . ' ' . uiTextSnippet('toresume');
         }
       } else {
-        $openmsg = uiTextSnippet('notresumed') . " " . uiTextSnippet('maybedone');
+        $openmsg = uiTextSnippet('notresumed') . ' ' . uiTextSnippet('maybedone');
       }
     } elseif (!$openmsg) {
-      $openmsg = uiTextSnippet('notresumed') . " " . uiTextSnippet('turnonsis');
+      $openmsg = uiTextSnippet('notresumed') . ' ' . uiTextSnippet('turnonsis');
     }
     if ($old) {
       echo "<p>$openmsg</p>\n";
-      if ($clearedtogo == "true" && $saveimport && (!$remotefile || $remotefile == "none")) {
-        echo "<p>" . uiTextSnippet('ifimportfails') . " <a href=\"dataImportGedcomFormAction.php?old=1\">" . uiTextSnippet('clickresume') . "</a>.</p>\n";
+      if ($clearedtogo == 'true' && $saveimport && (!$remotefile || $remotefile == 'none')) {
+        echo '<p>' . uiTextSnippet('ifimportfails') . " <a href=\"dataImportGedcomFormAction.php?old=1\">" . uiTextSnippet('clickresume') . "</a>.</p>\n";
       }
     } else {
     ?>
@@ -284,7 +284,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       ob_flush();
       flush();
 
-      $savestate['livingstr'] = $savestate['norecalc'] ? "" : ", living";
+      $savestate['livingstr'] = $savestate['norecalc'] ? '' : ', living';
       if (!$tngimpcfg['maxlivingage']) {
         $tngimpcfg['maxlivingage'] = 110;
       }
@@ -293,7 +293,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       $result = tng_query($query);
       $custeventlist = [];
       while ($row = tng_fetch_assoc($result)) {
-        $eventtype = strtoupper($row['type'] . "_" . $row['tag'] . "_" . $row['description']);
+        $eventtype = strtoupper($row['type'] . '_' . $row['tag'] . '_' . $row['description']);
         $custevents[$eventtype]['keep'] = $row['keep'];
         $custevents[$eventtype]['display'] = $row['display'];
         $custevents[$eventtype]['eventtypeID'] = $row['eventtypeID'];
@@ -309,26 +309,26 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       $lineinfo = getLine(); // first line of the file
       while ($lineinfo['tag']) {
         if ($lineinfo['level'] == 0) {
-          preg_match("/^@(\S+)@/", $lineinfo['tag'], $matches);
+          preg_match('/^@(\S+)@/', $lineinfo['tag'], $matches);
           $id = $matches[1];
           $rest = trim($lineinfo['rest']);
           switch ($rest) {
-            case "FAM":
+            case 'FAM':
               getFamilyRecord($id, 0);
               break;
-            case "INDI":
+            case 'INDI':
               getIndividualRecord($id, 0);
               break;
-            case "SOUR":
+            case 'SOUR':
               getSourceRecord($id, 0);
               break;
-            case "REPO":
+            case 'REPO':
               getRepoRecord($id, 0);
               break;
-            case "NOTE":
+            case 'NOTE':
               getNoteRecord($id, 0);
               break;
-            case "OBJE":
+            case 'OBJE':
               if ($savestate['media']) {
                 $mminfo = [];
                 getMultimediaRecord($id, 0);
@@ -337,13 +337,13 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
               }
               break;
             default:
-              if (strtok($lineinfo['rest'], " ") == "NOTE") {
+              if (strtok($lineinfo['rest'], " ") == 'NOTE') {
                 getNoteRecord($id, 0);
-              } elseif ($lineinfo['tag'] == "_PLAC" || $lineinfo['tag'] == "_PLAC_DEFN" || $lineinfo['tag'] == "PLAC") {
+              } elseif ($lineinfo['tag'] == '_PLAC' || $lineinfo['tag'] == '_PLAC_DEFN' || $lineinfo['tag'] == 'PLAC') {
                 getPlaceRecord($lineinfo['rest'], 0);
-              } elseif ($lineinfo['tag'] == "HEAD") {
+              } elseif ($lineinfo['tag'] == 'HEAD') {
                 $lineinfo = getHeadRecord();
-              } elseif ($lineinfo['tag'] == "_EVDEF") { // [ts] RM extention
+              } elseif ($lineinfo['tag'] == '_EVDEF') { // [ts] RM extention
                 $lineinfo = getEventDefinitionRecord($rest);
               } else {
                 $lineinfo = getLine();
@@ -362,8 +362,8 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
         $sql = "DELETE from $saveimport_table";
         $result = tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
-      $log = uiTextSnippet('gedimport') . ": " . basename(uiTextSnippet('filename')); 
-      $log .= ":{$savestate['filename']}" . ($tree ? ", " . uiTextSnippet('tree') . ": $tree;" : "");
+      $log = uiTextSnippet('gedimport') . ': ' . basename(uiTextSnippet('filename')); 
+      $log .= ":{$savestate['filename']}" . ($tree ? ', ' . uiTextSnippet('tree') . ": $tree;" : '');
       $log .= " {$savestate['icount']} " . uiTextSnippet('people');
       $log .= ", {$savestate['fcount']} " . uiTextSnippet('families');
       $log .= ", {$savestate['scount']} " . uiTextSnippet('sources');
@@ -373,14 +373,14 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       adminwritelog($log);
 
       if ($old) {
-        echo "<p>" . uiTextSnippet('finishedimporting') . "<br>";
-          echo number_format($savestate['icount']) . " " . uiTextSnippet('people') . " ";
-          echo number_format($savestate['fcount']) . " " . uiTextSnippet('families') . " ";
-          echo number_format($savestate['scount']) . " " . uiTextSnippet('sources') . " ";
-          echo number_format($savestate['ncount']) . " " . uiTextSnippet('notes') . " ";
-          echo number_format($savestate['mcount']) . " " . uiTextSnippet('media') . " ";
-          echo number_format($savestate['pcount']) . " " . uiTextSnippet('places');
-        echo "</p>";
+        echo '<p>' . uiTextSnippet('finishedimporting') . '<br>';
+          echo number_format($savestate['icount']) . ' ' . uiTextSnippet('people') . ' ';
+          echo number_format($savestate['fcount']) . ' ' . uiTextSnippet('families') . ' ';
+          echo number_format($savestate['scount']) . ' ' . uiTextSnippet('sources') . ' ';
+          echo number_format($savestate['ncount']) . ' ' . uiTextSnippet('notes') . ' ';
+          echo number_format($savestate['mcount']) . ' ' . uiTextSnippet('media') . ' ';
+          echo number_format($savestate['pcount']) . ' ' . uiTextSnippet('places');
+        echo '</p>';
       } else {
         echo "<div class='impc'>\n";
           echo "<span id='pr'>500</span>\n";
@@ -399,7 +399,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       } // $old
     }
     if ($old) {
-      echo "<p><a href=\"dataSecondaryProcessesFormAction.php?secaction=" . uiTextSnippet('tracklines') . "\">" . uiTextSnippet('tracklines') . "</a></p>";
+      echo "<p><a href=\"dataSecondaryProcessesFormAction.php?secaction=" . uiTextSnippet('tracklines') . "\">" . uiTextSnippet('tracklines') . '</a></p>';
       echo "<p><a href=\"dataImportGedcom.php\">" . uiTextSnippet('backtodataimport') . "</a></p>\n";
 
       echo "<div align=\"right\"><span>$tng_title, v.$tng_version</span></div>";

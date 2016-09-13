@@ -18,8 +18,8 @@ tng_free_result($result);
 $query = "DELETE FROM $temp_events_table WHERE tempID=\"$tempID\"";
 $result = tng_query($query);
 
-adminwritelog(uiTextSnippet('deleted') . ": " . uiTextSnippet('tentdata') . " $tempID");
+adminwritelog(uiTextSnippet('deleted') . ': ' . uiTextSnippet('tentdata') . " $tempID");
 
-$message = uiTextSnippet('tentdata') . " $tempID " . uiTextSnippet('succdeleted') . ".";
+$message = uiTextSnippet('tentdata') . " $tempID " . uiTextSnippet('succdeleted') . '.';
 
-header("Location: admin_findreview.php?type={$row['type']}&message=" . urlencode($message) . "&time=" . microtime());
+header("Location: admin_findreview.php?type={$row['type']}&message=" . urlencode($message) . '&time=' . microtime());

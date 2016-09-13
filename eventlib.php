@@ -21,22 +21,22 @@ function showCustEvents($id) {
   if (!$eventcount) {
     echo " style='display: none'";
   }
-  echo ">";
+  echo '>';
   echo "<tr>\n";
-  echo "<th>" . uiTextSnippet('action') . "</th>\n";
-  echo "<th>" . uiTextSnippet('event') . "</th>\n";
-  echo "<th>" . uiTextSnippet('eventdate') . "</th>\n";
-  echo "<th>" . uiTextSnippet('eventplace') . "</th>\n";
-  echo "<th>" . uiTextSnippet('detail') . "</th>\n";
+  echo '<th>' . uiTextSnippet('action') . "</th>\n";
+  echo '<th>' . uiTextSnippet('event') . "</th>\n";
+  echo '<th>' . uiTextSnippet('eventdate') . "</th>\n";
+  echo '<th>' . uiTextSnippet('eventplace') . "</th>\n";
+  echo '<th>' . uiTextSnippet('detail') . "</th>\n";
   echo "</tr>\n";
   echo "<tbody id='custeventstblbody'>\n";
 
   if ($evresult && $eventcount) {
     while ($event = tng_fetch_assoc($evresult)) {
-      $dispvalues = explode("|", $event['display']);
+      $dispvalues = explode('|', $event['display']);
       $numvalues = count($dispvalues);
       if ($numvalues > 1) {
-        $displayval = "";
+        $displayval = '';
         for ($i = 0; $i < $numvalues; $i += 2) {
           $lang = $dispvalues[$i];
           if ($mylanguage == $languagesPath . $lang) {
@@ -64,14 +64,14 @@ function showCustEvents($id) {
       }
       if (isset($gotnotes)) {
         $eventId = $event['eventID'];
-        $iconColor = $gotnotes[$eventId] ? "icon-info" : "icon-muted";
+        $iconColor = $gotnotes[$eventId] ? 'icon-info' : 'icon-muted';
         $actionstr .= "<a class='event-notes' href='#' title='" . uiTextSnippet('notes') . "' data-event-id='$eventId' data-persfam-id='$id'>\n";
         $actionstr .= "<img class='icon-sm icon-right icon-notes $iconColor' data-event-id='$eventId' data-src='svg/documents.svg'>\n";
         $actionstr .= "</a>\n";
       }
       if (isset($gotcites)) {
         $eventId = $event['eventID'];
-        $iconColor = $gotcites[$eventId] ? "icon-info" : "icon-muted";
+        $iconColor = $gotcites[$eventId] ? 'icon-info' : 'icon-muted';
         $actionstr .= "<a class='event-citations' href='#' title='" . uiTextSnippet('citations') . "' data-event-id='$eventId' data-persfam-id='$id'>\n";
         $actionstr .= "<img class='icon-sm icon-right icon-citations $iconColor' data-event-id='$eventId' data-src='svg/archive.svg'>\n";
         $actionstr .= "</a>\n";

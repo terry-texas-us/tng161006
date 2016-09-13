@@ -6,14 +6,14 @@ require $subroot . 'logconfig.php';
 if ($maxloglines) {
   $loglines = $maxloglines;
 } else {
-  $loglines = "";
+  $loglines = '';
 }
 $owner = $sitename ? $sitename : $dbowner;
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle("$loglines " . uiTextSnippet('mostrecentactions'));
 ?>
 <!DOCTYPE html>
@@ -26,17 +26,17 @@ $headSection->setTitle("$loglines " . uiTextSnippet('mostrecentactions'));
     <br clear='all'>
     <?php
     if ($autorefresh) {
-      echo "<p><a href=\"showlog.php?autorefresh=0\">" . uiTextSnippet('refreshoff') . "</a></p>\n";
+      echo "<p><a href='showlog.php?autorefresh=0'>" . uiTextSnippet('refreshoff') . '</a></p>';
     } else {
-      echo "<p><a href=\"showlog.php?autorefresh=1\">" . uiTextSnippet('autorefresh') . "</a></p>\n";
+      echo "<p><a href='showlog.php?autorefresh=1'>" . uiTextSnippet('autorefresh') . '</a></p>';
     }
     ?>
-    <div id="content">
+    <div id='content'>
       <?php
       if (!$autorefresh) {
         $lines = file($logfile);
         foreach ($lines as $line) {
-          echo "$line<br>\n";
+          echo $line . '<br>';
         }
       }
       ?>

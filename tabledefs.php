@@ -11,7 +11,7 @@ function performQuery($query, $table = null)
   return $result;
 }
 
-$collationstr = $collation ? "COLLATE $collation" : "";
+$collationstr = $collation ? "COLLATE $collation" : '';
 
 $query = "DROP TABLE IF EXISTS $address_table";
 $result = performQuery($query);

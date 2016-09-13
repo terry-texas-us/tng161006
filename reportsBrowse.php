@@ -32,11 +32,11 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $tngpage = 1;
 }
 
-$wherestr = $searchstring ? "WHERE reportname LIKE \"%$searchstring%\" OR reportdesc LIKE \"%$searchstring%\"" : "";
+$wherestr = $searchstring ? "WHERE reportname LIKE \"%$searchstring%\" OR reportdesc LIKE \"%$searchstring%\"" : '';
 $query = "SELECT reportID, reportname, reportdesc, rank, active FROM $reports_table $wherestr ORDER BY rank, reportname, reportID LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
@@ -50,7 +50,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 } else {
   $totrows = $numrows;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('reports'));
 ?>
 <!DOCTYPE html>
@@ -61,9 +61,9 @@ $headSection->setTitle(uiTextSnippet('reports'));
     <?php
     echo $adminHeaderSection->build('reports', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "reportsBrowse.php", uiTextSnippet('browse'), "findreport"]);
-    $navList->appendItem([$allowAdd, "reportsAdd.php", uiTextSnippet('add'), "addreport"]);
-    echo $navList->build("findreport");
+    $navList->appendItem([true, 'reportsBrowse.php', uiTextSnippet('browse'), 'findreport']);
+    $navList->appendItem([$allowAdd, 'reportsAdd.php', uiTextSnippet('add'), 'addreport']);
+    echo $navList->build('findreport');
     ?>
     <div>
       <form action="reportsBrowse.php" name='form1'>
@@ -87,21 +87,21 @@ $headSection->setTitle(uiTextSnippet('reports'));
             <th><?php echo uiTextSnippet('action'); ?></th>
             <th><?php echo uiTextSnippet('rank'); ?></th>
             <th><?php echo uiTextSnippet('id'); ?></th>
-            <th><?php echo uiTextSnippet('name') . ", " . uiTextSnippet('description'); ?></th>
+            <th><?php echo uiTextSnippet('name') . ', ' . uiTextSnippet('description'); ?></th>
             <th><?php echo uiTextSnippet('active'); ?>?</th>
           </tr>
 
           <?php
-          $actionstr = "";
+          $actionstr = '';
           if ($allowEdit) {
             $actionstr .= "<a href=\"reportsEdit.php?reportID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
-            $actionstr .= "</a>";
+            $actionstr .= '</a>';
           }
           if ($allowDelete) {
             $actionstr .= "<a href='#' onClick=\"return confirmDelete('xxx');\" title='" . uiTextSnippet('delete') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
-            $actionstr .= "</a>";
+            $actionstr .= '</a>';
           }
           $actionstr .= "<a href=\"reportsShowReport.php?reportID=xxx&amp;test=1\" title='" . uiTextSnippet('preview') . "'>\n";
           $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
@@ -109,10 +109,10 @@ $headSection->setTitle(uiTextSnippet('reports'));
 
           while ($row = tng_fetch_assoc($result)) {
             $active = $row['active'] ? uiTextSnippet('yes') : uiTextSnippet('no');
-            $newactionstr = preg_replace("/xxx/", $row['reportID'], $actionstr);
+            $newactionstr = preg_replace('/xxx/', $row['reportID'], $actionstr);
             $editlink = "reportsEdit.php?reportID={$row['reportID']}";
-            $id = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['reportID'] . "</a>" : $row['reportID'];
-            $name = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['reportname'] . "</a>" : $row['reportname'];
+            $id = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['reportID'] . '</a>' : $row['reportID'];
+            $name = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['reportname'] . '</a>' : $row['reportname'];
 
             echo "<tr id=\"row_{$row['reportID']}\"><td><div class=\"action-btns\">$newactionstr</div></td>\n";
             echo "<td>{$row['rank']}</td>\n";

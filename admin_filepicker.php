@@ -8,23 +8,23 @@ require $subroot . 'importconfig.php';
 
 initMediaTypes();
 
-$img = "";
-if ($path == "gedcom") {
+$img = '';
+if ($path == 'gedcom') {
   $tngpath = $gedpath;
 } elseif ($mediatypes_assoc[$path]) {
   $tngpath = $mediatypes_assoc[$path];
 } else {
-  $tngpath = "templates/" . $path . "/img";
-  $img = "img/";
+  $tngpath = 'templates/' . $path . '/img';
+  $img = 'img/';
 }
 $pagetotal = 50;
 
 if (!isset($subdir)) {
   $subdir = '';
 }
-$ImageFileTypes = ["GIF", "JPG", "PNG"];
+$ImageFileTypes = ['GIF', 'JPG', 'PNG'];
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 
 frmFiles();
 
@@ -42,13 +42,13 @@ function frmFiles() {
   global $tngconfig;
   global $folders;
 
-  // [ts]  $datefmt = $tngconfig['preferEuro'] == "true" ? "d/m/Y/* h:i:s A*/" : "m/d/Y h:i:s A";
-  $datefmt = $tngconfig['preferEuro'] == "true" ? "d/m/Y" : "m/d/Y";
+  // [ts]  $datefmt = $tngconfig['preferEuro'] == 'true' ? "d/m/Y/* h:i:s A*/" : "m/d/Y h:i:s A";
+  $datefmt = $tngconfig['preferEuro'] == 'true' ? 'd/m/Y' : 'm/d/Y';
   ?>
   <div id='filepicker'>
     <header class='modal-header'>
       <h4><?php echo uiTextSnippet('selectfile'); ?></h4>
-      <span><?php echo "<strong>" . uiTextSnippet('folder') . ":</strong> $tngpath" . stripslashes($subdir); ?></span>
+      <span><?php echo '<strong>' . uiTextSnippet('folder') . ":</strong> $tngpath" . stripslashes($subdir); ?></span>
       <?php
       $nCurrentPage = $page ? $page : 0;
 
@@ -95,16 +95,16 @@ function frmFiles() {
           $entries = array_merge($dentries, $fentries);
           foreach ($entries as $file) {
             $filename = $file;
-            if (is_file($filename) && $filename != "index.html") {
+            if (is_file($filename) && $filename != 'index.html') {
               $fileparts = pathinfo($filename);
-              $file_ext = strtoupper($fileparts["extension"]);
+              $file_ext = strtoupper($fileparts['extension']);
               if ($nImageNr >= $lStartRec && $nImageShowed < $pagetotal) {
                 echo "<tr id=\"row_$nImageNr\">\n";
                 echo "<td>\n";
                 echo "<div class='action-btns'>\n";
                 echo "<a href=\"javascript:ReturnFile('$img$subdir" . addslashes($file) . "')\" title='" . uiTextSnippet('select') . "'>\n";
                 echo "<img class='icon-sm' src='svg/new-message.svg'>\n";
-                echo "</a>";
+                echo '</a>';
                 if ($allowDelete) {
                   echo "<a href='#' onclick=\"return deleteIt('file','$nImageNr','$tngpath/$subdir" . addslashes($file) . "');\" title='" . uiTextSnippet('delete') . "'>\n";
                   echo "<img class='icon-sm' src='svg/trash.svg'>\n";
@@ -116,20 +116,20 @@ function frmFiles() {
                 echo "</div>\n";
                 echo "</td>\n";
                 echo "<td>$file</td>\n";
-                echo "<td>" . date($datefmt, filemtime($file)) . "</td>\n";
-                echo "<td>" . displaySize(filesize($file)) . "</td>\n";
+                echo '<td>' . date($datefmt, filemtime($file)) . "</td>\n";
+                echo '<td>' . displaySize(filesize($file)) . "</td>\n";
                   
                 if (in_array($file_ext, $ImageFileTypes)) {
                   $size = getimagesize($filename);
                 } else {
-                  $size = "";
+                  $size = '';
                 }
                 if ($size) {
                   $imagesize1 = $size[0];
                   $imagesize2 = $size[1];
                   $imagesize = "$imagesize1 x $imagesize2";
                 } else {
-                  $imagesize = "";
+                  $imagesize = '';
                 }
                 echo "<td>$imagesize</td>\n";
                 echo "</tr>\n";
@@ -157,13 +157,13 @@ function frmFiles() {
                     <td>
                       <?php
                       if ($folders) {
-                        echo "<a href=\"javascript:ReturnFile('$img$subdir" . addslashes($file) . "')\" title=\"" . uiTextSnippet('select') . "\">" . uiTextSnippet('select') . "</a> | ";
+                        echo "<a href=\"javascript:ReturnFile('$img$subdir" . addslashes($file) . "')\" title=\"" . uiTextSnippet('select') . '\">' . uiTextSnippet('select') . '</a> | ';
                       }
                       ?>
                       <span><a href="#" onclick="return moreFilepicker({subdir: '<?php echo addslashes($newsubdir); ?>', path: '<?php echo $path; ?>', folders: '<?php echo $folders; ?>'});"><?php echo uiTextSnippet('open'); ?></a></span>
                     </td>
                     <td>
-                      <span><?php echo "<b>" . uiTextSnippet('folder') . ":</b> $filename"; ?></span>
+                      <span><?php echo '<b>' . uiTextSnippet('folder') . ":</b> $filename"; ?></span>
                     </td>
                     <td><?php echo date($datefmt, filemtime($file)); ?></td>
                     <td></td>
@@ -202,7 +202,7 @@ function lCountFiles() {
         $filename = $file;
         if (is_file($filename)) {
           $fileparts = pathinfo($filename);
-          $file_ext = strtoupper($fileparts["extension"]);
+          $file_ext = strtoupper($fileparts['extension']);
           $nFileCount++;
         } elseif (is_dir($filename)) {
           if (($subdir != '') || ($filename != '..')) {
@@ -251,13 +251,13 @@ function frmFilesHdFt($nCurrentPage, $nPages) {
 
 function displaySize($file_size) {
   if ($file_size >= 1073741824) {
-    $file_size = round($file_size / 1073741824 * 100) / 100 . "g";
+    $file_size = round($file_size / 1073741824 * 100) / 100 . 'g';
   } elseif ($file_size >= 1048576) {
-    $file_size = round($file_size / 1048576 * 100) / 100 . "m";
+    $file_size = round($file_size / 1048576 * 100) / 100 . 'm';
   } elseif ($file_size >= 1024) {
-    $file_size = round($file_size / 1024 * 100) / 100 . "k";
+    $file_size = round($file_size / 1024 * 100) / 100 . 'k';
   } else {
-    $file_size = $file_size . " bytes";
+    $file_size = $file_size . ' bytes';
   }
   return $file_size;
 }

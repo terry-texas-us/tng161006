@@ -87,7 +87,7 @@ function updateMostWanted(form) {
                     if (vars.thumbpath) {
                         newcontent += '<img src="' + vars.thumbpath + '" width="' + vars.width + '" height="' + vars.height + '" id="img_' + vars.ID + '" alt="' + vars.description + '">\n';
                     } else {
-                        newcontent += "&nbsp;";
+                        newcontent += '&nbsp;';
                     }
                     newcontent += '</td>\n';
                     newcontent += '<td>\n';
@@ -219,7 +219,7 @@ function doSpinner(id) {
 function selectMedia(mediaID) {
     'use strict';
     document.editmostwanted.mediaID.value = mediaID;
-    $('#mwthumb').html("&nbsp;");
+    $('#mwthumb').html('&nbsp;');
     $('#mwdetails').html(textSnippet('loading'));
 
     $.ajax({

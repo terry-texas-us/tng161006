@@ -4,7 +4,7 @@ require 'tng_begin.php';
 require 'functions.php';
 
 if (isset($mediatypeID)) {
-  $mediatypeID = preg_replace("/[<>{};!=]/", '', $mediatypeID);
+  $mediatypeID = preg_replace('/[<>{};!=]/', '', $mediatypeID);
 }
 
 $flags['imgprev'] = true;
@@ -19,14 +19,14 @@ if (!in_array($mediatypeID, $mediatypes_like['photos']) && !in_array($mediatypeI
 if ($orgmediatypeID) {
   $wherestr = "WHERE mediatypeID = \"$mediatypeID\"";
   $titlestr = uiTextSnippet($mediatypeID) ? uiTextSnippet($mediatypeID) : $mediatypes_display[$mediatypeID];
-  if ($orgmediatypeID == "headstones") {
+  if ($orgmediatypeID == 'headstones') {
     $hsfields = ", $media_table.cemeteryID, cemname, city";
     $hsjoin = "LEFT JOIN $cemeteries_table ON $media_table.cemeteryID = $cemeteries_table.cemeteryID";
   } else {
-    $hsfields = $hsjoin = "";
+    $hsfields = $hsjoin = '';
   }
 } else {
-  $wherestr = "WHERE 1 = 1";
+  $wherestr = 'WHERE 1 = 1';
   $titlestr = uiTextSnippet('allmedia');
 }
 
@@ -37,7 +37,7 @@ if ($mediasearch) {
   $mediasearch2 = addslashes($mediasearch);
   $mediasearch = cleanIt($mediasearch);
 } else {
-  $_SESSION['tng_mediasearch'] = "";
+  $_SESSION['tng_mediasearch'] = '';
 }
 
 if ($tnggallery) {
@@ -46,9 +46,9 @@ if ($tnggallery) {
   }
   $maxsearchresults *= 2;
   $wherestr .= " AND thumbpath != \"\"";
-  $gallerymsg = "<a href=\"mediaShow.php?mediatypeID=$orgmediatypeID&amp;mediasearch=$mediasearch\">&raquo; " . uiTextSnippet('regphotos') . "</a>";
+  $gallerymsg = "<a href=\"mediaShow.php?mediatypeID=$orgmediatypeID&amp;mediasearch=$mediasearch\">&raquo; " . uiTextSnippet('regphotos') . '</a>';
 } else {
-  $gallerymsg = "<a href=\"mediaShow.php?tnggallery=1&amp;mediatypeID=$orgmediatypeID&amp;mediasearch=$mediasearch\">&raquo; " . uiTextSnippet('gallery') . "</a>";
+  $gallerymsg = "<a href=\"mediaShow.php?tnggallery=1&amp;mediatypeID=$orgmediatypeID&amp;mediasearch=$mediasearch\">&raquo; " . uiTextSnippet('gallery') . '</a>';
 }
 $_SESSION['tng_gallery'] = $tnggallery;
 
@@ -57,7 +57,7 @@ function doMediaSearch($instance, $pagenav) {
   global $orgmediatypeID;
   global $tnggallery;
 
-  $str = buildFormElement("mediaShow", "get", "MediaSearch$instance");
+  $str = buildFormElement('mediaShow', 'get', "MediaSearch$instance");
   $str .= "<input name='mediasearch' type='text' value=\"$mediasearch\" /> \n";
   $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . "\" /> \n";
   $str .= "<input type='button' value=\"" . uiTextSnippet('tng_reset') . "\" onclick=\"window.location.href='mediaShow.php?mediatypeID=$orgmediatypeID&amp;tnggallery=$tnggallery';\" />&nbsp;&nbsp;&nbsp;";
@@ -75,7 +75,7 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $page = 1;
 }
 if ($mediasearch) {
@@ -100,9 +100,9 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 
 $numrowsplus = $numrows + $offset;
 
-$treestr = "";
+$treestr = '';
 $treestr = trim("$mediasearch $treestr");
-$treestr = $treestr ? " ($treestr)" : "";
+$treestr = $treestr ? " ($treestr)" : '';
 $logstring = "<a href=\"mediaShow.php?offset=$offset&amp;mediasearch=$mediasearch&amp;mediatypeID=$mediatypeID\">$titlestr$treestr</a>";
 writelog($logstring);
 preparebookmark($logstring);
@@ -110,7 +110,7 @@ preparebookmark($logstring);
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle($titlestr);
 ?>
 <!DOCTYPE html>
@@ -136,9 +136,9 @@ $headSection->setTitle($titlestr);
     $hiddenfields[0] = ['name' => 'mediatypeID', 'value' => $orgmediatypeID];
     $hiddenfields[1] = ['name' => 'tnggallery', 'value' => $tnggallery];
 
-    $toplinks = "<p>";
+    $toplinks = '<p>';
     if ($totrows) {
-      $toplinks .= uiTextSnippet('matches') . " " . number_format($offsetplus) . " " . uiTextSnippet('to') . " " . number_format($numrowsplus) . " " . uiTextSnippet('of') . " " . number_format($totrows) . " &nbsp;&nbsp;&nbsp; ";
+      $toplinks .= uiTextSnippet('matches') . ' ' . number_format($offsetplus) . ' ' . uiTextSnippet('to') . ' ' . number_format($numrowsplus) . ' ' . uiTextSnippet('of') . ' ' . number_format($totrows) . ' &nbsp;&nbsp;&nbsp; ';
     }
     $toplinks .= "$gallerymsg";
 
@@ -149,27 +149,27 @@ $headSection->setTitle($titlestr);
     if ($tnggallery) {
       $preheader .= "<div class=\"titlebox\">\n";
       $firstrow = 1;
-      $tablewidth = "";
-      $header = "";
+      $tablewidth = '';
+      $header = '';
     } else {
       $header = "<tr><td width='10'></td>\n";
       $header .= "<td width=\"$thumbmaxw\">" . uiTextSnippet('thumb') . "</td>\n";
-      $width = $mediatypeID == "headstones" ? "50%" : "75%";
+      $width = $mediatypeID == 'headstones' ? '50%' : '75%';
       $header .= "<td width=\"$width\">" . uiTextSnippet('description') . "</td>\n";
-      if ($mediatypeID == "headstones") {
-        $header .= "<td>" . uiTextSnippet('cemetery') . "</td>\n";
-        $header .= "<td>" . uiTextSnippet('status') . "</td>\n";
+      if ($mediatypeID == 'headstones') {
+        $header .= '<td>' . uiTextSnippet('cemetery') . "</td>\n";
+        $header .= '<td>' . uiTextSnippet('status') . "</td>\n";
       }
-      $header .= "<td>" . uiTextSnippet('indlinked') . "</td>\n";
+      $header .= '<td>' . uiTextSnippet('indlinked') . "</td>\n";
       $header .= "</tr>\n";
-      $tablewidth = " width=\"100%\"";
+      $tablewidth = " width='100%'";
     }
     $header = "<table class='table' $tablewidth>\n" . $header;
 
     $i = $offsetplus;
     $maxplus = $maxsearchresults + 1;
-    $mediatext = "";
-    $firsthref = "";
+    $mediatext = '';
+    $firsthref = '';
     $thumbcount = 0;
     $gotImageJpeg = function_exists(imageJpeg);
     while ($row = tng_fetch_assoc($result)) {
@@ -188,7 +188,7 @@ $headSection->setTitle($titlestr);
           . "WHERE mediaID = '{$row['mediaID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT $maxplus"; 
       $presult = tng_query($query);
       $numrows = tng_num_rows($presult);
-      $medialinktext = "";
+      $medialinktext = '';
       $foundliving = 0;
       $foundprivate = 0;
       $count = 0;
@@ -234,27 +234,27 @@ $headSection->setTitle($titlestr);
           $foundprivate = 1;
         }
         if (!$tnggallery) {
-          $hstext = "";
+          $hstext = '';
           if ($prow['personID2'] != null) {
             $medialinktext .= "<li><a href=\"peopleShowPerson.php?personID={$prow['personID2']}\">";
             $medialinktext .= getName($prow);
-            if ($orgmediatypeID == "headstones") {
+            if ($orgmediatypeID == 'headstones') {
               $deathdate = $prow['deathdate'] ? $prow['deathdate'] : $prow['burialdate'];
               if ($prow['deathdate']) {
                 $abbrev = uiTextSnippet('deathabbr');
               } elseif ($prow['burialdate']) {
                 $abbrev = uiTextSnippet('burialabbr');
               }
-              $hstext = $deathdate ? " ($abbrev " . displayDate($deathdate) . ")" : "";
+              $hstext = $deathdate ? " ($abbrev " . displayDate($deathdate) . ')' : '';
             }
           } elseif ($prow['sourceID'] != null) {
-            $sourcetext = $prow['title'] ? uiTextSnippet('source') . ": " . $prow['title'] : uiTextSnippet('source') . ": " . $prow['sourceID'];
+            $sourcetext = $prow['title'] ? uiTextSnippet('source') . ': ' . $prow['title'] : uiTextSnippet('source') . ': ' . $prow['sourceID'];
             $medialinktext .= "<li><a href=\"sourcesShowSource.php?sourceID={$prow['personID']}\">$sourcetext\n";
           } elseif ($prow['repoID'] != null) {
-            $repotext = $prow['reponame'] ? uiTextSnippet('repository') . ": " . $prow['reponame'] : uiTextSnippet('repository') . ": " . $prow['repoID'];
+            $repotext = $prow['reponame'] ? uiTextSnippet('repository') . ': ' . $prow['reponame'] : uiTextSnippet('repository') . ': ' . $prow['repoID'];
             $medialinktext .= "<li><a href=\"repositoriesShowItem.php?repoID={$prow['personID']}\">$repotext";
           } elseif ($prow['familyID'] != null) {
-            $medialinktext .= "<li><a href=\"familiesShowFamily.php?familyID={$prow['personID']}\">" . uiTextSnippet('family') . ": " . getFamilyName($prow);
+            $medialinktext .= "<li><a href=\"familiesShowFamily.php?familyID={$prow['personID']}\">" . uiTextSnippet('family') . ': ' . getFamilyName($prow);
           } else {
             $medialinktext .= "<li><a href=\"placesearch.php?psearch={$prow['personID']}\">" . $prow['personID'];
           }
@@ -288,9 +288,9 @@ $headSection->setTitle($titlestr);
       if ($showPhotoInfo) {
         $href = $uselink;
       } else {
-        $href = "";
+        $href = '';
       }
-      if ($href && strpos($href, "showmedia.php") !== false && !$firsthref) {
+      if ($href && strpos($href, 'showmedia.php') !== false && !$firsthref) {
         $firsthref = $href;
       }
       $notes = nl2br(truncateIt(getXrefNotes($row['notes']), $tngconfig['maxnoteprev']));
@@ -300,20 +300,20 @@ $headSection->setTitle($titlestr);
         $nonamesloc = $row['private'] ? $tngconfig['nnpriv'] : $nonames;
         if ($nonamesloc) {
           $description = uiTextSnippet('livingphoto');
-          $notes = "";
+          $notes = '';
         } else {
           $description = $row['description'];
-          $notes = $notes ? $notes . "<br>(" . uiTextSnippet('livingphoto') . ")" : "(" . uiTextSnippet('livingphoto') . ")";
+          $notes = $notes ? $notes . '<br>(' . uiTextSnippet('livingphoto') . ')' : '(' . uiTextSnippet('livingphoto') . ')';
         }
       }
-      if ($row['status'] && ($orgmediatypeID != "headstones")) {
-        $notes = uiTextSnippet('status') . ": " . $row['status'] . "; " . $notes;
+      if ($row['status'] && ($orgmediatypeID != 'headstones')) {
+        $notes = uiTextSnippet('status') . ': ' . $row['status'] . '; ' . $notes;
       }
       if ($tnggallery) {
         if ($imgsrc) {
           if ($firstrow) {
             $firstrow = 0;
-            $mediatext .= "<tr>";
+            $mediatext .= '<tr>';
           } else {
             if (($i - 1) % $tngconfig['thumbcols'] == 0) {
               $mediatext .= "</tr>\n<tr>";
@@ -347,11 +347,11 @@ $headSection->setTitle($titlestr);
           $mediatext .= "<td>\n";
         }
         $mediatext .= "$description<br>$notes&nbsp;</td>\n";
-        if ($orgmediatypeID == "headstones") {
+        if ($orgmediatypeID == 'headstones') {
           if (!$row['cemname']) {
             $row['cemname'] = $row['city'];
           }
-          $plotstr = $row['plot'] ? "<br>" . nl2br($row['plot']) : "";
+          $plotstr = $row['plot'] ? '<br>' . nl2br($row['plot']) : '';
           $mediatext .= "<td width=\"30%\"><a href=\"cemeteriesShowCemetery.php?cemeteryID={$row['cemeteryID']}\">{$row['cemname']}</a>$plotstr&nbsp;</td>\n";
           $mediatext .= "<td>{$row['status']}</td>\n";
           $mediatext .= "<td width=\"30%\">\n";
@@ -371,15 +371,15 @@ $headSection->setTitle($titlestr);
       }
     } else {
       if (!$thumbcount) {
-        $header = str_replace("<td>" . uiTextSnippet('thumb') . "</td>", "", $header);
-        $mediatext = str_replace("<td></td><td>", "<td>", $mediatext);
+        $header = str_replace('<td>' . uiTextSnippet('thumb') . '</td>', '', $header);
+        $mediatext = str_replace('<td></td><td>', '<td>', $mediatext);
       }
     }
     if (!$tngconfig['ssdisabled'] && $firsthref && $totrows > 1) {
-      $ss = strpos($firsthref, "?") ? "&amp;ss=1" : "?ss=1";
-      $toplinks .= " &nbsp;&nbsp; <a href=\"$firsthref$ss\">&raquo; " . uiTextSnippet('slidestart') . "</a>";
+      $ss = strpos($firsthref, '?') ? '&amp;ss=1' : '?ss=1';
+      $toplinks .= " &nbsp;&nbsp; <a href=\"$firsthref$ss\">&raquo; " . uiTextSnippet('slidestart') . '</a>';
     }
-    $toplinks .= "</p>";
+    $toplinks .= '</p>';
     //print out the whole shootin' match right here, eh
     echo $toplinks . $preheader . $header . $mediatext;
     echo "</table>\n";
@@ -391,7 +391,7 @@ $headSection->setTitle($titlestr);
 
     if ($totrows && ($pagenav || $mediasearch)) {
       echo doMediaSearch(2, $pagenav);
-      echo "<br>";
+      echo '<br>';
     }
     ?>
     <?php echo $publicFooterSection->build(); ?>

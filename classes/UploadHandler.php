@@ -897,7 +897,7 @@ class UploadHandler
       $cmd .= ' '.escapeshellarg($new_file_path);
       exec($cmd, $output, $error);
       if ($error) {
-          error_log(implode('\n', $output));
+          error_log(implode("\n", $output));
           return false;
       }
       return true;

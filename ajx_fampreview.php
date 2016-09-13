@@ -8,7 +8,7 @@ require 'checklogin.php';
 require 'personlib.php';
 
 $firstsection = 0;
-$tableid = "";
+$tableid = '';
 $cellnumber = 0;
 
 $totcols = 3;
@@ -17,10 +17,10 @@ $factcols = $totcols - 1;
 function showFact($text, $fact) {
   global $factcols;
 
-  $facttext = "";
+  $facttext = '';
   if ($fact) {
     $facttext .= "<tr>\n";
-    $facttext .= "<td>" . $text . "</td>\n";
+    $facttext .= '<td>' . $text . "</td>\n";
     $facttext .= "<td colspan=\"$factcols\">$fact</td>\n";
     $facttext .= "</tr>\n";
   }
@@ -30,18 +30,18 @@ function showFact($text, $fact) {
 function showDatePlace($event) {
   global $cellnumber;
 
-  $dptext = "";
+  $dptext = '';
   if ($event['date'] || $event['place']) {
     if (!$cellnumber) {
       $cellid = " id=\"info1\"";
       $cellnumber++;
     } else {
-      $cellid = "";
+      $cellid = '';
     }
 
     $dptext .= "<tr>\n";
     $dptext .= "<td $cellid><span>" . $event['text'] . "</span></td>\n";
-    $dptext .= "<td><span>" . displayDate($event['date']) . "&nbsp;</span></td>\n";
+    $dptext .= '<td><span>' . displayDate($event['date']) . "&nbsp;</span></td>\n";
     $dptext .= "<td width=\"80%\"><span>{$event['place']}&nbsp;</span></td>\n";
     $dptext .= "</tr>\n";
   }
@@ -54,12 +54,12 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   global $families_table;
   global $people_table;
 
-  $indtext = "";
+  $indtext = '';
   $rights = determineLivingPrivateRights($ind);
   $ind['allow_living'] = $rights['living'];
   $ind['allow_private'] = $rights['private'];
 
-  $restriction = $familyID ? "AND familyID != \"$familyID\"" : "";
+  $restriction = $familyID ? "AND familyID != \"$familyID\"" : '';
   if ($ind['sex'] == 'M') {
     $sex = uiTextSnippet('male');
   } else {
@@ -83,7 +83,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   $indtext .= "<tr><td colspan=\"$totcols\">";
   $indtext .= "<span>$label | $sex</span><br><h4><b>";
   if ($ind['haskids']) {
-    $indtext .= "> ";
+    $indtext .= '> ';
   }
   $indtext .= "$namestr</b>";
 
@@ -91,10 +91,10 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   $indtext .= "</td></tr>\n";
 
   $event = [];
-  $event = "";
+  $event = '';
 
   $event['text'] = uiTextSnippet('born');
-  $event['event'] = "BIRT";
+  $event['event'] = 'BIRT';
   $event['type'] = 'I';
   $event['ID'] = $personID;
   if ($rights['both']) {
@@ -103,8 +103,8 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   }
   $indtext .= showDatePlace($event);
 
-  $event = "";
-  $event['event'] = "CHR";
+  $event = '';
+  $event['event'] = 'CHR';
   $event['type'] = 'I';
   $event['ID'] = $personID;
   if ($rights['both']) {
@@ -116,9 +116,9 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
     $indtext .= showDatePlace($event);
   }
 
-  $event = "";
+  $event = '';
   $event['text'] = uiTextSnippet('died');
-  $event['event'] = "DEAT";
+  $event['event'] = 'DEAT';
   $event['type'] = 'I';
   $event['ID'] = $personID;
   if ($rights['both']) {
@@ -127,9 +127,9 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   }
   $indtext .= showDatePlace($event);
 
-  $event = "";
+  $event = '';
   $event['text'] = uiTextSnippet('buried');
-  $event['event'] = "BURI";
+  $event['event'] = 'BURI';
   $event['type'] = 'I';
   $event['ID'] = $personID;
   if ($rights['both']) {
@@ -149,16 +149,16 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
       $fam['allow_private'] = $frights['private'];
       tng_free_result($result);
 
-      $event = "";
+      $event = '';
       $eventd = [];
       $event['text'] = uiTextSnippet('married');
-      $event['event'] = "MARR";
+      $event['event'] = 'MARR';
       $event['type'] = 'F';
       $event['ID'] = $familyID;
       if ($frights['both']) {
         $event['date'] = $fam['marrdate'];
         $event['place'] = $fam['marrplace'];
-        $eventd['event'] = "DIV";
+        $eventd['event'] = 'DIV';
         $eventd['text'] = uiTextSnippet('divorced');
         $eventd['date'] = $fam['divdate'];
         $eventd['place'] = $fam['divplace'];
@@ -191,13 +191,13 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
     $fam['allow_living'] = $frights['living'];
     $fam['allow_private'] = $frights['private'];
     $spousename = getName($fam);
-    $spouselink = $spousename ? "$spousename | " : "";
+    $spouselink = $spousename ? "$spousename | " : '';
     $spouselink .= $fam['familyID'];
     $indtext .= showFact($spousetext, $spouselink);
 
-    $event = "";
+    $event = '';
     $event['text'] = uiTextSnippet('married');
-    $event['event'] = "MARR";
+    $event['event'] = 'MARR';
     $event['type'] = 'F';
     $event['ID'] = $fam['familyID'];
     $fam['living'] = $fam['fliving'];
@@ -222,7 +222,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
     $parent['allow_private'] = $prights['private'];
     $fathername = getName($parent);
     tng_free_result($presult);
-    $fatherlink = $fathername ? "$fathername | " . $parent['familyID'] : "";
+    $fatherlink = $fathername ? "$fathername | " . $parent['familyID'] : '';
     $indtext .= showFact(uiTextSnippet('father'), $fatherlink);
 
     $query = "SELECT familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, $people_table.living, $people_table.private, $people_table.branch FROM $families_table, $people_table WHERE $families_table.familyID = \"$ind[famc]\" AND $people_table.personID = $families_table.wife";
@@ -233,7 +233,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
     $parent['allow_private'] = $prights['private'];
     $mothername = getName($parent);
     tng_free_result($presult);
-    $motherlink = $mothername ? "$mothername | " . $parent['familyID'] : "";
+    $motherlink = $mothername ? "$mothername | " . $parent['familyID'] : '';
     $indtext .= showFact(uiTextSnippet('mother'), $motherlink);
   }
 
@@ -245,12 +245,12 @@ $result = tng_query($query);
 $famrow = tng_fetch_assoc($result);
 if (!tng_num_rows($result)) {
   tng_free_result($result);
-  header("Location: thispagedoesnotexist.html");
+  header('Location: thispagedoesnotexist.html');
   exit;
 } else {
   tng_free_result($result);
 }
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 
 initMediaTypes();
 
@@ -258,9 +258,9 @@ $frights = determineLivingPrivateRights($famrow);
 $famrow['allow_living'] = $frights['living'];
 $famrow['allow_private'] = $frights['private'];
 $famname = getFamilyName($famrow);
-$namestr = uiTextSnippet('family') . ": " . $famname;
+$namestr = uiTextSnippet('family') . ': ' . $famname;
 
-$years = $famrow['marrdate'] && $frights['both'] ? uiTextSnippet('marrabbr') . " " . displayDate($famrow['marrdate']) : "";
+$years = $famrow['marrdate'] && $frights['both'] ? uiTextSnippet('marrabbr') . ' ' . displayDate($famrow['marrdate']) : '';
 
 echo "<h4 class='header fn' id='nameheader'>$namestr</h4>";
 if ($years) {
@@ -268,7 +268,7 @@ if ($years) {
 }
 echo "<br clear='all'>\n";
 
-$famtext = "";
+$famtext = '';
 $personID = $famrow['husband'] ? $famrow['husband'] : $famrow['wife'];
 
 $famtext .= "<ul>\n";
@@ -306,7 +306,7 @@ if ($children && tng_num_rows($children)) {
   $childcount = 0;
   while ($childrow = tng_fetch_assoc($children)) {
     $childcount++;
-    $famtext .= displayIndividual($childrow, uiTextSnippet('child') . " $childcount", "", 1);
+    $famtext .= displayIndividual($childrow, uiTextSnippet('child') . " $childcount", '', 1);
   }
 }
 tng_free_result($children);

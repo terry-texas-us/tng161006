@@ -8,10 +8,10 @@ require 'version.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('sortmedia'));
 ?>
 <!DOCTYPE html>
@@ -22,10 +22,10 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
     <?php
     echo $adminHeaderSection->build('albums-text_sort', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "albumsBrowse.php", uiTextSnippet('browse'), "findalbum"]);
-    $navList->appendItem([$allowAdd, "albumsAdd.php", uiTextSnippet('add'), "addalbum"]);
-    $navList->appendItem([$allowEdit, "albumsSort.php", uiTextSnippet('text_sort'), "sortalbums"]);
-    echo $navList->build("sortalbums");
+    $navList->appendItem([true, 'albumsBrowse.php', uiTextSnippet('browse'), 'findalbum']);
+    $navList->appendItem([$allowAdd, 'albumsAdd.php', uiTextSnippet('add'), 'addalbum']);
+    $navList->appendItem([$allowEdit, 'albumsSort.php', uiTextSnippet('text_sort'), 'sortalbums']);
+    echo $navList->build('sortalbums');
     ?>
     <form name='find' action='albumsSortFormAction.php' method='post' onsubmit="return validateSortForm();">
       <h4><?php echo uiTextSnippet('sortalbumind'); ?></h4>
@@ -80,7 +80,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
       }
       return rval;
     }
-    var gsControlName = "";
+    var gsControlName = '';
   </script>
 </body>
 </html>

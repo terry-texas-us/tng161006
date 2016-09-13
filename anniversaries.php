@@ -3,18 +3,18 @@ require 'tng_begin.php';
 
 require 'functions.php';
 
-$tngyear = preg_replace("/[^0-9]/", "", $tngyear);
-$tngkeywords = preg_replace("/[^A-Za-z0-9]/", "", $tngkeywords);
+$tngyear = preg_replace('/[^0-9]/', '', $tngyear);
+$tngkeywords = preg_replace('/[^A-Za-z0-9]/', '', $tngkeywords);
 
 set_time_limit(0);
 
 if (!$tngneedresults) {
   //get today's date
-  $tngdaymonth = date("d", time() + (3600 * $timeOffset));
-  $tngmonth = date("m", time() + (3600 * $timeOffset));
+  $tngdaymonth = date('d', time() + (3600 * $timeOffset));
+  $tngmonth = date('m', time() + (3600 * $timeOffset));
   $tngneedresults = 1;
 }
-$logstring = "<a href=\"anniversaries.php?tngevent=$tngevent&amp;tngdaymonth=$tngdaymonth&amp;tngmonth=$tngmonth&amp;tngyear=$tngyear&amp;tngkeywords=$tngkeywords&amp;tngneedresults=$tngneedresults&amp;offset=$offset&amp;tngpage=$tngpage\">" . xmlcharacters(uiTextSnippet('anniversaries')) . "</a>";
+$logstring = "<a href=\"anniversaries.php?tngevent=$tngevent&amp;tngdaymonth=$tngdaymonth&amp;tngmonth=$tngmonth&amp;tngyear=$tngyear&amp;tngkeywords=$tngkeywords&amp;tngneedresults=$tngneedresults&amp;offset=$offset&amp;tngpage=$tngpage\">" . xmlcharacters(uiTextSnippet('anniversaries')) . '</a>';
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -25,7 +25,7 @@ $ldsOK = determineLDSRights();
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('anniversaries'));
 ?>
 <!DOCTYPE html>
@@ -44,84 +44,84 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
           <?php
           echo "<option value=''>&nbsp;</option>\n";
           echo "<option value=\"birth\"";
-          if ($tngevent == "birth") {
-            echo " selected";
+          if ($tngevent == 'birth') {
+            echo ' selected';
           }
-          echo ">" . uiTextSnippet('born') . "</option>\n";
+          echo '>' . uiTextSnippet('born') . "</option>\n";
 
           echo "<option value=\"altbirth\"";
-          if ($tngevent == "altbirth") {
-            echo " selected";
+          if ($tngevent == 'altbirth') {
+            echo ' selected';
           }
-          echo ">" . uiTextSnippet('christened') . "</option>\n";
+          echo '>' . uiTextSnippet('christened') . "</option>\n";
 
           echo "<option value=\"death\"";
-          if ($tngevent == "death") {
-            echo " selected";
+          if ($tngevent == 'death') {
+            echo ' selected';
           }
-          echo ">" . uiTextSnippet('died') . "</option>\n";
+          echo '>' . uiTextSnippet('died') . "</option>\n";
 
           echo "<option value=\"burial\"";
-          if ($tngevent == "burial") {
-            echo " selected";
+          if ($tngevent == 'burial') {
+            echo ' selected';
           }
-          echo ">" . uiTextSnippet('buried') . "</option>\n";
+          echo '>' . uiTextSnippet('buried') . "</option>\n";
 
           echo "<option value=\"marr\"";
-          if ($tngevent == "marr") {
-            echo " selected";
+          if ($tngevent == 'marr') {
+            echo ' selected';
           }
-          echo ">" . uiTextSnippet('married') . "</option>\n";
+          echo '>' . uiTextSnippet('married') . "</option>\n";
 
           echo "<option value=\"div\"";
-          if ($tngevent == "div") {
-            echo " selected";
+          if ($tngevent == 'div') {
+            echo ' selected';
           }
-          echo ">" . uiTextSnippet('divorced') . "</option>\n";
+          echo '>' . uiTextSnippet('divorced') . "</option>\n";
 
           if ($ldsOK) {
             echo "<option value=\"bapt\"";
-            if ($tngevent == "bapt") {
-              echo " selected";
+            if ($tngevent == 'bapt') {
+              echo ' selected';
             }
-            echo ">" . uiTextSnippet('baptizedlds') . "</option>\n";
+            echo '>' . uiTextSnippet('baptizedlds') . "</option>\n";
 
             echo "<option value=\"conf\"";
-            if ($tngevent == "conf") {
-              echo " selected";
+            if ($tngevent == 'conf') {
+              echo ' selected';
             }
-            echo ">" . uiTextSnippet('conflds') . "</option>\n";
+            echo '>' . uiTextSnippet('conflds') . "</option>\n";
 
             echo "<option value=\"init\"";
-            if ($tngevent == "init") {
-              echo " selected";
+            if ($tngevent == 'init') {
+              echo ' selected';
             }
-            echo ">" . uiTextSnippet('initlds') . "</option>\n";
+            echo '>' . uiTextSnippet('initlds') . "</option>\n";
 
             echo "<option value=\"endl\"";
-            if ($tngevent == "endl") {
-              echo " selected";
+            if ($tngevent == 'endl') {
+              echo ' selected';
             }
-            echo ">" . uiTextSnippet('endowedlds') . "</option>\n";
+            echo '>' . uiTextSnippet('endowedlds') . "</option>\n";
 
             echo "<option value=\"seal\"";
-            if ($tngevent == "seal") {
-              echo " selected";
+            if ($tngevent == 'seal') {
+              echo ' selected';
             }
-            echo ">" . uiTextSnippet('sealedslds') . "</option>\n";
+            echo '>' . uiTextSnippet('sealedslds') . "</option>\n";
           }
 
           //loop through custom event types where keep=1, not a standard event
           $query = "SELECT eventtypeID, tag, display FROM $eventtypes_table WHERE keep = '1' AND type = 'I' ORDER BY display";
           $result = tng_query($query);
-          $dontdo = ["ADDR", "BIRT", "CHR", "DEAT", "BURI", "NAME", "NICK", "TITL", "NSFX", "DIV", "MARR"];
+          $dontdo = ['ADDR', 'BIRT', 'CHR', 'DEAT', 'BURI', 'NAME', 'NICK', 'TITL', 'NSFX', 'DIV', 'MARR'];
           while ($row = tng_fetch_assoc($result)) {
             if (!in_array($row['tag'], $dontdo)) {
               echo "<option value=\"{$row['eventtypeID']}\"";
               if ($tngevent == $row['eventtypeID']) {
-                echo " selected";
+                echo ' selected';
               }
-              echo ">" . getEventDisplay($row['display']) . "</option>\n";
+              echo '>' . getEventDisplay($row['display']) . "</option>\n";
             }
           }
           tng_free_result($result);
@@ -136,11 +136,11 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
           for ($i = 1; $i <= 31; $i++) {
             echo "<option value=\"$i\"";
             if ($i == $tngdaymonth) {
-              echo " selected";
+              echo ' selected';
             }
             echo ">$i</option>\n";
           }
-          $tngkeywordsclean = preg_replace("/\"/", "&#34;", stripslashes($tngkeywords));
+          $tngkeywordsclean = preg_replace('/\"/', '&#34;', stripslashes($tngkeywords));
           ?>
         </select>
       </div>
@@ -148,18 +148,18 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
         <label for="tngmonth" class="annlabel"><?php echo uiTextSnippet('month'); ?>:</label><br>
         <select name="tngmonth" id="tngmonth">
           <option value=''>&nbsp;</option>
-          <option value='1'<?php if ($tngmonth == 1) {echo " selected";} ?>><?php echo uiTextSnippet('JANUARY'); ?></option>
-          <option value="2"<?php if ($tngmonth == 2) {echo " selected";} ?>><?php echo uiTextSnippet('FEBRUARY'); ?></option>
-          <option value="3"<?php if ($tngmonth == 3) {echo " selected";} ?>><?php echo uiTextSnippet('MARCH'); ?></option>
-          <option value="4"<?php if ($tngmonth == 4) {echo " selected";} ?>><?php echo uiTextSnippet('APRIL'); ?></option>
-          <option value="5"<?php if ($tngmonth == 5) {echo " selected";} ?>><?php echo uiTextSnippet('MAY'); ?></option>
-          <option value="6"<?php if ($tngmonth == 6) {echo " selected";} ?>><?php echo uiTextSnippet('JUNE'); ?></option>
-          <option value="7"<?php if ($tngmonth == 7) {echo " selected";} ?>><?php echo uiTextSnippet('JULY'); ?></option>
-          <option value="8"<?php if ($tngmonth == 8) {echo " selected";} ?>><?php echo uiTextSnippet('AUGUST'); ?></option>
-          <option value="9"<?php if ($tngmonth == 9) {echo " selected";} ?>><?php echo uiTextSnippet('SEPTEMBER'); ?></option>
-          <option value="10"<?php if ($tngmonth == 10) {echo " selected";} ?>><?php echo uiTextSnippet('OCTOBER'); ?></option>
-          <option value="11"<?php if ($tngmonth == 11) {echo " selected";} ?>><?php echo uiTextSnippet('NOVEMBER'); ?></option>
-          <option value="12"<?php if ($tngmonth == 12) {echo " selected";} ?>><?php echo uiTextSnippet('DECEMBER'); ?></option>
+          <option value='1'<?php if ($tngmonth == 1) {echo ' selected';} ?>><?php echo uiTextSnippet('JANUARY'); ?></option>
+          <option value='2'<?php if ($tngmonth == 2) {echo ' selected';} ?>><?php echo uiTextSnippet('FEBRUARY'); ?></option>
+          <option value='3'<?php if ($tngmonth == 3) {echo ' selected';} ?>><?php echo uiTextSnippet('MARCH'); ?></option>
+          <option value='4'<?php if ($tngmonth == 4) {echo ' selected';} ?>><?php echo uiTextSnippet('APRIL'); ?></option>
+          <option value='5'<?php if ($tngmonth == 5) {echo ' selected';} ?>><?php echo uiTextSnippet('MAY'); ?></option>
+          <option value="6"<?php if ($tngmonth == 6) {echo ' selected';} ?>><?php echo uiTextSnippet('JUNE'); ?></option>
+          <option value="7"<?php if ($tngmonth == 7) {echo ' selected';} ?>><?php echo uiTextSnippet('JULY'); ?></option>
+          <option value="8"<?php if ($tngmonth == 8) {echo ' selected';} ?>><?php echo uiTextSnippet('AUGUST'); ?></option>
+          <option value="9"<?php if ($tngmonth == 9) {echo ' selected';} ?>><?php echo uiTextSnippet('SEPTEMBER'); ?></option>
+          <option value="10"<?php if ($tngmonth == 10) {echo ' selected';} ?>><?php echo uiTextSnippet('OCTOBER'); ?></option>
+          <option value="11"<?php if ($tngmonth == 11) {echo ' selected';} ?>><?php echo uiTextSnippet('NOVEMBER'); ?></option>
+          <option value="12"<?php if ($tngmonth == 12) {echo ' selected';} ?>><?php echo uiTextSnippet('DECEMBER'); ?></option>
         </select>
       </div>
       <div class="annfield">
@@ -187,15 +187,15 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
       if ($tngevent) {
         $tngevents = [$tngevent];
       } else {
-        $tngevents = ["birth", "altbirth", "death", "burial", "marr", "div"];
+        $tngevents = ['birth', 'altbirth', 'death', 'burial', 'marr', 'div'];
         if ($ldsOK) {
-          $ldsevents = ["seal", "endl", "bapt", "conf", "init"];
+          $ldsevents = ['seal', 'endl', 'bapt', 'conf', 'init'];
           $tngevents = array_merge($tngevents, $ldsevents);
         }
         $query = "SELECT tag, eventtypeID FROM $eventtypes_table
           WHERE keep=\"1\" AND type=\"I\" ORDER BY display";
         $result = tng_query($query);
-        $dontdo = ["ADDR", "BIRT", "CHR", "DEAT", "BURI", "NAME", "NICK", "TITL", "NSFX", "DIV", "MARR"];
+        $dontdo = ['ADDR', 'BIRT', 'CHR', 'DEAT', 'BURI', 'NAME', 'NICK', 'TITL', 'NSFX', 'DIV', 'MARR'];
         while ($row = tng_fetch_assoc($result)) {
           if (!in_array($row['tag'], $dontdo)) {
             array_push($tngevents, $row['eventtypeID']);
@@ -204,77 +204,76 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
         tng_free_result($result);
       }
       foreach ($tngevents as $tngevent) {
-        $allwhere = "";
+        $allwhere = '';
 
-        $eventsjoin = "";
-        $eventsfields = "";
-        $needfamilies = "";
+        $eventsjoin = '';
+        $eventsfields = '';
+        $needfamilies = '';
         $tngsaveevent = $tngevent;
         switch ($tngevent) {
-          case "birth":
+          case 'birth':
             $datetxt = uiTextSnippet('born');
             break;
-          case "altbirth":
+          case 'altbirth':
             $datetxt = uiTextSnippet('christened');
             break;
-          case "death":
+          case 'death':
             $datetxt = uiTextSnippet('died');
             break;
-          case "burial":
+          case 'burial':
             $datetxt = uiTextSnippet('buried');
             break;
-          case "marr":
+          case 'marr':
             $datetxt = uiTextSnippet('married');
             $needfamilies = 1;
             break;
-          case "div":
+          case 'div':
             $datetxt = uiTextSnippet('divorced');
             $needfamilies = 1;
             break;
-          case "seal":
+          case 'seal':
             $datetxt = uiTextSnippet('sealedslds');
             $needfamilies = 1;
             break;
-          case "endl":
+          case 'endl':
             $datetxt = uiTextSnippet('endowedlds');
             break;
-          case "bapt":
+          case 'bapt':
             $datetxt = uiTextSnippet('baptizedlds');
             break;
-          case "conf":
+          case 'conf':
             $datetxt = uiTextSnippet('conflds');
             break;
-          case "init":
+          case 'init':
             $datetxt = uiTextSnippet('initlds');
             break;
           default:
             //look up display
-            $query = "SELECT display FROM $eventtypes_table
-              WHERE eventtypeID=\"$tngevent\" ORDER BY display";
+            $query = "SELECT display FROM $eventtypes_table WHERE eventtypeID=\"$tngevent\" ORDER BY display";
             $evresult = tng_query($query);
             $event = tng_fetch_assoc($evresult);
             $datetxt = getEventDisplay($event['display']);
             tng_free_result($evresult);
 
             $eventsjoin = ", $events_table";
-            $eventsfields = ",info";
+            $eventsfields = ', info';
             $allwhere .= " AND $people_table.personID = $events_table.persfamID AND eventtypeID = '$tngevent'";
-            $tngevent = "event";
+            $tngevent = 'event';
             break;
         }
         if ($needfamilies) {
           $familiesjoin = " LEFT JOIN $families_table ON ($people_table.personID = $families_table.husband)";
           $familiesjoinw = " LEFT JOIN $families_table ON ($people_table.personID = $families_table.wife)";
-          $familiessortdate = ", " . $tngevent . "datetr";
+          $familiessortdate = ', ' . $tngevent . 'datetr';
         } else {
-          $familiesjoin = "";
-          $familiesjoinw = "";
-          $familiessortdate = "";
+          $familiesjoin = '';
+          $familiesjoinw = '';
+          $familiessortdate = '';
         }
 
-        $datefield = $tngevent . "date";
-        $datefieldtr = $tngevent . "datetr";
-        $place = $tngevent . "place";
+        $datefield = $tngevent . 'date';
+        $datefieldtr = $tngevent . 'datetr';
+        $place = $tngevent . 'place';
 
         if ($tngdaymonth) {
           $allwhere .= " AND DAYOFMONTH($datefieldtr) = '$tngdaymonth'";
@@ -293,7 +292,7 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
         }
         $more = getLivingPrivateRestrictions($people_table, false, true);
         if ($more) {
-          $allwhere .= " AND " . $more;
+          $allwhere .= ' AND ' . $more;
         }
 
         $max_browsesearch_pages = 5;
@@ -302,7 +301,7 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
           $newoffset = "$offset, ";
         } else {
           $offsetplus = 1;
-          $newoffset = "";
+          $newoffset = '';
           $tngpage = 1;
         }
 
@@ -345,7 +344,7 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
           $numrowsplus = $numrows + $offset;
           $successcount++;
 
-          echo "<p>" . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</p>";
+          echo '<p>' . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</p>";
           ?>
           <table class="table table-sm table-striped">
             <tr>
@@ -364,16 +363,16 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
                 $placetxt = $row[$place] ? buildSilentPlaceLink($row[$place]) : truncateIt($row['info'], 75);
                 $dateval = $row[$datefield];
               } else {
-                $dateval = $placetxt = $prefix = $suffix = $title = $nickname = $birthdate = $birthplace = $deathdate = $deathplace = $livingOK = "";
+                $dateval = $placetxt = $prefix = $suffix = $title = $nickname = $birthdate = $birthplace = $deathdate = $deathplace = $livingOK = '';
               }
-              echo "<tr>";
+              echo '<tr>';
               $name = getNameRev($row);
               echo "<td>$i</td>\n";
               $i++;
               echo "<td>\n";
               echo "<a tabindex='0' class='btn btn-sm btn-outline-primary person-popover' role='button' data-toggle='popover' data-placement='bottom' data-person-id={$row['personID']}>$name</a>\n";
               echo "</td>\n";
-              echo "<td>" . displayDate($dateval) . "</td><td>$placetxt</td>";
+              echo '<td>' . displayDate($dateval) . "</td><td>$placetxt</td>";
               echo "</tr>\n";
             }
             tng_free_result($result);
@@ -388,7 +387,7 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
         }
       }
       if (!$successcount) {
-        echo "<p>" . uiTextSnippet('noresults') . ".</p>";
+        echo '<p>' . uiTextSnippet('noresults') . '.</p>';
       }
     } //end of $tng_needresults
     ?>
@@ -405,10 +404,10 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
     var myform = document.form1;
 
     myform.tngevent.selectedIndex = 0;
-    myform.tngdaymonth.value = "";
+    myform.tngdaymonth.value = '';
     myform.tngmonth.selectedIndex = 0;
-    myform.tngyear.value = "";
-    myform.tngkeywords.value = "";
+    myform.tngyear.value = '';
+    myform.tngkeywords.value = '';
   }
 
   function validateForm(form) {

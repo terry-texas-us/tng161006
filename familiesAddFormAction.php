@@ -8,7 +8,7 @@ require 'checklogin.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 require 'adminlog.php';
@@ -19,7 +19,7 @@ require 'deletelib.php';
 
 $familyID = ucfirst($familyID);
 
-if ($newfamily == "ajax" && $session_charset != "UTF-8") {
+if ($newfamily == 'ajax' && $session_charset != 'UTF-8') {
   $marrplace = tng_utf8_decode($marrplace);
   $divplace = tng_utf8_decode($divplace);
   $sealplace = tng_utf8_decode($sealplace);
@@ -143,8 +143,8 @@ if ($lastperson) {
 }
 adminwritelog("<a href=\"familiesEdit.php?familyID=$familyID\">" . uiTextSnippet('addnewfamily') . ": $familyID</a>");
 
-if ($newfamily == "ajax") {
-  echo "1";
+if ($newfamily == 'ajax') {
+  echo '1';
 } else {
   header("Location: familiesEdit.php?familyID=$familyID&cw=$cw&added=1");
 }

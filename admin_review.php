@@ -15,7 +15,7 @@ $familyID = $row['familyID'];
 $eventID = $row['eventID'];
 
 //look up person or family
-if ($row['type'] == 'I' || $row['type'] == "C") {
+if ($row['type'] == 'I' || $row['type'] == 'C') {
   $tng_search_preview = $_SESSION['tng_search_preview'];
   $reviewmsg = uiTextSnippet('reviewpeople');
 
@@ -37,13 +37,13 @@ if ($row['type'] == 'I' || $row['type'] == "C") {
   $teststr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
   $teststr .= "</a>\n";
 
-  $editstr = "  | <a href=\"peopleEdit.php?personID=$personID\" target='_blank'>" . uiTextSnippet('edit') . "</a>";
+  $editstr = "  | <a href=\"peopleEdit.php?personID=$personID\" target='_blank'>" . uiTextSnippet('edit') . '</a>';
 } elseif ($row['type'] == 'F') {
   
   $query = "SELECT husband, wife FROM $families_table WHERE familyID = '$familyID'";
   $result = tng_query($query);
   $frow = tng_fetch_assoc($result);
-  $hname = $wname = "";
+  $hname = $wname = '';
   if ($frow['husband']) {
     $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch FROM $people_table WHERE personID = '{$frow['husband']}'";
     $result = tng_query($query);
@@ -67,7 +67,7 @@ if ($row['type'] == 'I' || $row['type'] == "C") {
     $wname = getName($prow);
   }
   $persfamID = $familyID;
-  $plus = $hname && $wname ? " + " : "";
+  $plus = $hname && $wname ? ' + ' : '';
   $name = "$hname$plus$wname";
 
   $checkbranch = 1;
@@ -76,20 +76,20 @@ if ($row['type'] == 'I' || $row['type'] == "C") {
   $teststr .= "<a href=\"familiesShowFamily.php?familyID=$familyID\" title=\"<?php echo uiTextSnippet('preview') ?>\">\n";
   $teststr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
   $teststr .= "</a>\n";
-  $editstr = "  | <a href=\"familiesEdit.php?familyID=$familyID\" target='_blank'>" . uiTextSnippet('edit') . "</a>";
+  $editstr = "  | <a href=\"familiesEdit.php?familyID=$familyID\" target='_blank'>" . uiTextSnippet('edit') . '</a>';
 }
 
 if (!$allowEdit || !$rightbranch) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
 if (is_numeric($eventID)) {
   //custom event type
-  $datefield = "eventdate";
-  $placefield = "eventplace";
-  $factfield = "info";
+  $datefield = 'eventdate';
+  $placefield = 'eventplace';
+  $factfield = 'info';
 
   $query = "SELECT eventdate, eventplace, info FROM $events_table WHERE eventID = '$eventID'";
   $result = tng_query($query);
@@ -101,10 +101,10 @@ if (is_numeric($eventID)) {
   $evtrow = tng_fetch_assoc($evresult);
 
   if ($evtrow['display']) {
-    $dispvalues = explode("|", $evtrow['display']);
+    $dispvalues = explode('|', $evtrow['display']);
     $numvalues = count($dispvalues);
     if ($numvalues > 1) {
-      $displayval = "";
+      $displayval = '';
       for ($i = 0; $i < $numvalues; $i += 2) {
         $lang = $dispvalues[$i];
         if ($mylanguage == $languagesPath . $lang) {
@@ -125,69 +125,69 @@ if (is_numeric($eventID)) {
   $needfamilies = 0;
   $needchildren = 0;
   switch ($eventID) {
-    case "TITL":
-      $factfield = "title";
+    case 'TITL':
+      $factfield = 'title';
       break;
-    case "NPFX":
-      $factfield = "prefix";
+    case 'NPFX':
+      $factfield = 'prefix';
       break;
-    case "NSFX":
-      $factfield = "suffix";
+    case 'NSFX':
+      $factfield = 'suffix';
       break;
-    case "NICK":
-      $factfield = "nickname";
+    case 'NICK':
+      $factfield = 'nickname';
       break;
-    case "BIRT":
-      $datefield = "birthdate";
-      $placefield = "birthplace";
+    case 'BIRT':
+      $datefield = 'birthdate';
+      $placefield = 'birthplace';
       break;
-    case "CHR":
-      $datefield = "altbirthdate";
-      $placefield = "altbirthplace";
+    case 'CHR':
+      $datefield = 'altbirthdate';
+      $placefield = 'altbirthplace';
       break;
-    case "BAPL":
-      $datefield = "baptdate";
-      $placefield = "baptplace";
+    case 'BAPL':
+      $datefield = 'baptdate';
+      $placefield = 'baptplace';
       break;
-    case "CONL":
-      $datefield = "confdate";
-      $placefield = "confplace";
+    case 'CONL':
+      $datefield = 'confdate';
+      $placefield = 'confplace';
       break;
-    case "INIT":
-      $datefield = "initdate";
-      $placefield = "initplace";
+    case 'INIT':
+      $datefield = 'initdate';
+      $placefield = 'initplace';
       break;
-    case "ENDL":
-      $datefield = "endldate";
+    case 'ENDL':
+      $datefield = 'endldate';
       $placefield = "endlplace";
       break;
-    case "DEAT":
-      $datefield = "deathdate";
-      $placefield = "deathplace";
+    case 'DEAT':
+      $datefield = 'deathdate';
+      $placefield = 'deathplace';
       break;
-    case "BURI":
-      $datefield = "burialdate";
-      $placefield = "burialplace";
+    case 'BURI':
+      $datefield = 'burialdate';
+      $placefield = 'burialplace';
       break;
-    case "MARR":
-      $datefield = "marrdate";
-      $placefield = "marrplace";
-      $factfield = "marrtype";
+    case 'MARR':
+      $datefield = 'marrdate';
+      $placefield = 'marrplace';
+      $factfield = 'marrtype';
       $needfamilies = 1;
       break;
-    case "DIV":
-      $datefield = "divdate";
-      $placefield = "divplace";
+    case 'DIV':
+      $datefield = 'divdate';
+      $placefield = 'divplace';
       $needfamilies = 1;
       break;
-    case "SLGS":
-      $datefield = "sealdate";
-      $placefield = "sealplace";
+    case 'SLGS':
+      $datefield = 'sealdate';
+      $placefield = 'sealplace';
       $needfamilies = 1;
       break;
-    case "SLGC":
-      $datefield = "sealdate";
-      $placefield = "sealplace";
+    case 'SLGC':
+      $datefield = 'sealdate';
+      $placefield = 'sealplace';
       $needchildren = 1;
       break;
   }
@@ -212,7 +212,7 @@ if (is_numeric($eventID)) {
   $query = "SELECT count(eventID) AS evcount FROM $events_table WHERE persfamID = '$persfamID' AND eventID = '$eventID'";
   $morelinks = tng_query($query);
   $more = tng_fetch_assoc($morelinks);
-  $gotmore = $more['evcount'] ? "*" : "";
+  $gotmore = $more['evcount'] ? '*' : '';
   tng_free_result($morelinks);
 
   $displayval = uiTextSnippet($eventID);
@@ -220,16 +220,16 @@ if (is_numeric($eventID)) {
 $query = "SELECT count(ID) AS notecount FROM $notelinks_table WHERE persfamID = '$persfamID' AND eventID = '$eventID'";
 $notelinks = tng_query($query);
 $note = tng_fetch_assoc($notelinks);
-$gotnotes = $note['notecount'] ? "*" : "";
+$gotnotes = $note['notecount'] ? '*' : '';
 tng_free_result($notelinks);
 
 $citequery = "SELECT count(citationID) AS citecount FROM $citations_table WHERE persfamID = '$persfamID' AND eventID = '$eventID'";
 $citeresult = tng_query($citequery) or die(uiTextSnippet('cannotexecutequery') . ": $citequery");
 $cite = tng_fetch_assoc($citeresult);
-$gotcites = $cite['citecount'] ? "*" : "";
+$gotcites = $cite['citecount'] ? '*' : '';
 tng_free_result($citeresult);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('review'));
 ?>
 <!DOCTYPE html>
@@ -242,16 +242,16 @@ $headSection->setTitle(uiTextSnippet('review'));
     echo $adminHeaderSection->build($hmsg . '-review', $message);
     $navList = new navList('');
     if ($row['type'] == 'I') {
-      $navList->appendItem([true, "peopleBrowse.php", uiTextSnippet('browse'), "findperson"]);
-      $navList->appendItem([$allowAdd, "peopleAdd.php", uiTextSnippet('add'), "addperson"]);
-      $navList->appendItem([$allowEdit, "admin_findreview.php?type=I", uiTextSnippet('review'), "review"]);
-      $navList->appendItem([$allowEdit && $allowDelete, "peopleMerge.php", uiTextSnippet('merge'), "merge"]);
+      $navList->appendItem([true, 'peopleBrowse.php', uiTextSnippet('browse'), 'findperson']);
+      $navList->appendItem([$allowAdd, 'peopleAdd.php', uiTextSnippet('add'), 'addperson']);
+      $navList->appendItem([$allowEdit, 'admin_findreview.php?type=I', uiTextSnippet('review'), 'review']);
+      $navList->appendItem([$allowEdit && $allowDelete, 'peopleMerge.php', uiTextSnippet('merge'), 'merge']);
     } else {
-      $navList->appendItem([true, "familiesBrowse.php", uiTextSnippet('browse'), "findperson"]);
-      $navList->appendItem([$allowAdd, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
-      $navList->appendItem([$allowEdit, "admin_findreview.php?type=F", uiTextSnippet('review'), "review"]);
+      $navList->appendItem([true, 'familiesBrowse.php', uiTextSnippet('browse'), 'findperson']);
+      $navList->appendItem([$allowAdd, 'familiesAdd.php', uiTextSnippet('add'), 'addfamily']);
+      $navList->appendItem([$allowEdit, 'admin_findreview.php?type=F', uiTextSnippet('review'), 'review']);
     }
-    echo $navList->build("review");
+    echo $navList->build('review');
     ?>
     <span class='h4'><?php echo "$persfamID: $name</strong> $teststr $editstr"; ?></span><br>
     <form action="admin_savereview.php" method='post' name='form1'>
@@ -269,15 +269,15 @@ $headSection->setTitle(uiTextSnippet('review'));
         </tr>
         <?php
         if ($datefield) {
-          echo "<tr><td>" . uiTextSnippet('eventdate') . ": </span></td><td><span>{$evrow[$datefield]}</td></tr>\n";
-          echo "<tr><td><strong>" . uiTextSnippet('suggested') . ":</strong></td><td colspan='2'>\n";
+          echo '<tr><td>' . uiTextSnippet('eventdate') . ": </span></td><td><span>{$evrow[$datefield]}</td></tr>\n";
+          echo '<tr><td><strong>' . uiTextSnippet('suggested') . ":</strong></td><td colspan='2'>\n";
           echo "<input name='newdate' type='text' value=\"{$row['eventdate']}\" onblur=\"checkDate(this);\">\n";
           echo "</td></tr>\n";
         }
         if ($placefield) {
           $row['eventplace'] = preg_replace('/\"/', '&#34;', $row['eventplace']);
-          echo "<tr><td>" . uiTextSnippet('eventplace') . ":</td><td><span>{$evrow[$placefield]}</td></tr>\n";
-          echo "<tr><td><strong>" . uiTextSnippet('suggested') . ":</strong></td><td><input class='verylongfield' id='newplace' name='newplace' type='text' size='40' value=\"{$row['eventplace']}\"></td>";
+          echo '<tr><td>' . uiTextSnippet('eventplace') . ":</td><td><span>{$evrow[$placefield]}</td></tr>\n";
+          echo '<tr><td><strong>' . uiTextSnippet('suggested') . ":</strong></td><td><input class='verylongfield' id='newplace' name='newplace' type='text' size='40' value=\"{$row['eventplace']}\"></td>";
           echo "<td>\n";
             echo "<a href='#' onclick=\"return openFindPlaceForm('newplace');\" title='" . uiTextSnippet('find') . "'>\n";
             echo "<img class='icon-sm' src='svg/magnifying-glass.svg'>\n";
@@ -286,8 +286,8 @@ $headSection->setTitle(uiTextSnippet('review'));
         }
         if ($factfield) {
           $row['info'] = preg_replace('/\"/', '&#34;', $row['info']);
-          echo "<tr><td>" . uiTextSnippet('detail') . ":</td><td>{$row[$factfield]}</td></tr>\n";
-          echo "<tr><td><strong>" . uiTextSnippet('suggested') . ":</strong></td><td colspan='2'><textarea cols=\"60\" rows=\"4\" name=\"newinfo\">{$row['info']}</textarea></td></tr>\n";
+          echo '<tr><td>' . uiTextSnippet('detail') . ":</td><td>{$row[$factfield]}</td></tr>\n";
+          echo '<tr><td><strong>' . uiTextSnippet('suggested') . ":</strong></td><td colspan='2'><textarea cols=\"60\" rows=\"4\" name=\"newinfo\">{$row['info']}</textarea></td></tr>\n";
         }
         $row['note'] = preg_replace('/\"/', '&#34;', $row['note']);
         ?>
@@ -296,17 +296,17 @@ $headSection->setTitle(uiTextSnippet('review'));
           <td>
             <?php
             if (!is_numeric($eventID)) {
-              $iconColor = $gotmore ? "icon-info" : "icon-muted";
+              $iconColor = $gotmore ? 'icon-info' : 'icon-muted';
               echo "<a class='event-more' href='#' title='" . uiTextSnippet('more') . "' data-event-id='$eventID' data-persfam-id='$persfamID'>\n";
               echo "<img class='icon-sm icon-right icon-more $iconColor' data-event-id='$label' data-src='svg/plus.svg'>\n";
               echo "</a>\n";
             }
-            $iconColor = $gotnotes ? "icon-info" : "icon-muted";
+            $iconColor = $gotnotes ? 'icon-info' : 'icon-muted';
             echo "<a class='event-notes' href='#' title='" . uiTextSnippet('notes') . "' data-event-id='$eventID' data-persfam-id='$persfamID'>\n";
             echo "<img class='icon-sm icon-right icon-notes $iconColor' data-src='svg/documents.svg'>\n";
             echo "</a>\n";
 
-            $iconColor = $gotcites ? "icon-info" : "icon-muted";
+            $iconColor = $gotcites ? 'icon-info' : 'icon-muted';
             echo "<a class='event-citations' href='#' title='" . uiTextSnippet('citations') . "' data-event-id='$eventID' data-persfam-id='$persfamID'>\n";
             echo "<img class='icon-sm icon-right icon-citations $iconColor' data-src='svg/archive.svg'>\n";
             echo "</a>\n";
@@ -318,7 +318,7 @@ $headSection->setTitle(uiTextSnippet('review'));
         </tr>
         <tr>
           <td><?php echo uiTextSnippet('usernotes'); ?>:</td>
-          <td><textarea cols="60" rows="4"
+          <td><textarea cols="60" rows='4'
                                      name="usernote"><?php echo $row['note']; ?></textarea>
           </td>
         </tr>
@@ -347,7 +347,7 @@ $headSection->setTitle(uiTextSnippet('review'));
   <?php require_once 'eventlib.php'; ?>
 <script>
     var tnglitbox;
-    var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;
+    var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : 'false'); ?>;
     var preferDateFormat = '<?php echo $preferDateFormat; ?>';
 </script>
 <script src="js/selectutils.js"></script>

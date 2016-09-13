@@ -6,7 +6,7 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('emailusers'));
 ?>
 <!DOCTYPE html>
@@ -17,11 +17,11 @@ $headSection->setTitle(uiTextSnippet('emailusers'));
     <?php
     echo $adminHeaderSection->build('users-emailmessage', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "usersBrowse.php", uiTextSnippet('search'), "finduser"]);
-    $navList->appendItem([$allowAdd, "usersAdd.php", uiTextSnippet('add'), "adduser"]);
-    $navList->appendItem([$allowEdit, "usersReview.php", uiTextSnippet('review') . $revstar, "review"]);
-    //    $navList->appendItem([true, "usersSendMail.php", uiTextSnippet('email'), "mail"]);
-    echo $navList->build("mail");
+    $navList->appendItem([true, 'usersBrowse.php', uiTextSnippet('search'), 'finduser']);
+    $navList->appendItem([$allowAdd, 'usersAdd.php', uiTextSnippet('add'), 'adduser']);
+    $navList->appendItem([$allowEdit, 'usersReview.php', uiTextSnippet('review') . $revstar, 'review']);
+    //    $navList->appendItem([true, 'usersSendMail.php', uiTextSnippet('email'), 'mail']);
+    echo $navList->build('mail');
     ?>
     <form id='users-send-mail' name='form1' action='usersSendMailFormAction.php' method='post'>
       <span><?php echo uiTextSnippet('subject'); ?>:</span>

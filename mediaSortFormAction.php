@@ -15,7 +15,7 @@ $personID = ucfirst($newlink1);
 $linktype = $linktype1;
 $eventID = $event1;
 
-$sortstr = preg_replace("/xxx/", uiTextSnippet($mediatypeID), uiTextSnippet('sortmedia'));
+$sortstr = preg_replace('/xxx/', uiTextSnippet($mediatypeID), uiTextSnippet('sortmedia'));
 
 switch ($linktype) {
   case 'I':
@@ -25,8 +25,8 @@ switch ($linktype) {
     $person['allow_living'] = 1;
     $namestr = "$personID: " . getName($person);
     tng_free_result($result2);
-    $test_url = "peopleShowPerson.php?";
-    $testID = "personID";
+    $test_url = 'peopleShowPerson.php?';
+    $testID = 'personID';
     break;
   case 'F':
     $query = "SELECT branch FROM $families_table WHERE familyID = '$personID'";
@@ -34,8 +34,8 @@ switch ($linktype) {
     $person = tng_fetch_assoc($result2);
     $namestr = uiTextSnippet('family') . ": $personID";
     tng_free_result($result2);
-    $test_url = "familiesShowFamily.php?";
-    $testID = "familyID";
+    $test_url = 'familiesShowFamily.php?';
+    $testID = 'familyID';
     break;
   case 'S':
     $query = "SELECT title FROM $sources_table WHERE sourceID = '$personID'";
@@ -43,12 +43,12 @@ switch ($linktype) {
     $person = tng_fetch_assoc($result2);
     $namestr = uiTextSnippet('source') . ": $personID";
     if ($person['title']) {
-      $namestr .= ", " . $person['title'];
+      $namestr .= ', ' . $person['title'];
     }
-    $person['branch'] = "";
+    $person['branch'] = '';
     tng_free_result($result2);
-    $test_url = "sourcesShowSource.php?";
-    $testID = "sourceID";
+    $test_url = 'sourcesShowSource.php?';
+    $testID = 'sourceID';
     break;
   case 'R':
     $query = "SELECT reponame FROM $repositories_table WHERE repoID = '$personID'";
@@ -56,30 +56,30 @@ switch ($linktype) {
     $person = tng_fetch_assoc($result2);
     $namestr = uiTextSnippet('repository') . ": $personID";
     if ($person['reponame']) {
-      $namestr .= ", " . $person['reponame'];
+      $namestr .= ', ' . $person['reponame'];
     }
-    $person['branch'] = "";
+    $person['branch'] = '';
     tng_free_result($result2);
-    $test_url = "repositoriesShowItem.php?";
-    $testID = "repoID";
+    $test_url = 'repositoriesShowItem.php?';
+    $testID = 'repoID';
     break;
   case 'L':
     $namestr = $personID;
-    $person['branch'] = "";
-    $test_url = "placesearch.php?";
-    $testID = "psearch";
+    $person['branch'] = '';
+    $test_url = 'placesearch.php?';
+    $testID = 'psearch';
     break;
 }
 
 if (!checkbranch($person['branch'])) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
 adminwritelog("<a href=\"ordermedia.php?personID=$personID\">$sortstr: $personID</a>");
 
-$photo = "";
+$photo = '';
 
 $query = "SELECT alwayson, thumbpath, $media_table.mediaID AS mediaID, usecollfolder, mediatypeID, medialinkID FROM ($media_table, $medialinks_table)
     WHERE personID = '$personID' AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
@@ -100,7 +100,7 @@ if (!$numrows) {
   header("Location: mediaSort.php?personID=$personID&message=" . urlencode($message));
   exit;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet($sortstr));
 ?>
 <!DOCTYPE html>
@@ -110,13 +110,13 @@ $headSection->setTitle(uiTextSnippet($sortstr));
   <?php
   echo $adminHeaderSection->build('media-text_sort', $message);
   $navList = new navList('');
-  $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('browse'), "findmedia"]);
-  $navList->appendItem([$allowMediaAdd, "mediaAdd.php", uiTextSnippet('add'), "addmedia"]);
-  $navList->appendItem([$allowMediaEdit, "mediaSort.php", uiTextSnippet('text_sort'), "sortmedia"]);
-  $navList->appendItem([$allowMediaEdit, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-  $navList->appendItem([$allowMediaAdd, "mediaImport.php", uiTextSnippet('import'), "import"]);
-  $navList->appendItem([$allowMediaAdd, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
-  echo $navList->build("sortmedia");
+  $navList->appendItem([true, 'mediaBrowse.php', uiTextSnippet('browse'), 'findmedia']);
+  $navList->appendItem([$allowMediaAdd, 'mediaAdd.php', uiTextSnippet('add'), 'addmedia']);
+  $navList->appendItem([$allowMediaEdit, 'mediaSort.php', uiTextSnippet('text_sort'), 'sortmedia']);
+  $navList->appendItem([$allowMediaEdit, 'mediaThumbnails.php', uiTextSnippet('thumbnails'), 'thumbs']);
+  $navList->appendItem([$allowMediaAdd, 'mediaImport.php', uiTextSnippet('import'), 'import']);
+  $navList->appendItem([$allowMediaAdd, 'mediaUpload.php', uiTextSnippet('upload'), 'upload']);
+  echo $navList->build('sortmedia');
   ?>
   <br>
   <a href="<?php echo $test_url; ?><?php echo $testID; ?>=<?php echo $personID; ?>" title='<?php echo uiTextSnippet('preview') ?>'>
@@ -128,7 +128,7 @@ $headSection->setTitle(uiTextSnippet($sortstr));
         <h4><?php echo "<div id='thumbholder' style='float: left'>$photo</div><strong>$sortstr<br>$namestr</strong>"; ?></h4>
         <br clear="left">
         <?php
-        echo "<p class=\"small\" id=\"removedefault\"";
+        echo "<p class='small' id='removedefault'";
         if (!$photo) {
           echo " style=\"display:none\"";
         }
@@ -173,21 +173,21 @@ $headSection->setTitle(uiTextSnippet($sortstr));
                 $size = getimagesize("$rootpath$usefolder/" . $row['thumbpath']);
                 echo "<a href=\"mediaEdit.php?mediaID={$row['mediaID']}\"><img src=\"$usefolder/" . str_replace("%2F", "/", rawurlencode($row['thumbpath'])) . "\" $size[3] alt=\"{$row['description']}\"></a>";
               } else {
-                echo "&nbsp;";
+                echo '&nbsp;';
               }
               echo "</td>\n";
-              $checked = $row['defphoto'] ? " checked" : "";
+              $checked = $row['defphoto'] ? ' checked' : '';
               echo "<td><a href=\"mediaEdit.php?mediaID={$row['mediaID']}\">{$row['description']}</a><br>$truncated<br>\n";
               echo "<span id=\"md_{$row['medialinkID']}\" class=\"small\" style=\"color:gray;visibility:hidden\">\n";
               echo "<input name='rthumbs' type='radio' value=\"r{$row['mediaID']}\"$checked onclick=\"makeDefault(this);\">" . uiTextSnippet('makedefault') . "\n";
-              echo " &nbsp;|&nbsp; ";
-              echo "<a href='#' onclick=\"return removeFromSort('media','{$row['medialinkID']}');\">" . uiTextSnippet('remove') . "</a>";
+              echo ' &nbsp;|&nbsp; ';
+              echo "<a href='#' onclick=\"return removeFromSort('media','{$row['medialinkID']}');\">" . uiTextSnippet('remove') . '</a>';
               echo "</span>&nbsp;</td>\n";
               echo "<td style=\"width: 45px; text-align: center\">";
-              $checked = $row['dontshow'] ? "" : " checked";
+              $checked = $row['dontshow'] ? '' : ' checked';
               echo "<input name=\"show{$row['medialinkID']}\" type='checkbox' onclick=\"toggleShow(this);\" value='1'$checked/>&nbsp;</td>\n";
               echo "<td style=\"width:150px;\">{$row['datetaken']}&nbsp;</td>\n";
-              echo "</tr></table>";
+              echo '</tr></table>';
               echo "</div>\n";
               $count++;
             }
@@ -220,12 +220,12 @@ $headSection->setTitle(uiTextSnippet($sortstr));
       $photohtouse = $thumbmaxh;
       $photowtouse = intval($thumbmaxh * $photoinfo[0] / $photoinfo[1]);
     }
-    $photo = "<img src=\"" . str_replace("%2F", "/", rawurlencode($photoref)) . "?" . time() . "\" alt='' width=\"$photowtouse\" height=\"$photohtouse\" style=\"margin-right:10px\">";
+    $photo = "<img src=\"" . str_replace('%2F', '/', rawurlencode($photoref)) . '?' . time() . "\" alt='' width=\"$photowtouse\" height=\"$photohtouse\" style=\"margin-right:10px\">";
   }
   ?>
   <script>
     var entity = "<?php echo $personID; ?>";
-    var album = "";
+    var album = '';
     var orderaction = "order";
   </script>
   <script src='js/selectutils.js'></script>

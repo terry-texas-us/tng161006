@@ -16,13 +16,13 @@ tng_free_result($result);
 
 if ((!$allowEdit && (!$allowAdd || !$added)) || !checkbranch($row['branch'])) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 $editconflict = determineConflict($row, $people_table);
 
 if (!$editconflict) {
-  if ($newfamily == "ajax" && $session_charset != "UTF-8") {
+  if ($newfamily == 'ajax' && $session_charset != 'UTF-8') {
     $firstname = tng_utf8_decode($firstname);
     $lastname = tng_utf8_decode($lastname);
     $lnprefix = tng_utf8_decode($lnprefix);
@@ -64,7 +64,7 @@ if (!$editconflict) {
   $initdatetr = convertDate($initdate);
   $endldatetr = convertDate($endldate);
 
-  $newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
+  $newdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
 
   if (is_array($branch)) {
     foreach ($branch as $b) {
@@ -78,7 +78,7 @@ if (!$editconflict) {
   }
 
   if ($allbranches != $orgbranch) {
-    $oldbranches = explode(",", $orgbranch);
+    $oldbranches = explode(',', $orgbranch);
     foreach ($oldbranches as $b) {
       if ($b && !in_array($b, $branch)) {
         $query = "DELETE FROM $branchlinks_table WHERE persfamID = '$personID' AND branch = \"$b\"";
@@ -128,7 +128,7 @@ if (!$editconflict) {
   $query = "SELECT familyID FROM $children_table WHERE personID = '$personID'";
   $parents = tng_query($query);
 
-  $famc = "";
+  $famc = '';
   if ($parents && tng_num_rows($parents)) {
     while ($parent = tng_fetch_assoc($parents)) {
       eval("\$sealpdate = \$sealpdate{$parent['familyID']};");
@@ -145,7 +145,7 @@ if (!$editconflict) {
     }
     tng_free_result($parents);
   }
-  $famcstr = $famc ? ", famc = \"$famc\"" : "";
+  $famcstr = $famc ? ", famc = \"$famc\"" : '';
   if (!$living) {
     $living = 0;
   }
@@ -170,8 +170,8 @@ if (!$editconflict) {
       $self = 'wife';
       $spouseorder = 'wifeorder';
     } else {
-      $self = "";
-      $spouseorder = "";
+      $self = '';
+      $spouseorder = '';
     }
   }
   if ($self) {
@@ -189,7 +189,7 @@ if (!$editconflict) {
         if ($personID == $marriagerow['wife']) {
           $spquery = "SELECT living, private FROM $people_table WHERE personID = \"{$marriagerow['husband']}\"";
         } else {
-          $spquery = "";
+          $spquery = '';
         }
       }
       if ($spquery) {
@@ -210,16 +210,16 @@ if (!$editconflict) {
 } else {
   $message = uiTextSnippet('notsaved');
 }
-if ($media == "1") {
+if ($media == '1') {
   header("Location: admin_newmedia.php?personID=$personID&amp;linktype=I&amp;cw=$cw");
-} elseif ($newfamily == "none") {
+} elseif ($newfamily == 'none') {
   $message = uiTextSnippet('changestoperson') . " $personID " . uiTextSnippet('succsaved') . '.';
-  header("Location: peopleBrowse.php?message=" . urlencode($message));
-} elseif ($newfamily == "return") {
+  header('Location: peopleBrowse.php?message=' . urlencode($message));
+} elseif ($newfamily == 'return') {
   header("Location: peopleEdit.php?personID=$personID&cw=$cw");
-} elseif ($newfamily == "child") {
+} elseif ($newfamily == 'child') {
   header("Location: familiesAdd.php?child=$personID&cw=$cw");
-} elseif ($newfamily == "close") {
+} elseif ($newfamily == 'close') {
 ?>
   <!DOCTYPE html>
   <html>
@@ -230,7 +230,7 @@ if ($media == "1") {
   </body>
   </html>
 <?php
-} elseif ($newfamily == "ajax") {
+} elseif ($newfamily == 'ajax') {
   $row = [
           'personID' => $personID,
           'firstname' => $firstname,
@@ -245,7 +245,7 @@ if ($media == "1") {
           'branch' => $allbranches,
           'allow_living' => 1
   ];
-  $name = $session_charset == "UTF-8" ? getName($row) : utf8_encode(getName($row));
+  $name = $session_charset == 'UTF-8' ? getName($row) : utf8_encode(getName($row));
   echo "{\"id\":\"$personID\",\"name\":\"" . $name . "\"}";
 } else {
   header("Location: familiesAdd.php?$self=$personID&cw=$cw");

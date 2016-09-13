@@ -9,10 +9,10 @@ require 'version.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('addnewplace'));
 ?>
 <!DOCTYPE html>
@@ -23,11 +23,11 @@ $headSection->setTitle(uiTextSnippet('addnewplace'));
     <?php
     echo $adminHeaderSection->build('places-addnewplace', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "placesBrowse.php", uiTextSnippet('browse'), "findplace"]);
-    $navList->appendItem([$allowAdd, "placesAdd.php", uiTextSnippet('add'), "addplace"]);
-    $navList->appendItem([$allowEdit && $allowDelete, "placesMerge.php", uiTextSnippet('merge'), "merge"]);
-    $navList->appendItem([$allowEdit, "admin_geocodeform.php", uiTextSnippet('geocode'), "geo"]);
-    echo $navList->build("addplace");
+    $navList->appendItem([true, 'placesBrowse.php', uiTextSnippet('browse'), 'findplace']);
+    $navList->appendItem([$allowAdd, 'placesAdd.php', uiTextSnippet('add'), 'addplace']);
+    $navList->appendItem([$allowEdit && $allowDelete, 'placesMerge.php', uiTextSnippet('merge'), 'merge']);
+    $navList->appendItem([$allowEdit, 'admin_geocodeform.php', uiTextSnippet('geocode'), 'geo']);
+    echo $navList->build('addplace');
     ?>
     <form name='form1' action='placesAddFormAction.php' method='post' onSubmit="return validateForm();">
       <table class='table table-sm'>
@@ -52,7 +52,7 @@ $headSection->setTitle(uiTextSnippet('addnewplace'));
               <div style="padding:10px">
                 <?php
                 // draw the map here
-                include "googlemapdrawthemap.php";
+                include 'googlemapdrawthemap.php';
                 ?>
               </div>
             </td>
@@ -96,7 +96,7 @@ $headSection->setTitle(uiTextSnippet('addnewplace'));
         <tr>
           <td><?php echo uiTextSnippet('notes'); ?>:</td>
           <td>
-            <textarea wrap='soft' cols="50" rows="5" name="notes"></textarea>
+            <textarea wrap='soft' cols="50" rows='5' name="notes"></textarea>
           </td>
         </tr>
       </table>
@@ -122,7 +122,7 @@ $headSection->setTitle(uiTextSnippet('addnewplace'));
   </script>
   <?php
   if ($map['key']) {
-    include "googlemaplib2.php";
+    include 'googlemaplib2.php';
   }
   ?>
 </body>

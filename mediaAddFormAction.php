@@ -8,7 +8,7 @@ require 'checklogin.php';
 
 if (!$allowMediaAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
@@ -16,7 +16,7 @@ require 'adminlog.php';
 initMediaTypes();
 
 $exptime = 0;
-setcookie("lastcoll", $mediatypeID, $exptime);
+setcookie('lastcoll', $mediatypeID, $exptime);
 
 $thumbquality = 80;
 if (function_exists(imageJpeg)) {
@@ -25,35 +25,33 @@ if (function_exists(imageJpeg)) {
 
 $path = stripslashes($path);
 $thumbpath = stripslashes($thumbpath);
-if (substr($path, 0, 1) == "/") {
+if (substr($path, 0, 1) == '/') {
   $path = substr($path, 1);
 }
 
 $usefolder = $usecollfolder ? $mediatypes_assoc[$mediatypeID] : $mediapath;
 $newpath = "$rootpath$usefolder/$path";
 
-if ($newfile && $newfile != "none") {
+if ($newfile && $newfile != 'none') {
   if (move_uploaded_file($newfile, $newpath)) {
     chmod($newpath, 0644);
   } else {
     //improper permissions or folder doesn't exist (root path may be wrong)
-    $message = uiTextSnippet('notcopied') . " $newpath " . uiTextSnippet('improperpermissions') . ".";
-    header("Location: mediaBrowse.php?message=" . urlencode($message));
+    $message = uiTextSnippet('notcopied') . " $newpath " . uiTextSnippet('improperpermissions') . '.';
+    header('Location: mediaBrowse.php?message=' . urlencode($message));
     exit;
   }
 }
 
-if (substr($thumbpath, 0, 1) == "/") {
+if (substr($thumbpath, 0, 1) == '/') {
   $thumbpath = substr($thumbpath, 1);
 }
 $newthumbpath = "$rootpath$usefolder/$thumbpath";
 
-if (function_exists(imageJpeg) && $thumbcreate == "auto") {
-  ///$cleanpath = $session_charset == "UTF-8" ? utf8_decode($newpath) : $newpath;
-  //$cleannewthumbpath = $session_charset == "UTF-8" ? utf8_decode($newthumbpath) : $newthumbpath;
+if (function_exists(imageJpeg) && $thumbcreate == 'auto') {
   if (image_createThumb($newpath, $newthumbpath, $thumbmaxw, $thumbmaxh, $thumbquality)) {
     $destInfo = pathInfo($newthumbpath);
-    if (strtoupper($destInfo['extension']) == "GIF") {
+    if (strtoupper($destInfo['extension']) == 'GIF') {
       $thumbpath = substr_replace($thumbpath, 'jpg', -3);
       $newthumbpath = substr_replace($newthumbpath, 'jpg', -3);
     }
@@ -61,17 +59,17 @@ if (function_exists(imageJpeg) && $thumbcreate == "auto") {
   } else {
     //could not create thumbnail (size or type problem) or permissions (root path may be wrong)
     $message = uiTextSnippet('thumbnailnotcopied') . " $newthumbpath " . uiTextSnippet('improper2') . '.';
-    header("Location: mediaBrowse.php?message=" . urlencode($message));
+    header('Location: mediaBrowse.php?message=' . urlencode($message));
     exit;
   }
 } else {
-  if ($newthumb && $newthumb != "none") {
+  if ($newthumb && $newthumb != 'none') {
     if (move_uploaded_file($newthumb, $newthumbpath)) {
       chmod($newthumbpath, 0644);
     } else {
       //improper permissions or folder doesn't exist (root path may be wrong)
-      $message = uiTextSnippet('thumbnailnotcopied') . " $newthumbpath " . uiTextSnippet('improperpermissions') . ".";
-      header("Location: mediaBrowse.php?message=" . urlencode($message));
+      $message = uiTextSnippet('thumbnailnotcopied') . " $newthumbpath " . uiTextSnippet('improperpermissions') . '.';
+      header('Location: mediaBrowse.php?message=' . urlencode($message));
       exit;
     }
   }
@@ -95,7 +93,7 @@ if ($abspath) {
   $abspath = 0;
 }
 if (!$showmap) {
-  $showmap = "0";
+  $showmap = '0';
 }
 if (!$usenl) {
   $usenl = 0;
@@ -127,7 +125,7 @@ if (!$zoom) {
 
 $fileparts = pathinfo($path);
 $form = strtoupper($fileparts['extension']);
-$newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
+$newdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
 $mediakey = $path ? "$usefolder/$path" : time();
 $query = "INSERT IGNORE INTO $media_table (mediatypeID, mediakey, path, thumbpath, description, notes, width, height, datetaken, placetaken, owner, changedate, changedby, form, alwayson, map, abspath, status, cemeteryID, plot, showmap, linktocem, latitude, longitude, zoom, bodytext, usenl, newwindow, usecollfolder) "
     . "VALUES ('$mediatypeID', '$mediakey', '$path', '$thumbpath', '$description', '$notes', '$width', '$height', '$datetaken', '$placetaken', '$owner', '$newdate', '$currentuser', '$form', '$alwayson', '$imagemap', '$abspath', '$status', '$cemeteryID', '$plot', '$showmap', '$linktocem', '$latitude', '$longitude', '$zoom', '$bodytext', '$usenl', '$newwindow', '$usecollfolder')";
@@ -147,7 +145,7 @@ if ($result && $success) {
       $newrow = 1;
     }
 
-    $defval = "";
+    $defval = '';
 
     $query = "INSERT IGNORE INTO $medialinks_table (personID, mediaID, ordernum, linktype, eventID, defphoto) "
         . "VALUES ('$link_personID', '$mediaID', '$newrow', '$link_linktype', '', '$defval')";
@@ -160,6 +158,6 @@ if ($result && $success) {
 
   header("Location: mediaEdit.php?mediaID=$mediaID&newmedia=1&added=1");
 } else {
-  $message = uiTextSnippet('photonotadded') . ".";
-  header("Location: mediaBrowse.php?message=" . urlencode($message));
+  $message = uiTextSnippet('photonotadded') . '.';
+  header('Location: mediaBrowse.php?message=' . urlencode($message));
 }

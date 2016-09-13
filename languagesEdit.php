@@ -8,7 +8,7 @@ require 'version.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 $query = "SELECT * FROM $languagesTable WHERE languageID = \"$languageID\"";
@@ -16,7 +16,7 @@ $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('modifylanguage'));
 ?>
 <!DOCTYPE html>
@@ -27,10 +27,10 @@ $headSection->setTitle(uiTextSnippet('modifylanguage'));
     <?php
     echo $adminHeaderSection->build('languages-modifylanguage', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "languagesBrowse.php", uiTextSnippet('browse'), "findlang"]);
-    $navList->appendItem([$allowAdd, "languagesAdd.php", uiTextSnippet('add'), "addlanguage"]);
-    $navList->appendItem([$allowEdit, "#", uiTextSnippet('edit'), "edit"]);
-    echo $navList->build("edit");
+    $navList->appendItem([true, 'languagesBrowse.php', uiTextSnippet('browse'), 'findlang']);
+    $navList->appendItem([$allowAdd, 'languagesAdd.php', uiTextSnippet('add'), 'addlanguage']);
+    $navList->appendItem([$allowEdit, '#', uiTextSnippet('edit'), 'edit']);
+    echo $navList->build('edit');
     ?>
     <table class='table table-sm'>
       <tr>
@@ -55,7 +55,7 @@ $headSection->setTitle(uiTextSnippet('modifylanguage'));
                       foreach ($dirs as $dir) {
                         echo "<option value=\"$dir\"";
                         if ($dir == $row['folder']) {
-                          echo " selected";
+                          echo ' selected';
                           $found_current = 1;
                         }
                         echo ">$dir</option>\n";

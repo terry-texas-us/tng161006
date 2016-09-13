@@ -8,7 +8,7 @@ if (strpos($scriptName, 'ajax/checkPersonId.php') !== false) {
   $query = "SELECT personID FROM $people_table WHERE personID = '$checkID'";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
-  header("Content-type: text/html; charset=" . $session_charset);
+  header('Content-type: text/html; charset=' . $session_charset);
 
   $out = '';
   if ($result && tng_num_rows($result)) {

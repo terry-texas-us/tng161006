@@ -9,7 +9,7 @@ if ($medialinkID) {
   $ordernum = $row['ordernum'];
   $mediatypeID = $row['mediatypeID'];
   $linktype = $row['linktype'];
-  if ($linktype == "P") {
+  if ($linktype == 'P') {
     $linktype = 'I';
   }
   $eventID = $row['eventID'];
@@ -31,7 +31,7 @@ if ($medialinkID) {
 }
 if (!tng_num_rows($result)) {
   tng_free_result($result);
-  header("Location: thispagedoesnotexist.html");
+  header('Location: thispagedoesnotexist.html');
   exit;
 }
 $info = getMediaInfo($mediatypeID, $mediaID, $personID, $albumID, $albumlinkID, $cemeteryID, $eventID);
@@ -52,7 +52,7 @@ $nonamesloc = $livinginfo['private'] ? $tngconfig['nnpriv'] : $nonames;
 if ($noneliving || !$nonamesloc || $imgrow['alwayson']) {
   $description = $mediadescription;
   $notes = nl2br(xmlcharacters(getXrefNotes($medianotes)));
-  $notes .= $info['gotmap'] ? "<p>" . uiTextSnippet('mediamaptext') . "</p>" : "";
+  $notes .= $info['gotmap'] ? '<p>' . uiTextSnippet('mediamaptext') . '</p>' : '';
 } else {
   $description = $notes = uiTextSnippet('living');
 }

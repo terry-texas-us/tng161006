@@ -3,7 +3,7 @@ require 'processvars.php';
 require 'subroot.php';
 // [ts] require_once 'tngconnect.php';
 
-if (!file_exists($subroot . "config.php")) {
+if (!file_exists($subroot . 'config.php')) {
   $subroot = $_GET['sr'];
 }
 require $subroot . 'config.php';
@@ -19,7 +19,7 @@ session_start();
 $session_language = $_SESSION['session_language'];
 $session_charset = $_SESSION['session_charset'];
 
-$languagesPath = "languages/";
+$languagesPath = 'languages/';
 require 'getlang.php';
 
 $link = tng_db_connect($database_host, $database_name, $database_username, $database_password);
@@ -32,9 +32,9 @@ require 'version.php';
 $error_reporting = ((int)ini_get('error_reporting')) & E_NOTICE;
 
 if (!$sub) {
-  $sub = "configuration";
+  $sub = 'configuration';
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('setup'));
 ?>
 <!DOCTYPE html>
@@ -45,17 +45,17 @@ $headSection->setTitle(uiTextSnippet('setup'));
     <?php
     echo $adminHeaderSection->build('setup-' . $sub, $message);
     $navList = new navList('');
-    $navList->appendItem([true, "admin_setup.php", uiTextSnippet('configuration'), "configuration"]);
-    $navList->appendItem([true, "admin_diagnostics.php", uiTextSnippet('diagnostics'), "diagnostics"]);
-    $navList->appendItem([true, "admin_setup.php?sub=tablecreation", uiTextSnippet('tablecreation'), "tablecreation"]);
-    $internallink = $sub == "configuration" ? "config" : "tables";
+    $navList->appendItem([true, 'admin_setup.php', uiTextSnippet('configuration'), 'configuration']);
+    $navList->appendItem([true, 'admin_diagnostics.php', uiTextSnippet('diagnostics'), 'diagnostics']);
+    $navList->appendItem([true, 'admin_setup.php?sub=tablecreation', uiTextSnippet('tablecreation'), 'tablecreation']);
+    $internallink = $sub == 'configuration' ? 'config' : 'tables';
     echo $navList->build($sub);
     ?>
     <table class='table table-sm'>
       <tr>
         <td>
           <?php
-          if ($sub == "configuration") {
+          if ($sub == 'configuration') {
             ?>
             <span><i><?php echo uiTextSnippet('entersysvars'); ?></i></span><br><br>
 
@@ -92,7 +92,7 @@ $headSection->setTitle(uiTextSnippet('setup'));
             <br>
             <p><em><?php echo uiTextSnippet('custvars'); ?></em></p>
             <?php
-          } elseif ($sub == "tablecreation") {
+          } elseif ($sub == 'tablecreation') {
             ?>
             <span><i><?php echo uiTextSnippet('createdbtables'); ?></i></span><br>
 

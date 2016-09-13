@@ -53,6 +53,6 @@ while ($distinctplink = tng_fetch_assoc($result)) {
 }
 tng_free_result($result);
 
-adminwritelog(uiTextSnippet('assigndefs') . ": " . uiTextSnippet('defsassigned') . ": $defsdone;");
+adminwritelog(uiTextSnippet('assigndefs') . ': ' . uiTextSnippet('defsassigned') . ": $defsdone;");
 
-echo "<p><strong>" . uiTextSnippet('defsassigned') . ":</strong> $defsdone</p>";
+echo '<p><strong>' . uiTextSnippet('defsassigned') . ":</strong> $defsdone</p>";

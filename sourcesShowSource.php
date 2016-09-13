@@ -2,7 +2,7 @@
 require 'begin.php';
 require 'genlib.php';
 if (!$sourceID) {
-  header("Location: thispagedoesnotexist.html");
+  header('Location: thispagedoesnotexist.html');
   exit;
 }
 require 'getlang.php';
@@ -15,8 +15,8 @@ require 'sources.php';
 $flags['imgprev'] = true;
 
 $firstsection = 1;
-$firstsectionsave = "";
-$tableid = "";
+$firstsectionsave = '';
+$tableid = '';
 $cellnumber = 0;
 
 $query = "SELECT sourceID, title, shorttitle, author, publisher, actualtext, reponame, $sources_table.repoID AS repoID, callnum, other FROM $sources_table "
@@ -26,7 +26,7 @@ $result = tng_query($query);
 $srcrow = tng_fetch_assoc($result);
 if (!tng_num_rows($result)) {
   tng_free_result($result);
-  header("Location: thispagedoesnotexist.html");
+  header('Location: thispagedoesnotexist.html');
   exit;
 }
 tng_free_result($result);
@@ -47,7 +47,7 @@ tng_free_result($sresult);
 $srcnotes = getNotes($sourceID, 'S');
 getCitations($sourceID);
 
-$logstring = "<a href=\"sourcesShowSource.php?sourceID=$sourceID\">" . xmlcharacters(uiTextSnippet('source') . " {$srcrow['title']} ($sourceID)") . "</a>";
+$logstring = "<a href=\"sourcesShowSource.php?sourceID=$sourceID\">" . xmlcharacters(uiTextSnippet('source') . " {$srcrow['title']} ($sourceID)") . '</a>';
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -55,7 +55,7 @@ $headtext = $srcrow['title'] ? $srcrow['title'] : $srcrow['shorttitle'];
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle($headtext);
 ?>
 <!DOCTYPE html>
@@ -68,9 +68,9 @@ $headSection->setTitle($headtext);
     $srcmedia = getMedia($srcrow, 'S');
     $srcalbums = getAlbums($srcrow, 'S');
     $photostr = showSmallPhoto($sourceID, $headtext, $rights['both'], 0);
-    echo tng_DrawHeading($photostr, $srcrow['title'], "");
+    echo tng_DrawHeading($photostr, $srcrow['title'], '');
 
-    $sourcetext = "";
+    $sourcetext = '';
     $sourcetext .= "<ul>\n";
     $sourcetext .= beginListItem('info');
     $sourcetext .= "<table class='table'>\n";
@@ -78,25 +78,25 @@ $headSection->setTitle($headtext);
     $sourcetext .= "<col style='width: {$datewidth}px'>\n";
     $sourcetext .= "<col>\n";
     if ($srcrow['title']) {
-      $sourcetext .= showEvent(["text" => uiTextSnippet('title'), "fact" => $srcrow['title']]);
+      $sourcetext .= showEvent(['text' => uiTextSnippet('title'), 'fact' => $srcrow['title']]);
     }
     if ($srcrow['shorttitle']) {
-      $sourcetext .= showEvent(["text" => uiTextSnippet('shorttitle'), "fact" => $srcrow['shorttitle']]);
+      $sourcetext .= showEvent(['text' => uiTextSnippet('shorttitle'), 'fact' => $srcrow['shorttitle']]);
     }
     if ($srcrow['author']) {
-      $sourcetext .= showEvent(["text" => uiTextSnippet('author'), "fact" => $srcrow['author']]);
+      $sourcetext .= showEvent(['text' => uiTextSnippet('author'), 'fact' => $srcrow['author']]);
     }
     if ($srcrow['publisher']) {
-      $sourcetext .= showEvent(["text" => uiTextSnippet('publisher'), "fact" => $srcrow['publisher']]);
+      $sourcetext .= showEvent(['text' => uiTextSnippet('publisher'), 'fact' => $srcrow['publisher']]);
     }
     if ($srcrow['callnum']) {
-      $sourcetext .= showEvent(["text" => uiTextSnippet('callnum'), "fact" => $srcrow['callnum']]);
+      $sourcetext .= showEvent(['text' => uiTextSnippet('callnum'), 'fact' => $srcrow['callnum']]);
     }
     if ($srcrow['reponame']) {
-      $sourcetext .= showEvent(["text" => uiTextSnippet('repository'), "fact" => "<a href=\"repositoriesShowItem.php?repoID={$srcrow['repoID']}\">{$srcrow['reponame']}</a>"]);
+      $sourcetext .= showEvent(['text' => uiTextSnippet('repository'), 'fact' => "<a href=\"repositoriesShowItem.php?repoID={$srcrow['repoID']}\">{$srcrow['reponame']}</a>"]);
     }
     if ($srcrow['other']) {
-      $sourcetext .= showEvent(["text" => uiTextSnippet('other'), "fact" => $srcrow['other']]);
+      $sourcetext .= showEvent(['text' => uiTextSnippet('other'), 'fact' => $srcrow['other']]);
     }
 
     //do custom events
@@ -108,28 +108,28 @@ $headSection->setTitle($headtext);
       $sourcetext .= showEvent($event);
     }
     if ($allow_admin && $allowEdit) {
-      $sourcetext .= showEvent(["text" => uiTextSnippet('sourceid'), "date" => $sourceID, "place" => "<a href=\"sourcesEdit.php?sourceID=$sourceID&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . "</a>", "np" => 1]);
+      $sourcetext .= showEvent(['text' => uiTextSnippet('sourceid'), 'date' => $sourceID, 'place' => "<a href=\"sourcesEdit.php?sourceID=$sourceID&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . '</a>', 'np' => 1]);
     } else {
-      $sourcetext .= showEvent(["text" => uiTextSnippet('sourceid'), "date" => $sourceID]);
+      $sourcetext .= showEvent(['text' => uiTextSnippet('sourceid'), 'date' => $sourceID]);
     }
     if ($ioffset) {
       $ioffsetstr = "$ioffset, ";
       $newioffset = $ioffset + 1;
     } else {
-      $ioffsetstr = "";
-      $newioffset = "";
+      $ioffsetstr = '';
+      $newioffset = '';
     }
     if ($foffset) {
       $foffsetstr = "$foffset, ";
       $newfoffset = $foffset + 1;
     } else {
-      $foffsetstr = "";
-      $newfoffset = "";
+      $foffsetstr = '';
+      $newfoffset = '';
     }
     $query = "SELECT DISTINCT $citations_table.persfamID, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch FROM $citations_table, $people_table WHERE $citations_table.persfamID = $people_table.personID AND $citations_table.sourceID = '$sourceID' ORDER BY lastname, firstname LIMIT $ioffsetstr" . ($maxsearchresults + 1);
     $sresult = tng_query($query);
     $numrows = tng_num_rows($sresult);
-    $sourcelinktext = "";
+    $sourcelinktext = '';
     $noneliving = $noneprivate = 1;
     while ($srow = tng_fetch_assoc($sresult)) {
       if ($sourcelinktext) {
@@ -147,16 +147,16 @@ $headSection->setTitle($headtext);
       }
       $sourcelinktext .= "<a href=\"peopleShowPerson.php?personID={$srow['persfamID']}\">";
       $sourcelinktext .= getName($srow);
-      $sourcelinktext .= "</a>";
+      $sourcelinktext .= '</a>';
     }
     if ($srcrow['actualtext']) {
       if ((!$noneliving && !$srcrow['allow_living']) || (!$noneprivate && !$srcrow['allow_private'])) {
         $srcrow['actualtext'] = uiTextSnippet('livingphoto');
       }
-      $sourcetext .= showEvent(["text" => uiTextSnippet('text'), "fact" => $srcrow['actualtext']]);
+      $sourcetext .= showEvent(['text' => uiTextSnippet('text'), 'fact' => $srcrow['actualtext']]);
     }
     if ($numrows > $maxsearchresults) {
-      $sourcelinktext .= "\n[<a href=\"sourcesShowSource.php?sourceID=$sourceID&amp;foffset=$foffset&amp;ioffset=" . ($newioffset + $maxsearchresults) . "\">" . uiTextSnippet('moreind') . "</a>]";
+      $sourcelinktext .= "\n[<a href=\"sourcesShowSource.php?sourceID=$sourceID&amp;foffset=$foffset&amp;ioffset=" . ($newioffset + $maxsearchresults) . "\">" . uiTextSnippet('moreind') . '</a>]';
     }
     tng_free_result($sresult);
 
@@ -178,15 +178,15 @@ $headSection->setTitle($headtext);
       if (!$srow['allow_private']) {
         $noneprivate = 0;
       }
-      $sourcelinktext .= "<a href=\"familiesShowFamily.php?familyID=$srow[familyID]\">" . uiTextSnippet('family') . ": " . getFamilyName($srow) . "</a>";
+      $sourcelinktext .= "<a href=\"familiesShowFamily.php?familyID=$srow[familyID]\">" . uiTextSnippet('family') . ': ' . getFamilyName($srow) . '</a>';
     }
     if ($numrows >= $maxsearchresults) {
-      $sourcelinktext .= "\n[<a href=\"sourcesShowSource.php?sourceID=$sourceID&amp;ioffset=$ioffset&amp;foffset=" . ($newfoffset + $maxsearchresults) . "\">" . uiTextSnippet('morefam') . "</a>]";
+      $sourcelinktext .= "\n[<a href=\"sourcesShowSource.php?sourceID=$sourceID&amp;ioffset=$ioffset&amp;foffset=" . ($newfoffset + $maxsearchresults) . "\">" . uiTextSnippet('morefam') . '</a>]';
     }
     tng_free_result($sresult);
 
     if ($sourcelinktext) {
-      $sourcetext .= showEvent(["text" => uiTextSnippet('indlinked'), "fact" => $sourcelinktext]);
+      $sourcetext .= showEvent(['text' => uiTextSnippet('indlinked'), 'fact' => $sourcelinktext]);
     }
     $sourcetext .= "</table>\n";
     $sourcetext .= "<br>\n";
@@ -198,7 +198,7 @@ $headSection->setTitle($headtext);
       $sourcetext .= $media . "<br>\n";
       $sourcetext .= endListItem('media');
     }
-    $notes = buildNotes($srcnotes, "");
+    $notes = buildNotes($srcnotes, '');
     if ($notes) {
       $sourcetext .= beginListItem('notes');
       $sourcetext .= "<table class='table table-sm'>\n";

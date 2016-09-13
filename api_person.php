@@ -8,7 +8,7 @@ require 'personlib.php';
 require 'api_library.php';
 require 'log.php';
 
-header("Content-Type: application/json; charset=" . $session_charset);
+header('Content-Type: application/json; charset=' . $session_charset);
 
 $query = "SELECT *, DATE_FORMAT(changedate,\"%e %b %Y\") AS changedate FROM $people_table WHERE personID = '$personID'";
 $result = tng_query($query);
@@ -36,4 +36,4 @@ writelog("<a href=\"peopleShowPerson.php?personID=$personID\">" . uiTextSnippet(
 $events = [];
 echo api_person($row, $fullevents);
 
-echo "}";
+echo '}';

@@ -14,13 +14,13 @@ require 'deletelib.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
 $personID = ucfirst($personID);
 
-if ($newperson == "ajax" && $session_charset != "UTF-8") {
+if ($newperson == 'ajax' && $session_charset != 'UTF-8') {
   $firstname = tng_utf8_decode($firstname);
   $lastname = tng_utf8_decode($lastname);
   $lnprefix = tng_utf8_decode($lnprefix);
@@ -62,17 +62,17 @@ $confdatetr = convertDate($confdate);
 $initdatetr = convertDate($initdate);
 $endldatetr = convertDate($endldate);
 
-$newdate = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
+$newdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
 
 $query = "SELECT personID FROM $people_table WHERE personID = '$personID'";
 $result = tng_query($query);
 
 if ($result && tng_num_rows($result)) {
-  if ($newperson == "ajax") {
-    echo "error:" . uiTextSnippet('person') . " $personID " . uiTextSnippet('idexists');
+  if ($newperson == 'ajax') {
+    echo 'error:' . uiTextSnippet('person') . " $personID " . uiTextSnippet('idexists');
   } else {
     $message = uiTextSnippet('person') . " $personID " . uiTextSnippet('idexists');
-    header("Location: peopleBrowse.php?message=" . urlencode($message));
+    header('Location: peopleBrowse.php?message=' . urlencode($message));
   }
   exit;
 }
@@ -151,7 +151,7 @@ foreach ($branchlist as $b) {
 
 adminwritelog("<a href=\"peopleEdit.php?personID=$personID\">" . uiTextSnippet('addnewperson') . ": $personID</a>");
 
-if ($type == "child") {
+if ($type == 'child') {
   if ($familyID) {
     $query = "SELECT personID FROM $children_table WHERE familyID = '$familyID'";
     $result = tng_query($query);
@@ -177,12 +177,12 @@ if ($type == "child") {
   }
 
   if ($row['birthdate']) {
-    $birthdate = uiTextSnippet('birthabbr') . " " . $row['birthdate'];
+    $birthdate = uiTextSnippet('birthabbr') . ' ' . $row['birthdate'];
   } else {
     if ($row['altbirthdate']) {
-      $birthdate = uiTextSnippet('chrabbr') . " " . $row['altbirthdate'];
+      $birthdate = uiTextSnippet('chrabbr') . ' ' . $row['altbirthdate'];
     } else {
-      $birthdate = "";
+      $birthdate = '';
     }
   }
 
@@ -197,17 +197,17 @@ if ($type == "child") {
 
   $rval .= "<div id='unlinkc_$personID' class='small hide-right'>\n";
   $rval .= "<a href='#' onclick=\"return unlinkChild('$personID','child_unlink');\">" . uiTextSnippet('remove') . "</a> &nbsp; | &nbsp; \n";
-  $rval .= "<a href='#' onclick=\"return unlinkChild('$personID','child_delete');\">" . uiTextSnippet('delete') . "</a></div>";
+  $rval .= "<a href='#' onclick=\"return unlinkChild('$personID','child_delete');\">" . uiTextSnippet('delete') . '</a></div>';
   $personlink = getName($row);
-  if ($newperson != "ajax") {
+  if ($newperson != 'ajax') {
     $personlink = "<a href='#' onclick=\"EditChild('$personID');\">$personlink</a>";
   }
   $rval .= "$personlink - $personID<br>$birthdate</div>\n</td>\n</tr>\n</table>\n</div>\n";
   echo $rval;
-} elseif ($type == "spouse") {
-  $name = $session_charset == "UTF-8" ? getName($row) : utf8_encode(getName($row));
+} elseif ($type == 'spouse') {
+  $name = $session_charset == 'UTF-8' ? getName($row) : utf8_encode(getName($row));
   echo "{\"id\":\"{$row['personID']}\",\"name\":\"" . $name . "\"}";
-} elseif ($newperson == "ajax") {
+} elseif ($newperson == 'ajax') {
   echo 1;
 } else {
   header("Location: peopleEdit.php?personID=$personID&added=1");

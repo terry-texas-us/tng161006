@@ -9,7 +9,7 @@ require 'version.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
@@ -19,7 +19,7 @@ $stateresult = tng_query($query);
 $query = "SELECT country FROM $countries_table";
 $countryresult = tng_query($query);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('addnewcemetery'));
 ?>
 <!DOCTYPE html>
@@ -30,9 +30,9 @@ $headSection->setTitle(uiTextSnippet('addnewcemetery'));
     <?php
     echo $adminHeaderSection->build('cemeteries-addnewcemetery', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "cemeteriesBrowse.php", uiTextSnippet('browse'), "findcem"]);
-    //    $navList->appendItem([$allowAdd, "cemeteriesAdd.php", uiTextSnippet('add'), "addcemetery"]);
-    echo $navList->build("addcemetery");
+    $navList->appendItem([true, 'cemeteriesBrowse.php', uiTextSnippet('browse'), 'findcem']);
+    //    $navList->appendItem([$allowAdd, 'cemeteriesAdd.php', uiTextSnippet('add'), 'addcemetery']);
+    echo $navList->build('addcemetery');
     ?>
     <form action="cemeteriesAddFormAction.php" method='post' name='form1' id='form1' ENCTYPE="multipart/form-data" onSubmit="return validateForm();">
       <table class='table table-sm'>
@@ -53,7 +53,7 @@ $headSection->setTitle(uiTextSnippet('addnewcemetery'));
             <input id="maplink" name="maplink" type='text' size='60'>
             <input id="maplink_org" type="hidden">
             <input id="maplink_last" type="hidden"> 
-            <input type='button' value="<?php echo uiTextSnippet('select') . "..."; ?>"
+            <input type='button' value="<?php echo uiTextSnippet('select') . '...'; ?>"
                    onclick="FilePicker('maplink', 'headstones');">
           </td>
         </tr>
@@ -117,7 +117,7 @@ $headSection->setTitle(uiTextSnippet('addnewcemetery'));
               <div style="padding:10px">
                 <?php
                 // draw the map here
-                include "googlemapdrawthemap.php";
+                include 'googlemapdrawthemap.php';
                 ?>
               </div>
             </td>
@@ -167,7 +167,7 @@ $headSection->setTitle(uiTextSnippet('addnewcemetery'));
 <script src='js/cemeteries.js'></script>
 <?php
 if ($map['key']) {
-  include "googlemaplib2.php";
+  include 'googlemaplib2.php';
 }
 ?>
 </body>

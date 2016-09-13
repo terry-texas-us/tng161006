@@ -9,7 +9,7 @@ if ($del) {
   $result = tng_query($query);
 }
 
-if ($session_charset != "UTF-8") {
+if ($session_charset != 'UTF-8') {
   $myplace = tng_utf8_decode($myplace);
 }
 
@@ -23,7 +23,7 @@ if ($temple) {
 $query = "SELECT ID, place, temple, notes FROM $places_table WHERE $allwhere ORDER BY place LIMIT 250";
 $result = tng_query($query);
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <div id='findplaceresdiv'>
   <table class='table table-sm'>
@@ -44,7 +44,7 @@ header("Content-type:text/html; charset=" . $session_charset);
     <?php
     while ($row = tng_fetch_assoc($result)) {
       $row['place'] = str_replace("'", "&#39;", $row['place']);
-      $notes = $row['temple'] && $row['notes'] ? " (" . truncateIt($row['notes'], 75) . ")" : "";
+      $notes = $row['temple'] && $row['notes'] ? ' (' . truncateIt($row['notes'], 75) . ')' : '';
       echo "<tr>\n";
         echo "<td>\n";
           echo "<span>";

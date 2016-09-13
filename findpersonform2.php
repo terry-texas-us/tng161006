@@ -11,7 +11,7 @@ if ($type == "map") {
   $firstfield = "mylastname";
   $subtitle = uiTextSnippet('enternamepart');
 }
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <div id='finddiv'>
   <h4><?php echo uiTextSnippet('findpersonid'); ?></h4>
@@ -19,15 +19,15 @@ header("Content-type:text/html; charset=" . $session_charset);
   <form id='findform1' name='findform1' action='' onsubmit="return openFind(this,'findperson2.php');">
     <span>(<?php echo $subtitle; ?>)</span><br>
 
-    <?php if ($formname == "") {
+    <?php if ($formname == '') {
       $formname = "form1";
     } ?>
     <input name='formname' type='hidden' value="<?php echo $formname; ?>">
-    <?php if ($field == "") {
+    <?php if ($field == '') {
       $field = "personID";
     } ?>
     <input name='field' type='hidden' value="<?php echo $field; ?>">
-    <?php if ($type == "") {
+    <?php if ($type == '') {
       $type = "text";
     } ?>
     <input name='type' type='hidden' value="<?php echo $type; ?>">
@@ -52,7 +52,7 @@ header("Content-type:text/html; charset=" . $session_charset);
     </table>
     <br>
     <input type='submit' value="<?php echo uiTextSnippet('search'); ?>"> 
-    <img id='findspin' src="img/spinner.gif" style="display: none">
+    <img id='findspin' src="img/spinner.gif" style='display: none'>
   </form>
 
 </div>

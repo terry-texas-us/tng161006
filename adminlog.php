@@ -7,16 +7,16 @@ function adminwritelog($string) {
 
   include $subroot . 'logconfig.php';
 
-  $string .= " (" . uiTextSnippet('user') . ": $currentuserdesc)";
+  $string .= ' (' . uiTextSnippet('user') . ": $currentuserdesc)";
 
   $lines = file($adminlogfile);
   if ($adminmaxloglines && sizeof($lines) >= $adminmaxloglines) {
     array_pop($lines);
   }
-  $updated = date("D d M Y h:i:s A", time() + (3600 * $timeOffset));
+  $updated = date('D d M Y h:i:s A', time() + (3600 * $timeOffset));
   array_unshift($lines, "$updated $string.\n");
 
-  $fp = fopen($adminlogfile, "w");
+  $fp = fopen($adminlogfile, 'w');
   if (!$fp) {
     die(uiTextSnippet('cannotopen') . " $adminlogfile");
   }

@@ -8,7 +8,7 @@ require 'version.php';
 
 if (!$allowMediaAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 $treequery = "SELECT gedcom FROM $treesTable";
@@ -21,18 +21,18 @@ while ($treerow = tng_fetch_assoc($treeresult)) {
 }
 tng_free_result($treeresult);
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('addnewmedia'));
 ?>
 <!DOCTYPE html>
 <html>
 <?php echo $headSection->build('', 'admin', $session_charset); ?>
-<body id="media-addnewmedia">
+<body id='media-addnewmedia'>
   <section class='container'>
     <?php
-    $lastcoll = isset($_COOKIE['lastcoll']) ? $_COOKIE['lastcoll'] : "";
+    $lastcoll = isset($_COOKIE['lastcoll']) ? $_COOKIE['lastcoll'] : '';
     $standardtypes = [];
-    $moptions = "";
+    $moptions = '';
     $likearray = "var like = new Array();\n";
     foreach ($mediatypes as $mediatype) {
       if (!$mediatype['type']) {
@@ -41,24 +41,24 @@ $headSection->setTitle(uiTextSnippet('addnewmedia'));
       $msgID = $mediatype['ID'];
       $moptions .= "  <option value=\"$msgID\"";
       if ($lastcoll == $msgID) {
-        $moptions .= " selected";
+        $moptions .= ' selected';
       }
-      $moptions .= ">" . $mediatype['display'] . "</option>\n";
+      $moptions .= '>' . $mediatype['display'] . "</option>\n";
       $likearray .= "like['$msgID'] = '{$mediatype['liketype']}';\n";
     }
-    $sttypestr = implode(",", $standardtypes);
+    $sttypestr = implode(',', $standardtypes);
     ?>
 
     <?php
     echo $adminHeaderSection->build('media-addnewmedia', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "mediaBrowse.php", uiTextSnippet('browse'), "findmedia"]);
-    //    $navList->appendItem([$allowMediaAdd, "mediaAdd.php", uiTextSnippet('add'), "addmedia"]);
-    $navList->appendItem([$allowMediaEdit, "mediaSort.php", uiTextSnippet('text_sort'), "sortmedia"]);
-    $navList->appendItem([$allowMediaEdit, "mediaThumbnails.php", uiTextSnippet('thumbnails'), "thumbs"]);
-    $navList->appendItem([$allowMediaAdd, "mediaImport.php", uiTextSnippet('import'), "import"]);
-    $navList->appendItem([$allowMediaAdd, "mediaUpload.php", uiTextSnippet('upload'), "upload"]);
-    echo $navList->build("addmedia");
+    $navList->appendItem([true, 'mediaBrowse.php', uiTextSnippet('browse'), 'findmedia']);
+    //    $navList->appendItem([$allowMediaAdd, 'mediaAdd.php', uiTextSnippet('add'), 'addmedia']);
+    $navList->appendItem([$allowMediaEdit, 'mediaSort.php', uiTextSnippet('text_sort'), 'sortmedia']);
+    $navList->appendItem([$allowMediaEdit, 'mediaThumbnails.php', uiTextSnippet('thumbnails'), 'thumbs']);
+    $navList->appendItem([$allowMediaAdd, 'mediaImport.php', uiTextSnippet('import'), 'import']);
+    $navList->appendItem([$allowMediaAdd, 'mediaUpload.php', uiTextSnippet('upload'), 'upload']);
+    echo $navList->build('addmedia');
     ?>
     <div class='small'>
       <a href='#' onClick="toggleAll('on');"><?php echo uiTextSnippet('expandall'); ?></a>
@@ -69,7 +69,7 @@ $headSection->setTitle(uiTextSnippet('addnewmedia'));
       <input name='link_personID' type='hidden' value="<?php echo $personID; ?>">
       <input name='link_linktype' type='hidden' value="<?php echo $linktype; ?>">
      
-      <?php echo displayToggle("plus0", 1, "mediafile", uiTextSnippet('imagefile'), uiTextSnippet('uplsel')); ?>
+      <?php echo displayToggle('plus0', 1, 'mediafile', uiTextSnippet('imagefile'), uiTextSnippet('uplsel')); ?>
 
       <div id="mediafile">
         <br>
@@ -80,9 +80,9 @@ $headSection->setTitle(uiTextSnippet('addnewmedia'));
         <?php if ($allowAdd && $allowEdit && $allowDelete) { ?>
           <input name='addnewmediatype' type='button' value="<?php echo uiTextSnippet('addnewcoll'); ?>"
                  onclick="tnglitbox = new ModalDialog('admin_newcollection.php?field=mediatypeID');">
-          <input id='editmediatype' name='editmediatype' type='button' value="<?php echo uiTextSnippet('edit'); ?>" style="display: none"
+          <input id='editmediatype' name='editmediatype' type='button' value="<?php echo uiTextSnippet('edit'); ?>" style='display: none'
                  onclick="editMediatype(document.form1.mediatypeID);">
-          <input id='delmediatype' name='delmediatype' type='button' value="<?php echo uiTextSnippet('delete'); ?>" style="display: none"
+          <input id='delmediatype' name='delmediatype' type='button' value="<?php echo uiTextSnippet('delete'); ?>" style='display: none'
                  onclick="confirmDeleteMediatype(document.form1.mediatypeID);">
         <?php } ?>
         <br>
@@ -100,7 +100,7 @@ $headSection->setTitle(uiTextSnippet('addnewmedia'));
             <input id='path' name='path' type='text' size='60'>
             <input id='path_org' type="hidden">
             <input id='path_last' type="hidden"> 
-            <input name='photoselect' type='button' value="<?php echo uiTextSnippet('select') . "..."; ?>"
+            <input name='photoselect' type='button' value="<?php echo uiTextSnippet('select') . '...'; ?>"
                    onclick="javascript:FilePicker('path', document.form1.mediatypeID.options[document.form1.mediatypeID.selectedIndex].value);">
           </div>
         </div>
@@ -117,7 +117,7 @@ $headSection->setTitle(uiTextSnippet('addnewmedia'));
             <textarea class='form-control' id='bodytext' name='bodytext' wrap='soft'></textarea>
           </div>
         </div>
-        <?php if (function_exists("imageJpeg")) { ?>
+        <?php if (function_exists('imageJpeg')) { ?>
           <div class='row'>
             <div class='col-sm-12'>
               <span><strong><br><?php echo uiTextSnippet('thumbnailfile'); ?></strong></span>
@@ -150,7 +150,7 @@ $headSection->setTitle(uiTextSnippet('addnewmedia'));
             <input id='thumbpath' name='thumbpath' type='text' size='60'>
             <input id='thumbpath_org' type='hidden'>
             <input id='thumbpath_last' type='hidden'>
-            <input name='thumbselect' type='button' value="<?php echo uiTextSnippet('select') . "..."; ?>"
+            <input name='thumbselect' type='button' value="<?php echo uiTextSnippet('select') . '...'; ?>"
                    onClick="javascript:FilePicker('thumbpath', document.form1.mediatypeID.options[document.form1.mediatypeID.selectedIndex].value);">
           </div>
         </div>
@@ -177,13 +177,13 @@ $headSection->setTitle(uiTextSnippet('addnewmedia'));
         </div>
         <p class="small">
           <?php
-          echo "*" . uiTextSnippet('leaveblankphoto') . "<br>\n";
-          echo "**" . uiTextSnippet('requiredphoto') . "\n";
+          echo '*' . uiTextSnippet('leaveblankphoto') . "<br>\n";
+          echo '**' . uiTextSnippet('requiredphoto') . "\n";
           ?>
         </p>
       </div>
 
-      <?php echo displayToggle("plus1", 1, "details", uiTextSnippet('newmediainfo'), uiTextSnippet('minfosubt')); ?>
+      <?php echo displayToggle('plus1', 1, 'details', uiTextSnippet('newmediainfo'), uiTextSnippet('minfosubt')); ?>
 
       <div id="details">
         <br>
@@ -218,7 +218,7 @@ $headSection->setTitle(uiTextSnippet('addnewmedia'));
             <div id="cemchoice">
               <a href="#" onclick="return toggleCemSelect();"><?php echo uiTextSnippet('select'); ?></a>
             </div>
-            <div id="cemselect" style="display: none">
+            <div id="cemselect" style='display: none'>
               <select name='cemeteryID'>
                 <option selected></option>
                 <?php
@@ -302,8 +302,8 @@ for ($i = 1; $i <= $treenum; $i++) {
 <?php echo $likearray; ?>
   var linkcount = 1;
   var stmediatypes = new Array(<?php echo $sttypestr; ?>);
-  var allow_edit = <?php echo($allowEdit ? "1" : "0"); ?>;
-  var allow_delete = <?php echo($allowDelete ? "1" : "0"); ?>;
+  var allow_edit = <?php echo($allowEdit ? '1' : '0'); ?>;
+  var allow_delete = <?php echo($allowDelete ? '1' : '0'); ?>;
 
   function validateForm() {
     var rval = true;
@@ -311,7 +311,7 @@ for ($i = 1; $i <= $treenum; $i++) {
     var frm = document.form1;
    
     var selectedType = frm.mediatypeID.options[frm.mediatypeID.selectedIndex].value;
-    if (frm.path.value.length === 0 && frm.mediaurl.value.length === 0 && like[selectedType] !== "histories" && frm.mediatypeID.options[frm.mediatypeID.selectedIndex].value !== "headstones") {
+    if (frm.path.value.length === 0 && frm.mediaurl.value.length === 0 && like[selectedType] !== "histories" && frm.mediatypeID.options[frm.mediatypeID.selectedIndex].value !== 'headstones') {
       alert(textSnippet('enterphotopath'));
       rval = false;
     } else if (frm.thumbpath.value.length === 0 && frm.thumbcreate[1].checked === true) {
@@ -342,7 +342,7 @@ for ($i = 1; $i <= $treenum; $i++) {
     return rval;
   }
 
-  var gsControlName = "";
+  var gsControlName = '';
 
   function toggleAll(display) {
     toggleSection('mediafile', 'plus0', display);
@@ -351,7 +351,7 @@ for ($i = 1; $i <= $treenum; $i++) {
   }
 </script>
 <script>
-  var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;
+  var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : 'false'); ?>;
   var preferDateFormat = '<?php echo $preferDateFormat; ?>';
   switchOnType(document.form1.mediatypeID.options[document.form1.mediatypeID.selectedIndex].value);
 </script>

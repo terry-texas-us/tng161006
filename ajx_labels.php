@@ -11,7 +11,7 @@ require 'deletelib.php';
 
 if ($assignedbranch) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 set_time_limit(0);
@@ -26,7 +26,7 @@ $wifegender['spouseorder'] = 'wifeorder';
 
 $counter = $fcounter = 0;
 $done = $fdone = [];
-$names = $famnames = "";
+$names = $famnames = '';
 
 function getGender($personID) {
   global $people_table;
@@ -44,9 +44,9 @@ function getGender($personID) {
       if ($row['sex'] == 'F') {
         $info = $wifegender;
       } else {
-        $info['spouse'] = "";
-        $info['self'] = "";
-        $info['spouseorder'] = "";
+        $info['spouse'] = '';
+        $info['self'] = '';
+        $info['spouseorder'] = '';
       }
     }
     $info['firstname'] = $row['firstname'];
@@ -66,8 +66,8 @@ function clearBranch($table, $branch) {
   while ($row = tng_fetch_assoc($result)) {
     $oldbranch = trim($row['branch']);
 
-    $newbranch = "";
-    $oldbranches = explode(",", $oldbranch);
+    $newbranch = '';
+    $oldbranches = explode(',', $oldbranch);
     foreach ($oldbranches as $tempbranch) {
       if ($tempbranch != $branch) {
         $newbranch .= $newbranch ? ",$tempbranch" : $tempbranch;
@@ -91,7 +91,7 @@ function deleteBranch($table, $branch) {
     $query = "SELECT ID, personID, branch, sex FROM $table WHERE branch LIKE \"%$branch%\"";
     $result = tng_query($query);
     while ($row = tng_fetch_assoc($result)) {
-      $branches = explode(",", trim($row['branch']));
+      $branches = explode(',', trim($row['branch']));
       if (in_array($branch, $branches)) {
         deletePersonPlus($row['personID'], $row['sex']);
         $query = "DELETE FROM $table WHERE ID=\"{$row['ID']}\"";
@@ -104,7 +104,7 @@ function deleteBranch($table, $branch) {
     $query = "SELECT ID, familyID, branch FROM $table WHERE branch LIKE \"%$branch%\"";
     $result = tng_query($query);
     while ($row = tng_fetch_assoc($result)) {
-      $branches = explode(",", trim($row['branch']));
+      $branches = explode(',', trim($row['branch']));
       if (in_array($branch, $branches)) {
         $familyID = $row['familyID'];
         $query = "DELETE FROM $children_table WHERE ID = '$familyID'";
@@ -141,8 +141,8 @@ function setPersonLabel($personID) {
   global $names;
 
   if ($personID) {
-    $row = "";
-    if ($branchaction == "delete") {
+    $row = '';
+    if ($branchaction == 'delete') {
       $query = "SELECT firstname, lastname, lnprefix, nameorder, living, private, suffix, title, sex FROM $people_table WHERE personID = '$personID'";
       $result = tng_query($query);
       $row = tng_fetch_assoc($result);
@@ -160,11 +160,11 @@ function setPersonLabel($personID) {
       $row = tng_fetch_assoc($result);
       tng_free_result($result);
 
-      if ($branch && ($overwrite != 1 || $branchaction == "clear")) { //append or leave
+      if ($branch && ($overwrite != 1 || $branchaction == 'clear')) { //append or leave
         //appending, so get current value first
         $oldbranch = trim($row['branch']);
-        if ($oldbranch && ($overwrite == 2 || $branchaction == "clear")) {
-          $oldbranches = explode(",", $oldbranch);
+        if ($oldbranch && ($overwrite == 2 || $branchaction == 'clear')) {
+          $oldbranches = explode(',', $oldbranch);
           if ($overwrite == 2) {
             if (!in_array($branch, $oldbranches)) {
               $newbranch = "$oldbranch,$branch";
@@ -183,7 +183,7 @@ function setPersonLabel($personID) {
         }
       } else {
         $newbranch = $branch;
-        $oldbranch = "";
+        $oldbranch = '';
       }
 
       if ($overwrite || !$oldbranch) {
@@ -200,7 +200,7 @@ function setPersonLabel($personID) {
       $names .= "<a href=\"peopleEdit.php?personID={$personID}&amp;cw=1\" target='_blank'>" . getName($row) . " ($personID)</a><br>\n";
     }
 
-    if ($branchaction == "clear" || $branchaction == "delete") {
+    if ($branchaction == 'clear' || $branchaction == 'delete') {
       $query = "DELETE FROM $branchlinks_table WHERE persfamID = '$personID' AND branch = '$branch'";
       tng_query($query);
     } else {
@@ -246,7 +246,7 @@ function setFamilyLabel($personID, $gender) {
       if (!in_array($row['familyID'], $fdone)) {
         $famnames .= "<a href=\"familiesEdit.php?familyID={$row['familyID']}&amp;cw=1\" target='_blank'>" . getFamilyName($row) . "</a><br>\n";
       }
-      if ($branchaction == "delete") {
+      if ($branchaction == 'delete') {
         $query = "DELETE FROM $families_table WHERE familyID = \"{$row['familyID']}\"";
         tng_query($query);
 
@@ -265,8 +265,8 @@ function setFamilyLabel($personID, $gender) {
         deleteAlbumLinks($familyID);
         doFCounter();
       } elseif (!in_array($row['familyID'], $fdone)) {
-        if ($branch && $oldbranch && ($overwrite == 2 || $branchaction == "clear")) {
-          $oldbranches = explode(",", $oldbranch);
+        if ($branch && $oldbranch && ($overwrite == 2 || $branchaction == 'clear')) {
+          $oldbranches = explode(',', $oldbranch);
           if ($overwrite == 2) {
             if (!in_array($branch, $oldbranches)) {
               $newbranch = "$oldbranch,$branch";
@@ -293,7 +293,7 @@ function setFamilyLabel($personID, $gender) {
         array_push($fdone, $row['familyID']);
       }
 
-      if ($branchaction == "clear" || $branchaction == "delete") {
+      if ($branchaction == 'clear' || $branchaction == 'delete') {
         $query = "DELETE FROM $branchlinks_table WHERE persfamID = \"{$row['familyID']}\" AND branch = '$branch'";
         tng_query($query);
       } else {
@@ -397,24 +397,24 @@ function doDescendants($personID, $gender, $gen, $maxgen) {
   tng_free_result($spouseresult);
 }
 
-if ($branchaction == "clear") {
+if ($branchaction == 'clear') {
   $branchtitle = uiTextSnippet('clearingbranch');
-  //$branchclause = $set == "all" ? "" : " AND branch = \"$branch\"";
-  //$branch = "";
+  //$branchclause = $set == "all" ? '' : " AND branch = \"$branch\"";
+  //$branch = '';
   $overwrite = 1;
-} elseif ($branchaction == "delete") {
-  $branchtitle = "DELETING BRANCH";
+} elseif ($branchaction == 'delete') {
+  $branchtitle = 'DELETING BRANCH';
   $overwrite = 0;
 } else {
   $branchtitle = uiTextSnippet('addingbranch');
-  $branchclause = $overwrite ? "" : " AND branch = \"\"";
+  $branchclause = $overwrite ? '' : " AND branch = \"\"";
 }
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 echo "<p><strong>$branchtitle</strong></p>";
 
-if ($set == "all") {
+if ($set == 'all') {
   //all only works for deleting
-  if ($branchaction == "clear") {
+  if ($branchaction == 'clear') {
     $counter = clearBranch($people_table, $branch);
     $fcounter = clearBranch($families_table, $branch);
   } else {    //deleting
@@ -442,7 +442,7 @@ if ($set == "all") {
     doDescendants($personID, $gender, 1, $dgens);
   }
 }
-echo "<p>" . uiTextSnippet('totalaffected') . ": $counter " . uiTextSnippet('people') . ", $fcounter " . uiTextSnippet('families') . ".</p>\n";
+echo '<p>' . uiTextSnippet('totalaffected') . ": $counter " . uiTextSnippet('people') . ", $fcounter " . uiTextSnippet('families') . ".</p>\n";
 echo "<p>$names</p>\n";
 echo "<p>$famnames</p>\n";
 

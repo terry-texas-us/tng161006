@@ -28,7 +28,7 @@ class HeadElementSection {
     if ($id === 'admin') {
       $this->out .= "<meta name=\"robots\" content=\"noindex,nofollow\">\n";
       
-      $usesitename = $siteName ? stripslashes($siteName) . ": " : "";
+      $usesitename = $siteName ? stripslashes($siteName) . ': ' : '';
       $this->out .= "<title>$usesitename" . "$this->title</title>\n";
 
       initMediaTypes();
@@ -39,7 +39,7 @@ class HeadElementSection {
       if (isset($flags['norobots'])) {
         $this->out .= $flags['norobots'];
       }
-      $siteprefix = $siteName ? htmlspecialchars($this->title ? ": " . $siteName : $siteName, ENT_QUOTES, $sessionCharset) : "";
+      $siteprefix = $siteName ? htmlspecialchars($this->title ? ': ' . $siteName : $siteName, ENT_QUOTES, $sessionCharset) : '';
       $title = htmlspecialchars($this->title, ENT_QUOTES, $sessionCharset);
       $this->out .= "<title>$title$siteprefix</title>\n";
 

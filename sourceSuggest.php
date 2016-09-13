@@ -26,11 +26,11 @@ $row['allow_private'] = $rights['private'];
 tng_free_result($sresult);
 
 $name = uiTextSnippet('source') . ": {$row['title']} ($ID)";
-$years = "";
+$years = '';
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 
 $headTitle = uiTextSnippet('suggestchange') . ": $name";
 $headSection->setTitle($headTitle);

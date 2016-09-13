@@ -3,7 +3,7 @@ require 'tng_begin.php';
 
 require 'functions.php';
 
-$logstring = "<a href='mostwanted.php'>" . xmlcharacters(uiTextSnippet('mostwanted')) . "</a>";
+$logstring = "<a href='mostwanted.php'>" . xmlcharacters(uiTextSnippet('mostwanted')) . '</a>';
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -31,7 +31,7 @@ function showDivs($type) {
     $mediatypeID = $row['mediatypeID'];
     $usefolder = $row['usecollfolder'] ? $mediatypes_assoc[$mediatypeID] : $mediapath;
     $row['allow_living'] = 1;
-    $imgsrc = $row['mediaID'] ? getSmallPhoto($row) : "";
+    $imgsrc = $row['mediaID'] ? getSmallPhoto($row) : '';
 
     $mediatext .= "<tr><td>\n";
     $href = getMediaHREF($row, 0);
@@ -49,23 +49,23 @@ function showDivs($type) {
     $mediatext .= "<div style=\"margin:0;\">{$row['mwdesc']}</div>";
 
     $mediatext .= "<div class=\"mwperson\">\n";
-    if ($type == "person") {
+    if ($type == 'person') {
       if ($row['personID']) {
-        $mediatext .= "<a href=\"personSuggest.php?&amp;ID={$row['personID']}\">" . uiTextSnippet('tellus') . "</a>";
+        $mediatext .= "<a href=\"personSuggest.php?&amp;ID={$row['personID']}\">" . uiTextSnippet('tellus') . '</a>';
 
         $rights = determineLivingPrivateRights($row);
         $row['allow_living'] = $rights['living'];
         $row['allow_private'] = $rights['private'];
 
         $name = getName($row);
-        $mediatext .= " &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; " . uiTextSnippet('moreinfo') . " <a href=\"peopleShowPerson.php?personID={$row['personID']}\">$name</a>";
+        $mediatext .= ' &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; ' . uiTextSnippet('moreinfo') . " <a href=\"peopleShowPerson.php?personID={$row['personID']}\">$name</a>";
       } else {
-        $mediatext .= "<a href=\"contactUs.php?page=" . uiTextSnippet('mostwanted') . ":+{$row['mwtitle']}\">" . uiTextSnippet('tellus') . "</a>";
+        $mediatext .= "<a href=\"contactUs.php?page=" . uiTextSnippet('mostwanted') . ":+{$row['mwtitle']}\">" . uiTextSnippet('tellus') . '</a>';
       }
     }
-    if ($type == "photo" && $row['mediaID']) {
-      $mediatext .= "<a href=\"contactUs.php?page=" . uiTextSnippet('mostwanted') . ":+{$row['mtitle']}\">" . uiTextSnippet('tellus') . "</a>";
-      $mediatext .= " &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; " . uiTextSnippet('moreinfo') . " <a href=\"$href\">{$row['mtitle']}</a> &nbsp;&nbsp;&nbsp;";
+    if ($type == 'photo' && $row['mediaID']) {
+      $mediatext .= "<a href=\"contactUs.php?page=" . uiTextSnippet('mostwanted') . ":+{$row['mtitle']}\">" . uiTextSnippet('tellus') . '</a>';
+      $mediatext .= ' &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; ' . uiTextSnippet('moreinfo') . " <a href=\"$href\">{$row['mtitle']}</a> &nbsp;&nbsp;&nbsp;";
     }
     $mediatext .= "</div>\n";
     $mediatext .= "</td></tr>\n";
@@ -78,12 +78,12 @@ function showDivs($type) {
   return $mediatext;
 }
 
-$flags = "";
+$flags = '';
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('mostwanted'));
 ?>
 <!DOCTYPE html>
@@ -99,15 +99,15 @@ $headSection->setTitle(uiTextSnippet('mostwanted'));
     <?php
 
     echo "<div class=\"titlebox mwblock\">\n";
-    echo "<h4>&nbsp;" . uiTextSnippet('mysperson') . "</h4>\n";
-    echo showDivs("person");
+    echo '<h4>' . uiTextSnippet('mysperson') . '</h4>';
+    echo showDivs('person');
     echo "</div>\n";
 
     echo "<br>\n";
 
     echo "<div class=\"titlebox mwblock\">\n";
-    echo "<h4>&nbsp;" . uiTextSnippet('mysphoto') . "</h4>\n";
-    echo showDivs("photo");
+    echo '<h4>' . uiTextSnippet('mysphoto') . '</h4>';
+    echo showDivs('photo');
     echo "</div>\n";
     ?>
     <?php echo $publicFooterSection->build(); ?>

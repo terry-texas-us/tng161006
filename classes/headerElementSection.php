@@ -3,11 +3,11 @@
 class HeaderElementSection {
 
   protected $out;
-  protected $id = "admin";
-  protected $title = "Title";
-  protected $subtitle = "";
-  protected $imageUrl = "";
-  protected $version = "1.0.0";
+  protected $id = 'admin';
+  protected $title = 'Title';
+  protected $subtitle = '';
+  protected $imageUrl = '';
+  protected $version = '0.09';
 
   protected $data = [];
 

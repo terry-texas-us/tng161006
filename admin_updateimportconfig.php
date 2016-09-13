@@ -4,7 +4,7 @@ require 'begin.php';
 require 'adminlib.php';
 
 if (!count($_POST)) {
-  header("Location: admin.php");
+  header('Location: admin.php');
   exit;
 }
 if ($link) {
@@ -12,15 +12,15 @@ if ($link) {
 
   if (!$allowEdit) {
     $message = uiTextSnippet('norights');
-    header("Location: admin_login.php?message=" . urlencode($message));
+    header('Location: admin_login.php?message=' . urlencode($message));
     exit;
   }
 }
 require 'adminlog.php';
 
-$fp = fopen($subroot . "importconfig.php", "w", 1);
+$fp = fopen($subroot . 'importconfig.php', 'w', 1);
 if (!$fp) {
-  die(uiTextSnippet('cannotopen') . " importconfig.php");
+  die(uiTextSnippet('cannotopen') . ' importconfig.php');
 }
 $localphotopathdisplay = addslashes($localphotopathdisplay);
 $localhistorypathdisplay = addslashes($localhistorypathdisplay);
@@ -54,4 +54,4 @@ fclose($fp);
 
 adminwritelog(uiTextSnippet('modifyimportsettings'));
 
-header("Location: admin_setup.php");
+header('Location: admin_setup.php');

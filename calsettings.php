@@ -2,7 +2,7 @@
 
 /* Make sure we're running under TNG */
 if (!isset($tngconfig)) {
-  die ("Sorry!");
+  die('Sorry!');
 }
 
 

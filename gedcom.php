@@ -55,8 +55,8 @@ function getCitations($persfamID) {
   $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
   while ($cite = tng_fetch_assoc($citresult)) {
-    $eventID = $cite['eventID'] ? $cite['eventID'] : "-x--general--x-";
-    $citations[$eventID][] = ["page" => $cite['page'], "quay" => $cite['quay'], "citedate" => $cite['citedate'], "citetext" => $cite['citetext'], "note" => $cite['note'], "sourceID" => $cite['sourceID'], "description" => $cite['description']];
+    $eventID = $cite['eventID'] ? $cite['eventID'] : '-x--general--x-';
+    $citations[$eventID][] = ['page' => $cite['page'], 'quay' => $cite['quay'], 'citedate' => $cite['citedate'], 'citetext' => $cite['citetext'], 'note' => $cite['note'], 'sourceID' => $cite['sourceID'], 'description' => $cite['description']];
   }
   return $citations;
 }
@@ -66,7 +66,7 @@ function writeCitation($citelist, $level) {
   global $lineending;
 
   $levelplus1 = $level + 1;
-  $citestr = "";
+  $citestr = '';
 
   $citecount = count($citelist);
   if ($citecount) {
@@ -81,23 +81,23 @@ function writeCitation($citelist, $level) {
             $citestr .= "$levelplus2 DATE {$cite['citedate']}$lineending";
           }
           if ($cite['citetext']) {
-            $citestr .= doNote($levelplus2, "TEXT", $cite['citetext']);
+            $citestr .= doNote($levelplus2, 'TEXT', $cite['citetext']);
           }
         }
       } else {
         $citestr = "$level SOUR {$cite['description']}$lineending";
         if ($cite['citetext']) {
-          $citestr .= doNote($levelplus1, "TEXT", $cite['citetext']);
+          $citestr .= doNote($levelplus1, 'TEXT', $cite['citetext']);
         }
       }
       if ($cite['page']) {
-        $citestr .= doNote($levelplus1, "PAGE", $cite['page']);
+        $citestr .= doNote($levelplus1, 'PAGE', $cite['page']);
       }
-      if ($cite['quay'] && $cite['quay'] != "0") {
+      if ($cite['quay'] && $cite['quay'] != '0') {
         $citestr .= "$levelplus1 QUAY {$cite['quay']}$lineending";
       }
       if ($cite['note']) {
-        $citestr .= doNote($levelplus1, "NOTE", $cite['note']);
+        $citestr .= doNote($levelplus1, 'NOTE', $cite['note']);
       }
     }
   }
@@ -109,7 +109,7 @@ function getFact($row, $level) {
   global $address_table;
   global $lineending;
 
-  $fact = "";
+  $fact = '';
   if ($row['age']) {
     $fact .= "$level AGE {$row['age']}$lineending";
   }
@@ -123,7 +123,7 @@ function getFact($row, $level) {
     $query = "SELECT address1, address2, city, state, zip, country, phone, www, email FROM $address_table WHERE addressID = \"{$row['addressID']}\"";
     $addrresults = tng_query($query);
     $addr = tng_fetch_assoc($addrresults);
-    if ($row['tag'] != "ADDR") {
+    if ($row['tag'] != 'ADDR') {
       $fact .= "$level ADDR$lineending";
       $level++;
     }
@@ -174,7 +174,7 @@ function doEvent($custevent, $level) {
   global $lineending;
 
   $infolen = strlen($custevent['info']);
-  if ($custevent['tag'] != "EVEN" || $infolen < 150) {
+  if ($custevent['tag'] != 'EVEN' || $infolen < 150) {
     $info = doNote($level, $custevent['tag'], $custevent['info']);
   } else {
     $info = "$level " . $custevent['tag'] . $lineending;
@@ -189,8 +189,8 @@ function doEvent($custevent, $level) {
   if ($custevent['eventplace']) {
     $info .= "2 PLAC {$custevent['eventplace']}$lineending";
   }
-  if ($custevent['tag'] == "EVEN" && $infolen >= 150) {
-    $info .= doNote($nextlevel, "NOTE", $custevent['info']);
+  if ($custevent['tag'] == 'EVEN' && $infolen >= 150) {
+    $info .= doNote($nextlevel, 'NOTE', $custevent['info']);
   }
 
   return $info;
@@ -211,7 +211,7 @@ function getNotes($id) {
   $notelinks = tng_query($query);
   $notearray = [];
   while ($notelink = tng_fetch_assoc($notelinks)) {
-    $eventid = $notelink['eventID'] ? $notelink['eventID'] : "-x--general--x-";
+    $eventid = $notelink['eventID'] ? $notelink['eventID'] : '-x--general--x-';
     $newnote = $notelink['noteID'] ? "@{$notelink['noteID']}@" : $notelink['note'];
     if (!is_array($notearray[$eventid])) {
       $notearray[$eventid] = [];
@@ -235,19 +235,19 @@ function getNotes($id) {
 function getNoteLine($level, $label, $note, $delta) {
   global $lineending, $session_charset; // added $session_charset to fix UTF-8 problem
 
-  $noteconc = "";
+  $noteconc = '';
   $notelen = strlen($note);
   if ($notelen > 245) {
     $orgnote = trim($note);
     $offset = 245;
-    if ($session_charset == "UTF-8" && function_exists(mb_substr)) {
-      while (mb_substr($orgnote, $offset, 1, 'UTF-8') == " " || mb_substr($orgnote, $offset - 1, 1, 'UTF-8') == " ") {
+    if ($session_charset == 'UTF-8' && function_exists(mb_substr)) {
+      while (mb_substr($orgnote, $offset, 1, 'UTF-8') == ' ' || mb_substr($orgnote, $offset - 1, 1, 'UTF-8') == ' ') {
         $offset--;
       }
       $note = mb_substr($note, 0, $offset, 'UTF-8');
     } else {
 
-      while (substr($orgnote, $offset, 1) == " " || substr($orgnote, $offset - 1, 1) == " ") {
+      while (substr($orgnote, $offset, 1) == ' ' || substr($orgnote, $offset - 1, 1) == ' ') {
         $offset--;
       }
       $note = substr($note, 0, $offset);   // moved line above close - R�al
@@ -257,13 +257,13 @@ function getNoteLine($level, $label, $note, $delta) {
     $newlevel = $level + $delta;
     while ($offset < $notelen) {
       $endnext = 245;
-      if ($session_charset == "UTF-8" && function_exists(mb_substr)) {
-        while (mb_substr($orgnote, $offset + $endnext, 1, 'UTF-8') == " " || mb_substr($orgnote, $offset + $endnext - 1, 1, 'UTF-8') == " ") {
+      if ($session_charset == 'UTF-8' && function_exists(mb_substr)) {
+        while (mb_substr($orgnote, $offset + $endnext, 1, 'UTF-8') == ' ' || mb_substr($orgnote, $offset + $endnext - 1, 1, 'UTF-8') == ' ') {
           $offset--;
         }
         $nextpart = trim(mb_substr($orgnote, $offset, $endnext, 'UTF-8'), $lineending);
       } else {
-        while (substr($orgnote, $offset + $endnext, 1) == " " || substr($orgnote, $offset + $endnext - 1, 1) == " ") {
+        while (substr($orgnote, $offset + $endnext, 1) == ' ' || substr($orgnote, $offset + $endnext - 1, 1) == ' ') {
           $endnext--;
         }
         $nextpart = trim(substr($orgnote, $offset, $endnext), $lineending);
@@ -276,11 +276,11 @@ function getNoteLine($level, $label, $note, $delta) {
   return trim("$level $label $note") . "$lineending$noteconc";
 }
 
-function doNote($level, $label, $notetxt, $private = "") {
-  $noteinfo = "";
-  $notetxt = str_replace("\r", "", $notetxt);
+function doNote($level, $label, $notetxt, $private = '') {
+  $noteinfo = '';
+  $notetxt = str_replace("\r", '', $notetxt);
   if (!preg_match('/^@.+@$/', $notetxt)) {
-    $notetxt = str_replace("@", "@@", $notetxt);
+    $notetxt = str_replace('@', '@@', $notetxt);
   }
   $notes = is_string($notetxt) ? preg_split('/\r\n|\n/', $notetxt) : [];
   if ($level) {
@@ -289,10 +289,10 @@ function doNote($level, $label, $notetxt, $private = "") {
   }
   $level++;
   foreach ($notes as $note) {
-    $noteinfo .= getNoteLine($level, "CONT", $note, 0);
+    $noteinfo .= getNoteLine($level, 'CONT', $note, 0);
   }
   if ($private) {
-    $noteinfo .= getNoteLine($level, "_PRIVATE", "Y", 0);
+    $noteinfo .= getNoteLine($level, '_PRIVATE', 'Y', 0);
   }
 
   return $noteinfo;
@@ -301,7 +301,7 @@ function doNote($level, $label, $notetxt, $private = "") {
 function writeNote($level, $label, $notes) {
   global $citations;
 
-  $noteinfo = "";
+  $noteinfo = '';
   if (is_array($notes)) {
     foreach ($notes as $notearray) {
       $noteinfo .= doNote($level, $label, $notearray['text'], $notearray['private']);
@@ -323,7 +323,7 @@ function doXNotes() {
       $xnotearray = tng_query($query);
       $xnotetxt = tng_fetch_assoc($xnotearray);
       echo "0 @$xnote@ NOTE$lineending";
-      echo doNote(0, "NOTE", $xnotetxt['note']);
+      echo doNote(0, 'NOTE', $xnotetxt['note']);
 
       tng_free_result($xnotearray);
     }
@@ -426,7 +426,7 @@ function appendParents($child) {
   global $lineending;
   global $indarray;
 
-  $info = "";
+  $info = '';
   if (!strstr($indarray[$child['personID']], "1 FAMC @{$child['familyID']}@")) {
     $info = "1 FAMC @{$child['familyID']}@$lineending";
   }
@@ -445,10 +445,10 @@ function appendParents($child) {
           $info .= "2 DATE {$child['sealdate']}$lineending";
         }
         if ($child['sealplace']) {
-          $tok = strtok($child['sealplace'], " ");
+          $tok = strtok($child['sealplace'], ' ');
           if (strlen($tok) == 5) {
             $info .= "2 TEMP $tok$lineending";
-            $tok = strtok(" ");
+            $tok = strtok(' ');
             if ($tok) {
               $info .= "2 PLAC $tok$lineending";
             }
@@ -457,7 +457,7 @@ function appendParents($child) {
           }
         }
         if ($childnotes['SLGC']) {
-          $info .= writeNote(2, "NOTE", $childnotes['SLGC']);
+          $info .= writeNote(2, 'NOTE', $childnotes['SLGC']);
         }
         if ($citations['SLGC']) {
           $info .= writeCitation($citations['SLGC'], 2);
@@ -500,7 +500,7 @@ function writeIndividual($person) {
 
     $info = "0 @$person@ INDI$lineending";
     if ($rights['both']) {
-      $info .= "1 NAME {$ind['firstname']} /" . trim($ind['lnprefix'] . " " . $ind['lastname']) . "/";
+      $info .= "1 NAME {$ind['firstname']} /" . trim($ind['lnprefix'] . ' ' . $ind['lastname']) . '/';
       $info .= $ind['suffix'] ? " {$ind['suffix']}$lineending" : $lineending;
       if ($ind['firstname']) {
         $info .= "2 GIVN {$ind['firstname']}$lineending";
@@ -513,24 +513,24 @@ function writeIndividual($person) {
       }
 
       if ($indnotes['NAME']) {
-        $info .= writeNote(2, "NOTE", $indnotes['NAME']);
+        $info .= writeNote(2, 'NOTE', $indnotes['NAME']);
       }
       if ($ind['prefix']) {
         $info .= "2 NPFX {$ind['prefix']}$lineending";
         if ($indnotes['NPFX']) {
-          $info .= writeNote(3, "NOTE", $indnotes['NPFX']);
+          $info .= writeNote(3, 'NOTE', $indnotes['NPFX']);
         }
       }
       if ($ind['suffix']) {
         $info .= "2 NSFX {$ind['suffix']}$lineending";
         if ($indnotes['NSFX']) {
-          $info .= writeNote(3, "NOTE", $indnotes['NSFX']);
+          $info .= writeNote(3, 'NOTE', $indnotes['NSFX']);
         }
       }
       if ($ind['nickname']) {
         $info .= "2 NICK {$ind['nickname']}$lineending";
         if ($indnotes['NICK']) {
-          $info .= writeNote(3, "NOTE", $indnotes['NICK']);
+          $info .= writeNote(3, 'NOTE', $indnotes['NICK']);
         }
       }
       if ($citations['NAME']) {
@@ -539,7 +539,7 @@ function writeIndividual($person) {
       if ($ind['title']) {
         $info .= "1 TITL {$ind['title']}$lineending";
         if ($indnotes['TITL']) {
-          $info .= writeNote(2, "NOTE", $indnotes['TITL']);
+          $info .= writeNote(2, 'NOTE', $indnotes['TITL']);
         }
       }
       $info .= "1 SEX {$ind['sex']}$lineending";
@@ -553,16 +553,16 @@ function writeIndividual($person) {
         $info .= writeCitation($citations['-x--general--x-'], 1);
       }
     } elseif (showNames($ind) == 2) {
-      $info .= "1 NAME " . initials($ind['firstname']) . " /" . trim($ind['lnprefix'] . " " . $ind['lastname']) . "/$lineending";
+      $info .= '1 NAME ' . initials($ind['firstname']) . " /" . trim($ind['lnprefix'] . ' ' . $ind['lastname']) . "/$lineending";
     } elseif ($ind['private']) {
-      $info .= "1 NAME " . uiTextSnippet('private') . " //$lineending";
+      $info .= '1 NAME ' . uiTextSnippet('private') . " //$lineending";
     } else {
-      $info .= "1 NAME " . uiTextSnippet('living') . " //$lineending";
+      $info .= '1 NAME ' . uiTextSnippet('living') . " //$lineending";
     }
 
     if ($rights['both']) {
       if ($ind['birthdate'] || $ind['birthplace'] || $indnotes['BIRT'] || $citations['BIRT'] || $extras['BIRT']) {
-        if ($ind['birthdate'] == "Y" || (!$ind['birthdate'] && !$ind['birthplace'])) {
+        if ($ind['birthdate'] == 'Y' || (!$ind['birthdate'] && !$ind['birthplace'])) {
           $info .= "1 BIRT Y$lineending";
         } else {
           $info .= "1 BIRT$lineending";
@@ -574,7 +574,7 @@ function writeIndividual($person) {
           }
         }
         if ($indnotes['BIRT']) {
-          $info .= writeNote(2, "NOTE", $indnotes['BIRT']);
+          $info .= writeNote(2, 'NOTE', $indnotes['BIRT']);
         }
         if ($citations['BIRT']) {
           $info .= writeCitation($citations['BIRT'], 2);
@@ -582,7 +582,7 @@ function writeIndividual($person) {
         $info .= $extras['BIRT'];
       }
       if ($ind['altbirthdate'] || $ind['altbirthplace'] || $indnotes['CHR'] || $citations['CHR'] || $extras['CHR']) {
-        if ($ind['altbirthdate'] == "Y" || (!$ind['altbirthdate'] && !$ind['altbirthplace'])) {
+        if ($ind['altbirthdate'] == 'Y' || (!$ind['altbirthdate'] && !$ind['altbirthplace'])) {
           $info .= "1 CHR Y$lineending";
         } else {
           $info .= "1 CHR$lineending";
@@ -594,7 +594,7 @@ function writeIndividual($person) {
           }
         }
         if ($indnotes['CHR']) {
-          $info .= writeNote(2, "NOTE", $indnotes['CHR']);
+          $info .= writeNote(2, 'NOTE', $indnotes['CHR']);
         }
         if ($citations['CHR']) {
           $info .= writeCitation($citations['CHR'], 2);
@@ -602,7 +602,7 @@ function writeIndividual($person) {
         $info .= $extras['CHR'];
       }
       if ($ind['deathdate'] || $ind['deathplace'] || $indnotes['DEAT'] || $citations['DEAT'] || $extras['DEAT']) {
-        if ($ind['deathdate'] == "Y" || (!$ind['deathdate'] && !$ind['deathplace'])) {
+        if ($ind['deathdate'] == 'Y' || (!$ind['deathdate'] && !$ind['deathplace'])) {
           $info .= "1 DEAT Y$lineending";
         } else {
           $info .= "1 DEAT$lineending";
@@ -614,7 +614,7 @@ function writeIndividual($person) {
           }
         }
         if ($indnotes['DEAT']) {
-          $info .= writeNote(2, "NOTE", $indnotes['DEAT']);
+          $info .= writeNote(2, 'NOTE', $indnotes['DEAT']);
         }
         if ($citations['DEAT']) {
           $info .= writeCitation($citations['DEAT'], 2);
@@ -622,8 +622,8 @@ function writeIndividual($person) {
         $info .= $extras['DEAT'];
       }
       if ($ind['burialdate'] || $ind['burialplace'] || $indnotes['BURI'] || $citations['BURI'] || $extras['BURI']) {
-        $btag = $ind['burialtype'] ? "CREM" : "BURI";
-        if ($ind['burialdate'] == "Y" || (!$ind['burialdate'] && !$ind['burialplace'])) {
+        $btag = $ind['burialtype'] ? 'CREM' : 'BURI';
+        if ($ind['burialdate'] == 'Y' || (!$ind['burialdate'] && !$ind['burialplace'])) {
           $info .= "1 $btag Y$lineending";
         } else {
           $info .= "1 $btag$lineending";
@@ -635,7 +635,7 @@ function writeIndividual($person) {
           }
         }
         if ($indnotes['BURI']) {
-          $info .= writeNote(2, "NOTE", $indnotes['BURI']);
+          $info .= writeNote(2, 'NOTE', $indnotes['BURI']);
         }
         if ($citations['BURI']) {
           $info .= writeCitation($citations['BURI'], 2);
@@ -649,7 +649,7 @@ function writeIndividual($person) {
         $info .= doEvent($custevent, 1);
         $eventID = $custevent['eventID'];
         if ($indnotes[$eventID]) {
-          $info .= writeNote(2, "NOTE", $indnotes[$eventID]);
+          $info .= writeNote(2, 'NOTE', $indnotes[$eventID]);
         }
         if ($citations[$eventID]) {
           $info .= writeCitation($citations[$eventID], 2);
@@ -658,10 +658,10 @@ function writeIndividual($person) {
       }
 
       if ($rights['lds'] && $ldsOK) {
-        $info .= doLDSEvent("BAPL", "bapt", $indnotes['BAPL'], $citations['BAPL'], $extras['BAPL'], $ind);
-        $info .= doLDSEvent("CONL", "conf", $indnotes['CONL'], $citations['CONL'], $extras['CONL'], $ind);
-        $info .= doLDSEvent("_INIT", "init", $indnotes['INIT'], $citations['INIT'], $extras['INIT'], $ind);
-        $info .= doLDSEvent("ENDL", "endl", $indnotes['ENDL'], $citations['ENDL'], $extras['ENDL'], $ind);
+        $info .= doLDSEvent('BAPL', 'bapt', $indnotes['BAPL'], $citations['BAPL'], $extras['BAPL'], $ind);
+        $info .= doLDSEvent('CONL', 'conf', $indnotes['CONL'], $citations['CONL'], $extras['CONL'], $ind);
+        $info .= doLDSEvent('_INIT', 'init', $indnotes['INIT'], $citations['INIT'], $extras['INIT'], $ind);
+        $info .= doLDSEvent('ENDL', 'endl', $indnotes['ENDL'], $citations['ENDL'], $extras['ENDL'], $ind);
       }
       //do associations
       $query = "SELECT passocID, relationship FROM $assoc_table WHERE personID = '$person'";
@@ -674,7 +674,7 @@ function writeIndividual($person) {
       }
 
       if ($indnotes['-x--general--x-']) {
-        $info .= writeNote(1, "NOTE", $indnotes['-x--general--x-']);
+        $info .= writeNote(1, 'NOTE', $indnotes['-x--general--x-']);
       }
 
       if ($ind['changedate']) {
@@ -690,17 +690,17 @@ function writeIndividual($person) {
 function doLDSEvent($tag, $key, $notes, $citations, $extras, $row) {
   global $lineending;
 
-  $event = "";
+  $event = '';
   if ($row[$key . 'date'] || $row[$key . 'place']) {
     $event .= "1 $tag$lineending";
     if ($row[$key . 'date']) {
       $event .= "2 DATE {$row[$key . 'date']}$lineending";
     }
     if ($row[$key . 'place']) {
-      $tok = strtok($row[$key . 'place'], " ");
+      $tok = strtok($row[$key . 'place'], ' ');
       if (strlen($tok) == 5) {
         $event .= "2 TEMP $tok$lineending";
-        $tok = strtok(" ");
+        $tok = strtok(' ');
         if ($tok) {
           $event .= "2 PLAC $tok$lineending";
         }
@@ -709,7 +709,7 @@ function doLDSEvent($tag, $key, $notes, $citations, $extras, $row) {
       }
     }
     if ($notes) {
-      $event .= writeNote(2, "NOTE", $notes);
+      $event .= writeNote(2, 'NOTE', $notes);
     }
     if ($citations) {
       $event .= writeCitation($citations, 2);
@@ -755,7 +755,7 @@ function writeFamily($family) {
     $extras = getStdExtras($familyID, 2);
     if (!in_array($family['husband'], $private) && !in_array($family['wife'], $private)) {
       if ($family['marrdate'] || $family['marrplace'] || $famnotes['MARR'] || $citations['MARR'] || $extras['MARR'] || $family['marrtype']) {
-        if ($family['marrdate'] == "Y" || (!$family['marrdate'] && !$family['marrplace'])) {
+        if ($family['marrdate'] == 'Y' || (!$family['marrdate'] && !$family['marrplace'])) {
           $info .= "1 MARR Y$lineending";
         } else {
           $info .= "1 MARR$lineending";
@@ -767,10 +767,10 @@ function writeFamily($family) {
           }
         }
         if ($family['marrtype']) {
-          $info .= "2 TYPE " . $family['marrtype'] . $lineending;
+          $info .= '2 TYPE ' . $family['marrtype'] . $lineending;
         }
         if ($famnotes['MARR']) {
-          $info .= writeNote(2, "NOTE", $famnotes['MARR']);
+          $info .= writeNote(2, 'NOTE', $famnotes['MARR']);
         }
         if ($citations['MARR']) {
           $info .= writeCitation($citations['MARR'], 2);
@@ -778,7 +778,7 @@ function writeFamily($family) {
         $info .= $extras['MARR'];
       }
       if ($family['divdate'] || $family['divplace'] || $famnotes['DIV'] || $citations['DIV'] || $extras['DIV']) {
-        if ($family['divdate'] == "Y" || (!$family['divdate'] && !$family['divplace'])) {
+        if ($family['divdate'] == 'Y' || (!$family['divdate'] && !$family['divplace'])) {
           $info .= "1 DIV Y$lineending";
         } else {
           $info .= "1 DIV$lineending";
@@ -790,7 +790,7 @@ function writeFamily($family) {
           }
         }
         if ($famnotes['DIV']) {
-          $info .= writeNote(2, "NOTE", $famnotes['DIV']);
+          $info .= writeNote(2, 'NOTE', $famnotes['DIV']);
         }
         if ($citations['DIV']) {
           $info .= writeCitation($citations['DIV'], 2);
@@ -804,7 +804,7 @@ function writeFamily($family) {
         $info .= doEvent($custevent, 1);
         $eventID = $custevent['eventID'];
         if ($famnotes[$eventID]) {
-          $info .= writeNote(2, "NOTE", $famnotes[$eventID]);
+          $info .= writeNote(2, 'NOTE', $famnotes[$eventID]);
         }
         if ($citations[$eventID]) {
           $info .= writeCitation($citations[$eventID], 2);
@@ -819,10 +819,10 @@ function writeFamily($family) {
             $info .= "2 DATE {$family['sealdate']}$lineending";
           }
           if ($family['sealplace']) {
-            $tok = strtok($family['sealplace'], " ");
+            $tok = strtok($family['sealplace'], ' ');
             if (strlen($tok) == 5) {
               $info .= "2 TEMP $tok$lineending";
-              $tok = strtok(" ");
+              $tok = strtok(' ');
               if ($tok) {
                 $info .= "2 PLAC $tok$lineending";
               }
@@ -831,7 +831,7 @@ function writeFamily($family) {
             }
           }
           if ($famnotes['SLGS']) {
-            $info .= writeNote(2, "NOTE", $famnotes['SLGS']);
+            $info .= writeNote(2, 'NOTE', $famnotes['SLGS']);
           }
           if ($citations['SLGS']) {
             $info .= writeCitation($citations['SLGS'], 2);
@@ -844,7 +844,7 @@ function writeFamily($family) {
       }
 
       if ($famnotes['-x--general--x-']) {
-        $info .= writeNote(1, "NOTE", $famnotes['-x--general--x-']);
+        $info .= writeNote(1, 'NOTE', $famnotes['-x--general--x-']);
       }
     }
     if ($family['changedate']) {
@@ -876,11 +876,11 @@ function getDescendant($person, $generation) {
   $result = getPersonGender($person);
   $row = tng_fetch_assoc($result);
   if ($row['sex'] == 'M') {
-    $orderby = " ORDER BY husborder";
+    $orderby = ' ORDER BY husborder';
   } elseif ($row['sex'] == 'F') {
-    $orderby = " ORDER BY wifeorder";
+    $orderby = ' ORDER BY wifeorder';
   } else {
-    $orderby = "";
+    $orderby = '';
   }
   tng_free_result($result);
   $query = "(SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM $families_table WHERE husband = '$person') UNION (SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM $families_table WHERE wife = \"$person\")$orderby";
@@ -985,10 +985,10 @@ function doSources() {
 
         $srcnotes = getNotes($nextsource);
         if ($srcnotes['-x--general--x-']) {
-          echo writeNote(1, "NOTE", $srcnotes['-x--general--x-']);
+          echo writeNote(1, 'NOTE', $srcnotes['-x--general--x-']);
         }
         if ($source['actualtext']) {
-          $srcnote = writeNote(1, "TEXT", $source['actualtext']);
+          $srcnote = writeNote(1, 'TEXT', $source['actualtext']);
           echo $srcnote;
         }
         tng_free_result($srcresult);
@@ -1027,7 +1027,7 @@ function doRepositories() {
 
         $reponotes = getNotes($repo['repoID']);
         if ($reponotes['-x--general--x-']) {
-          echo writeNote(1, "NOTE", $reponotes['-x--general--x-']);
+          echo writeNote(1, 'NOTE', $reponotes['-x--general--x-']);
         }
         tng_free_result($reporesult);
       }
@@ -1035,7 +1035,7 @@ function doRepositories() {
   }
 }
 
-if ($maxgcgen > 0 || $type == "all") {
+if ($maxgcgen > 0 || $type == 'all') {
   if ($maxgcgen > 999) {
     $maxgcgen = 999;
   }
@@ -1048,22 +1048,22 @@ if ($maxgcgen > 0 || $type == "all") {
     $row['allow_living'] = $rights['living'];
     $row['allow_private'] = $rights['private'];
     $namestr = getName($row);
-    $filenamestr = str_replace("'", "", $namestr);
-    $filenamestr = str_replace("\"", "", $filenamestr);
-    $filenamestr = ereg_replace("[\]", "", $filenamestr);
-    $filenamestr = str_replace(" ", "", $filenamestr);
-    $filenamestr = str_replace(",", "", $filenamestr);
-    if ($session_charset == "UTF-8") {
+    $filenamestr = str_replace("'", '', $namestr);
+    $filenamestr = str_replace('\"', '', $filenamestr);
+    $filenamestr = ereg_replace('[\]', '', $filenamestr);
+    $filenamestr = str_replace(' ', '', $filenamestr);
+    $filenamestr = str_replace(',', '', $filenamestr);
+    if ($session_charset == 'UTF-8') {
       $filenamestr = utf8_decode($filenamestr);
     }
     tng_free_result($result);
   }
-  header("Content-type: application/ged");
+  header('Content-type: application/ged');
   header("Content-Disposition: attachment; filename=$filenamestr.ged\n\n");
 
   $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $namestr);
   writelog(xmlcharacters(uiTextSnippet('gedcreatedfrom') . " $logname ($personID), $maxgcgen " . uiTextSnippet('generations') . " ($type) " . uiTextSnippet('gedcreatedfor') . " $email."));
-  preparebookmark(xmlcharacters("" . uiTextSnippet('gedcreatedfrom') . " $namestr ($personID), $maxgcgen " . uiTextSnippet('generations') . " ($type) " . uiTextSnippet('gedcreatedfor') . " $email."));
+  preparebookmark(xmlcharacters('' . uiTextSnippet('gedcreatedfrom') . " $namestr ($personID), $maxgcgen " . uiTextSnippet('generations') . " ($type) " . uiTextSnippet('gedcreatedfor') . " $email."));
 
   $owneremail = $treerow['email'] ? $treerow['email'] : $emailaddr;
   $ownername = $treerow['owner'] ? $treerow['owner'] : $dbowner;
@@ -1078,7 +1078,7 @@ if ($maxgcgen > 0 || $type == "all") {
           . "1 GEDC$lineending"
           . "2 VERS 5.5$lineending"
           . "2 FORM LINEAGE-LINKED$lineending"
-          . "1 CHAR " . ($session_charset == "UTF-8" ? "UTF-8" : "ANSI") . $lineending
+          . '1 CHAR ' . ($session_charset == 'UTF-8' ? 'UTF-8' : 'ANSI') . $lineending
           . "1 SUBM @SUB1@$lineending"
           . "0 @SUB1@ SUBM$lineending"
           . "1 NAME $ownername$lineending"
@@ -1098,14 +1098,14 @@ if ($maxgcgen > 0 || $type == "all") {
       }
       getDescendant($personID, $generation);
     } else {
-      if ($type == "all") {
+      if ($type == 'all') {
         $query = "SELECT personID, sex FROM $people_table";
         $result = tng_query($query);
         while ($ind = tng_fetch_assoc($result)) {
           if (!array_key_exists($ind['personID'], $indarray)) {
             $indarray[$ind['personID']] = writeIndividual($ind['personID']);
           }
-          $query = "";
+          $query = '';
           if ($ind['sex'] == 'M') {
             $query = "SELECT familyID FROM $families_table WHERE husband = \"{$ind['personID']}\" ORDER BY wifeorder";
           } else {
@@ -1151,7 +1151,7 @@ if ($maxgcgen > 0 || $type == "all") {
       }
     }
   }
-  if ($type != "all") {
+  if ($type != 'all') {
     processEntities($indarray);
     processEntities($famarray);
   }
@@ -1162,7 +1162,7 @@ if ($maxgcgen > 0 || $type == "all") {
 
   echo "0 TRLR$lineending";
 } else {
-  header("Content-type: text/html; charset=" . $session_charset);
+  header('Content-type: text/html; charset=' . $session_charset);
   $headSection->setTitle('Error');
   ?>
   <!DOCTYPE html>

@@ -2,16 +2,16 @@
 /*global slotceiling, slotceiling_minus1, display, usepopups, popupchartlinks, popupkids, popupspouses, pedborderwidth, pedbullet, emptycolor, hideempty, leftarrowimg, namepad, allow_add, allow_edit,
          chartlink, tngprint, personID, parentset, generations */
 var lastpopup = 0;
-var firstperson = "";
+var firstperson = '';
 var families = [];
 var people = [];
 var slots = [];
-var toplinks = "";
-var botlinks = "";
+var toplinks = '';
+var botlinks = '';
 var endslotctr;
 var endslots;
-var topparams = "";
-var botparams = "";
+var topparams = '';
+var botparams = '';
 
 var snippets = {
     "editperson": textSnippet('editperson'),
@@ -29,7 +29,7 @@ var timerleft = false;
 
 function setPopup(slot, tall, high) {
     "use strict";
-    eval("timer" + slot + "=setTimeout(\"showPopup(" + slot + "," + tall + "," + high + ")\",150);");
+    eval("timer" + slot + "=setTimeout(\"showPopup(" + slot + ',' + tall + ',' + high + ")\",150);");
 }
 
 function setTimer(slot) {
@@ -93,8 +93,8 @@ function pedIcon(personID) {
 function doBMD(slot, slotperson) {
     "use strict";
     var famID = slotperson.famID;
-    var content = "";
-    var icons = "";
+    var content = '';
+    var icons = '';
     if (popupchartlinks && slotperson.famc !== '-1' && slotperson.personID !== personID) {
         icons += pedIcon(slotperson.personID);
     }
@@ -122,7 +122,7 @@ function doBMD(slot, slotperson) {
 
 function getPopup(slot) {
     "use strict";
-    var popupcontent = "", spouselink, sppedlink, count, kidlink, kidpedlink, parpedlink, parentlink;
+    var popupcontent = '', spouselink, sppedlink, count, kidlink, kidpedlink, parpedlink, parentlink;
 
     var slotperson = slots[slot];
     var i, j, par, fam, children, spchild;
@@ -147,7 +147,7 @@ function getPopup(slot) {
             }
             if (par.motherID) {
                 if (parentlink) {
-                    parentlink += ", ";
+                    parentlink += ', ';
                 }
                 parentlink += '<a href="peopleShowPerson.php?personID=' + par.motherID + '">' + par.mothername + '</a>';
             }
@@ -258,7 +258,7 @@ function showPopup(slot, tall, high) {
 
 function getBackPopup() {
     "use strict";
-    var popupcontent = "", spouselink, count, kidlink;
+    var popupcontent = '', spouselink, count, kidlink;
 
     var slotperson = slots[1];
     var i, j, fam, children, spchild;
@@ -350,7 +350,7 @@ function toggleLines(slot, nextperson, visibility) {
 
 function getGenderIcon(gender) {
     "use strict";
-    var genderstr, icon = "";
+    var genderstr, icon = '';
     var valign = display === "compact" ? -2 : -1;
     if (gender) {
         if (gender === 'M') {
@@ -369,7 +369,7 @@ function addToList(linklist, backperson) {
     "use strict";
     if (linklist.indexOf(backperson) < 0) {
         if (linklist) {
-            linklist += ",";
+            linklist += ',';
         }
         linklist += backperson;
     }
@@ -379,7 +379,7 @@ function addToList(linklist, backperson) {
 function fillSlot(slot, currperson, lastperson) {
     "use strict";
     var currentBox = document.getElementById('box' + slot);
-    var content = "";
+    var content = '';
     var slotperson, husband, wife;
 
     if (people[currperson]) {
@@ -392,15 +392,15 @@ function fillSlot(slot, currperson, lastperson) {
     slots[slot] = slotperson;
     var dnarrow = $('#downarrow' + slot);
     var popup = $('#popup' + slot);
-    var popupcontent = "";
-    var icons = "";
+    var popupcontent = '';
+    var icons = '';
 
     if (slotperson.personID) {
         //save primary marriage
         if (lastperson) {
             slotperson.famID = people[lastperson].famc;
         } else {
-            slotperson.famID = "";
+            slotperson.famID = '';
         }
         if (hideempty) {
             currentBox.style.visibility = 'visible';
@@ -432,7 +432,7 @@ function fillSlot(slot, currperson, lastperson) {
                 icons = '<div class="floverlr" id="ic' + slot + '" style="left:' + w + 'px; top:' + h + 'px; display:none; background-color:' + currentBox.oldcolor + '">' + icons + '</div>';
             } else {
                 content += icons;
-                icons = "";
+                icons = '';
             }
         }
         if (display === "box") {
@@ -460,7 +460,7 @@ function fillSlot(slot, currperson, lastperson) {
         } else {
             if (allow_edit && lastperson && people[lastperson].famc !== '-1') {
                 var twoback = people[lastperson].backperson;
-                var twobackfam = people[twoback] ? people[twoback].famc : "";
+                var twobackfam = people[twoback] ? people[twoback].famc : '';
                 content = '<td class="pboxname" id="td' + slot + '" align="left">' + namepad + '<a href="#" onclick="return editFamily(\'' + people[lastperson].famc + '\', ' + slot + ',\'' + people[lastperson].personID + '\',\'' + twobackfam + '\');">' + snippets.editfamily + '</a></td>';
             } else if (allow_add && lastperson && people[lastperson].famc === '-1') {
                 content = '<td class="pboxname" id="td' + slot + '" align="left">' + namepad + '<a href="#" onclick="return newFamily(' + slot + ',\'' + people[lastperson].personID + '\');">' + snippets.addnewfamily + '</a></td>';
@@ -474,7 +474,7 @@ function fillSlot(slot, currperson, lastperson) {
             popup.html("");
         }
     }
-    currentBox.innerHTML = content ? icons + '<table align="left"><tr>' + content + '</tr></table>' : "";
+    currentBox.innerHTML = content ? icons + '<table align="left"><tr>' + content + '</tr></table>' : '';
 
     var nextslot = slot * 2;
     if (slotperson.famc !== '-1' && families[slotperson.famc]) {
@@ -513,17 +513,17 @@ function needspouses(nextfamily) {
 
 function getParams(personstr) {
     "use strict";
-    var params = "", currperson, nextfamily;
+    var params = '', currperson, nextfamily;
 
     if (personstr) {
-        var pers = personstr.split(",");
+        var pers = personstr.split(',');
         var i, ctr;
         for (i = 0; i < pers.length; i += 1) {
             currperson = pers[i];
             nextfamily = people[currperson].famc;
             if (!families[nextfamily] || needspouses(nextfamily)) {
                 ctr = i + 1;
-                params += "&backpers" + ctr + "=" + currperson + "&famc" + ctr + "=" + people[currperson].famc;
+                params += "&backpers" + ctr + '=' + currperson + "&famc" + ctr + '=' + people[currperson].famc;
             }
         }
         params += "&l=" + pers.length;
@@ -533,8 +533,8 @@ function getParams(personstr) {
 
 function displayChart() {
     "use strict";
-    toplinks = "";
-    botlinks = "";
+    toplinks = '';
+    botlinks = '';
     endslotctr = 0;
     endslots = [];
 

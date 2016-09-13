@@ -21,9 +21,9 @@ $row['state'] = preg_replace('/\"/', '&#34;', $row['state']);
 $row['zip'] = preg_replace('/\"/', '&#34;', $row['zip']);
 $row['country'] = preg_replace('/\"/', '&#34;', $row['country']);
 
-$helplang = findhelp("more_help.php");
+$helplang = findhelp('more_help.php');
 
-header("Content-type:text/html; charset=" . $session_charset);
+header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <div id='more'>
   <form name='editmoreform' action='' onsubmit="return updateMore(this);">
@@ -31,7 +31,7 @@ header("Content-type:text/html; charset=" . $session_charset);
       <button id='modalHelpControl' class='help' onclick="return openHelp('<?php echo $helplang; ?>/more_help.php');" title='<?php echo uiTextSnippet('help'); ?>'>
         <span aria-hidden='true'>?</span>
       </button>
-      <h4><?php echo uiTextSnippet('moreinfo') . ": " . uiTextSnippet($eventID); ?></h4>
+      <h4><?php echo uiTextSnippet('moreinfo') . ': ' . uiTextSnippet($eventID); ?></h4>
     </header>
     <div class='container'>
     <div class='modal-body'>

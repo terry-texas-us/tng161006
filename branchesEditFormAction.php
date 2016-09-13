@@ -8,7 +8,7 @@ require 'checklogin.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
@@ -26,7 +26,7 @@ adminwritelog(uiTextSnippet('modifybranch') . ": $branch");
 
 if ($submitx) {
   $message = uiTextSnippet('changestobranch') . ' ' . stripslashes($description) . ' ' . uiTextSnippet('succsaved') . '.';
-  header("Location: branchesBrowse.php?message=" . urlencode($message));
+  header('Location: branchesBrowse.php?message=' . urlencode($message));
 } else {
   header("Location: branchesEdit.php?branch=$branch");
 }

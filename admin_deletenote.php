@@ -19,6 +19,6 @@ $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
 
-adminwritelog(uiTextSnippet('deleted') . ": " . uiTextSnippet('note') . " $noteID");
+adminwritelog(uiTextSnippet('deleted') . ': ' . uiTextSnippet('note') . " $noteID");
 
 echo $row['ncount'];

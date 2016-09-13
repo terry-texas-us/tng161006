@@ -14,10 +14,10 @@ $max_pages = 5;
 if (!isset($max_cemeteries)) {
   $max_cemeteries = 5;
 }
-$city = preg_replace("/[<>{};!=]/", '', $city);
-$county = preg_replace("/[<>{};!=]/", '', $county);
-$state = preg_replace("/[<>{};!=]/", '', $state);
-$country = preg_replace("/[<>{};!=]/", '', $country);
+$city = preg_replace('/[<>{};!=]/', '', $city);
+$county = preg_replace('/[<>{};!=]/', '', $county);
+$state = preg_replace('/[<>{};!=]/', '', $state);
+$country = preg_replace('/[<>{};!=]/', '', $country);
 
 $city = addslashes($city);
 $county = addslashes($county);
@@ -32,13 +32,13 @@ if ($cemeteryID) {
     $cemnewoffset = "$cemoffset, ";
   } else {
     $cemoffsetplus = 1;
-    $cemnewoffset = "";
+    $cemnewoffset = '';
     $page = 1;
   }
   if ($country) {
     $subquery = "WHERE country = '$country' ";
   } else {
-    $subquery = "";
+    $subquery = '';
   }
   if ($state) {
     $subquery .= "AND state = '$state' ";
@@ -66,7 +66,7 @@ if ($subquery) {
     $totrows = $numrows;
   }
 } else {
-  $cemresult = "";
+  $cemresult = '';
 }
 if (!$cemeteryID) {
   $toppagenav = buildSearchResultPagination($totrows, "headstones.php?country=$country&amp;state=$state&amp;county=$county&amp;city=$city&amp;cemoffset", $max_cemeteries, $max_pages);
@@ -83,7 +83,7 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $page = 1;
 }
 $country = stripslashes($country);
@@ -109,7 +109,7 @@ if ($location && $country) {
 }
 $titlestr = uiTextSnippet('cemeteriesheadstones');
 if ($location) {
-  $titlestr .= " " . uiTextSnippet('in') . " $location";
+  $titlestr .= ' ' . uiTextSnippet('in') . " $location";
 }
 $logstring = "<a href=\"headstones.php?country=$country&amp;state=$state&amp;county=$county&amp;city=$city&amp;cemeteryID=$cemeteryID\">$titlestr</a>";
 writelog($logstring);
@@ -118,11 +118,11 @@ preparebookmark($logstring);
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
 $headerLabel = uiTextSnippet('cemeteriesheadstones');
 if ($location) {
-  $headerLabel .= " " . uiTextSnippet('in') . " $location";
+  $headerLabel .= ' ' . uiTextSnippet('in') . " $location";
 }
 ?>
 <!DOCTYPE html>
@@ -138,7 +138,7 @@ if ($location) {
     $hiddenfields[] = ['name' => 'state', 'value' => $state];
     $hiddenfields[] = ['name' => 'county', 'value' => $county];
 
-    $body = "";
+    $body = '';
     $cemcount = 0;
     $gotImageJpeg = function_exists(imageJpeg);
     while (!$subquery || $cemetery = tng_fetch_assoc($cemresult)) {
@@ -146,14 +146,14 @@ if ($location) {
         $body .= "<br>\n";
       }
       $body .= "<div class=\"titlebox\">\n";
-      $thiscem = $subquery ? $cemetery['cemeteryID'] : "";
+      $thiscem = $subquery ? $cemetery['cemeteryID'] : '';
       $query = "SELECT DISTINCT $media_table.mediaID, description, notes, path, thumbpath, status, plot, showmap, usecollfolder, form, mediatypeID, abspath, newwindow FROM $media_table "
           . "LEFT JOIN $medialinks_table ON $media_table.mediaID = $medialinks_table.mediaID "
           . "WHERE mediatypeID = 'headstones' AND cemeteryID = '$thiscem' ORDER BY description LIMIT $newoffset" . $maxsearchresults;
       if (!$subquery) {
         $cemetery = [];
         $cemetery['cemname'] = uiTextSnippet('nocemetery');
-        $subquery = "done";
+        $subquery = 'done';
       }
       $hsresult = tng_query($query);
 
@@ -176,29 +176,29 @@ if ($location) {
         $location = "<a href=\"cemeteriesShowCemetery.php?cemeteryID={$cemetery['cemeteryID']}\">" . $cemetery['cemname'];
         if ($cemetery['city']) {
           if ($location) {
-            $location .= ", ";
+            $location .= ', ';
           }
           $location .= $cemetery['city'];
         }
         if ($cemetery['county']) {
           if ($location) {
-            $location .= ", ";
+            $location .= ', ';
           }
           $location .= $cemetery['county'];
         }
         if ($cemetery['state']) {
           if ($location) {
-            $location .= ", ";
+            $location .= ', ';
           }
           $location .= $cemetery['state'];
         }
         if ($cemetery['country']) {
           if ($location) {
-            $location .= ", ";
+            $location .= ', ';
           }
           $location .= $cemetery['country'];
         }
-        $location .= "</a>";
+        $location .= '</a>';
       }
 
       if ($map['key']) {
@@ -213,37 +213,37 @@ if ($location) {
           $localballooncemeteryname = htmlspecialchars($cemetery['cemname'], ENT_QUOTES, $session_charset);
           $localballooncemeteryplace = htmlspecialchars($cemeteryplace, ENT_QUOTES, $session_charset);
           $remoteballoontext = htmlspecialchars(str_replace($banish, $banreplace, "{$cemetery['cemname']}, $cemeteryplace"), ENT_QUOTES, $session_charset);
-          $codednotes = $cemetery['notes'] ? "<br><br>" . tng_real_escape_string(uiTextSnippet('notes') . ": " . $cemetery['notes']) : "";
+          $codednotes = $cemetery['notes'] ? '<br><br>' . tng_real_escape_string(uiTextSnippet('notes') . ': ' . $cemetery['notes']) : '';
           $codednotes .= "<br><br><a href=\"{$http}://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)\" target=\"_blank\">" .
-                  uiTextSnippet('getdirections') . "</a>" . uiTextSnippet('directionsto') . " $localballooncemeteryname";
+                  uiTextSnippet('getdirections') . '</a>' . uiTextSnippet('directionsto') . " $localballooncemeteryname";
           $locations2map[$l2mCount] = [
-            "zoom" => $zoom,
-            "lat" => $lat,
-            "long" => $long,
-            "pinplacelevel" => $pinplacelevel,
-            "place" => $cemeteryplace,
-            "htmlcontent" => "<div class=\"mapballoon\"><a href=\"cemeteriesShowCemetery.php?cemeteryID={$cemetery['cemeteryID']}\">$localballooncemeteryname</a><br>$localballooncemeteryplace$codednotes</div>"
+            'zoom' => $zoom,
+            'lat' => $lat,
+            'long' => $long,
+            'pinplacelevel' => $pinplacelevel,
+            'place' => $cemeteryplace,
+            'htmlcontent' => "<div class=\"mapballoon\"><a href=\"cemeteriesShowCemetery.php?cemeteryID={$cemetery['cemeteryID']}\">$localballooncemeteryname</a><br>$localballooncemeteryplace$codednotes</div>"
           ];
           $l2mCount++;
           $body .= "<a href=\"https://maps.google.com/maps?f=q&amp" . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">\n";
           $body .= "<img src=\"google_marker.php?image=$pinplacelevel2.png&amp;text=$l2mCount\" alt='' style=\"padding-right:5px\">\n";
-          $body .= "</a>";
+          $body .= '</a>';
           $map['pins']++;
         }
       }
 
       $body .= $location;
-      $body .= "</h4>";
+      $body .= '</h4>';
       $pagenav = buildSearchResultPagination($totrows, "headstones.php?cemeteryID={$cemetery['cemeteryID']}&amp;offset", $maxsearchresults, 5);
       $body .= "<p>$pagenav</p>";
       $body .= "</div>\n";
 
       $body .= "<table class=\"table table-sm table-striped\">\n";
-      $body .= "<tr><th>" . uiTextSnippet('thumb') . "</th>";
-      $body .= "<th>" . uiTextSnippet('description') . "</th>";
-      $body .= "<th>" . uiTextSnippet('status') . "</th>";
-      $body .= "<th>" . uiTextSnippet('location') . "</th>";
-      $body .= "<th>" . uiTextSnippet('name') . " (" . uiTextSnippet('diedburied') . ")</th></tr>";
+      $body .= '<tr><th>' . uiTextSnippet('thumb') . '</th>';
+      $body .= '<th>' . uiTextSnippet('description') . '</th>';
+      $body .= '<th>' . uiTextSnippet('status') . '</th>';
+      $body .= '<th>' . uiTextSnippet('location') . '</th>';
+      $body .= '<th>' . uiTextSnippet('name') . ' (' . uiTextSnippet('diedburied') . ')</th></tr>';
 
       while ($hs = tng_fetch_assoc($hsresult)) {
         $mediatypeID = $hs['mediatypeID'];
@@ -263,13 +263,13 @@ if ($location) {
             . "WHERE mediaID = \"{$hs['mediaID']}\" ORDER BY lastname, lnprefix, firstname, $medialinks_table.personID";
 
         $presult = tng_query($query);
-        $hslinktext = "";
+        $hslinktext = '';
         while ($prow = tng_fetch_assoc($presult)) {
           $prights = determineLivingPrivateRights($prow);
           $prow['allow_living'] = $prights['living'];
           $prow['allow_private'] = $prights['private'];
 
-          $hstext = "";
+          $hstext = '';
           if ($prow['personID2'] != null) {
             $hslinktext .= "<a href=\"peopleShowPerson.php?personID={$prow['personID2']}\">";
             $hslinktext .= getName($prow);
@@ -279,9 +279,9 @@ if ($location) {
             } elseif ($prow['burialdate']) {
               $abbrev = uiTextSnippet('burialabbr');
             }
-            $hstext = $deathdate ? " ($abbrev " . displayDate($deathdate) . ")" : "";
+            $hstext = $deathdate ? " ($abbrev " . displayDate($deathdate) . ')' : '';
           } elseif ($prow['familyID'] != null) {
-            $hslinktext .= "<a href=\"familiesShowFamily.php?familyID={$prow['familyID']}<br>}\">" . uiTextSnippet('family') . ": " . getFamilyName($prow);
+            $hslinktext .= "<a href=\"familiesShowFamily.php?familyID={$prow['familyID']}<br>}\">" . uiTextSnippet('family') . ': ' . getFamilyName($prow);
           } elseif ($prow['sourceID'] != null) {
             $sourcetext = $prow['title'] ? uiTextSnippet('source') . ": {$prow['title']}" : uiTextSnippet('source') . ": {$prow['sourceID']}";
             $hslinktext .= "<a href=\"sourcesShowSource.php?sourceID={$prow['sourceID']}\">$sourcetext";
@@ -299,7 +299,7 @@ if ($location) {
         $notes = $hs['notes'];
 
         $body .= "<tr><td style=\"width:$thumbmaxw" . "px\">";
-        $hs['mediatypeID'] = "headstones";
+        $hs['mediatypeID'] = 'headstones';
         $hs['allow_living'] = 1;
         $imgsrc = getSmallPhoto($hs);
         $href = getMediaHREF($hs, 3);
@@ -312,17 +312,17 @@ if ($location) {
           }
           $body .= ">$imgsrc</a>\n";
         } else {
-          $body .= "&nbsp;";
+          $body .= '&nbsp;';
         }
 
         $body .= "</td>\n";
 
         $body .= "<td><span><a href=\"$href\">{$hs['description']}</a><br>{$hs['notes']}&nbsp;</span></td>\n";
         $body .= "<td><span>{$hs['status']}&nbsp;</span></td>\n";
-        $body .= "<td><span>" . nl2br($hs['plot']);
+        $body .= '<td><span>' . nl2br($hs['plot']);
         if ($hs['latitude'] || $hs['longitude']) {
           if ($hs['plot']) {
-            $body .= "<br>";
+            $body .= '<br>';
           }
           $body .= uiTextSnippet('latitude') . ": {$hs['latitude']}, " . uiTextSnippet('longitude') . ": {$hs['longitude']}";
         }
@@ -337,7 +337,7 @@ if ($location) {
       }
       $body .= "</div>\n<br>\n";
 
-      if ($subquery == "done") {
+      if ($subquery == 'done') {
         break;
       }
     }

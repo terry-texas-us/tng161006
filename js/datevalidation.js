@@ -36,7 +36,7 @@
 var MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 var DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 function LZ(x) {
-    return(x < 0 || x > 9 ? "" : "0") + x;
+    return(x < 0 || x > 9 ? "" : '0') + x;
 }
 
 // ------------------------------------------------------------------
@@ -78,11 +78,11 @@ function compareDates(date1, dateformat1, date2, dateformat2) {
 // ------------------------------------------------------------------
 function formatDate(date, format) {
     format = format + "";
-    var result = "",
+    var result = '',
         i_format = 0,
-        c = "",
-        token = "",
-        y = date.getFullYear() + "",
+        c = '',
+        token = '',
+        y = date.getFullYear() + '',
         M = date.getMonth() + 1,
         d = date.getDate(),
         E = date.getDay(),
@@ -92,9 +92,9 @@ function formatDate(date, format) {
         value = new Object();
     // Convert real date parts into formatted versions
     if (y.length < 3 || y < 0) {
-        y = "" + (y - 0 + 1900);
+        y = '' + (y - 0 + 1900);
     }
-    value.y = "" + y;
+    value.y = '' + y;
     value.yyyy = y;
     value.yy = y.substring(2, 4);
     value.M = M;
@@ -134,7 +134,7 @@ function formatDate(date, format) {
     value.ss = LZ(s);
     while (i_format < format.length) {
         c = format.charAt(i_format);
-        token = "";
+        token = '';
         while ((format.charAt(i_format) === c) && (i_format < format.length)) {
             token += format.charAt(i_format++);
         }
@@ -190,8 +190,8 @@ function getDateFromFormat(val, format) {
     format = format + "";
     var i_val = 0,
         i_format = 0,
-        c = "",
-        token = "",
+        c = '',
+        token = '',
         x,
         y,
         now = new Date(),
@@ -201,12 +201,12 @@ function getDateFromFormat(val, format) {
         hh = now.getHours(),
         mm = now.getMinutes(),
         ss = now.getSeconds(),
-        ampm = "";
+        ampm = '';
 
     while (i_format < format.length) {
         // Get next token from format string
         c = format.charAt(i_format);
-        token = "";
+        token = '';
         while ((format.charAt(i_format) == c) && (i_format < format.length)) {
             token += format.charAt(i_format++);
         }
@@ -396,7 +396,7 @@ function checkDate(field) {
     var checkList = new Array('generalFormats', preferEuro ? 'dateFirst' : 'monthFirst', preferEuro ? 'monthFirst' : 'dateFirst');
     var newFormat = preferDateFormat ? preferDateFormat : 'd NNN yyyy';
 
-    field.value = field.value.replace(/^\s*|\s*$/g, "");
+    field.value = field.value.replace(/^\s*|\s*$/g, '');
     var orgval = field.value;
     var newval = parseDate(orgval, checkList);
     if (newval)

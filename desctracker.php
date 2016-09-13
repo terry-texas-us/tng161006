@@ -24,38 +24,38 @@ function drawBox($person, $box) {
   }
 
   //begin, entire square
-  echo "<td><table width=\"100%\"><tr>";
+  echo "<td><table width='100%'><tr>";
 
   //box consists of three cells
   //left margin
   drawEmpty($box['topleft'], $box['middleleft'], $box['bottomleft']);
 
   //main area
-  echo "<td>";
+  echo '<td>';
 
   //top border
   if ($box['lineinto']) {
     if ($box['topleft']) {
-      echo "<img src=\"img/black.gif\" width=\"{$pedigree['halfwidth']}\" height=\"1\">";
+      echo "<img src='img/black.gif' width=\"{$pedigree['halfwidth']}\" height=\"1\">";
     } else {
-      echo "<img src=\"img/spacer.gif\" width=\"{$pedigree['halfwidth']}\" height=\"1\">";
+      echo "<img src='img/spacer.gif' width=\"{$pedigree['halfwidth']}\" height=\"1\">";
     }
     if ($box['lineinto'] == 1 || $box['topleft'] || $box['topright']) {
-      echo "<img src=\"img/black.gif\" width=\"1\" height=\"1\">";
+      echo "<img src='img/black.gif' width='1' height='1'>";
     }
     //line break after
     if ($box['topright']) {
-      echo "<img src=\"img/black.gif\" width=\"{$pedigree['halfwidth']}\" height=\"1\"><br>";
+      echo "<img src='img/black.gif' width=\"{$pedigree['halfwidth']}\" height=\"1\"><br>";
     } else {
-      echo "<img src=\"img/spacer.gif\" width=\"{$pedigree['halfwidth']}\" height=\"1\"><br>";
+      echo "<img src='img/spacer.gif' width=\"{$pedigree['halfwidth']}\" height=\"1\"><br>";
     }
     if ($box['lineinto'] == 1) {
-      echo "<img src=\"img/black.gif\" width=\"1\" height=\"20\">";
+      echo "<img src='img/black.gif' width='1' height='20'>";
     } else {
-      echo "<img src=\"img/spacer.gif\" width=\"1\" height=\"20\">";
+      echo "<img src='img/spacer.gif' width='1' height='20'>";
     }
   } else {
-    echo "<img src=\"img/spacer.gif\" width=\"1\" height=\"21\">";
+    echo "<img src='img/spacer.gif' width='1' height='21'>";
   }
 
   //name section
@@ -74,12 +74,12 @@ function drawBox($person, $box) {
   if ($person['allow_living'] && $person['allow_private']) {
     if ($person['birth'] || $person['death']) {
       if (!$person['birth']) {
-        $person['birth'] = "";
+        $person['birth'] = '';
       }
       if (!$person['death']) {
-        $person['death'] = "";
+        $person['death'] = '';
       }
-      $nameinfo .= "<br>" . getYears($person);
+      $nameinfo .= '<br>' . getYears($person);
     }
   }
   echo "</td>\n<td width=\"100%\">$nameinfo";
@@ -87,65 +87,65 @@ function drawBox($person, $box) {
   echo "</td>\n</tr></table>\n";
 
   //end outer table with border
-  echo "</div>";
+  echo '</div>';
 
   //bottom border
   if ($more && $box['lineoutof']) {
-    echo "<img src=\"img/black.gif\" width=\"1\" height=\"20\"><br>";
+    echo "<img src='img/black.gif' width='1' height='20'><br>";
   } else {
-    echo "<img src=\"img/spacer.gif\" width=\"1\" height=\"20\"><br>";
+    echo "<img src='img/spacer.gif' width='1' height='20'><br>";
   }
 
   if ($more) {
     if ($box['bottomleft']) {
-      echo "<img src=\"img/black.gif\" width=\"{$pedigree['halfwidth']}\" height=\"1\">";
+      echo "<img src='img/black.gif' width=\"{$pedigree['halfwidth']}\" height=\"1\">";
     } else {
-      echo "<img src=\"img/spacer.gif\" width=\"{$pedigree['halfwidth']}\" height=\"1\">";
+      echo "<img src='img/spacer.gif' width=\"{$pedigree['halfwidth']}\" height=\"1\">";
     }
     if ($box['bottomleft'] || $box['bottomright'] || $box['lineoutof']) {
-      echo "<img src=\"img/black.gif\" width=\"1\" height=\"1\">";
+      echo "<img src='img/black.gif' width='1' height='1'>";
     }
     if ($box['bottomright']) {
-      echo "<img src=\"img/black.gif\" width=\"{$pedigree['halfwidth']}\" height=\"1\">";
+      echo "<img src='img/black.gif' width=\"{$pedigree['halfwidth']}\" height=\"1\">";
     } else {
-      echo "<img src=\"img/spacer.gif\" width=\"{$pedigree['halfwidth']}\" height=\"1\">";
+      echo "<img src='img/spacer.gif' width=\"{$pedigree['halfwidth']}\" height=\"1\">";
     }
   }
 
   //end main area
-  echo "</td>";
+  echo '</td>';
 
   //right margin
   drawEmpty($box['topright'], $box['middleright'], $box['bottomright']);
 
   //end, entire square
-  echo "</tr></table></td>";
+  echo '</tr></table></td>';
 }
 
 function drawEmpty($top, $middle, $bottom) {
   global $pedigree, $more;
 
-  echo "<td>";
+  echo '<td>';
   if ($top) {
-    echo "<img src=\"img/black.gif\" width=\"5\" height=\"1\"><br>";
-    echo "<img src=\"img/spacer.gif\" width=\"1\" height=\"20\">";
+    echo "<img src='img/black.gif' width='5' height='1'><br>";
+    echo "<img src='img/spacer.gif' width='1' height='20'>";
   } else {
-    echo "<img src=\"img/spacer.gif\" width=\"1\" height=\"21\">";
+    echo "<img src='img/spacer.gif' width='1' height='21'>";
   }
 
   echo "<table width=\"5\" height=\"{$pedigree['puboxheight']}\"><tr><td>\n";
   if ($middle) {
-    echo "<img src=\"img/black.gif\" width=\"5\" height=\"1\">";
+    echo "<img src='img/black.gif' width='5' height='1'>";
   }
-  echo "</td></tr></table>";
+  echo '</td></tr></table>';
 
   if ($bottom && $more) {
-    echo "<img src=\"img/spacer.gif\" width=\"1\" height=\"20\"><br>";
-    echo "<img src=\"img/black.gif\" width=\"5\" height=\"1\">";
+    echo "<img src='img/spacer.gif' width='1' height='20'><br>";
+    echo "<img src='img/black.gif' width='5' height='1'>";
   } else {
-    echo "<img src=\"img/spacer.gif\" width=\"1\" height=\"21\">";
+    echo "<img src='img/spacer.gif' width='1' height='21'>";
   }
-  echo "</td>";
+  echo '</td>';
 }
 
 function doNextPerson($row, $items, $nextperson, $box) {
@@ -186,7 +186,7 @@ function doNextPerson($row, $items, $nextperson, $box) {
     $box['middleleft'] = 1;
     $box['middleright'] = 0;
 
-    $spouserow['birthdatetr'] = $spouserow['altbirthdatetr'] = "0000-00-00"; //this is to suppress the age calculation on the chart
+    $spouserow['birthdatetr'] = $spouserow['altbirthdatetr'] = '0000-00-00'; //this is to suppress the age calculation on the chart
     drawBox($spouserow, $box);  //yes, that's intentional
   }
 }
@@ -242,7 +242,7 @@ $pedigree['puboxheight'] += 24;
 
 $pedigree['halfwidth'] = floor($pedigree['puboxwidth'] / 2) + 6;
 
-$items = explode(",", $trail);
+$items = explode(',', $trail);
 $personID = $nextperson = array_shift($items);
 if ($nextperson) {
   $result = getPersonFullPlusDates($nextperson);
@@ -264,7 +264,7 @@ if ($nextperson) {
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle($descname);
 ?>
 <!DOCTYPE html>
@@ -276,7 +276,7 @@ echo $publicHeaderSection->build();
 
 $photostr = showSmallPhoto($personID, $descname, $rights['both'], 0, false, $row['sex']);
 echo tng_DrawHeading($photostr, $descname, getYears($row));
-$row['deathdatetr'] = $row['burialdatetr'] = "0000-00-00"; //this is to suppress the age calculation on the chart
+$row['deathdatetr'] = $row['burialdatetr'] = '0000-00-00'; //this is to suppress the age calculation on the chart
 
 if (!$pedigree['maxdesc']) {
   $pedigree['maxdesc'] = 12;
@@ -299,8 +299,8 @@ $innermenu .= "<a class='navigation-item' href='descend.php?personID=$personID&a
 $innermenu .= "<a class='navigation-item' href='descendtext.php?personID=$personID&amp;generations=$generations'>" . uiTextSnippet('pedtextonly') . "</a>\n";
 $innermenu .= "<a class='navigation-item' href='register.php?personID=$personID&amp;generations=$generations'>" . uiTextSnippet('regformat') . "</a>\n";
 
-beginFormElement("descend", "GET", "form1", "form1");
-echo buildPersonMenu("descend", $personID);
+beginFormElement('descend', 'get', 'form1', 'form1');
+echo buildPersonMenu('descend', $personID);
 echo "<div class='pub-innermenu small'>\n";
   echo $innermenu;
 echo "</div>\n";
@@ -330,7 +330,7 @@ endFormElement();
             doNextPerson($row, $items, $nextperson, $box);
             echo "</tr>\n</table>\n";
             if ($more) {
-              echo "<img src=\"img/black.gif\" width=\"1\" height=\"20\"><br>";
+              echo "<img src='img/black.gif' width='1' height='20'><br>";
             }
           }
           while ($more) {
@@ -365,7 +365,7 @@ endFormElement();
                   $thisisit = 0;
                 }
 
-                $row['birthdatetr'] = $row['altbirthdatetr'] = "0000-00-00"; //this is to suppress the age calculation on the chart
+                $row['birthdatetr'] = $row['altbirthdatetr'] = '0000-00-00'; //this is to suppress the age calculation on the chart
                 $box = getBox($childcount, $totkids, $thisisit, $gotnext);
                 $box['middleleft'] = 0;
                 $box['middleright'] = $thisisit && $more ? 1 : 0;
@@ -376,7 +376,7 @@ endFormElement();
               echo "</tr>\n</table>";
             }
             if ($more) {
-              echo "<img src=\"img/black.gif\" width=\"1\" height=\"20\"><br>";
+              echo "<img src='img/black.gif' width='1' height='20'><br>";
             }
             tng_free_result($result2);
           }

@@ -1,5 +1,5 @@
 <?php
-$linkrows = "";
+$linkrows = '';
 $usetree = $row['gedcom'];
 if ($result2) {
   $oldlinks = 0;
@@ -12,13 +12,13 @@ if ($result2) {
     $plink['allow_living'] = $rights['living'];
     $plink['allow_private'] = $rights['private'];
     if ($plink['personID2'] != null) {
-      $type = "person";
+      $type = 'person';
       $entityID = $plink['personID'];
       $id = " ($entityID)";
       $name = getName($plink);
       $linktype = 'I';
     } elseif ($plink['familyID'] != null) {
-      $type = "family";
+      $type = 'family';
       $husb['firstname'] = $plink['hfirstname'];
       $husb['lnprefix'] = $plink['hlnprefix'];
       $husb['lastname'] = $plink['hlastname'];
@@ -39,7 +39,7 @@ if ($result2) {
 
       if ($wifename) {
         if ($name) {
-          $name .= ", ";
+          $name .= ', ';
         }
         $name .= $wifename;
       }
@@ -47,38 +47,38 @@ if ($result2) {
       $id = " ($entityID)";
       $linktype = 'F';
     } elseif ($plink['sourceID'] != null) {
-      $type = "source";
+      $type = 'source';
       $entityID = $plink['sourceID'];
       $id = " ($entityID)";
       $name = truncateIt($plink['title'], 100);
       $linktype = 'S';
     } elseif ($plink['repoID'] != null) {
-      $type = "repository";
+      $type = 'repository';
       $entityID = $plink['repoID'];
       $id = " ($entityID)";
       $name = truncateIt($plink['reponame'], 100);
       $linktype = 'R';
     } else { //place
-      $type = "place";
+      $type = 'place';
       $entityID = $name = $plink['personID'];
-      $id = "";
+      $id = '';
       $linktype = 'L';
     }
-    $dchecked = $plink['defphoto'] ? " checked" : "";
-    $schecked = $plink['dontshow'] ? "" : " checked";
-    $alttext = $plink['altdescription'] || $plink['altnotes'] ? uiTextSnippet('yes') : "&nbsp;";
+    $dchecked = $plink['defphoto'] ? ' checked' : '';
+    $schecked = $plink['dontshow'] ? '' : ' checked';
+    $alttext = $plink['altdescription'] || $plink['altnotes'] ? uiTextSnippet('yes') : '&nbsp;';
 
-    include "eventmicro.php";
+    include 'eventmicro.php';
 
     $linkrows .= "<tr id=\"alink_{$plink['mlinkID']}\"><td>";
     $linkrows .= "<a href='#' onclick=\"return editMedia2EntityLink({$plink['mlinkID']});\" title='" . uiTextSnippet('edit') . "'>\n";
     $linkrows .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
-    $linkrows .= "</a>";
+    $linkrows .= '</a>';
     $linkrows .= "<a href='#' onclick=\"return deleteMedia2EntityLink({$plink['mlinkID']});\" title='" . uiTextSnippet('removelink') . "'>\n";
     $linkrows .= "<img class='icon-sm' src='svg/link.svg'>\n";
-    $linkrows .= "</a>";
+    $linkrows .= '</a>';
     $linkrows .= "</td>\n";
-    $linkrows .= "<td>" . uiTextSnippet($type) . "</td>\n";
+    $linkrows .= '<td>' . uiTextSnippet($type) . "</td>\n";
     $linkrows .= "<td>$name$id (<a href=\"mediaSortFormAction.php?linktype1=$linktype&amp;mediatypeID=$mediatypeID&amp;newlink1=$entityID&amp;event1=$eventID\">" . uiTextSnippet('text_sort') . "</a>)&nbsp;</td>\n";
     $linkrows .= "<td>{$plink['treename']}</td>\n";
     $linkrows .= "<td id=\"event_{$plink['mlinkID']}\">$eventstr&nbsp;</td>\n";
@@ -131,7 +131,7 @@ if ($result2) {
     <tr>
       <td><?php echo uiTextSnippet('action'); ?></td>
       <td><?php echo uiTextSnippet('linktype'); ?></td>
-      <td><?php echo uiTextSnippet('name') . ", " . uiTextSnippet('id'); ?></td>
+      <td><?php echo uiTextSnippet('name') . ', ' . uiTextSnippet('id'); ?></td>
       <td><?php echo uiTextSnippet('tree'); ?></td>
       <td><?php echo uiTextSnippet('event'); ?></td>
       <td><?php echo uiTextSnippet('alttd'); ?></td>

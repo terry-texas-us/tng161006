@@ -8,10 +8,10 @@ require 'version.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('addnewrepo'));
 ?>
 <!DOCTYPE html>
@@ -22,10 +22,10 @@ $headSection->setTitle(uiTextSnippet('addnewrepo'));
     <?php
     echo $adminHeaderSection->build('repositories-addnewrepo', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "repositoriesBrowse.php", uiTextSnippet('search'), "findrepo"]);
-    //    $navList->appendItem([$allowAdd, "repositoriesAdd.php", uiTextSnippet('add'), "addrepo"]);
-    $navList->appendItem([$allowEdit && $allowDelete, "repositoriesMerge.php", uiTextSnippet('merge'), "merge"]);
-    echo $navList->build("addrepo");
+    $navList->appendItem([true, 'repositoriesBrowse.php', uiTextSnippet('search'), 'findrepo']);
+    //    $navList->appendItem([$allowAdd, 'repositoriesAdd.php', uiTextSnippet('add'), 'addrepo']);
+    $navList->appendItem([$allowEdit && $allowDelete, 'repositoriesMerge.php', uiTextSnippet('merge'), 'merge']);
+    echo $navList->build('addrepo');
     ?>
     <form name='form1' action='repositoriesAddFormAction.php' method='post' onSubmit="return validateForm();">
       <header id='repository-header'>

@@ -8,10 +8,10 @@ require 'version.php';
 
 if (!$allowMediaAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('addnewalbum'));
 ?>
 <!DOCTYPE html>
@@ -22,16 +22,16 @@ $headSection->setTitle(uiTextSnippet('addnewalbum'));
     <?php
     echo $adminHeaderSection->build('albums-addnewalbum', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "albumsBrowse.php", uiTextSnippet('browse'), "findalbum"]);
-    $navList->appendItem([$allowAdd, "albumsAdd.php", uiTextSnippet('add'), "addalbum"]);
-    $navList->appendItem([$allowEdit, "albumsSort.php", uiTextSnippet('text_sort'), "sortalbums"]);
-    echo $navList->build("addalbum");
+    $navList->appendItem([true, 'albumsBrowse.php', uiTextSnippet('browse'), 'findalbum']);
+    $navList->appendItem([$allowAdd, 'albumsAdd.php', uiTextSnippet('add'), 'addalbum']);
+    $navList->appendItem([$allowEdit, 'albumsSort.php', uiTextSnippet('text_sort'), 'sortalbums']);
+    echo $navList->build('addalbum');
     ?>
     <form name='form1' action='albumsAddFormAction.php' method='post' onSubmit="return validateForm();">
       <table class='table table-sm'>
         <tr>
           <td>
-            <?php echo displayToggle("plus0", 1, "details", uiTextSnippet('existingalbuminfo'), uiTextSnippet('infosubt')); ?>
+            <?php echo displayToggle('plus0', 1, 'details', uiTextSnippet('existingalbuminfo'), uiTextSnippet('infosubt')); ?>
 
             <div id='details'>
               <table>
@@ -44,13 +44,13 @@ $headSection->setTitle(uiTextSnippet('addnewalbum'));
                 <tr>
                   <td><?php echo uiTextSnippet('description'); ?>:</td>
                   <td>
-                    <textarea cols="60" rows="3" name='description'></textarea>
+                    <textarea cols="60" rows='3' name='description'></textarea>
                   </td>
                 </tr>
                 <tr>
                   <td><?php echo uiTextSnippet('keywords'); ?>:</td>
                   <td>
-                    <textarea cols="60" rows="3" name="keywords"></textarea>
+                    <textarea cols="60" rows='3' name="keywords"></textarea>
                   </td>
                 </tr>
                 <tr>

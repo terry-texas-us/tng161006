@@ -1,24 +1,24 @@
 <?php
 function convertDate($olddate) {
   //additional month names (ie, different languages) may be added with same values in case multiple languages are used in the same database
-  $months = ["JAN" => 1, "FEB" => 2, "MAR" => 3, "APR" => 4, "MAY" => 5, "JUN" => 6, "JUL" => 7, "AUG" => 8, "SEP" => 9, "OCT" => 10, "NOV" => 11, "DEC" => 12];
-  $hebrewmonths = ["TIS" => 1, "CHE" => 2, "HES" => 2, "KIS" => 3, "TEV" => 4, "TEB" => 4, "SHV" => 5, "SHE" => 5, "ADA" => 6, "VEA" => 7, "NIS" => 8, "IYA" => 9, "SIV" => 10, "TAM" => 11, "AB" => 12, "AV" => 12, "ELU" => 13];
+  $months = ['JAN' => 1, 'FEB' => 2, 'MAR' => 3, 'APR' => 4, 'MAY' => 5, 'JUN' => 6, 'JUL' => 7, 'AUG' => 8, 'SEP' => 9, 'OCT' => 10, 'NOV' => 11, 'DEC' => 12];
+  $hebrewmonths = ['TIS' => 1, 'CHE' => 2, 'HES' => 2, 'KIS' => 3, 'TEV' => 4, 'TEB' => 4, 'SHV' => 5, 'SHE' => 5, 'ADA' => 6, 'VEA' => 7, 'NIS' => 8, 'IYA' => 9, 'SIV' => 10, 'TAM' => 11, 'AB' => 12, 'AV' => 12, 'ELU' => 13];
   //alternatives for "BEF" and "AFT" should be entered in these lists separated by commas
-  $befarray = ["BEF"];
-  $aftarray = ["AFT"];
+  $befarray = ['BEF'];
+  $aftarray = ['AFT'];
   $lastday = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  $preferred_separator = "/";  //this character separates the components in a numeric date, as in "MM/DD/YYYY"
+  $preferred_separator = '/';  //this character separates the components in a numeric date, as in "MM/DD/YYYY"
   $numeric_date_order = 0;  //0 = MM/DD/YYYY; 1 = DD/MM/YYYY
   $befstringused = false;
 
   if ($olddate) {
     $olddate = strtoupper(trim($olddate));
 
-    $dateparts = explode(" ", $olddate);
+    $dateparts = explode(' ', $olddate);
 
-    $found = array_search("TO", $dateparts);
+    $found = array_search('TO', $dateparts);
     if (!$found) {
-      $found = array_search("AND", $dateparts);
+      $found = array_search('AND', $dateparts);
     }
     $ptr = $found ? $found - 1 : count($dateparts) - 1;
 
@@ -34,10 +34,10 @@ function convertDate($olddate) {
       $reversedate = 0;
     }
 
-    $slashpos = strpos($dateparts[$ptr], "/");
+    $slashpos = strpos($dateparts[$ptr], '/');
     if ($slashpos) {
-      $wholeyear1 = strtok($dateparts[$ptr], "/");
-      $wholeyear2 = strtok("/");
+      $wholeyear1 = strtok($dateparts[$ptr], '/');
+      $wholeyear2 = strtok('/');
       $len = -1 * strlen($wholeyear2);
       $len1 = strlen($wholeyear1);
       $century = substr($wholeyear1, 0, $len1 + $len);
@@ -53,7 +53,7 @@ function convertDate($olddate) {
         $len = -4;
       }
       $tempyear = trim(substr($dateparts[$ptr], $len));
-      $dash = strpos($tempyear, "-");
+      $dash = strpos($tempyear, '-');
       if ($dash !== false) {
         $tempyear = substr($tempyear, $dash + 1);
       }
@@ -90,7 +90,7 @@ function convertDate($olddate) {
           $tempday = $temppart;
         }
         if (is_numeric($tempday) && strlen($tempday) <= 2) {
-          $newday = sprintf("%02d", $tempday);
+          $newday = sprintf('%02d', $tempday);
           $ptr--;
           $str = substr(strtoupper($dateparts[$ptr]), 0, 3);
           if (in_array($str, $aftarray)) {
@@ -126,7 +126,7 @@ function convertDate($olddate) {
           $tempday = 1;
         }
         $gregoriandate = JDtoGregorian(JewishToJD($newmonth, $tempday, $newyear));
-        $newdate = explode("/", $gregoriandate);
+        $newdate = explode('/', $gregoriandate);
         $newyear = $newdate[2];
         $newmonth = $newdate[0];
         $newday = $newdate[1];
@@ -148,9 +148,9 @@ function convertDate($olddate) {
         $newday = cal_days_in_month(CAL_GREGORIAN, $newmonth, $newyear);
       }
     }
-    $newdate = sprintf("%04d-%02d-%02d", $newyear, $newmonth, $newday);
+    $newdate = sprintf('%04d-%02d-%02d', $newyear, $newmonth, $newday);
   } else {
-    $newdate = "0000-00-00";
+    $newdate = '0000-00-00';
   }
   return ($newdate);
 }

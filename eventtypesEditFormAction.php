@@ -8,7 +8,7 @@ require 'checklogin.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
@@ -32,4 +32,4 @@ $result = tng_query($query);
 adminwritelog(uiTextSnippet('modifyeventtype') . ": $eventtypeID");
 
 $message = uiTextSnippet('changestoevtype') . " $eventtypeID " . uiTextSnippet('succsaved') . '.';
-header("Location: eventtypesBrowse.php?message=" . urlencode($message));
+header('Location: eventtypesBrowse.php?message=' . urlencode($message));

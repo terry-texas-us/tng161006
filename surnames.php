@@ -1,14 +1,14 @@
 <?php
 require 'tng_begin.php';
 
-$logstring = "<a href='surnames.php'>" . xmlcharacters(uiTextSnippet('surnamelist')) . "</a>";
+$logstring = "<a href='surnames.php'>" . xmlcharacters(uiTextSnippet('surnamelist')) . '</a>';
 writelog($logstring);
 preparebookmark($logstring);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('surnamelist'));
 ?>
 <!DOCTYPE html>
@@ -20,17 +20,17 @@ $headSection->setTitle(uiTextSnippet('surnamelist'));
     <h2><img class='icon-md' src='svg/person.svg'><?php echo uiTextSnippet('surnamelist'); ?></h2>
     <br class='clearleft'>
     <?php
-    $linkstr = "";
-    $linkstr2col1 = "";
-    $linkstr2col2 = "";
-    $linkstr3col1 = "";
-    $linkstr3col2 = "";
+    $linkstr = '';
+    $linkstr2col1 = '';
+    $linkstr2col2 = '';
+    $linkstr3col1 = '';
+    $linkstr3col2 = '';
     $collen = 10;
     $cols = 3;
     $nosurname = urlencode(uiTextSnippet('nosurname'));
-    $text['top30'] = preg_replace("/xxx/", "30", $text['top30']);
+    $text['top30'] = preg_replace('/xxx/', '30', $text['top30']);
 
-    $wherestr = "";
+    $wherestr = '';
 
     $allwhere = getLivingPrivateRestrictions($people_table, false, false);
 
@@ -46,27 +46,27 @@ $headSection->setTitle(uiTextSnippet('surnamelist'));
 
       while ($surname = tng_fetch_assoc($result)) {
         if ($initialchar != 1) {
-          $linkstr .= " ";
+          $linkstr .= ' ';
         }
-        if ($session_charset == "UTF-8" && function_exists(mb_substr)) {
+        if ($session_charset == 'UTF-8' && function_exists(mb_substr)) {
           $firstchar = mb_substr($surname['firstchar'], 0, 1, 'UTF-8');
         } else {
           $firstchar = substr($surname['firstchar'], 0, 1);
         }
         $firstchar = strtoupper($firstchar);
-        if ($firstchar == "") {
-          $linkstr .= "<a href=\"search.php?mylastname=$nosurname&amp;lnqualify=equals&amp;mybool=AND$treestr\">" . uiTextSnippet('nosurname') . "</a> ";
+        if ($firstchar == '') {
+          $linkstr .= "<a href=\"search.php?mylastname=$nosurname&amp;lnqualify=equals&amp;mybool=AND$treestr\">" . uiTextSnippet('nosurname') . '</a> ';
         } else {
           $urlfirstchar = $firstchar;
 
-          $countstr = uiTextSnippet('surnamesstarting') . ": " . $firstchar . " (" . number_format($surname['lncount']) . " " . uiTextSnippet('totalnames') . ")";
+          $countstr = uiTextSnippet('surnamesstarting') . ': ' . $firstchar . ' (' . number_format($surname['lncount']) . ' ' . uiTextSnippet('totalnames') . ')';
           $linkstr .= "<a href=\"surnames-oneletter.php?firstchar=$urlfirstchar$treestr\" title=\"$countstr\">{$firstchar}</a>";
         }
         $initialchar++;
       }
       tng_free_result($result);
     }
-    $surnamestr = $lnprefixes ? "TRIM(CONCAT_WS(' ',lnprefix,lastname) )" : "lastname";
+    $surnamestr = $lnprefixes ? "TRIM(CONCAT_WS(' ',lnprefix,lastname) )" : 'lastname';
     if ($tngconfig['ucsurnames']) {
       $surnamestr = "ucase($surnamestr)";
     }
@@ -91,10 +91,10 @@ $headSection->setTitle(uiTextSnippet('surnamelist'));
         $linkstr2col[$col] .= "<tr>\n";
         $linkstr2col[$col] .= "<td>$count.</td>\n";
 
-        $chartstr = $col ? "" : "<td class=\"bar-holder\"><div style=\"width:{$thiswidth}%;\" class=\"bar rightround\" title=\"{$surname['lowername']} ($tally_fmt)\"><a href=\"search.php?mylastname=$surname2&amp;lnqualify=equals&amp;mybool=AND$treestr\"></a></div></td>";
+        $chartstr = $col ? '' : "<td class=\"bar-holder\"><div style=\"width:{$thiswidth}%;\" class=\"bar rightround\" title=\"{$surname['lowername']} ($tally_fmt)\"><a href=\"search.php?mylastname=$surname2&amp;lnqualify=equals&amp;mybool=AND$treestr\"></a></div></td>";
         
         $linkstr2col[$col] .= "<td><a href=\"search.php?mylastname=$surname2&amp;lnqualify=equals&amp;mybool=AND$treestr\">{$surname['lowername']}</a> ($tally_fmt)</td>$chartstr\n";
-        $linkstr2col[$col] .= "</tr>";
+        $linkstr2col[$col] .= '</tr>';
         
         $count++;
       }
@@ -107,13 +107,13 @@ $headSection->setTitle(uiTextSnippet('surnamelist'));
         <h4><?php echo uiTextSnippet('surnamesstarting'); ?></h4>
       <!--</div>-->
       <p class="firstchars"><?php echo $linkstr; ?></p>
-      <?php echo "<a href='surnames-all.php'>" . uiTextSnippet('showallsurnames') . "</a> (" . uiTextSnippet('sortedalpha') . ")"; ?>
+      <?php echo "<a href='surnames-all.php'>" . uiTextSnippet('showallsurnames') . '</a> (' . uiTextSnippet('sortedalpha') . ')'; ?>
     <!--</div>-->
 
     <br>
     <!--<div class="panel panel-primary">-->
       <!--<div class="panel-heading">-->
-        <h4><?php echo "" . uiTextSnippet('top30') . " (" . uiTextSnippet('totalnames') . "):"; ?></h4>
+        <h4><?php echo uiTextSnippet('top30') . ' (' . uiTextSnippet('totalnames') . '):'; ?></h4>
       <!--</div>-->
       <!--<div class="panel-body">-->
         <div class="row">
@@ -133,7 +133,7 @@ $headSection->setTitle(uiTextSnippet('surnamelist'));
     <!--</div>-->
     <div class="row">
       <?php
-      beginFormElement("surnames100", "get");
+      beginFormElement('surnames100', 'get');
         echo uiTextSnippet('showtop');
         ?>
         <input name='topnum' type='text' value='100' size='4' maxlength='4'/> <?php echo uiTextSnippet('byoccurrence'); ?>

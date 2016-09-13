@@ -13,7 +13,7 @@ function injectLoginForm() {
         <?php $label = uiTextSnippet('password'); ?>
         <label class='sr-only' for='tngpassword'><?php echo $label; ?></label>
         <input class='form-control' name='tngpassword' type="password" placeholder='<?php echo $label; ?>'>
-        <div id='resetrow' style="display: none">
+        <div id='resetrow' style='display: none'>
           <?php $label = uiTextSnippet('newpassword'); ?>
           <label class='sr-only' for='newpassword'><?php echo $label; ?></label>
           <input class='form-control' name='newpassword' type="password" placeholder='<?php echo $label; ?>'>

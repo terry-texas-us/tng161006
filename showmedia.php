@@ -2,7 +2,7 @@
 require 'begin.php';
 require 'genlib.php';
 if (!is_numeric($mediaID)) {
-  header("Location: thispagedoesnotexist.html");
+  header('Location: thispagedoesnotexist.html');
   exit;
 }
 require 'getlang.php';
@@ -12,7 +12,7 @@ require 'functions.php';
 require 'personlib.php';
 
 //starting time between slides
-$slidetime_display = "3.0";
+$slidetime_display = '3.0';
 //starting time in microseconds
 $slidetime_micro = 3000;
 
@@ -28,7 +28,7 @@ if ($medialinkID) {
   $ordernum = $row['ordernum'];
   $mediatypeID = $row['mediatypeID'];
   $linktype = $row['linktype'];
-  if ($linktype == "P") {
+  if ($linktype == 'P') {
     $linktype = 'I';
   }
   $eventID = $row['eventID'];
@@ -51,7 +51,7 @@ if ($medialinkID) {
 }
 if (!tng_num_rows($result)) {
   tng_free_result($result);
-  header("Location: thispagedoesnotexist.html");
+  header('Location: thispagedoesnotexist.html');
   exit;
 }
 require 'checklogin.php';
@@ -111,12 +111,12 @@ $showPhotoInfo = $imgrow['alwayson'] || $noneliving;
 $nonamesloc = $livinginfo['private'] ? $tngconfig['nnpriv'] : $nonames;
 
 if ($noneliving || !$nonamesloc || $imgrow['alwayson']) {
-  $description = preg_replace("/\"/", "&#34;", $mediadescription);
+  $description = preg_replace('/\"/', '&#34;', $mediadescription);
   $notes = nl2br(getXrefNotes($medianotes));
-  $mapnote = $info['gotmap'] ? "<p>" . uiTextSnippet('mediamaptext') . "</p>\n" : "";
+  $mapnote = $info['gotmap'] ? '<p>' . uiTextSnippet('mediamaptext') . "</p>\n" : '';
 } else {
   $description = $notes = ($livinginfo['private'] ? uiTextSnippet('private') : uiTextSnippet('living'));
-  $mapnote = "";
+  $mapnote = '';
 }
 $logdesc = $nonamesloc && !$noneliving && !$imgrow['alwayson'] ? ($livinginfo['private'] ? uiTextSnippet('private') : uiTextSnippet('living')) : $description;
 $mediatypeIDstr = uiTextSnippet($mediatypeID) ? uiTextSnippet($mediatypeID) : $mediatypes_display[$mediatypeID];
@@ -137,8 +137,8 @@ $flags['styles'] = "<link href=\"css/media.css\" rel=\"stylesheet\" type=\"text/
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
-$headSection->setTitle($mediatypeIDstr . ": " . $description);
+header('Content-type: text/html; charset=' . $session_charset);
+$headSection->setTitle($mediatypeIDstr . ': ' . $description);
 ?>
 <!DOCTYPE html>
 <html>
@@ -155,27 +155,27 @@ echo "<body id='public'>\n";
     if (!$tngconfig['ssdisabled'] && !$tngprint && $numitems > 1) {
       $sscontrols = " &nbsp;&nbsp;&nbsp; <a href='#' onclick=\"return start();\">&raquo; " . uiTextSnippet('slidestart') . "</a>\n";
     } else {
-      $sscontrols = "";
+      $sscontrols = '';
     }
 
     if ($personID) {
       if ($linktype == 'I') {
         $namestr = getName($row);
         $years = getYears($row);
-        $type = "person";
+        $type = 'person';
       } elseif ($linktype == 'F') {
-        $namestr = uiTextSnippet('family') . ": " . getFamilyName($row);
-        $years = $row['marrdate'] && $row['allow_living'] && $row['allow_private'] ? uiTextSnippet('marrabbr') . " " . displayDate($row['marrdate']) : "";
-        $type = "family";
+        $namestr = uiTextSnippet('family') . ': ' . getFamilyName($row);
+        $years = $row['marrdate'] && $row['allow_living'] && $row['allow_private'] ? uiTextSnippet('marrabbr') . ' ' . displayDate($row['marrdate']) : '';
+        $type = 'family';
       } elseif ($linktype == 'S') {
         $namestr = $row['title'];
-        $type = "source";
+        $type = 'source';
       } elseif ($linktype == 'R') {
         $namestr = $row['reponame'];
-        $type = "repo";
+        $type = 'repo';
       } else {
         $namestr = $personID;
-        $type = "place";
+        $type = 'place';
       }
       $mediastr = showSmallPhoto($personID, $namestr, $row['allow_living'] && $row['allow_private'], 0, false, $row['sex']);
       $slideshowheader = $namestr;
@@ -201,7 +201,7 @@ echo "<body id='public'>\n";
         $slideshowheader = $titlemsg;
       }
     }
-    $slideshowheader = preg_replace("/\"/", "&#34;", $slideshowheader);
+    $slideshowheader = preg_replace('/\"/', '&#34;', $slideshowheader);
 
     if (!$tngprint && !$tngconfig['ssdisabled']) {
       ?>
@@ -216,9 +216,9 @@ echo "<body id='public'>\n";
       } else {
         $nextpage = 1;
       }
-      $nextmediaID = get_item_id($result, $nextpage - 1, "mediaID");
-      $nextmedialinkID = get_item_id($result, $nextpage - 1, "medialinkID");
-      $nextalbumlinkID = get_item_id($result, $nextpage - 1, "albumlinkID");
+      $nextmediaID = get_item_id($result, $nextpage - 1, 'mediaID');
+      $nextmedialinkID = get_item_id($result, $nextpage - 1, 'medialinkID');
+      $nextalbumlinkID = get_item_id($result, $nextpage - 1, 'albumlinkID');
     }
     tng_free_result($result);
 
@@ -229,7 +229,7 @@ echo "<body id='public'>\n";
       if ((isset($mediatypes_like['histories']) && !in_array($mediatypeID, $mediatypes_like['histories'])) || !$imgrow['bodytext']) {
         echo $mapnote;
         showMediaSource($imgrow);
-        echo "<br><br>";
+        echo '<br><br>';
         $show_on_top = true;
       }
 
@@ -237,27 +237,27 @@ echo "<body id='public'>\n";
       if ($notes) {
         echo "<p>$notes</p>\n";
       } else {
-        echo "<br><br>";
+        echo '<br><br>';
       }
       if (!$show_on_top) {
         showMediaSource($imgrow);
       }
-      if ($mediatypeID == "headstones" && ($imgrow['status'] || $imgrow['plot'])) {
-        echo "<p>";
+      if ($mediatypeID == 'headstones' && ($imgrow['status'] || $imgrow['plot'])) {
+        echo '<p>';
         if ($imgrow['status']) {
           $status = $imgrow['status'];
           if ($status && uiTextSnippet($status)) {
             $imgrow['status'] = uiTextSnippet($status);
           }
-          echo "<b>" . uiTextSnippet('status') . ":</b> {$imgrow['status']}";
+          echo '<b>' . uiTextSnippet('status') . ":</b> {$imgrow['status']}";
         }
         if ($imgrow['plot']) {
           if ($imgrow['status']) {
-            echo "<br>";
+            echo '<br>';
           }
-          echo "<b>" . uiTextSnippet('plot') . ":</b> " . nl2br($imgrow['plot']);
+          echo '<b>' . uiTextSnippet('plot') . ':</b> ' . nl2br($imgrow['plot']);
         }
-        echo "</p>";
+        echo '</p>';
       } elseif (!$tngconfig['imgviewer'] || in_array($mediatypeID, $mediatypes_like[$tngconfig['imgviewer']])) {
         echo "<br>\n";
       } else {

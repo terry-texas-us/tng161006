@@ -37,7 +37,7 @@ if ($newsearch) {
     setcookie("tng_search_places_post[offset]", $offset, $exptime);
   }
 }
-$searchstring_noquotes = preg_replace("/\"/", "&#34;", $searchstring);
+$searchstring_noquotes = preg_replace('/\"/', '&#34;', $searchstring);
 $searchstring = addslashes($searchstring);
 
 if ($offset) {
@@ -45,32 +45,32 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $tngpage = 1;
 }
 
 function addCriteria($field, $value, $operator) {
-  $criteria = $operator == "=" ? " OR $field $operator \"$value\"" : " OR $field $operator \"%$value%\"";
+  $criteria = $operator == '=' ? " OR $field $operator \"$value\"" : " OR $field $operator \"%$value%\"";
 
   return $criteria;
 }
-$allwhere = "1 = 1";
+$allwhere = '1 = 1';
 if ($nocoords) {
   $allwhere .= " AND (latitude IS NULL OR latitude = \"\" OR longitude IS NULL OR longitude = \"\")";
 }
 if ($temples) {
-  $allwhere .= " AND temple = 1";
+  $allwhere .= ' AND temple = 1';
 }
 if ($searchstring) {
-  $allwhere .= " AND (1=0";
-  if ($exactmatch == "yes") {
-    $frontmod = "=";
+  $allwhere .= ' AND (1=0';
+  if ($exactmatch == 'yes') {
+    $frontmod = '=';
   } else {
-    $frontmod = "LIKE";
+    $frontmod = 'LIKE';
   }
-  $allwhere .= addCriteria("place", $searchstring, $frontmod);
-  $allwhere .= addCriteria("notes", $searchstring, $frontmod);
-  $allwhere .= ")";
+  $allwhere .= addCriteria('place', $searchstring, $frontmod);
+  $allwhere .= addCriteria('notes', $searchstring, $frontmod);
+  $allwhere .= ')';
 }
 $query = "SELECT ID, place, placelevel, longitude, latitude, zoom FROM $places_table WHERE $allwhere ORDER BY place, ID LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
@@ -84,7 +84,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 } else {
   $totrows = $numrows;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('places'));
 ?>
 <!DOCTYPE html>
@@ -95,11 +95,11 @@ $headSection->setTitle(uiTextSnippet('places'));
     <?php
     echo $adminHeaderSection->build('places', $message);
     $navList = new navList('');
-    //    $navList->appendItem([true, "placesBrowse.php", uiTextSnippet('browse'), "findplace"]);
-    $navList->appendItem([$allowAdd, "placesAdd.php", uiTextSnippet('add'), "addplace"]);
-    $navList->appendItem([$allowEdit && $allowDelete, "placesMerge.php", uiTextSnippet('merge'), "merge"]);
-    $navList->appendItem([$allowEdit, "admin_geocodeform.php", uiTextSnippet('geocode'), "geo"]);
-    echo $navList->build("findplace");
+    //    $navList->appendItem([true, 'placesBrowse.php', uiTextSnippet('browse'), 'findplace']);
+    $navList->appendItem([$allowAdd, 'placesAdd.php', uiTextSnippet('add'), 'addplace']);
+    $navList->appendItem([$allowEdit && $allowDelete, 'placesMerge.php', uiTextSnippet('merge'), 'merge']);
+    $navList->appendItem([$allowEdit, 'admin_geocodeform.php', uiTextSnippet('geocode'), 'geo']);
+    echo $navList->build('findplace');
     ?>
     <br>
     <div class='row'>
@@ -111,18 +111,18 @@ $headSection->setTitle(uiTextSnippet('places'));
                onClick="resetPlacesSearch();">
         
         <label for='exactmatch'>
-          <input name='exactmatch' type='checkbox' value='yes'<?php if ($exactmatch == 'yes') {echo " checked";} ?>> 
+          <input name='exactmatch' type='checkbox' value='yes'<?php if ($exactmatch == 'yes') {echo ' checked';} ?>> 
           <?php echo uiTextSnippet('exactmatch'); ?>
         </label>
         <label for='nocoords'>
-          <input name='nocoords' type='checkbox' value='yes'<?php if ($nocoords == 'yes') {echo " checked";} ?>> 
+          <input name='nocoords' type='checkbox' value='yes'<?php if ($nocoords == 'yes') {echo ' checked';} ?>> 
           <?php echo uiTextSnippet('nocoords'); ?>
         </label>
         <?php
         if (determineLDSRights()) {
           echo "<label for='temples'>\n";
           echo "<input name='temples' type='checkbox' value='yes'";
-          echo $temples == "yes" ? " checked>\n" : ">\n";
+          echo $temples == 'yes' ? " checked>\n" : ">\n";
           echo uiTextSnippet('findtemples');
           echo "</label>\n";
         }
@@ -169,16 +169,16 @@ $headSection->setTitle(uiTextSnippet('places'));
         </tr>
         <?php
         if ($numrows) {
-          $actionstr = "";
+          $actionstr = '';
         if ($allowEdit) {
           $actionstr .= "<a href=\"placesEdit.php?ID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
           $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
-          $actionstr .= "</a>";
+          $actionstr .= '</a>';
         }
         if ($allowDelete) {
           $actionstr .= "<a href='#' onClick=\"return confirmDelete('xxx');\" title='" . uiTextSnippet('delete') . "'>\n";
           $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
-          $actionstr .= "</a>";
+          $actionstr .= '</a>';
         }
         $actionstr .= "<a href=\"placesearch.php?psearch=zzz";
         $actionstr .= "\" title='" . uiTextSnippet('preview') . "'>\n";
@@ -186,15 +186,15 @@ $headSection->setTitle(uiTextSnippet('places'));
         $actionstr .= "</a>\n";
 
         while ($row = tng_fetch_assoc($result)) {
-          $newactionstr = preg_replace("/xxx/", $row['ID'], $actionstr);
-          $newactionstr = preg_replace("/zzz/", urlencode($row['place']), $newactionstr);
+          $newactionstr = preg_replace('/xxx/', $row['ID'], $actionstr);
+          $newactionstr = preg_replace('/zzz/', urlencode($row['place']), $newactionstr);
           echo "<tr id=\"row_{$row['ID']}\"><td><div class=\"action-btns\">$newactionstr</div></td>\n";
           if ($allowDelete) {
             echo "<td><input name=\"del{$row['ID']}\" type='checkbox' value='1'></td>";
           }
           $display = $row['place'];
-          $display = preg_replace("/</", "&lt;", $display);
-          $display = preg_replace("/>/", "&gt;", $display);
+          $display = preg_replace('/</', '&lt;', $display);
+          $display = preg_replace('/>/', '&gt;', $display);
           echo "<td>$display</td>\n";
           if ($map['key']) {
             echo "<td>{$row['placelevel']}</td>\n";
@@ -209,7 +209,7 @@ $headSection->setTitle(uiTextSnippet('places'));
         ?>
       </table>
       <?php
-      echo buildSearchResultPagination($totrows, "placesBrowse.php?searchstring=" . stripslashes($searchstring) . "&amp;exactmatch=$exactmatch&amp;noocords=$nocoords&amp;temples=$temples&amp;offset", $maxsearchresults, 5);
+      echo buildSearchResultPagination($totrows, 'placesBrowse.php?searchstring=' . stripslashes($searchstring) . "&amp;exactmatch=$exactmatch&amp;noocords=$nocoords&amp;temples=$temples&amp;offset", $maxsearchresults, 5);
     } else {
       echo "</table>\n" . uiTextSnippet('norecords');
     }

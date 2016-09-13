@@ -12,7 +12,7 @@ $numrows = tng_num_rows($result);
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('changelanguage'));
 ?>
 <!DOCTYPE html>
@@ -24,7 +24,7 @@ $headSection->setTitle(uiTextSnippet('changelanguage'));
 <br clear='all'>
 <?php 
 if ($numrows) {
-    $str .= buildFormElement("savelanguage", "post", "");
+    $str .= buildFormElement('savelanguage', 'post', '');
     echo "$str";
 
     echo uiTextSnippet('language') . ": \n";
@@ -34,7 +34,7 @@ if ($numrows) {
     while( $row = tng_fetch_assoc($result)) {
     echo "<option value=\"{$row['languageID']}\"";
     if ($row['folder'] == $mylanguage) {
-      echo " selected";
+      echo ' selected';
     }
     echo ">{$row['display']}</option>\n";
     }

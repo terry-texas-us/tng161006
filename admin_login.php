@@ -1,12 +1,12 @@
 <?php
 require 'begin.php';
-$tngconfig['maint'] = "";
+$tngconfig['maint'] = '';
 require 'adminlib.php';
 
 require 'mail.php';
 
 if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && $_SESSION['allow_admin'] && $currentuser) {
-  header("Location: admin.php");
+  header('Location: admin.php');
   $reset = 1;
 }
 if ($message) {
@@ -34,9 +34,9 @@ if ($email) {
     if ($success) {
       $sendmail = 1;
       $content = uiTextSnippet('newpass') . ": $newpassword";
-      $message = "<div class='alert alert-success' role='alert'>" . uiTextSnippet('pwdsent') . "</div>";
+      $message = "<div class='alert alert-success' role='alert'>" . uiTextSnippet('pwdsent') . '</div>';
     } else {
-      $message = "<div class='alert alert-warning' role='alert'>" . uiTextSnippet('loginnotsent3') . "</div>";
+      $message = "<div class='alert alert-warning' role='alert'>" . uiTextSnippet('loginnotsent3') . '</div>';
     }
   } else {
     $query = "SELECT username, realname FROM $users_table WHERE email = \"$email\"";
@@ -47,14 +47,14 @@ if ($email) {
     if ($row['username']) {
       $sendmail = 1;
       $content = uiTextSnippet('logininfo') . ":\n\n" . uiTextSnippet('username') . ": {$row['username']}";
-      $message = "<div class='alert alert-success' role='alert'>" . uiTextSnippet('usersent') . "</div>";
+      $message = "<div class='alert alert-success' role='alert'>" . uiTextSnippet('usersent') . '</div>';
     } else {
-      $message = "<div class='alert alert-warning' role='alert'>" . uiTextSnippet('loginnotsent2') . "</div>";
+      $message = "<div class='alert alert-warning' role='alert'>" . uiTextSnippet('loginnotsent2') . '</div>';
     }
   }
   if ($sendmail) {
     $mailmessage = $content;
-    $owner = preg_replace("/,/", "", ($sitename ? $sitename : ($dbowner ? $dbowner : "TNG")));
+    $owner = preg_replace('/,/', '', ($sitename ? $sitename : ($dbowner ? $dbowner : 'TNG')));
 
     tng_sendmail($owner, $emailaddr, $row['realname'], $email, uiTextSnippet('logininfo'), $mailmessage, $emailaddr, $emailaddr);
   }
@@ -62,7 +62,7 @@ if ($email) {
 $home_url = $homepage;
 
 $newroot = preg_replace('/\//', '', $rootpath);
-$newroot = str_replace(" ", "", $newroot);
+$newroot = str_replace(' ', '', $newroot);
 $newroot = preg_replace('/\./', '', $newroot);
 $loggedin = "tngloggedin_$newroot";
 ?>
@@ -70,27 +70,27 @@ $loggedin = "tngloggedin_$newroot";
 <html>
 <?php
 if (!$_SESSION['logged_in'] && $_COOKIE[$loggedin] && !$reset) {
-  if (strpos($_SESSION['destinationpage8'], "admin.php") !== false) {
-    $continue = "";
+  if (strpos($_SESSION['destinationpage8'], 'admin.php') !== false) {
+    $continue = '';
   }
   session_start();
   session_unset();
   session_destroy();
-  setcookie("tngloggedin_$newroot", "");
+  setcookie("tngloggedin_$newroot", '');
 
-  header("Content-type: text/html; charset=" . $session_charset);
+  header('Content-type: text/html; charset=' . $session_charset);
   $headSection->setTitle(uiTextSnippet('login'));
 
   echo $headSection->build('', 'admin', $session_charset);
   $message = uiTextSnippet('sessexp');
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('login'));
 
 echo $headSection->build('', 'admin', $session_charset);
 
 if ($reset) {
-  $_COOKIE[$loggedin] = "";
+  $_COOKIE[$loggedin] = '';
 }
 ?>
 <body class='admin-login'>
@@ -110,7 +110,7 @@ if ($reset) {
         <form action='processlogin.php' name='form1' method='post'>
           <div class='form-admin-login'>
             <div class='form-admin-login-heading'>
-              <h4><?php echo uiTextSnippet('login') . ": " . uiTextSnippet('administration'); ?></h4>
+              <h4><?php echo uiTextSnippet('login') . ': ' . uiTextSnippet('administration'); ?></h4>
             </div>
             <?php $label = uiTextSnippet('username'); ?>
             <label class='sr-only' for='tngusername'><?php echo $label; ?></label>

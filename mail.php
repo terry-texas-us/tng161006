@@ -37,7 +37,7 @@ function tng_sendmail($from_name, $from_email, $to_name, $to_email, $subject, $b
 
         $mail->CharSet = strtolower($session_charset);
         //$mail->WordWrap = 50;
-        if ($session_charset && strtoupper($session_charset) != "ISO-8859-1") {
+        if ($session_charset && strtoupper($session_charset) != 'ISO-8859-1') {
           $mail->IsHTML(true);                                  // set email format to HTML
           $body = nl2br($body);
         }
@@ -53,7 +53,7 @@ function tng_sendmail($from_name, $from_email, $to_name, $to_email, $subject, $b
       }
     } else {
       //normal procedure
-      if (strtoupper($session_charset) != "ISO-8859-1") {
+      if (strtoupper($session_charset) != 'ISO-8859-1') {
         //$from_name = '=?utf-8?B?'.base64_encode($from_name).'?=';
         //$subject = '=?utf-8?B?'.base64_encode($subject).'?=';
         $headers = "MIME-Version: 1.0\nContent-type: text/html; charset=$session_charset\nFrom: $from_name <$from_email>\nReply-to: $replyto\nReturn-Path: $from_email";
@@ -62,7 +62,7 @@ function tng_sendmail($from_name, $from_email, $to_name, $to_email, $subject, $b
         $headers = "From: $from_name <$from_email>\nReply-to: $replyto\nReturn-Path: $returnpath\nDate:" . date('r', time());
       }
       if ($envelope) {
-        $success = mail($to_email, $subject, $body, $headers, "-f" . $from_email);
+        $success = mail($to_email, $subject, $body, $headers, '-f' . $from_email);
       } else {
         $success = mail($to_email, $subject, $body, $headers);
       }

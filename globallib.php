@@ -1,31 +1,31 @@
 <?php
 
-ini_set("session.bug_compat_warn", "0");
-ini_set("allow_url_fopen", "0");
+ini_set('session.bug_compat_warn', '0');
+ini_set('allow_url_fopen', '0');
 $http = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')) ? 'https' : 'http';
 
 set_time_limit(0);
 //set binary to "binary" for more sensitive searches
-$binary = "";
+$binary = '';
 $notrunc = 0; //don't truncate if link doesn't go to showmedia
 $envelope = false;
 
 if (isset($offset) && $offset && !is_numeric($offset)) {
-  die("invalid offset");
+  die('invalid offset');
 }
-$endrootpath = "";
+$endrootpath = '';
 
-$newroot = preg_replace("/\//", "", $rootpath);
-$newroot = preg_replace("/ /", "", $newroot);
-$newroot = preg_replace("/\./", "", $newroot);
+$newroot = preg_replace('/\//', '', $rootpath);
+$newroot = preg_replace('/ /', '', $newroot);
+$newroot = preg_replace('/\./', '', $newroot);
 $errorcookiename = "tngerror_$newroot";
 
 if (isset($_COOKIE[$errorcookiename])) {
   $message = $_COOKIE[$errorcookiename];
   $error = $message;
-  setcookie("tngerror_$newroot", "", time() - 31536000, "/");
+  setcookie("tngerror_$newroot", '', time() - 31536000, '/');
 } else {
-  $error = "";
+  $error = '';
 }
 
 require_once '_/components/php/textSnippets.php';
@@ -38,25 +38,25 @@ function debugPrint($obj) {
 
 function constructName($firstnames, $lastnames, $title, $suffix, $order) {
   if ($title) {
-    $title .= " ";
+    $title .= ' ';
   }
   if ($firstnames) {
-    $firstnames .= " ";
+    $firstnames .= ' ';
   }
 
   switch ($order) {
-    case "3":
+    case '3':
       if ($lastnames && $firstnames) {
-        $lastnames .= ",";
+        $lastnames .= ',';
       }
       if ($lastnames) {
-        $lastnames .= " ";
+        $lastnames .= ' ';
       }
       $namestr = trim("$lastnames $title$firstnames$suffix");
       break;
-    case "2":
+    case '2':
       if ($lastnames) {
-        $lastnames .= " ";
+        $lastnames .= ' ';
       }
       $namestr = trim("$title$lastnames$firstnames");
       if ($suffix) {
@@ -100,26 +100,26 @@ function getNameUniversal($row, $order, $hcard = null) {
   global $nonames;
 
   //$nonames = showNames($row);
-  $lastname = trim($row['lnprefix'] . " " . $row['lastname']);
+  $lastname = trim($row['lnprefix'] . ' ' . $row['lastname']);
   if ($tngconfig['ucsurnames']) {
     $lastname = tng_strtoupper($lastname);
   }
   if ($hcard) {
-    $lastname = "<span class=\"family-name\">" . $lastname . "</span>";
-    $title = $suffix = "";
+    $lastname = "<span class=\"family-name\">" . $lastname . '</span>';
+    $title = $suffix = '';
   } else {
-    $title = $row['title'] && ($row['title'] == $row['prefix']) ? $row['title'] : trim($row['title'] . " " . $row['prefix']);
+    $title = $row['title'] && ($row['title'] == $row['prefix']) ? $row['title'] : trim($row['title'] . ' ' . $row['prefix']);
     $suffix = $row['suffix'];
   }
   if (($row['allow_living'] || !$nonames) && ($row['allow_private'] || !$tngconfig['nnpriv'])) {
-    $firstname = $hcard ? "<span class=\"given-name\">" . $row['firstname'] . "</span>" : $row['firstname'];
+    $firstname = $hcard ? "<span class=\"given-name\">" . $row['firstname'] . '</span>' : $row['firstname'];
     $namestr = constructName($firstname, $lastname, $title, $suffix, $order);
   } elseif ($row['living'] && !$row['allow_living'] && $nonames == 1) {
     $namestr = uiTextSnippet('living');
   } elseif ($row['private'] && !$row['allow_private'] && $tngconfig['nnpriv'] == 1) {
     $namestr = uiTextSnippet('private');
   } else { //initials
-    $firstname = $hcard ? "<span class=\"given-name\">" . initials($row['firstname']) . "</span>" : initials($row['firstname']);
+    $firstname = $hcard ? "<span class=\"given-name\">" . initials($row['firstname']) . '</span>' : initials($row['firstname']);
     $namestr = constructName($firstname, $lastname, $title, $suffix, $order);
   }
 
@@ -160,22 +160,22 @@ function getFamilyName($row) {
 function initials($name) {
   global $session_charset;
 
-  $newname = "";
-  if ($session_charset == "UTF-8") {
+  $newname = '';
+  if ($session_charset == 'UTF-8') {
     $name = utf8_decode($name);
   }
 
-  $token = strtok($name, " ");
+  $token = strtok($name, ' ');
   do {
-    if (substr($token, 0, 1) != "(") { //In case there is a name in brackets, in which case ignore
-      if ($session_charset == "UTF-8") {
-        $newname .= utf8_encode(substr($token, 0, 1)) . ".";
+    if (substr($token, 0, 1) != '(') { //In case there is a name in brackets, in which case ignore
+      if ($session_charset == 'UTF-8') {
+        $newname .= utf8_encode(substr($token, 0, 1)) . '.';
       } else {
-        $newname .= substr($token, 0, 1) . ".";
+        $newname .= substr($token, 0, 1) . '.';
       }
     }
-    $token = strtok(" ");
-  } while ($token != "");
+    $token = strtok(' ');
+  } while ($token != '');
 
   return $newname;
 }
@@ -187,12 +187,12 @@ function showNames($row) {
 }
 
 function getGenderIcon($gender, $valign) {
-  $icon = "";
+  $icon = '';
   if ($gender) {
     if ($gender == 'M') {
-      $genderstr = "male";
+      $genderstr = 'male';
     } elseif ($gender == 'F') {
-      $genderstr = "female";
+      $genderstr = 'female';
     }
     if ($genderstr) {
       $icon = "<img src=\"img/tng_$genderstr.gif\" width='11' height='11' alt=\"" . uiTextSnippet($genderstr) . "\" style=\"vertical-align: " . $valign . "px;\" />";
@@ -202,7 +202,7 @@ function getGenderIcon($gender, $valign) {
 }
 
 function buildFormElement($action, $method, $name, $id = '', $onsubmit = null) {
-  $url = $action ? $action . ".php" : "";
+  $url = $action ? $action . '.php' : '';
 
   $out = "<form action='$url'";
   if ($method) {
@@ -236,7 +236,7 @@ function isPhoto($row) {
   if ($row['form']) {
     $form = strtoupper($row['form']);
   } else {
-    preg_match("/\.(.+)$/", $row['path'], $matches);
+    preg_match('/\.(.+)$/', $row['path'], $matches);
     $form = strtoupper($matches[1]);
   }
 
@@ -250,10 +250,10 @@ function isPhoto($row) {
 function getEventDisplay($displaystr) {
   global $mylanguage, $languagesPath;
 
-  $dispvalues = explode("|", $displaystr);
+  $dispvalues = explode('|', $displaystr);
   $numvalues = count($dispvalues);
   if ($numvalues > 1) {
-    $displayval = "";
+    $displayval = '';
     for ($i = 0; $i < $numvalues; $i += 2) {
       $lang = $dispvalues[$i];
       if ($mylanguage == $languagesPath . $lang) {
@@ -359,9 +359,9 @@ function getLivingPrivateRestrictions($table, $firstname, $allOtherInput) {
   global $assignedbranch;
   global $people_table;
 
-  $query = "";
+  $query = '';
   if ($table) {
-    $table .= ".";
+    $table .= '.';
   }
   $limitedLivingRights = $allow_living && !$livedefault;
   $limitedPrivateRights = $allow_private;
@@ -371,7 +371,7 @@ function getLivingPrivateRestrictions($table, $firstname, $allOtherInput) {
   $privateNameRestrictions = ($tngconfig['nnpriv'] == 1 || ($tngconfig['nnpriv'] == 2 && $firstname)) && !$allPrivateRights;
 
   if ($livingNameRestrictions || $privateNameRestrictions || $allOtherInput) {
-    $atreestr = $matchperson = "";
+    $atreestr = $matchperson = '';
     if ($_SESSION['mypersonID'] && $table == $people_table) {
       //this is me (current user)
       $matchperson = " OR ({$table}personID = \"{$_SESSION['mypersonID']}\")";
@@ -418,19 +418,19 @@ function checkLivingLinks($itemID) {
   if (($livedefault == 2 || $allow_living) && $allow_private) {
     return true;
   }
-  $icriteria = $fcriteria = "";
+  $icriteria = $fcriteria = '';
   if (!$allow_living && !$allow_private) {
     // Viewer can not see media of Living individuals regardless of branch,
     // So need to check all links to this media for living individuals (don't narrow the search.)
-    $icriteria = $fcriteria = "AND (living = 1 OR private = 1)";
+    $icriteria = $fcriteria = 'AND (living = 1 OR private = 1)';
   } else {
     // Viewer can see some media of Living individuals, now figure if there are some the viewer should not see
     if (!$allow_living && $livedefault != 2) {
-      $icriteria = $icriteria ? "AND (living = 1 OR ($icriteria AND private = 1))" : "AND living = 1";
-      $fcriteria = $fcriteria ? "AND (living = 1 OR ($fcriteria AND private = 1))" : "AND living = 1";
+      $icriteria = $icriteria ? "AND (living = 1 OR ($icriteria AND private = 1))" : 'AND living = 1';
+      $fcriteria = $fcriteria ? "AND (living = 1 OR ($fcriteria AND private = 1))" : 'AND living = 1';
     } elseif (!$allow_private) {    //!$allow_private_db
-      $icriteria = $icriteria ? "AND (private = 1 OR ($icriteria AND living = 1))" : "AND private = 1";
-      $fcriteria = $fcriteria ? "AND (private = 1 OR ($fcriteria AND living = 1))" : "AND private = 1";
+      $icriteria = $icriteria ? "AND (private = 1 OR ($icriteria AND living = 1))" : 'AND private = 1';
+      $fcriteria = $fcriteria ? "AND (private = 1 OR ($fcriteria AND living = 1))" : 'AND private = 1';
     } else {
       if ($icriteria) {
         $icriteria = "AND $icriteria AND (living = 1 OR private = 1)";
@@ -473,10 +473,10 @@ function checkMediaFileSize($path) {
 function getScriptName($replace = true) {
   global $_SERVER;
 
-  $scriptname = $_SERVER['REQUEST_URI'] ? $_SERVER['REQUEST_URI'] : $_SERVER['SCRIPT_NAME'] . "?" . $_SERVER['QUERY_STRING'];
+  $scriptname = $_SERVER['REQUEST_URI'] ? $_SERVER['REQUEST_URI'] : $_SERVER['SCRIPT_NAME'] . '?' . $_SERVER['QUERY_STRING'];
   if ($replace) {
-    $scriptname = str_replace("&", "&amp;", $scriptname);
-    $scriptname = str_replace("amp;amp;", "amp;", $scriptname);
+    $scriptname = str_replace('&', '&amp;', $scriptname);
+    $scriptname = str_replace('amp;amp;', 'amp;', $scriptname);
   }
 
   return $scriptname;
@@ -559,23 +559,23 @@ function buildSearchResultPagination($total, $address, $perpage, $pagenavpages) 
 }
 
 function displayDate($date) {
-  $newdate = "";
+  $newdate = '';
   /* [ts] additional date string from rm (date-range  direction modifier 'begdate-enddate')
           rm gedcom is emmitting an en dash character so what looks like a dash is a 3-byte character.
    * Better to filter this on the gedcom import. Behavior also modified to
           all white-space characters. Need to watch this for a while to see if side-effect */
 
   // [ts] $dateparts = preg_split("/[\s–]/", $date);
-  $dateparts = explode(" ", $date);
+  $dateparts = explode(' ', $date);
   foreach ($dateparts as $datepart) {
     if (!is_numeric($datepart)) {
       $datepartu = strtoupper($datepart);
       if (uiTextSnippet($datepartu) != null) {
         $datepart = uiTextSnippet($datepartu);
-      } elseif ($datepartu == "AND") {
+      } elseif ($datepartu == 'AND') {
         $datepart = uiTextSnippet('and');
-      } elseif ($datepartu == "@#DJULIAN@") {
-        $datepart = "[J]";
+      } elseif ($datepartu == '@#DJULIAN@') {
+        $datepart = '[J]';
       }
     }
     $newdate .= $newdate ? " $datepart" : $datepart;
@@ -586,29 +586,29 @@ function displayDate($date) {
 function xmlcharacters($string) {
   global $session_charset;
 
-  $bad = ["&", "\""];
-  $good = ["&#038;", "&#034;"];
+  $bad = ['&', "\""];
+  $good = ['&#038;', '&#034;'];
 
   $ucharset = strtoupper($session_charset);
-  $enc = function_exists('mb_detect_encoding') ? mb_detect_encoding($string) : "";
-  if ($enc && strtoupper($enc) == "UTF-8" && $ucharset == "UTF-8") {
+  $enc = function_exists('mb_detect_encoding') ? mb_detect_encoding($string) : '';
+  if ($enc && strtoupper($enc) == 'UTF-8' && $ucharset == 'UTF-8') {
     return str_replace($bad, $good, mb_convert_encoding($string, 'UTF-8', $enc));
-  } elseif ($ucharset == "ISO-8859-1") {
+  } elseif ($ucharset == 'ISO-8859-1') {
     $trans = get_html_translation_table(HTML_ENTITIES, ENT_QUOTES);
     foreach ($trans as $k => $v) {
-      $trans[$k] = "&#" . ord($k) . ";";
+      $trans[$k] = '&#' . ord($k) . ';';
     }
     $trans[chr(38)] = '&'; // don't translate the & when it is part of &xxx;
     // now translate & into &#38, but only when it is not part of &xxx or &#xxxx;
-    return preg_replace("/&(?![A-Za-z]{0,4}\w{2,3};|#[0-9]{2,5};)/", "&#38;", strtr($string, $trans));
+    return preg_replace('/&(?![A-Za-z]{0,4}\w{2,3};|#[0-9]{2,5};)/', '&#38;', strtr($string, $trans));
   } else {
     return str_replace($bad, $good, $string);
   }
 }
 
 function generatePassword($flag) {
-  $password = "";
-  $possible = $flag ? "bcdfghjkmnpqrstvwxyz" : "0123456789bcdfghjkmnpqrstvwxyz";
+  $password = '';
+  $possible = $flag ? 'bcdfghjkmnpqrstvwxyz' : '0123456789bcdfghjkmnpqrstvwxyz';
   $length = 8;
 
   $i = 0;
@@ -626,7 +626,7 @@ function generatePassword($flag) {
 function getXrefNotes($noteref) {
   global $xnotes_table;
 
-  preg_match("/^@(\S+)@/", $noteref, $matches);
+  preg_match('/^@(\S+)@/', $noteref, $matches);
   if ($matches[1]) {
     $query = "SELECT note FROM $xnotes_table WHERE noteID = \"$matches[1]\"";
     $xnoteres = tng_query($query);
@@ -642,13 +642,13 @@ function getXrefNotes($noteref) {
 }
 
 function getDatePrefix($datestr) {
-  $prefix = "";
+  $prefix = '';
   if ($datestr) {
     $datestr = strtoupper($datestr);
     $prefixes = [uiTextSnippet('BEF'), uiTextSnippet('AFT'), uiTextSnippet('ABT'), uiTextSnippet('CAL'), uiTextSnippet('EST')];
     foreach ($prefixes as $str) {
       if (strpos($datestr, strtoupper($str)) === 0) {
-        $prefix = $str . " ";
+        $prefix = $str . ' ';
         break;
       }
     }
@@ -657,13 +657,13 @@ function getDatePrefix($datestr) {
 }
 
 function getDisplayYear($datestr, $trueyear) {
-  if ($datestr == "Y") {
+  if ($datestr == 'Y') {
     $display = uiTextSnippet('Y');
   } else {
     $newstr = displayDate($datestr); //translated
     $prefix = getDatePrefix($newstr); //first part of translated string
     $rest = trim(substr($newstr, strlen($prefix)));
-    $parts = explode(" ", $rest);
+    $parts = explode(' ', $rest);
     $numParts = count($parts);
     $lastPart = $parts[$numParts - 1];
     if (is_numeric($lastPart)) {
@@ -708,56 +708,56 @@ function age($row) {
   $datum_2 = $row['deathdate'];
   $datum_alt_2_tr = $row['burialdatetr'];
   $datum_alt_2 = $row['burialdate'];
-  $age = "";
+  $age = '';
 
-  if ($row['living'] == "1" && !$datum_2 && !$datum_alt_2) {
+  if ($row['living'] == '1' && !$datum_2 && !$datum_alt_2) {
     // Today
-    $datum_2_tr = date("Y-m-d", time() + (3600 * $timeOffset));
+    $datum_2_tr = date('Y-m-d', time() + (3600 * $timeOffset));
   }
 
   // Only if one of the FROM and one of the TO dates are filled
-  if (($datum_1_tr != "0000-00-00" || $datum_alt_1_tr != "0000-00-00") && ($datum_2_tr != "0000-00-00" || $datum_alt_2_tr != "0000-00-00")) {
+  if (($datum_1_tr != '0000-00-00' || $datum_alt_1_tr != '0000-00-00') && ($datum_2_tr != '0000-00-00' || $datum_alt_2_tr != '0000-00-00')) {
 
     // FROM date
     // $datum1 = result datum1
     // $datum_1_tr = date numeric, Datum_1 = date alfanumeric
     // $datum_alt_1_tr = alternative date numeric, $datum_alt_1 = alternative date alfanumeric
 
-    if ($datum_1_tr != "0000-00-00") {
+    if ($datum_1_tr != '0000-00-00') {
       $datum1 = $datum_1_tr;
-      if (substr($datum_1, 0, 3) == "BEF") {
-        $sign1 = ">";
+      if (substr($datum_1, 0, 3) == 'BEF') {
+        $sign1 = '>';
       } else {
-        if (substr($datum_1, 0, 3) == "AFT") {
-          $sign1 = "&lt;";
-          $datum1 = substr_replace($datum1, "12-31", 5);
+        if (substr($datum_1, 0, 3) == 'AFT') {
+          $sign1 = '&lt;';
+          $datum1 = substr_replace($datum1, '12-31', 5);
         } else {
           if (substr($datum_1, 1, 4) == substr($datum1, 0, 4)) {
-            $sign1 = "~";
-            $datum1 = substr_replace($datum1, "07-15", 5);
+            $sign1 = '~';
+            $datum1 = substr_replace($datum1, '07-15', 5);
           } else {
             if (substr($datum_1, 0, 2) < 1) {
-              $sign1 = "~";
-              $datum1 = substr_replace($datum1, "15", 8);
+              $sign1 = '~';
+              $datum1 = substr_replace($datum1, '15', 8);
             }
           }
         }
       }
     } else {
       $datum1 = $datum_alt_1_tr;
-      $sign1 = "~";
-      if (substr($datum_alt_1, 0, 3) == "BEF") {
-        $sign1 = ">";
+      $sign1 = '~';
+      if (substr($datum_alt_1, 0, 3) == 'BEF') {
+        $sign1 = '>';
       } else {
-        if (substr($datum_alt_1, 0, 3) == "AFT") {
-          $sign1 = "&lt;";
-          $datum1 = substr_replace($datum1, "12-31", 5);
+        if (substr($datum_alt_1, 0, 3) == 'AFT') {
+          $sign1 = '&lt;';
+          $datum1 = substr_replace($datum1, '12-31', 5);
         } else {
           if (substr($datum_alt_1, 1, 4) == substr($datum1, 0, 4)) {
-            $datum1 = substr_replace($datum1, "07-15", 5);
+            $datum1 = substr_replace($datum1, '07-15', 5);
           } else {
             if (substr($datum_alt_1, 0, 2) < 1) {
-              $datum1 = substr_replace($datum1, "15", 8);
+              $datum1 = substr_replace($datum1, '15', 8);
             }
           }
         }
@@ -769,39 +769,39 @@ function age($row) {
     // $datum_2_tr = date numeric, Datum_2 = datum alfanumeric
     // $datum_alt_2_tr = alternative date numeric, $datum_alt_2 = alternative date alfanumeric
 
-    if ($datum_2_tr != "0000-00-00") {
+    if ($datum_2_tr != '0000-00-00') {
       $datum2 = $datum_2_tr;
-      if (substr($datum_2, 0, 3) == "BEF") {
-        $sign2 = "&lt;";
+      if (substr($datum_2, 0, 3) == 'BEF') {
+        $sign2 = '&lt;';
       } else {
-        if (substr($datum_2, 0, 3) == "AFT") {
-          $sign2 = "&gt;";
-          $datum2 = substr_replace($datum2, "12-31", 5);
+        if (substr($datum_2, 0, 3) == 'AFT') {
+          $sign2 = '&gt;';
+          $datum2 = substr_replace($datum2, '12-31', 5);
         } else {
           if (substr($datum_2, 1, 4) == substr($datum2, 0, 4)) {
-            $datum2 = substr_replace($datum2, "07-15", 5);
+            $datum2 = substr_replace($datum2, '07-15', 5);
           } else {
             if (substr($datum2, 8, 2) < 1) {
-              $datum2 = substr_replace($datum2, "15", 8);
+              $datum2 = substr_replace($datum2, '15', 8);
             }
           }
         }
       }
     } else {
       $datum2 = $datum_alt_2_tr;
-      $sign2 = "~";
-      if (substr($datum_alt_2, 0, 3) == "BEF") {
-        $sign2 = "&lt;";
+      $sign2 = '~';
+      if (substr($datum_alt_2, 0, 3) == 'BEF') {
+        $sign2 = '&lt;';
       } else {
-        if (substr($datum_alt_2, 0, 3) == "AFT") {
-          $sign2 = "&gt;";
-          $datum2 = substr_replace($datum2, "12-31", 5);
+        if (substr($datum_alt_2, 0, 3) == 'AFT') {
+          $sign2 = '&gt;';
+          $datum2 = substr_replace($datum2, '12-31', 5);
         } else {
           if (substr($datum_alt_2, 1, 4) == substr($datum2, 0, 4)) {
-            $datum2 = substr_replace($datum2, "07-15", 5);
+            $datum2 = substr_replace($datum2, '07-15', 5);
           } else {
             if (substr($datum_alt_2, 0, 2) < 1) {
-              $datum2 = substr_replace($datum2, "15", 8);
+              $datum2 = substr_replace($datum2, '15', 8);
             }
           }
         }
@@ -817,10 +817,10 @@ function age($row) {
     // format age
 
     if ($age < 0) {
-      $age = "";
+      $age = '';
     } else {
       if ($age >= 0 && $age < 10000) {
-        $age = "0 ";
+        $age = '0 ';
       } else {
         if ($age > 9999 && $age < 100000) {
           $age = substr($age, 0, 1);
@@ -838,34 +838,34 @@ function age($row) {
 
     // format sign
 
-    if ((($sign1 == "<") || ($sign1 == ">")) && (($sign2 == "<") || ($sign2 == ">"))) {
-      $sign = "~";
+    if ((($sign1 == '<') || ($sign1 == '>')) && (($sign2 == '<') || ($sign2 == '>'))) {
+      $sign = '~';
     } else {
-      if (($sign1 == "~") || ($sign2 == "~")) {
-        $sign = "~";
+      if (($sign1 == '~') || ($sign2 == '~')) {
+        $sign = '~';
       } else {
-        if ($sign1 && $sign1 <> " ") {
+        if ($sign1 && $sign1 <> ' ') {
           $sign = $sign1;
         }
-        if ($sign2 && $sign2 <> " ") {
+        if ($sign2 && $sign2 <> ' ') {
           $sign = $sign2;
         }
       }
     }
 
-    if ($age && $sign <> "") {
-      $age = $sign . " " . $age;
+    if ($age && $sign <> '') {
+      $age = $sign . ' ' . $age;
     }
   }
 
-  if ($age <> "") {
-    $age .= " " . uiTextSnippet('years');
+  if ($age <> '') {
+    $age .= ' ' . uiTextSnippet('years');
   }
 
   return $age;
 }
 
-function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $gender = "") {
+function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $gender = '') {
   global $rootpath;
   global $photopath;
   global $mediapath;
@@ -875,8 +875,8 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
   global $media_table;
   global $tngconfig;
 
-  $photo = "";
-  $photocheck = "";
+  $photo = '';
+  $photocheck = '';
 
   $query = "SELECT $media_table.mediaID, medialinkID, alwayson, thumbpath, mediatypeID, usecollfolder, newwindow "
       . "FROM ($media_table, $medialinks_table) WHERE personID = \"$persfamID\" AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
@@ -884,23 +884,23 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
   $row = tng_fetch_assoc($result);
 
   if ($row['thumbpath']) {
-    $targettext = $row['newwindow'] ? " target='_blank'" : "";
+    $targettext = $row['newwindow'] ? " target='_blank'" : '';
 
     if ($adm || $row['alwayson'] || $rights || checkLivingLinks($row['mediaID'])) {
       $mediatypeID = $row['mediatypeID'];
       $usefolder = $row['usecollfolder'] ? $mediatypes_assoc[$mediatypeID] : $mediapath;
       $photocheck = "$usefolder/" . $row['thumbpath'];
-      $photoref = "$usefolder/" . str_replace("%2F", "/", rawurlencode($row['thumbpath']));
+      $photoref = "$usefolder/" . str_replace('%2F', '/', rawurlencode($row['thumbpath']));
       if ($type) {
         $prefix = "<a href=\"admin_editmedia.php?mediaID={$row['mediaID']}\"$targettext>";
       } else {
         $prefix = "<a href=\"showmedia.php?mediaID={$row['mediaID']}&amp;medialinkID={$row['medialinkID']}\" title=\"" . str_replace("\"", "&#34;", $alttext) . "\"$targettext>";
       }
-      $suffix = "</a>";
+      $suffix = '</a>';
     }
   } elseif ($rights) {
     $photoref = $photocheck = "$photopath/$persfamID.$photosext";
-    $prefix = $suffix = "";
+    $prefix = $suffix = '';
   }
 
   $gotfile = $photocheck ? file_exists("$rootpath$photocheck") : false;
@@ -913,12 +913,12 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
       tng_free_result($result2);
       if ($numphotos) {
         //if photos exist, show box with link to sort page where they can pick a default
-        $photo = "<a href=\"mediaSortFormAction.php?newlink1=$persfamID&amp;mediatypeID=photos&amp;linktype1=$type\" class=\"small\" style=\"display:block;padding:8px;border:1px solid black;margin-right:6px;text-align:center\">" . uiTextSnippet('choosedef') . "</a>";
+        $photo = "<a href=\"mediaSortFormAction.php?newlink1=$persfamID&amp;mediatypeID=photos&amp;linktype1=$type\" class=\"small\" style=\"display:block;padding:8px;border:1px solid black;margin-right:6px;text-align:center\">" . uiTextSnippet('choosedef') . '</a>';
       } elseif ($gender && $tngconfig['usedefthumbs']) {
         if ($gender == 'M') {
-          $photocheck = "img/silhouette_male.png";
+          $photocheck = 'img/silhouette_male.png';
         } elseif ($gender == 'F') {
-          $photocheck = "img/silhouette_female.png";
+          $photocheck = 'img/silhouette_female.png';
         }
         $photoref = $photocheck;
         $gotfile = file_exists("$rootpath$photocheck");
@@ -926,7 +926,7 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
     }
   }
   if ($gotfile) {
-    $align = $height ? "" : " style=\"float:left;\"";
+    $align = $height ? '' : " style=\"float:left;\"";
     $photoinfo = getimagesize("$rootpath$photocheck");
     $photohtouse = $height ? $height : 100;
     if ($photoinfo[1] <= $photohtouse) {
@@ -950,8 +950,8 @@ function buildSilentPlaceLink($place) {
 function checkMaintenanceMode($area) {
   global $tngconfig;
 
-  if (strpos($_SERVER['SCRIPT_NAME'], "/mixedSuggest.php") === false && strpos($_SERVER['SCRIPT_NAME'], "admin") === false && $tngconfig['maint'] && (!$_SESSION['allow_admin']) && strpos($_SERVER['SCRIPT_NAME'], "/index.") === false) {
-    $maint_url = $area ? "adminmaint.php" : "maint.php";
+  if (strpos($_SERVER['SCRIPT_NAME'], "/mixedSuggest.php") === false && strpos($_SERVER['SCRIPT_NAME'], 'admin') === false && $tngconfig['maint'] && (!$_SESSION['allow_admin']) && strpos($_SERVER['SCRIPT_NAME'], "/index.") === false) {
+    $maint_url = $area ? 'adminmaint.php' : 'maint.php';
     header("Location:$maint_url");
     exit;
   }
@@ -959,11 +959,11 @@ function checkMaintenanceMode($area) {
 
 function cleanIt($string) {
   global $session_charset;
-  $string = htmlspecialchars(preg_replace("/\n/", " ", $string), ENT_QUOTES, $session_charset);
-  $string = preg_replace("/\"/", "&#34;", $string);
-  $string = preg_replace("/</", "&lt;", $string);
-  $string = preg_replace("/>/", "&gt;", $string);
-  $string = preg_replace("/\t/", "&#09;", $string);
+  $string = htmlspecialchars(preg_replace("/\n/", ' ', $string), ENT_QUOTES, $session_charset);
+  $string = preg_replace('/\"/', '&#34;', $string);
+  $string = preg_replace('/</', '&lt;', $string);
+  $string = preg_replace('/>/', '&gt;', $string);
+  $string = preg_replace('/\t/', '&#09;', $string);
 
   return $string;
 }
@@ -984,9 +984,9 @@ function tng_strtoupper($string) {
   global $session_charset;
 
   $ucharset = strtoupper($session_charset);
-  $enc = function_exists(mb_detect_encoding) ? mb_detect_encoding($string) : "";
-  if ($enc && strtoupper($enc) == "UTF-8" && $ucharset == "UTF-8") {
-    $string = mb_strtoupper($string, "UTF-8");
+  $enc = function_exists(mb_detect_encoding) ? mb_detect_encoding($string) : '';
+  if ($enc && strtoupper($enc) == 'UTF-8' && $ucharset == 'UTF-8') {
+    $string = mb_strtoupper($string, 'UTF-8');
   } else {
     $string = strtoupper($string);
   }
@@ -998,9 +998,9 @@ function tng_strtolower($string) {
   global $session_charset;
 
   $ucharset = strtoupper($session_charset);
-  $enc = function_exists(mb_detect_encoding) ? mb_detect_encoding($string) : "";
-  if ($enc && strtoupper($enc) == "UTF-8" && $ucharset == "UTF-8") {
-    $string = mb_strtolower($string, "UTF-8");
+  $enc = function_exists(mb_detect_encoding) ? mb_detect_encoding($string) : '';
+  if ($enc && strtoupper($enc) == 'UTF-8' && $ucharset == 'UTF-8') {
+    $string = mb_strtolower($string, 'UTF-8');
   } else {
     $string = strtolower($string);
   }
@@ -1012,9 +1012,9 @@ function tng_utf8_decode($text) {
   global $session_charset;
 
   $ucharset = strtoupper($session_charset);
-  if ($ucharset == "ISO-8859-1") {
+  if ($ucharset == 'ISO-8859-1') {
     $text = utf8_decode($text);
-  } elseif ($ucharset == "ISO-8859-2") {
+  } elseif ($ucharset == 'ISO-8859-2') {
     $text = utf82iso88592($text);
   }
   return $text;
@@ -1050,7 +1050,7 @@ function getAllTextPath() {
   global $languagesPath;
 
   $rootpath = trim($rootpath);
-  if ($rootpath && strpos($rootpath, "http") !== 0) {
+  if ($rootpath && strpos($rootpath, 'http') !== 0) {
     $thislanguage = trim($mylanguage ? $mylanguage : $languagesPath . $language);
   }
 }
@@ -1059,7 +1059,7 @@ function buildParentRow($parent, $spouse, $label) {
   global $people_table;
   global $families_table;
 
-  $out = "";
+  $out = '';
   $query = "SELECT personID, lastname, lnprefix, firstname, birthdate, birthplace, altbirthdate, altbirthplace, prefix, suffix, nameorder FROM $people_table, $families_table WHERE $people_table.personID = $families_table.$spouse AND $families_table.familyID = \"{$parent['familyID']}\"";
   $gotparent = tng_query($query);
 
@@ -1070,7 +1070,7 @@ function buildParentRow($parent, $spouse, $label) {
     $prow['allow_living'] = $prights['living'];
     $prow['allow_private'] = $prights['private'];
 
-    $birthinfo = $prow['birthdate'] ? " (" . uiTextSnippet('birthabbr') . " " . displayDate($prow['birthdate']) . ")" : "";
+    $birthinfo = $prow['birthdate'] ? ' (' . uiTextSnippet('birthabbr') . ' ' . displayDate($prow['birthdate']) . ')' : '';
 
     $out = "<div class='form-group row'>\n";
       $out .= "<label class='col-sm-2 form-control-label' for='parent'>" . uiTextSnippet($label) . "</label>\n";
@@ -1086,13 +1086,13 @@ function buildParentRow($parent, $spouse, $label) {
         $out .= "<select class='form-control form-control-sm' id='relationship' name=\"$fieldname{$parent['familyID']}\">\n";
         $out .= "<option value=''></option>\n";
 
-        $reltypes = ["adopted", "birth", "foster", "sealing", "step"];
+        $reltypes = ['adopted', 'birth', 'foster', 'sealing', 'step'];
         foreach ($reltypes as $reltype) {
           $out .= "<option value=\"$reltype\"";
           if ($parent[$fieldname] == $reltype || $parent[$fieldname] == uiTextSnippet($reltype)) {
-            $out .= " selected";
+            $out .= ' selected';
           }
-          $out .= ">" . uiTextSnippet($reltype) . "</option>\n";
+          $out .= '>' . uiTextSnippet($reltype) . "</option>\n";
         }
         $out .= "</select>\n";
       $out .= "</div>\n";
@@ -1105,15 +1105,15 @@ function buildParentRow($parent, $spouse, $label) {
 
 function buildSexSelectControl($sex) {
   $out = "<label class='form-check-inline'>\n";
-  $out .= "<input class='form-check-input' name ='sex' type='radio' value='M'" . (($sex == 'M') ? " checked>" : ">");
+  $out .= "<input class='form-check-input' name ='sex' type='radio' value='M'" . (($sex == 'M') ? ' checked>' : '>');
   $out .= uiTextSnippet('male');
   $out .= "</label>\n";
   $out .= "<label class='form-check-inline'>\n";
-  $out .= "<input class='form-check-input' name ='sex' type='radio' value='F'" . (($sex == 'F') ? " checked>" : ">");
+  $out .= "<input class='form-check-input' name ='sex' type='radio' value='F'" . (($sex == 'F') ? ' checked>' : '>');
   $out .= uiTextSnippet('female');
   $out .= "</label>\n";
   $out .= "<label class='form-check-inline'>\n";
-  $out .= "<input class='form-check-input' name ='sex' type='radio' value='U'" . (($sex == 'U') ? " checked>" : ">");
+  $out .= "<input class='form-check-input' name ='sex' type='radio' value='U'" . (($sex == 'U') ? ' checked>' : '>');
   $out .= uiTextSnippet('unknown');
   $out .= "</label>\n";
   

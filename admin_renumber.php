@@ -10,12 +10,12 @@ require 'prefixes.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 //can only start if in maintenance mode
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('backuprestore'));
 ?>
 <!DOCTYPE html>
@@ -24,12 +24,12 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
 <body>
 
 <?php
-$headline = uiTextSnippet('backuprestore') . " &gt;&gt; " . uiTextSnippet('renumber');
+$headline = uiTextSnippet('backuprestore') . ' &gt;&gt; ' . uiTextSnippet('renumber');
 $navList = new navList('');
-$navList->appendItem([true, "admin_utilities.php?sub=tables", uiTextSnippet('tables'), "tables"]);
-$navList->appendItem([true, "admin_utilities.php?sub=structure", uiTextSnippet('tablestruct'), "structure"]);
-$navList->appendItem([true, "admin_renumbermenu.php", uiTextSnippet('renumber'), "renumber"]);
-echo $navList->build("renumber");
+$navList->appendItem([true, 'admin_utilities.php?sub=tables', uiTextSnippet('tables'), 'tables']);
+$navList->appendItem([true, 'admin_utilities.php?sub=structure', uiTextSnippet('tablestruct'), 'structure']);
+$navList->appendItem([true, 'admin_renumbermenu.php', uiTextSnippet('renumber'), 'renumber']);
+echo $navList->build('renumber');
 ?>
 <div>
   <div>
@@ -42,26 +42,26 @@ echo $navList->build("renumber");
       $digits = 0;
     }
     if (!isset($type)) {
-      $type = "person";
+      $type = 'person';
     }
     $count = 0;
 
-    eval("\$prefix = \$$type" . "prefix;");
-    eval("\$suffix = \$$type" . "suffix;");
+    eval("\$prefix = \$$type" . 'prefix;');
+    eval("\$suffix = \$$type" . 'suffix;');
 
     //choose to do people, families, sources or repos
-    if ($type == "person") {
+    if ($type == 'person') {
       $table = $people_table;
-      $id = "personID";
-    } elseif ($type == "family") {
+      $id = 'personID';
+    } elseif ($type == 'family') {
       $table = $families_table;
-      $id = "familyID";
-    } elseif ($type == "source") {
+      $id = 'familyID';
+    } elseif ($type == 'source') {
       $table = $sources_table;
-      $id = "sourceID";
-    } elseif ($type == "repo") {
+      $id = 'sourceID';
+    } elseif ($type == 'repo') {
       $table = $repositories_table;
-      $id = "repoID";
+      $id = 'repoID';
     }
 
     //get all people after start number, sorted on ID (not including prefix)
@@ -76,7 +76,7 @@ echo $navList->build("renumber");
     $result = tng_query($query);
 
     //do this only for person type:
-    if ($type == "person") {
+    if ($type == 'person') {
       //search media table for all media records with an image map
       $query = "SELECT mediaID, map FROM $media_table WHERE map != ''";
       $result1 = tng_query($query);
@@ -84,7 +84,7 @@ echo $navList->build("renumber");
       $maps = [];
       while ($row = tng_fetch_assoc($result1)) {
         //put all in an array with mediaID as the key
-        $maps[$row['mediaID']] = ["map" => $row['map'], "newmap" => ""];
+        $maps[$row['mediaID']] = ['map' => $row['map'], 'newmap' => ''];
         $pattern = "/personID=(I\d+)&[amp;]*tree=$tree/";
         //loop over all of them and pull out person IDs
         preg_match_all($pattern, $row['map'], $matches, PREG_SET_ORDER);
@@ -93,7 +93,7 @@ echo $navList->build("renumber");
           $fullmatch = $match[0];
           $specmatch = $match[1];
           $key = $specmatch;
-          $keys[$key][] = ["mediaID" => $row['mediaID'], "found" => $fullmatch];
+          $keys[$key][] = ['mediaID' => $row['mediaID'], 'found' => $fullmatch];
           /* this block used for testing
             if(isset($keys[$key])) {
             foreach($keys[$key] as $tkey) {
@@ -121,17 +121,17 @@ echo $navList->build("renumber");
         break;
       }
       if ($row['num'] >= $nextnum) {
-        $newID = $digits ? ($prefix . str_pad($nextnum, $digits, "0", STR_PAD_LEFT) . $suffix) : ($prefix . $nextnum . $suffix);
+        $newID = $digits ? ($prefix . str_pad($nextnum, $digits, '0', STR_PAD_LEFT) . $suffix) : ($prefix . $nextnum . $suffix);
 
         $query = "SELECT ID FROM $table WHERE $id = '$newID'";
         $result1 = tng_query($query);
         if (!tng_num_rows($result1)) {
-          //if(tng_num_rows($result1)) die ("Problem: destination ID ($newID) already exists. Operation aborted.");
+          //if(tng_num_rows($result1)) die("Problem: destination ID ($newID) already exists. Operation aborted.");
           //change ID in people to match next #
           $query = "UPDATE $table SET $id=\"$newID\" WHERE ID=\"{$row['ID']}\"";
           $result2 = tng_query($query);
 
-          if ($type == "person") {
+          if ($type == 'person') {
             $old = $row['personID'];
 
             $query = "UPDATE $families_table SET husband = '$newID' WHERE husband = '$old'";
@@ -177,7 +177,7 @@ echo $navList->build("renumber");
             }
           }
 
-          if ($type == "family") {
+          if ($type == 'family') {
             $query = "UPDATE $children_table SET familyID = '$newID' WHERE familyID=\"{$row['familyID']}\"";
             $result2 = tng_query($query);
 
@@ -194,7 +194,7 @@ echo $navList->build("renumber");
           $query = "UPDATE $medialinks_table SET personID = '$newID' WHERE personID=\"" . $row[$id] . "\"";
           $result2 = tng_query($query);
 
-          if ($type == "person" || $type == "family") {
+          if ($type == 'person' || $type == 'family') {
             $query = "UPDATE $branchlinks_table SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . "\"";
             $result2 = tng_query_noerror($query);
             $success = tng_affected_rows();
@@ -207,7 +207,7 @@ echo $navList->build("renumber");
           $query = "UPDATE $album2entities_table SET entityID = '$newID' WHERE entityID=\"" . $row[$id] . "\"";
           $result2 = tng_query($query);
 
-          if ($type == "source") {
+          if ($type == 'source') {
             $query = "UPDATE $citations_table SET sourceID = '$newID' WHERE sourceID=\"" . $row[$id] . "\"";
             $result2 = tng_query($query);
           } else {
@@ -230,7 +230,7 @@ echo $navList->build("renumber");
     }
     tng_free_result($result);
 
-    echo "<p>" . uiTextSnippet('finreseq') . ": $count " . uiTextSnippet('recsreseq') . "</p>\n";
+    echo '<p>' . uiTextSnippet('finreseq') . ": $count " . uiTextSnippet('recsreseq') . "</p>\n";
     echo "</div></div>\n";
     echo "<div align=\"right\"><span>$tng_title, v.$tng_version</span></div>";
     ?>

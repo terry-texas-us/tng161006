@@ -11,7 +11,7 @@ require 'mail.php';
 
 if (!$allowEdit) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 $description = addslashes($description);
@@ -35,7 +35,7 @@ if (($password != $orgpwd) || $newuser) {
   $password_type = PasswordType();
   $pwd_str = "password=\"$password\",password_type=\"$password_type\",";
 } else {
-  $pwd_str = "";
+  $pwd_str = '';
 }
 if (!$form_allow_add) {
   $form_allow_add = 0;
@@ -73,7 +73,7 @@ if (!$no_email) {
 if (!$disabled) {
   $disabled = 0;
 }
-$today = date("Y-m-d H:i:s", time() + (3600 * $timeOffset));
+$today = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
 
 //if the username has changed, we must look up the new name to see if it exists
 //if it exists, "duplicate"
@@ -95,13 +95,13 @@ if (!$duplicate && $email && $email != $orgemail) {
   }
 }
 if (!$duplicate) {
-  $activatedstr = $newuser ? ", dt_activated=\"$today\"" : "";
+  $activatedstr = $newuser ? ", dt_activated=\"$today\"" : '';
   $query = "UPDATE $users_table SET description = '$description', username = '$username', {$pwd_str}realname = '$realname', phone = '$phone', email= '$email', website = '$website', address = '$address', city = '$city', state = '$state', zip = '$zip', country = '$country', notes = '$notes', mygedcom = '$mynewgedcom', personID = '$personID', role = '$role', allow_edit = '$form_allow_edit', allow_add = '$form_allow_add', tentative_edit = '$form_tentative_edit', allow_delete = '$form_allow_delete', allow_lds = '$form_allow_lds', allow_living = '$form_allow_living', allow_private = '$form_allow_private', allow_ged = '$form_allow_ged', allow_pdf = '$form_allow_pdf', allow_profile = '$form_allow_profile', branch = '$branch'{$activatedstr}, no_email = '$no_email', disabled='$disabled' WHERE userID = '$userID'";
 
   $result = tng_query($query);
 
   if ($notify && $email) {
-    $owner = preg_replace("/,/", "", ($sitename ? $sitename : ($dbowner ? $dbowner : "TNG")));
+    $owner = preg_replace("/,/", '', ($sitename ? $sitename : ($dbowner ? $dbowner : 'TNG')));
 
     tng_sendmail($owner, $emailaddr, $realname, $email, uiTextSnippet('subjectline'), stripslashes($welcome), $emailaddr, $emailaddr);
   }
@@ -112,7 +112,7 @@ if (!$duplicate) {
   $message = uiTextSnippet('duplicate');
 }
 if ($newuser) {
-  header("Location: usersReview.php?message=" . urlencode($message));
+  header('Location: usersReview.php?message=' . urlencode($message));
 } else {
-  header("Location: usersBrowse.php?message=" . urlencode($message));
+  header('Location: usersBrowse.php?message=' . urlencode($message));
 }

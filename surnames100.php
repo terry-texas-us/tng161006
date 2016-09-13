@@ -1,18 +1,18 @@
 <?php
 require 'tng_begin.php';
 
-$topnum = preg_replace("/[^0-9]/", '', $topnum);
+$topnum = preg_replace('/[^0-9]/', '', $topnum);
 
-$text['top30'] = preg_replace("/xxx/", $topnum, $text['top30']);
+$text['top30'] = preg_replace('/xxx/', $topnum, $text['top30']);
 
-$logstring = "<a href='surnames100.php?topnum=$topnum'>" . xmlcharacters(uiTextSnippet('surnamelist') . ": " . uiTextSnippet('top') . " $topnum") . "</a>";
+$logstring = "<a href='surnames100.php?topnum=$topnum'>" . xmlcharacters(uiTextSnippet('surnamelist') . ': ' . uiTextSnippet('top') . " $topnum") . '</a>';
 writelog($logstring);
 preparebookmark($logstring);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('surnamelist') . " &mdash; " . uiTextSnippet('top') . " $topnum");
 ?>
 <!DOCTYPE html>
@@ -21,11 +21,11 @@ $headSection->setTitle(uiTextSnippet('surnamelist') . " &mdash; " . uiTextSnippe
 <body id='public'>
   <section class='container'>
     <?php echo $publicHeaderSection->build(); ?>
-    <h2><img class='icon-md' src='svg/person.svg'><?php echo uiTextSnippet('surnamelist') . ": " . uiTextSnippet('top30'); ?></h2>
+    <h2><img class='icon-md' src='svg/person.svg'><?php echo uiTextSnippet('surnamelist') . ': ' . uiTextSnippet('top30'); ?></h2>
     <br class='clearleft'>
     <?php
 
-    beginFormElement("surnames100", "get");
+    beginFormElement('surnames100', 'get');
     ?>
       <div>
         <?php echo uiTextSnippet('showtop'); ?>&nbsp;
@@ -36,8 +36,8 @@ $headSection->setTitle(uiTextSnippet('surnamelist') . " &mdash; " . uiTextSnippe
       <br>
 
       <div>
-        <h4><?php echo uiTextSnippet('top30') . " (" . uiTextSnippet('totalnames') . "):"; ?></h4>
-        <p class="small"><?php echo uiTextSnippet('showmatchingsurnames') . "&nbsp;&nbsp;&nbsp;<a href='surnames.php'>" . uiTextSnippet('mainsurnamepage') . "</a> &nbsp;|&nbsp; <a href = 'surnames-all.php'>" . uiTextSnippet('showallsurnames') . "</a>"; ?></p>
+        <h4><?php echo uiTextSnippet('top30') . ' (' . uiTextSnippet('totalnames') . '):'; ?></h4>
+        <p class="small"><?php echo uiTextSnippet('showmatchingsurnames') . "&nbsp;&nbsp;&nbsp;<a href='surnames.php'>" . uiTextSnippet('mainsurnamepage') . "</a> &nbsp;|&nbsp; <a href = 'surnames-all.php'>" . uiTextSnippet('showallsurnames') . '</a>'; ?></p>
         <?php require 'surnamestable.php'; ?>
       </div>
       <br>

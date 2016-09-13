@@ -28,7 +28,7 @@ if ($newsearch) {
     setcookie("tng_search_sources_post[offset]", $offset, $exptime);
   }
 }
-$searchstring_noquotes = preg_replace("/\"/", "&#34;", $searchstring);
+$searchstring_noquotes = preg_replace('/\"/', '&#34;', $searchstring);
 $searchstring = addslashes($searchstring);
 
 if ($offset) {
@@ -36,21 +36,21 @@ if ($offset) {
   $newoffset = "$offset, ";
 } else {
   $offsetplus = 1;
-  $newoffset = "";
+  $newoffset = '';
   $tngpage = 1;
 }
 
 function addCriteria($field, $value, $operator) {
-  $criteria = "";
+  $criteria = '';
 
-  if ($operator == "=") {
+  if ($operator == '=') {
     $criteria = " OR $field $operator \"$value\"";
   } else {
-    $innercriteria = "";
+    $innercriteria = '';
     $terms = explode(' ', $value);
     foreach ($terms as $term) {
       if ($innercriteria) {
-        $innercriteria .= " AND ";
+        $innercriteria .= ' AND ';
       }
       $innercriteria .= "$field $operator \"%$term%\"";
     }
@@ -61,24 +61,24 @@ function addCriteria($field, $value, $operator) {
 
   return $criteria;
 }
-$allwhere = "1=1";
+$allwhere = '1=1';
 
 if ($searchstring) {
-  $allwhere .= " AND (1=0 ";
-  if ($exactmatch == "yes") {
-    $frontmod = "=";
+  $allwhere .= ' AND (1=0 ';
+  if ($exactmatch == 'yes') {
+    $frontmod = '=';
   } else {
-    $frontmod = "LIKE";
+    $frontmod = 'LIKE';
   }
 
-  $allwhere .= addCriteria("sourceID", $searchstring, $frontmod);
-  $allwhere .= addCriteria("shorttitle", $searchstring, $frontmod);
-  $allwhere .= addCriteria("title", $searchstring, $frontmod);
-  $allwhere .= addCriteria("author", $searchstring, $frontmod);
-  $allwhere .= addCriteria("callnum", $searchstring, $frontmod);
-  $allwhere .= addCriteria("publisher", $searchstring, $frontmod);
-  $allwhere .= addCriteria("actualtext", $searchstring, $frontmod);
-  $allwhere .= ")";
+  $allwhere .= addCriteria('sourceID', $searchstring, $frontmod);
+  $allwhere .= addCriteria('shorttitle', $searchstring, $frontmod);
+  $allwhere .= addCriteria('title', $searchstring, $frontmod);
+  $allwhere .= addCriteria('author', $searchstring, $frontmod);
+  $allwhere .= addCriteria('callnum', $searchstring, $frontmod);
+  $allwhere .= addCriteria('publisher', $searchstring, $frontmod);
+  $allwhere .= addCriteria('actualtext', $searchstring, $frontmod);
+  $allwhere .= ')';
 }
 
 $query = "SELECT sourceID, shorttitle, title, ID FROM $sources_table WHERE $allwhere ORDER BY shorttitle, title LIMIT $newoffset" . $maxsearchresults;
@@ -94,7 +94,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 } else {
   $totrows = $numrows;
 }
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('sources'));
 ?>
 <!DOCTYPE html>
@@ -105,10 +105,10 @@ $headSection->setTitle(uiTextSnippet('sources'));
     <?php
     echo $adminHeaderSection->build('sources', $message);
     $navList = new navList('');
-    // $navList->appendItem([true, "sourcesBrowse.php", uiTextSnippet('browse'), "findsource"]);
-    $navList->appendItem([$allowAdd, "sourcesAdd.php", uiTextSnippet('add'), "addsource"]);
-    $navList->appendItem([$allowEdit && $allowDelete, "sourcesMerge.php", uiTextSnippet('merge'), "merge"]);
-    echo $navList->build("findsource");
+    // $navList->appendItem([true, 'sourcesBrowse.php', uiTextSnippet('browse'), 'findsource']);
+    $navList->appendItem([$allowAdd, 'sourcesAdd.php', uiTextSnippet('add'), 'addsource']);
+    $navList->appendItem([$allowEdit && $allowDelete, 'sourcesMerge.php', uiTextSnippet('merge'), 'merge']);
+    echo $navList->build('findsource');
     require '_/components/php/findSourcesForm.php';
     ?>
     <div class="row">
@@ -139,7 +139,7 @@ $headSection->setTitle(uiTextSnippet('sources'));
           </tr>
           <?php
           if ($numrows) {
-            $actionstr = "";
+            $actionstr = '';
             if ($allowEdit) {
               $actionstr .= "<a href=\"sourcesEdit.php?sourceID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
               $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
@@ -155,11 +155,11 @@ $headSection->setTitle(uiTextSnippet('sources'));
             $actionstr .= "</a>\n";
 
             while ($row = tng_fetch_assoc($result)) {
-              $newactionstr = preg_replace("/xxx/", $row['sourceID'], $actionstr);
-              $newactionstr = preg_replace("/zzz/", $row['ID'], $newactionstr);
+              $newactionstr = preg_replace('/xxx/', $row['sourceID'], $actionstr);
+              $newactionstr = preg_replace('/zzz/', $row['ID'], $newactionstr);
               $title = $row['shorttitle'] ? $row['shorttitle'] : $row['title'];
               $editlink = "sourcesEdit.php?sourceID={$row['sourceID']}";
-              $id = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['sourceID'] . "</a>" : $row['sourceID'];
+              $id = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['sourceID'] . '</a>' : $row['sourceID'];
 
               echo "<tr id=\"row_{$row['ID']}\">\n";
                 echo "<td><div class=\"action-btns\">$newactionstr</div></td>\n";
@@ -171,7 +171,7 @@ $headSection->setTitle(uiTextSnippet('sources'));
               echo "</tr>\n";
             }
           } else {
-            echo "<tr><td>" . uiTextSnippet('norecords') . "</td></tr>\n";
+            echo '<tr><td>' . uiTextSnippet('norecords') . "</td></tr>\n";
           }
         ?> </table> <?php
         echo buildSearchResultPagination($totrows, "sourcesBrowse.php?searchstring=$searchstring&amp;exactmatch=$exactmatch&amp;offset", $maxsearchresults, 5);

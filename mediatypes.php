@@ -39,7 +39,7 @@ function setMediaType($newtype) {
   $mediatypes_assoc[$ID] = $newtype['path'];
   $mediatypes_icons[$ID] = $newtype['icon'];
   $mediatypes_thumbs[$ID] = $newtype['thumb'];
-  $mediatypes_display[$ID] = isset($newtype['display']) ? $newtype['display'] : "";
+  $mediatypes_display[$ID] = isset($newtype['display']) ? $newtype['display'] : '';
   $mediatypes_like[$newtype['liketype']][] = $ID;
   $mctr++;
 }
@@ -66,81 +66,81 @@ function initMediaTypes() {
   if ($result) {
     while ($row = tng_fetch_assoc($result)) {
       switch ($row['mediatypeID']) {
-        case "photos":
+        case 'photos':
           setMediaType(
-              ["mediatypeID" => "photos",
-              "path" => $photopath,
-              "icon" => "svg/images.svg",
-              "thumb" => "photos_thumb.png",
-              "liketype" => "photos",
-              "exportas" => "PHOTO",
-              "type" => 0,
-              "disabled" => $row['disabled']
+              ['mediatypeID' => 'photos',
+              'path' => $photopath,
+              'icon' => 'svg/images.svg',
+              'thumb' => 'photos_thumb.png',
+              'liketype' => 'photos',
+              'exportas' => 'PHOTO',
+              'type' => 0,
+              'disabled' => $row['disabled']
               ]
           );
           break;
-        case "documents":
+        case 'documents':
           setMediaType(
-              ["mediatypeID" => "documents",
-              "path" => $documentpath,
-              "icon" => "svg/documents.svg",
-              "thumb" => "documents_thumb.png",
-              "liketype" => "documents",
-              "exportas" => "DOCUMENT",
-              "type" => 0,
-              "disabled" => $row['disabled']
+              ['mediatypeID' => 'documents',
+              'path' => $documentpath,
+              'icon' => 'svg/documents.svg',
+              'thumb' => 'documents_thumb.png',
+              'liketype' => 'documents',
+              'exportas' => 'DOCUMENT',
+              'type' => 0,
+              'disabled' => $row['disabled']
               ]
           );
           break;
-        case "headstones":
+        case 'headstones':
           setMediaType(
-              ["mediatypeID" => "headstones",
-              "path" => $headstonepath,
-              "icon" => "svg/headstone.svg",
-              "thumb" => "headstones_thumb.png",
-              "liketype" => "headstones",
-              "exportas" => "HEADSTONE",
-              "type" => 0,
-              "disabled" => $row['disabled']
+              ['mediatypeID' => 'headstones',
+              'path' => $headstonepath,
+              'icon' => 'svg/headstone.svg',
+              'thumb' => 'headstones_thumb.png',
+              'liketype' => 'headstones',
+              'exportas' => 'HEADSTONE',
+              'type' => 0,
+              'disabled' => $row['disabled']
               ]
           );
           break;
-        case "histories":
+        case 'histories':
           setMediaType(
-              ["mediatypeID" => "histories",
-              "path" => $historypath,
-              "icon" => "svg/book.svg",
-              "thumb" => "histories_thumb.png",
-              "liketype" => "histories",
-              "exportas" => "HISTORY",
-              "type" => 0,
-              "disabled" => $row['disabled']
+              ['mediatypeID' => 'histories',
+              'path' => $historypath,
+              'icon' => 'svg/book.svg',
+              'thumb' => 'histories_thumb.png',
+              'liketype' => 'histories',
+              'exportas' => 'HISTORY',
+              'type' => 0,
+              'disabled' => $row['disabled']
               ]
           );
           break;
-        case "recordings":
+        case 'recordings':
           setMediaType(
-              ["mediatypeID" => "recordings",
-              "path" => $mediapath,
-              "icon" => "svg/mic.svg",
-              "thumb" => "recordings_thumb.png",
-              "liketype" => "recordings",
-              "exportas" => "RECORDING",
-              "type" => 0,
-              "disabled" => $row['disabled']
+              ['mediatypeID' => 'recordings',
+              'path' => $mediapath,
+              'icon' => 'svg/mic.svg',
+              'thumb' => 'recordings_thumb.png',
+              'liketype' => 'recordings',
+              'exportas' => 'RECORDING',
+              'type' => 0,
+              'disabled' => $row['disabled']
               ]
           );
           break;
-        case "videos":
+        case 'videos':
           setMediaType(
-              ["mediatypeID" => "videos",
-              "path" => $mediapath,
-              "icon" => "svg/video.svg",
-              "thumb" => "videos_thumb.png",
-              "liketype" => "videos",
-              "exportas" => "VIDEO",
-              "type" => 0,
-              "disabled" => $row['disabled']
+              ['mediatypeID' => 'videos',
+              'path' => $mediapath,
+              'icon' => 'svg/video.svg',
+              'thumb' => 'videos_thumb.png',
+              'liketype' => 'videos',
+              'exportas' => 'VIDEO',
+              'type' => 0,
+              'disabled' => $row['disabled']
               ]
           );
           break;

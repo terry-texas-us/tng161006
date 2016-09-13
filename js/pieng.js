@@ -10,8 +10,8 @@ if (/MSIE [56].*Windows/.test(navigator.userAgent))
             if (!/\.png$/.test(src) || !/googlemaps/.test(src))
                 continue;
             var s = img.runtimeStyle;
-            s.width = img.offsetWidth + "px";
-            s.height = img.offsetHeight + "px";
+            s.width = img.offsetWidth + 'px';
+            s.height = img.offsetHeight + 'px';
             s.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + src + "',sizingMethod='scale')";
             img.src = blank.src;
         }

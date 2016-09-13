@@ -8,7 +8,7 @@ require 'checklogin.php';
 
 if (!$allowMediaAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 require 'adminlog.php';
@@ -26,10 +26,10 @@ if ($lastslash !== false) {
   $thumb_folder = substr($thumbprefix, 0, $lastslash);
   $thumb_prefix = substr($thumbprefix, $lastslash + 1);
 } else {
-  $thumb_folder = "";
+  $thumb_folder = '';
   $thumb_prefix = $thumbprefix;
 }
-$endslash = strpos($tngdomain, strlen($tngdomain)) == "/" ? "" : "/";
+$endslash = strpos($tngdomain, strlen($tngdomain)) == '/' ? '' : '/';
 $mediafolder = $mediatypes_assoc[$mediatypeID];
 if ($folder) {
   $mediafolder .= "/$folder";
@@ -39,8 +39,8 @@ if ($folder) {
         this will alter the default behaviour of the sample handler from blueimp */
 
 $options = [
-        'mediapath' => $rootpath . $endrootpath . $mediafolder . "/",
-        'mediaurl' => $tngdomain . $endslash . $mediafolder . "/",
+        'mediapath' => $rootpath . $endrootpath . $mediafolder . '/',
+        'mediaurl' => $tngdomain . $endslash . $mediafolder . '/',
         'thumb_folder' => $thumb_folder,
         'thumb_prefix' => $thumb_prefix,
         'thumb_suffix' => $thumbsuffix,

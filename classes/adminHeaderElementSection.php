@@ -14,7 +14,7 @@ class AdminHeaderElementSection extends HeaderElementSection {
     $levelDelimiter = mb_strpos($currentPage, '-');
     $topLevel = $levelDelimiter != 0 ? mb_substr($currentPage, 0, $levelDelimiter) : $currentPage;
 
-    $iconPath = "img/" . $topLevel . "_icon.gif";
+    $iconPath = 'img/' . $topLevel . '_icon.gif';
 
     $this->out = "<header id='$this->id' class='clearfix'>\n";
 

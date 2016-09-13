@@ -8,7 +8,7 @@ require 'version.php';
 
 if (!$allowAdd) {
   $message = uiTextSnippet('norights');
-  header("Location: admin_login.php?message=" . urlencode($message));
+  header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
 
@@ -21,7 +21,7 @@ if ($child) {
     if ($wife) {
       $newperson = $wife;
     } else {
-      $newperson = "";
+      $newperson = '';
     }
   }
 }
@@ -51,7 +51,7 @@ if (!isset($wifestr)) {
 }
 $revstar = checkReview('F');
 
-header("Content-type: text/html; charset=" . $session_charset);
+header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('addnewfamily'));
 ?>
 <!DOCTYPE html>
@@ -62,10 +62,10 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
     <?php
     echo $adminHeaderSection->build('families-addnewfamily', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "familiesBrowse.php", uiTextSnippet('browse'), "findfamily"]);
-    //    $navList->appendItem([$allowAdd, "familiesAdd.php", uiTextSnippet('add'), "addfamily"]);
-    $navList->appendItem([$allowEdit, "admin_findreview.php?type=F", uiTextSnippet('review') . $revstar, "review"]);
-    echo $navList->build("addfamily");
+    $navList->appendItem([true, 'familiesBrowse.php', uiTextSnippet('browse'), 'findfamily']);
+    //    $navList->appendItem([$allowAdd, 'familiesAdd.php', uiTextSnippet('add'), 'addfamily']);
+    $navList->appendItem([$allowEdit, 'admin_findreview.php?type=F', uiTextSnippet('review') . $revstar, 'review']);
+    echo $navList->build('addfamily');
     ?>
     <div class='small'>
       <a href='#' onClick="toggleAll('on');"><?php echo uiTextSnippet('expandall'); ?></a>
@@ -88,11 +88,11 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
                   $query = "SELECT branch, description FROM $branches_table ORDER BY description";
                   $branchresult = tng_query($query);
                   $numbranches = tng_num_rows($branchresult);
-                  $branchlist = explode(",", $row['branch']);
+                  $branchlist = explode(',', $row['branch']);
 
                   $descriptions = [];
-                  $assdesc = "";
-                  $options = "";
+                  $assdesc = '';
+                  $options = '';
                   while ($branchrow = tng_fetch_assoc($branchresult)) {
                     $options .= "  <option value=\"{$branchrow['branch']}\">{$branchrow['description']}</option>\n";
                     if ($branchrow['branch'] == $assignedbranch) {
@@ -102,17 +102,17 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
                   echo "<span id='branchlist'></span>";
                   if (!$assignedbranch) {
                     if ($numbranches > 8) {
-                      $select = uiTextSnippet('scrollbranch') . "<br>";
+                      $select = uiTextSnippet('scrollbranch') . '<br>';
                     }
                     $select .= "<select id='branch' name=\"branch[]\" multiple size=\"8\">\n";
                     $select .= "  <option value=''";
-                    if ($row['branch'] == "") {
-                      $select .= " selected";
+                    if ($row['branch'] == '') {
+                      $select .= ' selected';
                     }
-                    $select .= ">" . uiTextSnippet('nobranch') . "</option>\n";
+                    $select .= '>' . uiTextSnippet('nobranch') . "</option>\n";
 
                     $select .= "$options</select>\n";
-                    echo " &nbsp;<span>(<a href='#' onclick=\"showBranchEdit('branchedit'); quitBranchEdit('branchedit'); return false;\"><img src='img/ArrowDown.gif'>" . uiTextSnippet('edit') . "</a> )</span><br>";
+                    echo " &nbsp;<span>(<a href='#' onclick=\"showBranchEdit('branchedit'); quitBranchEdit('branchedit'); return false;\"><img src='img/ArrowDown.gif'>" . uiTextSnippet('edit') . '</a> )</span><br>';
                     ?>
                     <div id='branchedit' style='position: absolute; display: none;'
                          onmouseover="clearTimeout(branchtimer);"
@@ -147,7 +147,7 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
         </tr>
         <tr>
           <td>
-            <?php echo displayToggle("plus0", 1, "spouses", uiTextSnippet('spouses'), ""); ?>
+            <?php echo displayToggle('plus0', 1, 'spouses', uiTextSnippet('spouses'), ''); ?>
 
             <div id='spouses'>
               <table class='table table-sm'>
@@ -195,7 +195,7 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
         </tr>
         <tr>
           <td>
-            <?php echo displayToggle("plus1", 1, "events", uiTextSnippet('events'), ""); ?>
+            <?php echo displayToggle('plus1', 1, 'events', uiTextSnippet('events'), ''); ?>
 
             <div id='events'>
               <p><?php echo uiTextSnippet('datenote'); ?></p>
@@ -242,13 +242,13 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
 <?php require_once 'eventlib.php'; ?>
 <script>
   var tnglitbox;
-  var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : "false"); ?>;
+  var preferEuro = <?php echo($tngconfig['preferEuro'] ? $tngconfig['preferEuro'] : 'false'); ?>;
   var preferDateFormat = '<?php echo $preferDateFormat; ?>';
 </script>
 <script src="js/selectutils.js"></script>
 <script src="js/datevalidation.js"></script>
 <script>
-  var persfamID = "";
+  var persfamID = '';
   var allow_cites = false;
   var allow_notes = false;
 
@@ -266,7 +266,7 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
   if (!$assignedbranch) {
     include 'branchlibjs.php';
   } else {
-    $swapbranches = "";
+    $swapbranches = '';
   }
   ?>
 
@@ -292,7 +292,7 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
   }
 
   function RemoveSpouse(spouse, spousedisplay) {
-    spouse.value = "";
+    spouse.value = '';
     spousedisplay.value = textSnippet('clickfind');
   }
 
