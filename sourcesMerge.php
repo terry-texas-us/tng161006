@@ -109,28 +109,28 @@ function addCriteria($row) {
 
   $criteria = '';
   if ($cshorttitle == 'yes') {
-    $criteria .= ' AND shorttitle' . " = \"" . addslashes($row['shorttitle']) . "\"";
-    $criteria .= $cignoreblanks == 'yes' ? " AND shorttitle != \"\"" : '';
+    $criteria .= ' AND shorttitle' . ' = "' . addslashes($row['shorttitle']) . '"';
+    $criteria .= $cignoreblanks == 'yes' ? ' AND shorttitle != ""' : '';
   }
   if ($clongtitle == 'yes') {
-    $criteria .= ' AND title' . " = \"" . addslashes($row['title']) . "\"";
-    $criteria .= $cignoreblanks == 'yes' ? " AND title != \"\"" : '';
+    $criteria .= ' AND title' . ' = "' . addslashes($row['title']) . '"';
+    $criteria .= $cignoreblanks == 'yes' ? ' AND title != ""' : '';
   }
   if ($cauthor == 'yes') {
-    $criteria .= " AND author = \"" . addslashes($row['author']) . "\"";
-    $criteria .= $cignoreblanks == 'yes' ? " AND author != \"\"" : '';
+    $criteria .= ' AND author = "' . addslashes($row['author']) . '"';
+    $criteria .= $cignoreblanks == 'yes' ? ' AND author != ""' : '';
   }
   if ($cpublisher == 'yes') {
-    $criteria .= " AND publisher = \"" . addslashes($row['publisher']) . "\"";
-    $criteria .= $cignoreblanks == 'yes' ? " AND publisher = \"\"" : '';
+    $criteria .= ' AND publisher = "' . addslashes($row['publisher']) . '"';
+    $criteria .= $cignoreblanks == 'yes' ? ' AND publisher = ""' : '';
   }
   if ($crepository == 'yes') {
-    $criteria .= " AND repoID = \"" . addslashes($row['repoID']) . "\"";
-    $criteria .= $cignoreblanks == 'yes' ? " AND repoID != \"\"" : '';
+    $criteria .= ' AND repoID = "' . addslashes($row['repoID']) . '"';
+    $criteria .= $cignoreblanks == 'yes' ? ' AND repoID != ""' : '';
   }
   if ($cactualtext == 'yes') {
-    $criteria .= " AND actualtext = \"" . addslashes($row['actualtext']) . "\"";
-    $criteria .= $cignoreblanks == 'yes' ? " AND actualtext = \"\"" : '';
+    $criteria .= ' AND actualtext = "' . addslashes($row['actualtext']) . '"';
+    $criteria .= $cignoreblanks == 'yes' ? ' AND actualtext = ""' : '';
   }
 
   return $criteria;

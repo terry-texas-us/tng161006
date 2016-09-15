@@ -10,10 +10,10 @@ require 'version.php';
 $tng_search_cemeteries = $_SESSION['tng_search_cemeteries'] = 1;
 if ($newsearch) {
   $exptime = 0;
-  setcookie("tng_search_cemeteries_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_cemeteries_post[offset]", 0, $exptime);
-  setcookie("tng_search_cemeteries_post[tngpage]", 1, $exptime);
-  setcookie("tng_search_cemeteries_post[offset]", 0, $exptime);
+  setcookie('tng_search_cemeteries_post[search]', $searchstring, $exptime);
+  setcookie('tng_search_cemeteries_post[offset]', 0, $exptime);
+  setcookie('tng_search_cemeteries_post[tngpage]', 1, $exptime);
+  setcookie('tng_search_cemeteries_post[offset]', 0, $exptime);
 } else {
   if (!$searchstring) {
     $searchstring = stripslashes($_COOKIE['tng_search_cemeteries_post']['search']);
@@ -23,8 +23,8 @@ if ($newsearch) {
     $offset = $_COOKIE['tng_search_cemeteries_post']['offset'];
   } else {
     $exptime = 0;
-    setcookie("tng_search_cemeteries_post[tngpage]", $tngpage, $exptime);
-    setcookie("tng_search_cemeteries_post[offset]", $offset, $exptime);
+    setcookie('tng_search_cemeteries_post[tngpage]', $tngpage, $exptime);
+    setcookie('tng_search_cemeteries_post[offset]', $offset, $exptime);
   }
 }
 $searchstring_noquotes = preg_replace('/\"/', '&#34;', $searchstring);

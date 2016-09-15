@@ -97,7 +97,7 @@ if (file_exists("$rootpath$photoref")) {
     $photohtouse = $thumbmaxh;
     $photowtouse = intval($thumbmaxh * $photoinfo[0] / $photoinfo[1]);
   }
-  $photo = "<img src=\"" . str_replace('%2F', '/', rawurlencode($photoref)) . '?' . time() . "\" alt='' width=\"$photowtouse\" height=\"$photohtouse\" style=\"margin-right:10px\">";
+  $photo = '<img src="' . str_replace('%2F', '/', rawurlencode($photoref)) . '?' . time() . "\" alt='' width=\"$photowtouse\" height=\"$photohtouse\" style=\"margin-right:10px\">";
   $photofound = 1;
 }
 
@@ -155,15 +155,15 @@ $headSection->setTitle(uiTextSnippet($sortstr));
                 echo "<img src='img/admArrowUp.gif' alt=''>" . uiTextSnippet('drag') . "\n";
                 echo "<img src='img/admArrowDown.gif' alt=''>\n";
               echo "</td>\n";
-              echo "<td class=\"small\" style=\"width:35px;text-align:center\">";
+              echo '<td class="small" style="width: 35px; text-align:center">';
               echo "<div style=\"padding-bottom:5px\"><a href='#' onclick=\"return moveItemInList('{$row['alinkID']}',1);\" title=\"" .
                       uiTextSnippet('movetop') . "\"><img src=\"img/admArrowUp.gif\" alt=''><br>" . uiTextSnippet('top') . "</a></div>\n";
               echo "<input class='movefields' id=\"move{$row['alinkID']}\" name=\"move{$row['alinkID']}\" style='width: 30px' value=\"$count\" onkeypress=\"handleMediaEnter('{$row['alinkID']}',$('#move{$row['alinkID']}').val(),event);\" />\n";
               echo "<a href='#' onclick=\"return moveItemInList('{$row['alinkID']}',$('#move{$row['alinkID']}').val());\" title=\"" .
-                      uiTextSnippet('movetop') . "\">" . uiTextSnippet('go') . "</a>\n";
+                      uiTextSnippet('movetop') . '">' . uiTextSnippet('go') . "</a>\n";
               echo "</td>\n";
 
-              echo "<td style=\"width:" . ($thumbmaxw + 6) . "px;text-align:center;\">";
+              echo '<td style="width: ' . ($thumbmaxw + 6) . 'px; text-align: center;">';
 
               $query2 = "SELECT thumbpath, usecollfolder, mediatypeID FROM ($albumlinks_table, $media_table) WHERE albumID=\"{$row['albumID']}\" AND defphoto = \"1\" AND $albumlinks_table.mediaID = $media_table.mediaID";
               $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
@@ -179,11 +179,11 @@ $headSection->setTitle(uiTextSnippet($sortstr));
                 echo '&nbsp;';
               }
               echo "</td>\n";
-              $checked = $row['defphoto'] ? " checked" : '';
+              $checked = $row['defphoto'] ? ' checked' : '';
               echo "<td><a href=\"editalbum.php?albumID={$row['albumID']}\">{$row['albumname']}</a><br>$truncated<br>";
-              echo "<span id=\"md_{$row['albumID']}\" class=\"small\" style=\"visibility:hidden\"><a href='#' onclick=\"return removeFromSort('album','{$row['alinkID']}');\">" .
+              echo "<span id=\"md_{$row['albumID']}\" class=\"small\" style=\"visibility: hidden\"><a href='#' onclick=\"return removeFromSort('album','{$row['alinkID']}');\">" .
                       uiTextSnippet('remove') . "</a></span></td>\n";
-              echo "</tr></table>";
+              echo '</tr></table>';
               echo "</div>\n";
               $count++;
             }

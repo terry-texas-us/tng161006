@@ -14,29 +14,28 @@ if ($personID) {
   $allwhere .= " AND personID = \"$personID\"";
 }
 if ($myfirstname) {
-  $allwhere .= " AND firstname LIKE \"%" . trim($myfirstname) . "%\"";
+  $allwhere .= ' AND firstname LIKE "%' . trim($myfirstname) . '%"';
 }
 if ($mylastname) {
   if ($lnprefixes) {
-    $allwhere .= " AND CONCAT_WS(' ',lnprefix,lastname) LIKE \"%" . trim($mylastname) . "%\"";
+    $allwhere .= " AND CONCAT_WS(' ',lnprefix,lastname) LIKE \"%" . trim($mylastname) . '%"';
   } else {
-    $allwhere .= " AND lastname LIKE \"%" . trim($mylastname) . "%\"";
+    $allwhere .= ' AND lastname LIKE "%' . trim($mylastname) . '%"';
   }
 }
 if ($livedefault < 2 && (!$allow_living_db) && $nonames == 1) {
-  $allwhere .= " AND ";
+  $allwhere .= ' AND ';
   if ($allow_living_db) {
     if ($assignedbranch) {
       $allwhere .= "(living != 1 OR branch LIKE \"%$assignedbranch%\")";
     } else {
-      $allwhere .= "living != 1";
+      $allwhere .= 'living != 1';
     }
   } else {
-    $allwhere .= "living != 1 AND private != 1";
+    $allwhere .= 'living != 1 AND private != 1';
   }
 }
-$query = "SELECT personID, lastname, firstname, lnprefix, birthdate, altbirthdate, deathdate, burialdate, prefix, suffix, nameorder, living, private, branch "
-        . "FROM $people_table WHERE $allwhere ORDER BY lastname, lnprefix, firstname LIMIT 250";
+$query = "SELECT personID, lastname, firstname, lnprefix, birthdate, altbirthdate, deathdate, burialdate, prefix, suffix, nameorder, living, private, branch FROM $people_table WHERE $allwhere ORDER BY lastname, lnprefix, firstname LIMIT 250";
 $result = tng_query($query);
 
 header('Content-type:text/html; charset=' . $session_charset);
@@ -82,7 +81,7 @@ header('Content-type:text/html; charset=' . $session_charset);
         }
       }
       $name = getName($row);
-      if ($fieldtype == "select") {
+      if ($fieldtype == 'select') {
         $namestr = addslashes($name) . "| - {$row['personID']}<br>$birthdate";
       } elseif ($textchange) {
         $birthdatestr = displayDate($birthdate);
@@ -95,8 +94,8 @@ header('Content-type:text/html; charset=' . $session_charset);
       } else {
         $namestr = addslashes("$name");
       }
-      $jsnamestr = str_replace("&#34;", "&lsquo;", $namestr);
-      $jsnamestr = str_replace("\\\"", "&lsquo;", $namestr);
+      $jsnamestr = str_replace('&#34;', '&lsquo;', $namestr);
+      $jsnamestr = str_replace("\\\"", '&lsquo;', $namestr);
       echo "<tr>\n";
         echo "<td><span><a href='#' onClick=\"return returnName('{$row['personID']}','$jsnamestr','$fieldtype','$nameplusid');\">{$row['personID']}</a></span></td>\n";
         echo "<td><a href='#' onClick=\"return returnName('{$row['personID']}','$jsnamestr','$fieldtype','$nameplusid');\">$name</a><br>$birthdate $deathdate</td>\n";

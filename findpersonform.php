@@ -21,7 +21,7 @@ if ($mediaID) {
 }
 $bailtext = $mediaoption ? uiTextSnippet('finish') : uiTextSnippet('cancel');
 
-$applyfilter = "applyFilter({"
+$applyfilter = 'applyFilter({'
         . "form: 'findform1', fieldId: 'myflastname', myflastname: $('#myflastname').val(), myffirstname: $('#myffirstname').val(), myfpersonID: $('#myfpersonID').val(),"
         . "type: 'I', branch: '$branch', destdiv: 'findresults'$mediaoption});";
 

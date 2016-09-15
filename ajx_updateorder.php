@@ -78,13 +78,13 @@ switch ($action) {
     if ($album) {
       for ($i = 0; $i < $count; $i++) {
         $order = $i + 1;
-        $query = "UPDATE $albumlinks_table SET ordernum=\"$order\" WHERE albumlinkID=\"" . $links[$i] . "\"";
+        $query = "UPDATE $albumlinks_table SET ordernum=\"$order\" WHERE albumlinkID=\"" . $links[$i] . '"';
         $result = tng_query($query);
       }
     } else {
       for ($i = 0; $i < $count; $i++) {
         $order = $i + 1;
-        $query = "UPDATE $medialinks_table SET ordernum=\"$order\" WHERE medialinkID=\"" . $links[$i] . "\"";
+        $query = "UPDATE $medialinks_table SET ordernum=\"$order\" WHERE medialinkID=\"" . $links[$i] . '"';
         $result = tng_query($query);
       }
     }
@@ -94,7 +94,7 @@ switch ($action) {
     $count = count($alinks);
     for ($i = 0; $i < $count; $i++) {
       $order = $i + 1;
-      $query = "UPDATE $album2entities_table SET ordernum=\"$order\" WHERE alinkID = \"" . $alinks[$i] . "\"";
+      $query = "UPDATE $album2entities_table SET ordernum=\"$order\" WHERE alinkID = \"" . $alinks[$i] . '"';
       $result = tng_query($query);
     }
     break;
@@ -103,7 +103,7 @@ switch ($action) {
     $count = count($links);
     for ($i = 0; $i < $count; $i++) {
       $order = $i + 1;
-      $query = "UPDATE $mostwanted_table SET ordernum=\"$order\", mwtype=\"$mwtype\" WHERE ID = \"" . $links[$i] . "\"";
+      $query = "UPDATE $mostwanted_table SET ordernum=\"$order\", mwtype=\"$mwtype\" WHERE ID = \"" . $links[$i] . '"';
       $result = tng_query($query);
     }
     break;
@@ -158,12 +158,10 @@ switch ($action) {
     $marriagerow = tng_fetch_assoc($marriage);
 
     if ($personID == $marriagerow['husband']) {
-      //$spquery = "SELECT living FROM $people_table WHERE personID = \"$marriagerow[wife]\"";
-      $delspousestr = "husband = \"\"";
+      $delspousestr = 'husband = ""';
     } else {
       if ($personID == $marriagerow['wife']) {
-        //$spquery = "SELECT living FROM $people_table WHERE personID = \"$marriagerow[husband]\"";
-        $delspousestr = "wife = \"\"";
+        $delspousestr = 'wife = ""';
       } else {
         $spquery = '';
         $delspousestr = '';
@@ -249,7 +247,7 @@ switch ($action) {
         $photohtouse = $thumbmaxh;
         $photowtouse = intval($thumbmaxh * $photoinfo[0] / $photoinfo[1]);
       }
-      $rval = "<img src=\"" . str_replace('%2F', '/', rawurlencode($photoref)) . "?" . time() . "\" alt='' width=\"$photowtouse\" height=\"$photohtouse\" style=\"margin-right:10px\">";
+      $rval = '<img src="' . str_replace('%2F', '/', rawurlencode($photoref)) . '?' . time() . "\" alt='' width=\"$photowtouse\" height=\"$photohtouse\" style=\"margin-right:10px\">";
     }
     break;
   case 'setdef2':

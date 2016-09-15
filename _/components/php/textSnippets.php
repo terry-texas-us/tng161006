@@ -19,13 +19,13 @@ function uiTextSnippet($name, $extra = null) {
     $value = $row && array_key_exists('value', $row) ? $row['value'] : '';
 
     if ($value === '') {
-      if (preg_match('/^[iIfFsSrR][0-9]+$/', $name)) { // [ts] Individual (i###), Family (f###), Source (s###) and Repository (R###) ids are passed to this function. Modify callers to always call with values expected to be snippets?
+//      if (preg_match('/^[iIfFsSrR][0-9]+$/', $name)) { // [ts] Individual (i###), Family (f###), Source (s###) and Repository (R###) ids are passed to this function. Modify callers to always call with values expected to be snippets?
 //        echo("<script>console.log('Undefined User Interface Text Snippet: [" . $name . "]');</script>");
-      } else if (preg_match('/^\d{4}.+\d{4}$/', $name)) {  // [ts] rm date year date range ex. 1899-1901. Notice the .+ to interprete the unicode dash/hyphen codes.
+//      } else if (preg_match('/^\d{4}.+\d{4}$/', $name)) {  // [ts] rm date year date range ex. 1899-1901. Notice the .+ to interprete the unicode dash/hyphen codes.
 //        echo("<script>console.log('Undefined User Interface Text Snippet: [" . $name . "]');</script>");
-      } else {
+//      } else {
 //        trigger_error('Undefined User Interface Text Snippet: [' . $name . ']');
-      }
+//      }
     } else {
       $snippets[$name] = $value;
     }

@@ -71,7 +71,7 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
         $photohtouse = $thumbmaxh;
         $photowtouse = intval($thumbmaxh * $photoinfo[0] / $photoinfo[1]);
       }
-      $photo = "<img src=\"" . str_replace('%2F', '/', rawurlencode($photoref)) . '?' . time() . "\" alt='' width=\"$photowtouse\" height=\"$photohtouse\" style='margin-right: 10px; margin-bottom: 4px;'>";
+      $photo = '<img src="' . str_replace('%2F', '/', rawurlencode($photoref)) . '?' . time() . "\" alt='' width=\"$photowtouse\" height=\"$photohtouse\" style='margin-right: 10px; margin-bottom: 4px;'>";
     }
     ?>
     <?php
@@ -98,7 +98,7 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
       <?php
       echo "<a class='small' id='removedefault' href='#' onclick=\"return removeDefault();\"";
       if (!$photo) {
-        echo " style=\"visibility:hidden\"";
+        echo ' style="visibility: hidden"';
       }
       echo '>' . uiTextSnippet('removedef') . "</a>\n";
       ?>
@@ -182,17 +182,17 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
                   echo "<img src='img/admArrowDown.gif' alt=''>\n";
                   echo "</td>\n";
 
-                  echo "<td class=\"small\" style=\"width:35px;text-align:center\">";
+                  echo '<td class="small" style="width: 35px; text-align: center">';
                   echo "<div style=\"padding-bottom:5px\"><a href='#' onclick=\"return moveItemInList('{$lrow['albumlinkID']}',1);\" title=\"" .
                           uiTextSnippet('movetop') . "\"><img src=\"img/admArrowUp.gif\" alt=''><br>Top</a></div>\n";
                   echo "<input class='movefields' id=\"move{$lrow['albumlinkID']}\" name=\"move{$lrow['albumlinkID']}\" style='width: 30px' value=\"$count\" onkeypress=\"return handleMediaEnter('{$lrow['albumlinkID']}',$('#move{$lrow['albumlinkID']}').val(),event);\" />\n";
                   echo "<a href='#' onclick=\"return moveItemInList('{$lrow['albumlinkID']}',$('#move{$lrow['albumlinkID']}').val());\" title=\"" . uiTextSnippet('movetop') . "\">Go</a>\n";
                   echo "</td>\n";
 
-                  echo "<td style=\"width:" . ($thumbmaxw + 6) . "px;text-align:center;\">";
+                  echo '<td style="width:' . ($thumbmaxw + 6) . 'px; text-align: center;">';
                   if ($lrow['thumbpath'] && file_exists("$rootpath$usefolder/" . $lrow['thumbpath'])) {
                     $size = getimagesize("$rootpath$usefolder/" . $lrow['thumbpath']);
-                    echo "<a href=\"admin_editmedia.php?mediaID={$lrow['mediaID']}\"><img src=\"$usefolder/" . str_replace('%2F', '/', rawurlencode($lrow['thumbpath'])) . "\" $size[3] alt=\"" . htmlentities($lrow['description'], ENT_QUOTES) . " \"></a>";
+                    echo "<a href=\"admin_editmedia.php?mediaID={$lrow['mediaID']}\"><img src=\"$usefolder/" . str_replace('%2F', '/', rawurlencode($lrow['thumbpath'])) . "\" $size[3] alt=\"" . htmlentities($lrow['description'], ENT_QUOTES) . ' \"></a>';
                     $foundthumb = true;
                   } else {
                     echo '&nbsp;';
@@ -201,7 +201,7 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
                   echo "</td>\n";
                   $checked = $lrow['defphoto'] ? ' checked' : '';
                   echo "<td><a href=\"admin_editmedia.php?mediaID={$lrow['mediaID']}\">{$lrow['description']}</a><br>" . strip_tags($truncated) . '<br>';
-                  echo "<div id=\"del_{$lrow['albumlinkID']}\" class=\"small\" style=\"color:gray;visibility:hidden\">";
+                  echo "<div id=\"del_{$lrow['albumlinkID']}\" class=\"small\" style=\"color: gray; visibility: hidden\">";
                   if ($foundthumb) {
                     echo "<input name='rthumbs' type='radio' value=\"r{$lrow['mediaID']}\"$checked onclick=\"makeDefault(this);\">" . uiTextSnippet('makedefault');
                     echo ' &nbsp;|&nbsp; ';
@@ -209,7 +209,7 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
                   echo "<a href='#' onclick=\"return removeFromAlbum('{$lrow['mediaID']}','{$lrow['albumlinkID']}');\">" . uiTextSnippet('remove') . '</a>';
                   echo "</div></td>\n";
                   echo "<td style=\"width:150px;\">{$lrow['datetaken']}&nbsp;</td>\n";
-                  echo "<td style=\"width:100px;\">" . uiTextSnippet($lmediatypeID) . "&nbsp;</td>\n";
+                  echo '<td style="width: 100px;">' . uiTextSnippet($lmediatypeID) . "&nbsp;</td>\n";
                   echo '</tr></table>';
                   echo "</div>\n";
                   $count++;

@@ -25,19 +25,19 @@ function showAction($entityID, $num = null) {
 
   $id = $num ? $num : $entityID;
   $lines = "<tr id=\"linkrow_$id\"><td>";
-  $lines .= "<div id=\"link_$id\" style=\"text-align:center;width:50px;";
+  $lines .= "<div id=\"link_$id\" style=\"text-align: center; width:50px;";
   if ($albumID || $mediaID) {
     $gotit = in_array($entityID, $alreadygot);
     if ($gotit) {
       $lines .= 'display:none';
     }
     $lines .= "\"><a href='#' onclick=\"return addMedia2EntityLink(findform, '" . urlencode($entityID) . "', '$num');\">" . uiTextSnippet('add') . '</a></div>';
-    $lines .= "<div id=\"linked_$id\" style=\"text-align:center;width:50px;";
+    $lines .= "<div id=\"linked_$id\" style=\"text-align: center; width:50px;";
     if (!$gotit) {
       $lines .= 'display:none';
     }
     $lines .= "\"><img class='icon-sm' src='svg/eye.svg' alt=''>\n";
-    $lines .= "<div id=\"sdef_" . urlencode($entityID) . "\"></div>";
+    $lines .= '<div id="sdef_' . urlencode($entityID) . '"></div>';
   } else {
     $lines .= "\"><a href='#' onclick=\"selectEntity(document.find.newlink1, '$id');\">" . uiTextSnippet('select') . '</a>';
   }

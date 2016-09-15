@@ -9,7 +9,7 @@ function doNoteSearch($instance, $pagenav) {
   $str = "<div>\n";
   $str .= buildFormElement('browsenotes', 'get', "notesearch$instance");
   $str .= "<input name='notesearch' type='text' value=\"$notesearch\" /> \n";
-  $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . "\" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+  $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . '" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
   $str .= $pagenav;
   if ($notesearch) {
     $str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='browsenotes.php'>" . uiTextSnippet('browseallnotes') . '</a>';
@@ -56,7 +56,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 }
 $numrowsplus = $numrows + $offset;
 
-$logstring = "<a href=\"browsenotes.php?offset=$offset&amp;notesearch=" . htmlentities(stripslashes($notesearch), ENT_QUOTES) . "\">" . xmlcharacters(uiTextSnippet('notes')) . '</a>';
+$logstring = "<a href=\"browsenotes.php?offset=$offset&amp;notesearch=" . htmlentities(stripslashes($notesearch), ENT_QUOTES) . '">' . xmlcharacters(uiTextSnippet('notes')) . '</a>';
 writelog($logstring);
 preparebookmark($logstring);
 

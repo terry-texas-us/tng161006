@@ -11,7 +11,7 @@ initMediaTypes();
 function xmlPhoto($persfamID, $living, $gender) {
   $photoInfo = getPhotoSrc($persfamID, $living, $gender);
   $photoref = "\"photosrc\":\"{$photoInfo['ref']}\"";
-  $photolink = $photoInfo['link'] ? "\"photolink\":\"{$photoInfo['link']}\"" : "\"photolink\":\"-1\"";
+  $photolink = $photoInfo['link'] ? "\"photolink\":\"{$photoInfo['link']}\"" : '"photolink":"-1"';
 
   return $photoref . ',' . $photolink;
 }
@@ -64,11 +64,11 @@ function xmlPerson($currperson, $backperson, $generation) {
     tng_free_result($parents);
   }
 
-  $person .= $parentfamID ? "\"famc\":\"$parentfamID\"," : "\"famc\":\"-1\",";
+  $person .= $parentfamID ? "\"famc\":\"$parentfamID\"," : '"famc":"-1",';
   if ($display == 'standard' && $pedigree['inclphotos']) {
     $person .= xmlPhoto($currperson, $rights['both'], $row['sex']) . ',';
   } else {
-    $person .= "\"photosrc\":\"-1\",\"photolink\":\"\",";
+    $person .= '"photosrc\":"-1","photolink":"",';
   }
 
   if ($rights['both']) {
@@ -102,12 +102,12 @@ function xmlPerson($currperson, $backperson, $generation) {
   } else {
     $bd = $bp = $birthabbr = $dd = $dp = $deathabbr = $md = $mp = $marrabbr = '';
   }
-  $person .= "\"babbr\":\"" . uiTextSnippet($birthabbr) . "\",";
-  $person .= "\"bdate\":\"" . xmlcharacters(displayDate($bd)) . "\",";
-  $person .= "\"bplace\":\"" . xmlcharacters($bp) . "\",";
-  $person .= "\"dabbr\":\"" . uiTextSnippet($deathabbr) . "\",";
-  $person .= "\"ddate\":\"" . xmlcharacters(displayDate($dd)) . "\",";
-  $person .= "\"dplace\":\"" . xmlcharacters($dp) . "\"";
+  $person .= '"babbr":"' . uiTextSnippet($birthabbr) . '",';
+  $person .= '"bdate":"' . xmlcharacters(displayDate($bd)) . '",';
+  $person .= '"bplace":"' . xmlcharacters($bp) . '",';
+  $person .= '"dabbr":"' . uiTextSnippet($deathabbr) . '",';
+  $person .= '"ddate":"' . xmlcharacters(displayDate($dd)) . '",';
+  $person .= '"dplace":"' . xmlcharacters($dp) . '"';
 
   if ($parentscount > 1) {
     $parents = '';
@@ -117,14 +117,14 @@ function xmlPerson($currperson, $backperson, $generation) {
       }
       $parents .= '{';
       $parentinfo = getParentInfo($parentfamIDs[$i]);
-      $parents .= "\"famID\":\"" . $parentfamIDs[$i] . "\",";
-      $parents .= "\"fatherID\":\"" . $parentinfo['fathID'] . "\",";
-      $parents .= "\"fathername\":\"" . xmlcharacters($parentinfo['fathname']) . "\",";
-      $parents .= "\"motherID\":\"" . $parentinfo['mothID'] . "\",";
-      $parents .= "\"mothername\":\"" . xmlcharacters($parentinfo['mothname']) . "\"";
+      $parents .= '"famID":"' . $parentfamIDs[$i] . '",';
+      $parents .= '"fatherID":"' . $parentinfo['fathID'] . '",';
+      $parents .= '"fathername":"' . xmlcharacters($parentinfo['fathname']) . '",';
+      $parents .= '"motherID":"' . $parentinfo['mothID'] . '",';
+      $parents .= '"mothername":"' . xmlcharacters($parentinfo['mothname']) . '"';
       $parents .= '}';
     }
-    $person .= ",\n\"parents\":[" . $parents . "]";
+    $person .= ",\n\"parents\":[" . $parents . ']';
   }
 
   //do spouses
@@ -181,22 +181,20 @@ function xmlPerson($currperson, $backperson, $generation) {
         $rights = determineLivingPrivateRights($spouseIDrow, $rightbranch);
         $spouseIDrow['allow_living'] = $rights['living'];
         $spouseIDrow['allow_private'] = $rights['private'];
-        $sp = "\"spID\":\"" . $spouserow[$spouse] . "\",";
-        $sp .= "\"spname\":\"" . xmlcharacters(getName($spouseIDrow)) . "\",";
-        //$sp .= "\"spname\":\"" . htmlentities( getName( $spouseIDrow ), ENT_QUOTES ) . "\",";
+        $sp = '"spID":"' . $spouserow[$spouse] . '",';
+        $sp .= '"spname":"' . xmlcharacters(getName($spouseIDrow)) . '",';
         tng_free_result($spouseIDresult);
       }
-      $sp .= "\"spFamID\":\"" . $spouserow['familyID'] . "\"";
-      $spfams .= $sp . "}\n";
+      $sp .= '"spFamID":"' . $spouserow['familyID'] . '"';
+      $spfams .= $sp . '}';
       //if family not already in $families, use xmlfamily to add it here
       if (!in_array($spouserow['familyID'], $familylist)) {
         $families[] = getFamily($spouserow);
       }
     }
     tng_free_result($spouseresults);
-    $person .= ",\n\"spfams\":[" . $spfams . "]";  //used to be spFam
+    $person .= ",\n\"spfams\":[" . $spfams . "]\n";
   }
-
   $person .= '}';
   $people[] = $person;
 
@@ -223,9 +221,9 @@ function getChildren($familyID) {
         $rights = determineLivingPrivateRights($child, $rightbranch);
         $child['allow_living'] = $rights['living'];
         $child['allow_private'] = $rights['private'];
-        $children .= "{\"childID\":\"" . $child['pID'] . "\",\"name\":\"" . xmlcharacters(getName($child)) . "\"}";
+        $children .= '{"childID":"' . $child['pID'] . '","name":"' . xmlcharacters(getName($child)) . '"}';
       }
-      $children = "\"children\":[$children]";  //used to be child
+      $children = "\"children\":[$children]";
     }
     tng_free_result($childrenresults);
   }
@@ -234,7 +232,7 @@ function getChildren($familyID) {
 }
 
 function getFamily($famrow) {
-  $family = "{\"famID\":\"" . $famrow['familyID'] . "\",\"husband\":\"" . $famrow['husband'] . "\",\"wife\":\"" . $famrow['wife'] . "\",";
+  $family = '{"famID":"' . $famrow['familyID'] . '","husband":"' . $famrow['husband'] . '","wife":"' . $famrow['wife'] . '",';
   $rightbranch = checkbranch($famrow['branch']);
   $rights = determineLivingPrivateRights($famrow, $rightbranch);
   $famrow['allow_living'] = $rights['living'];
@@ -250,8 +248,8 @@ function getFamily($famrow) {
   } else {
     $marrdate = $marrplace = $marrabbr = '';
   }
-  $family .= "\"mdate\":\"" . xmlcharacters($marrdate) . "\",";
-  $family .= "\"mplace\":\"" . xmlcharacters($marrplace) . "\",";
+  $family .= '"mdate":"' . xmlcharacters($marrdate) . '",';
+  $family .= '"mplace":"' . xmlcharacters($marrplace) . '",';
   $family .= "\"mabbr\":\"$marrabbr\"";
 
   $children = getChildren($famrow['familyID']);
@@ -351,12 +349,12 @@ echo '{';
 
 $numfamilies = count($families);
 if (count($people)) {
-  echo "\"people\":[" . implode(',', $people) . "]";
+  echo '"people":[' . implode(',', $people) . ']';
   if ($numfamilies) {
     echo ',';
   }
 }
 if ($numfamilies) {
-  echo "\"families\":[" . implode(',', $families) . "]";
+  echo '"families":[' . implode(',', $families) . ']';
 }
 echo '}';

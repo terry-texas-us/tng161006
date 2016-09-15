@@ -132,8 +132,6 @@ if (!$personID) {
   preparebookmark("<a href=\"showmedia.php?mediaID=$mediaID&amp;medialinkID=$medialinkID\">$mediatypeIDstr: $description ($mediaID)</a>");
 }
 
-$flags['styles'] = "<link href=\"css/media.css\" rel=\"stylesheet\" type=\"text/css\" />\n";
-
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 

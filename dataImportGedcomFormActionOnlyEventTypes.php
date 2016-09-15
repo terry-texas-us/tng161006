@@ -218,7 +218,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
     </span>
 
     <?php
-    echo "<p><a href=\"dataImportGedcom.php\">" . uiTextSnippet('backtodataimport') . '</a></p>';
+    echo '<p><a href="dataImportGedcom.php">' . uiTextSnippet('backtodataimport') . '</a></p>';
 
     echo "<div align=\"right\"><span>$tng_title, v.$tng_version</span></div>";
     ?>

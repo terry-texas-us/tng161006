@@ -22,7 +22,7 @@ $pdf->AddFont($lblFont, 'B');
 $pdf->AddFont($rptFont);
 $pdf->AddFont($rptFont, 'B');
 
-$ldsOK = determineLDSRights(true);
+$ldsOK = determineLDSRights();
 
 // compute the label width based on the longest string that will be displayed
 $labelwidth = getMaxStringWidth([uiTextSnippet('name'), uiTextSnippet('born'), uiTextSnippet('christened'), uiTextSnippet('died'), uiTextSnippet('buried'),

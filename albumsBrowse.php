@@ -9,9 +9,9 @@ require 'version.php';
 $tng_search_album = $_SESSION['tng_search_album'] = 1;
 if ($newsearch) {
   $exptime = 0;
-  setcookie("tng_search_album_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_album_post[tngpage]", 1, $exptime);
-  setcookie("tng_search_album_post[offset]", 0, $exptime);
+  setcookie('tng_search_album_post[search]', $searchstring, $exptime);
+  setcookie('tng_search_album_post[tngpage]', 1, $exptime);
+  setcookie('tng_search_album_post[offset]', 0, $exptime);
 } else {
   if (!$searchstring) {
     $searchstring = stripslashes($_COOKIE['tng_search_album_post']['search']);
@@ -21,8 +21,8 @@ if ($newsearch) {
     $offset = $_COOKIE['tng_search_album_post']['offset'];
   } else {
     $exptime = 05;
-    setcookie("tng_search_album_post[tngpage]", $tngpage, $exptime);
-    setcookie("tng_search_album_post[offset]", $offset, $exptime);
+    setcookie('tng_search_album_post[tngpage]', $tngpage, $exptime);
+    setcookie('tng_search_album_post[offset]', $offset, $exptime);
   }
 }
 $searchstring_noquotes = preg_replace('/\"/', '&#34;', $searchstring);
@@ -102,7 +102,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
                   $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
                   $actionstr .= "</a>\n";
                 }
-                $actionstr .= "<a href=\"" . "albumsShowAlbum.php?albumID=xxx\" title='" . uiTextSnippet('preview') . "'>\n";
+                $actionstr .= '<a href="' . "albumsShowAlbum.php?albumID=xxx\" title='" . uiTextSnippet('preview') . "'>\n";
                 $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
                 $actionstr .= "</a>\n";
 
@@ -112,7 +112,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
                   echo   "<td>\n";
                   echo     "<div class=\"action-btns\">$newactionstr</div>\n";
                   echo   "</td>\n";
-                  echo   "<td style=\"width: " . ($thumbmaxw + 6) . "px; text-align: center\">";
+                  echo   '<td style="width: ' . ($thumbmaxw + 6) . 'px; text-align: center">';
 
                   $query2 = "SELECT thumbpath, usecollfolder, mediatypeID FROM ($media_table, $albumlinks_table) WHERE albumID = \"{$row['albumID']}\" AND $media_table.mediaID = $albumlinks_table.mediaID AND defphoto=\"1\"";
                   $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");

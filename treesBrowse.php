@@ -8,9 +8,9 @@ require 'version.php';
 
 if ($newsearch) {
   $exptime = 0;
-  setcookie("tng_search_trees_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_trees_post[tngpage]", 1, $exptime);
-  setcookie("tng_search_trees_post[offset]", 0, $exptime);
+  setcookie('tng_search_trees_post[search]', $searchstring, $exptime);
+  setcookie('tng_search_trees_post[tngpage]', 1, $exptime);
+  setcookie('tng_search_trees_post[offset]', 0, $exptime);
 } else {
   if (!$searchstring) {
     $searchstring = $_COOKIE['tng_search_trees_post']['search'];
@@ -20,8 +20,8 @@ if ($newsearch) {
     $offset = $_COOKIE['tng_search_trees_post']['offset'];
   } else {
     $exptime = 0;
-    setcookie("tng_search_trees_post[tngpage]", $tngpage, $exptime);
-    setcookie("tng_search_trees_post[offset]", $offset, $exptime);
+    setcookie('tng_search_trees_post[tngpage]', $tngpage, $exptime);
+    setcookie('tng_search_trees_post[offset]', $offset, $exptime);
   }
 }
 if ($offset) {

@@ -8,7 +8,7 @@ preparebookmark($logstring);
 
 $ucharset = strtoupper($session_charset);
 function substr_unicode($str, $start, $len = null) {
-    return join('', array_slice(preg_split("//u", $str, -1, PREG_SPLIT_NO_EMPTY), $start, $len));
+    return join('', array_slice(preg_split('//u', $str, -1, PREG_SPLIT_NO_EMPTY), $start, $len));
 }
 
 $flags['styles'] = "<link href=\"css/calendar.css\" rel=\"stylesheet\" type=\"text/css\" />\n";
@@ -80,7 +80,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
       $where[] = $key . "datetr LIKE '%-$thisMonth-%'";
     }
     if (! empty($where)) {
-      $sql = "SELECT personID, gedcom, firstname, nickname, lnprefix, lastname, suffix, living, branch, private, " . implode(', ', $select) . "
+      $sql = 'SELECT personID, gedcom, firstname, nickname, lnprefix, lastname, suffix, living, branch, private, ' . implode(', ', $select) . "
         FROM $people_table
         WHERE (" . implode(' OR ', $where) . ')';
 
@@ -151,7 +151,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     }
 
     if (! empty($where)) {
-      $sql = "SELECT familyID, gedcom, husband, wife, living, private, " . implode(', ', $select) . "
+      $sql = 'SELECT familyID, gedcom, husband, wife, living, private, ' . implode(', ', $select) . "
         FROM $families_table
         WHERE (" . implode(' OR ', $where) . ')';
 
@@ -360,7 +360,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     <?php
     // Weekday name headers
     for ($i = $startOfWeek; $i < $startOfWeek + 7; $i++) {
-      echo "<th class=\"calDay\">" . $daysOfWeek[($i % 7)] . "</th>\n";
+      echo '<th class="calDay">' . $daysOfWeek[($i % 7)] . "</th>\n";
     }
 
     echo "</tr><tr>\n";

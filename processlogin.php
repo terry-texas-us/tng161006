@@ -13,7 +13,7 @@ if ($adminLogin) {
 } else {
   $home_url = $homepage;
   $dest_url = isset($_SESSION['destinationpage8']) ? $_SESSION['destinationpage8'] : $home_url;
-  $login_url = $requirelogin || !isset($_SESSION['destinationpage8']) || strpos($_SESSION['destinationpage8'], $home_url) !== false || substr($_SESSION['destinationpage8'], -1) == '/' ? "login.php?message=loginfailed" : $dest_url;
+  $login_url = $requirelogin || !isset($_SESSION['destinationpage8']) || strpos($_SESSION['destinationpage8'], $home_url) !== false || substr($_SESSION['destinationpage8'], -1) == '/' ? 'login.php?message=loginfailed' : $dest_url;
 }
 $query = "SELECT * FROM $users_table WHERE BINARY username = \"$tngusername\"";
 $result = tng_query($query) or die("Cannot execute query: $query");

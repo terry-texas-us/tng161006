@@ -147,7 +147,7 @@ $headSection->setTitle(uiTextSnippet('addnewuser'));
             </p>
             <p>
               <input name='role' type='radio' value='meditor'  data-role='meditor'>
-              <?php echo uiTextSnippet('usrmeditor') . "<br><em class='small indent'>" . uiTextSnippet('usrmeditord') . "</em>"; ?>
+              <?php echo uiTextSnippet('usrmeditor') . "<br><em class='small indent'>" . uiTextSnippet('usrmeditord') . '</em>'; ?>
             </p>
             <p>
               <input name='role' type='radio' value='custom'  data-role='custom'>

@@ -13,17 +13,16 @@ if ($personID) {
   $allwhere .= " AND personID = \"$personID\"";
 }
 if ($myfirstname) {
-  $allwhere .= " AND firstname LIKE \"%" . trim($myfirstname) . "%\"";
+  $allwhere .= ' AND firstname LIKE "%' . trim($myfirstname) . '%"';
 }
 if ($mylastname) {
   if ($lnprefixes) {
-    $allwhere .= " AND CONCAT_WS(' ',lnprefix,lastname) LIKE \"%" . trim($mylastname) . "%\"";
+    $allwhere .= " AND CONCAT_WS(' ',lnprefix,lastname) LIKE \"%" . trim($mylastname) . '%"';
   } else {
-    $allwhere .= " AND lastname LIKE \"%" . trim($mylastname) . "%\"";
+    $allwhere .= ' AND lastname LIKE "%' . trim($mylastname) . '%"';
   }
 }
-$query = "SELECT personID, lastname, firstname, lnprefix, birthdate, altbirthdate, deathdate, burialdate, prefix, suffix, nameorder, living, private, branch "
-        . "FROM $people_table WHERE $allwhere ORDER BY lastname, lnprefix, firstname LIMIT 250";
+$query = "SELECT personID, lastname, firstname, lnprefix, birthdate, altbirthdate, deathdate, burialdate, prefix, suffix, nameorder, living, private, branch FROM $people_table WHERE $allwhere ORDER BY lastname, lnprefix, firstname LIMIT 250";
 $result = tng_query($query);
 
 header('Content-type:text/html; charset=' . $session_charset);
@@ -70,7 +69,7 @@ header('Content-type:text/html; charset=' . $session_charset);
       }
       $row['allow_living'] = determineLivingRights($row);
       $name = getName($row);
-      if ($type == "select") {
+      if ($type == 'select') {
         $namestr = addslashes($name) . "| - {$row['personID']}<br>$birthdate";
       } elseif ($nameplusid == 1) {
         $namestr = addslashes("$name");
@@ -79,8 +78,8 @@ header('Content-type:text/html; charset=' . $session_charset);
       } else {
         $namestr = addslashes("$name");
       }
-      $jsnamestr = str_replace("&#34;", "&quot;", $namestr);
-      $jsnamestr = str_replace("\"", "&quot;", $namestr);
+      $jsnamestr = str_replace('&#34;', '&quot;', $namestr);
+      $jsnamestr = str_replace('"', '&quot;', $namestr);
       echo "<tr>\n";
         echo "<td><span><a href='#' onClick=\"return returnName('{$row['personID']}','$jsnamestr','$type','$nameplusid');\">{$row['personID']}</a></span></td>\n";
         echo "<td><a href='#' onClick=\"return returnName('{$row['personID']}','$jsnamestr','$type','$nameplusid');\">$name</a><br>$birthdate $deathdate</td>\n";

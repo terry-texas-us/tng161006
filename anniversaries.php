@@ -43,68 +43,68 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
         <select name="tngevent" id="tngevent" style="max-width:335px">
           <?php
           echo "<option value=''>&nbsp;</option>\n";
-          echo "<option value=\"birth\"";
+          echo '<option value="birth"';
           if ($tngevent == 'birth') {
             echo ' selected';
           }
           echo '>' . uiTextSnippet('born') . "</option>\n";
 
-          echo "<option value=\"altbirth\"";
+          echo '<option value="altbirth"';
           if ($tngevent == 'altbirth') {
             echo ' selected';
           }
           echo '>' . uiTextSnippet('christened') . "</option>\n";
 
-          echo "<option value=\"death\"";
+          echo '<option value="death"';
           if ($tngevent == 'death') {
             echo ' selected';
           }
           echo '>' . uiTextSnippet('died') . "</option>\n";
 
-          echo "<option value=\"burial\"";
+          echo '<option value="burial"';
           if ($tngevent == 'burial') {
             echo ' selected';
           }
           echo '>' . uiTextSnippet('buried') . "</option>\n";
 
-          echo "<option value=\"marr\"";
+          echo '<option value="marr"';
           if ($tngevent == 'marr') {
             echo ' selected';
           }
           echo '>' . uiTextSnippet('married') . "</option>\n";
 
-          echo "<option value=\"div\"";
+          echo '<option value="div"';
           if ($tngevent == 'div') {
             echo ' selected';
           }
           echo '>' . uiTextSnippet('divorced') . "</option>\n";
 
           if ($ldsOK) {
-            echo "<option value=\"bapt\"";
+            echo '<option value="bapt"';
             if ($tngevent == 'bapt') {
               echo ' selected';
             }
             echo '>' . uiTextSnippet('baptizedlds') . "</option>\n";
 
-            echo "<option value=\"conf\"";
+            echo '<option value="conf"';
             if ($tngevent == 'conf') {
               echo ' selected';
             }
             echo '>' . uiTextSnippet('conflds') . "</option>\n";
 
-            echo "<option value=\"init\"";
+            echo '<option value="init"';
             if ($tngevent == 'init') {
               echo ' selected';
             }
             echo '>' . uiTextSnippet('initlds') . "</option>\n";
 
-            echo "<option value=\"endl\"";
+            echo '<option value="endl"';
             if ($tngevent == 'endl') {
               echo ' selected';
             }
             echo '>' . uiTextSnippet('endowedlds') . "</option>\n";
 
-            echo "<option value=\"seal\"";
+            echo '<option value="seal"';
             if ($tngevent == 'seal') {
               echo ' selected';
             }

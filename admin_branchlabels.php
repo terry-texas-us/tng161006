@@ -412,15 +412,13 @@ $headSection->setTitle(uiTextSnippet('labelbranches'));
         <?php
         if ($branchaction == 'clear') {
           $branchtitle = uiTextSnippet('clearingbranch');
-          //$branchclause = $set == "all" ? '' : " AND branch = \"$branch\"";
-          //$branch = '';
           $overwrite = 1;
         } elseif ($branchaction == 'delete') {
           $branchtitle = 'DELETING BRANCH';
           $overwrite = 0;
         } else {
           $branchtitle = uiTextSnippet('addingbranch');
-          $branchclause = $overwrite ? '' : " AND branch = \"\"";
+          $branchclause = $overwrite ? '' : " AND branch = ''";
         }
         echo "<p><strong>$branchtitle</strong></p>";
 

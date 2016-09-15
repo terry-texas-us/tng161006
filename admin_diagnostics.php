@@ -14,9 +14,9 @@ $safe_mode = (bool)ini_get('safe_mode');
 
 error_reporting(E_ERROR | E_PARSE); //  Disable error reporting for anything but critical errors
 
-$red = "<img src=\"img/tng_close.gif\" width=\"18\" height=\"18\">";
-$orange = "<img src=\"img/orange.gif\" width=\"18\" height=\"18\">";
-$green = "<img src=\"img/tng_check.gif\" width=\"18\" height=\"18\">";
+$red = "<img src='img/tng_close.gif' width='18' height='18'>";
+$orange = "<img src='img/orange.gif' width='18' height='18'>";
+$green = "<img src='img/tng_check.gif' width='18' height='18'>";
 
 header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('diagnostics'));

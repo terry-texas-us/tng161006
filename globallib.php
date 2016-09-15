@@ -105,21 +105,21 @@ function getNameUniversal($row, $order, $hcard = null) {
     $lastname = tng_strtoupper($lastname);
   }
   if ($hcard) {
-    $lastname = "<span class=\"family-name\">" . $lastname . '</span>';
+    $lastname = '<span class="family-name">' . $lastname . '</span>';
     $title = $suffix = '';
   } else {
     $title = $row['title'] && ($row['title'] == $row['prefix']) ? $row['title'] : trim($row['title'] . ' ' . $row['prefix']);
     $suffix = $row['suffix'];
   }
   if (($row['allow_living'] || !$nonames) && ($row['allow_private'] || !$tngconfig['nnpriv'])) {
-    $firstname = $hcard ? "<span class=\"given-name\">" . $row['firstname'] . '</span>' : $row['firstname'];
+    $firstname = $hcard ? '<span class="given-name">' . $row['firstname'] . '</span>' : $row['firstname'];
     $namestr = constructName($firstname, $lastname, $title, $suffix, $order);
   } elseif ($row['living'] && !$row['allow_living'] && $nonames == 1) {
     $namestr = uiTextSnippet('living');
   } elseif ($row['private'] && !$row['allow_private'] && $tngconfig['nnpriv'] == 1) {
     $namestr = uiTextSnippet('private');
   } else { //initials
-    $firstname = $hcard ? "<span class=\"given-name\">" . initials($row['firstname']) . '</span>' : initials($row['firstname']);
+    $firstname = $hcard ? '<span class="given-name">' . initials($row['firstname']) . '</span>' : initials($row['firstname']);
     $namestr = constructName($firstname, $lastname, $title, $suffix, $order);
   }
 
@@ -195,7 +195,7 @@ function getGenderIcon($gender, $valign) {
       $genderstr = 'female';
     }
     if ($genderstr) {
-      $icon = "<img src=\"img/tng_$genderstr.gif\" width='11' height='11' alt=\"" . uiTextSnippet($genderstr) . "\" style=\"vertical-align: " . $valign . "px;\" />";
+      $icon = "<img src=\"img/tng_$genderstr.gif\" width='11' height='11' alt=\"" . uiTextSnippet($genderstr) . '" style="vertical-align: ' . $valign . 'px;" />';
     }
   }
   return $icon;
@@ -341,7 +341,7 @@ function determineLivingPrivateRights($row, $pagerightbranch = -1) {
   return $rights;
 }
 
-function determineLDSRights($notree = false) {
+function determineLDSRights() {
   global $ldsdefault;
   global $allow_lds;
 
@@ -586,7 +586,7 @@ function displayDate($date) {
 function xmlcharacters($string) {
   global $session_charset;
 
-  $bad = ['&', "\""];
+  $bad = ['&', '"'];
   $good = ['&#038;', '&#034;'];
 
   $ucharset = strtoupper($session_charset);
@@ -878,8 +878,7 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
   $photo = '';
   $photocheck = '';
 
-  $query = "SELECT $media_table.mediaID, medialinkID, alwayson, thumbpath, mediatypeID, usecollfolder, newwindow "
-      . "FROM ($media_table, $medialinks_table) WHERE personID = \"$persfamID\" AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
+  $query = "SELECT $media_table.mediaID, medialinkID, alwayson, thumbpath, mediatypeID, usecollfolder, newwindow FROM ($media_table, $medialinks_table) WHERE personID = \"$persfamID\" AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
 
@@ -894,7 +893,7 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
       if ($type) {
         $prefix = "<a href=\"admin_editmedia.php?mediaID={$row['mediaID']}\"$targettext>";
       } else {
-        $prefix = "<a href=\"showmedia.php?mediaID={$row['mediaID']}&amp;medialinkID={$row['medialinkID']}\" title=\"" . str_replace("\"", "&#34;", $alttext) . "\"$targettext>";
+        $prefix = "<a href=\"showmedia.php?mediaID={$row['mediaID']}&amp;medialinkID={$row['medialinkID']}\" title=\"" . str_replace('"', '&#34;', $alttext) . "\"$targettext>";
       }
       $suffix = '</a>';
     }
@@ -906,8 +905,7 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
   $gotfile = $photocheck ? file_exists("$rootpath$photocheck") : false;
   if (!$gotfile) {
     if ($type) {
-      $query = "SELECT medialinkID FROM ($media_table, $medialinks_table) "
-          . "WHERE personID = \"$persfamID\" AND $media_table.mediaID = $medialinks_table.mediaID AND mediatypeID = \"photos\" AND thumbpath != \"\"";
+      $query = "SELECT medialinkID FROM ($media_table, $medialinks_table) WHERE personID = \"$persfamID\" AND $media_table.mediaID = $medialinks_table.mediaID AND mediatypeID = \"photos\" AND thumbpath != \"\"";
       $result2 = tng_query($query);
       $numphotos = tng_num_rows($result2);
       tng_free_result($result2);
@@ -926,7 +924,7 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
     }
   }
   if ($gotfile) {
-    $align = $height ? '' : " style=\"float:left;\"";
+    $align = $height ? '' : ' style="float: left;"';
     $photoinfo = getimagesize("$rootpath$photocheck");
     $photohtouse = $height ? $height : 100;
     if ($photoinfo[1] <= $photohtouse) {
@@ -935,7 +933,7 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
     } else {
       $photowtouse = intval($photohtouse * $photoinfo[0] / $photoinfo[1]);
     }
-    $photo = "$prefix<img src=\"$photoref\" alt=\"" . str_replace("\"", "&#34;", $alttext) . "\" width=\"$photowtouse\" height=\"$photohtouse\" class=\"smallimg\"{$align}>$suffix";
+    $photo = "$prefix<img src=\"$photoref\" alt=\"" . str_replace('"', '&#34;', $alttext) . "\" width=\"$photowtouse\" height=\"$photohtouse\" class=\"smallimg\"{$align}>$suffix";
   }
   tng_free_result($result);
 
@@ -950,7 +948,7 @@ function buildSilentPlaceLink($place) {
 function checkMaintenanceMode($area) {
   global $tngconfig;
 
-  if (strpos($_SERVER['SCRIPT_NAME'], "/mixedSuggest.php") === false && strpos($_SERVER['SCRIPT_NAME'], 'admin') === false && $tngconfig['maint'] && (!$_SESSION['allow_admin']) && strpos($_SERVER['SCRIPT_NAME'], "/index.") === false) {
+  if (strpos($_SERVER['SCRIPT_NAME'], '/mixedSuggest.php') === false && strpos($_SERVER['SCRIPT_NAME'], 'admin') === false && $tngconfig['maint'] && (!$_SESSION['allow_admin']) && strpos($_SERVER['SCRIPT_NAME'], '/index.') === false) {
     $maint_url = $area ? 'adminmaint.php' : 'maint.php';
     header("Location:$maint_url");
     exit;
@@ -1073,29 +1071,29 @@ function buildParentRow($parent, $spouse, $label) {
     $birthinfo = $prow['birthdate'] ? ' (' . uiTextSnippet('birthabbr') . ' ' . displayDate($prow['birthdate']) . ')' : '';
 
     $out = "<div class='form-group row'>\n";
-      $out .= "<label class='col-sm-2 form-control-label' for='parent'>" . uiTextSnippet($label) . "</label>\n";
-      $out .= "<div class='col-md-6'>\n";
-        if ($prow['personID']) {
-          $out .= "<p id='parent'><a href=\"peopleEdit.php?personID={$prow['personID']}&amp;cw=$cw\">" . getName($prow) . " - {$prow['personID']}</a>$birthinfo</p>";
-        }
-      $out .= "</div>\n";
+    $out .= "<label class='col-sm-2 form-control-label' for='parent'>" . uiTextSnippet($label) . "</label>\n";
+    $out .= "<div class='col-md-6'>\n";
+    if ($prow['personID']) {
+      $out .= "<p id='parent'><a href=\"peopleEdit.php?personID={$prow['personID']}&amp;cw=$cw\">" . getName($prow) . " - {$prow['personID']}</a>$birthinfo</p>";
+    }
+    $out .= "</div>\n";
 
-      $out .= "<label class='col-sm-2 form-control-label' for='relationship'>" . uiTextSnippet('relationship') . "</label>\n";
-      $out .= "<div class='col-sm-2'>\n";
-        $fieldname = $label == 'father' ? 'frel' : 'mrel';
-        $out .= "<select class='form-control form-control-sm' id='relationship' name=\"$fieldname{$parent['familyID']}\">\n";
-        $out .= "<option value=''></option>\n";
+    $out .= "<label class='col-sm-2 form-control-label' for='relationship'>" . uiTextSnippet('relationship') . "</label>\n";
+    $out .= "<div class='col-sm-2'>\n";
+    $fieldname = $label == 'father' ? 'frel' : 'mrel';
+    $out .= "<select class='form-control form-control-sm' id='relationship' name=\"$fieldname{$parent['familyID']}\">\n";
+    $out .= "<option value=''></option>\n";
 
-        $reltypes = ['adopted', 'birth', 'foster', 'sealing', 'step'];
-        foreach ($reltypes as $reltype) {
-          $out .= "<option value=\"$reltype\"";
-          if ($parent[$fieldname] == $reltype || $parent[$fieldname] == uiTextSnippet($reltype)) {
-            $out .= ' selected';
-          }
-          $out .= '>' . uiTextSnippet($reltype) . "</option>\n";
-        }
-        $out .= "</select>\n";
-      $out .= "</div>\n";
+    $reltypes = ['adopted', 'birth', 'foster', 'sealing', 'step'];
+    foreach ($reltypes as $reltype) {
+      $out .= "<option value=\"$reltype\"";
+      if ($parent[$fieldname] == $reltype || $parent[$fieldname] == uiTextSnippet($reltype)) {
+        $out .= ' selected';
+      }
+      $out .= '>' . uiTextSnippet($reltype) . "</option>\n";
+    }
+    $out .= "</select>\n";
+    $out .= "</div>\n";
     $out .= "</div>\n";
 
     tng_free_result($gotparent);

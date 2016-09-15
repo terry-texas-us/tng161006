@@ -12,14 +12,14 @@ $treeresult = tng_query($query);
 while ($treerow = tng_fetch_assoc($treeresult)) {
   $nexttree = addslashes($treerow['gedcom']);
   $dispid .= "branchids['$nexttree'] = new Array(\"\"";
-  $dispname .= "branchnames['$nexttree'] = new Array(\"" . uiTextSnippet('allbranches') . "\"";
+  $dispname .= "branchnames['$nexttree'] = new Array(\"" . uiTextSnippet('allbranches') . '"';
 
   $query = "SELECT branch, gedcom, description FROM $branches_table WHERE gedcom = \"$nexttree\" ORDER BY description";
   $branchresult = tng_query($query);
 
   while ($branch = tng_fetch_assoc($branchresult)) {
     $dispid .= ",\"{$branch['branch']}\"";
-    $dispname .= ",\"" . addslashes(trim($branch['description'])) . "\"";
+    $dispname .= ',"' . addslashes(trim($branch['description'])) . '"';
   }
   tng_free_result($branchresult);
   $dispid .= ");\n";

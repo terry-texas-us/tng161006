@@ -75,7 +75,7 @@ header('Content-type:text/html; charset=' . $session_charset);
         <table class='table table-sm'>
           <tr>
             <td id='mwthumb'
-                style="width:<?php echo($thumbmaxw + 6); ?>px;height:<?php echo($thumbmaxh + 6); ?>px;text-align:center;">
+                style="width:<?php echo($thumbmaxw + 6); ?>px;height:<?php echo($thumbmaxh + 6); ?>px;text-align: center;">
               <?php
               initMediaTypes();
               $lmediatypeID = $row['mediatypeID'];

@@ -26,7 +26,7 @@ function getTimelineDate($date) {
 }
 
 header('Content-Type: application/xml');
-echo "<?xml version=\"1.0\"";
+echo '<?xml version="1.0"';
 if ($session_charset) {
   echo " encoding=\"$session_charset\"";
 }
@@ -56,14 +56,14 @@ while ($tlrow = tng_fetch_assoc($tlresult)) {
     }
     $end_date_gmt = strftime('%b %d ' . $tlrow['endyear'], gmmktime(12, 0, 0, $tlrow['endmonth'], $tlrow['endday'], 2000)) . ' GMT';
     if ($end_date_gmt != $beg_date_gmt) {
-      $isduration = "isDuration=\"true\"";
+      $isduration = 'isDuration="true"';
     }
   } else {
     $end_date_gmt = $beg_date_gmt;
     $isduration = '';
   }
   $evtitle = $tlrow['evtitle'] ? $tlrow['evtitle'] : $tlrow['evdetail'];
-  echo "<event start=\"" . $beg_date_gmt . "\" end=\"" . $end_date_gmt . "\" $isduration icon=\"img/red-circle.png\" title=\" " . htmlspecialchars($evtitle, ENT_QUOTES, $session_charset) . "\">" . htmlspecialchars($tlrow['evdetail'], ENT_QUOTES, $session_charset) . "</event>\n";
+  echo '<event start="' . $beg_date_gmt . '" end="' . $end_date_gmt . "\" $isduration icon=\"img/red-circle.png\" title=\" " . htmlspecialchars($evtitle, ENT_QUOTES, $session_charset) . '">' . htmlspecialchars($tlrow['evdetail'], ENT_QUOTES, $session_charset) . "</event>\n";
 }
 tng_free_result($tlresult);
 
@@ -88,7 +88,7 @@ foreach ($timeline as $timeentry) {
   $row['allow_living'] = $rights['living'];
   $row['allow_private'] = $rights['private'];
   $name = xmlcharacters(getName($row));
-  echo "<event start=\"" . $beg_date_gmt . "\" end=\"" . $end_date_gmt . "\" title=\"$name ($beg_year - $end_year)\">$name ($beg_year - $end_year)</event>\n";
+  echo '<event start="' . $beg_date_gmt . '" end="' . $end_date_gmt . "\" title=\"$name ($beg_year - $end_year)\">$name ($beg_year - $end_year)</event>\n";
   tng_free_result($result);
 
   if (count($timeline) == 1 && $rights['both']) {
@@ -126,7 +126,7 @@ foreach ($timeline as $timeentry) {
         $info = $custevent['eventplace'];
         $info .= $info && $custevent['info'] ? ': ' . xmlcharacters($custevent['info']) : '';
         $title = xmlcharacters("$displayval ($eventDate)");
-        echo "<event start=\"" . $beg_date_gmt . "\" end=\"" . $end_date_gmt . "\" icon=\"img/green-circle.png\" title=\" $title\">$info</event>\n";
+        echo '<event start="' . $beg_date_gmt . '" end="' . $end_date_gmt . "\" icon=\"img/green-circle.png\" title=\" $title\">$info</event>\n";
       }
     }
     tng_free_result($custevents);
@@ -183,7 +183,7 @@ foreach ($timeline as $timeentry) {
           $beg_date_gmt = $beg_date['date_gmt'];
           $displayDate = displayDate($marriagerow['marrdate']);
 
-          echo "<event start=\"" . $beg_date_gmt . "\" end=\"" . $beg_date_gmt . "\" title=\"" . xmlcharacters("" . uiTextSnippet('married') . " $spousename") . "\">" . xmlcharacters("$displayDate, {$marriagerow['marrplace']}") . "</event>\n";
+          echo '<event start="' . $beg_date_gmt . '" end="' . $beg_date_gmt . '" title="' . xmlcharacters('' . uiTextSnippet('married') . " $spousename") . '">' . xmlcharacters("$displayDate, {$marriagerow['marrplace']}") . "</event>\n";
         }
       }
       //get all children (link to people) born to this marriage
@@ -211,7 +211,7 @@ foreach ($timeline as $timeentry) {
             $beg_date = getTimelineDate($date);
             $beg_year = $beg_date['year'];
             $beg_date_gmt = $beg_date['date_gmt'];
-            echo "<event start=\"" . $beg_date_gmt . "\" end=\"" . $beg_date_gmt . "\" title=\"" . xmlcharacters(uiTextSnippet('child') . ': ' . $childname) . "\">" . xmlcharacters("$abbr $displayDate") . "</event>\n";
+            echo '<event start="' . $beg_date_gmt . '" end="' . $beg_date_gmt . '" title="' . xmlcharacters(uiTextSnippet('child') . ': ' . $childname) . '">' . xmlcharacters("$abbr $displayDate") . "</event>\n";
           }
         }
       }

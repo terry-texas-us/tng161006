@@ -44,7 +44,7 @@ $headSection->setTitle(uiTextSnippet('labelbranches'));
       <table class='table table-sm'>
         <tr>
           <td><strong><?php echo uiTextSnippet('branch'); ?>:</strong></td>
-          <td><?php echo $brow['description'] . "<br>(" . uiTextSnippet('people') . ' + ' . uiTextSnippet('families') . " = $pcount*)"; ?>
+          <td><?php echo $brow['description'] . '<br>(' . uiTextSnippet('people') . ' + ' . uiTextSnippet('families') . " = $pcount*)"; ?>
             <input name='branch' type='hidden' value="<?php echo $branch; ?>"></td>
         </tr>
         <tr>

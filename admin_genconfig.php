@@ -1091,7 +1091,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
                 <option value='5'<?php if ($tngconfig['calstart'] == '5') {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('friday'); ?>
                 </option>
-                <option value="6"<?php if ($tngconfig['calstart'] == "6") {echo ' selected';} ?>>
+                <option value='6'<?php if ($tngconfig['calstart'] == '6') {echo ' selected';} ?>>
                   <?php echo uiTextSnippet('saturday'); ?>
                 </option>
               </select>
@@ -1124,7 +1124,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
                 <?php
                 $encrtypes = PasswordTypeList();
                 foreach ($encrtypes as $encrtype) {
-                  $display = $encrtype != "none" ? $encrtype : uiTextSnippet('none');
+                  $display = $encrtype != 'none' ? $encrtype : uiTextSnippet('none');
                   echo "<option value=\"$encrtype\"";
                   if ($encrtype == $tngconfig['password_type']) {
                     echo ' selected';

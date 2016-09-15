@@ -51,10 +51,10 @@ function showDiv($type) {
     echo "<div class='sortrow' id=\"order{$lrow['mwtype']}" . "divs_{$lrow['mwID']}\" style='clear: both' onmouseover=\"showEditDelete('{$lrow['mwID']}');\" onmouseout=\"hideEditDelete('{$lrow['mwID']}');\">";
     echo "<table width='100%'><tr id=\"row_{$lrow['mwID']}\">\n";
     echo "<td class='dragarea'>";
-      echo "<img src='img/admArrowUp.gif' alt=''>" . uiTextSnippet('drag') . "\n";
-      echo "<img src='img/admArrowDown.gif' alt=''>\n";
+    echo "<img src='img/admArrowUp.gif' alt=''>" . uiTextSnippet('drag') . "\n";
+    echo "<img src='img/admArrowDown.gif' alt=''>\n";
     echo "</td>\n";
-    echo "<td style=\"width:" . ($thumbmaxw + 6) . "px;text-align:center;\">";
+    echo "<td style='width:" . ($thumbmaxw + 6) . "px; text-align:center;'>";
     if ($lrow['thumbpath'] && file_exists("$rootpath$usefolder/" . $lrow['thumbpath'])) {
       $size = getimagesize("$rootpath$usefolder/" . $lrow['thumbpath']);
       echo "<img src=\"$usefolder/" . str_replace('%2F', '/', rawurlencode($lrow['thumbpath'])) . "\" {$size[3]} id=\"img_{$lrow['mwID']}\" alt=\"{$lrow['mtitle']}\">";
@@ -69,7 +69,7 @@ function showDiv($type) {
       echo "<u id=\"title_{$lrow['mwID']}\">{$lrow['title']}</u>";
     }
     echo "<br><span id=\"desc_{$lrow['mwID']}\">$truncated</span><br>";
-    echo "<div id=\"del_{$lrow['mwID']}\" class=\"small\" style=\"color:gray;visibility:hidden\">";
+    echo "<div id=\"del_{$lrow['mwID']}\" class=\"small\" style=\"color: gray; visibility: hidden\">";
     if ($allowEdit) {
       echo "<a href='#' onclick=\"return openMostWanted('{$lrow['mwtype']}','{$lrow['mwID']}');\">" . uiTextSnippet('edit') . '</a>';
       if ($allowDelete) {

@@ -1,7 +1,6 @@
 // [ts] global functions and/or variables for JSLint
 /*global ModalAlert, ModalDialog, FilePicker, textSnippet */
-var branchcounts, branches, helpLang;
-var saveimport;
+var branchcounts, branches, helpLang, timeoutID, msgdiv, saveimport;
 
 var tnglitbox;
 var timecheck;
@@ -42,7 +41,8 @@ function stopimport() {
 function checkFile(form) {
     'use strict';
     var rval = true,
-        treeselect = document.form1.tree1;
+        treeselect = document.form1.tree1,
+        popup;
     if (form.remotefile.value.length === 0 && form.database.value.length === 0) {
         alert(textSnippet('selectimportfile'));
         rval = false;
@@ -54,7 +54,7 @@ function checkFile(form) {
     if (rval && form.target) {
         if (form.action.indexOf("dataImportGedcomFormAction.php") >= 0) {
             resetimport();
-            var popup = '<div class="impcontainer">\n';
+            popup = '<div class="impcontainer">\n';
             popup += '<div class="impheader">\n';
             popup += '<h4 id="importmsg">';
             if (form.remotefile.value.length) {
@@ -64,7 +64,7 @@ function checkFile(form) {
             }
             popup += '... &nbsp;<img src="img/spinner.gif"></h4>\n';
             popup += '</div>\n';
-            popup += '<div id="impdata" style="visibility:hidden">\n';
+            popup += '<div id="impdata" style="visibility: hidden">\n';
             popup += '<p id="recordcount">\n';
             popup += '<span class="imp"><span class="implabel">' + textSnippet('people') + ': </span><span id="personcount" class="impctr">0</span></span>\n';
             popup += '<div class="imp"><span class="implabel">' + textSnippet('families') + ': </span><span id="familycount" class="impctr">0</span></div>\n';
@@ -73,7 +73,7 @@ function checkFile(form) {
             popup += '<div class="imp"><span class="implabel">' + textSnippet('media') + ': </span><span id="mediacount" class="impctr">0</span></div>\n';
             popup += '<div class="imp"><span class="implabel">' + textSnippet('places') + ': </span><span id="placecount" class="impctr">0</span></div>\n';
             popup += '</p><br><br>';
-            popup += '<progress class="progress progress-info" id="gedcom-progress" value='0' max="500"></progress>\n';
+            popup += '<progress class="progress progress-info" id="gedcom-progress" value="0" max="500"></progress>\n';
             popup += '</div>\n';
             popup += '<br><div id="implinks"><a class="btn btn-outline-secondary" href="#" onclick="return suspendimport();">' + textSnippet('stop') + '</a>';
             if (saveimport === '1') {
@@ -129,43 +129,57 @@ function checkIfDone() {
 function updateCount() {
     'use strict';
 
-    var idivs = $('div.impc');
+    var idivs = $('div.impc'),
+        ilen,
+        pr,
+        parentDocument,
+        gedcomProgress,
+        barValue,
+        percentComplete,
+        ic,
+        fc,
+        sc,
+        nc,
+        mc,
+        pc,
+        closemsg;
+
     if (idivs.length) {
-        var ilen = idivs.length - 1;
-        // console.log('file at ' + idivs['ilen'].down('#pr').innerHTML);
-        var pr = $(idivs[ilen]).find('#pr');
-        var parentDocument = parent.document;
+        ilen = idivs.length - 1;
+
+        pr = $(idivs[ilen]).find('#pr');
+        parentDocument = parent.document;
         if (pr.length) {
-            var gedcomProgress = parentDocument.getElementById('gedcom-progress');
-            var barValue = pr.html();
-            var percentComplete = 100 * barValue / 500;
+            gedcomProgress = parentDocument.getElementById('gedcom-progress');
+            barValue = pr.html();
+            percentComplete = 100 * barValue / 500;
             gedcomProgress.setAttribute('value', barValue);
             gedcomProgress.innerHTML = percentComplete + '%';
             if (percentComplete === 100) {
                 gedcomProgress.className = 'progress progress-success';
             }
         }
-        var ic = $(idivs[ilen]).find('#ic');
+        ic = $(idivs[ilen]).find('#ic');
         if (ic.length) {
             parent.document.getElementById('personcount').innerHTML = ic.html();
         }
-        var fc = $(idivs[ilen]).find('#fc');
+        fc = $(idivs[ilen]).find('#fc');
         if (fc.length) {
             parent.document.getElementById('familycount').innerHTML = fc.html();
         }
-        var sc = $(idivs[ilen]).find('#sc');
+        sc = $(idivs[ilen]).find('#sc');
         if (sc.length) {
             parent.document.getElementById('sourcecount').innerHTML = sc.html();
         }
-        var nc = $(idivs[ilen]).find('#nc');
+        nc = $(idivs[ilen]).find('#nc');
         if (nc.length) {
             parent.document.getElementById('notecount').innerHTML = nc.html();
         }
-        var mc = $(idivs[ilen]).find('#mc');
+        mc = $(idivs[ilen]).find('#mc');
         if (mc.length) {
             parent.document.getElementById('mediacount').innerHTML = mc.html();
         }
-        var pc = $(idivs[ilen]).find('#pc');
+        pc = $(idivs[ilen]).find('#pc');
         if (pc.length) {
             parent.document.getElementById('placecount').innerHTML = pc.html();
         }
@@ -174,7 +188,7 @@ function updateCount() {
         timeoutID = setTimeout(updateCount, 250);
     } else if (!parent.suspended) {
         msgdiv.innerHTML = textSnippet('finishedimporting');
-        var closemsg = '<a class="btn btn-outline-primary" href="#" onclick="tnglitbox.remove(); return false;">' + textSnippet('okay') + '</a>';
+        closemsg = '<a class="btn btn-outline-primary" href="#" onclick="tnglitbox.remove(); return false;">' + textSnippet('okay') + '</a>';
         parent.document.getElementById('implinks').innerHTML = '<p>' + closemsg + '</p>';
     }
 }
@@ -203,8 +217,8 @@ function validateTreeForm(form) {
                 if (req === '1') {
                     // tnglitbox.remove();
                     $('#myModal').modal('hide');
-                    var treeselect = document.form1.tree1;
-                    var i = treeselect.options.length;
+                    var treeselect = document.form1.tree1,
+                        i = treeselect.options.length;
                     if (navigator.appName === "Netscape") {
                         treeselect.options[i] = new Option(form.treename.value, form.gedcom.value, false, false);
                     } else if (navigator.appName === "Microsoft Internet Explorer") {
@@ -257,11 +271,12 @@ function filePicker(sControl, collection, folders) {
     'use strict';
     gsControlName = sControl;
 
-    var origsearch = document.getElementById(sControl + "_org");
-    var lastsearch;
-    var searchstring;
-    var sendstring;
-    var folderstr;
+    var origsearch = document.getElementById(sControl + "_org"),
+        lastsearch,
+        searchstring,
+        sendstring,
+        folderstr,
+        url;
     if (origsearch) {
         lastsearch = document.getElementById(sControl + "_last");
         searchstring = document.getElementById(sControl);
@@ -279,7 +294,7 @@ function filePicker(sControl, collection, folders) {
         sendstring = '';
     }
     folderstr = folders ? '&folders=1' : '';
-    var url = 'admin_filepicker.php?path=' + collection + '&searchstring=' + sendstring + folderstr;
+    url = 'admin_filepicker.php?path=' + collection + '&searchstring=' + sendstring + folderstr;
     tnglitbox = new ModalDialog(url, {size: 'modal-lg'});
 }
 
@@ -357,14 +372,13 @@ function showBranches(treeidx) {
 function getBranches(treeselect, selected) {
     'use strict';
     if (selected) {
-        var tree = treeselect.options[treeselect.selectedIndex].value;
-        var treeidx = tree ? tree : 'none';
+        var tree = treeselect.options[treeselect.selectedIndex].value,
+            treeidx = tree || 'none';
 
         if (branchcounts[treeidx] === -1) {
-            var params = {tree: tree};
             $.ajax({
                 url: 'admin_branchoptions.php',
-                data: params,
+                data: {tree: tree},
                 dataType: 'html',
                 success: function (req) {
                     branchcounts[treeidx] = req === '0' ? 0 : 1;

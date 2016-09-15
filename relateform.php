@@ -145,7 +145,7 @@ echo "<body id='public'>\n";
                     <select name="disallowspouses">
                       <?php
                       $dospouses = $dospouses ? $dospouses : 1;
-                      echo "<option value=\"0\"";
+                      echo '<option value="0"';
                       if ($dospouses) {
                         echo ' selected';
                       }

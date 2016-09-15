@@ -22,7 +22,7 @@ function getPhotoSrc($persfamID, $living, $gender) {
       $mediatypeID = $row['mediatypeID'];
       $usefolder = $row['usecollfolder'] ? $mediatypes_assoc[$mediatypeID] : $mediapath;
       $photocheck = "$usefolder/" . $row['thumbpath'];
-      $photoref = "$usefolder/" . str_replace("%2F", "/", rawurlencode($row['thumbpath']));
+      $photoref = "$usefolder/" . str_replace('%2F', '/', rawurlencode($row['thumbpath']));
       $photolink = xmlcharacters("showmedia.php?mediaID={$row['mediaID']}&amp;medialinkID={$row['medialinkID']}");
     }
   } elseif ($living) {
@@ -33,9 +33,9 @@ function getPhotoSrc($persfamID, $living, $gender) {
   if (!$gotfile) {
     if ($gender && $tngconfig['usedefthumbs']) {
       if ($gender == 'M') {
-        $photocheck = "img/silhouette_male_small.png";
+        $photocheck = 'img/silhouette_male_small.png';
       } elseif ($gender == 'F') {
-        $photocheck = "img/silhouette_female_small.png";
+        $photocheck = 'img/silhouette_female_small.png';
       }
       $photoref = $photocheck;
       $gotfile = file_exists("$rootpath$photocheck");

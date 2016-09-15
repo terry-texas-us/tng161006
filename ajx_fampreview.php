@@ -33,7 +33,7 @@ function showDatePlace($event) {
   $dptext = '';
   if ($event['date'] || $event['place']) {
     if (!$cellnumber) {
-      $cellid = " id=\"info1\"";
+      $cellid = ' id="info1"';
       $cellnumber++;
     } else {
       $cellid = '';

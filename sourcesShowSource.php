@@ -156,7 +156,7 @@ $headSection->setTitle($headtext);
       $sourcetext .= showEvent(['text' => uiTextSnippet('text'), 'fact' => $srcrow['actualtext']]);
     }
     if ($numrows > $maxsearchresults) {
-      $sourcelinktext .= "\n[<a href=\"sourcesShowSource.php?sourceID=$sourceID&amp;foffset=$foffset&amp;ioffset=" . ($newioffset + $maxsearchresults) . "\">" . uiTextSnippet('moreind') . '</a>]';
+      $sourcelinktext .= "\n[<a href=\"sourcesShowSource.php?sourceID=$sourceID&amp;foffset=$foffset&amp;ioffset=" . ($newioffset + $maxsearchresults) . '">' . uiTextSnippet('moreind') . '</a>]';
     }
     tng_free_result($sresult);
 
@@ -181,7 +181,7 @@ $headSection->setTitle($headtext);
       $sourcelinktext .= "<a href=\"familiesShowFamily.php?familyID=$srow[familyID]\">" . uiTextSnippet('family') . ': ' . getFamilyName($srow) . '</a>';
     }
     if ($numrows >= $maxsearchresults) {
-      $sourcelinktext .= "\n[<a href=\"sourcesShowSource.php?sourceID=$sourceID&amp;ioffset=$ioffset&amp;foffset=" . ($newfoffset + $maxsearchresults) . "\">" . uiTextSnippet('morefam') . '</a>]';
+      $sourcelinktext .= "\n[<a href=\"sourcesShowSource.php?sourceID=$sourceID&amp;ioffset=$ioffset&amp;foffset=" . ($newfoffset + $maxsearchresults) . '">' . uiTextSnippet('morefam') . '</a>]';
     }
     tng_free_result($sresult);
 
@@ -205,7 +205,7 @@ $headSection->setTitle($headtext);
       $sourcetext .= "<col class='labelcol'>\n";
       $sourcetext .= "<col>\n";
       $sourcetext .= "<tr>\n";
-      $sourcetext .= "<td class=\"indleftcol\" id=\"notes1\"><span>" . uiTextSnippet('notes') . "</span></td>\n";
+      $sourcetext .= '<td class="indleftcol" id="notes1"><span>' . uiTextSnippet('notes') . "</span></td>\n";
       $sourcetext .= "<td>$notes</td>\n";
       $sourcetext .= "</tr>\n";
       $sourcetext .= "</table>\n";

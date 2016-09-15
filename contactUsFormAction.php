@@ -30,7 +30,7 @@ if (preg_match("/\n[[:space:]]*(to|bcc|cc|boundary)[[:space:]]*[:|=].*@/i", $you
 if (preg_match("/\r/i", $youremail) || preg_match("/\n/i", $youremail) || preg_match("/\r/i", $yourname) || preg_match("/\n/i", $yourname)) {
   die('sorry!');
 }
-$youremail = strtok($youremail, ",; ");
+$youremail = strtok($youremail, ',; ');
 if (!$youremail || !$comments || !$yourname) {
   die('sorry!');
 }
@@ -50,11 +50,11 @@ $emailtouse = $tngconfig['fromadmin'] == 1 ? $emailaddr : $youremail;
 
 $success = tng_sendmail($yourname, $emailtouse, $owner, $sendemail, $subject, $body, $emailaddr, $youremail);
 if ($success) {
-  $message = "mailsent";
+  $message = 'mailsent';
   if ($mailme) {
     tng_sendmail($yourname, $emailtouse, $yourname, $youremail, $subject, $body, $emailaddr, $youremail);
   }
 } else {
-  $message = "mailnotsent&sowner=" . urlencode($owner) . "&ssendemail=" . urlencode($sendemail);
+  $message = 'mailnotsent&sowner=' . urlencode($owner) . '&ssendemail=' . urlencode($sendemail);
 }
 header("Location: contactUs.php?page=$page&amp;message=$message");

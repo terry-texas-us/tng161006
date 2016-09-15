@@ -68,9 +68,7 @@ function getCitations($persfamID, $shortcite = 1) {
   global $citedisplay;
 
   $actualtext = $shortcite ? '' : ', actualtext';
-  $citquery = "SELECT citationID, title, shorttitle, author, other, publisher, callnum, page, quay, citedate, citetext, $citations_table.note AS note, $citations_table.sourceID, description, eventID{$actualtext} FROM $citations_table "
-      . "LEFT JOIN $sources_table ON $citations_table.sourceID = $sources_table.sourceID "
-      . "WHERE persfamID = '$persfamID' ORDER BY ordernum, citationID";
+  $citquery = "SELECT citationID, title, shorttitle, author, other, publisher, callnum, page, quay, citedate, citetext, $citations_table.note AS note, $citations_table.sourceID, description, eventID{$actualtext} FROM $citations_table LEFT JOIN $sources_table ON $citations_table.sourceID = $sources_table.sourceID WHERE persfamID = '$persfamID' ORDER BY ordernum, citationID";
   $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
 
   while ($citrow = tng_fetch_assoc($citresult)) {
@@ -225,7 +223,7 @@ function getNotes($persfamID, $flag) {
     $postcusttitles = [];
   }
 
-  $secretstr = $allow_private ? '' : " AND secret != \"1\"";
+  $secretstr = $allow_private ? '' : ' AND secret != "1"';
   $query = "SELECT display, $xnotes_table.note AS note, $notelinks_table.eventID AS eventID, $notelinks_table.xnoteID AS xnoteID, $notelinks_table.ID AS ID, noteID FROM $notelinks_table "
       . "LEFT JOIN  $xnotes_table ON $notelinks_table.xnoteID = $xnotes_table.ID "
       . "LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID "
@@ -529,11 +527,11 @@ function showEvent($data) {
   }
   $dateplace = $data['date'] || $data['place'] ? 1 : 0;
   $eventcounter += 1;
-  $toggle = $data['collapse'] ? " style=\"display:none\"" : '';
+  $toggle = $data['collapse'] ? " style='display: none'" : '';
   $notes = $notestogether && $data['event'] ? buildGenNotes($notearray, $data['entity'], $data['event']) : '';
   $rows = $dateplace;
   if ($tableid && !$cellnumber && ($dateplace || $data['fact'] || $notes)) {
-    $cellid = " id=\"$tableid" . "1\"";
+    $cellid = " id=\"$tableid" . '1"';
     $cellnumber++;
   } else {
     $cellid = '';
@@ -570,7 +568,7 @@ function showEvent($data) {
       if (isset($data['np'])) {
         $output .= "<span class='place'>{$data['place']}</span>";
       } else {
-        $output .= " <a  class='place' href=\"placesearch.php?psearch=" . urlencode($data['place']) . "\" title=\"" . uiTextSnippet('findplaces') . "\">\n";
+        $output .= " <a  class='place' href=\"placesearch.php?psearch=" . urlencode($data['place']) . '" title="' . uiTextSnippet('findplaces') . "\">\n";
         $output .= "<span>{$data['place']}</span>";
         $output .= "</a>$cite</td>\n";
       }
@@ -663,8 +661,8 @@ function showEvent($data) {
     $output .= $mediaoutput;
   }
   if ($output) {
-    $editicon = $tentative_edit && $data['event'] && $data['event'] != 'NAME' ? "<img class='icon-sm' src='svg/new-message.svg' alt=\"" . uiTextSnippet('editevent') . "\" title=\"" . uiTextSnippet('editevent') . "\" onclick=\"tnglitbox = new ModalDialog('ajx_tentedit.php?persfamID={$data['entity']}&amp;type={$data['type']}&amp;event={$data['event']}&amp;title={$data['text']}');\" class=\"fakelink\">" : '';
-    $toggleicon = $data['collapse'] && $rows > 1 ? "<img src=\"img/tng_sort_desc.gif\" class=\"toggleicon\" id=\"t{$eventcounter}\" title=\"" . uiTextSnippet('expand') . "\">" : '';
+    $editicon = $tentative_edit && $data['event'] && $data['event'] != 'NAME' ? "<img class='icon-sm' src='svg/new-message.svg' alt=\"" . uiTextSnippet('editevent') . '" title="' . uiTextSnippet('editevent') . "\" onclick=\"tnglitbox = new ModalDialog('ajx_tentedit.php?persfamID={$data['entity']}&amp;type={$data['type']}&amp;event={$data['event']}&amp;title={$data['text']}');\" class=\"fakelink\">" : '';
+    $toggleicon = $data['collapse'] && $rows > 1 ? "<img src=\"img/tng_sort_desc.gif\" class=\"toggleicon\" id=\"t{$eventcounter}\" title=\"" . uiTextSnippet('expand') . '">' : '';
     $class = $cellid ? 'indleftcol' : '';
     $rowspan = $rows > 1 && !$data['collapse'] ? " rowspan=\"$rows\"" : '';
     $preoutput = "<tr>\n<td class=\"$class lt{$eventcounter}\" $rowspan$cellid>$toggleicon<span>{$data['text']}$editicon</span></td>\n";
@@ -685,8 +683,7 @@ function doCustomEvents($entityID, $type, $nomap = 0) {
   global $eventtypes_table;
   global $tngprint;
 
-  $query = "SELECT display, eventdate, eventdatetr, eventplace, age, agency, cause, addressID, info, tag, description, eventID, collapse FROM "
-          . "($events_table, $eventtypes_table) WHERE persfamID = \"$entityID\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND keep = \"1\" AND parenttag = \"\" ORDER BY ordernum, tag, description, eventdatetr, info, eventID";
+  $query = "SELECT display, eventdate, eventdatetr, eventplace, age, agency, cause, addressID, info, tag, description, eventID, collapse FROM ($events_table, $eventtypes_table) WHERE persfamID = \"$entityID\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND keep = \"1\" AND parenttag = \"\" ORDER BY ordernum, tag, description, eventdatetr, info, eventID";
   $custevents = tng_query($query);
   while ($custevent = tng_fetch_assoc($custevents)) {
     $displayval = getEventDisplay($custevent['display']);
@@ -746,11 +743,11 @@ function getLinkTypeMisc($entity, $linktype) {
   switch ($linktype) {
     case 'I':
       $misc['personID'] = $entity['personID'];
-      $misc['always'] = $entity['allow_living'] && $entity['allow_private'] ? '' : "AND alwayson = \"1\"";
+      $misc['always'] = $entity['allow_living'] && $entity['allow_private'] ? '' : 'AND alwayson = "1"';
       break;
     case 'F':
       $misc['personID'] = $entity['familyID'];
-      $misc['always'] = $entity['allow_living'] && $entity['allow_private'] ? '' : "AND alwayson = \"1\"";
+      $misc['always'] = $entity['allow_living'] && $entity['allow_private'] ? '' : 'AND alwayson = "1"';
       break;
     case 'S':
       $misc['personID'] = $entity['sourceID'];
@@ -861,7 +858,7 @@ function writeAlbums($albums_array) {
   $albumtext = '';
   $albums = $albums_array['-x--general--x-'];
 
-  $cellid = $tableid && !$cellnumber ? " id=\"$tableid" . "1\"" : '';
+  $cellid = $tableid && !$cellnumber ? " id=\"$tableid" . '1"' : '';
 
   if (is_array($albums)) {
     $totalalbums = count($albums);
@@ -880,7 +877,7 @@ function writeAlbums($albums_array) {
           $albumrows .= "<td style=\"width:$datewidth" . "px\">{$item['imgsrc']}</td><td>";
           $thumbcount++;
         } else {
-          $albumrows .= "<td style=\"width:$datewidth" . "px\">&nbsp;</td><td>";
+          $albumrows .= "<td style=\"width:$datewidth" . 'px">&nbsp;</td><td>';
         }
         $albumrows .= "<span>{$item['name']}<br>" . nl2br($item['description']) . "</span></td></tr>\n";
         $albumcount++;
@@ -943,12 +940,12 @@ function getMedia($entity, $linktype) {
         if ($thismedia['imgsrc']) {
           $imgsrc = $thismedia['imgsrc'];
           $medialinkID = $medialink['medialinkID'];
-          $thismedia['imgsrc'] = "<div class=\"media-img\">";
-          $thismedia['imgsrc'] .= "<div class=\"media-prev\" id=\"prev{$medialink['mediaID']}_$medialinkID\" style=\"display:none\"></div>";
+          $thismedia['imgsrc'] = '<div class="media-img">';
+          $thismedia['imgsrc'] .= "<div class=\"media-prev\" id=\"prev{$medialink['mediaID']}_$medialinkID\" style='display: none'></div>";
           $thismedia['imgsrc'] .= "</div>\n";
           $thismedia['imgsrc'] .= "<a href=\"{$thismedia['href']}\"";
           if ($gotImageJpeg && isPhoto($medialink) && checkMediaFileSize("$rootpath$usefolder/" . $medialink['path'])) {
-            $thismedia['imgsrc'] .= " class=\"media-preview\" id=\"img-{$medialink['mediaID']}-{$medialinkID}-" . urlencode("$usefolder/{$medialink['path']}") . "\"";
+            $thismedia['imgsrc'] .= " class=\"media-preview\" id=\"img-{$medialink['mediaID']}-{$medialinkID}-" . urlencode("$usefolder/{$medialink['path']}") . '"';
           }
           $thismedia['imgsrc'] .= ">$imgsrc</a>";
         }
@@ -988,7 +985,7 @@ function writeMedia($media_array, $mediatypeID, $prefix = '') {
   $mediatext = '';
   $media = $media_array['-x--general--x-'][$mediatypeID];
 
-  $cellid = $tableid && !$cellnumber ? " id=\"$tableid" . "1\"" : '';
+  $cellid = $tableid && !$cellnumber ? " id=\"$tableid" . '1"' : '';
 
   if (is_array($media)) {
     $totalmedia = count($media);
@@ -1019,7 +1016,7 @@ function writeMedia($media_array, $mediatypeID, $prefix = '') {
         if ($mediacount) {
           $mediarows .= "<tr class=\"m{$prefix}{$mediatypeID}\"";
           if ($hidemedia) {
-            $mediarows .= " style=\"display:none\"";
+            $mediarows .= " style='display: none'";
           }
           $mediarows .= '>';
         }
@@ -1027,7 +1024,7 @@ function writeMedia($media_array, $mediatypeID, $prefix = '') {
           $mediarows .= "<td style=\"width:$datewidth" . "px\">{$item['imgsrc']}</td><td>";
           $thumbcount++;
         } else {
-          $mediarows .= "<td style=\"width:$datewidth" . "px\">&nbsp;</td><td>";
+          $mediarows .= "<td style=\"width:$datewidth" . 'px">&nbsp;</td><td>';
         }
         $mediarows .= "<span>{$item['name']}<br>" . nl2br($item['description']) . "</span></td></tr>\n";
         $mediacount++;
@@ -1035,17 +1032,17 @@ function writeMedia($media_array, $mediatypeID, $prefix = '') {
       if (!$tngconfig['ssdisabled'] && $mediacount >= 3 && $slidelink) {
         $titlemsg .= "<div id=\"ssm{$prefix}{$mediatypeID}\"";
         if ($hidemedia) {
-          $titlemsg .= " style=\"display:none\"";
+          $titlemsg .= " style='display: none'";
         }
-        if (strpos($slidelink, "\" target=") !== false) {
-          $slidelink = str_replace("\" target=", "&amp;ss=1\" target=", $slidelink);
+        if (strpos($slidelink, '" target=') !== false) {
+          $slidelink = str_replace('" target=', '&amp;ss=1" target=', $slidelink);
         } else {
           $slidelink .= '&amp;ss=1';
         }
         $titlemsg .= "><br><a href=\"$slidelink\" class=\"small\">&raquo; " . uiTextSnippet('slidestart') . "</a></div>\n";
       }
       $mediatext .= "<tr>\n";
-      $toggleicon = $hidemedia ? "<img src=\"img/tng_sort_desc.gif\" class=\"toggleicon\" id=\"m{$prefix}{$mediatypeID}\" title=\"" . uiTextSnippet('expand') . "\">" : '';
+      $toggleicon = $hidemedia ? "<img src=\"img/tng_sort_desc.gif\" class=\"toggleicon\" id=\"m{$prefix}{$mediatypeID}\" title=\"" . uiTextSnippet('expand') . '">' : '';
       $mediatext .= "<td class=\"indleftcol lm{$prefix}{$mediatypeID}\"$cellid";
       if (!$hidemedia) {
         $mediatext .= " rowspan=\"$totalmedia\"";
@@ -1054,7 +1051,7 @@ function writeMedia($media_array, $mediatypeID, $prefix = '') {
       $mediatext .= "<span>$titlemsg</span></td>\n";
 
       if (!$thumbcount) {
-        $mediarows = str_replace("<td style=\"width:$datewidth" . "px\">&nbsp;</td><td>", "<td colspan='2'>", $mediarows);
+        $mediarows = str_replace("<td style=\"width:$datewidth" . 'px">&nbsp;</td><td>', "<td colspan='2'>", $mediarows);
       }
       $mediatext .= $mediarows;
     }
@@ -1089,10 +1086,7 @@ function getAlbumPhoto($albumID, $albumname) {
     $foundliving = 0;
     $foundprivate = 0;
     if (!$trow['alwayson'] && $livedefault != 2) {
-      $query = "SELECT people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, linktype FROM $medialinks_table "
-          . "LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID "
-          . "LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID "
-          . "WHERE mediaID = '$mediaID'";
+      $query = "SELECT people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, linktype FROM $medialinks_table LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID WHERE mediaID = '$mediaID'";
       $presult = tng_query($query);
       while ($prow = tng_fetch_assoc($presult)) {
         if ($prow['fbranch'] != null) {
@@ -1140,11 +1134,11 @@ function getAlbumPhoto($albumID, $albumname) {
     if (!$foundliving && !$foundprivate) {
       $size = getimagesize("$rootpath$tusefolder/{$trow['thumbpath']}");
       $imgsrc = "<div class='media-img'>";
-      $imgsrc .= "<div class=\"media-prev\" id=\"prev$albumID\" style=\"display:none\"></div>";
+      $imgsrc .= "<div class=\"media-prev\" id=\"prev$albumID\" style='display: none'></div>";
       $imgsrc .= "</div>\n";
-      $imgsrc .= "<a href=\"albumsShowAlbum.php?albumID=$albumID\" title=\"" . uiTextSnippet('albclicksee') . "\"";
+      $imgsrc .= "<a href=\"albumsShowAlbum.php?albumID=$albumID\" title=\"" . uiTextSnippet('albclicksee') . '"';
       if (function_exists(imageJpeg)) {
-        $imgsrc .= " class=\"media-preview\" id=\"img-{$albumID}-0-" . urlencode("$tusefolder/{$trow['path']}") . "\"";
+        $imgsrc .= " class=\"media-preview\" id=\"img-{$albumID}-0-" . urlencode("$tusefolder/{$trow['path']}") . '"';
       }
       $imgsrc .= "><img src=\"$tusefolder/" . str_replace('%2F', '/', rawurlencode($trow['thumbpath'])) . "\" class=\"thumb\" $size[3] alt=\"$albumname\"></a>";
     }
@@ -1204,8 +1198,8 @@ function getFact($row) {
       $fact[$i] .= ($fact[$i] ? '<br>' : '') . "<a href=\"mailto:{$addr['email']}\">{$addr['email']}</a>";
     }
     if ($addr['www']) {
-      $link = strpos($addr['www'], 'http') !== 0 ? "http://" . $addr['www'] : $addr['www'];
-      $fact[$i] .= ($fact[$i] ? "<br>" : '') . "<a href=\"$link\">{$addr['www']}</a>";
+      $link = strpos($addr['www'], 'http') !== 0 ? 'http://' . $addr['www'] : $addr['www'];
+      $fact[$i] .= ($fact[$i] ? '<br>' : '') . "<a href=\"$link\">{$addr['www']}</a>";
     }
   }
   return $fact;

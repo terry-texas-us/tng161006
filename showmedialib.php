@@ -74,7 +74,7 @@ function getMediaInfo($mediatypeID, $mediaID, $personID, $albumID, $albumlinkID,
 
   if ($albumlinkID) {
     if ($tnggallery) {
-      $wherestr = " AND thumbpath != \"\"";
+      $wherestr = ' AND thumbpath != ""';
     }
     $query = "SELECT $media_table.mediaID, albumlinkID, ordernum, path, map, description, notes, width, height, datetaken, placetaken, owner, alwayson, abspath, usecollfolder, status, plot, cemeteryID, showmap, bodytext, form, newwindow, usenl, latitude, longitude, mediatypeID FROM ($albumlinks_table, $media_table) "
         . "WHERE albumID = '$albumID' AND $albumlinks_table.mediaID = $media_table.mediaID $wherestr ORDER BY ordernum, description";
@@ -103,7 +103,7 @@ function getMediaInfo($mediatypeID, $mediaID, $personID, $albumID, $albumlinkID,
       $wherestr .= " AND ($media_table.description LIKE \"%$mediasearch%\" OR $media_table.notes LIKE \"%$mediasearch%\" OR bodytext LIKE \"%$mediasearch%\")";
     }
     if ($tnggallery) {
-      $wherestr .= " AND thumbpath != \"\"";
+      $wherestr .= ' AND thumbpath != ""';
     }
     $cemwhere = $cemeteryID ? " AND cemeteryID = '$cemeteryID'" : '';
 
@@ -228,14 +228,14 @@ function getMediaNavigation($mediaID, $personID, $albumlinkID, $result, $showlin
 
   if ($showlinks) {
     if ($allow_admin && $allowMediaEdit) {
-      $pagenav .= "<a href=\"mediaEdit.php?mediaID=$mediaID&amp;cw=1\" target='_blank'>&raquo; " . uiTextSnippet('editmedia') . "</a> &nbsp;&nbsp;&nbsp;";
+      $pagenav .= "<a href=\"mediaEdit.php?mediaID=$mediaID&amp;cw=1\" target='_blank'>&raquo; " . uiTextSnippet('editmedia') . '</a> &nbsp;&nbsp;&nbsp;';
     }
     if ($albumlinkID) {
       $offset = floor($page / $maxsearchresults) * $maxsearchresults;
       $pagenav .= "<a href=\"albumsShowAlbum.php?albumID=$albumID&amp;offset=$offset&amp;tngpage=$pagenum&amp;tnggallery=$tnggallery\">&raquo; $albumname</a>  &nbsp;&nbsp;&nbsp;";
     } elseif (!$personID) {
       $offset = floor($page / $maxsearchresults) * $maxsearchresults;
-      $pagenav .= "<a href=\"mediaShow.php?" . $showall . "offset=$offset&amp;tngpage=$pagenum&amp;tnggallery=$tnggallery\">&raquo; " . uiTextSnippet('showall') . "</a>  &nbsp;&nbsp;&nbsp;";
+      $pagenav .= '<a href="mediaShow.php?' . $showall . "offset=$offset&amp;tngpage=$pagenum&amp;tnggallery=$tnggallery\">&raquo; " . uiTextSnippet('showall') . '</a>  &nbsp;&nbsp;&nbsp;';
     } else {
       if ($linktype == 'F') {
         $pagenav .= "<a href=\"familiesShowFamily.php?familyID=$personID\">&raquo; " . uiTextSnippet('groupsheet') . '</a>  &nbsp;&nbsp;&nbsp;';
@@ -373,7 +373,7 @@ function getMediaLinkText($mediaID, $ioffset) {
       $familyname = trim($prow['hlnprefix'] . ' ' . $prow['hlastname']) . '/' . trim($prow['wlnprefix'] . ' ' . $prow['wlastname']) . " ({$prow['familyID']})";
       $medialinktext .= "<a href=\"familiesShowFamily.php?familyID={$prow['familyID']}\">" . uiTextSnippet('family') . ": $familyname</a>";
     } else {
-      $medialinktext .= "<a href=\"placesearch.php?psearch=" . urlencode($prow['personID']) . "\">" . $prow['personID'] . '</a>';
+      $medialinktext .= '<a href="placesearch.php?psearch=' . urlencode($prow['personID']) . '">' . $prow['personID'] . '</a>';
     }
     if ($prow['eventID']) {
       $query = "SELECT display FROM $events_table, $eventtypes_table WHERE eventID = \"{$prow['eventID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID";
@@ -389,7 +389,7 @@ function getMediaLinkText($mediaID, $ioffset) {
   }
   tng_free_result($presult);
   if ($numrows > $maxsearchresults) {
-    $medialinktext .= "\n['<a href=\"showmedia.php?mediaID=$mediaID&amp;ioffset=" . ($newioffset + $maxsearchresults) . "\">" . uiTextSnippet('morelinks') . "</a>']";
+    $medialinktext .= "\n['<a href=\"showmedia.php?mediaID=$mediaID&amp;ioffset=" . ($newioffset + $maxsearchresults) . '">' . uiTextSnippet('morelinks') . "</a>']";
   }
 
   return $medialinktext;
@@ -488,7 +488,8 @@ function showMediaSource($imgrow, $ss = false) {
           if (!$imgviewer || in_array($imgrow['mediatypeID'], $mediatypes_like[$imgviewer])) {
             $maxvh = $tngconfig['imgvheight'];
             $calcHeight = $maxvh ? ($height > $maxvh ? $maxvh : $height) : 1;
-            echo "<div id='loadingdiv2' style=\"position:static;\">" . uiTextSnippet('loading') . "</div><iframe name=\"iframe1\" id=\"iframe1\" src=\"" . "img_viewer.php?mediaID={$imgrow['mediaID']}&amp;medialinkID={$imgrow['medialinkID']}\" width=\"100%\" height=\"1\" onload=\"calcHeight($calcHeight)\" frameborder=\"0\" marginheight=\"0\" marginwidth=\"0\" scrolling=\"no\"></iframe>";
+            echo '<div id="loadingdiv2" style="position: static;">' . uiTextSnippet('loading') . '</div>';
+            echo '<iframe name="iframe1" id="iframe1" src="' . "img_viewer.php?mediaID={$imgrow['mediaID']}&amp;medialinkID={$imgrow['medialinkID']}\" width=\"100%\" height=\"1\" onload=\"calcHeight($calcHeight)\" frameborder=\"0\" marginheight=\"0\" marginwidth=\"0\" scrolling=\"no\"></iframe>";
           } else {
             echo "<div class=\"titlebox mediaalign\" id=\"imgdiv\"><img src=\"$mediasrc\" id=\"theimage\" $mapstr alt=\"$description\"></div>\n";
           }
@@ -501,7 +502,7 @@ function showMediaSource($imgrow, $ss = false) {
           $flvheight = $imgrow['height'] ? $imgrow['height'] : 300;
           $flvwidth = $imgrow['width'] ? $imgrow['width'] : 400;
           $preview_img = str_replace('.flv', '.jpg', $mediasrc);
-          echo "<script src=\"flvsupport/flowplayer-3.2.8.min.js\"></script>";
+          echo '<script src="flvsupport/flowplayer-3.2.8.min.js"></script>';
           echo "<a href=\"$mediasrc\"";
           echo "style=\"display:block;width:{$flvwidth}px;height:{$flvheight}px;\" id=\"videoplayer\">";
           if (file_exists(str_replace('%20', ' ', $preview_img))) {

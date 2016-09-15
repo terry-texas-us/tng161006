@@ -9,9 +9,9 @@ require 'version.php';
 $tng_search_langs = $_SESSION['tng_search_langs'] = 1;
 if ($newsearch) {
   $exptime = 0;
-  setcookie("tng_search_langs_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_langs_post[tngpage]", 1, $exptime);
-  setcookie("tng_search_langs_post[offset]", 0, $exptime);
+  setcookie('tng_search_langs_post[search]', $searchstring, $exptime);
+  setcookie('tng_search_langs_post[tngpage]', 1, $exptime);
+  setcookie('tng_search_langs_post[offset]', 0, $exptime);
 } else {
   if (!$searchstring) {
     $searchstring = stripslashes($_COOKIE['tng_search_langs_post']['search']);
@@ -21,8 +21,8 @@ if ($newsearch) {
     $offset = $_COOKIE['tng_search_langs_post']['offset'];
   } else {
     $exptime = 0;
-    setcookie("tng_search_langs_post[tngpage]", $tngpage, $exptime);
-    setcookie("tng_search_langs_post[offset]", $offset, $exptime);
+    setcookie('tng_search_langs_post[tngpage]', $tngpage, $exptime);
+    setcookie('tng_search_langs_post[offset]', $offset, $exptime);
   }
 }
 if ($offset) {

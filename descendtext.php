@@ -105,7 +105,7 @@ function getIndividual($key, $sex, $level, $trail) {
             }
             if ($nxtkids) {
               //chart continues
-              $rval .= "[<a href=\"descendtext.php?personID={$crow['personID']}\" title=\"" . uiTextSnippet('popupnote3') . "\"> =&gt;</a>]";
+              $rval .= "[<a href=\"descendtext.php?personID={$crow['personID']}\" title=\"" . uiTextSnippet('popupnote3') . '"> =&gt;</a>]';
             }
           }
           $rval .= str_repeat('  ', ($level - 1) * 8) . "</li>\n";

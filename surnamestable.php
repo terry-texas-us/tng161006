@@ -14,7 +14,7 @@
       if ($tngconfig['ucsurnames']) {
         $surnamestr = "ucase($surnamestr)";
       }
-      $wherestr .= $wherestr ? " AND lastname != \"\"" : "WHERE lastname != \"\"";
+      $wherestr .= $wherestr ? ' AND lastname != ""' : 'WHERE lastname != ""';
       $query = "SELECT ucase( $binary $surnamestr ) AS lastname, $surnamestr AS lowername, count( ucase($binary lastname) ) AS lncount FROM $people_table $wherestr GROUP BY lowername ORDER by lncount DESC, lastname LIMIT $topnum";
 
       $result = tng_query($query);

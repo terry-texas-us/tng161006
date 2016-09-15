@@ -46,7 +46,7 @@ $citresult = tng_query($query);
 $citationcount = tng_num_rows($citresult);
 ?>
 
-<div id='citations'<?php if (!$citationcount) {echo " style=\"display:none\"";} ?>>
+<div id='citations'<?php if (!$citationcount) {echo " style='display: none'";} ?>>
   <form name='citeform'>
     <header class='modal-header'>
       <h4><?php echo uiTextSnippet('citations') . ": $eventtypedesc"; ?></h4>

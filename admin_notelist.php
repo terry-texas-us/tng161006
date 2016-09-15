@@ -13,14 +13,14 @@ $searchstring_noquotes = stripslashes(preg_replace('/\"/', '&#34;', $searchstrin
 $searchstring = addslashes($searchstring);
 
 if ($newsearch) {
-  setcookie("tng_search_notes_post[search]", $searchstring_noquotes, $exptime);
-  setcookie("tng_search_notes_post[tngpage]", 1, $exptime);
-  setcookie("tng_search_notes_post[offset]", 0, $exptime);
-  setcookie("tng_search_notes_post[private]", $private, $exptime);
+  setcookie('tng_search_notes_post[search]', $searchstring_noquotes, $exptime);
+  setcookie('tng_search_notes_post[tngpage]', 1, $exptime);
+  setcookie('tng_search_notes_post[offset]', 0, $exptime);
+  setcookie('tng_search_notes_post[private]', $private, $exptime);
 } else {
   if (!$searchstring) {
     $searchstring_noquotes = $_COOKIE['tng_search_notes_post']['search'];
-    $searchstring = preg_replace("/&#34;/", "\\\"", $searchstring_noquotes);
+    $searchstring = preg_replace('/&#34;/', '\\\"', $searchstring_noquotes);
   }
   if (!$private) {
     $private = $_COOKIE['tng_search_notes_post']['private'];
@@ -29,8 +29,8 @@ if ($newsearch) {
     $tngpage = $_COOKIE['tng_search_notes_post']['tngpage'];
     $offset = $_COOKIE['tng_search_notes_post']['offset'];
   } else {
-    setcookie("tng_search_notes_post[tngpage]", $tngpage, $exptime);
-    setcookie("tng_search_notes_post[offset]", $offset, $exptime);
+    setcookie('tng_search_notes_post[tngpage]', $tngpage, $exptime);
+    setcookie('tng_search_notes_post[offset]', $offset, $exptime);
   }
 }
 if ($offset) {

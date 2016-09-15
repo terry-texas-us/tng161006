@@ -15,7 +15,7 @@ if ($session_charset != 'UTF-8') {
 }
 
 $criteria = trim($criteria);
-$f = $filter == "c" ? "%" : '';
+$f = $filter == 'c' ? '%' : '';
 
 header('Content-type:text/html; charset=' . $session_charset);
 
@@ -44,29 +44,29 @@ function showAction($entityID, $num = null) {
 
   $id = $num ? $num : $entityID;
   $lines = '<td>';
-  $lines .= "<div id=\"link_$id\" style=\"text-align:center;width:50px;";
+  $lines .= "<div id=\"link_$id\" style=\"text-align: center; width:50px;";
   if ($albumID || $mediaID) {
     $gotit = in_array($entityID, $alreadygot);
     if ($gotit) {
-      $lines .= "display:none";
+      $lines .= 'display: none';
     }
-    $lines .= "\"><a href='#' onclick=\"return addMedia2EntityLink(findform, '" . str_replace("&#39;", "\\'", $entityID) . "', '$num');\">" . uiTextSnippet('add') . "</a></div>";
-    $lines .= "<div id=\"linked_$id\" style=\"text-align:center;width:50px;";
+    $lines .= "\"><a href='#' onclick=\"return addMedia2EntityLink(findform, '" . str_replace('&#39;', "\\'", $entityID) . "', '$num');\">" . uiTextSnippet('add') . "</a></div>";
+    $lines .= "<div id=\"linked_$id\" style=\"text-align: center; width:50px;";
     if (!$gotit) {
-      $lines .= "display:none";
+      $lines .= 'display: none';
     }
     $lines .= "\"><img class='icon-sm' src='svg/eye.svg' alt=''>\n";
-    $lines .= "<div id=\"sdef_" . urlencode($entityID) . "\"></div>";
+    $lines .= '<div id="sdef_' . urlencode($entityID) . '"></div>';
   } else {
     $lines .= "\"><a href='#' onclick=\"selectEntity(document.find.newlink1, '$id');\">" . uiTextSnippet('select') . '</a>';
   }
-  $lines .= "</div>";
+  $lines .= '</div>';
   $lines .= "</td>\n";
 
   return $lines;
 }
 
-$selectline = $mediaID || $albumID ? "<td width=\"50\">" . uiTextSnippet('select') . "</td>\n" : '';
+$selectline = $mediaID || $albumID ? '<td width="50">' . uiTextSnippet('select') . "</td>\n" : '';
 
 switch ($type) {
   case 'I':
@@ -79,23 +79,23 @@ switch ($type) {
     }
     if ($myfpersonID) {
       $myfpersonID = strtoupper($myfpersonID);
-      if ($f != "%" && substr($myfpersonID, 0, 1) != $personprefix) {
+      if ($f != '%' && substr($myfpersonID, 0, 1) != $personprefix) {
         $myfpersonID = $personprefix . $myfpersonID;
       }
       $allwhere .= " AND personID LIKE \"$f$myfpersonID%\"";
     }
     if ($myffirstname) {
-      $allwhere .= " AND firstname LIKE \"$f" . trim($myffirstname) . "%\"";
+      $allwhere .= " AND firstname LIKE \"$f" . trim($myffirstname) . '%"';
     }
     if ($myflastname) {
       if ($lnprefixes) {
-        $allwhere .= " AND TRIM(CONCAT_WS(' ',lnprefix,lastname)) LIKE \"$f" . trim($myflastname) . "%\"";
+        $allwhere .= " AND TRIM(CONCAT_WS(' ',lnprefix,lastname)) LIKE \"$f" . trim($myflastname) . '%"';
       } else {
-        $allwhere .= " AND lastname LIKE \"$f" . trim($myflastname) . "%\"";
+        $allwhere .= " AND lastname LIKE \"$f" . trim($myflastname) . '%"';
       }
     }
 
-    $more = getLivingPrivateRestrictions("", $myffirstname, $false);
+    $more = getLivingPrivateRestrictions('', $myffirstname, $false);
 
     if ($more) {
       if ($allwhere) {
@@ -164,7 +164,7 @@ switch ($type) {
     }
     if ($myfamilyID) {
       $myfamilyID = strtoupper($myfamilyID);
-      if ($f != "%" && substr($myfamilyID, 0, 1) != $familyprefix) {
+      if ($f != '%' && substr($myfamilyID, 0, 1) != $familyprefix) {
         $myfamilyID = $familyprefix . $myfamilyID;
       }
       $allwhere .= " AND familyID LIKE \"%$myfamilyID%\"";
@@ -180,7 +180,7 @@ switch ($type) {
       $terms = explode(' ', $mywifename);
       foreach ($terms as $term) {
         if ($allwhere2) {
-          $allwhere2 .= " AND ";
+          $allwhere2 .= ' AND ';
         }
         $allwhere2 .= "CONCAT_WS(' ',wifepeople.firstname,TRIM(CONCAT_WS(' ',wifepeople.lnprefix,wifepeople.lastname))) LIKE \"$f$term%\"";
       }
@@ -190,7 +190,7 @@ switch ($type) {
       $terms = explode(' ', $myhusbname);
       foreach ($terms as $term) {
         if ($allwhere2) {
-          $allwhere2 .= " AND ";
+          $allwhere2 .= ' AND ';
         }
         $allwhere2 .= "CONCAT_WS(' ',husbpeople.firstname,TRIM(CONCAT_WS(' ',husbpeople.lnprefix,husbpeople.lastname))) LIKE \"$f$term%\"";
       }
@@ -234,7 +234,7 @@ switch ($type) {
         }
         if ($row['wpersonID']) {
           if ($thisfamily) {
-            $thisfamily .= "<br>";
+            $thisfamily .= '<br>';
           }
           $person['firstname'] = $row['wfirstname'];
           $person['lnprefix'] = $row['wlnprefix'];
@@ -266,7 +266,7 @@ switch ($type) {
     if (tng_num_rows($result)) {
       $lines = "<tr>\n";
       $lines .= $selectline;
-      $lines .= "<td style=\"width:100px\">" . uiTextSnippet('sourceid') . "</td>\n";
+      $lines .= '<td style="width: 100px">' . uiTextSnippet('sourceid') . "</td>\n";
       $lines .= '<td>' . uiTextSnippet('title') . "</td>\n";
       $lines .= "</tr>\n";
 
@@ -288,7 +288,7 @@ switch ($type) {
     if (tng_num_rows($result)) {
       $lines = "<tr>\n";
       $lines .= $selectline;
-      $lines .= "<td style=\"width:100px\">" . uiTextSnippet('repoid') . "</td>\n";
+      $lines .= '<td style="width: 100px">' . uiTextSnippet('repoid') . "</td>\n";
       $lines .= '<td>' . uiTextSnippet('title') . "</td>\n";
       $lines .= "</tr>\n";
 
@@ -303,12 +303,12 @@ switch ($type) {
     }
     break;
   case 'L':
-    $allwhere = "1=1";
+    $allwhere = '1=1';
     if ($criteria) {
       $allwhere .= " AND place LIKE \"$f$criteria%\"";
     }
     if ($temple) {
-      $allwhere .= " AND temple = 1";
+      $allwhere .= ' AND temple = 1';
     }
     $query = "SELECT ID, place, temple, notes FROM $places_table WHERE $allwhere ORDER BY place LIMIT 250";
     $result = tng_query($query);
@@ -321,7 +321,7 @@ switch ($type) {
 
       $num = 1;
       while ($row = tng_fetch_assoc($result)) {
-        $row['place'] = preg_replace("/'/", "&#39;", $row['place']);
+        $row['place'] = preg_replace("/'/", '&#39;', $row['place']);
         $notes = $row['temple'] && $row['notes'] ? ' (' . truncateIt($row['notes'], 75) . ')' : '';
         $place_slashed = addslashes(preg_replace('/[^A-Za-z0-9]/', '_', $row['place']));
         $lines .= "<tr id=\"linkrow_{$row['ID']}\">\n";

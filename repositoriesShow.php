@@ -9,7 +9,7 @@ function doRepoSearch($instance, $pagenav) {
   $str = "<span>\n";
   $str .= buildFormElement('repositoriesShow', 'get', "RepoSearch$instance");
   $str .= "<input name='reposearch' type='text' value=\"$reposearch\" /> \n";
-  $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . "\" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+  $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . '" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
   $str .= $pagenav;
   if ($reposearch) {
     $str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='repositoriesShow.php'>" . uiTextSnippet('browseallrepos') . '</a>';

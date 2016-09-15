@@ -368,7 +368,7 @@ $year = $earliest;
 $displayyear = $year;
 for ($i = $lineoffset; $i <= ($lineoffset + $chartwidth); $i+=($chartwidth / $divisions)) {
   $iadj = $i - 12;
-  echo "<div class='yeardiv' style=\"left:$iadj" . "px;\">";
+  echo "<div class='yeardiv' style=\"left:$iadj" . 'px;">';
   if ($pedigree['simile']) {
     echo "<a href='#' onclick=\"return centerTimeline($displayyear);\">$displayyear</a>";
   } else {
@@ -451,7 +451,7 @@ if ($highestll == 1) {
 } elseif ($highestll == 2) {
   echo '<br><br><br>';
 }
-echo "<table width=\"" . ($chartwidth + $lineoffset + 20) . "\" style=\"height:$top" . "px\"><tr><td>&nbsp;</td></tr></table>";
+echo '<table width="' . ($chartwidth + $lineoffset + 20) . "\" style=\"height:$top" . 'px"><tr><td>&nbsp;</td></tr></table>';
 ?>
 
 <br><br>

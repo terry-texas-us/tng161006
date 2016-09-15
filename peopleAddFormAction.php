@@ -206,7 +206,7 @@ if ($type == 'child') {
   echo $rval;
 } elseif ($type == 'spouse') {
   $name = $session_charset == 'UTF-8' ? getName($row) : utf8_encode(getName($row));
-  echo "{\"id\":\"{$row['personID']}\",\"name\":\"" . $name . "\"}";
+  echo "{\"id\":\"{$row['personID']}\",\"name\":\"" . $name . '"}';
 } elseif ($newperson == 'ajax') {
   echo 1;
 } else {

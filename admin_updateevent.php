@@ -85,4 +85,4 @@ $truncated = substr($info, 0, 90);
 $info = strlen($info) > 90 ? substr($truncated, 0, strrpos($truncated, ' ')) . '&hellip;' : $info;
 
 header('Content-type:text/html; charset=' . $session_charset);
-echo "{\"display\":\"$display\",\"eventdate\":\"$eventdate\",\"eventplace\":\"" . stripslashes($eventplace) . "\",\"info\":\"" . stripslashes($info) . "\"}";
+echo "{\"display\":\"$display\",\"eventdate\":\"$eventdate\",\"eventplace\":\"" . stripslashes($eventplace) . '","info":"' . stripslashes($info) . '"}';

@@ -18,10 +18,10 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     <?php
     echo $adminHeaderSection->build('datamaint-gedexport', $message);
     $navList = new navList('');
-    $navList->appendItem([true, "dataImportGedcom.php", uiTextSnippet('import'), "import"]);
-    //    $navList->appendItem([$allow_ged,dataExportGedcomrt.php", uiTextSnippet('export'), "export"]);
-    $navList->appendItem([true, "dataSecondaryProcesses.php", uiTextSnippet('secondarymaint'), "second"]);
-    echo $navList->build("export");
+    $navList->appendItem([true, 'dataImportGedcom.php', uiTextSnippet('import'), 'import']);
+    //    $navList->appendItem([$allow_ged, 'dataExportGedcom.php', uiTextSnippet('export'), 'export']);
+    $navList->appendItem([true, 'dataSecondaryProcesses.php', uiTextSnippet('secondarymaint'), 'second']);
+    echo $navList->build('export');
     ?>
     <form name='form1' action='dataExportGedcomFormAction.php' method='post'>
       <table class='table table-sm'>
@@ -66,13 +66,13 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           foreach ($mediatypes as $mediatype) {
             $msgID = $mediatype['ID'];
             switch ($msgID) {
-              case "photos":
+              case 'photos':
                 $value = strtok($locimppath['photos'], ',');
                 break;
-              case "histories":
+              case 'histories':
                 $value = strtok($locimppath['histories'], ',');
                 break;
-              case "documents":
+              case 'documents':
                 $value = strtok($locimppath['documents'], ',');
                 break;
               case 'headstones':

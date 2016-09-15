@@ -113,7 +113,7 @@ require_once 'eventlib.php';
             while ($branchrow = tng_fetch_assoc($branchresult)) {
               $options .= "  <option value=\"{$branchrow['branch']}\">{$branchrow['description']}</option>\n";
             }
-            echo "<span id=\"fbranchlist\"></span>";
+            echo "<span id='fbranchlist'></span>";
             if (!$assignedbranch) {
               if ($numbranches > 8) {
                 $select = uiTextSnippet('scrollbranch') . '<br>';
@@ -126,7 +126,7 @@ require_once 'eventlib.php';
               $select .= '>' . uiTextSnippet('nobranch') . "</option>\n";
 
               $select .= "$options</select>\n";
-              echo "<span>(<a href='#' onclick=\"showBranchEdit('fbranchedit'); quitBranchEdit('fbranchedit'); return false;\"><img src='img/ArrowDown.gif'>" . uiTextSnippet('edit') . "</a> )</span><br>";
+              echo "<span>(<a href='#' onclick=\"showBranchEdit('fbranchedit'); quitBranchEdit('fbranchedit'); return false;\"><img src='img/ArrowDown.gif'>" . uiTextSnippet('edit') . '</a> )</span><br>';
               ?>
               <div id='fbranchedit' style='position: absolute; display: none;'
                    onmouseover="clearTimeout(branchtimer);"

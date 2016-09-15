@@ -146,7 +146,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
                     $actionstr .= '</a>';
                   }
                   if ($allowEdit) {
-                    $actionstr .= "<a href='#' onclick=\"return copyGeoInfo('{$cemrow['cemeteryID']}');\"><img class='icon-sm-inline' src='svg/globe.svg' id=\"geo{$cemrow['cemeteryID']}\" title=\"" . uiTextSnippet('geocopy') . "\" alt=\"" . uiTextSnippet('geocopy') . "\"></a>";
+                    $actionstr .= "<a href='#' onclick=\"return copyGeoInfo('{$cemrow['cemeteryID']}');\"><img class='icon-sm-inline' src='svg/globe.svg' id=\"geo{$cemrow['cemeteryID']}\" title=\"" . uiTextSnippet('geocopy') . '" alt="' . uiTextSnippet('geocopy') . '"></a>';
                   }
                   echo "<tr id=\"row_{$cemrow['cemeteryID']}\">\n";
                     echo "<td>$actionstr</td>\n";

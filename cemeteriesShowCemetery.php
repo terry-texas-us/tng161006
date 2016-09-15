@@ -118,7 +118,7 @@ $headSection->setTitle($location);
           $localballooncemeteryplace = htmlspecialchars($cemeteryplace, ENT_QUOTES, $session_charset);
           $remoteballoontext = htmlspecialchars(str_replace($banish, $banreplace, "{$cemetery['cemname']}, $cemeteryplace"), ENT_QUOTES, $session_charset);
           $codednotes = $cemetery['notes'] ? '<br><br>' . tng_real_escape_string(uiTextSnippet('notes') . ': ' . $cemetery['notes']) : '';
-          $codednotes .= "<br><br><a href=\"https://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)\" target=\"_blank\">" .
+          $codednotes .= '<br><br><a href="https://maps.google.com/maps?f=q&amp;' . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)\" target=\"_blank\">" .
                   uiTextSnippet('getdirections') . '</a>' . uiTextSnippet('directionsto') . " $localballooncemeteryname";
           $locations2map[$l2mCount] = [
             'zoom' => $zoom,
@@ -129,7 +129,7 @@ $headSection->setTitle($location);
           ];
           $cemcoords = true;
           $body .= "<div style=\"padding-bottom:15px\">\n";
-          $body .= "<a href=\"https://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target='_blank'>\n";
+          $body .= '<a href="https://maps.google.com/maps?f=q&amp;' . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target='_blank'>\n";
           $body .= "<img src=\"google_marker.php?image=$pinplacelevel2.png&amp;text=1\" alt=''>\n";
           $body .= '</a>';
           $map['pins']++;
@@ -167,10 +167,10 @@ $headSection->setTitle($location);
         $body .= "<tr><td>$i</td>";
         $body .= "<td width=\"$thumbmaxw\">";
         if ($imgsrc) {
-          $body .= "<div class=\"media-img\"><div class=\"media-prev\" id=\"prev{$hs['mediaID']}\" style=\"display:none\"></div></div>\n";
+          $body .= "<div class=\"media-img\"><div class=\"media-prev\" id=\"prev{$hs['mediaID']}\" style='display: none'></div></div>\n";
           $body .= "<a href=\"$href\"";
           if ($gotImageJpeg && checkMediaFileSize("$rootpath$usefolder/{$hs['path']}")) {
-            $body .= " class=\"media-preview\" id=\"img-{$hs['mediaID']}-0-" . urlencode("$usefolder/{$hs['path']}") . "\"";
+            $body .= " class=\"media-preview\" id=\"img-{$hs['mediaID']}-0-" . urlencode("$usefolder/{$hs['path']}") . '"';
           }
           $body .= ">$imgsrc</a>\n";
         } else {
@@ -294,17 +294,17 @@ $headSection->setTitle($location);
         $notes = nl2br($hs['notes']);
 
         $body .= "<tr>\n";
-        $body .= "<td align='center' style=\"width:$thumbmaxw" . "px\">";
+        $body .= "<td align='center' style=\"width:$thumbmaxw" . 'px">';
         $hs['allow_living'] = $noneliving;
         $hs['allow_private'] = $noneprivate;
         $imgsrc = getSmallPhoto($hs);
         $href = getMediaHREF($hs, 3);
 
         if ($imgsrc) {
-          $body .= "<div class=\"media-img\"><div class=\"media-prev\" id=\"prev{$hs['mediaID']}\" style=\"display:none\"></div></div>\n";
+          $body .= "<div class=\"media-img\"><div class=\"media-prev\" id=\"prev{$hs['mediaID']}\" style='display: none'></div></div>\n";
           $body .= "<a href=\"$href\"";
           if ($gotImageJpeg && isPhoto($hs) && checkMediaFileSize("$rootpath$usefolder/{$hs['path']}")) {
-            $body .= " class=\"media-preview\" id=\"img-{$hs['mediaID']}-0-" . urlencode("$usefolder/{$hs['path']}") . "\"";
+            $body .= " class=\"media-preview\" id=\"img-{$hs['mediaID']}-0-" . urlencode("$usefolder/{$hs['path']}") . '"';
           }
           $body .= ">$imgsrc</a>\n";
         } else {
@@ -335,7 +335,7 @@ $headSection->setTitle($location);
     tng_free_result($hsresult);
 
     if ($cemetery['place']) {
-      $query = "SELECT * FROM $people_table WHERE burialplace = \"" . addslashes($cemetery['place']) . "\" ORDER BY lastname, firstname";
+      $query = "SELECT * FROM $people_table WHERE burialplace = \"" . addslashes($cemetery['place']) . '" ORDER BY lastname, firstname';
       $result = tng_query($query);
       if (tng_num_rows($result)) {
         $body .= "<br><div>\n";

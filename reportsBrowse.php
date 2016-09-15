@@ -10,9 +10,9 @@ $tng_search_tlevents = $_SESSION['tng_search_reports'] = 1;
 if ($newsearch) {
   $exptime = 0;
   $searchstring = stripslashes(trim($searchstring));
-  setcookie("tng_search_reports_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_reports_post[tngpage]", 1, $exptime);
-  setcookie("tng_search_reports_post[offset]", 0, $exptime);
+  setcookie('tng_search_reports_post[search]', $searchstring, $exptime);
+  setcookie('tng_search_reports_post[tngpage]', 1, $exptime);
+  setcookie('tng_search_reports_post[offset]', 0, $exptime);
 } else {
   if (!$searchstring) {
     $searchstring = $_COOKIE['tng_search_reports_post']['search'];
@@ -22,8 +22,8 @@ if ($newsearch) {
     $offset = $_COOKIE['tng_search_reports_post']['offset'];
   } else {
     $exptime = 0;
-    setcookie("tng_search_reports_post[tngpage]", $tngpage, $exptime);
-    setcookie("tng_search_reports_post[offset]", $offset, $exptime);
+    setcookie('tng_search_reports_post[tngpage]', $tngpage, $exptime);
+    setcookie('tng_search_reports_post[offset]', $offset, $exptime);
   }
 }
 

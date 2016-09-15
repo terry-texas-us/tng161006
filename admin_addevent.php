@@ -90,5 +90,5 @@ $eventplace = stripslashes($eventplace);
 if ($eventID) {
   echo "{\"id\":\"$eventID\",\"persfamID\":\"$persfamID\",\"display\":\"$display\",\"eventdate\":\"$eventdate\",\"eventplace\":\"$eventplace\",\"info\":\"" . stripslashes($info) . "\",\"allow_edit\":$allowEdit,\"allow_delete\":$allowDelete}";
 } else {
-  echo "{\"id\":0}";
+  echo '{\"id\":0}';
 }

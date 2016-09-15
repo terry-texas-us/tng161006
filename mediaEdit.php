@@ -14,8 +14,7 @@ if (!$allowMediaEdit && (!$allowMediaAdd || !$added)) {
 }
 require 'showmedialib.php';
 
-$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate "
-        . "FROM $media_table WHERE mediaID = \"$mediaID\"";
+$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $media_table WHERE mediaID = \"$mediaID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 $row['description'] = preg_replace('/\"/', '&#34;', $row['description']);
@@ -80,7 +79,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
     $likearray = "var like = new Array();\n";
     foreach ($mediatypes as $mediatype) {
       if (!$mediatype['type']) {
-        $standardtypes[] = "\"" . $mediatype['ID'] . "\"";
+        $standardtypes[] = '"' . $mediatype['ID'] . '"';
       }
       $msgID = $mediatype['ID'];
       $moptions .= "  <option value=\"$msgID\"";
@@ -343,10 +342,10 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                 <tr id="cemrow">
                   <td><?php echo uiTextSnippet('cemetery'); ?>:</td>
                   <td>
-                    <div id="cemchoice"<?php if ($row['cemeteryID'] || $mediatypeID == 'headstones') {echo " style=\"display:none\"";} ?>>
+                    <div id="cemchoice"<?php if ($row['cemeteryID'] || $mediatypeID == 'headstones') {echo " style='display: none'";} ?>>
                       <a href="#" onclick="return toggleCemSelect();"><?php echo uiTextSnippet('select'); ?></a>
                     </div>
-                    <div id="cemselect"<?php if (!$row['cemeteryID'] && $mediatypeID != 'headstones') {echo " style=\"display:none\"";} ?>>
+                    <div id="cemselect"<?php if (!$row['cemeteryID'] && $mediatypeID != 'headstones') {echo " style='display: none'";} ?>>
                       <select name="cemeteryID">
                         <option selected></option>
                         <?php
@@ -429,7 +428,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
         <tr>
           <td>
             <?php echo displayToggle('plus3', $placeopen, 'placeinfo', uiTextSnippet('placetaken'), ''); ?>
-            <div id="placeinfo"<?php if (!$placeopen) {echo " style=\"display:none\"";} ?>>
+            <div id="placeinfo"<?php if (!$placeopen) {echo " style='display: none'";} ?>>
               <table class='table table-sm'>
                 <tr>
                   <td width="150"><?php echo uiTextSnippet('placetaken'); ?>:</td>

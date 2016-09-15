@@ -68,14 +68,14 @@ function doRow($field, $textmsg, $boxname) {
       }
       echo '</span></td>';
       if (!$p2field) {
-        $p2field = "<span class=\"msgerror\">&laquo; " . uiTextSnippet('chkdel') . '</span>';
+        $p2field = '<span class="msgerror">&laquo; ' . uiTextSnippet('chkdel') . '</span>';
       }
       echo "<td width=\"31%\"><span>$p2field&nbsp;</span></td>";
     } else {
       echo "<td width='10'></td>";
       echo "<td width='15%'><span>" . uiTextSnippet($textmsg) . ':</span></td>';
       echo "<td width='5'><span>&nbsp;</span></td>";
-      echo "<td width=\"31%\"><span>&nbsp;</span></td>";
+      echo '<td width="31%"><span>&nbsp;</span></td>';
     }
     echo "</tr>\n";
   }
@@ -206,27 +206,27 @@ function addCriteria($row) {
   $esx = $csoundex ? ')' : '';
   if ($cfirstname == 'yes') {
     $criteria .= " AND $bsx" . 'firstname' . "$esx = $bsx\"" . addslashes($row['firstname']) . "\"$esx";
-    $criteria .= $cignoreblanks == 'yes' ? " AND firstname != \"\"" : '';
+    $criteria .= $cignoreblanks == 'yes' ? ' AND firstname != ""' : '';
   }
   if ($clastname == 'yes') {
     $criteria .= " AND $bsx" . 'lastname' . "$esx = $bsx\"" . addslashes($row['lastname']) . "\"$esx";
-    $criteria .= $cignoreblanks == 'yes' ? " AND lastname != \"\"" : '';
+    $criteria .= $cignoreblanks == 'yes' ? ' AND lastname != ""' : '';
   }
   if ($cbirthdate == 'yes') {
-    $criteria .= " AND birthdate = \"" . addslashes($row['birthdate']) . "\"";
-    $criteria .= $cignoreblanks == 'yes' ? " AND birthdate != \"\"" : '';
+    $criteria .= ' AND birthdate = "' . addslashes($row['birthdate']) . '"';
+    $criteria .= $cignoreblanks == 'yes' ? ' AND birthdate != ""' : '';
   }
   if ($cbirthplace == 'yes') {
-    $criteria .= " AND birthplace = \"" . addslashes($row['birthplace']) . "\"";
-    $criteria .= $cignoreblanks == 'yes' ? " AND birthplace = \"\"" : '';
+    $criteria .= ' AND birthplace = "' . addslashes($row['birthplace']) . '"';
+    $criteria .= $cignoreblanks == 'yes' ? ' AND birthplace = ""' : '';
   }
   if ($cdeathdate == 'yes') {
-    $criteria .= " AND deathdate = \"" . addslashes($row['deathdate']) . "\"";
-    $criteria .= $cignoreblanks == 'yes' ? " AND deathdate != \"\" AND deathdate != \"Y\"" : '';
+    $criteria .= ' AND deathdate = "' . addslashes($row['deathdate']) . '"';
+    $criteria .= $cignoreblanks == 'yes' ? ' AND deathdate != "" AND deathdate != "Y"' : '';
   }
   if ($cdeathplace == 'yes') {
-    $criteria .= " AND deathplace = \"" . addslashes($row['deathplace']) . "\"";
-    $criteria .= $cignoreblanks == 'yes' ? " AND deathplace = \"\"" : '';
+    $criteria .= ' AND deathplace = "' . addslashes($row['deathplace']) . '"';
+    $criteria .= $cignoreblanks == 'yes' ? ' AND deathplace = ""' : '';
   }
 
   return $criteria;
@@ -460,7 +460,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
           $famresult = tng_query($query);
 
           //get families where left person is the husband/wife and right SPOUSE is the wife/husband
-          $query = "SELECT familyID FROM $families_table WHERE $p1self = \"$personID1\" AND $p1spouse = \"" . substr($value, 6) . "\"";
+          $query = "SELECT familyID FROM $families_table WHERE $p1self = \"$personID1\" AND $p1spouse = \"" . substr($value, 6) . '"';
           $sp1result = tng_query($query);
           $sp1row = tng_fetch_assoc($sp1result);
           tng_free_result($sp1result);
@@ -519,7 +519,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
 
             //same spouse, box checked, so we're removing LEFT family, moving kids over to left family
             //get families where left person is the husband/wife and right SPOUSE is the wife/husband
-            $query = "SELECT familyID, $p1spouseorder FROM $families_table WHERE $p1self = \"$personID1\" AND $p1spouse = \"" . substr($value, 6) . "\"";
+            $query = "SELECT familyID, $p1spouseorder FROM $families_table WHERE $p1self = \"$personID1\" AND $p1spouse = \"" . substr($value, 6) . '"';
             $sp1result = tng_query($query);
             $sp1row = tng_fetch_assoc($sp1result);
             tng_free_result($sp1result);
@@ -887,7 +887,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                   doRow('deathdate', 'deathdate', 'p2deathdate');
                   doRow('deathplace', 'deathplace', 'p2deathplace');
                   doRow('burialdate', 'burialdate', 'p2burialdate');
-                  doRow("burialplace", "burialplace", "p2burialplace");
+                  doRow('burialplace', 'burialplace', 'p2burialplace');
                   if ($ldsOK) {
                     doRow('baptdate', 'bapldate', 'p2baptdate');
                     doRow('baptplace', 'baplplace', 'p2baptplace');

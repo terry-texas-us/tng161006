@@ -30,9 +30,9 @@ $tng_search_branches = $_SESSION['tng_search_branches'] = 1;
 if ($newsearch) {
   $exptime = 05;
   $searchstring = stripslashes(trim($searchstring));
-  setcookie("tng_search_branches_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_branches_post[tngpage]", 1, $exptime);
-  setcookie("tng_search_branches_post[offset]", 0, $exptime);
+  setcookie('tng_search_branches_post[search]', $searchstring, $exptime);
+  setcookie('tng_search_branches_post[tngpage]', 1, $exptime);
+  setcookie('tng_search_branches_post[offset]', 0, $exptime);
 } else {
   if (!$searchstring) {
     $searchstring = $_COOKIE['tng_search_branches_post']['search'];
@@ -42,8 +42,8 @@ if ($newsearch) {
     $offset = $_COOKIE['tng_search_branches_post']['offset'];
   } else {
     $exptime = 0;
-    setcookie("tng_search_branches_post[tngpage]", $tngpage, $exptime);
-    setcookie("tng_search_branches_post[offset]", $offset, $exptime);
+    setcookie('tng_search_branches_post[tngpage]', $tngpage, $exptime);
+    setcookie('tng_search_branches_post[offset]', $offset, $exptime);
   }
 }
 $searchstring_noquotes = preg_replace('/\"/', '&#34;', $searchstring);

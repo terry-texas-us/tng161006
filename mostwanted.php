@@ -40,7 +40,7 @@ function showDivs($type) {
       $mediatext .= "<div class=\"mwimage\">\n<div class=\"media-img\"><div class=\"media-prev\" id=\"prev{$row['mediaID']}\" style=\"display:none;\"></div></div>\n";
       $mediatext .= "<a href=\"$href\"";
       if ($gotImageJpeg && isPhoto($row) && filesize("$rootpath$usefolder/" . $row['path']) < $maxmediafilesize) {
-        $mediatext .= " class=\"media-preview\" id=\"img-{$row['mediaID']}-0-" . urlencode("$usefolder/{$row['path']}") . "\"";
+        $mediatext .= " class=\"media-preview\" id=\"img-{$row['mediaID']}-0-" . urlencode("$usefolder/{$row['path']}") . '"';
       }
       $mediatext .= ">$imgsrc</a>\n";
       $mediatext .= "</div>\n";
@@ -60,11 +60,11 @@ function showDivs($type) {
         $name = getName($row);
         $mediatext .= ' &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; ' . uiTextSnippet('moreinfo') . " <a href=\"peopleShowPerson.php?personID={$row['personID']}\">$name</a>";
       } else {
-        $mediatext .= "<a href=\"contactUs.php?page=" . uiTextSnippet('mostwanted') . ":+{$row['mwtitle']}\">" . uiTextSnippet('tellus') . '</a>';
+        $mediatext .= '<a href="contactUs.php?page=' . uiTextSnippet('mostwanted') . ":+{$row['mwtitle']}\">" . uiTextSnippet('tellus') . '</a>';
       }
     }
     if ($type == 'photo' && $row['mediaID']) {
-      $mediatext .= "<a href=\"contactUs.php?page=" . uiTextSnippet('mostwanted') . ":+{$row['mtitle']}\">" . uiTextSnippet('tellus') . '</a>';
+      $mediatext .= '<a href="contactUs.php?page=' . uiTextSnippet('mostwanted') . ":+{$row['mtitle']}\">" . uiTextSnippet('tellus') . '</a>';
       $mediatext .= ' &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; ' . uiTextSnippet('moreinfo') . " <a href=\"$href\">{$row['mtitle']}</a> &nbsp;&nbsp;&nbsp;";
     }
     $mediatext .= "</div>\n";

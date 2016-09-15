@@ -159,7 +159,7 @@ if (is_numeric($eventID)) {
       break;
     case 'ENDL':
       $datefield = 'endldate';
-      $placefield = "endlplace";
+      $placefield = 'endlplace';
       break;
     case 'DEAT':
       $datefield = 'deathdate';

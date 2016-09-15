@@ -147,7 +147,7 @@ function getEvent($event) {
 
 function addCriteria($row) {
   $criteria = '';
-  $criteria .= " AND reponame = \"" . addslashes($row['reponame']) . "\"";
+  $criteria .= ' AND reponame = "' . addslashes($row['reponame']) . '"';
 
   return $criteria;
 }

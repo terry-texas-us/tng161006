@@ -134,7 +134,7 @@ function deleteNote($noteID, $flag) {
 function displayToggle($id, $state, $target, $headline, $subhead) {
   $rval = "<p class='togglehead'>\n";
   $rval .= "<a href='#' onclick=\"return toggleSection('$target','$id');\">\n";
-  $rval .= "<img src=\"img/" . ($state ? 'tng_collapse.gif' : 'tng_expand.gif') . "\" title=\"" . uiTextSnippet('toggle') . "\" alt=\"" . uiTextSnippet('toggle') . "\" width='15' height='15' id=\"$id\" /></a>";
+  $rval .= '<img src="img/' . ($state ? 'tng_collapse.gif' : 'tng_expand.gif') . '" title="' . uiTextSnippet('toggle') . '" alt="' . uiTextSnippet('toggle') . "\" width='15' height='15' id=\"$id\" /></a>";
   $rval .= "<span class='th-indent'>$headline</span>\n";
   $rval .= "</p>\n";
   if ($subhead) {

@@ -67,7 +67,7 @@ $headSection->setTitle(uiTextSnippet('placelist'));
           $tally = $place['placecount'];
           $tally_fmt = number_format($tally);
           $thiswidth = floor($tally / $maxcount * 100);
-          $query = "SELECT count(place) AS placecount FROM $places_table WHERE place = \"" . addslashes($place['myplace']) . "\"";
+          $query = "SELECT count(place) AS placecount FROM $places_table WHERE place = \"" . addslashes($place['myplace']) . '"';
           $result2 = tng_query($query);
           $countrow = tng_fetch_assoc($result2);
           $specificcount = $countrow['placecount'];
@@ -78,7 +78,7 @@ $headSection->setTitle(uiTextSnippet('placelist'));
           if (($count - 1) % $collen == 0) {
             $col++;
           }
-          $chartstr = $col ? "" : "<td width=\"400\"><div style=\"width:{$thiswidth}%;\" class=\"bar rightround\"><a href=\"places-oneletter.php?offset=$offset&amp;psearch=$place2\" title=\"{$place['myplace']} ($tally_fmt)\"></a></div></td>";
+          $chartstr = $col ? '' : "<td width=\"400\"><div style=\"width:{$thiswidth}%;\" class=\"bar rightround\"><a href=\"places-oneletter.php?offset=$offset&amp;psearch=$place2\" title=\"{$place['myplace']} ($tally_fmt)\"></a></div></td>";
           $linkstr2col[$col] .= "<tr><td align=\"right\">$count.</td><td>$name$searchlink</td>$chartstr</tr>\n";
           $count++;
         }
@@ -137,7 +137,7 @@ $headSection->setTitle(uiTextSnippet('placelist'));
           beginFormElement('places100', 'get');
           echo uiTextSnippet('showtop');
           echo "<input name='topnum' type='text' value='100' size='4' maxlength='4'> " . uiTextSnippet('byoccurrence') . "\n";
-          echo "<input type=\"submit\" value=\"" . uiTextSnippet('go') . "\" />\n";
+          echo '<input type="submit" value="' . uiTextSnippet('go') . "\" />\n";
           endFormElement();
           ?>
         </div>

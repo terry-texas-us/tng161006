@@ -75,7 +75,7 @@ echo "<body id='public'>\n";
     $height = $maxh;
     $width = floor($height * $orgwidth / $orgheight);
   }
-  $float = strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 7') > 0 ? " style=\"float:left\"" : '';
+  $float = strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 7') > 0 ? ' style="float: left"' : '';
   ?>
   <div id="imgviewer" <?php echo $float; ?>>
     <map name="imgMapViewer" id="imgMapViewer"><?php echo $imgrow['map']; ?></map>

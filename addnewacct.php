@@ -100,7 +100,7 @@ $headSection->setTitle(uiTextSnippet('regnewacct'));
 echo "<body id='public'>\n";
 echo $publicHeaderSection->build();
 
-echo "<p class=\"header\">" . uiTextSnippet('regnewacct') . "</span></p><br>\n";
+echo "<p class='header'>" . uiTextSnippet('regnewacct') . "</span></p><br>\n";
 echo "<span>\n";
 if ($success) {
   echo '<p>' . uiTextSnippet('successfulregistration') . '</p>';

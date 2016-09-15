@@ -7,8 +7,8 @@ require 'checklogin.php';
 require 'version.php';
 
 if ($place) {
-  setcookie("tng_merge_places_post[place]", $place, 0);
-  setcookie("tng_merge_places_post[place2]", $place2, 0);
+  setcookie('tng_merge_places_post[place]', $place, 0);
+  setcookie('tng_merge_places_post[place2]', $place2, 0);
 
   $pwherestr = "place LIKE \"%$place%\"";
   if ($place2) {

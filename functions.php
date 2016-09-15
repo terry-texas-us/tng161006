@@ -183,8 +183,7 @@ function doMedia($mediatypeID) {
         $repotext = $prow['reponame'] ? uiTextSnippet('repository') . ': ' . $prow['reponame'] : uiTextSnippet('repository') . ': ' . $prow['repoID'];
         $medialinktext .= "<li><a href=\"repositoriesShowItem.php?repoID={$prow['repoID']}\">$repotext";
       } else {
-        $medialinktext .= "<li><a href=\"placesearch.php?psearch=" . urlencode($prow['personID']);
-        $medialinktext .= "\">" . $prow['personID'];
+        $medialinktext .= '<li><a href="placesearch.php?psearch=' . urlencode($prow['personID']) . '">' . $prow['personID'];
       }
       if ($prow['eventID']) {
         $query = "SELECT display FROM $events_table, $eventtypes_table WHERE eventID = \"{$prow['eventID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID";
@@ -225,12 +224,12 @@ function doMedia($mediatypeID) {
     $row['mediatypeID'] = $mediatypeID;
     $imgsrc = getSmallPhoto($row);
     if ($imgsrc) {
-      $mediatext .= "<td style=\"width:$thumbmaxw" . "px\">";
-      $mediatext .= "<div class=\"media-img\"><div class=\"media-prev\" id=\"prev{$row['mediaID']}\" style=\"display:none\"></div></div>\n";
+      $mediatext .= "<td style=\"width:$thumbmaxw" . 'px">';
+      $mediatext .= "<div class=\"media-img\"><div class=\"media-prev\" id=\"prev{$row['mediaID']}\" style='display: none'></div></div>\n";
       if ($href && $row['allow_living']) {
         $mediatext .= "<a href=\"$href\"";
         if ($gotImageJpeg && isPhoto($row) && checkMediaFileSize("$rootpath$usefolder/" . $row['path'])) {
-          $mediatext .= " class=\"media-preview\" id=\"img-{$row['mediaID']}-0-" . urlencode("$usefolder/{$row['path']}") . "\"";
+          $mediatext .= " class=\"media-preview\" id=\"img-{$row['mediaID']}-0-" . urlencode("$usefolder/{$row['path']}") . '"';
         }
         $mediatext .= ">$imgsrc</a>";
       } else {

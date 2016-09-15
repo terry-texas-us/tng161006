@@ -4,11 +4,11 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-if ($type == "map") {
-  $firstfield = "personID";
+if ($type == 'map') {
+  $firstfield = 'personID';
   $subtitle = uiTextSnippet('enternamepart2');
 } else {
-  $firstfield = "mylastname";
+  $firstfield = 'mylastname';
   $subtitle = uiTextSnippet('enternamepart');
 }
 header('Content-type:text/html; charset=' . $session_charset);
@@ -20,15 +20,15 @@ header('Content-type:text/html; charset=' . $session_charset);
     <span>(<?php echo $subtitle; ?>)</span><br>
 
     <?php if ($formname == '') {
-      $formname = "form1";
+      $formname = 'form1';
     } ?>
     <input name='formname' type='hidden' value="<?php echo $formname; ?>">
     <?php if ($field == '') {
-      $field = "personID";
+      $field = 'personID';
     } ?>
     <input name='field' type='hidden' value="<?php echo $field; ?>">
     <?php if ($type == '') {
-      $type = "text";
+      $type = 'text';
     } ?>
     <input name='type' type='hidden' value="<?php echo $type; ?>">
     <?php

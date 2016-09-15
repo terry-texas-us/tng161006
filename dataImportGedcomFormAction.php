@@ -259,7 +259,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
     if ($old) {
       echo "<p>$openmsg</p>\n";
       if ($clearedtogo == 'true' && $saveimport && (!$remotefile || $remotefile == 'none')) {
-        echo '<p>' . uiTextSnippet('ifimportfails') . " <a href=\"dataImportGedcomFormAction.php?old=1\">" . uiTextSnippet('clickresume') . "</a>.</p>\n";
+        echo '<p>' . uiTextSnippet('ifimportfails') . ' <a href="dataImportGedcomFormAction.php?old=1">' . uiTextSnippet('clickresume') . "</a>.</p>\n";
       }
     } else {
     ?>
@@ -337,7 +337,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
               }
               break;
             default:
-              if (strtok($lineinfo['rest'], " ") == 'NOTE') {
+              if (strtok($lineinfo['rest'], ' ') == 'NOTE') {
                 getNoteRecord($id, 0);
               } elseif ($lineinfo['tag'] == '_PLAC' || $lineinfo['tag'] == '_PLAC_DEFN' || $lineinfo['tag'] == 'PLAC') {
                 getPlaceRecord($lineinfo['rest'], 0);
@@ -399,8 +399,8 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       } // $old
     }
     if ($old) {
-      echo "<p><a href=\"dataSecondaryProcessesFormAction.php?secaction=" . uiTextSnippet('tracklines') . "\">" . uiTextSnippet('tracklines') . '</a></p>';
-      echo "<p><a href=\"dataImportGedcom.php\">" . uiTextSnippet('backtodataimport') . "</a></p>\n";
+      echo '<p><a href="dataSecondaryProcessesFormAction.php?secaction=' . uiTextSnippet('tracklines') . '">' . uiTextSnippet('tracklines') . '</a></p>';
+      echo '<p><a href="dataImportGedcom.php">' . uiTextSnippet('backtodataimport') . "</a></p>\n";
 
       echo "<div align=\"right\"><span>$tng_title, v.$tng_version</span></div>";
     }

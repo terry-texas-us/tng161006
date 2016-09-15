@@ -32,7 +32,7 @@ function buildColumn($qualifier, $column, $usevalue)
       $qualifystr = uiTextSnippet('soundexof');
       break;
     case 'metaphoneof':
-      $criteria .= "metaphone = \"" . metaphone($usevalue) . "\"";
+      $criteria .= 'metaphone = "' . metaphone($usevalue) . '"';
       $qualifystr = uiTextSnippet('metaphoneof');
       break;
     default:

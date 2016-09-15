@@ -73,7 +73,7 @@ if (file_exists($arrrtpath)) {
   $offpageimg = getimagesize($arrrtpath);
   $offpageimgw = $offpageimg[0];
   $offpageimgh = $offpageimg[1];
-  $pedigree['offpagelink'] = "<img src=\"img/ArrowRight.gif\" $offpageimg[3] title=\"" . uiTextSnippet('popupnote2') . "\" alt=\"" . uiTextSnippet('popupnote2') . "\">";
+  $pedigree['offpagelink'] = "<img src=\"img/ArrowRight.gif\" $offpageimg[3] title=\"" . uiTextSnippet('popupnote2') . '" alt="' . uiTextSnippet('popupnote2') . '">';
 } else {
   $pedigree['offpagelink'] = '<b>&gt;</b>';
 }
@@ -82,13 +82,13 @@ if (file_exists($arrltpath)) {
   $leftarrowimg = getimagesize($arrltpath);
   $leftarrowimgw = $leftarrowimg[0];
   $leftarrowimgh = $leftarrowimg[1];
-  $pedigree['leftarrowlink'] = "<img src=\"img/ArrowLeft.gif\" $leftarrowimg[3] title=\"" . uiTextSnippet('popupnote2') . "\" alt=\"" . uiTextSnippet('popupnote2') . "\">";
+  $pedigree['leftarrowlink'] = "<img src=\"img/ArrowLeft.gif\" $leftarrowimg[3] title=\"" . uiTextSnippet('popupnote2') . '" alt="' . uiTextSnippet('popupnote2') . '">';
 } else {
   $pedigree['leftarrowlink'] = '<b>&lt;</b>';
 }
 if (file_exists($rootpath . $endrootpath . 'img/Chart.gif')) {
   $chartlinkimg = getimagesize($rootpath . $endrootpath . 'img/Chart.gif');
-  $pedigree['chartlink'] = "<img src=\"img/Chart.gif\" $chartlinkimg[3] title=\"" . uiTextSnippet('popupnote2') . "\" alt=\"" . uiTextSnippet('popupnote2') . "\">";
+  $pedigree['chartlink'] = "<img src=\"img/Chart.gif\" $chartlinkimg[3] title=\"" . uiTextSnippet('popupnote2') . '" alt="' . uiTextSnippet('popupnote2') . '">';
 } else {
   $pedigree['chartlink'] = '<span><b>P</b></span>';
 }
@@ -327,7 +327,7 @@ function showBox($generation, $slot) {
     $top = ($offsetV + intval(($boxheighttouse - $offpageimgh) / 2) + 1) . 'px';
     $left = ($offsetH + $pedigree['boxwidth'] + $pedigree['borderwidth'] + 3) . 'px';
     $boxes .= "<div class='offpagearrow' id='offpage$slot' style=\"top: {$top}; left: {$left};\">\n";
-    $params = $slot < (pow(2, $generations - 1) * 3 / 2) ? "topparams, 1, \"M\"" : "botparams, 1, \"F\"";
+    $params = $slot < (pow(2, $generations - 1) * 3 / 2) ? 'topparams, 1, "M"' : 'botparams, 1, "F"';
     $boxes .= "<a href='javascript:getNewFamilies({$params});'>{$pedigree['offpagelink']}</a>\n";
     $boxes .= "</div>\n";
   }
@@ -346,7 +346,7 @@ $chartStyle = "<style>\n";
 $chartStyle .= ".pedigree-connectors-child {background-color:{$pedigree['bordercolor']};}\n";
 $chartStyle .= ".pedigree-connectors-father {border-color: {$pedigree['bordercolor']}; border-left-width: {$pedigree['linewidth']}px; border-top-width: {$pedigree['linewidth']}px;}\n";
 $chartStyle .= ".pedigree-connectors-mother {border-color: {$pedigree['bordercolor']}; border-left-width: {$pedigree['linewidth']}px; border-bottom-width: {$pedigree['linewidth']}px;}\n";
-$chartStyle .= ".popup { position:absolute; visibility:hidden; background-color:{$pedigree['popupcolor']}; z-index:8 }\n";
+$chartStyle .= ".popup {position: absolute; visibility: hidden; background-color: {$pedigree['popupcolor']}; z-index: 8}\n";
 $chartStyle .= ".pboxname {font-size: {$pedigree['boxnamesize']}pt; text-align: {$chartBoxContentsAlign};}\n";
 $slot = 1;
 $boxes = '';

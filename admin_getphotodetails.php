@@ -15,7 +15,7 @@ header('Content-type:text/html; charset=' . $session_charset);
 
 <table style="padding-top:6px">
   <tr>
-    <td id="mwthumb" style="width:<?php echo($thumbmaxw + 6); ?>px;height:<?php echo($thumbmaxh + 6); ?>px;text-align:center;">
+    <td id="mwthumb" style="width:<?php echo($thumbmaxw + 6); ?>px;height:<?php echo($thumbmaxh + 6); ?>px;text-align: center;">
       <?php
       initMediaTypes();
       $lmediatypeID = $row['mediatypeID'];

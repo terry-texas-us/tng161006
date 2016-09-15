@@ -312,7 +312,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
           <button class="savebutton" id="q{%=file.mediaID%}" disabled="disabled">
             <span style="display:none"><?php echo uiTextSnippet('save'); ?></span><img src="img/tng_check.gif" alt="" id="ch{%=file.mediaID%}">
           </button> &nbsp;
-          <span id="spin{%=file.mediaID%}" style="visibility:hidden"><img src="img/spinner.gif"></span>
+          <span id="spin{%=file.mediaID%}" style="visibility: hidden"><img src="img/spinner.gif"></span>
         </td>          
         <td class="name">
           <form id="f{%=file.mediaID%}">

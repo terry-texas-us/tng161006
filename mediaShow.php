@@ -45,7 +45,7 @@ if ($tnggallery) {
     $tngconfig['thumbcols'] = 10;
   }
   $maxsearchresults *= 2;
-  $wherestr .= " AND thumbpath != \"\"";
+  $wherestr .= ' AND thumbpath != ""';
   $gallerymsg = "<a href=\"mediaShow.php?mediatypeID=$orgmediatypeID&amp;mediasearch=$mediasearch\">&raquo; " . uiTextSnippet('regphotos') . '</a>';
 } else {
   $gallerymsg = "<a href=\"mediaShow.php?tnggallery=1&amp;mediatypeID=$orgmediatypeID&amp;mediasearch=$mediasearch\">&raquo; " . uiTextSnippet('gallery') . '</a>';
@@ -319,7 +319,7 @@ $headSection->setTitle($titlestr);
               $mediatext .= "</tr>\n<tr>";
             }
           }
-          $mediatext .= "<td style=\"padding:10px\">";
+          $mediatext .= '<td style="padding: 10px">';
           $mediatext .= $href ? "<a href=\"$href\">$imgsrc</a></td>\n" : "$imgsrc</td>\n";
           $i++;
         }
@@ -328,12 +328,12 @@ $headSection->setTitle($titlestr);
         if ($imgsrc) {
           $mediatext .= "<td>\n";
           $mediatext .= "<div class=\"media-img\" id=\"mi{$row['mediaID']}\">\n";
-          $mediatext .= "<div class=\"media-prev\" id=\"prev{$row['mediaID']}\" style=\"display:none\"></div>\n";
+          $mediatext .= "<div class=\"media-prev\" id=\"prev{$row['mediaID']}\" style='display: none'></div>\n";
           $mediatext .= "</div>\n";
           if ($href && $row['allow_living']) {
             $mediatext .= "<a href=\"$href\"";
             if ($gotImageJpeg && isPhoto($row) && checkMediaFileSize("$rootpath$usefolder/{$row['path']}")) {
-              $mediatext .= " class=\"media-preview\" id=\"img-{$row['mediaID']}-0-" . urlencode("$usefolder/{$row['path']}") . "\"";
+              $mediatext .= " class=\"media-preview\" id=\"img-{$row['mediaID']}-0-" . urlencode("$usefolder/{$row['path']}") . '"';
             }
             $mediatext .= ">$imgsrc</a>";
           } else {

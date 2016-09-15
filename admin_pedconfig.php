@@ -263,7 +263,7 @@ $headSection->setTitle(uiTextSnippet('modifypedsettings'));
                   </td>
                 </tr>
               </table>
-              <table<?php if (!$pedigree['simile']) {echo " style=\"display:none\"";} ?> id="simileTable">
+              <table<?php if (!$pedigree['simile']) {echo " style='display: none'";} ?> id="simileTable">
                 <tr>
                   <td><?php echo uiTextSnippet('tcheight'); ?>:</td>
                   <td><input name='tcheight' type='text' value="<?php echo $pedigree['tcheight']; ?>" size='5'></td>

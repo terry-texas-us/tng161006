@@ -78,7 +78,7 @@ $headSection->setTitle(uiTextSnippet('users'));
               if ($row['realname'] && $row['email']) {
                 echo '<br>';
               }
-              echo "<a href=\"mailto:" . $row['email'] . "\">" . $row['email'] . "</a></span></td>\n";
+              echo '<a href="mailto:' . $row['email'] . '">' . $row['email'] . "</a></span></td>\n";
               echo "<td><span>{$row['dt_registered_fmt']}</span></td>\n";
             echo "</tr>\n";
           }

@@ -86,7 +86,7 @@ if (!$duplicate) {
   $result = tng_query($query);
 
   if ($notify && $email) {
-    $owner = preg_replace("/,/", '', ($sitename ? $sitename : ($dbowner ? $dbowner : 'TNG')));
+    $owner = preg_replace('/,/', '', ($sitename ? $sitename : ($dbowner ? $dbowner : 'TNG')));
 
     tng_sendmail($owner, $emailaddr, $realname, $email, uiTextSnippet('activated'), $welcome, $emailaddr, $emailaddr);
   }

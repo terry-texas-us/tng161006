@@ -50,22 +50,22 @@ $nameformap = $namestr;
 $logname = $tngconfig['nnpriv'] && $row['private'] ? uiTextSnippet('private') : ($nonames && $row['living'] ? uiTextSnippet('living') : $namestr);
 $treestr = "<a href='showtree.php'>{$treerow['treename']}</a>";
 if ($row['branch']) {
-    $branches = explode(',', $row['branch']);
-    $count = 0;
-    $branchstr = '';
-    foreach ($branches as $branch) {
-      $count++;
-      $brresult = getBranchesSimple($branch);
-      $brrow = tng_fetch_assoc($brresult);
-      $branchstr .= $brrow['description'] ? $brrow['description'] : $branch;
-      if ($count < count($branches)) {
-        $branchstr .= ', ';
-      }
-      tng_free_result($brresult);
+  $branches = explode(',', $row['branch']);
+  $count = 0;
+  $branchstr = '';
+  foreach ($branches as $branch) {
+    $count++;
+    $brresult = getBranchesSimple($branch);
+    $brrow = tng_fetch_assoc($brresult);
+    $branchstr .= $brrow['description'] ? $brrow['description'] : $branch;
+    if ($count < count($branches)) {
+      $branchstr .= ', ';
     }
-    if ($branchstr) {
-      $treestr = $treestr . " | $branchstr";
-    }
+    tng_free_result($brresult);
+  }
+  if ($branchstr) {
+    $treestr = $treestr . " | $branchstr";
+  }
 }
 tng_free_result($result);
 
@@ -74,18 +74,18 @@ preparebookmark("<a href='peopleShowPerson.php?personID=$personID'>" . uiTextSni
 
 $headTitle = $namestr;
 if ($rights['both']) {
-    if ($row['birthdate']) {
+  if ($row['birthdate']) {
     $headTitle .= ' ' . uiTextSnippet('birthabbr') . ' ' . displayDate($row['birthdate']);
-    }
-    if ($row['birthplace']) {
-      $headTitle .= ' ' . $row['birthplace'];
-    }
-    if ($row['deathdate']) {
-      $headTitle .= ' ' . uiTextSnippet('deathabbr') . ' ' . displayDate($row['deathdate']);
-    }
-    if ($row['deathplace']) {
-      $headTitle .= ' ' . $row['deathplace'];
-    }
+  }
+  if ($row['birthplace']) {
+    $headTitle .= ' ' . $row['birthplace'];
+  }
+  if ($row['deathdate']) {
+    $headTitle .= ' ' . uiTextSnippet('deathabbr') . ' ' . displayDate($row['deathdate']);
+  }
+  if ($row['deathplace']) {
+    $headTitle .= ' ' . $row['deathplace'];
+  }
 }
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
@@ -302,7 +302,7 @@ $headSection->setTitle($headTitle);
           tng_free_result($gotmother);
         }
 
-// parents events
+        // parents events
         
         $parentsEventsHtml = '';
         if ($rights['both'] && $rights['lds'] && $tngconfig['pardata'] < 2) {
@@ -506,7 +506,7 @@ $headSection->setTitle($headTitle);
         while ($child = tng_fetch_assoc($children)) {
           $childID = $child['personID'];
           $child['gedcom'] = '';
-          $ifkids = $child['haskids'] ? "<a href=\"descend.php?personID=$childID\" title=\"" . uiTextSnippet('descendants') . "\" class=\"descindicator\"><strong>+</strong></a>" : '&nbsp;';
+          $ifkids = $child['haskids'] ? "<a href=\"descend.php?personID=$childID\" title=\"" . uiTextSnippet('descendants') . '" class="descindicator"><strong>+</strong></a>' : '&nbsp;';
           $birthinfo = getBirthInfo($child);
           $crights = determineLivingPrivateRights($child);
           $child['allow_living'] = $crights['living'];
@@ -567,101 +567,101 @@ $headSection->setTitle($headTitle);
       $persontext .= "</tr>\n";
       $persontext .= "<tr>\n";
       $persontext .= "<td class='mapcol' colspan='2'>\n";
-        $persontext .= "<div id='map' style='width: {$map['indw']}; height: {$map['indh']};'>";
-          if ($map['pstartoff']) {
-            $persontext .= "<a href='#' onclick='ShowTheMap(); return false;'>\n";
-              $persontext .= "<div class='loadmap'>" . uiTextSnippet('loadmap') . "<br>\n";
-                $persontext .= "<img src='img/loadmap.gif' width='150' height='150'>\n";
-              $persontext .= "</div>\n";
-            $persontext .= '</a>';
-          }
+      $persontext .= "<div id='map' style='width: {$map['indw']}; height: {$map['indh']};'>";
+      if ($map['pstartoff']) {
+        $persontext .= "<a href='#' onclick='ShowTheMap(); return false;'>\n";
+        $persontext .= "<div class='loadmap'>" . uiTextSnippet('loadmap') . "<br>\n";
+        $persontext .= "<img src='img/loadmap.gif' width='150' height='150'>\n";
         $persontext .= "</div>\n";
+        $persontext .= '</a>';
+      }
+      $persontext .= "</div>\n";
       $persontext .= "</td>\n";
       $mapheight = (intval($map['indh']) - 40) . 'px';
       $persontext .= "<td>\n";
-        $persontext .= "<div style='height:{$mapheight};' id='mapevents'>\n";
-          $persontext .= "<table class='table table-sm'>\n";
-            asort($locations2map);
-            reset($locations2map);
-            $markerIcon = 0;
-            $nonzeroplaces = 0;
-            $usedplaces = [];
-            $savedplaces = [];
-            while (list($key, $val) = each($locations2map)) {
-              // RM these next lines are about getting different coloured pins for different levels of place
-              $placelevel = $val['placelevel'];
-              $pinplacelevel = $val['pinplacelevel'];
-              if (!$placelevel) {
-                $placelevel = 0;
-              }
-              else {
-                $nonzeroplaces++;
-              }
-              if (!$pinplacelevel) {
-                $pinplacelevel = $pinplacelevel0;
-              }
-              $lat = $val['lat'];
-              $long = $val['long'];
-              $zoom = $val['zoom'] ? $val['zoom'] : 10;
-              $event = $val['event'];
-              $place = $val['place'];
-              $dateforremoteballoon = $dateforeventtable = displayDate($val['eventdate']);
-              $dateforlocalballoon = htmlspecialchars(tng_real_escape_string($dateforremoteballoon), ENT_QUOTES, $session_charset);
-              $description = $val['description'];
-              $balloondesc = str_replace("\n", ' ', $description);
-              if ($place) {
-                $persontext .= "<tr>\n";
-                $persontext .= "<td>\n";
-                if ($lat && $long) {
-                  $directionplace = htmlspecialchars(stri_replace($banish, $banreplace, $place), ENT_QUOTES, $session_charset);
-                  $directionballoontext = htmlspecialchars(stri_replace($banish, $banreplace, $place), ENT_QUOTES, $session_charset);
-                  if ($map['showallpins'] || !in_array($place, $usedplaces)) {
-                    $markerIcon++;
-                    $usedplaces[] = $place;
-                    $savedplaces[] = ['place' => $place, 'key' => $key];
-                    $locations2map[$key]['htmlcontent'] = "<div class=\"mapballoon\"><strong>{$val['fixedplace']}</strong><br><br>$event: $dateforlocalballoon";
-                    $locations2map[$key]['htmlcontent'] .= "<br><br><a href=\"https://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($directionballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">" .
-                        uiTextSnippet('getdirections') . '</a>' . uiTextSnippet('directionsto') . " $directionplace</div>";
-                    $thismarker = $markerIcon;
-                  }
-                  else {
-                    $total = count($usedplaces);
-                    for ($i = 0; $i < $total; $i++) {
-                      if ($savedplaces[$i]['place'] == $place) {
-                        $thismarker = $i + 1;
-                        $thiskey = $savedplaces[$i]['key'];
-                        $locations2map[$thiskey]['htmlcontent'] = str_replace('</div>', "<br>$event: $dateforlocalballoon</div>", $locations2map[$thiskey]['htmlcontent']);
-                        break;
-                      }
-                    }
-                  }
-                  $persontext .= "<a href=\"https://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($directionballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target= \"_blank\">\n";
-                    $persontext .= "<img src='google_marker.php?image=$pinplacelevel.png&amp;text=$thismarker' alt='" . uiTextSnippet('googlemaplink') . "' width= '20' height='34'>\n";
-                  $persontext .= "</a>\n";
-                  $map['pins'] ++;
-                }
-                else {
-                  $persontext .= '&nbsp;';
-                }
-                $persontext .= "</td>\n";
-                $persontext .= "<td><span class='small'><strong>$event</strong>";
-                if ($description) {
-                  $persontext .= " - $description";
-                }
-                $persontext .= " - $dateforeventtable - $place</span></td>\n";
-                $persontext .= "<td>\n";
-                  $persontext .= "<a href='googleearthbylatlong.php?m=world&amp;n=$directionplace&amp;lon=$long&amp;lat=$lat&amp;z=$zoom'>\n";
-                    $persontext .= "<img class='icon-sm icon-primary icon-globe' data-src='svg/globe.svg' alt='" . uiTextSnippet('googleearthlink') . "'>\n";
-                  $persontext .= "</a>\n";
-                $persontext .= "</td>\n";
-                $persontext .= "</tr>\n";
-                if ($val['notes']) {
-                  $locations2map[$key]['htmlcontent'] = str_replace('</div>', '<br><br>' . tng_real_escape_string($val['notes']) . '</div>', $locations2map[$key]['htmlcontent']);
+      $persontext .= "<div style='height:{$mapheight};' id='mapevents'>\n";
+      $persontext .= "<table class='table table-sm'>\n";
+      asort($locations2map);
+      reset($locations2map);
+      $markerIcon = 0;
+      $nonzeroplaces = 0;
+      $usedplaces = [];
+      $savedplaces = [];
+      while (list($key, $val) = each($locations2map)) {
+        // RM these next lines are about getting different coloured pins for different levels of place
+        $placelevel = $val['placelevel'];
+        $pinplacelevel = $val['pinplacelevel'];
+        if (!$placelevel) {
+          $placelevel = 0;
+        }
+        else {
+          $nonzeroplaces++;
+        }
+        if (!$pinplacelevel) {
+          $pinplacelevel = $pinplacelevel0;
+        }
+        $lat = $val['lat'];
+        $long = $val['long'];
+        $zoom = $val['zoom'] ? $val['zoom'] : 10;
+        $event = $val['event'];
+        $place = $val['place'];
+        $dateforremoteballoon = $dateforeventtable = displayDate($val['eventdate']);
+        $dateforlocalballoon = htmlspecialchars(tng_real_escape_string($dateforremoteballoon), ENT_QUOTES, $session_charset);
+        $description = $val['description'];
+        $balloondesc = str_replace("\n", ' ', $description);
+        if ($place) {
+          $persontext .= "<tr>\n";
+          $persontext .= "<td>\n";
+          if ($lat && $long) {
+            $directionplace = htmlspecialchars(stri_replace($banish, $banreplace, $place), ENT_QUOTES, $session_charset);
+            $directionballoontext = htmlspecialchars(stri_replace($banish, $banreplace, $place), ENT_QUOTES, $session_charset);
+            if ($map['showallpins'] || !in_array($place, $usedplaces)) {
+              $markerIcon++;
+              $usedplaces[] = $place;
+              $savedplaces[] = ['place' => $place, 'key' => $key];
+              $locations2map[$key]['htmlcontent'] = "<div class=\"mapballoon\"><strong>{$val['fixedplace']}</strong><br><br>$event: $dateforlocalballoon";
+              $locations2map[$key]['htmlcontent'] .= '<br><br><a href="https://maps.google.com/maps?f=q&amp;' . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($directionballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">" .
+                  uiTextSnippet('getdirections') . '</a>' . uiTextSnippet('directionsto') . " $directionplace</div>";
+              $thismarker = $markerIcon;
+            }
+            else {
+              $total = count($usedplaces);
+              for ($i = 0; $i < $total; $i++) {
+                if ($savedplaces[$i]['place'] == $place) {
+                  $thismarker = $i + 1;
+                  $thiskey = $savedplaces[$i]['key'];
+                  $locations2map[$thiskey]['htmlcontent'] = str_replace('</div>', "<br>$event: $dateforlocalballoon</div>", $locations2map[$thiskey]['htmlcontent']);
+                  break;
                 }
               }
             }
-          $persontext .= "</table>\n";
-        $persontext .= "</div>\n";
+            $persontext .= '<a href="https://maps.google.com/maps?f=q&amp;' . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($directionballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target= \"_blank\">\n";
+              $persontext .= "<img src='google_marker.php?image=$pinplacelevel.png&amp;text=$thismarker' alt='" . uiTextSnippet('googlemaplink') . "' width= '20' height='34'>\n";
+            $persontext .= "</a>\n";
+            $map['pins'] ++;
+          }
+          else {
+            $persontext .= '&nbsp;';
+          }
+          $persontext .= "</td>\n";
+          $persontext .= "<td><span class='small'><strong>$event</strong>";
+          if ($description) {
+            $persontext .= " - $description";
+          }
+          $persontext .= " - $dateforeventtable - $place</span></td>\n";
+          $persontext .= "<td>\n";
+            $persontext .= "<a href='googleearthbylatlong.php?m=world&amp;n=$directionplace&amp;lon=$long&amp;lat=$lat&amp;z=$zoom'>\n";
+              $persontext .= "<img class='icon-sm icon-primary icon-globe' data-src='svg/globe.svg' alt='" . uiTextSnippet('googleearthlink') . "'>\n";
+            $persontext .= "</a>\n";
+          $persontext .= "</td>\n";
+          $persontext .= "</tr>\n";
+          if ($val['notes']) {
+            $locations2map[$key]['htmlcontent'] = str_replace('</div>', '<br><br>' . tng_real_escape_string($val['notes']) . '</div>', $locations2map[$key]['htmlcontent']);
+          }
+        }
+      }
+      $persontext .= "</table>\n";
+      $persontext .= "</div>\n";
       $persontext .= "<table class='table table-sm'>";
         $persontext .= "<tr>\n";
           $persontext .= "<td><span class='small'><img src='img/white.gif' alt='' height='15' width='9'>&nbsp;= " . uiTextSnippet('googlemaplink') . "&nbsp;</span></td>\n";
@@ -678,7 +678,7 @@ $headSection->setTitle($headTitle);
         $persontext .= '<tr><td>' . uiTextSnippet('gmaplegend') . "</td>\n";
         $persontext .= "<td colspan='2'><span class=\"small\">";
         for ($i = 1; $i < 7; $i++) {
-          $persontext .= "<img src=\"img/" . ${"pinplacelevel" . $i} . ".png\" alt='' height=\"17\" width='10'>&nbsp;: " . uiTextSnippet("level$i") . " &nbsp;&nbsp;&nbsp;&nbsp;\n";
+          $persontext .= '<img src="img/' . ${'pinplacelevel' . $i} . ".png\" alt='' height=\"17\" width='10'>&nbsp;: " . uiTextSnippet("level$i") . " &nbsp;&nbsp;&nbsp;&nbsp;\n";
         }
         $persontext .= "<img src=\"img/$pinplacelevel0.png\" alt='' height='17' width='10'>&nbsp;: " . uiTextSnippet('level0') . "</span></td>\n";
         $persontext .= "</tr>\n";
@@ -708,7 +708,7 @@ $headSection->setTitle($headTitle);
         $persontext .= beginListItem('notes');
         $persontext .= "<table class='table table-sm'>\n";
         $persontext .= "<tr>\n";
-        $persontext .= "<td class=\"indleftcol\" id=\"notes1\"><span>" . uiTextSnippet('notes') . "&nbsp;</span></td>\n";
+        $persontext .= '<td class="indleftcol" id="notes1"><span>' . uiTextSnippet('notes') . "&nbsp;</span></td>\n";
         $persontext .= "<td>$notes</td>\n";
         $persontext .= "</tr>\n";
         $persontext .= "</table>\n";

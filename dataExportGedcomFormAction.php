@@ -37,7 +37,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         if ($exppath[$msgID]) {
           if (strpos($exppath[$msgID], '/') !== false) {
             $expdir[$msgID] = 1;
-          } elseif (strpos($exppath[$msgID], "\\") !== false) {
+          } elseif (strpos($exppath[$msgID], '\\') !== false) {
             $expdir[$msgID] = -1;
           } else {
             $expdir[$msgID] = 0;
@@ -1293,7 +1293,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
 
       if ($branch) {
         foreach ($placelist as $place) {
-          $query = "SELECT place, notes, latitude, longitude, placelevel, zoom FROM $places_table WHERE place = \"" . addslashes($place) . "\"";
+          $query = "SELECT place, notes, latitude, longitude, placelevel, zoom FROM $places_table WHERE place = \"" . addslashes($place) . '"';
           $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
           $row = tng_fetch_assoc($result);
           if ($row['latitude'] || $row['longitude'] || $row['notes']) {
@@ -1353,7 +1353,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     <p><strong><?php echo uiTextSnippet('exporting'); ?></strong></p>
     <?php
     if ($saveimport) {
-      echo '<p>' . uiTextSnippet('ifexportfails') . " <a href=\"dataExportGedcomFormAction.php?resume=1\">" . uiTextSnippet('clickresume') . "</a>.</p>$lineending";
+      echo '<p>' . uiTextSnippet('ifexportfails') . ' <a href="dataExportGedcomFormAction.php?resume=1">' . uiTextSnippet('clickresume') . "</a>.</p>$lineending";
     }
     set_time_limit(0);
     $xnotes = [];
@@ -1486,8 +1486,8 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     }
     $prefixlen = strlen($personprefix) + 1;
     $branchstr = $branch ? " AND branch LIKE \"%$branch%\"" : '';
-    $exlivingstr = $exliving ? " AND living != \"1\"" : '';
-    $exprivatestr = $exprivate ? " AND private != \"1\"" : '';
+    $exlivingstr = $exliving ? ' AND living != "1"' : '';
+    $exprivatestr = $exprivate ? ' AND private != "1"' : '';
 
     if ($savestate['lasttype'] < 2) {
       $nextchunk = -1;

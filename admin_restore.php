@@ -41,7 +41,7 @@ function restore($table) {
   $prevendquote = 0;
 
   foreach ($lines as $line) {
-    $startquote = substr($line, 0, 1) == "\"" ? 1 : 0;
+    $startquote = substr($line, 0, 1) == '"' ? 1 : 0;
     if ($startquote && $prevendquote) {
       $values .= sprintf('(%s),', rtrim($saveline));
       $counter++;
@@ -52,7 +52,7 @@ function restore($table) {
       }
       $saveline = '';
     }
-    $prevendquote = substr(rtrim($line), -1) == "\"" && (substr(rtrim($line), -3) == "\\\\\"" || substr(rtrim($line), -2) != "\\\"") ? 1 : 0;
+    $prevendquote = substr(rtrim($line), -1) == '"' && (substr(rtrim($line), -3) == "\\\\\"" || substr(rtrim($line), -2) != "\\\"") ? 1 : 0;
     $saveline .= $line;
   }
 

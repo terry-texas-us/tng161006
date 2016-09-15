@@ -1,6 +1,6 @@
 <?php
 
-echo "<input type='button' onclick=\"return divbox('mapcontainer');\" value=\"" . uiTextSnippet('showhidemap') . "\"> <span>" . uiTextSnippet('getcoords') . "</span>\n";
+echo "<input type='button' onclick=\"return divbox('mapcontainer');\" value=\"" . uiTextSnippet('showhidemap') . '"> <span>' . uiTextSnippet('getcoords') . "</span>\n";
 
 echo "<div class='mappad5' id='mapcontainer' style=\"display: none; width:{$map['admw']};\">\n";
 $searchstring = $row['place'] ? $row['place'] : uiTextSnippet('searchstring');

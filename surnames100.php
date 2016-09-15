@@ -13,7 +13,7 @@ scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
 header('Content-type: text/html; charset=' . $session_charset);
-$headSection->setTitle(uiTextSnippet('surnamelist') . " &mdash; " . uiTextSnippet('top') . " $topnum");
+$headSection->setTitle(uiTextSnippet('surnamelist') . ' &mdash; ' . uiTextSnippet('top') . " $topnum");
 ?>
 <!DOCTYPE html>
 <html>

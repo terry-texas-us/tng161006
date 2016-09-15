@@ -110,9 +110,9 @@ function finishAddToAlbum(req) {
     newrow += '<a href="#" onclick="return moveItemInList(\'' + albumlink + '\',$(\'#move' + albumlink + '\').val());" title="' + textSnippet('movetop') + '">Go</a>';
     newrow += '</td>\n';
 
-    newrow += '<td style="width:' + (thumbmaxw + 6) + 'px;text-align:center;">' + $('#thumbcell_' + media).html() + '</td>\n';
+    newrow += '<td style="width:' + (thumbmaxw + 6) + 'px; text-align: center;">' + $('#thumbcell_' + media).html() + '</td>\n';
     newrow += '<td>' + $('#desc_' + media).html();
-    newrow += '<div id="del_' + albumlink + '" class="small" style="color:gray;visibility:hidden">';
+    newrow += '<div id="del_' + albumlink + '" class="small" style="color: gray; visibility: hidden">';
     if ($('#thumbcell_' + media).html() !== '&nbsp;') {
         newrow += '<input name="rthumbs" type="radio" value="r' + media + '" onclick="makeDefault(this);">' + textSnippet('makedefault');
         newrow += ' &nbsp;|&nbsp; ';

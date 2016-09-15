@@ -193,8 +193,7 @@ function getSpouseFamilyDataUnion($spouse1ID) {
 function getSpouseFamilyDataPlusDates($spouse1, $spouse1ID, $spouseorder) {
   global $families_table;
 
-  $query = "SELECT husband, wife, familyID, marrdate, marrdatetr, marrplace, marrtype, living, private, branch, YEAR(marrdatetr) AS marryear, MONTH(marrdatetr) AS marrmonth, DAYOFMONTH(marrdatetr) AS marrday, marrplace, sealdate, sealplace "
-      . "FROM $families_table WHERE $spouse1 = '$spouse1ID' ORDER BY $spouseorder";
+  $query = "SELECT husband, wife, familyID, marrdate, marrdatetr, marrplace, marrtype, living, private, branch, YEAR(marrdatetr) AS marryear, MONTH(marrdatetr) AS marrmonth, DAYOFMONTH(marrdatetr) AS marrday, marrplace, sealdate, sealplace FROM $families_table WHERE $spouse1 = '$spouse1ID' ORDER BY $spouseorder";
 
   return tng_query($query);
 }

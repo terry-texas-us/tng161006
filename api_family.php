@@ -16,7 +16,7 @@ $result = tng_query($query);
 $famrow = tng_fetch_assoc($result);
 if (!tng_num_rows($result)) {
   tng_free_result($result);
-  echo "{\"error\":\"No one in database with that ID\"}";
+  echo '{"error":"No one in database with that ID"}';
   exit;
 } else {
   tng_free_result($result);
@@ -46,7 +46,7 @@ if ($famrow['husband']) {
   $husbrow['allow_private'] = $hrights['private'];
 
   $events = [];
-  $family .= ",\"father\":{" . api_person($husbrow, $fullevents) . "}";
+  $family .= ',"father":{' . api_person($husbrow, $fullevents) . '}';
   tng_free_result($result);
 }
 
@@ -61,7 +61,7 @@ if ($famrow['wife']) {
   $wiferow['allow_private'] = $wrights['private'];
 
   $events = [];
-  $family .= ",\"mother\":{" . api_person($wiferow, $fullevents) . "}";
+  $family .= ',"mother":{' . api_person($wiferow, $fullevents) . '}';
   tng_free_result($result);
 }
 
@@ -91,7 +91,7 @@ $children = tng_query($query);
 
 if ($children && tng_num_rows($children)) {
   $childcount = 0;
-  $family .= ",\"children\":[";
+  $family .= ',"children":[';
   while ($childrow = tng_fetch_assoc($children)) {
     if ($childcount) {
       $family .= ',';

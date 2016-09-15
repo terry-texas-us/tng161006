@@ -9,7 +9,7 @@ function doBranchSearch($instance, $pagenav) {
   $str = "<span>\n";
   $str .= buildFormElement('branchesShow', 'get', "BranchSearch$instance");
   $str .= "<input name='branchsearch' type='text' value=\"$branchsearch\"> \n";
-  $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . "\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+  $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . '">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
   $str .= $pagenav;
   if ($branchsearch) {
     $str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='branchesShow.php'>" . uiTextSnippet('browsealltrees') . '</a>';

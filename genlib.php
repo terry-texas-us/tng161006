@@ -69,13 +69,13 @@ function getSmallPhoto($medialink) {
       }
     }
     $dimensions = " width=\"$photowtouse\" height=\"$photohtouse\"";
-    $class = " class=\"thumb\"";
+    $class = ' class="thumb"';
   } else {
-    $thumb = "img/" . $mediatypes_thumbs[$mediatypeID];
+    $thumb = 'img/' . $mediatypes_thumbs[$mediatypeID];
     $dimensions = $class = '';
   }
 
-  $cleantitle = $medialink['allow_living'] ? str_replace("\"", "'", $medialink['description']) : '';
+  $cleantitle = $medialink['allow_living'] ? str_replace('"', "'", $medialink['description']) : '';
   $imgsrc = "<img src=\"$thumb\" $dimensions alt=\"$cleantitle\" title=\"$cleantitle\"$class>";
 
   return $imgsrc;
@@ -129,7 +129,7 @@ function getFirstNameOnly($row) {
 }
 
 function doMenuItem($index, $link, $icon, $label, $page, $thispage) {
-  $class = $page == $thispage ? " class=\"here\"" : '';
+  $class = $page == $thispage ? ' class="here"' : '';
   $imagetext = $icon ? "<img class='icon-sm' src='{$icon}'>" : '';
 
   return "<li><a id=\"a$index\" href=\"$link\"$class>$imagetext$label</a></li>\n";
@@ -218,7 +218,7 @@ function tng_getRightIcons() {
 
   $sharemenu = '';
   if ($tngconfig['showshare']) {
-    $sharemenu .= "<div id=\"shareicons\" style=\"display:none\">\n";
+    $sharemenu .= "<div id=\"shareicons\" style='display: none'>\n";
     $sharemenu .= "<span class='st_facebook_hcount' displayText='Facebook'></span>\n";
     // [ts] $sharemenu .= "<span class='st_twitter_hcount' displayText='Tweet'></span>\n";
     // [ts] $sharemenu .= "<span class='st_pinterest_hcount' displayText='Pinterest'></span>\n";
@@ -272,7 +272,7 @@ function getMediaHREF($row, $mlflag) {
     }
   }
   if ($row['newwindow']) {
-    $uselink .= "\" target=\"_blank";
+    $uselink .= '" target="_blank';
   }
   return $uselink;
 }
@@ -284,7 +284,7 @@ function insertLinks($notes) {
       if ($pos) {
         $prevchar = substr($notes, $pos - 1, 1);
       }
-      if ($pos == 0 || ($prevchar != "\"" && $prevchar != '=')) {
+      if ($pos == 0 || ($prevchar != '"' && $prevchar != '=')) {
         $notepos[] = $pos++;
       } else {
         $pos++;

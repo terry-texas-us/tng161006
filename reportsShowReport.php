@@ -239,16 +239,16 @@ if ($rrow['sqlselect']) {
     }
 
     if ($criteriafields[$i] == 'currmonth') {
-      $criteriafields[$i] = "\"" . strtoupper(date('M', time() + (3600 * $timeOffset))) . "\"";
+      $criteriafields[$i] = '"' . strtoupper(date('M', time() + (3600 * $timeOffset))) . '"';
     } else {
       if ($criteriafields[$i] == 'currmonthnum') {
-        $criteriafields[$i] = "\"" . date('m', time() + (3600 * $timeOffset)) . "\"";
+        $criteriafields[$i] = '"' . date('m', time() + (3600 * $timeOffset)) . '"';
       } else {
         if ($criteriafields[$i] == 'curryear') {
-          $criteriafields[$i] = "\"" . date('Y', time() + (3600 * $timeOffset)) . "\"";
+          $criteriafields[$i] = '"' . date('Y', time() + (3600 * $timeOffset)) . '"';
         } else {
           if ($criteriafields[$i] == 'currday') {
-            $criteriafields[$i] = "\"" . date('d', time() + (3600 * $timeOffset)) . "\"";
+            $criteriafields[$i] = '"' . date('d', time() + (3600 * $timeOffset)) . '"';
           } else {
             if ($criteriafields[$i] == 'personID') {
               $criteriafields[$i] = "$people_table.personID";
@@ -354,22 +354,22 @@ if ($rrow['sqlselect']) {
             }
             break;
           case 'contains':
-            if (substr($criteriafields[$i], 0, 1) == "\"") {
+            if (substr($criteriafields[$i], 0, 1) == '"') {
               $newcriteria = substr($criteriafields[$i], 1, -1);
             }
-            $criteriastr .= "\"%" . $newcriteria . "%\"";
+            $criteriastr .= '"%' . $newcriteria . '%"';
             break;
           case 'starts with':
-            if (substr($criteriafields[$i], 0, 1) == "\"") {
+            if (substr($criteriafields[$i], 0, 1) == '"') {
               $newcriteria = substr($criteriafields[$i], 1, -1);
             }
-            $criteriastr .= "\"" . $newcriteria . "%\"";
+            $criteriastr .= '"' . $newcriteria . '%"';
             break;
           case 'ends with':
-            if (substr($criteriafields[$i], 0, 1) == "\"") {
+            if (substr($criteriafields[$i], 0, 1) == '"') {
               $newcriteria = substr($criteriafields[$i], 1, -1);
             }
-            $criteriastr .= "\"%" . $newcriteria . "\"";
+            $criteriastr .= '"%' . $newcriteria . '"';
             break;
           default:
             if (substr($criteriafields[$i], 0, 2) == 'ps') {

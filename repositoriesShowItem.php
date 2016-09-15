@@ -100,7 +100,7 @@ $headSection->setTitle($reporow['reponame']);
       $repolinktext .= "<a href=\"sourcesShowSource.php?sourceID={$srow['sourceID']}\">$title</a>";
     }
     if ($numrows >= $maxsearchresults) {
-      $repolinktext .= "\n[<a href=\"repositoriesShowItem.php?repoID=$repoID&amp;foffset=$foffset&amp;soffset=" . ($newsoffset + $maxsearchresults) . "\">" . uiTextSnippet('moresrc') . '</a>]';
+      $repolinktext .= "\n[<a href=\"repositoriesShowItem.php?repoID=$repoID&amp;foffset=$foffset&amp;soffset=" . ($newsoffset + $maxsearchresults) . '">' . uiTextSnippet('moresrc') . '</a>]';
     }
     tng_free_result($sresult);
 
@@ -125,7 +125,7 @@ $headSection->setTitle($reporow['reponame']);
       $repotext .= "<table class=\"table tfixed\">\n";
       $repotext .= "<col class=\"labelcol\"/><col/>\n";
       $repotext .= "<tr>\n";
-      $repotext .= "<td class=\"indleftcol\" id=\"notes1\"><span>" . uiTextSnippet('notes') . "</span></td>\n";
+      $repotext .= '<td class="indleftcol" id="notes1"><span>' . uiTextSnippet('notes') . "</span></td>\n";
       $repotext .= "<td>$notes</td>\n";
       $repotext .= "</tr>\n";
       $repotext .= "</table>\n";

@@ -57,8 +57,8 @@ if ($proceed) {
     $newroot = preg_replace('/\//', '', $rootpath);
     $newroot = preg_replace('/ /', '', $newroot);
     $newroot = preg_replace('/\./', '', $newroot);
-    setcookie("tnguser_$newroot", '', time() - 31536000, "/");
-    setcookie("tngpass_$newroot", '', time() - 31536000, "/");
+    setcookie("tnguser_$newroot", '', time() - 31536000, '/');
+    setcookie("tngpass_$newroot", '', time() - 31536000, '/');
   }
 }
 header('Location: ' . $_SESSION['destinationpage8']);

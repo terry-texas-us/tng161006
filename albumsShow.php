@@ -26,7 +26,7 @@ if ($offset) {
   $newoffset = '';
   $page = 1;
 }
-$wherestr = "WHERE active = \"1\"";
+$wherestr = 'WHERE active = "1"';
 if ($mediasearch) {
   $wherestr .= " AND ($albums_table.albumname LIKE \"%$mediasearch%\" OR $albums_table.description LIKE \"%$mediasearch%\" OR $albums_table.keywords LIKE \"%$mediasearch%\")";
 }
@@ -50,7 +50,7 @@ $treestr = '';
 $treestr = trim("$mediasearch $treestr");
 $treestr = $treestr ? " ($treestr)" : '';
 
-$logstring = "<a href=\"albumsShow.php?" . "offset=$offset&amp;mediasearch=$mediasearch\">" . uiTextSnippet('allalbums') . "$treestr</a>";
+$logstring = '<a href="albumsShow.php?' . "offset=$offset&amp;mediasearch=$mediasearch\">" . uiTextSnippet('allalbums') . "$treestr</a>";
 writelog($logstring);
 preparebookmark($logstring);
 

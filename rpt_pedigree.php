@@ -553,7 +553,7 @@ function drawBoxLine($x, $y, $w, $num, $list) {
   $pdf->Cell(0, $lineheight + 0.02, "$num", 0, 1, 'L');
   foreach ($list as $letter) {
     $pdf->SetX($x + $textin);
-    $pdf->Cell(0, $lineheight, $letter . ":", 0, 1, 'L');
+    $pdf->Cell(0, $lineheight, $letter . ':', 0, 1, 'L');
   }
   return ($y + $lineheight);
 }

@@ -163,7 +163,7 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
                     $imagesize2 = $size[1];
                     $sections[$n] .= " &nbsp; $imagesize1 x $imagesize2 px\n";
                   }
-                  $sections[$n] .= "<div id=\"div_$key\" style=\"display:none\"></div>";
+                  $sections[$n] .= "<div id=\"div_$key\" style='display: none'></div>";
                 }
               }
               if ($languageList && !isset($parts[2]) && in_array($label, $needtrans)) {
@@ -179,7 +179,7 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
             foreach ($entries as $i) {
               $section = $sections['t' . $i];
               if ($section) {
-                $dispstr = '' != $i ? " style=\"display:none\"" : '';
+                $dispstr = '' != $i ? " style='display: none'" : '';
                 echo "<div$dispstr class=\"tsection\" id=\"t$i\">\n<table class=\"tstable\">\n";
                 $newtemplatepfx = is_numeric($i) ? 'template' : '';
                 $imagetext = '';

@@ -8,10 +8,10 @@ require 'version.php';
 
 if ($newsearch) {
   $exptime = 0;
-  setcookie("tng_search_repos_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_repos_post[exactmatch]", $exactmatch, $exptime);
-  setcookie("tng_search_repos_post[tngpage]", 1, $exptime);
-  setcookie("tng_search_repos_post[offset]", 0, $exptime);
+  setcookie('tng_search_repos_post[search]', $searchstring, $exptime);
+  setcookie('tng_search_repos_post[exactmatch]', $exactmatch, $exptime);
+  setcookie('tng_search_repos_post[tngpage]', 1, $exptime);
+  setcookie('tng_search_repos_post[offset]', 0, $exptime);
 } else {
   if (!$searchstring) {
     $searchstring = stripslashes($_COOKIE['tng_search_repos_post']['search']);
@@ -24,8 +24,8 @@ if ($newsearch) {
     $offset = $_COOKIE['tng_search_repos_post']['offset'];
   } else {
     $exptime = 0;
-    setcookie("tng_search_repos_post[tngpage]", $tngpage, $exptime);
-    setcookie("tng_search_repos_post[offset]", $offset, $exptime);
+    setcookie('tng_search_repos_post[tngpage]', $tngpage, $exptime);
+    setcookie('tng_search_repos_post[offset]', $offset, $exptime);
   }
 }
 $searchstring_noquotes = preg_replace('/\"/', '&#34;', $searchstring);

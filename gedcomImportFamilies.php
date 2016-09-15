@@ -203,7 +203,7 @@ function getFamilyRecord($familyID, $prevlevel) {
     $info['SLGS']['DATETR'] = '0000-00-00';
   }
   $query = "INSERT IGNORE INTO $families_table (familyID, marrdate, marrdatetr, marrplace, marrtype, divdate, divdatetr, divplace, husband, wife, sealdate, sealdatetr, sealplace, changedate, branch, living, private, changedby ) "
-      . "VALUES('$familyID', \"" . $info['MARR']['DATE'] . "\", \"" . $info['MARR']['DATETR'] . "\", \"" . $info['MARR']['PLAC'] . "\", \"" . $info['MARR']['TYPE'] . "\", \"" . $info['DIV']['DATE'] . "\", \"" . $info['DIV']['DATETR'] . "\", \"" . $info['DIV']['PLAC'] . "\", \"" . $info['HUSB'] . "\", \"" . $info['WIFE'] . "\", \"" . $info['SLGS']['DATE'] . "\", \"" . $info['SLGS']['DATETR'] . "\", '$slgsplace', '$inschangedt', \"{$savestate['branch']}\", '$living', '$private', '$currentuser')";
+      . "VALUES('$familyID', \"" . $info['MARR']['DATE'] . '", "' . $info['MARR']['DATETR'] . '", "' . $info['MARR']['PLAC'] . '", "' . $info['MARR']['TYPE'] . '", "' . $info['DIV']['DATE'] . '", "' . $info['DIV']['DATETR'] . '", "' . $info['DIV']['PLAC'] . '", "' . $info['HUSB'] . '", "' . $info['WIFE'] . '", "' . $info['SLGS']['DATE'] . '", "' . $info['SLGS']['DATETR'] . "\", '$slgsplace', '$inschangedt', \"{$savestate['branch']}\", '$living', '$private', '$currentuser')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   $success = tng_affected_rows();
   if (!$success && $savestate['del'] != 'no') {
@@ -221,7 +221,7 @@ function getFamilyRecord($familyID, $prevlevel) {
     if ($goahead) {
       $chdatestr = $inschangedt ? ", changedate=\"$inschangedt\"" : '';
       $branchstr = $savestate['branch'] ? ", branch=\"{$savestate['branch']}\"" : '';
-      $query = "UPDATE $families_table SET marrdate=\"" . $info['MARR']['DATE'] . "\", marrdatetr=\"" . $info['MARR']['DATETR'] . "\", marrplace=\"" . $info['MARR']['PLAC'] . "\", marrtype=\"" . $info['MARR']['TYPE'] . "\", divdate=\"" . $info['DIV']['DATE'] . "\", divdatetr=\"" . $info['DIV']['DATETR'] . "\", divplace=\"" . $info['DIV']['PLAC'] . "\", husband=\"" . $info['HUSB'] . "\", wife=\"" . $info['WIFE'] . "\", sealdate=\"" . $info['SLGS']['DATE'] . "\", sealdatetr=\"" . $info['SLGS']['DATETR'] . "\", sealplace = '$slgsplace', changedby = '$currentuser' $chdatestr$branchstr WHERE familyID = '$familyID'";
+      $query = "UPDATE $families_table SET marrdate=\"" . $info['MARR']['DATE'] . '", marrdatetr="' . $info['MARR']['DATETR'] . '", marrplace="' . $info['MARR']['PLAC'] . '", marrtype="' . $info['MARR']['TYPE'] . '", divdate="' . $info['DIV']['DATE'] . '", divdatetr="' . $info['DIV']['DATETR'] . '", divplace="' . $info['DIV']['PLAC'] . '", husband="' . $info['HUSB'] . '", wife="' . $info['WIFE'] . '", sealdate="' . $info['SLGS']['DATE'] . '", sealdatetr="' . $info['SLGS']['DATETR'] . "\", sealplace = '$slgsplace', changedby = '$currentuser' $chdatestr$branchstr WHERE familyID = '$familyID'";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $success = 1;
 

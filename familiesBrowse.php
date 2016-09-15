@@ -8,12 +8,12 @@ require 'version.php';
 
 if ($newsearch) {
   $exptime = 0;
-  setcookie("tng_search_families_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_families_post[living]", $living, $exptime);
-  setcookie("tng_search_families_post[exactmatch]", $exactmatch, $exptime);
-  setcookie("tng_search_families_post[spousename]", $spousename, $exptime);
-  setcookie("tng_search_families_post[tngpage]", 1, $exptime);
-  setcookie("tng_search_families_post[offset]", 0, $exptime);
+  setcookie('tng_search_families_post[search]', $searchstring, $exptime);
+  setcookie('tng_search_families_post[living]', $living, $exptime);
+  setcookie('tng_search_families_post[exactmatch]', $exactmatch, $exptime);
+  setcookie('tng_search_families_post[spousename]', $spousename, $exptime);
+  setcookie('tng_search_families_post[tngpage]', 1, $exptime);
+  setcookie('tng_search_families_post[offset]', 0, $exptime);
 } else {
   if (!$searchstring) {
     $searchstring = stripslashes($_COOKIE['tng_search_families_post']['search']);
@@ -35,8 +35,8 @@ if ($newsearch) {
     $offset = $_COOKIE['tng_search_families_post']['offset'];
   } else {
     $exptime = 0;
-    setcookie("tng_search_families_post[tngpage]", $tngpage, $exptime);
-    setcookie("tng_search_families_post[offset]", $offset, $exptime);
+    setcookie('tng_search_families_post[tngpage]', $tngpage, $exptime);
+    setcookie('tng_search_families_post[offset]', $offset, $exptime);
   }
 }
 $searchstring_noquotes = preg_replace('/\"/', '&#34;', $searchstring);

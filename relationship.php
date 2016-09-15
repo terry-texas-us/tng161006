@@ -344,7 +344,7 @@ function drawBox($drawpersonID, $spouseflag, $topflag) {
   }
 
   $namefontsztouse = $pedigree['boxnamesize'] - 2;
-  $pedigree['begnamefont'] = "<span style=\"font-size:$namefontsztouse" . "pt\">";
+  $pedigree['begnamefont'] = "<span style=\"font-size:$namefontsztouse" . 'pt">';
   $pedigree['endfont'] = '</span>';
 
   $result = getPersonData($drawpersonID);
@@ -369,7 +369,7 @@ function drawBox($drawpersonID, $spouseflag, $topflag) {
     if ($row['famc'] && $pedigree['popupchartlinks']) {
       $iconactions = " onmouseover=\"if($('ic$slot')) $('ic$slot').style.display='';\" onmouseout=\"if($('ic$slot')) $('ic$slot').style.display='none';\"";
       $iconlinks = "<div class=\"floverlr\" id=\"ic$slot\" style=\"left:" . ($pedigree['puboxwidth'] - 35) . 'px;top:' . ($pedigree['puboxheight'] - 15) . "px;display:none;background-color:$boxcolortouse\">";
-      $iconlinks .= "<a href=\"{$pedigree['url']}personID=$drawpersonID&amp;display=standard&amp;generations=" . $pedigree['initpedgens'] . "\" title=\"" . uiTextSnippet('popupnote2') . "\">{$pedigree['chartlink']}</a>\n";
+      $iconlinks .= "<a href=\"{$pedigree['url']}personID=$drawpersonID&amp;display=standard&amp;generations=" . $pedigree['initpedgens'] . '" title="' . uiTextSnippet('popupnote2') . "\">{$pedigree['chartlink']}</a>\n";
       $iconlinks .= "</div>\n";
       $slot++;
     } else {

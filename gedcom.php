@@ -553,7 +553,7 @@ function writeIndividual($person) {
         $info .= writeCitation($citations['-x--general--x-'], 1);
       }
     } elseif (showNames($ind) == 2) {
-      $info .= '1 NAME ' . initials($ind['firstname']) . " /" . trim($ind['lnprefix'] . ' ' . $ind['lastname']) . "/$lineending";
+      $info .= '1 NAME ' . initials($ind['firstname']) . ' /' . trim($ind['lnprefix'] . ' ' . $ind['lastname']) . "/$lineending";
     } elseif ($ind['private']) {
       $info .= '1 NAME ' . uiTextSnippet('private') . " //$lineending";
     } else {

@@ -399,8 +399,8 @@ function do_chart($gens, $output = false) {
   }
 }
 
-writelog("<a href=\"verticalchart.php?personID=$personID&amp;generations=$gens&amp;display=$display\">" . xmlcharacters("" . uiTextSnippet('pedigreefor') . " $logname ($personID)") . "</a> $gens " . $gentext);
-preparebookmark("<a href=\"verticalchart.php?personID=$personID&amp;generations=$gens&amp;display=$display\">" . xmlcharacters("" . uiTextSnippet('pedigreefor') . " $pedname ($personID)") . "</a> $gens " . $gentext);
+writelog("<a href=\"verticalchart.php?personID=$personID&amp;generations=$gens&amp;display=$display\">" . xmlcharacters('' . uiTextSnippet('pedigreefor') . " $logname ($personID)") . "</a> $gens " . $gentext);
+preparebookmark("<a href=\"verticalchart.php?personID=$personID&amp;generations=$gens&amp;display=$display\">" . xmlcharacters('' . uiTextSnippet('pedigreefor') . " $pedname ($personID)") . "</a> $gens " . $gentext);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();

@@ -433,10 +433,6 @@ class PHPMailer
             $address
         );
       case 'html5':
-        /**
-         * This is the pattern used in the HTML5 spec for validation of 'email' type form input elements.
-         * @link http://www.whatwg.org/specs/web-apps/current-work/#e-mail-state-(type=email)
-         */
         return (boolean)preg_match(
             '/^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}' .
             '[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/sD',

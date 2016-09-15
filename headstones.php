@@ -225,7 +225,7 @@ if ($location) {
             'htmlcontent' => "<div class=\"mapballoon\"><a href=\"cemeteriesShowCemetery.php?cemeteryID={$cemetery['cemeteryID']}\">$localballooncemeteryname</a><br>$localballooncemeteryplace$codednotes</div>"
           ];
           $l2mCount++;
-          $body .= "<a href=\"https://maps.google.com/maps?f=q&amp" . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">\n";
+          $body .= '<a href="https://maps.google.com/maps?f=q&amp' . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">\n";
           $body .= "<img src=\"google_marker.php?image=$pinplacelevel2.png&amp;text=$l2mCount\" alt='' style=\"padding-right:5px\">\n";
           $body .= '</a>';
           $map['pins']++;
@@ -298,17 +298,17 @@ if ($location) {
         $description = $hs['description'];
         $notes = $hs['notes'];
 
-        $body .= "<tr><td style=\"width:$thumbmaxw" . "px\">";
+        $body .= "<tr><td style=\"width:$thumbmaxw" . 'px">';
         $hs['mediatypeID'] = 'headstones';
         $hs['allow_living'] = 1;
         $imgsrc = getSmallPhoto($hs);
         $href = getMediaHREF($hs, 3);
 
         if ($imgsrc) {
-          $body .= "<div class=\"media-img\"><div class=\"media-prev\" id=\"prev{$hs['mediaID']}\" style=\"display:none\"></div></div>\n";
+          $body .= "<div class=\"media-img\"><div class=\"media-prev\" id=\"prev{$hs['mediaID']}\" style='display: none'></div></div>\n";
           $body .= "<a href=\"$href\"";
           if ($gotImageJpeg && isPhoto($hs) && checkMediaFileSize("$rootpath$usefolder/{$hs['path']}")) {
-            $body .= " class=\"media-preview\" id=\"img-{$hs['mediaID']}-0-" . urlencode("$usefolder/{$hs['path']}") . "\"";
+            $body .= " class=\"media-preview\" id=\"img-{$hs['mediaID']}-0-" . urlencode("$usefolder/{$hs['path']}") . '"';
           }
           $body .= ">$imgsrc</a>\n";
         } else {

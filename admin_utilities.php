@@ -43,7 +43,7 @@ function doRow($table_name, $display_name) {
   echo "<a href='#' onclick=\"return startBackup('$table_name');\" title=\"" . uiTextSnippet('backup') . "\">\n";
   echo "<img class='icon-sm' src='svg/upload.svg'>\n";
   echo '</a>';
-  echo "<a id=\"rst_$table_name\" href='#' onclick=\"if( confirm('" . uiTextSnippet('surerestore') . "') ) {startRestore('$table_name') ;} return false;\" title=\"" . uiTextSnippet('restore') . "\"";
+  echo "<a id=\"rst_$table_name\" href='#' onclick=\"if( confirm('" . uiTextSnippet('surerestore') . "') ) {startRestore('$table_name') ;} return false;\" title=\"" . uiTextSnippet('restore') . '"';
   echo $fileflag ? '>' : " style='visibility: hidden'>";
   echo "<img class='icon-sm' src='svg/download.svg'>\n";
   echo '</a>';

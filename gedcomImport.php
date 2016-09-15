@@ -624,22 +624,22 @@ function incrCounter($prefix) {
     if ($allcount % 100 == 0) {
       $newtext = "<div class=\"impc\"><span id=\"pr\">$newwidth</span>";
       if ($savestate['icount']) {
-        $newtext .= "<span id=\"ic\">" . $savestate['icount'] . '</span>';
+        $newtext .= '<span id="ic">' . $savestate['icount'] . '</span>';
       }
       if ($savestate['fcount']) {
-        $newtext .= "<span id=\"fc\">" . $savestate['fcount'] . '</span>';
+        $newtext .= '<span id="fc">' . $savestate['fcount'] . '</span>';
       }
       if ($savestate['scount']) {
-        $newtext .= "<span id=\"sc\">" . $savestate['scount'] . '</span>';
+        $newtext .= '<span id="sc">' . $savestate['scount'] . '</span>';
       }
       if ($savestate['ncount']) {
-        $newtext .= "<span id=\"nc\">" . $savestate['ncount'] . '</span>';
+        $newtext .= '<span id="nc">' . $savestate['ncount'] . '</span>';
       }
       if ($savestate['mcount']) {
-        $newtext .= "<span id=\"mc\">" . $savestate['mcount'] . '</span>';
+        $newtext .= '<span id="mc">' . $savestate['mcount'] . '</span>';
       }
       if ($savestate['pcount']) {
-        $newtext .= "<span id=\"pc\">" . $savestate['pcount'] . '</span>';
+        $newtext .= '<span id="pc">' . $savestate['pcount'] . '</span>';
       }
       $newtext .= "</div>\n";
       echo $newtext;
@@ -927,7 +927,7 @@ function processMedia($mmcount, $mminfo, $persfamID, $eventID) {
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     $psuccess = tng_affected_rows();
     if (!$psuccess && $savestate['del'] != 'no') {
-      $defphotostr = $mm['defphoto'] ? ", defphoto = \"1\"" : '';
+      $defphotostr = $mm['defphoto'] ? ', defphoto = "1"' : '';
       $query = "UPDATE $medialinks_table SET altdescription=\"{$mm['TITL']}\", altnotes=\"{$mm['NOTE']}\"$defphotostr WHERE personID = '$persfamID' AND mediaID = '$mediaID' AND eventID = '$eventID'";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     }
@@ -1314,7 +1314,7 @@ function saveCustEvents($prefix, $persfamID, $events, $totevents) {
         $eventinfo = '@' . adjustId($matches[1], $savestate['noffset']) . '@';
       }
       $query = "INSERT INTO $events_table (eventtypeID, persfamID, eventdate, eventdatetr, eventplace, age, agency, cause, addressID, parenttag, info) "
-          . "VALUES('$eventtypeID', '$persfamID', \"" . $eventptr['DATE'] . "\", \"" . $eventptr['DATETR'] . "\", \"" . $eventptr['PLAC'] . "\", \"" . $eventptr['AGE'] . "\", \"" . $eventptr['AGNC'] . "\", \"" . $eventptr['CAUS'] . "\", \"" . $eventptr['ADDR'] . "\",  \"" . $eventptr['parent'] . "\", '$eventinfo')";
+          . "VALUES('$eventtypeID', '$persfamID', \"" . $eventptr['DATE'] . '", "' . $eventptr['DATETR'] . '", "' . $eventptr['PLAC'] . '", "' . $eventptr['AGE'] . '", "' . $eventptr['AGNC'] . '", "' . $eventptr['CAUS'] . '", "' . $eventptr['ADDR'] . '",  "' . $eventptr['parent'] . "\", '$eventinfo')";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $eventID = tng_insert_id();
 

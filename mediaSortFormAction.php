@@ -130,7 +130,7 @@ $headSection->setTitle(uiTextSnippet($sortstr));
         <?php
         echo "<p class='small' id='removedefault'";
         if (!$photo) {
-          echo " style=\"display:none\"";
+          echo " style='display: none'";
         }
         echo "><a href='#' onclick=\"return removeDefault();\">" . uiTextSnippet('removedef') . "</a></p>\n";
         ?>
@@ -160,30 +160,30 @@ $headSection->setTitle(uiTextSnippet($sortstr));
                 echo "<img src='img/admArrowDown.gif' alt=''>\n";
               echo "</td>\n";
 
-              echo "<td class=\"small\" style=\"width:35px;text-align:center\">";
+              echo '<td class="small" style="width: 35px; text-align: center">';
               echo "<div style=\"padding-bottom:5px\"><a href='#' onclick=\"return moveItemInList('{$row['medialinkID']}',1);\" title=\"" .
                       uiTextSnippet('movetop') . "\"><img src=\"img/admArrowUp.gif\" alt=''><br>" . uiTextSnippet('top') . "</a></div>\n";
               echo "<input class='movefields' id=\"move{$row['medialinkID']}\" name=\"move{$row['medialinkID']}\" style='width: 30px' value=\"$count\" onkeypress=\"handleMediaEnter('{$row['medialinkID']}',$('#move{$row['medialinkID']}').val(),event);\" />\n";
               echo "<a href='#' onclick=\"return moveItemInList('{$row['medialinkID']}',$('#move{$row['medialinkID']}').val());\" title=\"" .
-                      uiTextSnippet('movetop') . "\">" . uiTextSnippet('go') . "</a>\n";
+                      uiTextSnippet('movetop') . '">' . uiTextSnippet('go') . "</a>\n";
               echo "</td>\n";
 
-              echo "<td style=\"width:" . ($thumbmaxw + 6) . "px;text-align:center;\">";
+              echo '<td style="width:' . ($thumbmaxw + 6) . 'px; text-align: center;">';
               if ($row['thumbpath'] && file_exists("$rootpath$usefolder/" . $row['thumbpath'])) {
                 $size = getimagesize("$rootpath$usefolder/" . $row['thumbpath']);
-                echo "<a href=\"mediaEdit.php?mediaID={$row['mediaID']}\"><img src=\"$usefolder/" . str_replace("%2F", "/", rawurlencode($row['thumbpath'])) . "\" $size[3] alt=\"{$row['description']}\"></a>";
+                echo "<a href=\"mediaEdit.php?mediaID={$row['mediaID']}\"><img src=\"$usefolder/" . str_replace('%2F', '/', rawurlencode($row['thumbpath'])) . "\" $size[3] alt=\"{$row['description']}\"></a>";
               } else {
                 echo '&nbsp;';
               }
               echo "</td>\n";
               $checked = $row['defphoto'] ? ' checked' : '';
               echo "<td><a href=\"mediaEdit.php?mediaID={$row['mediaID']}\">{$row['description']}</a><br>$truncated<br>\n";
-              echo "<span id=\"md_{$row['medialinkID']}\" class=\"small\" style=\"color:gray;visibility:hidden\">\n";
+              echo "<span id=\"md_{$row['medialinkID']}\" class=\"small\" style=\"color: gray; visibility: hidden\">\n";
               echo "<input name='rthumbs' type='radio' value=\"r{$row['mediaID']}\"$checked onclick=\"makeDefault(this);\">" . uiTextSnippet('makedefault') . "\n";
               echo ' &nbsp;|&nbsp; ';
               echo "<a href='#' onclick=\"return removeFromSort('media','{$row['medialinkID']}');\">" . uiTextSnippet('remove') . '</a>';
               echo "</span>&nbsp;</td>\n";
-              echo "<td style=\"width: 45px; text-align: center\">";
+              echo '<td style="width: 45px; text-align: center">';
               $checked = $row['dontshow'] ? '' : ' checked';
               echo "<input name=\"show{$row['medialinkID']}\" type='checkbox' onclick=\"toggleShow(this);\" value='1'$checked/>&nbsp;</td>\n";
               echo "<td style=\"width:150px;\">{$row['datetaken']}&nbsp;</td>\n";
@@ -201,9 +201,9 @@ $headSection->setTitle(uiTextSnippet($sortstr));
 
   </table>
   <?php
-  echo $adminFooterSection->build(); ?>
+  echo $adminFooterSection->build();
   echo scriptsManager::buildScriptElements($flags, 'admin');
-  <?php
+  
   $usefolder = $row['usecollfolder'] ? $mediatypes_assoc[$thismediatypeID] : $mediapath;
 
   if ($row['thumbpath']) {
@@ -220,7 +220,7 @@ $headSection->setTitle(uiTextSnippet($sortstr));
       $photohtouse = $thumbmaxh;
       $photowtouse = intval($thumbmaxh * $photoinfo[0] / $photoinfo[1]);
     }
-    $photo = "<img src=\"" . str_replace('%2F', '/', rawurlencode($photoref)) . '?' . time() . "\" alt='' width=\"$photowtouse\" height=\"$photohtouse\" style=\"margin-right:10px\">";
+    $photo = '<img src="' . str_replace('%2F', '/', rawurlencode($photoref)) . '?' . time() . "\" alt='' width=\"$photowtouse\" height=\"$photohtouse\" style=\"margin-right:10px\">";
   }
   ?>
   <script>

@@ -83,7 +83,7 @@ function updateMostWanted(form) {
                     newcontent += '<img src="img/admArrowUp.gif" alt=""><br>' + textSnippet('drag') + '<br>\n';
                     newcontent += '<img src="img/admArrowDown.gif" alt="">\n';
                     newcontent += '</td>\n';
-                    newcontent += '<td style="width:' + thumbwidth + 'px;text-align:center;">\n';
+                    newcontent += '<td style="width:' + thumbwidth + 'px; text-align: center;">\n';
                     if (vars.thumbpath) {
                         newcontent += '<img src="' + vars.thumbpath + '" width="' + vars.width + '" height="' + vars.height + '" id="img_' + vars.ID + '" alt="' + vars.description + '">\n';
                     } else {
@@ -97,7 +97,7 @@ function updateMostWanted(form) {
                         newcontent += '<u id="title_' + vars.ID + '">' + vars.title + '</u>\n';
                     }
                     newcontent += '<br><span id="desc_' + vars.ID + '">' + vars.description + '</span><br>\n';
-                    newcontent += '<div id="del_' + vars.ID + '" class="small" style="color:gray;visibility:hidden">\n';
+                    newcontent += '<div id="del_' + vars.ID + '" class="small" style="color: gray; visibility: hidden">\n';
                     if (vars.edit) {
                         newcontent += '<a href="#" onclick="return openMostWanted(\'' + vars.mwtype + '\',\'' + vars.ID + '\');">' + textSnippet('edit') + '</a>\n';
                         if (vars.del) {

@@ -99,7 +99,7 @@ function getAlbumLinkText($albumID) {
   }
   tng_free_result($presult);
   if ($numrows > $maxsearchresults) {
-    $links .= "\n[<a href=\"albumsShowAlbum.php?albumID=$albumID&amp;ioffset=" . ($newioffset + $maxsearchresults) . "\">" . uiTextSnippet('morelinks') . '</a>]';
+    $links .= "\n[<a href=\"albumsShowAlbum.php?albumID=$albumID&amp;ioffset=" . ($newioffset + $maxsearchresults) . '">' . uiTextSnippet('morelinks') . '</a>]';
   }
 
   return $links;
@@ -110,7 +110,7 @@ if ($albumlinktext) {
   $altext = $albumlinktext;
   $albumlinktext = "<table class='table'>\n";
   $albumlinktext .= "<tr>\n";
-  $albumlinktext .= "<td width=\"100\">" . uiTextSnippet('indlinked') . "</td>\n";
+  $albumlinktext .= '<td width="100">' . uiTextSnippet('indlinked') . "</td>\n";
   $albumlinktext .= "<td width=\"90%\">$altext</td>\n";
   $albumlinktext .= "</tr>\n";
   $albumlinktext .= "</table>\n<br>";
@@ -227,10 +227,10 @@ preparebookmark($logstring);
     } else {
       $header = "<tr><td></td>\n";
       $header .= "<td width=\"$thumbmaxw\">" . uiTextSnippet('thumb') . "</td>\n";
-      $header .= "<td width=\"80%\">" . uiTextSnippet('description') . "</td>\n";
+      $header .= '<td width="80%">' . uiTextSnippet('description') . "</td>\n";
       $header .= '<td>' . uiTextSnippet('indlinked') . "</td>\n";
       $header .= "</tr>\n";
-      $tablewidth = " width=\"100%\"";
+      $tablewidth = ' width="100%"';
     }
 
     $header = "<table class='table' $tablewidth>\n" . $header;
@@ -387,11 +387,11 @@ preparebookmark($logstring);
         $mediatext .= "<tr><td><span>$i</span></td>";
         if ($imgsrc) {
           $mediatext .= '<td>';
-          $mediatext .= "<div class=\"media-img\"><div class=\"media-prev\" id=\"prev{$row['mediaID']}\" style=\"display:none\"></div></div>\n";
+          $mediatext .= "<div class=\"media-img\"><div class=\"media-prev\" id=\"prev{$row['mediaID']}\" style='display: none'></div></div>\n";
           if ($href) {
             $mediatext .= "<a href=\"$href\"";
             if ($gotImageJpeg && isPhoto($row) && checkMediaFileSize("$rootpath$usefolder/{$row['path']}")) {
-              $mediatext .= " class=\"media-preview\" id=\"img-{$row['mediaID']}-0-" . urlencode("$usefolder/{$row['path']}") . "\"";
+              $mediatext .= " class=\"media-preview\" id=\"img-{$row['mediaID']}-0-" . urlencode("$usefolder/{$row['path']}") . '"';
             }
             $mediatext .= ">$imgsrc</a>";
           } else {

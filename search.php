@@ -140,7 +140,7 @@ $allwhere = '';
 
 if ($mylastname || $lnqualify == 'exists' || $lnqualify == 'dnexist') {
   if ($mylastname == uiTextSnippet('nosurname')) {
-    addtoQuery(uiTextSnippet('lastname'), 'mylastname', "lastname = \"\"", 'lnqualify', uiTextSnippet('equals'), uiTextSnippet('equals'), $mylastname);
+    addtoQuery(uiTextSnippet('lastname'), 'mylastname', 'lastname = ""', 'lnqualify', uiTextSnippet('equals'), uiTextSnippet('equals'), $mylastname);
   } else {
     buildCriteria('p.lastname', 'mylastname', 'lnqualify', $lnqualify, $mylastname, uiTextSnippet('lastname'));
   }
@@ -286,7 +286,7 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
     <h2><img class='icon-md' src='svg/magnifying-glass.svg'><?php echo uiTextSnippet('searchresults'); ?></h2>
     <br>
     <?php
-    $logstring = "<a href=\"search.php?" . $_SERVER['QUERY_STRING'] . "\">" . xmlcharacters(uiTextSnippet('searchresults') . " $querystring") . '</a>';
+    $logstring = '<a href="search.php?' . $_SERVER['QUERY_STRING'] . '">' . xmlcharacters(uiTextSnippet('searchresults') . " $querystring") . '</a>';
     writelog($logstring);
     preparebookmark($logstring);
 

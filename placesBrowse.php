@@ -10,12 +10,12 @@ require 'version.php';
 $exptime = 0;
 if ($newsearch) {
   $searchstring = trim($searchstring);
-  setcookie("tng_search_places_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_places_post[exactmatch]", $exactmatch, $exptime);
-  setcookie("tng_search_places_post[nocoords]", $nocoords, $exptime);
-  setcookie("tng_search_places_post[temples]", $temples, $exptime);
-  setcookie("tng_search_places_post[tngpage]", 1, $exptime);
-  setcookie("tng_search_places_post[offset]", 0, $exptime);
+  setcookie('tng_search_places_post[search]', $searchstring, $exptime);
+  setcookie('tng_search_places_post[exactmatch]', $exactmatch, $exptime);
+  setcookie('tng_search_places_post[nocoords]', $nocoords, $exptime);
+  setcookie('tng_search_places_post[temples]', $temples, $exptime);
+  setcookie('tng_search_places_post[tngpage]', 1, $exptime);
+  setcookie('tng_search_places_post[offset]', 0, $exptime);
 } else {
   if (!$searchstring) {
     $searchstring = stripslashes($_COOKIE['tng_search_places_post']['search']);
@@ -33,8 +33,8 @@ if ($newsearch) {
     $tngpage = $_COOKIE['tng_search_places_post']['tngpage'];
     $offset = $_COOKIE['tng_search_places_post']['offset'];
   } else {
-    setcookie("tng_search_places_post[tngpage]", $tngpage, $exptime);
-    setcookie("tng_search_places_post[offset]", $offset, $exptime);
+    setcookie('tng_search_places_post[tngpage]', $tngpage, $exptime);
+    setcookie('tng_search_places_post[offset]', $offset, $exptime);
   }
 }
 $searchstring_noquotes = preg_replace('/\"/', '&#34;', $searchstring);
@@ -56,7 +56,7 @@ function addCriteria($field, $value, $operator) {
 }
 $allwhere = '1 = 1';
 if ($nocoords) {
-  $allwhere .= " AND (latitude IS NULL OR latitude = \"\" OR longitude IS NULL OR longitude = \"\")";
+  $allwhere .= ' AND (latitude IS NULL OR latitude = "" OR longitude IS NULL OR longitude = "")';
 }
 if ($temples) {
   $allwhere .= ' AND temple = 1';
@@ -180,7 +180,7 @@ $headSection->setTitle(uiTextSnippet('places'));
           $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
           $actionstr .= '</a>';
         }
-        $actionstr .= "<a href=\"placesearch.php?psearch=zzz";
+        $actionstr .= '<a href="placesearch.php?psearch=zzz';
         $actionstr .= "\" title='" . uiTextSnippet('preview') . "'>\n";
         $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
         $actionstr .= "</a>\n";

@@ -57,7 +57,7 @@ function displayIndividual($key, $generation, $slot, $column) {
         $columns[$column][$generation] .= "<li><span><a href=\"peopleShowPerson.php?tng_extras=1&amp;personID=$key\">$namestr</a> (" . trim(getYears($row)) . ')';
         if ($mediarow['mediacount']) {
           $columns[$column][$generation] .= " <a href=\"peopleShowPerson.php?tng_extras=1&amp;personID=$key\" title=\"" . uiTextSnippet('mediaavail') . "\">\n";
-          $columns[$column][$generation] .= "<img class='icon-sm' src='svg/camera.svg' alt=\"" . uiTextSnippet('mediaavail') . "\"></a>";
+          $columns[$column][$generation] .= "<img class='icon-sm' src='svg/camera.svg' alt=\"" . uiTextSnippet('mediaavail') . '"></a>';
         }
         $columns[$column][$generation] .= "</span></li>\n";
       }
@@ -186,7 +186,7 @@ $headSection->setTitle(uiTextSnippet('media') . ': ' . uiTextSnippet('familyof')
     echo '<h4>' . uiTextSnippet('media') . ': ' . uiTextSnippet('familyof') . " $pedname</h4>";
 
     if ($showall) {
-      echo "<p><img class='icon-sm' src='svg/camera.svg' alt=\"" . uiTextSnippet('mediaavail') . "\"> " . uiTextSnippet('extrasexpl') . '</p>';
+      echo "<p><img class='icon-sm' src='svg/camera.svg' alt=\"" . uiTextSnippet('mediaavail') . '"> ' . uiTextSnippet('extrasexpl') . '</p>';
     }
     $slot = 1;
     displayIndividual($personID, 1, $slot, 0);

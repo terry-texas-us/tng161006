@@ -7,7 +7,7 @@ if (!$map['displaytype']) {
 }
 // these two lines used to remove or replace characters that cause problems with opening new Google maps
 $banish = ['(', ')', '#', '&', ' from ', ' to ', ' van ', ' naar ', ' von ', ' bis ', ' da ', ' a ', ' de ', ' ? ', ' vers ', ' till '];
-$banreplace = ['[', ']', '', 'and', ' from%A0', ' to%A0', ' van%A0', ' naar%A0', ' von%A0', ' bis%A0', ' da%A0', ' a%A0', ' de%A0', "à%A0", 'vers%A0', 'till%A0'];
+$banreplace = ['[', ']', '', 'and', ' from%A0', ' to%A0', ' van%A0', ' naar%A0', ' von%A0', ' bis%A0', ' da%A0', ' a%A0', ' de%A0', 'à%A0', 'vers%A0', 'till%A0'];
 
 function tng_map_pins() {
   global $locations2map;

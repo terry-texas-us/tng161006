@@ -10,11 +10,11 @@ $tng_search_eventtypes = $_SESSION['tng_search_eventtypes'] = 1;
 if ($newsearch) {
   $exptime = 05;
   $searchstring = stripslashes(trim($searchstring));
-  setcookie("tng_search_eventtypes_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_eventtypes_post[etype]", $etype, $exptime);
-  setcookie("tng_search_eventtypes_post[onimport]", $onimport, $exptime);
-  setcookie("tng_search_eventtypes_post[tngpage]", 1, $exptime);
-  setcookie("tng_search_eventtypes_post[offset]", 0, $exptime);
+  setcookie('tng_search_eventtypes_post[search]', $searchstring, $exptime);
+  setcookie('tng_search_eventtypes_post[etype]', $etype, $exptime);
+  setcookie('tng_search_eventtypes_post[onimport]', $onimport, $exptime);
+  setcookie('tng_search_eventtypes_post[tngpage]', 1, $exptime);
+  setcookie('tng_search_eventtypes_post[offset]', 0, $exptime);
 } else {
   if (!$searchstring) {
     $searchstring = stripslashes($_COOKIE['tng_search_eventtypes_post']['search']);
@@ -30,8 +30,8 @@ if ($newsearch) {
     $offset = $_COOKIE['tng_search_eventtypes_post']['offset'];
   } else {
     $exptime = 0;
-    setcookie("tng_search_eventtypes_post[tngpage]", $tngpage, $exptime);
-    setcookie("tng_search_eventtypes_post[offset]", $offset, $exptime);
+    setcookie('tng_search_eventtypes_post[tngpage]', $tngpage, $exptime);
+    setcookie('tng_search_eventtypes_post[offset]', $offset, $exptime);
   }
 }
 if ($offset) {

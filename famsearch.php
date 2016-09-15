@@ -84,7 +84,7 @@ if ($order == 'fname') {
   $orderstr = 'father.lastname, father.firstname, marrdatetr';
   $fnamesort = "<a href=\"famsearch.php?$currargs&amp;order=fnameup\">" . uiTextSnippet('fathername') . " <img src='img/tng_sort_desc.gif' width='15' height='8'></a>";
 } else {
-  $fnamesort = "<a href=\"famsearch.php?$currargs&amp;order=fname\">" . uiTextSnippet('fathername') . " <img src=\"img/tng_sort_asc.gif\" width=\"15\" height=\"8\"></a>";
+  $fnamesort = "<a href=\"famsearch.php?$currargs&amp;order=fname\">" . uiTextSnippet('fathername') . " <img src='img/tng_sort_asc.gif' width='15' height='8'></a>";
   if ($order == 'fnameup') {
     $orderstr = 'father.lastname DESC, father.firstname DESC, marrdatetr';
   }
@@ -94,7 +94,7 @@ if ($order == 'mname') {
   $orderstr = 'mother.lastname, mother.firstname, marrdatetr';
   $mnamesort = "<a href=\"famsearch.php?$currargs&amp;order=mnameup\">" . uiTextSnippet('mothername') . " <img src='img/tng_sort_desc.gif' width='15' height='8'></a>";
 } else {
-  $mnamesort = "<a href=\"famsearch.php?$currargs&amp;order=mname\">" . uiTextSnippet('mothername') . " <img src=\"img/tng_sort_asc.gif\" width=\"15\" height=\"8\"></a>";
+  $mnamesort = "<a href=\"famsearch.php?$currargs&amp;order=mname\">" . uiTextSnippet('mothername') . " <img src='img/tng_sort_asc.gif' width='15' height='8'></a>";
   if ($order == 'mnameup') {
     $orderstr = 'mother.lastname DESC, mother.firstname DESC, marrdatetr';
   }
@@ -133,7 +133,7 @@ $querystring = '';
 
 if ($myflastname || $flnqualify == 'exists' || $flnqualify == 'dnexist') {
   if ($myflastname == uiTextSnippet('nosurname')) {
-    addtoQuery('lastname', 'myflastname', "father.lastname = \"\"", 'flnqualify', uiTextSnippet('equals'), uiTextSnippet('equals'), $myflastname);
+    addtoQuery('lastname', 'myflastname', 'father.lastname = ""', 'flnqualify', uiTextSnippet('equals'), uiTextSnippet('equals'), $myflastname);
   } else {
     buildCriteria('father.lastname', 'myflastname', 'flnqualify', $flnqualify, $myflastname, uiTextSnippet('lastname'));
   }
@@ -144,7 +144,7 @@ if ($myffirstname || $ffnqualify == 'exists' || $ffnqualify == 'dnexist') {
 
 if ($mymlastname || $mlnqualify == 'exists' || $mlnqualify == 'dnexist') {
   if ($mymlastname == uiTextSnippet('nosurname')) {
-    addtoQuery('lastname', 'mymlastname', "mother.lastname = \"\"", 'mlnqualify', uiTextSnippet('equals'), uiTextSnippet('equals'), $mymlastname);
+    addtoQuery('lastname', 'mymlastname', 'mother.lastname = ""', 'mlnqualify', uiTextSnippet('equals'), uiTextSnippet('equals'), $mymlastname);
   } else {
     buildCriteria('mother.lastname', 'mymlastname', 'mlnqualify', $mlnqualify, $mymlastname, uiTextSnippet('lastname'));
   }
@@ -239,7 +239,7 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
     <?php echo $publicHeaderSection->build(); ?>
     <h2><img class='icon-md' src='svg/magnifying-glass.svg'><?php echo uiTextSnippet('searchresults'); ?></h2>
     <?php
-    $logstring = "<a href=\"famsearch.php?" . $_SERVER['QUERY_STRING'] . "\">" . xmlcharacters(uiTextSnippet('searchresults') . " $querystring") . '</a>';
+    $logstring = '<a href="famsearch.php?' . $_SERVER['QUERY_STRING'] . '">' . xmlcharacters(uiTextSnippet('searchresults') . " $querystring") . '</a>';
     writelog($logstring);
     preparebookmark($logstring);
 

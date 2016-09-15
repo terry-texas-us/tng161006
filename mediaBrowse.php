@@ -12,14 +12,14 @@ $maxnoteprev = 350;    //don't use the global value here because we always want 
 if ($newsearch) {
   $exptime = 0;
   $searchstring = stripslashes(trim($searchstring));
-  setcookie("tng_search_media_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_media_post[mediatypeID]", $mediatypeID, $exptime);
-  setcookie("tng_search_media_post[fileext]", $fileext, $exptime);
-  setcookie("tng_search_media_post[unlinked]", $unlinked, $exptime);
-  setcookie("tng_search_media_post[hsstat]", $hsstat, $exptime);
-  setcookie("tng_search_media_post[cemeteryID]", $cemeteryID, $exptime);
-  setcookie("tng_search_media_post[tngpage]", 1, $exptime);
-  setcookie("tng_search_media_post[offset]", 0, $exptime);
+  setcookie('tng_search_media_post[search]', $searchstring, $exptime);
+  setcookie('tng_search_media_post[mediatypeID]', $mediatypeID, $exptime);
+  setcookie('tng_search_media_post[fileext]', $fileext, $exptime);
+  setcookie('tng_search_media_post[unlinked]', $unlinked, $exptime);
+  setcookie('tng_search_media_post[hsstat]', $hsstat, $exptime);
+  setcookie('tng_search_media_post[cemeteryID]', $cemeteryID, $exptime);
+  setcookie('tng_search_media_post[tngpage]', 1, $exptime);
+  setcookie('tng_search_media_post[offset]', 0, $exptime);
 } else {
   if (!$searchstring) {
     $searchstring = stripslashes($_COOKIE['tng_search_media_post']['search']);
@@ -44,8 +44,8 @@ if ($newsearch) {
     $offset = $_COOKIE['tng_search_media_post']['offset'];
   } else {
     $exptime = 0;
-    setcookie("tng_search_media_post[tngpage]", $tngpage, $exptime);
-    setcookie("tng_search_media_post[offset]", $offset, $exptime);
+    setcookie('tng_search_media_post[tngpage]', $tngpage, $exptime);
+    setcookie('tng_search_media_post[offset]', $offset, $exptime);
   }
 }
 if ($offset) {
@@ -111,7 +111,7 @@ $headSection->setTitle(uiTextSnippet('media'));
     $standardtypes = [];
     foreach ($mediatypes as $mediatype) {
       if (!$mediatype['type']) {
-        $standardtypes[] = "\"" . $mediatype['ID'] . "\"";
+        $standardtypes[] = '"' . $mediatype['ID'] . '"';
       }
     }
     $sttypestr = implode(',', $standardtypes);

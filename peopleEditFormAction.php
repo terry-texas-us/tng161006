@@ -246,7 +246,7 @@ if ($media == '1') {
           'allow_living' => 1
   ];
   $name = $session_charset == 'UTF-8' ? getName($row) : utf8_encode(getName($row));
-  echo "{\"id\":\"$personID\",\"name\":\"" . $name . "\"}";
+  echo "{\"id\":\"$personID\",\"name\":\"" . $name . '"}';
 } else {
   header("Location: familiesAdd.php?$self=$personID&cw=$cw");
 }

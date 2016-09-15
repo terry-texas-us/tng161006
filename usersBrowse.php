@@ -10,10 +10,10 @@ $tng_search_users = $_SESSION['tng_search_users'] = 1;
 if ($newsearch) {
   $exptime = 0;
   $searchstring = stripslashes(trim($searchstring));
-  setcookie("tng_search_users_post[search]", $searchstring, $exptime);
-  setcookie("tng_search_users_post[adminonly]", $adminonly, $exptime);
-  setcookie("tng_search_users_post[tngpage]", 1, $exptime);
-  setcookie("tng_search_users_post[offset]", 0, $exptime);
+  setcookie('tng_search_users_post[search]', $searchstring, $exptime);
+  setcookie('tng_search_users_post[adminonly]', $adminonly, $exptime);
+  setcookie('tng_search_users_post[tngpage]', 1, $exptime);
+  setcookie('tng_search_users_post[offset]', 0, $exptime);
 } else {
   if (!$searchstring) {
     $searchstring = stripslashes($_COOKIE['tng_search_users_post']['search']);
@@ -26,8 +26,8 @@ if ($newsearch) {
     $offset = $_COOKIE['tng_search_users_post']['offset'];
   } else {
     $exptime = 0;
-    setcookie("tng_search_users_post[tngpage]", $tngpage, $exptime);
-    setcookie("tng_search_users_post[offset]", $offset, $exptime);
+    setcookie('tng_search_users_post[tngpage]', $tngpage, $exptime);
+    setcookie('tng_search_users_post[offset]', $offset, $exptime);
   }
 }
 if ($offset) {
@@ -39,7 +39,7 @@ if ($offset) {
   $tngpage = 1;
 }
 $wherestr = $searchstring ? " AND (username LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR realname LIKE \"%$searchstring%\" OR email LIKE \"%$searchstring%\")" : '';
-$wherestr .= $adminonly ? " AND allow_add = \"1\" AND allow_edit = \"1\" AND allow_delete = \"1\" AND gedcom = \"\"" : '';
+$wherestr .= $adminonly ? ' AND allow_add = "1" AND allow_edit = "1" AND allow_delete = "1" AND gedcom = ""' : '';
 $query = "SELECT *, DATE_FORMAT(lastlogin,\"%d %b %Y %H:%i:%s\") AS lastlogin FROM $users_table WHERE allow_living != \"-1\" $wherestr ORDER BY description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
@@ -176,7 +176,7 @@ $headSection->setTitle(uiTextSnippet('users'));
               echo '<br>';
             }
             $rolestr = 'usr' . ($row['role'] ? $row['role'] : 'custom');
-            echo "<a href=\"mailto:" . $row['email'] . "\">" . $row['email'] . "</a></td>\n";
+            echo '<a href="mailto:' . $row['email'] . '">' . $row['email'] . "</a></td>\n";
 
             echo "<td>{$row['branch']}</td>\n";
             echo '<td>' . uiTextSnippet($rolestr) . "</td>\n";

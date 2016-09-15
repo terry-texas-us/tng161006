@@ -73,7 +73,7 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": $displaychar");
           echo "<input name='pgo' type='submit' value=\"" . uiTextSnippet('go') . "\" />\n";
           ?>
         </div>
-        <br><br><?php echo "<a href=\"placesMain.php\">" . uiTextSnippet('mainplacepage') . "</a> &nbsp;|&nbsp; <a href=\"places-all.php\">" . uiTextSnippet('showallplaces') . '</a>'; ?>
+        <br><br><?php echo '<a href="placesMain.php">' . uiTextSnippet('mainplacepage') . '</a> &nbsp;|&nbsp; <a href="places-all.php">' . uiTextSnippet('showallplaces') . '</a>'; ?>
       </div>
     <?php endFormElement(); ?>
     <br>
@@ -102,7 +102,7 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": $displaychar");
                 $olplace = $place2 = urlencode($place['myplace']);
                 if ($place2) {
                   $commaOnEnd = false;
-                  $poffset = $stretch ? "" : "offset=$offset&amp;";
+                  $poffset = $stretch ? '' : "offset=$offset&amp;";
                   if (substr($place['wholeplace'], 0, 1) == ',' && trim(substr($place['wholeplace'], 1)) == $place['myplace']) {
                     $place3 = addslashes($place['wholeplace']);
                     $commaOnEnd = true;
@@ -118,8 +118,8 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": $displaychar");
                   $specificcount = $countrow['placecount'];
                   tng_free_result($result2);
 
-                  $searchlink = $specificcount ? " <a href=\"placesearch.php?psearch=$place2\" title=\"" . uiTextSnippet('findplaces') . "\">"
-                      . "<img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=\"" . uiTextSnippet('findplaces') . "\"></a>" : '';
+                  $searchlink = $specificcount ? " <a href=\"placesearch.php?psearch=$place2\" title=\"" . uiTextSnippet('findplaces') . '">'
+                      . "<img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=\"" . uiTextSnippet('findplaces') . '"></a>' : '';
                   if ($place['placecount'] > 1 || ($place['myplace'] != $place['wholeplace'] && !$commaOnEnd)) {
                     $name = "<a href=\"$places_oneletter_url" . $poffset;
                     $name .= "psearch=$olplace\">";

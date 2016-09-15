@@ -47,7 +47,7 @@ function api_person($row, $fullevents = false) {
     $lnprefix = $lastname = $title = $prefix = $suffix = $nickname = '';
   }
   $person .= "\"firstname\":\"$firstname\",\"lnprefix\":\"$lnprefix\",\"lastname\":\"$lastname\",";
-  $person .= "\"title\":\"$title\",\"prefix\":\"$prefix\",\"suffix\":\"$suffix\",\"nickname\":\"$nickname\",\"gender\":\"{$row['sex']}\",\"changedate\":\"" . displayDate($row['changedate'], false) . "\"";
+  $person .= "\"title\":\"$title\",\"prefix\":\"$prefix\",\"suffix\":\"$suffix\",\"nickname\":\"$nickname\",\"gender\":\"{$row['sex']}\",\"changedate\":\"" . displayDate($row['changedate'], false) . '"';
 
   if ($row['allow_living'] && $row['allow_private']) {
     setMinEvent(['date' => $row['birthdate'], 'place' => $row['birthplace'], 'event' => 'BIRT'], $row['birthdatetr']);
@@ -80,7 +80,7 @@ function processEvents($events) {
   $output = '';
   if (count($events)) {
     ksort($events);
-    $output .= "\"events\":[";
+    $output .= '"events":[';
     $counter = 0;
     foreach ($events as $event) {
       if ($counter) {

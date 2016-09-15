@@ -188,34 +188,34 @@ echo $navList->build('renumber');
             $result2 = tng_query($query);
           }
 
-          $query = "UPDATE $events_table SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . "\"";
+          $query = "UPDATE $events_table SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . '"';
           $result2 = tng_query($query);
 
-          $query = "UPDATE $medialinks_table SET personID = '$newID' WHERE personID=\"" . $row[$id] . "\"";
+          $query = "UPDATE $medialinks_table SET personID = '$newID' WHERE personID=\"" . $row[$id] . '"';
           $result2 = tng_query($query);
 
           if ($type == 'person' || $type == 'family') {
-            $query = "UPDATE $branchlinks_table SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . "\"";
+            $query = "UPDATE $branchlinks_table SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . '"';
             $result2 = tng_query_noerror($query);
             $success = tng_affected_rows();
             if (!$success) {
-              $query = "DELETE FROM $branchlinks_table WHERE persfamID=\"" . $row[$id] . "\"";
+              $query = "DELETE FROM $branchlinks_table WHERE persfamID=\"" . $row[$id] . '"';
               $result2 = tng_query_noerror($query);
             }
           }
 
-          $query = "UPDATE $album2entities_table SET entityID = '$newID' WHERE entityID=\"" . $row[$id] . "\"";
+          $query = "UPDATE $album2entities_table SET entityID = '$newID' WHERE entityID=\"" . $row[$id] . '"';
           $result2 = tng_query($query);
 
           if ($type == 'source') {
-            $query = "UPDATE $citations_table SET sourceID = '$newID' WHERE sourceID=\"" . $row[$id] . "\"";
+            $query = "UPDATE $citations_table SET sourceID = '$newID' WHERE sourceID=\"" . $row[$id] . '"';
             $result2 = tng_query($query);
           } else {
-            $query = "UPDATE $citations_table SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . "\"";
+            $query = "UPDATE $citations_table SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . '"';
             $result2 = tng_query($query);
           }
 
-          $query = "UPDATE $notelinks_table SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . "\"";
+          $query = "UPDATE $notelinks_table SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . '"';
           $result2 = tng_query($query);
 
           //echo "$row['personID'] -&gt; $newID<br>";

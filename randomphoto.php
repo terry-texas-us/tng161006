@@ -58,9 +58,9 @@ if ($rp_maxwidth && $photowtouse > $rp_maxwidth) {
 }
 
 //these lines restrict the table width so the caption will not be wider than the photo
-$width = "width=\"" . ($photowtouse + 10) . "\"";
+$width = 'width="' . ($photowtouse + 10) . '"';
 
-echo "<table class=\"indexphototable\">";
+echo '<table class="indexphototable">';
 echo "<tr><td><a href=\"${showmedia_url}mediaID={$imgrow['mediaID']}\"><img class=\"indexphoto\" src=\"$usefolder/" . str_replace('%2F', '/', rawurlencode($imgrow['path'])) . "\" width=\"$photowtouse\" height=\"$photohtouse\" alt=\"{$imgrow['description']}\" title=\"{$imgrow['description']}\"></a></td></tr>";
 echo "<tr><td $width><a href=\"${showmedia_url}mediaID={$imgrow['mediaID']}\">{$imgrow['description']}</a></td></tr>";
 echo '</table>';

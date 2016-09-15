@@ -19,7 +19,7 @@ function doEvent($eventID, $displayval, $info) {
 }
 
 header('Content-Type: application/xml');
-echo "<?xml version=\"1.0\"";
+echo '<?xml version="1.0"';
 if ($session_charset) {
   echo " encoding=\"$session_charset\"";
 }

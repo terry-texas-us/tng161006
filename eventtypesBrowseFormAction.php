@@ -31,7 +31,7 @@ if ($cetaction == uiTextSnippet('ignoreselected')) {
 if ($query) {
   foreach (array_keys($_POST) as $key) {
     if (substr($key, 0, 2) == 'et') {
-      $query .= " OR eventtypeID=\"" . substr($key, 2) . "\"";
+      $query .= ' OR eventtypeID="' . substr($key, 2) . '"';
     }
   }
   $result = tng_query($query);

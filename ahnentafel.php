@@ -13,16 +13,15 @@ if ($tngmore) {
 } elseif ($tngless) {
   $pedigree['regnotes'] = 0;
 }
-
 $detail_link = "ahnentafel.php?personID=$personID&parentset=$parentset&generations=$generations";
 if ($pedigree['regnotes']) {
   $detail_link = "<a href=\"{$detail_link}&tngless=1\">" . uiTextSnippet('lessdetail') . '</a>';
 } else {
   $detail_link = "<a href=\"{$detail_link}&tngmore=1\">" . uiTextSnippet('moredetail') . '</a>';
 }
-
 $generation = 1;
 $personcount = 1;
+$ordinalNumbers = explode(',', uiTextSnippet('ordinalnumbers'));
 
 $currgen = [];
 $nextgen = [];
@@ -65,7 +64,7 @@ $headSection->setTitle($row['name']);
 <!DOCTYPE html>
 <html>
 <?php echo $headSection->build($flags, 'public', $session_charset); ?>
-<body id='public'>
+<body id='ahnentafel'>
   <section class='container'>
     <?php
     echo $publicHeaderSection->build();
@@ -114,11 +113,13 @@ $headSection->setTitle($row['name']);
       <div class="pull-xs-right"><?php echo $detail_link; ?></div>
       <?php
       //do self
-      echo '<h4>' . uiTextSnippet('generation') . ": 1</h4>\n";
-      echo "<ol style=\"list-style-type:none; padding:0; margin:0;\">";
+
+      echo '<h4>' . ucfirst($ordinalNumbers[1]) . ' ' . uiTextSnippet('generation') . "</h4>\n";
+      echo "<ol class='self'>";
       echo '<li>';
-      echo "<table><tr><td width='40' align='right'>";
-      echo "$personcount.&nbsp;&nbsp;</td><td>";
+      echo "<table><tr data-sosa-id='{$personcount}'>";
+      echo "<td width='40'>$personcount.&nbsp;&nbsp;</td>";
+      echo '<td>';
       echo showSmallPhoto($row['personID'], $row['name'], $rights['both'], 0);
       echo "<a href=\"peopleShowPerson.php?personID={$row['personID']}\" name=\"p{$row['personID']}\" id=\"p{$row['personID']}\">{$row['name']}</a>";
       echo getVitalDates($row, 1);
@@ -164,7 +165,8 @@ $headSection->setTitle($row['name']);
 
         $result2 = getChildrenData($spouserow['familyID']);
         if ($result2 && tng_num_rows($result2)) {
-          echo uiTextSnippet('children') . ":\n<ol class=\"ahnblock\">\n";
+          echo uiTextSnippet('children') . ":\n";
+          echo "<ol class='children'>\n";
           while ($childrow = tng_fetch_assoc($result2)) {
             $childrow['genlist'] = $newlist;
             $crights = determineLivingPrivateRights($childrow);
@@ -175,7 +177,7 @@ $headSection->setTitle($row['name']);
               $childrow['firstname'] = uiTextSnippet('living');
             }
 
-            echo "<li style=\"list-style-type:lower-roman\"><a href=\"peopleShowPerson.php?personID={$childrow['personID']}\">{$childrow['name']}</a>";
+            echo "<li><a href=\"peopleShowPerson.php?personID={$childrow['personID']}\">{$childrow['name']}</a>";
             echo getVitalDates($childrow);
             echo "</li>\n";
           }
@@ -184,7 +186,9 @@ $headSection->setTitle($row['name']);
         }
       }
       echo '</td></tr></table>';
-      echo "<br clear='all'></li>\n</ol>\n";
+      echo "<br clear='all'>";
+      echo '</li>';
+      echo "</ol>\n";
 
       //push famc (family of parents) to nextgen
       $parentfamID = '';
@@ -221,8 +225,8 @@ $headSection->setTitle($row['name']);
       //loop through nextgen
       //while there's one to pop and we're less than maxgen
       while (count($currgen) && $generation <= $generations) {
-        echo '<h4>' . uiTextSnippet('generation') . ": $generation</h4>\n";
-        echo "<ol style=\"list-style-type:none; padding:0; margin:0;\">";
+        echo '<h4>' . ucfirst($ordinalNumbers[$generation]) . ' ' . uiTextSnippet('generation') . "</h4>\n";
+        echo "<ol class='nextgen'>";
         while ($nextfamily = array_shift($currgen)) {
           $parents = getFamilyData($nextfamily);
           if ($parents) {
@@ -249,7 +253,8 @@ $headSection->setTitle($row['name']);
                   }
 
                   echo '<li>';
-                  echo "<table><tr><td width='40' align='right'>";
+                  echo "<table><tr data-sosa-id='{$personcount}'>";
+                  echo "<td width='40'>";
                   echo "$personcount.&nbsp;&nbsp;</td><td>";
                   echo showSmallPhoto($fathrow['personID'], $fathrow['name'], $frights['both'], 0);
                   echo "<a href=\"peopleShowPerson.php?personID={$fathrow['personID']}\" name=\"p{$fathrow['personID']}\" id=\"p{$fathrow['personID']}\">{$fathrow['name']}</a>";
@@ -313,7 +318,8 @@ $headSection->setTitle($row['name']);
                     echo "<br clear='all'></li>\n";
                   }
                   echo '<li>';
-                  echo "<table><tr><td width='40' align='right'>";
+                  echo "<table><tr data-sosa-id='{$personcount}'>";
+                  echo "<td width='40'>";
                   echo "$personcount.&nbsp;&nbsp;</td><td>";
                   echo showSmallPhoto($mothrow['personID'], $mothrow['name'], $mrights['both'], 0);
                   echo "<a href=\"peopleShowPerson.php?personID={$mothrow['personID']}\" name=\"p{$mothrow['personID']}\" id=\"p{$mothrow['personID']}\">{$mothrow['name']}</a>";
@@ -355,14 +361,15 @@ $headSection->setTitle($row['name']);
             //get children
             $result2 = getChildrenData($nextfamily);
             if ($result2 && tng_num_rows($result2)) {
-              echo '<table><tr><td>' . uiTextSnippet('children') . ":<br>\n<ol class=\"ahnblock\">\n";
+              echo '<table><tr><td>' . uiTextSnippet('children') . ":<br>\n";
+              echo "<ol class='children'>\n";
               while ($childrow = tng_fetch_assoc($result2)) {
                 $crights = determineLivingPrivateRights($childrow);
                 $childrow['allow_living'] = $crights['living'];
                 $childrow['allow_private'] = $crights['private'];
                 $childrow['name'] = getName($childrow);
 
-                echo "<li style=\"list-style-type:lower-roman\">";
+                echo '<li>';
                 if ($lastlastgen[$childrow['personID']]) {
                   echo $lastlastgen[$childrow['personID']] . '. ';
                   echo "<a href='#' onclick=\"$('html, body').animate({scrollTop: $('#p{$childrow['personID']}').offset().top-10},'slow'); return false;\">{$childrow['name']}</a>";

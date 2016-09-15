@@ -189,11 +189,11 @@ $headSection->setTitle(uiTextSnippet('modifyeventtype'));
     }
     if (count($disppairs) > 1) {
       $defdisplay = '';
-      $displaytrstyle = " style=\"display:none\"";
+      $displaytrstyle = " style='display: none'";
       $otherlangsstyle = '';
     } else {
       $displaytrstyle = '';
-      $otherlangsstyle = " style=\"display:none\"";
+      $otherlangsstyle = " style='display: none'";
       if (count($disppairs) == 1) {
         $defdisplay = $dispvalues[1];
       } else {

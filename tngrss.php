@@ -126,7 +126,7 @@ function doMedia($mediatypeID) {
     tng_free_result($presult);
 
     $href = getMediaHREF($row, 0);
-    $href = str_replace("\" target=\"_blank", '', $href);  // fix the string in case someone might have used the "open in a new window" option on the media
+    $href = str_replace('" target="_blank', '', $href);  // fix the string in case someone might have used the "open in a new window" option on the media
     if ((!$foundliving && !$foundprivate) || !$nonames || $row['alwayson']) {
       $description = strip_tags($row['description']);
       $notes = nl2br(strip_tags(getXrefNotes($row['notes'])));
@@ -168,7 +168,7 @@ header("Content-type: application/rss+xml; charset=\"$charset\"");
 
 $item .= "<rss version=\"2.0\" xmlns:atom=\"{$http}://www.w3.org/2005/Atom\">\n";
 $item .= "<channel>\n";
-$item .= "<atom:link href=\"" . $tngdomain . "/tngrss.php\" rel=\"self\" type=\"application/rss+xml\" />\n";
+$item .= '<atom:link href="' . $tngdomain . "/tngrss.php\" rel=\"self\" type=\"application/rss+xml\" />\n";
 
 $tngscript = basename($_SERVER['SCRIPT_NAME'], '.php');
 

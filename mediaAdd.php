@@ -36,7 +36,7 @@ $headSection->setTitle(uiTextSnippet('addnewmedia'));
     $likearray = "var like = new Array();\n";
     foreach ($mediatypes as $mediatype) {
       if (!$mediatype['type']) {
-        $standardtypes[] = "\"" . $mediatype['ID'] . "\"";
+        $standardtypes[] = '"' . $mediatype['ID'] . '"';
       }
       $msgID = $mediatype['ID'];
       $moptions .= "  <option value=\"$msgID\"";
