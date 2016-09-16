@@ -113,8 +113,7 @@ if (is_array($branch)) {
 } else {
   $allbranches = $branch;
 }
-$query = "INSERT INTO $families_table (familyID, husband, husborder, wife, wifeorder, living, private, marrdate, marrdatetr, marrplace, marrtype, divdate, divdatetr, divplace, sealdate, sealdatetr, sealplace, changedate, branch, changedby, status, edituser, edittime) "
-    . "VALUES('$familyID', '$husband', '$husborder', '$wife', '$wifeorder', '$familyliving', '$private', '$marrdate', '$marrdatetr', '$marrplace', '$marrtype', '$divdate', '$divdatetr', '$divplace', '$sealdate', '$sealdatetr', '$sealplace', '$newdate', $allbranches', '$currentuser', '', '', '0')";
+$query = "INSERT INTO $families_table (familyID, husband, husborder, wife, wifeorder, living, private, marrdate, marrdatetr, marrplace, marrtype, divdate, divdatetr, divplace, sealdate, sealdatetr, sealplace, changedate, branch, changedby, status, edituser, edittime) VALUES('$familyID', '$husband', '$husborder', '$wife', '$wifeorder', '$familyliving', '$private', '$marrdate', '$marrdatetr', '$marrplace', '$marrtype', '$divdate', '$divdatetr', '$divplace', '$sealdate', '$sealdatetr', '$sealplace', '$newdate', $allbranches', '$currentuser', '', '', '0')";
 $result = tng_query($query);
 
 $branchlist = explode(',', $allbranches);
@@ -125,8 +124,7 @@ foreach ($branchlist as $b) {
 if ($lastperson) {
   $haskids = getHasKids($lastperson);
 
-  $query = "INSERT INTO $children_table (familyID, personID, ordernum, mrel, frel, haskids, parentorder, sealdate, sealdatetr, sealplace) "
-      . "VALUES ('$familyID', '$lastperson', 1, '', '', $haskids, 0, '', '0000-00-00', '')";
+  $query = "INSERT INTO $children_table (familyID, personID, ordernum, mrel, frel, haskids, parentorder, sealdate, sealdatetr, sealplace) VALUES ('$familyID', '$lastperson', 1, '', '', $haskids, 0, '', '0000-00-00', '')";
   $result = tng_query($query);
 
   if ($husband) {

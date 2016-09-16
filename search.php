@@ -246,8 +246,7 @@ if (($mysplname && $mygender) || $spqualify == 'exists' || $spqualify == 'dnexis
     $huswife = '';
   }
 
-  $query = "SELECT p.ID, p.personID, lastname, lnprefix, firstname, p.living, p.private, p.branch, nickname, prefix, suffix, nameorder, title, birthplace, birthdate, deathplace, deathdate, altbirthdate, altbirthplace, burialdate, burialplace $huswife "
-      . "FROM $people_table AS p $families_join $cejoin $allwhere $orderbyClause $limitClause";
+  $query = "SELECT p.ID, p.personID, lastname, lnprefix, firstname, p.living, p.private, p.branch, nickname, prefix, suffix, nameorder, title, birthplace, birthdate, deathplace, deathdate, altbirthdate, altbirthplace, burialdate, burialplace $huswife FROM $people_table AS p $families_join $cejoin $allwhere $orderbyClause $limitClause";
   $query2 = "SELECT count(p.ID) AS pcount FROM $people_table AS p $families_join $cejoin $allwhere";
 }
 $result = tng_query($query);

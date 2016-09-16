@@ -25,8 +25,7 @@ $citenote = addslashes($citenote);
 $citedatetr = convertDate($citedate);
 $sourceID = strtoupper($sourceID);
 
-$query = "INSERT INTO $citations_table (persfamID, eventID, sourceID, page, quay, citedate, citedatetr, citetext, note, description, ordernum) "
-    . "VALUES('$persfamID', '$eventID', '$sourceID', '$citepage', '$quay', '$citedate', '$citedatetr', '$citetext', '$citenote', '', 999)";
+$query = "INSERT INTO $citations_table (persfamID, eventID, sourceID, page, quay, citedate, citedatetr, citetext, note, description, ordernum) VALUES('$persfamID', '$eventID', '$sourceID', '$citepage', '$quay', '$citedate', '$citedatetr', '$citetext', '$citenote', '', 999)";
 $result = tng_query($query);
 $citationID = tng_insert_id();
 

@@ -158,8 +158,7 @@ if ($type == 'child') {
     $order = tng_num_rows($result);
     tng_free_result($result);
 
-    $query = "INSERT INTO $children_table (familyID, personID, ordernum, frel, mrel, haskids, parentorder, sealdate, sealdatetr, sealplace) "
-        . "VALUES ('$familyID', '$personID', $order, '', '', 0, 0, '', '0000-00-00', '')";
+    $query = "INSERT INTO $children_table (familyID, personID, ordernum, frel, mrel, haskids, parentorder, sealdate, sealdatetr, sealplace) VALUES ('$familyID', '$personID', $order, '', '', 0, 0, '', '0000-00-00', '')";
     $result = tng_query($query);
 
     $query = "SELECT husband,wife FROM $families_table WHERE familyID = '$familyID'";

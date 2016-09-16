@@ -96,8 +96,7 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
       } else {
         $orderstr = "$datefieldtr DESC, p1lastname DESC, p2lastname DESC";
       }
-      $query = "SELECT $families_table.ID, familyID, $families_table.living, $families_table.private, $families_table.branch, p1.lastname AS p1lastname, p2.lastname AS p2lastname, $place, $datefield "
-          . "FROM ($families_table $eventsjoin) $peoplejoin1 $peoplejoin2 WHERE $livingPrivateCondition $allwhere2 ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
+      $query = "SELECT $families_table.ID, familyID, $families_table.living, $families_table.private, $families_table.branch, p1.lastname AS p1lastname, p2.lastname AS p2lastname, $place, $datefield FROM ($families_table $eventsjoin) $peoplejoin1 $peoplejoin2 WHERE $livingPrivateCondition $allwhere2 ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
     } elseif ($prefix == 'I') {
       if ($order == 'name') {
         $orderstr = "lastname, firstname, $datefieldtr";
@@ -108,8 +107,7 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
       } else {
         $orderstr = "$datefieldtr DESC, lastname DESC, firstname DESC";
       }
-      $query = "SELECT $people_table.ID, personID, lastname, lnprefix, firstname, living, private, branch, prefix, suffix, nameorder, $place, $datefield "
-          . "FROM ($people_table $eventsjoin) WHERE $livingPrivateCondition $allwhere2 ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
+      $query = "SELECT $people_table.ID, personID, lastname, lnprefix, firstname, living, private, branch, prefix, suffix, nameorder, $place, $datefield FROM ($people_table $eventsjoin) WHERE $livingPrivateCondition $allwhere2 ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
     }
     $result = tng_query($query);
     $numrows = tng_num_rows($result);

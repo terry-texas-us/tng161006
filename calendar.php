@@ -123,7 +123,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
               $field = $key . 'datetr';
               if (isset($row[$field])) {
                 $date = substr($row[$field], 5);
-                $html = '<img src="' . 'img/' . $val . '" class="calIcon" alt=""><a href="peopleShowPerson.php?personID=' . $row['personID'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
+                $html = '<img src="img/' . $val . '" class="calIcon" alt=""><a href="peopleShowPerson.php?personID=' . $row['personID'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
 
                 if (strpos($date, '-00')) {
                   $html = '<span>' . $html . '</span>';
@@ -196,7 +196,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
               $field = $key . 'datetr';
               if (isset($row[$field])) {
                 $date = substr($row[$field], 5);
-                $html = '<img src="' . 'img/' . $val . '" class="calIcon" alt=""><a href="familiesShowFamily.php?familyID=' . $row['familyID'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
+                $html = '<img src="img/' . $val . '" class="calIcon" alt=""><a href="familiesShowFamily.php?familyID=' . $row['familyID'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
 
                 if (strpos($date, '-00')) {
                   $html = '<span>' . $html . '</span>';
@@ -290,9 +290,9 @@ $headSection->setTitle(uiTextSnippet('calendar'));
             $tag = $row['tag'];
 
             if ($isFam) {
-              $html = '<img src="' . 'img/' . $calEvent[$tag] . '" class="calIcon" alt=""><a href="familiesShowFamily.php?familyID=' . $row['persfamID'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
+              $html = '<img src="img/' . $calEvent[$tag] . '" class="calIcon" alt=""><a href="familiesShowFamily.php?familyID=' . $row['persfamID'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
             } else {
-              $html = '<img src="' . 'img/' . $calEvent[$tag] . '" class="calIcon" alt=""><a href="peopleShowPerson.php?personID=' . $row['persfamID'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
+              $html = '<img src="img/' . $calEvent[$tag] . '" class="calIcon" alt=""><a href="peopleShowPerson.php?personID=' . $row['persfamID'] . '" class="calEvent" title="' . $longname . '">' . $name . '</a>';
             }
 
             $date = substr($row['eventdatetr'], 5);
@@ -473,7 +473,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
           $toHide[] = $key;
         }
         $args = "?living=$showLiving&amp;hide=" . implode(',', $toHide) . "&amp;m=$thisMonth&amp;year=$thisYear";
-        echo '<li><img src="' . 'img/' . $val . '" class="calIcon" alt=""><a href="' . $args . '" class="' . $class . '">' . $text[$key . 'date'] . '</a></li>' . "\n";
+        echo '<li><img src="img/' . $val . '" class="calIcon" alt=""><a href="' . $args . '" class="' . $class . '">' . $text[$key . 'date'] . '</a></li>' . "\n";
       }
     ?>
     </ul>

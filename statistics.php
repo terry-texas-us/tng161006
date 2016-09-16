@@ -218,8 +218,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
         </tr>
         </thead>
       <?php
-      $query = "SELECT personID, firstname, lnprefix, lastname, gedcom, living, private, branch, YEAR(deathdatetr) - YEAR(birthdatetr) AS yearsold, DAYOFYEAR(deathdatetr) - DAYOFYEAR(birthdatetr) AS daysold, IF(DAYOFYEAR(deathdatetr) and DAYOFYEAR(birthdatetr), TO_DAYS(deathdatetr) - TO_DAYS(birthdatetr), (YEAR(deathdatetr) - YEAR(birthdatetr)) * 365) as totaldays FROM $people_table "
-          . "WHERE birthdatetr != '0000-00-00' AND deathdatetr != '0000-00-00' AND birthdate not like 'AFT%' AND deathdate not like 'AFT%' AND birthdate not like 'BEF%' AND deathdate not like 'BEF%' AND birthdate not like 'ABT%' AND deathdate not like 'ABT%' AND birthdate not like 'BET%' AND deathdate not like 'BET%' AND birthdate not like 'CAL%' AND deathdate not like 'CAL%' ORDER BY totaldays DESC LIMIT 10";
+      $query = "SELECT personID, firstname, lnprefix, lastname, gedcom, living, private, branch, YEAR(deathdatetr) - YEAR(birthdatetr) AS yearsold, DAYOFYEAR(deathdatetr) - DAYOFYEAR(birthdatetr) AS daysold, IF(DAYOFYEAR(deathdatetr) and DAYOFYEAR(birthdatetr), TO_DAYS(deathdatetr) - TO_DAYS(birthdatetr), (YEAR(deathdatetr) - YEAR(birthdatetr)) * 365) as totaldays FROM $people_table WHERE birthdatetr != '0000-00-00' AND deathdatetr != '0000-00-00' AND birthdate not like 'AFT%' AND deathdate not like 'AFT%' AND birthdate not like 'BEF%' AND deathdate not like 'BEF%' AND birthdate not like 'ABT%' AND deathdate not like 'ABT%' AND birthdate not like 'BET%' AND deathdate not like 'BET%' AND birthdate not like 'CAL%' AND deathdate not like 'CAL%' ORDER BY totaldays DESC LIMIT 10";
       $result = tng_query($query);
       $numpeople = tng_num_rows($result);
 

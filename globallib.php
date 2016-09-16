@@ -273,8 +273,9 @@ function checkbranch($branch) {
 
   return (!$assignedbranch || (false !== ($pos = strpos($branch, $assignedbranch, 0)))) ? 1 : 0;
 }
-
-// The following function is now obsolete
+/**
+ * The following function is now obsolete
+ */
 function determineLivingRights($row, $usedb = 0, $allow_living_db = 0, $allow_private_db = 0) {
   global $livedefault;
   global $allow_living;

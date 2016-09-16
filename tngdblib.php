@@ -36,8 +36,7 @@ function getChildrenSimple($familyID) {
   global $children_table;
   global $people_table;
 
-  $query = "SELECT $people_table.personID AS pID, $people_table.personID AS personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch FROM ($children_table, $people_table) "
-      . "WHERE familyID = '$familyID' AND $children_table.personID = $people_table.personID ORDER BY ordernum";
+  $query = "SELECT $people_table.personID AS pID, $people_table.personID AS personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch FROM ($children_table, $people_table) WHERE familyID = '$familyID' AND $children_table.personID = $people_table.personID ORDER BY ordernum";
 
   return tng_query($query);
 }
@@ -46,8 +45,7 @@ function getChildrenData($familyID) {
   global $children_table;
   global $people_table;
 
-  $query = "SELECT $people_table.personID AS personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, haskids, sex, living, private, branch FROM ($people_table, $children_table) "
-      . "WHERE familyID = '$familyID' AND $people_table.personID = $children_table.personID ORDER BY ordernum";
+  $query = "SELECT $people_table.personID AS personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, haskids, sex, living, private, branch FROM ($people_table, $children_table) WHERE familyID = '$familyID' AND $people_table.personID = $children_table.personID ORDER BY ordernum";
 
   return tng_query($query);
 }
@@ -56,8 +54,7 @@ function getChildrenDataPlusDates($familyID) {
   global $children_table;
   global $people_table;
 
-  $query = "SELECT $people_table.personID AS personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, burialdate, sex, living, private, branch, ordernum, IF(birthdate != '', YEAR(birthdatetr), YEAR(altbirthdatetr)) AS birth, IF(deathdate != '', YEAR(deathdatetr), YEAR(burialdatetr)) AS death "
-      . "FROM ($children_table, $people_table) WHERE familyID = '$familyID' AND $children_table.personID = $people_table.personID ORDER BY ordernum";
+  $query = "SELECT $people_table.personID AS personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, burialdate, sex, living, private, branch, ordernum, IF(birthdate != '', YEAR(birthdatetr), YEAR(altbirthdatetr)) AS birth, IF(deathdate != '', YEAR(deathdatetr), YEAR(burialdatetr)) AS death FROM ($children_table, $people_table) WHERE familyID = '$familyID' AND $children_table.personID = $people_table.personID ORDER BY ordernum";
 
   return tng_query($query);
 }
@@ -100,8 +97,7 @@ function getParentDataCrossPlusDates($familyID, $spouse1, $spouse1ID, $spouse2) 
   global $families_table;
 
   //Get opposite parent for a family plus dates
-  $query = "SELECT personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, sex, $people_table.living, $people_table.private, $people_table.branch, IF(birthdate != '', YEAR(birthdatetr), YEAR(altbirthdatetr)) AS birth, IF(deathdate != '', YEAR(deathdatetr), YEAR(burialdatetr)) AS death "
-      . "FROM ($families_table, $people_table) WHERE $spouse1 = '$spouse1ID' AND personID = $spouse2 AND familyID = '$familyID'";
+  $query = "SELECT personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, sex, $people_table.living, $people_table.private, $people_table.branch, IF(birthdate != '', YEAR(birthdatetr), YEAR(altbirthdatetr)) AS birth, IF(deathdate != '', YEAR(deathdatetr), YEAR(burialdatetr)) AS death FROM ($families_table, $people_table) WHERE $spouse1 = '$spouse1ID' AND personID = $spouse2 AND familyID = '$familyID'";
 
   return tng_query($query);
 }
@@ -110,8 +106,7 @@ function getParentSimple($familyID, $spouse) {
   global $people_table;
   global $families_table;
 
-  $query = "SELECT personID, lastname, lnprefix, firstname, prefix, suffix, nameorder, $people_table.living, $people_table.private, $people_table.branch "
-      . "FROM ($people_table, $families_table) WHERE personID = $spouse AND familyID = '$familyID'";
+  $query = "SELECT personID, lastname, lnprefix, firstname, prefix, suffix, nameorder, $people_table.living, $people_table.private, $people_table.branch FROM ($people_table, $families_table) WHERE personID = $spouse AND familyID = '$familyID'";
 
   return tng_query($query);
 }
@@ -120,8 +115,7 @@ function getParentSimplePlusDates($familyID, $spouse) {
   global $people_table;
   global $families_table;
 
-  $query = "SELECT personID, lastname, lnprefix, firstname, prefix, suffix, nameorder, birthdate, YEAR(birthdatetr) AS birthyear, deathdate, YEAR(deathdatetr) AS deathyear, $people_table.living, $people_table.private, $people_table.branch "
-      . "FROM ($people_table, $families_table) WHERE personID = $spouse AND familyID = '$familyID'";
+  $query = "SELECT personID, lastname, lnprefix, firstname, prefix, suffix, nameorder, birthdate, YEAR(birthdatetr) AS birthyear, deathdate, YEAR(deathdatetr) AS deathyear, $people_table.living, $people_table.private, $people_table.branch FROM ($people_table, $families_table) WHERE personID = $spouse AND familyID = '$familyID'";
 
   return tng_query($query);
 }
@@ -233,9 +227,7 @@ function getSpousesSimple($spouse1, $spouse1ID, $spouse2, $spouseorder) {
   global $people_table;
 
   // Get basic information for all spouses of a person (spouse1)
-  $query = "SELECT UPPER($spouse2) AS $spouse2, familyID, sex FROM $families_table "
-      . "LEFT JOIN $people_table ON $people_table.personID = $spouse2 "
-      . "WHERE $spouse1 = '$spouse1ID' ORDER BY $spouseorder";
+  $query = "SELECT UPPER($spouse2) AS $spouse2, familyID, sex FROM $families_table LEFT JOIN $people_table ON $people_table.personID = $spouse2 WHERE $spouse1 = '$spouse1ID' ORDER BY $spouseorder";
 
   return tng_query($query);
 }

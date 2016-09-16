@@ -73,8 +73,7 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . ' ' . $pastxdays);
     if ($more) {
       $allwhere .= ' AND ' . $more;
     }
-    $query = "SELECT p.personID, lastname, lnprefix, firstname, birthdate, prefix, suffix, nameorder, living, private, branch, DATE_FORMAT(changedate,'%e %b %Y') AS changedatef, changedby, LPAD(SUBSTRING_INDEX(birthdate, ' ', -1),4,'0') AS birthyear, birthplace, altbirthdate, LPAD(SUBSTRING_INDEX(altbirthdate, ' ', -1),4,'0') AS altbirthyear, altbirthplace FROM $people_table as p "
-        . "WHERE $cutoffstr 1=1 $allwhere ORDER BY changedate DESC, lastname, firstname, birthyear, altbirthyear LIMIT $change_limit";
+    $query = "SELECT p.personID, lastname, lnprefix, firstname, birthdate, prefix, suffix, nameorder, living, private, branch, DATE_FORMAT(changedate,'%e %b %Y') AS changedatef, changedby, LPAD(SUBSTRING_INDEX(birthdate, ' ', -1),4,'0') AS birthyear, birthplace, altbirthdate, LPAD(SUBSTRING_INDEX(altbirthdate, ' ', -1),4,'0') AS altbirthyear, altbirthplace FROM $people_table as p WHERE $cutoffstr 1=1 $allwhere ORDER BY changedate DESC, lastname, firstname, birthyear, altbirthyear LIMIT $change_limit";
     $result = tng_query($query);
     if (tng_num_rows($result)) {
       ?>
@@ -129,9 +128,7 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . ' ' . $pastxdays);
     if ($more) {
       $allwhere .= ' AND ' . $more;
     }
-    $query = "SELECT familyID, husband, wife, marrdate, firstname, lnprefix, lastname, prefix, suffix, nameorder, $families_table.living AS fliving, $families_table.private AS fprivate, $people_table.living AS living, $people_table.private AS private, $people_table.branch AS branch, $families_table.branch AS fbranch, DATE_FORMAT($families_table.changedate,'%e %b %Y') AS changedatef, $families_table.changedby FROM ($families_table) "
-        . "LEFT JOIN $people_table ON $people_table.personID = husband "
-        . "WHERE $famcutoffstr $allwhere ORDER BY $families_table.changedate DESC, lastname LIMIT $change_limit";
+    $query = "SELECT familyID, husband, wife, marrdate, firstname, lnprefix, lastname, prefix, suffix, nameorder, $families_table.living AS fliving, $families_table.private AS fprivate, $people_table.living AS living, $people_table.private AS private, $people_table.branch AS branch, $families_table.branch AS fbranch, DATE_FORMAT($families_table.changedate,'%e %b %Y') AS changedatef, $families_table.changedby FROM ($families_table) LEFT JOIN $people_table ON $people_table.personID = husband WHERE $famcutoffstr $allwhere ORDER BY $families_table.changedate DESC, lastname LIMIT $change_limit";
     $famresult = tng_query($query);
     if (tng_num_rows($famresult)) {
     ?>

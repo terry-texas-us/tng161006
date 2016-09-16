@@ -273,16 +273,16 @@ $headSection->setTitle(uiTextSnippet('media'));
             $numalbums = tng_num_rows($albumresult);
             if ($numalbums) {
               echo "<div class='row'>\n";
-                echo "<div class='offset-md-6 col-md-3'>\n";
-                  echo "<button class='btn btn-secondary' name='xphaction' type='submit'>" . uiTextSnippet('addtoalbum') . "</button>\n";
-                echo "</div>\n";
-                echo "<div class='col-md-3'>\n";
-                  echo "<select class='form-control' name='albumID'>\n";
-                  while ($albumrow = tng_fetch_assoc($albumresult)) {
-                    echo "<option value=\"{$albumrow['albumID']}\">{$albumrow['albumname']}</option>\n";
-                  }
-                  echo "</select>\n";
-                echo "</div>\n";
+              echo "<div class='offset-md-6 col-md-3'>\n";
+              echo "<button class='btn btn-secondary' name='xphaction' type='submit'>" . uiTextSnippet('addtoalbum') . "</button>\n";
+              echo "</div>\n";
+              echo "<div class='col-md-3'>\n";
+              echo "<select class='form-control' name='albumID'>\n";
+              while ($albumrow = tng_fetch_assoc($albumresult)) {
+                echo "<option value=\"{$albumrow['albumID']}\">{$albumrow['albumname']}</option>\n";
+              }
+              echo "</select>\n";
+              echo "</div>\n";
               echo "</div>\n";
             }
             tng_free_result($albumresult);
@@ -373,12 +373,7 @@ $headSection->setTitle(uiTextSnippet('media'));
               $label = uiTextSnippet($mtypeID) ? uiTextSnippet($mtypeID) : $mediatypes_display[$mtypeID];
               echo '<td>' . $label . "</td>\n";
             }
-            $query = "SELECT people.personID AS personID2, familyID, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, $medialinks_table.personID AS personID, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame, linktype FROM $medialinks_table "
-                . "LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID "
-                . "LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID "
-                . "LEFT JOIN $sources_table ON $medialinks_table.personID = $sources_table.sourceID "
-                . "LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID) "
-                . "WHERE mediaID = '{$row['mediaID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT 10";
+            $query = "SELECT people.personID AS personID2, familyID, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, $medialinks_table.personID AS personID, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame, linktype FROM $medialinks_table LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID LEFT JOIN $sources_table ON $medialinks_table.personID = $sources_table.sourceID LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID) WHERE mediaID = '{$row['mediaID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT 10";
             $presult = tng_query($query);
             $medialinktext = '';
             while ($prow = tng_fetch_assoc($presult)) {

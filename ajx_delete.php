@@ -224,7 +224,7 @@ switch ($t) {
 
     $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('report') . " $id";
     break;
-case 'entity':
+  case 'entity':
     $newname = addslashes($delitem);
     if ($entity == 'state') {
       $query = "DELETE FROM $states_table WHERE state = '$newname'";

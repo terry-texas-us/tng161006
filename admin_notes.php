@@ -4,9 +4,7 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-$query = "SELECT $eventtypes_table.eventtypeID, tag, display FROM $events_table "
-    . "LEFT JOIN  $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID "
-    . "WHERE eventID = '$eventID'";
+$query = "SELECT $eventtypes_table.eventtypeID, tag, display FROM $events_table LEFT JOIN  $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE eventID = '$eventID'";
 $eventtypes = tng_query($query);
 $eventtype = tng_fetch_assoc($eventtypes);
 

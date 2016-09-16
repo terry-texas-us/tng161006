@@ -258,8 +258,7 @@ function getIndividualRecord($personID, $prevlevel) {
           }
           $lineinfo = getLine();
           $relationship = $lineinfo['tag'] == 'PEDI' ? $lineinfo['rest'] : '';
-          $query = "INSERT IGNORE INTO $children_table (familyID, personID, mrel, frel, parentorder) "
-              . "VALUES('$famc', '$personID', '$relationship', '$relationship', '$parentorder')";
+          $query = "INSERT IGNORE INTO $children_table (familyID, personID, mrel, frel, parentorder) VALUES('$famc', '$personID', '$relationship', '$relationship', '$parentorder')";
           $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
           $success = tng_affected_rows();
           if ($success) {
@@ -606,8 +605,7 @@ function getIndividualRecord($personID, $prevlevel) {
     //do associations
     if (count($assocarr)) {
       foreach ($assocarr as $assoc) {
-        $query = "INSERT INTO $assoc_table (personID, passocID, relationship, reltype) "
-            . "VALUES('$personID', \"{$assoc['asso']}\", \"{$assoc['rela']}\", \"{$assoc['reltype']}\" )";
+        $query = "INSERT INTO $assoc_table (personID, passocID, relationship, reltype) VALUES('$personID', \"{$assoc['asso']}\", \"{$assoc['rela']}\", \"{$assoc['reltype']}\" )";
         $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
     }
@@ -632,12 +630,10 @@ function getIndividualRecord($personID, $prevlevel) {
         }
         if ($info['SEX'] == 'M') {
           $uspousestr = "husband = \"$personID\", husborder = \"$spousectr\"";
-          $query = "INSERT IGNORE INTO $families_table (familyID, husborder, living, private, changedby) "
-              . "VALUES('$familyID', '$spousectr', '$living', '$private', '$currentuser')";
+          $query = "INSERT IGNORE INTO $families_table (familyID, husborder, living, private, changedby) VALUES('$familyID', '$spousectr', '$living', '$private', '$currentuser')";
         } elseif ($info['SEX'] == 'F') {
           $uspousestr = "wife = \"$personID\", wifeorder = \"$spousectr\"";
-          $query = "INSERT IGNORE INTO $families_table (familyID, wifeorder, living, private, changedby) "
-              . "VALUES('$familyID', '$spousectr', '$living', '$private', '$currentuser')";
+          $query = "INSERT IGNORE INTO $families_table (familyID, wifeorder, living, private, changedby) VALUES('$familyID', '$spousectr', '$living', '$private', '$currentuser')";
         } else {
           $uspousestr = '';
           $query = "INSERT IGNORE INTO $families_table (familyID, changedby) VALUES('$familyID', '$currentuser')";

@@ -54,9 +54,7 @@ function get_details(&$gens, $generation, $max_generations) {
   $delete_variables = ['firstname', 'lnprefix', 'lastname', 'title', 'prefix', 'suffix', 'nameorder', 'allow_living', 'allow_private'];
   foreach ($gens[$generation] as $num => $g) {
     if ($g) {
-      $query = "SELECT personID, firstname, lnprefix, lastname, title, prefix, suffix, nameorder, sex, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, deathdatetr, burialdate, burialdatetr, birthplace, altbirthplace, deathplace, burialplace, husband AS father, wife AS mother, {$people_table}.living, {$people_table}.private, {$people_table}.branch FROM {$people_table} "
-      . "LEFT JOIN {$families_table} ON {$people_table}.famc={$families_table}.familyID "
-      . "WHERE personID='{$g}'";
+      $query = "SELECT personID, firstname, lnprefix, lastname, title, prefix, suffix, nameorder, sex, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, deathdatetr, burialdate, burialdatetr, birthplace, altbirthplace, deathplace, burialplace, husband AS father, wife AS mother, {$people_table}.living, {$people_table}.private, {$people_table}.branch FROM {$people_table} LEFT JOIN {$families_table} ON {$people_table}.famc={$families_table}.familyID WHERE personID='{$g}'";
       $result = tng_query($query);
       if ($result && tng_num_rows($result)) {
         $result = tng_fetch_assoc($result);

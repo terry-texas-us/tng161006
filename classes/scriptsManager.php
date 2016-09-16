@@ -33,34 +33,34 @@ class scriptsManager {
   public static function getScript($scriptName, $flags = null) {
     $out = "<script> // $scriptName\n";
     switch ($scriptName) {
-    case 'litbox-globals':
-      $out .=   "var tnglitbox;\n";
-      $out .=   "var share = 0;\n";
+      case 'litbox-globals':
+        $out .= "var tnglitbox;\n";
+        $out .= "var share = 0;\n";
 
-      if (isset($flags['error']) && $flags['error']) {
-        $out .= "$(document).ready(function(){openLogin('ajx_login.php?p=&message={$flags['error']}');});\n";
-      }
-      break;
+        if (isset($flags['error']) && $flags['error']) {
+          $out .= "$(document).ready(function(){openLogin('ajx_login.php?p=&message={$flags['error']}');});\n";
+        }
+        break;
 
-    case 'toggleall':
-      $out .= "function toggleAll(flag) {\n";
-      $out .= " for (var i = 0; i < document.form2.elements.length; i++) {\n";
-      $out .= "  if (document.form2.elements[i].type == \"checkbox\") {\n";
-      $out .= "   if (flag) {\n";
-      $out .= "     document.form2.elements[i].checked = true;\n";
-      $out .= "   } else {\n";
-      $out .= "    document.form2.elements[i].checked = false;\n";
-      $out .= "   }\n";
-      $out .= "  }\n";
-      $out .= " }\n";
-      $out .= "}\n";
-      break;
-    case 'sharethis':
-      $out .= "stLight.options({publisher: \"be4e16ed-3cf4-460b-aaa4-6ac3d0e3004b\",doNotHash:true,doNotCopy:true,hashAddressBar:false});\n";
-      break;
+      case 'toggleall':
+        $out .= "function toggleAll(flag) {\n";
+        $out .= "for (var i = 0; i < document.form2.elements.length; i++) {\n";
+        $out .= "if (document.form2.elements[i].type == \"checkbox\") {\n";
+        $out .= "if (flag) {\n";
+        $out .= "document.form2.elements[i].checked = true;\n";
+        $out .= "} else {\n";
+        $out .= "document.form2.elements[i].checked = false;\n";
+        $out .= "}\n";
+        $out .= "}\n";
+        $out .= "}\n";
+        $out .= "}\n";
+        break;
+      case 'sharethis':
+        $out .= "stLight.options({publisher: \"be4e16ed-3cf4-460b-aaa4-6ac3d0e3004b\",doNotHash:true,doNotCopy:true,hashAddressBar:false});\n";
+        break;
 
-    default:
-      break;
+      default:
+        break;
     }
     $out .= "</script> <!-- $scriptName -->\n";
     return $out;

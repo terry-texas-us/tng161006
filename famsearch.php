@@ -199,13 +199,8 @@ if ($offset) {
   $page = 1;
 }
 
-$query = "SELECT f.ID, familyID, husband, wife, marrdate, marrplace, divdate, divplace, f.living, f.private, f.branch, father.lastname AS flastname, father.lnprefix AS flnprefix, father.firstname AS ffirstname, father.living AS fliving, father.private AS fprivate, father.branch AS fbranch, mother.lastname AS mlastname, mother.lnprefix AS mlnprefix, mother.firstname AS mfirstname, mother.living AS mliving, mother.private AS fprivate, mother.branch AS mbranch FROM ($families_table AS f) $cejoin "
-    . "LEFT JOIN $people_table AS father ON husband = father.personID "
-    . "LEFT JOIN $people_table AS mother ON wife = mother.personID $allwhere "
-    . "ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
-$query2 = "SELECT count(f.ID) AS fcount FROM ($families_table AS f) $cejoin "
-    . "LEFT JOIN $people_table AS father ON husband = father.personID LEFT JOIN $people_table AS mother ON wife = mother.personID "
-    . "$allwhere";
+$query = "SELECT f.ID, familyID, husband, wife, marrdate, marrplace, divdate, divplace, f.living, f.private, f.branch, father.lastname AS flastname, father.lnprefix AS flnprefix, father.firstname AS ffirstname, father.living AS fliving, father.private AS fprivate, father.branch AS fbranch, mother.lastname AS mlastname, mother.lnprefix AS mlnprefix, mother.firstname AS mfirstname, mother.living AS mliving, mother.private AS fprivate, mother.branch AS mbranch FROM ($families_table AS f) $cejoin LEFT JOIN $people_table AS father ON husband = father.personID LEFT JOIN $people_table AS mother ON wife = mother.personID $allwhere ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
+$query2 = "SELECT count(f.ID) AS fcount FROM ($families_table AS f) $cejoin LEFT JOIN $people_table AS father ON husband = father.personID LEFT JOIN $people_table AS mother ON wife = mother.personID $allwhere";
 
 $result = tng_query($query);
 $numrows = tng_num_rows($result);

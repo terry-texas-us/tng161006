@@ -79,8 +79,7 @@ if ($username && $password && $realname && $email && $fingerprint == 'realperson
     $moreinfo = $deftext['accinactive'];
   }
   $password_type = PasswordType();
-  $query = "INSERT IGNORE INTO $users_table (description, username, password, password_type, realname, phone, email, website, address, city, state, zip, country, notes, role, allow_living, dt_registered) "
-      . "VALUES ('$realname', '$username', '$password', '$password_type', '$realname', '$phone', '$email', '$website', '$address', '$city', '$state', '$zip', '$country', '$notes', 'guest', '$allow_living_val', '$today')";
+  $query = "INSERT IGNORE INTO $users_table (description, username, password, password_type, realname, phone, email, website, address, city, state, zip, country, notes, role, allow_living, dt_registered) VALUES ('$realname', '$username', '$password', '$password_type', '$realname', '$phone', '$email', '$website', '$address', '$city', '$state', '$zip', '$country', '$notes', 'guest', '$allow_living_val', '$today')";
   $result = tng_query($query);
   $success = tng_affected_rows();
 } else {

@@ -314,37 +314,37 @@ require_once 'eventlib.php';
                       $childId = $child['pID'];
                       echo "<div class='sortrow' id='child_{$childId}' data-child-id='{$childId}' data-allow-delete='{$allowDelete}' style='width: 500px; clear: both'";
                       echo ">\n";
-                        echo "<table class='table table-sm'>\n";
-                          echo "<tr>\n";
-                            echo "<td class='dragarea'>";
-                              echo "<img src='img/admArrowUp.gif' alt=''>" . uiTextSnippet('drag') . "\n";
-                              echo "<img src='img/admArrowDown.gif' alt=''>\n";
-                            echo "</td>\n";
-                            echo "<td class='childblock'>\n";
-                              if ($allowDelete) {
-                                echo "<div class='small hide-right' id=\"unlinkc_{$childId}\">\n";
-                                  echo "<a id='remove-child' href='#' data-child-id='{$childId}'>" . uiTextSnippet('remove') . "</a> &nbsp; | &nbsp;\n";
-                                  echo "<a id='delete-child' href='#' data-child-id='{$childId}'>" . uiTextSnippet('delete') . "</a>\n";
-                                echo '</div>';
-                              }
-                              if ($crights['both']) {
-                                if ($child['birthdate']) {
-                                  $birthstring = uiTextSnippet('birthabbr') . ' ' . displayDate($child['birthdate']);
-                                } else {
-                                  if ($child['altbirthdate']) {
-                                    $birthstring = uiTextSnippet('chrabbr') . ' ' . displayDate($child['altbirthdate']);
-                                  } else {
-                                    $birthstring = uiTextSnippet('nobirthinfo');
-                                  }
-                                }
-                                echo getName($child);
-                                echo " - {$childId}<br>$birthstring";
-                              } else {
-                                echo uiTextSnippet('living') . ' - ' . $childId;
-                              }
-                            echo "</td>\n";
-                          echo "</tr>\n";
-                        echo "</table>\n";
+                      echo "<table class='table table-sm'>\n";
+                      echo "<tr>\n";
+                      echo "<td class='dragarea'>";
+                      echo "<img src='img/admArrowUp.gif' alt=''>" . uiTextSnippet('drag') . "\n";
+                      echo "<img src='img/admArrowDown.gif' alt=''>\n";
+                      echo "</td>\n";
+                      echo "<td class='childblock'>\n";
+                      if ($allowDelete) {
+                        echo "<div class='small hide-right' id=\"unlinkc_{$childId}\">\n";
+                        echo "<a id='remove-child' href='#' data-child-id='{$childId}'>" . uiTextSnippet('remove') . "</a> &nbsp; | &nbsp;\n";
+                        echo "<a id='delete-child' href='#' data-child-id='{$childId}'>" . uiTextSnippet('delete') . "</a>\n";
+                        echo '</div>';
+                      }
+                      if ($crights['both']) {
+                        if ($child['birthdate']) {
+                          $birthstring = uiTextSnippet('birthabbr') . ' ' . displayDate($child['birthdate']);
+                        } else {
+                          if ($child['altbirthdate']) {
+                            $birthstring = uiTextSnippet('chrabbr') . ' ' . displayDate($child['altbirthdate']);
+                          } else {
+                            $birthstring = uiTextSnippet('nobirthinfo');
+                          }
+                        }
+                        echo getName($child);
+                        echo " - {$childId}<br>$birthstring";
+                      } else {
+                        echo uiTextSnippet('living') . ' - ' . $childId;
+                      }
+                      echo "</td>\n";
+                      echo "</tr>\n";
+                      echo "</table>\n";
                       echo "</div>\n";
                     }
                   }

@@ -14,11 +14,11 @@ if ($tngmore) {
   $pedigree['regnotes'] = 0;
 }
 
-$detail_link = "register.php?personID=$personID&amp;generations=$generations";
+$detailUrl = "register.php?personID=$personID&amp;generations=$generations";
 if ($pedigree['regnotes']) {
-  $detail_link = "<a href=\"{$detail_link}&tngless=1\">" . uiTextSnippet('lessdetail') . '</a>';
+  $detailUrl = "<a href='{$detailUrl}&amp;tngless=1'>" . uiTextSnippet('lessdetail') . '</a>';
 } else {
-  $detail_link = "<a href=\"{$detail_link}&tngmore=1\">" . uiTextSnippet('moredetail') . '</a>';
+  $detailUrl = "<a href='{$detailUrl}&amp;tngmore=1'>" . uiTextSnippet('moredetail') . '</a>';
 }
 $generation = 1;
 $personcount = 1;
@@ -101,7 +101,7 @@ $headSection->setTitle($row['name']);
     endFormElement();
     ?>
     <div class="titleboxmedium">
-      <div class="pull-xs-right"><?php echo $detail_link; ?></div>
+      <div class="pull-xs-right"><?php echo $detailUrl; ?></div>
       <?php
       while (count($currgen) && $generation <= $generations) {
         echo '<h4>' . uiTextSnippet('generation') . ": $generation</h4>\n";

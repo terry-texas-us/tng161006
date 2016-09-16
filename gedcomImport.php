@@ -191,8 +191,7 @@ function getMoreInfo($persfamID, $prevlevel, $prevtag, $prevtype) {
     $moreinfo['MEDIA'] = $mminfo;
   }
   if (is_array($address)) {
-    $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, www, email, phone) "
-        . "VALUES('{$address['ADR1']}', '{$address['ADR2']}', '{$address['CITY']}', '{$address['STAE']}', '{$address['POST']}', '{$address['CTRY']}', '{$address['WWW']}', '{$address['EMAIL']}', '{$address['PHON']}')";
+    $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, www, email, phone) VALUES('{$address['ADR1']}', '{$address['ADR2']}', '{$address['CITY']}', '{$address['STAE']}', '{$address['POST']}', '{$address['CTRY']}', '{$address['WWW']}', '{$address['EMAIL']}', '{$address['PHON']}')";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     $moreinfo['ADDR'] = tng_insert_id();
     if ($moreinfo['FACT'] == $address['ADR1']) {
@@ -462,8 +461,7 @@ function getPlaceRecord($place, $prevlevel) {
 
   if ($place) {
     $temple = isTemple($place);
-    $query = "INSERT IGNORE INTO $places_table (place, longitude, latitude, zoom, placelevel, temple, notes, geoignore) "
-        . "VALUES('$place', '{$map['long']}', '{$map['lati']}', '{$map['zoom']}', '{$map['placelevel']}', '$temple', '$note', '0')";
+    $query = "INSERT IGNORE INTO $places_table (place, longitude, latitude, zoom, placelevel, temple, notes, geoignore) VALUES('$place', '{$map['long']}', '{$map['lati']}', '{$map['zoom']}', '{$map['placelevel']}', '$temple', '$note', '0')";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
     $success = tng_affected_rows();
@@ -885,8 +883,7 @@ function processMedia($mmcount, $mminfo, $persfamID, $eventID) {
     if (!$mm['TITL']) {
       $mm['TITL'] = $mm['FILE'];
     }
-    $query = "INSERT IGNORE INTO $media_table (mediatypeID, mediakey, path, description, notes, form, usecollfolder, changedate) "
-        . "VALUES('{$mm['mediatypeID']}', '{$mm['OBJE']}', '{$mm['FILE']}', '{$mm['TITL']}', '{$mm['NOTE']}', '{$mm['FORM']}', '1', '{$mm['CHAN']}')";
+    $query = "INSERT IGNORE INTO $media_table (mediatypeID, mediakey, path, description, notes, form, usecollfolder, changedate) VALUES('{$mm['mediatypeID']}', '{$mm['OBJE']}', '{$mm['FILE']}', '{$mm['TITL']}', '{$mm['NOTE']}', '{$mm['FORM']}', '1', '{$mm['CHAN']}')";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
     $success = tng_affected_rows();
@@ -922,8 +919,7 @@ function processMedia($mmcount, $mminfo, $persfamID, $eventID) {
     tng_free_result($result);
 
     //insert ignore or update medialink
-    $query = "INSERT IGNORE INTO $medialinks_table (personID, mediaID, linktype, altdescription, altnotes, ordernum, dontshow, eventID, defphoto)  "
-        . "VALUES('$persfamID', '$mediaID', '{$mm['linktype']}', '{$mm['TITL']}', '{$mm['NOTE']}', '$orderctr', '0', '$eventID', '{$mm['defphoto']}')";
+    $query = "INSERT IGNORE INTO $medialinks_table (personID, mediaID, linktype, altdescription, altnotes, ordernum, dontshow, eventID, defphoto) VALUES('$persfamID', '$mediaID', '{$mm['linktype']}', '{$mm['TITL']}', '{$mm['NOTE']}', '$orderctr', '0', '$eventID', '{$mm['defphoto']}')";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     $psuccess = tng_affected_rows();
     if (!$psuccess && $savestate['del'] != 'no') {
@@ -1105,8 +1101,7 @@ function getMultimediaRecord($objectID, $prevlevel) {
       if (!$mminfo['TITL']) {
         $mminfo['TITL'] = $mminfo['FILE'];
       }
-      $query = "INSERT IGNORE INTO $media_table (mediakey, path, thumbpath, description, notes, form, mediatypeID, usecollfolder, changedate) "
-          . "VALUES('{$mminfo['ID']}', '{$mminfo['FILE']}', '$thumbpath', '{$mminfo['TITL']}', '{$mminfo['NOTE']}', '{$mminfo['FORM']}', '{$mminfo['mediatypeID']}', '{$mminfo['ucf']}', '$inschangedt')";
+      $query = "INSERT IGNORE INTO $media_table (mediakey, path, thumbpath, description, notes, form, mediatypeID, usecollfolder, changedate) VALUES('{$mminfo['ID']}', '{$mminfo['FILE']}', '$thumbpath', '{$mminfo['TITL']}', '{$mminfo['NOTE']}', '{$mminfo['FORM']}', '{$mminfo['mediatypeID']}', '{$mminfo['ucf']}', '$inschangedt')";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
       $success = tng_affected_rows();
@@ -1142,8 +1137,7 @@ function saveCitation($persfamID, $eventID, $cite) {
   if (!$cite['DATETR']) {
     $cite['DATETR'] = '0000-00-00';
   }
-  $query = "INSERT INTO $citations_table (persfamID, eventID, sourceID, description, citedate, citedatetr, citetext, page, quay, note, ordernum ) "
-      . "VALUES('$persfamID', '$eventID', '{$cite['sourceID']}', '{$cite['desc']}', '{$cite['DATE']}', '{$cite['DATETR']}', '{$cite['TEXT']}', '{$cite['PAGE']}', '{$cite['QUAY']}', '{$cite['NOTE']}', '0')";
+  $query = "INSERT INTO $citations_table (persfamID, eventID, sourceID, description, citedate, citedatetr, citetext, page, quay, note, ordernum ) VALUES('$persfamID', '$eventID', '{$cite['sourceID']}', '{$cite['desc']}', '{$cite['DATE']}', '{$cite['DATETR']}', '{$cite['TEXT']}', '{$cite['PAGE']}', '{$cite['QUAY']}', '{$cite['NOTE']}', '0')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 }
 
@@ -1180,8 +1174,7 @@ function saveNote($persfamID, $eventID, $note) {
 
   $privlen = strlen($tngimpcfg['privnote']);
   $secret = ($privlen && substr($note['NOTE'], 0, $privlen) == $tngimpcfg['privnote']) ? 1 : 0;
-  $query = "INSERT IGNORE INTO $notelinks_table (persfamID, eventID, xnoteID, secret, ordernum) "
-      . "VALUES('$persfamID', '$eventID', '$xnoteID', '$secret', '0')";
+  $query = "INSERT IGNORE INTO $notelinks_table (persfamID, eventID, xnoteID, secret, ordernum) VALUES('$persfamID', '$eventID', '$xnoteID', '$secret', '0')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   $ID = tng_insert_id();
 
@@ -1313,8 +1306,7 @@ function saveCustEvents($prefix, $persfamID, $events, $totevents) {
       if ($matches[1]) {
         $eventinfo = '@' . adjustId($matches[1], $savestate['noffset']) . '@';
       }
-      $query = "INSERT INTO $events_table (eventtypeID, persfamID, eventdate, eventdatetr, eventplace, age, agency, cause, addressID, parenttag, info) "
-          . "VALUES('$eventtypeID', '$persfamID', \"" . $eventptr['DATE'] . '", "' . $eventptr['DATETR'] . '", "' . $eventptr['PLAC'] . '", "' . $eventptr['AGE'] . '", "' . $eventptr['AGNC'] . '", "' . $eventptr['CAUS'] . '", "' . $eventptr['ADDR'] . '",  "' . $eventptr['parent'] . "\", '$eventinfo')";
+      $query = "INSERT INTO $events_table (eventtypeID, persfamID, eventdate, eventdatetr, eventplace, age, agency, cause, addressID, parenttag, info) VALUES('$eventtypeID', '$persfamID', \"" . $eventptr['DATE'] . '", "' . $eventptr['DATETR'] . '", "' . $eventptr['PLAC'] . '", "' . $eventptr['AGE'] . '", "' . $eventptr['AGNC'] . '", "' . $eventptr['CAUS'] . '", "' . $eventptr['ADDR'] . '",  "' . $eventptr['parent'] . "\", '$eventinfo')";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $eventID = tng_insert_id();
 

@@ -109,11 +109,11 @@ function addCriteria($row) {
 
   $criteria = '';
   if ($cshorttitle == 'yes') {
-    $criteria .= ' AND shorttitle' . ' = "' . addslashes($row['shorttitle']) . '"';
+    $criteria .= ' AND shorttitle = "' . addslashes($row['shorttitle']) . '"';
     $criteria .= $cignoreblanks == 'yes' ? ' AND shorttitle != ""' : '';
   }
   if ($clongtitle == 'yes') {
-    $criteria .= ' AND title' . ' = "' . addslashes($row['title']) . '"';
+    $criteria .= ' AND title = "' . addslashes($row['title']) . '"';
     $criteria .= $cignoreblanks == 'yes' ? ' AND title != ""' : '';
   }
   if ($cauthor == 'yes') {

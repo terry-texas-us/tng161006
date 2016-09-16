@@ -120,8 +120,7 @@ if ($allwhere2) {
 if ($living == 'yes') {
   $allwhere .= " AND $families_table.living = \"1\"";
 }
-$query = "SELECT $families_table.ID AS ID, familyID, husband, wife, marrdate $otherfields FROM ($families_table $people_join) "
-    . "WHERE $allwhere ORDER BY $sortstr familyID LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT $families_table.ID AS ID, familyID, husband, wife, marrdate $otherfields FROM ($families_table $people_join) WHERE $allwhere ORDER BY $sortstr familyID LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);

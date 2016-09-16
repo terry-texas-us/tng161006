@@ -42,8 +42,7 @@ function getMediaLinksToSave() {
   global $medialinks_table;
 
   $medialinks = [];
-  $query = "SELECT medialinkID, mediaID, $medialinks_table.eventID, persfamID, eventtypeID, eventdate, eventplace, info FROM ($medialinks_table,$events_table) "
-      . "WHERE $medialinks_table.eventID != '' AND $medialinks_table.eventID = $events_table.eventID";
+  $query = "SELECT medialinkID, mediaID, $medialinks_table.eventID, persfamID, eventtypeID, eventdate, eventplace, info FROM ($medialinks_table,$events_table) WHERE $medialinks_table.eventID != '' AND $medialinks_table.eventID = $events_table.eventID";
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {
@@ -60,8 +59,7 @@ function getAlbumLinksToSave() {
   global $album2entities_table;
 
   $albumlinks = [];
-  $query = "SELECT alinkID, albumID, $album2entities_table.eventID, entityID, eventtypeID, eventdate, eventplace, info FROM ($album2entities_table,$events_table) "
-      . "WHERE $album2entities_table.eventID != '' AND $album2entities_table.eventID = $events_table.eventID";
+  $query = "SELECT alinkID, albumID, $album2entities_table.eventID, entityID, eventtypeID, eventdate, eventplace, info FROM ($album2entities_table,$events_table) WHERE $album2entities_table.eventID != '' AND $album2entities_table.eventID = $events_table.eventID";
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {
@@ -196,8 +194,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
         $query = "DELETE FROM $saveimport_table";
         $result = tng_query($query);
 
-        $sql = "INSERT INTO $saveimport_table (filename, icount, ioffset, fcount, foffset, scount, soffset, mcount, pcount, ncount, noffset, roffset, offset, delvar, ucaselast, norecalc, neweronly, media, branch) "
-            . "VALUES(\"{$savestate['filename']}\", 0, \"{$savestate['ioffset']}\", 0, \"{$savestate['foffset']}\", 0, \"{$savestate['soffset']}\", 0, 0, 0, \"{$savestate['noffset']}\", \"{$savestate['roffset']}\", 0, '$del', {$savestate['ucaselast']}, {$savestate['norecalc']}, {$savestate['neweronly']}, $mll, '$branch')";
+        $sql = "INSERT INTO $saveimport_table (filename, icount, ioffset, fcount, foffset, scount, soffset, mcount, pcount, ncount, noffset, roffset, offset, delvar, ucaselast, norecalc, neweronly, media, branch) VALUES(\"{$savestate['filename']}\", 0, \"{$savestate['ioffset']}\", 0, \"{$savestate['foffset']}\", 0, \"{$savestate['soffset']}\", 0, 0, 0, \"{$savestate['noffset']}\", \"{$savestate['roffset']}\", 0, '$del', {$savestate['ucaselast']}, {$savestate['norecalc']}, {$savestate['neweronly']}, $mll, '$branch')";
         $result = tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $sql");
       }
     } elseif ($saveimport && !$openmsg) {

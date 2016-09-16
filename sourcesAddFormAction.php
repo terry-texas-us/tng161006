@@ -40,8 +40,7 @@ $newdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
 if (!$repoID) {
   $repoID = 0;
 }
-$query = "INSERT INTO $sources_table (sourceID, shorttitle, title, author, callnum, publisher, repoID, actualtext, changedate, changedby, type, other, comments) "
-    . "VALUES ('$sourceID', '$shorttitle', '$title', '$author', '$callnum', '$publisher', '$repoID', '$actualtext', '$newdate', '$currentuser', '', '', '')";
+$query = "INSERT INTO $sources_table (sourceID, shorttitle, title, author, callnum, publisher, repoID, actualtext, changedate, changedby, type, other, comments) VALUES ('$sourceID', '$shorttitle', '$title', '$author', '$callnum', '$publisher', '$repoID', '$actualtext', '$newdate', '$currentuser', '', '', '')";
 $result = tng_query($query) or die($error_pfx . uiTextSnippet('cannotexecutequery') . ": $query");
 
 adminwritelog("<a href=\"sourcesEdit.php?sourceID=$sourceID\">" . uiTextSnippet('addnewsource') . ": $sourceID</a>");

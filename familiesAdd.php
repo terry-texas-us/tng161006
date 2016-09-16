@@ -271,8 +271,8 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
   ?>
 
   $('#gedcom').on('change', function () {
-     <?php echo $swapbranches; ?>
-     generateID('family', document.form1.familyID);
+      <?php echo $swapbranches; ?>
+      generateID('family', document.form1.familyID);
   });
 
   function validateFamily(form) {

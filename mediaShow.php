@@ -180,12 +180,7 @@ $headSection->setTitle($titlestr);
       if ($status && uiTextSnippet($status)) {
         $row['status'] = uiTextSnippet($status);
       }
-      $query = "SELECT $medialinks_table.mediaID, $medialinks_table.personID AS personID, people.personID AS personID2, people.living AS living, people.private AS private, people.branch AS branch, $medialinks_table.eventID, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, familyID, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame, deathdate, burialdate, linktype FROM $medialinks_table "
-          . "LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID "
-          . "LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID "
-          . "LEFT JOIN $sources_table ON $medialinks_table.personID = $sources_table.sourceID "
-          . "LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID) "
-          . "WHERE mediaID = '{$row['mediaID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT $maxplus"; 
+      $query = "SELECT $medialinks_table.mediaID, $medialinks_table.personID AS personID, people.personID AS personID2, people.living AS living, people.private AS private, people.branch AS branch, $medialinks_table.eventID, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, familyID, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID, reponame, deathdate, burialdate, linktype FROM $medialinks_table LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID LEFT JOIN $sources_table ON $medialinks_table.personID = $sources_table.sourceID LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID) WHERE mediaID = '{$row['mediaID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT $maxplus"; 
       $presult = tng_query($query);
       $numrows = tng_num_rows($presult);
       $medialinktext = '';

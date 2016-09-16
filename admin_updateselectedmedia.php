@@ -60,12 +60,10 @@ if ($xphaction == uiTextSnippet('convto')) {
         //change ordernum in media link
         //add to end of new media type
         //get all people linked to this item where the item has the same *new* mediatype so we can add one
-        $query3 = "SELECT medialinkID, personID, eventID, mediatypeID FROM ($medialinks_table, $media_table) "
-            . "WHERE $medialinks_table.mediaID = \"$mediaID\" AND mediatypeID = \"$newmediatype\" AND $medialinks_table.mediaID = $media_table.mediaID";
+        $query3 = "SELECT medialinkID, personID, eventID, mediatypeID FROM ($medialinks_table, $media_table) WHERE $medialinks_table.mediaID = \"$mediaID\" AND mediatypeID = \"$newmediatype\" AND $medialinks_table.mediaID = $media_table.mediaID";
         $result3 = tng_query($query3) or die(uiTextSnippet('cannotexecutequery') . ": $query3");
         while ($row3 = tng_fetch_assoc($result3)) {
-          $query4 = "SELECT count(medialinkID) AS count FROM ($media_table, $medialinks_table) "
-              . "WHERE personID = \"{$row3['personID']}\" AND mediatypeID = \"$newmediatype\" AND $medialinks_table.mediaID = $media_table.mediaID AND eventID = \"{$row3['eventID']}\"";
+          $query4 = "SELECT count(medialinkID) AS count FROM ($media_table, $medialinks_table) WHERE personID = \"{$row3['personID']}\" AND mediatypeID = \"$newmediatype\" AND $medialinks_table.mediaID = $media_table.mediaID AND eventID = \"{$row3['eventID']}\"";
           $result4 = tng_query($query4) or die(uiTextSnippet('cannotexecutequery') . ": $query4");
           if ($result4) {
             $row4 = tng_fetch_assoc($result4);

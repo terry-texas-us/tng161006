@@ -202,8 +202,7 @@ function getFamilyRecord($familyID, $prevlevel) {
   if (!$info['SLGS']['DATETR']) {
     $info['SLGS']['DATETR'] = '0000-00-00';
   }
-  $query = "INSERT IGNORE INTO $families_table (familyID, marrdate, marrdatetr, marrplace, marrtype, divdate, divdatetr, divplace, husband, wife, sealdate, sealdatetr, sealplace, changedate, branch, living, private, changedby ) "
-      . "VALUES('$familyID', \"" . $info['MARR']['DATE'] . '", "' . $info['MARR']['DATETR'] . '", "' . $info['MARR']['PLAC'] . '", "' . $info['MARR']['TYPE'] . '", "' . $info['DIV']['DATE'] . '", "' . $info['DIV']['DATETR'] . '", "' . $info['DIV']['PLAC'] . '", "' . $info['HUSB'] . '", "' . $info['WIFE'] . '", "' . $info['SLGS']['DATE'] . '", "' . $info['SLGS']['DATETR'] . "\", '$slgsplace', '$inschangedt', \"{$savestate['branch']}\", '$living', '$private', '$currentuser')";
+  $query = "INSERT IGNORE INTO $families_table (familyID, marrdate, marrdatetr, marrplace, marrtype, divdate, divdatetr, divplace, husband, wife, sealdate, sealdatetr, sealplace, changedate, branch, living, private, changedby ) VALUES('$familyID', \"" . $info['MARR']['DATE'] . '", "' . $info['MARR']['DATETR'] . '", "' . $info['MARR']['PLAC'] . '", "' . $info['MARR']['TYPE'] . '", "' . $info['DIV']['DATE'] . '", "' . $info['DIV']['DATETR'] . '", "' . $info['DIV']['PLAC'] . '", "' . $info['HUSB'] . '", "' . $info['WIFE'] . '", "' . $info['SLGS']['DATE'] . '", "' . $info['SLGS']['DATETR'] . "\", '$slgsplace', '$inschangedt', \"{$savestate['branch']}\", '$living', '$private', '$currentuser')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   $success = tng_affected_rows();
   if (!$success && $savestate['del'] != 'no') {
@@ -255,8 +254,7 @@ function getFamilyRecord($familyID, $prevlevel) {
     //do associations
     if (count($assocarr)) {
       foreach ($assocarr as $assoc) {
-        $query = "INSERT INTO $assoc_table (personID, passocID, relationship, reltype) "
-            . "VALUES('$familyID', \"{$assoc['asso']}\", \"{$assoc['rela']}\", \"{$assoc['reltype']}\" )";
+        $query = "INSERT INTO $assoc_table (personID, passocID, relationship, reltype) VALUES('$familyID', \"{$assoc['asso']}\", \"{$assoc['rela']}\", \"{$assoc['reltype']}\" )";
         $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
     }

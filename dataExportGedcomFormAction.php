@@ -212,11 +212,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       global $events_table;
       global $xnotes;
 
-      $query = "SELECT $notelinks_table.ID AS ID, secret, $xnotes_table.note AS note, $xnotes_table.noteID AS noteID, $notelinks_table.eventID FROM $notelinks_table "
-          . "LEFT JOIN  $xnotes_table ON $notelinks_table.xnoteID = $xnotes_table.ID "
-          . "LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID "
-          . "LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID "
-          . "WHERE $notelinks_table.persfamID = '$id' ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum, ID";
+      $query = "SELECT $notelinks_table.ID AS ID, secret, $xnotes_table.note AS note, $xnotes_table.noteID AS noteID, $notelinks_table.eventID FROM $notelinks_table LEFT JOIN  $xnotes_table ON $notelinks_table.xnoteID = $xnotes_table.ID LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE $notelinks_table.persfamID = '$id' ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum, ID";
       $notelinks = tng_query($query);
       $notearray = [];
       while ($notelink = tng_fetch_assoc($notelinks)) {
@@ -1309,8 +1305,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         }
         tng_free_result($result);
 
-        $query = "SELECT $medialinks_table.personID AS place, $places_table.notes AS notes, latitude, longitude FROM ($places_table, $medialinks_table) "
-            . "WHERE linktype = 'L' $places_table.place = $medialinks_table.personID";
+        $query = "SELECT $medialinks_table.personID AS place, $places_table.notes AS notes, latitude, longitude FROM ($places_table, $medialinks_table) WHERE linktype = 'L' $places_table.place = $medialinks_table.personID";
         $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         while ($row = tng_fetch_assoc($result)) {
           if (!in_array($place, $places)) {
@@ -1423,8 +1418,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         $query = "DELETE from $saveimport_table";
         $result = tng_query($query);
 
-        $sql = "INSERT INTO $saveimport_table (filename, offset, media) "
-            . "VALUES('$filename', 0, '$exportmedia')";
+        $sql = "INSERT INTO $saveimport_table (filename, offset, media) VALUES('$filename', 0, '$exportmedia')";
         $result = tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $sql");
       }
     }

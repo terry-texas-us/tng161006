@@ -4,9 +4,7 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-$query = "SELECT $eventtypes_table.eventtypeID, tag, display FROM $events_table "
-    . "LEFT JOIN  $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID "
-    . "WHERE eventID = '$eventID'";
+$query = "SELECT $eventtypes_table.eventtypeID, tag, display FROM $events_table LEFT JOIN  $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE eventID = '$eventID'";
 $eventtypes = tng_query($query);
 $eventtype = tng_fetch_assoc($eventtypes);
 
@@ -39,9 +37,7 @@ $helplang = findhelp('citations_help.php');
 header('Content-type:text/html; charset=' . $session_charset);
 
 $xnotestr = $noteID ? " OR persfamID = '$noteID'" : '';
-$query = "SELECT citationID, $citations_table.sourceID AS sourceID, description, title, shorttitle FROM $citations_table "
-    . "LEFT JOIN $sources_table ON $citations_table.sourceID = $sources_table.sourceID "
-    . "WHERE ((persfamID = '$persfamID' AND eventID = '$eventID')$xnotestr) ORDER BY ordernum, citationID";
+$query = "SELECT citationID, $citations_table.sourceID AS sourceID, description, title, shorttitle FROM $citations_table LEFT JOIN $sources_table ON $citations_table.sourceID = $sources_table.sourceID WHERE ((persfamID = '$persfamID' AND eventID = '$eventID')$xnotestr) ORDER BY ordernum, citationID";
 $citresult = tng_query($query);
 $citationcount = tng_num_rows($citresult);
 ?>

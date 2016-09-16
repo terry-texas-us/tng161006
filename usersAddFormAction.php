@@ -81,8 +81,7 @@ if ($result && tng_num_rows($result)) {
 }
 
 if (!$duplicate) {
-  $query = "INSERT IGNORE INTO $users_table (description, username, password, password_type, realname, phone, email, website, address, city, state, zip, country, notes, personID, role, allow_edit, allow_add, tentative_edit, allow_delete, allow_lds, allow_living, allow_private, allow_ged, allow_pdf, allow_profile, branch, dt_activated, no_email, disabled) "
-      . "VALUES ('$description', '$username', '$password', '$password_type', '$realname', '$phone', '$email', '$website', '$address', '$city', '$state', '$zip', '$country', '$notes', '$personID', '$role', '$form_allow_edit', '$form_allow_add', '$form_tentative_edit', '$form_allow_delete', '$form_allow_lds', '$form_allow_living', '$form_allow_private', '$form_allow_ged', '$form_allow_pdf', '$form_allow_profile', '$branch', '$today', '$no_email', '$disabled')";
+  $query = "INSERT IGNORE INTO $users_table (description, username, password, password_type, realname, phone, email, website, address, city, state, zip, country, notes, personID, role, allow_edit, allow_add, tentative_edit, allow_delete, allow_lds, allow_living, allow_private, allow_ged, allow_pdf, allow_profile, branch, dt_activated, no_email, disabled) VALUES ('$description', '$username', '$password', '$password_type', '$realname', '$phone', '$email', '$website', '$address', '$city', '$state', '$zip', '$country', '$notes', '$personID', '$role', '$form_allow_edit', '$form_allow_add', '$form_tentative_edit', '$form_allow_delete', '$form_allow_lds', '$form_allow_living', '$form_allow_private', '$form_allow_ged', '$form_allow_pdf', '$form_allow_profile', '$branch', '$today', '$no_email', '$disabled')";
   $result = tng_query($query);
 
   if ($notify && $email) {

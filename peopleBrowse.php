@@ -103,21 +103,15 @@ if ($noparents) {
   $noparentjoin = '';
 }
 if ($nospouse) {
-  $nospousejoin = "LEFT JOIN $families_table as nospousef ON $people_table.personID = nospousef.husband "
-          . "LEFT JOIN $families_table as nospousem ON $people_table.personID = nospousem.wife";
+  $nospousejoin = "LEFT JOIN $families_table as nospousef ON $people_table.personID = nospousef.husband LEFT JOIN $families_table as nospousem ON $people_table.personID = nospousem.wife";
   $allwhere .= ' AND nospousef.familyID is NULL AND nospousem.familyID is NULL';
 } else {
   $nospousejoin = '';
 }
 if ($nokids) {
-  $nokidjoin = "LEFT OUTER JOIN $families_table AS familiesH ON $people_table.personID=familiesH.husband "
-          . "LEFT OUTER JOIN $families_table AS familiesW ON $people_table.personID=familiesW.wife "
-          . "LEFT OUTER JOIN $children_table AS childrenH ON familiesH.familyID=childrenH.familyID "
-          . "LEFT OUTER JOIN $children_table AS childrenW ON familiesW.familyID=childrenW.familyID ";
+  $nokidjoin = "LEFT OUTER JOIN $families_table AS familiesH ON $people_table.personID=familiesH.husband LEFT OUTER JOIN $families_table AS familiesW ON $people_table.personID=familiesW.wife LEFT OUTER JOIN $children_table AS childrenH ON familiesH.familyID=childrenH.familyID LEFT OUTER JOIN $children_table AS childrenW ON familiesW.familyID=childrenW.familyID ";
   $nokidhaving = 'HAVING ChildrenCount = 0 ';
-  $nokidgroup = "GROUP BY $people_table.personID, $people_table.lastname, $people_table.firstname, $people_table.firstname, $people_table.lnprefix, "
-          . "$people_table.prefix, $people_table.suffix, $people_table.nameorder, $people_table.birthdate, birthyear, $people_table.birthplace, $people_table.altbirthdate, altbirthyear, "
-          . "$people_table.altbirthplace ";
+  $nokidgroup = "GROUP BY $people_table.personID, $people_table.lastname, $people_table.firstname, $people_table.firstname, $people_table.lnprefix, $people_table.prefix, $people_table.suffix, $people_table.nameorder, $people_table.birthdate, birthyear, $people_table.birthplace, $people_table.altbirthdate, altbirthyear, $people_table.altbirthplace ";
   $nokidselect = ', SUM((childrenH.familyID is not NULL) + (childrenW.familyID is not NULL)) AS ChildrenCount ';
   $nokidgroup2 = "GROUP BY $people_table.personID, $people_table.lastname, $people_table.firstname, $people_table.firstname, $people_table.lnprefix ";
 } else {
@@ -126,18 +120,13 @@ if ($nokids) {
   $nokidgroup = '';
   $nokidselect = '';
 }
-$query = "SELECT $people_table.ID, $people_table.personID, lastname, firstname, lnprefix, prefix, suffix, nameorder, birthdate, LPAD(SUBSTRING_INDEX(birthdate, ' ', -1), 4, '0') AS birthyear, birthplace, altbirthdate, LPAD(SUBSTRING_INDEX(altbirthdate, ' ', -1), 4, '0') AS altbirthyear, altbirthplace, deathdate, LPAD(SUBSTRING_INDEX(deathdate, ' ', -1), 4, '0') AS deathyear, deathplace $nokidselect "
-  . "FROM ($people_table) $nokidjoin $noparentjoin $nospousejoin "
-  . "WHERE $allwhere $nokidgroup $nokidhaving "
-  . "ORDER BY lastname, lnprefix, firstname, birthyear, altbirthyear LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT $people_table.ID, $people_table.personID, lastname, firstname, lnprefix, prefix, suffix, nameorder, birthdate, LPAD(SUBSTRING_INDEX(birthdate, ' ', -1), 4, '0') AS birthyear, birthplace, altbirthdate, LPAD(SUBSTRING_INDEX(altbirthdate, ' ', -1), 4, '0') AS altbirthyear, altbirthplace, deathdate, LPAD(SUBSTRING_INDEX(deathdate, ' ', -1), 4, '0') AS deathyear, deathplace $nokidselect FROM ($people_table) $nokidjoin $noparentjoin $nospousejoin WHERE $allwhere $nokidgroup $nokidhaving ORDER BY lastname, lnprefix, firstname, birthyear, altbirthyear LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
   if ($nokids) {
-    $query = "SELECT $people_table.ID, $people_table.personID, lastname, firstname, lnprefix $nokidselect "
-            . "FROM ($people_table) $nokidjoin $noparentjoin $nospousejoin "
-            . "WHERE $allwhere $nokidgroup2 $nokidhaving";
+    $query = "SELECT $people_table.ID, $people_table.personID, lastname, firstname, lnprefix $nokidselect FROM ($people_table) $nokidjoin $noparentjoin $nospousejoin WHERE $allwhere $nokidgroup2 $nokidhaving";
     $result2 = tng_query($query);
     $totrows = tng_num_rows($result2);
   } else {

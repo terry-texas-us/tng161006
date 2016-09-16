@@ -88,8 +88,7 @@ $headSection->setTitle(uiTextSnippet('placelist') . ': ' . uiTextSnippet('top') 
                 $specificcount = $countrow['placecount'];
                 tng_free_result($result2);
 
-                $searchlink = $specificcount ? " <a href='placesearch.php?psearch=$place2'>"
-                        . "<img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=''></a>" : '';
+                $searchlink = $specificcount ? " <a href='placesearch.php?psearch=$place2'><img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=''></a>" : '';
                 if ($place[placecount] > 1 || !$specificcount) {
                   $name = "<a href=\"places-oneletter.php?offset=$offset&amp;psearch=$place2\">{$place['myplace']}</a>";
                   echo "$counter. $name ({$place['placecount']}) $searchlink<br>\n";

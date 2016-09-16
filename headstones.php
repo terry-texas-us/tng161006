@@ -147,9 +147,7 @@ if ($location) {
       }
       $body .= "<div class=\"titlebox\">\n";
       $thiscem = $subquery ? $cemetery['cemeteryID'] : '';
-      $query = "SELECT DISTINCT $media_table.mediaID, description, notes, path, thumbpath, status, plot, showmap, usecollfolder, form, mediatypeID, abspath, newwindow FROM $media_table "
-          . "LEFT JOIN $medialinks_table ON $media_table.mediaID = $medialinks_table.mediaID "
-          . "WHERE mediatypeID = 'headstones' AND cemeteryID = '$thiscem' ORDER BY description LIMIT $newoffset" . $maxsearchresults;
+      $query = "SELECT DISTINCT $media_table.mediaID, description, notes, path, thumbpath, status, plot, showmap, usecollfolder, form, mediatypeID, abspath, newwindow FROM $media_table LEFT JOIN $medialinks_table ON $media_table.mediaID = $medialinks_table.mediaID WHERE mediatypeID = 'headstones' AND cemeteryID = '$thiscem' ORDER BY description LIMIT $newoffset" . $maxsearchresults;
       if (!$subquery) {
         $cemetery = [];
         $cemetery['cemname'] = uiTextSnippet('nocemetery');
@@ -159,9 +157,7 @@ if ($location) {
 
       $numrows = tng_num_rows($hsresult);
       if ($numrows == $maxsearchresults || $offsetplus > 1) {
-        $query = "SELECT count(DISTINCT $media_table.mediaID) AS hscount FROM $media_table "
-            . "LEFT JOIN $medialinks_table ON $media_table.mediaID = $medialinks_table.mediaID "
-            . "WHERE mediatypeID = 'headstones' AND cemeteryID = '$thiscem'";
+        $query = "SELECT count(DISTINCT $media_table.mediaID) AS hscount FROM $media_table LEFT JOIN $medialinks_table ON $media_table.mediaID = $medialinks_table.mediaID WHERE mediatypeID = 'headstones' AND cemeteryID = '$thiscem'";
         $result2 = tng_query($query);
         $row = tng_fetch_assoc($result2);
         $totrows = $row['hscount'];
@@ -255,12 +251,7 @@ if ($location) {
           $hs['status'] = uiTextSnippet($status);
         }
 
-        $query = "SELECT medialinkID, $medialinks_table.personID AS personID, people.personID AS personID2, familyID, people.living AS living, people.private AS private, people.branch AS branch, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID,reponame, deathdate, burialdate, linktype FROM ($medialinks_table) "
-            . "LEFT JOIN $people_table AS people ON ($medialinks_table.personID = people.personID) "
-            . "LEFT JOIN $families_table ON ($medialinks_table.personID = $families_table.familyID) "
-            . "LEFT JOIN $sources_table ON ($medialinks_table.personID = $sources_table.sourceID) "
-            . "LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID) "
-            . "WHERE mediaID = \"{$hs['mediaID']}\" ORDER BY lastname, lnprefix, firstname, $medialinks_table.personID";
+        $query = "SELECT medialinkID, $medialinks_table.personID AS personID, people.personID AS personID2, familyID, people.living AS living, people.private AS private, people.branch AS branch, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID,reponame, deathdate, burialdate, linktype FROM ($medialinks_table) LEFT JOIN $people_table AS people ON ($medialinks_table.personID = people.personID) LEFT JOIN $families_table ON ($medialinks_table.personID = $families_table.familyID) LEFT JOIN $sources_table ON ($medialinks_table.personID = $sources_table.sourceID) LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID) WHERE mediaID = \"{$hs['mediaID']}\" ORDER BY lastname, lnprefix, firstname, $medialinks_table.personID";
 
         $presult = tng_query($query);
         $hslinktext = '';
