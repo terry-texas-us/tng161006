@@ -19,7 +19,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     echo $adminHeaderSection->build('datamaint-gedexport', $message);
     $navList = new navList('');
     $navList->appendItem([true, 'dataImportGedcom.php', uiTextSnippet('import'), 'import']);
-    //    $navList->appendItem([$allow_ged, 'dataExportGedcom.php', uiTextSnippet('export'), 'export']);
+    //    $navList->appendItem([$allowGed, 'dataExportGedcom.php', uiTextSnippet('export'), 'export']);
     $navList->appendItem([true, 'dataSecondaryProcesses.php', uiTextSnippet('secondarymaint'), 'second']);
     echo $navList->build('export');
     ?>

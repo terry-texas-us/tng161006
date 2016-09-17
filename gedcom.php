@@ -18,7 +18,7 @@ $ldsOK = determineLDSRights();
 $query = "SELECT email, owner FROM $treesTable";
 $treeresult = tng_query($query);
 $treerow = tng_fetch_assoc($treeresult);
-if (!$allow_ged) {
+if (!$allowGed) {
   exit;
 }
 tng_free_result($treeresult);

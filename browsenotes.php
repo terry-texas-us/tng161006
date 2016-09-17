@@ -30,7 +30,7 @@ if ($offset) {
 }
 $wherestr = "WHERE $xnotes_table.ID = $notelinks_table.xnoteID";
 
-if (!$allow_private) {
+if (!$allowPrivate) {
   $wherestr .= " AND $notelinks_table.secret != \"1\"";
 }
 if ($notesearch) {

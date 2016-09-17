@@ -131,7 +131,7 @@ $headSection->setTitle(uiTextSnippet('addnewperson'));
         echo buildEventRow('deathdate', 'deathplace', 'DEAT', '');
         echo buildEventRow('burialdate', 'burialplace', 'BURI', '');
         echo "<input id='burialtype' name='burialtype' type='checkbox' value='1'> <label for='burialtype'>" . uiTextSnippet('cremated') . "</label>\n";
-        if ($allow_lds) {
+        if ($allowLds) {
           echo buildEventRow('baptdate', 'baptplace', 'BAPL', '');
           echo buildEventRow('confdate', 'confplace', 'CONL', '');
           echo buildEventRow('initdate', 'initplace', 'INIT', '');

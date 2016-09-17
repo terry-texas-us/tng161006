@@ -37,7 +37,7 @@ if ($linktype == 'I') {
   foreach ($list as $eventtype) {
     doEvent($eventtype, uiTextSnippet($eventtype), '');
   }
-  if ($allow_lds) {
+  if ($allowLds) {
     $ldslist = ['BAPL', 'CONL', 'INIT', 'ENDL', 'SLGC'];
     foreach ($ldslist as $eventtype) {
       doEvent($eventtype, uiTextSnippet($eventtype), '');
@@ -49,7 +49,7 @@ if ($linktype == 'I') {
   foreach ($list as $eventtype) {
     doEvent($eventtype, uiTextSnippet($eventtype), '');
   }
-  if ($allow_lds) {
+  if ($allowLds) {
     $ldslist = ['SLGS'];
     foreach ($ldslist as $eventtype) {
       doEvent($eventtype, uiTextSnippet($eventtype), '');

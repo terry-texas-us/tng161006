@@ -127,7 +127,7 @@ require_once 'eventlib.php';
       }
       echo buildEventRow('deathdate', 'deathplace', 'DEAT', '');
       echo buildEventRow('burialdate', 'burialplace', 'BURI', '');
-      if ($allow_lds) {
+      if ($allowLds) {
         echo '<br>';
         echo buildEventRow('baptdate', 'baptplace', 'BAPL', '');
         echo buildEventRow('confdate', 'confplace', 'CONL', '');

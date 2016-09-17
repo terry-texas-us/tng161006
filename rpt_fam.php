@@ -314,7 +314,6 @@ function displayChild($personID, $childcount) {
     $fam['allow_living'] = $frights['living'];
     $fam['allow_private'] = $frights['private'];
 
-    //$fam['allow_living'] = !$fam['fliving'] || $livedefault == 2 || ( $allow_living && checkbranch( $fam['fbranch'] ) ) ? 1 : 0;
     $spousename = getName($fam);
     $fam['living'] = $fam['fliving'];
     $fam['private'] = $fam['fprivate'];

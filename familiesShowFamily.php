@@ -574,7 +574,7 @@ $headSection->setTitle($headTitle);
     } else {
       $innermenu = '<span>' . uiTextSnippet('faminfo') . "</span>\n";
     }
-    if ($allow_pdf && $rightbranch) {
+    if ($allowPdf && $rightbranch) {
       $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=fam&amp;familyID=$familyID');return false;\">PDF</a>\n";
     }
     echo buildFamilyMenu('family', $familyID);

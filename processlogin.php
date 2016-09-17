@@ -78,24 +78,24 @@ if ($check) {
       $_SESSION['tngrole'] = $row['role'];
 
       if (!$livedefault) { //depends on permissions
-        $allow_living = $_SESSION['allow_living'] = $row['allow_living'];
+        $allowLiving = $_SESSION['allow_living'] = $row['allow_living'];
       } elseif ($livedefault == 2) { //always do living
-        $allow_living = $_SESSION['allow_living'] = 1;
+        $allowLiving = $_SESSION['allow_living'] = 1;
       } else { //never do living
-        $allow_living = $_SESSION['allow_living'] = 0;
+        $allowLiving = $_SESSION['allow_living'] = 0;
       }
-      $allow_private = $_SESSION['allow_private'] = $row['allow_private'];
+      $allowPrivate = $_SESSION['allow_private'] = $row['allow_private'];
 
-      $allow_ged = $_SESSION['allow_ged'] = $row['allow_ged'];
-      $allow_pdf = $_SESSION['allow_pdf'] = $row['allow_pdf'];
+      $allowGed = $_SESSION['allow_ged'] = $row['allow_ged'];
+      $allowPdf = $_SESSION['allow_pdf'] = $row['allow_pdf'];
       $allow_profile = $_SESSION['allow_profile'] = $row['allow_profile'];
 
       if (!$ldsdefault) { //always do lds
-        $allow_lds = $_SESSION['allow_lds'] = 1;
+        $allowLds = $_SESSION['allow_lds'] = 1;
       } elseif ($ldsdefault == 2) { //depends on permissions
-        $allow_lds = $_SESSION['allow_lds'] = $row['allow_lds'];
+        $allowLds = $_SESSION['allow_lds'] = $row['allow_lds'];
       } else { //never do lds
-        $allow_lds = $_SESSION['allow_lds'] = 0;
+        $allowLds = $_SESSION['allow_lds'] = 0;
       }
       $assignedbranch = $_SESSION['assignedbranch'] = $row['branch'];
       $currentuser = $_SESSION['currentuser'] = $row['username'];

@@ -278,12 +278,12 @@ function checkbranch($branch) {
  */
 function determineLivingRights($row, $usedb = 0, $allow_living_db = 0, $allow_private_db = 0) {
   global $livedefault;
-  global $allow_living;
-  global $allow_private;
+  global $allowLiving;
+  global $allowPrivate;
   global $rightbranch;
 
-  $allow_living_loc = $usedb ? $allow_living_db : $allow_living;
-  $allow_private_loc = $usedb ? $allow_private_db : $allow_private;
+  $allow_living_loc = $usedb ? $allow_living_db : $allowLiving;
+  $allow_private_loc = $usedb ? $allow_private_db : $allowPrivate;
 
   $rightbranch = checkbranch($row['branch']) ? 1 : 0;
   $living = $row['living'];
@@ -314,9 +314,9 @@ function determineLivingRights($row, $usedb = 0, $allow_living_db = 0, $allow_pr
 function determineLivingPrivateRights($row, $pagerightbranch = -1) {
   global $livedefault;
   global $ldsdefault;
-  global $allow_living;
-  global $allow_private;
-  global $allow_lds;
+  global $allowLiving;
+  global $allowPrivate;
+  global $allowLds;
 
   $rights = ['private' => true, 'living' => true, 'lds' => (!$ldsdefault ? true : false)];
 
@@ -327,13 +327,13 @@ function determineLivingPrivateRights($row, $pagerightbranch = -1) {
     $rightbranch = $pagerightbranch >= 0 ? $pagerightbranch : (checkbranch($row['branch']));
     $user_person = $_SESSION['mypersonID'] && $_SESSION['mypersonID'] == $row['personID'];
 
-    if ($living && (!$allow_living || !$rightbranch) && !$user_person) {
+    if ($living && (!$allowLiving || !$rightbranch) && !$user_person) {
       $rights['living'] = false;
     }
-    if ($private && (!$allow_private || !$rightbranch) && !$user_person) {
+    if ($private && (!$allowPrivate || !$rightbranch) && !$user_person) {
       $rights['private'] = false;
     }
-    if ($ldsdefault == 2 && (($allow_lds && $rightbranch) || $user_person)) {
+    if ($ldsdefault == 2 && (($allowLds && $rightbranch) || $user_person)) {
       $rights['lds'] = true;
     }
   }
@@ -344,9 +344,9 @@ function determineLivingPrivateRights($row, $pagerightbranch = -1) {
 
 function determineLDSRights() {
   global $ldsdefault;
-  global $allow_lds;
+  global $allowLds;
 
-  $ldsOK = !$ldsdefault || ($ldsdefault == 2 && $allow_lds) ? true : false;
+  $ldsOK = !$ldsdefault || ($ldsdefault == 2 && $allowLds) ? true : false;
 
   return $ldsOK;
 }
@@ -355,8 +355,8 @@ function getLivingPrivateRestrictions($table, $firstname, $allOtherInput) {
   global $livedefault;
   global $nonames;
   global $tngconfig;
-  global $allow_living;
-  global $allow_private;
+  global $allowLiving;
+  global $allowPrivate;
   global $assignedbranch;
   global $people_table;
 
@@ -364,10 +364,10 @@ function getLivingPrivateRestrictions($table, $firstname, $allOtherInput) {
   if ($table) {
     $table .= '.';
   }
-  $limitedLivingRights = $allow_living && !$livedefault;
-  $limitedPrivateRights = $allow_private;
-  $allLivingRights = $livedefault == 2 || ($allow_living);
-  $allPrivateRights = $allow_private;
+  $limitedLivingRights = $allowLiving && !$livedefault;
+  $limitedPrivateRights = $allowPrivate;
+  $allLivingRights = $livedefault == 2 || ($allowLiving);
+  $allPrivateRights = $allowPrivate;
   $livingNameRestrictions = $livedefault == 1 || (!$livedefault && ($nonames == 1 || ($nonames == 2 && $firstname)) && !$allLivingRights);
   $privateNameRestrictions = ($tngconfig['nnpriv'] == 1 || ($tngconfig['nnpriv'] == 2 && $firstname)) && !$allPrivateRights;
 
@@ -413,23 +413,23 @@ function checkLivingLinks($itemID) {
   global $people_table;
   global $medialinks_table;
   global $families_table;
-  global $allow_living;
-  global $allow_private;
+  global $allowLiving;
+  global $allowPrivate;
 
-  if (($livedefault == 2 || $allow_living) && $allow_private) {
+  if (($livedefault == 2 || $allowLiving) && $allowPrivate) {
     return true;
   }
   $icriteria = $fcriteria = '';
-  if (!$allow_living && !$allow_private) {
+  if (!$allowLiving && !$allowPrivate) {
     // Viewer can not see media of Living individuals regardless of branch,
     // So need to check all links to this media for living individuals (don't narrow the search.)
     $icriteria = $fcriteria = 'AND (living = 1 OR private = 1)';
   } else {
     // Viewer can see some media of Living individuals, now figure if there are some the viewer should not see
-    if (!$allow_living && $livedefault != 2) {
+    if (!$allowLiving && $livedefault != 2) {
       $icriteria = $icriteria ? "AND (living = 1 OR ($icriteria AND private = 1))" : 'AND living = 1';
       $fcriteria = $fcriteria ? "AND (living = 1 OR ($fcriteria AND private = 1))" : 'AND living = 1';
-    } elseif (!$allow_private) {    //!$allow_private_db
+    } elseif (!$allowPrivate) {    //!$allow_private_db
       $icriteria = $icriteria ? "AND (private = 1 OR ($icriteria AND living = 1))" : 'AND private = 1';
       $fcriteria = $fcriteria ? "AND (private = 1 OR ($fcriteria AND living = 1))" : 'AND private = 1';
     } else {

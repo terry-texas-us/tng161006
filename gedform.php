@@ -13,7 +13,7 @@ if ($result) {
   $name = getName($row);
   tng_free_result($result);
 }
-if (!$allow_ged || !$rightbranch) {
+if (!$allowGed || !$rightbranch) {
   exit;
 }
 initMediaTypes();

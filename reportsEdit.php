@@ -46,7 +46,7 @@ $dfields['title'] = 'title';
 $dfields['suffix'] = 'suffix';
 $dfields['prefix'] = 'prefix';
 $dfields['gedcom'] = 'tree';
-if ($allow_lds) {
+if ($allowLds) {
   $dfields['baptdate'] = 'ldsbapldate';
   $dfields['baptplace'] = 'ldsbaplplace';
   $dfields['confdate'] = 'ldsconfdate';
@@ -96,7 +96,7 @@ $cfields['title'] = 'title';
 $cfields['prefix'] = 'prefix';
 $cfields['suffix'] = 'suffix';
 $cfields['gedcom'] = 'tree';
-if ($allow_lds) {
+if ($allowLds) {
   $cfields['baptdate'] = 'ldsbapldate';
   $cfields['baptdatetr'] = 'ldsbapldatetr';
   $cfields['baptplace'] = 'ldsbaplplace';

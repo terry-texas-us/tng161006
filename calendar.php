@@ -62,7 +62,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     $lastMonthYear  = $lastMonth == 12 ? $thisYear - 1 : $thisYear;
     $lastYear  = $thisYear - 1;
 
-    $showLiving  = $allow_living ? (isset($_GET['living']) ? $_GET['living'] : 2) : 0;
+    $showLiving  = $allowLiving ? (isset($_GET['living']) ? $_GET['living'] : 2) : 0;
     $hideEvents  = isset($_GET['hide']) ? explode(',', $_GET['hide']) : $defaultHide;
 
     $events = [];
@@ -336,7 +336,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     </div>
 
     <?php
-      if($allow_living) {
+      if($allowLiving) {
     ?>
     <div style="text-align: right;">
     <div style="float: left;">

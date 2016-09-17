@@ -44,11 +44,11 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$adminLo
   $allowMediaEdit = $_SESSION['allow_media_edit'];
   $allowMediaAdd = $_SESSION['allow_media_add'];
   $allowMediaDelete = $_SESSION['allow_media_delete'];
-  $allow_living = $_SESSION['allow_living'];
-  $allow_private = $_SESSION['allow_private'];
-  $allow_ged = $_SESSION['allow_ged'];
-  $allow_pdf = $_SESSION['allow_pdf'];
-  $allow_lds = $_SESSION['allow_lds'];
+  $allowLiving = $_SESSION['allow_living'];
+  $allowPrivate = $_SESSION['allow_private'];
+  $allowGed = $_SESSION['allow_ged'];
+  $allowPdf = $_SESSION['allow_pdf'];
+  $allowLds = $_SESSION['allow_lds'];
   $allow_profile = $_SESSION['allow_profile'];
   $logged_in = 1;
 } else {
@@ -63,10 +63,12 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$adminLo
     $allowMediaEdit = 1;
     $allowMediaAdd = 1;
     $allowMediaDelete = 1;
-    $allow_living = 1;
-    $allow_private = 1;
-    $allow_ged = $allow_pdf = $allow_profile = 1;
-    $allow_lds = 1;
+    $allowLiving = 1;
+    $allowPrivate = 1;
+    $allowGed = 1;
+    $allowPdf = 1;
+    $allow_profile = 1;
+    $allowLds = 1;
     $_SESSION['currentuser'] = 'Administrator-No-Users-Yet';
     $_SESSION['currentuserdesc'] = 'Administrator';
     $logged_in = $_SESSION['logged_in'] = 1;
@@ -107,10 +109,12 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$adminLo
 
       $allow_admin = 0;
       $allowEdit = $allowAdd = $tentative_edit = $allowDelete = $allowMediaAdd = $allowMediaEdit = $allowMediaDelete = 0;
-      $allow_living = $livedefault == 2 ? 1 : 0;
-      $allow_private = 0;
-      $allow_ged = $allow_pdf = $allow_profile = 0;
-      $allow_lds = $ldsdefault ? 0 : 1;
+      $allowLiving = $livedefault == 2 ? 1 : 0;
+      $allowPrivate = 0;
+      $allowGed = 0;
+      $allowPdf = 0;
+      $allow_profile = 0;
+      $allowLds = $ldsdefault ? 0 : 1;
 
       $currentuser = $_SESSION['currentuser'];
       $currentuserdesc = $_SESSION['currentuserdesc'];
@@ -130,11 +134,11 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$adminLo
   $_SESSION['allow_media_edit'] = $allowMediaEdit;
   $_SESSION['allow_media_add'] = $allowMediaAdd;
   $_SESSION['allow_media_delete'] = $allowMediaDelete;
-  $_SESSION['allow_living'] = $allow_living;
-  $_SESSION['allow_private'] = $allow_private;
-  $_SESSION['allow_ged'] = $allow_ged;
-  $_SESSION['allow_pdf'] = $allow_pdf;
-  $_SESSION['allow_lds'] = $allow_lds;
+  $_SESSION['allow_living'] = $allowLiving;
+  $_SESSION['allow_private'] = $allowPrivate;
+  $_SESSION['allow_ged'] = $allowGed;
+  $_SESSION['allow_pdf'] = $allowPdf;
+  $_SESSION['allow_lds'] = $allowLds;
   $_SESSION['allow_profile'] = $allow_profile;
 }
 

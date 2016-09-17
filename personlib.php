@@ -204,7 +204,7 @@ function getNotes($persfamID, $flag) {
   global $xnotes_table;
   global $eventtypes_table;
   global $events_table;
-  global $allow_private;
+  global $allowPrivate;
 
   $custnotes = [];
   $gennotes = [];
@@ -223,7 +223,7 @@ function getNotes($persfamID, $flag) {
     $postcusttitles = [];
   }
 
-  $secretstr = $allow_private ? '' : ' AND secret != "1"';
+  $secretstr = $allowPrivate ? '' : ' AND secret != "1"';
   $query = "SELECT display, $xnotes_table.note AS note, $notelinks_table.eventID AS eventID, $notelinks_table.xnoteID AS xnoteID, $notelinks_table.ID AS ID, noteID FROM $notelinks_table LEFT JOIN  $xnotes_table ON $notelinks_table.xnoteID = $xnotes_table.ID LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE $notelinks_table.persfamID = '$persfamID' $secretstr ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum, ID";
   $notelinks = tng_query($query);
 
@@ -1279,7 +1279,7 @@ function endListItem($section) {
 function buildPersonMenu($currpage, $entityID) {
   global $allowEdit;
   global $rightbranch;
-  global $allow_ged;
+  global $allowGed;
   global $emailaddr;
 
   $menu = "<div id='tngmenu'>\n";
@@ -1289,7 +1289,7 @@ function buildPersonMenu($currpage, $entityID) {
   } elseif ($emailaddr && $currpage != 'suggest') {
     $menu .= "<a href='personSuggest.php?ID=$entityID' title='" . uiTextSnippet('suggest') . "'><img class='icon-sm' src='svg/new-message.svg'></a>\n";
   }
-  if ($allow_ged && $rightbranch) {
+  if ($allowGed && $rightbranch) {
     if ($currpage != 'gedcom') {
       $menu .= "<a href='gedform.php?personID=$entityID' title='" . uitextSnippet('extractgedcom') . "'><img class='icon-sm' src='svg/folder.svg'></a>\n";
     }

@@ -771,7 +771,7 @@ $headSection->setTitle($headTitle);
     else {
       $innermenu = '<span>' . uiTextSnippet('persinfo') . "</span>\n";
     }
-    if ($allow_pdf && $rightbranch) {
+    if ($allowPdf && $rightbranch) {
       $innermenu .= "<a  class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ind&amp;personID=$personID');return false;\">PDF</a>\n";
     }
     $rightbranch = $org_rightbranch;
