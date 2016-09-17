@@ -8,7 +8,6 @@ function ClearData($tree) {
   global $events_table;
   global $repositories_table;
   global $notelinks_table;
-  global $xnotes_table;
   global $citations_table;
   global $places_table;
   global $address_table;
@@ -25,7 +24,7 @@ function ClearData($tree) {
           $people_table,
           $repositories_table,
           $sources_table,
-          $xnotes_table
+          'xnotes'
   ];
   $query = 'SELECT COUNT(*) AS trees FROM trees';
   if (!($result = tng_query($query))) {

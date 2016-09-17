@@ -201,7 +201,6 @@ function reorderCitation($citekey, $withlink = 1) {
 
 function getNotes($persfamID, $flag) {
   global $notelinks_table;
-  global $xnotes_table;
   global $eventtypes_table;
   global $events_table;
   global $allowPrivate;
@@ -224,7 +223,7 @@ function getNotes($persfamID, $flag) {
   }
 
   $secretstr = $allowPrivate ? '' : ' AND secret != "1"';
-  $query = "SELECT display, $xnotes_table.note AS note, $notelinks_table.eventID AS eventID, $notelinks_table.xnoteID AS xnoteID, $notelinks_table.ID AS ID, noteID FROM $notelinks_table LEFT JOIN  $xnotes_table ON $notelinks_table.xnoteID = $xnotes_table.ID LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE $notelinks_table.persfamID = '$persfamID' $secretstr ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum, ID";
+  $query = "SELECT display, xnotes.note AS note, $notelinks_table.eventID AS eventID, $notelinks_table.xnoteID AS xnoteID, $notelinks_table.ID AS ID, noteID FROM $notelinks_table LEFT JOIN xnotes ON $notelinks_table.xnoteID = xnotes.ID LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE $notelinks_table.persfamID = '$persfamID' $secretstr ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum, ID";
   $notelinks = tng_query($query);
 
   $currevent = '';
@@ -383,12 +382,10 @@ function buildGenNotes($notearray, $entity, $eventlist) {
 }
 
 function checkXnote($fact) {
-  global $xnotes_table;
-
   $newfact = [];
   preg_match('/^@(\S+)@/', $fact, $matches);
   if ($matches[1]) {
-    $query = "SELECT note, ID FROM $xnotes_table WHERE noteID = \"$matches[1]\"";
+    $query = "SELECT note, ID FROM xnotes WHERE noteID = \"$matches[1]\"";
     $xnoteres = tng_query($query);
     if ($xnoteres) {
       $xnote = tng_fetch_assoc($xnoteres);

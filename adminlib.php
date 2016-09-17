@@ -109,20 +109,19 @@ function checkReview($type) {
 
 function deleteNote($noteID, $flag) {
   global $notelinks_table;
-  global $xnotes_table;
 
   $query = "SELECT xnoteID FROM $notelinks_table WHERE ID=\"$noteID\"";
   $result = tng_query($query);
   $nrow = tng_fetch_assoc($result);
   tng_free_result($result);
 
-  $query = "SELECT count(ID) AS xcount FROM $xnotes_table WHERE ID=\"{$nrow['xnoteID']}\"";
+  $query = "SELECT count(ID) AS xcount FROM xnotes WHERE ID=\"{$nrow['xnoteID']}\"";
   $result = tng_query($query);
   $xrow = tng_fetch_assoc($result);
   tng_free_result($result);
 
   if ($xrow['xcount'] == 1) {
-    $query = "DELETE FROM $xnotes_table WHERE ID=\"{$nrow['xnoteID']}\"";
+    $query = "DELETE FROM xnotes WHERE ID=\"{$nrow['xnoteID']}\"";
     tng_query($query);
   }
   if ($flag) {

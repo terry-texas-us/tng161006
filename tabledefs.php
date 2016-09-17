@@ -705,9 +705,9 @@ $query = "CREATE TABLE users (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, 'users');
 
-$query = "DROP TABLE IF EXISTS $xnotes_table";
+$query = 'DROP TABLE IF EXISTS xnotes';
 $result = performQuery($query);
-$query = "CREATE TABLE $xnotes_table (
+$query = "CREATE TABLE xnotes (
     ID INT(11) NOT NULL AUTO_INCREMENT,
     noteID VARCHAR(22) NOT NULL,
     gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
@@ -717,4 +717,4 @@ $query = "CREATE TABLE $xnotes_table (
     INDEX noteID (noteID),
     FOREIGN KEY xnotes_fk1 (ID) REFERENCES $notelinks_table (xnoteID)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $xnotes_table);
+$result = performQuery($query, 'xnotes');

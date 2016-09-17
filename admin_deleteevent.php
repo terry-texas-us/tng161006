@@ -39,7 +39,7 @@ if ($result) {
   tng_free_result($result);
 }
 if ($row['xcount'] == 1) {
-  $query = "DELETE FROM $xnotes_table WHERE ID=\"{$row['xnoteID']}\"";
+  $query = "DELETE FROM xnotes WHERE ID=\"{$row['xnoteID']}\"";
   $result = tng_query($query);
 }
 $query = "DELETE FROM $notelinks_table WHERE eventID=\"$eventID\"";

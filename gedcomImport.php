@@ -343,7 +343,6 @@ function deleteLinksOnMatch($entityID) {
   global $events_table;
   global $notelinks_table;
   global $citations_table;
-  global $xnotes_table;
   global $address_table;
   global $assoc_table;
 
@@ -364,7 +363,7 @@ function deleteLinksOnMatch($entityID) {
   $query = "SELECT xnoteID FROM $notelinks_table WHERE persfamID = '$entityID'";
   $result = tng_query($query);
   while ($row = tng_fetch_assoc($result)) {
-    $query = "DELETE from $xnotes_table WHERE ID = '{$row['xnoteID']}'";
+    $query = "DELETE from xnotes WHERE ID = '{$row['xnoteID']}'";
     tng_query($query);
   }
   tng_free_result($result);
@@ -1151,12 +1150,11 @@ function processNotes($persfamID, $eventID, $notearray) {
 
 function saveNote($persfamID, $eventID, $note) {
   global $notelinks_table;
-  global $xnotes_table;
   global $tngimpcfg;
 
   $found = 0;
   if ($note['XNOTE']) {
-    $query = "SELECT ID FROM $xnotes_table WHERE noteID = \"{$note['XNOTE']}\"";
+    $query = "SELECT ID FROM xnotes WHERE noteID = \"{$note['XNOTE']}\"";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     $row = tng_fetch_assoc($result);
     if (tng_num_rows($result)) {
@@ -1166,7 +1164,7 @@ function saveNote($persfamID, $eventID, $note) {
     tng_free_result($result);
   }
   if (!$found) {
-    $query = "INSERT INTO $xnotes_table (noteID, note) VALUES('{$note['XNOTE']}', '{$note['NOTE']}')";
+    $query = "INSERT INTO xnotes (noteID, note) VALUES('{$note['XNOTE']}', '{$note['NOTE']}')";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     $xnoteID = tng_insert_id();
     incrCounter('N');
@@ -1186,7 +1184,6 @@ function saveNote($persfamID, $eventID, $note) {
 function getNoteRecord($noteID, $prevlevel) {
   global $savestate;
   global $lineinfo;
-  global $xnotes_table;
   global $citations_table;
   global $tngimpcfg;
   global $notelinks_table;
@@ -1217,15 +1214,15 @@ function getNoteRecord($noteID, $prevlevel) {
     $notesource[$notectr] = handleSource($noteID, $lineinfo['level']);
   }
 
-  $query = "SELECT ID FROM $xnotes_table WHERE noteID = '$noteID'";
+  $query = "SELECT ID FROM xnotes WHERE noteID = '$noteID'";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   $row = tng_fetch_assoc($result);
   if (tng_num_rows($result) && $savestate['del'] != 'no') {
     $ID = $row['ID'];
-    $query = "UPDATE $xnotes_table SET note=\"$note\" WHERE noteID = '$noteID'";
+    $query = "UPDATE xnotes SET note=\"$note\" WHERE noteID = '$noteID'";
     $xresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   } else {
-    $query = "INSERT INTO $xnotes_table (noteID, note) VALUES('$noteID', '$note')";
+    $query = "INSERT INTO xnotes (noteID, note) VALUES('$noteID', '$note')";
     $xresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     $ID = tng_insert_id();
     incrCounter($prefix);

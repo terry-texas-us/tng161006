@@ -29,7 +29,6 @@ $eventtypes_table = "eventtypes";
 $rectangles_table = "";
 $reports_table = "reports";
 $notelinks_table = "notelinks";
-$xnotes_table = "xnotes";
 $saveimport_table = "saveimport";
 $temp_events_table = "temp_events";
 $tlevents_table = "timelineevents";

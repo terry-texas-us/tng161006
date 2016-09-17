@@ -17,7 +17,7 @@ if ($session_charset != 'UTF-8') {
 $orgnote = preg_replace("/$lineending/", ' ', stripslashes($note));
 $note = addslashes($note);
 
-$query = "INSERT INTO $xnotes_table (noteID, note)  VALUES('', '$note')";
+$query = "INSERT INTO xnotes (noteID, note)  VALUES('', '$note')";
 $result = tng_query($query);
 $xnoteID = tng_insert_id();
 

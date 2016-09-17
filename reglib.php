@@ -261,7 +261,6 @@ function getOtherEvents($row) {
 
 function getRegNotes($persfamID, $flag) {
   global $notelinks_table;
-  global $xnotes_table;
   global $eventtypes_table;
   global $events_table;
 
@@ -281,7 +280,7 @@ function getRegNotes($persfamID, $flag) {
     $postcusttitles = [];
   }
 
-  $query = "SELECT display, $xnotes_table.note AS note, $notelinks_table.eventID AS eventID FROM $notelinks_table LEFT JOIN  $xnotes_table ON $notelinks_table.xnoteID = $xnotes_table.ID LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE $notelinks_table.persfamID = '$persfamID' AND secret != '1' ORDER BY eventdatetr, $eventtypes_table.ordernum, tag";
+  $query = "SELECT display, xnotes.note AS note, $notelinks_table.eventID AS eventID FROM $notelinks_table LEFT JOIN xnotes ON $notelinks_table.xnoteID = xnotes.ID LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE $notelinks_table.persfamID = '$persfamID' AND secret != '1' ORDER BY eventdatetr, $eventtypes_table.ordernum, tag";
   $notelinks = tng_query($query);
 
   $currevent = '';

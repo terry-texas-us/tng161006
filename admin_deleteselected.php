@@ -63,7 +63,7 @@ if ($xsrcaction) {
   $id = 'cemeteryID';
   $location = 'cemeteriesBrowse.php';
 } elseif ($xnoteaction) {
-  $query = "DELETE FROM $xnotes_table";
+  $query = 'DELETE FROM xnotes';
   $modmsg = 'notes';
   $id = 'ID';
   $location = 'admin_notelist.php';

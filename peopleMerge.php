@@ -249,7 +249,7 @@ function doNotesCitations($persfam1, $persfam2, $varname) {
     $query = "SELECT xnoteID FROM $notelinks_table WHERE persfamID = '$persfam1' $wherestr";
     $noteresult = tng_query($query);
     while ($row = tng_fetch_assoc($noteresult)) {
-      $query = "DELETE FROM $xnotes_table WHERE ID=\"{$row['xnoteID']}\"";
+      $query = "DELETE FROM xnotes WHERE ID=\"{$row['xnoteID']}\"";
       $noteresult = tng_query($query);
     }
     tng_free_result($noteresult);
@@ -611,7 +611,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
   $query = "SELECT xnoteID FROM $notelinks_table WHERE persfamID = '$persfam2'";
   $noteresult = tng_query($query);
   while ($row = tng_fetch_assoc($noteresult)) {
-    $query = "DELETE FROM $xnotes_table WHERE ID=\"{$row['xnoteID']}\"";
+    $query = "DELETE FROM xnotes WHERE ID=\"{$row['xnoteID']}\"";
     $noteresult2 = tng_query($query);
   }
   tng_free_result($noteresult);

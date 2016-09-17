@@ -198,12 +198,11 @@ function doEvent($custevent, $level) {
 
 function getNotes($id) {
   global $notelinks_table;
-  global $xnotes_table;
   global $eventtypes_table;
   global $events_table;
   global $xnotes;
 
-  $query = "SELECT $notelinks_table.ID AS ID, secret, $xnotes_table.note AS note, $xnotes_table.noteID AS noteID, $notelinks_table.eventID FROM $notelinks_table LEFT JOIN  $xnotes_table ON $notelinks_table.xnoteID = $xnotes_table.ID LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE $notelinks_table.persfamID = '$id' ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum";
+  $query = "SELECT $notelinks_table.ID AS ID, secret, xnotes.note AS note, xnotes.noteID AS noteID, $notelinks_table.eventID FROM $notelinks_table LEFT JOIN  xnotes ON $notelinks_table.xnoteID = xnotes.ID LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE $notelinks_table.persfamID = '$id' ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum";
   $notelinks = tng_query($query);
   $notearray = [];
   while ($notelink = tng_fetch_assoc($notelinks)) {
@@ -309,13 +308,12 @@ function writeNote($level, $label, $notes) {
 }
 
 function doXNotes() {
-  global $xnotes_table;
   global $xnotes;
   global $lineending;
 
   if ($xnotes) {
     foreach ($xnotes as $xnote) {
-      $query = "SELECT note FROM $xnotes_table WHERE noteID = '$xnote' ORDER BY noteID";
+      $query = "SELECT note FROM xnotes WHERE noteID = '$xnote' ORDER BY noteID";
       $xnotearray = tng_query($query);
       $xnotetxt = tng_fetch_assoc($xnotearray);
       echo "0 @$xnote@ NOTE$lineending";

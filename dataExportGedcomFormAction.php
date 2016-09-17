@@ -207,12 +207,11 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
 
     function getNotes($id) {
       global $notelinks_table;
-      global $xnotes_table;
       global $eventtypes_table;
       global $events_table;
       global $xnotes;
 
-      $query = "SELECT $notelinks_table.ID AS ID, secret, $xnotes_table.note AS note, $xnotes_table.noteID AS noteID, $notelinks_table.eventID FROM $notelinks_table LEFT JOIN  $xnotes_table ON $notelinks_table.xnoteID = $xnotes_table.ID LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE $notelinks_table.persfamID = '$id' ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum, ID";
+      $query = "SELECT $notelinks_table.ID AS ID, secret, xnotes.note AS note, xnotes.noteID AS noteID, $notelinks_table.eventID FROM $notelinks_table LEFT JOIN xnotes ON $notelinks_table.xnoteID = xnotes.ID LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE $notelinks_table.persfamID = '$id' ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum, ID";
       $notelinks = tng_query($query);
       $notearray = [];
       while ($notelink = tng_fetch_assoc($notelinks)) {
@@ -331,7 +330,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     }
 
     function doXNotes() {
-      global $xnotes_table;
       global $savestate;
       global $noteprefix;
       global $xnotes;
@@ -345,7 +343,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       if ($branch || $exliving || $exprivate) {
         if ($xnotes) {
           foreach ($xnotes as $xnote) {
-            $query = "SELECT note, noteID FROM $xnotes_table WHERE noteID = '$xnote' ORDER BY noteID";
+            $query = "SELECT note, noteID FROM xnotes WHERE noteID = '$xnote' ORDER BY noteID";
             $xnotearray = tng_query($query);
             $xnotetxt = tng_fetch_assoc($xnotearray);
             $xnotestr .= writeXNote($xnotetxt);
@@ -355,7 +353,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       } else {
         $prefixlen = strlen($noteprefix) + 1;
 
-        $query = "SELECT note, noteID, (0+SUBSTRING(noteID,$prefixlen)) AS num FROM $xnotes_table WHERE noteID != \"\" {$savestate['wherestr']} ORDER BY num";
+        $query = "SELECT note, noteID, (0+SUBSTRING(noteID,$prefixlen)) AS num FROM xnotes WHERE noteID != \"\" {$savestate['wherestr']} ORDER BY num";
         $xnotearray = tng_query($query);
         while ($xnotetxt = tng_fetch_assoc($xnotearray)) {
           $xnotestr .= writeXNote($xnotetxt);

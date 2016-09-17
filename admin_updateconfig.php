@@ -80,7 +80,6 @@ fwrite($fp, "\$eventtypes_table = \"$eventtypes_table\";\n");
 fwrite($fp, "\$rectangles_table = \"$rectangles_table\";\n");
 fwrite($fp, "\$reports_table = \"$reports_table\";\n");
 fwrite($fp, "\$notelinks_table = \"$notelinks_table\";\n");
-fwrite($fp, "\$xnotes_table = \"$xnotes_table\";\n");
 fwrite($fp, "\$saveimport_table = \"$saveimport_table\";\n");
 fwrite($fp, "\$temp_events_table = \"$temp_events_table\";\n");
 fwrite($fp, "\$tlevents_table = \"$tlevents_table\";\n");

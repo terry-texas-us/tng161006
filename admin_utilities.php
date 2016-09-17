@@ -129,7 +129,7 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
             doRow($mediatypes_table, uiTextSnippet('mediatypes'));
             doRow($mostwanted_table, uiTextSnippet('mostwanted'));
             doRow($notelinks_table, uiTextSnippet('notelinkstable'));
-            doRow($xnotes_table, uiTextSnippet('notes'));
+            doRow('xnotes', uiTextSnippet('notes'));
             doRow($people_table, uiTextSnippet('people'));
             doRow($reports_table, uiTextSnippet('reports'));
             doRow($sources_table, uiTextSnippet('sources'));

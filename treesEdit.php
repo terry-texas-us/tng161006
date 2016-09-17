@@ -40,7 +40,7 @@ $reporow = tng_fetch_assoc($reporesult);
 $rcount = number_format($reporow['rcount']);
 tng_free_result($reporesult);
 
-$query = "SELECT count(noteID) AS ncount FROM $xnotes_table";
+$query = 'SELECT count(noteID) AS ncount FROM xnotes';
 $nresult = tng_query($query);
 $nrow = tng_fetch_assoc($nresult);
 $ncount = number_format($nrow['ncount']);

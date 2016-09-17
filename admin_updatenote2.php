@@ -16,7 +16,7 @@ require 'adminlog.php';
 
 $note = addslashes($note);
 
-$query = "UPDATE $xnotes_table SET note=\"$note\" WHERE ID=\"$xID\"";
+$query = "UPDATE xnotes SET note=\"$note\" WHERE ID=\"$xID\"";
 $result = tng_query($query);
 
 if (!$private) {

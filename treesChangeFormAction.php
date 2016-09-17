@@ -88,7 +88,7 @@ $result = tng_query($query);
 $query = "SELECT xnoteID FROM $notelinks_table WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\" AND xnoteID!=\"\"";
 $result = tng_query($query);
 while ($row = tng_fetch_assoc($result)) {
-  $query = "UPDATE $xnotes_table SET gedcom=\"$newtree\" WHERE ID=\"{$row['xnoteID']}\"";
+  $query = "UPDATE xnotes SET gedcom=\"$newtree\" WHERE ID=\"{$row['xnoteID']}\"";
   $result2 = tng_query($query);
 }
 tng_free_result($result);

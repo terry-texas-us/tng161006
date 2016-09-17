@@ -626,11 +626,9 @@ function generatePassword($flag) {
 }
 
 function getXrefNotes($noteref) {
-  global $xnotes_table;
-
   preg_match('/^@(\S+)@/', $noteref, $matches);
   if ($matches[1]) {
-    $query = "SELECT note FROM $xnotes_table WHERE noteID = \"$matches[1]\"";
+    $query = "SELECT note FROM xnotes WHERE noteID = \"$matches[1]\"";
     $xnoteres = tng_query($query);
     if ($xnoteres) {
       $xnote = tng_fetch_assoc($xnoteres);

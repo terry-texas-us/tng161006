@@ -81,7 +81,7 @@ switch ($t) {
     $query = "DELETE FROM $notelinks_table WHERE xnoteID = '$id'";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $xnotes_table WHERE ID = '$id'";
+    $query = "DELETE FROM xnotes WHERE ID = '$id'";
     $result = tng_query($query);
 
     $logmsg = uiTextSnippet('note') . " $id " . uiTextSnippet('succdeleted');
@@ -257,7 +257,7 @@ switch ($t) {
     $query = "DELETE FROM $notelinks_table WHERE gedcom = '$id'";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $xnotes_table WHERE gedcom = '$id'";
+    $query = "DELETE FROM xnotes WHERE gedcom = '$id'";
     $result = tng_query($query);
 
     $query = "DELETE FROM $citations_table WHERE gedcom = '$id'";

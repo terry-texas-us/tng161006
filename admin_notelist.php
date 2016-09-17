@@ -41,22 +41,22 @@ if ($offset) {
   $newoffset = '';
   $tngpage = 1;
 }
-$wherestr = "WHERE $xnotes_table.ID = $notelinks_table.xnoteID";
+$wherestr = "WHERE xnotes.ID = $notelinks_table.xnoteID";
 
 if ($private) {
   $wherestr .= " AND $notelinks_table.secret != 0";
 }
 if ($searchstring) {
   $wherestr .= $wherestr ? ' AND' : 'WHERE';
-  $wherestr .= " ($xnotes_table.note LIKE '%" . $searchstring . "%')";
+  $wherestr .= " (xnotes.note LIKE '%" . $searchstring . "%')";
 }
-$query = "SELECT $xnotes_table.ID AS ID, $xnotes_table.note AS note FROM ($xnotes_table, $notelinks_table)" . $wherestr . " ORDER BY note LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT xnotes.ID AS ID, xnotes.note AS note FROM (xnotes, $notelinks_table)" . $wherestr . " ORDER BY note LIMIT $newoffset" . $maxsearchresults;
 
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count($xnotes_table.ID) AS scount FROM ($xnotes_table, $notelinks_table) " . $wherestr;
+  $query = "SELECT count(xnotes.ID) AS scount FROM (xnotes, $notelinks_table) " . $wherestr;
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['scount'];
