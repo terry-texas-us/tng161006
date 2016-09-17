@@ -188,13 +188,13 @@ $query = "CREATE TABLE $citations_table (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $citations_table);
 
-$query = "DROP TABLE IF EXISTS $countries_table";
+$query = 'DROP TABLE IF EXISTS countries';
 $result = performQuery($query);
-$query = "CREATE TABLE $countries_table (
+$query = "CREATE TABLE countries (
     country varchar(64) NOT NULL,
     PRIMARY KEY (country)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $countries_table);
+$result = performQuery($query, 'countries');
 
 $query = "DROP TABLE IF EXISTS $events_table";
 $result = performQuery($query);
@@ -592,13 +592,13 @@ $query = "CREATE TABLE $sources_table (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $sources_table);
 
-$query = "DROP TABLE IF EXISTS $states_table";
+$query = 'DROP TABLE IF EXISTS states';
 $result = performQuery($query);
-$query = "CREATE TABLE $states_table (
+$query = "CREATE TABLE states (
    state varchar(64) NOT NULL,
    PRIMARY KEY (state)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $states_table);
+$result = performQuery($query, 'states');
 
 $query = 'DROP TABLE IF EXISTS temp_events';
 $result = performQuery($query);

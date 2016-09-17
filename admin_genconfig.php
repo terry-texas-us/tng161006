@@ -170,14 +170,6 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
                   <td><input name='cemeteries_table' type='text' value="<?php echo $cemeteries_table; ?>"></td>
                 </tr>
                 <tr>
-                  <td><?php echo uiTextSnippet('statestable'); ?>:</td>
-                  <td><input name='states_table' type='text' value="<?php echo $states_table; ?>"></td>
-                </tr>
-                <tr>
-                  <td><?php echo uiTextSnippet('countriestable'); ?>:</td>
-                  <td><input name='countries_table' type='text' value="<?php echo $countries_table; ?>"></td>
-                </tr>
-                <tr>
                   <td><?php echo uiTextSnippet('sources'); ?>:</td>
                   <td><input name='sources_table' type='text' value="<?php echo $sources_table; ?>"></td>
                 </tr>

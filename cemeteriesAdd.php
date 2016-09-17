@@ -13,10 +13,10 @@ if (!$allowAdd) {
   exit;
 }
 
-$query = "SELECT state FROM $states_table";
+$query = 'SELECT state FROM states';
 $stateresult = tng_query($query);
 
-$query = "SELECT country FROM $countries_table";
+$query = 'SELECT country FROM countries';
 $countryresult = tng_query($query);
 
 header('Content-type: text/html; charset=' . $session_charset);

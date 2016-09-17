@@ -227,9 +227,9 @@ switch ($t) {
   case 'entity':
     $newname = addslashes($delitem);
     if ($entity == 'state') {
-      $query = "DELETE FROM $states_table WHERE state = '$newname'";
+      $query = "DELETE FROM states WHERE state = '$newname'";
     } elseif ($entity == 'country') {
-      $query = "DELETE FROM $countries_table WHERE country = '$newname'";
+      $query = "DELETE FROM countries WHERE country = '$newname'";
     }
     $result = tng_query($query);
 

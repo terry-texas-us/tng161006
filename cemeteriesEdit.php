@@ -21,10 +21,10 @@ $row = tng_fetch_assoc($result);
 tng_free_result($result);
 $row['cemname'] = preg_replace('/\"/', '&#34;', $row['cemname']);
 
-$query = "SELECT state FROM $states_table";
+$query = "SELECT state FROM states";
 $stateresult = tng_query($query);
 
-$query = "SELECT country FROM $countries_table";
+$query = 'SELECT country FROM countries';
 $countryresult = tng_query($query);
 
 header('Content-type: text/html; charset=' . $session_charset);

@@ -20,9 +20,9 @@ if ($session_charset != 'UTF-8') {
 $newname = addslashes($newitem);
 
 if ($entity == 'state') {
-  $query = "INSERT INTO $states_table (state) VALUES (\"$newname\")";
+  $query = "INSERT INTO states (state) VALUES (\"$newname\")";
 } elseif ($entity == 'country') {
-  $query = "INSERT INTO $countries_table (country) VALUES (\"$newname\")";
+  $query = "INSERT INTO countries (country) VALUES ('$newname')";
 }
 $result = tng_query($query);
 
