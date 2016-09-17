@@ -59,7 +59,7 @@ if ($addressID) {
   $addressID = tng_insert_id();
 }
 
-$query = "UPDATE $events_table SET eventdate=\"$eventdate\", eventdatetr=\"$eventdatetr\", eventplace=\"$eventplace\", age=\"$age\", agency=\"$agency\", cause=\"$cause\", addressID=\"$addressID\", info=\"$info\" WHERE eventID=\"$eventID\"";
+$query = "UPDATE events SET eventdate=\"$eventdate\", eventdatetr=\"$eventdatetr\", eventplace=\"$eventplace\", age=\"$age\", agency=\"$agency\", cause=\"$cause\", addressID=\"$addressID\", info=\"$info\" WHERE eventID=\"$eventID\"";
 $result = tng_query($query);
 
 if (trim($eventplace)) {
@@ -72,7 +72,7 @@ if (trim($eventplace)) {
 }
 adminwritelog(uiTextSnippet('modifyevent') . ": $eventID");
 
-$query = "SELECT display FROM eventtypes, $events_table WHERE eventtypes.eventtypeID = $events_table.eventtypeID AND eventID = \"$eventID\"";
+$query = "SELECT display FROM eventtypes, events WHERE eventtypes.eventtypeID = events.eventtypeID AND eventID = \"$eventID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 

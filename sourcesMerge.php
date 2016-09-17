@@ -259,11 +259,11 @@ if ($mergeaction == uiTextSnippet('merge')) {
         if (strpos($key, '::')) {
           $halves = explode('::', substr($key, 5));
           $varname = substr(strstr($halves[0], '_'), 1);
-          $query = "DELETE from $events_table WHERE persfamID = '$sourceID1' AND eventID = '$varname'";
+          $query = "DELETE from events WHERE persfamID = '$sourceID1' AND eventID = '$varname'";
           $evresult = tng_query($query);
           $varname = substr(strstr($halves[1], '_'), 1);
 
-          $query = "SELECT eventID FROM $events_table WHERE persfamID = '$sourceID2' AND eventID = '$varname'";
+          $query = "SELECT eventID FROM events WHERE persfamID = '$sourceID2' AND eventID = '$varname'";
           $evresult = tng_query($query);
           while ($evrow = tng_fetch_assoc($evresult)) {
             doNotes($sourceID1, $sourceID2, $evrow['eventID']);
@@ -274,7 +274,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
           doNotes($sourceID1, $sourceID2, $varname);
         }
 
-        $query = "UPDATE $events_table set persfamID = \"$sourceID1\" WHERE persfamID = '$sourceID2' AND eventID = '$varname'";
+        $query = "UPDATE events set persfamID = \"$sourceID1\" WHERE persfamID = '$sourceID2' AND eventID = '$varname'";
         $evresult = tng_query($query);
         break;
     }
@@ -296,7 +296,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
   $combresult = tng_query($query);
 
   //delete remaining notes & events for source 2
-  $query = "DELETE from $events_table WHERE persfamID = '$sourceID2'";
+  $query = "DELETE from events WHERE persfamID = '$sourceID2'";
   $combresult = tng_query($query);
 
   $query = "DELETE from notelinks WHERE persfamID = '$sourceID2'";
@@ -453,7 +453,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
             if (is_array($s2row)) {
               echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('sourcesEdit.php?sourceID={$s2row['sourceID']}&amp;cw=1','edit')\"></td>\n";
 
-              $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID AS eventtypeID, $events_table.eventID AS eventID FROM $events_table, eventtypes WHERE persfamID = \"{$s2row['sourceID']}\" AND $events_table.eventtypeID = eventtypes.eventtypeID ORDER BY ordernum";
+              $query = "SELECT display, eventdate, eventplace, info, events.eventtypeID AS eventtypeID, events.eventID AS eventID FROM events, eventtypes WHERE persfamID = \"{$s2row['sourceID']}\" AND events.eventtypeID = eventtypes.eventtypeID ORDER BY ordernum";
               $evresult = tng_query($query);
               $eventcount = tng_num_rows($evresult);
 
@@ -480,7 +480,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
             doRow('publisher', 'publisher', 's2publisher');
             doRow('repoID', 'repository', 's2repository');
             doRow('actualtext', 'actualtext', 's2actualtext');
-            $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID AS eventtypeID, $events_table.eventID AS eventID FROM $events_table, eventtypes WHERE persfamID = \"{$s1row['sourceID']}\" AND $events_table.eventtypeID = eventtypes.eventtypeID ORDER BY ordernum";
+            $query = "SELECT display, eventdate, eventplace, info, events.eventtypeID AS eventtypeID, events.eventID AS eventID FROM events, eventtypes WHERE persfamID = \"{$s1row['sourceID']}\" AND events.eventtypeID = eventtypes.eventtypeID ORDER BY ordernum";
             $evresult = tng_query($query);
             $eventcount = tng_num_rows($evresult);
 

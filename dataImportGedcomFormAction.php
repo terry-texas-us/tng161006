@@ -38,11 +38,10 @@ $ldsOK = determineLDSRights();
 ob_implicit_flush(true);
 
 function getMediaLinksToSave() {
-  global $events_table;
   global $medialinks_table;
 
   $medialinks = [];
-  $query = "SELECT medialinkID, mediaID, $medialinks_table.eventID, persfamID, eventtypeID, eventdate, eventplace, info FROM ($medialinks_table,$events_table) WHERE $medialinks_table.eventID != '' AND $medialinks_table.eventID = $events_table.eventID";
+  $query = "SELECT medialinkID, mediaID, $medialinks_table.eventID, persfamID, eventtypeID, eventdate, eventplace, info FROM ($medialinks_table,events) WHERE $medialinks_table.eventID != '' AND $medialinks_table.eventID = events.eventID";
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {
@@ -55,11 +54,10 @@ function getMediaLinksToSave() {
 }
 
 function getAlbumLinksToSave() {
-  global $events_table;
   global $album2entities_table;
 
   $albumlinks = [];
-  $query = "SELECT alinkID, albumID, $album2entities_table.eventID, entityID, eventtypeID, eventdate, eventplace, info FROM ($album2entities_table,$events_table) WHERE $album2entities_table.eventID != '' AND $album2entities_table.eventID = $events_table.eventID";
+  $query = "SELECT alinkID, albumID, $album2entities_table.eventID, entityID, eventtypeID, eventdate, eventplace, info FROM ($album2entities_table, events) WHERE $album2entities_table.eventID != '' AND $album2entities_table.eventID = events.eventID";
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {

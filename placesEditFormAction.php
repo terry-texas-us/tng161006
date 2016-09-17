@@ -68,7 +68,7 @@ if ($propagate && trim($orgplace)) {
   $result = tng_query($query);
 
   //events
-  $query = "UPDATE $events_table SET eventplace = '$place' WHERE eventplace = '$orgplace'";
+  $query = "UPDATE events SET eventplace = '$place' WHERE eventplace = '$orgplace'";
   $result = tng_query($query);
 
   //children

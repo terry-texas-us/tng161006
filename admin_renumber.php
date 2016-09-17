@@ -188,7 +188,7 @@ echo $navList->build('renumber');
             $result2 = tng_query($query);
           }
 
-          $query = "UPDATE $events_table SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . '"';
+          $query = "UPDATE events SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . '"';
           $result2 = tng_query($query);
 
           $query = "UPDATE $medialinks_table SET personID = '$newID' WHERE personID=\"" . $row[$id] . '"';

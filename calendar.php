@@ -219,7 +219,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
       $where[] = "eventtypes.tag = '$key'";
     }
     if (! empty($where)) {
-      $sql = "SELECT gedcom, persfamID, tag, display, eventdate, eventdatetr, eventplace FROM $events_table, eventtypes WHERE (" . implode(' OR ', $where) . ") AND eventtypes.eventtypeID = $events_table.eventtypeID AND eventdatetr LIKE '%-$thisMonth-%'";
+      $sql = "SELECT gedcom, persfamID, tag, display, eventdate, eventdatetr, eventplace FROM events, eventtypes WHERE (" . implode(' OR ', $where) . ") AND eventtypes.eventtypeID = events.eventtypeID AND eventdatetr LIKE '%-$thisMonth-%'";
 
       $result = tng_query($sql);
       # BREAK

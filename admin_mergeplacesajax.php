@@ -92,7 +92,7 @@ foreach ($mergelist as $val) {
     $result = tng_query($query);
 
     //events
-    $query = "UPDATE $events_table SET eventplace = '$newplace' WHERE eventplace = '$oldplace'";
+    $query = "UPDATE events SET eventplace = '$newplace' WHERE eventplace = '$oldplace'";
     $result = tng_query($query);
 
     //children

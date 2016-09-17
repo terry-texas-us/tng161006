@@ -251,7 +251,7 @@ switch ($t) {
     $query = "DELETE FROM repositories WHERE gedcom = '$id'";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $events_table WHERE gedcom = '$id'";
+    $query = "DELETE FROM events WHERE gedcom = '$id'";
     $result = tng_query($query);
 
     $query = "DELETE FROM notelinks WHERE gedcom = '$id'";

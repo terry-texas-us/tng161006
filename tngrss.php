@@ -30,7 +30,6 @@ function doMedia($mediatypeID) {
   global $people_table;
   global $livedefault;
   global $wherestr2;
-  global $events_table;
 
   if ($mediatypeID == 'headstones') {
     $hsfields = ", $media_table.cemeteryID, cemname";
@@ -103,7 +102,7 @@ function doMedia($mediatypeID) {
         $mediatext = $prow['personID'];
       }
       if ($prow['eventID']) {
-        $query = "SELECT description FROM $events_table, eventtypes WHERE eventID = \"$prow[eventID]\" AND $events_table.eventtypeID = eventtypes.eventtypeID";
+        $query = "SELECT description FROM events, eventtypes WHERE eventID = \"$prow[eventID]\" AND events.eventtypeID = eventtypes.eventtypeID";
         $eresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . " : $query");
         $erow = tng_fetch_assoc($eresult);
         $event = $erow['description'] ? $erow['description'] : $prow['eventID'];

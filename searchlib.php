@@ -162,7 +162,6 @@ function addtoQuery($textstr, $colvar, $criteria, $qualifyvar, $qualifier, $qual
 function doCustomEvents($type) {
   global $dontdo;
   global $cejoin;
-  global $events_table;
   global $allwhere;
   global $mybool;
 
@@ -229,13 +228,13 @@ function doCustomEvents($type) {
       }
       if ($needce) {
         if ($mybool == 'AND') {
-          $cejoin .= "INNER JOIN $events_table as e$ecount ON $persfamfield = $tablepfx" . 'persfamID ';
+          $cejoin .= "INNER JOIN events as e$ecount ON $persfamfield = $tablepfx" . 'persfamID ';
           if ($allwhere) {
             $allwhere .= " $mybool ";
           }
           $allwhere .= $tablepfx . "eventtypeID = \"{$row['eventtypeID']}\" ";
         } else {    //OR
-          $cejoin .= "LEFT JOIN $events_table as e$ecount ON $persfamfield = $tablepfx" . "persfamID AND $tablepfx" . "eventtypeID = \"{$row['eventtypeID']}\" ";
+          $cejoin .= "LEFT JOIN events as e$ecount ON $persfamfield = $tablepfx" . "persfamID AND $tablepfx" . "eventtypeID = \"{$row['eventtypeID']}\" ";
         }
         $needce = 0;
       }

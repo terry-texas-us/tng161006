@@ -11,7 +11,7 @@ if (!$allowDelete) {
 }
 require 'adminlog.php';
 
-$query = "SELECT addressID FROM $events_table WHERE eventID=\"$eventID\"";
+$query = "SELECT addressID FROM events WHERE eventID=\"$eventID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 if ($result) {
@@ -20,7 +20,7 @@ if ($result) {
 $query = "DELETE FROM $address_table WHERE addressID=\"{$row['addressID']}\"";
 $result = tng_query($query);
 
-$query = "DELETE FROM $events_table WHERE eventID=\"$eventID\"";
+$query = "DELETE FROM events WHERE eventID=\"$eventID\"";
 $result = tng_query($query);
 
 $query = "DELETE FROM $citations_table WHERE eventID=\"$eventID\"";

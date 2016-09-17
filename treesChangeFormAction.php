@@ -68,7 +68,7 @@ switch ($entity) {
     break;
 }
 
-$query = "SELECT addressID FROM $events_table WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\" AND addressID!=\"\"";
+$query = "SELECT addressID FROM events WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\" AND addressID!=\"\"";
 $result = tng_query($query);
 while ($row = tng_fetch_assoc($result)) {
   $query = "UPDATE $address_table SET gedcom=\"$newtree\" WHERE addressID=\"{$row['addressID']}\"";
@@ -76,7 +76,7 @@ while ($row = tng_fetch_assoc($result)) {
 }
 tng_free_result($result);
 
-$query = "UPDATE $events_table SET gedcom=\"$newtree\", persfamID=\"$newID\" WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\"";
+$query = "UPDATE events SET gedcom=\"$newtree\", persfamID=\"$newID\" WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\"";
 $result = tng_query($query);
 
 $query = "UPDATE $album2entities_table SET gedcom=\"$newtree\", entityID=\"$newID\" WHERE gedcom=\"$oldtree\" AND entityID=\"$entityID\"";

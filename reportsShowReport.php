@@ -11,7 +11,11 @@ if (!is_numeric($reportID)) {
 }
 
 function processfield($field) {
-  global $need_families, $cejoins, $evfields, $people_table, $events_table, $familyfields_nonss;
+  global $need_families;
+  global $cejoins;
+  global $evfields;
+  global $people_table;
+  global $familyfields_nonss;
 
   if (in_array($field, $familyfields_nonss)) {
     $newfield = "if(sex='M',families1." . $field . ',families2.' . $field . ')';
@@ -24,7 +28,7 @@ function processfield($field) {
     $subtype = substr($field, 3, 2);
     $newfield = "e$eventtypeID.$evfields[$subtype]";
     if (!isset($cejoins[$eventtypeID])) {
-      $cejoins[$eventtypeID] = "LEFT JOIN $events_table e$eventtypeID ON $people_table.personID = e$eventtypeID.persfamID AND e$eventtypeID.eventtypeID = \"$eventtypeID\"";
+      $cejoins[$eventtypeID] = "LEFT JOIN events e$eventtypeID ON $people_table.personID = e$eventtypeID.persfamID AND e$eventtypeID.eventtypeID = \"$eventtypeID\"";
     }
   } else {
     $newfield = $field;
@@ -199,7 +203,7 @@ if ($rrow['sqlselect']) {
         $displaystr .= "e$eventtypeID.$evfields[$subtype] as $evfields[$subtype]$eventtypeID";
         $displayfields[$i] = "$evfields[$subtype]$eventtypeID";
         if (!isset($cejoins[$eventtypeID])) {
-          $cejoins[$eventtypeID] = "LEFT JOIN $events_table e$eventtypeID ON $people_table.personID = e$eventtypeID.persfamID AND e$eventtypeID.eventtypeID = '$eventtypeID'";
+          $cejoins[$eventtypeID] = "LEFT JOIN events e$eventtypeID ON $people_table.personID = e$eventtypeID.persfamID AND e$eventtypeID.eventtypeID = '$eventtypeID'";
         }
       } elseif ($dfield == 'lastfirst') {
         $displaystr .= 'lastname, firstname';
@@ -309,7 +313,7 @@ if ($rrow['sqlselect']) {
             $subtype = substr($criteriafields[$i], 3, 2);
             $newcriteria = "e$eventtypeID.$evfields[$subtype]";
             if (!isset($cejoins[$eventtypeID])) {
-              $cejoins[$eventtypeID] = "LEFT JOIN $events_table e$eventtypeID ON $people_table.personID = e$eventtypeID.persfamID AND e$eventtypeID.eventtypeID = '$eventtypeID'";
+              $cejoins[$eventtypeID] = "LEFT JOIN events e$eventtypeID ON $people_table.personID = e$eventtypeID.persfamID AND e$eventtypeID.eventtypeID = '$eventtypeID'";
             }
           } else {
             $newcriteria = $criteriafields[$i];

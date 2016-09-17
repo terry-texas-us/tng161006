@@ -196,9 +196,9 @@ $query = "CREATE TABLE countries (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, 'countries');
 
-$query = "DROP TABLE IF EXISTS $events_table";
+$query = 'DROP TABLE IF EXISTS events';
 $result = performQuery($query);
-$query = "CREATE TABLE $events_table (
+$query = "CREATE TABLE events (
     eventID INT(11) NOT NULL AUTO_INCREMENT,
     gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     persfamID VARCHAR(22) NOT NULL,
@@ -220,7 +220,7 @@ $query = "CREATE TABLE $events_table (
     FOREIGN KEY events_fk3 (persfamID) REFERENCES sources (sourceID),
     FOREIGN KEY events_fk4 (eventtypeID) REFERENCES eventtypes (eventtypeID)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $events_table);
+$result = performQuery($query, 'events');
 
 $query = 'DROP TABLE IF EXISTS eventtypes';
 $result = performQuery($query);

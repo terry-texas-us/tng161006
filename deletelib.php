@@ -35,9 +35,7 @@ function deleteAlbumLinks($id) {
 }
 
 function deleteEvents($id) {
-  global $events_table;
-
-  $query = "DELETE FROM $events_table WHERE persfamID = '$id'";
+  $query = "DELETE FROM events WHERE persfamID = '$id'";
   tng_query($query);
 }
 

@@ -91,12 +91,12 @@ if (is_numeric($eventID)) {
   $placefield = 'eventplace';
   $factfield = 'info';
 
-  $query = "SELECT eventdate, eventplace, info FROM $events_table WHERE eventID = '$eventID'";
+  $query = "SELECT eventdate, eventplace, info FROM events WHERE eventID = '$eventID'";
   $result = tng_query($query);
   $evrow = tng_fetch_assoc($result);
   tng_free_result($result);
 
-  $query = "SELECT display, tag FROM eventtypes, $events_table WHERE eventID = $eventID AND eventtypes.eventtypeID = $events_table.eventtypeID";
+  $query = "SELECT display, tag FROM eventtypes, events WHERE eventID = $eventID AND eventtypes.eventtypeID = events.eventtypeID";
   $evresult = tng_query($query);
   $evtrow = tng_fetch_assoc($evresult);
 
@@ -209,7 +209,7 @@ if (is_numeric($eventID)) {
   $evrow = tng_fetch_assoc($result);
   tng_free_result($result);
 
-  $query = "SELECT count(eventID) AS evcount FROM $events_table WHERE persfamID = '$persfamID' AND eventID = '$eventID'";
+  $query = "SELECT count(eventID) AS evcount FROM events WHERE persfamID = '$persfamID' AND eventID = '$eventID'";
   $morelinks = tng_query($query);
   $more = tng_fetch_assoc($morelinks);
   $gotmore = $more['evcount'] ? '*' : '';

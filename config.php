@@ -18,7 +18,6 @@ $mediatypes_table = "mediatypes";
 $address_table = "addresses";
 $languagesTable = "languages";
 $citations_table = "citations";
-$events_table = "events";
 $rectangles_table = "";
 $reports_table = "reports";
 $saveimport_table = "saveimport";

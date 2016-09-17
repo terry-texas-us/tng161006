@@ -64,18 +64,18 @@ if ($addressID) {
 }
 if ($eventID) {
   if ($age || $agency || $cause || $addressID || $info) {
-    $query = "UPDATE $events_table SET age='$age', agency='$agency', cause='$cause', addressID='$addressID', info='$info' WHERE eventID='$eventID'";
+    $query = "UPDATE events SET age='$age', agency='$agency', cause='$cause', addressID='$addressID', info='$info' WHERE eventID='$eventID'";
     $result = tng_query($query);
     adminwritelog(uiTextSnippet('modifyevent') . ": $eventID");
     $rval = 1;
   } else {
-    $query = "DELETE FROM $events_table WHERE eventID='$eventID'";
+    $query = "DELETE FROM events WHERE eventID='$eventID'";
     $result = tng_query($query);
     adminwritelog(uiTextSnippet('deleteevent') . ": $eventID");
   }
 } else {
   if ($age || $agency || $cause || $addressID || $info) {
-    $query = "INSERT INTO $events_table (eventtypeID, persfamID, age, agency, cause, addressID, info, parenttag, eventdate, eventdatetr, eventplace) VALUES(0, '$persfamID', '$age', '$agency', '$cause', '$addressID', '$info', '$eventtypeID', '', '0000-00-00', '')";
+    $query = "INSERT INTO events (eventtypeID, persfamID, age, agency, cause, addressID, info, parenttag, eventdate, eventdatetr, eventplace) VALUES(0, '$persfamID', '$age', '$agency', '$cause', '$addressID', '$info', '$eventtypeID', '', '0000-00-00', '')";
     $result = tng_query($query);
     $eventID = tng_insert_id();
     adminwritelog(uiTextSnippet('addnewevent') . ": $eventID - $eventtypeID/$persfamID");

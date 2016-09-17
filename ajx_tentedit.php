@@ -68,7 +68,7 @@ if (is_numeric($event)) {
   $factfield = 'info';
 
   if ($rights['both']) {
-    $query = "SELECT eventdate, eventplace, info FROM $events_table WHERE eventID = \"$event\"";
+    $query = "SELECT eventdate, eventplace, info FROM events WHERE eventID = \"$event\"";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
     tng_free_result($result);

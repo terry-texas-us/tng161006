@@ -33,7 +33,7 @@ $eventdatetr = convertDate($eventdate);
 
 if ($choice == uiTextSnippet('savedel')) {
   if (is_numeric($eventID)) {
-    $query = "UPDATE $events_table SET eventdate=\"$eventdate\", eventdatetr=\"$eventdatetr\", eventplace=\"$eventplace\", info=\"$info\" WHERE eventID=\"$eventID\"";
+    $query = "UPDATE events SET eventdate=\"$eventdate\", eventdatetr=\"$eventdatetr\", eventplace=\"$eventplace\", info=\"$info\" WHERE eventID=\"$eventID\"";
     $result = tng_query($query);
 
     if ($row['type'] == 'F') {

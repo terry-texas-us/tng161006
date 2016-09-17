@@ -72,7 +72,7 @@ $assocrow = tng_fetch_assoc($assocresult);
 $gotassoc = $assocrow['acount'] ? '*' : '';
 tng_free_result($assocresult);
 
-$query = "SELECT parenttag FROM $events_table WHERE persfamID = '$familyID'";
+$query = "SELECT parenttag FROM events WHERE persfamID = '$familyID'";
 $morelinks = tng_query($query);
 $gotmore = [];
 while ($more = tng_fetch_assoc($morelinks)) {

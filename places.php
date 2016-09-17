@@ -27,7 +27,6 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
   global $maxsearchresults;
   global $psearchns;
   global $urlstring;
-  global $events_table;
   global $order;
   global $namesort;
   global $datesort;
@@ -76,8 +75,8 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
     $placetxt = $displaymsgs[$tngevent];
 
     if (in_array($tngevent, $custevents)) {
-      $eventsjoin = ", $events_table";
-      $allwhere2 .= "$table.$idfield = $events_table.persfamID AND eventtypeID = '$tngevent' AND parenttag = '' AND ";
+      $eventsjoin = ", events";
+      $allwhere2 .= "$table.$idfield = events.persfamID AND eventtypeID = '$tngevent' AND parenttag = '' AND ";
       $tngevent = 'event';
     }
     $datefield = $tngevent . 'date';

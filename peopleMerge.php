@@ -416,21 +416,21 @@ if ($mergeaction == uiTextSnippet('merge')) {
         if (strpos($key, '::')) {
           $halves = explode('::', substr($key, 5));
           $varname = substr(strstr($halves[1], '_'), 1);
-          $query = "DELETE from $events_table WHERE persfamID = '$personID1' and eventID = \"$varname\"";
+          $query = "DELETE from events WHERE persfamID = '$personID1' and eventID = \"$varname\"";
           $evresult = tng_query($query);
           $varname = $halves['0'] != 'event' ? substr(strstr($halves['0'], '_'), 1) : '';
         } else {
           $varname = substr(strstr($key, '_'), 1);
         }
         if ($varname) {
-          $query = "SELECT eventID FROM $events_table WHERE persfamID = '$personID2' AND eventID = \"$varname\"";
+          $query = "SELECT eventID FROM events WHERE persfamID = '$personID2' AND eventID = \"$varname\"";
           $evresult = tng_query($query);
           while ($evrow = tng_fetch_assoc($evresult)) {
             doNotesCitations($personID1, $personID2, $evrow['eventID']);
           }
           tng_free_result($evresult);
 
-          $query = "UPDATE $events_table set persfamID = '$personID1' WHERE persfamID = '$personID2' AND eventID = \"$varname\"";
+          $query = "UPDATE events set persfamID = '$personID1' WHERE persfamID = '$personID2' AND eventID = \"$varname\"";
           $evresult = tng_query($query);
         }
         break;
@@ -489,7 +489,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
             doNotesCitations($sp1row['familyID'], $varname, '');
           }
 
-          $query = "UPDATE $events_table set persfamID = \"{$sp1row['familyID']}\" WHERE persfamID = '$varname'";
+          $query = "UPDATE events set persfamID = \"{$sp1row['familyID']}\" WHERE persfamID = '$varname'";
           $evresult = tng_query($query);
         }
         break;
@@ -555,7 +555,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
               doNotesCitations($varname, $sp1row['familyID'], '');
             }
 
-            $query = "UPDATE $events_table set persfamID = \"{$sp1row['familyID']}\" WHERE persfamID = '$varname'";
+            $query = "UPDATE events set persfamID = \"{$sp1row['familyID']}\" WHERE persfamID = '$varname'";
             $evresult = tng_query($query);
           } else {
             //this means spouses are different, the box has been checked, so they want to keep the right spouse + family
@@ -604,7 +604,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
   $combresult = tng_query($query);
 
   //delete remaining notes, citations & events for person 2
-  $query = "DELETE from $events_table WHERE persfamID = '$personID2'";
+  $query = "DELETE from events WHERE persfamID = '$personID2'";
   $combresult = tng_query($query);
 
   $query = "SELECT xnoteID FROM notelinks WHERE persfamID = '$persfam2'";
@@ -808,7 +808,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                   if (is_array($p2row)) {
                     echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('peopleEdit.php?personID={$p2row['personID']}&amp;cw=1','edit')\"></td>\n";
 
-                    $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID AS eventtypeID, $events_table.eventID AS eventID FROM $events_table, eventtypes WHERE persfamID = \"{$p2row['personID']}\" AND $events_table.eventtypeID = eventtypes.eventtypeID ORDER BY ordernum";
+                    $query = "SELECT display, eventdate, eventplace, info, events.eventtypeID AS eventtypeID, events.eventID AS eventID FROM events, eventtypes WHERE persfamID = \"{$p2row['personID']}\" AND events.eventtypeID = eventtypes.eventtypeID ORDER BY ordernum";
                     $evresult = tng_query($query);
                     $eventcount = tng_num_rows($evresult);
 
@@ -897,7 +897,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                     doRow('endldate', 'endldate', 'p2endldate');
                     doRow('endlplace', 'endlplace', 'p2endlplace');
                   }
-                  $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID AS eventtypeID, $events_table.eventID AS eventID FROM $events_table, eventtypes WHERE persfamID = \"{$p1row['personID']}\" AND $events_table.eventtypeID = eventtypes.eventtypeID ORDER BY ordernum";
+                  $query = "SELECT display, eventdate, eventplace, info, events.eventtypeID AS eventtypeID, events.eventID AS eventID FROM events, eventtypes WHERE persfamID = \"{$p1row['personID']}\" AND events.eventtypeID = eventtypes.eventtypeID ORDER BY ordernum";
                   $evresult = tng_query($query);
                   $eventcount = tng_num_rows($evresult);
 

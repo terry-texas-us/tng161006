@@ -254,9 +254,9 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
             $datetxt = getEventDisplay($event['display']);
             tng_free_result($evresult);
 
-            $eventsjoin = ", $events_table";
+            $eventsjoin = ", events";
             $eventsfields = ', info';
-            $allwhere .= " AND $people_table.personID = $events_table.persfamID AND eventtypeID = '$tngevent'";
+            $allwhere .= " AND $people_table.personID = events.persfamID AND eventtypeID = '$tngevent'";
             $tngevent = 'event';
             break;
         }

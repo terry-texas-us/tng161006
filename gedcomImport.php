@@ -340,12 +340,11 @@ function getContinued() {
 }
 
 function deleteLinksOnMatch($entityID) {
-  global $events_table;
   global $citations_table;
   global $address_table;
   global $assoc_table;
 
-  $query = "SELECT addressID FROM $events_table WHERE persfamID = '$entityID'";
+  $query = "SELECT addressID FROM events WHERE persfamID = '$entityID'";
   $result = tng_query($query);
   while ($row = tng_fetch_assoc($result)) {
     $query = "DELETE from $address_table WHERE addressID = '{$row['addressID']}'";
@@ -353,7 +352,7 @@ function deleteLinksOnMatch($entityID) {
   }
   tng_free_result($result);
 
-  $query = "DELETE from $events_table WHERE persfamID = '$entityID'";
+  $query = "DELETE from events WHERE persfamID = '$entityID'";
   tng_query($query);
 
   $query = "DELETE from $assoc_table WHERE personID = '$entityID'";
@@ -1251,7 +1250,6 @@ function dumpnotes($notearray) {
 }
 
 function saveCustEvents($prefix, $persfamID, $events, $totevents) {
-  global $events_table;
   global $custevents;
   global $medialinks;
   global $num_medialinks;
@@ -1298,7 +1296,7 @@ function saveCustEvents($prefix, $persfamID, $events, $totevents) {
       if ($matches[1]) {
         $eventinfo = '@' . adjustId($matches[1], $savestate['noffset']) . '@';
       }
-      $query = "INSERT INTO $events_table (eventtypeID, persfamID, eventdate, eventdatetr, eventplace, age, agency, cause, addressID, parenttag, info) VALUES('$eventtypeID', '$persfamID', \"" . $eventptr['DATE'] . '", "' . $eventptr['DATETR'] . '", "' . $eventptr['PLAC'] . '", "' . $eventptr['AGE'] . '", "' . $eventptr['AGNC'] . '", "' . $eventptr['CAUS'] . '", "' . $eventptr['ADDR'] . '",  "' . $eventptr['parent'] . "\", '$eventinfo')";
+      $query = "INSERT INTO events (eventtypeID, persfamID, eventdate, eventdatetr, eventplace, age, agency, cause, addressID, parenttag, info) VALUES('$eventtypeID', '$persfamID', \"" . $eventptr['DATE'] . '", "' . $eventptr['DATETR'] . '", "' . $eventptr['PLAC'] . '", "' . $eventptr['AGE'] . '", "' . $eventptr['AGNC'] . '", "' . $eventptr['CAUS'] . '", "' . $eventptr['ADDR'] . '",  "' . $eventptr['parent'] . "\", '$eventinfo')";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $eventID = tng_insert_id();
 
