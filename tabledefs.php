@@ -600,9 +600,9 @@ $query = "CREATE TABLE $states_table (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $states_table);
 
-$query = "DROP TABLE IF EXISTS $temp_events_table";
+$query = 'DROP TABLE IF EXISTS temp_events';
 $result = performQuery($query);
-$query = "CREATE TABLE $temp_events_table (
+$query = "CREATE TABLE temp_events (
     tempID INT(11) NOT NULL AUTO_INCREMENT,
     type CHAR(1) NOT NULL,
     gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
@@ -619,7 +619,7 @@ $query = "CREATE TABLE $temp_events_table (
     INDEX gedtype (type),
     INDEX user (user)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $temp_events_table);
+$result = performQuery($query, 'temp_events');
 
 $query = 'DROP TABLE IF EXISTS timelineevents';
 $result = performQuery($query);

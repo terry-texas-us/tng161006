@@ -21,7 +21,7 @@ switch ($entity) {
     $query = "UPDATE $mostwanted_table SET gedcom=\"$newtree\", personID=\"$newID\" WHERE gedcom=\"$oldtree\" AND personID=\"$entityID\"";
     $result = tng_query($query);
 
-    $query = "UPDATE $temp_events_table SET gedcom=\"$newtree\", personID=\"$newID\" WHERE gedcom=\"$oldtree\" AND personID=\"$entityID\"";
+    $query = "UPDATE temp_events SET gedcom=\"$newtree\", personID=\"$newID\" WHERE gedcom=\"$oldtree\" AND personID=\"$entityID\"";
     $result = tng_query($query);
 
     $query = "UPDATE users SET mygedcom='$newtree', personID='$newID' WHERE mygedcom='$oldtree' AND personID='$entityID'";

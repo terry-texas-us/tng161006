@@ -62,11 +62,11 @@ switch ($t) {
     $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('media') . " $id";
     break;
   case 'tevent':
-    $row = getID('personID, familyID', $temp_events_table, $id, 'tempID');
+    $row = getID('personID, familyID', 'temp_events', $id, 'tempID');
     $personID = $row['personID'];
     $familyID = $row['familyID'];
 
-    $query = "DELETE FROM $temp_events_table WHERE tempID = '$id'";
+    $query = "DELETE FROM temp_events WHERE tempID = '$id'";
     $result = tng_query($query);
 
     $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('tentdata') . ' ' . ($row['personID'] ? $row['personID'] : $row['familyID']);

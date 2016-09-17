@@ -86,20 +86,19 @@ function findhelp($helpfile) {
 function checkReview($type) {
   global $people_table;
   global $families_table;
-  global $temp_events_table;
   global $assignedbranch;
 
   if ($type == 'I') {
-    $revwhere = "$people_table.personID = $temp_events_table.personID AND (type = 'I' OR type = 'C')";
+    $revwhere = "$people_table.personID = temp_events.personID AND (type = 'I' OR type = 'C')";
     $table = $people_table;
   } else {
-    $revwhere = "$families_table.familyID = $temp_events_table.familyID AND type = 'F'";
+    $revwhere = "$families_table.familyID = temp_events.familyID AND type = 'F'";
     $table = $families_table;
   }
   if ($assignedbranch) {
     $revwhere .= " AND branch LIKE \"%$assignedbranch%\"";
   }
-  $revquery = "SELECT count(tempID) AS tcount FROM ($table, $temp_events_table) WHERE $revwhere";
+  $revquery = "SELECT count(tempID) AS tcount FROM ($table, temp_events) WHERE $revwhere";
   $revresult = tng_query($revquery) or die(uiTextSnippet('cannotexecutequery') . ": $revquery");
   $revrow = tng_fetch_assoc($revresult);
   tng_free_result($revresult);

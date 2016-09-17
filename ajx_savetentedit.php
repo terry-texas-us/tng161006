@@ -11,7 +11,7 @@ if ($session_charset != 'UTF-8') {
   $usernote = tng_utf8_decode($usernote);
 }
 $postdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
-$query = "INSERT INTO $temp_events_table (type, personID, familyID, eventID, eventdate, eventplace, info, note, user, postdate) VALUES ('$type', '$personID', '$familyID', '$eventID', '$newdate', '$newplace', '$newinfo', '$usernote', '$currentuser', '$postdate')";
+$query = "INSERT INTO temp_events (type, personID, familyID, eventID, eventdate, eventplace, info, note, user, postdate) VALUES ('$type', '$personID', '$familyID', '$eventID', '$newdate', '$newplace', '$newinfo', '$usernote', '$currentuser', '$postdate')";
 $result = tng_query($query);
 
 if ($tngconfig['revmail']) {

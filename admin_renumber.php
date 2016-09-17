@@ -149,7 +149,7 @@ echo $navList->build('renumber');
             $query = "UPDATE $assoc_table SET passocID = '$newID' WHERE passocID = '$old'";
             $result2 = tng_query($query);
 
-            $query = "UPDATE $temp_events_table SET personID = '$newID' WHERE personID = '$old'";
+            $query = "UPDATE temp_events SET personID = '$newID' WHERE personID = '$old'";
             $result2 = tng_query($query);
 
             $query = "UPDATE $mostwanted_table SET personID = '$newID' WHERE personID = '$old'";
@@ -184,7 +184,7 @@ echo $navList->build('renumber');
             $query = "UPDATE $people_table SET famc = '$newID' WHERE famc=\"{$row['familyID']}\"";
             $result2 = tng_query($query);
 
-            $query = "UPDATE $temp_events_table SET familyID = '$newID' WHERE familyID=\"{$row['familyID']}\"";
+            $query = "UPDATE temp_events SET familyID = '$newID' WHERE familyID=\"{$row['familyID']}\"";
             $result2 = tng_query($query);
           }
 

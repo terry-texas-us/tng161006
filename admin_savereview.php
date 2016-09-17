@@ -17,7 +17,7 @@ $eventdate = addslashes($newdate);
 $eventplace = addslashes($newplace);
 $info = addslashes($newinfo);
 
-$query = "SELECT * FROM $temp_events_table WHERE tempID = \"$tempID\"";
+$query = "SELECT * FROM temp_events WHERE tempID = '$tempID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -140,7 +140,7 @@ if ($choice == uiTextSnippet('savedel')) {
   $succmsg = uiTextSnippet('tentadd');
 }
 if ($choice != uiTextSnippet('postpone')) {
-  $query = "DELETE FROM $temp_events_table WHERE tempID=\"$tempID\"";
+  $query = "DELETE FROM temp_events WHERE tempID = '$tempID'";
   $result = tng_query($query);
 
   if ($choice == uiTextSnippet('igndel')) {
