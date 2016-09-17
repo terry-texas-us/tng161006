@@ -109,7 +109,7 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
               <th style='width: 200px'><?php echo uiTextSnippet('msg'); ?></th>
             </tr>
             <?php
-            doRow($address_table, uiTextSnippet('addresstable'));
+            doRow('addresses', uiTextSnippet('addresstable'));
             doRow($albums_table, uiTextSnippet('albums'));
             doRow($album2entities_table, uiTextSnippet('album2entitiestable'));
             doRow($albumlinks_table, uiTextSnippet('albumlinkstable'));

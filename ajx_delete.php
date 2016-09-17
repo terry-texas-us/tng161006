@@ -156,7 +156,7 @@ switch ($t) {
     $row = tng_fetch_assoc($result);
     tng_free_result($result);
 
-    $query = "DELETE FROM $address_table WHERE addressID = '{$row['addressID']}'";
+    $query = "DELETE FROM addresses WHERE addressID = '{$row['addressID']}'";
     $result = tng_query($query);
 
     $query = "DELETE FROM repositories WHERE ID = '$id'";
@@ -269,7 +269,7 @@ switch ($t) {
     $query = "DELETE FROM $assoc_table WHERE gedcom = '$id'";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $address_table WHERE gedcom = '$id'";
+    $query = "DELETE FROM addresses WHERE gedcom = '$id'";
     $result = tng_query($query);
 
     if ($id) {

@@ -53,7 +53,6 @@ function adjustID($ID, $offset) {
 function getMoreInfo($persfamID, $prevlevel, $prevtag, $prevtype) {
   global $lineinfo;
   global $savestate;
-  global $address_table;
   global $prefix;
 
   $moreinfo = [];
@@ -191,7 +190,7 @@ function getMoreInfo($persfamID, $prevlevel, $prevtag, $prevtype) {
     $moreinfo['MEDIA'] = $mminfo;
   }
   if (is_array($address)) {
-    $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, www, email, phone) VALUES('{$address['ADR1']}', '{$address['ADR2']}', '{$address['CITY']}', '{$address['STAE']}', '{$address['POST']}', '{$address['CTRY']}', '{$address['WWW']}', '{$address['EMAIL']}', '{$address['PHON']}')";
+    $query = "INSERT INTO addresses (address1, address2, city, state, zip, country, www, email, phone) VALUES('{$address['ADR1']}', '{$address['ADR2']}', '{$address['CITY']}', '{$address['STAE']}', '{$address['POST']}', '{$address['CTRY']}', '{$address['WWW']}', '{$address['EMAIL']}', '{$address['PHON']}')";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     $moreinfo['ADDR'] = tng_insert_id();
     if ($moreinfo['FACT'] == $address['ADR1']) {
@@ -340,13 +339,12 @@ function getContinued() {
 }
 
 function deleteLinksOnMatch($entityID) {
-  global $address_table;
   global $assoc_table;
 
   $query = "SELECT addressID FROM events WHERE persfamID = '$entityID'";
   $result = tng_query($query);
   while ($row = tng_fetch_assoc($result)) {
-    $query = "DELETE from $address_table WHERE addressID = '{$row['addressID']}'";
+    $query = "DELETE from addresses WHERE addressID = '{$row['addressID']}'";
     tng_query($query);
   }
   tng_free_result($result);

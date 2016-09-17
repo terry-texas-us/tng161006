@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-$query = "SELECT eventID, age, agency, cause, events.addressID, address1, address2, city, state, zip, country, info, phone, email, www FROM events LEFT JOIN $address_table ON events.addressID = $address_table.addressID WHERE parenttag = '$eventID' AND events.persfamID = '$persfamID'";
+$query = "SELECT eventID, age, agency, cause, events.addressID, address1, address2, city, state, zip, country, info, phone, email, www FROM events LEFT JOIN addresses ON events.addressID = addresses.addressID WHERE parenttag = '$eventID' AND events.persfamID = '$persfamID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);

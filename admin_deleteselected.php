@@ -129,7 +129,7 @@ foreach (array_keys($_POST) as $key) {
       $row = tng_fetch_assoc($result);
       tng_free_result($result);
 
-      $rquery = "DELETE FROM $address_table WHERE addressID = '{$row['addressID']}'";
+      $rquery = "DELETE FROM addresses WHERE addressID = '{$row['addressID']}'";
       $result = tng_query($rquery);
 
       $rquery = "UPDATE sources SET repoID = '' WHERE repoID = '$repoID'";

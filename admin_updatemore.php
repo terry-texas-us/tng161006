@@ -45,18 +45,18 @@ $www = addslashes($www);
 
 if ($addressID) {
   if ($address1 || $address2 || $city || $state || $zip || $country || $phone || $email || $www) {
-    $query = "UPDATE $address_table SET address1='$address1', address2='$address2', city='$city', state='$state', zip='$zip', country='$country', phone='$phone', email='$email', www='$www' WHERE addressID = '$addressID'";
+    $query = "UPDATE addresses SET address1='$address1', address2='$address2', city='$city', state='$state', zip='$zip', country='$country', phone='$phone', email='$email', www='$www' WHERE addressID = '$addressID'";
     $result = tng_query($query);
     adminwritelog(uiTextSnippet('modifyaddress') . ": $addressID");
     $rval = 1;
   } else {
-    $query = "DELETE FROM $address_table WHERE addressID = '$addressID'";
+    $query = "DELETE FROM addresses WHERE addressID = '$addressID'";
     $result = tng_query($query);
     adminwritelog(uiTextSnippet('deleteaddress') . ": $addressID");
     $addressID = '';
   }
 } elseif ($address1 || $address2 || $city || $state || $zip || $country || $phone || $email || $www) {
-  $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, phone, email, www) VALUES('$address1', '$address2', '$city', '$state', '$zip', '$country', '$phone', '$email', '$www')";
+  $query = "INSERT INTO addresses (address1, address2, city, state, zip, country, phone, email, www) VALUES('$address1', '$address2', '$city', '$state', '$zip', '$country', '$phone', '$email', '$www')";
   $result = tng_query($query);
   $addressID = tng_insert_id();
   adminwritelog(uiTextSnippet('addnewaddress') . ": $addressID");

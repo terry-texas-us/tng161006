@@ -1126,8 +1126,6 @@ function getAlbumPhoto($albumID, $albumname) {
 }
 
 function getFact($row) {
-  global $address_table;
-
   $fact = [];
   $i = 0;
   if ($row['age']) {
@@ -1141,7 +1139,7 @@ function getFact($row) {
   }
   if ($row['addressID']) {
     $fact[$i] = $row['isrepo'] ? '' : uiTextSnippet('address') . ':';
-    $query = "SELECT address1, address2, city, state, zip, country, www, email, phone FROM $address_table WHERE addressID = \"{$row['addressID']}\"";
+    $query = "SELECT address1, address2, city, state, zip, country, www, email, phone FROM addresses WHERE addressID = \"{$row['addressID']}\"";
     $addrresults = tng_query($query);
     $addr = tng_fetch_assoc($addrresults);
     if ($addr['address1']) {

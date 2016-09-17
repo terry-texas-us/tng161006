@@ -113,7 +113,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     }
 
     function getFact($row, $level) {
-      global $address_table;
       global $lineending;
 
       $fact = '';
@@ -127,7 +126,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         $fact .= "$level CAUS {$row['cause']}$lineending";
       }
       if ($row['addressID']) {
-        $query = "SELECT address1, address2, city, state, zip, country, phone, email, www FROM $address_table WHERE addressID = \"{$row['addressID']}\"";
+        $query = "SELECT address1, address2, city, state, zip, country, phone, email, www FROM addresses WHERE addressID = \"{$row['addressID']}\"";
         $addrresults = tng_query($query);
         $addr = tng_fetch_assoc($addrresults);
         if ($row['tag'] != 'ADDR') {

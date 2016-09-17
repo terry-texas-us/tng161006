@@ -17,7 +17,7 @@ $row = tng_fetch_assoc($result);
 if ($result) {
   tng_free_result($result);
 }
-$query = "DELETE FROM $address_table WHERE addressID=\"{$row['addressID']}\"";
+$query = "DELETE FROM addresses WHERE addressID=\"{$row['addressID']}\"";
 $result = tng_query($query);
 
 $query = "DELETE FROM events WHERE eventID=\"$eventID\"";

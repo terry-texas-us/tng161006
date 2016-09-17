@@ -104,7 +104,6 @@ function writeCitation($citelist, $level) {
 }
 
 function getFact($row, $level) {
-  global $address_table;
   global $lineending;
 
   $fact = '';
@@ -118,7 +117,7 @@ function getFact($row, $level) {
     $fact .= "$level CAUS {$row['cause']}$lineending";
   }
   if ($row['addressID']) {
-    $query = "SELECT address1, address2, city, state, zip, country, phone, www, email FROM $address_table WHERE addressID = \"{$row['addressID']}\"";
+    $query = "SELECT address1, address2, city, state, zip, country, phone, www, email FROM addresses WHERE addressID = \"{$row['addressID']}\"";
     $addrresults = tng_query($query);
     $addr = tng_fetch_assoc($addrresults);
     if ($row['tag'] != 'ADDR') {

@@ -309,7 +309,6 @@ function getRepoRecord($repoID, $prevlevel) {
   global $currentuser;
   global $tngimpcfg;
   global $today;
-  global $address_table;
   global $prefix;
 
   $repoID = adjustID($repoID, $savestate['roffset']);
@@ -433,7 +432,7 @@ function getRepoRecord($repoID, $prevlevel) {
       processMedia($mmcount, $mminfo, $repoID, '');
     }
     if (is_array($address)) {
-      $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, www, email, phone) VALUES('{$address['ADR1']}', '{$address['ADR2']}', '{$address['CITY']}', '{$address['STAE']}', '{$address['POST']}',  '{$address['CTRY']}', '{$address['WWW']}', '{$address['EMAIL']}', '{$address['PHON']}')";
+      $query = "INSERT INTO addresses (address1, address2, city, state, zip, country, www, email, phone) VALUES('{$address['ADR1']}', '{$address['ADR2']}', '{$address['CITY']}', '{$address['STAE']}', '{$address['POST']}',  '{$address['CTRY']}', '{$address['WWW']}', '{$address['EMAIL']}', '{$address['PHON']}')";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $info['ADDR'] = tng_insert_id();
       $query = "UPDATE repositories SET addressID='{$info['ADDR']}' WHERE repoID = '$repoID'";

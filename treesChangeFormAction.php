@@ -71,7 +71,7 @@ switch ($entity) {
 $query = "SELECT addressID FROM events WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\" AND addressID!=\"\"";
 $result = tng_query($query);
 while ($row = tng_fetch_assoc($result)) {
-  $query = "UPDATE $address_table SET gedcom=\"$newtree\" WHERE addressID=\"{$row['addressID']}\"";
+  $query = "UPDATE addresses SET gedcom=\"$newtree\" WHERE addressID=\"{$row['addressID']}\"";
   $result2 = tng_query($query);
 }
 tng_free_result($result);

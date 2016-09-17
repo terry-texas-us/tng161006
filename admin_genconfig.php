@@ -153,10 +153,6 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
                   <td><input name='mediatypes_table' type='text' value="<?php echo $mediatypes_table; ?>"></td>
                 </tr>
                 <tr>
-                  <td><?php echo uiTextSnippet('addresstable'); ?>:</td>
-                  <td><input name='address_table' type='text' value="<?php echo $address_table; ?>"></td>
-                </tr>
-                <tr>
                   <td><?php echo uiTextSnippet('languages'); ?>:</td>
                   <td><input name='languages_table' type='text' value="<?php echo $languagesTable; ?>"></td>
                 </tr>

@@ -28,8 +28,8 @@ tng_query("ALTER TABLE $children_table AUTO_INCREMENT = 1");
 tng_query("DELETE FROM $assoc_table");
 tng_query("ALTER TABLE $assoc_table AUTO_INCREMENT = 1");
 
-tng_query("DELETE FROM $address_table");
-tng_query("ALTER TABLE $address_table AUTO_INCREMENT = 1");
+tng_query('DELETE FROM addresses');
+tng_query('ALTER TABLE addresses AUTO_INCREMENT = 1');
 
 tng_query('DELETE FROM sources');
 tng_query('ALTER TABLE sources AUTO_INCREMENT = 1');

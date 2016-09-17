@@ -12,9 +12,9 @@ function performQuery($query, $table = null) {
 
 $collationstr = $collation ? "COLLATE $collation" : '';
 
-$query = "DROP TABLE IF EXISTS $address_table";
+$query = 'DROP TABLE IF EXISTS addresses';
 $result = performQuery($query);
-$query = "CREATE TABLE $address_table (
+$query = "CREATE TABLE addresses (
     addressID INT(11) NOT NULL AUTO_INCREMENT,
     address1 VARCHAR(64) NOT NULL,
     address2 VARCHAR(64) NOT NULL,
@@ -29,7 +29,7 @@ $query = "CREATE TABLE $address_table (
     PRIMARY KEY (addressID),
     INDEX address (country, state, city, address1)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $address_table);
+$result = performQuery($query, 'addresses');
 
 $query = "DROP TABLE IF EXISTS $albums_table";
 $result = performQuery($query);

@@ -15,7 +15,6 @@ $albumlinks_table = "albumlinks";
 $media_table = "media";
 $medialinks_table = "medialinks";
 $mediatypes_table = "mediatypes";
-$address_table = "addresses";
 $languagesTable = "languages";
 $rectangles_table = "";
 $reports_table = "reports";
