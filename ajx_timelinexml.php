@@ -34,7 +34,7 @@ echo "?>\n";
 echo "<data>\n";
 
 $wherestr = $pedigree['tcevents'] ? "WHERE (evyear BETWEEN \"$earliest\" AND \"$latest\") OR (endyear BETWEEN \"$earliest\" AND \"$latest\")" : '';
-$tlquery = "SELECT evday, evmonth, evyear, evtitle, evdetail, endday, endmonth, endyear FROM $tlevents_table $wherestr ORDER BY evyear, evmonth, evday";
+$tlquery = "SELECT evday, evmonth, evyear, evtitle, evdetail, endday, endmonth, endyear FROM timelineevents $wherestr ORDER BY evyear, evmonth, evday";
 $tlresult = tng_query($tlquery) or die(uiTextSnippet('cannotexecutequery') . ": $tlquery");
 $tlevents = [];
 $tlevents2 = [];

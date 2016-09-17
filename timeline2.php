@@ -271,7 +271,7 @@ foreach ($timeline as $timeentry) {
 //get all events that fall in time period
 //loop through and use year as index in array
 //append if duplicate years
-$tlquery = "SELECT evday, evmonth, evyear, evtitle, evdetail, endday, endmonth, endyear FROM $tlevents_table WHERE (evyear <= \"$latest\" AND endyear >= \"$earliest\") OR (endyear = \"\" AND (evyear BETWEEN \"$earliest\" AND \"$latest\")) ORDER BY evyear, evmonth, evday";
+$tlquery = "SELECT evday, evmonth, evyear, evtitle, evdetail, endday, endmonth, endyear FROM timelineevents WHERE (evyear <= \"$latest\" AND endyear >= \"$earliest\") OR (endyear = \"\" AND (evyear BETWEEN \"$earliest\" AND \"$latest\")) ORDER BY evyear, evmonth, evday";
 
 $tlresult = tng_query($tlquery) or die(uiTextSnippet('cannotexecutequery') . ": $tlquery");
 $tlevents = [];

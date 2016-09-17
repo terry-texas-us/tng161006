@@ -29,7 +29,7 @@ if (!$endday) {
 if (!$endmonth) {
   $endmonth = '0';
 }
-$query = "INSERT INTO $tlevents_table (evday,evmonth,evyear,endday,endmonth,endyear,evtitle,evdetail) VALUES (\"$evday\",\"$evmonth\",\"$evyear\",\"$endday\",\"$endmonth\",\"$endyear\",\"$evtitle\",\"$evdetail\")";
+$query = "INSERT INTO timelineevents (evday,evmonth,evyear,endday,endmonth,endyear,evtitle,evdetail) VALUES (\"$evday\",\"$evmonth\",\"$evyear\",\"$endday\",\"$endmonth\",\"$endyear\",\"$evtitle\",\"$evdetail\")";
 $result = tng_query($query);
 $tleventID = tng_insert_id();
 

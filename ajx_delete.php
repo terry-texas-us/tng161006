@@ -72,7 +72,7 @@ switch ($t) {
     $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('tentdata') . ' ' . ($row['personID'] ? $row['personID'] : $row['familyID']);
     break;
   case 'tlevent':
-    $query = "DELETE FROM $tlevents_table WHERE tleventID = '$id'";
+    $query = "DELETE FROM timelineevents WHERE tleventID = '$id'";
     $result = tng_query($query);
 
     $logmsg = uiTextSnippet('tlevent') . " $id " . uiTextSnippet('succdeleted');

@@ -138,7 +138,7 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
             doRow($saveimport_table, uiTextSnippet('saveimporttable'));
             doRow($states_table, uiTextSnippet('statestable'));
             doRow($temp_events_table, uiTextSnippet('temptable'));
-            doRow($tlevents_table, uiTextSnippet('tleventstable'));
+            doRow('timelineevents', uiTextSnippet('tleventstable'));
             doRow('trees', uiTextSnippet('trees'));
             doRow('users', uiTextSnippet('users'));
             ?>

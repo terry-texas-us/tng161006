@@ -621,9 +621,9 @@ $query = "CREATE TABLE $temp_events_table (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $temp_events_table);
 
-$query = "DROP TABLE IF EXISTS $tlevents_table";
+$query = 'DROP TABLE IF EXISTS timelineevents';
 $result = performQuery($query);
-$query = "CREATE TABLE $tlevents_table (
+$query = "CREATE TABLE timelineevents (
    tleventID INT(11) NOT NULL AUTO_INCREMENT,
    evday TINYINT(4) NOT NULL,
    evmonth TINYINT(4) NOT NULL,
@@ -637,7 +637,7 @@ $query = "CREATE TABLE $tlevents_table (
    INDEX evyear (evyear, evmonth, evday, evdetail(100)),
    INDEX evdetail (evdetail(100))
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $tlevents_table);
+$result = performQuery($query, 'timelineevents');
 
 $query = 'DROP TABLE IF EXISTS trees';
 $result = performQuery($query);

@@ -29,7 +29,6 @@ $rectangles_table = "";
 $reports_table = "reports";
 $saveimport_table = "saveimport";
 $temp_events_table = "temp_events";
-$tlevents_table = "timelineevents";
 $branches_table = "branches";
 $branchlinks_table = "branchlinks";
 $assoc_table = "associations";

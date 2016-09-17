@@ -9,7 +9,7 @@ require 'version.php';
 
 $tng_search_tlevents = $_SESSION['tng_search_tlevents'];
 
-$query = "SELECT * FROM $tlevents_table WHERE tleventID = \"$tleventID\"";
+$query = "SELECT * FROM timelineevents WHERE tleventID = \"$tleventID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);

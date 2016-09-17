@@ -48,7 +48,7 @@ if ($xsrcaction) {
   $id = 'ID';
   $location = 'placesBrowse.php';
 } elseif ($xtimeaction) {
-  $query = "DELETE FROM $tlevents_table";
+  $query = 'DELETE FROM timelineevents';
   $modmsg = 'tlevents';
   $id = 'tleventID';
   $location = 'timelineeventsBrowse.php';
@@ -147,7 +147,7 @@ foreach (array_keys($_POST) as $key) {
       deleteMediaLinks($place);
       deleteAlbumLinks($place);
     } elseif ($xtimeaction) {
-      $query3 = "DELETE FROM $tlevents_table WHERE tleventID = '$thisid'";
+      $query3 = "DELETE FROM timelineevents WHERE tleventID = '$thisid'";
       $result3 = tng_query($query3) or die(uiTextSnippet('cannotexecutequery') . ": $query3");
       $items[] = $thisid;
     } elseif ($xbranchaction) {

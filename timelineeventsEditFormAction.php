@@ -29,7 +29,7 @@ if (!$endday) {
 if (!$endmonth) {
   $endmonth = '0';
 }
-$query = "UPDATE $tlevents_table SET evday=\"$evday\", evmonth=\"$evmonth\", evyear=\"$evyear\",endday=\"$endday\", endmonth=\"$endmonth\", endyear=\"$endyear\",evtitle=\"$evtitle\",evdetail=\"$evdetail\" WHERE tleventID=\"$tleventID\"";
+$query = "UPDATE timelineevents SET evday=\"$evday\", evmonth=\"$evmonth\", evyear=\"$evyear\",endday=\"$endday\", endmonth=\"$endmonth\", endyear=\"$endyear\",evtitle=\"$evtitle\",evdetail=\"$evdetail\" WHERE tleventID=\"$tleventID\"";
 $result = tng_query($query);
 
 adminwritelog(uiTextSnippet('modifytlevent') . ": $tleventID");
