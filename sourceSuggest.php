@@ -9,7 +9,7 @@ $_SESSION['tng_yourname'] = generatePassword(1);
 
 $preemail = getCurrentUserEmail($currentuser);
 
-$query = "SELECT title FROM $sources_table WHERE sourceID = '$ID'";
+$query = "SELECT title FROM sources WHERE sourceID = '$ID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);

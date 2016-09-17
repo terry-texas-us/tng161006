@@ -34,7 +34,7 @@ switch ($linktype) {
     tng_free_result($result2);
     break;
   case 'S':
-    $query = "SELECT title FROM $sources_table WHERE sourceID = '$personID'";
+    $query = "SELECT title FROM sources WHERE sourceID = '$personID'";
     $result2 = tng_query($query);
     $person = tng_fetch_assoc($result2);
     $namestr = uiTextSnippet('source') . ": $personID";

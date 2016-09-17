@@ -132,7 +132,7 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
             doRow('xnotes', uiTextSnippet('notes'));
             doRow($people_table, uiTextSnippet('people'));
             doRow($reports_table, uiTextSnippet('reports'));
-            doRow($sources_table, uiTextSnippet('sources'));
+            doRow('sources', uiTextSnippet('sources'));
             doRow($repositories_table, uiTextSnippet('repositories'));
             doRow($citations_table, uiTextSnippet('citations'));
             doRow($saveimport_table, uiTextSnippet('saveimporttable'));

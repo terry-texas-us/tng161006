@@ -57,7 +57,7 @@ echo $navList->build('renumber');
       $table = $families_table;
       $id = 'familyID';
     } elseif ($type == 'source') {
-      $table = $sources_table;
+      $table = 'sources';
       $id = 'sourceID';
     } elseif ($type == 'repo') {
       $table = $repositories_table;

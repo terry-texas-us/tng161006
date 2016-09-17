@@ -314,7 +314,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
   $combresult = tng_query($query);
 
   //point sources for r2 to r1
-  $query = "UPDATE $sources_table set repoID = \"$repoID1\" WHERE repoID = '$repoID2'";
+  $query = "UPDATE sources set repoID = \"$repoID1\" WHERE repoID = '$repoID2'";
   $combresult = tng_query($query);
 
   //construct name for default photo 2

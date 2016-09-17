@@ -19,7 +19,7 @@ $firstsectionsave = '';
 $tableid = '';
 $cellnumber = 0;
 
-$query = "SELECT sourceID, title, shorttitle, author, publisher, actualtext, reponame, $sources_table.repoID AS repoID, callnum, other FROM $sources_table LEFT JOIN $repositories_table ON $sources_table.repoID = $repositories_table.repoID WHERE $sources_table.sourceID = '$sourceID'";
+$query = "SELECT sourceID, title, shorttitle, author, publisher, actualtext, reponame, sources.repoID AS repoID, callnum, other FROM sources LEFT JOIN $repositories_table ON sources.repoID = $repositories_table.repoID WHERE sources.sourceID = '$sourceID'";
 $result = tng_query($query);
 $srcrow = tng_fetch_assoc($result);
 if (!tng_num_rows($result)) {

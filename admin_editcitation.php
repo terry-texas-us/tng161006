@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-$query = "SELECT $citations_table.sourceID AS sourceID, description, page, quay, citedate, citetext, note, title FROM $citations_table LEFT JOIN $sources_table ON $citations_table.sourceID = $sources_table.sourceID WHERE citationID = '$citationID'";
+$query = "SELECT $citations_table.sourceID AS sourceID, description, page, quay, citedate, citetext, note, title FROM $citations_table LEFT JOIN sources ON $citations_table.sourceID = sources.sourceID WHERE citationID = '$citationID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);

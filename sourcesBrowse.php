@@ -82,12 +82,12 @@ if ($searchstring) {
   $allwhere .= ')';
 }
 
-$query = "SELECT sourceID, shorttitle, title, ID FROM $sources_table WHERE $allwhere ORDER BY shorttitle, title LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT sourceID, shorttitle, title, ID FROM sources WHERE $allwhere ORDER BY shorttitle, title LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(sourceID) AS scount FROM $sources_table WHERE $allwhere";
+  $query = "SELECT count(sourceID) AS scount FROM sources WHERE $allwhere";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['scount'];

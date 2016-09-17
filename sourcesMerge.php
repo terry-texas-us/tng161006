@@ -158,7 +158,7 @@ function doNotes($persfam1, $persfam2, $varname) {
 
 $s1row = $s2row = '';
 if ($sourceID1) {
-  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $sources_table WHERE sourceID = '$sourceID1'";
+  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM sources WHERE sourceID = '$sourceID1'";
   $result = tng_query($query);
   if ($result && tng_num_rows($result)) {
     $s1row = tng_fetch_assoc($result);
@@ -189,7 +189,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
       $nextone = $nextchunk + 1;
       $nextchunk += $largechunk;
 
-      $query = "SELECT * FROM $sources_table WHERE 1 $wherestr ORDER BY sourceID LIMIT $nextone, $largechunk";
+      $query = "SELECT * FROM sources WHERE 1 $wherestr ORDER BY sourceID LIMIT $nextone, $largechunk";
       $result = tng_query($query);
       $numrows = tng_num_rows($result);
       if ($result && $numrows) {
@@ -197,7 +197,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
           //echo "compare $row['firstname'] $row['lastname']<br>\n";
           $wherestr2 = addCriteria($row);
 
-          $query = "SELECT * FROM $sources_table WHERE sourceID > \"{$row['sourceID']}\" $wherestr2 ORDER BY sourceID LIMIT 1";
+          $query = "SELECT * FROM sources WHERE sourceID > \"{$row['sourceID']}\" $wherestr2 ORDER BY sourceID LIMIT 1";
           //echo "q2: $query<br>\n";
           $result2 = tng_query($query);
           if ($result2 && tng_num_rows($result2)) {
@@ -222,7 +222,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
     $wherestr2 = $sourceID2 ? " AND sourceID > \"$sourceID2\"" : '';
     $wherestr2 .= addCriteria($s1row);
 
-    $query = "SELECT * FROM $sources_table WHERE sourceID != \"{$s1row['sourceID']}\" $wherestr2 ORDER BY sourceID LIMIT 1";
+    $query = "SELECT * FROM sources WHERE sourceID != \"{$s1row['sourceID']}\" $wherestr2 ORDER BY sourceID LIMIT 1";
     $result2 = tng_query($query);
     if ($result2 && tng_num_rows($result2)) {
       $s2row = tng_fetch_assoc($result2);
@@ -233,7 +233,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
     }
   }
 } elseif ($sourceID2) {
-  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $sources_table WHERE sourceID = '$sourceID2'";
+  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM sources WHERE sourceID = '$sourceID2'";
   $result2 = tng_query($query);
   if ($result2 && tng_num_rows($result2) && $sourceID1 != $sourceID2) {
     $s2row = tng_fetch_assoc($result2);
@@ -289,11 +289,11 @@ if ($mergeaction == uiTextSnippet('merge')) {
   }
   if ($updatestr) {
     $updatestr = substr($updatestr, 2);
-    $query = "UPDATE $sources_table set $updatestr WHERE sourceID = '$sourceID1'";
+    $query = "UPDATE sources set $updatestr WHERE sourceID = '$sourceID1'";
     $combresult = tng_query($query);
   }
 
-  $query = "DELETE from $sources_table WHERE sourceID = '$sourceID2'";
+  $query = "DELETE from sources WHERE sourceID = '$sourceID2'";
   $combresult = tng_query($query);
 
   //delete remaining notes & events for source 2

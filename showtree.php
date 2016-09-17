@@ -52,7 +52,7 @@ $headSection->setTitle(uiTextSnippet('tree') . ': ' . $row['treename']);
         tng_free_result($fresult);
         showFact(uiTextSnippet('families'), "<a href='famsearch.php'>" . number_format($frow['fcount']) . '</a>');
 
-        $sresult = tng_query("SELECT count(sourceID) AS scount FROM $sources_table");
+        $sresult = tng_query('SELECT count(sourceID) AS scount FROM sources');
         $srow = tng_fetch_assoc($sresult);
         tng_free_result($sresult);
         showFact(uiTextSnippet('sources'), "<a href='sourcesShow.php'>" . number_format($srow['scount']) . '</a>');

@@ -55,7 +55,7 @@ if ($enttype == 'I') {
   $years = $years = $row['marrdate'] && $row['allow_living'] && $row['allow_private'] ? uiTextSnippet('marrabbr') . ' ' . displayDate($row['marrdate']) : '';
 } elseif ($enttype == 'S') {
   $typestr = 'source';
-  $query = "SELECT title FROM $sources_table WHERE sourceID = '$ID'";
+  $query = "SELECT title FROM sources WHERE sourceID = '$ID'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   tng_free_result($result);

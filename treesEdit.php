@@ -28,7 +28,7 @@ $famrow = tng_fetch_assoc($famresult);
 $fcount = number_format($famrow['fcount']);
 tng_free_result($famresult);
 
-$query = "SELECT count(sourceID) AS scount FROM $sources_table";
+$query = 'SELECT count(sourceID) AS scount FROM sources';
 $srcresult = tng_query($query);
 $srcrow = tng_fetch_assoc($srcresult);
 $scount = number_format($srcrow['scount']);

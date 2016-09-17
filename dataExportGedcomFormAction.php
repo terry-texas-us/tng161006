@@ -1061,7 +1061,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     }
 
     function doSources() {
-      global $sources_table;
       global $savestate;
       global $sourceprefix;
       global $sourcesuffix;
@@ -1074,7 +1073,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         $newsources = array_unique($allsources);
         if ($newsources) {
           foreach ($newsources as $nextsource) {
-            $srcquery = "SELECT * FROM $sources_table WHERE sourceID = '$nextsource'";
+            $srcquery = "SELECT * FROM sources WHERE sourceID = '$nextsource'";
             $srcresult = tng_query($srcquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
             if ($srcresult) {
               $source = tng_fetch_assoc($srcresult);
@@ -1094,7 +1093,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           $numstr = "(0+SUBSTRING_INDEX(sourceID,'$sourcesuffix',1))";
         }
 
-        $srcquery = "SELECT *, $numstr AS num FROM $sources_table WHERE 1 {$savestate['wherestr']} ORDER BY num";
+        $srcquery = "SELECT *, $numstr AS num FROM sources WHERE 1 {$savestate['wherestr']} ORDER BY num";
         $srcresult = tng_query($srcquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         while ($source = tng_fetch_assoc($srcresult)) {
           $sourcestr .= writeSource($source);

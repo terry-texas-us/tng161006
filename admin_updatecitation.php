@@ -36,7 +36,7 @@ $_SESSION['lastcite'] = $citationID;
 adminwritelog(uiTextSnippet('modifycite') . ": $citationID/$sourceID");
 
 if ($sourceID) {
-  $query = "SELECT title, shorttitle FROM $sources_table WHERE sourceID = '$sourceID'";
+  $query = "SELECT title, shorttitle FROM sources WHERE sourceID = '$sourceID'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   $title = $row['title'] ? $row['title'] : $row['shorttitle'];

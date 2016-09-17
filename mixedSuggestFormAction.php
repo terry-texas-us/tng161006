@@ -67,7 +67,7 @@ if ($enttype == 'I') {
   $pagelink = "$tngwebsite/" . "familiesShowFamily.php?familyID=$ID";
   tng_free_result($result);
 } elseif ($enttype == 'S') {
-  $query = "SELECT title FROM $sources_table WHERE sourceID = '$ID'";
+  $query = "SELECT title FROM sources WHERE sourceID = '$ID'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   $name = uiTextSnippet('source') . ": {$row['title']} ($ID)";

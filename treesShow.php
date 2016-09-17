@@ -42,7 +42,7 @@ $headSection->setTitle(uiTextSnippet('trees'));
         $frow = tng_fetch_assoc($fresult);
         tng_free_result($fresult);
 
-        $sresult = tng_query("SELECT count(sourceID) AS scount FROM $sources_table");
+        $sresult = tng_query('SELECT count(sourceID) AS scount FROM sources');
         $srow = tng_fetch_assoc($sresult);
         tng_free_result($sresult);
 

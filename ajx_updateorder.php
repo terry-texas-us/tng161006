@@ -393,7 +393,7 @@ switch ($action) {
     $query2 = "SELECT familyID AS personID FROM $families_table WHERE familyID = '$entityID'";
     reorderMedia($query2, $row);
 
-    $query2 = "SELECT sourceID AS personID FROM $sources_table WHERE sourceID = '$entityID'";
+    $query2 = "SELECT sourceID AS personID FROM sources WHERE sourceID = '$entityID'";
     reorderMedia($query2, $row);
 
     $query2 = "SELECT repoID AS personID FROM $repositories_table WHERE repoID = '$entityID'";
@@ -532,7 +532,7 @@ switch ($action) {
         tng_free_result($result);
         break;
       case 'S':
-        $query = "SELECT title FROM $sources_table WHERE sourceID = '$entityID'";
+        $query = "SELECT title FROM sources WHERE sourceID = '$entityID'";
         $result = tng_query($query);
         $row = tng_fetch_assoc($result);
         $name = $row['title'];

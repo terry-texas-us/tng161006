@@ -69,7 +69,6 @@ fwrite($fp, "\$address_table = \"$address_table\";\n");
 fwrite($fp, "\$languagesTable = \"$languagesTable\";\n");
 fwrite($fp, "\$cemeteries_table = \"$cemeteries_table\";\n");
 
-fwrite($fp, "\$sources_table = \"$sources_table\";\n");
 fwrite($fp, "\$repositories_table = \"$repositories_table\";\n");
 fwrite($fp, "\$citations_table = \"$citations_table\";\n");
 fwrite($fp, "\$events_table = \"$events_table\";\n");

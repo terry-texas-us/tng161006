@@ -31,8 +31,8 @@ tng_query("ALTER TABLE $assoc_table AUTO_INCREMENT = 1");
 tng_query("DELETE FROM $address_table");
 tng_query("ALTER TABLE $address_table AUTO_INCREMENT = 1");
 
-tng_query("DELETE FROM $sources_table");
-tng_query("ALTER TABLE $sources_table AUTO_INCREMENT = 1");
+tng_query('DELETE FROM sources');
+tng_query('ALTER TABLE sources AUTO_INCREMENT = 1');
 
 tng_query("DELETE FROM $repositories_table");
 tng_query("ALTER TABLE $repositories_table AUTO_INCREMENT = 1");

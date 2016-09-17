@@ -259,7 +259,7 @@ switch ($type) {
     }
     break;
   case 'S':
-    $query = "SELECT sourceID, title, shorttitle FROM $sources_table WHERE (title LIKE \"$f$criteria%\" OR shorttitle LIKE \"$f$criteria%\") ORDER BY title LIMIT 250";
+    $query = "SELECT sourceID, title, shorttitle FROM sources WHERE (title LIKE \"$f$criteria%\" OR shorttitle LIKE \"$f$criteria%\") ORDER BY title LIMIT 250";
     $result = tng_query($query);
 
     if (tng_num_rows($result)) {

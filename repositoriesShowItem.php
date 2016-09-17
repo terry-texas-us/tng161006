@@ -88,7 +88,7 @@ $headSection->setTitle($reporow['reponame']);
       $newsoffset = '';
     }
 
-    $query = "SELECT sourceID, title, shorttitle FROM $sources_table WHERE repoID = '$repoID' ORDER BY title LIMIT $soffsetstr" . ($maxsearchresults + 1);
+    $query = "SELECT sourceID, title, shorttitle FROM sources WHERE repoID = '$repoID' ORDER BY title LIMIT $soffsetstr" . ($maxsearchresults + 1);
     $sresult = tng_query($query);
     $numrows = tng_num_rows($sresult);
     $repolinktext = '';

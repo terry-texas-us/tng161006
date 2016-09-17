@@ -23,7 +23,7 @@ function getID($fields, $table, $id) {
 }
 
 if ($xsrcaction) {
-  $query = "DELETE FROM $sources_table";
+  $query = 'DELETE FROM sources';
   $modmsg = 'sources';
   $id = 'ID';
   $location = 'sourcesBrowse.php';
@@ -107,7 +107,7 @@ foreach (array_keys($_POST) as $key) {
       deleteMediaLinks($familyID);
       deleteAlbumLinks($familyID);
     } elseif ($xsrcaction) {
-      $row = getID('sourceID', $sources_table, $thisid);
+      $row = getID('sourceID', 'sources', $thisid);
       $sourceID = $row['sourceID'];
       $items[] = $row['sourceID'];
 
@@ -132,7 +132,7 @@ foreach (array_keys($_POST) as $key) {
       $rquery = "DELETE FROM $address_table WHERE addressID = '{$row['addressID']}'";
       $result = tng_query($rquery);
 
-      $rquery = "UPDATE $sources_table SET repoID = '' WHERE repoID = '$repoID'";
+      $rquery = "UPDATE sources SET repoID = '' WHERE repoID = '$repoID'";
       $result = tng_query($rquery);
 
       deleteEvents($repoID);

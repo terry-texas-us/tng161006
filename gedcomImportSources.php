@@ -51,7 +51,6 @@ function handleSource($persfamID, $prevlevel) {
 }
 
 function getSourceRecord($sourceID, $prevlevel) {
-  global $sources_table;
   global $savestate;
   global $lineinfo;
   global $stdnotes;
@@ -222,12 +221,12 @@ function getSourceRecord($sourceID, $prevlevel) {
     }
   }
   $inschangedt = $changedate ? $changedate : ($tngimpcfg['chdate'] ? '' : $today);
-  $query = "INSERT IGNORE INTO $sources_table (sourceID, callnum, title, author, publisher, shorttitle, repoID, actualtext, changedate, changedby, type, other, comments) VALUES('$sourceID', '{$info['CALN']}', '{$info['TITL']}', '{$info['AUTH']}', '{$info['PUBL']}', '{$info['ABBR']}', '{$info['REPO']}', \"" . trim($info['TEXT']) . "\", '$changedate', '$currentuser', '', '', '')";
+  $query = "INSERT IGNORE INTO sources (sourceID, callnum, title, author, publisher, shorttitle, repoID, actualtext, changedate, changedby, type, other, comments) VALUES('$sourceID', '{$info['CALN']}', '{$info['TITL']}', '{$info['AUTH']}', '{$info['PUBL']}', '{$info['ABBR']}', '{$info['REPO']}', \"" . trim($info['TEXT']) . "\", '$changedate', '$currentuser', '', '', '')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   $success = tng_affected_rows();
   if (!$success && $savestate['del'] != 'no') {
     if ($savestate['neweronly'] && $inschangedt) {
-      $query = "SELECT changedate FROM $sources_table WHERE sourceID = '$sourceID'";
+      $query = "SELECT changedate FROM sources WHERE sourceID = '$sourceID'";
       $result = tng_query($query);
       $srcrow = tng_fetch_assoc($result);
       $goahead = $inschangedt > $srcrow['changedate'] ? 1 : 0;
@@ -239,7 +238,7 @@ function getSourceRecord($sourceID, $prevlevel) {
     }
     if ($goahead) {
       $chdatestr = $inschangedt ? ", changedate='$inschangedt'" : '';
-      $query = "UPDATE $sources_table SET callnum = '{$info['CALN']}', title='{$info['TITL']}', author='{$info['AUTH']}', publisher='{$info['PUBL']}', shorttitle='{$info['ABBR']}', repoID='{$info['REPO']}', actualtext=\"" . trim($info['TEXT']) . "\", changedby='$currentuser' $chdatestr WHERE sourceID = '$sourceID'";
+      $query = "UPDATE sources SET callnum = '{$info['CALN']}', title='{$info['TITL']}', author='{$info['AUTH']}', publisher='{$info['PUBL']}', shorttitle='{$info['ABBR']}', repoID='{$info['REPO']}', actualtext=\"" . trim($info['TEXT']) . "\", changedby='$currentuser' $chdatestr WHERE sourceID = '$sourceID'";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $success = 1;
 

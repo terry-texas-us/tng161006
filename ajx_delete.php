@@ -130,10 +130,10 @@ switch ($t) {
     $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('family') . " $familyID";
     break;
   case 'source':
-    $row = getID('sourceID', $sources_table, $id);
+    $row = getID('sourceID', 'sources', $id);
     $sourceID = $row['sourceID'];
 
-    $query = "DELETE FROM $sources_table WHERE ID = '$id'";
+    $query = "DELETE FROM sources WHERE ID = '$id'";
     $result = tng_query($query);
 
     $query = "DELETE FROM $citations_table WHERE sourceID = '$sourceID'";
@@ -162,7 +162,7 @@ switch ($t) {
     $query = "DELETE FROM $repositories_table WHERE ID = '$id'";
     $result = tng_query($query);
 
-    $query = "UPDATE $sources_table SET repoID = '' WHERE repoID = '$repoID'";
+    $query = "UPDATE sources SET repoID = '' WHERE repoID = '$repoID'";
     $result = tng_query($query);
 
     deleteEvents($repoID);
@@ -245,7 +245,7 @@ switch ($t) {
     $query = "DELETE FROM $children_table WHERE gedcom = '$id'";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $sources_table WHERE gedcom = '$id'";
+    $query = "DELETE FROM sources WHERE gedcom = '$id'";
     $result = tng_query($query);
 
     $query = "DELETE FROM $repositories_table WHERE gedcom = '$id'";

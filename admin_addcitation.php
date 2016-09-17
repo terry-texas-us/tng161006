@@ -33,7 +33,7 @@ $_SESSION['lastcite'] = $citationID;
 
 adminwritelog(uiTextSnippet('addnewcite') . ": $citationID/$persfamID/$eventID/$sourceID");
 
-$query = "SELECT title FROM $sources_table WHERE sourceID = '$sourceID'";
+$query = "SELECT title FROM sources WHERE sourceID = '$sourceID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 

@@ -38,7 +38,7 @@ if (!$youremail || !$comments || !$yourname) {
 killBlockedAddress($youremail);
 killBlockedMessageContent($comments);
 
-$query = "SELECT title FROM $sources_table WHERE sourceID = '$ID'";
+$query = "SELECT title FROM sources WHERE sourceID = '$ID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 $name = uiTextSnippet('source') . ": {$row['title']} ($ID)";

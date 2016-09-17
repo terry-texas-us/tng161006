@@ -81,7 +81,7 @@ if ($personID && !$albumlinkID) {
     if ($linktype == 'F') {
       $query = "SELECT familyID, husband, wife, living, marrdate, branch FROM $families_table WHERE familyID = '$personID'";
     } elseif ($linktype == 'S') {
-      $query = "SELECT title FROM $sources_table WHERE sourceID = '$personID'";
+      $query = "SELECT title FROM sources WHERE sourceID = '$personID'";
     } elseif ($linktype == 'R') {
       $query = "SELECT reponame FROM $repositories_table WHERE repoID = '$personID'";
     } elseif ($linktype == 'I') {

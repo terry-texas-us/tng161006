@@ -154,7 +154,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
             }
           }
           if (!$notelinktext) {
-            $query = "SELECT * FROM $sources_table WHERE sourceID = '{$nrow['personID']}'";
+            $query = "SELECT * FROM sources WHERE sourceID = '{$nrow['personID']}'";
             $result2 = tng_query($query);
             if (tng_num_rows($result2) == 1) {
               $row2 = tng_fetch_assoc($result2);

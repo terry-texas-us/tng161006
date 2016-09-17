@@ -29,13 +29,13 @@ if ($sourcesearch) {
 } else {
   $wherestr = '';
 }
-$query = "SELECT sourceID, title, shorttitle, author FROM $sources_table $wherestr ORDER BY title LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT sourceID, title, shorttitle, author FROM sources $wherestr ORDER BY title LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(sourceID) AS scount FROM $sources_table $wherestr";
+  $query = "SELECT count(sourceID) AS scount FROM sources $wherestr";
 
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);

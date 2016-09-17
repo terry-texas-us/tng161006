@@ -928,7 +928,6 @@ function getDescendant($person, $generation) {
 }
 
 function doSources() {
-  global $sources_table;
   global $events_table;
   global $eventtypes_table;
   global $allsources;
@@ -938,7 +937,7 @@ function doSources() {
   $newsources = array_unique($allsources);
   if ($newsources) {
     foreach ($newsources as $nextsource) {
-      $srcquery = "SELECT * FROM $sources_table WHERE sourceID = '$nextsource'";
+      $srcquery = "SELECT * FROM sources WHERE sourceID = '$nextsource'";
       $srcresult = tng_query($srcquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       if ($srcresult) {
         $source = tng_fetch_assoc($srcresult);

@@ -18,7 +18,7 @@ if ($type == 'person') {
     $suffix = $familysuffix;
   } else {
     if ($type == 'source') {
-      $query = "SELECT sourceID FROM $sources_table WHERE sourceID = '$checkID'";
+      $query = "SELECT sourceID FROM sources WHERE sourceID = '$checkID'";
       $prefix = $sourceprefix;
       $suffix = $sourcesuffix;
     } else {

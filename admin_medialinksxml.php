@@ -196,7 +196,6 @@ function doFamilies($husbname, $wifename) {
 }
 
 function doSources($title) {
-  global $sources_table;
   global $maxsearchresults;
 
   $lines = "<tr>\n";
@@ -205,7 +204,7 @@ function doSources($title) {
   $lines .= '<td>' . uiTextSnippet('title') . "</td>\n";
   $lines .= "</tr>\n";
 
-  $query = "SELECT sourceID, title FROM $sources_table WHERE title LIKE \"%$title%\" ORDER BY title LIMIT $maxsearchresults";
+  $query = "SELECT sourceID, title FROM sources WHERE title LIKE \"%$title%\" ORDER BY title LIMIT $maxsearchresults";
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {

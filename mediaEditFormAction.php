@@ -182,7 +182,7 @@ if ($mediatypeID != $mediatypeID_org) {
       reorderMedia($query, $plink, $mediatypeID_org);
       reorderMedia($query, $plink, $mediatypeID);
 
-      $query = "SELECT sourceID AS personID FROM $sources_table WHERE sourceID = \"{$plink['personID']}\"";
+      $query = "SELECT sourceID AS personID FROM sources WHERE sourceID = \"{$plink['personID']}\"";
       reorderMedia($query, $plink, $mediatypeID_org);
       reorderMedia($query, $plink, $mediatypeID);
 

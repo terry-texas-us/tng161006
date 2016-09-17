@@ -96,7 +96,7 @@ switch ($type) {
     $newID = getNewID('family', $families_table);
     break;
   case 'source':
-    $newID = getNewID('source', $sources_table);
+    $newID = getNewID('source', 'sources');
     break;
   case 'repo':
     $newID = getNewID('repo', $repositories_table);

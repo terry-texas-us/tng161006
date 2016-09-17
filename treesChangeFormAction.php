@@ -49,7 +49,7 @@ switch ($entity) {
   case 'source':
     $url = "admin_editsource.php?sourceID=$newID&tree=$newtree";
 
-    $query = "UPDATE $sources_table SET gedcom=\"$newtree\", sourceID=\"$newID\" WHERE gedcom=\"$oldtree\" AND sourceID=\"$entityID\"";
+    $query = "UPDATE sources SET gedcom=\"$newtree\", sourceID=\"$newID\" WHERE gedcom=\"$oldtree\" AND sourceID=\"$entityID\"";
     $result = tng_query($query);
 
     $query = "DELETE FROM $citations_table WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\"";
@@ -62,7 +62,7 @@ switch ($entity) {
     $query = "UPDATE $repositories_table SET gedcom=\"$newtree\", repoID=\"$newID\" WHERE gedcom=\"$oldtree\" AND repoID=\"$entityID\"";
     $result = tng_query($query);
 
-    $query = "UPDATE $sources_table SET repoID=\"\" WHERE gedcom=\"$oldtree\" AND repoID=\"$entityID\"";
+    $query = "UPDATE sources SET repoID=\"\" WHERE gedcom=\"$oldtree\" AND repoID=\"$entityID\"";
     $result = tng_query($query);
 
     break;

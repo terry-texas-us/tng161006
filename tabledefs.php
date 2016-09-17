@@ -73,7 +73,7 @@ $query = "CREATE TABLE $album2entities_table (
     INDEX entityID (entityID, ordernum),
     FOREIGN KEY alinks_fk1 (entityID) REFERENCES $people_table (personID),
     FOREIGN KEY alinks_fk2 (entityID) REFERENCES $families_table (familyID),
-    FOREIGN KEY alinks_fk3 (entityID) REFERENCES $sources_table (sourceID)
+    FOREIGN KEY alinks_fk3 (entityID) REFERENCES sources (sourceID)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $album2entities_table);
 
@@ -184,7 +184,7 @@ $query = "CREATE TABLE $citations_table (
     INDEX citation (persfamID, eventID, sourceID, description(20)),
     FOREIGN KEY citations_fk1 (persfamID) REFERENCES $people_table (personID),
     FOREIGN KEY citations_fk2 (persfamID) REFERENCES $families_table (familyID),
-    FOREIGN KEY citations_fk3 (sourceID) REFERENCES $sources_table (sourceID)
+    FOREIGN KEY citations_fk3 (sourceID) REFERENCES sources (sourceID)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $citations_table);
 
@@ -217,7 +217,7 @@ $query = "CREATE TABLE $events_table (
     INDEX eventplace (eventplace(20)),
     FOREIGN KEY events_fk1 (persfamID) REFERENCES $people_table (personID),
     FOREIGN KEY events_fk2 (persfamID) REFERENCES $families_table (familyID),
-    FOREIGN KEY events_fk3 (persfamID) REFERENCES $sources_table (sourceID),
+    FOREIGN KEY events_fk3 (persfamID) REFERENCES sources (sourceID),
     FOREIGN KEY events_fk4 (eventtypeID) REFERENCES $eventtypes_table (eventtypeID)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $events_table);
@@ -307,7 +307,7 @@ $query = "CREATE TABLE $medialinks_table (
     INDEX personID (personID, ordernum),
     FOREIGN KEY medialinks_fk1 (personID) REFERENCES $people_table (personID),
     FOREIGN KEY medialinks_fk2 (personID) REFERENCES $families_table (familyID),
-    FOREIGN KEY medialinks_fk3 (personID) REFERENCES $sources_table (sourceID)
+    FOREIGN KEY medialinks_fk3 (personID) REFERENCES sources (sourceID)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $medialinks_table);
 
@@ -567,9 +567,9 @@ $query = "CREATE TABLE $saveimport_table (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $saveimport_table);
 
-$query = "DROP TABLE IF EXISTS $sources_table";
+$query = 'DROP TABLE IF EXISTS sources';
 $result = performQuery($query);
-$query = "CREATE TABLE $sources_table (
+$query = "CREATE TABLE sources (
     ID INT(11) NOT NULL AUTO_INCREMENT,
     gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     sourceID VARCHAR(22) NOT NULL,
@@ -590,7 +590,7 @@ $query = "CREATE TABLE $sources_table (
     UNIQUE sourceID (sourceID),
     INDEX changedate (changedate)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $sources_table);
+$result = performQuery($query, 'sources');
 
 $query = 'DROP TABLE IF EXISTS states';
 $result = performQuery($query);

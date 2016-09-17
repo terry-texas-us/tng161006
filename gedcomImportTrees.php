@@ -4,7 +4,6 @@ function ClearData($tree) {
   global $people_table;
   global $families_table;
   global $children_table;
-  global $sources_table;
   global $events_table;
   global $repositories_table;
   global $citations_table;
@@ -21,7 +20,7 @@ function ClearData($tree) {
           'notelinks',
           $people_table,
           $repositories_table,
-          $sources_table,
+          'sources',
           'xnotes'
   ];
   $query = 'SELECT COUNT(*) AS trees FROM trees';

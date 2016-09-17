@@ -61,14 +61,13 @@ function getBirthInfo($thisperson) {
 }
 
 function getCitations($persfamID, $shortcite = 1) {
-  global $sources_table;
   global $citations_table;
   global $citations;
   global $citationsctr;
   global $citedisplay;
 
   $actualtext = $shortcite ? '' : ', actualtext';
-  $citquery = "SELECT citationID, title, shorttitle, author, other, publisher, callnum, page, quay, citedate, citetext, $citations_table.note AS note, $citations_table.sourceID, description, eventID{$actualtext} FROM $citations_table LEFT JOIN $sources_table ON $citations_table.sourceID = $sources_table.sourceID WHERE persfamID = '$persfamID' ORDER BY ordernum, citationID";
+  $citquery = "SELECT citationID, title, shorttitle, author, other, publisher, callnum, page, quay, citedate, citetext, $citations_table.note AS note, $citations_table.sourceID, description, eventID{$actualtext} FROM $citations_table LEFT JOIN sources ON $citations_table.sourceID = sources.sourceID WHERE persfamID = '$persfamID' ORDER BY ordernum, citationID";
   $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
 
   while ($citrow = tng_fetch_assoc($citresult)) {

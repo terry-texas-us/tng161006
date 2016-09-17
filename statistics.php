@@ -60,7 +60,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
         $totalmedia[$mediatypeID] = number_format($row['mcount']);
         tng_free_result($result);
       }
-      $query = "SELECT count(id) AS scount FROM $sources_table";
+      $query = 'SELECT count(id) AS scount FROM sources';
       $result = tng_query($query);
       $row = tng_fetch_assoc($result);
       $totalsources = number_format($row['scount']);

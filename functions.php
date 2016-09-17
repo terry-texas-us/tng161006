@@ -74,7 +74,6 @@ function doMedia($mediatypeID) {
   global $cutoffstr;
   global $wherestr;
   global $families_table;
-  global $sources_table;
   global $repositories_table;
   global $citations_table;
   global $nonames;
@@ -119,7 +118,7 @@ function doMedia($mediatypeID) {
       $row['status'] = uiTextSnippet($status);
     }
 
-    $query = "SELECT medialinkID, $medialinks_table.personID AS personID, $medialinks_table.eventID, people.personID AS personID2, familyID, people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch as fbranch, $families_table.living as fliving, $families_table.private as fprivate, husband, wife, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.prefix as prefix, people.suffix as suffix, nameorder, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID,reponame, deathdate, burialdate, linktype FROM $medialinks_table LEFT JOIN $people_table AS people ON ($medialinks_table.personID = people.personID) LEFT JOIN $families_table ON ($medialinks_table.personID = $families_table.familyID) LEFT JOIN $sources_table ON ($medialinks_table.personID = $sources_table.sourceID) LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID) WHERE mediaID = \"{$row['mediaID']}\"$Wherestr2 ORDER BY lastname, lnprefix, firstname, $medialinks_table.personID";
+    $query = "SELECT medialinkID, $medialinks_table.personID AS personID, $medialinks_table.eventID, people.personID AS personID2, familyID, people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch as fbranch, $families_table.living as fliving, $families_table.private as fprivate, husband, wife, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.prefix as prefix, people.suffix as suffix, nameorder, sources.title, sources.sourceID, $repositories_table.repoID,reponame, deathdate, burialdate, linktype FROM $medialinks_table LEFT JOIN $people_table AS people ON ($medialinks_table.personID = people.personID) LEFT JOIN $families_table ON ($medialinks_table.personID = $families_table.familyID) LEFT JOIN sources ON ($medialinks_table.personID = sources.sourceID) LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID) WHERE mediaID = \"{$row['mediaID']}\"$Wherestr2 ORDER BY lastname, lnprefix, firstname, $medialinks_table.personID";
     $presult = tng_query($query);
     $foundliving = 0;
     $foundprivate = 0;
