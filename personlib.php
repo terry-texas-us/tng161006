@@ -752,9 +752,6 @@ function getLinkTypeMisc($entity, $linktype) {
 }
 
 function getAlbums($entity, $linktype) {
-  global $album2entities_table;
-  global $albums_table;
-  global $albumlinks_table;
   global $people_table;
   global $families_table;
   global $livedefault;
@@ -765,7 +762,7 @@ function getAlbums($entity, $linktype) {
   $ID = $misc['personID'];
   $always = $misc['always'];
 
-  $query = "SELECT $albums_table.albumID, albumname, description, eventID, alwayson FROM ($albums_table,$album2entities_table) WHERE entityID = '$ID' AND $album2entities_table.albumID=$albums_table.albumID AND active = '1' ORDER BY ordernum, albumname";
+  $query = "SELECT albums.albumID, albumname, description, eventID, alwayson FROM (albums, albumplinks) WHERE entityID = '$ID' AND albumplinks.albumID=albums.albumID AND active = '1' ORDER BY ordernum, albumname";
   $albumlinks = tng_query($query);
 
   while ($albumlink = tng_fetch_assoc($albumlinks)) {
@@ -773,7 +770,7 @@ function getAlbums($entity, $linktype) {
     $eventID = $albumlink['eventID'] && $entity['allow_living'] && $entity['allow_private'] ? $albumlink['eventID'] : '-x--general--x-';
 
     //check to see if we have rights to view this album
-    $query = "SELECT $album2entities_table.entityID AS personID, people.living AS living, people.private AS private, people.branch AS branch, families.branch AS fbranch, families.living AS fliving, families.private AS fprivate, familyID, people.personID AS personID2 FROM $album2entities_table LEFT JOIN $people_table AS people ON $album2entities_table.entityID = people.personID LEFT JOIN $families_table AS families ON $album2entities_table.entityID = families.familyID WHERE albumID = '{$albumlink['albumID']}'";
+    $query = "SELECT albumplinks.entityID AS personID, people.living AS living, people.private AS private, people.branch AS branch, families.branch AS fbranch, families.living AS fliving, families.private AS fprivate, familyID, people.personID AS personID2 FROM albumplinks LEFT JOIN $people_table AS people ON albumplinks.entityID = people.personID LEFT JOIN $families_table AS families ON albumplinks.entityID = families.familyID WHERE albumID = '{$albumlink['albumID']}'";
     $presult = tng_query($query);
     $foundliving = 0;
     $foundprivate = 0;
@@ -808,7 +805,7 @@ function getAlbums($entity, $linktype) {
     tng_free_result($presult);
 
     //putting this count in the albums table would make this faster
-    $query = "SELECT count($albumlinks_table.albumlinkID) AS acount FROM $albumlinks_table WHERE albumID = \"{$albumlink['albumID']}\"";
+    $query = "SELECT count(albumlinks.albumlinkID) AS acount FROM albumlinks WHERE albumID = \"{$albumlink['albumID']}\"";
     $result2 = tng_query($query);
     $arow = tng_fetch_assoc($result2);
     tng_free_result($result2);
@@ -1044,15 +1041,14 @@ function getAlbumPhoto($albumID, $albumname) {
   global $livedefault;
   global $rootpath;
   global $media_table;
-  global $albumlinks_table;
   global $people_table;
   global $families_table;
   global $medialinks_table;
   global $mediatypes_assoc;
   global $mediapath;
 
-  $query2 = "SELECT path, thumbpath, usecollfolder, mediatypeID, $albumlinks_table.mediaID AS mediaID, alwayson FROM ($media_table, $albumlinks_table)
-    WHERE albumID = \"$albumID\" AND $media_table.mediaID = $albumlinks_table.mediaID AND defphoto=\"1\"";
+  $query2 = "SELECT path, thumbpath, usecollfolder, mediatypeID, albumlinks.mediaID AS mediaID, alwayson FROM ($media_table, albumlinks)
+    WHERE albumID = \"$albumID\" AND $media_table.mediaID = albumlinks.mediaID AND defphoto=\"1\"";
   $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
   $trow = tng_fetch_assoc($result2);
   $mediaID = $trow['mediaID'];

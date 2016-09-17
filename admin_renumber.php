@@ -204,7 +204,7 @@ echo $navList->build('renumber');
             }
           }
 
-          $query = "UPDATE $album2entities_table SET entityID = '$newID' WHERE entityID=\"" . $row[$id] . '"';
+          $query = "UPDATE albumplinks SET entityID = '$newID' WHERE entityID=\"" . $row[$id] . '"';
           $result2 = tng_query($query);
 
           if ($type == 'source') {

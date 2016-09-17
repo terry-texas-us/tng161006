@@ -3,15 +3,14 @@
 function getAlbumPhoto($albumID, $albumname) {
   global $rootpath;
   global $media_table;
-  global $albumlinks_table;
   global $people_table;
   global $families_table;
   global $medialinks_table;
   global $mediatypes_assoc;
   global $mediapath;
   
-  $query2 = "SELECT path, thumbpath, usecollfolder, mediatypeID, $albumlinks_table.mediaID AS mediaID, alwayson FROM ($media_table, $albumlinks_table)
-    WHERE albumID = \"$albumID\" AND $media_table.mediaID = $albumlinks_table.mediaID AND defphoto=\"1\"";
+  $query2 = "SELECT path, thumbpath, usecollfolder, mediatypeID, albumlinks.mediaID AS mediaID, alwayson FROM ($media_table, albumlinks)
+    WHERE albumID = \"$albumID\" AND $media_table.mediaID = albumlinks.mediaID AND defphoto=\"1\"";
   $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
   $trow = tng_fetch_assoc($result2);
   $mediaID = $trow['mediaID'];

@@ -7,7 +7,7 @@ $adminLogin = 1;
 require 'checklogin.php';
 
 if ($albumID) {
-  $query2 = "SELECT entityID FROM $album2entities_table WHERE albumID = '$albumID' AND linktype = '$linktype'";
+  $query2 = "SELECT entityID FROM albumplinks WHERE albumID = '$albumID' AND linktype = '$linktype'";
 } else {
   $query2 = "SELECT personID AS entityID FROM $medialinks_table WHERE mediaID = '$mediaID' AND linktype = '$linktype'";
 }

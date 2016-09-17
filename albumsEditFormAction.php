@@ -19,7 +19,7 @@ $keywords = addslashes($keywords);
 if (!$alwayson) {
   $alwayson = 0;
 }
-$query = "UPDATE $albums_table SET albumname=\"$albumname\",description=\"$description\",keywords=\"$keywords\",active=\"$active\",alwayson=\"$alwayson\" WHERE albumID=\"$albumID\"";
+$query = "UPDATE albums SET albumname=\"$albumname\",description=\"$description\",keywords=\"$keywords\",active=\"$active\",alwayson=\"$alwayson\" WHERE albumID=\"$albumID\"";
 $result = tng_query($query);
 
 adminwritelog(uiTextSnippet('modifyalbum') . ": $albumID");

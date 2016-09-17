@@ -68,7 +68,6 @@ function getMediaInfo($mediatypeID, $mediaID, $personID, $albumID, $albumlinkID,
   global $ordernum;
   global $media_table;
   global $medialinks_table;
-  global $albumlinks_table;
 
   $info = [];
 
@@ -76,7 +75,7 @@ function getMediaInfo($mediatypeID, $mediaID, $personID, $albumID, $albumlinkID,
     if ($tnggallery) {
       $wherestr = ' AND thumbpath != ""';
     }
-    $query = "SELECT $media_table.mediaID, albumlinkID, ordernum, path, map, description, notes, width, height, datetaken, placetaken, owner, alwayson, abspath, usecollfolder, status, plot, cemeteryID, showmap, bodytext, form, newwindow, usenl, latitude, longitude, mediatypeID FROM ($albumlinks_table, $media_table) WHERE albumID = '$albumID' AND $albumlinks_table.mediaID = $media_table.mediaID $wherestr ORDER BY ordernum, description";
+    $query = "SELECT $media_table.mediaID, albumlinkID, ordernum, path, map, description, notes, width, height, datetaken, placetaken, owner, alwayson, abspath, usecollfolder, status, plot, cemeteryID, showmap, bodytext, form, newwindow, usenl, latitude, longitude, mediatypeID FROM (albumlinks, $media_table) WHERE albumID = '$albumID' AND albumlinks.mediaID = $media_table.mediaID $wherestr ORDER BY ordernum, description";
     $result = tng_query($query);
     $offsets = get_media_offsets($result, $mediaID);
     $info['page'] = $offsets[0] + 1;
@@ -287,12 +286,9 @@ function getMediaNavigation($mediaID, $personID, $albumlinkID, $result, $showlin
 }
 
 function getAlbumLinkText($mediaID) {
-  global $albums_table;
-  global $albumlinks_table;
-
   $albumlinktext = '';
   //get all albumlink records for this mediaID, joined with album tables
-  $query = "SELECT $albums_table.albumID, albumname FROM ($albumlinks_table, $albums_table) WHERE mediaID = \"$mediaID\" AND $albumlinks_table.albumID = $albums_table.albumID";
+  $query = "SELECT albums.albumID, albumname FROM (albumlinks, albums) WHERE mediaID = \"$mediaID\" AND albumlinks.albumID = albums.albumID";
   $result = tng_query($query);
   while ($row = tng_fetch_assoc($result)) {
     if ($albumlinktext) {

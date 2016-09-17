@@ -31,9 +31,9 @@ $query = "CREATE TABLE addresses (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, 'addresses');
 
-$query = "DROP TABLE IF EXISTS $albums_table";
+$query = 'DROP TABLE IF EXISTS albums';
 $result = performQuery($query);
-$query = "CREATE TABLE $albums_table (
+$query = "CREATE TABLE albums (
     albumID INT(11) NOT NULL AUTO_INCREMENT,
     albumname VARCHAR(100) NOT NULL,
     description TEXT NULL,
@@ -43,11 +43,11 @@ $query = "CREATE TABLE $albums_table (
     PRIMARY KEY (albumID),
     INDEX albumname (albumname)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $albums_table);
+$result = performQuery($query, 'albums');
 
-$query = "DROP TABLE IF EXISTS $albumlinks_table";
+$query = 'DROP TABLE IF EXISTS albumlinks';
 $result = performQuery($query);
-$query = "CREATE TABLE $albumlinks_table (
+$query = "CREATE TABLE albumlinks (
     albumlinkID INT(11) NOT NULL AUTO_INCREMENT,
     albumID INT(11) NOT NULL,
     mediaID INT(11) NOT NULL,
@@ -56,11 +56,11 @@ $query = "CREATE TABLE $albumlinks_table (
     PRIMARY KEY (albumlinkID),
     INDEX albumID (albumID,ordernum)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $albumlinks_table);
+$result = performQuery($query, 'albumlinks');
 
-$query = "DROP TABLE IF EXISTS $album2entities_table";
+$query = 'DROP TABLE IF EXISTS albumplinks';
 $result = performQuery($query);
-$query = "CREATE TABLE $album2entities_table (
+$query = "CREATE TABLE albumplinks (
     alinkID INT(11) NOT NULL AUTO_INCREMENT,
     gedcom VARCHAR(20) NOT NULL,
     linktype CHAR(1) NOT NULL,
@@ -75,7 +75,7 @@ $query = "CREATE TABLE $album2entities_table (
     FOREIGN KEY alinks_fk2 (entityID) REFERENCES $families_table (familyID),
     FOREIGN KEY alinks_fk3 (entityID) REFERENCES sources (sourceID)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $album2entities_table);
+$result = performQuery($query, 'albumplinks');
 
 $query = 'DROP TABLE IF EXISTS associations';
 $result = performQuery($query);

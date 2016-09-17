@@ -129,18 +129,6 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
                   <td><input name='children_table' type='text' value="<?php echo $children_table; ?>"></td>
                 </tr>
                 <tr>
-                  <td><?php echo uiTextSnippet('albums'); ?>:</td>
-                  <td><input name='albums_table' type='text' value="<?php echo $albums_table; ?>"></td>
-                </tr>
-                <tr>
-                  <td><?php echo uiTextSnippet('album2entitiestable'); ?>:</td>
-                  <td><input name='album2entities_table' type='text' value="<?php echo $album2entities_table; ?>"></td>
-                </tr>
-                <tr>
-                  <td><?php echo uiTextSnippet('albumlinkstable'); ?>:</td>
-                  <td><input name='albumlinks_table' type='text' value="<?php echo $albumlinks_table; ?>"></td>
-                </tr>
-                <tr>
                   <td><?php echo uiTextSnippet('media'); ?>:</td>
                   <td><input name='media_table' type='text' value="<?php echo $media_table; ?>"></td>
                 </tr>

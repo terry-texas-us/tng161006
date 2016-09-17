@@ -103,21 +103,21 @@ if ($xphaction == uiTextSnippet('convto')) {
       $count++;
       $mediaID = substr($key, 2);
 
-      $query = "SELECT count(albumlinkID) AS acount FROM $albumlinks_table WHERE albumID = \"$albumID\" AND mediaID = \"$mediaID\"";
+      $query = "SELECT count(albumlinkID) AS acount FROM albumlinks WHERE albumID = \"$albumID\" AND mediaID = \"$mediaID\"";
       $result = tng_query($query);
       $row = tng_fetch_assoc($result);
       tng_free_result($result);
 
       if (!$row['acount']) {
         //get new order number
-        $query = "SELECT count(albumlinkID) AS acount FROM $albumlinks_table WHERE albumID = \"$albumID\"";
+        $query = "SELECT count(albumlinkID) AS acount FROM albumlinks WHERE albumID = \"$albumID\"";
         $result = tng_query($query);
         $row = tng_fetch_assoc($result);
         tng_free_result($result);
 
         $neworder = $row['acount'] ? $row['acount'] + 1 : 1;
 
-        $query = "INSERT INTO $albumlinks_table (albumID, mediaID, ordernum, defphoto) VALUES (\"$albumID\", \"$mediaID\", \"$neworder\", \"0\")";
+        $query = "INSERT INTO albumlinks (albumID, mediaID, ordernum, defphoto) VALUES (\"$albumID\", \"$mediaID\", \"$neworder\", \"0\")";
         $result = tng_query($query);
       }
     }
@@ -133,7 +133,7 @@ if ($xphaction == uiTextSnippet('convto')) {
 
       //removeImages($mediaID);
 
-      $aquery = "DELETE FROM $albumlinks_table WHERE mediaID=\"$mediaID\"";
+      $aquery = "DELETE FROM albumlinks WHERE mediaID=\"$mediaID\"";
       $aresult = tng_query($aquery) or die(uiTextSnippet('cannotexecutequery') . ": $aquery");
 
       resortMedia($mediaID);

@@ -1247,7 +1247,6 @@ function saveCustEvents($prefix, $persfamID, $events, $totevents) {
   global $num_medialinks;
   global $medialinks_table;
   global $num_albumlinks;
-  global $album2entities_table;
   global $albumlinks;
   global $allevents;
   global $savestate;
@@ -1309,7 +1308,7 @@ function saveCustEvents($prefix, $persfamID, $events, $totevents) {
           if (isset($albumlinks[$key])) {
             foreach ($albumlinks[$key] as $albumlinkID) {
               //put new eventID in old medialink records for this event
-              $query = "UPDATE $album2entities_table SET eventID = \"$eventID\" WHERE alinkID = \"$albumlinkID\"";
+              $query = "UPDATE albumplinks SET eventID = \"$eventID\" WHERE alinkID = \"$albumlinkID\"";
               $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
             }
             unset($albumlinks[$key]);

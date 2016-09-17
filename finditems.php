@@ -21,7 +21,7 @@ header('Content-type:text/html; charset=' . $session_charset);
 
 $mediaquery = '';
 if ($albumID) {
-  $mediaquery = "SELECT entityID FROM $album2entities_table WHERE albumID = '$albumID' AND linktype = '$type'";
+  $mediaquery = "SELECT entityID FROM albumplinks WHERE albumID = '$albumID' AND linktype = '$type'";
 } else {
   if ($mediaID) {
     $mediaquery = "SELECT personID AS entityID FROM $medialinks_table WHERE mediaID = '$mediaID' AND linktype = '$type'";

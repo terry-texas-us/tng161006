@@ -28,9 +28,7 @@ function deleteMediaLinks($id) {
 }
 
 function deleteAlbumLinks($id) {
-  global $album2entities_table;
-
-  $query = "DELETE FROM $album2entities_table WHERE entityID = '$id'";
+  $query = "DELETE FROM albumplinks WHERE entityID = '$id'";
   tng_query($query);
 }
 

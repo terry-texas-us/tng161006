@@ -16,7 +16,6 @@ $noneliving = $noneprivate = 1;
 function getAlbumLinkText($albumID) {
   global $noneliving;
   global $noneprivate;
-  global $album2entities_table;
   global $people_table;
   global $families_table;
   global $maxsearchresults;
@@ -30,7 +29,7 @@ function getAlbumLinkText($albumID) {
     $ioffsetstr = '';
     $newioffset = '';
   }
-  $query = "SELECT $album2entities_table.alinkID, $album2entities_table.entityID AS personID, people.living AS living, people.private AS private, people.branch AS branch, $album2entities_table.eventID, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, people.nameorder, familyID, people.personID AS personID2, wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.prefix AS wprefix, wifepeople.suffix AS wsuffix, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.prefix AS hprefix, husbpeople.suffix AS hsuffix, sources.title, sources.sourceID, repositories.repoID, reponame FROM $album2entities_table LEFT JOIN $people_table AS people ON $album2entities_table.entityID = people.personID LEFT JOIN $families_table ON $album2entities_table.entityID = $families_table.familyID LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID LEFT JOIN sources ON $album2entities_table.entityID = sources.sourceID LEFT JOIN repositories ON ($album2entities_table.entityID = repositories.repoID) WHERE albumID = '$albumID' ORDER BY people.lastname, people.lnprefix, people.firstname, hlastname, hlnprefix, hfirstname  LIMIT $ioffsetstr" . ($maxsearchresults + 1);
+  $query = "SELECT albumplinks.alinkID, albumplinks.entityID AS personID, people.living AS living, people.private AS private, people.branch AS branch, albumplinks.eventID, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, people.nameorder, familyID, people.personID AS personID2, wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.prefix AS wprefix, wifepeople.suffix AS wsuffix, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.prefix AS hprefix, husbpeople.suffix AS hsuffix, sources.title, sources.sourceID, repositories.repoID, reponame FROM albumplinks LEFT JOIN $people_table AS people ON albumplinks.entityID = people.personID LEFT JOIN $families_table ON albumplinks.entityID = $families_table.familyID LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID LEFT JOIN sources ON albumplinks.entityID = sources.sourceID LEFT JOIN repositories ON (albumplinks.entityID = repositories.repoID) WHERE albumID = '$albumID' ORDER BY people.lastname, people.lnprefix, people.firstname, hlastname, hlnprefix, hfirstname  LIMIT $ioffsetstr" . ($maxsearchresults + 1);
   $presult = tng_query($query);
   $numrows = tng_num_rows($presult);
 
@@ -132,7 +131,7 @@ if ($offset) {
   $page = 1;
 }
 
-$query = "SELECT albumname, description, active FROM $albums_table WHERE albumID = \"$albumID\"";
+$query = "SELECT albumname, description, active FROM albums WHERE albumID = \"$albumID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 if (!tng_num_rows($result) || (!$row['active'] && !$allow_admin)) {
@@ -164,13 +163,13 @@ if (!$noneliving && !$noneprivate) {
   echo "</html>\n";
   exit;
 }
-$query = "SELECT DISTINCT $media_table.mediaID, albumlinkID, $media_table.description, $media_table.notes, thumbpath, alwayson, usecollfolder, mediatypeID, path, form, abspath, newwindow FROM ($albumlinks_table, $media_table) LEFT JOIN $medialinks_table ON $media_table.mediaID = $medialinks_table.mediaID WHERE albumID = '$albumID' AND $albumlinks_table.mediaID = $media_table.mediaID ORDER BY $albumlinks_table.ordernum, description LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT DISTINCT $media_table.mediaID, albumlinkID, $media_table.description, $media_table.notes, thumbpath, alwayson, usecollfolder, mediatypeID, path, form, abspath, newwindow FROM (albumlinks, $media_table) LEFT JOIN $medialinks_table ON $media_table.mediaID = $medialinks_table.mediaID WHERE albumID = '$albumID' AND albumlinks.mediaID = $media_table.mediaID ORDER BY albumlinks.ordernum, description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 $numrows = tng_num_rows($result);
 
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(distinct $media_table.mediaID) AS mcount FROM ($albumlinks_table, $media_table) LEFT JOIN $medialinks_table
-    ON $media_table.mediaID = $medialinks_table.mediaID WHERE albumID = \"$albumID\" AND $albumlinks_table.mediaID = $media_table.mediaID";
+  $query = "SELECT count(distinct $media_table.mediaID) AS mcount FROM (albumlinks, $media_table) LEFT JOIN $medialinks_table
+    ON $media_table.mediaID = $medialinks_table.mediaID WHERE albumID = \"$albumID\" AND albumlinks.mediaID = $media_table.mediaID";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   tng_free_result($result2);

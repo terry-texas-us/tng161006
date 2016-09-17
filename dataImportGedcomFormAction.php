@@ -54,10 +54,8 @@ function getMediaLinksToSave() {
 }
 
 function getAlbumLinksToSave() {
-  global $album2entities_table;
-
   $albumlinks = [];
-  $query = "SELECT alinkID, albumID, $album2entities_table.eventID, entityID, eventtypeID, eventdate, eventplace, info FROM ($album2entities_table, events) WHERE $album2entities_table.eventID != '' AND $album2entities_table.eventID = events.eventID";
+  $query = "SELECT alinkID, albumID, albumplinks.eventID, entityID, eventtypeID, eventdate, eventplace, info FROM (albumplinks, events) WHERE albumplinks.eventID != '' AND albumplinks.eventID = events.eventID";
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {

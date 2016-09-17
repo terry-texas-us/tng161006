@@ -28,15 +28,15 @@ if ($offset) {
 }
 $wherestr = 'WHERE active = "1"';
 if ($mediasearch) {
-  $wherestr .= " AND ($albums_table.albumname LIKE \"%$mediasearch%\" OR $albums_table.description LIKE \"%$mediasearch%\" OR $albums_table.keywords LIKE \"%$mediasearch%\")";
+  $wherestr .= " AND (albums.albumname LIKE \"%$mediasearch%\" OR albums.description LIKE \"%$mediasearch%\" OR albums.keywords LIKE \"%$mediasearch%\")";
 }
 
-$query = "SELECT albumID, albumname, description, alwayson FROM $albums_table $wherestr ORDER BY albumname LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT albumID, albumname, description, alwayson FROM albums $wherestr ORDER BY albumname LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 $numrows = tng_num_rows($result);
 
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count($albums_table.albumID) AS acount FROM $albums_table";
+  $query = "SELECT count(albums.albumID) AS acount FROM albums";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   tng_free_result($result2);
@@ -90,12 +90,12 @@ $headSection->setTitle(uiTextSnippet('albums'));
         $maxplus = $maxsearchresults + 1;
         $thumbcount = 0;
         while ($row = tng_fetch_assoc($result)) {
-          $query2 = "SELECT count($albumlinks_table.albumlinkID) AS acount FROM $albumlinks_table WHERE albumID = \"{$row['albumID']}\"";
+          $query2 = "SELECT count(albumlinks.albumlinkID) AS acount FROM albumlinks WHERE albumID = \"{$row['albumID']}\"";
           $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
           $arow = tng_fetch_assoc($result2);
           tng_free_result($result2);
 
-          $query = "SELECT $album2entities_table.entityID AS personID, people.personID AS personID2, people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, familyID, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, sources.title, sources.sourceID, repositories.repoID, reponame, deathdate, burialdate, linktype FROM $album2entities_table LEFT JOIN $people_table AS people ON $album2entities_table.entityID = people.personID LEFT JOIN $families_table ON $album2entities_table.entityID = $families_table.familyID LEFT JOIN sources ON $album2entities_table.entityID = sources.sourceID LEFT JOIN repositories ON ($album2entities_table.entityID = repositories.repoID) WHERE albumID = '{$row['albumID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT $maxplus";
+          $query = "SELECT albumplinks.entityID AS personID, people.personID AS personID2, people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, familyID, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, sources.title, sources.sourceID, repositories.repoID, reponame, deathdate, burialdate, linktype FROM albumplinks LEFT JOIN $people_table AS people ON albumplinks.entityID = people.personID LEFT JOIN $families_table ON albumplinks.entityID = $families_table.familyID LEFT JOIN sources ON albumplinks.entityID = sources.sourceID LEFT JOIN repositories ON (albumplinks.entityID = repositories.repoID) WHERE albumID = '{$row['albumID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT $maxplus";
           $presult = tng_query($query);
           $numrows = tng_num_rows($presult);
           $medialinktext = '';

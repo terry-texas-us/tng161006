@@ -268,7 +268,7 @@ $headSection->setTitle(uiTextSnippet('media'));
             </div>  
             <br>
             <?php
-            $albumquery = "SELECT albumID, albumname FROM $albums_table ORDER BY albumname";
+            $albumquery = 'SELECT albumID, albumname FROM albums ORDER BY albumname';
             $albumresult = tng_query($albumquery) or die(uiTextSnippet('cannotexecutequery') . ": $albumquery");
             $numalbums = tng_num_rows($albumresult);
             if ($numalbums) {

@@ -34,8 +34,8 @@ if ($medialinkID) {
   $eventID = $row['eventID'];
 } else {
   if ($albumlinkID) {
-    $query = "SELECT albumname, description, ordernum, $albums_table.albumID AS albumID FROM ($albums_table, $albumlinks_table)
-      WHERE albumlinkID = \"$albumlinkID\" AND $albumlinks_table.albumID = $albums_table.albumID";
+    $query = "SELECT albumname, description, ordernum, albums.albumID AS albumID FROM (albums, albumlinks)
+      WHERE albumlinkID = \"$albumlinkID\" AND albumlinks.albumID = albums.albumID";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
     $ordernum = $row['ordernum'];

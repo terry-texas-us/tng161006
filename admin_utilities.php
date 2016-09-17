@@ -110,9 +110,9 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
             </tr>
             <?php
             doRow('addresses', uiTextSnippet('addresstable'));
-            doRow($albums_table, uiTextSnippet('albums'));
-            doRow($album2entities_table, uiTextSnippet('album2entitiestable'));
-            doRow($albumlinks_table, uiTextSnippet('albumlinkstable'));
+            doRow('albums', uiTextSnippet('albums'));
+            doRow('albumplinks', uiTextSnippet('album2entitiestable'));
+            doRow('albumlinks', uiTextSnippet('albumlinkstable'));
             doRow('associations', uiTextSnippet('associations'));
             doRow($branches_table, uiTextSnippet('branches'));
             doRow($branchlinks_table, uiTextSnippet('brlinkstable'));

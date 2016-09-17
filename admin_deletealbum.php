@@ -14,10 +14,10 @@ if (!$allowMediaDelete) {
 
 require 'adminlog.php';
 
-$query = "DELETE FROM $albums_table WHERE albumID=\"$albumID\"";
+$query = "DELETE FROM albums WHERE albumID=\"$albumID\"";
 $result = tng_query($query);
 
-$query = "DELETE FROM $albumlinks_table WHERE albumID=\"$albumID\"";
+$query = "DELETE FROM albumlinks WHERE albumID=\"$albumID\"";
 $result = tng_query($query);
 
 adminwritelog(uiTextSnippet('deleted') . ': ' . uiTextSnippet('album') . " $albumID");

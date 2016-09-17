@@ -19,7 +19,6 @@ function reorderMedia($query, $plink) {
   global $medialinks_table;
   global $media_table;
   global $type;
-  global $album2entities_table;
 
   $eventID = $plink['eventID'];
   $result3 = tng_query($query);
@@ -37,11 +36,11 @@ function reorderMedia($query, $plink) {
       tng_free_result($result4);
     } else {
       //do for albums
-      $query = "SELECT alinkID FROM $album2entities_table WHERE entityID = \"{$personrow['personID']}\" ORDER BY ordernum";
+      $query = "SELECT alinkID FROM albumplinks WHERE entityID = \"{$personrow['personID']}\" ORDER BY ordernum";
       $result4 = tng_query($query);
 
       while ($albumlinkrow = tng_fetch_assoc($result4)) {
-        $query = "UPDATE $album2entities_table SET ordernum = \"$counter\" WHERE alinkID = \"{$albumlinkrow['alinkID']}\"";
+        $query = "UPDATE albumplinks SET ordernum = \"$counter\" WHERE alinkID = \"{$albumlinkrow['alinkID']}\"";
         tng_query($query);
         $counter++;
       }
@@ -52,14 +51,13 @@ function reorderMedia($query, $plink) {
 }
 
 function setDefault($entity, $media, $album) {
-  global $albumlinks_table;
   global $medialinks_table;
 
   if ($album) {
-    $query = "UPDATE $albumlinks_table SET defphoto = '' WHERE defphoto = '1' AND albumID = '$album'";
+    $query = "UPDATE albumlinks SET defphoto = '' WHERE defphoto = '1' AND albumID = '$album'";
     tng_query($query);
 
-    $query = "UPDATE $albumlinks_table SET defphoto = '1' WHERE albumID = '$album' AND mediaID = '$media'";
+    $query = "UPDATE albumlinks SET defphoto = '1' WHERE albumID = '$album' AND mediaID = '$media'";
     tng_query($query);
   } else {
     $query = "UPDATE $medialinks_table SET defphoto = '' WHERE defphoto = '1' AND personID = '$entity'";
@@ -78,7 +76,7 @@ switch ($action) {
     if ($album) {
       for ($i = 0; $i < $count; $i++) {
         $order = $i + 1;
-        $query = "UPDATE $albumlinks_table SET ordernum=\"$order\" WHERE albumlinkID=\"" . $links[$i] . '"';
+        $query = "UPDATE albumlinks SET ordernum=\"$order\" WHERE albumlinkID=\"" . $links[$i] . '"';
         $result = tng_query($query);
       }
     } else {
@@ -94,7 +92,7 @@ switch ($action) {
     $count = count($alinks);
     for ($i = 0; $i < $count; $i++) {
       $order = $i + 1;
-      $query = "UPDATE $album2entities_table SET ordernum=\"$order\" WHERE alinkID = \"" . $alinks[$i] . '"';
+      $query = "UPDATE albumplinks SET ordernum=\"$order\" WHERE alinkID = \"" . $alinks[$i] . '"';
       $result = tng_query($query);
     }
     break;
@@ -262,8 +260,8 @@ switch ($action) {
   case 'deldef':
     //look for old style default, delete if exists
     if ($album) {
-      $query = "SELECT thumbpath, usecollfolder, mediatypeID, albumlinkID FROM ($media_table, $albumlinks_table)
-        WHERE albumID = \"$album\" AND $media_table.mediaID = $albumlinks_table.mediaID AND defphoto = '1'";
+      $query = "SELECT thumbpath, usecollfolder, mediatypeID, albumlinkID FROM ($media_table, albumlinks)
+        WHERE albumID = \"$album\" AND $media_table.mediaID = albumlinks.mediaID AND defphoto = '1'";
     } else {
       $query = "SELECT thumbpath, usecollfolder, mediatypeID, medialinkID FROM ($media_table, $medialinks_table)
         WHERE personID = '$entity' AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
@@ -278,7 +276,7 @@ switch ($action) {
     tng_free_result($result);
 
     if ($album) {
-      $query = "UPDATE $albumlinks_table SET defphoto = '' WHERE albumlinkID = '{$row['albumlinkID']}'";
+      $query = "UPDATE albumlinks SET defphoto = '' WHERE albumlinkID = '{$row['albumlinkID']}'";
     } else {
       $query = "UPDATE $medialinks_table SET defphoto = '' WHERE medialinkID = '{$row['medialinkID']}'";
     }
@@ -289,7 +287,7 @@ switch ($action) {
     $result = tng_query($query);
     break;
   case 'remalb':
-    $query = "DELETE FROM $albumlinks_table WHERE albumlinkID=\"$albumlink\"";
+    $query = "DELETE FROM albumlinks WHERE albumlinkID=\"$albumlink\"";
     $result = tng_query($query);
     $rval = $media . '&' . $albumlink;
     break;
@@ -300,7 +298,7 @@ switch ($action) {
     break;
   case 'remsort':
     if ($type == 'album') {
-      $query = "DELETE FROM $album2entities_table WHERE alinkID=\"$link\"";
+      $query = "DELETE FROM albumplinks WHERE alinkID=\"$link\"";
       $result = tng_query($query);
     } elseif ($type == 'media') {
       $query = "DELETE FROM $medialinks_table WHERE medialinkID=\"$link\"";
@@ -353,16 +351,16 @@ switch ($action) {
     break;
   case 'add':
     //add photo to album at end
-    $query2 = "SELECT max(ordernum) AS maxordernum FROM $albumlinks_table WHERE albumID = \"$album\" GROUP BY albumID";
+    $query2 = "SELECT max(ordernum) AS maxordernum FROM albumlinks WHERE albumID = \"$album\" GROUP BY albumID";
     $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
     $row2 = tng_fetch_assoc($result2);
     $count = $row2['maxordernum'] + 1;
     tng_free_result($result2);
 
     if ($count == 1) {
-      $query = "INSERT INTO $albumlinks_table (albumID,mediaID,ordernum,defphoto) VALUES (\"$album\", \"$media\", \"$count\", \"1\")";
+      $query = "INSERT INTO albumlinks (albumID,mediaID,ordernum,defphoto) VALUES (\"$album\", \"$media\", \"$count\", \"1\")";
     } else {
-      $query = "INSERT INTO $albumlinks_table (albumID,mediaID,ordernum,defphoto) VALUES (\"$album\", \"$media\", \"$count\",\"0\")";
+      $query = "INSERT INTO albumlinks (albumID,mediaID,ordernum,defphoto) VALUES (\"$album\", \"$media\", \"$count\",\"0\")";
     }
     $result = tng_query($query);
     $albumlinkID = tng_insert_id();
@@ -370,7 +368,7 @@ switch ($action) {
     break;
   case 'dellink':
     if ($type == 'album') {
-      $query = "SELECT entityID FROM $album2entities_table WHERE alinkID = '$linkID'";
+      $query = "SELECT entityID FROM albumplinks WHERE alinkID = '$linkID'";
     } else {
       $query = "SELECT personID AS entityID, eventID, mediatypeID FROM ($medialinks_table, $media_table) WHERE medialinkID = '$linkID' AND $medialinks_table.mediaID = $media_table.mediaID";
     }
@@ -381,7 +379,7 @@ switch ($action) {
     tng_free_result($result);
 
     if ($type == 'album') {
-      $query = "DELETE FROM $album2entities_table WHERE alinkID=\"$linkID\"";
+      $query = "DELETE FROM albumplinks WHERE alinkID=\"$linkID\"";
     } else {
       $query = "DELETE FROM $medialinks_table WHERE medialinkID=\"$linkID\"";
     }
@@ -404,7 +402,7 @@ switch ($action) {
   case 'updatelink':
     //check if thumb exists before making default? We used to do that
     if ($type == 'album') {
-      $query = "UPDATE $album2entities_table SET eventID = '$eventID' WHERE alinkID = $linkID";
+      $query = "UPDATE albumplinks SET eventID = '$eventID' WHERE alinkID = $linkID";
       $result = tng_query($query);
     } else {
       if ($session_charset != 'UTF-8') {
@@ -459,7 +457,7 @@ switch ($action) {
       $entityID = $entityID . $suffix;
     }
     if ($type == 'album') {
-      $query = "SELECT count(alinkID) AS count FROM $album2entities_table WHERE entityID = \"$entityID\"";
+      $query = "SELECT count(alinkID) AS count FROM albumplinks WHERE entityID = \"$entityID\"";
     } else {
       $query = "SELECT count(medialinkID) AS count FROM $medialinks_table WHERE personID = \"$entityID\"";
     }
@@ -569,7 +567,7 @@ switch ($action) {
 
     if ($numrows) {
       if ($type == 'album') {
-        $query = "INSERT IGNORE INTO $album2entities_table (entityID, albumID, ordernum, linktype) VALUES ('$entityID', '$albumID', '$newrow', '$linktype')";
+        $query = "INSERT IGNORE INTO albumplinks (entityID, albumID, ordernum, linktype) VALUES ('$entityID', '$albumID', '$newrow', '$linktype')";
       } else {
         $query = "INSERT IGNORE INTO $medialinks_table (personID, mediaID, ordernum, linktype, eventID) VALUES ('$entityID', '$mediaID', '$newrow', '$linktype', '')";
       }

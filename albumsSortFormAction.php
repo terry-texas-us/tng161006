@@ -101,7 +101,7 @@ if (file_exists("$rootpath$photoref")) {
   $photofound = 1;
 }
 
-$query = "SELECT * FROM ($album2entities_table, $albums_table) WHERE $album2entities_table.entityID = '$personID' AND $albums_table.albumID = $album2entities_table.albumID ORDER BY ordernum";
+$query = "SELECT * FROM (albumplinks, albums) WHERE albumplinks.entityID = '$personID' AND albums.albumID = albumplinks.albumID ORDER BY ordernum";
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
@@ -165,7 +165,7 @@ $headSection->setTitle(uiTextSnippet($sortstr));
 
               echo '<td style="width: ' . ($thumbmaxw + 6) . 'px; text-align: center;">';
 
-              $query2 = "SELECT thumbpath, usecollfolder, mediatypeID FROM ($albumlinks_table, $media_table) WHERE albumID=\"{$row['albumID']}\" AND defphoto = \"1\" AND $albumlinks_table.mediaID = $media_table.mediaID";
+              $query2 = "SELECT thumbpath, usecollfolder, mediatypeID FROM (albumlinks, $media_table) WHERE albumID=\"{$row['albumID']}\" AND defphoto = \"1\" AND albumlinks.mediaID = $media_table.mediaID";
               $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
               $trow = tng_fetch_assoc($result2);
               $tmediatypeID = $trow['mediatypeID'];

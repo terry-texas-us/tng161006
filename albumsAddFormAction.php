@@ -20,7 +20,7 @@ $keywords = addslashes($keywords);
 if (!$alwayson) {
   $alwayson = 0;
 }
-$query = "INSERT INTO $albums_table (albumname,description,keywords,active,alwayson) VALUES (\"$albumname\",\"$description\",\"$keywords\",\"$active\",\"$alwayson\")";
+$query = "INSERT INTO albums (albumname,description,keywords,active,alwayson) VALUES (\"$albumname\",\"$description\",\"$keywords\",\"$active\",\"$alwayson\")";
 $result = tng_query($query);
 $albumID = tng_insert_id();
 
