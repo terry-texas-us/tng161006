@@ -148,10 +148,10 @@ switch ($t) {
     $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('source') . " $sourceID";
     break;
   case 'repository':
-    $row = getID('repoID', $repositories_table, $id);
+    $row = getID('repoID', 'repositories', $id);
     $repoID = $row['repoID'];
 
-    $query = "SELECT addressID FROM $repositories_table WHERE repoID = '$repoID'";
+    $query = "SELECT addressID FROM repositories WHERE repoID = '$repoID'";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
     tng_free_result($result);
@@ -159,7 +159,7 @@ switch ($t) {
     $query = "DELETE FROM $address_table WHERE addressID = '{$row['addressID']}'";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $repositories_table WHERE ID = '$id'";
+    $query = "DELETE FROM repositories WHERE ID = '$id'";
     $result = tng_query($query);
 
     $query = "UPDATE sources SET repoID = '' WHERE repoID = '$repoID'";
@@ -248,7 +248,7 @@ switch ($t) {
     $query = "DELETE FROM sources WHERE gedcom = '$id'";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $repositories_table WHERE gedcom = '$id'";
+    $query = "DELETE FROM repositories WHERE gedcom = '$id'";
     $result = tng_query($query);
 
     $query = "DELETE FROM $events_table WHERE gedcom = '$id'";

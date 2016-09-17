@@ -34,7 +34,7 @@ $srcrow = tng_fetch_assoc($srcresult);
 $scount = number_format($srcrow['scount']);
 tng_free_result($srcresult);
 
-$query = "SELECT count(repoID) AS rcount FROM $repositories_table";
+$query = 'SELECT count(repoID) AS rcount FROM repositories';
 $reporesult = tng_query($query);
 $reporow = tng_fetch_assoc($reporesult);
 $rcount = number_format($reporow['rcount']);

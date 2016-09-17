@@ -1176,7 +1176,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
 
     function doRepositories() {
       global $branch;
-      global $repositories_table;
       global $savestate;
       global $repoprefix;
       global $reposuffix;
@@ -1188,7 +1187,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         $newrepos = array_unique($allrepos);
         if ($newrepos) {
           foreach ($newrepos as $nextrepo) {
-            $repoquery = "SELECT * FROM $repositories_table WHERE repoID = '$nextrepo'";
+            $repoquery = "SELECT * FROM repositories WHERE repoID = '$nextrepo'";
             $reporesult = tng_query($repoquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
             if ($reporesult) {
               $repo = tng_fetch_assoc($reporesult);
@@ -1205,7 +1204,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           $numstr = "(0+SUBSTRING_INDEX(repoID,'$reposuffix',1))";
         }
 
-        $repoquery = "SELECT *, $numstr AS num FROM $repositories_table WHERE 1 {$savestate['wherestr']} ORDER BY num";
+        $repoquery = "SELECT *, $numstr AS num FROM repositories WHERE 1 {$savestate['wherestr']} ORDER BY num";
         $reporesult = tng_query($repoquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
         while ($repo = tng_fetch_assoc($reporesult)) {

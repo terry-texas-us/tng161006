@@ -28,7 +28,7 @@ if ($xsrcaction) {
   $id = 'ID';
   $location = 'sourcesBrowse.php';
 } elseif ($xrepoaction) {
-  $query = "DELETE FROM $repositories_table";
+  $query = 'DELETE FROM repositories';
   $modmsg = 'repositories';
   $id = 'ID';
   $location = 'repositoriesBrowse.php';
@@ -120,11 +120,11 @@ foreach (array_keys($_POST) as $key) {
       deleteMediaLinks($sourceID);
       deleteAlbumLinks($sourceID);
     } elseif ($xrepoaction) {
-      $row = getID('repoID', $repositories_table, $thisid);
+      $row = getID('repoID', 'repositories', $thisid);
       $repoID = $row['repoID'];
       $items[] = $row['repoID'];
 
-      $rquery = "SELECT addressID FROM $repositories_table WHERE repoID = '$repoID'";
+      $rquery = "SELECT addressID FROM repositories WHERE repoID = '$repoID'";
       $result = tng_query($rquery);
       $row = tng_fetch_assoc($result);
       tng_free_result($result);

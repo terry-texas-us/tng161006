@@ -51,7 +51,7 @@ switch ($linktype) {
     $testID = 'sourceID';
     break;
   case 'R':
-    $query = "SELECT reponame FROM $repositories_table WHERE repoID = '$personID'";
+    $query = "SELECT reponame FROM repositories WHERE repoID = '$personID'";
     $result2 = tng_query($query);
     $person = tng_fetch_assoc($result2);
     $namestr = uiTextSnippet('repository') . ": $personID";

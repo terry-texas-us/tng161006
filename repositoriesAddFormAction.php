@@ -38,7 +38,7 @@ if ($address1 || $address2 || $city || $state || $zip || $country || $phone || $
 if (!$addressID) {
   $addressID = 0;
 }
-$query = "INSERT INTO $repositories_table (repoID, reponame, addressID, changedate, changedby) VALUES ('$repoID', '$reponame', '$addressID', '$newdate', '$currentuser')";
+$query = "INSERT INTO repositories (repoID, reponame, addressID, changedate, changedby) VALUES ('$repoID', '$reponame', '$addressID', '$newdate', '$currentuser')";
 $result = tng_query($query);
 
 adminwritelog("<a href=\"repositoriesEdit.php?repoID=$repoID\">" . uiTextSnippet('addnewrepo') . ": $repoID</a>");

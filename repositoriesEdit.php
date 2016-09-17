@@ -13,7 +13,7 @@ if ((!$allowEdit && (!$allowAdd || !$added))) {
 }
 $repoID = ucfirst($repoID);
 
-$query = "SELECT reponame, changedby, $repositories_table.addressID, address1, address2, city, state, zip, country, phone, email, www, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $repositories_table LEFT JOIN $address_table ON $repositories_table.addressID = $address_table.addressID WHERE repoID = '$repoID'";
+$query = "SELECT reponame, changedby, repositories.addressID, address1, address2, city, state, zip, country, phone, email, www, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM repositories LEFT JOIN $address_table ON repositories.addressID = $address_table.addressID WHERE repoID = '$repoID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);

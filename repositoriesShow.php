@@ -36,13 +36,13 @@ if ($reposearch) {
 } else {
   $wherestr = '';
 }
-$query = "SELECT repoID, reponame FROM $repositories_table $wherestr ORDER BY reponame LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT repoID, reponame FROM repositories $wherestr ORDER BY reponame LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(repoID) AS scount FROM $repositories_table $wherestr";
+  $query = "SELECT count(repoID) AS scount FROM repositories $wherestr";
 
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);

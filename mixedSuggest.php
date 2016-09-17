@@ -75,7 +75,7 @@ if ($enttype == 'I') {
   $years = '';
 } elseif ($enttype == 'R') {
   $typestr = 'repo';
-  $query = "SELECT reponame FROM $repositories_table WHERE repoID = '$ID'";
+  $query = "SELECT reponame FROM repositories WHERE repoID = '$ID'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   tng_free_result($result);

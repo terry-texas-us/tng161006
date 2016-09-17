@@ -186,7 +186,7 @@ if ($mediatypeID != $mediatypeID_org) {
       reorderMedia($query, $plink, $mediatypeID_org);
       reorderMedia($query, $plink, $mediatypeID);
 
-      $query = "SELECT repoID AS personID FROM $repositories_table WHERE repoID = \"{$plink['personID']}\"";
+      $query = "SELECT repoID AS personID FROM repositories WHERE repoID = \"{$plink['personID']}\"";
       reorderMedia($query, $plink, $mediatypeID_org);
       reorderMedia($query, $plink, $mediatypeID);
     }

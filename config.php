@@ -18,7 +18,6 @@ $mediatypes_table = "mediatypes";
 $address_table = "addresses";
 $languagesTable = "languages";
 $cemeteries_table = "cemeteries";
-$repositories_table = "repositories";
 $citations_table = "citations";
 $events_table = "events";
 $eventtypes_table = "eventtypes";

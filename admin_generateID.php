@@ -99,7 +99,7 @@ switch ($type) {
     $newID = getNewID('source', 'sources');
     break;
   case 'repo':
-    $newID = getNewID('repo', $repositories_table);
+    $newID = getNewID('repo', 'repositories');
     break;
 }
 echo $newID;

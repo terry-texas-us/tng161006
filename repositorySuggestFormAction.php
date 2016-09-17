@@ -38,7 +38,7 @@ if (!$youremail || !$comments || !$yourname) {
 killBlockedAddress($youremail);
 killBlockedMessageContent($comments);
 
-$query = "SELECT reponame FROM $repositories_table WHERE repoID = '$ID'";
+$query = "SELECT reponame FROM repositories WHERE repoID = '$ID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 $name = uiTextSnippet('repository') . ": {$row['reponame']} ($ID)";

@@ -990,7 +990,6 @@ function doSources() {
 }
 
 function doRepositories() {
-  global $repositories_table;
   global $events_table;
   global $eventtypes_table;
   global $allrepos;
@@ -999,7 +998,7 @@ function doRepositories() {
   $newrepos = array_unique($allrepos);
   if ($newrepos) {
     foreach ($newrepos as $nextrepo) {
-      $repoquery = "SELECT * FROM $repositories_table WHERE repoID = '$nextrepo'";
+      $repoquery = "SELECT * FROM repositories WHERE repoID = '$nextrepo'";
       $reporesult = tng_query($repoquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       if ($reporesult) {
         $repo = tng_fetch_assoc($reporesult);

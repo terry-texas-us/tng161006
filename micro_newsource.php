@@ -46,7 +46,7 @@
     <select class='form-control' name='repoID'>
       <option value=''></option>
       <?php
-      $query = "SELECT repoID, reponame FROM $repositories_table $wherestr ORDER BY reponame";
+      $query = "SELECT repoID, reponame FROM repositories $wherestr ORDER BY reponame";
       $reporesult = tng_query($query);
       while ($reporow = tng_fetch_assoc($reporesult)) {
         echo "  <option value='{$reporow['repoID']}'>{$reporow['reponame']}</option>\n";

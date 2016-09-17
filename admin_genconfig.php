@@ -174,10 +174,6 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
                   <td><input name='citations_table' type='text' value="<?php echo $citations_table; ?>"></td>
                 </tr>
                 <tr>
-                  <td><?php echo uiTextSnippet('repositories'); ?>:</td>
-                  <td><input name='repositories_table' type='text' value="<?php echo $repositories_table; ?>"></td>
-                </tr>
-                <tr>
                   <td><?php echo uiTextSnippet('events'); ?>:</td>
                   <td><input name='events_table' type='text' value="<?php echo $events_table; ?>"></td>
                 </tr>

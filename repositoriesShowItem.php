@@ -15,7 +15,7 @@ $firstsectionsave = '';
 $tableid = '';
 $cellnumber = 0;
 
-$query = "SELECT * FROM $repositories_table WHERE repoID = '$repoID'";
+$query = "SELECT * FROM repositories WHERE repoID = '$repoID'";
 $result = tng_query($query);
 $reporow = tng_fetch_assoc($result);
 if (!tng_num_rows($result)) {

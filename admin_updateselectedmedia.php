@@ -86,7 +86,7 @@ if ($xphaction == uiTextSnippet('convto')) {
           $query6 = "SELECT sourceID AS personID FROM sources WHERE sourceID = \"{$row3['personID']}\"";
           reorderMedia($query6, $row3, $row3['mediatypeID']);
 
-          $query6 = "SELECT repoID AS personID FROM $repositories_table WHERE repoID = \"{$row3['personID']}\"";
+          $query6 = "SELECT repoID AS personID FROM repositories WHERE repoID = \"{$row3['personID']}\"";
           reorderMedia($query6, $row3, $row3['mediatypeID']);
         }
         tng_free_result($result3);

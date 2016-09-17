@@ -33,7 +33,7 @@ if ($addressID) {
   $result = tng_query($query);
   $addressID = tng_insert_id();
 }
-$query = "UPDATE $repositories_table SET reponame=\"$reponame\",addressID=\"$addressID\",changedate=\"$newdate\",changedby=\"$currentuser\" WHERE repoID = '$repoID'";
+$query = "UPDATE repositories SET reponame=\"$reponame\",addressID=\"$addressID\",changedate=\"$newdate\",changedby=\"$currentuser\" WHERE repoID = '$repoID'";
 $result = tng_query($query);
 
 adminwritelog("<a href=\"editrepo.php?repoID=$repoID\">" . uiTextSnippet('modifyrepo') . ": $repoID</a>");

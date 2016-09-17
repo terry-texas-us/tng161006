@@ -174,7 +174,7 @@ function doNotes($persfam1, $persfam2, $varname) {
 
 $r1row = $r2row = '';
 if ($repoID1) {
-  $query = "SELECT reponame, repoID, $repositories_table.addressID AS addressID, address1, address2, city, state, zip, country, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $repositories_table LEFT JOIN $address_table ON $repositories_table.addressID = $address_table.addressID WHERE repoID = '$repoID1'";
+  $query = "SELECT reponame, repoID, repositories.addressID AS addressID, address1, address2, city, state, zip, country, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM repositories LEFT JOIN $address_table ON repositories.addressID = $address_table.addressID WHERE repoID = '$repoID1'";
   $result = tng_query($query);
   if ($result && tng_num_rows($result)) {
     $r1row = tng_fetch_assoc($result);
@@ -201,14 +201,14 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
       $nextone = $nextchunk + 1;
       $nextchunk += $largechunk;
 
-      $query = "SELECT * FROM $repositories_table WHERE 1 $wherestr ORDER BY repoID LIMIT $nextone, $largechunk";
+      $query = "SELECT * FROM repositories WHERE 1 $wherestr ORDER BY repoID LIMIT $nextone, $largechunk";
       $result = tng_query($query);
       $numrows = tng_num_rows($result);
       if ($result && $numrows) {
         while ($still_looking && $row = tng_fetch_assoc($result)) {
           $wherestr2 = addCriteria($row);
 
-          $query = "SELECT * FROM $repositories_table WHERE repoID > \"{$row['repoID']}\" $wherestr2 ORDER BY repoID";
+          $query = "SELECT * FROM repositories WHERE repoID > \"{$row['repoID']}\" $wherestr2 ORDER BY repoID";
           $result2 = tng_query($query);
           if ($result2 && tng_num_rows($result2)) {
             //set repoID1, repoID2
@@ -232,7 +232,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
     $wherestr2 = $repoID2 ? " AND repoID > \"$repoID2\"" : '';
     $wherestr2 .= addCriteria($r1row);
 
-    $query = "SELECT * FROM $repositories_table WHERE repoID != \"{$r1row['repoID']}\" $wherestr2 ORDER BY repoID LIMIT 1";
+    $query = "SELECT * FROM repositories WHERE repoID != \"{$r1row['repoID']}\" $wherestr2 ORDER BY repoID LIMIT 1";
     $result2 = tng_query($query);
     if ($result2 && tng_num_rows($result2)) {
       $r2row = tng_fetch_assoc($result2);
@@ -243,7 +243,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
     }
   }
 } elseif ($repoID2) {
-  $query = "SELECT reponame, repoID, $repositories_table.addressID AS addressID, address1, address2, city, state, zip, country, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $repositories_table LEFT JOIN $address_table ON $repositories_table.addressID = $address_table.addressID WHERE repoID = '$repoID2'";
+  $query = "SELECT reponame, repoID, repositories.addressID AS addressID, address1, address2, city, state, zip, country, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM repositories LEFT JOIN $address_table ON repositories.addressID = $address_table.addressID WHERE repoID = '$repoID2'";
   $result2 = tng_query($query);
   if ($result2 && tng_num_rows($result2) && $repoID1 != $repoID2) {
     $r2row = tng_fetch_assoc($result2);
@@ -299,11 +299,11 @@ if ($mergeaction == uiTextSnippet('merge')) {
   }
   if ($updatestr) {
     $updatestr = substr($updatestr, 2);
-    $query = "UPDATE $repositories_table set $updatestr WHERE repoID = '$repoID1'";
+    $query = "UPDATE repositories set $updatestr WHERE repoID = '$repoID1'";
     $combresult = tng_query($query);
   }
 
-  $query = "DELETE from $repositories_table WHERE repoID = '$repoID2'";
+  $query = "DELETE from repositories WHERE repoID = '$repoID2'";
   $combresult = tng_query($query);
 
   //delete remaining notes & events for repo 2

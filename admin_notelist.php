@@ -196,7 +196,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
                 }
               }
               if (!$notelinktext) {
-                $query = "SELECT * FROM $repositories_table WHERE repoID = \"{$nrow['personID']}\"";
+                $query = "SELECT * FROM repositories WHERE repoID = \"{$nrow['personID']}\"";
                 $result2 = tng_query($query);
                 if (tng_num_rows($result2) == 1) {
                   $row2 = tng_fetch_assoc($result2);

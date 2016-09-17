@@ -9,7 +9,7 @@ $_SESSION['tng_yourname'] = generatePassword(1);
 
 $preemail = getCurrentUserEmail($currentuser);
 
-$query = "SELECT reponame FROM $repositories_table WHERE repoID = '$ID'";
+$query = "SELECT reponame FROM repositories WHERE repoID = '$ID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);

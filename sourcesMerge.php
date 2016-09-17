@@ -18,21 +18,20 @@ $wherestr = '';
 function doRow($field, $textmsg, $boxname) {
   global $s1row;
   global $s2row;
-  global $repositories_table;
 
   $s1field = isset($s1row[$field]) ? $s1row[$field] : '';
   $s2field = isset($s2row[$field]) ? $s2row[$field] : '';
 
   if ($field == 'repoID') {
     if ($s1field) {
-      $query = "SELECT reponame FROM $repositories_table WHERE repoID = '$s1field'";
+      $query = "SELECT reponame FROM repositories WHERE repoID = '$s1field'";
       $result = tng_query($query);
       $reporow = tng_fetch_assoc($result);
       $s1field = $reporow['reponame'] ? "{$reporow['reponame']} ($s1field)" : $s1field;
       tng_free_result($result);
     }
     if ($s2field) {
-      $query = "SELECT reponame FROM $repositories_table WHERE repoID = '$s2field'";
+      $query = "SELECT reponame FROM repositories WHERE repoID = '$s2field'";
       $result = tng_query($query);
       $reporow = tng_fetch_assoc($result);
       $s2field = $reporow['reponame'] ? "{$reporow['reponame']} ($s2field)" : $s2field;

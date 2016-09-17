@@ -60,7 +60,7 @@ echo $navList->build('renumber');
       $table = 'sources';
       $id = 'sourceID';
     } elseif ($type == 'repo') {
-      $table = $repositories_table;
+      $table = 'repositories';
       $id = 'repoID';
     }
 

@@ -302,7 +302,6 @@ function getRestOfSource($sourceID, $prevlevel) {
 }
 
 function getRepoRecord($repoID, $prevlevel) {
-  global $repositories_table;
   global $savestate;
   global $lineinfo;
   global $stdnotes;
@@ -391,12 +390,12 @@ function getRepoRecord($repoID, $prevlevel) {
     }
   }
   $inschangedt = $changedate ? $changedate : ($tngimpcfg['chdate'] ? '' : $today);
-  $query = "INSERT IGNORE INTO $repositories_table (repoID, reponame, changedate, changedby)  VALUES('$repoID', '{$info['NAME']}', '$inschangedt', '$currentuser')";
+  $query = "INSERT IGNORE INTO repositories (repoID, reponame, changedate, changedby)  VALUES('$repoID', '{$info['NAME']}', '$inschangedt', '$currentuser')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   $success = tng_affected_rows();
   if (!$success && $savestate['del'] != 'no') {
     if ($savestate['neweronly'] && $inschangedt) {
-      $query = "SELECT changedate FROM $repositories_table WHERE repoID = '$repoID'";
+      $query = "SELECT changedate FROM repositories WHERE repoID = '$repoID'";
       $result = tng_query($query);
       $reporow = tng_fetch_assoc($result);
       $goahead = $inschangedt > $reporow['changedate'] ? 1 : 0;
@@ -411,7 +410,7 @@ function getRepoRecord($repoID, $prevlevel) {
       if (!isset($info['ADDR'])) {
         $info['ADDR'] = 0;
       }
-      $query = "UPDATE $repositories_table SET reponame='{$info['NAME']}', addressID='{$info['ADDR']}', changedby='$currentuser' $chdatestr WHERE repoID = '$repoID'";
+      $query = "UPDATE repositories SET reponame='{$info['NAME']}', addressID='{$info['ADDR']}', changedby='$currentuser' $chdatestr WHERE repoID = '$repoID'";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $success = 1;
 
@@ -437,7 +436,7 @@ function getRepoRecord($repoID, $prevlevel) {
       $query = "INSERT INTO $address_table (address1, address2, city, state, zip, country, www, email, phone) VALUES('{$address['ADR1']}', '{$address['ADR2']}', '{$address['CITY']}', '{$address['STAE']}', '{$address['POST']}',  '{$address['CTRY']}', '{$address['WWW']}', '{$address['EMAIL']}', '{$address['PHON']}')";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $info['ADDR'] = tng_insert_id();
-      $query = "UPDATE $repositories_table SET addressID='{$info['ADDR']}' WHERE repoID = '$repoID'";
+      $query = "UPDATE repositories SET addressID='{$info['ADDR']}' WHERE repoID = '$repoID'";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     }
   }

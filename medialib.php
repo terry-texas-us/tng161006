@@ -26,7 +26,6 @@ function resortMedia($mediaID) {
   global $medialinks_table;
   global $people_table;
   global $families_table;
-  global $repositories_table;
 
   $query = "SELECT $media_table.mediaID AS mediaID, personID, mediatypeID FROM $medialinks_table, $media_table WHERE $medialinks_table.mediaID = '$mediaID' AND $medialinks_table.mediaID = $media_table.mediaID";
   $result2 = tng_query($query);
@@ -44,7 +43,7 @@ function resortMedia($mediaID) {
       $query = "SELECT sourceID AS personID FROM sources WHERE sourceID = \"{$plink['personID']}\"";
       reorderMedia($query, $plink, $plink['mediatypeID']);
 
-      $query = "SELECT repoID AS personID FROM $repositories_table WHERE repoID = \"{$plink['personID']}\"";
+      $query = "SELECT repoID AS personID FROM repositories WHERE repoID = \"{$plink['personID']}\"";
       reorderMedia($query, $plink, $plink['mediatypeID']);
     }
     tng_free_result($result2);

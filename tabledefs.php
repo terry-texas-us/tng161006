@@ -520,9 +520,9 @@ $query = "CREATE TABLE $reports_table (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $reports_table);
 
-$query = "DROP TABLE IF EXISTS $repositories_table";
+$query = 'DROP TABLE IF EXISTS repositories';
 $result = performQuery($query);
-$query = "CREATE TABLE $repositories_table (
+$query = "CREATE TABLE repositories (
     ID INT(11) NOT NULL AUTO_INCREMENT,
     repoID VARCHAR(22) NOT NULL,
     reponame VARCHAR(90) NOT NULL,
@@ -534,7 +534,7 @@ $query = "CREATE TABLE $repositories_table (
     UNIQUE repoID (repoID),
     INDEX reponame (reponame)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $repositories_table);
+$result = performQuery($query, 'repositories');
 
 $query = "DROP TABLE IF EXISTS $saveimport_table";
 $result = performQuery($query);

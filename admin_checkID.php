@@ -23,7 +23,7 @@ if ($type == 'person') {
       $suffix = $sourcesuffix;
     } else {
       if ($type == 'repo') {
-        $query = "SELECT repoID FROM $repositories_table WHERE repoID = '$checkID'";
+        $query = "SELECT repoID FROM repositories WHERE repoID = '$checkID'";
         $prefix = $repoprefix;
         $suffix = $reposuffix;
       }

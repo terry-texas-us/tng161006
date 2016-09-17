@@ -154,7 +154,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
           $savestate['foffset'] = getNewNumericID('family', 'family', $families_table);
           $savestate['soffset'] = getNewNumericID('source', 'source', 'sources');
           $savestate['noffset'] = getNewNumericID('note', 'note', 'xnotes');
-          $savestate['roffset'] = getNewNumericID('repo', 'repo', $repositories_table);
+          $savestate['roffset'] = getNewNumericID('repo', 'repo', 'repositories');
         } else {
           $savestate['ioffset'] = $savestate['foffset'] = $savestate['soffset'] = $savestate['noffset'] = $savestate['roffset'] = $useroffset;
         }

@@ -142,7 +142,7 @@ $headSection->setTitle(uiTextSnippet('modifysource'));
           <select class='form-control' name="repoID">
             <option value=''></option>
             <?php
-            $query = "SELECT repoID, reponame FROM $repositories_table ORDER BY reponame";
+            $query = "SELECT repoID, reponame FROM repositories ORDER BY reponame";
             $reporesult = tng_query($query);
             while ($reporow = tng_fetch_assoc($reporesult)) {
               echo "    <option value='{$reporow['repoID']}'";

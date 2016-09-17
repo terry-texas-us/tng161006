@@ -218,7 +218,6 @@ function doSources($title) {
 }
 
 function doRepos($title) {
-  global $repositories_table;
   global $maxsearchresults;
 
   $lines = "<tr>\n";
@@ -227,7 +226,7 @@ function doRepos($title) {
   $lines .= '<td>' . uiTextSnippet('title') . "</td>\n";
   $lines .= "</tr>\n";
 
-  $query = "SELECT repoID, reponame FROM $repositories_table WHERE reponame LIKE \"%$title%\" ORDER BY reponame LIMIT $maxsearchresults";
+  $query = "SELECT repoID, reponame FROM repositories WHERE reponame LIKE \"%$title%\" ORDER BY reponame LIMIT $maxsearchresults";
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {

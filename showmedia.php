@@ -83,7 +83,7 @@ if ($personID && !$albumlinkID) {
     } elseif ($linktype == 'S') {
       $query = "SELECT title FROM sources WHERE sourceID = '$personID'";
     } elseif ($linktype == 'R') {
-      $query = "SELECT reponame FROM $repositories_table WHERE repoID = '$personID'";
+      $query = "SELECT reponame FROM repositories WHERE repoID = '$personID'";
     } elseif ($linktype == 'I') {
       $query = "SELECT lastname, firstname, prefix, suffix, title, lnprefix, living, private, branch, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, deathdatetr, burialdate, burialdatetr, sex, IF(birthdatetr !='0000-00-00', YEAR(birthdatetr), YEAR(altbirthdatetr)) AS birth, IF(deathdatetr !='0000-00-00', YEAR(deathdatetr), YEAR(burialdatetr)) AS death FROM $people_table, trees WHERE personID = '$personID'";
     }

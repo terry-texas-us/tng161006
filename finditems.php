@@ -281,7 +281,7 @@ switch ($type) {
     }
     break;
   case 'R':
-    $query = "SELECT repoID, reponame FROM $repositories_table WHERE reponame LIKE \"$f$criteria%\" ORDER BY reponame LIMIT 250";
+    $query = "SELECT repoID, reponame FROM repositories WHERE reponame LIKE \"$f$criteria%\" ORDER BY reponame LIMIT 250";
     $result = tng_query($query);
 
     if (tng_num_rows($result)) {

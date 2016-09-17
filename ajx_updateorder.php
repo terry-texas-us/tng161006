@@ -396,7 +396,7 @@ switch ($action) {
     $query2 = "SELECT sourceID AS personID FROM sources WHERE sourceID = '$entityID'";
     reorderMedia($query2, $row);
 
-    $query2 = "SELECT repoID AS personID FROM $repositories_table WHERE repoID = '$entityID'";
+    $query2 = "SELECT repoID AS personID FROM repositories WHERE repoID = '$entityID'";
     reorderMedia($query2, $row);
 
     $rval = $linkID . '&' . $entityID;
@@ -542,7 +542,7 @@ switch ($action) {
         tng_free_result($result);
         break;
       case 'R':
-        $query = "SELECT reponame FROM $repositories_table WHERE repoID = '$entityID'";
+        $query = "SELECT reponame FROM repositories WHERE repoID = '$entityID'";
         $result = tng_query($query);
         $row = tng_fetch_assoc($result);
         $name = $row['reponame'];
