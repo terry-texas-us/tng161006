@@ -21,7 +21,7 @@ if ($session_charset != 'UTF-8') {
 $relationship = addslashes($relationship);
 
 
-$query = "UPDATE $assoc_table SET passocID=\"$passocID\", relationship=\"$relationship\", reltype=\"$reltype\" WHERE assocID = '$assocID'";
+$query = "UPDATE associations SET passocID=\"$passocID\", relationship=\"$relationship\", reltype=\"$reltype\" WHERE assocID = '$assocID'";
 $result = tng_query($query);
 
 adminwritelog(uiTextSnippet('modifyassoc') . ": $assocID/$personID::$passocID ($relationship)");

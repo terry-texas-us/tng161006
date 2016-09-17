@@ -4,11 +4,10 @@ function ClearData($tree) {
   global $people_table;
   global $families_table;
   global $children_table;
-  global $assoc_table;
 
   $clear_files = [
           'addresses',
-          $assoc_table,
+          'associations',
           $children_table,
           'citations',
           // 'events',

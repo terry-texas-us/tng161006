@@ -459,7 +459,6 @@ function writeIndividual($person) {
   global $people_table;
   global $citations;
   global $lnprefixes;
-  global $assoc_table;
   global $lineending;
   global $private;
 
@@ -648,7 +647,7 @@ function writeIndividual($person) {
         $info .= doLDSEvent('ENDL', 'endl', $indnotes['ENDL'], $citations['ENDL'], $extras['ENDL'], $ind);
       }
       //do associations
-      $query = "SELECT passocID, relationship FROM $assoc_table WHERE personID = '$person'";
+      $query = "SELECT passocID, relationship FROM associations WHERE personID = '$person'";
       $assocresult = tng_query($query);
       while ($assoc = tng_fetch_assoc($assocresult)) {
         $info .= "1 ASSO @{$assoc['passocID']}@$lineending";

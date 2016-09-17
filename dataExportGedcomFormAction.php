@@ -549,11 +549,10 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     }
 
     function doAssociations($entityID) {
-      global $assoc_table;
       global $lineending;
 
       $assocstr = '';
-      $query = "SELECT passocID, relationship FROM $assoc_table WHERE personID = '$entityID'";
+      $query = "SELECT passocID, relationship FROM associations WHERE personID = '$entityID'";
       $assocresult = tng_query($query);
       while ($assoc = tng_fetch_assoc($assocresult)) {
         $assocstr .= "1 ASSO @{$assoc['passocID']}@$lineending";

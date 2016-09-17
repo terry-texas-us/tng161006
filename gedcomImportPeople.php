@@ -14,7 +14,6 @@ function getIndividualRecord($personID, $prevlevel) {
   global $people_table;
   global $children_table;
   global $families_table;
-  global $assoc_table;
   global $savestate;
   global $lineinfo;
   global $custeventlist;
@@ -604,7 +603,7 @@ function getIndividualRecord($personID, $prevlevel) {
     //do associations
     if (count($assocarr)) {
       foreach ($assocarr as $assoc) {
-        $query = "INSERT INTO $assoc_table (personID, passocID, relationship, reltype) VALUES('$personID', \"{$assoc['asso']}\", \"{$assoc['rela']}\", \"{$assoc['reltype']}\" )";
+        $query = "INSERT INTO associations (personID, passocID, relationship, reltype) VALUES('$personID', \"{$assoc['asso']}\", \"{$assoc['rela']}\", \"{$assoc['reltype']}\" )";
         $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
     }

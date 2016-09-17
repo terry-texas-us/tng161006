@@ -5,7 +5,6 @@ function getFamilyRecord($familyID, $prevlevel) {
   global $children_table;
   global $fciteevents;
   global $prefix;
-  global $assoc_table;
   global $savestate;
   global $lineinfo;
   global $custeventlist;
@@ -255,7 +254,7 @@ function getFamilyRecord($familyID, $prevlevel) {
     //do associations
     if (count($assocarr)) {
       foreach ($assocarr as $assoc) {
-        $query = "INSERT INTO $assoc_table (personID, passocID, relationship, reltype) VALUES('$familyID', \"{$assoc['asso']}\", \"{$assoc['rela']}\", \"{$assoc['reltype']}\" )";
+        $query = "INSERT INTO associations (personID, passocID, relationship, reltype) VALUES('$familyID', \"{$assoc['asso']}\", \"{$assoc['rela']}\", \"{$assoc['reltype']}\" )";
         $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
     }

@@ -266,22 +266,18 @@ function doNotesCitations($persfam1, $persfam2, $varname) {
 }
 
 function doAssociations($personID1, $personID2) {
-  global $assoc_table;
-
-  $query = "UPDATE $assoc_table set personID = \"$personID1\" WHERE personID = '$personID2'";
+  $query = "UPDATE associations set personID = \"$personID1\" WHERE personID = '$personID2'";
   tng_query($query);
 
-  $query = "UPDATE $assoc_table set passocID = \"$personID1\" WHERE personID = '$personID2'";
+  $query = "UPDATE associations set passocID = \"$personID1\" WHERE personID = '$personID2'";
   tng_query($query);
 }
 
 function delAssociations($entity) {
-  global $assoc_table;
-
-  $query = "DELETE FROM $assoc_table WHERE personID = '$entity'";
+  $query = "DELETE FROM associations WHERE personID = '$entity'";
   tng_query($query);
 
-  $query = "DELETE FROM $assoc_table WHERE passocID = '$entity'";
+  $query = "DELETE FROM associations WHERE passocID = '$entity'";
   tng_query($query);
 }
 

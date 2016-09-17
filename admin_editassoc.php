@@ -9,7 +9,7 @@ if (!$allowEdit) {
   header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-$query = "SELECT passocID, relationship, reltype FROM $assoc_table WHERE assocID = '$assocID'";
+$query = "SELECT passocID, relationship, reltype FROM associations WHERE assocID = '$assocID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);

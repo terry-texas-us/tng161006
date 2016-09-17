@@ -42,7 +42,7 @@ switch ($entity) {
     $query = "DELETE FROM $children_table WHERE gedcom=\"$oldtree\" AND personID=\"$entityID\"";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $assoc_table WHERE gedcom=\"$oldtree\" AND (personID=\"$entityID\" OR passocID=\"$entityID\")";
+    $query = "DELETE FROM associations WHERE gedcom=\"$oldtree\" AND (personID=\"$entityID\" OR passocID=\"$entityID\")";
     $result = tng_query($query);
 
     break;

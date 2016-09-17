@@ -77,9 +77,9 @@ $query = "CREATE TABLE $album2entities_table (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $album2entities_table);
 
-$query = "DROP TABLE IF EXISTS $assoc_table";
+$query = 'DROP TABLE IF EXISTS associations';
 $result = performQuery($query);
-$query = "CREATE TABLE $assoc_table (
+$query = "CREATE TABLE associations (
     assocID INT(11) NOT NULL AUTO_INCREMENT,
     gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     personID VARCHAR(22) NOT NULL,
@@ -89,7 +89,7 @@ $query = "CREATE TABLE $assoc_table (
     PRIMARY KEY (assocID),
     INDEX assoc (personID)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $assoc_table);
+$result = performQuery($query, 'associations');
 
 $query = "DROP TABLE IF EXISTS $branches_table";
 $result = performQuery($query);

@@ -282,9 +282,7 @@ function getBranchesSimple($branch) {
 }
 
 function getAssociations($personID) {
-  global $assoc_table;
-
-  $query = "SELECT passocID, relationship, reltype FROM $assoc_table WHERE personID = '$personID'";
+  $query = "SELECT passocID, relationship, reltype FROM associations WHERE personID = '$personID'";
 
   return tng_query($query);
 }

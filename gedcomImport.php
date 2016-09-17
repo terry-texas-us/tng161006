@@ -339,8 +339,6 @@ function getContinued() {
 }
 
 function deleteLinksOnMatch($entityID) {
-  global $assoc_table;
-
   $query = "SELECT addressID FROM events WHERE persfamID = '$entityID'";
   $result = tng_query($query);
   while ($row = tng_fetch_assoc($result)) {
@@ -352,7 +350,7 @@ function deleteLinksOnMatch($entityID) {
   $query = "DELETE from events WHERE persfamID = '$entityID'";
   tng_query($query);
 
-  $query = "DELETE from $assoc_table WHERE personID = '$entityID'";
+  $query = "DELETE from associations WHERE personID = '$entityID'";
   tng_query($query);
 
   $query = "SELECT xnoteID FROM notelinks WHERE persfamID = '$entityID'";

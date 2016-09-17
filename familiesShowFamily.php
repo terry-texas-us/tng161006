@@ -475,7 +475,7 @@ $headSection->setTitle($headTitle);
 
     $assoctext = '';
     if ($rights['both']) {
-      $query = "SELECT passocID, relationship, reltype FROM $assoc_table WHERE personID = '$familyID'";
+      $query = "SELECT passocID, relationship, reltype FROM associations WHERE personID = '$familyID'";
       $assocresult = tng_query($query);
       while ($assoc = tng_fetch_assoc($assocresult)) {
         $assoctext .= showEvent(['text' => uiTextSnippet('association'), 'fact' => formatAssoc($assoc)]);

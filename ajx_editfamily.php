@@ -66,7 +66,7 @@ while ($cite = tng_fetch_assoc($citresult)) {
   }
   $gotcites[$cite['eventID']] = '*';
 }
-$assocquery = "SELECT count(assocID) AS acount FROM $assoc_table WHERE personID = '$familyID'";
+$assocquery = "SELECT count(assocID) AS acount FROM associations WHERE personID = '$familyID'";
 $assocresult = tng_query($assocquery) or die(uiTextSnippet('cannotexecutequery') . ": $assocquery");
 $assocrow = tng_fetch_assoc($assocresult);
 $gotassoc = $assocrow['acount'] ? '*' : '';

@@ -72,7 +72,6 @@ fwrite($fp, "\$reports_table = \"$reports_table\";\n");
 fwrite($fp, "\$saveimport_table = \"$saveimport_table\";\n");
 fwrite($fp, "\$branches_table = \"$branches_table\";\n");
 fwrite($fp, "\$branchlinks_table = \"$branchlinks_table\";\n");
-fwrite($fp, "\$assoc_table = \"$assoc_table\";\n");
 fwrite($fp, "\$mostwanted_table = \"$mostwanted_table\";\n");
 fwrite($fp, "\n");
 if ($rootpath != $newrootpath) {

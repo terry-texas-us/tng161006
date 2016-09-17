@@ -183,10 +183,6 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
                   <td><input name='branchlinks_table' type='text' value="<?php echo $branchlinks_table; ?>"></td>
                 </tr>
                 <tr>
-                  <td><?php echo uiTextSnippet('associations'); ?>:</td>
-                  <td><input name='assoc_table' type='text' value="<?php echo $assoc_table; ?>"></td>
-                </tr>
-                <tr>
                   <td><?php echo uiTextSnippet('mostwanted'); ?>:</td>
                   <td><input name='mostwanted_table' type='text' value="<?php echo $mostwanted_table; ?>"></td>
                 </tr>

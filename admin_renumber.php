@@ -143,10 +143,10 @@ echo $navList->build('renumber');
             $query = "UPDATE $children_table SET personID = '$newID' WHERE personID = '$old'";
             $result2 = tng_query($query);
 
-            $query = "UPDATE $assoc_table SET personID = '$newID' WHERE personID = '$old'";
+            $query = "UPDATE associations SET personID = '$newID' WHERE personID = '$old'";
             $result2 = tng_query($query);
 
-            $query = "UPDATE $assoc_table SET passocID = '$newID' WHERE passocID = '$old'";
+            $query = "UPDATE associations SET passocID = '$newID' WHERE passocID = '$old'";
             $result2 = tng_query($query);
 
             $query = "UPDATE temp_events SET personID = '$newID' WHERE personID = '$old'";

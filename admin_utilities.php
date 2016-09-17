@@ -113,7 +113,7 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
             doRow($albums_table, uiTextSnippet('albums'));
             doRow($album2entities_table, uiTextSnippet('album2entitiestable'));
             doRow($albumlinks_table, uiTextSnippet('albumlinkstable'));
-            doRow($assoc_table, uiTextSnippet('associations'));
+            doRow('associations', uiTextSnippet('associations'));
             doRow($branches_table, uiTextSnippet('branches'));
             doRow($branchlinks_table, uiTextSnippet('brlinkstable'));
             doRow('cemeteries', uiTextSnippet('cemeteries'));

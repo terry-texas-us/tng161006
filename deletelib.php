@@ -52,9 +52,7 @@ function deleteChildren($id) {
 }
 
 function deleteAssociations($id) {
-  global $assoc_table;
-
-  $query = "DELETE FROM $assoc_table WHERE personID = '$id' OR passocID = '$id'";
+  $query = "DELETE FROM associations WHERE personID = '$id' OR passocID = '$id'";
   tng_query($query);
 }
 

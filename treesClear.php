@@ -25,8 +25,8 @@ tng_query("ALTER TABLE $families_table AUTO_INCREMENT = 1");
 tng_query("DELETE FROM $children_table");
 tng_query("ALTER TABLE $children_table AUTO_INCREMENT = 1");
 
-tng_query("DELETE FROM $assoc_table");
-tng_query("ALTER TABLE $assoc_table AUTO_INCREMENT = 1");
+tng_query('DELETE FROM associations');
+tng_query('ALTER TABLE associations AUTO_INCREMENT = 1');
 
 tng_query('DELETE FROM addresses');
 tng_query('ALTER TABLE addresses AUTO_INCREMENT = 1');

@@ -21,7 +21,6 @@ $reports_table = "reports";
 $saveimport_table = "saveimport";
 $branches_table = "branches";
 $branchlinks_table = "branchlinks";
-$assoc_table = "associations";
 $mostwanted_table = "mostwanted";
 
 $rootpath = "C:/apache/htdocs/tng/";

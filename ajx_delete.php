@@ -266,7 +266,7 @@ switch ($t) {
     $query = "DELETE FROM places WHERE gedcom = '$id'";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $assoc_table WHERE gedcom = '$id'";
+    $query = "DELETE FROM associations WHERE gedcom = '$id'";
     $result = tng_query($query);
 
     $query = "DELETE FROM addresses WHERE gedcom = '$id'";

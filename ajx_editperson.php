@@ -78,7 +78,7 @@ while ($cite = tng_fetch_assoc($citresult)) {
 }
 tng_free_result($citresult);
 
-$assocquery = "SELECT count(assocID) AS acount FROM $assoc_table WHERE personID = '$personID'";
+$assocquery = "SELECT count(assocID) AS acount FROM associations WHERE personID = '$personID'";
 $assocresult = tng_query($assocquery) or die(uiTextSnippet('cannotexecutequery') . ": $assocquery");
 $assocrow = tng_fetch_assoc($assocresult);
 $gotassoc = $assocrow['acount'] ? '*' : '';
