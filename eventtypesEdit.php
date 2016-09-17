@@ -11,7 +11,7 @@ if (!$allowEdit) {
   header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-$query = "SELECT * FROM $eventtypes_table WHERE eventtypeID = \"$eventtypeID\"";
+$query = "SELECT * FROM eventtypes WHERE eventtypeID = \"$eventtypeID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);

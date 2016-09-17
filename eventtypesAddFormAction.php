@@ -28,7 +28,7 @@ if (!$ordernum) {
 if (!$display) {
   $display = $defdisplay;
 }
-$query = "INSERT INTO $eventtypes_table (tag,description,display,type,keep,collapse,ordernum) VALUES (\"$tag\",\"$description\",\"$display\",\"$type\",\"$keep\",\"$collapse\",\"$ordernum\")";
+$query = "INSERT INTO eventtypes (tag,description,display,type,keep,collapse,ordernum) VALUES (\"$tag\",\"$description\",\"$display\",\"$type\",\"$keep\",\"$collapse\",\"$ordernum\")";
 $result = tng_query($query);
 if (tng_affected_rows() == 1) {
   $eventtypeID = tng_insert_id();

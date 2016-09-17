@@ -2,7 +2,6 @@
 
 function showCustEvents($id) {
   global $events_table;
-  global $eventtypes_table;
   global $allowEdit;
   global $allowDelete;
   global $gotnotes;
@@ -12,7 +11,7 @@ function showCustEvents($id) {
 
   echo "<div id='custevents' style='margin-bottom: 5px'>\n";
 
-  $query = "SELECT display, eventdate, eventplace, info, $events_table.eventID AS eventID FROM $events_table, $eventtypes_table WHERE parenttag = \"\" AND persfamID = '$id' AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY eventdatetr, ordernum";
+  $query = "SELECT display, eventdate, eventplace, info, $events_table.eventID AS eventID FROM $events_table, eventtypes WHERE parenttag = \"\" AND persfamID = '$id' AND $events_table.eventtypeID = eventtypes.eventtypeID ORDER BY eventdatetr, ordernum";
   $evresult = tng_query($query);
   $eventcount = tng_num_rows($evresult);
 

@@ -162,13 +162,12 @@ function addtoQuery($textstr, $colvar, $criteria, $qualifyvar, $qualifier, $qual
 function doCustomEvents($type) {
   global $dontdo;
   global $cejoin;
-  global $eventtypes_table;
   global $events_table;
   global $allwhere;
   global $mybool;
 
   $cejoin = '';
-  $query = "SELECT eventtypeID, tag, display FROM $eventtypes_table WHERE keep = '1' AND type = '$type' ORDER BY display";
+  $query = "SELECT eventtypeID, tag, display FROM eventtypes WHERE keep = '1' AND type = '$type' ORDER BY display";
   $result = tng_query($query);
   $needce = 0;
   $ecount = 0;

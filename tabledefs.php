@@ -218,13 +218,13 @@ $query = "CREATE TABLE $events_table (
     FOREIGN KEY events_fk1 (persfamID) REFERENCES $people_table (personID),
     FOREIGN KEY events_fk2 (persfamID) REFERENCES $families_table (familyID),
     FOREIGN KEY events_fk3 (persfamID) REFERENCES sources (sourceID),
-    FOREIGN KEY events_fk4 (eventtypeID) REFERENCES $eventtypes_table (eventtypeID)
+    FOREIGN KEY events_fk4 (eventtypeID) REFERENCES eventtypes (eventtypeID)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $events_table);
 
-$query = "DROP TABLE IF EXISTS $eventtypes_table";
+$query = 'DROP TABLE IF EXISTS eventtypes';
 $result = performQuery($query);
-$query = "CREATE TABLE $eventtypes_table (
+$query = "CREATE TABLE eventtypes (
     eventtypeID INT(11) NOT NULL AUTO_INCREMENT,
     tag VARCHAR(10) NOT NULL,
     description VARCHAR(90) NOT NULL,
@@ -237,7 +237,7 @@ $query = "CREATE TABLE $eventtypes_table (
     UNIQUE typetagdesc (type, tag, description),
     INDEX ordernum (ordernum)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $eventtypes_table);
+$result = performQuery($query, 'eventtypes');
 
 $query = "DROP TABLE IF EXISTS $families_table";
 $result = performQuery($query);

@@ -206,11 +206,10 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     }
 
     function getNotes($id) {
-      global $eventtypes_table;
       global $events_table;
       global $xnotes;
 
-      $query = "SELECT notelinks.ID AS ID, secret, xnotes.note AS note, xnotes.noteID AS noteID, notelinks.eventID FROM notelinks LEFT JOIN xnotes ON notelinks.xnoteID = xnotes.ID LEFT JOIN $events_table ON notelinks.eventID = $events_table.eventID LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE notelinks.persfamID = '$id' ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, notelinks.ordernum, ID";
+      $query = "SELECT notelinks.ID AS ID, secret, xnotes.note AS note, xnotes.noteID AS noteID, notelinks.eventID FROM notelinks LEFT JOIN xnotes ON notelinks.xnoteID = xnotes.ID LEFT JOIN $events_table ON notelinks.eventID = $events_table.eventID LEFT JOIN eventtypes ON eventtypes.eventtypeID = $events_table.eventtypeID WHERE notelinks.persfamID = '$id' ORDER BY eventdatetr, eventtypes.ordernum, tag, notelinks.ordernum, ID";
       $notelinks = tng_query($query);
       $notearray = [];
       while ($notelink = tng_fetch_assoc($notelinks)) {
@@ -575,7 +574,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     function writeIndividual($ind) {
       global $people_table;
       global $events_table;
-      global $eventtypes_table;
       global $lnprefixes;
       global $children_table;
       global $families_table;
@@ -804,7 +802,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         $info .= $parentdata;
 
         if ($rights['both']) {
-          $query = "SELECT tag, description, eventdate, eventplace, age, agency, cause, addressID, info, eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$ind['personID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND parenttag = \"\" AND keep = \"1\" ORDER BY eventdate, ordernum, tag";
+          $query = "SELECT tag, description, eventdate, eventplace, age, agency, cause, addressID, info, eventID FROM $events_table, eventtypes WHERE persfamID = \"{$ind['personID']}\" AND $events_table.eventtypeID = eventtypes.eventtypeID AND parenttag = \"\" AND keep = \"1\" ORDER BY eventdate, ordernum, tag";
           $custevents = tng_query($query);
           while ($custevent = tng_fetch_assoc($custevents)) {
             $info .= doEvent($custevent, 1);
@@ -882,7 +880,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
 
     function writeFamily($family) {
       global $events_table;
-      global $eventtypes_table;
       global $citations;
       global $savestate;
       global $children_table;
@@ -993,7 +990,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
             $info .= $extras['DIV'];
           }
 
-          $query = "SELECT tag, description, eventdate, eventplace, age, agency, cause, addressID, info, eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"$familyID\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND parenttag = \"\" AND keep = \"1\" ORDER BY eventdate, ordernum, tag";
+          $query = "SELECT tag, description, eventdate, eventplace, age, agency, cause, addressID, info, eventID FROM $events_table, eventtypes WHERE persfamID = \"$familyID\" AND $events_table.eventtypeID = eventtypes.eventtypeID AND parenttag = \"\" AND keep = \"1\" ORDER BY eventdate, ordernum, tag";
           $custevents = tng_query($query);
           while ($custevent = tng_fetch_assoc($custevents)) {
             $info .= doEvent($custevent, 1);
@@ -1107,7 +1104,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     function writeSource($source) {
       global $saveimport_table;
       global $events_table;
-      global $eventtypes_table;
       global $savestate;
       global $lineending;
       global $saveimport;
@@ -1141,7 +1137,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         }
       }
 
-      $query = "SELECT tag, description, eventdate, eventplace, info FROM $events_table, $eventtypes_table WHERE persfamID = \"{$source['sourceID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND type = \"S\" AND keep = \"1\" ORDER BY ordernum";
+      $query = "SELECT tag, description, eventdate, eventplace, info FROM $events_table, eventtypes WHERE persfamID = \"{$source['sourceID']}\" AND $events_table.eventtypeID = eventtypes.eventtypeID AND type = \"S\" AND keep = \"1\" ORDER BY ordernum";
       $custevents = tng_query($query);
       while ($custevent = tng_fetch_assoc($custevents)) {
         $sourcestr .= doEvent($custevent, 1);
@@ -1218,7 +1214,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
 
     function writeRepository($repo) {
       global $events_table;
-      global $eventtypes_table;
       global $savestate;
       global $lineending;
       global $saveimport_table;
@@ -1235,7 +1230,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         $repostr .= getFact($repo, 1);
       }
 
-      $query = "SELECT tag, description, eventdate, eventplace, info FROM $events_table, $eventtypes_table WHERE persfamID = \"{$repo['repoID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND type = \"R\" AND keep = \"1\" ORDER BY ordernum";
+      $query = "SELECT tag, description, eventdate, eventplace, info FROM $events_table, eventtypes WHERE persfamID = \"{$repo['repoID']}\" AND $events_table.eventtypeID = eventtypes.eventtypeID AND type = \"R\" AND keep = \"1\" ORDER BY ordernum";
       $custevents = tng_query($query);
       while ($custevent = tng_fetch_assoc($custevents)) {
         $repostr .= doEvent($custevent, 1);

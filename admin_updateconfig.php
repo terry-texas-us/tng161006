@@ -70,7 +70,6 @@ fwrite($fp, "\$languagesTable = \"$languagesTable\";\n");
 
 fwrite($fp, "\$citations_table = \"$citations_table\";\n");
 fwrite($fp, "\$events_table = \"$events_table\";\n");
-fwrite($fp, "\$eventtypes_table = \"$eventtypes_table\";\n");
 fwrite($fp, "\$rectangles_table = \"$rectangles_table\";\n");
 fwrite($fp, "\$reports_table = \"$reports_table\";\n");
 fwrite($fp, "\$saveimport_table = \"$saveimport_table\";\n");

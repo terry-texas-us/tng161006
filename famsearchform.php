@@ -133,7 +133,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
           </div>
           <div id='otherevents' style='display: none'>
             <?php
-            $query = "SELECT eventtypeID, tag, display FROM $eventtypes_table WHERE keep=\"1\" AND type=\"F\" ORDER BY display";
+            $query = "SELECT eventtypeID, tag, display FROM eventtypes WHERE keep=\"1\" AND type=\"F\" ORDER BY display";
             $result = tng_query($query);
             $eventtypes = [];
             while ($row = tng_fetch_assoc($result)) {
@@ -315,8 +315,8 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
       <?php
       $qcount++;
       }
-      //get eventtypeIDs from $eventtypes_table
-      $query = "SELECT eventtypeID, tag FROM $eventtypes_table WHERE keep=\"1\" AND type=\"F\"";
+
+      $query = "SELECT eventtypeID, tag FROM eventtypes WHERE keep=\"1\" AND type=\"F\"";
       $etresult = tng_query($query);
       while ($row = tng_fetch_assoc($etresult)) {
       if (!in_array($row[tag], $dontdo)) {

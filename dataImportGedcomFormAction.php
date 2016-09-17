@@ -286,7 +286,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
         $tngimpcfg['maxlivingage'] = 110;
       }
       //get custom event types
-      $query = "SELECT eventtypeID, tag, description, keep, type, display FROM $eventtypes_table";
+      $query = 'SELECT eventtypeID, tag, description, keep, type, display FROM eventtypes';
       $result = tng_query($query);
       $custeventlist = [];
       while ($row = tng_fetch_assoc($result)) {

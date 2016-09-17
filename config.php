@@ -19,7 +19,6 @@ $address_table = "addresses";
 $languagesTable = "languages";
 $citations_table = "citations";
 $events_table = "events";
-$eventtypes_table = "eventtypes";
 $rectangles_table = "";
 $reports_table = "reports";
 $saveimport_table = "saveimport";

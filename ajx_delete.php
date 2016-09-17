@@ -213,7 +213,7 @@ switch ($t) {
     $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('branch') . " $id";
     break;
   case 'eventtype':
-    $query = "DELETE FROM $eventtypes_table WHERE eventtypeID = '$id'";
+    $query = "DELETE FROM eventtypes WHERE eventtypeID = '$id'";
     $result = tng_query($query);
 
     $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('eventtype') . " $id";

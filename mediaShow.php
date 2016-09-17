@@ -254,7 +254,7 @@ $headSection->setTitle($titlestr);
             $medialinktext .= "<li><a href=\"placesearch.php?psearch={$prow['personID']}\">" . $prow['personID'];
           }
           if ($prow['eventID']) {
-            $query = "SELECT display FROM $events_table, $eventtypes_table WHERE eventID = \"{$prow['eventID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID";
+            $query = "SELECT display FROM $events_table, eventtypes WHERE eventID = \"{$prow['eventID']}\" AND $events_table.eventtypeID = eventtypes.eventtypeID";
             $eresult = tng_query($query);
             $erow = tng_fetch_assoc($eresult);
             $event = $erow['display'] && is_numeric($prow['eventID']) ? getEventDisplay($erow['display']) : (uiTextSnippet($prow['eventID']) ? uiTextSnippet($prow['eventID']) : $prow['eventID']);

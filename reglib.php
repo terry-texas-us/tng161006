@@ -214,13 +214,12 @@ function getSpouseDates($row) {
 }
 
 function getOtherEvents($row) {
-  global $eventtypes_table;
   global $events_table;
   global $pedigree;
 
   $otherEvents = '';
   if ($pedigree['regnotes'] && $row['allow_living'] && $row['allow_private']) {
-    $query = "SELECT display, eventdate, eventdatetr, eventplace, age, agency, cause, addressID, info, tag, description, eventID FROM ($events_table, $eventtypes_table) WHERE persfamID = \"{$row['personID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND keep = \"1\" AND parenttag = \"\" ORDER BY eventdatetr, ordernum, tag, description, info, eventID";
+    $query = "SELECT display, eventdate, eventdatetr, eventplace, age, agency, cause, addressID, info, tag, description, eventID FROM ($events_table, eventtypes) WHERE persfamID = \"{$row['personID']}\" AND $events_table.eventtypeID = eventtypes.eventtypeID AND keep = \"1\" AND parenttag = \"\" ORDER BY eventdatetr, ordernum, tag, description, info, eventID";
     $custevents = tng_query($query);
     while ($custevent = tng_fetch_assoc($custevents)) {
       $displayval = getEventDisplay($custevent['display']);
@@ -260,7 +259,6 @@ function getOtherEvents($row) {
 }
 
 function getRegNotes($persfamID, $flag) {
-  global $eventtypes_table;
   global $events_table;
 
   $custnotes = [];
@@ -279,7 +277,7 @@ function getRegNotes($persfamID, $flag) {
     $postcusttitles = [];
   }
 
-  $query = "SELECT display, xnotes.note AS note, notelinks.eventID AS eventID FROM notelinks LEFT JOIN xnotes ON notelinks.xnoteID = xnotes.ID LEFT JOIN $events_table ON notelinks.eventID = $events_table.eventID LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE notelinks.persfamID = '$persfamID' AND secret != '1' ORDER BY eventdatetr, $eventtypes_table.ordernum, tag";
+  $query = "SELECT display, xnotes.note AS note, notelinks.eventID AS eventID FROM notelinks LEFT JOIN xnotes ON notelinks.xnoteID = xnotes.ID LEFT JOIN $events_table ON notelinks.eventID = $events_table.eventID LEFT JOIN eventtypes ON eventtypes.eventtypeID = $events_table.eventtypeID WHERE notelinks.persfamID = '$persfamID' AND secret != '1' ORDER BY eventdatetr, eventtypes.ordernum, tag";
   $notelinks = tng_query($query);
 
   $currevent = '';

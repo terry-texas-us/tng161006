@@ -121,7 +121,7 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
             doRow('countries', uiTextSnippet('countriestable'));
             doRow('places', uiTextSnippet('places'));
             doRow($events_table, uiTextSnippet('events'));
-            doRow($eventtypes_table, uiTextSnippet('eventtypes'));
+            doRow('eventtypes', uiTextSnippet('eventtypes'));
             doRow($families_table, uiTextSnippet('families'));
             doRow($languagesTable, uiTextSnippet('languages'));
             doRow($media_table, uiTextSnippet('mediatable'));

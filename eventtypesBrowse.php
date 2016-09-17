@@ -52,12 +52,12 @@ if ($onimport || $onimport === '0') {
 if ($wherestr) {
   $wherestr = "WHERE $wherestr";
 }
-$query = "SELECT eventtypeID, tag, description, display, type, keep, collapse, ordernum FROM $eventtypes_table $wherestr ORDER BY tag, description LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT eventtypeID, tag, description, display, type, keep, collapse, ordernum FROM eventtypes $wherestr ORDER BY tag, description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(eventtypeID) AS ecount FROM $eventtypes_table $wherestr";
+  $query = "SELECT count(eventtypeID) AS ecount FROM eventtypes $wherestr";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['ecount'];

@@ -96,7 +96,7 @@ if (is_numeric($eventID)) {
   $evrow = tng_fetch_assoc($result);
   tng_free_result($result);
 
-  $query = "SELECT display, tag FROM $eventtypes_table, $events_table WHERE eventID = $eventID AND $eventtypes_table.eventtypeID = $events_table.eventtypeID";
+  $query = "SELECT display, tag FROM eventtypes, $events_table WHERE eventID = $eventID AND eventtypes.eventtypeID = $events_table.eventtypeID";
   $evresult = tng_query($query);
   $evtrow = tng_fetch_assoc($evresult);
 

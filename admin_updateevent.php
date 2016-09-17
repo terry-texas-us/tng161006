@@ -72,7 +72,7 @@ if (trim($eventplace)) {
 }
 adminwritelog(uiTextSnippet('modifyevent') . ": $eventID");
 
-$query = "SELECT display FROM $eventtypes_table, $events_table WHERE $eventtypes_table.eventtypeID = $events_table.eventtypeID AND eventID = \"$eventID\"";
+$query = "SELECT display FROM eventtypes, $events_table WHERE eventtypes.eventtypeID = $events_table.eventtypeID AND eventID = \"$eventID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 

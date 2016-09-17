@@ -72,7 +72,7 @@ $eventID = tng_insert_id();
 
 adminwritelog(uiTextSnippet('addnewevent') . ": $eventtypeID/$persfamID");
 
-$query = "SELECT display FROM $eventtypes_table WHERE eventtypeID = \"$eventtypeID\"";
+$query = "SELECT display FROM eventtypes WHERE eventtypeID = \"$eventtypeID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 

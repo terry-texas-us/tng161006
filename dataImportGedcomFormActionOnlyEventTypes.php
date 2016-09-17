@@ -71,7 +71,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
     <p><strong><?php echo uiTextSnippet('importinggedcom'); ?></strong></p>
     <?php
     //get custom event types
-    $query = "SELECT eventtypeID, tag, description, keep, type, display FROM $eventtypes_table";
+    $query = 'SELECT eventtypeID, tag, description, keep, type, display FROM eventtypes';
     $result = tng_query($query);
     $custeventlist = [];
     while ($row = tng_fetch_assoc($result)) {
@@ -133,7 +133,6 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       global $lineinfo;
       global $custeventlist;
       global $eventctr;
-      global $eventtypes_table;
 
       $lineinfo = getLine();
       while ($lineinfo['tag'] && $lineinfo['level'] >= 1) {
@@ -168,7 +167,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
               if (!$display) {
                 $display = uiTextSnippet($tag) ? uiTextSnippet($tag) : $tag;
               }
-              $query = "INSERT IGNORE INTO $eventtypes_table (tag, description, display, keep, type)  VALUES(\"$tag\", \"$type\", \"$display\", \"0\", \"$prefix\")";
+              $query = "INSERT IGNORE INTO eventtypes (tag, description, display, keep, type)  VALUES(\"$tag\", \"$type\", \"$display\", \"0\", \"$prefix\")";
               $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
               $eventctr++;

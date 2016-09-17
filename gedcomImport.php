@@ -1252,7 +1252,6 @@ function dumpnotes($notearray) {
 
 function saveCustEvents($prefix, $persfamID, $events, $totevents) {
   global $events_table;
-  global $eventtypes_table;
   global $custevents;
   global $medialinks;
   global $num_medialinks;
@@ -1282,7 +1281,7 @@ function saveCustEvents($prefix, $persfamID, $events, $totevents) {
     if (!$custevents[$eventtype]) {
       //if not in  custevents array, add to eventtypes_table with keep=ignore
       $keep = $allevents ? 1 : 0;
-      $query = "INSERT IGNORE INTO $eventtypes_table (tag, description, display, keep, type)  VALUES(\"$event\", \"$description\", \"$display\", $keep, \"$prefix\")";
+      $query = "INSERT IGNORE INTO eventtypes (tag, description, display, keep, type)  VALUES(\"$event\", \"$description\", \"$display\", $keep, \"$prefix\")";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $custevents[$eventtype]['eventtypeID'] = tng_insert_id();
       $custevents[$eventtype]['keep'] = $keep;

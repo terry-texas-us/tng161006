@@ -28,7 +28,7 @@ header('Content-type:text/html; charset=' . $session_charset);
             <select name="eventtypeID">
               <option value=''></option>
               <?php
-              $query = "SELECT * FROM $eventtypes_table WHERE type = \"$prefix\" ORDER BY tag";
+              $query = "SELECT * FROM eventtypes WHERE type = \"$prefix\" ORDER BY tag";
               $evresult = tng_query($query);
 
               $events = [];

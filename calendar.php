@@ -216,12 +216,10 @@ $headSection->setTitle(uiTextSnippet('calendar'));
       if (in_array($key, $hideEvents)) {
         continue;
       }
-      $where[] = "$eventtypes_table.tag = '$key'";
+      $where[] = "eventtypes.tag = '$key'";
     }
     if (! empty($where)) {
-      $sql = "SELECT gedcom, persfamID, tag, display, eventdate, eventdatetr, eventplace
-        FROM $events_table, $eventtypes_table
-        WHERE (" . implode(' OR ', $where) . ") AND $eventtypes_table.eventtypeID = $events_table.eventtypeID AND eventdatetr LIKE '%-$thisMonth-%'";
+      $sql = "SELECT gedcom, persfamID, tag, display, eventdate, eventdatetr, eventplace FROM $events_table, eventtypes WHERE (" . implode(' OR ', $where) . ") AND eventtypes.eventtypeID = $events_table.eventtypeID AND eventdatetr LIKE '%-$thisMonth-%'";
 
       $result = tng_query($sql);
       # BREAK
@@ -442,9 +440,9 @@ $headSection->setTitle(uiTextSnippet('calendar'));
       $where = [];
       if(count($calEvent)) {
         foreach ($calEvent as $key => $val)
-          {$where[] = "$eventtypes_table.tag = '$key'";}
+          {$where[] = "eventtypes.tag = '$key'";}
 
-        $sql = "SELECT tag, display FROM $eventtypes_table WHERE " . implode(' OR ', $where);
+        $sql = "SELECT tag, display FROM eventtypes WHERE " . implode(' OR ', $where);
 
         $result = tng_query($sql);
         # BREAK

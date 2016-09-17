@@ -26,7 +26,7 @@ if ($tag2) {
 if (!$display) {
   $display = $defdisplay;
 }
-$query = "UPDATE $eventtypes_table SET tag=\"$tag\",type=\"$type\",description=\"$description\",display=\"$display\",keep=\"$keep\",collapse=\"$collapse\",ordernum=\"$ordernum\" WHERE eventtypeID=\"$eventtypeID\"";
+$query = "UPDATE eventtypes SET tag=\"$tag\",type=\"$type\",description=\"$description\",display=\"$display\",keep=\"$keep\",collapse=\"$collapse\",ordernum=\"$ordernum\" WHERE eventtypeID=\"$eventtypeID\"";
 $result = tng_query($query);
 
 adminwritelog(uiTextSnippet('modifyeventtype') . ": $eventtypeID");

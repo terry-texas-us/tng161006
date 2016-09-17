@@ -92,8 +92,8 @@ foreach ($timeline as $timeentry) {
   tng_free_result($result);
 
   if (count($timeline) == 1 && $rights['both']) {
-    $query = "SELECT display, eventdate, eventdatetr, eventplace, info FROM ($events_table, $eventtypes_table)
-      WHERE persfamID = \"$timeperson\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND keep = \"1\" AND parenttag = \"\"
+    $query = "SELECT display, eventdate, eventdatetr, eventplace, info FROM ($events_table, eventtypes)
+      WHERE persfamID = \"$timeperson\" AND $events_table.eventtypeID = eventtypes.eventtypeID AND keep = \"1\" AND parenttag = \"\"
       ORDER BY ordernum, tag, description, eventdatetr, info, eventID";
     $custevents = tng_query($query);
     while ($custevent = tng_fetch_assoc($custevents)) {

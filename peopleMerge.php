@@ -808,7 +808,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                   if (is_array($p2row)) {
                     echo "<td colspan=\"3\"><input type='button' value=\"" . uiTextSnippet('edit') . "\" onClick=\"deepOpen('peopleEdit.php?personID={$p2row['personID']}&amp;cw=1','edit')\"></td>\n";
 
-                    $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID AS eventtypeID, $events_table.eventID AS eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$p2row['personID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
+                    $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID AS eventtypeID, $events_table.eventID AS eventID FROM $events_table, eventtypes WHERE persfamID = \"{$p2row['personID']}\" AND $events_table.eventtypeID = eventtypes.eventtypeID ORDER BY ordernum";
                     $evresult = tng_query($query);
                     $eventcount = tng_num_rows($evresult);
 
@@ -897,7 +897,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                     doRow('endldate', 'endldate', 'p2endldate');
                     doRow('endlplace', 'endlplace', 'p2endlplace');
                   }
-                  $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID AS eventtypeID, $events_table.eventID AS eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"{$p1row['personID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID ORDER BY ordernum";
+                  $query = "SELECT display, eventdate, eventplace, info, $events_table.eventtypeID AS eventtypeID, $events_table.eventID AS eventID FROM $events_table, eventtypes WHERE persfamID = \"{$p1row['personID']}\" AND $events_table.eventtypeID = eventtypes.eventtypeID ORDER BY ordernum";
                   $evresult = tng_query($query);
                   $eventcount = tng_num_rows($evresult);
 

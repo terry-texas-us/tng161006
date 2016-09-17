@@ -199,7 +199,6 @@ function reorderCitation($citekey, $withlink = 1) {
 }
 
 function getNotes($persfamID, $flag) {
-  global $eventtypes_table;
   global $events_table;
   global $allowPrivate;
 
@@ -221,7 +220,7 @@ function getNotes($persfamID, $flag) {
   }
 
   $secretstr = $allowPrivate ? '' : ' AND secret != "1"';
-  $query = "SELECT display, xnotes.note AS note, notelinks.eventID AS eventID, notelinks.xnoteID AS xnoteID, notelinks.ID AS ID, noteID FROM notelinks LEFT JOIN xnotes ON notelinks.xnoteID = xnotes.ID LEFT JOIN $events_table ON notelinks.eventID = $events_table.eventID LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE notelinks.persfamID = '$persfamID' $secretstr ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, notelinks.ordernum, ID";
+  $query = "SELECT display, xnotes.note AS note, notelinks.eventID AS eventID, notelinks.xnoteID AS xnoteID, notelinks.ID AS ID, noteID FROM notelinks LEFT JOIN xnotes ON notelinks.xnoteID = xnotes.ID LEFT JOIN $events_table ON notelinks.eventID = $events_table.eventID LEFT JOIN eventtypes ON eventtypes.eventtypeID = $events_table.eventtypeID WHERE notelinks.persfamID = '$persfamID' $secretstr ORDER BY eventdatetr, eventtypes.ordernum, tag, notelinks.ordernum, ID";
   $notelinks = tng_query($query);
 
   $currevent = '';
@@ -670,10 +669,9 @@ function showBreak($breaksize) {
 
 function doCustomEvents($entityID, $type, $nomap = 0) {
   global $events_table;
-  global $eventtypes_table;
   global $tngprint;
 
-  $query = "SELECT display, eventdate, eventdatetr, eventplace, age, agency, cause, addressID, info, tag, description, eventID, collapse FROM ($events_table, $eventtypes_table) WHERE persfamID = \"$entityID\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND keep = \"1\" AND parenttag = \"\" ORDER BY ordernum, tag, description, eventdatetr, info, eventID";
+  $query = "SELECT display, eventdate, eventdatetr, eventplace, age, agency, cause, addressID, info, tag, description, eventID, collapse FROM ($events_table, eventtypes) WHERE persfamID = \"$entityID\" AND $events_table.eventtypeID = eventtypes.eventtypeID AND keep = \"1\" AND parenttag = \"\" ORDER BY ordernum, tag, description, eventdatetr, info, eventID";
   $custevents = tng_query($query);
   while ($custevent = tng_fetch_assoc($custevents)) {
     $displayval = getEventDisplay($custevent['display']);

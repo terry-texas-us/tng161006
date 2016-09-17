@@ -291,10 +291,9 @@ function getAssociations($personID) {
 
 function getPersonEventData($personID) {
   global $events_table;
-  global $eventtypes_table;
 
-  $query = "SELECT eventID, display, eventdate, eventplace, info FROM ($events_table, $eventtypes_table)
-      WHERE persfamID = '$personID' AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND keep = '1' AND parenttag = ''  ORDER BY ordernum, tag, description, eventdatetr, info, eventID";
+  $query = "SELECT eventID, display, eventdate, eventplace, info FROM ($events_table, eventtypes)
+      WHERE persfamID = '$personID' AND $events_table.eventtypeID = eventtypes.eventtypeID AND keep = '1' AND parenttag = ''  ORDER BY ordernum, tag, description, eventdatetr, info, eventID";
 
   return tng_query($query);
 }

@@ -19,7 +19,6 @@ function buildPlaceMenu($currpage, $entityID) {
 }
 
 function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
-  global $eventtypes_table;
   global $people_table;
   global $families_table;
   global $offset;
@@ -61,7 +60,7 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
   }
   $tngevents = $stdevents;
   $custevents = [];
-  $query = "SELECT tag, eventtypeID, display FROM $eventtypes_table WHERE keep = '1' AND type = '$prefix' ORDER BY display";
+  $query = "SELECT tag, eventtypeID, display FROM eventtypes WHERE keep = '1' AND type = '$prefix' ORDER BY display";
   $result = tng_query($query);
   while ($row = tng_fetch_assoc($result)) {
     $eventtypeID = $row['eventtypeID'];

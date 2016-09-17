@@ -20,7 +20,6 @@ function getAlbumLinkText($albumID) {
   global $people_table;
   global $families_table;
   global $events_table;
-  global $eventtypes_table;
   global $maxsearchresults;
 
   $links = '';
@@ -80,7 +79,7 @@ function getAlbumLinkText($albumID) {
       $links .= "<a href=\"placesearch.php?psearch={$prow['personID']}\">" . $prow['personID'] . '</a>';
     }
     if ($prow['eventID']) {
-      $query = "SELECT description FROM $events_table, $eventtypes_table WHERE eventID = \"{$prow['eventID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID";
+      $query = "SELECT description FROM $events_table, eventtypes WHERE eventID = \"{$prow['eventID']}\" AND $events_table.eventtypeID = eventtypes.eventtypeID";
       $eresult = tng_query($query);;
       $erow = tng_fetch_assoc($eresult);
       $event = $erow['description'] ? $erow['description'] : $prow['eventID'];

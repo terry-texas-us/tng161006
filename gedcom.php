@@ -197,11 +197,10 @@ function doEvent($custevent, $level) {
 }
 
 function getNotes($id) {
-  global $eventtypes_table;
   global $events_table;
   global $xnotes;
 
-  $query = "SELECT notelinks.ID AS ID, secret, xnotes.note AS note, xnotes.noteID AS noteID, notelinks.eventID FROM notelinks LEFT JOIN xnotes ON notelinks.xnoteID = xnotes.ID LEFT JOIN $events_table ON notelinks.eventID = $events_table.eventID LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE notelinks.persfamID = '$id' ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, notelinks.ordernum";
+  $query = "SELECT notelinks.ID AS ID, secret, xnotes.note AS note, xnotes.noteID AS noteID, notelinks.eventID FROM notelinks LEFT JOIN xnotes ON notelinks.xnoteID = xnotes.ID LEFT JOIN $events_table ON notelinks.eventID = $events_table.eventID LEFT JOIN eventtypes ON eventtypes.eventtypeID = $events_table.eventtypeID WHERE notelinks.persfamID = '$id' ORDER BY eventdatetr, eventtypes.ordernum, tag, notelinks.ordernum";
   $notelinks = tng_query($query);
   $notearray = [];
   while ($notelink = tng_fetch_assoc($notelinks)) {
@@ -465,7 +464,6 @@ function writeIndividual($person) {
   global $ldsOK;
   global $people_table;
   global $events_table;
-  global $eventtypes_table;
   global $citations;
   global $lnprefixes;
   global $assoc_table;
@@ -636,7 +634,7 @@ function writeIndividual($person) {
         $info .= $extras['BURI'];
       }
 
-      $query = "SELECT tag, description, eventdate, eventplace, age, agency, cause, addressID, info, eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"$person\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND parenttag = \"\" AND keep = \"1\" ORDER BY ordernum";
+      $query = "SELECT tag, description, eventdate, eventplace, age, agency, cause, addressID, info, eventID FROM $events_table, eventtypes WHERE persfamID = \"$person\" AND $events_table.eventtypeID = eventtypes.eventtypeID AND parenttag = \"\" AND keep = \"1\" ORDER BY ordernum";
       $custevents = tng_query($query);
       while ($custevent = tng_fetch_assoc($custevents)) {
         $info .= doEvent($custevent, 1);
@@ -715,7 +713,6 @@ function doLDSEvent($tag, $key, $notes, $citations, $extras, $row) {
 function writeFamily($family) {
   global $ldsOK;
   global $events_table;
-  global $eventtypes_table;
   global $citations;
   global $lineending;
   global $famarray;
@@ -791,7 +788,7 @@ function writeFamily($family) {
         $info .= $extras['DIV'];
       }
 
-      $query = "SELECT tag, description, eventdate, eventplace, age, agency, cause, addressID, info, eventID FROM $events_table, $eventtypes_table WHERE persfamID = \"$familyID\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND parenttag = \"\" AND keep = \"1\" ORDER BY ordernum";
+      $query = "SELECT tag, description, eventdate, eventplace, age, agency, cause, addressID, info, eventID FROM $events_table, eventtypes WHERE persfamID = \"$familyID\" AND $events_table.eventtypeID = eventtypes.eventtypeID AND parenttag = \"\" AND keep = \"1\" ORDER BY ordernum";
       $custevents = tng_query($query);
       while ($custevent = tng_fetch_assoc($custevents)) {
         $info .= doEvent($custevent, 1);
@@ -929,7 +926,6 @@ function getDescendant($person, $generation) {
 
 function doSources() {
   global $events_table;
-  global $eventtypes_table;
   global $allsources;
   global $allrepos;
   global $lineending;
@@ -969,7 +965,7 @@ function doSources() {
           }
         }
 
-        $query = "SELECT tag, description, eventdate, eventplace, info FROM $events_table, $eventtypes_table WHERE persfamID = \"{$source['sourceID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND type = \"S\" AND keep = \"1\" ORDER BY ordernum";
+        $query = "SELECT tag, description, eventdate, eventplace, info FROM $events_table, eventtypes WHERE persfamID = \"{$source['sourceID']}\" AND $events_table.eventtypeID = eventtypes.eventtypeID AND type = \"S\" AND keep = \"1\" ORDER BY ordernum";
         $custevents = tng_query($query);
         while ($custevent = tng_fetch_assoc($custevents)) {
           echo doEvent($custevent, 1);
@@ -991,7 +987,6 @@ function doSources() {
 
 function doRepositories() {
   global $events_table;
-  global $eventtypes_table;
   global $allrepos;
   global $lineending;
 
@@ -1010,7 +1005,7 @@ function doRepositories() {
           echo getFact($repo, 1);
         }
 
-        $query = "SELECT tag, description, eventdate, eventplace, info FROM $events_table, $eventtypes_table WHERE persfamID = \"{$repo['repoID']}\" AND $events_table.eventtypeID = $eventtypes_table.eventtypeID AND type = \"R\" AND keep = \"1\" ORDER BY ordernum";
+        $query = "SELECT tag, description, eventdate, eventplace, info FROM $events_table, eventtypes WHERE persfamID = \"{$repo['repoID']}\" AND $events_table.eventtypeID = eventtypes.eventtypeID AND type = \"R\" AND keep = \"1\" ORDER BY ordernum";
         $custevents = tng_query($query);
         while ($custevent = tng_fetch_assoc($custevents)) {
           echo doEvent($custevent, 1);

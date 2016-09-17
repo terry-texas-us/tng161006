@@ -188,7 +188,7 @@ if ($rrow['sqlselect']) {
         $displayfields[$i] = 'treename';
       } elseif ($tngprefix == 'ce') {
         $eventtypeID = substr($dfield, 6);
-        $query = "SELECT display FROM $eventtypes_table WHERE eventtypeID=\"$eventtypeID\"";
+        $query = "SELECT display FROM eventtypes WHERE eventtypeID=\"$eventtypeID\"";
         $evresult = tng_query($query);
         $evrow = tng_fetch_assoc($evresult);
         tng_free_result($evresult);

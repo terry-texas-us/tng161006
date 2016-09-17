@@ -176,7 +176,7 @@ $headSection->setTitle(uiTextSnippet('review'));
 
         while ($row = tng_fetch_assoc($result)) {
           if (is_numeric($row['eventID'])) {
-            $query = "SELECT display, $eventtypes_table.eventtypeID AS eventtypeID, tag FROM $eventtypes_table, $events_table WHERE eventID = {$row['eventID']} AND $eventtypes_table.eventtypeID = $events_table.eventtypeID";
+            $query = "SELECT display, eventtypes.eventtypeID AS eventtypeID, tag FROM eventtypes, $events_table WHERE eventID = {$row['eventID']} AND eventtypes.eventtypeID = $events_table.eventtypeID";
             $evresult = tng_query($query);
             $evrow = tng_fetch_assoc($evresult);
 
