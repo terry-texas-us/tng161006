@@ -234,7 +234,6 @@ function addCriteria($row) {
 
 function doNotesCitations($persfam1, $persfam2, $varname) {
   global $ccombinenotes;
-  global $citations_table;
 
   if ($varname) {
     if ($varname == 'general') {
@@ -256,13 +255,13 @@ function doNotesCitations($persfam1, $persfam2, $varname) {
     $query = "DELETE from notelinks WHERE persfamID = '$persfam1' $wherestr";
     tng_query($query);
 
-    $query = "DELETE from $citations_table WHERE persfamID = '$persfam1' $wherestr";
+    $query = "DELETE from citations WHERE persfamID = '$persfam1' $wherestr";
     tng_query($query);
   }
   $query = "UPDATE notelinks set persfamID = \"$persfam1\" WHERE persfamID = '$persfam2' $wherestr";
   tng_query($query);
 
-  $query = "UPDATE $citations_table set persfamID = \"$persfam1\" WHERE persfamID = '$persfam2' $wherestr";
+  $query = "UPDATE citations set persfamID = \"$persfam1\" WHERE persfamID = '$persfam2' $wherestr";
   tng_query($query);
 }
 
@@ -589,7 +588,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
     $query = "UPDATE notelinks set persfamID = \"$personID1\" WHERE persfamID = '$personID2'";
     $noteresult = tng_query($query);
 
-    $query = "UPDATE $citations_table set persfamID = \"$personID1\" WHERE persfamID = '$personID2'";
+    $query = "UPDATE citations set persfamID = \"$personID1\" WHERE persfamID = '$personID2'";
     $citeresult = tng_query($query);
   }
   if ($updatestr) {
@@ -618,7 +617,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
   $query = "DELETE from notelinks WHERE persfamID = '$personID2'";
   $combresult = tng_query($query);
 
-  $query = "DELETE from $citations_table WHERE persfamID = '$personID2'";
+  $query = "DELETE from citations WHERE persfamID = '$personID2'";
   $combresult = tng_query($query);
 
   doAssociations($personID1, $personID2);

@@ -47,7 +47,7 @@ require_once 'eventlib.php';
             echo buildParentRow($parent, 'husband', 'father');
             echo buildParentRow($parent, 'wife', 'mother');
 
-            $citquery = "SELECT citationID FROM $citations_table WHERE persfamID = \"$personID" . '::' . "{$familyId}\"";
+            $citquery = "SELECT citationID FROM citations WHERE persfamID = \"$personID" . '::' . "{$familyId}\"";
             $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
             $iconColor = tng_num_rows($citresult) ? 'icon-info' : 'icon-muted';
             tng_free_result($citresult);

@@ -136,7 +136,7 @@ switch ($t) {
     $query = "DELETE FROM sources WHERE ID = '$id'";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $citations_table WHERE sourceID = '$sourceID'";
+    $query = "DELETE FROM citations WHERE sourceID = '$sourceID'";
     $result = tng_query($query);
 
     deleteEvents($sourceID);
@@ -260,7 +260,7 @@ switch ($t) {
     $query = "DELETE FROM xnotes WHERE gedcom = '$id'";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $citations_table WHERE gedcom = '$id'";
+    $query = "DELETE FROM citations WHERE gedcom = '$id'";
     $result = tng_query($query);
 
     $query = "DELETE FROM places WHERE gedcom = '$id'";

@@ -134,7 +134,7 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
             doRow($reports_table, uiTextSnippet('reports'));
             doRow('sources', uiTextSnippet('sources'));
             doRow('repositories', uiTextSnippet('repositories'));
-            doRow($citations_table, uiTextSnippet('citations'));
+            doRow('citations', uiTextSnippet('citations'));
             doRow($saveimport_table, uiTextSnippet('saveimporttable'));
             doRow('states', uiTextSnippet('statestable'));
             doRow('temp_events', uiTextSnippet('temptable'));

@@ -71,7 +71,7 @@ $notecount = tng_num_rows($notelinks);
         if ($notelinks && $notecount) {
 
           while ($note = tng_fetch_assoc($notelinks)) {
-            $citquery = "SELECT citationID FROM $citations_table WHERE ";
+            $citquery = 'SELECT citationID FROM citations WHERE ';
             if ($note['noteID']) {
               $citquery .= "((persfamID = \"$persfamID\" AND eventID = \"N{$note['ID']}\") OR persfamID = \"{$note['noteID']}\")";
             } else {

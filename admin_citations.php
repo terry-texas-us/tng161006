@@ -37,7 +37,7 @@ $helplang = findhelp('citations_help.php');
 header('Content-type:text/html; charset=' . $session_charset);
 
 $xnotestr = $noteID ? " OR persfamID = '$noteID'" : '';
-$query = "SELECT citationID, $citations_table.sourceID AS sourceID, description, title, shorttitle FROM $citations_table LEFT JOIN sources ON $citations_table.sourceID = sources.sourceID WHERE ((persfamID = '$persfamID' AND eventID = '$eventID')$xnotestr) ORDER BY ordernum, citationID";
+$query = "SELECT citationID, citations.sourceID AS sourceID, description, title, shorttitle FROM citations LEFT JOIN sources ON citations.sourceID = sources.sourceID WHERE ((persfamID = '$persfamID' AND eventID = '$eventID')$xnotestr) ORDER BY ordernum, citationID";
 $citresult = tng_query($query);
 $citationcount = tng_num_rows($citresult);
 ?>

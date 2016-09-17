@@ -14,7 +14,6 @@ function getIndividualRecord($personID, $prevlevel) {
   global $people_table;
   global $children_table;
   global $families_table;
-  global $citations_table;
   global $assoc_table;
   global $savestate;
   global $lineinfo;
@@ -284,7 +283,7 @@ function getIndividualRecord($personID, $prevlevel) {
               $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
             }
             if (isset($info['SLGC']['SOUR'])) {
-              $query = "DELETE from $citations_table WHERE persfamID = \"$personID" . '::' . $info['SLGC']['FAMC'] . '"';
+              $query = "DELETE from citations WHERE persfamID = \"$personID" . '::' . $info['SLGC']['FAMC'] . '"';
               $result = tng_query($query);
               processCitations($personID . '::' . $famc, 'SLGC', $info['SLGC']['SOUR']);
             }
@@ -333,7 +332,7 @@ function getIndividualRecord($personID, $prevlevel) {
               $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
             }
             if (isset($info['SLGC']['SOUR'])) {
-              $query = "DELETE from $citations_table WHERE persfamID = \"$personID" . '::' . $info['SLGC']['FAMC'] . '"';
+              $query = "DELETE from citations WHERE persfamID = \"$personID" . '::' . $info['SLGC']['FAMC'] . '"';
               $result = tng_query($query);
               processCitations($personID . '::' . $info['SLGC']['FAMC'], 'SLGC', $info['SLGC']['SOUR']);
             }

@@ -148,7 +148,7 @@ switch ($action) {
     $count = count($clinks);
     for ($i = 0; $i < $count; $i++) {
       $order = $i + 1;
-      $query = "UPDATE $citations_table SET ordernum=\"$order\" WHERE citationID = \"$clinks[$i]\"";
+      $query = "UPDATE citations SET ordernum=\"$order\" WHERE citationID = \"$clinks[$i]\"";
       $result2 = tng_query($query);
     }
     break;

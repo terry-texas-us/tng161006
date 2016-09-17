@@ -28,7 +28,7 @@ $citenote = addslashes($citenote);
 $citedatetr = convertDate($citedate);
 $sourceID = strtoupper($sourceID);
 
-$query = "UPDATE $citations_table SET sourceID = '$sourceID', description = '$description', page= '$citepage', quay = '$quay', citedate = '$citedate', citedatetr = '$citedatetr', citetext = '$citetext', note = '$citenote' WHERE citationID = '$citationID'";
+$query = "UPDATE citations SET sourceID = '$sourceID', description = '$description', page= '$citepage', quay = '$quay', citedate = '$citedate', citedatetr = '$citedatetr', citetext = '$citetext', note = '$citenote' WHERE citationID = '$citationID'";
 $result = tng_query($query);
 
 $_SESSION['lastcite'] = $citationID;

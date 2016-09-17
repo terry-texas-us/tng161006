@@ -57,7 +57,7 @@ while ($note = tng_fetch_assoc($notelinks)) {
   }
   $gotnotes[$note['eventID']] = '*';
 }
-$citquery = "SELECT DISTINCT eventID FROM $citations_table WHERE persfamID = '$familyID'";
+$citquery = "SELECT DISTINCT eventID FROM citations WHERE persfamID = '$familyID'";
 $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
 $gotcites = [];
 while ($cite = tng_fetch_assoc($citresult)) {

@@ -4,7 +4,6 @@ function ClearData($tree) {
   global $people_table;
   global $families_table;
   global $children_table;
-  global $citations_table;
   global $address_table;
   global $assoc_table;
 
@@ -12,7 +11,7 @@ function ClearData($tree) {
           $address_table,
           $assoc_table,
           $children_table,
-          $citations_table,
+          'citations',
           // 'events',
           $families_table,
           'notelinks',

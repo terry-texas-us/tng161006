@@ -23,7 +23,7 @@ $result = tng_query($query);
 $query = "DELETE FROM events WHERE eventID=\"$eventID\"";
 $result = tng_query($query);
 
-$query = "DELETE FROM $citations_table WHERE eventID=\"$eventID\"";
+$query = "DELETE FROM citations WHERE eventID=\"$eventID\"";
 $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . "]: $query");
 
 $query = "SELECT xnoteID FROM notelinks WHERE eventID=\"$eventID\"";

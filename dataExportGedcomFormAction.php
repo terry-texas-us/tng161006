@@ -57,10 +57,8 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     echo $navList->build('export');
 
     function getCitations($persfamID) {
-      global $citations_table;
-
       $citations = [];
-      $citquery = "SELECT citationID, page, quay, citedate, citetext, note, sourceID, description, eventID FROM $citations_table WHERE persfamID = '$persfamID' ORDER BY eventID";
+      $citquery = "SELECT citationID, page, quay, citedate, citetext, note, sourceID, description, eventID FROM citations WHERE persfamID = '$persfamID' ORDER BY eventID";
       $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
       while ($cite = tng_fetch_assoc($citresult)) {

@@ -303,7 +303,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
   $combresult = tng_query($query);
 
   //point citations for s2 to s1
-  $query = "UPDATE $citations_table set sourceID = \"$sourceID1\" WHERE sourceID = '$sourceID2'";
+  $query = "UPDATE citations set sourceID = \"$sourceID1\" WHERE sourceID = '$sourceID2'";
   $combresult = tng_query($query);
 
   //construct name for default photo 2

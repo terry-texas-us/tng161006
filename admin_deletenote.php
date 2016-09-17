@@ -9,7 +9,7 @@ require 'prefixes.php';
 require 'adminlog.php';
 
 if ($noteID) {
-  $query = "DELETE FROM $citations_table WHERE eventID=\"$noteprefix$noteID$notesuffix\"";
+  $query = "DELETE FROM citations WHERE eventID=\"$noteprefix$noteID$notesuffix\"";
   $result = tng_query($query);
 }
 deleteNote($noteID, 1);

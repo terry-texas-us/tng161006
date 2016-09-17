@@ -67,7 +67,7 @@ while ($note = tng_fetch_assoc($notelinks)) {
 }
 tng_free_result($notelinks);
 
-$citquery = "SELECT DISTINCT eventID FROM $citations_table WHERE persfamID = '$personID'";
+$citquery = "SELECT DISTINCT eventID FROM citations WHERE persfamID = '$personID'";
 $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
 $gotcites = [];
 while ($cite = tng_fetch_assoc($citresult)) {
@@ -298,7 +298,7 @@ require_once 'eventlib.php';
                       
                       $parent['sealplace'] = preg_replace('/\"/', '&#34;', $parent['sealplace']);
                       if ($rights['lds']) {
-                        $citquery = "SELECT citationID FROM $citations_table WHERE persfamID = \"$personID" . '::' . "{$familyId}\"";
+                        $citquery = "SELECT citationID FROM citations WHERE persfamID = \"$personID" . '::' . "{$familyId}\"";
                         $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
                         $iconColor = tng_num_rows($citresult) ? 'icon-info' : 'icon-muted';
                         tng_free_result($citresult);

@@ -36,7 +36,7 @@ switch ($entity) {
     $query = "DELETE FROM $branchlinks_table WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\"";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $citations_table WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\"";
+    $query = "DELETE FROM citations WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\"";
     $result = tng_query($query);
 
     $query = "DELETE FROM $children_table WHERE gedcom=\"$oldtree\" AND personID=\"$entityID\"";
@@ -52,7 +52,7 @@ switch ($entity) {
     $query = "UPDATE sources SET gedcom=\"$newtree\", sourceID=\"$newID\" WHERE gedcom=\"$oldtree\" AND sourceID=\"$entityID\"";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $citations_table WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\"";
+    $query = "DELETE FROM citations WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\"";
     $result = tng_query($query);
 
     break;

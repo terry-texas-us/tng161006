@@ -25,7 +25,6 @@ function doMedia($mediatypeID) {
   global $change_limit;
   global $cutoffstr;
   global $families_table;
-  global $citations_table;
   global $nonames;
   global $people_table;
   global $livedefault;
@@ -57,7 +56,7 @@ function doMedia($mediatypeID) {
         $prow['private'] = $prow['fprivate'];
       }
       if ($prow['living'] == null && $prow['private'] == null && $prow['linktype'] == 'I') {
-        $query = "SELECT count(personID) AS ccount FROM $citations_table, $people_table WHERE $citations_table.sourceID = '{$prow['personID']}' AND $citations_table.persfamID = $people_table.personID AND (living = '1' OR private = '1')";
+        $query = "SELECT count(personID) AS ccount FROM citations, $people_table WHERE citations.sourceID = '{$prow['personID']}' AND citations.persfamID = $people_table.personID AND (living = '1' OR private = '1')";
         $presult2 = tng_query($query);
         $prow2 = tng_fetch_assoc($presult2);
         if ($prow2['ccount']) {

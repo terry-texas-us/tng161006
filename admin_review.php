@@ -223,7 +223,7 @@ $note = tng_fetch_assoc($notelinks);
 $gotnotes = $note['notecount'] ? '*' : '';
 tng_free_result($notelinks);
 
-$citequery = "SELECT count(citationID) AS citecount FROM $citations_table WHERE persfamID = '$persfamID' AND eventID = '$eventID'";
+$citequery = "SELECT count(citationID) AS citecount FROM citations WHERE persfamID = '$persfamID' AND eventID = '$eventID'";
 $citeresult = tng_query($citequery) or die(uiTextSnippet('cannotexecutequery') . ": $citequery");
 $cite = tng_fetch_assoc($citeresult);
 $gotcites = $cite['citecount'] ? '*' : '';

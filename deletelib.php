@@ -40,9 +40,7 @@ function deleteEvents($id) {
 }
 
 function deleteCitations($id) {
-  global $citations_table;
-
-  $query = "DELETE FROM $citations_table WHERE persfamID = '$id'";
+  $query = "DELETE FROM citations WHERE persfamID = '$id'";
   tng_query($query);
 }
 

@@ -164,9 +164,9 @@ $query = "CREATE TABLE $children_table (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $children_table);
 
-$query = "DROP TABLE IF EXISTS $citations_table";
+$query = 'DROP TABLE IF EXISTS citations';
 $result = performQuery($query);
-$query = "CREATE TABLE $citations_table (
+$query = "CREATE TABLE citations (
     citationID INT(11) NOT NULL AUTO_INCREMENT,
     gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     persfamID VARCHAR(22) NOT NULL,
@@ -186,7 +186,7 @@ $query = "CREATE TABLE $citations_table (
     FOREIGN KEY citations_fk2 (persfamID) REFERENCES $families_table (familyID),
     FOREIGN KEY citations_fk3 (sourceID) REFERENCES sources (sourceID)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $citations_table);
+$result = performQuery($query, 'citations');
 
 $query = 'DROP TABLE IF EXISTS countries';
 $result = performQuery($query);

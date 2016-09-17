@@ -114,7 +114,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
             }
             //if living still null, must be a source
             if ($prow['living'] == null && $prow['private'] == null && $prow['linktype'] == 'I') {
-              $query = "SELECT count(personID) AS ccount FROM $citations_table, $people_table WHERE $citations_table.sourceID = '{$prow['personID']}' AND $citations_table.persfamID = $people_table.personID AND (living = '1' OR private = '1')";
+              $query = "SELECT count(personID) AS ccount FROM citations, $people_table WHERE citations.sourceID = '{$prow['personID']}' AND citations.persfamID = $people_table.personID AND (living = '1' OR private = '1')";
               $presult2 = tng_query($query);
               $prow2 = tng_fetch_assoc($presult2);
               if ($prow2['ccount']) {
@@ -123,7 +123,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
               tng_free_result($presult2);
             }
             if ($prow['living'] == null && $prow['private'] == null && $prow[linktype] == 'F') {
-              $query = "SELECT count(familyID) AS ccount FROM $citations_table, $families_table WHERE $citations_table.sourceID = '{$prow['personID']}' AND $citations_table.persfamID = $families_table.familyID AND living = '1'";
+              $query = "SELECT count(familyID) AS ccount FROM citations, $families_table WHERE citations.sourceID = '{$prow['personID']}' AND citations.persfamID = $families_table.familyID AND living = '1'";
               $presult2 = tng_query($query);
               $prow2 = tng_fetch_assoc($presult2);
               if ($prow2['ccount']) {

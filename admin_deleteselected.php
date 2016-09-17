@@ -111,7 +111,7 @@ foreach (array_keys($_POST) as $key) {
       $sourceID = $row['sourceID'];
       $items[] = $row['sourceID'];
 
-      $squery = "DELETE FROM $citations_table WHERE sourceID = '$sourceID'";
+      $squery = "DELETE FROM citations WHERE sourceID = '$sourceID'";
       $result = tng_query($squery);
 
       deleteEvents($sourceID);

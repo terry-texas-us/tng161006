@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-$query = "SELECT * FROM $citations_table WHERE citationID = \"$citationID\"";
+$query = "SELECT * FROM citations WHERE citationID = \"$citationID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);

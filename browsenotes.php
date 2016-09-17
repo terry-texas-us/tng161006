@@ -107,8 +107,8 @@ $headSection->setTitle(uiTextSnippet('notes'));
               $row2 = tng_fetch_assoc($result2);
 
               if (!$row2['living'] || !$row2['private']) {
-                $query = "SELECT count(personID) AS ccount FROM $citations_table, $people_table
-              WHERE $citations_table.sourceID = '{$nrow['personID']}' AND $citations_table.persfamID = $people_table.personID AND (living = '1' OR private = '1')";
+                $query = "SELECT count(personID) AS ccount FROM citations, $people_table
+                    WHERE citations.sourceID = '{$nrow['personID']}' AND citations.persfamID = $people_table.personID AND (living = '1' OR private = '1')";
                 $nresult2 = tng_query($query);
                 $nrow2 = tng_fetch_assoc($nresult2);
                 if ($nrow2['ccount']) {

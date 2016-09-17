@@ -340,7 +340,6 @@ function getContinued() {
 }
 
 function deleteLinksOnMatch($entityID) {
-  global $citations_table;
   global $address_table;
   global $assoc_table;
 
@@ -367,7 +366,7 @@ function deleteLinksOnMatch($entityID) {
   tng_free_result($result);
   $query = "DELETE from notelinks WHERE persfamID = '$entityID'";
   tng_query($query);
-  $query = "DELETE from $citations_table WHERE persfamID = '$entityID'";
+  $query = "DELETE from citations WHERE persfamID = '$entityID'";
   tng_query($query);
 }
 
@@ -1128,12 +1127,10 @@ function processCitations($persfamID, $eventID, $citearray) {
 }
 
 function saveCitation($persfamID, $eventID, $cite) {
-  global $citations_table;
-
   if (!$cite['DATETR']) {
     $cite['DATETR'] = '0000-00-00';
   }
-  $query = "INSERT INTO $citations_table (persfamID, eventID, sourceID, description, citedate, citedatetr, citetext, page, quay, note, ordernum ) VALUES('$persfamID', '$eventID', '{$cite['sourceID']}', '{$cite['desc']}', '{$cite['DATE']}', '{$cite['DATETR']}', '{$cite['TEXT']}', '{$cite['PAGE']}', '{$cite['QUAY']}', '{$cite['NOTE']}', '0')";
+  $query = "INSERT INTO citations (persfamID, eventID, sourceID, description, citedate, citedatetr, citetext, page, quay, note, ordernum ) VALUES('$persfamID', '$eventID', '{$cite['sourceID']}', '{$cite['desc']}', '{$cite['DATE']}', '{$cite['DATETR']}', '{$cite['TEXT']}', '{$cite['PAGE']}', '{$cite['QUAY']}', '{$cite['NOTE']}', '0')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 }
 
@@ -1180,7 +1177,6 @@ function saveNote($persfamID, $eventID, $note) {
 function getNoteRecord($noteID, $prevlevel) {
   global $savestate;
   global $lineinfo;
-  global $citations_table;
   global $tngimpcfg;
 
   $noteID = adjustID($noteID, $savestate['noffset']);
@@ -1232,7 +1228,7 @@ function getNoteRecord($noteID, $prevlevel) {
 
   if ($notectr) {
     if ($savestate['del'] == 'match') {
-      $query = "DELETE from $citations_table WHERE persfamID = '$noteID'";
+      $query = "DELETE from citations WHERE persfamID = '$noteID'";
       tng_query($query);
     }
     processCitations($noteID, '', $notesource);

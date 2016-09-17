@@ -208,10 +208,10 @@ echo $navList->build('renumber');
           $result2 = tng_query($query);
 
           if ($type == 'source') {
-            $query = "UPDATE $citations_table SET sourceID = '$newID' WHERE sourceID=\"" . $row[$id] . '"';
+            $query = "UPDATE citations SET sourceID = '$newID' WHERE sourceID=\"" . $row[$id] . '"';
             $result2 = tng_query($query);
           } else {
-            $query = "UPDATE $citations_table SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . '"';
+            $query = "UPDATE citations SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . '"';
             $result2 = tng_query($query);
           }
 

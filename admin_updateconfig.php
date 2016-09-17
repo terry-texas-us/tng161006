@@ -68,7 +68,6 @@ fwrite($fp, "\$mediatypes_table = \"$mediatypes_table\";\n");
 fwrite($fp, "\$address_table = \"$address_table\";\n");
 fwrite($fp, "\$languagesTable = \"$languagesTable\";\n");
 
-fwrite($fp, "\$citations_table = \"$citations_table\";\n");
 fwrite($fp, "\$rectangles_table = \"$rectangles_table\";\n");
 fwrite($fp, "\$reports_table = \"$reports_table\";\n");
 fwrite($fp, "\$saveimport_table = \"$saveimport_table\";\n");

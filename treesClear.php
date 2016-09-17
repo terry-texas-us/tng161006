@@ -46,8 +46,8 @@ tng_query('ALTER TABLE notelinks AUTO_INCREMENT = 1');
 tng_query('DELETE FROM xnotes');
 tng_query('ALTER TABLE xnotes AUTO_INCREMENT = 1');
 
-tng_query("DELETE FROM $citations_table");
-tng_query("ALTER TABLE $citations_table AUTO_INCREMENT = 1");
+tng_query('DELETE FROM citations');
+tng_query('ALTER TABLE citations AUTO_INCREMENT = 1');
 
 tng_query('DELETE FROM places');
 tng_query('ALTER TABLE places AUTO_INCREMENT = 1');

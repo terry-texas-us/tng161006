@@ -17,7 +17,6 @@ $medialinks_table = "medialinks";
 $mediatypes_table = "mediatypes";
 $address_table = "addresses";
 $languagesTable = "languages";
-$citations_table = "citations";
 $rectangles_table = "";
 $reports_table = "reports";
 $saveimport_table = "saveimport";
