@@ -12,7 +12,7 @@ if (!$currentuser) {
 }
 header('Content-type:text/html; charset=' . $session_charset);
 
-$query = "SELECT userID, username, password, realname, phone, email, website, address, city, state, country, zip FROM $users_table WHERE username = \"$currentuser\"";
+$query = "SELECT userID, username, password, realname, phone, email, website, address, city, state, country, zip FROM users WHERE username = '$currentuser'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);

@@ -29,7 +29,7 @@ $country = addslashes($country);
 
 $proceed = true;
 if ($password != $orgpwd) {
-  $query = "SELECT username FROM $users_table WHERE username = \"$checkuser\"";
+  $query = "SELECT username FROM users WHERE username = '$checkuser'";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
   if ($result && tng_num_rows($result)) {
@@ -47,7 +47,7 @@ if ($proceed) {
     $pwd_str = '';
   }
 
-  $query = "UPDATE $users_table SET username=\"$username\",{$pwd_str}realname=\"$realname\",phone=\"$phone\",email=\"$email\",website=\"$website\",address=\"$address\",city=\"$city\",state=\"$state\",zip=\"$zip\",country=\"$country\" WHERE userID=\"$userID\"";
+  $query = "UPDATE users SET username=\"$username\",{$pwd_str}realname=\"$realname\",phone=\"$phone\",email=\"$email\",website=\"$website\",address=\"$address\",city=\"$city\",state=\"$state\",zip=\"$zip\",country=\"$country\" WHERE userID=\"$userID\"";
   $result = tng_query($query);
 
   adminwritelog("<a href=\"usersEdit.php?userID=$userID\">" . uiTextSnippet('modifyuser') . ": $userID</a>");

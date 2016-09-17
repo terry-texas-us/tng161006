@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-$query = "SELECT username FROM $users_table WHERE username = \"$checkuser\"";
+$query = "SELECT username FROM users WHERE username = '$checkuser'";
 $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
 if ($result && tng_num_rows($result)) {

@@ -10,7 +10,7 @@ require 'mail.php';
 
 $wherestr = $branch ? " AND branch = '$branch'" : '';
 
-$recipientquery = "SELECT realname, email FROM $users_table WHERE allow_living != '-1' AND email != '' AND (no_email is NULL or no_email != '1') $wherestr";
+$recipientquery = "SELECT realname, email FROM users WHERE allow_living != '-1' AND email != '' AND (no_email is NULL or no_email != '1') $wherestr";
 $result = tng_query($recipientquery) or die(uiTextSnippet('cannotexecutequery') . ": $recipientquery");
 $numrows = tng_num_rows($result);
 

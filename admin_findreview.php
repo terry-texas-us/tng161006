@@ -118,7 +118,7 @@ $headSection->setTitle(uiTextSnippet('review'));
               <select name="reviewuser">
                 <?php
                 echo "  <option value=''>" . uiTextSnippet('allusers') . "</option>\n";
-                $query = "SELECT username, description FROM $users_table ORDER BY description";
+                $query = "SELECT username, description FROM users ORDER BY description";
                 $userresult = tng_query($query);
                 while ($userrow = tng_fetch_assoc($userresult)) {
                   echo "  <option value=\"{$userrow['username']}\"";

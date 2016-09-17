@@ -86,7 +86,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             </td>
           </tr>
           <?php
-          $query = "SELECT count(userID) AS ucount FROM $users_table";
+          $query = "SELECT count(userID) AS ucount FROM users";
           $uresult = tng_query($query);
           if ($uresult) {
             $urow = tng_fetch_assoc($uresult);
@@ -180,10 +180,6 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
                 <tr>
                   <td><?php echo uiTextSnippet('countriestable'); ?>:</td>
                   <td><input name='countries_table' type='text' value="<?php echo $countries_table; ?>"></td>
-                </tr>
-                <tr>
-                  <td><?php echo uiTextSnippet('users'); ?>:</td>
-                  <td><input name='users_table' type='text' value="<?php echo $users_table; ?>"></td>
                 </tr>
                 <tr>
                   <td><?php echo uiTextSnippet('sources'); ?>:</td>

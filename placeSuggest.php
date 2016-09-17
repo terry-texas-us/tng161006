@@ -7,7 +7,7 @@ $_SESSION['tng_email'] = generatePassword(1);
 $_SESSION['tng_comments'] = generatePassword(1);
 $_SESSION['tng_yourname'] = generatePassword(1);
 
-$preemail = getCurrentUserEmail($currentuser, $users_table);
+$preemail = getCurrentUserEmail($currentuser);
 
 $row['living'] = 0;
 $row['allow_living'] = $row['allow_private'] = 1;

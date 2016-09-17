@@ -196,12 +196,12 @@ switch ($t) {
     $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('cemetery') . " $id";
     break;
   case 'user':
-    $query3 = "SELECT username FROM $users_table WHERE userID = '$id'";
+    $query3 = "SELECT username FROM users WHERE userID = '$id'";
     $result3 = tng_query($query3);
     $urow = tng_fetch_assoc($result3);
     tng_free_result($result3);
 
-    $query = "DELETE FROM $users_table WHERE userID = '$id'";
+    $query = "DELETE FROM users WHERE userID = '$id'";
     $result = tng_query($query);
 
     $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('user') . " {$urow['username']}";
@@ -297,7 +297,7 @@ switch ($t) {
     $query = "DELETE FROM $branchlinks_table WHERE gedcom = '$id'";
     $result = tng_query($query);
 
-    $query = "UPDATE $users_table SET allow_living = '-1' WHERE gedcom = '$id'";
+    $query = "UPDATE users SET allow_living = '-1' WHERE gedcom = '$id'";
     $result = tng_query($query);
 
     $logmsg = uiTextSnippet('deleted') . " $id " . uiTextSnippet('succdeleted') . '.';

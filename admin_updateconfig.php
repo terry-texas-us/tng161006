@@ -83,7 +83,6 @@ fwrite($fp, "\$treesTable = \"$treesTable\";\n");
 fwrite($fp, "\$notelinks_table = \"$notelinks_table\";\n");
 fwrite($fp, "\$xnotes_table = \"$xnotes_table\";\n");
 fwrite($fp, "\$saveimport_table = \"$saveimport_table\";\n");
-fwrite($fp, "\$users_table = \"$users_table\";\n");
 fwrite($fp, "\$temp_events_table = \"$temp_events_table\";\n");
 fwrite($fp, "\$tlevents_table = \"$tlevents_table\";\n");
 fwrite($fp, "\$branches_table = \"$branches_table\";\n");

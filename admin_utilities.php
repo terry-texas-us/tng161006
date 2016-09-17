@@ -139,7 +139,7 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
             doRow($temp_events_table, uiTextSnippet('temptable'));
             doRow($tlevents_table, uiTextSnippet('tleventstable'));
             doRow($treesTable, uiTextSnippet('trees'));
-            doRow($users_table, uiTextSnippet('users'));
+            doRow('users', uiTextSnippet('users'));
             ?>
           </table>
         </form>

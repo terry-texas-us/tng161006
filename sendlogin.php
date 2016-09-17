@@ -23,7 +23,7 @@ if ($email) {
 
   //if username is there too, then look up based on username and get password
   if ($username) {
-    $query = "SELECT realname, allow_profile FROM $users_table WHERE username = \"$username\"";
+    $query = "SELECT realname, allow_profile FROM users WHERE username = '$username'";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
     tng_free_result($result);
@@ -31,7 +31,7 @@ if ($email) {
     $div = 'pwdmsg';
     if ($row['allow_profile']) {
       $newpassword = generatePassword(0);
-      $query = "UPDATE $users_table SET password = \"" . PasswordEncode($newpassword) . '", password_type = "' . PasswordType() . "\" WHERE email = \"$email\" AND username = \"$username\" AND allow_living != \"-1\"";
+      $query = "UPDATE users SET password = \"" . PasswordEncode($newpassword) . '", password_type = "' . PasswordType() . "\" WHERE email = '$email' AND username = '$username' AND allow_living != '-1'";
       $result = tng_query($query);
       $success = tng_affected_rows();
 
@@ -47,7 +47,7 @@ if ($email) {
     }
   } else {
     $div = 'usnmsg';
-    $query = "SELECT realname, username FROM $users_table WHERE email = \"$email\"";
+    $query = "SELECT realname, username FROM users WHERE email = '$email'";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
     tng_free_result($result);

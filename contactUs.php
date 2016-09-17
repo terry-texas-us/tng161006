@@ -6,7 +6,7 @@ $_SESSION['tng_email'] = generatePassword(1);
 $_SESSION['tng_comments'] = generatePassword(1);
 $_SESSION['tng_yourname'] = generatePassword(1);
 
-$preemail = getCurrentUserEmail($currentuser, $users_table);
+$preemail = getCurrentUserEmail($currentuser);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();

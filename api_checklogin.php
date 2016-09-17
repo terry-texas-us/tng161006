@@ -8,7 +8,7 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && $currentus
   $allowPrivate = $_SESSION['allow_private'];
   $allowLds = $_SESSION['allow_lds'];
 } else {
-  $query = "SELECT * FROM $users_table WHERE BINARY username = \"$tngusername\"";
+  $query = "SELECT * FROM users WHERE BINARY username = '$tngusername'";
   $result = tng_query($query) or die("Cannot execute query: $query");
   if (tng_num_rows($result)) {
     $allowLiving = $allowPrivate = $allowLds = 0;

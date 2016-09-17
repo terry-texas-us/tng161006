@@ -15,7 +15,7 @@ if ($adminLogin) {
   $dest_url = isset($_SESSION['destinationpage8']) ? $_SESSION['destinationpage8'] : $home_url;
   $login_url = $requirelogin || !isset($_SESSION['destinationpage8']) || strpos($_SESSION['destinationpage8'], $home_url) !== false || substr($_SESSION['destinationpage8'], -1) == '/' ? 'login.php?message=loginfailed' : $dest_url;
 }
-$query = "SELECT * FROM $users_table WHERE BINARY username = \"$tngusername\"";
+$query = "SELECT * FROM users WHERE BINARY username = '$tngusername'";
 $result = tng_query($query) or die("Cannot execute query: $query");
 if (tng_num_rows($result)) {
   $row = tng_fetch_assoc($result);
@@ -25,7 +25,7 @@ if (tng_num_rows($result)) {
     $password_type = PasswordType();    // update password to the new encoding method specified by PasswordType()
     $password = PasswordEncode($tngpassword, $password_type);
 
-    $query2 = "UPDATE $users_table SET password = '$password', password_type = '$password_type' WHERE userID = \"{$row['userID']}\"";
+    $query2 = "UPDATE users SET password = '$password', password_type = '$password_type' WHERE userID = \"{$row['userID']}\"";
 
     $result2 = tng_query($query) or die("Cannot execute query: $query");
   }
@@ -48,9 +48,9 @@ if ($check) {
       $newdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
       if ($resetpass && $newpassword && $row['allow_profile']) {
         $password_type = PasswordType();
-        $query = "UPDATE $users_table SET password=\"" . PasswordEncode($newpassword) . "\", lastlogin=\"$newdate\", password_type=\"$password_type\" WHERE userID=\"{$row['userID']}\"";
+        $query = "UPDATE users SET password=\"" . PasswordEncode($newpassword) . "\", lastlogin=\"$newdate\", password_type=\"$password_type\" WHERE userID=\"{$row['userID']}\"";
       } else {
-        $query = "UPDATE $users_table SET lastlogin=\"$newdate\" WHERE userID=\"{$row['userID']}\"";
+        $query = "UPDATE users SET lastlogin=\"$newdate\" WHERE userID=\"{$row['userID']}\"";
       }
       $uresult = tng_query($query) or die("Cannot execute query: $query");
       if ($remember) {

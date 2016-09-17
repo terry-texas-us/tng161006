@@ -155,7 +155,7 @@ echo $navList->build('renumber');
             $query = "UPDATE $mostwanted_table SET personID = '$newID' WHERE personID = '$old'";
             $result2 = tng_query($query);
 
-            $query = "UPDATE $users_table SET personID = '$newID' WHERE personID = '$old'";
+            $query = "UPDATE users SET personID = '$newID' WHERE personID = '$old'";
             $result2 = tng_query($query);
 
             if (isset($keys[$old])) {

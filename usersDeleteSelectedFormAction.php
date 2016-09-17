@@ -13,7 +13,7 @@ if (!$allowDelete) {
 }
 require 'adminlog.php';
 
-$query = "DELETE FROM $users_table WHERE 1=0";
+$query = "DELETE FROM users WHERE 1=0";
 $location = ($xuseraction) ? 'usersBrowse.php' : 'usersReview.php';
 
 $count = 0;
@@ -27,12 +27,12 @@ foreach (array_keys($_POST) as $key) {
 
     $itemID = '';
 
-    $query3 = "SELECT username FROM $users_table WHERE userID = \"$thisid\"";
+    $query3 = "SELECT username FROM users WHERE userID = '$thisid'";
     $result3 = tng_query($query3);
     $urow = tng_fetch_assoc($result3);
     tng_free_result($result3);
 
-    $query3 = "DELETE FROM $users_table WHERE userID = \"$thisid\"";
+    $query3 = "DELETE FROM users WHERE userID = '$thisid'";
     $result3 = tng_query($query3) or die(uiTextSnippet('cannotexecutequery') . ": $query3");
     $items[] = $urow['username'];
   }

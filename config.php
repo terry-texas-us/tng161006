@@ -32,7 +32,6 @@ $treesTable = "trees";
 $notelinks_table = "notelinks";
 $xnotes_table = "xnotes";
 $saveimport_table = "saveimport";
-$users_table = "users";
 $temp_events_table = "temp_events";
 $tlevents_table = "timelineevents";
 $branches_table = "branches";

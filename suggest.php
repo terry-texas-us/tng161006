@@ -1,10 +1,10 @@
 <?php
 
-function getCurrentUserEmail($currentUser, $users)
+function getCurrentUserEmail($currentUser)
 {
   $out = '';
   if ($currentUser) {
-    $query = "SELECT email FROM $users WHERE username='$currentUser'";
+    $query = "SELECT email FROM users WHERE username='$currentUser'";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
     $out .= $row['email'];

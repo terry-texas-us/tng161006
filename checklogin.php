@@ -24,7 +24,7 @@ if (isset($_SESSION['postvars']) && is_array($_SESSION['postvars'])) {
 
 if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$adminLogin || ($_SESSION['allow_admin'] && $currentuser))) {
   if ($currentuser == 'Administrator-No-Users-Yet') {
-    $query = "SELECT userID FROM $users_table";
+    $query = "SELECT userID FROM users";
     $result = tng_query_noerror($query);
     if ($result && tng_num_rows($result)) {
       echo "$currentuser" . ' is not a valid user';
@@ -52,7 +52,7 @@ if ($_SESSION['logged_in'] && $_SESSION['session_rp'] == $rootpath && (!$adminLo
   $allow_profile = $_SESSION['allow_profile'];
   $logged_in = 1;
 } else {
-  $query = "SELECT userID FROM $users_table";
+  $query = "SELECT userID FROM users";
   $result = tng_query_noerror($query);
   if (!$result || !tng_num_rows($result)) {
     $allow_admin = 1;

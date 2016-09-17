@@ -79,7 +79,7 @@ $today = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
 //if it exists, "duplicate"
 $duplicate = false;
 if ($username != $orguser) {
-  $query = "SELECT username FROM $users_table WHERE LOWER(username) = LOWER(\"$username\")";
+  $query = "SELECT username FROM users WHERE LOWER(username) = LOWER(\"$username\")";
   $result = tng_query($query);
 
   if ($result && tng_num_rows($result)) {
@@ -87,7 +87,7 @@ if ($username != $orguser) {
   }
 }
 if (!$duplicate && $email && $email != $orgemail) {
-  $query = "SELECT username FROM $users_table WHERE LOWER(email) = LOWER(\"$email\")";
+  $query = "SELECT username FROM users WHERE LOWER(email) = LOWER(\"$email\")";
   $result = tng_query($query);
 
   if ($result && tng_num_rows($result)) {
@@ -96,7 +96,7 @@ if (!$duplicate && $email && $email != $orgemail) {
 }
 if (!$duplicate) {
   $activatedstr = $newuser ? ", dt_activated=\"$today\"" : '';
-  $query = "UPDATE $users_table SET description = '$description', username = '$username', {$pwd_str}realname = '$realname', phone = '$phone', email= '$email', website = '$website', address = '$address', city = '$city', state = '$state', zip = '$zip', country = '$country', notes = '$notes', mygedcom = '$mynewgedcom', personID = '$personID', role = '$role', allow_edit = '$form_allow_edit', allow_add = '$form_allow_add', tentative_edit = '$form_tentative_edit', allow_delete = '$form_allow_delete', allow_lds = '$form_allow_lds', allow_living = '$form_allow_living', allow_private = '$form_allow_private', allow_ged = '$form_allow_ged', allow_pdf = '$form_allow_pdf', allow_profile = '$form_allow_profile', branch = '$branch'{$activatedstr}, no_email = '$no_email', disabled='$disabled' WHERE userID = '$userID'";
+  $query = "UPDATE users SET description = '$description', username = '$username', {$pwd_str}realname = '$realname', phone = '$phone', email= '$email', website = '$website', address = '$address', city = '$city', state = '$state', zip = '$zip', country = '$country', notes = '$notes', mygedcom = '$mynewgedcom', personID = '$personID', role = '$role', allow_edit = '$form_allow_edit', allow_add = '$form_allow_add', tentative_edit = '$form_tentative_edit', allow_delete = '$form_allow_delete', allow_lds = '$form_allow_lds', allow_living = '$form_allow_living', allow_private = '$form_allow_private', allow_ged = '$form_allow_ged', allow_pdf = '$form_allow_pdf', allow_profile = '$form_allow_profile', branch = '$branch'{$activatedstr}, no_email = '$no_email', disabled='$disabled' WHERE userID = '$userID'";
 
   $result = tng_query($query);
 
