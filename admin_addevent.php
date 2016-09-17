@@ -52,7 +52,7 @@ $www = addslashes($www);
 $eventdatetr = convertDate($eventdate);
 
 if (trim($eventplace)) {
-  $query = "INSERT IGNORE INTO $places_table (place, placelevel, zoom) VALUES ('$eventplace', '0','0')";
+  $query = "INSERT IGNORE INTO places (place, placelevel, zoom) VALUES ('$eventplace', '0','0')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   if ($tngconfig['autogeo'] && tng_affected_rows()) {
     $ID = tng_insert_id();

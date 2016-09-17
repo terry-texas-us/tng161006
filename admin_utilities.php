@@ -119,7 +119,7 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
             doRow($cemeteries_table, uiTextSnippet('cemeteries'));
             doRow($children_table, uiTextSnippet('children'));
             doRow($countries_table, uiTextSnippet('countriestable'));
-            doRow($places_table, uiTextSnippet('places'));
+            doRow('places', uiTextSnippet('places'));
             doRow($events_table, uiTextSnippet('events'));
             doRow($eventtypes_table, uiTextSnippet('eventtypes'));
             doRow($families_table, uiTextSnippet('families'));

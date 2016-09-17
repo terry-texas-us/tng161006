@@ -60,7 +60,7 @@ if (trim($sealplace) && !in_array($sealplace, $places)) {
 }
 foreach ($places as $place) {
   $temple = strlen($place) == 5 && $place == strtoupper($place) ? 1 : 0;
-  $query = "INSERT IGNORE INTO $places_table (place, placelevel, zoom, geoignore, temple) VALUES ('$place', '0', '0', '0', '$temple')";
+  $query = "INSERT IGNORE INTO places (place, placelevel, zoom, geoignore, temple) VALUES ('$place', '0', '0', '0', '$temple')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   if ($tngconfig['autogeo'] && tng_affected_rows()) {
     $ID = tng_insert_id();

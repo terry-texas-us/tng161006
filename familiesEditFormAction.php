@@ -97,7 +97,7 @@ if (!$editconflict) {
     array_push($places, $sealplace);
   }
   foreach ($places as $place) {
-    $query = "INSERT IGNORE INTO $places_table (place, placelevel, zoom, geoignore) VALUES ('$place', '0', '0', '0')";
+    $query = "INSERT IGNORE INTO places (place, placelevel, zoom, geoignore) VALUES ('$place', '0', '0', '0')";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     if ($tngconfig['autogeo'] && tng_affected_rows()) {
       $ID = tng_insert_id();

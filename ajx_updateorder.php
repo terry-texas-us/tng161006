@@ -552,7 +552,7 @@ switch ($action) {
         tng_free_result($result);
         break;
       case 'L':
-        $query = "SELECT place FROM $places_table WHERE place = \"$entityID\"";
+        $query = "SELECT place FROM places WHERE place = \"$entityID\"";
         $result = tng_query($query);
         $numrows = tng_num_rows($result);
         tng_free_result($result);
@@ -560,7 +560,7 @@ switch ($action) {
         $name = stripslashes($entityID);
 
         if (!$numrows) {
-          $query = "INSERT IGNORE INTO $places_table (place, placelevel, temple, latitude, longitude, zoom, notes, geoignore) VALUES ('$entityID', '0', '0', '', '', '13', '', '0')";
+          $query = "INSERT IGNORE INTO places (place, placelevel, temple, latitude, longitude, zoom, notes, geoignore) VALUES ('$entityID', '0', '0', '', '', '13', '', '0')";
           $result = tng_query($query);
           $numrows = 1;
         }

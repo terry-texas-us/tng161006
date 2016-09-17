@@ -9,7 +9,6 @@ function geocode($address, $multiples, $id) {
   global $base_url;
   global $phpversion;
   global $foundzoom;
-  global $places_table;
 
   $geocode_pending = true;
   $message = '';
@@ -45,12 +44,12 @@ function geocode($address, $multiples, $id) {
           $lat = $xml->result->geometry->location->lat;
           $lng = $xml->result->geometry->location->lng;
 
-          $query = "UPDATE $places_table SET latitude = \"$lat\", longitude = \"$lng\", zoom = \"$foundzoom\" WHERE ID = \"$id\"";
+          $query = "UPDATE places SET latitude = \"$lat\", longitude = \"$lng\", zoom = \"$foundzoom\" WHERE ID = \"$id\"";
           $result2 = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query " . tng_error());
 
           $message = "$lat, $lng  &mdash; <a href=\"admin_editplace.php?ID=$id&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . '</a>';
         } else {
-          $query = "UPDATE $places_table SET geoignore = \"1\" WHERE ID = \"$id\"";
+          $query = "UPDATE places SET geoignore = \"1\" WHERE ID = \"$id\"";
           $result2 = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query " . tng_error());
 
           $message = '<strong>' . uiTextSnippet('toomany') . "</strong> &mdash; <a href=\"admin_editplace.php?ID=$id&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . '</a>';
@@ -65,7 +64,7 @@ function geocode($address, $multiples, $id) {
         } else {
           // failure to geocode
           $geocode_pending = false;
-          $query = "UPDATE $places_table SET geoignore = \"1\" WHERE ID = \"$id\"";
+          $query = "UPDATE places SET geoignore = \"1\" WHERE ID = \"$id\"";
           $result2 = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query" . tng_error());
 
           $message = '<strong>' . uiTextSnippet('nogeocode') . " ($status)</strong> &mdash; <a href=\"admin_editplace.php?ID=$id&amp;cw=1\" target='_blank'>" . uiTextSnippet('edit') . '</a>';

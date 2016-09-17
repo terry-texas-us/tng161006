@@ -25,10 +25,10 @@ if ($wherestr) {
 }
 //if doing a locality search, link directly to placesearch
 if ($stretch) {
-  $query = "SELECT distinct place AS myplace, place AS wholeplace, count( place ) AS placecount FROM $places_table $wherestr GROUP BY myplace ORDER by myplace";
+  $query = "SELECT distinct place AS myplace, place AS wholeplace, count( place ) AS placecount FROM places $wherestr GROUP BY myplace ORDER by myplace";
   $places_oneletter_url = 'placesearch.php?';
 } else {
-  $query = "SELECT distinct trim(substring_index(place,',',-$offset)) AS myplace, trim(place) AS wholeplace, count(place) AS placecount FROM $places_table $wherestr GROUP BY myplace ORDER by myplace";
+  $query = "SELECT distinct trim(substring_index(place,',',-$offset)) AS myplace, trim(place) AS wholeplace, count(place) AS placecount FROM places $wherestr GROUP BY myplace ORDER by myplace";
   $places_oneletter_url = 'places-oneletter.php?';
 }
 $result = tng_query($query);
@@ -112,7 +112,7 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": $displaychar");
                     $place3 = addslashes($place['myplace']);
                     $placetitle = $place['myplace'];
                   }
-                  $query = "SELECT count(place) AS placecount FROM $places_table WHERE place = \"$place3\"";
+                  $query = "SELECT count(place) AS placecount FROM places WHERE place = \"$place3\"";
                   $result2 = tng_query($query);
                   $countrow = tng_fetch_assoc($result2);
                   $specificcount = $countrow['placecount'];

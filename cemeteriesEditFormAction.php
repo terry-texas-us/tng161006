@@ -51,7 +51,7 @@ $result = tng_query($query);
 $place = trim($place);
 if ($place) {
   //first check to see if any place exists with new place name
-  $query = "SELECT * FROM $places_table WHERE place = '$place'";
+  $query = "SELECT * FROM places WHERE place = '$place'";
   $result = tng_query($query);
 
   if (!tng_num_rows($result)) {
@@ -59,10 +59,10 @@ if ($place) {
       $latitude = $longitude = '';
       $zoom = 0;
     }
-    $query = "INSERT IGNORE INTO $places_table (place, placelevel, latitude, longitude, zoom, notes) VALUES ('$place', '0', '$latitude', '$longitude', '$zoom', '$notes')";
+    $query = "INSERT IGNORE INTO places (place, placelevel, latitude, longitude, zoom, notes) VALUES ('$place', '0', '$latitude', '$longitude', '$zoom', '$notes')";
     $result3 = tng_query($query);
   } elseif (isset($usecoords)) {
-    $query = "UPDATE $places_table SET latitude = '$latitude', longitude = '$longitude', zoom='$zoom' WHERE place = '$place'";
+    $query = "UPDATE places SET latitude = '$latitude', longitude = '$longitude', zoom='$zoom' WHERE place = '$place'";
     $result3 = tng_query($query);
   }
   tng_free_result($result);

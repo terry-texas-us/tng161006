@@ -1278,7 +1278,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     function doPlaces() {
       global $branch;
       global $placelist;
-      global $places_table;
       global $medialinks_table;
       global $savestate;
       global $lineending;
@@ -1287,7 +1286,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
 
       if ($branch) {
         foreach ($placelist as $place) {
-          $query = "SELECT place, notes, latitude, longitude, placelevel, zoom FROM $places_table WHERE place = \"" . addslashes($place) . '"';
+          $query = "SELECT place, notes, latitude, longitude, placelevel, zoom FROM places WHERE place = \"" . addslashes($place) . '"';
           $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
           $row = tng_fetch_assoc($result);
           if ($row['latitude'] || $row['longitude'] || $row['notes']) {
@@ -1296,14 +1295,14 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           tng_free_result($result);
         }
       } else {
-        $query = "SELECT place, notes, latitude, longitude, placelevel, zoom FROM $places_table WHERE (latitude != \"\" OR longitude != \"\" OR notes != \"\")";
+        $query = "SELECT place, notes, latitude, longitude, placelevel, zoom FROM places WHERE (latitude != \"\" OR longitude != \"\" OR notes != \"\")";
         $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         while ($row = tng_fetch_assoc($result)) {
           $places[] = $row;
         }
         tng_free_result($result);
 
-        $query = "SELECT $medialinks_table.personID AS place, $places_table.notes AS notes, latitude, longitude FROM ($places_table, $medialinks_table) WHERE linktype = 'L' $places_table.place = $medialinks_table.personID";
+        $query = "SELECT $medialinks_table.personID AS place, places.notes AS notes, latitude, longitude FROM (places, $medialinks_table) WHERE linktype = 'L' places.place = $medialinks_table.personID";
         $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         while ($row = tng_fetch_assoc($result)) {
           if (!in_array($place, $places)) {

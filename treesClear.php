@@ -49,8 +49,8 @@ tng_query('ALTER TABLE xnotes AUTO_INCREMENT = 1');
 tng_query("DELETE FROM $citations_table");
 tng_query("ALTER TABLE $citations_table AUTO_INCREMENT = 1");
 
-tng_query("DELETE FROM $places_table");
-tng_query("ALTER TABLE $places_table AUTO_INCREMENT = 1");
+tng_query('DELETE FROM places');
+tng_query('ALTER TABLE places AUTO_INCREMENT = 1');
 
 $query = "UPDATE $people_table SET branch = '' WHERE branch = '$branch'";
 $result = tng_query($query);

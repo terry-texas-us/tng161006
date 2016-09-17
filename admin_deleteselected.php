@@ -43,7 +43,7 @@ if ($xsrcaction) {
   $id = 'ID';
   $location = 'familiesBrowse.php';
 } elseif ($xplacaction) {
-  $query = "DELETE FROM $places_table";
+  $query = 'DELETE FROM places';
   $modmsg = 'places';
   $id = 'ID';
   $location = 'placesBrowse.php';
@@ -140,7 +140,7 @@ foreach (array_keys($_POST) as $key) {
       deleteMediaLinks($repoID);
       deleteAlbumLinks($repoID);
     } elseif ($xplacaction) {
-      $row = getID('place', $places_table, $thisid);
+      $row = getID('place', 'places', $thisid);
       $place = $row['place'];
       $items[] = $row['place'];
 

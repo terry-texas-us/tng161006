@@ -11,7 +11,7 @@ if (!$allowEdit) {
 
 require 'adminlog.php';
 
-$query = "SELECT place, latitude, longitude, placelevel, zoom, notes FROM $places_table WHERE ID = \"$keep\"";
+$query = "SELECT place, latitude, longitude, placelevel, zoom, notes FROM places WHERE ID = \"$keep\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 $newplace = addslashes($row['place']);
@@ -23,7 +23,7 @@ $keepnotes = $row['notes'];
 $latlongstr = ', latitude, longitude, placelevel, zoom';
 tng_free_result($result);
 
-$dquery = "DELETE FROM $places_table WHERE ";
+$dquery = 'DELETE FROM places WHERE ';
 
 $addtoquery = '';
 $mergelist = explode(',', $places);
@@ -34,7 +34,7 @@ foreach ($mergelist as $val) {
   }
   $addtoquery .= "ID=\"$val\"";
 
-  $query = "SELECT place, notes$latlongstr FROM $places_table WHERE ID = \"$val\"";
+  $query = "SELECT place, notes$latlongstr FROM places WHERE ID = \"$val\"";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   tng_free_result($result);
@@ -55,14 +55,14 @@ foreach ($mergelist as $val) {
         if (!$keepzoom && $row['zoom']) {
           $keepzoom = $row['zoom'];
         }
-        $query = "UPDATE $places_table SET latitude = \"$keeplat\", longitude = \"$keeplong\", placelevel = \"$keeplevel\", zoom = \"$keepzoom\" WHERE ID = \"$keep\"";
+        $query = "UPDATE places SET latitude = \"$keeplat\", longitude = \"$keeplong\", placelevel = \"$keeplevel\", zoom = \"$keepzoom\" WHERE ID = \"$keep\"";
         $result = tng_query($query);
         $latlongstr = '';  //just do the first one we get
       }
     }
     if ($row['notes']) {
       $keepnotes .= $lineending . $row['notes'];
-      $query = "UPDATE $places_table SET notes = \"" . addslashes($keepnotes) . "\" WHERE ID = \"$keep\"";
+      $query = "UPDATE places SET notes = \"" . addslashes($keepnotes) . "\" WHERE ID = \"$keep\"";
       $result = tng_query($query);
     }
 

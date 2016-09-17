@@ -71,7 +71,6 @@ fwrite($fp, "\$cemeteries_table = \"$cemeteries_table\";\n");
 
 fwrite($fp, "\$states_table = \"$states_table\";\n");
 fwrite($fp, "\$countries_table = \"$countries_table\";\n");
-fwrite($fp, "\$places_table = \"$places_table\";\n");
 fwrite($fp, "\$sources_table = \"$sources_table\";\n");
 fwrite($fp, "\$repositories_table = \"$repositories_table\";\n");
 fwrite($fp, "\$citations_table = \"$citations_table\";\n");

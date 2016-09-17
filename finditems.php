@@ -309,7 +309,7 @@ switch ($type) {
     if ($temple) {
       $allwhere .= ' AND temple = 1';
     }
-    $query = "SELECT ID, place, temple, notes FROM $places_table WHERE $allwhere ORDER BY place LIMIT 250";
+    $query = "SELECT ID, place, temple, notes FROM places WHERE $allwhere ORDER BY place LIMIT 250";
     $result = tng_query($query);
 
     if (tng_num_rows($result)) {

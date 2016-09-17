@@ -73,11 +73,11 @@ if ($searchstring) {
   $allwhere .= addCriteria('notes', $searchstring, $frontmod);
   $allwhere .= ')';
 }
-$query = "SELECT ID, place, placelevel, longitude, latitude, zoom FROM $places_table WHERE $allwhere ORDER BY place, ID LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT ID, place, placelevel, longitude, latitude, zoom FROM places WHERE $allwhere ORDER BY place, ID LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(ID) AS pcount FROM $places_table WHERE $allwhere";
+  $query = "SELECT count(ID) AS pcount FROM places WHERE $allwhere";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['pcount'];

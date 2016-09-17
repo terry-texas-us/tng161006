@@ -394,7 +394,6 @@ function getEventDefinitionRecord($event) {
 function getPlaceRecord($place, $prevlevel) {
   global $savestate;
   global $lineinfo;
-  global $places_table;
 
   $note = '';
   $map = [];
@@ -460,12 +459,12 @@ function getPlaceRecord($place, $prevlevel) {
 
   if ($place) {
     $temple = isTemple($place);
-    $query = "INSERT IGNORE INTO $places_table (place, longitude, latitude, zoom, placelevel, temple, notes, geoignore) VALUES('$place', '{$map['long']}', '{$map['lati']}', '{$map['zoom']}', '{$map['placelevel']}', '$temple', '$note', '0')";
+    $query = "INSERT IGNORE INTO places (place, longitude, latitude, zoom, placelevel, temple, notes, geoignore) VALUES('$place', '{$map['long']}', '{$map['lati']}', '{$map['zoom']}', '{$map['placelevel']}', '$temple', '$note', '0')";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
     $success = tng_affected_rows();
     if (!$success && $savestate['del'] != 'no' && (($savestate['latlong'] && ($map['long'] || $map['lati'])) || $note)) {
-      $query = "UPDATE $places_table SET temple='$temple'";
+      $query = "UPDATE places SET temple='$temple'";
       $query1 = '';
       if ($savestate['latlong']) {
         if ($map['long'] || $map['lati']) {

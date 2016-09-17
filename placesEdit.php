@@ -14,7 +14,7 @@ if (is_numeric($ID)) {
 } else {
   $wherestr = "place = \"$ID\"";
 }
-$query = "SELECT * FROM $places_table WHERE $wherestr";
+$query = "SELECT * FROM places WHERE $wherestr";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);

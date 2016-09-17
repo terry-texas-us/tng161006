@@ -99,7 +99,7 @@ if ($result && tng_num_rows($result)) {
   }
   foreach ($places as $place) {
     $temple = strlen($place) == 5 && $place == strtoupper($place) ? 1 : 0;
-    $query = "INSERT IGNORE INTO $places_table (place, placelevel, zoom, geoignore, temple) VALUES('$place', '0', '0', '0', '$temple')";
+    $query = "INSERT IGNORE INTO places (place, placelevel, zoom, geoignore, temple) VALUES('$place', '0', '0', '0', '$temple')";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   }
   if (is_array($branch)) {

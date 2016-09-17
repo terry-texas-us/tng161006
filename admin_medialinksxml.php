@@ -243,7 +243,6 @@ function doRepos($title) {
 
 function doPlaces($place) {
   global $maxsearchresults;
-  global $places_table;
 
   $lines = "<tr>\n";
   $lines .= "<td width='50'>" . uiTextSnippet('select') . "</td>\n";
@@ -254,7 +253,7 @@ function doPlaces($place) {
   if ($place) {
     $allwhere .= " AND place LIKE \"%$place%\"";
   }
-  $query = "SELECT ID, place FROM $places_table WHERE $allwhere ORDER BY place LIMIT $maxsearchresults";
+  $query = "SELECT ID, place FROM places WHERE $allwhere ORDER BY place LIMIT $maxsearchresults";
   $result = tng_query($query);
 
   $num = 1;

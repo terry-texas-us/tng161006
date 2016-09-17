@@ -173,10 +173,10 @@ switch ($t) {
     $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('person') . " $personID";
     break;
   case 'place':
-    $row = getID('place', $places_table, $id);
+    $row = getID('place', 'places', $id);
     $place = $row['place'];
 
-    $query = "DELETE FROM $places_table WHERE ID = '$id'";
+    $query = "DELETE FROM places WHERE ID = '$id'";
     $result = tng_query($query);
 
     deleteMediaLinks($place);
@@ -263,7 +263,7 @@ switch ($t) {
     $query = "DELETE FROM $citations_table WHERE gedcom = '$id'";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $places_table WHERE gedcom = '$id'";
+    $query = "DELETE FROM places WHERE gedcom = '$id'";
     $result = tng_query($query);
 
     $query = "DELETE FROM $assoc_table WHERE gedcom = '$id'";

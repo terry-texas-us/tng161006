@@ -440,11 +440,10 @@ function setEvent($data, $datetr) {
   if ($map['key'] && $data['place'] && !$data['nomap']) {
     global $locations2map;
     global $l2mCount;
-    global $places_table;
     global $pinplacelevel0;
 
     $safeplace = tng_real_escape_string($data['place']);
-    $query = "SELECT place, placelevel, latitude, longitude, zoom, notes FROM $places_table WHERE $places_table.place = '$safeplace' AND (latitude is not null and latitude != '') AND (longitude is not null and longitude != '')";
+    $query = "SELECT place, placelevel, latitude, longitude, zoom, notes FROM places WHERE places.place = '$safeplace' AND (latitude is not null and latitude != '') AND (longitude is not null and longitude != '')";
     $custevents = tng_query($query);
 
     $numrows = tng_num_rows($custevents);

@@ -33,7 +33,7 @@ if (!$placelevel) {
 if (!$temple) {
   $temple = 0;
 }
-$query = "UPDATE $places_table SET place = '$place', placelevel = '$placelevel', temple = '$temple', latitude = '$latitude', longitude = '$longitude', zoom = '$zoom', notes = '$notes', geoignore = '0' WHERE ID = '$ID'";
+$query = "UPDATE places SET place = '$place', placelevel = '$placelevel', temple = '$temple', latitude = '$latitude', longitude = '$longitude', zoom = '$zoom', notes = '$notes', geoignore = '0' WHERE ID = '$ID'";
 $result = tng_query($query);
 if (!$result) {
   $message = uiTextSnippet('duplicate');

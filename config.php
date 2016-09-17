@@ -20,7 +20,6 @@ $languagesTable = "languages";
 $cemeteries_table = "cemeteries";
 $states_table = "states";
 $countries_table = "countries";
-$places_table = "places";
 $sources_table = "sources";
 $repositories_table = "repositories";
 $citations_table = "citations";

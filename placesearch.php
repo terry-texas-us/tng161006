@@ -69,7 +69,7 @@ $headSection->setTitle($psearchns);
 
     echo tng_DrawHeading($photostr, $psearchns, '');
 
-    $pquery = "SELECT placelevel, latitude, longitude, zoom, notes FROM $places_table WHERE place = '$psearch'";
+    $pquery = "SELECT placelevel, latitude, longitude, zoom, notes FROM places WHERE place = '$psearch'";
     $presult = tng_query($pquery) or die(uiTextSnippet('cannotexecutequery') . ": $pquery");
 
     $rightbranch = 1;

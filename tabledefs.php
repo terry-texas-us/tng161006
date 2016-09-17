@@ -483,9 +483,9 @@ $query = "CREATE TABLE $people_table (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $people_table);
 
-$query = "DROP TABLE IF EXISTS $places_table";
+$query = 'DROP TABLE IF EXISTS places';
 $result = performQuery($query);
-$query = "CREATE TABLE $places_table (
+$query = "CREATE TABLE places (
     ID INT(11) NOT NULL AUTO_INCREMENT,
     gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     place VARCHAR(248) NOT NULL,
@@ -500,7 +500,7 @@ $query = "CREATE TABLE $places_table (
     UNIQUE place (place),
     INDEX temple (temple, place)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $places_table);
+$result = performQuery($query, 'places');
 
 $query = "DROP TABLE IF EXISTS $reports_table";
 $result = performQuery($query);

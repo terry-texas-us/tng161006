@@ -64,7 +64,7 @@ $headSection->setTitle(uiTextSnippet('placelist') . ': ' . uiTextSnippet('top') 
             $offsetplus = $offset + 1;
 
             $topnum = $topnum ? $topnum : 100;
-            $query = "SELECT distinct trim(substring_index(place,',',-$offset)) AS myplace, count(place) AS placecount FROM $places_table WHERE trim(substring_index(place,',',-$offset)) != \"\" $wherestr GROUP BY myplace ORDER by placecount DESC, myplace LIMIT $topnum";
+            $query = "SELECT distinct trim(substring_index(place,',',-$offset)) AS myplace, count(place) AS placecount FROM places WHERE trim(substring_index(place,',',-$offset)) != \"\" $wherestr GROUP BY myplace ORDER by placecount DESC, myplace LIMIT $topnum";
 
             $result = tng_query($query);
             $topnum = tng_num_rows($result);
@@ -82,7 +82,7 @@ $headSection->setTitle(uiTextSnippet('placelist') . ': ' . uiTextSnippet('top') 
               while ($place = tng_fetch_assoc($result)) {
                 $place2 = urlencode($place['myplace']);
 
-                $query = "SELECT count(place) AS placecount FROM $places_table WHERE place = \"" . addslashes($place['myplace']) . "\" $wherestr";
+                $query = "SELECT count(place) AS placecount FROM places WHERE place = \"" . addslashes($place['myplace']) . "\" $wherestr";
                 $result2 = tng_query($query);
                 $countrow = tng_fetch_assoc($result2);
                 $specificcount = $countrow['placecount'];

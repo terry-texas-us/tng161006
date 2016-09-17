@@ -9,7 +9,6 @@ function ClearData($tree) {
   global $repositories_table;
   global $notelinks_table;
   global $citations_table;
-  global $places_table;
   global $address_table;
   global $assoc_table;
 
@@ -46,6 +45,6 @@ function ClearData($tree) {
   $query = "DELETE from $events_table WHERE persfamID != \"XXX\"";
   tng_query($query);
 
-  $query = "DELETE from $places_table WHERE (latitude is null OR latitude = \"\") AND (longitude is null OR longitude = \"\") AND (notes is null OR notes = \"\")";
+  $query = "DELETE from places WHERE (latitude is null OR latitude = \"\") AND (longitude is null OR longitude = \"\") AND (notes is null OR notes = \"\")";
   tng_query($query);
 }
