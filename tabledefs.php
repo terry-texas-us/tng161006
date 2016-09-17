@@ -401,9 +401,9 @@ $query = "CREATE TABLE $mostwanted_table (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $mostwanted_table);
 
-$query = "DROP TABLE IF EXISTS $notelinks_table";
+$query = 'DROP TABLE IF EXISTS notelinks';
 $result = performQuery($query);
-$query = "CREATE TABLE $notelinks_table (
+$query = "CREATE TABLE notelinks (
     ID INT(11) NOT NULL AUTO_INCREMENT,
     persfamID VARCHAR(22) NOT NULL,
     gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
@@ -416,7 +416,7 @@ $query = "CREATE TABLE $notelinks_table (
     FOREIGN KEY notelinks_fk1 (persfamID) REFERENCES $people_table (personID),
     FOREIGN KEY notelinks_fk2 (persfamID) REFERENCES $families_table (familyID)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $notelinks_table);
+$result = performQuery($query, 'notelinks');
 
 $query = "DROP TABLE IF EXISTS $people_table";
 $result = performQuery($query);
@@ -660,7 +660,7 @@ $query = "CREATE TABLE trees (
     importfilename VARCHAR(100) NOT NULL,
     PRIMARY KEY (gedcom)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, trees);
+$result = performQuery($query, 'trees');
 
 $query = 'DROP TABLE IF EXISTS users';
 $result = performQuery($query);
@@ -715,6 +715,6 @@ $query = "CREATE TABLE xnotes (
     PRIMARY KEY (ID),
     FULLTEXT note (note),
     INDEX noteID (noteID),
-    FOREIGN KEY xnotes_fk1 (ID) REFERENCES $notelinks_table (xnoteID)
+    FOREIGN KEY xnotes_fk1 (ID) REFERENCES notelinks (xnoteID)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, 'xnotes');

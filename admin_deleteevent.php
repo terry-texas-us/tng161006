@@ -26,13 +26,13 @@ $result = tng_query($query);
 $query = "DELETE FROM $citations_table WHERE eventID=\"$eventID\"";
 $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . "]: $query");
 
-$query = "SELECT xnoteID FROM $notelinks_table WHERE eventID=\"$eventID\"";
+$query = "SELECT xnoteID FROM notelinks WHERE eventID=\"$eventID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 if ($result) {
   tng_free_result($result);
 }
-$query = "SELECT count(ID) AS xcount FROM $notelinks_table WHERE xnoteID=\"{$row['xnoteID']}\"";
+$query = "SELECT count(ID) AS xcount FROM notelinks WHERE xnoteID=\"{$row['xnoteID']}\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 if ($result) {
@@ -42,7 +42,7 @@ if ($row['xcount'] == 1) {
   $query = "DELETE FROM xnotes WHERE ID=\"{$row['xnoteID']}\"";
   $result = tng_query($query);
 }
-$query = "DELETE FROM $notelinks_table WHERE eventID=\"$eventID\"";
+$query = "DELETE FROM notelinks WHERE eventID=\"$eventID\"";
 $result = tng_query($query);
 
 adminwritelog(uiTextSnippet('deleted') . ': ' . uiTextSnippet('event') . " $eventID");

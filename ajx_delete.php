@@ -78,7 +78,7 @@ switch ($t) {
     $logmsg = uiTextSnippet('tlevent') . " $id " . uiTextSnippet('succdeleted');
     break;
   case 'note':
-    $query = "DELETE FROM $notelinks_table WHERE xnoteID = '$id'";
+    $query = "DELETE FROM notelinks WHERE xnoteID = '$id'";
     $result = tng_query($query);
 
     $query = "DELETE FROM xnotes WHERE ID = '$id'";
@@ -254,7 +254,7 @@ switch ($t) {
     $query = "DELETE FROM $events_table WHERE gedcom = '$id'";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $notelinks_table WHERE gedcom = '$id'";
+    $query = "DELETE FROM notelinks WHERE gedcom = '$id'";
     $result = tng_query($query);
 
     $query = "DELETE FROM xnotes WHERE gedcom = '$id'";

@@ -21,7 +21,7 @@ $row['reponame'] = preg_replace('/\"/', '&#34;', $row['reponame']);
 
 $row['allow_living'] = 1;
 
-$query = "SELECT DISTINCT eventID AS eventID FROM $notelinks_table WHERE persfamID = '$repoID'";
+$query = "SELECT DISTINCT eventID AS eventID FROM notelinks WHERE persfamID = '$repoID'";
 $notelinks = tng_query($query);
 $gotnotes = [];
 while ($note = tng_fetch_assoc($notelinks)) {

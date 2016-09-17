@@ -89,7 +89,7 @@ if ($table == 'struct') {
   adminwritelog(uiTextSnippet('restore') . ': ' . uiTextSnippet('tablestruct'));
 } else {
   if ($table == 'all') {
-    $tablelist = [$address_table, $albums_table, $albumlinks_table, $album2entities_table, $assoc_table, $branches_table, $branchlinks_table, $cemeteries_table, $people_table, $families_table, $children_table, $languagesTable, 'places', $states_table, $countries_table, $sources_table, $repositories_table, $citations_table, $reports_table, $events_table, $eventtypes_table, 'trees', $notelinks_table, 'xnotes', 'users', $tlevents_table, $saveimport_table, $temp_events_table, $media_table, $medialinks_table, $mediatypes_table, $mostwanted_table];
+    $tablelist = [$address_table, $albums_table, $albumlinks_table, $album2entities_table, $assoc_table, $branches_table, $branchlinks_table, $cemeteries_table, $people_table, $families_table, $children_table, $languagesTable, 'places', $states_table, $countries_table, $sources_table, $repositories_table, $citations_table, $reports_table, $events_table, $eventtypes_table, 'trees', 'notelinks', 'xnotes', 'users', $tlevents_table, $saveimport_table, $temp_events_table, $media_table, $medialinks_table, $mediatypes_table, $mostwanted_table];
     $tablename = uiTextSnippet('alltables');
     $message = '';
     foreach ($tablelist as $table) {

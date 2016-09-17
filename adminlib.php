@@ -108,9 +108,7 @@ function checkReview($type) {
 }
 
 function deleteNote($noteID, $flag) {
-  global $notelinks_table;
-
-  $query = "SELECT xnoteID FROM $notelinks_table WHERE ID=\"$noteID\"";
+  $query = "SELECT xnoteID FROM notelinks WHERE ID=\"$noteID\"";
   $result = tng_query($query);
   $nrow = tng_fetch_assoc($result);
   tng_free_result($result);
@@ -125,7 +123,7 @@ function deleteNote($noteID, $flag) {
     tng_query($query);
   }
   if ($flag) {
-    $query = "DELETE FROM $notelinks_table WHERE ID=\"$noteID\"";
+    $query = "DELETE FROM notelinks WHERE ID=\"$noteID\"";
     tng_query($query);
   }
 }

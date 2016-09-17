@@ -139,7 +139,7 @@ switch ($action) {
     $count = count($nlinks);
     for ($i = 0; $i < $count; $i++) {
       $order = $i + 1;
-      $query = "UPDATE $notelinks_table SET ordernum=\"$order\" WHERE ID = \"$nlinks[$i]\"";
+      $query = "UPDATE notelinks SET ordernum=\"$order\" WHERE ID = \"$nlinks[$i]\"";
       $result2 = tng_query($query);
     }
     break;

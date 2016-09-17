@@ -234,7 +234,6 @@ function addCriteria($row) {
 
 function doNotesCitations($persfam1, $persfam2, $varname) {
   global $ccombinenotes;
-  global $notelinks_table;
   global $citations_table;
 
   if ($varname) {
@@ -246,7 +245,7 @@ function doNotesCitations($persfam1, $persfam2, $varname) {
     $wherestr = '';
   }
   if ($ccombinenotes != 'yes') {
-    $query = "SELECT xnoteID FROM $notelinks_table WHERE persfamID = '$persfam1' $wherestr";
+    $query = "SELECT xnoteID FROM notelinks WHERE persfamID = '$persfam1' $wherestr";
     $noteresult = tng_query($query);
     while ($row = tng_fetch_assoc($noteresult)) {
       $query = "DELETE FROM xnotes WHERE ID=\"{$row['xnoteID']}\"";
@@ -254,13 +253,13 @@ function doNotesCitations($persfam1, $persfam2, $varname) {
     }
     tng_free_result($noteresult);
 
-    $query = "DELETE from $notelinks_table WHERE persfamID = '$persfam1' $wherestr";
+    $query = "DELETE from notelinks WHERE persfamID = '$persfam1' $wherestr";
     tng_query($query);
 
     $query = "DELETE from $citations_table WHERE persfamID = '$persfam1' $wherestr";
     tng_query($query);
   }
-  $query = "UPDATE $notelinks_table set persfamID = \"$persfam1\" WHERE persfamID = '$persfam2' $wherestr";
+  $query = "UPDATE notelinks set persfamID = \"$persfam1\" WHERE persfamID = '$persfam2' $wherestr";
   tng_query($query);
 
   $query = "UPDATE $citations_table set persfamID = \"$persfam1\" WHERE persfamID = '$persfam2' $wherestr";
@@ -587,7 +586,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
     doNotesCitations($personID1, $personID2, 'general');
 
     //convert all remaining notes and citations
-    $query = "UPDATE $notelinks_table set persfamID = \"$personID1\" WHERE persfamID = '$personID2'";
+    $query = "UPDATE notelinks set persfamID = \"$personID1\" WHERE persfamID = '$personID2'";
     $noteresult = tng_query($query);
 
     $query = "UPDATE $citations_table set persfamID = \"$personID1\" WHERE persfamID = '$personID2'";
@@ -608,7 +607,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
   $query = "DELETE from $events_table WHERE persfamID = '$personID2'";
   $combresult = tng_query($query);
 
-  $query = "SELECT xnoteID FROM $notelinks_table WHERE persfamID = '$persfam2'";
+  $query = "SELECT xnoteID FROM notelinks WHERE persfamID = '$persfam2'";
   $noteresult = tng_query($query);
   while ($row = tng_fetch_assoc($noteresult)) {
     $query = "DELETE FROM xnotes WHERE ID=\"{$row['xnoteID']}\"";
@@ -616,7 +615,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
   }
   tng_free_result($noteresult);
 
-  $query = "DELETE from $notelinks_table WHERE persfamID = '$personID2'";
+  $query = "DELETE from notelinks WHERE persfamID = '$personID2'";
   $combresult = tng_query($query);
 
   $query = "DELETE from $citations_table WHERE persfamID = '$personID2'";

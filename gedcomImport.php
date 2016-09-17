@@ -341,7 +341,6 @@ function getContinued() {
 
 function deleteLinksOnMatch($entityID) {
   global $events_table;
-  global $notelinks_table;
   global $citations_table;
   global $address_table;
   global $assoc_table;
@@ -360,14 +359,14 @@ function deleteLinksOnMatch($entityID) {
   $query = "DELETE from $assoc_table WHERE personID = '$entityID'";
   tng_query($query);
 
-  $query = "SELECT xnoteID FROM $notelinks_table WHERE persfamID = '$entityID'";
+  $query = "SELECT xnoteID FROM notelinks WHERE persfamID = '$entityID'";
   $result = tng_query($query);
   while ($row = tng_fetch_assoc($result)) {
     $query = "DELETE from xnotes WHERE ID = '{$row['xnoteID']}'";
     tng_query($query);
   }
   tng_free_result($result);
-  $query = "DELETE from $notelinks_table WHERE persfamID = '$entityID'";
+  $query = "DELETE from notelinks WHERE persfamID = '$entityID'";
   tng_query($query);
   $query = "DELETE from $citations_table WHERE persfamID = '$entityID'";
   tng_query($query);
@@ -1148,7 +1147,6 @@ function processNotes($persfamID, $eventID, $notearray) {
 }
 
 function saveNote($persfamID, $eventID, $note) {
-  global $notelinks_table;
   global $tngimpcfg;
 
   $found = 0;
@@ -1171,7 +1169,7 @@ function saveNote($persfamID, $eventID, $note) {
 
   $privlen = strlen($tngimpcfg['privnote']);
   $secret = ($privlen && substr($note['NOTE'], 0, $privlen) == $tngimpcfg['privnote']) ? 1 : 0;
-  $query = "INSERT IGNORE INTO $notelinks_table (persfamID, eventID, xnoteID, secret, ordernum) VALUES('$persfamID', '$eventID', '$xnoteID', '$secret', '0')";
+  $query = "INSERT IGNORE INTO notelinks (persfamID, eventID, xnoteID, secret, ordernum) VALUES('$persfamID', '$eventID', '$xnoteID', '$secret', '0')";
   $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   $ID = tng_insert_id();
 
@@ -1185,7 +1183,6 @@ function getNoteRecord($noteID, $prevlevel) {
   global $lineinfo;
   global $citations_table;
   global $tngimpcfg;
-  global $notelinks_table;
 
   $noteID = adjustID($noteID, $savestate['noffset']);
 
@@ -1230,7 +1227,7 @@ function getNoteRecord($noteID, $prevlevel) {
   //see if private character exists
   $privlen = strlen($tngimpcfg['privnote']);
   if ($privlen && substr($note, 0, $privlen) == $tngimpcfg['privnote']) {
-    $query = "UPDATE $notelinks_table SET secret=\"1\" WHERE xnoteID=\"$ID\"";
+    $query = "UPDATE notelinks SET secret=\"1\" WHERE xnoteID=\"$ID\"";
     $nresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   }
 

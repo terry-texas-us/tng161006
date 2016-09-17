@@ -197,12 +197,11 @@ function doEvent($custevent, $level) {
 }
 
 function getNotes($id) {
-  global $notelinks_table;
   global $eventtypes_table;
   global $events_table;
   global $xnotes;
 
-  $query = "SELECT $notelinks_table.ID AS ID, secret, xnotes.note AS note, xnotes.noteID AS noteID, $notelinks_table.eventID FROM $notelinks_table LEFT JOIN  xnotes ON $notelinks_table.xnoteID = xnotes.ID LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE $notelinks_table.persfamID = '$id' ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum";
+  $query = "SELECT notelinks.ID AS ID, secret, xnotes.note AS note, xnotes.noteID AS noteID, notelinks.eventID FROM notelinks LEFT JOIN xnotes ON notelinks.xnoteID = xnotes.ID LEFT JOIN $events_table ON notelinks.eventID = $events_table.eventID LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE notelinks.persfamID = '$id' ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, notelinks.ordernum";
   $notelinks = tng_query($query);
   $notearray = [];
   while ($notelink = tng_fetch_assoc($notelinks)) {

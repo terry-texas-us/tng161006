@@ -28,10 +28,10 @@ if ($offset) {
   $newoffset = '';
   $page = 1;
 }
-$wherestr = "WHERE xnotes.ID = $notelinks_table.xnoteID";
+$wherestr = "WHERE xnotes.ID = notelinks.xnoteID";
 
 if (!$allowPrivate) {
-  $wherestr .= " AND $notelinks_table.secret != \"1\"";
+  $wherestr .= " AND notelinks.secret != \"1\"";
 }
 if ($notesearch) {
   $notesearch2 = addslashes($notesearch);
@@ -41,13 +41,13 @@ if ($notesearch) {
   $wherestr .= " match(xnotes.note) against( \"$notesearch2\" in boolean mode)";
 }
 
-$query = "SELECT xnotes.ID AS ID, xnotes.note AS note, $notelinks_table.persfamID AS personID FROM (xnotes, $notelinks_table) $wherestr ORDER BY note LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT xnotes.ID AS ID, xnotes.note AS note, notelinks.persfamID AS personID FROM (xnotes, notelinks) $wherestr ORDER BY note LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(xnotes.ID) AS scount FROM (xnotes, $notelinks_table) $wherestr";
+  $query = "SELECT count(xnotes.ID) AS scount FROM (xnotes, notelinks) $wherestr";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['scount'];

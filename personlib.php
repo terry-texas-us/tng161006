@@ -200,7 +200,6 @@ function reorderCitation($citekey, $withlink = 1) {
 }
 
 function getNotes($persfamID, $flag) {
-  global $notelinks_table;
   global $eventtypes_table;
   global $events_table;
   global $allowPrivate;
@@ -223,7 +222,7 @@ function getNotes($persfamID, $flag) {
   }
 
   $secretstr = $allowPrivate ? '' : ' AND secret != "1"';
-  $query = "SELECT display, xnotes.note AS note, $notelinks_table.eventID AS eventID, $notelinks_table.xnoteID AS xnoteID, $notelinks_table.ID AS ID, noteID FROM $notelinks_table LEFT JOIN xnotes ON $notelinks_table.xnoteID = xnotes.ID LEFT JOIN $events_table ON $notelinks_table.eventID = $events_table.eventID LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE $notelinks_table.persfamID = '$persfamID' $secretstr ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, $notelinks_table.ordernum, ID";
+  $query = "SELECT display, xnotes.note AS note, notelinks.eventID AS eventID, notelinks.xnoteID AS xnoteID, notelinks.ID AS ID, noteID FROM notelinks LEFT JOIN xnotes ON notelinks.xnoteID = xnotes.ID LEFT JOIN $events_table ON notelinks.eventID = $events_table.eventID LEFT JOIN $eventtypes_table ON $eventtypes_table.eventtypeID = $events_table.eventtypeID WHERE notelinks.persfamID = '$persfamID' $secretstr ORDER BY eventdatetr, $eventtypes_table.ordernum, tag, notelinks.ordernum, ID";
   $notelinks = tng_query($query);
 
   $currevent = '';

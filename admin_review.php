@@ -217,7 +217,7 @@ if (is_numeric($eventID)) {
 
   $displayval = uiTextSnippet($eventID);
 }
-$query = "SELECT count(ID) AS notecount FROM $notelinks_table WHERE persfamID = '$persfamID' AND eventID = '$eventID'";
+$query = "SELECT count(ID) AS notecount FROM notelinks WHERE persfamID = '$persfamID' AND eventID = '$eventID'";
 $notelinks = tng_query($query);
 $note = tng_fetch_assoc($notelinks);
 $gotnotes = $note['notecount'] ? '*' : '';

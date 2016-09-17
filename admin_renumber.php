@@ -215,7 +215,7 @@ echo $navList->build('renumber');
             $result2 = tng_query($query);
           }
 
-          $query = "UPDATE $notelinks_table SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . '"';
+          $query = "UPDATE notelinks SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . '"';
           $result2 = tng_query($query);
 
           //echo "$row['personID'] -&gt; $newID<br>";

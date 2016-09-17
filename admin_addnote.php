@@ -24,7 +24,7 @@ $xnoteID = tng_insert_id();
 if (!$private) {
   $private = '0';
 }
-$query = "INSERT INTO $notelinks_table (persfamID, xnoteID, eventID, secret, ordernum) VALUES ('$persfamID', '$xnoteID', '$eventID', '$private', 999)";
+$query = "INSERT INTO notelinks (persfamID, xnoteID, eventID, secret, ordernum) VALUES ('$persfamID', '$xnoteID', '$eventID', '$private', 999)";
 $result = tng_query($query);
 $ID = tng_insert_id();
 

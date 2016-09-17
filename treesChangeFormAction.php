@@ -85,7 +85,7 @@ $result = tng_query($query);
 $query = "UPDATE $medialinks_table SET gedcom=\"$newtree\", personID=\"$newID\" WHERE gedcom=\"$oldtree\" AND personID=\"$entityID\"";
 $result = tng_query($query);
 
-$query = "SELECT xnoteID FROM $notelinks_table WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\" AND xnoteID!=\"\"";
+$query = "SELECT xnoteID FROM notelinks WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\" AND xnoteID!=\"\"";
 $result = tng_query($query);
 while ($row = tng_fetch_assoc($result)) {
   $query = "UPDATE xnotes SET gedcom=\"$newtree\" WHERE ID=\"{$row['xnoteID']}\"";
@@ -93,7 +93,7 @@ while ($row = tng_fetch_assoc($result)) {
 }
 tng_free_result($result);
 
-$query = "UPDATE $notelinks_table SET gedcom=\"$newtree\", persfamID=\"$newID\" WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\"";
+$query = "UPDATE notelinks SET gedcom=\"$newtree\", persfamID=\"$newID\" WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\"";
 $result = tng_query($query);
 
 header("Location: $url");

@@ -65,7 +65,7 @@ $row['allow_private'] = $rights['private'];
 
 $namestr = getName($row);
 
-$query = "SELECT DISTINCT eventID AS eventID FROM $notelinks_table WHERE persfamID = '$personID'";
+$query = "SELECT DISTINCT eventID AS eventID FROM notelinks WHERE persfamID = '$personID'";
 $notelinks = tng_query($query);
 $gotnotes = [];
 while ($note = tng_fetch_assoc($notelinks)) {

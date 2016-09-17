@@ -36,8 +36,8 @@ $helplang = findhelp('notes_help.php');
 
 header('Content-type:text/html; charset=' . $session_charset);
 
-$query = "SELECT $notelinks_table.ID AS ID, xnotes.note AS note, noteID, secret FROM ($notelinks_table, xnotes)
-    WHERE $notelinks_table.xnoteID = xnotes.ID AND persfamID = '$persfamID' AND eventID = '$eventID' ORDER BY ordernum, ID";
+$query = "SELECT notelinks.ID AS ID, xnotes.note AS note, noteID, secret FROM (notelinks, xnotes)
+    WHERE notelinks.xnoteID = xnotes.ID AND persfamID = '$persfamID' AND eventID = '$eventID' ORDER BY ordernum, ID";
 $notelinks = tng_query($query);
 $notecount = tng_num_rows($notelinks);
 ?>

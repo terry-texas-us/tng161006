@@ -27,7 +27,6 @@ $events_table = "events";
 $eventtypes_table = "eventtypes";
 $rectangles_table = "";
 $reports_table = "reports";
-$notelinks_table = "notelinks";
 $saveimport_table = "saveimport";
 $temp_events_table = "temp_events";
 $tlevents_table = "timelineevents";

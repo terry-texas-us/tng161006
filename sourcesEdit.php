@@ -29,7 +29,7 @@ $row['actualtext'] = preg_replace('/\"/', '&#34;', $row['actualtext']);
 $sourcename = $row['title'] ? $row['title'] : $row['shorttitle'];
 $row['allow_living'] = 1;
 
-$query = "SELECT DISTINCT eventID AS eventID FROM $notelinks_table WHERE persfamID = '$sourceID'";
+$query = "SELECT DISTINCT eventID AS eventID FROM notelinks WHERE persfamID = '$sourceID'";
 $notelinks = tng_query($query);
 $gotnotes = [];
 while ($note = tng_fetch_assoc($notelinks)) {

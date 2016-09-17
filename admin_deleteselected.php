@@ -161,7 +161,7 @@ foreach (array_keys($_POST) as $key) {
       tng_free_result($result3);
       $items[] = $crow['cemname'];
     } elseif ($xnoteaction) {
-      $nquery = "DELETE FROM $notelinks_table WHERE xnoteID = '$thisid'";
+      $nquery = "DELETE FROM notelinks WHERE xnoteID = '$thisid'";
       $result = tng_query($nquery);
       $items[] = $thisid;
     }

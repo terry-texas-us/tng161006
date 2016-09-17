@@ -154,7 +154,6 @@ function addCriteria($row) {
 
 function doNotes($persfam1, $persfam2, $varname) {
   global $ccombinenotes;
-  global $notelinks_table;
 
   if ($varname) {
     if ($varname == 'general') {
@@ -166,10 +165,10 @@ function doNotes($persfam1, $persfam2, $varname) {
   }
 
   if ($ccombinenotes != 'yes') {
-    $query = "DELETE from $notelinks_table WHERE persfamID = '$persfam1' $wherestr";
+    $query = "DELETE from notelinks WHERE persfamID = '$persfam1' $wherestr";
     tng_query($query);
   }
-  $query = "UPDATE $notelinks_table set persfamID = \"$persfam1\" WHERE persfamID = '$persfam2' $wherestr";
+  $query = "UPDATE notelinks set persfamID = \"$persfam1\" WHERE persfamID = '$persfam2' $wherestr";
   tng_query($query);
 }
 
@@ -295,7 +294,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
     doNotes($repoID1, $repoID2, 'general');
 
     //convert all remaining notes and citations
-    $query = "UPDATE $notelinks_table set persfamID = \"$repoID1\" WHERE persfamID = '$repoID2'";
+    $query = "UPDATE notelinks set persfamID = \"$repoID1\" WHERE persfamID = '$repoID2'";
     $noteresult = tng_query($query);
   }
   if ($updatestr) {
@@ -311,7 +310,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
   $query = "DELETE from $events_table WHERE persfamID = '$repoID2'";
   $combresult = tng_query($query);
 
-  $query = "DELETE from $notelinks_table WHERE persfamID = '$repoID2'";
+  $query = "DELETE from notelinks WHERE persfamID = '$repoID2'";
   $combresult = tng_query($query);
 
   //point sources for r2 to r1

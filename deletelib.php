@@ -1,9 +1,7 @@
 <?php
 
 function deleteNoteLinks($id) {
-  global $notelinks_table;
-
-  $query = "SELECT ID FROM $notelinks_table WHERE persfamID = '$id'";
+  $query = "SELECT ID FROM notelinks WHERE persfamID = '$id'";
   $nresult = tng_query($query);
 
   while ($nrow = tng_fetch_assoc($nresult)) {
@@ -11,7 +9,7 @@ function deleteNoteLinks($id) {
   }
   tng_free_result($nresult);
 
-  $query = "DELETE FROM $notelinks_table WHERE persfamID = '$id'";
+  $query = "DELETE FROM notelinks WHERE persfamID = '$id'";
   tng_query($query);
 }
 

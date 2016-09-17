@@ -41,22 +41,22 @@ if ($offset) {
   $newoffset = '';
   $tngpage = 1;
 }
-$wherestr = "WHERE xnotes.ID = $notelinks_table.xnoteID";
+$wherestr = 'WHERE xnotes.ID = notelinks.xnoteID';
 
 if ($private) {
-  $wherestr .= " AND $notelinks_table.secret != 0";
+  $wherestr .= ' AND notelinks.secret != 0';
 }
 if ($searchstring) {
   $wherestr .= $wherestr ? ' AND' : 'WHERE';
   $wherestr .= " (xnotes.note LIKE '%" . $searchstring . "%')";
 }
-$query = "SELECT xnotes.ID AS ID, xnotes.note AS note FROM (xnotes, $notelinks_table)" . $wherestr . " ORDER BY note LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT xnotes.ID AS ID, xnotes.note AS note FROM (xnotes, notelinks)" . $wherestr . " ORDER BY note LIMIT $newoffset" . $maxsearchresults;
 
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(xnotes.ID) AS scount FROM (xnotes, $notelinks_table) " . $wherestr;
+  $query = "SELECT count(xnotes.ID) AS scount FROM (xnotes, notelinks) " . $wherestr;
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['scount'];
@@ -157,7 +157,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
             if ($allowDelete) {
               echo "<td><input name=\"del{$row['ID']}\" type='checkbox' value='1'></td>";
             }
-            $query = "SELECT $notelinks_table.ID, $notelinks_table.persfamID AS personID, secret FROM $notelinks_table WHERE $notelinks_table.xnoteID = '{$row['ID']}' ";
+            $query = "SELECT notelinks.ID, notelinks.persfamID AS personID, secret FROM notelinks WHERE notelinks.xnoteID = '{$row['ID']}' ";
 
             $nresult = tng_query($query);
             $notelinktext = '';

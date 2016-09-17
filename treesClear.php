@@ -40,8 +40,8 @@ tng_query("ALTER TABLE $repositories_table AUTO_INCREMENT = 1");
 tng_query("DELETE FROM $events_table");
 tng_query("ALTER TABLE $events_table AUTO_INCREMENT = 1");
 
-tng_query("DELETE FROM $notelinks_table");
-tng_query("ALTER TABLE $notelinks_table AUTO_INCREMENT = 1");
+tng_query('DELETE FROM notelinks');
+tng_query('ALTER TABLE notelinks AUTO_INCREMENT = 1');
 
 tng_query('DELETE FROM xnotes');
 tng_query('ALTER TABLE xnotes AUTO_INCREMENT = 1');

@@ -207,10 +207,6 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td>
               <table class='table table-sm'>
                 <tr>
-                  <td><?php echo uiTextSnippet('notelinkstable'); ?>:</td>
-                  <td><input name='notelinks_table' type='text' value="<?php echo $notelinks_table; ?>"></td>
-                </tr>
-                <tr>
                   <td><?php echo uiTextSnippet('saveimporttable'); ?>:</td>
                   <td><input name='saveimport_table' type='text' value="<?php echo $saveimport_table; ?>"></td>
                 </tr>
