@@ -31,7 +31,7 @@ $phone = addslashes($phone);
 if (!$private) {
   $private = 0;
 }
-$query = "INSERT IGNORE INTO $treesTable (treename, description, owner, email, address, city, state, country, zip, phone, secret) VALUES ('$treename', '$description', '$owner', '$email', '$address', '$city', '$state', '$country', '$zip', '$phone', '$private')";
+$query = "INSERT IGNORE INTO trees (treename, description, owner, email, address, city, state, country, zip, phone, secret) VALUES ('$treename', '$description', '$owner', '$email', '$address', '$city', '$state', '$country', '$zip', '$phone', '$private')";
 $result = tng_query($query);
 $success = tng_affected_rows();
 if ($success) {

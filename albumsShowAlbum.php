@@ -12,6 +12,7 @@ require_once 'albums.php';
 $flags['imgprev'] = true;
 
 $noneliving = $noneprivate = 1;
+
 function getAlbumLinkText($albumID) {
   global $noneliving;
   global $noneprivate;

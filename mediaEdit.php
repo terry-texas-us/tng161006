@@ -43,7 +43,7 @@ if ($row['form']) {
   preg_match('/\.(.+)$/', $row['path'], $matches);
   $form = strtoupper($matches[1]);
 }
-$treequery = "SELECT gedcom FROM $treesTable";
+$treequery = 'SELECT gedcom FROM trees';
 $treeresult = tng_query($treequery) or die(uiTextSnippet('cannotexecutequery') . ": $treequery");
 $treenum = 0;
 

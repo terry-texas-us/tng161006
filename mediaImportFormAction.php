@@ -62,6 +62,7 @@ function importFrom($tngpath, $orgpath, $needsubdirs) {
 
   return $subdirs;
 }
+
 adminwritelog(uiTextSnippet('media') . ' &gt;&gt; ' . uiTextSnippet('import') . " ($mediatypeID)");
 
 header('Content-type: text/html; charset=' . $session_charset);

@@ -93,4 +93,5 @@ class scriptsManager {
     }
     return $out;
   }
+  
 }

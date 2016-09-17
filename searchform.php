@@ -50,6 +50,7 @@ function buildSelectInputGroup($label, $formName, $selectName, $value, $options,
   
   return $out;
 }
+
 $idOptions = ['contains', 'equals', 'startswith', 'endswith'];
 $placeOptions = ['contains', 'equals', 'startswith', 'endswith', 'exists', 'dnexist'];
 $fnOptions = ['contains', 'equals', 'startswith', 'endswith', 'exists', 'dnexist', 'soundexof'];

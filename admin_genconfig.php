@@ -211,10 +211,6 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td>
               <table class='table table-sm'>
                 <tr>
-                  <td><?php echo uiTextSnippet('trees'); ?>:</td>
-                  <td><input name='trees_table' type='text' value="<?php echo $treesTable; ?>"></td>
-                </tr>
-                <tr>
                   <td><?php echo uiTextSnippet('notes'); ?>:</td>
                   <td><input name='xnotes_table' type='text' value="<?php echo $xnotes_table; ?>"></td>
                 </tr>

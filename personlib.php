@@ -476,6 +476,7 @@ function setEvent($data, $datetr) {
     tng_free_result($custevents);
   }
 }
+
 $datewidth = $thumbmaxw + 20 > 104 ? $thumbmaxw + 20 : 104;
 $eventcounter = 0;
 

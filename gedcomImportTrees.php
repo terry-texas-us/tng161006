@@ -1,4 +1,5 @@
 <?php
+
 function ClearData($tree) {
   global $people_table;
   global $families_table;
@@ -6,7 +7,6 @@ function ClearData($tree) {
   global $sources_table;
   global $events_table;
   global $repositories_table;
-  global $treesTable;
   global $notelinks_table;
   global $xnotes_table;
   global $citations_table;
@@ -27,7 +27,7 @@ function ClearData($tree) {
           $sources_table,
           $xnotes_table
   ];
-  $query = "SELECT COUNT(*) AS trees FROM $treesTable";
+  $query = 'SELECT COUNT(*) AS trees FROM trees';
   if (!($result = tng_query($query))) {
     die(uiTextSnippet('cannotexecutequery') . ": $query");
   }

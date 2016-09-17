@@ -45,4 +45,5 @@ class FooterElementSection {
 
     return $this->out;
   }
+  
 }

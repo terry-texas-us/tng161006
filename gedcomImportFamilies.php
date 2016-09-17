@@ -1,4 +1,5 @@
 <?php
+
 function getFamilyRecord($familyID, $prevlevel) {
   global $families_table;
   global $children_table;

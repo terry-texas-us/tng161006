@@ -1344,6 +1344,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       }
       return $placestr;
     }
+    
     ?>
     <p><strong><?php echo uiTextSnippet('exporting'); ?></strong></p>
     <?php
@@ -1452,7 +1453,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     $maxgcgen = 999;
 
     if (!$found) {
-      $query = "SELECT email, owner FROM $treesTable";
+      $query = 'SELECT email, owner FROM trees';
       $treeresult = tng_query($query);
       $treerow = tng_fetch_assoc($treeresult);
       tng_free_result($treeresult);

@@ -13,7 +13,7 @@ if (!$allowDelete) {
 }
 require 'adminlog.php';
 
-$query = "DELETE FROM users WHERE 1=0";
+$query = 'DELETE FROM users WHERE 1=0';
 $location = ($xuseraction) ? 'usersBrowse.php' : 'usersReview.php';
 
 $count = 0;

@@ -85,6 +85,7 @@ function showDiv($type) {
   tng_free_result($result);
   echo "</div>\n";
 }
+
 header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle(uiTextSnippet('mostwanted'));
 ?>

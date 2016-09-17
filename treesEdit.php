@@ -11,7 +11,7 @@ if (!$allowEdit) {
   header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-$query = "SELECT * FROM $treesTable";
+$query = 'SELECT * FROM trees';
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);

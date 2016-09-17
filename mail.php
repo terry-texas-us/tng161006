@@ -1,4 +1,5 @@
 <?php
+
 function tng_sendmail($from_name, $from_email, $to_name, $to_email, $subject, $body, $returnpath, $replyto) {
   global $session_charset;
   global $envelope;

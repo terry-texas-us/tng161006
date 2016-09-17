@@ -370,6 +370,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
 
   return $indtext;
 }
+
 $query = "SELECT familyID, husband, wife, living, private, marrdate, branch FROM $families_table WHERE familyID = '$familyID'";
 $result = tng_query($query);
 $famrow = tng_fetch_assoc($result);

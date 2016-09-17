@@ -99,6 +99,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
       } elseif ($secaction == uiTextSnippet('creategendex')) {
 
         //create gendex file
+
         function getVitals($person) {
           if ($person['birthdate']) {
             $info = $person['birthdate'] . '|' . $person['birthplace'] . '|';
@@ -112,6 +113,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
           }
           return $info;
         }
+        
         echo '<p>' . uiTextSnippet('creatinggendex') . '</p>';
         $gendexout = "$rootpath$gendexfile/gendex.txt";
         $gendexURL = "$tngdomain/$gendexfile/gendex.txt";

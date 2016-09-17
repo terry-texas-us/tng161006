@@ -9,8 +9,8 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-$file_uploads = (bool)ini_get('file_uploads');
-$safe_mode = (bool)ini_get('safe_mode');
+$file_uploads = (bool) ini_get('file_uploads');
+$safe_mode = (bool) ini_get('safe_mode');
 
 error_reporting(E_ERROR | E_PARSE); //  Disable error reporting for anything but critical errors
 
@@ -267,6 +267,7 @@ $headSection->setTitle(uiTextSnippet('diagnostics'));
 </html>
 
 <?php 
+
 function fileReadWrite($myuserid, $mygroupid, $fileref) {
   $rval = false;
 

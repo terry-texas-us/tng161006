@@ -124,8 +124,7 @@ function getIndividual($key, $sex, $level, $trail) {
   return $rval;
 }
 
-function getVitalDates($row)
-{
+function getVitalDates($row) {
   $vitalinfo = '';
 
   if ($row['allow_living'] && $row['allow_private']) {
@@ -150,6 +149,7 @@ function getVitalDates($row)
   }
   return $vitalinfo;
 }
+
 $level = 1;
 $key = $personID;
 

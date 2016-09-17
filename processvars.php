@@ -1,6 +1,6 @@
 <?php
 
-$register_globals = (bool)ini_get('register_globals');
+$register_globals = (bool) ini_get('register_globals');
 
 if (!$register_globals) {
   if ($_SERVER && is_array($_SERVER)) {

@@ -308,6 +308,7 @@ function getParentInfo($famid) {
   }
   return $parentarray;
 }
+
 // how many generations to show?
 if (!$pedigree['maxgen']) {
   $pedigree['maxgen'] = 6;

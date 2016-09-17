@@ -23,7 +23,6 @@ if ($tngprint) {
     case 'ahnentafel':
     case 'anniversaries':
     case 'calendar':
-    case 'treesShow':
     case 'changelanguage':
     case 'descend':
     case 'descendtext':

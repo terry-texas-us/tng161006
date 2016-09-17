@@ -6,8 +6,7 @@ if (!class_exists('TNGPDF')) {
   include_once 'ufpdf.php';
   include_once 'version.php';
 
-  class TNGPDF extends UFPDF
-  {
+  class TNGPDF extends UFPDF {
 
     // Private properties
     var $charset;         // character set being used
@@ -28,7 +27,7 @@ if (!class_exists('TNGPDF')) {
 
     function GetStringWidth($s) {
       //Get width of a string in the current font
-      $s = (string)$s;
+      $s = (string) $s;
       $w = 0;
       if ($this->charset == 'UTF-8') {
         $codepoints = $this->utf8_to_codepoints($s);

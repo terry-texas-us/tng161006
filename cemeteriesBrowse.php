@@ -59,6 +59,7 @@ function addCriteria($field, $value, $operator) {
   }
   return $criteria;
 }
+
 $frontmod = 'LIKE';
 $allwhere = 'WHERE 1=0';
 

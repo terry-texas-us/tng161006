@@ -10,8 +10,7 @@ if (!is_numeric($reportID)) {
   die('Sorry!');
 }
 
-function processfield($field)
-{
+function processfield($field) {
   global $need_families, $cejoins, $evfields, $people_table, $events_table, $familyfields_nonss;
 
   if (in_array($field, $familyfields_nonss)) {
@@ -32,6 +31,7 @@ function processfield($field)
   }
   return $newfield;
 }
+
 $ldsfields = ['baptdate', 'baptplace', 'confdate', 'confplace', 'initdate', 'initplace', 'endldate', 'endlplace', 'ssealdate', 'ssealplace', 'psealdate', 'psealplace'];
 
 $max_browsesearch_pages = 5;
@@ -180,9 +180,9 @@ if ($rrow['sqlselect']) {
       } elseif (in_array($dfield, $truedates)) {
         $displaystr .= "DATE_FORMAT($people_table.$dfield,'%d %b %Y') as $dfield" . '_disp';
       } elseif ($dfield == 'gedcom') {
-        $trees_join = ", $treesTable";
+        $trees_join = ', trees';
         if (!$dtreestr) {
-          $dtreestr = " $people_table.gedcom = $treesTable.gedcom";
+          $dtreestr = " $people_table.gedcom = trees.gedcom";
         }
         $displaystr .= 'treename';
         $displayfields[$i] = 'treename';

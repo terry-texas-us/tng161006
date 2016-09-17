@@ -60,6 +60,7 @@ function addCriteria($field, $value, $operator) {
   }
   return $criteria;
 }
+
 $allwhere = '1=1';
 if ($searchstring) {
   $allwhere .= ' AND (1=0 ';

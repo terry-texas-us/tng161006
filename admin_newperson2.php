@@ -36,6 +36,7 @@ function relateSelect($label) {
 
   return $pout;
 }
+
 header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <div id='newperson'>

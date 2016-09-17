@@ -56,5 +56,6 @@ class HeadElementSection {
     $this->out .= "</head>\n";
     
     return $this->out;
-  } 
+  }
+  
 }

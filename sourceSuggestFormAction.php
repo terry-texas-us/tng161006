@@ -46,7 +46,7 @@ $pagelink = "$tngwebsite/" . "sourcesShowSource.php?sourceID=$ID";
 tng_free_result($result);
 
 $subject = uiTextSnippet('proposed') . ": $name";
-$query = "SELECT email, owner FROM $treesTable";
+$query = 'SELECT email, owner FROM trees';
 $treeresult = tng_query($query);
 $treerow = tng_fetch_assoc($treeresult);
 tng_free_result($treeresult);

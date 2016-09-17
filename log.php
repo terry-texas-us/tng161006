@@ -1,7 +1,6 @@
 <?php
 
-function writelog($string)
-{
+function writelog($string) {
   global $currentuser;
   global $currentuserdesc;
   global $_SERVER;
@@ -86,8 +85,7 @@ function writelog($string)
   }
 }
 
-function getLock($ptr, $lockType)
-{
+function getLock($ptr, $lockType) {
   $locked = flock($ptr, $lockType);
   if (!$locked) {
     $counter = 0;
@@ -100,8 +98,7 @@ function getLock($ptr, $lockType)
   return $locked;
 }
 
-function preparebookmark($string)
-{
+function preparebookmark($string) {
   global $gotlastpage;
   $_SESSION['tnglastpage'] = $string;
   $gotlastpage = true;

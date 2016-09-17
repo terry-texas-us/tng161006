@@ -7,6 +7,7 @@ writelog($logstring);
 preparebookmark($logstring);
 
 $ucharset = strtoupper($session_charset);
+
 function substr_unicode($str, $start, $len = null) {
     return join('', array_slice(preg_split('//u', $str, -1, PREG_SPLIT_NO_EMPTY), $start, $len));
 }
@@ -45,14 +46,14 @@ $headSection->setTitle(uiTextSnippet('calendar'));
       : $current['year'];
 
     $dateString  = "$thisYear-$thisMonth-01 00:00:00";
-    $time    = strtotime($dateString);
+    $time = strtotime($dateString);
 
-    $startDay  = date('w', $time);
+    $startDay = date('w', $time);
 
     $daysInMonth  = date('t', $time);
     $daysOfWeek  = [uiTextSnippet('sunday'), uiTextSnippet('monday'), uiTextSnippet('tuesday'), uiTextSnippet('wednesday'), uiTextSnippet('thursday'), uiTextSnippet('friday'), uiTextSnippet('saturday')];
 
-    $thisMonthName  = uiTextSnippet(strtoupper(date('F', $time)));
+    $thisMonthName = uiTextSnippet(strtoupper(date('F', $time)));
 
     $nextMonth  = date('n', strtotime($dateString . ' +1 month'));
     $nextMonthYear  = $nextMonth == 1 ? $thisYear + 1 : $thisYear;

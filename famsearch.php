@@ -129,6 +129,7 @@ function buildCriteria($column, $colvar, $qualifyvar, $qualifier, $value, $texts
 
   addtoQuery($textstr, $colvar, $criteria, $qualifyvar, $qualifier, $qualifystr, $value);
 }
+
 $querystring = '';
 
 if ($myflastname || $flnqualify == 'exists' || $flnqualify == 'dnexist') {

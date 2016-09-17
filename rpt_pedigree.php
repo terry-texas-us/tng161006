@@ -559,6 +559,7 @@ function drawBoxLine($x, $y, $w, $num, $list) {
 }
 
 // returns the location of the horizontal line for prev gen
+
 function drawHusbWifeCombo($w, $num, $fh, $mh, $hsp, $vsp, $endspace = 0, $drawlines = 1, $listmode = 0, $boxmode = 0) {
   global $pdf, $lineheight;
 

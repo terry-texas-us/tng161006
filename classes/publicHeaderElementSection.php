@@ -23,4 +23,5 @@ class PublicHeaderElementSection extends HeaderElementSection {
     $this->out .= "</header>\n";
     return $this->out;
   }
+  
 }

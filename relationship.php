@@ -30,8 +30,7 @@ $maxupgen = $generations;
 
 $slot = 0;
 
-class Relationship
-{
+class Relationship {
 
   var $upcount = 0;
   var $downcount = 0;
@@ -560,6 +559,7 @@ function checkParent($parentrow, $parent, $spouse) {
 }
 
 //check ancestors of person1 to see if you find person2
+
 function checkpersonup($nextcouple) {
   global $maxupgen;
   global $gens;
@@ -652,6 +652,7 @@ function checkpersonup($nextcouple) {
 }
 
 //check descendants of person1 to see if you find person2
+
 function checkpersondown($checkpersonID) {
   global $targetID;
   global $maxupgen;

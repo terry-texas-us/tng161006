@@ -223,7 +223,7 @@ function trimCheckPersonRequired() {
   $dispid = '';
   $dispname = '';
 
-  getBranchInfo($treesTable, $branches_table, $dispid, $dispname);
+  getBranchInfo('trees', $branches_table, $dispid, $dispname);
   
   echo $dispid;
   echo $dispname;

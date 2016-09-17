@@ -94,7 +94,7 @@ function get_details(&$gens, $generation, $max_generations) {
 }
 
 function is_male($num) {
-  return (boolean)($num % 2);
+  return (boolean) ($num % 2);
 }
 
 function move_one_person(&$gens, $gen_num, $num) {
@@ -377,7 +377,7 @@ function do_chart($gens, $output = false) {
     }
     #vcontainer div.box {
     height:' . $chartBoxHeight . 'px;
-    padding-right:' . (int)($chartBoxVerticalSpacing / 2) . 'px;
+    padding-right:' . (int) ($chartBoxVerticalSpacing / 2) . 'px;
     }
     #vcontainer div.box div.inner {
     font-size: 0.75rem;

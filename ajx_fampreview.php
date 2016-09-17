@@ -239,6 +239,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
 
   return $indtext;
 }
+
 //get family
 $query = "SELECT familyID, husband, wife, living, private, marrdate, branch FROM $families_table WHERE familyID = '$familyID'";
 $result = tng_query($query);

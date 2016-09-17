@@ -57,7 +57,6 @@ function PasswordEncode($str, $name = null) {
   return false;  // error, something went wrong if we got this far
 }
 
-
 /*
  * PasswordCheck
  * Takes a password string $str, an encoded string $hash, and optionally the encryption method name $name, and returns:
@@ -103,7 +102,6 @@ function PasswordCheck($str, $hash, $name = null) {
     }
   }
 }
-
 
 /*
  * PasswordTypeList

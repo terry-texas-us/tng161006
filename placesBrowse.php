@@ -54,6 +54,7 @@ function addCriteria($field, $value, $operator) {
 
   return $criteria;
 }
+
 $allwhere = '1 = 1';
 if ($nocoords) {
   $allwhere .= ' AND (latitude IS NULL OR latitude = "" OR longitude IS NULL OR longitude = "")';

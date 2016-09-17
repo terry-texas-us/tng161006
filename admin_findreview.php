@@ -61,14 +61,14 @@ if ($reviewuser != '') {
 }
 if ($type == 'I') {
   $allwhere .= " AND $people_table.personID = $temp_events_table.personID AND (type = 'I' OR type = 'C')";
-  $query = "SELECT tempID, $temp_events_table.personID AS personID, lastname, firstname, lnprefix, prefix, suffix, nameorder, eventID, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") AS postdate, living, private, branch FROM $people_table, $treesTable, $temp_events_table WHERE $allwhere ORDER BY postdate DESC";
+  $query = "SELECT tempID, $temp_events_table.personID AS personID, lastname, firstname, lnprefix, prefix, suffix, nameorder, eventID, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") AS postdate, living, private, branch FROM $people_table, trees, $temp_events_table WHERE $allwhere ORDER BY postdate DESC";
   $returnpage = 'people.php';
-  $totquery = "SELECT count(tempID) AS tcount FROM $people_table, $treesTable, $temp_events_table WHERE $allwhere";
+  $totquery = "SELECT count(tempID) AS tcount FROM $people_table, trees, $temp_events_table WHERE $allwhere";
 } elseif ($type == 'F') {
   $allwhere .= " AND $families_table.familyID = $temp_events_table.familyID AND type = 'F'";
-  $query = "SELECT tempID, $temp_events_table.familyID AS familyID, husband, wife, eventID, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") AS postdate FROM $families_table, $treesTable, $temp_events_table WHERE $allwhere ORDER BY postdate DESC";
+  $query = "SELECT tempID, $temp_events_table.familyID AS familyID, husband, wife, eventID, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") AS postdate FROM $families_table, trees, $temp_events_table WHERE $allwhere ORDER BY postdate DESC";
   $returnpage = 'families.php';
-  $totquery = "SELECT count(tempID) AS tcount FROM $people_table, $treesTable, $temp_events_table WHERE $allwhere";
+  $totquery = "SELECT count(tempID) AS tcount FROM $people_table, trees, $temp_events_table WHERE $allwhere";
 }
 $result = tng_query($query);
 
@@ -118,7 +118,7 @@ $headSection->setTitle(uiTextSnippet('review'));
               <select name="reviewuser">
                 <?php
                 echo "  <option value=''>" . uiTextSnippet('allusers') . "</option>\n";
-                $query = "SELECT username, description FROM users ORDER BY description";
+                $query = 'SELECT username, description FROM users ORDER BY description';
                 $userresult = tng_query($query);
                 while ($userrow = tng_fetch_assoc($userresult)) {
                   echo "  <option value=\"{$userrow['username']}\"";

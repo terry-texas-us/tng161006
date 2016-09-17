@@ -11,7 +11,7 @@ if (!$allowAdd) {
   header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-$query = "SELECT count(userID) AS ucount FROM users";
+$query = 'SELECT count(userID) AS ucount FROM users';
 $result = tng_query($query);
 if ($result) {
   $row = tng_fetch_assoc($result);

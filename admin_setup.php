@@ -29,7 +29,7 @@ if ($link) {
 }
 require 'version.php';
 
-$error_reporting = ((int)ini_get('error_reporting')) & E_NOTICE;
+$error_reporting = ((int) ini_get('error_reporting')) & E_NOTICE;
 
 if (!$sub) {
   $sub = 'configuration';

@@ -1,4 +1,5 @@
 <?php
+
 function reorderMedia($query, $plink, $mediatypeID) {
   global $medialinks_table;
   global $media_table;

@@ -5,8 +5,7 @@ if (!class_exists('UFPDF')) {
 
   include_once 'fpdf.php';
 
-  class UFPDF extends FPDF
-  {
+  class UFPDF extends FPDF {
 
     function UFPDF($orientation = 'P', $unit = 'mm', $format = 'A4') {
       FPDF::FPDF($orientation, $unit, $format);
@@ -14,7 +13,7 @@ if (!class_exists('UFPDF')) {
 
     function GetStringWidth($s) {
       //Get width of a string in the current font
-      $s = (string)$s;
+      $s = (string) $s;
       $codepoints = $this->utf8_to_codepoints($s);
       $cw = &$this->CurrentFont['cw'];
       $w = 0;
@@ -267,6 +266,7 @@ if (!class_exists('UFPDF')) {
 
     // UTF-8 to UTF-16BE conversion.
     // Correctly handles all illegal UTF-8 sequences.
+    
     function utf8_to_utf16be(&$txt, $bom = true) {
       $l = strlen($txt);
       $out = $bom ? "\xFE\xFF" : '';
@@ -373,6 +373,7 @@ if (!class_exists('UFPDF')) {
 
     // UTF-8 to codepoint array conversion.
     // Correctly handles all illegal UTF-8 sequences.
+    
     function utf8_to_codepoints(&$txt) {
       $l = strlen($txt);
       $out = [];

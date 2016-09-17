@@ -1,8 +1,7 @@
 <?php
 require 'tng_begin.php';
 
-function showFact($text, $fact, $numflag = 0)
-{
+function showFact($text, $fact, $numflag = 0) {
   echo "<tr>\n";
   echo '<td>' . $text . "</td>\n";
   echo "<td colspan='2' ";
@@ -13,7 +12,7 @@ function showFact($text, $fact, $numflag = 0)
   echo "</tr>\n";
 }
 
-$result = tng_query("SELECT gedcom, treename, description, owner, secret, address, email, city, state, zip, country, phone FROM $treesTable");
+$result = tng_query('SELECT gedcom, treename, description, owner, secret, address, email, city, state, zip, country, phone FROM trees');
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
 
@@ -46,17 +45,17 @@ $headSection->setTitle(uiTextSnippet('tree') . ': ' . $row['treename']);
         $presult = tng_query("SELECT count(personID) AS pcount FROM $people_table");
         $prow = tng_fetch_assoc($presult);
         tng_free_result($presult);
-        showFact(uiTextSnippet('individuals'), $prow['pcount'], true);
-
+        showFact(uiTextSnippet('individuals'), "<a href='search.php'>" . number_format($prow['pcount']) . '</a>');
+          
         $fresult = tng_query("SELECT count(familyID) AS fcount FROM $families_table");
         $frow = tng_fetch_assoc($fresult);
         tng_free_result($fresult);
-        showFact(uiTextSnippet('families'), $frow['fcount'], true);
+        showFact(uiTextSnippet('families'), "<a href='famsearch.php'>" . number_format($frow['fcount']) . '</a>');
 
         $sresult = tng_query("SELECT count(sourceID) AS scount FROM $sources_table");
         $srow = tng_fetch_assoc($sresult);
         tng_free_result($sresult);
-        showFact(uiTextSnippet('sources'), $srcrow['scount'], true);
+        showFact(uiTextSnippet('sources'), "<a href='sourcesShow.php'>" . number_format($srow['scount']) . '</a>');
 
         if (!$row['secret']) {
           if ($row['owner']) {

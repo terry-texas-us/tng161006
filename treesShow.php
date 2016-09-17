@@ -3,7 +3,7 @@ require 'tng_begin.php';
 
 require 'functions.php';
 
-$query = "SELECT gedcom, treename, description FROM $treesTable";
+$query = 'SELECT gedcom, treename, description FROM trees';
 $result = tng_query($query);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);

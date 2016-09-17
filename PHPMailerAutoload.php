@@ -7,6 +7,7 @@ function PHPMailerAutoload($classname) {
     include $filename;
   }
 }
+
 if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
   //SPL autoloading was introduced in PHP 5.1.2
   if (version_compare(PHP_VERSION, '5.3.0', '>=')) {
@@ -19,4 +20,5 @@ if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
   function __autoload($classname) {
     PHPMailerAutoload($classname);
   }
+  
 }

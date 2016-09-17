@@ -56,6 +56,7 @@ function doRow($table_name, $display_name) {
   echo "<td><span id=\"msg_$table_name\"></span>&nbsp;</td>\n";
   echo "</tr>\n";
 }
+
 if (!$sub) {
   $sub = 'tables';
 }
@@ -138,7 +139,7 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
             doRow($states_table, uiTextSnippet('statestable'));
             doRow($temp_events_table, uiTextSnippet('temptable'));
             doRow($tlevents_table, uiTextSnippet('tleventstable'));
-            doRow($treesTable, uiTextSnippet('trees'));
+            doRow('trees', uiTextSnippet('trees'));
             doRow('users', uiTextSnippet('users'));
             ?>
           </table>

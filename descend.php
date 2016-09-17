@@ -36,6 +36,7 @@ function setTopMarker($level, $value, $debug) {
   //echo "level=$level, old=" . $topmarker[$level] . ", new=$value ($debug)<br>";
   $topmarker[$level] = $value;
 }
+
 $pedigree['cellpad'] = 5;
 $topmarker = [];
 $botmarker = [];
@@ -560,6 +561,7 @@ function getVitalDates($row) {
   }
   return $vitalinfo;
 }
+
 $level = 1;
 $key = $personID;
 

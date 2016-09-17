@@ -29,7 +29,7 @@ $phone = addslashes($phone);
 if (!$private) {
   $private = 0;
 }
-$query = "UPDATE $treesTable SET treename = '$treename', description = '$description', owner = '$owner', email = '$email', address = '$address', city = '$city', state = '$state', country = '$country', zip = '$zip', phone = '$phone', secret = '$private'";
+$query = "UPDATE trees SET treename = '$treename', description = '$description', owner = '$owner', email = '$email', address = '$address', city = '$city', state = '$state', country = '$country', zip = '$zip', phone = '$phone', secret = '$private'";
 $result = tng_query($query);
 
 adminwritelog("<a href='treesEdit.php'>" . uiTextSnippet('modifytree') . ": $tree</a>");

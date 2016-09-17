@@ -1,4 +1,5 @@
 <?php
+
 function countChildren($familyID) {
   global $children_table;
 

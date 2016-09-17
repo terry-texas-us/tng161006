@@ -1,7 +1,6 @@
 <?php
 
-function performQuery($query, $table = null)
-{
+function performQuery($query, $table = null) {
   global $badtables;
 
   $result = tng_query($query);
@@ -640,9 +639,9 @@ $query = "CREATE TABLE $tlevents_table (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $tlevents_table);
 
-$query = "DROP TABLE IF EXISTS $treesTable";
+$query = 'DROP TABLE IF EXISTS trees';
 $result = performQuery($query);
-$query = "CREATE TABLE $treesTable (
+$query = "CREATE TABLE trees (
     gedcom VARCHAR(20) NOT NULL,
     treename VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
@@ -661,9 +660,9 @@ $query = "CREATE TABLE $treesTable (
     importfilename VARCHAR(100) NOT NULL,
     PRIMARY KEY (gedcom)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $treesTable);
+$result = performQuery($query, trees);
 
-$query = "DROP TABLE IF EXISTS users";
+$query = 'DROP TABLE IF EXISTS users';
 $result = performQuery($query);
 $query = "CREATE TABLE users (
     userID INT(11) NOT NULL AUTO_INCREMENT,

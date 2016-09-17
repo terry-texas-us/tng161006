@@ -28,7 +28,6 @@ $events_table = "events";
 $eventtypes_table = "eventtypes";
 $rectangles_table = "";
 $reports_table = "reports";
-$treesTable = "trees";
 $notelinks_table = "notelinks";
 $xnotes_table = "xnotes";
 $saveimport_table = "saveimport";

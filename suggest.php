@@ -1,7 +1,6 @@
 <?php
 
-function getCurrentUserEmail($currentUser)
-{
+function getCurrentUserEmail($currentUser) {
   $out = '';
   if ($currentUser) {
     $query = "SELECT email FROM users WHERE username='$currentUser'";
@@ -13,8 +12,7 @@ function getCurrentUserEmail($currentUser)
   return $out;
 }
 
-function killBlockedAddress($address)
-{
+function killBlockedAddress($address) {
   global $addr_exclude;
   
   if ($addr_exclude) {
@@ -30,8 +28,7 @@ function killBlockedAddress($address)
   return false;
 }
 
-function killBlockedMessageContent($comments)
-{
+function killBlockedMessageContent($comments) {
   global $msg_exclude;
   
   if ($msg_exclude) {
@@ -46,8 +43,7 @@ function killBlockedMessageContent($comments)
   }
 }
 
-function echoResponseMessage($message, $sowner, $ssendemail)
-{
+function echoResponseMessage($message, $sowner, $ssendemail) {
   if ($message) {
     $newmessage = uiTextSnippet($message);
     if ($message == 'mailsent') {

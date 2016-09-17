@@ -17,6 +17,7 @@ class NavElementSection {
   public function __construct($id) {
     $this->id = $id;
   }
+  
   public function __set($name, $value) {
     $this->data[$name] = $value;
   }

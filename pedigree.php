@@ -339,6 +339,7 @@ function showBox($generation, $slot) {
     showBox($generation, $nextslot);
   }
 }
+
 if (!$tngprint) {
   $tngprint = 0;
 }

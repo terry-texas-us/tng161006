@@ -55,8 +55,7 @@ if ($offset) {
   $tngpage = 1;
 }
 
-function addCriteria($field, $value, $operator)
-{
+function addCriteria($field, $value, $operator) {
   $criteria = '';
 
   if ($operator == '=') {

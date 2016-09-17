@@ -30,7 +30,6 @@ function doMedia($mediatypeID) {
   global $citations_table;
   global $nonames;
   global $people_table;
-  global $treesTable;
   global $cemeteries_table;
   global $livedefault;
   global $wherestr2;
@@ -47,7 +46,7 @@ function doMedia($mediatypeID) {
   $mediaresult = tng_query($query);
 
   while ($row = tng_fetch_assoc($mediaresult)) {
-    $query = "SELECT medialinkID, $medialinks_table.personID AS personID, $medialinks_table.eventID, people.personID AS personID2, familyID, people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.suffix AS suffix, nameorder, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID,reponame, deathdate, burialdate, linktype FROM ($medialinks_table, $treesTable) LEFT JOIN $people_table AS people ON ($medialinks_table.personID = people.personID) LEFT JOIN $families_table ON ($medialinks_table.personID = $families_table.familyID) LEFT JOIN $sources_table ON ($medialinks_table.personID = $sources_table.sourceID) LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID) WHERE mediaID = '{$row['mediaID']}' $wherestr2 ORDER BY lastname, lnprefix, firstname, $medialinks_table.personID";
+    $query = "SELECT medialinkID, $medialinks_table.personID AS personID, $medialinks_table.eventID, people.personID AS personID2, familyID, people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.suffix AS suffix, nameorder, $sources_table.title, $sources_table.sourceID, $repositories_table.repoID,reponame, deathdate, burialdate, linktype FROM ($medialinks_table, trees) LEFT JOIN $people_table AS people ON ($medialinks_table.personID = people.personID) LEFT JOIN $families_table ON ($medialinks_table.personID = $families_table.familyID) LEFT JOIN $sources_table ON ($medialinks_table.personID = $sources_table.sourceID) LEFT JOIN $repositories_table ON ($medialinks_table.personID = $repositories_table.repoID) WHERE mediaID = '{$row['mediaID']}' $wherestr2 ORDER BY lastname, lnprefix, firstname, $medialinks_table.personID";
     $presult = tng_query($query);
     $foundliving = 0;
     $foundprivate = 0;
@@ -222,7 +221,7 @@ if ($more) {
 }
 
 if (!$familyID) {    // if a family is NOT specified (ie: we are looking for a personID or the What's New
-  $query = "SELECT p.personID, lastname, lnprefix, firstname, birthdate, prefix, suffix, nameorder, living, private, branch, DATE_FORMAT(changedate,'%e %b %Y') AS changedatef, changedby, LPAD(SUBSTRING_INDEX(birthdate, ' ', -1),4,'0') AS birthyear, birthplace, altbirthdate, LPAD(SUBSTRING_INDEX(altbirthdate, ' ', -1),4,'0') AS altbirthyear, altbirthplace FROM $people_table as p, $treesTable WHERE $cutoffstr $allwhere ORDER BY changedate DESC, lastname, firstname, birthyear, altbirthyear LIMIT $change_limit";
+  $query = "SELECT p.personID, lastname, lnprefix, firstname, birthdate, prefix, suffix, nameorder, living, private, branch, DATE_FORMAT(changedate,'%e %b %Y') AS changedatef, changedby, LPAD(SUBSTRING_INDEX(birthdate, ' ', -1),4,'0') AS birthyear, birthplace, altbirthdate, LPAD(SUBSTRING_INDEX(altbirthdate, ' ', -1),4,'0') AS altbirthyear, altbirthplace FROM $people_table as p, trees WHERE $cutoffstr $allwhere ORDER BY changedate DESC, lastname, firstname, birthyear, altbirthyear LIMIT $change_limit";
   $result = tng_query($query);
   $numrows = tng_num_rows($result);
   if ($numrows) {

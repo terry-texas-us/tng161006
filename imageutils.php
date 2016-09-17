@@ -1,4 +1,5 @@
 <?php
+
 function chkgd2() {
   $testGD = get_extension_funcs('gd'); // Grab function list
   if (!$testGD) {
@@ -154,7 +155,7 @@ function tngImageFlip(&$image, $x = 0, $y = 0, $width = null, $height = null) {
     $tmp = imagecreate(1, $height);
   }
   $x2 = $x + $width - 1;
-  for ($i = (int)floor(($width - 1) / 2); $i >= 0; $i--) {
+  for ($i = (int) floor(($width - 1) / 2); $i >= 0; $i--) {
     // Backup right stripe.
     imagecopy($tmp, $image, 0, 0, $x2 - $i, $y, 1, $height);
 

@@ -288,7 +288,7 @@ switch ($t) {
       $result = tng_query($query);
     }
 
-    $query = "DELETE FROM $treesTable WHERE gedcom='$id'";
+    $query = "DELETE FROM trees WHERE gedcom='$id'";
     $result = tng_query($query);
 
     $query = "DELETE FROM $branches_table WHERE gedcom = '$id'";

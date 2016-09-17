@@ -1,4 +1,5 @@
 <?php
+
 function handleSource($persfamID, $prevlevel) {
   global $lineinfo;
   global $savestate;

@@ -42,7 +42,7 @@ $name = $ID;
 $pagelink = "$tngwebsite/" . 'placesearch.php?psearch=' . urlencode($name);
 
 $subject = uiTextSnippet('proposed') . ": $name";
-$query = "SELECT treename, email, owner FROM $treesTable";
+$query = 'SELECT treename, email, owner FROM trees';
 $treeresult = tng_query($query);
 $treerow = tng_fetch_assoc($treeresult);
 tng_free_result($treeresult);

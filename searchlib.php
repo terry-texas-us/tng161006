@@ -3,8 +3,7 @@
 $criteria_limit = 8;
 $criteria_count = 0;
 
-function buildColumn($qualifier, $column, $usevalue)
-{
+function buildColumn($qualifier, $column, $usevalue) {
   $criteria = '';
   switch ($qualifier) {
     case 'equals':

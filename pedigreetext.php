@@ -219,6 +219,7 @@ function displayIndividual($key, $generation, $slot) {
     displayIndividual($wife, $generation, $nextslot);
   }
 }
+
 $result = getPersonFullPlusDates($personID);
 if ($result) {
   $row = tng_fetch_assoc($result);

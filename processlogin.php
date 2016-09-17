@@ -48,7 +48,7 @@ if ($check) {
       $newdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
       if ($resetpass && $newpassword && $row['allow_profile']) {
         $password_type = PasswordType();
-        $query = "UPDATE users SET password=\"" . PasswordEncode($newpassword) . "\", lastlogin=\"$newdate\", password_type=\"$password_type\" WHERE userID=\"{$row['userID']}\"";
+        $query = 'UPDATE users SET password="' . PasswordEncode($newpassword) . "\", lastlogin=\"$newdate\", password_type=\"$password_type\" WHERE userID=\"{$row['userID']}\"";
       } else {
         $query = "UPDATE users SET lastlogin=\"$newdate\" WHERE userID=\"{$row['userID']}\"";
       }

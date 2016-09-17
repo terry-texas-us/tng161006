@@ -43,4 +43,5 @@ class HeaderElementSection {
   public function setImageUrl($imageUrl) {
     $this->imageUrl = $imageUrl;
   }
+  
 }

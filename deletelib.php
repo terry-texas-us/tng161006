@@ -1,4 +1,5 @@
 <?php
+
 function deleteNoteLinks($id) {
   global $notelinks_table;
 

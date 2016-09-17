@@ -24,8 +24,7 @@
 # Obviously, since this code is in the public domain, the above are not
 # requirements (there can be none), but merely suggestions.
 #
-class PasswordHash
-{
+class PasswordHash {
   var $itoa64;
   var $iteration_count_log2;
   var $portable_hashes;
@@ -254,4 +253,5 @@ class PasswordHash
 
     return $hash == $stored_hash;
   }
+  
 }

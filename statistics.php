@@ -27,7 +27,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
         </tr>
       </thead>
       <?php
-      $query = "SELECT lastimportdate, treename, secret FROM $treesTable";
+      $query = 'SELECT lastimportdate, treename, secret FROM trees';
       $result = tng_query($query);
       $treerow = tng_fetch_array($result, 'assoc');
       $lastimportdate = $treerow['lastimportdate'];

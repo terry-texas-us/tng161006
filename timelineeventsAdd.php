@@ -28,6 +28,7 @@ $headSection->setTitle(uiTextSnippet('addnewtlevent'));
     ?>
     <form name='form1' action='timelineeventsAddFormAction.php' method='post' onSubmit="return validateForm();">
       <table class='table table-sm'>
+        
         <?php function doEventRow($label, $dayname, $monthname, $yearname, $help) { ?>
           <tr>
             <td><?php echo $label; ?>:</td>
@@ -61,6 +62,7 @@ $headSection->setTitle(uiTextSnippet('addnewtlevent'));
           </tr>
           <?php
         }
+        
         doEventRow(uiTextSnippet('startdt'), 'evday', 'evmonth', 'evyear', uiTextSnippet('yrreq'));
         doEventRow(uiTextSnippet('enddt'), 'endday', 'endmonth', 'endyear', '');
         ?>

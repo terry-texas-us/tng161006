@@ -273,6 +273,7 @@ function checkbranch($branch) {
 
   return (!$assignedbranch || (false !== ($pos = strpos($branch, $assignedbranch, 0)))) ? 1 : 0;
 }
+
 /**
  * The following function is now obsolete
  */

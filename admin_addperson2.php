@@ -191,8 +191,6 @@ if ($result && tng_num_rows($result)) {
     $name = getName($row);
     $name = preg_replace('/\"/', '\\\"', $name);
     echo "{\"id\":\"{$row['personID']}\",\"name\":\"$name\"}";
-  } else {
-
   }
   adminwritelog("<a href=\"peopleEdit.php?personID=$personID\">" . uiTextSnippet('addnewperson') . ": $personID</a>");
   if ($needped) {

@@ -40,6 +40,7 @@ function getBirth($row) {
   }
   return $birthdate;
 }
+
 $rightbranch = checkbranch($row['branch']);
 $rights = determineLivingPrivateRights($row, $rightbranch);
 $row['allow_living'] = $rights['living'];

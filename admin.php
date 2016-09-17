@@ -17,6 +17,7 @@ function adminMenuItem($destination, $label, $message, $icon) {
 
   return $menu;
 }
+
 $genmsg = $mediamsg = '';
 if ($allowAdd) {
   $genmsg .= uiTextSnippet('add') . ' | ';

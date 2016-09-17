@@ -1,4 +1,5 @@
 <?php
+
 function getPhotoSrc($persfamID, $living, $gender) {
   global $rootpath;
   global $photopath;
