@@ -51,13 +51,13 @@ if ($cemeteryID) {
   }
 }
 if ($subquery) {
-  $query = "SELECT * FROM $cemeteries_table $subquery ORDER BY country, state, county, city, cemname LIMIT $cemnewoffset" . $max_cemeteries;
+  $query = "SELECT * FROM cemeteries $subquery ORDER BY country, state, county, city, cemname LIMIT $cemnewoffset" . $max_cemeteries;
   $cemresult = tng_query($query);
 
   $numrows = tng_num_rows($cemresult);
 
   if ($numrows == $max_cemeteries || $cemoffsetplus > 1) {
-    $query = "SELECT count(cemeteryID) AS ccount FROM $cemeteries_table $subquery";
+    $query = "SELECT count(cemeteryID) AS ccount FROM cemeteries $subquery";
     $result2 = tng_query($query);
     $row = tng_fetch_assoc($result2);
     tng_free_result($result2);

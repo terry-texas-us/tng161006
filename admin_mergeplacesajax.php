@@ -110,7 +110,7 @@ foreach ($mergelist as $val) {
     }
 
     //cemeteries
-    $query = "UPDATE $cemeteries_table SET place = '$newplace' WHERE place = '$oldplace'";
+    $query = "UPDATE cemeteries SET place = '$newplace' WHERE place = '$oldplace'";
     $result = tng_query($query);
   }
 }

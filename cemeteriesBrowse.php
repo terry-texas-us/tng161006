@@ -63,7 +63,7 @@ function addCriteria($field, $value, $operator) {
 $frontmod = 'LIKE';
 $allwhere = 'WHERE 1=0';
 
-$allwhere .= addCriteria("$cemeteries_table.cemeteryID", $searchstring, $frontmod);
+$allwhere .= addCriteria('cemeteries.cemeteryID', $searchstring, $frontmod);
 $allwhere .= addCriteria('maplink', $searchstring, $frontmod);
 $allwhere .= addCriteria('cemname', $searchstring, $frontmod);
 $allwhere .= addCriteria('city', $searchstring, $frontmod);
@@ -71,12 +71,12 @@ $allwhere .= addCriteria('state', $searchstring, $frontmod);
 $allwhere .= addCriteria('county', $searchstring, $frontmod);
 $allwhere .= addCriteria('country', $searchstring, $frontmod);
 
-$query = "SELECT cemeteryID,cemname,city,county,state,country,latitude,longitude,zoom FROM $cemeteries_table $allwhere ORDER BY cemname, city, county, state, country LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT cemeteryID,cemname,city,county,state,country,latitude,longitude,zoom FROM cemeteries $allwhere ORDER BY cemname, city, county, state, country LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(cemeteryID) AS ccount FROM $cemeteries_table $allwhere";
+  $query = "SELECT count(cemeteryID) AS ccount FROM cemeteries $allwhere";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['ccount'];

@@ -166,10 +166,6 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td>
               <table class='table table-sm'>
                 <tr>
-                  <td><?php echo uiTextSnippet('cemeteries'); ?>:</td>
-                  <td><input name='cemeteries_table' type='text' value="<?php echo $cemeteries_table; ?>"></td>
-                </tr>
-                <tr>
                   <td><?php echo uiTextSnippet('citations'); ?>:</td>
                   <td><input name='citations_table' type='text' value="<?php echo $citations_table; ?>"></td>
                 </tr>

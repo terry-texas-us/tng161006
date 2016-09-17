@@ -67,7 +67,6 @@ fwrite($fp, "\$medialinks_table = \"$medialinks_table\";\n");
 fwrite($fp, "\$mediatypes_table = \"$mediatypes_table\";\n");
 fwrite($fp, "\$address_table = \"$address_table\";\n");
 fwrite($fp, "\$languagesTable = \"$languagesTable\";\n");
-fwrite($fp, "\$cemeteries_table = \"$cemeteries_table\";\n");
 
 fwrite($fp, "\$citations_table = \"$citations_table\";\n");
 fwrite($fp, "\$events_table = \"$events_table\";\n");

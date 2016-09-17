@@ -15,7 +15,7 @@ if (!$allowEdit) {
 
 $tng_search_cemeteries = $_SESSION['tng_search_cemeteries'];
 
-$query = "SELECT * FROM $cemeteries_table WHERE cemeteryID = '$cemeteryID'";
+$query = "SELECT * FROM cemeteries WHERE cemeteryID = '$cemeteryID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);

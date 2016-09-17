@@ -58,7 +58,7 @@ if ($xsrcaction) {
   $id = 'branch';
   $location = 'branchesBrowse.php';
 } elseif ($xcemaction) {
-  $query = "DELETE FROM $cemeteries_table";
+  $query = 'DELETE FROM cemeteries';
   $modmsg = 'cemeteries';
   $id = 'cemeteryID';
   $location = 'cemeteriesBrowse.php';
@@ -155,7 +155,7 @@ foreach (array_keys($_POST) as $key) {
       $items[] = $branch;
       include 'branchlib.php';
     } elseif ($xcemaction) {
-      $query3 = "SELECT cemname FROM $cemeteries_table WHERE cemeteryID = '$thisid'";
+      $query3 = "SELECT cemname FROM cemeteries WHERE cemeteryID = '$thisid'";
       $result3 = tng_query($query3);
       $crow = tng_fetch_assoc($result3);
       tng_free_result($result3);

@@ -120,9 +120,9 @@ $query = "CREATE TABLE $branchlinks_table (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $branchlinks_table);
 
-$query = "DROP TABLE IF EXISTS $cemeteries_table";
+$query = 'DROP TABLE IF EXISTS cemeteries';
 $result = performQuery($query);
-$query = "CREATE TABLE $cemeteries_table (
+$query = "CREATE TABLE cemeteries (
     cemeteryID INT(11) NOT NULL AUTO_INCREMENT,
     cemname VARCHAR(64) NOT NULL,
     maplink VARCHAR(255) NOT NULL,
@@ -139,7 +139,7 @@ $query = "CREATE TABLE $cemeteries_table (
     INDEX cemname (cemname),
     INDEX place (place)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $cemeteries_table);
+$result = performQuery($query, 'cemeteries');
 
 $query = "DROP TABLE IF EXISTS $children_table";
 $result = performQuery($query);

@@ -28,7 +28,6 @@ function doMedia($mediatypeID) {
   global $citations_table;
   global $nonames;
   global $people_table;
-  global $cemeteries_table;
   global $livedefault;
   global $wherestr2;
   global $events_table;
@@ -36,7 +35,7 @@ function doMedia($mediatypeID) {
 
   if ($mediatypeID == 'headstones') {
     $hsfields = ", $media_table.cemeteryID, cemname";
-    $hsjoin = "LEFT JOIN $cemeteries_table ON $media_table.cemeteryID = $cemeteries_table.cemeteryID";
+    $hsjoin = "LEFT JOIN cemeteries ON $media_table.cemeteryID = cemeteries.cemeteryID";
   } else {
     $hsfields = $hsjoin = '';
   }

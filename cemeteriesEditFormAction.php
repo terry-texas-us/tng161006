@@ -45,7 +45,7 @@ if ($latitude && $longitude && !$zoom) {
 if (!$zoom) {
   $zoom = 0;
 }
-$query = "UPDATE $cemeteries_table SET cemname = '$cemname', maplink = '$maplink', city = '$city', county = '$county', state = '$state', country = '$country', latitude = '$latitude', longitude = '$longitude', zoom = '$zoom', notes = '$notes', place = '$place' WHERE cemeteryID = '$cemeteryID'";
+$query = "UPDATE cemeteries SET cemname = '$cemname', maplink = '$maplink', city = '$city', county = '$county', state = '$state', country = '$country', latitude = '$latitude', longitude = '$longitude', zoom = '$zoom', notes = '$notes', place = '$place' WHERE cemeteryID = '$cemeteryID'";
 $result = tng_query($query);
 
 $place = trim($place);

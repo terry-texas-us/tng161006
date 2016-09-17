@@ -45,7 +45,7 @@ if ($latitude && $longitude && !$zoom) {
 if (!$zoom) {
   $zoom = 0;
 }
-$query = "INSERT INTO $cemeteries_table (cemname, maplink, city, county, state, country, latitude, longitude, zoom, notes, place) VALUES ('$cemname', '$maplink', '$city', '$county', '$state', '$country', '$latitude', '$longitude', '$zoom', '$notes', '$place')";
+$query = "INSERT INTO cemeteries (cemname, maplink, city, county, state, country, latitude, longitude, zoom, notes, place) VALUES ('$cemname', '$maplink', '$city', '$county', '$state', '$country', '$latitude', '$longitude', '$zoom', '$notes', '$place')";
 $result = tng_query($query);
 $cemeteryID = tng_insert_id();
 

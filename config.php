@@ -17,7 +17,6 @@ $medialinks_table = "medialinks";
 $mediatypes_table = "mediatypes";
 $address_table = "addresses";
 $languagesTable = "languages";
-$cemeteries_table = "cemeteries";
 $citations_table = "citations";
 $events_table = "events";
 $eventtypes_table = "eventtypes";

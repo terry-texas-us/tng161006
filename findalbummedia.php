@@ -59,7 +59,7 @@ header('Content-type:text/html; charset=' . $session_charset);
             <select name='cemeteryID' onchange="getNewMedia(document.find2, 0)" style='width: 380px'>
               <option selected></option>
               <?php
-              $query = "SELECT cemname, cemeteryID, city, county, state, country FROM $cemeteries_table ORDER BY country, state, county, city, cemname";
+              $query = "SELECT cemname, cemeteryID, city, county, state, country FROM cemeteries ORDER BY country, state, county, city, cemname";
               $cemresult = tng_query($query);
               while ($cemrow = tng_fetch_assoc($cemresult)) {
                 $cemetery = "{$cemrow['country']}, {$cemrow['state']}, {$cemrow['county']}, {$cemrow['city']}, {$cemrow['cemname']}";

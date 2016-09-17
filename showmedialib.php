@@ -576,7 +576,6 @@ function showTable($imgrow, $medialinktext, $albumlinktext) {
 }
 
 function doCemPlusMap($imgrow) {
-  global $cemeteries_table;
   global $media_table;
   global $rootpath;
   global $headstonepath;
@@ -584,7 +583,7 @@ function doCemPlusMap($imgrow) {
   global $mediapath;
   global $thumbmaxw;
 
-  $query = "SELECT cemname, city, county, state, country, maplink, notes FROM $cemeteries_table WHERE cemeteryID = \"{$imgrow['cemeteryID']}\"";
+  $query = "SELECT cemname, city, county, state, country, maplink, notes FROM cemeteries WHERE cemeteryID = \"{$imgrow['cemeteryID']}\"";
   $cemresult = tng_query($query);
   $cemetery = tng_fetch_assoc($cemresult);
   tng_free_result($cemresult);

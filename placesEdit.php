@@ -111,7 +111,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
                 <tbody id="cemeteriestblbody">
                 <?php
                 //get cemeteries with no place assoc
-                $query = "SELECT cemeteryID, cemname, city, county, state, country FROM $cemeteries_table WHERE place = \"{$row['place']}\" ORDER BY cemname";
+                $query = "SELECT cemeteryID, cemname, city, county, state, country FROM cemeteries WHERE place = \"{$row['place']}\" ORDER BY cemname";
                 $cemresult = tng_query($query);
                 while ($cemrow = tng_fetch_assoc($cemresult)) {
                   $location = $cemrow['cemname'];

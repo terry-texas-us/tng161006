@@ -78,12 +78,22 @@ function doMedia($mediatypeID) {
   global $nonames;
   global $people_table;
   global $currentuser;
-  global $rootpath, $mediapath, $header, $footer, $cemeteries_table, $mediatypes_assoc, $mediatypes_display;
-  global $whatsnew, $thumbmaxw, $events_table, $eventtypes_table, $altstr, $tngconfig;
+  global $rootpath;
+  global $mediapath;
+  global $header;
+  global $footer;
+  global $mediatypes_assoc;
+  global $mediatypes_display;
+  global $whatsnew;
+  global $thumbmaxw;
+  global $events_table;
+  global $eventtypes_table;
+  global $altstr;
+  global $tngconfig;
 
   if ($mediatypeID == 'headstones') {
     $hsfields = ", $media_table.cemeteryID, cemname, city";
-    $hsjoin = "LEFT JOIN $cemeteries_table ON $media_table.cemeteryID = $cemeteries_table.cemeteryID";
+    $hsjoin = "LEFT JOIN cemeteries ON $media_table.cemeteryID = cemeteries.cemeteryID";
   } else {
     $hsfields = $hsjoin = '';
   }

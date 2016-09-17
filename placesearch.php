@@ -128,7 +128,7 @@ $headSection->setTitle($psearchns);
       echo "$media\n";
       echo "</div>\n";
     }
-    $pquery = "SELECT cemname, city, county, state, country, cemeteryID FROM $cemeteries_table WHERE place = \"$psearch\"";
+    $pquery = "SELECT cemname, city, county, state, country, cemeteryID FROM cemeteries WHERE place = \"$psearch\"";
     $presult = tng_query($pquery) or die(uiTextSnippet('cannotexecutequery') . ": $pquery");
     $cemdata = '';
     $i = 1;

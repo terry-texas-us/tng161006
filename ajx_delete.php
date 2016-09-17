@@ -185,12 +185,12 @@ switch ($t) {
     $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('place') . " $place";
     break;
   case 'cemetery':
-    $query = "SELECT maplink FROM $cemeteries_table WHERE cemeteryID = '$id'";
+    $query = "SELECT maplink FROM cemeteries WHERE cemeteryID = '$id'";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
     tng_free_result($result);
 
-    $query = "DELETE FROM $cemeteries_table WHERE cemeteryID = '$id'";
+    $query = "DELETE FROM cemeteries WHERE cemeteryID = '$id'";
     $result = tng_query($query);
 
     $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('cemetery') . " $id";
@@ -333,7 +333,7 @@ switch ($t) {
     $logmsg = uiTextSnippet('deleted') . ": $id.";
     break;
   case 'cemlink':
-    $query = "UPDATE $cemeteries_table SET place='' WHERE cemeteryID = '$id'";
+    $query = "UPDATE cemeteries SET place='' WHERE cemeteryID = '$id'";
     $result = tng_query($query);
     break;
 }

@@ -23,7 +23,7 @@ if ($offset) {
   $page = 1;
 }
 if ($cemeteryID) {
-  $query = "SELECT cemname, city, county, state, country, maplink, notes, latitude, longitude, zoom, place FROM $cemeteries_table WHERE cemeteryID = '$cemeteryID'";
+  $query = "SELECT cemname, city, county, state, country, maplink, notes, latitude, longitude, zoom, place FROM cemeteries WHERE cemeteryID = '$cemeteryID'";
   $cemresult = tng_query($query);
 
   if (!tng_num_rows($cemresult)) {

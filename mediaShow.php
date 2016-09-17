@@ -21,7 +21,7 @@ if ($orgmediatypeID) {
   $titlestr = uiTextSnippet($mediatypeID) ? uiTextSnippet($mediatypeID) : $mediatypes_display[$mediatypeID];
   if ($orgmediatypeID == 'headstones') {
     $hsfields = ", $media_table.cemeteryID, cemname, city";
-    $hsjoin = "LEFT JOIN $cemeteries_table ON $media_table.cemeteryID = $cemeteries_table.cemeteryID";
+    $hsjoin = "LEFT JOIN cemeteries ON $media_table.cemeteryID = cemeteries.cemeteryID";
   } else {
     $hsfields = $hsjoin = '';
   }

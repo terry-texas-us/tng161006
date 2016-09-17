@@ -50,7 +50,7 @@ if ($exactmatch == 'yes') {
 $allwhere = 'WHERE 1=0';
 
 if ($cemeteryID == 'yes') {
-  $allwhere .= addCriteria("$cemeteries_table.cemeteryID", $searchstring, $frontmod);
+  $allwhere .= addCriteria("cemeteries.cemeteryID", $searchstring, $frontmod);
 }
 
 if ($maplink == 'yes') {
@@ -76,7 +76,7 @@ if ($county == 'yes') {
 if ($country == 'yes') {
   $allwhere .= addCriteria('country', $searchstring, $frontmod);
 }
-$query = "SELECT cemeteryID,cemname,city,county,state,country FROM $cemeteries_table $allwhere ORDER BY cemname, city, county, state, country";
+$query = "SELECT cemeteryID,cemname,city,county,state,country FROM cemeteries $allwhere ORDER BY cemname, city, county, state, country";
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
