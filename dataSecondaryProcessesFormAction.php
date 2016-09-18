@@ -193,7 +193,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         echo '<br><br>' . uiTextSnippet('finishedtracking') . '<br>';
       } elseif ($secaction == uiTextSnippet('relabelbranches')) {
         echo '<p>' . uiTextSnippet('relabeling') . '</p>';
-        $query = "SELECT branch, persfamID FROM $branchlinks_table";
+        $query = 'SELECT branch, persfamID FROM branchlinks';
         $result = tng_query($query);
         while ($branch = tng_fetch_assoc($result)) {
           $success = 0;

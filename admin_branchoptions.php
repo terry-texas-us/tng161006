@@ -6,7 +6,7 @@ require 'adminlib.php';
 $adminLogin = 1;
 require 'checklogin.php';
 
-$query = "SELECT branch, description FROM $branches_table";
+$query = 'SELECT branch, description FROM branches';
 $result = tng_query($query);
 $numrows = tng_num_rows($result);
 

@@ -291,10 +291,10 @@ switch ($t) {
     $query = "DELETE FROM trees WHERE gedcom='$id'";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $branches_table WHERE gedcom = '$id'";
+    $query = "DELETE FROM branches WHERE gedcom = '$id'";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $branchlinks_table WHERE gedcom = '$id'";
+    $query = "DELETE FROM branchlinks WHERE gedcom = '$id'";
     $result = tng_query($query);
 
     $query = "UPDATE users SET allow_living = '-1' WHERE gedcom = '$id'";

@@ -244,7 +244,7 @@ $headSection->setTitle(uiTextSnippet('modifyuser'));
           </div>
           <div class='col-sm-3'>
             <?php
-            $query = "SELECT branch, gedcom, description FROM $branches_table ORDER BY description";
+            $query = 'SELECT branch, gedcom, description FROM branches ORDER BY description';
             $branchresult = tng_query($query);
 
             echo "<select id='branch' name='branch' size='$selectnum'>\n";

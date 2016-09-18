@@ -274,9 +274,7 @@ function getPersonSimple($personID) {
 }
 
 function getBranchesSimple($branch) {
-  global $branches_table;
-
-  $query = "SELECT description FROM $branches_table WHERE branch = '$branch'";
+  $query = "SELECT description FROM branches WHERE branch = '$branch'";
 
   return tng_query($query);
 }

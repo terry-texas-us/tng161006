@@ -75,7 +75,7 @@ header('Content-type:text/html; charset=' . $session_charset);
         </div>
         <div class='col-md-6'>
           <?php require_once 'branches.php'; ?>
-          <?php echo buildBranchSelectControl_admin_newperson2($row, $assignedbranch, $branches_table); ?>
+          <?php echo buildBranchSelectControl_admin_newperson2($row, $assignedbranch); ?>
         </div>
       </div>
       <div class='row'>

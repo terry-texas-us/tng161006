@@ -201,7 +201,7 @@ require_once 'eventlib.php';
                   <td><?php echo uiTextSnippet('branch') . ': '; ?>
 
                     <?php
-                    $query = "SELECT branch, description FROM $branches_table ORDER BY description";
+                    $query = 'SELECT branch, description FROM branches ORDER BY description';
                     $branchresult = tng_query($query);
                     $branchlist = explode(',', $row['branch']);
 

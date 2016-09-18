@@ -19,7 +19,6 @@ function getIndividualRecord($personID, $prevlevel) {
   global $custeventlist;
   global $stdnotes;
   global $notecount;
-  global $branchlinks_table;
   global $today;
   global $lnprefixes;
   global $lnpfxnum;
@@ -588,7 +587,7 @@ function getIndividualRecord($personID, $prevlevel) {
       tng_query($query);
     }
     if ($savestate['branch']) {
-      $query = "INSERT IGNORE INTO $branchlinks_table (branch, persfamID) VALUES(\"{$savestate['branch']}\", '$personID')";
+      $query = "INSERT IGNORE INTO branchlinks (branch, persfamID) VALUES(\"{$savestate['branch']}\", '$personID')";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     }
     if ($custeventctr) {

@@ -11,9 +11,6 @@ $families_table = "families";
 $children_table = "children";
 $languagesTable = "languages";
 $rectangles_table = "";
-$saveimport_table = "saveimport";
-$branches_table = "branches";
-$branchlinks_table = "branchlinks";
 
 $rootpath = "C:/apache/htdocs/tng/";
 $homepage = "index.php";

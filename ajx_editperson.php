@@ -207,7 +207,7 @@ require_once 'eventlib.php';
           <div class='row'>
             <div class='col-md-4'>
               <?php include_once 'branches.php'; ?>
-              <?php echo buildBranchSelectControl($row, $assignedbranch, $branches_table); ?>
+              <?php echo buildBranchSelectControl($row, $assignedbranch); ?>
             </div>
             <div class='col-md-4'>
               <label class='form-check-inline'>

@@ -14,7 +14,7 @@ while ($treerow = tng_fetch_assoc($treeresult)) {
   $dispid .= "branchids['$nexttree'] = new Array(\"\"";
   $dispname .= "branchnames['$nexttree'] = new Array(\"" . uiTextSnippet('allbranches') . '"';
 
-  $query = "SELECT branch, gedcom, description FROM $branches_table WHERE gedcom = \"$nexttree\" ORDER BY description";
+  $query = "SELECT branch, gedcom, description FROM branches WHERE gedcom = \"$nexttree\" ORDER BY description";
   $branchresult = tng_query($query);
 
   while ($branch = tng_fetch_assoc($branchresult)) {

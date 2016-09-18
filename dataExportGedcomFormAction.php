@@ -271,7 +271,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     function doNote($level, $label, $notetxt, $private = '') {
       global $savestate;
       global $saveimport;
-      global $saveimport_table;
 
       $noteinfo = '';
       $notetxt = str_replace("\r", '', $notetxt);
@@ -296,7 +295,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       $savestate['ncount']++;
       if ($savestate['ncount'] % 10 == 0) {
         if ($saveimport) {
-          $query = "UPDATE $saveimport_table SET ncount=\"{$savestate['ncount']}\"";
+          $query = "UPDATE saveimport SET ncount=\"{$savestate['ncount']}\"";
           $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         }
         echo "<strong>N{$savestate['ncount']}</strong> ";
@@ -362,7 +361,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       global $citations;
       global $fp;
       global $saveimport;
-      global $saveimport_table;
 
       $xnotestr = '';
 
@@ -374,7 +372,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
 
       if ($saveimport) {
         $savestate['offset'] = ftell($fp);
-        $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$xnotetxt['noteID']}\"";
+        $query = "UPDATE saveimport SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$xnotetxt['noteID']}\"";
         $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
 
@@ -1091,7 +1089,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     }
 
     function writeSource($source) {
-      global $saveimport_table;
       global $savestate;
       global $lineending;
       global $saveimport;
@@ -1148,7 +1145,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       $savestate['scount']++;
       if ($saveimport) {
         $savestate['offset'] = ftell($fp);
-        $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$source['sourceID']}\", scount=\"{$savestate['scount']}\"";
+        $query = "UPDATE saveimport SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$source['sourceID']}\", scount=\"{$savestate['scount']}\"";
         $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
       if ($savestate['scount'] % 10 == 0) {
@@ -1203,7 +1200,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     function writeRepository($repo) {
       global $savestate;
       global $lineending;
-      global $saveimport_table;
 
       $repostr = '';
       $reponotes = getNotes($repo['repoID']);
@@ -1235,7 +1231,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       $savestate['rcount']++;
       if ($saveimport) {
         $savestate['offset'] = ftell($fp);
-        $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$repo['repoID']}\", rcount=\"{$savestate['rcount']}\"";
+        $query = "UPDATE saveimport SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$repo['repoID']}\", rcount=\"{$savestate['rcount']}\"";
         $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
       if ($savestate['rcount'] % 10 == 0) {
@@ -1310,7 +1306,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         $savestate['pcount']++;
         if ($saveimport) {
           $savestate['offset'] = ftell($fp);
-          $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$place['place']}\", pcount=\"{$savestate['pcount']}\"";
+          $query = "UPDATE saveimport SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$place['place']}\", pcount=\"{$savestate['pcount']}\"";
           $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         }
         if ($savestate['pcount'] % 10 == 0) {
@@ -1336,7 +1332,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     //if saving is enabled and URL flag is set, check the db table to see if a record exists
     if ($saveimport) {
       if ($resume) {
-        $checksql = "SELECT filename, offset, lasttype, lastid, icount, fcount, scount, ncount, rcount, mcount, pcount FROM $saveimport_table";
+        $checksql = 'SELECT filename, offset, lasttype, lastid, icount, fcount, scount, ncount, rcount, mcount, pcount FROM saveimport';
         $result = tng_query($checksql) or die(uiTextSnippet('cannotexecutequery') . ": $checksql");
         $found = tng_num_rows($result);
         if ($found) {
@@ -1391,10 +1387,10 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         }
         tng_free_result($result);
       } else {
-        $query = "DELETE from $saveimport_table";
+        $query = 'DELETE from saveimport';
         $result = tng_query($query);
 
-        $sql = "INSERT INTO $saveimport_table (filename, offset, media) VALUES('$filename', 0, '$exportmedia')";
+        $sql = "INSERT INTO saveimport (filename, offset, media) VALUES('$filename', 0, '$exportmedia')";
         $result = tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $sql");
       }
     }
@@ -1484,7 +1480,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
               writeIndividual($ind);
               if ($saveimport) {
                 $savestate['offset'] = ftell($fp);
-                $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$ind['personID']}\", icount=\"{$savestate['icount']}\"";
+                $query = "UPDATE saveimport SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$ind['personID']}\", icount=\"{$savestate['icount']}\"";
                 $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
               }
             }
@@ -1523,7 +1519,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
               $famarray[$fam['familyID']] = writeFamily($fam);
               if ($saveimport) {
                 $savestate['offset'] = ftell($fp);
-                $query = "UPDATE $saveimport_table SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$fam['familyID']}\", fcount=\"{$savestate['fcount']}\"";
+                $query = "UPDATE saveimport SET offset={$savestate['offset']}, lasttype={$savestate['lasttype']}, lastid=\"{$fam['familyID']}\", fcount=\"{$savestate['fcount']}\"";
                 $saveresult = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
               }
             }
@@ -1561,7 +1557,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     chmod($filename, 0644);
 
     if ($saveimport) {
-      $sql = "DELETE from $saveimport_table";
+      $sql = 'DELETE from saveimport';
       $result = tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     }
     ?>

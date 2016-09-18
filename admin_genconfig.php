@@ -139,20 +139,6 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             </td>
             <td>&nbsp;</td>
             <td>
-              <table class='table table-sm'>
-                <tr>
-                  <td><?php echo uiTextSnippet('saveimporttable'); ?>:</td>
-                  <td><input name='saveimport_table' type='text' value="<?php echo $saveimport_table; ?>"></td>
-                </tr>
-                <tr>
-                  <td><?php echo uiTextSnippet('branches'); ?>:</td>
-                  <td><input name='branches_table' type='text' value="<?php echo $branches_table; ?>"></td>
-                </tr>
-                <tr>
-                  <td><?php echo uiTextSnippet('brlinkstable'); ?>:</td>
-                  <td><input name='branchlinks_table' type='text' value="<?php echo $branchlinks_table; ?>"></td>
-                </tr>
-              </table>
             </td>
           </tr>
         </table>

@@ -13,7 +13,6 @@ function getFamilyRecord($familyID, $prevlevel) {
   global $today;
   global $currentuser;
   global $tngimpcfg;
-  global $branchlinks_table;
 
   $familyID = adjustID($familyID, $savestate['foffset']);
 
@@ -232,7 +231,7 @@ function getFamilyRecord($familyID, $prevlevel) {
   }
   if ($success) {
     if ($savestate['branch']) {
-      $query = "INSERT IGNORE INTO $branchlinks_table (branch, persfamID) VALUES(\"{$savestate['branch']}\", '$familyID')";
+      $query = "INSERT IGNORE INTO branchlinks (branch, persfamID) VALUES(\"{$savestate['branch']}\", '$familyID')";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     }
     if ($custeventctr) {

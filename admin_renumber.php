@@ -195,11 +195,11 @@ echo $navList->build('renumber');
           $result2 = tng_query($query);
 
           if ($type == 'person' || $type == 'family') {
-            $query = "UPDATE $branchlinks_table SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . '"';
+            $query = "UPDATE branchlinks SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . '"';
             $result2 = tng_query_noerror($query);
             $success = tng_affected_rows();
             if (!$success) {
-              $query = "DELETE FROM $branchlinks_table WHERE persfamID=\"" . $row[$id] . '"';
+              $query = "DELETE FROM branchlinks WHERE persfamID=\"" . $row[$id] . '"';
               $result2 = tng_query_noerror($query);
             }
           }

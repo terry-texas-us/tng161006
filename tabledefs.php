@@ -91,9 +91,9 @@ $query = "CREATE TABLE associations (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, 'associations');
 
-$query = "DROP TABLE IF EXISTS $branches_table";
+$query = 'DROP TABLE IF EXISTS branches';
 $result = performQuery($query);
-$query = "CREATE TABLE $branches_table (
+$query = "CREATE TABLE branches (
     branch VARCHAR(20) NOT NULL,
     gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     description VARCHAR(128) NOT NULL,
@@ -106,11 +106,11 @@ $query = "CREATE TABLE $branches_table (
     PRIMARY KEY (branch),
     INDEX description (description)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $branches_table);
+$result = performQuery($query, 'branches');
 
-$query = "DROP TABLE IF EXISTS $branchlinks_table";
+$query = 'DROP TABLE IF EXISTS branchlinks';
 $result = performQuery($query);
-$query = "CREATE TABLE $branchlinks_table (
+$query = "CREATE TABLE branchlinks (
     ID INT(11) NOT NULL AUTO_INCREMENT,
     branch VARCHAR(20) NOT NULL,
     gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
@@ -118,7 +118,7 @@ $query = "CREATE TABLE $branchlinks_table (
     PRIMARY KEY (ID),
     UNIQUE branch (branch, persfamID)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $branchlinks_table);
+$result = performQuery($query, 'branchlinks');
 
 $query = 'DROP TABLE IF EXISTS cemeteries';
 $result = performQuery($query);
@@ -536,9 +536,9 @@ $query = "CREATE TABLE repositories (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, 'repositories');
 
-$query = "DROP TABLE IF EXISTS $saveimport_table";
+$query = 'DROP TABLE IF EXISTS saveimport';
 $result = performQuery($query);
-$query = "CREATE TABLE $saveimport_table (
+$query = "CREATE TABLE saveimport (
     ID INT(11) NOT NULL AUTO_INCREMENT,
     filename VARCHAR(100) NULL,
     icount INT(11) NULL,
@@ -565,7 +565,7 @@ $query = "CREATE TABLE $saveimport_table (
     lastid VARCHAR(255) NULL,
     PRIMARY KEY (ID)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $saveimport_table);
+$result = performQuery($query, 'saveimport');
 
 $query = 'DROP TABLE IF EXISTS sources';
 $result = performQuery($query);

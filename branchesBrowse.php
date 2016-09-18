@@ -57,13 +57,13 @@ if ($offset) {
   $newoffset = '';
   $tngpage = 1;
 }
-$whereClause = $searchstring ? "WHERE (branch LIKE '%$searchstring%' OR $branches_table.description LIKE '%$searchstring%')" : '';
-$query = "SELECT branch, $branches_table.description AS description, personID FROM $branches_table $whereClause ORDER BY $branches_table.description LIMIT $newoffset" . $maxsearchresults;
+$whereClause = $searchstring ? "WHERE (branch LIKE '%$searchstring%' OR branches.description LIKE '%$searchstring%')" : '';
+$query = "SELECT branch, branches.description AS description, personID FROM branches $whereClause ORDER BY branches.description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(branch) AS bcount FROM $branches_table $whereClause";
+  $query = "SELECT count(branch) AS bcount FROM branches $whereClause";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['bcount'];

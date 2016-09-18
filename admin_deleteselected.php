@@ -53,7 +53,7 @@ if ($xsrcaction) {
   $id = 'tleventID';
   $location = 'timelineeventsBrowse.php';
 } elseif ($xbranchaction) {
-  $query = "DELETE FROM $branches_table";
+  $query = 'DELETE FROM branches';
   $modmsg = 'branches';
   $id = 'branch';
   $location = 'branchesBrowse.php';

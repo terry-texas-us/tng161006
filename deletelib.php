@@ -14,9 +14,7 @@ function deleteNoteLinks($id) {
 }
 
 function deleteBranchLinks($id) {
-  global $branchlinks_table;
-
-  $query = "DELETE FROM $branchlinks_table WHERE persfamID = '$id'";
+  $query = "DELETE FROM branchlinks WHERE persfamID = '$id'";
   tng_query($query);
 }
 

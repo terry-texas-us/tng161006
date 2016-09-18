@@ -118,7 +118,7 @@ $result = tng_query($query);
 
 $branchlist = explode(',', $allbranches);
 foreach ($branchlist as $b) {
-  $query = "INSERT IGNORE INTO $branchlinks_table (branch, persfamID) VALUES('$b', '$familyID')";
+  $query = "INSERT IGNORE INTO branchlinks (branch, persfamID) VALUES('$b', '$familyID')";
   $result = tng_query($query);
 }
 if ($lastperson) {

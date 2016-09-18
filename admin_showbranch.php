@@ -16,7 +16,7 @@ $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
 
-$query = "SELECT description FROM $branches_table WHERE branch = '$branch'";
+$query = "SELECT description FROM branches WHERE branch = '$branch'";
 $result = tng_query($query);
 $brow = tng_fetch_assoc($result);
 tng_free_result($result);

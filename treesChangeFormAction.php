@@ -33,7 +33,7 @@ switch ($entity) {
     $query = "UPDATE $families_table SET wife=\"\" WHERE gedcom=\"$oldtree\" AND wife=\"$entityID\"";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $branchlinks_table WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\"";
+    $query = "DELETE FROM branchlinks WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\"";
     $result = tng_query($query);
 
     $query = "DELETE FROM citations WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\"";

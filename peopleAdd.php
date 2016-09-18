@@ -104,7 +104,7 @@ $headSection->setTitle(uiTextSnippet('addnewperson'));
         <br>
         <div class='row'>
           <div class='col-md-4'>
-            <?php echo buildBranchSelectControl($row, $assignedbranch, $branches_table); ?>
+            <?php echo buildBranchSelectControl($row, $assignedbranch); ?>
           </div>
           <div class='col-sm-4'>
             <label class='form-check-inline'>
@@ -223,7 +223,7 @@ function trimCheckPersonRequired() {
   $dispid = '';
   $dispname = '';
 
-  getBranchInfo('trees', $branches_table, $dispid, $dispname);
+  getBranchInfo('trees', 'branches', $dispid, $dispname);
   
   echo $dispid;
   echo $dispname;
@@ -232,7 +232,7 @@ function trimCheckPersonRequired() {
     
   <?php  
 } else {
-    $query = "SELECT description FROM $branches_table WHERE branch = '$assignedbranch' ORDER BY description";
+    $query = "SELECT description FROM branches WHERE branch = '$assignedbranch' ORDER BY description";
     $branchresult = tng_query($query);
     $branch = tng_fetch_assoc($branchresult);
     $dispname = $branch['description'];

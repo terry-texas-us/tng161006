@@ -12,7 +12,7 @@ if (!$allowEdit) {
   exit;
 }
 
-$query = "SELECT * FROM $branches_table WHERE branch = '$branch'";
+$query = "SELECT * FROM branches WHERE branch = '$branch'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 $row['description'] = preg_replace('/\"/', '&#34;', $row['description']);

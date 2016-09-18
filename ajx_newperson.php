@@ -60,7 +60,7 @@ require_once 'eventlib.php';
       <div class='col-md-6'>
         <?php require_once 'branches.php'; ?>
         <br>
-        <?php echo buildBranchSelectControl($row, $assignedbranch, $branches_table); ?>
+        <?php echo buildBranchSelectControl($row, $assignedbranch); ?>
       </div>
     </div>
     <div id='person-names'>

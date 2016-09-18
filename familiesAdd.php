@@ -85,7 +85,7 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
                 <td><?php echo uiTextSnippet('branch'); ?>:</td>
                 <td style="height:2em">
                   <?php
-                  $query = "SELECT branch, description FROM $branches_table ORDER BY description";
+                  $query = 'SELECT branch, description FROM branches ORDER BY description';
                   $branchresult = tng_query($query);
                   $numbranches = tng_num_rows($branchresult);
                   $branchlist = explode(',', $row['branch']);

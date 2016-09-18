@@ -58,7 +58,7 @@ $result = tng_query($query);
 $query = "UPDATE $families_table SET branch = '' WHERE branch = '$branch'";
 $result = tng_query($query);
 
-$query = "DELETE FROM $branchlinks_table WHERE branch = '$branch'";
+$query = "DELETE FROM branchlinks WHERE branch = '$branch'";
 $result = tng_query($query);
 
 $message = uiTextSnippet('tree') . " $gedcom " . uiTextSnippet('succcleared') . '.';

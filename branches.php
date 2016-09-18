@@ -23,10 +23,10 @@ function getBranchInfo($trees, $branches, &$ids, &$names) {
   tng_free_result($treeresult);
 }
 
-function buildBranchSelectControl($row, $assignedbranch, $branches_table) {
+function buildBranchSelectControl($row, $assignedbranch) {
   $out = uiTextSnippet('branch') . ': ';
 
-  $query = "SELECT branch, description FROM $branches_table ORDER BY description";
+  $query = 'SELECT branch, description FROM branches ORDER BY description';
   $branchresult = tng_query($query);
   $branchlist = explode(',', $row['branch']);
 
@@ -75,10 +75,10 @@ function buildBranchSelectControl($row, $assignedbranch, $branches_table) {
 
 // [ts] variations below
 
-function buildBranchSelectControl_admin_newperson2($row, $assignedbranch, $branches_table) {
+function buildBranchSelectControl_admin_newperson2($row, $assignedbranch) {
   $out = uiTextSnippet('branch') . ': ';
   
-  $query = "SELECT branch, description FROM $branches_table ORDER BY description";
+  $query = 'SELECT branch, description FROM branches ORDER BY description';
   $branchresult = tng_query($query);
   $numbranches = tng_num_rows($branchresult);
   

@@ -185,14 +185,14 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       $mll = $savestate['media'] * 10 + $savestate['latlong'];
 
       if ($saveimport) {
-        $query = "DELETE FROM $saveimport_table";
+        $query = 'DELETE FROM saveimport';
         $result = tng_query($query);
 
-        $sql = "INSERT INTO $saveimport_table (filename, icount, ioffset, fcount, foffset, scount, soffset, mcount, pcount, ncount, noffset, roffset, offset, delvar, ucaselast, norecalc, neweronly, media, branch) VALUES(\"{$savestate['filename']}\", 0, \"{$savestate['ioffset']}\", 0, \"{$savestate['foffset']}\", 0, \"{$savestate['soffset']}\", 0, 0, 0, \"{$savestate['noffset']}\", \"{$savestate['roffset']}\", 0, '$del', {$savestate['ucaselast']}, {$savestate['norecalc']}, {$savestate['neweronly']}, $mll, '$branch')";
+        $sql = "INSERT INTO saveimport (filename, icount, ioffset, fcount, foffset, scount, soffset, mcount, pcount, ncount, noffset, roffset, offset, delvar, ucaselast, norecalc, neweronly, media, branch) VALUES(\"{$savestate['filename']}\", 0, \"{$savestate['ioffset']}\", 0, \"{$savestate['foffset']}\", 0, \"{$savestate['soffset']}\", 0, 0, 0, \"{$savestate['noffset']}\", \"{$savestate['roffset']}\", 0, '$del', {$savestate['ucaselast']}, {$savestate['norecalc']}, {$savestate['neweronly']}, $mll, '$branch')";
         $result = tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $sql");
       }
     } elseif ($saveimport && !$openmsg) {
-      $checksql = "SELECT filename, icount, ioffset, fcount, foffset, scount, soffset, mcount, pcount, ncount, noffset, offset, ucaselast, norecalc, neweronly, media, branch, delvar FROM $saveimport_table";
+      $checksql = 'SELECT filename, icount, ioffset, fcount, foffset, scount, soffset, mcount, pcount, ncount, noffset, offset, ucaselast, norecalc, neweronly, media, branch, delvar FROM saveimport';
       $result = tng_query($checksql) or die(uiTextSnippet('cannotexecutequery') . ": $checksql");
       $found = tng_num_rows($result);
       if ($found) {
@@ -350,7 +350,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       fclose($fp);
 
       if ($saveimport) {
-        $sql = "DELETE from $saveimport_table";
+        $sql = 'DELETE from saveimport';
         $result = tng_query($sql) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
       $log = uiTextSnippet('gedimport') . ': ' . basename(uiTextSnippet('filename')); 

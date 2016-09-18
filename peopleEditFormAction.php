@@ -81,13 +81,13 @@ if (!$editconflict) {
     $oldbranches = explode(',', $orgbranch);
     foreach ($oldbranches as $b) {
       if ($b && !in_array($b, $branch)) {
-        $query = "DELETE FROM $branchlinks_table WHERE persfamID = '$personID' AND branch = \"$b\"";
+        $query = "DELETE FROM branchlinks WHERE persfamID = '$personID' AND branch = \"$b\"";
         $result = tng_query($query);
       }
     }
     foreach ($branch as $b) {
       if ($b && !in_array($b, $oldbranches)) {
-        $query = "INSERT IGNORE INTO $branchlinks_table (branch, persfamID) VALUES('$b', '$personID')";
+        $query = "INSERT IGNORE INTO branchlinks (branch, persfamID) VALUES('$b', '$personID')";
         $result = tng_query($query);
       }
     }

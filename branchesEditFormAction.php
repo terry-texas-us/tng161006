@@ -19,7 +19,7 @@ $description = addslashes($description);
 if (!$dospouses) {
   $dospouses = 0;
 }
-$query = "UPDATE $branches_table SET description=\"$description\", personID=\"$personID\", agens=\"$agens\", dgens=\"$dgens\", dagens=\"$dagens\", inclspouses=\"$dospouses\" WHERE branch = '$branch'";
+$query = "UPDATE branches SET description=\"$description\", personID=\"$personID\", agens=\"$agens\", dgens=\"$dgens\", dagens=\"$dagens\", inclspouses=\"$dospouses\" WHERE branch = '$branch'";
 $result = tng_query($query);
 
 adminwritelog(uiTextSnippet('modifybranch') . ": $branch");

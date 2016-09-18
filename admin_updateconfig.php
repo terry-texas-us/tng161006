@@ -62,9 +62,6 @@ fwrite($fp, "\$children_table = \"$children_table\";\n");
 fwrite($fp, "\$languagesTable = \"$languagesTable\";\n");
 
 fwrite($fp, "\$rectangles_table = \"$rectangles_table\";\n");
-fwrite($fp, "\$saveimport_table = \"$saveimport_table\";\n");
-fwrite($fp, "\$branches_table = \"$branches_table\";\n");
-fwrite($fp, "\$branchlinks_table = \"$branchlinks_table\";\n");
 fwrite($fp, "\n");
 if ($rootpath != $newrootpath) {
   $_SESSION['session_rp'] = $newrootpath;

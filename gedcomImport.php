@@ -568,7 +568,6 @@ function getLatLong($value, $negdir) {
 function incrCounter($prefix) {
   global $savestate;
   global $saveimport;
-  global $saveimport_table; 
   global $fp;
   global $allcount;
   global $fstat;
@@ -637,7 +636,7 @@ function incrCounter($prefix) {
     }
   } // $old
   if ($saveimport) {
-    $query = "UPDATE $saveimport_table SET icount = {$savestate['icount']}, fcount = {$savestate['fcount']}, scount = {$savestate['scount']}, mcount = {$savestate['mcount']}, ncount = {$savestate['ncount']}, mcount = {$savestate['mcount']}, pcount = {$savestate['pcount']}, offset = $offset";
+    $query = "UPDATE saveimport SET icount = {$savestate['icount']}, fcount = {$savestate['fcount']}, scount = {$savestate['scount']}, mcount = {$savestate['mcount']}, ncount = {$savestate['ncount']}, mcount = {$savestate['mcount']}, pcount = {$savestate['pcount']}, offset = $offset";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
   }
 }

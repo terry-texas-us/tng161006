@@ -134,7 +134,6 @@ function deleteBranch($table, $branch) {
 function setPersonLabel($personID) {
   global $people_table;
   global $branch;
-  global $branchlinks_table;
   global $overwrite;
   global $branchaction;
   global $done;
@@ -201,15 +200,15 @@ function setPersonLabel($personID) {
     }
 
     if ($branchaction == 'clear' || $branchaction == 'delete') {
-      $query = "DELETE FROM $branchlinks_table WHERE persfamID = '$personID' AND branch = '$branch'";
+      $query = "DELETE FROM branchlinks WHERE persfamID = '$personID' AND branch = '$branch'";
       tng_query($query);
     } else {
       if ($overwrite == 1 || !$branch) {
-        $query = "DELETE FROM $branchlinks_table WHERE persfamID = '$personID'";
+        $query = "DELETE FROM branchlinks WHERE persfamID = '$personID'";
         tng_query($query);
       }
       if ($branch) {
-        $query = "INSERT IGNORE INTO $branchlinks_table (branch, persfamID) VALUES('$branch', '$personID')";
+        $query = "INSERT IGNORE INTO branchlinks (branch, persfamID) VALUES('$branch', '$personID')";
         tng_query($query);
       }
     }
@@ -232,7 +231,6 @@ function setFamilyLabel($personID, $gender) {
   global $families_table;
   global $branch;
   global $overwrite;
-  global $branchlinks_table;
   global $branchaction;
   global $people_table;
   global $fdone;
@@ -294,15 +292,15 @@ function setFamilyLabel($personID, $gender) {
       }
 
       if ($branchaction == 'clear' || $branchaction == 'delete') {
-        $query = "DELETE FROM $branchlinks_table WHERE persfamID = \"{$row['familyID']}\" AND branch = '$branch'";
+        $query = "DELETE FROM branchlinks WHERE persfamID = \"{$row['familyID']}\" AND branch = '$branch'";
         tng_query($query);
       } else {
         if ($overwrite == 1 || !$branch) {
-          $query = "DELETE FROM $branchlinks_table WHERE persfamID = \"{$row['familyID']}\"";
+          $query = "DELETE FROM branchlinks WHERE persfamID = \"{$row['familyID']}\"";
           tng_query($query);
         }
         if ($branch) {
-          $query = "INSERT IGNORE INTO $branchlinks_table (branch, persfamID) VALUES('$branch', '{$row['familyID']}')";
+          $query = "INSERT IGNORE INTO branchlinks (branch, persfamID) VALUES('$branch', '{$row['familyID']}')";
           tng_query($query);
         }
       }
@@ -420,7 +418,7 @@ if ($set == 'all') {
     $fcounter = deleteBranch($families_table, $branch);
   }
 
-  $query = "DELETE FROM $branchlinks_table WHERE branch = '$branch'";
+  $query = "DELETE FROM branchlinks WHERE branch = '$branch'";
   $result = tng_query($query);
 } else {
   $gender = getGender($personID);

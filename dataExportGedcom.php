@@ -29,7 +29,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           <td><?php echo uiTextSnippet('branch'); ?>:</td>
           <td>
             <?php
-            $query = "SELECT branch, description FROM $branches_table ORDER BY description";
+            $query = 'SELECT branch, description FROM branches ORDER BY description';
             $branchresult = tng_query($query);
 
             echo "<select id='branch' name=\"branch\" size=\"$selectnum\">\n";

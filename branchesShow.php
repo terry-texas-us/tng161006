@@ -30,13 +30,13 @@ if ($offset) {
 }
 $whereClause = ($branchsearch) ? "WHERE (branch LIKE '%$branchsearch%' OR b.description LIKE '%$branchsearch%')" : '';
 
-$query = "SELECT branch, description, personID FROM $branches_table $whereClause ORDER BY description LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT branch, description, personID FROM branches $whereClause ORDER BY description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(branch) AS branchcount FROM $branches_table";
+  $query = 'SELECT count(branch) AS branchcount FROM branches';
   $result2 = tng_query($query);
   $countrow = tng_fetch_assoc($result2);
   $totrows = $countrow['branchcount'];
