@@ -39,7 +39,7 @@ if (!$youremail || !$comments || !$yourname) {
 killBlockedAddress($youremail);
 killBlockedMessageContent($comments);
 
-$query = "SELECT familyID, husband, wife, living, private, marrdate, branch FROM $families_table WHERE familyID = '$ID'";
+$query = "SELECT familyID, husband, wife, living, private, marrdate, branch FROM families WHERE familyID = '$ID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 

@@ -60,11 +60,11 @@ if ($propagate && trim($orgplace)) {
   $result = tng_query($query);
 
   //families
-  $query = "UPDATE $families_table SET marrplace = '$place' WHERE marrplace = '$orgplace'";
+  $query = "UPDATE families SET marrplace = '$place' WHERE marrplace = '$orgplace'";
   $result = tng_query($query);
-  $query = "UPDATE $families_table SET divplace = '$place' WHERE divplace = '$orgplace'";
+  $query = "UPDATE families SET divplace = '$place' WHERE divplace = '$orgplace'";
   $result = tng_query($query);
-  $query = "UPDATE $families_table SET sealplace = '$place' WHERE sealplace = '$orgplace'";
+  $query = "UPDATE families SET sealplace = '$place' WHERE sealplace = '$orgplace'";
   $result = tng_query($query);
 
   //events

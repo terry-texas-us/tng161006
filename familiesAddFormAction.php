@@ -36,7 +36,7 @@ $sealdatetr = convertDate($sealdate);
 
 $newdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
 
-$query = "SELECT familyID FROM $families_table WHERE familyID = '$familyID'";
+$query = "SELECT familyID FROM families WHERE familyID = '$familyID'";
 $result = tng_query($query);
 
 if ($result && tng_num_rows($result)) {
@@ -74,7 +74,7 @@ if ($husband) {
   $spouserow = tng_fetch_assoc($spouselive);
   $husbliving = $spouserow['living'];
 
-  $query = "SELECT husborder FROM $families_table WHERE husband = '$husband' ORDER BY husborder DESC";
+  $query = "SELECT husborder FROM families WHERE husband = '$husband' ORDER BY husborder DESC";
   $husbresult = tng_query($query);
   $husbrow = tng_fetch_assoc($husbresult);
   tng_free_result($husbresult);
@@ -90,7 +90,7 @@ if ($wife) {
   $spouserow = tng_fetch_assoc($spouselive);
   $wifeliving = $spouserow['living'];
 
-  $query = "SELECT wifeorder FROM $families_table WHERE wife = '$wife' ORDER BY wifeorder DESC";
+  $query = "SELECT wifeorder FROM families WHERE wife = '$wife' ORDER BY wifeorder DESC";
   $wiferesult = tng_query($query);
   $wiferow = tng_fetch_assoc($wiferesult);
   tng_free_result($wiferesult);
@@ -113,7 +113,7 @@ if (is_array($branch)) {
 } else {
   $allbranches = $branch;
 }
-$query = "INSERT INTO $families_table (familyID, husband, husborder, wife, wifeorder, living, private, marrdate, marrdatetr, marrplace, marrtype, divdate, divdatetr, divplace, sealdate, sealdatetr, sealplace, changedate, branch, changedby, status, edituser, edittime) VALUES('$familyID', '$husband', '$husborder', '$wife', '$wifeorder', '$familyliving', '$private', '$marrdate', '$marrdatetr', '$marrplace', '$marrtype', '$divdate', '$divdatetr', '$divplace', '$sealdate', '$sealdatetr', '$sealplace', '$newdate', $allbranches', '$currentuser', '', '', '0')";
+$query = "INSERT INTO families (familyID, husband, husborder, wife, wifeorder, living, private, marrdate, marrdatetr, marrplace, marrtype, divdate, divdatetr, divplace, sealdate, sealdatetr, sealplace, changedate, branch, changedby, status, edituser, edittime) VALUES('$familyID', '$husband', '$husborder', '$wife', '$wifeorder', '$familyliving', '$private', '$marrdate', '$marrdatetr', '$marrplace', '$marrtype', '$divdate', '$divdatetr', '$divplace', '$sealdate', '$sealdatetr', '$sealplace', '$newdate', $allbranches', '$currentuser', '', '', '0')";
 $result = tng_query($query);
 
 $branchlist = explode(',', $allbranches);

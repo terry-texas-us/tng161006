@@ -175,9 +175,9 @@ if (!$editconflict) {
     }
   }
   if ($self) {
-    $query = "SELECT familyID, husband, wife FROM $families_table WHERE $families_table.$self = '$personID' ORDER BY $spouseorder";
+    $query = "SELECT familyID, husband, wife FROM families WHERE families.$self = '$personID' ORDER BY $spouseorder";
   } else {
-    $query = "SELECT familyID, husband, wife FROM $families_table WHERE ($families_table.husband = \"$personID\" OR $families_table.wife = \"$personID\")";
+    $query = "SELECT familyID, husband, wife FROM families WHERE (families.husband = \"$personID\" OR families.wife = \"$personID\")";
   }
   $marriages = tng_query($query);
 
@@ -202,7 +202,7 @@ if (!$editconflict) {
       }
       $familyliving = ($living || $spouseliving) ? 1 : 0;
       $familyprivate = ($private || $spouseprivate) ? 1 : 0;
-      $query = "UPDATE $families_table SET living = \"$familyliving\", private = \"$familyprivate\", branch = \"$allbranches\" WHERE familyID = \"{$marriagerow['familyID']}\"";
+      $query = "UPDATE families SET living = \"$familyliving\", private = \"$familyprivate\", branch = \"$allbranches\" WHERE familyID = \"{$marriagerow['familyID']}\"";
       $spouseresult = tng_query($query);
     }
   }

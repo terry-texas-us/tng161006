@@ -48,7 +48,7 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . ' ' . $pastxdays);
     }
     if ($change_cutoff) {
       $cutoffstr = "TO_DAYS(NOW()) - TO_DAYS(changedate) <= $change_cutoff AND ";
-      $famcutoffstr = "TO_DAYS(NOW()) - TO_DAYS($families_table.changedate) <= $change_cutoff AND ";
+      $famcutoffstr = "TO_DAYS(NOW()) - TO_DAYS(families.changedate) <= $change_cutoff AND ";
     } else {
       $cutoffstr = $famcutoffstr = '';
     }
@@ -124,11 +124,11 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . ' ' . $pastxdays);
     }
     $allwhere = '1=1';
 
-    $more = getLivingPrivateRestrictions($families_table, false, false);
+    $more = getLivingPrivateRestrictions('families', false, false);
     if ($more) {
       $allwhere .= ' AND ' . $more;
     }
-    $query = "SELECT familyID, husband, wife, marrdate, firstname, lnprefix, lastname, prefix, suffix, nameorder, $families_table.living AS fliving, $families_table.private AS fprivate, $people_table.living AS living, $people_table.private AS private, $people_table.branch AS branch, $families_table.branch AS fbranch, DATE_FORMAT($families_table.changedate,'%e %b %Y') AS changedatef, $families_table.changedby FROM ($families_table) LEFT JOIN $people_table ON $people_table.personID = husband WHERE $famcutoffstr $allwhere ORDER BY $families_table.changedate DESC, lastname LIMIT $change_limit";
+    $query = "SELECT familyID, husband, wife, marrdate, firstname, lnprefix, lastname, prefix, suffix, nameorder, families.living AS fliving, families.private AS fprivate, $people_table.living AS living, $people_table.private AS private, $people_table.branch AS branch, families.branch AS fbranch, DATE_FORMAT(families.changedate,'%e %b %Y') AS changedatef, families.changedby FROM (families) LEFT JOIN $people_table ON $people_table.personID = husband WHERE $famcutoffstr $allwhere ORDER BY families.changedate DESC, lastname LIMIT $change_limit";
     $famresult = tng_query($query);
     if (tng_num_rows($famresult)) {
     ?>

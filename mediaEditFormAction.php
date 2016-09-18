@@ -176,7 +176,7 @@ if ($mediatypeID != $mediatypeID_org) {
       reorderMedia($query, $plink, $mediatypeID_org);
       reorderMedia($query, $plink, $mediatypeID);
 
-      $query = "SELECT familyID AS personID FROM $families_table WHERE familyID = \"{$plink['personID']}\"";
+      $query = "SELECT familyID AS personID FROM families WHERE familyID = \"{$plink['personID']}\"";
       reorderMedia($query, $plink, $mediatypeID_org);
       reorderMedia($query, $plink, $mediatypeID);
 

@@ -412,7 +412,6 @@ function checkLivingLinks($itemID) {
   global $livedefault;
   global $assignedbranch;
   global $people_table;
-  global $families_table;
   global $allowLiving;
   global $allowPrivate;
 
@@ -453,7 +452,7 @@ function checkLivingLinks($itemID) {
   }
 
   if ($fcriteria) {
-    $query = "SELECT count(*) AS pcount FROM (medialinks, $families_table) WHERE medialinks.personID = $families_table.familyID AND medialinks.mediaID = '$itemID' $fcriteria";
+    $query = "SELECT count(*) AS pcount FROM (medialinks, families) WHERE medialinks.personID = families.familyID AND medialinks.mediaID = '$itemID' $fcriteria";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
     tng_free_result($result);
@@ -1052,10 +1051,9 @@ function getAllTextPath() {
 
 function buildParentRow($parent, $spouse, $label) {
   global $people_table;
-  global $families_table;
 
   $out = '';
-  $query = "SELECT personID, lastname, lnprefix, firstname, birthdate, birthplace, altbirthdate, altbirthplace, prefix, suffix, nameorder FROM $people_table, $families_table WHERE $people_table.personID = $families_table.$spouse AND $families_table.familyID = \"{$parent['familyID']}\"";
+  $query = "SELECT personID, lastname, lnprefix, firstname, birthdate, birthplace, altbirthdate, altbirthplace, prefix, suffix, nameorder FROM $people_table, families WHERE $people_table.personID = families.$spouse AND families.familyID = \"{$parent['familyID']}\"";
   $gotparent = tng_query($query);
 
   if ($gotparent) {

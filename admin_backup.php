@@ -98,7 +98,7 @@ function getfilesize($filename) {
 
 set_time_limit(0);
 $largechunk = 10000;
-$tablelist = ['addresses', 'albums', 'albumlinks', 'albumplinks', 'associations', 'branches', 'branchlinks', 'cemeteries', $people_table, $families_table, 'children', 'languages', 'places', 'states', 'countries', 'sources', 'repositories', 'citations', 'reports', 'events', 'eventtypes', 'trees', 'notelinks', 'xnotes', 'users', 'timelineevents', 'saveimport', 'temp_events', 'media', 'medialinks', 'mediatypes', 'mostwanted'];
+$tablelist = ['addresses', 'albums', 'albumlinks', 'albumplinks', 'associations', 'branches', 'branchlinks', 'cemeteries', $people_table, 'families', 'children', 'languages', 'places', 'states', 'countries', 'sources', 'repositories', 'citations', 'reports', 'events', 'eventtypes', 'trees', 'notelinks', 'xnotes', 'users', 'timelineevents', 'saveimport', 'temp_events', 'media', 'medialinks', 'mediatypes', 'mostwanted'];
 $ajaxmsg = $msg = '';
 
 if ($table == 'struct') {

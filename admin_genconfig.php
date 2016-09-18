@@ -120,10 +120,6 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
                   <td><?php echo uiTextSnippet('people'); ?>:</td>
                   <td><input name='people_table' type='text' value="<?php echo $people_table; ?>"></td>
                 </tr>
-                <tr>
-                  <td><?php echo uiTextSnippet('families'); ?>:</td>
-                  <td><input name='families_table' type='text' value="<?php echo $families_table; ?>"></td>
-                </tr>
               </table>
             </td>
             <td>&nbsp;</td>

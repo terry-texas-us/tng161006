@@ -47,7 +47,7 @@ $headSection->setTitle(uiTextSnippet('tree') . ': ' . $row['treename']);
         tng_free_result($presult);
         showFact(uiTextSnippet('individuals'), "<a href='search.php'>" . number_format($prow['pcount']) . '</a>');
           
-        $fresult = tng_query("SELECT count(familyID) AS fcount FROM $families_table");
+        $fresult = tng_query("SELECT count(familyID) AS fcount FROM families");
         $frow = tng_fetch_assoc($fresult);
         tng_free_result($fresult);
         showFact(uiTextSnippet('families'), "<a href='famsearch.php'>" . number_format($frow['fcount']) . '</a>');

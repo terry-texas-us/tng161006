@@ -145,16 +145,14 @@ $headSection->setTitle(uiTextSnippet('calendar'));
       if (in_array($key, $hideEvents)) {
         continue;
       }
-      $select[] = $families_table . '.' . $key . 'date';
-      $select[] = $families_table . '.' . $key . 'datetr';
-      $select[] = $families_table . '.' . $key . 'place';
+      $select[] = 'families.' . $key . 'date';
+      $select[] = 'families.' . $key . 'datetr';
+      $select[] = 'families.' . $key . 'place';
       $where[] = $key . "datetr LIKE '%-$thisMonth-%'";
     }
 
     if (! empty($where)) {
-      $sql = 'SELECT familyID, gedcom, husband, wife, living, private, ' . implode(', ', $select) . "
-        FROM $families_table
-        WHERE (" . implode(' OR ', $where) . ')';
+      $sql = 'SELECT familyID, gedcom, husband, wife, living, private, ' . implode(', ', $select) . 'FROM families WHERE (' . implode(' OR ', $where) . ')';
 
       if ($showLiving == '1') {
         $sql .= ' AND living = 1';
@@ -257,7 +255,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
             $longname = htmlentities(getName(tng_fetch_assoc($result2)), ENT_QUOTES);
 
           } elseif ($row['persfamID']{0} == 'F') {
-            $sql = "SELECT * FROM $families_table WHERE familyID = '" . $row['persfamID'] . "'";
+            $sql = "SELECT * FROM families WHERE familyID = '" . $row['persfamID'] . "'";
             if ($showLiving == '1') {
               $sql .= ' AND living = 1';
             } elseif ($showLiving == '0') {

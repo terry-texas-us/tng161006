@@ -37,7 +37,7 @@ if ($choice == uiTextSnippet('savedel')) {
     $result = tng_query($query);
 
     if ($row['type'] == 'F') {
-      $query = "UPDATE $families_table SET changedate = \"$changedate\", changedby = \"{$row['user']}\" WHERE familyID = '$familyID'";
+      $query = "UPDATE families SET changedate = \"$changedate\", changedby = \"{$row['user']}\" WHERE familyID = '$familyID'";
     } else {
       $query = "UPDATE $people_table SET changedate = \"$changedate\", changedby = \"{$row['user']}\" WHERE personID = '$personID'";
     }
@@ -123,7 +123,7 @@ if ($choice == uiTextSnippet('savedel')) {
       $fieldstr .= $fieldstr ? ", $factfield" : $factfield;
     }
     if ($needfamilies) {
-      $query = "UPDATE $families_table SET $fieldstr WHERE familyID = '$familyID'";
+      $query = "UPDATE families SET $fieldstr WHERE familyID = '$familyID'";
     } elseif ($needchildren) {
       $query = "UPDATE $people_table SET changedate = \"$changedate\", changedby=\"{$row['user']}\" WHERE personID = '$personID'";
       $result = tng_query($query);

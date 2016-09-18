@@ -154,11 +154,10 @@ function getSpouse($marriage, $spouse) {
 
 function getParents($parent) {
   global $people_table;
-  global $families_table;
   global $ldsOK;
 
   $parentstr = '';
-  $query = "SELECT personID, lastname, firstname, prefix, suffix, nameorder FROM $people_table, $families_table WHERE $people_table.personID = $families_table.husband AND $families_table.familyID = \"{$parent['familyID']}\"";
+  $query = "SELECT personID, lastname, firstname, prefix, suffix, nameorder FROM $people_table, families WHERE $people_table.personID = families.husband AND families.familyID = \"{$parent['familyID']}\"";
   $gotfather = tng_query($query);
 
   if ($gotfather) {
@@ -172,7 +171,7 @@ function getParents($parent) {
     tng_free_result($gotfather);
   }
 
-  $query = "SELECT personID, lastname, firstname, prefix, suffix, nameorder FROM $people_table, $families_table WHERE $people_table.personID = $families_table.wife AND $families_table.familyID = \"{$parent['familyID']}\"";
+  $query = "SELECT personID, lastname, firstname, prefix, suffix, nameorder FROM $people_table, families WHERE $people_table.personID = families.wife AND families.familyID = \"{$parent['familyID']}\"";
   $gotmother = tng_query($query);
 
   if ($gotmother) {
@@ -450,11 +449,11 @@ if ($mergeaction == uiTextSnippet('merge')) {
           $varname = substr($key, 8);
 
           //delete family on right (important to do deleting first)
-          $query = "DELETE from $families_table WHERE familyID = '$varname'";
+          $query = "DELETE from families WHERE familyID = '$varname'";
           $famresult = tng_query($query);
 
           //get families where left person is the husband/wife and right SPOUSE is the wife/husband
-          $query = "SELECT familyID FROM $families_table WHERE $p1self = \"$personID1\" AND $p1spouse = \"" . substr($value, 6) . '"';
+          $query = "SELECT familyID FROM families WHERE $p1self = \"$personID1\" AND $p1spouse = \"" . substr($value, 6) . '"';
           $sp1result = tng_query($query);
           $sp1row = tng_fetch_assoc($sp1result);
           tng_free_result($sp1result);
@@ -494,7 +493,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
         if (!$_POST[$samespouse] && $p1self) {
           $varname = substr($key, 8);
 
-          $query = "UPDATE $families_table set $p1self = \"\", $p1spouseorder = \"\" WHERE familyID = '$varname'";
+          $query = "UPDATE families set $p1self = \"\", $p1spouseorder = \"\" WHERE familyID = '$varname'";
           $chilresult = tng_query($query);
         }
         break;
@@ -502,7 +501,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
         $varname = substr($key, 8);
 
         //remove left person from family.
-        $query = "UPDATE $families_table set $p1self = \"\", $p1spouseorder = \"\" WHERE familyID = '$varname'";
+        $query = "UPDATE families set $p1self = \"\", $p1spouseorder = \"\" WHERE familyID = '$varname'";
         $chilresult = tng_query($query);
         break;
       case 'sp':
@@ -513,16 +512,16 @@ if ($mergeaction == uiTextSnippet('merge')) {
 
             //same spouse, box checked, so we're removing LEFT family, moving kids over to left family
             //get families where left person is the husband/wife and right SPOUSE is the wife/husband
-            $query = "SELECT familyID, $p1spouseorder FROM $families_table WHERE $p1self = \"$personID1\" AND $p1spouse = \"" . substr($value, 6) . '"';
+            $query = "SELECT familyID, $p1spouseorder FROM families WHERE $p1self = \"$personID1\" AND $p1spouse = \"" . substr($value, 6) . '"';
             $sp1result = tng_query($query);
             $sp1row = tng_fetch_assoc($sp1result);
             tng_free_result($sp1result);
 
-            $query = "UPDATE $families_table set $p1self = \"$personID1\", $p1spouseorder = \"{$sp1row[$p1spouseorder]}\" WHERE familyID = '$varname'";
+            $query = "UPDATE families set $p1self = \"$personID1\", $p1spouseorder = \"{$sp1row[$p1spouseorder]}\" WHERE familyID = '$varname'";
             $chilresult = tng_query($query);
 
             //delete family on LEFT
-            $query = "DELETE from $families_table WHERE familyID = \"{$sp1row['familyID']}\"";
+            $query = "DELETE from families WHERE familyID = \"{$sp1row['familyID']}\"";
             $famresult = tng_query($query);
 
             doAssociations($varname, $sp1row['familyID']);
@@ -557,20 +556,20 @@ if ($mergeaction == uiTextSnippet('merge')) {
             $varname = substr($key, 6);
 
             //get families where right person is married to right spouse
-            $query = "SELECT familyID FROM $families_table WHERE $p1self = \"$personID2\" AND $p1spouse = \"$varname\"";
+            $query = "SELECT familyID FROM families WHERE $p1self = \"$personID2\" AND $p1spouse = \"$varname\"";
             $sp1result = tng_query($query);
             $sp1row = tng_fetch_assoc($sp1result);
             tng_free_result($sp1result);
 
             //get spouse order for left person, add one
-            $query = "SELECT $p1spouseorder FROM $families_table WHERE $p1self = \"$personID1\" ORDER BY $p1spouseorder DESC";
+            $query = "SELECT $p1spouseorder FROM families WHERE $p1self = \"$personID1\" ORDER BY $p1spouseorder DESC";
             $spresult = tng_query($query);
             $sprow = tng_fetch_assoc($spresult);
             tng_free_result($spresult);
             $sporder = $sprow[$p1spouseorder] + 1;
 
             //update those families to have left person married to right spouse, change spouse order
-            $query = "UPDATE $families_table set $p1self = \"$personID1\", $p1spouseorder = \"$sporder\" WHERE familyID = '$varname'";
+            $query = "UPDATE families set $p1self = \"$personID1\", $p1spouseorder = \"$sporder\" WHERE familyID = '$varname'";
             $chilresult = tng_query($query);
           }
         }
@@ -620,7 +619,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
 
   //update families: remove person2 as spouse from all families
   if ($p1self) {
-    $query = "UPDATE $families_table set $p1self = \"\", $p1spouseorder = \"0\" WHERE $p1self = '$personID2'";
+    $query = "UPDATE families set $p1self = \"\", $p1spouseorder = \"0\" WHERE $p1self = '$personID2'";
     $chilresult = tng_query($query);
   }
 
@@ -653,7 +652,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
   //clean up: remove all families with husband blank and wife blank
   //remove all children from those families
   if ($deleteblankfamilies) {
-    $query = "SELECT familyID FROM $families_table WHERE husband = \"\" AND wife = \"\"";
+    $query = "SELECT familyID FROM families WHERE husband = \"\" AND wife = \"\"";
     $blankfams = tng_query($query);
     while ($blankrow = tng_fetch_assoc($blankfams)) {
       $query = "DELETE FROM children WHERE familyID = \"{$blankrow['familyID']}\"";
@@ -663,7 +662,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
       $result2 = tng_query($query);
     }
     tng_free_result($blankfams);
-    $query = "DELETE FROM $families_table WHERE husband = \"\" AND wife = \"\"";
+    $query = "DELETE FROM families WHERE husband = \"\" AND wife = \"\"";
     $famresult = tng_query($query);
   }
   adminwritelog(uiTextSnippet('merge') . ": $personID2 => $personID1");
@@ -847,7 +846,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                       }
 
                       if ($p2self) {
-                        $query = "SELECT $p2spouse, familyID, marrdate, marrplace, sealdate, sealplace FROM $families_table WHERE $families_table.$p2self = \"{$p2row['personID']}\" ORDER BY $p2spouseorder";
+                        $query = "SELECT $p2spouse, familyID, marrdate, marrplace, sealdate, sealplace FROM families WHERE families.$p2self = \"{$p2row['personID']}\" ORDER BY $p2spouseorder";
                         $marriages2 = tng_query($query);
 
                         while ($marriage = tng_fetch_assoc($marriages2)) {
@@ -955,7 +954,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                     }
 
                     if ($p1self) {
-                      $query = "SELECT $p1spouse, familyID, marrdate, marrplace, sealdate, sealplace FROM $families_table WHERE $families_table.$p1self = \"{$p1row['personID']}\" ORDER BY $p1spouseorder";
+                      $query = "SELECT $p1spouse, familyID, marrdate, marrplace, sealdate, sealplace FROM families WHERE families.$p1self = \"{$p1row['personID']}\" ORDER BY $p1spouseorder";
                       $marriages1 = tng_query($query);
 
                       while ($marriage = tng_fetch_assoc($marriages1)) {

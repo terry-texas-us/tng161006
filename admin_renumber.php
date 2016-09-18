@@ -54,7 +54,7 @@ echo $navList->build('renumber');
       $table = $people_table;
       $id = 'personID';
     } elseif ($type == 'family') {
-      $table = $families_table;
+      $table = 'families';
       $id = 'familyID';
     } elseif ($type == 'source') {
       $table = 'sources';
@@ -134,10 +134,10 @@ echo $navList->build('renumber');
           if ($type == 'person') {
             $old = $row['personID'];
 
-            $query = "UPDATE $families_table SET husband = '$newID' WHERE husband = '$old'";
+            $query = "UPDATE families SET husband = '$newID' WHERE husband = '$old'";
             $result2 = tng_query($query);
 
-            $query = "UPDATE $families_table SET wife = '$newID' WHERE wife = '$old'";
+            $query = "UPDATE families SET wife = '$newID' WHERE wife = '$old'";
             $result2 = tng_query($query);
 
             $query = "UPDATE children SET personID = '$newID' WHERE personID = '$old'";

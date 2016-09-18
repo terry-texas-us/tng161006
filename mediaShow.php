@@ -180,7 +180,7 @@ $headSection->setTitle($titlestr);
       if ($status && uiTextSnippet($status)) {
         $row['status'] = uiTextSnippet($status);
       }
-      $query = "SELECT medialinks.mediaID, medialinks.personID AS personID, people.personID AS personID2, people.living AS living, people.private AS private, people.branch AS branch, medialinks.eventID, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, familyID, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, sources.title, sources.sourceID, repositories.repoID, reponame, deathdate, burialdate, linktype FROM medialinks LEFT JOIN $people_table AS people ON medialinks.personID = people.personID LEFT JOIN $families_table ON medialinks.personID = $families_table.familyID LEFT JOIN sources ON medialinks.personID = sources.sourceID LEFT JOIN repositories ON (medialinks.personID = repositories.repoID) WHERE mediaID = '{$row['mediaID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT $maxplus"; 
+      $query = "SELECT medialinks.mediaID, medialinks.personID AS personID, people.personID AS personID2, people.living AS living, people.private AS private, people.branch AS branch, medialinks.eventID, families.branch AS fbranch, families.living AS fliving, families.private AS fprivate, familyID, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, sources.title, sources.sourceID, repositories.repoID, reponame, deathdate, burialdate, linktype FROM medialinks LEFT JOIN $people_table AS people ON medialinks.personID = people.personID LEFT JOIN families ON medialinks.personID = families.familyID LEFT JOIN sources ON medialinks.personID = sources.sourceID LEFT JOIN repositories ON (medialinks.personID = repositories.repoID) WHERE mediaID = '{$row['mediaID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT $maxplus"; 
       $presult = tng_query($query);
       $numrows = tng_num_rows($presult);
       $medialinktext = '';
@@ -209,8 +209,8 @@ $headSection->setTitle($titlestr);
           tng_free_result($presult2);
         }
         if ($prow['living'] == null && $prow['private'] == null && $prow['linktype'] == 'F') {
-          $query = "SELECT count(familyID) AS ccount FROM citations, $families_table
-              WHERE citations.sourceID = '{$prow['personID']}' AND citations.persfamID = $families_table.familyID AND living = '1'";
+          $query = "SELECT count(familyID) AS ccount FROM citations, families
+              WHERE citations.sourceID = '{$prow['personID']}' AND citations.persfamID = families.familyID AND living = '1'";
           $presult2 = tng_query($query);
           $prow2 = tng_fetch_assoc($presult2);
           if ($prow2['ccount']) {

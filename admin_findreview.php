@@ -65,8 +65,8 @@ if ($type == 'I') {
   $returnpage = 'people.php';
   $totquery = "SELECT count(tempID) AS tcount FROM $people_table, trees, temp_events WHERE $allwhere";
 } elseif ($type == 'F') {
-  $allwhere .= " AND $families_table.familyID = temp_events.familyID AND type = 'F'";
-  $query = "SELECT tempID, temp_events.familyID AS familyID, husband, wife, eventID, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") AS postdate FROM $families_table, trees, temp_events WHERE $allwhere ORDER BY postdate DESC";
+  $allwhere .= " AND families.familyID = temp_events.familyID AND type = 'F'";
+  $query = "SELECT tempID, temp_events.familyID AS familyID, husband, wife, eventID, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") AS postdate FROM families, trees, temp_events WHERE $allwhere ORDER BY postdate DESC";
   $returnpage = 'families.php';
   $totquery = "SELECT count(tempID) AS tcount FROM $people_table, trees, temp_events WHERE $allwhere";
 }

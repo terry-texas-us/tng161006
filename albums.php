@@ -3,7 +3,6 @@
 function getAlbumPhoto($albumID, $albumname) {
   global $rootpath;
   global $people_table;
-  global $families_table;
   global $mediatypes_assoc;
   global $mediapath;
   
@@ -21,7 +20,7 @@ function getAlbumPhoto($albumID, $albumname) {
     $foundliving = 0;
     $foundprivate = 0;
     if (!$trow['alwayson'] && $livedefault != 2) {
-      $query = "SELECT people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, linktype FROM medialinks LEFT JOIN $people_table AS people ON medialinks.personID = people.personID LEFT JOIN $families_table ON medialinks.personID = $families_table.familyID WHERE mediaID = '$mediaID'";
+      $query = "SELECT people.living AS living, people.private AS private, people.branch AS branch, families.branch AS fbranch, families.living AS fliving, families.private AS fprivate, linktype FROM medialinks LEFT JOIN $people_table AS people ON medialinks.personID = people.personID LEFT JOIN families ON medialinks.personID = families.familyID WHERE mediaID = '$mediaID'";
       $presult = tng_query($query);
       while ($prow = tng_fetch_assoc($presult)) {
         if ($prow['fbranch'] != null) {
@@ -49,8 +48,8 @@ function getAlbumPhoto($albumID, $albumname) {
           }
           tng_free_result($presult2);
         } elseif ($prow['living'] == null && $prow['private'] == null && $prow['linktype'] == 'F') {
-          $query = "SELECT count(familyID) AS ccount FROM citations, $families_table
-            WHERE citations.sourceID = '{$prow['personID']}' AND citations.persfamID = $families_table.familyID AND living = '1'";
+          $query = "SELECT count(familyID) AS ccount FROM citations, families
+            WHERE citations.sourceID = '{$prow['personID']}' AND citations.persfamID = families.familyID AND living = '1'";
           $presult2 = tng_query($query);
           $prow2 = tng_fetch_assoc($presult2);
           if ($prow2['ccount']) {

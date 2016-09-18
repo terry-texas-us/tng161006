@@ -25,7 +25,7 @@ function getBirth($row) {
 }
 
 $familyID = ucfirst($familyID);
-$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $families_table WHERE familyID = '$familyID'";
+$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM families WHERE familyID = '$familyID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -39,7 +39,7 @@ if ((!$allowEdit && (!$allowAdd || !$added)) || !checkbranch($row['branch'])) {
   header('Location: ajx_login.php?message=' . urlencode($message));
   exit;
 }
-$editconflict = determineConflict($row, $families_table);
+$editconflict = determineConflict($row, 'families');
 
 $rightbranch = checkbranch($row['branch']);
 $rights = determineLivingPrivateRights($row, $rightbranch);

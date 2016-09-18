@@ -145,7 +145,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
         //calculate offsets
         if ($offsetchoice == 'auto') {
           $savestate['ioffset'] = getNewNumericID('person', 'person', $people_table);
-          $savestate['foffset'] = getNewNumericID('family', 'family', $families_table);
+          $savestate['foffset'] = getNewNumericID('family', 'family', 'families');
           $savestate['soffset'] = getNewNumericID('source', 'source', 'sources');
           $savestate['noffset'] = getNewNumericID('note', 'note', 'xnotes');
           $savestate['roffset'] = getNewNumericID('repo', 'repo', 'repositories');

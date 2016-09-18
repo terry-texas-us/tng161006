@@ -88,13 +88,13 @@ $headSection->setTitle(uiTextSnippet('branches'));
         if ($peoplewhere) {
           $peoplewhere = 'AND ' . $peoplewhere;
         }
-        $familywhere = getLivingPrivateRestrictions($families_table, false, false);
+        $familywhere = getLivingPrivateRestrictions('families', false, false);
         if ($familywhere) {
           $familywhere = 'AND ' . $familywhere;
         }
 
         while ($row = tng_fetch_assoc($result)) {
-          $query = "SELECT count(familyID) AS fcount FROM $families_table WHERE branch LIKE \"%{$row['branch']}%\" $familywhere";
+          $query = "SELECT count(familyID) AS fcount FROM families WHERE branch LIKE \"%{$row['branch']}%\" $familywhere";
           $famresult = tng_query($query);
           $famrow = tng_fetch_assoc($famresult);
           tng_free_result($famresult);

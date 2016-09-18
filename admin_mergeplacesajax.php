@@ -84,11 +84,11 @@ foreach ($mergelist as $val) {
     $result = tng_query($query);
 
     //families
-    $query = "UPDATE $families_table SET marrplace = '$newplace' WHERE marrplace = '$oldplace'";
+    $query = "UPDATE families SET marrplace = '$newplace' WHERE marrplace = '$oldplace'";
     $result = tng_query($query);
-    $query = "UPDATE $families_table SET divplace = '$newplace' WHERE divplace = '$oldplace'";
+    $query = "UPDATE families SET divplace = '$newplace' WHERE divplace = '$oldplace'";
     $result = tng_query($query);
-    $query = "UPDATE $families_table SET sealplace = '$newplace' WHERE sealplace = '$oldplace'";
+    $query = "UPDATE families SET sealplace = '$newplace' WHERE sealplace = '$oldplace'";
     $result = tng_query($query);
 
     //events

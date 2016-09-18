@@ -63,157 +63,128 @@ function getChildParentsFamily($personID) {
 }
 
 function getChildParentsFamilyMinimal($personID) {
-  global $families_table;
-
-  $query = "SELECT husband, wife FROM ($families_table, children) WHERE personID = '$personID' AND children.familyID = $families_table.familyID";
+  $query = "SELECT husband, wife FROM (families, children) WHERE personID = '$personID' AND children.familyID = families.familyID";
 
   return tng_query($query);
 }
 
 function getParentData($familyID, $spouse) {
   global $people_table;
-  global $families_table;
 
-  $query = "SELECT personID, lastname, lnprefix, firstname, prefix, suffix, nameorder, birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, marrdate, marrplace, $people_table.living, $people_table.private, $people_table.branch, sex FROM ($people_table, $families_table) WHERE personID = $spouse AND familyID = '$familyID'";
+  $query = "SELECT personID, lastname, lnprefix, firstname, prefix, suffix, nameorder, birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, marrdate, marrplace, $people_table.living, $people_table.private, $people_table.branch, sex FROM ($people_table, families) WHERE personID = $spouse AND familyID = '$familyID'";
   return tng_query($query);
 }
 
 function getParentDataCrossPlusDates($familyID, $spouse1, $spouse1ID, $spouse2) {
   global $people_table;
-  global $families_table;
 
   //Get opposite parent for a family plus dates
-  $query = "SELECT personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, sex, $people_table.living, $people_table.private, $people_table.branch, IF(birthdate != '', YEAR(birthdatetr), YEAR(altbirthdatetr)) AS birth, IF(deathdate != '', YEAR(deathdatetr), YEAR(burialdatetr)) AS death FROM ($families_table, $people_table) WHERE $spouse1 = '$spouse1ID' AND personID = $spouse2 AND familyID = '$familyID'";
+  $query = "SELECT personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, sex, $people_table.living, $people_table.private, $people_table.branch, IF(birthdate != '', YEAR(birthdatetr), YEAR(altbirthdatetr)) AS birth, IF(deathdate != '', YEAR(deathdatetr), YEAR(burialdatetr)) AS death FROM (families, $people_table) WHERE $spouse1 = '$spouse1ID' AND personID = $spouse2 AND familyID = '$familyID'";
 
   return tng_query($query);
 }
 
 function getParentSimple($familyID, $spouse) {
   global $people_table;
-  global $families_table;
 
-  $query = "SELECT personID, lastname, lnprefix, firstname, prefix, suffix, nameorder, $people_table.living, $people_table.private, $people_table.branch FROM ($people_table, $families_table) WHERE personID = $spouse AND familyID = '$familyID'";
+  $query = "SELECT personID, lastname, lnprefix, firstname, prefix, suffix, nameorder, $people_table.living, $people_table.private, $people_table.branch FROM ($people_table, families) WHERE personID = $spouse AND familyID = '$familyID'";
 
   return tng_query($query);
 }
 
 function getParentSimplePlusDates($familyID, $spouse) {
   global $people_table;
-  global $families_table;
 
-  $query = "SELECT personID, lastname, lnprefix, firstname, prefix, suffix, nameorder, birthdate, YEAR(birthdatetr) AS birthyear, deathdate, YEAR(deathdatetr) AS deathyear, $people_table.living, $people_table.private, $people_table.branch FROM ($people_table, $families_table) WHERE personID = $spouse AND familyID = '$familyID'";
+  $query = "SELECT personID, lastname, lnprefix, firstname, prefix, suffix, nameorder, birthdate, YEAR(birthdatetr) AS birthyear, deathdate, YEAR(deathdatetr) AS deathyear, $people_table.living, $people_table.private, $people_table.branch FROM ($people_table, families) WHERE personID = $spouse AND familyID = '$familyID'";
 
   return tng_query($query);
 }
 
 function getFamilyMinimal($familyID) {
-  global $families_table;
-
-  $query = "SELECT UPPER(husband) AS husband, UPPER(wife) AS wife FROM $families_table WHERE familyID = '$familyID'";
+  $query = "SELECT UPPER(husband) AS husband, UPPER(wife) AS wife FROM families WHERE familyID = '$familyID'";
 
   return tng_query($query);
 }
 
 function getFamilyData($familyID) {
-  global $families_table;
-
   //Get husband and wife IDs for a family
-  $query = "SELECT husband, wife, living, private, branch, marrdate, marrdatetr, marrplace, divdate, divdatetr, divplace, familyID FROM $families_table WHERE familyID = '$familyID'";
+  $query = "SELECT husband, wife, living, private, branch, marrdate, marrdatetr, marrplace, divdate, divdatetr, divplace, familyID FROM families WHERE familyID = '$familyID'";
 
   return tng_query($query);
 }
 
 function getSpouseFamilyMinimal($spouse1, $spouse1ID, $spouseorder) {
-  global $families_table;
-
-  $query = "SELECT husband, wife, familyID FROM $families_table WHERE $spouse1 = '$spouse1ID' ORDER BY $spouseorder";
+  $query = "SELECT husband, wife, familyID FROM families WHERE $spouse1 = '$spouse1ID' ORDER BY $spouseorder";
 
   return tng_query($query);
 }
 
 function getSpouseFamilyMinimalUnion($spouse1ID) {
-  global $families_table;
-
   //Get family data for a known spouse with unknown gender
-  $query = "SELECT husband, wife, familyID FROM $families_table WHERE $families_table.wife = '$spouse1ID'
+  $query = "SELECT husband, wife, familyID FROM families WHERE families.wife = '$spouse1ID'
       UNION
-        SELECT husband, wife, familyID FROM $families_table WHERE $families_table.husband = '$spouse1ID'";
+        SELECT husband, wife, familyID FROM families WHERE families.husband = '$spouse1ID'";
 
   return tng_query($query);
 }
 
 function getSpouseFamilyMinimalExcept($spouse1, $spouse1ID, $spouse2, $spouse2ID) {
-  global $families_table;
-
   // Get family ID, plus spouse ID for a known person, except the one indicated
-  $query = "SELECT familyID, UPPER(husband) AS husband, UPPER(wife) AS wife FROM $families_table WHERE $spouse1 = '$spouse1ID' AND $spouse2 != '$spouse2ID'";
+  $query = "SELECT familyID, UPPER(husband) AS husband, UPPER(wife) AS wife FROM families WHERE $spouse1 = '$spouse1ID' AND $spouse2 != '$spouse2ID'";
 
   return tng_query($query);
 }
 
 function getSpouseFamilyData($spouse1, $spouse1ID, $spouseorder) {
-  global $families_table;
-
-  $query = "SELECT husband, wife, familyID, marrdate, marrplace, marrtype, divdate, divplace, living, private, branch FROM $families_table WHERE $spouse1 = '$spouse1ID' ORDER BY $spouseorder";
+  $query = "SELECT husband, wife, familyID, marrdate, marrplace, marrtype, divdate, divplace, living, private, branch FROM families WHERE $spouse1 = '$spouse1ID' ORDER BY $spouseorder";
 
   return tng_query($query);
 }
 
 function getSpouseFamilyDataUnion($spouse1ID) {
-  global $families_table;
-
   // Get most family data for a known spouse with unknown gender
-  $query = "SELECT husband, wife, familyID, marrdate, marrplace, marrtype, divdate, divplace, living, private, branch FROM $families_table WHERE husband = '$spouse1ID'
+  $query = "SELECT husband, wife, familyID, marrdate, marrplace, marrtype, divdate, divplace, living, private, branch FROM families WHERE husband = '$spouse1ID'
       UNION
-        SELECT husband, wife, familyID, marrdate, marrplace, marrtype, divdate, divplace, living, private, branch FROM $families_table WHERE wife = '$spouse1ID'";
+        SELECT husband, wife, familyID, marrdate, marrplace, marrtype, divdate, divplace, living, private, branch FROM families WHERE wife = '$spouse1ID'";
 
   return tng_query($query);
 }
 
 function getSpouseFamilyDataPlusDates($spouse1, $spouse1ID, $spouseorder) {
-  global $families_table;
-
-  $query = "SELECT husband, wife, familyID, marrdate, marrdatetr, marrplace, marrtype, living, private, branch, YEAR(marrdatetr) AS marryear, MONTH(marrdatetr) AS marrmonth, DAYOFMONTH(marrdatetr) AS marrday, marrplace, sealdate, sealplace FROM $families_table WHERE $spouse1 = '$spouse1ID' ORDER BY $spouseorder";
+  $query = "SELECT husband, wife, familyID, marrdate, marrdatetr, marrplace, marrtype, living, private, branch, YEAR(marrdatetr) AS marryear, MONTH(marrdatetr) AS marrmonth, DAYOFMONTH(marrdatetr) AS marrday, marrplace, sealdate, sealplace FROM families WHERE $spouse1 = '$spouse1ID' ORDER BY $spouseorder";
 
   return tng_query($query);
 }
 
 function getSpouseFamilyDataUnionPlusDates($spouse1ID) {
-  global $families_table;
-
   // Get most family data for a known spouse with unknown gender
-  $query = "SELECT husband, wife, familyID, marrdate, marrdatetr, marrplace, marrtype, living, private, branch, YEAR(marrdatetr) AS marryear, MONTH(marrdatetr) AS marrmonth, DAYOFMONTH(marrdatetr) AS marrday, marrplace, sealdate, sealplace FROM $families_table WHERE husband = '$spouse1ID'
+  $query = "SELECT husband, wife, familyID, marrdate, marrdatetr, marrplace, marrtype, living, private, branch, YEAR(marrdatetr) AS marryear, MONTH(marrdatetr) AS marrmonth, DAYOFMONTH(marrdatetr) AS marrday, marrplace, sealdate, sealplace FROM families WHERE husband = '$spouse1ID'
       UNION
-        SELECT husband, wife, familyID, marrdate, marrdatetr, marrplace, marrtype, living, private, branch, YEAR(marrdatetr) AS marryear, MONTH(marrdatetr) AS marrmonth, DAYOFMONTH(marrdatetr) AS marrday, marrplace, sealdate, sealplace FROM $families_table WHERE wife = '$spouse1ID'";
+        SELECT husband, wife, familyID, marrdate, marrdatetr, marrplace, marrtype, living, private, branch, YEAR(marrdatetr) AS marryear, MONTH(marrdatetr) AS marrmonth, DAYOFMONTH(marrdatetr) AS marrday, marrplace, sealdate, sealplace FROM families WHERE wife = '$spouse1ID'";
 
   return tng_query($query);
 }
 
 function getSpouseFamilyFull($spouse1, $spouse1ID, $spouseorder) {
-  global $families_table;
-
-  $query = "SELECT *, DATE_FORMAT(changedate,\"%e %b %Y\") AS changedate FROM $families_table WHERE $spouse1 = '$spouse1ID' ORDER BY $spouseorder";
+  $query = "SELECT *, DATE_FORMAT(changedate,\"%e %b %Y\") AS changedate FROM families WHERE $spouse1 = '$spouse1ID' ORDER BY $spouseorder";
 
   return tng_query($query);
 }
 
 function getSpouseFamilyFullUnion($spouse1ID) {
-  global $families_table;
-
   // Get all family data for a known spouse with unknown gender
-  $query = "SELECT *, DATE_FORMAT(changedate,\"%e %b %Y %H:%i:%s\") AS changedate FROM $families_table WHERE husband = '$spouse1ID'
+  $query = "SELECT *, DATE_FORMAT(changedate,\"%e %b %Y %H:%i:%s\") AS changedate FROM families WHERE husband = '$spouse1ID'
       UNION
-        SELECT *, DATE_FORMAT(changedate,\"%e %b %Y %H:%i:%s\") AS changedate FROM $families_table WHERE wife = '$spouse1ID'";
+        SELECT *, DATE_FORMAT(changedate,\"%e %b %Y %H:%i:%s\") AS changedate FROM families WHERE wife = '$spouse1ID'";
 
   return tng_query($query);
 }
 
 function getSpousesSimple($spouse1, $spouse1ID, $spouse2, $spouseorder) {
-  global $families_table;
   global $people_table;
 
   // Get basic information for all spouses of a person (spouse1)
-  $query = "SELECT UPPER($spouse2) AS $spouse2, familyID, sex FROM $families_table LEFT JOIN $people_table ON $people_table.personID = $spouse2 WHERE $spouse1 = '$spouse1ID' ORDER BY $spouseorder";
+  $query = "SELECT UPPER($spouse2) AS $spouse2, familyID, sex FROM families LEFT JOIN $people_table ON $people_table.personID = $spouse2 WHERE $spouse1 = '$spouse1ID' ORDER BY $spouseorder";
 
   return tng_query($query);
 }

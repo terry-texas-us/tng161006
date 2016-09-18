@@ -152,7 +152,7 @@ if ($result && tng_num_rows($result)) {
       $query = "INSERT INTO children (familyID, personID, ordernum, frel, mrel, haskids, parentorder, sealdate, sealdatetr, sealplace) VALUES ('$familyID', '$personID', $order, '$frel', '$mrel', 0, 0, '', '0000-00-00', '')";
       $result = tng_query($query);
 
-      $query = "SELECT husband,wife FROM $families_table WHERE familyID = '$familyID'";
+      $query = "SELECT husband,wife FROM families WHERE familyID = '$familyID'";
       $result = tng_query($query);
       $famrow = tng_fetch_assoc($result);
       if ($famrow['husband']) {

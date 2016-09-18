@@ -20,7 +20,6 @@ function buildPlaceMenu($currpage, $entityID) {
 
 function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
   global $people_table;
-  global $families_table;
   global $offset;
   global $page;
   global $psearch;
@@ -39,9 +38,9 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
     $idtext = 'personid';
     $namefield = 'lastfirst';
   } elseif ($prefix == 'F') {
-    $table = $families_table;
-    $peoplejoin1 = " LEFT JOIN $people_table as p1 ON p1.personID = $families_table.husband";
-    $peoplejoin2 = " LEFT JOIN $people_table as p2 ON p2.personID = $families_table.wife";
+    $table = 'families';
+    $peoplejoin1 = " LEFT JOIN $people_table as p1 ON p1.personID = families.husband";
+    $peoplejoin2 = " LEFT JOIN $people_table as p2 ON p2.personID = families.wife";
     $idfield = 'familyID';
     $idtext = 'familyid';
     $namefield = 'family';
@@ -94,7 +93,7 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
       } else {
         $orderstr = "$datefieldtr DESC, p1lastname DESC, p2lastname DESC";
       }
-      $query = "SELECT $families_table.ID, familyID, $families_table.living, $families_table.private, $families_table.branch, p1.lastname AS p1lastname, p2.lastname AS p2lastname, $place, $datefield FROM ($families_table $eventsjoin) $peoplejoin1 $peoplejoin2 WHERE $livingPrivateCondition $allwhere2 ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
+      $query = "SELECT families.ID, familyID, families.living, families.private, families.branch, p1.lastname AS p1lastname, p2.lastname AS p2lastname, $place, $datefield FROM (families $eventsjoin) $peoplejoin1 $peoplejoin2 WHERE $livingPrivateCondition $allwhere2 ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
     } elseif ($prefix == 'I') {
       if ($order == 'name') {
         $orderstr = "lastname, firstname, $datefieldtr";

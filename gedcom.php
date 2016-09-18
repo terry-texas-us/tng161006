@@ -319,12 +319,11 @@ function doXNotes() {
 function getFamily($person, $parents, $generation) {
   global $famarray;
   global $indarray;
-  global $families_table;
   global $people_table;
   global $lineending;
   global $gotfamily;
 
-  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM $families_table WHERE familyID = '$parents'";
+  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM families WHERE familyID = '$parents'";
   $result = tng_query($query);
   if ($result) {
     $family = tng_fetch_assoc($result);
@@ -336,7 +335,7 @@ function getFamily($person, $parents, $generation) {
 
       if ($family['husband']) {
         getAncestor($family['husband'], $generation);
-        $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM $families_table WHERE husband = \"{$family['husband']}\" ORDER BY husborder";
+        $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM families WHERE husband = \"{$family['husband']}\" ORDER BY husborder";
         $result = tng_query($query);
         if ($result) {
           while ($spouse = tng_fetch_assoc($result)) {
@@ -359,7 +358,7 @@ function getFamily($person, $parents, $generation) {
 
       if ($family['wife']) {
         getAncestor($family['wife'], $generation);
-        $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM $families_table WHERE wife = \"{$family['wife']}\" ORDER BY wifeorder";
+        $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM families WHERE wife = \"{$family['wife']}\" ORDER BY wifeorder";
         $result = tng_query($query);
         if ($result) {
           while ($spouse = tng_fetch_assoc($result)) {
@@ -848,7 +847,6 @@ function getDescendant($person, $generation) {
   global $maxgcgen;
   global $famarray;
   global $indarray;
-  global $families_table;
   global $people_table;
   global $lineending;
 
@@ -862,7 +860,7 @@ function getDescendant($person, $generation) {
     $orderby = '';
   }
   tng_free_result($result);
-  $query = "(SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM $families_table WHERE husband = '$person') UNION (SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM $families_table WHERE wife = \"$person\")$orderby";
+  $query = "(SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM families WHERE husband = '$person') UNION (SELECT *, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM families WHERE wife = \"$person\")$orderby";
   $result = tng_query($query);
   if ($result) {
     while ($family = tng_fetch_assoc($result)) {
@@ -1080,10 +1078,10 @@ if ($maxgcgen > 0 || $type == 'all') {
           }
           $query = '';
           if ($ind['sex'] == 'M') {
-            $query = "SELECT familyID FROM $families_table WHERE husband = \"{$ind['personID']}\" ORDER BY wifeorder";
+            $query = "SELECT familyID FROM families WHERE husband = \"{$ind['personID']}\" ORDER BY wifeorder";
           } else {
             if ($ind['sex'] == 'F') {
-              $query = "SELECT familyID FROM $families_table WHERE wife = \"{$ind['personID']}\" ORDER BY husborder";
+              $query = "SELECT familyID FROM families WHERE wife = \"{$ind['personID']}\" ORDER BY husborder";
             }
           }
           if ($query) {
@@ -1097,7 +1095,7 @@ if ($maxgcgen > 0 || $type == 'all') {
         }
         tng_free_result($result);
 
-        $query = "SELECT * FROM $families_table";
+        $query = 'SELECT * FROM families';
         $result = tng_query($query);
         while ($fam = tng_fetch_assoc($result)) {
           $famarray[$fam['familyID']] = writeFamily($fam);

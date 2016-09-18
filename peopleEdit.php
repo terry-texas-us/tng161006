@@ -360,9 +360,9 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
           <?php
           if ($row['sex']) {
             if ($self) {
-              $query = "SELECT $spouse, familyID, marrdate FROM $families_table WHERE $families_table.$self = '$personID' ORDER BY $spouseorder";
+              $query = "SELECT $spouse, familyID, marrdate FROM families WHERE families.$self = '$personID' ORDER BY $spouseorder";
             } else {
-              $query = "SELECT husband, wife, familyID, marrdate FROM $families_table WHERE ($families_table.husband = \"$personID\" OR $families_table.wife = \"$personID\")";
+              $query = "SELECT husband, wife, familyID, marrdate FROM families WHERE (families.husband = \"$personID\" OR families.wife = \"$personID\")";
             }
             $marriages = tng_query($query);
             $marrcount = tng_num_rows($marriages);

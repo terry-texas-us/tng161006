@@ -6,7 +6,7 @@ require 'checklogin.php';
 require 'version.php';
 
 $familyID = ucfirst($familyID);
-$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $families_table WHERE familyID = '$familyID'";
+$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM families WHERE familyID = '$familyID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -20,7 +20,7 @@ if ((!$allowEdit && (!$allowAdd || !$added)) || !checkbranch($row['branch'])) {
   header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-$editconflict = determineConflict($row, $families_table);
+$editconflict = determineConflict($row, families);
 if ($tngconfig['edit_timeout'] === '') {
   $tngconfig['edit_timeout'] = 15;
 }

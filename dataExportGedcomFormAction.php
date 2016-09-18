@@ -563,7 +563,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     function writeIndividual($ind) {
       global $people_table;
       global $lnprefixes;
-      global $families_table;
       global $citations;
       global $templeready;
       global $savestate;
@@ -596,7 +595,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       } else {
         $orderfield = $orderby = '';
       }
-      $query = "(SELECT familyID, changedate, sealdate, sealplace, marrplace, marrdatetr$orderfield FROM $families_table WHERE husband = \"{$ind['personID']}\" $exlivingstr $exprivatestr) UNION (SELECT familyID, changedate, sealdate, sealplace, marrplace, marrdatetr$orderfield FROM $families_table WHERE wife = \"{$ind['personID']}\" $exlivingstr $exprivatestr)$orderby";
+      $query = "(SELECT familyID, changedate, sealdate, sealplace, marrplace, marrdatetr$orderfield FROM families WHERE husband = \"{$ind['personID']}\" $exlivingstr $exprivatestr) UNION (SELECT familyID, changedate, sealdate, sealplace, marrplace, marrdatetr$orderfield FROM families WHERE wife = \"{$ind['personID']}\" $exlivingstr $exprivatestr)$orderby";
 
       $result2 = tng_query($query);
       while ($spouse = tng_fetch_assoc($result2)) {
@@ -1505,7 +1504,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         }
 
         $query = "SELECT *, (0+SUBSTRING(familyID,$prefixlen)) AS num, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate "
-          . "FROM $families_table "
+          . "FROM families "
           . "WHERE 1 $branchstr {$savestate['wherestr']} $exlivingstr $exprivatestr "
           . 'ORDER BY num '
           . "LIMIT $nextone, $largechunk";

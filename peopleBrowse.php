@@ -102,13 +102,13 @@ if ($noparents) {
   $noparentjoin = '';
 }
 if ($nospouse) {
-  $nospousejoin = "LEFT JOIN $families_table as nospousef ON $people_table.personID = nospousef.husband LEFT JOIN $families_table as nospousem ON $people_table.personID = nospousem.wife";
+  $nospousejoin = "LEFT JOIN families as nospousef ON $people_table.personID = nospousef.husband LEFT JOIN families as nospousem ON $people_table.personID = nospousem.wife";
   $allwhere .= ' AND nospousef.familyID is NULL AND nospousem.familyID is NULL';
 } else {
   $nospousejoin = '';
 }
 if ($nokids) {
-  $nokidjoin = "LEFT OUTER JOIN $families_table AS familiesH ON $people_table.personID=familiesH.husband LEFT OUTER JOIN $families_table AS familiesW ON $people_table.personID=familiesW.wife LEFT OUTER JOIN children AS childrenH ON familiesH.familyID=childrenH.familyID LEFT OUTER JOIN children AS childrenW ON familiesW.familyID=childrenW.familyID ";
+  $nokidjoin = "LEFT OUTER JOIN families AS familiesH ON $people_table.personID=familiesH.husband LEFT OUTER JOIN families AS familiesW ON $people_table.personID=familiesW.wife LEFT OUTER JOIN children AS childrenH ON familiesH.familyID=childrenH.familyID LEFT OUTER JOIN children AS childrenW ON familiesW.familyID=childrenW.familyID ";
   $nokidhaving = 'HAVING ChildrenCount = 0 ';
   $nokidgroup = "GROUP BY $people_table.personID, $people_table.lastname, $people_table.firstname, $people_table.firstname, $people_table.lnprefix, $people_table.prefix, $people_table.suffix, $people_table.nameorder, $people_table.birthdate, birthyear, $people_table.birthplace, $people_table.altbirthdate, altbirthyear, $people_table.altbirthplace ";
   $nokidselect = ', SUM((childrenH.familyID is not NULL) + (childrenW.familyID is not NULL)) AS ChildrenCount ';

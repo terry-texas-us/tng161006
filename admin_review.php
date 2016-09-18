@@ -40,7 +40,7 @@ if ($row['type'] == 'I' || $row['type'] == 'C') {
   $editstr = "  | <a href=\"peopleEdit.php?personID=$personID\" target='_blank'>" . uiTextSnippet('edit') . '</a>';
 } elseif ($row['type'] == 'F') {
   
-  $query = "SELECT husband, wife FROM $families_table WHERE familyID = '$familyID'";
+  $query = "SELECT husband, wife FROM families WHERE familyID = '$familyID'";
   $result = tng_query($query);
   $frow = tng_fetch_assoc($result);
   $hname = $wname = '';
@@ -199,7 +199,7 @@ if (is_numeric($eventID)) {
     $fieldstr .= $fieldstr ? ", $factfield" : $factfield;
   }
   if ($needfamilies) {
-    $query = "SELECT $fieldstr FROM $families_table WHERE familyID = '$familyID'";
+    $query = "SELECT $fieldstr FROM families WHERE familyID = '$familyID'";
   } elseif ($needchildren) {
     $query = "SELECT $fieldstr FROM children WHERE familyID = '$familyID' AND personID = '$personID'";
   } else {

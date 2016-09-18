@@ -9,7 +9,7 @@ require 'datelib.php';
 
 require 'geocodelib.php';
 
-$query = "SELECT branch, edituser, edittime FROM $families_table WHERE familyID = '$familyID'";
+$query = "SELECT branch, edituser, edittime FROM families WHERE familyID = '$familyID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -19,7 +19,7 @@ if (!$allowEdit || !checkbranch($row['branch'])) {
   header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-$editconflict = determineConflict($row, $families_table);
+$editconflict = determineConflict($row, families);
 
 if (!$editconflict) {
   if ($newfamily == 'ajax' && $session_charset != 'UTF-8') {
@@ -104,7 +104,7 @@ if (!$editconflict) {
       $message = geocode($place, 0, $ID);
     }
   }
-  $query = "UPDATE $families_table SET husband=\"$husband\",wife=\"$wife\",living=\"$familyliving\",private=\"$private\",marrdate=\"$marrdate\",marrdatetr=\"$marrdatetr\",marrplace=\"$marrplace\",marrtype=\"$marrtype\",divdate=\"$divdate\",divdatetr=\"$divdatetr\",divplace=\"$divplace\",sealdate=\"$sealdate\",sealdatetr=\"$sealdatetr\",sealplace=\"$sealplace\",changedate=\"$newdate\",branch=\"$allbranches\",changedby=\"$currentuser\",edituser=\"\",edittime=\"0\" WHERE familyID = '$familyID'";
+  $query = "UPDATE families SET husband=\"$husband\",wife=\"$wife\",living=\"$familyliving\",private=\"$private\",marrdate=\"$marrdate\",marrdatetr=\"$marrdatetr\",marrplace=\"$marrplace\",marrtype=\"$marrtype\",divdate=\"$divdate\",divdatetr=\"$divdatetr\",divplace=\"$divplace\",sealdate=\"$sealdate\",sealdatetr=\"$sealdatetr\",sealplace=\"$sealplace\",changedate=\"$newdate\",branch=\"$allbranches\",changedby=\"$currentuser\",edituser=\"\",edittime=\"0\" WHERE familyID = '$familyID'";
   $result = tng_query($query);
 
   adminwritelog("<a href=\"familiesEdit.php?familyID=$familyID&cw=$cw\">" . uiTextSnippet('modifyfamily') . ": $familyID</a>");

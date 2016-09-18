@@ -27,7 +27,7 @@ switch ($linktype) {
     tng_free_result($result2);
     break;
   case 'F':
-    $query = "SELECT branch FROM $families_table WHERE familyID = '$personID'";
+    $query = "SELECT branch FROM families WHERE familyID = '$personID'";
     $result2 = tng_query($query);
     $person = tng_fetch_assoc($result2);
     $namestr = uiTextSnippet('family') . ": $personID";

@@ -32,7 +32,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         echo '<p>' . uiTextSnippet('sortingchildren') . '</p>';
         echo uiTextSnippet('families') . ":<br>\n";
         $fcount = 0;
-        $query = "SELECT familyID FROM $families_table";
+        $query = "SELECT familyID FROM families";
         $result = tng_query($query);
         while ($family = tng_fetch_assoc($result)) {
           $query = "SELECT children.ID AS ID, IF(birthdatetr !='0000-00-00', birthdatetr, altbirthdatetr) AS birth FROM children, $people_table WHERE children.familyID = '{$family['familyID']}' AND $people_table.personID = children.personID ORDER BY birth, ordernum";
@@ -57,15 +57,15 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         echo uiTextSnippet('people') . ":<br>\n";
         $fcount = 0;
         //first do husbands
-        $query = "SELECT personID FROM $families_table, $people_table WHERE $people_table.personID = $families_table.husband";
+        $query = "SELECT personID FROM families, $people_table WHERE $people_table.personID = families.husband";
         $result = tng_query($query);
         while ($husband = tng_fetch_assoc($result)) {
-          $query = "SELECT ID FROM $families_table WHERE husband = '{$husband['personID']}' ORDER BY marrdatetr, husborder";
+          $query = "SELECT ID FROM families WHERE husband = '{$husband['personID']}' ORDER BY marrdatetr, husborder";
           $fresult = tng_query($query);
           $order = 0;
           while ($spouse = tng_fetch_assoc($fresult)) {
             $order++;
-            $query = "UPDATE $families_table SET husborder=\"$order\" WHERE ID=\"{$spouse['ID']}\"";
+            $query = "UPDATE families SET husborder=\"$order\" WHERE ID=\"{$spouse['ID']}\"";
             $cresult = tng_query($query);
           }
           $fcount++;
@@ -77,15 +77,15 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         tng_free_result($result);
 
         //now do wives
-        $query = "SELECT personID FROM $families_table, $people_table WHERE $people_table.personID = $families_table.wife";
+        $query = "SELECT personID FROM families, $people_table WHERE $people_table.personID = families.wife";
         $result = tng_query($query);
         while ($wife = tng_fetch_assoc($result)) {
-          $query = "SELECT ID FROM $families_table WHERE wife = '{$wife['personID']}' ORDER BY marrdatetr, wifeorder";
+          $query = "SELECT ID FROM families WHERE wife = '{$wife['personID']}' ORDER BY marrdatetr, wifeorder";
           $fresult = tng_query($query);
           $order = 0;
           while ($spouse = tng_fetch_assoc($fresult)) {
             $order++;
-            $query = "UPDATE $families_table SET wifeorder=\"$order\" WHERE ID=\"{$spouse['ID']}\"";
+            $query = "UPDATE families SET wifeorder=\"$order\" WHERE ID=\"{$spouse['ID']}\"";
             $cresult = tng_query($query);
           }
           $fcount++;
@@ -173,7 +173,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         $result2 = tng_query($query);
 
         $fcount = 0;
-        $query = "SELECT distinct ($families_table.familyID), husband, wife FROM (children, $families_table) WHERE $families_table.familyID = children.familyID";
+        $query = "SELECT distinct (families.familyID), husband, wife FROM (children, families) WHERE families.familyID = children.familyID";
         $result = tng_query($query);
         while ($family = tng_fetch_assoc($result)) {
           if ($family['husband'] != '') {
@@ -219,7 +219,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
             tng_free_result($result2);
           }
           if (!$success) {
-            $query = "SELECT branch FROM $families_table WHERE familyID = \"{$branch['persfamID']}\"";
+            $query = "SELECT branch FROM families WHERE familyID = \"{$branch['persfamID']}\"";
             $result2 = tng_query($query);
             if (tng_num_rows($result2)) {
               $row = tng_fetch_assoc($result2);
@@ -233,7 +233,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
               } else {
                 $label = $branch['branch'];
               }
-              $query = "UPDATE $families_table SET branch = \"$label\" WHERE familyID = \"{$branch['persfamID']}\"";
+              $query = "UPDATE families SET branch = \"$label\" WHERE familyID = \"{$branch['persfamID']}\"";
               $result3 = tng_query($query);
               $success = 1;
             }

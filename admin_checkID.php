@@ -13,7 +13,7 @@ if ($type == 'person') {
   $suffix = $personsuffix;
 } else {
   if ($type == 'family') {
-    $query = "SELECT familyID FROM $families_table WHERE familyID = '$checkID'";
+    $query = "SELECT familyID FROM families WHERE familyID = '$checkID'";
     $prefix = $familyprefix;
     $suffix = $familysuffix;
   } else {

@@ -22,7 +22,7 @@ $prow = tng_fetch_assoc($result);
 $pcount = number_format($prow['pcount']);
 tng_free_result($result);
 
-$query = "SELECT count(familyID) AS fcount FROM $families_table";
+$query = 'SELECT count(familyID) AS fcount FROM families';
 $famresult = tng_query($query);
 $famrow = tng_fetch_assoc($famresult);
 $fcount = number_format($famrow['fcount']);

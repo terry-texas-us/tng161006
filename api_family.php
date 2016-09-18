@@ -11,7 +11,7 @@ require 'log.php';
 header('Content-Type: application/json; charset=' . $session_charset);
 
 //get family
-$query = "SELECT familyID, husband, wife, living, private, marrdate, gedcom, branch FROM $families_table WHERE familyID = '$familyID'";
+$query = "SELECT familyID, husband, wife, living, private, marrdate, gedcom, branch FROM families WHERE familyID = '$familyID'";
 $result = tng_query($query);
 $famrow = tng_fetch_assoc($result);
 if (!tng_num_rows($result)) {

@@ -19,8 +19,8 @@ tng_query("ALTER TABLE $people_table AUTO_INCREMENT = 1");
 tng_query('DELETE FROM extlinks');
 tng_query('ALTER TABLE extlinks AUTO_INCREMENT = 1');
 
-tng_query("DELETE FROM $families_table");
-tng_query("ALTER TABLE $families_table AUTO_INCREMENT = 1");
+tng_query('DELETE FROM families');
+tng_query('ALTER TABLE families AUTO_INCREMENT = 1');
 
 tng_query('DELETE FROM children');
 tng_query('ALTER TABLE children AUTO_INCREMENT = 1');
@@ -55,7 +55,7 @@ tng_query('ALTER TABLE places AUTO_INCREMENT = 1');
 $query = "UPDATE $people_table SET branch = '' WHERE branch = '$branch'";
 $result = tng_query($query);
 
-$query = "UPDATE $families_table SET branch = '' WHERE branch = '$branch'";
+$query = "UPDATE families SET branch = '' WHERE branch = '$branch'";
 $result = tng_query($query);
 
 $query = "DELETE FROM branchlinks WHERE branch = '$branch'";

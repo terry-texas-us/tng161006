@@ -139,13 +139,12 @@ function getMediaInfo($mediatypeID, $mediaID, $personID, $albumID, $albumlinkID,
 
 function findLivingPrivate($mediaID) {
   global $people_table;
-  global $families_table;
 
   $info = [];
   //select all medialinks for this mediaID, joined with people
   //loop through looking for living
   //if any are living, don't show media
-  $query = "SELECT medialinks.medialinkID, medialinks.personID AS personID, linktype, people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate FROM medialinks LEFT JOIN $people_table AS people ON medialinks.personID = people.personID LEFT JOIN $families_table ON medialinks.personID = $families_table.familyID WHERE medialinks.mediaID = \"$mediaID\"";
+  $query = "SELECT medialinks.medialinkID, medialinks.personID AS personID, linktype, people.living AS living, people.private AS private, people.branch AS branch, families.branch AS fbranch, families.living AS fliving, families.private AS fprivate FROM medialinks LEFT JOIN $people_table AS people ON medialinks.personID = people.personID LEFT JOIN families ON medialinks.personID = families.familyID WHERE medialinks.mediaID = \"$mediaID\"";
 
   $presult = tng_query($query);
   $noneliving = 1;
@@ -300,7 +299,6 @@ function getAlbumLinkText($mediaID) {
 
 function getMediaLinkText($mediaID, $ioffset) {
   global $people_table;
-  global $families_table;
   global $wherestr2;
   global $maxsearchresults;
 
@@ -311,7 +309,7 @@ function getMediaLinkText($mediaID, $ioffset) {
     $ioffsetstr = '';
     $newioffset = '';
   }
-  $query = "SELECT medialinks.medialinkID, medialinks.personID AS personID, people.living AS living, people.private AS private, people.branch AS branch, medialinks.eventID, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, people.nameorder, altdescription, altnotes, familyID, people.personID AS personID2, wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.prefix AS wprefix, wifepeople.suffix AS wsuffix, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.prefix AS hprefix, husbpeople.suffix AS hsuffix, sources.title, sources.sourceID, repositories.repoID, reponame FROM medialinks LEFT JOIN $people_table AS people ON medialinks.personID = people.personID LEFT JOIN $families_table ON medialinks.personID = $families_table.familyID LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID LEFT JOIN sources ON medialinks.personID = sources.sourceID LEFT JOIN repositories ON (medialinks.personID = repositories.repoID) WHERE mediaID = \"$mediaID\"$wherestr2 ORDER BY people.lastname, people.lnprefix, people.firstname, hlastname, hlnprefix, hfirstname  LIMIT $ioffsetstr" . ($maxsearchresults + 1);
+  $query = "SELECT medialinks.medialinkID, medialinks.personID AS personID, people.living AS living, people.private AS private, people.branch AS branch, medialinks.eventID, families.branch AS fbranch, families.living AS fliving, families.private AS fprivate, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, people.nameorder, altdescription, altnotes, familyID, people.personID AS personID2, wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.prefix AS wprefix, wifepeople.suffix AS wsuffix, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.prefix AS hprefix, husbpeople.suffix AS hsuffix, sources.title, sources.sourceID, repositories.repoID, reponame FROM medialinks LEFT JOIN $people_table AS people ON medialinks.personID = people.personID LEFT JOIN families ON medialinks.personID = families.familyID LEFT JOIN $people_table AS husbpeople ON families.husband = husbpeople.personID LEFT JOIN $people_table AS wifepeople ON families.wife = wifepeople.personID LEFT JOIN sources ON medialinks.personID = sources.sourceID LEFT JOIN repositories ON (medialinks.personID = repositories.repoID) WHERE mediaID = \"$mediaID\"$wherestr2 ORDER BY people.lastname, people.lnprefix, people.firstname, hlastname, hlnprefix, hfirstname  LIMIT $ioffsetstr" . ($maxsearchresults + 1);
   $presult = tng_query($query);
   $numrows = tng_num_rows($presult);
   $medialinktext = '';

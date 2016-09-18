@@ -102,14 +102,14 @@ switch ($t) {
     $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('person') . " $personID";
     break;
   case 'family':
-    $row = getID('familyID, branch', $families_table, $id);
+    $row = getID('familyID, branch', 'families', $id);
     $familyID = $row['familyID'];
 
     if (!checkbranch($row['branch'])) {
       exit;
     }
 
-    $query = "DELETE FROM $families_table WHERE ID = '$id'";
+    $query = "DELETE FROM families WHERE ID = '$id'";
     $result = tng_query($query);
 
     $query = "DELETE FROM children WHERE familyID = '$familyID'";
@@ -239,7 +239,7 @@ switch ($t) {
     $query = "DELETE FROM $people_table WHERE gedcom = '$id'";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $families_table WHERE gedcom = '$id'";
+    $query = "DELETE FROM families WHERE gedcom = '$id'";
     $result = tng_query($query);
 
     $query = "DELETE FROM children WHERE gedcom = '$id'";

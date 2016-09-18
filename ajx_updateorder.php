@@ -124,7 +124,7 @@ switch ($action) {
     $count = count($slinks);
     for ($i = 0; $i < $count; $i++) {
       $order = $i + 1;
-      $query = "UPDATE $families_table SET $spouseorder=\"$order\" WHERE familyID = \"$slinks[$i]\"";
+      $query = "UPDATE families SET $spouseorder=\"$order\" WHERE familyID = \"$slinks[$i]\"";
       $result2 = tng_query($query);
     }
     break;
@@ -147,7 +147,7 @@ switch ($action) {
     }
     break;
   case 'spouseunlink':
-    $query = "SELECT husband, wife FROM $families_table WHERE familyID = '$familyID'";
+    $query = "SELECT husband, wife FROM families WHERE familyID = '$familyID'";
     $marriage = tng_query($query);
     $marriagerow = tng_fetch_assoc($marriage);
 
@@ -162,7 +162,7 @@ switch ($action) {
       }
     }
     if ($delspousestr) {
-      $query = "UPDATE $families_table SET $delspousestr WHERE familyID = '$familyID'";
+      $query = "UPDATE families SET $delspousestr WHERE familyID = '$familyID'";
       $spouseresult = tng_query($query);
     }
     break;
@@ -179,7 +179,7 @@ switch ($action) {
     $query = "INSERT INTO children (familyID, personID, ordernum, mrel, frel, haskids, parentorder, sealdate, sealdatetr, sealplace) VALUES ('$familyID', '$personID', $order, '', '', $haskids, 0, '', '0000-00-00', '')";
     $result = tng_query($query);
 
-    $query = "SELECT husband,wife FROM $families_table WHERE familyID = '$familyID'";
+    $query = "SELECT husband,wife FROM families WHERE familyID = '$familyID'";
     $result = tng_query($query);
     $famrow = tng_fetch_assoc($result);
     if ($famrow['husband']) {
@@ -383,7 +383,7 @@ switch ($action) {
     $query2 = "SELECT personID FROM $people_table WHERE personID = '$entityID'";
     reorderMedia($query2, $row);
 
-    $query2 = "SELECT familyID AS personID FROM $families_table WHERE familyID = '$entityID'";
+    $query2 = "SELECT familyID AS personID FROM families WHERE familyID = '$entityID'";
     reorderMedia($query2, $row);
 
     $query2 = "SELECT sourceID AS personID FROM sources WHERE sourceID = '$entityID'";
@@ -480,9 +480,9 @@ switch ($action) {
         tng_free_result($result);
         break;
       case 'F':
-        $joinonwife = "LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID";
-        $joinonhusb = "LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID";
-        $query = "SELECT wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.prefix AS wprefix, wifepeople.suffix AS wsuffix, wifepeople.nameorder AS wnameorder, wifepeople.branch AS wbranch, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.prefix AS hprefix, husbpeople.suffix AS hsuffix, husbpeople.nameorder AS hnameorder, husbpeople.branch AS hbranch FROM $families_table $joinonwife $joinonhusb WHERE familyID = '$entityID'";
+        $joinonwife = "LEFT JOIN $people_table AS wifepeople ON families.wife = wifepeople.personID";
+        $joinonhusb = "LEFT JOIN $people_table AS husbpeople ON families.husband = husbpeople.personID";
+        $query = "SELECT wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.prefix AS wprefix, wifepeople.suffix AS wsuffix, wifepeople.nameorder AS wnameorder, wifepeople.branch AS wbranch, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.prefix AS hprefix, husbpeople.suffix AS hsuffix, husbpeople.nameorder AS hnameorder, husbpeople.branch AS hbranch FROM families $joinonwife $joinonhusb WHERE familyID = '$entityID'";
         $result = tng_query($query);
         $row = tng_fetch_assoc($result);
         $name = '';

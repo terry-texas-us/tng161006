@@ -27,10 +27,10 @@ switch ($entity) {
     $query = "UPDATE users SET mygedcom='$newtree', personID='$newID' WHERE mygedcom='$oldtree' AND personID='$entityID'";
     $result = tng_query($query);
 
-    $query = "UPDATE $families_table SET husband=\"\" WHERE gedcom=\"$oldtree\" AND husband=\"$entityID\"";
+    $query = "UPDATE families SET husband=\"\" WHERE gedcom=\"$oldtree\" AND husband=\"$entityID\"";
     $result = tng_query($query);
 
-    $query = "UPDATE $families_table SET wife=\"\" WHERE gedcom=\"$oldtree\" AND wife=\"$entityID\"";
+    $query = "UPDATE families SET wife=\"\" WHERE gedcom=\"$oldtree\" AND wife=\"$entityID\"";
     $result = tng_query($query);
 
     $query = "DELETE FROM branchlinks WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\"";

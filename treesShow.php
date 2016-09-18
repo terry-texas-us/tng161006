@@ -38,7 +38,7 @@ $headSection->setTitle(uiTextSnippet('trees'));
         $prow = tng_fetch_assoc($presult);
         tng_free_result($presult);
                 
-        $fresult = tng_query("SELECT count(familyID) AS fcount FROM $families_table");
+        $fresult = tng_query('SELECT count(familyID) AS fcount FROM families');
         $frow = tng_fetch_assoc($fresult);
         tng_free_result($fresult);
 

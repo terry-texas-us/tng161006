@@ -122,7 +122,7 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
             doRow('places', uiTextSnippet('places'));
             doRow('events', uiTextSnippet('events'));
             doRow('eventtypes', uiTextSnippet('eventtypes'));
-            doRow($families_table, uiTextSnippet('families'));
+            doRow('families', uiTextSnippet('families'));
             doRow('languages', uiTextSnippet('languages'));
             doRow('media', uiTextSnippet('mediatable'));
             doRow('medialinks', uiTextSnippet('medialinkstable'));

@@ -79,7 +79,7 @@ if ($personID && !$albumlinkID) {
     $rightbranch = 1;
   } else {
     if ($linktype == 'F') {
-      $query = "SELECT familyID, husband, wife, living, marrdate, branch FROM $families_table WHERE familyID = '$personID'";
+      $query = "SELECT familyID, husband, wife, living, marrdate, branch FROM families WHERE familyID = '$personID'";
     } elseif ($linktype == 'S') {
       $query = "SELECT title FROM sources WHERE sourceID = '$personID'";
     } elseif ($linktype == 'R') {

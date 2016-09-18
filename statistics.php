@@ -38,7 +38,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
       $totalpeople = $row['pcount'];
       tng_free_result($result);
 
-      $query = "SELECT count(id) AS fcount FROM $families_table";
+      $query = 'SELECT count(id) AS fcount FROM families';
       $result = tng_query($query);
       $row = tng_fetch_assoc($result);
       $totalfamilies = $row['fcount'];

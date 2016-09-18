@@ -470,7 +470,7 @@ if ($rrow['sqlselect']) {
     $orderbystr = "ORDER BY $orderbystr";
   }
   if ($need_families) {
-    $families_join = "LEFT JOIN $families_table AS families1 ON ($people_table.personID = families1.husband) LEFT JOIN $families_table AS families2 ON ($people_table.personID = families2.wife) ";
+    $families_join = "LEFT JOIN families AS families1 ON ($people_table.personID = families1.husband) LEFT JOIN families AS families2 ON ($people_table.personID = families2.wife) ";
   } else {
     $families_join = '';
   }

@@ -57,9 +57,7 @@ fwrite($fp, "\$database_password = '$new_database_password';\n");
 fwrite($fp, "\$tngconfig['maint'] = \"$maint\";\n");
 fwrite($fp, "\n");
 fwrite($fp, "\$people_table = \"$people_table\";\n");
-fwrite($fp, "\$families_table = \"$families_table\";\n");
 
-fwrite($fp, "\$rectangles_table = \"$rectangles_table\";\n");
 fwrite($fp, "\n");
 if ($rootpath != $newrootpath) {
   $_SESSION['session_rp'] = $newrootpath;

@@ -157,7 +157,7 @@ $headSection->setTitle($headtext);
     }
     tng_free_result($sresult);
 
-    $query = "SELECT DISTINCT citations.persfamID, familyID, husband, wife, living, private, branch FROM citations, $families_table WHERE citations.persfamID = $families_table.familyID AND citations.sourceID = '$sourceID' ORDER BY familyID LIMIT $foffsetstr" . ($maxsearchresults + 1);
+    $query = "SELECT DISTINCT citations.persfamID, familyID, husband, wife, living, private, branch FROM citations, families WHERE citations.persfamID = families.familyID AND citations.sourceID = '$sourceID' ORDER BY familyID LIMIT $foffsetstr" . ($maxsearchresults + 1);
     $sresult = tng_query($query);
     $numrows = tng_num_rows($sresult);
     $noneliving = $noneprivate = 1;

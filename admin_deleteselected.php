@@ -38,7 +38,7 @@ if ($xsrcaction) {
   $id = 'ID';
   $location = 'peopleBrowse.php';
 } elseif ($xfamaction) {
-  $query = "DELETE FROM $families_table";
+  $query = 'DELETE FROM families';
   $modmsg = 'families';
   $id = 'ID';
   $location = 'familiesBrowse.php';
@@ -88,7 +88,7 @@ foreach (array_keys($_POST) as $key) {
 
       deletePersonPlus($personID, $row['sex']);
     } elseif ($xfamaction) {
-      $row = getID('familyID, branch', $families_table, $thisid);
+      $row = getID('familyID, branch', families, $thisid);
       $familyID = $row['familyID'];
       $items[] = $row['familyID'];
 

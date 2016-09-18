@@ -107,7 +107,7 @@ if ($allwhere2) {
   $allwhere .= ' ';
 
   if ($assignedbranch) {
-    $allwhere .= " AND $families_table.branch LIKE \"%$assignedbranch%\"";
+    $allwhere .= " AND families.branch LIKE \"%$assignedbranch%\"";
   }
   $people_join = ", $people_table";
   $otherfields = ', firstname, lnprefix, lastname, prefix, suffix, nameorder';
@@ -118,14 +118,14 @@ if ($allwhere2) {
   $sortstr = '';
 }
 if ($living == 'yes') {
-  $allwhere .= " AND $families_table.living = \"1\"";
+  $allwhere .= " AND families.living = \"1\"";
 }
-$query = "SELECT $families_table.ID AS ID, familyID, husband, wife, marrdate $otherfields FROM ($families_table $people_join) WHERE $allwhere ORDER BY $sortstr familyID LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT families.ID AS ID, familyID, husband, wife, marrdate $otherfields FROM (families $people_join) WHERE $allwhere ORDER BY $sortstr familyID LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count($families_table.ID) AS fcount FROM ($families_table $people_join) WHERE $allwhere";
+  $query = "SELECT count(families.ID) AS fcount FROM (families $people_join) WHERE $allwhere";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['fcount'];

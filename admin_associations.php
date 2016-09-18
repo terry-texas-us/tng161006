@@ -60,7 +60,7 @@ $assoccount = tng_num_rows($assocresult);
                 $assocname = getName($row) . " ({$assoc['passocID']})";
                 tng_free_result($nameresult);
               } else {
-                $query = "SELECT husband, wife, familyID, living, private FROM $families_table WHERE familyID=\"{$assoc['passocID']}\"";
+                $query = "SELECT husband, wife, familyID, living, private FROM families WHERE familyID=\"{$assoc['passocID']}\"";
                 $nameresult = tng_query($query);
                 $row = tng_fetch_assoc($nameresult);
                 $rights = determineLivingPrivateRights($row);

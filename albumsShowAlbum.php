@@ -17,7 +17,6 @@ function getAlbumLinkText($albumID) {
   global $noneliving;
   global $noneprivate;
   global $people_table;
-  global $families_table;
   global $maxsearchresults;
 
   $links = '';
@@ -29,7 +28,7 @@ function getAlbumLinkText($albumID) {
     $ioffsetstr = '';
     $newioffset = '';
   }
-  $query = "SELECT albumplinks.alinkID, albumplinks.entityID AS personID, people.living AS living, people.private AS private, people.branch AS branch, albumplinks.eventID, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, people.nameorder, familyID, people.personID AS personID2, wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.prefix AS wprefix, wifepeople.suffix AS wsuffix, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.prefix AS hprefix, husbpeople.suffix AS hsuffix, sources.title, sources.sourceID, repositories.repoID, reponame FROM albumplinks LEFT JOIN $people_table AS people ON albumplinks.entityID = people.personID LEFT JOIN $families_table ON albumplinks.entityID = $families_table.familyID LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID LEFT JOIN sources ON albumplinks.entityID = sources.sourceID LEFT JOIN repositories ON (albumplinks.entityID = repositories.repoID) WHERE albumID = '$albumID' ORDER BY people.lastname, people.lnprefix, people.firstname, hlastname, hlnprefix, hfirstname  LIMIT $ioffsetstr" . ($maxsearchresults + 1);
+  $query = "SELECT albumplinks.alinkID, albumplinks.entityID AS personID, people.living AS living, people.private AS private, people.branch AS branch, albumplinks.eventID, families.branch AS fbranch, families.living AS fliving, families.private AS fprivate, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, people.nameorder, familyID, people.personID AS personID2, wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.prefix AS wprefix, wifepeople.suffix AS wsuffix, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.prefix AS hprefix, husbpeople.suffix AS hsuffix, sources.title, sources.sourceID, repositories.repoID, reponame FROM albumplinks LEFT JOIN $people_table AS people ON albumplinks.entityID = people.personID LEFT JOIN families ON albumplinks.entityID = families.familyID LEFT JOIN $people_table AS husbpeople ON families.husband = husbpeople.personID LEFT JOIN $people_table AS wifepeople ON families.wife = wifepeople.personID LEFT JOIN sources ON albumplinks.entityID = sources.sourceID LEFT JOIN repositories ON (albumplinks.entityID = repositories.repoID) WHERE albumID = '$albumID' ORDER BY people.lastname, people.lnprefix, people.firstname, hlastname, hlnprefix, hfirstname  LIMIT $ioffsetstr" . ($maxsearchresults + 1);
   $presult = tng_query($query);
   $numrows = tng_num_rows($presult);
 
@@ -231,7 +230,7 @@ preparebookmark($logstring);
     while ($row = tng_fetch_assoc($result)) {
       $mediatypeID = $row['mediatypeID'];
       $usefolder = $row['usecollfolder'] ? $mediatypes_assoc[$mediatypeID] : $mediapath;
-      $query = "SELECT medialinks.mediaID, medialinks.personID AS personID, people.personID AS personID2, people.living AS living, people.private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, familyID, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, sources.title, sources.sourceID, repositories.repoID, reponame, deathdate, burialdate, linktype FROM medialinks LEFT JOIN $people_table AS people ON medialinks.personID = people.personID LEFT JOIN $families_table ON medialinks.personID = $families_table.familyID LEFT JOIN sources ON medialinks.personID = sources.sourceID LEFT JOIN repositories ON (medialinks.personID = repositories.repoID) WHERE mediaID = '{$row['mediaID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT $maxplus";
+      $query = "SELECT medialinks.mediaID, medialinks.personID AS personID, people.personID AS personID2, people.living AS living, people.private, people.branch AS branch, families.branch AS fbranch, families.living AS fliving, familyID, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, sources.title, sources.sourceID, repositories.repoID, reponame, deathdate, burialdate, linktype FROM medialinks LEFT JOIN $people_table AS people ON medialinks.personID = people.personID LEFT JOIN families ON medialinks.personID = families.familyID LEFT JOIN sources ON medialinks.personID = sources.sourceID LEFT JOIN repositories ON (medialinks.personID = repositories.repoID) WHERE mediaID = '{$row['mediaID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT $maxplus";
       $presult = tng_query($query);
       $numrows = tng_num_rows($presult);
       $medialinktext = '';
@@ -260,8 +259,8 @@ preparebookmark($logstring);
           tng_free_result($presult2);
         }
         if ($prow['living'] == null && $prow['private'] == null && $prow['linktype'] == 'F') {
-          $query = "SELECT count(familyID) AS ccount FROM citations, $families_table
-            WHERE citations.sourceID = '{$prow['personID']}' AND citations.persfamID = $families_table.familyID AND living = '1'";
+          $query = "SELECT count(familyID) AS ccount FROM citations, families
+            WHERE citations.sourceID = '{$prow['personID']}' AND citations.persfamID = families.familyID AND living = '1'";
           $presult2 = tng_query($query);
           $prow2 = tng_fetch_assoc($presult2);
           if ($prow2['ccount']) {

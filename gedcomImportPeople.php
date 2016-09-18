@@ -12,7 +12,6 @@ foreach ($orgprefixes as $prefix) {
 
 function getIndividualRecord($personID, $prevlevel) {
   global $people_table;
-  global $families_table;
   global $savestate;
   global $lineinfo;
   global $custeventlist;
@@ -626,13 +625,13 @@ function getIndividualRecord($personID, $prevlevel) {
         }
         if ($info['SEX'] == 'M') {
           $uspousestr = "husband = \"$personID\", husborder = \"$spousectr\"";
-          $query = "INSERT IGNORE INTO $families_table (familyID, husborder, living, private, changedby) VALUES('$familyID', '$spousectr', '$living', '$private', '$currentuser')";
+          $query = "INSERT IGNORE INTO families (familyID, husborder, living, private, changedby) VALUES('$familyID', '$spousectr', '$living', '$private', '$currentuser')";
         } elseif ($info['SEX'] == 'F') {
           $uspousestr = "wife = \"$personID\", wifeorder = \"$spousectr\"";
-          $query = "INSERT IGNORE INTO $families_table (familyID, wifeorder, living, private, changedby) VALUES('$familyID', '$spousectr', '$living', '$private', '$currentuser')";
+          $query = "INSERT IGNORE INTO families (familyID, wifeorder, living, private, changedby) VALUES('$familyID', '$spousectr', '$living', '$private', '$currentuser')";
         } else {
           $uspousestr = '';
-          $query = "INSERT IGNORE INTO $families_table (familyID, changedby) VALUES('$familyID', '$currentuser')";
+          $query = "INSERT IGNORE INTO families (familyID, changedby) VALUES('$familyID', '$currentuser')";
         }
         $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         $success = tng_affected_rows();
@@ -640,7 +639,7 @@ function getIndividualRecord($personID, $prevlevel) {
           if ($uspousestr && $famlivingstr) {
             $famlivingstr .= ',';
           }
-          $query = "UPDATE $families_table SET $famlivingstr $uspousestr, changedby=\"$currentuser\" WHERE familyID = '$familyID'";
+          $query = "UPDATE families SET $famlivingstr $uspousestr, changedby=\"$currentuser\" WHERE familyID = '$familyID'";
           $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         }
       }

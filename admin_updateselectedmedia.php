@@ -80,7 +80,7 @@ if ($xphaction == uiTextSnippet('convto')) {
           $query6 = "SELECT personID FROM $people_table WHERE personID = \"{$row3['personID']}\"";
           reorderMedia($query6, $row3, $row3['mediatypeID']);
 
-          $query6 = "SELECT familyID AS personID FROM $families_table WHERE familyID = \"{$row3['personID']}\"";
+          $query6 = "SELECT familyID AS personID FROM families WHERE familyID = \"{$row3['personID']}\"";
           reorderMedia($query6, $row3, $row3['mediatypeID']);
 
           $query6 = "SELECT sourceID AS personID FROM sources WHERE sourceID = \"{$row3['personID']}\"";

@@ -93,7 +93,7 @@ switch ($type) {
     $newID = getNewID('person', $people_table);
     break;
   case 'family':
-    $newID = getNewID('family', $families_table);
+    $newID = getNewID('family', families);
     break;
   case 'source':
     $newID = getNewID('source', 'sources');

@@ -49,8 +49,6 @@ function deleteAssociations($id) {
 }
 
 function deletePersonPlus($personID, $gender) {
-  global $families_table;
-
   $query = "DELETE FROM children WHERE personID = '$personID'";
   tng_query($query);
 
@@ -61,12 +59,12 @@ function deletePersonPlus($personID, $gender) {
   deleteAssociations($personID);
 
   if ($gender == 'M') {
-    $query = "SELECT familyID FROM $families_table WHERE husband = '$personID'";
+    $query = "SELECT familyID FROM families WHERE husband = '$personID'";
   } else {
     if ($gender == 'F') {
-      $query = "SELECT familyID FROM $families_table WHERE wife = '$personID'";
+      $query = "SELECT familyID FROM families WHERE wife = '$personID'";
     } else {
-      $query = "SELECT familyID FROM $families_table WHERE (husband = '$personID' OR wife = '$personID')";
+      $query = "SELECT familyID FROM families WHERE (husband = '$personID' OR wife = '$personID')";
     }
   }
 
@@ -76,10 +74,10 @@ function deletePersonPlus($personID, $gender) {
   }
   tng_free_result($result);
 
-  $query = "UPDATE $families_table SET husband = '', husborder = 0 WHERE husband = '$personID'";
+  $query = "UPDATE families SET husband = '', husborder = 0 WHERE husband = '$personID'";
   tng_query($query);
 
-  $query = "UPDATE $families_table SET wife = '', wifeorder = 0 WHERE wife = '$personID'";
+  $query = "UPDATE families SET wife = '', wifeorder = 0 WHERE wife = '$personID'";
   tng_query($query);
 
   deleteMediaLinks($personID);
@@ -87,9 +85,7 @@ function deletePersonPlus($personID, $gender) {
 }
 
 function updateHasKids($spouseID, $spousestr) {
-  global $families_table;
-
-  $query = "SELECT familyID FROM $families_table WHERE $spousestr = '$spouseID'";
+  $query = "SELECT familyID FROM families WHERE $spousestr = '$spouseID'";
   $result = tng_query($query);
   $numkids = 0;
   while (!$numkids && $row = tng_fetch_assoc($result)) {
@@ -107,9 +103,7 @@ function updateHasKids($spouseID, $spousestr) {
 }
 
 function updateHasKidsFamily($familyID) {
-  global $families_table;
-
-  $query = "SELECT husband, wife FROM $families_table WHERE familyID = '$familyID'";
+  $query = "SELECT husband, wife FROM families WHERE familyID = '$familyID'";
   $result = tng_query($query);
   $famrow = tng_fetch_assoc($result);
   tng_free_result($result);

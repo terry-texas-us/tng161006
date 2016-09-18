@@ -85,15 +85,14 @@ function findhelp($helpfile) {
 
 function checkReview($type) {
   global $people_table;
-  global $families_table;
   global $assignedbranch;
 
   if ($type == 'I') {
     $revwhere = "$people_table.personID = temp_events.personID AND (type = 'I' OR type = 'C')";
     $table = $people_table;
   } else {
-    $revwhere = "$families_table.familyID = temp_events.familyID AND type = 'F'";
-    $table = $families_table;
+    $revwhere = "families.familyID = temp_events.familyID AND type = 'F'";
+    $table = 'families';
   }
   if ($assignedbranch) {
     $revwhere .= " AND branch LIKE \"%$assignedbranch%\"";
@@ -285,11 +284,9 @@ function determineConflict($row, $table) {
 }
 
 function getHasKids($personID) {
-  global $families_table;
-
   $haskids = 0;
-  $query = "SELECT familyID FROM $families_table WHERE husband = '$personID' UNION
-    SELECT familyID FROM $families_table WHERE wife = '$personID'";
+  $query = "SELECT familyID FROM families WHERE husband = '$personID' UNION
+    SELECT familyID FROM families WHERE wife = '$personID'";
   $fresult = tng_query($query);
   while ($famrow = tng_fetch_assoc($fresult)) {
     $query = "SELECT personID FROM children WHERE familyID = \"{$famrow['familyID']}\"";

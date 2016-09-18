@@ -29,7 +29,7 @@ while ($imgrow = tng_fetch_assoc($result)) {
     $rows = tng_num_rows($presult);
     tng_free_result($presult);
 
-    $query = "SELECT medialinks.personID FROM (medialinks, $families_table) WHERE medialinks.personID = $families_table.familyID AND medialinks.mediaID = {$imgrow['mediaID']} AND ($families_table.living = '1' OR $families_table.private = '1')";
+    $query = "SELECT medialinks.personID FROM (medialinks, families) WHERE medialinks.personID = families.familyID AND medialinks.mediaID = {$imgrow['mediaID']} AND (families.living = '1' OR families.private = '1')";
     $presult = tng_query($query);
     $rows = $rows + tng_num_rows($presult);
     tng_free_result($presult);
