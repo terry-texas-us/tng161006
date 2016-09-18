@@ -136,12 +136,6 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             </td>
             <td>&nbsp;</td>
             <td>
-              <table class='table table-sm'>
-                <tr>
-                  <td><?php echo uiTextSnippet('reports'); ?>:</td>
-                  <td><input name='reports_table' type='text' value="<?php echo $reports_table; ?>"></td>
-                </tr>
-              </table>
             </td>
             <td>&nbsp;</td>
             <td>
@@ -157,10 +151,6 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
                 <tr>
                   <td><?php echo uiTextSnippet('brlinkstable'); ?>:</td>
                   <td><input name='branchlinks_table' type='text' value="<?php echo $branchlinks_table; ?>"></td>
-                </tr>
-                <tr>
-                  <td><?php echo uiTextSnippet('mostwanted'); ?>:</td>
-                  <td><input name='mostwanted_table' type='text' value="<?php echo $mostwanted_table; ?>"></td>
                 </tr>
               </table>
             </td>

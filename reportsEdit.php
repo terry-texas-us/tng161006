@@ -11,7 +11,7 @@ if (!$allowEdit) {
   header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-$query = "SELECT * FROM $reports_table WHERE reportID = \"$reportID\"";
+$query = "SELECT * FROM reports WHERE reportID = \"$reportID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 $row['sqlselect'] = preg_replace('/\"/', '&#34;', $row['sqlselect']);

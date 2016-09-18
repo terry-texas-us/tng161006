@@ -18,7 +18,7 @@ $reportdesc = addslashes($reportdesc);
 $criteria = addslashes($criteria);
 $sqlselect = addslashes($sqlselect);
 
-$query = "UPDATE $reports_table SET reportname=\"$reportname\",reportdesc=\"$reportdesc\",rank=\"$rank\",active=\"$active\",display=\"$display\",criteria=\"$criteria\",orderby=\"$orderby\",sqlselect=\"$sqlselect\" WHERE reportID=\"$reportID\"";
+$query = "UPDATE reports SET reportname=\"$reportname\",reportdesc=\"$reportdesc\",rank=\"$rank\",active=\"$active\",display=\"$display\",criteria=\"$criteria\",orderby=\"$orderby\",sqlselect=\"$sqlselect\" WHERE reportID=\"$reportID\"";
 $result = tng_query($query);
 
 adminwritelog("<a href=\"reportsEdit.php?reportID=$reportID\">" . uiTextSnippet('modifyreport') . ": $reportID</a>");

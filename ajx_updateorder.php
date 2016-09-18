@@ -97,7 +97,7 @@ switch ($action) {
     $count = count($links);
     for ($i = 0; $i < $count; $i++) {
       $order = $i + 1;
-      $query = "UPDATE $mostwanted_table SET ordernum=\"$order\", mwtype=\"$mwtype\" WHERE ID = \"" . $links[$i] . '"';
+      $query = "UPDATE mostwanted SET ordernum=\"$order\", mwtype=\"$mwtype\" WHERE ID = \"" . $links[$i] . '"';
       $result = tng_query($query);
     }
     break;
@@ -287,7 +287,7 @@ switch ($action) {
     $rval = $media . '&' . $albumlink;
     break;
   case 'remmostwanted':
-    $query = "DELETE FROM $mostwanted_table WHERE ID=\"$id\"";
+    $query = "DELETE FROM mostwanted WHERE ID=\"$id\"";
     $result = tng_query($query);
     $rval = $id;
     break;

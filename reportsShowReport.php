@@ -48,7 +48,7 @@ if ($offset) {
   $page = 1;
 }
 
-$query = "SELECT * FROM $reports_table WHERE reportID = $reportID";
+$query = "SELECT * FROM reports WHERE reportID = $reportID";
 $testurl = $test ? "&amp;test=$test" : '';
 $result = tng_query($query);
 $rrow = tng_fetch_assoc($result);

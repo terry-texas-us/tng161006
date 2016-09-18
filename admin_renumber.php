@@ -152,7 +152,7 @@ echo $navList->build('renumber');
             $query = "UPDATE temp_events SET personID = '$newID' WHERE personID = '$old'";
             $result2 = tng_query($query);
 
-            $query = "UPDATE $mostwanted_table SET personID = '$newID' WHERE personID = '$old'";
+            $query = "UPDATE mostwanted SET personID = '$newID' WHERE personID = '$old'";
             $result2 = tng_query($query);
 
             $query = "UPDATE users SET personID = '$newID' WHERE personID = '$old'";

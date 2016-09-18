@@ -6,9 +6,8 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-$m = $mostwanted_table;
 if ($ID) {
-  $query = "SELECT $m.title AS title, $m.personID AS personID, $m.description AS description, $m.mediaID AS mediaID, mwtype, thumbpath, usecollfolder, media.description AS mtitle, media.notes AS mdesc, mediatypeID FROM $m LEFT JOIN media ON $m.mediaID = media.mediaID LEFT JOIN $people_table ON $m.personID = $people_table.personID WHERE $m.ID = '$ID'";
+  $query = "SELECT mostwanted.title AS title, mostwanted.personID AS personID, mostwanted.description AS description, mostwanted.mediaID AS mediaID, mwtype, thumbpath, usecollfolder, media.description AS mtitle, media.notes AS mdesc, mediatypeID FROM mostwanted LEFT JOIN media ON mostwanted.mediaID = media.mediaID LEFT JOIN $people_table ON mostwanted.personID = $people_table.personID WHERE mostwanted.ID = '$ID'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   tng_free_result($result);

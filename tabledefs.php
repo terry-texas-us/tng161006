@@ -385,9 +385,9 @@ $result = performQuery($query);
 $query = "INSERT IGNORE INTO mediatypes (mediatypeID,display,path,liketype,icon,thumb,exportas,disabled,ordernum) VALUES('videos','','','','','','',0,0)";
 $result = performQuery($query);
 
-$query = "DROP TABLE IF EXISTS $mostwanted_table";
+$query = 'DROP TABLE IF EXISTS mostwanted';
 $result = performQuery($query);
-$query = "CREATE TABLE $mostwanted_table (
+$query = "CREATE TABLE mostwanted (
     ID INT(11) NOT NULL AUTO_INCREMENT,
     ordernum FLOAT NOT NULL,
     gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
@@ -399,7 +399,7 @@ $query = "CREATE TABLE $mostwanted_table (
     PRIMARY KEY (ID),
     INDEX mwtype (mwtype,ordernum,title)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $mostwanted_table);
+$result = performQuery($query, 'mostwanted');
 
 $query = 'DROP TABLE IF EXISTS notelinks';
 $result = performQuery($query);
@@ -502,9 +502,9 @@ $query = "CREATE TABLE places (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, 'places');
 
-$query = "DROP TABLE IF EXISTS $reports_table";
+$query = 'DROP TABLE IF EXISTS reports';
 $result = performQuery($query);
-$query = "CREATE TABLE $reports_table (
+$query = "CREATE TABLE reports (
     reportID INT(11) NOT NULL AUTO_INCREMENT,
     reportname VARCHAR(80) NOT NULL,
     reportdesc TEXT NOT NULL,
@@ -518,7 +518,7 @@ $query = "CREATE TABLE $reports_table (
     INDEX reportname (reportname),
     INDEX rank (rank)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $reports_table);
+$result = performQuery($query, 'reports');
 
 $query = 'DROP TABLE IF EXISTS repositories';
 $result = performQuery($query);
