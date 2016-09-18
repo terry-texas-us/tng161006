@@ -250,11 +250,11 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
       } elseif ($secaction == uiTextSnippet('evalmedia')) {
         echo '<p>' . uiTextSnippet('evaluating') . '...</p>';
         //loop through each media type
-        $query = "SELECT * FROM $mediatypes_table ORDER BY ordernum, display";
+        $query = "SELECT * FROM mediatypes ORDER BY ordernum, display";
         $result = tng_query($query);
 
         while ($row = tng_fetch_assoc($result)) {
-          $query2 = "SELECT count(*) AS counter FROM $media_table WHERE mediatypeID = \"{$row['mediatypeID']}\"";
+          $query2 = "SELECT count(*) AS counter FROM media WHERE mediatypeID = \"{$row['mediatypeID']}\"";
           $result2 = tng_query($query2);
           $row2 = tng_fetch_assoc($result2);
           $display = $row['display'] ? $row['display'] : uiTextSnippet($row['mediatypeID']);
@@ -265,7 +265,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
           } else {
             $disabled = 0;
           }
-          $query3 = "UPDATE $mediatypes_table SET disabled=\"$disabled\" WHERE mediatypeID=\"{$row['mediatypeID']}\"";
+          $query3 = "UPDATE mediatypes SET disabled=\"$disabled\" WHERE mediatypeID=\"{$row['mediatypeID']}\"";
           $result3 = tng_query($query3);
           echo "<br>\n";
           tng_free_result($result2);

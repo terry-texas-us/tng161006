@@ -8,7 +8,7 @@ require 'checklogin.php';
 if ($type == 'album') {
   $query = "SELECT eventID, linktype, entityID FROM albumplinks WHERE alinkID = '$linkID'";
 } else {
-  $query = "SELECT eventID, altdescription, altnotes, defphoto, linktype, personID, dontshow FROM $medialinks_table WHERE medialinkID = '$linkID'";
+  $query = "SELECT eventID, altdescription, altnotes, defphoto, linktype, personID, dontshow FROM medialinks WHERE medialinkID = '$linkID'";
 }
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);

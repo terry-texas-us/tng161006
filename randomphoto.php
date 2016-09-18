@@ -11,7 +11,7 @@ if (!$rp_maxheight) {
 if (!isset($rp_mediatypeID) || !$rp_mediatypeID) {
   $rp_mediatypeID = 'photos';
 }
-$query = "SELECT DISTINCT $media_table.mediaID, $media_table.description, path, alwayson, usecollfolder, mediatypeID FROM $media_table WHERE mediatypeID = \"$rp_mediatypeID\" AND (abspath is NULL OR abspath = \"0\") ORDER BY RAND()";
+$query = "SELECT DISTINCT media.mediaID, media.description, path, alwayson, usecollfolder, mediatypeID FROM media WHERE mediatypeID = \"$rp_mediatypeID\" AND (abspath is NULL OR abspath = \"0\") ORDER BY RAND()";
 $result = tng_query($query);
 while ($imgrow = tng_fetch_assoc($result)) {
 
@@ -24,12 +24,12 @@ while ($imgrow = tng_fetch_assoc($result)) {
   } else {
 
     // this query will return rows of personIDs on the photo that are living
-    $query = "SELECT $medialinks_table.personID FROM ($medialinks_table, $people_table) WHERE $medialinks_table.personID = $people_table.personID AND $medialinks_table.mediaID = {$imgrow['mediaID']} AND ($people_table.living = '1' OR $people_table.private = '1')";
+    $query = "SELECT medialinks.personID FROM (medialinks, $people_table) WHERE medialinks.personID = $people_table.personID AND medialinks.mediaID = {$imgrow['mediaID']} AND ($people_table.living = '1' OR $people_table.private = '1')";
     $presult = tng_query($query);
     $rows = tng_num_rows($presult);
     tng_free_result($presult);
 
-    $query = "SELECT $medialinks_table.personID FROM ($medialinks_table, $families_table) WHERE $medialinks_table.personID = $families_table.familyID AND $medialinks_table.mediaID = {$imgrow['mediaID']} AND ($families_table.living = '1' OR $families_table.private = '1')";
+    $query = "SELECT medialinks.personID FROM (medialinks, $families_table) WHERE medialinks.personID = $families_table.familyID AND medialinks.mediaID = {$imgrow['mediaID']} AND ($families_table.living = '1' OR $families_table.private = '1')";
     $presult = tng_query($query);
     $rows = $rows + tng_num_rows($presult);
     tng_free_result($presult);

@@ -16,8 +16,6 @@ $json = false;
 initMediaTypes();
 
 function reorderMedia($query, $plink) {
-  global $medialinks_table;
-  global $media_table;
   global $type;
 
   $eventID = $plink['eventID'];
@@ -25,11 +23,11 @@ function reorderMedia($query, $plink) {
   while ($personrow = tng_fetch_assoc($result3)) {
     $counter = 1;
     if ($type == 'media') {
-      $query = "SELECT medialinkID FROM ($medialinks_table, $media_table) WHERE personID = \"{$personrow['personID']}\" AND $media_table.mediaID = $medialinks_table.mediaID AND eventID = \"$eventID\" AND mediatypeID = \"{$plink['mediatypeID']}\" ORDER BY ordernum";
+      $query = "SELECT medialinkID FROM (medialinks, media) WHERE personID = \"{$personrow['personID']}\" AND media.mediaID = medialinks.mediaID AND eventID = \"$eventID\" AND mediatypeID = \"{$plink['mediatypeID']}\" ORDER BY ordernum";
       $result4 = tng_query($query);
 
       while ($medialinkrow = tng_fetch_assoc($result4)) {
-        $query = "UPDATE $medialinks_table SET ordernum = \"$counter\" WHERE medialinkID = \"{$medialinkrow['medialinkID']}\"";
+        $query = "UPDATE medialinks SET ordernum = \"$counter\" WHERE medialinkID = \"{$medialinkrow['medialinkID']}\"";
         tng_query($query);
         $counter++;
       }
@@ -51,8 +49,6 @@ function reorderMedia($query, $plink) {
 }
 
 function setDefault($entity, $media, $album) {
-  global $medialinks_table;
-
   if ($album) {
     $query = "UPDATE albumlinks SET defphoto = '' WHERE defphoto = '1' AND albumID = '$album'";
     tng_query($query);
@@ -60,10 +56,10 @@ function setDefault($entity, $media, $album) {
     $query = "UPDATE albumlinks SET defphoto = '1' WHERE albumID = '$album' AND mediaID = '$media'";
     tng_query($query);
   } else {
-    $query = "UPDATE $medialinks_table SET defphoto = '' WHERE defphoto = '1' AND personID = '$entity'";
+    $query = "UPDATE medialinks SET defphoto = '' WHERE defphoto = '1' AND personID = '$entity'";
     tng_query($query);
 
-    $query = "UPDATE $medialinks_table SET defphoto = '1' WHERE personID = '$entity' AND mediaID = '$media'";
+    $query = "UPDATE medialinks SET defphoto = '1' WHERE personID = '$entity' AND mediaID = '$media'";
     tng_query($query);
   }
 }
@@ -82,7 +78,7 @@ switch ($action) {
     } else {
       for ($i = 0; $i < $count; $i++) {
         $order = $i + 1;
-        $query = "UPDATE $medialinks_table SET ordernum=\"$order\" WHERE medialinkID=\"" . $links[$i] . '"';
+        $query = "UPDATE medialinks SET ordernum=\"$order\" WHERE medialinkID=\"" . $links[$i] . '"';
         $result = tng_query($query);
       }
     }
@@ -219,8 +215,7 @@ switch ($action) {
   case 'setdef':
     setDefault($entity, $media, $album);
 
-    $query = "SELECT thumbpath, usecollfolder, mediatypeID FROM $media_table
-      WHERE mediaID = \"$media\"";
+    $query = "SELECT thumbpath, usecollfolder, mediatypeID FROM media WHERE mediaID = \"$media\"";
     $result = tng_query($query);
     if ($result) {
       $row = tng_fetch_assoc($result);
@@ -251,20 +246,20 @@ switch ($action) {
     setDefault($entity, $media, $album);
     break;
   case 'setdef3':
-    $query = "UPDATE $medialinks_table SET defphoto = '' WHERE defphoto = '1' AND personID = '$entity'";
+    $query = "UPDATE medialinks SET defphoto = '' WHERE defphoto = '1' AND personID = '$entity'";
     $result = tng_query($query);
 
-    $query = "UPDATE $medialinks_table SET defphoto = '$toggle' WHERE medialinkID=\"$medialinkID\"";
+    $query = "UPDATE medialinks SET defphoto = '$toggle' WHERE medialinkID=\"$medialinkID\"";
     $result = tng_query($query);
     break;
   case 'deldef':
     //look for old style default, delete if exists
     if ($album) {
-      $query = "SELECT thumbpath, usecollfolder, mediatypeID, albumlinkID FROM ($media_table, albumlinks)
-        WHERE albumID = \"$album\" AND $media_table.mediaID = albumlinks.mediaID AND defphoto = '1'";
+      $query = "SELECT thumbpath, usecollfolder, mediatypeID, albumlinkID FROM (media, albumlinks)
+        WHERE albumID = \"$album\" AND media.mediaID = albumlinks.mediaID AND defphoto = '1'";
     } else {
-      $query = "SELECT thumbpath, usecollfolder, mediatypeID, medialinkID FROM ($media_table, $medialinks_table)
-        WHERE personID = '$entity' AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
+      $query = "SELECT thumbpath, usecollfolder, mediatypeID, medialinkID FROM (media, medialinks)
+        WHERE personID = '$entity' AND media.mediaID = medialinks.mediaID AND defphoto = '1'";
     }
     $result = tng_query($query);
     if ($result) {
@@ -278,12 +273,12 @@ switch ($action) {
     if ($album) {
       $query = "UPDATE albumlinks SET defphoto = '' WHERE albumlinkID = '{$row['albumlinkID']}'";
     } else {
-      $query = "UPDATE $medialinks_table SET defphoto = '' WHERE medialinkID = '{$row['medialinkID']}'";
+      $query = "UPDATE medialinks SET defphoto = '' WHERE medialinkID = '{$row['medialinkID']}'";
     }
     $result = tng_query($query);
     break;
   case 'show':
-    $query = "UPDATE $medialinks_table SET dontshow = $toggle WHERE medialinkID=\"$medialinkID\"";
+    $query = "UPDATE medialinks SET dontshow = $toggle WHERE medialinkID=\"$medialinkID\"";
     $result = tng_query($query);
     break;
   case 'remalb':
@@ -301,7 +296,7 @@ switch ($action) {
       $query = "DELETE FROM albumplinks WHERE alinkID=\"$link\"";
       $result = tng_query($query);
     } elseif ($type == 'media') {
-      $query = "DELETE FROM $medialinks_table WHERE medialinkID=\"$link\"";
+      $query = "DELETE FROM medialinks WHERE medialinkID=\"$link\"";
       $result = tng_query($query);
     }
     $rval = $link;
@@ -370,7 +365,7 @@ switch ($action) {
     if ($type == 'album') {
       $query = "SELECT entityID FROM albumplinks WHERE alinkID = '$linkID'";
     } else {
-      $query = "SELECT personID AS entityID, eventID, mediatypeID FROM ($medialinks_table, $media_table) WHERE medialinkID = '$linkID' AND $medialinks_table.mediaID = $media_table.mediaID";
+      $query = "SELECT personID AS entityID, eventID, mediatypeID FROM (medialinks, media) WHERE medialinkID = '$linkID' AND medialinks.mediaID = media.mediaID";
     }
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
@@ -381,7 +376,7 @@ switch ($action) {
     if ($type == 'album') {
       $query = "DELETE FROM albumplinks WHERE alinkID=\"$linkID\"";
     } else {
-      $query = "DELETE FROM $medialinks_table WHERE medialinkID=\"$linkID\"";
+      $query = "DELETE FROM medialinks WHERE medialinkID=\"$linkID\"";
     }
     $result = tng_query($query);
 
@@ -413,11 +408,11 @@ switch ($action) {
       $altnotes = addslashes($altnotes);
 
       $dontshow = $show ? '0' : '1';
-      $query = "UPDATE $medialinks_table SET defphoto = '$defphoto', altdescription = '$altdescription', altnotes = '$altnotes', eventID = '$eventID', dontshow = $dontshow WHERE medialinkID = $linkID";
+      $query = "UPDATE medialinks SET defphoto = '$defphoto', altdescription = '$altdescription', altnotes = '$altnotes', eventID = '$eventID', dontshow = $dontshow WHERE medialinkID = $linkID";
       $result = tng_query($query);
 
       if ($defphoto) {
-        $query = "UPDATE $medialinks_table SET defphoto = '' WHERE personID = '$personID' AND medialinkID != $linkID";
+        $query = "UPDATE medialinks SET defphoto = '' WHERE personID = '$personID' AND medialinkID != $linkID";
         $result = tng_query($query);
       }
     }
@@ -459,7 +454,7 @@ switch ($action) {
     if ($type == 'album') {
       $query = "SELECT count(alinkID) AS count FROM albumplinks WHERE entityID = \"$entityID\"";
     } else {
-      $query = "SELECT count(medialinkID) AS count FROM $medialinks_table WHERE personID = \"$entityID\"";
+      $query = "SELECT count(medialinkID) AS count FROM medialinks WHERE personID = \"$entityID\"";
     }
     $result = tng_query($query);
     if ($result) {
@@ -569,7 +564,7 @@ switch ($action) {
       if ($type == 'album') {
         $query = "INSERT IGNORE INTO albumplinks (entityID, albumID, ordernum, linktype) VALUES ('$entityID', '$albumID', '$newrow', '$linktype')";
       } else {
-        $query = "INSERT IGNORE INTO $medialinks_table (personID, mediaID, ordernum, linktype, eventID) VALUES ('$entityID', '$mediaID', '$newrow', '$linktype', '')";
+        $query = "INSERT IGNORE INTO medialinks (personID, mediaID, ordernum, linktype, eventID) VALUES ('$entityID', '$mediaID', '$newrow', '$linktype', '')";
       }
 
       $result = tng_query($query);
@@ -577,7 +572,7 @@ switch ($action) {
       if ($success) {
         $linkID = tng_insert_id();
         $rval = $linkID . '|' . $name;
-        $query = "SELECT thumbpath, mediatypeID, usecollfolder FROM $media_table WHERE mediaID = \"$mediaID\"";
+        $query = "SELECT thumbpath, mediatypeID, usecollfolder FROM media WHERE mediaID = \"$mediaID\"";
         $result = tng_query($query);
         $row = tng_fetch_assoc($result);
         $mediatypeID = $row['mediatypeID'];
@@ -595,7 +590,7 @@ switch ($action) {
     break;
   case 'masslink':
     $entityID = tng_utf8_decode($newlink1);
-    $query = "SELECT count(medialinkID) AS count FROM $medialinks_table WHERE personID = \"$entityID\"";
+    $query = "SELECT count(medialinkID) AS count FROM medialinks WHERE personID = \"$entityID\"";
     $result = tng_query($query);
     if ($result) {
       $row = tng_fetch_assoc($result);
@@ -608,7 +603,7 @@ switch ($action) {
     $newlinks = 0;
     $mediaIDs = explode(',', $medialist);
     foreach ($mediaIDs as $mediaID) {
-      $query = "INSERT IGNORE INTO $medialinks_table (personID, mediaID, ordernum, linktype, eventID) VALUES ('$entityID', '$mediaID', '$newrow', '$linktype1', '$event1')";
+      $query = "INSERT IGNORE INTO medialinks (personID, mediaID, ordernum, linktype, eventID) VALUES ('$entityID', '$mediaID', '$newrow', '$linktype1', '$event1')";
       $result = tng_query($query);
       if (tng_affected_rows()) {
         $newlinks += 1;
@@ -627,7 +622,7 @@ switch ($action) {
     $owner = addslashes($owner);
     $datetaken = addslashes($datetaken);
 
-    $query = "UPDATE $media_table SET description = \"$title\", owner = \"$owner\", datetaken = \"$datetaken\", notes = \"$description\" WHERE mediaID = \"$mediaID\"";
+    $query = "UPDATE media SET description = \"$title\", owner = \"$owner\", datetaken = \"$datetaken\", notes = \"$description\" WHERE mediaID = \"$mediaID\"";
     $result = tng_query($query);
     $rval = 1;
     break;

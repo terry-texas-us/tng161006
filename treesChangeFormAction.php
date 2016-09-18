@@ -82,7 +82,7 @@ $result = tng_query($query);
 $query = "UPDATE albumplinks SET gedcom=\"$newtree\", entityID=\"$newID\" WHERE gedcom=\"$oldtree\" AND entityID=\"$entityID\"";
 $result = tng_query($query);
 
-$query = "UPDATE $medialinks_table SET gedcom=\"$newtree\", personID=\"$newID\" WHERE gedcom=\"$oldtree\" AND personID=\"$entityID\"";
+$query = "UPDATE medialinks SET gedcom=\"$newtree\", personID=\"$newID\" WHERE gedcom=\"$oldtree\" AND personID=\"$entityID\"";
 $result = tng_query($query);
 
 $query = "SELECT xnoteID FROM notelinks WHERE gedcom=\"$oldtree\" AND persfamID=\"$entityID\" AND xnoteID!=\"\"";

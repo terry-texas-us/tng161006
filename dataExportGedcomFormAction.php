@@ -383,15 +383,13 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
 
     function getMediaLinks($id) {
       global $savestate;
-      global $media_table;
-      global $medialinks_table;
       global $expdir;
       global $exppath;
       global $incl;
 
       $allmedia = [];
       if ($savestate['media']) {
-        $query = "SELECT notes, altnotes, description, altdescription, path, mediatypeID, eventID, form, abspath, defphoto FROM ($media_table, $medialinks_table) WHERE $medialinks_table.personID=\"" . addslashes($id) . "\" AND $media_table.mediaID = $medialinks_table.mediaID ORDER BY eventID, ordernum";
+        $query = "SELECT notes, altnotes, description, altdescription, path, mediatypeID, eventID, form, abspath, defphoto FROM (media, medialinks) WHERE medialinks.personID=\"" . addslashes($id) . "\" AND media.mediaID = medialinks.mediaID ORDER BY eventID, ordernum";
         $media = tng_query($query);
 
         while ($prow = tng_fetch_assoc($media)) {
@@ -1259,7 +1257,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     function doPlaces() {
       global $branch;
       global $placelist;
-      global $medialinks_table;
       global $savestate;
       global $lineending;
 
@@ -1283,7 +1280,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         }
         tng_free_result($result);
 
-        $query = "SELECT $medialinks_table.personID AS place, places.notes AS notes, latitude, longitude FROM (places, $medialinks_table) WHERE linktype = 'L' places.place = $medialinks_table.personID";
+        $query = "SELECT medialinks.personID AS place, places.notes AS notes, latitude, longitude FROM (places, medialinks) WHERE linktype = 'L' places.place = medialinks.personID";
         $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         while ($row = tng_fetch_assoc($result)) {
           if (!in_array($place, $places)) {

@@ -462,9 +462,9 @@ if ($mergeaction == uiTextSnippet('merge')) {
           delAssociations($varname);
 
           if ($ccombineextras) {
-            $query = "UPDATE $medialinks_table set personID = \"{$sp1row['familyID']}\" WHERE personID = '$varname'";
+            $query = "UPDATE medialinks set personID = \"{$sp1row['familyID']}\" WHERE personID = '$varname'";
           } else {
-            $query = "DELETE FROM $medialinks_table WHERE personID = '$varname'";
+            $query = "DELETE FROM medialinks WHERE personID = '$varname'";
           }
           $mediaresult = tng_query($query);
 
@@ -528,9 +528,9 @@ if ($mergeaction == uiTextSnippet('merge')) {
             doAssociations($varname, $sp1row['familyID']);
 
             if ($ccombineextras) {
-              $query = "UPDATE $medialinks_table set personID = \"$varname\" WHERE personID = \"{$sp1row['familyID']}\"";
+              $query = "UPDATE medialinks set personID = \"$varname\" WHERE personID = \"{$sp1row['familyID']}\"";
             } else {
-              $query = "DELETE FROM $medialinks_table WHERE personID = \"{$sp1row['familyID']}\"";
+              $query = "DELETE FROM medialinks WHERE personID = \"{$sp1row['familyID']}\"";
             }
             $mediaresult = tng_query($query);
 
@@ -631,7 +631,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
   //construct name for default photo 2
   $defaultphoto2 = "$rootpath$photopath/$personID2.$photosext";
   if ($ccombineextras) {
-    $query = "UPDATE $medialinks_table set personID = \"$personID1\", defphoto = \"\" WHERE personID = '$personID2'";
+    $query = "UPDATE medialinks set personID = \"$personID1\", defphoto = \"\" WHERE personID = '$personID2'";
     $mediaresult = tng_query($query);
 
     //construct name for default photo 1
@@ -644,7 +644,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
       //unlink( $defaultphoto2 );
     }
   } else {
-    $query = "DELETE FROM $medialinks_table WHERE personID = '$personID2'";
+    $query = "DELETE FROM medialinks WHERE personID = '$personID2'";
     $mediaresult = tng_query($query);
   }
   $personID2 = '';

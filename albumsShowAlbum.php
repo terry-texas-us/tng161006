@@ -163,13 +163,13 @@ if (!$noneliving && !$noneprivate) {
   echo "</html>\n";
   exit;
 }
-$query = "SELECT DISTINCT $media_table.mediaID, albumlinkID, $media_table.description, $media_table.notes, thumbpath, alwayson, usecollfolder, mediatypeID, path, form, abspath, newwindow FROM (albumlinks, $media_table) LEFT JOIN $medialinks_table ON $media_table.mediaID = $medialinks_table.mediaID WHERE albumID = '$albumID' AND albumlinks.mediaID = $media_table.mediaID ORDER BY albumlinks.ordernum, description LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT DISTINCT media.mediaID, albumlinkID, media.description, media.notes, thumbpath, alwayson, usecollfolder, mediatypeID, path, form, abspath, newwindow FROM (albumlinks, media) LEFT JOIN medialinks ON media.mediaID = medialinks.mediaID WHERE albumID = '$albumID' AND albumlinks.mediaID = media.mediaID ORDER BY albumlinks.ordernum, description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 $numrows = tng_num_rows($result);
 
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(distinct $media_table.mediaID) AS mcount FROM (albumlinks, $media_table) LEFT JOIN $medialinks_table
-    ON $media_table.mediaID = $medialinks_table.mediaID WHERE albumID = \"$albumID\" AND albumlinks.mediaID = $media_table.mediaID";
+  $query = "SELECT count(distinct media.mediaID) AS mcount FROM (albumlinks, media) LEFT JOIN medialinks
+    ON media.mediaID = medialinks.mediaID WHERE albumID = \"$albumID\" AND albumlinks.mediaID = media.mediaID";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   tng_free_result($result2);
@@ -231,7 +231,7 @@ preparebookmark($logstring);
     while ($row = tng_fetch_assoc($result)) {
       $mediatypeID = $row['mediatypeID'];
       $usefolder = $row['usecollfolder'] ? $mediatypes_assoc[$mediatypeID] : $mediapath;
-      $query = "SELECT $medialinks_table.mediaID, $medialinks_table.personID AS personID, people.personID AS personID2, people.living AS living, people.private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, familyID, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, sources.title, sources.sourceID, repositories.repoID, reponame, deathdate, burialdate, linktype FROM $medialinks_table LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID LEFT JOIN sources ON $medialinks_table.personID = sources.sourceID LEFT JOIN repositories ON ($medialinks_table.personID = repositories.repoID) WHERE mediaID = '{$row['mediaID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT $maxplus";
+      $query = "SELECT medialinks.mediaID, medialinks.personID AS personID, people.personID AS personID2, people.living AS living, people.private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, familyID, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, sources.title, sources.sourceID, repositories.repoID, reponame, deathdate, burialdate, linktype FROM medialinks LEFT JOIN $people_table AS people ON medialinks.personID = people.personID LEFT JOIN $families_table ON medialinks.personID = $families_table.familyID LEFT JOIN sources ON medialinks.personID = sources.sourceID LEFT JOIN repositories ON (medialinks.personID = repositories.repoID) WHERE mediaID = '{$row['mediaID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT $maxplus";
       $presult = tng_query($query);
       $numrows = tng_num_rows($presult);
       $medialinktext = '';

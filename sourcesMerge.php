@@ -309,7 +309,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
   //construct name for default photo 2
   $defaultphoto2 = "$rootpath$photopath/$sourceID2.$photosext";
   if ($ccombineextras) {
-    $query = "UPDATE $medialinks_table set personID = \"$sourceID1\", defphoto = \"\" WHERE personID = '$sourceID2'";
+    $query = "UPDATE medialinks set personID = \"$sourceID1\", defphoto = \"\" WHERE personID = '$sourceID2'";
     $mediaresult = tng_query($query);
 
     //construct name for default photo 1
@@ -322,7 +322,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
       }
     }
   } else {
-    $query = "DELETE FROM $medialinks_table WHERE personID = '$sourceID2'";
+    $query = "DELETE FROM medialinks WHERE personID = '$sourceID2'";
     $mediaresult = tng_query($query);
 
     if (file_exists($defaultphoto2)) {

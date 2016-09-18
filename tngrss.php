@@ -20,8 +20,6 @@ function doMedia($mediatypeID) {
   global $mediatypes_display;
   global $timezone;
   global $session_charset;
-  global $media_table;
-  global $medialinks_table;
   global $change_limit;
   global $cutoffstr;
   global $families_table;
@@ -31,16 +29,16 @@ function doMedia($mediatypeID) {
   global $wherestr2;
 
   if ($mediatypeID == 'headstones') {
-    $hsfields = ", $media_table.cemeteryID, cemname";
-    $hsjoin = "LEFT JOIN cemeteries ON $media_table.cemeteryID = cemeteries.cemeteryID";
+    $hsfields = ", media.cemeteryID, cemname";
+    $hsjoin = "LEFT JOIN cemeteries ON media.cemeteryID = cemeteries.cemeteryID";
   } else {
     $hsfields = $hsjoin = '';
   }
-  $query = "SELECT distinct $media_table.mediaID AS mediaID, description, $media_table.notes, thumbpath, path, form, mediatypeID, alwayson, usecollfolder, DATE_FORMAT(changedate,'%a, %d %b %Y %T') AS changedatef, status, abspath, newwindow $hsfields FROM $media_table $hsjoin WHERE $cutoffstr $wherestr AND mediatypeID = \"$mediatypeID\" ORDER BY changedate DESC, description LIMIT $change_limit";
+  $query = "SELECT distinct media.mediaID AS mediaID, description, media.notes, thumbpath, path, form, mediatypeID, alwayson, usecollfolder, DATE_FORMAT(changedate,'%a, %d %b %Y %T') AS changedatef, status, abspath, newwindow $hsfields FROM media $hsjoin WHERE $cutoffstr $wherestr AND mediatypeID = \"$mediatypeID\" ORDER BY changedate DESC, description LIMIT $change_limit";
   $mediaresult = tng_query($query);
 
   while ($row = tng_fetch_assoc($mediaresult)) {
-    $query = "SELECT medialinkID, $medialinks_table.personID AS personID, $medialinks_table.eventID, people.personID AS personID2, familyID, people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.suffix AS suffix, nameorder, sources.title, sources.sourceID, repositories.repoID,reponame, deathdate, burialdate, linktype FROM ($medialinks_table, trees) LEFT JOIN $people_table AS people ON ($medialinks_table.personID = people.personID) LEFT JOIN $families_table ON ($medialinks_table.personID = $families_table.familyID) LEFT JOIN sources ON ($medialinks_table.personID = sources.sourceID) LEFT JOIN repositories ON ($medialinks_table.personID = repositories.repoID) WHERE mediaID = '{$row['mediaID']}' $wherestr2 ORDER BY lastname, lnprefix, firstname, $medialinks_table.personID";
+    $query = "SELECT medialinkID, medialinks.personID AS personID, medialinks.eventID, people.personID AS personID2, familyID, people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.suffix AS suffix, nameorder, sources.title, sources.sourceID, repositories.repoID,reponame, deathdate, burialdate, linktype FROM (medialinks, trees) LEFT JOIN $people_table AS people ON (medialinks.personID = people.personID) LEFT JOIN $families_table ON (medialinks.personID = $families_table.familyID) LEFT JOIN sources ON (medialinks.personID = sources.sourceID) LEFT JOIN repositories ON (medialinks.personID = repositories.repoID) WHERE mediaID = '{$row['mediaID']}' $wherestr2 ORDER BY lastname, lnprefix, firstname, medialinks.personID";
     $presult = tng_query($query);
     $foundliving = 0;
     $foundprivate = 0;

@@ -11,8 +11,6 @@ if (!$generations) {
 function displayIndividual($key, $generation, $slot, $column) {
   global $columns;
   global $pedmax;
-  global $media_table;
-  global $medialinks_table;
   global $col1fam;
   global $col2fam;
   global $showall;
@@ -39,7 +37,7 @@ function displayIndividual($key, $generation, $slot, $column) {
       }
 
       //if( $rights['both'] ) {
-      $mediaquery = "SELECT count($medialinks_table.medialinkID) AS mediacount FROM ($medialinks_table, $media_table) WHERE $medialinks_table.mediaID = $media_table.mediaID AND personID = '$key'";
+      $mediaquery = "SELECT count(medialinks.medialinkID) AS mediacount FROM (medialinks, media) WHERE medialinks.mediaID = media.mediaID AND personID = '$key'";
       $mediaresult = tng_query($mediaquery) or die(uiTextSnippet('cannotexecutequery') . ": $mediaquery");
       if ($mediaresult) {
         $mediarow = tng_fetch_assoc($mediaresult);

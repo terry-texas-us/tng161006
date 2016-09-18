@@ -76,7 +76,7 @@ if ($propagate && trim($orgplace)) {
   $result = tng_query($query);
 
   //media
-  $query = "UPDATE $medialinks_table SET personID = '$place' WHERE personID = '$orgplace'";
+  $query = "UPDATE medialinks SET personID = '$place' WHERE personID = '$orgplace'";
   $result = tng_query($query);
 }
 adminwritelog("<a href=\"placesEdit.php?ID=$ID\">" . uiTextSnippet('modifyplace') . ": $place</a>");

@@ -12,18 +12,18 @@ if (!$allowMediaEdit) {
   echo uiTextSnippet('norights');
   exit;
 }
-$query = "SELECT DISTINCT personID FROM $medialinks_table";
+$query = 'SELECT DISTINCT personID FROM medialinks';
 $result = tng_query($query);
 
 $defsdone = 0;
 while ($distinctplink = tng_fetch_assoc($result)) {
   //must have a thumbnail
-  $query2 = "SELECT medialinkID FROM ($medialinks_table, $media_table) WHERE $medialinks_table.mediaID = $media_table.mediaID AND personID = \"{$distinctplink['personID']}\" AND thumbpath != \"\" and mediatypeID = \"photos\" ORDER BY ordernum";
+  $query2 = "SELECT medialinkID FROM (medialinks, media) WHERE medialinks.mediaID = media.mediaID AND personID = \"{$distinctplink['personID']}\" AND thumbpath != \"\" and mediatypeID = \"photos\" ORDER BY ordernum";
   $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
 
   $defsexist = 0;
   if (!$overwritedefs) {
-    $query3 = "SELECT count(medialinkID) AS pcount FROM $medialinks_table WHERE personID = \"{$distinctplink['personID']}\" AND defphoto = '1'";
+    $query3 = "SELECT count(medialinkID) AS pcount FROM medialinks WHERE personID = \"{$distinctplink['personID']}\" AND defphoto = '1'";
     $result3 = tng_query($query3) or die(uiTextSnippet('cannotexecutequery') . ": $query3");
     $pcountrow = tng_fetch_assoc($result3);
     if ($pcountrow['pcount']) {
@@ -40,10 +40,10 @@ while ($distinctplink = tng_fetch_assoc($result)) {
     $count = 0;
     while ($ulink = tng_fetch_assoc($result2)) {
       if (!$count) {
-        $query4 = "UPDATE $medialinks_table SET defphoto = '1' WHERE medialinkID='{$ulink['medialinkID']}'";
+        $query4 = "UPDATE medialinks SET defphoto = '1' WHERE medialinkID='{$ulink['medialinkID']}'";
         $result4 = tng_query($query4) or die(uiTextSnippet('cannotexecutequery') . ": $query4");
       } else {
-        $query4 = "UPDATE $medialinks_table SET defphoto = '0' WHERE medialinkID='{$ulink['medialinkID']}'";
+        $query4 = "UPDATE medialinks SET defphoto = '0' WHERE medialinkID='{$ulink['medialinkID']}'";
         $result4 = tng_query($query4) or die(uiTextSnippet('cannotexecutequery') . ": $query4");
       }
       $count++;

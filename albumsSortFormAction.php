@@ -72,8 +72,8 @@ adminwritelog("<a href=\"ordermedia.php?personID=$personID\">$sortstr: $action</
 $photofound = 0;
 $photo = '';
 
-$query = "SELECT alwayson, thumbpath, $media_table.mediaID AS mediaID, usecollfolder, mediatypeID, medialinkID FROM ($media_table, $medialinks_table)
-    WHERE personID = \"$personID\" AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
+$query = "SELECT alwayson, thumbpath, media.mediaID AS mediaID, usecollfolder, mediatypeID, medialinkID FROM (media, medialinks)
+    WHERE personID = \"$personID\" AND media.mediaID = medialinks.mediaID AND defphoto = '1'";
 $result = tng_query($query);
 if ($result) {
   $row = tng_fetch_assoc($result);
@@ -165,7 +165,7 @@ $headSection->setTitle(uiTextSnippet($sortstr));
 
               echo '<td style="width: ' . ($thumbmaxw + 6) . 'px; text-align: center;">';
 
-              $query2 = "SELECT thumbpath, usecollfolder, mediatypeID FROM (albumlinks, $media_table) WHERE albumID=\"{$row['albumID']}\" AND defphoto = \"1\" AND albumlinks.mediaID = $media_table.mediaID";
+              $query2 = "SELECT thumbpath, usecollfolder, mediatypeID FROM (albumlinks, media) WHERE albumID=\"{$row['albumID']}\" AND defphoto = \"1\" AND albumlinks.mediaID = media.mediaID";
               $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
               $trow = tng_fetch_assoc($result2);
               $tmediatypeID = $trow['mediatypeID'];

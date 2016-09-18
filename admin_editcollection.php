@@ -11,7 +11,7 @@ if (!$allowEdit) {
   exit;
 }
 
-$query = "SELECT * FROM $mediatypes_table WHERE mediatypeID = \"$mediatypeID\"";
+$query = "SELECT * FROM mediatypes WHERE mediatypeID = \"$mediatypeID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);

@@ -50,17 +50,13 @@ function initMediaTypes() {
   global $headstonepath;
   global $historypath;
   global $mediapath;
-  global $mediatypes_table;
   global $mediatypes;
 
   if (count($mediatypes)) {
     return;
   }
 
-  if (!isset($mediatypes_table)) {
-    return;
-  }
-  $query = "SELECT * FROM $mediatypes_table ORDER BY ordernum, display";
+  $query = 'SELECT * FROM mediatypes ORDER BY ordernum, display';
   $result = tng_query($query);
 
   if ($result) {

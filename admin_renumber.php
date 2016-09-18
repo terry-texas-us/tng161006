@@ -78,7 +78,7 @@ echo $navList->build('renumber');
     //do this only for person type:
     if ($type == 'person') {
       //search media table for all media records with an image map
-      $query = "SELECT mediaID, map FROM $media_table WHERE map != ''";
+      $query = "SELECT mediaID, map FROM media WHERE map != ''";
       $result1 = tng_query($query);
       $keys = [];
       $maps = [];
@@ -170,7 +170,7 @@ echo $navList->build('renumber');
                   $newmap = substr_replace($map, $newID, $offset, $oldlen);
                   $maps[$mediaID]['map'] = $maps[$mediaID]['newmap'] = $newmap;
 
-                  $query = "UPDATE $media_table SET map=\"" . addslashes($newmap) . "\" WHERE mediaID=\"$mediaID\"";
+                  $query = "UPDATE media SET map=\"" . addslashes($newmap) . "\" WHERE mediaID=\"$mediaID\"";
                   $result2 = tng_query($query);
                 }
               }
@@ -191,7 +191,7 @@ echo $navList->build('renumber');
           $query = "UPDATE events SET persfamID = '$newID' WHERE persfamID=\"" . $row[$id] . '"';
           $result2 = tng_query($query);
 
-          $query = "UPDATE $medialinks_table SET personID = '$newID' WHERE personID=\"" . $row[$id] . '"';
+          $query = "UPDATE medialinks SET personID = '$newID' WHERE personID=\"" . $row[$id] . '"';
           $result2 = tng_query($query);
 
           if ($type == 'person' || $type == 'family') {

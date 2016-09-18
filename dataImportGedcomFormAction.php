@@ -38,10 +38,8 @@ $ldsOK = determineLDSRights();
 ob_implicit_flush(true);
 
 function getMediaLinksToSave() {
-  global $medialinks_table;
-
   $medialinks = [];
-  $query = "SELECT medialinkID, mediaID, $medialinks_table.eventID, persfamID, eventtypeID, eventdate, eventplace, info FROM ($medialinks_table,events) WHERE $medialinks_table.eventID != '' AND $medialinks_table.eventID = events.eventID";
+  $query = "SELECT medialinkID, mediaID, medialinks.eventID, persfamID, eventtypeID, eventdate, eventplace, info FROM (medialinks,events) WHERE medialinks.eventID != '' AND medialinks.eventID = events.eventID";
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {

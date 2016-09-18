@@ -5,7 +5,7 @@ $query = "SELECT * FROM cemeteries ORDER BY country, state, county, city, cemnam
 $cemresult = tng_query($query);
 $numcems = $tngconfig['cemrows'] ? $tngconfig['cemrows'] : max(floor(tng_num_rows($cemresult) / 2), 10);
 
-$query = "SELECT $medialinks_table.personID AS personID FROM $medialinks_table, $media_table WHERE $media_table.mediaID = $medialinks_table.mediaID AND mediatypeID = 'headstones' AND cemeteryID = ''";
+$query = "SELECT medialinks.personID AS personID FROM medialinks, media WHERE media.mediaID = medialinks.mediaID AND mediatypeID = 'headstones' AND cemeteryID = ''";
 $hsresult = tng_query($query);
 $numhs = tng_num_rows($hsresult);
 tng_free_result($hsresult);

@@ -14,18 +14,16 @@ require 'adminlog.php';
 initMediaTypes();
 
 function reorderMedia($query, $plink, $mediatypeID) {
-  global $medialinks_table, $media_table;
-
   $ptree = $plink['gedcom'];
   $eventID = $plink['eventID'];
   $result3 = tng_query($query);
   while ($personrow = tng_fetch_assoc($result3)) {
-    $query = "SELECT medialinkID FROM ($medialinks_table, $media_table) WHERE personID = \"{$personrow['personID']}\" AND $media_table.mediaID = $medialinks_table.mediaID AND eventID = \"$eventID\" AND mediatypeID = \"$mediatypeID\" ORDER BY ordernum";
+    $query = "SELECT medialinkID FROM (medialinks, media) WHERE personID = \"{$personrow['personID']}\" AND media.mediaID = medialinks.mediaID AND eventID = \"$eventID\" AND mediatypeID = \"$mediatypeID\" ORDER BY ordernum";
     $result4 = tng_query($query);
 
     $counter = 1;
     while ($medialinkrow = tng_fetch_assoc($result4)) {
-      $query = "UPDATE $medialinks_table SET ordernum = \"$counter\" WHERE medialinkID = \"{$medialinkrow['medialinkID']}\"";
+      $query = "UPDATE medialinks SET ordernum = \"$counter\" WHERE medialinkID = \"{$medialinkrow['medialinkID']}\"";
       tng_query($query);
       $counter++;
     }
@@ -166,11 +164,11 @@ if (function_exists(imageJpeg) && $thumbcreate == 'auto') {
     }
   }
 }
-$query = "UPDATE $media_table SET path = '$path', thumbpath = '$thumbpath', description = '$description', notes = '$notes', width = '$width', height = '$height', datetaken = '$datetaken', placetaken = '$place', owner = '$owner', changedate = '$newdate', changedby = '$currentuser', form = '$form', alwayson = '$alwayson', mediatypeID = '$mediatypeID', map = '$imagemap', abspath = '$abspath', gedcom = '', status = '$status', cemeteryID = '$cemeteryID', plot = '$plot', showmap = '$showmap', linktocem = '$linktocem', latitude = '$latitude', longitude= '$longitude', zoom = '$zoom', bodytext = '$bodytext', usenl = '$usenl', newwindow = '$newwindow', usecollfolder = '$usecollfolder', mediakey = '$mediakey'  WHERE mediaID = '$mediaID'";
+$query = "UPDATE media SET path = '$path', thumbpath = '$thumbpath', description = '$description', notes = '$notes', width = '$width', height = '$height', datetaken = '$datetaken', placetaken = '$place', owner = '$owner', changedate = '$newdate', changedby = '$currentuser', form = '$form', alwayson = '$alwayson', mediatypeID = '$mediatypeID', map = '$imagemap', abspath = '$abspath', gedcom = '', status = '$status', cemeteryID = '$cemeteryID', plot = '$plot', showmap = '$showmap', linktocem = '$linktocem', latitude = '$latitude', longitude= '$longitude', zoom = '$zoom', bodytext = '$bodytext', usenl = '$usenl', newwindow = '$newwindow', usecollfolder = '$usecollfolder', mediakey = '$mediakey'  WHERE mediaID = '$mediaID'";
 $result = tng_query($query);
 
 if ($mediatypeID != $mediatypeID_org) {
-  $query = "SELECT personID, $medialinks_table.gedcom, eventID FROM ($medialinks_table, $media_table) WHERE $medialinks_table.mediaID = \"$mediaID\" AND $medialinks_table.mediaID = $media_table.mediaID";
+  $query = "SELECT personID, medialinks.gedcom, eventID FROM (medialinks, media) WHERE medialinks.mediaID = \"$mediaID\" AND medialinks.mediaID = media.mediaID";
   $result2 = tng_query($query);
   if ($result2) {
     while ($plink = tng_fetch_assoc($result2)) {

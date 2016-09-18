@@ -22,7 +22,7 @@ $maxsizeallowed = 10000000; // [ts] 10 Mbytes
 if (function_exists(imageJpeg)) {
   include 'imageutils.php';
 }
-$query = "SELECT mediaID, path, thumbpath, mediatypeID, usecollfolder, form FROM $media_table where path != \"\"";
+$query = "SELECT mediaID, path, thumbpath, mediatypeID, usecollfolder, form FROM media where path != \"\"";
 $result = tng_query($query);
 
 $count = 0;
@@ -97,7 +97,7 @@ while ($row = tng_fetch_assoc($result)) {
   }
   if ($needsupdate) {
     $changedate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
-    $query = "UPDATE $media_table SET thumbpath=\"$thumbpath\", changedate=\"$changedate\", changedby=\"$currentuser\" WHERE mediaID=\"{$row['mediaID']}\"";
+    $query = "UPDATE media SET thumbpath=\"$thumbpath\", changedate=\"$changedate\", changedby=\"$currentuser\" WHERE mediaID=\"{$row['mediaID']}\"";
     $result2 = tng_query($query);
     $updated++;
   }

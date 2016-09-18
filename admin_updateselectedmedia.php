@@ -27,7 +27,7 @@ if ($xphaction == uiTextSnippet('convto')) {
       $count++;
       $mediaID = substr($key, 2);
 
-      $query = "SELECT mediatypeID, usecollfolder, path, thumbpath FROM $media_table WHERE mediaID = \"$mediaID\"";
+      $query = "SELECT mediatypeID, usecollfolder, path, thumbpath FROM media WHERE mediaID = \"$mediaID\"";
       $result = tng_query($query);
       $row = tng_fetch_assoc($result);
       tng_free_result($result);
@@ -37,7 +37,7 @@ if ($xphaction == uiTextSnippet('convto')) {
 
       if ($oldmediatype != $newmediatype) {
         //change media type
-        $query = "UPDATE $media_table SET mediatypeID = \"$newmediatype\" WHERE mediaID = \"$mediaID\"";
+        $query = "UPDATE media SET mediatypeID = \"$newmediatype\" WHERE mediaID = \"$mediaID\"";
         $result = tng_query($query);
 
         //if usecollfolder then move to new folder
@@ -60,10 +60,10 @@ if ($xphaction == uiTextSnippet('convto')) {
         //change ordernum in media link
         //add to end of new media type
         //get all people linked to this item where the item has the same *new* mediatype so we can add one
-        $query3 = "SELECT medialinkID, personID, eventID, mediatypeID FROM ($medialinks_table, $media_table) WHERE $medialinks_table.mediaID = \"$mediaID\" AND mediatypeID = \"$newmediatype\" AND $medialinks_table.mediaID = $media_table.mediaID";
+        $query3 = "SELECT medialinkID, personID, eventID, mediatypeID FROM (medialinks, media) WHERE medialinks.mediaID = \"$mediaID\" AND mediatypeID = \"$newmediatype\" AND medialinks.mediaID = media.mediaID";
         $result3 = tng_query($query3) or die(uiTextSnippet('cannotexecutequery') . ": $query3");
         while ($row3 = tng_fetch_assoc($result3)) {
-          $query4 = "SELECT count(medialinkID) AS count FROM ($media_table, $medialinks_table) WHERE personID = \"{$row3['personID']}\" AND mediatypeID = \"$newmediatype\" AND $medialinks_table.mediaID = $media_table.mediaID AND eventID = \"{$row3['eventID']}\"";
+          $query4 = "SELECT count(medialinkID) AS count FROM (media, medialinks) WHERE personID = \"{$row3['personID']}\" AND mediatypeID = \"$newmediatype\" AND medialinks.mediaID = media.mediaID AND eventID = \"{$row3['eventID']}\"";
           $result4 = tng_query($query4) or die(uiTextSnippet('cannotexecutequery') . ": $query4");
           if ($result4) {
             $row4 = tng_fetch_assoc($result4);
@@ -73,7 +73,7 @@ if ($xphaction == uiTextSnippet('convto')) {
             $newrow = 1;
           }
 
-          $query5 = "UPDATE $medialinks_table SET ordernum = \"$newrow\" WHERE medialinkID = \"{$row3['medialinkID']}\"";
+          $query5 = "UPDATE medialinks SET ordernum = \"$newrow\" WHERE medialinkID = \"{$row3['medialinkID']}\"";
           $result5 = tng_query($query5) or die(uiTextSnippet('cannotexecutequery') . ": $query5");
 
           //reorder old media type for everything linked to item
@@ -94,7 +94,7 @@ if ($xphaction == uiTextSnippet('convto')) {
     }
   }
   if ($count) {
-    $query = "UPDATE $mediatypes_table SET disabled=\"0\" WHERE mediatypeID = '$newmediatypeID'";
+    $query = "UPDATE mediatypes SET disabled=\"0\" WHERE mediatypeID = '$newmediatypeID'";
     $result = tng_query($query);
   }
 } elseif ($xphaction == uiTextSnippet('addtoalbum')) {
@@ -123,7 +123,7 @@ if ($xphaction == uiTextSnippet('convto')) {
     }
   }
 } elseif ($xphaction == uiTextSnippet('deleteselected')) {
-  $query = "DELETE FROM $media_table WHERE 1=0";
+  $query = "DELETE FROM media WHERE 1=0";
 
   foreach (array_keys($_POST) as $key) {
     if (substr($key, 0, 2) == 'ph') {

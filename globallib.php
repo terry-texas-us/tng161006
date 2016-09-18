@@ -412,7 +412,6 @@ function checkLivingLinks($itemID) {
   global $livedefault;
   global $assignedbranch;
   global $people_table;
-  global $medialinks_table;
   global $families_table;
   global $allowLiving;
   global $allowPrivate;
@@ -444,7 +443,7 @@ function checkLivingLinks($itemID) {
   }
   if ($icriteria) {
     // Now find Living individuals linked to the media that fit the criteria set above.
-    $query = "SELECT count(*) AS pcount FROM ($medialinks_table, $people_table) WHERE $medialinks_table.personID = $people_table.personID AND $medialinks_table.mediaID = '$itemID' $icriteria";
+    $query = "SELECT count(*) AS pcount FROM (medialinks, $people_table) WHERE medialinks.personID = $people_table.personID AND medialinks.mediaID = '$itemID' $icriteria";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
     tng_free_result($result);
@@ -454,7 +453,7 @@ function checkLivingLinks($itemID) {
   }
 
   if ($fcriteria) {
-    $query = "SELECT count(*) AS pcount FROM ($medialinks_table, $families_table) WHERE $medialinks_table.personID = $families_table.familyID AND $medialinks_table.mediaID = '$itemID' $fcriteria";
+    $query = "SELECT count(*) AS pcount FROM (medialinks, $families_table) WHERE medialinks.personID = $families_table.familyID AND medialinks.mediaID = '$itemID' $fcriteria";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
     tng_free_result($result);
@@ -871,14 +870,12 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
   global $mediapath;
   global $mediatypes_assoc;
   global $photosext;
-  global $medialinks_table;
-  global $media_table;
   global $tngconfig;
 
   $photo = '';
   $photocheck = '';
 
-  $query = "SELECT $media_table.mediaID, medialinkID, alwayson, thumbpath, mediatypeID, usecollfolder, newwindow FROM ($media_table, $medialinks_table) WHERE personID = \"$persfamID\" AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
+  $query = "SELECT media.mediaID, medialinkID, alwayson, thumbpath, mediatypeID, usecollfolder, newwindow FROM (media, medialinks) WHERE personID = \"$persfamID\" AND media.mediaID = medialinks.mediaID AND defphoto = '1'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
 
@@ -905,7 +902,7 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
   $gotfile = $photocheck ? file_exists("$rootpath$photocheck") : false;
   if (!$gotfile) {
     if ($type) {
-      $query = "SELECT medialinkID FROM ($media_table, $medialinks_table) WHERE personID = \"$persfamID\" AND $media_table.mediaID = $medialinks_table.mediaID AND mediatypeID = \"photos\" AND thumbpath != \"\"";
+      $query = "SELECT medialinkID FROM (media, medialinks) WHERE personID = \"$persfamID\" AND media.mediaID = medialinks.mediaID AND mediatypeID = \"photos\" AND thumbpath != \"\"";
       $result2 = tng_query($query);
       $numphotos = tng_num_rows($result2);
       tng_free_result($result2);

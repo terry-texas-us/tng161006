@@ -11,7 +11,6 @@ $gotImageJpeg = function_exists(imageJpeg);
 
 function showDivs($type) {
   global $people_table;
-  global $media_table;
   global $mostwanted_table;
   global $mediatypes_assoc;
   global $mediapath;
@@ -21,7 +20,7 @@ function showDivs($type) {
 
   $mediatext = "<table class='table'>\n";
 
-  $query = "SELECT DISTINCT $mostwanted_table.ID AS mwID, mwtype, thumbpath, abspath, form, usecollfolder, mediatypeID, path, $media_table.description AS mtitle, $mostwanted_table.personID, $mostwanted_table.mediaID, $mostwanted_table.description AS mwdesc, $mostwanted_table.title AS mwtitle, lastname, firstname, lnprefix, suffix, prefix, $people_table.title AS title, living, private, nameorder, branch FROM $mostwanted_table LEFT JOIN $media_table ON $mostwanted_table.mediaID = $media_table.mediaID LEFT JOIN $people_table ON $mostwanted_table.personID = $people_table.personID WHERE mwtype = '$type' ORDER BY ordernum";
+  $query = "SELECT DISTINCT $mostwanted_table.ID AS mwID, mwtype, thumbpath, abspath, form, usecollfolder, mediatypeID, path, media.description AS mtitle, $mostwanted_table.personID, $mostwanted_table.mediaID, $mostwanted_table.description AS mwdesc, $mostwanted_table.title AS mwtitle, lastname, firstname, lnprefix, suffix, prefix, $people_table.title AS title, living, private, nameorder, branch FROM $mostwanted_table LEFT JOIN media ON $mostwanted_table.mediaID = media.mediaID LEFT JOIN $people_table ON $mostwanted_table.personID = $people_table.personID WHERE mwtype = '$type' ORDER BY ordernum";
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {

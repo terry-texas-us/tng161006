@@ -53,7 +53,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
       $totalmedia = [];
       foreach ($mediatypes as $mediatype) {
         $mediatypeID = $mediatype['ID'];
-        $query = "SELECT count(mediaID) AS mcount FROM $media_table WHERE mediatypeID = '$mediatypeID'";
+        $query = "SELECT count(mediaID) AS mcount FROM media WHERE mediatypeID = '$mediatypeID'";
 
         $result = tng_query($query);
         $row = tng_fetch_assoc($result);

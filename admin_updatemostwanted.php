@@ -49,7 +49,7 @@ $thumbpath = '';
 $size = [0, 0];
 if ($mediaID && $mediaID != $orgmediaID) {
   initMediaTypes();
-  $query = "SELECT * FROM $media_table WHERE mediaID = '$mediaID'";
+  $query = "SELECT * FROM media WHERE mediaID = '$mediaID'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   $mediatypeID = $row['mediatypeID'];

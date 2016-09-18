@@ -64,7 +64,7 @@ function getAlbumNav($total, $perpage, $pagenavpages) {
   return $pagenav;
 }
 
-$wherestr = $searchstring ? "($media_table.mediaID LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR path LIKE \"%$searchstring%\" OR notes LIKE \"%$searchstring%\" OR owner LIKE \"%$searchstring%\" OR bodytext LIKE \"%$searchstring%\")" : '';
+$wherestr = $searchstring ? "(media.mediaID LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR path LIKE \"%$searchstring%\" OR notes LIKE \"%$searchstring%\" OR owner LIKE \"%$searchstring%\" OR bodytext LIKE \"%$searchstring%\")" : '';
 if ($searchtree) {
   $wherestr .= $wherestr ? " AND (gedcom = \"\" OR gedcom = \"$searchtree\")" : "(gedcom = \"\" OR gedcom = \"$searchtree\")";
 }
@@ -94,12 +94,12 @@ if (isset($offset) && $offset != 0) {
   $page = 1;
 }
 
-$query = "SELECT $media_table.mediaID AS mediaID, $medialinkID description, notes, thumbpath, mediatypeID, usecollfolder, datetaken FROM $media_table $join $wherestr ORDER BY description LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT media.mediaID AS mediaID, $medialinkID description, notes, thumbpath, mediatypeID, usecollfolder, datetaken FROM media $join $wherestr ORDER BY description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count($media_table.mediaID) AS mcount FROM $media_table $join $wherestr";
+  $query = "SELECT count(media.mediaID) AS mcount FROM media $join $wherestr";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['mcount'];

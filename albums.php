@@ -2,15 +2,13 @@
 
 function getAlbumPhoto($albumID, $albumname) {
   global $rootpath;
-  global $media_table;
   global $people_table;
   global $families_table;
-  global $medialinks_table;
   global $mediatypes_assoc;
   global $mediapath;
   
-  $query2 = "SELECT path, thumbpath, usecollfolder, mediatypeID, albumlinks.mediaID AS mediaID, alwayson FROM ($media_table, albumlinks)
-    WHERE albumID = \"$albumID\" AND $media_table.mediaID = albumlinks.mediaID AND defphoto=\"1\"";
+  $query2 = "SELECT path, thumbpath, usecollfolder, mediatypeID, albumlinks.mediaID AS mediaID, alwayson FROM (media, albumlinks)
+    WHERE albumID = \"$albumID\" AND media.mediaID = albumlinks.mediaID AND defphoto=\"1\"";
   $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
   $trow = tng_fetch_assoc($result2);
   $mediaID = $trow['mediaID'];
@@ -23,7 +21,7 @@ function getAlbumPhoto($albumID, $albumname) {
     $foundliving = 0;
     $foundprivate = 0;
     if (!$trow['alwayson'] && $livedefault != 2) {
-      $query = "SELECT people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, linktype FROM $medialinks_table LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID WHERE mediaID = '$mediaID'";
+      $query = "SELECT people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, linktype FROM medialinks LEFT JOIN $people_table AS people ON medialinks.personID = people.personID LEFT JOIN $families_table ON medialinks.personID = $families_table.familyID WHERE mediaID = '$mediaID'";
       $presult = tng_query($query);
       while ($prow = tng_fetch_assoc($presult)) {
         if ($prow['fbranch'] != null) {

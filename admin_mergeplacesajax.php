@@ -101,11 +101,11 @@ foreach ($mergelist as $val) {
 
     //media (this is quick & dirty. would be better to cycle through each link and try the update, then delete the old if the update is not successful,
     //since that would indicate a key collision and the old record would remain, but it shouldn't come up very often and it wouldn't be critical in any case)
-    $query = "UPDATE $medialinks_table SET personID = '$newplace' WHERE personID = '$oldplace'";
+    $query = "UPDATE medialinks SET personID = '$newplace' WHERE personID = '$oldplace'";
     $result = tng_query($query);
 
     if (!tng_affected_rows()) {
-      $query = "DELETE FROM $medialinks_table WHERE personID = '$oldplace'";
+      $query = "DELETE FROM medialinks WHERE personID = '$oldplace'";
       $result = tng_query($query);
     }
 

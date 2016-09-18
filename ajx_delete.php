@@ -53,7 +53,7 @@ switch ($t) {
 
     resortMedia($id);
 
-    $query = "DELETE FROM $media_table WHERE mediaID = '$id'";
+    $query = "DELETE FROM media WHERE mediaID = '$id'";
     $result = tng_query($query);
 
     $query = "DELETE FROM albumlinks WHERE mediaID = '$id'";
@@ -273,7 +273,7 @@ switch ($t) {
     $result = tng_query($query);
 
     if ($id) {
-      $query = "SELECT mediaID FROM $media_table";
+      $query = 'SELECT mediaID FROM media';
       $result = tng_query($query);
       while ($row = tng_fetch_assoc($result)) {
         $delquery = "DELETE FROM albumlinks WHERE mediaID = '{$row['mediaID']}'";
@@ -281,10 +281,10 @@ switch ($t) {
       }
       tng_free_result($result);
 
-      $query = "DELETE FROM $media_table WHERE gedcom = '$id'";
+      $query = "DELETE FROM media WHERE gedcom = '$id'";
       $result = tng_query($query);
 
-      $query = "DELETE FROM $medialinks_table WHERE gedcom = '$id'";
+      $query = "DELETE FROM medialinks WHERE gedcom = '$id'";
       $result = tng_query($query);
     }
 
@@ -327,7 +327,7 @@ switch ($t) {
     $logmsg = uiTextSnippet('deleted') . ": $personID/$familyID.";
     break;
   case 'mediatype':
-    $query = "DELETE FROM $mediatypes_table WHERE mediatypeID = '$id'";
+    $query = "DELETE FROM mediatypes WHERE mediatypeID = '$id'";
     $result = tng_query($query);
 
     $logmsg = uiTextSnippet('deleted') . ": $id.";

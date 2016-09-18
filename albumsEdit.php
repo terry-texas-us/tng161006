@@ -20,8 +20,8 @@ tng_free_result($result);
 $row['description'] = preg_replace('/\"/', '&#34;', $row['description']);
 $row['keywords'] = preg_replace('/\"/', '&#34;', $row['keywords']);
 
-$query2 = "SELECT albumlinkID, thumbpath, $media_table.mediaID AS mediaID, usecollfolder, mediatypeID, notes, description, datetaken, placetaken, defphoto FROM ($media_table, albumlinks)
-    WHERE albumID = \"$albumID\" AND $media_table.mediaID = albumlinks.mediaID order by ordernum, description";
+$query2 = "SELECT albumlinkID, thumbpath, media.mediaID AS mediaID, usecollfolder, mediatypeID, notes, description, datetaken, placetaken, defphoto FROM (media, albumlinks)
+    WHERE albumID = \"$albumID\" AND media.mediaID = albumlinks.mediaID order by ordernum, description";
 $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
 $numrows = tng_num_rows($result2);
 
@@ -43,8 +43,8 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
     <?php
     $photo = '';
 
-    $query = "SELECT alwayson, thumbpath, $media_table.mediaID AS mediaID, usecollfolder, mediatypeID, albumlinkID FROM ($media_table, albumlinks)
-      WHERE albumID = '$albumID' AND $media_table.mediaID = albumlinks.mediaID AND defphoto = '1'";
+    $query = "SELECT alwayson, thumbpath, media.mediaID AS mediaID, usecollfolder, mediatypeID, albumlinkID FROM (media, albumlinks)
+      WHERE albumID = '$albumID' AND media.mediaID = albumlinks.mediaID AND defphoto = '1'";
     $defresult = tng_query($query);
     if ($defresult) {
       $drow = tng_fetch_assoc($defresult);

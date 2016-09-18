@@ -288,9 +288,9 @@ $query = "CREATE TABLE $languagesTable (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $languagesTable);
 
-$query = "DROP TABLE IF EXISTS $medialinks_table";
+$query = 'DROP TABLE IF EXISTS medialinks';
 $result = performQuery($query);
-$query = "CREATE TABLE $medialinks_table (
+$query = "CREATE TABLE medialinks (
     medialinkID INT(11) NOT NULL AUTO_INCREMENT,
     gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     linktype CHAR(1) NOT NULL,
@@ -309,11 +309,11 @@ $query = "CREATE TABLE $medialinks_table (
     FOREIGN KEY medialinks_fk2 (personID) REFERENCES $families_table (familyID),
     FOREIGN KEY medialinks_fk3 (personID) REFERENCES sources (sourceID)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $medialinks_table);
+$result = performQuery($query, 'medialinks');
 
-$query = "DROP TABLE IF EXISTS $media_table";
+$query = 'DROP TABLE IF EXISTS media';
 $result = performQuery($query);
-$query = "CREATE TABLE $media_table (
+$query = "CREATE TABLE media (
     mediaID INT(11) NOT NULL AUTO_INCREMENT,
     mediatypeID VARCHAR(20) NOT NULL,
     mediakey VARCHAR(255) NOT NULL,
@@ -351,13 +351,13 @@ $query = "CREATE TABLE $media_table (
     INDEX changedate (changedate),
     INDEX description (description(20)),
     INDEX headstones (cemeteryID, description(20)),
-    FOREIGN KEY media_fk1 (mediaID) REFERENCES $medialinks_table (mediaID)
+    FOREIGN KEY media_fk1 (mediaID) REFERENCES medialinks (mediaID)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $media_table);
+$result = performQuery($query, 'media');
 
-$query = "DROP TABLE IF EXISTS $mediatypes_table";
+$query = 'DROP TABLE IF EXISTS mediatypes';
 $result = performQuery($query);
-$query = "CREATE TABLE $mediatypes_table (
+$query = "CREATE TABLE mediatypes (
     mediatypeID VARCHAR(20) NOT NULL,
     display VARCHAR(40) NOT NULL,
     path VARCHAR(127) NOT NULL,
@@ -370,19 +370,19 @@ $query = "CREATE TABLE $mediatypes_table (
     PRIMARY KEY (mediatypeID),
     INDEX ordernum (ordernum, display)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $mediatypes_table);
+$result = performQuery($query, 'mediatypes');
 
-$query = "INSERT IGNORE INTO $mediatypes_table (mediatypeID,display,path,liketype,icon,thumb,exportas,disabled,ordernum) VALUES('photos','','','','','','',0,0)";
+$query = "INSERT IGNORE INTO mediatypes (mediatypeID,display,path,liketype,icon,thumb,exportas,disabled,ordernum) VALUES('photos','','','','','','',0,0)";
 $result = performQuery($query);
-$query = "INSERT IGNORE INTO $mediatypes_table (mediatypeID,display,path,liketype,icon,thumb,exportas,disabled,ordernum) VALUES('documents','','','','','','',0,0)";
+$query = "INSERT IGNORE INTO mediatypes (mediatypeID,display,path,liketype,icon,thumb,exportas,disabled,ordernum) VALUES('documents','','','','','','',0,0)";
 $result = performQuery($query);
-$query = "INSERT IGNORE INTO $mediatypes_table (mediatypeID,display,path,liketype,icon,thumb,exportas,disabled,ordernum) VALUES('headstones','','','','','','',0,0)";
+$query = "INSERT IGNORE INTO mediatypes (mediatypeID,display,path,liketype,icon,thumb,exportas,disabled,ordernum) VALUES('headstones','','','','','','',0,0)";
 $result = performQuery($query);
-$query = "INSERT IGNORE INTO $mediatypes_table (mediatypeID,display,path,liketype,icon,thumb,exportas,disabled,ordernum) VALUES('histories','','','','','','',0,0)";
+$query = "INSERT IGNORE INTO mediatypes (mediatypeID,display,path,liketype,icon,thumb,exportas,disabled,ordernum) VALUES('histories','','','','','','',0,0)";
 $result = performQuery($query);
-$query = "INSERT IGNORE INTO $mediatypes_table (mediatypeID,display,path,liketype,icon,thumb,exportas,disabled,ordernum) VALUES('recordings','','','','','','',0,0)";
+$query = "INSERT IGNORE INTO mediatypes (mediatypeID,display,path,liketype,icon,thumb,exportas,disabled,ordernum) VALUES('recordings','','','','','','',0,0)";
 $result = performQuery($query);
-$query = "INSERT IGNORE INTO $mediatypes_table (mediatypeID,display,path,liketype,icon,thumb,exportas,disabled,ordernum) VALUES('videos','','','','','','',0,0)";
+$query = "INSERT IGNORE INTO mediatypes (mediatypeID,display,path,liketype,icon,thumb,exportas,disabled,ordernum) VALUES('videos','','','','','','',0,0)";
 $result = performQuery($query);
 
 $query = "DROP TABLE IF EXISTS $mostwanted_table";

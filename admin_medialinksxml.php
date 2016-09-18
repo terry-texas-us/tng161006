@@ -9,7 +9,7 @@ require 'checklogin.php';
 if ($albumID) {
   $query2 = "SELECT entityID FROM albumplinks WHERE albumID = '$albumID' AND linktype = '$linktype'";
 } else {
-  $query2 = "SELECT personID AS entityID FROM $medialinks_table WHERE mediaID = '$mediaID' AND linktype = '$linktype'";
+  $query2 = "SELECT personID AS entityID FROM medialinks WHERE mediaID = '$mediaID' AND linktype = '$linktype'";
 }
 $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
 $alreadygot = [];

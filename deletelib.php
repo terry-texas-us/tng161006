@@ -21,9 +21,7 @@ function deleteBranchLinks($id) {
 }
 
 function deleteMediaLinks($id) {
-  global $medialinks_table;
-
-  $query = "DELETE FROM $medialinks_table WHERE personID = '$id'";
+  $query = "DELETE FROM medialinks WHERE personID = '$id'";
   tng_query($query);
 }
 

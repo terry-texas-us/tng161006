@@ -17,7 +17,6 @@ $totalImported = 0;
 
 function importFrom($tngpath, $orgpath, $needsubdirs) {
   global $rootpath;
-  global $media_table;
   global $mediatypeID;
   global $timeOffset;
   global $thumbprefix;
@@ -42,7 +41,7 @@ function importFrom($tngpath, $orgpath, $needsubdirs) {
           $fileparts = pathinfo($filename);
           $form = strtoupper($fileparts['extension']);
           $newdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
-          $query = "INSERT IGNORE INTO $media_table (mediatypeID, mediakey, path, thumbpath, description, notes, width, height, datetaken, placetaken, owner, changedate, form, alwayson, map, abspath, status, cemeteryID, showmap, linktocem, latitude, longitude, zoom, bodytext, usenl, newwindow, usecollfolder) VALUES ('$mediatypeID', '$path/$filename', '$orgpath$filename', '', '$orgpath$filename', '', '', '', '', '', '', '$newdate', '$form', '0', '', '0', '', '', '0', '0', '', '', '0', '', '0', '0', '1')";
+          $query = "INSERT IGNORE INTO media (mediatypeID, mediakey, path, thumbpath, description, notes, width, height, datetaken, placetaken, owner, changedate, form, alwayson, map, abspath, status, cemeteryID, showmap, linktocem, latitude, longitude, zoom, bodytext, usenl, newwindow, usecollfolder) VALUES ('$mediatypeID', '$path/$filename', '$orgpath$filename', '', '$orgpath$filename', '', '', '', '', '', '', '$newdate', '$form', '0', '', '0', '', '', '0', '0', '', '', '0', '', '0', '0', '1')";
           tng_query($query);
           $success = tng_affected_rows();
           //$success = 1;
@@ -96,7 +95,7 @@ $headSection->setTitle(uiTextSnippet('mediaimport'));
             importFrom($tngpath, $subdir, 0);
           }
           if ($totalImported) {
-            $query = "UPDATE $mediatypes_table SET disabled=\"0\" WHERE mediatypeID = '$mediatypeID'";
+            $query = "UPDATE mediatypes SET disabled=\"0\" WHERE mediatypeID = '$mediatypeID'";
             $result = tng_query($query);
           }
           ?>

@@ -81,8 +81,8 @@ adminwritelog("<a href=\"ordermedia.php?personID=$personID\">$sortstr: $personID
 
 $photo = '';
 
-$query = "SELECT alwayson, thumbpath, $media_table.mediaID AS mediaID, usecollfolder, mediatypeID, medialinkID FROM ($media_table, $medialinks_table)
-    WHERE personID = '$personID' AND $media_table.mediaID = $medialinks_table.mediaID AND defphoto = '1'";
+$query = "SELECT alwayson, thumbpath, media.mediaID AS mediaID, usecollfolder, mediatypeID, medialinkID FROM (media, medialinks)
+    WHERE personID = '$personID' AND media.mediaID = medialinks.mediaID AND defphoto = '1'";
 $result = tng_query($query);
 if ($result) {
   $row = tng_fetch_assoc($result);
@@ -90,7 +90,7 @@ if ($result) {
 $thismediatypeID = $row['mediatypeID'];
 tng_free_result($result);
 
-$query = "SELECT * FROM ($medialinks_table, $media_table) WHERE $medialinks_table.personID = '$personID' AND $media_table.mediaID = $medialinks_table.mediaID AND eventID = \"$eventID\" AND mediatypeID = \"$mediatypeID\" ORDER BY ordernum";
+$query = "SELECT * FROM (medialinks, media) WHERE medialinks.personID = '$personID' AND media.mediaID = medialinks.mediaID AND eventID = \"$eventID\" AND mediatypeID = \"$mediatypeID\" ORDER BY ordernum";
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);

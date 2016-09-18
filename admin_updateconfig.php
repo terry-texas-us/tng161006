@@ -59,9 +59,6 @@ fwrite($fp, "\n");
 fwrite($fp, "\$people_table = \"$people_table\";\n");
 fwrite($fp, "\$families_table = \"$families_table\";\n");
 fwrite($fp, "\$children_table = \"$children_table\";\n");
-fwrite($fp, "\$media_table = \"$media_table\";\n");
-fwrite($fp, "\$medialinks_table = \"$medialinks_table\";\n");
-fwrite($fp, "\$mediatypes_table = \"$mediatypes_table\";\n");
 fwrite($fp, "\$languagesTable = \"$languagesTable\";\n");
 
 fwrite($fp, "\$rectangles_table = \"$rectangles_table\";\n");

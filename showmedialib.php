@@ -66,8 +66,6 @@ function getMediaInfo($mediatypeID, $mediaID, $personID, $albumID, $albumlinkID,
   global $all;
   global $showall;
   global $ordernum;
-  global $media_table;
-  global $medialinks_table;
 
   $info = [];
 
@@ -75,7 +73,7 @@ function getMediaInfo($mediatypeID, $mediaID, $personID, $albumID, $albumlinkID,
     if ($tnggallery) {
       $wherestr = ' AND thumbpath != ""';
     }
-    $query = "SELECT $media_table.mediaID, albumlinkID, ordernum, path, map, description, notes, width, height, datetaken, placetaken, owner, alwayson, abspath, usecollfolder, status, plot, cemeteryID, showmap, bodytext, form, newwindow, usenl, latitude, longitude, mediatypeID FROM (albumlinks, $media_table) WHERE albumID = '$albumID' AND albumlinks.mediaID = $media_table.mediaID $wherestr ORDER BY ordernum, description";
+    $query = "SELECT media.mediaID, albumlinkID, ordernum, path, map, description, notes, width, height, datetaken, placetaken, owner, alwayson, abspath, usecollfolder, status, plot, cemeteryID, showmap, bodytext, form, newwindow, usenl, latitude, longitude, mediatypeID FROM (albumlinks, media) WHERE albumID = '$albumID' AND albumlinks.mediaID = media.mediaID $wherestr ORDER BY ordernum, description";
     $result = tng_query($query);
     $offsets = get_media_offsets($result, $mediaID);
     $info['page'] = $offsets[0] + 1;
@@ -98,14 +96,14 @@ function getMediaInfo($mediatypeID, $mediaID, $personID, $albumID, $albumlinkID,
     }
     $join = 'LEFT JOIN';
     if ($mediasearch) {
-      $wherestr .= " AND ($media_table.description LIKE \"%$mediasearch%\" OR $media_table.notes LIKE \"%$mediasearch%\" OR bodytext LIKE \"%$mediasearch%\")";
+      $wherestr .= " AND (media.description LIKE \"%$mediasearch%\" OR media.notes LIKE \"%$mediasearch%\" OR bodytext LIKE \"%$mediasearch%\")";
     }
     if ($tnggallery) {
       $wherestr .= ' AND thumbpath != ""';
     }
     $cemwhere = $cemeteryID ? " AND cemeteryID = '$cemeteryID'" : '';
 
-    $query = "SELECT DISTINCT $media_table.mediaID, path, map, description, notes, width, height, datetaken, placetaken, owner, alwayson, abspath, usecollfolder, status, plot, cemeteryID, showmap, bodytext, form, newwindow, usenl, latitude, longitude, mediatypeID FROM $media_table $wherestr $cemwhere ORDER BY description";
+    $query = "SELECT DISTINCT media.mediaID, path, map, description, notes, width, height, datetaken, placetaken, owner, alwayson, abspath, usecollfolder, status, plot, cemeteryID, showmap, bodytext, form, newwindow, usenl, latitude, longitude, mediatypeID FROM media $wherestr $cemwhere ORDER BY description";
 
     $result = tng_query($query);
     $offsets = get_media_offsets($result, $mediaID);
@@ -118,7 +116,7 @@ function getMediaInfo($mediatypeID, $mediaID, $personID, $albumID, $albumlinkID,
     $info['mediaID'] = $mediaID;
     $info['ordernum'] = $ordernum;
   } else {
-    $query = "SELECT medialinkID, path, map, description, notes, altdescription, altnotes, width, height, datetaken, placetaken, owner, ordernum, alwayson, abspath, $media_table.mediaID AS mediaID, usecollfolder, status, plot, cemeteryID, showmap, bodytext, form, newwindow, usenl, latitude, longitude, mediatypeID FROM ($media_table, $medialinks_table) WHERE personID = '$personID' AND mediatypeID = '$mediatypeID' AND eventID = '$eventID' AND $media_table.mediaID = $medialinks_table.mediaID ORDER by ordernum";
+    $query = "SELECT medialinkID, path, map, description, notes, altdescription, altnotes, width, height, datetaken, placetaken, owner, ordernum, alwayson, abspath, media.mediaID AS mediaID, usecollfolder, status, plot, cemeteryID, showmap, bodytext, form, newwindow, usenl, latitude, longitude, mediatypeID FROM (media, medialinks) WHERE personID = '$personID' AND mediatypeID = '$mediatypeID' AND eventID = '$eventID' AND media.mediaID = medialinks.mediaID ORDER by ordernum";
     $result = tng_query($query);
     $offsets = get_media_offsets($result, $mediaID);
     $info['page'] = $offsets[0] + 1;
@@ -140,7 +138,6 @@ function getMediaInfo($mediatypeID, $mediaID, $personID, $albumID, $albumlinkID,
 }
 
 function findLivingPrivate($mediaID) {
-  global $medialinks_table;
   global $people_table;
   global $families_table;
 
@@ -148,7 +145,7 @@ function findLivingPrivate($mediaID) {
   //select all medialinks for this mediaID, joined with people
   //loop through looking for living
   //if any are living, don't show media
-  $query = "SELECT $medialinks_table.medialinkID, $medialinks_table.personID AS personID, linktype, people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate FROM $medialinks_table LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID WHERE $medialinks_table.mediaID = \"$mediaID\"";
+  $query = "SELECT medialinks.medialinkID, medialinks.personID AS personID, linktype, people.living AS living, people.private AS private, people.branch AS branch, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate FROM medialinks LEFT JOIN $people_table AS people ON medialinks.personID = people.personID LEFT JOIN $families_table ON medialinks.personID = $families_table.familyID WHERE medialinks.mediaID = \"$mediaID\"";
 
   $presult = tng_query($query);
   $noneliving = 1;
@@ -302,7 +299,6 @@ function getAlbumLinkText($mediaID) {
 }
 
 function getMediaLinkText($mediaID, $ioffset) {
-  global $medialinks_table;
   global $people_table;
   global $families_table;
   global $wherestr2;
@@ -315,7 +311,7 @@ function getMediaLinkText($mediaID, $ioffset) {
     $ioffsetstr = '';
     $newioffset = '';
   }
-  $query = "SELECT $medialinks_table.medialinkID, $medialinks_table.personID AS personID, people.living AS living, people.private AS private, people.branch AS branch, $medialinks_table.eventID, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, people.nameorder, altdescription, altnotes, familyID, people.personID AS personID2, wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.prefix AS wprefix, wifepeople.suffix AS wsuffix, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.prefix AS hprefix, husbpeople.suffix AS hsuffix, sources.title, sources.sourceID, repositories.repoID, reponame FROM $medialinks_table LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID LEFT JOIN sources ON $medialinks_table.personID = sources.sourceID LEFT JOIN repositories ON ($medialinks_table.personID = repositories.repoID) WHERE mediaID = \"$mediaID\"$wherestr2 ORDER BY people.lastname, people.lnprefix, people.firstname, hlastname, hlnprefix, hfirstname  LIMIT $ioffsetstr" . ($maxsearchresults + 1);
+  $query = "SELECT medialinks.medialinkID, medialinks.personID AS personID, people.living AS living, people.private AS private, people.branch AS branch, medialinks.eventID, $families_table.branch AS fbranch, $families_table.living AS fliving, $families_table.private AS fprivate, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, people.nameorder, altdescription, altnotes, familyID, people.personID AS personID2, wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.prefix AS wprefix, wifepeople.suffix AS wsuffix, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.prefix AS hprefix, husbpeople.suffix AS hsuffix, sources.title, sources.sourceID, repositories.repoID, reponame FROM medialinks LEFT JOIN $people_table AS people ON medialinks.personID = people.personID LEFT JOIN $families_table ON medialinks.personID = $families_table.familyID LEFT JOIN $people_table AS husbpeople ON $families_table.husband = husbpeople.personID LEFT JOIN $people_table AS wifepeople ON $families_table.wife = wifepeople.personID LEFT JOIN sources ON medialinks.personID = sources.sourceID LEFT JOIN repositories ON (medialinks.personID = repositories.repoID) WHERE mediaID = \"$mediaID\"$wherestr2 ORDER BY people.lastname, people.lnprefix, people.firstname, hlastname, hlnprefix, hfirstname  LIMIT $ioffsetstr" . ($maxsearchresults + 1);
   $presult = tng_query($query);
   $numrows = tng_num_rows($presult);
   $medialinktext = '';
@@ -569,7 +565,6 @@ function showTable($imgrow, $medialinktext, $albumlinktext) {
 }
 
 function doCemPlusMap($imgrow) {
-  global $media_table;
   global $rootpath;
   global $headstonepath;
   global $mediatypes_assoc;
@@ -620,7 +615,7 @@ function doCemPlusMap($imgrow) {
     }
   }
 
-  $query = "SELECT mediaID, mediatypeID, path, thumbpath, description, notes, usecollfolder, abspath, newwindow FROM $media_table WHERE cemeteryID = \"{$imgrow['cemeteryID']}\" AND linktocem = \"1\" ORDER BY mediatypeID, description";
+  $query = "SELECT mediaID, mediatypeID, path, thumbpath, description, notes, usecollfolder, abspath, newwindow FROM media WHERE cemeteryID = \"{$imgrow['cemeteryID']}\" AND linktocem = \"1\" ORDER BY mediatypeID, description";
   $hsresult = tng_query($query);
   if (tng_num_rows($hsresult)) {
     $i = 1;

@@ -859,8 +859,6 @@ function getMediaFolder($mediatypeID) {
 }
 
 function processMedia($mmcount, $mminfo, $persfamID, $eventID) {
-  global $medialinks_table;
-  global $media_table;
   global $savestate;
   global $today;
   global $tngimpcfg;
@@ -874,7 +872,7 @@ function processMedia($mmcount, $mminfo, $persfamID, $eventID) {
     if (!$mm['TITL']) {
       $mm['TITL'] = $mm['FILE'];
     }
-    $query = "INSERT IGNORE INTO $media_table (mediatypeID, mediakey, path, description, notes, form, usecollfolder, changedate) VALUES('{$mm['mediatypeID']}', '{$mm['OBJE']}', '{$mm['FILE']}', '{$mm['TITL']}', '{$mm['NOTE']}', '{$mm['FORM']}', '1', '{$mm['CHAN']}')";
+    $query = "INSERT IGNORE INTO media (mediatypeID, mediakey, path, description, notes, form, usecollfolder, changedate) VALUES('{$mm['mediatypeID']}', '{$mm['OBJE']}', '{$mm['FILE']}', '{$mm['TITL']}', '{$mm['NOTE']}', '{$mm['FORM']}', '1', '{$mm['CHAN']}')";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
     $success = tng_affected_rows();
@@ -883,7 +881,7 @@ function processMedia($mmcount, $mminfo, $persfamID, $eventID) {
       incrCounter('M');
     } else {
       //update if necessary
-      $query = "SELECT mediaID FROM $media_table WHERE mediakey = \"{$mm['OBJE']}\"";
+      $query = "SELECT mediaID FROM media WHERE mediakey = \"{$mm['OBJE']}\"";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       $row = tng_fetch_assoc($result);
       $mediaID = $row['mediaID'];
@@ -891,35 +889,35 @@ function processMedia($mmcount, $mminfo, $persfamID, $eventID) {
       if ($savestate['del'] != 'no') {
         if ($mm['FILE'] || $mm['TITL'] || $mm['NOTE']) {
           $changedatestr = $mm['CHAN'] ? ", changedate=\"{$mm['CHAN']}\"" : '';
-          //$query = "UPDATE $media_table SET path=\"$mm['FILE']\", description=\"$mm['TITL']\", notes=\"$mm['NOTE']\", form=\"$mm['FORM']\"$changedatestr WHERE mediakey = \"$mm['OBJE']\"";
+          //$query = "UPDATE media SET path=\"$mm['FILE']\", description=\"$mm['TITL']\", notes=\"$mm['NOTE']\", form=\"$mm['FORM']\"$changedatestr WHERE mediakey = \"$mm['OBJE']\"";
           $descstr = $mm['TITL'] ? ", description=\"{$mm['TITL']}\"" : '';
           $notestr = $mm['NOTE'] ? ", notes=\"{$mm['NOTE']}\"" : '';
-          $query = "UPDATE $media_table SET path=\"{$mm['FILE']}\"$descstr$notestr, form=\"{$mm['FORM']}\"$changedatestr WHERE mediakey = \"{$mm['OBJE']}\"";
+          $query = "UPDATE media SET path=\"{$mm['FILE']}\"$descstr$notestr, form=\"{$mm['FORM']}\"$changedatestr WHERE mediakey = \"{$mm['OBJE']}\"";
         } elseif ($mm['CHAN']) {
-          $query = "UPDATE $media_table SET changedate=\"{$mm['CHAN']}\" WHERE mediakey = \"{$mm['OBJE']}\"";
+          $query = "UPDATE media SET changedate=\"{$mm['CHAN']}\" WHERE mediakey = \"{$mm['OBJE']}\"";
         }
         $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         incrCounter('M');
       }
     }
     //get ordernum according to collection/mediatypeID
-    $query = "SELECT count(medialinkID) AS count FROM ($medialinks_table, $media_table) WHERE $media_table.mediaID = $medialinks_table.mediaID AND personID = '$persfamID' AND mediatypeID = \"{$mm['mediatypeID']}\"";
+    $query = "SELECT count(medialinkID) AS count FROM (medialinks, media) WHERE media.mediaID = medialinks.mediaID AND personID = '$persfamID' AND mediatypeID = \"{$mm['mediatypeID']}\"";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     $row = tng_fetch_assoc($result);
     $orderctr = $row['count'] ? $row['count'] + 1 : 1;
     tng_free_result($result);
 
     //insert ignore or update medialink
-    $query = "INSERT IGNORE INTO $medialinks_table (personID, mediaID, linktype, altdescription, altnotes, ordernum, dontshow, eventID, defphoto) VALUES('$persfamID', '$mediaID', '{$mm['linktype']}', '{$mm['TITL']}', '{$mm['NOTE']}', '$orderctr', '0', '$eventID', '{$mm['defphoto']}')";
+    $query = "INSERT IGNORE INTO medialinks (personID, mediaID, linktype, altdescription, altnotes, ordernum, dontshow, eventID, defphoto) VALUES('$persfamID', '$mediaID', '{$mm['linktype']}', '{$mm['TITL']}', '{$mm['NOTE']}', '$orderctr', '0', '$eventID', '{$mm['defphoto']}')";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     $psuccess = tng_affected_rows();
     if (!$psuccess && $savestate['del'] != 'no') {
       $defphotostr = $mm['defphoto'] ? ', defphoto = "1"' : '';
-      $query = "UPDATE $medialinks_table SET altdescription=\"{$mm['TITL']}\", altnotes=\"{$mm['NOTE']}\"$defphotostr WHERE personID = '$persfamID' AND mediaID = '$mediaID' AND eventID = '$eventID'";
+      $query = "UPDATE medialinks SET altdescription=\"{$mm['TITL']}\", altnotes=\"{$mm['NOTE']}\"$defphotostr WHERE personID = '$persfamID' AND mediaID = '$mediaID' AND eventID = '$eventID'";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     }
     if ($mm['defphoto']) {
-      $query = "UPDATE $medialinks_table SET defphoto=\"\" WHERE personID = '$persfamID' AND mediaID != '$mediaID'";
+      $query = "UPDATE medialinks SET defphoto=\"\" WHERE personID = '$persfamID' AND mediaID != '$mediaID'";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
     }
   }
@@ -967,7 +965,6 @@ function getMultimediaRecord($objectID, $prevlevel) {
   global $tree;
   global $savestate;
   global $lineinfo;
-  global $media_table;
   global $mminfo;
   global $today;
   global $tngimpcfg;
@@ -1092,19 +1089,19 @@ function getMultimediaRecord($objectID, $prevlevel) {
       if (!$mminfo['TITL']) {
         $mminfo['TITL'] = $mminfo['FILE'];
       }
-      $query = "INSERT IGNORE INTO $media_table (mediakey, path, thumbpath, description, notes, form, mediatypeID, usecollfolder, changedate) VALUES('{$mminfo['ID']}', '{$mminfo['FILE']}', '$thumbpath', '{$mminfo['TITL']}', '{$mminfo['NOTE']}', '{$mminfo['FORM']}', '{$mminfo['mediatypeID']}', '{$mminfo['ucf']}', '$inschangedt')";
+      $query = "INSERT IGNORE INTO media (mediakey, path, thumbpath, description, notes, form, mediatypeID, usecollfolder, changedate) VALUES('{$mminfo['ID']}', '{$mminfo['FILE']}', '$thumbpath', '{$mminfo['TITL']}', '{$mminfo['NOTE']}', '{$mminfo['FORM']}', '{$mminfo['mediatypeID']}', '{$mminfo['ucf']}', '$inschangedt')";
       $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
       $success = tng_affected_rows();
       if (!$success) {
-        $query = "SELECT mediatypeID FROM $media_table WHERE mediakey = \"{$mminfo['ID']}\"";
+        $query = "SELECT mediatypeID FROM media WHERE mediakey = \"{$mminfo['ID']}\"";
         $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         $row = tng_fetch_assoc($result);
         tng_free_result($result);
 
         $mediatypeIDstr = !$row['mediatypeID'] ? " mediatypeID=\"{$mminfo['mediatypeID']}\"," : '';
         //$mediatypeIDstr = " mediatypeID=\"{$mminfo['mediatypeID']}\",";
-        $query = "UPDATE $media_table SET path=\"{$mminfo['FILE']}\", description=\"{$mminfo['TITL']}\", notes=\"{$mminfo['NOTE']}\", form=\"{$mminfo['FORM']}\",$mediatypeIDstr changedate=\"$inschangedt\" WHERE mediakey = \"{$mminfo['ID']}\"";
+        $query = "UPDATE media SET path=\"{$mminfo['FILE']}\", description=\"{$mminfo['TITL']}\", notes=\"{$mminfo['NOTE']}\", form=\"{$mminfo['FORM']}\",$mediatypeIDstr changedate=\"$inschangedt\" WHERE mediakey = \"{$mminfo['ID']}\"";
         $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
       }
     }
@@ -1245,7 +1242,6 @@ function saveCustEvents($prefix, $persfamID, $events, $totevents) {
   global $custevents;
   global $medialinks;
   global $num_medialinks;
-  global $medialinks_table;
   global $num_albumlinks;
   global $albumlinks;
   global $allevents;
@@ -1298,7 +1294,7 @@ function saveCustEvents($prefix, $persfamID, $events, $totevents) {
           if (isset($medialinks[$key])) {
             foreach ($medialinks[$key] as $medialinkID) {
 
-              $query = "UPDATE $medialinks_table SET eventID = \"$eventID\" WHERE medialinkID = \"$medialinkID\"";
+              $query = "UPDATE medialinks SET eventID = \"$eventID\" WHERE medialinkID = \"$medialinkID\"";
               $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
             }
             unset($medialinks[$key]);

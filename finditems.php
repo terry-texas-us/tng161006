@@ -24,7 +24,7 @@ if ($albumID) {
   $mediaquery = "SELECT entityID FROM albumplinks WHERE albumID = '$albumID' AND linktype = '$type'";
 } else {
   if ($mediaID) {
-    $mediaquery = "SELECT personID AS entityID FROM $medialinks_table WHERE mediaID = '$mediaID' AND linktype = '$type'";
+    $mediaquery = "SELECT personID AS entityID FROM medialinks WHERE mediaID = '$mediaID' AND linktype = '$type'";
   }
 }
 

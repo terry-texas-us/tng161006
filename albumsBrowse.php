@@ -114,7 +114,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
                   echo   "</td>\n";
                   echo   '<td style="width: ' . ($thumbmaxw + 6) . 'px; text-align: center">';
 
-                  $query2 = "SELECT thumbpath, usecollfolder, mediatypeID FROM ($media_table, albumlinks) WHERE albumID = \"{$row['albumID']}\" AND $media_table.mediaID = albumlinks.mediaID AND defphoto=\"1\"";
+                  $query2 = "SELECT thumbpath, usecollfolder, mediatypeID FROM (media, albumlinks) WHERE albumID = \"{$row['albumID']}\" AND media.mediaID = albumlinks.mediaID AND defphoto=\"1\"";
                   $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
                   $trow = tng_fetch_assoc($result2);
                   $tmediatypeID = $trow['mediatypeID'];

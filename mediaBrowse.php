@@ -60,7 +60,7 @@ $orgwherestr = '';
 
 $originalstring = preg_replace('/\"/', '&#34;', $searchstring);
 $searchstring = addslashes($searchstring);
-$wherestr = $searchstring ? "($media_table.mediaID LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR path LIKE \"%$searchstring%\" OR notes LIKE \"%$searchstring%\" OR bodytext LIKE \"%$searchstring%\")" : '';
+$wherestr = $searchstring ? "(media.mediaID LIKE \"%$searchstring%\" OR description LIKE \"%$searchstring%\" OR path LIKE \"%$searchstring%\" OR notes LIKE \"%$searchstring%\" OR bodytext LIKE \"%$searchstring%\")" : '';
 
 if ($mediatypeID) {
   $wherestr .= $wherestr ? " AND mediatypeID = \"$mediatypeID\"" : "mediatypeID = \"$mediatypeID\"";
@@ -79,19 +79,19 @@ if ($cemeteryID) {
   $wherestr .= $wherestr ? " AND cemeteryID = '$cemeteryID'" : "cemeteryID = '$cemeteryID'";
 }
 if ($unlinked) {
-  $join = "LEFT JOIN $medialinks_table ON $media_table.mediaID = $medialinks_table.mediaID";
+  $join = "LEFT JOIN medialinks ON media.mediaID = medialinks.mediaID";
   $medialinkID = 'medialinkID,';
   $wherestr .= $wherestr ? ' AND medialinkID is NULL' : 'medialinkID is NULL';
 }
 if ($wherestr) {
   $wherestr = "WHERE $wherestr";
 }
-$query = "SELECT $media_table.mediaID AS mediaID, $medialinkID description, notes, thumbpath, mediatypeID, usecollfolder, latitude, longitude, zoom FROM $media_table $join $wherestr ORDER BY description LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT media.mediaID AS mediaID, $medialinkID description, notes, thumbpath, mediatypeID, usecollfolder, latitude, longitude, zoom FROM media $join $wherestr ORDER BY description LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count($media_table.mediaID) AS mcount FROM $media_table $join $wherestr";
+  $query = "SELECT count(media.mediaID) AS mcount FROM media $join $wherestr";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['mcount'];
@@ -373,7 +373,7 @@ $headSection->setTitle(uiTextSnippet('media'));
               $label = uiTextSnippet($mtypeID) ? uiTextSnippet($mtypeID) : $mediatypes_display[$mtypeID];
               echo '<td>' . $label . "</td>\n";
             }
-            $query = "SELECT people.personID AS personID2, familyID, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, $medialinks_table.personID AS personID, sources.title, sources.sourceID, repositories.repoID, reponame, linktype FROM $medialinks_table LEFT JOIN $people_table AS people ON $medialinks_table.personID = people.personID LEFT JOIN $families_table ON $medialinks_table.personID = $families_table.familyID LEFT JOIN sources ON $medialinks_table.personID = sources.sourceID LEFT JOIN repositories ON ($medialinks_table.personID = repositories.repoID) WHERE mediaID = '{$row['mediaID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT 10";
+            $query = "SELECT people.personID AS personID2, familyID, husband, wife, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.prefix AS prefix, people.suffix AS suffix, nameorder, medialinks.personID AS personID, sources.title, sources.sourceID, repositories.repoID, reponame, linktype FROM medialinks LEFT JOIN $people_table AS people ON medialinks.personID = people.personID LEFT JOIN $families_table ON medialinks.personID = $families_table.familyID LEFT JOIN sources ON medialinks.personID = sources.sourceID LEFT JOIN repositories ON (medialinks.personID = repositories.repoID) WHERE mediaID = '{$row['mediaID']}' ORDER BY lastname, lnprefix, firstname, personID LIMIT 10";
             $presult = tng_query($query);
             $medialinktext = '';
             while ($prow = tng_fetch_assoc($presult)) {

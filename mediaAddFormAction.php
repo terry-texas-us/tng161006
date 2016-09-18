@@ -127,14 +127,14 @@ $fileparts = pathinfo($path);
 $form = strtoupper($fileparts['extension']);
 $newdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
 $mediakey = $path ? "$usefolder/$path" : time();
-$query = "INSERT IGNORE INTO $media_table (mediatypeID, mediakey, path, thumbpath, description, notes, width, height, datetaken, placetaken, owner, changedate, changedby, form, alwayson, map, abspath, status, cemeteryID, plot, showmap, linktocem, latitude, longitude, zoom, bodytext, usenl, newwindow, usecollfolder) VALUES ('$mediatypeID', '$mediakey', '$path', '$thumbpath', '$description', '$notes', '$width', '$height', '$datetaken', '$placetaken', '$owner', '$newdate', '$currentuser', '$form', '$alwayson', '$imagemap', '$abspath', '$status', '$cemeteryID', '$plot', '$showmap', '$linktocem', '$latitude', '$longitude', '$zoom', '$bodytext', '$usenl', '$newwindow', '$usecollfolder')";
+$query = "INSERT IGNORE INTO media (mediatypeID, mediakey, path, thumbpath, description, notes, width, height, datetaken, placetaken, owner, changedate, changedby, form, alwayson, map, abspath, status, cemeteryID, plot, showmap, linktocem, latitude, longitude, zoom, bodytext, usenl, newwindow, usecollfolder) VALUES ('$mediatypeID', '$mediakey', '$path', '$thumbpath', '$description', '$notes', '$width', '$height', '$datetaken', '$placetaken', '$owner', '$newdate', '$currentuser', '$form', '$alwayson', '$imagemap', '$abspath', '$status', '$cemeteryID', '$plot', '$showmap', '$linktocem', '$latitude', '$longitude', '$zoom', '$bodytext', '$usenl', '$newwindow', '$usecollfolder')";
 $result = tng_query($query);
 $success = tng_affected_rows();
 if ($result && $success) {
   $mediaID = tng_insert_id();
 
   if ($link_personID) {
-    $query = "SELECT count(medialinkID) AS count FROM $medialinks_table WHERE personID = '$link_personID'";
+    $query = "SELECT count(medialinkID) AS count FROM medialinks WHERE personID = '$link_personID'";
     $result = tng_query($query);
     if ($result) {
       $row = tng_fetch_assoc($result);
@@ -146,10 +146,10 @@ if ($result && $success) {
 
     $defval = '';
 
-    $query = "INSERT IGNORE INTO $medialinks_table (personID, mediaID, ordernum, linktype, eventID, defphoto) VALUES ('$link_personID', '$mediaID', '$newrow', '$link_linktype', '', '$defval')";
+    $query = "INSERT IGNORE INTO medialinks (personID, mediaID, ordernum, linktype, eventID, defphoto) VALUES ('$link_personID', '$mediaID', '$newrow', '$link_linktype', '', '$defval')";
     $result = tng_query($query);
   }
-  $query = "UPDATE $mediatypes_table SET disabled=\"0\" WHERE mediatypeID = '$mediatypeID'";
+  $query = "UPDATE mediatypes SET disabled=\"0\" WHERE mediatypeID = '$mediatypeID'";
   $result = tng_query($query);
 
   adminwritelog("<a href=\"mediaEdit.php?mediaID=$mediaID\">" . uiTextSnippet('addnewmedia') . ": $mediaID</a>");

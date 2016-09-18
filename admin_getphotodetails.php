@@ -5,7 +5,7 @@ require 'adminlib.php';
 $adminLogin = 1;
 require 'checklogin.php';
 
-$query = "SELECT thumbpath,  usecollfolder, description, notes, mediatypeID FROM $media_table WHERE mediaID = \"$mediaID\"";
+$query = "SELECT thumbpath,  usecollfolder, description, notes, mediatypeID FROM media WHERE mediaID = \"$mediaID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
