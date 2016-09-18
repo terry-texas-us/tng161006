@@ -201,7 +201,7 @@ $headSection->setTitle(uiTextSnippet('modifyeventtype'));
       }
       $disppairs = null;
     }
-    $query = "SELECT languageID, display, folder FROM $languagesTable ORDER BY display";
+    $query = 'SELECT languageID, display, folder FROM languages ORDER BY display';
     $langresult = tng_query($query);
     if (tng_num_rows($langresult)) {
       $displayrows = '';

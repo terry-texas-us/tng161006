@@ -14,8 +14,7 @@ if ($place) {
   if ($place2) {
     $pwherestr = "($pwherestr OR place LIKE \"%$place2%\")";
   }
-  $query = "SELECT ID, place, longitude, latitude, gedcom FROM places
-    WHERE ";
+  $query = 'SELECT ID, place, longitude, latitude, gedcom FROM places WHERE ';
   $query .= $pwherestr . ' ORDER BY place, gedcom, ID';
   $result = tng_query($query);
 

@@ -35,12 +35,12 @@ if ($offset) {
 }
 
 $wherestr = $searchstring ? "WHERE display LIKE \"%$searchstring%\" OR folder LIKE \"%$searchstring%\"" : '';
-$query = "SELECT languageID, display, folder, charset FROM $languagesTable $wherestr ORDER BY display LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT languageID, display, folder, charset FROM languages $wherestr ORDER BY display LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(languageID) AS lcount FROM $languagesTable $wherestr";
+  $query = "SELECT count(languageID) AS lcount FROM languages $wherestr";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['lcount'];

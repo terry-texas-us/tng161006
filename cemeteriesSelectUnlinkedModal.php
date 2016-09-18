@@ -6,7 +6,7 @@ require 'checklogin.php';
 
 header('Content-type:text/html; charset=' . $session_charset);
 
-$query = "SELECT cemeteryID, cemname, city, county, state, country FROM cemeteries WHERE place = \"\" ORDER BY country, state, county, city, cemname";
+$query = 'SELECT cemeteryID, cemname, city, county, state, country FROM cemeteries WHERE place = "" ORDER BY country, state, county, city, cemname';
 $result = tng_query($query);
 ?>
 <div id='cemdiv'>

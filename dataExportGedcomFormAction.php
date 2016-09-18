@@ -387,7 +387,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
 
       $allmedia = [];
       if ($savestate['media']) {
-        $query = "SELECT notes, altnotes, description, altdescription, path, mediatypeID, eventID, form, abspath, defphoto FROM (media, medialinks) WHERE medialinks.personID=\"" . addslashes($id) . "\" AND media.mediaID = medialinks.mediaID ORDER BY eventID, ordernum";
+        $query = 'SELECT notes, altnotes, description, altdescription, path, mediatypeID, eventID, form, abspath, defphoto FROM (media, medialinks) WHERE medialinks.personID="' . addslashes($id) . '" AND media.mediaID = medialinks.mediaID ORDER BY eventID, ordernum';
         $media = tng_query($query);
 
         while ($prow = tng_fetch_assoc($media)) {
@@ -1258,7 +1258,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
 
       if ($branch) {
         foreach ($placelist as $place) {
-          $query = "SELECT place, notes, latitude, longitude, placelevel, zoom FROM places WHERE place = \"" . addslashes($place) . '"';
+          $query = 'SELECT place, notes, latitude, longitude, placelevel, zoom FROM places WHERE place = "' . addslashes($place) . '"';
           $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
           $row = tng_fetch_assoc($result);
           if ($row['latitude'] || $row['longitude'] || $row['notes']) {
@@ -1267,7 +1267,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           tng_free_result($result);
         }
       } else {
-        $query = "SELECT place, notes, latitude, longitude, placelevel, zoom FROM places WHERE (latitude != \"\" OR longitude != \"\" OR notes != \"\")";
+        $query = 'SELECT place, notes, latitude, longitude, placelevel, zoom FROM places WHERE (latitude != "" OR longitude != "" OR notes != "")';
         $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         while ($row = tng_fetch_assoc($result)) {
           $places[] = $row;

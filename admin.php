@@ -70,7 +70,7 @@ $headSection->setTitle(uiTextSnippet('administration'));
     <form action="admin_savelanguage.php" target="_parent" name="language">
       <?php
       if ($link && $chooselang) {
-        $query = "SELECT languageID, display, folder FROM $languagesTable ORDER BY display";
+        $query = 'SELECT languageID, display, folder FROM languages ORDER BY display';
         $result = tng_query($query);
 
         if ($result && tng_num_rows($result)) {

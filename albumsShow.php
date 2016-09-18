@@ -36,7 +36,7 @@ $result = tng_query($query);
 $numrows = tng_num_rows($result);
 
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(albums.albumID) AS acount FROM albums";
+  $query = 'SELECT count(albums.albumID) AS acount FROM albums';
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   tng_free_result($result2);

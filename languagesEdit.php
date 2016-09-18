@@ -11,7 +11,7 @@ if (!$allowEdit) {
   header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-$query = "SELECT * FROM $languagesTable WHERE languageID = \"$languageID\"";
+$query = "SELECT * FROM languages WHERE languageID = \"$languageID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);

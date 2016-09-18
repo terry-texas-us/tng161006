@@ -14,16 +14,16 @@ require 'adminlog.php';
 
 $query = '';
 if ($cetaction == uiTextSnippet('ignoreselected')) {
-  $query = "UPDATE eventtypes SET keep=\"0\" WHERE 1=0";
+  $query = 'UPDATE eventtypes SET keep="0" WHERE 1=0';
 } else {
   if ($cetaction == uiTextSnippet('acceptselected')) {
-    $query = "UPDATE eventtypes SET keep=\"1\" WHERE 1=0";
+    $query = 'UPDATE eventtypes SET keep="1" WHERE 1=0';
   } else {
     if ($cetaction == uiTextSnippet('collapseselected')) {
-      $query = "UPDATE eventtypes SET collapse=\"1\" WHERE 1=0";
+      $query = 'UPDATE eventtypes SET collapse="1" WHERE 1=0';
     } else {
       if ($cetaction == uiTextSnippet('deleteselected')) {
-        $query = "DELETE FROM eventtypes WHERE 1=0";
+        $query = 'DELETE FROM eventtypes WHERE 1=0';
       }
     }
   }

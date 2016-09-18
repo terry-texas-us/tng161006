@@ -62,7 +62,7 @@ foreach ($mergelist as $val) {
     }
     if ($row['notes']) {
       $keepnotes .= $lineending . $row['notes'];
-      $query = "UPDATE places SET notes = \"" . addslashes($keepnotes) . "\" WHERE ID = \"$keep\"";
+      $query = 'UPDATE places SET notes = "' . addslashes($keepnotes) . "\" WHERE ID = \"$keep\"";
       $result = tng_query($query);
     }
 

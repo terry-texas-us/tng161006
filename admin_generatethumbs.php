@@ -22,7 +22,7 @@ $maxsizeallowed = 10000000; // [ts] 10 Mbytes
 if (function_exists(imageJpeg)) {
   include 'imageutils.php';
 }
-$query = "SELECT mediaID, path, thumbpath, mediatypeID, usecollfolder, form FROM media where path != \"\"";
+$query = 'SELECT mediaID, path, thumbpath, mediatypeID, usecollfolder, form FROM media where path != ""';
 $result = tng_query($query);
 
 $count = 0;

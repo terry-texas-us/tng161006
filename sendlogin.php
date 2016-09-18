@@ -31,7 +31,7 @@ if ($email) {
     $div = 'pwdmsg';
     if ($row['allow_profile']) {
       $newpassword = generatePassword(0);
-      $query = "UPDATE users SET password = \"" . PasswordEncode($newpassword) . '", password_type = "' . PasswordType() . "\" WHERE email = '$email' AND username = '$username' AND allow_living != '-1'";
+      $query = 'UPDATE users SET password = "' . PasswordEncode($newpassword) . '", password_type = "' . PasswordType() . "\" WHERE email = '$email' AND username = '$username' AND allow_living != '-1'";
       $result = tng_query($query);
       $success = tng_affected_rows();
 

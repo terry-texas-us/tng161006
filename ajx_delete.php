@@ -43,7 +43,7 @@ switch ($t) {
     $logmsg = uiTextSnippet('deleted') . ": $desc";
     break;
   case 'language':
-    $query = "DELETE FROM $languagesTable WHERE languageID = '$id'";
+    $query = "DELETE FROM languages WHERE languageID = '$id'";
     $result = tng_query($query);
 
     $logmsg = uiTextSnippet('deleted') . ': ' . uiTextSnippet('language') . " $id";

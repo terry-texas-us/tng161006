@@ -137,7 +137,7 @@ $subtypes['pl'] = uiTextSnippet('place');
 $subtypes['fa'] = uiTextSnippet('fact');
 
 $cetypes = [];
-$query = "SELECT eventtypeID, tag, display FROM eventtypes WHERE keep=\"1\" AND type=\"I\" ORDER BY display";
+$query = 'SELECT eventtypeID, tag, display FROM eventtypes WHERE keep="1" AND type="I" ORDER BY display';
 $ceresult = tng_query($query);
 while ($cerow = tng_fetch_assoc($ceresult)) {
   if (!in_array($cerow['tag'], $dontdo)) {

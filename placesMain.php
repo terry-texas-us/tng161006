@@ -65,7 +65,7 @@ $headSection->setTitle(uiTextSnippet('placelist'));
           $tally = $place['placecount'];
           $tally_fmt = number_format($tally);
           $thiswidth = floor($tally / $maxcount * 100);
-          $query = "SELECT count(place) AS placecount FROM places WHERE place = \"" . addslashes($place['myplace']) . '"';
+          $query = 'SELECT count(place) AS placecount FROM places WHERE place = "' . addslashes($place['myplace']) . '"';
           $result2 = tng_query($query);
           $countrow = tng_fetch_assoc($result2);
           $specificcount = $countrow['placecount'];

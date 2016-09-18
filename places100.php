@@ -82,7 +82,7 @@ $headSection->setTitle(uiTextSnippet('placelist') . ': ' . uiTextSnippet('top') 
               while ($place = tng_fetch_assoc($result)) {
                 $place2 = urlencode($place['myplace']);
 
-                $query = "SELECT count(place) AS placecount FROM places WHERE place = \"" . addslashes($place['myplace']) . "\" $wherestr";
+                $query = 'SELECT count(place) AS placecount FROM places WHERE place = "' . addslashes($place['myplace']) . "\" $wherestr";
                 $result2 = tng_query($query);
                 $countrow = tng_fetch_assoc($result2);
                 $specificcount = $countrow['placecount'];

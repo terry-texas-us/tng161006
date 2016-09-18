@@ -29,8 +29,8 @@ function doMedia($mediatypeID) {
   global $wherestr2;
 
   if ($mediatypeID == 'headstones') {
-    $hsfields = ", media.cemeteryID, cemname";
-    $hsjoin = "LEFT JOIN cemeteries ON media.cemeteryID = cemeteries.cemeteryID";
+    $hsfields = ', media.cemeteryID, cemname';
+    $hsjoin = 'LEFT JOIN cemeteries ON media.cemeteryID = cemeteries.cemeteryID';
   } else {
     $hsfields = $hsjoin = '';
   }

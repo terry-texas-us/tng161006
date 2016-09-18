@@ -16,7 +16,7 @@ require 'adminlog.php';
 $display = addslashes($display);
 $folder = addslashes($folder);
 
-$query = "INSERT INTO $languagesTable (display,folder,charset) VALUES (\"$display\",\"$folder\",\"$langcharset\")";
+$query = "INSERT INTO languages (display,folder,charset) VALUES (\"$display\",\"$folder\",\"$langcharset\")";
 $result = tng_query($query);
 $languageID = tng_insert_id();
 

@@ -1,7 +1,7 @@
 <?php
 require 'tng_begin.php';
 
-$query = "SELECT * FROM cemeteries ORDER BY country, state, county, city, cemname";
+$query = 'SELECT * FROM cemeteries ORDER BY country, state, county, city, cemname';
 $cemresult = tng_query($query);
 $numcems = $tngconfig['cemrows'] ? $tngconfig['cemrows'] : max(floor(tng_num_rows($cemresult) / 2), 10);
 

@@ -302,7 +302,7 @@ switch ($action) {
     $rval = $link;
     break;
   case 'addcemlink':
-    $query = "UPDATE cemeteries SET place = \"" . urldecode($place) . "\" WHERE cemeteryID = '$cemeteryID'";
+    $query = 'UPDATE cemeteries SET place = "' . urldecode($place) . "\" WHERE cemeteryID = '$cemeteryID'";
     $result = tng_query($query);
 
     //get cemname, location from cemetery, pass back in json

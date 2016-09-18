@@ -1,7 +1,6 @@
 <?php
 
-class SMTP
-{
+class SMTP {
   
   const VERSION = '5.2.10';
   

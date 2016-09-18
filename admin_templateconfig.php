@@ -17,7 +17,7 @@ if ($link) {
   }
 }
 $languageArray = [];
-$query = "SELECT display, folder FROM $languagesTable ORDER BY display";
+$query = 'SELECT display, folder FROM languages ORDER BY display';
 $result = tng_query($query);
 $languageList = tng_num_rows($result) ? "<option value=''></option>\n" : '';
 while ($row = tng_fetch_assoc($result)) {

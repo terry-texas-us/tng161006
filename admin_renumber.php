@@ -170,7 +170,7 @@ echo $navList->build('renumber');
                   $newmap = substr_replace($map, $newID, $offset, $oldlen);
                   $maps[$mediaID]['map'] = $maps[$mediaID]['newmap'] = $newmap;
 
-                  $query = "UPDATE media SET map=\"" . addslashes($newmap) . "\" WHERE mediaID=\"$mediaID\"";
+                  $query = 'UPDATE media SET map="' . addslashes($newmap) . "\" WHERE mediaID=\"$mediaID\"";
                   $result2 = tng_query($query);
                 }
               }
@@ -199,7 +199,7 @@ echo $navList->build('renumber');
             $result2 = tng_query_noerror($query);
             $success = tng_affected_rows();
             if (!$success) {
-              $query = "DELETE FROM branchlinks WHERE persfamID=\"" . $row[$id] . '"';
+              $query = 'DELETE FROM branchlinks WHERE persfamID="' . $row[$id] . '"';
               $result2 = tng_query_noerror($query);
             }
           }

@@ -192,7 +192,7 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
           $ldsevents = ['seal', 'endl', 'bapt', 'conf', 'init'];
           $tngevents = array_merge($tngevents, $ldsevents);
         }
-        $query = "SELECT tag, eventtypeID FROM eventtypes WHERE keep=\"1\" AND type=\"I\" ORDER BY display";
+        $query = 'SELECT tag, eventtypeID FROM eventtypes WHERE keep="1" AND type="I" ORDER BY display';
         $result = tng_query($query);
         $dontdo = ['ADDR', 'BIRT', 'CHR', 'DEAT', 'BURI', 'NAME', 'NICK', 'TITL', 'NSFX', 'DIV', 'MARR'];
         while ($row = tng_fetch_assoc($result)) {
@@ -254,7 +254,7 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
             $datetxt = getEventDisplay($event['display']);
             tng_free_result($evresult);
 
-            $eventsjoin = ", events";
+            $eventsjoin = ', events';
             $eventsfields = ', info';
             $allwhere .= " AND $people_table.personID = events.persfamID AND eventtypeID = '$tngevent'";
             $tngevent = 'event';

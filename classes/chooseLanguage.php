@@ -6,13 +6,12 @@ class ChooseLanguage {
 
   public function buildForm($instance) {
     global $chooselang;
-    global $languagesTable;
     global $mylanguage;
     global $languagesPath;
 
     $this->out = '';
     if ($chooselang) {
-      $query = "SELECT languageID, display, folder FROM $languagesTable ORDER BY display";
+      $query = 'SELECT languageID, display, folder FROM languages ORDER BY display';
       $result = tng_query($query);
       $numlangs = tng_num_rows($result);
 

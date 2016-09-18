@@ -250,7 +250,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
       } elseif ($secaction == uiTextSnippet('evalmedia')) {
         echo '<p>' . uiTextSnippet('evaluating') . '...</p>';
         //loop through each media type
-        $query = "SELECT * FROM mediatypes ORDER BY ordernum, display";
+        $query = 'SELECT * FROM mediatypes ORDER BY ordernum, display';
         $result = tng_query($query);
 
         while ($row = tng_fetch_assoc($result)) {

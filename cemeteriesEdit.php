@@ -21,7 +21,7 @@ $row = tng_fetch_assoc($result);
 tng_free_result($result);
 $row['cemname'] = preg_replace('/\"/', '&#34;', $row['cemname']);
 
-$query = "SELECT state FROM states";
+$query = 'SELECT state FROM states';
 $stateresult = tng_query($query);
 
 $query = 'SELECT country FROM countries';

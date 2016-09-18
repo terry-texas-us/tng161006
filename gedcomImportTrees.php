@@ -34,9 +34,9 @@ function ClearData($tree) {
 
   //we won't be able to match media links for custom events, since the custom event IDs will be renumbered, so delete the media links and start again
 
-  $query = "DELETE from events WHERE persfamID != \"XXX\"";
+  $query = 'DELETE from events WHERE persfamID != "XXX"';
   tng_query($query);
 
-  $query = "DELETE from places WHERE (latitude is null OR latitude = \"\") AND (longitude is null OR longitude = \"\") AND (notes is null OR notes = \"\")";
+  $query = 'DELETE from places WHERE (latitude is null OR latitude = "") AND (longitude is null OR longitude = "") AND (notes is null OR notes = "")';
   tng_query($query);
 }

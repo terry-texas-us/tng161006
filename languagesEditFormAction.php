@@ -16,7 +16,7 @@ require 'adminlog.php';
 $display = addslashes($display);
 $folder = addslashes($folder);
 
-$query = "UPDATE $languagesTable SET display=\"$display\", folder=\"$folder\", charset=\"$langcharset\" WHERE languageID=\"$languageID\"";
+$query = "UPDATE languages SET display=\"$display\", folder=\"$folder\", charset=\"$langcharset\" WHERE languageID=\"$languageID\"";
 $result = tng_query($query);
 
 adminwritelog("<a href=\"editlanguage.php?languageID=$languageID\">" . uiTextSnippet('modifylanguage') . ": $languageID</a>");

@@ -50,7 +50,7 @@ if ($exactmatch == 'yes') {
 $allwhere = 'WHERE 1=0';
 
 if ($cemeteryID == 'yes') {
-  $allwhere .= addCriteria("cemeteries.cemeteryID", $searchstring, $frontmod);
+  $allwhere .= addCriteria('cemeteries.cemeteryID', $searchstring, $frontmod);
 }
 
 if ($maplink == 'yes') {

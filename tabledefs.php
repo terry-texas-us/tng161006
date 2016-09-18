@@ -277,16 +277,16 @@ $query = "CREATE TABLE $families_table (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, $families_table);
 
-$query = "DROP TABLE IF EXISTS $languagesTable";
+$query = 'DROP TABLE IF EXISTS languages';
 $result = performQuery($query);
-$query = "CREATE TABLE $languagesTable (
+$query = "CREATE TABLE languages (
     languageID SMALLINT(6) NOT NULL AUTO_INCREMENT,
     display VARCHAR(100) NOT NULL,
     folder VARCHAR(50) NOT NULL,
     charset VARCHAR(30) NOT NULL,
     PRIMARY KEY (languageID)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $languagesTable);
+$result = performQuery($query, 'languages');
 
 $query = 'DROP TABLE IF EXISTS medialinks';
 $result = performQuery($query);

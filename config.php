@@ -8,7 +8,6 @@ $tngconfig['maint'] = "";
 
 $people_table = "people";
 $families_table = "families";
-$languagesTable = "languages";
 $rectangles_table = "";
 
 $rootpath = "C:/apache/htdocs/tng/";

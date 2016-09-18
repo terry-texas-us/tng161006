@@ -79,7 +79,7 @@ if ($cemeteryID) {
   $wherestr .= $wherestr ? " AND cemeteryID = '$cemeteryID'" : "cemeteryID = '$cemeteryID'";
 }
 if ($unlinked) {
-  $join = "LEFT JOIN medialinks ON media.mediaID = medialinks.mediaID";
+  $join = 'LEFT JOIN medialinks ON media.mediaID = medialinks.mediaID';
   $medialinkID = 'medialinkID,';
   $wherestr .= $wherestr ? ' AND medialinkID is NULL' : 'medialinkID is NULL';
 }
@@ -212,7 +212,7 @@ $headSection->setTitle(uiTextSnippet('media'));
                   <select class='form-control' name="cemeteryID">
                     <option selected></option>
                     <?php
-                    $query = "SELECT cemname, cemeteryID, city, county, state, country FROM cemeteries ORDER BY country, state, county, city, cemname";
+                    $query = 'SELECT cemname, cemeteryID, city, county, state, country FROM cemeteries ORDER BY country, state, county, city, cemname';
                     $cemresult = tng_query($query);
                     while ($cemrow = tng_fetch_assoc($cemresult)) {
                       $cemetery = "{$cemrow['country']}, {$cemrow['state']}, {$cemrow['county']}, {$cemrow['city']}, {$cemrow['cemname']}";

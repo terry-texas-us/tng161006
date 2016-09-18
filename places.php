@@ -75,7 +75,7 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
     $placetxt = $displaymsgs[$tngevent];
 
     if (in_array($tngevent, $custevents)) {
-      $eventsjoin = ", events";
+      $eventsjoin = ', events';
       $allwhere2 .= "$table.$idfield = events.persfamID AND eventtypeID = '$tngevent' AND parenttag = '' AND ";
       $tngevent = 'event';
     }

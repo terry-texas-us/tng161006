@@ -87,15 +87,15 @@ function doMedia($mediatypeID) {
   global $tngconfig;
 
   if ($mediatypeID == 'headstones') {
-    $hsfields = ", media.cemeteryID, cemname, city";
-    $hsjoin = "LEFT JOIN cemeteries ON media.cemeteryID = cemeteries.cemeteryID";
+    $hsfields = ', media.cemeteryID, cemname, city';
+    $hsjoin = 'LEFT JOIN cemeteries ON media.cemeteryID = cemeteries.cemeteryID';
   } else {
     $hsfields = $hsjoin = '';
   }
 
   $query = "SELECT distinct media.mediaID AS mediaID, description $altstr, media.notes, thumbpath, path, form, mediatypeID, alwayson, usecollfolder, DATE_FORMAT(changedate,'%e %b %Y') AS changedatef, changedby, status, plot, abspath, newwindow $hsfields FROM media $hsjoin";
   if ($wherestr) {
-    $query .= " LEFT JOIN medialinks ON media.mediaID = medialinks.mediaID";
+    $query .= ' LEFT JOIN medialinks ON media.mediaID = medialinks.mediaID';
   }
   $query .= " WHERE $cutoffstr $wherestr mediatypeID = \"$mediatypeID\" ORDER BY ";
   if (strpos($_SERVER['SCRIPT_NAME'], 'placesearch') !== false) {

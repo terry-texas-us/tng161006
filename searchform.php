@@ -180,7 +180,7 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
             <br>
             <?php
             $eventtypes = [];
-            $query = "SELECT eventtypeID, tag, display FROM eventtypes WHERE keep=\"1\" AND type=\"I\" ORDER BY display";
+            $query = 'SELECT eventtypeID, tag, display FROM eventtypes WHERE keep="1" AND type="I" ORDER BY display';
             $result = tng_query($query);
             while ($row = tng_fetch_assoc($result)) {
               if (!in_array($row['tag'], $dontdo)) {
@@ -366,7 +366,7 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
       $qcount++;
       }
 
-      $query = "SELECT eventtypeID, tag FROM eventtypes WHERE keep=\"1\" AND type=\"I\"";
+      $query = 'SELECT eventtypeID, tag FROM eventtypes WHERE keep="1" AND type="I"';
       $etresult = tng_query($query);
       while ($row = tng_fetch_assoc($etresult)) {
       if (!in_array($row[tag], $dontdo)) {

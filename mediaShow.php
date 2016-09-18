@@ -20,8 +20,8 @@ if ($orgmediatypeID) {
   $wherestr = "WHERE mediatypeID = \"$mediatypeID\"";
   $titlestr = uiTextSnippet($mediatypeID) ? uiTextSnippet($mediatypeID) : $mediatypes_display[$mediatypeID];
   if ($orgmediatypeID == 'headstones') {
-    $hsfields = ", media.cemeteryID, cemname, city";
-    $hsjoin = "LEFT JOIN cemeteries ON media.cemeteryID = cemeteries.cemeteryID";
+    $hsfields = ', media.cemeteryID, cemname, city';
+    $hsjoin = 'LEFT JOIN cemeteries ON media.cemeteryID = cemeteries.cemeteryID';
   } else {
     $hsfields = $hsjoin = '';
   }

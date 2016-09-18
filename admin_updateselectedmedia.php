@@ -123,7 +123,7 @@ if ($xphaction == uiTextSnippet('convto')) {
     }
   }
 } elseif ($xphaction == uiTextSnippet('deleteselected')) {
-  $query = "DELETE FROM media WHERE 1=0";
+  $query = 'DELETE FROM media WHERE 1=0';
 
   foreach (array_keys($_POST) as $key) {
     if (substr($key, 0, 2) == 'ph') {

@@ -28,10 +28,10 @@ if ($offset) {
   $newoffset = '';
   $page = 1;
 }
-$wherestr = "WHERE xnotes.ID = notelinks.xnoteID";
+$wherestr = 'WHERE xnotes.ID = notelinks.xnoteID';
 
 if (!$allowPrivate) {
-  $wherestr .= " AND notelinks.secret != \"1\"";
+  $wherestr .= ' AND notelinks.secret != "1"';
 }
 if ($notesearch) {
   $notesearch2 = addslashes($notesearch);
