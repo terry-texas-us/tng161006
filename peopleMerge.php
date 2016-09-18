@@ -431,12 +431,12 @@ if ($mergeaction == uiTextSnippet('merge')) {
         break;
       case 'pa':
         $varname = substr($key, 7);
-        $query = "DELETE from $children_table WHERE personID = '$personID1' and familyID = \"$varname\"";
+        $query = "DELETE from children WHERE personID = '$personID1' and familyID = \"$varname\"";
         $evresult = tng_query($query);
 
         //if not selected, delete child record for person 2
 
-        $query = "UPDATE $children_table set personID = '$personID1' WHERE personID = '$personID2' AND familyID = \"$varname\"";
+        $query = "UPDATE children set personID = '$personID1' WHERE personID = '$personID2' AND familyID = \"$varname\"";
         $evresult = tng_query($query);
         if (!$prifamily) {
           $updatestr .= ", famc = \"$varname\" ";
@@ -473,10 +473,10 @@ if ($mergeaction == uiTextSnippet('merge')) {
           $paresult = tng_query($query);
 
           //move kids from right family to left
-          $query = "UPDATE $children_table set familyID = \"{$sp1row['familyID']}\" WHERE familyID = '$varname'";
+          $query = "UPDATE children set familyID = \"{$sp1row['familyID']}\" WHERE familyID = '$varname'";
           $chilresult = tng_query($query);
           if (!$chilresult) {
-            $query = "DELETE FROM $children_table WHERE familyID = '$varname'";
+            $query = "DELETE FROM children WHERE familyID = '$varname'";
             $chilresult = tng_query($query);
           }
 
@@ -539,10 +539,10 @@ if ($mergeaction == uiTextSnippet('merge')) {
             $paresult = tng_query($query);
 
             //move all children from family1 to family2
-            $query = "UPDATE $children_table set familyID = \"$varname\" WHERE familyID = \"{$sp1row['familyID']}\"";
+            $query = "UPDATE children set familyID = \"$varname\" WHERE familyID = \"{$sp1row['familyID']}\"";
             $chilresult = tng_query($query);
             if (!$chilresult) {
-              $query = "DELETE FROM $children_table WHERE familyID = \"{$sp1row['familyID']}\"";
+              $query = "DELETE FROM children WHERE familyID = \"{$sp1row['familyID']}\"";
               $chilresult = tng_query($query);
             }
 
@@ -625,7 +625,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
   }
 
   //remove person2 from children table
-  $query = "DELETE FROM $children_table WHERE personID = '$personID2'";
+  $query = "DELETE FROM children WHERE personID = '$personID2'";
   $chilresult = tng_query($query);
 
   //construct name for default photo 2
@@ -656,7 +656,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
     $query = "SELECT familyID FROM $families_table WHERE husband = \"\" AND wife = \"\"";
     $blankfams = tng_query($query);
     while ($blankrow = tng_fetch_assoc($blankfams)) {
-      $query = "DELETE FROM $children_table WHERE familyID = \"{$blankrow['familyID']}\"";
+      $query = "DELETE FROM children WHERE familyID = \"{$blankrow['familyID']}\"";
       $chilresult = tng_query($query);
 
       $query = "UPDATE $people_table SET famc=\"\" WHERE famc = \"{$blankrow['familyID']}\"";
@@ -818,7 +818,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                       tng_free_result($evresult);
                     }
 
-                    $query = "SELECT personID, familyID, sealdate, sealplace FROM $children_table WHERE personID = \"{$p2row['personID']}\"";
+                    $query = "SELECT personID, familyID, sealdate, sealplace FROM children WHERE personID = \"{$p2row['personID']}\"";
                     $parents2 = tng_query($query);
 
                     if ($parents2 && tng_num_rows($parents2)) {
@@ -920,7 +920,7 @@ $headSection->setTitle(uiTextSnippet('merge'));
                     doRow($ename, 'otherevents', $inputname);
                   }
 
-                  $query = "SELECT personID, familyID, sealdate, sealplace FROM $children_table WHERE personID = \"{$p1row['personID']}\"";
+                  $query = "SELECT personID, familyID, sealdate, sealplace FROM children WHERE personID = \"{$p1row['personID']}\"";
                   $parents1 = tng_query($query);
 
                   if ($parents1 && tng_num_rows($parents1)) {

@@ -12,7 +12,6 @@ foreach ($orgprefixes as $prefix) {
 
 function getIndividualRecord($personID, $prevlevel) {
   global $people_table;
-  global $children_table;
   global $families_table;
   global $savestate;
   global $lineinfo;
@@ -255,7 +254,7 @@ function getIndividualRecord($personID, $prevlevel) {
           }
           $lineinfo = getLine();
           $relationship = $lineinfo['tag'] == 'PEDI' ? $lineinfo['rest'] : '';
-          $query = "INSERT IGNORE INTO $children_table (familyID, personID, mrel, frel, parentorder) VALUES('$famc', '$personID', '$relationship', '$relationship', '$parentorder')";
+          $query = "INSERT IGNORE INTO children (familyID, personID, mrel, frel, parentorder) VALUES('$famc', '$personID', '$relationship', '$relationship', '$parentorder')";
           $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
           $success = tng_affected_rows();
           if ($success) {
@@ -263,7 +262,7 @@ function getIndividualRecord($personID, $prevlevel) {
           }
           if ($relationship) {
             if (!$success) {
-              $query = "UPDATE $children_table SET mrel = \"$relationship\", frel = \"$relationship\" WHERE familyID = \"$famc\" AND personID = '$personID'";
+              $query = "UPDATE children SET mrel = \"$relationship\", frel = \"$relationship\" WHERE familyID = \"$famc\" AND personID = '$personID'";
               $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
             }
             $lineinfo = getLine();
@@ -272,12 +271,12 @@ function getIndividualRecord($personID, $prevlevel) {
             if (!$info['SLGC']['DATETR']) {
               $info['SLGC']['DATETR'] = '0000-00-00';
             }
-            $query = "INSERT IGNORE INTO $children_table (familyID, personID, sealdate, sealdatetr, sealplace ) "
+            $query = "INSERT IGNORE INTO children (familyID, personID, sealdate, sealdatetr, sealplace ) "
                 . 'VALUES("' . $famc . "\", '$personID', \"" . $info['SLGC']['DATE'] . '", "' . $info['SLGC']['DATETR'] . "\", '$slgcplace')";
             $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
             $success = tng_affected_rows();
             if (!$success && ($info['SLGC']['DATE'] || $slgplace || $info['SLGC']['SOUR'])) {
-              $query = "UPDATE $children_table SET sealdate=\"" . $info['SLGC']['DATE'] . '", sealdatetr="' . $info['SLGC']['DATETR'] . "\", sealplace=\"$slgcplace\" WHERE personID = \"$personID\" AND familyID = \"" . $famc . '"';
+              $query = "UPDATE children SET sealdate=\"" . $info['SLGC']['DATE'] . '", sealdatetr="' . $info['SLGC']['DATETR'] . "\", sealplace=\"$slgcplace\" WHERE personID = \"$personID\" AND familyID = \"" . $famc . '"';
               $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
             }
             if (isset($info['SLGC']['SOUR'])) {
@@ -318,7 +317,7 @@ function getIndividualRecord($personID, $prevlevel) {
               if (!$info['SLGC']['DATETR']) {
                 $info['SLGC']['DATETR'] = '0000-00-00';
               }
-              $query = "INSERT IGNORE INTO $children_table (familyID, personID, sealdate, sealdatetr, sealplace) "
+              $query = "INSERT IGNORE INTO children (familyID, personID, sealdate, sealdatetr, sealplace) "
                   . 'VALUES("' . $info['SLGC']['FAMC'] . "\", '$personID', \"" . $info['SLGC']['DATE'] . '", "' . $info['SLGC']['DATETR'] . "\", '$slgcplace')";
               $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
               $success = tng_affected_rows();
@@ -326,7 +325,7 @@ function getIndividualRecord($personID, $prevlevel) {
               $success = 0;
             }
             if (!$success && ($info['SLGC']['DATE'] || $slgplace || $info['SLGC']['SOUR'])) {
-              $query = "UPDATE $children_table SET sealdate=\"" . $info['SLGC']['DATE'] . '", sealdatetr="' . $info['SLGC']['DATETR'] . "\", sealplace=\"$slgcplace\" WHERE personID = \"$personID\" AND familyID = \"" . $info['SLGC']['FAMC'] . '"';
+              $query = "UPDATE children SET sealdate=\"" . $info['SLGC']['DATE'] . '", sealdatetr="' . $info['SLGC']['DATETR'] . "\", sealplace=\"$slgcplace\" WHERE personID = \"$personID\" AND familyID = \"" . $info['SLGC']['FAMC'] . '"';
               $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
             }
             if (isset($info['SLGC']['SOUR'])) {

@@ -320,7 +320,6 @@ function getFamily($person, $parents, $generation) {
   global $famarray;
   global $indarray;
   global $families_table;
-  global $children_table;
   global $people_table;
   global $lineending;
   global $gotfamily;
@@ -381,7 +380,7 @@ function getFamily($person, $parents, $generation) {
         }
       }
       if ($generation > 1) {
-        $query = "SELECT familyID, $children_table.personID AS personID, sealdate, sealplace, mrel, frel, living, private, branch FROM $children_table, $people_table WHERE familyID = '$parents' AND $children_table.personID = $people_table.personID ORDER BY ordernum";
+        $query = "SELECT familyID, children.personID AS personID, sealdate, sealplace, mrel, frel, living, private, branch FROM children, $people_table WHERE familyID = '$parents' AND children.personID = $people_table.personID ORDER BY ordernum";
         $result = tng_query($query);
         if ($result) {
           while ($child = tng_fetch_assoc($result)) {
@@ -850,7 +849,6 @@ function getDescendant($person, $generation) {
   global $famarray;
   global $indarray;
   global $families_table;
-  global $children_table;
   global $people_table;
   global $lineending;
 
@@ -887,7 +885,7 @@ function getDescendant($person, $generation) {
           $indarray[$person] .= "1 FAMS @{$family['familyID']}@$lineending";
         }
         if ($generation > 0) {
-          $query = "SELECT $children_table.personID AS personID, familyID, mrel, frel, living, private, branch FROM $children_table, $people_table WHERE familyID = \"{$family['familyID']}\" AND $children_table.personID = $people_table.personID ORDER BY ordernum";
+          $query = "SELECT children.personID AS personID, familyID, mrel, frel, living, private, branch FROM children, $people_table WHERE familyID = \"{$family['familyID']}\" AND children.personID = $people_table.personID ORDER BY ordernum";
           $result2 = tng_query($query);
           if ($result2) {
             while ($child = tng_fetch_assoc($result2)) {
@@ -1104,7 +1102,7 @@ if ($maxgcgen > 0 || $type == 'all') {
         while ($fam = tng_fetch_assoc($result)) {
           $famarray[$fam['familyID']] = writeFamily($fam);
 
-          $query = "SELECT personID AS personID, mrel, frel FROM $children_table WHERE familyID = \"{$fam['familyID']}\" ORDER BY ordernum";
+          $query = "SELECT personID AS personID, mrel, frel FROM children WHERE familyID = \"{$fam['familyID']}\" ORDER BY ordernum";
           $result2 = tng_query($query);
           if ($result2) {
             while ($child = tng_fetch_assoc($result2)) {

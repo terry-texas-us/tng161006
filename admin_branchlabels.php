@@ -83,7 +83,6 @@ function clearBranch($table, $branch) {
 
 function deleteBranch($table, $branch) {
   global $people_table;
-  global $children_table;
 
   $counter = 0;
   if ($table == $people_table) {
@@ -106,7 +105,7 @@ function deleteBranch($table, $branch) {
       $branches = explode(',', trim($row['branch']));
       if (in_array($branch, $branches)) {
         $familyID = $row['familyID'];
-        $query = "DELETE FROM $children_table WHERE ID = '$familyID'";
+        $query = "DELETE FROM children WHERE ID = '$familyID'";
         tng_query($query);
 
         $query = "UPDATE $people_table SET famc=\"\" WHERE famc = '$familyID'";
@@ -243,7 +242,7 @@ function setFamilyLabel($personID, $gender) {
         tng_query($query);
 
         //also delete children, events, medialinks, citations, notes
-        $query = "DELETE FROM $children_table WHERE ID = '$familyID'";
+        $query = "DELETE FROM children WHERE ID = '$familyID'";
         tng_query($query);
 
         deleteEvents($familyID);
@@ -316,7 +315,6 @@ function setSpousesLabel($personID, $gender) {
 function doAncestors($personID, $gender, $gen) {
   global $dagens;
   global $agens;
-  global $children_table;
   global $families_table;
   global $husbgender;
   global $wifegender;
@@ -329,12 +327,12 @@ function doAncestors($personID, $gender, $gen) {
   }
   $spouses = [];
   if ($gen <= $agens) {
-    $query = "SELECT $children_table.familyID AS familyID, husband, wife FROM ($children_table, $families_table) WHERE $children_table.familyID = $families_table.familyID AND personID = '$personID'";
+    $query = "SELECT children.familyID AS familyID, husband, wife FROM (children, $families_table) WHERE children.familyID = $families_table.familyID AND personID = '$personID'";
     $familyresult = tng_query($query);
 
     while ($familyrow = tng_fetch_assoc($familyresult)) {
       if ($dagens) {
-        $query = "SELECT personID FROM $children_table WHERE familyID = \"{$familyrow['familyID']}\" AND personID != '$personID'";
+        $query = "SELECT personID FROM children WHERE familyID = \"{$familyrow['familyID']}\" AND personID != '$personID'";
         $childresult = tng_query($query);
         while ($childrow = tng_fetch_assoc($childresult)) {
           $newgender = getGender($childrow['personID']);
@@ -360,7 +358,6 @@ function doAncestors($personID, $gender, $gen) {
 
 function doDescendants($personID, $gender, $gen, $maxgen) {
   global $families_table;
-  global $children_table;
   global $dospouses;
 
   if ($gender['spouseorder']) {
@@ -371,7 +368,7 @@ function doDescendants($personID, $gender, $gen, $maxgen) {
   $spouseresult = tng_query($query);
   while ($spouserow = tng_fetch_assoc($spouseresult)) {
     //setPersonLabel( $spouserow[$gender['spouse']] );
-    $query = "SELECT personID FROM $children_table WHERE familyID = \"{$spouserow['familyID']}\" ORDER BY ordernum";
+    $query = "SELECT personID FROM children WHERE familyID = \"{$spouserow['familyID']}\" ORDER BY ordernum";
     $childresult = tng_query($query);
     while ($childrow = tng_fetch_assoc($childresult)) {
       $newgender = getGender($childrow['personID']);

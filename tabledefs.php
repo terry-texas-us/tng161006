@@ -141,9 +141,9 @@ $query = "CREATE TABLE cemeteries (
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, 'cemeteries');
 
-$query = "DROP TABLE IF EXISTS $children_table";
+$query = 'DROP TABLE IF EXISTS children';
 $result = performQuery($query);
-$query = "CREATE TABLE $children_table (
+$query = "CREATE TABLE children (
     ID INT(11) NOT NULL AUTO_INCREMENT,
     gedcom VARCHAR(20) NOT NULL DEFAULT 'master',
     familyID VARCHAR(22) NOT NULL,
@@ -162,7 +162,7 @@ $query = "CREATE TABLE $children_table (
     FOREIGN KEY children_fk1 (familyID) REFERENCES $families_table (familyID),
     FOREIGN KEY children_fk2 (personID) REFERENCES $people_table (personID)
 ) ENGINE = MYISAM $collationstr";
-$result = performQuery($query, $children_table);
+$result = performQuery($query, 'children');
 
 $query = 'DROP TABLE IF EXISTS citations';
 $result = performQuery($query);

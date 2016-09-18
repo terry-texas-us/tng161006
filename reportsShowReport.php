@@ -175,7 +175,7 @@ if ($rrow['sqlselect']) {
         $displayfields[$i] = "if(sex='M',families1." . substr($dfield, 1) . ',families2.' . substr($dfield, 1) . ')';
       }
       if ($tngprefix == 'ps') {
-        $displayfields[$i] = "$children_table." . substr($dfield, 1);
+        $displayfields[$i] = "children." . substr($dfield, 1);
         $need_children = 1;
       }
       if (substr($dfield, 0, 6) == 'spouse') {
@@ -377,7 +377,7 @@ if ($rrow['sqlselect']) {
             break;
           default:
             if (substr($criteriafields[$i], 0, 2) == 'ps') {
-              $criteriastr .= "$children_table." . substr($criteriafields[$i], 1);
+              $criteriastr .= "children." . substr($criteriafields[$i], 1);
               $need_children = 1;
             } else {
               if (substr($criteriafields[$i], 0, 2) == 'ss') {
@@ -456,7 +456,7 @@ if ($rrow['sqlselect']) {
             $orderbystr .= "$people_table.personID";
           } else {
             if (substr($orderbyfields[$i], 0, 2) == 'ps') {
-              $orderbystr .= "$children_table." . substr($orderbyfields[$i], 1);
+              $orderbystr .= "children." . substr($orderbyfields[$i], 1);
               $need_children = 1;
             } else {
               $orderbystr .= processfield($orderbyfields[$i]);
@@ -475,7 +475,7 @@ if ($rrow['sqlselect']) {
     $families_join = '';
   }
   if ($need_children) {
-    $children_join = "LEFT JOIN $children_table ON $people_table.personID = $children_table.personID";
+    $children_join = "LEFT JOIN children ON $people_table.personID = children.personID";
     if ($childrentreestr) {
       $treestr .= " AND $childrentreestr";
     }

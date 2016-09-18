@@ -35,12 +35,12 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         $query = "SELECT familyID FROM $families_table";
         $result = tng_query($query);
         while ($family = tng_fetch_assoc($result)) {
-          $query = "SELECT $children_table.ID AS ID, IF(birthdatetr !='0000-00-00', birthdatetr, altbirthdatetr) AS birth FROM $children_table, $people_table WHERE $children_table.familyID = '{$family['familyID']}' AND $people_table.personID = $children_table.personID ORDER BY birth, ordernum";
+          $query = "SELECT children.ID AS ID, IF(birthdatetr !='0000-00-00', birthdatetr, altbirthdatetr) AS birth FROM children, $people_table WHERE children.familyID = '{$family['familyID']}' AND $people_table.personID = children.personID ORDER BY birth, ordernum";
           $fresult = tng_query($query);
           $order = 0;
           while ($child = tng_fetch_assoc($fresult)) {
             $order++;
-            $query = "UPDATE $children_table SET ordernum=\"$order\" WHERE ID=\"{$child['ID']}\"";
+            $query = "UPDATE children SET ordernum=\"$order\" WHERE ID=\"{$child['ID']}\"";
             $cresult = tng_query($query);
           }
           $fcount++;
@@ -169,19 +169,19 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
         echo '<p>' . uiTextSnippet('trackinglines') . '</p>';
         echo uiTextSnippet('families') . ":<br>\n";
 
-        $query = "UPDATE $children_table SET haskids = 0";
+        $query = 'UPDATE children SET haskids = 0';
         $result2 = tng_query($query);
 
         $fcount = 0;
-        $query = "SELECT distinct ($families_table.familyID), husband, wife FROM ($children_table, $families_table) WHERE $families_table.familyID = $children_table.familyID";
+        $query = "SELECT distinct ($families_table.familyID), husband, wife FROM (children, $families_table) WHERE $families_table.familyID = children.familyID";
         $result = tng_query($query);
         while ($family = tng_fetch_assoc($result)) {
           if ($family['husband'] != '') {
-            $query = "UPDATE $children_table SET haskids = 1 WHERE personID = '{$family['husband']}'";
+            $query = "UPDATE children SET haskids = 1 WHERE personID = '{$family['husband']}'";
             $result2 = tng_query($query);
           }
           if ($family['wife'] != '') {
-            $query = "UPDATE $children_table SET haskids = 1 WHERE personID = '{$family['wife']}'";
+            $query = "UPDATE children SET haskids = 1 WHERE personID = '{$family['wife']}'";
             $result2 = tng_query($query);
           }
           $fcount++;

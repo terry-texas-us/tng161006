@@ -140,7 +140,7 @@ echo $navList->build('renumber');
             $query = "UPDATE $families_table SET wife = '$newID' WHERE wife = '$old'";
             $result2 = tng_query($query);
 
-            $query = "UPDATE $children_table SET personID = '$newID' WHERE personID = '$old'";
+            $query = "UPDATE children SET personID = '$newID' WHERE personID = '$old'";
             $result2 = tng_query($query);
 
             $query = "UPDATE associations SET personID = '$newID' WHERE personID = '$old'";
@@ -178,7 +178,7 @@ echo $navList->build('renumber');
           }
 
           if ($type == 'family') {
-            $query = "UPDATE $children_table SET familyID = '$newID' WHERE familyID=\"{$row['familyID']}\"";
+            $query = "UPDATE children SET familyID = '$newID' WHERE familyID=\"{$row['familyID']}\"";
             $result2 = tng_query($query);
 
             $query = "UPDATE $people_table SET famc = '$newID' WHERE famc=\"{$row['familyID']}\"";

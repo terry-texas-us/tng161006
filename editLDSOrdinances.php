@@ -37,7 +37,7 @@ require_once 'eventlib.php';
         echo buildEventRow('endldate', 'endlplace', 'ENDL', $personID);
         // parents
         echo "<div id='parents'>\n";
-          $query = "SELECT personID, familyID, sealdate, sealplace, frel, mrel FROM $children_table WHERE personID = '$personID' ORDER BY parentorder";
+          $query = "SELECT personID, familyID, sealdate, sealplace, frel, mrel FROM children WHERE personID = '$personID' ORDER BY parentorder";
           $parents = tng_query($query);
           $parentcount = tng_num_rows($parents);
 

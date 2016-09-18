@@ -2,7 +2,6 @@
 
 function getFamilyRecord($familyID, $prevlevel) {
   global $families_table;
-  global $children_table;
   global $fciteevents;
   global $prefix;
   global $savestate;
@@ -121,7 +120,7 @@ function getFamilyRecord($familyID, $prevlevel) {
             }
           } while ($lineinfo['level'] > $startlevel);
 
-          $query = "UPDATE $children_table SET ordernum=$childorder$frelstr$mrelstr WHERE personID = \"$child\" AND familyID = '$familyID'";
+          $query = "UPDATE children SET ordernum=$childorder$frelstr$mrelstr WHERE personID = \"$child\" AND familyID = '$familyID'";
           $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
           $childorder++;
           break;

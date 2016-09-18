@@ -117,7 +117,7 @@ $headSection->setTitle(uiTextSnippet('backuprestore'));
             doRow('branches', uiTextSnippet('branches'));
             doRow('branchlinks', uiTextSnippet('brlinkstable'));
             doRow('cemeteries', uiTextSnippet('cemeteries'));
-            doRow($children_table, uiTextSnippet('children'));
+            doRow('children', uiTextSnippet('children'));
             doRow('countries', uiTextSnippet('countriestable'));
             doRow('places', uiTextSnippet('places'));
             doRow('events', uiTextSnippet('events'));

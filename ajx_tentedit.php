@@ -156,7 +156,7 @@ if (is_numeric($event)) {
     if ($needfamilies) {
       $query = "SELECT $fieldstr FROM $families_table WHERE familyID = '$familyID'";
     } elseif ($needchildren) {
-      $query = "SELECT $fieldstr FROM $children_table WHERE familyID = '$familyID' AND personID = '$personID'";
+      $query = "SELECT $fieldstr FROM children WHERE familyID = '$familyID' AND personID = '$personID'";
     } else {
       $query = "SELECT $fieldstr FROM $people_table WHERE personID = '$personID'";
     }

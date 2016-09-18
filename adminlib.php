@@ -286,14 +286,13 @@ function determineConflict($row, $table) {
 
 function getHasKids($personID) {
   global $families_table;
-  global $children_table;
 
   $haskids = 0;
   $query = "SELECT familyID FROM $families_table WHERE husband = '$personID' UNION
     SELECT familyID FROM $families_table WHERE wife = '$personID'";
   $fresult = tng_query($query);
   while ($famrow = tng_fetch_assoc($fresult)) {
-    $query = "SELECT personID FROM $children_table WHERE familyID = \"{$famrow['familyID']}\"";
+    $query = "SELECT personID FROM children WHERE familyID = \"{$famrow['familyID']}\"";
     $cresult = tng_query($query);
     $ccount = tng_num_rows($cresult);
     tng_free_result($cresult);

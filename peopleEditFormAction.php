@@ -125,7 +125,7 @@ if (!$editconflict) {
       $message = geocode($place, 0, $ID);
     }
   }
-  $query = "SELECT familyID FROM $children_table WHERE personID = '$personID'";
+  $query = "SELECT familyID FROM children WHERE personID = '$personID'";
   $parents = tng_query($query);
 
   $famc = '';
@@ -137,7 +137,7 @@ if (!$editconflict) {
       eval("\$sealpdatetr = convertdate( \$sealpdate{$parent['familyID']} );");
       eval("\$frel = \$frel{$parent['familyID']};");
       eval("\$mrel = \$mrel{$parent['familyID']};");
-      $query = "UPDATE $children_table SET sealdate=\"$sealpdate\", sealdatetr=\"$sealpdatetr\", sealplace=\"$sealpplace\", frel=\"$frel\", mrel=\"$mrel\" WHERE familyID = \"{$parent['familyID']}\" AND personID = '$personID'";
+      $query = "UPDATE children SET sealdate=\"$sealpdate\", sealdatetr=\"$sealpdatetr\", sealplace=\"$sealpplace\", frel=\"$frel\", mrel=\"$mrel\" WHERE familyID = \"{$parent['familyID']}\" AND personID = '$personID'";
       $result2 = tng_query($query);
       if (!$famc) {
         $famc = $parent['familyID'];

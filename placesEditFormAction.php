@@ -72,7 +72,7 @@ if ($propagate && trim($orgplace)) {
   $result = tng_query($query);
 
   //children
-  $query = "UPDATE $children_table SET sealplace = '$place' WHERE sealplace = '$orgplace'";
+  $query = "UPDATE children SET sealplace = '$place' WHERE sealplace = '$orgplace'";
   $result = tng_query($query);
 
   //media

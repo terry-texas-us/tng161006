@@ -8,7 +8,6 @@ $tngconfig['maint'] = "";
 
 $people_table = "people";
 $families_table = "families";
-$children_table = "children";
 $languagesTable = "languages";
 $rectangles_table = "";
 

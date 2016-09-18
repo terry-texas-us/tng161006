@@ -127,7 +127,7 @@ if ($choice == uiTextSnippet('savedel')) {
     } elseif ($needchildren) {
       $query = "UPDATE $people_table SET changedate = \"$changedate\", changedby=\"{$row['user']}\" WHERE personID = '$personID'";
       $result = tng_query($query);
-      $query = "UPDATE $children_table SET $fieldstr WHERE familyID = '$familyID' AND personID = '$personID'";
+      $query = "UPDATE children SET $fieldstr WHERE familyID = '$familyID' AND personID = '$personID'";
     } else {
       $query = "UPDATE $people_table SET $fieldstr WHERE personID = '$personID'";
     }

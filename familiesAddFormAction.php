@@ -124,15 +124,15 @@ foreach ($branchlist as $b) {
 if ($lastperson) {
   $haskids = getHasKids($lastperson);
 
-  $query = "INSERT INTO $children_table (familyID, personID, ordernum, mrel, frel, haskids, parentorder, sealdate, sealdatetr, sealplace) VALUES ('$familyID', '$lastperson', 1, '', '', $haskids, 0, '', '0000-00-00', '')";
+  $query = "INSERT INTO children (familyID, personID, ordernum, mrel, frel, haskids, parentorder, sealdate, sealdatetr, sealplace) VALUES ('$familyID', '$lastperson', 1, '', '', $haskids, 0, '', '0000-00-00', '')";
   $result = tng_query($query);
 
   if ($husband) {
-    $query = "UPDATE $children_table SET haskids=\"1\" WHERE personID = '$husband'";
+    $query = "UPDATE children SET haskids=\"1\" WHERE personID = '$husband'";
     $result2 = tng_query($query);
   }
   if ($wife) {
-    $query = "UPDATE $children_table SET haskids=\"1\" WHERE personID = '$wife'";
+    $query = "UPDATE children SET haskids=\"1\" WHERE personID = '$wife'";
     $result2 = tng_query($query);
   }
 

@@ -1,86 +1,71 @@
 <?php
 
 function countChildren($familyID) {
-  global $children_table;
-
-  $query = "SELECT count(ID) AS ccount FROM $children_table WHERE familyID = '$familyID'";
+  $query = "SELECT count(ID) AS ccount FROM children WHERE familyID = '$familyID'";
 
   return tng_query($query);
 }
 
 function getChildrenMinimal($familyID) {
-  global $children_table;
-
-  $query = "SELECT UPPER(personID) AS personID FROM $children_table WHERE familyID = '$familyID' ORDER BY ordernum";
+  $query = "SELECT UPPER(personID) AS personID FROM children WHERE familyID = '$familyID' ORDER BY ordernum";
 
   return tng_query($query);
 }
 
 function getChildrenMinimalExcept($familyID, $personID) {
-  global $children_table;
-
-  $query = "SELECT UPPER(personID) AS personID FROM $children_table WHERE familyID = '$familyID' AND personID != '$personID' ORDER BY ordernum";
+  $query = "SELECT UPPER(personID) AS personID FROM children WHERE familyID = '$familyID' AND personID != '$personID' ORDER BY ordernum";
 
   return tng_query($query);
 }
 
 function getChildrenMinimalPlusGender($familyID) {
-  global $children_table;
   global $people_table;
 
-  $query = "SELECT $children_table.personID AS personID, sex FROM ($children_table, $people_table) WHERE familyID = '$familyID' AND $children_table.personID = $people_table.personID ORDER BY ordernum";
+  $query = "SELECT children.personID AS personID, sex FROM (children, $people_table) WHERE familyID = '$familyID' AND children.personID = $people_table.personID ORDER BY ordernum";
 
   return tng_query($query);
 }
 
 function getChildrenSimple($familyID) {
-  global $children_table;
   global $people_table;
 
-  $query = "SELECT $people_table.personID AS pID, $people_table.personID AS personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch FROM ($children_table, $people_table) WHERE familyID = '$familyID' AND $children_table.personID = $people_table.personID ORDER BY ordernum";
+  $query = "SELECT $people_table.personID AS pID, $people_table.personID AS personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch FROM (children, $people_table) WHERE familyID = '$familyID' AND children.personID = $people_table.personID ORDER BY ordernum";
 
   return tng_query($query);
 }
 
 function getChildrenData($familyID) {
-  global $children_table;
   global $people_table;
 
-  $query = "SELECT $people_table.personID AS personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, haskids, sex, living, private, branch FROM ($people_table, $children_table) WHERE familyID = '$familyID' AND $people_table.personID = $children_table.personID ORDER BY ordernum";
+  $query = "SELECT $people_table.personID AS personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, haskids, sex, living, private, branch FROM ($people_table, children) WHERE familyID = '$familyID' AND $people_table.personID = children.personID ORDER BY ordernum";
 
   return tng_query($query);
 }
 
 function getChildrenDataPlusDates($familyID) {
-  global $children_table;
   global $people_table;
 
-  $query = "SELECT $people_table.personID AS personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, burialdate, sex, living, private, branch, ordernum, IF(birthdate != '', YEAR(birthdatetr), YEAR(altbirthdatetr)) AS birth, IF(deathdate != '', YEAR(deathdatetr), YEAR(burialdatetr)) AS death FROM ($children_table, $people_table) WHERE familyID = '$familyID' AND $children_table.personID = $people_table.personID ORDER BY ordernum";
+  $query = "SELECT $people_table.personID AS personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, burialdate, sex, living, private, branch, ordernum, IF(birthdate != '', YEAR(birthdatetr), YEAR(altbirthdatetr)) AS birth, IF(deathdate != '', YEAR(deathdatetr), YEAR(burialdatetr)) AS death FROM (children, $people_table) WHERE familyID = '$familyID' AND children.personID = $people_table.personID ORDER BY ordernum";
 
   return tng_query($query);
 }
 
 function getChildFamily($personID, $orderfield) {
-  global $children_table;
-
-  $query = "SELECT familyID FROM $children_table WHERE personID = '$personID' ORDER BY $orderfield";
+  $query = "SELECT familyID FROM children WHERE personID = '$personID' ORDER BY $orderfield";
 
   return tng_query($query);
 }
 
 function getChildParentsFamily($personID) {
-  global $children_table;
-
-  $query = "SELECT personID, familyID, sealdate, sealdatetr, sealplace, mrel, frel FROM $children_table WHERE personID = '$personID' ORDER BY parentorder";
+  $query = "SELECT personID, familyID, sealdate, sealdatetr, sealplace, mrel, frel FROM children WHERE personID = '$personID' ORDER BY parentorder";
 
   return tng_query($query);
 }
 
 function getChildParentsFamilyMinimal($personID) {
-  global $children_table;
   global $families_table;
 
-  $query = "SELECT husband, wife FROM ($families_table, $children_table) WHERE personID = '$personID' AND $children_table.familyID = $families_table.familyID";
+  $query = "SELECT husband, wife FROM ($families_table, children) WHERE personID = '$personID' AND children.familyID = $families_table.familyID";
 
   return tng_query($query);
 }

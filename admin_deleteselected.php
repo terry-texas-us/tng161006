@@ -92,7 +92,7 @@ foreach (array_keys($_POST) as $key) {
       $familyID = $row['familyID'];
       $items[] = $row['familyID'];
 
-      $fquery = "DELETE FROM $children_table WHERE familyID = '$familyID'";
+      $fquery = "DELETE FROM children WHERE familyID = '$familyID'";
       $result = tng_query($fquery);
 
       $pquery = "UPDATE $people_table SET famc = '' WHERE famc = '$familyID'";

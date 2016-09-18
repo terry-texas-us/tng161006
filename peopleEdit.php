@@ -287,7 +287,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
         </div> <!-- #person-events -->
         
         <?php
-        $query = "SELECT personID, familyID, sealdate, sealplace, frel, mrel FROM $children_table WHERE personID = '$personID' ORDER BY parentorder";
+        $query = "SELECT personID, familyID, sealdate, sealplace, frel, mrel FROM children WHERE personID = '$personID' ORDER BY parentorder";
         $parents = tng_query($query);
         $parentcount = tng_num_rows($parents);
         $addNewFamilyTitle = "title='" . uiTextSnippet('gotonewfamily') . " ($personID) " . uiTextSnippet('aschild') . "'";
@@ -436,7 +436,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                                 <span><?php echo displayDate($marriagerow['marrdate']); ?></span>
                               <?php } ?>
                               <?php
-                              $query = "SELECT $people_table.personID AS pID, firstname, lnprefix, lastname, birthdate, birthplace, altbirthdate, altbirthplace, haskids, living, private, branch, prefix, suffix, nameorder FROM ($people_table, $children_table) WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = \"{$familyId}\" ORDER BY ordernum";
+                              $query = "SELECT $people_table.personID AS pID, firstname, lnprefix, lastname, birthdate, birthplace, altbirthdate, altbirthplace, haskids, living, private, branch, prefix, suffix, nameorder FROM ($people_table, children) WHERE $people_table.personID = children.personID AND children.familyID = \"{$familyId}\" ORDER BY ordernum";
                               $children = tng_query($query);
 
                               if ($children && tng_num_rows($children)) {

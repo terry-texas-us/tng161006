@@ -144,23 +144,23 @@ if ($result && tng_num_rows($result)) {
 
   if ($type == 'child') {
     if ($familyID) {
-      $query = "SELECT personID FROM $children_table WHERE familyID = '$familyID'";
+      $query = "SELECT personID FROM children WHERE familyID = '$familyID'";
       $result = tng_query($query);
       $order = tng_num_rows($result) + 1;
       tng_free_result($result);
 
-      $query = "INSERT INTO $children_table (familyID, personID, ordernum, frel, mrel, haskids, parentorder, sealdate, sealdatetr, sealplace) VALUES ('$familyID', '$personID', $order, '$frel', '$mrel', 0, 0, '', '0000-00-00', '')";
+      $query = "INSERT INTO children (familyID, personID, ordernum, frel, mrel, haskids, parentorder, sealdate, sealdatetr, sealplace) VALUES ('$familyID', '$personID', $order, '$frel', '$mrel', 0, 0, '', '0000-00-00', '')";
       $result = tng_query($query);
 
       $query = "SELECT husband,wife FROM $families_table WHERE familyID = '$familyID'";
       $result = tng_query($query);
       $famrow = tng_fetch_assoc($result);
       if ($famrow['husband']) {
-        $query = "UPDATE $children_table SET haskids=\"1\" WHERE personID = \"{$famrow['husband']}\"";
+        $query = "UPDATE children SET haskids=\"1\" WHERE personID = \"{$famrow['husband']}\"";
         $result2 = tng_query($query);
       }
       if ($famrow['wife']) {
-        $query = "UPDATE $children_table SET haskids=\"1\" WHERE personID = \"{$famrow['wife']}\"";
+        $query = "UPDATE children SET haskids=\"1\" WHERE personID = \"{$famrow['wife']}\"";
         $result2 = tng_query($query);
       }
       tng_free_result($result);

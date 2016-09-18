@@ -90,7 +90,6 @@ function showDatePlace($event) {
 }
 
 function displayIndividual($ind, $label, $familyID, $showmarriage) {
-  global $children_table;
   global $datewidth;
   global $allow_lds_this;
   global $allowEdit;
@@ -220,7 +219,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
     $event['place'] = $ind['burialplace'];
     if ($allow_lds_this) {
       if ($familyID) {
-        $query = "SELECT sealdate, sealplace FROM $children_table WHERE familyID = \"{$ind['famc']}\" AND personID = \"{$ind['personID']}\"";
+        $query = "SELECT sealdate, sealplace FROM children WHERE familyID = \"{$ind['famc']}\" AND personID = \"{$ind['personID']}\"";
         $cresult = tng_query($query);
         $sealinfo = tng_fetch_assoc($cresult);
         $ind['sealdate'] = $sealinfo['sealdate'];
@@ -456,7 +455,7 @@ $headSection->setTitle($headTitle);
     }
 
     //for each child
-    $query = "SELECT $people_table.personID AS personID, branch, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, famc, sex, birthdate, birthplace, altbirthdate, altbirthplace, haskids, deathdate, deathplace, burialdate, burialplace, burialtype, baptdate, baptplace, endldate, endlplace, sealdate, sealplace FROM $people_table, $children_table WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = \"{$famrow['familyID']}\" ORDER BY ordernum";
+    $query = "SELECT $people_table.personID AS personID, branch, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, famc, sex, birthdate, birthplace, altbirthdate, altbirthplace, haskids, deathdate, deathplace, burialdate, burialplace, burialtype, baptdate, baptplace, endldate, endlplace, sealdate, sealplace FROM $people_table, children WHERE $people_table.personID = children.personID AND children.familyID = \"{$famrow['familyID']}\" ORDER BY ordernum";
     $children = tng_query($query);
 
     if ($children && tng_num_rows($children)) {

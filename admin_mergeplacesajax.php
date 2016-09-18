@@ -96,7 +96,7 @@ foreach ($mergelist as $val) {
     $result = tng_query($query);
 
     //children
-    $query = "UPDATE $children_table SET sealplace = '$newplace' WHERE sealplace = '$oldplace'";
+    $query = "UPDATE children SET sealplace = '$newplace' WHERE sealplace = '$oldplace'";
     $result = tng_query($query);
 
     //media (this is quick & dirty. would be better to cycle through each link and try the update, then delete the old if the update is not successful,

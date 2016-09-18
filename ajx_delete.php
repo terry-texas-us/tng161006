@@ -112,7 +112,7 @@ switch ($t) {
     $query = "DELETE FROM $families_table WHERE ID = '$id'";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $children_table WHERE familyID = '$familyID'";
+    $query = "DELETE FROM children WHERE familyID = '$familyID'";
     $result = tng_query($query);
 
     $query = "UPDATE $people_table SET famc='' WHERE famc = '$familyID'";
@@ -242,7 +242,7 @@ switch ($t) {
     $query = "DELETE FROM $families_table WHERE gedcom = '$id'";
     $result = tng_query($query);
 
-    $query = "DELETE FROM $children_table WHERE gedcom = '$id'";
+    $query = "DELETE FROM children WHERE gedcom = '$id'";
     $result = tng_query($query);
 
     $query = "DELETE FROM sources WHERE gedcom = '$id'";
@@ -303,7 +303,7 @@ switch ($t) {
     $logmsg = uiTextSnippet('deleted') . " $id " . uiTextSnippet('succdeleted') . '.';
     break;
   case 'child_unlink':
-    $query = "DELETE FROM $children_table WHERE familyID = '$familyID' AND personID = '$personID'";
+    $query = "DELETE FROM children WHERE familyID = '$familyID' AND personID = '$personID'";
     $result = tng_query($query);
 
     $query = "UPDATE $people_table SET famc='' WHERE personID = '$personID'";

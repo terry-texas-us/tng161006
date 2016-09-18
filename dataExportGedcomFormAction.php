@@ -563,7 +563,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     function writeIndividual($ind) {
       global $people_table;
       global $lnprefixes;
-      global $children_table;
       global $families_table;
       global $citations;
       global $templeready;
@@ -607,7 +606,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         }
         //if $doit still false, loop through children to see if sealing needs to be done for any of them
         if (!$doit) {
-          $query = "SELECT personID, sealdate, sealplace FROM $children_table WHERE familyID = \"{$spouse['familyID']}\"";
+          $query = "SELECT personID, sealdate, sealplace FROM children WHERE familyID = \"{$spouse['familyID']}\"";
           $children = tng_query($query);
           if ($children) {
             while (!$doit && $child = tng_fetch_assoc($children)) {
@@ -627,7 +626,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       tng_free_result($result2);
 
       $childdata = '';
-      $query = "SELECT * FROM $children_table WHERE personID = \"{$ind['personID']}\" ORDER BY parentorder";
+      $query = "SELECT * FROM children WHERE personID = \"{$ind['personID']}\" ORDER BY parentorder";
       $children = tng_query($query);
       if ($children) {
         while ($child = tng_fetch_assoc($children)) {
@@ -869,7 +868,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     function writeFamily($family) {
       global $citations;
       global $savestate;
-      global $children_table;
       global $people_table;
       global $templeready;
       global $fp;
@@ -883,7 +881,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       }
 
       $childdata = '';
-      $query = "SELECT personID, sealdate, sealplace, mrel, frel FROM $children_table WHERE familyID = \"$familyID\" AND personID != \"\" ORDER BY ordernum";
+      $query = "SELECT personID, sealdate, sealplace, mrel, frel FROM children WHERE familyID = \"$familyID\" AND personID != \"\" ORDER BY ordernum";
       $result = tng_query($query);
       if ($result) {
         while ($child = tng_fetch_assoc($result)) {

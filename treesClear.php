@@ -22,8 +22,8 @@ tng_query('ALTER TABLE extlinks AUTO_INCREMENT = 1');
 tng_query("DELETE FROM $families_table");
 tng_query("ALTER TABLE $families_table AUTO_INCREMENT = 1");
 
-tng_query("DELETE FROM $children_table");
-tng_query("ALTER TABLE $children_table AUTO_INCREMENT = 1");
+tng_query('DELETE FROM children');
+tng_query('ALTER TABLE children AUTO_INCREMENT = 1');
 
 tng_query('DELETE FROM associations');
 tng_query('ALTER TABLE associations AUTO_INCREMENT = 1');

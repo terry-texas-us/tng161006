@@ -142,7 +142,7 @@ else {
     titleLine(uiTextSnippet('children'));
 
     // for each child
-    $query = "SELECT $people_table.personID AS personID, branch, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, famc, sex, birthdate, birthplace, altbirthdate, altbirthplace, haskids, deathdate, deathplace, burialdate, burialplace, burialtype, baptdate, baptplace, confdate, confplace, initdate, initplace, endldate, endlplace, sealdate, sealplace FROM $people_table, $children_table WHERE $people_table.personID = $children_table.personID AND $children_table.familyID = \"$famrow[familyID]\" ORDER BY ordernum";
+    $query = "SELECT $people_table.personID AS personID, branch, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, famc, sex, birthdate, birthplace, altbirthdate, altbirthplace, haskids, deathdate, deathplace, burialdate, burialplace, burialtype, baptdate, baptplace, confdate, confplace, initdate, initplace, endldate, endlplace, sealdate, sealplace FROM $people_table, children WHERE $people_table.personID = children.personID AND children.familyID = \"$famrow[familyID]\" ORDER BY ordernum";
     $children = tng_query($query);
     if ($children && tng_num_rows($children)) {
       $childcount = 0;
@@ -220,7 +220,6 @@ $pdf->Output();
 function displayChild($personID, $childcount) {
   global $people_table;
   global $families_table;
-  global $children_table;
   global $citesources;
 
   $query = "SELECT * FROM $people_table WHERE personID = '$personID'";
@@ -282,7 +281,7 @@ function displayChild($personID, $childcount) {
       $cite = reorderCitation($personID . '_ENDL', 0);
       dateLine(uiTextSnippet('endowedlds'), displayDate($ind['endldate']), $ind['endlplace'], $cite);
 
-      $query = "SELECT sealdate, sealplace FROM $children_table WHERE familyID = \"{$ind['famc']}\" AND personID = '$personID'";
+      $query = "SELECT sealdate, sealplace FROM children WHERE familyID = \"{$ind['famc']}\" AND personID = '$personID'";
       $chresult = tng_query($query);
       $child = tng_fetch_assoc($chresult);
       getCitations($personID . '::' . $ind['famc'], 0);
@@ -353,7 +352,6 @@ function displayIndividual($personID, $showparents, $showmarriage) {
   global $familyID;
   global $people_table;
   global $families_table;
-  global $children_table;
   global $citesources;
 
   $query = "SELECT * FROM $people_table WHERE personID = '$personID'";
@@ -457,7 +455,7 @@ function displayIndividual($personID, $showparents, $showmarriage) {
     }
     parentLine(uiTextSnippet('father'), $fathername, uiTextSnippet('mother'), $mothername, $cite1, $cite2);
     if ($rights['lds'] && $rights['both']) {
-      $query = "SELECT sealdate, sealplace FROM $children_table WHERE familyID = \"{$ind['famc']}\" AND personID = '$personID'";
+      $query = "SELECT sealdate, sealplace FROM children WHERE familyID = \"{$ind['famc']}\" AND personID = '$personID'";
       $chresult = tng_query($query);
       $child = tng_fetch_assoc($chresult);
       $cite = reorderCitation($personID . '::' . $ind['famc'] . '_SLGC', 0);

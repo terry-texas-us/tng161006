@@ -39,9 +39,7 @@ function deleteCitations($id) {
 }
 
 function deleteChildren($id) {
-  global $children_table;
-
-  $query = "DELETE FROM $children_table WHERE familyID = '$id'";
+  $query = "DELETE FROM children WHERE familyID = '$id'";
   tng_query($query);
 }
 
@@ -51,10 +49,9 @@ function deleteAssociations($id) {
 }
 
 function deletePersonPlus($personID, $gender) {
-  global $children_table;
   global $families_table;
 
-  $query = "DELETE FROM $children_table WHERE personID = '$personID'";
+  $query = "DELETE FROM children WHERE personID = '$personID'";
   tng_query($query);
 
   deleteEvents($personID);
@@ -91,13 +88,12 @@ function deletePersonPlus($personID, $gender) {
 
 function updateHasKids($spouseID, $spousestr) {
   global $families_table;
-  global $children_table;
 
   $query = "SELECT familyID FROM $families_table WHERE $spousestr = '$spouseID'";
   $result = tng_query($query);
   $numkids = 0;
   while (!$numkids && $row = tng_fetch_assoc($result)) {
-    $query = "SELECT count(ID) AS ccount FROM $children_table WHERE familyID = '$row[familyID]'";
+    $query = "SELECT count(ID) AS ccount FROM children WHERE familyID = '$row[familyID]'";
     $result2 = tng_query($query);
     $crow = tng_fetch_assoc($result2);
     $numkids = $crow['ccount'];
@@ -105,7 +101,7 @@ function updateHasKids($spouseID, $spousestr) {
   }
   tng_free_result($result);
   if (!$numkids) {
-    $query = "UPDATE $children_table SET haskids = '0' WHERE personID = '$spouseID'";
+    $query = "UPDATE children SET haskids = '0' WHERE personID = '$spouseID'";
     tng_query($query);
   }
 }
