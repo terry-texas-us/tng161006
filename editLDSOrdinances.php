@@ -6,7 +6,7 @@ if (!$personID) {
 }
 require 'checklogin.php';
 
-$query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch, living, private FROM $people_table WHERE personID = '$personID'";
+$query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch, living, private FROM people WHERE personID = '$personID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 

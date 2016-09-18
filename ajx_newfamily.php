@@ -23,7 +23,7 @@ if ($child) {
   }
 }
 if ($newperson) {
-  $query = "SELECT personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch FROM $people_table WHERE personID = '$newperson'";
+  $query = "SELECT personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch FROM people WHERE personID = '$newperson'";
   $result = tng_query($query);
   $newpersonrow = tng_fetch_assoc($result);
   tng_free_result($result);

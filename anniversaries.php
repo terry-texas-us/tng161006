@@ -256,13 +256,13 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
 
             $eventsjoin = ', events';
             $eventsfields = ', info';
-            $allwhere .= " AND $people_table.personID = events.persfamID AND eventtypeID = '$tngevent'";
+            $allwhere .= " AND people.personID = events.persfamID AND eventtypeID = '$tngevent'";
             $tngevent = 'event';
             break;
         }
         if ($needfamilies) {
-          $familiesjoin = " LEFT JOIN families ON ($people_table.personID = families.husband)";
-          $familiesjoinw = " LEFT JOIN families ON ($people_table.personID = families.wife)";
+          $familiesjoin = ' LEFT JOIN families ON (people.personID = families.husband)';
+          $familiesjoinw = ' LEFT JOIN families ON (people.personID = families.wife)';
           $familiessortdate = ', ' . $tngevent . 'datetr';
         } else {
           $familiesjoin = '';
@@ -289,7 +289,7 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
         if ($tngdaymonth || $tngmonth || $tngyear) {
           $allwhere .= " AND $datefieldtr != '0000-00-00'";
         }
-        $more = getLivingPrivateRestrictions($people_table, false, true);
+        $more = getLivingPrivateRestrictions('people', false, true);
         if ($more) {
           $allwhere .= ' AND ' . $more;
         }
@@ -307,12 +307,12 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
         //if one event was selected, just do that one
         //if no event was selected, do them each in turn
 
-        $query = "SELECT $people_table.ID, $people_table.personID, lastname, lnprefix, firstname, $people_table.living, $people_table.branch, prefix, suffix, nameorder, $place, $datefield $familiessortdate $eventsfields
-          FROM ($people_table $eventsjoin) $familiesjoin
+        $query = "SELECT people.ID, people.personID, lastname, lnprefix, firstname, people.living, people.branch, prefix, suffix, nameorder, $place, $datefield $familiessortdate $eventsfields
+          FROM (people $eventsjoin) $familiesjoin
           WHERE 1 $allwhere ";
         if ($needfamilies) {
-          $query .= "UNION ALL SELECT $people_table.ID, $people_table.personID, lastname, lnprefix, firstname, $people_table.living, $people_table.branch, prefix, suffix, nameorder, $place, $datefield $familiessortdate $eventsfields
-            FROM ($people_table $eventsjoin) $familiesjoinw
+          $query .= "UNION ALL SELECT people.ID, people.personID, lastname, lnprefix, firstname, people.living, people.branch, prefix, suffix, nameorder, $place, $datefield $familiessortdate $eventsfields
+            FROM (people $eventsjoin) $familiesjoinw
             WHERE 1=1 $allwhere ";
         }
         $query .= " ORDER BY DAY($datefieldtr), MONTH($datefieldtr), YEAR($datefieldtr), lastname, firstname LIMIT $newoffset" . $maxsearchresults;
@@ -323,13 +323,13 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
         if ($numrows == $maxsearchresults || $offsetplus > 1) {
           if ($needfamilies) {
             $query = "SELECT (SELECT count(personID)
-              FROM ($people_table $eventsjoin) $familiesjoin
+              FROM (people $eventsjoin) $familiesjoin
               WHERE 1=1 $allwhere) +
               (SELECT count(personID)
-              FROM ($people_table $eventsjoin) $familiesjoinw
+              FROM (people $eventsjoin) $familiesjoinw
               WHERE 1=1 $allwhere) as pcount";
           } else {
-            $query = "SELECT count(personID) AS pcount FROM ($people_table $eventsjoin) $familiesjoin WHERE 1=1 $allwhere";
+            $query = "SELECT count(personID) AS pcount FROM (people $eventsjoin) $familiesjoin WHERE 1=1 $allwhere";
           }
           $result2 = tng_query($query);
           $countrow = tng_fetch_assoc($result2);

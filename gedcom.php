@@ -26,9 +26,8 @@ tng_free_result($treeresult);
 function getAncestor($person, $generation) {
   global $maxgcgen;
   global $indarray;
-  global $people_table;
 
-  $query = "SELECT personID, famc FROM $people_table WHERE personID = '$person'";
+  $query = "SELECT personID, famc FROM people WHERE personID = '$person'";
   $result = tng_query($query);
   if ($result) {
     $ind = tng_fetch_assoc($result);
@@ -319,7 +318,6 @@ function doXNotes() {
 function getFamily($person, $parents, $generation) {
   global $famarray;
   global $indarray;
-  global $people_table;
   global $lineending;
   global $gotfamily;
 
@@ -379,7 +377,7 @@ function getFamily($person, $parents, $generation) {
         }
       }
       if ($generation > 1) {
-        $query = "SELECT familyID, children.personID AS personID, sealdate, sealplace, mrel, frel, living, private, branch FROM children, $people_table WHERE familyID = '$parents' AND children.personID = $people_table.personID ORDER BY ordernum";
+        $query = "SELECT familyID, children.personID AS personID, sealdate, sealplace, mrel, frel, living, private, branch FROM children, people WHERE familyID = '$parents' AND children.personID = people.personID ORDER BY ordernum";
         $result = tng_query($query);
         if ($result) {
           while ($child = tng_fetch_assoc($result)) {
@@ -454,13 +452,12 @@ function appendParents($child) {
 
 function writeIndividual($person) {
   global $ldsOK;
-  global $people_table;
   global $citations;
   global $lnprefixes;
   global $lineending;
   global $private;
 
-  $query = "SELECT lastname, lnprefix, firstname, sex, title, prefix, suffix, nameorder, nickname, birthdate, birthplace, altbirthdate, altbirthplace, deathdate, deathplace, burialdate, burialplace, burialtype, baptdate, baptplace, confdate, confplace, initdate, initplace, endldate, endlplace, famc, living, private, branch, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM $people_table WHERE personID = '$person'";
+  $query = "SELECT lastname, lnprefix, firstname, sex, title, prefix, suffix, nameorder, nickname, birthdate, birthplace, altbirthdate, altbirthplace, deathdate, deathplace, burialdate, burialplace, burialtype, baptdate, baptplace, confdate, confplace, initdate, initplace, endldate, endlplace, famc, living, private, branch, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM people WHERE personID = '$person'";
   $result = tng_query($query);
   if ($result) {
     $ind = tng_fetch_assoc($result);
@@ -847,7 +844,6 @@ function getDescendant($person, $generation) {
   global $maxgcgen;
   global $famarray;
   global $indarray;
-  global $people_table;
   global $lineending;
 
   $result = getPersonGender($person);
@@ -883,7 +879,7 @@ function getDescendant($person, $generation) {
           $indarray[$person] .= "1 FAMS @{$family['familyID']}@$lineending";
         }
         if ($generation > 0) {
-          $query = "SELECT children.personID AS personID, familyID, mrel, frel, living, private, branch FROM children, $people_table WHERE familyID = \"{$family['familyID']}\" AND children.personID = $people_table.personID ORDER BY ordernum";
+          $query = "SELECT children.personID AS personID, familyID, mrel, frel, living, private, branch FROM children, people WHERE familyID = \"{$family['familyID']}\" AND children.personID = people.personID ORDER BY ordernum";
           $result2 = tng_query($query);
           if ($result2) {
             while ($child = tng_fetch_assoc($result2)) {
@@ -1011,7 +1007,7 @@ if ($maxgcgen > 0 || $type == 'all') {
     $maxgcgen = 999;
   }
 
-  $query = "SELECT firstname, lnprefix, lastname, suffix, living, private, branch FROM $people_table WHERE personID = '$personID'";
+  $query = "SELECT firstname, lnprefix, lastname, suffix, living, private, branch FROM people WHERE personID = '$personID'";
   $result = tng_query($query) or die("Cannot execute query: $query");
   if ($result) {
     $row = tng_fetch_assoc($result);
@@ -1070,7 +1066,7 @@ if ($maxgcgen > 0 || $type == 'all') {
       getDescendant($personID, $generation);
     } else {
       if ($type == 'all') {
-        $query = "SELECT personID, sex FROM $people_table";
+        $query = 'SELECT personID, sex FROM people';
         $result = tng_query($query);
         while ($ind = tng_fetch_assoc($result)) {
           if (!array_key_exists($ind['personID'], $indarray)) {

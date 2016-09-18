@@ -40,7 +40,7 @@ if (!$editconflict) {
 
   //get living from husband, wife
   if ($husband) {
-    $spquery = "SELECT living FROM $people_table WHERE personID = '$husband'";
+    $spquery = "SELECT living FROM people WHERE personID = '$husband'";
     $spouselive = tng_query($spquery) or die(uiTextSnippet('cannotexecutequery') . ": $spquery");
     $spouserow = tng_fetch_assoc($spouselive);
     $husbliving = $spouserow['living'];
@@ -48,7 +48,7 @@ if (!$editconflict) {
     $husbliving = 0;
   }
   if ($wife) {
-    $spquery = "SELECT living FROM $people_table WHERE personID = '$wife'";
+    $spquery = "SELECT living FROM people WHERE personID = '$wife'";
     $spouselive = tng_query($spquery) or die(uiTextSnippet('cannotexecutequery') . ": $spquery");
     $spouserow = tng_fetch_assoc($spouselive);
     $wifeliving = $spouserow['living'];

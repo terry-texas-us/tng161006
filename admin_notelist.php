@@ -163,7 +163,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
             $notelinktext = '';
             while ($nrow = tng_fetch_assoc($nresult)) {
               if (!$notelinktext) {
-                $query = "SELECT * FROM $people_table WHERE personID = \"{$nrow['personID']}\"";
+                $query = "SELECT * FROM people WHERE personID = \"{$nrow['personID']}\"";
                 $result2 = tng_query($query);
                 if (tng_num_rows($result2) == 1) {
                   $row2 = tng_fetch_assoc($result2);

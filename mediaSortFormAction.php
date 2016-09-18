@@ -19,7 +19,7 @@ $sortstr = preg_replace('/xxx/', uiTextSnippet($mediatypeID), uiTextSnippet('sor
 
 switch ($linktype) {
   case 'I':
-    $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, branch FROM $people_table WHERE personID = '$personID'";
+    $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, branch FROM people WHERE personID = '$personID'";
     $result2 = tng_query($query);
     $person = tng_fetch_assoc($result2);
     $person['allow_living'] = 1;

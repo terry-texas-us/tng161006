@@ -158,7 +158,7 @@ if (is_numeric($event)) {
     } elseif ($needchildren) {
       $query = "SELECT $fieldstr FROM children WHERE familyID = '$familyID' AND personID = '$personID'";
     } else {
-      $query = "SELECT $fieldstr FROM $people_table WHERE personID = '$personID'";
+      $query = "SELECT $fieldstr FROM people WHERE personID = '$personID'";
     }
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);

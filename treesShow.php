@@ -34,7 +34,7 @@ $headSection->setTitle(uiTextSnippet('trees'));
       <?php
       $i = 1;
       while ($row = tng_fetch_assoc($result)) {
-        $presult = tng_query("SELECT count(personID) AS pcount FROM $people_table");
+        $presult = tng_query('SELECT count(personID) AS pcount FROM people');
         $prow = tng_fetch_assoc($presult);
         tng_free_result($presult);
                 

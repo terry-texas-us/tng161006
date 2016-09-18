@@ -84,12 +84,11 @@ function findhelp($helpfile) {
 }
 
 function checkReview($type) {
-  global $people_table;
   global $assignedbranch;
 
   if ($type == 'I') {
-    $revwhere = "$people_table.personID = temp_events.personID AND (type = 'I' OR type = 'C')";
-    $table = $people_table;
+    $revwhere = "people.personID = temp_events.personID AND (type = 'I' OR type = 'C')";
+    $table = 'people';
   } else {
     $revwhere = "families.familyID = temp_events.familyID AND type = 'F'";
     $table = 'families';

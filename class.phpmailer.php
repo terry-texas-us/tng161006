@@ -1,7 +1,6 @@
 <?php
 
-class PHPMailer
-{
+class PHPMailer {
   public $Version = '5.2.10';
   
   public $Priority = 3;
@@ -158,16 +157,14 @@ class PHPMailer
   
   const MAX_LINE_LENGTH = 998;
 
-  
   public function __construct($options = false, $exceptions = false) {
     if ($options && isset($options->charset)) {
       $this->CharSet = $options->charset;
     } else {
       $this->CharSet = 'iso-8859-1';
     }
-    $this->exceptions = (boolean)$exceptions;
+    $this->exceptions = (boolean) $exceptions;
   }
-
   
   public function __destruct() {
     //Close any open SMTP connection nicely
@@ -175,7 +172,6 @@ class PHPMailer
       $this->smtpClose();
     }
   }
-
   
   private function mailPassthru($to, $subject, $body, $header, $params) {
     //Check overloading of mail function to avoid double-encoding
@@ -192,7 +188,6 @@ class PHPMailer
     return $result;
   }
 
- 
   protected function edebug($str) {
     if ($this->SMTPDebug <= 0) {
       return;
@@ -219,7 +214,6 @@ class PHPMailer
     }
   }
 
-  
   public function isHTML($isHtml = true) {
     if ($isHtml) {
       $this->ContentType = 'text/html';
@@ -227,17 +221,14 @@ class PHPMailer
       $this->ContentType = 'text/plain';
     }
   }
-
   
   public function isSMTP() {
     $this->Mailer = 'smtp';
   }
-
   
   public function isMail() {
     $this->Mailer = 'mail';
   }
-
   
   public function isSendmail() {
     $ini_sendmail_path = ini_get('sendmail_path');
@@ -248,7 +239,6 @@ class PHPMailer
     }
     $this->Mailer = 'sendmail';
   }
-
   
   public function isQmail() {
     $ini_sendmail_path = ini_get('sendmail_path');
@@ -259,27 +249,22 @@ class PHPMailer
     }
     $this->Mailer = 'qmail';
   }
-
  
   public function addAddress($address, $name = '') {
     return $this->addAnAddress('to', $address, $name);
   }
-
   
   public function addCC($address, $name = '') {
     return $this->addAnAddress('cc', $address, $name);
   }
-
   
   public function addBCC($address, $name = '') {
     return $this->addAnAddress('bcc', $address, $name);
   }
-
   
   public function addReplyTo($address, $name = '') {
     return $this->addAnAddress('Reply-To', $address, $name);
   }
-
   
   protected function addAnAddress($kind, $address, $name = '') {
     if (!preg_match('/^(to|cc|bcc|Reply-To)$/', $kind)) {
@@ -314,7 +299,6 @@ class PHPMailer
     }
     return false;
   }
-
   
   public function parseAddresses($addrstr, $useimap = true) {
     $addresses = [];
@@ -350,7 +334,6 @@ class PHPMailer
     }
     return $addresses;
   }
-
   
   public function setFrom($address, $name = '', $auto = true) {
     $address = trim($address);
@@ -372,12 +355,10 @@ class PHPMailer
     }
     return true;
   }
-
   
   public function getLastMessageID() {
     return $this->lastMessageID;
   }
-
   
   public static function validateAddress($address, $patternselect = 'auto') {
     if (!$patternselect or $patternselect == 'auto') {
@@ -446,10 +427,9 @@ class PHPMailer
                 and strpos($address, '@') != strlen($address) - 1);
       case 'php':
       default:
-        return (boolean)filter_var($address, FILTER_VALIDATE_EMAIL);
+        return (boolean) filter_var($address, FILTER_VALIDATE_EMAIL);
     }
   }
-
   
   public function send() {
     try {
@@ -466,7 +446,6 @@ class PHPMailer
       return false;
     }
   }
-
   
   public function preSend() {
     try {
@@ -524,7 +503,6 @@ class PHPMailer
       return false;
     }
   }
-
   
   public function postSend() {
     try {
@@ -553,7 +531,6 @@ class PHPMailer
     }
     return false;
   }
-
   
   protected function sendmailSend($header, $body) {
     if ($this->Sender != '') {
@@ -597,7 +574,6 @@ class PHPMailer
     }
     return true;
   }
-
   
   protected function mailSend($header, $body) {
     $toArr = [];
@@ -632,7 +608,6 @@ class PHPMailer
     }
     return true;
   }
-
   
   public function getSMTPInstance() {
     if (!is_object($this->smtp)) {
@@ -640,7 +615,6 @@ class PHPMailer
     }
     return $this->smtp;
   }
-
   
   protected function smtpSend($header, $body) {
     $bad_rcpt = [];
@@ -689,7 +663,6 @@ class PHPMailer
     }
     return true;
   }
-
   
   public function smtpConnect($options = []) {
     if (is_null($this->smtp)) {
@@ -738,7 +711,7 @@ class PHPMailer
       }
       $host = $hostinfo[3];
       $port = $this->Port;
-      $tport = (integer)$hostinfo[4];
+      $tport = (integer) $hostinfo[4];
       if ($tport > 0 and $tport < 65536) {
         $port = $tport;
       }
@@ -787,7 +760,6 @@ class PHPMailer
     }
     return false;
   }
-
   
   public function smtpClose() {
     if ($this->smtp !== null) {
@@ -797,7 +769,6 @@ class PHPMailer
       }
     }
   }
-
   
   public function setLanguage($langcode = 'en', $lang_path = '') {
     // Define full set of translatable strings in English
@@ -846,7 +817,6 @@ class PHPMailer
   public function getTranslations() {
     return $this->language;
   }
-
   
   public function addrAppend($type, $addr) {
     $addresses = [];
@@ -855,7 +825,6 @@ class PHPMailer
     }
     return $type . ': ' . implode(', ', $addresses) . $this->LE;
   }
-
   
   public function addrFormat($addr) {
     if (empty($addr[1])) { // No name provided
@@ -864,7 +833,6 @@ class PHPMailer
       return $this->encodeHeader($this->secureHeader($addr[1]), 'phrase') . ' <' . $this->secureHeader($addr[0]) . '>';
     }
   }
-
   
   public function wrapText($message, $length, $qp_mode = false) {
     if ($qp_mode) {
@@ -949,7 +917,6 @@ class PHPMailer
     }
     return $message;
   }
-
   
   public function utf8CharBoundary($encodedText, $maxLength) {
     $foundSplitPos = false;
@@ -986,7 +953,6 @@ class PHPMailer
     }
     return $maxLength;
   }
-
   
   public function setWordWrap() {
     if ($this->WordWrap < 1) {
@@ -1004,7 +970,6 @@ class PHPMailer
         break;
     }
   }
-
   
   public function createHeader() {
     $result = '';
@@ -1072,7 +1037,6 @@ class PHPMailer
     }
     return $result;
   }
-
   
   public function getMailMIME() {
     $result = '';
@@ -1117,12 +1081,10 @@ class PHPMailer
     }
     return $result;
   }
-
   
   public function getSentMIMEMessage() {
     return $this->MIMEHeader . $this->mailHeader . self::CRLF . $this->MIMEBody;
   }
-
   
   public function createBody() {
     $body = '';
@@ -1304,7 +1266,6 @@ class PHPMailer
     }
     return $body;
   }
-
   
   protected function getBoundary($boundary, $charSet, $contentType, $encoding) {
     $result = '';
@@ -1327,12 +1288,10 @@ class PHPMailer
     $result .= $this->LE;
     return $result;
   }
-
   
   protected function endBoundary($boundary) {
     return $this->LE . '--' . $boundary . '--' . $this->LE;
   }
-
   
   protected function setMessageType() {
     $type = [];
@@ -1350,17 +1309,14 @@ class PHPMailer
       $this->message_type = 'plain';
     }
   }
-
   
   public function headerLine($name, $value) {
     return $name . ': ' . $value . $this->LE;
   }
-
   
   public function textLine($value) {
     return $value . $this->LE;
   }
-
   
   public function addAttachment($path, $name = '', $encoding = 'base64', $type = '', $disposition = 'attachment') {
     try {
@@ -1395,12 +1351,10 @@ class PHPMailer
     }
     return true;
   }
-
   
   public function getAttachments() {
     return $this->attachment;
   }
-
   
   protected function attachAll($disposition_type, $boundary) {
     // Return text of body
@@ -1476,7 +1430,6 @@ class PHPMailer
     $mime[] = sprintf('--%s--%s', $boundary, $this->LE);
     return implode('', $mime);
   }
-
   
   protected function encodeFile($path, $encoding = 'base64') {
     try {
@@ -1491,7 +1444,6 @@ class PHPMailer
       return '';
     }
   }
-
   
   public function encodeString($str, $encoding = 'base64') {
     $encoded = '';
@@ -1519,7 +1471,6 @@ class PHPMailer
     }
     return $encoded;
   }
-
   
   public function encodeHeader($str, $position = 'text') {
     $matchcount = 0;
@@ -1572,7 +1523,6 @@ class PHPMailer
     $encoded = trim(str_replace("\n", $this->LE, $encoded));
     return $encoded;
   }
-
   
   public function hasMultiBytes($str) {
     if (function_exists('mb_strlen')) {
@@ -1581,12 +1531,10 @@ class PHPMailer
       return false;
     }
   }
-
   
   public function has8bitChars($text) {
     return (boolean)preg_match('/[\x80-\xFF]/', $text);
   }
-
   
   public function base64EncodeWrapMB($str, $linebreak = null) {
     $start = '=?' . $this->CharSet . '?B?';
@@ -1616,7 +1564,6 @@ class PHPMailer
     $encoded = substr($encoded, 0, -strlen($linebreak));
     return $encoded;
   }
-
   
   public function encodeQP($string, $line_max = 76) {
     // Use native function if it's available (>= PHP5.3)
@@ -1671,7 +1618,6 @@ class PHPMailer
     // Replace every spaces to _ (more readable than =20)
     return str_replace(' ', '_', $encoded);
   }
-
   
   public function addStringAttachment($string, $filename, $encoding = 'base64', $type = '', $disposition = 'attachment') {
     // If a MIME type is not specified, try to work it out from the file name
@@ -1690,7 +1636,6 @@ class PHPMailer
             7 => 0
     ];
   }
-
   
   public function addEmbeddedImage($path, $cid, $name = '', $encoding = 'base64', $type = '', $disposition = 'inline') {
     if (!is_file($path)) {
@@ -1737,7 +1682,6 @@ class PHPMailer
     ];
     return true;
   }
-
   
   public function inlineImageExists() {
     foreach ($this->attachment as $attachment) {
@@ -1747,7 +1691,6 @@ class PHPMailer
     }
     return false;
   }
-
   
   public function attachmentExists() {
     foreach ($this->attachment as $attachment) {
@@ -1757,12 +1700,10 @@ class PHPMailer
     }
     return false;
   }
-
   
   public function alternativeExists() {
     return !empty($this->AltBody);
   }
-
   
   public function clearAddresses() {
     foreach ($this->to as $to) {
@@ -1770,7 +1711,6 @@ class PHPMailer
     }
     $this->to = [];
   }
-
   
   public function clearCCs() {
     foreach ($this->cc as $cc) {
@@ -1778,7 +1718,6 @@ class PHPMailer
     }
     $this->cc = [];
   }
-
   
   public function clearBCCs() {
     foreach ($this->bcc as $bcc) {
@@ -1786,12 +1725,10 @@ class PHPMailer
     }
     $this->bcc = [];
   }
-
   
   public function clearReplyTos() {
     $this->ReplyTo = [];
   }
-
   
   public function clearAllRecipients() {
     $this->to = [];
@@ -1799,17 +1736,14 @@ class PHPMailer
     $this->bcc = [];
     $this->all_recipients = [];
   }
-
   
   public function clearAttachments() {
     $this->attachment = [];
   }
-
  
   public function clearCustomHeaders() {
     $this->CustomHeader = [];
   }
-
   
   protected function setError($msg) {
     $this->error_count++;
@@ -1830,7 +1764,6 @@ class PHPMailer
     }
     $this->ErrorInfo = $msg;
   }
-
   
   public static function rfcDate() {
     // Set the time zone to whatever the default is to avoid 500 errors
@@ -1838,7 +1771,6 @@ class PHPMailer
     date_default_timezone_set(date_default_timezone_get());
     return date('D, j M Y H:i:s O');
   }
-
   
   protected function serverHostname() {
     $result = 'localhost.localdomain';
@@ -1853,7 +1785,6 @@ class PHPMailer
     }
     return $result;
   }
-
   
   protected function lang($key) {
     if (count($this->language) < 1) {
@@ -1872,12 +1803,10 @@ class PHPMailer
       return $key;
     }
   }
-
   
   public function isError() {
     return ($this->error_count > 0);
   }
-
   
   public function fixEOL($str) {
     // Normalise to \n
@@ -1888,7 +1817,6 @@ class PHPMailer
     }
     return $nstr;
   }
-
   
   public function addCustomHeader($name, $value = null) {
     if ($value === null) {
@@ -1898,12 +1826,10 @@ class PHPMailer
       $this->CustomHeader[] = [$name, $value];
     }
   }
-
   
   public function getCustomHeaders() {
     return $this->CustomHeader;
   }
-
   
   public function msgHTML($message, $basedir = '', $advanced = false) {
     preg_match_all('/(src|background)=["\'](.*)["\']/Ui', $message, $images);
@@ -2055,7 +1981,6 @@ class PHPMailer
     }
     return 'application/octet-stream';
   }
-
   
   public static function filenameToType($filename) {
     // In case the path is a URL, strip any query string before getting extension
@@ -2066,7 +1991,6 @@ class PHPMailer
     $pathinfo = self::mb_pathinfo($filename);
     return self::_mime_types($pathinfo['extension']);
   }
-
   
   public static function mb_pathinfo($path, $options = null) {
     $ret = ['dirname' => '', 'basename' => '', 'extension' => '', 'filename' => ''];
@@ -2102,7 +2026,6 @@ class PHPMailer
         return $ret;
     }
   }
-
   
   public function set($name, $value = '') {
     if (property_exists($this, $name)) {
@@ -2113,17 +2036,14 @@ class PHPMailer
       return false;
     }
   }
-
   
   public function secureHeader($str) {
     return trim(str_replace(["\r", "\n"], '', $str));
   }
-
   
   public static function normalizeBreaks($text, $breaktype = "\r\n") {
     return preg_replace('/(\r\n|\r|\n)/ms', $breaktype, $text);
   }
-
   
   public function sign($cert_filename, $key_filename, $key_pass, $extracerts_filename = '') {
     $this->sign_cert_file = $cert_filename;
@@ -2131,7 +2051,6 @@ class PHPMailer
     $this->sign_key_pass = $key_pass;
     $this->sign_extracerts_file = $extracerts_filename;
   }
-
   
   public function DKIM_QP($txt) {
     $line = '';
@@ -2145,7 +2064,6 @@ class PHPMailer
     }
     return $line;
   }
-
   
   public function DKIM_Sign($signHeader) {
     if (!defined('PKCS7_TEXT')) {
@@ -2165,7 +2083,6 @@ class PHPMailer
     }
     return '';
   }
-
   
   public function DKIM_HeaderC($signHeader) {
     $signHeader = preg_replace('/\r\n\s+/', ' ', $signHeader);
@@ -2179,7 +2096,6 @@ class PHPMailer
     $signHeader = implode("\r\n", $lines);
     return $signHeader;
   }
-
   
   public function DKIM_BodyC($body) {
     if ($body == '') {
@@ -2194,7 +2110,6 @@ class PHPMailer
     }
     return $body;
   }
-
   
   public function DKIM_Add($headers_line, $subject, $body) {
     $DKIMsignatureType = 'rsa-sha1'; // Signature & hash algorithms
@@ -2250,38 +2165,31 @@ class PHPMailer
     $signed = $this->DKIM_Sign($toSign);
     return $dkimhdrs . $signed . "\r\n";
   }
-
  
   public static function hasLineLongerThanMax($str) {
     //+2 to include CRLF line break for a 1000 total
     return (boolean)preg_match('/^(.{' . (self::MAX_LINE_LENGTH + 2) . ',})/m', $str);
   }
-
   
   public function getToAddresses() {
     return $this->to;
   }
-
   
   public function getCcAddresses() {
     return $this->cc;
   }
-
   
   public function getBccAddresses() {
     return $this->bcc;
   }
-
   
   public function getReplyToAddresses() {
     return $this->ReplyTo;
   }
-
   
   public function getAllRecipientAddresses() {
     return $this->all_recipients;
   }
-
   
   protected function doCallback($isSent, $to, $cc, $bcc, $subject, $body, $from) {
     if (!empty($this->action_function) && is_callable($this->action_function)) {
@@ -2291,12 +2199,11 @@ class PHPMailer
   }
 }
 
-
-class phpmailerException extends Exception
-{
+class phpmailerException extends Exception {
   
   public function errorMessage() {
     $errorMsg = '<strong>' . $this->getMessage() . "</strong><br>\n";
     return $errorMsg;
   }
+
 }

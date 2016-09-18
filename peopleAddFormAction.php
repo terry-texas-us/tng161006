@@ -64,7 +64,7 @@ $endldatetr = convertDate($endldate);
 
 $newdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
 
-$query = "SELECT personID FROM $people_table WHERE personID = '$personID'";
+$query = "SELECT personID FROM people WHERE personID = '$personID'";
 $result = tng_query($query);
 
 if ($result && tng_num_rows($result)) {
@@ -132,12 +132,12 @@ if (!$burialtype) {
   $burialtype = 0;
 }
 $meta = metaphone($lnprefix . $lastname);
-$query = "INSERT INTO $people_table (personID, firstname, lnprefix, lastname, nickname, prefix, suffix, title, nameorder, living, private, birthdate, birthdatetr, birthplace, sex, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, baptdate, baptdatetr, baptplace, confdate, confdatetr, confplace, initdate, initdatetr, initplace, endldate, endldatetr, endlplace, changedate, branch, changedby, famc, metaphone, edituser, edittime)
+$query = "INSERT INTO people (personID, firstname, lnprefix, lastname, nickname, prefix, suffix, title, nameorder, living, private, birthdate, birthdatetr, birthplace, sex, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, baptdate, baptdatetr, baptplace, confdate, confdatetr, confplace, initdate, initdatetr, initplace, endldate, endldatetr, endlplace, changedate, branch, changedby, famc, metaphone, edituser, edittime)
     VALUES('$personID', '$firstname', '$lnprefix', '$lastname', '$nickname', '$prefix', '$suffix', '$title', '$pnameorder', '$living', '$private', '$birthdate', '$birthdatetr', '$birthplace', '$sex', '$altbirthdate', '$altbirthdatetr', '$altbirthplace', '$deathdate', '$deathdatetr', '$deathplace', '$burialdate', '$burialdatetr', '$burialplace', '$burialtype', '$baptdate', '$baptdatetr', '$baptplace', '$confdate', '$confdatetr', '$confplace', '$initdate', '$initdatetr', '$initplace', '$endldate', '$endldatetr', '$endlplace', '$newdate', '$allbranches', '$currentuser', '', '$meta', '', '0')";
 $result = tng_query($query);
 $ID = tng_insert_id();
 
-$query = "SELECT personID, lastname, firstname, lnprefix, birthdate, altbirthdate, prefix, suffix, nameorder FROM $people_table WHERE ID = '$ID'";
+$query = "SELECT personID, lastname, firstname, lnprefix, birthdate, altbirthdate, prefix, suffix, nameorder FROM people WHERE ID = '$ID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 $row['allow_living'] = $row['allow_private'] = 1;

@@ -60,15 +60,15 @@ if ($reviewuser != '') {
   $allwhere .= " AND user = \"$reviewuser\"";
 }
 if ($type == 'I') {
-  $allwhere .= " AND $people_table.personID = temp_events.personID AND (type = 'I' OR type = 'C')";
-  $query = "SELECT tempID, temp_events.personID AS personID, lastname, firstname, lnprefix, prefix, suffix, nameorder, eventID, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") AS postdate, living, private, branch FROM $people_table, trees, temp_events WHERE $allwhere ORDER BY postdate DESC";
+  $allwhere .= " AND people.personID = temp_events.personID AND (type = 'I' OR type = 'C')";
+  $query = "SELECT tempID, temp_events.personID AS personID, lastname, firstname, lnprefix, prefix, suffix, nameorder, eventID, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") AS postdate, living, private, branch FROM people, trees, temp_events WHERE $allwhere ORDER BY postdate DESC";
   $returnpage = 'people.php';
-  $totquery = "SELECT count(tempID) AS tcount FROM $people_table, trees, temp_events WHERE $allwhere";
+  $totquery = "SELECT count(tempID) AS tcount FROM people, trees, temp_events WHERE $allwhere";
 } elseif ($type == 'F') {
   $allwhere .= " AND families.familyID = temp_events.familyID AND type = 'F'";
   $query = "SELECT tempID, temp_events.familyID AS familyID, husband, wife, eventID, DATE_FORMAT(postdate,\"%d %b %Y %H:%i:%s\") AS postdate FROM families, trees, temp_events WHERE $allwhere ORDER BY postdate DESC";
   $returnpage = 'families.php';
-  $totquery = "SELECT count(tempID) AS tcount FROM $people_table, trees, temp_events WHERE $allwhere";
+  $totquery = "SELECT count(tempID) AS tcount FROM people, trees, temp_events WHERE $allwhere";
 }
 $result = tng_query($query);
 
@@ -213,7 +213,7 @@ $headSection->setTitle(uiTextSnippet('review'));
           } elseif ($type == 'F') {
             $hname = $wname = '';
             if ($row['husband']) {
-              $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, living, private, branch FROM $people_table WHERE personID = '{$row['husband']}'";
+              $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, living, private, branch FROM people WHERE personID = '{$row['husband']}'";
               $hresult = tng_query($query);
               $prow = tng_fetch_assoc($hresult);
               tng_free_result($hresult);
@@ -223,7 +223,7 @@ $headSection->setTitle(uiTextSnippet('review'));
               $hname = getName($prow);
             }
             if ($row['wife']) {
-              $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, living, private, branch FROM $people_table WHERE personID = '{$row['wife']}'";
+              $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, living, private, branch FROM people WHERE personID = '{$row['wife']}'";
               $wresult = tng_query($query);
               $prow = tng_fetch_assoc($wresult);
               tng_free_result($wresult);

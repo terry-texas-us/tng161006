@@ -14,7 +14,6 @@ function processfield($field) {
   global $need_families;
   global $cejoins;
   global $evfields;
-  global $people_table;
   global $familyfields_nonss;
 
   if (in_array($field, $familyfields_nonss)) {
@@ -28,7 +27,7 @@ function processfield($field) {
     $subtype = substr($field, 3, 2);
     $newfield = "e$eventtypeID.$evfields[$subtype]";
     if (!isset($cejoins[$eventtypeID])) {
-      $cejoins[$eventtypeID] = "LEFT JOIN events e$eventtypeID ON $people_table.personID = e$eventtypeID.persfamID AND e$eventtypeID.eventtypeID = \"$eventtypeID\"";
+      $cejoins[$eventtypeID] = "LEFT JOIN events e$eventtypeID ON people.personID = e$eventtypeID.persfamID AND e$eventtypeID.eventtypeID = \"$eventtypeID\"";
     }
   } else {
     $newfield = $field;
@@ -150,7 +149,7 @@ if ($rrow['sqlselect']) {
   $familyfields_nonss = ['marrdate', 'marrdatetr', 'marrplace', 'divdate', 'divdatetr', 'divplace'];
   $cejoins = [];
 
-  $displaystr = "$people_table.living, $people_table.private, lnprefix, prefix, suffix, $people_table.branch";
+  $displaystr = 'people.living, people.private, lnprefix, prefix, suffix, people.branch';
   $displayfields = explode($lineending, $rrow['display']);
   $dtreestr = '';
   for ($i = 0; $i < count($displayfields) - 1; $i++) {
@@ -182,11 +181,11 @@ if ($rrow['sqlselect']) {
         $need_families = 1;
         $displaystr .= "(if(sex='M',families1.wife,families2.husband)) as spouse";
       } elseif (in_array($dfield, $truedates)) {
-        $displaystr .= "DATE_FORMAT($people_table.$dfield,'%d %b %Y') as $dfield" . '_disp';
+        $displaystr .= "DATE_FORMAT(people.$dfield,'%d %b %Y') as $dfield" . '_disp';
       } elseif ($dfield == 'gedcom') {
         $trees_join = ', trees';
         if (!$dtreestr) {
-          $dtreestr = " $people_table.gedcom = trees.gedcom";
+          $dtreestr = ' people.gedcom = trees.gedcom';
         }
         $displaystr .= 'treename';
         $displayfields[$i] = 'treename';
@@ -203,7 +202,7 @@ if ($rrow['sqlselect']) {
         $displaystr .= "e$eventtypeID.$evfields[$subtype] as $evfields[$subtype]$eventtypeID";
         $displayfields[$i] = "$evfields[$subtype]$eventtypeID";
         if (!isset($cejoins[$eventtypeID])) {
-          $cejoins[$eventtypeID] = "LEFT JOIN events e$eventtypeID ON $people_table.personID = e$eventtypeID.persfamID AND e$eventtypeID.eventtypeID = '$eventtypeID'";
+          $cejoins[$eventtypeID] = "LEFT JOIN events e$eventtypeID ON people.personID = e$eventtypeID.persfamID AND e$eventtypeID.eventtypeID = '$eventtypeID'";
         }
       } elseif ($dfield == 'lastfirst') {
         $displaystr .= 'lastname, firstname';
@@ -227,7 +226,7 @@ if ($rrow['sqlselect']) {
     }
     $treestr .= $dtreestr;
   }
-  $displaystr .= ", $people_table.personID, $people_table.gedcom, nameorder";
+  $displaystr .= ', people.personID, people.gedcom, nameorder';
 
   $criteriastr = '';
   $criteriafields = explode($lineending, $rrow['criteria']);
@@ -255,7 +254,7 @@ if ($rrow['sqlselect']) {
             $criteriafields[$i] = '"' . date('d', time() + (3600 * $timeOffset)) . '"';
           } else {
             if ($criteriafields[$i] == 'personID') {
-              $criteriafields[$i] = "$people_table.personID";
+              $criteriafields[$i] = 'people.personID';
             } else {
               if ($criteriafields[$i] == 'today') {
                 if ($timeOffset) {
@@ -292,16 +291,16 @@ if ($rrow['sqlselect']) {
         $criteriastr .= 'LIKE';
         break;
       case 'living':
-        $criteriastr .= "$people_table.living = 1";
+        $criteriastr .= 'people.living = 1';
         break;
       case 'dead':
-        $criteriastr .= "$people_table.living != 1";
+        $criteriastr .= 'people.living != 1';
         break;
       case 'private':
-        $criteriastr .= "$people_table.private = 1";
+        $criteriastr .= 'people.private = 1';
         break;
       case 'open':
-        $criteriastr .= "$people_table.private != 1";
+        $criteriastr .= 'people.private != 1';
         break;
       default:
         if (in_array($criteriafields[$i], $familyfields_nonss)) {
@@ -313,12 +312,12 @@ if ($rrow['sqlselect']) {
             $subtype = substr($criteriafields[$i], 3, 2);
             $newcriteria = "e$eventtypeID.$evfields[$subtype]";
             if (!isset($cejoins[$eventtypeID])) {
-              $cejoins[$eventtypeID] = "LEFT JOIN events e$eventtypeID ON $people_table.personID = e$eventtypeID.persfamID AND e$eventtypeID.eventtypeID = '$eventtypeID'";
+              $cejoins[$eventtypeID] = "LEFT JOIN events e$eventtypeID ON people.personID = e$eventtypeID.persfamID AND e$eventtypeID.eventtypeID = '$eventtypeID'";
             }
           } else {
             $newcriteria = $criteriafields[$i];
             if ($newcriteria == 'changedate') {
-              $newcriteria = "$people_table." . $newcriteria;
+              $newcriteria = 'people.' . $newcriteria;
             } else {
               $position = array_search($newcriteria, $mnemonics);
               if ($position !== false) {
@@ -385,7 +384,7 @@ if ($rrow['sqlselect']) {
                 $need_families = 1;
               } else {
                 if ($criteriafields[$i] == 'gedcom') {
-                  $criteriastr .= "$people_table.$newcriteria";
+                  $criteriastr .= "people.$newcriteria";
                 } else {
                   $criteriastr .= $newcriteria;
                 }
@@ -397,7 +396,7 @@ if ($rrow['sqlselect']) {
     }
   }
 
-  $more = getLivingPrivateRestrictions($people_table, null, null);
+  $more = getLivingPrivateRestrictions('people', null, null);
   if ($more) {
     if ($criteriastr) {
       $criteriastr = "($criteriastr) AND ";
@@ -453,7 +452,7 @@ if ($rrow['sqlselect']) {
           $orderbystr .= "yearonly$orderbyfields[$i]";
         } else {
           if ($orderbyfields[$i] == 'personID') {
-            $orderbystr .= "$people_table.personID";
+            $orderbystr .= 'people.personID';
           } else {
             if (substr($orderbyfields[$i], 0, 2) == 'ps') {
               $orderbystr .= 'children.' . substr($orderbyfields[$i], 1);
@@ -470,12 +469,12 @@ if ($rrow['sqlselect']) {
     $orderbystr = "ORDER BY $orderbystr";
   }
   if ($need_families) {
-    $families_join = "LEFT JOIN families AS families1 ON ($people_table.personID = families1.husband) LEFT JOIN families AS families2 ON ($people_table.personID = families2.wife) ";
+    $families_join = 'LEFT JOIN families AS families1 ON (people.personID = families1.husband) LEFT JOIN families AS families2 ON (people.personID = families2.wife) ';
   } else {
     $families_join = '';
   }
   if ($need_children) {
-    $children_join = "LEFT JOIN children ON $people_table.personID = children.personID";
+    $children_join = 'LEFT JOIN children ON people.personID = children.personID';
     if ($childrentreestr) {
       $treestr .= " AND $childrentreestr";
     }
@@ -492,7 +491,7 @@ if ($rrow['sqlselect']) {
     $cejoin .= " $join";
   }
 
-  $query = "SELECT $displaystr FROM ($people_table $trees_join) $families_join $children_join $cejoin $criteriastr $treestr $orderbystr";
+  $query = "SELECT $displaystr FROM (people $trees_join) $families_join $children_join $cejoin $criteriastr $treestr $orderbystr";
 }
 //echo $query . " LIMIT $newoffset" . $maxsearchresults;
 $limitstr = $csv ? '' : " LIMIT $newoffset" . $maxsearchresults;
@@ -542,14 +541,14 @@ if (!$result) {
     if ($numrows == $maxsearchresults || $offsetplus > 1) {
       if ($rrow['sqlselect']) {
         if ($gotpersonid) {
-          $query = "SELECT count( $people_table.personID ) AS rcount $from";
+          $query = "SELECT count( people.personID ) AS rcount $from";
         } else {
           $result2 = tng_query($query);
           $totrows = tng_num_rows($result2);
           $query = '';
         }
       } else {
-        $query = "SELECT count($people_table.personID) AS rcount FROM ($people_table $trees_join) $families_join $children_join $cejoin $criteriastr $treestr";
+        $query = "SELECT count(people.personID) AS rcount FROM (people $trees_join) $families_join $children_join $cejoin $criteriastr $treestr";
       }
       if ($query) {
         $result2 = tng_query($query);
@@ -612,7 +611,7 @@ if (!$result) {
               if (substr($thisfield, 0, 6) == 'spouse') {
                 $spouseID = $row['spouse'];
                 if ($thisfield == 'spousename') {
-                  $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, living, private, branch FROM $people_table WHERE personID = '$spouseID'";
+                  $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, living, private, branch FROM people WHERE personID = '$spouseID'";
                   $spresult = tng_query($query);
                   if ($spresult) {
                     $sprow = tng_fetch_assoc($spresult);

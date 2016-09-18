@@ -156,7 +156,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
             echo "<td>$id</td>\n";
             echo "<td>&nbsp;{$row['description']}</td>\n";
 
-            $pcount = getBranchCount($row['branch'], $people_table);
+            $pcount = getBranchCount($row['branch'], 'people');
             $fcount = getBranchCount($row['branch'], 'families');
 
             echo "<td>{$row['personID']}&nbsp;</td>\n";

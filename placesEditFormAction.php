@@ -42,21 +42,21 @@ if (!$result) {
 }
 if ($propagate && trim($orgplace)) {
   //people
-  $query = "UPDATE $people_table SET birthplace = '$place' WHERE birthplace = '$orgplace'";
+  $query = "UPDATE people SET birthplace = '$place' WHERE birthplace = '$orgplace'";
   $result = tng_query($query);
-  $query = "UPDATE $people_table SET altbirthplace = '$place' WHERE altbirthplace = '$orgplace'";
+  $query = "UPDATE people SET altbirthplace = '$place' WHERE altbirthplace = '$orgplace'";
   $result = tng_query($query);
-  $query = "UPDATE $people_table SET deathplace = '$place' WHERE deathplace = '$orgplace'";
+  $query = "UPDATE people SET deathplace = '$place' WHERE deathplace = '$orgplace'";
   $result = tng_query($query);
-  $query = "UPDATE $people_table SET burialplace = '$place' WHERE burialplace = '$orgplace'";
+  $query = "UPDATE people SET burialplace = '$place' WHERE burialplace = '$orgplace'";
   $result = tng_query($query);
-  $query = "UPDATE $people_table SET baptplace = '$place' WHERE baptplace = '$orgplace'";
+  $query = "UPDATE people SET baptplace = '$place' WHERE baptplace = '$orgplace'";
   $result = tng_query($query);
-  $query = "UPDATE $people_table SET confplace = '$place' WHERE confplace = '$orgplace'";
+  $query = "UPDATE people SET confplace = '$place' WHERE confplace = '$orgplace'";
   $result = tng_query($query);
-  $query = "UPDATE $people_table SET initplace = '$place' WHERE initplace = '$orgplace'";
+  $query = "UPDATE people SET initplace = '$place' WHERE initplace = '$orgplace'";
   $result = tng_query($query);
-  $query = "UPDATE $people_table SET endlplace = '$place' WHERE endlplace = '$orgplace'";
+  $query = "UPDATE people SET endlplace = '$place' WHERE endlplace = '$orgplace'";
   $result = tng_query($query);
 
   //families

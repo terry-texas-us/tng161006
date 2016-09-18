@@ -7,7 +7,6 @@ class Surname_cloud {
   }
 
   function display($top = '50', $surnameBranch = '') {
-    global $people_table;
     global $lnprefixes;
 
     $treeBranchUrlString = '';
@@ -15,7 +14,7 @@ class Surname_cloud {
     // If you have surnames you wish to exclude enter them here
     $wherestr = "WHERE lastname<>\"\" AND lastname<>\"Unknown\"AND lastname<>'[--?--]'";  // Ignore these last names
 
-    $more = getLivingPrivateRestrictions($people_table, false, false);
+    $more = getLivingPrivateRestrictions('people', false, false);
 
     if ($more) {
       $wherestr .= $wherestr ? ' AND ' . $more : "WHERE $more";
@@ -28,7 +27,7 @@ class Surname_cloud {
 
     // Get all unique surnames
     $surnamestr = $lnprefixes ? "TRIM(CONCAT_WS(' ',lnprefix,lastname) )" : 'lastname';
-    $query = "SELECT ucase( $binary $surnamestr ) AS surnameuc, $surnamestr AS surname, count( ucase($binary lastname ) ) AS count, lastname FROM $people_table $wherestr GROUP BY surname ORDER by lastname";
+    $query = "SELECT ucase( $binary $surnamestr ) AS surnameuc, $surnamestr AS surname, count( ucase($binary lastname ) ) AS count, lastname FROM people $wherestr GROUP BY surname ORDER by lastname";
     $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
 
     if (!$result) {

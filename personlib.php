@@ -361,16 +361,16 @@ function buildGenNotes($notearray, $entity, $eventlist) {
             $cite = " [$cite]";
           }
           if ($note['title'] != $lasttitle) {
-            $notes .= "<ul>\n";
+            $notes .= '<ul>';
             $lasttitle = $note['title'];
           }
-          $notes .= $note['text'] . "$cite</li>\n";
+          $notes .= $note['text'] . "$cite</li>";
         }
       }
       $eventctr++;
     }
     if ($notes) {
-      $notes .= "</ul>\n";
+      $notes .= '</ul>';
     }
   }
   return insertLinks($notes);
@@ -752,7 +752,6 @@ function getLinkTypeMisc($entity, $linktype) {
 }
 
 function getAlbums($entity, $linktype) {
-  global $people_table;
   global $livedefault;
 
   $albums = [];
@@ -769,7 +768,7 @@ function getAlbums($entity, $linktype) {
     $eventID = $albumlink['eventID'] && $entity['allow_living'] && $entity['allow_private'] ? $albumlink['eventID'] : '-x--general--x-';
 
     //check to see if we have rights to view this album
-    $query = "SELECT albumplinks.entityID AS personID, people.living AS living, people.private AS private, people.branch AS branch, families.branch AS fbranch, families.living AS fliving, families.private AS fprivate, familyID, people.personID AS personID2 FROM albumplinks LEFT JOIN $people_table AS people ON albumplinks.entityID = people.personID LEFT JOIN families AS families ON albumplinks.entityID = families.familyID WHERE albumID = '{$albumlink['albumID']}'";
+    $query = "SELECT albumplinks.entityID AS personID, people.living AS living, people.private AS private, people.branch AS branch, families.branch AS fbranch, families.living AS fliving, families.private AS fprivate, familyID, people.personID AS personID2 FROM albumplinks LEFT JOIN people AS people ON albumplinks.entityID = people.personID LEFT JOIN families AS families ON albumplinks.entityID = families.familyID WHERE albumID = '{$albumlink['albumID']}'";
     $presult = tng_query($query);
     $foundliving = 0;
     $foundprivate = 0;
@@ -1037,7 +1036,6 @@ function writeMedia($media_array, $mediatypeID, $prefix = '') {
 function getAlbumPhoto($albumID, $albumname) {
   global $livedefault;
   global $rootpath;
-  global $people_table;
   global $mediatypes_assoc;
   global $mediapath;
 
@@ -1055,7 +1053,7 @@ function getAlbumPhoto($albumID, $albumname) {
     $foundliving = 0;
     $foundprivate = 0;
     if (!$trow['alwayson'] && $livedefault != 2) {
-      $query = "SELECT people.living AS living, people.private AS private, people.branch AS branch, families.branch AS fbranch, families.living AS fliving, families.private AS fprivate, linktype FROM medialinks LEFT JOIN $people_table AS people ON medialinks.personID = people.personID LEFT JOIN families ON medialinks.personID = families.familyID WHERE mediaID = '$mediaID'";
+      $query = "SELECT people.living AS living, people.private AS private, people.branch AS branch, families.branch AS fbranch, families.living AS fliving, families.private AS fprivate, linktype FROM medialinks LEFT JOIN people AS people ON medialinks.personID = people.personID LEFT JOIN families ON medialinks.personID = families.familyID WHERE mediaID = '$mediaID'";
       $presult = tng_query($query);
       while ($prow = tng_fetch_assoc($presult)) {
         if ($prow['fbranch'] != null) {
@@ -1074,8 +1072,8 @@ function getAlbumPhoto($albumID, $albumname) {
 
         //if living still null, must be a source
         if ($prow['living'] == null && $prow['private'] == null && $prow['linktype'] == 'I') {
-          $query = "SELECT count(personID) AS ccount FROM citations, $people_table
-              WHERE citations.sourceID = '{$prow['personID']}' AND citations.persfamID = $people_table.personID AND living = '1'";
+          $query = "SELECT count(personID) AS ccount FROM citations, people
+              WHERE citations.sourceID = '{$prow['personID']}' AND citations.persfamID = people.personID AND living = '1'";
           $presult2 = tng_query($query);
           $prow2 = tng_fetch_assoc($presult2);
           if ($prow2['ccount']) {
@@ -1183,12 +1181,10 @@ function getStdExtras($persfamID) {
 }
 
 function formatAssoc($assoc) {
-  global $people_table;
-
   $assocstr = $namestr = '';
 
   if ($assoc['reltype'] == 'I' || $assoc['reltype'] == '') {
-    $query = "SELECT firstname, lastname, lnprefix, prefix, suffix, nameorder, living, private, branch FROM $people_table WHERE personID = '{$assoc['passocID']}'";
+    $query = "SELECT firstname, lastname, lnprefix, prefix, suffix, nameorder, living, private, branch FROM people WHERE personID = '{$assoc['passocID']}'";
     $result = tng_query($query);
 
     $row = tng_fetch_assoc($result);

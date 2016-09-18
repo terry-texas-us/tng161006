@@ -224,7 +224,7 @@ $earliest = date('Y');
 $latest = 0;
 foreach ($timeline as $timeentry) {
   parse_str($timeentry);
-  $query = "SELECT firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch, sex, IF(birthdatetr !='0000-00-00',YEAR(birthdatetr),YEAR(altbirthdatetr)) AS birth, IF(deathdatetr != '0000-00-00', YEAR(deathdatetr), YEAR(burialdatetr)) as death, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, deathdatetr, burialdate, burialdatetr FROM $people_table WHERE personID = '$timeperson'";
+  $query = "SELECT firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch, sex, IF(birthdatetr !='0000-00-00',YEAR(birthdatetr),YEAR(altbirthdatetr)) AS birth, IF(deathdatetr != '0000-00-00', YEAR(deathdatetr), YEAR(burialdatetr)) as death, birthdate, birthdatetr, altbirthdate, altbirthdatetr, deathdate, deathdatetr, burialdate, burialdatetr FROM people WHERE personID = '$timeperson'";
   $result2 = tng_query($query);
   if ($result2) {
     $row2 = tng_fetch_assoc($result2);

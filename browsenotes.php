@@ -101,14 +101,14 @@ $headSection->setTitle(uiTextSnippet('notes'));
             $nrow['private'] = 1;
           }
           if (!$notelinktext) {
-            $query = "SELECT * FROM $people_table WHERE personID = '{$nrow['personID']}'";
+            $query = "SELECT * FROM people WHERE personID = '{$nrow['personID']}'";
             $result2 = tng_query($query);
             if (tng_num_rows($result2) == 1) {
               $row2 = tng_fetch_assoc($result2);
 
               if (!$row2['living'] || !$row2['private']) {
-                $query = "SELECT count(personID) AS ccount FROM citations, $people_table
-                    WHERE citations.sourceID = '{$nrow['personID']}' AND citations.persfamID = $people_table.personID AND (living = '1' OR private = '1')";
+                $query = "SELECT count(personID) AS ccount FROM citations, people
+                    WHERE citations.sourceID = '{$nrow['personID']}' AND citations.persfamID = people.personID AND (living = '1' OR private = '1')";
                 $nresult2 = tng_query($query);
                 $nrow2 = tng_fetch_assoc($nresult2);
                 if ($nrow2['ccount']) {

@@ -25,7 +25,7 @@ $query2 = "SELECT albumlinkID, thumbpath, media.mediaID AS mediaID, usecollfolde
 $result2 = tng_query($query2) or die(uiTextSnippet('cannotexecutequery') . ": $query2");
 $numrows = tng_num_rows($result2);
 
-$query3 = "SELECT alinkID, entityID, eventID, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.suffix AS suffix, people.nameorder AS nameorder, familyID, people.personID AS personID, wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.prefix AS wprefix, wifepeople.suffix AS wsuffix, wifepeople.nameorder AS wnameorder, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.prefix AS hprefix, husbpeople.suffix AS hsuffix, husbpeople.nameorder AS hnameorder, sourceID, sources.title, repositories.repoID AS repoID, reponame, linktype FROM (albumplinks as ate) LEFT JOIN $people_table AS people ON ate.entityID = people.personID LEFT JOIN families ON ate.entityID = families.familyID LEFT JOIN sources AS sources ON ate.entityID = sources.sourceID LEFT JOIN repositories AS repositories ON ate.entityID = repositories.repoID LEFT JOIN $people_table AS husbpeople ON families.husband = husbpeople.personID LEFT JOIN $people_table AS wifepeople ON families.wife = wifepeople.personID WHERE albumID = '$albumID' ORDER BY alinkID DESC";
+$query3 = "SELECT alinkID, entityID, eventID, people.lastname AS lastname, people.lnprefix AS lnprefix, people.firstname AS firstname, people.suffix AS suffix, people.nameorder AS nameorder, familyID, people.personID AS personID, wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.prefix AS wprefix, wifepeople.suffix AS wsuffix, wifepeople.nameorder AS wnameorder, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.prefix AS hprefix, husbpeople.suffix AS hsuffix, husbpeople.nameorder AS hnameorder, sourceID, sources.title, repositories.repoID AS repoID, reponame, linktype FROM (albumplinks as ate) LEFT JOIN people AS people ON ate.entityID = people.personID LEFT JOIN families ON ate.entityID = families.familyID LEFT JOIN sources AS sources ON ate.entityID = sources.sourceID LEFT JOIN repositories AS repositories ON ate.entityID = repositories.repoID LEFT JOIN people AS husbpeople ON families.husband = husbpeople.personID LEFT JOIN people AS wifepeople ON families.wife = wifepeople.personID WHERE albumID = '$albumID' ORDER BY alinkID DESC";
 $result3 = tng_query($query3) or die(uiTextSnippet('cannotexecutequery') . ": $query3");
 $numlinks = tng_num_rows($result3);
 
@@ -185,7 +185,7 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
                   echo '<td style="width:' . ($thumbmaxw + 6) . 'px; text-align: center;">';
                   if ($lrow['thumbpath'] && file_exists("$rootpath$usefolder/" . $lrow['thumbpath'])) {
                     $size = getimagesize("$rootpath$usefolder/" . $lrow['thumbpath']);
-                    echo "<a href=\"admin_editmedia.php?mediaID={$lrow['mediaID']}\"><img src=\"$usefolder/" . str_replace('%2F', '/', rawurlencode($lrow['thumbpath'])) . "\" $size[3] alt=\"" . htmlentities($lrow['description'], ENT_QUOTES) . ' \"></a>';
+                    echo "<a href=\"mediaEdit.php?mediaID={$lrow['mediaID']}\"><img src=\"$usefolder/" . str_replace('%2F', '/', rawurlencode($lrow['thumbpath'])) . "\" $size[3] alt=\"" . htmlentities($lrow['description'], ENT_QUOTES) . ' \"></a>';
                     $foundthumb = true;
                   } else {
                     echo '&nbsp;';
@@ -193,7 +193,7 @@ $headSection->setTitle(uiTextSnippet('modifyalbum'));
                   }
                   echo "</td>\n";
                   $checked = $lrow['defphoto'] ? ' checked' : '';
-                  echo "<td><a href=\"admin_editmedia.php?mediaID={$lrow['mediaID']}\">{$lrow['description']}</a><br>" . strip_tags($truncated) . '<br>';
+                  echo "<td><a href=\"mediaEdit.php?mediaID={$lrow['mediaID']}\">{$lrow['description']}</a><br>" . strip_tags($truncated) . '<br>';
                   echo "<div id=\"del_{$lrow['albumlinkID']}\" class=\"small\" style=\"color: gray; visibility: hidden\">";
                   if ($foundthumb) {
                     echo "<input name='rthumbs' type='radio' value=\"r{$lrow['mediaID']}\"$checked onclick=\"makeDefault(this);\">" . uiTextSnippet('makedefault');

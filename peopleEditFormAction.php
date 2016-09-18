@@ -9,7 +9,7 @@ require 'datelib.php';
 
 require 'geocodelib.php';
 
-$query = "SELECT branch, edituser, edittime FROM $people_table WHERE personID = '$personID'";
+$query = "SELECT branch, edituser, edittime FROM people WHERE personID = '$personID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -19,7 +19,7 @@ if ((!$allowEdit && (!$allowAdd || !$added)) || !checkbranch($row['branch'])) {
   header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-$editconflict = determineConflict($row, $people_table);
+$editconflict = determineConflict($row, 'people');
 
 if (!$editconflict) {
   if ($newfamily == 'ajax' && $session_charset != 'UTF-8') {
@@ -156,7 +156,7 @@ if (!$editconflict) {
     $burialtype = 0;
   }
   $meta = metaphone($lnprefix . $lastname);
-  $query = "UPDATE $people_table SET firstname=\"$firstname\", lnprefix=\"$lnprefix\", lastname=\"$lastname\", nickname=\"$nickname\", prefix=\"$prefix\", suffix=\"$suffix\", title=\"$title\", nameorder=\"$pnameorder\", living=\"$living\", private=\"$private\",
+  $query = "UPDATE people SET firstname=\"$firstname\", lnprefix=\"$lnprefix\", lastname=\"$lastname\", nickname=\"$nickname\", prefix=\"$prefix\", suffix=\"$suffix\", title=\"$title\", nameorder=\"$pnameorder\", living=\"$living\", private=\"$private\",
     birthdate=\"$birthdate\", birthdatetr=\"$birthdatetr\", birthplace=\"$birthplace\", sex=\"$sex\", altbirthdate=\"$altbirthdate\", altbirthdatetr=\"$altbirthdatetr\", altbirthplace=\"$altbirthplace\",
     deathdate=\"$deathdate\", deathdatetr=\"$deathdatetr\", deathplace=\"$deathplace\", burialdate=\"$burialdate\", burialdatetr=\"$burialdatetr\", burialplace=\"$burialplace\", burialtype=\"$burialtype\",
     baptdate=\"$baptdate\", baptdatetr=\"$baptdatetr\", baptplace=\"$baptplace\", confdate=\"$confdate\", confdatetr=\"$confdatetr\", confplace=\"$confplace\", initdate=\"$initdate\", initdatetr=\"$initdatetr\", initplace=\"$initplace\", endldate=\"$endldate\", endldatetr=\"$endldatetr\", endlplace=\"$endlplace\", changedate=\"$newdate\",branch=\"$allbranches\",changedby=\"$currentuser\",edituser=\"\",edittime=\"0\",metaphone=\"$meta\" $famcstr WHERE personID = '$personID'";
@@ -184,10 +184,10 @@ if (!$editconflict) {
   if ($marriages && tng_num_rows($marriages)) {
     while ($marriagerow = tng_fetch_assoc($marriages)) {
       if ($personID == $marriagerow['husband']) {
-        $spquery = "SELECT living, private FROM $people_table WHERE personID = \"{$marriagerow['wife']}\"";
+        $spquery = "SELECT living, private FROM people WHERE personID = \"{$marriagerow['wife']}\"";
       } else {
         if ($personID == $marriagerow['wife']) {
-          $spquery = "SELECT living, private FROM $people_table WHERE personID = \"{$marriagerow['husband']}\"";
+          $spquery = "SELECT living, private FROM people WHERE personID = \"{$marriagerow['husband']}\"";
         } else {
           $spquery = '';
         }

@@ -164,7 +164,7 @@ echo " &nbsp; <span>$pagenav</span></p>";
       echo "<td style=\"text-align:center\" id=\"thumbcell_{$row['mediaID']}\">";
       if ($row['thumbpath'] && file_exists("$rootpath$usefolder/" . $row['thumbpath'])) {
         $size = getimagesize("$rootpath$usefolder/" . $row['thumbpath']);
-        echo "<a href=\"admin_editmedia.php?mediaID={$row['mediaID']}\" target='_blank'>\n";
+        echo "<a href=\"mediaEdit.php?mediaID={$row['mediaID']}\" target='_blank'>\n";
           echo "<img src=\"$usefolder/" . str_replace('%2F', '/', rawurlencode($row['thumbpath'])) . "\" $size[3]>\n";
         echo "</a>\n";
       } else {
@@ -173,7 +173,7 @@ echo " &nbsp; <span>$pagenav</span></p>";
       echo "</td>\n";
       $truncated = substr($row['notes'], 0, 90);
       $truncated = strlen($row['notes']) > 90 ? substr($truncated, 0, strrpos($truncated, ' ')) . '&hellip;' : $row['notes'];
-      echo "<td id=\"desc_{$row['mediaID']}\"><a href=\"admin_editmedia.php?mediaID={$row['mediaID']}\">{$row['description']}</a><br>$truncated &nbsp;</td>";
+      echo "<td id=\"desc_{$row['mediaID']}\"><a href=\"mediaEdit.php?mediaID={$row['mediaID']}\">{$row['description']}</a><br>$truncated &nbsp;</td>";
       echo "<td style=\"width:100px;\" id=\"date_{$row['mediaID']}\">{$row['datetaken']}&nbsp;</td>\n";
       echo "<td><span id=\"mtype_{$row['mediaID']}\">" . uiTextSnippet($mtypeID) . "&nbsp;</span></td>\n";
       echo "</tr>\n";

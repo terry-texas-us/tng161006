@@ -33,7 +33,7 @@ if ($xsrcaction) {
   $id = 'ID';
   $location = 'repositoriesBrowse.php';
 } elseif ($xperaction) {
-  $query = "DELETE FROM $people_table";
+  $query = 'DELETE FROM people';
   $modmsg = 'people';
   $id = 'ID';
   $location = 'peopleBrowse.php';
@@ -82,20 +82,20 @@ foreach (array_keys($_POST) as $key) {
     $whereClause .= "$id = '$thisid'";
 
     if ($xperaction) {
-      $row = getID('personID, branch, sex', $people_table, $thisid);
+      $row = getID('personID, branch, sex', 'people', $thisid);
       $personID = $row['personID'];
       $items[] = $row['personID'];
 
       deletePersonPlus($personID, $row['sex']);
     } elseif ($xfamaction) {
-      $row = getID('familyID, branch', families, $thisid);
+      $row = getID('familyID, branch', 'families', $thisid);
       $familyID = $row['familyID'];
       $items[] = $row['familyID'];
 
       $fquery = "DELETE FROM children WHERE familyID = '$familyID'";
       $result = tng_query($fquery);
 
-      $pquery = "UPDATE $people_table SET famc = '' WHERE famc = '$familyID'";
+      $pquery = "UPDATE people SET famc = '' WHERE famc = '$familyID'";
       $result = tng_query($pquery);
 
       updateHasKidsFamily($familyID);
@@ -167,12 +167,12 @@ foreach (array_keys($_POST) as $key) {
     }
   }
 }
-$query .= $whereClause;
-$result = tng_query($query);
+if ($count > 0) {
+  $query .= $whereClause;
+  $result = tng_query($query);
 
-adminwritelog(uiTextSnippet('deleted') . ': ' . $modifymsg . ' ' . implode(', ', $items));
+  adminwritelog(uiTextSnippet('deleted') . ': ' . $modifymsg . ' ' . implode(', ', $items));
 
-if ($count) {
   $message = uiTextSnippet('changestoallitems') . ' ' . uiTextSnippet('succsaved') . '.';
 } else {
   $message = uiTextSnippet('nochanges');

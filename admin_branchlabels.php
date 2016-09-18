@@ -28,12 +28,11 @@ $counter = $fcounter = 0;
 $done = $fdone = [];
 
 function getGender($personID) {
-  global $people_table;
   global $husbgender;
   global $wifegender;
 
   $info = [];
-  $query = "SELECT firstname, lastname, sex FROM $people_table WHERE personID = '$personID'";
+  $query = "SELECT firstname, lastname, sex FROM people WHERE personID = '$personID'";
   $result = tng_query($query);
   if ($result) {
     $row = tng_fetch_assoc($result);
@@ -82,10 +81,8 @@ function clearBranch($table, $branch) {
 }
 
 function deleteBranch($table, $branch) {
-  global $people_table;
-
   $counter = 0;
-  if ($table == $people_table) {
+  if ($table == 'people') {
     $query = "SELECT ID, personID, branch, sex FROM $table WHERE branch LIKE \"%$branch%\"";
     $result = tng_query($query);
     while ($row = tng_fetch_assoc($result)) {
@@ -108,7 +105,7 @@ function deleteBranch($table, $branch) {
         $query = "DELETE FROM children WHERE ID = '$familyID'";
         tng_query($query);
 
-        $query = "UPDATE $people_table SET famc=\"\" WHERE famc = '$familyID'";
+        $query = "UPDATE people SET famc=\"\" WHERE famc = '$familyID'";
         tng_query($query);
 
         deleteEvents($familyID);
@@ -131,7 +128,6 @@ function deleteBranch($table, $branch) {
 }
 
 function setPersonLabel($personID) {
-  global $people_table;
   global $branch;
   global $overwrite;
   global $branchaction;
@@ -139,12 +135,12 @@ function setPersonLabel($personID) {
 
   if ($personID) {
     if ($branchaction == 'delete') {
-      $query = "SELECT sex FROM $people_table WHERE personID='$personID'";
+      $query = "SELECT sex FROM people WHERE personID='$personID'";
       $result = tng_query($query);
       $row = tng_fetch_assoc($result);
       tng_free_result($result);
 
-      $query = "DELETE FROM $people_table WHERE personID = '$personID'";
+      $query = "DELETE FROM people WHERE personID = '$personID'";
       tng_query($query);
 
       //also delete children, events, medialinks, citations, notes, other family references
@@ -153,7 +149,7 @@ function setPersonLabel($personID) {
     } elseif (!in_array($personID, $done)) {
       if ($branch && ($overwrite != 1 || $branchaction == 'clear')) { //append or leave
         //appending, so get current value first
-        $query = "SELECT branch FROM $people_table WHERE personID = '$personID'";
+        $query = "SELECT branch FROM people WHERE personID = '$personID'";
         $result = tng_query($query);
         $row = tng_fetch_assoc($result);
         $oldbranch = trim($row['branch']);
@@ -181,7 +177,7 @@ function setPersonLabel($personID) {
         $oldbranch = '';
       }
       if ($overwrite || !$oldbranch) {
-        $query = "UPDATE $people_table SET branch = '$newbranch' WHERE personID = '$personID'";
+        $query = "UPDATE people SET branch = '$newbranch' WHERE personID = '$personID'";
         tng_query($query);
         doICounter();
       }
@@ -225,7 +221,6 @@ function setFamilyLabel($personID, $gender) {
   global $branch;
   global $overwrite;
   global $branchaction;
-  global $people_table;
   global $fdone;
 
   if ($gender['self']) {
@@ -237,7 +232,7 @@ function setFamilyLabel($personID, $gender) {
         $query = "DELETE FROM families WHERE familyID = \"{$row['familyID']}\"";
         tng_query($query);
 
-        $query = "UPDATE $people_table SET famc=\"\" WHERE famc = \"{$row['familyID']}\"";
+        $query = "UPDATE people SET famc=\"\" WHERE famc = \"{$row['familyID']}\"";
         tng_query($query);
 
         //also delete children, events, medialinks, citations, notes
@@ -415,11 +410,11 @@ $headSection->setTitle(uiTextSnippet('labelbranches'));
         if ($set == 'all') {
           //all only works for deleting
           if ($branchaction == 'clear') {
-            $counter = clearBranch($people_table, $branch);
-            $fcounter = clearBranch(families, $branch);
+            $counter = clearBranch('people', $branch);
+            $fcounter = clearBranch('families', $branch);
           } else { //deleting
-            $counter = deleteBranch($people_table, $branch);
-            $fcounter = deleteBranch(families, $branch);
+            $counter = deleteBranch('people', $branch);
+            $fcounter = deleteBranch('families', $branch);
           }
 
           $query = "DELETE FROM branchlinks WHERE branch = '$branch'";

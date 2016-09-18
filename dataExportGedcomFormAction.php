@@ -561,7 +561,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     }
 
     function writeIndividual($ind) {
-      global $people_table;
       global $lnprefixes;
       global $citations;
       global $templeready;
@@ -611,7 +610,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
             while (!$doit && $child = tng_fetch_assoc($children)) {
               if (!$child['sealdate'] && !$child['sealplace']) {
                 //make sure child is eligible
-                $query = "SELECT birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdatetr, burialdatetr FROM $people_table WHERE personID = \"{$child['personID']}\" $exlivingstr $exprivatestr";
+                $query = "SELECT birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdatetr, burialdatetr FROM people WHERE personID = \"{$child['personID']}\" $exlivingstr $exprivatestr";
                 $childresult = tng_query($query);
                 $childind = tng_fetch_assoc($childresult);
                 $doit = getEligibility($childind);
@@ -867,7 +866,6 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     function writeFamily($family) {
       global $citations;
       global $savestate;
-      global $people_table;
       global $templeready;
       global $fp;
       global $lineending;
@@ -917,12 +915,12 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         $family['allow_private'] = $frights['private'];
         if ($frights['both']) {
           //look up husband and wife
-          $query = "SELECT personID, living, private, branch FROM $people_table WHERE personID = '{$family['husband']}'";
+          $query = "SELECT personID, living, private, branch FROM people WHERE personID = '{$family['husband']}'";
           $result2 = tng_query($query);
           $hrow = tng_fetch_assoc($result2);
           $frights = determineLivingPrivateRights($hrow);
           if ($frights['both']) {
-            $query = "SELECT personID, living, private, branch FROM $people_table WHERE personID = '{$family['wife']}'";
+            $query = "SELECT personID, living, private, branch FROM people WHERE personID = '{$family['wife']}'";
             $result2 = tng_query($query);
             $wrow = tng_fetch_assoc($result2);
             $frights = determineLivingPrivateRights($wrow);
@@ -1464,11 +1462,8 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         } else {
           $numstr = "(0+SUBSTRING_INDEX(personID,'$personsuffix',1))";
         }
-        $query = "SELECT personID, $numstr AS num, lastname, lnprefix, firstname, sex, title, prefix, suffix, nickname, birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, baptdate, baptplace, endldate, endlplace, famc, living, private, branch, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate "
-          . "FROM $people_table "
-          . "WHERE 1 $branchstr $exlivingstr $exprivatestr {$savestate['wherestr']} "
-          . 'ORDER BY num '
-          . "LIMIT $nextone, $largechunk";
+        $query = "SELECT personID, $numstr AS num, lastname, lnprefix, firstname, sex, title, prefix, suffix, nickname, birthdate, birthdatetr, birthplace, altbirthdate, altbirthdatetr, altbirthplace, deathdate, deathdatetr, deathplace, burialdate, burialdatetr, burialplace, burialtype, baptdate, baptplace, endldate, endlplace, famc, living, private, branch, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate 
+          FROM people WHERE 1 $branchstr $exlivingstr $exprivatestr {$savestate['wherestr']} ORDER BY num LIMIT $nextone, $largechunk";
         $result = tng_query($query);
         if ($result) {
           $numrows = tng_num_rows($result);
@@ -1503,11 +1498,8 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
           $numstr = "(0+SUBSTRING_INDEX(familyID,'$familysuffix',1))";
         }
 
-        $query = "SELECT *, (0+SUBSTRING(familyID,$prefixlen)) AS num, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate "
-          . "FROM families "
-          . "WHERE 1 $branchstr {$savestate['wherestr']} $exlivingstr $exprivatestr "
-          . 'ORDER BY num '
-          . "LIMIT $nextone, $largechunk";
+        $query = "SELECT *, (0+SUBSTRING(familyID,$prefixlen)) AS num, DATE_FORMAT(changedate,\"%d %b %Y\") AS changedate FROM families 
+          WHERE 1 $branchstr {$savestate['wherestr']} $exlivingstr $exprivatestr ORDER BY num LIMIT $nextone, $largechunk";
         $result = tng_query($query);
         if ($result) {
           $numrows = tng_num_rows($result);

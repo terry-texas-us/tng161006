@@ -8,7 +8,6 @@ require 'version.php';
 
 function showDiv($type) {
   global $thumbmaxw;
-  global $people_table;
   global $mediatypes_assoc;
   global $mediapath;
   global $allowAdd;
@@ -33,7 +32,7 @@ function showDiv($type) {
   echo "</table>\n";
 
 
-  $query = "SELECT DISTINCT mostwanted.ID AS mwID, mwtype, thumbpath, usecollfolder, mediatypeID, media.description AS mtitle, mostwanted.description AS mwdesc, mostwanted.title AS title FROM mostwanted LEFT JOIN media ON mostwanted.mediaID = media.mediaID LEFT JOIN $people_table ON mostwanted.personID = $people_table.personID WHERE mwtype = '$type' ORDER BY ordernum";
+  $query = "SELECT DISTINCT mostwanted.ID AS mwID, mwtype, thumbpath, usecollfolder, mediatypeID, media.description AS mtitle, mostwanted.description AS mwdesc, mostwanted.title AS title FROM mostwanted LEFT JOIN media ON mostwanted.mediaID = media.mediaID LEFT JOIN people ON mostwanted.personID = people.personID WHERE mwtype = '$type' ORDER BY ordernum";
   $result = tng_query($query);
   //echo $query;
 

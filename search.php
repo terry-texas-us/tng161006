@@ -235,20 +235,20 @@ $limitClause .= $maxsearchresults;
 if (($mysplname && $mygender) || $spqualify == 'exists' || $spqualify == 'dnexist') {
   $spouseCondition = $mygender == 'F' ? 'p.personID = wife AND spouse.personID = husband' : 'p.personID = husband AND spouse.personID = wife';
   $query = 'SELECT p.ID, spouse.personID AS spersonID, p.personID, p.lastname, p.lnprefix, p.firstname, p.living, p.private, p.branch, p.nickname, p.suffix, p.prefix, p.nameorder, p.title, p.birthplace, p.birthdate, p.deathplace, p.deathdate, p.altbirthdate, p.altbirthplace, p.burialdate, p.burialplace '
-      . "FROM ($people_table AS p, families, $people_table AS spouse) $cejoin $allwhere AND $spouseCondition $orderbyClause $limitClause";
+      . "FROM (people AS p, families, people AS spouse) $cejoin $allwhere AND $spouseCondition $orderbyClause $limitClause";
   $showspouse = 'yess';
-  $query2 = "SELECT count(p.ID) AS pcount FROM ($people_table AS p, families, $people_table AS spouse) $cejoin $allwhere AND $spouseCondition";
+  $query2 = "SELECT count(p.ID) AS pcount FROM (people AS p, families, people AS spouse) $cejoin $allwhere AND $spouseCondition";
 } else {
   if ($showspouse == 'yes') {
-    $families_join = "LEFT JOIN families AS families1 ON (p.personID = families1.husband) LEFT JOIN families AS families2 ON (p.personID = families2.wife) ";
+    $families_join = 'LEFT JOIN families AS families1 ON (p.personID = families1.husband) LEFT JOIN families AS families2 ON (p.personID = families2.wife) ';
     $huswife = ', families1.wife as wife, families2.husband as husband';
   } else {
     $families_join = '';
     $huswife = '';
   }
 
-  $query = "SELECT p.ID, p.personID, lastname, lnprefix, firstname, p.living, p.private, p.branch, nickname, prefix, suffix, nameorder, title, birthplace, birthdate, deathplace, deathdate, altbirthdate, altbirthplace, burialdate, burialplace $huswife FROM $people_table AS p $families_join $cejoin $allwhere $orderbyClause $limitClause";
-  $query2 = "SELECT count(p.ID) AS pcount FROM $people_table AS p $families_join $cejoin $allwhere";
+  $query = "SELECT p.ID, p.personID, lastname, lnprefix, firstname, p.living, p.private, p.branch, nickname, prefix, suffix, nameorder, title, birthplace, birthdate, deathplace, deathdate, altbirthdate, altbirthplace, burialdate, burialplace $huswife FROM people AS p $families_join $cejoin $allwhere $orderbyClause $limitClause";
+  $query2 = "SELECT count(p.ID) AS pcount FROM people AS p $families_join $cejoin $allwhere";
 }
 $result = tng_query($query);
 $numrows = tng_num_rows($result);
@@ -372,7 +372,7 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
             $spouseID = $row['husband'] ? $row['husband'] : $row['wife'];
           }
           if ($spouseID) {
-            $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, living, private, branch FROM $people_table WHERE personID = '$spouseID'";
+            $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, living, private, branch FROM people WHERE personID = '$spouseID'";
             $spresult = tng_query($query);
             if ($spresult) {
               $sprow = tng_fetch_assoc($spresult);

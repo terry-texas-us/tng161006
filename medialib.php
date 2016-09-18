@@ -19,8 +19,6 @@ function reorderMedia($query, $plink, $mediatypeID) {
 }
 
 function resortMedia($mediaID) {
-  global $people_table;
-
   $query = "SELECT media.mediaID AS mediaID, personID, mediatypeID FROM medialinks, media WHERE medialinks.mediaID = '$mediaID' AND medialinks.mediaID = media.mediaID";
   $result2 = tng_query($query);
   if ($result2) {
@@ -28,7 +26,7 @@ function resortMedia($mediaID) {
       $query = "DELETE FROM medialinks WHERE mediaID = {$plink['mediaID']}";
       tng_query($query);
 
-      $query = "SELECT personID FROM $people_table WHERE personID = \"{$plink['personID']}\"";
+      $query = "SELECT personID FROM people WHERE personID = \"{$plink['personID']}\"";
       reorderMedia($query, $plink, $plink['mediatypeID']);
 
       $query = "SELECT familyID AS personID FROM families WHERE familyID = \"{$plink['personID']}\"";

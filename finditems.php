@@ -50,7 +50,7 @@ function showAction($entityID, $num = null) {
     if ($gotit) {
       $lines .= 'display: none';
     }
-    $lines .= "\"><a href='#' onclick=\"return addMedia2EntityLink(findform, '" . str_replace('&#39;', "\\'", $entityID) . "', '$num');\">" . uiTextSnippet('add') . "</a></div>";
+    $lines .= "\"><a href='#' onclick=\"return addMedia2EntityLink(findform, '" . str_replace('&#39;', "\\'", $entityID) . "', '$num');\">" . uiTextSnippet('add') . '</a></div>';
     $lines .= "<div id=\"linked_$id\" style=\"text-align: center; width:50px;";
     if (!$gotit) {
       $lines .= 'display: none';
@@ -104,7 +104,7 @@ switch ($type) {
       $allwhere .= $more;
     }
 
-    $query = "SELECT personID, lastname, firstname, lnprefix, birthdate, altbirthdate, deathdate, burialdate, prefix, suffix, nameorder, living, private, branch FROM $people_table WHERE $allwhere ORDER BY lastname, lnprefix, firstname LIMIT 250";
+    $query = "SELECT personID, lastname, firstname, lnprefix, birthdate, altbirthdate, deathdate, burialdate, prefix, suffix, nameorder, living, private, branch FROM people WHERE $allwhere ORDER BY lastname, lnprefix, firstname LIMIT 250";
     $result = tng_query($query);
 
     if (tng_num_rows($result)) {
@@ -202,8 +202,8 @@ switch ($type) {
       $allwhere2 = "AND $allwhere2";
     }
 
-    $joinonwife = "LEFT JOIN $people_table AS wifepeople ON families.wife = wifepeople.personID";
-    $joinonhusb = "LEFT JOIN $people_table AS husbpeople ON families.husband = husbpeople.personID";
+    $joinonwife = 'LEFT JOIN people AS wifepeople ON families.wife = wifepeople.personID';
+    $joinonhusb = 'LEFT JOIN people AS husbpeople ON families.husband = husbpeople.personID';
     $query = "SELECT familyID, wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.suffix AS wsuffix, wifepeople.nameorder AS wnameorder, wifepeople.living AS wliving, wifepeople.private AS wprivate, wifepeople.branch AS wbranch, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.suffix AS hsuffix, husbpeople.nameorder AS hnameorder, husbpeople.living AS hliving, husbpeople.private AS hprivate, husbpeople.branch AS hbranch FROM families $joinonwife $joinonhusb WHERE $allwhere $allwhere2 ORDER BY hlastname, hlnprefix, hfirstname LIMIT 250";
     $result = tng_query($query);
 

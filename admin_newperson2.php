@@ -11,7 +11,7 @@ if (!$allowAdd) {
   exit;
 }
 if ($father) {
-  $query = "SELECT lnprefix, lastname, branch FROM $people_table WHERE personID = '$father'";
+  $query = "SELECT lnprefix, lastname, branch FROM people WHERE personID = '$father'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   tng_free_result($result);

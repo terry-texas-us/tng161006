@@ -9,7 +9,7 @@ require 'checklogin.php';
 initMediaTypes();
 
 $personID = ucfirst($personID);
-$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $people_table WHERE personID = '$personID'";
+$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM people WHERE personID = '$personID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -30,7 +30,7 @@ if ((!$allowEdit && (!$allowAdd || !$added)) || !checkbranch($row['branch'])) {
   header('Location: ajx_login.php?message=' . urlencode($message));
   exit;
 }
-$editconflict = determineConflict($row, $people_table);
+$editconflict = determineConflict($row, 'people');
 
 if ($row['sex'] == 'M') {
   $spouse = 'wife';
@@ -383,7 +383,7 @@ require_once 'eventlib.php';
                               echo $familyId . "\n";
                               
                               if ($marriagerow[$spouse]) {
-                                  $query = "SELECT personID, lastname, lnprefix, firstname, prefix, suffix, nameorder, living, private, branch FROM $people_table WHERE personID = \"{$marriagerow[$spouse]}\"";
+                                  $query = "SELECT personID, lastname, lnprefix, firstname, prefix, suffix, nameorder, living, private, branch FROM people WHERE personID = \"{$marriagerow[$spouse]}\"";
                                   $spouseresult = tng_query($query);
                                   $spouserow = tng_fetch_assoc($spouseresult);
                                   
@@ -409,7 +409,7 @@ require_once 'eventlib.php';
                                 <span><?php echo $marriagerow['marrdate']; ?></span>
                               <?php } ?>
                               <?php
-                              $query = "SELECT $people_table.personID AS pID, firstname, lnprefix, lastname, haskids, living, private, branch, prefix, suffix, nameorder FROM ($people_table, children) WHERE $people_table.personID = children.personID AND children.familyID = \"{$familyId}\" ORDER BY ordernum";
+                              $query = "SELECT people.personID AS pID, firstname, lnprefix, lastname, haskids, living, private, branch, prefix, suffix, nameorder FROM (people, children) WHERE people.personID = children.personID AND children.familyID = \"{$familyId}\" ORDER BY ordernum";
                               $children = tng_query($query);
 
                               if ($children && tng_num_rows($children)) {

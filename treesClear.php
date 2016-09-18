@@ -13,8 +13,8 @@ if (!$allowDelete) {
 }
 require 'adminlog.php';
 
-tng_query("DELETE FROM $people_table");
-tng_query("ALTER TABLE $people_table AUTO_INCREMENT = 1");
+tng_query('DELETE FROM people');
+tng_query('ALTER TABLE people AUTO_INCREMENT = 1');
 
 tng_query('DELETE FROM extlinks');
 tng_query('ALTER TABLE extlinks AUTO_INCREMENT = 1');
@@ -52,7 +52,7 @@ tng_query('ALTER TABLE citations AUTO_INCREMENT = 1');
 tng_query('DELETE FROM places');
 tng_query('ALTER TABLE places AUTO_INCREMENT = 1');
 
-$query = "UPDATE $people_table SET branch = '' WHERE branch = '$branch'";
+$query = "UPDATE people SET branch = '' WHERE branch = '$branch'";
 $result = tng_query($query);
 
 $query = "UPDATE families SET branch = '' WHERE branch = '$branch'";

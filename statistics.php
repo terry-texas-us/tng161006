@@ -32,7 +32,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
       $treerow = tng_fetch_array($result, 'assoc');
       $lastimportdate = $treerow['lastimportdate'];
 
-      $query = "SELECT count(id) AS pcount FROM $people_table";
+      $query = 'SELECT count(id) AS pcount FROM people';
       $result = tng_query($query);
       $row = tng_fetch_assoc($result);
       $totalpeople = $row['pcount'];
@@ -44,7 +44,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
       $totalfamilies = $row['fcount'];
       tng_free_result($result);
 
-      $query = "SELECT count(DISTINCT ucase(lastname)) AS lncount FROM $people_table";
+      $query = 'SELECT count(DISTINCT ucase(lastname)) AS lncount FROM people';
       $result = tng_query($query);
       $row = tng_fetch_array($result);
       $uniquesurnames = number_format($row['lncount']);
@@ -66,13 +66,13 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
       $totalsources = number_format($row['scount']);
       tng_free_result($result);
 
-      $query = "SELECT count(id) AS pcount FROM $people_table WHERE sex = 'M'";
+      $query = "SELECT count(id) AS pcount FROM people WHERE sex = 'M'";
       $result = tng_query($query);
       $row = tng_fetch_assoc($result);
       $males = $row['pcount'];
       tng_free_result($result);
 
-      $query = "SELECT count(id) AS pcount FROM $people_table WHERE sex = 'F'";
+      $query = "SELECT count(id) AS pcount FROM people WHERE sex = 'F'";
       $result = tng_query($query);
       $row = tng_fetch_assoc($result);
       $females = $row['pcount'];
@@ -80,13 +80,13 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
 
       $unknownsex = $totalpeople - $males - $females;
 
-      $query = "SELECT count(id) AS pcount FROM $people_table WHERE living != 0";
+      $query = 'SELECT count(id) AS pcount FROM people WHERE living != 0';
       $result = tng_query($query);
       $row = tng_fetch_assoc($result);
       $numliving = number_format($row['pcount']);
       tng_free_result($result);
 
-      $query = "SELECT personID, firstname, lnprefix, lastname, birthdate, gedcom, living, private, branch FROM $people_table WHERE birthdatetr != '0000-00-00' ORDER BY birthdatetr LIMIT 1";
+      $query = "SELECT personID, firstname, lnprefix, lastname, birthdate, gedcom, living, private, branch FROM people WHERE birthdatetr != '0000-00-00' ORDER BY birthdatetr LIMIT 1";
       $result = tng_query($query);
       $firstbirth = tng_fetch_array($result);
       $firstbirthpersonid = $firstbirth['personID'];
@@ -101,7 +101,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
 
       tng_free_result($result);
 
-      $query = "SELECT YEAR( deathdatetr ) - YEAR( birthdatetr ) AS yearsold, DAYOFYEAR( deathdatetr ) - DAYOFYEAR( birthdatetr ) AS daysold, IF(DAYOFYEAR(deathdatetr) and DAYOFYEAR(birthdatetr), TO_DAYS(deathdatetr) - TO_DAYS(birthdatetr), (YEAR(deathdatetr) - YEAR(birthdatetr)) * 365) as totaldays FROM $people_table 
+      $query = "SELECT YEAR( deathdatetr ) - YEAR( birthdatetr ) AS yearsold, DAYOFYEAR( deathdatetr ) - DAYOFYEAR( birthdatetr ) AS daysold, IF(DAYOFYEAR(deathdatetr) and DAYOFYEAR(birthdatetr), TO_DAYS(deathdatetr) - TO_DAYS(birthdatetr), (YEAR(deathdatetr) - YEAR(birthdatetr)) * 365) as totaldays FROM people 
         WHERE birthdatetr != '0000-00-00' AND deathdatetr != '0000-00-00' AND birthdate not like 'AFT%' AND deathdate not like 'AFT%' AND birthdate not like 'BEF%' AND deathdate not like 'BEF%' AND birthdate not like 'ABT%' AND deathdate not like 'ABT%' AND birthdate not like 'BET%' AND deathdate not like 'BET%' AND birthdate not like 'CAL%' AND deathdate not like 'CAL%' ORDER BY totaldays DESC";
       $result = tng_query($query);
       $numpeople = tng_num_rows($result);
@@ -218,7 +218,7 @@ $headSection->setTitle(uiTextSnippet('databasestatistics'));
         </tr>
         </thead>
       <?php
-      $query = "SELECT personID, firstname, lnprefix, lastname, gedcom, living, private, branch, YEAR(deathdatetr) - YEAR(birthdatetr) AS yearsold, DAYOFYEAR(deathdatetr) - DAYOFYEAR(birthdatetr) AS daysold, IF(DAYOFYEAR(deathdatetr) and DAYOFYEAR(birthdatetr), TO_DAYS(deathdatetr) - TO_DAYS(birthdatetr), (YEAR(deathdatetr) - YEAR(birthdatetr)) * 365) as totaldays FROM $people_table WHERE birthdatetr != '0000-00-00' AND deathdatetr != '0000-00-00' AND birthdate not like 'AFT%' AND deathdate not like 'AFT%' AND birthdate not like 'BEF%' AND deathdate not like 'BEF%' AND birthdate not like 'ABT%' AND deathdate not like 'ABT%' AND birthdate not like 'BET%' AND deathdate not like 'BET%' AND birthdate not like 'CAL%' AND deathdate not like 'CAL%' ORDER BY totaldays DESC LIMIT 10";
+      $query = "SELECT personID, firstname, lnprefix, lastname, gedcom, living, private, branch, YEAR(deathdatetr) - YEAR(birthdatetr) AS yearsold, DAYOFYEAR(deathdatetr) - DAYOFYEAR(birthdatetr) AS daysold, IF(DAYOFYEAR(deathdatetr) and DAYOFYEAR(birthdatetr), TO_DAYS(deathdatetr) - TO_DAYS(birthdatetr), (YEAR(deathdatetr) - YEAR(birthdatetr)) * 365) as totaldays FROM people WHERE birthdatetr != '0000-00-00' AND deathdatetr != '0000-00-00' AND birthdate not like 'AFT%' AND deathdate not like 'AFT%' AND birthdate not like 'BEF%' AND deathdate not like 'BEF%' AND birthdate not like 'ABT%' AND deathdate not like 'ABT%' AND birthdate not like 'BET%' AND deathdate not like 'BET%' AND birthdate not like 'CAL%' AND deathdate not like 'CAL%' ORDER BY totaldays DESC LIMIT 10";
       $result = tng_query($query);
       $numpeople = tng_num_rows($result);
 

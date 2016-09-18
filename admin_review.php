@@ -19,7 +19,7 @@ if ($row['type'] == 'I' || $row['type'] == 'C') {
   $tng_search_preview = $_SESSION['tng_search_preview'];
   $reviewmsg = uiTextSnippet('reviewpeople');
 
-  $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch FROM $people_table WHERE personID = '$personID'";
+  $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch FROM people WHERE personID = '$personID'";
   $result = tng_query($query);
   $prow = tng_fetch_assoc($result);
   tng_free_result($result);
@@ -45,7 +45,7 @@ if ($row['type'] == 'I' || $row['type'] == 'C') {
   $frow = tng_fetch_assoc($result);
   $hname = $wname = '';
   if ($frow['husband']) {
-    $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch FROM $people_table WHERE personID = '{$frow['husband']}'";
+    $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch FROM people WHERE personID = '{$frow['husband']}'";
     $result = tng_query($query);
     $prow = tng_fetch_assoc($result);
     $rightbranch = checkbranch($prow['branch']);
@@ -56,7 +56,7 @@ if ($row['type'] == 'I' || $row['type'] == 'C') {
     $hname = getName($prow);
   }
   if ($frow['wife']) {
-    $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch FROM $people_table WHERE personID = '{$frow['wife']}'";
+    $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch FROM people WHERE personID = '{$frow['wife']}'";
     $result = tng_query($query);
     $prow = tng_fetch_assoc($result);
     $rightbranch = checkbranch($prow['branch']);
@@ -203,7 +203,7 @@ if (is_numeric($eventID)) {
   } elseif ($needchildren) {
     $query = "SELECT $fieldstr FROM children WHERE familyID = '$familyID' AND personID = '$personID'";
   } else {
-    $query = "SELECT $fieldstr FROM $people_table WHERE personID = '$personID'";
+    $query = "SELECT $fieldstr FROM people WHERE personID = '$personID'";
   }
   $result = tng_query($query);
   $evrow = tng_fetch_assoc($result);

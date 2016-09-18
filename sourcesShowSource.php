@@ -29,7 +29,7 @@ if (!tng_num_rows($result)) {
 }
 tng_free_result($result);
 
-$query = "SELECT count(personID) AS ccount FROM citations, $people_table WHERE citations.sourceID = '$sourceID' AND citations.persfamID = $people_table.personID AND (living = '1' OR private = '1')";
+$query = "SELECT count(personID) AS ccount FROM citations, people WHERE citations.sourceID = '$sourceID' AND citations.persfamID = people.personID AND (living = '1' OR private = '1')";
 $sresult = tng_query($query);
 $srow = tng_fetch_assoc($sresult);
 $srcrow['living'] = $srcrow['private'] = $srow['ccount'] ? 1 : 0;
@@ -123,7 +123,7 @@ $headSection->setTitle($headtext);
       $foffsetstr = '';
       $newfoffset = '';
     }
-    $query = "SELECT DISTINCT citations.persfamID, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch FROM citations, $people_table WHERE citations.persfamID = $people_table.personID AND citations.sourceID = '$sourceID' ORDER BY lastname, firstname LIMIT $ioffsetstr" . ($maxsearchresults + 1);
+    $query = "SELECT DISTINCT citations.persfamID, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch FROM citations, people WHERE citations.persfamID = people.personID AND citations.sourceID = '$sourceID' ORDER BY lastname, firstname LIMIT $ioffsetstr" . ($maxsearchresults + 1);
     $sresult = tng_query($query);
     $numrows = tng_num_rows($sresult);
     $sourcelinktext = '';

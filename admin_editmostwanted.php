@@ -7,7 +7,7 @@ require 'checklogin.php';
 require 'version.php';
 
 if ($ID) {
-  $query = "SELECT mostwanted.title AS title, mostwanted.personID AS personID, mostwanted.description AS description, mostwanted.mediaID AS mediaID, mwtype, thumbpath, usecollfolder, media.description AS mtitle, media.notes AS mdesc, mediatypeID FROM mostwanted LEFT JOIN media ON mostwanted.mediaID = media.mediaID LEFT JOIN $people_table ON mostwanted.personID = $people_table.personID WHERE mostwanted.ID = '$ID'";
+  $query = "SELECT mostwanted.title AS title, mostwanted.personID AS personID, mostwanted.description AS description, mostwanted.mediaID AS mediaID, mwtype, thumbpath, usecollfolder, media.description AS mtitle, media.notes AS mdesc, mediatypeID FROM mostwanted LEFT JOIN media ON mostwanted.mediaID = media.mediaID LEFT JOIN people ON mostwanted.personID = people.personID WHERE mostwanted.ID = '$ID'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   tng_free_result($result);

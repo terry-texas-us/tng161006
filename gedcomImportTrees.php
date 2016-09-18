@@ -1,8 +1,6 @@
 <?php
 
 function ClearData($tree) {
-  global $people_table;
-
   $clear_files = [
           'addresses',
           'associations',
@@ -11,7 +9,7 @@ function ClearData($tree) {
           // 'events',
           'families',
           'notelinks',
-          $people_table,
+          'people',
           'repositories',
           'sources',
           'xnotes'

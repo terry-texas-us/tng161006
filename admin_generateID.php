@@ -90,10 +90,10 @@ function getNewID($type, $table) {
 
 switch ($type) {
   case 'person':
-    $newID = getNewID('person', $people_table);
+    $newID = getNewID('person', 'people');
     break;
   case 'family':
-    $newID = getNewID('family', families);
+    $newID = getNewID('family', 'families');
     break;
   case 'source':
     $newID = getNewID('source', 'sources');

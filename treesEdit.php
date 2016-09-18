@@ -16,7 +16,7 @@ $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
 
-$query = "SELECT count(personID) AS pcount FROM $people_table";
+$query = 'SELECT count(personID) AS pcount FROM people';
 $result = tng_query($query);
 $prow = tng_fetch_assoc($result);
 $pcount = number_format($prow['pcount']);

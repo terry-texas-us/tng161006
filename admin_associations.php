@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-$query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch, living, private FROM $people_table WHERE personID = '$personID'";
+$query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, branch, living, private FROM people WHERE personID = '$personID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 
@@ -51,7 +51,7 @@ $assoccount = tng_num_rows($assocresult);
               //run query for name or family
               $assoc['allow_living'] = 1;
               if ($assoc['reltype'] == 'I') {
-                $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, living, private, branch FROM $people_table WHERE personID=\"{$assoc['passocID']}\"";
+                $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix, living, private, branch FROM people WHERE personID=\"{$assoc['passocID']}\"";
                 $nameresult = tng_query($query);
                 $row = tng_fetch_assoc($nameresult);
                 $rights = determineLivingPrivateRights($row);

@@ -15,7 +15,7 @@ switch ($entity) {
   case 'person':
     $url = "peopleEdit.php?personID=$newID";
 
-    $query = "UPDATE $people_table SET gedcom=\"$newtree\", personID=\"$newID\" WHERE gedcom=\"$oldtree\" AND personID=\"$entityID\"";
+    $query = "UPDATE people SET gedcom=\"$newtree\", personID=\"$newID\" WHERE gedcom=\"$oldtree\" AND personID=\"$entityID\"";
     $result = tng_query($query);
 
     $query = "UPDATE mostwanted SET gedcom=\"$newtree\", personID=\"$newID\" WHERE gedcom=\"$oldtree\" AND personID=\"$entityID\"";

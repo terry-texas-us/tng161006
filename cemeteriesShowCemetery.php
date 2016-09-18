@@ -227,7 +227,7 @@ $headSection->setTitle($location);
           $hs['status'] = uiTextSnippet($status);
         }
 
-        $query = "SELECT medialinkID, medialinks.personID AS personID, people.personID AS personID2, familyID, people.living AS living, people.private AS private, people.branch AS branch, families.branch as fbranch, families.living as fliving, families.private as fprivate, husband, wife, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.prefix as prefix, people.suffix as suffix, nameorder, sources.title, sources.sourceID, repositories.repoID,reponame, deathdate, burialdate, linktype FROM (medialinks) LEFT JOIN $people_table AS people ON (medialinks.personID = people.personID) LEFT JOIN families ON (medialinks.personID = families.familyID) LEFT JOIN sources ON (medialinks.personID = sources.sourceID) LEFT JOIN repositories ON (medialinks.personID = repositories.repoID) WHERE mediaID = \"{$hs['mediaID']}\" ORDER BY lastname, lnprefix, firstname, medialinks.personID";
+        $query = "SELECT medialinkID, medialinks.personID AS personID, people.personID AS personID2, familyID, people.living AS living, people.private AS private, people.branch AS branch, families.branch as fbranch, families.living as fliving, families.private as fprivate, husband, wife, people.lastname as lastname, people.lnprefix as lnprefix, people.firstname as firstname, people.prefix as prefix, people.suffix as suffix, nameorder, sources.title, sources.sourceID, repositories.repoID,reponame, deathdate, burialdate, linktype FROM (medialinks) LEFT JOIN people AS people ON (medialinks.personID = people.personID) LEFT JOIN families ON (medialinks.personID = families.familyID) LEFT JOIN sources ON (medialinks.personID = sources.sourceID) LEFT JOIN repositories ON (medialinks.personID = repositories.repoID) WHERE mediaID = \"{$hs['mediaID']}\" ORDER BY lastname, lnprefix, firstname, medialinks.personID";
         $presult = tng_query($query);
         $hslinktext = '';
         $noneliving = $noneprivate = 1;
@@ -326,7 +326,7 @@ $headSection->setTitle($location);
     tng_free_result($hsresult);
 
     if ($cemetery['place']) {
-      $query = "SELECT * FROM $people_table WHERE burialplace = \"" . addslashes($cemetery['place']) . '" ORDER BY lastname, firstname';
+      $query = 'SELECT * FROM people WHERE burialplace = "' . addslashes($cemetery['place']) . '" ORDER BY lastname, firstname';
       $result = tng_query($query);
       if (tng_num_rows($result)) {
         $body .= "<br><div>\n";

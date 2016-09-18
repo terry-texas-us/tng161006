@@ -21,7 +21,7 @@ $result = tng_query($query);
 $brow = tng_fetch_assoc($result);
 tng_free_result($result);
 
-$query = "SELECT personID, firstname, lastname, lnprefix, prefix, suffix, branch, nameorder, living, private FROM $people_table WHERE branch LIKE \"%$branch%\" ORDER BY lastname, firstname";
+$query = "SELECT personID, firstname, lastname, lnprefix, prefix, suffix, branch, nameorder, living, private FROM people WHERE branch LIKE \"%$branch%\" ORDER BY lastname, firstname";
 $brresult = tng_query($query);
 
 header('Content-type: text/html; charset=' . $session_charset);

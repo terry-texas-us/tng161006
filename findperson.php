@@ -35,7 +35,7 @@ if ($livedefault < 2 && (!$allow_living_db) && $nonames == 1) {
     $allwhere .= 'living != 1 AND private != 1';
   }
 }
-$query = "SELECT personID, lastname, firstname, lnprefix, birthdate, altbirthdate, deathdate, burialdate, prefix, suffix, nameorder, living, private, branch FROM $people_table WHERE $allwhere ORDER BY lastname, lnprefix, firstname LIMIT 250";
+$query = "SELECT personID, lastname, firstname, lnprefix, birthdate, altbirthdate, deathdate, burialdate, prefix, suffix, nameorder, living, private, branch FROM people WHERE $allwhere ORDER BY lastname, lnprefix, firstname LIMIT 250";
 $result = tng_query($query);
 
 header('Content-type:text/html; charset=' . $session_charset);

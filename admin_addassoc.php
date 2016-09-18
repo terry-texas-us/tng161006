@@ -28,7 +28,7 @@ adminwritelog(uiTextSnippet('addnewassoc') . ": $assocID/$personID::$passocID ($
 
 //get name
 if ($reltype == 'I') {
-  $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix FROM $people_table WHERE personID = '$passocID'";
+  $query = "SELECT firstname, lastname, lnprefix, nameorder, prefix, suffix FROM people WHERE personID = '$passocID'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
   $rightbranch = checkbranch($row['branch']);

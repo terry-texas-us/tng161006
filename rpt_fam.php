@@ -142,7 +142,7 @@ else {
     titleLine(uiTextSnippet('children'));
 
     // for each child
-    $query = "SELECT $people_table.personID AS personID, branch, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, famc, sex, birthdate, birthplace, altbirthdate, altbirthplace, haskids, deathdate, deathplace, burialdate, burialplace, burialtype, baptdate, baptplace, confdate, confplace, initdate, initplace, endldate, endlplace, sealdate, sealplace FROM $people_table, children WHERE $people_table.personID = children.personID AND children.familyID = \"$famrow[familyID]\" ORDER BY ordernum";
+    $query = "SELECT people.personID AS personID, branch, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, famc, sex, birthdate, birthplace, altbirthdate, altbirthplace, haskids, deathdate, deathplace, burialdate, burialplace, burialtype, baptdate, baptplace, confdate, confplace, initdate, initplace, endldate, endlplace, sealdate, sealplace FROM people, children WHERE people.personID = children.personID AND children.familyID = \"$famrow[familyID]\" ORDER BY ordernum";
     $children = tng_query($query);
     if ($children && tng_num_rows($children)) {
       $childcount = 0;
@@ -218,10 +218,9 @@ else {
 $pdf->Output();
 
 function displayChild($personID, $childcount) {
-  global $people_table;
   global $citesources;
 
-  $query = "SELECT * FROM $people_table WHERE personID = '$personID'";
+  $query = "SELECT * FROM people WHERE personID = '$personID'";
   $result = tng_query($query);
   $ind = tng_fetch_assoc($result);
   tng_free_result($result);
@@ -294,14 +293,14 @@ function displayChild($personID, $childcount) {
   }
 
   // show spouses
-  $query = "SELECT familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, families.living AS fliving, families.private AS fprivate, families.branch AS fbranch, $people_table.living AS living, $people_table.private AS private, $people_table.branch AS branch, marrdate, marrplace, sealdate, sealplace FROM families ";
+  $query = 'SELECT familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, families.living AS fliving, families.private AS fprivate, families.branch AS fbranch, people.living AS living, people.private AS private, people.branch AS branch, marrdate, marrplace, sealdate, sealplace FROM families ';
   if ($ind['sex'] == 'M') {
-    $query .= "LEFT JOIN $people_table ON families.wife = $people_table.personID WHERE husband = \"{$ind['personID']}\" $restriction ORDER BY husborder";
+    $query .= "LEFT JOIN people ON families.wife = people.personID WHERE husband = \"{$ind['personID']}\" $restriction ORDER BY husborder";
   } else {
     if ($ind['sex'] = 'F') {
-      $query .= "LEFT JOIN $people_table ON families.husband = $people_table.personID WHERE wife = \"{$ind['personID']}\" $restriction ORDER BY wifeorder";
+      $query .= "LEFT JOIN people ON families.husband = people.personID WHERE wife = \"{$ind['personID']}\" $restriction ORDER BY wifeorder";
     } else {
-      $query .= "LEFT JOIN $people_table ON (families.husband = $people_table.personID OR families.wife = $people_table.personID) WHERE (wife = \"{$ind['personID']}\" && husband = \"{$ind['personID']}\")";
+      $query .= "LEFT JOIN people ON (families.husband = people.personID OR families.wife = people.personID) WHERE (wife = \"{$ind['personID']}\" && husband = \"{$ind['personID']}\")";
     }
   }
 
@@ -349,10 +348,9 @@ function displayChild($personID, $childcount) {
 
 function displayIndividual($personID, $showparents, $showmarriage) {
   global $familyID;
-  global $people_table;
   global $citesources;
 
-  $query = "SELECT * FROM $people_table WHERE personID = '$personID'";
+  $query = "SELECT * FROM people WHERE personID = '$personID'";
   $result = tng_query($query);
   $ind = tng_fetch_assoc($result);
   tng_free_result($result);
@@ -418,7 +416,7 @@ function displayIndividual($personID, $showparents, $showmarriage) {
   if ($showparents) {
     //show parents (for hus&wif)
     $cite1 = $cite2 = '';
-    $query = "SELECT YEAR(birthdatetr) AS birthyear, YEAR(deathdatetr) AS deathyear, familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, $people_table.living, $people_table.private, $people_table.branch FROM (families, $people_table) WHERE families.familyID = \"{$ind['famc']}\" AND $people_table.personID = families.husband";
+    $query = "SELECT YEAR(birthdatetr) AS birthyear, YEAR(deathdatetr) AS deathyear, familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, people.living, people.private, people.branch FROM (families, people) WHERE families.familyID = \"{$ind['famc']}\" AND people.personID = families.husband";
     $presult = tng_query($query);
     $parent = tng_fetch_assoc($presult);
 
@@ -435,7 +433,7 @@ function displayIndividual($personID, $showparents, $showmarriage) {
       $cite1 = reorderCitation($fatherID . '_NAME', 0);
     }
 
-    $query = "SELECT YEAR(birthdatetr) AS birthyear, YEAR(deathdatetr) AS deathyear, familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, $people_table.living, $people_table.private, $people_table.branch FROM (families, $people_table) WHERE families.familyID = \"{$ind['famc']}\" AND $people_table.personID = families.wife";
+    $query = "SELECT YEAR(birthdatetr) AS birthyear, YEAR(deathdatetr) AS deathyear, familyID, personID, firstname, lnprefix, lastname, prefix, suffix, nameorder, people.living, people.private, people.branch FROM (families, people) WHERE families.familyID = \"{$ind['famc']}\" AND people.personID = families.wife";
     $presult = tng_query($query);
     $parent = tng_fetch_assoc($presult);
 

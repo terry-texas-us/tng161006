@@ -78,7 +78,7 @@ $gotmore = [];
 while ($more = tng_fetch_assoc($morelinks)) {
   $gotmore[$more['parenttag']] = '*';
 }
-$query = "SELECT $people_table.personID AS pID, firstname, lastname, lnprefix, prefix, suffix, nameorder, birthdate, altbirthdate, living, private, branch FROM $people_table, children WHERE $people_table.personID = children.personID AND children.familyID = '$familyID' ORDER BY ordernum";
+$query = "SELECT people.personID AS pID, firstname, lastname, lnprefix, prefix, suffix, nameorder, birthdate, altbirthdate, living, private, branch FROM people, children WHERE people.personID = children.personID AND children.familyID = '$familyID' ORDER BY ordernum";
 $children = tng_query($query);
 
 $kidcount = tng_num_rows($children);
@@ -160,7 +160,7 @@ $headSection->setTitle(uiTextSnippet('modifyfamily'));
                 <table class='table table-sm'>
                   <?php
                   if ($row['husband']) {
-                    $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, birthdate, altbirthdate FROM $people_table WHERE personID = \"{$row['husband']}\"";
+                    $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, birthdate, altbirthdate FROM people WHERE personID = \"{$row['husband']}\"";
                     $spouseresult = tng_query($query);
                     $spouserow = tng_fetch_assoc($spouseresult);
                     tng_free_result($spouseresult);
@@ -189,7 +189,7 @@ $headSection->setTitle(uiTextSnippet('modifyfamily'));
                   </tr>
                   <?php
                   if ($row['wife']) {
-                    $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, birthdate, altbirthdate FROM $people_table WHERE personID = \"{$row['wife']}\"";
+                    $query = "SELECT lastname, lnprefix, firstname, prefix, suffix, nameorder, birthdate, altbirthdate FROM people WHERE personID = \"{$row['wife']}\"";
                     $spouseresult = tng_query($query);
                     $spouserow = tng_fetch_assoc($spouseresult);
                     tng_free_result($spouseresult);

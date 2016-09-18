@@ -77,7 +77,7 @@ if ($xphaction == uiTextSnippet('convto')) {
           $result5 = tng_query($query5) or die(uiTextSnippet('cannotexecutequery') . ": $query5");
 
           //reorder old media type for everything linked to item
-          $query6 = "SELECT personID FROM $people_table WHERE personID = \"{$row3['personID']}\"";
+          $query6 = "SELECT personID FROM people WHERE personID = \"{$row3['personID']}\"";
           reorderMedia($query6, $row3, $row3['mediatypeID']);
 
           $query6 = "SELECT familyID AS personID FROM families WHERE familyID = \"{$row3['personID']}\"";

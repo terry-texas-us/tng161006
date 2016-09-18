@@ -172,7 +172,7 @@ if ($mediatypeID != $mediatypeID_org) {
   $result2 = tng_query($query);
   if ($result2) {
     while ($plink = tng_fetch_assoc($result2)) {
-      $query = "SELECT personID FROM $people_table WHERE personID = \"{$plink['personID']}\"";
+      $query = "SELECT personID FROM people WHERE personID = \"{$plink['personID']}\"";
       reorderMedia($query, $plink, $mediatypeID_org);
       reorderMedia($query, $plink, $mediatypeID);
 

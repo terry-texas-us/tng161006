@@ -81,9 +81,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
       $where[] = $key . "datetr LIKE '%-$thisMonth-%'";
     }
     if (! empty($where)) {
-      $sql = 'SELECT personID, gedcom, firstname, nickname, lnprefix, lastname, suffix, living, branch, private, ' . implode(', ', $select) . "
-        FROM $people_table
-        WHERE (" . implode(' OR ', $where) . ')';
+      $sql = 'SELECT personID, gedcom, firstname, nickname, lnprefix, lastname, suffix, living, branch, private, ' . implode(', ', $select) . ' FROM people WHERE (' . implode(' OR ', $where) . ')';
 
       if ($showLiving == '1') {
         $sql .= ' AND living = 1';
@@ -152,7 +150,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
     }
 
     if (! empty($where)) {
-      $sql = 'SELECT familyID, gedcom, husband, wife, living, private, ' . implode(', ', $select) . 'FROM families WHERE (' . implode(' OR ', $where) . ')';
+      $sql = 'SELECT familyID, gedcom, husband, wife, living, private, ' . implode(', ', $select) . ' FROM families WHERE (' . implode(' OR ', $where) . ')';
 
       if ($showLiving == '1') {
         $sql .= ' AND living = 1';
@@ -235,7 +233,7 @@ $headSection->setTitle(uiTextSnippet('calendar'));
           $isFam = 0;
 
           if ($row['persfamID']{0} == 'I') {
-            $sql = "SELECT * FROM $people_table WHERE personID = '" . $row['persfamID'] . "'";
+            $sql = "SELECT * FROM people WHERE personID = '" . $row['persfamID'] . "'";
             if ($showLiving == '1') {
               $sql .= ' AND living = 1';
             } elseif ($showLiving == '0') {

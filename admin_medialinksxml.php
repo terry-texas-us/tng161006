@@ -51,7 +51,6 @@ function doPeople($firstname, $lastname) {
   global $assignedbranch;
   global $lnprefixes;
   global $maxsearchresults;
-  global $people_table;
 
   $lines = "<tr>\n";
   $lines .= "<td width='50'>" . uiTextSnippet('select') . "</td>\n";
@@ -76,7 +75,7 @@ function doPeople($firstname, $lastname) {
     }
   }
 
-  $query = "SELECT personID, lastname, firstname, lnprefix, birthdate, altbirthdate, deathdate, burialdate, prefix, suffix, nameorder FROM $people_table WHERE $allwhere ORDER BY lastname, lnprefix, firstname LIMIT $maxsearchresults";
+  $query = "SELECT personID, lastname, firstname, lnprefix, birthdate, altbirthdate, deathdate, burialdate, prefix, suffix, nameorder FROM people WHERE $allwhere ORDER BY lastname, lnprefix, firstname LIMIT $maxsearchresults";
   $result = tng_query($query);
 
   while ($row = tng_fetch_assoc($result)) {
@@ -116,7 +115,6 @@ function doPeople($firstname, $lastname) {
 function doFamilies($husbname, $wifename) {
   global $assignedbranch;
   global $maxsearchresults;
-  global $people_table;
 
   $lines = "<tr>\n";
   $lines .= "<td width='50'>" . uiTextSnippet('select') . "</td>\n";
@@ -155,8 +153,8 @@ function doFamilies($husbname, $wifename) {
     $allwhere2 = "AND $allwhere2";
   }
 
-  $joinonwife = "LEFT JOIN $people_table AS wifepeople ON families.wife = wifepeople.personID";
-  $joinonhusb = "LEFT JOIN $people_table AS husbpeople ON families.husband = husbpeople.personID";
+  $joinonwife = 'LEFT JOIN people AS wifepeople ON families.wife = wifepeople.personID';
+  $joinonhusb = 'LEFT JOIN people AS husbpeople ON families.husband = husbpeople.personID';
   $query = "SELECT familyID, wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.prefix AS wprefix, wifepeople.suffix AS wsuffix, wifepeople.nameorder AS wnameorder, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.prefix AS hprefix, husbpeople.suffix AS hsuffix, husbpeople.nameorder AS hnameorder FROM families $joinonwife $joinonhusb WHERE $allwhere $allwhere2 ORDER BY hlastname, hlnprefix, hfirstname LIMIT $maxsearchresults";
   $result = tng_query($query);
 

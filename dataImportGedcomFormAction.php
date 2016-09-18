@@ -144,7 +144,7 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
       if ($del == 'append') {
         //calculate offsets
         if ($offsetchoice == 'auto') {
-          $savestate['ioffset'] = getNewNumericID('person', 'person', $people_table);
+          $savestate['ioffset'] = getNewNumericID('person', 'person', 'people');
           $savestate['foffset'] = getNewNumericID('family', 'family', 'families');
           $savestate['soffset'] = getNewNumericID('source', 'source', 'sources');
           $savestate['noffset'] = getNewNumericID('note', 'note', 'xnotes');

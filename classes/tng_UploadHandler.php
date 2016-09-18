@@ -1,7 +1,6 @@
 <?php
 
-class UploadHandler
-{
+class UploadHandler {
 
   protected $options;
 
@@ -210,6 +209,7 @@ class UploadHandler
 
   // Fix for overflowing signed 32 bit integers,
   // works for sizes up to 2^32-1 bytes (4 GiB - 1):
+
   protected function fixIntegerOverflow($size) {
     if ($size < 0) {
       $size += 2.0 * (PHP_INT_MAX + 1);
@@ -551,13 +551,13 @@ class UploadHandler
       } else {
         $filepath = $file->name;
       }
-      $query = "INSERT IGNORE INTO {$this->options['media_table']} (mediatypeID, mediakey, path, thumbpath, description, notes, width, height, datetaken, placetaken, owner, changedate, changedby, form, alwayson, map, abspath, status, cemeteryID, plot, showmap, linktocem, latitude, longitude, zoom, bodytext, usenl, newwindow, usecollfolder) "
-      . "VALUES ('{$this->options['mediatypeID']}', '$mediakey', '$filepath', '$thumbpath', '{$file->name}', '', '0', '0', '', '', '', '$newdate', '{$this->options['currentuser']}', '$form', '0', '', '0', '', '0', '', '0', '0', '', '', '0', '', '0', '0', '1')";
+      $query = "INSERT IGNORE INTO {$this->options['media_table']} (mediatypeID, mediakey, path, thumbpath, description, notes, width, height, datetaken, placetaken, owner, changedate, changedby, form, alwayson, map, abspath, status, cemeteryID, plot, showmap, linktocem, latitude, longitude, zoom, bodytext, usenl, newwindow, usecollfolder) 
+        VALUES ('{$this->options['mediatypeID']}', '$mediakey', '$filepath', '$thumbpath', '{$file->name}', '', '0', '0', '', '', '', '$newdate', '{$this->options['currentuser']}', '$form', '0', '', '0', '', '0', '', '0', '0', '', '', '0', '', '0', '0', '1')";
       $result = tng_query($query);
       $success = tng_affected_rows();
       if ($result && $success) {
         $file->mediaID = tng_insert_id();
-        adminwritelog("<a href=\"admin_editmedia.php?mediaID={$file->mediaID}\">{$this->options['added']}: {$file->mediaID}</a>");
+        adminwritelog("<a href=\"mediaEdit.php?mediaID={$file->mediaID}\">{$this->options['added']}: {$file->mediaID}</a>");
 
         $query = "UPDATE {$this->options['mediatypes_table']} SET disabled=\"0\" WHERE mediatypeID=\"{$this->options['mediatypeID']}\"";
         tng_query($query);

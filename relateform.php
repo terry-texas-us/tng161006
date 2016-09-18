@@ -88,7 +88,7 @@ echo "<body id='public'>\n";
                 <td>
                   <?php
                   if ($relatepersonID) {
-                    $query = "SELECT firstname, lastname, lnprefix, prefix, suffix, nameorder, living, private, branch, birthdate, altbirthdate FROM $people_table WHERE personID = '$relatepersonID'";
+                    $query = "SELECT firstname, lastname, lnprefix, prefix, suffix, nameorder, living, private, branch, birthdate, altbirthdate FROM people WHERE personID = '$relatepersonID'";
                     $result2 = tng_query($query);
                     if ($result2) {
                       $row2 = tng_fetch_assoc($result2);

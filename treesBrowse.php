@@ -123,7 +123,7 @@ $headSection->setTitle(uiTextSnippet('trees'));
           $editlink = "treesEdit.php?tree={$row['gedcom']}";
           $gedcom = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['gedcom'] . '</a>' : $row['gedcom'];
 
-          $query = "SELECT count(personID) AS pcount FROM $people_table";
+          $query = 'SELECT count(personID) AS pcount FROM people';
           $result2 = tng_query($query);
           $prow = tng_fetch_assoc($result2);
           $pcount = number_format($prow['pcount']);

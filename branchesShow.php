@@ -84,7 +84,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
         </thead>
         <?php
         $i = $offsetplus;
-        $peoplewhere = getLivingPrivateRestrictions($people_table, false, false);
+        $peoplewhere = getLivingPrivateRestrictions('people', false, false);
         if ($peoplewhere) {
           $peoplewhere = 'AND ' . $peoplewhere;
         }
@@ -99,7 +99,7 @@ $headSection->setTitle(uiTextSnippet('branches'));
           $famrow = tng_fetch_assoc($famresult);
           tng_free_result($famresult);
 
-          $query = "SELECT count(personID) AS pcount FROM $people_table WHERE branch LIKE \"%{$row['branch']}%\" $peoplewhere";
+          $query = "SELECT count(personID) AS pcount FROM people WHERE branch LIKE \"%{$row['branch']}%\" $peoplewhere";
           $indresult = tng_query($query);
           $indrow = tng_fetch_assoc($indresult);
           tng_free_result($indresult);

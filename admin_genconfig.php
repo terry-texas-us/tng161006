@@ -109,28 +109,6 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
           </tr>
         </table>
       </div>
-      <?php echo displayToggle('plus1', 0, 'tables', uiTextSnippet('tablesection'), ''); ?>
-
-      <div class='table table-sm' id='tables' style='display: none'>
-        <table>
-          <tr>
-            <td>
-              <table class='table table-sm'>
-                <tr>
-                  <td><?php echo uiTextSnippet('people'); ?>:</td>
-                  <td><input name='people_table' type='text' value="<?php echo $people_table; ?>"></td>
-                </tr>
-              </table>
-            </td>
-            <td>&nbsp;</td>
-            <td>
-            </td>
-            <td>&nbsp;</td>
-            <td>
-            </td>
-          </tr>
-        </table>
-      </div>
       <?php echo displayToggle('plus2', 0, 'folders', uiTextSnippet('foldersection'), ''); ?>
       <div id="folders" style="display:none">
         <table>

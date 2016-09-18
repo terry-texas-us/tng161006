@@ -126,17 +126,18 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
     <form action="eventtypesBrowseFormAction.php" method='post' name="form2">
       <p>
         <?php if ($allowDelete) { ?>
-          <input class='btn btn-outline-warning' name='cetaction' type='submit' value="<?php echo uiTextSnippet('deleteselected'); ?>" onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');">
+          <input class='btn btn-outline-warning' id='deleteselected-eventtypes' name='cetaction' type='submit' value="<?php echo uiTextSnippet('deleteselected'); ?>">
         <?php } ?>
         <?php if ($allowEdit) { ?>
           <input class='btn btn-outline-secondary' name='cetaction' type='submit' value="<?php echo uiTextSnippet('acceptselected'); ?>">
           <input class='btn btn-outline-secondary' name='cetaction' type='submit' value="<?php echo uiTextSnippet('ignoreselected'); ?>">
           <input class='btn btn-outline-secondary' name='cetaction' type='submit' value ="<?php echo uiTextSnippet('collapseselected'); ?>">
+          <input class='btn btn-outline-secondary' name='cetaction' type='submit' value ="<?php echo uiTextSnippet('expandselected'); ?>">
         <?php } ?>
       </p>
       <p>
-        <button class='btn btn-outline-secondary' name='selectall' type='button' onClick="toggleAll(1);"><?php echo uiTextSnippet('selectall'); ?></button>
-        <button class='btn btn-outline-secondary' name='clearall' type='button' onClick="toggleAll(0);"><?php echo uiTextSnippet('clearall'); ?></button>
+        <button class='btn btn-outline-secondary' id='selectall-eventtypes' name='selectall' type='button'><?php echo uiTextSnippet('selectall'); ?></button>
+        <button class='btn btn-outline-secondary' id='clearall-eventtypes' name='clearall' type='button'><?php echo uiTextSnippet('clearall'); ?></button>
       </p>
       <?php if ($numrows) { ?>
         <table class="table table-sm table-striped">
@@ -204,7 +205,7 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
             echo "<div class='action-btns2'>\n$newactionstr</div>\n";
             echo "</td>\n";
             if ($allowDelete || $allowEdit) {
-              echo "<td><input name=\"et{$row['eventtypeID']}\" type='checkbox' value='1'></td>\n";
+              echo "<td><input class='selected' name=\"et{$row['eventtypeID']}\" type='checkbox' value='1'></td>\n";
             }
             echo "<td>{$row['tag']}</td>\n";
             echo "<td>{$row['description']}</td><td>$displayval</td>";
@@ -225,6 +226,19 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
 <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
 <script src="js/admin.js"></script>
 <script>
+  
+  $('#selectall-eventtypes').on('click', function () {
+      $('.selected').prop('checked', true);
+  });
+
+  $('#clearall-eventtypes').on('click', function () {
+      $('.selected').prop('checked', false);
+  });
+
+  $('#deleteselected-eventtypes').on('click', function () {
+      return confirm(textSnippet('confdeleterecs'));
+  });
+  
   $('button[name="reset"]').on('click', function () {
       document.form1.searchstring.value = '';
       document.form1.etype.selectedIndex = 0;

@@ -14,29 +14,31 @@ require 'adminlog.php';
 
 $query = '';
 if ($cetaction == uiTextSnippet('ignoreselected')) {
-  $query = 'UPDATE eventtypes SET keep="0" WHERE 1=0';
-} else {
-  if ($cetaction == uiTextSnippet('acceptselected')) {
-    $query = 'UPDATE eventtypes SET keep="1" WHERE 1=0';
-  } else {
-    if ($cetaction == uiTextSnippet('collapseselected')) {
-      $query = 'UPDATE eventtypes SET collapse="1" WHERE 1=0';
-    } else {
-      if ($cetaction == uiTextSnippet('deleteselected')) {
-        $query = 'DELETE FROM eventtypes WHERE 1=0';
-      }
-    }
-  }
+  $query = 'UPDATE eventtypes SET keep="0"';
+} elseif ($cetaction == uiTextSnippet('acceptselected')) {
+  $query = 'UPDATE eventtypes SET keep="1"';
+} elseif ($cetaction == uiTextSnippet('collapseselected')) {
+  $query = 'UPDATE eventtypes SET collapse="1"';
+} elseif ($cetaction == uiTextSnippet('expandselected')) {
+  $query = 'UPDATE eventtypes SET collapse="0"';
+} elseif ($cetaction == uiTextSnippet('deleteselected')) {
+  $query = 'DELETE FROM eventtypes';
 }
-if ($query) {
-  foreach (array_keys($_POST) as $key) {
-    if (substr($key, 0, 2) == 'et') {
-      $query .= ' OR eventtypeID="' . substr($key, 2) . '"';
-    }
-  }
-  $result = tng_query($query);
-}
-adminwritelog(uiTextSnippet('modifyeventtype') . ': ' . uiTextSnippet('all'));
+$count = 0;
+$whereClause = '';
 
-$message = uiTextSnippet('changestoallevtypes') . ' ' . uiTextSnippet('succsaved') . '.';
+foreach (array_keys($_POST) as $key) {
+  if (substr($key, 0, 2) == 'et') {
+    $count += 1;
+    $whereClause .= $whereClause ? ' OR ' : ' WHERE ';
+    $whereClause .= 'eventtypeID="' . substr($key, 2) . '"';
+  }
+}
+if ($count > 0) {
+  tng_query($query . $whereClause);
+  adminwritelog(uiTextSnippet('modifyeventtype') . ': ' . uiTextSnippet('all'));
+  $message = uiTextSnippet('changestoallevtypes') . ' ' . uiTextSnippet('succsaved') . '.';
+} else {
+  $message = uiTextSnippet('nochanges');
+}
 header('Location: eventtypesBrowse.php?message=' . urlencode($message));

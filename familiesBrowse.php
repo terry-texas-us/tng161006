@@ -96,9 +96,9 @@ if ($searchstring) {
   $allwhere .= ')';
 }
 if ($spousename == 'husband') {
-  $allwhere2 .= "AND $people_table.personID = husband ";
+  $allwhere2 .= 'AND people.personID = husband ';
 } elseif ($spousename == 'wife') {
-  $allwhere2 .= "AND $people_table.personID = wife ";
+  $allwhere2 .= 'AND people.personID = wife ';
 }
 
 if ($allwhere2) {
@@ -109,7 +109,7 @@ if ($allwhere2) {
   if ($assignedbranch) {
     $allwhere .= " AND families.branch LIKE \"%$assignedbranch%\"";
   }
-  $people_join = ", $people_table";
+  $people_join = ', people';
   $otherfields = ', firstname, lnprefix, lastname, prefix, suffix, nameorder';
   $sortstr = 'lastname, lnprefix, firstname,';
 } else {
@@ -118,7 +118,7 @@ if ($allwhere2) {
   $sortstr = '';
 }
 if ($living == 'yes') {
-  $allwhere .= " AND families.living = \"1\"";
+  $allwhere .= ' AND families.living = "1"';
 }
 $query = "SELECT families.ID AS ID, familyID, husband, wife, marrdate $otherfields FROM (families $people_join) WHERE $allwhere ORDER BY $sortstr familyID LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
@@ -164,9 +164,9 @@ $headSection->setTitle(uiTextSnippet('families'));
       <form action="admin_deleteselected.php" method='post' name="form2">
         <?php if ($allowDelete) { ?>
           <p>
-            <button class='btn btn-secondary' name='selectall' type='button' onClick="toggleAll(1);"><?php echo uiTextSnippet('selectall'); ?></button>
-            <button class='btn btn-secondary' name='clearall' type='button' onClick="toggleAll(0);"><?php echo uiTextSnippet('clearall'); ?></button>
-            <button class='btn btn-outline-danger' name='xfamaction' type='submit' onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');"><?php echo uiTextSnippet('deleteselected'); ?></button>
+            <button class='btn btn-secondary' id='selectall-families' name='selectall' type='button'><?php echo uiTextSnippet('selectall'); ?></button>
+            <button class='btn btn-secondary' id='clearall-families' name='clearall' type='button'><?php echo uiTextSnippet('clearall'); ?></button>
+            <button class='btn btn-outline-danger' id='deleteselected-families' name='xfamaction' type='submit' value='true'><?php echo uiTextSnippet('deleteselected'); ?></button>
           </p>
         <?php }
         if ($numrows) {
@@ -220,7 +220,7 @@ $headSection->setTitle(uiTextSnippet('families'));
               echo    "<div class='action-btns'>\n$newactionstr</div>\n";
               echo "</td>\n";
               if ($allowDelete) {
-                echo "<td><input name=\"del{$row['ID']}\" type='checkbox' value='1'></td>\n";
+                echo "<td><input class='selected' name='del" . $row['ID'] . "' type='checkbox' value='1'></td>\n";
               }
               echo "<td>$id</td>\n";
               echo "<td>{$row['husband']}</td>\n";
@@ -251,6 +251,18 @@ $headSection->setTitle(uiTextSnippet('families'));
   <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
   <script src="js/admin.js"></script>
   <script>
+    $('#selectall-families').on('click', function () {
+        $('.selected').prop('checked', true);
+    });
+
+    $('#clearall-families').on('click', function () {
+        $('.selected').prop('checked', false);
+    });    
+    
+    $('#deleteselected-families').on('click', function () {
+        return confirm(textSnippet('confdeleterecs'));
+    });
+    
     function confirmDelete(ID) {
       if (confirm(textSnippet('confdeletefam'))) {
         deleteIt('family', ID);

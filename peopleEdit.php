@@ -8,7 +8,7 @@ require 'checklogin.php';
 initMediaTypes();
 
 $personID = ucfirst($personID);
-$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $people_table WHERE personID = '$personID'";
+$query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM people WHERE personID = '$personID'";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 tng_free_result($result);
@@ -31,7 +31,7 @@ if ((!$allowEdit && (!$allowAdd || !$added)) || !checkbranch($row['branch'])) {
   header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-$editconflict = determineConflict($row, $people_table);
+$editconflict = determineConflict($row, 'people');
 if ($tngconfig['edit_timeout'] === '') {
   $tngconfig['edit_timeout'] = 15;
 }
@@ -410,7 +410,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                               echo "<a href=\"familiesEdit.php?familyID={$familyId}&amp;cw=$cw\">{$familyId}</a>\n";
                               
                               if ($marriagerow[$spouse]) {
-                                $query = "SELECT personID, lastname, lnprefix, firstname, birthdate, birthplace, altbirthdate, altbirthplace, prefix, suffix, nameorder FROM $people_table WHERE personID = \"{$marriagerow[$spouse]}\"";
+                                $query = "SELECT personID, lastname, lnprefix, firstname, birthdate, birthplace, altbirthdate, altbirthplace, prefix, suffix, nameorder FROM people WHERE personID = \"{$marriagerow[$spouse]}\"";
                                 $spouseresult = tng_query($query);
                                 $spouserow = tng_fetch_assoc($spouseresult);
 
@@ -436,7 +436,7 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
                                 <span><?php echo displayDate($marriagerow['marrdate']); ?></span>
                               <?php } ?>
                               <?php
-                              $query = "SELECT $people_table.personID AS pID, firstname, lnprefix, lastname, birthdate, birthplace, altbirthdate, altbirthplace, haskids, living, private, branch, prefix, suffix, nameorder FROM ($people_table, children) WHERE $people_table.personID = children.personID AND children.familyID = \"{$familyId}\" ORDER BY ordernum";
+                              $query = "SELECT people.personID AS pID, firstname, lnprefix, lastname, birthdate, birthplace, altbirthdate, altbirthplace, haskids, living, private, branch, prefix, suffix, nameorder FROM (people, children) WHERE people.personID = children.personID AND children.familyID = \"{$familyId}\" ORDER BY ordernum";
                               $children = tng_query($query);
 
                               if ($children && tng_num_rows($children)) {

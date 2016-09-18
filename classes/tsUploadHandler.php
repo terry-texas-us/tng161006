@@ -91,13 +91,13 @@ class tsUploadHandler extends UploadHandler {
     } else {
       $filepath = $file->name;
     }
-    $query = "INSERT IGNORE INTO {$this->media_table} (mediatypeID, mediakey, path, thumbpath, description, notes, width, height, datetaken, placetaken, owner, changedate, changedby, form, alwayson, map, abspath, status, cemeteryID, plot, showmap, linktocem, latitude, longitude, zoom, bodytext, usenl, newwindow, usecollfolder) "
-    . "VALUES ('{$this->mediatypeID}', '$mediakey', '$filepath', '$thumbpath', '{$file->name}', '', '0', '0', '', '', '', '$newdate', '{$this->currentuser}', '$form', '0', '', '0', '', '0', '', '0', '0', '', '', '0', '', '0', '0', '1')";
+    $query = "INSERT IGNORE INTO {$this->media_table} (mediatypeID, mediakey, path, thumbpath, description, notes, width, height, datetaken, placetaken, owner, changedate, changedby, form, alwayson, map, abspath, status, cemeteryID, plot, showmap, linktocem, latitude, longitude, zoom, bodytext, usenl, newwindow, usecollfolder) 
+      VALUES ('{$this->mediatypeID}', '$mediakey', '$filepath', '$thumbpath', '{$file->name}', '', '0', '0', '', '', '', '$newdate', '{$this->currentuser}', '$form', '0', '', '0', '', '0', '', '0', '0', '', '', '0', '', '0', '0', '1')";
     $result = tng_query($query);
     $success = tng_affected_rows();
     if ($result && $success) {
       $file->mediaID = tng_insert_id();
-      adminwritelog("<a href=\"admin_editmedia.php?mediaID={$file->mediaID}\">{$this->options['added']}: {$file->mediaID}</a>");
+      adminwritelog("<a href=\"mediaEdit.php?mediaID={$file->mediaID}\">{$this->options['added']}: {$file->mediaID}</a>");
 
       $query = "UPDATE {$this->options['mediatypes_table']} SET disabled=\"0\" WHERE mediatypeID=\"{$this->mediatypeID}\"";
       tng_query($query);
@@ -107,6 +107,7 @@ class tsUploadHandler extends UploadHandler {
   }
  
   // [ts] function was renamed from set_delete_file_properties
+
   protected function setAdditionalFileProperties($file) {
     // [ts] parent::setAdditionalFileProperties($file);
 
@@ -172,4 +173,5 @@ class tsUploadHandler extends UploadHandler {
     }
     return $this->options['upload_url'] . $this->getUserPath() . $version_path . rawurlencode($file_name);
   }
+
 }

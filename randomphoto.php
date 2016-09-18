@@ -24,7 +24,7 @@ while ($imgrow = tng_fetch_assoc($result)) {
   } else {
 
     // this query will return rows of personIDs on the photo that are living
-    $query = "SELECT medialinks.personID FROM (medialinks, $people_table) WHERE medialinks.personID = $people_table.personID AND medialinks.mediaID = {$imgrow['mediaID']} AND ($people_table.living = '1' OR $people_table.private = '1')";
+    $query = "SELECT medialinks.personID FROM (medialinks, people) WHERE medialinks.personID = people.personID AND medialinks.mediaID = {$imgrow['mediaID']} AND (people.living = '1' OR people.private = '1')";
     $presult = tng_query($query);
     $rows = tng_num_rows($presult);
     tng_free_result($presult);

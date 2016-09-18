@@ -51,7 +51,7 @@ echo $navList->build('renumber');
 
     //choose to do people, families, sources or repos
     if ($type == 'person') {
-      $table = $people_table;
+      $table = 'people';
       $id = 'personID';
     } elseif ($type == 'family') {
       $table = 'families';
@@ -181,7 +181,7 @@ echo $navList->build('renumber');
             $query = "UPDATE children SET familyID = '$newID' WHERE familyID=\"{$row['familyID']}\"";
             $result2 = tng_query($query);
 
-            $query = "UPDATE $people_table SET famc = '$newID' WHERE famc=\"{$row['familyID']}\"";
+            $query = "UPDATE people SET famc = '$newID' WHERE famc=\"{$row['familyID']}\"";
             $result2 = tng_query($query);
 
             $query = "UPDATE temp_events SET familyID = '$newID' WHERE familyID=\"{$row['familyID']}\"";

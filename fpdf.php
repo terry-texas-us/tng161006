@@ -5,8 +5,7 @@ ob_clean();
 if (!class_exists('FPDF')) {
   define('FPDF_VERSION', '1.53');
 
-  class FPDF
-  {
+  class FPDF {
 
     //Private properties
     var $page;                             //current page number
@@ -407,7 +406,7 @@ if (!class_exists('FPDF')) {
 
     function GetStringWidth($s) {
       //Get width of a string in the current font
-      $s = (string)$s;
+      $s = (string) $s;
       $cw = &$this->CurrentFont['cw'];
       $w = 0;
       $l = strlen($s);

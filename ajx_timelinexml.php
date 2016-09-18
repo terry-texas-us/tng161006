@@ -69,7 +69,7 @@ tng_free_result($tlresult);
 
 foreach ($timeline as $timeentry) {
   parse_str($timeentry);
-  $query = "SELECT firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch, sex, IF(birthdatetr !='0000-00-00', birthdatetr, altbirthdatetr) as birth, IF(deathdatetr !='0000-00-00', deathdatetr, burialdatetr) as death FROM $people_table WHERE personID = '$timeperson'";
+  $query = "SELECT firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, branch, sex, IF(birthdatetr !='0000-00-00', birthdatetr, altbirthdatetr) as birth, IF(deathdatetr !='0000-00-00', deathdatetr, burialdatetr) as death FROM people WHERE personID = '$timeperson'";
   $result = tng_query($query);
   $row = tng_fetch_assoc($result);
 

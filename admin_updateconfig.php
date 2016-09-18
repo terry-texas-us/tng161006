@@ -56,7 +56,6 @@ fwrite($fp, "\$database_username = \"$new_database_username\";\n");
 fwrite($fp, "\$database_password = '$new_database_password';\n");
 fwrite($fp, "\$tngconfig['maint'] = \"$maint\";\n");
 fwrite($fp, "\n");
-fwrite($fp, "\$people_table = \"$people_table\";\n");
 
 fwrite($fp, "\n");
 if ($rootpath != $newrootpath) {

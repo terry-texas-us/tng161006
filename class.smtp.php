@@ -46,7 +46,6 @@ class SMTP {
   
   protected $last_reply = '';
 
-  
   protected function edebug($str, $level = 0) {
     if ($level > $this->do_debug) {
       return;
@@ -72,7 +71,6 @@ class SMTP {
         echo gmdate('Y-m-d H:i:s') . "\t" . str_replace("\n", "\n                   \t                  ", trim($str)) . "\n";
     }
   }
-
   
   public function connect($host, $port = null, $timeout = 30, $options = []) {
     static $streamok;
@@ -127,7 +125,6 @@ class SMTP {
     $this->edebug('SERVER -> CLIENT: ' . $announce, self::DEBUG_SERVER);
     return true;
   }
-
   
   public function startTLS() {
     if (!$this->sendCommand('STARTTLS', 'STARTTLS', 220)) {
@@ -139,7 +136,6 @@ class SMTP {
     }
     return true;
   }
-
   
   public function authenticate($username, $password, $authtype = null, $realm = '', $workstation = '') {
     if (!$this->server_caps) {
@@ -240,7 +236,6 @@ class SMTP {
     }
     return true;
   }
-
   
   protected function hmac($data, $key) {
     if (function_exists('hash_hmac')) {
@@ -263,7 +258,6 @@ class SMTP {
     $k_opad = $key ^ $opad;
     return md5($k_opad . pack('H*', md5($k_ipad . $data)));
   }
-
   
   public function connected() {
     if (is_resource($this->smtp_conn)) {
@@ -278,7 +272,6 @@ class SMTP {
     }
     return false;
   }
-
   
   public function close() {
     $this->setError('');
@@ -291,7 +284,6 @@ class SMTP {
       $this->edebug('Connection: closed', self::DEBUG_CONNECTION);
     }
   }
-
   
   public function data($msg_data) {
     //This will use the standard timelimit
@@ -363,13 +355,11 @@ class SMTP {
     $this->Timelimit = $savetimelimit;
     return $result;
   }
-
   
   public function hello($host = '') {
     //Try extended hello first (RFC 2821)
     return (boolean)($this->sendHello('EHLO', $host) or $this->sendHello('HELO', $host));
   }
-
   
   protected function sendHello($hello, $host) {
     $noerror = $this->sendCommand($hello, $hello . ' ' . $host, 250);
@@ -381,7 +371,6 @@ class SMTP {
     }
     return $noerror;
   }
-
   
   protected function parseHelloFields($type) {
     $this->server_caps = [];
@@ -406,13 +395,11 @@ class SMTP {
       }
     }
   }
-
   
   public function mail($from) {
     $useVerp = ($this->do_verp ? ' XVERP' : '');
     return $this->sendCommand('MAIL FROM', 'MAIL FROM:<' . $from . '>' . $useVerp, 250);
   }
-
   
   public function quit($close_on_error = true) {
     $noerror = $this->sendCommand('QUIT', 'QUIT', 221);
@@ -423,17 +410,14 @@ class SMTP {
     }
     return $noerror;
   }
-
   
   public function recipient($toaddr) {
     return $this->sendCommand('RCPT TO', 'RCPT TO:<' . $toaddr . '>', [250, 251]);
   }
-
   
   public function reset() {
     return $this->sendCommand('RSET', 'RSET', 250);
   }
-
   
   protected function sendCommand($command, $commandstring, $expect) {
     if (!$this->connected()) {
@@ -464,45 +448,37 @@ class SMTP {
     $this->setError('');
     return true;
   }
-
   
   public function sendAndMail($from) {
     return $this->sendCommand('SAML', "SAML FROM:$from", 250);
   }
-
   
   public function verify($name) {
     return $this->sendCommand('VRFY', "VRFY $name", [250, 251]);
   }
-
   
   public function noop() {
     return $this->sendCommand('NOOP', 'NOOP', 250);
   }
-
   
   public function turn() {
     $this->setError('The SMTP TURN command is not implemented');
     $this->edebug('SMTP NOTICE: ' . $this->error['error'], self::DEBUG_CLIENT);
     return false;
   }
-
   
   public function clientSend($data) {
     $this->edebug("CLIENT -> SERVER: $data", self::DEBUG_CLIENT);
     return fwrite($this->smtp_conn, $data);
   }
-
   
   public function getError() {
     return $this->error;
   }
-
   
   public function getServerExtList() {
     return $this->server_caps;
   }
-
   
   public function getServerExt($name) {
     if (!$this->server_caps) {
@@ -522,12 +498,10 @@ class SMTP {
     }
     return $this->server_caps[$name];
   }
-
   
   public function getLastReply() {
     return $this->last_reply;
   }
-
   
   protected function getLines() {
     // If the connection is bad, give up straight away
@@ -564,49 +538,41 @@ class SMTP {
     }
     return $data;
   }
-
   
   public function setVerp($enabled = false) {
     $this->do_verp = $enabled;
   }
-
   
   public function getVerp() {
     return $this->do_verp;
   }
-
   
   protected function setError($message, $detail = '', $smtp_code = '', $smtp_code_ex = '') {
     $this->error = ['error' => $message, 'detail' => $detail, 'smtp_code' => $smtp_code, 'smtp_code_ex' => $smtp_code_ex];
   }
-
   
   public function setDebugOutput($method = 'echo') {
     $this->Debugoutput = $method;
   }
-
   
   public function getDebugOutput() {
     return $this->Debugoutput;
   }
-
   
   public function setDebugLevel($level = 0) {
     $this->do_debug = $level;
   }
-
   
   public function getDebugLevel() {
     return $this->do_debug;
   }
-
   
   public function setTimeout($timeout = 0) {
     $this->Timeout = $timeout;
   }
-
   
   public function getTimeout() {
     return $this->Timeout;
   }
+
 }

@@ -8,7 +8,7 @@ require 'checklogin.php';
 require 'prefixes.php';
 
 if ($type == 'person') {
-  $query = "SELECT personID FROM $people_table WHERE personID = '$checkID'";
+  $query = "SELECT personID FROM people WHERE personID = '$checkID'";
   $prefix = $personprefix;
   $suffix = $personsuffix;
 } else {

@@ -79,7 +79,7 @@ function addCriteria($field, $value, $operator) {
 $allwhere = '1=1 ';
 
 if ($assignedbranch) {
-  $allwhere .= " AND $people_table.branch LIKE \"%$assignedbranch%\"";
+  $allwhere .= " AND people.branch LIKE \"%$assignedbranch%\"";
 }
 if ($searchstring) {
   $allwhere .= ' AND (1=0';
@@ -88,48 +88,48 @@ if ($searchstring) {
   } else {
     $frontmod = 'LIKE';
   }
-  $allwhere .= addCriteria("$people_table.personID", $searchstring, $frontmod);
+  $allwhere .= addCriteria('people.personID', $searchstring, $frontmod);
   $allwhere .= addCriteria("CONCAT_WS(' ', TRIM(firstname)" . ($lnprefixes ? ', IF(TRIM(lnprefix),TRIM(lnprefix),NULL)' : '') . ', TRIM(lastname))', $searchstring, $frontmod);
   $allwhere .= ')';
 }
 if ($living == 'yes') {
-  $allwhere .= " AND $people_table.living = \"1\"";
+  $allwhere .= ' AND people.living = "1"';
 }
 if ($noparents) {
-  $noparentjoin = "LEFT JOIN children as noparents ON $people_table.personID = noparents.personID";
+  $noparentjoin = 'LEFT JOIN children as noparents ON people.personID = noparents.personID';
   $allwhere .= ' AND noparents.familyID is NULL';
 } else {
   $noparentjoin = '';
 }
 if ($nospouse) {
-  $nospousejoin = "LEFT JOIN families as nospousef ON $people_table.personID = nospousef.husband LEFT JOIN families as nospousem ON $people_table.personID = nospousem.wife";
+  $nospousejoin = 'LEFT JOIN families as nospousef ON people.personID = nospousef.husband LEFT JOIN families as nospousem ON people.personID = nospousem.wife';
   $allwhere .= ' AND nospousef.familyID is NULL AND nospousem.familyID is NULL';
 } else {
   $nospousejoin = '';
 }
 if ($nokids) {
-  $nokidjoin = "LEFT OUTER JOIN families AS familiesH ON $people_table.personID=familiesH.husband LEFT OUTER JOIN families AS familiesW ON $people_table.personID=familiesW.wife LEFT OUTER JOIN children AS childrenH ON familiesH.familyID=childrenH.familyID LEFT OUTER JOIN children AS childrenW ON familiesW.familyID=childrenW.familyID ";
+  $nokidjoin = 'LEFT OUTER JOIN families AS familiesH ON people.personID=familiesH.husband LEFT OUTER JOIN families AS familiesW ON people.personID=familiesW.wife LEFT OUTER JOIN children AS childrenH ON familiesH.familyID=childrenH.familyID LEFT OUTER JOIN children AS childrenW ON familiesW.familyID=childrenW.familyID ';
   $nokidhaving = 'HAVING ChildrenCount = 0 ';
-  $nokidgroup = "GROUP BY $people_table.personID, $people_table.lastname, $people_table.firstname, $people_table.firstname, $people_table.lnprefix, $people_table.prefix, $people_table.suffix, $people_table.nameorder, $people_table.birthdate, birthyear, $people_table.birthplace, $people_table.altbirthdate, altbirthyear, $people_table.altbirthplace ";
+  $nokidgroup = 'GROUP BY people.personID, people.lastname, people.firstname, people.firstname, people.lnprefix, people.prefix, people.suffix, people.nameorder, people.birthdate, birthyear, people.birthplace, people.altbirthdate, altbirthyear, people.altbirthplace ';
   $nokidselect = ', SUM((childrenH.familyID is not NULL) + (childrenW.familyID is not NULL)) AS ChildrenCount ';
-  $nokidgroup2 = "GROUP BY $people_table.personID, $people_table.lastname, $people_table.firstname, $people_table.firstname, $people_table.lnprefix ";
+  $nokidgroup2 = 'GROUP BY people.personID, people.lastname, people.firstname, people.firstname, people.lnprefix ';
 } else {
   $nokidjoin = '';
   $nokidhaving = '';
   $nokidgroup = '';
   $nokidselect = '';
 }
-$query = "SELECT $people_table.ID, $people_table.personID, lastname, firstname, lnprefix, prefix, suffix, nameorder, birthdate, LPAD(SUBSTRING_INDEX(birthdate, ' ', -1), 4, '0') AS birthyear, birthplace, altbirthdate, LPAD(SUBSTRING_INDEX(altbirthdate, ' ', -1), 4, '0') AS altbirthyear, altbirthplace, deathdate, LPAD(SUBSTRING_INDEX(deathdate, ' ', -1), 4, '0') AS deathyear, deathplace $nokidselect FROM ($people_table) $nokidjoin $noparentjoin $nospousejoin WHERE $allwhere $nokidgroup $nokidhaving ORDER BY lastname, lnprefix, firstname, birthyear, altbirthyear LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT people.ID, people.personID, lastname, firstname, lnprefix, prefix, suffix, nameorder, birthdate, LPAD(SUBSTRING_INDEX(birthdate, ' ', -1), 4, '0') AS birthyear, birthplace, altbirthdate, LPAD(SUBSTRING_INDEX(altbirthdate, ' ', -1), 4, '0') AS altbirthyear, altbirthplace, deathdate, LPAD(SUBSTRING_INDEX(deathdate, ' ', -1), 4, '0') AS deathyear, deathplace $nokidselect FROM (people) $nokidjoin $noparentjoin $nospousejoin WHERE $allwhere $nokidgroup $nokidhaving ORDER BY lastname, lnprefix, firstname, birthyear, altbirthyear LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
   if ($nokids) {
-    $query = "SELECT $people_table.ID, $people_table.personID, lastname, firstname, lnprefix $nokidselect FROM ($people_table) $nokidjoin $noparentjoin $nospousejoin WHERE $allwhere $nokidgroup2 $nokidhaving";
+    $query = "SELECT people.ID, people.personID, lastname, firstname, lnprefix $nokidselect FROM (people) $nokidjoin $noparentjoin $nospousejoin WHERE $allwhere $nokidgroup2 $nokidhaving";
     $result2 = tng_query($query);
     $totrows = tng_num_rows($result2);
   } else {
-    $query = "SELECT count($people_table.personID) AS pcount FROM ($people_table) $noparentjoin $nospousejoin WHERE $allwhere";
+    $query = "SELECT count(people.personID) AS pcount FROM (people) $noparentjoin $nospousejoin WHERE $allwhere";
     $result2 = tng_query($query);
     $row = tng_fetch_assoc($result2);
     $totrows = $row['pcount'];
@@ -225,10 +225,10 @@ $headSection->setTitle(uiTextSnippet('people'));
               $newactionstr = preg_replace('/zzz/', $row['ID'], $newactionstr);
 
               echo "<tr id=\"row_{$row['ID']}\">\n";
-              echo "<td><div class=\"action-btns\">$newactionstr</div></td>\n";
+              echo "<td><div class='action-btns'>$newactionstr</div></td>\n";
 
               if ($allowDelete) {
-                echo "<td><input name=\"del{$row['ID']}\" type='checkbox' value='1'></td>";
+                echo "<td><input class='selected' name='del" . $row['ID'] . "' type='checkbox' value='1'></td>";
               }
               echo "<td>\n";
                 $editlink = "peopleEdit.php?personID={$row['personID']}";
@@ -256,11 +256,11 @@ $headSection->setTitle(uiTextSnippet('people'));
   <script src="js/admin.js"></script>
   <script>
     $('#selectall-people').on('click', function () {
-        toggleAll(1);
+        $('.selected').prop('checked', true);
     });
 
     $('#clearall-people').on('click', function () {
-        toggleAll(0);
+        $('.selected').prop('checked', false);
     });
     
     $('#deleteselected-people').on('click', function () {

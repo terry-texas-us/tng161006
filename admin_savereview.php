@@ -39,7 +39,7 @@ if ($choice == uiTextSnippet('savedel')) {
     if ($row['type'] == 'F') {
       $query = "UPDATE families SET changedate = \"$changedate\", changedby = \"{$row['user']}\" WHERE familyID = '$familyID'";
     } else {
-      $query = "UPDATE $people_table SET changedate = \"$changedate\", changedby = \"{$row['user']}\" WHERE personID = '$personID'";
+      $query = "UPDATE people SET changedate = \"$changedate\", changedby = \"{$row['user']}\" WHERE personID = '$personID'";
     }
     $result = tng_query($query);
   } else {
@@ -125,11 +125,11 @@ if ($choice == uiTextSnippet('savedel')) {
     if ($needfamilies) {
       $query = "UPDATE families SET $fieldstr WHERE familyID = '$familyID'";
     } elseif ($needchildren) {
-      $query = "UPDATE $people_table SET changedate = \"$changedate\", changedby=\"{$row['user']}\" WHERE personID = '$personID'";
+      $query = "UPDATE people SET changedate = \"$changedate\", changedby=\"{$row['user']}\" WHERE personID = '$personID'";
       $result = tng_query($query);
       $query = "UPDATE children SET $fieldstr WHERE familyID = '$familyID' AND personID = '$personID'";
     } else {
-      $query = "UPDATE $people_table SET $fieldstr WHERE personID = '$personID'";
+      $query = "UPDATE people SET $fieldstr WHERE personID = '$personID'";
     }
     $result = tng_query($query);
   }

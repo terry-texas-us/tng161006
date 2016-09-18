@@ -130,9 +130,7 @@ function getNameUniversal($row, $order, $hcard = null) {
 }
 
 function getFamilyName($row) {
-  global $people_table;
-
-  $hquery = "SELECT firstname, lnprefix, lastname, title, prefix, suffix, living, private, branch, nameorder FROM $people_table WHERE personID = '{$row['husband']}'";
+  $hquery = "SELECT firstname, lnprefix, lastname, title, prefix, suffix, living, private, branch, nameorder FROM people WHERE personID = '{$row['husband']}'";
   $hresult = tng_query($hquery) or die(uiTextSnippet('cannotexecutequery') . ": $hquery");
   $hrow = tng_fetch_assoc($hresult);
 
@@ -143,7 +141,7 @@ function getFamilyName($row) {
   $husbname = getName($hrow);
   tng_free_result($hresult);
 
-  $wquery = "SELECT firstname, lnprefix, lastname, title, prefix, suffix, living, private, branch, nameorder FROM $people_table WHERE personID = '{$row['wife']}'";
+  $wquery = "SELECT firstname, lnprefix, lastname, title, prefix, suffix, living, private, branch, nameorder FROM people WHERE personID = '{$row['wife']}'";
   $wresult = tng_query($wquery) or die(uiTextSnippet('cannotexecutequery') . ": $wquery");
   $wrow = tng_fetch_assoc($wresult);
 
@@ -359,7 +357,6 @@ function getLivingPrivateRestrictions($table, $firstname, $allOtherInput) {
   global $allowLiving;
   global $allowPrivate;
   global $assignedbranch;
-  global $people_table;
 
   $query = '';
   if ($table) {
@@ -374,7 +371,7 @@ function getLivingPrivateRestrictions($table, $firstname, $allOtherInput) {
 
   if ($livingNameRestrictions || $privateNameRestrictions || $allOtherInput) {
     $atreestr = $matchperson = '';
-    if ($_SESSION['mypersonID'] && $table == $people_table) {
+    if ($_SESSION['mypersonID'] && $table == 'people') {
       //this is me (current user)
       $matchperson = " OR ({$table}personID = \"{$_SESSION['mypersonID']}\")";
     }
@@ -410,8 +407,6 @@ function getLivingPrivateRestrictions($table, $firstname, $allOtherInput) {
 
 function checkLivingLinks($itemID) {
   global $livedefault;
-  global $assignedbranch;
-  global $people_table;
   global $allowLiving;
   global $allowPrivate;
 
@@ -442,7 +437,7 @@ function checkLivingLinks($itemID) {
   }
   if ($icriteria) {
     // Now find Living individuals linked to the media that fit the criteria set above.
-    $query = "SELECT count(*) AS pcount FROM (medialinks, $people_table) WHERE medialinks.personID = $people_table.personID AND medialinks.mediaID = '$itemID' $icriteria";
+    $query = "SELECT count(*) AS pcount FROM (medialinks, people) WHERE medialinks.personID = people.personID AND medialinks.mediaID = '$itemID' $icriteria";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
     tng_free_result($result);
@@ -887,7 +882,7 @@ function showSmallPhoto($persfamID, $alttext, $rights, $height, $type = false, $
       $photocheck = "$usefolder/" . $row['thumbpath'];
       $photoref = "$usefolder/" . str_replace('%2F', '/', rawurlencode($row['thumbpath']));
       if ($type) {
-        $prefix = "<a href=\"admin_editmedia.php?mediaID={$row['mediaID']}\"$targettext>";
+        $prefix = "<a href=\"mediaEdit.php?mediaID={$row['mediaID']}\"$targettext>";
       } else {
         $prefix = "<a href=\"showmedia.php?mediaID={$row['mediaID']}&amp;medialinkID={$row['medialinkID']}\" title=\"" . str_replace('"', '&#34;', $alttext) . "\"$targettext>";
       }
@@ -1050,10 +1045,8 @@ function getAllTextPath() {
 }
 
 function buildParentRow($parent, $spouse, $label) {
-  global $people_table;
-
   $out = '';
-  $query = "SELECT personID, lastname, lnprefix, firstname, birthdate, birthplace, altbirthdate, altbirthplace, prefix, suffix, nameorder FROM $people_table, families WHERE $people_table.personID = families.$spouse AND families.familyID = \"{$parent['familyID']}\"";
+  $query = "SELECT personID, lastname, lnprefix, firstname, birthdate, birthplace, altbirthdate, altbirthplace, prefix, suffix, nameorder FROM people, families WHERE people.personID = families.$spouse AND families.familyID = \"{$parent['familyID']}\"";
   $gotparent = tng_query($query);
 
   if ($gotparent) {

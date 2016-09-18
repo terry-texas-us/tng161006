@@ -87,14 +87,14 @@ switch ($t) {
     $logmsg = uiTextSnippet('note') . " $id " . uiTextSnippet('succdeleted');
     break;
   case 'person':
-    $row = getID('personID, branch, sex', $people_table, $id);
+    $row = getID('personID, branch, sex', 'people', $id);
     $personID = $row['personID'];
 
     if (!checkbranch($row['branch'])) {
       exit;
     }
 
-    $query = "DELETE FROM $people_table WHERE ID = '$id'";
+    $query = "DELETE FROM people WHERE ID = '$id'";
     $result = tng_query($query);
 
     deletePersonPlus($personID, $row['sex']);
@@ -115,7 +115,7 @@ switch ($t) {
     $query = "DELETE FROM children WHERE familyID = '$familyID'";
     $result = tng_query($query);
 
-    $query = "UPDATE $people_table SET famc='' WHERE famc = '$familyID'";
+    $query = "UPDATE people SET famc='' WHERE famc = '$familyID'";
     $result = tng_query($query);
 
     updateHasKidsFamily($familyID);
@@ -236,7 +236,7 @@ switch ($t) {
     $logmsg = uiTextSnippet('deleted') . ": $entity: $delitem";
     break;
   case 'tree':
-    $query = "DELETE FROM $people_table WHERE gedcom = '$id'";
+    $query = "DELETE FROM people WHERE gedcom = '$id'";
     $result = tng_query($query);
 
     $query = "DELETE FROM families WHERE gedcom = '$id'";
@@ -306,7 +306,7 @@ switch ($t) {
     $query = "DELETE FROM children WHERE familyID = '$familyID' AND personID = '$personID'";
     $result = tng_query($query);
 
-    $query = "UPDATE $people_table SET famc='' WHERE personID = '$personID'";
+    $query = "UPDATE people SET famc='' WHERE personID = '$personID'";
     $result = tng_query($query);
 
     updateHasKidsFamily($familyID);
@@ -314,12 +314,12 @@ switch ($t) {
     $logmsg = uiTextSnippet('chunlinked') . ": $personID/$familyID.";
     break;
   case 'child_delete':
-    $query = "SELECT sex FROM $people_table WHERE personID = '$personID'";
+    $query = "SELECT sex FROM people WHERE personID = '$personID'";
     $result = tng_query($query);
     $row = tng_fetch_assoc($result);
     tng_free_result($result);
 
-    $query = "DELETE FROM $people_table WHERE personID = '$personID'";
+    $query = "DELETE FROM people WHERE personID = '$personID'";
     $result = tng_query($query);
 
     deletePersonPlus($personID, $row['sex']);

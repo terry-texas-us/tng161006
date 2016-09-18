@@ -69,7 +69,7 @@ foreach ($places as $place) {
 }
 //get living from husband, wife
 if ($husband) {
-  $spquery = "SELECT living FROM $people_table WHERE personID = '$husband'";
+  $spquery = "SELECT living FROM people WHERE personID = '$husband'";
   $spouselive = tng_query($spquery) or die(uiTextSnippet('cannotexecutequery') . ": $spquery");
   $spouserow = tng_fetch_assoc($spouselive);
   $husbliving = $spouserow['living'];
@@ -85,7 +85,7 @@ if ($husband) {
   $husborder = 0;
 }
 if ($wife) {
-  $spquery = "SELECT living FROM $people_table WHERE personID = '$wife'";
+  $spquery = "SELECT living FROM people WHERE personID = '$wife'";
   $spouselive = tng_query($spquery) or die(uiTextSnippet('cannotexecutequery') . ": $spquery");
   $spouserow = tng_fetch_assoc($spouselive);
   $wifeliving = $spouserow['living'];
@@ -136,7 +136,7 @@ if ($lastperson) {
     $result2 = tng_query($query);
   }
 
-  $query = "UPDATE $people_table SET famc = '$familyID' WHERE personID = '$lastperson'";
+  $query = "UPDATE people SET famc = '$familyID' WHERE personID = '$lastperson'";
   $result = tng_query($query);
 }
 adminwritelog("<a href=\"familiesEdit.php?familyID=$familyID\">" . uiTextSnippet('addnewfamily') . ": $familyID</a>");

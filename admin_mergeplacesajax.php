@@ -66,21 +66,21 @@ foreach ($mergelist as $val) {
       $result = tng_query($query);
     }
 
-    $query = "UPDATE $people_table SET birthplace = '$newplace' WHERE birthplace = '$oldplace'";
+    $query = "UPDATE people SET birthplace = '$newplace' WHERE birthplace = '$oldplace'";
     $result = tng_query($query);
-    $query = "UPDATE $people_table SET altbirthplace = '$newplace' WHERE altbirthplace = '$oldplace'";
+    $query = "UPDATE people SET altbirthplace = '$newplace' WHERE altbirthplace = '$oldplace'";
     $result = tng_query($query);
-    $query = "UPDATE $people_table SET deathplace = '$newplace' WHERE deathplace = '$oldplace'";
+    $query = "UPDATE people SET deathplace = '$newplace' WHERE deathplace = '$oldplace'";
     $result = tng_query($query);
-    $query = "UPDATE $people_table SET burialplace = '$newplace' WHERE burialplace = '$oldplace'";
+    $query = "UPDATE people SET burialplace = '$newplace' WHERE burialplace = '$oldplace'";
     $result = tng_query($query);
-    $query = "UPDATE $people_table SET baptplace = '$newplace' WHERE baptplace = '$oldplace'";
+    $query = "UPDATE people SET baptplace = '$newplace' WHERE baptplace = '$oldplace'";
     $result = tng_query($query);
-    $query = "UPDATE $people_table SET confplace = '$newplace' WHERE confplace = '$oldplace'";
+    $query = "UPDATE people SET confplace = '$newplace' WHERE confplace = '$oldplace'";
     $result = tng_query($query);
-    $query = "UPDATE $people_table SET initplace = '$newplace' WHERE initplace = '$oldplace'";
+    $query = "UPDATE people SET initplace = '$newplace' WHERE initplace = '$oldplace'";
     $result = tng_query($query);
-    $query = "UPDATE $people_table SET endlplace = '$newplace' WHERE endlplace = '$oldplace'";
+    $query = "UPDATE people SET endlplace = '$newplace' WHERE endlplace = '$oldplace'";
     $result = tng_query($query);
 
     //families

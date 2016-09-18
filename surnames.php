@@ -32,14 +32,14 @@ $headSection->setTitle(uiTextSnippet('surnamelist'));
 
     $wherestr = '';
 
-    $allwhere = getLivingPrivateRestrictions($people_table, false, false);
+    $allwhere = getLivingPrivateRestrictions('people', false, false);
 
     if ($allwhere) {
       $wherestr .= $wherestr ? " AND $allwhere" : "WHERE $allwhere";
       $wherestr2 .= " AND $allwhere";
     }
 
-    $query = "SELECT ucase(left(lastname,1)) AS firstchar, ucase( $binary left(lastname,1) ) AS binfirstchar, count( ucase( left( lastname,1) ) ) AS lncount FROM $people_table $wherestr GROUP BY binfirstchar ORDER by binfirstchar";
+    $query = "SELECT ucase(left(lastname,1)) AS firstchar, ucase( $binary left(lastname,1) ) AS binfirstchar, count( ucase( left( lastname,1) ) ) AS lncount FROM people $wherestr GROUP BY binfirstchar ORDER by binfirstchar";
     $result = tng_query($query);
     if ($result) {
       $initialchar = 1;
@@ -71,7 +71,7 @@ $headSection->setTitle(uiTextSnippet('surnamelist'));
       $surnamestr = "ucase($surnamestr)";
     }
     $wherestr .= $wherestr ? ' AND lastname != ""' : 'WHERE lastname != ""';
-    $query = "SELECT ucase( $binary $surnamestr ) AS lastname, $surnamestr AS lowername, count( ucase($binary lastname ) ) AS lncount FROM $people_table $wherestr GROUP BY lowername ORDER by lncount DESC, lastname LIMIT 30";
+    $query = "SELECT ucase( $binary $surnamestr ) AS lastname, $surnamestr AS lowername, count( ucase($binary lastname ) ) AS lncount FROM people $wherestr GROUP BY lowername ORDER by lncount DESC, lastname LIMIT 30";
     $result = tng_query($query);
     $maxcount = 0;
     if ($result) {

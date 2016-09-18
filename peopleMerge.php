@@ -115,12 +115,11 @@ function getEvent($event) {
 }
 
 function getSpouse($marriage, $spouse) {
-  global $people_table;
   global $ldsOK;
 
   $spousestr = '';
   if ($marriage[$spouse]) {
-    $query = "SELECT personID, lastname, firstname, prefix, suffix, nameorder FROM $people_table WHERE personID = \"{$marriage[$spouse]}\"";
+    $query = "SELECT personID, lastname, firstname, prefix, suffix, nameorder FROM people WHERE personID = \"{$marriage[$spouse]}\"";
     $gotspouse = tng_query($query);
     $spouserow = tng_fetch_assoc($gotspouse);
 
@@ -153,11 +152,10 @@ function getSpouse($marriage, $spouse) {
 }
 
 function getParents($parent) {
-  global $people_table;
   global $ldsOK;
 
   $parentstr = '';
-  $query = "SELECT personID, lastname, firstname, prefix, suffix, nameorder FROM $people_table, families WHERE $people_table.personID = families.husband AND families.familyID = \"{$parent['familyID']}\"";
+  $query = "SELECT personID, lastname, firstname, prefix, suffix, nameorder FROM people, families WHERE people.personID = families.husband AND families.familyID = \"{$parent['familyID']}\"";
   $gotfather = tng_query($query);
 
   if ($gotfather) {
@@ -171,7 +169,7 @@ function getParents($parent) {
     tng_free_result($gotfather);
   }
 
-  $query = "SELECT personID, lastname, firstname, prefix, suffix, nameorder FROM $people_table, families WHERE $people_table.personID = families.wife AND families.familyID = \"{$parent['familyID']}\"";
+  $query = "SELECT personID, lastname, firstname, prefix, suffix, nameorder FROM people, families WHERE people.personID = families.wife AND families.familyID = \"{$parent['familyID']}\"";
   $gotmother = tng_query($query);
 
   if ($gotmother) {
@@ -282,7 +280,7 @@ function delAssociations($entity) {
 
 $p1row = $p2row = '';
 if ($personID1) {
-  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $people_table WHERE personID = '$personID1'";
+  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM people WHERE personID = '$personID1'";
   $result = tng_query($query);
   if ($result && tng_num_rows($result)) {
     $p1row = tng_fetch_assoc($result);
@@ -316,7 +314,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
       $nextone = $nextchunk + 1;
       $nextchunk += $largechunk;
 
-      $query = "SELECT * FROM $people_table WHERE 1 $branchstr $wherestr ORDER BY personID, lastname, firstname LIMIT $nextone, $largechunk";
+      $query = "SELECT * FROM people WHERE 1 $branchstr $wherestr ORDER BY personID, lastname, firstname LIMIT $nextone, $largechunk";
       $result = tng_query($query);
       $numrows = tng_num_rows($result);
       if ($result && $numrows) {
@@ -324,7 +322,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
           //echo "compare $row['firstname'] $row['lastname']<br>\n";
           $wherestr2 = addCriteria($row);
 
-          $query = "SELECT * FROM $people_table WHERE personID > \"{$row['personID']}\" $branchstr $wherestr2 ORDER BY personID, lastname, firstname LIMIT 1";
+          $query = "SELECT * FROM people WHERE personID > \"{$row['personID']}\" $branchstr $wherestr2 ORDER BY personID, lastname, firstname LIMIT 1";
           //echo "q2: $query<br>\n";
           $result2 = tng_query($query);
           if ($result2 && tng_num_rows($result2)) {
@@ -349,7 +347,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
     $wherestr2 = $personID2 ? " AND personID > \"$personID2\"" : '';
     $wherestr2 .= addCriteria($p1row);
 
-    $query = "SELECT * FROM $people_table WHERE personID != \"{$p1row['personID']}\" $branchstr $wherestr2 ORDER BY personID, lastname, firstname LIMIT 1";
+    $query = "SELECT * FROM people WHERE personID != \"{$p1row['personID']}\" $branchstr $wherestr2 ORDER BY personID, lastname, firstname LIMIT 1";
     $result2 = tng_query($query);
     if ($result2 && tng_num_rows($result2)) {
       $p2row = tng_fetch_assoc($result2);
@@ -361,7 +359,7 @@ if ($mergeaction == uiTextSnippet('nextmatch') || $mergeaction == uiTextSnippet(
     }
   }
 } elseif ($personID2) {
-  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM $people_table WHERE personID = '$personID2'";
+  $query = "SELECT *, DATE_FORMAT(changedate,\"%d %b %Y %H:%i:%s\") AS changedate FROM people WHERE personID = '$personID2'";
   $result2 = tng_query($query);
   if ($result2 && tng_num_rows($result2) && $personID1 != $personID2) {
     $p2row = tng_fetch_assoc($result2);
@@ -468,7 +466,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
           $mediaresult = tng_query($query);
 
           //update all people records where FAMC = the deleted family, set FAMC = family on left
-          $query = "UPDATE $people_table set famc = \"{$sp1row['familyID']}\" WHERE famc = '$varname'";
+          $query = "UPDATE people set famc = \"{$sp1row['familyID']}\" WHERE famc = '$varname'";
           $paresult = tng_query($query);
 
           //move kids from right family to left
@@ -534,7 +532,7 @@ if ($mergeaction == uiTextSnippet('merge')) {
             $mediaresult = tng_query($query);
 
             //update all people records where FAMC = the deleted family, set FAMC = family on right
-            $query = "UPDATE $people_table set famc = \"$varname\" WHERE famc = \"{$sp1row['familyID']}\"";
+            $query = "UPDATE people set famc = \"$varname\" WHERE famc = \"{$sp1row['familyID']}\"";
             $paresult = tng_query($query);
 
             //move all children from family1 to family2
@@ -590,11 +588,11 @@ if ($mergeaction == uiTextSnippet('merge')) {
     $updatestr = substr($updatestr, 2);
     $newdate = date('Y-m-d H:i:s', time() + (3600 * $timeOffset));
     $updatestr .= ", changedate = \"$newdate\"";
-    $query = "UPDATE $people_table set $updatestr WHERE personID = '$personID1'";
+    $query = "UPDATE people set $updatestr WHERE personID = '$personID1'";
     $combresult = tng_query($query);
   }
 
-  $query = "DELETE from $people_table WHERE personID = '$personID2'";
+  $query = "DELETE from people WHERE personID = '$personID2'";
   $combresult = tng_query($query);
 
   //delete remaining notes, citations & events for person 2
@@ -652,17 +650,17 @@ if ($mergeaction == uiTextSnippet('merge')) {
   //clean up: remove all families with husband blank and wife blank
   //remove all children from those families
   if ($deleteblankfamilies) {
-    $query = "SELECT familyID FROM families WHERE husband = \"\" AND wife = \"\"";
+    $query = 'SELECT familyID FROM families WHERE husband = "" AND wife = ""';
     $blankfams = tng_query($query);
     while ($blankrow = tng_fetch_assoc($blankfams)) {
       $query = "DELETE FROM children WHERE familyID = \"{$blankrow['familyID']}\"";
       $chilresult = tng_query($query);
 
-      $query = "UPDATE $people_table SET famc=\"\" WHERE famc = \"{$blankrow['familyID']}\"";
+      $query = "UPDATE people SET famc=\"\" WHERE famc = \"{$blankrow['familyID']}\"";
       $result2 = tng_query($query);
     }
     tng_free_result($blankfams);
-    $query = "DELETE FROM families WHERE husband = \"\" AND wife = \"\"";
+    $query = 'DELETE FROM families WHERE husband = "" AND wife = ""';
     $famresult = tng_query($query);
   }
   adminwritelog(uiTextSnippet('merge') . ": $personID2 => $personID1");

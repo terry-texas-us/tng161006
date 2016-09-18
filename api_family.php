@@ -37,7 +37,7 @@ writelog($logstring);
 $family = "\"id\":\"{$famrow['familyID']}\"";
 //get husband & spouses
 if ($famrow['husband']) {
-  $query = "SELECT * FROM $people_table WHERE personID = \"{$famrow['husband']}\"";
+  $query = "SELECT * FROM people WHERE personID = \"{$famrow['husband']}\"";
   $result = tng_query($query);
   $husbrow = tng_fetch_assoc($result);
 
@@ -52,7 +52,7 @@ if ($famrow['husband']) {
 
 //get wife & spouses
 if ($famrow['wife']) {
-  $query = "SELECT * FROM $people_table WHERE personID = \"{$famrow['wife']}\"";
+  $query = "SELECT * FROM people WHERE personID = \"{$famrow['wife']}\"";
   $result = tng_query($query);
   $wiferow = tng_fetch_assoc($result);
 
@@ -84,7 +84,7 @@ if ($eventstr) {
 }
 
 //for each child
-$query = "SELECT $people_table.personID AS personID, branch, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, famc, sex, birthdate, birthplace, altbirthdate, altbirthplace, haskids, deathdate, deathplace, burialdate, burialplace, baptdate, baptplace, confdate, confplace, initdate, initplace, endldate, endlplace, sealdate, sealplace FROM $people_table, children WHERE $people_table.personID = children.personID AND children.familyID = \"{$famrow['familyID']}\" ORDER BY ordernum";
+$query = "SELECT people.personID AS personID, branch, firstname, lnprefix, lastname, prefix, suffix, nameorder, living, private, famc, sex, birthdate, birthplace, altbirthdate, altbirthplace, haskids, deathdate, deathplace, burialdate, burialplace, baptdate, baptplace, confdate, confplace, initdate, initplace, endldate, endlplace, sealdate, sealplace FROM people, children WHERE people.personID = children.personID AND children.familyID = \"{$famrow['familyID']}\" ORDER BY ordernum";
 $children = tng_query($query);
 
 if ($children && tng_num_rows($children)) {

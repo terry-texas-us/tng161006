@@ -19,7 +19,6 @@ function buildPlaceMenu($currpage, $entityID) {
 }
 
 function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
-  global $people_table;
   global $offset;
   global $page;
   global $psearch;
@@ -32,15 +31,15 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
 
   $successcount = 0;
   if ($prefix == 'I') {
-    $table = $people_table;
+    $table = 'people';
     $peoplejoin1 = $peoplejoin2 = '';
     $idfield = 'personID';
     $idtext = 'personid';
     $namefield = 'lastfirst';
   } elseif ($prefix == 'F') {
     $table = 'families';
-    $peoplejoin1 = " LEFT JOIN $people_table as p1 ON p1.personID = families.husband";
-    $peoplejoin2 = " LEFT JOIN $people_table as p2 ON p2.personID = families.wife";
+    $peoplejoin1 = ' LEFT JOIN people as p1 ON p1.personID = families.husband';
+    $peoplejoin2 = ' LEFT JOIN people as p2 ON p2.personID = families.wife';
     $idfield = 'familyID';
     $idtext = 'familyid';
     $namefield = 'family';
@@ -104,7 +103,7 @@ function processPlaceEvents($prefix, $stdevents, $displaymsgs) {
       } else {
         $orderstr = "$datefieldtr DESC, lastname DESC, firstname DESC";
       }
-      $query = "SELECT $people_table.ID, personID, lastname, lnprefix, firstname, living, private, branch, prefix, suffix, nameorder, $place, $datefield FROM ($people_table $eventsjoin) WHERE $livingPrivateCondition $allwhere2 ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
+      $query = "SELECT people.ID, personID, lastname, lnprefix, firstname, living, private, branch, prefix, suffix, nameorder, $place, $datefield FROM (people $eventsjoin) WHERE $livingPrivateCondition $allwhere2 ORDER BY $orderstr LIMIT $newoffset" . $maxsearchresults;
     }
     $result = tng_query($query);
     $numrows = tng_num_rows($result);

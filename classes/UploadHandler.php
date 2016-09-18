@@ -1,7 +1,6 @@
 <?php
 
-class UploadHandler
-{
+class UploadHandler {
   protected $options;
 
   // PHP File Upload error message codes:
@@ -337,7 +336,7 @@ class UploadHandler
       $file->error = $this->getErrorMessage($error);
       return false;
     }
-    $content_length = $this->fixIntegerOverflow((int)$this->getServerVar('CONTENT_LENGTH'));
+    $content_length = $this->fixIntegerOverflow((int) $this->getServerVar('CONTENT_LENGTH'));
     $post_max_size = $this->getConfigBytes(ini_get('post_max_size'));
     if ($post_max_size && ($content_length > $post_max_size)) {
       $file->error = $this->getErrorMessage('post_max_size');
@@ -403,7 +402,7 @@ class UploadHandler
   }
 
   protected function upcount_name_callback($matches) {
-    $index = isset($matches[1]) ? ((int)$matches[1]) + 1 : 1;
+    $index = isset($matches[1]) ? ((int) $matches[1]) + 1 : 1;
     $ext = isset($matches[2]) ? $matches[2] : '';
     return ' ('.$index.')'.$ext;
   }

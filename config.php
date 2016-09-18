@@ -6,8 +6,6 @@ $database_username = "root";
 $database_password = 'tas1223';
 $tngconfig['maint'] = "";
 
-$people_table = "people";
-
 $rootpath = "C:/apache/htdocs/tng/";
 $homepage = "index.php";
 $tngdomain = "http://localhost/tng";
