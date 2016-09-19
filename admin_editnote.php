@@ -11,46 +11,34 @@ $row = tng_fetch_assoc($result);
 tng_free_result($result);
 
 $row['note'] = str_replace('&', '&amp;', $row['note']);
-$row['note'] = preg_replace('/\"/', '&#34;', $row['note']);
+$row['note'] = str_replace('"', '&quot;', $row['note']);
 
 $helplang = findhelp('notes_help.php');
 header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <form name='form3' action='' onSubmit="return updateNote(this);">
-  <div style='float: right; text-align: center'>
-    <input class='bigsave' name='submit' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
-    <p><a href="#" onclick="gotoSection('editnote', 'notelist');"><?php echo uiTextSnippet('cancel'); ?></a></p>
+  <header class='modal-header'>
+    <h5><?php echo uiTextSnippet('modifynote'); ?></h5>
+    <span><a href="#" onclick="return openHelp('<?php echo $helplang; ?>/notes_help.php');"><?php echo uiTextSnippet('help'); ?></a></span>
+  </header>
+  <div class='modal-body'>
+    <?php echo uiTextSnippet('note'); ?>:
+    <textarea class='form-control' name='note' rows='8'><?php echo $row['note']; ?></textarea>
+    <label class='form-check-inline'>
+      <?php
+      echo "<input class='form-check-input' name='private' type='checkbox' value='1'";
+      echo ($row['secret'] !== 0) ? ' checked>' : '>';
+      echo uiTextSnippet('private');
+      ?>
+    </label>
   </div>
-  <h4><?php echo uiTextSnippet('modifynote'); ?> |
-    <a href="#"
-       onclick="return openHelp('<?php echo $helplang; ?>/notes_help.php');"><?php echo uiTextSnippet('help'); ?></a>
-  </h4>
+  <footer class='modal-footer'>
+    <input name='xID' type='hidden' value="<?php echo $row['xID']; ?>">
+    <input name='ID' type='hidden' value="<?php echo $noteID; ?>">
+    <input name='persfamID' type='hidden' value="<?php echo $row['persfamID']; ?>">
+    <input name='eventID' type='hidden' value="<?php echo $row['eventID']; ?>">
 
-  <table class='table table-sm'>
-    <tr>
-      <td><?php echo uiTextSnippet('note'); ?>:
-      </td>
-      <td>
-        <textarea wrap='soft' cols='60' rows='25' name='note'><?php echo $row['note']; ?></textarea>
-      </td>
-    </tr>
-    <tr>
-      <td>&nbsp;
-      </td>
-      <td>
-        <?php
-        echo "<input name='private' type='checkbox' value='1'";
-        if ($row['secret']) {
-          echo ' checked';
-        }
-        echo '> ' . uiTextSnippet('private');
-        ?>
-      </td>
-    </tr>
-  </table>
-  <br>
-  <input name='xID' type='hidden' value="<?php echo $row['xID']; ?>">
-  <input name='ID' type='hidden' value="<?php echo $noteID; ?>">
-  <input name='persfamID' type='hidden' value="<?php echo $row['persfamID']; ?>">
-  <input name='eventID' type='hidden' value="<?php echo $row['eventID']; ?>">
+    <button class='btn btn-outline-primary' name='submit' type='submit'><?php echo uiTextSnippet('save'); ?></button>
+    <button class='btn' name='cancel' type='button' onclick="gotoSection('editnote', 'notelist');"><?php echo uiTextSnippet('cancel'); ?></button>
+  </footer>
 </form>

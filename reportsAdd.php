@@ -151,18 +151,17 @@ $headSection->setTitle(uiTextSnippet('addnewreport'));
     echo $adminHeaderSection->build('reports-addnewreport', $message);
     $navList = new navList('');
     $navList->appendItem([true, 'reportsBrowse.php', uiTextSnippet('browse'), 'findreport']);
-    $navList->appendItem([$allowAdd, 'reportsAdd.php', uiTextSnippet('add'), 'addreport']);
+    // $navList->appendItem([$allowAdd, 'reportsAdd.php', uiTextSnippet('add'), 'addreport']);
     echo $navList->build('addreport');
     ?>
-    <form action="reportsAddFormAction.php" method='post' name='form1' id='form1'
-          onSubmit="return validateForm();">
+    <form action="reportsAddFormAction.php" method='post' name='form1' id='form1' onSubmit="return validateForm();">
       <table class='table table-sm'>
         <tr>
           <td>
             <?php echo uiTextSnippet('reportname'); ?>:
           </td>
           <td>
-            <input name='reportname' type='text' size='50' maxlength='80'>
+            <input class='form-control' name='reportname' type='text' size='50' maxlength='80'>
           </td>
         </tr>
         <tr>
@@ -170,7 +169,7 @@ $headSection->setTitle(uiTextSnippet('addnewreport'));
             <?php echo uiTextSnippet('description'); ?>:
           </td>
           <td>
-            <textarea cols="50" rows='3' name="reportdesc"></textarea>
+            <textarea class='form-control' name='reportdesc' rows='3'></textarea>
           </td>
         </tr>
         <tr>
@@ -445,7 +444,7 @@ $headSection->setTitle(uiTextSnippet('addnewreport'));
           </td>
         </tr>
         <tr>
-          <td colspan='2'><textarea cols="60" rows='4' name="sqlselect"></textarea></td>
+          <td colspan='2'><textarea class='form-control' name='sqlselect' rows='4'></textarea></td>
         </tr>
       </table>
       <br>

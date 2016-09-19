@@ -238,7 +238,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                 <tr id="bodytextrow">
                   <td><?php echo uiTextSnippet('bodytext'); ?>:</td>
                   <td>
-                    <textarea wrap='soft' cols="100" rows="11" name="bodytext" id="bodytext"><?php echo $row['bodytext']; ?></textarea>
+                    <textarea class='form-control' name='bodytext' id='bodytext' rows='11'><?php echo $row['bodytext']; ?></textarea>
                   </td>
                 </tr>
                 <?php if (function_exists('imageJpeg')) { ?>
@@ -309,13 +309,13 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                 <tr>
                   <td><?php echo uiTextSnippet('title'); ?>:</td>
                   <td>
-                    <textarea wrap='soft' cols="70" rows='3' name='description'><?php echo $row['description']; ?></textarea>
+                    <textarea class='form-control' name='description' rows='3'><?php echo $row['description']; ?></textarea>
                   </td>
                 </tr>
                 <tr>
                   <td><?php echo uiTextSnippet('description'); ?>:</td>
                   <td>
-                    <textarea wrap='soft' cols="70" rows='5' name="notes"><?php echo $row['notes']; ?></textarea>
+                    <textarea class='form-control' name='notes' rows='5'><?php echo $row['notes']; ?></textarea>
                   </td>
                 </tr>
                 <tr>
@@ -360,11 +360,11 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                 <tr id="hsplotrow">
                   <td><?php echo uiTextSnippet('plot'); ?>:</td>
                   <td>
-                    <textarea wrap='soft' cols="70" rows='2' name="plot"><?php echo $row['plot']; ?></textarea>
+                    <textarea class='form-control' name='plot' rows='2'><?php echo $row['plot']; ?></textarea>
                   </td>
                 </tr>
                 <tr id="hsstatrow">
-                  <td><?php echo uiTextSnippet('status'); ?>:</td>
+                  <td><?php echo uiTextSnippet('status'); ?>:</td>  
                   <td>
                     <select name="status">
                       <option value=''>&nbsp;</option>
@@ -500,7 +500,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                 </div>
                 <p><?php echo uiTextSnippet('imgmap'); ?>:
                   <br>
-                  <textarea cols="80" rows='4' name="imagemap" id="imagemap"><?php echo $row['map']; ?></textarea>
+                  <textarea class='form-control' name='imagemap' id='imagemap' rows='4'><?php echo $row['map']; ?></textarea>
                 </p>
               </div>
             </td>

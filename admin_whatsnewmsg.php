@@ -20,12 +20,6 @@ $headSection->setTitle(uiTextSnippet('whatsnew'));
   <section class='container'>
     <?php
     echo $adminHeaderSection->build('misc-whatsnewmsg', $message);
-    $navList = new navList('');
-    $navList->appendItem([true, 'admin_misc.php', uiTextSnippet('menu'), 'misc']);
-    $navList->appendItem([true, 'admin_notelist.php', uiTextSnippet('notes'), 'notes']);
-    $navList->appendItem([true, 'admin_whatsnewmsg.php', uiTextSnippet('whatsnew'), 'whatsnew']);
-    $navList->appendItem([true, 'admin_mostwanted.php', uiTextSnippet('mostwanted'), 'mostwanted']);
-    echo $navList->build('whatsnew');
     $messageClass = "class='";
     if (isset($color) && $color != '') {
       $messageClass .= "$color'";
@@ -33,23 +27,28 @@ $headSection->setTitle(uiTextSnippet('whatsnew'));
       $messageClass .= "msgnone'";
     }
     ?>
-    <a href="whatsnew.php" title='<?php echo uiTextSnippet('preview') ?>'>
+    <br>
+    <a href="whatsnew.php" title='<?php echo uiTextSnippet('preview'); ?>'>
       <img class='icon-sm' src='svg/eye.svg'>
     </a>
     <br>
     <hr>
     <form action='admin_savewhatsnewmsg.php' method='post' name='form1'>
       <label><?php echo uiTextSnippet('wnmsg'); ?></label>
-        <?php if (isset($message) && $message != '') { ?>
-          <p <?php echo $messageClass; ?> id='savedmsg'><i><?php echo $message; ?></i></p>
-        <?php } ?>
+        <?php
+        if (isset($message) && $message != '') {
+          echo '<p ' . $messageClass . "id='savedmsg'><i>" . $message . '</i></p>';
+        }
+        ?>
         <br>
-        <textarea id='whatsnewmsg' name='whatsnewmsg' style='width: 100%'>
-          <?php if (is_array($contents)) {
+        <textarea class='form-control' id='whatsnewmsg' name='whatsnewmsg'>
+          <?php
+          if (is_array($contents)) {
             foreach ($contents as $line) {
               echo $line;
             }
-          } ?>
+          }
+          ?>
         </textarea>
       <br>
       <button class='btn btn-outline-primary pull-right' name='submit' type='submit'><?php echo uiTextSnippet('save'); ?></button>

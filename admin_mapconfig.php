@@ -28,7 +28,7 @@ $headSection->setTitle(uiTextSnippet('modifymapsettings'));
     $navList->appendItem([true, 'admin_setup.php', uiTextSnippet('configuration'), 'configuration']);
     $navList->appendItem([true, 'admin_diagnostics.php', uiTextSnippet('diagnostics'), 'diagnostics']);
     $navList->appendItem([true, 'admin_setup.php?sub=tablecreation', uiTextSnippet('tablecreation'), 'tablecreation']);
-    $navList->appendItem([true, '#', uiTextSnippet('mapconfigsettings'), 'map']);
+    // $navList->appendItem([true, '#', uiTextSnippet('mapconfigsettings'), 'map']);
     echo $navList->build('map');
     ?>
     <form action="admin_updatemapconfig.php" method='post' name='form1'>

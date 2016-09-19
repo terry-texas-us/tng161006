@@ -21,7 +21,6 @@ function showDiv($type) {
     echo "</form>\n";
   }
 
-
   echo "<div id=\"order$type" . "divs\">\n";
   echo "<table id=\"order$type" . "tbl\" width='100%'>\n";
   echo "<tr>\n";
@@ -31,17 +30,15 @@ function showDiv($type) {
   echo "</tr>\n";
   echo "</table>\n";
 
-
   $query = "SELECT DISTINCT mostwanted.ID AS mwID, mwtype, thumbpath, usecollfolder, mediatypeID, media.description AS mtitle, mostwanted.description AS mwdesc, mostwanted.title AS title FROM mostwanted LEFT JOIN media ON mostwanted.mediaID = media.mediaID LEFT JOIN people ON mostwanted.personID = people.personID WHERE mwtype = '$type' ORDER BY ordernum";
   $result = tng_query($query);
-  //echo $query;
 
   while ($lrow = tng_fetch_assoc($result)) {
     $lmediatypeID = $lrow['mediatypeID'];
     $usefolder = $lrow['usecollfolder'] ? $mediatypes_assoc[$lmediatypeID] : $mediapath;
 
     $truncated = substr($lrow['mwdesc'], 0, 90);
-    $truncated = strlen($lrow['mwdesc']) > 90 ? substr($truncated, 0, strrpos($truncated, ' ')) . '&hellip;' : $lrow['mwdesc'];
+    $truncated = (strlen($lrow['mwdesc']) > 90) ? substr($truncated, 0, strrpos($truncated, ' ')) . '&hellip;' : $lrow['mwdesc'];
     echo "<div class='sortrow' id=\"order{$lrow['mwtype']}" . "divs_{$lrow['mwID']}\" style='clear: both' onmouseover=\"showEditDelete('{$lrow['mwID']}');\" onmouseout=\"hideEditDelete('{$lrow['mwID']}');\">";
     echo "<table width='100%'><tr id=\"row_{$lrow['mwID']}\">\n";
     echo "<td class='dragarea'>";
@@ -55,6 +52,7 @@ function showDiv($type) {
     } else {
       echo '&nbsp;';
     }
+    
     echo "</td>\n";
     echo '<td>';
     if ($allowEdit) {
@@ -62,6 +60,7 @@ function showDiv($type) {
     } else {
       echo "<u id=\"title_{$lrow['mwID']}\">{$lrow['title']}</u>";
     }
+    
     echo "<br><span id=\"desc_{$lrow['mwID']}\">$truncated</span><br>";
     echo "<div id=\"del_{$lrow['mwID']}\" class=\"small\" style=\"color: gray; visibility: hidden\">";
     if ($allowEdit) {
@@ -73,11 +72,13 @@ function showDiv($type) {
     if ($allowDelete) {
       echo "<a href='#' onclick=\"return removeFromMostWanted('{$lrow['mwtype']}','{$lrow['mwID']}');\">" . uiTextSnippet('delete') . '</a>';
     }
+    
     echo '</div>';
     echo "</td>\n";
     echo '</tr></table>';
     echo "</div>\n";
   }
+  
   tng_num_rows($result);
   tng_free_result($result);
   echo "</div>\n";
@@ -93,15 +94,9 @@ $headSection->setTitle(uiTextSnippet('mostwanted'));
   <section class='container'>
     <?php
     echo $adminHeaderSection->build('misc-mostwanted', $message);
-    $navList = new navList('');
-    $navList->appendItem([true, 'admin_misc.php', uiTextSnippet('menu'), 'misc']);
-    $navList->appendItem([true, 'admin_notelist.php', uiTextSnippet('notes'), 'notes']);
-    $navList->appendItem([true, 'admin_whatsnewmsg.php', uiTextSnippet('whatsnew'), 'whatsnew']);
-    $navList->appendItem([true, 'admin_mostwanted.php', uiTextSnippet('mostwanted'), 'mostwanted']);
-    echo $navList->build('mostwanted');
     ?>
     <br>
-    <a href="mostwanted.php" title='<?php echo uiTextSnippet('preview') ?>'>
+    <a href="mostwanted.php" title='<?php echo uiTextSnippet('preview'); ?>'>
       <img class='icon-sm' src='svg/eye.svg'>
     </a>
     <table class='table table-sm'>

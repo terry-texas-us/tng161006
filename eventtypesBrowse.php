@@ -126,18 +126,18 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
     <form action="eventtypesBrowseFormAction.php" method='post' name="form2">
       <p>
         <?php if ($allowDelete) { ?>
-          <input class='btn btn-outline-warning' id='deleteselected-eventtypes' name='cetaction' type='submit' value="<?php echo uiTextSnippet('deleteselected'); ?>">
+          <input class='btn btn-sm btn-outline-warning' id='deleteselected-eventtypes' name='cetaction' type='submit' value="<?php echo uiTextSnippet('deleteselected'); ?>">
         <?php } ?>
         <?php if ($allowEdit) { ?>
-          <input class='btn btn-outline-secondary' name='cetaction' type='submit' value="<?php echo uiTextSnippet('acceptselected'); ?>">
-          <input class='btn btn-outline-secondary' name='cetaction' type='submit' value="<?php echo uiTextSnippet('ignoreselected'); ?>">
-          <input class='btn btn-outline-secondary' name='cetaction' type='submit' value ="<?php echo uiTextSnippet('collapseselected'); ?>">
-          <input class='btn btn-outline-secondary' name='cetaction' type='submit' value ="<?php echo uiTextSnippet('expandselected'); ?>">
+          <input class='btn btn-sm btn-outline-secondary' name='cetaction' type='submit' value="<?php echo uiTextSnippet('acceptselected'); ?>">
+          <input class='btn btn-sm btn-outline-secondary' name='cetaction' type='submit' value="<?php echo uiTextSnippet('ignoreselected'); ?>">
+          <input class='btn btn-sm btn-outline-secondary' name='cetaction' type='submit' value ="<?php echo uiTextSnippet('collapseselected'); ?>">
+          <input class='btn btn-sm btn-outline-secondary' name='cetaction' type='submit' value ="<?php echo uiTextSnippet('expandselected'); ?>">
         <?php } ?>
       </p>
       <p>
-        <button class='btn btn-outline-secondary' id='selectall-eventtypes' name='selectall' type='button'><?php echo uiTextSnippet('selectall'); ?></button>
-        <button class='btn btn-outline-secondary' id='clearall-eventtypes' name='clearall' type='button'><?php echo uiTextSnippet('clearall'); ?></button>
+        <button class='btn btn-sm btn-outline-secondary' id='selectall-eventtypes' name='selectall' type='button'><?php echo uiTextSnippet('selectall'); ?></button>
+        <button class='btn btn-sm btn-outline-secondary' id='clearall-eventtypes' name='clearall' type='button'><?php echo uiTextSnippet('clearall'); ?></button>
       </p>
       <?php if ($numrows) { ?>
         <table class="table table-sm table-striped">
@@ -159,13 +159,13 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
           <?php
           $actionstr = '';
           if ($allowEdit) {
-            $actionstr .= "<a href=\"eventtypesEdit.php?eventtypeID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
-            $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
+            $actionstr .= "<a href='eventtypesEdit.php?eventtypeID=xxx' title='" . uiTextSnippet('edit') . "'>";
+            $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>";
             $actionstr .= "</a>\n";
           }
           if ($allowDelete) {
-            $actionstr .= "<a href='#' onClick=\"return confirmDelete('xxx');\" title='" . uiTextSnippet('delete') . "'>\n";
-            $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
+            $actionstr .= "<a id='delete' href='#' title='" . uiTextSnippet('delete') . "' data-row-id='xxx'>";
+            $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>";
             $actionstr .= "</a>\n";
           }
           while ($row = tng_fetch_assoc($result)) {
@@ -200,12 +200,10 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
               $displayval = $row['display'];
             }
             $newactionstr = preg_replace('/xxx/', $row['eventtypeID'], $actionstr);
-            echo "<tr id=\"row_{$row['eventtypeID']}\">\n";
-            echo "<td>\n";
-            echo "<div class='action-btns2'>\n$newactionstr</div>\n";
-            echo "</td>\n";
+            echo "<tr id='row_" . $row['eventtypeID'] . "'>\n";
+            echo "<td><div class='action-btns2'>$newactionstr</div></td>\n";
             if ($allowDelete || $allowEdit) {
-              echo "<td><input class='selected' name=\"et{$row['eventtypeID']}\" type='checkbox' value='1'></td>\n";
+              echo "<td><input class='selected' name='et" . $row['eventtypeID'] . "' type='checkbox' value='1'></td>\n";
             }
             echo "<td>{$row['tag']}</td>\n";
             echo "<td>{$row['description']}</td><td>$displayval</td>";
@@ -245,12 +243,13 @@ $headSection->setTitle(uiTextSnippet('eventtypes'));
       document.form1.onimport['2'].checked = true;
   });
   
-  function confirmDelete(ID) {
-      'use strict';
-      if (confirm(textSnippet('confdeleteevtype')))
-          deleteIt('eventtype', ID);
+  $('#customeventtypes #delete').on('click', function () {
+        var rowId = $(this).data('rowId');
+        if (confirm(textSnippet('confdeleteevtype'))) {
+            deleteIt('eventtype', rowId);
+      }
       return false;
-  }
+  });
 </script>
 </body>
 </html>

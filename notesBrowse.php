@@ -74,33 +74,26 @@ $headSection->setTitle(uiTextSnippet('notes'));
   <section class='container'>
     <?php
     echo $adminHeaderSection->build('misc-notes', $message);
-    $navList = new navList('');
-    $navList->appendItem([true, 'admin_misc.php', uiTextSnippet('menu'), 'misc']);
-    $navList->appendItem([true, 'admin_notelist.php', uiTextSnippet('notes'), 'notes']);
-    $navList->appendItem([true, 'admin_whatsnewmsg.php', uiTextSnippet('whatsnew'), 'whatsnew']);
-    $navList->appendItem([true, 'admin_mostwanted.php', uiTextSnippet('mostwanted'), 'mostwanted']);
-    echo $navList->build('notes');
     ?>
+    <br>
     <div>
-      <form action="admin_notelist.php" name='form1' id='form1'>
-        <table>
-          <tr>
-            <td><?php echo uiTextSnippet('searchfor'); ?>: </td>
-            <td>
-              <input class='longfield' name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>">
-            </td>
-            <td>
-              <input name='submit' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
-              <input name='submit' type='submit' value="<?php echo uiTextSnippet('reset'); ?>"
-                     onClick="resetForm();">
-            </td>
-          </tr>
-          <tr>
-            <td>&nbsp;</td>
-            <td><input name='private' type='checkbox' value='yes'<?php if ($private == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('private'); ?>
-            </td>
-          </tr>
-        </table>
+      <form name='form1' id='form1' action="notesBrowse.php">
+        <div class='row'>
+          <div class='col-sm-2'><?php echo uiTextSnippet('searchfor'); ?>: </div>
+          <div class='col-sm-4'>
+            <input class='form-control' name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>">
+          </div>
+          <div class='col-sm-6'>
+            <input class='btn btn-outline-primary' name='submit' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
+            <input class='btn btn-outline-secondary' name='submit' type='submit' value="<?php echo uiTextSnippet('reset'); ?>"
+                   onClick="resetForm();">
+          </div>
+        </div>
+        <div class='row'>
+          <div class='offset-sm-2 col-sm-6'>
+          <td><input name='private' type='checkbox' value='yes'<?php if ($private == 'yes') {echo ' checked';} ?>> <?php echo uiTextSnippet('private'); ?>
+          </div>
+        </div>
 
         <input name='newsearch' type='hidden' value='1'>
       </form>
@@ -118,25 +111,24 @@ $headSection->setTitle(uiTextSnippet('notes'));
         if ($allowDelete) {
           ?>
           <p>
-            <input name='selectall' type='button' value="<?php echo uiTextSnippet('selectall'); ?>" 
-                   onClick="toggleAll(1);">
-            <input name='clearall' type='button' value="<?php echo uiTextSnippet('clearall'); ?>"
-                   onClick="toggleAll(0);">
-            <input name='xnoteaction' type='submit' value="<?php echo uiTextSnippet('deleteselected'); ?>"
-                   onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');">
+            <button class='btn btn-sm btn-outline-secondary' id='selectall-notes' name='selectall' type='button'><?php echo uiTextSnippet('selectall'); ?></button> 
+            <button class='btn btn-sm btn-outline-secondary' id='clearall-notes' name='clearall' type='button'><?php echo uiTextSnippet('clearall'); ?></button>
+            <input class='btn btn-sm btn-outline-warning' id='deleteselected-notes' name='xnoteaction' type='submit' value="<?php echo uiTextSnippet('deleteselected'); ?>">
           </p>
           <?php
         }
         ?>
-        <table class="table table-sm table-striped">
-          <tr>
-            <th><?php echo uiTextSnippet('action'); ?></th>
-            <?php if ($allowDelete) { ?>
-              <th><?php echo uiTextSnippet('select'); ?></th>
-            <?php } ?>
-            <th><?php echo uiTextSnippet('note'); ?></th>
-            <th><?php echo uiTextSnippet('linkedto'); ?></th>
-          </tr>
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th><?php echo uiTextSnippet('action'); ?></th>
+              <?php if ($allowDelete) { ?>
+                <th><?php echo uiTextSnippet('select'); ?></th>
+              <?php } ?>
+              <th><?php echo uiTextSnippet('note'); ?></th>
+              <th width='20%'><?php echo uiTextSnippet('linkedto'); ?></th>
+            </tr>
+          </thead>
           <?php
           if ($numrows) {
           $actionstr = '';
@@ -155,14 +147,14 @@ $headSection->setTitle(uiTextSnippet('notes'));
             $newactionstr = preg_replace('/xxx/', $row['ID'], $actionstr);
             echo "<tr id=\"row_{$row['ID']}\"><td><div class=\"action-btns2\">$newactionstr</div></td>\n";
             if ($allowDelete) {
-              echo "<td><input name=\"del{$row['ID']}\" type='checkbox' value='1'></td>";
+              echo "<td><input class='selected' name=\"del{$row['ID']}\" type='checkbox' value='1'></td>";
             }
             $query = "SELECT notelinks.ID, notelinks.persfamID AS personID, secret FROM notelinks WHERE notelinks.xnoteID = '{$row['ID']}' ";
 
             $nresult = tng_query($query);
-            $notelinktext = '';
+            $linkedTo = '';
             while ($nrow = tng_fetch_assoc($nresult)) {
-              if (!$notelinktext) {
+              if (!$linkedTo) {
                 $query = "SELECT * FROM people WHERE personID = \"{$nrow['personID']}\"";
                 $result2 = tng_query($query);
                 if (tng_num_rows($result2) == 1) {
@@ -170,11 +162,11 @@ $headSection->setTitle(uiTextSnippet('notes'));
                   $nrights = determineLivingPrivateRights($row2);
                   $row2['allow_living'] = $nrights['living'];
                   $row2['allow_private'] = $nrights['private'];
-                  $notelinktext .= "<li><a href=\"peopleShowPerson.php?personID={$row2['personID']}\" target='_blank'>" . getNameRev($row2) . " ({$row2['personID']})</a></li>\n";
+                  $linkedTo .= "<li><a href=\"peopleShowPerson.php?personID={$row2['personID']}\" target='_blank'>" . getNameRev($row2) . "</a></li>\n";
                   tng_free_result($result2);
                 }
               }
-              if (!$notelinktext) {
+              if (!$linkedTo) {
                 $query = "SELECT * FROM families WHERE familyID = \"{$nrow['personID']}\"";
                 $result2 = tng_query($query);
                 if (tng_num_rows($result2) == 1) {
@@ -182,25 +174,25 @@ $headSection->setTitle(uiTextSnippet('notes'));
                   $nrights = determineLivingPrivateRights($row2);
                   $row2['allow_living'] = $nrights['living'];
                   $row2['allow_private'] = $nrights['private'];
-                  $notelinktext .= "<li><a href=\"familiesShowFamily.php?familyID={$row2['familyID']}\" target='_blank'>" . uiTextSnippet('family') . " {$row2['familyID']}</a></li>\n";
+                  $linkedTo .= "<li><a href=\"familiesShowFamily.php?familyID={$row2['familyID']}\" target='_blank'>" . uiTextSnippet('family') . " ({$row2['familyID']})</a></li>\n";
                   tng_free_result($result2);
                 }
               }
-              if (!$notelinktext) {
+              if (!$linkedTo) {
                 $query = "SELECT * FROM sources WHERE sourceID = \"{$nrow['personID']}\"";
                 $result2 = tng_query($query);
                 if (tng_num_rows($result2) == 1) {
                   $row2 = tng_fetch_assoc($result2);
-                  $notelinktext .= "<li><a href=\"sourcesShowSource.php?sourceID={$row2['sourceID']}\" target='_blank'>" . uiTextSnippet('source') . " $sourcetext ({$row2['sourceID']})</a></li>\n";
+                  $linkedTo .= "<li><a href=\"sourcesShowSource.php?sourceID={$row2['sourceID']}\" target='_blank'>" . uiTextSnippet('source') . " $sourcetext ({$row2['sourceID']})</a></li>\n";
                   tng_free_result($result2);
                 }
               }
-              if (!$notelinktext) {
+              if (!$linkedTo) {
                 $query = "SELECT * FROM repositories WHERE repoID = \"{$nrow['personID']}\"";
                 $result2 = tng_query($query);
                 if (tng_num_rows($result2) == 1) {
                   $row2 = tng_fetch_assoc($result2);
-                  $notelinktext .= "<li><a href=\"repositoriesShowItem.php?repoID={$row2['repoID']}\" target='_blank'>" . uiTextSnippet('repository') . " $sourcetext ({$row2['repoID']})</a></li>\n";
+                  $linkedTo .= "<li><a href=\"repositoriesShowItem.php?repoID={$row2['repoID']}\" target='_blank'>" . uiTextSnippet('repository') . " $sourcetext ({$row2['repoID']})</a></li>\n";
                   tng_free_result($result2);
                 }
               }
@@ -218,12 +210,12 @@ $headSection->setTitle(uiTextSnippet('notes'));
             }
             echo "<td>$notetext</td>\n";
             echo $treetext;
-            echo "<td>\n<ul>\n$notelinktext\n</ul>\n</td></tr>\n";
+            echo "<td>\n<ul>\n$linkedTo\n</ul>\n</td></tr>\n";
           }
           ?>
         </table>
       <?php
-      echo buildSearchResultPagination($totrows, "admin_notelist.php?searchstring=$searchstring_noquotes&amp;offset", $maxsearchresults, 5);
+      echo buildSearchResultPagination($totrows, "notesBrowse.php?searchstring=$searchstring_noquotes&amp;offset", $maxsearchresults, 5);
       }
       else {
         echo "</table>\n" . uiTextSnippet('norecords');
@@ -246,6 +238,18 @@ $headSection->setTitle(uiTextSnippet('notes'));
       return rval;
     }
 
+    $('#selectall-notes').on('click', function () {
+        $('.selected').prop('checked', true);
+    });
+
+    $('#clearall-notes').on('click', function () {
+        $('.selected').prop('checked', false);
+    });
+
+    $('#deleteselected-notes').on('click', function () {
+        return confirm(textSnippet('confdeleterecs'));
+    });
+  
     function confirmDelete(ID) {
       if (confirm(textSnippet('confdeletenote')))
         deleteIt('note', ID);

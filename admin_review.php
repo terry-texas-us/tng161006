@@ -255,18 +255,10 @@ $headSection->setTitle(uiTextSnippet('review'));
     ?>
     <span class='h4'><?php echo "$persfamID: $name</strong> $teststr $editstr"; ?></span><br>
     <form action="admin_savereview.php" method='post' name='form1'>
-      <table>
-        <tr>
-          <td colspan='2'>&nbsp;</td>
-        </tr>
-        <tr>
-          <td><span class='h4'><?php echo uiTextSnippet('event'); ?>
-              :</span></td>
-          <td><span class='h4'><?php echo $displayval; ?></span></td>
-        </tr>
-        <tr>
-          <td colspan='2'>&nbsp;</td>
-        </tr>
+      <br>
+      <span class='h4'><?php echo uiTextSnippet('event'); ?>:</span>
+      <span class='h4'><?php echo $displayval; ?></span>
+      <table class='table table-sm'>
         <?php
         if ($datefield) {
           echo '<tr><td>' . uiTextSnippet('eventdate') . ": </span></td><td><span>{$evrow[$datefield]}</td></tr>\n";
@@ -287,7 +279,8 @@ $headSection->setTitle(uiTextSnippet('review'));
         if ($factfield) {
           $row['info'] = preg_replace('/\"/', '&#34;', $row['info']);
           echo '<tr><td>' . uiTextSnippet('detail') . ":</td><td>{$row[$factfield]}</td></tr>\n";
-          echo '<tr><td><strong>' . uiTextSnippet('suggested') . ":</strong></td><td colspan='2'><textarea cols=\"60\" rows=\"4\" name=\"newinfo\">{$row['info']}</textarea></td></tr>\n";
+          echo '<tr><td><strong>' . uiTextSnippet('suggested') . ":</strong></td><td colspan='2'>";
+          echo "<textarea class='form-control' name='newinfo' rows='4'>{$row['info']}</textarea></td></tr>\n";
         }
         $row['note'] = preg_replace('/\"/', '&#34;', $row['note']);
         ?>
@@ -313,24 +306,16 @@ $headSection->setTitle(uiTextSnippet('review'));
             ?>
           </td>
         </tr>
-        <tr>
-          <td colspan='2'>&nbsp;</td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('usernotes'); ?>:</td>
-          <td><textarea cols="60" rows='4'
-                                     name="usernote"><?php echo $row['note']; ?></textarea>
-          </td>
-        </tr>
-        <tr>
-          <td colspan='2'>&nbsp;</td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('postdate'); ?>:</td>
-          <td><?php echo "{$row['postdate']} ({$row['user']})"; ?></td>
-        </tr>
       </table>
+      <div class='row'>
+        <div class='col-md-3'><?php echo uiTextSnippet('usernotes'); ?>:</div>
+        <div class='col-md-9'><textarea class='form-control' name='usernote' rows='4'><?php echo $row['note']; ?></textarea>
+        </div>
+      </div>
       <br>
+      <?php echo uiTextSnippet('postdate'); ?>:
+      <?php echo "{$row['postdate']} ({$row['user']})"; ?>
+      <hr>
       <input name='tempID' type='hidden' value="<?php echo $tempID; ?>">
       <input name='type' type='hidden' value="<?php echo $row['type']; ?>">
       <input name='choice' type='hidden' value="<?php echo uiTextSnippet('savedel'); ?>">

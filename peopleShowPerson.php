@@ -772,7 +772,7 @@ $headSection->setTitle($headTitle);
       $innermenu = '<span>' . uiTextSnippet('persinfo') . "</span>\n";
     }
     if ($allowPdf && $rightbranch) {
-      $innermenu .= "<a  class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ind&amp;personID=$personID');return false;\">PDF</a>\n";
+      $innermenu .= "<a  class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('pdfReportOptions.modal.php?type=ind&amp;personID=$personID');return false;\">PDF</a>\n";
     }
     $rightbranch = $org_rightbranch;
 

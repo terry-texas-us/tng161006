@@ -61,6 +61,6 @@
     <?php echo uiTextSnippet('actualtext'); ?>:
   </div>
   <div class='col-md-9'>
-    <textarea name='actualtext' cols='50' rows='5'></textarea>
+    <textarea class='form-control' name='actualtext' rows='5'></textarea>
   </div>    
 </div>

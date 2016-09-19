@@ -39,7 +39,7 @@ $headSection->setTitle(uiTextSnippet('modifyimportsettings'));
     $navList->appendItem([true, 'admin_setup.php', uiTextSnippet('configuration'), 'configuration']);
     $navList->appendItem([true, 'admin_diagnostics.php', uiTextSnippet('diagnostics'), 'diagnostics']);
     $navList->appendItem([true, 'admin_setup.php?sub=tablecreation', uiTextSnippet('tablecreation'), 'tablecreation']);
-    $navList->appendItem([true, '#', uiTextSnippet('importconfigsettings'), 'import']);
+    // $navList->appendItem([true, '#', uiTextSnippet('importconfigsettings'), 'import']);
     echo $navList->build('import');
     ?>
     <form action="admin_updateimportconfig.php" method='post' name='form1'>

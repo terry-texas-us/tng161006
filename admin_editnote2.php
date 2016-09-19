@@ -30,47 +30,36 @@ $headSection->setTitle(uiTextSnippet('modifynote'));
   <section class='container'>
     <?php
     echo $adminHeaderSection->build('misc-modifynote', $message);
-    $navList = new navList('');
-    $navList->appendItem([true, 'admin_misc.php', uiTextSnippet('menu'), 'misc']);
-    $navList->appendItem([true, 'admin_notelist.php', uiTextSnippet('notes'), 'notes']);
-    $navList->appendItem([true, 'admin_whatsnewmsg.php', uiTextSnippet('whatsnew'), 'whatsnew']);
-    $navList->appendItem([true, 'admin_mostwanted.php', uiTextSnippet('mostwanted'), 'mostwanted']);
-    $navList->appendItem([$allowEdit, '#', uiTextSnippet('edit'), 'edit']);
-    echo $navList->build('edit');
     ?>
-    <table class='table table-sm'>
-      <tr>
-        <td>
-          <form action="admin_updatenote2.php" name="form2" method='post' onSubmit="return validateForm(this);">
-            <table>
-              <tr>
-                <td><?php echo uiTextSnippet('note'); ?>:</td>
-                <td>
-                  <textarea wrap='soft' cols="80" rows="30" name="note"><?php echo $row['note']; ?></textarea>
-                </td>
-              </tr>
-              <tr>
-                <td>&nbsp;</td>
-                <td>
-                  <?php
-                  echo "<input name='private' type='checkbox' value='1'";
-                  if ($row['secret']) {
-                    echo ' checked';
-                  }
-                  echo '> ' . uiTextSnippet('private');
-                  ?>
-                </td>
-              </tr>
-            </table>
-            <input name='ID' type='hidden' value="<?php echo $row['nID']; ?>">
-            <input name='xID' type='hidden' value="<?php echo $ID; ?>">
-            <input name='submit' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
-            <input name='cancel' type='button' value="<?php echo uiTextSnippet('cancel'); ?>"
-                onClick="window.location.href = 'admin_notelist.php';">
-          </form>
-        </td>
-      </tr>
-    </table>
+    <br>
+    <form action="admin_updatenote2.php" name="form2" method='post' onSubmit="return validateForm(this);">
+      <div class='row'>
+        <div class='col-sm-12'>
+          <?php echo uiTextSnippet('note'); ?>:
+          <textarea class='form-control' name='note' rows='8'><?php echo $row['note']; ?></textarea>
+        </div>
+      </div>
+      <br>
+      <div class='row'>
+        <div class='col-md-6'>
+          <label class='form-check-inline'>
+          <?php
+            echo "<input class='form-check-input' name='private' type='checkbox' value='1'";
+            echo ($row['secret'] !== 0) ? ' checked>' : '>';
+            echo uiTextSnippet('private');
+            ?>
+          </label>            
+        </div>
+        <input name='ID' type='hidden' value="<?php echo $row['nID']; ?>">
+        <input name='xID' type='hidden' value="<?php echo $ID; ?>">
+        <div class='col-md-2'>
+          <input class='btn btn-outline-primary btn-block' name='submit' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
+        </div>
+        <div class='col-md-2'>
+          <input class='btn btn-block cancel-note' name='cancel' type='button' value="<?php echo uiTextSnippet('cancel'); ?>">
+        </div>
+      </div>
+    </form>
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
@@ -83,6 +72,9 @@ function validateForm(form) {
   }
   return rval;
 }
+$('.cancel-note').on('click', function() {
+  window.location.href = 'notesBrowse.php';
+});
 </script>
 </body>
 </html>

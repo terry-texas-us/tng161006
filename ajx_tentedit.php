@@ -202,7 +202,7 @@ header('Content-type:text/html; charset=' . $session_charset);
           if ($event == 'MARR') {
             echo "<input name='newinfo' type='text' size='40' value=\"$row[$factfield]\">";
           } else {
-            echo "<textarea cols=\"40\" rows=\"3\" name=\"newinfo\">$row[$factfield]</textarea>";
+            echo "<textarea class='form-control' name='newinfo' rows='3'>$row[$factfield]</textarea>";
           }
           echo "</td></tr>\n";
           echo "<tr><td colspan='2'>&nbsp;</td></tr>\n";
@@ -210,7 +210,7 @@ header('Content-type:text/html; charset=' . $session_charset);
         ?>
         <tr>
           <td><span><?php echo uiTextSnippet('notes'); ?>: </span></td>
-          <td><textarea cols="40" rows='3' name="usernote"></textarea></td>
+          <td><textarea class='form-control' name='usernote' rows='3'></textarea></td>
         </tr>
       </table>
     </div> <!-- .modal-body -->

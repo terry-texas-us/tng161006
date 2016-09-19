@@ -101,7 +101,7 @@ $headSection->setTitle(uiTextSnippet('regnewacct'));
           <div class='form-group row'>
             <label class='form-control-label col-sm-12'><?php echo uiTextSnippet('acctcomments'); ?>:</label>
             <div class='col-sm-12'>
-              <textarea class='form-control' rows='4' name="notes"></textarea>
+              <textarea class='form-control' name='notes' rows='4'></textarea>
             </div>
           </div>
 <!--

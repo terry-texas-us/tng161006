@@ -45,74 +45,72 @@ $headSection->setTitle(uiTextSnippet('setup'));
     <?php
     echo $adminHeaderSection->build('setup-' . $sub, $message);
     $navList = new navList('');
-    $navList->appendItem([true, 'admin_setup.php', uiTextSnippet('configuration'), 'configuration']);
+    // $navList->appendItem([true, 'admin_setup.php', uiTextSnippet('configuration'), 'configuration']);
     $navList->appendItem([true, 'admin_diagnostics.php', uiTextSnippet('diagnostics'), 'diagnostics']);
     $navList->appendItem([true, 'admin_setup.php?sub=tablecreation', uiTextSnippet('tablecreation'), 'tablecreation']);
     $internallink = $sub == 'configuration' ? 'config' : 'tables';
     echo $navList->build($sub);
+    if ($sub == 'configuration') {
     ?>
-    <table class='table table-sm'>
-      <tr>
-        <td>
-          <?php
-          if ($sub == 'configuration') {
-            ?>
-            <span><i><?php echo uiTextSnippet('entersysvars'); ?></i></span><br><br>
+      <span><i><?php echo uiTextSnippet('entersysvars'); ?></i></span><br><br>
 
-            <table>
-              <tr>
-                <td>
-                  <h4><img src="img/tng_expand.gif" width="15" height="15"> <a
-                            href="admin_genconfig.php"><b><?php echo uiTextSnippet('configsettings'); ?></b></a>
-                  </h4>
-                  <h4><img src="img/tng_expand.gif" width="15" height="15"> <a
-                            href="admin_pedconfig.php"><b><?php echo uiTextSnippet('pedconfigsettings'); ?></b></a>
-                  </h4>
-                </td>
-                <td style="width:50px">&nbsp;</td>
-                <td>
-                  <h4><img src="img/tng_expand.gif" width="15" height="15"> <a
-                            href="admin_logconfig.php"><b><?php echo uiTextSnippet('logconfigsettings'); ?></b></a>
-                  </h4>
-                  <h4><img src="img/tng_expand.gif" width="15" height="15"> <a
-                            href="admin_importconfig.php"><b><?php echo uiTextSnippet('importconfigsettings'); ?></b></a>
-                  </h4>
-                </td>
-                <td style="width:50px">&nbsp;</td>
-                <td>
-                  <h4><img src="img/tng_expand.gif" width="15" height="15"> <a
-                            href="admin_mapconfig.php"><b><?php echo uiTextSnippet('mapconfigsettings'); ?></b></a>
-                  </h4>
-                  <h4><img src="img/tng_expand.gif" width="15" height="15"> <a
-                            href="admin_templateconfig.php"><b><?php echo uiTextSnippet('templateconfigsettings'); ?></b></a>
-                  </h4>
-                </td>
-              </tr>
-            </table>
-            <br>
-            <p><em><?php echo uiTextSnippet('custvars'); ?></em></p>
-            <?php
-          } elseif ($sub == 'tablecreation') {
-            ?>
-            <span><i><?php echo uiTextSnippet('createdbtables'); ?></i></span><br>
+      <div class='row'>
+        <div class='col-md-4 h4'>
+          <img src="img/tng_expand.gif" width="15" height="15"> <a href="admin_genconfig.php"><?php echo uiTextSnippet('configsettings'); ?></a>
+        </div>
+        <div class='col-md-4 h4'>
+          <img src="img/tng_expand.gif" width="15" height="15"> <a href="admin_logconfig.php"><?php echo uiTextSnippet('logconfigsettings'); ?></a>
+        </div>
+        <div class='col-md-4 h4'>
+          <img src="img/tng_expand.gif" width="15" height="15"> <a href="admin_mapconfig.php"><?php echo uiTextSnippet('mapconfigsettings'); ?></a>
+        </div>
+      </div>
+      <hr>
+      <div class='row'>
+        <div class='col-md-4 h4'>
+          <img src="img/tng_expand.gif" width="15" height="15"> <a href="admin_pedconfig.php"><?php echo uiTextSnippet('pedconfigsettings'); ?></a>
+        </div>
+        <div class='col-md-4 h4'>
+          <img src="img/tng_expand.gif" width="15" height="15"> <a href="admin_importconfig.php"><?php echo uiTextSnippet('importconfigsettings'); ?></a>
+        </div>
+      </div>
+      <hr>
+      <div class='row'>
+        <div class='col-md-4'>
+          <h4><img src="img/tng_expand.gif" width="15" height="15"> <a href="admin_templateconfig.php"><?php echo uiTextSnippet('templateconfigsettings'); ?></a></h4>
+        </div>
+        <div class='col-md-4'>
+          <h4><img src="img/tng_expand.gif" width="15" height="15"> <a href="admin_whatsnewmsg.php"><?php echo uiTextSnippet('whatsnew'); ?></a></h4>
+          <blockquote><?php echo uiTextSnippet('whatsnewblurb'); ?></blockquote>
+        </div>
+        <div class='col-md-4'>
+          <h4><img src="img/tng_expand.gif" width="15" height="15"> <a href="admin_mostwanted.php"><?php echo uiTextSnippet('mostwanted'); ?></a></h4>
+          <blockquote><?php echo uiTextSnippet('mwblurb'); ?></blockquote>
+        </div>
+      </div>
+    <?php
+    } elseif ($sub === 'tablecreation') {
+    ?>
+      <span><i><?php echo uiTextSnippet('createdbtables'); ?></i></span><br>
 
-            <p><em><?php echo uiTextSnippet('tcwarning'); ?></em></p>
-            <form action="">
-              <?php echo uiTextSnippet('collation'); ?>: <input type='text'
-                                                                name="collation"/> <?php echo uiTextSnippet('collationexpl'); ?>
-              <br><br>
-              <input type='button' value="<?php echo uiTextSnippet('createtables'); ?>"
-                     onClick="if (confirm('<?php echo uiTextSnippet('conftabledelete'); ?>'))
-                             window.location.href = 'admin_tablecreate.php';">
-            </form>
-            <?php
-          }
-          ?>
-        </td>
-      </tr>
-    </table>
+      <p><em><?php echo uiTextSnippet('tcwarning'); ?></em></p>
+      <form action=''>
+        <?php echo uiTextSnippet('collation'); ?>: <input type='text' name='collation'> <?php echo uiTextSnippet('collationexpl'); ?>
+        <br>
+        <input id='create-tables' type='button' value='<?php echo uiTextSnippet('createtables'); ?>'>
+      </form>
+    <?php
+    }
+    ?>
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
+  <script>
+    $('#create-tables').on('click', function () {
+        if (confirm('<?php echo uiTextSnippet('conftabledelete'); ?>')) {
+            window.location.href = 'admin_tablecreate.php';
+        }
+    });
+  </script>
 </body>
 </html>

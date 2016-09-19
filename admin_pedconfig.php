@@ -30,7 +30,7 @@ $headSection->setTitle(uiTextSnippet('modifypedsettings'));
     $navList->appendItem([true, 'admin_setup.php', uiTextSnippet('configuration'), 'configuration']);
     $navList->appendItem([true, 'admin_diagnostics.php', uiTextSnippet('diagnostics'), 'diagnostics']);
     $navList->appendItem([true, 'admin_setup.php?sub=tablecreation', uiTextSnippet('tablecreation'), 'tablecreation']);
-    $navList->appendItem([true, '#', uiTextSnippet('pedconfigsettings'), 'ped']);
+    // $navList->appendItem([true, '#', uiTextSnippet('pedconfigsettings'), 'ped']);
     echo $navList->build('ped');
     ?>
     <div class='small'>

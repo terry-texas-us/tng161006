@@ -23,7 +23,7 @@ $headSection->setTitle(uiTextSnippet('addnewtlevent'));
     echo $adminHeaderSection->build('tlevents-addnewtlevent', $message);
     $navList = new navList('');
     $navList->appendItem([true, 'timelineeventsBrowse.php', uiTextSnippet('browse'), 'findtimeline']);
-    $navList->appendItem([$allowAdd, 'timelineeventsAdd.php', uiTextSnippet('add'), 'addtlevent']);
+    // $navList->appendItem([$allowAdd, 'timelineeventsAdd.php', uiTextSnippet('add'), 'addtlevent']);
     echo $navList->build('addtlevent');
     ?>
     <form name='form1' action='timelineeventsAddFormAction.php' method='post' onSubmit="return validateForm();">
@@ -68,20 +68,12 @@ $headSection->setTitle(uiTextSnippet('addnewtlevent'));
         doEventRow(uiTextSnippet('startdt'), 'evday', 'evmonth', 'evyear', uiTextSnippet('yrreq'));
         doEventRow(uiTextSnippet('enddt'), 'endday', 'endmonth', 'endyear', '');
         ?>
-        <tr>
-          <td><?php echo uiTextSnippet('evtitle'); ?>:</td>
-          <td>
-            <input name='evtitle' type='text' size='100' />
-          </td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('evdetail'); ?>:</td>
-          <td>
-            <textarea cols="80" rows="8" name="evdetail"></textarea>
-          </td>
-        </tr>
       </table>
-      <br>&nbsp;
+      <?php echo uiTextSnippet('evtitle'); ?>:
+      <input class='form-control' name='evtitle' type='text' size='100'>
+      <?php echo uiTextSnippet('evdetail'); ?>:
+      <textarea class='form-control' name='evdetail' rows='8'></textarea>
+      <br>
       <input name='submit' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
     </form>
     <?php echo $adminFooterSection->build(); ?>

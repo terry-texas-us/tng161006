@@ -51,7 +51,7 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
     $navList->appendItem([true, 'admin_setup.php', uiTextSnippet('configuration'), 'configuration']);
     $navList->appendItem([true, 'admin_diagnostics.php', uiTextSnippet('diagnostics'), 'diagnostics']);
     $navList->appendItem([true, 'admin_setup.php?sub=tablecreation', uiTextSnippet('tablecreation'), 'tablecreation']);
-    $navList->appendItem([true, '#', uiTextSnippet('configsettings'), 'gen']);
+    // $navList->appendItem([true, '#', uiTextSnippet('configsettings'), 'gen']);
     echo $navList->build('gen');
     ?>
     <div class='small'>
@@ -204,11 +204,11 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
           </tr>
           <tr>
             <td><?php echo uiTextSnippet('sitename'); ?>:</td>
-            <td><input name='sitename' type='text' value="<?php echo $sitename; ?>" size='40'></td>
+            <td><input class='form-control' name='sitename' type='text' value="<?php echo $sitename; ?>" size='40'></td>
           </tr>
           <tr>
             <td><?php echo uiTextSnippet('site_desc'); ?>:</td>
-            <td><textarea name="site_desc" rows='2' cols="65"><?php echo $site_desc; ?></textarea>
+            <td><textarea class='form-control' name='site_desc' rows='2'><?php echo $site_desc; ?></textarea>
             </td>
           </tr>
           <tr>

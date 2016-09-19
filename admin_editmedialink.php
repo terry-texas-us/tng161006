@@ -87,13 +87,13 @@ header('Content-type:text/html; charset=' . $session_charset);
         <tr>
           <td><?php echo uiTextSnippet('alttitle'); ?>:</td>
           <td>
-            <textarea name='altdescription' rows='3' cols='40'><?php echo $row['altdescription']; ?></textarea>
+            <textarea class='form-control' name='altdescription' rows='3'><?php echo $row['altdescription']; ?></textarea>
           </td>
         </tr>
         <tr>
           <td><?php echo uiTextSnippet('altdesc'); ?>:</td>
           <td>
-            <textarea name='altnotes' rows='4' cols='40'><?php echo $row['altnotes']; ?></textarea>
+            <textarea class='form-control' name='altnotes' rows='4'><?php echo $row['altnotes']; ?></textarea>
           </td>
         </tr>
         <tr>

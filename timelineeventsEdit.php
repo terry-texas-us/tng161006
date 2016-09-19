@@ -79,31 +79,20 @@ $headSection->setTitle(uiTextSnippet('modifytlevent'));
               doEventRow(uiTextSnippet('startdt'), $row, 'evday', 'evmonth', 'evyear', uiTextSnippet('yrreq'));
               doEventRow(uiTextSnippet('enddt'), $row, 'endday', 'endmonth', 'endyear', '');
               ?>
-              <tr>
-                <td><?php echo uiTextSnippet('evtitle'); ?>:</td>
-                <td>
-                  <input name='evtitle' type='text' size='100' value="<?php echo $row['evtitle']; ?>"/>
-                </td>
-              </tr>
-              <tr>
-                <td><span><?php echo uiTextSnippet('evdetail'); ?>:</span></td>
-                <td colspan='2'><textarea cols="80" rows="8"
-                                          name="evdetail"><?php echo $row['evdetail']; ?></textarea></td>
-              </tr>
-              <tr>
-                <td colspan='2'>
-                  <span>
-                    <?php
-                    echo uiTextSnippet('onsave') . ':<br>';
-                    echo "<input name='newscreen' type='radio' value='return'> " . uiTextSnippet('savereturn') . "<br>\n";
-                    if ($tng_search_tlevents) {
-                      echo "<input name='newscreen' type='radio' value='none' checked> " . uiTextSnippet('saveback') . "\n";
-                    }
-                    ?>
-                  </span>
-                </td>
-              </tr>
             </table>
+            <?php echo uiTextSnippet('evtitle'); ?>:
+            <input class='form-control' name='evtitle' type='text' size='100' value="<?php echo $row['evtitle']; ?>">
+            <span><?php echo uiTextSnippet('evdetail'); ?>:</span>
+            <textarea class='form-control' name='evdetail' rows='8'><?php echo $row['evdetail']; ?></textarea>
+            <span>
+              <?php
+              echo uiTextSnippet('onsave') . ':<br>';
+              echo "<input name='newscreen' type='radio' value='return'> " . uiTextSnippet('savereturn') . "<br>\n";
+              if ($tng_search_tlevents) {
+                echo "<input name='newscreen' type='radio' value='none' checked> " . uiTextSnippet('saveback') . "\n";
+              }
+              ?>
+            </span>
             <br>
             <input name='tleventID' type='hidden' value="<?php echo $tleventID; ?>">
             <input name='submit' type='submit' value="<?php echo uiTextSnippet('save'); ?>">

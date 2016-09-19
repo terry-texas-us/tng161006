@@ -56,7 +56,7 @@ if ($tngprint) {
     case 'mediaShow':
     case 'browsedocs':
     case 'browseheadstones':
-    case 'browsenotes':
+    case 'notesShow':
     case 'browsephotos':
     case 'repositoriesShow':
     case 'sourcesShow':

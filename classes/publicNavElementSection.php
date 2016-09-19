@@ -38,7 +38,7 @@ class PublicNavElementSection extends NavElementSection {
     $out .= $this->buildListItem('reportsShow.php', 'svg/print.svg', 'reports');
     $out .= $this->buildListItem('statistics.php', 'svg/bar-graph.svg', 'databasestatistics');
     $out .= $this->buildListItem('branchesShow.php', 'svg/flow-branch.svg', 'branches');
-    $out .= $this->buildListItem('browsenotes.php', 'svg/new-message.svg', 'notes');
+    $out .= $this->buildListItem('notesShow.php', 'svg/new-message.svg', 'notes');
     $out .= $this->buildListItem('sourcesShow.php', 'svg/archive.svg', 'sources');
     $out .= $this->buildListItem('repositoriesShow.php', 'svg/building.svg', 'repositories');
 

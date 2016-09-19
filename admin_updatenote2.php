@@ -1,9 +1,8 @@
 <?php
-
 require 'begin.php';
 require 'adminlib.php';
 
-$adminLogin = 1;
+$admin_login = 1;
 require 'checklogin.php';
 
 if (!$allowEdit) {
@@ -16,16 +15,17 @@ require 'adminlog.php';
 
 $note = addslashes($note);
 
-$query = "UPDATE xnotes SET note=\"$note\" WHERE ID=\"$xID\"";
-$result = tng_query($query);
+$query = "UPDATE xnotes SET note='" . $note . "' WHERE ID='" . $xID . "'";
+tng_query($query);
 
 if (!$private) {
   $private = '0';
 }
-$query = "UPDATE notelinks SET secret=\"$private\" WHERE ID=\"$ID\"";
-$result = tng_query($query);
 
-adminwritelog(uiTextSnippet('modifynote') . ": $ID");
+$query = "UPDATE notelinks SET secret='" . $private . "' WHERE ID='" . $ID . "'";
+tng_query($query);
 
-$message = uiTextSnippet('notechanges') . " $ID " . uiTextSnippet('succsaved') . '.';
-header('Location: admin_notelist.php?message=' . urlencode($message));
+adminwritelog(uiTextSnippet('modifynote') . ': ' . $ID . '');
+
+$message = uiTextSnippet('notechanges') . ' ' . $ID . ' ' . uiTextSnippet('succsaved') . '.';
+header('Location: notesBrowse.php?message=' . urlencode($message));

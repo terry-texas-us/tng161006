@@ -17,8 +17,8 @@ function adminMenuItem($destination, $label, $message, $icon) {
 
   return $menu;
 }
-
-$genmsg = $mediamsg = '';
+$genmsg = '';
+$mediamsg = '';
 if ($allowAdd) {
   $genmsg .= uiTextSnippet('add') . ' | ';
   $mediamsg = $genmsg;
@@ -27,17 +27,22 @@ if ($allowAdd) {
 }
 $genmsg .= uiTextSnippet('find2') . ' | ';
 $mediamsg . uiTextSnippet('find2') . ' | ';
+$notesMessage = uiTextSnippet('find2') . ' | ';
+
 if ($allowEdit) {
   $genmsg .= uiTextSnippet('edit') . ' | ';
   $mediamsg .= uiTextSnippet('edit') . ' | ';
+  $notesMessage .= uiTextSnippet('edit') . ' | ';
 } elseif ($allowMediaEdit) {
   $mediamsg .= uiTextSnippet('edit') . ' | ';
 }
+$delete = uiTextSnippet('delete');
 if ($allowDelete) {
-  $genmsg .= uiTextSnippet('delete') . ' | ';
-  $mediamsg .= uiTextSnippet('delete') . ' | ';
+  $genmsg .= $delete . ' | ';
+  $mediamsg .= $delete . ' | ';
+  $notesMessage .= $delete;
 } elseif ($allowMediaDelete) {
-  $mediamsg .= uiTextSnippet('delete') . ' | ';
+  $mediamsg .= $delete . ' | ';
 }
 $sourcesmsg = $peoplemsg = $familiesmsg = $treesmsg = $cemeteriesmsg = $timelinemsg = $placesmsg = $genmsg;
 $mediamsg .= uiTextSnippet('text_sort') . ' | ';
@@ -106,8 +111,8 @@ $headSection->setTitle(uiTextSnippet('administration'));
         echo adminMenuItem('placesBrowse.php', uiTextSnippet('places'), $placesmsg, 'svg/location.svg');
         echo adminMenuItem('timelineeventsBrowse.php', uiTextSnippet('tlevents'), $timelinemsg, 'img/tlevents_icon.gif');
       }
-      if ($allowEdit && $allowAdd && $allowDelete) {
-        echo adminMenuItem('admin_misc.php', uiTextSnippet('misc'), uiTextSnippet('miscitems'), 'img/misc_icon.gif');
+      if ($allowEdit && $allowDelete) {
+        echo adminMenuItem('notesBrowse.php', uiTextSnippet('notes'), $notesMessage, 'svg/new-message.svg');
       }
 
       if ($allowEdit && $allowAdd && $allowDelete && !$assignedbranch) {

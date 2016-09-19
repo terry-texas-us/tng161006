@@ -165,7 +165,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
         <tr>
           <td><?php echo uiTextSnippet('notes'); ?>:</td>
           <td>
-            <textarea wrap='soft' cols="50" rows='5' name="notes"><?php echo $row['notes']; ?></textarea>
+            <textarea class='form-control' name='notes' rows='5'><?php echo $row['notes']; ?></textarea>
           </td>
         </tr>
         <?php

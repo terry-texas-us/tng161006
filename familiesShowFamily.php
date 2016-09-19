@@ -573,7 +573,7 @@ $headSection->setTitle($headTitle);
       $innermenu = '<span>' . uiTextSnippet('faminfo') . "</span>\n";
     }
     if ($allowPdf && $rightbranch) {
-      $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=fam&amp;familyID=$familyID');return false;\">PDF</a>\n";
+      $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('pdfReportOptions.modal.php?type=fam&amp;familyID=$familyID');return false;\">PDF</a>\n";
     }
     echo buildFamilyMenu('family', $familyID);
     echo "<div class='pub-innermenu small'>\n";

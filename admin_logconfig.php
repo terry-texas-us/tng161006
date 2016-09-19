@@ -28,7 +28,7 @@ $headSection->setTitle(uiTextSnippet('modifylogsettings'));
     $navList->appendItem([true, 'admin_setup.php', uiTextSnippet('configuration'), 'configuration']);
     $navList->appendItem([true, 'admin_diagnostics.php', uiTextSnippet('diagnostics'), 'diagnostics']);
     $navList->appendItem([true, 'admin_setup.php?sub=tablecreation', uiTextSnippet('tablecreation'), 'tablecreation']);
-    $navList->appendItem([true, '#', uiTextSnippet('logconfigsettings'), 'log']);
+    // $navList->appendItem([true, '#', uiTextSnippet('logconfigsettings'), 'log']);
     echo $navList->build('log');
     ?>
     <form action="admin_updatelogconfig.php" method='post' name='form1'>

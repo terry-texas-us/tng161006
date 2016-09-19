@@ -66,7 +66,7 @@ if ($xsrcaction) {
   $query = 'DELETE FROM xnotes';
   $modmsg = 'notes';
   $id = 'ID';
-  $location = 'admin_notelist.php';
+  $location = 'notesBrowse.php';
 }
 $modifymsg = uiTextSnippet($modmsg);
 $count = 0;

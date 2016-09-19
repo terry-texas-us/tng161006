@@ -30,7 +30,7 @@ $headSection->setTitle(uiTextSnippet('diagnostics'));
     echo $adminHeaderSection->build('setup-diagnostics', $message);
     $navList = new navList('');
     $navList->appendItem([true, 'admin_setup.php', uiTextSnippet('configuration'), 'configuration']);
-    $navList->appendItem([true, 'admin_diagnostics.php', uiTextSnippet('diagnostics'), 'diagnostics']);
+    // $navList->appendItem([true, 'admin_diagnostics.php', uiTextSnippet('diagnostics'), 'diagnostics']);
     $navList->appendItem([true, 'admin_setup.php?sub=tablecreation', uiTextSnippet('tablecreation'), 'tablecreation']);
     echo $navList->build('diagnostics');
     ?>

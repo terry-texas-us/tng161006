@@ -69,7 +69,7 @@ header('Content-type:text/html; charset=' . $session_charset);
       </tr>
       <tr>
         <td><?php echo uiTextSnippet('detail'); ?>:</td>
-        <td><textarea name="info" rows='4' cols="40"></textarea></td>
+        <td><textarea class='form-control' name='info' rows='4'></textarea></td>
       </tr>
     </table>
     <?php echo displayToggle('plus9', 0, 'more', uiTextSnippet('more'), ''); ?>

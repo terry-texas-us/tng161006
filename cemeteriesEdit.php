@@ -162,7 +162,7 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
         <tr>
           <td><?php echo uiTextSnippet('notes'); ?>:</td>
           <td>
-            <textarea wrap='soft' cols="60" rows="8" name="notes"><?php echo $row['notes']; ?></textarea>
+            <textarea class='form-control' name='notes' rows='4'><?php echo $row['notes']; ?></textarea>
           </td>
         </tr>
         <tr>

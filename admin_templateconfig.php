@@ -41,7 +41,7 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
     $navList->appendItem([true, 'admin_setup.php', uiTextSnippet('configuration'), 'configuration']);
     $navList->appendItem([true, 'admin_diagnostics.php', uiTextSnippet('diagnostics'), 'diagnostics']);
     $navList->appendItem([true, 'admin_setup.php?sub=tablecreation', uiTextSnippet('tablecreation'), 'tablecreation']);
-    $navList->appendItem([true, '#', uiTextSnippet('templateconfigsettings'), 'template']);
+    // $navList->appendItem([true, '#', uiTextSnippet('templateconfigsettings'), 'template']);
     echo $navList->build('template');
     ?>
     <form action="admin_updatetemplateconfig.php" method='post' name="form1" ENCTYPE="multipart/form-data">
@@ -139,7 +139,7 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
               $sections[$n] .= "</td>\n";
               $sections[$n] .= '<td>';
               if ($type == 'textarea') {
-                $sections[$n] .= "<textarea name=\"form_$key\" id=\"form_$key\" rows=\"5\" cols=\"80\">$value</textarea>\n";
+                $sections[$n] .= "<textarea class='form-control' id=\"form_$key\" name=\"form_$key\" rows='5'>$value</textarea>\n";
               } elseif ($label == 'titlechoice') {
                 $sections[$n] .= "<input id=\"form_{$key}_image\" name=\"form_$key\" type='radio' value=\"image\"";
                 if ($value == 'image') {
@@ -235,7 +235,7 @@ $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
         var newtr = table.insertRow(row.rowIndex + 1);
         var label = "&nbsp;&nbsp;" + $('#' + rowID + ' :first-child').html();
         insertCell(newtr, 0, label + "<br>&nbsp;&nbsp;&nbsp;(" + langDisplay + ")");
-        var inputstr = type === "textarea" ? "<textarea name=\"form_" + rowID + '_' + langVal + "\" id=\"form_" + rowID + '_' + langVal + "\" rows=\"3\" cols=\"80\"></textarea>" : "<input class='longfield' id=\"form_" + rowID + '_' + langVal + "\" name=\"form_" + rowID + '_' + langVal + "\" type='text'>";
+        var inputstr = type === "textarea" ? "<textarea class='form-control' name=\"form_" + rowID + '_' + langVal + "\" id=\"form_" + rowID + '_' + langVal + "\" rows=\"3\" cols=\"80\"></textarea>" : "<input class='longfield' id=\"form_" + rowID + '_' + langVal + "\" name=\"form_" + rowID + '_' + langVal + "\" type='text'>";
         insertCell(newtr, 1, inputstr);
         insertCell(newtr, 2, '');
       }

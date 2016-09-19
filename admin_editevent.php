@@ -28,9 +28,8 @@ header('Content-type:text/html; charset=' . $session_charset);
 ?>
 <form id='form1' name='form1' action='' method='post' onSubmit="return updateEvent(this);">
   <header class='modal-header'>
-    <h4><?php echo uiTextSnippet('modifyevent'); ?> |
-      <a href='#' onclick="return openHelp('<?php echo $helplang; ?>/events_help.php');"><?php echo uiTextSnippet('help'); ?></a>
-    </h4>
+    <h5><?php echo uiTextSnippet('modifyevent'); ?></h5>
+    <a href='#' onclick="return openHelp('<?php echo $helplang; ?>/events_help.php');"><?php echo uiTextSnippet('help'); ?></a>
   </header>
   <div class='modal-body'>
     <table class='table table-sm'>
@@ -57,7 +56,7 @@ header('Content-type:text/html; charset=' . $session_charset);
       </tr>
       <tr>
         <td><?php echo uiTextSnippet('detail'); ?>:</td>
-        <td><textarea name="info" rows='4' cols="40"><?php echo $row['info']; ?></textarea>
+        <td><textarea class='form-control' name='info' rows='4'><?php echo $row['info']; ?></textarea>
         </td>
       </tr>
     </table>

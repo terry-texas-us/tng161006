@@ -3,20 +3,24 @@ require 'tng_begin.php';
 
 require 'functions.php';
 
-function doNoteSearch($instance, $pagenav) {
-  global $notesearch;
-
-  $str = "<div>\n";
-  $str .= buildFormElement('browsenotes', 'get', "notesearch$instance");
-  $str .= "<input name='notesearch' type='text' value=\"$notesearch\" /> \n";
-  $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . '" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-  $str .= $pagenav;
+function doNoteSearch($notesearch) {
+  $html .= buildFormElement('notesShow', 'get', 'notesearch1');
+  $html .= "<div class='row'>\n";
+  $html .= "<div class='col-sm-6'>";
+  $html .= "<input class='form-control' name='notesearch' type='text' value='$notesearch'>";
+  $html .= "</div>\n";
+  $html .= "<div class='col-sm-2'>";
+  $html .= "<input class='btn btn-outline-primary' type='submit' value='" . uiTextSnippet('search') . "'>";
+  $html .= "</div>\n";
+  $html .= "<div class='col-sm-4'>";
   if ($notesearch) {
-    $str .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='browsenotes.php'>" . uiTextSnippet('browseallnotes') . '</a>';
+    $html .= "<a href='notesShow.php'>" . uiTextSnippet('browseallnotes') . '</a>';
   }
-  $str .= "</form></div>\n";
+  $html .= "</div>\n";
+  $html .= "</div>\n";
+  $html .= "</form>\n";
 
-  return $str;
+  return $html;
 }
 
 $max_browsenote_pages = 5;
@@ -28,26 +32,26 @@ if ($offset) {
   $newoffset = '';
   $page = 1;
 }
-$wherestr = 'WHERE xnotes.ID = notelinks.xnoteID';
+$whereClause = 'WHERE xnotes.ID = notelinks.xnoteID';
 
 if (!$allowPrivate) {
-  $wherestr .= ' AND notelinks.secret != "1"';
+  $whereClause .= ' AND notelinks.secret != "1"';
 }
 if ($notesearch) {
   $notesearch2 = addslashes($notesearch);
   $notesearch = cleanIt($notesearch);
 
-  $wherestr .= $wherestr ? ' AND' : 'WHERE';
-  $wherestr .= " match(xnotes.note) against( \"$notesearch2\" in boolean mode)";
+  $whereClause .= $whereClause ? ' AND' : 'WHERE';
+  $whereClause .= " MATCH(xnotes.note) AGAINST('$notesearch2' IN BOOLEAN MODE)";
 }
 
-$query = "SELECT xnotes.ID AS ID, xnotes.note AS note, notelinks.persfamID AS personID FROM (xnotes, notelinks) $wherestr ORDER BY note LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT xnotes.ID AS ID, xnotes.note AS note, notelinks.persfamID AS personID FROM (xnotes, notelinks) $whereClause ORDER BY note LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
 
 if ($numrows == $maxsearchresults || $offsetplus > 1) {
-  $query = "SELECT count(xnotes.ID) AS scount FROM (xnotes, notelinks) $wherestr";
+  $query = "SELECT count(xnotes.ID) AS scount FROM (xnotes, notelinks) $whereClause";
   $result2 = tng_query($query);
   $row = tng_fetch_assoc($result2);
   $totrows = $row['scount'];
@@ -56,7 +60,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 }
 $numrowsplus = $numrows + $offset;
 
-$logstring = "<a href=\"browsenotes.php?offset=$offset&amp;notesearch=" . htmlentities(stripslashes($notesearch), ENT_QUOTES) . '">' . xmlcharacters(uiTextSnippet('notes')) . '</a>';
+$logstring = "<a href=\"notesShow.php?offset=$offset&amp;notesearch=" . htmlentities(stripslashes($notesearch), ENT_QUOTES) . '">' . xmlcharacters(uiTextSnippet('notes')) . '</a>';
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -75,24 +79,24 @@ $headSection->setTitle(uiTextSnippet('notes'));
     <h2><img class='icon-md' src='svg/new-message.svg'><?php echo uiTextSnippet('notes'); ?></h2>
     <br clear='left'>
     <?php
+    echo doNoteSearch($notesearch);
+    echo "<br>\n";
     if ($totrows) {
       echo '<p>' . uiTextSnippet('matches') . ' ' . number_format($offsetplus) . ' ' . uiTextSnippet('to') . ' ' . number_format($numrowsplus) . ' ' . uiTextSnippet('of') . ' ' . number_format($totrows) . '</p>';
     }
-
-    $pagenav = buildSearchResultPagination($totrows, "browsenotes.php?notesearch=$notesearch&amp;offset", $maxsearchresults, $max_browsenote_pages);
-    echo doNoteSearch(1, $pagenav);
-    echo "<br>\n";
     ?>
       <table class='table table-sm'>
-        <tr>
-          <th></th>
-          <th><?php echo uiTextSnippet('notes'); ?></th>
-          <th><?php echo uiTextSnippet('indlinked'); ?></th>
-        </tr>
+        <thead>
+          <tr>
+            <th></th>
+            <th><?php echo uiTextSnippet('notes'); ?></th>
+            <th width='20%'><?php echo uiTextSnippet('indlinked'); ?></th>
+          </tr>
+        </thead>
         <?php
         $i = $offsetplus;
         while ($nrow = tng_fetch_assoc($result)) {
-          $notelinktext = '';
+          $linkedTo = '';
           $noneliving = 1;
           $noneprivate = 1;
           $query2 = $query;
@@ -100,7 +104,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
           if ($nrow['secret']) {
             $nrow['private'] = 1;
           }
-          if (!$notelinktext) {
+          if (!$linkedTo) {
             $query = "SELECT * FROM people WHERE personID = '{$nrow['personID']}'";
             $result2 = tng_query($query);
             if (tng_num_rows($result2) == 1) {
@@ -129,12 +133,12 @@ $headSection->setTitle(uiTextSnippet('notes'));
                 $noneliving = 0;
               }
 
-              $notelinktext .= "<a href=\"peopleShowPerson.php?personID={$row2['personID']}\">" . getNameRev($row2) . " ({$row2['personID']})</a>\n<br>\n";
+              $linkedTo .= "<a href=\"peopleShowPerson.php?personID={$row2['personID']}\">" . getNameRev($row2) . "</a>\n<br>\n";
               tng_free_result($result2);
             }
           }
 
-          if (!$notelinktext) {
+          if (!$linkedTo) {
             $query = "SELECT * FROM families WHERE familyID = '{$nrow['personID']}'";
             $result2 = tng_query($query);
             if (tng_num_rows($result2) == 1) {
@@ -149,25 +153,25 @@ $headSection->setTitle(uiTextSnippet('notes'));
               if (!$row2['allow_living']) {
                 $noneliving = 0;
               }
-              $notelinktext .= "<a href=\"familiesShowFamily.php?familyID={$row2['familyID']}\" target='_blank'>" . uiTextSnippet('family') . " {$row2['familyID']}</a>\n<br>\n";
+              $linkedTo .= "<a href=\"familiesShowFamily.php?familyID={$row2['familyID']}\" target='_blank'>" . uiTextSnippet('family') . " ({$row2['familyID']})</a>\n<br>\n";
               tng_free_result($result2);
             }
           }
-          if (!$notelinktext) {
+          if (!$linkedTo) {
             $query = "SELECT * FROM sources WHERE sourceID = '{$nrow['personID']}'";
             $result2 = tng_query($query);
             if (tng_num_rows($result2) == 1) {
               $row2 = tng_fetch_assoc($result2);
-              $notelinktext .= "<a href=\"sourcesShowSource.php?sourceID={$row2['sourceID']}\" target='_blank'>" . uiTextSnippet('source') . " $sourcetext ({$row2['sourceID']})</a>\n<br>\n";
+              $linkedTo .= "<a href=\"sourcesShowSource.php?sourceID={$row2['sourceID']}\" target='_blank'>" . uiTextSnippet('source') . " $sourcetext ({$row2['sourceID']})</a>\n<br>\n";
               tng_free_result($result2);
             }
           }
-          if (!$notelinktext) {
+          if (!$linkedTo) {
             $query = "SELECT * FROM repositories WHERE repoID = '{$nrow['personID']}'";
             $result2 = tng_query($query);
             if (tng_num_rows($result2) == 1) {
               $row2 = tng_fetch_assoc($result2);
-              $notelinktext .= "<a href=\"repositoriesShowItem.php?repoID={$row2['repoID']}\" target='_blank'>" . uiTextSnippet('repository') . " $sourcetext ({$row2['repoID']})</a>\n<br>\n";
+              $linkedTo .= "<a href=\"repositoriesShowItem.php?repoID={$row2['repoID']}\" target='_blank'>" . uiTextSnippet('repository') . " $sourcetext ({$row2['repoID']})</a>\n<br>\n";
               tng_free_result($result2);
             }
           }
@@ -178,16 +182,17 @@ $headSection->setTitle(uiTextSnippet('notes'));
           } else {
             echo uiTextSnippet('livingnote');
           }
-          echo '&nbsp;</td>';
-          echo "<td width=\"175\">$notelinktext&nbsp;</td></tr>\n";
+          echo '</td>';
+          echo "<td>$linkedTo&nbsp;</td></tr>\n";
           $i++;
         }
         tng_free_result($result);
         ?>
-      </table><br>
+      </table>
     <?php
+    $pagenav = buildSearchResultPagination($totrows, "notesShow.php?notesearch=$notesearch&amp;offset", $maxsearchresults, $max_browsenote_pages);
     if ($pagenav || $notesearch) {
-      echo doNoteSearch(2, $pagenav);
+      echo $pagenav;
       echo '<br>';
     }
     ?>

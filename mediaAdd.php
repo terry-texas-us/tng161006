@@ -114,7 +114,7 @@ $headSection->setTitle(uiTextSnippet('addnewmedia'));
           <div class='col-sm-12'>
             <span><?php echo uiTextSnippet('bodytext'); ?>:</span>
             <br>
-            <textarea class='form-control' id='bodytext' name='bodytext' wrap='soft'></textarea>
+            <textarea class='form-control' id='bodytext' name='bodytext'></textarea>
           </div>
         </div>
         <?php if (function_exists('imageJpeg')) { ?>
@@ -190,13 +190,13 @@ $headSection->setTitle(uiTextSnippet('addnewmedia'));
         <div class='row'>
           <div class='col-sm-12'>
             <?php echo uiTextSnippet('title'); ?>:
-            <textarea class='form-control' name='description' wrap='soft'></textarea>
+            <textarea class='form-control' name='description'></textarea>
           </div>
         </div>
         <div class='row'>
           <div class='col-sm-12'>
             <?php echo uiTextSnippet('description'); ?>:
-            <textarea class='form-control' name='notes' wrap='soft'></textarea>
+            <textarea class='form-control' name='notes'></textarea>
           </div>
         </div>
         <div class='row'>
@@ -236,7 +236,7 @@ $headSection->setTitle(uiTextSnippet('addnewmedia'));
         <div class='row' id='hsplotrow'>
           <div class='col-sm-12'>
             <?php echo uiTextSnippet('plot'); ?>:
-            <textarea class='form-control' name='plot' wrap='soft'></textarea>
+            <textarea class='form-control' name='plot'></textarea>
           </div>
         </div>
         <div class='row' id='hsstatrow'>

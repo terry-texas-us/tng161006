@@ -395,7 +395,7 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
     $innermenu .= "<a class='navigation-item' href='ahnentafel.php?personID=$personID&amp;parentset=$parentset&amp;generations=$generations' id='ahnlnk'>" . uiTextSnippet('ahnentafel') . "</a>\n";
     $innermenu .= "<a class='navigation-item' href='extrastree.php?personID=$personID&amp;parentset=$parentset&amp;showall=1&amp;generations=$generations' id='extralnk'>" . uiTextSnippet('media') . "</a>\n";
     if ($generations <= 6 && $allowPdf && $rightbranch) {
-      $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('rpt_pdfform.php?pdftype=ped&amp;personID=' + firstperson + '&amp;generations=$generations');return false;\">PDF</a>\n";
+      $innermenu .= "<a class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('pdfReportOptions.modal.php?type=ped&amp;personID=' + firstperson + '&amp;generations=$generations');return false;\">PDF</a>\n";
     }
     beginFormElement('pedigree', '', 'form1', 'form1');
     echo buildPersonMenu('pedigree', $personID);

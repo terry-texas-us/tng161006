@@ -28,22 +28,21 @@ header('Content-type:text/html; charset=' . $session_charset);
 <div id='more'>
   <form name='editmostwanted' action='' onsubmit="return updateMostWanted(this);">
     <header class='modal-header'>
-      <h4><?php echo uiTextSnippet('mostwanted') . ': ' . $typemsg; ?> |
-        <a href='#' onclick="return openHelp('<?php echo $helplang; ?>/mostwanted_help.php');"><?php echo uiTextSnippet('help'); ?></a>
-      </h4>
+      <h5><?php echo uiTextSnippet('mostwanted') . ': ' . $typemsg; ?></h5>
+      <a href='#' onclick="return openHelp('<?php echo $helplang; ?>/mostwanted_help.php');"><?php echo uiTextSnippet('help'); ?></a>
     </header>
     <div class='modal-body'>
       <table class='table table-sm'>
         <tr>
           <td><?php echo uiTextSnippet('title'); ?>:</td>
           <td>
-            <input name='title' type='text' maxlength='128' value="<?php echo $row['title']; ?>">
+            <input class='form-control' name='title' type='text' maxlength='128' value="<?php echo $row['title']; ?>">
           </td>
         </tr>
         <tr>
           <td><?php echo uiTextSnippet('description'); ?>:</td>
           <td>
-            <textarea name='description' rows='7'><?php echo $row['description']; ?></textarea>
+            <textarea class='form-control' name='description' rows='7'><?php echo $row['description']; ?></textarea>
           </td>
         </tr>
         <tr>

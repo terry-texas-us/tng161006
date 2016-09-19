@@ -96,7 +96,7 @@ $headSection->setTitle(uiTextSnippet('addnewplace'));
         <tr>
           <td><?php echo uiTextSnippet('notes'); ?>:</td>
           <td>
-            <textarea wrap='soft' cols="50" rows='5' name="notes"></textarea>
+            <textarea class='form-control' name='notes' rows='5'></textarea>
           </td>
         </tr>
       </table>

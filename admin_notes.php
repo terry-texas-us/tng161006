@@ -30,6 +30,7 @@ if ($eventtype['display']) {
 } else {
   $eventtypedesc = uiTextSnippet('general');
 }
+
 tng_free_result($eventtypes);
 
 $helplang = findhelp('notes_help.php');
@@ -44,91 +45,87 @@ $notecount = tng_num_rows($notelinks);
 <div id='notelist'<?php if (!$notecount) {echo " style='display: none'";} ?>>
   <form name='form1'>
     <header class='modal-header'>
-      <h4><?php echo uiTextSnippet('notes') . ": $eventtypedesc"; ?></h4>
-      <p>
+      <h5><?php echo uiTextSnippet('notes') . ": $eventtypedesc"; ?></h5>
+      <span>
         <a href='#' onclick="return openHelp('<?php echo $helplang; ?>/notes_help.php');"><?php echo uiTextSnippet('help'); ?></a>
-      </p>
+      </span>
     </header>
     <div class='modal-body'>
-      <p>
-        <?php if ($allowAdd) { ?>
-          <input type='button' value="  <?php echo uiTextSnippet('addnew'); ?>  "
-                 onclick="document.form2.reset(); gotoSection('notelist', 'addnote');" />
-        <?php } ?>
-        <input type='button' value="  <?php echo uiTextSnippet('finish'); ?>  " onclick="tnglitbox.remove();" />
-      </p>
       <table class='table table-sm' id='notestbl' <?php if (!$notecount) {echo " style='display: none'";} ?>>
         <thead>
           <tr>
             <th><?php echo uiTextSnippet('text_sort'); ?></th>
-            <th><?php echo uiTextSnippet('action'); ?></th>
+            <th width='15%'><?php echo uiTextSnippet('action'); ?></th>
             <th><?php echo uiTextSnippet('note'); ?></th>
           </tr>
         </thead>
-      </table>
-      <div id='notes' style='width: 460px;'>
-        <?php
-        if ($notelinks && $notecount) {
 
-          while ($note = tng_fetch_assoc($notelinks)) {
-            $citquery = 'SELECT citationID FROM citations WHERE ';
-            if ($note['noteID']) {
-              $citquery .= "((persfamID = \"$persfamID\" AND eventID = \"N{$note['ID']}\") OR persfamID = \"{$note['noteID']}\")";
-            } else {
-              $citquery .= "persfamID = \"$persfamID\" AND eventID = \"N{$note['ID']}\"";
-            }
-            $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
-            $iconColor = tng_num_rows($citresult) ? 'icon-info' : 'icon-muted';
-            tng_free_result($citresult);
+        <div id='notes' style='width: 460px;'>
+          <?php
+          if ($notelinks && $notecount) {
 
-            $note['note'] = cleanIt($note['note']);
-            $truncated = truncateIt($note['note'], 75);
-            $actionstr = '';
-            if ($allowEdit) {
-              $actionstr .= "<a href='#' onclick=\"return editNote({$note['ID']});\" title='" . uiTextSnippet('edit') . "'>\n";
-              $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
-              $actionstr .= '</a>';
+            while ($note = tng_fetch_assoc($notelinks)) {
+              $citquery = 'SELECT citationID FROM citations WHERE ';
+              if ($note['noteID']) {
+                $citquery .= "((persfamID = \"$persfamID\" AND eventID = \"N{$note['ID']}\") OR persfamID = \"{$note['noteID']}\")";
+              } else {
+                $citquery .= "persfamID = \"$persfamID\" AND eventID = \"N{$note['ID']}\"";
+              }
+              $citresult = tng_query($citquery) or die(uiTextSnippet('cannotexecutequery') . ": $citquery");
+              $iconColor = tng_num_rows($citresult) ? 'icon-info' : 'icon-muted';
+              tng_free_result($citresult);
+
+              $note['note'] = cleanIt($note['note']);
+              $truncated = truncateIt($note['note'], 256);
+              $actionstr = '';
+              if ($allowEdit) {
+                $actionstr .= "<a href='#' onclick=\"return editNote({$note['ID']});\" title='" . uiTextSnippet('edit') . "'>\n";
+                $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
+                $actionstr .= '</a>';
+              }
+              if ($allowDelete) {
+                $actionstr .= "<a href='#' onclick=\"return deleteNote({$note['ID']},'$persfamID','$eventID');\" title='" . uiTextSnippet('delete') . "'>\n";
+                $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
+                $actionstr .= '</a>';
+              }
+              $citesLink = "<a id=\"citesiconN{$note['ID']}\" href='#' onclick=\"return showCitationsInside('N{$note['ID']}','{$note['noteID']}', '$persfamID');\" title='" . uiTextSnippet('citations') . "'>\n";
+              $citesLink .= "<img class='icon-sm icon-citations $iconColor' data-src='svg/archive.svg'>\n";
+              $citesLink .= '</a>';
+              echo "<div class=\"sortrow\" id=\"notes_{$note['ID']}\">";
+
+              echo "<tr id=\"row_{$note['ID']}\">";
+              echo "<td class='dragarea'>\n";
+              echo "<img src='img/admArrowUp.gif' alt=''><br>\n";
+              echo "<img src='img/admArrowDown.gif' alt=''>\n";
+              echo '</td>';
+              echo "<td>$actionstr$citesLink</td>";
+              echo "<td>$truncated</td>";
+              echo "</tr>\n";
+              echo "</div>\n";
             }
-            if ($allowDelete) {
-              $actionstr .= "<a href='#' onclick=\"return deleteNote({$note['ID']},'$persfamID','$eventID');\" title='" . uiTextSnippet('delete') . "'>\n";
-              $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
-              $actionstr .= '</a>';
-            }
-            $citesLink = "<a id=\"citesiconN{$note['ID']}\" href='#' onclick=\"return showCitationsInside('N{$note['ID']}','{$note['noteID']}', '$persfamID');\" title='" . uiTextSnippet('citations') . "'>\n";
-            $citesLink .= "<img class='icon-sm icon-citations $iconColor' data-src='svg/archive.svg'>\n";
-            $citesLink .= '</a>';
-            echo "<div class=\"sortrow\" id=\"notes_{$note['ID']}\">";
-              echo "<table class='table table-sm'>";
-                echo "<tr id=\"row_{$note['ID']}\">";
-                  echo "<td class='dragarea'>\n";
-                    echo "<img src='img/admArrowUp.gif' alt=''><br>\n";
-                    echo "<img src='img/admArrowDown.gif' alt=''>\n";
-                  echo '</td>';
-                  echo "<td>$actionstr$citesLink</td>";
-                  echo "<td>$truncated</td>";
-                echo "</tr>\n";
-              echo "</table>\n";
-            echo "</div>\n";
+            tng_free_result($notelinks);
           }
-          tng_free_result($notelinks);
-        }
-        ?>
-      </div>
+          ?>
+        </div>
+      </table>
     </div> <!-- .modal-body -->
-    <footer class='modal-footer'></footer>
+    <footer class='modal-footer'>
+      <?php if ($allowAdd) { ?>
+        <input class='btn btn-outline-secondary' type='button' value="<?php echo uiTextSnippet('addnew'); ?>" onclick="document.form2.reset(); gotoSection('notelist', 'addnote');">
+      <?php } ?>
+      <input class='btn btn-outline-primary' type='button' value="<?php echo uiTextSnippet('finish'); ?>" onclick="tnglitbox.remove();">
+    </footer>
   </form>
 </div>
 <div id='addnote'<?php if ($notecount) {echo " style='display: none'";} ?>>
   <form name='form2' action='' onSubmit="return addNote(this);">
     <header class='modal-header'>
-      <h4><?php echo uiTextSnippet('addnewnote'); ?> |
-        <a href="#"
-           onclick="return openHelp('<?php echo $helplang; ?>/notes_help.php');"><?php echo uiTextSnippet('help'); ?></a>
-      </h4>
+      <h5><?php echo uiTextSnippet('addnewnote'); ?></h5>
+      <span><a href="#" onclick="return openHelp('<?php echo $helplang; ?>/notes_help.php');"><?php echo uiTextSnippet('help'); ?></a></span>
     </header>
     <div class='modal-body'>
       <?php echo uiTextSnippet('note'); ?>:
-      <textarea class='form-control' name='note' wrap='soft'></textarea>
+      <textarea class='form-control' name='note'></textarea>
       <label>
         <?php echo uiTextSnippet('private'); ?>
         <input class='form-control' name='private' type='checkbox' value='1'>
