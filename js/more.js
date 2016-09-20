@@ -1,5 +1,5 @@
 // [ts] global functions and variables for jsLint
-/*global ModalDialog, SVGInjector */
+/*global SVGInjector */
 
 var tnglitbox;
 
@@ -28,7 +28,7 @@ $('.event-more').on('click', function () {
     var eventId = $(this).data('eventId'),
         persfamId = $(this).data('persfamId');
 
-    tnglitbox = new ModalDialog('admin_editmore.php?eventID=' + eventId + '&persfamID=' + persfamId);
+    tnglitbox = new ModalDialog('moreEdit.modal.php?eventID=' + eventId + '&persfamID=' + persfamId);
     return false;
 });
 

@@ -1,5 +1,6 @@
 // [ts] global functions and/or variables for JSLint
-/*global ModalDialog, textSnippet, updateMediaOrder */
+/*global updateMediaOrder */
+
 var album, mediacount, remove_text, thumbmaxw, tnglitbox;
 
 function validateForm() {
@@ -14,8 +15,8 @@ function validateForm() {
 
 function toggleHeadstoneCriteria(form, mediatypeID) {
     'use strict';
-    var hsstatus = $('#hsstatrow');
-    var cemrow = $('#cemrow');
+    var hsstatus = $('#hsstatrow'),
+        cemrow = $('#cemrow');
     if (mediatypeID === 'headstones') {
         $('#newmedia').css('height', '380px');
         cemrow.show();
@@ -90,13 +91,11 @@ function getMoreMedia(searchstring, mediatypeID, hsstat, cemeteryID, offset, pag
 
 function finishAddToAlbum(req) {
     'use strict';
-    var newrow;
-
-    var pairs = req.split('&');
-    var media = parseInt(pairs[0], 10);
-    var albumlink = parseInt(pairs[1], 10);
-
-    var newnum = $('.sortrow').length + 1;
+    var newrow,
+        pairs = req.split('&'),
+        media = parseInt(pairs[0], 10),
+        albumlink = parseInt(pairs[1], 10),
+        newnum = $('.sortrow').length + 1;
 
     newrow = '<table width="100%"><tr>\n';
     newrow += '<td class="dragarea">\n';
@@ -193,6 +192,6 @@ function removeFromAlbum(media, albumlink) {
 
 function openAlbumMediaFind() {
     'use strict';
-    tnglitbox = new ModalDialog('findalbummedia.php', {size: 'modal-lg'});
+    tnglitbox = new ModalDialog('albumsMediaFind.modal.php', {size: 'modal-lg'});
     return false;
 }

@@ -115,7 +115,7 @@ $headSection->setTitle(uiTextSnippet('placelist'));
             <?php
             for ($i = 0; $i < $cols; $i++) {
               if ($i) {
-                echo "<td class=\"table-gutter\">&nbsp;</td>\n";
+                echo "<td class='table-gutter'>&nbsp;</td>\n";
               }
               ?>
               <td>

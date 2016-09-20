@@ -648,7 +648,7 @@ function showEvent($data) {
     $output .= $mediaoutput;
   }
   if ($output) {
-    $editicon = $tentative_edit && $data['event'] && $data['event'] != 'NAME' ? "<img class='icon-sm' src='svg/new-message.svg' alt=\"" . uiTextSnippet('editevent') . '" title="' . uiTextSnippet('editevent') . "\" onclick=\"tnglitbox = new ModalDialog('ajx_tentedit.php?persfamID={$data['entity']}&amp;type={$data['type']}&amp;event={$data['event']}&amp;title={$data['text']}');\" class=\"fakelink\">" : '';
+    $editicon = $tentative_edit && $data['event'] && $data['event'] != 'NAME' ? "<img class='icon-sm' src='svg/new-message.svg' alt=\"" . uiTextSnippet('editevent') . '" title="' . uiTextSnippet('editevent') . "\" onclick=\"tnglitbox = new ModalDialog('tentEdit.modal.php?persfamID={$data['entity']}&amp;type={$data['type']}&amp;event={$data['event']}&amp;title={$data['text']}');\" class=\"fakelink\">" : '';
     $toggleicon = $data['collapse'] && $rows > 1 ? "<img src=\"img/tng_sort_desc.gif\" class=\"toggleicon\" id=\"t{$eventcounter}\" title=\"" . uiTextSnippet('expand') . '">' : '';
     $class = $cellid ? 'indleftcol' : '';
     $rowspan = $rows > 1 && !$data['collapse'] ? " rowspan=\"$rows\"" : '';
@@ -705,7 +705,7 @@ function doMediaSection($entity, $medialist, $albums) {
       if ($media) {
         $media .= "<br>\n";
       }
-      $media .= "<table class=\"table tfixed\">\n";
+      $media .= "<table class='table table-fixed'>\n";
       $media .= "<col class=\"labelcol\"/><col style=\"width:{$datewidth}px\"/><col/>\n";
       $media .= "$newmedia\n</table>\n";
     }
@@ -716,7 +716,7 @@ function doMediaSection($entity, $medialist, $albums) {
     if ($media) {
       $media .= "<br>\n";
     }
-    $media .= "<table class=\"table tfixed\">\n";
+    $media .= "<table class='table table-fixed'>\n";
     $media .= "<col class=\"labelcol\"/><col style=\"width:{$datewidth}px\"/><col/>\n";
     $media .= "$albumtext\n</table>\n";
   }

@@ -11,7 +11,7 @@ function editPerson(personID, slot, gender) {
             spouseorder = 'wifeorder';
         }
         persfamID = personID;
-        tnglitbox = new ModalDialog('ajx_editperson.php?personID=' + personID + '&slot=' + slot, {size: 'modal-lg'});
+        tnglitbox = new ModalDialog('peopleEdit.modal.php?personID=' + personID + '&slot=' + slot, {size: 'modal-lg'});
         startSortPerson();
     }
     return false;
@@ -24,7 +24,7 @@ function newPerson(gender, type, father, familyID) {
     allow_cites = false;
     allow_notes = false;
     newpersongender = gender;
-    nplitbox = new ModalDialog('ajx_newperson.php?gender=' + gender + '&type=' + type + '&father=' + father + '&familyID=' + familyID, {size: 'modal-lg'});
+    nplitbox = new ModalDialog('peopleAdd.modal.php?gender=' + gender + '&type=' + type + '&father=' + father + '&familyID=' + familyID, {size: 'modal-lg'});
     generateIDajax('person', 'personID');
     $('#firstname').focus();
     return false;
@@ -110,7 +110,7 @@ function editFamily(familyID, slot, lastperson) {
     allow_cites = true;
     allow_notes = true;
     persfamID = familyID;
-    tnglitbox = new ModalDialog('ajx_editfamily.php?familyID=' + familyID + '&lastperson=' + lastperson + '&slot=' + slot, {size: 'modal-lg'});
+    tnglitbox = new ModalDialog('familiesEdit.modal.php?familyID=' + familyID + '&lastperson=' + lastperson + '&slot=' + slot, {size: 'modal-lg'});
     startSortFamily();
     return false;
 }
@@ -118,7 +118,7 @@ function editFamily(familyID, slot, lastperson) {
 function newFamily(slot, child) {
     allow_cites = false;
     allow_notes = false;
-    tnglitbox = new ModalDialog('ajx_newfamily.php?child=' + child + '&slot=' + slot, {size: 'modal-lg'});
+    tnglitbox = new ModalDialog('familiesAdd.modal.php?child=' + child + '&slot=' + slot, {size: 'modal-lg'});
     generateIDajax('family', 'familyID');
     return false;
 }

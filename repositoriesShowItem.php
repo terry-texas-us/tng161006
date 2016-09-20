@@ -55,8 +55,8 @@ $headSection->setTitle($reporow['reponame']);
     $repotext = '';
     $repotext .= "<ul>\n";
     $repotext .= beginListItem('info');
-    $repotext .= "<table class=\"table tfixed\">\n";
-    $repotext .= "<col class=\"labelcol\"/><col style=\"width:{$datewidth}px\"/><col/>\n";
+    $repotext .= "<table class='table table-fixed'>\n";
+    $repotext .= "<col class='labelcol'/><col style='width:{$datewidth}px'/><col/>\n";
     if ($reporow['reponame']) {
       $repotext .= showEvent(['text' => uiTextSnippet('name'), 'fact' => $reporow['reponame']]);
     }
@@ -122,8 +122,8 @@ $headSection->setTitle($reporow['reponame']);
     $notes = buildNotes($reponotes, '');
     if ($notes) {
       $repotext .= beginListItem('notes');
-      $repotext .= "<table class=\"table tfixed\">\n";
-      $repotext .= "<col class=\"labelcol\"/><col/>\n";
+      $repotext .= "<table class='table table-fixed'>\n";
+      $repotext .= "<col class='labelcol'/><col/>\n";
       $repotext .= "<tr>\n";
       $repotext .= '<td class="indleftcol" id="notes1"><span>' . uiTextSnippet('notes') . "</span></td>\n";
       $repotext .= "<td>$notes</td>\n";

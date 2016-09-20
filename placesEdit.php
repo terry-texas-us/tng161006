@@ -260,7 +260,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
 
   var tnglitbox;
   function pickCemetery() {
-    tnglitbox = new ModalDialog('cemeteriesSelectUnlinkedModal.php');
+    tnglitbox = new ModalDialog('cemeteriesSelectUnlinked.modal.php');
   }
 
   function insertCell(row, index, classname, content) {

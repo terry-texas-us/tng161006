@@ -1,5 +1,5 @@
 // [ts] global functions and/or variables for JSLint
-/*global ModalDialog, textSnippet, updateChildrenOrder */
+/*global updateChildrenOrder */
 var allow_notes, allow_cites, persfamID, tnglitbox, tree;
 
 function AddtoDisplay(source, dest) {
@@ -179,13 +179,13 @@ function updateEvent(form) {
 
 function editEvent(eventID) {
     'use strict';
-    tnglitbox = new ModalDialog('admin_editevent.php?eventID=' + eventID);
+    tnglitbox = new ModalDialog('eventsEdit.modal.php?eventID=' + eventID);
     return false;
 }
 
 function newEvent(prefix, persfamID) {
     'use strict';
-    tnglitbox = new ModalDialog('admin_newevent.php?prefix=' + prefix + '&persfamID=' + persfamID);
+    tnglitbox = new ModalDialog('eventsAdd.modal.php?prefix=' + prefix + '&persfamID=' + persfamID);
     return false;
 }
 
@@ -236,7 +236,7 @@ function initCitationSort() {
 
 function showCitations(eventID, persfamID) {
     'use strict';
-    tnglitbox = new ModalDialog('admin_citations.php?eventID=' + eventID + '&persfamID=' + persfamID, {doneLoading: initCitationSort});
+    tnglitbox = new ModalDialog('citationsShow.modal.php?eventID=' + eventID + '&persfamID=' + persfamID, {doneLoading: initCitationSort});
     return false;
 }
 
@@ -265,7 +265,7 @@ function showCitationsInside(eventID, noteID, persfamID) {
     subpage = true;
     var xnote = noteID !== '' ? noteID : '';
     $.ajax({
-        url: 'admin_citations.php',
+        url: 'citationsShow.modal.php',
         data: {eventID: eventID, persfamID: persfamID, noteID: xnote},
         dataType: 'html',
         success: function (req) {
@@ -281,7 +281,7 @@ function editCitation(citationID) {
     'use strict';
     var params = {citationID: citationID};
     $.ajax({
-        url: 'admin_editcitation.php',
+        url: 'citationsEdit.modal.php',
         data: params,
         dataType: 'html',
         success: function (req) {
@@ -411,7 +411,7 @@ function openFindPlaceForm(field, temple) {
     activebox = field;
     var value = $('#' + field).val(),
         templestr = temple ? "&temple=1" : '';
-    seclitbox = new ModalDialog('findplaceform.php?tree=' + tree + '&place=' + encodeURIComponent(value) + templestr);
+    seclitbox = new ModalDialog('placesFind.modal.php?tree=' + tree + '&place=' + encodeURIComponent(value) + templestr);
     initFilter(null, seclitbox, field, null);
     if (value) {
         $('#myplace').val(value);
@@ -443,23 +443,23 @@ function findItem(type, field, titlediv, branch, media) {
     }
     switch (type) {
     case 'I':
-        url = "findpersonform.php";
+        url = "peopleFind.modal.php";
         startfield = "myflastname";
         break;
     case 'F':
-        url = "findfamilyform.php";
+        url = "familiesFind.modal.php";
         startfield = "myhusbname";
         break;
     case 'S':
-        url = "findsourceform.php";
+        url = "sourcesFind.modal.php";
         startfield = "mytitle";
         break;
     case 'R':
-        url = "findrepoform.php";
+        url = "repositoriesFind.modal.php";
         startfield = "mytitle";
         break;
     case 'L':
-        url = "findplaceform.php";
+        url = "placesFind.modal.php";
         startfield = "myplace";
         break;
     }

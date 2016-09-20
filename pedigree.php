@@ -464,7 +464,7 @@ $headSection->setTitle(uiTextSnippet('pedigreefor') . " $pedname");
     <?php if ($needperson && $allowAdd) { ?>
     var nplitbox;
     function openCreatePersonForm() {
-      tnglitbox = new ModalDialog('admin_newperson2.php?&amp;needped=1');
+      tnglitbox = new ModalDialog('peopleAdd2.modal.php?&amp;needped=1');
       $('#firstname').focus();
       return false;
     }

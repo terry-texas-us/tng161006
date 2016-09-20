@@ -193,7 +193,7 @@ function deleteMedia2EntityLink(linkID) {
 }
 
 function editMedia2EntityLink(linkID) {
-    tnglitbox = new ModalDialog('admin_editmedialink.php?linkID=' + linkID + '&type=' + type, {size: 'modal-lg'});
+    tnglitbox = new ModalDialog('mediaEditEntityLinks.modal.php?linkID=' + linkID + '&type=' + type, {size: 'modal-lg'});
     return false;
 }
 

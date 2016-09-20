@@ -1,5 +1,5 @@
 // [ts] global functions and/or variables for JSLint
-/*global deepOpen, findItem, ModalDialog */
+/*global deepOpen, findItem */
 var activeidbox, activenamebox, tnglitbox;
 
 $('#find-husband').on('click', function () {
@@ -12,7 +12,7 @@ $('#create-husband').on('click', function () {
     'use strict';
     activeidbox = 'husband';
     activenamebox = 'husbnameplusid';
-    var url = 'admin_newperson2.php?type=spouse' + '&familyID=' + document.form1.familyID.value + '&father=&gender=M';
+    var url = 'peopleAdd2.modal.php?type=spouse' + '&familyID=' + document.form1.familyID.value + '&father=&gender=M';
     tnglitbox = new ModalDialog(url);
 //      generateID('person', document.npform.personID);
     $('#firstname').focus();
@@ -45,7 +45,7 @@ $('#create-wife').on('click', function () {
     'use strict';
     activeidbox = 'wife';
     activenamebox = 'wifenameplusid';
-    var url = 'admin_newperson2.php?type=spouse' + '&familyID=' + document.form1.familyID.value + '&father=&gender=F';
+    var url = 'peopleAdd2.modal.php?type=spouse' + '&familyID=' + document.form1.familyID.value + '&father=&gender=F';
     tnglitbox = new ModalDialog(url);
 //      generateID('person', document.npform.personID);
     $('#firstname').focus();
@@ -112,7 +112,7 @@ $('#create-child').on('click', function () {
     'use strict';
     activeidbox = '';
     activenamebox = '';
-    var url = 'admin_newperson2.php?type=child' + '&familyID=' + document.form1.familyID.value + '&father=' + document.form1.husband.value + '&gender=';
+    var url = 'peopleAdd2.modal.php?type=child' + '&familyID=' + document.form1.familyID.value + '&father=' + document.form1.husband.value + '&gender=';
     tnglitbox = new ModalDialog(url);
 //      generateID('person', document.npform.personID);
     $('#firstname').focus();

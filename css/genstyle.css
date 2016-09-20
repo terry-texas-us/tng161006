@@ -961,9 +961,8 @@ form[action="places-oneletter.php"] {
 .mediaalign, .center {
   text-align: center; }
 
-.tfixed {
+.table-fixed {
   table-layout: fixed;
-  width: 100%;
   overflow: auto; }
 
 .labelcol {
@@ -1077,12 +1076,6 @@ ul#tngnav {
 .uploadfield {
   width: 100%;
   min-width: 300px; }
-
-.table-full {
-  border-spacing: 0;
-  padding: 0;
-  border: 0;
-  width: 100%; }
 
 .table-histogram {
   border-spacing: 5px 4px;

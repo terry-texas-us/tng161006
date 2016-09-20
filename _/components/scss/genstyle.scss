@@ -404,7 +404,7 @@ form[action="places-oneletter.php"] {margin: 10px 0;}
 
 .mediaalign, .center {	text-align: center;}
 
-.tfixed {table-layout: fixed; width: 100%; overflow: auto;}
+.table-fixed {table-layout: fixed; overflow: auto;}
 
 .labelcol {width: 130px;}
 
@@ -466,8 +466,6 @@ ul#tngnav {	margin: 0 0 0 10px; padding: 0 0 0 0; list-style: none; border: none
 #imgdiv img {max-width: 100%; height: auto;}
 
 .uploadfield {width: 100%; 	min-width: 300px;}
-
-.table-full {border-spacing: 0; padding: 0; border: 0; width: 100%;}
 
 .table-histogram {border-spacing: 5px 4px; padding: 0; margin-left: -3px;}
 

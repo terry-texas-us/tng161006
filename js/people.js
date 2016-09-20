@@ -1,5 +1,5 @@
 // [ts] global functions and/or variables for JSLint
-/*global checkDate, closeBranchEdit, ModalDialog, newEvent, openFindPlaceForm, quitBranchEdit,
+/*global checkDate, closeBranchEdit, newEvent, openFindPlaceForm, quitBranchEdit,
          removePrefixFromArray, showBranchEdit, showCitations, textSnippet */
 var branchtimer, tnglitbox;
 

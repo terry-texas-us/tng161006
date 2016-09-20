@@ -207,7 +207,7 @@ function tng_getRightIcons() {
     $right_icons .= "</a>\n";
   }
   if (!$tngconfig['showbmarks'] && $gotlastpage) {
-    $onclick = "onclick=\"tnglitbox = new ModalDialog('ajx_addbookmark.php?p='); return false;\"";
+    $onclick = "onclick=\"tnglitbox = new ModalDialog('bookmarksAdd.modal.php?p='); return false;\"";
     $title = uiTextSnippet('bookmark');
     $right_icons .= " <a href='#' $onclick title='$title'>\n";
     $right_icons .= "<img class='icon-sm' src='svg/bookmark.svg'>\n";

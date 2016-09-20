@@ -794,7 +794,6 @@ $headSection->setTitle($headTitle);
   <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAlWTL2QZDQv9BWXBvCwdAuhq1Lak8jSwU&amp;<?php echo uiTextSnippet('localize'); ?>'></script>
 <?php } ?>
 <script>
-  'use strict';
   var media = '<?php echo $media; ?>';
   var citedispctr = '<?php echo $citedispctr; ?>';
   var notes = '<?php echo $notes; ?>';

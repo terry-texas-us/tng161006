@@ -1,5 +1,5 @@
 // [ts] global functions and/or variables for JSLint
-/*global ModalDialog */
+/*global */
 var tnglitbox;
 
 var gsControlName = '';
@@ -7,11 +7,11 @@ function FilePicker(sControl, collection, folders) {
     'use strict';
     gsControlName = sControl;
 
-    var origsearch = document.getElementById(sControl + "_org");
-    var lastsearch;
-    var searchstring;
-    var sendstring;
-    var folderstr;
+    var origsearch = document.getElementById(sControl + "_org"),
+        lastsearch,
+        searchstring,
+        sendstring,
+        folderstr;
     if (origsearch) {
         lastsearch = document.getElementById(sControl + "_last");
         searchstring = document.getElementById(sControl);
@@ -29,7 +29,7 @@ function FilePicker(sControl, collection, folders) {
         sendstring = '';
     }
     folderstr = folders ? '&folders=1' : '';
-    var url = 'admin_filepicker.php?path=' + collection + '&searchstring=' + sendstring + folderstr;
+    var url = 'filepicker.modal.php?path=' + collection + '&searchstring=' + sendstring + folderstr;
     tnglitbox = new ModalDialog(url, {size: 'modal-lg'});
 }
 
@@ -42,7 +42,7 @@ function ReturnFile(sFileName) {
 function moreFilepicker(args) {
     'use strict';
     $.ajax({
-        url: 'admin_filepicker.php',
+        url: 'filepicker.modal.php',
         data: args,
         dataType: 'html',
         success: function (req) {
@@ -82,9 +82,9 @@ function setDefault(linkID, entity) {
 
 function populatePath(source, dest) {
     'use strict';
-    var lastslash, temp;
-    var lastperiod;
-    var ext;
+    var lastslash, temp,
+        lastperiod,
+        ext;
     dest.value = '';
     temp = source.value.replace(/\\/g, "/");
     lastslash = temp.lastIndexOf("/") + 1;
@@ -110,10 +110,10 @@ function populatePath(source, dest) {
 
 function prepopulateThumb() {
     'use strict';
-    var path = document.form1.path;
-    var lastslash = path.value.lastIndexOf("/") + 1;
-    var lastperiod = path.value.lastIndexOf(".");
-    var thumbpath = document.form1.thumbpath;
+    var path = document.form1.path,
+        lastslash = path.value.lastIndexOf("/") + 1,
+        lastperiod = path.value.lastIndexOf("."),
+        thumbpath = document.form1.thumbpath;
 
     thumbpath.value = '';
     if (lastslash) {
@@ -178,10 +178,10 @@ function switchOnType(mtypeIndex) {
 
 function toggleMediaURL() {
     'use strict';
-    var abspath = document.getElementById("abspathrow");
-    var path = document.getElementById("pathrow");
-    var img = document.getElementById("imgrow");
-    var imgmap = document.getElementById("imgmaprow");
+    var abspath = document.getElementById("abspathrow"),
+        path = document.getElementById("pathrow"),
+        img = document.getElementById("imgrow"),
+        imgmap = document.getElementById("imgmaprow");
 
     if (document.form1.abspath.checked) {
         abspath.style.display = '';
@@ -217,8 +217,8 @@ Coordinate_X_InImage = Coordinate_Y_InImage = 0;
 
 function imageClick(photoID) {
     'use strict';
-    var shapeobj = document.form1.shape;
-    var shape;
+    var shapeobj = document.form1.shape,
+        shape;
 
     //GetCoordinatesInImage();
 
@@ -254,9 +254,9 @@ function GetCoordinatesInImage(evt) {
         Coordinate_Y_InImage = event.offsetY;
     } else if (document.addEventListener && evt && typeof evt.pageX === "number") {
         // Mozilla-based browsers
-        var Element = evt.target;
-        var CalculatedTotalOffsetLeft = 0;
-        var CalculatedTotalOffsetTop = 0;
+        var Element = evt.target,
+            CalculatedTotalOffsetLeft = 0,
+            CalculatedTotalOffsetTop = 0;
         while (Element.offsetParent) {
             CalculatedTotalOffsetLeft += Element.offsetLeft;
             CalculatedTotalOffsetTop += Element.offsetTop;
@@ -324,10 +324,9 @@ function attemptDelete(entity, entityname) {
     if (entity.options[entity.selectedIndex].value.length === 0) {
         alert(textSnippet('nothingtodelete'));
     } else if (confirm(textSnippet('confdeleteentity') + ' ' + entityname + '?')) {
-        params = {entity: entityname, delitem: entity.options[entity.selectedIndex].value};
         $.ajax({
             url: 'admin_deleteentity.php',
-            data: params,
+            data: {entity: entityname, delitem: entity.options[entity.selectedIndex].value},
             dataType: 'html',
             success: function (req) {
                 RemovefromDisplay(entity);
@@ -386,8 +385,8 @@ function addCollection(form) {
             dataType: 'html',
             success: function (req) {
                 if (req !== '0') {
-                    var field = document.form1.mediatypeID;
-                    var i = field.options.length;
+                    var field = document.form1.mediatypeID,
+                        i = field.options.length;
                     if (navigator.appName === "Netscape") {
                         field.options[i] = new Option(form.display.value, req, false, false);
                     } else if (navigator.appName === "Microsoft Internet Explorer") {
@@ -419,9 +418,9 @@ function addCollection(form) {
 
 function editMediatype(field) {
     'use strict';
-    var mediatypeID = field.options[field.selectedIndex].value;
-    var fieldname = field.name;
-    tnglitbox = new ModalDialog('admin_editcollection.php?field=' + fieldname + '&mediatypeID=' + mediatypeID + '&selidx=' + field.selectedIndex);
+    var mediatypeID = field.options[field.selectedIndex].value,
+        fieldname = field.name;
+    tnglitbox = new ModalDialog('collectionsEditMediaType.modal.php?field=' + fieldname + '&mediatypeID=' + mediatypeID + '&selidx=' + field.selectedIndex);
 }
 
 function updateCollection(form) {
@@ -505,12 +504,12 @@ function startMediaSort() {
 
 function moveItemInList(elname, pos) {
     'use strict';
-    var el = $('#orderdivs_' + elname);
-    var sortrows = $('div.sortrow');
-    var current = 1;
-    var count = 0;
-    var found = false;
-    var needAppend = false;
+    var el = $('#orderdivs_' + elname),
+        sortrows = $('div.sortrow'),
+        current = 1,
+        count = 0,
+        found = false,
+        needAppend = false;
     $.each(sortrows, function (index, item) {
         if (item.id === 'orderdivs_' + elname) {
             found = true;
@@ -614,8 +613,8 @@ function switchLinktypes(select) {
 function resetFindFields(section, fields) {
     'use strict';
     $('#newlines').html('');
-    var field;
-    var i;
+    var field,
+        i;
     for (i = 0; i < fields.length; i += 1) {
         field = eval("document.find2." + fields[i]);
         field.value = '';

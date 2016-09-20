@@ -56,7 +56,7 @@ function showDatePlace($event) {
     }
   }
   $dptext .= "<tr>\n";
-  $editicon = $tentative_edit ? "<img class='icon-sm' src='svg/new-message.svg' alt=\"" . uiTextSnippet('editevent') . "\" onclick=\"tnglitbox = new ModalDialog('ajx_tentedit.php?persfamID={$event['ID']}&amp;type={$event['type']}&amp;event={$event['event']}&amp;title={$event['text']}');\" class=\"fakelink\">" : '';
+  $editicon = $tentative_edit ? "<img class='icon-sm' src='svg/new-message.svg' alt=\"" . uiTextSnippet('editevent') . "\" onclick=\"tnglitbox = new ModalDialog('tentEdit.modal.php?persfamID={$event['ID']}&amp;type={$event['type']}&amp;event={$event['event']}&amp;title={$event['text']}');\" class=\"fakelink\">" : '';
   $dptext .= "<td $cellid><span>" . $event['text'] . "$editicon</span></td>\n";
   $dptext .= "<td colspan='2'>" . displayDate($event['date']) . " $dcitestr<br>\n";
   if ($allow_lds_this && $event['ldstext']) {
@@ -74,7 +74,7 @@ function showDatePlace($event) {
       $event['type'] = $event['type2'];
       $event['ID'] = $event['ID2'];
     }
-    $editicon = $tentative_edit && $event['eventlds'] ? "<img class='icon-sm' src='svg/new-message.svg' alt=\"" . uiTextSnippet('editevent') . "\" onclick=\"tnglitbox = new ModalDialog('ajx_tentedit.php?persfamID={$event['ID']}&amp;type={$event['type']}&amp;event={$event['eventlds']}&amp;title={$event['ldstext']}');\" class=\"fakelink\">" : '';
+    $editicon = $tentative_edit && $event['eventlds'] ? "<img class='icon-sm' src='svg/new-message.svg' alt=\"" . uiTextSnippet('editevent') . "\" onclick=\"tnglitbox = new ModalDialog('tentEdit.modal.php?persfamID={$event['ID']}&amp;type={$event['type']}&amp;event={$event['eventlds']}&amp;title={$event['ldstext']}');\" class=\"fakelink\">" : '';
     $dptext .= '<td>' . $event['ldstext'] . "$editicon</td>\n";
     $dptext .= '<td><span>' . displayDate($event['ldsdate']) . "&nbsp;</span></td>\n";
     $dptext .= '<td><span>';

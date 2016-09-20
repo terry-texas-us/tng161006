@@ -1,5 +1,5 @@
 // [ts] global functions and variables for jsLint
-/*global getActionButtons, gotoSection, insertCell, ModalDialog, removePrefixFromArray, SVGInjector, textSnippet */
+/*global getActionButtons, gotoSection, insertCell, removePrefixFromArray, SVGInjector */
 var tnglitbox;
 
 function updateNoteOrder(event, ui) {
@@ -20,7 +20,7 @@ function initNoteSort() {
 
 function showNotes(eventID, persfamID) {
     'use strict';
-    tnglitbox = new ModalDialog('admin_notes.php?eventID=' + eventID + '&persfamID=' + persfamID, {doneLoading: initNoteSort});
+    tnglitbox = new ModalDialog('notesShow.modal.php?eventID=' + eventID + '&persfamID=' + persfamID, {doneLoading: initNoteSort});
     return false;
 }
 
@@ -84,10 +84,9 @@ function deleteNote(noteID, personID, eventID) {
 
 function editNote(noteID) {
     'use strict';
-    var params = {noteID: noteID};
     $.ajax({
-        url: 'admin_editnote.php',
-        data: params,
+        url: 'notesEdit.modal.php',
+        data: {noteID: noteID},
         dataType: 'html',
         success: function (req) {
             $('#editnote').html(req);

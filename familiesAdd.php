@@ -302,7 +302,7 @@ $headSection->setTitle(uiTextSnippet('addnewfamily'));
   function openCreatePersonForm(idfield, namefield, type, gender) {
     activeidbox = idfield;
     activenamebox = namefield;
-    var url = 'admin_newperson2.php?type=' + type + '&familyID=' + persfamID + '&gender=' + gender; 
+    var url = 'peopleAdd2.modal.php?type=' + type + '&familyID=' + persfamID + '&gender=' + gender; 
     tnglitbox = new ModalDialog(url);
 //      generateID('person', document.npform.personID);
     $('#firstname').focus();

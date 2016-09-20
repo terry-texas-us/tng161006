@@ -96,7 +96,9 @@ $headSection->setTitle(uiTextSnippet('surnamelist') . ' - ' . uiTextSnippet('all
                   $snnum++;
                   $num_in_col_ctr++;
                   if ($num_in_col_ctr == $num_in_col) {
-                    echo "</td>\n<td class=\"table-dblgutter\"></td>\n<td class=\"sncol\">";
+                    echo "</td>\n";
+                    echo "<td class='table-dblgutter'></td>\n";
+                    echo "<td class='sncol'>";
                     $num_in_col_ctr = 0;
                   }
                 }

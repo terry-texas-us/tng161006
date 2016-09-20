@@ -1,5 +1,5 @@
 // [ts] global functions and/or variables for JSLint
-/*global ModalDialog, removePrefixFromArray, textSnippet */
+/*global removePrefixFromArray */
 var mwlitbox, thumbwidth, tnglitbox;
 
 function updateMostWantedOrder(mwtype) {
@@ -38,13 +38,13 @@ function startMostWanted() {
 
 function openMostWanted(mwtype, ID) {
     'use strict';
-    mwlitbox = new ModalDialog('admin_editmostwanted.php?mwtype=' + mwtype + '&ID=' + ID, {size: 'modal-lg'});
+    mwlitbox = new ModalDialog('mostwantedEdit.modal.php?mwtype=' + mwtype + '&ID=' + ID, {size: 'modal-lg'});
     return false;
 }
 
 function openMostWantedMediaFind() {
     'use strict';
-    tnglitbox = new ModalDialog('admin_findmwmedia.php');
+    tnglitbox = new ModalDialog('mostwantedFindMedia.modal.php');
     return false;
 }
 

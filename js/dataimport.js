@@ -1,5 +1,5 @@
 // [ts] global functions and/or variables for JSLint
-/*global ModalAlert, ModalDialog, FilePicker, textSnippet */
+/*global ModalAlert, FilePicker */
 var branchcounts, branches, helpLang, timeoutID, msgdiv, saveimport;
 
 var tnglitbox;
@@ -294,7 +294,7 @@ function filePicker(sControl, collection, folders) {
         sendstring = '';
     }
     folderstr = folders ? '&folders=1' : '';
-    url = 'admin_filepicker.php?path=' + collection + '&searchstring=' + sendstring + folderstr;
+    url = 'filepicker.modal.php?path=' + collection + '&searchstring=' + sendstring + folderstr;
     tnglitbox = new ModalDialog(url, {size: 'modal-lg'});
 }
 
@@ -318,7 +318,7 @@ $('#eventsonly').on('click', function () {
 
 $('#addnewtree').on('click', function () {
     'use strict';
-    var url = 'treesAddModal.php?beforeimport=yes&helplang=' + helpLang;
+    var url = 'treesAdd.modal.php?beforeimport=yes&helplang=' + helpLang;
 
     tnglitbox = new ModalDialog(url);
 });

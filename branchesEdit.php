@@ -143,7 +143,7 @@ function validateForm() {
 function startLabels(form) {
     'use strict';
     var args = '&personID=' + form.personID.value + '&agens=' + form.agens.value + '&dagens=' + form.dagens.value + '&dgens=' + form.dgens.value + '&dospouses=' + form.dospouses.value;
-    var url = 'ajx_branchmenu.php?branch=' + form.branch.value + args;
+    var url = 'branchesStartLabels.modal.php?branch=' + form.branch.value + args;
 
     if (form.personID.value.length === 0) {
         textSnippetAlert('enterstartingind');
@@ -157,7 +157,7 @@ function startLabels(form) {
 
 function showBranchPeople(branch, description) {
     'use strict';
-    var url = 'ajx_showbranch.php?branch=' + branch + '&description=' + encodeURIComponent(description);
+    var url = 'branchesShow.modal.php?branch=' + branch + '&description=' + encodeURIComponent(description);
     tnglitbox = new ModalDialog(url);
     return false;
 }

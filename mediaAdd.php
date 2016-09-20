@@ -79,7 +79,7 @@ $headSection->setTitle(uiTextSnippet('addnewmedia'));
         </select>
         <?php if ($allowAdd && $allowEdit && $allowDelete) { ?>
           <input name='addnewmediatype' type='button' value="<?php echo uiTextSnippet('addnewcoll'); ?>"
-                 onclick="tnglitbox = new ModalDialog('admin_newcollection.php?field=mediatypeID');">
+                 onclick="tnglitbox = new ModalDialog('collectionsAdd.modal.php?field=mediatypeID');">
           <input id='editmediatype' name='editmediatype' type='button' value="<?php echo uiTextSnippet('edit'); ?>" style='display: none'
                  onclick="editMediatype(document.form1.mediatypeID);">
           <input id='delmediatype' name='delmediatype' type='button' value="<?php echo uiTextSnippet('delete'); ?>" style='display: none'

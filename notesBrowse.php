@@ -133,7 +133,7 @@ $headSection->setTitle(uiTextSnippet('notes'));
           if ($numrows) {
           $actionstr = '';
           if ($allowEdit) {
-            $actionstr .= "<a href=\"admin_editnote2.php?ID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
+            $actionstr .= "<a href=\"notesEdit.php?ID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
             $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
             $actionstr .= "</a>\n";
           }

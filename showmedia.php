@@ -311,7 +311,7 @@ echo "<body id='public'>\n";
       var repeat = <?php echo $tngconfig['ssrepeat'] ?> ? true : false;
       
       function start() {
-        var url = "ajx_slideshow.php?mediaID=<?php echo $mediaID ?>&medialinkID=<?php echo $medialinkID ?>&albumlinkID=<?php echo $albumlinkID ?>&cemeteryID=<?php echo $cemeteryID ?>";
+        var url = "slideshow.modal.php?mediaID=<?php echo $mediaID ?>&medialinkID=<?php echo $medialinkID ?>&albumlinkID=<?php echo $albumlinkID ?>&cemeteryID=<?php echo $cemeteryID ?>";
         tnglitbox = new ModalDialog(url, {
           size: 'modal-lg',
           title: '<?php echo addslashes(truncateIt($slideshowheader, 100)) ?>',

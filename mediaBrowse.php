@@ -170,7 +170,7 @@ $headSection->setTitle(uiTextSnippet('media'));
               </select>
             </label>
             <?php if ($allowAdd && $allowEdit && $allowDelete) { ?>
-              <button class='btn btn-secondary' name='addnewmediatype' type='button' onclick="tnglitbox = new ModalDialog('admin_newcollection.php?field=mediatypeID');"><?php echo uiTextSnippet('addnewcoll'); ?></button>
+              <button class='btn btn-secondary' name='addnewmediatype' type='button' onclick="tnglitbox = new ModalDialog('collectionsAdd.modal.php?field=mediatypeID');"><?php echo uiTextSnippet('addnewcoll'); ?></button>
               <button class='btn btn-secondary' id='editmediatype' name='editmediatype' type='button' style='display: none' onclick="editMediatype(document.form1.mediatypeID);"><?php echo uiTextSnippet('edit'); ?></button>
               <button class='btn btn-outline-danger' id='delmediatype' name='delmediatype' type='button' style='display: none' onclick="confirmDeleteMediatype(document.form1.mediatypeID);"><?php echo uiTextSnippet('delete'); ?></button>
             <?php } ?>

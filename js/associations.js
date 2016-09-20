@@ -1,5 +1,5 @@
 // [ts] global functions and variables for jsLint
-/*global textSnippet, insertCell, getActionButtons, gotoSection, ModalDialog, SVGInjector */
+/*global insertCell, getActionButtons, gotoSection, SVGInjector */
 var tnglitbox;
 
 function addAssociation(form) {
@@ -35,7 +35,7 @@ function editAssociation(assocID) {
     'use strict';
     var params = {assocID: assocID};
     $.ajax({
-        url: 'admin_editassoc.php',
+        url: 'associationsEdit.modal.php',
         data: params,
         dataType: 'html',
         success: function (req) {
@@ -94,13 +94,13 @@ function deleteAssociation(assocID, personID) {
 $('#person-associations').on('click', function () {
     'use strict';
     var $personId = $(this).data('personId');
-    tnglitbox = new ModalDialog('admin_associations.php?orgreltype=I&personID=' + $personId);
+    tnglitbox = new ModalDialog('associations.modal.php?orgreltype=I&personID=' + $personId);
 });
 
 $('#family-associations').on('click', function () {
     'use strict';
     var $familyId = $(this).data('familyId');
-    tnglitbox = new ModalDialog('admin_associations.php?orgreltype=I&personID=' + $familyId);
+    tnglitbox = new ModalDialog('associations.modal.php?orgreltype=I&personID=' + $familyId);
 });
 
 var associationIcon = $('img.icon-associations');

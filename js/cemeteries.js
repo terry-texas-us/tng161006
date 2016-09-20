@@ -1,11 +1,11 @@
 // [ts] global functions and/or variables for JSLint
-/*global attemptDelete, ModalDialog, textSnippet */
+/*global attemptDelete */
 
 var tnglitbox;
 
 $('#addnewstate').on('click', function () {
     'use strict';
-    var url = 'admin_newentity.php?entity=state';
+    var url = 'entitiesAdd.modal.php?entity=state';
     tnglitbox = new ModalDialog(url, {size: 'modal-sm'});
     $('newitem').focus();
 });
@@ -18,7 +18,7 @@ $('#deletestate').on('click', function () {
 
 $('#addnewcountry').on('click', function () {
     'use strict';
-    var url = 'admin_newentity.php?entity=country';
+    var url = 'entitiesAdd.modal.php?entity=country';
     tnglitbox = new ModalDialog(url, {size: 'modal-sm'});
     $('newitem').focus();
 });
@@ -45,8 +45,8 @@ function validateForm() {
 
 function populatePath(source, dest) {
     'use strict';
-    var lastslash;
-    var temp;
+    var lastslash,
+        temp;
 
     dest.value = '';
     temp = source.value.replace(/\\/g, "/");
