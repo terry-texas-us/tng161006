@@ -72,28 +72,7 @@ $headSection->setTitle(uiTextSnippet('administration'));
 <body>
   <section class='container'>
     <?php echo $adminHeaderSection->build(); ?>
-    <form action="admin_savelanguage.php" target="_parent" name="language">
-      <?php
-      if ($link && $chooselang) {
-        $query = 'SELECT languageID, display, folder FROM languages ORDER BY display';
-        $result = tng_query($query);
-
-        if ($result && tng_num_rows($result)) {
-          echo " &nbsp;<select name=\"newlanguage\" onChange=\"document.language.submit();\">\n";
-
-          while ($row = tng_fetch_assoc($result)) {
-            echo "<option value=\"{$row['languageID']}\"";
-            if ($languagesPath . $row['folder'] == $mylanguage) {
-              echo ' selected';
-            }
-            echo ">{$row['display']}</option>\n";
-          }
-          echo "</select>\n";
-          tng_free_result($result);
-        }
-      }
-      ?>
-    </form>
+    
     <div class="row">
       <?php
       if ($allowEdit || $allowAdd || $allowDelete) {

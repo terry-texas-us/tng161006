@@ -69,9 +69,9 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . ' ' . $pastxdays);
     }
     $allwhere = '';
 
-    $more = getLivingPrivateRestrictions('p', false, false);
-    if ($more) {
-      $allwhere .= ' AND ' . $more;
+    $livingPrivateCondition = getLivingPrivateRestrictions('p', false, false);
+    if ($livingPrivateCondition) {
+      $allwhere .= ' AND ' . $livingPrivateCondition;
     }
     $query = "SELECT p.personID, lastname, lnprefix, firstname, birthdate, prefix, suffix, nameorder, living, private, branch, DATE_FORMAT(changedate,'%e %b %Y') AS changedatef, changedby, LPAD(SUBSTRING_INDEX(birthdate, ' ', -1),4,'0') AS birthyear, birthplace, altbirthdate, LPAD(SUBSTRING_INDEX(altbirthdate, ' ', -1),4,'0') AS altbirthyear, altbirthplace FROM people as p WHERE $cutoffstr 1=1 $allwhere ORDER BY changedate DESC, lastname, firstname, birthyear, altbirthyear LIMIT $change_limit";
     $result = tng_query($query);
@@ -124,9 +124,9 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . ' ' . $pastxdays);
     }
     $allwhere = '1=1';
 
-    $more = getLivingPrivateRestrictions('families', false, false);
-    if ($more) {
-      $allwhere .= ' AND ' . $more;
+    $livingPrivateCondition = getLivingPrivateRestrictions('families', false, false);
+    if ($livingPrivateCondition) {
+      $allwhere .= ' AND ' . $livingPrivateCondition;
     }
     $query = "SELECT familyID, husband, wife, marrdate, firstname, lnprefix, lastname, prefix, suffix, nameorder, families.living AS fliving, families.private AS fprivate, people.living AS living, people.private AS private, people.branch AS branch, families.branch AS fbranch, DATE_FORMAT(families.changedate,'%e %b %Y') AS changedatef, families.changedby FROM (families) LEFT JOIN people ON people.personID = husband WHERE $famcutoffstr $allwhere ORDER BY families.changedate DESC, lastname LIMIT $change_limit";
     $famresult = tng_query($query);

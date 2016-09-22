@@ -1,8 +1,6 @@
 <?php
 require 'tng_begin.php';
 
-require 'classes/chooseLanguage.php';
-require 'classes/personSearchForm.class.php';
 require 'classes/surname_cloud.class.php';
 
 $tngconfig['showshare'] = 0;
@@ -20,16 +18,7 @@ $headSection->setTitle($sitename ? '' : uiTextSnippet('mnuheader'));
 <?php echo $headSection->build($flags, 'public', $session_charset); ?>
 <body id='public'>
   <section class='container'>
-    <?php
-    echo $publicHeaderSection->build();
-    echo '<br>';
-    echo "<div class='row'>\n";
-    echo "<div class='offset-md-6 col-md-6'>";
-    $form = new PersonSearchForm();
-    echo $form->get();
-    echo "</div>\n";
-    echo "</div>\n";
-    ?>
+    <?php echo $publicHeaderSection->build(); ?>
     <hr>
     <div class='row'>
       <section>
@@ -53,19 +42,13 @@ $headSection->setTitle($sitename ? '' : uiTextSnippet('mnuheader'));
             <h3 class='card-header'><?php echo getTemplateMessage('topsurnames'); ?></h3>
             <?php
             $nc = new Surname_cloud();
-            $nc->display(32);
+            $nc->display(50);
             ?>
           </div> <!-- .card -->
         </article>
       </section>
     </div> <!-- .row -->
     <?php
-    echo "<div class='row'>\n";
-    echo "<div class='offset-md-8 col-md-3'>";
-    $chooseLanguage = new ChooseLanguage();
-    echo $chooseLanguage->buildForm($instance);
-    echo "</div>\n";
-    echo "</div>\n";
     echo $publicFooterSection->build();
     ?>
   </section> <!-- .container -->

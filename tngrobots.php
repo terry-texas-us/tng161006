@@ -64,7 +64,7 @@ if ($tngprint) {
     case 'reportsShow':
     case 'search':
     case 'reportsShowReport':
-    case 'surnames100':
+    case 'surnamesTop':
     case 'whatsnew':
       $flags['norobots'] = $NOI;
       break;
@@ -82,8 +82,8 @@ if ($tngprint) {
     case 'sourcesShowSource':
     case 'showtree':
     case 'surnames':
-    case 'surnames-all':
-    case 'surnames-oneletter':
+    case 'surnamesAll':
+    case 'surnamesFirstLetter':
       $flags['norobots'] = '';
       break;
 

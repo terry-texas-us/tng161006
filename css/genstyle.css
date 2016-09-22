@@ -317,6 +317,18 @@ div#branchedit-person {
   margin-top: 1rem;
   padding-top: 1rem; }
 
+footer.admin {
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  padding-top: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem; }
+
+footer.public {
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  padding-top: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem; }
+
 #person-footer {
   padding-bottom: 1rem; }
 
@@ -473,9 +485,6 @@ button.help {
   width: 16px;
   height: 16px;
   margin: 0 2px; }
-
-.icon-menu {
-  background-color: #999; }
 
 .icon-md {
   width: 32px;
@@ -655,6 +664,12 @@ button.help {
 .blue {
   color: blue; }
 
+.yellow {
+  color: yellow; }
+
+.orange {
+  color: orange; }
+
 textarea:hover {
   border-color: #FFCC33; }
 
@@ -709,9 +724,6 @@ input.verylongfield {
 
 .alignmiddle {
   vertical-align: middle; }
-
-.yellow {
-  color: yellow; }
 
 /*arrow underneath pedigree boxes*/
 .downarrow {
@@ -1095,14 +1107,6 @@ ul#tngnav {
 .table-dblgutter {
   width: 20px; }
 
-.sntable {
-  width: 100%;
-  max-width: 1024px; }
-
-.sncol {
-  vertical-align: top;
-  width: 20%; }
-
 .plcol {
   vertical-align: top;
   width: 33%; }
@@ -1128,43 +1132,42 @@ ul#tngnav {
   color: #999;
   background-color: #999; }
 
-/* styles for home page surname cloud post */
 .surnames-cloud, .surnames-cloud a {
   padding: 2px;
-  letter-spacing: 0.0em;
-  word-spacing: 0.0em;
+  letter-spacing: 0.0rem;
+  word-spacing: 0.0rem;
   text-decoration: none;
   text-align: center; }
 
 a.size1 {
-  font-size: 2.2em; }
+  font-size: 2.4rem; }
 
 a.size2 {
-  font-size: 2.0em; }
+  font-size: 2.2rem; }
 
 a.size3 {
-  font-size: 1.8em; }
+  font-size: 2.0rem; }
 
 a.size4 {
-  font-size: 1.6em; }
+  font-size: 1.8rem; }
 
 a.size5 {
-  font-size: 1.4em; }
+  font-size: 1.6rem; }
 
 a.size6 {
-  font-size: 1.2em; }
+  font-size: 1.4rem; }
 
 a.size7 {
-  font-size: 1.0em; }
+  font-size: 1.2rem; }
 
 a.size8 {
-  font-size: 0.8em; }
+  font-size: 1.0rem; }
 
 a.size9 {
-  font-size: 0.6em; }
+  font-size: 0.8rem; }
 
 a.size0 {
-  font-size: 0.4em; }
+  font-size: 0.6rem; }
 
 .msgnone {
   display: none; }
@@ -1233,16 +1236,14 @@ table.uploadmore td {
   height: 97px;
   z-index: 0; }
 
-@media screen and (max-width: 1200px) {
-  /* bootstrap lg */
+@media screen and (max-width: 1199px) {
   .media-prev {
     top: 10%;
     left: 30%;
     padding: 15px 16px 20px 16px;
     position: fixed;
     background: none; } }
-@media screen and (max-width: 992px) {
-  /* bootstrap md */
+@media screen and (max-width: 991px) {
   .slidepane {
     width: 800px;
     height: 500px;
@@ -1253,7 +1254,6 @@ table.uploadmore td {
     height: 500px;
     padding: 10px; } }
 @media screen and (max-width: 767px) {
-  /* bootstrap sm */
   a.btn {
     font-size: 1em; }
 
@@ -1280,6 +1280,14 @@ table.uploadmore td {
     width: 600px;
     height: 400px;
     padding: 6px; } }
+#surnames span.verbose-md, #surnames-top span.verbose-md {
+  display: none; }
+
+@media (min-width: 544px) {
+  #surnames span.verbose-md, #surnames-top span.verbose-md {
+    display: inline;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem; } }
 @media screen and (max-width: 480px) {
   .media-prev {
     width: 240px; }
@@ -1293,9 +1301,5 @@ table.uploadmore td {
     width: 400px;
     height: 400px;
     padding: 4px; } }
-@media (max-width: 425px) {
-  .media-prev {
-    left: 20%;
-    width: 220px; } }
 
 /*# sourceMappingURL=genstyle.css.map */

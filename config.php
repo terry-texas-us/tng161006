@@ -1,10 +1,10 @@
 <?php
-$database_host = 'localhost';
 $database_host = "localhost";
 $database_name = "tgn";
 $database_username = "root";
 $database_password = 'tas1223';
 $tngconfig['maint'] = "";
+
 
 $rootpath = "C:/apache/htdocs/tng/";
 $homepage = "index.php";
@@ -20,7 +20,7 @@ $lineendingdisplay = "\\r\\n";
 $lineending = "\r\n";
 $gendexfile = "gendex";
 $mediapath = "media";
-$headstonepath = 'headstones';
+$headstonepath = "headstones";
 $historypath = "histories";
 $backuppath = "backups-ss";
 $documentpath = "documents";

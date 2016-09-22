@@ -95,13 +95,13 @@ switch ($type) {
       }
     }
 
-    $more = getLivingPrivateRestrictions('', $myffirstname, $false);
+    $livingPrivateCondition = getLivingPrivateRestrictions('', $myffirstname, $false);
 
-    if ($more) {
+    if ($livingPrivateCondition) {
       if ($allwhere) {
         $allwhere = "($allwhere) AND ";
       }
-      $allwhere .= $more;
+      $allwhere .= $livingPrivateCondition;
     }
 
     $query = "SELECT personID, lastname, firstname, lnprefix, birthdate, altbirthdate, deathdate, burialdate, prefix, suffix, nameorder, living, private, branch FROM people WHERE $allwhere ORDER BY lastname, lnprefix, firstname LIMIT 250";

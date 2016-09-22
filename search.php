@@ -294,28 +294,30 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
 
     echo '<p>' . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . ' ' . number_format($totrows) . " $querystring</p>";
     ?>
-    <table class="table table-sm table-striped">
-      <tr>
-        <th></th>
-        <th><?php echo $namesort; ?></th>
-        <?php if ($myprefix) { ?>
-          <th><?php echo uiTextSnippet('prefix'); ?></th>
-        <?php } ?>
-        <?php if ($mysuffix) { ?>
-          <th><?php echo uiTextSnippet('suffix'); ?></th>
-        <?php } ?>
-        <?php if ($mytitle) { ?>
-          <th><?php echo uiTextSnippet('title'); ?></th>
-        <?php } ?>
-        <?php if ($mynickname) { ?>
-          <th><?php echo uiTextSnippet('nickname'); ?></th>
-        <?php } ?>
-        <th colspan='2'><?php echo $birthsort; ?></th>
-        <th colspan='2'><?php echo $deathsort; ?></th>
-        <?php if ($showspouse) { ?>
-          <th><?php echo uiTextSnippet('spouse'); ?></th>
-        <?php } ?>
-      </tr>
+    <table class="table table-sm table-hover">
+      <thead class='thead-default'>
+        <tr>
+          <th></th>
+          <th><?php echo $namesort; ?></th>
+          <?php if ($myprefix) { ?>
+            <th><?php echo uiTextSnippet('prefix'); ?></th>
+          <?php } ?>
+          <?php if ($mysuffix) { ?>
+            <th><?php echo uiTextSnippet('suffix'); ?></th>
+          <?php } ?>
+          <?php if ($mytitle) { ?>
+            <th><?php echo uiTextSnippet('title'); ?></th>
+          <?php } ?>
+          <?php if ($mynickname) { ?>
+            <th><?php echo uiTextSnippet('nickname'); ?></th>
+          <?php } ?>
+          <th colspan='2'><?php echo $birthsort; ?></th>
+          <th colspan='2'><?php echo $deathsort; ?></th>
+          <?php if ($showspouse) { ?>
+            <th><?php echo uiTextSnippet('spouse'); ?></th>
+          <?php } ?>
+        </tr>
+      </thead>
       <?php
       $i = $offsetplus;
       

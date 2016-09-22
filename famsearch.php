@@ -243,8 +243,8 @@ $headSection->setTitle(uiTextSnippet('searchresults'));
 
     echo '<p>' . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . ' ' . number_format($totrows) . " $querystring</p>";
     ?>
-    <table class="table table-sm table-striped">
-      <thead>
+    <table class="table table-sm table-hover">
+      <thead class='thead-default'>
         <tr>
           <th></th>
           <th><?php echo uiTextSnippet('familyid'); ?></th>

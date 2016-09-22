@@ -1,5 +1,7 @@
 <?php
 
+require_once 'classes/chooseLanguage.php';
+
 class FooterElementSection {
 
   private $out;
@@ -33,14 +35,20 @@ class FooterElementSection {
   }
 
   public function build() {
-    $this->out = "\n";
-    $this->out .= "<footer class='row' id='$this->id'>\n<br>\n<hr>\n";
-    $this->out .= "<span class='pull-xs-right'>\n";
+    $this->out .= "<footer class='$this->id'> \n";
+    $this->out .= "<div class='row'>\n";
+    $this->out .= "<div class='col-md-9'>\n";
     $this->out .= "<strong>$this->title</strong>  v.$this->version, " . date('Y');
     if ($this->id === 'admin') {
       $this->out .= ' (Admin interface)';
     }
-    $this->out .= "</span>\n";
+    $this->out .= "</div>\n";
+    
+    $this->out .= "<div class='col-md-3'>";
+    $chooseLanguage = new ChooseLanguage();
+    $this->out .= $chooseLanguage->buildForm($instance);
+    $this->out .= "</div>\n";
+    $this->out .= "</div>\n";
     $this->out .= "</footer>\n";
 
     return $this->out;

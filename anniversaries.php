@@ -289,9 +289,9 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
         if ($tngdaymonth || $tngmonth || $tngyear) {
           $allwhere .= " AND $datefieldtr != '0000-00-00'";
         }
-        $more = getLivingPrivateRestrictions('people', false, true);
-        if ($more) {
-          $allwhere .= ' AND ' . $more;
+        $livingPrivateCondition = getLivingPrivateRestrictions('people', false, true);
+        if ($livingPrivateCondition) {
+          $allwhere .= ' AND ' . $livingPrivateCondition;
         }
 
         $max_browsesearch_pages = 5;

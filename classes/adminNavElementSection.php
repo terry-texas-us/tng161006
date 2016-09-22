@@ -10,17 +10,17 @@ class AdminNavElementSection extends NavElementSection {
     $topLevel = $levelDelimiter != 0 ? mb_substr($currentPage, 0, $levelDelimiter) : $currentPage;
 
     $this->out = "<nav class='navbar navbar-dark bg-inverse' role='navigation'>\n";
-    $this->out .= "<button type='button' class='navbar-toggler hidden-md-up' data-toggle='collapse' data-target='#admin-navbar-collapse'>&#9776;</button>\n";
+    $this->out .= "<button type='button' class='navbar-toggler hidden-md-up bg-inverse' data-toggle='collapse' data-target='#admin-navbar-collapse'>&#9776;</button>\n";
     $this->out .= "<div class='collapse navbar-toggleable-sm' id='admin-navbar-collapse'>\n";
-    $this->out .= "<ul class='nav navbar-nav'>\n";
-    $this->out .= "<li class='nav-item active'><a class='nav-link' href='admin.php' target='_parent'>$this->adminhome</a></li>\n";
-    $this->out .= "<li class='nav-item'><a class='nav-link' href='" . NavElementSection::$homePage . "' target='_parent'>$this->publichome</a></li>\n";
+    $this->out .= "<div class='nav navbar-nav'>\n";
+    $this->out .= "<a class='nav-item nav-link active' href='admin.php' target='_parent'>$this->adminhome</a>\n";
+    $this->out .= "<a class='nav-item nav-link' href='" . NavElementSection::$homePage . "' target='_parent'>$this->publichome</a>\n";
 
     switch ($topLevel) {
       case 'admin':
       case 'mostrecentactions':
         if (NavElementSection::$allowAdmin) {
-          $this->out .= "<li class='nav-item'><a class='nav-link' href='adminshowlog.php' target='main'>$this->showlog</a></li>\n";
+          $this->out .= "<a class='nav-item nav-link' href='adminshowlog.php' target='main'>$this->showlog</a>\n";
         }
         break;
 
@@ -45,19 +45,19 @@ class AdminNavElementSection extends NavElementSection {
       default:
         break;
     }
-    $this->out .= "<li class='nav-item'><a class='nav-link' href='logout.php?adminLogin=1' target='_parent'>$this->logout (<strong>" . NavElementSection::$currentUser . "</strong>)</a></li>\n";
+    $this->out .= "<a class='nav-item nav-link' href='logout.php?adminLogin=1' target='_parent'>$this->logout (<strong>" . NavElementSection::$currentUser . "</strong>)</a>\n";
 
     $helpFile = $topLevel . '_help.php';
     $helpPath = findhelp($helpFile) . '/' . $helpFile;
 
-    $this->out .= "<li class='nav-item'><a class='nav-link' href='#' onclick=\"return openHelp('$helpPath');\">" . uiTextSnippet('help') . "</a></li>\n";
+    $this->out .= "<a class='nav-item nav-link' href='#' onclick=\"return openHelp('$helpPath');\">" . uiTextSnippet('help') . "</a>\n";
 
     // [ts] not a linking menu item. move to section below header as in public
 
     if (NavElementSection::$maintenanceIsOn) {
-      $this->out .= "<li class='nav-item'><strong class='yellow'>" . NavElementSection::$maintenanceMessage . "</strong></li>\n";
+      $this->out .= "<span class='nav-item'><strong class='yellow'>" . NavElementSection::$maintenanceMessage . "</strong></span>\n";
     }
-    $this->out .= "</ul>\n";
+    $this->out .= "</div>\n";
     $this->out .= "</div> <!-- .navbar-collapse -->\n";
     $this->out .= "</nav>\n";
 

@@ -356,7 +356,6 @@ function getLivingPrivateRestrictions($table, $firstname, $allOtherInput) {
   global $tngconfig;
   global $allowLiving;
   global $allowPrivate;
-  global $assignedbranch;
 
   $query = '';
   if ($table) {

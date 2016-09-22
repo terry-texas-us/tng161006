@@ -6,16 +6,16 @@ class PersonSearchForm {
 
   public function __construct() {
     $args = func_get_args();
-    $num_args = func_num_args();
+    $numArgs = func_num_args();
 
-    if (method_exists($this, $construct = '__construct' . $num_args)) {
+    if (method_exists($this, $construct = '__construct' . $numArgs)) {
       call_user_func_array([$this, $construct], $args);
     }
   }
 
   public function __construct0() {
     $this->out = "<div id='personsearchform'>\n";
-    $this->out .= "<form class='form-inline' name='personsearchform' method='get' action='search.php'>\n";
+    $this->out .= "<form class='form-inline pull-md-right' name='personsearchform' method='get' action='search.php'>\n";
       $this->out .= "<label class='sr-only' for='myfirstname'>" . uiTextSnippet('mnufirstname') . "</label>\n";
       $this->out .= "<input class='form-control' id='myfirstname' name='myfirstname' type='text' placeholder='" . uiTextSnippet('mnufirstname') . "'>\n";
       $this->out .= "<label class='sr-only' for='mylastname'>" . uiTextSnippet('mnulastname') . "</label>\n";
