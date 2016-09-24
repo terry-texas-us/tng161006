@@ -128,16 +128,17 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   //show photo & name
   $indtext .= showSmallPhoto($ind['personID'], $namestr, $rights['both'], 0, false, $ind['sex']);
   $indtext .= "<span>$label | $sex</span>\n";
-  $indtext .= '<h4>';
+  $indtext .= '<h5>';
   if ($ind['haskids']) {
     $indtext .= '+ ';
   }
   $indtext .= "<a href='peopleShowPerson.php?personID={$ind['personID']}'>$namestr</a>";
 
+  $indtext .= "</h5>\n";
   if ($allowEdit && $rightbranch) {
-    $indtext .= " | <a href='peopleEdit.php?personID={$ind['personID']}&amp;cw=1' target='_blank'>" . uiTextSnippet('edit') . '</a>';
+    $indtext .= "<a href='peopleEdit.php?personID={$ind['personID']}&amp;cw=1' target='_blank'><img class='icon-sm' src='svg/new-message.svg'></a>";
+
   }
-  $indtext .= "</h4>\n";
   $indtext .= "</div>\n"; // .card-header
 
   $event = '';
@@ -154,6 +155,7 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
     $indtext .= "<col class='labelcol'>\n";
   }
   $indtext .= "</colgroup>\n";
+  
   $event['text'] = uiTextSnippet('born');
   $event['event'] = 'BIRT';
   $event['type'] = 'I';
@@ -363,7 +365,6 @@ function displayIndividual($ind, $label, $familyID, $showmarriage) {
   }
   $indtext .= "</table>\n";
   $indtext .= "</div>\n";
-  $indtext .= "<br>\n";
 
   return $indtext;
 }
@@ -429,9 +430,6 @@ $headSection->setTitle($headTitle);
     $fammedia = getMedia($famrow, 'F');
     $famalbums = getAlbums($famrow, 'F');
 
-    //    $famtext .= "<ul>\n";
-    //    $famtext .= beginListItem('info');
-
     //get husband & spouses
     if ($famrow['husband']) {
       $query = "SELECT * FROM people WHERE personID = \"{$famrow['husband']}\"";
@@ -464,8 +462,6 @@ $headSection->setTitle($headTitle);
       }
     }
     tng_free_result($children);
-
-    //    $famtext .= endListItem('info');
 
     $firstsection = 1;
     $firstsectionsave = '';
@@ -549,7 +545,6 @@ $headSection->setTitle($headTitle);
       $famtext .= endListItem('notes');
       $notes = true;
     }
-    //    $famtext .= "</ul>\n";
 
     if ($media || $notes || $citedispctr || $assoctext) {
       if ($tngconfig['istart']) {

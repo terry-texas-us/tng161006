@@ -171,24 +171,26 @@ $headSection->setTitle(uiTextSnippet('families'));
         <?php }
         if ($numrows) {
         ?>
-          <table class="table table-sm table-striped">
-            <tr>
-              <th><?php echo uiTextSnippet('action'); ?></th>
-              <?php if ($allowDelete) { ?>
-                <th><?php echo uiTextSnippet('select'); ?></th>
-              <?php } ?>
-              <th><?php echo uiTextSnippet('id'); ?></th>
-              <th><?php echo uiTextSnippet('husbid'); ?></th>
-              <?php if ($spousename == 'husband') { ?>
-                <th><?php echo uiTextSnippet('husbname'); ?></th>
-              <?php } ?>
-              <th><?php echo uiTextSnippet('wifeid'); ?></th>
-              <?php
-              if ($spousename == 'wife') { ?>
-                <th><?php echo uiTextSnippet('wifename'); ?></th>
-              <?php } ?>
-              <th><?php echo uiTextSnippet('marrdate'); ?></th>
-            </tr>
+          <table class='table table-sm table-hover'>
+            <thead class='thead-default'>
+              <tr>
+                <th><?php echo uiTextSnippet('action'); ?></th>
+                <?php if ($allowDelete) { ?>
+                  <th><?php echo uiTextSnippet('select'); ?></th>
+                <?php } ?>
+                <th><?php echo uiTextSnippet('id'); ?></th>
+                <th><?php echo uiTextSnippet('husbid'); ?></th>
+                <?php if ($spousename == 'husband') { ?>
+                  <th><?php echo uiTextSnippet('husbname'); ?></th>
+                <?php } ?>
+                <th><?php echo uiTextSnippet('wifeid'); ?></th>
+                <?php
+                if ($spousename == 'wife') { ?>
+                  <th><?php echo uiTextSnippet('wifename'); ?></th>
+                <?php } ?>
+                <th><?php echo uiTextSnippet('marrdate'); ?></th>
+              </tr>
+            </thead>
             <?php
             $actionstr = '';
             if ($allowEdit) {

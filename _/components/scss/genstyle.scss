@@ -325,9 +325,9 @@ input.verylongfield {width: 550px;}
 
 .indexphoto {border: 0;}
 
-form[action="places100.php"] {margin: 10px 0;}
+form[action="places-top.php"] {margin: 10px 0;}
 
-form[action="places-oneletter.php"] {margin: 10px 0;}
+form[action="places-containing.php"] {margin: 10px 0;}
 
 /*table cell for pedigree image*/
 .lefttop {vertical-align: top; text-align: left; width: 10px; padding-right: 0;}
@@ -485,8 +485,6 @@ ul#tngnav {	margin: 0 0 0 10px; padding: 0 0 0 0; list-style: none; border: none
 
 .table-gutter {width: 10px;}
 
-.table-dblgutter {width: 20px;}
-
 .plcol {vertical-align: top; width: 33%;}
 
 .clearleft {clear: left;}
@@ -593,8 +591,16 @@ table.uploadmore td {padding: 2px; border: none;}
   display: none;
 }
 
+#places span.verbose-md {
+  display: none;
+}
+
 @media (min-width: 544px) {
   #surnames span.verbose-md, #surnames-top span.verbose-md {
+    display: inline; padding-left: 0.5rem; padding-right: 0.5rem;
+  }
+  
+  #places span.verbose-md {
     display: inline; padding-left: 0.5rem; padding-right: 0.5rem;
   }
 }

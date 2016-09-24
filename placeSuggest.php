@@ -1,7 +1,7 @@
 <?php
 require 'tng_begin.php';
 require 'suggest.php';
-require 'places.php';
+require 'places.inc.php';
 
 $_SESSION['tng_email'] = generatePassword(1);
 $_SESSION['tng_comments'] = generatePassword(1);

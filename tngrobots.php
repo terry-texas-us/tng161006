@@ -34,10 +34,10 @@ if ($tngprint) {
     case 'pedigree':
     case 'pedigreetext':
     case 'places-all':
-    case 'places-oneletter':
+    case 'places-containing':
     case 'places':
     case 'placesearch':
-    case 'places100':
+    case 'places-top':
     case 'register':
     case 'relateform':
     case 'relationship':

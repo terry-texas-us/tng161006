@@ -3,7 +3,7 @@ $needMap = true;
 require 'tng_begin.php';
 
 require $subroot . 'mapconfig.php';
-require 'places.php';
+require 'places.inc.php';
 
 if (!$psearch) {
   exit;

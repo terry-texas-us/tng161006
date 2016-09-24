@@ -129,7 +129,7 @@ function getNameUniversal($row, $order, $hcard = null) {
   return $namestr;
 }
 
-function getFamilyName($row) {
+function getFamilyName($row, $appendId=false) {
   $hquery = "SELECT firstname, lnprefix, lastname, title, prefix, suffix, living, private, branch, nameorder FROM people WHERE personID = '{$row['husband']}'";
   $hresult = tng_query($hquery) or die(uiTextSnippet('cannotexecutequery') . ": $hquery");
   $hrow = tng_fetch_assoc($hresult);
@@ -138,7 +138,7 @@ function getFamilyName($row) {
   $hrow['allow_living'] = $hrights['living'];
   $hrow['allow_private'] = $hrights['private'];
 
-  $husbname = getName($hrow);
+  $text = getName($hrow) . ' / ';
   tng_free_result($hresult);
 
   $wquery = "SELECT firstname, lnprefix, lastname, title, prefix, suffix, living, private, branch, nameorder FROM people WHERE personID = '{$row['wife']}'";
@@ -149,10 +149,11 @@ function getFamilyName($row) {
   $wrow['allow_living'] = $wrights['living'];
   $wrow['allow_private'] = $wrights['private'];
 
-  $wifename = getName($wrow);
+  $text .= getName($wrow);
   tng_free_result($wresult);
 
-  return "$husbname/$wifename ({$row['familyID']})";
+  $text .= ($appendId === true) ? " ({$row['familyID']})" : '';
+  return $text;
 }
 
 function initials($name) {

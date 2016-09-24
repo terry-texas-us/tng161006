@@ -1,55 +1,61 @@
 <?php
+/**
+ * Name history: places100.php
+ */
+
 require 'tng_begin.php';
 
 $topnum = preg_replace('/[^0-9]/', '', $topnum);
 
-$logstring = "<a href='places100.php?topnum=$topnum'>" . xmlcharacters(uiTextSnippet('placelist') . ' &mdash; ' . uiTextSnippet('top') . " $topnum") . '</a>';
+$logstring = "<a href='places-top.php?topnum=$topnum'>" . xmlcharacters(uiTextSnippet('placelist') . ' &mdash; ' . uiTextSnippet('top') . " $topnum") . '</a>';
 writelog($logstring);
 preparebookmark($logstring);
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
+$tooltip['showall'] = uiTextSnippet('showallplaces') . ' (' . uiTextSnippet('sortedalpha') . ')';
 
 header('Content-type: text/html; charset=' . $session_charset);
-$headSection->setTitle(uiTextSnippet('placelist') . ': ' . uiTextSnippet('top') . " $topnum");
+$headSection->setTitle(uiTextSnippet('places') . ': ' . uiTextSnippet('top') . " $topnum");
 ?>
 <!DOCTYPE html>
 <html>
 <?php echo $headSection->build($flags, 'public', $session_charset); ?>
-<body id='public'>
+<body id='places'>
   <section class='container'>
     <?php echo $publicHeaderSection->build(); ?>
     <h2><img class='icon-md' src='svg/location.svg'><? echo uiTextSnippet('placelist') . ': ' . uiTextSnippet('top') . " $topnum"; ?></h2>
     <br class='clearleft'>
-    <?php
-    beginFormElement('places100', 'get');
-    ?>
-      <div class="card">
-        <?php echo uiTextSnippet('showtop'); ?>&nbsp;
-        <input name='topnum' type='text' value="<?php echo $topnum; ?>" size='4' maxlength='4'/> <?php echo uiTextSnippet('byoccurrence'); ?>&nbsp;
-        <input type='submit' value="<?php echo uiTextSnippet('go'); ?>"/>
+    
+    <nav class='breadcrumb'>
+      <a class='breadcrumb-item' href='places.php'><?php echo uiTextSnippet('mainplacepage'); ?></a>
+      <span class='breadcrumb-item active'><?php echo uiTextSnippet('topplaces'); ?></span>
+    </nav>
+
+    <form class='form-inline' action='places-top.php' method='get'>
+      <div class='form-group'>
+        <label for='topnum'><?php echo uiTextSnippet('showtop'); ?></label>
+        <input class='form-control' name='topnum' type='text' value="<?php echo $topnum; ?>" size='4' maxlength='4'><span class='verbose-md'><?php echo uiTextSnippet('byoccurrence'); ?></span>
+        <input class='btn btn-outline-secondary' type='submit' value="<?php echo uiTextSnippet('go'); ?>">
       </div>
-      <?php
-      endFormElement();
-      beginFormElement('places-oneletter', 'get');
+    </form>
+    
+    <form class='form-inline' action='places-containing.php' method='get'>
+      <label for='psearch'><?php echo uiTextSnippet('placescont') . ': '; ?></label>
+      <input class='form-control' name='psearch' type='text'>
+      <input class='form-control' name='pgo' type='submit' value='<?php echo uiTextSnippet('go'); ?>'>
+      <button class='btn btn-outline-secondary' type='button' title='<?php echo $tooltip['showall']; ?>'><a href='places-all.php'><?php echo uiTextSnippet('showall'); ?></a></button>
+      <input name='stretch' type='hidden' value='1'>
+      <?php 
+      if (!$decodedfirstchar) {
+        $decodedfirstchar = uiTextSnippet('top') . " $topnum";
+      }
       ?>
-      <div class="card">
-        <?php
-        echo uiTextSnippet('placescont') . ": <input name='psearch' type='text' />\n";
-        echo "<input name='stretch' type='hidden' value='1' />\n";
-        echo "<input name='pgo' type='submit' value='" . uiTextSnippet('go') . "' />\n";
-        if (!$decodedfirstchar) {
-          $decodedfirstchar = uiTextSnippet('top') . " $topnum";
-        }
-        ?>
-        <?php echo "<a href='placesMain.php'>" . uiTextSnippet('mainplacepage') . "</a> &nbsp;|&nbsp; <a href='places-all.php'>" . uiTextSnippet('showallplaces') . '</a>'; ?>
-      </div>
-    <?php endFormElement(); ?>
+    </form>
     <br>
-    <div class="card">
+    <div class='card'>
       <div class='card-header'>
-        <h4><?php echo uiTextSnippet('placelist') . ": $decodedfirstchar, " . uiTextSnippet('sortedalpha') . ' (' . uiTextSnippet('numoccurrences') . '):'; ?></h4>
-        <p class="small"><?php echo uiTextSnippet('showmatchingplaces'); ?></p>
+        <h5><?php echo uiTextSnippet('places') . ": $decodedfirstchar, " . uiTextSnippet('sortedalpha'); ?></h5>
       </div>
       <table class="table table-sm">
         <tr>
@@ -90,7 +96,7 @@ $headSection->setTitle(uiTextSnippet('placelist') . ': ' . uiTextSnippet('top') 
 
                 $searchlink = $specificcount ? " <a href='placesearch.php?psearch=$place2'><img class='icon-xs-inline' src='svg/magnifying-glass.svg' alt=''></a>" : '';
                 if ($place[placecount] > 1 || !$specificcount) {
-                  $name = "<a href=\"places-oneletter.php?offset=$offset&amp;psearch=$place2\">{$place['myplace']}</a>";
+                  $name = "<a href=\"places-containing.php?offset=$offset&amp;psearch=$place2\">{$place['myplace']}</a>";
                   echo "$counter. $name ({$place['placecount']}) $searchlink<br>\n";
                 } else {
                   echo "$counter. {$place['myplace']} $searchlink<br>\n";

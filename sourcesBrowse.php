@@ -123,9 +123,9 @@ $headSection->setTitle(uiTextSnippet('sources'));
       <form action="admin_deleteselected.php" method='post' name="form2">
         <?php if ($allowDelete) { ?>
           <p>
-          <button class='btn btn-secondary' id='selectall-sources' name='selectall' type='button'><?php echo uiTextSnippet('selectall'); ?></button>
-          <button class='btn btn-secondary' id='clearall-sources' name='clearall' type='button'><?php echo uiTextSnippet('clearall'); ?></button>
-          <button class='btn btn-outline-danger' id='deleteselected-sources' name='xsrcaction' type='submit' value='true'><?php echo uiTextSnippet('deleteselected'); ?></button>
+          <button class='btn btn-secondary btn-sm' id='selectall-sources' name='selectall' type='button'><?php echo uiTextSnippet('selectall'); ?></button>
+          <button class='btn btn-secondary btn-sm' id='clearall-sources' name='clearall' type='button'><?php echo uiTextSnippet('clearall'); ?></button>
+          <button class='btn btn-outline-danger btn-sm' id='deleteselected-sources' name='xsrcaction' type='submit' value='true'><?php echo uiTextSnippet('deleteselected'); ?></button>
           </p>
         <?php } ?>
 

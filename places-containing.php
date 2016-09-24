@@ -1,10 +1,14 @@
 <?php
+/**
+ * Name history: places-oneletter.php
+ */
+
 require 'tng_begin.php';
 
 $psearch = trim($psearch);
 $decodedfirstchar = $firstchar ? stripslashes(urldecode($firstchar)) : stripslashes($psearch);
 
-$logstring = "<a href=\"places-oneletter.php?firstchar=$firstchar&amp;psearch=$psearch\">" . uiTextSnippet('placelist') . ": $decodedfirstchar</a>";
+$logstring = "<a href=\"places-containing.php?firstchar=$firstchar&amp;psearch=$psearch\">" . uiTextSnippet('placelist') . ": $decodedfirstchar</a>";
 
 $offsetorg = $offset;
 $offset = $offset ? $offset + 1 : 1;
@@ -29,7 +33,7 @@ if ($stretch) {
   $places_oneletter_url = 'placesearch.php?';
 } else {
   $query = "SELECT distinct trim(substring_index(place,',',-$offset)) AS myplace, trim(place) AS wholeplace, count(place) AS placecount FROM places $wherestr GROUP BY myplace ORDER by myplace";
-  $places_oneletter_url = 'places-oneletter.php?';
+  $places_oneletter_url = 'places-containing.php?';
 }
 $result = tng_query($query);
 if (tng_num_rows($result) == 1) {
@@ -47,9 +51,10 @@ $displaychar = $decodedfirstchar ? $decodedfirstchar : uiTextSnippet('all');
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
+$tooltip['showall'] = uiTextSnippet('showallplaces') . ' (' . uiTextSnippet('sortedalpha') . ')';
 
 header('Content-type: text/html; charset=' . $session_charset);
-$headSection->setTitle(uiTextSnippet('placelist') . ": $displaychar");
+$headSection->setTitle(uiTextSnippet('places-containing') . ": $displaychar");
 ?>
 <!DOCTYPE html>
 <html>
@@ -57,45 +62,46 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": $displaychar");
 <body id='public'>
   <section class='container'>
     <?php echo $publicHeaderSection->build(); ?>
-    <h2><img class='icon-md' src='svg/location.svg'><?php echo uiTextSnippet('placelist') . ": $displaychar"; ?></h2>
+    <h2><img class='icon-md' src='svg/location.svg'><?php echo uiTextSnippet('places-containing') . ": $displaychar"; ?></h2>
     <br class='clearleft'>
+    
+    <nav class='breadcrumb'>
+      <a class='breadcrumb-item' href='places.php'><?php echo uiTextSnippet('places'); ?></a>
+      <span class='breadcrumb-item active'><?php echo uiTextSnippet('places-containing'); ?></span>
+    </nav>
+
     <?php
     $hiddenfields[] = ['name' => 'firstchar', 'value' => $firstchar];
     $hiddenfields[] = ['name' => 'psearch', 'value' => $psearch];
     $hiddenfields[] = ['name' => 'offset', 'value' => $offsetorg];
-    beginFormElement('places-oneletter', 'get');
     ?>
-      <div class="card">
-        <div class='card-header'>
-          <?php
-          echo uiTextSnippet('placescont') . ": <input name='psearch' type='text' />\n";
-          echo "<input name='stretch' type='hidden' value='1'>\n";
-          echo "<input name='pgo' type='submit' value=\"" . uiTextSnippet('go') . "\" />\n";
-          ?>
-        </div>
-        <br><br><?php echo '<a href="placesMain.php">' . uiTextSnippet('mainplacepage') . '</a> &nbsp;|&nbsp; <a href="places-all.php">' . uiTextSnippet('showallplaces') . '</a>'; ?>
-      </div>
-    <?php endFormElement(); ?>
-    <br>
-    <div class="card">
+    <form class='form-inline' action='places-containing.php' method='get'>
+      <label for='psearch'><?php echo uiTextSnippet('placescont') . ': '; ?></label>
+      <input class='form-control' name='psearch' type='text' value='<?php echo $displaychar; ?>'>
+      <input class='btn btn-outline-secondary' name='pgo' type='submit' value="<?php echo uiTextSnippet('go'); ?>">
+      <button class='btn btn-outline-secondary' type='button' title='<?php echo $tooltip['showall']; ?>'><a href='places-all.php'><?php echo uiTextSnippet('showall'); ?></a></button>
+      <input name='stretch' type='hidden' value='1'>
+    </form>
+    
+    <div class='card'>
       <div class='card-header'>
-        <h4><?php echo uiTextSnippet('placelist') . ": $decodedfirstchar, " . uiTextSnippet('sortedalpha') . ' (' . uiTextSnippet('numoccurrences') . '):'; ?></h4>
-        <p class="small"><?php echo uiTextSnippet('showmatchingplaces'); ?></p>
+        <h5><?php echo uiTextSnippet('placelist') . ", " . uiTextSnippet('sortedalpha'); ?></h5>
       </div>
-      <table class="table table-sm">
-        <tr>
-          <td class="plcol">
+      <div class='card-block'>
+        <div class='card-text'>
+          <div class='row'>
+          <div class='col-md-6'>
             <?php
             $topnum = tng_num_rows($result);
             if ($result) {
               $snnum = 1;
               if (!isset($numcols)) {
-                $numcols = 3;
+                $numcols = 2;
               }
               $num_in_col = ceil($topnum / $numcols);
-              if ($numcols > 3) {
-                $numcols = 3;
-                $num_in_col = ceil($topnum / 3);
+              if ($numcols > 2) {
+                $numcols = 2;
+                $num_in_col = ceil($topnum / $numcols);
               }
               $num_in_col_ctr = 0;
               while ($place = tng_fetch_assoc($result)) {
@@ -133,9 +139,8 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": $displaychar");
                   $snnum++;
                   $num_in_col_ctr++;
                   if ($num_in_col_ctr == $num_in_col) {
-                    echo "</td>\n";
-                    echo "<td class='table-dblgutter'></td>\n";
-                    echo "<td class='plcol'>";
+                    echo "</div>\n";
+                    echo "<div class='col-md-6'>";
                     $num_in_col_ctr = 0;
                   }
                 }
@@ -143,9 +148,10 @@ $headSection->setTitle(uiTextSnippet('placelist') . ": $displaychar");
               tng_free_result($result);
             }
             ?>
-          </td>
-        </tr>
-      </table>
+          </div>
+          </div>
+        </div>
+      </div> <!-- .card-block -->
     </div>
     <br>
   <?php echo $publicFooterSection->build(); ?>
