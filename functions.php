@@ -105,7 +105,10 @@ function doMedia($mediatypeID) {
   $mediaresult = tng_query($query);
 
   $titlemsg = uiTextSnippet($mediatypeID) ? uiTextSnippet($mediatypeID) : $mediatypes_display[$mediatypeID];
-  $mediaheader = "<div class=\"titlebox\"><h4>$titlemsg</h4>\n" . $header;
+  $mediaheader = "<div class='card'>\n";
+  $mediaheader .= "<div class='card-header'><h4>$titlemsg</h4></div>\n";
+  $mediaheader .= "<div class='card-block'>\n";
+  $mediaheader .= $header;
 
   $mediatext = '';
   $thumbcount = 0;
@@ -264,7 +267,7 @@ function doMedia($mediatypeID) {
     $mediatext = str_replace('<td>&nbsp;</td><td>', '<td>', $mediatext);
   }
   tng_free_result($mediaresult);
-  $media = $mediatext ? $mediaheader . $mediatext . $footer . "</div>\n<br>\n" : '';
+  $media = $mediatext ? $mediaheader . $mediatext . $footer . "</div></div>\n<br>\n" : '';
 
   return $media;
 }

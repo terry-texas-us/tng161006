@@ -55,7 +55,7 @@ function hidePopup(slot) {
 function editIcon(type, slot, personID, familyID, gender) {
     "use strict";
     var iconlink;
-    var editicon = '<img src="svg/pencil.svg" width="10" height="10">';
+    var editicon = "<img class='icon-xs' src='svg/pencil.svg'>";
 
     if (type === "P") {
         iconlink = ' <a href="#" onclick="return editPerson(\'' + personID + '\',' + slot + ',\'' + gender + '\');" title="' + snippets.editperson + '">' + editicon + '</a>';

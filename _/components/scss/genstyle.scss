@@ -97,6 +97,8 @@ div#branchedit-person {z-index: 1060;}
 #person-footer {padding-bottom: $spacer-y;}
 #person-footer button {float: right;}
 
+#cemeteries img.information {width: 100%;}
+
 .togglehead {text-decoration: none; color: black;}
 
 .th-indent {margin-left: 5px;}
@@ -170,7 +172,7 @@ button.help {padding: 0 8px; cursor: pointer; background: transparent; border: 0
 
 .icon-xs {width: 8px; height: 8px; margin: 0 1px; display: block; float: left;}
 .icon-xs-inline {width: 8px; height: 8px; margin: 0 2px;}
-.icon-xs-inline:hover {width: 16px; height: 16px;}
+.icon-xs-inline:hover {width: 12px; height: 12px;}
 
 .icon-sm {width: 16px; height: 16px; margin: 0 2px; display: block; float: left;}
 .icon-sm-inline {width: 16px; height: 16px; margin: 0 2px;}
@@ -185,6 +187,9 @@ button.help {padding: 0 8px; cursor: pointer; background: transparent; border: 0
 .icon-muted {fill: $icon-muted;}
 .icon-info {fill: $icon-info;}
 .icon-primary {fill: $icon-primary;}
+
+.files-silent-folder-link {text-decoration: none;}
+.files-silent-folder-link:hover {text-decoration: none;}
 
 .custom-events {border-top: $hr-border-width solid $hr-border-color; margin-top: $spacer-y; padding-top: $spacer-y;}
 .father-name, .mother-name {border-top: $hr-border-width solid $hr-border-color; margin-top: $spacer-y; padding-top: $spacer-y;}
@@ -334,10 +339,6 @@ form[action="places-containing.php"] {margin: 10px 0;}
 
 .floverlr {	position: absolute; z-index: 10; text-align: right; width: 30px;}
 
-.titlebox {border: 1px solid silver; background-color: #f9f9f9; padding: 10px; margin: 10px 2px;}
-
-.whiteback {border: 1px solid silver; background-color: white;}
-
 .rightround {border-radius: 0 4px 4px 0;}
 
 /*load the map link*/
@@ -409,10 +410,6 @@ form[action="places-containing.php"] {margin: 10px 0;}
 .mwperson {margin-top: 10px; color: gray;}
 
 .mwimage {float: left; margin-right: 15px; margin-bottom: 5px;}
-
-.mwblock {max-width: 800px;}
-
-.mediaalign, .center {	text-align: center;}
 
 .table-fixed {table-layout: fixed; overflow: auto;}
 

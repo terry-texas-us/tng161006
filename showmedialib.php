@@ -458,9 +458,9 @@ function showMediaSource($imgrow, $ss = false) {
             $maxvh = $tngconfig['imgvheight'];
             $calcHeight = $maxvh ? ($height > $maxvh ? $maxvh : $height) : 1;
             echo '<div id="loadingdiv2" style="position: static;">' . uiTextSnippet('loading') . '</div>';
-            echo '<iframe name="iframe1" id="iframe1" src="' . "img_viewer.php?mediaID={$imgrow['mediaID']}&amp;medialinkID={$imgrow['medialinkID']}\" width=\"100%\" height=\"1\" onload=\"calcHeight($calcHeight)\" frameborder=\"0\" marginheight=\"0\" marginwidth=\"0\" scrolling=\"no\"></iframe>";
+            echo '<iframe id="iframe1" name="iframe1" src="' . "img_viewer.php?mediaID={$imgrow['mediaID']}&amp;medialinkID={$imgrow['medialinkID']}\" width='100%' height='1' onload=\"calcHeight($calcHeight)\" frameborder='0' marginheight='0' marginwidth='0' scrolling='no' seamless></iframe>";
           } else {
-            echo "<div class=\"titlebox mediaalign\" id=\"imgdiv\"><img src=\"$mediasrc\" id=\"theimage\" $mapstr alt=\"$description\"></div>\n";
+            echo "<div class='card' id=\"imgdiv\"><img src=\"$mediasrc\" id=\"theimage\" $mapstr alt=\"$description\"></div>\n";
           }
         }
       } elseif (in_array($imgrow['form'], $videotypes) || in_array($imgrow['form'], $recordingtypes)) {
@@ -614,13 +614,16 @@ function doCemPlusMap($imgrow) {
   $hsresult = tng_query($query);
   if (tng_num_rows($hsresult)) {
     $i = 1;
-    echo "<div class=\"titlebox\">\n";
+    echo "<div class='card'>\n";
     echo '<h4><b>' . uiTextSnippet('cemphotos') . '</b></h4>';
 
-    echo "<table class=\"table\">\n";
+    echo "<table class='table table-sm table-hover'>\n";
+    echo "<thead class='thead-default'>\n";
     echo "<tr><th width='10'></th>\n";
     echo "<th width=\"$thumbmaxw\">" . uiTextSnippet('thumb') . "</th>\n";
-    echo '<th>' . uiTextSnippet('description') . "</th></tr>\n";
+    echo '<th>' . uiTextSnippet('description') . "</th>\n";
+    echo "</tr>\n";
+    echo "</thead >\n";
 
     while ($hs = tng_fetch_assoc($hsresult)) {
       $description = $hs['description'];

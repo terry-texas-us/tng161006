@@ -3,17 +3,6 @@ require 'tng_begin.php';
 
 require 'functions.php';
 
-function doSourceSearch($instance, $pagenav) {
-  global $sourcesearch;
-
-  $str = "<div>\n";
-  $str .= buildFormElement('sourcesShow', 'get', "SourceSearch$instance");
-  $str .= $pagenav;
-  $str .= "</form></div>\n";
-
-  return $str;
-}
-
 $max_browsesource_pages = 5;
 if ($offset) {
   $offsetplus = $offset + 1;
@@ -67,21 +56,15 @@ $headSection->setTitle(uiTextSnippet('sources'));
     $pagenav = buildSearchResultPagination($totrows, "sourcesShow.php?sourcesearch=$sourcesearch&amp;offset", $maxsearchresults, $max_browsesource_pages);
     if ($pagenav || $sourcesearch) {
     ?>      
-      <form action='sourcesShow.php' method="get" name='SourceSearch1'>
-        <div class='row'>
-          <div class='col-md-6'>
-            <input class='form-control' name='sourcesearch' type='text' value='<?php echo $sourcesearch; ?>'>
-          </div>
-          <div class='col-md-3'>
-            <input class='form-control' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
-          </div>
-          <div class='col-md-3'>
-            <?php if ($sourcesearch) { ?>
-              <a href='sourcesShow.php'><?php echo uiTextSnippet('browseallsources'); ?></a>
-            <?php } ?>
-          </div>
-        </div>
-      </form>
+      <div>
+        <form class='form-inline' action='sourcesShow.php' method="get" name='SourceSearch1'>
+          <input class='form-control' name='sourcesearch' type='text' value='<?php echo $sourcesearch; ?>'>
+          <button class='btn btn-outline-primary' type='submit' value="<?php echo uiTextSnippet('search'); ?>"><img class='icon-sm' src='svg/magnifying-glass.svg'></button>
+          <?php if ($sourcesearch) { ?>
+            <button class='btn btn-outline-secondary'><a href='sourcesShow.php'><?php echo uiTextSnippet('showall'); ?></a></button>
+          <?php } ?>
+        </form>
+      </div>
       <br>
     <?php 
     }
@@ -89,12 +72,14 @@ $headSection->setTitle(uiTextSnippet('sources'));
       echo '<p><span>' . uiTextSnippet('matches') . " $offsetplus " . uiTextSnippet('to') . " $numrowsplus " . uiTextSnippet('of') . " $totrows</span></p>";
     }
     ?>
-    <table class="table table-sm table-striped">
-      <tr>
-        <th></th>
-        <th><?php echo uiTextSnippet('sourceid'); ?></th>
-        <th><?php echo uiTextSnippet('title') . ', ' . uiTextSnippet('author'); ?></th>
-      </tr>
+    <table class='table table-sm table-hover'>
+      <thead class='thead-default'>
+        <tr>
+          <th></th>
+          <th><?php echo uiTextSnippet('sourceid'); ?></th>
+          <th><?php echo uiTextSnippet('title') . ', ' . uiTextSnippet('author'); ?></th>
+        </tr>
+      </thead>
       <?php
       $i = $offsetplus;
       while ($row = tng_fetch_assoc($result)) {

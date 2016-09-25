@@ -21,7 +21,7 @@ if ($path == 'gedcom') {
   $tngpath = 'templates/' . $path . '/img';
   $img = 'img/';
 }
-$pagetotal = 50;
+$pagetotal = 20;
 
 if (!isset($subdir)) {
   $subdir = '';
@@ -46,29 +46,27 @@ function frmFiles() {
   global $tngconfig;
   global $folders;
 
-  // [ts]  $datefmt = $tngconfig['preferEuro'] == 'true' ? "d/m/Y/* h:i:s A*/" : "m/d/Y h:i:s A";
   $datefmt = $tngconfig['preferEuro'] == 'true' ? 'd/m/Y' : 'm/d/Y';
   ?>
   <div id='filepicker'>
     <header class='modal-header'>
       <h4><?php echo uiTextSnippet('selectfile'); ?></h4>
-      <span><?php echo '<strong>' . uiTextSnippet('folder') . ":</strong> $tngpath" . stripslashes($subdir); ?></span>
+      
+      <span><?php echo "<img class='icon-sm-inline' src='svg/folder.svg'> $tngpath/" . stripslashes($subdir); ?></span>
       <?php
       $nCurrentPage = $page ? $page : 0;
 
       $lRecCount = lCountFiles();
       $nPages = intval(( $lRecCount - 0.5 ) / $pagetotal) + 1;
       $lStartRec = $nCurrentPage * $pagetotal;
-
-      frmFilesHdFt($nCurrentPage, $nPages);
       ?>
     </header>
     <div class='modal-body'>
-      <table class='table table-sm'>
-        <thead>
+      <table class='table table-sm table-hover'>
+        <thead class='thead-default'>
           <tr>
             <th><?php echo uiTextSnippet('action'); ?></th>
-            <th><?php echo uiTextSnippet('filename'); ?></th>
+            <th><?php echo uiTextSnippet('name'); ?></th>
             <th><?php echo uiTextSnippet('date'); ?></th>
             <th><?php echo uiTextSnippet('size'); ?></th>
             <th><?php echo uiTextSnippet('dimensions'); ?></th>
@@ -119,7 +117,7 @@ function frmFiles() {
                 echo "</a>\n";
                 echo "</div>\n";
                 echo "</td>\n";
-                echo "<td>$file</td>\n";
+                echo "<td><img class='icon-sm-inline' src='svg/folder-images.svg'> $file</td>\n";
                 echo '<td>' . date($datefmt, filemtime($file)) . "</td>\n";
                 echo '<td>' . displaySize(filesize($file)) . "</td>\n";
                   
@@ -140,10 +138,8 @@ function frmFiles() {
                 $nImageShowed++;
               }
               $nImageNr++;
-            }
-            elseif (is_dir($filename)) {
+            } elseif (is_dir($filename)) {
               if ($filename != '.' && ($filename != '..' || $subdir != '')) {
-                //if( ( ( $subdir != '' ) && ( $filename != '.' ) ) || ( ( $subdir == '' ) && ( $filename != '.' ) && ( $filename != '..' ) ) ) {
                 if ($nImageNr >= $lStartRec && $nImageShowed < $pagetotal) {
                   if ($filename != '..') {
                     $newsubdir = $subdir . $filename . '/';
@@ -164,10 +160,9 @@ function frmFiles() {
                         echo "<a href=\"javascript:ReturnFile('$img$subdir" . addslashes($file) . "')\" title=\"" . uiTextSnippet('select') . '\">' . uiTextSnippet('select') . '</a> | ';
                       }
                       ?>
-                      <span><a href="#" onclick="return moreFilepicker({subdir: '<?php echo addslashes($newsubdir); ?>', path: '<?php echo $path; ?>', folders: '<?php echo $folders; ?>'});"><?php echo uiTextSnippet('open'); ?></a></span>
                     </td>
                     <td>
-                      <span><?php echo '<b>' . uiTextSnippet('folder') . ":</b> $filename"; ?></span>
+                      <span><a class='files-silent-folder-link' href="#" onclick="return moreFilepicker({subdir: '<?php echo addslashes($newsubdir); ?>', path: '<?php echo $path; ?>', folders: '<?php echo $folders; ?>'});"><img class='icon-sm-inline' src='svg/folder.svg'> <?php echo $filename; ?></a></span>
                     </td>
                     <td><?php echo date($datefmt, filemtime($file)); ?></td>
                     <td></td>
@@ -186,7 +181,9 @@ function frmFiles() {
         ?>
       </table>
     </div>
-    <footer class='modal-footer'></footer>
+    <footer class='modal-footer'>
+      <?php frmFilesHdFt($nCurrentPage, $nPages); ?>
+    </footer>
   </div>
 <?php
 }
@@ -226,29 +223,29 @@ function frmFilesHdFt($nCurrentPage, $nPages) {
   global $subdir;
   global $path;
   if ($nPages > 1) {
+    $nCPage = $nCurrentPage + 1;
   ?>
-    <span style='display: block; float: right;'>
-      <a href='#' onclick="return moreFilepicker({subdir: '<?php echo addslashes($subdir); ?>', path: '<?php echo $path; ?>', page: 0});">
-        <img src='img/first_button.gif' width='15' height='15'>
-      </a>
-      <?php if ($nCurrentPage != 0) { ?>
-        <a href='#' onclick="return moreFilepicker({subdir: '<?php echo addslashes($subdir); ?>', path: '<?php echo $path; ?>', page: <?php echo ($nCurrentPage - 1); ?>});">
-          <img src='img/prev_button.gif' width='15' height='15'>
-        </a>
-      <?php
-      }
-      $nCPage = $nCurrentPage + 1;
-      echo uiTextSnippet('page') . " $nCPage " . uiTextSnippet('of') . " $nPages ";
-      if ($nCurrentPage + 1 != $nPages) {
-      ?>
-        <a href='#' onclick="return moreFilepicker({subdir: '<?php echo addslashes($subdir); ?>', path: '<?php echo $path; ?>', page: <?php echo ($nCurrentPage + 1); ?>});">
-          <img src='img/next_button.gif' width='15' height='15'>
-        </a>
-      <?php } ?>
-      <a href='#' onclick="return moreFilepicker({subdir: '<?php echo addslashes($subdir); ?>', path: '<?php echo $path; ?>', page: <?php echo ($nPages - 1); ?>});">
-        <img src='img/last_button.gif' width="15" height='15'>
-      </a>
-    </span>
+    <nav aria-label='Navigation'>
+      <ul class='pagination pagination-sm'>
+        <?php if ($nCurrentPage != 0) { ?>
+          <li class='page-item'>
+            <a class='page-link' href='#' aria-label='Previous' onclick="return moreFilepicker({subdir: '<?php echo addslashes($subdir); ?>', path: '<?php echo $path; ?>', page: <?php echo ($nCurrentPage - 1); ?>});">
+              <span aria-hidden='true'>&laquo;</span>
+              <span class='sr-only'>Previous</span>
+            </a>
+          </li>
+        <?php } ?>
+        <li class='page-item active'><a class='page-link' href="#"><?php echo $nCPage; ?></a></li>
+        <?php if ($nCurrentPage + 1 != $nPages) { ?>
+          <li class="page-item">
+            <a class='page-link' href='#' aria-label='Next' onclick="return moreFilepicker({subdir: '<?php echo addslashes($subdir); ?>', path: '<?php echo $path; ?>', page: <?php echo ($nCurrentPage + 1); ?>});">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        <?php } ?>
+      </ul>
+    </nav>
   <?php
   }
 }

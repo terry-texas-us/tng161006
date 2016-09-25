@@ -39,9 +39,9 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
     $lastcountry = DUMMYPLACE;
     $divctr = $linectr = $colctr = $i = 0;
 
-    echo "<div id=\"cemwrapper\">\n";
-    echo '<p>&nbsp;&nbsp;<a href=\"mediaShow.php?mediatypeID=headstones\">&raquo; ' . uiTextSnippet('showallhsr') . "</a></p>\n";
-    echo "<div id=\"cemcontainer\">\n";
+    echo "<div id='cemwrapper'>\n";
+    echo "<a href='mediaShow.php?mediatypeID=headstones'>&raquo; " . uiTextSnippet('showallhsr') . "</a>\n";
+    echo "<div id='cemcontainer'>\n";
     echo "<div id=\"col$colctr\">\n";
 
     $cemetery = tng_fetch_assoc($cemresult);
@@ -68,9 +68,9 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
                 $divname = "city$divctr";
                 if ($cemetery['city'] || !$tngconfig['cemblanks']) {
                   $txt = $cemetery['city'] ? htmlspecialchars($cemetery['city'], ENT_QUOTES, $session_charset) : uiTextSnippet('nocity');
-                  echo "<div class=\"pad3\">\n";
-                    echo '<img src="' . "img/tng_expand.gif\" class=\"expandicon\" title='" . uiTextSnippet('expand') . "' id='plusminus$divname' onclick=\"return toggleSection('$divname');\" alt=''>\n";
-                    echo '<a href="headstones.php?country=' . urlencode($cemetery['country']) . '&amp;state=' . urlencode($cemetery['state']) . '&amp;county=' . urlencode($cemetery['county']) . '&amp;city=' . urlencode($cemetery['city']) . "\">$txt</a>\n";
+                  echo "<div class='pad3'>\n";
+                    echo "<img src='" . "img/tng_expand.gif' class='expandicon' title='" . uiTextSnippet('expand') . "' id='plusminus$divname' onclick=\"return toggleSection('$divname');\" alt=''>\n";
+                    echo "<a href='headstones.php?country=" . urlencode($cemetery['country']) . '&amp;state=' . urlencode($cemetery['state']) . '&amp;county=' . urlencode($cemetery['county']) . '&amp;city=' . urlencode($cemetery['city']) . "'>$txt</a>\n";
                   echo "</div>\n";
                   echo "<div id=\"$divname\" class=\"cemblock\" style=\"display:none;\">\n";
                 } else {
@@ -97,7 +97,7 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
               $txt = $cemetery['county'] ? htmlspecialchars($cemetery['county'], ENT_QUOTES, $session_charset) : uiTextSnippet('nocounty');
               echo "<div class=\"pad3\">\n";
                 echo '<img src="' . "img/tng_expand.gif\" class=\"expandicon\" title='" . uiTextSnippet('expand') . "' id='plusminus$divname' onclick=\"return toggleSection('$divname');\" alt=''>\n";
-                echo '<a href=\"headstones.php?country=' . urlencode($cemetery['country']) . '&amp;state=' . urlencode($cemetery['state']) . '&amp;county=' . urlencode($cemetery['county']) . "\">$txt</a>\n";
+                echo "<a href='headstones.php?country=" . urlencode($cemetery['country']) . '&amp;state=' . urlencode($cemetery['state']) . '&amp;county=' . urlencode($cemetery['county']) . "'>$txt</a>\n";
               echo "</div>\n";
               echo "<div id=\"$divname\" class='cemblock' style='display:none;'>\n";
               $hiding = true;
@@ -127,8 +127,8 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
             echo "<br>\n";
           }
         }
-      } else {                                    // display the Country
-        if (($colctr < NUMCOLS) && ($linectr > $colsize)) {    // end of a column
+      } else { // display the Country
+        if (($colctr < NUMCOLS) && ($linectr > $colsize)) { // end of a column
           $linectr = 0;
           $colctr++;
           echo "</div>\n<div id=\"col$colctr\">\n";

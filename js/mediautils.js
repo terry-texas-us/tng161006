@@ -46,7 +46,7 @@ function moreFilepicker(args) {
         data: args,
         dataType: 'html',
         success: function (req) {
-            tnglitbox.d4.innerHTML = req;
+            tnglitbox.modalContent.innerHTML = req;
         }
     });
     return false;

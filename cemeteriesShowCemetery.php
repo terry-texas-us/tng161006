@@ -76,7 +76,7 @@ $headSection->setTitle($location);
 <!DOCTYPE html>
 <html>
 <?php echo $headSection->build($flags, 'public', $session_charset); ?>
-<body id='public'>
+<body id='cemeteries'>
   <section class='container'>
     <?php echo $publicHeaderSection->build(); ?>
     <h2><img class='icon-md' src='svg/headstone.svg'><?php echo $location; ?></h2>
@@ -87,10 +87,14 @@ $headSection->setTitle($location);
     $infoblock = '';
     $body = '';
     if ($cemeteryID) {
+      $infoblock .= "<div class='row'>\n";
+      $infoblock .= "<div class='col-md-6'>\n";
       if ($cemetery['maplink'] && file_exists("$rootpath$headstonepath/" . $cemetery['maplink'])) {
         $imageSize = getimagesize("$rootpath$headstonepath/" . $cemetery['maplink']);
-        $infoblock .= "<img src=\"$headstonepath/{$cemetery['maplink']}\" $imageSize[3] alt=\"{$cemetery['cemname']}\"><br><br>\n";
+        $infoblock .= "<img class='information' src=\"$headstonepath/{$cemetery['maplink']}\" alt=\"{$cemetery['cemname']}\"><br><br>\n";
       }
+      $infoblock .= "</div>\n";
+      $infoblock .= "<div class='col-md-6'>\n";
       if ($allow_admin && $allowEdit) {
         $infoblock .= "<p><a href=\"cemeteriesEdit.php?cemeteryID=$cemeteryID&amp;cw=1\" target='_blank'>" . uiTextSnippet('editcem') . "</a></p>\n";
       }
@@ -100,6 +104,9 @@ $headSection->setTitle($location);
       if (!$map['key'] && ($cemetery['latitude'] || $cemetery['longitude'])) {
         $infoblock .= '<p><strong>' . uiTextSnippet('latitude') . ":</strong> {$cemetery['latitude']}, <strong>" . uiTextSnippet('longitude') . ":</strong> {$cemetery['longitude']}</p>";
       }
+      $infoblock .= "</div>\n";
+      $infoblock .= "</div>\n";
+
       $cemcoords = false;
       if ($map['key']) {
         $lat = $cemetery['latitude'];
@@ -138,7 +145,7 @@ $headSection->setTitle($location);
       }
     }
     if ($infoblock) {
-      $body .= "<div class=\"titlebox\">$infoblock</div>\n<br>\n";
+      $body .= "<div class='card card-block'>$infoblock</div>\n<br>\n";
     }
     $query = "SELECT mediaID, thumbpath, description, notes, usecollfolder, mediatypeID, path, form, abspath, newwindow FROM media WHERE cemeteryID = '$cemeteryID' AND (mediatypeID != 'headstones' OR linktocem = '1') ORDER BY description";
     $hsresult = tng_query($query);
@@ -149,10 +156,14 @@ $headSection->setTitle($location);
       $body .= '<h4><b>' . uiTextSnippet('cemphotos') . "</b></h4>\n";
 
       $body .= "<table class='table'>\n";
-      $body .= "<tr><th width='10'></th>\n";
+      $body .= "<thead class='thead-default'>\n";
+      $body .= "<tr>\n";
+      $body .= "<th width='10'></th>\n";
       $body .= "<th width=\"$thumbmaxw\">" . uiTextSnippet('thumb') . "</th>\n";
       $body .= '<th>' . uiTextSnippet('description') . "</th>\n";
-
+      $body .= "</tr>\n";
+      $body .= "</thead>\n";
+      
       while ($hs = tng_fetch_assoc($hsresult)) {
         $mediatypeID = $hs['mediatypeID'];
         $usefolder = $hs['usecollfolder'] ? $mediatypes_assoc[$mediatypeID] : $mediapath;
@@ -208,7 +219,8 @@ $headSection->setTitle($location);
       if ($pagenav) {
         $body .= "<p>$pagenav</p>";
       }
-      $body .= "<table class='table'>\n";
+      $body .= "<table class='table table-sm table-hover'>\n";
+      $body .= "<thead class='thead-default'>\n";
       $body .= "<tr>\n";
       $body .= '<th>' . uiTextSnippet('thumb') . '</th>';
       $body .= '<th>' . uiTextSnippet('description') . '</th>';
@@ -216,6 +228,7 @@ $headSection->setTitle($location);
       $body .= '<th>' . uiTextSnippet('location') . '</th>';
       $body .= '<th>' . uiTextSnippet('name') . ' (' . uiTextSnippet('diedburied') . ")</th>\n";
       $body .= "</tr>\n";
+      $body .= "</thead>\n";
 
       while ($hs = tng_fetch_assoc($hsresult)) {
         $mediatypeID = $hs['mediatypeID'];
@@ -332,12 +345,14 @@ $headSection->setTitle($location);
         $body .= "<br><div>\n";
         $body .= '<h4>' . uiTextSnippet('allburials') . "</h4>\n";
 
-        $body .= "<table class='table table-sm table-striped'>\n";
+        $body .= "<table class='table table-sm table-hover'>\n";
+        $body .= "<thead class='thead-default'>\n";
         $body .= "<tr>\n";
         $body .= "<th></th>\n";
         $body .= '<th>' . uiTextSnippet('lastfirst') . "</th>\n";
         $body .= '<th>' . uiTextSnippet('buried') . "</th>\n";
         $body .= "</tr>\n";
+        $body .= "</thead>\n";
 
         $i = 1;
         while ($row = tng_fetch_assoc($result)) {

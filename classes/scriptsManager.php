@@ -45,7 +45,7 @@ class scriptsManager {
       case 'toggleall':
         $out .= "function toggleAll(flag) {\n";
         $out .= "for (var i = 0; i < document.form2.elements.length; i++) {\n";
-        $out .= "if (document.form2.elements[i].type == \"checkbox\") {\n";
+        $out .= "if (document.form2.elements[i].type === 'checkbox') {\n";
         $out .= "if (flag) {\n";
         $out .= "document.form2.elements[i].checked = true;\n";
         $out .= "} else {\n";

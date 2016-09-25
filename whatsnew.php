@@ -32,7 +32,8 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . ' ' . $pastxdays);
     <br clear='left'>
     <?php
 
-    $header1 = "<table class='table table-sm'>\n";
+    $header1 = "<table class='table table-sm table-hover'>\n";
+    $header1 .= "<thead class='thead-default'>\n";
     $header1 .= "<tr>\n";
     $header1 .= '<th>' . uiTextSnippet('thumb') . "</th>\n";
     $header1 .= '<th>' . uiTextSnippet('description') . "</th>\n";
@@ -41,6 +42,7 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . ' ' . $pastxdays);
     $header2 = '<th>' . uiTextSnippet('indlinked') . "</th>\n";
     $header2 .= "<th width='130'>" . uiTextSnippet('lastmodified') . "</th>\n";
     $header2 .= "</tr>\n";
+    $header2 .= "</thead>\n";
     $footer = "</table>\n";
 
     if (!$change_limit) {
@@ -79,8 +81,8 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . ' ' . $pastxdays);
       ?>
       <div>
         <h4><?php echo uiTextSnippet('individuals'); ?></h4>
-        <table class='table table-sm table-striped'>
-          <thead>
+        <table class='table table-sm table-hover'>
+          <thead class='thead-default'>
             <tr>
               <th><?php echo uiTextSnippet('lastfirst'); ?></th>
               <th colspan='2'><?php echo($tngconfig['hidechr'] ? uiTextSnippet('born') : uiTextSnippet('bornchr')); ?></th>
@@ -134,8 +136,8 @@ $headSection->setTitle(uiTextSnippet('whatsnew') . ' ' . $pastxdays);
     ?>
       <div>
         <h4><?php echo uiTextSnippet('families'); ?></h4>
-        <table class="table table-sm table-striped">
-          <thead>
+        <table class="table table-sm table-hover">
+          <thead class='thead-default'>
             <tr>
               <th><?php echo uiTextSnippet('id'); ?></th>
               <th><?php echo uiTextSnippet('husbid'); ?></th>

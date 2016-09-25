@@ -289,8 +289,8 @@ $headSection->setTitle(uiTextSnippet('media'));
           }
           ?>
         <?php } ?>
-        <table class='table table-sm'>
-          <thead>
+        <table class='table table-sm table-hover'>
+          <thead class='thead-default'>
             <tr>
               <th><?php echo uiTextSnippet('action'); ?></th>
               <?php if ($allowEdit || $allowMediaEdit || $allowDelete || $allowMediaDelete) { ?>

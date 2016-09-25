@@ -123,7 +123,7 @@ $headSection->setTitle($psearchns);
     $placealbums = getAlbums($psearch, 'L');
     $media = doMediaSection($psearch, $placemedia, $placealbums);
     if ($media) {
-      echo "<br>\n<div class=\"titlebox\">\n";
+      echo "<br>\n<div class='card'>\n";
       echo '<h4>' . uiTextSnippet('media') . '</h4>';
       echo "$media\n";
       echo "</div>\n";

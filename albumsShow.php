@@ -10,7 +10,7 @@ function doMediaSearch($instance, $pagenav) {
   $str = buildFormElement('albumsShow', 'get', "MediaSearch$instance");
   $str .= "<input name='mediasearch' type='text' value=\"$mediasearch\"> \n";
   $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . "\" /> \n";
-  $str .= "<input type='button' value=\"" . uiTextSnippet('tng_reset') . "\" onclick=\"window.location.href='albumsShow.php';\" />&nbsp;&nbsp;&nbsp;";
+  $str .= "<input type='button' value=\"" . uiTextSnippet('reset') . "\" onclick=\"window.location.href='albumsShow.php';\" />&nbsp;&nbsp;&nbsp;";
   $str .= $pagenav;
   $str .= "</form>\n";
 
@@ -76,15 +76,17 @@ $headSection->setTitle(uiTextSnippet('albums'));
     echo doMediaSearch(1, $pagenav);
     echo "<br>\n";
     ?>
-      <table class='table table-sm'>
+      <table class='table table-sm table-hover'>
         <?php
         $albumtext = $header = '';
+        $header .= "<thead class='thead-default'>\n";
         $header .= "<tr><td></td>\n";
         $header .= '<th>' . uiTextSnippet('thumb') . "</th>\n";
         $header .= '<th>' . uiTextSnippet('description') . "</th>\n";
         $header .= '<th>' . uiTextSnippet('numitems') . "</th>\n";
         $header .= '<th>' . uiTextSnippet('indlinked') . "</th>\n";
         $header .= "</tr>\n";
+        $header .= "</thead>\n";
 
         $i = $offsetplus;
         $maxplus = $maxsearchresults + 1;

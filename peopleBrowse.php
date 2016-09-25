@@ -167,14 +167,14 @@ $headSection->setTitle(uiTextSnippet('people'));
     <form action="admin_deleteselected.php" method='post' name="form2">
       <?php if ($allowDelete) { ?>
         <p>
-          <button class='btn btn-secondary' id='selectall-people' name='selectall' type='button'><?php echo uiTextSnippet('selectall'); ?></button>
-          <button class='btn btn-secondary' id='clearall-people' name='clearall' type='button'><?php echo uiTextSnippet('clearall'); ?></button>
-          <button class='btn btn-outline-danger' id='deleteselected-people' name='xperaction' type='submit' value='true'><?php echo uiTextSnippet('deleteselected'); ?></button>
+          <button class='btn btn-secondary btn-sm' id='selectall-people' name='selectall' type='button'><?php echo uiTextSnippet('selectall'); ?></button>
+          <button class='btn btn-secondary btn-sm' id='clearall-people' name='clearall' type='button'><?php echo uiTextSnippet('clearall'); ?></button>
+          <button class='btn btn-outline-danger btn-sm' id='deleteselected-people' name='xperaction' type='submit' value='true'><?php echo uiTextSnippet('deleteselected'); ?></button>
         </p>
       <?php } ?>
       <?php if ($numrows) { ?>            
-        <table class='table table-sm table-striped'>
-          <thead>
+        <table class='table table-sm table-hover'>
+          <thead class='thead-default'>
             <tr>
               <th><?php echo uiTextSnippet('action'); ?></th>
               <?php if ($allowDelete) { ?>

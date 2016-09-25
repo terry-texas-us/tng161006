@@ -145,7 +145,6 @@ if ($location) {
       if ($cemcount) {
         $body .= "<br>\n";
       }
-      $body .= "<div class=\"titlebox\">\n";
       $thiscem = $subquery ? $cemetery['cemeteryID'] : '';
       $query = "SELECT DISTINCT media.mediaID, description, notes, path, thumbpath, status, plot, showmap, usecollfolder, form, mediatypeID, abspath, newwindow FROM media LEFT JOIN medialinks ON media.mediaID = medialinks.mediaID WHERE mediatypeID = 'headstones' AND cemeteryID = '$thiscem' ORDER BY description LIMIT $newoffset" . $maxsearchresults;
       if (!$subquery) {
@@ -164,8 +163,8 @@ if ($location) {
       } else {
         $totrows = $numrows;
       }
-
-      $body .= "<div><h4>\n";
+      $body .= "<div class='card'>\n";
+      $body .= "<div class='card-header'><h5>\n";
       if ($cemetery['cemname'] == uiTextSnippet('nocemetery')) {
         $location = $cemetery['cemname'];
       } else {
@@ -229,17 +228,20 @@ if ($location) {
       }
 
       $body .= $location;
-      $body .= '</h4>';
+      $body .= '</h5>';
       $pagenav = buildSearchResultPagination($totrows, "headstones.php?cemeteryID={$cemetery['cemeteryID']}&amp;offset", $maxsearchresults, 5);
       $body .= "<p>$pagenav</p>";
       $body .= "</div>\n";
 
-      $body .= "<table class=\"table table-sm table-striped\">\n";
-      $body .= '<tr><th>' . uiTextSnippet('thumb') . '</th>';
+      $body .= "<div class='card-block'>\n";
+      $body .= "<table class='table table-sm table-hover'>\n";
+      $body .= "<thead class='thead-default'></tr>\n";
+      $body .= '<th>' . uiTextSnippet('thumb') . '</th>';
       $body .= '<th>' . uiTextSnippet('description') . '</th>';
       $body .= '<th>' . uiTextSnippet('status') . '</th>';
       $body .= '<th>' . uiTextSnippet('location') . '</th>';
-      $body .= '<th>' . uiTextSnippet('name') . ' (' . uiTextSnippet('diedburied') . ')</th></tr>';
+      $body .= '<th>' . uiTextSnippet('name') . ' (' . uiTextSnippet('diedburied') . ")</th>\n";
+      $body .= "</tr></thead>\n";
 
       while ($hs = tng_fetch_assoc($hsresult)) {
         $mediatypeID = $hs['mediatypeID'];
@@ -323,6 +325,7 @@ if ($location) {
       }
       $cemcount++;
       $body .= "</table>\n";
+      $body .= "</div>\n";
       if ($pagenav) {
         $body .= "<br>$pagenav";
       }

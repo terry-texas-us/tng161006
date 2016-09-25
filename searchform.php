@@ -264,7 +264,7 @@ $headSection->setTitle(uiTextSnippet('searchnames'));
           <button class='btn btn-outline-primary' id='searchbtn' type='submit'><?php echo uiTextSnippet('search'); ?></button>
         </div>
         <div class='col-sm-2'>
-          <button class='btn btn-outline-primary' id='resetbtn' type='button' onclick="resetValues();"><?php echo uiTextSnippet('tng_reset'); ?></button> 
+          <button class='btn btn-outline-primary' id='resetbtn' type='button' onclick="resetValues();"><?php echo uiTextSnippet('reset'); ?></button> 
         </div>
       </div>
     </form>

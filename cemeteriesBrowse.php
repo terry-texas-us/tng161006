@@ -100,150 +100,134 @@ $headSection->setTitle(uiTextSnippet('cemeteries'));
     $navList->appendItem([$allowAdd, 'cemeteriesAdd.php', uiTextSnippet('add'), 'addcemetery']);
     echo $navList->build('findcem');
     ?>
-    <table class='table table-sm'>
-      <tr>
-        <td>
-          <div>
-            <form action="cemeteriesBrowse.php" name='form1'>
-              <table>
-                <tr>
-                  <td><?php echo uiTextSnippet('searchfor'); ?>:</td>
-                  <td>
-                    <input class='longfield' name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>">
-                  </td>
-                  <td>
-                    <input name='submit' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
-                    <input name='submit' type='submit' value="<?php echo uiTextSnippet('reset'); ?>" onClick="resetCemeteriesSearch();">
+    <form class='form-inline' action="cemeteriesBrowse.php" name='form1'>
+      <label for='searchstring'><?php echo uiTextSnippet('searchfor'); ?>: </label>
+      <input class='form-control' name='searchstring' type='text' value="<?php echo $searchstring_noquotes; ?>">
+      <input class='form-control' name='submit' type='submit' value="<?php echo uiTextSnippet('search'); ?>">
+      <input class='form-control' name='submit' type='submit' value="<?php echo uiTextSnippet('reset'); ?>" onClick="resetCemeteriesSearch();">
+      <input name='findcemetery' type='hidden' value='1'>
+      <input name='newsearch' type='hidden' value='1'>
+    </form>
+    <br>
+    <?php
+    $numrowsplus = $numrows + $offset;
+    if (!$numrowsplus) {
+      $offsetplus = 0;
+    }
+    echo displayListLocation($offsetplus, $numrowsplus, $totrows);
+    ?>
+    <form action="admin_deleteselected.php" method='post' name="form2">
+      <?php
+      if ($allowDelete) {
+        ?>
+        <p>
+          <input class='btn btn-outline-secondary btn-sm' name='selectall' type='button' value="<?php echo uiTextSnippet('selectall'); ?>" onClick="toggleAll(1);">
+          <input class='btn btn-outline-secondary btn-sm' name='clearall' type='button' value="<?php echo uiTextSnippet('clearall'); ?>" onClick="toggleAll(0);">
+          <input class='btn btn-outline-warning btn-sm' name='xcemaction' type='submit' value="<?php echo uiTextSnippet('deleteselected'); ?>" onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');">
+        </p>
+        <?php
+      }
+      ?>
+      <table class="table table-sm table-hover">
+        <thead class='thead-default'>
+          <tr>
+            <th><?php echo uiTextSnippet('action'); ?></th>
+            <?php if ($allowDelete) { ?>
+              <th><?php echo uiTextSnippet('select'); ?></th>
+            <?php } ?>
+            <th><?php echo uiTextSnippet('cemetery'); ?></th>
+            <th><?php echo uiTextSnippet('location'); ?></th>
+            <?php if ($map['key']) { ?>
+              <th><?php echo uiTextSnippet('googleplace'); ?></th>
+            <?php } else { ?>
+              <th><?php echo uiTextSnippet('latitude'); ?></th>
+              <th><?php echo uiTextSnippet('longitude'); ?></th>
+            <?php } ?>
+          </tr>
+        </thead>
+        <?php
+        if ($numrows) {
+        $actionstr = '';
+        if ($allowEdit) {
+          $actionstr .= "<a href=\"cemeteriesEdit.php?cemeteryID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
+          $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
+          $actionstr .= '</a>';
+        }
+        if ($allowDelete) {
+          $actionstr .= "<a href='#' onClick=\"return confirmDelete('xxx');\" title=\"" . uiTextSnippet('delete') . "\">\n";
+          $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
+          $actionstr .= '</a>';
+        }
+        $actionstr .= "<a href=\"cemeteriesShowCemetery.php?cemeteryID=xxx&amp;\" title='" . uiTextSnippet('preview') . "'>\n";
+        $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
+        $actionstr .= "</a>\n";
 
-                  </td>
-                </tr>
-              </table>
-              <input name='findcemetery' type='hidden' value='1'>
-              <input name='newsearch' type='hidden' value='1'>
-            </form>
-            <br>
-            <?php
-            $numrowsplus = $numrows + $offset;
-            if (!$numrowsplus) {
-              $offsetplus = 0;
+        while ($row = tng_fetch_assoc($result)) {
+          $location = $row['city'];
+          if ($row['county']) {
+            if ($location) {
+              $location .= ', ';
             }
-            echo displayListLocation($offsetplus, $numrowsplus, $totrows);
-            ?>
-            <form action="admin_deleteselected.php" method='post' name="form2">
-              <?php
-              if ($allowDelete) {
-                ?>
-                <p>
-                  <input name='selectall' type='button' value="<?php echo uiTextSnippet('selectall'); ?>" onClick="toggleAll(1);">
-                  <input name='clearall' type='button' value="<?php echo uiTextSnippet('clearall'); ?>" onClick="toggleAll(0);">
-                  <input name='xcemaction' type='submit' value="<?php echo uiTextSnippet('deleteselected'); ?>" onClick="return confirm('<?php echo uiTextSnippet('confdeleterecs'); ?>');">
-                </p>
-                <?php
+            $location .= $row['county'];
+          }
+          if ($row['state']) {
+            if ($location) {
+              $location .= ', ';
+            }
+            $location .= $row['state'];
+          }
+          if ($row['country']) {
+            if ($location) {
+              $location .= ', ';
+            }
+            $location .= $row['country'];
+          }
+          $newactionstr = preg_replace('/xxx/', $row['cemeteryID'], $actionstr);
+          echo "<tr id=\"row_{$row['cemeteryID']}\"><td><div class=\"action-btns\">$newactionstr</div></td>\n";
+          if ($allowDelete) {
+            echo '<td>'
+            . "<input name=\"del{$row['cemeteryID']}\" type='checkbox' value='1'></td>";
+          }
+          $editlink = "cemeteriesEdit.php?cemeteryID={$row['cemeteryID']}";
+          $cemname = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['cemname'] . '</a>' : $row['cemname'];
+
+          echo "<td>$cemname</td>\n";
+          echo "<td>$location</td>\n";
+          if ($map['key']) {
+            echo '<td>';
+            $geo = '';
+            if ($row['latitude']) {
+              $geo .= uiTextSnippet('latitude') . ': ' . number_format($row['latitude'], 3);
+            }
+            if ($row['longitude']) {
+              if ($geo) {
+                $geo .= '<br>';
               }
-              ?>
-              <table class="table table-sm table-striped">
-                <tr>
-                  <th><?php echo uiTextSnippet('action'); ?></th>
-                  <?php if ($allowDelete) { ?>
-                    <th><?php echo uiTextSnippet('select'); ?></th>
-                  <?php } ?>
-                  <th><?php echo uiTextSnippet('cemetery'); ?></th>
-                  <th><?php echo uiTextSnippet('location'); ?></th>
-                  <?php if ($map['key']) { ?>
-                    <th><?php echo uiTextSnippet('googleplace'); ?></th>
-                  <?php } else { ?>
-                    <th><?php echo uiTextSnippet('latitude'); ?></th>
-                    <th><?php echo uiTextSnippet('longitude'); ?></th>
-                  <?php } ?>
-                </tr>
-
-                <?php
-                if ($numrows) {
-                $actionstr = '';
-                if ($allowEdit) {
-                  $actionstr .= "<a href=\"cemeteriesEdit.php?cemeteryID=xxx\" title='" . uiTextSnippet('edit') . "'>\n";
-                  $actionstr .= "<img class='icon-sm' src='svg/new-message.svg'>\n";
-                  $actionstr .= '</a>';
-                }
-                if ($allowDelete) {
-                  $actionstr .= "<a href='#' onClick=\"return confirmDelete('xxx');\" title=\"" . uiTextSnippet('delete') . "\">\n";
-                  $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
-                  $actionstr .= '</a>';
-                }
-                $actionstr .= "<a href=\"cemeteriesShowCemetery.php?cemeteryID=xxx&amp;\" title='" . uiTextSnippet('preview') . "'>\n";
-                $actionstr .= "<img class='icon-sm' src='svg/eye.svg'>\n";
-                $actionstr .= "</a>\n";
-
-                while ($row = tng_fetch_assoc($result)) {
-                  $location = $row['city'];
-                  if ($row['county']) {
-                    if ($location) {
-                      $location .= ', ';
-                    }
-                    $location .= $row['county'];
-                  }
-                  if ($row['state']) {
-                    if ($location) {
-                      $location .= ', ';
-                    }
-                    $location .= $row['state'];
-                  }
-                  if ($row['country']) {
-                    if ($location) {
-                      $location .= ', ';
-                    }
-                    $location .= $row['country'];
-                  }
-                  $newactionstr = preg_replace('/xxx/', $row['cemeteryID'], $actionstr);
-                  echo "<tr id=\"row_{$row['cemeteryID']}\"><td><div class=\"action-btns\">$newactionstr</div></td>\n";
-                  if ($allowDelete) {
-                    echo '<td>'
-                    . "<input name=\"del{$row['cemeteryID']}\" type='checkbox' value='1'></td>";
-                  }
-                  $editlink = "cemeteriesEdit.php?cemeteryID={$row['cemeteryID']}";
-                  $cemname = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['cemname'] . '</a>' : $row['cemname'];
-
-                  echo "<td>$cemname</td>\n";
-                  echo "<td>$location</td>\n";
-                  if ($map['key']) {
-                    echo '<td>';
-                    $geo = '';
-                    if ($row['latitude']) {
-                      $geo .= uiTextSnippet('latitude') . ': ' . number_format($row['latitude'], 3);
-                    }
-                    if ($row['longitude']) {
-                      if ($geo) {
-                        $geo .= '<br>';
-                      }
-                      $geo .= uiTextSnippet('longitude') . ': ' . number_format($row['longitude'], 3);
-                    }
-                    if ($row['zoom']) {
-                      if ($geo) {
-                        $geo .= '<br>';
-                      }
-                      $geo .= uiTextSnippet('zoom') . ': ' . $row['zoom'];
-                    }
-                    echo "$geo</td>\n";
-                  } else {
-                    echo "<td>{$row['latitude']}</td>\n";
-                    echo "<td>{$row['longitude']}</td></tr>\n";
-                  }
-                }
-                ?>
-              </table>
-            <?php
-            echo buildSearchResultPagination($totrows, "cemeteriesBrowse.php?searchstring=$searchstring&amp;exactmatch=$exactmatch&amp;offset", $maxsearchresults, 5);
+              $geo .= uiTextSnippet('longitude') . ': ' . number_format($row['longitude'], 3);
             }
-            else {
-              echo "<div class='alert alert-warning'>" . uiTextSnippet('norecords') . "</div>\n";
+            if ($row['zoom']) {
+              if ($geo) {
+                $geo .= '<br>';
+              }
+              $geo .= uiTextSnippet('zoom') . ': ' . $row['zoom'];
             }
-            tng_free_result($result);
-            ?>
-            </form>
-          </div>
-        </td>
-      </tr>
-    </table>
+            echo "$geo</td>\n";
+          } else {
+            echo "<td>{$row['latitude']}</td>\n";
+            echo "<td>{$row['longitude']}</td></tr>\n";
+          }
+        }
+        ?>
+      </table>
+    <?php
+    echo buildSearchResultPagination($totrows, "cemeteriesBrowse.php?searchstring=$searchstring&amp;exactmatch=$exactmatch&amp;offset", $maxsearchresults, 5);
+    }
+    else {
+      echo "<div class='alert alert-warning'>" . uiTextSnippet('norecords') . "</div>\n";
+    }
+    tng_free_result($result);
+    ?>
+    </form>
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>

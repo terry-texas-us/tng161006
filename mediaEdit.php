@@ -136,7 +136,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
     $navList->appendItem([$allowMediaEdit, 'mediaThumbnails.php', uiTextSnippet('thumbnails'), 'thumbs']);
     $navList->appendItem([$allowMediaAdd, 'mediaImport.php', uiTextSnippet('import'), 'import']);
     $navList->appendItem([$allowMediaAdd, 'mediaUpload.php', uiTextSnippet('upload'), 'upload']);
-    $navList->appendItem([$allowMediaEdit, '#', uiTextSnippet('edit'), 'edit']);
+    // $navList->appendItem([$allowMediaEdit, '#', uiTextSnippet('edit'), 'edit']);
     echo $navList->build('edit');
     ?>
     <br>
@@ -148,8 +148,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
       <a href='#' onClick="toggleAll('on');"><?php echo uiTextSnippet('expandall'); ?></a>
       <a href='#' onClick="toggleAll('off');"><?php echo uiTextSnippet('collapseall'); ?></a>
     </div>
-    <form action="mediaEditFormAction.php" method='post' name='form1' id='form1' ENCTYPE="multipart/form-data"
-          onsubmit="return validateForm();">
+    <form action="mediaEditFormAction.php" method='post' name='form1' id='form1' ENCTYPE="multipart/form-data" onsubmit="return validateForm();">
       <table class="table table-sm">
         <tr>
           <td>
@@ -339,7 +338,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                       <a href="#" onclick="return toggleCemSelect();"><?php echo uiTextSnippet('select'); ?></a>
                     </div>
                     <div id="cemselect"<?php if (!$row['cemeteryID'] && $mediatypeID != 'headstones') {echo " style='display: none'";} ?>>
-                      <select name="cemeteryID">
+                      <select class='form-control' name="cemeteryID">
                         <option selected></option>
                         <?php
                         $query = 'SELECT cemname, cemeteryID, city, county, state, country FROM cemeteries ORDER BY country, state, county, city, cemname';
@@ -366,7 +365,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                 <tr id="hsstatrow">
                   <td><?php echo uiTextSnippet('status'); ?>:</td>  
                   <td>
-                    <select name="status">
+                    <select class='form-control' name="status">
                       <option value=''>&nbsp;</option>
                       <option value="notyetlocated"<?php if ($row['status'] == 'notyetlocated') {echo ' selected';} ?>>
                         <?php echo uiTextSnippet('notyetlocated'); ?>

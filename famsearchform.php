@@ -246,7 +246,7 @@ $headSection->setTitle(uiTextSnippet('searchfams'));
         </div>
         <div class='col-sm-2'>
           <button class='btn btn-outline-warning' id='resetbtn' type='button' 
-                  onclick="resetValues();"><?php echo uiTextSnippet('tng_reset'); ?></button>
+                  onclick="resetValues();"><?php echo uiTextSnippet('reset'); ?></button>
         </div>
       </footer>
     </form>

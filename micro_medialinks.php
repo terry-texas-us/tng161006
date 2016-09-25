@@ -58,7 +58,7 @@ if ($result2) {
       $id = " ($entityID)";
       $name = truncateIt($plink['reponame'], 100);
       $linktype = 'R';
-    } else { //place
+    } else {
       $type = 'place';
       $entityID = $name = $plink['personID'];
       $id = '';
@@ -97,7 +97,7 @@ if ($result2) {
     </tr>
     <tr>
       <td>
-        <select name="linktype1">
+        <select class='form-control' name="linktype1">
           <option value='I'><?php echo uiTextSnippet('person'); ?></option>
           <option value='F'><?php echo uiTextSnippet('family'); ?></option>
           <option value='S'><?php echo uiTextSnippet('source'); ?></option>
@@ -106,14 +106,9 @@ if ($result2) {
         </select>
       </td>
       <td>
-        <input id='newlink' name='newlink1' type='text' value=''
-                 onkeypress="return newlinkEnter(findform, this, event);">
+        <input class='form-control' id='newlink' name='newlink1' type='text' value='' onkeypress="return newlinkEnter(findform, this, event);">
       </td>
-      <!--<td><input type='submit' value="<?php echo uiTextSnippet('add'); ?>"> <?php echo uiTextSnippet('or'); ?>
-      <input name='find1' type='button' value="<?php echo uiTextSnippet('find'); ?>" onClick="findopen=true;openFind(document.find.linktype1.options[document.find.linktype1.selectedIndex].value);$('newlines').innerHTML=resheremsg;"></td>-->
-      <td><input type='button' value="<?php echo uiTextSnippet('add'); ?>"
-                 onclick="return addMedia2EntityLink(findform);"> &nbsp;<?php echo uiTextSnippet('or'); ?>
-        &nbsp;</td>
+      <td><input class='form-control' type='button' value="<?php echo uiTextSnippet('add'); ?>" onclick="return addMedia2EntityLink(findform);"> &nbsp;<?php echo uiTextSnippet('or'); ?>&nbsp;</td>
       <td>
         <a href='#' onclick="return findItem(findform.linktype1.options[findform.linktype1.selectedIndex].value, 'newlink', null, '<?php echo $assignedbranch; ?>', 'm_<?php echo $mediaID; ?>');"
            title="<?php echo uiTextSnippet('find'); ?>">
@@ -126,21 +121,21 @@ if ($result2) {
 
   <p>&nbsp;<strong><?php echo uiTextSnippet('existlinks'); ?>
       :</strong> <?php echo uiTextSnippet('eloptions'); ?></p>
-  <table id="linktable">
+  <table class='table table-sm' id='linktable'>
+    <thead class='thead-default'>
+      <tr>
+        <th><?php echo uiTextSnippet('action'); ?></th>
+        <th><?php echo uiTextSnippet('linktype'); ?></th>
+        <th><?php echo uiTextSnippet('name') . ', ' . uiTextSnippet('id'); ?></th>
+        <th><?php echo uiTextSnippet('tree'); ?></th>
+        <th><?php echo uiTextSnippet('event'); ?></th>
+        <th><?php echo uiTextSnippet('alttd'); ?></th>
+        <th><?php echo uiTextSnippet('defphoto'); ?></th>
+        <th><?php echo uiTextSnippet('show'); ?></th>
+      </tr>
+    </thead>  
     <tbody>
-    <tr>
-      <td><?php echo uiTextSnippet('action'); ?></td>
-      <td><?php echo uiTextSnippet('linktype'); ?></td>
-      <td><?php echo uiTextSnippet('name') . ', ' . uiTextSnippet('id'); ?></td>
-      <td><?php echo uiTextSnippet('tree'); ?></td>
-      <td><?php echo uiTextSnippet('event'); ?></td>
-      <td><?php echo uiTextSnippet('alttd'); ?></td>
-      <td><?php echo uiTextSnippet('defphoto'); ?></td>
-      <td><?php echo uiTextSnippet('show'); ?></td>
-    </tr>
-    <?php
-    echo $linkrows;
-    ?>
+    <?php echo $linkrows; ?>
     </tbody>
   </table>
   <div id="nolinks" style="margin-left:3px">

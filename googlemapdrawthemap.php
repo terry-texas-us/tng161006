@@ -1,17 +1,17 @@
 <?php
 
-echo "<input type='button' onclick=\"return divbox('mapcontainer');\" value=\"" . uiTextSnippet('showhidemap') . '"> <span>' . uiTextSnippet('getcoords') . "</span>\n";
+echo "<input class='btn btn-sm' type='button' onclick=\"return divbox('mapcontainer');\" value=\"" . uiTextSnippet('showhidemap') . '"> <span>' . uiTextSnippet('getcoords') . "</span>\n";
 
 echo "<div class='mappad5' id='mapcontainer' style=\"display: none; width:{$map['admw']};\">\n";
 $searchstring = $row['place'] ? $row['place'] : uiTextSnippet('searchstring');
 echo '<span>' . uiTextSnippet('googleplace') . '.';
 
-echo "<input id='location' name='address' type='text' size='60' onkeypress=\"return keyHandlerEnter(this,event);\" value=\"$searchstring\"";
+echo "<input class='form-control form-control-sm' id='location' name='address' type='text' size='60' onkeypress=\"return keyHandlerEnter(this,event);\" value=\"$searchstring\"";
 if (!$row['place']) {
   echo " onfocus=\"if(this.value=='$searchstring'){this.value='';}\"";
 }
 echo ">\n";
-echo "<input type='button' value=\"" . uiTextSnippet('gobutton') . "\" onclick=\"showAddress(document.form1.address.value); return false\" /><br><br></span>\n";
+echo "<input class='btn btn-secondary btn-sm' type='button' value=\"" . uiTextSnippet('gobutton') . "\" onclick=\"showAddress(document.form1.address.value); return false\" /><br><br></span>\n";
 
 echo "<div id='map' style=\"width: {$map['admw']}; height: {$map['admh']}\"></div>\n";
 $maphelplang = findhelp('places_googlemap_help.php');

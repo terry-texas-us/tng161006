@@ -86,9 +86,9 @@ if (file_exists($arrltpath)) {
 } else {
   $pedigree['leftarrowlink'] = '<b>&lt;</b>';
 }
-if (file_exists($rootpath . $endrootpath . 'img/Chart.gif')) {
-  $chartlinkimg = getimagesize($rootpath . $endrootpath . 'img/Chart.gif');
-  $pedigree['chartlink'] = "<img src=\"img/Chart.gif\" $chartlinkimg[3] title=\"" . uiTextSnippet('popupnote2') . '" alt="' . uiTextSnippet('popupnote2') . '">';
+if (file_exists($rootpath . $endrootpath . 'svg/flow-split-horizontal.svg')) {
+  $chartlinkimg = getimagesize($rootpath . $endrootpath . 'svg/flow-split-horizontal.svg');
+  $pedigree['chartlink'] = '<img class="icon-xs pull-xs-right" src="svg/flow-split-horizontal.svg" title="' . uiTextSnippet('popupnote2') . '" alt="' . uiTextSnippet('popupnote2') . '">';
 } else {
   $pedigree['chartlink'] = '<span><b>P</b></span>';
 }

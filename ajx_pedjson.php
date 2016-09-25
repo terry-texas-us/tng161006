@@ -68,7 +68,7 @@ function xmlPerson($currperson, $backperson, $generation) {
   if ($display == 'standard' && $pedigree['inclphotos']) {
     $person .= xmlPhoto($currperson, $rights['both'], $row['sex']) . ',';
   } else {
-    $person .= '"photosrc\":"-1","photolink":"",';
+    $person .= '"photosrc":"-1","photolink":"",';
   }
 
   if ($rights['both']) {

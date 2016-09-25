@@ -154,7 +154,7 @@ $item .= '<atom:link href="' . $tngdomain . "/tngrss.php\" rel=\"self\" type=\"a
 
 $tngscript = basename($_SERVER['SCRIPT_NAME'], '.php');
 
-$item .= "<copyright>$tng_title, v.$tng_version ($tng_date), $tng_copyright</copyright>\n";
+$item .= "<copyright>$tng_title, v.$tng_version, $tng_copyright</copyright>\n";
 $item .= "<lastBuildDate>$date</lastBuildDate>\n";
 $item .= '<description>' . xmlcharacters($site_desc) . "</description>\n";
 

@@ -174,7 +174,7 @@ $headSection->setTitle(uiTextSnippet('anniversaries'));
         <br>
         <input name='tngneedresults' type='hidden' value='1'/>
         <input type='submit' value="<?php echo uiTextSnippet('search'); ?>"/>
-        <input type='button' value="<?php echo uiTextSnippet('tng_reset'); ?>" onclick="resetForm();"/>
+        <input type='button' value="<?php echo uiTextSnippet('reset'); ?>" onclick="resetForm();"/>
         | <input type='button' value="<?php echo uiTextSnippet('calendar'); ?>"
                  onclick="window.location.href='<?php echo "calendar.php?m=$tngmonth&amp;year=$tngyear"; ?>';"/>
       </div>

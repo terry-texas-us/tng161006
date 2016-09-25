@@ -81,12 +81,14 @@ $headSection->setTitle(uiTextSnippet('repositories'));
       echo "<br>\n";
     }
     ?>
-    <table class="table table-sm table-striped">
-      <tr>
-        <th></th>
-        <th><?php echo uiTextSnippet('repoid'); ?></th>
-        <th><?php echo uiTextSnippet('name'); ?></th>
-      </tr>
+    <table class="table table-sm table-hover">
+      <thead class='thead-default'>
+        <tr>
+          <th></th>
+          <th><?php echo uiTextSnippet('repoid'); ?></th>
+          <th><?php echo uiTextSnippet('name'); ?></th>
+        </tr>
+      </thead>
       <?php
       $i = $offsetplus;
       while ($row = tng_fetch_assoc($result)) {

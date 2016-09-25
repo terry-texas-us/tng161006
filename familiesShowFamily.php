@@ -487,7 +487,7 @@ $headSection->setTitle($headTitle);
     $media = doMediaSection($familyID, $fammedia, $famalbums);
     if ($media) {
       $famtext .= beginListItem('media');
-        $famtext .= "<div class='titlebox'>\n$media\n</div>\n<br>\n";
+        $famtext .= "<div class='card'>\n$media\n</div>\n<br>\n";
       $famtext .= endListItem('media');
     }
     if ($rights['both']) {

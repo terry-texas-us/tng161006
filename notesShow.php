@@ -4,21 +4,15 @@ require 'tng_begin.php';
 require 'functions.php';
 
 function doNoteSearch($notesearch) {
-  $html .= buildFormElement('notesShow', 'get', 'notesearch1');
-  $html .= "<div class='row'>\n";
-  $html .= "<div class='col-sm-6'>";
-  $html .= "<input class='form-control' name='notesearch' type='text' value='$notesearch'>";
-  $html .= "</div>\n";
-  $html .= "<div class='col-sm-2'>";
-  $html .= "<input class='btn btn-outline-primary' type='submit' value='" . uiTextSnippet('search') . "'>";
-  $html .= "</div>\n";
-  $html .= "<div class='col-sm-4'>";
+  $html .= "<div>\n";
+  $html .= "<form class='form-inline' name='notesearch1' action='notesShow.php' method='get'>\n";
+  $html .= "<input class='form-control' name='notesearch' type='text' value='$notesearch'>\n";
+  $html .= "<button class='btn btn-outline-primary' type='submit' value='" . uiTextSnippet('search') . "'><img class='icon-sm' src='svg/magnifying-glass.svg'></button>\n";
   if ($notesearch) {
-    $html .= "<a href='notesShow.php'>" . uiTextSnippet('browseallnotes') . '</a>';
+    $html .= "<button class='btn btn-outline-secondary'><a href='notesShow.php'>" . uiTextSnippet('showall') . '</a></button>';
   }
-  $html .= "</div>\n";
-  $html .= "</div>\n";
   $html .= "</form>\n";
+  $html .= "</div>\n";
 
   return $html;
 }
@@ -85,8 +79,8 @@ $headSection->setTitle(uiTextSnippet('notes'));
       echo '<p>' . uiTextSnippet('matches') . ' ' . number_format($offsetplus) . ' ' . uiTextSnippet('to') . ' ' . number_format($numrowsplus) . ' ' . uiTextSnippet('of') . ' ' . number_format($totrows) . '</p>';
     }
     ?>
-      <table class='table table-sm'>
-        <thead>
+      <table class='table table-sm table-hover'>
+        <thead class='thead-default'>
           <tr>
             <th></th>
             <th><?php echo uiTextSnippet('notes'); ?></th>

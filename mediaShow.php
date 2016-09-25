@@ -1,4 +1,8 @@
 <?php
+/**
+ * Name history: browsemedia.php
+ */
+
 require 'tng_begin.php';
 
 require 'functions.php';
@@ -42,7 +46,7 @@ if ($mediasearch) {
 
 if ($tnggallery) {
   if (!$tngconfig['thumbcols']) {
-    $tngconfig['thumbcols'] = 10;
+    $tngconfig['thumbcols'] = 8;
   }
   $maxsearchresults *= 2;
   $wherestr .= ' AND thumbpath != ""';
@@ -52,21 +56,23 @@ if ($tnggallery) {
 }
 $_SESSION['tng_gallery'] = $tnggallery;
 
-function doMediaSearch($instance, $pagenav) {
+function buildMediaSearchForm($instance, $pagenav) {
   global $mediasearch;
   global $orgmediatypeID;
   global $tnggallery;
 
-  $str = buildFormElement('mediaShow', 'get', "MediaSearch$instance");
-  $str .= "<input name='mediasearch' type='text' value=\"$mediasearch\" /> \n";
-  $str .= "<input type='submit' value=\"" . uiTextSnippet('search') . "\" /> \n";
-  $str .= "<input type='button' value=\"" . uiTextSnippet('tng_reset') . "\" onclick=\"window.location.href='mediaShow.php?mediatypeID=$orgmediatypeID&amp;tnggallery=$tnggallery';\" />&nbsp;&nbsp;&nbsp;";
-  $str .= "<input name='mediatypeID' type='hidden' value=\"$orgmediatypeID\" />\n";
-  $str .= $pagenav;
-  $str .= "<input name='tnggallery' type='hidden' value=\"$tnggallery\" />\n";
-  $str .= "</form>\n";
+  $html = "<div>\n";
+  $html .= "<form class='form-inline' name='MediaSearch" . $instance . "' action='mediaShow.php' method='get'>\n";
+  $html .= "<input class='form-control' name='mediasearch' type='text' value=\"$mediasearch\" /> \n";
+  $html .= "<button class='btn btn-outline-primary' type='submit' value='" . uiTextSnippet('search') . "' /><img class='icon-sm' src='svg/magnifying-glass.svg'></button>\n";
+  $html .= "<input class='btn btn-outline-secondary' type='button' value='" . uiTextSnippet('reset') . "' onclick=\"window.location.href='mediaShow.php?mediatypeID=$orgmediatypeID&amp;tnggallery=$tnggallery';\" />&nbsp;&nbsp;&nbsp;";
+  $html .= "<input name='mediatypeID' type='hidden' value=\"$orgmediatypeID\" />\n";
+//  $html .= $pagenav;
+  $html .= "<input name='tnggallery' type='hidden' value=\"$tnggallery\" />\n";
+  $html .= "</form>\n";
+  $html .= "</div>\n";
 
-  return $str;
+  return $html;
 }
 
 $max_browsemedia_pages = 5;
@@ -100,10 +106,7 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 
 $numrowsplus = $numrows + $offset;
 
-$treestr = '';
-$treestr = trim("$mediasearch $treestr");
-$treestr = $treestr ? " ($treestr)" : '';
-$logstring = "<a href=\"mediaShow.php?offset=$offset&amp;mediasearch=$mediasearch&amp;mediatypeID=$mediatypeID\">$titlestr$treestr</a>";
+$logstring = "<a href=\"mediaShow.php?offset=$offset&amp;mediasearch=$mediasearch&amp;mediatypeID=$mediatypeID\">$titlestr</a>";
 writelog($logstring);
 preparebookmark($logstring);
 
@@ -131,7 +134,7 @@ $headSection->setTitle($titlestr);
     }
     ?>
     <h2><?php echo $icon . $titlestr; ?></h2>
-    <br clear='all'>
+    <br>
     <?php
     $hiddenfields[0] = ['name' => 'mediatypeID', 'value' => $orgmediatypeID];
     $hiddenfields[1] = ['name' => 'tnggallery', 'value' => $tnggallery];
@@ -143,28 +146,30 @@ $headSection->setTitle($titlestr);
     $toplinks .= "$gallerymsg";
 
     $pagenav = buildSearchResultPagination($totrows, "mediaShow.php?mediasearch=$mediasearch&amp;tnggallery=$tnggallery&amp;mediatypeID=$orgmediatypeID&amp;offset", $maxsearchresults, $max_browsemedia_pages);
-    $preheader = doMediaSearch(1, $pagenav);
+    $preheader = buildMediaSearchForm(1, $pagenav);
     $preheader .= "<br>\n";
 
+    $tableClass = 'table table-sm';
     if ($tnggallery) {
-      $preheader .= "<div class=\"titlebox\">\n";
+      $preheader .= "<div class='card'>\n";
       $firstrow = 1;
-      $tablewidth = '';
       $header = '';
     } else {
-      $header = "<tr><td width='10'></td>\n";
-      $header .= "<td width=\"$thumbmaxw\">" . uiTextSnippet('thumb') . "</td>\n";
-      $width = $mediatypeID == 'headstones' ? '50%' : '75%';
-      $header .= "<td width=\"$width\">" . uiTextSnippet('description') . "</td>\n";
-      if ($mediatypeID == 'headstones') {
-        $header .= '<td>' . uiTextSnippet('cemetery') . "</td>\n";
-        $header .= '<td>' . uiTextSnippet('status') . "</td>\n";
+      $tableClass .= ' table-hover';
+      $header = "<thead class='thead-default'>\n";
+      $header .= "<tr><th width='10'></th>\n";
+      $header .= "<th width=\"$thumbmaxw\">" . uiTextSnippet('thumb') . "</th>\n";
+      $width = ($mediatypeID === 'headstones') ? '50%' : '75%';
+      $header .= "<th width=\"$width\">" . uiTextSnippet('description') . "</th>\n";
+      if ($mediatypeID === 'headstones') {
+        $header .= '<th>' . uiTextSnippet('cemetery') . "</th>\n";
+        $header .= '<th>' . uiTextSnippet('status') . "</th>\n";
       }
-      $header .= '<td>' . uiTextSnippet('indlinked') . "</td>\n";
+      $header .= '<th>' . uiTextSnippet('indlinked') . "</th>\n";
       $header .= "</tr>\n";
-      $tablewidth = " width='100%'";
+      $header .= "</thead>\n";
     }
-    $header = "<table class='table' $tablewidth>\n" . $header;
+    $header = "<table class='$tableClass'>\n" . $header;
 
     $i = $offsetplus;
     $maxplus = $maxsearchresults + 1;
@@ -374,7 +379,7 @@ $headSection->setTitle($titlestr);
       $ss = strpos($firsthref, '?') ? '&amp;ss=1' : '?ss=1';
       $toplinks .= " &nbsp;&nbsp; <a href=\"$firsthref$ss\">&raquo; " . uiTextSnippet('slidestart') . '</a>';
     }
-    $toplinks .= '</p>';
+    $toplinks .= "</p>\n";
     //print out the whole shootin' match right here, eh
     echo $toplinks . $preheader . $header . $mediatext;
     echo "</table>\n";
@@ -382,11 +387,9 @@ $headSection->setTitle($titlestr);
     if ($tnggallery) {
       echo "</div>\n";
     }
-    echo "<br>\n";
 
     if ($totrows && ($pagenav || $mediasearch)) {
-      echo doMediaSearch(2, $pagenav);
-      echo '<br>';
+      echo $pagenav;
     }
     ?>
     <?php echo $publicFooterSection->build(); ?>

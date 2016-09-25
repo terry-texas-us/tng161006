@@ -1,4 +1,8 @@
 <?php
+/*
+ * Name history: admin_editplace.php
+ */
+
 require 'begin.php';
 require $subroot . 'mapconfig.php';
 require 'adminlib.php';
@@ -37,169 +41,165 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
     $navList->appendItem([$allowAdd, 'placesAdd.php', uiTextSnippet('add'), 'addplace']);
     $navList->appendItem([$allowEdit && $allowDelete, 'placesMerge.php', uiTextSnippet('merge'), 'merge']);
     $navList->appendItem([$allowEdit, 'admin_geocodeform.php', uiTextSnippet('geocode'), 'geo']);
-    $navList->appendItem([$allowEdit, '#', uiTextSnippet('edit'), 'edit']);
+    // $navList->appendItem([$allowEdit, '#', uiTextSnippet('edit'), 'edit']);
     echo $navList->build('edit');
     ?>
     <br>
     <a href="placesearch.php?psearch=<?php echo urlencode($orgplace); ?>" title='<?php echo uiTextSnippet('preview') ?>'>
       <img class='icon-sm' src='svg/eye.svg'>
     </a>
-    <!-- [ts] should this be placeID or is personID correct? -->
     <a href="admin_newmedia.php?personID=<?php echo $row['place']; ?>&amp;linktype=L"><?php echo uiTextSnippet('addmedia'); ?></a>
-    <form action="placesEditFormAction.php" method='post' name='form1' id='form1'
-          onSubmit="return validateForm();">
+    <form action='placesEditFormAction.php' method='post' name='form1' id='form1' onSubmit="return validateForm();">
       <h2><?php echo $row['place']; ?></h2>
-      <table>
-        <tr>
-          <td><?php echo uiTextSnippet('place'); ?>:</td>
-          <td>
-            <input class='longfield' id='place' name='place' type='text' value="<?php echo $row['place']; ?>" size='50'></td>
-        </tr>
-        <?php
-        if (determineLDSRights()) {
-          echo "<tr><td>&nbsp;</td><td><input name='temple' type='checkbox' value='1'";
-          if ($row['temple']) {
-            echo ' checked';
-          }
-          echo '> ' . uiTextSnippet('istemple') . "</td></tr>\n";
+
+      <div class='form-group row'>
+        <label class='col-form-label col-sm-2' for='place'><?php echo uiTextSnippet('place'); ?></label>
+        <div class='col-sm-6'>
+          <input class='form-control' id='place' name='place' type='text' value="<?php echo $row['place']; ?>">
+        </div>
+      </div>
+      <?php
+      if (determineLDSRights()) {
+        echo "<div class='row'><div class='offset-sm-2 col-sm-6'><input name='temple' type='checkbox' value='1'";
+        if ($row['temple']) {
+          echo ' checked';
         }
-        if ($map['key']) { ?>
-          <tr>
-            <td colspan='2'>
-              <div style="padding:10px">
-                <?php include 'googlemapdrawthemap.php'; ?>
-              </div>
-            </td>
-          </tr>
-        <?php } ?>
-        <tr>
-          <td><?php echo uiTextSnippet('latitude'); ?>:</td>
-          <td><input id='latbox' name='latitude' type='text' value="<?php echo $row['latitude']; ?>"></td>
-        </tr>
-        <tr>
-          <td><?php echo uiTextSnippet('longitude'); ?>:</td>
-          <td><input id='lonbox' name='longitude' type='text' value="<?php echo $row['longitude']; ?>"></td>
-        </tr>
-        <?php if ($map['key']) { ?>
-          <tr>
-            <td><?php echo uiTextSnippet('zoom'); ?>:</td>
-            <td>
-              <input id='zoombox' name='zoom' type='text' value="<?php echo $row['zoom']; ?>">
-            </td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('placelevel'); ?>:</td>
-            <td>
-              <select name="placelevel">
-                <option value=''></option>
-                <?php
-                for ($i = 1; $i < 7; $i++) {
-                  echo "<option value=\"$i\"";
-                  if ($i == $row['placelevel']) {
-                    echo ' selected';
-                  }
-                  echo '>' . uiTextSnippet('level' . $i) . "</option>\n";
+        echo '> ' . uiTextSnippet('istemple') . "</div></div>\n";
+      }
+      if ($map['key']) { 
+      ?>
+        <hr>
+        <div class='form-group row'>
+          <label class='col-form-label col-sm-2'><?php echo uiTextSnippet('mapof'); ?></label>
+          <div class='col-sm-10'>
+            <?php include 'googlemapdrawthemap.php'; ?>
+          </div>
+        </div>
+      <?php } ?>
+      <div class='row'>
+        <label class='col-form-label offset-sm-2 col-sm-2' for='latitude'><?php echo uiTextSnippet('latitude'); ?></label>
+        <div class='col-sm-3'>
+          <input class='form-control' id='latbox' name='latitude' type='text' value="<?php echo $row['latitude']; ?>">
+        </div>
+        <label class='col-form-label col-sm-2' for='longitude'><?php echo uiTextSnippet('longitude'); ?></label>
+        <div class='col-sm-3'>
+          <input class='form-control' id='lonbox' name='longitude' type='text' value="<?php echo $row['longitude']; ?>">
+        </div>
+      </div>
+      <?php if ($map['key']) { ?>
+        <div class='row'>
+          <label class='col-form-label offset-sm-2 col-sm-2' for='zoom'><?php echo uiTextSnippet('zoom'); ?></label>
+          <div class='col-sm-3'>
+            <input class='form-control' id='zoombox' name='zoom' type='text' value="<?php echo $row['zoom']; ?>">
+          </div>
+          <label class='col-form-label col-sm-2' for='placelevel'><?php echo uiTextSnippet('placelevel'); ?></label>
+          <div class='col-sm-3'>
+            <select class='form-control' name='placelevel'>
+              <option value=''></option>
+              <?php
+              for ($i = 1; $i < 7; $i++) {
+                echo "<option value='$i'";
+                if ($i === (int) $row['placelevel']) {
+                  echo ' selected';
                 }
-                ?>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('cemeteries'); ?>:</td>
-            <td>
-              <table id="cemeteries">
-                <tbody id="cemeteriestblbody">
-                <?php
-                //get cemeteries with no place assoc
-                $query = "SELECT cemeteryID, cemname, city, county, state, country FROM cemeteries WHERE place = \"{$row['place']}\" ORDER BY cemname";
-                $cemresult = tng_query($query);
-                while ($cemrow = tng_fetch_assoc($cemresult)) {
-                  $location = $cemrow['cemname'];
-                  if ($cemrow['city']) {
-                    if ($location) {
-                      $location .= ', ';
-                    }
-                    $location .= $cemrow['city'];
+                echo '>' . uiTextSnippet('level' . $i) . "</option>\n";
+              }
+              ?>
+            </select>
+          </div>
+        </div>
+      <?php } ?>
+
+      <?php if ($map['key']) { ?>
+        <hr>
+        <div class='row'>
+          <div class='col-sm-2'><?php echo uiTextSnippet('cemeteries'); ?></div>
+          <div class='col-sm-10'>
+            <table class='table table-sm' id='cemeteries'>
+              <thead class='thead-default'>
+                <tr>
+                  <th><?php echo uiTextSnippet('action'); ?></th>
+                  <th><?php echo uiTextSnippet('place'); ?></th>
+                </tr>
+              </thead>
+              <tbody id="cemeteriestblbody">
+              <?php
+
+              $query = "SELECT cemeteryID, cemname, city, county, state, country FROM cemeteries WHERE place = \"{$row['place']}\" ORDER BY cemname";
+              $cemresult = tng_query($query);
+              while ($cemrow = tng_fetch_assoc($cemresult)) {
+                $location = $cemrow['cemname'];
+                if ($cemrow['city']) {
+                  if ($location) {
+                    $location .= ', ';
                   }
-                  if ($cemrow['county']) {
-                    if ($location) {
-                      $location .= ', ';
-                    }
-                    $location .= $cemrow['county'];
-                  }
-                  if ($cemrow['state']) {
-                    if ($location) {
-                      $location .= ', ';
-                    }
-                    $location .= $cemrow['state'];
-                  }
-                  if ($cemrow['country']) {
-                    if ($location) {
-                      $location .= ', ';
-                    }
-                    $location .= $cemrow['country'];
-                  }
-                  $actionstr = '';
-                  if ($allowDelete) {
-                    $actionstr .= "<a href='#' onclick=\"return deleteCemLink('{$cemrow['cemeteryID']}');\" title='" . uiTextSnippet('delete') . "'>\n";
-                    $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
-                    $actionstr .= '</a>';
-                  }
-                  if ($allowEdit) {
-                    $actionstr .= "<a href='#' onclick=\"return copyGeoInfo('{$cemrow['cemeteryID']}');\"><img class='icon-sm-inline' src='svg/globe.svg' id=\"geo{$cemrow['cemeteryID']}\" title=\"" . uiTextSnippet('geocopy') . '" alt="' . uiTextSnippet('geocopy') . '"></a>';
-                  }
-                  echo "<tr id=\"row_{$cemrow['cemeteryID']}\">\n";
-                    echo "<td>$actionstr</td>\n";
-                    echo "<td>$location</td>\n";
-                  echo "</tr>\n";
+                  $location .= $cemrow['city'];
                 }
-                ?>
-                </tbody>
-              </table>
-              <input type='button' value="<?php echo uiTextSnippet('linkcem'); ?>"
-                     onclick="pickCemetery();"/>
-              <img class='icon-sm-inline' src='svg/globe.svg' title="<?php echo uiTextSnippet('geocopy'); ?>">
-            </td>
-          </tr>
-        <?php } ?>
-        <tr>
-          <td><?php echo uiTextSnippet('notes'); ?>:</td>
-          <td>
-            <textarea class='form-control' name='notes' rows='5'><?php echo $row['notes']; ?></textarea>
-          </td>
-        </tr>
-        <?php
-        if (!$assignedbranch) {
-          ?>
-          <tr>
-            <td colspan='2'>
-              <input name='propagate' type='checkbox' value='1' checked> <?php echo uiTextSnippet('propagate'); ?>:
-            </td>
-          </tr>
-          <?php
-        }
-        ?>
-        <tr>
-          <td colspan='2'>&nbsp;</td>
-        </tr>
-        <tr>
-          <td colspan='2'>
-            <?php
-            echo uiTextSnippet('onsave') . ':<br>';
-            echo "<input name='newscreen' type='radio' value='return'> " . uiTextSnippet('savereturn') . "<br>\n";
-            if ($cw) {
-              echo "<input name='newscreen' type='radio' value='close' checked> " . uiTextSnippet('closewindow') . "\n";
-            } else {
-              echo "<input name='newscreen' type='radio' value='none' checked> " . uiTextSnippet('saveback') . "\n";
-            }
-            ?>
-          </td>
-        </tr>
-      </table>
-      &nbsp;
+                if ($cemrow['county']) {
+                  if ($location) {
+                    $location .= ', ';
+                  }
+                  $location .= $cemrow['county'];
+                }
+                if ($cemrow['state']) {
+                  if ($location) {
+                    $location .= ', ';
+                  }
+                  $location .= $cemrow['state'];
+                }
+                if ($cemrow['country']) {
+                  if ($location) {
+                    $location .= ', ';
+                  }
+                  $location .= $cemrow['country'];
+                }
+                $actionstr = '';
+                if ($allowDelete) {
+                  $actionstr .= "<a href='#' onclick=\"return deleteCemLink('{$cemrow['cemeteryID']}');\" title='" . uiTextSnippet('delete') . "'>\n";
+                  $actionstr .= "<img class='icon-sm' src='svg/trash.svg'>\n";
+                  $actionstr .= '</a>';
+                }
+                if ($allowEdit) {
+                  $actionstr .= "<a href='#' onclick=\"return copyGeoInfo('{$cemrow['cemeteryID']}');\"><img class='icon-sm' src='svg/globe.svg' id=\"geo{$cemrow['cemeteryID']}\" title=\"" . uiTextSnippet('geocopy') . '" alt="' . uiTextSnippet('geocopy') . '"></a>';
+                }
+                echo "<tr id=\"row_{$cemrow['cemeteryID']}\">\n";
+                echo "<td>$actionstr</td>\n";
+                echo "<td>$location</td>\n";
+                echo "</tr>\n";
+              }
+              ?>
+              </tbody>
+            </table>
+            <input class='btn btn-outline-primary' id='linkcem' type='button' value="<?php echo uiTextSnippet('linkcem'); ?>">
+            <img class='icon-sm-inline' src='svg/globe.svg' title="<?php echo uiTextSnippet('geocopy'); ?>">
+          </div>
+        </div>
+      <?php } ?>
+      <hr>
+      <div class='form-group row'>
+        <label class='col-form-label col-sm-2' for='notes'><?php echo uiTextSnippet('notes'); ?></label>
+        <div class='col-sm-10'>
+          <textarea class='form-control' name='notes' rows='5'><?php echo $row['notes']; ?></textarea>
+        </div>
+      </div>
+      <?php if (!$assignedbranch) { ?>
+        <input name='propagate' type='checkbox' value='1' checked> <?php echo uiTextSnippet('propagate'); ?>:
+        <br>
+      <?php 
+      }
+      echo uiTextSnippet('onsave') . ':<br>';
+      echo "<input name='newscreen' type='radio' value='return'> " . uiTextSnippet('savereturn') . "<br>\n";
+      if ($cw) {
+        echo "<input name='newscreen' type='radio' value='close' checked> " . uiTextSnippet('closewindow') . "\n";
+      } else {
+        echo "<input name='newscreen' type='radio' value='none' checked> " . uiTextSnippet('saveback') . "\n";
+      }
+      ?>
+      <br>
       <input name='ID' type='hidden' value="<?php echo "$ID"; ?>">
       <input name='orgplace' type='hidden' value="<?php echo $row['place']; ?>">
-      <input name='submit' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
+      <br>
+      <input class='btn btn-primary' name='submit' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
     </form>
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->
@@ -259,10 +259,12 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
   }
 
   var tnglitbox;
-  function pickCemetery() {
-    tnglitbox = new ModalDialog('cemeteriesSelectUnlinked.modal.php');
-  }
 
+  $('#linkcem').on('click', function () {
+      'use strict';
+      tnglitbox = new ModalDialog('cemeteriesSelectUnlinked.modal.php');
+  });
+  
   function insertCell(row, index, classname, content) {
     var cell = row.insertCell(index);
     cell.className = classname;
@@ -271,7 +273,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
   }
 
   function addCemLink(cemeteryID) {
-    //ajax to add
+    'use strict';
     var place = '<?php echo urlencode($row['place']); ?>';
     var params = {cemeteryID: cemeteryID, place: place, action: 'addcemlink'};
     $.ajax({
@@ -284,16 +286,16 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
         var newtr = cemtbl.insertRow(cemtbl.rows.length);
         newtr.id = "row_" + cemeteryID;
         var actionstr = '<a href="#" onclick="return deleteCemLink(\'' + cemeteryID + '\');" title="' + textSnippet('delete') + '">\n';
-        $actionstr += '<img class="icon-sm" src="svg/trash.svg">\n';
-        $actionstr += '</a>';
-        actionstr += '<a href="#" onclick="return copyGeoInfo(\'' + cemeteryID + '\');\"><img class="icon-sm-inline" id="geo' + cemeteryID + '" src="svg/globe.svg" title="' + textSnippet('geocopy') + '" alt="' + textSnippet('geocopy') + '"></a>';
+        actionstr += '<img class="icon-sm" src="svg/trash.svg">\n';
+        actionstr += '</a>';
+        actionstr += '<a href="#" onclick="return copyGeoInfo(\'' + cemeteryID + '\');\"><img class="icon-sm" id="geo' + cemeteryID + '" src="svg/globe.svg" title="' + textSnippet('geocopy') + '" alt="' + textSnippet('geocopy') + '"></a>';
         insertCell(newtr, 0, "nw", actionstr);
         insertCell(newtr, 1, "nw", vars.location);
         tnglitbox.remove();
         var tds = $('tr#row_' + cemeteryID + ' td');
         $.each(tds, function (index, item) {
           item.effect('highlight', {}, 1400);
-        })
+        });
       }
     });
     return false;

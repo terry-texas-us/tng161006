@@ -92,16 +92,24 @@ $headSection->setTitle(uiTextSnippet('mostwanted'));
     <br clear='left'>
     <?php
 
-    echo "<div class=\"titlebox mwblock\">\n";
+    echo "<div class='card'>\n";
+    echo "<div class='card-header'>\n";
     echo '<h4>' . uiTextSnippet('mysperson') . '</h4>';
+    echo "</div>\n";
+    echo "<div class='card-block'>\n";
     echo showDivs('person');
+    echo "</div>\n";
     echo "</div>\n";
 
     echo "<br>\n";
 
-    echo "<div class=\"titlebox mwblock\">\n";
+    echo "<div class='card'>\n";
+    echo "<div class='card-header'>\n";
     echo '<h4>' . uiTextSnippet('mysphoto') . '</h4>';
+    echo "</div>\n";
+    echo "<div class='card-block'>\n";
     echo showDivs('photo');
+    echo "</div>\n";
     echo "</div>\n";
     ?>
     <?php echo $publicFooterSection->build(); ?>

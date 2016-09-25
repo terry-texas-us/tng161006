@@ -18,8 +18,8 @@ class AdminHeaderElementSection extends HeaderElementSection {
 
     $this->out = "<header id='$this->id' class='clearfix'>\n";
 
-    $this->out .= "<a class='logo' title='twhs [placeholder]' href='#'><span>twhs logo [placeholder]</span></a>\n";
-    $this->out .= "<h3><a href='admin.php'>$this->title, v.$this->version</a></h3>\n";
+    $this->out .= "<h3><a href='admin.php'>$this->title</a></h3>\n";
+    $this->out .= "<a title='twhs [placeholder]' href='#'><span>[logo placeholder]</span></a>\n";
 
     global $adminNavSection;
     switch ($topLevel) {

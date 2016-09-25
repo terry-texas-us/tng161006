@@ -205,7 +205,7 @@ preparebookmark($logstring);
     $preheader = $pagenav . "</p>\n";
 
     if ($tnggallery) {
-      $preheader .= "<div class=\"titlebox\">\n";
+      $preheader .= "<div class='card'>\n";
       $firstrow = 1;
       $tablewidth = '';
       $header = '';

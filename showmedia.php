@@ -190,7 +190,7 @@ echo "<body id='public'>\n";
         $titlemsg = uiTextSnippet($mediatypeID) ? uiTextSnippet($mediatypeID) : $mediatypes_display[$mediatypeID];
         $icon = $mediatypes_icons[$mediatypeID];
         if ($mediatypes_icons[$mediatypeID]) {
-          $icon = "<img class='icon-md' src='{$mediatypes_icons[$mediatypeID]}'alt=''>";
+          $icon = "<img class='icon-md' src='{$mediatypes_icons[$mediatypeID]}' alt=''>";
         } else {
           $icon = "<span class='icon-md icon-{$mediatypeID}'></span>";
         }

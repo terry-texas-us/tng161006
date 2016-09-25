@@ -227,15 +227,13 @@ function updateMedia2EntityLink(form) {
 function addMedia2EntityLink(form, newEntityID, num) {
     if (newEntityID) {
         var entityID = decodeURIComponent(newEntityID);
-        //form.newlink1.value = decodeURIComponent(entityID).replace(/\+/g,' ');
     } else
         var entityID = form.linktype1.options[form.linktype1.selectedIndex].value === 'L' ? form.newlink1.value : form.newlink1.value.toUpperCase();
     if (!entityID)
         alert(textSnippet('enterid'));
     else {
-        var tree = form.tree1.options[form.tree1.selectedIndex].value;
         var linktype = form.linktype1.options[form.linktype1.selectedIndex].value;
-        var params = {tree: tree, linktype: linktype, entityID: entityID, type: type, action: 'addlink'};
+        var params = {linktype: linktype, entityID: entityID, type: type, action: 'addlink'};
         if (type === "album")
             params.albumID = album;
         else
@@ -265,8 +263,6 @@ function addMedia2EntityLink(form, newEntityID, num) {
                     var newrow;
                     var displayID = linktype !== 'L' ? ' (' + entityID + ')' : '';
                     var dims = "width=\"20\" height=\"20\" class=\"icon-sm\"";
-                    var treename = form.tree1.options[form.tree1.selectedIndex].text;
-                    var treeID = form.tree1.options[form.tree1.selectedIndex].value;
                     var linktext = form.linktype1.options[form.linktype1.selectedIndex].text;
 
                     if ($('#linkcount').length) {

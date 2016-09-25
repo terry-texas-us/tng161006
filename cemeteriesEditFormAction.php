@@ -1,4 +1,8 @@
 <?php
+/**
+ * Name history: admin_updatecemetery.php
+ */
+
 require 'begin.php';
 require $subroot . 'mapconfig.php';
 require 'adminlib.php';
@@ -50,7 +54,7 @@ $result = tng_query($query);
 
 $place = trim($place);
 if ($place) {
-  //first check to see if any place exists with new place name
+  // First check to see if any place exists with new place name.
   $query = "SELECT * FROM places WHERE place = '$place'";
   $result = tng_query($query);
 

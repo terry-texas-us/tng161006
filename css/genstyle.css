@@ -335,6 +335,9 @@ footer.public {
 #person-footer button {
   float: right; }
 
+#cemeteries img.information {
+  width: 100%; }
+
 .togglehead {
   text-decoration: none;
   color: black; }
@@ -471,8 +474,8 @@ button.help {
   margin: 0 2px; }
 
 .icon-xs-inline:hover {
-  width: 16px;
-  height: 16px; }
+  width: 12px;
+  height: 12px; }
 
 .icon-sm {
   width: 16px;
@@ -514,6 +517,12 @@ button.help {
 
 .icon-primary {
   fill: #0275d8 !important; }
+
+.files-silent-folder-link {
+  text-decoration: none; }
+
+.files-silent-folder-link:hover {
+  text-decoration: none; }
 
 .custom-events {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -788,16 +797,6 @@ form[action="places-containing.php"] {
   text-align: right;
   width: 30px; }
 
-.titlebox {
-  border: 1px solid silver;
-  background-color: #f9f9f9;
-  padding: 10px;
-  margin: 10px 2px; }
-
-.whiteback {
-  border: 1px solid silver;
-  background-color: white; }
-
 .rightround {
   border-radius: 0 4px 4px 0; }
 
@@ -966,12 +965,6 @@ form[action="places-containing.php"] {
   float: left;
   margin-right: 15px;
   margin-bottom: 5px; }
-
-.mwblock {
-  max-width: 800px; }
-
-.mediaalign, .center {
-  text-align: center; }
 
 .table-fixed {
   table-layout: fixed;

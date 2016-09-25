@@ -1,6 +1,5 @@
 <?php
-$tng_title = 'The Next Generation';
-$tng_abbrev = 'TNG';
-$tng_version = '10.1.3';
-$tng_copyright = '2001-' . date('Y');
-$tng_date = '24 October 2015';
+$tng_title = 'Texas Wendish Heritage';
+$tng_abbrev = 'TWH';
+$tng_version = '0.09';
+$tng_copyright = date('Y');

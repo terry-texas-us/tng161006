@@ -52,6 +52,8 @@ tng_query('ALTER TABLE citations AUTO_INCREMENT = 1');
 tng_query('DELETE FROM places');
 tng_query('ALTER TABLE places AUTO_INCREMENT = 1');
 
+tng_query("INSERT IGNORE INTO places (place, longitude, latitude, zoom, placelevel, temple, geoignore, notes) VALUES('DALLA - Dallas Texas','-96.7969879','32.7766642',12,3,1,0,'')");
+
 $query = "UPDATE people SET branch = '' WHERE branch = '$branch'";
 $result = tng_query($query);
 
