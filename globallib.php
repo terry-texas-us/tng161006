@@ -105,26 +105,26 @@ function getNameUniversal($row, $order, $hcard = null) {
     $lastname = tng_strtoupper($lastname);
   }
   if ($hcard) {
-    $lastname = '<span class="family-name">' . $lastname . '</span>';
+    $lastname = '<span>' . $lastname . '</span>';
     $title = $suffix = '';
   } else {
     $title = $row['title'] && ($row['title'] == $row['prefix']) ? $row['title'] : trim($row['title'] . ' ' . $row['prefix']);
     $suffix = $row['suffix'];
   }
   if (($row['allow_living'] || !$nonames) && ($row['allow_private'] || !$tngconfig['nnpriv'])) {
-    $firstname = $hcard ? '<span class="given-name">' . $row['firstname'] . '</span>' : $row['firstname'];
+    $firstname = $hcard ? '<span>' . $row['firstname'] . '</span>' : $row['firstname'];
     $namestr = constructName($firstname, $lastname, $title, $suffix, $order);
   } elseif ($row['living'] && !$row['allow_living'] && $nonames == 1) {
     $namestr = uiTextSnippet('living');
   } elseif ($row['private'] && !$row['allow_private'] && $tngconfig['nnpriv'] == 1) {
     $namestr = uiTextSnippet('private');
   } else { //initials
-    $firstname = $hcard ? '<span class="given-name">' . initials($row['firstname']) . '</span>' : initials($row['firstname']);
+    $firstname = $hcard ? '<span>' . initials($row['firstname']) . '</span>' : initials($row['firstname']);
     $namestr = constructName($firstname, $lastname, $title, $suffix, $order);
   }
 
   if ($hcard) {
-    $namestr = "<span class=\"n\">$namestr</span>";
+    $namestr = "<span>$namestr</span>";
   }
   return $namestr;
 }
@@ -508,10 +508,10 @@ function buildSearchResultPagination($total, $address, $perpage, $pagenavpages) 
     $navoffset = (($prevpage * $perpage) - $perpage);
 
     $out .= "<li class='page-item'>\n";
-      $out .= "<a class='page-link' href='$address=$navoffset&amp;tngpage=$prevpage' aria-label='Previous'>\n";
-        $out .= "<span aria-hidden='true'>&laquo;</span>\n";
-        $out .= "<span class='sr-only'>Previous</span>\n";
-      $out .= "</a>\n";
+    $out .= "<a class='page-link' href='$address=$navoffset&amp;tngpage=$prevpage' aria-label='Previous'>\n";
+    $out .= "<span aria-hidden='true'>&laquo;</span>\n";
+    $out .= "<span class='sr-only'>Previous</span>\n";
+    $out .= "</a>\n";
     $out .= "</li>\n";
   }
   while ($curpage++ < $totalpages) {
@@ -541,9 +541,9 @@ function buildSearchResultPagination($total, $address, $perpage, $pagenavpages) 
 
     $out .= "<li class='page-item'>\n";
     $out .= "<a class='page-link' href='$address=$navoffset&amp;tngpage=$nextpage' aria-label='Next'>\n";
-      $out .= "<span aria-hidden='true'>&raquo;</span>\n";
-      $out .= "<span class='sr-only'>Next</span>\n";
-      $out .= "</a>\n";
+    $out .= "<span aria-hidden='true'>&raquo;</span>\n";
+    $out .= "<span class='sr-only'>Next</span>\n";
+    $out .= "</a>\n";
     $out .= "</li>\n";
   }
   $out .= "</ul>\n";

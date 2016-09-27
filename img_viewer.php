@@ -35,8 +35,6 @@ require 'showmedialib.php';
 $info = getMediaInfo($mediatypeID, $mediaID, $personID, $albumID, $albumlinkID, $cemeteryID, $eventID);
 $imgrow = $info['imgrow'];
 
-$flags['styles'] = "<link href=\"css/img_viewer.css\" rel=\"stylesheet\" type=\"text/css\">\n";
-
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
@@ -48,8 +46,6 @@ $headSection->setTitle($imgrow['description']);
 <?php echo $headSection->build($flags, 'public', $session_charset); ?>
 <?php
 echo "<body id='public'>\n";
-  echo $publicHeaderSection->build();
-
   $usefolder = $imgrow['usecollfolder'] ? $mediatypes_assoc[$mediatypeID] : $mediapath;
   if ($imgrow['abspath'] || substr($imgrow['path'], 0, 4) == 'http' || substr($imgrow['path'], 0, 1) == '/') {
     $mediasrc = $imgrow['path'];
@@ -75,9 +71,8 @@ echo "<body id='public'>\n";
     $height = $maxh;
     $width = floor($height * $orgwidth / $orgheight);
   }
-  $float = strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 7') > 0 ? ' style="float: left"' : '';
   ?>
-  <div id="imgviewer" <?php echo $float; ?>>
+  <div id='imgviewer'>
     <map name="imgMapViewer" id="imgMapViewer"><?php echo $imgrow['map']; ?></map>
     <?php
     // Clean up the description.

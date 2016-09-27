@@ -11,11 +11,6 @@ require 'log.php';
 require 'functions.php';
 require 'personlib.php';
 
-//starting time between slides
-$slidetime_display = '3.0';
-//starting time in microseconds
-$slidetime_micro = 3000;
-
 initMediaTypes();
 
 if ($medialinkID) {
@@ -68,9 +63,7 @@ $mediadescription = $info['mediadescription'];
 $page = $info['page'];
 $result = $info['result'];
 $imgrow = $info['imgrow'];
-if (($imgrow['form'] && !in_array($imgrow['form'], $imagetypes))) {
-  $tngconfig['ssdisabled'] = 1;
-}
+
 $numitems = tng_num_rows($result);
 
 if ($personID && !$albumlinkID) {
@@ -91,7 +84,8 @@ if ($personID && !$albumlinkID) {
     if ($result2) {
       $row = tng_fetch_assoc($result2);
       if ($linktype == 'S' || $linktype == 'R') {
-        $row['allow_living'] = $row['allow_private'] = 1;
+        $row['allow_living'] = 1;
+        $row['allow_private'] = 1;
         $rightbranch = 1;
       } else {
         $rightbranch = checkbranch($row['branch']);
@@ -150,12 +144,6 @@ echo "<body id='public'>\n";
     $size = getimagesize("$rootpath$usefolder/" . $imgrow['path'], $info);
     $adjheight = $size['1'] - 1;
 
-    if (!$tngconfig['ssdisabled'] && !$tngprint && $numitems > 1) {
-      $sscontrols = " &nbsp;&nbsp;&nbsp; <a href='#' onclick=\"return start();\">&raquo; " . uiTextSnippet('slidestart') . "</a>\n";
-    } else {
-      $sscontrols = '';
-    }
-
     if ($personID) {
       if ($linktype == 'I') {
         $namestr = getName($row);
@@ -176,7 +164,6 @@ echo "<body id='public'>\n";
         $type = 'place';
       }
       $mediastr = showSmallPhoto($personID, $namestr, $row['allow_living'] && $row['allow_private'], 0, false, $row['sex']);
-      $slideshowheader = $namestr;
       echo tng_DrawHeading($mediastr, $namestr, $years);
 
       echo tng_menu($linktype, $type, $personID);
@@ -184,7 +171,6 @@ echo "<body id='public'>\n";
     } else {
       if ($albumlinkID) {
         $mediastr = "<img class='icon-md' src='svg/album.svg'>\n";
-        $slideshowheader = $albumname;
         echo tng_DrawHeading($mediastr, $albumname, $albdesc);
       } else {
         $titlemsg = uiTextSnippet($mediatypeID) ? uiTextSnippet($mediatypeID) : $mediatypes_display[$mediatypeID];
@@ -194,40 +180,30 @@ echo "<body id='public'>\n";
         } else {
           $icon = "<span class='icon-md icon-{$mediatypeID}'></span>";
         }
-        echo "<h1 class=\"header\">$icon$titlemsg</h1>\n";
-
-        $slideshowheader = $titlemsg;
+        echo "<h1>$icon$titlemsg</h1>\n";
       }
     }
-    $slideshowheader = preg_replace('/\"/', '&#34;', $slideshowheader);
+    $pagenav = getMediaNavigation($mediaID, $personID, $albumlinkID, $result, true);
 
-    if (!$tngprint && !$tngconfig['ssdisabled']) {
-      ?>
-      <div>
-      <?php
+    if ($page < $totalpages) {
+      $nextpage = $page + 1;
+    } else {
+      $nextpage = 1;
     }
-    if (!$tngprint) {
-      $pagenav = getMediaNavigation($mediaID, $personID, $albumlinkID, $result, true);
+    $nextmediaID = get_item_id($result, $nextpage - 1, 'mediaID');
+    $nextmedialinkID = get_item_id($result, $nextpage - 1, 'medialinkID');
+    $nextalbumlinkID = get_item_id($result, $nextpage - 1, 'albumlinkID');
 
-      if ($page < $totalpages) {
-        $nextpage = $page + 1;
-      } else {
-        $nextpage = 1;
-      }
-      $nextmediaID = get_item_id($result, $nextpage - 1, 'mediaID');
-      $nextmedialinkID = get_item_id($result, $nextpage - 1, 'medialinkID');
-      $nextalbumlinkID = get_item_id($result, $nextpage - 1, 'albumlinkID');
-    }
     tng_free_result($result);
 
-    echo "<p style=\"margin-top:2.5em\">$pagenav$sscontrols</p>";
+    echo "<div style='margin-top: 2.5em'>$pagenav</div>";
 
     if ($noneliving || $imgrow['alwayson']) {
       $show_on_top = false;
       if ((isset($mediatypes_like['histories']) && !in_array($mediatypeID, $mediatypes_like['histories'])) || !$imgrow['bodytext']) {
         echo $mapnote;
         showMediaSource($imgrow);
-        echo '<br><br>';
+        echo '<br>';
         $show_on_top = true;
       }
 
@@ -235,7 +211,7 @@ echo "<body id='public'>\n";
       if ($notes) {
         echo "<p>$notes</p>\n";
       } else {
-        echo '<br><br>';
+        echo '<br>';
       }
       if (!$show_on_top) {
         showMediaSource($imgrow);
@@ -270,9 +246,7 @@ echo "<body id='public'>\n";
       if ($imgrow['cemeteryID']) {
         doCemPlusMap($imgrow);
       }
-      if (!$tngprint) {
-        echo "<br><p>$pagenav$sscontrols</p><br>\n";
-      }
+      echo "<br><div>$pagenav</div><br>\n";
     } else {
       ?>
       <div style="border:1px solid black;padding:5px;width:<?php echo $size['0']; ?>px;height:<?php echo $adjheight; ?>px">
@@ -280,60 +254,24 @@ echo "<body id='public'>\n";
       </div>
       <?php
     }
-    if (!$tngprint && !$tngconfig['ssdisabled']) {
-      ?>
-      </div>
-      <?php
-    }
     echo "<br>\n";
     echo $publicFooterSection->build();
   echo "</section> <!-- .container -->\n";
   echo scriptsManager::buildScriptElements($flags, 'public');
-  if (!$tngprint) {
-  ?>
-    <script src='js/slideshow.js'></script>
-    <script>
-      var timeoutID;
-      var myslides;
-    
-      <?php if ($ss) { ?>
-         $(document).ready(start);
-      <?php } ?>
 
-      <?php if ($imgviewer && !in_array($imgrow['mediatypeID'], $mediatypes_like[$imgviewer])) { ?>
-        $(document).ready(adjustWidth);
-        function adjustWidth() {
-          if ($('#imgdiv').length && $('#theimage').width() > document.getElementById('imgdiv').clientWidth) {
-            $('#imgdiv').width($('#theimage').width() + 'px');
-          }
+  ?>
+  <script>
+    <?php if ($imgviewer && !in_array($imgrow['mediatypeID'], $mediatypes_like[$imgviewer])) { ?>
+      $(document).ready(adjustWidth);
+      function adjustWidth() {
+        if ($('#imgdiv').length && $('#theimage').width() > document.getElementById('imgdiv').clientWidth) {
+          $('#imgdiv').width($('#theimage').width() + 'px');
         }
-      <?php } ?>
-      var repeat = <?php echo $tngconfig['ssrepeat'] ?> ? true : false;
-      
-      function start() {
-        var url = "slideshow.modal.php?mediaID=<?php echo $mediaID ?>&medialinkID=<?php echo $medialinkID ?>&albumlinkID=<?php echo $albumlinkID ?>&cemeteryID=<?php echo $cemeteryID ?>";
-        tnglitbox = new ModalDialog(url, {
-          size: 'modal-lg',
-          title: '<?php echo addslashes(truncateIt($slideshowheader, 100)) ?>',
-          onremove: function() {tnglitbox = null; timeoutID = null;},
-          doneLoading: startSlides
-        });
-        $('#slidetoggle').click(function() {stopshow(); return false;});
-        return false;
       }
-      function startSlides() {
-        myslides = new Slideshow({
-          timeout: <?php echo $slidetime_micro ?>,
-          startingID: '<?php echo $mediaID ?>',
-          mediaID: '<?php echo $nextmediaID ?>',
-          medialinkID: '<?php echo $nextmedialinkID ?>',
-          albumlinkID: '<?php echo $nextalbumlinkID?>',
-          cemeteryID: '<?php echo $cemeteryID ?>'
-        });
-      }
-    </script>
+    <?php } ?>
+  </script>
   <?php
-  }
+
   $imgviewer = $tngconfig['imgviewer'];
   if (!$imgviewer || in_array($imgrow['mediatypeID'], $mediatypes_like[$imgviewer])) {
   ?>

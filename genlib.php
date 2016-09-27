@@ -24,7 +24,7 @@ $tree = '';
 
 require_once 'classes/HeadElementSection.php';
 require_once 'classes/publicNavElementSection.php';
-require_once 'classes/publicHeaderElementSection.php';
+require_once 'classes/PublicHeaderElementSection.php';
 require_once 'classes/footerElementSection.php';
 require_once 'classes/scriptsManager.php';
 
@@ -82,17 +82,19 @@ function getSmallPhoto($medialink) {
 }
 
 function tng_DrawHeading($photostr, $namestr, $years) {
+  $html = "<div class='clearfix'>\n";
   if ($photostr) {
-    $outputstr = "<div style='float: left; padding-right: 5px'>$photostr</div>\n";
-    $outputstr .= "<h2>$namestr</h2><span>$years</span>\n";
+    $html .= "<div style='float: left; padding-right: 5px'>$photostr</div>\n";
+    $html .= "<h2>$namestr</h2>";
   } else {
-    $outputstr = "<h2 class='header fn' id='nameheader'>$namestr</h2>";
-    if ($years) {
-      $outputstr .= "<span>$years</span><br>\n";
-    }
+    $html .= "<h2 class='header fn' id='nameheader'>$namestr</h2>";
   }
-  $outputstr .= "<br clear='all'><br>\n";
-  return $outputstr;
+  if ($years) {
+    $html .= "<span>$years</span>\n";
+  }
+  $html .= "</div>\n";
+  $html .= "<hr>\n";
+  return $html;
 }
 
 function getSurnameOnly($row) {

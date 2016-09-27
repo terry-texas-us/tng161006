@@ -198,6 +198,93 @@ body.admin-login {
   border-top-left-radius: 0;
   border-top-right-radius: 0; }
 
+iframe#iframe1 {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin: 0;
+  overflow: hidden; }
+
+button.close {
+  margin-right: 0.5rem; }
+
+.magnifier {
+  position: absolute;
+  border: solid 1px black;
+  cursor: move;
+  background: white no-repeat; }
+
+.magnifierShadow {
+  position: absolute;
+  background: transparent;
+  padding: 0;
+  margin: 0; }
+
+.controller {
+  vertical-align: top; }
+
+.controllerContainer {
+  height: 34px;
+  /*background: #EEE;*/
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  padding: 0; }
+
+.controllerText {
+  vertical-align: bottom;
+  margin: 5px 0 0 5px;
+  font-size: 10pt; }
+
+.controllerButton {
+  margin: 5px 5px 0 5px;
+  font-size: 8pt;
+  vertical-align: bottom; }
+
+.controllerPan {
+  margin: 5px 5px 0 5px;
+  border: solid 1px #EEE;
+  vertical-align: bottom;
+  cursor: pointer; }
+
+.controllerPanSelected {
+  margin: 5px 5px 0 5px;
+  vertical-align: bottom;
+  background: #DDD;
+  border: 1px solid #111;
+  border-right-color: white;
+  border-bottom-color: white; }
+
+.controllerMag {
+  border: solid 1px #EEE;
+  margin: 5px 5px 0 10px;
+  vertical-align: bottom;
+  cursor: pointer; }
+
+.controllerMagSelected {
+  margin: 5px 5px 0 10px;
+  background: #DDD;
+  border: 1px solid #111;
+  border-right-color: white;
+  border-bottom-color: white;
+  vertical-align: bottom; }
+
+.controllerImage {
+  margin: 5px 0 0 5px;
+  background: #EEE;
+  vertical-align: bottom; }
+
+.zoomSelector {
+  font-size: 8pt;
+  margin: 5px 0 0 5px; }
+
+.breakLine {
+  vertical-align: bottom; }
+
+.canvas {
+  background-color: #F9F9F9;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.125); }
+
 .form-gedcom .form-container {
   background-color: #eee;
   max-width: 420px;
@@ -234,6 +321,11 @@ body.admin-login {
   min-width: 8rem;
   max-width: 8rem; }
 
+#custevents {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-top: 1rem; }
+
 .family-link-silent {
   color: #373a3c; }
 
@@ -252,6 +344,13 @@ body.admin-login {
 
 .place {
   color: #373a3c; }
+
+.map-cemetery, .map-place-search, map-headstones {
+  width: 100%;
+  height: 340px;
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden; }
 
 html {
   font-size: 15px; }
@@ -578,51 +677,12 @@ button.help {
 * html .media-prev {
   background: url("../img/media-prevbg.gif") no-repeat 0 0; }
 
-#slideshow {
-  position: relative; }
-
-#slideshow div.slide, #slideshow div.loadingdiv {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 860px;
-  height: 550px; }
-
-.livingbox {
-  width: 870px;
-  height: 550px;
-  border: 1px solid black;
-  padding: 5px; }
-
 #loadingdiv, #loadingdiv2 {
   position: absolute;
   background-color: white;
-  padding: 20px;
-  font-size: 21pt;
-  border: solid 1px black;
+  padding: 2px;
+  border: solid 1px gray;
   z-index: 5; }
-
-#loadingdiv2 {
-  width: 200px; }
-
-#sscontrols {
-  font-size: 8pt;
-  padding-bottom: 8px;
-  margin: 0; }
-
-#slidemsg {
-  padding: 0 5px 0 15px; }
-
-.slidepane {
-  width: 860px;
-  height: 550px;
-  padding: 10px;
-  overflow: hidden; }
-
-#slidearea img {
-  max-width: 100%;
-  max-height: 550px;
-  height: auto; }
 
 .person-prev {
   top: -120px;
@@ -682,7 +742,7 @@ button.help {
 textarea:hover {
   border-color: #FFCC33; }
 
-.langmenu select option {
+.language-change select option {
   padding: 0 5px 1px 5px; }
 
 input.longfield {
@@ -808,6 +868,10 @@ form[action="places-containing.php"] {
   margin: 20px auto;
   text-align: center;
   cursor: pointer; }
+
+.pin-label {
+  font-size: 80%;
+  font-weight: normal; }
 
 /*Searching button on Relationship chart*/
 #searching {
@@ -942,19 +1006,8 @@ form[action="places-containing.php"] {
   text-decoration: none;
   color: black; }
 
-.langblock {
-  padding-top: 2px;
-  padding-right: 4px;
-  clear: both; }
-
 #mapcontainer {
-  border: solid 1px black;
-  margin-bottom: 8px;
-  margin-right: 10px;
-  margin-top: 8px; }
-
-.mappad5 {
-  padding: 5px; }
+  margin-top: 1rem; }
 
 /*most wanted*/
 .mwperson {
@@ -1047,7 +1100,7 @@ ul#tngnav {
   background: #0275d8;
   color: #FC0; }
 
-.notearea {
+.notearea, .sources-scroll {
   max-height: 200px;
   overflow: auto; }
 
@@ -1233,16 +1286,6 @@ table.uploadmore td {
     padding: 15px 16px 20px 16px;
     position: fixed;
     background: none; } }
-@media screen and (max-width: 991px) {
-  .slidepane {
-    width: 800px;
-    height: 500px;
-    padding: 10px; }
-
-  #slideshow div.slide {
-    width: 800px;
-    height: 500px;
-    padding: 10px; } }
 @media screen and (max-width: 767px) {
   a.btn {
     font-size: 1em; }
@@ -1259,17 +1302,7 @@ table.uploadmore td {
     display: none; }
 
   .media-prev {
-    width: 320px; }
-
-  .slidepane {
-    width: 600px;
-    height: 400px;
-    padding: 6px; }
-
-  #slideshow div.slide {
-    width: 600px;
-    height: 400px;
-    padding: 6px; } }
+    width: 320px; } }
 #surnames span.verbose-md, #surnames-top span.verbose-md {
   display: none; }
 
@@ -1288,16 +1321,42 @@ table.uploadmore td {
     padding-right: 0.5rem; } }
 @media screen and (max-width: 480px) {
   .media-prev {
-    width: 240px; }
+    width: 240px; } }
+@media print {
+  body {
+    font-size: 14px; }
 
-  .slidepane {
-    width: 400px;
-    height: 400px;
-    padding: 4px; }
+  section.container {
+    padding-left: 0;
+    padding-right: 0; }
 
-  #slideshow div.slide {
-    width: 400px;
-    height: 400px;
-    padding: 4px; } }
+  nav {
+    display: none; }
+
+  .icons-rt {
+    display: none; }
+
+  #tngmenu {
+    display: none; }
+
+  .pub-innermenu {
+    display: none; }
+
+  #info a {
+    color: #373a3c; }
+
+  #eventmap table {
+    page-break-before: always; }
+  #eventmap table table {
+    display: none; }
+
+  #sources table {
+    page-break-before: always; }
+
+  .sources-scroll {
+    max-height: none; }
+
+  div.language-change {
+    display: none; } }
 
 /*# sourceMappingURL=genstyle.css.map */

@@ -8,7 +8,7 @@ function showCustEvents($id) {
   global $mylanguage;
   global $languagesPath;
 
-  echo "<div id='custevents' style='margin-bottom: 5px'>\n";
+  echo "<div id='custevents'>\n";
 
   $query = "SELECT display, eventdate, eventplace, info, events.eventID AS eventID FROM events, eventtypes WHERE parenttag = \"\" AND persfamID = '$id' AND events.eventtypeID = eventtypes.eventtypeID ORDER BY eventdatetr, ordernum";
   $evresult = tng_query($query);
@@ -18,7 +18,8 @@ function showCustEvents($id) {
   if (!$eventcount) {
     echo " style='display: none'";
   }
-  echo '>';
+  echo ">\n";
+  echo "<thead class='thead-default'>\n";
   echo "<tr>\n";
   echo '<th>' . uiTextSnippet('action') . "</th>\n";
   echo '<th>' . uiTextSnippet('event') . "</th>\n";
@@ -26,6 +27,7 @@ function showCustEvents($id) {
   echo '<th>' . uiTextSnippet('eventplace') . "</th>\n";
   echo '<th>' . uiTextSnippet('detail') . "</th>\n";
   echo "</tr>\n";
+  echo "</thead>\n";
   echo "<tbody id='custeventstblbody'>\n";
 
   if ($evresult && $eventcount) {

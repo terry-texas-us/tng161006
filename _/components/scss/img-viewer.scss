@@ -1,0 +1,103 @@
+iframe#iframe1 {
+  width: 100%;
+  border: $card-border-width solid $card-border-color;
+  margin: 0;
+  overflow: hidden;
+}
+
+button.close {
+  margin-right: 0.5rem;
+}
+
+.magnifier {
+    position: absolute;
+    border: solid 1px black;
+    cursor: move;
+    background: white no-repeat;
+}
+		
+.magnifierShadow {
+    position: absolute;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+		
+.controller {
+    vertical-align: top;
+}
+		
+.controllerContainer {
+    height: 34px;
+    /*background: #EEE;*/
+    border: $card-border-width solid $card-border-color;
+    padding: 0;
+}
+
+.controllerText {
+    vertical-align: bottom;
+    margin: 5px 0 0 5px;
+    font-size: 10pt;
+}
+
+.controllerButton {
+    margin: 5px 5px 0 5px;
+    font-size: 8pt;
+    vertical-align: bottom;
+}
+
+.controllerPan  {
+    margin: 5px 5px 0 5px;
+    border: solid 1px #EEE;
+    vertical-align: bottom;
+    cursor: pointer;
+}
+
+.controllerPanSelected {
+    margin: 5px 5px 0 5px;
+    vertical-align: bottom;
+    background: #DDD;
+    border: 1px solid #111;
+    border-right-color: white;
+    border-bottom-color: white;
+}
+
+.controllerMag {
+    border: solid 1px #EEE;
+    margin: 5px 5px 0 10px;
+    vertical-align: bottom;
+    cursor: pointer;
+}
+
+.controllerMagSelected {
+    margin: 5px 5px 0 10px;
+    background: #DDD;
+    border: 1px solid #111;
+    border-right-color: white;
+    border-bottom-color: white;
+    vertical-align: bottom;
+}
+
+.controllerImage {
+    margin: 5px 0 0 5px;
+    background: #EEE;
+    vertical-align: bottom;
+}
+
+.zoomSelector {
+    font-size: 8pt;
+    margin: 5px 0 0 5px;
+}
+
+.breakLine {
+    vertical-align: bottom;
+}
+
+.canvas {
+	background-color: #F9F9F9;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+	border: $card-border-width solid $card-border-color;
+}
+

@@ -80,7 +80,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
         <?php
         $albumtext = $header = '';
         $header .= "<thead class='thead-default'>\n";
-        $header .= "<tr><td></td>\n";
+        $header .= "<tr><th></th>\n";
         $header .= '<th>' . uiTextSnippet('thumb') . "</th>\n";
         $header .= '<th>' . uiTextSnippet('description') . "</th>\n";
         $header .= '<th>' . uiTextSnippet('numitems') . "</th>\n";

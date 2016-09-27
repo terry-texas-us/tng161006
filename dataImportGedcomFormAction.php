@@ -255,15 +255,18 @@ $headSection->setTitle(uiTextSnippet('datamaint'));
     } else {
     ?>
       <script>
-        var idivs, timeoutID;
+        var idivs,
+            timeoutID,
+            msgdiv,
+            closemsg;
         parent.started = <?php echo $clearedtogo; ?>;
-        var msgdiv = parent.document.getElementById('importmsg');
+        msgdiv = parent.document.getElementById('importmsg');
 
         if (parent.started) {
             parent.document.getElementById('impdata').style.visibility = "visible";
             timeoutID = setTimeout(updateCount, 250);
         } else {
-            var closemsg = '<a href="#" onclick="tnglitbox.remove();return false;">' + textSnippet('okay') + '</a>';
+            closemsg = '<a href="#" onclick="tnglitbox.remove();return false;">' + textSnippet('okay') + '</a>';
             parent.document.getElementById('implinks').innerHTML = '<p>' + closemsg + '</p>';
         }
         msgdiv.innerHTML = "<?php echo $openmsg; ?>";

@@ -39,10 +39,11 @@ function calcHeight(maxHeight) {
     imgHeight = iframe.contentWindow.document.getElementById('theimage').height + 60 + titleHeight;
 
     // set the height of the iframe
-    if (maxHeight === 1)
-        iframe.height = imgHeight;
-    else
-        iframe.height = maxHeight + 25;
+    if (maxHeight === 1) {
+        $(iframe).css({'height' : imgHeight});
+    } else {
+        $(iframe).css({'height' : maxHeight + 25});
+    }
 
     // erase the 'please wait' message
     document.getElementById('loadingdiv2').style.display = 'none';

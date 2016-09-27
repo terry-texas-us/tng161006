@@ -18,7 +18,7 @@ $headSection->setTitle(uiTextSnippet('addnewplace'));
 <!DOCTYPE html>
 <html>
 <?php echo $headSection->build('', 'admin', $session_charset); ?>
-<body<?php if ($map['key']) {if (!$map['startoff']) {echo " onload=\"divbox('mapcontainer');\"";}} ?>>
+<body<?php echo ((bool) $map['key'] === true && (bool) $map['startoff'] === false) ? " onload=\"divbox('mapcontainer');\"" : ""; ?>>
   <section class='container'>
     <?php
     echo $adminHeaderSection->build('places-addnewplace', $message);
@@ -49,11 +49,8 @@ $headSection->setTitle(uiTextSnippet('addnewplace'));
           ?>
           <tr>
             <td colspan='2'>
-              <div style="padding:10px">
-                <?php
-                // draw the map here
-                include 'googlemapdrawthemap.php';
-                ?>
+              <div>
+                <?php echo buildGoogleMapCardHtml($map); ?>
               </div>
             </td>
           </tr>

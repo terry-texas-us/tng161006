@@ -54,6 +54,8 @@ preparebookmark($logstring);
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
+$snippets = ['latitude' => uiTextSnippet('latitude'), 'longitude' => uiTextSnippet('longitude')];
+
 header('Content-type: text/html; charset=' . $session_charset);
 $headSection->setTitle($psearchns);
 ?>
@@ -79,41 +81,54 @@ $headSection->setTitle($psearchns);
     $altstr = ', altdescription, altnotes';
     $mapdrawn = false;
     while ($prow = tng_fetch_assoc($presult)) {
-      if ($prow['notes'] || $prow['latitude'] || $prow['longitude']) {
+      if ($prow['latitude'] || $prow['longitude']) {
+        echo "<div class='card card-block'>";
+        echo "<div class='row'>\n";
+        echo "<div class='col-md-8'>\n";
         if (($prow['latitude'] || $prow['longitude']) && $map['key'] && !$mapdrawn) {
-          echo "<br><div id='map' style=\"width: {$map['hstw']}; height: {$map['hsth']}; margin-bottom:20px;\"></div>\n";
+          echo "<div class='map-place-search' id='map' style='width: {$map['hstw']}; height: {$map['hsth']};'></div>\n";
           $usedplaces = [];
           $mapdrawn = true;
         }
-        if ($prow['notes']) {
-          echo '<span><strong>' . uiTextSnippet('notes') . ':</strong> ' . nl2br($prow['notes']) . '</span><br>';
-        }
+        echo "</div>\n";
+        echo "<div class='col-md-4'>\n";
         if ($map['key']) {
           $lat = $prow['latitude'];
           $long = $prow['longitude'];
           $zoom = $prow['zoom'] ? $prow['zoom'] : 10;
           $placelevel = $prow['placelevel'] ? $prow['placelevel'] : '0';
-          $pinplacelevel = ${'pinplacelevel' . $placelevel};
-          $placeleveltext = $placelevel != '0' ? uiTextSnippet('level' . $placelevel) . '&nbsp;:&nbsp;' : '';
+          $placeleveltext = $placelevel != '0' ? uiTextSnippet('level' . $placelevel) : '';
           $codedplace = htmlspecialchars(str_replace($banish, $banreplace, $psearchns), ENT_QUOTES, $session_charset);
-          $codednotes = $prow['notes'] ? '<br><br>' . tng_real_escape_string(uiTextSnippet('notes') . ': ' . $prow['notes']) : '';
-          // add external link to Google Maps for Directions in the balloon
-          $codednotes .= "<br><br><a href=\"{$http}://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($codedplace)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">" . uiTextSnippet('getdirections') . '</a>' . uiTextSnippet('directionsto') . " $codedplace";
+          $codednotes = $prow['notes'] ? '<br>' . tng_real_escape_string(uiTextSnippet('notes') . ': ' . $prow['notes']) : '';
+
+          $codednotes .= "<br><br><a href=\"https://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "&amp;oe=$session_charset&amp;daddr=$lat,$long($codedplace)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">" . uiTextSnippet('getdirections') . '</a>' . uiTextSnippet('directionsto') . " $codedplace";
+
           if ($lat && $long) {
             $uniqueplace = $psearch . $lat . $long;
             if ($map['showallpins'] || !in_array($uniqueplace, $usedplaces)) {
               $usedplaces[] = $uniqueplace;
-              $locations2map[$l2mCount] = ['pinplacelevel' => $pinplacelevel, 'lat' => $lat, 'long' => $long, 'zoom' => $zoom, 'htmlcontent' => "<div class=\"mapballoon\">$placeleveltext<br>$codedplace$codednotes</div>"];
+              $locations2map[$l2mCount] = ['placelevel' => $placelevel, 'lat' => $lat, 'long' => $long, 'zoom' => $zoom, 'htmlcontent' => "<div class=\"mapballoon\">$placeleveltext<br>$codedplace$codednotes</div>"];
               $l2mCount++;
             }
           }
-          echo "<a href=\"{$http}://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($codedplace)&amp;z=12&amp;om=1&amp;iwloc=addr\" target=\"_blank\">\n";
-          echo "<img src=\"google_marker.php?image=$pinplacelevel.png&amp;text=$l2mCount\" alt=''></a><strong>$placeleveltext</strong><span><strong>" .
-                  uiTextSnippet('latitude') . ":</strong> {$prow['latitude']}, <strong>" . uiTextSnippet('longitude') . ":</strong> {$prow['longitude']}</span><br><br>";
+          echo '<a href="https://maps.google.com/maps?f=q&amp;' . uiTextSnippet('localize') . "&amp;oe=$session_charset&amp;daddr=$lat,$long($codedplace)&amp;z=12&amp;om=1&amp;iwloc=addr\" target='_blank'>\n";
+//          echo "<img src=\"google_marker.php?image=$pins[$placelevel]&amp;text=$l2mCount\" alt=''>\n";
+          echo "</a>\n";
+          
           $map['pins']++;
+          echo "<strong>" . uiTextSnippet('placelevel') . ":</strong> $placeleveltext<br>\n";
+          echo "<strong>{$snippets['latitude']}:</strong> {$prow['latitude']}<br>\n";
+          echo "<strong>{$snippets['longitude']}:</strong> {$prow['longitude']}\n";
         } elseif ($prow['latitude'] || $prow['longitude']) {
-          echo '<span><strong>' . uiTextSnippet('latitude') . ":</strong> {$prow['latitude']}, <strong>" . uiTextSnippet('longitude') . ":</strong> {$prow['longitude']}</span><br><br>";
+          echo "<strong>{$snippets['latitude']}:</strong> {$prow['latitude']}<br>\n";
+          echo "<strong>{$snippets['longitude']}:</strong> {$prow['longitude']}\n";
         }
+        echo "</div>\n";
+        echo "</div>\n"; // .row
+        echo "</div>\n"; // .card.card-block
+      }
+      if ($prow['notes']) {
+        echo '<span><strong>' . uiTextSnippet('notes') . ':</strong> ' . nl2br($prow['notes']) . '</span><br>';
       }
     }
     

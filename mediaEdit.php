@@ -434,8 +434,8 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                 <?php if ($map['key']) { ?>
                   <tr>
                     <td colspan='2'>
-                      <div style="padding:0 10px 10px 0">
-                        <?php include 'googlemapdrawthemap.php'; ?>
+                      <div>
+                        <?php echo buildGoogleMapCardHtml($map, $row['placetaken']); ?>
                       </div>
                     </td>
                   </tr>

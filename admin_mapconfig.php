@@ -209,13 +209,6 @@ $headSection->setTitle(uiTextSnippet('modifymapsettings'));
         </tr>
       </table>
       <br>
-      <input name='pinplacelevel0' type='hidden' value="<?php echo $pinplacelevel0; ?>">
-      <input name='pinplacelevel1' type='hidden' value="<?php echo $pinplacelevel1; ?>">
-      <input name='pinplacelevel2' type='hidden' value="<?php echo $pinplacelevel2; ?>">
-      <input name='pinplacelevel3' type='hidden' value="<?php echo $pinplacelevel3; ?>">
-      <input name='pinplacelevel4' type='hidden' value="<?php echo $pinplacelevel4; ?>">
-      <input name='pinplacelevel5' type='hidden' value="<?php echo $pinplacelevel5; ?>">
-      <input name='pinplacelevel6' type='hidden' value="<?php echo $pinplacelevel6; ?>">
       <input name='submit' type='submit' value="<?php echo uiTextSnippet('save'); ?>">
     </form>
     <?php echo $adminFooterSection->build(); ?>

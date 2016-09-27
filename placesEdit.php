@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Name history: admin_editplace.php
  */
 
@@ -32,7 +32,8 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
 <!DOCTYPE html>
 <html>
 <?php echo $headSection->build('', 'admin', $session_charset); ?>
-<body<?php if ($map['key']) {if (!$map['startoff']) {echo " onload=\"divbox('mapcontainer');\"";}} ?>>
+  
+<body<?php echo ((bool) $map['key'] === true && (bool) $map['startoff'] === false) ? " onload=\"divbox('mapcontainer');\"" : ""; ?>>
   <section class='container'>
     <?php
     echo $adminHeaderSection->build('places-modifyplace', $message);
@@ -70,9 +71,9 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
       ?>
         <hr>
         <div class='form-group row'>
-          <label class='col-form-label col-sm-2'><?php echo uiTextSnippet('mapof'); ?></label>
-          <div class='col-sm-10'>
-            <?php include 'googlemapdrawthemap.php'; ?>
+          <label class='col-form-label col-lg-2'><?php echo uiTextSnippet('mapof'); ?></label>
+          <div class='col-lg-6'>
+            <?php echo buildGoogleMapCardHtml($map, $row['place']); ?>
           </div>
         </div>
       <?php } ?>

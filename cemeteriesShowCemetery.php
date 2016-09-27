@@ -80,18 +80,16 @@ $headSection->setTitle($location);
   <section class='container'>
     <?php echo $publicHeaderSection->build(); ?>
     <h2><img class='icon-md' src='svg/headstone.svg'><?php echo $location; ?></h2>
-    <br clear='all'>
     <?php
     $hiddenfields[] = ['name' => 'cemeteryID', 'value' => $cemeteryID];
 
-    $infoblock = '';
     $body = '';
     if ($cemeteryID) {
-      $infoblock .= "<div class='row'>\n";
+      $infoblock = "<div class='row'>\n";
       $infoblock .= "<div class='col-md-6'>\n";
       if ($cemetery['maplink'] && file_exists("$rootpath$headstonepath/" . $cemetery['maplink'])) {
         $imageSize = getimagesize("$rootpath$headstonepath/" . $cemetery['maplink']);
-        $infoblock .= "<img class='information' src=\"$headstonepath/{$cemetery['maplink']}\" alt=\"{$cemetery['cemname']}\"><br><br>\n";
+        $infoblock .= "<img class='information' src=\"$headstonepath/{$cemetery['maplink']}\" alt=\"{$cemetery['cemname']}\">\n";
       }
       $infoblock .= "</div>\n";
       $infoblock .= "<div class='col-md-6'>\n";
@@ -115,38 +113,47 @@ $headSection->setTitle($location);
         if (!$zoom) {
           $zoom = 10;
         }
-        //RM - set placeleve = 2 to provide this value to the map for all cemeteries
-        $pinplacelevel = $pinplacelevel2;
 
-        // if we have one, add it
         if ($lat && $long) {
           $cemeteryplace = "{$cemetery['city']}, {$cemetery['county']}, {$cemetery['state']}, {$cemetery['country']}";
           $localballooncemeteryname = htmlspecialchars($cemetery['cemname'], ENT_QUOTES, $session_charset);
           $localballooncemeteryplace = htmlspecialchars($cemeteryplace, ENT_QUOTES, $session_charset);
           $remoteballoontext = htmlspecialchars(str_replace($banish, $banreplace, "{$cemetery['cemname']}, $cemeteryplace"), ENT_QUOTES, $session_charset);
           $codednotes = $cemetery['notes'] ? '<br><br>' . tng_real_escape_string(uiTextSnippet('notes') . ': ' . $cemetery['notes']) : '';
-          $codednotes .= '<br><br><a href="https://maps.google.com/maps?f=q&amp;' . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)\" target=\"_blank\">" .
+          $codednotes .= '<br><br><a href="https://maps.google.com/maps?f=q&amp;' . uiTextSnippet('localize') . "&amp;oe=$session_charset&amp;daddr=$lat,$long($remoteballoontext)\" target=\"_blank\">" .
                   uiTextSnippet('getdirections') . '</a>' . uiTextSnippet('directionsto') . " $localballooncemeteryname";
           $locations2map[$l2mCount] = [
             'zoom' => $zoom,
             'lat' => $lat,
             'long' => $long,
-            'pinplacelevel' => $pinplacelevel,
+            'placelevel' => 2,
             'htmlcontent' => "<div class=\"mapballoon\">$localballooncemeteryname<br>$localballooncemeteryplace$codednotes</div>"
           ];
           $cemcoords = true;
-          $body .= "<div style=\"padding-bottom:15px\">\n";
-          $body .= '<a href="https://maps.google.com/maps?f=q&amp;' . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target='_blank'>\n";
-          $body .= "<img src=\"google_marker.php?image=$pinplacelevel2.png&amp;text=1\" alt=''>\n";
-          $body .= '</a>';
+          $googleMap = "<div class='card card-block'\n";
+          $googleMap .= "<div class='row'>\n";
+          $googleMap .= "<div class='col-md-8'>\n";
+          $googleMap .= "<div class='map-cemetery' id='map' style='width: {$map['hstw']}; height: {$map['hsth']};'></div>\n";
+          $googleMap .= "</div>\n";
+          $googleMap .= "<div class='col-md-4'>\n";
+          
+          $googleMap .= "<div style='padding-bottom: 15px'>\n";
+          $googleMap .= '<a href="https://maps.google.com/maps?f=q&amp;' . uiTextSnippet('localize') . "&amp;oe=$session_charset&amp;daddr=$lat,$long($remoteballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target='_blank'>\n";
+//          $googleMap .= "<img src=\"google_marker.php?image=$pins[2]&amp;text=1\" alt=''>\n";
+          $googleMap .= '</a>';
           $map['pins']++;
-          $body .= '<span><strong>' . uiTextSnippet('latitude') . ":</strong> $lat, <strong>" . uiTextSnippet('longitude') . ":</strong> $long</span></div>";
+          $googleMap .= '<span><strong>' . uiTextSnippet('latitude') . ":</strong> $lat<br><strong>" . uiTextSnippet('longitude') . ":</strong> $long</span>\n";
+          $googleMap .= "</div>\n";
+          $googleMap .= "</div>\n";
+          $googleMap .= "</div>\n"; // .row
+          $googleMap .= "</div>\n"; // .card.card-block
+
+          $body .= $googleMap;
         }
       }
-    }
-    if ($infoblock) {
       $body .= "<div class='card card-block'>$infoblock</div>\n<br>\n";
     }
+    // headstones media
     $query = "SELECT mediaID, thumbpath, description, notes, usecollfolder, mediatypeID, path, form, abspath, newwindow FROM media WHERE cemeteryID = '$cemeteryID' AND (mediatypeID != 'headstones' OR linktocem = '1') ORDER BY description";
     $hsresult = tng_query($query);
     $gotImageJpeg = function_exists(imageJpeg);
@@ -298,7 +305,7 @@ $headSection->setTitle($location);
         $notes = nl2br($hs['notes']);
 
         $body .= "<tr>\n";
-        $body .= "<td align='center' style=\"width:$thumbmaxw" . 'px">';
+        $body .= "<td style='width: {$thumbmaxw}px'>";
         $hs['allow_living'] = $noneliving;
         $hs['allow_private'] = $noneprivate;
         $imgsrc = getSmallPhoto($hs);
@@ -386,9 +393,6 @@ $headSection->setTitle($location);
         $body .= "</div>\n";
       }
       tng_free_result($result);
-    }
-    if ($map['key'] && $map['pins']) {
-      echo "<div id='map' style=\"width: {$map['hstw']}; height: {$map['hsth']};margin-bottom:20px;\"></div>\n";
     }
     echo $body;
     ?>

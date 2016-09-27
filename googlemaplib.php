@@ -2,16 +2,48 @@
 $locations2map = [];
 $l2mCount = 0;
 $map['pins'] = 0;
+
 if (!$map['displaytype']) {
   $map['displaytype'] = 'TERRAIN';
 }
+$pins = ["006.png", "009.png", "023.png", "038.png", "074.png", "122.png", "155.png"];
+
 // these two lines used to remove or replace characters that cause problems with opening new Google maps
 $banish = ['(', ')', '#', '&', ' from ', ' to ', ' van ', ' naar ', ' von ', ' bis ', ' da ', ' a ', ' de ', ' ? ', ' vers ', ' till '];
 $banreplace = ['[', ']', '', 'and', ' from%A0', ' to%A0', ' van%A0', ' naar%A0', ' von%A0', ' bis%A0', ' da%A0', ' a%A0', ' de%A0', 'à%A0', 'vers%A0', 'till%A0'];
 
+function buildGoogleMapCardHtml($map, $place = '') {
+  global $session_charset;
+  $html = "<input class='btn btn-sm' type='button' onclick=\"return divbox('mapcontainer');\" value=\"" . uiTextSnippet('showhidemap') . '"> <span>' . uiTextSnippet('getcoords') . "</span>\n";
+
+  $html .= "<div class='card card-block' id='mapcontainer' style='display: none; width:{$map['admw']};'>\n";
+
+  $maphelplang = findhelp('places_googlemap_help.php');
+  $html .= "<div class='clearfix'><span class='close'><a href=\"javascript:newwindow=window.open('$maphelplang/places_googlemap_help.php', 'newwindow', 'height=500, width=600, resizable=yes, scrollbars=yes'); newwindow.focus();\">?</a></span></div>\n";
+
+  $html .= '<span>' . uiTextSnippet('googleplace') . '.</span>';
+  
+  $searchstring = $place ? $place : uiTextSnippet('searchstring');
+  $html .= "<input class='form-control form-control-sm' id='location' name='address' type='text' size='60' onkeypress=\"return keyHandlerEnter(this,event);\" value=\"$searchstring\"";
+  if (!$place) {
+    $html .= " onfocus=\"if(this.value=='$searchstring'){this.value='';}\"";
+  }
+  $html .= ">\n";
+  $html .= "<input class='btn btn-secondary btn-sm' type='button' value=\"" . uiTextSnippet('search') . "\" onclick=\"showAddress(document.form1.address.value); return false\" /><br><br>\n";
+
+  $html .= "<div id='map' style='width: {$map['admw']}; height: {$map['admh']}'></div>\n";
+  
+  if ($map['externallink'] === true) { // [ts] always false but may use later
+    $html .= "<a href=\"javascript:newwindow=window.open('https://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "&amp;oe=$session_charset&amp;q=" . $place . "', 'googlehelp'); newwindow.focus();\"> " . uiTextSnippet('difficultmap') . "</a>\n";
+  }
+  
+  $html .= "</div>\n";
+
+  return $html;
+}
+
 function tng_map_pins() {
   global $locations2map;
-  global $pinplacelevel0;
   global $map;
   global $defermap;
   global $session_charset;
@@ -26,7 +58,6 @@ function tng_map_pins() {
     $lat = $val['lat'];
     $long = $val['long'];
     $zoom = $val['zoom'] ? $val['zoom'] : 10;
-    $pinplacelevel = $val['pinplacelevel'];
     if ($lat && $long) {
       if ($lat < $minLat) {
         $minLat = $lat;
@@ -85,17 +116,18 @@ function tng_map_pins() {
       
       <?php
       //do the points
+      global $pins;
       reset($locations2map);
       $usedplaces = [];
       $zoom = 10;
       while (list($key, $val) = each($locations2map)) {
         $lat = $val['lat'];
         $long = $val['long'];
-        $pinplacelevel = $val['pinplacelevel'];
-
-        if (!$pinplacelevel) {
-          $pinplacelevel = $pinplacelevel0;
+        $placelevel = $val['placelevel'];
+        if (!placelevel) {
+          $placelevel = 0;
         }
+
         $zoom = $val['zoom'] ? $val['zoom'] : $zoom;
         $uniqueplace = $val['place'] . ' ' . $lat . $long;
 
@@ -106,12 +138,12 @@ function tng_map_pins() {
           lat = <?php echo $lat; ?>;
           long = <?php echo $long; ?>;
           uniquePlace = '<?php echo htmlspecialchars($uniqueplace, ENT_QUOTES, $session_charset); ?>';
-          pinPlaceLevel = '<?php echo $pinplacelevel; ?>';
+          pinPlaceLevel = '<?php echo $pins[$placelevel]; ?>';
           contentString = '<?php echo $htmlcontent; ?>';
           
           locationLatLng = new google.maps.LatLng(lat, long);
           markerNum += 1;
-          icon = 'google_marker.php?image=' + pinPlaceLevel + '.png&text=' + markerNum;
+          icon = 'google_marker.php?image=' + pinPlaceLevel + '&text=' + markerNum;
           locationMarker = new google.maps.Marker({
             position: locationLatLng, 
             map: map, 
@@ -148,33 +180,4 @@ function tng_map_pins() {
     <?php } ?>
   </script>
   <?php
-}
-
-function stri_replace($find, $replace, $string) {
-  if (!is_array($find)) {
-    $find = [$find];
-  }
-  if (!is_array($replace)) {
-    if (!is_array($find)) {
-      $replace = [$replace];
-    } else {
-      // this will duplicate the string into an array the size of $find
-      $c = count($find);
-      $rString = $replace;
-      unset($replace);
-      for ($i = 0; $i < $c; $i++) {
-        $replace[$i] = $rString;
-      }
-    }
-  }
-  foreach ($find as $fKey => $fItem) {
-    $between = explode(strtolower($fItem), strtolower($string));
-    $pos = 0;
-    foreach ($between as $bKey => $bItem) {
-      $between[$bKey] = substr($string, $pos, strlen($bItem));
-      $pos += strlen($bItem) + strlen($fItem);
-    }
-    $string = implode($replace[$fKey], $between);
-  }
-  return ($string);
 }

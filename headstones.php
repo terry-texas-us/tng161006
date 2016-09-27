@@ -200,28 +200,26 @@ if ($location) {
         $lat = $cemetery['latitude'];
         $long = $cemetery['longitude'];
         $zoom = $cemetery['zoom'] ? $cemetery['zoom'] : 10;
-        $pinplacelevel = $pinplacelevel2;
 
-        // if we have one, add it
         if ($lat && $long) {
           $cemeteryplace = "{$cemetery['city']}, {$cemetery['county']}, {$cemetery['state']}, {$cemetery['country']}";
           $localballooncemeteryname = htmlspecialchars($cemetery['cemname'], ENT_QUOTES, $session_charset);
           $localballooncemeteryplace = htmlspecialchars($cemeteryplace, ENT_QUOTES, $session_charset);
           $remoteballoontext = htmlspecialchars(str_replace($banish, $banreplace, "{$cemetery['cemname']}, $cemeteryplace"), ENT_QUOTES, $session_charset);
           $codednotes = $cemetery['notes'] ? '<br><br>' . tng_real_escape_string(uiTextSnippet('notes') . ': ' . $cemetery['notes']) : '';
-          $codednotes .= "<br><br><a href=\"{$http}://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)\" target=\"_blank\">" .
+          $codednotes .= "<br><br><a href=\"https://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "&amp;oe=$session_charset&amp;daddr=$lat,$long($remoteballoontext)\" target=\"_blank\">" .
                   uiTextSnippet('getdirections') . '</a>' . uiTextSnippet('directionsto') . " $localballooncemeteryname";
           $locations2map[$l2mCount] = [
             'zoom' => $zoom,
             'lat' => $lat,
             'long' => $long,
-            'pinplacelevel' => $pinplacelevel,
+            'placelevel' => 2,
             'place' => $cemeteryplace,
             'htmlcontent' => "<div class=\"mapballoon\"><a href=\"cemeteriesShowCemetery.php?cemeteryID={$cemetery['cemeteryID']}\">$localballooncemeteryname</a><br>$localballooncemeteryplace$codednotes</div>"
           ];
           $l2mCount++;
-          $body .= '<a href="https://maps.google.com/maps?f=q&amp' . uiTextSnippet('localize') . "$mcharsetstr&amp;daddr=$lat,$long($remoteballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">\n";
-          $body .= "<img src=\"google_marker.php?image=$pinplacelevel2.png&amp;text=$l2mCount\" alt='' style=\"padding-right:5px\">\n";
+          $body .= '<a href="https://maps.google.com/maps?f=q&amp' . uiTextSnippet('localize') . "&amp;oe=$session_charset&amp;daddr=$lat,$long($remoteballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">\n";
+          $body .= "<img src=\"google_marker.php?image=$pins[2]&amp;text=$l2mCount\" alt='' style=\"padding-right:5px\">\n";
           $body .= '</a>';
           $map['pins']++;
         }

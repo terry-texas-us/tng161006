@@ -1,6 +1,6 @@
 <?php
 
-require_once 'headerElementSection.php';
+require_once 'HeaderElementSection.php';
 
 class AdminHeaderElementSection extends HeaderElementSection {
 

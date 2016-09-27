@@ -210,7 +210,6 @@ function getMediaNavigation($mediaID, $personID, $albumlinkID, $result, $showlin
   $mediaperpage = 1;
   $max_showmedia_pages = 5;
   $pagenum = ceil($page / $maxsearchresults);
-  $pagenam = '';
 
   if ($showlinks) {
     if ($allow_admin && $allowMediaEdit) {
@@ -247,36 +246,49 @@ function getMediaNavigation($mediaID, $personID, $albumlinkID, $result, $showlin
     }
     $allstr = $all ? '&amp;all=1' : '';
 
+    $html = "<nav aria-label='Page navigation'>\n";
+    $html .= "<ul class='pagination pagination-sm'>\n";
+
     if ($page > 1) {
       $prevpage = $page - 1;
-      $prevlink = get_media_link($result, 'showmedia.php?', $prevpage, 'jump', uiTextSnippet('prev'), '&laquo;' . uiTextSnippet('prev'), $allstr, $showlinks);
-    }
-    if ($page < $totalpages) {
-      $nextpage = $page + 1;
-      $nextlink = get_media_link($result, 'showmedia.php?', $nextpage, 'jumpnext', uiTextSnippet('next'), uiTextSnippet('next') . '&raquo;', $allstr, $showlinks);
+      $html .= "<li class='page-item'>\n";
+      $html .= buildMediaPaginationLinkHtml($result, 'showmedia.php?', $prevpage, 'jump', uiTextSnippet('prev'), '&laquo;', $allstr, $showlinks);
+      $html .= "</li>\n";
     }
     $curpage = 0;
-    $numlinks = '';
     while ($curpage++ < $totalpages) {
       if (($curpage <= $page - $max_showmedia_pages || $curpage >= $page + $max_showmedia_pages) && $max_showmedia_pages != 0) {
         if ($curpage == 1) {
-          $firstlink = get_media_link($result, 'showmedia.php?', $curpage, 'jump', uiTextSnippet('firstpage'), '&laquo;1', $allstr, $showlinks) . '...';
+          $firstPage = "<li class='page-item'>" . buildMediaPaginationLinkHtml($result, 'showmedia.php?', $curpage, 'jump', uiTextSnippet('firstpage'), '1', $allstr, $showlinks) . "</li>\n";
+          $html .= $firstPage;
+          $html .= "<li class='page-item disabled'><a class='page-link' href='#'>...</a></li>\n";
+          
         }
         if ($curpage == $totalpages) {
-          $lastlink = '...' . get_media_link($result, 'showmedia.php?', $curpage, 'jump', uiTextSnippet('lastpage'), "$totalpages&raquo;", $allstr, $showlinks);
+          $html .= "<li class='page-item disabled'><a class='page-link' href='#'>...</a></li>\n";
+          $lastpage = "<li class='page-item'>" . buildMediaPaginationLinkHtml($result, 'showmedia.php?', $curpage, 'jump', uiTextSnippet('lastpage'), "$totalpages", $allstr, $showlinks) . "</li>\n";
+          $html .= $lastpage;
         }
       } else {
         if ($curpage == $page) {
-          $numlinks .= " <span>$curpage</span> ";
+          $html .= "<li class='page-item active'><a class='page-link' href='#'>$curpage</a></li>\n";
         } else {
-          $numlinks .= get_media_link($result, 'showmedia.php?', $curpage, 'jump', $curpage, $curpage, $allstr, $showlinks);
+          $html .= "<li class='page-item'>" . buildMediaPaginationLinkHtml($result, 'showmedia.php?', $curpage, 'jump', $curpage, $curpage, $allstr, $showlinks) . "</li>\n";
         }
       }
     }
-    $pagenav .= "<span>$prevlink $firstlink $numlinks $lastlink $nextlink</span>";
-  }
+    if ($page < $totalpages) {
+      $nextpage = $page + 1;
 
-  return $pagenav;
+      $htmlnext = buildMediaPaginationLinkHtml($result, 'showmedia.php?', $nextpage, 'jumpnext', uiTextSnippet('next'), '&raquo;', $allstr, $showlinks);
+      $html .= "<li class='page-item'>\n";
+      $html .= $htmlnext;
+      $html .= "</li>\n";
+    }
+    $html .= "</ul>\n";
+    $html .= "</nav>\n";
+  }
+  return $pagenav . $html;
 }
 
 function getAlbumLinkText($mediaID) {
@@ -364,7 +376,7 @@ function getMediaLinkText($mediaID, $ioffset) {
   return $medialinktext;
 }
 
-function showMediaSource($imgrow, $ss = false) {
+function showMediaSource($imgrow) {
   global $usefolder;
   global $size;
   global $imagetypes;
@@ -382,10 +394,7 @@ function showMediaSource($imgrow, $ss = false) {
     preg_match('/\.(.+)$/', $imgrow['path'], $matches);
     $imgrow['form'] = strtoupper($matches[1]);
   }
-  if ($ss) {
-    echo "<div class='slidepane'>\n";
-  }
-  if (!$ss && $imgrow['map']) {
+  if ($imgrow['map']) {
     echo "<map name=\"tngmap_{$imgrow['mediaID']}\" id=\"tngmap_{$imgrow['mediaID']}\">{$imgrow['map']}</map>\n";
     $mapstr = " usemap=\"#tngmap_{$imgrow['mediaID']}\"";
   } else {
@@ -413,25 +422,10 @@ function showMediaSource($imgrow, $ss = false) {
       if (in_array($imgrow['form'], $imagetypes)) {
         $width = $size[0];
         $height = $size[1];
-        if ($ss) {
-          $maxw = 860;
-          $maxh = 550;
-          $medialinkstr = $medialinkID ? "&medialinkID=$medialinkID" : '';
-          $albumlinkstr = $albumlinkID ? "&albumlinkID=$albumlinkID" : '';
-        }
         if ($width && $height) {
-          if ($ss) {
-            if ($width > $height) {
-              $height = floor($height * $maxw / $width);
-              $width = $maxw;
-            } else {
-              $width = floor($width * $maxh / $height);
-              $height = $maxh;
-            }
-          } else {
-            $maxw = $tngconfig['imgmaxw'];
-            $maxh = $tngconfig['imgmaxh'];
-          }
+          $maxw = $tngconfig['imgmaxw'];
+          $maxh = $tngconfig['imgmaxh'];
+          
           if ($maxw && ($width > $maxw)) {
             $width = $maxw;
             $height = floor($width * $size[1] / $size[0]);
@@ -440,8 +434,6 @@ function showMediaSource($imgrow, $ss = false) {
             $height = $maxh;
             $width = floor($height * $size[0] / $size[1]);
           }
-        } elseif ($ss) {
-          $height = $maxh;
         }
         if ($width && $width != '0') {
           $widthstr = "width=\"$width\"";
@@ -449,20 +441,17 @@ function showMediaSource($imgrow, $ss = false) {
         if ($height && $height != '0') {
           $heightstr = "height=\"$height\"";
         }
-        if ($ss) {    //slideshow
-          $img = "<img src=\"$mediasrc\" $mapstr alt=\"$description\">";
-          echo "<div id=\"slidearea\"><a href=\"showmedia.php?mediaID={$imgrow['mediaID']}$medialinkstr$albumlinkstr\" title=\"" . uiTextSnippet('moreinfo') . "\">$img</a></div>\n";
+
+        $imgviewer = $tngconfig['imgviewer'];
+        if (!$imgviewer || in_array($imgrow['mediatypeID'], $mediatypes_like[$imgviewer])) {
+          $maxvh = $tngconfig['imgvheight'];
+          $calcHeight = $maxvh ? ($height > $maxvh ? $maxvh : $height) : 1;
+          echo '<div id="loadingdiv2" style="position: static;">' . uiTextSnippet('loading') . '</div>';
+          echo "<iframe id='iframe1' name='iframe1' src='" . "img_viewer.php?mediaID={$imgrow['mediaID']}&amp;medialinkID={$imgrow['medialinkID']}' onload='calcHeight(1)' scrolling='no'></iframe>";
         } else {
-          $imgviewer = $tngconfig['imgviewer'];
-          if (!$imgviewer || in_array($imgrow['mediatypeID'], $mediatypes_like[$imgviewer])) {
-            $maxvh = $tngconfig['imgvheight'];
-            $calcHeight = $maxvh ? ($height > $maxvh ? $maxvh : $height) : 1;
-            echo '<div id="loadingdiv2" style="position: static;">' . uiTextSnippet('loading') . '</div>';
-            echo '<iframe id="iframe1" name="iframe1" src="' . "img_viewer.php?mediaID={$imgrow['mediaID']}&amp;medialinkID={$imgrow['medialinkID']}\" width='100%' height='1' onload=\"calcHeight($calcHeight)\" frameborder='0' marginheight='0' marginwidth='0' scrolling='no' seamless></iframe>";
-          } else {
-            echo "<div class='card' id=\"imgdiv\"><img src=\"$mediasrc\" id=\"theimage\" $mapstr alt=\"$description\"></div>\n";
-          }
+          echo "<div class='card' id=\"imgdiv\"><img src=\"$mediasrc\" id=\"theimage\" $mapstr alt=\"$description\"></div>\n";
         }
+
       } elseif (in_array($imgrow['form'], $videotypes) || in_array($imgrow['form'], $recordingtypes)) {
         $widthstr = $imgrow['width'] ? " width=\"{$imgrow['width']}\"" : '';
         $heightstr = $imgrow['height'] ? " height=\"{$imgrow['height']}\"" : '';
@@ -498,9 +487,6 @@ function showMediaSource($imgrow, $ss = false) {
       echo "<br><br>\n";
     }
     echo '<div>' . ($imgrow['usenl'] ? nl2br($imgrow['bodytext']) : $imgrow['bodytext']) . '</div>';
-  }
-  if ($ss) {
-    echo "</div>\n";
   }
 }
 

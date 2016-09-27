@@ -12,6 +12,7 @@
  @import 'users.scss';
  @import 'verticalchart.scss';
  @import 'suggest.scss';
+ @import 'img-viewer.scss';
  @import 'gedcom.scss';
  
 .input-group-select {
@@ -28,7 +29,11 @@
   min-width: 8rem;
   max-width: 8rem;
 }
- 
+#custevents {
+  margin-top: $spacer-y;
+  margin-bottom: $spacer-y;
+  padding-top: $spacer-y;
+}
 .family-link-silent {
   color: $body-color;
 }
@@ -53,7 +58,14 @@
 .place {
   color: $body-color;
 }
- 
+.map-cemetery, .map-place-search,  map-headstones {
+  width: 100%;
+  height: 340px;
+  margin-bottom: $spacer_y;
+  position: relative;
+  overflow: hidden;
+}
+
 $icon-muted: $gray-light !default;
 $icon-info: $brand-info !important;
 $icon-primary: $brand-primary !important;
@@ -213,31 +225,13 @@ button.help {padding: 0 8px; cursor: pointer; background: transparent; border: 0
 
 * html .media-prev {background: url("../img/media-prevbg.gif") no-repeat 0 0;}
 
-#slideshow {position: relative;}
-
-	#slideshow div.slide, #slideshow div.loadingdiv {
-		position: absolute; top: 0; left: 0; width: 860px; height: 550px;}
-
-.livingbox {width: 870px; height: 550px; border: 1px solid black; padding: 5px;}
-
 #loadingdiv, #loadingdiv2 {
 	position: absolute;
 	background-color: white;
-	padding: 20px;
-	font-size: 21pt;
-	border: solid 1px black;
+	padding: 2px;
+	border: solid 1px gray;
 	z-index: 5;
 }
-
-#loadingdiv2 {width: 200px;}
-
-#sscontrols {font-size: 8pt; padding-bottom: 8px; margin: 0;}
-
-#slidemsg {padding: 0 5px 0 15px;}
-
-.slidepane {width: 860px; height: 550px; padding: 10px; overflow: hidden;}
-
-#slidearea img {max-width: 100%; max-height: 550px; height: auto;}
 
 .person-prev {top: -120px; height: 520px; position: absolute; width: 520px;
 	padding: 0 20px 20px 0; z-index: 98; display: table-cell; font-size: 11px; overflow: hidden;
@@ -270,7 +264,7 @@ button.help {padding: 0 8px; cursor: pointer; background: transparent; border: 0
 
 textarea:hover {border-color: #FFCC33;}
 
-.langmenu select option {padding: 0 5px 1px 5px;}
+.language-change select option {padding: 0 5px 1px 5px;}
 
 input.longfield {width: 350px;}
 
@@ -344,6 +338,11 @@ form[action="places-containing.php"] {margin: 10px 0;}
 /*load the map link*/
 .loadmap {font-size: 18px; 	width: 150px; height: 150px; margin: 20px auto; text-align: center; cursor: pointer;}
 
+.pin-label {
+  font-size: $small-font-size;
+  font-weight: normal;
+}
+
 /*Searching button on Relationship chart*/
 #searching {float: right; padding: 10px; font-size: 14pt; border: 1px solid black; margin-right: 15%;}
 
@@ -398,13 +397,7 @@ form[action="places-containing.php"] {margin: 10px 0;}
 
 .pdftoggle {text-decoration: none; color: black;}
 
-.langblock {padding-top: 2px; padding-right: 4px; clear: both;}
-
-#mapcontainer {border: solid 1px black; margin-bottom: 8px; margin-right: 10px; margin-top: 8px;}
-
-// .mapballoon {width: 280px;  margin-top: 10px;}
-
-.mappad5 {padding: 5px;}
+#mapcontainer {margin-top: $spacer_y;}
 
 /*most wanted*/
 .mwperson {margin-top: 10px; color: gray;}
@@ -454,7 +447,7 @@ ul#tngnav {	margin: 0 0 0 10px; padding: 0 0 0 0; list-style: none; border: none
 
 #tabs .here {background: $brand-primary; color:#FC0;}
 
-.notearea {max-height: 200px; overflow: auto;}
+.notearea, .sources-scroll {max-height: 200px; overflow: auto;}
 
 .spinner {vertical-align: -3px;}
 
@@ -558,9 +551,6 @@ table.uploadmore td {padding: 2px; border: none;}
 
 // Medium devices (tablets, less than 992px) [bootstrap md]
 @media screen and (max-width: 991px) {
-  .slidepane {width: 800px; height: 500px; padding: 10px;}
-
-	#slideshow div.slide {width: 800px; height: 500px; padding: 10px;}
 }
 
 // Small devices (landscape phones, less than 768px) [bootstrap sm]
@@ -578,11 +568,6 @@ table.uploadmore td {padding: 2px; border: none;}
 	.secondsearch {display: none;}
 
 	.media-prev {width: 320px;}
-
-	.slidepane {width: 600px; height: 400px; padding: 6px;}
-
-	#slideshow div.slide {width: 600px; height: 400px; padding: 6px;}
-
 }
 #surnames span.verbose-md, #surnames-top span.verbose-md {
   display: none;
@@ -609,8 +594,34 @@ table.uploadmore td {padding: 2px; border: none;}
 
 @media screen and (max-width: 480px) {
 	.media-prev {width: 240px;}
+}
 
-	.slidepane {width: 400px; height: 400px; padding: 4px;}
 
-	#slideshow div.slide {width: 400px; height: 400px; padding: 4px;}
+@media print {
+  body {font-size: 14px;}
+  section.container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  nav {display: none;}
+  .icons-rt {display: none;}
+  #tngmenu {display: none;}
+  .pub-innermenu {display: none;}
+  
+  #info a {color: $body-color;}
+  
+  #eventmap {
+    table {
+      page-break-before: always; 
+    }
+    table table {
+      display: none;
+    }
+  }
+  #sources table {
+    page-break-before: always;
+  }
+  .sources-scroll {max-height: none;}
+  
+  div.language-change {display: none;}
 }

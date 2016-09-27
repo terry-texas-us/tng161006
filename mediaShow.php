@@ -16,10 +16,6 @@ $flags['imgprev'] = true;
 $orgmediatypeID = $mediatypeID;
 initMediaTypes();
 
-if (!in_array($mediatypeID, $mediatypes_like['photos']) && !in_array($mediatypeID, $mediatypes_like['headstones'])) {
-  $tngconfig['ssdisabled'] = 1;
-}
-
 if ($orgmediatypeID) {
   $wherestr = "WHERE mediatypeID = \"$mediatypeID\"";
   $titlestr = uiTextSnippet($mediatypeID) ? uiTextSnippet($mediatypeID) : $mediatypes_display[$mediatypeID];
@@ -374,10 +370,6 @@ $headSection->setTitle($titlestr);
         $header = str_replace('<td>' . uiTextSnippet('thumb') . '</td>', '', $header);
         $mediatext = str_replace('<td></td><td>', '<td>', $mediatext);
       }
-    }
-    if (!$tngconfig['ssdisabled'] && $firsthref && $totrows > 1) {
-      $ss = strpos($firsthref, '?') ? '&amp;ss=1' : '?ss=1';
-      $toplinks .= " &nbsp;&nbsp; <a href=\"$firsthref$ss\">&raquo; " . uiTextSnippet('slidestart') . '</a>';
     }
     $toplinks .= "</p>\n";
     //print out the whole shootin' match right here, eh

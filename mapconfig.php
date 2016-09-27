@@ -1,24 +1,17 @@
 <?php
 $map['key'] = "1";
 $map['displaytype'] = "TERRAIN";
-$map['stlat'] = "31.9685988";
-$map['stlong'] = "-99.9018131";
-$map['stzoom'] = "10";
-$map['foundzoom'] = "12";
+$map['stlat'] = "30.1132852";
+$map['stlong'] = "-96.9883105";
+$map['stzoom'] = "12";
+$map['foundzoom'] = "14";
 $map['indw'] = "100%";
-$map['indh'] = "320px";
+$map['indh'] = "340px";
 $map['hstw'] = "100%";
-$map['hsth'] = "320px";
+$map['hsth'] = "340px";
 $map['admw'] = "100%";
-$map['admh'] = "320px";
-$map['startoff'] = "1";
+$map['admh'] = "340px";
+$map['startoff'] = "0";
 $map['pstartoff'] = "0";
-$map['showallpins'] = "0";
-$pinplacelevel0 = "006";
-$pinplacelevel1 = "009";
-$pinplacelevel2 = "023";
-$pinplacelevel3 = "038";
-$pinplacelevel4 = "074";
-$pinplacelevel5 = "122";
-$pinplacelevel6 = "155";
+$map['showallpins'] = "1";
 ?>

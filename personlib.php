@@ -157,6 +157,196 @@ function getCitations($persfamID, $shortcite = 1) {
   tng_free_result($citresult);
 }
 
+function stri_replace($find, $replace, $string) {
+  if (!is_array($find)) {
+    $find = [$find];
+  }
+  if (!is_array($replace)) {
+    if (!is_array($find)) {
+      $replace = [$replace];
+    } else {
+      // this will duplicate the string into an array the size of $find
+      $c = count($find);
+      $rString = $replace;
+      unset($replace);
+      for ($i = 0; $i < $c; $i++) {
+        $replace[$i] = $rString;
+      }
+    }
+  }
+  foreach ($find as $fKey => $fItem) {
+    $between = explode(strtolower($fItem), strtolower($string));
+    $pos = 0;
+    foreach ($between as $bKey => $bItem) {
+      $between[$bKey] = substr($string, $pos, strlen($bItem));
+      $pos += strlen($bItem) + strlen($fItem);
+    }
+    $string = implode($replace[$fKey], $between);
+  }
+  return ($string);
+}
+
+function buildEventMapHtml(&$map, &$locations2map) {
+  global $session_charset;
+  global $banish;
+  global $banreplace;
+  global $pins;
+
+  $html .= beginListItem('eventmap');
+  $html .= "<table class='table table-sm'>\n";
+
+  $html .= "<thead class='thead-default'>\n";
+  $html .= "<tr>\n";
+  $html .= "<th colspan='3' id='eventmap1'><span>" . uiTextSnippet('gmapevent') . "</span></th>\n";
+  $html .= "</tr>\n";
+  $html .= "</thead>\n";
+
+  $html .= "<tr>\n";
+  $html .= "<td class='mapcol' colspan='2'>\n";
+  $html .= "<div id='map' style='width: {$map['indw']}; height: {$map['indh']};'>";
+  if ($map['pstartoff']) {
+    $html .= "<a href='#' onclick='ShowTheMap(); return false;'>\n";
+    $html .= "<div class='loadmap'>" . uiTextSnippet('loadmap') . "<br>\n";
+    $html .= "<img src='img/loadmap.gif' width='150' height='150'>\n";
+    $html .= "</div>\n";
+    $html .= '</a>';
+  }
+  $html .= "</div>\n";
+  $html .= "</td>\n";
+  $mapheight = (intval($map['indh']) - 40) . 'px';
+  $html .= "<td>\n";
+  $html .= "<div style='height:{$mapheight};' id='mapevents'>\n";
+  $html .= "<table class='table table-sm'>\n";
+  asort($locations2map);
+  reset($locations2map);
+  $markerIcon = 0;
+  $nonzeroplaces = 0;
+  $usedplaces = [];
+  $savedplaces = [];
+  while (list($key, $val) = each($locations2map)) {
+    // get different coloured pins for different levels of place
+    $placelevel = $val['placelevel'];
+    if (!$placelevel) {
+      $placelevel = 0;
+    }
+    else {
+      $nonzeroplaces++;
+    }
+    $lat = $val['lat'];
+    $long = $val['long'];
+    $zoom = $val['zoom'] ? $val['zoom'] : 10;
+    $event = $val['event'];
+    $place = $val['place'];
+    $dateforremoteballoon = $dateforeventtable = displayDate($val['eventdate']);
+    $dateforlocalballoon = htmlspecialchars(tng_real_escape_string($dateforremoteballoon), ENT_QUOTES, $session_charset);
+    $description = $val['description'];
+
+    if ($place) {
+      $html .= "<tr>\n";
+      $html .= "<td>\n";
+      if ($lat && $long) {
+        $directionplace = htmlspecialchars(stri_replace($banish, $banreplace, $place), ENT_QUOTES, $session_charset);
+        $directionballoontext = htmlspecialchars(stri_replace($banish, $banreplace, $place), ENT_QUOTES, $session_charset);
+        if ($map['showallpins'] || !in_array($place, $usedplaces)) {
+          $markerIcon++;
+          $usedplaces[] = $place;
+          $savedplaces[] = ['place' => $place, 'key' => $key];
+          $locations2map[$key]['htmlcontent'] = "<div class=\"mapballoon\"><strong>{$val['fixedplace']}</strong><br><br>$event: $dateforlocalballoon";
+          $locations2map[$key]['htmlcontent'] .= '<br><br><a href="https://maps.google.com/maps?f=q&amp;' . uiTextSnippet('localize') . "&amp;oe=$session_charset&amp;daddr=$lat,$long($directionballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">" .
+              uiTextSnippet('getdirections') . '</a>' . uiTextSnippet('directionsto') . " $directionplace</div>";
+          $thismarker = $markerIcon;
+        }
+        else {
+          $total = count($usedplaces);
+          for ($i = 0; $i < $total; $i++) {
+            if ($savedplaces[$i]['place'] == $place) {
+              $thismarker = $i + 1;
+              $thiskey = $savedplaces[$i]['key'];
+              $locations2map[$thiskey]['htmlcontent'] = str_replace('</div>', "<br>$event: $dateforlocalballoon</div>", $locations2map[$thiskey]['htmlcontent']);
+              break;
+            }
+          }
+        }
+        $html .= '<a href="https://maps.google.com/maps?f=q&amp;' . uiTextSnippet('localize') . "&amp;oe=$session_charset&amp;daddr=$lat,$long($directionballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target= \"_blank\">\n";
+        $html .= "<img src='google_marker.php?image=$pins[$placelevel]&amp;text=$thismarker' alt='" . uiTextSnippet('googlemaplink') . "' width= '20' height='34'>\n";
+        $html .= "</a>\n";
+        $map['pins'] ++;
+      }
+      else {
+        $html .= '&nbsp;';
+      }
+      $html .= "</td>\n";
+      $html .= "<td><span class='small'><strong>$event</strong>";
+      if ($description) {
+        $html .= " - $description";
+      }
+      $html .= " - $dateforeventtable - $place</span></td>\n";
+      $html .= "<td>\n";
+      $html .= "<a href='googleearthbylatlong.php?m=world&amp;n=$directionplace&amp;lon=$long&amp;lat=$lat&amp;z=$zoom'>\n";
+      $html .= "<img class='icon-sm icon-primary icon-globe' data-src='svg/globe.svg' alt='" . uiTextSnippet('googleearthlink') . "'>\n";
+      $html .= "</a>\n";
+      $html .= "</td>\n";
+      $html .= "</tr>\n";
+      if ($val['notes']) {
+        $locations2map[$key]['htmlcontent'] = str_replace('</div>', '<br><br>' . tng_real_escape_string($val['notes']) . '</div>', $locations2map[$key]['htmlcontent']);
+      }
+    }
+  }
+  $html .= "</table>\n";
+  $html .= "</div>\n";
+
+  $html .= "</td>\n</tr>\n";
+  if ($nonzeroplaces) {
+    $html .= "<tr><td colspan='3'>" . uiTextSnippet('gmaplegend') . "<br>\n";
+    for ($i = 1; $i < 7; $i++) {
+      $html .= "<span class='pin-label'><img src='img/$pins[$i]' alt='' height='17' width='10'> : " . uiTextSnippet("level$i") . " </span>\n";
+    }
+    $html .= "<span class='pin-label'><img src='img/$pins[0]' alt='' height='17' width='10'> : " . uiTextSnippet('level0') . "</span></td>\n";
+    $html .= "</tr>\n";
+  }
+  $html .= "</table>\n";
+  $html .= "<br>\n";
+  $html .= endListItem('eventmap');
+  
+  return $html;
+}
+
+function buildSourcesListHtml($citestring, $options) {
+  $html .= beginListItem('sources');
+  $html .= "<table class='table table-sm'>\n";
+  $html .= "<thead class='thead-default'>\n";
+  $html .= "<tr>\n";
+  $html .= "<th colspan='2'><a name='sources'>" . uiTextSnippet('sources') . "</a></th>\n";
+  $html .= "</tr>\n";
+  $html .= "</thead>\n";
+  $html .= "<tr>\n";
+  $html .= "<td colspan='2'>";
+  if ($options['scrollcite']) {
+    $html .= "<div class='sources-scroll'>";
+  }
+  $html .= "<ol class='citeblock'>";
+  $citectr = 0;
+  $count = count($citestring);
+  foreach ($citestring as $cite) {
+    $html .= "<li><a name='cite" . ++$citectr . "'></a>$cite<br>";
+    if ($citectr < $count) {
+      $html .= '<br>';
+    }
+    $html .= "</li>\n";
+  }
+  $html .= '</ol>';
+
+  if ($options['scrollcite']) {
+    $html .= '</div>';
+  }
+  $html .= "</td>\n";
+  $html .= "</tr>\n";
+  $html .= "</table>\n";
+  $html .= "<br>\n";
+  $html .= endListItem('citations');
+
+  return $html;
+}
 function reorderCitation($citekey, $withlink = 1) {
   global $citedispctr;
   global $citestring;
@@ -435,7 +625,6 @@ function setEvent($data, $datetr) {
   if ($map['key'] && $data['place'] && !$data['nomap']) {
     global $locations2map;
     global $l2mCount;
-    global $pinplacelevel0;
 
     $safeplace = tng_real_escape_string($data['place']);
     $query = "SELECT place, placelevel, latitude, longitude, zoom, notes FROM places WHERE places.place = '$safeplace' AND (latitude is not null and latitude != '') AND (longitude is not null and longitude != '')";
@@ -446,11 +635,9 @@ function setEvent($data, $datetr) {
       $fixedplace = htmlspecialchars($safeplace, ENT_QUOTES);
       $custevent = tng_fetch_assoc($custevents);
       $info = $data['fact'];
-      $pinplacelevel = $custevent['placelevel'] ? ${'pinplacelevel' . $custevent['placelevel']} : $pinplacelevel0;
       //using $index above will ensure that this array gets sorted in the same order as the events on the page
       $locations2map[$l2mCount] = [$index_all,
               'placelevel' => $custevent['placelevel'],
-              'pinplacelevel' => $pinplacelevel,
               'event' => $data['text'],
               'htmlcontent' => '',
               'lat' => $custevent['latitude'],
@@ -533,7 +720,7 @@ function showEvent($data) {
   if ($dateplace) {
     $output .= '<td>';
     if ($data['date']) {
-      $output .= "<span class='date'>";
+      $output .= "<span>";
       $output .= displayDate($data['date']);
       if (!$data['place'] && $cite) {
         $output .= "<sup> $cite</sup>";
@@ -554,12 +741,12 @@ function showEvent($data) {
       }
       if (isset($data['np'])) {
         $output .= "<span class='place'>{$data['place']}</span>";
+        $output .= "</td>\n";
       } else {
         $output .= " <a  class='place' href=\"placesearch.php?psearch=" . urlencode($data['place']) . '" title="' . uiTextSnippet('findplaces') . "\">\n";
         $output .= "<span>{$data['place']}</span>";
         $output .= "</a>$cite</td>\n";
       }
-      $output .= "</td>\n";
       $cite = '';
     }
     $output .= "</tr>\n";
@@ -601,7 +788,8 @@ function showEvent($data) {
       if ($cite) {
         $cite = "<sup> $cite</sup>";
       }
-      $output .= "<td colspan='2'>" . nl2br(insertLinks($data['fact'])) . "$cite</td></tr>\n";
+      $output .= "<td colspan='2'>" . nl2br(insertLinks($data['fact'])) . "$cite</td>\n";
+      $output .= "</tr>\n";
       $cite = '';
     }
   }
@@ -650,9 +838,8 @@ function showEvent($data) {
   if ($output) {
     $editicon = $tentative_edit && $data['event'] && $data['event'] != 'NAME' ? "<img class='icon-sm' src='svg/new-message.svg' alt=\"" . uiTextSnippet('editevent') . '" title="' . uiTextSnippet('editevent') . "\" onclick=\"tnglitbox = new ModalDialog('tentEdit.modal.php?persfamID={$data['entity']}&amp;type={$data['type']}&amp;event={$data['event']}&amp;title={$data['text']}');\" class=\"fakelink\">" : '';
     $toggleicon = $data['collapse'] && $rows > 1 ? "<img src=\"img/tng_sort_desc.gif\" class=\"toggleicon\" id=\"t{$eventcounter}\" title=\"" . uiTextSnippet('expand') . '">' : '';
-    $class = $cellid ? 'indleftcol' : '';
     $rowspan = $rows > 1 && !$data['collapse'] ? " rowspan=\"$rows\"" : '';
-    $preoutput = "<tr>\n<td class=\"$class lt{$eventcounter}\" $rowspan$cellid>$toggleicon<span>{$data['text']}$editicon</span></td>\n";
+    $preoutput = "<tr>\n<td class=\"lt{$eventcounter}\" $rowspan$cellid>$toggleicon<span>{$data['text']}$editicon</span></td>\n";
     $final = $preoutput . $output;
   } else {
     $final = '';
@@ -705,9 +892,9 @@ function doMediaSection($entity, $medialist, $albums) {
       if ($media) {
         $media .= "<br>\n";
       }
-      $media .= "<table class='table table-fixed'>\n";
-      $media .= "<col class=\"labelcol\"/><col style=\"width:{$datewidth}px\"/><col/>\n";
-      $media .= "$newmedia\n</table>\n";
+      $media .= "<table class=\"table table-fixed\">";
+      $media .= "<col class=\"labelcol\"/><col style=\"width:{$datewidth}px\"/><col/>";
+      $media .= "$newmedia</table>";
     }
   }
   $albumtext = writeAlbums($albums);
@@ -834,7 +1021,7 @@ function writeAlbums($albums_array) {
   $albumtext = '';
   $albums = $albums_array['-x--general--x-'];
 
-  $cellid = $tableid && !$cellnumber ? " id=\"$tableid" . '1"' : '';
+  $cellid = $tableid && !$cellnumber ? "id=\"$tableid" . '1"' : '';
 
   if (is_array($albums)) {
     $totalalbums = count($albums);
@@ -859,7 +1046,7 @@ function writeAlbums($albums_array) {
         $albumcount++;
       }
       $albumtext .= "<tr>\n";
-      $albumtext .= "<td class=\"indleftcol\"$cellid rowspan=\"$totalalbums\"><span>" . uiTextSnippet('albums') . "</span></td>\n";
+      $albumtext .= "<td $cellid rowspan=\"$totalalbums\"><span>" . uiTextSnippet('albums') . "</span></td>\n";
 
       if (!$thumbcount) {
         $albumrows = str_replace("/<td style=\"width:$datewidth" . "px\">&nbsp;<\/td><td>/", "<td colspan='2'>", $albumrows);
@@ -914,8 +1101,8 @@ function getMedia($entity, $linktype) {
           $imgsrc = $thismedia['imgsrc'];
           $medialinkID = $medialink['medialinkID'];
           $thismedia['imgsrc'] = '<div class="media-img">';
-          $thismedia['imgsrc'] .= "<div class=\"media-prev\" id=\"prev{$medialink['mediaID']}_$medialinkID\" style='display: none'></div>";
-          $thismedia['imgsrc'] .= "</div>\n";
+          $thismedia['imgsrc'] .= "<div class=\"media-prev\" id=\"prev{$medialink['mediaID']}_$medialinkID\" style=\"display: none\"></div>";
+          $thismedia['imgsrc'] .= "</div>";
           $thismedia['imgsrc'] .= "<a href=\"{$thismedia['href']}\"";
           if ($gotImageJpeg && isPhoto($medialink) && checkMediaFileSize("$rootpath$usefolder/" . $medialink['path'])) {
             $thismedia['imgsrc'] .= " class=\"media-preview\" id=\"img-{$medialink['mediaID']}-{$medialinkID}-" . urlencode("$usefolder/{$medialink['path']}") . '"';
@@ -999,29 +1186,18 @@ function writeMedia($media_array, $mediatypeID, $prefix = '') {
         } else {
           $mediarows .= "<td style=\"width:$datewidth" . 'px">&nbsp;</td><td>';
         }
-        $mediarows .= "<span>{$item['name']}<br>" . nl2br($item['description']) . "</span></td></tr>\n";
+        $mediarows .= "<span>{$item['name']}<br>" . nl2br($item['description']) . "</span></td></tr>";
         $mediacount++;
       }
-      if (!$tngconfig['ssdisabled'] && $mediacount >= 3 && $slidelink) {
-        $titlemsg .= "<div id=\"ssm{$prefix}{$mediatypeID}\"";
-        if ($hidemedia) {
-          $titlemsg .= " style='display: none'";
-        }
-        if (strpos($slidelink, '" target=') !== false) {
-          $slidelink = str_replace('" target=', '&amp;ss=1" target=', $slidelink);
-        } else {
-          $slidelink .= '&amp;ss=1';
-        }
-        $titlemsg .= "><br><a href=\"$slidelink\" class=\"small\">&raquo; " . uiTextSnippet('slidestart') . "</a></div>\n";
-      }
-      $mediatext .= "<tr>\n";
+
+      $mediatext .= "<tr>";
       $toggleicon = $hidemedia ? "<img src=\"img/tng_sort_desc.gif\" class=\"toggleicon\" id=\"m{$prefix}{$mediatypeID}\" title=\"" . uiTextSnippet('expand') . '">' : '';
-      $mediatext .= "<td class=\"indleftcol lm{$prefix}{$mediatypeID}\"$cellid";
+      $mediatext .= "<td class=\"lm{$prefix}{$mediatypeID}\"$cellid";
       if (!$hidemedia) {
         $mediatext .= " rowspan=\"$totalmedia\"";
       }
       $mediatext .= ">$toggleicon";
-      $mediatext .= "<span>$titlemsg</span></td>\n";
+      $mediatext .= "<span>$titlemsg</span></td>";
 
       if (!$thumbcount) {
         $mediarows = str_replace("<td style=\"width:$datewidth" . 'px">&nbsp;</td><td>', "<td colspan='2'>", $mediarows);

@@ -396,28 +396,6 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><input name='tng_maxnoteprev' type='text' value="<?php echo $tngconfig['maxnoteprev']; ?>"></td>
           </tr>
           <tr>
-            <td><?php echo uiTextSnippet('ssenabled'); ?>:</td>
-            <td>
-              <select name='tng_ssdisabled'>
-                <option value='0'<?php if (!$tngconfig['ssdisabled']) {echo ' selected';} ?>><?php echo uiTextSnippet('yes'); ?></option>
-                <option value='1'<?php if ($tngconfig['ssdisabled']) {echo ' selected';} ?>><?php echo uiTextSnippet('no'); ?></option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('ssrepeat'); ?>:</td>
-            <td>
-              <select name='tng_ssrepeat'>
-                <option value='1'<?php if ($tngconfig['ssrepeat']) {echo ' selected';} ?>>
-                  <?php echo uiTextSnippet('yes'); ?>
-                </option>
-                <option value='0'<?php if (!$tngconfig['ssrepeat']) {echo ' selected';} ?>>
-                  <?php echo uiTextSnippet('no'); ?>
-                </option>
-              </select>
-            </td>
-          </tr>
-          <tr>
             <td><?php echo uiTextSnippet('imgviewer'); ?>:</td>
             <td>
               <select name='tng_imgviewer'>

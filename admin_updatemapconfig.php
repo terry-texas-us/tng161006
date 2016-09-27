@@ -44,13 +44,6 @@ fwrite($fp, "\$map['admh'] = \"$mapadmh\";\n");
 fwrite($fp, "\$map['startoff'] = \"$startoff\";\n");
 fwrite($fp, "\$map['pstartoff'] = \"$pstartoff\";\n");
 fwrite($fp, "\$map['showallpins'] = \"$showallpins\";\n");
-fwrite($fp, "\$pinplacelevel0 = \"$pinplacelevel0\";\n");
-fwrite($fp, "\$pinplacelevel1 = \"$pinplacelevel1\";\n");
-fwrite($fp, "\$pinplacelevel2 = \"$pinplacelevel2\";\n");
-fwrite($fp, "\$pinplacelevel3 = \"$pinplacelevel3\";\n");
-fwrite($fp, "\$pinplacelevel4 = \"$pinplacelevel4\";\n");
-fwrite($fp, "\$pinplacelevel5 = \"$pinplacelevel5\";\n");
-fwrite($fp, "\$pinplacelevel6 = \"$pinplacelevel6\";\n");
 fwrite($fp, "?>\n");
 
 flock($fp, LOCK_UN);

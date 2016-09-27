@@ -1,6 +1,6 @@
 <?php
 
-require_once 'classes/chooseLanguage.php';
+require_once 'classes/ChooseLanguage.php';
 
 class FooterElementSection {
 

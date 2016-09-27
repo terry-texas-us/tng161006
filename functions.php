@@ -43,7 +43,7 @@ function get_media_offsets($result, $mediaID) {
   return [$i, $prev, $next, $nexttolast];
 }
 
-function get_media_link($result, $address, $page, $jumpfunc, $title, $label, $allstr, $showlinks) {
+function buildMediaPaginationLinkHtml($result, $address, $page, $jumpfunc, $title, $label, $allstr, $showlinks) {
   global $cemeteryID;
 
   $mediaID = get_item_id($result, $page - 1, 'mediaID');
@@ -59,9 +59,9 @@ function get_media_link($result, $address, $page, $jumpfunc, $title, $label, $al
     if (substr($href, 0, 5) == '&amp;') {
       $href = substr($href, 5);
     }
-    $link = " <a href=\"$address$href\" title=\"$title\">$label</a> ";
+    $link = "<a class='page-link' href=\"$address$href\" title=\"$title\">$label</a> ";
   } else {
-    $link = " <a href='#' onclick=\"return $jumpfunc('$mediaID','$medialinkID','$albumlinkID')\" title=\"$title\">$label</a> ";
+    $link = "<a class='page-link' href='#' onclick=\"return $jumpfunc('$mediaID','$medialinkID','$albumlinkID')\" title=\"$title\">$label</a> ";
   }
 
   return $link;

@@ -218,18 +218,10 @@ $headSection->setTitle(uiTextSnippet('modifyperson'));
             <div class='col-md-3'>
               <label><?php echo uiTextSnippet('nameorder'); ?></label>
               <select class='form-control' name="pnameorder">
-                <option value='0'>
-                  <?php echo uiTextSnippet('default'); ?>
-                </option>
-                <option value='1' <?php if ($row['nameorder'] == '1') {echo 'selected';} ?>>
-                  <?php echo uiTextSnippet('western'); ?>
-                </option>
-                <option value='2' <?php if ($row['nameorder'] == '2') {echo 'selected';} ?>>
-                  <?php echo uiTextSnippet('oriental'); ?>
-                </option>
-                <option value='3' <?php if ($row['nameorder'] == '3') {echo 'selected';} ?>>
-                  <?php echo uiTextSnippet('lnfirst'); ?>
-                </option>
+                <option value='0'><?php echo uiTextSnippet('default'); ?></option>
+                <option value='1' <?php if ($row['nameorder'] == '1') {echo 'selected';} ?>><?php echo uiTextSnippet('western'); ?></option>
+                <option value='2' <?php if ($row['nameorder'] == '2') {echo 'selected';} ?>><?php echo uiTextSnippet('oriental'); ?></option>
+                <option value='3' <?php if ($row['nameorder'] == '3') {echo 'selected';} ?>><?php echo uiTextSnippet('lnfirst'); ?></option>
               </select>
             </div>
           </div>

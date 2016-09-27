@@ -37,7 +37,8 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
 <!DOCTYPE html>
 <html>
 <?php echo $headSection->build('', 'admin', $session_charset); ?>
-<body<?php if ($map['key']) {if (!$map['startoff']) {echo " onload=\"divbox('mapcontainer');\"";}}?>>
+  
+<body<?php echo ((bool) $map['key'] === true && (bool) $map['startoff'] === false) ? " onload=\"divbox('mapcontainer');\"" : ""; ?>>
   <section class='container'>
     <?php
     echo $adminHeaderSection->build('cemeteries-modifycemetery', $message);
@@ -152,7 +153,7 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
         <div class='form-group row'>
           <label class='col-form-label col-sm-2'><?php echo uiTextSnippet('mapof'); ?></label>
           <div class='col-sm-10'>
-            <?php include 'googlemapdrawthemap.php'; ?>
+            <?php echo buildGoogleMapCardHtml($map, $row['place']); ?>
           </div>
         </div>
       <?php } ?>
