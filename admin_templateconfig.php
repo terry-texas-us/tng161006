@@ -27,12 +27,12 @@ while ($row = tng_fetch_assoc($result)) {
 }
 tng_free_result($result);
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('modifytemplatesettings'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id="setup-configuration-templateconfigsettings">
   <section class='container'>
     <?php

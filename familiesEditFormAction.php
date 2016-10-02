@@ -22,7 +22,7 @@ if (!$allowEdit || !checkbranch($row['branch'])) {
 $editconflict = determineConflict($row, families);
 
 if (!$editconflict) {
-  if ($newfamily == 'ajax' && $session_charset != 'UTF-8') {
+  if ($newfamily == 'ajax' && $sessionCharset != 'UTF-8') {
     $marrplace = tng_utf8_decode($marrplace);
     $divplace = tng_utf8_decode($divplace);
     $sealplace = tng_utf8_decode($sealplace);

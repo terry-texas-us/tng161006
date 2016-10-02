@@ -401,12 +401,12 @@ preparebookmark("<a href=\"verticalchart.php?personID=$personID&amp;generations=
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('pedigreefor') . ' ' . $row['name']);
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build($flags, 'public', $session_charset); ?>
+<?php echo $headSection->build($flags, 'public', $sessionCharset); ?>
 <body id='public'>
   <section class='container'>
     <?php

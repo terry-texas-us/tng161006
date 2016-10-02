@@ -20,7 +20,7 @@ if (!$allowAdd) {
 
 $personID = ucfirst($personID);
 
-if ($newperson == 'ajax' && $session_charset != 'UTF-8') {
+if ($newperson == 'ajax' && $sessionCharset != 'UTF-8') {
   $firstname = tng_utf8_decode($firstname);
   $lastname = tng_utf8_decode($lastname);
   $lnprefix = tng_utf8_decode($lnprefix);
@@ -204,7 +204,7 @@ if ($type == 'child') {
   $rval .= "$personlink - $personID<br>$birthdate</div>\n</td>\n</tr>\n</table>\n</div>\n";
   echo $rval;
 } elseif ($type == 'spouse') {
-  $name = $session_charset == 'UTF-8' ? getName($row) : utf8_encode(getName($row));
+  $name = $sessionCharset == 'UTF-8' ? getName($row) : utf8_encode(getName($row));
   echo "{\"id\":\"{$row['personID']}\",\"name\":\"" . $name . '"}';
 } elseif ($newperson == 'ajax') {
   echo 1;

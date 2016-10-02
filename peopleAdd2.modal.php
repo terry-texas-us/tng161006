@@ -42,7 +42,7 @@ function relateSelect($label) {
   return $pout;
 }
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <div id='newperson'>
   <form name='npform' method='post' <?php if ($needped) {echo "action='admin_addperson2.php'";} else {echo "action='' onsubmit='return saveNewPerson(this);'";} ?>>

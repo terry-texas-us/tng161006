@@ -12,9 +12,9 @@ if (!class_exists('TNGPDF')) {
     var $charset;         // character set being used
 
     function TNGPDF($orientation = 'P', $unit = 'mm', $format = 'A4') {
-      global $session_charset;
+      global $sessionCharset;
 
-      $this->charset = $session_charset;
+      $this->charset = $sessionCharset;
       UFPDF::UFPDF($orientation, $unit, $format);
     }
 

@@ -12,7 +12,7 @@ if (!$allowAdd) {
   $message = uiTextSnippet('norights');
   exit;
 }
-if ($session_charset != 'UTF-8') {
+if ($sessionCharset != 'UTF-8') {
   $citepage = tng_utf8_decode($citepage);
   $citetext = tng_utf8_decode($citetext);
   $citenote = tng_utf8_decode($citenote);
@@ -40,5 +40,5 @@ $row = tng_fetch_assoc($result);
 $citationsrc = "[$sourceID] " . $row['title'];
 $citationsrc = cleanIt($citationsrc);
 $truncated = truncateIt($citationsrc, 75);
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 echo "{\"id\":\"$citationID\",\"persfamID\":\"$persfamID\",\"eventID\":\"$eventID\",\"display\":\"$truncated\",\"allow_edit\":$allowEdit,\"allow_delete\":$allowDelete}";

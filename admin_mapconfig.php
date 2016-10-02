@@ -14,12 +14,12 @@ if ($link) {
     exit;
   }
 }
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('modifymapsettings'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id="setup-configuration-mapconfigsettings">
   <section class='container'>
     <?php

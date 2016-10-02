@@ -10,12 +10,12 @@ $file = "$rootpath/whatsnew.txt";
 
 $contents = file($file);
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('whatsnew'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body>
   <section class='container'>
     <?php

@@ -8,7 +8,7 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 
 $query = 'SELECT cemeteryID, cemname, city, county, state, country FROM cemeteries WHERE place = "" ORDER BY country, state, county, city, cemname';
 $result = tng_query($query);

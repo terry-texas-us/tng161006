@@ -23,7 +23,7 @@ if ($father) {
   $row['lastname'] = '';
   $row['lnprefix'] = '';
 }
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 
 require_once 'eventlib.php';
 ?>

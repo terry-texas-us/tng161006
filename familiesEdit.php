@@ -85,12 +85,12 @@ $kidcount = tng_num_rows($children);
 
 $revstar = checkReview('F');
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('modifyfamily'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id='families-modifyfamily'>
   <section class='container'>
     <?php

@@ -38,7 +38,7 @@ tng_free_result($eventtypes);
 
 $helplang = findhelp('notes_help.php');
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 
 $query = "SELECT notelinks.ID AS ID, xnotes.note AS note, noteID, secret FROM (notelinks, xnotes)
     WHERE notelinks.xnoteID = xnotes.ID AND persfamID = '$persfamID' AND eventID = '$eventID' ORDER BY ordernum, ID";

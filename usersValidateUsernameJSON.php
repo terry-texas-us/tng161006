@@ -16,5 +16,5 @@ if ($result && tng_num_rows($result)) {
 }
 tng_free_result($result);
 
-header('Content-Type: application/json; charset=' . $session_charset);
+header('Content-Type: application/json; charset=' . $sessionCharset);
 echo "{\"rval\":$success,\"html\":\"$message\"}";

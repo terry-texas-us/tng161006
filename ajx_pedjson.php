@@ -329,7 +329,7 @@ $people = [];
 $families = [];
 $familylist = [];
 
-header('Content-Type: application/json; charset=' . $session_charset);
+header('Content-Type: application/json; charset=' . $sessionCharset);
 $generation = 1;
 $newfam = 1;
 $backperson = '';

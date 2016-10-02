@@ -17,5 +17,5 @@ if ($result && tng_num_rows($result)) {
 }
 tng_free_result($result);
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 echo "{\"result\":\"$success\",\"message\":\"$message\"}";

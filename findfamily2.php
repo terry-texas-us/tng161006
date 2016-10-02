@@ -4,7 +4,7 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-if ($session_charset != 'UTF-8') {
+if ($sessionCharset != 'UTF-8') {
   $myhusbname = tng_utf8_decode($myhusbname);
   $mywifename = tng_utf8_decode($mywifename);
 }
@@ -48,7 +48,7 @@ $joinonhusb = 'LEFT JOIN people AS husbpeople ON families.husband = husbpeople.p
 $query = "SELECT familyID, wifepeople.personID AS wpersonID, wifepeople.firstname AS wfirstname, wifepeople.lnprefix AS wlnprefix, wifepeople.lastname AS wlastname, wifepeople.suffix AS wsuffix, wifepeople.nameorder AS wnameorder, wifepeople.living AS wliving, wifepeople.private AS wprivate, wifepeople.branch AS wbranch, husbpeople.personID AS hpersonID, husbpeople.firstname AS hfirstname, husbpeople.lnprefix AS hlnprefix, husbpeople.lastname AS hlastname, husbpeople.suffix AS hsuffix, husbpeople.nameorder AS hnameorder, husbpeople.living AS hliving, husbpeople.private AS hprivate, husbpeople.branch AS hbranch FROM families $joinonwife $joinonhusb WHERE $allwhere $allwhere2 ORDER BY hlastname, hlnprefix, hfirstname LIMIT 250";
 $result = tng_query($query);
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 
 <div id='findfamilyresdiv'>

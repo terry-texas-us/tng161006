@@ -15,12 +15,12 @@ $_SESSION['tng_email'] = generatePassword(1);
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('regnewacct'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build($flags, 'public', $session_charset); ?>
+<?php echo $headSection->build($flags, 'public', $sessionCharset); ?>
 <body class='form-newaccount'>
   <section class='container'>
     <?php echo $publicHeaderSection->build(); ?>

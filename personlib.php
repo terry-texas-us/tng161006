@@ -187,7 +187,7 @@ function stri_replace($find, $replace, $string) {
 }
 
 function buildEventMapHtml(&$map, &$locations2map) {
-  global $session_charset;
+  global $sessionCharset;
   global $banish;
   global $banreplace;
   global $pins;
@@ -238,21 +238,21 @@ function buildEventMapHtml(&$map, &$locations2map) {
     $event = $val['event'];
     $place = $val['place'];
     $dateforremoteballoon = $dateforeventtable = displayDate($val['eventdate']);
-    $dateforlocalballoon = htmlspecialchars(tng_real_escape_string($dateforremoteballoon), ENT_QUOTES, $session_charset);
+    $dateforlocalballoon = htmlspecialchars(tng_real_escape_string($dateforremoteballoon), ENT_QUOTES, $sessionCharset);
     $description = $val['description'];
 
     if ($place) {
       $html .= "<tr>\n";
       $html .= "<td>\n";
       if ($lat && $long) {
-        $directionplace = htmlspecialchars(stri_replace($banish, $banreplace, $place), ENT_QUOTES, $session_charset);
-        $directionballoontext = htmlspecialchars(stri_replace($banish, $banreplace, $place), ENT_QUOTES, $session_charset);
+        $directionplace = htmlspecialchars(stri_replace($banish, $banreplace, $place), ENT_QUOTES, $sessionCharset);
+        $directionballoontext = htmlspecialchars(stri_replace($banish, $banreplace, $place), ENT_QUOTES, $sessionCharset);
         if ($map['showallpins'] || !in_array($place, $usedplaces)) {
           $markerIcon++;
           $usedplaces[] = $place;
           $savedplaces[] = ['place' => $place, 'key' => $key];
           $locations2map[$key]['htmlcontent'] = "<div class=\"mapballoon\"><strong>{$val['fixedplace']}</strong><br><br>$event: $dateforlocalballoon";
-          $locations2map[$key]['htmlcontent'] .= '<br><br><a href="https://maps.google.com/maps?f=q&amp;' . uiTextSnippet('localize') . "&amp;oe=$session_charset&amp;daddr=$lat,$long($directionballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">" .
+          $locations2map[$key]['htmlcontent'] .= '<br><br><a href="https://maps.google.com/maps?f=q&amp;' . uiTextSnippet('localize') . "&amp;oe=$sessionCharset&amp;daddr=$lat,$long($directionballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">" .
               uiTextSnippet('getdirections') . '</a>' . uiTextSnippet('directionsto') . " $directionplace</div>";
           $thismarker = $markerIcon;
         }
@@ -267,7 +267,7 @@ function buildEventMapHtml(&$map, &$locations2map) {
             }
           }
         }
-        $html .= '<a href="https://maps.google.com/maps?f=q&amp;' . uiTextSnippet('localize') . "&amp;oe=$session_charset&amp;daddr=$lat,$long($directionballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target= \"_blank\">\n";
+        $html .= '<a href="https://maps.google.com/maps?f=q&amp;' . uiTextSnippet('localize') . "&amp;oe=$sessionCharset&amp;daddr=$lat,$long($directionballoontext)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target= \"_blank\">\n";
         $html .= "<img src='google_marker.php?image=$pins[$placelevel]&amp;text=$thismarker' alt='" . uiTextSnippet('googlemaplink') . "' width= '20' height='34'>\n";
         $html .= "</a>\n";
         $map['pins'] ++;

@@ -24,12 +24,12 @@ if (!$allowEdit) {
 $row['note'] = str_replace('&', '&amp;', $row['note']);
 $row['note'] = preg_replace('/\"/', '&#34;', $row['note']);
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('modifynote'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id="misc-modifynote">
   <section class='container'>
     <?php

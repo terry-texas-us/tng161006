@@ -14,7 +14,7 @@ if (!$allowEdit) {
 }
 require 'adminlog.php';
 
-if ($session_charset != 'UTF-8') {
+if ($sessionCharset != 'UTF-8') {
   $citepage = tng_utf8_decode($citepage);
   $citetext = tng_utf8_decode($citetext);
   $citenote = tng_utf8_decode($citenote);
@@ -47,5 +47,5 @@ if ($sourceID) {
 
 $citationsrc = cleanIt($citationsrc);
 $truncated = truncateIt($citationsrc, 75);
-header('Content-Type: application/json; charset=' . $session_charset);
+header('Content-Type: application/json; charset=' . $sessionCharset);
 echo "{\"display\":\"$truncated\"}";

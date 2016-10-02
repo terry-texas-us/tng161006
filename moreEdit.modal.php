@@ -24,7 +24,7 @@ $row['country'] = preg_replace('/\"/', '&#34;', $row['country']);
 
 $helplang = findhelp('more_help.php');
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <div id='more'>
   <form name='editmoreform' action='' onsubmit="return updateMore(this);">

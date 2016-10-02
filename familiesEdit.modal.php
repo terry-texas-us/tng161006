@@ -89,7 +89,7 @@ $kidcount = tng_num_rows($children);
 $helplang = findhelp('families_help.php');
 
 $photo = showSmallPhoto($familyID, $namestr, 1, 0, true);
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 
 require_once 'eventlib.php';
 ?>

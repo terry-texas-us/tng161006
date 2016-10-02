@@ -164,7 +164,7 @@ if ($table == 'struct') {
   adminwritelog(uiTextSnippet('backup') . ": $tablename");
 }
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 if ($ajaxmsg) {
   echo $ajaxmsg;
 } else {

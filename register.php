@@ -47,12 +47,12 @@ preparebookmark("<a href=\"register.php?personID=$personID\">" . uiTextSnippet('
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle($row['name']);
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build($flags, 'public', $session_charset); ?>
+<?php echo $headSection->build($flags, 'public', $sessionCharset); ?>
 <body id='public'>
   <section class='container'>
     <?php

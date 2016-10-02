@@ -20,7 +20,7 @@ $namestr = getName($row);
 tng_free_result($result);
 
 $helplang = findhelp('assoc_help.php');
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 
 $query = "SELECT assocID, passocID, relationship, reltype FROM associations WHERE personID = '$personID'";
 $assocresult = tng_query($query);

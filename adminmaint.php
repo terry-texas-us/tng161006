@@ -7,12 +7,12 @@ $maintenance_mode = true;
 require 'checklogin.php';
 require 'version.php';
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('maintmode'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body>
   <div class='table table-sm'>
     <div style="padding:10px">

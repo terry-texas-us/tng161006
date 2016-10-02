@@ -85,12 +85,12 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
   $totrows = $numrows;
 }
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('cemeteries'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id="admin-cemeteries">
   <section class='container'>
     <?php

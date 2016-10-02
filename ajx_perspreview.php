@@ -17,7 +17,7 @@ $namestr = getName($row);
 
 tng_free_result($result);
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 
 initMediaTypes();
 

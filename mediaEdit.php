@@ -58,12 +58,12 @@ $query = "SELECT medialinks.medialinkID AS mlinkID, medialinks.personID AS perso
 $result2 = tng_query($query);
 $numlinks = tng_num_rows($result2);
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('modifymedia'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body <?php echo "$onload"; ?>>
   <section class='container'>
     <?php

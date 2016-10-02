@@ -2,12 +2,12 @@
 
 function tng_db_connect($dbhost, $dbname, $dbusername, $dbpassword) {
   global $textpart;
-  global $session_charset;
+  global $sessionCharset;
   global $tng_notinstalled;
 
   $link = tng_connect($dbhost, $dbusername, $dbpassword);
   if ($link && tng_select_db($link, $dbname)) {
-    if ($session_charset == 'UTF-8') {
+    if ($sessionCharset == 'UTF-8') {
       tng_set_charset($link, 'utf8');
     }
     return $link;

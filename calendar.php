@@ -6,7 +6,7 @@ $logstring = "<a href=\"calendar.php?living=$living&amp;hide=$hide&amp;m=$m&amp;
 writelog($logstring);
 preparebookmark($logstring);
 
-$ucharset = strtoupper($session_charset);
+$ucharset = strtoupper($sessionCharset);
 
 function substr_unicode($str, $start, $len = null) {
     return join('', array_slice(preg_split('//u', $str, -1, PREG_SPLIT_NO_EMPTY), $start, $len));
@@ -17,12 +17,12 @@ $flags['styles'] = "<link href=\"css/calendar.css\" rel=\"stylesheet\" type=\"te
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('calendar'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build($flags, 'public', $session_charset); ?>
+<?php echo $headSection->build($flags, 'public', $sessionCharset); ?>
 <body id='public'>
   <section class='container-fluid'>
     <?php echo $publicHeaderSection->build(); ?>

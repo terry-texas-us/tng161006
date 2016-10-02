@@ -15,12 +15,12 @@ $row = tng_fetch_assoc($result);
 tng_free_result($result);
 $row['evdetail'] = preg_replace('/\"/', '&#34;', $row['evdetail']);
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('modifytlevent'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id="tlevents-modifytlevent">
   <section class='container'>
     <?php

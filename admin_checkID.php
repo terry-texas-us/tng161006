@@ -34,7 +34,7 @@ $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $que
 $prefixlen = strlen($prefix);
 $suffixlen = strlen($suffix) * -1;
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 if ($result && tng_num_rows($result)) {
   echo "<span class=\"msgerror\">ID $checkID " . uiTextSnippet('idinuse') . '</span>';
 } else {

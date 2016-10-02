@@ -25,12 +25,12 @@ if ($localphotopathdisplay && !$locimppath['photos']) {
 if ($localdocpathdisplay && !$locimppath['histories']) {
   $locimppath['histories'] = $localdocpathdisplay;
 }
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('modifyimportsettings'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id="setup-configuration-importconfigsettings">
   <section class='container'>
     <?php

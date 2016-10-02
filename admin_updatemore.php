@@ -12,7 +12,7 @@ require 'adminlog.php';
 
 $rval = 0;
 
-if ($session_charset != 'UTF-8') {
+if ($sessionCharset != 'UTF-8') {
   $eventplace = tng_utf8_decode($eventplace);
   $info = tng_utf8_decode($info);
   $age = tng_utf8_decode($age);

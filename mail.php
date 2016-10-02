@@ -1,7 +1,7 @@
 <?php
 
 function tng_sendmail($from_name, $from_email, $to_name, $to_email, $subject, $body, $returnpath, $replyto) {
-  global $session_charset;
+  global $sessionCharset;
   global $envelope;
   global $tngconfig;
 
@@ -16,7 +16,7 @@ function tng_sendmail($from_name, $from_email, $to_name, $to_email, $subject, $b
 
       //need host, port, username & password
       $options = new stdClass();
-      $options->charset = $session_charset;
+      $options->charset = $sessionCharset;
       $mail = new PHPMailer($options, true);
       try {
         $mail->IsSMTP();                           // set mailer to use SMTP
@@ -36,9 +36,9 @@ function tng_sendmail($from_name, $from_email, $to_name, $to_email, $subject, $b
         $mail->AddAddress($to_email, $to_name); //Email address where you wish to receive/collect those emails.
         $mail->AddReplyTo($replyto, $from_name);
 
-        $mail->CharSet = strtolower($session_charset);
+        $mail->CharSet = strtolower($sessionCharset);
         //$mail->WordWrap = 50;
-        if ($session_charset && strtoupper($session_charset) != 'ISO-8859-1') {
+        if ($sessionCharset && strtoupper($sessionCharset) != 'ISO-8859-1') {
           $mail->IsHTML(true);                                  // set email format to HTML
           $body = nl2br($body);
         }
@@ -54,11 +54,11 @@ function tng_sendmail($from_name, $from_email, $to_name, $to_email, $subject, $b
       }
     } else {
       //normal procedure
-      if (strtoupper($session_charset) != 'ISO-8859-1') {
+      if (strtoupper($sessionCharset) != 'ISO-8859-1') {
         //$from_name = '=?utf-8?B?'.base64_encode($from_name).'?=';
         //$subject = '=?utf-8?B?'.base64_encode($subject).'?=';
-        $headers = "MIME-Version: 1.0\nContent-type: text/html; charset=$session_charset\nFrom: $from_name <$from_email>\nReply-to: $replyto\nReturn-Path: $from_email";
-        $body = "<html>\n<head>\n<meta http-equiv=\"Content-type\" content=\"text/html; charset=$session_charset\">\n</head>\n<body>\n" . nl2br($body) . "</body>\n</html>\n";
+        $headers = "MIME-Version: 1.0\nContent-type: text/html; charset=$sessionCharset\nFrom: $from_name <$from_email>\nReply-to: $replyto\nReturn-Path: $from_email";
+        $body = "<html>\n<head>\n<meta http-equiv=\"Content-type\" content=\"text/html; charset=$sessionCharset\">\n</head>\n<body>\n" . nl2br($body) . "</body>\n</html>\n";
       } else {
         $headers = "From: $from_name <$from_email>\nReply-to: $replyto\nReturn-Path: $returnpath\nDate:" . date('r', time());
       }

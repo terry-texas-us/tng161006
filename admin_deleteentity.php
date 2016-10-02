@@ -14,7 +14,7 @@ if (!$allowDelete) {
 require 'adminlog.php';
 
 $original_name = $delitem;
-if ($session_charset != 'UTF-8') {
+if ($sessionCharset != 'UTF-8') {
   $delitem = tng_utf8_decode($delitem);
 }
 

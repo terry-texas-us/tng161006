@@ -58,12 +58,12 @@ preparebookmark("<a href=\"ahnentafel.php?personID=$personID\">" . xmlcharacters
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle($row['name']);
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build($flags, 'public', $session_charset); ?>
+<?php echo $headSection->build($flags, 'public', $sessionCharset); ?>
 <body id='ahnentafel'>
   <section class='container'>
     <?php

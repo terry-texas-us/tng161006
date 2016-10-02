@@ -23,7 +23,7 @@ foreach ($bookmarks as $bookmark) {
 }
 setcookie($ref, stripslashes($bookmarkstr), time() + 31536000, '/');
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <div id='bkmkdiv'>
   <form>

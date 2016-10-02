@@ -20,8 +20,8 @@ function doEvent($eventID, $displayval, $info) {
 
 header('Content-Type: application/xml');
 echo '<?xml version="1.0"';
-if ($session_charset) {
-  echo " encoding=\"$session_charset\"";
+if ($sessionCharset) {
+  echo " encoding=\"$sessionCharset\"";
 }
 echo "?>\n";
 echo "<eventlist>\n";

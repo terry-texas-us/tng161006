@@ -120,7 +120,7 @@ if ($albumID) {
   $alreadygot[] = [];
 }
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 
 $numrowsplus = $numrows + $offset;
 if (!$numrowsplus) {

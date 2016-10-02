@@ -29,6 +29,6 @@ session_start();
 $languagesPath = 'languages/';
 require 'getlang.php';
 $session_language = $_SESSION['session_language'];
-$session_charset = $_SESSION['session_charset'];
+$sessionCharset = $_SESSION['session_charset'];
 
 $link = tng_db_connect($database_host, $database_name, $database_username, $database_password);

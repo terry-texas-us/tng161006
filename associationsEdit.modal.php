@@ -21,7 +21,7 @@ $row['relationship'] = preg_replace('/\"/', '&#34;', $row['relationship']);
 
 $helplang = findhelp('assoc_help.php');
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <form action='' name='findassocform1' onSubmit="return updateAssociation(this);">
   <header class='modal-header'>

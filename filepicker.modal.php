@@ -28,7 +28,7 @@ if (!isset($subdir)) {
 }
 $ImageFileTypes = ['GIF', 'JPG', 'PNG'];
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 
 frmFiles();
 

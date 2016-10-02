@@ -16,7 +16,7 @@ function chkgd2() {
 function image_createThumb($src, $dest, $maxWidth, $maxHeight, $quality) {
   if (file_exists($src) && isset($dest)) {
     $destInfo = pathInfo($dest);
-    if ($session_charset == 'UTF-8') {
+    if ($sessionCharset == 'UTF-8') {
       $dest = utf8_decode($dest);
     }
     $srcSize = getimagesize($src);

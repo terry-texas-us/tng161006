@@ -23,7 +23,7 @@ if (!$map['displaytype']) {
 if (empty($row['placelevel'])) {
   $placelevel = 1;
 }
-$mcharsetstr = "&amp;oe=$session_charset";
+$mcharsetstr = "&amp;oe=$sessionCharset";
 ?>
 
 <script>

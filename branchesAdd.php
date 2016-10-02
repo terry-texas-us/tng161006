@@ -11,12 +11,12 @@ if (!$allowAdd) {
   header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('addnewbranch'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id="branches-addnewbranch">
   <section class='container'>
     <?php

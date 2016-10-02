@@ -32,12 +32,12 @@ $revrow = tng_fetch_assoc($revresult);
 $revstar = $revrow['ucount'] ? ' *' : '';
 tng_free_result($revresult);
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('modifyuser'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body>
   <section class='container'>
     <?php

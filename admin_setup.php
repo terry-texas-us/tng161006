@@ -17,7 +17,7 @@ if ($subroot != $_GET['sr']) {
 }
 session_start();
 $session_language = $_SESSION['session_language'];
-$session_charset = $_SESSION['session_charset'];
+$sessionCharset = $_SESSION['session_charset'];
 
 $languagesPath = 'languages/';
 require 'getlang.php';
@@ -34,12 +34,12 @@ $error_reporting = ((int) ini_get('error_reporting')) & E_NOTICE;
 if (!$sub) {
   $sub = 'configuration';
 }
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('setup'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body>
   <section class='container'>
     <?php

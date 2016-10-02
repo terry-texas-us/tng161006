@@ -21,7 +21,7 @@ foreach ($tablelist as $thistable) {
   $result = tng_query($query);
 }
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 adminwritelog(uiTextSnippet('optimize') . ": $tablename");
 if ($table == 'all') {
   header('Location: admin_utilities.php?message=' . urlencode($message));

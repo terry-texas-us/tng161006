@@ -17,7 +17,7 @@ require 'geocodelib.php';
 $persfamID = ucfirst($persfamID);
 
 $orgplace = $eventplace;
-if ($session_charset != 'UTF-8') {
+if ($sessionCharset != 'UTF-8') {
   $eventplace = tng_utf8_decode($eventplace);
   $info = tng_utf8_decode($info);
   $age = tng_utf8_decode($age);
@@ -76,14 +76,14 @@ $query = "SELECT display FROM eventtypes WHERE eventtypeID = \"$eventtypeID\"";
 $result = tng_query($query);
 $row = tng_fetch_assoc($result);
 
-$display = htmlspecialchars(getEventDisplay($row['display']), ENT_QUOTES, $session_charset);
+$display = htmlspecialchars(getEventDisplay($row['display']), ENT_QUOTES, $sessionCharset);
 
 $info = str_replace("\r", ' ', $info);
-$info = htmlspecialchars(str_replace("\n", ' ', $info), ENT_QUOTES, $session_charset);
+$info = htmlspecialchars(str_replace("\n", ' ', $info), ENT_QUOTES, $sessionCharset);
 $truncated = substr($info, 0, 90);
 $info = strlen($info) > 90 ? substr($truncated, 0, strrpos($truncated, ' ')) . '&hellip;' : $info;
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 $eventplace = stripslashes($eventplace);
 if ($eventID) {
   echo "{\"id\":\"$eventID\",\"persfamID\":\"$persfamID\",\"display\":\"$display\",\"eventdate\":\"$eventdate\",\"eventplace\":\"$eventplace\",\"info\":\"" . stripslashes($info) . "\",\"allow_edit\":$allowEdit,\"allow_delete\":$allowDelete}";

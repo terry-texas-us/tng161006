@@ -15,12 +15,12 @@ scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 $tooltip['showall'] = uiTextSnippet('showallplaces') . ' (' . uiTextSnippet('sortedalpha') . ')';
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('places') . ': ' . uiTextSnippet('top') . " $topnum");
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build($flags, 'public', $session_charset); ?>
+<?php echo $headSection->build($flags, 'public', $sessionCharset); ?>
 <body id='places'>
   <section class='container'>
     <?php echo $publicHeaderSection->build(); ?>

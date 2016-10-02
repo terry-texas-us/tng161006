@@ -11,7 +11,7 @@ if ($type == 'map') {
   $firstfield = 'mylastname';
   $subtitle = uiTextSnippet('enternamepart');
 }
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <div id='finddiv'>
   <h4><?php echo uiTextSnippet('findpersonid'); ?></h4>

@@ -14,12 +14,12 @@ if ($link) {
     exit;
   }
 }
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('modifypedsettings'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <style>input[type='color'] {width: 100%;}</style>
 
 <body id="setup-configuration-pedconfigsettings">

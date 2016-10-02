@@ -13,7 +13,7 @@ $banish = ['(', ')', '#', '&', ' from ', ' to ', ' van ', ' naar ', ' von ', ' b
 $banreplace = ['[', ']', '', 'and', ' from%A0', ' to%A0', ' van%A0', ' naar%A0', ' von%A0', ' bis%A0', ' da%A0', ' a%A0', ' de%A0', 'à%A0', 'vers%A0', 'till%A0'];
 
 function buildGoogleMapCardHtml($map, $place = '') {
-  global $session_charset;
+  global $sessionCharset;
   $html = "<input class='btn btn-sm' type='button' onclick=\"return divbox('mapcontainer');\" value=\"" . uiTextSnippet('showhidemap') . '"> <span>' . uiTextSnippet('getcoords') . "</span>\n";
 
   $html .= "<div class='card card-block' id='mapcontainer' style='display: none; width:{$map['admw']};'>\n";
@@ -34,7 +34,7 @@ function buildGoogleMapCardHtml($map, $place = '') {
   $html .= "<div id='map' style='width: {$map['admw']}; height: {$map['admh']}'></div>\n";
   
   if ($map['externallink'] === true) { // [ts] always false but may use later
-    $html .= "<a href=\"javascript:newwindow=window.open('https://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "&amp;oe=$session_charset&amp;q=" . $place . "', 'googlehelp'); newwindow.focus();\"> " . uiTextSnippet('difficultmap') . "</a>\n";
+    $html .= "<a href=\"javascript:newwindow=window.open('https://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "&amp;oe=$sessionCharset&amp;q=" . $place . "', 'googlehelp'); newwindow.focus();\"> " . uiTextSnippet('difficultmap') . "</a>\n";
   }
   
   $html .= "</div>\n";
@@ -46,7 +46,7 @@ function tng_map_pins() {
   global $locations2map;
   global $map;
   global $defermap;
-  global $session_charset;
+  global $sessionCharset;
 
   $minLat = 500;
   $maxLat = -500;
@@ -137,7 +137,7 @@ function tng_map_pins() {
           ?>
           lat = <?php echo $lat; ?>;
           long = <?php echo $long; ?>;
-          uniquePlace = '<?php echo htmlspecialchars($uniqueplace, ENT_QUOTES, $session_charset); ?>';
+          uniquePlace = '<?php echo htmlspecialchars($uniqueplace, ENT_QUOTES, $sessionCharset); ?>';
           pinPlaceLevel = '<?php echo $pins[$placelevel]; ?>';
           contentString = '<?php echo $htmlcontent; ?>';
           

@@ -11,7 +11,7 @@ if (!$allowEdit) {
 
 require 'adminlog.php';
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 if ($action == 'convert') {
   $query = "UPDATE places SET gedcom = \"$placetree\" WHERE gedcom = \"\"";
   $result = tng_query($query) or die('Cannot complete this operation because place records were never merged.');

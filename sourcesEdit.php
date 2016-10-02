@@ -39,12 +39,12 @@ while ($note = tng_fetch_assoc($notelinks)) {
   $gotnotes[$note['eventID']] = '*';
 }
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('modifysource'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id='sources-modifysource'>
   <section class='container'>
     <?php

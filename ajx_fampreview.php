@@ -249,7 +249,7 @@ if (!tng_num_rows($result)) {
 } else {
   tng_free_result($result);
 }
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 
 initMediaTypes();
 

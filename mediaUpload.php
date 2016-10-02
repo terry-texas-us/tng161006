@@ -22,12 +22,12 @@ $flags['styles'] .= "<!-- CSS adjustments for browsers with JavaScript disabled 
 $flags['styles'] .= "<noscript><link rel=\"stylesheet\" href=\"css/jquery.fileupload-noscript.css\"></noscript>\n";
 $flags['styles'] .= "<noscript><link rel=\"stylesheet\" href=\"css/jquery.fileupload-ui-noscript.css\"></noscript>\n";
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('sortmedia'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id="media-upload">
   <section class='container'>
     <?php

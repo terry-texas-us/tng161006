@@ -125,7 +125,7 @@ fwrite($fp, "\$ldsdefault = \"$ldsdefault\";\n");
 fwrite($fp, "\$chooselang = \"$chooselang\";\n");
 if (!$chooselang) {
   $session_language = $_SESSION['session_language'] = $language;
-  $session_charset = $_SESSION['session_charset'] = $charset;
+  $sessionCharset = $_SESSION['session_charset'] = $charset;
   setcookie('tnglangfolder', $language, time() + 31536000, '/');
   setcookie('tngcharset', $charset, time() + 31536000, '/');
 }

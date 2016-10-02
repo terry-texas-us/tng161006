@@ -219,14 +219,14 @@ function getNotes($id) {
 }
 
 function getNoteLine($level, $label, $note, $delta) {
-  global $lineending, $session_charset; // added $session_charset to fix UTF-8 problem
+  global $lineending, $sessionCharset; // added $sessionCharset to fix UTF-8 problem
 
   $noteconc = '';
   $notelen = strlen($note);
   if ($notelen > 245) {
     $orgnote = trim($note);
     $offset = 245;
-    if ($session_charset == 'UTF-8' && function_exists(mb_substr)) {
+    if ($sessionCharset == 'UTF-8' && function_exists(mb_substr)) {
       while (mb_substr($orgnote, $offset, 1, 'UTF-8') == ' ' || mb_substr($orgnote, $offset - 1, 1, 'UTF-8') == ' ') {
         $offset--;
       }
@@ -243,7 +243,7 @@ function getNoteLine($level, $label, $note, $delta) {
     $newlevel = $level + $delta;
     while ($offset < $notelen) {
       $endnext = 245;
-      if ($session_charset == 'UTF-8' && function_exists(mb_substr)) {
+      if ($sessionCharset == 'UTF-8' && function_exists(mb_substr)) {
         while (mb_substr($orgnote, $offset + $endnext, 1, 'UTF-8') == ' ' || mb_substr($orgnote, $offset + $endnext - 1, 1, 'UTF-8') == ' ') {
           $offset--;
         }
@@ -1020,7 +1020,7 @@ if ($maxgcgen > 0 || $type == 'all') {
     $filenamestr = ereg_replace('[\]', '', $filenamestr);
     $filenamestr = str_replace(' ', '', $filenamestr);
     $filenamestr = str_replace(',', '', $filenamestr);
-    if ($session_charset == 'UTF-8') {
+    if ($sessionCharset == 'UTF-8') {
       $filenamestr = utf8_decode($filenamestr);
     }
     tng_free_result($result);
@@ -1045,7 +1045,7 @@ if ($maxgcgen > 0 || $type == 'all') {
           . "1 GEDC$lineending"
           . "2 VERS 5.5$lineending"
           . "2 FORM LINEAGE-LINKED$lineending"
-          . '1 CHAR ' . ($session_charset == 'UTF-8' ? 'UTF-8' : 'ANSI') . $lineending
+          . '1 CHAR ' . ($sessionCharset == 'UTF-8' ? 'UTF-8' : 'ANSI') . $lineending
           . "1 SUBM @SUB1@$lineending"
           . "0 @SUB1@ SUBM$lineending"
           . "1 NAME $ownername$lineending"
@@ -1129,12 +1129,12 @@ if ($maxgcgen > 0 || $type == 'all') {
 
   echo "0 TRLR$lineending";
 } else {
-  header('Content-type: text/html; charset=' . $session_charset);
+  header('Content-type: text/html; charset=' . $sessionCharset);
   $headSection->setTitle('Error');
   ?>
   <!DOCTYPE html>
   <html>
-  <?php echo $headSection->build('', 'public', $session_charset); ?>
+  <?php echo $headSection->build('', 'public', $sessionCharset); ?>
   <body id='public'>
     <section class='container'>
       <?php

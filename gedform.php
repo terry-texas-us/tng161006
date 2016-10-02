@@ -18,12 +18,12 @@ if (!$allowGed || !$rightbranch) {
 }
 initMediaTypes();
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('creategedfor') . ': ' . uiTextSnippet('gedstartfrom') . " $name");
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build($flags, 'public', $session_charset); ?>
+<?php echo $headSection->build($flags, 'public', $sessionCharset); ?>
 <body class='form-gedcom'>
   <section class='container'>
     <?php

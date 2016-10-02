@@ -8,7 +8,7 @@ require 'personlib.php';
 require 'api_library.php';
 require 'log.php';
 
-header('Content-Type: application/json; charset=' . $session_charset);
+header('Content-Type: application/json; charset=' . $sessionCharset);
 
 //get family
 $query = "SELECT familyID, husband, wife, living, private, marrdate, gedcom, branch FROM families WHERE familyID = '$familyID'";

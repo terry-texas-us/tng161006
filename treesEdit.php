@@ -46,12 +46,12 @@ $nrow = tng_fetch_assoc($nresult);
 $ncount = number_format($nrow['ncount']);
 tng_free_result($nresult);
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('modifytree'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id="trees-modifytree">
   <section class='container'>
     <?php

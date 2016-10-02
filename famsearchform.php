@@ -50,12 +50,12 @@ $lnOptions = ['contains', 'equals', 'startswith', 'endswith', 'exists', 'dnexist
 
 $yearOptions = ['equals', 'plusminus2', 'plusminus5', 'plusminus10', 'lessthan', 'greaterthan', 'lessthanequal', 'greaterthanequal', 'exists', 'dnexist'];
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('searchfams'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build($flags, 'public', $session_charset); ?>
+<?php echo $headSection->build($flags, 'public', $sessionCharset); ?>
 <body id='search-families'>
   <section class='container'>
     <?php echo $publicHeaderSection->build(); ?>

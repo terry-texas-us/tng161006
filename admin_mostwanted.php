@@ -84,12 +84,12 @@ function showDiv($type) {
   echo "</div>\n";
 }
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('mostwanted'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body onLoad="startMostWanted()">
   <section class='container'>
     <?php

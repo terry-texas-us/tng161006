@@ -29,7 +29,7 @@ $applyfilter = 'applyFilter({'
         . "form: 'findform1', fieldId: 'myflastname', myflastname: $('#myflastname').val(), myffirstname: $('#myffirstname').val(), myfpersonID: $('#myfpersonID').val(),"
         . "type: 'I', branch: '$branch', destdiv: 'findresults'$mediaoption});";
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <div id='finddiv'>
   <form id='findform1' name='findform1' action='' method='post' onsubmit="return <?php echo $applyfilter; ?>">

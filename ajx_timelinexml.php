@@ -27,8 +27,8 @@ function getTimelineDate($date) {
 
 header('Content-Type: application/xml');
 echo '<?xml version="1.0"';
-if ($session_charset) {
-  echo " encoding=\"$session_charset\"";
+if ($sessionCharset) {
+  echo " encoding=\"$sessionCharset\"";
 }
 echo "?>\n";
 echo "<data>\n";
@@ -63,7 +63,7 @@ while ($tlrow = tng_fetch_assoc($tlresult)) {
     $isduration = '';
   }
   $evtitle = $tlrow['evtitle'] ? $tlrow['evtitle'] : $tlrow['evdetail'];
-  echo '<event start="' . $beg_date_gmt . '" end="' . $end_date_gmt . "\" $isduration icon=\"img/red-circle.png\" title=\" " . htmlspecialchars($evtitle, ENT_QUOTES, $session_charset) . '">' . htmlspecialchars($tlrow['evdetail'], ENT_QUOTES, $session_charset) . "</event>\n";
+  echo '<event start="' . $beg_date_gmt . '" end="' . $end_date_gmt . "\" $isduration icon=\"img/red-circle.png\" title=\" " . htmlspecialchars($evtitle, ENT_QUOTES, $sessionCharset) . '">' . htmlspecialchars($tlrow['evdetail'], ENT_QUOTES, $sessionCharset) . "</event>\n";
 }
 tng_free_result($tlresult);
 

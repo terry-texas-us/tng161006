@@ -35,7 +35,7 @@ function importFrom($tngpath, $orgpath, $needsubdirs) {
     while ($filename = readdir($handle)) {
       if (is_file($filename)) {
         if (($thumbprefix && strpos($filename, $thumbprefix) !== 0) || ($thumbsuffix && substr($filename, -strlen($thumbsuffix)) != $thumbsuffix)) {
-          //$cleanfile = $session_charset == 'UTF-8' ? utf8_encode($filename) : $filename;
+          //$cleanfile = $sessionCharset == 'UTF-8' ? utf8_encode($filename) : $filename;
           echo "Inserting $path/$filename ... ";
           //insert ignore into database
           $fileparts = pathinfo($filename);
@@ -64,12 +64,12 @@ function importFrom($tngpath, $orgpath, $needsubdirs) {
 
 adminwritelog(uiTextSnippet('media') . ' &gt;&gt; ' . uiTextSnippet('import') . " ($mediatypeID)");
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('mediaimport'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id="media-import">
   <section class='container'>
     <?php

@@ -23,12 +23,12 @@ $prow = tng_fetch_assoc($result);
 $pcount = $prow['pcount'];
 tng_free_result($result);
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('labelbranches'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id="branches-labelbranches">
   <section class='container'>
     <?php

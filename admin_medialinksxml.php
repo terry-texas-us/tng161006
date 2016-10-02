@@ -265,38 +265,38 @@ function doPlaces($place) {
 $lines = '';
 switch ($linktype) {
   case 'I':
-    if ($session_charset != 'UTF-8') {
+    if ($sessionCharset != 'UTF-8') {
       $firstname = tng_utf8_decode($firstname);
       $lastname = tng_utf8_decode($lastname);
     }
     $lines = doPeople($firstname, $lastname);
     break;
   case 'F':
-    if ($session_charset != 'UTF-8') {
+    if ($sessionCharset != 'UTF-8') {
       $husbname = tng_utf8_decode($husbname);
       $wifename = tng_utf8_decode($wifename);
     }
     $lines = doFamilies($husbname, $wifename);
     break;
   case 'S':
-    if ($session_charset != 'UTF-8') {
+    if ($sessionCharset != 'UTF-8') {
       $title = tng_utf8_decode($title);
     }
     $lines = doSources($title);
     break;
   case 'R':
-    if ($session_charset != 'UTF-8') {
+    if ($sessionCharset != 'UTF-8') {
       $title = tng_utf8_decode($title);
     }
     $lines = doRepos($title);
     break;
   case 'L':
-    if ($session_charset != 'UTF-8') {
+    if ($sessionCharset != 'UTF-8') {
       $place = tng_utf8_decode($place);
     }
     $lines = doPlaces($place);
     break;
 }
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 echo "<table width='585'>\n$lines\n</table>\n";

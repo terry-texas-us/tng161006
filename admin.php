@@ -63,12 +63,12 @@ $cemeteriesmsg = substr($cemeteriesmsg, 0, -3);
 $placesmsg = substr($placesmsg, 0, -3);
 $timelinemsg = substr($timelinemsg, 0, -3);
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('administration'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body>
   <section class='container'>
     <?php echo $adminHeaderSection->build(); ?>

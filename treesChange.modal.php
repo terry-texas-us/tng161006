@@ -39,7 +39,7 @@ while ($row = tng_fetch_assoc($result)) {
     $currenttree = $row['treename'];
   }
 }
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <form id='treeschange' name='treeschange' action='treesChangeFormAction.php'>
   <header class='modal-header'>

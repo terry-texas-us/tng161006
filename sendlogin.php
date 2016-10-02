@@ -67,5 +67,5 @@ if ($email) {
     tng_sendmail($owner, $emailaddr, $row['realname'], $email, uiTextSnippet('logininfo'), $mailmessage, $emailaddr, $emailaddr);
   }
 }
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 echo "{\"div\":\"$div\", \"msg\":\"$message\"}";

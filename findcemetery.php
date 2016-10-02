@@ -88,12 +88,12 @@ if (!$numrows) {
 }
 $helplang = findhelp('cemeteries_help.html');
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('modifycemetery'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body>
 <div class="center">
   <table class='table table-sm'>

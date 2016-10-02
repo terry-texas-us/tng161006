@@ -15,7 +15,7 @@ if (!$allowEdit) {
 require 'adminlog.php';
 
 $orgrelationship = $relationship;
-if ($session_charset != 'UTF-8') {
+if ($sessionCharset != 'UTF-8') {
   $relationship = tng_utf8_decode($relationship);
 }
 $relationship = addslashes($relationship);
@@ -46,5 +46,5 @@ $namestr = cleanIt($name . ': ' . stripslashes($orgrelationship));
 
 $namestr = truncateIt($namestr, 75);
 tng_free_result($result);
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 echo "{\"display\":\"$namestr\"}";

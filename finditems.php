@@ -6,7 +6,7 @@ require 'adminlib.php';
 require 'checklogin.php';
 require 'prefixes.php';
 
-if ($session_charset != 'UTF-8') {
+if ($sessionCharset != 'UTF-8') {
   $criteria = tng_utf8_decode($criteria);
   $myffirstname = tng_utf8_decode($myffirstname);
   $myflastname = tng_utf8_decode($myflastname);
@@ -17,7 +17,7 @@ if ($session_charset != 'UTF-8') {
 $criteria = trim($criteria);
 $f = $filter == 'c' ? '%' : '';
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 
 $mediaquery = '';
 if ($albumID) {

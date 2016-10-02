@@ -15,7 +15,7 @@ if (!$allowAdd) {
     header('Location: admin_login.php?message=' . urlencode($message));
     exit;
 }
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 ?>
 <header class='modal-header'>
   <h4><?php echo uiTextSnippet('addnewtree'); ?></h4>

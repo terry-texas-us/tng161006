@@ -70,7 +70,7 @@ while ($custevent = tng_fetch_assoc($custevents)) {
 }
 tng_free_result($custevents);
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <form id='editlinkform' name='editlinkform' action='' method='post' onsubmit="return updateMedia2EntityLink(this);">
   <header class='modal-header'>

@@ -392,7 +392,7 @@ if ($branchaction == 'clear') {
   $branchtitle = uiTextSnippet('addingbranch');
   $branchclause = $overwrite ? '' : ' AND branch = ""';
 }
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 echo "<p><strong>$branchtitle</strong></p>";
 
 if ($set == 'all') {

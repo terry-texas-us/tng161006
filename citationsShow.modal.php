@@ -37,7 +37,7 @@ tng_free_result($eventtypes);
 
 $helplang = findhelp('citations_help.php');
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 
 $xnotestr = $noteID ? " OR persfamID = '$noteID'" : '';
 $query = "SELECT citationID, citations.sourceID AS sourceID, description, title, shorttitle FROM citations LEFT JOIN sources ON citations.sourceID = sources.sourceID WHERE ((persfamID = '$persfamID' AND eventID = '$eventID')$xnotestr) ORDER BY ordernum, citationID";

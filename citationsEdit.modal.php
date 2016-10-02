@@ -18,7 +18,7 @@ $row['note'] = preg_replace('/\"/', '&#34;', $row[note]);
 
 $helplang = findhelp('citations_help.php');
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <form action='' name='citeform3' onsubmit="return updateCitation(this);">
   <header class='modal-header'>

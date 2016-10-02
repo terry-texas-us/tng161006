@@ -19,12 +19,12 @@ $flags['styles'] = "<link href=\"css/cemeteries.css\" rel=\"stylesheet\" type=\"
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build($flags, 'public', $session_charset); ?>
+<?php echo $headSection->build($flags, 'public', $sessionCharset); ?>
 <body id='public'>
   <section class='container'>
     <?php echo $publicHeaderSection->build(); ?>
@@ -67,7 +67,7 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
                 }
                 $divname = "city$divctr";
                 if ($cemetery['city'] || !$tngconfig['cemblanks']) {
-                  $txt = $cemetery['city'] ? htmlspecialchars($cemetery['city'], ENT_QUOTES, $session_charset) : uiTextSnippet('nocity');
+                  $txt = $cemetery['city'] ? htmlspecialchars($cemetery['city'], ENT_QUOTES, $sessionCharset) : uiTextSnippet('nocity');
                   echo "<div class='pad3'>\n";
                     echo "<img src='" . "img/tng_expand.gif' class='expandicon' title='" . uiTextSnippet('expand') . "' id='plusminus$divname' onclick=\"return toggleSection('$divname');\" alt=''>\n";
                     echo "<a href='headstones.php?country=" . urlencode($cemetery['country']) . '&amp;state=' . urlencode($cemetery['state']) . '&amp;county=' . urlencode($cemetery['county']) . '&amp;city=' . urlencode($cemetery['city']) . "'>$txt</a>\n";
@@ -78,7 +78,7 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
                 }
               }
               $txt = $cemetery['cemname'] ? $cemetery['cemname'] : uiTextSnippet('nocemname');
-              $txt = htmlspecialchars($txt, ENT_QUOTES, $session_charset);
+              $txt = htmlspecialchars($txt, ENT_QUOTES, $sessionCharset);
               echo "- <a href=\"cemeteriesShowCemetery.php?cemeteryID={$cemetery['cemeteryID']}\">$txt</a><br>\n";
               $cemetery = tng_fetch_assoc($cemresult);
               $i++;
@@ -94,7 +94,7 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
             $lastcounty = $cemetery['county'];
             if ($cemetery['county'] || !$tngconfig['cemblanks']) {
               $linectr++;
-              $txt = $cemetery['county'] ? htmlspecialchars($cemetery['county'], ENT_QUOTES, $session_charset) : uiTextSnippet('nocounty');
+              $txt = $cemetery['county'] ? htmlspecialchars($cemetery['county'], ENT_QUOTES, $sessionCharset) : uiTextSnippet('nocounty');
               echo "<div class=\"pad3\">\n";
                 echo '<img src="' . "img/tng_expand.gif\" class=\"expandicon\" title='" . uiTextSnippet('expand') . "' id='plusminus$divname' onclick=\"return toggleSection('$divname');\" alt=''>\n";
                 echo "<a href='headstones.php?country=" . urlencode($cemetery['country']) . '&amp;state=' . urlencode($cemetery['state']) . '&amp;county=' . urlencode($cemetery['county']) . "'>$txt</a>\n";
@@ -118,7 +118,7 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
           $laststate = $cemetery['state'];
           $lastcounty = DUMMYPLACE;
           $hiding = false;
-          $txt = $cemetery['state'] ? htmlspecialchars($cemetery['state'], ENT_QUOTES, $session_charset) : uiTextSnippet('nostate');
+          $txt = $cemetery['state'] ? htmlspecialchars($cemetery['state'], ENT_QUOTES, $sessionCharset) : uiTextSnippet('nostate');
           if ($cemetery['state'] || !$tngconfig['cemblanks']) {
             $linectr += 2;        //Add extra line to allow for the <br> at the end
             echo '<br><strong><a href="headstones.php?country=' . urlencode($cemetery['country']) . '&amp;state=' . urlencode($cemetery['state']) . "\">$txt</a></strong><br>\n";
@@ -141,7 +141,7 @@ $headSection->setTitle(uiTextSnippet('cemeteriesheadstones'));
           echo '<br>';
         }
         $linectr++;     //Add extra line to allow for the <br> at the end
-        $txt = $cemetery['country'] ? htmlspecialchars($cemetery['country'], ENT_QUOTES, $session_charset) : uiTextSnippet('nocountry');
+        $txt = $cemetery['country'] ? htmlspecialchars($cemetery['country'], ENT_QUOTES, $sessionCharset) : uiTextSnippet('nocountry');
         echo '<div class="cemcountry h4"><a href="headstones.php?country=' . urlencode($cemetery['country']) . "\">$txt</a></div>\n";
         $orphan = true;
       }

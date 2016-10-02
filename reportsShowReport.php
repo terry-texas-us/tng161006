@@ -503,19 +503,19 @@ if ($rrow['active'] && !$csv) {
   preparebookmark($logstring);
 }
 if ($csv) {
-  header('Content-type:text/html;charset=' . $session_charset);
+  header('Content-type:text/html;charset=' . $sessionCharset);
   $truncname = str_replace(' ', '-', strtolower($rrow['reportname']));
   header("Content-Disposition: attachment; filename={$truncname}.csv\n\n");
 } else {
   scriptsManager::setShowShare($tngconfig['showshare'], $http);
   initMediaTypes();
 
-  header('Content-type: text/html; charset=' . $session_charset);
+  header('Content-type: text/html; charset=' . $sessionCharset);
   $headSection->setTitle($rrow['reportname']);
   ?>
   <!DOCTYPE html>
   <html>
-  <?php echo $headSection->build($flags, 'public', $session_charset); ?>
+  <?php echo $headSection->build($flags, 'public', $sessionCharset); ?>
   <body id='public'>
   <?php echo $publicHeaderSection->build(); ?>
   <h2><img class='icon-md' src='svg/print.svg'><?php echo '' . uiTextSnippet('report') . ": {$rrow['reportname']}"; ?></h2>

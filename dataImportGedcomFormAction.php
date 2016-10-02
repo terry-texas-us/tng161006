@@ -65,12 +65,12 @@ function getAlbumLinksToSave() {
   return $albumlinks;
 }
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('datamaint'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id="datamaint-gedimport">
 <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
 <script src='js/dataimport.js'></script>

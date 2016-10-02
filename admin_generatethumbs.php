@@ -13,7 +13,7 @@ if (!$allowMediaAdd) {
   echo uiTextSnippet('norights');
   exit;
 }
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 
 initMediaTypes();
 

@@ -7,7 +7,7 @@ require 'getlang.php';
 require 'log.php';
 require_once 'loginlib.php';
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 
 <div>

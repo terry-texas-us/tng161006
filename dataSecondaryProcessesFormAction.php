@@ -8,12 +8,12 @@ require 'version.php';
 
 require 'adminlog.php';
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('secondarymaint'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body>
   <?php
   echo $adminHeaderSection->build('datamaint-secondarymaint-' . $secaction, $message);
@@ -139,7 +139,7 @@ $headSection->setTitle(uiTextSnippet('secondarymaint'));
               } else {
                 $line = $person['personID'] . "&tree=master|$uclast|{$person['firstname']} /$uclast/|$info\n";
               }
-              if ($session_charset == 'UTF-8') {
+              if ($sessionCharset == 'UTF-8') {
                 $line = utf8_decode($line);
               }
               fwrite($fp2, "$line");

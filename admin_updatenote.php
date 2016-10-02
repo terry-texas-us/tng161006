@@ -11,7 +11,7 @@ if (!$allowEdit) {
 
 require 'adminlog.php';
 
-if ($session_charset != 'UTF-8') {
+if ($sessionCharset != 'UTF-8') {
   $note = tng_utf8_decode($note);
 }
 $orgnote = preg_replace("/$lineending/", ' ', $note);
@@ -34,5 +34,5 @@ adminwritelog(uiTextSnippet('modifynote') . ": $persfamID/$ID/$eventID");
 
 $orgnote = cleanIt($orgnote);
 $truncated = truncateIt(stripslashes($orgnote), 75);
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 echo "{\"display\":\"$truncated\"}";

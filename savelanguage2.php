@@ -12,7 +12,7 @@ $row = tng_fetch_assoc($result);
 tng_free_result($result);
 
 $session_language = $_SESSION['session_language'] = $row['folder'];
-$session_charset = $_SESSION['session_charset'] = $row['charset'];
+$sessionCharset = $_SESSION['session_charset'] = $row['charset'];
 
 if (file_exists($languagesPath . $row['folder'])) {
   $newroot = preg_replace('/\//', '', $rootpath);

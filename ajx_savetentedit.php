@@ -5,7 +5,7 @@ require_once 'tngdblib.php';
 require 'checklogin.php';
 require 'mail.php';
 
-if ($session_charset != 'UTF-8') {
+if ($sessionCharset != 'UTF-8') {
   $newplace = tng_utf8_decode($newplace);
   $newinfo = tng_utf8_decode($newinfo);
   $usernote = tng_utf8_decode($usernote);

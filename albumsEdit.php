@@ -32,12 +32,12 @@ $numlinks = tng_num_rows($result3);
 if (!$thumbmaxw) {
   $thumbmaxw = 50;
 }
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('modifyalbum'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body onload="startMediaSort()">
   <section class='container'>
     <?php

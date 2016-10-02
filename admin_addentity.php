@@ -14,7 +14,7 @@ if (!$allowAdd) {
 require 'adminlog.php';
 
 $original_name = $newitem;
-if ($session_charset != 'UTF-8') {
+if ($sessionCharset != 'UTF-8') {
   $newitem = tng_utf8_decode($newitem);
 }
 $newname = addslashes($newitem);

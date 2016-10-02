@@ -8,7 +8,7 @@ require 'adminlib.php';
 
 require 'checklogin.php';
 
-if ($session_charset != 'UTF-8') {
+if ($sessionCharset != 'UTF-8') {
   $place = tng_utf8_decode($place);
 }
 if ($mediaID) {
@@ -24,7 +24,7 @@ $bailtext = $mediaoption ? uiTextSnippet('finish') : uiTextSnippet('cancel');
 
 $applyfilter = "applyFilter({form:'findform1',fieldId:'myplace', type:'L', destdiv:'placeresults', temple:getTempleCheck()$mediaoption});";
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <div id='finddiv'>
   <form id='findform1' name='findform1' action='' method='post' onsubmit="return <?php echo $applyfilter; ?>">

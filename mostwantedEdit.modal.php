@@ -26,7 +26,7 @@ if ($row['mwtype']) {
 }
 $typemsg = $mwtype == 'person' ? uiTextSnippet('mysperson') : uiTextSnippet('mysphoto');
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <div id='more'>
   <form name='editmostwanted' action='' onsubmit="return updateMostWanted(this);">

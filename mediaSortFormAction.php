@@ -100,12 +100,12 @@ if (!$numrows) {
   header("Location: mediaSort.php?personID=$personID&message=" . urlencode($message));
   exit;
 }
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet($sortstr));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body onLoad="startMediaSort()">
   <?php
   echo $adminHeaderSection->build('media-text_sort', $message);

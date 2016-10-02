@@ -18,7 +18,7 @@ $helplang = findhelp('collections_help.php');
 
 initMediaTypes();
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <div id='newcollection'>
   <form id='collform' name='collform' action='admin_addcollection.php' method='post' onsubmit="return addCollection(this);">

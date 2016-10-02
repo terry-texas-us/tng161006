@@ -99,12 +99,12 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 } else {
   $totrows = $numrows;
 }
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('media'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id='admin-media'>
   <section class='container'>
     <?php
@@ -325,7 +325,7 @@ $headSection->setTitle(uiTextSnippet('media'));
           $actionstr .= "</a>\n";
 
           while ($row = tng_fetch_assoc($result)) {
-            //$cleanfile = $session_charset == 'UTF-8' ? utf8_decode($row['thumbpath']) : $row['thumbpath'];
+            //$cleanfile = $sessionCharset == 'UTF-8' ? utf8_decode($row['thumbpath']) : $row['thumbpath'];
             $mtypeID = $row['mediatypeID'];
             $usefolder = $row['usecollfolder'] ? $mediatypes_assoc[$mtypeID] : $mediapath;
             $newactionstr = preg_replace('/xxx/', $row['mediaID'], $actionstr);

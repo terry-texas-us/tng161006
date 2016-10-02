@@ -9,7 +9,7 @@ require 'adminlib.php';
 require 'checklogin.php';
 
 initMediaTypes();
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <div id='finddiv'>
     <form name='find2' onsubmit="getNewMedia(this,1); return false;">

@@ -157,17 +157,17 @@ function getFamilyName($row, $appendId=false) {
 }
 
 function initials($name) {
-  global $session_charset;
+  global $sessionCharset;
 
   $newname = '';
-  if ($session_charset == 'UTF-8') {
+  if ($sessionCharset == 'UTF-8') {
     $name = utf8_decode($name);
   }
 
   $token = strtok($name, ' ');
   do {
     if (substr($token, 0, 1) != '(') { //In case there is a name in brackets, in which case ignore
-      if ($session_charset == 'UTF-8') {
+      if ($sessionCharset == 'UTF-8') {
         $newname .= utf8_encode(substr($token, 0, 1)) . '.';
       } else {
         $newname .= substr($token, 0, 1) . '.';
@@ -579,12 +579,12 @@ function displayDate($date) {
 }
 
 function xmlcharacters($string) {
-  global $session_charset;
+  global $sessionCharset;
 
   $bad = ['&', '"'];
   $good = ['&#038;', '&#034;'];
 
-  $ucharset = strtoupper($session_charset);
+  $ucharset = strtoupper($sessionCharset);
   $enc = function_exists('mb_detect_encoding') ? mb_detect_encoding($string) : '';
   if ($enc && strtoupper($enc) == 'UTF-8' && $ucharset == 'UTF-8') {
     return str_replace($bad, $good, mb_convert_encoding($string, 'UTF-8', $enc));
@@ -947,8 +947,8 @@ function checkMaintenanceMode($area) {
 }
 
 function cleanIt($string) {
-  global $session_charset;
-  $string = htmlspecialchars(preg_replace("/\n/", ' ', $string), ENT_QUOTES, $session_charset);
+  global $sessionCharset;
+  $string = htmlspecialchars(preg_replace("/\n/", ' ', $string), ENT_QUOTES, $sessionCharset);
   $string = preg_replace('/\"/', '&#34;', $string);
   $string = preg_replace('/</', '&lt;', $string);
   $string = preg_replace('/>/', '&gt;', $string);
@@ -970,9 +970,9 @@ function truncateIt($string, $length) {
 }
 
 function tng_strtoupper($string) {
-  global $session_charset;
+  global $sessionCharset;
 
-  $ucharset = strtoupper($session_charset);
+  $ucharset = strtoupper($sessionCharset);
   $enc = function_exists(mb_detect_encoding) ? mb_detect_encoding($string) : '';
   if ($enc && strtoupper($enc) == 'UTF-8' && $ucharset == 'UTF-8') {
     $string = mb_strtoupper($string, 'UTF-8');
@@ -984,9 +984,9 @@ function tng_strtoupper($string) {
 }
 
 function tng_strtolower($string) {
-  global $session_charset;
+  global $sessionCharset;
 
-  $ucharset = strtoupper($session_charset);
+  $ucharset = strtoupper($sessionCharset);
   $enc = function_exists(mb_detect_encoding) ? mb_detect_encoding($string) : '';
   if ($enc && strtoupper($enc) == 'UTF-8' && $ucharset == 'UTF-8') {
     $string = mb_strtolower($string, 'UTF-8');
@@ -998,9 +998,9 @@ function tng_strtolower($string) {
 }
 
 function tng_utf8_decode($text) {
-  global $session_charset;
+  global $sessionCharset;
 
-  $ucharset = strtoupper($session_charset);
+  $ucharset = strtoupper($sessionCharset);
   if ($ucharset == 'ISO-8859-1') {
     $text = utf8_decode($text);
   } elseif ($ucharset == 'ISO-8859-2') {

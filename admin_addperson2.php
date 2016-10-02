@@ -15,10 +15,10 @@ if (!$allowAdd) {
 require 'deletelib.php';
 
 //this line needed to prevent garbage chars in IS0-8859-2
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 $personID = ucfirst($personID);
 
-if ($session_charset != 'UTF-8') {
+if ($sessionCharset != 'UTF-8') {
   $firstname = tng_utf8_decode($firstname);
   $lnprefix = tng_utf8_decode($lnprefix);
   $lastname = tng_utf8_decode($lastname);

@@ -343,12 +343,12 @@ if ($mergeaction == uiTextSnippet('merge')) {
   $r2row = '';
   adminwritelog(uiTextSnippet('merge') . ": $repoID2 => $repoID1");
 }
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('merge'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body>
   <section class='container'>
     <?php

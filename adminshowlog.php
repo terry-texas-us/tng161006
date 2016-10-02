@@ -10,12 +10,12 @@ require $subroot . 'logconfig.php';
 
 $loglines = $adminmaxloglines ? $adminmaxloglines : '';
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('adminlogfile'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body>
   <section class='container-fluid'>
     <?php echo $adminHeaderSection->build('mostrecentactions'); ?>

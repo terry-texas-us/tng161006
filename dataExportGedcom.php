@@ -7,12 +7,12 @@ $adminLogin = 1;
 require 'checklogin.php';
 require 'version.php';
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('gedexport'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id="datamaint-gedexport">
   <section class='container'>
     <?php

@@ -9,7 +9,7 @@ if ($del) {
   $result = tng_query($query);
 }
 
-if ($session_charset != 'UTF-8') {
+if ($sessionCharset != 'UTF-8') {
   $myplace = tng_utf8_decode($myplace);
 }
 
@@ -23,7 +23,7 @@ if ($temple) {
 $query = "SELECT ID, place, temple, notes FROM places WHERE $allwhere ORDER BY place LIMIT 250";
 $result = tng_query($query);
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <div id='findplaceresdiv'>
   <table class='table table-sm'>

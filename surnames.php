@@ -10,12 +10,12 @@ initMediaTypes();
 $sectionTitle = str_replace('xxx', '30', uiTextSnippet('top30'));
 $tooltip['showall'] = uiTextSnippet('showallsurnames') . ' (' . uiTextSnippet('sortedalpha') . ')';
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('surnames'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build($flags, 'public', $session_charset); ?>
+<?php echo $headSection->build($flags, 'public', $sessionCharset); ?>
 <body id='surnames'>
   <section class='container'>
     <?php echo $publicHeaderSection->build(); ?>

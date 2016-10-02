@@ -17,12 +17,12 @@ require 'tabledefs.php';
 if (!$badtables) {
   adminwritelog(uiTextSnippet('createtables'));
 }
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('tablecreation'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body>
   <?php
   echo $adminHeaderSection->build('setup-tablecreation', $message);

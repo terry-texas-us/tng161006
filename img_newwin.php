@@ -3,18 +3,18 @@ require 'begin.php';
 require 'genlib.php';
 require 'getlang.php';
 
-header('Content-type:text/html;charset=' . $session_charset);
+header('Content-type:text/html;charset=' . $sessionCharset);
 ?>
 <!DOCTYPE html>
 <html>
 <head>
   <?php
-  if ($session_charset) {
-    echo "<meta http-equiv=\"Content-type\" content=\"text/html; charset=$session_charset\" />\n";
+  if ($sessionCharset) {
+    echo "<meta http-equiv=\"Content-type\" content=\"text/html; charset=$sessionCharset\" />\n";
   }
   $title = $_GET['title'];
-  $siteprefix = $sitename ? htmlspecialchars($title ? ': ' . $sitename : $sitename, ENT_QUOTES, $session_charset) : '';
-  $title = htmlspecialchars($title, ENT_QUOTES, $session_charset);
+  $siteprefix = $sitename ? htmlspecialchars($title ? ': ' . $sitename : $sitename, ENT_QUOTES, $sessionCharset) : '';
+  $title = htmlspecialchars($title, ENT_QUOTES, $sessionCharset);
   ?>
   <script src="js/img_viewer.js"></script>
   <title><?php echo $title; ?></title>

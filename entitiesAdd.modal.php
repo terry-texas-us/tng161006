@@ -13,7 +13,7 @@ if (!$allowAdd) {
   header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <div class='container'>
   <form id='entityform' name='entityform' action='admin_addentity.php' method='post' onsubmit="return addEntity(this);">

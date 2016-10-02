@@ -20,7 +20,7 @@ require 'adminlog.php';
 
 $sourceID = ucfirst($sourceID);
 
-if ($session_charset != 'UTF-8') {
+if ($sessionCharset != 'UTF-8') {
   $shorttitle = tng_utf8_decode($shorttitle);
   $title = tng_utf8_decode($title);
   $author = tng_utf8_decode($author);

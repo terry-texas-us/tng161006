@@ -11,7 +11,7 @@ if (!$allowAdd) {
   $message = uiTextSnippet('norights');
   exit;
 }
-if ($session_charset != 'UTF-8') {
+if ($sessionCharset != 'UTF-8') {
   $relationship = tng_utf8_decode($relationship);
 }
 $relationship = addslashes($relationship);
@@ -45,5 +45,5 @@ if ($reltype == 'I') {
 $namestr = cleanIt($name . ': ' . stripslashes($relationship));
 $namestr = truncateIt($namestr, 75);
 tng_free_result($result);
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 echo "{\"id\":\"$assocID\",\"persfamID\":\"$personID\",\"display\":\"$namestr\",\"allow_edit\":$allowEdit,\"allow_delete\":$allowDelete}";

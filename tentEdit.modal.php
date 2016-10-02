@@ -171,7 +171,7 @@ if (is_numeric($event)) {
     $row = [];
   }
 }
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 
 <div id='tentedit'>

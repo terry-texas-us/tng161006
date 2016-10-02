@@ -333,12 +333,12 @@ if ($mergeaction == uiTextSnippet('merge')) {
   $s2row = '';
   adminwritelog(uiTextSnippet('merge') . ": $sourceID2 => $sourceID1");
 }
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('merge'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id="sources-merge">
   <section class='container'>
     <?php

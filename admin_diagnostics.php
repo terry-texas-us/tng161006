@@ -18,12 +18,12 @@ $red = "<img src='img/tng_close.gif' width='18' height='18'>";
 $orange = "<img src='img/orange.gif' width='18' height='18'>";
 $green = "<img src='img/tng_check.gif' width='18' height='18'>";
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('diagnostics'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id="setup-diagnostics">
   <section class='container'>
     <?php

@@ -50,7 +50,7 @@ tng_free_result($brresult);
 if (!$names) {
   $names = '<p>' . uiTextSnippet('norecords') . '</p>';
 }
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <header class='modal-header'>
   <h4><?php echo uiTextSnippet('branchid') . ': ' . $branch ?></h4>

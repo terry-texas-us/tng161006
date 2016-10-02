@@ -11,12 +11,12 @@ if (!$allowMediaEdit) {
   header('Location: admin_login.php?message=' . urlencode($message));
   exit;
 }
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('sortmedia'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id="media-text_sort">
   <section class='container'>
     <?php

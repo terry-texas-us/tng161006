@@ -13,7 +13,7 @@ if ($session_language) {
   if ($_COOKIE[$langcookiename]) {
     $mylanguage = $languagesPath . $_COOKIE[$langcookiename];
     $_SESSION['session_language'] = $_COOKIE[$langcookiename];
-    $session_charset = $_SESSION['session_charset'] = $_COOKIE[$charcookiename];
+    $sessionCharset = $_SESSION['session_charset'] = $_COOKIE[$charcookiename];
   } elseif ($lang) {
     $mylanguage = $languagesPath . $lang;
     $_SESSION['session_language'] = $lang;
@@ -25,6 +25,6 @@ if (!$mylanguage) {
 }
 $session_language = $_SESSION['session_language'];
 
-if (!$session_charset) {
-  $session_charset = $_SESSION['session_charset'] = ($charset ? $charset : 'ISO-8859-1');
+if (!$sessionCharset) {
+  $sessionCharset = $_SESSION['session_charset'] = ($charset ? $charset : 'ISO-8859-1');
 }

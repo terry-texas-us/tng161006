@@ -12,7 +12,7 @@ if (!$allowEdit && !$allowAdd) {
 
 require 'adminlog.php';
 
-if ($session_charset != 'UTF-8') {
+if ($sessionCharset != 'UTF-8') {
   $title = tng_utf8_decode($title);
   $description = tng_utf8_decode($description);
 }
@@ -66,7 +66,7 @@ adminwritelog(uiTextSnippet('mostwanted') . " : $title");
 
 $truncated = str_replace("\r", '', $truncated);
 $truncated = str_replace("\n", '', $truncated);
-header('Content-Type: application/json; charset=' . $session_charset);
+header('Content-Type: application/json; charset=' . $sessionCharset);
 echo "{\n";
 $cleaned = stripslashes($cleaned);
 $truncated = stripslashes($truncated);

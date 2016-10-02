@@ -400,7 +400,7 @@ switch ($action) {
       $query = "UPDATE albumplinks SET eventID = '$eventID' WHERE alinkID = $linkID";
       $result = tng_query($query);
     } else {
-      if ($session_charset != 'UTF-8') {
+      if ($sessionCharset != 'UTF-8') {
         $altdescription = tng_utf8_decode($altdescription);
         $altnotes = tng_utf8_decode($altnotes);
       }
@@ -613,7 +613,7 @@ switch ($action) {
     $rval = 'Links created: ' . $newlinks;
     break;
   case 'qmedia':
-    if ($session_charset != 'UTF-8') {
+    if ($sessionCharset != 'UTF-8') {
       $title = tng_utf8_decode($title);
       $description = tng_utf8_decode($description);
     }
@@ -629,9 +629,9 @@ switch ($action) {
 }
 
 if ($json) {
-  header('Content-Type: application/json; charset=' . $session_charset);
+  header('Content-Type: application/json; charset=' . $sessionCharset);
 } else {
-  header('Content-type:text/html; charset=' . $session_charset);
+  header('Content-type:text/html; charset=' . $sessionCharset);
 }
 
 echo $rval;

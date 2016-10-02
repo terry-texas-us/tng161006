@@ -27,7 +27,7 @@ $display = getEventDisplay($row['display']);
 
 $helplang = findhelp('events_help.php');
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <form id='form1' name='form1' action='' method='post' onSubmit="return updateEvent(this);">
   <header class='modal-header'>

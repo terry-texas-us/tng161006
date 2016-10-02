@@ -15,13 +15,13 @@ function displaySize($file_size) {
 }
 
 function output_iptc_data($info) {
-  global $session_charset;
+  global $sessionCharset;
 
   $outputtext = '';
   if (is_array($info)) {
     $iptc = iptcparse($info['APP13']);
     if (is_array($iptc)) {
-      $ucharset = strtoupper($session_charset);
+      $ucharset = strtoupper($sessionCharset);
       $enc = isset($iptc['1#090']) && $iptc['1#090'][0] == "\x1B%G" ? 'UTF-8' : 'ISO-8859-1';
       foreach (array_keys($iptc) as $key) {
         $count = count($iptc[$key]);

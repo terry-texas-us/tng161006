@@ -13,7 +13,7 @@ require 'adminlog.php';
 
 $display_org = stripslashes($display);
 
-if ($session_charset != 'UTF-8') {
+if ($sessionCharset != 'UTF-8') {
   $display = tng_utf8_decode($display);
 }
 $display = addslashes($display);

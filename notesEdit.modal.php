@@ -18,7 +18,7 @@ $row['note'] = str_replace('&', '&amp;', $row['note']);
 $row['note'] = str_replace('"', '&quot;', $row['note']);
 
 $helplang = findhelp('notes_help.php');
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <form name='form3' action='' onSubmit="return updateNote(this);">
   <header class='modal-header'>

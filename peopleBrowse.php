@@ -140,12 +140,12 @@ if ($numrows == $maxsearchresults || $offsetplus > 1) {
 }
 $revstar = checkReview('I');
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('people'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id="admin-people">
   <section class='container'>
     <?php

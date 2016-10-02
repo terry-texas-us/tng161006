@@ -26,12 +26,12 @@ $orgplace = $row['place'];
 $ID = $row['ID'];
 $row['place'] = preg_replace('/\"/', '&#34;', $row['place']);
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('modifyplace'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
   
 <body<?php echo ((bool) $map['key'] === true && (bool) $map['startoff'] === false) ? " onload=\"divbox('mapcontainer');\"" : ""; ?>>
   <section class='container'>

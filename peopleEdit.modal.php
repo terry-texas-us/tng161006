@@ -97,7 +97,7 @@ while ($more = tng_fetch_assoc($morelinks)) {
 $reltypes = ['adopted', 'birth', 'foster', 'sealing', 'step'];
 $photo = showSmallPhoto($personID, $namestr, 1, 0, 'I', $row['sex']);
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 
 require_once 'eventlib.php';
 ?>

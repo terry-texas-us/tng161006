@@ -19,7 +19,7 @@ function doMedia($mediatypeID) {
   global $langstr;
   global $mediatypes_display;
   global $timezone;
-  global $session_charset;
+  global $sessionCharset;
   global $change_limit;
   global $cutoffstr;
   global $nonames;
@@ -131,10 +131,10 @@ function doMedia($mediatypeID) {
 
     if ($mediatypeID == 'headstones') {
       $deathdate = $row['deathdate'] ? $row['deathdate'] : $row['burialdate'];
-      $item .= '<description>' . xmlcharacters($hstext . ' ' . htmlspecialchars($notes, ENT_NOQUOTES, $session_charset)) . "</description>\n";
+      $item .= '<description>' . xmlcharacters($hstext . ' ' . htmlspecialchars($notes, ENT_NOQUOTES, $sessionCharset)) . "</description>\n";
       $item .= '<category>' . uiTextSnippet('tree') . ": master</category>\n";
     } else {
-      $item .= '<description>' . xmlcharacters(htmlspecialchars($notes, ENT_NOQUOTES, $session_charset)) . "</description>\n";
+      $item .= '<description>' . xmlcharacters(htmlspecialchars($notes, ENT_NOQUOTES, $sessionCharset)) . "</description>\n";
     }
     $changedate = date_format(date_create($row['changedatef']), 'D, d M Y H:i:s');
     $item .= "<pubDate>$changedate $timezone</pubDate>\n";

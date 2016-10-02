@@ -78,16 +78,16 @@ if (!$_SESSION['logged_in'] && $_COOKIE[$loggedin] && !$reset) {
   session_destroy();
   setcookie("tngloggedin_$newroot", '');
 
-  header('Content-type: text/html; charset=' . $session_charset);
+  header('Content-type: text/html; charset=' . $sessionCharset);
   $headSection->setTitle(uiTextSnippet('login'));
 
-  echo $headSection->build('', 'admin', $session_charset);
+  echo $headSection->build('', 'admin', $sessionCharset);
   $message = uiTextSnippet('sessexp');
 }
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('login'));
 
-echo $headSection->build('', 'admin', $session_charset);
+echo $headSection->build('', 'admin', $sessionCharset);
 
 if ($reset) {
   $_COOKIE[$loggedin] = '';

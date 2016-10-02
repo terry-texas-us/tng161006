@@ -34,7 +34,7 @@ $helplang = findhelp('collections_help.php');
 
 initMediaTypes();
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 
 <div style="margin:10px;border:0" id="editcollection">

@@ -111,12 +111,12 @@ if (!$numrows) {
   header("Location: albumsSort.php?personID=$personID&message=" . urlencode($message));
   exit;
 }
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet($sortstr));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body onload="startMediaSort()">
   <?php
   echo $adminHeaderSection->build('albums-text_sort', $message);

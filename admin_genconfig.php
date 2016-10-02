@@ -37,12 +37,12 @@ $sitename = preg_replace('/\"/', '&#34;', $sitename);
 $site_desc = preg_replace('/\"/', '&#34;', $site_desc);
 $dbowner = preg_replace('/\"/', '&#34;', $dbowner);
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('modifysettings'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body>
   <section class='container'>
     <?php

@@ -22,7 +22,7 @@ if ((!$allowEdit && (!$allowAdd || !$added)) || !checkbranch($row['branch'])) {
 $editconflict = determineConflict($row, 'people');
 
 if (!$editconflict) {
-  if ($newfamily == 'ajax' && $session_charset != 'UTF-8') {
+  if ($newfamily == 'ajax' && $sessionCharset != 'UTF-8') {
     $firstname = tng_utf8_decode($firstname);
     $lastname = tng_utf8_decode($lastname);
     $lnprefix = tng_utf8_decode($lnprefix);
@@ -245,7 +245,7 @@ if ($media == '1') {
           'branch' => $allbranches,
           'allow_living' => 1
   ];
-  $name = $session_charset == 'UTF-8' ? getName($row) : utf8_encode(getName($row));
+  $name = $sessionCharset == 'UTF-8' ? getName($row) : utf8_encode(getName($row));
   echo "{\"id\":\"$personID\",\"name\":\"" . $name . '"}';
 } else {
   header("Location: familiesAdd.php?$self=$personID&cw=$cw");

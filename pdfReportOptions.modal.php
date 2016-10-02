@@ -109,7 +109,7 @@ if (is_dir($font_dir)) {
         continue;
       }
       $charset_dir = '';
-      if ($session_charset == 'UTF-8') {
+      if ($sessionCharset == 'UTF-8') {
         $charset_dir = '/utf8';
       }
       if (is_dir("$font_dir/$fontfamily$charset_dir") && is_file("$font_dir/$fontfamily$charset_dir/$fontfamily.php")) {
@@ -139,7 +139,7 @@ if ($type === 'fam') {
     $titletext = "$pedname ($personID)";
   }
 }
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <div id='finddiv'>
   <?php beginFormElement($dest, 'post', 'pdfform', 'pdfform'); ?>
@@ -150,7 +150,7 @@ header('Content-type:text/html; charset=' . $session_charset);
     <div class='modal-body'>
       <?php
       if (count($font_list) === 0) {
-        echo "ERROR: There are no fonts installed to support character set $session_charset.";
+        echo "ERROR: There are no fonts installed to support character set $sessionCharset.";
         return;
       }
       ?>

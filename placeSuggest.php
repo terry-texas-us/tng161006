@@ -15,14 +15,14 @@ $name = $ID;
 
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 
 $headTitle = uiTextSnippet('suggestchange') . ": $name";
 $headSection->setTitle($headTitle);
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build($flags, 'public', $session_charset); ?>
+<?php echo $headSection->build($flags, 'public', $sessionCharset); ?>
 <body class='form-suggest'>
   <section class='container'>
     <?php

@@ -101,12 +101,12 @@ while ($more = tng_fetch_assoc($morelinks)) {
 }
 $revstar = checkReview('I');
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('modifyperson'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id='editperson'>
   <section class='container'>
     <?php

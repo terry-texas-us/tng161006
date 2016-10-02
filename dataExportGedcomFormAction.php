@@ -20,12 +20,12 @@ $placelist = [];
 if (!$exportmedia) {
   $exportmedia = 0;
 }
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('gedexport'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body>
   <section class='container'>
     <?php
@@ -228,14 +228,14 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
     }
 
     function getNoteLine($level, $label, $note, $delta) {
-      global $lineending, $session_charset;
+      global $lineending, $sessionCharset;
 
       $noteconc = '';
       $notelen = strlen($note);
       if ($notelen > 245) {
         $orgnote = trim($note);
         $offset = 245;
-        if ($session_charset == 'UTF-8' && function_exists(mb_substr)) {
+        if ($sessionCharset == 'UTF-8' && function_exists(mb_substr)) {
           while (mb_substr($orgnote, $offset, 1, 'UTF-8') == ' ' || mb_substr($orgnote, $offset - 1, 1, 'UTF-8') == ' ') {
             $offset--;
           }
@@ -249,7 +249,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         $newlevel = $level + $delta;
         while ($offset < $notelen) {
           $endnext = 245;
-          if ($session_charset == 'UTF-8' && function_exists(mb_substr)) {
+          if ($sessionCharset == 'UTF-8' && function_exists(mb_substr)) {
             while (mb_substr($orgnote, $offset + $endnext, 1, 'UTF-8') == ' ' || mb_substr($orgnote, $offset + $endnext - 1, 1, 'UTF-8') == ' ') {
               $offset--;
             }
@@ -1437,7 +1437,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
               . "1 GEDC$lineending"
               . "2 VERS 5.5$lineending"
               . "2 FORM LINEAGE-LINKED$lineending"
-              . '1 CHAR ' . ($session_charset == 'UTF-8' ? 'UTF-8' : 'ANSI') . $lineending
+              . '1 CHAR ' . ($sessionCharset == 'UTF-8' ? 'UTF-8' : 'ANSI') . $lineending
               . "1 SUBM @SUB1@$lineending"
               . "0 @SUB1@ SUBM$lineending"
               . "1 NAME $ownername$lineending"

@@ -8,7 +8,7 @@ require 'personlib.php';
 require 'api_library.php';
 require 'log.php';
 
-header('Content-Type: application/json; charset=' . $session_charset);
+header('Content-Type: application/json; charset=' . $sessionCharset);
 
 $query = "SELECT *, DATE_FORMAT(changedate,\"%e %b %Y\") AS changedate FROM people WHERE personID = '$personID'";
 $result = tng_query($query);

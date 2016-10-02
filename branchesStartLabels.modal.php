@@ -18,7 +18,7 @@ $result = tng_query($query);
 $brow = tng_fetch_assoc($result);
 tng_free_result($result);
 
-header('Content-type:text/html; charset=' . $session_charset);
+header('Content-type:text/html; charset=' . $sessionCharset);
 ?>
 <div class='container'>
   <form id='form2' name='form2' action='#' method='post' onsubmit="return addLabels();">

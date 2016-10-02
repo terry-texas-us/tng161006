@@ -24,12 +24,12 @@ tng_free_result($result);
 $query = "SELECT personID, firstname, lastname, lnprefix, prefix, suffix, branch, nameorder, living, private FROM people WHERE branch LIKE \"%$branch%\" ORDER BY lastname, firstname";
 $brresult = tng_query($query);
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('labelbranches'));
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id="branches-labelbranches">
   <section class='container'>
     <?php

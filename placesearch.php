@@ -56,12 +56,12 @@ initMediaTypes();
 
 $snippets = ['latitude' => uiTextSnippet('latitude'), 'longitude' => uiTextSnippet('longitude')];
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle($psearchns);
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build($flags, 'public', $session_charset); ?>
+<?php echo $headSection->build($flags, 'public', $sessionCharset); ?>
 <body id='public'>
   <section class='container'>
     <?php
@@ -98,10 +98,10 @@ $headSection->setTitle($psearchns);
           $zoom = $prow['zoom'] ? $prow['zoom'] : 10;
           $placelevel = $prow['placelevel'] ? $prow['placelevel'] : '0';
           $placeleveltext = $placelevel != '0' ? uiTextSnippet('level' . $placelevel) : '';
-          $codedplace = htmlspecialchars(str_replace($banish, $banreplace, $psearchns), ENT_QUOTES, $session_charset);
+          $codedplace = htmlspecialchars(str_replace($banish, $banreplace, $psearchns), ENT_QUOTES, $sessionCharset);
           $codednotes = $prow['notes'] ? '<br>' . tng_real_escape_string(uiTextSnippet('notes') . ': ' . $prow['notes']) : '';
 
-          $codednotes .= "<br><br><a href=\"https://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "&amp;oe=$session_charset&amp;daddr=$lat,$long($codedplace)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">" . uiTextSnippet('getdirections') . '</a>' . uiTextSnippet('directionsto') . " $codedplace";
+          $codednotes .= "<br><br><a href=\"https://maps.google.com/maps?f=q&amp;" . uiTextSnippet('localize') . "&amp;oe=$sessionCharset&amp;daddr=$lat,$long($codedplace)&amp;z=$zoom&amp;om=1&amp;iwloc=addr\" target=\"_blank\">" . uiTextSnippet('getdirections') . '</a>' . uiTextSnippet('directionsto') . " $codedplace";
 
           if ($lat && $long) {
             $uniqueplace = $psearch . $lat . $long;
@@ -111,7 +111,7 @@ $headSection->setTitle($psearchns);
               $l2mCount++;
             }
           }
-          echo '<a href="https://maps.google.com/maps?f=q&amp;' . uiTextSnippet('localize') . "&amp;oe=$session_charset&amp;daddr=$lat,$long($codedplace)&amp;z=12&amp;om=1&amp;iwloc=addr\" target='_blank'>\n";
+          echo '<a href="https://maps.google.com/maps?f=q&amp;' . uiTextSnippet('localize') . "&amp;oe=$sessionCharset&amp;daddr=$lat,$long($codedplace)&amp;z=12&amp;om=1&amp;iwloc=addr\" target='_blank'>\n";
 //          echo "<img src=\"google_marker.php?image=$pins[$placelevel]&amp;text=$l2mCount\" alt=''>\n";
           echo "</a>\n";
           

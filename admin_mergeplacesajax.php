@@ -122,5 +122,5 @@ if ($addtoquery) {
 
   $message = uiTextSnippet('pmsucc') . ": $newplace.";
 }
-header('Content-Type: application/json; charset=' . $session_charset);
+header('Content-Type: application/json; charset=' . $sessionCharset);
 echo "{\"latitude\":\"$keeplat\", \"longitude\":\"$keeplong\"}";

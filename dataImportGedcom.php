@@ -25,14 +25,14 @@ while ($treerow = tng_fetch_assoc($result)) {
 }
 tng_free_result($result);
 
-header('Content-type: text/html; charset=' . $session_charset);
+header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle(uiTextSnippet('datamaint'));
 
 $allow_export = 1;
 ?>
 <!DOCTYPE html>
 <html>
-<?php echo $headSection->build('', 'admin', $session_charset); ?>
+<?php echo $headSection->build('', 'admin', $sessionCharset); ?>
 <body id='datamaint-gedimport'>
   <section class='container'>
     <?php
