@@ -204,6 +204,19 @@ if ($mygender) {
 $dontdo = ['ADDR', 'BIRT', 'CHR', 'DEAT', 'BURI', 'NICK', 'TITL', 'NSFX'];
 $cejoin = doCustomEvents('I');
 
+if ($branch) {
+  $urlstring .= "branch=$branch";
+
+  $query = "SELECT description FROM branches WHERE branch = '$branch'";
+  $branchresult = tng_query($query);
+  $branchrow = tng_fetch_assoc($branchresult);
+  tng_free_result($branchresult);
+
+  $querystring .= uiTextSnippet('branch') . ' ' . uiTextSnippet('equals') .  " {$branchrow['description']}";
+
+  $allwhere .= "p.branch like '%$branch%'";
+}
+
 $gotInput = $mytitle || $myprefix || $mysuffix || $mynickname || $mybirthplace || $mydeathplace || $mybirthyear || $mydeathyear || $ecount;
 $livingPrivateCondition = getLivingPrivateRestrictions('p', $myfirstname, $gotInput);
 

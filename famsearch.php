@@ -176,6 +176,19 @@ if ($mydivyear || $dvyqualify == 'exists' || $dvyqualify == 'dnexist') {
 $dontdo = ['MARR', 'DIV'];
 $cejoin = doCustomEvents('F');
 
+if($branch) {
+  $urlstring .= "branch=$branch";
+
+  $query = "SELECT description FROM branches WHERE branch = '$branch'";
+  $branchresult = tng_query($query);
+  $branchrow = tng_fetch_assoc($branchresult);
+  tng_free_result($branchresult);
+
+  $querystring .= uiTextSnippet('branch') . ' ' . uiTextSnippet('equals') . " {$branchrow['description']}";
+
+  $allwhere .= "f.branch like '%$branch%'";
+}
+
 $gotInput = $mymarrplace || $mydivplace || $mymarryear || $mydivyear || $ecount;
 $livingPrivateCondition = getLivingPrivateRestrictions('f', false, $gotInput);
 

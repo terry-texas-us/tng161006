@@ -131,7 +131,7 @@ function tng_map_pins() {
         $zoom = $val['zoom'] ? $val['zoom'] : $zoom;
         $uniqueplace = $val['place'] . ' ' . $lat . $long;
 
-        if ($lat && $long && ($map['showallpins'] || !in_array($uniqueplace, $usedplaces))) {
+        if ($lat && $long && ($map['consolidateduplicatepins'] === false || !in_array($uniqueplace, $usedplaces))) {
           $usedplaces[] = $uniqueplace;
           $htmlcontent = $val['htmlcontent'];
           ?>

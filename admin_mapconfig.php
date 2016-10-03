@@ -37,10 +37,10 @@ $headSection->setTitle(uiTextSnippet('modifymapsettings'));
           <td><?php echo uiTextSnippet('mapkey'); ?>:</td>
           <td>
             <select name="mapkey">
-              <option value='1'<?php if ($map['key']) {echo ' selected';} ?>>
+              <option value='true'<?php if ($map['key'] === true) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('yes'); ?>
               </option>
-              <option value='0'<?php if (!$map['key']) {echo ' selected';} ?>>
+              <option value='false'<?php if ($map['key'] === false) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('no'); ?>
               </option>
             </select>
@@ -169,10 +169,10 @@ $headSection->setTitle(uiTextSnippet('modifymapsettings'));
           <td><?php echo uiTextSnippet('startoff'); ?>:</td>
           <td>
             <select name="startoff">
-              <option value='1'<?php if ($map['startoff']) {echo ' selected';} ?>>
+              <option value='true'<?php if ($map['startoff'] === true) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('yes'); ?>
               </option>
-              <option value='0'<?php if (!$map['startoff']) {echo ' selected';} ?>>
+              <option value='false'<?php if ($map['startoff'] === false) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('no'); ?>
               </option>
             </select>
@@ -182,10 +182,10 @@ $headSection->setTitle(uiTextSnippet('modifymapsettings'));
           <td><?php echo uiTextSnippet('pstartoff'); ?>:</td>
           <td>
             <select name="pstartoff">
-              <option value='1'<?php if ($map['pstartoff']) {echo ' selected';} ?>>
+              <option value='true'<?php if ($map['pstartoff'] === true) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('yes'); ?>
               </option>
-              <option value='0'<?php if (!$map['pstartoff']) {echo ' selected';} ?>>
+              <option value='false'<?php if ($map['pstartoff'] === false) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('no'); ?>
               </option>
             </select>
@@ -195,14 +195,14 @@ $headSection->setTitle(uiTextSnippet('modifymapsettings'));
           <td colspan='2'><br></td>
         </tr>
         <tr>
-          <td><?php echo uiTextSnippet('conslpins'); ?>:</td>
+          <td><?php echo uiTextSnippet('consolidateduplicatepins'); ?>:</td>
           <td>
-            <select name="showallpins">
-              <option value='0'<?php if (!$map['showallpins']) {echo ' selected';} ?>>
-                <?php echo uiTextSnippet('yes'); ?>
-              </option>
-              <option value='1'<?php if ($map['showallpins']) {echo ' selected';} ?>>
+            <select name='consolidateduplicatepins'>
+              <option value='false'<?php if ($map['consolidateduplicatepins'] === false) {echo ' selected';} ?>>
                 <?php echo uiTextSnippet('no'); ?>
+              </option>
+              <option value='true'<?php if ($map['consolidateduplicatepins'] === true) {echo ' selected';} ?>>
+                <?php echo uiTextSnippet('yes'); ?>
               </option>
             </select>
           </td>

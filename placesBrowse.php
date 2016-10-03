@@ -159,12 +159,12 @@ $headSection->setTitle(uiTextSnippet('places'));
             <th><?php echo uiTextSnippet('select'); ?></th>
           <?php } ?>
           <th><?php echo uiTextSnippet('place'); ?></th>
-          <?php if ($map['key']) { ?>
+          <?php if ($map['key'] === true) { ?>
             <th><?php echo uiTextSnippet('placelevel'); ?></th>
           <?php } ?>
           <th><?php echo uiTextSnippet('latitude'); ?></th>
           <th><?php echo uiTextSnippet('longitude'); ?></th>
-          <?php if ($map['key']) { ?>
+          <?php if ($map['key'] === true) { ?>
             <th><?php echo uiTextSnippet('zoom'); ?></th>
           <?php } ?>
         </tr>
@@ -197,12 +197,12 @@ $headSection->setTitle(uiTextSnippet('places'));
           $display = preg_replace('/</', '&lt;', $display);
           $display = preg_replace('/>/', '&gt;', $display);
           echo "<td>$display</td>\n";
-          if ($map['key']) {
+          if ($map['key'] === true) {
             echo "<td>{$row['placelevel']}</td>\n";
           }
           echo "<td>{$row['latitude']}</td>\n";
           echo "<td>{$row['longitude']}</td>\n";
-          if ($map['key']) {
+          if ($map['key'] === true) {
             echo "<td>{$row['zoom']}</td>\n";
           }
           echo "</tr>\n";

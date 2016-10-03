@@ -298,7 +298,7 @@ $headSection->setTitle(uiTextSnippet('media'));
               <?php } ?>
               <th><?php echo uiTextSnippet('thumb'); ?></th>
               <th><?php echo uiTextSnippet('title') . ', ' . uiTextSnippet('description'); ?></th>
-              <?php if ($map['key']) { ?>
+              <?php if ($map['key'] === true) { ?>
                 <th><?php echo uiTextSnippet('googleplace'); ?></th>
               <?php } ?>
               <?php if (!$mediatypeID) { ?>
@@ -349,7 +349,7 @@ $headSection->setTitle(uiTextSnippet('media'));
             echo "</td>\n";
             $description = $allowEdit || $allowMediaEdit ? "<a href=\"mediaEdit.php?mediaID={$row['mediaID']}\">{$row['description']}</a>" : $row['description'];
             echo "<td><span>$description<br>" . truncateIt(getXrefNotes($row['notes']), $maxnoteprev) . "</span></td>\n";
-            if ($map['key']) {
+            if ($map['key'] === true) {
               echo '<td><span>';
               $geo = '';
               if ($row['latitude']) {

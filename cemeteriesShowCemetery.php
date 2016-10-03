@@ -99,14 +99,14 @@ $headSection->setTitle($location);
       if ($cemetery['notes']) {
         $infoblock .= '<p><strong>' . uiTextSnippet('notes') . ":</strong><br>\n" . nl2br(insertLinks($cemetery['notes'])) . '</p>';
       }
-      if (!$map['key'] && ($cemetery['latitude'] || $cemetery['longitude'])) {
+      if ($map['key'] === false && ($cemetery['latitude'] || $cemetery['longitude'])) {
         $infoblock .= '<p><strong>' . uiTextSnippet('latitude') . ":</strong> {$cemetery['latitude']}, <strong>" . uiTextSnippet('longitude') . ":</strong> {$cemetery['longitude']}</p>";
       }
       $infoblock .= "</div>\n";
       $infoblock .= "</div>\n";
 
       $cemcoords = false;
-      if ($map['key']) {
+      if ($map['key'] === true) {
         $lat = $cemetery['latitude'];
         $long = $cemetery['longitude'];
         $zoom = $cemetery['zoom'] ? $cemetery['zoom'] : 10;
@@ -399,11 +399,11 @@ $headSection->setTitle($location);
     <?php echo $publicFooterSection->build(); ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
-  <?php if ($map['key']) { ?>
+  <?php if ($map['key'] === true) { ?>
     <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAlWTL2QZDQv9BWXBvCwdAuhq1Lak8jSwU&amp;<?php echo uiTextSnippet('localize'); ?>'></script>
   <?php 
   }
-  if ($map['key'] && $map['pins']) {
+  if ($map['key'] === true && $map['pins']) {
     tng_map_pins();
   }
   ?>

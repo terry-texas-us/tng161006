@@ -33,7 +33,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
 <html>
 <?php echo $headSection->build('', 'admin', $sessionCharset); ?>
   
-<body<?php echo ((bool) $map['key'] === true && (bool) $map['startoff'] === false) ? " onload=\"divbox('mapcontainer');\"" : ""; ?>>
+<body<?php echo ($map['key'] === true && $map['startoff'] === false) ? " onload=\"divbox('mapcontainer');\"" : ""; ?>>
   <section class='container'>
     <?php
     echo $adminHeaderSection->build('places-modifyplace', $message);
@@ -67,7 +67,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
         }
         echo '> ' . uiTextSnippet('istemple') . "</div></div>\n";
       }
-      if ($map['key']) { 
+      if ($map['key'] === true) { 
       ?>
         <hr>
         <div class='form-group row'>
@@ -87,7 +87,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
           <input class='form-control' id='lonbox' name='longitude' type='text' value="<?php echo $row['longitude']; ?>">
         </div>
       </div>
-      <?php if ($map['key']) { ?>
+      <?php if ($map['key'] === true) { ?>
         <div class='row'>
           <label class='col-form-label offset-sm-2 col-sm-2' for='zoom'><?php echo uiTextSnippet('zoom'); ?></label>
           <div class='col-sm-3'>
@@ -111,7 +111,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
         </div>
       <?php } ?>
 
-      <?php if ($map['key']) { ?>
+      <?php if ($map['key'] === true) { ?>
         <hr>
         <div class='row'>
           <div class='col-sm-2'><?php echo uiTextSnippet('cemeteries'); ?></div>
@@ -205,7 +205,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
-<?php if ($map['key']) { ?>
+<?php if ($map['key'] === true) { ?>
   <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAlWTL2QZDQv9BWXBvCwdAuhq1Lak8jSwU&amp;<?php echo uiTextSnippet('localize'); ?>'></script>
 <?php } ?>
 <script src="js/admin.js"></script>
@@ -303,7 +303,7 @@ $headSection->setTitle(uiTextSnippet('modifyplace'));
   }
 </script>
 <?php
-if ($map['key']) {
+if ($map['key'] === true) {
   include 'googlemaplib2.php';
 }
 ?>

@@ -66,7 +66,6 @@ fwrite($fp, "\$homepage = \"$homepage\";\n");
 fwrite($fp, "\$tngdomain = \"$tngdomain\";\n");
 fwrite($fp, "\$sitename = \"$sitename\";\n");
 fwrite($fp, "\$site_desc = \"$site_desc\";\n");
-fwrite($fp, "\$tngconfig['doctype'] = \"$doctype\";\n");
 if (!$target) {
   $target = '_self';
 }

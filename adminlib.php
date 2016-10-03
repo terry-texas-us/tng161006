@@ -7,7 +7,7 @@ require_once 'mediatypes.php';
 require_once 'tngfiletypes.php';
 checkMaintenanceMode(1);
 
-if (isset($map['key']) && $map['key']) {
+if (isset($map['key']) && $map['key'] === true) {
   include_once 'googlemaplib.php';
 }
 require_once 'classes/headElementSection.php';

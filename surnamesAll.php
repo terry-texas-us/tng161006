@@ -80,7 +80,6 @@ $headSection->setTitle(uiTextSnippet('surnames') . ' - ' . uiTextSnippet('allsur
     for ($scount = 1; $scount < $initialchar; $scount++) {
       echo "<a id=\"char$scount\"></a>\n";
       $urlfirstchar = addslashes($firstchars[$scount]);
-      $panelClass = 'panel-collapse collapse' . (($scount === 1) ? ' in' : '');
       ?>
       <div class='card'>
         <div class='card-header text-md-center'>

@@ -106,7 +106,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
       $size = '';
       $isphoto = false;
     }
-    if ($map['key']) {
+    if ($map['key'] === true) {
     ?>
       <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAlWTL2QZDQv9BWXBvCwdAuhq1Lak8jSwU&amp;<?php echo uiTextSnippet('localize'); ?>'></script>
     <?php }
@@ -115,9 +115,9 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
       $onload = 'init();';
     }
     $placeopen = 0;
-    if ($map['key']) {
+    if ($map['key'] === true) {
       include 'googlemaplib2.php';
-      if (!$map['startoff']) {
+      if ($map['startoff'] === false) {
         $onload .= "divbox('mapcontainer');";
         $placeopen = 1;
       }
@@ -431,7 +431,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                     </a>
                   </td>
                 </tr>
-                <?php if ($map['key']) { ?>
+                <?php if ($map['key'] === true) { ?>
                   <tr>
                     <td colspan='2'>
                       <div>
@@ -452,7 +452,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
                     <input id='lonbox' name='longitude' type='text' value="<?php echo $row['longitude']; ?>">
                   </td>
                 </tr>
-                <?php if ($map['key']) { ?>
+                <?php if ($map['key'] === true) { ?>
                   <tr>
                     <td><?php echo uiTextSnippet('zoom'); ?>:</td>
                     <td>
@@ -620,7 +620,7 @@ $headSection->setTitle(uiTextSnippet('modifymedia'));
     if ($isphoto && !$row['abspath']) {
       echo "init();\n";
     }
-    if ($map['key'] && !$map['startoff']) {
+    if ($map['key'] === true && $map['startoff'] === false) {
       echo "divbox('mapcontainer');\n";
     }
     if ($added) {

@@ -38,7 +38,7 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
 <html>
 <?php echo $headSection->build('', 'admin', $sessionCharset); ?>
   
-<body<?php echo ((bool) $map['key'] === true && (bool) $map['startoff'] === false) ? " onload=\"divbox('mapcontainer');\"" : ""; ?>>
+<body<?php echo ($map['key'] === true && $map['startoff'] === false) ? " onload=\"divbox('mapcontainer');\"" : ""; ?>>
   <section class='container'>
     <?php
     echo $adminHeaderSection->build('cemeteries-modifycemetery', $message);
@@ -149,7 +149,7 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
       </div>
        <input class='form-check-inline' name='usecoords' type='checkbox' value='1'> <?php echo uiTextSnippet('usecemcoords'); ?>
       <hr>
-      <?php if ($map['key']) { ?>
+      <?php if ($map['key'] === true) { ?>
         <div class='form-group row'>
           <label class='col-form-label col-sm-2'><?php echo uiTextSnippet('mapof'); ?></label>
           <div class='col-sm-10'>
@@ -168,7 +168,7 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
         </div>
       </div>
 
-      <?php if ($map['key']) { ?>
+      <?php if ($map['key'] === true) { ?>
         <div class='form-group row'>
           <label class='col-form-label col-sm-2' for='zoom'><?php echo uiTextSnippet('zoom'); ?></label>
           <div class='col-sm-4'>
@@ -211,7 +211,7 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->
 <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
-<?php if ($map['key']) { ?>
+<?php if ($map['key'] === true) { ?>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlWTL2QZDQv9BWXBvCwdAuhq1Lak8jSwU&amp;<?php echo uiTextSnippet('localize'); ?>"></script>
 <?php } ?>
 <script src='js/selectutils.js'></script>
@@ -222,7 +222,7 @@ $headSection->setTitle(uiTextSnippet('modifycemetery'));
   var loaded = false;
 </script>
 <?php
-if ($map['key']) {
+if ($map['key'] === true) {
   include 'googlemaplib2.php';
 }
 ?>

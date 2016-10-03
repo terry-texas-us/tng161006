@@ -85,14 +85,14 @@ $headSection->setTitle($psearchns);
         echo "<div class='card card-block'>";
         echo "<div class='row'>\n";
         echo "<div class='col-md-8'>\n";
-        if (($prow['latitude'] || $prow['longitude']) && $map['key'] && !$mapdrawn) {
+        if (($prow['latitude'] || $prow['longitude']) && $map['key'] === true && !$mapdrawn) {
           echo "<div class='map-place-search' id='map' style='width: {$map['hstw']}; height: {$map['hsth']};'></div>\n";
           $usedplaces = [];
           $mapdrawn = true;
         }
         echo "</div>\n";
         echo "<div class='col-md-4'>\n";
-        if ($map['key']) {
+        if ($map['key'] === true) {
           $lat = $prow['latitude'];
           $long = $prow['longitude'];
           $zoom = $prow['zoom'] ? $prow['zoom'] : 10;
@@ -105,7 +105,7 @@ $headSection->setTitle($psearchns);
 
           if ($lat && $long) {
             $uniqueplace = $psearch . $lat . $long;
-            if ($map['showallpins'] || !in_array($uniqueplace, $usedplaces)) {
+            if ($map['consolidateduplicatepins'] === false || !in_array($uniqueplace, $usedplaces)) {
               $usedplaces[] = $uniqueplace;
               $locations2map[$l2mCount] = ['placelevel' => $placelevel, 'lat' => $lat, 'long' => $long, 'zoom' => $zoom, 'htmlcontent' => "<div class=\"mapballoon\">$placeleveltext<br>$codedplace$codednotes</div>"];
               $l2mCount++;
@@ -214,11 +214,11 @@ $headSection->setTitle($psearchns);
     ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
-  <?php if ($map['key']) { ?>
+  <?php if ($map['key'] === true) { ?>
     <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAlWTL2QZDQv9BWXBvCwdAuhq1Lak8jSwU&amp;<?php echo uiTextSnippet('localize'); ?>'></script>
   <?php
   }
-  if ($map['key'] && $map['pins']) {
+  if ($map['key'] === true && $map['pins']) {
     tng_map_pins();
   }
   ?>

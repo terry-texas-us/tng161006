@@ -32,7 +32,6 @@ if (!$lineendingdisplay) {
 if (!$tngconfig['maxdesc']) {
   $tngconfig['maxdesc'] = $maxdesc;
 }
-$tngconfig['doctype'] = preg_replace('/\"/', '&#34;', $tngconfig['doctype']);
 $sitename = preg_replace('/\"/', '&#34;', $sitename);
 $site_desc = preg_replace('/\"/', '&#34;', $site_desc);
 $dbowner = preg_replace('/\"/', '&#34;', $dbowner);
@@ -210,10 +209,6 @@ $headSection->setTitle(uiTextSnippet('modifysettings'));
             <td><?php echo uiTextSnippet('site_desc'); ?>:</td>
             <td><textarea class='form-control' name='site_desc' rows='2'><?php echo $site_desc; ?></textarea>
             </td>
-          </tr>
-          <tr>
-            <td><?php echo uiTextSnippet('doctype'); ?>:</td>
-            <td><input name='doctype' type='text' value="<?php echo $tngconfig['doctype']; ?>" size='70'></td>
           </tr>
           <tr>
             <td><?php echo uiTextSnippet('siteowner'); ?>:</td>

@@ -14,7 +14,7 @@ if ($tngprint) {
     $tngconfig['istart'] = '';
     $tngconfig['hidemedia'] = '';
 }
-$defermap = $map['pstartoff'] || $tngconfig['istart'] ? 1 : 0;
+$defermap = ($map['pstartoff'] === true) || $tngconfig['istart'] ? 1 : 0;
 require 'personlib.php';
 
 $citations = [];
@@ -562,7 +562,7 @@ $headSection->setTitle($headTitle);
     $persontext .= endListItem('info');
 
     // [ts] map section
-    if ($map['key'] && $locations2map) {
+    if ($map['key'] === true && $locations2map) {
       $persontext .= buildEventMapHtml($map, $locations2map);
     }
     if (!$tng_extras) {
@@ -598,7 +598,7 @@ $headSection->setTitle($headTitle);
     }
     $persontext .= "</ul>\n";
 
-    if ($media || $notes || $citedispctr || $map['key']) {
+    if ($media || $notes || $citedispctr || $map['key'] === true) {
       $innermenu = "<a class='navigation-item' href='#' onclick=\"return infoToggle('info');\">" . uiTextSnippet('persinfo') . "</a>\n";
       if ($media) {
         $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('media');\">" . uiTextSnippet('media') . "</a>\n";
@@ -609,7 +609,7 @@ $headSection->setTitle($headTitle);
       if ($citedispctr) {
         $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('sources');\">" . uiTextSnippet('sources') . "</a>\n";
       }
-      if ($map['key'] && $locations2map) {
+      if ($map['key'] === true && $locations2map) {
         $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('eventmap');\">" . uiTextSnippet('gmapevent') . "</a>\n";
       }
       $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('all');\" id=\"tng_alink\">" . uiTextSnippet('all') . "</a>\n";
@@ -636,14 +636,14 @@ $headSection->setTitle($headTitle);
 
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
 <script src="js/peopleShowPerson.js"></script>
-<?php if ($map['key']) { ?>
+<?php if ($map['key'] === true) { ?>
   <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAlWTL2QZDQv9BWXBvCwdAuhq1Lak8jSwU&amp;<?php echo uiTextSnippet('localize'); ?>'></script>
 <?php } ?>
 <script>
   var media = '<?php echo $media; ?>';
   var citedispctr = '<?php echo $citedispctr; ?>';
   var notes = '<?php echo $notes; ?>';
-  var mapKey = '<?php echo $map['key']; ?>';
+  var mapKey = <?php echo $map['key']; ?>;
   var locations2Map = '<?php echo $locations2map; ?>';
   var istart = '<?php echo $tngconfig['istart']; ?>';
 
@@ -703,7 +703,7 @@ $headSection->setTitle($headTitle);
 <?php } ?>
   
   <?php
-  if ($map['key'] && $map['pins']) {
+  if ($map['key'] === true && $map['pins']) {
     tng_map_pins();
   }
   ?>

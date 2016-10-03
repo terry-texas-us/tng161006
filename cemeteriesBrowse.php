@@ -137,7 +137,7 @@ $headSection->setTitle(uiTextSnippet('cemeteries'));
             <?php } ?>
             <th><?php echo uiTextSnippet('cemetery'); ?></th>
             <th><?php echo uiTextSnippet('location'); ?></th>
-            <?php if ($map['key']) { ?>
+            <?php if ($map['key'] === true) { ?>
               <th><?php echo uiTextSnippet('googleplace'); ?></th>
             <?php } else { ?>
               <th><?php echo uiTextSnippet('latitude'); ?></th>
@@ -193,7 +193,7 @@ $headSection->setTitle(uiTextSnippet('cemeteries'));
 
           echo "<td>$cemname</td>\n";
           echo "<td>$location</td>\n";
-          if ($map['key']) {
+          if ($map['key'] === true) {
             echo '<td>';
             $geo = '';
             if ($row['latitude']) {

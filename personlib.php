@@ -204,7 +204,7 @@ function buildEventMapHtml(&$map, &$locations2map) {
   $html .= "<tr>\n";
   $html .= "<td class='mapcol' colspan='2'>\n";
   $html .= "<div id='map' style='width: {$map['indw']}; height: {$map['indh']};'>";
-  if ($map['pstartoff']) {
+  if ($map['pstartoff'] === true) {
     $html .= "<a href='#' onclick='ShowTheMap(); return false;'>\n";
     $html .= "<div class='loadmap'>" . uiTextSnippet('loadmap') . "<br>\n";
     $html .= "<img src='img/loadmap.gif' width='150' height='150'>\n";
@@ -247,7 +247,7 @@ function buildEventMapHtml(&$map, &$locations2map) {
       if ($lat && $long) {
         $directionplace = htmlspecialchars(stri_replace($banish, $banreplace, $place), ENT_QUOTES, $sessionCharset);
         $directionballoontext = htmlspecialchars(stri_replace($banish, $banreplace, $place), ENT_QUOTES, $sessionCharset);
-        if ($map['showallpins'] || !in_array($place, $usedplaces)) {
+        if ($map['consolidateduplicatepins'] === false || !in_array($place, $usedplaces)) {
           $markerIcon++;
           $usedplaces[] = $place;
           $savedplaces[] = ['place' => $place, 'key' => $key];
@@ -622,7 +622,7 @@ function setEvent($data, $datetr) {
   $events[$index] = $data;
   $eventctr++;
 
-  if ($map['key'] && $data['place'] && !$data['nomap']) {
+  if ($map['key'] === true && $data['place'] && !$data['nomap']) {
     global $locations2map;
     global $l2mCount;
 
@@ -637,17 +637,17 @@ function setEvent($data, $datetr) {
       $info = $data['fact'];
       //using $index above will ensure that this array gets sorted in the same order as the events on the page
       $locations2map[$l2mCount] = [$index_all,
-              'placelevel' => $custevent['placelevel'],
-              'event' => $data['text'],
-              'htmlcontent' => '',
-              'lat' => $custevent['latitude'],
-              'long' => $custevent['longitude'],
-              'zoom' => $custevent['zoom'],
-              'place' => $custevent['place'],
-              'notes' => truncateIt($custevent['notes'], 600),
-              'eventdate' => $data['date'],
-              'description' => $info[0],
-              'fixedplace' => $fixedplace
+          'placelevel' => $custevent['placelevel'],
+          'event' => $data['text'],
+          'htmlcontent' => '',
+          'lat' => $custevent['latitude'],
+          'long' => $custevent['longitude'],
+          'zoom' => $custevent['zoom'],
+          'place' => $custevent['place'],
+          'notes' => truncateIt($custevent['notes'], 600),
+          'eventdate' => $data['date'],
+          'description' => $info[0],
+          'fixedplace' => $fixedplace
       ];
       $l2mCount++;
     }
@@ -890,7 +890,7 @@ function doMediaSection($entity, $medialist, $albums) {
     $newmedia = writeMedia($medialist, $mediatypeID);
     if ($newmedia) {
       if ($media) {
-        $media .= "<br>\n";
+        $media .= "<br>";
       }
       $media .= "<table class=\"table table-fixed\">";
       $media .= "<col class=\"labelcol\"/><col style=\"width:{$datewidth}px\"/><col/>";

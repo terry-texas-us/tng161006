@@ -18,7 +18,7 @@ $headSection->setTitle(uiTextSnippet('addnewplace'));
 <!DOCTYPE html>
 <html>
 <?php echo $headSection->build('', 'admin', $sessionCharset); ?>
-<body<?php echo ((bool) $map['key'] === true && (bool) $map['startoff'] === false) ? " onload=\"divbox('mapcontainer');\"" : ""; ?>>
+<body<?php echo ($map['key'] === true && $map['startoff'] === false) ? " onload=\"divbox('mapcontainer');\"" : ""; ?>>
   <section class='container'>
     <?php
     echo $adminHeaderSection->build('places-addnewplace', $message);
@@ -45,7 +45,7 @@ $headSection->setTitle(uiTextSnippet('addnewplace'));
           </tr>
           <?php
         }
-        if ($map['key']) {
+        if ($map['key'] === true) {
           ?>
           <tr>
             <td colspan='2'>
@@ -66,7 +66,7 @@ $headSection->setTitle(uiTextSnippet('addnewplace'));
           <td><input id='lonbox' name='longitude' type='text'></td>
         </tr>
         <?php
-        if ($map['key']) {
+        if ($map['key'] === true) {
           ?>
           <tr>
             <td><?php echo uiTextSnippet('zoom'); ?>:</td>
@@ -103,7 +103,7 @@ $headSection->setTitle(uiTextSnippet('addnewplace'));
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>
-  <?php if ($map['key']) { ?>
+  <?php if ($map['key'] === true) { ?>
     <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAlWTL2QZDQv9BWXBvCwdAuhq1Lak8jSwU&amp;<?php echo uiTextSnippet('localize'); ?>'></script>
   <?php } ?>
   <script>
@@ -118,7 +118,7 @@ $headSection->setTitle(uiTextSnippet('addnewplace'));
     }
   </script>
   <?php
-  if ($map['key']) {
+  if ($map['key'] === true) {
     include 'googlemaplib2.php';
   }
   ?>

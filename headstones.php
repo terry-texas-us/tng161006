@@ -196,7 +196,7 @@ if ($location) {
         $location .= '</a>';
       }
 
-      if ($map['key']) {
+      if ($map['key'] === true) {
         $lat = $cemetery['latitude'];
         $long = $cemetery['longitude'];
         $zoom = $cemetery['zoom'] ? $cemetery['zoom'] : 10;
@@ -333,7 +333,7 @@ if ($location) {
         break;
       }
     }
-    if ($map['key'] && $map['pins']) {
+    if ($map['key'] === true && $map['pins']) {
       echo "<div id='map' style='width: {$map['hstw']}; height: {$map['hsth']}; margin-bottom: 20px;'></div>\n";
     }
     if ($toppagenav) {
@@ -348,11 +348,11 @@ if ($location) {
     <?php echo $publicFooterSection->build(); ?>
   </section> <!-- .container -->
   <?php echo scriptsManager::buildScriptElements($flags, 'public'); ?>
-  <?php if ($map['key']) { ?>
+  <?php if ($map['key'] === true) { ?>
     <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAlWTL2QZDQv9BWXBvCwdAuhq1Lak8jSwU&amp;<?php echo uiTextSnippet('localize'); ?>'></script>
   <?php 
   }
-  if ($map['key'] && $map['pins']) {
+  if ($map['key'] === true && $map['pins']) {
     tng_map_pins();
   }
   ?>
