@@ -192,7 +192,6 @@ function buildEventMapHtml(&$map, &$locations2map) {
   global $banreplace;
   global $pins;
 
-  $html .= beginListItem('eventmap');
   $html .= "<table class='table table-sm'>\n";
 
   $html .= "<thead class='thead-default'>\n";
@@ -306,21 +305,11 @@ function buildEventMapHtml(&$map, &$locations2map) {
   }
   $html .= "</table>\n";
   $html .= "<br>\n";
-  $html .= endListItem('eventmap');
   
   return $html;
 }
 
 function buildSourcesListHtml($citestring, $options) {
-  $html .= beginListItem('sources');
-  $html .= "<table class='table table-sm'>\n";
-  $html .= "<thead class='thead-default'>\n";
-  $html .= "<tr>\n";
-  $html .= "<th colspan='2'><a name='sources'>" . uiTextSnippet('sources') . "</a></th>\n";
-  $html .= "</tr>\n";
-  $html .= "</thead>\n";
-  $html .= "<tr>\n";
-  $html .= "<td colspan='2'>";
   if ($options['scrollcite']) {
     $html .= "<div class='sources-scroll'>";
   }
@@ -328,7 +317,7 @@ function buildSourcesListHtml($citestring, $options) {
   $citectr = 0;
   $count = count($citestring);
   foreach ($citestring as $cite) {
-    $html .= "<li><a name='cite" . ++$citectr . "'></a>$cite<br>";
+    $html .= "<li><a id='cite" . ++$citectr . "'></a>$cite<br>";
     if ($citectr < $count) {
       $html .= '<br>';
     }
@@ -339,12 +328,6 @@ function buildSourcesListHtml($citestring, $options) {
   if ($options['scrollcite']) {
     $html .= '</div>';
   }
-  $html .= "</td>\n";
-  $html .= "</tr>\n";
-  $html .= "</table>\n";
-  $html .= "<br>\n";
-  $html .= endListItem('citations');
-
   return $html;
 }
 function reorderCitation($citekey, $withlink = 1) {
@@ -379,7 +362,7 @@ function reorderCitation($citekey, $withlink = 1) {
   foreach ($newcitearr as $newcite) {
     $newstring .= $newstring ? ', ' : '';
     if ($withlink) {
-      $newstring .= "<a href=\"#cite$newcite\" onclick=\"$('citations').style.display = '';\">$newcite</a>";
+      $newstring .= "<a href=\"#cite$newcite\" onclick=\"$('#collapseSources').collapse('show')\">$newcite</a>";
     } else {
       $newstring .= $newcite;
     }

@@ -1101,7 +1101,7 @@ ul#tngnav {
   color: #FC0; }
 
 .notearea, .sources-scroll {
-  max-height: 200px;
+  max-height: 300px;
   overflow: auto; }
 
 .spinner {

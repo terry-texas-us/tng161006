@@ -95,6 +95,11 @@ if ($rights['both']) {
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
+$snippets['persinfo'] = uiTextSnippet('persinfo');
+$snippets['family'] = uiTextSnippet('family');
+$snippets['notes'] = uiTextSnippet('notes');
+$snippets['media'] = uiTextSnippet('media');
+
 header('Content-type: text/html; charset=' . $sessionCharset);
 $headSection->setTitle($headTitle);
 ?>
@@ -122,17 +127,33 @@ $headSection->setTitle($headTitle);
     echo tng_DrawHeading($photostr, $namestr, getYears($row));
 
     $persontext = '';
-    $persontext .= "<ul>\n";
+    $persontext .= "<div id='accordion' role='tablist' aria-multiselectable='true'>\n";
 
     if ($tng_extras) {
       $media = doMediaSection($personID, $indmedia, $indalbums);
       if ($media) {
-        $persontext .= beginListItem('media');
-        $persontext .= $media . "<br>\n";
-        $persontext .= endListItem('media');
+        $persontext .= "<div class='card'>\n";
+        $persontext .= "<div class='card-header' id='headingMedia' role='tab'>\n";
+        $persontext .= "<h5>\n";
+        $persontext .= "<a data-toggle='collapse' data-parent='#accordion' href='#collapseMedia' aria-expanded='true' aria-controls='collapseMedia'>Media</a>\n";
+        $persontext .= "</h5>\n";
+        $persontext .= "</div>\n";
+        
+        $persontext .= "<div class='card-block collapse' id='collapseMedia' role='tabpanel' aria-labelledby='headingMedia'>\n";
+
+        $persontext .= $media . "\n";
+        $persontext .= "</div>\n";
+        $persontext .= "</div>\n";
       }
     }
-    $persontext .= beginListItem('info');
+    $persontext .= "<div class='card'>\n";
+    $persontext .= "<div class='card-header' role='tab' id='headingInfo'>\n";
+    $persontext .= "<h5>\n";
+    $persontext .= "<a data-toggle='collapse' data-parent='#accordion' href='#collapseInfo' aria-expanded='true' aria-controls='collapseInfo'>Personal Information</a>\n";
+    $persontext .= "</h5>\n";
+    $persontext .= "</div>\n";
+    $persontext .= "<div class='card-block collapse in' id='collapseInfo' role='tabpanel' aria-labelledby='headingInfo'>\n";
+    
     $persontext .= "<table class='table table-sm'>\n";
     resetEvents();
     if ($rights['both']) {
@@ -205,7 +226,7 @@ $headSection->setTitle($headTitle);
       }
       if ($notes) {
         $persontext .= "<tr>\n";
-        $persontext .= "<td id='notes1'>" . uiTextSnippet('notes') . "</td>\n";
+        $persontext .= "<td id='notes1'>{$snippets['notes']}</td>\n";
         $persontext .= "<td colspan='2'><div class='notearea'>$notes</div></td>\n";
         $persontext .= "</tr>\n";
         $notes = ''; //wipe it out so we don't get a link at the top
@@ -227,6 +248,17 @@ $headSection->setTitle($headTitle);
     $persontext .= "</table>\n";
     $persontext .= "<br>\n";
 
+    $persontext .= "</div>\n";
+    $persontext .= "</div> <!-- .card -->\n";
+
+    $persontext .= "<div class='card'>\n";
+    $persontext .= "<div class='card-header' role='tab' id='headingFamily'>\n";
+    $persontext .= "<h5>\n";
+    $persontext .= "<a data-toggle='collapse' data-parent='#accordion' href='#collapseFamily' aria-expanded='true' aria-controls='collapseFamily'>{$snippets['family']}</a>\n";
+    $persontext .= "</h5>\n";
+    $persontext .= "</div>\n";
+    $persontext .= "<div class='collapse' id='collapseFamily' role='tabpanel' aria-labelledby='headingFamily'>\n";
+    
     // do parents
     $parents = getChildParentsFamily($personID);
 
@@ -364,7 +396,7 @@ $headSection->setTitle($headTitle);
               }
               if ($famnotes2) {
                 $parentsEventsHtml .= "<tr>\n";
-                $parentsEventsHtml .= '<td>' . uiTextSnippet('notes') . "</td>\n";
+              $parentsEventsHtml .= "<td>{$snippets['notes']}</td>\n";
                 $parentsEventsHtml .= "<td colspan='2'><span><div class='notearea'>$famnotes2</div></span></td>\n";
                 $parentsEventsHtml .= "</tr>\n";
               }
@@ -386,7 +418,8 @@ $headSection->setTitle($headTitle);
       }
       tng_free_result($parents);
     }
-    // marriages
+
+    // spouses and children
     if ($spouseorder) {
       $marriages = getSpouseFamilyFull($self, $personID, $spouseorder);
     }
@@ -490,7 +523,7 @@ $headSection->setTitle($headTitle);
         }
         if ($famnotes2) {
           $persontext .= "<tr>\n";
-          $persontext .= '<td>' . uiTextSnippet('notes') . "</td>\n";
+          $persontext .= "<td>{$snippets['notes']}</td>\n";
           $persontext .= "<td colspan='2'><span><div class=\"notearea\">$famnotes2</div></span></td>\n";
           $persontext .= "</tr>\n";
         }
@@ -559,18 +592,39 @@ $headSection->setTitle($headTitle);
     }
     tng_free_result($marriages);
 
-    $persontext .= endListItem('info');
+    $persontext .= "</div>\n";
+    $persontext .= "</div>\n";
+
 
     // [ts] map section
     if ($map['key'] === true && $locations2map) {
+      $persontext .= "<div class='card'>\n";
+      $persontext .= "<div class='card-header' role='tab' id='headingEventMap'>\n";
+      $persontext .= "<h5>\n";
+      $persontext .= "<a data-toggle='collapse' data-parent='#accordion' href='#collapseEventMap' aria-expanded='true' aria-controls='collapseEventMap'>Event Map</a>\n";
+      $persontext .= "</h5>\n";
+      $persontext .= "</div>\n";
+      $persontext .= "<div class='collapse in' id='collapseEventMap' role='tabpanel' aria-labelledby='headingEventMap'>\n";
+
       $persontext .= buildEventMapHtml($map, $locations2map);
+      $persontext .= "</div>\n";
+      $persontext .= "</div>\n";
     }
     if (!$tng_extras) {
       $media = doMediaSection($personID, $indmedia, $indalbums);
       if ($media) {
-        $persontext .= beginListItem('media');
-        $persontext .= $media . "<br>\n";
-        $persontext .= endListItem('media');
+        $persontext .= "<div class='card'>\n";
+        $persontext .= "<div class='card-header' role='tab' id='headingMedia'>\n";
+        $persontext .= "<h5>\n";
+        $persontext .= "<a data-toggle='collapse' data-parent='#accordion' href='#collapseMedia' aria-expanded='true' aria-controls='collapseMedia'>Media</a>\n";
+        $persontext .= "</h5>\n";
+        $persontext .= "</div>\n";
+        $persontext .= "<div class='collapse' id='collapseMedia' role='tabpanel' aria-labelledby='headingMedia'>\n";
+                
+        $persontext .= $media . "\n";
+        $persontext .= "</div>\n";
+        $persontext .= "</div>\n";
+
       }
     }
     if ($notestogether != 1) {
@@ -582,40 +636,58 @@ $headSection->setTitle($headTitle);
       }
 
       if ($notes) {
-        $persontext .= beginListItem('notes');
+        $persontext .= "<div class='card'>\n";
+        $persontext .= "<div class='card-header' role='tab' id='headingNotes'>\n";
+        $persontext .= "<h5>\n";
+        $persontext .= "<a data-toggle='collapse' data-parent='#accordion' href='#collapseNotes' aria-expanded='true' aria-controls='collapseNotes'>Notes</a>\n";
+        $persontext .= "</h5>\n";
+        $persontext .= "</div>\n";
+        $persontext .= "<div id='collapseNotes' class='collapse' role='tabpanel' aria-labelledby='headingNotes'>\n";
+        
         $persontext .= "<table class='table table-sm'>\n";
         $persontext .= "<tr>\n";
-        $persontext .= "<td id='notes1'><span>" . uiTextSnippet('notes') . "&nbsp;</span></td>\n";
+        $persontext .= "<td id='notes1'><span>{$snippets['notes']}&nbsp;</span></td>\n";
         $persontext .= "<td>$notes</td>\n";
         $persontext .= "</tr>\n";
         $persontext .= "</table>\n";
-        $persontext .= "<br>\n";
-        $persontext .= endListItem('notes');
+        $persontext .= "</div>\n";
+        $persontext .= "</div>\n";
+
       }
     }
     if ($citedispctr) {
+      $persontext .= "<div class='card'>\n";
+      $persontext .= "<div class='card-header' role='tab' id='headingSources'>\n";
+      $persontext .= "<h5>\n";
+      $persontext .= "<a data-toggle='collapse' data-parent='#accordion' href='#collapseSources' aria-expanded='true' aria-controls='collapseSources'>Sources</a>\n";
+      $persontext .= "</h5>\n";
+      $persontext .= "</div>\n";
+      $persontext .= "<div class='card-block collapse in' id='collapseSources' role='tabpanel' aria-labelledby='headingSources'>\n";
+      
       $persontext .= buildSourcesListHtml($citestring, $tngconfig);
+      $persontext .= "</div>\n";
+      $persontext .= "</div>\n";
     }
-    $persontext .= "</ul>\n";
-
+    $persontext .= "</div> <!-- #accordion -->\n";
+    
     if ($media || $notes || $citedispctr || $map['key'] === true) {
-      $innermenu = "<a class='navigation-item' href='#' onclick=\"return infoToggle('info');\">" . uiTextSnippet('persinfo') . "</a>\n";
+      $innermenu = "<a class='navigation-item' href='#collapseInfo' data-toggle='collapse' aria-expanded='false' aria-controls='collapseInfo'>{$snippets['persinfo']}</a>\n";
+      $innermenu .= "<a class='navigation-item' href='#collapseFamily' data-toggle='collapse' aria-expanded='false' aria-controls='collapseFamily'>{$snippets['family']}</a>\n";
       if ($media) {
-        $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('media');\">" . uiTextSnippet('media') . "</a>\n";
+        $innermenu .= "<a class='navigation-item' href='#collapseMedia' data-toggle='collapse' aria-expanded='false' aria-controls='collapseMedia'>{$snippets['media']}</a>\n";
       }
       if ($notes) {
-        $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('notes');\">" . uiTextSnippet('notes') . "</a>\n";
+        $innermenu .= "<a class='navigation-item' href='#collapseNotes' data-toggle='collapse' aria-expanded='false' aria-controls='collapseNotes'>{$snippets['notes']}</a>\n";
       }
       if ($citedispctr) {
-        $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('sources');\">" . uiTextSnippet('sources') . "</a>\n";
+        $innermenu .= "<a class='navigation-item' href='#collapseSources' data-toggle='collapse' aria-expanded='false' aria-controls='collapseSources'>" . uiTextSnippet('sources') . "</a>\n";
       }
       if ($map['key'] === true && $locations2map) {
-        $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('eventmap');\">" . uiTextSnippet('gmapevent') . "</a>\n";
+        $innermenu .= "<a class='navigation-item' href='#collapseEventMap' data-toggle='collapse' aria-expanded='false' aria-controls='collapseEventMap'>" . uiTextSnippet('gmapevent') . "</a>\n";
       }
-      $innermenu .= "<a class='navigation-item' href='#' onclick=\"return infoToggle('all');\" id=\"tng_alink\">" . uiTextSnippet('all') . "</a>\n";
     }
     else {
-      $innermenu = '<span>' . uiTextSnippet('persinfo') . "</span>\n";
+      $innermenu = "<span>{$snippets['persinfo']}</span>\n";
     }
     if ($allowPdf && $rightbranch) {
       $innermenu .= "<a  class='navigation-item' href='#' onclick=\"tnglitbox = new ModalDialog('pdfReportOptions.modal.php?type=ind&amp;personID=$personID');return false;\">PDF</a>\n";
@@ -625,7 +697,7 @@ $headSection->setTitle($headTitle);
     echo buildPersonMenu('person', $personID);
     echo "<br>\n";
     echo "<div class='pub-innermenu small'>\n";
-      echo $innermenu;
+    echo $innermenu;
     echo "</div><br>\n";
     
     echo $persontext;
@@ -652,44 +724,6 @@ $headSection->setTitle($headTitle);
       $('#eventmap').hide();
     };
   }
-
-  function infoToggle(part) {
-    if (part === "all") {
-      $('#info').show();
-      if (media) {
-        $('#media').show();
-      }
-      if (notes) {
-        $('#notes').show();
-      }
-      if (citedispctr) {
-        $('#sources').show();
-      }
-      if (mapKey && locations2Map) {
-        $('#eventmap').show();
-      }
-    } else {
-      innerToggle(part, "info");
-      if (media) {
-        innerToggle(part,"media");
-      }
-      if (notes) {
-        innerToggle(part, "notes");
-      }
-      if (citedispctr) {
-        innerToggle(part, "sources");
-      }
-      if (mapKey && locations2Map) {
-        innerToggle(part, "eventmap");
-      }
-    }
-    if (mapKey && locations2Map && istart) {
-      if ((part === "eventmap" || part === "all") && !maploaded) {
-        ShowTheMap();
-      }
-    }
-    return false;
-  }
 </script>
 <script src='js/rpt_utils.js'></script>
 
@@ -700,16 +734,15 @@ $headSection->setTitle($headTitle);
   </script>
   <script src='js/tentedit.js'></script>
   <script src='js/datevalidation.js'></script>
-<?php } ?>
-  
-  <?php
-  if ($map['key'] === true && $map['pins']) {
-    tng_map_pins();
-  }
-  ?>
-  <script>
-    var tnglitbox;
-  </script>
+<?php
+}  
+if ($map['key'] === true && $map['pins']) {
+  tng_map_pins();
+}
+?>
+<script>
+  var tnglitbox;
+</script>
 <script>
     var globeIcon = $('img.icon-globe');
     SVGInjector(globeIcon);
