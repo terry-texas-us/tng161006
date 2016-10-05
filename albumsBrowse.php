@@ -69,7 +69,7 @@ $headSection->setTitle(uiTextSnippet('albums'));
     $navList->appendItem([$allowMediaEdit, 'albumsSort.php', uiTextSnippet('text_sort'), 'sortalbums']);
     echo $navList->build('findalbum');
 
-    require '_/components/php/findAlbumForm.php';
+    require 'components/php/findAlbumForm.php';
 
     $numrowsplus = $numrows + $offset;
     if (!$numrowsplus) {

@@ -28,7 +28,7 @@ if (isset($_COOKIE[$errorcookiename])) {
   $error = '';
 }
 
-require_once '_/components/php/textSnippets.php';
+require_once 'components/php/textSnippets.php';
 
 function debugPrint($obj) {
   echo "<pre>\n";

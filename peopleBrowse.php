@@ -156,7 +156,7 @@ $headSection->setTitle(uiTextSnippet('people'));
     $navList->appendItem([$allowEdit, 'admin_findreview.php?type=I', uiTextSnippet('review') . $revstar, 'review']);
     $navList->appendItem([$allowEdit && $allowDelete, 'peopleMerge.php', uiTextSnippet('merge'), 'merge']);
     echo $navList->build('findperson');
-    require '_/components/php/findPeopleForm.php';
+    require 'components/php/findPeopleForm.php';
     
     $numrowsplus = $numrows + $offset;
     if (!$numrowsplus) {

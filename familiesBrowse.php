@@ -153,7 +153,7 @@ $headSection->setTitle(uiTextSnippet('families'));
     echo $navList->build('findfamily');
     ?>
     <div>
-      <?php require '_/components/php/findFamilyForm.php'; ?>
+      <?php require 'components/php/findFamilyForm.php'; ?>
       <?php
       $numrowsplus = $numrows + $offset;
       if (!$numrowsplus) {

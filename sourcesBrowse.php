@@ -110,7 +110,7 @@ $headSection->setTitle(uiTextSnippet('sources'));
     $navList->appendItem([$allowAdd, 'sourcesAdd.php', uiTextSnippet('add'), 'addsource']);
     $navList->appendItem([$allowEdit && $allowDelete, 'sourcesMerge.php', uiTextSnippet('merge'), 'merge']);
     echo $navList->build('findsource');
-    require '_/components/php/findSourcesForm.php';
+    require 'components/php/findSourcesForm.php';
     ?>
     <div class="row">
       <?php

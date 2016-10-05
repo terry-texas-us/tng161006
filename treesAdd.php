@@ -27,7 +27,7 @@ $headSection->setTitle(uiTextSnippet('addnewtree'));
     //    $navList->appendItem([$allow_add_tree, 'treesAdd.php', uiTextSnippet('add'), 'addtree']);
     echo $navList->build('addtree');
     ?>
-    <?php require '_/components/php/newTreeForm.php'; ?>
+    <?php require 'components/php/newTreeForm.php'; ?>
     <?php echo $adminFooterSection->build(); ?>
   </section> <!-- .container -->
 <?php echo scriptsManager::buildScriptElements($flags, 'admin'); ?>

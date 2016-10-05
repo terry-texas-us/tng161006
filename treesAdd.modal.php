@@ -24,6 +24,6 @@ header('Content-type: text/html; charset=' . $sessionCharset);
   </a>
 </header>
 <div id='modal-body'>
-  <?php require '_/components/php/newTreeForm.php'; ?>
+  <?php require 'components/php/newTreeForm.php'; ?>
 </div>
 <footer class='modal-footer'></footer>

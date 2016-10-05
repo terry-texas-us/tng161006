@@ -1,9 +1,8 @@
 .idea/
-_/components/scss/.sass-cache/
-_/components/scss/_*.scss
-_/components/scss/bootstrap*.scss
-_/components/scss/mixins/
-_/js/
+.sass-cache/
+.settings/
+backups-ss/
+css/
 js/cors/
 js/jquery*.js
 js/npm.js
@@ -11,9 +10,6 @@ font/
 languages/
 nbproject/
 node_modules/
-.settings/
-backups-ss/
-css/
 documents/
 extensions/
 files/

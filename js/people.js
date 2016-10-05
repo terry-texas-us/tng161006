@@ -107,7 +107,7 @@ function checkPersonId(personIdInput) {
     var $personIdInput = $(personIdInput);
 
     $.ajax({
-        url: '_/components/ajax/checkPersonId.php',
+        url: 'components/ajax/checkPersonId.php',
         data: {checkID: $personIdInput.val()},
         success: function (data) {
             var result = JSON.parse(data).result,

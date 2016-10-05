@@ -6,7 +6,7 @@ function textSnippet(snippetID, extra) {
         type: 'get',
         async: false, // [ts] this is now considered bad form
         timeout: 1000,
-        url: '_/components/ajax/textSnippets.php',
+        url: 'components/ajax/textSnippets.php',
         data: {snippetID: snippetID, extra: extra},
         success: function (data) {
             snippet = data;
@@ -19,7 +19,7 @@ function textSnippet(snippetID, extra) {
 function textSnippetAlert(snippetID, extra) {
     'use strict';
     $.get(
-        '_/components/ajax/textSnippets.php',
+        'components/ajax/textSnippets.php',
         {snippetID: snippetID, extra: extra},
         function (data) {
             this.alert = document.createElement('div');
@@ -47,7 +47,7 @@ function textSnippetAlert(snippetID, extra) {
 function textSnippetInto(domElement, snippetID, extra) {
     'use strict';
     $.get(
-        '_/components/ajax/textSnippets.php',
+        'components/ajax/textSnippets.php',
         {snippetID: snippetID, extra: extra},
         function (data) {
             $(domElement).val(data);
