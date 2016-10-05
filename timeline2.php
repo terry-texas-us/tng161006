@@ -321,8 +321,6 @@ $totalspan = $latest - $earliest;
 $ratio = $totalspan ? $chartwidth / $totalspan : 0;
 $spanheight = 30 + count($keeparray) * 29;
 
-$flags['styles'] = "<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"css/timeline.css\"/>\n";
-
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 

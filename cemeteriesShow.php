@@ -14,8 +14,6 @@ $logstring = "<a href='cemeteriesShow.php'>" . uiTextSnippet('cemeteriesheadston
 writelog($logstring);
 preparebookmark($logstring);
 
-$flags['styles'] = "<link href=\"css/cemeteries.css\" rel=\"stylesheet\" type=\"text/css\" />\n";
-
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 

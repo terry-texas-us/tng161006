@@ -46,7 +46,7 @@ class HeadElementSection {
       $this->out .= "<link rel='alternate' type='application/rss+xml' title='RSS' href='tngrss.php' />\n";
     }
     $this->out .= "<!-- Bootstrap styles -->\n";
-    $this->out .= "<link rel='stylesheet' type='text/css' href='_/css/bootstrap.css'>\n";
+    $this->out .= "<link rel='stylesheet' type='text/css' href='node_modules/bootstrap/dist/css/bootstrap.min.css'>\n";
     
     $this->out .= "<link rel='stylesheet' type='text/css' href='css/genstyle.css'>\n";
       

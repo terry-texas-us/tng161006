@@ -307,6 +307,195 @@ button.close {
 .form-gedcom .form-control:focus {
   z-index: 2; }
 
+/* calendar */
+#calHeader {
+  font-size: 14pt;
+  font-weight: bold;
+  text-align: center; }
+
+#calLegend {
+  background-color: #D6E7FF;
+  border: 1px solid #5576BE;
+  font-size: 9pt;
+  font-weight: bold;
+  margin-top: 8px;
+  padding: 4px;
+  text-align: center; }
+
+#calWrapper {
+  width: 100%; }
+
+a.calDate {
+  color: black;
+  float: left;
+  font-size: 11pt;
+  font-weight: bold; }
+
+a.calMore {
+  font-size: 8pt;
+  line-height: 24px;
+  margin-left: 16px; }
+
+a.calEvent {
+  font-size: 8pt; }
+
+a.hidden {
+  background-color: silver;
+  font-style: italic;
+  padding: 2px; }
+
+a.nothidden {
+  padding: 2px; }
+
+div.calEvents {
+  margin-left: 16px;
+  position: relative;
+  top: -14px; }
+
+div.calKey {
+  margin: 8px;
+  font-weight: bold; }
+
+img.calIcon {
+  margin: 2px;
+  position: relative;
+  top: 2px; }
+
+table.calTip {
+  background-color: white;
+  border: 1px solid #5576BE;
+  padding: 0; }
+
+table.calendar {
+  background-color: #eee;
+  border: 1px solid #6687CD;
+  margin: 4px 0; }
+
+td.calDay {
+  background-color: white;
+  border: 1px solid #5576BE;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
+  height: 110px;
+  margin: 4px;
+  padding: 2px;
+  text-align: left;
+  vertical-align: top;
+  width: 14%; }
+
+th.calDay {
+  font-size: 10pt;
+  font-weight: bold;
+  text-align: center; }
+
+td.calSkip {
+  height: 110px;
+  width: 14%; }
+
+td.calToday {
+  background-color: #FFF5E4;
+  border: 1px solid #5576BE;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
+  height: 110px;
+  margin: 4px;
+  padding: 2px;
+  text-align: left;
+  vertical-align: top;
+  width: 14%; }
+
+li.flat {
+  display: inline;
+  list-style: none;
+  margin: 0 8px; }
+
+ul.flat {
+  display: inline; }
+
+#header {
+  margin: 0 0 10px 0; }
+
+#cemwrapper {
+  font-size: 12px;
+  text-align: left;
+  margin: 10px auto;
+  padding: 0;
+  border: 0;
+  width: 100%; }
+
+#col0, #col1, #col2 {
+  float: left;
+  width: 30%;
+  margin: 5px;
+  height: 100%; }
+
+#col1, #col2 {
+  border-left: 1px solid black;
+  padding-left: 10px; }
+
+.cemcountry {
+  padding: 5px; }
+
+.pad3 {
+  padding: 3px; }
+
+.cemblock {
+  padding-left: 16px; }
+
+.tlevent {
+  top: 0; }
+
+.vertlines {
+  position: absolute;
+  font-size: 0;
+  top: 33px;
+  width: 1px;
+  z-index: 0; }
+
+.cgray {
+  background-color: #cccccc; }
+
+.dgray {
+  background-color: #dddddd; }
+
+#tngtimeline {
+  border: 1px solid #aaa; }
+
+#tngchart {
+  position: relative;
+  text-align: left; }
+
+.yeardiv {
+  position: absolute;
+  top: 15px;
+  height: 17px;
+  width: 40px;
+  z-index: 0; }
+
+.footnote {
+  position: absolute;
+  height: 17px;
+  width: 12px;
+  z-index: 0;
+  font-size: 7pt; }
+
+.cb {
+  height: 25px;
+  left: 0; }
+
+.tlbar {
+  visibility: visible;
+  position: absolute;
+  z-index: 3; }
+
+.popup {
+  position: absolute;
+  visibility: hidden;
+  z-index: 8; }
+
+.popuptable {
+  border: 1px solid; }
+
 .input-group-select {
   padding: 0;
   display: table-cell; }

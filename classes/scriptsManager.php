@@ -68,9 +68,9 @@ class scriptsManager {
 
   public static function buildScriptElements($flags, $id = 'public') {
     $out = "<script src='node_modules/jquery/dist/jquery.min.js'></script>\n";
-    $out .= "<script src='js/jquery-ui.min.js'></script>\n";
+// [ts] $out .= "<script src='js/jquery-ui.min.js'></script>\n";  [only used for draggable/resizable modals? which are not implemented now]
     $out .= "<script src='node_modules/tether/dist/js/tether.min.js'></script>\n";
-    $out .= "<script src='_/js/bootstrap.min.js'></script>\n";
+    $out .= "<script src='node_modules/bootstrap/dist/js/bootstrap.min.js'></script>\n";
     $out .= "<script src='node_modules/svg-injector/dist/svg-injector.min.js'></script>\n";
     $out .= "<script src='js/net.js'></script>\n";
     $out .= "<script src='js/textSnippets.js'></script>\n";

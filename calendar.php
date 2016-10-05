@@ -12,8 +12,6 @@ function substr_unicode($str, $start, $len = null) {
     return join('', array_slice(preg_split('//u', $str, -1, PREG_SPLIT_NO_EMPTY), $start, $len));
 }
 
-$flags['styles'] = "<link href=\"css/calendar.css\" rel=\"stylesheet\" type=\"text/css\" />\n";
-
 scriptsManager::setShowShare($tngconfig['showshare'], $http);
 initMediaTypes();
 
