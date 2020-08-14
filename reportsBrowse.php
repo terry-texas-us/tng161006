@@ -37,7 +37,7 @@ if ($offset) {
 }
 
 $wherestr = $searchstring ? "WHERE reportname LIKE \"%$searchstring%\" OR reportdesc LIKE \"%$searchstring%\"" : '';
-$query = "SELECT reportID, reportname, reportdesc, rank, active FROM reports $wherestr ORDER BY rank, reportname, reportID LIMIT $newoffset" . $maxsearchresults;
+$query = "SELECT reportID, reportname, reportdesc, ranking, active FROM reports $wherestr ORDER BY ranking, reportname, reportID LIMIT $newoffset" . $maxsearchresults;
 $result = tng_query($query);
 
 $numrows = tng_num_rows($result);
@@ -85,7 +85,7 @@ $headSection->setTitle(uiTextSnippet('reports'));
         <table class="table table-sm table-striped">
           <tr>
             <th><?php echo uiTextSnippet('action'); ?></th>
-            <th><?php echo uiTextSnippet('rank'); ?></th>
+            <th><?php echo uiTextSnippet('ranking'); ?></th>
             <th><?php echo uiTextSnippet('id'); ?></th>
             <th><?php echo uiTextSnippet('name') . ', ' . uiTextSnippet('description'); ?></th>
             <th><?php echo uiTextSnippet('active'); ?>?</th>
@@ -115,7 +115,7 @@ $headSection->setTitle(uiTextSnippet('reports'));
             $name = $allowEdit ? "<a href=\"$editlink\" title='" . uiTextSnippet('edit') . "'>" . $row['reportname'] . '</a>' : $row['reportname'];
 
             echo "<tr id=\"row_{$row['reportID']}\"><td><div class=\"action-btns\">$newactionstr</div></td>\n";
-            echo "<td>{$row['rank']}</td>\n";
+            echo "<td>{$row['ranking']}</td>\n";
             echo "<td>$id</td>\n";
             echo "<td>$name<br>{$row['reportdesc']}</td>\n";
             echo "<td>$active</td></tr>\n";

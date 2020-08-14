@@ -5,7 +5,7 @@ $tmp['headimage'] = 'img/book.png';
 $tmp['welcome'] = 'Welcome!';
 $tmp['mainpara'] = 'This is where you can welcome a user to your site. You might also give them some basic information on navigating and links to any help or FAQ pages you may have.';
 
-$tmp['featurelink1'] = 'https://familysearch.org/tree/#view=ancestor&person=LDP1-3LM';
+$tmp['featurelink1'] = 'https://www.familysearch.org/tree/person/details/LDP1-3LM';
 $tmp['photol'] = 'photos/Teinert, Johann Carl Hermann.png';
 $tmp['phototitlel'] = 'Johann Carl Hermann Teinert';
 $tmp['photocaptionl'] = 'Johann was an early settler in the Warda community in Fayette, Texas.';

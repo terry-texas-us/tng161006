@@ -19,7 +19,7 @@ $reportdesc = addslashes($reportdesc);
 $criteria = addslashes($criteria);
 $sqlselect = addslashes($sqlselect);
 
-$query = "INSERT INTO reports (reportname, reportdesc, rank, active, display, criteria, orderby, sqlselect) VALUES (\"$reportname\",\"$reportdesc\",\"$rank\",\"$active\",\"$display\",\"$criteria\",\"$orderby\",\"$sqlselect\")";
+$query = "INSERT INTO reports (reportname, reportdesc, ranking, active, display, criteria, orderby, sqlselect) VALUES (\"$reportname\",\"$reportdesc\",\"$ranking\",\"$active\",\"$display\",\"$criteria\",\"$orderby\",\"$sqlselect\")";
 $result = tng_query($query);
 $reportID = tng_insert_id();
 

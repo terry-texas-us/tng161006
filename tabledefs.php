@@ -508,7 +508,7 @@ $query = "CREATE TABLE reports (
     reportID INT(11) NOT NULL AUTO_INCREMENT,
     reportname VARCHAR(80) NOT NULL,
     reportdesc TEXT NOT NULL,
-    rank INT(11) NOT NULL,
+    ranking INT(11) NOT NULL,
     display TEXT NOT NULL,
     criteria TEXT NOT NULL,
     orderby TEXT NOT NULL,
@@ -516,7 +516,7 @@ $query = "CREATE TABLE reports (
     active TINYINT(4) NOT NULL,
     PRIMARY KEY (reportID),
     INDEX reportname (reportname),
-    INDEX rank (rank)
+    INDEX ranking (ranking)
 ) ENGINE = MYISAM $collationstr";
 $result = performQuery($query, 'reports');
 

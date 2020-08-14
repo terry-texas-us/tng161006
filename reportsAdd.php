@@ -174,7 +174,7 @@ $headSection->setTitle(uiTextSnippet('addnewreport'));
         </tr>
         <tr>
           <td><span><?php echo uiTextSnippet('rankpriority'); ?>:</span></td>
-          <td><input name='rank' type='text' size='3' maxlength='3' value='1'></td>
+          <td><input name='ranking' type='text' size='3' maxlength='3' value='1'></td>
         </tr>
         <tr>
           <td><span><?php echo uiTextSnippet('active'); ?>:</span></td>

@@ -184,7 +184,7 @@ $headSection->setTitle(uiTextSnippet('modifyreport'));
           <span><?php echo uiTextSnippet('rankpriority'); ?>:</span>
         </div>
         <div class='col-md-3'>
-          <input class='form-control' name='rank' type='text' size='3' maxlength='3' value="<?php echo $row['rank']; ?>">
+          <input class='form-control' name='ranking' type='text' size='3' maxlength='3' value="<?php echo $row['ranking']; ?>">
         </div>
         <div class='offset-md-1 col-md-2'>
           <?php echo uiTextSnippet('active'); ?>:

@@ -34,7 +34,7 @@ echo help_header("Help: Reports");
       what criteria.</p>
 
     <span>Rank/Priority</span>
-    <p>Reports will normally sort alphabetically according to name, unless you give each one a ranking or priority. Lower numbers sort first. No rank sorts before any number.</p>
+    <p>Reports will normally sort alphabetically according to name, unless you give each one a ranking or priority. Lower numbers sort first. No ranking sorts before any number.</p>
 
     <span>Active</span>
     <p>Your new report will not be visible to regular site visitors until you indicate here that it is active. It's a good idea to save and test your report to make sure the
