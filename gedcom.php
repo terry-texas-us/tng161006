@@ -226,7 +226,7 @@ function getNoteLine($level, $label, $note, $delta) {
   if ($notelen > 245) {
     $orgnote = trim($note);
     $offset = 245;
-    if ($sessionCharset == 'UTF-8' && function_exists(mb_substr)) {
+    if ($sessionCharset == 'UTF-8' && function_exists('mb_substr')) {
       while (mb_substr($orgnote, $offset, 1, 'UTF-8') == ' ' || mb_substr($orgnote, $offset - 1, 1, 'UTF-8') == ' ') {
         $offset--;
       }
@@ -243,7 +243,7 @@ function getNoteLine($level, $label, $note, $delta) {
     $newlevel = $level + $delta;
     while ($offset < $notelen) {
       $endnext = 245;
-      if ($sessionCharset == 'UTF-8' && function_exists(mb_substr)) {
+      if ($sessionCharset == 'UTF-8' && function_exists('mb_substr')) {
         while (mb_substr($orgnote, $offset + $endnext, 1, 'UTF-8') == ' ' || mb_substr($orgnote, $offset + $endnext - 1, 1, 'UTF-8') == ' ') {
           $offset--;
         }
@@ -1017,7 +1017,7 @@ if ($maxgcgen > 0 || $type == 'all') {
     $namestr = getName($row);
     $filenamestr = str_replace("'", '', $namestr);
     $filenamestr = str_replace('\"', '', $filenamestr);
-    $filenamestr = ereg_replace('[\]', '', $filenamestr);
+    $filenamestr = preg_replace('[\]', '', $filenamestr);
     $filenamestr = str_replace(' ', '', $filenamestr);
     $filenamestr = str_replace(',', '', $filenamestr);
     if ($sessionCharset == 'UTF-8') {

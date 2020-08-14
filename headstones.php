@@ -140,7 +140,7 @@ if ($location) {
 
     $body = '';
     $cemcount = 0;
-    $gotImageJpeg = function_exists(imageJpeg);
+    $gotImageJpeg = function_exists('imageJpeg');
     while (!$subquery || $cemetery = tng_fetch_assoc($cemresult)) {
       if ($cemcount) {
         $body .= "<br>\n";

@@ -973,7 +973,7 @@ function tng_strtoupper($string) {
   global $sessionCharset;
 
   $ucharset = strtoupper($sessionCharset);
-  $enc = function_exists(mb_detect_encoding) ? mb_detect_encoding($string) : '';
+  $enc = function_exists('mb_detect_encoding') ? mb_detect_encoding($string) : '';
   if ($enc && strtoupper($enc) == 'UTF-8' && $ucharset == 'UTF-8') {
     $string = mb_strtoupper($string, 'UTF-8');
   } else {
@@ -987,7 +987,7 @@ function tng_strtolower($string) {
   global $sessionCharset;
 
   $ucharset = strtoupper($sessionCharset);
-  $enc = function_exists(mb_detect_encoding) ? mb_detect_encoding($string) : '';
+  $enc = function_exists('mb_detect_encoding') ? mb_detect_encoding($string) : '';
   if ($enc && strtoupper($enc) == 'UTF-8' && $ucharset == 'UTF-8') {
     $string = mb_strtolower($string, 'UTF-8');
   } else {

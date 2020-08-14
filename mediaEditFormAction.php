@@ -33,7 +33,7 @@ function reorderMedia($query, $plink, $mediatypeID) {
 }
 
 $thumbquality = 80;
-if (function_exists(imageJpeg)) {
+if (function_exists('imageJpeg')) {
   include 'imageutils.php';
 }
 $usefolder = $usecollfolder ? $mediatypes_assoc[$mediatypeID] : $mediapath;
@@ -138,7 +138,7 @@ if ($newfile && $newfile != 'none') {
     exit;
   }
 }
-if (function_exists(imageJpeg) && $thumbcreate == 'auto') {
+if (function_exists('imageJpeg') && $thumbcreate == 'auto') {
   if (image_createThumb($newpath, $newthumbpath, $thumbmaxw, $thumbmaxh, $thumbquality)) {
     $destInfo = pathInfo($newthumbpath);
     if (strtoupper($destInfo['extension']) == 'GIF') {

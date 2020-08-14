@@ -112,7 +112,7 @@ function doMedia($mediatypeID) {
 
   $mediatext = '';
   $thumbcount = 0;
-  $gotImageJpeg = function_exists(imageJpeg);
+  $gotImageJpeg = function_exists('imageJpeg');
 
   while ($row = tng_fetch_assoc($mediaresult)) {
     $mediatypeID = $row['mediatypeID'];

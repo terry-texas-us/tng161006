@@ -7,7 +7,7 @@ $logstring = "<a href='mostwanted.php'>" . xmlcharacters(uiTextSnippet('mostwant
 writelog($logstring);
 preparebookmark($logstring);
 
-$gotImageJpeg = function_exists(imageJpeg);
+$gotImageJpeg = function_exists('imageJpeg');
 
 function showDivs($type) {
   global $mediatypes_assoc;

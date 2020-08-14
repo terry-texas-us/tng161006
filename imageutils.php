@@ -48,9 +48,9 @@ function image_createThumb($src, $dest, $maxWidth, $maxHeight, $quality) {
     }
 
     $gd2 = chkgd2();
-    if ($gd2 && function_exists(imageCreateTrueColor)) {
+    if ($gd2 && function_exists('imageCreateTrueColor')) {
       $destImage = imagecreatetruecolor($destSize[0], $destSize[1]) or $destImage = imagecreate($destSize[0], $destSize[1]);
-      if (function_exists(imageantialias)) {
+      if (function_exists('imageantialias')) {
         imageantialias($destImage, true);
       }
     } else {
@@ -75,7 +75,7 @@ function image_createThumb($src, $dest, $maxWidth, $maxHeight, $quality) {
     }
 
     // resampling
-    if ($gd2 && function_exists(imagecopyresampled)) {
+    if ($gd2 && function_exists('imagecopyresampled')) {
       if (!imagecopyresampled($destImage, $srcImage, 0, 0, 0, 0, $destSize[0], $destSize[1], $srcSize[0], $srcSize[1])) {
         imagecopyresized($destImage, $srcImage, 0, 0, 0, 0, $destSize[0], $destSize[1], $srcSize[0], $srcSize[1]);
       }

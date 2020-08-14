@@ -225,7 +225,7 @@ preparebookmark($logstring);
     $mediatext = '';
     $firsthref = '';
     $thumbcount = 0;
-    $gotImageJpeg = function_exists(imageJpeg);
+    $gotImageJpeg = function_exists('imageJpeg');
     while ($row = tng_fetch_assoc($result)) {
       $mediatypeID = $row['mediatypeID'];
       $usefolder = $row['usecollfolder'] ? $mediatypes_assoc[$mediatypeID] : $mediapath;

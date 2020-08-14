@@ -35,7 +35,7 @@ $headSection->setTitle(uiTextSnippet('sortmedia'));
       <a href='#' onClick="toggleAll('off');"><?php echo uiTextSnippet('collapseall'); ?></a>
     </div>
     <table class='table table-sm'>
-      <?php if (function_exists(imageJpeg)) { ?>
+      <?php if (function_exists('imageJpeg')) { ?>
         <tr>
           <td>
             <?php echo displayToggle('plus1', 1, 'thumbs', uiTextSnippet('genthumbs'), uiTextSnippet('genthumbsdesc')); ?>

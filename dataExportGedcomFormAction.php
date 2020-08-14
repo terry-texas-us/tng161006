@@ -235,7 +235,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       if ($notelen > 245) {
         $orgnote = trim($note);
         $offset = 245;
-        if ($sessionCharset == 'UTF-8' && function_exists(mb_substr)) {
+        if ($sessionCharset == 'UTF-8' && function_exists('mb_substr')) {
           while (mb_substr($orgnote, $offset, 1, 'UTF-8') == ' ' || mb_substr($orgnote, $offset - 1, 1, 'UTF-8') == ' ') {
             $offset--;
           }
@@ -249,7 +249,7 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         $newlevel = $level + $delta;
         while ($offset < $notelen) {
           $endnext = 245;
-          if ($sessionCharset == 'UTF-8' && function_exists(mb_substr)) {
+          if ($sessionCharset == 'UTF-8' && function_exists('mb_substr')) {
             while (mb_substr($orgnote, $offset + $endnext, 1, 'UTF-8') == ' ' || mb_substr($orgnote, $offset + $endnext - 1, 1, 'UTF-8') == ' ') {
               $offset--;
             }
@@ -515,13 +515,13 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
       if ($birthplace && $birthdate > '1500-00-00') {
         $deathdate = $ind['deathdatetr'] != '0000-00-00' ? $ind['deathdatetr'] : $ind['burialdatetr'];
         if ($deathdate != '0000-00-00') {
-          $deathinfo = split('-', $deathdate);
+          $deathinfo = explode('-', $deathdate);
           $deathyeardiff = date('Y') - $deathinfo[0];
           if ($deathyeardiff > 1 || ($deathyeardiff && (date('m') > $deathinfo[1] || (date('m') == $deathinfo[1] && date('d') > $deathinfo[2])))) {
             $rval = 1;
           }
         } else {
-          $birthinfo = split('-', $birthdate);
+          $birthinfo = explode('-', $birthdate);
           $birthyeardiff = date('Y') - $birthinfo[0];
           if ($birthyeardiff > 110 || ($birthyeardiff == 110 && (date('m') > $birthinfo[1] || (date('m') == $birthinfo[1] && date('d') > $birthinfo[2])))) {
             $rval = 1;
@@ -1271,7 +1271,8 @@ $headSection->setTitle(uiTextSnippet('gedexport'));
         }
         tng_free_result($result);
 
-        $query = "SELECT medialinks.personID AS place, places.notes AS notes, latitude, longitude FROM (places, medialinks) WHERE linktype = 'L' places.place = medialinks.personID";
+        // TODO the following query where clause is likely wrong. It was ..linktype = 'L' $treestr AND..
+        $query = "SELECT medialinks.personID AS place, places.notes AS notes, latitude, longitude FROM (places, medialinks) WHERE linktype = 'L' AND places.place = medialinks.personID";
         $result = tng_query($query) or die(uiTextSnippet('cannotexecutequery') . ": $query");
         while ($row = tng_fetch_assoc($result)) {
           if (!in_array($place, $places)) {

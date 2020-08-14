@@ -156,7 +156,7 @@ $headSection->setTitle($location);
     // headstones media
     $query = "SELECT mediaID, thumbpath, description, notes, usecollfolder, mediatypeID, path, form, abspath, newwindow FROM media WHERE cemeteryID = '$cemeteryID' AND (mediatypeID != 'headstones' OR linktocem = '1') ORDER BY description";
     $hsresult = tng_query($query);
-    $gotImageJpeg = function_exists(imageJpeg);
+    $gotImageJpeg = function_exists('imageJpeg');
     if (tng_num_rows($hsresult)) {
       $i = 1;
       $body .= "<div>\n";

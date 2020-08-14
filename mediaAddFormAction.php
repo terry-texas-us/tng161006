@@ -19,7 +19,7 @@ $exptime = 0;
 setcookie('lastcoll', $mediatypeID, $exptime);
 
 $thumbquality = 80;
-if (function_exists(imageJpeg)) {
+if (function_exists('imageJpeg')) {
   include 'imageutils.php';
 }
 
@@ -48,7 +48,7 @@ if (substr($thumbpath, 0, 1) == '/') {
 }
 $newthumbpath = "$rootpath$usefolder/$thumbpath";
 
-if (function_exists(imageJpeg) && $thumbcreate == 'auto') {
+if (function_exists('imageJpeg') && $thumbcreate == 'auto') {
   if (image_createThumb($newpath, $newthumbpath, $thumbmaxw, $thumbmaxh, $thumbquality)) {
     $destInfo = pathInfo($newthumbpath);
     if (strtoupper($destInfo['extension']) == 'GIF') {

@@ -1057,7 +1057,7 @@ function getMedia($entity, $linktype) {
   $query = "SELECT medialinkID, description, notes, altdescription, altnotes, usecollfolder, mediatypeID, personID, medialinks.mediaID AS mediaID, thumbpath, status, plot, eventID, alwayson, path, form, abspath, newwindow FROM (medialinks, media) WHERE medialinks.personID = '$personID' AND media.mediaID = medialinks.mediaID and dontshow != 1";
   $query .= " $always  ORDER BY eventID, mediatypeID, ordernum";
   $medialinks = tng_query($query);
-  $gotImageJpeg = function_exists(imageJpeg);
+  $gotImageJpeg = function_exists('imageJpeg');
 
   while ($medialink = tng_fetch_assoc($medialinks)) {
     $imgsrc = '';
@@ -1263,7 +1263,7 @@ function getAlbumPhoto($albumID, $albumname) {
       $imgsrc .= "<div class=\"media-prev\" id=\"prev$albumID\" style='display: none'></div>";
       $imgsrc .= "</div>\n";
       $imgsrc .= "<a href=\"albumsShowAlbum.php?albumID=$albumID\" title=\"" . uiTextSnippet('albclicksee') . '"';
-      if (function_exists(imageJpeg)) {
+      if (function_exists('imageJpeg')) {
         $imgsrc .= " class=\"media-preview\" id=\"img-{$albumID}-0-" . urlencode("$tusefolder/{$trow['path']}") . '"';
       }
       $imgsrc .= "><img src=\"$tusefolder/" . str_replace('%2F', '/', rawurlencode($trow['thumbpath'])) . "\" class=\"thumb\" $size[3] alt=\"$albumname\"></a>";
