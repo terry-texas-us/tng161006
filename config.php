@@ -1,6 +1,6 @@
 <?php
 $database_host = "localhost";
-$database_name = "tgn";
+$database_name = "tng";
 $database_username = "root";
 $database_password = 'tas1223';
 $tngconfig['maint'] = "";
